@@ -43,15 +43,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * The constructor.
 	 *
-	 * @param	array		TypoScript configuration
-	 * 						(usually the same as for the FE plugin/BE module that instantiates this class)
 	 * @access public
 	 */
-	function tx_seminars_registrationmanager($conf) {
-		$this->init($conf);
+	function tx_seminars_registrationmanager() {
+		$this->init();
 		$this->retrieveFEUser();
-		
-		//debug($GLOBALS['TSFE']->tmpl->setup['plugin.']);
 	}
 	
 	/**

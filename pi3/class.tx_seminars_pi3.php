@@ -68,11 +68,11 @@ class tx_seminars_pi3 extends tx_salutationswitcher {
 		
 		/** Name of the registrationManager class in case somone subclasses it. */
 		$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
-		$this->registrationManager =& new $registrationManagerClassname($this->conf);
+		$this->registrationManager =& new $registrationManagerClassname();
 		
 		/** Name of the seminar class in case somone subclasses it. */
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$this->seminar = new $seminarClassname($this->conf, $this->registrationManager, $this->piVars['seminar']);
+		$this->seminar = new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
 		
 		/*
 			<p>You can click here to '.$this->pi_linkToPage("get to this page again",$GLOBALS["TSFE"]->id).'</p>

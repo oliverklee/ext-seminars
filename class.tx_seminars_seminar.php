@@ -54,8 +54,6 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
-	 * @param	array		TypoScript configuration
-	 * 						(usually the same as for the FE plugin/BE module that instantiates this class)
 	 * @param	object		An instance of a registrationManager.
 	 * @param	integer		The UID of the seminar to retrieve from the DB.
 	 * 						This parameter will be ignored if $dbResult is provided.
@@ -66,10 +64,10 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * 
 	 * @access public
 	 */
-	function tx_seminars_seminar($conf, &$registrationManager, $uid, $dbResult = null) {
+	function tx_seminars_seminar(&$registrationManager, $uid, $dbResult = null) {
 		$result = false;
 		
-		$this->init($conf);
+		$this->init();
 		
 		$this->registrationManager =& $registrationManager;
 		
