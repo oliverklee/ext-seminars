@@ -1,0 +1,170 @@
+--- tx_srfeuserregister_pi1_tmpl.tmpl	Fri May 27 11:25:22 2005
++++ tx_srfeuserregister_pi1_tmpl.tmpl	Fri May 27 18:58:55 2005
+@@ -131,6 +131,62 @@
+ 		</td>
+ 	</tr>
+ 	<!--###SUB_INCLUDED_FIELD_status###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_MATRICULATION_NUMBER### ###REQUIRED_TX_SEMINARS_MATRICULATION_NUMBER###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_matriculation_number######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_MATRICULATION_NUMBER######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_matriculation_number]" size ="10" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_PLANNED_DEGREE### ###REQUIRED_TX_SEMINARS_PLANNED_DEGREE###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_planned_degree######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_PLANNED_DEGREE######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_planned_degree]" size ="25" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_SEMESTER### ###REQUIRED_TX_SEMINARS_SEMESTER###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_semester######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_SEMESTER######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_semester]" size ="3" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_SUBJECT### ###REQUIRED_TX_SEMINARS_SUBJECT###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_subject######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_SUBJECT######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_subject]" size ="50" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
+ 	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+ 	<tr>
+ 		<td>
+@@ -269,6 +325,20 @@
+ 		</td>
+ 	</tr>
+ 	<!--###SUB_INCLUDED_FIELD_telephone###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_PHONE_MOBILE### ###REQUIRED_TX_SEMINARS_PHONE_MOBILE###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_phone_mobile######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_PHONE_MOBILE######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_phone_mobile]" size="25" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
+ 	<!--###SUB_INCLUDED_FIELD_fax###-->
+ 	<tr>
+ 		<td>
+@@ -1382,6 +1452,62 @@
+ 		</td>
+ 	</tr>
+ 	<!--###SUB_INCLUDED_FIELD_status###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_MATRICULATION_NUMBER### ###REQUIRED_TX_SEMINARS_MATRICULATION_NUMBER###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_matriculation_number######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_MATRICULATION_NUMBER######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_matriculation_number]" size ="10" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_PLANNED_DEGREE### ###REQUIRED_TX_SEMINARS_PLANNED_DEGREE###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_planned_degree######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_PLANNED_DEGREE######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_planned_degree]" size ="25" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_SEMESTER### ###REQUIRED_TX_SEMINARS_SEMESTER###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_semester######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_SEMESTER######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_semester]" size ="3" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_SUBJECT### ###REQUIRED_TX_SEMINARS_SUBJECT###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_subject######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_SUBJECT######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_subject]" size ="50" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
+ 	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+ 	<tr>
+ 		<td>
+@@ -1520,6 +1646,20 @@
+ 		</td>
+ 	</tr>
+ 	<!--###SUB_INCLUDED_FIELD_telephone###-->
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
++	<tr>
++		<td>
++			<p>###LABEL_TX_SEMINARS_PHONE_MOBILE### ###REQUIRED_TX_SEMINARS_PHONE_MOBILE###</p>
++		</td>
++		<td>
++			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_phone_mobile######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
++			<p>###GW2B######MISSING_TX_SEMINARS_PHONE_MOBILE######GW2E###</p>
++			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
++			<p><input type="text" name="FE[fe_users][tx_seminars_phone_mobile]" size="25" /></p>
++		</td>
++	</tr>
++	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
+ 	<!--###SUB_INCLUDED_FIELD_fax###-->
+ 	<tr>
+ 		<td>

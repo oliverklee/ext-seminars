@@ -1,0 +1,46 @@
+plugin.tx_seminars {
+	timeFormat = %H:%M
+	dateFormatY = %Y
+	dateFormatM = %m
+	dateFormatD = %d
+	dateFormatYMD = %d.%m.%Y
+	dateFormatYM = %m.%Y
+	dateFormatMD = %d.%m
+	abbreviateDateRanges = 1
+	currency = EUR
+}
+
+plugin.tx_seminars_pi1 {
+	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
+	salutation = formal
+	hideColumns =
+	hideFields =
+}
+
+plugin.tx_seminars_pi2 {
+	templateFile = EXT:seminars/pi2/seminars_pi2.tmpl
+	salutation = formal
+	hideColumns =
+}
+
+plugin.tx_seminars_pi3 {
+	templateFile = EXT:seminars/pi3/seminars_pi3.tmpl
+	salutation = formal
+}
+
+plugin.tx_srfeuserregister_pi1 {
+	create.evalValues {
+		tx_seminars_phone_mobile = atMost[25]
+		tx_seminars_matriculation_number = atMost[10]
+		tx_seminars_planned_degree = atMost[25]
+		tx_seminars_semester = atMost[3]
+		tx_seminars_subject = atMost[50]
+	}
+	edit.evalValues {
+		tx_seminars_phone_mobile = atMost[25]
+		tx_seminars_matriculation_number = atMost[10]
+		tx_seminars_planned_degree = atMost[25]
+		tx_seminars_semester = atMost[3]
+		tx_seminars_subject = atMost[50]
+	}
+}
