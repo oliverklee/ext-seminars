@@ -42,7 +42,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function tx_seminars_registration() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->tx_seminars_registration not implemented yet.');
 	}
 	
 	/**
@@ -56,7 +56,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getTitle() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getTitle not implemented yet.');
 	}
 	
 	/**
@@ -67,7 +67,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getUser() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getUser not implemented yet.');
 	}
 	
 	/**
@@ -78,7 +78,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getSeminar() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getSeminar not implemented yet.');
 	}
 	
 	/**
@@ -89,7 +89,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getIsPaid() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getIsPaid not implemented yet.');
 	}
 	
 	/**
@@ -100,7 +100,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getDatePaid() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getDatePaid not implemented yet.');
 	}
 	
 	/**
@@ -111,7 +111,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getMethodOfPayment() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getMethodOfPayment not implemented yet.');
 	}
 	
 	/**
@@ -122,7 +122,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getHasBeenThere() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getHasBeenThere not implemented yet.');
 	}
 	
 	/**
@@ -133,7 +133,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getInterests() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getInterests not implemented yet.');
 	}
 	
 	/**
@@ -144,7 +144,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getExpectations() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getExpectations not implemented yet.');
 	}
 	
 	/**
@@ -155,7 +155,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getKnowledge() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getKnowledge not implemented yet.');
 	}
 	
 	/**
@@ -166,7 +166,7 @@ class tx_seminars_registrationmanager {
 	 * @access public
 	 */
 	function getKnownForm() {
-		// stub
+		trigger_error('Member function tx_seminars_registration->getKnownForm not implemented yet.');
 	}
 }
 
