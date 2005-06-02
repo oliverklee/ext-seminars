@@ -40,6 +40,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/** The frontend user who currently is logged in. */
 	var $feuser;
 
+	/** the data of the current registration (tx_seminars_registration) */
+	var $registration = null;
+
 	/**
 	 * The constructor.
 	 *
