@@ -66,6 +66,32 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 	
 	/**
+	 * Checks whether a front end user is logged in.
+	 *
+	 * @return	boolean		true if a user is logged in, false otherwise
+	 * 
+	 * @access	public
+	 */	
+	function isLoggedIn() {
+		return $GLOBALS['TSFE']->loginUser;
+	}
+
+	/**
+	 * Checks whether a front end user is already registered for this seminar.
+	 * 
+	 * This method must not be called when no front end user is logged in!
+	 *
+	 * @param	object		a seminar for which we'll check if it is possible to register
+	 *
+	 * @return	boolean		true if user is already registered, false otherwise.
+	 * 
+	 * @access	public
+	 */	
+	function isUserRegistered(&$seminar) {
+		return $seminar->isUserRegistered($this->feuser['uid']);
+	}
+
+	/**
 	 * Checks whether a user is logged in and hasn't registered for this seminar yet.
 	 * Returns an empty string if everything is OK and an error message otherwise.
 	 * Note: This method does not check if it is possible to register for a given seminar at all.
@@ -80,32 +106,16 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		/** This is empty as long as no error has occured. */
 		$message = '';
 	
-		if (!$GLOBALS['TSFE']->loginUser) {
+		if (!$this->isLoggedIn()) {
 			$message = $this->pi_getLL('error_not_logged_in');
 		} else {
 			// The user is logged in. Let's see if he/she already has registered for this seminar.
-			if ($seminar->isUserRegistered($this->feuser['uid'])) {
+			if ($this->isUserRegistered($seminar)) {
 				$message = $this->pi_getLL('error_already_registered');
 			}
 		}
 
 		return $message;
-	}
-
-	/**
-	 * Checks whether a user is logged in and hasn't registered for this seminar yet.
-	 * Note: This method does not check if it is possible to register for a given seminar at all.
-	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register
-	 *
-	 * @return	boolean		true if everything is OK, false otherwise
-	 * 
-	 * @access	public
-	 */	
-	function canRegister(&$seminar) {
-		$canRegisterMessage = $this->canRegisterMessage($seminar);
-		
-		return isempty($canRegisterMessage);
 	}
 }
 
