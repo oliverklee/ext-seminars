@@ -52,7 +52,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @param	array		array with strings for the subpart markers to retrieve,
 	 * 						e.g. 'SIGN_IN_VIEW'
 	 * 
-	 * @access private
+	 * @access protected
 	 */
 	function getTemplateCode($subpartNames) {
 		/** the whole template file as a string */
