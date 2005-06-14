@@ -59,11 +59,11 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
 		
-		/** Name of the registrationManager class in case somone subclasses it. */
+		/** Name of the registrationManager class in case someone subclasses it. */
 		$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
 		$this->registrationManager =& new $registrationManagerClassname();
 		
-		/** Name of the seminar class in case somone subclasses it. */
+		/** Name of the seminar class in case someone subclasses it. */
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$this->seminar = new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
 		
