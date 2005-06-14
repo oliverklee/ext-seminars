@@ -57,18 +57,26 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	}
 
 	/**
-	 * Initialize the FE plugin stuff
+	 * Initialize the FE plugin stuff, read the configuration
 	 * and set the table names while we're at it.
 	 * 
 	 * This is merely a convenience function.
 	 * 
+	 * If the parameter is ommited, the configuration for plugin.tx_seminar is used instead.
+	 * 
+ 	 * @param	array		TypoScript configuration for the plugin
+	 * 
 	 * @access protected 
 	 */
-	function init() {
+	function init($conf = null) {
 		// call the base classe's constructor manually as this isn't done automatically
 		parent::tslib_pibase();
 
-		$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
+		if ($conf !== null) {
+			$this->conf = $conf;
+		} else {
+			$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
+		}
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 
