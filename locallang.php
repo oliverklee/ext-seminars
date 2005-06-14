@@ -14,7 +14,7 @@ $LOCAL_LANG = Array (
 		'no_registration_necessary' => 'For this seminar, not registration is necessary.',
 		'seminar_cancelled' => 'Alas, this seminar has been cancelled.',
 		'seminar_full' => 'Alas, this seminar already is full.',
-		'will_be_announced' => '(will be announced)',
+		'will_be_announced' => 'will be announced',
 	),
 	'dk' => Array (
 	),
@@ -28,7 +28,7 @@ $LOCAL_LANG = Array (
 		'no_registration_necessary' => 'Für dieses Seminar ist keine Anmeldung notwendig.',
 		'seminar_cancelled' => 'Dieses Seminar wurde leider abgesagt.',
 		'seminar_full' => 'Dieses Seminar ist leider schon voll.',
-		'will_be_announced' => '(wird noch bekannt gegeben)',
+		'will_be_announced' => 'wird noch bekannt gegeben',
 	),
 	'no' => Array (
 	),

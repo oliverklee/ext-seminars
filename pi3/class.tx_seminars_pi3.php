@@ -74,14 +74,10 @@ class tx_seminars_pi3 extends tx_salutationswitcher {
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$this->seminar = new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
 		
-		/*
-			<p>You can click here to '.$this->pi_linkToPage("get to this page again",$GLOBALS["TSFE"]->id).'</p>
-		*/
-
 		$error = $this->registrationManager->canRegisterMessage($this->seminar);
 		
 		if (empty($error)) {
-			$content = 'Anmeldung zum Seminar: '.$this->seminar->getTitleAndDate('&#8211;');
+			$content = $this->pi_getLL('registration_for_event').$this->seminar->getTitleAndDate('&#8211;');
 		} else {
 			$content = $error;
 		}

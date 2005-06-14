@@ -27,20 +27,16 @@
  * @author	Oliver Klee <typo-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('salutationswitcher').'class.tx_salutationswitcher.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 
-class tx_seminars_pi1 extends tx_salutationswitcher {
+class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_pi1';
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
-	/** The extension key. */
-	var $extKey = 'seminars';
 
 	/** Cache the organizers data for the list view */
 	var $organizersCache = array();
-	/** the HTML template subparts */
-	var $templateCache = array();
 	/** list of column names that shouldn't be displayed in the list view,
 	    set a subpart key like '###COLUM_DATE###' and the value to '' to remove that column */
 	var $columnsToHide = array();
@@ -56,29 +52,23 @@ class tx_seminars_pi1 extends tx_salutationswitcher {
 	 * @return	string		HTML for the plugin
 	 */
 	function main($content, $conf) {
-		// Setting the TypoScript passed to this function in $this->conf
-		$this->conf = $conf;
-		$this->pi_setPiVarDefaults();
-		// Loading the LOCAL_LANG values
-		$this->pi_loadLL();
-
-		// load the plugin template
-		$this->readTemplate();
+		$this->init($conf);
+		$this->getTemplateCode(array('LIST_HEADER', 'LIST_ITEM', 'SINGLE_VIEW'));
 		
 		switch ((string) $conf['CMD']) {
 			case 'singleView':
 				list($t) = explode(':', $this->cObj->currentRecord);
 				$this->internal['currentTable'] = $t;
 				$this->internal['currentRow'] = $this->cObj->data;
-				return $this->pi_wrapInBaseClass($this->singleView($content, $conf));
+				return $this->pi_wrapInBaseClass($this->singleView());
 			break;
 			default:
 				// We default to the list view.
 				if (strstr($this->cObj->currentRecord, 'tt_content')) {
-					$conf['pidList'] = $this->cObj->data['pages'];
-					$conf['recursive'] = $this->cObj->data['recursive'];
+					$this->conf['pidList'] = $this->cObj->data['pages'];
+					$this->conf['recursive'] = $this->cObj->data['recursive'];
 				}
-				return $this->pi_wrapInBaseClass($this->listView($content, $conf));
+				return $this->pi_wrapInBaseClass($this->listView());
 			break;
 		}
 	}
@@ -86,17 +76,11 @@ class tx_seminars_pi1 extends tx_salutationswitcher {
 	/**
 	 * Display a list of upcoming seminars.
 	 *
-	 * @param	string		Default content string, ignore
-	 * @param	array		TypoScript configuration for the plugin
 	 * @return	string		HTML for the plugin
+	 * 
+	 * @access protected
 	 */
-	function listView($content, $conf) {
-		// Setting the TypoScript passed to this function in $this->conf
-		$this->conf = $conf;
-		$this->pi_setPiVarDefaults();
-		// Loading the LOCAL_LANG values
-		$this->pi_loadLL();
-
+	function listView() {
 		$this->readColumnsToHide();
 
 		// Local settings for the listView function
@@ -104,10 +88,11 @@ class tx_seminars_pi1 extends tx_salutationswitcher {
 
 		if ($this->piVars['showUid']) {
 			// If a single element should be displayed:
+			// XXX Do we need this code?
 			$this->internal['currentTable'] = 'tx_seminars_seminars';
 			$this->internal['currentRow'] = $this->pi_getRecord('tx_seminars_seminars', $this->piVars['showUid']);
 
-			return $this->singleView($content, $conf);
+			return $this->singleView();
 		} else {
 			if (!isset($this->piVars['pointer'])) {
 				$this->piVars['pointer'] = 0;
@@ -156,17 +141,11 @@ class tx_seminars_pi1 extends tx_salutationswitcher {
 	/**
 	 * Display detailed data for a seminar.
 	 *
-	 * @param	string		Default content string, ignore
-	 * @param	array		TypoScript configuration for the plugin
 	 * @return	string		HTML for the plugin
+	 * 
+	 * @access protected
 	 */
-	function singleView($content, $conf) {
-		// Setting the TypoScript passed to this function in $this->conf
-		$this->conf = $conf;
-		$this->pi_setPiVarDefaults();
-		// Loading the LOCAL_LANG values
-		$this->pi_loadLL();
-
+	function singleView() {
 		$this->readFieldsToHide();
 		
 		// This sets the title of the page for use in indexed search results:
@@ -503,18 +482,6 @@ class tx_seminars_pi1 extends tx_salutationswitcher {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Retrieve the subparts from the plugin template and write them to $this->templateCache.
-	 */
-	function readTemplate() {
-		/** the whole template file as a string */
-		$templateCode = $this->cObj->fileResource($this->conf['templateFile']);
-
-		foreach (array('LIST_HEADER', 'LIST_ITEM', 'SINGLE_VIEW') as $currentKey) {
-			$this->templateCache[$currentKey] = $this->cObj->getSubpart($templateCode, '###'.$currentKey.'###');
-		}
 	}
 
 	/**

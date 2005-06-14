@@ -11,24 +11,16 @@ $LOCAL_LANG = Array (
 		'no_registration_necessary' => 'For this seminar, not registration is necessary.',
 		'seminar_cancelled' => 'Alas, this seminar has been cancelled.',
 		'seminar_full' => 'Alas, this seminar already is full.',
-		
-		'list_mode_1' => 'Mode 1',
-		'list_mode_2' => 'Mode 2',
-		'list_mode_3' => 'Mode 3',
-		'back' => 'Back',
-		'submit_button_label' => 'Click here to submit value',
+		'registration' => 'Registration',
 	),
 	'dk' => Array (
-		'list_mode_1' => 'Visning 1',
-		'list_mode_2' => 'Visning 2',
-		'list_mode_3' => 'Visning 3',
-		'back' => 'Tilbage',
 	),
 	'de' => Array (
 		'wrong_seminar_number' => 'Ein Seminar mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!',
 		'no_registration_necessary' => 'Für dieses Seminar ist keine Anmeldung notwendig.',
 		'seminar_cancelled' => 'Dieses Seminar wurde leider abgesagt.',
 		'seminar_full' => 'Dieses Seminar ist leider schon voll.',
+		'registration' => 'Anmeldung',
 	),
 	'no' => Array (
 	),

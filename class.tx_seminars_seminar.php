@@ -256,7 +256,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function getDate($dash = '-') {
 		if (!$this->hasDate()) {
-			$result = '<em>'.$this->pi_getLL('willBeAnnounced').'</em>';
+			$result = '<em>'.$this->pi_getLL('will_be_announced').'</em>';
 		} else {
 			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
 			$endDate = $this->getSeminarsPropertyInteger('end_date');
@@ -299,6 +299,19 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function hasDate() {
 		return ($this->getSeminarsPropertyInteger('begin_date') && $this->getSeminarsPropertyInteger('end_date'));
+	}
+	 
+	/**
+	 * Get the event type (seminar, workshop, lecture ...).
+	 * 
+	 * XXX Implement me
+	 * 
+	 * @return	string	the seminar type (will never be empty)
+	 * 
+	 * @access public
+	 */
+	function getType() {
+		return ('Workshop');
 	}
 	 
 	/**
