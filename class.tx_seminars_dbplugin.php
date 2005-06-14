@@ -25,8 +25,10 @@
 /**
  * Class 'tx_seminars_dbplugin' for the 'seminars' extension.
  * 
- * This abstract class is intended soleley for extension.
- * It defines some common data and functions.
+ * It defines the database table names, provides the configuration
+ * and calles the base class init functions. 
+ * 
+ * This is an abstract class; don't instantiate it.
  *
  * @author	Oliver Klee <typo-coding@oliverklee.de>
  */
@@ -37,7 +39,7 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	/** The extension key. */
 	var $extKey = 'seminars';
 
-	// Database table names. Will be initialized on object construction. 
+	// Database table names. Will be initialized (indirectly) by $this->init. 
 	var $tableSeminars;
 	var $tableSpeakers;
 	var $tableSpeakersMM;
@@ -64,7 +66,7 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	 */
 	function init() {
 		// call the base classe's constructor manually as this isn't done automatically
-		parent :: tslib_pibase();
+		parent::tslib_pibase();
 
 		$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
 		$this->pi_setPiVarDefaults();
@@ -81,14 +83,14 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	function setTableNames() {
 		$dbPrefix = 'tx_'.$this->extKey.'_';
 
-		$this->tableSeminars = $dbPrefix.'seminars';
-		$this->tableSpeakers = $dbPrefix.'speakers';
-		$this->tableSites = $dbPrefix.'sites';
-		$this->tableOrganizers = $dbPrefix.'organizers';
+		$this->tableSeminars    = $dbPrefix.'seminars';
+		$this->tableSpeakers    = $dbPrefix.'speakers';
+		$this->tableSites       = $dbPrefix.'sites';
+		$this->tableOrganizers  = $dbPrefix.'organizers';
 		$this->tableAttendances = $dbPrefix.'attendances';
 
-		$this->tableSpeakersMM = $dbPrefix.'seminars_speakers_mm';
-		$this->tableSitesMM = $dbPrefix.'seminars_place_mm';
+		$this->tableSpeakersMM  = $dbPrefix.'seminars_speakers_mm';
+		$this->tableSitesMM     = $dbPrefix.'seminars_place_mm';
 	}
 }
 
