@@ -81,7 +81,7 @@ class tx_seminars_pi3 extends tx_salutationswitcher {
 		$error = $this->registrationManager->canRegisterMessage($this->seminar);
 		
 		if (empty($error)) {
-			$content = 'Anmeldung zum Seminar: '.$this->seminar->getTitle();
+			$content = 'Anmeldung zum Seminar: '.$this->seminar->getTitleAndDate('&#8211;');
 		} else {
 			$content = $error;
 		}

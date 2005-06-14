@@ -213,6 +213,95 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
+	 * Check whether we have a subtitle.
+	 * 
+	 * @return	boolean		true if we have a non-empty subtitle, false otherwise.
+	 * 
+	 * @access public
+	 */
+	function hasSubtitle() {
+		return ($this->getSubtitle !== '');
+	}
+	 
+	/**
+	 * Get the unique seminar title, constiting of the seminar title and the date
+	 * (comma-separated).
+	 * 
+	 * If the seminar has no date, just the title is returned.
+	 * 
+	 * @param	string		the character or HTML entity used to separate start date and end date
+	 * 
+	 * @return	string		the unique seminar title (or '' if there is an error)
+	 * 
+	 * @access public
+	 */
+	function getTitleAndDate($dash = '-') {
+		$date = $this->hasDate() ? ', '.$this->getDate($dash) : '';
+		
+		return $this->getTitle().$date;
+	}
+	 
+	/**
+	 * Get the seminar date.
+	 * Returns a localized string "will be announced" if the seminar has no date set.
+	 * 
+	 * Returns just one day if the seminar takes place on only one day.
+	 * Returns a date range if the seminar takes several days.
+	 * 
+	 * @param	string		the character or HTML entity used to separate start date and end date
+	 * 
+	 * @return	string		the seminar date
+	 * 
+	 * @access public
+	 */
+	function getDate($dash = '-') {
+		if (!$this->hasDate()) {
+			$result = '<em>'.$this->pi_getLL('willBeAnnounced').'</em>';
+		} else {
+			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
+			$endDate = $this->getSeminarsPropertyInteger('end_date');
+			
+			$beginDateDay = strftime($this->conf['dateFormatYMD'], $beginDate);
+			$endDateDay = strftime($this->conf['dateFormatYMD'], $endDate);
+	
+			// Does the workshop span several days?
+			if ($beginDateDay == $endDateDay) {
+				$result = $beginDateDay;
+			} else {
+				if (!$this->conf['abbreviateDateRanges']) {
+					$result = $beginDateDay;
+				} else {
+					// Are the years different? Then include the complete begin date.
+					if (strftime($this->conf['dateFormatY'], $beginDate) !== strftime($this->conf['dateFormatY'], $endDate)) {
+						$result = $beingDateDay;
+					} else {
+						// Are the months different? Then include day and month.
+						if (strftime($this->conf['dateFormatM'], $beginDate) !== strftime($this->conf['dateFormatM'], $endDate)) {
+							$result = strftime($this->conf['dateFormatMD'], $beginDate);
+						} else {
+							$result = strftime($this->conf['dateFormatD'], $beginDate);
+						}
+					}
+				}
+				$result .= $dash.$endDateDay;
+			}
+		}
+		
+		return $result;
+	}
+	 
+	/**
+	 * Check whether the seminar has a date set (a begin date and an end date)
+	 * 
+	 * @return	boolean		true if we have a date, false otherwise.
+	 * 
+	 * @access public
+	 */
+	function hasDate() {
+		return ($this->getSeminarsPropertyInteger('begin_date') && $this->getSeminarsPropertyInteger('end_date'));
+	}
+	 
+	/**
 	 * Get a string element of the seminars array.
 	 * If the array has not been intialized properly, an empty string is returned instead.
 	 * 

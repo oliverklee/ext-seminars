@@ -1,11 +1,11 @@
 plugin.tx_seminars {
 	timeFormat = %H:%M
 	dateFormatY = %Y
-	dateFormatM = %m
-	dateFormatD = %d
+	dateFormatM = %m.
+	dateFormatD = %d.
 	dateFormatYMD = %d.%m.%Y
 	dateFormatYM = %m.%Y
-	dateFormatMD = %d.%m
+	dateFormatMD = %d.%m.
 	abbreviateDateRanges = 1
 	currency = EUR
 }
