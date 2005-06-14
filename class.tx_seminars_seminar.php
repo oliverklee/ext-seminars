@@ -273,7 +273,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 				} else {
 					// Are the years different? Then include the complete begin date.
 					if (strftime($this->conf['dateFormatY'], $beginDate) !== strftime($this->conf['dateFormatY'], $endDate)) {
-						$result = $beingDateDay;
+						$result = $beginDateDay;
 					} else {
 						// Are the months different? Then include day and month.
 						if (strftime($this->conf['dateFormatM'], $beginDate) !== strftime($this->conf['dateFormatM'], $endDate)) {
