@@ -27,24 +27,15 @@
  * @author	Oliver Klee <typo-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('salutationswitcher').'class.tx_salutationswitcher.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 
-class tx_seminars_pi3 extends tx_salutationswitcher {
-	/** The extension key. */
-	var $extKey = 'seminars';
+class tx_seminars_pi3 extends tx_seminars_templatehelper {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_pi3';
 	/** Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'pi3/class.tx_seminars_pi3.php';
-
-	/** the HTML template subparts */
-	var $templateCache = array();
-
-	// database table names
-	var $tableSeminars = 'tx_seminars_seminars';
-	var $tableAttendances = 'tx_seminars_attendances';
 
 	/** The seminar for which the user wants to register. */
 	var $seminar;
@@ -57,12 +48,14 @@ class tx_seminars_pi3 extends tx_salutationswitcher {
 	 *
 	 * @param	string		Default content string, ignore
 	 * @param	array		TypoScript configuration for the plugin
+	 * 
 	 * @return	string		HTML for the plugin
+	 * 
+	 * @access public
 	 */
 	function main($content, $conf)	{
-		$this->conf = $conf;
-		$this->pi_setPiVarDefaults();
-		$this->pi_loadLL();
+		$this->init($conf);
+		$this->getTemplateCode(array('SIGN_IN_VIEW', 'THANK_YOU_VIEW'));
 
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
 		
@@ -147,20 +140,6 @@ class tx_seminars_pi3 extends tx_salutationswitcher {
 		
 		return $error;
 	 }
-
-	/**
-	 * Retrieve the subparts from the plugin template and write them to $this->templateCache.
-	 * 
-	 * @access private
-	 */
-	function getTemplateCode() {
-		/** the whole template file as a string */
-		$templateCode = $this->cObj->fileResource($this->conf['templateFile']);
-
-		foreach (array('SIGN_IN_VIEW', 'THANK_YOU_VIEW') as $currentKey) {
-			$this->templateCache[$currentKey] = $this->cObj->getSubpart($templateCode, '###'.$currentKey.'###');
-		}
-	} 
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi3/class.tx_seminars_pi3.php']) {
