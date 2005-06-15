@@ -256,7 +256,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function getDate($dash = '-') {
 		if (!$this->hasDate()) {
-			$result = '<em>'.$this->pi_getLL('will_be_announced').'</em>';
+			$result = $this->pi_getLL('will_be_announced');
 		} else {
 			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
 			$endDate = $this->getSeminarsPropertyInteger('end_date');
