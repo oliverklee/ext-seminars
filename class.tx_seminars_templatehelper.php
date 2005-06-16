@@ -74,19 +74,24 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * In the process, the names are changed from 'aname' to '###BLA_ANAME###' and used as keys.
 	 * The corresponding values in the array are empty strings.
 	 * 
-	 * Example: If the prefix is "FIELD" and the list is "one,two", the array keys
+	 * Example: If the prefix is "field" and the list is "one,two", the array keys
 	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be written.
 	 * 
-	 * @param	String		prefix to the subpart names, must be uppercase
-	 * @param	String		comma-separated list of subpart names to hide (case-insensitive)
+	 * @param	String		prefix to the subpart names (may be empty, case-insensitive, will get uppercased)
+	 * @param	String		comma-separated list of subpart names to hide (case-insensitive, will get uppercased)
 	 * 
 	 * @access protected
 	 */
 	function readSubpartsToHide($prefix, $subparts) {
 		$subpartNames = explode(',', $subparts);
 		
+		// if a prefix is provided, uppercase it and separate it with an underscore
+		if ($prefix) {
+			$prefix = strtoupper($prefix).'_';
+		}
+		
 		foreach ($subpartNames as $currentSubpartName) {
-			$this->subpartsToHide['###'.$prefix.'_'.strtoupper(trim($currentSubpartName)).'###'] = '';
+			$this->subpartsToHide['###'.$prefix.strtoupper(trim($currentSubpartName)).'###'] = '';
 		}
 	}
 }
