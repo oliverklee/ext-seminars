@@ -218,16 +218,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function pi_list_header() {
 		$markers = array();
-		$markers['###HEADER_CLASS###'] = $this->pi_classParam('listrow-header');
-		$markers['###HEADER_TITLE###'] = $this->getFieldHeader_sortLink('title');
-		$markers['###HEADER_DATE###'] = $this->getFieldHeader_sortLink('date');
-		$markers['###HEADER_PRICE###'] = $this->getFieldHeader_sortLink('price_regular');
+		$markers['###HEADER_CLASS###']      = $this->pi_classParam('listrow-header');
+		$markers['###HEADER_TITLE###']      = $this->getFieldHeader_sortLink('title');
+		$markers['###HEADER_DATE###']       = $this->getFieldHeader_sortLink('date');
+		$markers['###HEADER_PRICE###']      = $this->getFieldHeader_sortLink('price_regular');
 		$markers['###HEADER_ORGANIZERS###'] = $this->getFieldHeader_sortLink('organizers');
-		$markers['###HEADER_VACANCIES###'] = $this->getFieldHeader('vacancies');
+		$markers['###HEADER_VACANCIES###']  = $this->getFieldHeader('vacancies');
 
-		$erasers = array();
-		$erasers['COLUMN_ORGANIZERS'] = '';
-		
 		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_HEADER'], $markers, $this->subpartsToHide);
 	}
 
@@ -243,18 +240,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function pi_list_row($c) {
 		$markers = array();
-		$markers['###ITEM_CLASS###'] = ($c % 2) ? ' class="listrow-odd"' : '';
-		$markers["###TITLE_LINK###"] = $this->getFieldContent('title');
-		$markers["###CLASS_TITLE###"] = $this->pi_getClassName('title');
-		$markers["###DATE###"] = $this->getFieldContent('date');
-		$markers["###CLASS_DATE###"] = $this->pi_getClassName('date');
-		$markers["###PRICE###"] = $this->getFieldContent('price_regular');
-		$markers["###CLASS_PRICE###"] = $this->pi_getClassName('price_regular');
-		$markers["###ORGANIZERS###"] = $this->getFieldContent('organizers');
+		$markers['###ITEM_CLASS###']       = ($c % 2) ? ' class="listrow-odd"' : '';
+		$markers["###TITLE_LINK###"]       = $this->getFieldContent('title');
+		$markers["###CLASS_TITLE###"]      = $this->pi_getClassName('title');
+		$markers["###DATE###"]             = $this->getFieldContent('date');
+		$markers["###CLASS_DATE###"]       = $this->pi_getClassName('date');
+		$markers["###PRICE###"]            = $this->getFieldContent('price_regular');
+		$markers["###CLASS_PRICE###"]      = $this->pi_getClassName('price_regular');
+		$markers["###ORGANIZERS###"]       = $this->getFieldContent('organizers');
 		$markers["###CLASS_ORGANIZERS###"] = $this->pi_getClassName('organizer');
-		$markers["###VACANCIES###"] = $this->getFieldContent('vacancies')
+		$markers["###VACANCIES###"]        = $this->getFieldContent('vacancies')
 			.'&nbsp;&nbsp;<span class="'.$this->pi_getClassName('square').'">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-		$markers["###CLASS_VACANCIES###"] = $this->getVacanciesClasses();
+		$markers["###CLASS_VACANCIES###"]  = $this->getVacanciesClasses();
 
 		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_ITEM'], $markers, $this->subpartsToHide);
 	}
