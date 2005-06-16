@@ -78,7 +78,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function listView() {
-		$this->readSubpartsToHide('COLUMN', $this->conf['hideColumns']);
+		$this->readSubpartsToHide($this->conf['hideColumns'], 'COLUMN');
 
 		// Local settings for the listView function
 		$lConf = $this->conf['listView.'];
@@ -143,7 +143,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function singleView() {
-		$this->readSubpartsToHide('FIELD', $this->conf['hideFields']);
+		$this->readSubpartsToHide($this->conf['hideFields'], 'FIELD');
 		
 		// This sets the title of the page for use in indexed search results:
 		if ($this->internal['currentRow']['title']) {
