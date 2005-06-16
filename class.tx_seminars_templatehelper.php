@@ -38,16 +38,22 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/** the HTML template subparts */
 	var $templateCache = array();
 
+	/** list of subpart names that shouldn't be displayed in the detailed view;
+	    set a subpart key like '###FIELD_DATE###' and the value to '' to remove that subpart */
+	var $subpartsToHide = array();
+
 	/**
 	 * Dummy constructor: Does nothing.
 	 * 
 	 * Call $this->init() instead.
+	 * 
+	 * @access public
 	 */
 	function tx_seminars_templatehelper() {
 	}
 
 	/**
-	 * Retrieve the subparts from the plugin template and write them to $this->templateCache.
+	 * Retrieves the subparts from the plugin template and write them to $this->templateCache.
 	 * 
 	 * @param	array		array with strings for the subpart markers to retrieve,
 	 * 						e.g. 'SIGN_IN_VIEW'
@@ -63,6 +69,26 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		}
 	} 
 
+	/**
+	 * Takes a comma-separated list of subpart names and writes them to $this->subpartsToHide.
+	 * In the process, the names are changed from 'aname' to '###BLA_ANAME###' and used as keys.
+	 * The corresponding values in the array are empty strings.
+	 * 
+	 * Example: If the prefix is "FIELD" and the list is "one,two", the array keys
+	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be written.
+	 * 
+	 * @param	String		prefix to the subpart names, must be uppercase
+	 * @param	String		comma-separated list of subpart names to hide (case-insensitive)
+	 * 
+	 * @access protected
+	 */
+	function readSubpartsToHide($prefix, $subparts) {
+		$subpartNames = explode(',', $subparts);
+		
+		foreach ($subpartNames as $currentSubpartName) {
+			$this->subpartsToHide['###'.$prefix.'_'.strtoupper(trim($currentSubpartName)).'###'] = '';
+		}
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_templatehelper.php']) {

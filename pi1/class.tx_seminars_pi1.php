@@ -37,12 +37,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/** Cache the organizers data for the list view */
 	var $organizersCache = array();
-	/** list of column names that shouldn't be displayed in the list view,
-	    set a subpart key like '###COLUM_DATE###' and the value to '' to remove that column */
-	var $columnsToHide = array();
-	/** list of field names that shouldn't be displayed in the detailed view
-	    set a subpart key like '###FIELD_DATE###' and the value to '' to remove that field */
-	var $fieldsToHide = array();
 
 	/**
 	 * Displays the seminar manager HTML.
@@ -84,7 +78,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function listView() {
-		$this->readColumnsToHide();
+		$this->readSubpartsToHide('COLUMN', $this->conf['hideColumns']);
 
 		// Local settings for the listView function
 		$lConf = $this->conf['listView.'];
@@ -149,7 +143,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function singleView() {
-		$this->readFieldsToHide();
+		$this->readSubpartsToHide('FIELD', $this->conf['hideFields']);
 		
 		// This sets the title of the page for use in indexed search results:
 		if ($this->internal['currentRow']['title']) {
@@ -162,12 +156,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$markers['###SUBTITLE###'] = $this->getFieldContent('subtitle');
 		if (empty($markers['###SUBTITLE###'])) {
-			$this->fieldsToHide['###FIELD_SUBTITLE###'] = '';
+			$this->subpartsToHide['###FIELD_SUBTITLE###'] = '';
 		}
 
 		$markers['###DESCRIPTION###'] = $this->getFieldContent('description');
 		if (empty($markers['###DESCRIPTION###'])) {
-			$this->fieldsToHide['###FIELD_DESCRIPTION###'] = '';
+			$this->subpartsToHide['###FIELD_DESCRIPTION###'] = '';
 		}
 
 		$markers['###HEADER_DATE###'] = $this->getFieldHeader('date');
@@ -182,7 +176,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$markers['###HEADER_ROOM###'] = $this->getFieldHeader('room');
 		$markers['###ROOM###'] = $this->getFieldContent('room');
 		if (empty($markers['###ROOM###'])) {
-			$this->fieldsToHide['###FIELD_ROOM###'] = '';
+			$this->subpartsToHide['###FIELD_ROOM###'] = '';
 		}
 
 		$markers['###HEADER_SPEAKERS###'] = $this->getFieldHeader('speakers');
@@ -190,7 +184,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if (!empty($markers['###SPEAKERS###'])) {
 			$markers['###SPEAKERS###'] = $this->pi_RTEcssText($markers['###SPEAKERS###']);
 		} else {
-			$this->fieldsToHide['###FIELD_SPEAKERS###'] = '';
+			$this->subpartsToHide['###FIELD_SPEAKERS###'] = '';
 		}
 
 		$markers['###HEADER_PRICE###'] = $this->getFieldHeader('price_regular');
@@ -203,7 +197,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$markers['###HEADER_VACANCIES###'] = $this->getFieldHeader('vacancies');
 			$markers['###VACANCIES###'] = $this->getFieldContent('vacancies');
 		} else {
-			$this->fieldsToHide['###FIELD_VACANCIES###'] = '';
+			$this->subpartsToHide['###FIELD_VACANCIES###'] = '';
 		}
 
 		$markers['###HEADER_REGISTRATION###'] = $this->getFieldHeader('registration');
@@ -211,7 +205,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$markers['###BACK###'] = $this->pi_list_linkSingle($this->pi_getLL('back', 'Back'), 0);
 
-		return $this->cObj->substituteMarkerArrayCached($this->templateCache['SINGLE_VIEW'], $markers, $this->fieldsToHide);
+		return $this->cObj->substituteMarkerArrayCached($this->templateCache['SINGLE_VIEW'], $markers, $this->subpartsToHide);
 	}
 	
 	/**
@@ -234,7 +228,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$erasers = array();
 		$erasers['COLUMN_ORGANIZERS'] = '';
 		
-		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_HEADER'], $markers, $this->columnsToHide);
+		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_HEADER'], $markers, $this->subpartsToHide);
 	}
 
 	/**
@@ -262,7 +256,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			.'&nbsp;&nbsp;<span class="'.$this->pi_getClassName('square').'">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 		$markers["###CLASS_VACANCIES###"] = $this->getVacanciesClasses();
 
-		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_ITEM'], $markers, $this->columnsToHide);
+		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_ITEM'], $markers, $this->subpartsToHide);
 	}
 	
 	/**
@@ -501,38 +495,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Reads a comma-separated list of column names from $this->conf['hideColumns']
-	 * and write sthem to $this->columnsToHide.
-	 * In the process, the names are changed from 'aname' to '###COLUMN_ANAME###' and used as keys.
-	 * The corresponding values in the array are empty strings.
-	 * 
-	 * @access protected
-	 */
-	function readColumnsToHide() {
-		$columnTitles = explode(',', $this->conf['hideColumns']);
-		
-		foreach ($columnTitles as $currentColumnTitle) {
-			$this->columnsToHide['###COLUMN_'.strtoupper($currentColumnTitle).'###'] = '';
-		}
-	}
-
-	/**
-	 * Reads a comma-separated list of fields names from $this->conf['hideFields']
-	 * and writes them to $this->fieldsToHide.
-	 * In the process, the names are changed from 'aname' to '###FIELD_ANAME###' and used as keys.
-	 * The corresponding values in the array are empty strings.
-	 * 
-	 * @access protected
-	 */
-	function readFieldsToHide() {
-		$fieldTitles = explode(',', $this->conf['hideFields']);
-		
-		foreach ($fieldTitles as $currentFieldTitle) {
-			$this->fieldsToHide['###FIELD_'.strtoupper($currentFieldTitle).'###'] = '';
-		}
 	}
 }
 
