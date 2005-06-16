@@ -45,11 +45,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	var $fieldsToHide = array();
 
 	/**
-	 * Display the seminar manager HTML.
+	 * Displays the seminar manager HTML.
 	 *
 	 * @param	string		Default content string, ignore
 	 * @param	array		TypoScript configuration for the plugin
+	 * 
 	 * @return	string		HTML for the plugin
+	 * 
+	 * @access public
 	 */
 	function main($content, $conf) {
 		$this->init($conf);
@@ -74,7 +77,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Display a list of upcoming seminars.
+	 * Displays a list of upcoming seminars.
 	 *
 	 * @return	string		HTML for the plugin
 	 * 
@@ -139,7 +142,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Display detailed data for a seminar.
+	 * Displays detailed data for a seminar.
 	 *
 	 * @return	string		HTML for the plugin
 	 * 
@@ -212,10 +215,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 	
 	/**
-	 * Return a list header row as a TR.
+	 * Returns a list header row as a TR.
 	 * Columns listed in $this->columnsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML output, a table row with a class attribute set
+	 * 
+	 * @access protected
 	 */
 	function pi_list_header() {
 		$markers = array();
@@ -233,11 +238,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Return a list row as a TR. Get data from $this->internal['currentRow'];
+	 * Returns a list row as a TR. Get data from $this->internal['currentRow'];
 	 * Columns listed in $this->columnsToHide are hidden (ie. not displayed).
 	 *
 	 * @param	integer		Row counting. Starts at 0 (zero). Used for alternating class values in the output rows.
+	 * 
 	 * @return	string		HTML output, a table row with a class attribute set (alternative based on odd/even rows)
+	 * 
+	 * @access protected
 	 */
 	function pi_list_row($c) {
 		$markers = array();
@@ -258,10 +266,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 	
 	/**
-	 * [Put your description here]
+	 * Gets the content for a field (e.g. seminar description).
 	 *
-	 * @param	[type]		$fN: ...
-	 * @return	[type]		...
+	 * @param	String		key of the field for which the content should be retrieved
+	 * 
+	 * @return	String		the field content (may be empty)
+	 * 
+	 * @access protected
 	 */
 	function getFieldContent($fN) {
 		switch($fN) {
@@ -430,10 +441,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 	}
 	/**
-	 * [Put your description here]
+	 * Gets the heading for a field type. 
 	 *
-	 * @param	[type]		$fN: ...
-	 * @return	[type]		...
+	 * @param	String		key of the field type for which the heading should be retrieved.
+	 * 
+	 * @return	String		the heading
+	 * 
+	 * @access protected
 	 */
 	function getFieldHeader($fN) {
 		switch($fN) {
@@ -447,10 +461,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * [Put your description here]
+	 * Gets the heading for a field type, wrapped in a hyperlink that sorts by that column.
 	 *
-	 * @param	[type]		$fN: ...
-	 * @return	[type]		...
+	 * @param	String		key of the field type for which the heading should be retrieved.
+	 * 
+	 * @return	String		the heading completely wrapped in a hyperlink
+	 * 
+	 * @access protected
 	 */
 	function getFieldHeader_sortLink($fN) {
 		$sortField = $fN;
@@ -465,9 +482,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Get the CSS classes (space-separated) for the Vacancies TD.
+	 * Gets the CSS classes (space-separated) for the Vacancies TD.
 	 *
-	 * @return	[type]		...
+	 * @return	String		a list a space-separated CSS classes (without any quotes and without the class attribute itself)
+	 * 
+	 * @access protected
 	 */
 	function getVacanciesClasses() {
 		$result = $this->pi_getClassName('vacancies');
@@ -485,10 +504,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Read a comma-separated list of column names from $this->conf['hideColumns']
-	 * and write them to $this->columnsToHide.
+	 * Reads a comma-separated list of column names from $this->conf['hideColumns']
+	 * and write sthem to $this->columnsToHide.
 	 * In the process, the names are changed from 'aname' to '###COLUMN_ANAME###' and used as keys.
 	 * The corresponding values in the array are empty strings.
+	 * 
+	 * @access protected
 	 */
 	function readColumnsToHide() {
 		$columnTitles = explode(',', $this->conf['hideColumns']);
@@ -499,10 +520,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Read a comma-separated list of fields names from $this->conf['hideFields']
-	 * and write them to $this->fieldsToHide.
+	 * Reads a comma-separated list of fields names from $this->conf['hideFields']
+	 * and writes them to $this->fieldsToHide.
 	 * In the process, the names are changed from 'aname' to '###FIELD_ANAME###' and used as keys.
 	 * The corresponding values in the array are empty strings.
+	 * 
+	 * @access protected
 	 */
 	function readFieldsToHide() {
 		$fieldTitles = explode(',', $this->conf['hideFields']);
