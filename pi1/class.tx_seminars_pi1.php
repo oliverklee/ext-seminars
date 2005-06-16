@@ -137,6 +137,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/**
 	 * Displays detailed data for a seminar.
+	 * Fields listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML for the plugin
 	 * 
@@ -210,7 +211,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	
 	/**
 	 * Returns a list header row as a TR.
-	 * Columns listed in $this->columnsToHide are hidden (ie. not displayed).
+	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML output, a table row with a class attribute set
 	 * 
@@ -230,7 +231,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/**
 	 * Returns a list row as a TR. Get data from $this->internal['currentRow'];
-	 * Columns listed in $this->columnsToHide are hidden (ie. not displayed).
+	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @param	integer		Row counting. Starts at 0 (zero). Used for alternating class values in the output rows.
 	 * 
