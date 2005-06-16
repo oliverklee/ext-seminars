@@ -46,9 +46,9 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get our title, containing:
+	 * Gets our title, containing:
 	 *  the attendee's full name,
-	 *  the seminar title
+	 *  the seminar title,
 	 *  the seminar date 
 	 * 
 	 * @return	string	the attendance title
@@ -60,7 +60,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get the attendee's uid.
+	 * Gets the attendee's uid.
 	 * 
 	 * @return	integer	the attendee's feuser uid
 	 * 
@@ -71,7 +71,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get the seminar's uid.
+	 * Gets the seminar's uid.
 	 * 
 	 * @return	integer	the seminar's uid
 	 * 
@@ -82,7 +82,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get whether this attendance has already been paid for.
+	 * Gets whether this attendance has already been paid for.
 	 * 
 	 * @return	boolean	whether this attendance has already been paid for
 	 * 
@@ -93,7 +93,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get the date at which the user has paid for this attendance.
+	 * Gets the date at which the user has paid for this attendance.
 	 * 
 	 * @return	integer	the date at which the user has paid for this attendance
 	 * 
@@ -104,7 +104,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get the method of payment.
+	 * Gets the method of payment.
 	 * 
 	 * @return	integer	the uid of the method of payment (may be 0 if none is given)
 	 * 
@@ -115,7 +115,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get whether the attendee has been at the seminar.
+	 * Gets whether the attendee has been at the seminar.
 	 * 
 	 * @return	boolean	whether the attendee has attended the seminar
 	 * 
@@ -126,7 +126,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get the attendee's special interests in the subject.
+	 * Gets the attendee's special interests in the subject.
 	 * 
 	 * @return	string	a description of the attendee's special interests (may be empty)
 	 * 
@@ -137,7 +137,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get the attendee's expectations for the seminar.
+	 * Gets the attendee's expectations for the seminar.
 	 * 
 	 * @return	string	a description of the attendee's expectations for the seminar (may be empty)
 	 * 
@@ -148,7 +148,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get the attendee's background knowledge on the subject.
+	 * Gets the attendee's background knowledge on the subject.
 	 * 
 	 * @return	string	a description of the attendee's background knowledge (may be empty)
 	 * 
@@ -159,7 +159,7 @@ class tx_seminars_registrationmanager {
 	}
 	
 	/**
-	 * Get where the attendee has heard about this seminar.
+	 * Gets where the attendee has heard about this seminar.
 	 * 
 	 * @return	string	a description of where the attendee has heard about this seminar (may be empty)
 	 * 

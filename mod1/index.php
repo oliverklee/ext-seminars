@@ -71,7 +71,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 	// If you chose 'web' as main module, you will need to consider the $this->id parameter which will contain the uid-number of the page clicked in the page tree
 	/**
-	 * Main function of the module. Write the content to $this->content
+	 * Main function of the module. Writes the content to $this->content
 	 *
 	 * @return	[type]		...
 	 */
@@ -147,7 +147,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	}
 
 	/**
-	 * Generates the module content
+	 * Generates the module content.
 	 *
 	 * @return	[type]		...
 	 */

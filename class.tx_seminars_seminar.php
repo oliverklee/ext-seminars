@@ -84,7 +84,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	
 	/**
-	 * Retrieve a seminar from the database.
+	 * Retrieves a seminar from the database.
 	 * 
 	 * @param	integer		The UID of the seminar to retrieve from the DB.
 	 * 
@@ -106,7 +106,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 }
 
 	/**
-	 * Retrieve the current seminar's speakers from the database to $this->speakers.
+	 * Retrieves the current seminar's speakers from the database to $this->speakers.
 	 * If this already has been done, we will overwrite existing entries
 	 * in the array.
 	 * 
@@ -142,7 +142,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 }
 	 
 	/**
-	 * Retrieve the current seminar's organizers from the database to $this->organizers.
+	 * Retrieves the current seminar's organizers from the database to $this->organizers.
 	 * If this already has been done, we will overwrite existing entries
 	 * in the array.
 	 * 
@@ -180,7 +180,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Get our UID.
+	 * Gets our UID.
 	 * 
 	 * @return	integer		our UID (or 0 if there is an error)
 	 * 
@@ -191,7 +191,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 		 
 	/**
-	 * Get our title.
+	 * Gets our title.
 	 * 
 	 * @return	string	our seminar title (or '' if there is an error)
 	 * 
@@ -202,7 +202,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Get our subtitle.
+	 * Gets our subtitle.
 	 * 
 	 * @return	string		our seminar title (or '' if there is an error)
 	 * 
@@ -213,7 +213,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Check whether we have a subtitle.
+	 * Checks whether we have a subtitle.
 	 * 
 	 * @return	boolean		true if we have a non-empty subtitle, false otherwise.
 	 * 
@@ -224,7 +224,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Get the unique seminar title, constiting of the seminar title and the date
+	 * Gets the unique seminar title, constiting of the seminar title and the date
 	 * (comma-separated).
 	 * 
 	 * If the seminar has no date, just the title is returned.
@@ -242,7 +242,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Get the seminar date.
+	 * Gets the seminar date.
 	 * Returns a localized string "will be announced" if the seminar has no date set.
 	 * 
 	 * Returns just one day if the seminar takes place on only one day.
@@ -291,7 +291,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Check whether the seminar has a date set (a begin date and an end date)
+	 * Checks whether the seminar has a date set (a begin date and an end date)
 	 * 
 	 * @return	boolean		true if we have a date, false otherwise.
 	 * 
@@ -302,7 +302,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Get the event type (seminar, workshop, lecture ...).
+	 * Gets the event type (seminar, workshop, lecture ...).
 	 * 
 	 * XXX Implement me
 	 * 
@@ -315,7 +315,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
-	 * Get a string element of the seminars array.
+	 * Gets a string element of the seminars array.
 	 * If the array has not been intialized properly, an empty string is returned instead.
 	 * 
 	 * @param	string		key of the element to return
@@ -331,7 +331,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Get an (intval'ed) integer element of the seminars array.
+	 * Gets an (intval'ed) integer element of the seminars array.
 	 * If the array has not been intialized properly, 0 is returned instead.
 	 * 
 	 * @param	string		key of the element to return

@@ -57,7 +57,7 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	}
 
 	/**
-	 * Initialize the FE plugin stuff, read the configuration
+	 * Initializes the FE plugin stuff, read the configuration
 	 * and set the table names while we're at it.
 	 * 
 	 * This is merely a convenience function.
@@ -84,7 +84,7 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	}
 
 	/**
-	 * Set the table names.
+	 * Sets the table names.
 	 * 
 	 * @access private 
 	 */

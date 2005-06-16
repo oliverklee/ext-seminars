@@ -54,7 +54,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 	
 	/**
-	 * Retrieve the currently logged-in FE user (if at all) and store it in
+	 * Retrieves the currently logged-in FE user (if at all) and store it in
 	 * $this->feuser.
 	 * 
 	 * Note that this will not be null if no user is logged in.
