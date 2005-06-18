@@ -1,0 +1,148 @@
+To-do list and milestone plan for tx_seminars
+=============================================
+
+The assignee is marked in square brackets. [?] Means that a to-do item isn't assigned yet - feel free to take it!
+
+When you start working on a to-do item, please open a bug at bugs.typo3.org for that.
+
+Note: Of course it is possible that a feature gets completed earlier than planned (if someone codes it).
+
+Version 0.4.0 (July 2005)
+-------------------------
+- remove dependency on new login box and front end user registration when you can sign up for a seminar without being a logged-in front end user; document that these extensions are recommended (and when they're not needed) [Oli]
+- make it configurable what to do when a participant signs up [Oli]
+  - send an email to the organizer
+  - send an email to the participant
+  - add a participation entry to the database
+- factor out the statistics update into a common function and make it more efficient [Oli]
+- templatize pi3 [Oli]
+- add online registration
+  - provide link to login page if no user is logged in [Oli]
+  - add forms
+  - make ID of registration page configurable [Mathias]
+  - make it configurable which fe_users data is is required [Oli]
+  - "thank you" page [Mathias]
+  - mail to participant (configurable) [Mathias]
+  - mail to organizer (configurable) [Mathias]
+  - enter into database [Oli]
+  - check whether seminar is not full yet [Oli]
+  - check whether the seminar lies in the future [Oli]
+  - check whether the user still hasn't registered for that seminar [Oli]
+  - add an additional live check whether there actually still are vacancies [Oli]
+  - remove the link to the organizer's email form [Oli]
+  - add link to registration page from seminar details page [Mathias]
+  - add link to registration page (configurable) from seminar listing page [Mathias]
+  - include seminar fee amount into mail participant [Mathias]
+  - after a front end user has registered for a seminar, automatically update the statistics [Oli]
+- integrate the salutationswitcher extension [Oli]
+- clean up pi1 to use the new seminars class [Oli]
+- for organizers, add field telling in which page new registration records should be stored [Oli]
+- implement time format configuration [Oli]
+
+Version 0.5.0 (August 2005)
+---------------------------
+- make organizer email address required [Oli]
+- make some fe_users data editable on the registration page [Oli]
+- show a drop-down list of seminars to select from on the registration page [Mathias]
+- show seminar fee on registration page [Oli]
+- matriculation number should be required for students [Oli]
+- prevent that users can delete their accounts if they are registered for a seminar [Mathias]
+- make sure all database queries are as safe as they can get [?]
+- make sure all links are generated using the Typo3 API [?]
+- feature to send email to all participants of a seminar [?]
+  - everyone/paid/not paid
+  - URL of login page
+  - user name
+  - seminar to which the email refers
+- add further back end statistics:
+  - list of sites and which seminars take place there [?]
+  - list of speakers and which seminars they hold [?]
+  - overview list of seminars [?]
+  - detail seminar listing that can be given to the speaker: [?]
+    - site and directions
+    - the important data of the participants
+- make the wrap for the number of vacancies (colored square) configurable [Oli]
+- add support for canceling seminars [Oli]
+  - CSS style
+  - don't allow registering in the seminar details page
+  - add localized text "this seminar has been canceled"
+  - add entry in participant records whether their money has been refunded
+- display picture of speakers on seminar page [?]
+
+Version 0.6.0 (September 2005)
+------------------------------
+- automatic signing off if the user hasn't paid after a configurable timespan [?]
+- add content element "my seminars" for logged-in users, list the following [?]
+  - seminar name and date
+  - link to seminar details page
+  - paid/unpaid/refunded (if the participation hasn't been deleted yet)
+  - attended?
+  - reuse as much code for this as possible (mostly from pi1) and avoid code duplication
+- add possibility for front end users to sign off a seminar if it's early enough [?]
+- add configuration: period before seminar start when signing off is not possible any more (default: 14 days) [?]
+- after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics [Oli]
+- add a way to make the seminar fee dependent on the user's status (student, working etc.) [?]
+- feature: find and display doubled registrations [?]
+- feature: avoid double registrations when entering registrations manually [?]
+- allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop) [?]
+
+Version 0.7.0 (October 2005)
+----------------------------
+- add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off [?]
+- allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee [?]
+  - make this configurable
+  - make this safe (SSL-only or something)
+- feature for email notification to the organizer once a seminar has enough attendances or is full [?]
+
+Version 1.0.0 (no date set yet)
+-------------------------------
+- have the documentation proofread
+- make sure the HTML validates as XHTML 1.0 strict
+- get the extension reviewed for a cigar
+
+Not triaged yet
+---------------
+- add credit card payment
+- add automated tests using PHPunit or something like it
+- feature: test user that can sign up to hidden/past seminars
+- add automatic headers to code files
+- separate "signing up" (which includes paying) and "registering a seat" (without paying)
+- move from ext_typoscript_setup.txt to static/setup.txt
+- feature to send all front end users an email, telling them their login name and the URLs of the login pages
+- allow signing up for a seminar without being logged in as a front end user (thus creating a new front end user in the process)
+- feature: quickly edit the "paid" entry for a participant
+- feature: easily enter after a single seminar who has participated
+- add feature to generate a participation-form for each seminar where each participant can sign for each day that he/she has been there, plus a column where he/she can sign if he/she wants to receive seminar announcements, plus space for suggestions on seminar subjects
+- add configuration: number of seminars to list per page
+- document how to link to another seminar from a seminar description
+- add field for "these seminars go together well"
+- in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
+- in the seminar list, add (localized) subheadings with month and year
+- feature: graph for total number of registrations per seminar over time
+- switch to Flexforms
+- switch localization files to XML
+- document the CSS styles used
+- remove unneeded subpart markers from the output
+- remove unneeded localization strings
+- format the HTML in a nice way
+- move the configuration into constants and make them configurable using the constants editor
+- make the link to the online form CSS-stylable
+- add support for different kinds of events (workshop, lecture, ...)
+- sanitize localization key names
+- add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions
+- feature for booking assets online (when belonging to the corresponding front end user group)
+- feature: room manager
+- support periodical events (e.g. each Monday at ten)
+- feature on the "my seminars" page: edit registration data
+- feature: notify users if a new seminar for one of their "favorite" speakers has been entered
+- automatically update record title if an attendance has been entered in the back end
+- add front end page about speakers and their seminars
+- distinguish between different events: seminars, workshops, lectures etc.
+- add different icons
+- handle it when a user has removed their account
+- create extension icon
+- make it configurable whether to use the payment system
+- check code with PhpLint once PhpLint is a bit more mature
+- feature: front end plug in "The next x upcoming seminars"
+- in pi1, implement the default sort order (by begin date) using TCA
+- make it configurable whether to list only seminars that haven't started yet or also running seminars
