@@ -38,6 +38,7 @@ Version 0.4.0 (July 2005)
 - clean up pi1 to use the new seminars class [Oli]
 - for organizers, add field telling in which page new registration records should be stored [Oli]
 - implement time format configuration [Oli]
+- make 00:00 mean "no time set" [Oli]
 
 Version 0.5.0 (August 2005)
 ---------------------------
