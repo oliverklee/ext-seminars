@@ -18,7 +18,7 @@ Version 0.4.0 (July 2005)
 - templatize pi3 [Oli]
 - add online registration
   - provide link to login page if no user is logged in [Oli]
-  - add forms
+  - add forms [Oli]
   - make ID of registration page configurable [Mathias]
   - make it configurable which fe_users data is is required [Oli]
   - "thank you" page [Mathias]
