@@ -151,62 +151,61 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$GLOBALS['TSFE']->indexedDocTitle = $this->internal['currentRow']['title'];
 		}
 
-		$markers = array();
-		$markers['###TYPE###'] = 'Workshop';
-		$markers['###TITLE###'] = $this->getFieldContent('title');
+		$this->markers['###TYPE###'] = 'Workshop';
+		$this->markers['###TITLE###'] = $this->getFieldContent('title');
 
-		$markers['###SUBTITLE###'] = $this->getFieldContent('subtitle');
-		if (empty($markers['###SUBTITLE###'])) {
+		$this->markers['###SUBTITLE###'] = $this->getFieldContent('subtitle');
+		if (empty($this->markers['###SUBTITLE###'])) {
 			$this->subpartsToHide['###FIELD_SUBTITLE###'] = '';
 		}
 
-		$markers['###DESCRIPTION###'] = $this->getFieldContent('description');
-		if (empty($markers['###DESCRIPTION###'])) {
+		$this->markers['###DESCRIPTION###'] = $this->getFieldContent('description');
+		if (empty($this->markers['###DESCRIPTION###'])) {
 			$this->subpartsToHide['###FIELD_DESCRIPTION###'] = '';
 		}
 
-		$markers['###HEADER_DATE###'] = $this->getFieldHeader('date');
-		$markers['###DATE###'] = $this->getFieldContent('date');
+		$this->markers['###HEADER_DATE###'] = $this->getFieldHeader('date');
+		$this->markers['###DATE###'] = $this->getFieldContent('date');
 
-		$markers['###HEADER_TIME###'] = $this->getFieldHeader('time');
-		$markers['###TIME###'] = $this->getFieldContent('time');
+		$this->markers['###HEADER_TIME###'] = $this->getFieldHeader('time');
+		$this->markers['###TIME###'] = $this->getFieldContent('time');
 
-		$markers['###HEADER_PLACE###'] = $this->getFieldHeader('place');
-		$markers['###PLACE###'] = $this->pi_RTEcssText($this->getFieldContent('place'));
+		$this->markers['###HEADER_PLACE###'] = $this->getFieldHeader('place');
+		$this->markers['###PLACE###'] = $this->pi_RTEcssText($this->getFieldContent('place'));
 
-		$markers['###HEADER_ROOM###'] = $this->getFieldHeader('room');
-		$markers['###ROOM###'] = $this->getFieldContent('room');
-		if (empty($markers['###ROOM###'])) {
+		$this->markers['###HEADER_ROOM###'] = $this->getFieldHeader('room');
+		$this->markers['###ROOM###'] = $this->getFieldContent('room');
+		if (empty($this->markers['###ROOM###'])) {
 			$this->subpartsToHide['###FIELD_ROOM###'] = '';
 		}
 
-		$markers['###HEADER_SPEAKERS###'] = $this->getFieldHeader('speakers');
-		$markers['###SPEAKERS###'] = $this->getFieldContent('speakers');
-		if (!empty($markers['###SPEAKERS###'])) {
-			$markers['###SPEAKERS###'] = $this->pi_RTEcssText($markers['###SPEAKERS###']);
+		$this->markers['###HEADER_SPEAKERS###'] = $this->getFieldHeader('speakers');
+		$this->markers['###SPEAKERS###'] = $this->getFieldContent('speakers');
+		if (!empty($this->markers['###SPEAKERS###'])) {
+			$this->markers['###SPEAKERS###'] = $this->pi_RTEcssText($this->markers['###SPEAKERS###']);
 		} else {
 			$this->subpartsToHide['###FIELD_SPEAKERS###'] = '';
 		}
 
-		$markers['###HEADER_PRICE###'] = $this->getFieldHeader('price_regular');
-		$markers['###PRICE###'] = $this->getFieldContent('price_regular');
+		$this->markers['###HEADER_PRICE###'] = $this->getFieldHeader('price_regular');
+		$this->markers['###PRICE###'] = $this->getFieldContent('price_regular');
 
-		$markers['###HEADER_ORGANIZERS###'] = $this->getFieldHeader('organizers');
-		$markers['###ORGANIZERS###'] = $this->getFieldContent('organizers');
+		$this->markers['###HEADER_ORGANIZERS###'] = $this->getFieldHeader('organizers');
+		$this->markers['###ORGANIZERS###'] = $this->getFieldContent('organizers');
 
 		if ($this->internal['currentRow']['needs_registration']) {
-			$markers['###HEADER_VACANCIES###'] = $this->getFieldHeader('vacancies');
-			$markers['###VACANCIES###'] = $this->getFieldContent('vacancies');
+			$this->markers['###HEADER_VACANCIES###'] = $this->getFieldHeader('vacancies');
+			$this->markers['###VACANCIES###'] = $this->getFieldContent('vacancies');
 		} else {
 			$this->subpartsToHide['###FIELD_VACANCIES###'] = '';
 		}
 
-		$markers['###HEADER_REGISTRATION###'] = $this->getFieldHeader('registration');
-		$markers['###REGISTRATION###'] = $this->getFieldContent('registration');
+		$this->markers['###HEADER_REGISTRATION###'] = $this->getFieldHeader('registration');
+		$this->markers['###REGISTRATION###'] = $this->getFieldContent('registration');
 
-		$markers['###BACK###'] = $this->pi_list_linkSingle($this->pi_getLL('back', 'Back'), 0);
+		$this->markers['###BACK###'] = $this->pi_list_linkSingle($this->pi_getLL('back', 'Back'), 0);
 
-		return $this->cObj->substituteMarkerArrayCached($this->templateCache['SINGLE_VIEW'], $markers, $this->subpartsToHide);
+		return $this->substituteMarkerArrayCached('SINGLE_VIEW');
 	}
 	
 	/**
@@ -218,15 +217,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_header() {
-		$markers = array();
-		$markers['###HEADER_CLASS###']      = $this->pi_classParam('listrow-header');
-		$markers['###HEADER_TITLE###']      = $this->getFieldHeader_sortLink('title');
-		$markers['###HEADER_DATE###']       = $this->getFieldHeader_sortLink('date');
-		$markers['###HEADER_PRICE###']      = $this->getFieldHeader_sortLink('price_regular');
-		$markers['###HEADER_ORGANIZERS###'] = $this->getFieldHeader_sortLink('organizers');
-		$markers['###HEADER_VACANCIES###']  = $this->getFieldHeader('vacancies');
+		$this->markers['###HEADER_CLASS###']      = $this->pi_classParam('listrow-header');
+		$this->markers['###HEADER_TITLE###']      = $this->getFieldHeader_sortLink('title');
+		$this->markers['###HEADER_DATE###']       = $this->getFieldHeader_sortLink('date');
+		$this->markers['###HEADER_PRICE###']      = $this->getFieldHeader_sortLink('price_regular');
+		$this->markers['###HEADER_ORGANIZERS###'] = $this->getFieldHeader_sortLink('organizers');
+		$this->markers['###HEADER_VACANCIES###']  = $this->getFieldHeader('vacancies');
 
-		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_HEADER'], $markers, $this->subpartsToHide);
+		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
 
 	/**
@@ -240,21 +238,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_row($c) {
-		$markers = array();
-		$markers['###ITEM_CLASS###']       = ($c % 2) ? ' class="listrow-odd"' : '';
-		$markers["###TITLE_LINK###"]       = $this->getFieldContent('title');
-		$markers["###CLASS_TITLE###"]      = $this->pi_getClassName('title');
-		$markers["###DATE###"]             = $this->getFieldContent('date');
-		$markers["###CLASS_DATE###"]       = $this->pi_getClassName('date');
-		$markers["###PRICE###"]            = $this->getFieldContent('price_regular');
-		$markers["###CLASS_PRICE###"]      = $this->pi_getClassName('price_regular');
-		$markers["###ORGANIZERS###"]       = $this->getFieldContent('organizers');
-		$markers["###CLASS_ORGANIZERS###"] = $this->pi_getClassName('organizer');
-		$markers["###VACANCIES###"]        = $this->getFieldContent('vacancies')
+		$this->markers['###ITEM_CLASS###']       = ($c % 2) ? ' class="listrow-odd"' : '';
+		$this->markers["###TITLE_LINK###"]       = $this->getFieldContent('title');
+		$this->markers["###CLASS_TITLE###"]      = $this->pi_getClassName('title');
+		$this->markers["###DATE###"]             = $this->getFieldContent('date');
+		$this->markers["###CLASS_DATE###"]       = $this->pi_getClassName('date');
+		$this->markers["###PRICE###"]            = $this->getFieldContent('price_regular');
+		$this->markers["###CLASS_PRICE###"]      = $this->pi_getClassName('price_regular');
+		$this->markers["###ORGANIZERS###"]       = $this->getFieldContent('organizers');
+		$this->markers["###CLASS_ORGANIZERS###"] = $this->pi_getClassName('organizer');
+		$this->markers["###VACANCIES###"]        = $this->getFieldContent('vacancies')
 			.'&nbsp;&nbsp;<span class="'.$this->pi_getClassName('square').'">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-		$markers["###CLASS_VACANCIES###"]  = $this->getVacanciesClasses();
+		$this->markers["###CLASS_VACANCIES###"]  = $this->getVacanciesClasses();
 
-		return $this->cObj->substituteMarkerArrayCached($this->templateCache['LIST_ITEM'], $markers, $this->subpartsToHide);
+		return $this->substituteMarkerArrayCached('LIST_ITEM');
 	}
 	
 	/**

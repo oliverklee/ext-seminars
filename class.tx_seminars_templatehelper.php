@@ -41,6 +41,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/** list of subpart names that shouldn't be displayed in the detailed view;
 	    set a subpart key like '###FIELD_DATE###' and the value to '' to remove that subpart */
 	var $subpartsToHide = array();
+	
+	/** list of markers and their contents (with the keys being the marker names) */
+	var $markers = array();
 
 	/**
 	 * Dummy constructor: Does nothing.
@@ -93,6 +96,20 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		foreach ($subpartNames as $currentSubpartName) {
 			$this->subpartsToHide['###'.$prefix.strtoupper(trim($currentSubpartName)).'###'] = '';
 		}
+	}
+	
+	/**
+	 * Multi substitution function with caching. Wrapper function for cObj->substituteMarkerArrayCached(),
+	 * using $this->markers and $this->subparts as defaults.
+	 * 
+	 * @param	string		key of the subpart from $this->templateCache, e.g. 'LIST_ITEM' (without the ###) 
+	 * 
+	 * @return	string		content stream with the markers replaced
+	 * 
+	 * @access protected
+	 */
+	function substituteMarkerArrayCached($key) {
+		return $this->cObj->substituteMarkerArrayCached($this->templateCache[$key], $this->markers, $this->subpartsToHide);
 	}
 }
 

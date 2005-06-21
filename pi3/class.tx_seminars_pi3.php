@@ -55,7 +55,7 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 	 */
 	function main($content, $conf)	{
 		$this->init($conf);
-		$this->getTemplateCode(array('SIGN_IN_VIEW', 'THANK_YOU_VIEW'));
+		$this->getTemplateCode(array('REGISTRATION_HEAD'));
 
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
 		
@@ -67,14 +67,10 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$this->seminar = new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
 		
-		$error = $this->registrationManager->canRegisterMessage($this->seminar);
+		$errorMessage = $this->registrationManager->canRegisterMessage($this->seminar);
 		
-		if (empty($error)) {
-			$content = $this->pi_getLL('registration_for_event').$this->seminar->getTitleAndDate('&#8211;');
-		} else {
-			$content = $error;
-		}
-
+		$content = $this->createHeading($errorMessage);
+		
 		return $this->pi_wrapInBaseClass($content);
 	}
 	
@@ -139,6 +135,30 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 		}
 		
 		return $error;
+	 }
+	 
+	 /**
+	  * Creates the page title and (if applicable) any error messages.
+	  * 
+	  * When this method is called, the function getTemplateCode() must already have been called.
+	  * 
+	  * @param	string	error message to be displayed (may be empty if there is no error)
+	  * 
+	  * @return	string	HTML code including the title and error message
+	  * 
+	  * @access protected
+	  */
+	 function createHeading($errorMessage) {
+		$this->markers['###REGISTRATION###'] = $this->pi_getLL('registration');
+		$this->markers['###TITLE###']        = $this->seminar->getTitleAndDate('&#8211;');
+
+		if (empty($errorMessage)) {
+			$this->subpartsToHide['###ERROR###'] = '';
+		} else {
+			$this->markers['###ERROR_TEXT###'] = $errorMessage;
+		}
+		
+		return $this->substituteMarkerArrayCached('REGISTRATION_HEAD');
 	 }
 }
 
