@@ -9,13 +9,12 @@ Note: Of course it is possible that a feature gets completed earlier than planne
 
 Version 0.4.0 (July 2005)
 -------------------------
-- remove dependency on new login box and front end user registration when you can sign up for a seminar without being a logged-in front end user; document that these extensions are recommended (and when they're not needed) [Oli]
-- make it configurable what to do when a participant signs up [Oli]
+- templatize pi3 [Oli]
+- make it configurable what to do when a participant signs up [Mathias]
   - send an email to the organizer
   - send an email to the participant
   - add a participation entry to the database
 - factor out the statistics update into a common function and make it more efficient [Oli]
-- templatize pi3 [Oli]
 - add online registration
   - provide link to login page if no user is logged in [Oli]
   - add forms [Oli]
@@ -39,6 +38,7 @@ Version 0.4.0 (July 2005)
 - for organizers, add field telling in which page new registration records should be stored [Oli]
 - implement time format configuration [Oli]
 - make 00:00 mean "no time set" [Oli]
+- remove dependency on new login box and front end user registration when you can sign up for a seminar without being a logged-in front end user; document that these extensions are recommended (and when they're not needed) [Oli]
 
 Version 0.5.0 (August 2005)
 ---------------------------
@@ -72,6 +72,7 @@ Version 0.5.0 (August 2005)
 
 Version 0.6.0 (September 2005)
 ------------------------------
+- switch extension status from "alpha" to "beta"
 - automatic signing off if the user hasn't paid after a configurable timespan [?]
 - add content element "my seminars" for logged-in users, list the following [?]
   - seminar name and date
@@ -147,3 +148,5 @@ Not triaged yet
 - feature: front end plug in "The next x upcoming seminars"
 - in pi1, implement the default sort order (by begin date) using TCA
 - make it configurable whether to list only seminars that haven't started yet or also running seminars
+- allow using data from jp_staff
+
