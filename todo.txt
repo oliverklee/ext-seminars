@@ -149,4 +149,5 @@ Not triaged yet
 - in pi1, implement the default sort order (by begin date) using TCA
 - make it configurable whether to list only seminars that haven't started yet or also running seminars
 - allow using data from jp_staff
-
+- feature: "this seminar is repeated on the following dates"
+- feature: "people who have registered for this seminar have also registered for these seminars"
