@@ -44,7 +44,7 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 	var $registrationManager;
 	
 	/**
-	 * Display the registration plugin HTML.
+	 * Displays the registration plugin HTML.
 	 *
 	 * @param	string		Default content string, ignore
 	 * @param	array		TypoScript configuration for the plugin
@@ -75,10 +75,11 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 	}
 	
 	/**
-	 * Check whether the logged-in user can register for a seminar.
+	 * Checks whether the logged-in user can register for a seminar.
 	 * The validity of the data the user can type in at this page is not checked, though.
 	 *
 	 * @return	string	empty string if everything is OK, else a localized error message.
+	 * 
 	 * @access	private
 	 */	
 	function canRegister() {
@@ -94,19 +95,19 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 		}
 
 		if (empty($error)) {
-			if (!$this->seminar[needs_registration]) {
+			if (!$this->seminar['needs_registration']) {
 				$error = $this->pi_getLL('no_registration_necessary');
 			}
 		}
 
 		if (empty($error)) {
-			if ($this->seminar[cancelled]) {
+			if ($this->seminar['cancelled']) {
 				$error = $this->pi_getLL('seminar_cancelled');
 			}
 		}
 
 		if (empty($error)) {
-			if ($this->seminar[is_full]) {
+			if ($this->seminar['is_full']) {
 				$error = $this->pi_getLL('seminar_full');
 			}
 		}
@@ -115,10 +116,11 @@ class tx_seminars_pi3 extends tx_seminars_templatehelper {
 	}
 	
 	/**
-	 * Read the current seminar from the database and writes it as an array to $this->seminar.
+	 * Reads the current seminar from the database and writes it as an array to $this->seminar.
 	 *
 	 * @return	string	empty string if everything is OK, else a localized error message.
-	 * @access	private
+	 * 
+	 * @access	protected
 	 */
 	 function readSeminarFromDB() {
 	 	$error = '';

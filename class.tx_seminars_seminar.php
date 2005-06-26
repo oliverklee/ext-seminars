@@ -393,19 +393,19 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		}
 
 		if (empty($error)) {
-			if (!$this->seminar[needs_registration]) {
+			if (!$this->seminar['needs_registration']) {
 				$error = $this->pi_getLL('no_registration_necessary');
 			}
 		}
 
 		if (empty($error)) {
-			if ($this->seminar[cancelled]) {
+			if ($this->seminar['cancelled']) {
 				$error = $this->pi_getLL('seminar_cancelled');
 			}
 		}
 
 		if (empty($error)) {
-			if ($this->seminar[is_full]) {
+			if ($this->seminar['is_full']) {
 				$error = $this->pi_getLL('seminar_full');
 			}
 		}
