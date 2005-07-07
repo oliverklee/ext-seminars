@@ -151,3 +151,5 @@ Not triaged yet
 - allow using data from jp_staff
 - feature: "this seminar is repeated on the following dates"
 - feature: "people who have registered for this seminar have also registered for these seminars"
+- feature: easily enter for a seminar who has attended and who hasn't
+- find a way against overly long lists in the back-end (e.g. all registrations)
