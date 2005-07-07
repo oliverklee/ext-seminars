@@ -212,7 +212,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 				'',
 				'',
 				'' ));
-			$result .= '<p>Anzahl Teilnehmer: '.$numberOfAttendees[num].'</p>';
+			$result .= '<p>Anzahl Teilnehmer: '.$numberOfAttendees['num'].'</p>';
 
 			$numberOfAttendeesPaid = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
@@ -223,7 +223,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			'',
 			'',
 			'' ));
-			$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid[num].'</p>';
+			$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid['num'].'</p>';
 
 			$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees[num] : $numberOfAttendeesPaid[num];
 
