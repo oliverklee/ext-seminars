@@ -80,7 +80,10 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * Example: If the prefix is "field" and the list is "one,two", the array keys
 	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be written.
 	 * 
-	 * @param	String		comma-separated list of subpart names to hide (case-insensitive, will get uppercased)
+	 * Example: If the prefix is empty and the list is "one,two", the array keys
+	 * "###ONE###" and "###TWO###" will be written.
+	 * 
+	 * @param	String		comma-separated list of at least 1 subpart name to hide (case-insensitive, will get uppercased)
 	 * @param	String		prefix to the subpart names (may be empty, case-insensitive, will get uppercased)
 	 * 
 	 * @access protected
