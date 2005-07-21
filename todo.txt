@@ -39,6 +39,7 @@ Version 0.4.0 (July 2005)
 - implement time format configuration [Oli]
 - make 00:00 mean "no time set" [Oli]
 - remove dependency on new login box and front end user registration when you can sign up for a seminar without being a logged-in front end user; document that these extensions are recommended (and when they're not needed) [Oli]
+- reduce code by using the API for COUNT queries [Oli]
 
 Version 0.5.0 (August 2005)
 ---------------------------
