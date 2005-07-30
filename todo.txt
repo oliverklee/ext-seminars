@@ -72,7 +72,6 @@ Version 0.5.0 (August 2005)
   - add localized text "this seminar has been canceled"
   - add entry in participant records whether their money has been refunded
 - display picture of speakers on seminar page [?]
-- Factor out getting a value from FF or TS
 
 Version 0.6.0 (September 2005)
 ------------------------------
@@ -91,6 +90,8 @@ Version 0.6.0 (September 2005)
 - feature: find and display doubled registrations [?]
 - feature: avoid double registrations when entering registrations manually [?]
 - allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop) [?]
+- Spanish localization [Oli]
+- French localization [?]
 
 Version 0.7.0 (October 2005)
 ----------------------------
