@@ -10,6 +10,8 @@ Note: Of course it is possible that a feature gets completed earlier than planne
 Version 0.4.0 (July 2005)
 -------------------------
 - templatize registration page [Oli]
+- switch to Flexforms [AM]
+
 - make it configurable what to do when a participant signs up [Mathias]
   - send an email to the organizer
   - send an email to the participant
@@ -126,7 +128,6 @@ Not triaged yet
 - in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
 - in the seminar list, add (localized) subheadings with month and year
 - feature: graph for total number of registrations per seminar over time
-- switch to Flexforms
 - switch localization files to XML
 - document the CSS styles used
 - remove unneeded subpart markers from the output
