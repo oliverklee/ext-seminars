@@ -45,6 +45,8 @@ Version 0.4.0 (July 2005)
 - improve the template helper class [Oli]
 - add default CSS for the plugin [Oli]
 - clean up HTML templates [Oli]
+- make all semantically required DB fields technically required [Oli]
+- remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
 
 Version 0.5.0 (August 2005)
 ---------------------------
@@ -72,11 +74,12 @@ Version 0.5.0 (August 2005)
     - the important data of the participants
 - make the wrap for the number of vacancies (colored square) configurable [Oli]
 - add support for canceling seminars [Oli]
-  - CSS style
+  - CSS style for this
   - don't allow registering in the seminar details page
   - add localized text "this seminar has been canceled"
   - add entry in participant records whether their money has been refunded
 - display picture of speakers on seminar page [?]
+- make it configurable which seminars to display: past/past+running/all [Oli]
 
 Version 0.6.0 (September 2005)
 ------------------------------
