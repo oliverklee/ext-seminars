@@ -28,6 +28,9 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('salutationswitcher').'class.tx_salutationswitcher.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** Same as class name */
@@ -37,7 +40,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/** Cache the organizers data for the list view */
 	var $organizersCache = array();
-
+	
+	/** The seminar for which the user wants to register. */
+	var $seminar;
+	
+	/** an instance of registration manager which we want to have around only once (for performance reasons) */
+	var $registrationManager;
+	
+	/** the HTML template subparts */
+	var $templateCache = array();
+	
 	/**
 	 * Displays the seminar manager HTML.
 	 *
@@ -50,24 +62,51 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function main($content, $conf) {
 		$this->init($conf);
-		$this->getTemplateCode(array('LIST_HEADER', 'LIST_ITEM', 'SINGLE_VIEW'));
+		$this->getTemplateCode(array('LIST_HEADER', 'LIST_ITEM', 'SINGLE_VIEW', 'REGISTRATION_HEAD'));
+		$this->pi_initPIflexForm();
+
+		$result = '';
 		
-		switch ((string) $conf['CMD']) {
-			case 'singleView':
-				list($t) = explode(':', $this->cObj->currentRecord);
-				$this->internal['currentTable'] = $t;
-				$this->internal['currentRow'] = $this->cObj->data;
-				return $this->pi_wrapInBaseClass($this->singleView());
-			break;
+		switch ($this->getConfValue('what_to_display')) {
+			case 'seminar_registration':
+				$this->feuser = $GLOBALS['TSFE']->fe_user;
+				
+				/** Name of the registrationManager class in case someone subclasses it. */
+				$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
+				$this->registrationManager =& new $registrationManagerClassname();
+				
+				/** Name of the seminar class in case someone subclasses it. */
+				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+				$this->seminar =& new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
+				
+				$errorMessage = $this->registrationManager->canRegisterMessage($this->seminar);
+				$result = $this->createHeading($errorMessage);
+				break;
+			case 'my_seminars':
+				trigger_error('"My Seminars" is not implemented yet.');
+				break;
+			case 'seminar_list':
 			default:
-				// We default to the list view.
-				if (strstr($this->cObj->currentRecord, 'tt_content')) {
-					$this->conf['pidList'] = $this->cObj->data['pages'];
-					$this->conf['recursive'] = $this->cObj->data['recursive'];
+				switch ((string) $conf['CMD']) {
+					case 'singleView':
+						list($t) = explode(':', $this->cObj->currentRecord);
+						$this->internal['currentTable'] = $t;
+						$this->internal['currentRow'] = $this->cObj->data;
+						$result = $this->singleView();
+						break;
+					default:
+						// We default to the list view.
+						if (strstr($this->cObj->currentRecord, 'tt_content')) {
+							$this->conf['pidList'] = $this->getConfValue('pages');
+							$this->conf['recursive'] = $this->getConfValue('recursive');
+						}
+						$result = $this->listView();
+						break;
 				}
-				return $this->pi_wrapInBaseClass($this->listView());
-			break;
+				break;
 		}
+		
+		return $this->pi_wrapInBaseClass($result);
 	}
 
 	/**
@@ -78,7 +117,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function listView() {
-		$this->readSubpartsToHide($this->conf['hideColumns'], 'COLUMN');
+		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'COLUMN');
 
 		// Local settings for the listView function
 		$lConf = $this->conf['listView.'];
@@ -144,7 +183,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function singleView() {
-		$this->readSubpartsToHide($this->conf['hideFields'], 'FIELD');
+		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD');
 		
 		// This sets the title of the page for use in indexed search results:
 		if ($this->internal['currentRow']['title']) {
@@ -285,7 +324,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						$result = '&#8211;'.$endDateDay;
 						// Are the years different? Then include the complete begin date.
 						if (strftime('%Y', $beginDate) !== strftime('%Y', $endDate)) {
-							$result = $beingDateDay.$result;
+							$result = $beginDateDay.$result;
 						} else {
 							// Are the months different? Then include day and month.
 							if (strftime('%m', $beginDate) !== strftime('%m', $endDate)) {
@@ -491,6 +530,95 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		return $result;
 	}
+	
+	/**
+	 * Checks whether the logged-in user can register for a seminar.
+	 * The validity of the data the user can type in at this page is not checked, though.
+	 *
+	 * @return	string	empty string if everything is OK, else a localized error message.
+	 * 
+	 * @access	private
+	 */	
+	function canRegister() {
+		/** This is empty as long as no error has occured. Used to circumvent deeply-nested ifs. */
+		$error = '';
+	
+		if (!$GLOBALS['TSFE']->loginUser) {
+			$error = $this->pi_getLL('please_log_in');
+		}
+
+		if (empty($error)) {
+			$error = $this->readSeminarFromDB();
+		}
+
+		if (empty($error)) {
+			if (!$this->seminar['needs_registration']) {
+				$error = $this->pi_getLL('no_registration_necessary');
+			}
+		}
+
+		if (empty($error)) {
+			if ($this->seminar['cancelled']) {
+				$error = $this->pi_getLL('seminar_cancelled');
+			}
+		}
+
+		if (empty($error)) {
+			if ($this->seminar['is_full']) {
+				$error = $this->pi_getLL('seminar_full');
+			}
+		}
+
+		return $error;
+	}
+	
+	/**
+	 * Reads the current seminar from the database and writes it as an array to $this->seminar.
+	 *
+	 * @return	string	empty string if everything is OK, else a localized error message.
+	 * 
+	 * @access	protected
+	 */
+	 function readSeminarFromDB() {
+	 	$error = '';
+
+		$this->seminar = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'*',
+			$this->tableSeminars,
+			'uid='.$this->seminarUid.t3lib_pageSelect::enableFields($this->tableSeminars),
+			'',
+			'',
+			'1'));
+		if (empty($this->seminar)) {
+			$error = $this->pi_getLL('wrong_seminar_number');
+		}
+		
+		return $error;
+	 }
+	 
+	 /**
+	  * Creates the page title and (if applicable) any error messages.
+	  * 
+	  * When this method is called, the function getTemplateCode() must already have been called.
+	  * 
+	  * @param	string	error message to be displayed (may be empty if there is no error)
+	  * 
+	  * @return	string	HTML code including the title and error message
+	  * 
+	  * @access protected
+	  */
+	 function createHeading($errorMessage) {
+		$this->markers['###REGISTRATION###'] = $this->pi_getLL('registration');
+		$this->markers['###TITLE###']        = $this->seminar->getTitleAndDate('&#8211;');
+
+		if (empty($errorMessage)) {
+			$this->subpartsToHide['###ERROR###'] = '';
+		} else {
+			$this->markers['###ERROR_TEXT###'] = $errorMessage;
+		}
+		
+		return $this->substituteMarkerArrayCached('REGISTRATION_HEAD');
+	 }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1.php']) {

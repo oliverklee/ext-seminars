@@ -7,6 +7,9 @@ if (TYPO3_MODE=='BE') {
 	t3lib_extMgm::addModule('web','txseminarsM1','',t3lib_extMgm::extPath($_EXTKEY).'mod1/');
 }
 
+t3lib_div::loadTCA('fe_users');
+t3lib_div::loadTCA('tt_content');
+
 $tempColumns = Array (
 	'tx_seminars_phone_mobile' => Array (
 		'exclude' => 0,
@@ -67,15 +70,6 @@ $tempColumns = Array (
 );
 
 
-t3lib_div::loadTCA('fe_users');
-t3lib_extMgm::addTCAcolumns('fe_users',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('fe_users','tx_seminars_phone_mobile;;;;1-1-1, tx_seminars_matriculation_number, tx_seminars_planned_degree, tx_seminars_semester, tx_seminars_subject');
-
-
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_seminars');
-
-
-t3lib_extMgm::addToInsertRecords('tx_seminars_seminars');
 
 $TCA['tx_seminars_seminars'] = Array (
 	'ctrl' => Array (
@@ -99,12 +93,6 @@ $TCA['tx_seminars_seminars'] = Array (
 	)
 );
 
-
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_speakers');
-
-
-t3lib_extMgm::addToInsertRecords('tx_seminars_speakers');
-
 $TCA['tx_seminars_speakers'] = Array (
 	'ctrl' => Array (
 		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers',
@@ -121,9 +109,6 @@ $TCA['tx_seminars_speakers'] = Array (
 		'fe_admin_fieldList' => 'title, organization, homepage, description, picture, notes, address, phone_work, phone_home, phone_mobile, fax, email',
 	)
 );
-
-
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_attendances');
 
 $TCA['tx_seminars_attendances'] = Array (
 	'ctrl' => Array (
@@ -142,9 +127,6 @@ $TCA['tx_seminars_attendances'] = Array (
 	)
 );
 
-
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_sites');
-
 $TCA['tx_seminars_sites'] = Array (
 	'ctrl' => Array (
 		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_sites',
@@ -161,9 +143,6 @@ $TCA['tx_seminars_sites'] = Array (
 		'fe_admin_fieldList' => 'title, address, homepage, directions, notes',
 	)
 );
-
-
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_organizers');
 
 $TCA['tx_seminars_organizers'] = Array (
 	'ctrl' => Array (
@@ -182,8 +161,6 @@ $TCA['tx_seminars_organizers'] = Array (
 	)
 );
 
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_payment_methods');
-
 $TCA['tx_seminars_payment_methods'] = Array (
 	'ctrl' => Array (
 		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_payment_methods',
@@ -201,33 +178,26 @@ $TCA['tx_seminars_payment_methods'] = Array (
 	)
 );
 
-t3lib_div::loadTCA('tt_content');
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key';
+t3lib_extMgm::addToInsertRecords('tx_seminars_seminars');
+t3lib_extMgm::addToInsertRecords('tx_seminars_speakers');
 
+t3lib_extMgm::addTCAcolumns('fe_users',$tempColumns,1);
+t3lib_extMgm::addToAllTCAtypes('fe_users','tx_seminars_phone_mobile;;;;1-1-1, tx_seminars_matriculation_number, tx_seminars_planned_degree, tx_seminars_semester, tx_seminars_subject');
+
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_attendances');
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_organizers');
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_payment_methods');
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_seminars');
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_sites');
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_speakers');
+
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,pages,recursive';
+
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='pi_flexform';
+
+t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:seminars/flexform_pi1_ds.xml');
+
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/','Seminars');
 
 t3lib_extMgm::addPlugin(Array('LLL:EXT:seminars/locallang_db.php:tt_content.list_type_pi1', $_EXTKEY.'_pi1'),'list_type');
-
-
-t3lib_extMgm::addStaticFile($_EXTKEY,'pi1/static/','Seminar Manager');
-
-
-/* Removed until the "My Seminars" plugin actually is functional
-t3lib_div::loadTCA('tt_content');
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi2']='layout,select_key';
-
-
-t3lib_extMgm::addPlugin(Array('LLL:EXT:seminars/locallang_db.php:tt_content.list_type_pi2', $_EXTKEY.'_pi2'),'list_type');
-
-
-t3lib_extMgm::addStaticFile($_EXTKEY,'pi2/static/','My Seminars');
-*/
-
-t3lib_div::loadTCA('tt_content');
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi3']='layout,select_key';
-
-
-t3lib_extMgm::addPlugin(Array('LLL:EXT:seminars/locallang_db.php:tt_content.list_type_pi3', $_EXTKEY.'_pi3'),'list_type');
-
-
-t3lib_extMgm::addStaticFile($_EXTKEY,'pi3/static/','Seminar registratrion');
 ?>

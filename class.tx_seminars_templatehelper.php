@@ -65,7 +65,10 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function getTemplateCode($subpartNames) {
 		/** the whole template file as a string */
-		$templateRawCode = $this->cObj->fileResource($this->conf['templateFile']);
+		$templateRawCode = $this->cObj->fileResource(
+			$this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'templateFile', 's_template_special') ? 
+				$this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'templateFile', 's_template_special') :
+				$this->conf['templateFile']);
 
 		foreach ($subpartNames as $currentKey) {
 			$this->templateCache[$currentKey] = $this->cObj->getSubpart($templateRawCode, '###'.$currentKey.'###');
@@ -113,6 +116,26 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function substituteMarkerArrayCached($key) {
 		return $this->cObj->substituteMarkerArrayCached($this->templateCache[$key], $this->markers, $this->subpartsToHide);
+	}
+
+	/**
+	 * Gets a value from flexforms or TS setup.
+	 * The priority lies on flexforms; if nothing is found there, the value
+	 * from TS setup is returned.
+	 * 
+	 * @param	string		field name to extract
+	 * @param	string		sheet pointer, eg. "sDEF"
+	 * 
+	 * @return	String		the value of the corresponding flexforms or TS setup entry (may be empty)
+	 * 
+	 * @access protected
+	 */
+	function getConfValue($fieldName, $sheet = 'sDEF') {
+		$flexformsValue = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $fieldName, $sheet);
+
+		$result = ($flexformsValue) ? $flexformsValue : $this->conf[$fieldName];  
+		
+		return $result;
 	}
 }
 

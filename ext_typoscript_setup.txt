@@ -17,17 +17,6 @@ plugin.tx_seminars_pi1 {
 	hideFields =
 }
 
-plugin.tx_seminars_pi2 {
-	templateFile = EXT:seminars/pi2/seminars_pi2.tmpl
-	salutation = formal
-	hideColumns =
-}
-
-plugin.tx_seminars_pi3 {
-	templateFile = EXT:seminars/pi3/seminars_pi3.tmpl
-	salutation = formal
-}
-
 plugin.tx_srfeuserregister_pi1 {
 	create.evalValues {
 		tx_seminars_phone_mobile = atMost[25]

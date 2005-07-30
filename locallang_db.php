@@ -72,8 +72,6 @@ $LOCAL_LANG = Array (
 		'tx_seminars_payment_methods' => 'Methods of payment',
 		'tx_seminars_payment_methods.title' => 'Title',
 		'tt_content.list_type_pi1' => 'Seminar Manager',
-		'tt_content.list_type_pi2' => 'My Seminars',
-		'tt_content.list_type_pi3' => 'Seminar registration',
 	),
 	'de' => Array (
 		'moduleFunction.tx_seminars_modfunc1' => 'Seminare',
@@ -141,8 +139,6 @@ $LOCAL_LANG = Array (
 		'tx_seminars_payment_methods' => 'Zahlungsarten',
 		'tx_seminars_payment_methods.title' => 'Titel',
 		'tt_content.list_type_pi1' => 'Seminar-Manager',
-		'tt_content.list_type_pi2' => 'Meine Seminare',
-		'tt_content.list_type_pi3' => 'Seminar-Anmeldung',
 	),
 );
 ?>
