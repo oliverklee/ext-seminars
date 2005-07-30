@@ -1,0 +1,2802 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<TITLE>Frond End User Registration Template</TITLE>
+</head>
+<body>
+
+
+
+<br />
+<br />
+<H1>FRONTEND USER REGISTRATION</H1>
+<h2>EXAMPLE</h2>
+
+
+
+<br />
+<br />
+<h2>'CREATE' TEMPLATES:</h2>
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>Form for the registration of a frontend user:</em>
+<br />
+<br />
+<!-- ###TEMPLATE_CREATE### begin
+	Form for creation of a new fe_users record
+	In this case, you can only create this record if you're not already logged in
+-->
+<form name="###FORM_NAME###" method="post" action="###FORM_URL###" enctype="multipart/form-data">
+<table border="0" cellspacing="0" cellpadding="1">
+	<tr>
+		<td><img src="clear.gif" height="1" width="160"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2"><p>###GW1B######LABEL_ENTER_ACCOUNT_INFO######GW1E###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<tr>
+		<td>
+			<p>###LABEL_USERNAME### ###REQUIRED_USERNAME###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_username###-->
+			<p>###GW2B######MISSING_USERNAME######GW2E###</p>
+			<p>###EVAL_ERROR_FIELD_username###</p>
+			<!--###SUB_REQUIRED_FIELD_username###-->
+			<p><input type="text" name="FE[fe_users][username]" size="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<tr>
+		<td>
+			<p>###LABEL_PASSWORD### ###REQUIRED_PASSWORD###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_password###-->
+			<p>###GW2B######MISSING_PASSWORD######GW2E###</p>
+			<p>###EVAL_ERROR_FIELD_password###</p>
+			<!--###SUB_REQUIRED_FIELD_password###-->
+			<p><input type="password" name="FE[fe_users][password]" size="10" /> ###LABEL_PASSWORD_REPEAT### <input type="password" name="FE[fe_users][password_again]" size="10" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<tr>
+		<td>
+			<p>###LABEL_GENDER### ###REQUIRED_GENDER###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_gender######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_gender###-->
+			<p>###GW2B######MISSING_GENDER######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_gender###-->
+			<p>###TCA_INPUT_gender###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_NAME### ###REQUIRED_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_name###-->
+			<p>###GW2B######MISSING_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_name###-->
+			<p><input type="text" name="FE[fe_users][name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_FIRST_NAME### ###REQUIRED_FIRST_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_first_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_first_name###-->
+			<p>###GW2B######MISSING_FIRST_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_first_name###-->
+			<p><input type="text" name="FE[fe_users][first_name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_LAST_NAME### ###REQUIRED_LAST_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_last_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_last_name###-->
+			<p>###GW2B######MISSING_LAST_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_last_name###-->
+			<p><input type="text" name="FE[fe_users][last_name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<tr>
+		<td>
+			<p>###LABEL_STATUS### ###REQUIRED_STATUS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_status######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_status###-->
+			<p>###GW2B######MISSING_STATUS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_status###-->
+			<p>###TCA_INPUT_status###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_MATRICULATION_NUMBER### ###REQUIRED_TX_SEMINARS_MATRICULATION_NUMBER###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_matriculation_number######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_MATRICULATION_NUMBER######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_matriculation_number]" size ="10" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_PLANNED_DEGREE### ###REQUIRED_TX_SEMINARS_PLANNED_DEGREE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_planned_degree######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_PLANNED_DEGREE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_planned_degree]" size ="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_SEMESTER### ###REQUIRED_TX_SEMINARS_SEMESTER###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_semester######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_SEMESTER######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_semester]" size ="3" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_SUBJECT### ###REQUIRED_TX_SEMINARS_SUBJECT###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_subject######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_SUBJECT######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_subject]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<tr>
+		<td>
+			<p>###LABEL_DATE_OF_BIRTH### ###REQUIRED_DATE_OF_BIRTH###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_date_of_birth######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_date_of_birth###-->
+			<p>###GW2B######MISSING_DATE_OF_BIRTH######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_date_of_birth###-->
+			<p><input type="text" name="FE[fe_users][date_of_birth]" size ="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<tr>
+		<td>
+			<p>###LABEL_TITLE### ###REQUIRED_TITLE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_title######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_title###-->
+			<p>###GW2B######MISSING_TITLE######GW2E###</p>>
+			<!--###SUB_REQUIRED_FIELD_title###-->
+			<p><input type="text" name="FE[fe_users][title]" size="40" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<tr>
+		<td>
+			<p>###LABEL_COMPANY### ###REQUIRED_COMPANY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_company######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_company###-->
+			<p>###GW2B######MISSING_COMPANY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_company###-->
+			<p><input type="text" name="FE[fe_users][company]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<tr>
+		<td>
+			<p>###LABEL_ADDRESS### ###REQUIRED_ADDRESS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_address######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_address###-->
+			<p>###GW2B######MISSING_ADDRESS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_address###-->
+			<p><input type="text" name="FE[fe_users][address]" size="60" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<tr>
+		<td>
+			<p>###LABEL_CITY### ###REQUIRED_CITY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_city######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_city###-->
+			<p>###GW2B######MISSING_CITY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_city###-->
+			<p><input type="text" name="FE[fe_users][city]" size="40" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<tr>
+		<td>
+			<p>###LABEL_ZONE### ###REQUIRED_ZONE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_zone###-->
+			<p>###GW2B######MISSING_ZONE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zone###-->
+			<p>###SELECTOR_ZONE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<tr>
+		<td>
+			<p>###LABEL_COUNTRY### ###REQUIRED_COUNTRY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_country######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_country###-->
+			<p>###GW2B######MISSING_COUNTRY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_country###-->
+			<p><input type="text" name="FE[fe_users][country]" size="60" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<tr>
+		<td>
+			<p>###LABEL_COUNTRY### ###REQUIRED_STATIC_INFO_COUNTRY###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_static_info_country###-->
+			<p>###GW2B######MISSING_STATIC_INFO_COUNTRY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_static_info_country###-->
+			<p>###SELECTOR_STATIC_INFO_COUNTRY###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<tr>
+		<td>
+			<p>###LABEL_ZIP### ###REQUIRED_ZIP###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_zip######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zip###-->
+			<p>###GW2B######MISSING_ZIP######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zip###-->
+			<p><input type="text" name="FE[fe_users][zip]" size="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<tr>
+		<td>
+			<p>###LABEL_TELEPHONE### ###REQUIRED_TELEPHONE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_telephone######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_telephone###-->
+			<p>###GW2B######MISSING_TELEPHONE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_telephone###-->
+			<p><input type="text" name="FE[fe_users][telephone]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_PHONE_MOBILE### ###REQUIRED_TX_SEMINARS_PHONE_MOBILE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_phone_mobile######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_PHONE_MOBILE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_phone_mobile]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<tr>
+		<td>
+			<p>###LABEL_FAX### ###REQUIRED_FAX###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_fax######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_fax###-->
+			<p>###GW2B######MISSING_FAX######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_fax###-->
+			<p><input type="text" name="FE[fe_users][fax]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<tr>
+		<td>
+			<p>###LABEL_EMAIL### ###REQUIRED_EMAIL###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_email######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_email###-->
+			<p>###GW2B######MISSING_EMAIL######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_email###-->
+			<p><input type="text" name="FE[fe_users][email]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<tr>
+		<td>
+			<p>###LABEL_MODULE_SYS_DMAIL_CATEGORY### ###REQUIRED_MODULE_SYS_DMAIL_CATEGORY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_module_sys_dmail_category######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_category###-->
+			<p>###GW2B######MISSING_MODULE_SYS_DMAIL_CATEGORY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_category###-->
+			<p>###TCA_INPUT_module_sys_dmail_category###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<tr>
+		<td>
+			<p>###LABEL_MODULE_SYS_DMAIL_HTML### ###REQUIRED_MODULE_SYS_DMAIL_HTML###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_html###-->
+			<p>###GW2B######MISSING_MODULE_SYS_DMAIL_HTML######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_html###-->
+			<p><div class="tx-srfeuserregister-pi1-checkbox"><input type="checkbox" name="FE[fe_users][module_sys_dmail_html]" value=1></div></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<tr>
+		<td>
+			<p>###LABEL_LANGUAGE### ###REQUIRED_LANGUAGE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_language###-->
+			<p>###GW2B######MISSING_LANGUAGE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_language###-->
+			<p>###SELECTOR_LANGUAGE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<tr>
+		<td>
+			<p>###LABEL_WWW### ###REQUIRED_WWW###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_www######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_www###-->
+			<p>###GW2B######MISSING_WWW######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_www###-->
+			<p><input type="text" name="FE[fe_users][www]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<tr>
+		<td>
+			<p>###LABEL_IMAGE### ###REQUIRED_IMAGE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_image###-->
+			<p>###GW2B######MISSING_IMAGE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_image###-->
+			<p>###EVAL_ERROR_FIELD_image######UPLOAD_image###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td>
+			<p>###LABEL_COMMENTS### ###REQUIRED_COMMENTS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_comments######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_comments###-->
+			<p>###GW2B######MISSING_COMMENTS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_comments###-->
+			<p>###TCA_INPUT_comments###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td colspan="2">
+			<p>###GW3B######LABEL_REQUIRED_INFO_NOTICE######GW3E###</p>
+		</td>
+	</tr>
+	<tr>
+		<td>###HIDDENFIELDS###</td>
+		<td>
+			<p><input type="submit" name="tx_srfeuserregister_pi1[submit]" value="###LABEL_BUTTON_REGISTER###" class="tx-srfeuserregister-pi1-submit" /></p>
+		</td>
+	</tr>
+</table>
+</form>
+<!-- ###TEMPLATE_CREATE### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>Here the user information is preview before final submission:</em>
+<br />
+<br />
+<!-- ###TEMPLATE_CREATE_PREVIEW### begin
+	Form for preview before creation of a new fe_users record
+-->
+<table border="0" cellspacing="0" cellpadding="1">
+	<tr>
+		<td><img src="clear.gif" height="1" width="160"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+			<p>###LABEL_V_VERIFY_BEFORE_CREATE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<tr>
+		<td><p>###LABEL_USERNAME###</p></td>
+		<td><p>###FIELD_username###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<tr>
+		<td><p>###LABEL_GENDER###</p></td>
+		<td><p>###TCA_INPUT_gender###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<tr>
+		<td><p>###LABEL_NAME###</p></td>
+		<td><p>###FIELD_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<tr>
+		<td><p>###LABEL_FIRST_NAME###</p></td>
+		<td><p>###FIELD_first_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<tr>
+		<td><p>###LABEL_LAST_NAME###</p></td>
+		<td><p>###FIELD_last_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<tr>
+		<td><p>###LABEL_STATUS###</p></td>
+		<td><p>###TCA_INPUT_status###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<tr>
+		<td><p>###LABEL_DATE_OF_BIRTH###</p></td>
+		<td><p>###FIELD_date_of_birth###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<tr>
+		<td><p>###LABEL_TITLE###</p></td>
+		<td><p>###FIELD_title###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<tr>
+		<td><p>###LABEL_COMPANY###</p></td>
+		<td><p>###FIELD_company###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<tr>
+		<td><p>###LABEL_ADDRESS###</p></td>
+		<td><p>###FIELD_address###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<tr>
+		<td><p>###LABEL_CITY###</p></td>
+		<td><p>###FIELD_city###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<tr>
+		<td><p>###LABEL_ZONE###</p></td>
+		<td><p>###FIELD_zone###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<tr>
+		<td><p>###LABEL_COUNTRY###</p></td>
+		<td><p>###FIELD_country###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<tr>
+		<td><p>###LABEL_STATIC_INFO_COUNTRY###</p></td>
+		<td><p>###FIELD_static_info_country###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<tr>
+		<td><p>###LABEL_ZIP###</p></td>
+		<td><p>###FIELD_zip###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<tr>
+		<td><p>###LABEL_TELEPHONE###</p></td>
+		<td><p>###FIELD_telephone###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<tr>
+		<td><p>###LABEL_FAX###</p></td>
+		<td><p>###FIELD_fax###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<tr>
+		<td><p>###LABEL_EMAIL###</p></td>
+		<td><p>###FIELD_email###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<tr>
+		<td><p>###LABEL_MODULE_SYS_DMAIL_CATEGORY###</p></td>
+		<td><p>###TCA_INPUT_module_sys_dmail_category###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<tr>
+		<td><p>###LABEL_MODULE_SYS_DMAIL_HTML###</p></td>
+		<td><p>###LABEL_module_sys_dmail_html_CHECKED###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<tr>
+		<td><p>###LABEL_LANGUAGE###</p></td>
+		<td><p>###FIELD_language###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<tr>
+		<td><p>###LABEL_WWW###</p></td>
+		<td><p>###FIELD_www###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<tr>
+		<td><p>###LABEL_IMAGE###</p></td>
+		<td><p>###UPLOAD_PREVIEW_image###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td><p>###LABEL_COMMENTS###</p></td>
+		<td><p>###TCA_INPUT_comments###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+	<form name="###FORM_NAME###" method="post" action="###FORM_URL###" enctype="multipart/form-data">
+		<td>
+	<input type="hidden" name="FE[fe_users][username]" />
+	<input type="hidden" name="FE[fe_users][password]" />
+	<input type="hidden" name="FE[fe_users][password_again]" />
+	<input type="hidden" name="FE[fe_users][gender]" />
+	<input type="hidden" name="FE[fe_users][name]" />
+	<input type="hidden" name="FE[fe_users][first_name]" />
+	<input type="hidden" name="FE[fe_users][last_name]" />
+	<input type="hidden" name="FE[fe_users][status]" />
+	<input type="hidden" name="FE[fe_users][date_of_birth]" />
+	<input type="hidden" name="FE[fe_users][address]" />
+	<input type="hidden" name="FE[fe_users][city]" />
+	<input type="hidden" name="FE[fe_users][zone]" />
+	<input type="hidden" name="FE[fe_users][country]" />
+	<input type="hidden" name="FE[fe_users][static_info_country]" />
+	<input type="hidden" name="FE[fe_users][zip]" />
+	<input type="hidden" name="FE[fe_users][telephone]" />
+	<input type="hidden" name="FE[fe_users][fax]" />
+	<input type="hidden" name="FE[fe_users][email]" />
+	<input type="hidden" name="FE[fe_users][module_sys_dmail_category]" />
+	<input type="hidden" name="FE[fe_users][module_sys_dmail_html]" />
+	<input type="hidden" name="FE[fe_users][language]" />
+	<input type="hidden" name="FE[fe_users][title]" />
+	<input type="hidden" name="FE[fe_users][company]" />
+	<input type="hidden" name="FE[fe_users][www]" />
+	<input type="hidden" name="FE[fe_users][image]" />
+	<input type="hidden" name="FE[fe_users][comments]" />
+	###HIDDENFIELDS###
+		</td>
+		<td>
+	<p><input type="submit" name="tx_srfeuserregister_pi1[doNotSave]" value="###LABEL_BUTTON_BACK_TO_FORM###" class="tx-srfeuserregister-pi1-submit" />
+	<input type="submit" name="tx_srfeuserregister_pi1[submit]" value="###LABEL_BUTTON_CONFIRM_REGISTER###" class="tx-srfeuserregister-pi1-submit" /></p>
+		</td>
+	</form>
+	</tr>
+</table>
+<!-- ###TEMPLATE_CREATE_PREVIEW### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>Template, displayed if the user is already logged in.</em>
+<br />
+<br />
+<!-- ###TEMPLATE_CREATE_LOGIN### begin-->
+<p><a href="###EDIT_URL###">###LABEL_CLICK_HERE_TO_EDIT###</a></p>
+<!-- ###TEMPLATE_CREATE_LOGIN### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is shown when the user is created.</em>
+<br />
+<br />
+<!-- ###TEMPLATE_CREATE_SAVED### begin-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p> 
+		<p>###LABEL_V_REGISTRATION_CREATED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_CREATED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_CREATED_MESSAGE2###</p>
+		<p>###LABEL_V_NOW_ENTER_YOUR_USERNAME###</p>
+		<p><table border="0" cellspacing="0" cellpadding="1">
+			<form name="###FORM_NAME###" action="###LOGIN_FORM###" method="post">
+				<tr>
+					<td><img src="clear.gif" height="1" width="20" /></td>
+					<td><p>###LABEL_USERNAME###</p></td>
+					<td><p><input type="text" name="user" value="###FIELD_username###" /></p></td>
+				</tr>
+				<tr>
+					<td><img src="clear.gif" height="1" width="20" /></td>
+					<td><p>###LABEL_PASSWORD###</p></td>
+					<td><p><input type="password" name="pass" value="###FIELD_password###" /></p></td>
+				</tr>
+				<tr>
+					<td><img src="clear.gif" height="1" width="20" /></td>
+					<td><img src="clear.gif" height="1" width="1" /></td>
+					<td><p><input type="submit" name="submit" value="###LABEL_BUTTON_ENTER###"  class="tx-srfeuserregister-pi1-submit" /></p>
+						<input type="hidden" name="logintype" value="login" />
+						<input type="hidden" name="pid" value="###THE_PID###" />
+						<input type="hidden" name="redirect_url" value="" />
+					</td>
+				</tr>
+			</form>
+		</table></p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_CREATE_SAVED### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is shown when the user is created and the option setfixed is configured.
+The user is informed that a message has been sent to his email address and that he needs to confirm his registration.</em>
+<br />
+<br />
+<!-- ###TEMPLATE_SETFIXED_CREATE### begin
+-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_PLEASE_CONFIRM###</p>
+		<p>###LABEL_V_YOUR_ACCOUNT_WAS_CREATED###</p>
+		<p>###LABEL_V_FOLLOW_INSTRUCTIONS1###</p>
+		<p>###LABEL_V_FOLLOW_INSTRUCTIONS2###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###</p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_SETFIXED_CREATE### end-->
+
+
+
+<br />
+<br />
+<h2>'INVITE' TEMPLATES:</h2>
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>Form for the registration of an invited frontend user:</em>
+<br />
+<br />
+<!-- ###TEMPLATE_INVITE### begin
+	Form for creation of an invited fe_users record
+-->
+<form name="###FORM_NAME###" method="post" action="###FORM_URL###" enctype="multipart/form-data">
+<table border="0" cellspacing="0" cellpadding="1">
+	<tr>
+		<td><img src="clear.gif" height="1" width="160"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2"><p>###GW1B######LABEL_ENTER_INVITATION_ACCOUNT_INFO######GW1E###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<tr>
+		<td>
+			<p>###LABEL_USERNAME### ###REQUIRED_USERNAME###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_username###-->
+			<p>###GW2B######MISSING_USERNAME######GW2E###</p>
+			<p>###EVAL_ERROR_FIELD_username###</p>
+			<!--###SUB_REQUIRED_FIELD_username###-->
+			<p><input type="text" name="FE[fe_users][username]" size="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<tr>
+		<td>
+			<p>###LABEL_PASSWORD### ###REQUIRED_PASSWORD###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_password###-->
+			<p>###GW2B######MISSING_PASSWORD######GW2E###</p>
+			<p>###EVAL_ERROR_FIELD_password###</p>
+			<!--###SUB_REQUIRED_FIELD_password###-->
+			<p><input type="password" name="FE[fe_users][password]" size="10" /> ###LABEL_PASSWORD_REPEAT### <input type="password" name="FE[fe_users][password_again]" size="10" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<tr>
+		<td>
+			<p>###LABEL_GENDER### ###REQUIRED_GENDER###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_gender######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_gender###-->
+			<p>###GW2B######MISSING_GENDER######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_gender###-->
+			<p>###TCA_INPUT_gender###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_NAME### ###REQUIRED_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_name###-->
+			<p>###GW2B######MISSING_INVITATION_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_name###-->
+			<p><input type="text" name="FE[fe_users][name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_FIRST_NAME### ###REQUIRED_FIRST_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_first_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_first_name###-->
+			<p>###GW2B######MISSING_INVITATION_FIRST_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_first_name###-->
+			<p><input type="text" name="FE[fe_users][first_name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_LAST_NAME### ###REQUIRED_LAST_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_last_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_last_name###-->
+			<p>###GW2B######MISSING_INVITATION_LAST_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_last_name###-->
+			<p><input type="text" name="FE[fe_users][last_name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<tr>
+		<td>
+			<p>###LABEL_STATUS### ###REQUIRED_STATUS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_status######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_status###-->
+			<p>###GW2B######MISSING_STATUS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_status###-->
+			<p>###TCA_INPUT_status###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<tr>
+		<td>
+			<p>###LABEL_DATE_OF_BIRTH### ###REQUIRED_DATE_OF_BIRTH###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_date_of_birth######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_date_of_birth###-->
+			<p>###GW2B######MISSING_DATE_OF_BIRTH######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_date_of_birth###-->
+			<p><input type="text" name="FE[fe_users][date_of_birth]" size ="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<tr>
+		<td>
+			<p>###LABEL_TITLE### ###REQUIRED_TITLE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_title######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_title###-->
+			<p>###GW2B######MISSING_INVITATION_TITLE######GW2E###</p>>
+			<!--###SUB_REQUIRED_FIELD_title###-->
+			<p><input type="text" name="FE[fe_users][title]" size="40" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<tr>
+		<td>
+			<p>###LABEL_COMPANY### ###REQUIRED_COMPANY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_company######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_company###-->
+			<p>###GW2B######MISSING_INVITATION_COMPANY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_company###-->
+			<p><input type="text" name="FE[fe_users][company]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<tr>
+		<td>
+			<p>###LABEL_ADDRESS### ###REQUIRED_ADDRESS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_address######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_address###-->
+			<p>###GW2B######MISSING_INVITATION_ADDRESS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_address###-->
+			<p><input type="text" name="FE[fe_users][address]" size="60" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<tr>
+		<td>
+			<p>###LABEL_CITY### ###REQUIRED_CITY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_city######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_city###-->
+			<p>###GW2B######MISSING_INVITATION_CITY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_city###-->
+			<p><input type="text" name="FE[fe_users][city]" size="40" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<tr>
+		<td>
+			<p>###LABEL_ZONE### ###REQUIRED_ZONE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_zone###-->
+			<p>###GW2B######MISSING_INVITATION_ZONE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zone###-->
+			<p>###SELECTOR_ZONE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<tr>
+		<td>
+			<p>###LABEL_COUNTRY### ###REQUIRED_COUNTRY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_country######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_country###-->
+			<p>###GW2B######MISSING_INVITATION_COUNTRY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_country###-->
+			<p><input type="text" name="FE[fe_users][country]" size="60" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<tr>
+		<td>
+			<p>###LABEL_COUNTRY### ###REQUIRED_STATIC_INFO_COUNTRY###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_static_info_country###-->
+			<p>###GW2B######MISSING_INVITATION_STATIC_INFO_COUNTRY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_static_info_country###-->
+			<p>###SELECTOR_STATIC_INFO_COUNTRY###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<tr>
+		<td>
+			<p>###LABEL_ZIP### ###REQUIRED_ZIP###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_zip######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zip###-->
+			<p>###GW2B######MISSING_INVITATION_ZIP######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zip###-->
+			<p><input type="text" name="FE[fe_users][zip]" size="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<tr>
+		<td>
+			<p>###LABEL_TELEPHONE### ###REQUIRED_TELEPHONE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_telephone######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_telephone###-->
+			<p>###GW2B######MISSING_INVITATION_TELEPHONE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_telephone###-->
+			<p><input type="text" name="FE[fe_users][telephone]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<tr>
+		<td>
+			<p>###LABEL_FAX### ###REQUIRED_FAX###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_fax######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_fax###-->
+			<p>###GW2B######MISSING_INVITATION_FAX######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_fax###-->
+			<p><input type="text" name="FE[fe_users][fax]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<tr>
+		<td>
+			<p>###LABEL_EMAIL### ###REQUIRED_EMAIL###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_email######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_email###-->
+			<p>###GW2B######MISSING_EMAIL######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_email###-->
+			<p><input type="text" name="FE[fe_users][email]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<tr>
+		<td>
+			<p>###LABEL_MODULE_SYS_DMAIL_CATEGORY### ###REQUIRED_MODULE_SYS_DMAIL_CATEGORY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_module_sys_dmail_category######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_category###-->
+			<p>###GW2B######MISSING_MODULE_SYS_DMAIL_CATEGORY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_category###-->
+			<p>###TCA_INPUT_module_sys_dmail_category###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<tr>
+		<td>
+			<p>###LABEL_MODULE_SYS_DMAIL_HTML### ###REQUIRED_MODULE_SYS_DMAIL_HTML###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_html###-->
+			<p>###GW2B######MISSING_MODULE_SYS_DMAIL_HTML######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_html###-->
+			<p><div class="tx-srfeuserregister-pi1-checkbox"><input type="checkbox" name="FE[fe_users][module_sys_dmail_html]" value=1></div></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<tr>
+		<td>
+			<p>###LABEL_LANGUAGE### ###REQUIRED_LANGUAGE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_language###-->
+			<p>###GW2B######MISSING_INVITATION_LANGUAGE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_language###-->
+			<p>###SELECTOR_LANGUAGE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<tr>
+		<td>
+			<p>###LABEL_WWW### ###REQUIRED_WWW###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_www######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_www###-->
+			<p>###GW2B######MISSING_INVITATION_WWW######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_www###-->
+			<p><input type="text" name="FE[fe_users][www]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<tr>
+		<td>
+			<p>###LABEL_IMAGE### ###REQUIRED_IMAGE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_image###-->
+			<p>###GW2B######MISSING_INVITATION_IMAGE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_image###-->
+			<p>###EVAL_ERROR_FIELD_image######UPLOAD_image###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td>
+			<p>###LABEL_COMMENTS### ###REQUIRED_COMMENTS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_comments######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_comments###-->
+			<p>###GW2B######MISSING_COMMENTS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_comments###-->
+			<p>###TCA_INPUT_comments###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td colspan="2">
+			<p>###GW3B######LABEL_REQUIRED_INFO_NOTICE######GW3E###</p>
+		</td>
+	</tr>
+	<tr>
+		<td>###HIDDENFIELDS###</td>
+		<td>
+			<p><input type="submit" name="tx_srfeuserregister_pi1[submit]" value="###LABEL_BUTTON_REGISTER###" class="tx-srfeuserregister-pi1-submit" /></p>
+		</td>
+	</tr>
+</table>
+</form>
+<!-- ###TEMPLATE_INVITE### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>Here the invited user information is previewed before final submission:</em>
+<br />
+<br />
+<!-- ###TEMPLATE_INVITE_PREVIEW### begin
+	Form for preview before creation of an invited fe_users record
+-->
+<table border="0" cellspacing="0" cellpadding="1">
+	<tr>
+		<td><img src="clear.gif" height="1" width="160"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<p>###LABEL_V_VERIFY_INVITATION_BEFORE_CREATE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<tr>
+		<td><p>###LABEL_USERNAME###</p></td>
+		<td><p>###FIELD_username###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<tr>
+		<td><p>###LABEL_GENDER###</p></td>
+		<td><p>###TCA_INPUT_gender###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<tr>
+		<td><p>###LABEL_NAME###</p></td>
+		<td><p>###FIELD_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<tr>
+		<td><p>###LABEL_FIRST_NAME###</p></td>
+		<td><p>###FIELD_first_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<tr>
+		<td><p>###LABEL_LAST_NAME###</p></td>
+		<td><p>###FIELD_last_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<tr>
+		<td><p>###LABEL_STATUS###</p></td>
+		<td><p>###TCA_INPUT_status###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<tr>
+		<td><p>###LABEL_DATE_OF_BIRTH###</p></td>
+		<td><p>###FIELD_date_of_birth###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<tr>
+		<td><p>###LABEL_TITLE###</p></td>
+		<td><p>###FIELD_title###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<tr>
+		<td><p>###LABEL_COMPANY###</p></td>
+		<td><p>###FIELD_company###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<tr>
+		<td><p>###LABEL_ADDRESS###</p></td>
+		<td><p>###FIELD_address###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<tr>
+		<td><p>###LABEL_CITY###</p></td>
+		<td><p>###FIELD_city###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<tr>
+		<td><p>###LABEL_ZONE###</p></td>
+		<td><p>###FIELD_zone###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<tr>
+		<td><p>###LABEL_COUNTRY###</p></td>
+		<td><p>###FIELD_country###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<tr>
+		<td><p>###LABEL_STATIC_INFO_COUNTRY###</p></td>
+		<td><p>###FIELD_static_info_country###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<tr>
+		<td><p>###LABEL_ZIP###</p></td>
+		<td><p>###FIELD_zip###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<tr>
+		<td><p>###LABEL_TELEPHONE###</p></td>
+		<td><p>###FIELD_telephone###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<tr>
+		<td><p>###LABEL_FAX###</p></td>
+		<td><p>###FIELD_fax###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<tr>
+		<td><p>###LABEL_EMAIL###</p></td>
+		<td><p>###FIELD_email###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<tr>
+		<td><p>###LABEL_MODULE_SYS_DMAIL_CATEGORY###</p></td>
+		<td><p>###TCA_INPUT_module_sys_dmail_category###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<tr>
+		<td><p>###LABEL_MODULE_SYS_DMAIL_HTML###</p></td>
+		<td><p>###LABEL_module_sys_dmail_html_CHECKED###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<tr>
+		<td><p>###LABEL_LANGUAGE###</p></td>
+		<td><p>###FIELD_language###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<tr>
+		<td><p>###LABEL_WWW###</p></td>
+		<td><p>###FIELD_www###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<tr>
+		<td><p>###LABEL_IMAGE###</p></td>
+		<td><p>###UPLOAD_PREVIEW_image###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td><p>###LABEL_COMMENTS###</p></td>
+		<td><p>###TCA_INPUT_comments###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+	<form name="###FORM_NAME###" method="post" action="###FORM_URL###" enctype="multipart/form-data">
+		<td>
+	<input type="hidden" name="FE[fe_users][username]" />
+	<input type="hidden" name="FE[fe_users][password]" />
+	<input type="hidden" name="FE[fe_users][password_again]" />
+	<input type="hidden" name="FE[fe_users][gender]" />
+	<input type="hidden" name="FE[fe_users][name]" />
+	<input type="hidden" name="FE[fe_users][first_name]" />
+	<input type="hidden" name="FE[fe_users][last_name]" />
+	<input type="hidden" name="FE[fe_users][status]" />
+	<input type="hidden" name="FE[fe_users][date_of_birth]" />
+	<input type="hidden" name="FE[fe_users][address]" />
+	<input type="hidden" name="FE[fe_users][city]" />
+	<input type="hidden" name="FE[fe_users][zone]" />
+	<input type="hidden" name="FE[fe_users][country]" />
+	<input type="hidden" name="FE[fe_users][static_info_country]" />
+	<input type="hidden" name="FE[fe_users][zip]" />
+	<input type="hidden" name="FE[fe_users][telephone]" />
+	<input type="hidden" name="FE[fe_users][fax]" />
+	<input type="hidden" name="FE[fe_users][email]" />
+	<input type="hidden" name="FE[fe_users][module_sys_dmail_category]" />
+	<input type="hidden" name="FE[fe_users][module_sys_dmail_html]" />
+	<input type="hidden" name="FE[fe_users][language]" />
+	<input type="hidden" name="FE[fe_users][title]" />
+	<input type="hidden" name="FE[fe_users][company]" />
+	<input type="hidden" name="FE[fe_users][www]" />
+	<input type="hidden" name="FE[fe_users][image]" />
+	<input type="hidden" name="FE[fe_users][comments]" />
+	###HIDDENFIELDS###
+		</td>
+		<td>
+	<p><input type="submit" name="tx_srfeuserregister_pi1[doNotSave]" value="###LABEL_BUTTON_BACK_TO_FORM###" class="tx-srfeuserregister-pi1-submit" />
+	<input type="submit" name="tx_srfeuserregister_pi1[submit]" value="###LABEL_BUTTON_CONFIRM_REGISTER###" class="tx-srfeuserregister-pi1-submit" /></p>
+		</td>
+	</form>
+	</tr>
+</table>
+<!-- ###TEMPLATE_INVITE_PREVIEW### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is shown when the invited user is created and the option setfixed is configured, which should be the case if invitations are to be sent!
+The user is informed that a message has been sent to the email address and that the invited user will need to accept/confirm his registration.</em>
+<br />
+<br />
+<!-- ###TEMPLATE_SETFIXED_INVITE### begin
+-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###LABEL_V_INVITATION_CONFIRM###</p>
+		<p>###LABEL_V_INVITATION_ACCOUNT_WAS_CREATED###</p>
+		<p>###LABEL_V_INVITATION_INSTRUCTIONS1###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###</p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_SETFIXED_INVITE### end-->
+
+
+<h2>'EDIT' TEMPLATES:</h2>
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>Form for editing of a fe_users record:</em>
+<br />
+<br />
+<!-- ###TEMPLATE_EDIT### begin
+	Form for editing of a fe_users record:
+-->
+<form name="###FORM_NAME###" method="post" action="###FORM_URL###" enctype="multipart/form-data">
+<table border="0" cellspacing="0" cellpadding="1">
+	<tr>
+		<td><img src="clear.gif" height="1" width="160"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+			<p>###LABEL_V_EDIT_YOUR_ACCOUNT###</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p>###LABEL_PASSWORD### ###REQUIRED_PASSWORD###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_password###-->
+			<p>###GW2B######MISSING_PASSWORD######GW2E###</p>
+			<p>###EVAL_ERROR_FIELD_password###</p>
+			<!--###SUB_REQUIRED_FIELD_password###-->
+			<p><input type="password" name="FE[fe_users][password]" size="10" /> ###LABEL_PASSWORD_REPEAT### <input type="password" name="FE[fe_users][password_again]" size="10" /></p>
+		</td>
+	</tr>
+	<tr>
+		<td><img src="clear.gif" height="1" width="160"></td>
+		<td></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<tr>
+		<td>
+			<p>###LABEL_GENDER### ###REQUIRED_GENDER###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_gender######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_gender###-->
+			<p>###GW2B######MISSING_GENDER######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_gender###-->
+			<p>###TCA_INPUT_gender###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_NAME### ###REQUIRED_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_name###-->
+			<p>###GW2B######MISSING_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_name###-->
+			<p><input type="text" name="FE[fe_users][name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_FIRST_NAME### ###REQUIRED_FIRST_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_first_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_first_name###-->
+			<p>###GW2B######MISSING_FIRST_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_first_name###-->
+			<p><input type="text" name="FE[fe_users][first_name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<tr>
+		<td>
+			<p>###LABEL_LAST_NAME### ###REQUIRED_LAST_NAME###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_last_name######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_last_name###-->
+			<p>###GW2B######MISSING_LAST_NAME######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_last_name###-->
+			<p><input type="text" name="FE[fe_users][last_name]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<tr>
+		<td>
+			<p>###LABEL_STATUS### ###REQUIRED_STATUS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_status######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_status###-->
+			<p>###GW2B######MISSING_STATUS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_status###-->
+			<p>###TCA_INPUT_status###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_MATRICULATION_NUMBER### ###REQUIRED_TX_SEMINARS_MATRICULATION_NUMBER###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_matriculation_number######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_MATRICULATION_NUMBER######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_matriculation_number###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_matriculation_number]" size ="10" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_matriculation_number###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_PLANNED_DEGREE### ###REQUIRED_TX_SEMINARS_PLANNED_DEGREE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_planned_degree######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_PLANNED_DEGREE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_planned_degree###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_planned_degree]" size ="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_planned_degree###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_SEMESTER### ###REQUIRED_TX_SEMINARS_SEMESTER###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_semester######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_SEMESTER######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_semester###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_semester]" size ="3" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_semester###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_SUBJECT### ###REQUIRED_TX_SEMINARS_SUBJECT###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_subject######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_SUBJECT######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_subject###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_subject]" size ="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_subject###-->
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<tr>
+		<td>
+			<p>###LABEL_DATE_OF_BIRTH### ###REQUIRED_DATE_OF_BIRTH###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_date_of_birth######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_date_of_birth###-->
+			<p>###GW2B######MISSING_DATE_OF_BIRTH######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_date_of_birth###-->
+			<p><input type="text" name="FE[fe_users][date_of_birth]" size ="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<tr>
+		<td>
+			<p>###LABEL_TITLE### ###REQUIRED_TITLE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_title######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_title###-->
+			<p>###GW2B######MISSING_TITLE######GW2E###</p>>
+			<!--###SUB_REQUIRED_FIELD_title###-->
+			<p><input type="text" name="FE[fe_users][title]" size="40" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<tr>
+		<td>
+			<p>###LABEL_COMPANY### ###REQUIRED_COMPANY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_company######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_company###-->
+			<p>###GW2B######MISSING_COMPANY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_company###-->
+			<p><input type="text" name="FE[fe_users][company]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<tr>
+		<td>
+			<p>###LABEL_ADDRESS### ###REQUIRED_ADDRESS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_address######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_address###-->
+			<p>###GW2B######MISSING_ADDRESS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_address###-->
+			<p><input type="text" name="FE[fe_users][address]" size="60" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<tr>
+		<td>
+			<p>###LABEL_CITY### ###REQUIRED_CITY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_city######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_city###-->
+			<p>###GW2B######MISSING_CITY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_city###-->
+			<p><input type="text" name="FE[fe_users][city]" size="40" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<tr>
+		<td>
+			<p>###LABEL_ZONE### ###REQUIRED_ZONE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_zone###-->
+			<p>###GW2B######MISSING_ZONE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zone###-->
+			<p>###SELECTOR_ZONE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<tr>
+		<td>
+			<p>###LABEL_COUNTRY### ###REQUIRED_COUNTRY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_country######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_country###-->
+			<p>###GW2B######MISSING_COUNTRY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_country###-->
+			<p><input type="text" name="FE[fe_users][country]" size="60" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<tr>
+		<td>
+			<p>###LABEL_COUNTRY### ###REQUIRED_STATIC_INFO_COUNTRY###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_static_info_country###-->
+			<p>###GW2B######MISSING_STATIC_INFO_COUNTRY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_static_info_country###-->
+			<p>###SELECTOR_STATIC_INFO_COUNTRY###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<tr>
+		<td>
+			<p>###LABEL_ZIP### ###REQUIRED_ZIP###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_zip######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zip###-->
+			<p>###GW2B######MISSING_ZIP######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_zip###-->
+			<p><input type="text" name="FE[fe_users][zip]" size="20" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<tr>
+		<td>
+			<p>###LABEL_TELEPHONE### ###REQUIRED_TELEPHONE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_telephone######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_telephone###-->
+			<p>###GW2B######MISSING_TELEPHONE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_telephone###-->
+			<p><input type="text" name="FE[fe_users][telephone]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
+	<tr>
+		<td>
+			<p>###LABEL_TX_SEMINARS_PHONE_MOBILE### ###REQUIRED_TX_SEMINARS_PHONE_MOBILE###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_tx_seminars_phone_mobile######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
+			<p>###GW2B######MISSING_TX_SEMINARS_PHONE_MOBILE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_tx_seminars_phone_mobile###-->
+			<p><input type="text" name="FE[fe_users][tx_seminars_phone_mobile]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_tx_seminars_phone_mobile###-->
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<tr>
+		<td>
+			<p>###LABEL_FAX### ###REQUIRED_FAX###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_fax######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_fax###-->
+			<p>###GW2B######MISSING_FAX######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_fax###-->
+			<p><input type="text" name="FE[fe_users][fax]" size="25" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<tr>
+		<td>
+			<p>###LABEL_EMAIL### ###REQUIRED_EMAIL###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_email######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_email###-->
+			<p>###GW2B######MISSING_EMAIL######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_email###-->
+			<p><input type="text" name="FE[fe_users][email]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<tr>
+		<td>
+			<p>###LABEL_MODULE_SYS_DMAIL_CATEGORY### ###REQUIRED_MODULE_SYS_DMAIL_CATEGORY###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_module_sys_dmail_category######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_category###-->
+			<p>###GW2B######MISSING_MODULE_SYS_DMAIL_CATEGORY######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_category###-->
+			<p>###TCA_INPUT_module_sys_dmail_category###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<tr>
+		<td>
+			<p>###LABEL_MODULE_SYS_DMAIL_HTML### ###REQUIRED_MODULE_SYS_DMAIL_HTML###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_html###-->
+			<p>###GW2B######MISSING_MODULE_SYS_DMAIL_HTML######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_module_sys_dmail_html###-->
+			<p><div class="tx-srfeuserregister-pi1-checkbox"><input type="checkbox" name="FE[fe_users][module_sys_dmail_html]" value=1></div></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<tr>
+		<td>
+			<p>###LABEL_LANGUAGE### ###REQUIRED_LANGUAGE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_language###-->
+			<p>###GW2B######MISSING_LANGUAGE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_language###-->
+			<p>###SELECTOR_LANGUAGE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<tr>
+		<td>
+			<p>###LABEL_WWW### ###REQUIRED_WWW###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_www######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_www###-->
+			<p>###GW2B######MISSING_WWW######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_www###-->
+			<p><input type="text" name="FE[fe_users][www]" size="50" /></p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<tr>
+		<td>
+			<p>###LABEL_IMAGE### ###REQUIRED_IMAGE###</p>
+		</td>
+		<td>
+			<!--###SUB_REQUIRED_FIELD_image###-->
+			<p>###GW2B######MISSING_IMAGE######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_image###-->
+			<p>###EVAL_ERROR_FIELD_image######UPLOAD_image###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td>
+			<p>###LABEL_COMMENTS### ###REQUIRED_COMMENTS###</p>
+		</td>
+		<td>
+			<p>###GW2B######EVAL_ERROR_FIELD_comments######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_comments###-->
+			<p>###GW2B######MISSING_COMMENTS######GW2E###</p>
+			<!--###SUB_REQUIRED_FIELD_comments###-->
+			<p>###TCA_INPUT_comments###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td colspan="2">
+			<p>###GW3B######LABEL_REQUIRED_INFO_NOTICE######GW3E###</p>
+		</td>
+	</tr>
+	<tr>
+		<td>###HIDDENFIELDS###
+		</td>
+		<td>
+			<p><input type="submit" name="tx_srfeuserregister_pi1[submit]" value="###LABEL_BUTTON_UPDATE###" class="tx-srfeuserregister-pi1-submit" /></p>
+		</td>
+	</tr>
+</table>
+</form>
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr>
+		<td>
+			<p><a href="###DELETE_URL###">###LABEL_CLICK_HERE_TO_DELETE###</a></p>
+	</tr>
+</table>
+<!-- ###TEMPLATE_EDIT### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>Here the user information is preview before final submission:</em>
+<br>
+<br>
+<!-- ###TEMPLATE_EDIT_PREVIEW### begin-->
+<table border="0" cellspacing="0" cellpadding="1">
+	<tr>
+		<td><img src="clear.gif" height="1" width="160"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+			<p>###LABEL_V_VERIFY_BEFORE_UPDATE###</p>
+		</td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<tr>
+		<td><p>###LABEL_USERNAME###</p></td>
+		<td><p>###FIELD_username###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_username###-->
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<tr>
+		<td><p>###LABEL_GENDER###</p></td>
+		<td><p>###TCA_INPUT_gender###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_gender###-->
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<tr>
+		<td><p>###LABEL_NAME###</p></td>
+		<td><p>###FIELD_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_name###-->
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<tr>
+		<td><p>###LABEL_FIRST_NAME###</p></td>
+		<td><p>###FIELD_first_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_first_name###-->
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<tr>
+		<td><p>###LABEL_LAST_NAME###</p></td>
+		<td><p>###FIELD_last_name###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_last_name###-->
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<tr>
+		<td><p>###LABEL_STATUS###</p></td>
+		<td><p>###TCA_INPUT_status###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_status###-->
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<tr>
+		<td><p>###LABEL_DATE_OF_BIRTH###</p></td>
+		<td><p>###FIELD_date_of_birth###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_date_of_birth###-->
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<tr>
+		<td><p>###LABEL_TITLE###</p></td>
+		<td><p>###FIELD_title###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_title###-->
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<tr>
+		<td><p>###LABEL_COMPANY###</p></td>
+		<td><p>###FIELD_company###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_company###-->
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<tr>
+		<td><p>###LABEL_ADDRESS###</p></td>
+		<td><p>###FIELD_address###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_address###-->
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<tr>
+		<td><p>###LABEL_CITY###</p></td>
+		<td><p>###FIELD_city###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_city###-->
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<tr>
+		<td><p>###LABEL_ZONE###</p></td>
+		<td><p>###FIELD_zone###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zone###-->
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<tr>
+		<td><p>###LABEL_COUNTRY###</p></td>
+		<td><p>###FIELD_country###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_country###-->
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<tr>
+		<td><p>###LABEL_STATIC_INFO_COUNTRY###</p></td>
+		<td><p>###FIELD_static_info_country###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_static_info_country###-->
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<tr>
+		<td><p>###LABEL_ZIP###</p></td>
+		<td><p>###FIELD_zip###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_zip###-->
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<tr>
+		<td><p>###LABEL_TELEPHONE###</p></td>
+		<td><p>###FIELD_telephone###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_telephone###-->
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<tr>
+		<td><p>###LABEL_FAX###</p></td>
+		<td><p>###FIELD_fax###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_fax###-->
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<tr>
+		<td><p>###LABEL_EMAIL###</p></td>
+		<td><p>###FIELD_email###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_email###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<tr>
+		<td><p>###LABEL_MODULE_SYS_DMAIL_CATEGORY###</p></td>
+		<td><p>###TCA_INPUT_module_sys_dmail_category###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_category###-->
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<tr>
+		<td><p>###LABEL_MODULE_SYS_DMAIL_HTML###</p></td>
+		<td><p>###LABEL_module_sys_dmail_html_CHECKED###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_module_sys_dmail_html###-->
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<tr>
+		<td><p>###LABEL_LANGUAGE###</p></td>
+		<td><p>###FIELD_language###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_language###-->
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<tr>
+		<td><p>###LABEL_WWW###</p></td>
+		<td><p>###FIELD_www###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_www###-->
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<tr>
+		<td><p>###LABEL_IMAGE###</p></td>
+		<td><p>###UPLOAD_PREVIEW_image###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_image###-->
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+		<td><p>###LABEL_COMMENTS###</p></td>
+		<td><p>###TCA_INPUT_comments###</p></td>
+	</tr>
+	<!--###SUB_INCLUDED_FIELD_comments###-->
+	<tr>
+	<form name="###FORM_NAME###" method="post" action="###FORM_URL###" enctype="multipart/form-data">
+		<td>
+	<input type="hidden" name="FE[fe_users][password]" />
+	<input type="hidden" name="FE[fe_users][password_again]" />
+	<input type="hidden" name="FE[fe_users][gender]" />
+	<input type="hidden" name="FE[fe_users][name]" />
+	<input type="hidden" name="FE[fe_users][first_name]" />
+	<input type="hidden" name="FE[fe_users][last_name]" />
+	<input type="hidden" name="FE[fe_users][status]" />
+	<input type="hidden" name="FE[fe_users][date_of_birth]" />
+	<input type="hidden" name="FE[fe_users][address]" />
+	<input type="hidden" name="FE[fe_users][city]" />
+	<input type="hidden" name="FE[fe_users][zone]" />
+	<input type="hidden" name="FE[fe_users][country]" />
+	<input type="hidden" name="FE[fe_users][static_info_country]" />
+	<input type="hidden" name="FE[fe_users][zip]" />
+	<input type="hidden" name="FE[fe_users][telephone]" />
+	<input type="hidden" name="FE[fe_users][fax]" />
+	<input type="hidden" name="FE[fe_users][email]" />
+	<input type="hidden" name="FE[fe_users][module_sys_dmail_category]" />
+	<input type="hidden" name="FE[fe_users][module_sys_dmail_html]" />
+	<input type="hidden" name="FE[fe_users][language]" />
+	<input type="hidden" name="FE[fe_users][title]" />
+	<input type="hidden" name="FE[fe_users][company]" />
+	<input type="hidden" name="FE[fe_users][www]" />
+	<input type="hidden" name="FE[fe_users][image]" />
+	<input type="hidden" name="FE[fe_users][comments]" />
+	###HIDDENFIELDS###
+		</td>
+		<td>
+	<p><input type="submit" name="tx_srfeuserregister_pi1[doNotSave]" value="###LABEL_BUTTON_BACK_TO_FORM###" class="tx-srfeuserregister-pi1-submit" /> 
+	<input type="submit" name="tx_srfeuserregister_pi1[submit]" value="###LABEL_BUTTON_CONFIRM_UPDATE###" class="tx-srfeuserregister-pi1-submit" /></p>
+	</form>
+		</td>
+	</tr>
+</table>
+<!-- ###TEMPLATE_EDIT_PREVIEW### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is shown when the user profile has been updated</em>
+<br />
+<br />
+<!-- ###TEMPLATE_EDIT_SAVED### begin-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_UPDATED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_UPDATED_MESSAGE1###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###</p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_EDIT_SAVED### end-->
+
+
+
+<br />
+<br />
+<h2>'DELETE' TEMPLATES:</h2>
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is the response page when a user has deleted himself.</em>
+<br />
+<br />
+<!-- ###TEMPLATE_DELETE_SAVED### begin-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_DELETED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_DELETED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_DELETED_MESSAGE2###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###</p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_DELETE_SAVED### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is the verification page before the user finally deletes himself.</em>
+<br />
+<br />
+<!-- ###TEMPLATE_DELETE_PREVIEW### begin-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REALLY_WISH_TO_DELETE###</p>
+		<form name="###FORM_NAME###" method="post" action="###FORM_URL###">
+		###HIDDENFIELDS###
+		<input type="hidden" name="FE[fe_users][module_sys_dmail_html]" value="###FIELD_module_sys_dmail_html###" />
+		<p><input type="submit" name="tx_srfeuserregister_pi1[doNotSave]" value="###LABEL_BUTTON_CANCEL_DELETE###" onClick="document.location='###BACK_URL###'; return false;" class="tx-srfeuserregister-pi1-submit" />
+		<input type="submit" name="tx_srfeuserregister_pi1[submit]" value="###LABEL_BUTTON_CONFIRM_DELETE###" class="tx-srfeuserregister-pi1-submit" /></p>
+		</form>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_DELETE_PREVIEW### end-->
+
+
+
+<h2>'SETFIXED' TEMPLATES</h2>
+
+
+
+<em>This template is the response page when the user approves his subscription.</em>
+<!-- ###TEMPLATE_SETFIXED_OK### begin -->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p> 
+		<p>###LABEL_V_REGISTRATION_CONFIRMED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_CONFIRMED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_CONFIRMED_MESSAGE2###</p>
+		<p>###LABEL_V_NOW_ENTER_YOUR_USERNAME###</p>
+		<p><table border="0" cellspacing="0" cellpadding="1">
+			<form name="###FORM_NAME###" action="###LOGIN_FORM###" method="post">
+				<tr>
+					<td><img src="clear.gif" height="1" width="20" /></td>
+					<td><p>###LABEL_USERNAME###</p></td>
+					<td><p><input type="text" name="user" value="###FIELD_username###" /></p></td>
+				</tr>
+				<tr>
+					<td><img src="clear.gif" height="1" width="20" /></td>
+					<td><p>###LABEL_PASSWORD###</p></td>
+					<td><p><input type="password" name="pass" value="###FIELD_password###" /></p></td>
+				</tr>
+				<tr>
+					<td><img src="clear.gif" height="1" width="20" /></td>
+					<td><img src="clear.gif" height="1" width="1" /></td>
+					<td><p><input type="submit" name="submit" value="###LABEL_BUTTON_ENTER###" class="tx-srfeuserregister-pi1-submit" /></p>
+						<input type="hidden" name="logintype" value="login" />
+						<input type="hidden" name="pid" value="###THE_PID###" />
+						<input type="hidden" name="redirect_url" value="" />
+					</td>
+				</tr>
+			</form>
+		</table></p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_SETFIXED_OK### end-->
+
+ 
+<em>This template is the response page when a user deleted his subscription.</em>
+ 
+<!-- ###TEMPLATE_SETFIXED_OK_DELETE### begin -->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_CANCELLED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_CANCELLED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_CANCELLED_MESSAGE2###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###</p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_SETFIXED_OK_DELETE### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is the response page when a user has clicked a setfixed link, but the link failed.</em>
+<!-- ###TEMPLATE_SETFIXED_FAILED### begin -->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_REGISTRATION_PROBLEM######GW1E###</p>
+		<p>###LABEL_REGISTRATION_SORRY###</p>
+		<p>###LABEL_REGISTRATION_CLICKED_TWICE###</p>
+		<p>###LABEL_REGISTRATION_HELP### <a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###</p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_SETFIXED_FAILED### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<h2>'Authentication' templates:</h2>
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>	Authentication failed message.</em>
+<br />
+<br />
+<!-- ###TEMPLATE_AUTH### begin
+	Authentication failed message
+-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p><a href="###REGISTER_URL###">###LABEL_CLICK_HERE_TO_REGISTER###</a></p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_AUTH### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>No permission template</em>
+<br />
+<br />
+<!-- ###TEMPLATE_NO_PERMISSIONS### begin-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_REGISTRATION_PROBLEM######GW1E###</p>
+		<p>###LABEL_REGISTRATION_SORRY###</p>
+		<p>###LABEL_REGISTRATION_HELP### <a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###</p>
+	</td></tr>
+</table>
+<!-- ###TEMPLATE_NO_PERMISSIONS### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<h1>EMAIL TEMPLATES:</h1>
+In these plain text email templates the first line with content is used as subject in the mails.<br />
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_CREATE_SAVED_HTML### begin -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<STYLE TYPE="text/css">
+<!--
+###CSS_STYLES###
+-->
+</STYLE>
+<title>###LABEL_V_REGISTRATION_CREATED_SUBJECT###</title>
+<meta http-equiv="Content-Type" content="text/html; charset=###CHARSET###">
+<meta name="generator" content="Typo 3.5 CMS">
+</head>
+<body bgColor="#ffffff" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
+<!--###SUB_RECORD###-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_CREATED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_CREATED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_CREATED_MESSAGE2###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###<br />
+		<a href="###SITE_URL###">###SITE_WWW###</a><br />
+		<a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+	</td></tr>
+</table>
+<!--###SUB_RECORD###-->
+</body></html>
+<!-- ###EMAIL_TEMPLATE_CREATE_SAVED_HTML### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_CREATE_SAVED### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_REGISTRATION_CREATED_SUBJECT###
+
+###LABEL_V_DEAR###
+
+###LABEL_V_REGISTRATION_CREATED_SUBJECT###
+
+###LABEL_V_REGISTRATION_CREATED_MESSAGE1###
+
+###LABEL_V_REGISTRATION_CREATED_MESSAGE2###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+###SITE_URL###
+###SITE_EMAIL###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_CREATE_SAVED### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is the template used for the administrator notification email upon creation of a user account.<br />
+</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_CREATE_SAVED_ADMIN### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_NOTIFICATION### ###LABEL_V_REGISTRATION_CREATED###
+
+###LABEL_V_REGISTRATION_CREATED###
+
+###LABEL_NAME### ###FIELD_name###
+###LABEL_EMAIL### ###FIELD_email###
+
+###LABEL_USERNAME### ###FIELD_username###
+###LABEL_PASSWORD### ###FIELD_password###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_CREATE_SAVED_ADMIN### end-->
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_EDIT_SAVED_HTML### begin -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<STYLE TYPE="text/css">
+<!--
+###CSS_STYLES###
+-->
+</STYLE>
+<title>###LABEL_V_REGISTRATION_UPDATED_SUBJECT###</title>
+<meta http-equiv="Content-Type" content="text/html; charset=###CHARSET###">
+<meta name="generator" content="Typo 3.5 CMS">
+</head>
+<body bgColor="#ffffff" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
+<!--###SUB_RECORD###-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_UPDATED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_UPDATED_MESSAGE1###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###<br />
+		<a href="###SITE_URL###">###SITE_WWW###</a><br />
+		<a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+	</td></tr>
+</table>
+<!--###SUB_RECORD###-->
+</body></html>
+<!-- ###EMAIL_TEMPLATE_EDIT_SAVED_HTML### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_EDIT_SAVED### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_REGISTRATION_UPDATED_SUBJECT###
+
+
+###LABEL_V_DEAR###
+
+###LABEL_V_REGISTRATION_UPDATED_SUBJECT###
+
+###LABEL_V_REGISTRATION_UPDATED_MESSAGE1###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+###SITE_URL###
+###SITE_EMAIL###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_EDIT_SAVED### end-->
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is the template used for the administrator notification email upon update of a user profile.<br />
+</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_EDIT_SAVED_ADMIN### begin -->
+
+<!--###SUB_RECORD###-->###LABEL_V_NOTIFICATION### ###LABEL_V_REGISTRATION_UPDATED###
+
+
+###LABEL_V_REGISTRATION_UPDATED###
+
+###LABEL_NAME### ###FIELD_name###
+###LABEL_EMAIL### ###FIELD_email###
+
+###LABEL_USERNAME### ###FIELD_username###
+###LABEL_PASSWORD### ###FIELD_password###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_EDIT_SAVED_ADMIN### end-->
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to notify a person by email that he has created his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_CREATE_HTML### begin -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<STYLE TYPE="text/css">
+<!--
+###CSS_STYLES###
+-->
+</STYLE>
+<title>###LABEL_V_REGISTRATION_INITIATED_SUBJECT###</title>
+<meta http-equiv="Content-Type" content="text/html; charset=###CHARSET###">
+<meta name="generator" content="Typo 3.5 CMS">
+</head>
+<body bgColor="#ffffff" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
+<!--###SUB_RECORD###-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_INITIATED_MESSAGE1###<br/>
+		<a href="###SETFIXED_APPROVE_URL###">###SETFIXED_APPROVE_URL###</a><br />
+		###LABEL_COPY_PASTE_LINK###</p>
+		<p>###LABEL_V_REGISTRATION_INITIATED_MESSAGE2###<br/>
+		<a href="###SETFIXED_DELETE_URL###">###SETFIXED_DELETE_URL###</a><br />
+		###LABEL_COPY_PASTE_LINK###<br />
+		###LABEL_EXCUSE_US###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###<br />
+		<a href="###SITE_URL###">###SITE_WWW###</a><br />
+		<a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+	</td></tr>
+</table>
+<!--###SUB_RECORD###-->
+</body></html>
+<!-- ###EMAIL_TEMPLATE_SETFIXED_CREATE_HTML### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to notify a person by email that he has created his account.
+
+     You can use the newly created record as markers on the format ###FIELD_[fieldname]### </em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_CREATE### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_REGISTRATION_INITIATED_SUBJECT###
+
+###LABEL_V_DEAR###
+
+###LABEL_V_REGISTRATION_INITIATED_MESSAGE1###
+###SETFIXED_APPROVE_URL###
+###LABEL_COPY_PASTE_LINK###
+
+###LABEL_V_REGISTRATION_INITIATED_MESSAGE2###
+###SETFIXED_DELETE_URL###
+
+###LABEL_COPY_PASTE_LINK###
+###LABEL_EXCUSE_US###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+###SITE_URL###
+###SITE_EMAIL###
+
+<!--###SUB_RECORD###-->
+   
+<!-- ###EMAIL_TEMPLATE_SETFIXED_CREATE### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is the template used for the administrator notification email upon a new user registration.<br />
+</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_CREATE_ADMIN### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_NOTIFICATION### ###LABEL_V_REGISTRATION_INITIATED###
+
+###LABEL_V_REGISTRATION_INITIATED###
+
+
+###LABEL_NAME### ###FIELD_name###
+###LABEL_EMAIL### ###FIELD_email###
+
+
+###LABEL_USERNAME### ###FIELD_username###
+###LABEL_PASSWORD### ###FIELD_password###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_SETFIXED_CREATE_ADMIN### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to notify a person by email that he has created his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_INVITE_HTML### begin -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<STYLE TYPE="text/css">
+<!--
+###CSS_STYLES###
+-->
+</STYLE>
+<title>###LABEL_V_REGISTRATION_INVITED_SUBJECT###</title>
+<meta http-equiv="Content-Type" content="text/html; charset=###CHARSET###">
+<meta name="generator" content="Typo 3.5 CMS">
+</head>
+<body bgColor="#ffffff" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
+<!--###SUB_RECORD###-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_INVITED_MESSAGE1###<br/>
+		<a href="###SETFIXED_APPROVE_URL###">###SETFIXED_APPROVE_URL###</a><br />
+		###LABEL_COPY_PASTE_LINK###</p>
+		<p>###LABEL_V_REGISTRATION_INVITED_MESSAGE2###<br/>
+		<a href="###SETFIXED_DELETE_URL###">###SETFIXED_DELETE_URL###</a><br />
+		###LABEL_COPY_PASTE_LINK###<br />
+		###LABEL_EXCUSE_US###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###<br />
+		<a href="###SITE_URL###">###SITE_WWW###</a><br />
+		<a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+	</td></tr>
+</table>
+<!--###SUB_RECORD###-->
+</body></html>
+<!-- ###EMAIL_TEMPLATE_SETFIXED_INVITE_HTML### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to notify a person by email that he has created his account.
+
+     You can use the newly created record as markers on the format ###FIELD_[fieldname]### </em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_INVITE### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_REGISTRATION_INVITED_SUBJECT###
+
+###LABEL_V_DEAR###
+
+###LABEL_V_REGISTRATION_INVITED_MESSAGE1###
+###SETFIXED_APPROVE_URL###
+###LABEL_COPY_PASTE_LINK###
+
+###LABEL_V_REGISTRATION_INVITED_MESSAGE2###
+###SETFIXED_DELETE_URL###
+###LABEL_COPY_PASTE_LINK###
+###LABEL_EXCUSE_US###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+###SITE_URL###
+###SITE_EMAIL###
+
+<!--###SUB_RECORD###-->
+   
+<!-- ###EMAIL_TEMPLATE_SETFIXED_INVITE### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is the template used for the administrator notification email upon a new user registration.<br />
+</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_INVITE_ADMIN### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_NOTIFICATION### ###LABEL_V_REGISTRATION_INVITED###
+
+###LABEL_V_REGISTRATION_INVITED###
+
+
+###LABEL_NAME### ###FIELD_name###
+###LABEL_EMAIL### ###FIELD_email###
+
+
+
+###LABEL_USERNAME### ###FIELD_username###
+###LABEL_PASSWORD### ###FIELD_password###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_SETFIXED_INVITE_ADMIN### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_APPROVE_HTML### begin -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<STYLE TYPE="text/css">
+<!--
+###CSS_STYLES###
+-->
+</STYLE>
+<title>###LABEL_V_REGISTRATION_CONFIRMED_SUBJECT###</title>
+<meta http-equiv="Content-Type" content="text/html; charset=###CHARSET###">
+<meta name="generator" content="Typo 3.5 CMS">
+</head>
+<body bgColor="#ffffff" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
+<!--###SUB_RECORD###-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_CONFIRMED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_CONFIRMED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_CONFIRMED_MESSAGE2###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###<br />
+		<a href="###SITE_URL###">###SITE_WWW###</a><br />
+		<a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+	</td></tr>
+</table>
+<!--###SUB_RECORD###-->
+</body></html>
+<!-- ###EMAIL_TEMPLATE_SETFIXED_APPROVE_HTML### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to send a welcome email when a person has confirmed his(her) registration.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_APPROVE### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_REGISTRATION_CONFIRMED_SUBJECT###
+
+###LABEL_V_DEAR###
+
+###LABEL_V_REGISTRATION_CONFIRMED_SUBJECT###
+
+###LABEL_V_REGISTRATION_CONFIRMED_MESSAGE1###
+
+###LABEL_V_REGISTRATION_CONFIRMED_MESSAGE2###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+###SITE_URL###
+###SITE_EMAIL###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_SETFIXED_APPROVE### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is the template used for the administrator notification email upon user confirmation of his registration.<br />
+</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_APPROVE_ADMIN### begin -->
+
+<!--###SUB_RECORD###-->###LABEL_V_NOTIFICATION### ###LABEL_V_REGISTRATION_CONFIRMED###
+
+###LABEL_V_REGISTRATION_CONFIRMED###
+
+###LABEL_NAME### ###FIELD_name###
+###LABEL_EMAIL### ###FIELD_email###
+
+###LABEL_USERNAME### ###FIELD_username###
+###LABEL_PASSWORD### ###FIELD_password###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_SETFIXED_APPROVE_ADMIN### end-->
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has cancelles his registration.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_DELETE_HTML### begin -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<STYLE TYPE="text/css">
+<!--
+###CSS_STYLES###
+-->
+</STYLE>
+<title>###LABEL_V_REGISTRATION_CANCELLED_SUBJECT###</title>
+<meta http-equiv="Content-Type" content="text/html; charset=###CHARSET###">
+<meta name="generator" content="Typo 3.5 CMS">
+</head>
+<body bgColor="#ffffff" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
+<!--###SUB_RECORD###-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_CANCELLED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_CANCELLED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_CANCELLED_MESSAGE2###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###<br />
+		<a href="###SITE_URL###">###SITE_WWW###</a><br />
+		<a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+	</td></tr>
+</table>
+<!--###SUB_RECORD###-->
+</body></html>
+<!-- ###EMAIL_TEMPLATE_SETFIXED_DELETE_HTML### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_DELETE### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_REGISTRATION_CANCELLED_SUBJECT###
+
+###LABEL_V_DEAR###
+
+###LABEL_V_REGISTRATION_CANCELLED_SUBJECT###
+
+
+###LABEL_V_REGISTRATION_CANCELLED_MESSAGE1###
+
+###LABEL_V_REGISTRATION_CANCELLED_MESSAGE2###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+###SITE_URL###
+###SITE_EMAIL###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_SETFIXED_DELETE### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is the template used for the administrator notification email upon user refusal to confirm his registration.<br />
+</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_SETFIXED_DELETE_ADMIN### begin -->
+
+<!--###SUB_RECORD###-->###LABEL_V_NOTIFICATION### ###LABEL_V_REGISTRATION_CANCELLED###
+
+###LABEL_V_REGISTRATION_CANCELLED###
+
+###LABEL_NAME### ###FIELD_name###
+###LABEL_EMAIL### ###FIELD_email###
+
+###LABEL_USERNAME### ###FIELD_username###
+###LABEL_PASSWORD### ###FIELD_password###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_SETFIXED_DELETE_ADMIN### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_DELETE_SAVED_HTML### begin -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<STYLE TYPE="text/css">
+<!--
+###CSS_STYLES###
+-->
+</STYLE>
+<title>###LABEL_V_REGISTRATION_DELETED_SUBJECT###</title>
+<meta http-equiv="Content-Type" content="text/html; charset=###CHARSET###">
+<meta name="generator" content="Typo 3.5 CMS">
+</head>
+<body bgColor="#ffffff" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
+<!--###SUB_RECORD###-->
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr><td>
+		<p>###GW1B######LABEL_V_DEAR######GW1E###</p>
+		<p>###LABEL_V_REGISTRATION_DELETED_SUBJECT###</p>
+		<p>###LABEL_V_REGISTRATION_DELETED_MESSAGE1###</p>
+		<p>###LABEL_V_REGISTRATION_DELETED_MESSAGE2###</p>
+		<p>###LABEL_KIND_REGARDS###<br />
+		###GW1B######SITE_NAME######GW1E###<br />
+		<a href="###SITE_URL###">###SITE_WWW###</a><br />
+		<a href="mailto:###SITE_EMAIL###">###SITE_EMAIL###</a></p>
+	</td></tr>
+</table>
+<!--###SUB_RECORD###-->
+</body></html>
+<!-- ###EMAIL_TEMPLATE_DELETE_SAVED_HTML### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This template is used to confirm to a person by email that he has deleted his account.</em>
+<br />
+<br />
+<!-- ###EMAIL_TEMPLATE_DELETE_SAVED### begin -->
+<!--###SUB_RECORD###-->###LABEL_V_REGISTRATION_DELETED_SUBJECT###
+
+###LABEL_V_DEAR###
+
+###LABEL_V_REGISTRATION_DELETED_SUBJECT###
+
+###LABEL_V_REGISTRATION_DELETED_MESSAGE1###
+
+###LABEL_V_REGISTRATION_DELETED_MESSAGE2###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+###SITE_URL###
+###SITE_EMAIL###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_DELETE_SAVED### end-->
+
+
+
+<br /><br /><br /><br /><hr /><br /><br /><br />
+<em>This is the template used for the administrator notification email upon deletion of a user account.<br />
+</em>
+<br>
+<br>
+<!-- ###EMAIL_TEMPLATE_DELETE_SAVED_ADMIN### begin -->
+
+<!--###SUB_RECORD###-->###LABEL_V_NOTIFICATION### ###LABEL_V_REGISTRATION_DELETED###
+
+###LABEL_V_REGISTRATION_DELETED###
+
+###LABEL_NAME### ###FIELD_name###
+###LABEL_EMAIL### ###FIELD_email###
+
+###LABEL_USERNAME### ###FIELD_username###
+###LABEL_PASSWORD### ###FIELD_password###
+
+###LABEL_KIND_REGARDS###
+###SITE_NAME###
+<!--###SUB_RECORD###-->
+<!-- ###EMAIL_TEMPLATE_DELETE_SAVED_ADMIN### end-->
+
+
+</body>
+</html>
