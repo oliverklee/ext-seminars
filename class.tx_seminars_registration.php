@@ -30,7 +30,7 @@
  * @author	Oliver Klee <typo-coding@oliverklee.de>
  */
 
-class tx_seminars_registrationmanager {
+class tx_seminars_registration extends tx_seminars_dbplugin {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_registration';
 	/**  Path to this script relative to the extension dir. */
