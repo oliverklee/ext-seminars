@@ -11,7 +11,13 @@ Version 0.4.0 (July 2005)
 -------------------------
 - templatize registration page [Oli]
 - switch to Flexforms [AM]
+- remove dependency on new login box and front end user registration ; document that these extensions are recommended (and when they're not needed) [Oli]
+- clean up HTML templates [Oli]
+- improve the template helper class [Oli]
+- remove unneeded subpart markers from the output [Oli]
+- remove unneeded localization strings [Oli]
 
+- format the HTML in a nice way [Oli]
 - make it configurable what to do when a participant signs up [Mathias]
   - send an email to the organizer
   - send an email to the participant
@@ -40,11 +46,8 @@ Version 0.4.0 (July 2005)
 - for organizers, add field telling in which page new registration records should be stored [Oli]
 - implement time format configuration [Oli]
 - make 00:00 mean "no time set" [Oli]
-- remove dependency on new login box and front end user registration when you can sign up for a seminar without being a logged-in front end user; document that these extensions are recommended (and when they're not needed) [Oli]
 - reduce code by using the API for COUNT queries [Oli]
-- improve the template helper class [Oli]
 - add default CSS for the plugin [Oli]
-- clean up HTML templates [Oli]
 - make all semantically required DB fields technically required [Oli]
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
 
@@ -79,7 +82,7 @@ Version 0.5.0 (August 2005)
   - add localized text "this seminar has been canceled"
   - add entry in participant records whether their money has been refunded
 - display picture of speakers on seminar page [?]
-- make it configurable which seminars to display: past/past+running/all [Oli]
+- make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
 
 Version 0.6.0 (September 2005)
 ------------------------------
@@ -136,9 +139,6 @@ Not triaged yet
 - feature: graph for total number of registrations per seminar over time
 - switch localization files to XML
 - document the CSS styles used
-- remove unneeded subpart markers from the output
-- remove unneeded localization strings
-- format the HTML in a nice way
 - move the configuration into constants and make them configurable using the constants editor
 - make the link to the online form CSS-stylable
 - add support for different kinds of events (workshop, lecture, ...)
@@ -146,7 +146,7 @@ Not triaged yet
 - add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions
 - feature for booking assets online (when belonging to the corresponding front end user group)
 - feature: room manager
-- support periodical events (e.g. each Monday at ten)
+- support periodical events (e.g. each Monday at ten a.m.)
 - feature on the "my seminars" page: edit registration data
 - feature: notify users if a new seminar for one of their "favorite" speakers has been entered
 - automatically update record title if an attendance has been entered in the back end
@@ -159,7 +159,6 @@ Not triaged yet
 - check code with PhpLint once PhpLint is a bit more mature
 - feature: front end plug in "The next x upcoming seminars"
 - in pi1, implement the default sort order (by begin date) using TCA
-- make it configurable whether to list only seminars that haven't started yet or also running seminars
 - allow using data from jp_staff
 - feature: "this seminar is repeated on the following dates"
 - feature: "people who have registered for this seminar have also registered for these seminars"
