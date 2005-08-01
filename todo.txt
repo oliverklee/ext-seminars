@@ -83,6 +83,7 @@ Version 0.5.0 (August 2005)
   - add entry in participant records whether their money has been refunded
 - display picture of speakers on seminar page [?]
 - make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
+- Improve and clean up flexforms structure for better usability [Oli]
 
 Version 0.6.0 (September 2005)
 ------------------------------
