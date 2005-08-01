@@ -17,7 +17,6 @@ Version 0.4.0 (July 2005)
 - remove unneeded subpart markers from the output [Oli]
 - remove unneeded localization strings [Oli]
 
-- format the HTML in a nice way [Oli]
 - make it configurable what to do when a participant signs up [Mathias]
   - send an email to the organizer
   - send an email to the participant
@@ -45,15 +44,16 @@ Version 0.4.0 (July 2005)
 - clean up pi1 to use the new seminars class [Oli]
 - for organizers, add field telling in which page new registration records should be stored [Oli]
 - implement time format configuration [Oli]
-- make 00:00 mean "no time set" [Oli]
+- make 00:00 mean "no time set/will be announced" [Oli]
 - reduce code by using the API for COUNT queries [Oli]
 - add default CSS for the plugin [Oli]
-- make all semantically required DB fields technically required [Oli]
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
 
 Version 0.5.0 (August 2005)
 ---------------------------
+- make all semantically required DB fields technically required [Oli]
 - make dependencies for registration process [AM]
+- clean up the HTML formatting (inluding the RTE and non-RTE elements) [Oli]
 - make it configurable whether to have the university-specific stuff [Oli]
 - make organizer email address required [Oli]
 - make some fe_users data editable on the registration page [Oli]
