@@ -17,6 +17,7 @@ Version 0.4.0 (July 2005)
 - remove unneeded subpart markers from the output [Oli]
 - remove unneeded localization strings [Oli]
 
+- add : after flexforms labels
 - make it configurable what to do when a participant signs up [Mathias]
   - send an email to the organizer
   - send an email to the participant
