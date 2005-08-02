@@ -46,6 +46,7 @@ Version 0.4.0 (July 2005)
 - for organizers, add field telling in which page new registration records should be stored [Oli]
 - add default CSS for the plugin [Oli]
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
+- document new marker and subpart names in the manual [Oli]
 
 Version 0.5.0 (August 2005)
 ---------------------------
@@ -86,7 +87,9 @@ Version 0.5.0 (August 2005)
   - add entry in participant records whether their money has been refunded
 - display picture of speakers on seminar page [?]
 - make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
-- Improve and clean up flexforms structure for better usability [Oli]
+- improve and clean up flexforms structure for better usability [Oli]
+- find and remove dead code [?]
+- find and remove unused localization strings [Oli]
 
 Version 0.6.0 (September 2005)
 ------------------------------
