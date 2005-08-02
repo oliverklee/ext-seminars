@@ -52,6 +52,7 @@ Version 0.4.0 (July 2005)
 
 Version 0.5.0 (August 2005)
 ---------------------------
+- make CSS class names configurable via flexforms [Oli]
 - make all semantically required DB fields technically required [Oli]
 - make dependencies for registration process [AM]
 - clean up the HTML formatting (inluding the RTE and non-RTE elements) [Oli]
