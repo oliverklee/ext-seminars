@@ -52,7 +52,7 @@ Version 0.4.0 (mid-August 2005)
 - implement time format configuration [Oli]
 - make 00:00 mean "no time set/will be announced" [Oli]
 
-Version 0.5.0 (August 2005)
+Version 0.5.0 (September 2005)
 ---------------------------
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account) [?]
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
@@ -87,7 +87,7 @@ Version 0.5.0 (August 2005)
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off [?]
 - feature for email notification to the organizer once a seminar has enough attendances or is full [?]
 
-Version 0.6.0 (September 2005)
+Version 0.6.0 (October 2005)
 ------------------------------
 - switch extension status from "alpha" to "beta"
 - add possibility for front end users to sign off a seminar if it's early enough [?]
@@ -119,7 +119,7 @@ Version 0.6.0 (September 2005)
 - document the CSS styles used
 - in pi1, implement the default sort order (by begin date) using TCA
 
-Version 0.7.0 (October 2005)
+Version 0.7.0 (November 2005)
 ----------------------------
 - add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions [?]
 - feature for booking assets online (when belonging to the corresponding front end user group)
@@ -168,3 +168,4 @@ Not triaged yet
 - allow using data from jp_staff
 - feature: "this seminar is repeated on the following dates"
 - feature: "people who have registered for this seminar have also registered for these seminars"
+- feature: create seminar certificates (as PDF) for those who have successfully attended
