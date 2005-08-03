@@ -50,6 +50,7 @@ Version 0.4.0 (July 2005)
 
 Version 0.5.0 (August 2005)
 ---------------------------
+- make it configurable what feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account) [?]
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
 - add configuration whether to show seminars without date as well [Oli]
 - implement time format configuration [Oli]
