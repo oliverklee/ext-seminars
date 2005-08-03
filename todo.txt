@@ -54,6 +54,9 @@ Version 0.4.0 (mid-August 2005)
 - check manual whether all parts about "no online registration" are changed now [Oli]
 - implement time format configuration [Oli]
 - make 00:00 mean "no time set/will be announced" [Oli]
+- use flexforms as much as possible [AM/Oli]
+- document that flexforms override and empty values don't [Oli]
+- work out how to override non-empty TS values with empty flexforms values [Oli/AM]
 
 Version 0.5.0 (September 2005)
 ------------------------------
