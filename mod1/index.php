@@ -225,7 +225,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			'' ));
 			$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid['num'].'</p>';
 
-			$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees[num] : $numberOfAttendeesPaid[num];
+			$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees['num'] : $numberOfAttendeesPaid[num];
 
 			$hasEnoughAttendees = ($numberOfSeenAttendees >= $currentSeminar['attendees_min']) ? 1 : 0;
 			$isFull = ($numberOfSeenAttendees >= $currentSeminar['attendees_max']) ? 1 : 0;
