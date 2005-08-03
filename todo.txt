@@ -5,7 +5,7 @@ The assignee is marked in square brackets. [?] Means that a to-do item isn't ass
 
 When you start working on a to-do item, please open a bug at bugs.typo3.org for that.
 
-Note: Of course it is possible that a feature gets completed earlier than planned (if someone codes it).
+If you need a feature urgently and don't want to wait until it is implemented, you can either sponsor the extension authour to code it or code it yourself and provide a (tested!) patch.
 
 Version 0.3.2 (early August 2005)
 ---------------------------------
