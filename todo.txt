@@ -21,7 +21,7 @@ Version 0.3.2 (early August 2005)
 - make ID of registration page configurable [Oli]
 - after a front end user has registered for a seminar, automatically update the statistics [Oli]
 
-- include seminar fee amount and bank account information into mail participant [Oli]
+- include seminar fee amount and bank account information into mail to participant [Oli]
 - remove the link (and corresponding DB entry) to the organizer's email form [Oli]
 - online registration: "thank you" page [Mathias]
 - online registration: mail to participant (configurable) [Mathias]
@@ -30,7 +30,7 @@ Version 0.3.2 (early August 2005)
 Version 0.4.0 (mid-August 2005)
 ---------------------------------
 - remove unneeded localization strings [Oli]
-- add ":" after flexforms labels
+- add ":" after flexforms labels [?]
 - integrate the salutationswitcher extension [Oli]
 - clean up pi1 to use the new seminars class [Oli]
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
@@ -53,7 +53,7 @@ Version 0.4.0 (mid-August 2005)
 - make 00:00 mean "no time set/will be announced" [Oli]
 
 Version 0.5.0 (September 2005)
----------------------------
+------------------------------
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account) [?]
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
 - for organizers, add field telling in which page new registration records should be stored [Oli]
@@ -88,7 +88,7 @@ Version 0.5.0 (September 2005)
 - feature for email notification to the organizer once a seminar has enough attendances or is full [?]
 
 Version 0.6.0 (October 2005)
-------------------------------
+----------------------------
 - switch extension status from "alpha" to "beta"
 - add possibility for front end users to sign off a seminar if it's early enough [?]
 - add configuration: period before seminar start when signing off is not possible any more (default: 14 days) [?]
@@ -120,7 +120,7 @@ Version 0.6.0 (October 2005)
 - in pi1, implement the default sort order (by begin date) using TCA
 
 Version 0.7.0 (November 2005)
-----------------------------
+-----------------------------
 - add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions [?]
 - feature for booking assets online (when belonging to the corresponding front end user group)
 - allow signing up for a seminar without being logged in as a front end user (thus creating a new front end user in the process)
