@@ -26,9 +26,12 @@ Version 0.3.2 (early August 2005)
 - online registration: "thank you" page [Mathias]
 - online registration: mail to participant (configurable) [Mathias]
 - online registration: mail to organizer (configurable) [Mathias]
+- add a field "payment method" to the seminar record [?]
+- add a field "description" to the payment method record (e.g. for bank account information) [?]
 
 Version 0.4.0 (mid-August 2005)
 ---------------------------------
+- move getConfValue from templateHelper to dbPlugin [Oli]
 - remove unneeded localization strings [Oli]
 - add ":" after flexforms labels [?]
 - integrate the salutationswitcher extension [Oli]
@@ -169,3 +172,4 @@ Not triaged yet
 - feature: "this seminar is repeated on the following dates"
 - feature: "people who have registered for this seminar have also registered for these seminars"
 - feature: create seminar certificates (as PDF) for those who have successfully attended
+- add "target group" record type, add this as a field to the seminar type [?]
