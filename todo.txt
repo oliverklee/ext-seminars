@@ -57,6 +57,7 @@ Version 0.4.0 (mid-August 2005)
 - use flexforms as much as possible [AM/Oli]
 - document that flexforms override and empty values don't [Oli]
 - work out how to override non-empty TS values with empty flexforms values [Oli/AM]
+- in the seminar class, make the organizer cache and the seminar site cache singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/> [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
@@ -92,6 +93,7 @@ Version 0.5.0 (September 2005)
 - automatic signing off if the user hasn't paid after a configurable timespan [?]
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off [?]
 - feature for email notification to the organizer once a seminar has enough attendances or is full [?]
+- investigate performance improvements when using caching or singletons in the template helper class [Oli]
 
 Version 0.6.0 (October 2005)
 ----------------------------
