@@ -5,7 +5,7 @@ The assignee is marked in square brackets. [?] Means that a to-do item isn't ass
 
 When you start working on a to-do item, please open a bug at bugs.typo3.org for that.
 
-If you need a feature urgently and don't want to wait until it is implemented, you can either sponsor the extension authour to code it or code it yourself and provide a (tested!) patch.
+If you need a feature urgently and you want to speed up development, you can either sponsor the extension authour to code it or code it yourself and provide a (tested!) patch.
 
 Version 0.3.2 (early August 2005)
 ---------------------------------
@@ -58,6 +58,7 @@ Version 0.4.0 (mid-August 2005)
 - document that flexforms override and empty values don't [Oli]
 - work out how to override non-empty TS values with empty flexforms values [Oli/AM]
 - in the seminar class, make the organizer cache and the seminar site cache singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/> [Oli]
+- provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
@@ -94,6 +95,8 @@ Version 0.5.0 (September 2005)
 - feature for email notification to the organizer once a seminar has enough attendances or is full [?]
 - investigate performance improvements when using caching or singletons in the template helper class [Oli]
 - make the link to the online registration form CSS-stylable [Oli]
+- optimize the DB queries [?]
+- provide a patch for frop-down-lists in frontendformslib [Oli]
 
 Version 0.6.0 (October 2005)
 ----------------------------
