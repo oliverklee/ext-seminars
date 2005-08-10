@@ -8,6 +8,7 @@ plugin.tx_seminars {
 	dateFormatMD = %d.%m.
 	abbreviateDateRanges = 1
 	currency = EUR
+	eventType = Workshop
 }
 
 plugin.tx_seminars_pi1 {
@@ -18,6 +19,8 @@ plugin.tx_seminars_pi1 {
 	salutation = formal
 	hideColumns =
 	hideFields =
+	# this should go away once all seminar properties have moved to the seminar class
+	eventType = Workshop
 }
 
 plugin.tx_srfeuserregister_pi1 {

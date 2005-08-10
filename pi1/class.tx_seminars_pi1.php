@@ -195,7 +195,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$GLOBALS['TSFE']->indexedDocTitle = $this->internal['currentRow']['title'];
 		}
 
-		$this->markers['###TYPE###'] = 'Workshop';
+		$this->markers['###TYPE###'] = $this->getConfValue('eventType');
 		$this->markers['###TITLE###'] = $this->getFieldContent('title');
 
 		$this->markers['###SUBTITLE###'] = $this->getFieldContent('subtitle');

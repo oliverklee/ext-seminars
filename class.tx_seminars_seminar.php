@@ -304,14 +304,12 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets the event type (seminar, workshop, lecture ...).
 	 * 
-	 * XXX Implement me
-	 * 
-	 * @return	string	the seminar type (will never be empty)
+	 * @return	string	the seminar type (may be empty)
 	 * 
 	 * @access public
 	 */
 	function getType() {
-		return ('Workshop');
+		return $this->conf['eventType'];
 	}
 	 
 	/**
