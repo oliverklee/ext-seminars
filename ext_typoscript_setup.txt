@@ -12,9 +12,35 @@ plugin.tx_seminars {
 }
 
 plugin.tx_seminars_pi1 {
+	# location of the template file
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
 	# location of the CSS file (leave empty to include no CSS file)
 	cssFile = typo3conf/ext/seminars/pi1/seminars_pi1.css
+
+	# CSS class for the TR with the header row for the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	class_headerrow =
+
+	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	class_headertitle =
+	class_headerdate =
+	class_headerprice =
+	class_headerorganizers =
+	class_headervacancies =
+
+	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	class_itemrow =
+
+	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	class_listtitle =
+	class_listdate = date
+	class_listprice = price
+	class_listorganizers =
+	
+	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	class_square = square
+	
+	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	class_error = error
 
 	salutation = formal
 	hideColumns =

@@ -256,7 +256,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function getDate($dash = '-') {
 		if (!$this->hasDate()) {
-			$result = $this->pi_getLL('will_be_announced');
+			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
 			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
 			$endDate = $this->getSeminarsPropertyInteger('end_date');
@@ -383,7 +383,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$error = '';
 	
 		if (!$GLOBALS['TSFE']->loginUser) {
-			$error = $this->pi_getLL('please_log_in');
+			$error = $this->pi_getLL('message_notLoggedIn');
 		}
 
 		if (empty($error)) {
@@ -392,19 +392,19 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 		if (empty($error)) {
 			if (!$this->seminar['needs_registration']) {
-				$error = $this->pi_getLL('no_registration_necessary');
+				$error = $this->pi_getLL('message_noRegistrationNecessary');
 			}
 		}
 
 		if (empty($error)) {
 			if ($this->seminar['cancelled']) {
-				$error = $this->pi_getLL('seminar_cancelled');
+				$error = $this->pi_getLL('message_seminarCancelled');
 			}
 		}
 
 		if (empty($error)) {
 			if ($this->seminar['is_full']) {
-				$error = $this->pi_getLL('seminar_full');
+				$error = $this->pi_getLL('message_noVacancies');
 			}
 		}
 

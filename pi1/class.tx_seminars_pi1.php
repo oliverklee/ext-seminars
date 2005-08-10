@@ -47,9 +47,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager;
 	
-	/** the HTML template subparts */
-	var $templateCache = array();
-	
 	/**
 	 * Displays the seminar manager HTML.
 	 *
@@ -62,8 +59,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function main($content, $conf) {
 		$this->init($conf);
-		$this->getTemplateCode(array('LIST_HEADER', 'LIST_ITEM', 'SINGLE_VIEW', 'REGISTRATION_HEAD'));
 		$this->pi_initPIflexForm();
+
+		$this->getTemplateCode();
+		$this->setLabels();
+		$this->setCSS();
 
 		// include CSS in header of page
 		if ($this->getConfValue('cssFile') !== '') {
@@ -122,7 +122,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function listView() {
-		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'COLUMN');
+		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
+		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
 
 		// Local settings for the listView function
 		$lConf = $this->conf['listView.'];
@@ -188,66 +189,54 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function singleView() {
-		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD');
+		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 		
 		// This sets the title of the page for use in indexed search results:
 		if ($this->internal['currentRow']['title']) {
 			$GLOBALS['TSFE']->indexedDocTitle = $this->internal['currentRow']['title'];
 		}
 
-		$this->markers['###TYPE###'] = $this->getConfValue('eventType');
-		$this->markers['###TITLE###'] = $this->getFieldContent('title');
+		$this->setMarkerContent('TYPE', $this->getConfValue('eventType'));
+		$this->setMarkerContent('TITLE', $this->getFieldContent('title'));
 
-		$this->markers['###SUBTITLE###'] = $this->getFieldContent('subtitle');
+		$this->setMarkerContent('SUBTITLE', $this->getFieldContent('subtitle'));
 		if (empty($this->markers['###SUBTITLE###'])) {
-			$this->subpartsToHide['###FIELD_SUBTITLE###'] = '';
+			$this->readSubpartsToHide('subtitle', 'field');
 		}
 
-		$this->markers['###DESCRIPTION###'] = $this->getFieldContent('description');
+		$this->setMarkerContent('DESCRIPTION', $this->getFieldContent('description'));
 		if (empty($this->markers['###DESCRIPTION###'])) {
-			$this->subpartsToHide['###FIELD_DESCRIPTION###'] = '';
+			$this->readSubpartsToHide('description', 'field');
 		}
 
-		$this->markers['###HEADER_DATE###'] = $this->getFieldHeader('date');
-		$this->markers['###DATE###'] = $this->getFieldContent('date');
+		$this->setMarkerContent('DATE', $this->getFieldContent('date'));
+		$this->setMarkerContent('TIME', $this->getFieldContent('time'));
+		$this->setMarkerContent('PLACE', $this->pi_RTEcssText($this->getFieldContent('place')));
 
-		$this->markers['###HEADER_TIME###'] = $this->getFieldHeader('time');
-		$this->markers['###TIME###'] = $this->getFieldContent('time');
-
-		$this->markers['###HEADER_PLACE###'] = $this->getFieldHeader('place');
-		$this->markers['###PLACE###'] = $this->pi_RTEcssText($this->getFieldContent('place'));
-
-		$this->markers['###HEADER_ROOM###'] = $this->getFieldHeader('room');
-		$this->markers['###ROOM###'] = $this->getFieldContent('room');
+		$this->setMarkerContent('ROOM', $this->getFieldContent('room'));
 		if (empty($this->markers['###ROOM###'])) {
-			$this->subpartsToHide['###FIELD_ROOM###'] = '';
+			$this->readSubpartsToHide('room', 'field');
 		}
 
-		$this->markers['###HEADER_SPEAKERS###'] = $this->getFieldHeader('speakers');
-		$this->markers['###SPEAKERS###'] = $this->getFieldContent('speakers');
+		$this->setMarkerContent('SPEAKERS', $this->getFieldContent('speakers'));
 		if (!empty($this->markers['###SPEAKERS###'])) {
-			$this->markers['###SPEAKERS###'] = $this->pi_RTEcssText($this->markers['###SPEAKERS###']);
+			$this->setMarkerContent('SPEAKERS', $this->pi_RTEcssText($this->markers['###SPEAKERS###']));
 		} else {
-			$this->subpartsToHide['###FIELD_SPEAKERS###'] = '';
+			$this->readSubpartsToHide('speakers', 'field');
 		}
 
-		$this->markers['###HEADER_PRICE###'] = $this->getFieldHeader('price_regular');
-		$this->markers['###PRICE###'] = $this->getFieldContent('price_regular');
-
-		$this->markers['###HEADER_ORGANIZERS###'] = $this->getFieldHeader('organizers');
-		$this->markers['###ORGANIZERS###'] = $this->getFieldContent('organizers');
+		$this->setMarkerContent('PRICE', $this->getFieldContent('price_regular'));
+		$this->setMarkerContent('ORGANIZERS', $this->getFieldContent('organizers'));
 
 		if ($this->internal['currentRow']['needs_registration']) {
-			$this->markers['###HEADER_VACANCIES###'] = $this->getFieldHeader('vacancies');
-			$this->markers['###VACANCIES###'] = $this->getFieldContent('vacancies');
+			$this->setMarkerContent('VACANCIES', $this->getFieldContent('vacancies'));
 		} else {
-			$this->subpartsToHide['###FIELD_VACANCIES###'] = '';
+			$this->readSubpartsToHide('vacancies', 'field');
 		}
 
-		$this->markers['###HEADER_REGISTRATION###'] = $this->getFieldHeader('registration');
-		$this->markers['###REGISTRATION###'] = $this->getFieldContent('registration');
+		$this->setMarkerContent('REGISTRATION', $this->getFieldContent('registration'));
 
-		$this->markers['###BACK###'] = $this->pi_list_linkSingle($this->pi_getLL('back', 'Back'), 0);
+		$this->setMarkerContent('BACKLINK', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
 
 		return $this->substituteMarkerArrayCached('SINGLE_VIEW');
 	}
@@ -256,17 +245,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Returns a list header row as a TR.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
-	 * @return	string		HTML output, a table row with a class attribute set
+	 * @return	string		HTML output, a table row
 	 * 
 	 * @access protected
 	 */
 	function pi_list_header() {
-		$this->markers['###HEADER_CLASS###']      = $this->pi_classParam('listrow-header');
-		$this->markers['###HEADER_TITLE###']      = $this->getFieldHeader_sortLink('title');
-		$this->markers['###HEADER_DATE###']       = $this->getFieldHeader_sortLink('date');
-		$this->markers['###HEADER_PRICE###']      = $this->getFieldHeader_sortLink('price_regular');
-		$this->markers['###HEADER_ORGANIZERS###'] = $this->getFieldHeader_sortLink('organizers');
-		$this->markers['###HEADER_VACANCIES###']  = $this->getFieldHeader('vacancies');
+		$this->setMarkerContent('HEADER_TITLE',      $this->getFieldHeader_sortLink('title'));
+		$this->setMarkerContent('HEADER_DATE',       $this->getFieldHeader_sortLink('date'));
+		$this->setMarkerContent('HEADER_PRICE',      $this->getFieldHeader_sortLink('price_regular'));
+		$this->setMarkerContent('HEADER_ORGANIZERS', $this->getFieldHeader_sortLink('organizers'));
+		$this->setMarkerContent('HEADER_VACANCIES',  $this->getFieldHeader('vacancies'));
 
 		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
@@ -282,20 +270,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_row($c) {
-		$this->markers['###ITEM_CLASS###']       = ($c % 2) ? ' class="listrow-odd"' : '';
-		$this->markers['###TITLE_LINK###']       = $this->getFieldContent('title');
-		$this->markers['###CLASS_TITLE###']      = $this->pi_getClassName('title');
-		$this->markers['###DATE###']             = $this->getFieldContent('date');
-		$this->markers['###CLASS_DATE###']       = $this->pi_getClassName('date');
-		$this->markers['###PRICE###']            = $this->getFieldContent('price_regular');
-		$this->markers['###CLASS_PRICE###']      = $this->pi_getClassName('price_regular');
-		$this->markers['###ORGANIZERS###']       = $this->getFieldContent('organizers');
-		$this->markers['###CLASS_ORGANIZERS###'] = $this->pi_getClassName('organizer');
-		$this->markers['###VACANCIES###']        = $this->getFieldContent('vacancies')
-			.'&nbsp;&nbsp;<span class="'.$this->pi_getClassName('square').'">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-		$this->markers['###CLASS_VACANCIES###']  = $this->getVacanciesClasses();
+		$this->setMarkerContent('CLASS_ITEMROW',    ($c % 2) ? 'class="listrow-odd"' : '');
+		
+		$this->setMarkerContent('TITLE_LINK',       $this->getFieldContent('title'));
+		$this->setMarkerContent('DATE',             $this->getFieldContent('date'));
+		$this->setMarkerContent('PRICE',            $this->getFieldContent('price_regular'));
+		$this->setMarkerContent('ORGANIZERS',       $this->getFieldContent('organizers'));
+		$this->setMarkerContent('VACANCIES',        $this->getFieldContent('vacancies'));
+		$this->setMarkerContent('CLASS_LISTVACANCIES',  $this->getVacanciesClasses());
 
-		return $this->substituteMarkerArrayCached('LIST_ITEM');
+		return $this->substituteMarkerArrayCached('LIST_ITEM'); 
 	}
 	
 	/**
@@ -354,9 +338,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$endDateTime = strftime('%H:%M', $endDate);
 
 				if (!empty($beginDate)) {
-					$result = $beginDateTime.'&#8211;'.$endDateTime.'&nbsp;'.$this->pi_getLL('hours');
+					$result = $beginDateTime.'&#8211;'.$endDateTime;
 				} else {
-					$result = '<em>'.$this->pi_getLL('willBeAnnounced').'</em>';
+					$result = '<em>'.$this->pi_getLL('message_willBeAnnounced').'</em>';
 				}
 				return $result;
 			break;
@@ -444,15 +428,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result = '';
 				if ($this->internal['currentRow']['needs_registration']) {
 					if ($this->internal['currentRow']['is_full']) {
-						$result = $this->pi_getLL('noVacancies');
+						$result = $this->pi_getLL('message_noVacancies');
 					} else {
 						$organizers = explode(',', $this->internal['currentRow']['organizers']);
 						foreach($organizers as $currentOrganizer) {
-							$result = '<a href="'.$this->organizersCache[$currentOrganizer]['registration_page']. 										'&subject=Anmeldung+zum+Seminar+'.urlencode($this->internal['currentRow']['title']).' '.urlencode($this->getFieldContent('begin_date')).'">'. $this->pi_getLL('online_registration').'</a>';
+							$result = '<a href="'.$this->organizersCache[$currentOrganizer]['registration_page']. 										'&subject=Anmeldung+zum+Seminar+'.urlencode($this->internal['currentRow']['title']).' '.urlencode($this->getFieldContent('begin_date')).'">'. $this->pi_getLL('label_onlineRegistration').'</a>';
 						}
 					}
 				} else {
-					$result = $this->pi_getLL('noRegistrationNecessary');
+					$result = $this->pi_getLL('message_noRegistrationNecessary');
 				}
 				return $result;
 			break;
@@ -483,14 +467,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function getFieldHeader($fN) {
-		switch($fN) {
-			case 'title':
-			return $this->pi_getLL('listFieldHeader_title', '<em>title</em>');
-			break;
-			default:
-			return $this->pi_getLL('listFieldHeader_'.$fN, '['.$fN.']');
-			break;
-		}
+		return $this->pi_getLL('label_'.$fN, '['.$fN.']');
 	}
 
 	/**
@@ -533,7 +510,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 		}
 
-		return $result;
+		return 'class="'.$result.'"';
 	}
 	
 	/**
@@ -558,19 +535,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if (empty($error)) {
 			if (!$this->seminar['needs_registration']) {
-				$error = $this->pi_getLL('no_registration_necessary');
+				$error = $this->pi_getLL('message_noRegistrationNecessary');
 			}
 		}
 
 		if (empty($error)) {
 			if ($this->seminar['cancelled']) {
-				$error = $this->pi_getLL('seminar_cancelled');
+				$error = $this->pi_getLL('message_seminarCancelled');
 			}
 		}
 
 		if (empty($error)) {
 			if ($this->seminar['is_full']) {
-				$error = $this->pi_getLL('seminar_full');
+				$error = $this->pi_getLL('message_noVacancies');
 			}
 		}
 
@@ -595,7 +572,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'',
 			'1'));
 		if (empty($this->seminar)) {
-			$error = $this->pi_getLL('wrong_seminar_number');
+			$error = $this->pi_getLL('message_wrongSeminarNumber');
 		}
 		
 		return $error;
@@ -613,13 +590,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	  * @access protected
 	  */
 	 function createHeading($errorMessage) {
-		$this->markers['###REGISTRATION###'] = $this->pi_getLL('registration');
-		$this->markers['###TITLE###']        = $this->seminar->getTitleAndDate('&#8211;');
+		$this->setMarkerContent('REGISTRATION', $this->pi_getLL('registration'));
+		$this->setMarkerContent('TITLE',        $this->seminar->getTitleAndDate('&#8211;'));
 
 		if (empty($errorMessage)) {
-			$this->subpartsToHide['###ERROR###'] = '';
+			$this->readSubpartsToHide('error', 'wrapper');
 		} else {
-			$this->markers['###ERROR_TEXT###'] = $errorMessage;
+			$this->setMarkerContent('ERROR_TEXT', $errorMessage);
 		}
 		
 		return $this->substituteMarkerArrayCached('REGISTRATION_HEAD');

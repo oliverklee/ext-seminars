@@ -107,11 +107,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		$message = '';
 	
 		if (!$this->isLoggedIn()) {
-			$message = $this->pi_getLL('error_not_logged_in');
+			$message = $this->pi_getLL('message_notLoggedIn');
 		} else {
 			// The user is logged in. Let's see if he/she already has registered for this seminar.
 			if ($this->isUserRegistered($seminar)) {
-				$message = $this->pi_getLL('error_already_registered');
+				$message = $this->pi_getLL('message_alreadyRegistered');
 			}
 		}
 
