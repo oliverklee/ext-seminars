@@ -65,6 +65,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->getTemplateCode(array('LIST_HEADER', 'LIST_ITEM', 'SINGLE_VIEW', 'REGISTRATION_HEAD'));
 		$this->pi_initPIflexForm();
 
+		// include CSS in header of page
+		if ($this->getConfValue('cssFile') !== '') {
+			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValue('cssFile').'";</style>';
+		}
+
 		$result = '';
 		
 		switch ($this->getConfValue('what_to_display')) {

@@ -18,6 +18,7 @@ $LOCAL_LANG = Array (
 		'seminars.pi_flexform.formal' => 'formal',
 		'seminars.pi_flexform.informal' => 'informal',
 		'seminars.pi_flexform.templateFile' => 'File name of the HTML template',
+		'seminars.pi_flexform.cssFile' => 'File name of the CSS stylesheet',
 		'seminars.pi_flexform.hideFields' => 'hide fields in detailed view (comma-separated)',
 		'seminars.pi_flexform.hideColumns' => 'hide column names in list view (comma-separated)',
 		
@@ -94,7 +95,8 @@ $LOCAL_LANG = Array (
 		'seminars.pi_flexform.salutation' => 'Anredeform auf der Seite',
 		'seminars.pi_flexform.formal' => 'formell',
 		'seminars.pi_flexform.informal' => 'informell',
-		'seminars.pi_flexform.templateFile' => 'Dateiname des  HTML-Templates',
+		'seminars.pi_flexform.templateFile' => 'Dateiname des HTML-Templates',
+		'seminars.pi_flexform.cssFile' => 'Dateiname des CSS-Stylesheets',
 		'seminars.pi_flexform.hideFields' => 'versteckte Felder in Detailansicht (komma-separiert)',
 		'seminars.pi_flexform.hideColumns' => 'versteckte Felder in Listenansicht (komma-separiert)',
 		

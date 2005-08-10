@@ -133,6 +133,21 @@
 							</config>
 						</TCEforms>
 					</templateFile>
+					<cssFile>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.cssFile</label>
+							<config>
+								<type>group</type>
+								<internal_type>file</internal_type>
+								<allowed>css</allowed>
+								<max_size>100</max_size>
+								<uploadfolder>uploads/tx_txseminars</uploadfolder>
+								<maxitems>1</maxitems>
+								<size>1</size>
+								<selectedListStyle>Width:180px</selectedListStyle>
+							</config>
+						</TCEforms>
+					</cssFile>
 					<hideColumns>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.hideColumns</label>

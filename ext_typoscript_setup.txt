@@ -12,6 +12,9 @@ plugin.tx_seminars {
 
 plugin.tx_seminars_pi1 {
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
+	# location of the CSS file (leave empty to include no CSS file)
+	cssFile = typo3conf/ext/seminars/pi1/seminars_pi1.css
+
 	salutation = formal
 	hideColumns =
 	hideFields =

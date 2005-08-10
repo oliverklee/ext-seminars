@@ -1,0 +1,64 @@
+.tx-seminars-pi1-error {
+  color: #f00;
+  font-weight: bold;
+}
+
+.tx-seminars-pi1-listrow th, .tx-seminars-pi1-listrow td {
+  padding:  .2em .5em;
+  margin: 0;
+  border-spacing: 0;
+  vertical-align: top;
+}
+
+.tx-seminars-pi1-listrow th {
+  font-weight: bold;
+  text-align: center;
+}
+
+.tx-seminars-pi1-date, .tx-seminars-pi1-vacancies, .tx-seminars-pi1-price {
+  text-align: right;
+}
+
+.tx-seminars-pi1-listrow .listrow-odd, .tx-seminars-pi1-listrow th {
+  background-color: #f0f0f0;
+  color: inherit;
+}
+
+.tx-seminars-pi1-listrow tr:hover {
+  background-color: #e0e0e0;
+  color: inherit;
+}
+
+.tx-seminars-pi1-vacancies-available .tx-seminars-pi1-square {
+  background-color: #00a500;
+  color: inherit;
+}
+
+.tx-seminars-pi1-vacancies-2 .tx-seminars-pi1-square, .tx-seminars-pi1-vacancies-1 .tx-seminars-pi1-square {
+  background-color: #ffff3c;
+  color: inherit;
+}
+
+.tx-seminars-pi1-vacancies-0 .tx-seminars-pi1-square {
+  background-color: #c30000;
+  color: inherit;
+}
+
+.tx-seminars-pi1 .tx-frontendformslib-label {
+  display: block;
+  float: left;
+  width: 20em;
+  vertical-align: top;
+}
+
+.tx-seminars-pi1 .tx-frontendformslib-field {
+  margin-bottom: 1em;
+}
+
+.tx-seminars-pi1 .tx-frontendformslib-submitbuttons {
+  margin: .5em 0;
+}
+
+.tx-seminars-pi1 .tx-frontendformslib-submitbuttons input {
+  margin: 0 .5em 0 0;
+}
