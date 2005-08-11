@@ -156,13 +156,6 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		switch ((string)$this->MOD_SETTINGS['function']) {
 			case 'updateStats':
-			$content='<div><strong>Update stats</strong></div><BR>
-					The <em>Kickstarter</em> has made this module automatically, it contains a default framework for a backend module but apart from it does nothing useful until you open the script '.substr(t3lib_extMgm::extPath('seminars'),strlen(PATH_site)).'mod1/index.php and edit it!
-					<HR>
-					<BR>This is the GET/POST vars sent to the script:<BR>'.
-					'GET:'.t3lib_div::view_array($GLOBALS['HTTP_GET_VARS']).'<BR>'.
-					'POST:'.t3lib_div::view_array($GLOBALS['HTTP_POST_VARS']).'<BR>'.
-					'';
 				$content = $this->updateStats();
 				$this->content.=$this->doc->section($LANG->getLL('menu_updateStats'),$content,0,1);
 			break;
@@ -225,7 +218,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			'' ));
 			$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid['num'].'</p>';
 
-			$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees['num'] : $numberOfAttendeesPaid[num];
+			$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees['num'] : $numberOfAttendeesPaid['num'];
 
 			$hasEnoughAttendees = ($numberOfSeenAttendees >= $currentSeminar['attendees_min']) ? 1 : 0;
 			$isFull = ($numberOfSeenAttendees >= $currentSeminar['attendees_max']) ? 1 : 0;
