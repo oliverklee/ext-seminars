@@ -28,6 +28,7 @@ Version 0.3.2 (early August 2005)
 - online registration: "thank you" page [Mathias]
 - online registration: mail to participant (configurable) [Mathias]
 - online registration: mail to organizer (configurable) [Mathias]
+- make it configurable which input fields to show on online registration [Oli]
 
 Version 0.4.0 (mid-August 2005)
 ---------------------------------
