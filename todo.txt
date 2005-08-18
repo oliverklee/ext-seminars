@@ -21,14 +21,16 @@ Version 0.3.2 (early August 2005)
 - make ID of registration page configurable [Oli]
 - after a front end user has registered for a seminar, automatically update the statistics [Oli]
 
+- online registration: "thank you" page [Oli]
+- make it configurable which input fields to show on online registration [Oli]
+- show seminar fee on registration page [Oli]
+- show number of vacancies on registration page [Oli]
 - remove the link (and corresponding DB entry) to the organizer's email form [Oli]
 - add a field "description" to the payment method record (e.g. for bank account information) [?]
 - include seminar fee amount and bank account information into mail to participant [Oli]
 - add a field "payment methods" to the seminar record [Oli]
-- online registration: "thank you" page [Mathias]
 - online registration: mail to participant (configurable) [Mathias]
 - online registration: mail to organizer (configurable) [Mathias]
-- make it configurable which input fields to show on online registration [Oli]
 
 Version 0.4.0 (mid-August 2005)
 ---------------------------------
@@ -80,7 +82,6 @@ Version 0.5.0 (September 2005)
 - make it configurable whether to have the university-specific stuff [Oli]
 - make some fe_users data editable on the registration page [Oli]
 - show a drop-down list of seminars to select from on the registration page [Mathias]
-- show seminar fee on registration page [Oli]
 - matriculation number should be required for students [Oli]
 - prevent that users can delete their accounts if they are registered for a seminar [Mathias]
 - feature to send email to all participants of a seminar [?]
