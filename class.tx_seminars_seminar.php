@@ -264,7 +264,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access public
 	 */
 	function hasSubtitle() {
-		return ($this->getSubtitle !== '');
+		return ($this->getSubtitle() !== '');
 	}
 	 
 	/**
