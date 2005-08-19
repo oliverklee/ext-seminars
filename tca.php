@@ -402,7 +402,7 @@ $TCA['tx_seminars_speakers'] = Array (
 $TCA['tx_seminars_attendances'] = Array (
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'title,user,seminar,paid,datepaid,method_of_payment,been_there,interests,expectations,background_knowledge,known_from'
+		'showRecordFieldList' => 'title,user,seminar,paid,datepaid,method_of_payment,been_there,interests,expectations,background_knowledge,known_from,notes'
 	),
 	'feInterface' => $TCA['tx_seminars_attendances']['feInterface'],
 	'columns' => Array (
@@ -511,9 +511,18 @@ $TCA['tx_seminars_attendances'] = Array (
 				'rows' => '5',
 			)
 		),
+		'notes' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.notes',
+			'config' => Array (
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5',
+			)
+		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, known_from')
+		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, known_from, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')
@@ -600,7 +609,7 @@ $TCA['tx_seminars_sites'] = Array (
 $TCA['tx_seminars_organizers'] = Array (
 	'ctrl' => $TCA['tx_seminars_organizers']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'title,homepage,email,registration_page'
+		'showRecordFieldList' => 'title,homepage,email'
 	),
 	'feInterface' => $TCA['tx_seminars_organizers']['feInterface'],
 	'columns' => Array (
@@ -642,30 +651,9 @@ $TCA['tx_seminars_organizers'] = Array (
 				'size' => '30',
 			)
 		),
-		'registration_page' => Array (
-			'exclude' => 0,
-			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers.registration_page',
-			'config' => Array (
-				'type' => 'input',
-				'size' => '15',
-				'max' => '255',
-				'checkbox' => '',
-				'eval' => 'trim',
-				'wizards' => Array(
-					'_PADDING' => 2,
-					'link' => Array(
-						'type' => 'popup',
-						'title' => 'Link',
-						'icon' => 'link_popup.gif',
-						'script' => 'browse_links.php?mode=wizard',
-						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-					)
-				)
-			)
-		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, registration_page')
+		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')

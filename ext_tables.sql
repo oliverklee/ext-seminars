@@ -132,6 +132,7 @@ CREATE TABLE tx_seminars_attendances (
 	expectations text NOT NULL,
 	background_knowledge text NOT NULL,
 	known_from text NOT NULL,
+	notes text NOT NULL,
 	
 	PRIMARY KEY (uid),
 	KEY parent (pid)
@@ -174,7 +175,6 @@ CREATE TABLE tx_seminars_organizers (
 	title tinytext NOT NULL,
 	homepage tinytext NOT NULL,
 	email tinytext NOT NULL,
-	registration_page tinytext NOT NULL,
 	
 	PRIMARY KEY (uid),
 	KEY parent (pid)

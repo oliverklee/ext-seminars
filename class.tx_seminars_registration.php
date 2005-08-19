@@ -30,19 +30,51 @@
  * @author	Oliver Klee <typo-coding@oliverklee.de>
  */
 
-class tx_seminars_registration extends tx_seminars_dbplugin {
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
+
+class tx_seminars_registration extends tx_seminars_templatehelper {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_registration';
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_registration.php';
 
+	/** associative array with the values from/for the DB */
+	var $recordData = array();
+
+	/** our seminar (object) */
+	var $seminar = null;
+
+	/** whether this attendance already is stored in the DB */
+	var $isInDb = false;
+
 	/**
 	 * The constructor.
+	 * 
+	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
+	 * @param	integer		the UID of the feuser who wants to sign up
+	 * @param	array		associative array with the registration data the user has just entered
 	 *
 	 * @access public
 	 */
-	function tx_seminars_registration() {
-		trigger_error('Member function tx_seminars_registration->tx_seminars_registration not implemented yet.');
+	function tx_seminars_registration(&$seminar, $userUid, $registrationData) {
+		$this->init();
+		
+		$this->seminar = $seminar;
+
+		$this->recordData['seminar'] = $seminar->getUid();
+		$this->recordData['user'] = $userUid;
+		
+		$this->recordData['interests'] = $registrationData['interests'];
+		$this->recordData['expectations'] = $registrationData['expectations'];
+		$this->recordData['background_knowledge'] = $registrationData['background_knowledge'];
+		$this->recordData['known_from'] = $registrationData['known_from'];
+		$this->recordData['notes'] = $registrationData['notes'];
+
+		$this->recordData['pid'] = $this->getConfValue('attendancesPID');
+		
+		$this->createTitle();
+		
+		return;
 	}
 	
 	/**
@@ -51,40 +83,79 @@ class tx_seminars_registration extends tx_seminars_dbplugin {
 	 *  the seminar title,
 	 *  the seminar date 
 	 * 
-	 * @return	string	the attendance title
+	 * @return	String		the attendance title
 	 * 
 	 * @access public
 	 */
 	function getTitle() {
-		trigger_error('Member function tx_seminars_registration->getTitle not implemented yet.');
+		return $this->$this->recordData['title'];
+	}
+	
+	/**
+	 * Creates our title and writes it to $this->title.
+	 * 
+	 * The title is constructed like this:
+	 *   Name of Attendee / Title of Seminar seminardate 
+	 * 
+	 * @access private
+	 */
+	function createTitle() {
+		$this->recordData['title'] = $this->getUserName().' / '.$this->seminar->getTitle().' '.$this->seminar->getDate();
+		
+		return;
 	}
 	
 	/**
 	 * Gets the attendee's uid.
 	 * 
-	 * @return	integer	the attendee's feuser uid
+	 * @return	integer		the attendee's feuser uid
 	 * 
 	 * @access public
 	 */
 	function getUser() {
-		trigger_error('Member function tx_seminars_registration->getUser not implemented yet.');
+		return intval($this->recordData['user']);
+	}
+	
+	/**
+	 * Gets the attendee's (real) name
+	 * 
+	 * @return	String		the attendee's name
+	 * 
+	 * @access private
+	 */
+	function getUserName() {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'name',
+				'fe_users',
+				'uid='.$this->getUser(),
+				'',
+				'',
+				'');
+		if ($dbResult) {
+			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$result = $dbResultAssoc['name'];
+		} else {
+			$result = '';
+		}
+		
+		return $result;
 	}
 	
 	/**
 	 * Gets the seminar's uid.
 	 * 
-	 * @return	integer	the seminar's uid
+	 * @return	integer		the seminar's uid
 	 * 
 	 * @access public
 	 */
 	function getSeminar() {
-		trigger_error('Member function tx_seminars_registration->getSeminar not implemented yet.');
+		return intval($this->recordData['seminar']);
 	}
 	
 	/**
 	 * Gets whether this attendance has already been paid for.
 	 * 
-	 * @return	boolean	whether this attendance has already been paid for
+	 * @return	boolean		whether this attendance has already been paid for
 	 * 
 	 * @access public
 	 */
@@ -95,7 +166,7 @@ class tx_seminars_registration extends tx_seminars_dbplugin {
 	/**
 	 * Gets the date at which the user has paid for this attendance.
 	 * 
-	 * @return	integer	the date at which the user has paid for this attendance
+	 * @return	integer		the date at which the user has paid for this attendance
 	 * 
 	 * @access public
 	 */
@@ -106,7 +177,7 @@ class tx_seminars_registration extends tx_seminars_dbplugin {
 	/**
 	 * Gets the method of payment.
 	 * 
-	 * @return	integer	the uid of the method of payment (may be 0 if none is given)
+	 * @return	integer		the uid of the method of payment (may be 0 if none is given)
 	 * 
 	 * @access public
 	 */
@@ -117,7 +188,7 @@ class tx_seminars_registration extends tx_seminars_dbplugin {
 	/**
 	 * Gets whether the attendee has been at the seminar.
 	 * 
-	 * @return	boolean	whether the attendee has attended the seminar
+	 * @return	boolean		whether the attendee has attended the seminar
 	 * 
 	 * @access public
 	 */
@@ -128,45 +199,71 @@ class tx_seminars_registration extends tx_seminars_dbplugin {
 	/**
 	 * Gets the attendee's special interests in the subject.
 	 * 
-	 * @return	string	a description of the attendee's special interests (may be empty)
+	 * @return	String		a description of the attendee's special interests (may be empty)
 	 * 
 	 * @access public
 	 */
 	function getInterests() {
-		trigger_error('Member function tx_seminars_registration->getInterests not implemented yet.');
+		return $this->recordData['interests'];
 	}
 	
 	/**
 	 * Gets the attendee's expectations for the seminar.
 	 * 
-	 * @return	string	a description of the attendee's expectations for the seminar (may be empty)
+	 * @return	String		a description of the attendee's expectations for the seminar (may be empty)
 	 * 
 	 * @access public
 	 */
 	function getExpectations() {
-		trigger_error('Member function tx_seminars_registration->getExpectations not implemented yet.');
+		return $this->recordData['expectations'];
 	}
 	
 	/**
 	 * Gets the attendee's background knowledge on the subject.
 	 * 
-	 * @return	string	a description of the attendee's background knowledge (may be empty)
+	 * @return	String		a description of the attendee's background knowledge (may be empty)
 	 * 
 	 * @access public
 	 */
 	function getKnowledge() {
-		trigger_error('Member function tx_seminars_registration->getKnowledge not implemented yet.');
+		return $this->recordData['background_knowledge'];
 	}
 	
 	/**
 	 * Gets where the attendee has heard about this seminar.
 	 * 
-	 * @return	string	a description of where the attendee has heard about this seminar (may be empty)
+	 * @return	String		a description of where the attendee has heard about this seminar (may be empty)
 	 * 
 	 * @access public
 	 */
-	function getKnownForm() {
-		trigger_error('Member function tx_seminars_registration->getKnownForm not implemented yet.');
+	function getKnownFrom() {
+		return $this->recordData['known_from'];
+	}
+	
+	/**
+	 * Gets text from the "additional notes" field the attendee could fill at online registration.
+	 * 
+	 * @return	String		additional notes on registration (may be empty)
+	 * 
+	 * @access public
+	 */
+	function getNotes() {
+		return $this->recordData['notes'];
+	}
+	
+	/**
+	 * Writes this registration to the DB.
+	 * 
+	 * Parent page is $this->conf['attendancesPID].
+	 * 
+	 * @return	boolean		true if everything went OK, false otherwise
+	 */
+	function commitToDb() {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_INSERTquery($this->tableAttendances, $this->recordData);
+		
+		$this->isInDb = true;
+		
+		return $dbResult;
 	}
 }
 

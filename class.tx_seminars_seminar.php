@@ -38,7 +38,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_seminar.php';
 
-	/** the seminar data as an array */
+	/** the seminar data as an array, initialized on construction */
 	var $seminarData = null;
 
 	/** The seminar's speakers data as an array of arrays with their UID as key. Lazily initialized. */
@@ -64,7 +64,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * 
 	 * @access public
 	 */
-	function tx_seminars_seminar(&$registrationManager, $uid, $dbResult = null) {
+	function tx_seminars_seminar(&$registrationManager, $seminarUid, $dbResult = null) {
 		$result = false;
 		
 		$this->init();
@@ -72,7 +72,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$this->registrationManager =& $registrationManager;
 		
 		if (!$dbResult) {
-			$dbResult = $this->retrieveSeminar($uid);
+			$dbResult = $this->retrieveSeminar($seminarUid);
 		}
 
 	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
@@ -84,23 +84,63 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	
 	/**
+	 * Checks whether a non-deleted and non-hidden seminar with a given UID exists in the DB.
+	 * 
+	 * This method may be called statically.
+	 * 
+	 * @param	String		String with a UID
+	 * 
+	 * @return	boolean		true if a non-deleted seminar with that UID exists; false otherwise.
+	 * 
+	 * @access public
+	 */
+	function existsSeminar($seminarUid) {
+		$result = is_numeric($seminarUid) && ($seminarUid);
+		
+		if ($result) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'COUNT(*) AS num',
+				$this->tableSeminars,
+				'uid='.intval($seminarUid)
+					.t3lib_pageSelect::enableFields($this->tableSeminars),
+				'',
+				'',
+				'');
+			
+			if ($dbResult) {
+				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+				$result = ($dbResultAssoc['num'] == 1);
+			} else {
+				$result = false;
+			}
+		}
+		
+		return $result;
+	}
+	
+	/**
 	 * Retrieves a seminar from the database.
 	 * 
 	 * @param	integer		The UID of the seminar to retrieve from the DB.
 	 * 
-	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object.
+	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
 	 * 
 	 * @access private
 	 */
-	 function retrieveSeminar($uid) {
-	 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			$this->tableSeminars,
-			'uid='.intval($uid)
-				.t3lib_pageSelect::enableFields($this->tableSeminars),
-			'',
-			'',
-			'1');
+	 function retrieveSeminar($seminarUid) {
+	 	if ($this->existsSeminar($seminarUid)) {
+		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'*',
+				$this->tableSeminars,
+				'uid='.intval($seminarUid)
+					.t3lib_pageSelect::enableFields($this->tableSeminars),
+				'',
+				'',
+				'1');
+	 	} else {
+	 		$result = null;
+	 	}
+	 	
 
 		return $result;
 	 }
@@ -110,6 +150,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * If this already has been done, we will overwrite existing entries
 	 * in the array.
 	 * 
+	 * XXX Currently, this method is not used. Check whether we'll need it or else remove it
+	 *  
 	 * @return	boolean		true if everything went OK, false otherwise.
 	 * 
 	 * @access private
@@ -146,6 +188,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * If this already has been done, we will overwrite existing entries
 	 * in the array.
 	 * 
+	 * XXX Currently, this method is not used. Check whether we'll need it or else remove it
+	 *  
 	 * @return	boolean		true if everything went OK, false otherwise.
 	 * 
 	 * @access private
@@ -193,7 +237,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets our title.
 	 * 
-	 * @return	string	our seminar title (or '' if there is an error)
+	 * @return	String	our seminar title (or '' if there is an error)
 	 * 
 	 * @access public
 	 */
@@ -204,7 +248,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets our subtitle.
 	 * 
-	 * @return	string		our seminar title (or '' if there is an error)
+	 * @return	String		our seminar title (or '' if there is an error)
 	 * 
 	 * @access public
 	 */
@@ -229,9 +273,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * 
 	 * If the seminar has no date, just the title is returned.
 	 * 
-	 * @param	string		the character or HTML entity used to separate start date and end date
+	 * @param	String		the character or HTML entity used to separate start date and end date
 	 * 
-	 * @return	string		the unique seminar title (or '' if there is an error)
+	 * @return	String		the unique seminar title (or '' if there is an error)
 	 * 
 	 * @access public
 	 */
@@ -248,9 +292,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Returns just one day if the seminar takes place on only one day.
 	 * Returns a date range if the seminar takes several days.
 	 * 
-	 * @param	string		the character or HTML entity used to separate start date and end date
+	 * @param	String		the character or HTML entity used to separate start date and end date
 	 * 
-	 * @return	string		the seminar date
+	 * @return	String		the seminar date
 	 * 
 	 * @access public
 	 */
@@ -304,7 +348,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets the event type (seminar, workshop, lecture ...).
 	 * 
-	 * @return	string	the seminar type (may be empty)
+	 * @return	String	the seminar type (may be empty)
 	 * 
 	 * @access public
 	 */
@@ -313,12 +357,56 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	 
 	/**
+	 * Gets our regular price as a string containing amount and currency.
+	 * 
+	 * @return	String		the seminar price
+	 * 
+	 * @access public
+	 */
+	function getPrice() {
+		return $this->getSeminarsPropertyInteger('price_regular').'&nbsp;EUR';
+	}
+	 
+	/**
+	 * Checks whether this seminar has a non-zero regular price set.
+	 * 
+	 * @return	boolean		true if the seminar has a non-zero regular price, false if it is free.
+	 * 
+	 * @access public
+	 */
+	function hasPrice() {
+		return ($this->getSeminarsPropertyInteger('price_regular') !== 0);
+	}
+	 
+	/**
+	 * Gets the number of vacancies for this seminar
+	 * 
+	 * @return	integer		the number of vacancies (will be 0 if the seminar is overbooked)
+	 * 
+	 * @access public
+	 */
+	function getVacancies() {
+		return max(0, $this->getSeminarsPropertyInteger('attendees_max') - $this->getSeminarsPropertyInteger('attendees'));
+	}
+	 
+	/**
+	 * Checks whether this seminar still has vacancies (is not full yet).
+	 * 
+	 * @return	boolean		true if the seminar has vacancies, false if it is full.
+	 * 
+	 * @access public
+	 */
+	function hasVacancies() {
+		return !$this->getSeminarsPropertyInteger('is_full');
+	}
+	 
+	/**
 	 * Gets a string element of the seminars array.
 	 * If the array has not been intialized properly, an empty string is returned instead.
 	 * 
-	 * @param	string		key of the element to return
+	 * @param	String		key of the element to return
 	 * 
-	 * @return	string		the corresponding element from the seminars array.
+	 * @return	String		the corresponding element from the seminars array.
 	 * 
 	 * @access private
 	 */
@@ -332,7 +420,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Gets an (intval'ed) integer element of the seminars array.
 	 * If the array has not been intialized properly, 0 is returned instead.
 	 * 
-	 * @param	string		key of the element to return
+	 * @param	String		key of the element to return
 	 * 
 	 * @return	integer		the corresponding element from the seminars array.
 	 * 
@@ -354,11 +442,11 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * 
 	 * @access public
 	 */
-	function isUserRegistered($uid) {
+	function isUserRegistered($feuserUid) {
 	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$this->tableAttendances,
-			'seminar='.$this->getUid().' AND user='.$uid
+			'seminar='.$this->getUid().' AND user='.$feuserUid
 				.t3lib_pageSelect::enableFields($this->tableAttendances),
 			'',
 			'',
@@ -369,46 +457,115 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 	
 	/**
-	 * Checks whether a user is logged in and hasn't registered for this seminar yet.
-	 * Returns an empty string if everything is OK and an error message otherwise.
+	 * Checks whether a certain user already is registered for this seminar.
 	 * 
-	 * Note: This method does not check if it is possible to register for a given seminar at all. 
-	 *
-	 * @return	string		empty string if everything is OK, else a localized error message.
+	 * @param	integer		UID of the user to check
 	 * 
-	 * @access	public
-	 */	
-	function userCanRegister() {
-		/** This is empty as long as no error has occured. Used to circumvent deeply-nested ifs. */
-		$error = '';
+	 * @return	String		empty string if everything is OK, else a localized error message.
+	 * 
+	 * @access public
+	 */
+	function isUserRegisteredMessage($feuserUid) {
+		return ($this->isUserRegistered($feuserUid)) ? $this->pi_getLL('message_alreadyRegistered') : '';
+	}
 	
-		if (!$GLOBALS['TSFE']->loginUser) {
-			$error = $this->pi_getLL('message_notLoggedIn');
-		}
+	/**
+	 * Checkes whether it is possible at all to register for this seminar,
+	 * ie. it needs registration at all,
+	 *     has not been cancelled,
+	 *     has not begun yet
+	 *     and there are still vacancies.
+	 * 
+	 * @return	boolean		true if registration is possible, false otherwise. 
+	 * 
+	 * @access public
+	 */	
+	function canSomebodyRegister() {
+		return $this->seminarData['needs_registration'] &&
+			!$this->seminarData['cancelled'] &&
+			($GLOBALS['SIM_EXEC_TIME'] < $this->seminarData['begin_date']) &&
+			$this->hasVacancies();
+	}
 
-		if (empty($error)) {
-			$error = $this->readSeminarFromDB();
+	/**
+	 * Checkes whether it is possible at all to register for this seminar,
+	 * ie. it needs registration at all,
+	 *     has not been cancelled,
+	 *     has not begun yet
+	 *     and there are still vacancies,
+	 * and returns a localized error message if registration is not possible.
+	 * 
+	 * @return	String		empty string if everything is OK, else a localized error message.
+	 * 
+	 * @access public
+	 */	
+	function canSomebodyRegisterMessage() {
+		$message = '';
+		
+		if (!$this->seminarData['needs_registration']) {
+			$message = $this->pi_getLL('message_noRegistrationNecessary');
+		} elseif ($this->seminarData['cancelled']) {
+			$message = $this->pi_getLL('message_seminarCancelled');
+		} elseif ($GLOBALS['SIM_EXEC_TIME'] > $this->seminarData['end_date']) {
+			$message = $this->pi_getLL('message_seminarOver');
+		} elseif ($GLOBALS['SIM_EXEC_TIME'] >= $this->seminarData['begin_date']) {
+			$message = $this->pi_getLL('message_seminarStarted');
+		} elseif (!$this->hasVacancies()) {
+			$message = $this->pi_getLL('message_noVacancies');
 		}
+		
+		return $message;
+	}
+	
+	/**
+	 * Recalculates the statistics for this seminar:
+	 *   the number of participants,
+	 *   whether there are enough registrations for this seminar to take place,
+	 *   and whether this seminar even is full.
+	 *
+	 * @access public
+	 */
+	function updateStatistics() {
+		$numberOfAttendees = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'COUNT(*) AS num',
+			$this->tableAttendances,
+			'seminar='.$this->getUid()
+			.t3lib_pageSelect::enableFields($this->tableAttendances),
+			'',
+			'',
+			''
+		));
 
-		if (empty($error)) {
-			if (!$this->seminar['needs_registration']) {
-				$error = $this->pi_getLL('message_noRegistrationNecessary');
-			}
-		}
+		$numberOfAttendeesPaid = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'COUNT(*) AS num',
+			$this->tableAttendances,
+			'seminar='.$this->getUid().' AND paid=1'
+			.t3lib_pageSelect::enableFields($this->tableAttendances),
+			'',
+			'',
+			''
+		));
+		
+		// We count paid and unpaid registrations.
+		// This behaviour will be configurable in a later version.
+		$numberOfSeenAttendees = $numberOfAttendees['num'];
 
-		if (empty($error)) {
-			if ($this->seminar['cancelled']) {
-				$error = $this->pi_getLL('message_seminarCancelled');
-			}
-		}
+		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
+		$hasEnoughAttendees = ($numberOfSeenAttendees >= $this->seminarData['attendees_min']) ? 1 : 0;
+		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
+		$isFull = ($numberOfSeenAttendees >= $this->seminarData['attendees_max']) ? 1 : 0;
 
-		if (empty($error)) {
-			if ($this->seminar['is_full']) {
-				$error = $this->pi_getLL('message_noVacancies');
-			}
-		}
-
-		return $error;
+		$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+			$this->tableSeminars,
+			'uid='.$this->getUid(),
+			array(
+				'attendees' => $numberOfSeenAttendees,
+				'enough_attendees' => $hasEnoughAttendees,
+				'is_full' => $isFull
+			)
+		);
+		
+		return;
 	}
 }
 

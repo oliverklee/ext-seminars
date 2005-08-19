@@ -123,7 +123,7 @@ $TCA['tx_seminars_attendances'] = Array (
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_attendances.gif',
 	),
 	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, user, seminar, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, known_from',
+		'fe_admin_fieldList' => 'title, user, seminar, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, known_from, notes',
 	)
 );
 
@@ -157,7 +157,7 @@ $TCA['tx_seminars_organizers'] = Array (
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_organizers.gif',
 	),
 	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, homepage, email, registration_page',
+		'fe_admin_fieldList' => 'title, homepage, email',
 	)
 );
 

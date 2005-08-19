@@ -45,6 +45,8 @@ plugin.tx_seminars_pi1 {
 	salutation = formal
 	hideColumns =
 	hideFields =
+	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
+	showRegistrationFields = interests,expectations,background_knowledge,known_from,notes
 	# this should go away once all seminar properties have moved to the seminar class
 	eventType = Workshop
 }

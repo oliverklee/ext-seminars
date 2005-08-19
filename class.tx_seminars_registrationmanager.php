@@ -30,6 +30,8 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 
 class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/** Same as class name */
@@ -77,18 +79,89 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks whether a front end user is already registered for this seminar.
+	 * Checks whether it is generally possible to register
+	 * (without looking at a certain seminar):
+	 * If a user is logged in and a non-deleted and non-hidden seminar with the given number exists.
 	 * 
-	 * This method must not be called when no front end user is logged in!
+	 * This function can be called even if no seminar object exists.
+	 * 
+	 * Note: This function does not check whether the logged-in user could register for a certain seminar.
+	 * 
+	 * @param	String		a given seminar UID (may not neccessarily be an integer)
+	 * 
+	 * @return	boolean		true if it is possible to register, false otherwise
+	 * 
+	 * @access public
+	 */
+	function canGenerallyRegister($seminarUid) {
+		// We can't use t3lib_div::makeInstanceClassName in this case as we
+		// cannot use a class function when using a variable as class name. 
+		return ($this->isLoggedIn()) && (tx_seminars_seminar::existsSeminar($seminarUid));
+	}
+
+	/**
+	 * Checks whether it is generally possible to register
+	 * (without looking at a certain seminar):
+	 * If a user is logged in and a non-deleted and non-hidden seminar with the given number exists.
+	 * 
+	 * This function can be called even if no seminar object exists.
+	 * 
+	 * Note: This function does not check whether the logged-in user could register for a certain seminar.
+	 * 
+	 * @param	String		a given seminar UID (may not neccessarily be an integer)
+	 * 
+	 * @return	string		empty string if everything is OK, else a localized error message.
+	 * 
+	 * @access public
+	 */
+	function canGenerallyRegisterMessage($seminarUid) {
+		/** This is empty as long as no error has occured. */
+		$message = '';
+	
+		if (!$this->isLoggedIn()) {
+			$message = $this->pi_getLL('message_notLoggedIn');
+		} elseif (!tx_seminars_seminar::existsSeminar($seminarUid)) {
+			$message = $this->pi_getLL('message_wrongSeminarNumber');
+		}
+		
+		return $message;
+	}
+
+	/**
+	 * Checks whether it the logged in user can register for a given seminar.
+	 * 
+	 * This method may only be called when a seminar object (with a valid UID) exists.
+	 * 
+	 * XXX Currently, this method is not used. Check whether we'll need it or else remove it
+	 *  
+	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)
 	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register
-	 *
-	 * @return	boolean		true if user is already registered, false otherwise.
+	 * @return	boolean		true if it is possible to register, false otherwise
 	 * 
 	 * @access	public
-	 */	
-	function isUserRegistered(&$seminar) {
-		return $seminar->isUserRegistered($this->feuser['uid']);
+	 */
+	function canUserRegisterForSeminar(&$seminar) {
+		return (!$this->isUserRegistered($seminar) && $seminar->canSomebodyRegister());
+	}
+
+	/**
+	 * Checks whether it the logged in user can register for a given seminar.
+	 * 
+	 * This method may only be called when a seminar object (with a valid UID) exists.
+	 *  
+	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)
+	 *
+	 * @return	string		empty string if everything is OK, else a localized error message.
+	 * 
+	 * @access	public
+	 */
+	function canUserRegisterForSeminarMessage(&$seminar) {
+		if ($this->isUserRegistered($seminar)) {
+			$message = $this->isUserRegisteredMessage($seminar);
+		} else {
+			$message = $seminar->canSomebodyRegisterMessage();
+		}		
+		return $message;
 	}
 
 	/**
@@ -96,6 +169,8 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Returns an empty string if everything is OK and an error message otherwise.
 	 * Note: This method does not check if it is possible to register for a given seminar at all.
 	 * 
+	 * XXX Currently, this method is not used. Check whether we'll need it or else remove it
+	 *  
 	 * @param	object		a seminar for which we'll check if it is possible to register
 	 *
 	 * @return	string		empty string if everything is OK, else a localized error message.
@@ -116,6 +191,53 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Checks whether a front end user is already registered for this seminar.
+	 * 
+	 * This method must not be called when no front end user is logged in!
+	 *
+	 * @param	object		a seminar for which we'll check if it is possible to register
+	 *
+	 * @return	boolean		true if user is already registered, false otherwise.
+	 * 
+	 * @access	public
+	 */	
+	function isUserRegistered(&$seminar) {
+		return $seminar->isUserRegistered($this->feuser['uid']);
+	}
+
+	/**
+	 * Checks whether a certain user already is registered for this seminar.
+	 * 
+	 * @param	object		a seminar for which we'll check if it is possible to register
+	 *
+	 * @return	string		empty string if everything is OK, else a localized error message.
+	 * 
+	 * @access public
+	 */
+	function isUserRegisteredMessage(&$seminar) {
+		return $seminar->isUserRegisteredMessage($this->feuser['uid']);
+	}
+	
+	/**
+	 * Creates a registration to $this->registration, writes it to DB,
+	 * and notifies the organizer and the user (both via email).
+	 * 
+	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
+	 * @param	array		associative array with the registration data the user has just entered
+	 * 
+	 * @access public
+	 */
+	function createRegistration(&$seminar, $registrationData) {
+			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
+			$this->registration =& new $registrationClassname($seminar, $this->feuser['uid'], $registrationData);
+
+			$this->registration->commitToDb();
+			$seminar->updateStatistics();
+
+			return;
 	}
 }
 
