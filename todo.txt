@@ -26,6 +26,9 @@ Version 0.3.2 (early August 2005)
 - make it configurable which input fields to show on online registration [Oli]
 - remove the link (and corresponding DB entry) to the organizer's email form [Oli]
 
+- bug: use localized string for link to online registration [Oli]
+- check that DB queries use the extra parameters for GROUP BY/ORDER BY [Oli]
+- add flexforms for registration forms [Oli]
 - add a field "description" to the payment method record (e.g. for bank account information) [?]
 - add a field "payment methods" to the seminar record [Oli]
 - online registration: mail to participant (configurable) [Mathias]
@@ -49,6 +52,7 @@ Version 0.4.0 (mid-August 2005)
 - make organizer email address required [Oli]
 - make sure all links are generated using the Typo3 API [?]
 - make sure all database queries are as safe as they can get [?]
+- make all database queries use single quotes instead of double quotes [Oli]
 - improve support for canceling seminars [Oli]
   - CSS style for this [Oli]
   - don't allow registering in the seminar details page or the seminars list [Oli]
