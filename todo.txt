@@ -26,9 +26,6 @@ Version 0.3.2 (early August 2005)
 - make it configurable which input fields to show on online registration [Oli]
 - remove the link (and corresponding DB entry) to the organizer's email form [Oli]
 
-- bug: use localized string for link to online registration [Oli]
-- check that DB queries use the extra parameters for GROUP BY/ORDER BY [Oli]
-- add flexforms for registration forms [Oli]
 - add a field "description" to the payment method record (e.g. for bank account information) [?]
 - add a field "payment methods" to the seminar record [Oli]
 - online registration: mail to participant (configurable) (using t3lib_htmlmail) [Mathias]
