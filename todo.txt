@@ -31,8 +31,8 @@ Version 0.3.2 (early August 2005)
 - add flexforms for registration forms [Oli]
 - add a field "description" to the payment method record (e.g. for bank account information) [?]
 - add a field "payment methods" to the seminar record [Oli]
-- online registration: mail to participant (configurable) [Mathias]
-- online registration: mail to organizer (configurable) [Mathias]
+- online registration: mail to participant (configurable) (using t3lib_htmlmail) [Mathias]
+- online registration: mail to organizer (configurable) (using t3lib_htmlmail) [Mathias]
 - include seminar fee amount and bank account information into mail to participant [Oli]
 
 Version 0.4.0 (mid-August 2005)
