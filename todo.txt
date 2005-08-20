@@ -60,12 +60,12 @@ Version 0.4.0 (mid-August 2005)
 - use flexforms as much as possible [Oli]
 - document that flexforms override and empty values don't [Oli]
 - work out how to override non-empty TS values with empty flexforms values [Oli/AM]
-- in the seminar class, make the organizer cache and the seminar site cache singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/> [Oli]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
+- in the seminar class, make the organizer cache and the seminar site cache singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/> [Oli]
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account) [?]
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
 - for organizers, add field telling in which page new registration records should be stored [Oli]
@@ -100,6 +100,8 @@ Version 0.5.0 (September 2005)
 - make the link to the online registration form CSS-stylable [Oli]
 - optimize the DB queries [?]
 - provide a patch for frop-down-lists in frontendformslib [Oli]
+- investigate whether some of the DB selectors in the back end can be replaced with select lists (like in the cl_company_database extension) in order to reduce the clickomania [?]
+- display payment methods on seminar details page [?]
 
 Version 0.6.0 (October 2005)
 ----------------------------
