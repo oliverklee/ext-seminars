@@ -96,7 +96,7 @@ Version 0.5.0 (September 2005)
 - add entry in participant records whether their money has been refunded [?]
 - make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
 - improve and clean up flexforms structure for better usability [Oli]
-- automatic signing off if the user hasn't paid after a configurable timespan [?]
+- automatic signing off if the user hasn't paid after a configurable timespan (x days after registration or x days before start of seminar) [?]
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off [?]
 - feature for email notification to the organizer once a seminar has enough attendances or is full [?]
 - investigate performance improvements when using caching or singletons in the template helper class [Oli]
@@ -105,6 +105,7 @@ Version 0.5.0 (September 2005)
 - provide a patch for frop-down-lists in frontendformslib [Oli]
 - investigate whether some of the DB selectors in the back end can be replaced with select lists (like in the cl_company_database extension) in order to reduce the clickomania [?]
 - display payment methods on seminar details page [?]
+- Slim down back end UI (don't display unneded fields, e.g. unneeded payment methods) [Oli]
 
 Version 0.6.0 (October 2005)
 ----------------------------
