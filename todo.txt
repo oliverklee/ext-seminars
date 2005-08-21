@@ -3,7 +3,9 @@ To-do list and milestone plan for tx_seminars
 
 The assignee is marked in square brackets. [?] Means that a to-do item isn't assigned yet - feel free to take it!
 
-When you start working on a to-do item, please open a bug at bugs.typo3.org for that.
+The extension still lacks many features. Help is very welcome! Contact the author if you want to help in any way.
+
+If you find any bugs in this extension, please report them in the Typo3 bugtracker under the project tx_seminars.
 
 If you need a feature urgently and you want to speed up development, you can either sponsor the extension authour to code it or code it yourself and provide a (tested!) patch.
 
