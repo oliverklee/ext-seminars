@@ -30,6 +30,7 @@ Version 0.3.2 (early August 2005)
 - add a field "payment methods" to the seminar record [Oli]
 - online registration: mail to participant (configurable) (using t3lib_htmlmail) [Mathias]
 - online registration: mail to organizer (configurable) (using t3lib_htmlmail) [Mathias]
+- online registration: add "mail footer" field to organizer record [Oli]
 - include seminar fee amount and bank account information into mail to participant [Oli]
 
 Version 0.4.0 (mid-August 2005)
