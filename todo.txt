@@ -70,6 +70,7 @@ Version 0.5.0 (September 2005)
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account) [?]
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
 - for organizers, add field telling in which page new registration records should be stored, overriding the global setting [Oli]
+- for seminars, add field telling in which page new registration records should be stored, overriding the global and organizers setting [Oli]
 - factor out the statistics update into a common function and make it more efficient [Oli]
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics [Oli]
 - make it configurable what to do when a participant signs up [Mathias]
