@@ -63,6 +63,7 @@ Version 0.4.0 (mid-August 2005)
 - work out how to override non-empty TS values with empty flexforms values [Oli/AM]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
+- comment out "special price" from UI until there is code for it [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
