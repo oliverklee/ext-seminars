@@ -47,6 +47,7 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	var $tableSitesMM;
 	var $tableOrganizers;
 	var $tableAttendances;
+	var $tablePaymentMethods;
 
 	/**
 	 * Dummy constructor: Does nothing.
@@ -91,14 +92,15 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	function setTableNames() {
 		$dbPrefix = 'tx_'.$this->extKey.'_';
 
-		$this->tableSeminars    = $dbPrefix.'seminars';
-		$this->tableSpeakers    = $dbPrefix.'speakers';
-		$this->tableSites       = $dbPrefix.'sites';
-		$this->tableOrganizers  = $dbPrefix.'organizers';
-		$this->tableAttendances = $dbPrefix.'attendances';
+		$this->tableSeminars       = $dbPrefix.'seminars';
+		$this->tableSpeakers       = $dbPrefix.'speakers';
+		$this->tableSites          = $dbPrefix.'sites';
+		$this->tableOrganizers     = $dbPrefix.'organizers';
+		$this->tableAttendances    = $dbPrefix.'attendances';
+		$this->tablePaymentMethods = $dbPrefix.'payment_methods';
 
-		$this->tableSpeakersMM  = $dbPrefix.'seminars_speakers_mm';
-		$this->tableSitesMM     = $dbPrefix.'seminars_place_mm';
+		$this->tableSpeakersMM     = $dbPrefix.'seminars_speakers_mm';
+		$this->tableSitesMM        = $dbPrefix.'seminars_place_mm';
 	}
 }
 

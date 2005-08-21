@@ -66,6 +66,7 @@ CREATE TABLE tx_seminars_seminars (
 	speakers int(11) unsigned DEFAULT '0' NOT NULL,
 	price_regular int(11) DEFAULT '0' NOT NULL,
 	price_special int(11) DEFAULT '0' NOT NULL,
+	payment_methods blob NOT NULL,
 	organizers blob NOT NULL,
 	needs_registration tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	attendees_min int(11) DEFAULT '0' NOT NULL,
@@ -192,6 +193,7 @@ CREATE TABLE tx_seminars_payment_methods (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	title tinytext NOT NULL,
+	description text NOT NULL,
 	
 	PRIMARY KEY (uid),
 	KEY parent (pid)

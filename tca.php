@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA['tx_seminars_seminars'] = Array (
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,begin_date,end_date,place,room,speakers,price_regular,price_special,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,begin_date,end_date,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,notes'
 	),
 	'feInterface' => $TCA['tx_seminars_seminars']['feInterface'],
 	'columns' => Array (
@@ -161,6 +161,18 @@ $TCA['tx_seminars_seminars'] = Array (
 				'default' => 0
 			)
 		),
+		'payment_methods' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.payment_methods',
+			'config' => Array (
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_payment_methods',
+				'size' => 3,
+				'minitems' => 0,
+				'maxitems' => 3,
+			)
+		),
 		'organizers' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.organizers',
@@ -252,7 +264,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], begin_date, end_date, place, room, speakers, price_regular, price_special, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, notes')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], begin_date, end_date, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'starttime, endtime')
@@ -663,7 +675,7 @@ $TCA['tx_seminars_organizers'] = Array (
 $TCA['tx_seminars_payment_methods'] = Array (
 	'ctrl' => $TCA['tx_seminars_payment_methods']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'title'
+		'showRecordFieldList' => 'title, description'
 	),
 	'feInterface' => $TCA['tx_seminars_payment_methods']['feInterface'],
 	'columns' => Array (
@@ -676,9 +688,18 @@ $TCA['tx_seminars_payment_methods'] = Array (
 				'eval' => 'required',
 			)
 		),
+		'description' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_payment_methods.description',
+			'config' => Array (
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '10',
+			)
+		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2')
+		'0' => Array('showitem' => 'title;;;;2-2-2, description')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')

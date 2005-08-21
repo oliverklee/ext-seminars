@@ -191,12 +191,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$this->setMarkerContent('SUBTITLE', $this->getFieldContent('subtitle'));
 		if (empty($this->markers['###SUBTITLE###'])) {
-			$this->readSubpartsToHide('subtitle', 'field');
+			$this->readSubpartsToHide('subtitle', 'field_wrapper');
 		}
 
 		$this->setMarkerContent('DESCRIPTION', $this->getFieldContent('description'));
 		if (empty($this->markers['###DESCRIPTION###'])) {
-			$this->readSubpartsToHide('description', 'field');
+			$this->readSubpartsToHide('description', 'field_wrapper');
 		}
 
 		$this->setMarkerContent('DATE', $this->getFieldContent('date'));
@@ -205,23 +205,30 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$this->setMarkerContent('ROOM', $this->getFieldContent('room'));
 		if (empty($this->markers['###ROOM###'])) {
-			$this->readSubpartsToHide('room', 'field');
+			$this->readSubpartsToHide('room', 'field_wrapper');
 		}
 
 		$this->setMarkerContent('SPEAKERS', $this->getFieldContent('speakers'));
 		if (!empty($this->markers['###SPEAKERS###'])) {
 			$this->setMarkerContent('SPEAKERS', $this->pi_RTEcssText($this->markers['###SPEAKERS###']));
 		} else {
-			$this->readSubpartsToHide('speakers', 'field');
+			$this->readSubpartsToHide('speakers', 'field_wrapper');
 		}
 
 		$this->setMarkerContent('PRICE', $this->getFieldContent('price_regular'));
+
+		if ($this->internal['currentRow']['payment_methods'] !== '') {
+			$this->setMarkerContent('PAYMENTMETHODS', $this->getFieldContent('payment_methods'));
+		} else {
+			$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
+		}
+
 		$this->setMarkerContent('ORGANIZERS', $this->getFieldContent('organizers'));
 
 		if ($this->internal['currentRow']['needs_registration']) {
 			$this->setMarkerContent('VACANCIES', $this->getFieldContent('vacancies'));
 		} else {
-			$this->readSubpartsToHide('vacancies', 'field');
+			$this->readSubpartsToHide('vacancies', 'field_wrapper');
 		}
 
 		$this->setMarkerContent('REGISTRATION', $this->getFieldContent('registration'));
@@ -346,6 +353,36 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			break;
 			case 'price_regular':
 				return $this->internal['currentRow']['price_regular'].'&nbsp;EUR';
+			break;
+			case 'payment_methods':
+				$result = '';
+				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'payment_methods',
+					$this->tableSeminars,
+					'uid='.$this->internal['currentRow']['uid']
+						.$this->cObj->enableFields($this->tableSeminars),
+					'',
+					'',
+					'' );
+
+				$row = mysql_fetch_assoc($res);
+				$paymentMethodsUids = explode(',', $row['payment_methods']);
+				foreach ($paymentMethodsUids as $currentPaymentMethod) {
+					$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+						'title',
+						$this->tablePaymentMethods,
+						'uid='.intval($currentPaymentMethod)
+							.$this->cObj->enableFields($this->tablePaymentMethods),
+						'',
+						'',
+						'' );
+
+					// we expect only one result	
+					$row = mysql_fetch_assoc($res2);
+					$this->setMarkerContent('PAYMENTMETHOD_TITLE', htmlspecialchars($row['title']));
+					$result .= $this->substituteMarkerArrayCached('PAYMENTMETHOD_SHORT');
+				}
+				return $result;
 			break;
 			case 'organizers':
 				if (!count($this->organizersCache)) {

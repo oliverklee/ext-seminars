@@ -24,6 +24,7 @@ $LOCAL_LANG = Array (
 		'tx_seminars_seminars.speakers' => 'Speakers',
 		'tx_seminars_seminars.price_regular' => 'Regular price',
 		'tx_seminars_seminars.price_special' => 'Special price',
+		'tx_seminars_seminars.payment_methods' => 'Allowed methods of payment',
 		'tx_seminars_seminars.organizers' => 'Organizers',
 		'tx_seminars_seminars.needs_registration' => 'Attendance registration is necessary',
 		'tx_seminars_seminars.attendees_min' => 'Minimal number of attendees',
@@ -71,6 +72,7 @@ $LOCAL_LANG = Array (
 		'tx_seminars_organizers.email' => 'E-mail address',
 		'tx_seminars_payment_methods' => 'Methods of payment',
 		'tx_seminars_payment_methods.title' => 'Title',
+		'tx_seminars_payment_methods.description' => 'Detailed description (for automated emails):',
 		'tt_content.list_type_pi1' => 'Seminar Manager',
 	),
 	'de' => Array (
@@ -91,6 +93,7 @@ $LOCAL_LANG = Array (
 		'tx_seminars_seminars.speakers' => 'ReferentInnen',
 		'tx_seminars_seminars.price_regular' => 'Standardpreis',
 		'tx_seminars_seminars.price_special' => 'Sonderpreis',
+		'tx_seminars_seminars.payment_methods' => 'Erlaubte Zahlungsarten',
 		'tx_seminars_seminars.organizers' => 'Veranstalter',
 		'tx_seminars_seminars.needs_registration' => 'Anmeldung ist nötig für Teilnahme',
 		'tx_seminars_seminars.attendees_min' => 'Minimale Anzahl TeilnehmerInnen',
@@ -138,6 +141,7 @@ $LOCAL_LANG = Array (
 		'tx_seminars_organizers.email' => 'E-Mail-Adresse',
 		'tx_seminars_payment_methods' => 'Zahlungsarten',
 		'tx_seminars_payment_methods.title' => 'Titel',
+		'tx_seminars_payment_methods.description' => 'Detaillierte Beschreibung (für automatische E-Mails):',
 		'tt_content.list_type_pi1' => 'Seminar-Manager',
 	),
 );
