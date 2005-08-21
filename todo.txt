@@ -25,9 +25,9 @@ Version 0.3.2 (early August 2005)
 - online registration: "thank you" page [Oli]
 - make it configurable which input fields to show on online registration [Oli]
 - remove the link (and corresponding DB entry) to the organizer's email form [Oli]
+- add a field "description" to the payment method record (e.g. for bank account information) [Oli]
+- add a field "payment methods" to the seminar record and add it to the seminar details page [Oli]
 
-- add a field "description" to the payment method record (e.g. for bank account information) [?]
-- add a field "payment methods" to the seminar record [Oli]
 - online registration: mail to participant (configurable) (using t3lib_htmlmail) [Mathias]
 - online registration: mail to organizer (configurable) (using t3lib_htmlmail) [Mathias]
 - online registration: add "mail footer" field to organizer record [Oli]
