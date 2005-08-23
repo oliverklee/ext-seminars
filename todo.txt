@@ -109,6 +109,7 @@ Version 0.5.0 (September 2005)
 - investigate whether some of the DB selectors in the back end can be replaced with select lists (like in the cl_company_database extension) in order to reduce the clickomania [?]
 - display payment methods on seminar details page [?]
 - Slim down back end UI (don't display unneded fields, e.g. unneeded payment methods) [Oli]
+- make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
 
 Version 0.6.0 (October 2005)
 ----------------------------
