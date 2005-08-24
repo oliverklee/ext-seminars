@@ -190,3 +190,5 @@ Not triaged yet
 - feature: "people who have registered for this seminar have also registered for these seminars" [?]
 - feature: create seminar certificates (as PDF) for those who have successfully attended [?]
 - add "target group" record type, add this as a field to the seminar type [?]
+- feature: configure sort order of seminar list [?]
+- feature: show seminars from a configurable time window in the seminar list [?]
