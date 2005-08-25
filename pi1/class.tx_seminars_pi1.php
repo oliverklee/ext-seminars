@@ -149,7 +149,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Get number of records
 			$res = $this->pi_exec_query($this->tableSeminars, 1, $inFuture);
-			list($this->internal['res_count']) = $GLOBALS['TYPO3_DB']->sql_fetch_row($res);
+			list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
 
 			// Make listing query, pass query to SQL database
 			$res = $this->pi_exec_query($this->tableSeminars, 0, $inFuture);
@@ -363,32 +363,49 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						.$this->cObj->enableFields($this->tableSeminars),
 					'',
 					'',
-					'' );
+					''
+				);
 
-				$row = mysql_fetch_assoc($res);
-				$paymentMethodsUids = explode(',', $row['payment_methods']);
-				foreach ($paymentMethodsUids as $currentPaymentMethod) {
-					$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-						'title',
-						$this->tablePaymentMethods,
-						'uid='.intval($currentPaymentMethod)
-							.$this->cObj->enableFields($this->tablePaymentMethods),
-						'',
-						'',
-						'' );
-
-					// we expect only one result	
-					$row = mysql_fetch_assoc($res2);
-					$this->setMarkerContent('PAYMENTMETHOD_TITLE', htmlspecialchars($row['title']));
-					$result .= $this->substituteMarkerArrayCached('PAYMENTMETHOD_SHORT');
+				if ($res) {
+					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+					$paymentMethodsUids = explode(',', $row['payment_methods']);
+					foreach ($paymentMethodsUids as $currentPaymentMethod) {
+						$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+							'title',
+							$this->tablePaymentMethods,
+							'uid='.intval($currentPaymentMethod)
+								.$this->cObj->enableFields($this->tablePaymentMethods),
+							'',
+							'',
+							''
+						);
+						
+						// we expect just one result	
+						if ($res2 && $GLOBALS['TYPO3_DB']->sql_num_rows ($res2)) {
+							$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res2);
+							$this->setMarkerContent('PAYMENTMETHOD_TITLE', htmlspecialchars($row['title']));
+							$result .= $this->substituteMarkerArrayCached('PAYMENTMETHOD_SHORT');
+						}
+					}
+				} else {
+					$result = '';
 				}
 				return $result;
 			break;
 			case 'organizers':
 				if (!count($this->organizersCache)) {
-					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $this->tableOrganizers, '', '', '', '');
-					while ($row = mysql_fetch_assoc($res)) {
-						$this->organizersCache[$row['uid']] = $row;
+					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+						'*',
+						$this->tableOrganizers,
+						'',
+						'',
+						'',
+						''
+					);
+					if ($res) {
+						while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+							$this->organizersCache[$row['uid']] = $row;
+						}
 					}
 				}
 				$result = '';
@@ -405,48 +422,55 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'title, organization, homepage, description',
 					$this->tableSpeakers.', '.$this->tableSpeakersMM,
-					'uid_local='.$this->internal['currentRow']['uid'].' AND uid=uid_foreign' .$this->cObj->enableFields($this->tableSpeakers),
+					'uid_local='.intval($this->internal['currentRow']['uid']).' AND uid=uid_foreign'
+						.$this->cObj->enableFields($this->tableSpeakers),
 					'',
 					'',
-					'' );
+					''
+				);
 
 				$result = '';
-				while ($row = mysql_fetch_assoc($res)) {
-					$name = htmlspecialchars($row['title']);
-					if (!empty($row['organization'])) {
-						$name .= ', '.htmlspecialchars($row['organization']);
-					}
-					if (!empty($row['homepage'])) {
-						$name = '<a href="'.$row['homepage'].'">'.$name.'</a>';
-					}
-					$result .= $name.chr(10);
-					if (!empty($row['description'])) {
-					$result .= $this->pi_RTEcssText($row['description']);
+				if ($res) {
+					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+						$name = htmlspecialchars($row['title']);
+						if (!empty($row['organization'])) {
+							$name .= ', '.htmlspecialchars($row['organization']);
+						}
+						if (!empty($row['homepage'])) {
+							$name = '<a href="'.$row['homepage'].'">'.$name.'</a>';
+						}
+						$result .= $name.chr(10);
+						if (!empty($row['description'])) {
+						$result .= $this->pi_RTEcssText($row['description']);
+						}
 					}
 				}
 				return $result;
 			break;
 			case 'place':
 				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, address, homepage, directions',
+					'title, address, homepage, directions',
 					$this->tableSites.', '.$this->tableSitesMM,
-					'uid_local='.$this->internal['currentRow']['uid'].' AND uid=uid_foreign',
+					'uid_local='.intval($this->internal['currentRow']['uid']).' AND uid=uid_foreign',
 					'',
 					'',
-					'');
+					''
+				);
 
 				$result = '';
-				while ($row = mysql_fetch_assoc($res)) {
-					$name = htmlspecialchars($row['title']);
-					if (!empty($row['homepage'])) {
-						$name = '<a href="'.$row['homepage'].'">'.$name.'</a>';
-					}
-					$result .= $name;
-					if (!empty($row['address'])) {
-						$result .= '<br />'.$row['address'];
-					}
-					if (!empty($row['directions'])) {
-						$result .= $this->pi_RTEcssText($row['address']);
+				if ($res) {
+					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+						$name = htmlspecialchars($row['title']);
+						if (!empty($row['homepage'])) {
+							$name = '<a href="'.$row['homepage'].'">'.$name.'</a>';
+						}
+						$result .= $name;
+						if (!empty($row['address'])) {
+							$result .= '<br />'.$row['address'];
+						}
+						if (!empty($row['directions'])) {
+							$result .= $this->pi_RTEcssText($row['address']);
+						}
 					}
 				}
 				return $result;
