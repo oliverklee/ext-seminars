@@ -84,7 +84,6 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$access = is_array($this->pageinfo) ? 1 : 0;
 
 		if (($this->id && $access) || ($BE_USER->user['admin'] && !$this->id))	{
-
 			// Draw the header.
 			$this->doc = t3lib_div::makeInstance('mediumDoc');
 			$this->doc->backPath = $BACK_PATH;
@@ -183,6 +182,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$tableSeminars = 'tx_seminars_seminars';
 		$tableAttendances = 'tx_seminars_attendances';
 		$tableUsers = 'fe_users';
+		
 		$result = '';
 		$alsoNoticeUnpaidRegistrations = true;
 
@@ -195,81 +195,98 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			'begin_date',
 			'' );
 
-		while ($currentSeminar = mysql_fetch_assoc($seminars)) {
-			$result .= '<h4>'.htmlspecialchars($currentSeminar['title']).'</h4>';
-			$numberOfAttendees = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'COUNT(*) AS num',
-				$tableAttendances,
-				'seminar='.$GLOBALS['TYPO3_DB']->quoteStr($currentSeminar['uid'], $tableAttendances)
-				.t3lib_pageSelect::enableFields($tableAttendances),
-				'',
-				'',
-				'' ));
-			$result .= '<p>Anzahl Teilnehmer: '.$numberOfAttendees['num'].'</p>';
-
-			$numberOfAttendeesPaid = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'COUNT(*) AS num',
-			$tableAttendances,
-			'seminar='.$GLOBALS['TYPO3_DB']->quoteStr($currentSeminar['uid'], $tableAttendances)
-				.' AND paid=1'
-				.t3lib_pageSelect::enableFields($tableAttendances),
-			'',
-			'',
-			'' ));
-			$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid['num'].'</p>';
-
-			$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees['num'] : $numberOfAttendeesPaid['num'];
-
-			$hasEnoughAttendees = ($numberOfSeenAttendees >= $currentSeminar['attendees_min']) ? 1 : 0;
-			$isFull = ($numberOfSeenAttendees >= $currentSeminar['attendees_max']) ? 1 : 0;
-
-			$result .= '<p>Hat genug Teilis: '.$hasEnoughAttendees.'</p>';
-			$result .= '<p>Ist voll: '.$isFull.'</p>';
-
-			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-				$tableSeminars,
-				'uid='.$GLOBALS['TYPO3_DB']->quoteStr($currentSeminar['uid'], $tableSeminars),
-				array(
-					'attendees' => $numberOfSeenAttendees,
-					'enough_attendees' => $hasEnoughAttendees,
-					'is_full' => $isFull,
-				)
-			);
+		if ($seminars) {
+			while ($currentSeminar = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($seminars)) {
+				$result .= '<h4>'.htmlspecialchars($currentSeminar['title']).'</h4>';
+				
+				$dbResultAttendees = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'COUNT(*) AS num',
+					$tableAttendances,
+					'seminar='.intval($currentSeminar['uid'])
+						.t3lib_pageSelect::enableFields($tableAttendances),
+					'',
+					'',
+					''
+				);
+				$dbResultAttendeesPaid = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'COUNT(*) AS num',
+					$tableAttendances,
+					'seminar='.intval($currentSeminar['uid'])
+						.t3lib_pageSelect::enableFields($tableAttendances),
+					'',
+					'',
+					''
+				);
+				if ($dbResultAttendees && $dbResultAttendeesPaid) {
+					$numberOfAttendees = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendees);
+					$numberOfAttendeesPaid = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendeesPaid);
+				
+					$result .= '<p>Anzahl Teilnehmer: '.$numberOfAttendees['num'].'</p>';
+					$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid['num'].'</p>';
+	
+					$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees['num'] : $numberOfAttendeesPaid['num'];
+	
+					$hasEnoughAttendees = ($numberOfSeenAttendees >= $currentSeminar['attendees_min']) ? 1 : 0;
+					$isFull = ($numberOfSeenAttendees >= $currentSeminar['attendees_max']) ? 1 : 0;
+	
+					$result .= '<p>Hat genug Teilis: '.$hasEnoughAttendees.'</p>';
+					$result .= '<p>Ist voll: '.$isFull.'</p>';
+	
+					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+						$tableSeminars,
+						'uid='.intval($currentSeminar['uid']),
+						array(
+							'attendees' => $numberOfSeenAttendees,
+							'enough_attendees' => $hasEnoughAttendees,
+							'is_full' => $isFull,
+						)
+					);
+				}
+			}
 		}
 
 		$result .= '<h3>Titel der Anmeldungen werden aktualisiert</h3>';
-		$attendances = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$dbResultAttendances = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
 			$tableAttendances,
 			'1'.t3lib_pageSelect::enableFields($tableAttendances),
 			'',
 			'',
-			'' );
-
-		while ($currentAttendance = mysql_fetch_assoc($attendances)) {
-			$attendeeName = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'name',
-				$tableUsers,
-				'uid='.$GLOBALS['TYPO3_DB']->quoteStr($currentAttendance['user'], $tableUsers)
-					.t3lib_pageSelect::enableFields($tableUsers),
-				'',
-				'',
-				''));
-			$seminarData = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, begin_date',
-				$tableSeminars,
-				'uid='.$GLOBALS['TYPO3_DB']->quoteStr($currentAttendance['seminar'], $tableSeminars)
-					.t3lib_pageSelect::enableFields($tableSeminars),
-				'',
-				'',
-				''));
-			$newTitle = $attendeeName['name'].' / '.$seminarData['title'].' '.strftime('%d.%m.%Y', $seminarData['begin_date']);
-			$result .= '<p>'.$newTitle.'</p>';
-			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-				$tableAttendances,
-				'uid='.$GLOBALS['TYPO3_DB']->quoteStr($currentAttendance['uid'], $tableAttendances),
-				array('title' => $GLOBALS['TYPO3_DB']->quoteStr($newTitle, $tableAttendances))
-			);
+			''
+		);
+		if ($dbResultAttendances) {
+			while ($currentAttendance = mysql_fetch_assoc($dbResultAttendances)) {
+				$dbResultAttendee = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'name',
+					$tableUsers,
+					'uid='.intval($currentAttendance['user'])
+						.t3lib_pageSelect::enableFields($tableUsers),
+					'',
+					'',
+					''
+				);
+				$dbResultSeminar = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'title, begin_date',
+					$tableSeminars,
+					'uid='.intval($currentAttendance['seminar'])
+						.t3lib_pageSelect::enableFields($tableSeminars),
+					'',
+					'',
+					''
+				);
+				
+				if ($dbResultAttendee && $dbResultSeminar) {
+					$attendeeName = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendee);
+					$seminarData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultSeminar);
+					$newTitle = $attendeeName['name'].' / '.$seminarData['title'].' '.strftime('%d.%m.%Y', $seminarData['begin_date']);
+					$result .= '<p>'.$newTitle.'</p>';
+					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+						$tableAttendances,
+						'uid='.intval($currentAttendance['uid']),
+						array('title' => $GLOBALS['TYPO3_DB']->quoteStr($newTitle, $tableAttendances))
+					);
+				}
+			}
 		}
 		return $result;
 	}

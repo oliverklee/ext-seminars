@@ -88,9 +88,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * 
 	 * This method may be called statically.
 	 * 
-	 * @param	String		String with a UID
+	 * @param	String		String with a UID (need not necessarily be escaped, will be intval'ed)
 	 * 
-	 * @return	boolean		true if a non-deleted seminar with that UID exists; false otherwise.
+	 * @return	boolean		true if a visible seminar with that UID exists; false otherwise.
 	 * 
 	 * @access public
 	 */
@@ -140,7 +140,6 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 	} else {
 	 		$result = null;
 	 	}
-	 	
 
 		return $result;
 	 }
@@ -206,7 +205,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 					.t3lib_pageSelect::enableFields($this->tableOrganizers),
 				'',
 				'',
-				'' );
+				''
+			);
 
 			if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
 				$result = true;
@@ -411,7 +411,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access private
 	 */
 	function getSeminarsPropertyString($key) {
-		$result = ($this->seminarData && isset($this->seminarData[$key])) ? $this->seminarData[$key] : '';
+		$result = ($this->seminarData && isset($this->seminarData[$key]))
+			? trim($this->seminarData[$key]) : '';
 		
 		return $result;
 	}
@@ -443,6 +444,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access public
 	 */
 	function isUserRegistered($feuserUid) {
+		$result = false;
+	
 	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$this->tableAttendances,
@@ -451,9 +454,12 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			'',
 			'',
 			'');
-		$numberOfRegistrations = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		if ($dbResult) {
+			$numberOfRegistrations = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$result = ($numberOfRegistrations['num'] > 0);
+		}
 		
-		return ($numberOfRegistrations['num'] > 0);
+		return $result;
 	}
 	
 	/**
@@ -523,49 +529,57 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *   whether there are enough registrations for this seminar to take place,
 	 *   and whether this seminar even is full.
 	 *
+	 * @return	boolean		true if everything went ok, false otherwise
+	 *
 	 * @access public
 	 */
 	function updateStatistics() {
-		$numberOfAttendees = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$result = false;
+	
+		$dbResultAttendees = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$this->tableAttendances,
 			'seminar='.$this->getUid()
-			.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.t3lib_pageSelect::enableFields($this->tableAttendances),
 			'',
 			'',
 			''
-		));
-
-		$numberOfAttendeesPaid = mysql_fetch_assoc($GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		);
+		$dbResultAttendeesPaid = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$this->tableAttendances,
 			'seminar='.$this->getUid().' AND paid=1'
-			.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.t3lib_pageSelect::enableFields($this->tableAttendances),
 			'',
 			'',
 			''
-		));
-		
-		// We count paid and unpaid registrations.
-		// This behaviour will be configurable in a later version.
-		$numberOfSeenAttendees = $numberOfAttendees['num'];
-
-		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-		$hasEnoughAttendees = ($numberOfSeenAttendees >= $this->seminarData['attendees_min']) ? 1 : 0;
-		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-		$isFull = ($numberOfSeenAttendees >= $this->seminarData['attendees_max']) ? 1 : 0;
-
-		$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-			$this->tableSeminars,
-			'uid='.$this->getUid(),
-			array(
-				'attendees' => $numberOfSeenAttendees,
-				'enough_attendees' => $hasEnoughAttendees,
-				'is_full' => $isFull
-			)
 		);
 		
-		return;
+		if ($dbResultAttendees && $dbResultAttendeesPaid) {
+			$numberOfAttendees = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendees);
+			$numberOfAttendeesPaid = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendeesPaid);
+			
+			// We count paid and unpaid registrations.
+			// This behaviour will be configurable in a later version.
+			$numberOfSeenAttendees = $numberOfAttendees['num'];
+	
+			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
+			$hasEnoughAttendees = ($numberOfSeenAttendees >= $this->seminarData['attendees_min']) ? 1 : 0;
+			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
+			$isFull = ($numberOfSeenAttendees >= $this->seminarData['attendees_max']) ? 1 : 0;
+	
+			$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+				$this->tableSeminars,
+				'uid='.$this->getUid(),
+				array(
+					'attendees' => $numberOfSeenAttendees,
+					'enough_attendees' => $hasEnoughAttendees,
+					'is_full' => $isFull
+				)
+			);
+		}
+		
+		return $result;
 	}
 }
 

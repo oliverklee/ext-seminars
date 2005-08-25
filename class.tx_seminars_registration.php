@@ -260,8 +260,9 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 */
 	function commitToDb() {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_INSERTquery($this->tableAttendances, $this->recordData);
-		
-		$this->isInDb = true;
+		if ($dbResult) {
+			$this->isInDb = true;
+		}
 		
 		return $dbResult;
 	}
