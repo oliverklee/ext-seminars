@@ -37,6 +37,9 @@ Version 0.3.2 (mid-August 2005)
 
 Version 0.4.0 (end-August 2005)
 ---------------------------------
+- clean up HTML in case of two or more seminar sites [Oli]
+- clean up HTML in case of two or more speakers [Oli]
+- clean up HTML in case of two or more organizers [Oli]
 - clean up richtext options in tca.php [Oli]
 - move getConfValue from templateHelper to dbPlugin [Oli]
 - remove unneeded localization strings [Oli]
