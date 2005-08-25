@@ -35,8 +35,8 @@ $LANG->includeLLFile('EXT:seminars/mod1/locallang.php');
 #include ('locallang.php');
 require_once (PATH_t3lib.'class.t3lib_scbase.php');
 require_once (PATH_t3lib.'class.t3lib_page.php');
-$BE_USER->modAccess($MCONF, 1);	// This checks permissions and exits if the users has no permission for entry.
-
+// This checks permissions and exits if the users has no permission for entry.
+$BE_USER->modAccess($MCONF, 1);
 class tx_seminars_module1 extends t3lib_SCbase {
 	var $pageinfo;
 
