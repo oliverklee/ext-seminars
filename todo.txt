@@ -192,3 +192,4 @@ Not triaged yet
 - add "target group" record type, add this as a field to the seminar type [?]
 - feature: configure sort order of seminar list [?]
 - feature: show seminars from a configurable time window in the seminar list [?]
+- add a field "destination group" (Zielgruppe) to the seminar record [?]
