@@ -46,8 +46,6 @@ Version 0.3.2 (mid-August 2005)
 
 Version 0.4.0 (end-August 2005)
 ---------------------------------
-- cache speaker data [Oli]
-- cache site data [Oli]
 - make link targets configurable [Oli]
 - slim down the URL paramenters for links to the detailed view [Oli]
 - clean up richtext options in tca.php [Oli]
@@ -78,7 +76,10 @@ Version 0.4.0 (end-August 2005)
 
 Version 0.5.0 (September 2005)
 ------------------------------
-- in the seminar class, make the organizer cache and the seminar site cache singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/> [Oli]
+- cache speaker data [Oli]
+- cache site data [Oli]
+- cache payment methods [Oli]
+- in the seminar class, make the organizer, speaker, site, and payment methods caches singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/> [Oli]
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account) [?]
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
 - for organizers, add field telling in which page new registration records should be stored, overriding the global setting [Oli]
