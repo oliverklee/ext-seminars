@@ -128,12 +128,13 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks whether it the logged in user can register for a given seminar.
+	 * Checks whether it is possible to register for a given seminar at all
+	 * and the logged in user can register for it.
+	 *
+	 * Before calling this method, make sure that a user is logged in.
 	 * 
 	 * This method may only be called when a seminar object (with a valid UID) exists.
 	 * 
-	 * XXX Currently, this method is not used. Check whether we'll need it or else remove it
-	 *  
 	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)
 	 *
 	 * @return	boolean		true if it is possible to register, false otherwise
@@ -145,8 +146,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks whether it the logged in user can register for a given seminar.
+	 * Checks whether it is possible to register for a given seminar at all
+	 * and the logged in user can register for it.
 	 * 
+	 * Before calling this method, make sure that a user is logged in.
+	 *
 	 * This method may only be called when a seminar object (with a valid UID) exists.
 	 *  
 	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)

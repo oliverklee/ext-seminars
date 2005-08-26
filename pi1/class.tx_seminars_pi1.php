@@ -39,9 +39,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
-	/** Cache the organizers data for the list view */
-	var $organizersCache = array();
-	
 	/** The seminar for which the user wants to register. */
 	var $seminar;
 	
@@ -71,6 +68,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValue('cssFile').'";</style>';
 		}
 
+		/** Name of the registrationManager class in case someone subclasses it. */
+		$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
+		$this->registrationManager =& new $registrationManagerClassname();
+		
 		$result = '';
 		
 		switch ($this->getConfValue('what_to_display')) {
@@ -82,26 +83,39 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 			case 'seminar_list':
 			default:
-				switch ((string) $conf['CMD']) {
-					case 'singleView':
-						list($t) = explode(':', $this->cObj->currentRecord);
-						$this->internal['currentTable'] = $t;
-						$this->internal['currentRow'] = $this->cObj->data;
-						$result = $this->singleView();
-						break;
-					default:
-						// We default to the list view.
-						if (strstr($this->cObj->currentRecord, 'tt_content')) {
-							$this->conf['pidList'] = $this->getConfValue('pages');
-							$this->conf['recursive'] = $this->getConfValue('recursive');
-						}
-						$result = $this->listView();
-						break;
-				}
+				$result = $this->createSeminarList();
 				break;
 		}
 		
 		return $this->pi_wrapInBaseClass($result);
+	}
+
+	/**
+	 * Creates the seminar list HTML (either the list view or the single view).
+	 *
+	 * @return	String		HTML code (shouldn't be empty)
+	 *
+	 * @access private
+	 */
+	function createSeminarList() {
+		switch ((string) $this->getConfValue('CMD')) {
+			case 'singleView':
+				list($t) = explode(':', $this->cObj->currentRecord);
+				$this->internal['currentTable'] = $t;
+				$this->internal['currentRow'] = $this->cObj->data;
+				$result = $this->singleView();
+				break;
+			default:
+				// We default to the list view.
+				if (strstr($this->cObj->currentRecord, 'tt_content')) {
+					$this->conf['pidList'] = $this->getConfValue('pages');
+					$this->conf['recursive'] = $this->getConfValue('recursive');
+				}
+				$result = $this->listView();
+				break;
+		}
+		
+		return $result;
 	}
 
 	/**
@@ -112,20 +126,22 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function listView() {
-		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
-		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
-
-		// Local settings for the listView function
-		$lConf = $this->conf['listView.'];
-
+		$result = '';
+		
 		if ($this->piVars['showUid']) {
 			// If a single element should be displayed:
-			// XXX Do we need this code?
+			// XXX Move this code up. CMD seems to be not used.
 			$this->internal['currentTable'] = $this->tableSeminars;
 			$this->internal['currentRow'] = $this->pi_getRecord($this->tableSeminars, $this->piVars['showUid']);
 
-			return $this->singleView();
+			$result = $this->singleView();
 		} else {
+			$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
+			$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
+
+			// Local settings for the listView function
+			$lConf = $this->conf['listView.'];
+	
 			if (!isset($this->piVars['pointer'])) {
 				$this->piVars['pointer'] = 0;
 			}
@@ -166,8 +182,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$fullTable .= $this->pi_list_browseresults();
 
 			// Returns the content from the plugin.
-			return $fullTable;
+			$result = $fullTable;
 		}
+		
+		return $result;
 	}
 
 	/**
@@ -181,59 +199,63 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function singleView() {
 		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 		
+		/** Name of the seminar class in case someone subclasses it. */
+		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+		$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
+		
+		
 		// This sets the title of the page for use in indexed search results:
-		if ($this->internal['currentRow']['title']) {
-			$GLOBALS['TSFE']->indexedDocTitle = $this->internal['currentRow']['title'];
-		}
+		$GLOBALS['TSFE']->indexedDocTitle = $currentSeminar->getTitle();
 
-		$this->setMarkerContent('TYPE', $this->getConfValue('eventType'));
-		$this->setMarkerContent('TITLE', $this->getFieldContent('title'));
+		$this->setMarkerContent('type', $currentSeminar->getType());
+		$this->setMarkerContent('title', $currentSeminar->getTitle());
 
-		$this->setMarkerContent('SUBTITLE', $this->getFieldContent('subtitle'));
-		if (empty($this->markers['###SUBTITLE###'])) {
+		if ($currentSeminar->hasSubtitle()) {
+			$this->setMarkerContent('subtitle', $currentSeminar->getSubtitle());
+		} else {
 			$this->readSubpartsToHide('subtitle', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('DESCRIPTION', $this->getFieldContent('description'));
-		if (empty($this->markers['###DESCRIPTION###'])) {
+		if ($currentSeminar->hasDescription()) {
+			$this->setMarkerContent('description', $currentSeminar->getDescription($this));
+		} else {
 			$this->readSubpartsToHide('description', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('DATE', $this->getFieldContent('date'));
-		$this->setMarkerContent('TIME', $this->getFieldContent('time'));
-		$this->setMarkerContent('PLACE', $this->pi_RTEcssText($this->getFieldContent('place')));
+		$this->setMarkerContent('date', $currentSeminar->getDate('&#8211;'));
+		$this->setMarkerContent('time', $currentSeminar->getTime('&#8211;'));
+		$this->setMarkerContent('place', $currentSeminar->getPlace($this));
 
-		$this->setMarkerContent('ROOM', $this->getFieldContent('room'));
-		if (empty($this->markers['###ROOM###'])) {
+		if ($currentSeminar->hasRoom()) {
+			$this->setMarkerContent('room', $currentSeminar->getRoom());
+		} else {
 			$this->readSubpartsToHide('room', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('SPEAKERS', $this->getFieldContent('speakers'));
-		if (!empty($this->markers['###SPEAKERS###'])) {
-			$this->setMarkerContent('SPEAKERS', $this->pi_RTEcssText($this->markers['###SPEAKERS###']));
+		if ($currentSeminar->hasSpeakers()) {
+			$this->setMarkerContent('speakers', $currentSeminar->getSpeakers($this));
 		} else {
 			$this->readSubpartsToHide('speakers', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('PRICE', $this->getFieldContent('price_regular'));
+		$this->setMarkerContent('price', $currentSeminar->getPrice($this));
 
-		if ($this->internal['currentRow']['payment_methods'] !== '') {
-			$this->setMarkerContent('PAYMENTMETHODS', $this->getFieldContent('payment_methods'));
+		if ($currentSeminar->hasPaymentMethods()) {
+			$this->setMarkerContent('paymentmethods', $currentSeminar->getPaymentMethods($this));
 		} else {
 			$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('ORGANIZERS', $this->getFieldContent('organizers'));
+		$this->setMarkerContent('organizers', $currentSeminar->getOrganizers($this));
 
-		if ($this->internal['currentRow']['needs_registration']) {
-			$this->setMarkerContent('VACANCIES', $this->getFieldContent('vacancies'));
+		if ($currentSeminar->needsRegistration()) {
+			$this->setMarkerContent('vacancies', $currentSeminar->getVacancies());
 		} else {
 			$this->readSubpartsToHide('vacancies', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('REGISTRATION', $this->getFieldContent('registration'));
-
-		$this->setMarkerContent('BACKLINK', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
+		$this->setMarkerContent('registration', $currentSeminar->getRegistrationLink($this));
+		$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
 
 		return $this->substituteMarkerArrayCached('SINGLE_VIEW');
 	}
@@ -247,17 +269,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_header() {
-		$this->setMarkerContent('HEADER_TITLE',      $this->getFieldHeader_sortLink('title'));
-		$this->setMarkerContent('HEADER_DATE',       $this->getFieldHeader_sortLink('date'));
-		$this->setMarkerContent('HEADER_PRICE',      $this->getFieldHeader_sortLink('price_regular'));
-		$this->setMarkerContent('HEADER_ORGANIZERS', $this->getFieldHeader_sortLink('organizers'));
-		$this->setMarkerContent('HEADER_VACANCIES',  $this->getFieldHeader('vacancies'));
+		$this->setMarkerContent('header_title',      $this->getFieldHeader_sortLink('title'));
+		$this->setMarkerContent('header_date',       $this->getFieldHeader_sortLink('date'));
+		$this->setMarkerContent('header_price',      $this->getFieldHeader_sortLink('price_regular'));
+		$this->setMarkerContent('header_organizers', $this->getFieldHeader_sortLink('organizers'));
+		$this->setMarkerContent('header_vacancies',  $this->getFieldHeader('vacancies'));
 
 		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
 
 	/**
-	 * Returns a list row as a TR. Get data from $this->internal['currentRow'];
+	 * Returns a list row as a TR. Gets data from $this->internal['currentRow'];
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @param	integer		Row counting. Starts at 0 (zero). Used for alternating class values in the output rows.
@@ -267,247 +289,22 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_row($c) {
-		$this->setMarkerContent('CLASS_ITEMROW',    ($c % 2) ? 'class="listrow-odd"' : '');
+		/** Name of the seminar class in case someone subclasses it. */
+		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+		$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
 		
-		$this->setMarkerContent('TITLE_LINK',       $this->getFieldContent('title'));
-		$this->setMarkerContent('DATE',             $this->getFieldContent('date'));
-		$this->setMarkerContent('PRICE',            $this->getFieldContent('price_regular'));
-		$this->setMarkerContent('ORGANIZERS',       $this->getFieldContent('organizers'));
-		$this->setMarkerContent('VACANCIES',        $this->getFieldContent('vacancies'));
-		$this->setMarkerContent('CLASS_LISTVACANCIES',  $this->getVacanciesClasses());
+		$this->setMarkerContent('class_itemrow',    ($c % 2) ? 'class="listrow-odd"' : '');
+		
+		$this->setMarkerContent('title_link',       $currentSeminar->getLinkedTitle($this));
+		$this->setMarkerContent('date',             $currentSeminar->getDate('&#8211;'));
+		$this->setMarkerContent('price',            $currentSeminar->getPrice());
+		$this->setMarkerContent('organizers',       $currentSeminar->getOrganizers($this));
+		$this->setMarkerContent('vacancies',        $currentSeminar->needsRegistration() ? $currentSeminar->getVacancies() : '');
+		$this->setMarkerContent('class_listvacancies',  $this->getVacanciesClasses($currentSeminar));
 
 		return $this->substituteMarkerArrayCached('LIST_ITEM'); 
 	}
 	
-	/**
-	 * Gets the content for a field (e.g. seminar description).
-	 *
-	 * @param	String		key of the field for which the content should be retrieved
-	 * 
-	 * @return	String		the field content (may be empty)
-	 * 
-	 * @access protected
-	 */
-	function getFieldContent($fN) {
-		switch($fN) {
-			case 'title':
-				// This will wrap the title in a link.
-				// The '1' means that the display of single items is CACHED! Set to zero to disable caching.
-				return $this->pi_list_linkSingle($this->internal['currentRow']['title'], $this->internal['currentRow']['uid'], 0);
-			break;
-			case 'description':
-				return $this->pi_RTEcssText($this->internal['currentRow']['description']);
-			break;
-			case 'date':
-				$beginDate = $this->internal['currentRow']['begin_date'];
-				$beginDateDay = strftime('%d.%m.%Y', $beginDate);
-				$endDate = $this->internal['currentRow']['end_date'];
-				$endDateDay = strftime('%d.%m.%Y', $endDate);
-
-				if (!empty($beginDate)) {
-					// Does the workshop span several days?
-					if (!empty($endDate) && $beginDateDay !== $endDateDay) {
-						$result = '&#8211;'.$endDateDay;
-						// Are the years different? Then include the complete begin date.
-						if (strftime('%Y', $beginDate) !== strftime('%Y', $endDate)) {
-							$result = $beginDateDay.$result;
-						} else {
-							// Are the months different? Then include day and month.
-							if (strftime('%m', $beginDate) !== strftime('%m', $endDate)) {
-								$result = strftime('%d.%m.', $beginDate).$result;
-							} else {
-								$result = strftime('%d.', $beginDate).$result;
-							}
-						}
-
-					} else {
-						$result = $beginDateDay;
-					}
-				} else {
-					$result = '<em>'.$this->pi_getLL('message_willBeAnnounced').'</em>';
-				}
-				return $result;
-			break;
-				case 'time':
-				$beginDate = $this->internal['currentRow']['begin_date'];
-				$beginDateTime = strftime('%H:%M', $beginDate);
-				$endDate = $this->internal['currentRow']['end_date'];
-				$endDateTime = strftime('%H:%M', $endDate);
-
-				if (!empty($beginDate)) {
-					$result = $beginDateTime.'&#8211;'.$endDateTime;
-				} else {
-					$result = '<em>'.$this->pi_getLL('message_willBeAnnounced').'</em>';
-				}
-				return $result;
-			break;
-			case 'begin_date':
-				$date = $this->internal['currentRow']['begin_date'];
-				return (!empty($date)) ? strftime('%d-%m-%Y %H:%M', $date) :
-					'&nbsp;';
-			break;
-			case 'end_date':
-				$date = $this->internal['currentRow']['end_date'];
-				return (!empty($date)) ? strftime('%d-%m-%Y %H:%M', $date) :
-					'&nbsp;';
-			break;
-			case 'price_regular':
-				return $this->internal['currentRow']['price_regular'].'&nbsp;EUR';
-			break;
-			case 'payment_methods':
-				$result = '';
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'payment_methods',
-					$this->tableSeminars,
-					'uid='.$this->internal['currentRow']['uid']
-						.$this->cObj->enableFields($this->tableSeminars),
-					'',
-					'',
-					''
-				);
-
-				if ($res) {
-					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-					$paymentMethodsUids = explode(',', $row['payment_methods']);
-					foreach ($paymentMethodsUids as $currentPaymentMethod) {
-						$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-							'title',
-							$this->tablePaymentMethods,
-							'uid='.intval($currentPaymentMethod)
-								.$this->cObj->enableFields($this->tablePaymentMethods),
-							'',
-							'',
-							''
-						);
-						
-						// we expect just one result	
-						if ($res2 && $GLOBALS['TYPO3_DB']->sql_num_rows ($res2)) {
-							$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res2);
-							$this->setMarkerContent('PAYMENTMETHOD_TITLE', htmlspecialchars($row['title']));
-							$result .= $this->substituteMarkerArrayCached('PAYMENTMETHOD_SHORT');
-						}
-					}
-				} else {
-					$result = '';
-				}
-				return $result;
-			break;
-			case 'organizers':
-				if (!count($this->organizersCache)) {
-					$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-						'*',
-						$this->tableOrganizers,
-						'',
-						'',
-						'',
-						''
-					);
-					if ($res) {
-						while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-							$this->organizersCache[$row['uid']] = $row;
-						}
-					}
-				}
-				$result = '';
-				$organizers = explode(',', $this->internal['currentRow']['organizers']);
-				foreach($organizers as $currentOrganizer) {
-					if (!empty($result)) {
-						$result .= ', ';
-					}
-					$result .= '<a href="'.$this->organizersCache[$currentOrganizer]['homepage'].'">'. htmlspecialchars($this->organizersCache[$currentOrganizer]['title']).'</a>';
-				}
-				return $result;
-			break;
-			case 'speakers':
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'title, organization, homepage, description',
-					$this->tableSpeakers.', '.$this->tableSpeakersMM,
-					'uid_local='.intval($this->internal['currentRow']['uid']).' AND uid=uid_foreign'
-						.$this->cObj->enableFields($this->tableSpeakers),
-					'',
-					'',
-					''
-				);
-
-				$result = '';
-				if ($res) {
-					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-						$name = htmlspecialchars($row['title']);
-						if (!empty($row['organization'])) {
-							$name .= ', '.htmlspecialchars($row['organization']);
-						}
-						if (!empty($row['homepage'])) {
-							$name = '<a href="'.$row['homepage'].'">'.$name.'</a>';
-						}
-						$result .= $name.chr(10);
-						if (!empty($row['description'])) {
-						$result .= $this->pi_RTEcssText($row['description']);
-						}
-					}
-				}
-				return $result;
-			break;
-			case 'place':
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'title, address, homepage, directions',
-					$this->tableSites.', '.$this->tableSitesMM,
-					'uid_local='.intval($this->internal['currentRow']['uid']).' AND uid=uid_foreign',
-					'',
-					'',
-					''
-				);
-
-				$result = '';
-				if ($res) {
-					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-						$name = htmlspecialchars($row['title']);
-						if (!empty($row['homepage'])) {
-							$name = '<a href="'.$row['homepage'].'">'.$name.'</a>';
-						}
-						$result .= $name;
-						if (!empty($row['address'])) {
-							$result .= '<br />'.$row['address'];
-						}
-						if (!empty($row['directions'])) {
-							$result .= $this->pi_RTEcssText($row['address']);
-						}
-					}
-				}
-				return $result;
-			break;
-			case 'registration':
-				$result = '';
-				if ($this->internal['currentRow']['needs_registration']) {
-					if ($this->internal['currentRow']['is_full']) {
-						$result = $this->pi_getLL('message_noVacancies');
-					} else {
-						$organizers = explode(',', $this->internal['currentRow']['organizers']);
-						foreach($organizers as $currentOrganizer) {
-							$result = $this->pi_linkTP($this->pi_getLL('label_onlineRegistration'), array('tx_seminars_pi1[seminar]' => $this->internal['currentRow']['uid']), 0, $this->getConfValue('registerPID'));
-						}
-					}
-				} else {
-					$result = $this->pi_getLL('message_noRegistrationNecessary');
-				}
-				return $result;
-			break;
-			case 'vacancies':
-				if ($this->internal['currentRow']['needs_registration']) {
-					if ($this->internal['currentRow']['is_full']) {
-						$result = 0;
-					} else {
-						$result = $this->internal['currentRow']['attendees_max'] - $this->internal['currentRow']['attendees'];
-					}
-				} else {
-					$result = '&nbsp;';
-				}
-				return $result;
-			break;
-			default:
-				return $this->internal['currentRow'][$fN];
-			break;
-		}
-	}
 	/**
 	 * Gets the heading for a field type. 
 	 *
@@ -518,14 +315,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function getFieldHeader($fN) {
+		$result = '';
+	
 		switch($fN) {
-			case 'title':
-			return $this->pi_getLL('label_title', '<em>title</em>');
+		case 'title':
+			$result = $this->pi_getLL('label_title', '<em>title</em>');
 			break;
-			default:
-			return $this->pi_getLL('label_'.$fN, '['.$fN.']');
+		default:
+			$result = $this->pi_getLL('label_'.$fN, '['.$fN.']');
 			break;
 		}
+		
+		return $result;
 	}
 
 	/**
@@ -541,30 +342,32 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$sortField = $fN;
 		switch($fN) {
 			case 'date':
-			$sortField = 'begin_date';
-			break;
+				$sortField = 'begin_date';
+				break;
 			default:
-			break;
+				break;
 		}
-		return $this->pi_linkTP_keepPIvars($this->getFieldHeader($fN), array('sort' => $sortField.':'.($this->internal['descFlag']?0:1)));
+		return $this->pi_linkTP_keepPIvars($this->getFieldHeader($fN), array('sort' => $sortField.':'.($this->internal['descFlag'] ? 0 : 1)));
 	}
 
 	/**
 	 * Gets the CSS classes (space-separated) for the Vacancies TD.
 	 *
+	 * @param	object		the current Seminar object
+	 *
 	 * @return	String		a list a space-separated CSS classes (without any quotes and without the class attribute itself)
 	 * 
 	 * @access protected
 	 */
-	function getVacanciesClasses() {
+	function getVacanciesClasses(&$seminar) {
 		$result = $this->pi_getClassName('vacancies');
 
-		if ($this->internal['currentRow']['needs_registration']) {
-			if ($this->internal['currentRow']['is_full']) {
-				$result .= ' '.$this->pi_getClassName('vacancies-0');
+		if ($seminar->needsRegistration()) {
+			if ($seminar->hasVacancies()) {
+				$result .= ' '.$this->pi_getClassName('vacancies-available').' '
+					.$this->pi_getClassName('vacancies-'.$seminar->getVacancies());
 			} else {
-				$result .= ' '.$this->pi_getClassName('vacancies-available').' '.$this->pi_getClassName('vacancies-')
-					.($this->internal['currentRow']['attendees_max'] - $this->internal['currentRow']['attendees']);
+				$result .= ' '.$this->pi_getClassName('vacancies-0');
 			}
 		}
 
@@ -580,10 +383,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
-		
-		/** Name of the registrationManager class in case someone subclasses it. */
-		$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
-		$this->registrationManager =& new $registrationManagerClassname();
 		
 		if (!$this->registrationManager->canGenerallyRegister($this->piVars['seminar'])) {
 			$errorMessage = $this->registrationManager->canGenerallyRegisterMessage($this->piVars['seminar']);
@@ -614,13 +413,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function createRegistrationHeading($errorMessage) {
-		$this->setMarkerContent('REGISTRATION', $this->pi_getLL('label_registration'));
-		$this->setMarkerContent('TITLE',        ($this->seminar) ? $this->seminar->getTitleAndDate('&#8211;') : '');
+		$this->setMarkerContent('registration', $this->pi_getLL('label_registration'));
+		$this->setMarkerContent('title',        ($this->seminar) ? $this->seminar->getTitleAndDate('&#8211;') : '');
 
 		if (empty($errorMessage)) {
 			$this->readSubpartsToHide('error', 'wrapper');
 		} else {
-			$this->setMarkerContent('ERROR_TEXT', $errorMessage);
+			$this->setMarkerContent('error_text', $errorMessage);
 		}
 		
 		return $this->substituteMarkerArrayCached('REGISTRATION_HEAD');
@@ -651,8 +450,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Destroy session data for our submitted form:
 			$formObj->destroySessionData();
 		} else {
-			$this->setMarkerContent('PRICE', $this->seminar->getPrice());
-			$this->setMarkerContent('VACANCIES', $this->seminar->getVacancies());
+			$this->setMarkerContent('price', $this->seminar->getPrice());
+			$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
 			$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
 			// Form has not yet been submitted, so render the form:
 			$output .= $formObj->renderWholeForm();

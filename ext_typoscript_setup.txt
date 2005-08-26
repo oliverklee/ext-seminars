@@ -47,8 +47,6 @@ plugin.tx_seminars_pi1 {
 	hideFields =
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
 	showRegistrationFields = interests,expectations,background_knowledge,known_from,notes
-	# this should go away once all seminar properties have moved to the seminar class
-	eventType = Workshop
 }
 
 plugin.tx_srfeuserregister_pi1 {
