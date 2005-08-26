@@ -111,6 +111,7 @@ Version 0.5.0 (September 2005)
 - display payment methods on seminar details page [?]
 - Slim down back end UI (don't display unneded fields, e.g. unneeded payment methods) [Oli]
 - make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
+- add a localized "h" after the time [Oli]
 
 Version 0.6.0 (October 2005)
 ----------------------------
