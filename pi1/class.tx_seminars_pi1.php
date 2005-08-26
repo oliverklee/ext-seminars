@@ -41,18 +41,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/** The seminar for which the user wants to register. */
 	var $seminar;
-	
+
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager;
-	
+
 	/**
 	 * Displays the seminar manager HTML.
 	 *
 	 * @param	string		Default content string, ignore
 	 * @param	array		TypoScript configuration for the plugin
-	 * 
+	 *
 	 * @return	string		HTML for the plugin
-	 * 
+	 *
 	 * @access public
 	 */
 	function main($content, $conf) {
@@ -71,12 +71,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		/** Name of the registrationManager class in case someone subclasses it. */
 		$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
 		$this->registrationManager =& new $registrationManagerClassname();
-		
+
 		$result = '';
-		
+
 		switch ($this->getConfValue('what_to_display')) {
 			case 'seminar_registration':
-				$result = $this->createRegistrationPage(); 
+				$result = $this->createRegistrationPage();
 				break;
 			case 'my_seminars':
 				trigger_error('"My Seminars" is not implemented yet.');
@@ -86,7 +86,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result = $this->createSeminarList();
 				break;
 		}
-		
+
 		return $this->pi_wrapInBaseClass($result);
 	}
 
@@ -114,7 +114,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result = $this->listView();
 				break;
 		}
-		
+
 		return $result;
 	}
 
@@ -122,12 +122,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Displays a list of upcoming seminars.
 	 *
 	 * @return	string		HTML for the plugin
-	 * 
+	 *
 	 * @access protected
 	 */
 	function listView() {
 		$result = '';
-		
+
 		if ($this->piVars['showUid']) {
 			// If a single element should be displayed:
 			// XXX Move this code up. CMD seems to be not used.
@@ -141,7 +141,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Local settings for the listView function
 			$lConf = $this->conf['listView.'];
-	
+
 			if (!isset($this->piVars['pointer'])) {
 				$this->piVars['pointer'] = 0;
 			}
@@ -184,7 +184,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Returns the content from the plugin.
 			$result = $fullTable;
 		}
-		
+
 		return $result;
 	}
 
@@ -193,17 +193,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Fields listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML for the plugin
-	 * 
+	 *
 	 * @access protected
 	 */
 	function singleView() {
 		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD_WRAPPER');
-		
+
 		/** Name of the seminar class in case someone subclasses it. */
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
-		
-		
+
+
 		// This sets the title of the page for use in indexed search results:
 		$GLOBALS['TSFE']->indexedDocTitle = $currentSeminar->getTitle();
 
@@ -259,13 +259,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		return $this->substituteMarkerArrayCached('SINGLE_VIEW');
 	}
-	
+
 	/**
 	 * Returns a list header row as a TR.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML output, a table row
-	 * 
+	 *
 	 * @access protected
 	 */
 	function pi_list_header() {
@@ -283,18 +283,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @param	integer		Row counting. Starts at 0 (zero). Used for alternating class values in the output rows.
-	 * 
+	 *
 	 * @return	string		HTML output, a table row with a class attribute set (alternative based on odd/even rows)
-	 * 
+	 *
 	 * @access protected
 	 */
 	function pi_list_row($c) {
 		/** Name of the seminar class in case someone subclasses it. */
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
-		
+
 		$this->setMarkerContent('class_itemrow',    ($c % 2) ? 'class="listrow-odd"' : '');
-		
+
 		$this->setMarkerContent('title_link',       $currentSeminar->getLinkedTitle($this));
 		$this->setMarkerContent('date',             $currentSeminar->getDate('&#8211;'));
 		$this->setMarkerContent('price',            $currentSeminar->getPrice());
@@ -302,21 +302,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('vacancies',        $currentSeminar->needsRegistration() ? $currentSeminar->getVacancies() : '');
 		$this->setMarkerContent('class_listvacancies',  $this->getVacanciesClasses($currentSeminar));
 
-		return $this->substituteMarkerArrayCached('LIST_ITEM'); 
+		return $this->substituteMarkerArrayCached('LIST_ITEM');
 	}
-	
+
 	/**
-	 * Gets the heading for a field type. 
+	 * Gets the heading for a field type.
 	 *
 	 * @param	String		key of the field type for which the heading should be retrieved.
-	 * 
+	 *
 	 * @return	String		the heading
-	 * 
+	 *
 	 * @access protected
 	 */
 	function getFieldHeader($fN) {
 		$result = '';
-	
+
 		switch($fN) {
 		case 'title':
 			$result = $this->pi_getLL('label_title', '<em>title</em>');
@@ -325,7 +325,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$result = $this->pi_getLL('label_'.$fN, '['.$fN.']');
 			break;
 		}
-		
+
 		return $result;
 	}
 
@@ -333,9 +333,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Gets the heading for a field type, wrapped in a hyperlink that sorts by that column.
 	 *
 	 * @param	String		key of the field type for which the heading should be retrieved.
-	 * 
+	 *
 	 * @return	String		the heading completely wrapped in a hyperlink
-	 * 
+	 *
 	 * @access protected
 	 */
 	function getFieldHeader_sortLink($fN) {
@@ -356,7 +356,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @param	object		the current Seminar object
 	 *
 	 * @return	String		a list a space-separated CSS classes (without any quotes and without the class attribute itself)
-	 * 
+	 *
 	 * @access protected
 	 */
 	function getVacanciesClasses(&$seminar) {
@@ -373,43 +373,43 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		return 'class="'.$result.'"';
 	}
-	
+
 	/**
 	 * Creates the HTML for the registration page.
-	 * 
+	 *
 	 * @return	String		HTML code for the registration page
-	 * 
+	 *
 	 * @acces private
 	 */
 	function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
-		
+
 		if (!$this->registrationManager->canGenerallyRegister($this->piVars['seminar'])) {
 			$errorMessage = $this->registrationManager->canGenerallyRegisterMessage($this->piVars['seminar']);
 		} else {
 			/** Name of the seminar class in case someone subclasses it. */
 			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 			$this->seminar =& new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
-			
+
 			$errorMessage = $this->registrationManager->canUserRegisterForSeminarMessage($this->seminar);
 		}
 
 		$result = $this->createRegistrationHeading($errorMessage);
-		
+
 		if (empty($errorMessage)) {
 			$result .= $this->createRegistrationForm();
 		}
-		
-		return $result;		
+
+		return $result;
 	}
 
 	/**
 	 * Creates the registration page title and (if applicable) any error messages.
-	 * 
+	 *
 	 * @param	String	error message to be displayed (may be empty if there is no error)
-	 * 
+	 *
 	 * @return	String	HTML code including the title and error message
-	 * 
+	 *
 	 * @access protected
 	 */
 	function createRegistrationHeading($errorMessage) {
@@ -421,31 +421,31 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		} else {
 			$this->setMarkerContent('error_text', $errorMessage);
 		}
-		
+
 		return $this->substituteMarkerArrayCached('REGISTRATION_HEAD');
 	}
-	 
+
 	/**
 	 * Creates the registration form.
-	 * 
+	 *
 	 * @return	String		HTML code for the form
-	 * 
+	 *
 	 * @access protected
 	 */
 	function createRegistrationForm() {
 		// Create the frontend form object:
 		$className = t3lib_div::makeInstanceClassName('tx_frontendformslib');
 		$formObj = new $className($this);
-		
+
 		// Generate configuration for a single step displaying certain fields of tt_address:
 		$formObj->steps[1] = $formObj->createStepConf($this->getConfValue('showRegistrationFields'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
-		
+
 		$formObj->init();
-		
+
 		// Check if the form has been submitted:
 		if ($formObj->submitType == 'submit') {
 			$this->registrationManager->createRegistration($this->seminar, $formObj->sessionData['data'][$this->tableAttendances]);
-			
+
 			$output = $this->substituteMarkerArrayCached('REGISTRATION_THANKYOU');
 			// Destroy session data for our submitted form:
 			$formObj->destroySessionData();
@@ -456,7 +456,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Form has not yet been submitted, so render the form:
 			$output .= $formObj->renderWholeForm();
 		}
-		
+
 		return $output;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Language labels for database tables/fields belonging to extension 'seminars"
- * 
+ *
  * This file is detected by the translation tool.
  */
 
@@ -70,6 +70,7 @@ $LOCAL_LANG = Array (
 		'tx_seminars_organizers.title' => 'Name',
 		'tx_seminars_organizers.homepage' => 'Homepage',
 		'tx_seminars_organizers.email' => 'E-mail address',
+		'tx_seminars_organizers.email_footer' => 'Footer text for confirmation emails sent to participants',
 		'tx_seminars_payment_methods' => 'Methods of payment',
 		'tx_seminars_payment_methods.title' => 'Title',
 		'tx_seminars_payment_methods.description' => 'Detailed description (for automated emails):',
@@ -139,6 +140,7 @@ $LOCAL_LANG = Array (
 		'tx_seminars_organizers.title' => 'Name',
 		'tx_seminars_organizers.homepage' => 'Homepage',
 		'tx_seminars_organizers.email' => 'E-Mail-Adresse',
+		'tx_seminars_organizers.email_footer' => 'Text, der an Bestätigungsmails bei der Anmeldung angefügt wird',
 		'tx_seminars_payment_methods' => 'Zahlungsarten',
 		'tx_seminars_payment_methods.title' => 'Titel',
 		'tx_seminars_payment_methods.description' => 'Detaillierte Beschreibung (für automatische E-Mails):',

@@ -35,10 +35,10 @@ plugin.tx_seminars_pi1 {
 	class_listdate = date
 	class_listprice = price
 	class_listorganizers =
-	
+
 	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_square = square
-	
+
 	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_error = error
 

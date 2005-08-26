@@ -418,9 +418,9 @@ $TCA['tx_seminars_attendances'] = Array (
 	),
 	'feInterface' => $TCA['tx_seminars_attendances']['feInterface'],
 	'columns' => Array (
-		"title" => Array (		
-			"exclude" => 0,		
-			"label" => "LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.title",		
+		"title" => Array (
+			"exclude" => 0,
+			"label" => "LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.title",
 			"config" => Array (
 				"type" => "none",
 			)
@@ -621,7 +621,7 @@ $TCA['tx_seminars_sites'] = Array (
 $TCA['tx_seminars_organizers'] = Array (
 	'ctrl' => $TCA['tx_seminars_organizers']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'title,homepage,email'
+		'showRecordFieldList' => 'title,homepage,email,email_footer'
 	),
 	'feInterface' => $TCA['tx_seminars_organizers']['feInterface'],
 	'columns' => Array (
@@ -663,9 +663,18 @@ $TCA['tx_seminars_organizers'] = Array (
 				'size' => '30',
 			)
 		),
+		'email_footer' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers.email_footer',
+			'config' => Array (
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5',
+			)
+		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email')
+		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')

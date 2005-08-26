@@ -157,7 +157,7 @@ $TCA['tx_seminars_organizers'] = Array (
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_organizers.gif',
 	),
 	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, homepage, email',
+		'fe_admin_fieldList' => 'title, homepage, email, email_footer',
 	)
 );
 

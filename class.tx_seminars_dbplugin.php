@@ -24,10 +24,10 @@
 
 /**
  * Class 'tx_seminars_dbplugin' for the 'seminars' extension.
- * 
+ *
  * It defines the database table names, provides the configuration
- * and calles the base class init functions. 
- * 
+ * and calles the base class init functions.
+ *
  * This is an abstract class; don't instantiate it.
  *
  * @author	Oliver Klee <typo-coding@oliverklee.de>
@@ -39,7 +39,7 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	/** The extension key. */
 	var $extKey = 'seminars';
 
-	// Database table names. Will be initialized (indirectly) by $this->init. 
+	// Database table names. Will be initialized (indirectly) by $this->init.
 	var $tableSeminars;
 	var $tableSpeakers;
 	var $tableSpeakersMM;
@@ -51,7 +51,7 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 
 	/**
 	 * Dummy constructor: Does nothing.
-	 * 
+	 *
 	 * The base classe's constructor is called in $this->init().
 	 */
 	function tx_seminars_dbplugin() {
@@ -60,14 +60,14 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 	/**
 	 * Initializes the FE plugin stuff, read the configuration
 	 * and set the table names while we're at it.
-	 * 
+	 *
 	 * This is merely a convenience function.
-	 * 
+	 *
 	 * If the parameter is ommited, the configuration for plugin.tx_seminar is used instead.
-	 * 
+	 *
  	 * @param	array		TypoScript configuration for the plugin
-	 * 
-	 * @access protected 
+	 *
+	 * @access protected
 	 */
 	function init($conf = null) {
 		// call the base classe's constructor manually as this isn't done automatically
@@ -86,8 +86,8 @@ class tx_seminars_dbplugin extends tx_salutationswitcher {
 
 	/**
 	 * Sets the table names.
-	 * 
-	 * @access private 
+	 *
+	 * @access private
 	 */
 	function setTableNames() {
 		$dbPrefix = 'tx_'.$this->extKey.'_';

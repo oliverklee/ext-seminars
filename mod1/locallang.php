@@ -1,7 +1,7 @@
 <?php
 /**
  * Language labels for module 'web_txseminarsM1'
- * 
+ *
  * This file is detected by the translation tool.
  */
 

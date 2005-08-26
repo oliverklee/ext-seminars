@@ -182,7 +182,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$tableSeminars = 'tx_seminars_seminars';
 		$tableAttendances = 'tx_seminars_attendances';
 		$tableUsers = 'fe_users';
-		
+
 		$result = '';
 		$alsoNoticeUnpaidRegistrations = true;
 
@@ -198,7 +198,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		if ($seminars) {
 			while ($currentSeminar = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($seminars)) {
 				$result .= '<h4>'.htmlspecialchars($currentSeminar['title']).'</h4>';
-				
+
 				$dbResultAttendees = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'COUNT(*) AS num',
 					$tableAttendances,
@@ -220,18 +220,18 @@ class tx_seminars_module1 extends t3lib_SCbase {
 				if ($dbResultAttendees && $dbResultAttendeesPaid) {
 					$numberOfAttendees = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendees);
 					$numberOfAttendeesPaid = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendeesPaid);
-				
+
 					$result .= '<p>Anzahl Teilnehmer: '.$numberOfAttendees['num'].'</p>';
 					$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid['num'].'</p>';
-	
+
 					$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees['num'] : $numberOfAttendeesPaid['num'];
-	
+
 					$hasEnoughAttendees = ($numberOfSeenAttendees >= $currentSeminar['attendees_min']) ? 1 : 0;
 					$isFull = ($numberOfSeenAttendees >= $currentSeminar['attendees_max']) ? 1 : 0;
-	
+
 					$result .= '<p>Hat genug Teilis: '.$hasEnoughAttendees.'</p>';
 					$result .= '<p>Ist voll: '.$isFull.'</p>';
-	
+
 					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 						$tableSeminars,
 						'uid='.intval($currentSeminar['uid']),
@@ -274,7 +274,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 					'',
 					''
 				);
-				
+
 				if ($dbResultAttendee && $dbResultSeminar) {
 					$attendeeName = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendee);
 					$seminarData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultSeminar);

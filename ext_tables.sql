@@ -14,7 +14,7 @@ CREATE TABLE fe_users (
 
 #
 # Table structure for table 'tx_seminars_seminars_place_mm'
-# 
+#
 #
 CREATE TABLE tx_seminars_seminars_place_mm (
   uid_local int(11) unsigned DEFAULT '0' NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE tx_seminars_seminars_place_mm (
 
 #
 # Table structure for table 'tx_seminars_seminars_speakers_mm'
-# 
+#
 #
 CREATE TABLE tx_seminars_seminars_speakers_mm (
   uid_local int(11) unsigned DEFAULT '0' NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE tx_seminars_seminars (
 	enough_attendees tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	is_full tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	notes text NOT NULL,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
@@ -105,7 +105,7 @@ CREATE TABLE tx_seminars_speakers (
 	phone_mobile tinytext NOT NULL,
 	fax tinytext NOT NULL,
 	email tinytext NOT NULL,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
@@ -134,7 +134,7 @@ CREATE TABLE tx_seminars_attendances (
 	background_knowledge text NOT NULL,
 	known_from text NOT NULL,
 	notes text NOT NULL,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
@@ -156,7 +156,7 @@ CREATE TABLE tx_seminars_sites (
 	homepage tinytext NOT NULL,
 	directions text NOT NULL,
 	notes text NOT NULL,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
@@ -176,7 +176,8 @@ CREATE TABLE tx_seminars_organizers (
 	title tinytext NOT NULL,
 	homepage tinytext NOT NULL,
 	email tinytext NOT NULL,
-	
+	email_footer text NOT NULL,
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
@@ -194,7 +195,7 @@ CREATE TABLE tx_seminars_payment_methods (
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	title tinytext NOT NULL,
 	description text NOT NULL,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );

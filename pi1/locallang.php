@@ -24,7 +24,7 @@ $LOCAL_LANG = Array (
 		'seminars.pi_flexform.hideFields' => 'hide fields in detailed view (comma-separated)',
 		'seminars.pi_flexform.hideColumns' => 'hide column names in list view (comma-separated)',
 		'seminars.pi_flexform.showRegistrationFields' => 'show text input fields for online registration (comma-separated)',
-		
+
 		'pi_list_browseresults_prev' => '< Previous',
 		'pi_list_browseresults_page' => 'Page',
 		'pi_list_browseresults_next' => 'Next >',
@@ -48,7 +48,7 @@ $LOCAL_LANG = Array (
 		'label_onlineRegistration' => 'Register online',
 		'label_registrationForm' => 'Registration data',
 		'label_thankyou' => 'Thank you for your registration. We are looking forward to your attendance.',
-		
+
 		'message_wrongSeminarNumber' => 'There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!',
 		'message_noRegistrationNecessary' => 'For this event, no registration is necessary.',
 		'message_seminarCancelled' => 'Alas, this event has been cancelled.',
@@ -83,7 +83,7 @@ $LOCAL_LANG = Array (
 		'seminars.pi_flexform.hideFields' => 'versteckte Felder in Detailansicht (komma-separiert)',
 		'seminars.pi_flexform.hideColumns' => 'versteckte Felder in Listenansicht (komma-separiert)',
 		'seminars.pi_flexform.showRegistrationFields' => 'angezeigte Text-Input-Felder bei Online-Anmeldung (komma-separiert)',
-		
+
 		'pi_list_browseresults_prev' => '< Vorherige',
 		'pi_list_browseresults_page' => 'Seite',
 		'pi_list_browseresults_next' => 'Nächste >',
@@ -108,7 +108,7 @@ $LOCAL_LANG = Array (
 		'label_registrationForm' => 'Anmeldedaten',
 		'label_thankyou' => 'Vielen Dank für Ihre Anmeldung! Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.',
 		'label_thankyou_informal' => 'Vielen Dank für deine Anmeldung! Wir freuen uns auf dich und wünschen dir viel Erfolg bei der Veranstaltung.',
-		
+
 		'message_wrongSeminarNumber' => 'Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!',
 		'message_wrongSeminarNumber_informal' => 'Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!',
 		'message_noRegistrationNecessary' => 'Für diese Veranstaltung ist keine Anmeldung erforderlich.',

@@ -1,7 +1,7 @@
 <?php
 /**
  * General front end language labels for the extension 'seminars'.
- * 
+ *
  * This file is detected by the translation tool.
  */
 
@@ -16,6 +16,10 @@ $LOCAL_LANG = Array (
 		'message_seminarOver' => 'This event is already over.',
 		'message_noVacancies' => 'Sorry, there are no more vancacies.',
 		'message_willBeAnnounced' => 'will be announced',
+		'email_confirmationHello' => 'Hello %s,
+
+thank you for registering for this event:',
+		'email_confirmationPayment' => 'If you haven\'t paid the attendance fee yet, please pay it using these payment options:',
 	),
 	'dk' => Array (
 	),
@@ -32,6 +36,14 @@ $LOCAL_LANG = Array (
 		'message_seminarOver' => 'Diese Veranstaltung ist leider schon beendet.',
 		'message_noVacancies' => 'Es sind leider keine Plätze mehr frei.',
 		'message_willBeAnnounced' => 'wird noch bekannt gegeben',
+		'email_confirmationHello' => 'Guten Tag %s,
+
+vielen Dank für Ihre Anmeldung zu dieser Veranstaltung:',
+		'email_confirmationHello_informal' => 'Hallo %s,
+
+vielen Dank für deine Anmeldung zu dieser Veranstaltung:',
+		'email_confirmationPayment' => 'Falls Sie den Teilnahmebeitrag noch nicht bezahlt haben, können Sie wie folgt bezahlen:',
+		'email_confirmationPayment_informal' => 'Falls du den Teilnahmebeitrag noch nicht bezahlt hast, kannst du wie folgt bezahlen:',
 	),
 	'no' => Array (
 	),
