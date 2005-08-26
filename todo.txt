@@ -33,6 +33,11 @@ Version 0.3.2 (mid-August 2005)
 - make sure all database queries are as safe as they can get [?]
 - make all database queries use single quotes instead of double quotes [Oli]
 - clean up pi1 to use the new seminars class [Oli]
+- clean up HTML in case of two or more seminar sites [Oli]
+- clean up HTML in case of two or more organizers [Oli]
+- clean up HTML in case of two or more speakers [Oli]
+- make it configurable which attendance fields are required when a user wants to register for a seminar [Oli]
+- clean up the HTML formatting (inluding the RTE and non-RTE elements) [Oli]
 
 - online registration: mail to participant (configurable) (using t3lib_htmlmail) [Mathias]
 - online registration: mail to organizer (configurable) (using t3lib_htmlmail) [Mathias]
@@ -41,9 +46,10 @@ Version 0.3.2 (mid-August 2005)
 
 Version 0.4.0 (end-August 2005)
 ---------------------------------
-- clean up HTML in case of two or more seminar sites [Oli]
-- clean up HTML in case of two or more speakers [Oli]
-- clean up HTML in case of two or more organizers [Oli]
+- cache speaker data [Oli]
+- cache site data [Oli]
+- make link targets configurable [Oli]
+- slim down the URL paramenters for links to the detailed view [Oli]
 - clean up richtext options in tca.php [Oli]
 - move getConfValue from templateHelper to dbPlugin [Oli]
 - remove unneeded localization strings [Oli]
@@ -68,6 +74,7 @@ Version 0.4.0 (end-August 2005)
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
 - comment out "special price" from UI until there is code for it [Oli]
+- in the back end seminar editor, increase the number of lines for the organizers [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
@@ -82,11 +89,8 @@ Version 0.5.0 (September 2005)
   - send an email to the organizer
   - send an email to the participant
   - add a participation entry to the database
-- make it configurable which attendance fields are required when a user wants to register for a seminar [Oli]
-- add configuration whether to show seminars without date as well [Oli]
 - reduce code by using the API for COUNT queries [Oli]
 - make dependencies for registration process [AM]
-- clean up the HTML formatting (inluding the RTE and non-RTE elements) [Oli]
 - make it configurable whether to have the university-specific stuff [Oli]
 - make some fe_users data editable on the registration page [Oli]
 - show a drop-down list of seminars to select from on the registration page [Mathias]
@@ -99,6 +103,7 @@ Version 0.5.0 (September 2005)
 - make the wrap for the number of vacancies (colored square) configurable [Oli]
 - add entry in participant records whether their money has been refunded [?]
 - make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
+- add configuration whether to show seminars without date as well [Oli]
 - improve and clean up flexforms structure for better usability [Oli]
 - automatic signing off if the user hasn't paid after a configurable timespan (x days after registration or x days before start of seminar) [?]
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off [?]
@@ -112,6 +117,7 @@ Version 0.5.0 (September 2005)
 - Slim down back end UI (don't display unneded fields, e.g. unneeded payment methods) [Oli]
 - make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
 - add a localized "h" after the time [Oli]
+- if no user is logged in for online registration, provide a link to the login form [?]
 
 Version 0.6.0 (October 2005)
 ----------------------------
