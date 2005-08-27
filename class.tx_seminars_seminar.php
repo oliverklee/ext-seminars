@@ -183,25 +183,22 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Creates a hyperlink link to this seminar details page.
+	 * Creates a hyperlink to this seminar details page.
 	 *
 	 * If $this->conf['listPID'] (and the corresponding flexforms value) is not set or 0,
 	 * the link will use the current page's PID.
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
 	 *
-	 * @return	string	HTML code for the link to the seminar details page
+	 * @return	String		HTML code for the link to the seminar details page
 	 *
 	 * @access public
 	 */
 	function getLinkedTitle(&$plugin) {
-		return $plugin->pi_list_linkSingle(
+		return $plugin->cObj->getTypoLink(
 			$this->getTitle(),
-			$this->getUid(),
-			0,
-			array(),
-			false,
-			$plugin->getConfValue('listPID')
+			$plugin->getConfValue('listPID'),
+			array('tx_seminars_pi1[showUid]' => $this->getUid())
 		);
 	}
 
@@ -263,7 +260,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @access public
 	 */
-	function getTitleAndDate($dash = '-') {
+	function getTitleAndDate($dash = '&#8211;') {
 		$date = $this->hasDate() ? ', '.$this->getDate($dash) : '';
 
 		return $this->getTitle().$date;
@@ -282,7 +279,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @access public
 	 */
-	function getDate($dash = '-') {
+	function getDate($dash = '&#8211;') {
 		if (!$this->hasDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
@@ -341,7 +338,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @access public
 	 */
-	function getTime($dash = '-') {
+	function getTime($dash = '&#8211;') {
 		if (!$this->hasTime()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
@@ -595,12 +592,14 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets our regular price as a string containing amount and currency.
 	 *
+	 * @param	String		the character or HTML entity used to separate price and currency
+	 *
 	 * @return	String		the seminar price
 	 *
 	 * @access public
 	 */
-	function getPrice() {
-		return $this->getSeminarsPropertyInteger('price_regular').'&nbsp;EUR';
+	function getPrice($space = '&nbsp;') {
+		return $this->getSeminarsPropertyInteger('price_regular').$space.'EUR';
 	}
 
 	/**
@@ -615,7 +614,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Gets our allowed payment methods, complete as RTE'ed HTML LI list (with enclosing UL).
+	 * Gets our allowed payment methods, complete as RTE'ed HTML LI list (with enclosing UL),
+	 * but without the detailed description.
 	 * Returns an empty paragraph if this seminar doesn't have any payment methods.
 	 *
 	 * @param	object		the live pibase object
@@ -665,6 +665,54 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Gets our allowed payment methods, just as plain text,
+	 * including the detailed description.
+	 * Returns an empty string if this seminar doesn't have any payment methods.
+	 *
+	 * @return	String		our payment methods as plain text (or '' if there is an error)
+	 *
+	 * @access public
+	 */
+	function getPaymentMethodsPlain() {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'payment_methods',
+			$this->tableSeminars,
+			'uid='.$this->getUid()
+				.t3lib_pageSelect::enableFields($this->tableSeminars),
+			'',
+			'',
+			''
+		);
+
+		if ($dbResult) {
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$paymentMethodsUids = explode(',', $row['payment_methods']);
+			foreach ($paymentMethodsUids as $currentPaymentMethod) {
+				$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'title, description',
+					$this->tablePaymentMethods,
+					'uid='.intval($currentPaymentMethod)
+						.t3lib_pageSelect::enableFields($this->tablePaymentMethods),
+					'',
+					'',
+					''
+				);
+
+				// we expect just one result
+				if ($dbResultPaymentMethod && $GLOBALS['TYPO3_DB']->sql_num_rows ($dbResultPaymentMethod)) {
+					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
+					$result .= '* '.$row['title'].': ';
+					$result .= $row['description'].chr(10).chr(10);
+				}
+			}
+		} else {
+			$result = '';
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Checks whether this seminar has any paxment methods set.
 	 *
 	 * @return	boolean		true if the seminar has any payment methods, false if it is free.
@@ -702,7 +750,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
-	 * @return	string		the hyperlinked names and descriptions or our organizers
+	 * @return	String		the hyperlinked names and descriptions or our organizers
 	 *
 	 * @access public
 	 */
@@ -719,6 +767,56 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 						$result .= ', ';
 					}
 					$result .= $plugin->cObj->getTypoLink($currentOrganizerData['title'], $currentOrganizerData['homepage']);
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets our organizers' names and email addresses in the format
+	 *   Name <email@domain.com>
+	 * The name is not encoded yet.
+	 *
+	 * @return	array		the organizers' names and email addresses
+	 *
+	 * @access public
+	 */
+	function getOrganizersEmail() {
+		$result = array();
+
+		if ($this->hasOrganizers()) {
+			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
+			foreach($organizersNumbers as $currentOrganizerNumber) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
+
+				if ($currentOrganizerData) {
+					$result[] = $currentOrganizerData['title'].' <'.$currentOrganizerData['email'].'>';
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets our organizers' email footers.
+	 *
+	 * @return	array		the organizers' email footers.
+	 *
+	 * @access public
+	 */
+	function getOrganizersFooter() {
+		$result = array();
+
+		if ($this->hasOrganizers()) {
+			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
+			foreach($organizersNumbers as $currentOrganizerNumber) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
+
+				if ($currentOrganizerData) {
+					$result[] = $currentOrganizerData['email_footer'];
 				}
 			}
 		}
@@ -798,6 +896,26 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the URL to the detailed view of this seminar.
+	 *
+	 * If $this->conf['listPID'] (and the corresponding flexforms value) is not set or 0,
+	 * the link will use the current page's PID.
+	 *
+	 * @param	object		a plugin object (for a live page, must not be null)
+	 *
+	 * @return	String		URL of the seminar details page
+	 *
+	 * @access public
+	 */
+	function getDetailedViewUrl(&$plugin) {
+		return $plugin->getConfValue('baseURL')
+			.$plugin->cObj->getTypoLink_URL(
+				$plugin->getConfValue('listPID'),
+				array('tx_seminars_pi1[showUid]' => $this->getUid())
+			);
 	}
 
 	/**

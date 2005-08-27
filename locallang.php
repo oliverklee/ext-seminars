@@ -7,6 +7,15 @@
 
 $LOCAL_LANG = Array (
 	'default' => Array (
+		'label_date' => 'Date',
+		'label_time' => 'Time',
+		'label_place' => 'Place',
+		'label_room' => 'Room number at location',
+		'label_price_regular' => 'Regular price',
+		'label_price_special' => 'Special price',
+		'label_paymentmethods' => 'Available methods of payment',
+		'label_url' => 'More information',
+
 		'message_notLoggedIn' => 'Please log in first in order to register for an event.',
 		'message_alreadyRegistered' => 'You already have registered for this event.',
 		'message_wrongSeminarNumber' => 'There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!',
@@ -24,6 +33,15 @@ thank you for registering for this event:',
 	'dk' => Array (
 	),
 	'de' => Array (
+		'label_date' => 'Datum',
+		'label_time' => 'Zeit',
+		'label_place' => 'Ort',
+		'label_room' => 'Raum',
+		'label_price_regular' => 'Preis',
+		'label_price_special' => 'Spezialpreis',
+		'label_paymentmethods' => 'Mögliche Zahlungsarten',
+		'label_url' => 'Mehr Informationen',
+
 		'message_notLoggedIn' => 'Bitte loggen Sie sich zuerst ein, um sich für eine Veranstaltung anzumelden.',
 		'message_notLoggedIn_informal' => 'Bitte logge dich zuerst ein, um dich für eine Veranstaltung anzumelden.',
 		'message_alreadyRegistered' => 'Sie sind für diese Veranstaltung bereits angemeldet.',

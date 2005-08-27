@@ -1,4 +1,8 @@
 plugin.tx_seminars {
+	# location of the template file
+	templateFile = EXT:seminars/seminars.tmpl
+	hideFieldsInThankYouMail =
+
 	timeFormat = %H:%M
 	dateFormatY = %Y
 	dateFormatM = %m.

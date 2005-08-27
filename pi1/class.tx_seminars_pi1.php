@@ -222,8 +222,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('description', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('date', $currentSeminar->getDate('&#8211;'));
-		$this->setMarkerContent('time', $currentSeminar->getTime('&#8211;'));
+		$this->setMarkerContent('date', $currentSeminar->getDate());
+		$this->setMarkerContent('time', $currentSeminar->getTime());
 		$this->setMarkerContent('place', $currentSeminar->getPlace($this));
 
 		if ($currentSeminar->hasRoom()) {
@@ -238,7 +238,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('speakers', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('price', $currentSeminar->getPrice($this));
+		$this->setMarkerContent('price', $currentSeminar->getPrice());
 
 		if ($currentSeminar->hasPaymentMethods()) {
 			$this->setMarkerContent('paymentmethods', $currentSeminar->getPaymentMethods($this));
@@ -296,7 +296,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('class_itemrow',    ($c % 2) ? 'class="listrow-odd"' : '');
 
 		$this->setMarkerContent('title_link',       $currentSeminar->getLinkedTitle($this));
-		$this->setMarkerContent('date',             $currentSeminar->getDate('&#8211;'));
+		$this->setMarkerContent('date',             $currentSeminar->getDate());
 		$this->setMarkerContent('price',            $currentSeminar->getPrice());
 		$this->setMarkerContent('organizers',       $currentSeminar->getOrganizers($this));
 		$this->setMarkerContent('vacancies',        $currentSeminar->needsRegistration() ? $currentSeminar->getVacancies() : '');
@@ -414,7 +414,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createRegistrationHeading($errorMessage) {
 		$this->setMarkerContent('registration', $this->pi_getLL('label_registration'));
-		$this->setMarkerContent('title',        ($this->seminar) ? $this->seminar->getTitleAndDate('&#8211;') : '');
+		$this->setMarkerContent('title',        ($this->seminar) ? $this->seminar->getTitleAndDate() : '');
 
 		if (empty($errorMessage)) {
 			$this->readSubpartsToHide('error', 'wrapper');
@@ -444,7 +444,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Check if the form has been submitted:
 		if ($formObj->submitType == 'submit') {
-			$this->registrationManager->createRegistration($this->seminar, $formObj->sessionData['data'][$this->tableAttendances]);
+			$this->registrationManager->createRegistration($this->seminar, $formObj->sessionData['data'][$this->tableAttendances], $this);
 
 			$output = $this->substituteMarkerArrayCached('REGISTRATION_THANKYOU');
 			// Destroy session data for our submitted form:

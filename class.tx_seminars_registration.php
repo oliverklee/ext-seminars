@@ -47,17 +47,22 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/** whether this attendance already is stored in the DB */
 	var $isInDb = false;
 
+	/** whether we have already initialized the templates (which is done lazily) */
+	var $isTemplateInitialized = false;
+
 	/**
 	 * The constructor.
 	 *
 	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
 	 * @param	integer		the UID of the feuser who wants to sign up
 	 * @param	array		associative array with the registration data the user has just entered
+	 * @param	object		content object (must not be null)
 	 *
 	 * @access public
 	 */
-	function tx_seminars_registration(&$seminar, $userUid, $registrationData) {
+	function tx_seminars_registration(&$seminar, $userUid, $registrationData, &$cObj) {
 		$this->init();
+		$this->cObj =& $cObj;
 
 		$this->seminar = $seminar;
 
@@ -100,7 +105,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access private
 	 */
 	function createTitle() {
-		$this->recordData['title'] = $this->getUserName().' / '.$this->seminar->getTitle().' '.$this->seminar->getDate();
+		$this->recordData['title'] = $this->getUserName().' / '.$this->seminar->getTitle().' '.$this->seminar->getDate('-');
 
 		return;
 	}
@@ -134,6 +139,31 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		if ($dbResult) {
 			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 			$result = $dbResultAssoc['name'];
+		} else {
+			$result = '';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the attendee's email addres
+	 *
+	 * @return	String		the attendee's email address
+	 *
+	 * @access private
+	 */
+	function getUserEmail() {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'email',
+				'fe_users',
+				'uid='.$this->getUser(),
+				'',
+				'',
+				'');
+		if ($dbResult) {
+			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$result = $dbResultAssoc['email'];
 		} else {
 			$result = '';
 		}
@@ -265,6 +295,75 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		}
 
 		return $dbResult;
+	}
+
+	/**
+	 * Send a mail to the attendee, thanking him/her for registering for an event.
+	 *
+	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 *
+	 * @access public
+	 */
+	function notifyAttendee(&$plugin) {
+		$this->initializeTemplate();
+		$this->readSubpartsToHide($this->getConfValue('hideFieldsInThankYouMail'), 'FIELD_WRAPPER');
+
+		$this->setMarkerContent('hello', sprintf($this->pi_getLL('email_confirmationHello'), $this->getUserName()));
+		$this->setMarkerContent('type', $this->seminar->getType());
+		$this->setMarkerContent('title', $this->seminar->getTitle());
+		$this->setMarkerContent('date', $this->seminar->getDate('-'));
+		$this->setMarkerContent('time', $this->seminar->getTime('-'));
+		$this->setMarkerContent('place', $this->seminar->getPlaceShort());
+
+		if ($this->seminar->hasRoom()) {
+			$this->setMarkerContent('room', $this->seminar->getRoom());
+		} else {
+			$this->readSubpartsToHide('room', 'field_wrapper');
+		}
+
+		$this->setMarkerContent('price', $this->seminar->getPrice(' '));
+
+		if ($this->seminar->hasPaymentMethods()) {
+			$this->setMarkerContent('paymentmethods', $this->seminar->getPaymentMethodsPlain());
+		} else {
+			$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
+		}
+
+		$this->setMarkerContent('url', $this->seminar->getDetailedViewUrl($plugin));
+
+		$footers = $this->seminar->getOrganizersFooter();
+		$this->setMarkerContent('footer', $footers[0]);
+
+		$content = $this->substituteMarkerArrayCached('MAIL_THANKYOU');
+		$froms = $this->seminar->getOrganizersEmail();
+
+		t3lib_div::plainMailEncoded(
+			$this->getUserEmail(),
+			$this->seminar->getType().': '.$this->seminar->getTitle(),
+			$content,
+			// We just use the first organizer as sender
+			'From: '.$froms[0],
+			'8bit'
+		);
+
+		return;
+	}
+
+	/**
+	 * Reads and initializes the templates.
+	 * If this has already been called for this instance, this function does nothing.
+	 *
+	 * @access private
+	 */
+	function initializeTemplate() {
+		if (!$this->isTemplateInitialized) {
+			$this->getTemplateCode();
+			$this->setLabels();
+
+			$this->isTemplateInitialized = true;
+		}
+
+		return;
 	}
 }
 

@@ -231,15 +231,17 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
 	 * @param	array		associative array with the registration data the user has just entered
+	 * @param	object		live plugin object (must not be null)
 	 *
 	 * @access public
 	 */
-	function createRegistration(&$seminar, $registrationData) {
+	function createRegistration(&$seminar, $registrationData, &$plugin) {
 			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-			$this->registration =& new $registrationClassname($seminar, $this->feuser['uid'], $registrationData);
+			$this->registration =& new $registrationClassname($seminar, $this->feuser['uid'], $registrationData, $plugin->cObj);
 
 			$this->registration->commitToDb();
 			$seminar->updateStatistics();
+			$this->registration->notifyAttendee($plugin);
 
 			return;
 	}
