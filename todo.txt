@@ -38,6 +38,7 @@ Version 0.3.2 (mid-August 2005)
 - clean up HTML in case of two or more speakers [Oli]
 - make it configurable which attendance fields are required when a user wants to register for a seminar [Oli]
 - clean up the HTML formatting (inluding the RTE and non-RTE elements) [Oli]
+- slim down the URL paramenters for links to the detailed view [Oli]
 
 - online registration: mail to participant (configurable) (using t3lib_htmlmail) [Mathias]
 - online registration: mail to organizer (configurable) (using t3lib_htmlmail) [Mathias]
@@ -46,10 +47,7 @@ Version 0.3.2 (mid-August 2005)
 
 Version 0.4.0 (end-August 2005)
 ---------------------------------
-- make link targets configurable [Oli]
-- slim down the URL paramenters for links to the detailed view [Oli]
 - clean up richtext options in tca.php [Oli]
-- move getConfValue from templateHelper to dbPlugin [Oli]
 - remove unneeded localization strings [Oli]
 - add ":" after flexforms labels [?]
 - integrate the salutationswitcher extension [Oli]
@@ -67,12 +65,12 @@ Version 0.4.0 (end-August 2005)
   - add localized text "this seminar has been canceled" [Oli]
 - find and remove dead code [Oli]
 - use flexforms as much as possible [Oli]
-- document that flexforms override and empty values don't [Oli]
 - work out how to override non-empty TS values with empty flexforms values [Oli/AM]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
 - comment out "special price" from UI until there is code for it [Oli]
 - in the back end seminar editor, increase the number of lines for the organizers [Oli]
+- investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
@@ -119,6 +117,8 @@ Version 0.5.0 (September 2005)
 - make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
 - add a localized "h" after the time [Oli]
 - if no user is logged in for online registration, provide a link to the login form [?]
+- make email charset configurable [?]
+- refactor seminar::getOrganizers*() [Oli]
 
 Version 0.6.0 (October 2005)
 ----------------------------
