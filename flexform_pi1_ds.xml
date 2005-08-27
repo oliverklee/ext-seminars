@@ -33,6 +33,16 @@
 							</config>
 						</TCEforms>
 					</what_to_display>
+					<baseURL>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.baseURL</label>
+							<config>
+								<type>input</type>
+								<size>32</size>
+							</config>
+						</TCEforms>
+					</baseURL>
 					<listPID>
 						<TCEforms>
 							<exclude>1</exclude>
