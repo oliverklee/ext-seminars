@@ -759,7 +759,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 		if ($this->hasOrganizers()) {
 			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
-			foreach($organizersNumbers as $currentOrganizerNumber) {
+			foreach ($organizersNumbers as $currentOrganizerNumber) {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
 
 				if ($currentOrganizerData) {
@@ -788,7 +788,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 		if ($this->hasOrganizers()) {
 			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
-			foreach($organizersNumbers as $currentOrganizerNumber) {
+			foreach ($organizersNumbers as $currentOrganizerNumber) {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
 
 				if ($currentOrganizerData) {
@@ -812,7 +812,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 		if ($this->hasOrganizers()) {
 			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
-			foreach($organizersNumbers as $currentOrganizerNumber) {
+			foreach ($organizersNumbers as $currentOrganizerNumber) {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
 
 				if ($currentOrganizerData) {
@@ -948,6 +948,66 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	function getSeminarsPropertyInteger($key) {
 		$result = ($this->seminarData && isset($this->seminarData[$key]))
 			? intval($this->seminarData[$key]) : 0;
+
+		return $result;
+	}
+
+	/**
+	 * Gets a plain text list of property values (if they exist),
+	 * formatted as strings (and nicely lined up) in the following format:
+	 *
+	 * key1: value1
+	 *
+	 * @param	String		comma-separated list of key names
+	 *
+	 * @return	String		formatted output (may be empty)
+	 *
+	 * @access public
+	 */
+	function dumpSeminarValues($keysList) {
+		$keys = explode(',', $keysList);
+
+		$maxLength = 0;
+		foreach ($keys as $index => $currentKey) {
+			$currentKeyTrimmed = strtolower(trim($currentKey));
+			// write the trimmed key back so that we don't have to trim again
+			$keys[$index] = $currentKeyTrimmed;
+			$maxLength = max($maxLength, strlen($currentKeyTrimmed));
+		}
+
+		$result = '';
+		foreach ($keys as $currentKey) {
+			switch ($currentKey) {
+				case 'date':
+					$value = $this->getDate('-');
+					break;
+				case 'place':
+					$value = $this->getPlaceShort();
+					break;
+				case 'price':
+					$value = $this->getPrice(' ');
+					break;
+				case 'speakers':
+					$value = $this->getSpeakersShort();
+					break;
+				case 'time':
+					$value = $this->getTime('-');
+					break;
+				case 'titleanddate':
+					$value = $this->getTitleAndDate('-');
+					break;
+				case 'type':
+					$value = $this->getType();
+					break;
+				case 'vacancies':
+					$value = $this->getVacancies();
+					break;
+				default:
+					$value = $this->getSeminarsPropertyString($currentKey);
+					break;
+			}
+			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
+		}
 
 		return $result;
 	}

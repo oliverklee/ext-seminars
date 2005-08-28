@@ -93,7 +93,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access public
 	 */
 	function getTitle() {
-		return $this->$this->recordData['title'];
+		return $this->recordData['title'];
 	}
 
 	/**
@@ -105,7 +105,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access private
 	 */
 	function createTitle() {
-		$this->recordData['title'] = $this->getUserName().' / '.$this->seminar->getTitle().' '.$this->seminar->getDate('-');
+		$this->recordData['title'] = $this->getUserName().' / '.$this->seminar->getTitle().', '.$this->seminar->getDate('-');
 
 		return;
 	}
@@ -147,7 +147,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Gets the attendee's email addres
+	 * Gets the attendee's email address
 	 *
 	 * @return	String		the attendee's email address
 	 *
@@ -164,6 +164,32 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		if ($dbResult) {
 			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 			$result = $dbResultAssoc['email'];
+		} else {
+			$result = '';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the attendee's name and email address in the format
+	 * Name <address@provider.com>
+	 *
+	 * @return	String		the attendee's name and email address
+	 *
+	 * @access private
+	 */
+	function getUserNameAndEmail() {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'name, email',
+				'fe_users',
+				'uid='.$this->getUser(),
+				'',
+				'',
+				'');
+		if ($dbResult) {
+			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$result = $dbResultAssoc['name'].' <'.$dbResultAssoc['email'].'>';
 		} else {
 			$result = '';
 		}
@@ -306,7 +332,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 */
 	function notifyAttendee(&$plugin) {
 		$this->initializeTemplate();
-		$this->readSubpartsToHide($this->getConfValue('hideFieldsInThankYouMail'), 'FIELD_WRAPPER');
+		$this->readSubpartsToHide($this->getConfValue('hideFieldsInThankYouMail'), 'field_wrapper');
 
 		$this->setMarkerContent('hello', sprintf($this->pi_getLL('email_confirmationHello'), $this->getUserName()));
 		$this->setMarkerContent('type', $this->seminar->getType());
@@ -339,13 +365,65 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		$froms = $this->seminar->getOrganizersEmail();
 
 		t3lib_div::plainMailEncoded(
-			$this->getUserEmail(),
-			$this->seminar->getType().': '.$this->seminar->getTitle(),
+			$this->getUserNameAndEmail(),
+			$this->pi_getLL('email_confirmationSubject').': '.$this->seminar->getTitleAndDate('-'),
 			$content,
 			// We just use the first organizer as sender
 			'From: '.$froms[0],
 			'8bit'
 		);
+
+		return;
+	}
+
+	/**
+	 * Send a mail to all organizers, notifying them of the registration
+	 *
+	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 *
+	 * @access public
+	 */
+	function notifyOrganizers(&$plugin) {
+		$this->initializeTemplate();
+		$this->readSubpartsToHide($this->getConfValue('hideGeneralFieldsInNotificationMail'), 'field_wrapper');
+
+		$this->setMarkerContent('hello', $this->pi_getLL('email_notificationHello'));
+		$this->setMarkerContent('summary', $this->getTitle());
+
+		$showSeminarFields = $this->getConfValue('showSeminarFieldsInNotificationMail');
+		if (!empty($showSeminarFields)) {
+			$this->setMarkerContent('seminardata', $this->seminar->dumpSeminarValues($showSeminarFields));
+		} else {
+			$this->readSubpartsToHide('seminardata', 'field_wrapper');
+		}
+
+		$showFeUserFields = $this->getConfValue('showFeUserFieldsInNotificationMail');
+		if (!empty($showFeUserFields)) {
+			$this->setMarkerContent('feuserdata', $this->dumpUserValues($showFeUserFields));
+		} else {
+			$this->readSubpartsToHide('feuserdata', 'field_wrapper');
+		}
+
+		$showAttendanceFields = $this->getConfValue('showAttendanceFieldsInNotificationMail');
+		if (!empty($showAttendanceFields)) {
+			$this->setMarkerContent('attendancedata', $this->dumpAttendanceValues($showAttendanceFields));
+		} else {
+			$this->readSubpartsToHide('attendancedata', 'field_wrapper');
+		}
+
+		$content = $this->substituteMarkerArrayCached('MAIL_NOTIFICATION');
+
+		$organizers = $this->seminar->getOrganizersEmail();
+		foreach ($organizers as $currentOrganizerEmail) {
+			t3lib_div::plainMailEncoded(
+				$currentOrganizerEmail,
+				$this->pi_getLL('email_notificationSubject').': '.$this->getTitle(),
+				$content,
+				// We use the attendee's email as sender
+				'From: '.$this->getUserNameAndEmail(),
+				'8bit'
+			);
+		}
 
 		return;
 	}
@@ -365,6 +443,91 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		}
 
 		return;
+	}
+
+	/**
+	 * Gets a plain text list of feuser property values (if they exist),
+	 * formatted as strings (and nicely lined up) in the following format:
+	 *
+	 * key1: value1
+	 *
+	 * @param	String		comma-separated list of key names
+	 *
+	 * @return	String		formatted output (may be empty)
+	 *
+	 * @access public
+	 */
+	function dumpUserValues($keysList) {
+		$keys = explode(',', $keysList);
+
+		$maxLength = 0;
+		foreach ($keys as $index => $currentKey) {
+			$currentKeyTrimmed = strtolower(trim($currentKey));
+			// write the trimmed key back so that we don't have to trim again
+			$keys[$index] = $currentKeyTrimmed;
+			$maxLength = max($maxLength, strlen($currentKeyTrimmed));
+		}
+
+		$result = '';
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'*',
+				'fe_users',
+				'uid='.$this->getUser(),
+				'',
+				'',
+				'');
+		if ($dbResult) {
+			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+
+			foreach ($keys as $currentKey) {
+				if (array_key_exists($currentKey, $dbResultAssoc)) {
+					$value = $dbResultAssoc[$currentKey];
+				} else {
+					$value = '';
+				}
+				$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets a plain text list of attendance (registration) property values (if they exist),
+	 * formatted as strings (and nicely lined up) in the following format:
+	 *
+	 * key1: value1
+	 *
+	 * @param	String		comma-separated list of key names
+	 *
+	 * @return	String		formatted output (may be empty)
+	 *
+	 * @access public
+	 */
+	function dumpAttendanceValues($keysList) {
+		$keys = explode(',', $keysList);
+
+		$maxLength = 0;
+		foreach ($keys as $index => $currentKey) {
+			$currentKeyTrimmed = strtolower(trim($currentKey));
+			// write the trimmed key back so that we don't have to trim again
+			$keys[$index] = $currentKeyTrimmed;
+			$maxLength = max($maxLength, strlen($currentKeyTrimmed));
+		}
+
+		$result = '';
+
+		foreach ($keys as $currentKey) {
+			if (array_key_exists($currentKey, $this->recordData)) {
+				$value = $this->recordData[$currentKey];
+			} else {
+				$value = '';
+			}
+			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
+		}
+
+		return $result;
 	}
 }
 

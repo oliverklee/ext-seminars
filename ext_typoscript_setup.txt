@@ -2,6 +2,10 @@ plugin.tx_seminars {
 	# location of the template file
 	templateFile = EXT:seminars/seminars.tmpl
 	hideFieldsInThankYouMail =
+	hideFieldsInNotificationMail =
+	showSeminarFieldsInNotificationMail = title,date,place,price,attendees,vacancies,enough_attendees,is_full
+	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile,date_of_birth
+	showAttendanceFieldsInNotificationMail = interests,expectations,background_knowledge,known_from,notes
 
 	timeFormat = %H:%M
 	dateFormatY = %Y
