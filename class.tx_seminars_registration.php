@@ -324,6 +324,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		$this->setMarkerContent('price', $this->seminar->getPrice(' '));
 
 		if ($this->seminar->hasPaymentMethods()) {
+			$this->setMarkerContent('message_paymentmethods', $this->pi_getLL('email_confirmationPayment'));
 			$this->setMarkerContent('paymentmethods', $this->seminar->getPaymentMethodsPlain());
 		} else {
 			$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
