@@ -9,41 +9,6 @@ If you find any bugs in this extension, please report them in the Typo3 bugtrack
 
 If you need a feature urgently and you want to speed up development, you can either sponsor the extension authour to code it or code it yourself and provide a (tested!) patch.
 
-Version 0.3.2 (mid-August 2005)
----------------------------------
-- templatize registration page [Oli]
-- switch to Flexforms [AM]
-- remove dependency on new login box and front end user registration ; document that these extensions are recommended (and when they're not needed) [Oli]
-- clean up HTML templates [Oli]
-- improve the template helper class [Oli]
-- remove unneeded subpart markers from the output [Oli]
-- add default CSS for the plugin [Oli]
-- basic online registration support [Oli]
-- add link to registration page from seminar details page [Oli]
-- make ID of registration page configurable [Oli]
-- after a front end user has registered for a seminar, automatically update the statistics [Oli]
-- show seminar fee on registration page [Oli]
-- show number of vacancies on registration page [Oli]
-- online registration: "thank you" page [Oli]
-- make it configurable which input fields to show on online registration [Oli]
-- remove the link (and corresponding DB entry) to the organizer's email form [Oli]
-- add a field "description" to the payment method record (e.g. for bank account information) [Oli]
-- add a field "payment methods" to the seminar record and add it to the seminar details page [Oli]
-- make sure all links are generated using the Typo3 API [?]
-- make sure all database queries are as safe as they can get [?]
-- make all database queries use single quotes instead of double quotes [Oli]
-- clean up pi1 to use the new seminars class [Oli]
-- clean up HTML in case of two or more seminar sites [Oli]
-- clean up HTML in case of two or more organizers [Oli]
-- clean up HTML in case of two or more speakers [Oli]
-- make it configurable which attendance fields are required when a user wants to register for a seminar [Oli]
-- clean up the HTML formatting (inluding the RTE and non-RTE elements) [Oli]
-- slim down the URL paramenters for links to the detailed view [Oli]
-- online registration: add "mail footer" field to organizer record [Oli]
-- include seminar fee amount and bank account information into mail to participant [Oli]
-- online registration: mail to participant (configurable) [Oli]
-- online registration: mail to organizer (configurable) [Oli]
-
 Version 0.4.0 (end-August 2005)
 ---------------------------------
 - clean up richtext options in tca.php [Oli]
