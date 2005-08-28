@@ -39,11 +39,10 @@ Version 0.3.2 (mid-August 2005)
 - make it configurable which attendance fields are required when a user wants to register for a seminar [Oli]
 - clean up the HTML formatting (inluding the RTE and non-RTE elements) [Oli]
 - slim down the URL paramenters for links to the detailed view [Oli]
-
-- online registration: mail to participant (configurable) (using t3lib_htmlmail) [Mathias]
-- online registration: mail to organizer (configurable) (using t3lib_htmlmail) [Mathias]
 - online registration: add "mail footer" field to organizer record [Oli]
 - include seminar fee amount and bank account information into mail to participant [Oli]
+- online registration: mail to participant (configurable) [Oli]
+- online registration: mail to organizer (configurable) [Oli]
 
 Version 0.4.0 (end-August 2005)
 ---------------------------------
@@ -52,7 +51,6 @@ Version 0.4.0 (end-August 2005)
 - add ":" after flexforms labels [?]
 - integrate the salutationswitcher extension [Oli]
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
-- document new marker and subpart names in the manual [Oli]
 - online registration: provide link to login page if no user is logged in [Oli]
 - add link to registration page (configurable) from seminar listing page [Mathias]
 - tidy up single view and list view in pi1 [Oli]
@@ -71,6 +69,7 @@ Version 0.4.0 (end-August 2005)
 - comment out "special price" from UI until there is code for it [Oli]
 - in the back end seminar editor, increase the number of lines for the organizers [Oli]
 - investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
+- add to manual: what to do with registration records [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
@@ -119,6 +118,8 @@ Version 0.5.0 (September 2005)
 - if no user is logged in for online registration, provide a link to the login form [?]
 - make email charset configurable [?]
 - refactor seminar::getOrganizers*() [Oli]
+- use array_key_exists() where possible [Oli]
+- refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues() [Oli]
 
 Version 0.6.0 (October 2005)
 ----------------------------
@@ -172,7 +173,6 @@ Version 0.7.0 (November 2005)
 Version 1.0.0 (no date set yet)
 -------------------------------
 - get the extension reviewed for a cigar [Oli]
-- add automated tests using PHPunit or something like it [Oli]
 - add automatic headers to code files [?]
 - in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records [?]
 - add different icons [?]
@@ -202,3 +202,6 @@ Not triaged yet
 - feature: configure sort order of seminar list [?]
 - feature: show seminars from a configurable time window in the seminar list [?]
 - add a field "destination group" (Zielgruppe) to the seminar record [?]
+- add all organizers as Reply-To: in registration confirmation email [?]
+- add automated tests using PHPunit or something like it [Oli]
+- make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender) [?]
