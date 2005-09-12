@@ -35,6 +35,11 @@ Version 0.4.0 (end-August 2005)
 - in the back end seminar editor, increase the number of lines for the organizers [Oli]
 - investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 - add to manual: what to do with registration records [Oli]
+- in Web->Seminars->Statistics, show login name and UID of the users [Oli]
+- Bei der Flexform-Auswahl des css-Files reklamiert er, das Verzeichnis in upload/tx-txseminars nicht zu finden - tatsächlich wird
+auch nur ein tx-seminars erstellt... Nach Umbenennen des DIR klappts...
+- document that name and email must be required for feusers [Oli]
+- document error 500 if organizer has no email address (from old version) [Oli]
 
 Version 0.5.0 (September 2005)
 ------------------------------
@@ -85,6 +90,9 @@ Version 0.5.0 (September 2005)
 - refactor seminar::getOrganizers*() [Oli]
 - use array_key_exists() where possible [Oli]
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues() [Oli]
+- investigate whether in the back end seminar info view and list mode, the titles can be displayed instead of the UIDs for speakers, organizers, sites and payment methods [?]
+- investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars [?]
+- investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees [?]
 
 Version 0.6.0 (October 2005)
 ----------------------------
@@ -170,3 +178,5 @@ Not triaged yet
 - add all organizers as Reply-To: in registration confirmation email [?]
 - add automated tests using PHPunit or something like it [Oli]
 - make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender) [?]
+- investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
+- add configuration for default values for most of the seminar record fields [?]
