@@ -9,7 +9,6 @@ $LOCAL_LANG = Array (
 	'default' => Array (
 		'seminars.pi_flexform.sheet_general' => 'General',
 		'seminars.pi_flexform.what_to_display' => 'What should be displayed:',
-		'seminars.pi_flexform.s_template_special' => 'Templates and special prooperties:',
 		'seminars.pi_flexform.sheet_template_and_special' => 'Templates and special properties',
 		'seminars.pi_flexform.seminar_list' => 'Seminar List',
 		'seminars.pi_flexform.my_seminars' => 'My Seminars',
@@ -30,7 +29,7 @@ $LOCAL_LANG = Array (
 		'pi_list_browseresults_page' => 'Page',
 		'pi_list_browseresults_next' => 'Next >',
 		'pi_list_browseresults_displays' => 'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>',
-		'pi_list_browseresults_noResults' => 'Sorry, no items were found.',
+		'pi_list_browseresults_noResults' => 'Sorry, no events were found.',
 		'pi_list_searchBox_search' => 'Search',
 
 		'label_title' => 'Title',
@@ -50,11 +49,6 @@ $LOCAL_LANG = Array (
 		'label_registrationForm' => 'Registration data',
 		'label_thankyou' => 'Thank you for your registration. A confirmation email has been sent. We are looking forward to your attendance.',
 
-		'message_wrongSeminarNumber' => 'There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!',
-		'message_noRegistrationNecessary' => 'For this event, no registration is necessary.',
-		'message_seminarCancelled' => 'Alas, this event has been cancelled.',
-		'message_noVacancies' => 'Sorry, there are no more vancacies.',
-		'message_willBeAnnounced' => 'will be announced',
 		'message_registrationForm' => 'If you like, you can enter some data for your registration here:',
 	),
 	'dk' => Array (
@@ -69,7 +63,6 @@ $LOCAL_LANG = Array (
 	'de' => Array (
 		'seminars.pi_flexform.sheet_general' => 'Allgemein',
 		'seminars.pi_flexform.what_to_display' => 'Was soll angezeigt werden:',
-		'seminars.pi_flexform.s_template_special' => 'Templates und spezielle Einstellungen:',
 		'seminars.pi_flexform.sheet_template_and_special' => 'Templates und spezielle Einstellungen',
 		'seminars.pi_flexform.seminar_list' => 'Seminarliste',
 		'seminars.pi_flexform.my_seminars' => 'Meine Seminare',
@@ -111,12 +104,6 @@ $LOCAL_LANG = Array (
 		'label_thankyou' => 'Vielen Dank für Ihre Anmeldung! Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.',
 		'label_thankyou_informal' => 'Vielen Dank für deine Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf dich und wünschen dir viel Erfolg bei der Veranstaltung.',
 
-		'message_wrongSeminarNumber' => 'Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!',
-		'message_wrongSeminarNumber_informal' => 'Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!',
-		'message_noRegistrationNecessary' => 'Für diese Veranstaltung ist keine Anmeldung erforderlich.',
-		'message_seminarCancelled' => 'Diese Veranstaltung wurde leider abgesagt.',
-		'message_noVacancies' => 'Es sind leider keine Plätze mehr frei.',
-		'message_willBeAnnounced' => 'wird noch bekannt gegeben',
 		'message_registrationForm' => 'Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:',
 		'message_registrationForm_informal' => 'Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:',
 	),
