@@ -257,7 +257,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		if ($dbResultAttendances) {
 			while ($currentAttendance = mysql_fetch_assoc($dbResultAttendances)) {
 				$dbResultAttendee = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'name',
+					'uid,name,username',
 					$tableUsers,
 					'uid='.intval($currentAttendance['user'])
 						.t3lib_pageSelect::enableFields($tableUsers),
@@ -279,7 +279,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 					$attendeeName = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendee);
 					$seminarData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultSeminar);
 					$newTitle = $attendeeName['name'].' / '.$seminarData['title'].' '.strftime('%d.%m.%Y', $seminarData['begin_date']);
-					$result .= '<p>'.$newTitle.'</p>';
+					$displayTitle = $attendeeName['name'].' ['.$attendeeName['username'].':'.$attendeeName['uid'].'] / '.$seminarData['title'].' '.strftime('%d.%m.%Y', $seminarData['begin_date']);
+					$result .= '<p>'.$displayTitle.'</p>';
 					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 						$tableAttendances,
 						'uid='.intval($currentAttendance['uid']),
