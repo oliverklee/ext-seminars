@@ -7,42 +7,42 @@ The extension still lacks many features. Help is very welcome! Contact the autho
 
 If you find any bugs in this extension, please report them in the Typo3 bugtracker under the project tx_seminars.
 
-If you need a feature urgently and you want to speed up development, you can either sponsor the extension authour to code it or code it yourself and provide a (tested!) patch.
+Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please sponsor the author.
 
-Version 0.4.0 (end-August 2005)
----------------------------------
+Version 0.4.0
+-------------
 - clean up richtext options in tca.php [Oli]
-- remove unneeded localization strings [Oli]
-- add ":" after flexforms labels [?]
 - integrate the salutationswitcher extension [Oli]
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
 - online registration: provide link to login page if no user is logged in [Oli]
-- add link to registration page (configurable) from seminar listing page [Mathias]
+- add link to registration page (configurable) from seminar listing page [?]
 - tidy up single view and list view in pi1 [Oli]
 - make CSS class names configurable via flexforms and document this [Oli]
-- make all semantically required DB fields technically required [Oli]
-- make organizer email address required [Oli]
 - improve support for canceling seminars [Oli]
   - CSS style for this [Oli]
   - don't allow registering in the seminar details page or the seminars list [Oli]
   - add localized text "this seminar has been canceled" [Oli]
 - find and remove dead code [Oli]
 - use flexforms as much as possible [Oli]
-- work out how to override non-empty TS values with empty flexforms values [Oli/AM]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
-- comment out "special price" from UI until there is code for it [Oli]
 - in the back end seminar editor, increase the number of lines for the organizers [Oli]
 - investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 - add to manual: what to do with registration records [Oli]
-- in Web->Seminars->Statistics, show login name and UID of the users [Oli]
 - Bei der Flexform-Auswahl des css-Files reklamiert er, das Verzeichnis in upload/tx-txseminars nicht zu finden - tatsächlich wird
 auch nur ein tx-seminars erstellt... Nach Umbenennen des DIR klappts...
+
 - document that name and email must be required for feusers [Oli]
 - document error 500 if organizer has no email address (from old version) [Oli]
+- make all semantically required DB fields technically required [Oli]
+- in Web->Seminars->Statistics, show login name and UID of the users [Oli]
+- add ":" after flexforms labels [?]
+- remove unneeded localization strings [Oli]
+- comment out "special price" from UI until there is code for it [Oli]
 
-Version 0.5.0 (September 2005)
-------------------------------
+Version 0.5.0
+-------------
+- work out how to override non-empty TS values with empty flexforms values [Oli/AM]
 - cache speaker data [Oli]
 - cache site data [Oli]
 - cache payment methods [Oli]
@@ -93,9 +93,10 @@ Version 0.5.0 (September 2005)
 - investigate whether in the back end seminar info view and list mode, the titles can be displayed instead of the UIDs for speakers, organizers, sites and payment methods [?]
 - investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars [?]
 - investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees [?]
+- separate date and time fields for seminars and provide a conversion feature [Oli]
 
-Version 0.6.0 (October 2005)
-----------------------------
+Version 0.6.0
+-------------
 - switch extension status from "alpha" to "beta" [Oli]
 - add possibility for front end users to sign off a seminar if it's early enough [?]
 - add configuration: period before seminar start when signing off is not possible any more (default: 14 days) [?]
@@ -103,6 +104,7 @@ Version 0.6.0 (October 2005)
   - make this configurable [?]
   - make this safe (SSL-only or something) [?]
 - add a way to make the seminar fee dependent on the user's status (student, working etc.) [?]
+- re-add different prices to UI (once they're supported) [?]
 - feature: find and display double registrations [?]
 - feature: avoid double registrations when entering registrations manually [?]
 - allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop) [?]
@@ -127,8 +129,8 @@ Version 0.6.0 (October 2005)
 - in pi1, implement the default sort order (by begin date) using TCA [?]
 - move the global configuration into constants and make them configurable using the constants editor [Oli]
 
-Version 0.7.0 (November 2005)
------------------------------
+Version 0.7.0
+-------------
 - add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions [?]
 - feature for booking assets online (when belonging to the corresponding front end user group) [?]
 - allow signing up for a seminar without being logged in as a front end user (thus creating a new front end user in the process) [?]
@@ -143,8 +145,8 @@ Version 0.7.0 (November 2005)
 - find a way against overly long lists in the back-end (e.g. all registrations) [?]
 - feature: easily enter for a seminar who has attended and who hasn't [?]
 
-Version 1.0.0 (no date set yet)
--------------------------------
+Version 1.0.0
+-------------
 - get the extension reviewed for a cigar [Oli]
 - add automatic headers to code files [?]
 - in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records [?]
@@ -180,3 +182,8 @@ Not triaged yet
 - make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender) [?]
 - investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
 - add configuration for default values for most of the seminar record fields [?]
+- disable the "save and view" button for all our records (as they are not treated as regular content elements) [?]
+- add image to seminar record [?]
+- add image to seminar topic [?]
+- Web -> Seminars should only use the selected page's data (optionally recursively) [?]
+- make the back end forms prettier and clean them up (using TCA.php) [?]
