@@ -17,6 +17,7 @@ $tempColumns = Array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => '30',
+			'eval' => 'trim',
 		)
 	),
 	'tx_seminars_matriculation_number' => Array (
@@ -41,6 +42,7 @@ $tempColumns = Array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => '30',
+			'eval' => 'trim',
 		)
 	),
 	'tx_seminars_semester' => Array (
@@ -65,6 +67,7 @@ $tempColumns = Array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => '30',
+			'eval' => 'trim',
 		)
 	),
 );
@@ -87,10 +90,8 @@ $TCA['tx_seminars_seminars'] = Array (
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_seminars.gif',
+		'hideAtCopy' => true,
 	),
-	'feInterface' => Array (
-		'fe_admin_fieldList' => 'hidden, starttime, endtime, title, subtitle, description, begin_date, end_date, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, notes',
-	)
 );
 
 $TCA['tx_seminars_speakers'] = Array (
@@ -105,9 +106,6 @@ $TCA['tx_seminars_speakers'] = Array (
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_speakers.gif',
 	),
-	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, organization, homepage, description, picture, notes, address, phone_work, phone_home, phone_mobile, fax, email',
-	)
 );
 
 $TCA['tx_seminars_attendances'] = Array (
@@ -122,9 +120,6 @@ $TCA['tx_seminars_attendances'] = Array (
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_attendances.gif',
 	),
-	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, user, seminar, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, known_from, notes',
-	)
 );
 
 $TCA['tx_seminars_sites'] = Array (
@@ -139,9 +134,6 @@ $TCA['tx_seminars_sites'] = Array (
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_sites.gif',
 	),
-	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, address, homepage, directions, notes',
-	)
 );
 
 $TCA['tx_seminars_organizers'] = Array (
@@ -156,9 +148,6 @@ $TCA['tx_seminars_organizers'] = Array (
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_organizers.gif',
 	),
-	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, homepage, email, email_footer',
-	)
 );
 
 $TCA['tx_seminars_payment_methods'] = Array (
@@ -173,9 +162,6 @@ $TCA['tx_seminars_payment_methods'] = Array (
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_payment_methods.gif',
 	),
-	'feInterface' => Array (
-		'fe_admin_fieldList' => 'title, description',
-	)
 );
 
 t3lib_extMgm::addToInsertRecords('tx_seminars_seminars');

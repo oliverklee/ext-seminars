@@ -6,7 +6,6 @@ $TCA['tx_seminars_seminars'] = Array (
 	'interface' => Array (
 		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,begin_date,end_date,place,room,speakers,price_regular,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,notes'
 	),
-	'feInterface' => $TCA['tx_seminars_seminars']['feInterface'],
 	'columns' => Array (
 		'hidden' => Array (
 			'exclude' => 1,
@@ -50,7 +49,7 @@ $TCA['tx_seminars_seminars'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required',
+				'eval' => 'required,trim',
 			)
 		),
 		'subtitle' => Array (
@@ -59,6 +58,7 @@ $TCA['tx_seminars_seminars'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'trim',
 			)
 		),
 		'description' => Array (
@@ -235,6 +235,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		'attendees' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees',
+			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => Array (
 				'type' => 'none',
 			)
@@ -242,6 +243,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		'enough_attendees' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.enough_attendees',
+			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => Array (
 				'type' => 'none',
 			)
@@ -249,6 +251,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		'is_full' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.is_full',
+			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => Array (
 				'type' => 'none',
 			)
@@ -278,7 +281,6 @@ $TCA['tx_seminars_speakers'] = Array (
 	'interface' => Array (
 		'showRecordFieldList' => 'title,organization,homepage,description,picture,notes,address,phone_work,phone_home,phone_mobile,fax,email'
 	),
-	'feInterface' => $TCA['tx_seminars_speakers']['feInterface'],
 	'columns' => Array (
 		'title' => Array (
 			'exclude' => 0,
@@ -286,7 +288,7 @@ $TCA['tx_seminars_speakers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required',
+				'eval' => 'required,trim',
 			)
 		),
 		'organization' => Array (
@@ -295,6 +297,7 @@ $TCA['tx_seminars_speakers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'trim',
 			)
 		),
 		'homepage' => Array (
@@ -305,7 +308,7 @@ $TCA['tx_seminars_speakers'] = Array (
 				'size' => '15',
 				'max' => '255',
 				'checkbox' => '',
-				'eval' => 'trim',
+				'eval' => 'trim,nospace',
 				'wizards' => Array(
 					'_PADDING' => 2,
 					'link' => Array(
@@ -366,6 +369,7 @@ $TCA['tx_seminars_speakers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'trim',
 			)
 		),
 		'phone_home' => Array (
@@ -374,6 +378,7 @@ $TCA['tx_seminars_speakers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'trim',
 			)
 		),
 		'phone_mobile' => Array (
@@ -382,6 +387,7 @@ $TCA['tx_seminars_speakers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'trim',
 			)
 		),
 		'fax' => Array (
@@ -390,6 +396,7 @@ $TCA['tx_seminars_speakers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'trim',
 			)
 		),
 		'email' => Array (
@@ -398,6 +405,7 @@ $TCA['tx_seminars_speakers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'trim,nospace',
 			)
 		),
 	),
@@ -416,13 +424,12 @@ $TCA['tx_seminars_attendances'] = Array (
 	'interface' => Array (
 		'showRecordFieldList' => 'title,user,seminar,paid,datepaid,method_of_payment,been_there,interests,expectations,background_knowledge,known_from,notes'
 	),
-	'feInterface' => $TCA['tx_seminars_attendances']['feInterface'],
 	'columns' => Array (
-		"title" => Array (
-			"exclude" => 0,
-			"label" => "LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.title",
-			"config" => Array (
-				"type" => "none",
+		'title' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.title',
+			'config' => Array (
+				'type' => 'none',
 			)
 		),
 		'user' => Array (
@@ -548,7 +555,6 @@ $TCA['tx_seminars_sites'] = Array (
 	'interface' => Array (
 		'showRecordFieldList' => 'title,address,homepage,directions,notes'
 	),
-	'feInterface' => $TCA['tx_seminars_sites']['feInterface'],
 	'columns' => Array (
 		'title' => Array (
 			'exclude' => 0,
@@ -556,7 +562,7 @@ $TCA['tx_seminars_sites'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required',
+				'eval' => 'required,trim',
 			)
 		),
 		'address' => Array (
@@ -576,7 +582,7 @@ $TCA['tx_seminars_sites'] = Array (
 				'size' => '15',
 				'max' => '255',
 				'checkbox' => '',
-				'eval' => 'trim',
+				'eval' => 'trim,nospace',
 				'wizards' => Array(
 					'_PADDING' => 2,
 					'link' => Array(
@@ -623,7 +629,6 @@ $TCA['tx_seminars_organizers'] = Array (
 	'interface' => Array (
 		'showRecordFieldList' => 'title,homepage,email,email_footer'
 	),
-	'feInterface' => $TCA['tx_seminars_organizers']['feInterface'],
 	'columns' => Array (
 		'title' => Array (
 			'exclude' => 0,
@@ -631,7 +636,7 @@ $TCA['tx_seminars_organizers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required',
+				'eval' => 'required,trim',
 			)
 		),
 		'homepage' => Array (
@@ -642,7 +647,7 @@ $TCA['tx_seminars_organizers'] = Array (
 				'size' => '15',
 				'max' => '255',
 				'checkbox' => '',
-				'eval' => 'trim',
+				'eval' => 'trim,nospace',
 				'wizards' => Array(
 					'_PADDING' => 2,
 					'link' => Array(
@@ -661,6 +666,7 @@ $TCA['tx_seminars_organizers'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
+				'eval' => 'required,trim,nospace',
 			)
 		),
 		'email_footer' => Array (
@@ -686,7 +692,6 @@ $TCA['tx_seminars_payment_methods'] = Array (
 	'interface' => Array (
 		'showRecordFieldList' => 'title, description'
 	),
-	'feInterface' => $TCA['tx_seminars_payment_methods']['feInterface'],
 	'columns' => Array (
 		'title' => Array (
 			'exclude' => 0,
@@ -694,7 +699,7 @@ $TCA['tx_seminars_payment_methods'] = Array (
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required',
+				'eval' => 'required,trim',
 			)
 		),
 		'description' => Array (
