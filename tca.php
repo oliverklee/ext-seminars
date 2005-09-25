@@ -279,7 +279,7 @@ $TCA['tx_seminars_seminars'] = Array (
 $TCA['tx_seminars_speakers'] = Array (
 	'ctrl' => $TCA['tx_seminars_speakers']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'title,organization,homepage,description,picture,notes,address,phone_work,phone_home,phone_mobile,fax,email'
+		'showRecordFieldList' => 'title,organization,homepage,description,notes,address,phone_work,phone_home,phone_mobile,fax,email'
 	),
 	'columns' => Array (
 		'title' => Array (
@@ -410,7 +410,7 @@ $TCA['tx_seminars_speakers'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], picture, notes, address, phone_work, phone_home, phone_mobile, fax, email')
+		'0' => Array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], notes, address, phone_work, phone_home, phone_mobile, fax, email')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')
