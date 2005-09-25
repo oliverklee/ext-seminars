@@ -267,7 +267,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], begin_date, end_date, place, room, speakers, price_regular, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, notes')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], begin_date, end_date, place, room, speakers, price_regular, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'starttime, endtime')
@@ -410,7 +410,7 @@ $TCA['tx_seminars_speakers'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], notes, address, phone_work, phone_home, phone_mobile, fax, email')
+		'0' => Array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts], notes, address, phone_work, phone_home, phone_mobile, fax, email')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')
@@ -615,7 +615,7 @@ $TCA['tx_seminars_sites'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, homepage, directions;;;richtext[paste|bold|italic|underline|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], notes')
+		'0' => Array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')
