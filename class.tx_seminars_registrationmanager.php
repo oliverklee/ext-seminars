@@ -169,35 +169,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks whether a user is logged in and hasn't registered for this seminar yet.
-	 * Returns an empty string if everything is OK and an error message otherwise.
-	 * Note: This method does not check if it is possible to register for a given seminar at all.
-	 *
-	 * XXX Currently, this method is not used. Check whether we'll need it or else remove it
-	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register
-	 *
-	 * @return	string		empty string if everything is OK, else a localized error message.
-	 *
-	 * @access	public
-	 */
-	function canRegisterMessage(&$seminar) {
-		/** This is empty as long as no error has occured. */
-		$message = '';
-
-		if (!$this->isLoggedIn()) {
-			$message = $this->pi_getLL('message_notLoggedIn');
-		} else {
-			// The user is logged in. Let's see if he/she already has registered for this seminar.
-			if ($this->isUserRegistered($seminar)) {
-				$message = $this->pi_getLL('message_alreadyRegistered');
-			}
-		}
-
-		return $message;
-	}
-
-	/**
 	 * Checks whether a front end user is already registered for this seminar.
 	 *
 	 * This method must not be called when no front end user is logged in!
