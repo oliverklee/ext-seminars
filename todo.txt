@@ -11,8 +11,6 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.0
 -------------
-- clean up richtext options in tca.php [Oli]
-- integrate the salutationswitcher extension [Oli]
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
 - online registration: provide link to login page if no user is logged in [Oli]
 - add link to registration page (configurable) from seminar listing page [?]
@@ -22,16 +20,20 @@ Version 0.4.0
   - CSS style for this [Oli]
   - don't allow registering in the seminar details page or the seminars list [Oli]
   - add localized text "this seminar has been canceled" [Oli]
-- find and remove dead code [Oli]
 - use flexforms as much as possible [Oli]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
 - in the back end seminar editor, increase the number of lines for the organizers [Oli]
 - investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 - add to manual: what to do with registration records [Oli]
+- on registration page, the text element after the form doesn't start at the very left (CSS issue) [Oli]
+
+- integrate the salutationswitcher extension [Oli]
+- clean up richtext options in tca.php [Oli]
+- find and remove dead code [Oli]
 - Bei der Flexform-Auswahl des css-Files reklamiert er, das Verzeichnis in upload/tx-txseminars nicht zu finden - tatsächlich wird
 auch nur ein tx-seminars erstellt... Nach Umbenennen des DIR klappts...
-
+- remove UI for speakers' pictures until it is supported [Oli]
 - document that name and email must be required for feusers [Oli]
 - document error 500 if organizer has no email address (from old version) [Oli]
 - make all semantically required DB fields technically required [Oli]
@@ -94,6 +96,7 @@ Version 0.5.0
 - investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars [?]
 - investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees [?]
 - separate date and time fields for seminars and provide a conversion feature [Oli]
+- improve CSS for registration form <http://www.alistapart.com/articles/practicalcss/> [Oli]
 
 Version 0.6.0
 -------------
@@ -187,3 +190,6 @@ Not triaged yet
 - add image to seminar topic [?]
 - Web -> Seminars should only use the selected page's data (optionally recursively) [?]
 - make the back end forms prettier and clean them up (using TCA.php) [?]
+- notification mail: Use the organizer as From: and the attendee as Reply-to: [?]
+- allow different hours for multi-day events [?]
+- find a way to use the salutation switcher for the form labels and improve the wording [?]
