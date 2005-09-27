@@ -33,9 +33,9 @@
  * @author	Oliver Klee <typo-coding@oliverklee.de>
  */
 
-require_once (t3lib_extMgm :: extPath('salutationswitcher').'class.tx_salutationswitcher.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_salutationswitcher.php');
 
-class tx_seminars_dbplugin extends tx_salutationswitcher {
+class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	/** The extension key. */
 	var $extKey = 'seminars';
 

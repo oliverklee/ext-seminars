@@ -30,7 +30,6 @@
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('salutationswitcher').'class.tx_salutationswitcher.php');
 require_once(t3lib_extMgm::extPath('frontendformslib').'class.tx_frontendformslib.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
