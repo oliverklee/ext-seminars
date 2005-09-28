@@ -1066,7 +1066,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function canSomebodyRegister() {
 		return $this->needsRegistration() &&
-			!$this->seminarData['cancelled'] &&
+			!$this->isCancelled() &&
 			($GLOBALS['SIM_EXEC_TIME'] < $this->seminarData['begin_date']) &&
 			$this->hasVacancies();
 	}
@@ -1088,7 +1088,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 		if (!$this->needsRegistration()) {
 			$message = $this->pi_getLL('message_noRegistrationNecessary');
-		} elseif ($this->seminarData['cancelled']) {
+		} elseif ($this->isCancelled()) {
 			$message = $this->pi_getLL('message_seminarCancelled');
 		} elseif ($GLOBALS['SIM_EXEC_TIME'] > $this->seminarData['end_date']) {
 			$message = $this->pi_getLL('message_seminarOver');
@@ -1099,6 +1099,17 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Checks whether this event has been cancelled.
+	 *
+	 * @return	boolean		true if the event has been cancelled, false otherwise
+	 *
+	 * @access public
+	 */
+	function isCancelled() {
+		return (boolean) $this->seminarData['cancelled'];
 	}
 
 	/**

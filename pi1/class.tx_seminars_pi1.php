@@ -292,7 +292,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
 
-		$this->setMarkerContent('class_itemrow',    ($c % 2) ? 'class="listrow-odd"' : '');
+		$rowClass = ($c % 2) ? 'listrow-odd' : '';
+		$cancelledClass = ($currentSeminar->isCancelled()) ? $this->pi_getClassName('cancelled') : '';
+		// If we have two classes, we need a space as a separator.
+		$classSeparator = (!empty($rowClass) && !empty($cancelledClass)) ? ' ' : '';
+		// Only use the class construct if we actually have a class.
+		$completeClass = (!empty($rowClass) || !empty($cancelledClass)) ?
+			'class="'.$rowClass.$classSeparator.$cancelledClass.'"' :
+			'';
+
+		$this->setMarkerContent('class_itemrow',    $completeClass);
 
 		$this->setMarkerContent('title_link',       $currentSeminar->getLinkedTitle($this));
 		$this->setMarkerContent('date',             $currentSeminar->getDate());
