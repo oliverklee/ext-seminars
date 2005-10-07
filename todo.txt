@@ -13,16 +13,20 @@ Version 0.4.0
 -------------
 - remove config values from flex forms if they don't refer to pi1, but to another class [Oli]
 - online registration: provide link to login page if no user is logged in [Oli]
-- add link to registration page (configurable) from seminar listing page [?]
 - tidy up single view and list view in pi1 [Oli]
-- make CSS class names configurable via flexforms and document this [Oli]
-- use flexforms as much as possible [Oli]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
 - in the back end seminar editor, increase the number of lines for the organizers [Oli]
 - investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 - add to manual: what to do with registration records [Oli]
 - on registration page, the text element after the form doesn't start at the very left (CSS issue) [Oli]
+- document that both start date/time and end date/time must be entered for an event to be displayed in the list view [Oli]
+- investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
+- investigate whether to set the HTTP status of the registration page to 404 if the seminar number in the URL is invalid [?]
+- detailed view: if the seminar number in the URL is invalid, show a message instead of trying to display the seminar details [Oli]
+- detailed view: if no registration is necessary for a seminar, show that instead of the "please log in first" message [Oli]
+- bug: the notification mail to the organizer contains the statistics _before_ they are updated with the new registration [Oli]
+- s/email/e-mail in comments and strings
 
 - add CSS style for cancelled seminars [Oli]
 - s/Date & Time/Time & Date/ in labels [Oli]
@@ -39,6 +43,17 @@ auch nur ein tx-seminars erstellt... Nach Umbenennen des DIR klappts...
 - add ":" after flexforms labels [?]
 - remove unneeded localization strings [Oli]
 - comment out "special price" from UI until there is code for it [Oli]
+
+Version 0.4.1
+-------------
+- ext_tables.sql: replace all "blob" (comma-lists of foreign UIDs) with "tinytext" [Oli]
+- add two additional fields for Martin Kurz [Oli]
+- make viewing the two additional fields configurable in the EM [Oli]
+- add back end and front end support for the field "special price" [Oli]
+- add link to registration page (configurable) from seminar listing page [?]
+- make CSS class names configurable via flexforms and document this [Oli]
+- use flexforms as much as possible [Oli]
+
 
 Version 0.5.0
 -------------
@@ -181,7 +196,6 @@ Not triaged yet
 - add all organizers as Reply-To: in registration confirmation email [?]
 - add automated tests using PHPunit or something like it [Oli]
 - make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender) [?]
-- investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
 - add configuration for default values for most of the seminar record fields [?]
 - disable the "save and view" button for all our records (as they are not treated as regular content elements) [?]
 - add image to seminar record [?]
@@ -192,3 +206,6 @@ Not triaged yet
 - allow different hours for multi-day events [?]
 - find a way to use the salutation switcher for the form labels and improve the wording [?]
 - don't display "page 1 of 1" in the list view if there is only 1 page [?]
+- function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online) [?]
+- list view: modify the css so that the whole table cell for the title is clickable as a link [?]
+- find a way to enter and display open-ended events [?]
