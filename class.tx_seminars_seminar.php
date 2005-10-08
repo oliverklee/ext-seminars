@@ -884,7 +884,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function getRegistrationLink(&$plugin) {
 		if (!$this->registrationManager->canGenerallyRegister($this->getUid())) {
-			$result = $this->registrationManager->canGenerallyRegisterMessage($this->getUid());
+			$result = $this->registrationManager->canGenerallyRegisterMessage($this->getUid(), $plugin);
 		} elseif (!$this->registrationManager->canUserRegisterForSeminar($this)) {
 			$result = $this->registrationManager->canUserRegisterForSeminarMessage($this);
 		} else {

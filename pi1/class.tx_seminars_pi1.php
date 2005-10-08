@@ -400,7 +400,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
 
 		if (!$this->registrationManager->canGenerallyRegister($this->piVars['seminar'])) {
-			$errorMessage = $this->registrationManager->canGenerallyRegisterMessage($this->piVars['seminar']);
+			$errorMessage = $this->registrationManager->canGenerallyRegisterMessage($this->piVars['seminar'], $this);
 		} else {
 			/** Name of the seminar class in case someone subclasses it. */
 			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');

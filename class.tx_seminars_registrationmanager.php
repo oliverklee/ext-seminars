@@ -110,16 +110,19 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @param	String		a given seminar UID (may not neccessarily be an integer)
 	 *
-	 * @return	string		empty string if everything is OK, else a localized error message.
+	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
+	 *
+	 * @return	string		empty string if everything is OK, else a localized error message (may be a link).
 	 *
 	 * @access public
 	 */
-	function canGenerallyRegisterMessage($seminarUid) {
+	function canGenerallyRegisterMessage($seminarUid, &$plugin) {
 		/** This is empty as long as no error has occured. */
 		$message = '';
 
 		if (!$this->isLoggedIn()) {
-			$message = $this->pi_getLL('message_notLoggedIn');
+			$message = $plugin->cObj->getTypoLink($this->pi_getLL('message_notLoggedIn'),
+				$plugin->getConfValue('loginPID'));
 		} elseif (!tx_seminars_seminar::existsSeminar($seminarUid)) {
 			$message = $this->pi_getLL('message_wrongSeminarNumber');
 			header('Status: 404 Not Found');
