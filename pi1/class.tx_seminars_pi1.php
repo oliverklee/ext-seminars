@@ -38,7 +38,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
-	/** The seminar for which the user wants to register. */
+	/** The seminar which we want to list/show or for which the user wants to register. */
 	var $seminar;
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
@@ -203,65 +203,61 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function singleView() {
 		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 
-		if (tx_seminars_seminar::existsSeminar($this->internal['currentRow']['uid'])) {
-			/** Name of the seminar class in case someone subclasses it. */
-			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-			$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
-	
+		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
 			// This sets the title of the page for use in indexed search results:
-			$GLOBALS['TSFE']->indexedDocTitle = $currentSeminar->getTitle();
+			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
 	
-			$this->setMarkerContent('type', $currentSeminar->getType());
-			$this->setMarkerContent('title', $currentSeminar->getTitle());
+			$this->setMarkerContent('type', $this->seminar->getType());
+			$this->setMarkerContent('title', $this->seminar->getTitle());
 	
-			if ($currentSeminar->hasSubtitle()) {
-				$this->setMarkerContent('subtitle', $currentSeminar->getSubtitle());
+			if ($this->seminar->hasSubtitle()) {
+				$this->setMarkerContent('subtitle', $this->seminar->getSubtitle());
 			} else {
 				$this->readSubpartsToHide('subtitle', 'field_wrapper');
 			}
 	
-			if ($currentSeminar->hasDescription()) {
-				$this->setMarkerContent('description', $currentSeminar->getDescription($this));
+			if ($this->seminar->hasDescription()) {
+				$this->setMarkerContent('description', $this->seminar->getDescription($this));
 			} else {
 				$this->readSubpartsToHide('description', 'field_wrapper');
 			}
 	
-			$this->setMarkerContent('date', $currentSeminar->getDate());
-			$this->setMarkerContent('time', $currentSeminar->getTime());
-			$this->setMarkerContent('place', $currentSeminar->getPlace($this));
+			$this->setMarkerContent('date', $this->seminar->getDate());
+			$this->setMarkerContent('time', $this->seminar->getTime());
+			$this->setMarkerContent('place', $this->seminar->getPlace($this));
 	
-			if ($currentSeminar->hasRoom()) {
-				$this->setMarkerContent('room', $currentSeminar->getRoom());
+			if ($this->seminar->hasRoom()) {
+				$this->setMarkerContent('room', $this->seminar->getRoom());
 			} else {
 				$this->readSubpartsToHide('room', 'field_wrapper');
 			}
 	
-			if ($currentSeminar->hasSpeakers()) {
-				$this->setMarkerContent('speakers', $currentSeminar->getSpeakers($this));
+			if ($this->seminar->hasSpeakers()) {
+				$this->setMarkerContent('speakers', $this->seminar->getSpeakers($this));
 			} else {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}
 	
-			$this->setMarkerContent('price', $currentSeminar->getPrice());
+			$this->setMarkerContent('price', $this->seminar->getPrice());
 	
-			if ($currentSeminar->hasPaymentMethods()) {
-				$this->setMarkerContent('paymentmethods', $currentSeminar->getPaymentMethods($this));
+			if ($this->seminar->hasPaymentMethods()) {
+				$this->setMarkerContent('paymentmethods', $this->seminar->getPaymentMethods($this));
 			} else {
 				$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
 			}
 	
-			$this->setMarkerContent('organizers', $currentSeminar->getOrganizers($this));
+			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
 	
-			if ($currentSeminar->needsRegistration()) {
-				$this->setMarkerContent('vacancies', $currentSeminar->getVacancies());
+			if ($this->seminar->needsRegistration()) {
+				$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
 			} else {
 				$this->readSubpartsToHide('vacancies', 'field_wrapper');
 			}
 	
 			$this->setMarkerContent('registration',
-				$this->registrationManager->canRegisterIfLoggedIn($currentSeminar) ?
-					$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $currentSeminar) :
-					$this->registrationManager->canRegisterIfLoggedInMessage($currentSeminar)				 
+				$this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
+					$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) :
+					$this->registrationManager->canRegisterIfLoggedInMessage($this->seminar)				 
 			);
 			$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
 	
@@ -272,6 +268,29 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			header('Status: 404 Not Found');
 		}
 
+		return $result;
+	}
+
+	/**
+	 * Creates a seminar in $this->seminar.
+	 * $this->registrationManager must have been initialized before this method may be called.
+	 *
+	 * @param	int			a seminar UID 
+	 *
+	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
+	 *
+	 * @access private
+	 */
+	function createSeminar($seminarUid) {
+		$result = false;
+
+		if (tx_seminars_seminar::existsSeminar($seminarUid)) {
+			/** Name of the seminar class in case someone subclasses it. */
+			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+			$this->seminar =& new $seminarClassname($this->registrationManager, $seminarUid);
+			$result = true;
+		}
+		
 		return $result;
 	}
 
@@ -304,27 +323,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_row($c) {
-		/** Name of the seminar class in case someone subclasses it. */
-		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
-
-		$rowClass = ($c % 2) ? 'listrow-odd' : '';
-		$cancelledClass = ($currentSeminar->isCancelled()) ? $this->pi_getClassName('cancelled') : '';
-		// If we have two classes, we need a space as a separator.
-		$classSeparator = (!empty($rowClass) && !empty($cancelledClass)) ? ' ' : '';
-		// Only use the class construct if we actually have a class.
-		$completeClass = (!empty($rowClass) || !empty($cancelledClass)) ?
-			'class="'.$rowClass.$classSeparator.$cancelledClass.'"' :
-			'';
-
-		$this->setMarkerContent('class_itemrow',    $completeClass);
-
-		$this->setMarkerContent('title_link',       $currentSeminar->getLinkedTitle($this));
-		$this->setMarkerContent('date',             $currentSeminar->getDate());
-		$this->setMarkerContent('price',            $currentSeminar->getPrice());
-		$this->setMarkerContent('organizers',       $currentSeminar->getOrganizers($this));
-		$this->setMarkerContent('vacancies',        $currentSeminar->needsRegistration() ? $currentSeminar->getVacancies() : '');
-		$this->setMarkerContent('class_listvacancies',  $this->getVacanciesClasses($currentSeminar));
+		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
+			$rowClass = ($c % 2) ? 'listrow-odd' : '';
+			$cancelledClass = ($this->seminar->isCancelled()) ? $this->pi_getClassName('cancelled') : '';
+			// If we have two classes, we need a space as a separator.
+			$classSeparator = (!empty($rowClass) && !empty($cancelledClass)) ? ' ' : '';
+			// Only use the class construct if we actually have a class.
+			$completeClass = (!empty($rowClass) || !empty($cancelledClass)) ?
+				'class="'.$rowClass.$classSeparator.$cancelledClass.'"' :
+				'';
+	
+			$this->setMarkerContent('class_itemrow',    $completeClass);
+	
+			$this->setMarkerContent('title_link',       $this->seminar->getLinkedTitle($this));
+			$this->setMarkerContent('date',             $this->seminar->getDate());
+			$this->setMarkerContent('price',            $this->seminar->getPrice());
+			$this->setMarkerContent('organizers',       $this->seminar->getOrganizers($this));
+			$this->setMarkerContent('vacancies',        $this->seminar->needsRegistration() ? $this->seminar->getVacancies() : '');
+			$this->setMarkerContent('class_listvacancies',  $this->getVacanciesClasses($this->seminar));
+		}
 
 		return $this->substituteMarkerArrayCached('LIST_ITEM');
 	}
@@ -408,14 +425,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
 
-		if (!$this->registrationManager->existsSeminar($this->piVars['seminar'])) {
-			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar'], $this);
-		} else {
-			// Looks like the seminar UID is valid.
-			/** Name of the seminar class in case someone subclasses it. */
-			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-			$this->seminar =& new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
-
+		if ($this->createSeminar($this->piVars['seminar'])) {
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar); 
 			} else {
@@ -423,6 +433,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$errorMessage = $this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar);
 				}
 			}
+		} else {
+			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar'], $this);
 		}
 
 		$result = $this->createRegistrationHeading($errorMessage);
