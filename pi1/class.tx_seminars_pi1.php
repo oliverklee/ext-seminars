@@ -166,13 +166,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$res = $this->pi_exec_query($this->tableSeminars, 1, $inFuture);
 			list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
 
-			// Make listing query, pass query to SQL database
-			$res = $this->pi_exec_query($this->tableSeminars, 0, $inFuture);
-			$this->internal['currentTable'] = $this->tableSeminars;
-
-			// Put the whole list together:
-			// Adds the whole list table
-			$fullTable = $this->pi_list_makelist($res);
+			if ($this->internal['res_count']) {
+				// Make listing query, pass query to SQL database
+				$res = $this->pi_exec_query($this->tableSeminars, 0, $inFuture);
+				$this->internal['currentTable'] = $this->tableSeminars;
+	
+				// Put the whole list together:
+				// Adds the whole list table
+				$fullTable = $this->pi_list_makelist($res);
+			} else {
+				$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
+				$fullTable = $this->substituteMarkerArrayCached('ERROR_VIEW');
+			}
 
 			// Adds the search box:
 			$fullTable .= $this->pi_list_searchBox();
