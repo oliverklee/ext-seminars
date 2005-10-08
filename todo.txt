@@ -21,12 +21,13 @@ Version 0.4.0
 - add to manual: what to do with registration records [Oli]
 - on registration page, the text element after the form doesn't start at the very left (CSS issue) [Oli]
 - document that both start date/time and end date/time must be entered for an event to be displayed in the list view [Oli]
-- investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
-- investigate whether to set the HTTP status of the registration page to 404 if the seminar number in the URL is invalid [?]
-- detailed view: if the seminar number in the URL is invalid, show a message instead of trying to display the seminar details [Oli]
 - detailed view: if no registration is necessary for a seminar, show that instead of the "please log in first" message [Oli]
 - s/email/e-mail in comments and strings
+- add link to registration page (configurable) from seminar listing page [?]
 
+- detailed view: if the seminar number in the URL is invalid, show a message instead of trying to display the seminar details [Oli]
+- investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
+- investigate whether to set the HTTP status of the registration page to 404 if the seminar number in the URL is invalid [?]
 - bug: the notification mail to the organizer contains the statistics _before_ they are updated with the new registration [Oli]
 - add CSS style for cancelled seminars [Oli]
 - s/Date & Time/Time & Date/ in labels [Oli]
@@ -50,7 +51,6 @@ Version 0.4.1
 - add two additional fields for Martin Kurz [Oli]
 - make viewing the two additional fields configurable in the EM [Oli]
 - add back end and front end support for the field "special price" [Oli]
-- add link to registration page (configurable) from seminar listing page [?]
 - make CSS class names configurable via flexforms and document this [Oli]
 - use flexforms as much as possible [Oli]
 
