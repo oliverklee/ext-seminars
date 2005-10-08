@@ -49,6 +49,7 @@ $LOCAL_LANG = Array (
 		'label_registrationForm' => 'Registration data',
 		'label_thankyou' => 'Thank you for your registration. A confirmation email has been sent. We are looking forward to your attendance.',
 
+		'message_wrongSeminarNumber' => 'There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!',
 		'message_registrationForm' => 'If you like, you can enter some data for your registration here:',
 	),
 	'dk' => Array (
@@ -104,6 +105,8 @@ $LOCAL_LANG = Array (
 		'label_thankyou' => 'Vielen Dank für Ihre Anmeldung! Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.',
 		'label_thankyou_informal' => 'Vielen Dank für deine Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf dich und wünschen dir viel Erfolg bei der Veranstaltung.',
 
+		'message_wrongSeminarNumber' => 'Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!',
+		'message_wrongSeminarNumber_informal' => 'Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!',
 		'message_registrationForm' => 'Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:',
 		'message_registrationForm_informal' => 'Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:',
 	),

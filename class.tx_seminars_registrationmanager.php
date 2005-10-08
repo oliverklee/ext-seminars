@@ -122,6 +122,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$message = $this->pi_getLL('message_notLoggedIn');
 		} elseif (!tx_seminars_seminar::existsSeminar($seminarUid)) {
 			$message = $this->pi_getLL('message_wrongSeminarNumber');
+			header('Status: 404 Not Found');
 		}
 
 		return $message;

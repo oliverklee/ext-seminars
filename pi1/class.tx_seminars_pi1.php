@@ -198,65 +198,72 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function singleView() {
 		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 
-		/** Name of the seminar class in case someone subclasses it. */
-		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
-
-
-		// This sets the title of the page for use in indexed search results:
-		$GLOBALS['TSFE']->indexedDocTitle = $currentSeminar->getTitle();
-
-		$this->setMarkerContent('type', $currentSeminar->getType());
-		$this->setMarkerContent('title', $currentSeminar->getTitle());
-
-		if ($currentSeminar->hasSubtitle()) {
-			$this->setMarkerContent('subtitle', $currentSeminar->getSubtitle());
+		if (tx_seminars_seminar::existsSeminar($this->internal['currentRow']['uid'])) {
+			/** Name of the seminar class in case someone subclasses it. */
+			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+			$currentSeminar =& new $seminarClassname($this->registrationManager, $this->internal['currentRow']['uid']);
+	
+			// This sets the title of the page for use in indexed search results:
+			$GLOBALS['TSFE']->indexedDocTitle = $currentSeminar->getTitle();
+	
+			$this->setMarkerContent('type', $currentSeminar->getType());
+			$this->setMarkerContent('title', $currentSeminar->getTitle());
+	
+			if ($currentSeminar->hasSubtitle()) {
+				$this->setMarkerContent('subtitle', $currentSeminar->getSubtitle());
+			} else {
+				$this->readSubpartsToHide('subtitle', 'field_wrapper');
+			}
+	
+			if ($currentSeminar->hasDescription()) {
+				$this->setMarkerContent('description', $currentSeminar->getDescription($this));
+			} else {
+				$this->readSubpartsToHide('description', 'field_wrapper');
+			}
+	
+			$this->setMarkerContent('date', $currentSeminar->getDate());
+			$this->setMarkerContent('time', $currentSeminar->getTime());
+			$this->setMarkerContent('place', $currentSeminar->getPlace($this));
+	
+			if ($currentSeminar->hasRoom()) {
+				$this->setMarkerContent('room', $currentSeminar->getRoom());
+			} else {
+				$this->readSubpartsToHide('room', 'field_wrapper');
+			}
+	
+			if ($currentSeminar->hasSpeakers()) {
+				$this->setMarkerContent('speakers', $currentSeminar->getSpeakers($this));
+			} else {
+				$this->readSubpartsToHide('speakers', 'field_wrapper');
+			}
+	
+			$this->setMarkerContent('price', $currentSeminar->getPrice());
+	
+			if ($currentSeminar->hasPaymentMethods()) {
+				$this->setMarkerContent('paymentmethods', $currentSeminar->getPaymentMethods($this));
+			} else {
+				$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
+			}
+	
+			$this->setMarkerContent('organizers', $currentSeminar->getOrganizers($this));
+	
+			if ($currentSeminar->needsRegistration()) {
+				$this->setMarkerContent('vacancies', $currentSeminar->getVacancies());
+			} else {
+				$this->readSubpartsToHide('vacancies', 'field_wrapper');
+			}
+	
+			$this->setMarkerContent('registration', $currentSeminar->getRegistrationLink($this));
+			$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
+	
+			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
 		} else {
-			$this->readSubpartsToHide('subtitle', 'field_wrapper');
+			$this->setMarkerContent('error_text', $this->pi_getLL('message_wrongSeminarNumber'));
+			$result = $this->substituteMarkerArrayCached('ERROR_VIEW');
+			header('Status: 404 Not Found');
 		}
 
-		if ($currentSeminar->hasDescription()) {
-			$this->setMarkerContent('description', $currentSeminar->getDescription($this));
-		} else {
-			$this->readSubpartsToHide('description', 'field_wrapper');
-		}
-
-		$this->setMarkerContent('date', $currentSeminar->getDate());
-		$this->setMarkerContent('time', $currentSeminar->getTime());
-		$this->setMarkerContent('place', $currentSeminar->getPlace($this));
-
-		if ($currentSeminar->hasRoom()) {
-			$this->setMarkerContent('room', $currentSeminar->getRoom());
-		} else {
-			$this->readSubpartsToHide('room', 'field_wrapper');
-		}
-
-		if ($currentSeminar->hasSpeakers()) {
-			$this->setMarkerContent('speakers', $currentSeminar->getSpeakers($this));
-		} else {
-			$this->readSubpartsToHide('speakers', 'field_wrapper');
-		}
-
-		$this->setMarkerContent('price', $currentSeminar->getPrice());
-
-		if ($currentSeminar->hasPaymentMethods()) {
-			$this->setMarkerContent('paymentmethods', $currentSeminar->getPaymentMethods($this));
-		} else {
-			$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
-		}
-
-		$this->setMarkerContent('organizers', $currentSeminar->getOrganizers($this));
-
-		if ($currentSeminar->needsRegistration()) {
-			$this->setMarkerContent('vacancies', $currentSeminar->getVacancies());
-		} else {
-			$this->readSubpartsToHide('vacancies', 'field_wrapper');
-		}
-
-		$this->setMarkerContent('registration', $currentSeminar->getRegistrationLink($this));
-		$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
-
-		return $this->substituteMarkerArrayCached('SINGLE_VIEW');
+		return $result;
 	}
 
 	/**

@@ -109,7 +109,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			}
 		}
 
-		return $result;
+		return (boolean) $result;
 	}
 
 	/**
