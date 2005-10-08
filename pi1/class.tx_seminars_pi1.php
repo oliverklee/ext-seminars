@@ -470,6 +470,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
 			// Form has not yet been submitted, so render the form:
 			$output .= $formObj->renderWholeForm();
+			$output .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
 		}
 
 		return $output;

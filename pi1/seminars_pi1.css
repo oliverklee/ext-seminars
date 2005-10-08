@@ -1,3 +1,9 @@
+.tx-seminars-pi1-clear {
+  clear: both;
+  width: 1px;
+  height: 1px;
+}
+
 .tx-seminars-pi1-error {
   color: #f00;
   font-weight: bold;
