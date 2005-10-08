@@ -208,3 +208,4 @@ Not triaged yet
 - list view: modify the css so that the whole table cell for the title is clickable as a link [?]
 - find a way to enter and display open-ended events [?]
 - automatically return to the registration page after login [?]
+- investigate how the colored "vancancies" square get displayed for seminar that have already started and for seminars that are already over [?]
