@@ -873,32 +873,6 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Creates a HTML link to the registration page (not wrapped in a paragraph, though)
-	 * or a localized error message if registration is not possible.
-	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_linkTP() on (must not be null)
-	 *
-	 * @return	String		HTML link or error message
-	 *
-	 * @access public
-	 */
-	function getRegistrationLink(&$plugin) {
-		if (!$this->registrationManager->canGenerallyRegister($this->getUid())) {
-			$result = $this->registrationManager->canGenerallyRegisterMessage($this->getUid(), $plugin);
-		} elseif (!$this->registrationManager->canUserRegisterForSeminar($this)) {
-			$result = $this->registrationManager->canUserRegisterForSeminarMessage($this);
-		} else {
-			$result = $plugin->cObj->getTypoLink(
-				$plugin->pi_getLL('label_onlineRegistration'),
-				$plugin->getConfValue('registerPID'),
-				array('tx_seminars_pi1[seminar]' => $this->getUid())
-			);
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Gets the URL to the detailed view of this seminar.
 	 *
 	 * If $this->conf['listPID'] (and the corresponding flexforms value) is not set or 0,

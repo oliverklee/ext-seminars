@@ -258,7 +258,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('vacancies', 'field_wrapper');
 			}
 	
-			$this->setMarkerContent('registration', $currentSeminar->getRegistrationLink($this));
+			$this->setMarkerContent('registration',
+				$this->registrationManager->canRegisterIfLoggedIn($currentSeminar) ?
+					$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $currentSeminar) :
+					$this->registrationManager->canRegisterIfLoggedInMessage($currentSeminar)				 
+			);
 			$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
 	
 			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
@@ -404,14 +408,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
 
-		if (!$this->registrationManager->canGenerallyRegister($this->piVars['seminar'])) {
-			$errorMessage = $this->registrationManager->canGenerallyRegisterMessage($this->piVars['seminar'], $this);
+		if (!$this->registrationManager->existsSeminar($this->piVars['seminar'])) {
+			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar'], $this);
 		} else {
+			// Looks like the seminar UID is valid.
 			/** Name of the seminar class in case someone subclasses it. */
 			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 			$this->seminar =& new $seminarClassname($this->registrationManager, $this->piVars['seminar']);
 
-			$errorMessage = $this->registrationManager->canUserRegisterForSeminarMessage($this->seminar);
+			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
+				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar); 
+			} else {
+				if (!$this->registrationManager->isLoggedIn()) {
+					$errorMessage = $this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar);
+				}
+			}
 		}
 
 		$result = $this->createRegistrationHeading($errorMessage);

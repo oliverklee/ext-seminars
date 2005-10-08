@@ -79,58 +79,145 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks whether it is generally possible to register
-	 * (without looking at a certain seminar):
-	 * If a user is logged in and a non-deleted and non-hidden seminar with the given number exists.
+	 * Checks whether is possible to register for a given seminar at all:
+	 * if a possibly logged-in user hasn't registered yet for this seminar,
+	 * if the seminar isn't cancelled, full etc.
 	 *
-	 * This function can be called even if no seminar object exists.
+	 * If no user is logged in, it is just checked whether somebody could register
+	 * for this seminar.
 	 *
-	 * Note: This function does not check whether the logged-in user could register for a certain seminar.
+	 * Returns true if everything is okay, false otherwise.
 	 *
-	 * @param	String		a given seminar UID (may not neccessarily be an integer)
+	 * This function even works if no user is logged in.
 	 *
-	 * @return	boolean		true if it is possible to register, false otherwise
+	 * @param	object		a seminar for which we'll check if it is possible to register (must not be null)
+	 *
+	 * @return	boolean		true if everything is okay for the link, false otherwise
 	 *
 	 * @access public
 	 */
-	function canGenerallyRegister($seminarUid) {
-		// We can't use t3lib_div::makeInstanceClassName in this case as we
-		// cannot use a class function when using a variable as class name.
-		return ($this->isLoggedIn()) && (tx_seminars_seminar::existsSeminar($seminarUid));
+	function canRegisterIfLoggedIn(&$seminar) {
+		$result = true;
+		
+		if ($this->isLoggedIn() && $this->isUserRegistered($seminar)) {
+			// a user is logged in and is already registered for that seminar
+			$result = false;
+		} else {
+			// it is not possible to register for this seminar at all (it is cancelled, full, etc.)
+			$result = $seminar->canSomebodyRegister();
+		}
+		
+		return $result;
 	}
 
 	/**
-	 * Checks whether it is generally possible to register
-	 * (without looking at a certain seminar):
-	 * If a user is logged in and a non-deleted and non-hidden seminar with the given number exists.
+	 * Checks whether is possible to register for a given seminar at all:
+	 * if a possibly logged-in user hasn't registered yet for this seminar,
+	 * if the seminar isn't cancelled, full etc.
+	 *
+	 * If no user is logged in, it is just checked whether somebody could register
+	 * for this seminar.
+	 *
+	 * Returns a message if there is anything to complain about
+	 * and an empty string otherwise.
+	 *
+	 * This function even works if no user is logged in.
+	 *
+	 * @param	object		a seminar for which we'll check if it is possible to register (must not be null)
+	 *
+	 * @return	String		error message or empty string
+	 *
+	 * @access public
+	 */
+	function canRegisterIfLoggedInMessage(&$seminar) {
+		$result = '';
+		
+		if ($this->isLoggedIn() && $this->isUserRegistered($seminar)) {
+			// a user is logged in and is already registered for that seminar
+			$result = $this->pi_getLL('message_alreadyRegistered');
+		} elseif (!$seminar->canSomebodyRegister()) {
+			// it is not possible to register for this seminar at all (it is cancelled, full, etc.)
+			$result = $seminar->canSomebodyRegisterMessage();
+		}
+		
+		return $result;
+	}
+
+	/**
+	 * Creates an HTML link to either the registration page (if a user is logged in)
+	 * or the login page (if no user is logged in).
+	 *
+	 * Before you can call this function, you should make sure that the link makes sense
+	 * (ie. the seminar still has vacancies, the user hasn't registered for this seminar etc.).
+	 *
+	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_linkTP() on (must not be null)
+	 *
+	 * @param	object		a seminar for which we'll check if it is possible to register (may be null), if this is null, the seminar UID parameter will be disregarded
+	 *
+	 * @return	String		HTML code with the link
+	 *
+	 * @access public
+	 */
+	function getLinkToRegistrationOrLoginPage(&$plugin, &$seminar) {
+		if ($this->isLoggedIn()) {
+			// provide the registration link
+			$result = $plugin->cObj->getTypoLink(
+				$plugin->pi_getLL('label_onlineRegistration'),
+				$plugin->getConfValue('registerPID'),
+				array('tx_seminars_pi1[seminar]' => $seminar->getUid())
+			);
+		} else {
+			// provide a link to the login form
+			$result = $plugin->cObj->getTypoLink($this->pi_getLL('message_notLoggedIn'),
+				$plugin->getConfValue('loginPID'));
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a seminar UID is valid,
+	 * ie. a non-deleted and non-hidden seminar with the given number exists.
 	 *
 	 * This function can be called even if no seminar object exists.
 	 *
-	 * Note: This function does not check whether the logged-in user could register for a certain seminar.
+	 * @param	String		a given seminar UID (may not neccessarily be an integer)
+	 *
+	 * @return	boolean		true the UID is valid, false otherwise
+	 *
+	 * @access public
+	 */
+	function existsSeminar($seminarUid) {
+		// We can't use t3lib_div::makeInstanceClassName in this case as we
+		// cannot use a class function when using a variable as class name.
+		return tx_seminars_seminar::existsSeminar($seminarUid);
+	}
+
+	/**
+	 * Checks whether a seminar UID is valid,
+	 * ie. a non-deleted and non-hidden seminar with the given number exists.
+	 *
+	 * This function can be called even if no seminar object exists.
 	 *
 	 * @param	String		a given seminar UID (may not neccessarily be an integer)
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
 	 *
-	 * @return	string		empty string if everything is OK, else a localized error message (may be a link).
+	 * @return	string		empty string if the UID is valid, else a localized error message
 	 *
 	 * @access public
 	 */
-	function canGenerallyRegisterMessage($seminarUid, &$plugin) {
+	function existsSeminarMessage($seminarUid, &$plugin) {
 		/** This is empty as long as no error has occured. */
 		$message = '';
 
-		if (!$this->isLoggedIn()) {
-			$message = $plugin->cObj->getTypoLink($this->pi_getLL('message_notLoggedIn'),
-				$plugin->getConfValue('loginPID'));
-		} elseif (!tx_seminars_seminar::existsSeminar($seminarUid)) {
+		if (!tx_seminars_seminar::existsSeminar($seminarUid)) {
 			$message = $this->pi_getLL('message_wrongSeminarNumber');
 			header('Status: 404 Not Found');
 		}
 
 		return $message;
 	}
-
 	/**
 	 * Checks whether it is possible to register for a given seminar at all
 	 * and the logged in user can register for it.
@@ -138,6 +225,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Before calling this method, make sure that a user is logged in.
 	 *
 	 * This method may only be called when a seminar object (with a valid UID) exists.
+	 *
+	 * XXX This function may be needed for the drop-down-list on the registration page
+	 * and else should go away.
 	 *
 	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)
 	 *
@@ -156,6 +246,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Before calling this method, make sure that a user is logged in.
 	 *
 	 * This method may only be called when a seminar object (with a valid UID) exists.
+	 *
+	 * XXX This function may be needed for the drop-down-list on the registration page
+	 * and else should go away.
 	 *
 	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)
 	 *
