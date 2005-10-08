@@ -775,11 +775,11 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Gets our organizers' names and email addresses in the format
+	 * Gets our organizers' names and e-mail addresses in the format
 	 *   Name <email@domain.com>
 	 * The name is not encoded yet.
 	 *
-	 * @return	array		the organizers' names and email addresses
+	 * @return	array		the organizers' names and e-mail addresses
 	 *
 	 * @access public
 	 */
@@ -801,9 +801,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Gets our organizers' email footers.
+	 * Gets our organizers' e-mail footers.
 	 *
-	 * @return	array		the organizers' email footers.
+	 * @return	array		the organizers' e-mail footers.
 	 *
 	 * @access public
 	 */

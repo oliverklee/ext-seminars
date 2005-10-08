@@ -147,9 +147,9 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Gets the attendee's email address
+	 * Gets the attendee's e-mail address
 	 *
-	 * @return	String		the attendee's email address
+	 * @return	String		the attendee's e-mail address
 	 *
 	 * @access private
 	 */
@@ -172,10 +172,10 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Gets the attendee's name and email address in the format
+	 * Gets the attendee's name and e-mail address in the format
 	 * Name <address@provider.com>
 	 *
-	 * @return	String		the attendee's name and email address
+	 * @return	String		the attendee's name and e-mail address
 	 *
 	 * @access private
 	 */
@@ -419,7 +419,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 				$currentOrganizerEmail,
 				$this->pi_getLL('email_notificationSubject').': '.$this->getTitle(),
 				$content,
-				// We use the attendee's email as sender
+				// We use the attendee's e-mail as sender
 				'From: '.$this->getUserNameAndEmail(),
 				'8bit'
 			);

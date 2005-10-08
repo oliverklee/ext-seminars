@@ -22,9 +22,9 @@ Version 0.4.0
 - on registration page, the text element after the form doesn't start at the very left (CSS issue) [Oli]
 - document that both start date/time and end date/time must be entered for an event to be displayed in the list view [Oli]
 - detailed view: if no registration is necessary for a seminar, show that instead of the "please log in first" message [Oli]
-- s/email/e-mail in comments and strings
 - add link to registration page (configurable) from seminar listing page [?]
 
+- s/email/e-mail in comments and strings
 - detailed view: if the seminar number in the URL is invalid, show a message instead of trying to display the seminar details [Oli]
 - investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
 - investigate whether to set the HTTP status of the registration page to 404 if the seminar number in the URL is invalid [?]
@@ -37,8 +37,8 @@ Version 0.4.0
 - Bei der Flexform-Auswahl des css-Files reklamiert er, das Verzeichnis in upload/tx-txseminars nicht zu finden - tatsächlich wird
 auch nur ein tx-seminars erstellt... Nach Umbenennen des DIR klappts...
 - remove UI for speakers' pictures until it is supported [Oli]
-- document that name and email must be required for feusers [Oli]
-- document error 500 if organizer has no email address (from old version) [Oli]
+- document that name and e-mail must be required for feusers [Oli]
+- document error 500 if organizer has no e-mail address (from old version) [Oli]
 - make all semantically required DB fields technically required [Oli]
 - in Web->Seminars->Statistics, show login name and UID of the users [Oli]
 - add ":" after flexforms labels [?]
@@ -69,8 +69,8 @@ Version 0.5.0
 - factor out the statistics update into a common function and make it more efficient [Oli]
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics [Oli]
 - make it configurable what to do when a participant signs up [Mathias]
-  - send an email to the organizer
-  - send an email to the participant
+  - send an e-mail to the organizer
+  - send an e-mail to the participant
   - add a participation entry to the database
 - reduce code by using the API for COUNT queries [Oli]
 - make dependencies for registration process [AM]
@@ -79,10 +79,10 @@ Version 0.5.0
 - show a drop-down list of seminars to select from on the registration page [Mathias]
 - matriculation number should be required for students [Oli]
 - prevent that users can delete their accounts if they are registered for a seminar [Mathias]
-- feature to send email to all participants of a seminar [?]
+- feature to send e-mail to all participants of a seminar [?]
   - select from: everyone/paid/not paid
   - user name
-  - seminar to which the email refers
+  - seminar to which the e-mail refers
 - make the wrap for the number of vacancies (colored square) configurable [Oli]
 - add entry in participant records whether their money has been refunded [?]
 - make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
@@ -90,7 +90,7 @@ Version 0.5.0
 - improve and clean up flexforms structure for better usability [Oli]
 - automatic signing off if the user hasn't paid after a configurable timespan (x days after registration or x days before start of seminar) [?]
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off [?]
-- feature for email notification to the organizer once a seminar has enough attendances or is full [?]
+- feature for e-mail notification to the organizer once a seminar has enough attendances or is full [?]
 - investigate performance improvements when using caching or singletons in the template helper class [Oli]
 - make the link to the online registration form CSS-stylable [Oli]
 - optimize the DB queries [?]
@@ -101,7 +101,7 @@ Version 0.5.0
 - make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
 - add a localized "h" after the time [Oli]
 - if no user is logged in for online registration, provide a link to the login form [?]
-- make email charset configurable [?]
+- make e-mail charset configurable [?]
 - refactor seminar::getOrganizers*() [Oli]
 - use array_key_exists() where possible [Oli]
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues() [Oli]
@@ -193,7 +193,7 @@ Not triaged yet
 - feature: configure sort order of seminar list [?]
 - feature: show seminars from a configurable time window in the seminar list [?]
 - add a field "destination group" (Zielgruppe) to the seminar record [?]
-- add all organizers as Reply-To: in registration confirmation email [?]
+- add all organizers as Reply-To: in registration confirmation e-mail [?]
 - add automated tests using PHPunit or something like it [Oli]
 - make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender) [?]
 - add configuration for default values for most of the seminar record fields [?]

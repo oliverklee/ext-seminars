@@ -47,7 +47,7 @@ $LOCAL_LANG = Array (
 		'label_back' => 'Back to listing',
 		'label_onlineRegistration' => 'Register online',
 		'label_registrationForm' => 'Registration data',
-		'label_thankyou' => 'Thank you for your registration. A confirmation email has been sent. We are looking forward to your attendance.',
+		'label_thankyou' => 'Thank you for your registration. A confirmation e-mail has been sent. We are looking forward to your attendance.',
 
 		'message_wrongSeminarNumber' => 'There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!',
 		'message_registrationForm' => 'If you like, you can enter some data for your registration here:',

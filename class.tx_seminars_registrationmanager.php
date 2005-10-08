@@ -199,7 +199,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 	/**
 	 * Creates a registration to $this->registration, writes it to DB,
-	 * and notifies the organizer and the user (both via email).
+	 * and notifies the organizer and the user (both via e-mail).
 	 *
 	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
 	 * @param	array		associative array with the registration data the user has just entered
