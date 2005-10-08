@@ -15,13 +15,13 @@ Version 0.4.0
 - tidy up single view and list view in pi1 [Oli]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - if there are no seminars, don't display the table and the result browser but a message instead [Oli]
-- in the back end seminar editor, increase the number of lines for the organizers [Oli]
 - investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 - add to manual: what to do with registration records [Oli]
 - document that both start date/time and end date/time must be entered for an event to be displayed in the list view [Oli]
 - detailed view: if no registration is necessary for a seminar, show that instead of the "please log in first" message [Oli]
 - add link to registration page (configurable) from seminar listing page [?]
 
+- in the back end seminar editor, increase the number of lines for the organizers and places [Oli]
 - on registration page, the text element after the form doesn't start at the very left (CSS issue) [Oli]
 - s/email/e-mail in comments and strings
 - detailed view: if the seminar number in the URL is invalid, show a message instead of trying to display the seminar details [Oli]

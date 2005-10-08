@@ -101,9 +101,9 @@ $TCA['tx_seminars_seminars'] = Array (
 				'type' => 'group',
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_sites',
-				'size' => 2,
+				'size' => 3,
 				'minitems' => 0,
-				'maxitems' => 2,
+				'maxitems' => 3,
 				'MM' => 'tx_seminars_seminars_place_mm',
 			)
 		),
@@ -180,7 +180,7 @@ $TCA['tx_seminars_seminars'] = Array (
 				'type' => 'group',
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
-				'size' => 2,
+				'size' => 3,
 				'minitems' => 0,
 				'maxitems' => 3,
 			)
