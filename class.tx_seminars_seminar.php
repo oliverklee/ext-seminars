@@ -1161,20 +1161,20 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 			// We count paid and unpaid registrations.
 			// This behaviour will be configurable in a later version.
-			$numberOfSeenAttendees = $numberOfAttendees['num'];
+			$this->seminarData['attendees'] = $numberOfAttendees['num'];
 
 			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-			$hasEnoughAttendees = ($numberOfSeenAttendees >= $this->seminarData['attendees_min']) ? 1 : 0;
+			$this->seminarData['enough_attendees'] = ($this->seminarData['attendees'] >= $this->seminarData['attendees_min']) ? 1 : 0;
 			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-			$isFull = ($numberOfSeenAttendees >= $this->seminarData['attendees_max']) ? 1 : 0;
+			$this->seminarData['is_full'] = ($this->seminarData['attendees'] >= $this->seminarData['attendees_max']) ? 1 : 0;
 
 			$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 				$this->tableSeminars,
 				'uid='.$this->getUid(),
 				array(
-					'attendees' => $numberOfSeenAttendees,
-					'enough_attendees' => $hasEnoughAttendees,
-					'is_full' => $isFull
+					'attendees' => $this->seminarData['attendees'],
+					'enough_attendees' => $this->seminarData['enough_attendees'],
+					'is_full' => $this->seminarData['is_full']
 				)
 			);
 		}

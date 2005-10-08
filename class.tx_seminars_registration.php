@@ -64,7 +64,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		$this->init();
 		$this->cObj =& $cObj;
 
-		$this->seminar = $seminar;
+		$this->seminar =& $seminar;
 
 		$this->recordData['seminar'] = $seminar->getUid();
 		$this->recordData['user'] = $userUid;
