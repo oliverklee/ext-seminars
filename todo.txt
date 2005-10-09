@@ -25,6 +25,8 @@ Version 0.4.1
 - list view: modify the css so that the whole table cell for the title is clickable as a link [?]
 - add all organizers as Reply-To: in registration confirmation e-mail [?]
 - check for unused localization strings once more
+- test multi-page list views
+- price is limited to 1000 EUR - up it to 9999 EUR
 
 Version 0.5.0
 -------------
@@ -176,3 +178,5 @@ Not triaged yet
 - find a way to enter and display open-ended events [?]
 - automatically return to the registration page after login [?]
 - investigate how the colored "vancancies" square get displayed for seminar that have already started and for seminars that are already over [?]
+- attach images to seminars (like in tt_news)
+- attach documents to seminars
