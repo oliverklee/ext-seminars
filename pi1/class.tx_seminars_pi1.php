@@ -97,21 +97,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access private
 	 */
 	function createSeminarList() {
-		switch ((string) $this->getConfValue('CMD')) {
-			case 'singleView':
-				list($t) = explode(':', $this->cObj->currentRecord);
-				$this->internal['currentTable'] = $t;
-				$this->internal['currentRow'] = $this->cObj->data;
-				$result = $this->singleView();
-				break;
-			default:
-				// We default to the list view.
-				if (strstr($this->cObj->currentRecord, 'tt_content')) {
-					$this->conf['pidList'] = $this->getConfValue('pages');
-					$this->conf['recursive'] = $this->getConfValue('recursive');
-				}
-				$result = $this->listView();
-				break;
+		// if we have a 'showUid' var set, we'll show the detailed view
+		if ($this->piVars['showUid']) {
+			$this->internal['currentTable'] = $this->tableSeminars;
+			$this->internal['currentRow'] = $this->pi_getRecord($this->tableSeminars, $this->piVars['showUid']);
+			$result = $this->singleView();
+		} else {
+			if (strstr($this->cObj->currentRecord, 'tt_content')) {
+				$this->conf['pidList'] = $this->getConfValue('pages');
+				$this->conf['recursive'] = $this->getConfValue('recursive');
+			}
+			$result = $this->listView();
 		}
 
 		return $result;
@@ -126,74 +122,64 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function listView() {
 		$result = '';
+		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
+		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
 
-		if ($this->piVars['showUid']) {
-			// If a single element should be displayed:
-			// XXX Move this code up. CMD seems to be not used.
-			$this->internal['currentTable'] = $this->tableSeminars;
-			$this->internal['currentRow'] = $this->pi_getRecord($this->tableSeminars, $this->piVars['showUid']);
-
-			$result = $this->singleView();
-		} else {
-			$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
-			$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
-
-			// hide the registration column if no user is logged in
-			if (!$this->registrationManager->isLoggedIn()) {
-				$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
-				$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
-			}
-
-			// Local settings for the listView function
-			$lConf = $this->conf['listView.'];
-
-			if (!isset($this->piVars['pointer'])) {
-				$this->piVars['pointer'] = 0;
-			}
-
-			// Initializing the query parameters:
-			list($this->internal['orderBy'], $this->internal['descFlag']) = explode(':', $this->piVars['sort']);
-			// If no sort order is given, sort by beginning date.
-			if (empty($this->internal['orderBy'])) {
-				$this->internal['orderBy'] = 'begin_date';
-			}
-			// Number of results to show in a listing.
-			$this->internal['results_at_a_time'] = t3lib_div::intInRange($lConf['results_at_a_time'], 0, 1000, 20);
-			// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
-			$this->internal['maxPages'] = t3lib_div::intInRange($lConf['maxPages'], 0, 1000, 2);
-
-			$this->internal['searchFieldList'] = 'title,subtitle,description';
-			$this->internal['orderByList'] = 'date,begin_date,title,price_regular,organizers';
-
-			/** only show upcoming seminars */
-			$inFuture = 'AND end_date >= '.$GLOBALS['SIM_EXEC_TIME'];
-
-			// Get number of records
-			$res = $this->pi_exec_query($this->tableSeminars, 1, $inFuture);
-			list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
-
-			if ($this->internal['res_count']) {
-				// Make listing query, pass query to SQL database
-				$res = $this->pi_exec_query($this->tableSeminars, 0, $inFuture);
-				$this->internal['currentTable'] = $this->tableSeminars;
-
-				// Put the whole list together:
-				// Adds the whole list table
-				$fullTable = $this->pi_list_makelist($res);
-			} else {
-				$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
-				$fullTable = $this->substituteMarkerArrayCached('ERROR_VIEW');
-			}
-
-			// Adds the search box:
-			$fullTable .= $this->pi_list_searchBox();
-
-			// Adds the result browser:
-			$fullTable .= $this->pi_list_browseresults();
-
-			// Returns the content from the plugin.
-			$result = $fullTable;
+		// hide the registration column if no user is logged in
+		if (!$this->registrationManager->isLoggedIn()) {
+			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
+			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
 		}
+
+		// Local settings for the listView function
+		$lConf = $this->conf['listView.'];
+
+		if (!isset($this->piVars['pointer'])) {
+			$this->piVars['pointer'] = 0;
+		}
+
+		// Initializing the query parameters:
+		list($this->internal['orderBy'], $this->internal['descFlag']) = explode(':', $this->piVars['sort']);
+		// If no sort order is given, sort by beginning date.
+		if (empty($this->internal['orderBy'])) {
+			$this->internal['orderBy'] = 'begin_date';
+		}
+		// Number of results to show in a listing.
+		$this->internal['results_at_a_time'] = t3lib_div::intInRange($lConf['results_at_a_time'], 0, 1000, 20);
+		// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
+		$this->internal['maxPages'] = t3lib_div::intInRange($lConf['maxPages'], 0, 1000, 2);
+
+		$this->internal['searchFieldList'] = 'title,subtitle,description';
+		$this->internal['orderByList'] = 'date,begin_date,title,price_regular,organizers';
+
+		/** only show upcoming seminars */
+		$inFuture = 'AND end_date >= '.$GLOBALS['SIM_EXEC_TIME'];
+
+		// Get number of records
+		$res = $this->pi_exec_query($this->tableSeminars, 1, $inFuture);
+		list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
+
+		if ($this->internal['res_count']) {
+			// Make listing query, pass query to SQL database
+			$res = $this->pi_exec_query($this->tableSeminars, 0, $inFuture);
+			$this->internal['currentTable'] = $this->tableSeminars;
+
+			// Put the whole list together:
+			// Adds the whole list table
+			$fullTable = $this->pi_list_makelist($res);
+		} else {
+			$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
+			$fullTable = $this->substituteMarkerArrayCached('ERROR_VIEW');
+		}
+
+		// Adds the search box:
+		$fullTable .= $this->pi_list_searchBox();
+
+		// Adds the result browser:
+		$fullTable .= $this->pi_list_browseresults();
+
+		// Returns the content from the plugin.
+		$result = $fullTable;
 
 		return $result;
 	}
