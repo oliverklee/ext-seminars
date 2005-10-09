@@ -11,12 +11,12 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.0
 -------------
-- investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 - provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
 - document that both start date/time and end date/time must be entered for an event to be displayed in the list view [Oli]
 - add to manual: what to do with registration records [Oli]
 - document how to link to another seminar from a seminar description [Oli]
 
+- investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
 - tidy up single view and list view in pi1 [Oli]
 - if a user is logged in, add link to registration page (configurable) from seminar listing page [?]
 - $currentSeminar -> $this->seminar in pi1 and some refactoring [Oli]

@@ -157,7 +157,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access public
 	 */
 	function getType() {
-		return $this->conf['eventType'];
+		return $this->getConfValue('eventType');
 	}
 
 	/**
@@ -286,25 +286,25 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
 			$endDate = $this->getSeminarsPropertyInteger('end_date');
 
-			$beginDateDay = strftime($this->conf['dateFormatYMD'], $beginDate);
-			$endDateDay = strftime($this->conf['dateFormatYMD'], $endDate);
+			$beginDateDay = strftime($this->getConfValue('dateFormatYMD'), $beginDate);
+			$endDateDay = strftime($this->getConfValue('dateFormatYMD'), $endDate);
 
 			// Does the workshop span several days?
 			if ($beginDateDay == $endDateDay) {
 				$result = $beginDateDay;
 			} else {
-				if (!$this->conf['abbreviateDateRanges']) {
+				if (!$this->getConfValue('abbreviateDateRanges')) {
 					$result = $beginDateDay;
 				} else {
 					// Are the years different? Then include the complete begin date.
-					if (strftime($this->conf['dateFormatY'], $beginDate) !== strftime($this->conf['dateFormatY'], $endDate)) {
+					if (strftime($this->getConfValue('dateFormatY'), $beginDate) !== strftime($this->getConfValue('dateFormatY'), $endDate)) {
 						$result = $beginDateDay;
 					} else {
 						// Are the months different? Then include day and month.
-						if (strftime($this->conf['dateFormatM'], $beginDate) !== strftime($this->conf['dateFormatM'], $endDate)) {
-							$result = strftime($this->conf['dateFormatMD'], $beginDate);
+						if (strftime($this->getConfValue('dateFormatM'), $beginDate) !== strftime($this->getConfValue('dateFormatM'), $endDate)) {
+							$result = strftime($this->getConfValue('dateFormatMD'), $beginDate);
 						} else {
-							$result = strftime($this->conf['dateFormatD'], $beginDate);
+							$result = strftime($this->getConfValue('dateFormatD'), $beginDate);
 						}
 					}
 				}
@@ -345,8 +345,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
 			$endDate = $this->getSeminarsPropertyInteger('end_date');
 
-			$beginTime = strftime($this->conf['timeFormat'], $beginDate);
-			$endTime = strftime($this->conf['timeFormat'], $endDate);
+			$beginTime = strftime($this->getConfValue('timeFormat'), $beginDate);
+			$endTime = strftime($this->getConfValue('timeFormat'), $endDate);
 
 			$result = $beginTime;
 

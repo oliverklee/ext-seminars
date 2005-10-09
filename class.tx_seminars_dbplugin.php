@@ -102,6 +102,26 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableSpeakersMM     = $dbPrefix.'seminars_speakers_mm';
 		$this->tableSitesMM        = $dbPrefix.'seminars_place_mm';
 	}
+
+	/**
+	 * Gets a value from flexforms or TS setup.
+	 * The priority lies on flexforms; if nothing is found there, the value
+	 * from TS setup is returned. If there is no field with that name in TS setup,
+	 * an empty string is returned.
+	 *
+	 * @param	String		field name to extract
+	 * @param	String		sheet pointer, eg. "sDEF"
+	 *
+	 * @return	String		the value of the corresponding flexforms or TS setup entry (may be empty)
+	 *
+	 * @access protected
+	 */
+	function getConfValue($fieldName, $sheet = 'sDEF') {
+		$flexformsValue = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $fieldName, $sheet);
+		$confValue = isset($this->conf[$fieldName]) ? $this->conf[$fieldName] : '';
+
+		return ($flexformsValue) ? $flexformsValue : $confValue;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_dbplugin.php']) {
