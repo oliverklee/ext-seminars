@@ -9,43 +9,6 @@ If you find any bugs in this extension, please report them in the Typo3 bugtrack
 
 Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please sponsor the author.
 
-Version 0.4.0
--------------
-- provide a patch to make the frontendformslib extension fully XHTML-compliant [Oli]
-- document that both start date/time and end date/time must be entered for an event to be displayed in the list view [Oli]
-- add to manual: what to do with registration records [Oli]
-- document how to link to another seminar from a seminar description [Oli]
-
-- investigate whether to move getConfValue from templateHelper to dbPlugin [Oli]
-- tidy up single view and list view in pi1 [Oli]
-- if a user is logged in, add link to registration page (configurable) from seminar listing page [?]
-- $currentSeminar -> $this->seminar in pi1 and some refactoring [Oli]
-- detailed view and registration page: if no registration is necessary for a seminar, show that instead of the "please log in first" message [Oli]
-- if there are no seminars, don't display the table and the result browser but a message instead [Oli]
-- online registration: provide link to login page if no user is logged in [Oli]
-- in the back end seminar editor, increase the number of lines for the organizers and places [Oli]
-- on registration page, the text element after the form doesn't start at the very left (CSS issue) [Oli]
-- s/email/e-mail in comments and strings
-- detailed view: if the seminar number in the URL is invalid, show a message instead of trying to display the seminar details [Oli]
-- investigate whether to set the HTTP status of the detailed view page to 404 if the seminar number in the URL is invalid [?]
-- investigate whether to set the HTTP status of the registration page to 404 if the seminar number in the URL is invalid [?]
-- bug: the notification mail to the organizer contains the statistics _before_ they are updated with the new registration [Oli]
-- add CSS style for cancelled seminars [Oli]
-- s/Date & Time/Time & Date/ in labels [Oli]
-- integrate the salutationswitcher extension [Oli]
-- clean up richtext options in tca.php [Oli]
-- find and remove dead code [Oli]
-- Bei der Flexform-Auswahl des css-Files reklamiert er, das Verzeichnis in upload/tx-txseminars nicht zu finden - tatsächlich wird
-auch nur ein tx-seminars erstellt... Nach Umbenennen des DIR klappts...
-- remove UI for speakers' pictures until it is supported [Oli]
-- document that name and e-mail must be required for feusers [Oli]
-- document error 500 if organizer has no e-mail address (from old version) [Oli]
-- make all semantically required DB fields technically required [Oli]
-- in Web->Seminars->Statistics, show login name and UID of the users [Oli]
-- add ":" after flexforms labels [?]
-- remove unneeded localization strings [Oli]
-- comment out "special price" from UI until there is code for it [Oli]
-
 Version 0.4.1
 -------------
 - ext_tables.sql: replace all "blob" (comma-lists of foreign UIDs) with "tinytext" [Oli]
