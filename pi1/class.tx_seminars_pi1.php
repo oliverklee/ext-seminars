@@ -138,6 +138,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
 
+			// hide the registration column if no user is logged in
+			if (!$this->registrationManager->isLoggedIn()) {
+				$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
+				$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
+			}
+
 			// Local settings for the listView function
 			$lConf = $this->conf['listView.'];
 
@@ -303,11 +309,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_header() {
-		$this->setMarkerContent('header_title',      $this->getFieldHeader_sortLink('title'));
-		$this->setMarkerContent('header_date',       $this->getFieldHeader_sortLink('date'));
-		$this->setMarkerContent('header_price',      $this->getFieldHeader_sortLink('price_regular'));
-		$this->setMarkerContent('header_organizers', $this->getFieldHeader_sortLink('organizers'));
-		$this->setMarkerContent('header_vacancies',  $this->getFieldHeader('vacancies'));
+		$this->setMarkerContent('header_title',        $this->getFieldHeader_sortLink('title'));
+		$this->setMarkerContent('header_date',         $this->getFieldHeader_sortLink('date'));
+		$this->setMarkerContent('header_price',        $this->getFieldHeader_sortLink('price_regular'));
+		$this->setMarkerContent('header_organizers',   $this->getFieldHeader_sortLink('organizers'));
+		$this->setMarkerContent('header_vacancies',    $this->getFieldHeader('vacancies'));
+		$this->setMarkerContent('header_registration', $this->getFieldHeader('registration'));
 
 		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
@@ -341,6 +348,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('organizers',       $this->seminar->getOrganizers($this));
 			$this->setMarkerContent('vacancies',        $this->seminar->needsRegistration() ? $this->seminar->getVacancies() : '');
 			$this->setMarkerContent('class_listvacancies',  $this->getVacanciesClasses($this->seminar));
+			$this->setMarkerContent('registration',     $this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
+				$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) : ''
+			);
 		}
 
 		return $this->substituteMarkerArrayCached('LIST_ITEM');

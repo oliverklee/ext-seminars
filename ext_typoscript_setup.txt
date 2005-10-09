@@ -34,6 +34,7 @@ plugin.tx_seminars_pi1 {
 	class_headerprice =
 	class_headerorganizers =
 	class_headervacancies =
+	class_headerregistration =
 
 	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_itemrow =
@@ -43,6 +44,7 @@ plugin.tx_seminars_pi1 {
 	class_listdate = date
 	class_listprice = price
 	class_listorganizers =
+	class_listregistration =
 
 	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_square = square
