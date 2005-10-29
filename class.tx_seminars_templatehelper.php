@@ -283,7 +283,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * Example: If the parameter is 'foo', our extension is named 'bar' and we are in p1,
 	 * then the return value is 'class="tx-bar-pi1-foo"'.
 	 *
-	 * If the parameter is an emtry string, the return value is an empty string as well
+	 * If the parameter is an emty string, the return value is an empty string as well
 	 * (not an attribute with an empty value).
 	 *
 	 * @param	String	a CSS class name (may be empty)

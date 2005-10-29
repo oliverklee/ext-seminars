@@ -323,7 +323,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$classSeparator = (!empty($rowClass) && !empty($cancelledClass)) ? ' ' : '';
 			// Only use the class construct if we actually have a class.
 			$completeClass = (!empty($rowClass) || !empty($cancelledClass)) ?
-				'class="'.$rowClass.$classSeparator.$cancelledClass.'"' :
+				' class="'.$rowClass.$classSeparator.$cancelledClass.'"' :
 				'';
 
 			$this->setMarkerContent('class_itemrow',    $completeClass);
@@ -392,7 +392,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @param	object		the current Seminar object
 	 *
-	 * @return	String		a list a space-separated CSS classes (without any quotes and without the class attribute itself)
+	 * @return	String		class attribute filled with a list a space-separated CSS classes, plus a leading space
 	 *
 	 * @access protected
 	 */
@@ -408,7 +408,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 		}
 
-		return 'class="'.$result.'"';
+		return ' class="'.$result.'"';
 	}
 
 	/**

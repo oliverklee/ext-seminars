@@ -36,7 +36,6 @@ Version 0.4.1
 - add configuration for default values for most of the seminar record fields [?]
 - check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
 - in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
-- remove double spaces before CSS class names
 
 Version 0.5.0
 -------------
