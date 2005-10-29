@@ -139,7 +139,7 @@ $TCA['tx_seminars_seminars'] = Array (
 				'eval' => 'int',
 				'checkbox' => '0',
 				'range' => Array (
-					'upper' => '1000',
+					'upper' => '9999',
 					'lower' => '0'
 				),
 				'default' => 0
@@ -155,7 +155,7 @@ $TCA['tx_seminars_seminars'] = Array (
 				'eval' => 'int',
 				'checkbox' => '0',
 				'range' => Array (
-					'upper' => '1000',
+					'upper' => '9999',
 					'lower' => '0'
 				),
 				'default' => 0
