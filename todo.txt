@@ -99,7 +99,6 @@ Version 0.5.0
 - improve CSS for registration form <http://www.alistapart.com/articles/practicalcss/> [Oli]
 - in notification mail, show user's date of birth as a formatted date instead of an integer
 - in notification mail, show user's status as a string instead of an integer
-- s/canceled/cancelled (or the other way around - look it up in a dictionary) in code, strings and manual
 - check for accessibility according to WAI A/AA/AAA, BITV NRW and Sec. 508
 - test with PHP 5
 - include CSS file using TS (without PHP)
