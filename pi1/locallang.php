@@ -105,7 +105,7 @@ $LOCAL_LANG = Array (
 		'label_onlineRegistration' => 'Online anmelden',
 		'label_back' => 'Zur Übersicht',
 		'label_registrationForm' => 'Anmeldedaten',
-		'label_thankyou' => 'Vielen Dank für Ihre Anmeldung! Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.',
+		'label_thankyou' => 'Vielen Dank für Ihre Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.',
 		'label_thankyou_informal' => 'Vielen Dank für deine Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf dich und wünschen dir viel Erfolg bei der Veranstaltung.',
 
 		'message_wrongSeminarNumber' => 'Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!',
