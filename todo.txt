@@ -3,14 +3,16 @@ To-do list and milestone plan for tx_seminars
 
 The assignee is marked in square brackets. [?] Means that a to-do item isn't assigned yet - feel free to take it!
 
-The extension still lacks many features. Help is very welcome! Contact the author if you want to help in any way.
+For this extension, there are still many unimplemented feature ideas. Help is very welcome! Contact the author if you want to help in any way.
 
 If you find any bugs in this extension, please report them in the Typo3 bugtracker under the project tx_seminars.
 
-Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please sponsor the author.
+Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please pay for the author's time.
 
 Version 0.4.1
 -------------
+- also show the seminar date when updating the statistics
+- check that the CSS file doesn't allow for possibly unreadable color combinations
 - ext_tables.sql: replace all "blob" (comma-lists of foreign UIDs) with "tinytext" [Oli]
 - add two additional fields for Martin Kurz [Oli]
 - make viewing the two additional fields configurable in the EM [Oli]
@@ -27,9 +29,22 @@ Version 0.4.1
 - check for unused localization strings once more
 - test multi-page list views
 - price is limited to 1000 EUR - up it to 9999 EUR
+- shorten some overlong DB labels
+- test compatibility with indexed_search
+- provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag
+- fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
+- add tbody and thead to the list view
+- ensure that the organizer field is required
+- flag: enfore payment methods if the price is > 0
+- add configuration for default values for most of the seminar record fields [?]
+- check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
+- in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
 
 Version 0.5.0
 -------------
+- provide a patch for the frontendformslib extension: remove brackets from URLs
+- add titles for links
+- add summaries for tables
 - work out how to override non-empty TS values with empty flexforms values [Oli/AM]
 - cache speaker data [Oli]
 - cache site data [Oli]
@@ -50,7 +65,7 @@ Version 0.5.0
 - make some fe_users data editable on the registration page [Oli]
 - show a drop-down list of seminars to select from on the registration page [Mathias]
 - matriculation number should be required for students [Oli]
-- handle deleted (and "marked as deleted") user accounts graciously [Oli]
+- handle deleted (and "marked as deleted") user accounts and seminars graciously [Oli]
 - feature to send e-mail to all participants of a seminar [?]
   - select from: everyone/paid/not paid
   - user name
@@ -82,6 +97,18 @@ Version 0.5.0
 - investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees [?]
 - separate date and time fields for seminars and provide a conversion feature [Oli]
 - improve CSS for registration form <http://www.alistapart.com/articles/practicalcss/> [Oli]
+- in notification mail, show user's date of birth as a formatted date instead of an integer
+- in notification mail, show user's status as a string instead of an integer
+- s/canceled/cancelled (or the other way around - look it up in a dictionary) in code, strings and manual
+- check for accessibility according to WAI A/AA/AAA, BITV NRW and Sec. 508
+- test with PHP 5
+- include CSS file using TS (without PHP)
+- check what parts of the FE plugin can be cached
+- check that links in this extension work correctly on multilingual sites
+- set crdate and tstamp of automatically created registration records
+- option to update tstamp of a seminar record when it is updated (e.g. when a registration comes in)
+- allow for a time before an event when no registrations are possible any more
+- extend copyright line to 2006
 
 Version 0.6.0
 -------------
@@ -116,6 +143,7 @@ Version 0.6.0
 - document the CSS styles used [Oli]
 - in pi1, implement the default sort order (by begin date) using TCA [?]
 - move the global configuration into constants and make them configurable using the constants editor [Oli]
+- when a seminar is deleted, remove it from the FE cache (and from the search results)
 
 Version 0.7.0
 -------------
@@ -166,7 +194,6 @@ Not triaged yet
 - add a field "destination group" (Zielgruppe) to the seminar record [?]
 - add automated tests using PHPunit or something like it [Oli]
 - make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender) [?]
-- add configuration for default values for most of the seminar record fields [?]
 - disable the "save and view" button for all our records (as they are not treated as regular content elements) [?]
 - add image to seminar record [?]
 - add image to seminar topic [?]
@@ -180,3 +207,8 @@ Not triaged yet
 - investigate how the colored "vancancies" square get displayed for seminar that have already started and for seminars that are already over [?]
 - attach images to seminars (like in tt_news)
 - attach documents to seminars
+- ensure compatibility with indexed_search (if it doesn't work)
+- export events to tt_news
+- export events to other calendar extensions
+- export events to http://www.uni-bonn.de/~career/termine_liste.php
+- FE export function: all future seminars formatter for inserting them into PageMaker (for the "basta" magazine)
