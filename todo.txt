@@ -30,7 +30,7 @@ Version 0.4.1
 - test compatibility with indexed_search
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag
 - fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
-- add tbody and thead to the list view
+- add a table summary to the list view
 - ensure that the organizer field is required
 - flag: enfore payment methods if the price is > 0
 - add configuration for default values for most of the seminar record fields [?]
@@ -39,6 +39,7 @@ Version 0.4.1
 
 Version 0.5.0
 -------------
+- clean up code from pibase
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - add titles for links
 - add summaries for tables

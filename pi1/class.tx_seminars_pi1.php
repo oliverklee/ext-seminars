@@ -499,6 +499,43 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		return $output;
 	}
+
+	/**
+	 * Returns the list of items based on the input SQL result pointer.
+	 * For each result row the internal var, $this->internal['currentRow'], is set with the row returned.
+	 *
+	 * $this->pi_list_header() makes the header row for the list
+	 * $this->pi_list_row() is used for rendering each row
+	 *
+	 * @param	pointer		Result pointer to a SQL result which can be traversed.
+	 * @param	string		Attributes for the table tag which is wrapped around the table rows containing the list
+	 * @return	string		Output HTML, wrapped in <div>-tags with a class attribute
+	 *
+	 * @access protected
+	 *
+	 * @see pi_list_row(), pi_list_header()
+	 */
+	function pi_list_makelist($res, $tableParams = '')	{
+		// Make list table header
+		$tRows = array();
+		$this->internal['currentRow'] = '';
+		$tRows[] = $this->pi_list_header();
+		$tRows[] = '  <tbody>'.chr(10);
+
+		// Make list table rows
+		$c = 0;
+		while ($this->internal['currentRow'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			$tRows[] = $this->pi_list_row($c);
+			$c++;
+		}
+		$tRows[] = '  </tbody>'.chr(10);
+
+		$output = '<div'.$this->pi_classParam('listrow').'>'.chr(10);
+		$output .= '<'.trim('table '.$tableParams).'>'.implode('',$tRows).'</table>'.chr(10);
+		$output .= '</div>';
+
+		return $output;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1.php']) {
