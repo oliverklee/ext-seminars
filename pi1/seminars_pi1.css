@@ -21,6 +21,10 @@
   text-align: center;
 }
 
+.tx-seminars-pi1-title a {
+  display: block;
+}
+
 .tx-seminars-pi1-date, .tx-seminars-pi1-vacancies, .tx-seminars-pi1-price {
   text-align: right;
 }

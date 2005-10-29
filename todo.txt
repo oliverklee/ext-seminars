@@ -24,11 +24,8 @@ Version 0.4.1
 - document how to change localized string, e.g. for the special price [Oli]
 - don't display "page 1 of 1" in the list view if there is only 1 page [?]
 - function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online) [?]
-- list view: modify the css so that the whole table cell for the title is clickable as a link [?]
 - add all organizers as Reply-To: in registration confirmation e-mail [?]
 - check for unused localization strings once more
-- test multi-page list views
-- price is limited to 1000 EUR - up it to 9999 EUR
 - shorten some overlong DB labels
 - test compatibility with indexed_search
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag
@@ -39,6 +36,7 @@ Version 0.4.1
 - add configuration for default values for most of the seminar record fields [?]
 - check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
 - in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
+- remove double spaces before CSS class names
 
 Version 0.5.0
 -------------

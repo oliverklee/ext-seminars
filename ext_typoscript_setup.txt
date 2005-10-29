@@ -40,7 +40,7 @@ plugin.tx_seminars_pi1 {
 	class_itemrow =
 
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
-	class_listtitle =
+	class_listtitle = title
 	class_listdate = date
 	class_listprice = price
 	class_listorganizers =
