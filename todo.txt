@@ -22,7 +22,6 @@ Version 0.4.1
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 - ensure that the organizer field is required
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
-- mention in the manual that sr_feuser_register now has salutation modes, too
 
 Version 0.5.0
 -------------
