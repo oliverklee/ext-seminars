@@ -347,7 +347,16 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('room', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('price', $this->seminar->getPrice(' '));
+		if ($this->getConfValue('generalPriceInMail')) {
+			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
+		}
+		$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular(' '));
+
+		if ($this->seminar->hasPriceSpecial()) {
+			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial(' '));
+		} else {
+			$this->readSubpartsToHide('price_special', 'field_wrapper');
+		}
 
 		if ($this->seminar->hasPaymentMethods()) {
 			$this->setMarkerContent('message_paymentmethods', $this->pi_getLL('email_confirmationPayment'));

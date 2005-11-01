@@ -2,8 +2,9 @@ plugin.tx_seminars {
 	# location of the template file
 	templateFile = EXT:seminars/seminars.tmpl
 	hideFieldsInThankYouMail =
+	generalPriceInMail =
 	hideFieldsInNotificationMail =
-	showSeminarFieldsInNotificationMail = title,date,place,price,attendees,vacancies,enough_attendees,is_full
+	showSeminarFieldsInNotificationMail = title,date,place,price_regular,price_special,attendees,vacancies,enough_attendees,is_full
 	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile,date_of_birth
 	showAttendanceFieldsInNotificationMail = interests,expectations,background_knowledge,known_from,notes
 
@@ -31,7 +32,8 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_headertitle =
 	class_headerdate =
-	class_headerprice =
+	class_headerprice_regular =
+	class_headerprice_special =
 	class_headerorganizers =
 	class_headervacancies =
 	class_headerregistration =
@@ -42,7 +44,8 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_listtitle = title
 	class_listdate = date
-	class_listprice = price
+	class_listprice_regular = price
+	class_listprice_special = price
 	class_listorganizers =
 	class_listregistration =
 
@@ -53,8 +56,10 @@ plugin.tx_seminars_pi1 {
 	class_error = error
 
 	salutation = formal
-	hideColumns =
+	hideColumns = price_special
 	hideFields =
+	generalPriceInList =
+	generalPriceInSingle =
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
 	showRegistrationFields = interests,expectations,background_knowledge,known_from,notes
 }

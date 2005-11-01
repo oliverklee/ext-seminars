@@ -230,7 +230,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}
 
-			$this->setMarkerContent('price', $this->seminar->getPrice());
+			if ($this->getConfValue('generalPriceInSingle')) {
+				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
+			}
+			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
+
+			if ($this->seminar->hasPriceSpecial()) {
+				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+			} else {
+				$this->readSubpartsToHide('price_special', 'field_wrapper');
+			}
 
 			if ($this->seminar->hasPaymentMethods()) {
 				$this->setMarkerContent('paymentmethods', $this->seminar->getPaymentMethods($this));
@@ -295,12 +304,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_header() {
-		$this->setMarkerContent('header_title',        $this->getFieldHeader_sortLink('title'));
-		$this->setMarkerContent('header_date',         $this->getFieldHeader_sortLink('date'));
-		$this->setMarkerContent('header_price',        $this->getFieldHeader_sortLink('price_regular'));
-		$this->setMarkerContent('header_organizers',   $this->getFieldHeader_sortLink('organizers'));
-		$this->setMarkerContent('header_vacancies',    $this->getFieldHeader('vacancies'));
-		$this->setMarkerContent('header_registration', $this->getFieldHeader('registration'));
+		$this->setMarkerContent('header_title',         $this->getFieldHeader_sortLink('title'));
+		$this->setMarkerContent('header_date',          $this->getFieldHeader_sortLink('date'));
+		$this->setMarkerContent('header_price_regular', $this->getFieldHeader_sortLink('price_regular'));
+		$this->setMarkerContent('header_price_special', $this->getFieldHeader_sortLink('price_special'));
+		$this->setMarkerContent('header_organizers',    $this->getFieldHeader_sortLink('organizers'));
+		$this->setMarkerContent('header_vacancies',     $this->getFieldHeader('vacancies'));
+		$this->setMarkerContent('header_registration',  $this->getFieldHeader('registration'));
 
 		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
@@ -330,7 +340,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('title_link',       $this->seminar->getLinkedTitle($this));
 			$this->setMarkerContent('date',             $this->seminar->getDate());
-			$this->setMarkerContent('price',            $this->seminar->getPrice());
+			$this->setMarkerContent('price_regular',    $this->seminar->getPriceRegular());
+			$this->setMarkerContent('price_special',    $this->seminar->getPriceSpecial());
 			$this->setMarkerContent('organizers',       $this->seminar->getOrganizers($this));
 			$this->setMarkerContent('vacancies',        $this->seminar->needsRegistration() ? $this->seminar->getVacancies() : '');
 			$this->setMarkerContent('class_listvacancies',  $this->getVacanciesClasses($this->seminar));
@@ -358,6 +369,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		case 'title':
 			$result = $this->pi_getLL('label_title', '<em>title</em>');
 			break;
+		case 'price_regular':
+			if ($this->getConfValue('generalPriceInList')) {
+				$fN = 'price_general';
+			}
+			// fall-through is intended here
 		default:
 			$result = $this->pi_getLL('label_'.$fN, '['.$fN.']');
 			break;
@@ -489,7 +505,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Destroy session data for our submitted form:
 			$formObj->destroySessionData();
 		} else {
-			$this->setMarkerContent('price', $this->seminar->getPrice());
+			if ($this->getConfValue('generalPriceInSingle')) {
+				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
+			}
+			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
+			if ($this->seminar->hasPriceSpecial()) {
+				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+			} else {
+				$this->readSubpartsToHide('price_special', 'registration_wrapper');
+			}
 			$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
 			$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
 			// Form has not yet been submitted, so render the form:

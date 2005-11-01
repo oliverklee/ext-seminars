@@ -594,12 +594,12 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	String		the character or HTML entity used to separate price and currency
 	 *
-	 * @return	String		the seminar price
+	 * @return	String		the regular seminar price
 	 *
 	 * @access public
 	 */
-	function getPrice($space = '&nbsp;') {
-		return $this->getSeminarsPropertyInteger('price_regular').$space.'EUR';
+	function getPriceRegular($space = '&nbsp;') {
+		return $this->getSeminarsPropertyInteger('price_regular').$space.$this->getConfValue('currency');
 	}
 
 	/**
@@ -609,8 +609,34 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @access public
 	 */
-	function hasPrice() {
+	function hasPriceRegular() {
 		return ($this->getSeminarsPropertyInteger('price_regular') !== 0);
+	}
+
+	/**
+	 * Gets our special price as a string containing amount and currency.
+	 * Returns an empty string if there is no special price set.
+	 *
+	 * @param	String		the character or HTML entity used to separate price and currency
+	 *
+	 * @return	String		the special seminar price
+	 *
+	 * @access public
+	 */
+	function getPriceSpecial($space = '&nbsp;') {
+		return $this->hasPriceSpecial() ?
+			($this->getSeminarsPropertyInteger('price_special').$space.$this->getConfValue('currency')) : '';
+	}
+
+	/**
+	 * Checks whether this seminar has a non-zero special price set.
+	 *
+	 * @return	boolean		true if the seminar has a non-zero special price, false if it is free.
+	 *
+	 * @access public
+	 */
+	function hasPriceSpecial() {
+		return ($this->getSeminarsPropertyInteger('price_special') !== 0);
 	}
 
 	/**
@@ -958,8 +984,11 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 				case 'place':
 					$value = $this->getPlaceShort();
 					break;
-				case 'price':
-					$value = $this->getPrice(' ');
+				case 'price_regular':
+					$value = $this->getPriceRegular(' ');
+					break;
+				case 'price_special':
+					$value = $this->getPriceSpecial(' ');
 					break;
 				case 'speakers':
 					$value = $this->getSpeakersShort();
