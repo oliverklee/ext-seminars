@@ -11,7 +11,6 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.1
 -------------
-- add back end and front end support for the field "special price" [Oli]
 - add two additional fields for Martin Kurz [Oli]
 - make viewing the two additional fields configurable in the EM [Oli]
 - also show the seminar date when updating the statistics
@@ -22,6 +21,7 @@ Version 0.4.1
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 - ensure that the organizer field is required
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
+- check that the CSS file doesn't allow for possibly unreadable color combinations
 
 Version 0.5.0
 -------------
@@ -211,10 +211,11 @@ Not triaged yet
 - function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online) [?]
 - add all organizers as Reply-To: in registration confirmation e-mail [?]
 - check for unused localization strings once more
-- check that the CSS file doesn't allow for possibly unreadable color combinations
 - make CSS class names configurable via flexforms and document this [Oli]
 - use flexforms as much as possible [Oli]
 - investigate whether the string pi_list_browseresults_noResults actually is used [Oli]
 - move HTML from pi_list_makelist to template
 - in the back end, remove many checkboxes next to text fields
-- 
+- for all homepage fields, add http:// and / after editing if it has been left out
+- add field "event number" (UID) to list view and detailed view
+- Add/fix flexforms support for plugin.tx_seminars_pi1.generalPriceInList and plugin.tx_seminars_pi1.generalPriceInSingle
