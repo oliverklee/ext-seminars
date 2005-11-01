@@ -11,35 +11,22 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.1
 -------------
-- also show the seminar date when updating the statistics
-- check that the CSS file doesn't allow for possibly unreadable color combinations
-- ext_tables.sql: replace all "blob" (comma-lists of foreign UIDs) with "tinytext" [Oli]
+- add back end and front end support for the field "special price" [Oli]
 - add two additional fields for Martin Kurz [Oli]
 - make viewing the two additional fields configurable in the EM [Oli]
-- add back end and front end support for the field "special price" [Oli]
-- make CSS class names configurable via flexforms and document this [Oli]
-- use flexforms as much as possible [Oli]
-- investigate whether the string pi_list_browseresults_noResults actually is used [Oli]
+- also show the seminar date when updating the statistics
 - make it configurable whether to have the university-specific stuff [Oli]
 - document how to change localized string, e.g. for the special price [Oli]
-- don't display "page 1 of 1" in the list view if there is only 1 page [?]
-- function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online) [?]
-- add all organizers as Reply-To: in registration confirmation e-mail [?]
-- check for unused localization strings once more
 - shorten some overlong DB labels
 - test compatibility with indexed_search
-- provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag
-- fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
-- add a table summary to the list view
+- provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 - ensure that the organizer field is required
-- flag: enfore payment methods if the price is > 0
-- add configuration for default values for most of the seminar record fields [?]
-- check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
-- in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
+- remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
+- mention in the manual that sr_feuser_register now has salutation modes, too
 
 Version 0.5.0
 -------------
-- clean up code from pibase
+- clean up code from pibase (search box, results browser)
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - add titles for links
 - add summaries for tables
@@ -209,3 +196,26 @@ Not triaged yet
 - export events to other calendar extensions
 - export events to http://www.uni-bonn.de/~career/termine_liste.php
 - FE export function: all future seminars formatter for inserting them into PageMaker (for the "basta" magazine)
+- integrate the "Feed-back-Fragebogen"
+- handle singular/plural of "organizer" in headings
+- handle singular/plural and male/female of "speaker" in headings
+- add attribute "male/female" to speakers
+- remove the "has paid" attribute and use "has paid date set" instead; warn if there are records without paid date
+- investigate whether more than one seminar manager content element per page is possible (especially regarding the search function)
+- flag: enfore payment methods if the price is > 0
+- add configuration for default values for most of the seminar record fields [?]
+- check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
+- in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
+- fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
+- add a table summary to the list view
+- don't display "page 1 of 1" in the list view if there is only 1 page [?]
+- function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online) [?]
+- add all organizers as Reply-To: in registration confirmation e-mail [?]
+- check for unused localization strings once more
+- check that the CSS file doesn't allow for possibly unreadable color combinations
+- make CSS class names configurable via flexforms and document this [Oli]
+- use flexforms as much as possible [Oli]
+- investigate whether the string pi_list_browseresults_noResults actually is used [Oli]
+- move HTML from pi_list_makelist to template
+- in the back end, remove many checkboxes next to text fields
+- 
