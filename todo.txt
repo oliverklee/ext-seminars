@@ -17,7 +17,6 @@ Version 0.4.1
 - make it configurable whether to have the university-specific stuff [Oli]
 - document how to change localized string, e.g. for the special price [Oli]
 - shorten some overlong DB labels
-- test compatibility with indexed_search
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 - ensure that the organizer field is required
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
@@ -25,6 +24,7 @@ Version 0.4.1
 
 Version 0.5.0
 -------------
+- test compatibility with indexed_search
 - clean up code from pibase (search box, results browser)
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - add titles for links
