@@ -28,8 +28,9 @@ Version 0.4.2: dogfood
 - make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
 - feature for e-mail notification to the organizer once a seminar has enough attendances or is full [?]
 - find a way to enter and display open-ended events [?]
-- make it configurable whether to have the university-specific stuff [Oli]
 - participant lists on the back end: all, paid, not paid
+- check that the CSS file doesn't allow for possibly unreadable color combinations
+- make it configurable whether to have the university-specific stuff [Oli]
 
 Version 0.4.3: data integrity and sanity
 ----------------------------------------
@@ -61,15 +62,14 @@ Version 0.4.4: code clean-up and qa
 - move HTML from pi_list_makelist to template
 - investigate whether the string pi_list_browseresults_noResults actually is used [Oli]
 - check for unused localization strings once more
+- provide a patch for the frontendformslib extension: remove brackets from URLs
 
 Version 0.4.5: accessibility
 ----------------------------
-- check that the CSS file doesn't allow for possibly unreadable color combinations
 - clean up code from pibase (search box, results browser)
-- provide a patch for the frontendformslib extension: remove brackets from URLs
+- remove layout tables from the search box
 - add summaries for tables
 - check for accessibility according to WAI A/AA/AAA, BITV NRW and Sec. 508
-- remove layout tables from the search box
 - add titles for links
 - add a table summary to the list view
 
