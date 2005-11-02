@@ -13,12 +13,22 @@ Version 0.4.1: Requested features
 ---------------------------------
 - add two additional fields for Martin Kurz [Oli]
 - make viewing the two additional fields configurable in the EM [Oli]
-- also show the seminar date when updating the statistics
-- shorten some overlong DB labels
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
 
-Version 0.4.2: data integrity and sanity
+Version 0.4.2: urgent features for CaSeBo
+-----------------------------------------
+- allow for a time before an event when no registrations are possible any more
+- also show the seminar date when updating the statistics
+- in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
+- shorten some overlong DB labels
+- make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
+- make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
+- feature for e-mail notification to the organizer once a seminar has enough attendances or is full [?]
+- find a way to enter and display open-ended events [?]
+- make it configurable whether to have the university-specific stuff [Oli]
+
+Version 0.4.3: data integrity and sanity
 ----------------------------------------
 - ensure that the organizer field is required
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
@@ -38,17 +48,6 @@ Version 0.4.2: data integrity and sanity
 - add configuration for default values for most of the seminar record fields [?]
 - remove the "has paid" attribute and use "has paid date set" instead; warn if there are records without paid date
 - investigate whether more than one seminar manager content element per page is possible (especially regarding the search function)
-
-Version 0.4.3: urgent features for CaSeBo
------------------------------------------
-- make it configurable whether to have the university-specific stuff [Oli]
-- make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
-- feature for e-mail notification to the organizer once a seminar has enough attendances or is full [?]
-- make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
-- add a localized "h" after the time [Oli]
-- allow for a time before an event when no registrations are possible any more
-- in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
-- find a way to enter and display open-ended events [?]
 
 Version 0.4.4: code clean-up and qa
 -----------------------------------
@@ -144,6 +143,7 @@ Version 0.4.8: front end usability
 - automatically return to the registration page after login [?]
 - investigate how the colored "vancancies" square get displayed for seminar that have already started and for seminars that are already over [?]
 - find a way to use the salutation switcher for the form labels and improve the wording [?]
+- add a localized "h" after the time [Oli]
 
 Version 0.5.0
 -------------
