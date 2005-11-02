@@ -21,6 +21,7 @@ Version 0.4.2: urgent features for CaSeBo
 -----------------------------------------
 - allow for a time before an event when no registrations are possible any more
 - also show the seminar date when updating the statistics
+- participant lists on the back end, selectable via seminar: all, paid, not paid
 - in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
 - shorten some overlong DB labels
 - make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
@@ -28,6 +29,7 @@ Version 0.4.2: urgent features for CaSeBo
 - feature for e-mail notification to the organizer once a seminar has enough attendances or is full [?]
 - find a way to enter and display open-ended events [?]
 - make it configurable whether to have the university-specific stuff [Oli]
+- participant lists on the back end: all, paid, not paid
 
 Version 0.4.3: data integrity and sanity
 ----------------------------------------
