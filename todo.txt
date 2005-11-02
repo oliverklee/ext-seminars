@@ -17,8 +17,8 @@ Version 0.4.1: Requested features and urgent usability
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 
-Version 0.4.2: urgent features for CaSeBo
------------------------------------------
+Version 0.4.2: dogfood
+----------------------
 - allow for a time before an event when no registrations are possible any more
 - also show the seminar date when updating the statistics
 - participant lists on the back end, selectable via seminar: all, paid, not paid
