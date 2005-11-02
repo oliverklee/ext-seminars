@@ -9,12 +9,13 @@ If you find any bugs in this extension, please report them in the Typo3 bugtrack
 
 Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please pay for the author's time.
 
-Version 0.4.1: Requested features
----------------------------------
+Version 0.4.1: Requested features and urgent usability
+------------------------------------------------------
 - add two additional fields for Martin Kurz [Oli]
 - make viewing the two additional fields configurable in the EM [Oli]
-- provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
+- ensure that the organizer field is required
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
+- provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 
 Version 0.4.2: urgent features for CaSeBo
 -----------------------------------------
@@ -30,7 +31,6 @@ Version 0.4.2: urgent features for CaSeBo
 
 Version 0.4.3: data integrity and sanity
 ----------------------------------------
-- ensure that the organizer field is required
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
 - factor out the statistics update into a common function and make it more efficient [Oli]
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics [Oli]
