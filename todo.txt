@@ -245,3 +245,5 @@ Not triaged yet
 - FE export function: all future seminars formatter for inserting them into PageMaker (for the "basta" magazine)
 - integrate the "Feed-back-Fragebogen"
 - make CSS class names configurable via flexforms and document this [Oli]
+- feature: users can rate a seminar after it has taken place
+- for a speaker, show all past seminar ratings and the average rating
