@@ -16,6 +16,9 @@ Version 0.4.1: Requested features and urgent usability
 - ensure that the organizer field is required
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
+- add to manual:
+  - how to cancel a seminare and what that means
+  - what to do if someone wants to change their registration from one seminar to another
 
 Version 0.4.2: dogfood
 ----------------------
@@ -51,6 +54,7 @@ Version 0.4.3: data integrity and sanity
 - add configuration for default values for most of the seminar record fields [?]
 - remove the "has paid" attribute and use "has paid date set" instead; warn if there are records without paid date
 - investigate whether more than one seminar manager content element per page is possible (especially regarding the search function)
+- in Web > Seminars, check write permissions for source and destination pages
 
 Version 0.4.4: code clean-up and qa
 -----------------------------------
@@ -63,6 +67,7 @@ Version 0.4.4: code clean-up and qa
 - investigate whether the string pi_list_browseresults_noResults actually is used [Oli]
 - check for unused localization strings once more
 - provide a patch for the frontendformslib extension: remove brackets from URLs
+- investigate whether to use pibase->initMemberArray()
 
 Version 0.4.5: accessibility
 ----------------------------
