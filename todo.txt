@@ -1,8 +1,6 @@
 To-do list and milestone plan for tx_seminars
 =============================================
 
-The assignee is marked in square brackets. [?] Means that a to-do item isn't assigned yet - feel free to take it!
-
 For this extension, there are still many unimplemented feature ideas. Help is very welcome! Contact the author if you want to help in any way.
 
 If you find any bugs in this extension, please report them in the Typo3 bugtracker under the project tx_seminars.
@@ -11,8 +9,8 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.1: Requested features and urgent usability
 ------------------------------------------------------
-- add two additional fields for Martin Kurz [Oli]
-- make viewing the two additional fields configurable in the EM [Oli]
+- add two additional fields for Martin Kurz
+- make viewing the two additional fields configurable in the EM
 - ensure that the organizer field is required
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
@@ -27,44 +25,48 @@ Version 0.4.2: dogfood
 - participant lists on the back end, selectable via seminar: all, paid, not paid
 - in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
 - shorten some overlong DB labels
-- make it configurable which seminars to display: upcoming/upcoming+running/all [Oli]
-- make it configurable via flexforms which seminars to display (past, current, upcoming) [Oli]
-- feature for e-mail notification to the organizer once a seminar has enough attendances or is full [?]
-- find a way to enter and display open-ended events [?]
+- make it configurable which seminars to display: upcoming/upcoming+running/all
+- make it configurable via flexforms which seminars to display (past, current, upcoming)
+- feature for e-mail notification to the organizer once a seminar has enough attendances or is full
+- find a way to enter and display open-ended events
 - participant lists on the back end: all, paid, not paid
 - check that the CSS file doesn't allow for possibly unreadable color combinations
-- make it configurable whether to have the university-specific stuff [Oli]
+- make it configurable whether to have the university-specific stuff
+- make it configurable whether to display the speakers' detailed description
+- make it configurable whether to display the sites' detailed description
+- make it configurable whether to have the speakers' name or the URL as link text for their homepage
 
 Version 0.4.3: data integrity and sanity
 ----------------------------------------
-- add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies) [Oli]
-- factor out the statistics update into a common function and make it more efficient [Oli]
-- after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics [Oli]
-- handle deleted (and "marked as deleted") user accounts and seminars graciously [Oli]
+- add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
+- factor out the statistics update into a common function and make it more efficient
+- after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics
+- handle deleted (and "marked as deleted") user accounts and seminars graciously
 - set crdate and tstamp of automatically created registration records
 - option to update tstamp of a seminar record when it is updated (e.g. when a registration comes in)
-- feature: find and display double registrations [?]
-- feature: avoid double registrations when entering registrations manually [?]
-- automatically update record title if an attendance has been entered or edited in the back end [Oli]
-- notification mail: Use the organizer as From: and the attendee as Reply-to: [?]
-- add all organizers as Reply-To: in registration confirmation e-mail [?]
+- feature: find and display double registrations
+- feature: avoid double registrations when entering registrations manually
+- automatically update record title if an attendance has been entered or edited in the back end
+- notification mail: Use the organizer as From: and the attendee as Reply-to:
+- add all organizers as Reply-To: in registration confirmation e-mail
 - fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
 - check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
 - flag: enfore payment methods if the price is > 0
-- add configuration for default values for most of the seminar record fields [?]
+- add configuration for default values for most of the seminar record fields
 - remove the "has paid" attribute and use "has paid date set" instead; warn if there are records without paid date
 - investigate whether more than one seminar manager content element per page is possible (especially regarding the search function)
 - in Web > Seminars, check write permissions for source and destination pages
+- prevent users from deleting their account in sr_feuser_register if they are signed up for an upcoming or running seminar
 
 Version 0.4.4: code clean-up and qa
 -----------------------------------
-- reduce code by using the API for COUNT queries [Oli]
-- use array_key_exists() where possible [Oli]
-- add automatic headers to code files [?]
-- add automated tests using PHPunit or something like it [Oli]
-- check code with PhpLint once PhpLint is a bit more mature [Oli]
+- reduce code by using the API for COUNT queries
+- use array_key_exists() where possible
+- add automatic headers to code files
+- add automated tests using PHPunit or something like it
+- check code with PhpLint once PhpLint is a bit more mature
 - move HTML from pi_list_makelist to template
-- investigate whether the string pi_list_browseresults_noResults actually is used [Oli]
+- investigate whether the string pi_list_browseresults_noResults actually is used
 - check for unused localization strings once more
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - investigate whether to use pibase->initMemberArray()
@@ -80,98 +82,100 @@ Version 0.4.5: accessibility
 
 Version 0.4.6: performance
 --------------------------
-- cache speaker data [Oli]
-- cache site data [Oli]
-- cache payment methods [Oli]
-- in the seminar class, make the organizer, speaker, site, and payment methods caches singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/> [Oli]
-- optimize the DB queries [?]
+- cache speaker data
+- cache site data
+- cache payment methods
+- in the seminar class, make the organizer, speaker, site, and payment methods caches singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/>
+- optimize the DB queries
 - check what parts of the FE plugin can be cached
-- refactor seminar::getOrganizers*() [Oli]
-- refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues() [Oli]
-- investigate performance improvements when using caching or singletons in the template helper class [Oli]
+- refactor seminar::getOrganizers*()
+- refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
+- investigate performance improvements when using caching or singletons in the template helper class
 
 Version 0.4.7: back end usability
 ---------------------------------
-- work out how to override non-empty TS values with empty flexforms values [Oli/AM]
-- for organizers, add field telling in which page new registration records should be stored, overriding the global setting [Oli]
-- for seminars, add field telling in which page new registration records should be stored, overriding the global and organizers setting [Oli]
-- improve and clean up flexforms structure for better usability [Oli]
-- investigate whether some of the DB selectors in the back end can be replaced with select lists (like in the cl_company_database extension) in order to reduce the clickomania [?]
-- slim down back end UI (don't display unneded fields, e.g. unneeded payment methods) [Oli]
-- investigate whether in the back end seminar info view and list mode, the titles can be displayed instead of the UIDs for speakers, organizers, sites and payment methods [?]
-- investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars [?]
-- investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees [?]
-- separate date and time fields for seminars and provide a conversion feature [Oli]
+- work out how to override non-empty TS values with empty flexforms values
+- for organizers, add field telling in which page new registration records should be stored, overriding the global setting
+- for seminars, add field telling in which page new registration records should be stored, overriding the global and organizers setting
+- improve and clean up flexforms structure for better usability
+- investigate whether some of the DB selectors in the back end can be replaced with select lists (like in the cl_company_database extension) in order to reduce the clickomania
+- slim down back end UI (don't display unneded fields, e.g. unneeded payment methods)
+- re-arrange back end UI for better usability (tca.php)
+- investigate whether in the back end seminar info view and list mode, the titles can be displayed instead of the UIDs for speakers, organizers, sites and payment methods
+- investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars
+- investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees
+- separate date and time fields for seminars and provide a conversion feature
 - in notification mail, show user's date of birth as a formatted date instead of an integer
 - in notification mail, show user's status as a string instead of an integer
-- in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records [?]
-- disable the "save and view" button for all our records (as they are not treated as regular content elements) [?]
-- add different icons [?]
-- create extension icon [?]
-- Web -> Seminars should only use the selected page's data (optionally recursively) [?]
-- make the back end forms prettier and clean them up (using TCA.php) [?]
+- in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
+- disable the "save and view" button for all our records (as they are not treated as regular content elements)
+- add different icons
+- create extension icon
+- Web -> Seminars should only use the selected page's data (optionally recursively)
+- make the back end forms prettier and clean them up (using TCA.php)
 - in the back end, remove many checkboxes next to text fields
 - for all homepage fields, add http:// and / after editing if it has been left out
-- function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online) [?]
+- function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online)
 - Add/fix flexforms support for plugin.tx_seminars_pi1.generalPriceInList and plugin.tx_seminars_pi1.generalPriceInSingle
-- use flexforms as much as possible [Oli]
-- make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender) [?]
-- allow different hours for multi-day events [?]
+- use flexforms as much as possible
+- make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender)
+- allow different hours for multi-day events
+- investigate whether organizers, speakers and seminar sites can be created directly from within the seminar record
 
 Version 0.4.8: front end usability
 ----------------------------------
-- make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account) [?]
-- make some fe_users data editable on the registration page [Oli]
-- provide a patch for drop-down-lists in frontendformslib [Oli]
-- show a drop-down list of seminars to select from on the registration page [?]
+- make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
+- make some fe_users data editable on the registration page
+- provide a patch for drop-down-lists in frontendformslib
+- show a drop-down list of seminars to select from on the registration page
 - test compatibility with indexed_search
 - ensure compatibility with indexed_search (if it doesn't work)
 - when a seminar is deleted, remove it from the FE cache (and from the search results)
-- improve CSS for registration form <http://www.alistapart.com/articles/practicalcss/> [Oli]
-- allow signing up for a seminar without being logged in as a front end user (thus creating a new front end user in the process) [?]
-- add content element "my seminars" for logged-in users, list the following [?]
+- improve CSS for registration form <http://www.alistapart.com/articles/practicalcss/>
+- allow signing up for a seminar without being logged in as a front end user (thus creating a new front end user in the process)
+- add content element "my seminars" for logged-in users, list the following
   - seminar name and date
   - link to seminar details page
   - paid/unpaid/refunded (if the participation hasn't been deleted yet)
   - attended?
-- feature on the "my seminars" page: edit registration data [?]
-- feature: front end plug in "The next x upcoming seminars" [?]
-- feature: "this seminar is repeated on the following dates" [?]
-- add field for "these seminars go together well" [?]
-- feature: "people who have registered for this seminar have also registered for these seminars" [?]
-- add and document configuration: number of seminars to list per page [?]
-- feature: configure sort order of seminar list [?]
+- feature on the "my seminars" page: edit registration data
+- feature: front end plug in "The next x upcoming seminars"
+- feature: "this seminar is repeated on the following dates"
+- add field for "these seminars go together well"
+- feature: "people who have registered for this seminar have also registered for these seminars"
+- add and document configuration: number of seminars to list per page
+- feature: configure sort order of seminar list
 - add field "event number" (UID) to list view and detailed view
 - add a headline "Thanks for signing up for this event." or something similar after a successfull registration
-- don't display "page 1 of 1" in the list view if there is only 1 page [?]
+- don't display "page 1 of 1" in the list view if there is only 1 page
 - handle singular/plural of "organizer" in headings
 - handle singular/plural and male/female of "speaker" in headings
 - add attribute "male/female" to speakers
-- automatically return to the registration page after login [?]
-- investigate how the colored "vancancies" square get displayed for seminar that have already started and for seminars that are already over [?]
-- find a way to use the salutation switcher for the form labels and improve the wording [?]
-- add a localized "h" after the time [Oli]
+- automatically return to the registration page after login
+- investigate how the colored "vancancies" square get displayed for seminar that have already started and for seminars that are already over
+- find a way to use the salutation switcher for the form labels and improve the wording
+- add a localized "h" after the time
 
 Version 0.5.0
 -------------
 - Dutch localization
-- make it configurable what to do when a participant signs up [Oli]
+- make it configurable what to do when a participant signs up
   - send an e-mail to the organizer
   - send an e-mail to the participant
   - add a participation entry to the database
-- make dependencies for registration process [AM]
-- matriculation number should be required for students [Oli]
-- feature to send e-mail to all participants of a seminar [?]
+- make dependencies for registration process
+- matriculation number should be required for students
+- feature to send e-mail to all participants of a seminar
   - select from: everyone/paid/not paid
   - user name
   - seminar to which the e-mail refers
-- make the wrap for the number of vacancies (colored square) configurable [Oli]
-- add entry in participant records whether their money has been refunded [?]
-- add configuration whether to show seminars without date as well [Oli]
-- automatic signing off if the user hasn't paid after a configurable timespan (x days after registration or x days before start of seminar) [?]
-- add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off [?]
-- make the link to the online registration form CSS-stylable [Oli]
-- make e-mail charset configurable [?]
+- make the wrap for the number of vacancies (colored square) configurable
+- add entry in participant records whether their money has been refunded
+- add configuration whether to show seminars without date as well
+- automatic signing off if the user hasn't paid after a configurable timespan (x days after registration or x days before start of seminar)
+- add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off
+- make the link to the online registration form CSS-stylable
+- make e-mail charset configurable
 - test with PHP 5
 - include CSS file using TS (without PHP)
 - check that links in this extension work correctly on multilingual sites
@@ -179,64 +183,64 @@ Version 0.5.0
 
 Version 0.6.0
 -------------
-- switch extension status from "alpha" to "beta" [Oli]
-- add possibility for front end users to sign off a seminar if it's early enough [?]
-- add configuration: period before seminar start when signing off is not possible any more (default: 14 days) [?]
-- allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee [?]
-  - make this configurable [?]
-  - make this safe (SSL-only or something) [?]
-- add a way to make the seminar fee dependent on the user's status (student, working etc.) [?]
-- allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop) [?]
-- switch localization files to XML [?]
-- Spanish localization [Oli]
-- French localization [?]
-- feature: room manager [?]
+- switch extension status from "alpha" to "beta"
+- add possibility for front end users to sign off a seminar if it's early enough
+- add configuration: period before seminar start when signing off is not possible any more (default: 14 days)
+- allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee
+  - make this configurable
+  - make this safe (SSL-only or something)
+- add a way to make the seminar fee dependent on the user's status (student, working etc.)
+- allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop)
+- switch localization files to XML
+- Spanish localization
+- French localization
+- feature: room manager
 - add further back end statistics:
-  - list of sites and which seminars take place there [?]
-  - list of speakers and which seminars they hold [?]
-  - overview list of seminars [?]
-  - detail seminar listing that can be given to the speaker: [?]
+  - list of sites and which seminars take place there
+  - list of speakers and which seminars they hold
+  - overview list of seminars
+  - detail seminar listing that can be given to the speaker:
     - site and directions
     - the important data of the participants
-- have the documentation proofread [Oli]
-- display picture of speakers on seminar page [?]
-- move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation [Oli]
-- move from ext_typoscript_setup.txt to static/setup.txt [?]
-- make sure the HTML validates as XHTML 1.0 strict [Oli]
-- document the CSS styles used [Oli]
-- in pi1, implement the default sort order (by begin date) using TCA [?]
-- move the global configuration into constants and make them configurable using the constants editor [Oli]
+- have the documentation proofread
+- display picture of speakers on seminar page
+- move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation
+- move from ext_typoscript_setup.txt to static/setup.txt
+- make sure the HTML validates as XHTML 1.0 strict
+- document the CSS styles used
+- in pi1, implement the default sort order (by begin date) using TCA
+- move the global configuration into constants and make them configurable using the constants editor
 
 Version 0.7.0
 -------------
-- add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions [?]
-- feature for booking assets online (when belonging to the corresponding front end user group) [?]
-- feature: quickly edit the "paid" entry for a participant [?]
-- feature: easily enter after a single seminar who has participated [?]
-- add feature "Teilnahmeliste" to generate a participation-form for each seminar where each participant can sign for each day that he/she has been there, plus a column where he/she can sign if he/she wants to receive seminar announcements, plus space for suggestions on seminar subjects [?]
-- in the seminar list, add (localized) subheadings with month and year, e.g. "May 2006" [?]
-- add support for different kinds of events (workshop, lecture, ...) [?]
-- support periodical events (e.g. each Monday at ten a.m.) [?]
-- add front end page about speakers and their seminars [?]
-- find a way against overly long lists in the back-end (e.g. all registrations) [?]
-- feature: easily enter for a seminar who has attended and who hasn't [?]
+- add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions
+- feature for booking assets online (when belonging to the corresponding front end user group)
+- feature: quickly edit the "paid" entry for a participant
+- feature: easily enter after a single seminar who has participated
+- add feature "Teilnahmeliste" to generate a participation-form for each seminar where each participant can sign for each day that he/she has been there, plus a column where he/she can sign if he/she wants to receive seminar announcements, plus space for suggestions on seminar subjects
+- in the seminar list, add (localized) subheadings with month and year, e.g. "May 2006"
+- add support for different kinds of events (workshop, lecture, ...)
+- support periodical events (e.g. each Monday at ten a.m.)
+- add front end page about speakers and their seminars
+- find a way against overly long lists in the back-end (e.g. all registrations)
+- feature: easily enter for a seminar who has attended and who hasn't
 
 Version 1.0.0
 -------------
-- get the extension reviewed for a cigar [Oli]
+- get the extension reviewed for a cigar
 
 Not triaged yet
 ===============
-- separate "signing up" (which includes paying) and "registering a seat" (without paying) [?]
-- feature: create seminar certificates (as PDF) for those who have successfully attended [?]
-- add credit card payment [?]
-- feature: graph for total number of registrations per seminar over time [?]
-- feature: notify users if a new seminar for one of their "favorite" speakers has been entered [?]
-- allow using data from jp_staff [?]
-- add "target group/destination group" (Zielgruppe) record type, add this as a field to the seminar type [?]
-- feature: show seminars from a configurable time window in the seminar list [?]
-- add image to seminar record [?]
-- add image to seminar topic [?]
+- separate "signing up" (which includes paying) and "registering a seat" (without paying)
+- feature: create seminar certificates (as PDF) for those who have successfully attended
+- add credit card payment
+- feature: graph for total number of registrations per seminar over time
+- feature: notify users if a new seminar for one of their "favorite" speakers has been entered
+- allow using data from jp_staff
+- add "target group/destination group" (Zielgruppe) record type, add this as a field to the seminar type
+- feature: show seminars from a configurable time window in the seminar list
+- add image to seminar record
+- add image to seminar topic
 - attach images to seminars (like in tt_news)
 - attach documents to seminars
 - export events to tt_news
@@ -244,6 +248,6 @@ Not triaged yet
 - export events to http://www.uni-bonn.de/~career/termine_liste.php
 - FE export function: all future seminars formatter for inserting them into PageMaker (for the "basta" magazine)
 - integrate the "Feed-back-Fragebogen"
-- make CSS class names configurable via flexforms and document this [Oli]
+- make CSS class names configurable via flexforms and document this
 - feature: users can rate a seminar after it has taken place
 - for a speaker, show all past seminar ratings and the average rating
