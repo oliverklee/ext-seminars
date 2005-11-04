@@ -121,6 +121,8 @@ Version 0.4.7: back end usability
 - make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender)
 - allow different hours for multi-day events
 - investigate whether organizers, speakers and seminar sites can be created directly from within the seminar record
+- provide tooltips where it makes sense, e.g. in the "create new record" list
+- mark more fields as includefields
 
 Version 0.4.8: front end usability
 ----------------------------------
@@ -251,3 +253,4 @@ Not triaged yet
 - make CSS class names configurable via flexforms and document this
 - feature: users can rate a seminar after it has taken place
 - for a speaker, show all past seminar ratings and the average rating
+- feature: also notify speakers when one of their seminar has enough participants, is full etc.
