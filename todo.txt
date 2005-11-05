@@ -17,9 +17,10 @@ Version 0.4.1: Requested features and urgent usability
 - add to manual:
   - how to cancel a seminare and what that means
   - what to do if someone wants to change their registration from one seminar to another
+  - mention that "haspaid" will go away
 
-Version 0.4.2: dogfood
-----------------------
+Version 0.4.2: dogfood, part 1
+------------------------------
 - allow for a time before an event when no registrations are possible any more
 - also show the seminar date when updating the statistics
 - participant lists on the back end, selectable via seminar: all, paid, not paid
@@ -27,16 +28,18 @@ Version 0.4.2: dogfood
 - shorten some overlong DB labels
 - make it configurable which seminars to display: upcoming/upcoming+running/all
 - make it configurable via flexforms which seminars to display (past, current, upcoming)
+
+Version 0.4.3: dogfood, part 2
+------------------------------
 - feature for e-mail notification to the organizer once a seminar has enough attendances or is full
 - find a way to enter and display open-ended events
-- participant lists on the back end: all, paid, not paid
 - check that the CSS file doesn't allow for possibly unreadable color combinations
 - make it configurable whether to have the university-specific stuff
 - make it configurable whether to display the speakers' detailed description
 - make it configurable whether to display the sites' detailed description
 - make it configurable whether to have the speakers' name or the URL as link text for their homepage
 
-Version 0.4.3: data integrity and sanity
+Version 0.4.4: data integrity and sanity
 ----------------------------------------
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
 - factor out the statistics update into a common function and make it more efficient
@@ -58,7 +61,7 @@ Version 0.4.3: data integrity and sanity
 - in Web > Seminars, check write permissions for source and destination pages
 - prevent users from deleting their account in sr_feuser_register if they are signed up for an upcoming or running seminar
 
-Version 0.4.4: code clean-up and qa
+Version 0.4.5: code clean-up and qa
 -----------------------------------
 - reduce code by using the API for COUNT queries
 - use array_key_exists() where possible
@@ -71,7 +74,7 @@ Version 0.4.4: code clean-up and qa
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - investigate whether to use pibase->initMemberArray()
 
-Version 0.4.5: accessibility
+Version 0.4.6: accessibility
 ----------------------------
 - clean up code from pibase (search box, results browser)
 - remove layout tables from the search box
@@ -80,7 +83,7 @@ Version 0.4.5: accessibility
 - add titles for links
 - add a table summary to the list view
 
-Version 0.4.6: performance
+Version 0.4.7: performance
 --------------------------
 - cache speaker data
 - cache site data
@@ -92,7 +95,7 @@ Version 0.4.6: performance
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate performance improvements when using caching or singletons in the template helper class
 
-Version 0.4.7: back end usability
+Version 0.4.8: back end usability
 ---------------------------------
 - work out how to override non-empty TS values with empty flexforms values
 - for organizers, add field telling in which page new registration records should be stored, overriding the global setting
@@ -124,7 +127,7 @@ Version 0.4.7: back end usability
 - provide tooltips where it makes sense, e.g. in the "create new record" list
 - mark more fields as includefields
 
-Version 0.4.8: front end usability
+Version 0.4.9: front end usability
 ----------------------------------
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
 - make some fe_users data editable on the registration page
