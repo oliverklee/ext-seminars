@@ -9,15 +9,15 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.1: Requested features and urgent usability
 ------------------------------------------------------
-- add two additional fields for Martin Kurz
-- make viewing the two additional fields configurable in the EM
 - ensure that the organizer field is required
 - remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 - add to manual:
   - how to cancel a seminare and what that means
   - what to do if someone wants to change their registration from one seminar to another
-  - mention that "haspaid" will go away
+  - mention in the changelog, in the field list and on the extension status whiteboard that "haspaid" will go away
+  - mention which fields can be searched in the list view
+- remoce trailing spaces and tabs
 
 Version 0.4.2: dogfood, part 1
 ------------------------------
@@ -73,6 +73,7 @@ Version 0.4.5: code clean-up and qa
 - check for unused localization strings once more
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - investigate whether to use pibase->initMemberArray()
+- remove duplicate code for putting seminar properties into markers in tx_seminars_registration::notifyAttendee(), tx_seminars_pi1::singleView(), tx_seminars_pi1::pi_list_row() and tx_seminars_pi1::createRegistrationForm()
 
 Version 0.4.6: accessibility
 ----------------------------
@@ -95,8 +96,8 @@ Version 0.4.7: performance
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate performance improvements when using caching or singletons in the template helper class
 
-Version 0.4.8: back end usability
----------------------------------
+Version 0.4.8: back end usability and polish
+--------------------------------------------
 - work out how to override non-empty TS values with empty flexforms values
 - for organizers, add field telling in which page new registration records should be stored, overriding the global setting
 - for seminars, add field telling in which page new registration records should be stored, overriding the global and organizers setting
@@ -126,9 +127,11 @@ Version 0.4.8: back end usability
 - investigate whether organizers, speakers and seminar sites can be created directly from within the seminar record
 - provide tooltips where it makes sense, e.g. in the "create new record" list
 - mark more fields as includefields
+- change the table names ("seminars" etc.) from plural to singular so that they make more sense in the "new record" wizard
+- conduct BE usability tests
 
-Version 0.4.9: front end usability
-----------------------------------
+Version 0.4.9: front end usability and polish
+---------------------------------------------
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
 - make some fe_users data editable on the registration page
 - provide a patch for drop-down-lists in frontendformslib
@@ -160,6 +163,8 @@ Version 0.4.9: front end usability
 - investigate how the colored "vancancies" square get displayed for seminar that have already started and for seminars that are already over
 - find a way to use the salutation switcher for the form labels and improve the wording
 - add a localized "h" after the time
+- conduct FE usability tests
+- in the list view, allow ordering by the number of vacancies
 
 Version 0.5.0
 -------------
