@@ -80,6 +80,7 @@ Version 0.4.5: code clean-up and qa
 - make it easier to add new fields to the seminar record type
 - include CSS file using TS (without PHP)
 - check for trailing spaces and tabs again
+- clean up the mess in mod1/
 
 Version 0.4.6: accessibility
 ----------------------------
