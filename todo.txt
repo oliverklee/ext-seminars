@@ -24,6 +24,8 @@ Version 0.4.2: dogfood, part 1
 - allow for a time before an event when no registrations are possible any more
 - also show the seminar date when updating the statistics
 - participant lists on the back end, selectable via seminar: all, paid, not paid
+- in the BE under Web>Seminars, only show seminars for the selected page (and only if the user has read access to it)
+- only update seminars if the user has write access to the content of the page with the seminar
 - in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
 - shorten some overlong DB labels
 - make it configurable which seminars to display: upcoming/upcoming+running/all
