@@ -206,7 +206,7 @@ $TCA['tx_seminars_seminars'] = Array (
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
 				'size' => 3,
-				'minitems' => 0,
+				'minitems' => 1,
 				'maxitems' => 3,
 			)
 		),
