@@ -211,7 +211,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 				$dbResultAttendeesPaid = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'COUNT(*) AS num',
 					$tableAttendances,
-					'seminar='.intval($currentSeminar['uid'])
+					'seminar='.intval($currentSeminar['uid']).' AND (paid=1 OR datepaid!=0)'
 						.t3lib_pageSelect::enableFields($tableAttendances),
 					'',
 					'',

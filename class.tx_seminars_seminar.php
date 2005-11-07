@@ -1196,7 +1196,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$dbResultAttendeesPaid = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$this->tableAttendances,
-			'seminar='.$this->getUid().' AND paid=1'
+			'seminar='.$this->getUid().' AND (paid=1 OR datepaid!=0)'
 				.t3lib_pageSelect::enableFields($this->tableAttendances),
 			'',
 			'',
