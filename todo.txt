@@ -9,8 +9,6 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.1: Requested features and urgent usability
 ------------------------------------------------------
-- ensure that the organizer field is required
-- remove "start time" and "end time" for display from all record types as it is hardly used, but users confuse this with the seminar end time
 - provide a patch for the frontendformslib extension: adding an action attribute value to the forms tag (look in pibase search box for good action content)
 - add to manual:
   - how to cancel a seminare and what that means
