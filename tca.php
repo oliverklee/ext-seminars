@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 $TCA['tx_seminars_seminars'] = Array (
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,begin_date,end_date,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,notes'
 	),
 	'columns' => Array (
 		'hidden' => Array (
@@ -68,6 +68,31 @@ $TCA['tx_seminars_seminars'] = Array (
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
+			)
+		),
+		'accreditation_number' => Array (
+			'exclude' => '1',
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.accreditation_number',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '20',
+				'eval' => 'trim',
+			)
+		),
+		'credit_points' => Array (
+			'exclude' => '1',
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.credit_points',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '4',
+				'max' => '4',
+				'eval' => 'int',
+				'checkbox' => '0',
+				'range' => Array (
+					'upper' => '9999',
+					'lower' => '0'
+				),
+				'default' => 0
 			)
 		),
 		'begin_date' => Array (
@@ -267,7 +292,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], begin_date, end_date, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, notes')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts], accreditation_number, credit_points, begin_date, end_date, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'starttime, endtime')

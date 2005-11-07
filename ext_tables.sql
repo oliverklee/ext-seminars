@@ -58,6 +58,8 @@ CREATE TABLE tx_seminars_seminars (
 	endtime int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext NOT NULL,
 	subtitle tinytext NOT NULL,
+	accreditation_number tinytext NOT NULL,
+	credit_points int(11) unsigned DEFAULT '0' NOT NULL,
 	description text NOT NULL,
 	begin_date int(11) DEFAULT '0' NOT NULL,
 	end_date int(11) DEFAULT '0' NOT NULL,

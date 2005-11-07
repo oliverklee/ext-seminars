@@ -36,6 +36,8 @@ $LOCAL_LANG = Array (
 		'pi_list_searchBox_search' => 'Search',
 
 		'label_title' => 'Title',
+		'label_accreditation_number' => 'Accreditation number',
+		'label_credit_points' => 'Credit points',
 		'label_date' => 'Date',
 		'label_time' => 'Time',
 		'label_place' => 'Place',
@@ -96,6 +98,8 @@ $LOCAL_LANG = Array (
 		'pi_list_searchBox_search' => 'Suchen',
 
 		'label_title' => 'Titel',
+		'label_accreditation_number' => 'Akkreditierungsnummer',
+		'label_credit_points' => 'Leistungspunkte',
 		'label_date' => 'Datum',
 		'label_time' => 'Zeit',
 		'label_place' => 'Ort',

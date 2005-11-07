@@ -7,6 +7,8 @@
 
 $LOCAL_LANG = Array (
 	'default' => Array (
+		'label_accreditation_number' => 'Accreditation number',
+		'label_credit_points' => 'Credit points',
 		'label_date' => 'Date',
 		'label_time' => 'Time',
 		'label_place' => 'Place',
@@ -42,6 +44,8 @@ someone just has registered for an event:',
 	'dk' => Array (
 	),
 	'de' => Array (
+		'label_accreditation_number' => 'Akkreditierungsnummer',
+		'label_credit_points' => 'Leistungspunkte',
 		'label_date' => 'Datum',
 		'label_time' => 'Zeit',
 		'label_place' => 'Ort',

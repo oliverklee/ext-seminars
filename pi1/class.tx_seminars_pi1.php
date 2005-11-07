@@ -149,8 +149,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
 		$this->internal['maxPages'] = t3lib_div::intInRange($lConf['maxPages'], 0, 1000, 2);
 
-		$this->internal['searchFieldList'] = 'title,subtitle,description';
-		$this->internal['orderByList'] = 'date,begin_date,title,price_regular,organizers';
+		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
+		$this->internal['orderByList'] = 'title,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
 		/** only show upcoming seminars */
 		$inFuture = 'AND end_date >= '.$GLOBALS['SIM_EXEC_TIME'];
@@ -214,6 +214,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('description', 'field_wrapper');
 			}
 
+			if ($this->seminar->hasAccreditationNumber()) {
+				$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
+			} else {
+				$this->readSubpartsToHide('accreditation_number', 'field_wrapper');
+			}
+
+			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
 			$this->setMarkerContent('date', $this->seminar->getDate());
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlace($this));
@@ -304,13 +311,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access protected
 	 */
 	function pi_list_header() {
-		$this->setMarkerContent('header_title',         $this->getFieldHeader_sortLink('title'));
-		$this->setMarkerContent('header_date',          $this->getFieldHeader_sortLink('date'));
+		$this->setMarkerContent('header_title', $this->getFieldHeader_sortLink('title'));
+		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader_sortLink('accreditation_number'));
+		$this->setMarkerContent('header_credit_points', $this->getFieldHeader_sortLink('credit_points'));
+		$this->setMarkerContent('header_date', $this->getFieldHeader_sortLink('date'));
 		$this->setMarkerContent('header_price_regular', $this->getFieldHeader_sortLink('price_regular'));
 		$this->setMarkerContent('header_price_special', $this->getFieldHeader_sortLink('price_special'));
-		$this->setMarkerContent('header_organizers',    $this->getFieldHeader_sortLink('organizers'));
-		$this->setMarkerContent('header_vacancies',     $this->getFieldHeader('vacancies'));
-		$this->setMarkerContent('header_registration',  $this->getFieldHeader('registration'));
+		$this->setMarkerContent('header_organizers', $this->getFieldHeader_sortLink('organizers'));
+		$this->setMarkerContent('header_vacancies', $this->getFieldHeader('vacancies'));
+		$this->setMarkerContent('header_registration', $this->getFieldHeader('registration'));
 
 		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
@@ -336,16 +345,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				' class="'.$rowClass.$classSeparator.$cancelledClass.'"' :
 				'';
 
-			$this->setMarkerContent('class_itemrow',    $completeClass);
+			$this->setMarkerContent('class_itemrow', $completeClass);
 
-			$this->setMarkerContent('title_link',       $this->seminar->getLinkedTitle($this));
-			$this->setMarkerContent('date',             $this->seminar->getDate());
-			$this->setMarkerContent('price_regular',    $this->seminar->getPriceRegular());
-			$this->setMarkerContent('price_special',    $this->seminar->getPriceSpecial());
-			$this->setMarkerContent('organizers',       $this->seminar->getOrganizers($this));
-			$this->setMarkerContent('vacancies',        $this->seminar->needsRegistration() ? $this->seminar->getVacancies() : '');
-			$this->setMarkerContent('class_listvacancies',  $this->getVacanciesClasses($this->seminar));
-			$this->setMarkerContent('registration',     $this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
+			$this->setMarkerContent('title_link', $this->seminar->getLinkedTitle($this));
+			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
+			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
+			$this->setMarkerContent('date', $this->seminar->getDate());
+			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
+			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
+			$this->setMarkerContent('vacancies', $this->seminar->needsRegistration() ? $this->seminar->getVacancies() : '');
+			$this->setMarkerContent('class_listvacancies', $this->getVacanciesClasses($this->seminar));
+			$this->setMarkerContent('registration', $this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
 				$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) : ''
 			);
 		}

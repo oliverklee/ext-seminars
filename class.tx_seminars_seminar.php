@@ -267,6 +267,51 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Gets the accreditation number (which actually is a string, not an integer).
+	 *
+	 * @return	String		the accreditation number (may be empty)
+	 *
+	 * @access public
+	 */
+	function getAccreditationNumber() {
+		return $this->getSeminarsPropertyString('accreditation_number');
+	}
+
+	/**
+	 * Checks whether we have an accreditation number set.
+	 *
+	 * @return	boolean		true if we have a non-empty accreditation number, false otherwise.
+	 *
+	 * @access public
+	 */
+	function hasAccreditationNumber() {
+		return ($this->getAccreditationNumber() !== '');
+	}
+
+	/**
+	 * Gets the number of credit points for this seminar
+	 * (or a message that the number will still be announced if it is not set yet).
+	 *
+	 * @return	String		the number of credit points (or a localized message if it is 0)
+	 *
+	 * @access public
+	 */
+	function getCreditPoints() {
+		return ($this->hasCreditPoints()) ? $this->getSeminarsPropertyInteger('credit_points') : $this->pi_getLL('message_willBeAnnounced');
+	}
+
+	/**
+	 * Checks whether this seminar has a non-zero number of credit points assigned.
+	 *
+	 * @return	boolean		true if the seminar has credit points assigned, false otherwise.
+	 *
+	 * @access public
+	 */
+	function hasCreditPoints() {
+		return $this->getSeminarsPropertyInteger('credit_points');
+	}
+
+	/**
 	 * Gets the seminar date.
 	 * Returns a localized string "will be announced" if the seminar has no date set.
 	 *

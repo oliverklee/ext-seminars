@@ -337,6 +337,14 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		$this->setMarkerContent('hello', sprintf($this->pi_getLL('email_confirmationHello'), $this->getUserName()));
 		$this->setMarkerContent('type', $this->seminar->getType());
 		$this->setMarkerContent('title', $this->seminar->getTitle());
+
+		if ($this->seminar->hasAccreditationNumber()) {
+			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
+		} else {
+			$this->readSubpartsToHide('accreditation_number', 'field_wrapper');
+		}
+
+		$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
 		$this->setMarkerContent('date', $this->seminar->getDate('-'));
 		$this->setMarkerContent('time', $this->seminar->getTime('-'));
 		$this->setMarkerContent('place', $this->seminar->getPlaceShort());
