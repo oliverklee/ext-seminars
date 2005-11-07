@@ -74,6 +74,9 @@ Version 0.4.5: code clean-up and qa
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - investigate whether to use pibase->initMemberArray()
 - remove duplicate code for putting seminar properties into markers in tx_seminars_registration::notifyAttendee(), tx_seminars_pi1::singleView(), tx_seminars_pi1::pi_list_row() and tx_seminars_pi1::createRegistrationForm()
+- refactor the getters in the seminars class, try to remove duplicate code
+- remove redundancies from template
+- make it easier to add new fields to the seminar record type
 
 Version 0.4.6: accessibility
 ----------------------------
@@ -262,3 +265,6 @@ Not triaged yet
 - feature: users can rate a seminar after it has taken place
 - for a speaker, show all past seminar ratings and the average rating
 - feature: also notify speakers when one of their seminar has enough participants, is full etc.
+- feature: sub-seminars (see bugtracker)
+- feature: assign FE user to a speaker record
+- feature: for a speaker, list the seminars which he/she holds (when the corresponding FE user is logged in)
