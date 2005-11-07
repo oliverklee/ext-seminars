@@ -17,7 +17,6 @@ Version 0.4.1: Requested features and urgent usability
   - what to do if someone wants to change their registration from one seminar to another
   - mention in the changelog, in the field list and on the extension status whiteboard that "haspaid" will go away
   - mention which fields can be searched in the list view
-- remoce trailing spaces and tabs
 
 Version 0.4.2: dogfood, part 1
 ------------------------------
@@ -82,6 +81,7 @@ Version 0.4.5: code clean-up and qa
 - remove redundancies from template
 - make it easier to add new fields to the seminar record type
 - include CSS file using TS (without PHP)
+- check for trailing spaces and tabs again
 
 Version 0.4.6: accessibility
 ----------------------------

@@ -98,7 +98,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 */
 	function canRegisterIfLoggedIn(&$seminar) {
 		$result = true;
-		
+
 		if ($this->isLoggedIn() && $this->isUserRegistered($seminar)) {
 			// a user is logged in and is already registered for that seminar
 			$result = false;
@@ -106,7 +106,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			// it is not possible to register for this seminar at all (it is cancelled, full, etc.)
 			$result = $seminar->canSomebodyRegister();
 		}
-		
+
 		return $result;
 	}
 
@@ -131,7 +131,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 */
 	function canRegisterIfLoggedInMessage(&$seminar) {
 		$result = '';
-		
+
 		if ($this->isLoggedIn() && $this->isUserRegistered($seminar)) {
 			// a user is logged in and is already registered for that seminar
 			$result = $this->pi_getLL('message_alreadyRegistered');
@@ -139,7 +139,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			// it is not possible to register for this seminar at all (it is cancelled, full, etc.)
 			$result = $seminar->canSomebodyRegisterMessage();
 		}
-		
+
 		return $result;
 	}
 
