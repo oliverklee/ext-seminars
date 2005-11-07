@@ -66,6 +66,7 @@ Version 0.4.4: data integrity and sanity
 
 Version 0.4.5: code clean-up and qa
 -----------------------------------
+- rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
 - use array_key_exists() where possible
 - add automatic headers to code files
