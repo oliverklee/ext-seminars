@@ -77,6 +77,7 @@ Version 0.4.5: code clean-up and qa
 - refactor the getters in the seminars class, try to remove duplicate code
 - remove redundancies from template
 - make it easier to add new fields to the seminar record type
+- include CSS file using TS (without PHP)
 
 Version 0.4.6: accessibility
 ----------------------------
@@ -190,7 +191,6 @@ Version 0.5.0
 - make the link to the online registration form CSS-stylable
 - make e-mail charset configurable
 - test with PHP 5
-- include CSS file using TS (without PHP)
 - check that links in this extension work correctly on multilingual sites
 - extend copyright line to 2006
 
