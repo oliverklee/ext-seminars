@@ -139,6 +139,7 @@ Version 0.4.8: back end usability and polish
 - mark more fields as includefields
 - change the table names ("seminars" etc.) from plural to singular so that they make more sense in the "new record" wizard
 - conduct BE usability tests
+- check workspace compliance
 
 Version 0.4.9: front end usability and polish
 ---------------------------------------------
