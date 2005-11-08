@@ -81,6 +81,7 @@ Version 0.4.5: code clean-up and qa
 - include CSS file using TS (without PHP)
 - check for trailing spaces and tabs again
 - clean up the mess in mod1/
+- find out how to use the translation tool
 
 Version 0.4.6: accessibility
 ----------------------------
