@@ -106,6 +106,8 @@ Version 0.4.7: performance
 
 Version 0.4.8: back end usability and polish
 --------------------------------------------
+- move the "seminar is cancelled" checkbox further up in the BE form
+- bug: BE search doesn't find attendance titles
 - work out how to override non-empty TS values with empty flexforms values
 - for organizers, add field telling in which page new registration records should be stored, overriding the global setting
 - for seminars, add field telling in which page new registration records should be stored, overriding the global and organizers setting
