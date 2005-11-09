@@ -150,7 +150,6 @@ $TCA['tx_seminars_seminars'] = Array (
 				'allowed' => 'tx_seminars_speakers',
 				'size' => 3,
 				'minitems' => 0,
-				'maxitems' => 3,
 				'MM' => 'tx_seminars_seminars_speakers_mm',
 			)
 		),
