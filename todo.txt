@@ -75,6 +75,7 @@ Version 0.4.5: code clean-up and qa
 - check for trailing spaces and tabs again
 - clean up the mess in mod1/
 - find out how to use the translation tool
+- Make the statistics update function in mod1/ use tx_seminars_seminar::updateStatistics() instead
 
 Version 0.4.6: accessibility
 ----------------------------
