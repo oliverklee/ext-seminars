@@ -273,3 +273,4 @@ Not triaged yet
 - feature: for a speaker, list the seminars which he/she holds (when the corresponding FE user or an organizer is logged in)
 - feature: allow group registrations (so that one person can register a group a participants from e.g. a company)
 - export attendance records as bar codes
+- attendance record: if there is no name, use first and last name
