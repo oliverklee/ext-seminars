@@ -11,7 +11,7 @@
 
 $EM_CONF[$_EXTKEY] = Array (
 	'title' => 'Seminar Manager',
-	'description' => 'This extension allows you to create and manage a list of seminars, workshops, lectures and other events as an overview or as detailed descriptions. In addition, it allows frontend users to register for seminars.',
+	'description' => 'This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events as an overview or as detailed descriptions. In addition, it allows front end users to register for these events.',
 	'category' => 'plugin',
 	'shy' => 0,
 	'dependencies' => 'cms,css_styled_content,frontendformslib',
