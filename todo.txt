@@ -135,6 +135,7 @@ Version 0.4.8: back end usability and polish
 - conduct BE usability tests
 - check workspace compliance
 - in the selector for payment methods in the attendance record, only show/allow payment methods that have been set as allowed in the corresponding seminar
+- in the "new page content" wizard, show this extension (instead of as just another plugin)
 
 Version 0.4.9: front end usability and polish
 ---------------------------------------------
@@ -271,3 +272,4 @@ Not triaged yet
 - feature: assign FE user to a speaker record
 - feature: for a speaker, list the seminars which he/she holds (when the corresponding FE user or an organizer is logged in)
 - feature: allow group registrations (so that one person can register a group a participants from e.g. a company)
+- export attendance records as bar codes
