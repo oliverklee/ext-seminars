@@ -220,7 +220,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('accreditation_number', 'field_wrapper');
 			}
 
-			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
+			if ($this->seminar->hasCreditPoints()) {
+				$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
+			} else {
+				$this->readSubpartsToHide('credit_points', 'field_wrapper');
+			}
+
 			$this->setMarkerContent('date', $this->seminar->getDate());
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlace($this));

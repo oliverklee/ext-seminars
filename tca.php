@@ -84,12 +84,12 @@ $TCA['tx_seminars_seminars'] = Array (
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.credit_points',
 			'config' => Array (
 				'type' => 'input',
-				'size' => '4',
-				'max' => '4',
+				'size' => '3',
+				'max' => '3',
 				'eval' => 'int',
 				'checkbox' => '0',
 				'range' => Array (
-					'upper' => '9999',
+					'upper' => '999',
 					'lower' => '0'
 				),
 				'default' => 0

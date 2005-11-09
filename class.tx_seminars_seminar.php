@@ -290,14 +290,14 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 	/**
 	 * Gets the number of credit points for this seminar
-	 * (or a message that the number will still be announced if it is not set yet).
+	 * (or an empty string if it is not set yet).
 	 *
 	 * @return	String		the number of credit points (or a localized message if it is 0)
 	 *
 	 * @access public
 	 */
 	function getCreditPoints() {
-		return ($this->hasCreditPoints()) ? $this->getSeminarsPropertyInteger('credit_points') : $this->pi_getLL('message_willBeAnnounced');
+		return ($this->hasCreditPoints()) ? $this->getSeminarsPropertyInteger('credit_points') : '';
 	}
 
 	/**
@@ -308,7 +308,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access public
 	 */
 	function hasCreditPoints() {
-		return $this->getSeminarsPropertyInteger('credit_points');
+		return (boolean) $this->getSeminarsPropertyInteger('credit_points');
 	}
 
 	/**
