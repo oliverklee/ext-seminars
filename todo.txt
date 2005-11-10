@@ -9,6 +9,7 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.2: dogfood, part 1
 ------------------------------
+(all of these items are already entered to the bugtracker, please assign one of them to yourself if you want to contribute)
 - allow for a time before an event when no registrations are possible any more
 - also show the seminar date when updating the statistics
 - participant lists on the back end, selectable via seminar: all, paid, not paid
