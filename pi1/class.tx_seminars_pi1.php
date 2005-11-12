@@ -342,12 +342,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function pi_list_row($c) {
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
 			$rowClass = ($c % 2) ? 'listrow-odd' : '';
-			$cancelledClass = ($this->seminar->isCancelled()) ? $this->pi_getClassName('cancelled') : '';
+			$canceledClass = ($this->seminar->isCanceled()) ? $this->pi_getClassName('cancelled') : '';
 			// If we have two classes, we need a space as a separator.
-			$classSeparator = (!empty($rowClass) && !empty($cancelledClass)) ? ' ' : '';
+			$classSeparator = (!empty($rowClass) && !empty($canceledClass)) ? ' ' : '';
 			// Only use the class construct if we actually have a class.
-			$completeClass = (!empty($rowClass) || !empty($cancelledClass)) ?
-				' class="'.$rowClass.$classSeparator.$cancelledClass.'"' :
+			$completeClass = (!empty($rowClass) || !empty($canceledClass)) ?
+				' class="'.$rowClass.$classSeparator.$canceledClass.'"' :
 				'';
 
 			$this->setMarkerContent('class_itemrow', $completeClass);

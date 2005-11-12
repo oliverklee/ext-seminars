@@ -1104,7 +1104,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Checkes whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
-	 *     has not been cancelled,
+	 *     has not been canceled,
 	 *     has not begun yet
 	 *     and there are still vacancies.
 	 *
@@ -1114,7 +1114,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function canSomebodyRegister() {
 		return $this->needsRegistration() &&
-			!$this->isCancelled() &&
+			!$this->isCanceled() &&
 			($GLOBALS['SIM_EXEC_TIME'] < $this->seminarData['begin_date']) &&
 			$this->hasVacancies();
 	}
@@ -1122,7 +1122,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Checkes whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
-	 *     has not been cancelled,
+	 *     has not been canceled,
 	 *     has not begun yet
 	 *     and there are still vacancies,
 	 * and returns a localized error message if registration is not possible.
@@ -1136,7 +1136,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 		if (!$this->needsRegistration()) {
 			$message = $this->pi_getLL('message_noRegistrationNecessary');
-		} elseif ($this->isCancelled()) {
+		} elseif ($this->isCanceled()) {
 			$message = $this->pi_getLL('message_seminarCancelled');
 		} elseif ($GLOBALS['SIM_EXEC_TIME'] > $this->seminarData['end_date']) {
 			$message = $this->pi_getLL('message_seminarOver');
@@ -1150,13 +1150,13 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks whether this event has been cancelled.
+	 * Checks whether this event has been canceled.
 	 *
-	 * @return	boolean		true if the event has been cancelled, false otherwise
+	 * @return	boolean		true if the event has been canceled, false otherwise
 	 *
 	 * @access public
 	 */
-	function isCancelled() {
+	function isCanceled() {
 		return (boolean) $this->seminarData['cancelled'];
 	}
 

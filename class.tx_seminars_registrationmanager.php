@@ -81,7 +81,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * Checks whether is possible to register for a given seminar at all:
 	 * if a possibly logged-in user hasn't registered yet for this seminar,
-	 * if the seminar isn't cancelled, full etc.
+	 * if the seminar isn't canceled, full etc.
 	 *
 	 * If no user is logged in, it is just checked whether somebody could register
 	 * for this seminar.
@@ -103,7 +103,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			// a user is logged in and is already registered for that seminar
 			$result = false;
 		} else {
-			// it is not possible to register for this seminar at all (it is cancelled, full, etc.)
+			// it is not possible to register for this seminar at all (it is canceled, full, etc.)
 			$result = $seminar->canSomebodyRegister();
 		}
 
@@ -113,7 +113,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * Checks whether is possible to register for a given seminar at all:
 	 * if a possibly logged-in user hasn't registered yet for this seminar,
-	 * if the seminar isn't cancelled, full etc.
+	 * if the seminar isn't canceled, full etc.
 	 *
 	 * If no user is logged in, it is just checked whether somebody could register
 	 * for this seminar.
@@ -136,7 +136,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			// a user is logged in and is already registered for that seminar
 			$result = $this->pi_getLL('message_alreadyRegistered');
 		} elseif (!$seminar->canSomebodyRegister()) {
-			// it is not possible to register for this seminar at all (it is cancelled, full, etc.)
+			// it is not possible to register for this seminar at all (it is canceled, full, etc.)
 			$result = $seminar->canSomebodyRegisterMessage();
 		}
 
