@@ -54,6 +54,7 @@ Version 0.4.4: data integrity and sanity
 - in Web > Seminars, check write permissions for source and destination pages
 - prevent users from deleting their account in sr_feuser_register if they are signed up for an upcoming or running seminar
 - change most "seminar" to "event" as this extension allows for different event types
+- prevent potentially dangerous characters in e-mail headers (CR/LF, commas, <, > ...)
 
 Version 0.4.5: code clean-up and qa
 -----------------------------------
