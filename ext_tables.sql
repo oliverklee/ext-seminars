@@ -136,6 +136,7 @@ CREATE TABLE tx_seminars_attendances (
 	background_knowledge text NOT NULL,
 	known_from text NOT NULL,
 	notes text NOT NULL,
+	seats int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
