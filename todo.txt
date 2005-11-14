@@ -93,6 +93,7 @@ Version 0.4.6: accessibility
 - check for accessibility according to WAI A/AA/AAA, BITV NRW and Sec. 508
 - add titles for links
 - add a table summary to the list view
+- re-check everything on the FE and BE for XHTML 1.0 strict validity
 
 Version 0.4.7: performance
 --------------------------
@@ -184,6 +185,7 @@ Version 0.4.9: front end usability and polish
 
 Version 0.5.0
 -------------
+- switch extension status from "alpha" to "beta"
 - Dutch localization
 - make it configurable what to do when a participant signs up
   - send an e-mail to the organizer
@@ -208,7 +210,6 @@ Version 0.5.0
 
 Version 0.6.0
 -------------
-- switch extension status from "alpha" to "beta"
 - add possibility for front end users to sign off a seminar if it's early enough
 - add configuration: period before seminar start when signing off is not possible any more (default: 14 days)
 - allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee
@@ -252,6 +253,7 @@ Version 0.7.0
 
 Version 1.0.0
 -------------
+- switch extension status from "beta" to "stable"
 - get the extension reviewed for a cigar
 
 Not triaged yet
