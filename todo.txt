@@ -41,7 +41,7 @@ Version 0.4.4: data integrity and sanity
 - feature: find and display double registrations
 - feature: avoid double registrations when entering registrations manually
 - automatically update record title if an attendance has been entered or edited in the back end
-- notification mail: Use the organizer as From: and the attendee as Reply-to:
+- notification mail: Use the organizer as From: and the attendee as Reply-to: (if the anttendee's e-mail address is provided)
 - add all organizers as Reply-To: in registration confirmation e-mail
 - fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
 - check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
@@ -55,6 +55,7 @@ Version 0.4.4: data integrity and sanity
 - prevent users from deleting their account in sr_feuser_register if they are signed up for an upcoming or running seminar
 - change most "seminar" to "event" as this extension allows for different event types
 - prevent potentially dangerous characters in e-mail headers (CR/LF, commas, <, > ...)
+- only send e-mails if the sender and recipient address look valid
 
 Version 0.4.5: code clean-up and qa
 -----------------------------------
@@ -81,6 +82,7 @@ Version 0.4.5: code clean-up and qa
 - @access( )+ -> @access\t
 - @(param|return)\tString -> @(param|return)\tstring
 - add class diagram to the extension
+- provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 
 Version 0.4.6: accessibility
 ----------------------------
@@ -177,6 +179,7 @@ Version 0.4.9: front end usability and polish
 - add a localized "h" after the time
 - conduct FE usability tests
 - in the list view, allow ordering by the number of vacancies
+- online registration: only show the message "an e-mail has been sent" if sending the e-mail has been successful
 
 Version 0.5.0
 -------------
