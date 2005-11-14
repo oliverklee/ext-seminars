@@ -285,3 +285,4 @@ Not triaged yet
 - feature: allow group registrations (so that one person can register a group a participants from e.g. a company)
 - export attendance records as bar codes
 - attendance record: if there is no name, use first and last name
+- add configuration: maximum number of seats that can be registered for at one time
