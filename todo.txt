@@ -78,6 +78,8 @@ Version 0.4.5: code clean-up and qa
 - clean up the mess in mod1/
 - find out how to use the translation tool
 - Make the statistics update function in mod1/ use tx_seminars_seminar::updateStatistics() instead
+- @access( )+ -> @access\t
+- @(param|return)\tString -> @(param|return)\tstring
 
 Version 0.4.6: accessibility
 ----------------------------
