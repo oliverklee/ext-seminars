@@ -80,6 +80,7 @@ Version 0.4.5: code clean-up and qa
 - Make the statistics update function in mod1/ use tx_seminars_seminar::updateStatistics() instead
 - @access( )+ -> @access\t
 - @(param|return)\tString -> @(param|return)\tstring
+- add class diagram to the extension
 
 Version 0.4.6: accessibility
 ----------------------------
