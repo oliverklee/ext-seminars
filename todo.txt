@@ -289,3 +289,4 @@ Not triaged yet
 - attendance record: if there is no name, use first and last name
 - add configuration: maximum number of seats that can be registered for at one time
 - write a logfile with alle changes and registrations so that everything is traceable
+- configuration: don't show the exakt number of vacancies, but only the rough state
