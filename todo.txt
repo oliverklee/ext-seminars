@@ -29,6 +29,7 @@ Version 0.4.3: dogfood, part 2
 - make it configurable whether to display the speakers' detailed description
 - make it configurable whether to display the sites' detailed description
 - make it configurable whether to have the speakers' name or the URL as link text for their homepage
+- test whether all flexform fields work
 
 Version 0.4.4: data integrity and sanity
 ----------------------------------------
