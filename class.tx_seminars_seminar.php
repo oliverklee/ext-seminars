@@ -56,12 +56,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
 	 * 						If this parameter is provided, $uid will be ignored.
 	 *
-	 * @return	boolean		true if the seminar has been properly initialized, false otherwise
-	 *
 	 * @access public
 	 */
 	function tx_seminars_seminar(&$registrationManager, $seminarUid, $dbResult = null) {
-		$result = false;
 		$this->init();
 		$this->registrationManager =& $registrationManager;
 
@@ -71,10 +68,20 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
 	 		$this->seminarData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-	 		$result = true;
 	 	}
 
-		return $result;
+		return;
+	}
+
+	/**
+	 * Checks whether this seminar has been properly initialized and thus is usable.
+	 *
+	 * @return	boolean		true if the seminar has been initialized, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function isOk() {
+		return ($this->seminarData != null);
 	}
 
 	/**

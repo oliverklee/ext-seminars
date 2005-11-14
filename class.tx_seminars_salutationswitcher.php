@@ -28,6 +28,10 @@
  * @author	Oliver Klee <typo-coding@oliverklee.de>
  */
 
+// In case we're on the back end, PATH_tslib isn't defined yet.
+if (!defined('PATH_tslib')) {
+	define('PATH_tslib', PATH_site.'tslib/');
+}
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
 class tx_seminars_salutationswitcher extends tslib_pibase {
