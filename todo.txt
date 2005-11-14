@@ -83,6 +83,7 @@ Version 0.4.5: code clean-up and qa
 - @(param|return)\tString -> @(param|return)\tstring
 - add class diagram to the extension
 - provide a general "bag" class from which a seminar bag or a attendance bag can inherit
+- document (for developers) how to add new fields to the seminar record type or the attendance record type
 
 Version 0.4.6: accessibility
 ----------------------------
