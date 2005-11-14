@@ -267,6 +267,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('vacancies', 'field_wrapper');
 			}
 
+			if ($this->seminar->hasRegistrationDeadline()) {
+				$this->setMarkerContent('deadline_registration', $this->seminar->getRegistrationDeadline());
+			} else {
+				$this->readSubpartsToHide('deadline_registration', 'field_wrapper');
+			}
+
 			$this->setMarkerContent('registration',
 				$this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
 					$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) :

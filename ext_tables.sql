@@ -63,6 +63,7 @@ CREATE TABLE tx_seminars_seminars (
 	description text NOT NULL,
 	begin_date int(11) DEFAULT '0' NOT NULL,
 	end_date int(11) DEFAULT '0' NOT NULL,
+	deadline_registration int(11) DEFAULT '0' NOT NULL,
 	place int(11) unsigned DEFAULT '0' NOT NULL,
 	room text NOT NULL,
 	speakers int(11) unsigned DEFAULT '0' NOT NULL,

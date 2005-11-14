@@ -817,11 +817,52 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Returns the latest date/time to register for a seminar.
+	 * This is either the registration deadline (if set) or the begin date of an event.
+	 *
+	 * @return	integer		the latest possible moment to register for a seminar
+	 *
+	 * @access	public
+	 */
+	function getLatestPossibleRegistrationTime() {
+		$result = 0;
+		if ($this->getSeminarsPropertyInteger('deadline_registration') != 0) {
+			$result = $this->getSeminarsPropertyInteger('deadline_registration');
+		} else {
+			$result = $this->getSeminarsPropertyInteger('begin_date');
+		}
+		return $result;
+	}
+
+	/**
+	 * Returns the seminar registration deadline
+	 * The returned string is formatted using the format configured in dateFormatYMD and timeFormat
+	 *
+	 * @return	string		the date + time of the deadline
+	 *
+	 * @access	public
+	 */
+	function getRegistrationDeadline() {
+		return strftime($this->getConfValue('dateFormatYMD').' '.$this->getConfValue('timeFormat'), $this->getSeminarsPropertyInteger('deadline_registration'));
+	}
+
+	/**
+	 * Checks whether this seminar has a deadline for registration set.
+	 *
+	 * @return	boolean		true if the seminar has a datetime set.
+	 *
+	 * @access public
+	 */
+	function hasRegistrationDeadline() {
+		return (boolean) $this->getSeminarsPropertyInteger('deadline_registration');
+	}
+
+	/**
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if they have any).
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
-	 * @return	String		the hyperlinked names and descriptions or our organizers
+	 * @return	string		the hyperlinked names and descriptions of our organizers
 	 *
 	 * @access public
 	 */
@@ -1105,7 +1146,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Checkes whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
 	 *     has not been canceled,
-	 *     has not begun yet
+	 *     has not begun yet,
+	 *     registration deadline is not over yet,
 	 *     and there are still vacancies.
 	 *
 	 * @return	boolean		true if registration is possible, false otherwise.
@@ -1115,7 +1157,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	function canSomebodyRegister() {
 		return $this->needsRegistration() &&
 			!$this->isCanceled() &&
-			($GLOBALS['SIM_EXEC_TIME'] < $this->seminarData['begin_date']) &&
+			$GLOBALS['SIM_EXEC_TIME'] < $this->getLatestPossibleRegistrationTime() &&
 			$this->hasVacancies();
 	}
 
@@ -1123,7 +1165,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Checkes whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
 	 *     has not been canceled,
-	 *     has not begun yet
+	 *     has not begun yet,
+	 *     the registration deadline is not over yet
 	 *     and there are still vacancies,
 	 * and returns a localized error message if registration is not possible.
 	 *
@@ -1140,6 +1183,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			$message = $this->pi_getLL('message_seminarCancelled');
 		} elseif ($GLOBALS['SIM_EXEC_TIME'] > $this->seminarData['end_date']) {
 			$message = $this->pi_getLL('message_seminarOver');
+		} elseif ($this->seminarData['deadline_registration'] != 0 && $GLOBALS['SIM_EXEC_TIME'] >= $this->seminarData['deadline_registration'])	{
+			$message = $this->pi_getLL('message_seminarRegistrationIsClosed');
 		} elseif ($GLOBALS['SIM_EXEC_TIME'] >= $this->seminarData['begin_date']) {
 			$message = $this->pi_getLL('message_seminarStarted');
 		} elseif (!$this->hasVacancies()) {
