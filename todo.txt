@@ -57,6 +57,7 @@ Version 0.4.4: data integrity and sanity
 - change most "seminar" to "event" as this extension allows for different event types
 - prevent potentially dangerous characters in e-mail headers (CR/LF, commas, <, > ...)
 - only send e-mails if the sender and recipient address look valid
+- use htmlentities() for many strings that are output on the BE or FE
 
 Version 0.4.5: code clean-up and qa
 -----------------------------------
