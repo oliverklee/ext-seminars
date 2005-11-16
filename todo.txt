@@ -86,6 +86,7 @@ Version 0.4.5: code clean-up and qa
 - add class diagram to the extension
 - provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
+- add fields "attendees_paid" and "attendees_unpaid" to the seminar record and fill them in updateStatistics()
 
 Version 0.4.6: accessibility
 ----------------------------
@@ -147,6 +148,8 @@ Version 0.4.8: back end usability and polish
 - check workspace compliance
 - in the selector for payment methods in the attendance record, only show/allow payment methods that have been set as allowed in the corresponding seminar
 - in the "new page content" wizard, show this extension (instead of as just another plugin)
+- allow to use the constants editor for values in plugin.tx_seminars
+- check whether we should remain "attendance" to "participant" or "attendee" in the localized strings (not in the DB field names, though)
 
 Version 0.4.9: front end usability and polish
 ---------------------------------------------
@@ -186,7 +189,7 @@ Version 0.4.9: front end usability and polish
 - online registration: only show the message "an e-mail has been sent" if sending the e-mail has been successful
 - thankyou page: show how many seats have been reserver
 - thankyou page: show the e-mail address to which the e-mail has been sent
-- make it configurable whether to have the search box
+- make it configurable whether to have the search box in the list view
 
 Version 0.5.0
 -------------
@@ -293,3 +296,5 @@ Not triaged yet
 - add configuration: maximum number of seats that can be registered for at one time
 - write a logfile with alle changes and registrations so that everything is traceable
 - configuration: don't show the exakt number of vacancies, but only the rough state
+- make it configurable whether to count all registrations or only the paid ones
+- add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
