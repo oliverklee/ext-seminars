@@ -27,7 +27,7 @@
  * This aggregate class holds a bunch of seminar objects and allows
  * to iterate over them.
  *
- * @author	Oliver Klee <typo-coding@oliverklee.de>
+ * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');

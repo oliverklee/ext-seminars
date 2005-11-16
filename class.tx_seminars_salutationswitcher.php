@@ -25,7 +25,7 @@
  * Class 'tx_seminars_salutationswitcher' for the 'seminars' extension
  * (taken from the 'salutationswitcher' extension).
  *
- * @author	Oliver Klee <typo-coding@oliverklee.de>
+ * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 // In case we're on the back end, PATH_tslib isn't defined yet.
