@@ -223,7 +223,6 @@
 							</config>
 						</TCEforms>
 					</hideFields>
-					<!--
 					<generalPriceInList>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.generalPriceInList</label>
@@ -240,7 +239,6 @@
 							</config>
 						</TCEforms>
 					</generalPriceInSingle>
-					-->
 					<showRegistrationFields>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.showRegistrationFields</label>

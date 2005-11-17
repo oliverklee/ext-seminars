@@ -63,8 +63,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setCSS();
 
 		// include CSS in header of page
-		if ($this->getConfValue('cssFile') !== '') {
-			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValue('cssFile').'";</style>';
+		if ($this->getConfValue('cssFile', 's_template_special') !== '') {
+			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValue('cssFile', 's_template_special').'";</style>';
 		}
 
 		/** Name of the registrationManager class in case someone subclasses it. */
@@ -242,7 +242,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}
 
-			if ($this->getConfValue('generalPriceInSingle')) {
+			if ($this->getConfValue('generalPriceInSingle', 's_template_special')) {
 				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 			}
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
@@ -392,7 +392,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$result = $this->pi_getLL('label_title', '<em>title</em>');
 			break;
 		case 'price_regular':
-			if ($this->getConfValue('generalPriceInList')) {
+			if ($this->getConfValue('generalPriceInList', 's_template_special')) {
 				$fN = 'price_general';
 			}
 			// fall-through is intended here
@@ -515,8 +515,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$formObj = new $className($this);
 
 		// Generate configuration for a single step displaying certain fields of tt_address:
-		$formObj->steps[1] = $formObj->createStepConf($this->getConfValue('showRegistrationFields'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
-
+		$formObj->steps[1] = $formObj->createStepConf($this->getConfValue('showRegistrationFields', 's_template_special'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
 		$formObj->init();
 
 		// Check if the form has been submitted:
@@ -527,7 +526,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Destroy session data for our submitted form:
 			$formObj->destroySessionData();
 		} else {
-			if ($this->getConfValue('generalPriceInSingle')) {
+			if ($this->getConfValue('generalPriceInSingle', 's_template_special')) {
 				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 			}
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
