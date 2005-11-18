@@ -51,16 +51,13 @@ class tx_seminars_seminarbag extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		An instance of a registrationManager (may not be null)
 	 *
-	 * @return	boolean		true if the seminar bag has been properly initialized,
-	 * 						false otherwise (eg. on DB problems)
-	 *
 	 * @access	public
 	 */
 	function tx_seminars_seminarbag(&$registrationManager) {
 		$this->registrationManager =& $registrationManager;
 		$this->init();
 
-		return $this->resetToFirst();
+		return;
 	}
 
 	/**
@@ -99,11 +96,11 @@ class tx_seminars_seminarbag extends tx_seminars_dbplugin {
 	/**
 	 * Advances to the next event record and returns a reference to that object.
 	 *
-	 * @return	object		the now current seminar object (may be null if there is no next seminar)
+	 * @return	object		a reference to the now current seminar object (may be null if there is no next seminar)
 	 *
 	 * @access	public
 	 */
-	function getNext() {
+	function &getNext() {
 		if ($this->dbResultSeminars) {
 			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 			$this->currentSeminar =& new $seminarClassname($this->registrationManager, 0, $this->dbResultSeminars);
@@ -123,11 +120,11 @@ class tx_seminars_seminarbag extends tx_seminars_dbplugin {
 	/**
 	 * Returns the current seminar object (which may be null).
 	 *
-	 * @return	object		the current seminar object (may be null if there is no current object)
+	 * @return	object		a reference to the current seminar object (may be null if there is no current object)
 	 *
 	 * @access	public
 	 */
-	function getCurrent() {
+	function &getCurrent() {
 		return $this->currentSeminar;
 	}
 }
