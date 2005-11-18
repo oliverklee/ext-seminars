@@ -35,6 +35,9 @@ $LANG->includeLLFile('EXT:seminars/mod1/locallang.php');
 #include ('locallang.php');
 require_once (PATH_t3lib.'class.t3lib_scbase.php');
 require_once (PATH_t3lib.'class.t3lib_page.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
 class tx_seminars_module1 extends t3lib_SCbase {
@@ -174,75 +177,39 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	}
 
 	/**
-	 * Updates the seminar statistics and displays success/failure.
+	 * Updates the seminar statistics (number of attendances, is full,
+	 * has enough attendances etc.).
 	 *
-	 * @return	[type]		...
+	 * @return	string		HTML code displaying the updated statistics
+	 *
+	 * @access	private
 	 */
 	function updateStats() {
+		global $LANG;
+
 		$tableSeminars = 'tx_seminars_seminars';
 		$tableAttendances = 'tx_seminars_attendances';
 		$tableUsers = 'fe_users';
 
 		$result = '';
-		$alsoNoticeUnpaidRegistrations = true;
 
-		$result .= '<h3>Anmeldezahlen werden aktualisiert</h3>';
-		$seminars = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			$tableSeminars,
-			'1'.t3lib_pageSelect::enableFields($tableSeminars),
-			'',
-			'begin_date',
-			'' );
+		$registrationManager =& t3lib_div::makeInstance('tx_seminars_registrationmanager');
+		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
+		$seminarBag =& new $seminarBagClassname($registrationManager);
 
-		if ($seminars) {
-			while ($currentSeminar = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($seminars)) {
-				$result .= '<h4>'.htmlspecialchars($currentSeminar['title']).'</h4>';
+		$result .= '<h3>'.$LANG->getLL('message_updatingAttendanceNumbers').'</h3>'.chr(10);
+		while ($currentSeminar =& $seminarBag->getCurrent()) {
+			$currentSeminar->updateStatistics();
 
-				$dbResultAttendees = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'COUNT(*) AS num',
-					$tableAttendances,
-					'seminar='.intval($currentSeminar['uid'])
-						.t3lib_pageSelect::enableFields($tableAttendances),
-					'',
-					'',
-					''
-				);
-				$dbResultAttendeesPaid = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'COUNT(*) AS num',
-					$tableAttendances,
-					'seminar='.intval($currentSeminar['uid']).' AND (paid=1 OR datepaid!=0)'
-						.t3lib_pageSelect::enableFields($tableAttendances),
-					'',
-					'',
-					''
-				);
-				if ($dbResultAttendees && $dbResultAttendeesPaid) {
-					$numberOfAttendees = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendees);
-					$numberOfAttendeesPaid = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendeesPaid);
+			$result .= '<h4>'.htmlspecialchars($currentSeminar->getTitle()).'</h4>'.chr(10);
+			$result .= '<p>'.$LANG->getLL('label_all').$currentSeminar->getAttendances().'</p>';
+			$result .= '<p>'.$LANG->getLL('label_paid').$currentSeminar->getAttendancesPaid().'</p>';
+			$result .= '<p>'.$LANG->getLL('label_unpaid').$currentSeminar->getAttendancesNotPaid().'</p>';
+			$result .= '<p>'.$LANG->getLL('label_vacancies').$currentSeminar->getVacancies().'</p>';
+			$result .= '<p>'.$LANG->getLL('label_hasEnough').$currentSeminar->getAttendancesNotPaid().'</p>';
+			$result .= '<p>'.$LANG->getLL('label_isFull').($currentSeminar->isFull() ? '1' : '0').'</p>';
 
-					$result .= '<p>Anzahl Teilnehmer: '.$numberOfAttendees['num'].'</p>';
-					$result .= '<p>Anzahl Teilnehmer (bezahlt): '.$numberOfAttendeesPaid['num'].'</p>';
-
-					$numberOfSeenAttendees = $alsoNoticeUnpaidRegistrations ? $numberOfAttendees['num'] : $numberOfAttendeesPaid['num'];
-
-					$hasEnoughAttendees = ($numberOfSeenAttendees >= $currentSeminar['attendees_min']) ? 1 : 0;
-					$isFull = ($numberOfSeenAttendees >= $currentSeminar['attendees_max']) ? 1 : 0;
-
-					$result .= '<p>Hat genug Teilis: '.$hasEnoughAttendees.'</p>';
-					$result .= '<p>Ist voll: '.$isFull.'</p>';
-
-					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-						$tableSeminars,
-						'uid='.intval($currentSeminar['uid']),
-						array(
-							'attendees' => $numberOfSeenAttendees,
-							'enough_attendees' => $hasEnoughAttendees,
-							'is_full' => $isFull,
-						)
-					);
-				}
-			}
+			$seminarBag->getNext();
 		}
 
 		$result .= '<h3>Titel der Anmeldungen werden aktualisiert</h3>';

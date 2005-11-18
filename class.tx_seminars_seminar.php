@@ -47,6 +47,12 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager = null;
 
+	/** The number of paid attendances.
+	 *  This variable is only available directly after updateStatistics() has been called.
+	 *  It will go completely away once we have a configuration about whether to count
+	 *  only the paid or all attendances. */
+	var $numberOfAttendeesPaid = 0;
+
 	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
@@ -375,7 +381,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access public
 	 */
 	function hasDate() {
-		return ($this->getSeminarsPropertyInteger('begin_date') && $this->getSeminarsPropertyInteger('end_date'));
+		return (boolean) ($this->getSeminarsPropertyInteger('begin_date') && $this->getSeminarsPropertyInteger('end_date'));
 	}
 
 	/**
@@ -802,6 +808,41 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Gets the number of attendances for this seminar
+	 * (currently the paid attendances as well as the unpaid ones)
+	 *
+	 * @return	integer		the number of attendances
+	 *
+	 * @access public
+	 */
+	function getAttendances() {
+		return $this->getSeminarsPropertyInteger('attendees');
+	}
+
+	/**
+	 * Gets the number of paid attendances for this seminar.
+	 * This function may only be called after updateStatistics() has been called.
+	 *
+	 * @return	integer		the number of paid attendances
+	 *
+	 * @access public
+	 */
+	function getAttendancesPaid() {
+		return $this->numberOfAttendeesPaid;
+	}
+
+	/**
+	 * Gets the number of attendances that are not paid yet
+	 *
+	 * @return	integer		the number of attendances that are not paid yet
+	 *
+	 * @access public
+	 */
+	function getAttendancesNotPaid() {
+		return ($this->getAttendances() - $this->getAttendancesPaid());
+	}
+
+	/**
 	 * Gets the number of vacancies for this seminar
 	 *
 	 * @return	integer		the number of vacancies (will be 0 if the seminar is overbooked)
@@ -809,7 +850,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access public
 	 */
 	function getVacancies() {
-		return max(0, $this->getSeminarsPropertyInteger('attendees_max') - $this->getSeminarsPropertyInteger('attendees'));
+		return max(0, $this->getSeminarsPropertyInteger('attendees_max') - $this->getAttendances());
 	}
 
 	/**
@@ -820,7 +861,29 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access public
 	 */
 	function hasVacancies() {
-		return !$this->getSeminarsPropertyInteger('is_full');
+		return !($this->isFull());
+	}
+
+	/**
+	 * Checks whether this seminar already is full .
+	 *
+	 * @return	boolean		true if the seminar is full, false if it still has vacancies.
+	 *
+	 * @access public
+	 */
+	function isFull() {
+		return (boolean) $this->getSeminarsPropertyInteger('is_full');
+	}
+
+	/**
+	 * Checks whether this seminar has enough attendances to take place.
+	 *
+	 * @return	boolean		true if the seminar has enough attendances, false otherwise.
+	 *
+	 * @access public
+	 */
+	function hasEnoughAttendances() {
+		return (boolean) $this->getSeminarsPropertyInteger('enough_attendees');
 	}
 
 	/**
@@ -951,7 +1014,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	integer		UID of the organizer to retrieve
 	 *
-	 * @return	array		the organizer data (will be null if an error has occured)
+	 * @return	array		a reference to the organizer data (will be null if an error has occured)
 	 *
 	 * @access private
 	 */
@@ -1194,7 +1257,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			$message = $this->pi_getLL('message_seminarRegistrationIsClosed');
 		} elseif ($GLOBALS['SIM_EXEC_TIME'] >= $this->seminarData['begin_date']) {
 			$message = $this->pi_getLL('message_seminarStarted');
-		} elseif (!$this->hasVacancies()) {
+		} elseif ($this->isFull()) {
 			$message = $this->pi_getLL('message_noVacancies');
 		}
 
@@ -1231,7 +1294,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if everything went ok, false otherwise
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function updateStatistics() {
 		$result = false;
@@ -1262,13 +1325,15 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			// We count paid and unpaid registrations.
 			// This behaviour will be configurable in a later version.
 			$this->seminarData['attendees'] = $numberOfAttendees['num'];
+			// Let's store the other result in case someone needs it.
+			$this->numberOfAttendeesPaid = $numberOfAttendeesPaid['num'];
 
 			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-			$this->seminarData['enough_attendees'] = ($this->seminarData['attendees'] >= $this->seminarData['attendees_min']) ? 1 : 0;
+			$this->seminarData['enough_attendees'] = ($this->getAttendances() >= $this->seminarData['attendees_min']) ? 1 : 0;
 			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-			$this->seminarData['is_full'] = ($this->seminarData['attendees'] >= $this->seminarData['attendees_max']) ? 1 : 0;
+			$this->seminarData['is_full'] = ($this->getAttendances() >= $this->seminarData['attendees_max']) ? 1 : 0;
 
-			$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+			$result = (boolean) $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 				$this->tableSeminars,
 				'uid='.$this->getUid(),
 				array(

@@ -13,6 +13,15 @@ $LOCAL_LANG = Array (
 		'menu_listSites' => 'List seminar sites',
 		'menu_listSeminars' => 'List seminars',
 		'menu_seminarDetails' => 'Show seminar details',
+
+		'label_all' => 'All: ',
+		'label_paid' => 'Paid: ',
+		'label_unpaid' => 'Not paid: ',
+		'label_vacancies' => 'Vacancies: ',
+		'label_hasEnough' => 'Has enough attendances: ',
+		'label_isFull' => 'Is full: ',
+
+		'message_updatingAttendanceNumbers' => 'Updating the attendance numbers',
 	),
 	'dk' => Array (
 	),
@@ -23,6 +32,15 @@ $LOCAL_LANG = Array (
 		'menu_listSites' => 'Veranstaltungsorte auflisten',
 		'menu_listSeminars' => 'Seminare auflisten',
 		'menu_seminarDetails' => 'Seminardetails anzeigen',
+
+		'label_all' => 'Alle: ',
+		'label_paid' => 'Bezahlt: ',
+		'label_unpaid' => 'Nicht bezahlt: ',
+		'label_vacancies' => 'Freie Plätze: ',
+		'label_hasEnough' => 'Hat genug Anmeldungen: ',
+		'label_isFull' => 'Ist voll: ',
+
+		'message_updatingAttendanceNumbers' => 'Anmeldezahlen werden aktualisiert',
 	),
 	'no' => Array (
 	),
