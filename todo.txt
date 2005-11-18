@@ -58,6 +58,7 @@ Version 0.4.4: data integrity and sanity
 - prevent potentially dangerous characters in e-mail headers (CR/LF, commas, <, > ...)
 - only send e-mails if the sender and recipient address look valid
 - use htmlentities() for many strings that are output on the BE or FE
+- check all uses of references for correctness: that the function is &functionname() _and_ that the user uses "=& functionname();"
 
 Version 0.4.5: code clean-up and qa
 -----------------------------------
