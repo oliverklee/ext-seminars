@@ -91,6 +91,7 @@ Version 0.4.5: code clean-up and qa
 - provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
 - add fields "attendees_paid" and "attendees_unpaid" to the seminar record and fill them in updateStatistics()
+- remove all references to pi2 and pi3
 
 Version 0.4.6: accessibility
 ----------------------------
