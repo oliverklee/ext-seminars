@@ -49,13 +49,14 @@ class tx_seminars_seminarbag extends tx_seminars_dbplugin {
 	 * The constructor. Creates a seminar bag that (currently) contains all
 	 * non-deleted and visible seminar records.
 	 *
-	 * @param	object		An instance of a registrationManager (may not be null)
+	 * @param	object		an instance of a registrationManager (may not be null)
 	 *
 	 * @access	public
 	 */
 	function tx_seminars_seminarbag(&$registrationManager) {
 		$this->registrationManager =& $registrationManager;
 		$this->init();
+		$this->resetToFirst();
 
 		return;
 	}

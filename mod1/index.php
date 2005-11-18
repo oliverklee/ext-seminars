@@ -206,8 +206,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$result .= '<p>'.$LANG->getLL('label_paid').$currentSeminar->getAttendancesPaid().'</p>';
 			$result .= '<p>'.$LANG->getLL('label_unpaid').$currentSeminar->getAttendancesNotPaid().'</p>';
 			$result .= '<p>'.$LANG->getLL('label_vacancies').$currentSeminar->getVacancies().'</p>';
-			$result .= '<p>'.$LANG->getLL('label_hasEnough').$currentSeminar->getAttendancesNotPaid().'</p>';
-			$result .= '<p>'.$LANG->getLL('label_isFull').($currentSeminar->isFull() ? '1' : '0').'</p>';
+			$result .= '<p>'.$LANG->getLL('label_hasEnough').((integer) $currentSeminar->hasEnoughAttendances()).'</p>';
+			$result .= '<p>'.$LANG->getLL('label_isFull').((integer) $currentSeminar->isFull()).'</p>';
 
 			$seminarBag->getNext();
 		}
