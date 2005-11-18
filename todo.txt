@@ -191,6 +191,7 @@ Version 0.4.9: front end usability and polish
 - thankyou page: show how many seats have been reserver
 - thankyou page: show the e-mail address to which the e-mail has been sent
 - make it configurable whether to have the search box in the list view
+- don't show the number of vacancies in the list view and single view for canceled seminars
 
 Version 0.5.0
 -------------
