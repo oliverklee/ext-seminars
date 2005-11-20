@@ -22,6 +22,12 @@ t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_payment_methods=1
 ');
 
+
+// Adds our custom function to a hook in t3lib/class.t3lib_tcemain.php
+// Used for post-validation of fields in backend forms.
+$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
+
+
   ## Extending TypoScript from static template uid=43 to set up userdefined tag:
 t3lib_extMgm::addTypoScript($_EXTKEY,'editorcfg','
 	tt_content.CSS_editor.ch.tx_seminars_pi1 = < plugin.tx_seminars_pi1.CSS_editor
