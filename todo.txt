@@ -304,3 +304,4 @@ Not triaged yet
 - configuration: don't show the exakt number of vacancies, but only the rough state
 - make it configurable whether to count all registrations or only the paid ones
 - add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
+- add configuration: don't check for double registrations (this is useful for theaters)
