@@ -30,6 +30,18 @@ Version 0.4.3: dogfood, part 2
 - make it configurable whether to display the sites' detailed description
 - make it configurable whether to have the speakers' name or the URL as link text for their homepage
 - test whether all flexform fields work
+- Create a back end module (/mod2).
+  - create the module itself
+  - create the sub-modules (and the base for sub-module-switching)
+- Include some basic functionality
+  - output event lists
+  - possibility to select an event
+  - search forms (search for a user / event)
+- Create a global log-function (write all changes to a log-table)
+  - define the table-structure
+  - create a function to write to the db
+  - create a function in /mod2 to view the log (standard view, verbose view)
+
 
 Version 0.4.4: data integrity and sanity
 ----------------------------------------
@@ -224,6 +236,29 @@ Version 0.5.0
 - test with PHP 5
 - check that links in this extension work correctly on multilingual sites
 - extend copyright line to 2006
+
+Version 0.5.1
+-------------
+- Investigate on what happes, if a FE user account is deleted
+- Define all possible states of an event (in planning, open for registration, cancelled, …)
+- Feature: Create the select user functionality in the BE
+- Feature: Create the list / select possibility for an attendance of a user in the BE
+- Feature: Create a unified mail function for the BE SubModules
+- Investigate on how the payment-workflow could be optimized.
+
+Version 0.5.2 - the Back end fight :-)
+--------------------------------------
+- Feature: Show some global statistics about the whole seminar extension.
+- Feature: Show statistics for a selected event.
+- Feature: Add BE functionality to confirm attendances (person was really there)
+- Feature: Add BE functionality to show and print lists of participants for a selected event
+- Feature: Add BE functionality to confirm an event.
+- Feature: Add BE functionality to cancel an event.
+
+Version 0.5.3
+-------------
+- Feature: Add BE functionality to cancel attendances.
+- Check the new BE against the product requirement specifications.
 
 Version 0.6.0
 -------------
