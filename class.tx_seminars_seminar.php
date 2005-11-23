@@ -95,7 +95,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * This method may be called statically.
 	 *
-	 * @param	string		String with a UID (need not necessarily be escaped, will be intval'ed)
+	 * @param	string		string with a UID (need not necessarily be escaped, will be intval'ed)
 	 *
 	 * @return	boolean		true if a visible seminar with that UID exists; false otherwise.
 	 *
