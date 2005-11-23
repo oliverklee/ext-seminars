@@ -42,6 +42,9 @@ Version 0.4.4: data integrity and sanity
 - feature: find and display double registrations
 - feature: avoid double registrations when entering registrations manually
 - automatically update record title if an attendance has been entered or edited in the back end
+- automatically update attendances title if a FE user has been entered or edited in the back end
+- automatically update attendances titles if a FE user has been entered or edited by sr_feuser_register
+- automatically update attendances titles if a seminar has been entered or edited in the back end
 - notification mail: Use the organizer as From: and the attendee as Reply-to: (if the anttendee's e-mail address is provided)
 - add all organizers as Reply-To: in registration confirmation e-mail
 - fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
@@ -61,6 +64,8 @@ Version 0.4.4: data integrity and sanity
 - check all uses of references for correctness: that the function is &functionname() _and_ that the user uses "=& functionname();"
 - update the titles of all involved attendee records after the title of a seminar has been changed
 - update the titles of all involved attendee records after the name (or first name or last name) of a front end user has been changed
+- make it configurable whether to count all registrations or only the paid ones
+- add configuration: don't check for double registrations (this is useful for theaters)
 
 
 Version 0.4.5: code clean-up and qa
@@ -78,20 +83,18 @@ Version 0.4.5: code clean-up and qa
 - investigate whether to use pibase->initMemberArray()
 - remove duplicate code for putting seminar properties into markers in tx_seminars_registration::notifyAttendee(), tx_seminars_pi1::singleView(), tx_seminars_pi1::pi_list_row() and tx_seminars_pi1::createRegistrationForm()
 - refactor the getters in the seminars class, try to remove duplicate code
-- remove redundancies from template
+- remove redundancies from the templates
 - make it easier to add new fields to the seminar record type
 - include CSS file using TS (without PHP)
 - check for trailing spaces and tabs again
 - clean up the mess in mod1/
 - find out how to use the translation tool
-- Make the statistics update function in mod1/ use tx_seminars_seminar::updateStatistics() instead
-- @access( )+ -> @access\t
-- @(param|return)\tString -> @(param|return)\tstring
 - add class diagram to the extension
 - provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
 - add fields "attendees_paid" and "attendees_unpaid" to the seminar record and fill them in updateStatistics()
 - remove all references to pi2 and pi3
+- add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
 
 Version 0.4.6: accessibility
 ----------------------------
@@ -302,6 +305,3 @@ Not triaged yet
 - add configuration: maximum number of seats that can be registered for at one time
 - write a logfile with alle changes and registrations so that everything is traceable
 - configuration: don't show the exakt number of vacancies, but only the rough state
-- make it configurable whether to count all registrations or only the paid ones
-- add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
-- add configuration: don't check for double registrations (this is useful for theaters)
