@@ -95,7 +95,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * This method may be called statically.
 	 *
-	 * @param	String		String with a UID (need not necessarily be escaped, will be intval'ed)
+	 * @param	string		String with a UID (need not necessarily be escaped, will be intval'ed)
 	 *
 	 * @return	boolean		true if a visible seminar with that UID exists; false otherwise.
 	 *
@@ -165,7 +165,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets the event type (seminar, workshop, lecture ...).
 	 *
-	 * @return	String	the seminar type (may be empty)
+	 * @return	string	the seminar type (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -187,7 +187,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets our title.
 	 *
-	 * @return	String	our seminar title (or '' if there is an error)
+	 * @return	string	our seminar title (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -203,7 +203,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
 	 *
-	 * @return	String		HTML code for the link to the seminar details page
+	 * @return	string		HTML code for the link to the seminar details page
 	 *
 	 * @access	public
 	 */
@@ -218,7 +218,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets our subtitle.
 	 *
-	 * @return	String		our seminar subtitle (or '' if there is an error)
+	 * @return	string		our seminar subtitle (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -242,7 +242,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		the live pibase object
 	 *
-	 * @return	String		our seminar description (or '' if there is an error)
+	 * @return	string		our seminar description (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -267,9 +267,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * If the seminar has no date, just the title is returned.
 	 *
-	 * @param	String		the character or HTML entity used to separate start date and end date
+	 * @param	string		the character or HTML entity used to separate start date and end date
 	 *
-	 * @return	String		the unique seminar title (or '' if there is an error)
+	 * @return	string		the unique seminar title (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -282,7 +282,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets the accreditation number (which actually is a string, not an integer).
 	 *
-	 * @return	String		the accreditation number (may be empty)
+	 * @return	string		the accreditation number (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -305,7 +305,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Gets the number of credit points for this seminar
 	 * (or an empty string if it is not set yet).
 	 *
-	 * @return	String		the number of credit points (or a localized message if it is 0)
+	 * @return	string		the number of credit points (or a localized message if it is 0)
 	 *
 	 * @access	public
 	 */
@@ -331,9 +331,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Returns just one day if the seminar takes place on only one day.
 	 * Returns a date range if the seminar takes several days.
 	 *
-	 * @param	String		the character or HTML entity used to separate start date and end date
+	 * @param	string		the character or HTML entity used to separate start date and end date
 	 *
-	 * @return	String		the seminar date
+	 * @return	string		the seminar date
 	 *
 	 * @access	public
 	 */
@@ -390,9 +390,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * (i.e. both begin time and end time are 00:00).
 	 * Returns only the begin time if begin time and end time are the same.
 	 *
-	 * @param	String		the character or HTML entity used to separate begin time and end time
+	 * @param	string		the character or HTML entity used to separate begin time and end time
 	 *
-	 * @return	String		the seminar time
+	 * @return	string		the seminar time
 	 *
 	 * @access	public
 	 */
@@ -436,7 +436,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		the live pibase object
 	 *
-	 * @return	String		our places description (or '' if there is an error)
+	 * @return	string		our places description (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -484,7 +484,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Gets our place (or places) as a plain test list (just the place names).
 	 * Returns a localized string "will be announced" if the seminar has no places set.
 	 *
-	 * @return	String		our places list (or '' if there is an error)
+	 * @return	string		our places list (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -532,7 +532,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets the seminar room (not the site).
 	 *
-	 * @return	String		the seminar room (may be empty)
+	 * @return	string		the seminar room (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -557,7 +557,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		the live pibase object
 	 *
-	 * @return	String		our speakers (or '' if there is an error)
+	 * @return	string		our speakers (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -604,7 +604,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Gets our speaker (or speakers) as a plain test list (just their names).
 	 * Returns an empty string if this seminar doesn't have any speakers.
 	 *
-	 * @return	String		our speakers list (or '' if there is an error)
+	 * @return	string		our speakers list (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -650,9 +650,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	/**
 	 * Gets our regular price as a string containing amount and currency.
 	 *
-	 * @param	String		the character or HTML entity used to separate price and currency
+	 * @param	string		the character or HTML entity used to separate price and currency
 	 *
-	 * @return	String		the regular seminar price
+	 * @return	string		the regular seminar price
 	 *
 	 * @access	public
 	 */
@@ -675,9 +675,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Gets our special price as a string containing amount and currency.
 	 * Returns an empty string if there is no special price set.
 	 *
-	 * @param	String		the character or HTML entity used to separate price and currency
+	 * @param	string		the character or HTML entity used to separate price and currency
 	 *
-	 * @return	String		the special seminar price
+	 * @return	string		the special seminar price
 	 *
 	 * @access	public
 	 */
@@ -704,7 +704,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		the live pibase object
 	 *
-	 * @return	String		our payment methods as HTML (or '' if there is an error)
+	 * @return	string		our payment methods as HTML (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -753,7 +753,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * including the detailed description.
 	 * Returns an empty string if this seminar doesn't have any payment methods.
 	 *
-	 * @return	String		our payment methods as plain text (or '' if there is an error)
+	 * @return	string		our payment methods as plain text (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
@@ -1062,7 +1062,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		a plugin object (for a live page, must not be null)
 	 *
-	 * @return	String		URL of the seminar details page
+	 * @return	string		URL of the seminar details page
 	 *
 	 * @access	public
 	 */
@@ -1078,9 +1078,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Gets a trimmed string element of the seminars array.
 	 * If the array has not been intialized properly, an empty string is returned instead.
 	 *
-	 * @param	String		key of the element to return
+	 * @param	string		key of the element to return
 	 *
-	 * @return	String		the corresponding element from the seminars array.
+	 * @return	string		the corresponding element from the seminars array.
 	 *
 	 * @access	private
 	 */
@@ -1095,7 +1095,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * Gets an (intval'ed) integer element of the seminars array.
 	 * If the array has not been intialized properly, 0 is returned instead.
 	 *
-	 * @param	String		key of the element to return
+	 * @param	string		key of the element to return
 	 *
 	 * @return	integer		the corresponding element from the seminars array.
 	 *
@@ -1114,9 +1114,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * key1: value1
 	 *
-	 * @param	String		comma-separated list of key names
+	 * @param	string		comma-separated list of key names
 	 *
-	 * @return	String		formatted output (may be empty)
+	 * @return	string		formatted output (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -1204,7 +1204,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @param	integer		UID of the user to check
 	 *
-	 * @return	String		empty string if everything is OK, else a localized error message.
+	 * @return	string		empty string if everything is OK, else a localized error message.
 	 *
 	 * @access	public
 	 */
@@ -1240,7 +1240,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *     and there are still vacancies,
 	 * and returns a localized error message if registration is not possible.
 	 *
-	 * @return	String		empty string if everything is OK, else a localized error message.
+	 * @return	string		empty string if everything is OK, else a localized error message.
 	 *
 	 * @access	public
 	 */

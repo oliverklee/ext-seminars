@@ -125,7 +125,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		a seminar for which we'll check if it is possible to register (must not be null)
 	 *
-	 * @return	String		error message or empty string
+	 * @return	string		error message or empty string
 	 *
 	 * @access	public
 	 */
@@ -154,7 +154,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @param	object		a seminar for which we'll check if it is possible to register (may be null), if this is null, the seminar UID parameter will be disregarded
 	 *
-	 * @return	String		HTML code with the link
+	 * @return	string		HTML code with the link
 	 *
 	 * @access	public
 	 */
@@ -181,7 +181,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * This function can be called even if no seminar object exists.
 	 *
-	 * @param	String		a given seminar UID (may not neccessarily be an integer)
+	 * @param	string		a given seminar UID (may not neccessarily be an integer)
 	 *
 	 * @return	boolean		true the UID is valid, false otherwise
 	 *
@@ -199,7 +199,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * This function can be called even if no seminar object exists.
 	 *
-	 * @param	String		a given seminar UID (may not neccessarily be an integer)
+	 * @param	string		a given seminar UID (may not neccessarily be an integer)
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
 	 *

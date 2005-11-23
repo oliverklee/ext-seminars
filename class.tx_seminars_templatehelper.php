@@ -88,7 +88,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * Finds all subparts within a template.
 	 * The subparts must be within HTML comments.
 	 *
-	 * @param	String		the whole template file as a string
+	 * @param	string		the whole template file as a string
 	 *
 	 * @return	array		a list of the subpart names (uppercase, without ###, e.g. 'MY_SUBPART')
 	 *
@@ -109,9 +109,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * Example: If the markers ###FOO### and ###BAR### are found, the string "#FOO#BAR#" would be returned.
 	 *
-	 * @param	String		the whole template file as a string
+	 * @param	string		the whole template file as a string
 	 *
-	 * @return	String		a list of markes as one long string, separated, prefixed and postfixed by '#'
+	 * @return	string		a list of markes as one long string, separated, prefixed and postfixed by '#'
 	 *
 	 * @access	private
 	 */
@@ -133,7 +133,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * The functions <code>findMarkers</code> must be called before this function may be called.
 	 *
-	 * @param	String	case-insensitive prefix for the marker names to look for
+	 * @param	string	case-insensitive prefix for the marker names to look for
 	 *
 	 * @return	array	Array of matching marker names
 	 *
@@ -157,9 +157,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * If the prefix is empty and the marker name is "one", the marker
 	 * "###ONE###" will be written.
 	 *
-	 * @param	String		the marker's name without the ### signs, case-insensitive, will get uppercased, must not be empty
-	 * @param	String		the marker's content, may be empty
-	 * @param	String		prefix to the marker name (may be empty, case-insensitive, will get uppercased)
+	 * @param	string		the marker's name without the ### signs, case-insensitive, will get uppercased, must not be empty
+	 * @param	string		the marker's content, may be empty
+	 * @param	string		prefix to the marker name (may be empty, case-insensitive, will get uppercased)
 	 *
 	 * @access	protected
 	 */
@@ -180,8 +180,8 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * If the prefix is empty and the list is "one,two", the array keys
 	 * "###ONE###" and "###TWO###" will be written.
 	 *
-	 * @param	String		comma-separated list of at least 1 subpart name to hide (case-insensitive, will get uppercased)
-	 * @param	String		prefix to the subpart names (may be empty, case-insensitive, will get uppercased)
+	 * @param	string		comma-separated list of at least 1 subpart name to hide (case-insensitive, will get uppercased)
+	 * @param	string		prefix to the subpart names (may be empty, case-insensitive, will get uppercased)
 	 *
 	 * @access	protected
 	 */
@@ -223,9 +223,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * 2. for the other subparts, the subpart marker comments will be removed
 	 * 3. markes are replaced with their corresponding contents.
 	 *
-	 * @param	String		key of the subpart from $this->templateCache, e.g. 'LIST_ITEM' (without the ###)
+	 * @param	string		key of the subpart from $this->templateCache, e.g. 'LIST_ITEM' (without the ###)
 	 *
-	 * @return	String		content stream with the markers replaced
+	 * @return	string		content stream with the markers replaced
 	 *
 	 * @access	protected
 	 */
@@ -286,9 +286,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * If the parameter is an emty string, the return value is an empty string as well
 	 * (not an attribute with an empty value).
 	 *
-	 * @param	String	a CSS class name (may be empty)
+	 * @param	string	a CSS class name (may be empty)
 	 *
-	 * @return	String	a CSS class attribute (may be empty)
+	 * @return	string	a CSS class attribute (may be empty)
 	 *
 	 * @access	protected
 	 */

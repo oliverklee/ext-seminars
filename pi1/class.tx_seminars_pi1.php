@@ -92,7 +92,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates the seminar list HTML (either the list view or the single view).
 	 *
-	 * @return	String		HTML code (shouldn't be empty)
+	 * @return	string		HTML code (shouldn't be empty)
 	 *
 	 * @access	private
 	 */
@@ -378,9 +378,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Gets the heading for a field type.
 	 *
-	 * @param	String		key of the field type for which the heading should be retrieved.
+	 * @param	string		key of the field type for which the heading should be retrieved.
 	 *
-	 * @return	String		the heading
+	 * @return	string		the heading
 	 *
 	 * @access	protected
 	 */
@@ -407,9 +407,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Gets the heading for a field type, wrapped in a hyperlink that sorts by that column.
 	 *
-	 * @param	String		key of the field type for which the heading should be retrieved.
+	 * @param	string		key of the field type for which the heading should be retrieved.
 	 *
-	 * @return	String		the heading completely wrapped in a hyperlink
+	 * @return	string		the heading completely wrapped in a hyperlink
 	 *
 	 * @access	protected
 	 */
@@ -430,7 +430,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @param	object		the current Seminar object
 	 *
-	 * @return	String		class attribute filled with a list a space-separated CSS classes, plus a leading space
+	 * @return	string		class attribute filled with a list a space-separated CSS classes, plus a leading space
 	 *
 	 * @access	protected
 	 */
@@ -452,7 +452,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates the HTML for the registration page.
 	 *
-	 * @return	String		HTML code for the registration page
+	 * @return	string		HTML code for the registration page
 	 *
 	 * @acces	private
 	 */
@@ -483,9 +483,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates the registration page title and (if applicable) any error messages.
 	 *
-	 * @param	String	error message to be displayed (may be empty if there is no error)
+	 * @param	string	error message to be displayed (may be empty if there is no error)
 	 *
-	 * @return	String	HTML code including the title and error message
+	 * @return	string	HTML code including the title and error message
 	 *
 	 * @access	protected
 	 */
@@ -505,7 +505,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates the registration form.
 	 *
-	 * @return	String		HTML code for the form
+	 * @return	string		HTML code for the form
 	 *
 	 * @access	protected
 	 */

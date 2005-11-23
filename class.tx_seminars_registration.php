@@ -88,7 +88,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *  the seminar title,
 	 *  the seminar date
 	 *
-	 * @return	String		the attendance title
+	 * @return	string		the attendance title
 	 *
 	 * @access	public
 	 */
@@ -124,7 +124,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/**
 	 * Gets the attendee's (real) name
 	 *
-	 * @return	String		the attendee's name
+	 * @return	string		the attendee's name
 	 *
 	 * @access	private
 	 */
@@ -149,7 +149,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/**
 	 * Gets the attendee's e-mail address
 	 *
-	 * @return	String		the attendee's e-mail address
+	 * @return	string		the attendee's e-mail address
 	 *
 	 * @access	private
 	 */
@@ -175,7 +175,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * Gets the attendee's name and e-mail address in the format
 	 * Name <address@provider.com>
 	 *
-	 * @return	String		the attendee's name and e-mail address
+	 * @return	string		the attendee's name and e-mail address
 	 *
 	 * @access	private
 	 */
@@ -255,7 +255,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/**
 	 * Gets the attendee's special interests in the subject.
 	 *
-	 * @return	String		a description of the attendee's special interests (may be empty)
+	 * @return	string		a description of the attendee's special interests (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -266,7 +266,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/**
 	 * Gets the attendee's expectations for the seminar.
 	 *
-	 * @return	String		a description of the attendee's expectations for the seminar (may be empty)
+	 * @return	string		a description of the attendee's expectations for the seminar (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -277,7 +277,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/**
 	 * Gets the attendee's background knowledge on the subject.
 	 *
-	 * @return	String		a description of the attendee's background knowledge (may be empty)
+	 * @return	string		a description of the attendee's background knowledge (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -288,7 +288,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/**
 	 * Gets where the attendee has heard about this seminar.
 	 *
-	 * @return	String		a description of where the attendee has heard about this seminar (may be empty)
+	 * @return	string		a description of where the attendee has heard about this seminar (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -299,7 +299,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	/**
 	 * Gets text from the "additional notes" field the attendee could fill at online registration.
 	 *
-	 * @return	String		additional notes on registration (may be empty)
+	 * @return	string		additional notes on registration (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -473,9 +473,9 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * key1: value1
 	 *
-	 * @param	String		comma-separated list of key names
+	 * @param	string		comma-separated list of key names
 	 *
-	 * @return	String		formatted output (may be empty)
+	 * @return	string		formatted output (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -521,9 +521,9 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * key1: value1
 	 *
-	 * @param	String		comma-separated list of key names
+	 * @param	string		comma-separated list of key names
 	 *
-	 * @return	String		formatted output (may be empty)
+	 * @return	string		formatted output (may be empty)
 	 *
 	 * @access	public
 	 */

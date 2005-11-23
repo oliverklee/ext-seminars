@@ -109,10 +109,10 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * from TS setup is returned. If there is no field with that name in TS setup,
 	 * an empty string is returned.
 	 *
-	 * @param	String		field name to extract
-	 * @param	String		sheet pointer, eg. "sDEF"
+	 * @param	string		field name to extract
+	 * @param	string		sheet pointer, eg. "sDEF"
 	 *
-	 * @return	String		the value of the corresponding flexforms or TS setup entry (may be empty)
+	 * @return	string		the value of the corresponding flexforms or TS setup entry (may be empty)
 	 *
 	 * @access	protected
 	 */
