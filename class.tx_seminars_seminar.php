@@ -62,7 +62,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
 	 * 						If this parameter is provided, $uid will be ignored.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function tx_seminars_seminar(&$registrationManager, $seminarUid, $dbResult = null) {
 		$this->init();
@@ -99,7 +99,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if a visible seminar with that UID exists; false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function existsSeminar($seminarUid) {
 		$result = is_numeric($seminarUid) && ($seminarUid);
@@ -132,7 +132,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	 function retrieveSeminar($seminarUid) {
 	 	if ($this->existsSeminar($seminarUid)) {
@@ -156,7 +156,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	integer		our UID (or 0 if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getUid() {
 		return $this->getSeminarsPropertyInteger('uid');
@@ -167,7 +167,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String	the seminar type (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getType() {
 		return $this->getConfValue('eventType');
@@ -178,7 +178,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a type, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasType() {
 		return ($this->getType() !== '');
@@ -189,7 +189,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String	our seminar title (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getTitle() {
 		return $this->getSeminarsPropertyString('title');
@@ -205,7 +205,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		HTML code for the link to the seminar details page
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getLinkedTitle(&$plugin) {
 		return $plugin->cObj->getTypoLink(
@@ -220,7 +220,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our seminar subtitle (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getSubtitle() {
 		return $this->getSeminarsPropertyString('subtitle');
@@ -231,7 +231,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a non-empty subtitle, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasSubtitle() {
 		return ($this->getSubtitle() !== '');
@@ -244,7 +244,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our seminar description (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getDescription(&$plugin) {
 		return $plugin->pi_RTEcssText($this->getSeminarsPropertyString('description'));
@@ -255,7 +255,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a non-empty description, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasDescription() {
 		return ($this->getSeminarsPropertyString('description') !== '');
@@ -271,7 +271,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the unique seminar title (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getTitleAndDate($dash = '&#8211;') {
 		$date = $this->hasDate() ? ', '.$this->getDate($dash) : '';
@@ -284,7 +284,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the accreditation number (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getAccreditationNumber() {
 		return $this->getSeminarsPropertyString('accreditation_number');
@@ -295,7 +295,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a non-empty accreditation number, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasAccreditationNumber() {
 		return ($this->getAccreditationNumber() !== '');
@@ -307,7 +307,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the number of credit points (or a localized message if it is 0)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getCreditPoints() {
 		return ($this->hasCreditPoints()) ? $this->getSeminarsPropertyInteger('credit_points') : '';
@@ -318,7 +318,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar has credit points assigned, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasCreditPoints() {
 		return (boolean) $this->getSeminarsPropertyInteger('credit_points');
@@ -335,7 +335,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the seminar date
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getDate($dash = '&#8211;') {
 		if (!$this->hasDate()) {
@@ -378,7 +378,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a date, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasDate() {
 		return (boolean) ($this->getSeminarsPropertyInteger('begin_date') && $this->getSeminarsPropertyInteger('end_date'));
@@ -394,7 +394,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the seminar time
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getTime($dash = '&#8211;') {
 		if (!$this->hasTime()) {
@@ -421,7 +421,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a time, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasTime() {
 		$beginTime = strftime('%H:%M', $this->getSeminarsPropertyInteger('begin_date'));
@@ -438,7 +438,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our places description (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getPlace(&$plugin) {
 		$result = '';
@@ -486,7 +486,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our places list (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getPlaceShort() {
 		$result = '';
@@ -523,7 +523,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a non-empty places list, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasPlace() {
 		return (boolean) $this->getSeminarsPropertyInteger('place');
@@ -534,7 +534,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the seminar room (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getRoom() {
 		return $this->getSeminarsPropertyString('room');
@@ -545,7 +545,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have a non-empty room, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasRoom() {
 		return ($this->getRoom() !== '');
@@ -559,7 +559,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our speakers (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getSpeakers(&$plugin) {
 		$result = '';
@@ -606,7 +606,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our speakers list (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getSpeakersShort() {
 		$result = '';
@@ -641,7 +641,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have any speakers asssigned to this seminar, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasSpeakers() {
 		return (boolean) $this->getSeminarsPropertyInteger('speakers');
@@ -654,7 +654,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the regular seminar price
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getPriceRegular($space = '&nbsp;') {
 		return $this->getSeminarsPropertyInteger('price_regular').$space.$this->getConfValue('currency');
@@ -665,7 +665,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar has a non-zero regular price, false if it is free.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasPriceRegular() {
 		return ($this->getSeminarsPropertyInteger('price_regular') !== 0);
@@ -679,7 +679,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the special seminar price
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getPriceSpecial($space = '&nbsp;') {
 		return $this->hasPriceSpecial() ?
@@ -691,7 +691,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar has a non-zero special price, false if it is free.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasPriceSpecial() {
 		return ($this->getSeminarsPropertyInteger('price_special') !== 0);
@@ -706,7 +706,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our payment methods as HTML (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getPaymentMethods(&$plugin) {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -755,7 +755,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		our payment methods as plain text (or '' if there is an error)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getPaymentMethodsPlain() {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -801,7 +801,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar has any payment methods, false if it is free.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasPaymentMethods() {
 		return ($this->getSeminarsPropertyString('payment_methods') !== '');
@@ -813,7 +813,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	integer		the number of attendances
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getAttendances() {
 		return $this->getSeminarsPropertyInteger('attendees');
@@ -825,7 +825,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	integer		the number of paid attendances
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getAttendancesPaid() {
 		return $this->numberOfAttendeesPaid;
@@ -836,7 +836,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	integer		the number of attendances that are not paid yet
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getAttendancesNotPaid() {
 		return ($this->getAttendances() - $this->getAttendancesPaid());
@@ -847,7 +847,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	integer		the number of vacancies (will be 0 if the seminar is overbooked)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getVacancies() {
 		return max(0, $this->getSeminarsPropertyInteger('attendees_max') - $this->getAttendances());
@@ -858,7 +858,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar has vacancies, false if it is full.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasVacancies() {
 		return !($this->isFull());
@@ -869,7 +869,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar is full, false if it still has vacancies.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function isFull() {
 		return (boolean) $this->getSeminarsPropertyInteger('is_full');
@@ -880,7 +880,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar has enough attendances, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasEnoughAttendances() {
 		return (boolean) $this->getSeminarsPropertyInteger('enough_attendees');
@@ -921,7 +921,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the seminar has a datetime set.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasRegistrationDeadline() {
 		return (boolean) $this->getSeminarsPropertyInteger('deadline_registration');
@@ -934,7 +934,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	string		the hyperlinked names and descriptions of our organizers
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getOrganizers(&$plugin) {
 		$result = '';
@@ -963,7 +963,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	array		the organizers' names and e-mail addresses
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getOrganizersEmail() {
 		$result = array();
@@ -987,7 +987,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	array		the organizers' e-mail footers.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getOrganizersFooter() {
 		$result = array();
@@ -1016,7 +1016,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	array		a reference to the organizer data (will be null if an error has occured)
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	 function &retrieveOrganizer($organizerUid) {
 	 	$result = false;
@@ -1048,7 +1048,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if we have any organizers asssigned to this seminar, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function hasOrganizers() {
 		return ($this->getSeminarsPropertyString('organizers') !== '');
@@ -1064,7 +1064,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		URL of the seminar details page
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getDetailedViewUrl(&$plugin) {
 		return $plugin->getConfValue('baseURL')
@@ -1082,7 +1082,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		the corresponding element from the seminars array.
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function getSeminarsPropertyString($key) {
 		$result = ($this->seminarData && isset($this->seminarData[$key]))
@@ -1099,7 +1099,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	integer		the corresponding element from the seminars array.
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function getSeminarsPropertyInteger($key) {
 		$result = ($this->seminarData && isset($this->seminarData[$key]))
@@ -1118,7 +1118,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		formatted output (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function dumpSeminarValues($keysList) {
 		$keys = explode(',', $keysList);
@@ -1178,7 +1178,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the user already is registered, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function isUserRegistered($feuserUid) {
 		$result = false;
@@ -1206,7 +1206,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		empty string if everything is OK, else a localized error message.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function isUserRegisteredMessage($feuserUid) {
 		return ($this->isUserRegistered($feuserUid)) ? $this->pi_getLL('message_alreadyRegistered') : '';
@@ -1222,7 +1222,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if registration is possible, false otherwise.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function canSomebodyRegister() {
 		return $this->needsRegistration() &&
@@ -1242,7 +1242,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		empty string if everything is OK, else a localized error message.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function canSomebodyRegisterMessage() {
 		$message = '';
@@ -1269,7 +1269,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if the event has been canceled, false otherwise
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function isCanceled() {
 		return (boolean) $this->seminarData['cancelled'];
@@ -1280,7 +1280,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if registration is necessary, false otherwise
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function needsRegistration() {
 		return (boolean) $this->seminarData['needs_registration'];

@@ -58,7 +58,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @param	array		associative array with the registration data the user has just entered
 	 * @param	object		content object (must not be null)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function tx_seminars_registration(&$seminar, $userUid, $registrationData, &$cObj) {
 		$this->init();
@@ -90,7 +90,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		the attendance title
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getTitle() {
 		return $this->recordData['title'];
@@ -102,7 +102,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * The title is constructed like this:
 	 *   Name of Attendee / Title of Seminar seminardate
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function createTitle() {
 		$this->recordData['title'] = $this->getUserName().' / '.$this->seminar->getTitle().', '.$this->seminar->getDate('-');
@@ -115,7 +115,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	integer		the attendee's feuser uid
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getUser() {
 		return intval($this->recordData['user']);
@@ -126,7 +126,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		the attendee's name
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function getUserName() {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -151,7 +151,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		the attendee's e-mail address
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function getUserEmail() {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -177,7 +177,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		the attendee's name and e-mail address
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function getUserNameAndEmail() {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -202,7 +202,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	integer		the seminar's uid
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getSeminar() {
 		return intval($this->recordData['seminar']);
@@ -213,7 +213,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		whether this attendance has already been paid for
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getIsPaid() {
 		trigger_error('Member function tx_seminars_registration->getIsPaid not implemented yet.');
@@ -224,7 +224,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	integer		the date at which the user has paid for this attendance
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getDatePaid() {
 		trigger_error('Member function tx_seminars_registration->getDatePaid not implemented yet.');
@@ -235,7 +235,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	integer		the uid of the method of payment (may be 0 if none is given)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getMethodOfPayment() {
 		trigger_error('Member function tx_seminars_registration->getMethodOfPayment not implemented yet.');
@@ -246,7 +246,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		whether the attendee has attended the seminar
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getHasBeenThere() {
 		trigger_error('Member function tx_seminars_registration->getHasBeenThere not implemented yet.');
@@ -257,7 +257,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		a description of the attendee's special interests (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getInterests() {
 		return $this->recordData['interests'];
@@ -268,7 +268,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		a description of the attendee's expectations for the seminar (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getExpectations() {
 		return $this->recordData['expectations'];
@@ -279,7 +279,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		a description of the attendee's background knowledge (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getKnowledge() {
 		return $this->recordData['background_knowledge'];
@@ -290,7 +290,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		a description of where the attendee has heard about this seminar (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getKnownFrom() {
 		return $this->recordData['known_from'];
@@ -301,7 +301,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		additional notes on registration (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getNotes() {
 		return $this->recordData['notes'];
@@ -328,7 +328,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function notifyAttendee(&$plugin) {
 		$this->initializeTemplate();
@@ -403,7 +403,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function notifyOrganizers(&$plugin) {
 		$this->initializeTemplate();
@@ -454,7 +454,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * Reads and initializes the templates.
 	 * If this has already been called for this instance, this function does nothing.
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function initializeTemplate() {
 		if (!$this->isTemplateInitialized) {
@@ -477,7 +477,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		formatted output (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function dumpUserValues($keysList) {
 		$keys = explode(',', $keysList);
@@ -525,7 +525,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		formatted output (may be empty)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function dumpAttendanceValues($keysList) {
 		$keys = explode(',', $keysList);

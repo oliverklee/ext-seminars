@@ -48,7 +48,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * The constructor.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function tx_seminars_registrationmanager() {
 		$this->init();
@@ -61,7 +61,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * Note that this will not be null if no user is logged in.
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function retrieveFEUser() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user->user;
@@ -94,7 +94,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true if everything is okay for the link, false otherwise
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function canRegisterIfLoggedIn(&$seminar) {
 		$result = true;
@@ -127,7 +127,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		error message or empty string
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function canRegisterIfLoggedInMessage(&$seminar) {
 		$result = '';
@@ -156,7 +156,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @return	String		HTML code with the link
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function getLinkToRegistrationOrLoginPage(&$plugin, &$seminar) {
 		if ($this->isLoggedIn()) {
@@ -185,7 +185,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @return	boolean		true the UID is valid, false otherwise
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function existsSeminar($seminarUid) {
 		// We can't use t3lib_div::makeInstanceClassName in this case as we
@@ -205,7 +205,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @return	string		empty string if the UID is valid, else a localized error message
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function existsSeminarMessage($seminarUid, &$plugin) {
 		/** This is empty as long as no error has occured. */
@@ -287,7 +287,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @return	string		empty string if everything is OK, else a localized error message.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function isUserRegisteredMessage(&$seminar) {
 		return $seminar->isUserRegisteredMessage($this->feuser['uid']);
@@ -301,7 +301,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * @param	array		associative array with the registration data the user has just entered
 	 * @param	object		live plugin object (must not be null)
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function createRegistration(&$seminar, $registrationData, &$plugin) {
 			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');

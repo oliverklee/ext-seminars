@@ -67,7 +67,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
  	 * @param	array		TypoScript configuration for the plugin
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function init($conf = null) {
 		// call the base classe's constructor manually as this isn't done automatically
@@ -87,7 +87,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	/**
 	 * Sets the table names.
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function setTableNames() {
 		$dbPrefix = 'tx_'.$this->extKey.'_';
@@ -114,7 +114,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @return	String		the value of the corresponding flexforms or TS setup entry (may be empty)
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function getConfValue($fieldName, $sheet = 'sDEF') {
 		$flexformsValue = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $fieldName, $sheet);

@@ -52,7 +52,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		HTML for the plugin
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function main($content, $conf) {
 		$this->init($conf);
@@ -94,7 +94,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		HTML code (shouldn't be empty)
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function createSeminarList() {
 		// if we have a 'showUid' var set, we'll show the detailed view
@@ -118,7 +118,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		HTML for the plugin
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function listView() {
 		$result = '';
@@ -190,7 +190,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		HTML for the plugin
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function singleView() {
 		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD_WRAPPER');
@@ -298,7 +298,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
 	 *
-	 * @access private
+	 * @access	private
 	 */
 	function createSeminar($seminarUid) {
 		$result = false;
@@ -319,7 +319,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		HTML output, a table row
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function pi_list_header() {
 		$this->setMarkerContent('header_title', $this->getFieldHeader_sortLink('title'));
@@ -343,7 +343,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		HTML output, a table row with a class attribute set (alternative based on odd/even rows)
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function pi_list_row($c) {
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
@@ -382,7 +382,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		the heading
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function getFieldHeader($fN) {
 		$result = '';
@@ -411,7 +411,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		the heading completely wrapped in a hyperlink
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function getFieldHeader_sortLink($fN) {
 		$sortField = $fN;
@@ -432,7 +432,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		class attribute filled with a list a space-separated CSS classes, plus a leading space
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function getVacanciesClasses(&$seminar) {
 		$result = $this->pi_getClassName('vacancies');
@@ -454,7 +454,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		HTML code for the registration page
 	 *
-	 * @acces private
+	 * @acces	private
 	 */
 	function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
@@ -487,7 +487,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	String	HTML code including the title and error message
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function createRegistrationHeading($errorMessage) {
 		$this->setMarkerContent('registration', $this->pi_getLL('label_registration'));
@@ -507,7 +507,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	String		HTML code for the form
 	 *
-	 * @access protected
+	 * @access	protected
 	 */
 	function createRegistrationForm() {
 		// Create the frontend form object:
@@ -556,7 +556,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @param	string		Attributes for the table tag which is wrapped around the table rows containing the list
 	 * @return	string		Output HTML, wrapped in <div>-tags with a class attribute
 	 *
-	 * @access protected
+	 * @access	protected
 	 *
 	 * @see pi_list_row(), pi_list_header()
 	 */

@@ -37,7 +37,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	/**
 	 * The constructor.
 	 *
-	 * @access public
+	 * @access	public
 	 */
 	function tx_seminars_tcemainprocdm() {
 		parent::init();
