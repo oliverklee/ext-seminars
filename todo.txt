@@ -241,7 +241,7 @@ Version 0.5.0
 Version 0.5.1
 -------------
 - Investigate on what happes, if a FE user account is deleted
-- Define all possible states of an event (in planning, open for registration, cancelled, …)
+- Define all possible states of an event (in planning, open for registration, cancelled)
 - Feature: Create the select user functionality in the BE
 - Feature: Create the list / select possibility for an attendance of a user in the BE
 - Feature: Create a unified mail function for the BE SubModules
