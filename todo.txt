@@ -108,6 +108,8 @@ Version 0.4.5: code clean-up and qa
 - remove all references to pi2 and pi3
 - add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
 - investigate whether to use ameos_formidable instead of frontendformslib
+- check that all functions have a "return" (and only one), except for empty constructors
+- check that constructors don't try to return any values
 
 Version 0.4.6: accessibility
 ----------------------------
