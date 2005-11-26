@@ -49,16 +49,25 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	var $dbResult = null;
 	/** the current object (may be null) */
 	var $currentItem = null;
+	/**
+	 * string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
+	 * (the AND and the enclosing spaces are not necessary for this parameter)
+	 */
+	var $queryParameters;
 
 	/**
 	 * The constructor. Sets the iterator to the first result of a query
 	 *
 	 * @param	string		the name of an SQL table to query
+	 * @param	string		string that will be prepended to the WHERE clause
+	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
+	 *						spaces are not necessary for this parameter)
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_bag($dbTableName) {
+	function tx_seminars_bag($dbTableName, $queryParameters = '1') {
 		$this->dbTableName = $dbTableName;
+		$this->queryParameters = trim($queryParameters);
 
 		$this->init();
 		$this->resetToFirst();
@@ -67,7 +76,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Sets the iterator to the first object.
+	 * Sets the iterator to the first object, using additional
+	 * query parameters from $this->queryParameters for the DB query.
 	 *
 	 * @return	boolean		true if everything went okay, false otherwise
 	 *
@@ -79,14 +89,16 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 		// free old results if there are any
 		if ($this->dbResult) {
 			$GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
-			// we don't need to null out $this->dbResult as this will be
-			// rewritten immediately
+			// We don't need to null out $this->dbResult as this will be
+			// rewritten immediately.
 		}
 
+		// The ' AND' is provided by t3lib_pageSelect::enableFields,
+		// so we don't need to set it explicitely after $this->queryParameters.
 		$this->dbResult =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
 			$this->dbTableName,
-			'1'.t3lib_pageSelect::enableFields($this->dbTableName),
+			$this->queryParameters.t3lib_pageSelect::enableFields($this->dbTableName),
 			'',
 			'',
 			''
@@ -102,7 +114,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	/**
 	 * Advances to the next event record and returns a reference to that object.
 	 *
-	 * @return	object		a reference to the now current object (may be null if there is no next object)
+	 * @return	object		a reference to the now current object
+	 *						(may be null if there is no next object)
 	 *
 	 * @access	public
 	 */
