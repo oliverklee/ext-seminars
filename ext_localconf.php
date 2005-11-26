@@ -28,39 +28,16 @@ t3lib_extMgm::addUserTSConfig('
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
 
 
-  ## Extending TypoScript from static template uid=43 to set up userdefined tag:
+// Extending TypoScript from static template uid=43 to set up userdefined tag:
 t3lib_extMgm::addTypoScript($_EXTKEY,'editorcfg','
 	tt_content.CSS_editor.ch.tx_seminars_pi1 = < plugin.tx_seminars_pi1.CSS_editor
 ',43);
 
-
 t3lib_extMgm::addPItoST43($_EXTKEY,'pi1/class.tx_seminars_pi1.php','_pi1','list_type', 0);
-
 
 t3lib_extMgm::addTypoScript($_EXTKEY,'setup','
 	tt_content.shortcut.20.0.conf.tx_seminars_seminars = < plugin.'.t3lib_extMgm::getCN($_EXTKEY).'_pi1
 	tt_content.shortcut.20.0.conf.tx_seminars_seminars.CMD = singleView
 ',43);
-
-
-  ## Extending TypoScript from static template uid=43 to set up userdefined tag:
-t3lib_extMgm::addTypoScript($_EXTKEY,'editorcfg','
-	tt_content.CSS_editor.ch.tx_seminars_pi2 = < plugin.tx_seminars_pi2.CSS_editor
-',43);
-
-t3lib_extMgm::addPItoST43($_EXTKEY,'pi2/class.tx_seminars_pi2.php','_pi2','list_type', 0);
-
-
-t3lib_extMgm::addTypoScript($_EXTKEY,'setup','
-	tt_content.shortcut.20.0.conf.tx_seminars_seminars = < plugin.'.t3lib_extMgm::getCN($_EXTKEY).'_pi2
-	tt_content.shortcut.20.0.conf.tx_seminars_seminars.CMD = singleView
-',43);
-
-  ## Extending TypoScript from static template uid=43 to set up userdefined tag:
-t3lib_extMgm::addTypoScript($_EXTKEY,'editorcfg','
-	tt_content.CSS_editor.ch.tx_seminars_pi3 = < plugin.tx_seminars_pi3.CSS_editor
-',43);
-
-t3lib_extMgm::addPItoST43($_EXTKEY,'pi3/class.tx_seminars_pi3.php','_pi3','list_type', 0);
 
 ?>
