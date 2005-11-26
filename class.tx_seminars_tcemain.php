@@ -30,7 +30,7 @@
  *
  * @author	Mario Rimann <typo3-coding@rimann.li>
  */
- 
+
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
 class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
@@ -41,8 +41,10 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 */
 	function tx_seminars_tcemainprocdm() {
 		parent::init();
+
+		return;
 	}
-	
+
 	/**
 	 * Checks that the registration deadline set by the user is in no way larger (=later)
 	 * than the beginning of the event.
@@ -50,7 +52,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 * called AFTER writing the data from the form to the database.
 	 * In the case that the deadline is later than the beginning time, the deadline will
 	 * be set to zero (wich means: not set).
-	 * 
+	 *
 	 * Some of the parameters of this function are not used in this function. But they
 	 * are given by the hook in t3lib/class.t3lib_tcemain.php.
 	 *
@@ -84,7 +86,8 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 				}
 			}
 		}
-	return;
+
+		return;
 	}
 }
 

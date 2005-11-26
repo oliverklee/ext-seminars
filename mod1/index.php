@@ -145,7 +145,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	}
 
 	/**
-	 * Prints out the module HTML
+	 * Prints out the module HTML.
 	 *
 	 * @return	[type]		...
 	 */
@@ -275,15 +275,16 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * Returns a list of the emailadresses of the registered attendees.
 	 *
- 	 * @return	string	HTML Output (content of the Module).
+ 	 * @return	string		HTML Output (content of the Module).
+ 	 *
 	 * @access	private
 	 */
 	function listSeminarDetails() {
 		// Initialize the Localization Functionality
 		global $LANG;
-		
+
 		$result = '';
-		
+
 		$result .= '<h3>'.$LANG->getLL('title_getEmailAddressesForAttendances').'</h3>';
 		$seminars = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
@@ -330,7 +331,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 					'',
 					''
 				);
-				
+
 				$result .= $LANG->getLL('label_all').$this->generateEmailList($dbResultAttendeesALL).'<hr>';
 				$result .= $LANG->getLL('label_paid').$this->generateEmailList($dbResultAttendeesPAID).'<hr>';
 				$result .= $LANG->getLL('label_unpaid').$this->generateEmailList($dbResultAttendeesUNPAID).'<hr>';
@@ -338,26 +339,27 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		}
 		return $result;
 	}
-	
+
 	/**
-	 * Returns a comma separated list of Email Adresses.
-	 * The char to separate the emailaddresses from each other may be changed. Default is comma.
+	 * Returns a comma separated list of e-mail Adresses.
+	 * The char to separate the e-mail addresses from each other may be changed. Default is comma.
 	 *
- 	 * @param	Array	Result of the DB-Query
- 	 * @return	string	Returns a comma separated list.
+ 	 * @param	array		result of the DB query
+ 	 * @return	string		a comma separated list
+ 	 *
 	 * @access	private
 	 */
 	 function generateEmailList($dbResult)	{
 		// Initialize the Localization Functionality
 		global $LANG;
-		
+
 		$result = '';
 		$emailList = '';
 		$dividerInEmailList = ', ';
-		
+
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult))	{
-			while ($currentAttendance = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult))	{	
-				$currentEmail = '';						
+			while ($currentAttendance = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult))	{
+				$currentEmail = '';
 				$currentEmail = $this->getUserEmail($currentAttendance['user']);
 				if (empty($emailList))	{
 					$emailList = $currentEmail;
@@ -372,17 +374,18 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		}
 		return $result;
 	}
-	
+
 	/**
-	 * Retrieves the Email Address of a user from the database.
+	 * Retrieves the e-mail address of a user from the database.
 	 *
- 	 * @param	Integer	User ID of the user to search for
- 	 * @return	string	The Email Address of the user
+ 	 * @param	integer		User ID of the user to search for
+ 	 * @return	string		the Email Address of the user
+ 	 *
 	 * @access	private
 	 */
 	 function getUserEmail($userID)	{
 		$tableUsers = 'fe_users';
-		
+
 		$dbResultUserDetails = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'email',
 			$tableUsers,
@@ -397,7 +400,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	}
 
 } // END of class
-	
+
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod1/index.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod1/index.php']);
 }
