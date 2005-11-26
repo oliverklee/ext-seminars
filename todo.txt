@@ -22,6 +22,7 @@ Version 0.4.2: dogfood, part 1
 
 Version 0.4.3: dogfood, part 2
 ------------------------------
+- up the size limit for the TER to 500 kB
 - feature for e-mail notification to the organizer once a seminar has enough attendances or is full
 - find a way to enter and display open-ended events
 - check that the CSS file doesn't allow for possibly unreadable color combinations
