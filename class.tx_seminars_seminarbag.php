@@ -30,9 +30,9 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 
-class tx_seminars_seminarbag extends tx_seminars_dbplugin {
+class tx_seminars_seminarbag extends tx_seminars_bag {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_seminar_seminarbag';
 	/**  Path to this script relative to the extension dir. */
@@ -40,10 +40,6 @@ class tx_seminars_seminarbag extends tx_seminars_dbplugin {
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager;
-	/** an SQL query result (not yet converted to an associative array) */
-	var $dbResultSeminars = null;
-	/** the current seminar object (may be null) */
-	var $currentSeminar = null;
 
 	/**
 	 * The constructor. Creates a seminar bag that (currently) contains all
@@ -55,78 +51,32 @@ class tx_seminars_seminarbag extends tx_seminars_dbplugin {
 	 */
 	function tx_seminars_seminarbag(&$registrationManager) {
 		$this->registrationManager =& $registrationManager;
+
+		// Although the parent class also calls init(), we need to call it
+		// here already so that $this->tableSeminars is provided.
 		$this->init();
-		$this->resetToFirst();
+		parent::tx_seminars_bag($this->tableSeminars);
 
 		return;
 	}
 
 	/**
-	 * Sets the iterator to the first seminar.
+	 * Creates the current item in $this->currentItem, using $this->dbResult as a source.
+	 * If the current item cannot be created, $this->currentItem will be nulled out.
 	 *
-	 * @return	boolean		true if everything went okay, false otherwise
+	 * $this->dbResult is ensured to be non-null when this function is called.
 	 *
-	 * @access	public
+	 * @access	protected
 	 */
-	function resetToFirst() {
-		$result = false;
+	function createItemFromDbResult() {
+		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+		$this->currentItem =& new $seminarClassname($this->registrationManager, 0, $this->dbResult);
 
-		// free old results if there are any
-		if ($this->dbResultSeminars) {
-			$GLOBALS['TYPO3_DB']->sql_free_result($this->dbResultSeminars);
-			// we don't need to null out $this->dbResultSeminars as this will be
-			// rewritten immediately
+		// Null out the seminar object if has not been initialized properly,
+		// e.g. when there was no more data from the DB.
+		if (!$this->currentItem->isOk()) {
+			$this->currentItem = null;
 		}
-
-		$this->dbResultSeminars =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			$this->tableSeminars,
-			'1'.t3lib_pageSelect::enableFields($this->tableSeminars),
-			'',
-			'',
-			''
-		);
-
-		if ($this->dbResultSeminars) {
-			$result = (boolean) $this->getNext();
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Advances to the next event record and returns a reference to that object.
-	 *
-	 * @return	object		a reference to the now current seminar object (may be null if there is no next seminar)
-	 *
-	 * @access	public
-	 */
-	function &getNext() {
-		if ($this->dbResultSeminars) {
-			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-			$this->currentSeminar =& new $seminarClassname($this->registrationManager, 0, $this->dbResultSeminars);
-
-			// Null out the seminar object if has not been initialized properly,
-			// e.g. when there was no more data from the DB.
-			if (!$this->currentSeminar->isOk()) {
-				$this->currentSeminar = null;
-			}
-		} else {
-			$this->currentSeminar = null;
-		}
-
-		return $this->getCurrent();
-	}
-
-	/**
-	 * Returns the current seminar object (which may be null).
-	 *
-	 * @return	object		a reference to the current seminar object (may be null if there is no current object)
-	 *
-	 * @access	public
-	 */
-	function &getCurrent() {
-		return $this->currentSeminar;
 	}
 }
 

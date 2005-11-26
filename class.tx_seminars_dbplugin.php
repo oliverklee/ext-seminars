@@ -39,6 +39,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	/** The extension key. */
 	var $extKey = 'seminars';
 
+	/** whether init() already has been called (in order to avoid double calls) */
+	var $isInitialized = false;
+
 	// Database table names. Will be initialized (indirectly) by $this->init.
 	var $tableSeminars;
 	var $tableSpeakers;
@@ -61,6 +64,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * Initializes the FE plugin stuff, read the configuration
 	 * and set the table names while we're at it.
 	 *
+	 * It is harmless if this function gets called multiple times as it recognizes
+	 * this and ignores all calls but the first one.
+	 *
 	 * This is merely a convenience function.
 	 *
 	 * If the parameter is ommited, the configuration for plugin.tx_seminar is used instead.
@@ -70,18 +76,24 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @access	protected
 	 */
 	function init($conf = null) {
-		// call the base classe's constructor manually as this isn't done automatically
-		parent::tslib_pibase();
+		if (!$this->isInitialized) {
+			// call the base classe's constructor manually as this isn't done automatically
+			parent::tslib_pibase();
 
-		if ($conf !== null) {
-			$this->conf = $conf;
-		} else {
-			$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
+			if ($conf !== null) {
+				$this->conf = $conf;
+			} else {
+				$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
+			}
+			$this->pi_setPiVarDefaults();
+			$this->pi_loadLL();
+
+			$this->setTableNames();
+
+			$this->isInitialized = true;
 		}
-		$this->pi_setPiVarDefaults();
-		$this->pi_loadLL();
 
-		$this->setTableNames();
+		return;
 	}
 
 	/**
@@ -101,6 +113,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 		$this->tableSpeakersMM     = $dbPrefix.'seminars_speakers_mm';
 		$this->tableSitesMM        = $dbPrefix.'seminars_place_mm';
+
+		return;
 	}
 
 	/**
