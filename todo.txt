@@ -34,6 +34,7 @@ Version 0.4.3: dogfood, part 2
 - Create a back end module (/mod2).
   - create the module itself
   - create the sub-modules (and the base for sub-module-switching)
+  - document it in the manual
 - Include some basic functionality
   - output event lists
   - possibility to select an event
