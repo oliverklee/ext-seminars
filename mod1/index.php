@@ -211,7 +211,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		while ($currentSeminar =& $seminarBag->getCurrent()) {
 			$currentSeminar->updateStatistics();
 
-			$result .= '<h4>'.htmlspecialchars($currentSeminar->getTitle()).'</h4>'.chr(10);
+			$result .= '<h4>'.htmlspecialchars($currentSeminar->getTitleAndDate('-')).'</h4>'.chr(10);
 			$result .= '<p>'.$LANG->getLL('label_all').$currentSeminar->getAttendances().'</p>';
 			$result .= '<p>'.$LANG->getLL('label_paid').$currentSeminar->getAttendancesPaid().'</p>';
 			$result .= '<p>'.$LANG->getLL('label_unpaid').$currentSeminar->getAttendancesNotPaid().'</p>';
