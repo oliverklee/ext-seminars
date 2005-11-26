@@ -33,6 +33,8 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(PATH_t3lib.'class.t3lib_tstemplate.php');
+require_once(PATH_t3lib.'class.t3lib_page.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_salutationswitcher.php');
 
 class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
@@ -83,8 +85,30 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			if ($conf !== null) {
 				$this->conf = $conf;
 			} else {
-				$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
+				if (TYPO3_MODE == 'BE') {
+					// On the back end, we need to create our own template setup.
+					$template = t3lib_div::makeInstance('t3lib_TStemplate');
+					// do not log time-performance information
+					$template->tt_track = 0;
+					$template->init();
+	
+					// Get the root line
+					$sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
+					// the selected page in the BE is found
+					// exactly as in t3lib_SCbase::init()
+					$rootline = $sys_page->getRootLine(intval(t3lib_div::_GP('id')));
+	
+					// This generates the constants/config + hierarchy info for the template.
+					$template->runThroughTemplates($rootline, 0);
+					$template->generateConfig();
+	
+					$this->conf = $template->setup['plugin.']['tx_'.$this->extKey.'.'];
+				} else {
+					// On the front end, we can use the provided template setup.
+					$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
+				}
 			}
+
 			$this->pi_setPiVarDefaults();
 			$this->pi_loadLL();
 
