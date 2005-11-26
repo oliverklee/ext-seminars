@@ -154,7 +154,6 @@ Version 0.4.8: back end usability and polish
 - in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
 - disable the "save and view" button for all our records (as they are not treated as regular content elements)
 - add different icons
-- create extension icon
 - Web -> Seminars should only use the selected page's data (optionally recursively)
 - make the back end forms prettier and clean them up (using TCA.php)
 - in the back end, remove many checkboxes next to text fields
@@ -174,6 +173,7 @@ Version 0.4.8: back end usability and polish
 - in the "new page content" wizard, show this extension (instead of as just another plugin)
 - allow to use the constants editor for values in plugin.tx_seminars
 - check whether we should remain "attendance" to "participant" or "attendee" in the localized strings (not in the DB field names, though)
+- investigate if we can benefit from joh_advbesearch
 
 Version 0.4.9: front end usability and polish
 ---------------------------------------------
@@ -287,7 +287,6 @@ Version 0.6.0
 - have the documentation proofread
 - display picture of speakers on seminar page
 - move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation
-- move from ext_typoscript_setup.txt to static/setup.txt
 - make sure the HTML validates as XHTML 1.0 strict
 - document the CSS styles used
 - in pi1, implement the default sort order (by begin date) using TCA
@@ -310,7 +309,6 @@ Version 0.7.0
 Version 1.0.0
 -------------
 - switch extension status from "beta" to "stable"
-- get the extension reviewed for a cigar
 
 Not triaged yet
 ===============
