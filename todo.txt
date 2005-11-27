@@ -82,6 +82,7 @@ Version 0.4.4: safety, data integrity and sanity
 - make it configurable whether to count all registrations or only the paid ones
 - add configuration: don't check for double registrations (this is useful for theaters)
 - check that all DB accesses use either intval, quoteStr or fullQuoteStr
+- investigate whether to use removeBadHTML (like in the extension ve_guestbook)
 
 
 Version 0.4.5: code clean-up, qa and documentation
