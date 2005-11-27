@@ -44,6 +44,12 @@ Version 0.4.3: dogfood, part 2
   - create a function to write to the db
   - create a function in /mod2 to view the log (standard view, verbose view)
 - add field "event number" (UID) to list view, detailed view and e-mails
+- create a new template for sr_feuser_register with CSS
+- make the default sort order for the list view configurable
+- make the number of results for the list view configurable
+- make it configurable whether to also display canceled seminars in the list view
+- make it configurable whether to have the search box in the list view
+- make it configurable whether to have the results browser in the list view
 
 
 Version 0.4.4: safety, data integrity and sanity
@@ -223,7 +229,6 @@ Version 0.4.9: front end usability and polish
 - online registration: only show the message "an e-mail has been sent" if sending the e-mail has been successful
 - thankyou page: show how many seats have been reserved
 - thankyou page: show the e-mail address to which the e-mail has been sent
-- make it configurable whether to have the search box in the list view
 - don't show the number of vacancies in the list view and single view for canceled seminars
 - on the thank you page, provide a link to the list view or to the single view
 
