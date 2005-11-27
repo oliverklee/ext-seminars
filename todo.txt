@@ -43,6 +43,7 @@ Version 0.4.3: dogfood, part 2
   - define the table-structure
   - create a function to write to the db
   - create a function in /mod2 to view the log (standard view, verbose view)
+- add field "event number" (UID) to list view, detailed view and e-mails
 
 
 Version 0.4.4: safety, data integrity and sanity
@@ -207,7 +208,6 @@ Version 0.4.9: front end usability and polish
 - feature: "people who have registered for this seminar have also registered for these seminars"
 - add and document configuration: number of seminars to list per page
 - feature: configure sort order of seminar list
-- add field "event number" (UID) to list view and detailed view
 - add a headline "Thanks for signing up for this event." or something similar after a successfull registration
 - don't display "page 1 of 1" in the list view if there is only 1 page
 - handle singular/plural of "organizer" in headings
