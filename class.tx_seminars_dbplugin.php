@@ -91,17 +91,17 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 					// do not log time-performance information
 					$template->tt_track = 0;
 					$template->init();
-	
+
 					// Get the root line
 					$sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
 					// the selected page in the BE is found
 					// exactly as in t3lib_SCbase::init()
 					$rootline = $sys_page->getRootLine(intval(t3lib_div::_GP('id')));
-	
+
 					// This generates the constants/config + hierarchy info for the template.
 					$template->runThroughTemplates($rootline, 0);
 					$template->generateConfig();
-	
+
 					$this->conf = $template->setup['plugin.']['tx_'.$this->extKey.'.'];
 				} else {
 					// On the front end, we can use the provided template setup.
