@@ -38,7 +38,7 @@ Version 0.4.3: dogfood, part 2
 - Include some basic functionality
   - output event lists
   - possibility to select an event
-  - search forms (search for a user / event)
+  - search forms (search for a user / event), maybe use t3lib_db::searchQuery
 - Create a global log-function (write all changes to a log-table)
   - define the table-structure
   - create a function to write to the db
@@ -80,6 +80,7 @@ Version 0.4.4: safety, data integrity and sanity
 - update the titles of all involved attendee records after the name (or first name or last name) of a front end user has been changed
 - make it configurable whether to count all registrations or only the paid ones
 - add configuration: don't check for double registrations (this is useful for theaters)
+- check that all DB accesses use either intval, quoteStr or fullQuoteStr
 
 
 Version 0.4.5: code clean-up, qa and documentation
@@ -87,7 +88,7 @@ Version 0.4.5: code clean-up, qa and documentation
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
 - use array_key_exists() where possible
-- add automatic headers to code files
+- add automatic headers (function index) to code files
 - add automated tests using PHPunit or something like it
 - check code with PhpLint once PhpLint is a bit more mature
 - move HTML from pi_list_makelist to template
@@ -114,6 +115,10 @@ Version 0.4.5: code clean-up, qa and documentation
 - check that constructors don't try to return any values
 - document how the templates work (labels, wrappers etc.)
 - move code from pi1/class.tx_seminars_pi1.php into separate class where it makes sense
+- move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
+- investigate whether we should have @package/@subpackage tags
+- add the CVS tag "dollar Id dollar" in the header comment of each document
+- check that all file names are 31 characters or shorter
 
 
 Version 0.4.6: accessibility
