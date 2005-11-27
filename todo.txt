@@ -45,8 +45,8 @@ Version 0.4.3: dogfood, part 2
   - create a function in /mod2 to view the log (standard view, verbose view)
 
 
-Version 0.4.4: data integrity and sanity
-----------------------------------------
+Version 0.4.4: safety, data integrity and sanity
+------------------------------------------------
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
 - factor out the statistics update into a common function and make it more efficient
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics
@@ -82,8 +82,8 @@ Version 0.4.4: data integrity and sanity
 - add configuration: don't check for double registrations (this is useful for theaters)
 
 
-Version 0.4.5: code clean-up and qa
------------------------------------
+Version 0.4.5: code clean-up, qa and documentation
+--------------------------------------------------
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
 - use array_key_exists() where possible
@@ -112,6 +112,9 @@ Version 0.4.5: code clean-up and qa
 - investigate whether to use ameos_formidable instead of frontendformslib
 - check that all functions have a "return" (and only one), except for empty constructors
 - check that constructors don't try to return any values
+- document how the templates work (labels, wrappers etc.)
+- move code from pi1/class.tx_seminars_pi1.php into separate class where it makes sense
+
 
 Version 0.4.6: accessibility
 ----------------------------
