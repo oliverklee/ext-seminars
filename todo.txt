@@ -224,6 +224,7 @@ Version 0.4.9: front end usability and polish
 - thankyou page: show the e-mail address to which the e-mail has been sent
 - make it configurable whether to have the search box in the list view
 - don't show the number of vacancies in the list view and single view for canceled seminars
+- on the thank you page, provide a link to the list view or to the single view
 
 Version 0.5.0
 -------------
