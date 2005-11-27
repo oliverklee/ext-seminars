@@ -332,16 +332,16 @@ class tx_seminars_module1 extends t3lib_SCbase {
 					''
 				);
 
-				$result .= $LANG->getLL('label_all').$this->generateEmailList($dbResultAttendeesALL).'<hr>';
-				$result .= $LANG->getLL('label_paid').$this->generateEmailList($dbResultAttendeesPAID).'<hr>';
-				$result .= $LANG->getLL('label_unpaid').$this->generateEmailList($dbResultAttendeesUNPAID).'<hr>';
+				$result .= $LANG->getLL('label_all').'<br />'.$this->generateEmailList($dbResultAttendeesALL).'<hr />';
+				$result .= $LANG->getLL('label_paid').'<br />'.$this->generateEmailList($dbResultAttendeesPAID).'<hr />';
+				$result .= $LANG->getLL('label_unpaid').'<br />'.$this->generateEmailList($dbResultAttendeesUNPAID).'<hr />';
 			}
 		}
 		return $result;
 	}
 
 	/**
-	 * Returns a comma separated list of e-mail Adresses.
+	 * Returns a comma separated list of names and e-mail addresses.
 	 * The char to separate the e-mail addresses from each other may be changed. Default is comma.
 	 *
  	 * @param	array		result of the DB query
@@ -376,10 +376,11 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	}
 
 	/**
-	 * Retrieves the e-mail address of a user from the database.
+	 * Retrieves the name and e-mail address of a user from the database
+	 * in the form "Name <e-mail address>"
 	 *
  	 * @param	integer		User ID of the user to search for
- 	 * @return	string		the Email Address of the user
+ 	 * @return	string		the name and e-mail address of the user
  	 *
 	 * @access	private
 	 */
@@ -387,7 +388,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$tableUsers = 'fe_users';
 
 		$dbResultUserDetails = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'email',
+			'name, email',
 			$tableUsers,
 			'uid='.intval($userID)
 				.t3lib_pageSelect::enableFields($tableUsers),
@@ -396,7 +397,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			'1'
 		);
 		$currentUser = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultUserDetails);
-		return $currentUser['email'];
+		return htmlspecialchars($currentUser['name']).' &lt;'.htmlspecialchars($currentUser['email']).'&gt;';
 	}
 
 } // END of class
