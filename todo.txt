@@ -346,6 +346,7 @@ Not triaged yet
 - attach images to seminars (like in tt_news)
 - attach documents to seminars
 - export events to tt_news
+- export events to jw_calendar
 - export events to other calendar extensions
 - export events to http://www.uni-bonn.de/~career/termine_liste.php
 - FE export function: all future seminars formatter for inserting them into PageMaker (for the "basta" magazine)
