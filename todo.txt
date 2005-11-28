@@ -124,7 +124,6 @@ Version 0.4.5 - "Make it nice for developers": code clean-up, qa and documentati
 - provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
 - add fields "attendees_paid" and "attendees_unpaid" to the seminar record and fill them in updateStatistics()
-- remove all references to pi2 and pi3
 - add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
 - investigate whether to use ameos_formidable instead of frontendformslib
 - check that all functions have a "return" (and only one), except for empty constructors
@@ -183,7 +182,6 @@ Version 0.4.8 - "Make it nice for the BE users": back end usability and polish
 - in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
 - disable the "save and view" button for all our records (as they are not treated as regular content elements)
 - add different icons
-- Web -> Seminars should only use the selected page's data (optionally recursively)
 - make the back end forms prettier and clean them up (using TCA.php)
 - in the back end, remove many checkboxes next to text fields
 - for all homepage fields, add http:// and / after editing if it has been left out
@@ -261,6 +259,7 @@ Version 0.5.0 - "Getting real new features"
 - make the wrap for the number of vacancies (colored square) configurable
 - add entry in participant records whether their money has been refunded
 - add configuration whether to show seminars without date as well
+- separate "signing up" (which includes paying) and "registering a seat" (without paying)
 - automatic signing off if the user hasn't paid after a configurable timespan (x days after registration or x days before start of seminar)
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off
 - make the link to the online registration form CSS-stylable
@@ -336,7 +335,6 @@ Version 1.0.0
 
 Not triaged yet
 ===============
-- separate "signing up" (which includes paying) and "registering a seat" (without paying)
 - feature: create seminar certificates (as PDF) for those who have successfully attended
 - add credit card payment
 - feature: graph for total number of registrations per seminar over time
@@ -354,7 +352,7 @@ Not triaged yet
 - export/import for mjseventpro
 - export/import for rlmp_eventdb and asfk_eventmanagement
 - export events to http://www.uni-bonn.de/~career/termine_liste.php
-- FE export function: all future seminars formatter for inserting them into PageMaker (for the "basta" magazine)
+- FE export function: all future seminars formatted for inserting them into PageMaker (for the "basta" magazine)
 - integrate the "Feed-back-Fragebogen"
 - make CSS class names configurable via flexforms and document this
 - feature: users can rate a seminar after it has taken place
