@@ -351,6 +351,8 @@ Not triaged yet
 - export events to tt_news
 - export events to jw_calendar
 - export events to other calendar extensions
+- export/import for mjseventpro
+- export/import for rlmp_eventdb and asfk_eventmanagement
 - export events to http://www.uni-bonn.de/~career/termine_liste.php
 - FE export function: all future seminars formatter for inserting them into PageMaker (for the "basta" magazine)
 - integrate the "Feed-back-Fragebogen"
