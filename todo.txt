@@ -131,6 +131,7 @@ Version 0.4.5: code clean-up, qa and documentation
 - investigate whether we should have @package/@subpackage tags
 - add the CVS tag "dollar Id dollar" in the header comment of each document
 - check that all file names are 31 characters or shorter
+- factor out t3lib_pageSelect::enableFields into objectfromdb
 
 
 Version 0.4.6: accessibility
