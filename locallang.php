@@ -31,7 +31,9 @@ $LOCAL_LANG = Array (
 		'message_seminarStarted' => 'This event has already started.',
 		'message_seminarOver' => 'This event is already over.',
 		'message_noVacancies' => 'Sorry, there are no more vancacies.',
+		'message_invalidNumberOfSeats' => 'Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.',
 		'message_willBeAnnounced' => 'will be announced',
+
 		'email_confirmationSubject' => 'Registration confirmation',
 		'email_confirmationHello' => 'Hello %s,
 
@@ -72,7 +74,10 @@ someone just has registered for an event:',
 		'message_seminarStarted' => 'Diese Veranstaltung hat leider schon angefangen.',
 		'message_seminarOver' => 'Diese Veranstaltung ist leider schon beendet.',
 		'message_noVacancies' => 'Es sind leider keine Plätze mehr frei.',
+		'message_invalidNumberOfSeats_formal' => 'Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.',
+		'message_invalidNumberOfSeats_informal' => 'Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.',
 		'message_willBeAnnounced' => 'wird noch bekannt gegeben',
+
 		'email_confirmationSubject' => 'Anmeldebestätigung',
 		'email_confirmationHello' => 'Guten Tag %s,
 

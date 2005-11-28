@@ -294,6 +294,80 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Checks whether the data the user has just entered is okay for creating
+	 * a registration, e.g. mandatory fields are filled, number fields only
+	 * contain numbers, the number of seats to register is not too high etc.
+	 *
+	 * Please note that this function doesn't create a registration - it just checks.
+	 *
+	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
+	 * @param	array		associative array with the registration data the user has just entered
+	 *
+	 * @return	boolean		true if the data is okay, false otherwise
+	 *
+	 * @access	public
+	 */
+	function canCreateRegistration(&$seminar, $registrationData) {
+		return $this->canRegisterSeats($seminar, $registrationData['seats']);
+	}
+
+	/**
+	 * Checks whether the data the user has just entered is okay for creating
+	 * a registration, e.g. mandatory fields are filled, number fields only
+	 * contain numbers, the number of seats to register is not too high etc.
+	 *
+	 * This function returns an empty string if everything is okay and a
+	 * localized error message otherwise.
+	 *
+	 * Please note that this function doesn't create a registration - it just checks.
+	 *
+	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
+	 * @param	array		associative array with the registration data the user has just entered
+	 *
+	 * @return	string		an empty string if everything is okay, otherwise a localized error message
+	 *
+	 * @access	public
+	 */
+	function canCreateRegistrationMessage(&$seminar, $registrationData) {
+		return ($this->canRegisterSeats($seminar, $registrationData['seats'])) ?
+			'' :
+			sprintf($this->pi_getLL('message_invalidNumberOfSeats'),
+				$seminar->getVacancies());
+	}
+
+	/**
+	 * Checks whether a registration with a given number of seats could be created,
+	 * ie. an actual number is given and there are at least that many vacancies.
+	 *
+	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
+	 * @param	string		the number of seats to check (should be an integer, but we can't be sure of this)
+	 *
+	 * @return	boolean		true if there are at least that many vacancies, false otherwise.
+	 *
+	 * @access	private
+	 */
+	function canRegisterSeats(&$seminar, $numberOfSeats) {
+		$numberOfSeats = trim($numberOfSeats);
+
+		// If no number of seats is given, ie. the user has not entered anything
+		// or the field is not shown at all, assume 1.
+		if (($numberOfSeats == '') || ($numberOfSeats == '0')) {
+			$numberOfSeats = '1';
+		}
+
+		$numberOfSeatsInt = intval($numberOfSeats);
+
+		// Check whether we have a valid number
+		if ($numberOfSeats == strval($numberOfSeatsInt)) {
+			$result = ($seminar->getVacancies() >= $numberOfSeatsInt);
+		} else {
+			$result = false;
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Creates a registration to $this->registration, writes it to DB,
 	 * and notifies the organizer and the user (both via e-mail).
 	 *

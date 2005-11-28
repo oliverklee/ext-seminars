@@ -69,6 +69,8 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		$this->recordData['seminar'] = $seminar->getUid();
 		$this->recordData['user'] = $userUid;
 
+		$this->recordData['seats'] = $registrationData['seats'];
+
 		$this->recordData['interests'] = $registrationData['interests'];
 		$this->recordData['expectations'] = $registrationData['expectations'];
 		$this->recordData['background_knowledge'] = $registrationData['background_knowledge'];

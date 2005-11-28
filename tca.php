@@ -505,7 +505,7 @@ $TCA['tx_seminars_attendances'] = Array (
 					'upper' => '999',
 					'lower' => '0'
 				),
-				'default' => 0
+				'default' => '1'
 			)
 		),
 		'paid' => Array (

@@ -459,6 +459,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
 
+		$errorMessage = '';
+		$registrationForm = '';
+		$registationThankyou = '';
+
 		if ($this->createSeminar($this->piVars['seminar'])) {
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar);
@@ -471,11 +475,38 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar'], $this);
 		}
 
-		$result = $this->createRegistrationHeading($errorMessage);
-
 		if (empty($errorMessage)) {
-			$result .= $this->createRegistrationForm();
+			// create the frontend form object
+			$formsLibClassName = t3lib_div::makeInstanceClassName('tx_frontendformslib');
+			$formObj = new $formsLibClassName($this);
+
+			// generate configuration for a single step
+			$formObj->steps[1] = $formObj->createStepConf($this->getConfValue('showRegistrationFields', 's_template_special'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
+			$formObj->init();
+
+			if ($formObj->submitType == 'submit') {
+				if ($this->registrationManager->canCreateRegistration(
+						$this->seminar,
+						$formObj->sessionData['data'][$this->tableAttendances])) {
+					$this->registrationManager->createRegistration($this->seminar, $formObj->sessionData['data'][$this->tableAttendances], $this);
+					$registationThankyou = $this->substituteMarkerArrayCached('REGISTRATION_THANKYOU');
+
+					// destroy session data for our submitted form
+					$formObj->destroySessionData();
+				} else {
+					$errorMessage = $this->registrationManager->canCreateRegistrationMessage(
+						$this->seminar,
+						$formObj->sessionData['data'][$this->tableAttendances]);
+					$registrationForm = $this->createRegistrationForm($formObj);
+				}
+			} else {
+				$registrationForm = $this->createRegistrationForm($formObj);
+			}
 		}
+
+		$result = $this->createRegistrationHeading($errorMessage);
+		$result .= $registrationForm;
+		$result .= $registationThankyou;
 
 		return $result;
 	}
@@ -505,42 +536,27 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates the registration form.
 	 *
+	 * @param	object		a frontendformslib object
+	 *
 	 * @return	string		HTML code for the form
 	 *
 	 * @access	protected
 	 */
-	function createRegistrationForm() {
-		// Create the frontend form object:
-		$className = t3lib_div::makeInstanceClassName('tx_frontendformslib');
-		$formObj = new $className($this);
-
-		// Generate configuration for a single step displaying certain fields of tt_address:
-		$formObj->steps[1] = $formObj->createStepConf($this->getConfValue('showRegistrationFields', 's_template_special'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
-		$formObj->init();
-
-		// Check if the form has been submitted:
-		if ($formObj->submitType == 'submit') {
-			$this->registrationManager->createRegistration($this->seminar, $formObj->sessionData['data'][$this->tableAttendances], $this);
-
-			$output = $this->substituteMarkerArrayCached('REGISTRATION_THANKYOU');
-			// Destroy session data for our submitted form:
-			$formObj->destroySessionData();
-		} else {
-			if ($this->getConfValue('generalPriceInSingle', 's_template_special')) {
-				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
-			}
-			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
-			if ($this->seminar->hasPriceSpecial()) {
-				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
-			} else {
-				$this->readSubpartsToHide('price_special', 'registration_wrapper');
-			}
-			$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
-			$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
-			// Form has not yet been submitted, so render the form:
-			$output .= $formObj->renderWholeForm();
-			$output .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
+	function createRegistrationForm(&$formObj) {
+		if ($this->getConfValue('generalPriceInSingle', 's_template_special')) {
+			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 		}
+		$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
+		if ($this->seminar->hasPriceSpecial()) {
+			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+		} else {
+			$this->readSubpartsToHide('price_special', 'registration_wrapper');
+		}
+		$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
+		$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
+		// Form has not yet been submitted, so render the form:
+		$output .= $formObj->renderWholeForm();
+		$output .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
 
 		return $output;
 	}

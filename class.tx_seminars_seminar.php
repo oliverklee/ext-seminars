@@ -1292,56 +1292,90 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *   whether there are enough registrations for this seminar to take place,
 	 *   and whether this seminar even is full.
 	 *
-	 * @return	boolean		true if everything went ok, false otherwise
-	 *
 	 * @access	public
 	 */
 	function updateStatistics() {
-		$result = false;
+		$numberOfAttendees = $this->countAttendances();
+		$numberOfAttendeesPaid = $this->countAttendances('(paid=1 OR datepaid!=0)');
 
-		$dbResultAttendees = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'COUNT(*) AS num',
+		// We count paid and unpaid registrations.
+		// This behaviour will be configurable in a later version.
+		$this->seminarData['attendees'] = $numberOfAttendees;
+		// Let's store the other result in case someone needs it.
+		$this->numberOfAttendeesPaid = $numberOfAttendeesPaid['num'];
+
+		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
+		$this->seminarData['enough_attendees'] = ($this->getAttendances() >= $this->seminarData['attendees_min']) ? 1 : 0;
+		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
+		$this->seminarData['is_full'] = ($this->getAttendances() >= $this->seminarData['attendees_max']) ? 1 : 0;
+
+		$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+			$this->tableSeminars,
+			'uid='.$this->getUid(),
+			array(
+				'attendees' => $this->seminarData['attendees'],
+				'enough_attendees' => $this->seminarData['enough_attendees'],
+				'is_full' => $this->seminarData['is_full']
+			)
+		);
+
+		return;
+	}
+
+	/**
+	 * Queries the DB for the number of visible attendances for this event
+	 * and returns the result of the DB query with the number stored in 'num'
+	 * (the result will be null if the query fails).
+	 *
+	 * This function takes multi-seat registrations into account as well.
+	 *
+	 * An additional string can be added to the WHERE clause to look only for
+	 * certain attendances, e.g. only the paid ones.
+	 *
+	 * Note that this does not write the values back to the seminar record yet.
+	 * This needs to be done in an additional step after this.
+	 *
+	 * @param	string		string that will be prepended to the WHERE clause
+	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
+	 *						spaces are not necessary for this parameter)
+	 *
+	 * @return	integer		the number of attendances
+	 *
+	 * @access	protected
+	 */
+	function countAttendances($queryParameters = '1') {
+		$result = 0;
+
+		$dbResultSingleSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'COUNT(*) AS number',
 			$this->tableAttendances,
-			'seminar='.$this->getUid()
+			$queryParameters
+				.' AND seminar='.$this->getUid()
+				.' AND seats=0'
 				.t3lib_pageSelect::enableFields($this->tableAttendances),
 			'',
 			'',
 			''
 		);
-		$dbResultAttendeesPaid = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'COUNT(*) AS num',
+		if ($dbResultSingleSeats) {
+			$fieldsSingleSeats = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultSingleSeats);
+			$result += $fieldsSingleSeats['number'];
+		}
+
+		$dbResultMultiSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'SUM(seats) AS number',
 			$this->tableAttendances,
-			'seminar='.$this->getUid().' AND (paid=1 OR datepaid!=0)'
+			$queryParameters
+				.' AND seminar='.$this->getUid()
+				.' AND seats!=0'
 				.t3lib_pageSelect::enableFields($this->tableAttendances),
 			'',
 			'',
 			''
 		);
-
-		if ($dbResultAttendees && $dbResultAttendeesPaid) {
-			$numberOfAttendees = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendees);
-			$numberOfAttendeesPaid = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendeesPaid);
-
-			// We count paid and unpaid registrations.
-			// This behaviour will be configurable in a later version.
-			$this->seminarData['attendees'] = $numberOfAttendees['num'];
-			// Let's store the other result in case someone needs it.
-			$this->numberOfAttendeesPaid = $numberOfAttendeesPaid['num'];
-
-			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-			$this->seminarData['enough_attendees'] = ($this->getAttendances() >= $this->seminarData['attendees_min']) ? 1 : 0;
-			// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-			$this->seminarData['is_full'] = ($this->getAttendances() >= $this->seminarData['attendees_max']) ? 1 : 0;
-
-			$result = (boolean) $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-				$this->tableSeminars,
-				'uid='.$this->getUid(),
-				array(
-					'attendees' => $this->seminarData['attendees'],
-					'enough_attendees' => $this->seminarData['enough_attendees'],
-					'is_full' => $this->seminarData['is_full']
-				)
-			);
+		if ($dbResultMultiSeats) {
+			$fieldsMultiSeats = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultMultiSeats);
+			$result += $fieldsMultiSeats['number'];
 		}
 
 		return $result;
