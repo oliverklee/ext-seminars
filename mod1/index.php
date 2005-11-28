@@ -58,17 +58,23 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 * @return	[type]		...
 	 */
 	function menuConfig()	{
-		global $LANG;
-		$this->MOD_MENU = Array (
-			'function' => Array (
-				'updateStats' => $LANG->getLL('menu_updateStats'),
-				'seminarDetails' => $LANG->getLL('menu_seminarDetails'),
-// removed until the corresponding parts are functional
-//				'listSpeakers' => $LANG->getLL('menu_listSpeakers'),
-//				'listSites' => $LANG->getLL('menu_listSites'),
-//				'listSeminars' => $LANG->getLL('menu_listSeminars'),
-			)
+		global $LANG, $BE_USER;
+
+		$functionMenu = array();
+
+		// check whether the user has write access to the page before allowing
+		// to update the statistics
+		$sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
+		if ($BE_USER->doesUserHaveAccess($sys_page->getPage($this->id), 16)) {
+			$functionMenu['updateStats'] = $LANG->getLL('menu_updateStats'); 
+		}
+
+		$functionMenu['seminarDetails'] = $LANG->getLL('menu_seminarDetails');
+
+		$this->MOD_MENU = array(
+			'function' => $functionMenu
 		);
+
 		parent::menuConfig();
 	}
 
@@ -89,7 +95,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		// Access check!
 		// The page will show only if there is a valid page and if this page may be viewed by the user
-		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id,$this->perms_clause);
+		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		$access = is_array($this->pageinfo) ? 1 : 0;
 
 		if (($this->id && $access) || ($BE_USER->user['admin'] && !$this->id))	{
