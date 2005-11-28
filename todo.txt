@@ -22,6 +22,7 @@ Version 0.4.2: dogfood, part 1
 
 Version 0.4.3: dogfood, part 2
 ------------------------------
+- move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation
 - up the size limit for the TER to 500 kB
 - feature for e-mail notification to the organizer once a seminar has enough attendances or is full
 - find a way to enter and display open-ended events
@@ -40,6 +41,7 @@ Version 0.4.3: dogfood, part 2
   - possibility to select an event
   - search forms (search for a user / event), maybe use t3lib_db::searchQuery
 - Create a global log-function (write all changes to a log-table)
+  - with alle changes and registrations so that everything is traceable
   - define the table-structure
   - create a function to write to the db
   - create a function in /mod2 to view the log (standard view, verbose view)
@@ -52,8 +54,8 @@ Version 0.4.3: dogfood, part 2
 - make it configurable whether to have the results browser in the list view
 
 
-Version 0.4.4: safety, data integrity and sanity
-------------------------------------------------
+Version 0.4.4 - "Make it safe to use": safety, data integrity and sanity
+------------------------------------------------------------------------
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
 - factor out the statistics update into a common function and make it more efficient
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics
@@ -93,10 +95,11 @@ Version 0.4.4: safety, data integrity and sanity
 - tx_seminars_objectfromdb::commitToDb() should check for existence of a record before deciding whether to update or insert it
 - prevent tx_seminars_registration::tx_seminars_registration and tx_seminars_registrationmanager::canCreateRegistration from accessing uninitialized array elements
 - check for accesses to uninitialized array elements
+- investigate on what happens if a FE user account is deleted
 
 
-Version 0.4.5: code clean-up, qa and documentation
---------------------------------------------------
+Version 0.4.5 - "Make it nice for developers": code clean-up, qa and documentation
+----------------------------------------------------------------------------------
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
 - use array_key_exists() where possible
@@ -133,10 +136,11 @@ Version 0.4.5: code clean-up, qa and documentation
 - add the CVS tag "dollar Id dollar" in the header comment of each document
 - check that all file names are 31 characters or shorter
 - factor out t3lib_pageSelect::enableFields into objectfromdb
+- document the CSS styles used
 
 
-Version 0.4.6: accessibility
-----------------------------
+Version 0.4.6 - "Make it for everybody": accessibility
+------------------------------------------------------
 - clean up code from pibase (search box, results browser)
 - remove layout tables from the search box
 - add summaries for tables
@@ -144,9 +148,10 @@ Version 0.4.6: accessibility
 - add titles for links
 - add a table summary to the list view
 - re-check everything on the FE and BE for XHTML 1.0 strict validity
+- investigate XHTML 1.1
 
-Version 0.4.7: performance
---------------------------
+Version 0.4.7 - "Make it fast": performance
+-------------------------------------------
 - cache speaker data
 - cache site data
 - cache payment methods
@@ -156,9 +161,10 @@ Version 0.4.7: performance
 - refactor seminar::getOrganizers*()
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate performance improvements when using caching or singletons in the template helper class
+- cache BE page access rights when showing edit buttons for attendances
 
-Version 0.4.8: back end usability and polish
---------------------------------------------
+Version 0.4.8 - "Make it nice for the BE users": back end usability and polish
+------------------------------------------------------------------------------
 - move the "seminar is cancelled" checkbox further up in the BE form
 - bug: BE search doesn't find attendance titles
 - work out how to override non-empty TS values with empty flexforms values
@@ -198,8 +204,8 @@ Version 0.4.8: back end usability and polish
 - check whether we should remain "attendance" to "participant" or "attendee" in the localized strings (not in the DB field names, though)
 - investigate if we can benefit from joh_advbesearch
 
-Version 0.4.9: front end usability and polish
----------------------------------------------
+Version 0.4.9 - "Make it nice for the visitors": front end usability and polish
+-------------------------------------------------------------------------------
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
 - make some fe_users data editable on the registration page
 - provide a patch for drop-down-lists in frontendformslib
@@ -238,8 +244,8 @@ Version 0.4.9: front end usability and polish
 - don't show the number of vacancies in the list view and single view for canceled seminars
 - on the thank you page, provide a link to the list view or to the single view
 
-Version 0.5.0
--------------
+Version 0.5.0 - "Getting real new features"
+-------------------------------------------
 - switch extension status from "alpha" to "beta"
 - Dutch localization
 - make it configurable what to do when a participant signs up
@@ -263,17 +269,16 @@ Version 0.5.0
 - check that links in this extension work correctly on multilingual sites
 - extend copyright line to 2006
 
-Version 0.5.1
--------------
-- Investigate on what happes, if a FE user account is deleted
+Version 0.5.1 - "More back end features"
+----------------------------------------
 - Define all possible states of an event (in planning, open for registration, cancelled)
 - Feature: Create the select user functionality in the BE
 - Feature: Create the list / select possibility for an attendance of a user in the BE
 - Feature: Create a unified mail function for the BE SubModules
 - Investigate on how the payment-workflow could be optimized.
 
-Version 0.5.2 - the Back end fight :-)
---------------------------------------
+Version 0.5.2 - "The Back end fight :-)"
+----------------------------------------
 - Feature: Show some global statistics about the whole seminar extension.
 - Feature: Show statistics for a selected event.
 - Feature: Add BE functionality to confirm attendances (person was really there)
@@ -281,13 +286,13 @@ Version 0.5.2 - the Back end fight :-)
 - Feature: Add BE functionality to confirm an event.
 - Feature: Add BE functionality to cancel an event.
 
-Version 0.5.3
--------------
+Version 0.5.3 - "Back end polish"
+---------------------------------
 - Feature: Add BE functionality to cancel attendances.
 - Check the new BE against the product requirement specifications.
 
-Version 0.6.0
--------------
+Version 0.6.0 - "Great new FE features"
+---------------------------------------
 - add possibility for front end users to sign off a seminar if it's early enough
 - add configuration: period before seminar start when signing off is not possible any more (default: 14 days)
 - allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee
@@ -308,9 +313,6 @@ Version 0.6.0
     - the important data of the participants
 - have the documentation proofread
 - display picture of speakers on seminar page
-- move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation
-- make sure the HTML validates as XHTML 1.0 strict
-- document the CSS styles used
 - in pi1, implement the default sort order (by begin date) using TCA
 - move the global configuration into constants and make them configurable using the constants editor
 
@@ -363,5 +365,4 @@ Not triaged yet
 - export attendance records as bar codes
 - attendance record: if there is no name, use first and last name
 - add configuration: maximum number of seats that can be registered for at one time
-- write a logfile with alle changes and registrations so that everything is traceable
 - configuration: don't show the exakt number of vacancies, but only the rough state
