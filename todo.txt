@@ -22,6 +22,7 @@ Version 0.4.2: dogfood, part 1
 
 Version 0.4.3: dogfood, part 2
 ------------------------------
+- document the fields of the attendance record in the manual
 - move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation
 - up the size limit for the TER to 500 kB
 - feature for e-mail notification to the organizer once a seminar has enough attendances or is full
