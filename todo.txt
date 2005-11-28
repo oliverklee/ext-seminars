@@ -89,6 +89,10 @@ Version 0.4.4: safety, data integrity and sanity
 - add configuration: don't check for double registrations (this is useful for theaters)
 - check that all DB accesses use either intval, quoteStr or fullQuoteStr
 - investigate whether to use removeBadHTML (like in the extension ve_guestbook)
+- tx_seminars_objectfromdb::commitToDb() should also be able to update records
+- tx_seminars_objectfromdb::commitToDb() should check for existence of a record before deciding whether to update or insert it
+- prevent tx_seminars_registration::tx_seminars_registration and tx_seminars_registrationmanager::canCreateRegistration from accessing uninitialized array elements
+- check for accesses to uninitialized array elements
 
 
 Version 0.4.5: code clean-up, qa and documentation
