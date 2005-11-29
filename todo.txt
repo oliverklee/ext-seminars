@@ -140,6 +140,8 @@ Version 0.4.5 - "Make it nice for developers": code clean-up, qa and documentati
 - check that all file names are 31 characters or shorter
 - factor out t3lib_pageSelect::enableFields into objectfromdb
 - document the CSS styles used
+- investigate whether the seminar class can generate links without the FE, eg. using $this->cObj->typolink?
+- format the code in the manual in a nice way like at http://typo3.org/documentation/document-library/rlmp_eventdb/Reference-24/
 
 
 Version 0.4.6 - "Make it for everybody": accessibility
@@ -245,6 +247,8 @@ Version 0.4.9 - "Make it nice for the visitors": front end usability and polish
 - thankyou page: show the e-mail address to which the e-mail has been sent
 - don't show the number of vacancies in the list view and single view for canceled seminars
 - on the thank you page, provide a link to the list view or to the single view
+- use singular for message_invalidNumberOfSeats if the is only 1 vacancy
+
 
 Version 0.5.0 - "Getting real new features"
 -------------------------------------------
