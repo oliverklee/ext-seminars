@@ -100,6 +100,10 @@ Version 0.4.4 - "Make it safer to use": safety, data integrity and sanity
 - prevent tx_seminars_registration::tx_seminars_registration and tx_seminars_registrationmanager::canCreateRegistration from accessing uninitialized array elements
 - check for accesses to uninitialized array elements
 - investigate on what happens if a FE user account is deleted
+- check whether umlauts in sender and recipient names are handled correctly
+- spaces in sender or recipient names cause problems: http://bugs.typo3.org/view.php?id=1954
+
+
 
 
 Version 0.4.5 - "Make it nice for developers": code clean-up, qa and documentation
