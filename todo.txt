@@ -104,8 +104,6 @@ Version 0.4.4 - "Make it safer to use": safety, data integrity and sanity
 - spaces in sender or recipient names cause problems: http://bugs.typo3.org/view.php?id=1954
 
 
-
-
 Version 0.4.5 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
@@ -215,6 +213,7 @@ Version 0.4.8 - "Make it nice for the BE users": back end usability and polish
 
 Version 0.4.9 - "Make it nice for the visitors": front end usability and polish
 -------------------------------------------------------------------------------
+- option to hide seminar without vacancies in the list view
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
 - make some fe_users data editable on the registration page
 - provide a patch for drop-down-lists in frontendformslib
