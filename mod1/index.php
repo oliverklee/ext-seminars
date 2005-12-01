@@ -66,7 +66,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		// to update the statistics
 		$sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
 		if ($BE_USER->doesUserHaveAccess($sys_page->getPage($this->id), 16)) {
-			$functionMenu['updateStats'] = $LANG->getLL('menu_updateStats'); 
+			$functionMenu['updateStats'] = $LANG->getLL('menu_updateStats');
 		}
 
 		$functionMenu['seminarDetails'] = $LANG->getLL('menu_seminarDetails');
