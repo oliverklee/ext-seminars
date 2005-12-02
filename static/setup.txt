@@ -60,6 +60,8 @@ plugin.tx_seminars_pi1 {
 	class_error = error
 
 	salutation = formal
+	# the timeframe from which event should be displayed in the list view
+	timeframeInList = currentAndUpcoming
 	hideColumns = accreditation_number,credit_points,price_special
 	hideFields = credit_points
 	generalPriceInList =

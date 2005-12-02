@@ -205,6 +205,50 @@
 							</config>
 						</TCEforms>
 					</cssFile>
+					<timeframeInList>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList1</numIndex>
+										<numIndex index="1">all</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList2</numIndex>
+										<numIndex index="1">past</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList3</numIndex>
+										<numIndex index="1">pastAndCurrent</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList4</numIndex>
+										<numIndex index="1">current</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList5</numIndex>
+										<numIndex index="1">currentAndUpcoming</numIndex>
+									</numIndex>
+									<numIndex index="6" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList6</numIndex>
+										<numIndex index="1">upcoming</numIndex>
+									</numIndex>
+									<numIndex index="7" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.timeframeInList7</numIndex>
+										<numIndex index="1">deadlineNotOver</numIndex>
+									</numIndex>
+								</items>
+								<size>1</size>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</timeframeInList>
 					<hideColumns>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.hideColumns</label>

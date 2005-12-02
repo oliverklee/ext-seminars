@@ -152,16 +152,41 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
 		$this->internal['orderByList'] = 'title,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
-		/** only show upcoming seminars */
-		$inFuture = 'AND end_date >= '.$GLOBALS['SIM_EXEC_TIME'];
+		// work out from which timeframe we'll display the event list
+		$now = $GLOBALS['SIM_EXEC_TIME'];
+		$timeframeQueryParameters = '';
+		switch ($this->getConfValue('timeframeInList', 's_template_special')) {
+			case 'past':
+				$timeframeQueryParameters = ' AND end_date<='.$now;
+				break;
+			case 'pastAndCurrent':
+				$timeframeQueryParameters = ' AND begin_date<='.$now;
+				break;
+			case 'current':
+				$timeframeQueryParameters = ' AND begin_date<='.$now.' AND end_date>'.$now;
+				break;
+			case 'currentAndUpcoming':
+				$timeframeQueryParameters = ' AND end_date>'.$now;
+				break;
+			case 'upcoming':
+				$timeframeQueryParameters = ' AND begin_date>'.$now;
+				break;
+			case 'deadlineNotOver':
+				$timeframeQueryParameters = ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND begin_date>'.$now.'))';
+				break;
+			case 'all':
+			default:
+				// To show all events, we don't need any additional parameters.
+				break;
+		}
 
 		// Get number of records
-		$res = $this->pi_exec_query($this->tableSeminars, 1, $inFuture);
+		$res = $this->pi_exec_query($this->tableSeminars, 1, $timeframeQueryParameters);
 		list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
 
 		if ($this->internal['res_count']) {
 			// Make listing query, pass query to SQL database
-			$res = $this->pi_exec_query($this->tableSeminars, 0, $inFuture);
+			$res = $this->pi_exec_query($this->tableSeminars, 0, $timeframeQueryParameters);
 			$this->internal['currentTable'] = $this->tableSeminars;
 
 			// Put the whole list together:
