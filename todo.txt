@@ -7,21 +7,9 @@ If you find any bugs in this extension, please report them in the Typo3 bugtrack
 
 Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please pay for the author's time.
 
-Version 0.4.2: dogfood, part 1
-------------------------------
-(all of these items are already entered to the bugtracker, please assign one of them to yourself if you want to contribute)
-- allow for a time before an event when no registrations are possible any more
-- also show the seminar date when updating the statistics
-- participant lists on the back end, selectable via seminar: all, paid, not paid
-- in the BE under Web>Seminars, only show seminars for the selected page (and only if the user has read access to it)
-- only update seminars if the user has write access to the content of the page with the seminar
-- in Web>Seminars, provide a comma-separated list of participant emails for each seminar: all, paid, not paid yet
-- shorten some overlong DB labels
-- make it configurable which seminars to display: upcoming/upcoming+running/all
-- make it configurable via flexforms which seminars to display (past, current, upcoming)
-
 Version 0.4.3: dogfood, part 2
 ------------------------------
+- investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
 - get a wiki
 - document what all those *PID configuration variables are used for
 - document how to change localized strings using LOCAL_LANG
