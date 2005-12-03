@@ -136,6 +136,7 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - format the code in the manual in a nice way like at http://typo3.org/documentation/document-library/rlmp_eventdb/Reference-24/
 - investigate whether we should use http://typo3.org/extensions/repository/search/bidirectional/
 - document why &$plugin sometimes is needed (for e.g. RTE)
+- reduce code duplication by factoring out tx_seminars_seminar::getOrganizers*
 
 
 Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
