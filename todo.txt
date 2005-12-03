@@ -100,7 +100,6 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - reduce code by using the API for COUNT queries
 - use array_key_exists() where possible
 - add automatic headers (function index) to code files
-- add automated tests using PHPunit or something like it
 - check code with PhpLint once PhpLint is a bit more mature
 - move HTML from pi_list_makelist to template
 - investigate whether the string pi_list_browseresults_noResults actually is used
@@ -162,6 +161,8 @@ Version 0.4.7, 05/2006 - "Make it fast": performance
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate performance improvements when using caching or singletons in the template helper class
 - cache BE page access rights when showing edit buttons for attendances
+- test with PHP 5
+- add automated tests using T3unit (requires PHP5)
 
 Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and polish
 ---------------------------------------------------------------------------------------
@@ -268,7 +269,6 @@ Version 0.5.0, 08/2006 - "Getting real new features"
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off
 - make the link to the online registration form CSS-stylable
 - make e-mail charset configurable
-- test with PHP 5
 - check that links in this extension work correctly on multilingual sites
 - extend copyright line to 2006
 
