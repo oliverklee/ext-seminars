@@ -90,6 +90,7 @@ Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - investigate on what happens if a FE user account is deleted
 - check whether umlauts in sender and recipient names are handled correctly
 - only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
+- use julle_encmailheaders for encoding mail headers
 - extend copyright line to 2006
 
 
