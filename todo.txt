@@ -246,7 +246,7 @@ Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability an
 - don't show the number of vacancies in the list view and single view for canceled seminars
 - on the thank you page, provide a link to the list view or to the single view
 - use singular for message_invalidNumberOfSeats if there is only 1 vacancy
-- change the online registration button label from "submit" to "sign on" or "register"
+- change the online registration button label from "submit" to "sign on" or "register": LLL:EXT:frontendformslib/locallang.php:renderSubmitButtons_submit
 - change the online regitration buttons layout (they should be placed according to the OS UI design guidelines)
 
 
