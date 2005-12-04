@@ -91,6 +91,8 @@ Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - investigate on what happens if a FE user account is deleted
 - check whether umlauts in sender and recipient names are handled correctly
 - spaces in sender or recipient names cause problems: http://bugs.typo3.org/view.php?id=1954
+- only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
+- extend copyright line to 2006
 
 
 Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and documentation
@@ -136,6 +138,7 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - investigate whether we should use http://typo3.org/extensions/repository/search/bidirectional/
 - document why &$plugin sometimes is needed (for e.g. RTE)
 - reduce code duplication by factoring out tx_seminars_seminar::getOrganizers*
+- switch to UTF-8 so that we can also have Polish or Arabic localizations
 
 
 Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
@@ -244,7 +247,7 @@ Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability an
 - thankyou page: show the e-mail address to which the e-mail has been sent
 - don't show the number of vacancies in the list view and single view for canceled seminars
 - on the thank you page, provide a link to the list view or to the single view
-- use singular for message_invalidNumberOfSeats if the is only 1 vacancy
+- use singular for message_invalidNumberOfSeats if there is only 1 vacancy
 
 
 Version 0.5.0, 08/2006 - "Getting real new features"
@@ -270,7 +273,8 @@ Version 0.5.0, 08/2006 - "Getting real new features"
 - make the link to the online registration form CSS-stylable
 - make e-mail charset configurable
 - check that links in this extension work correctly on multilingual sites
-- extend copyright line to 2006
+- write an article about this extension for the T3N magazine
+
 
 Version 0.5.1, 09/2006 - "More back end features"
 -------------------------------------------------
