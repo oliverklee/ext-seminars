@@ -137,6 +137,7 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - document why &$plugin sometimes is needed (for e.g. RTE)
 - reduce code duplication by factoring out tx_seminars_seminar::getOrganizers*
 - switch to UTF-8 so that we can also have Polish or Arabic localizations
+- sort out and unify the terminology: participant/participation/attendance/attendee/registration
 
 
 Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
