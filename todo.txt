@@ -12,7 +12,6 @@ Version 0.4.3, 01/2006: dogfood, part 2
 - investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
 - get a wiki
 - document what all those *PID configuration variables are used for
-- document how to change localized strings using LOCAL_LANG
 - document the fields of the attendance record in the manual
 - move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation
 - feature for e-mail notification to the organizer once a seminar has enough attendances or is full
@@ -361,6 +360,9 @@ Not triaged yet
 - export events to other calendar extensions
 - export/import for mjseventpro
 - export/import for rlmp_eventdb and asfk_eventmanagement
+- export/import for julle_events
+- check rlmp_eventdb and asfk_eventmanagement for features that we should also have
+- check julle_events for features that we should also have
 - export events to http://www.uni-bonn.de/~career/termine_liste.php
 - FE export function: all future seminars formatted for inserting them into PageMaker (for the "basta" magazine)
 - integrate the "Feed-back-Fragebogen"
