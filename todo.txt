@@ -9,6 +9,7 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Version 0.4.3, 01/2006: dogfood, part 2
 ---------------------------------------
+- bug: at Web > Seminars > Update statistics, there is no number after "paid", and after "not paid", there is always the number of all attendances
 - investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
 - get a wiki
 - document what all those *PID configuration variables are used for
