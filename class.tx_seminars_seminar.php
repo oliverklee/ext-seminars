@@ -51,7 +51,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 *  This variable is only available directly after updateStatistics() has been called.
 	 *  It will go completely away once we have a configuration about whether to count
 	 *  only the paid or all attendances. */
-	var $numberOfAttendeesPaid = 0;
+	var $numberOfAttendancesPaid = 0;
 
 	/**
 	 * The constructor. Creates a seminar instance from a DB record.
@@ -828,7 +828,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getAttendancesPaid() {
-		return $this->numberOfAttendeesPaid;
+		return $this->numberOfAttendancesPaid;
 	}
 
 	/**
@@ -1295,14 +1295,14 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function updateStatistics() {
-		$numberOfAttendees = $this->countAttendances();
-		$numberOfAttendeesPaid = $this->countAttendances('(paid=1 OR datepaid!=0)');
+		$numberOfAttendances = $this->countAttendances();
+		$numberOfAttendancesPaid = $this->countAttendances('(paid=1 OR datepaid!=0)');
 
 		// We count paid and unpaid registrations.
 		// This behaviour will be configurable in a later version.
-		$this->seminarData['attendees'] = $numberOfAttendees;
+		$this->seminarData['attendees'] = $numberOfAttendances;
 		// Let's store the other result in case someone needs it.
-		$this->numberOfAttendeesPaid = $numberOfAttendeesPaid['num'];
+		$this->numberOfAttendancesPaid = $numberOfAttendancesPaid;
 
 		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
 		$this->seminarData['enough_attendees'] = ($this->getAttendances() >= $this->seminarData['attendees_min']) ? 1 : 0;
