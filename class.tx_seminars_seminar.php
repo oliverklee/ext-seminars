@@ -958,10 +958,36 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 	/**
 	 * Gets our organizers' names and e-mail addresses in the format
-	 *   Name <email@domain.com>
+	 * "John Doe <john.doe@example.com>".
+	 *
 	 * The name is not encoded yet.
 	 *
 	 * @return	array		the organizers' names and e-mail addresses
+	 *
+	 * @access	public
+	 */
+	function getOrganizersNameAndEmail() {
+		$result = array();
+
+		if ($this->hasOrganizers()) {
+			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
+			foreach ($organizersNumbers as $currentOrganizerNumber) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
+
+				if ($currentOrganizerData) {
+					$result[] = $currentOrganizerData['title'].' <'.$currentOrganizerData['email'].'>';
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets our organizers' e-mail addresses in the format
+	 * "john.doe@example.com".
+	 *
+	 * @return	array		the organizers' e-mail addresses
 	 *
 	 * @access	public
 	 */
@@ -974,7 +1000,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
 
 				if ($currentOrganizerData) {
-					$result[] = $currentOrganizerData['title'].' <'.$currentOrganizerData['email'].'>';
+					$result[] = $currentOrganizerData['email'];
 				}
 			}
 		}

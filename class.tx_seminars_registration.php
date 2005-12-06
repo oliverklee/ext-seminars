@@ -149,7 +149,8 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Gets the attendee's e-mail address
+	 * Gets the attendee's e-mail address in the format
+	 * "john.doe@example.com".
 	 *
 	 * @return	string		the attendee's e-mail address
 	 *
@@ -175,7 +176,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 
 	/**
 	 * Gets the attendee's name and e-mail address in the format
-	 * Name <address@provider.com>
+	 * "John Doe <john.doe@example.com>".
 	 *
 	 * @return	string		the attendee's name and e-mail address
 	 *
@@ -386,10 +387,13 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		$this->setMarkerContent('footer', $footers[0]);
 
 		$content = $this->substituteMarkerArrayCached('MAIL_THANKYOU');
-		$froms = $this->seminar->getOrganizersEmail();
+		$froms = $this->seminar->getOrganizersNameAndEmail();
 
+		// We use just the user's e-mail address as e-mail recipient
+		// as some SMTP servers cannot handle the format
+		// "John Doe <john.doe@example.com>".
 		t3lib_div::plainMailEncoded(
-			$this->getUserNameAndEmail(),
+			$this->getUserEmail(),
 			$this->pi_getLL('email_confirmationSubject').': '.$this->seminar->getTitleAndDate('-'),
 			$content,
 			// We just use the first organizer as sender
@@ -437,6 +441,9 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 
 		$content = $this->substituteMarkerArrayCached('MAIL_NOTIFICATION');
 
+		// We use just the organizer's e-mail address as e-mail recipient
+		// as some SMTP servers cannot handle the format
+		// "John Doe <john.doe@example.com>".
 		$organizers = $this->seminar->getOrganizersEmail();
 		foreach ($organizers as $currentOrganizerEmail) {
 			t3lib_div::plainMailEncoded(
