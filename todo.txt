@@ -207,6 +207,13 @@ Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and
 - allow to use the constants editor for values in plugin.tx_seminars
 - check whether we should remain "attendance" to "participant" or "attendee" in the localized strings (not in the DB field names, though)
 - investigate if we can benefit from joh_advbesearch
+- add FE editing for seminars
+- add FE editing for attendances
+- add FE editing for speakers
+- add FE editing for places
+- add FE editing for payment methods
+
+
 
 Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability and polish
 ----------------------------------------------------------------------------------------
