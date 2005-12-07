@@ -212,7 +212,7 @@ Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and
 - add FE editing for speakers
 - add FE editing for places
 - add FE editing for payment methods
-
+- mark more fields as excludefields
 
 
 Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability and polish
