@@ -259,6 +259,7 @@ Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability an
 - use singular for message_invalidNumberOfSeats if there is only 1 vacancy
 - change the online registration button label from "submit" to "sign on" or "register": LLL:EXT:frontendformslib/locallang.php:renderSubmitButtons_submit
 - change the online regitration buttons layout (they should be placed according to the OS UI design guidelines)
+- allow users to specify which price to pay (regular or special)
 
 
 Version 0.5.0, 08/2006 - "Getting real new features"
@@ -285,6 +286,7 @@ Version 0.5.0, 08/2006 - "Getting real new features"
 - make e-mail charset configurable
 - check that links in this extension work correctly on multilingual sites
 - write an article about this extension for the T3N magazine
+- payment reports on the BE (list by seminar: sum of money and who has paid how much with which payment method)
 
 
 Version 0.5.1, 09/2006 - "More back end features"
@@ -389,3 +391,4 @@ Not triaged yet
 - add configuration: maximum number of seats that can be registered for at one time
 - configuration: don't show the exakt number of vacancies, but only the rough state
 - feature: RSS or Atom feed for a list of seminars
+- feature: pay
