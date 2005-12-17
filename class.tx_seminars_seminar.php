@@ -940,9 +940,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = '';
 
 		if ($this->hasOrganizers()) {
-			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
-			foreach ($organizersNumbers as $currentOrganizerNumber) {
-				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
+			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			foreach ($organizerUids as $currentOrganizerUid) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
 				if ($currentOrganizerData) {
 					if (!empty($result)) {
@@ -970,9 +970,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = array();
 
 		if ($this->hasOrganizers()) {
-			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
-			foreach ($organizersNumbers as $currentOrganizerNumber) {
-				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
+			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			foreach ($organizerUids as $currentOrganizerUid) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
 				if ($currentOrganizerData) {
 					$result[] = $currentOrganizerData['title'].' <'.$currentOrganizerData['email'].'>';
@@ -995,9 +995,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = array();
 
 		if ($this->hasOrganizers()) {
-			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
-			foreach ($organizersNumbers as $currentOrganizerNumber) {
-				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
+			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			foreach ($organizerUids as $currentOrganizerUid) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
 				if ($currentOrganizerData) {
 					$result[] = $currentOrganizerData['email'];
@@ -1019,9 +1019,9 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = array();
 
 		if ($this->hasOrganizers()) {
-			$organizersNumbers = explode(',', $this->getSeminarsPropertyString('organizers'));
-			foreach ($organizersNumbers as $currentOrganizerNumber) {
-				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerNumber);
+			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			foreach ($organizerUids as $currentOrganizerUid) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
 				if ($currentOrganizerData) {
 					$result[] = $currentOrganizerData['email_footer'];
