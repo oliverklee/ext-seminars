@@ -394,3 +394,4 @@ Not triaged yet
 - add configuration: maximum number of seats that can be registered for at one time
 - configuration: don't show the exakt number of vacancies, but only the rough state
 - feature: RSS or Atom feed for a list of seminars
+- export seminar data as iCal (in the FE detailed view)
