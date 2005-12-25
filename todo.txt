@@ -45,9 +45,15 @@ Version 0.4.3, 01/2006: dogfood, part 2
 - *make it configurable whether to have the search box in the list view
 - *make it configurable whether to have the results browser in the list view
 - enter this extension into http://wiki.typo3.org/index.php/Calendar
+- extend copyright line to 2006
+- provide a general "bag" class from which a seminar bag or a attendance bag can inherit
+- move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
+
 
 Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sanity
 ----------------------------------------------------------------------------------
+- find out how to use the translation tool
+- test with Typo3 4.0 and make sure that it works
 - check that before every sql_fetch_assoc, there is an sql_num_rows to ensure that we have at least one row to operate on
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
 - factor out the statistics update into a common function and make it more efficient
@@ -61,7 +67,7 @@ Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - automatically update attendances title if a FE user has been entered or edited in the back end
 - automatically update attendances titles if a FE user has been entered or edited by sr_feuser_register
 - automatically update attendances titles if a seminar has been entered or edited in the back end
-- notification mail: Use the organizer as From: and the attendee as Reply-to: (if the anttendee's e-mail address is provided)
+- notification mail: Use the organizer as From: and the attendee as Reply-to: (if the attendee's e-mail address is provided)
 - add all organizers as Reply-To: in registration confirmation e-mail
 - fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
 - check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
@@ -92,12 +98,10 @@ Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - check whether umlauts in sender and recipient names are handled correctly
 - only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
 - use julle_encmailheaders for encoding mail headers
-- extend copyright line to 2006
 
 
 Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and documentation
 -------------------------------------------------------------------------------------------
-- test with Typo3 4.0 and make sure that it works
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
 - use array_key_exists() where possible
@@ -115,10 +119,8 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - include CSS file using TS (without PHP)
 - check for trailing spaces and tabs again
 - clean up the mess in mod1/
-- find out how to use the translation tool
 - investige the a4n_edit_locallang extension
 - add class diagram to the extension
-- provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
 - add fields "attendees_paid" and "attendees_unpaid" to the seminar record and fill them in updateStatistics()
 - add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
@@ -127,7 +129,6 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - check that constructors don't try to return any values
 - document how the templates work (labels, wrappers etc.)
 - move code from pi1/class.tx_seminars_pi1.php into separate class where it makes sense
-- move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
 - investigate whether we should have @package/@subpackage tags
 - add the CVS tag "dollar Id dollar" in the header comment of each document
 - check that all file names are 31 characters or shorter
@@ -141,6 +142,9 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - switch to UTF-8 so that we can also have Polish or Arabic localizations
 - sort out and unify the terminology: participant/participation/attendance/attendee/registration
 - remove the &$seminar parameter for pi1::getVacanciesClasses() (use $this->seminar instead)
+- investigate whether we should use Dynaflex forms on the BE
+- refactor seminar::getOrganizers*()
+- refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 
 
 Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
@@ -154,6 +158,7 @@ Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
 - re-check everything on the FE and BE for XHTML 1.0 strict validity
 - investigate XHTML 1.1
 
+
 Version 0.4.7, 05/2006 - "Make it fast": performance
 ----------------------------------------------------
 - cache speaker data
@@ -162,12 +167,11 @@ Version 0.4.7, 05/2006 - "Make it fast": performance
 - in the seminar class, make the organizer, speaker, site, and payment methods caches singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/>
 - optimize the DB queries
 - check what parts of the FE plugin can be cached
-- refactor seminar::getOrganizers*()
-- refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate performance improvements when using caching or singletons in the template helper class
 - cache BE page access rights when showing edit buttons for attendances
 - test with PHP 5 (once Ubuntu 6.04 has been released and suphp supports PHP 5)
 - add automated tests using T3unit (requires PHP5)
+
 
 Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and polish
 ---------------------------------------------------------------------------------------
@@ -193,7 +197,6 @@ Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and
 - in the back end, remove many checkboxes next to text fields
 - for all homepage fields, add http:// and / after editing if it has been left out
 - function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online)
-- Add/fix flexforms support for plugin.tx_seminars_pi1.generalPriceInList and plugin.tx_seminars_pi1.generalPriceInSingle
 - use flexforms as much as possible
 - make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender)
 - allow different hours for multi-day events
@@ -206,14 +209,14 @@ Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and
 - in the selector for payment methods in the attendance record, only show/allow payment methods that have been set as allowed in the corresponding seminar
 - in the "new page content" wizard, show this extension (instead of as just another plugin)
 - allow to use the constants editor for values in plugin.tx_seminars
-- check whether we should remain "attendance" to "participant" or "attendee" in the localized strings (not in the DB field names, though)
+- check whether we should rename "attendance" to "participant" or "attendee" in the localized strings (not in the DB field names, though)
 - investigate if we can benefit from joh_advbesearch
 - add FE editing for seminars
 - add FE editing for attendances
 - add FE editing for speakers
 - add FE editing for places
 - add FE editing for payment methods
-- mark more fields as excludefields
+- add a graphical display of the number of attendances in the BE seminar list (a colored bar)
 
 
 Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability and polish
@@ -258,7 +261,7 @@ Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability an
 - on the thank you page, provide a link to the list view or to the single view
 - use singular for message_invalidNumberOfSeats if there is only 1 vacancy
 - change the online registration button label from "submit" to "sign on" or "register": LLL:EXT:frontendformslib/locallang.php:renderSubmitButtons_submit
-- change the online regitration buttons layout (they should be placed according to the OS UI design guidelines)
+- change the online registration buttons layout (they should be placed according to the OS UI design guidelines)
 - allow users to specify which price to pay (regular or special)
 
 
@@ -323,6 +326,8 @@ Version 0.6.0, 12/2006 - "Great new FE and BE features"
 - switch localization files to XML
 - Spanish localization
 - French localization
+- Polish localization
+- Italian localization
 - feature: room manager
 - add further back end statistics:
   - list of sites and which seminars take place there
@@ -334,7 +339,6 @@ Version 0.6.0, 12/2006 - "Great new FE and BE features"
 - have the documentation proofread
 - display picture of speakers on seminar page
 - in pi1, implement the default sort order (by begin date) using TCA
-- move the global configuration into constants and make them configurable using the constants editor
 
 Version 0.7.0, 01/2007
 ----------------------
@@ -373,8 +377,7 @@ Not triaged yet
 - export/import for mjseventpro
 - export/import for rlmp_eventdb and asfk_eventmanagement
 - export/import for julle_events
-- check rlmp_eventdb and asfk_eventmanagement for features that we should also have
-- check julle_events for features that we should also have
+- check rlmp_eventdb, asfk_eventmanagement, julle_events and mjseventpro for features that we should also have
 - export events to http://www.uni-bonn.de/~career/termine_liste.php
 - FE export function: all future seminars formatted for inserting them into PageMaker (for the "basta" magazine)
 - integrate the "Feed-back-Fragebogen"
@@ -386,9 +389,8 @@ Not triaged yet
 - feature: assign FE user to a speaker record
 - feature: for a speaker, list the seminars which he/she holds (when the corresponding FE user or an organizer is logged in)
 - feature: allow group registrations (so that one person can register a group a participants from e.g. a company)
-- export attendance records as bar codes
-- attendance record: if there is no name, use first and last name
+- export attendance records as bar codes (ask the Fachschaft Informatik Bonn how they do this for their parties)
+- attendance record: if there is no name, use first and last name (this needs sr_feuser_register to be installed)
 - add configuration: maximum number of seats that can be registered for at one time
 - configuration: don't show the exakt number of vacancies, but only the rough state
 - feature: RSS or Atom feed for a list of seminars
-- feature: pay
