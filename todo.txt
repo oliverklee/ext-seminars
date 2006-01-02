@@ -98,6 +98,7 @@ Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - check whether umlauts in sender and recipient names are handled correctly
 - only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
 - use julle_encmailheaders for encoding mail headers
+- change all occurances of header(string string) to header (string string, bool replace, int http_response_code)
 
 
 Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and documentation
@@ -145,6 +146,7 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - investigate whether we should use Dynaflex forms on the BE
 - refactor seminar::getOrganizers*()
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
+- investigate whether we should use tslib_fe::pageNotFoundHandler
 
 
 Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
