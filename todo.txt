@@ -7,7 +7,7 @@ If you find any bugs in this extension, please report them in the Typo3 bugtrack
 
 Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please pay for the author's time.
 
-Version 0.4.3, 01/2006: dogfood, part 2
+Version 0.4.4, 01/2006: dogfood, part 2
 ---------------------------------------
 --> All bugs marked with a star (*) are entered to the bugtracker!
 - bug: at Web > Seminars > Update statistics, there is no number after "paid", and after "not paid", there is always the number of all attendances
@@ -50,7 +50,7 @@ Version 0.4.3, 01/2006: dogfood, part 2
 - move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
 
 
-Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sanity
+Version 0.4.5, 02/2006 - "Make it safer to use": safety, data integrity and sanity
 ----------------------------------------------------------------------------------
 - find out how to use the translation tool
 - test with Typo3 4.0 and make sure that it works
@@ -101,7 +101,7 @@ Version 0.4.4, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - change all occurances of header(string string) to header (string string, bool replace, int http_response_code)
 
 
-Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and documentation
+Version 0.4.6, 03/2006 - "Make it nice for developers": code clean-up, qa and documentation
 -------------------------------------------------------------------------------------------
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
@@ -149,7 +149,7 @@ Version 0.4.5, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - investigate whether we should use tslib_fe::pageNotFoundHandler
 
 
-Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
+Version 0.4.7, 04/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
 - clean up code from pibase (search box, results browser)
 - remove layout tables from the search box
@@ -161,7 +161,7 @@ Version 0.4.6, 04/2006 - "Make it for everybody": accessibility
 - investigate XHTML 1.1
 
 
-Version 0.4.7, 05/2006 - "Make it fast": performance
+Version 0.4.8, 05/2006 - "Make it fast": performance
 ----------------------------------------------------
 - cache speaker data
 - cache site data
@@ -175,7 +175,7 @@ Version 0.4.7, 05/2006 - "Make it fast": performance
 - add automated tests using T3unit (requires PHP5)
 
 
-Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and polish
+Version 0.4.9, 06/2006 - "Make it nice for the BE users": back end usability and polish
 ---------------------------------------------------------------------------------------
 - move the "seminar is cancelled" checkbox further up in the BE form
 - bug: BE search doesn't find attendance titles
@@ -221,7 +221,7 @@ Version 0.4.8, 06/2006 - "Make it nice for the BE users": back end usability and
 - add a graphical display of the number of attendances in the BE seminar list (a colored bar)
 
 
-Version 0.4.9, 07/2006 - "Make it nice for the visitors": front end usability and polish
+Version 0.4.10, 07/2006 - "Make it nice for the visitors": front end usability and polish
 ----------------------------------------------------------------------------------------
 - option to hide seminar without vacancies in the list view
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
