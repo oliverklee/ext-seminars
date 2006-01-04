@@ -169,6 +169,7 @@ Version 0.4.8, 05/2006 - "Make it fast": performance
 - in the seminar class, make the organizer, speaker, site, and payment methods caches singleton to improve performance <http://www.phppatterns.com/index.php/article/articleview/6/1/1/>
 - optimize the DB queries
 - check what parts of the FE plugin can be cached
+- investigate whether we can use the Typo3 internal cache to cache some things
 - investigate performance improvements when using caching or singletons in the template helper class
 - cache BE page access rights when showing edit buttons for attendances
 - test with PHP 5 (once Ubuntu 6.04 has been released and suphp supports PHP 5)
