@@ -220,6 +220,8 @@ Version 0.4.9, 06/2006 - "Make it nice for the BE users": back end usability and
 - add FE editing for places
 - add FE editing for payment methods
 - add a graphical display of the number of attendances in the BE seminar list (a colored bar)
+- add more BE examples to the manual
+- add more BE screenshots to the manual
 
 
 Version 0.4.10, 07/2006 - "Make it nice for the visitors": front end usability and polish
@@ -266,6 +268,8 @@ Version 0.4.10, 07/2006 - "Make it nice for the visitors": front end usability a
 - change the online registration button label from "submit" to "sign on" or "register": LLL:EXT:frontendformslib/locallang.php:renderSubmitButtons_submit
 - change the online registration buttons layout (they should be placed according to the OS UI design guidelines)
 - allow users to specify which price to pay (regular or special)
+- add more FE examples to the manual
+- add more FE screenshots to the manual
 
 
 Version 0.5.0, 08/2006 - "Getting real new features"
