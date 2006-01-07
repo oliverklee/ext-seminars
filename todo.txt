@@ -7,6 +7,8 @@ If you find any bugs in this extension, please report them in the Typo3 bugtrack
 
 Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please pay for the author's time.
 
+Hint regarding the items marked with [from dev-meeting 05/12], they got discussed on the developers meeting that took place at the end of 2005. Details about these points can be read in the notices of this meeting wich can be found at http://www.rimann.li/fileadmin/mario/typo3/Dev_Meeting_0512_060101.pdf (sorry, German only. If you have questions please ask.)
+
 Version 0.4.4, 01/2006: dogfood, part 2
 ---------------------------------------
 --> All bugs marked with a star (*) are entered to the bugtracker!
@@ -37,6 +39,7 @@ Version 0.4.4, 01/2006: dogfood, part 2
   - *define the table-structure
   - *create a function to write to the db
   - *create a function in /mod2 to view the log (standard view, verbose view)
+  - investigate if the sys_log table can be used to store the extension's log [from dev-meeting 05/12]
 - *add field "event number" (UID) to list view, detailed view and e-mails
 - *create a new template for sr_feuser_register with CSS
 - *make the default sort order for the list view configurable
@@ -48,6 +51,8 @@ Version 0.4.4, 01/2006: dogfood, part 2
 - extend copyright line to 2006
 - provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 - move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
+- Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
+- Add categorization of events [from dev-meeting 05/12]
 
 
 Version 0.4.5, 02/2006 - "Make it safer to use": safety, data integrity and sanity
@@ -147,7 +152,7 @@ Version 0.4.6, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - refactor seminar::getOrganizers*()
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate whether we should use tslib_fe::pageNotFoundHandler
-
+- Beautify the code in the manual [from dev-meeting 05/12]
 
 Version 0.4.7, 04/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
@@ -222,6 +227,7 @@ Version 0.4.9, 06/2006 - "Make it nice for the BE users": back end usability and
 - add a graphical display of the number of attendances in the BE seminar list (a colored bar)
 - add more BE examples to the manual
 - add more BE screenshots to the manual
+- show the status of registrations with color and graphical (progress bar) in BE lists [from dev-meeting 05/12]
 
 
 Version 0.4.10, 07/2006 - "Make it nice for the visitors": front end usability and polish
@@ -270,6 +276,7 @@ Version 0.4.10, 07/2006 - "Make it nice for the visitors": front end usability a
 - allow users to specify which price to pay (regular or special)
 - add more FE examples to the manual
 - add more FE screenshots to the manual
+- Check if we can/should use TemplaVoila before 0.5.0 [from dev-meeting 05/12]
 
 
 Version 0.5.0, 08/2006 - "Getting real new features"
@@ -392,7 +399,6 @@ Not triaged yet
 - feature: users can rate a seminar after it has taken place
 - for a speaker, show all past seminar ratings and the average rating
 - feature: also notify speakers when one of their seminar has enough participants, is full etc.
-- feature: sub-seminars (see bugtracker)
 - feature: assign FE user to a speaker record
 - feature: for a speaker, list the seminars which he/she holds (when the corresponding FE user or an organizer is logged in)
 - feature: allow group registrations (so that one person can register a group a participants from e.g. a company)
@@ -402,3 +408,23 @@ Not triaged yet
 - configuration: don't show the exakt number of vacancies, but only the rough state
 - feature: RSS or Atom feed for a list of seminars
 - export seminar data as iCal (in the FE detailed view)
+- Add function to search for location of an event [from dev-meeting 05/12]
+  - Split the address field to three single fields: address (street), zip, town [from dev-meeting 05/12]
+- BE: Add export function for participants list (CSV) [from dev-meeting 05/12]
+- Move past events to an other sysfolder (see EXT:mjs_event) [from dev-meeting 05/12]
+- Add timeslot-functionality [from dev-meeting 05/12]
+  - allow open ended events [from dev-meeting 05/12]
+- feature: Let the user select it's price (normal / reduced) and save the price in the registration record [from dev-meeting 05/12]
+- feature: Add pricing engine [from dev-meeting 05/12]
+- feature: Let's have events with sub-events [from dev-meeting 05/12] (already in Bugtracker)
+- feature: Allow anonymous registration to an event [from dev-meeting 05/12]
+- Remove all university specific stuff and move it to a separate extension (add on to main extension) [from dev-meeting 05/12]
+- Change functions that just get informations to also get info about deleted accounts [from dev-meeting 05/12]
+- Stop users from deleting their account if still registered to an event [from dev-meeting 05/12]
+- Make the mobile number a required field for fe_users [from dev-meeting 05/12]
+- Investigate wich problems the too long filenames can cause [from dev-meeting 05/12]
+- Start working with unit testing on this extension [from dev-meeting 05/12]
+- Change the FlexForm Checkboxes to Selectorboxes allowing to have the value of 0 (zero) [from dev-meeting 05/12]
+- feature: show alternative events (same event, other date/time) in FE [from dev-meeting 05/12]
+- "Translate" all locallang files to new XML format [from dev-meeting 05/12]
+- feature: Add a registration transfer module in BE [from dev-meeting 05/12]
