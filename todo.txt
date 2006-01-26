@@ -153,6 +153,7 @@ Version 0.4.6, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate whether we should use tslib_fe::pageNotFoundHandler
 - Beautify the code in the manual [from dev-meeting 05/12]
+- add UML diagrams for the DB structure
 
 Version 0.4.7, 04/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
@@ -428,3 +429,4 @@ Not triaged yet
 - feature: show alternative events (same event, other date/time) in FE [from dev-meeting 05/12]
 - "Translate" all locallang files to new XML format [from dev-meeting 05/12]
 - feature: Add a registration transfer module in BE [from dev-meeting 05/12]
+- calendar view
