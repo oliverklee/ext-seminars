@@ -47,7 +47,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Displays the seminar manager HTML.
 	 *
-	 * @param	string		Default content string, ignore
+	 * @param	string		default content string, ignore
 	 * @param	array		TypoScript configuration for the plugin
 	 *
 	 * @return	string		HTML for the plugin
