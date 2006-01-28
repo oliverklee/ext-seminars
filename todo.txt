@@ -156,6 +156,8 @@ Version 0.4.6, 03/2006 - "Make it nice for developers": code clean-up, qa and do
 - Beautify the code in the manual [from dev-meeting 05/12]
 - add UML diagrams for the DB structure
 - reduce code duplication in seminar::getPaymentMethods*
+- in the registration class, use $this->tableName instead of $this->tableAttendances
+- in the seminar class, use $this->tableName instead of $this->tableSeminars
 
 Version 0.4.7, 04/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
