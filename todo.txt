@@ -72,7 +72,7 @@ Version 0.4.5, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - automatically update attendances title if a FE user has been entered or edited in the back end
 - automatically update attendances titles if a FE user has been entered or edited by sr_feuser_register
 - automatically update attendances titles if a seminar has been entered or edited in the back end
-- notification mail: Use the organizer as From: and the attendee as Reply-to: (if the attendee's e-mail address is provided)
+- notification e-mail: Use the organizer as From: and the attendee as Reply-to: (if the attendee's e-mail address is provided)
 - add all organizers as Reply-To: in registration confirmation e-mail
 - fix URLs : &amp; -> &, ?& -> ?, & -> &amp; (should probably be done in the salutation switcher)
 - check whether frontendformslib use unencoded ampersands in the URL and provide a patch if necessary
@@ -102,7 +102,7 @@ Version 0.4.5, 02/2006 - "Make it safer to use": safety, data integrity and sani
 - investigate on what happens if a FE user account is deleted
 - check whether umlauts in sender and recipient names are handled correctly
 - only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
-- use julle_encmailheaders for encoding mail headers
+- use julle_encmailheaders for encoding e-mail headers
 - change all occurances of header(string string) to header (string string, bool replace, int http_response_code)
 - $result is appended to although it isn't initialized yet in seminar::getPaymentMethods*
 - *seminars without a date should automatically have no times set
@@ -199,17 +199,17 @@ Version 0.4.9, 06/2006 - "Make it nice for the BE users": back end usability and
 - investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars
 - investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees
 - separate date and time fields for seminars and provide a conversion feature
-- in notification mail, show user's date of birth as a formatted date instead of an integer
-- in notification mail, show user's status as a string instead of an integer
+- in notification e-mail, show user's date of birth as a formatted date instead of an integer
+- in notification e-mail, show user's status as a string instead of an integer
 - in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
 - disable the "save and view" button for all our records (as they are not treated as regular content elements)
 - add different icons
 - make the back end forms prettier and clean them up (using TCA.php)
 - in the back end, remove many checkboxes next to text fields
 - for all homepage fields, add http:// and / after editing if it has been left out
-- function to add the http:// and the trailing slash to URLs if they are missing (for mails to participants and links online)
+- function to add the http:// and the trailing slash to URLs if they are missing (for e-mails to participants and links online)
 - use flexforms as much as possible
-- make notification mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender)
+- make notification e-mails to organizers prettier, e.g. using localized labels and decoding some numerical values (yes/no, professional status, gender)
 - allow different hours for multi-day events
 - investigate whether organizers, speakers and seminar sites can be created directly from within the seminar record
 - provide tooltips where it makes sense, e.g. in the "create new record" list
@@ -314,7 +314,7 @@ Version 0.5.1, 09/2006 - "More back end features"
 - Define all possible states of an event (in planning, open for registration, cancelled)
 - Feature: Create the select user functionality in the BE
 - Feature: Create the list / select possibility for an attendance of a user in the BE
-- Feature: Create a unified mail function for the BE SubModules
+- Feature: Create a unified e-mail function for the BE SubModules
 - Investigate on how the payment-workflow could be optimized.
 
 Version 0.5.2, 10/2006 - "The Back end fight :-)"

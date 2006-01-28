@@ -327,7 +327,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Send a mail to the attendee, thanking him/her for registering for an event.
+	 * Send an e-mail to the attendee, thanking him/her for registering for an event.
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
@@ -405,7 +405,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Send a mail to all organizers, notifying them of the registration
+	 * Send an e-mail to all organizers, notifying them of the registration
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
