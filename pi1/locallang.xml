@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Locallang labels for tx_seminars/pi1</description>
+        <type>module</type>
+        <fileId>EXT:seminars/pi1/locallang.xml</fileId>
+        <labelContext type="array">
+            <label index="seminars.pi_flexform.sheet_general"></label>
+            <label index="seminars.pi_flexform.what_to_display"></label>
+            <label index="seminars.pi_flexform.sheet_template_and_special"></label>
+            <label index="seminars.pi_flexform.seminar_list"></label>
+            <label index="seminars.pi_flexform.my_seminars"></label>
+            <label index="seminars.pi_flexform.seminar_registration"></label>
+            <label index="seminars.pi_flexform.baseURL"></label>
+            <label index="seminars.pi_flexform.listPID"></label>
+            <label index="seminars.pi_flexform.loginPID"></label>
+            <label index="seminars.pi_flexform.registerPID"></label>
+            <label index="seminars.pi_flexform.salutation"></label>
+            <label index="seminars.pi_flexform.formal"></label>
+            <label index="seminars.pi_flexform.informal"></label>
+            <label index="seminars.pi_flexform.templateFile"></label>
+            <label index="seminars.pi_flexform.cssFile"></label>
+            <label index="seminars.pi_flexform.timeframeInList"></label>
+            <label index="seminars.pi_flexform.timeframeInList1"></label>
+            <label index="seminars.pi_flexform.timeframeInList2"></label>
+            <label index="seminars.pi_flexform.timeframeInList3"></label>
+            <label index="seminars.pi_flexform.timeframeInList4"></label>
+            <label index="seminars.pi_flexform.timeframeInList5"></label>
+            <label index="seminars.pi_flexform.timeframeInList6"></label>
+            <label index="seminars.pi_flexform.timeframeInList7"></label>
+            <label index="seminars.pi_flexform.hideFields"></label>
+            <label index="seminars.pi_flexform.hideColumns"></label>
+            <label index="seminars.pi_flexform.generalPriceInList"></label>
+            <label index="seminars.pi_flexform.generalPriceInSingle"></label>
+            <label index="seminars.pi_flexform.showRegistrationFields"></label>
+            <label index="pi_list_browseresults_prev"></label>
+            <label index="pi_list_browseresults_page"></label>
+            <label index="pi_list_browseresults_next"></label>
+            <label index="pi_list_browseresults_displays"></label>
+            <label index="pi_list_browseresults_noResults"></label>
+            <label index="pi_list_searchBox_search"></label>
+            <label index="label_title"></label>
+            <label index="label_accreditation_number"></label>
+            <label index="label_credit_points"></label>
+            <label index="label_date"></label>
+            <label index="label_time"></label>
+            <label index="label_place"></label>
+            <label index="label_room"></label>
+            <label index="label_speakers"></label>
+            <label index="label_price_general"></label>
+            <label index="label_price_regular"></label>
+            <label index="label_price_special"></label>
+            <label index="label_paymentmethods"></label>
+            <label index="label_organizers"></label>
+            <label index="label_vacancies"></label>
+            <label index="label_deadline_registration"></label>
+            <label index="label_registration"></label>
+            <label index="label_back"></label>
+            <label index="label_onlineRegistration"></label>
+            <label index="label_registrationForm"></label>
+            <label index="label_thankyou"></label>
+            <label index="message_wrongSeminarNumber"></label>
+            <label index="message_noResults"></label>
+            <label index="message_registrationForm"></label>
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="seminars.pi_flexform.sheet_general">General</label>
+            <label index="seminars.pi_flexform.what_to_display">What should be displayed:</label>
+            <label index="seminars.pi_flexform.sheet_template_and_special">Templates and special properties</label>
+            <label index="seminars.pi_flexform.seminar_list">Seminar List</label>
+            <label index="seminars.pi_flexform.my_seminars">My Seminars</label>
+            <label index="seminars.pi_flexform.seminar_registration">Seminar registration</label>
+            <label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
+            <label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
+            <label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
+            <label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
+            <label index="seminars.pi_flexform.salutation">Salutation mode on the page:</label>
+            <label index="seminars.pi_flexform.formal">formal</label>
+            <label index="seminars.pi_flexform.informal">informal</label>
+            <label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
+            <label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
+            <label index="seminars.pi_flexform.timeframeInList">Only show events from this timeframe:</label>
+            <label index="seminars.pi_flexform.timeframeInList1">all events</label>
+            <label index="seminars.pi_flexform.timeframeInList2">past events</label>
+            <label index="seminars.pi_flexform.timeframeInList3">past and current events</label>
+            <label index="seminars.pi_flexform.timeframeInList4">current events</label>
+            <label index="seminars.pi_flexform.timeframeInList5">current and upcoming events</label>
+            <label index="seminars.pi_flexform.timeframeInList6">upcoming events</label>
+            <label index="seminars.pi_flexform.timeframeInList7">events with the deadline in the future</label>
+            <label index="seminars.pi_flexform.hideFields">Hide fields in detailed view (comma-separated):</label>
+            <label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
+            <label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
+            <label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>
+            <label index="seminars.pi_flexform.showRegistrationFields">Show text input fields for online registration (comma-separated):</label>
+            <label index="pi_list_browseresults_prev">&lt; Previous</label>
+            <label index="pi_list_browseresults_page">Page</label>
+            <label index="pi_list_browseresults_next">Next &gt;</label>
+            <label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
+            <label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
+            <label index="pi_list_searchBox_search">Search</label>
+            <label index="label_title">Title</label>
+            <label index="label_accreditation_number">Accreditation number</label>
+            <label index="label_credit_points">Credit points</label>
+            <label index="label_date">Date</label>
+            <label index="label_time">Time</label>
+            <label index="label_place">Place</label>
+            <label index="label_room">Room</label>
+            <label index="label_speakers">Speakers</label>
+            <label index="label_price_general">Price</label>
+            <label index="label_price_regular">Regular price</label>
+            <label index="label_price_special">Special price</label>
+            <label index="label_paymentmethods">Available methods of payment</label>
+            <label index="label_organizers">Organizers</label>
+            <label index="label_vacancies">Vacancies</label>
+            <label index="label_deadline_registration">Deadline for registration</label>
+            <label index="label_registration">Registration</label>
+            <label index="label_back">Back to listing</label>
+            <label index="label_onlineRegistration">Register online</label>
+            <label index="label_registrationForm">Registration data</label>
+            <label index="label_thankyou">Thank you for your registration. A confirmation e-mail has been sent. We are looking forward to your attendance.</label>
+            <label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
+            <label index="message_noResults">Sorry, currently no events could be found.</label>
+            <label index="message_registrationForm">If you like, you can enter some data for your registration here:</label>
+        </languageKey>
+        <languageKey index="dk" type="array">
+            <label index="pi_list_browseresults_prev">&lt; Forrige</label>
+            <label index="pi_list_browseresults_page">Side</label>
+            <label index="pi_list_browseresults_next">Næste &gt;</label>
+            <label index="pi_list_browseresults_displays">Viser resultaterne ###SPAN_BEGIN###%s til %s&lt;/span&gt; ud af ###SPAN_BEGIN###%s&lt;/span&gt;</label>
+            <label index="pi_list_searchBox_search">Søg</label>
+            <label index="label_back">Tilbage</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="seminars.pi_flexform.sheet_general">Allgemein</label>
+            <label index="seminars.pi_flexform.what_to_display">Was soll angezeigt werden:</label>
+            <label index="seminars.pi_flexform.sheet_template_and_special">Templates und spezielle Einstellungen</label>
+            <label index="seminars.pi_flexform.seminar_list">Seminarliste</label>
+            <label index="seminars.pi_flexform.my_seminars">Meine Seminare</label>
+            <label index="seminars.pi_flexform.seminar_registration">Seminaranmeldung</label>
+            <label index="seminars.pi_flexform.baseURL">Basis-URL dieser Typo3-Site, z.B. http://www.mytypo3site.net/:</label>
+            <label index="seminars.pi_flexform.listPID">Seite mit der Seminarliste:</label>
+            <label index="seminars.pi_flexform.loginPID">Seite mit dem Login-Formular:</label>
+            <label index="seminars.pi_flexform.registerPID">Seite mit der Seminaranmeldung:</label>
+            <label index="seminars.pi_flexform.salutation">Anredeform auf der Seite:</label>
+            <label index="seminars.pi_flexform.formal">formell</label>
+            <label index="seminars.pi_flexform.informal">informell</label>
+            <label index="seminars.pi_flexform.templateFile">Dateiname des HTML-Templates:</label>
+            <label index="seminars.pi_flexform.cssFile">Dateiname des CSS-Stylesheets:</label>
+            <label index="seminars.pi_flexform.timeframeInList">Nur Veranstaltungen aus diesem Zeitabschnitt zeigen:</label>
+            <label index="seminars.pi_flexform.timeframeInList1">alle Veranstaltungen</label>
+            <label index="seminars.pi_flexform.timeframeInList2">vergangene Veranstaltungen</label>
+            <label index="seminars.pi_flexform.timeframeInList3">vergangene und laufende Veranstaltungen</label>
+            <label index="seminars.pi_flexform.timeframeInList4">laufende Veranstaltungen</label>
+            <label index="seminars.pi_flexform.timeframeInList5">laufende und zukünftige Veranstaltungen</label>
+            <label index="seminars.pi_flexform.timeframeInList6">zukünftige Veranstaltungen</label>
+            <label index="seminars.pi_flexform.timeframeInList7">Veranstaltungen mit Anmeldeschluss in der Zukunft</label>
+            <label index="seminars.pi_flexform.hideFields">Versteckte Felder in Detailansicht (komma-separiert):</label>
+            <label index="seminars.pi_flexform.hideColumns">Versteckte Felder in Listenansicht (komma-separiert):</label>
+            <label index="seminars.pi_flexform.generalPriceInList">&quot;Preis&quot; als Überschrift für den Standardpreis in der Listenansicht benutzen:</label>
+            <label index="seminars.pi_flexform.generalPriceInSingle">&quot;Preis&quot; als Überschrift für den Standardpreis in der Einzelansicht und bei der Anmeldung benutzen:</label>
+            <label index="seminars.pi_flexform.showRegistrationFields">Angezeigte Text-Input-Felder bei Online-Anmeldung (komma-separiert):</label>
+            <label index="pi_list_browseresults_prev">&lt; Vorherige</label>
+            <label index="pi_list_browseresults_page">Seite</label>
+            <label index="pi_list_browseresults_next">Nächste &gt;</label>
+            <label index="pi_list_browseresults_displays">Zeige Ergebnisse ###SPAN_BEGIN###%s bis %s&lt;/span&gt; von ###SPAN_BEGIN###%s&lt;/span&gt;</label>
+            <label index="pi_list_browseresults_noResults">Es wurden leider keine Veranstaltungen gefunden, die den Suchkriterien entsprechen.</label>
+            <label index="pi_list_searchBox_search">Suchen</label>
+            <label index="label_title">Titel</label>
+            <label index="label_accreditation_number">Akkreditierungsnummer</label>
+            <label index="label_credit_points">Leistungspunkte</label>
+            <label index="label_date">Datum</label>
+            <label index="label_time">Zeit</label>
+            <label index="label_place">Ort</label>
+            <label index="label_room">Raum</label>
+            <label index="label_speakers">ReferentInnen</label>
+            <label index="label_price_general">Preis</label>
+            <label index="label_price_regular">Standardpreis</label>
+            <label index="label_price_special">Spezialpreis</label>
+            <label index="label_paymentmethods">Mögliche Zahlungsarten</label>
+            <label index="label_organizers">Veranstalter</label>
+            <label index="label_vacancies">Freie Plätze</label>
+            <label index="label_deadline_registration">Anmeldeschluss</label>
+            <label index="label_registration">Anmeldung</label>
+            <label index="label_onlineRegistration">Online anmelden</label>
+            <label index="label_back">Zur Übersicht</label>
+            <label index="label_registrationForm">Anmeldedaten</label>
+            <label index="label_thankyou">Vielen Dank für Ihre Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.</label>
+            <label index="label_thankyou_informal">Vielen Dank für deine Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf dich und wünschen dir viel Erfolg bei der Veranstaltung.</label>
+            <label index="message_wrongSeminarNumber">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
+            <label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
+            <label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
+            <label index="message_registrationForm">Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:</label>
+            <label index="message_registrationForm_informal">Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:</label>
+        </languageKey>
+        <languageKey index="no" type="array">
+        </languageKey>
+        <languageKey index="it" type="array">
+        </languageKey>
+        <languageKey index="fr" type="array">
+        </languageKey>
+        <languageKey index="es" type="array">
+        </languageKey>
+        <languageKey index="nl" type="array">
+        </languageKey>
+        <languageKey index="cz" type="array">
+        </languageKey>
+        <languageKey index="pl" type="array">
+        </languageKey>
+        <languageKey index="si" type="array">
+        </languageKey>
+        <languageKey index="fi" type="array">
+        </languageKey>
+        <languageKey index="tr" type="array">
+        </languageKey>
+        <languageKey index="se" type="array">
+        </languageKey>
+        <languageKey index="pt" type="array">
+        </languageKey>
+        <languageKey index="ru" type="array">
+        </languageKey>
+        <languageKey index="ro" type="array">
+        </languageKey>
+        <languageKey index="ch" type="array">
+        </languageKey>
+        <languageKey index="sk" type="array">
+        </languageKey>
+        <languageKey index="lt" type="array">
+        </languageKey>
+        <languageKey index="is" type="array">
+        </languageKey>
+        <languageKey index="hr" type="array">
+        </languageKey>
+        <languageKey index="hu" type="array">
+        </languageKey>
+        <languageKey index="gl" type="array">
+        </languageKey>
+        <languageKey index="th" type="array">
+        </languageKey>
+        <languageKey index="gr" type="array">
+        </languageKey>
+        <languageKey index="hk" type="array">
+        </languageKey>
+        <languageKey index="eu" type="array">
+        </languageKey>
+        <languageKey index="bg" type="array">
+        </languageKey>
+        <languageKey index="br" type="array">
+        </languageKey>
+        <languageKey index="et" type="array">
+        </languageKey>
+        <languageKey index="ar" type="array">
+        </languageKey>
+        <languageKey index="he" type="array">
+        </languageKey>
+        <languageKey index="ua" type="array">
+        </languageKey>
+        <languageKey index="lv" type="array">
+        </languageKey>
+        <languageKey index="jp" type="array">
+        </languageKey>
+        <languageKey index="vn" type="array">
+        </languageKey>
+        <languageKey index="ca" type="array">
+        </languageKey>
+        <languageKey index="ba" type="array">
+        </languageKey>
+        <languageKey index="kr" type="array">
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="default" type="array">
+            <label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
+            <label index="seminars.pi_flexform.what_to_display" type="integer">97910403</label>
+            <label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
+            <label index="seminars.pi_flexform.seminar_list" type="integer">32827865</label>
+            <label index="seminars.pi_flexform.my_seminars" type="integer">18363047</label>
+            <label index="seminars.pi_flexform.seminar_registration" type="integer">250098610</label>
+            <label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
+            <label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
+            <label index="seminars.pi_flexform.loginPID" type="integer">140600031</label>
+            <label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
+            <label index="seminars.pi_flexform.salutation" type="integer">166511775</label>
+            <label index="seminars.pi_flexform.formal" type="integer">211667739</label>
+            <label index="seminars.pi_flexform.informal" type="integer">63642221</label>
+            <label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
+            <label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
+            <label index="seminars.pi_flexform.timeframeInList" type="integer">211332464</label>
+            <label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
+            <label index="seminars.pi_flexform.timeframeInList2" type="integer">36274015</label>
+            <label index="seminars.pi_flexform.timeframeInList3" type="integer">75911135</label>
+            <label index="seminars.pi_flexform.timeframeInList4" type="integer">236007007</label>
+            <label index="seminars.pi_flexform.timeframeInList5" type="integer">21658511</label>
+            <label index="seminars.pi_flexform.timeframeInList6" type="integer">52218414</label>
+            <label index="seminars.pi_flexform.timeframeInList7" type="integer">187059203</label>
+            <label index="seminars.pi_flexform.hideFields" type="integer">25256911</label>
+            <label index="seminars.pi_flexform.hideColumns" type="integer">70702598</label>
+            <label index="seminars.pi_flexform.generalPriceInList" type="integer">150285299</label>
+            <label index="seminars.pi_flexform.generalPriceInSingle" type="integer">30481588</label>
+            <label index="seminars.pi_flexform.showRegistrationFields" type="integer">128589369</label>
+            <label index="pi_list_browseresults_prev" type="integer">20121992</label>
+            <label index="pi_list_browseresults_page" type="integer">26464201</label>
+            <label index="pi_list_browseresults_next" type="integer">232350798</label>
+            <label index="pi_list_browseresults_displays" type="integer">152851483</label>
+            <label index="pi_list_browseresults_noResults" type="integer">210107189</label>
+            <label index="pi_list_searchBox_search" type="integer">20138052</label>
+            <label index="label_title" type="integer">192455458</label>
+            <label index="label_accreditation_number" type="integer">251981191</label>
+            <label index="label_credit_points" type="integer">267941596</label>
+            <label index="label_date" type="integer">71780721</label>
+            <label index="label_time" type="integer">175559919</label>
+            <label index="label_place" type="integer">129617664</label>
+            <label index="label_room" type="integer">214150095</label>
+            <label index="label_speakers" type="integer">258305227</label>
+            <label index="label_price_general" type="integer">56627526</label>
+            <label index="label_price_regular" type="integer">81309183</label>
+            <label index="label_price_special" type="integer">35819210</label>
+            <label index="label_paymentmethods" type="integer">119552142</label>
+            <label index="label_organizers" type="integer">68798680</label>
+            <label index="label_vacancies" type="integer">99017107</label>
+            <label index="label_deadline_registration" type="integer">106717060</label>
+            <label index="label_registration" type="integer">16354175</label>
+            <label index="label_back" type="integer">168615651</label>
+            <label index="label_onlineRegistration" type="integer">20392011</label>
+            <label index="label_registrationForm" type="integer">236130017</label>
+            <label index="label_thankyou" type="integer">235938949</label>
+            <label index="message_wrongSeminarNumber" type="integer">232548181</label>
+            <label index="message_noResults" type="integer">15777293</label>
+            <label index="message_registrationForm" type="integer">194008229</label>
+        </languageKey>
+        <languageKey index="dk" type="array">
+            <label index="pi_list_browseresults_prev" type="integer">20121992</label>
+            <label index="pi_list_browseresults_page" type="integer">26464201</label>
+            <label index="pi_list_browseresults_next" type="integer">232350798</label>
+            <label index="pi_list_browseresults_displays" type="integer">152851483</label>
+            <label index="pi_list_searchBox_search" type="integer">20138052</label>
+            <label index="label_back" type="integer">168615651</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
+            <label index="seminars.pi_flexform.what_to_display" type="integer">97910403</label>
+            <label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
+            <label index="seminars.pi_flexform.seminar_list" type="integer">32827865</label>
+            <label index="seminars.pi_flexform.my_seminars" type="integer">18363047</label>
+            <label index="seminars.pi_flexform.seminar_registration" type="integer">250098610</label>
+            <label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
+            <label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
+            <label index="seminars.pi_flexform.loginPID" type="integer">140600031</label>
+            <label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
+            <label index="seminars.pi_flexform.salutation" type="integer">166511775</label>
+            <label index="seminars.pi_flexform.formal" type="integer">211667739</label>
+            <label index="seminars.pi_flexform.informal" type="integer">63642221</label>
+            <label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
+            <label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
+            <label index="seminars.pi_flexform.timeframeInList" type="integer">211332464</label>
+            <label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
+            <label index="seminars.pi_flexform.timeframeInList2" type="integer">36274015</label>
+            <label index="seminars.pi_flexform.timeframeInList3" type="integer">75911135</label>
+            <label index="seminars.pi_flexform.timeframeInList4" type="integer">236007007</label>
+            <label index="seminars.pi_flexform.timeframeInList5" type="integer">21658511</label>
+            <label index="seminars.pi_flexform.timeframeInList6" type="integer">52218414</label>
+            <label index="seminars.pi_flexform.timeframeInList7" type="integer">187059203</label>
+            <label index="seminars.pi_flexform.hideFields" type="integer">25256911</label>
+            <label index="seminars.pi_flexform.hideColumns" type="integer">70702598</label>
+            <label index="seminars.pi_flexform.generalPriceInList" type="integer">150285299</label>
+            <label index="seminars.pi_flexform.generalPriceInSingle" type="integer">30481588</label>
+            <label index="seminars.pi_flexform.showRegistrationFields" type="integer">128589369</label>
+            <label index="pi_list_browseresults_prev" type="integer">20121992</label>
+            <label index="pi_list_browseresults_page" type="integer">26464201</label>
+            <label index="pi_list_browseresults_next" type="integer">232350798</label>
+            <label index="pi_list_browseresults_displays" type="integer">152851483</label>
+            <label index="pi_list_browseresults_noResults" type="integer">210107189</label>
+            <label index="pi_list_searchBox_search" type="integer">20138052</label>
+            <label index="label_title" type="integer">192455458</label>
+            <label index="label_accreditation_number" type="integer">251981191</label>
+            <label index="label_credit_points" type="integer">267941596</label>
+            <label index="label_date" type="integer">71780721</label>
+            <label index="label_time" type="integer">175559919</label>
+            <label index="label_place" type="integer">129617664</label>
+            <label index="label_room" type="integer">214150095</label>
+            <label index="label_speakers" type="integer">258305227</label>
+            <label index="label_price_general" type="integer">56627526</label>
+            <label index="label_price_regular" type="integer">81309183</label>
+            <label index="label_price_special" type="integer">35819210</label>
+            <label index="label_paymentmethods" type="integer">119552142</label>
+            <label index="label_organizers" type="integer">68798680</label>
+            <label index="label_vacancies" type="integer">99017107</label>
+            <label index="label_deadline_registration" type="integer">106717060</label>
+            <label index="label_registration" type="integer">16354175</label>
+            <label index="label_onlineRegistration" type="integer">20392011</label>
+            <label index="label_back" type="integer">168615651</label>
+            <label index="label_registrationForm" type="integer">236130017</label>
+            <label index="label_thankyou" type="integer">235938949</label>
+            <label index="label_thankyou_informal" type="integer">222419149</label>
+            <label index="message_wrongSeminarNumber" type="integer">232548181</label>
+            <label index="message_wrongSeminarNumber_informal" type="integer">222419149</label>
+            <label index="message_noResults" type="integer">15777293</label>
+            <label index="message_registrationForm" type="integer">194008229</label>
+            <label index="message_registrationForm_informal" type="integer">222419149</label>
+        </languageKey>
+        <languageKey index="no" type="array">
+        </languageKey>
+        <languageKey index="it" type="array">
+        </languageKey>
+        <languageKey index="fr" type="array">
+        </languageKey>
+        <languageKey index="es" type="array">
+        </languageKey>
+        <languageKey index="nl" type="array">
+        </languageKey>
+        <languageKey index="cz" type="array">
+        </languageKey>
+        <languageKey index="pl" type="array">
+        </languageKey>
+        <languageKey index="si" type="array">
+        </languageKey>
+        <languageKey index="fi" type="array">
+        </languageKey>
+        <languageKey index="tr" type="array">
+        </languageKey>
+        <languageKey index="se" type="array">
+        </languageKey>
+        <languageKey index="pt" type="array">
+        </languageKey>
+        <languageKey index="ru" type="array">
+        </languageKey>
+        <languageKey index="ro" type="array">
+        </languageKey>
+        <languageKey index="ch" type="array">
+        </languageKey>
+        <languageKey index="sk" type="array">
+        </languageKey>
+        <languageKey index="lt" type="array">
+        </languageKey>
+        <languageKey index="is" type="array">
+        </languageKey>
+        <languageKey index="hr" type="array">
+        </languageKey>
+        <languageKey index="hu" type="array">
+        </languageKey>
+        <languageKey index="gl" type="array">
+        </languageKey>
+        <languageKey index="th" type="array">
+        </languageKey>
+        <languageKey index="gr" type="array">
+        </languageKey>
+        <languageKey index="hk" type="array">
+        </languageKey>
+        <languageKey index="eu" type="array">
+        </languageKey>
+        <languageKey index="bg" type="array">
+        </languageKey>
+        <languageKey index="br" type="array">
+        </languageKey>
+        <languageKey index="et" type="array">
+        </languageKey>
+        <languageKey index="ar" type="array">
+        </languageKey>
+        <languageKey index="he" type="array">
+        </languageKey>
+        <languageKey index="ua" type="array">
+        </languageKey>
+        <languageKey index="lv" type="array">
+        </languageKey>
+        <languageKey index="jp" type="array">
+        </languageKey>
+        <languageKey index="vn" type="array">
+        </languageKey>
+        <languageKey index="ca" type="array">
+        </languageKey>
+        <languageKey index="ba" type="array">
+        </languageKey>
+        <languageKey index="kr" type="array">
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="default" type="array">
+        </languageKey>
+        <languageKey index="dk" type="array">
+        </languageKey>
+        <languageKey index="de" type="array">
+        </languageKey>
+        <languageKey index="no" type="array">
+        </languageKey>
+        <languageKey index="it" type="array">
+        </languageKey>
+        <languageKey index="fr" type="array">
+        </languageKey>
+        <languageKey index="es" type="array">
+        </languageKey>
+        <languageKey index="nl" type="array">
+        </languageKey>
+        <languageKey index="cz" type="array">
+        </languageKey>
+        <languageKey index="pl" type="array">
+        </languageKey>
+        <languageKey index="si" type="array">
+        </languageKey>
+        <languageKey index="fi" type="array">
+        </languageKey>
+        <languageKey index="tr" type="array">
+        </languageKey>
+        <languageKey index="se" type="array">
+        </languageKey>
+        <languageKey index="pt" type="array">
+        </languageKey>
+        <languageKey index="ru" type="array">
+        </languageKey>
+        <languageKey index="ro" type="array">
+        </languageKey>
+        <languageKey index="ch" type="array">
+        </languageKey>
+        <languageKey index="sk" type="array">
+        </languageKey>
+        <languageKey index="lt" type="array">
+        </languageKey>
+        <languageKey index="is" type="array">
+        </languageKey>
+        <languageKey index="hr" type="array">
+        </languageKey>
+        <languageKey index="hu" type="array">
+        </languageKey>
+        <languageKey index="gl" type="array">
+        </languageKey>
+        <languageKey index="th" type="array">
+        </languageKey>
+        <languageKey index="gr" type="array">
+        </languageKey>
+        <languageKey index="hk" type="array">
+        </languageKey>
+        <languageKey index="eu" type="array">
+        </languageKey>
+        <languageKey index="bg" type="array">
+        </languageKey>
+        <languageKey index="br" type="array">
+        </languageKey>
+        <languageKey index="et" type="array">
+        </languageKey>
+        <languageKey index="ar" type="array">
+        </languageKey>
+        <languageKey index="he" type="array">
+        </languageKey>
+        <languageKey index="ua" type="array">
+        </languageKey>
+        <languageKey index="lv" type="array">
+        </languageKey>
+        <languageKey index="jp" type="array">
+        </languageKey>
+        <languageKey index="vn" type="array">
+        </languageKey>
+        <languageKey index="ca" type="array">
+        </languageKey>
+        <languageKey index="ba" type="array">
+        </languageKey>
+        <languageKey index="kr" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>

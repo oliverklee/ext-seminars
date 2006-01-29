@@ -342,7 +342,6 @@ Version 0.6.0, 12/2006 - "Great new FE and BE features"
   - make this safe (SSL-only or something)
 - add a way to make the seminar fee dependent on the user's status (student, working etc.)
 - allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop)
-- switch localization files to XML
 - Spanish localization
 - French localization
 - Polish localization
