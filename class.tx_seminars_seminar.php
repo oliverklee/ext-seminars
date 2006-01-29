@@ -29,17 +29,14 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 
-class tx_seminars_seminar extends tx_seminars_dbplugin {
+class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_seminar';
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_seminar.php';
-
-	/** the seminar data as an array, initialized on construction */
-	var $seminarData = null;
 
 	/** Organizers data as an array of arrays with their UID as key. Lazily initialized. */
 	var $organizersCache = array();
@@ -66,6 +63,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function tx_seminars_seminar(&$registrationManager, $seminarUid, $dbResult = null) {
 		$this->init();
+		$this->tableName = $this->tableSeminars;
 		$this->registrationManager =& $registrationManager;
 
 		if (!$dbResult) {
@@ -73,21 +71,11 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		}
 
 	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-	 		$this->seminarData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$this->recordData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$this->isInDb = true;
 	 	}
 
 		return;
-	}
-
-	/**
-	 * Checks whether this seminar has been properly initialized and thus is usable.
-	 *
-	 * @return	boolean		true if the seminar has been initialized, false otherwise.
-	 *
-	 * @access	public
-	 */
-	function isOk() {
-		return ($this->seminarData != null);
 	}
 
 	/**
@@ -159,7 +147,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getUid() {
-		return $this->getSeminarsPropertyInteger('uid');
+		return $this->getRecordPropertyInteger('uid');
 	}
 
 	/**
@@ -192,7 +180,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getTitle() {
-		return $this->getSeminarsPropertyString('title');
+		return $this->getRecordPropertyString('title');
 	}
 
 	/**
@@ -223,7 +211,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getSubtitle() {
-		return $this->getSeminarsPropertyString('subtitle');
+		return $this->getRecordPropertyString('subtitle');
 	}
 
 	/**
@@ -234,7 +222,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasSubtitle() {
-		return ($this->getSubtitle() !== '');
+		return $this->hasRecordPropertyString('subtitle');
 	}
 
 	/**
@@ -247,7 +235,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getDescription(&$plugin) {
-		return $plugin->pi_RTEcssText($this->getSeminarsPropertyString('description'));
+		return $plugin->pi_RTEcssText($this->getRecordPropertyString('description'));
 	}
 
 	/**
@@ -258,7 +246,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasDescription() {
-		return ($this->getSeminarsPropertyString('description') !== '');
+		return $this->hasRecordPropertyString('description');
 	}
 
 	/**
@@ -287,7 +275,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getAccreditationNumber() {
-		return $this->getSeminarsPropertyString('accreditation_number');
+		return $this->getRecordPropertyString('accreditation_number');
 	}
 
 	/**
@@ -298,19 +286,19 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasAccreditationNumber() {
-		return ($this->getAccreditationNumber() !== '');
+		return $this->hasRecordPropertyString('accreditation_number');
 	}
 
 	/**
 	 * Gets the number of credit points for this seminar
 	 * (or an empty string if it is not set yet).
 	 *
-	 * @return	string		the number of credit points (or a localized message if it is 0)
+	 * @return	string		the number of credit points (or a an empty string if it is 0)
 	 *
 	 * @access	public
 	 */
 	function getCreditPoints() {
-		return ($this->hasCreditPoints()) ? $this->getSeminarsPropertyInteger('credit_points') : '';
+		return $this->hasCreditPoints() ? $this->getRecordPropertyInteger('credit_points') : '';
 	}
 
 	/**
@@ -321,7 +309,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasCreditPoints() {
-		return (boolean) $this->getSeminarsPropertyInteger('credit_points');
+		return $this->hasRecordPropertyInteger('credit_points');
 	}
 
 	/**
@@ -341,8 +329,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		if (!$this->hasDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
-			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
-			$endDate = $this->getSeminarsPropertyInteger('end_date');
+			$beginDate = $this->getRecordPropertyInteger('begin_date');
+			$endDate = $this->getRecordPropertyInteger('end_date');
 
 			$beginDateDay = strftime($this->getConfValue('dateFormatYMD'), $beginDate);
 			$endDateDay = strftime($this->getConfValue('dateFormatYMD'), $endDate);
@@ -381,7 +369,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasDate() {
-		return (boolean) ($this->getSeminarsPropertyInteger('begin_date') && $this->getSeminarsPropertyInteger('end_date'));
+		return ($this->hasRecordPropertyInteger('begin_date') && $this->hasRecordPropertyInteger('end_date'));
 	}
 
 	/**
@@ -400,8 +388,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		if (!$this->hasTime()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
-			$beginDate = $this->getSeminarsPropertyInteger('begin_date');
-			$endDate = $this->getSeminarsPropertyInteger('end_date');
+			$beginDate = $this->getRecordPropertyInteger('begin_date');
+			$endDate = $this->getRecordPropertyInteger('end_date');
 
 			$beginTime = strftime($this->getConfValue('timeFormat'), $beginDate);
 			$endTime = strftime($this->getConfValue('timeFormat'), $endDate);
@@ -424,8 +412,8 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasTime() {
-		$beginTime = strftime('%H:%M', $this->getSeminarsPropertyInteger('begin_date'));
-		$endTime = strftime('%H:%M', $this->getSeminarsPropertyInteger('end_date'));
+		$beginTime = strftime('%H:%M', $this->getRecordPropertyInteger('begin_date'));
+		$endTime = strftime('%H:%M', $this->getRecordPropertyInteger('end_date'));
 
 		return ($beginTime !== '00:00' || $endTime !== '00:00');
 	}
@@ -526,7 +514,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasPlace() {
-		return (boolean) $this->getSeminarsPropertyInteger('place');
+		return $this->hasRecordPropertyInteger('place');
 	}
 
 	/**
@@ -537,7 +525,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getRoom() {
-		return $this->getSeminarsPropertyString('room');
+		return $this->getRecordPropertyString('room');
 	}
 
 	/**
@@ -548,7 +536,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasRoom() {
-		return ($this->getRoom() !== '');
+		return $this->hasRecordPropertyString('room');
 	}
 
 	/**
@@ -644,7 +632,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasSpeakers() {
-		return (boolean) $this->getSeminarsPropertyInteger('speakers');
+		return $this->hasRecordPropertyInteger('speakers');
 	}
 
 	/**
@@ -657,7 +645,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getPriceRegular($space = '&nbsp;') {
-		return $this->getSeminarsPropertyInteger('price_regular').$space.$this->getConfValue('currency');
+		return $this->getRecordPropertyInteger('price_regular').$space.$this->getConfValue('currency');
 	}
 
 	/**
@@ -668,7 +656,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasPriceRegular() {
-		return ($this->getSeminarsPropertyInteger('price_regular') !== 0);
+		return $this->hasRecordPropertyInteger('price_regular');
 	}
 
 	/**
@@ -683,7 +671,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 */
 	function getPriceSpecial($space = '&nbsp;') {
 		return $this->hasPriceSpecial() ?
-			($this->getSeminarsPropertyInteger('price_special').$space.$this->getConfValue('currency')) : '';
+			($this->getRecordPropertyInteger('price_special').$space.$this->getConfValue('currency')) : '';
 	}
 
 	/**
@@ -694,7 +682,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasPriceSpecial() {
-		return ($this->getSeminarsPropertyInteger('price_special') !== 0);
+		return $this->hasRecordPropertyInteger('price_special');
 	}
 
 	/**
@@ -804,7 +792,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasPaymentMethods() {
-		return ($this->getSeminarsPropertyString('payment_methods') !== '');
+		return $this->hasRecordPropertyString('payment_methods');
 	}
 
 	/**
@@ -816,7 +804,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getAttendances() {
-		return $this->getSeminarsPropertyInteger('attendees');
+		return $this->getRecordPropertyInteger('attendees');
 	}
 
 	/**
@@ -850,7 +838,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getVacancies() {
-		return max(0, $this->getSeminarsPropertyInteger('attendees_max') - $this->getAttendances());
+		return max(0, $this->getRecordPropertyInteger('attendees_max') - $this->getAttendances());
 	}
 
 	/**
@@ -872,7 +860,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function isFull() {
-		return (boolean) $this->getSeminarsPropertyInteger('is_full');
+		return $this->getRecordPropertyBoolean('is_full');
 	}
 
 	/**
@@ -883,7 +871,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasEnoughAttendances() {
-		return (boolean) $this->getSeminarsPropertyInteger('enough_attendees');
+		return $this->getRecordPropertyBoolean('enough_attendees');
 	}
 
 	/**
@@ -895,13 +883,10 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getLatestPossibleRegistrationTime() {
-		$result = 0;
-		if ($this->getSeminarsPropertyInteger('deadline_registration') != 0) {
-			$result = $this->getSeminarsPropertyInteger('deadline_registration');
-		} else {
-			$result = $this->getSeminarsPropertyInteger('begin_date');
-		}
-		return $result;
+		return (($this->hasRecordPropertyInteger('deadline_registration')) ?
+			$this->getRecordPropertyInteger('deadline_registration') :
+			$this->getRecordPropertyInteger('begin_date')
+		);
 	}
 
 	/**
@@ -913,7 +898,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getRegistrationDeadline() {
-		return strftime($this->getConfValue('dateFormatYMD').' '.$this->getConfValue('timeFormat'), $this->getSeminarsPropertyInteger('deadline_registration'));
+		return strftime($this->getConfValue('dateFormatYMD').' '.$this->getConfValue('timeFormat'), $this->getRecordPropertyInteger('deadline_registration'));
 	}
 
 	/**
@@ -924,7 +909,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasRegistrationDeadline() {
-		return (boolean) $this->getSeminarsPropertyInteger('deadline_registration');
+		return $this->hasRecordPropertyInteger('deadline_registration');
 	}
 
 	/**
@@ -940,7 +925,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = '';
 
 		if ($this->hasOrganizers()) {
-			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			$organizerUids = explode(',', $this->getRecordPropertyString('organizers'));
 			foreach ($organizerUids as $currentOrganizerUid) {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
@@ -970,7 +955,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = array();
 
 		if ($this->hasOrganizers()) {
-			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			$organizerUids = explode(',', $this->getRecordPropertyString('organizers'));
 			foreach ($organizerUids as $currentOrganizerUid) {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
@@ -995,7 +980,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = array();
 
 		if ($this->hasOrganizers()) {
-			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			$organizerUids = explode(',', $this->getRecordPropertyString('organizers'));
 			foreach ($organizerUids as $currentOrganizerUid) {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
@@ -1019,7 +1004,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 		$result = array();
 
 		if ($this->hasOrganizers()) {
-			$organizerUids = explode(',', $this->getSeminarsPropertyString('organizers'));
+			$organizerUids = explode(',', $this->getRecordPropertyString('organizers'));
 			foreach ($organizerUids as $currentOrganizerUid) {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
@@ -1077,7 +1062,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function hasOrganizers() {
-		return ($this->getSeminarsPropertyString('organizers') !== '');
+		return $this->hasRecordPropertyString('organizers');
 	}
 
 	/**
@@ -1098,40 +1083,6 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 				$plugin->getConfValue('listPID'),
 				array('tx_seminars_pi1[showUid]' => $this->getUid())
 			);
-	}
-
-	/**
-	 * Gets a trimmed string element of the seminars array.
-	 * If the array has not been intialized properly, an empty string is returned instead.
-	 *
-	 * @param	string		key of the element to return
-	 *
-	 * @return	string		the corresponding element from the seminars array.
-	 *
-	 * @access	private
-	 */
-	function getSeminarsPropertyString($key) {
-		$result = ($this->seminarData && isset($this->seminarData[$key]))
-			? trim($this->seminarData[$key]) : '';
-
-		return $result;
-	}
-
-	/**
-	 * Gets an (intval'ed) integer element of the seminars array.
-	 * If the array has not been intialized properly, 0 is returned instead.
-	 *
-	 * @param	string		key of the element to return
-	 *
-	 * @return	integer		the corresponding element from the seminars array.
-	 *
-	 * @access	private
-	 */
-	function getSeminarsPropertyInteger($key) {
-		$result = ($this->seminarData && isset($this->seminarData[$key]))
-			? intval($this->seminarData[$key]) : 0;
-
-		return $result;
 	}
 
 	/**
@@ -1188,7 +1139,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 					$value = $this->getVacancies();
 					break;
 				default:
-					$value = $this->getSeminarsPropertyString($currentKey);
+					$value = $this->getRecordPropertyString($currentKey);
 					break;
 			}
 			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
@@ -1277,11 +1228,11 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			$message = $this->pi_getLL('message_noRegistrationNecessary');
 		} elseif ($this->isCanceled()) {
 			$message = $this->pi_getLL('message_seminarCancelled');
-		} elseif ($GLOBALS['SIM_EXEC_TIME'] > $this->seminarData['end_date']) {
+		} elseif ($GLOBALS['SIM_EXEC_TIME'] > $this->getRecordPropertyInteger('end_date')) {
 			$message = $this->pi_getLL('message_seminarOver');
-		} elseif ($this->seminarData['deadline_registration'] != 0 && $GLOBALS['SIM_EXEC_TIME'] >= $this->seminarData['deadline_registration'])	{
+		} elseif ($this->hasRegistrationDeadline() && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getRecordPropertyInteger('deadline_registration'))) {
 			$message = $this->pi_getLL('message_seminarRegistrationIsClosed');
-		} elseif ($GLOBALS['SIM_EXEC_TIME'] >= $this->seminarData['begin_date']) {
+		} elseif ($GLOBALS['SIM_EXEC_TIME'] >= $this->getRecordPropertyInteger('begin_date')) {
 			$message = $this->pi_getLL('message_seminarStarted');
 		} elseif ($this->isFull()) {
 			$message = $this->pi_getLL('message_noVacancies');
@@ -1298,7 +1249,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function isCanceled() {
-		return (boolean) $this->seminarData['cancelled'];
+		return $this->getRecordPropertyBoolean('cancelled');
 	}
 
 	/**
@@ -1309,7 +1260,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function needsRegistration() {
-		return (boolean) $this->seminarData['needs_registration'];
+		return $this->getRecordPropertyBoolean('needs_registration');
 	}
 
 	/**
@@ -1326,22 +1277,22 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 
 		// We count paid and unpaid registrations.
 		// This behaviour will be configurable in a later version.
-		$this->seminarData['attendees'] = $numberOfAttendances;
+		$this->recordData['attendees'] = $numberOfAttendances;
 		// Let's store the other result in case someone needs it.
 		$this->numberOfAttendancesPaid = $numberOfAttendancesPaid;
 
 		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-		$this->seminarData['enough_attendees'] = ($this->getAttendances() >= $this->seminarData['attendees_min']) ? 1 : 0;
+		$this->recordData['enough_attendees'] = ($this->getAttendances() >= $this->getRecordPropertyInteger('attendees_min')) ? 1 : 0;
 		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-		$this->seminarData['is_full'] = ($this->getAttendances() >= $this->seminarData['attendees_max']) ? 1 : 0;
+		$this->recordData['is_full'] = ($this->getAttendances() >= $this->getRecordPropertyInteger('attendees_max')) ? 1 : 0;
 
 		$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 			$this->tableSeminars,
 			'uid='.$this->getUid(),
 			array(
-				'attendees' => $this->seminarData['attendees'],
-				'enough_attendees' => $this->seminarData['enough_attendees'],
-				'is_full' => $this->seminarData['is_full']
+				'attendees' => $this->getRecordPropertyInteger('attendees'),
+				'enough_attendees' => $this->getRecordPropertyInteger('enough_attendees'),
+				'is_full' => $this->getRecordPropertyInteger('is_full')
 			)
 		);
 
@@ -1399,6 +1350,7 @@ class tx_seminars_seminar extends tx_seminars_dbplugin {
 			'',
 			''
 		);
+
 		if ($dbResultMultiSeats) {
 			$fieldsMultiSeats = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultMultiSeats);
 			$result += $fieldsMultiSeats['number'];

@@ -30,22 +30,16 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
-class tx_seminars_registration extends tx_seminars_templatehelper {
+class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_registration';
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_registration.php';
 
-	/** associative array with the values from/for the DB */
-	var $recordData = array();
-
 	/** our seminar (object) */
 	var $seminar = null;
-
-	/** whether this attendance already is stored in the DB */
-	var $isInDb = false;
 
 	/** whether we have already initialized the templates (which is done lazily) */
 	var $isTemplateInitialized = false;
@@ -62,9 +56,12 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 */
 	function tx_seminars_registration(&$seminar, $userUid, $registrationData, &$cObj) {
 		$this->init();
+		$this->tableName = $this->tableAttendances;
 		$this->cObj =& $cObj;
 
 		$this->seminar =& $seminar;
+
+		$this->recordData = array();
 
 		$this->recordData['seminar'] = $seminar->getUid();
 		$this->recordData['user'] = $userUid;
@@ -95,7 +92,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getTitle() {
-		return $this->recordData['title'];
+		return $this->getRecordPropertyString('title');
 	}
 
 	/**
@@ -120,7 +117,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getUser() {
-		return intval($this->recordData['user']);
+		return $this->getRecordPropertyInteger('user');
 	}
 
 	/**
@@ -208,7 +205,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getSeminar() {
-		return intval($this->recordData['seminar']);
+		return $this->getRecordPropertyInteger('seminar');
 	}
 
 	/**
@@ -263,7 +260,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getInterests() {
-		return $this->recordData['interests'];
+		return $this->getRecordPropertyString('interests');
 	}
 
 	/**
@@ -274,7 +271,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getExpectations() {
-		return $this->recordData['expectations'];
+		return $this->getRecordPropertyString('expectations');
 	}
 
 	/**
@@ -285,7 +282,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getKnowledge() {
-		return $this->recordData['background_knowledge'];
+		return $this->getRecordPropertyString('background_knowledge');
 	}
 
 	/**
@@ -296,7 +293,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getKnownFrom() {
-		return $this->recordData['known_from'];
+		return $this->getRecordPropertyString('known_from');
 	}
 
 	/**
@@ -307,23 +304,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getNotes() {
-		return $this->recordData['notes'];
-	}
-
-	/**
-	 * Writes this registration to the DB.
-	 *
-	 * Parent page is $this->conf['attendancesPID].
-	 *
-	 * @return	boolean		true if everything went OK, false otherwise
-	 */
-	function commitToDb() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_INSERTquery($this->tableAttendances, $this->recordData);
-		if ($dbResult) {
-			$this->isInDb = true;
-		}
-
-		return $dbResult;
+		return $this->getRecordPropertyString('notes');
 	}
 
 	/**
@@ -550,11 +531,7 @@ class tx_seminars_registration extends tx_seminars_templatehelper {
 		$result = '';
 
 		foreach ($keys as $currentKey) {
-			if (array_key_exists($currentKey, $this->recordData)) {
-				$value = $this->recordData[$currentKey];
-			} else {
-				$value = '';
-			}
+			$value = $this->getRecordPropertyString($currentKey);
 			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
 		}
 
