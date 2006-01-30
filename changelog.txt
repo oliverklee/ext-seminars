@@ -1,0 +1,106 @@
+0.4.3 - work in progress
+- Fixed: Paid attendances were counted as not paid.
+- Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format “John Doe <john.doe@example.com>”.
+- Improved the manual.
+- Code cleanup.
+- Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#2400)
+- moved the changelog from the manual to this file (#0002435)
+
+0.4.2
+- Now an unlimited number of speakers is allowed per seminar.
+- Added a registration deadline functionality.
+- Improved the manual.
+- Lots of code cleanup and refactoring.
+- The configuration of generalPriceInList and generalPriceInSingle now is possible with flexforms as well.
+- Fixed: The complete second sheet in the flexforms was non-functional.
+- Added an extension icon.
+- Now the extension default configuration is done using static templates. Please include the Seminars template in your site template under “Include static (from extensions)”.
+- Now Web > Seminars shows the seminars from the selected page, not from all pages.
+- Now Web > Seminars > Update Statistics also shows the seminar dates next to the seminar title.
+- Now Web > Seminars > Show event details displays a list of participant names and their e-mail addresses, ready for copy and paste into an e-mail client.
+- Shortened some long DB labels.
+- Now Web > Seminars > Update statistics is only available if the logged-in user actually has write access to the selected page's content.
+- On online registration, users can now specify how many seats they would like to register. This feature is switched off by default.
+- It now is configurable which seminars to display in the list view: past, current, upcoming, open for registration, or any sensible combination of those.
+
+0.4.1
+- Improved the manual.
+- Increased the maximum allowed price from 1000 to 9999.
+- In the list view, now the whole table cell containing the seminar title is a clickable link instead of just the text.
+- Removed excess spaces from within HTML tags.
+- Added tbody tag to the list view table (the thead was already there).
+- Changed the MySQL data types of some fields so that
+- more fields can be edited using PhpMyAdmin
+- fields for which negative values don't make sense now are unsigned
+- Added back end and front end support for the field special price in the seminar record. Note that all templates have changes in the part thats that contain prices: price now has been renamed to price_regular, and price_special has been added. If you use your own templates, you need to modify them accordingly, or the output will be broken.
+- Changed the hard-coded currency EUR to use the value set in the configuration instead.
+- Added the fields accreditation_number and credit_points. Both of them are hidden by default on the front end, the back and and in the e-mails.
+- Some code cleanup.
+- Fixed bug that caused the wrong number of paid attendances display on the back end (in Update statistics). Thanks to Mario Rimann for the patch.
+- In the seminar records, made the organizer entry required as it is needed for automated e-mail when a user signs up for an event.
+- Note that the field "has paid" in the attendance records will go away soon. Instead, if someone has paid will be deducted by whether a payment date has been entered. So make sure to set a payment date for all attendances that have been paid.
+- The upper boundary for the minimum and maximum number of attendees per event has been increased from 100 to 999.
+
+0.4.0
+- Lots of code cleanup.
+- In Web > Seminars > Update statistics, now the attendee's user name and UID get displayed as well. Thanks to Martin Kurz for the suggestion.
+- If you copy and paste a seminar record, the copy will be marked as hidden by default (so that it doesn't appear on the front end).
+- Improved and extended the manual.
+- All semantically required fields now actually are set as required in the back end so that it no longer is possible to leave a required field empty (eg. an organizer's e-mail address).
+- Removed the back end UI for fields that are not supported in this version yet: special price (seminars) and picture (speakers)
+- Fixed wrong upload path for templates and CSS files in flexforms. Thanks to Rolf Casanova for reporting that bug.
+- Cleaned up and slimmed down the RTE in the back end.
+- Integrated the salutationswitcher extension so that that extension doesn't need to be installed any more.
+- Canceled seminars now are marked in the list view: The text is lined through and the square always is red (regardless of the number of vacancies).
+- Fixed: The notification e-mail to the organizer contains the statistics of before they are updated with the new registration.
+- Invalid seminar IDs in the URL are now better handled in the detailed view and the registration form: with an error message and a HTTP status of 404 (so that search engines don't index the invalid URLs).
+- Fixed the CSS so that content directly below the registration form starts at the very left.
+- If no user is logged in, a link to the login form is now provided.
+- If there are no events for the list view, now a message gets displayed instead of an empty list.
+- The error messages in the “online registration” part of the detailed view and the registration form are now organized more intuitively: The user doesn't to log in any more to see if a seminar UID in the URL is valid or if a seminar has been canceled.
+- In the list view, there is now a column with direct links to the registration page. This column only is displayed if a front end user currently is logged in.
+
+0.3.2
+- Added feature “online registration”: registration form, automatic entry into the DB, update of statistics, e-mail to participant and to organizers.
+- For the front end plug in, the starting pages are now set using flexforms. You need to set the starting pages when you upgrade to this version.
+- This extension now provides some basic CSS styles.
+- It now is possible to configure the event type for all events using plugin.tx_seminars.eventType.
+- Provided basic template for sr_feuser_register.
+- The date and time formats now are configurable.
+- The former 3 front end plugins were merged to one with flexforms selection.
+- Configuration now partially uses flexforms.
+- Removed dependencies on sr_feuser_register and newloginbox.
+- Lots of code cleanup.
+- Made the database accesses safer.
+- Fixed: In the details view, the seminar title was always a link.
+- Cleaned up and fixed the HTML output in the seminar details page.
+- The links to the detailed seminar view now are much shorter.
+- Improved the manual.
+
+0.3.1
+- Fixed: The room number didn't get displayed in the front end.
+- Changed the list view so that seminars that already have started still get displayed.
+
+0.3.0
+- switched HTML output to templates
+- added switch for formal/informal language (the German “Du/Sie”)
+- made it configurable which columns to show in the list view
+- made it configurable which fields to show in the detailed view
+- translated “No results found” to German
+- renamed fe_users database field tx_seminars_registration_number to tx_seminars_matriculation_number
+
+0.2.1
+- added first code for online registration (not hooked up yet)
+- improved documentation
+- back end: added “save and add new item” button for all data types
+- made content items USER_INT object (thus disabling caching of this extension's content elements) as the number of vacancies is highly volatile
+
+0.2.0
+- updated documentation: added screenshots and more todo items.
+
+0.0.4
+- first public upload
+
+0.0.1
+- initial upload
+- managing seminars, sites, speakers and organizers already works
