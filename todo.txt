@@ -288,6 +288,7 @@ Version 0.4.10, 07/2006 - "Make it nice for the visitors": front end usability a
 - add more FE examples to the manual
 - add more FE screenshots to the manual
 - Check if we can/should use TemplaVoila before 0.5.0 [from dev-meeting 05/12]
+- in the list view, add little arrows to the list head indicating the sort field and sort order
 
 
 Version 0.5.0, 08/2006 - "Getting real new features"
