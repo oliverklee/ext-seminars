@@ -175,8 +175,14 @@ Version 0.4.7, 04/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
 - clean up code from pibase (search box, results browser)
 - remove layout tables from the search box
+- add labels to forms
 - add summary for the table element in the list view
-- check for accessibility according to WAI A/AA/AAA, BITV NRW and Sec. 508
+- check for accessibility according to BITV Priority 1
+- check for accessibility according to BITV Level 1
+- check for accessibility according to WAI A
+- check for accessibility according to WAI AA
+- check for accessibility according to WAI AAA
+- check for accessibility according to Sec. 508
 - add titles for links
 - add a table summary to the list view
 - re-check everything on the FE and BE for XHTML 1.0 strict validity
