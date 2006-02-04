@@ -943,7 +943,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 	/**
 	 * Gets our organizers' names and e-mail addresses in the format
-	 * "John Doe <john.doe@example.com>".
+	 * '"John Doe" <john.doe@example.com>'.
 	 *
 	 * The name is not encoded yet.
 	 *
@@ -960,7 +960,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
 
 				if ($currentOrganizerData) {
-					$result[] = $currentOrganizerData['title'].' <'.$currentOrganizerData['email'].'>';
+					$result[] = '"'.$currentOrganizerData['title'].'" <'.$currentOrganizerData['email'].'>';
 				}
 			}
 		}

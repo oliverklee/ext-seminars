@@ -173,7 +173,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 	/**
 	 * Gets the attendee's name and e-mail address in the format
-	 * "John Doe <john.doe@example.com>".
+	 * '"John Doe" <john.doe@example.com>'.
 	 *
 	 * @return	string		the attendee's name and e-mail address
 	 *
@@ -189,7 +189,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				'');
 		if ($dbResult) {
 			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$result = $dbResultAssoc['name'].' <'.$dbResultAssoc['email'].'>';
+			$result = '"'.$dbResultAssoc['name'].'" <'.$dbResultAssoc['email'].'>';
 		} else {
 			$result = '';
 		}

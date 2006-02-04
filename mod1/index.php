@@ -383,10 +383,11 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 	/**
 	 * Retrieves the name and e-mail address of a user from the database
-	 * in the form "Name <e-mail address>"
+	 * in the form '"Name" <e-mail address>'
+	 * The output of this function is already htmlspecialchars'ed.
 	 *
  	 * @param	integer		User ID of the user to search for
- 	 * @return	string		the name and e-mail address of the user
+ 	 * @return	string		the name and e-mail address of the user, already htmlspecialchars'ed
  	 *
 	 * @access	private
 	 */
@@ -403,7 +404,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			'1'
 		);
 		$currentUser = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultUserDetails);
-		return htmlspecialchars($currentUser['name']).' &lt;'.htmlspecialchars($currentUser['email']).'&gt;';
+		return '&quot;'.htmlspecialchars($currentUser['name']).'&quot;'.' &lt;'.htmlspecialchars($currentUser['email']).'&gt;';
 	}
 
 } // END of class
