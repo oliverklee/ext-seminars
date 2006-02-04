@@ -72,10 +72,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function isOk() {
-		return (($this->recordData !== null) && 
-			($this->tableName !== null) && 
-			(!empty($this->tableName))
-		);
+		return (!empty($this->recordData) && !empty($this->tableName));
 	}
 
 	/**
@@ -167,7 +164,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @access	private
 	 */
 	function hasKey($key) {
-		return ($this->isOk() && array_key_exists($key, $this->recordData));
+		return ($this->isOk() && isset($this->recordData[$key]));
 	}
 
 	/**
