@@ -1,10 +1,11 @@
 0.4.4 - work in progress
-- Fixed: Paid attendances were counted as not paid.
-- Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format “John Doe <john.doe@example.com>”.
+- Fixed: Paid attendances were counted as not paid. (#0001978)
+- Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format “John Doe <john.doe@example.com>”. (#0001954)
 - Improved the manual.
 - Code cleanup.
-- Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#2400)
+- Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#0002400)
 - moved the changelog from the manual to this file (#0002435)
+- Fixed: Commas in participant names or organizer names caused problems. (#0002432)
 
 0.4.3
 - Fixed: Paid attendances were counted as not paid.
