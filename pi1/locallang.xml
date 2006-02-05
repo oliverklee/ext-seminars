@@ -203,6 +203,66 @@
         <languageKey index="es" type="array">
         </languageKey>
         <languageKey index="nl" type="array">
+            <label index="seminars.pi_flexform.sheet_general">Algemeen</label>
+            <label index="seminars.pi_flexform.what_to_display">Wat moet er worden getoond:</label>
+            <label index="seminars.pi_flexform.sheet_template_and_special">Sjablonen en speciale eigenschappen</label>
+            <label index="seminars.pi_flexform.seminar_list">Lijst van seminars</label>
+            <label index="seminars.pi_flexform.my_seminars">Mijn seminars</label>
+            <label index="seminars.pi_flexform.seminar_registration">Seminar registratie</label>
+            <label index="seminars.pi_flexform.baseURL">Basis URL van deze Typo3 site, bijv. http://www.mytypo3site.net/:</label>
+            <label index="seminars.pi_flexform.listPID">Pagina die de seminarlijst bevat:</label>
+            <label index="seminars.pi_flexform.loginPID">Pagina die het inlogformulier bevat:</label>
+            <label index="seminars.pi_flexform.registerPID">Pagina die het registratieformulier van de bijeenkomst bevat:</label>
+            <label index="seminars.pi_flexform.salutation">Begroetingswijze op de pagina:</label>
+            <label index="seminars.pi_flexform.formal">formeel</label>
+            <label index="seminars.pi_flexform.informal">informeel</label>
+            <label index="seminars.pi_flexform.templateFile">Bestandsnaam van het HTML-sjabloon:</label>
+            <label index="seminars.pi_flexform.cssFile">Bestandsnaam van de CSS stylesheet:</label>
+            <label index="seminars.pi_flexform.timeframeInList">Toon alleen bijeenkomsten binnen deze tijdsperiode:</label>
+            <label index="seminars.pi_flexform.timeframeInList1">alle bijeenkomsten</label>
+            <label index="seminars.pi_flexform.timeframeInList2">oude bijeenkomsten</label>
+            <label index="seminars.pi_flexform.timeframeInList3">oude en actuele bijeenkomsten</label>
+            <label index="seminars.pi_flexform.timeframeInList4">actuele bijeenkomsten</label>
+            <label index="seminars.pi_flexform.timeframeInList5">actuele en komende bijeenkomsten</label>
+            <label index="seminars.pi_flexform.timeframeInList6">komende bijeenkomsten</label>
+            <label index="seminars.pi_flexform.timeframeInList7">bijeenkomsten met sluitingsdatum in de toekomst</label>
+            <label index="seminars.pi_flexform.hideFields">Verberg velden in detailaanzicht (comma-separated):</label>
+            <label index="seminars.pi_flexform.hideColumns">Verberg kolomnamen in lijstaanzicht (comma-separated):</label>
+            <label index="seminars.pi_flexform.generalPriceInList">&quot;Prijs&quot; als kop gebruiken voor de standaardprijs in de lijstaanzicht:</label>
+            <label index="seminars.pi_flexform.generalPriceInSingle">&quot;Prijs&quot; als kop gebruiken voor de standaardprijs in detailaanzicht en bij de registratie zelf:</label>
+            <label index="seminars.pi_flexform.showRegistrationFields">Toon tekst invoervelden voor online registratie (comma-separated):</label>
+            <label index="pi_list_browseresults_prev">&lt; Vorige</label>
+            <label index="pi_list_browseresults_page">Pag</label>
+            <label index="pi_list_browseresults_next">Volgende &gt;</label>
+            <label index="pi_list_browseresults_displays">Toon resultaten ###SPAN_BEGIN###%s tot %s&lt;/span&gt; van in totaal ###SPAN_BEGIN###%s&lt;/span&gt;</label>
+            <label index="pi_list_browseresults_noResults">Sorry, geen bijeenkomsten gevonden.</label>
+            <label index="pi_list_searchBox_search">Zoek</label>
+            <label index="label_title">Titel</label>
+            <label index="label_accreditation_number">Accrediteringsnummer</label>
+            <label index="label_credit_points">Kredietpunten</label>
+            <label index="label_date">Datum</label>
+            <label index="label_time">Tijd</label>
+            <label index="label_place">Plaats</label>
+            <label index="label_room">Kamer</label>
+            <label index="label_speakers">Sprekers</label>
+            <label index="label_price_general">Prijs</label>
+            <label index="label_price_regular">Reguliere prijs</label>
+            <label index="label_price_special">Speciale prijs</label>
+            <label index="label_paymentmethods">Beschikbare betaalwijzen</label>
+            <label index="label_organizers">Organiseerders</label>
+            <label index="label_vacancies">Plaatsen</label>
+            <label index="label_deadline_registration">Sluitingsdatum voor registratie</label>
+            <label index="label_registration">Registratie</label>
+            <label index="label_back">Terug naar overzicht</label>
+            <label index="label_onlineRegistration">Online registratie</label>
+            <label index="label_registrationForm">Registratiegegevens</label>
+            <label index="label_thankyou">Dank voor uw registratie. Een bevestigings e-mail is naar u toegezonden. We verheugen ons in uw belangstelling.</label>
+            <label index="label_thankyou_informal">Bedankt voor je registratie! Een e-mail met de registratiebevestiging is naar jou onderweg. Wij verheugen ons op jouw komst en wensen je veel succes bij de bijeenkomst.</label>
+            <label index="message_wrongSeminarNumber">Er is een bijeenkomst bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link wilt u dan de webmaster hiervan op de hoogte brengen? Dank u!</label>
+            <label index="message_wrongSeminarNumber_informal">Een bijeenkomst met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
+            <label index="message_noResults">Sorry, op dit moment zijn er geen bijeenkomsten gevonden.</label>
+            <label index="message_registrationForm">Wanneer u dat wilt kunt u bepaalde gegevens invullen ten behoeve van uw registratie:</label>
+            <label index="message_registrationForm_informal">Wanneer je dat wilt kunt je hier nog een paar opmerkingen met betrekking tot de registratie invullen:</label>
         </languageKey>
         <languageKey index="cz" type="array">
         </languageKey>
@@ -408,6 +468,66 @@
         <languageKey index="es" type="array">
         </languageKey>
         <languageKey index="nl" type="array">
+            <label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
+            <label index="seminars.pi_flexform.what_to_display" type="integer">97910403</label>
+            <label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
+            <label index="seminars.pi_flexform.seminar_list" type="integer">32827865</label>
+            <label index="seminars.pi_flexform.my_seminars" type="integer">18363047</label>
+            <label index="seminars.pi_flexform.seminar_registration" type="integer">250098610</label>
+            <label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
+            <label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
+            <label index="seminars.pi_flexform.loginPID" type="integer">140600031</label>
+            <label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
+            <label index="seminars.pi_flexform.salutation" type="integer">166511775</label>
+            <label index="seminars.pi_flexform.formal" type="integer">211667739</label>
+            <label index="seminars.pi_flexform.informal" type="integer">63642221</label>
+            <label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
+            <label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
+            <label index="seminars.pi_flexform.timeframeInList" type="integer">211332464</label>
+            <label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
+            <label index="seminars.pi_flexform.timeframeInList2" type="integer">36274015</label>
+            <label index="seminars.pi_flexform.timeframeInList3" type="integer">75911135</label>
+            <label index="seminars.pi_flexform.timeframeInList4" type="integer">236007007</label>
+            <label index="seminars.pi_flexform.timeframeInList5" type="integer">21658511</label>
+            <label index="seminars.pi_flexform.timeframeInList6" type="integer">52218414</label>
+            <label index="seminars.pi_flexform.timeframeInList7" type="integer">187059203</label>
+            <label index="seminars.pi_flexform.hideFields" type="integer">25256911</label>
+            <label index="seminars.pi_flexform.hideColumns" type="integer">70702598</label>
+            <label index="seminars.pi_flexform.generalPriceInList" type="integer">150285299</label>
+            <label index="seminars.pi_flexform.generalPriceInSingle" type="integer">30481588</label>
+            <label index="seminars.pi_flexform.showRegistrationFields" type="integer">128589369</label>
+            <label index="pi_list_browseresults_prev" type="integer">20121992</label>
+            <label index="pi_list_browseresults_page" type="integer">26464201</label>
+            <label index="pi_list_browseresults_next" type="integer">232350798</label>
+            <label index="pi_list_browseresults_displays" type="integer">152851483</label>
+            <label index="pi_list_browseresults_noResults" type="integer">210107189</label>
+            <label index="pi_list_searchBox_search" type="integer">20138052</label>
+            <label index="label_title" type="integer">192455458</label>
+            <label index="label_accreditation_number" type="integer">251981191</label>
+            <label index="label_credit_points" type="integer">267941596</label>
+            <label index="label_date" type="integer">71780721</label>
+            <label index="label_time" type="integer">175559919</label>
+            <label index="label_place" type="integer">129617664</label>
+            <label index="label_room" type="integer">214150095</label>
+            <label index="label_speakers" type="integer">258305227</label>
+            <label index="label_price_general" type="integer">56627526</label>
+            <label index="label_price_regular" type="integer">81309183</label>
+            <label index="label_price_special" type="integer">35819210</label>
+            <label index="label_paymentmethods" type="integer">119552142</label>
+            <label index="label_organizers" type="integer">68798680</label>
+            <label index="label_vacancies" type="integer">99017107</label>
+            <label index="label_deadline_registration" type="integer">106717060</label>
+            <label index="label_registration" type="integer">16354175</label>
+            <label index="label_back" type="integer">168615651</label>
+            <label index="label_onlineRegistration" type="integer">20392011</label>
+            <label index="label_registrationForm" type="integer">236130017</label>
+            <label index="label_thankyou" type="integer">235938949</label>
+            <label index="label_thankyou_informal" type="integer">222419149</label>
+            <label index="message_wrongSeminarNumber" type="integer">232548181</label>
+            <label index="message_wrongSeminarNumber_informal" type="integer">222419149</label>
+            <label index="message_noResults" type="integer">15777293</label>
+            <label index="message_registrationForm" type="integer">194008229</label>
+            <label index="message_registrationForm_informal" type="integer">222419149</label>
         </languageKey>
         <languageKey index="cz" type="array">
         </languageKey>

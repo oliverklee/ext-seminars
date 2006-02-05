@@ -5,6 +5,7 @@
 - Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#0002400)
 - moved the changelog from the manual to this file (#0002435)
 - Fixed: Commas in participant names or organizer names caused problems. (#0002432)
+- Added a Dutch localization. (#0001970)
 
 0.4.3
 - Fixed: Paid attendances were counted as not paid. (#0001978)
