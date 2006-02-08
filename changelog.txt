@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Fixed: For some RTE configurations, lists get rendered as <typolist> on the front end. (#0001979)
 - Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format “John Doe <john.doe@example.com>”. (#0001954)
 - Improved the manual.
 - Code cleanup.
