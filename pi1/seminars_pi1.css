@@ -6,11 +6,17 @@
 
 .tx-seminars-pi1-error {
   color: #f00;
+  background-color: inherit;
   font-weight: bold;
 }
 
+.tx-seminars-pi1-listrow table {
+  background-color: #fff;
+  color: #000;
+}
+
 .tx-seminars-pi1-listrow th, .tx-seminars-pi1-listrow td {
-  padding:  .2em .5em;
+  padding: .2em .5em;
   margin: 0;
   border-spacing: 0;
   vertical-align: top;
@@ -31,6 +37,11 @@
 
 .tx-seminars-pi1-listrow .listrow-odd, .tx-seminars-pi1-listrow th {
   background-color: #f0f0f0;
+  color: inherit;
+}
+
+.tx-seminars-pi1-listrow tr {
+  background-color: #fff;
   color: inherit;
 }
 
