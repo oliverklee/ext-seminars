@@ -53,6 +53,8 @@ Version 0.4.4, 02/2006: dogfood, part 2
 - move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
 - Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
 - Add categorization of events [from dev-meeting 05/12]
+- move the mobile phone number into its own extension
+- have real mn relations instead of the crappy "1,2,5" format and provide a conversion function
 
 
 Version 0.4.5, 03/2006 - "Make it safer to use": safety, data integrity and sanity
@@ -455,3 +457,6 @@ Not triaged yet
 - "Translate" all locallang files to new XML format [from dev-meeting 05/12]
 - feature: Add a registration transfer module in BE [from dev-meeting 05/12]
 - calendar view
+- iCal import
+- iCal export for single events on the FE
+- iCal export for one or more events on the BE
