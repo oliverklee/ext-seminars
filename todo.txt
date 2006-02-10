@@ -111,6 +111,7 @@ Version 0.4.5, 03/2006 - "Make it safer to use": safety, data integrity and sani
 
 Version 0.4.6, 04/2006 - "Make it nice for developers": code clean-up, qa and documentation
 -------------------------------------------------------------------------------------------
+- format changelog according to http://www.red-bean.com/cvs2cl/changelogs.html
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
 - add automatic headers (function index) to code files
