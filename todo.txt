@@ -462,3 +462,6 @@ Not triaged yet
 - iCal import
 - iCal export for single events on the FE
 - iCal export for one or more events on the BE
+- connection to the "cal" extension
+- translation feature for seminars, locations and speakers
+- add URL to seminar record
