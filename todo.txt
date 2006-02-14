@@ -465,3 +465,4 @@ Not triaged yet
 - connection to the "cal" extension
 - translation feature for seminars, locations and speakers
 - add URL to seminar record
+- aggregate and show seminar records from several sites using this extension (on different servers)
