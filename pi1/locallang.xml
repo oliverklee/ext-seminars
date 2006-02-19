@@ -44,6 +44,7 @@
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
 			<label index="label_title">Title</label>
+			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>
@@ -114,6 +115,7 @@
 			<label index="pi_list_browseresults_noResults">Es wurden leider keine Veranstaltungen gefunden, die den Suchkriterien entsprechen.</label>
 			<label index="pi_list_searchBox_search">Suchen</label>
 			<label index="label_title">Titel</label>
+			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Akkreditierungsnummer</label>
 			<label index="label_credit_points">Leistungspunkte</label>
 			<label index="label_date">Datum</label>
@@ -348,6 +350,7 @@
 			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
+			<label index="label_uid" type="integer">187623698</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>

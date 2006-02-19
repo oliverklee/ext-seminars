@@ -4,7 +4,7 @@ plugin.tx_seminars {
 	hideFieldsInThankYouMail = credit_points
 	generalPriceInMail =
 	hideFieldsInNotificationMail =
-	showSeminarFieldsInNotificationMail = title,date,place,price_regular,price_special,attendees,vacancies,enough_attendees,is_full
+	showSeminarFieldsInNotificationMail = title,uid,date,place,price_regular,price_special,attendees,vacancies,enough_attendees,is_full
 	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile,date_of_birth
 	showAttendanceFieldsInNotificationMail = interests,expectations,background_knowledge,known_from,notes
 

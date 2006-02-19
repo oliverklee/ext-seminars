@@ -150,7 +150,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['maxPages'] = t3lib_div::intInRange($lConf['maxPages'], 0, 1000, 2);
 
 		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
-		$this->internal['orderByList'] = 'title,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
+		$this->internal['orderByList'] = 'title,uid,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
 		// work out from which timeframe we'll display the event list
 		$now = $GLOBALS['SIM_EXEC_TIME'];
@@ -226,7 +226,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('type', $this->seminar->getType());
 			$this->setMarkerContent('title', $this->seminar->getTitle());
-
+			$this->setMarkerContent('uid', $this->seminar->getUid());
+			
 			if ($this->seminar->hasSubtitle()) {
 				$this->setMarkerContent('subtitle', $this->seminar->getSubtitle());
 			} else {
@@ -348,6 +349,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function pi_list_header() {
 		$this->setMarkerContent('header_title', $this->getFieldHeader_sortLink('title'));
+		$this->setMarkerContent('header_uid', $this->getFieldHeader_sortLink('uid'));
 		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader_sortLink('accreditation_number'));
 		$this->setMarkerContent('header_credit_points', $this->getFieldHeader_sortLink('credit_points'));
 		$this->setMarkerContent('header_date', $this->getFieldHeader_sortLink('date'));
@@ -384,6 +386,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('class_itemrow', $completeClass);
 
 			$this->setMarkerContent('title_link', $this->seminar->getLinkedTitle($this));
+			$this->setMarkerContent('uid', $this->seminar->getUid($this));
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
 			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
 			$this->setMarkerContent('date', $this->seminar->getDate());

@@ -40,7 +40,6 @@ Version 0.4.4, 02/2006: dogfood, part 2
   - *create a function to write to the db
   - *create a function in /mod2 to view the log (standard view, verbose view)
   - investigate if the sys_log table can be used to store the extension's log [from dev-meeting 05/12]
-- *add field "event number" (UID) to list view, detailed view and e-mails
 - *create a new template for sr_feuser_register with CSS
 - *make the default sort order for the list view configurable
 - *make the number of results for the list view configurable

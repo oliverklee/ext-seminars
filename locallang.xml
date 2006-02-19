@@ -9,6 +9,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>
@@ -55,6 +56,7 @@ someone just has registered for an event:</label>
 		<languageKey index="dk" type="array">
 		</languageKey>
 		<languageKey index="de" type="array">
+			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Akkreditierungsnummer</label>
 			<label index="label_credit_points">Leistungspunkte</label>
 			<label index="label_date">Datum</label>
@@ -260,6 +262,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="email_confirmationHello_formal" type="integer">88233580</label>
 			<label index="email_confirmationPayment_formal" type="integer">213064489</label>
+			<label index="label_uid" type="integer">187623698</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>

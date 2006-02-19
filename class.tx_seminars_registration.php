@@ -321,6 +321,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->setMarkerContent('hello', sprintf($this->pi_getLL('email_confirmationHello'), $this->getUserName()));
 		$this->setMarkerContent('type', $this->seminar->getType());
 		$this->setMarkerContent('title', $this->seminar->getTitle());
+		$this->setMarkerContent('uid', $this->seminar->getUid());
 
 		if ($this->seminar->hasAccreditationNumber()) {
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
