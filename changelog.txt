@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Fixed: Problems with formal/informal translations after conversion to XML locallang files. (#0002428)
 - Extended the default CSS file to prevent from having unreadable color combinations. Checked that it validates against the CSS validator. (#0001996)
 - Fixed: For some RTE configurations, lists get rendered as <typolist> on the front end. (#0001979)
 - Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format “John Doe <john.doe@example.com>”. (#0001954)

@@ -5,36 +5,6 @@
 		<type>module</type>
 		<fileId>EXT:seminars/locallang.xml</fileId>
 		<labelContext type="array">
-			<label index="label_accreditation_number"></label>
-			<label index="label_credit_points"></label>
-			<label index="label_date"></label>
-			<label index="label_time"></label>
-			<label index="label_place"></label>
-			<label index="label_room"></label>
-			<label index="label_price_general"></label>
-			<label index="label_price_regular"></label>
-			<label index="label_price_special"></label>
-			<label index="label_paymentmethods"></label>
-			<label index="label_url"></label>
-			<label index="label_seminardata"></label>
-			<label index="label_feuserdata"></label>
-			<label index="label_attendancedata"></label>
-			<label index="message_notLoggedIn"></label>
-			<label index="message_alreadyRegistered"></label>
-			<label index="message_wrongSeminarNumber"></label>
-			<label index="message_noRegistrationNecessary"></label>
-			<label index="message_seminarCancelled"></label>
-			<label index="message_seminarRegistrationIsClosed"></label>
-			<label index="message_seminarStarted"></label>
-			<label index="message_seminarOver"></label>
-			<label index="message_noVacancies"></label>
-			<label index="message_invalidNumberOfSeats"></label>
-			<label index="message_willBeAnnounced"></label>
-			<label index="email_confirmationSubject"></label>
-			<label index="email_confirmationHello"></label>
-			<label index="email_confirmationPayment"></label>
-			<label index="email_notificationSubject"></label>
-			<label index="email_notificationHello"></label>
 		</labelContext>
 	</meta>
 	<data type="array">
@@ -53,22 +23,30 @@
 			<label index="label_seminardata">Seminar data</label>
 			<label index="label_feuserdata">Account data</label>
 			<label index="label_attendancedata">Data that has been entered on registration</label>
-			<label index="message_notLoggedIn">Please log in first in order to register for an event.</label>
-			<label index="message_alreadyRegistered">You already have registered for this event.</label>
-			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
+			<label index="message_notLoggedIn_formal">Please log in first in order to register for an event.</label>
+			<label index="message_notLoggedIn_informal">Please log in first in order to register for an event.</label>
+			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
+			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
+			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration deadline has passed.</label>
 			<label index="message_seminarStarted">This event has already started.</label>
 			<label index="message_seminarOver">This event is already over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
-			<label index="email_confirmationHello">Hello %s,
+			<label index="email_confirmationHello_formal">Hello %s,
 
 thank you for registering for this event:</label>
-			<label index="email_confirmationPayment">If you haven't paid the attendance fee yet, please pay it using these payment options:</label>
+			<label index="email_confirmationHello_informal">Hello %s,
+
+thank you for registering for this event:</label>
+			<label index="email_confirmationPayment_formal">If you haven't paid the attendance fee yet, please pay it using these payment options:</label>
+			<label index="email_confirmationPayment_informal">If you haven't paid the attendance fee yet, please pay it using these payment options:</label>
 			<label index="email_notificationSubject">Registration notification</label>
 			<label index="email_notificationHello">Hello,
 
@@ -91,34 +69,34 @@ someone just has registered for an event:</label>
 			<label index="label_seminardata">Daten des Seminars</label>
 			<label index="label_feuserdata">Daten des Accounts</label>
 			<label index="label_attendancedata">Daten, die bei der Anmeldung angegeben wurden</label>
-			<label index="message_notLoggedIn">Bitte loggen Sie sich zuerst ein, um sich für eine Veranstaltung anzumelden.</label>
-			<label index="message_alreadyRegistered">Sie sind für diese Veranstaltung bereits angemeldet.</label>
-			<label index="message_wrongSeminarNumber">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
+			<label index="message_notLoggedIn_formal">Bitte loggen Sie sich zuerst ein, um sich für eine Veranstaltung anzumelden.</label>
+			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein, um dich für eine Veranstaltung anzumelden.</label>
+			<label index="message_alreadyRegistered_formal">Sie sind für diese Veranstaltung bereits angemeldet.</label>
+			<label index="message_alreadyRegistered_informal">Du bist für diese Veranstaltung bereits angemeldet.</label>
+			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
+			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noRegistrationNecessary">Für diese Veranstaltung ist keine Anmeldung erforderlich.</label>
 			<label index="message_seminarCancelled">Diese Veranstaltung wurde leider abgesagt.</label>
 			<label index="message_seminarRegistrationIsClosed">Die Anmeldefrist für diese Veranstaltung ist leider schon vorbei.</label>
 			<label index="message_seminarStarted">Diese Veranstaltung hat leider schon angefangen.</label>
 			<label index="message_seminarOver">Diese Veranstaltung ist leider schon beendet.</label>
 			<label index="message_noVacancies">Es sind leider keine Plätze mehr frei.</label>
+			<label index="message_invalidNumberOfSeats_formal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</label>
+			<label index="message_invalidNumberOfSeats_informal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</label>
 			<label index="message_willBeAnnounced">wird noch bekannt gegeben</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
-			<label index="email_confirmationHello">Guten Tag %s,
+			<label index="email_confirmationHello_formal">Guten Tag %s,
 
 vielen Dank für Ihre Anmeldung zu dieser Veranstaltung:</label>
-			<label index="email_confirmationPayment">Falls Sie den Teilnahmebeitrag noch nicht bezahlt haben, können Sie wie folgt bezahlen:</label>
+			<label index="email_confirmationHello_informal">Hallo %s,
+
+vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
+			<label index="email_confirmationPayment_formal">Falls Sie den Teilnahmebeitrag noch nicht bezahlt haben, können Sie wie folgt bezahlen:</label>
+			<label index="email_confirmationPayment_informal">Falls du den Teilnahmebeitrag noch nicht bezahlt hast, kannst du wie folgt bezahlen:</label>
 			<label index="email_notificationSubject">Anmeldebenachrichtigung</label>
 			<label index="email_notificationHello">Hallo,
 
 jemand hat sich gerade für eine Veranstaltung angemeldet:</label>
-			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein, um dich für eine Veranstaltung anzumelden.</label>
-			<label index="message_alreadyRegistered_informal">Du bist für diese Veranstaltung bereits angemeldet.</label>
-			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
-			<label index="message_invalidNumberOfSeats_formal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</label>
-			<label index="message_invalidNumberOfSeats_informal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</label>
-			<label index="email_confirmationHello_informal">Hallo %s,
-
-vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
-			<label index="email_confirmationPayment_informal">Falls du den Teilnahmebeitrag noch nicht bezahlt hast, kannst du wie folgt bezahlen:</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -128,50 +106,50 @@ vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
 		</languageKey>
 		<languageKey index="es" type="array">
 		</languageKey>
-        <languageKey index="nl" type="array">
-            <label index="label_accreditation_number">Accrediteringsnummer</label>
-            <label index="label_credit_points">Kredietpunten</label>
-            <label index="label_date">Datum</label>
-            <label index="label_time">Tijd</label>
-            <label index="label_place">Plaats</label>
-            <label index="label_room">Kamer</label>
-            <label index="label_price_general">Prijs</label>
-            <label index="label_price_regular">Standaardprijs</label>
-            <label index="label_price_special">Speciale prijs</label>
-            <label index="label_paymentmethods">Beschikbare betaalmogelijkheden</label>
-            <label index="label_url">Meer informatie</label>
-            <label index="label_seminardata">Seminar gegevens</label>
-            <label index="label_feuserdata">Gebruikergegevens</label>
-            <label index="label_attendancedata">Gegevens die zijn ingevoerd bij registratie</label>
-            <label index="message_notLoggedIn">U dient eerst in te loggen voordat u zich kunt registreren voor een bijeenkomst.</label>
-            <label index="message_notLoggedIn_informal">Log je eerst in om je aan te melden voor een bijeenkomst.</label>
-            <label index="message_alreadyRegistered">U heeft zich al geregistreerd voor deze bijeenkomst.</label>
-            <label index="message_alreadyRegistered_informal">Je bent al voor deze bijeenkomst aangemeld.</label>
-            <label index="message_wrongSeminarNumber">Er is geen bijeenkomst bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link op deze pagina wilt u dan svp de webmaster hiervan op de hoogte brengen. Dank u!</label>
-            <label index="message_wrongSeminarNumber_informal">Een bijeenkomst met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
-            <label index="message_noRegistrationNecessary">Voor deze bijeenkomst is geen registratie noodzakelijk.</label>
-            <label index="message_seminarCancelled">Helaas, deze bijeenkomst gaat niet door.</label>
-            <label index="message_seminarRegistrationIsClosed">De registratieperiode voor deze bijeenkomst is helaas al voorbij.</label>
-            <label index="message_seminarStarted">Deze bijeenkomst is inmiddels gestart.</label>
-            <label index="message_seminarOver">Deze bijeenkomst is inmiddels geëindigd.</label>
-            <label index="message_noVacancies">Helaas, er zijn geen vrije plaatsen meer beschikbaar.</label>
-            <label index="message_invalidNumberOfSeats_formal">Het aantal plaatsen dat u wilt reserveren is helaas te hoog. U kunt ten hoogste %s plaatsen reserveren.</label>
-            <label index="message_invalidNumberOfSeats_informal">Het aantal plaatsen dat je wilt reserveren is helaas te hoog. Je kunt ten hoogste %s plaatsen reserveren.</label>
-            <label index="message_willBeAnnounced">zal worden aangekondigd</label>
-            <label index="email_confirmationSubject">Bevestiging van de registratie</label>
-            <label index="email_confirmationHello">Hallo %s,
+		<languageKey index="nl" type="array">
+			<label index="label_accreditation_number">Accrediteringsnummer</label>
+			<label index="label_credit_points">Kredietpunten</label>
+			<label index="label_date">Datum</label>
+			<label index="label_time">Tijd</label>
+			<label index="label_place">Plaats</label>
+			<label index="label_room">Kamer</label>
+			<label index="label_price_general">Prijs</label>
+			<label index="label_price_regular">Standaardprijs</label>
+			<label index="label_price_special">Speciale prijs</label>
+			<label index="label_paymentmethods">Beschikbare betaalmogelijkheden</label>
+			<label index="label_url">Meer informatie</label>
+			<label index="label_seminardata">Seminar gegevens</label>
+			<label index="label_feuserdata">Gebruikergegevens</label>
+			<label index="label_attendancedata">Gegevens die zijn ingevoerd bij registratie</label>
+			<label index="message_notLoggedIn_formal">U dient eerst in te loggen voordat u zich kunt registreren voor een bijeenkomst.</label>
+			<label index="message_notLoggedIn_informal">Log je eerst in om je aan te melden voor een bijeenkomst.</label>
+			<label index="message_alreadyRegistered_formal">U heeft zich al geregistreerd voor deze bijeenkomst.</label>
+			<label index="message_alreadyRegistered_informal">Je bent al voor deze bijeenkomst aangemeld.</label>
+			<label index="message_wrongSeminarNumber_formal">Er is geen bijeenkomst bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link op deze pagina wilt u dan svp de webmaster hiervan op de hoogte brengen. Dank u!</label>
+			<label index="message_wrongSeminarNumber_informal">Een bijeenkomst met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
+			<label index="message_noRegistrationNecessary">Voor deze bijeenkomst is geen registratie noodzakelijk.</label>
+			<label index="message_seminarCancelled">Helaas, deze bijeenkomst gaat niet door.</label>
+			<label index="message_seminarRegistrationIsClosed">De registratieperiode voor deze bijeenkomst is helaas al voorbij.</label>
+			<label index="message_seminarStarted">Deze bijeenkomst is inmiddels gestart.</label>
+			<label index="message_seminarOver">Deze bijeenkomst is inmiddels geëindigd.</label>
+			<label index="message_noVacancies">Helaas, er zijn geen vrije plaatsen meer beschikbaar.</label>
+			<label index="message_invalidNumberOfSeats_formal">Het aantal plaatsen dat u wilt reserveren is helaas te hoog. U kunt ten hoogste %s plaatsen reserveren.</label>
+			<label index="message_invalidNumberOfSeats_informal">Het aantal plaatsen dat je wilt reserveren is helaas te hoog. Je kunt ten hoogste %s plaatsen reserveren.</label>
+			<label index="message_willBeAnnounced">zal worden aangekondigd</label>
+			<label index="email_confirmationSubject">Bevestiging van de registratie</label>
+			<label index="email_confirmationHello_formal">Hallo %s,
 
 Dank u voor uw registratie voor de bijeenkomst:</label>
-            <label index="email_confirmationHello_informal">Hallo %s,
+			<label index="email_confirmationHello_informal">Hallo %s,
 
 Bedankt voor je aanmelding voor deze bijeenkomst:</label>
-            <label index="email_confirmationPayment">Wanneer u nog niet heeft betaald voor uw toegang gebruik dan svp een van deze betaalmethoden:</label>
-            <label index="email_confirmationPayment_informal">Wanneer je het deelnamebedrag nog niet hebt betaald kun je op de volgende manieren betalen:</label>
-            <label index="email_notificationSubject">Registratiebericht</label>
-            <label index="email_notificationHello">Hallo,
+			<label index="email_confirmationPayment_formal">Wanneer u nog niet heeft betaald voor uw toegang gebruik dan svp een van deze betaalmethoden:</label>
+			<label index="email_confirmationPayment_informal">Wanneer je het deelnamebedrag nog niet hebt betaald kun je op de volgende manieren betalen:</label>
+			<label index="email_notificationSubject">Registratiebericht</label>
+			<label index="email_notificationHello">Hallo,
 
 iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
-        </languageKey>
+		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
 		<languageKey index="pl" type="array">
@@ -238,38 +216,6 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
-		<languageKey index="default" type="array">
-			<label index="label_accreditation_number" type="integer">251981191</label>
-			<label index="label_credit_points" type="integer">267941596</label>
-			<label index="label_date" type="integer">71780721</label>
-			<label index="label_time" type="integer">175559919</label>
-			<label index="label_place" type="integer">129617664</label>
-			<label index="label_room" type="integer">214150095</label>
-			<label index="label_price_general" type="integer">56627526</label>
-			<label index="label_price_regular" type="integer">81309183</label>
-			<label index="label_price_special" type="integer">35819210</label>
-			<label index="label_paymentmethods" type="integer">119552142</label>
-			<label index="label_url" type="integer">179332787</label>
-			<label index="label_seminardata" type="integer">202303574</label>
-			<label index="label_feuserdata" type="integer">104853840</label>
-			<label index="label_attendancedata" type="integer">196013839</label>
-			<label index="message_notLoggedIn" type="integer">7945840</label>
-			<label index="message_alreadyRegistered" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
-			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
-			<label index="message_seminarCancelled" type="integer">154447024</label>
-			<label index="message_seminarRegistrationIsClosed" type="integer">201942574</label>
-			<label index="message_seminarStarted" type="integer">227758659</label>
-			<label index="message_seminarOver" type="integer">97564023</label>
-			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats" type="integer">85122580</label>
-			<label index="message_willBeAnnounced" type="integer">181096808</label>
-			<label index="email_confirmationSubject" type="integer">69825439</label>
-			<label index="email_confirmationHello" type="integer">115141347</label>
-			<label index="email_confirmationPayment" type="integer">213064489</label>
-			<label index="email_notificationSubject" type="integer">239440327</label>
-			<label index="email_notificationHello" type="integer">263661604</label>
-		</languageKey>
 		<languageKey index="dk" type="array">
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -288,27 +234,32 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
 			<label index="message_notLoggedIn" type="integer">7945840</label>
-			<label index="message_notLoggedIn_informal" type="integer">222419149</label>
+			<label index="message_notLoggedIn_informal" type="integer">7945840</label>
 			<label index="message_alreadyRegistered" type="integer">72254150</label>
-			<label index="message_alreadyRegistered_informal" type="integer">222419149</label>
+			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
 			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
-			<label index="message_wrongSeminarNumber_informal" type="integer">222419149</label>
+			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">201942574</label>
 			<label index="message_seminarStarted" type="integer">227758659</label>
 			<label index="message_seminarOver" type="integer">97564023</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats_formal" type="integer">222419149</label>
-			<label index="message_invalidNumberOfSeats_informal" type="integer">222419149</label>
+			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationHello" type="integer">88233580</label>
-			<label index="email_confirmationHello_informal" type="integer">222419149</label>
+			<label index="email_confirmationHello_informal" type="integer">88233580</label>
 			<label index="email_confirmationPayment" type="integer">213064489</label>
-			<label index="email_confirmationPayment_informal" type="integer">222419149</label>
+			<label index="email_confirmationPayment_informal" type="integer">213064489</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
+			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
+			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
+			<label index="email_confirmationHello_formal" type="integer">88233580</label>
+			<label index="email_confirmationPayment_formal" type="integer">213064489</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -318,44 +269,49 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 		</languageKey>
 		<languageKey index="es" type="array">
 		</languageKey>
-        <languageKey index="nl" type="array">
-            <label index="label_accreditation_number" type="integer">251981191</label>
-            <label index="label_credit_points" type="integer">267941596</label>
-            <label index="label_date" type="integer">71780721</label>
-            <label index="label_time" type="integer">175559919</label>
-            <label index="label_place" type="integer">129617664</label>
-            <label index="label_room" type="integer">214150095</label>
-            <label index="label_price_general" type="integer">56627526</label>
-            <label index="label_price_regular" type="integer">81309183</label>
-            <label index="label_price_special" type="integer">35819210</label>
-            <label index="label_paymentmethods" type="integer">119552142</label>
-            <label index="label_url" type="integer">179332787</label>
-            <label index="label_seminardata" type="integer">202303574</label>
-            <label index="label_feuserdata" type="integer">104853840</label>
-            <label index="label_attendancedata" type="integer">196013839</label>
-            <label index="message_notLoggedIn" type="integer">7945840</label>
-            <label index="message_notLoggedIn_informal" type="integer">222419149</label>
-            <label index="message_alreadyRegistered" type="integer">72254150</label>
-            <label index="message_alreadyRegistered_informal" type="integer">222419149</label>
-            <label index="message_wrongSeminarNumber" type="integer">232548181</label>
-            <label index="message_wrongSeminarNumber_informal" type="integer">222419149</label>
-            <label index="message_noRegistrationNecessary" type="integer">59870455</label>
-            <label index="message_seminarCancelled" type="integer">154447024</label>
-            <label index="message_seminarRegistrationIsClosed" type="integer">201942574</label>
-            <label index="message_seminarStarted" type="integer">227758659</label>
-            <label index="message_seminarOver" type="integer">97564023</label>
-            <label index="message_noVacancies" type="integer">139364947</label>
-            <label index="message_invalidNumberOfSeats_formal" type="integer">222419149</label>
-            <label index="message_invalidNumberOfSeats_informal" type="integer">222419149</label>
-            <label index="message_willBeAnnounced" type="integer">181096808</label>
-            <label index="email_confirmationSubject" type="integer">69825439</label>
-            <label index="email_confirmationHello" type="integer">88233580</label>
-            <label index="email_confirmationHello_informal" type="integer">222419149</label>
-            <label index="email_confirmationPayment" type="integer">213064489</label>
-            <label index="email_confirmationPayment_informal" type="integer">222419149</label>
-            <label index="email_notificationSubject" type="integer">239440327</label>
-            <label index="email_notificationHello" type="integer">108930896</label>
-        </languageKey>
+		<languageKey index="nl" type="array">
+			<label index="label_accreditation_number" type="integer">251981191</label>
+			<label index="label_credit_points" type="integer">267941596</label>
+			<label index="label_date" type="integer">71780721</label>
+			<label index="label_time" type="integer">175559919</label>
+			<label index="label_place" type="integer">129617664</label>
+			<label index="label_room" type="integer">214150095</label>
+			<label index="label_price_general" type="integer">56627526</label>
+			<label index="label_price_regular" type="integer">81309183</label>
+			<label index="label_price_special" type="integer">35819210</label>
+			<label index="label_paymentmethods" type="integer">119552142</label>
+			<label index="label_url" type="integer">179332787</label>
+			<label index="label_seminardata" type="integer">202303574</label>
+			<label index="label_feuserdata" type="integer">104853840</label>
+			<label index="label_attendancedata" type="integer">196013839</label>
+			<label index="message_notLoggedIn" type="integer">7945840</label>
+			<label index="message_notLoggedIn_informal" type="integer">7945840</label>
+			<label index="message_alreadyRegistered" type="integer">72254150</label>
+			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
+			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
+			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
+			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
+			<label index="message_seminarCancelled" type="integer">154447024</label>
+			<label index="message_seminarRegistrationIsClosed" type="integer">201942574</label>
+			<label index="message_seminarStarted" type="integer">227758659</label>
+			<label index="message_seminarOver" type="integer">97564023</label>
+			<label index="message_noVacancies" type="integer">139364947</label>
+			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
+			<label index="message_willBeAnnounced" type="integer">181096808</label>
+			<label index="email_confirmationSubject" type="integer">69825439</label>
+			<label index="email_confirmationHello" type="integer">88233580</label>
+			<label index="email_confirmationHello_informal" type="integer">88233580</label>
+			<label index="email_confirmationPayment" type="integer">213064489</label>
+			<label index="email_confirmationPayment_informal" type="integer">213064489</label>
+			<label index="email_notificationSubject" type="integer">239440327</label>
+			<label index="email_notificationHello" type="integer">108930896</label>
+			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
+			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
+			<label index="email_confirmationHello_formal" type="integer">88233580</label>
+			<label index="email_confirmationPayment_formal" type="integer">213064489</label>
+		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
 		<languageKey index="pl" type="array">
