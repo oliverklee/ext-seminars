@@ -53,7 +53,8 @@ Version 0.4.4, 02/2006: dogfood, part 2
 - Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
 - Add categorization of events [from dev-meeting 05/12]
 - move the mobile phone number into its own extension
-- have real mn relations instead of the crappy "1,2,5" format and provide a conversion function
+- have real m:m relations instead of the crappy "1,2,5" format
+- provide an "update" function (like in tt_news) that updates to the real m:m tables
 
 
 Version 0.4.5, 03/2006 - "Make it safer to use": safety, data integrity and sanity
