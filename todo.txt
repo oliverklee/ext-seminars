@@ -65,6 +65,7 @@ Version 0.4.5, 03/2006 - "Make it safer to use": safety, data integrity and sani
 - test with Typo3 4.0 and make sure that it works
 - check that before every sql_fetch_assoc, there is an sql_num_rows to ensure that we have at least one row to operate on
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
+- simulate transactions when booking a seminar in order to avoid overbooking when two people simultaneously try to register
 - factor out the statistics update into a common function and make it more efficient
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics
 - handle deleted (and "marked as deleted") user accounts and seminars graciously
