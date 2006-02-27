@@ -1,9 +1,10 @@
 0.4.4 - work in progress
+- Feature: Sending additional notification mails to organizers if event has enough registrations or is full (#0001994)
 - Added the field UID to listview, singleview and outgoing emails (#0002009)
 - Fixed: Problems with formal/informal translations after conversion to XML locallang files. (#0002428)
 - Extended the default CSS file to prevent from having unreadable color combinations. Checked that it validates against the CSS validator. (#0001996)
 - Fixed: For some RTE configurations, lists get rendered as <typolist> on the front end. (#0001979)
-- Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format “John Doe <john.doe@example.com>”. (#0001954)
+- Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format John Doe <john.doe@example.com>. (#0001954)
 - Improved the manual.
 - Code cleanup.
 - Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#0002400)
@@ -22,7 +23,7 @@
 - The configuration of generalPriceInList and generalPriceInSingle now is possible with flexforms as well.
 - Fixed: The complete second sheet in the flexforms was non-functional.
 - Added an extension icon.
-- Now the extension default configuration is done using static templates. Please include the Seminars template in your site template under “Include static (from extensions)”.
+- Now the extension default configuration is done using static templates. Please include the Seminars template in your site template under Include static (from extensions).
 - Now Web > Seminars shows the seminars from the selected page, not from all pages.
 - Now Web > Seminars > Update Statistics also shows the seminar dates next to the seminar title.
 - Now Web > Seminars > Show event details displays a list of participant names and their e-mail addresses, ready for copy and paste into an e-mail client.
@@ -65,11 +66,11 @@
 - Fixed the CSS so that content directly below the registration form starts at the very left.
 - If no user is logged in, a link to the login form is now provided.
 - If there are no events for the list view, now a message gets displayed instead of an empty list.
-- The error messages in the “online registration” part of the detailed view and the registration form are now organized more intuitively: The user doesn't to log in any more to see if a seminar UID in the URL is valid or if a seminar has been canceled.
+- The error messages in the online registration part of the detailed view and the registration form are now organized more intuitively: The user doesn't to log in any more to see if a seminar UID in the URL is valid or if a seminar has been canceled.
 - In the list view, there is now a column with direct links to the registration page. This column only is displayed if a front end user currently is logged in.
 
 0.3.2
-- Added feature “online registration”: registration form, automatic entry into the DB, update of statistics, e-mail to participant and to organizers.
+- Added feature online registration: registration form, automatic entry into the DB, update of statistics, e-mail to participant and to organizers.
 - For the front end plug in, the starting pages are now set using flexforms. You need to set the starting pages when you upgrade to this version.
 - This extension now provides some basic CSS styles.
 - It now is possible to configure the event type for all events using plugin.tx_seminars.eventType.
@@ -91,16 +92,16 @@
 
 0.3.0
 - switched HTML output to templates
-- added switch for formal/informal language (the German “Du/Sie”)
+- added switch for formal/informal language (the German Du/Sie)
 - made it configurable which columns to show in the list view
 - made it configurable which fields to show in the detailed view
-- translated “No results found” to German
+- translated No results found to German
 - renamed fe_users database field tx_seminars_registration_number to tx_seminars_matriculation_number
 
 0.2.1
 - added first code for online registration (not hooked up yet)
 - improved documentation
-- back end: added “save and add new item” button for all data types
+- back end: added save and add new item button for all data types
 - made content items USER_INT object (thus disabling caching of this extension's content elements) as the number of vacancies is highly volatile
 
 0.2.0

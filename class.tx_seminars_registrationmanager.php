@@ -385,6 +385,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$seminar->updateStatistics();
 			$this->registration->notifyAttendee($plugin);
 			$this->registration->notifyOrganizers($plugin);
+			$this->registration->sendAdditionalNotification($plugin);
 
 			return;
 	}

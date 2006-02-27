@@ -442,6 +442,65 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks if additional notifications to the organizers are necessary. In that case, the notification e-mails will be sent to all organizers.
+	 * 
+	 * Additional notifications mails will be sent out upon the following events:
+	 * - an event now has enough registrations
+	 * - an event is fully booked
+	 * If both things happen at the same time (minimum and maximum count of attendees are the same), only the "event is full" message will be sent.
+	 * 
+	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 *
+	 * @access	public
+	 */
+	function sendAdditionalNotification(&$plugin)	{
+		$whichEmailToSend = '';
+		$whichEmailSubject = '';
+
+		if ($this->seminar->isFull()) {
+			$whichEmailToSend = 'email_additionalNotificationIsFull';
+			$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
+		}
+		// The second check ensures that only one set of e-mails is sent to the organizers.
+		elseif ($this->seminar->getMinimumAttendees() == $this->seminar->getAttendances()) {
+			$whichEmailToSend = 'email_additionalNotificationEnoughRegistrations';
+			$whichEmailSubject = 'email_additionalNotificationEnoughRegistrationsSubject';
+		}
+
+		// Only send an e-mail if there's a reason for it.
+		if (!empty($whichEmailToSend)) {
+			$this->setMarkerContent('message', $this->pi_getLL($whichEmailToSend));
+
+			$showSeminarFields = $this->getConfValue('showSeminarFieldsInNotificationMail');
+			if (!empty($showSeminarFields)) {
+				$this->setMarkerContent('seminardata', $this->seminar->dumpSeminarValues($showSeminarFields));
+			} else {
+				$this->readSubpartsToHide('seminardata', 'field_wrapper');
+			}
+
+			$content = $this->substituteMarkerArrayCached('MAIL_ADDITIONALNOTIFICATION');
+			$subject = sprintf($this->pi_getLL($whichEmailSubject), $this->seminar->getUid(), $this->seminar->getTitleAndDate());
+
+			// We use just the organizer's e-mail address as e-mail recipient
+			// as some SMTP servers cannot handle the format
+			// "John Doe <john.doe@example.com>".
+			$organizers = $this->seminar->getOrganizersEmail();
+			$froms = $this->seminar->getOrganizersNameAndEmail();
+			foreach ($organizers as $currentOrganizerEmail) {
+				t3lib_div::plainMailEncoded(
+					$currentOrganizerEmail,
+					$subject,
+					$content,
+					// We use the first organizer's e-mail as sender.
+					'From: '.$froms[0],
+					'8bit'
+				);
+			}
+		}
+		return;
+	}
+
+	/**
 	 * Reads and initializes the templates.
 	 * If this has already been called for this instance, this function does nothing.
 	 *
