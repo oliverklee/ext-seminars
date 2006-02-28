@@ -177,6 +177,7 @@ Version 0.4.6, 04/2006 - "Make it nice for developers": code clean-up, qa and do
   - in ext_tables.php:
       t3lib_extMgm::addStaticFile($_EXTKEY,'static/','Seminars');
 - make sure each file has a linefeed as last character
+- use mmQuery where possible (eg. in seminar->getSpeakersShort)
 
 
 Version 0.4.7, 05/2006 - "Make it for everybody": accessibility
