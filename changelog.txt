@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Feature: Added speakers to list view (disabled by default) (#0002730)
 - Feature: Sending additional notification mails to organizers if event has enough registrations or is full (#0001994)
 - Added the field UID to listview, singleview and outgoing emails (#0002009)
 - Fixed: Problems with formal/informal translations after conversion to XML locallang files. (#0002428)

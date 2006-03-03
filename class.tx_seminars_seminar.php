@@ -549,7 +549,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function getSpeakers(&$plugin) {
+	function getSpeakersWithDescription(&$plugin) {
 		$result = '';
 
 		if ($this->hasSpeakers()) {
@@ -589,7 +589,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our speaker (or speakers) as a plain test list (just their names).
+	 * Gets our speaker (or speakers) as a plain text list (just their names).
 	 * Returns an empty string if this seminar doesn't have any speakers.
 	 *
 	 * @return	string		our speakers list (or '' if there is an error)

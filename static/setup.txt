@@ -31,8 +31,10 @@ plugin.tx_seminars_pi1 {
 
 	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_headertitle =
+	class_headeruid =
 	class_headeraccreditation_number =
 	class_headercredit_points =
+	class_headerspeakers =
 	class_headerdate =
 	class_headerprice_regular =
 	class_headerprice_special =
@@ -45,8 +47,10 @@ plugin.tx_seminars_pi1 {
 
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_listtitle = title
+	class_listuid =
 	class_listaccreditation_number =
 	class_listcredit_points =
+	class_listspeakers =
 	class_listdate = date
 	class_listprice_regular = price
 	class_listprice_special = price
@@ -62,7 +66,7 @@ plugin.tx_seminars_pi1 {
 	salutation = formal
 	# the timeframe from which event should be displayed in the list view
 	timeframeInList = currentAndUpcoming
-	hideColumns = accreditation_number,credit_points,price_special
+	hideColumns = accreditation_number,credit_points,price_special,speakers
 	hideFields = credit_points
 	generalPriceInList =
 	generalPriceInSingle =

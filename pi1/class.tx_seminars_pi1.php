@@ -263,7 +263,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			if ($this->seminar->hasSpeakers()) {
-				$this->setMarkerContent('speakers', $this->seminar->getSpeakers($this));
+				$this->setMarkerContent('speakers', $this->seminar->getSpeakersWithDescription($this));
 			} else {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}
@@ -352,6 +352,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('header_uid', $this->getFieldHeader_sortLink('uid'));
 		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader_sortLink('accreditation_number'));
 		$this->setMarkerContent('header_credit_points', $this->getFieldHeader_sortLink('credit_points'));
+		$this->setMarkerContent('header_speakers', $this->getFieldHeader('speakers'));
 		$this->setMarkerContent('header_date', $this->getFieldHeader_sortLink('date'));
 		$this->setMarkerContent('header_price_regular', $this->getFieldHeader_sortLink('price_regular'));
 		$this->setMarkerContent('header_price_special', $this->getFieldHeader_sortLink('price_special'));
@@ -389,6 +390,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('uid', $this->seminar->getUid($this));
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
 			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
+			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
 			$this->setMarkerContent('date', $this->seminar->getDate());
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
 			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
