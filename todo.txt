@@ -47,14 +47,11 @@ Version 0.4.4, 02/2006: dogfood, part 2
 - *make it configurable whether to have the search box in the list view
 - *make it configurable whether to have the results browser in the list view
 - enter this extension into http://wiki.typo3.org/index.php/Calendar
-- extend copyright line to 2006
-- provide a general "bag" class from which a seminar bag or a attendance bag can inherit
-- move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
+- *extend copyright line to 2006
+- *provide a general "bag" class from which a seminar bag or a attendance bag can inherit
+- *move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
 - Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
 - Add categorization of events [from dev-meeting 05/12]
-- move the mobile phone number into its own extension
-- have real m:m relations instead of the crappy "1,2,5" format
-- provide an "update" function (like in tt_news) that updates to the real m:m tables
 - increase the number of lines in the Source Page flexforms element
 
 
@@ -113,7 +110,11 @@ Version 0.4.5, 03/2006 - "Make it safer to use": safety, data integrity and sani
 - *seminars without a date should automatically have no times set
 - change all tautology '1's to '1=1' in DB queries to make this extension work with PostgreSQL
 - add meta information and constraints (primaray key, foreign key, not null, etc.) to SQL file
-
+- move the mobile phone number into its own extension
+- have real m:m relations instead of the crappy "1,2,5" format
+- provide an "update" function (like in tt_news) that updates to the real m:m tables
+- make our DB scheme conform to 3NF, BCNF, 4NF or even 5NF and document this
+- store redundant data (e.g. the number of participants) in the cache instead of in the seminar records
 
 Version 0.4.6, 04/2006 - "Make it nice for developers": code clean-up, qa and documentation
 -------------------------------------------------------------------------------------------
