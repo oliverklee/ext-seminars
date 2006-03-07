@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Fix: Uninitialized variables (#0002779)
 - Feature: Added speakers to list view (disabled by default) (#0002730)
 - Feature: Sending additional notification mails to organizers if event has enough registrations or is full (#0001994)
 - Added the field UID to listview, singleview and outgoing emails (#0002009)

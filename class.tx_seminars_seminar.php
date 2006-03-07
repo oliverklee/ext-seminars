@@ -697,6 +697,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPaymentMethods(&$plugin) {
+		$result = '';
+
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'payment_methods',
 			$this->tableSeminars,
@@ -729,8 +731,6 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			}
 
 			$result = '<ul>'.chr(10).$result.'</ul>'.chr(10);
-		} else {
-			$result = '';
 		}
 
 		return $plugin->pi_RTEcssText($result);
@@ -746,6 +746,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPaymentMethodsPlain() {
+		$result = '';
+
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'payment_methods',
 			$this->tableSeminars,
@@ -777,8 +779,6 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 					$result .= $row['description'].chr(10).chr(10);
 				}
 			}
-		} else {
-			$result = '';
 		}
 
 		return $result;
