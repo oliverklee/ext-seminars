@@ -370,6 +370,8 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * Creates a registration to $this->registration, writes it to DB,
 	 * and notifies the organizer and the user (both via e-mail).
+	 * 
+	 * The additinal notifications will only be sent if this is enabled in the TypoScript setup (which is the default).
 	 *
 	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
 	 * @param	array		associative array with the registration data the user has just entered
@@ -385,7 +387,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$seminar->updateStatistics();
 			$this->registration->notifyAttendee($plugin);
 			$this->registration->notifyOrganizers($plugin);
-			$this->registration->sendAdditionalNotification($plugin);
+			if ($this->getConfValue('sendAdditionalNotificationEmails')) {
+				$this->registration->sendAdditionalNotification($plugin);
+			}
 
 			return;
 	}
