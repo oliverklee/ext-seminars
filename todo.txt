@@ -317,6 +317,9 @@ Version 0.4.10, 09/2006 - "Make it nice for the visitors": front end usability a
 - Check if we can/should use TemplaVoila before 0.5.0 [from dev-meeting 05/12]
 - in the list view, add little arrows to the list head indicating the sort field and sort order
 - remove vertical spacing between the table rows
+- implement sorting for all columns in the list view
+- after registering for a seminar, provide a link back to the seminar details page
+- after logging in, jump back to the seminar details page
 
 
 Version 0.5.0, 10/2006 - "Getting real new features"
