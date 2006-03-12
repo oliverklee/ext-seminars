@@ -292,6 +292,14 @@
 							</config>
 						</TCEforms>
 					</showRegistrationFields>
+					<showSpeakerDetails>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.showSpeakerDetails</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</showSpeakerDetails>
 				</el>
 			</ROOT>
 		</s_template_special>

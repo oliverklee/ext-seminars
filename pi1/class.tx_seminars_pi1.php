@@ -263,7 +263,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			if ($this->seminar->hasSpeakers()) {
-				$this->setMarkerContent('speakers', $this->seminar->getSpeakersWithDescription($this));
+				if ($this->getConfValue('showSpeakerDetails', 's_template_special')) {
+					$this->setMarkerContent('speakers', $this->seminar->getSpeakersWithDescription($this));
+				} else {
+					$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
+				}
 			} else {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}

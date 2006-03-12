@@ -37,6 +37,7 @@
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>
 			<label index="seminars.pi_flexform.showRegistrationFields">Show text input fields for online registration (comma-separated):</label>
+			<label index="seminars.pi_flexform.showSpeakerDetails">Show speaker details</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -108,6 +109,7 @@
 			<label index="seminars.pi_flexform.generalPriceInList">&quot;Preis&quot; als Überschrift für den Standardpreis in der Listenansicht benutzen:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">&quot;Preis&quot; als Überschrift für den Standardpreis in der Einzelansicht und bei der Anmeldung benutzen:</label>
 			<label index="seminars.pi_flexform.showRegistrationFields">Angezeigte Text-Input-Felder bei Online-Anmeldung (komma-separiert):</label>
+			<label index="seminars.pi_flexform.showSpeakerDetails">Referentendetails anzeigen</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorherige</label>
 			<label index="pi_list_browseresults_page">Seite</label>
 			<label index="pi_list_browseresults_next">Nächste &gt;</label>
@@ -351,6 +353,7 @@
 			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
