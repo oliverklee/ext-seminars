@@ -883,7 +883,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getLatestPossibleRegistrationTime() {
-		return (($this->hasRecordPropertyInteger('deadline_registration')) ?
+		return (($this->hasRegistrationDeadline()) ?
 			$this->getRecordPropertyInteger('deadline_registration') :
 			$this->getRecordPropertyInteger('begin_date')
 		);
@@ -1226,7 +1226,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function canSomebodyRegister() {
 		return $this->needsRegistration() &&
 			!$this->isCanceled() &&
-			$GLOBALS['SIM_EXEC_TIME'] < $this->getLatestPossibleRegistrationTime() &&
+			!$this->isRegistrationDeadlineOver() &&
 			$this->hasVacancies();
 	}
 
@@ -1250,12 +1250,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$message = $this->pi_getLL('message_noRegistrationNecessary');
 		} elseif ($this->isCanceled()) {
 			$message = $this->pi_getLL('message_seminarCancelled');
-		} elseif ($GLOBALS['SIM_EXEC_TIME'] > $this->getRecordPropertyInteger('end_date')) {
-			$message = $this->pi_getLL('message_seminarOver');
-		} elseif ($this->hasRegistrationDeadline() && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getRecordPropertyInteger('deadline_registration'))) {
+		} elseif ($this->isRegistrationDeadlineOver()) {
 			$message = $this->pi_getLL('message_seminarRegistrationIsClosed');
-		} elseif ($GLOBALS['SIM_EXEC_TIME'] >= $this->getRecordPropertyInteger('begin_date')) {
-			$message = $this->pi_getLL('message_seminarStarted');
 		} elseif ($this->isFull()) {
 			$message = $this->pi_getLL('message_noVacancies');
 		}
@@ -1272,6 +1268,19 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function isCanceled() {
 		return $this->getRecordPropertyBoolean('cancelled');
+	}
+
+ 	/**
+	 * Checks whether the latest possibility to register for this event is over.
+	 *
+	 * The latest moment is either the time the event starts, or a set registration deadline.
+	 *
+	 * @return	boolean		true if the deadline has passed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isRegistrationDeadlineOver() {
+		return ($GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleRegistrationTime());
 	}
 
 	/**

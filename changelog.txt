@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Changed the message shown if an event has begun, is over or registration is closed (#0001848)
 - Feature: Added configuration for sending additional notifications to the organizers (#0002770)
 - Fix: Uninitialized variables (#0002779)
 - Feature: Added speakers to list view (disabled by default) (#0002730)

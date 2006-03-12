@@ -32,9 +32,7 @@
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
-			<label index="message_seminarRegistrationIsClosed">Sorry, the registration deadline has passed.</label>
-			<label index="message_seminarStarted">This event has already started.</label>
-			<label index="message_seminarOver">This event is already over.</label>
+			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
 			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
@@ -84,8 +82,6 @@ someone just has registered for an event:</label>
 			<label index="message_noRegistrationNecessary">Für diese Veranstaltung ist keine Anmeldung erforderlich.</label>
 			<label index="message_seminarCancelled">Diese Veranstaltung wurde leider abgesagt.</label>
 			<label index="message_seminarRegistrationIsClosed">Die Anmeldefrist für diese Veranstaltung ist leider schon vorbei.</label>
-			<label index="message_seminarStarted">Diese Veranstaltung hat leider schon angefangen.</label>
-			<label index="message_seminarOver">Diese Veranstaltung ist leider schon beendet.</label>
 			<label index="message_noVacancies">Es sind leider keine Plätze mehr frei.</label>
 			<label index="message_invalidNumberOfSeats_formal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</label>
 			<label index="message_invalidNumberOfSeats_informal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</label>
@@ -140,8 +136,6 @@ jemand hat sich gerade für eine Veranstaltung angemeldet:</label>
 			<label index="message_noRegistrationNecessary">Voor deze bijeenkomst is geen registratie noodzakelijk.</label>
 			<label index="message_seminarCancelled">Helaas, deze bijeenkomst gaat niet door.</label>
 			<label index="message_seminarRegistrationIsClosed">De registratieperiode voor deze bijeenkomst is helaas al voorbij.</label>
-			<label index="message_seminarStarted">Deze bijeenkomst is inmiddels gestart.</label>
-			<label index="message_seminarOver">Deze bijeenkomst is inmiddels geëindigd.</label>
 			<label index="message_noVacancies">Helaas, er zijn geen vrije plaatsen meer beschikbaar.</label>
 			<label index="message_invalidNumberOfSeats_formal">Het aantal plaatsen dat u wilt reserveren is helaas te hoog. U kunt ten hoogste %s plaatsen reserveren.</label>
 			<label index="message_invalidNumberOfSeats_informal">Het aantal plaatsen dat je wilt reserveren is helaas te hoog. Je kunt ten hoogste %s plaatsen reserveren.</label>
@@ -251,9 +245,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
-			<label index="message_seminarRegistrationIsClosed" type="integer">201942574</label>
-			<label index="message_seminarStarted" type="integer">227758659</label>
-			<label index="message_seminarOver" type="integer">97564023</label>
+			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
 			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
@@ -308,9 +300,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
-			<label index="message_seminarRegistrationIsClosed" type="integer">201942574</label>
-			<label index="message_seminarStarted" type="integer">227758659</label>
-			<label index="message_seminarOver" type="integer">97564023</label>
+			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
 			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
