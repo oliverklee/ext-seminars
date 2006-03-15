@@ -149,17 +149,46 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @param	string		field name to extract
 	 * @param	string		sheet pointer, eg. "sDEF"
+	 * @param	string		whether this is a filename, which has to be combined with a path
 	 *
 	 * @return	string		the value of the corresponding flexforms or TS setup entry (may be empty)
 	 *
 	 * @access	protected
 	 */
-	function getConfValue($fieldName, $sheet = 'sDEF') {
+	function getConfValue($fieldName, $sheet = 'sDEF', $isFileName = false) {
 		$flexformsValue = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $fieldName, $sheet);
+		if ($isFileName && !empty($flexformsValue)) {
+			$flexformsValue = $this->addPathToFileName($flexformsValue);
+		}
 		$confValue = isset($this->conf[$fieldName]) ? $this->conf[$fieldName] : '';
 
 		return ($flexformsValue) ? $flexformsValue : $confValue;
 	}
+
+	/**
+	 * Adds a path in front of the file name.
+	 * This is used for files that are selected in the Flexform of the front end plugin.
+	 *
+	 * If no path is provided, the default (uploads/[extension_name]/) is used as path.
+	 *
+	 * An example (default, with no path provided):
+	 * If the file is named 'template.tmpl', the output will be 'uploads/[extension_name]/template.tmpl'.
+	 * The '[extension_name]' will be replaced by the name of the calling extension.
+	 *
+	 * @param	string		the file name
+	 * @param	string		the path to the file (without filename), must contain a slash at the end, may contain a slash at the beginning (if not relative)
+	 *
+	 * @return	string		the complete path including file name
+	 * 
+	 * @access	protected
+	 */
+	function addPathToFileName($fileName, $path = '') {
+		if (empty($path)) {
+			$path = 'uploads/tx_'.$this->extKey.'/';
+		}
+		return $path.$fileName;
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_dbplugin.php']) {

@@ -72,7 +72,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function getTemplateCode() {
 		/** the whole template file as a string */
-		$templateRawCode = $this->cObj->fileResource($this->getConfValue('templateFile', 's_template_special'));
+		$templateRawCode = $this->cObj->fileResource($this->getConfValue('templateFile', 's_template_special', true));
 		$this->markerNames = $this->findMarkers($templateRawCode);
 
 		$subpartNames = $this->findSubparts($templateRawCode);
