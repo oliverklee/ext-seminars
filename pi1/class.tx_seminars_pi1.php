@@ -63,8 +63,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setCSS();
 
 		// include CSS in header of page
-		if ($this->getConfValue('cssFile', 's_template_special') !== '') {
-			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValue('cssFile', 's_template_special').'";</style>';
+		if ($this->getConfValue('cssFile', 's_template_special', true) !== '') {
+			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValue('cssFile', 's_template_special', true).'";</style>';
 		}
 
 		/** Name of the registrationManager class in case someone subclasses it. */

@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Fix: Repaired the feature of selecting the CSS file from flexform (#0002825)
 - Fix: Added support for selecting the template file from Flexform (which wasn't working before) (#0002715)
 - Feature: Added configuration for showing detailed speaker information in single view (#0001998)
 - Changed the message shown if an event has begun, is over or registration is closed (#0001848)
