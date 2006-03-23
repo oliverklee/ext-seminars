@@ -186,9 +186,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		if (empty($path)) {
 			$path = 'uploads/tx_'.$this->extKey.'/';
 		}
+
 		return $path.$fileName;
 	}
-
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_dbplugin.php']) {
