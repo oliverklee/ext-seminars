@@ -477,3 +477,4 @@ Not triaged yet
 - translation feature for seminars, locations and speakers
 - add URL to seminar record
 - aggregate and show seminar records from several sites using this extension (on different servers)
+- investigate mth_feedit for front end editing of records
