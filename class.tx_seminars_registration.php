@@ -443,12 +443,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 	/**
 	 * Checks if additional notifications to the organizers are necessary. In that case, the notification e-mails will be sent to all organizers.
-	 * 
+	 *
 	 * Additional notifications mails will be sent out upon the following events:
 	 * - an event now has enough registrations
 	 * - an event is fully booked
 	 * If both things happen at the same time (minimum and maximum count of attendees are the same), only the "event is full" message will be sent.
-	 * 
+	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
 	 * @access	public

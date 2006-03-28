@@ -914,15 +914,15 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 	/**
 	 * Checks whether this seminar has a minimum of attendees set.
-	 * 
+	 *
 	 * @return	boolean		true if the seminar has a minimum of attendees set.
-	 * 
+	 *
 	 * @access	public
 	 */
 	function hasMinimumAttendees() {
 		return $this->hasRecordPropertyInteger('attendees_min');
 	}
-	
+
 	/**
 	 * Returns the minimum amount of attendees required for this event to be held.
 	 *
