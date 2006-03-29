@@ -136,6 +136,22 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Sets an integer element of the record data array (and intvals it).
+	 *
+	 * @param	string		key of the element to set (must be non-empty)
+	 * @param	integer		the value that will be written into the element
+	 *
+	 * @access	protected
+	 */
+	function setRecordPropertyInteger($key, $value) {
+		if (!empty($key)) {
+			$this->recordData[$key] = intval($value);
+		}
+
+		return;
+	}
+
+	/**
 	 * Gets an element of the record data array, converted to a boolean.
 	 * If the array has not been initialized properly, false is returned.
 	 *
@@ -164,7 +180,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @access	private
 	 */
 	function hasKey($key) {
-		return ($this->isOk() && isset($this->recordData[$key]));
+		return ($this->isOk() && !empty($key) && isset($this->recordData[$key]));
 	}
 
 	/**
@@ -181,6 +197,13 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 		$result = false;
 
 		if ($this->isOk()) {
+			// We save the current time so that tstamp and crdate will be the same.
+			$now = time();
+			$this->setRecordPropertyInteger('tstamp', $now);
+			if (!$this->isInDb) {
+				$this->setRecordPropertyInteger('crdate', $now);
+			}
+
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_INSERTquery($this->tableName, $this->recordData);
 			if ($dbResult) {
 				$this->isInDb = true;

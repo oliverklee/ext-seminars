@@ -1323,7 +1323,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			array(
 				'attendees' => $this->getRecordPropertyInteger('attendees'),
 				'enough_attendees' => $this->getRecordPropertyInteger('enough_attendees'),
-				'is_full' => $this->getRecordPropertyInteger('is_full')
+				'is_full' => $this->getRecordPropertyInteger('is_full'),
+				'tstamp' => time()
 			)
 		);
 
