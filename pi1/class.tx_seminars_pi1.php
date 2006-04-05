@@ -254,7 +254,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('date', $this->seminar->getDate());
 			$this->setMarkerContent('time', $this->seminar->getTime());
-			$this->setMarkerContent('place', $this->seminar->getPlace($this));
+
+			if ($this->getConfValue('showSiteDetails', 's_template_special')) {
+				$this->setMarkerContent('place', $this->seminar->getPlaceWithDetails($this));
+			} else {
+				$this->setMarkerContent('place', $this->seminar->getPlaceShort());
+			}
 
 			if ($this->seminar->hasRoom()) {
 				$this->setMarkerContent('room', $this->seminar->getRoom());

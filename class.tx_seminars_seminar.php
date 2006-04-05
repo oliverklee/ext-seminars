@@ -428,7 +428,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function getPlace(&$plugin) {
+	function getPlaceWithDetails(&$plugin) {
 		$result = '';
 
 		if ($this->hasPlace()) {
