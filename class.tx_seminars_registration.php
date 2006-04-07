@@ -323,6 +323,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->setMarkerContent('title', $this->seminar->getTitle());
 		$this->setMarkerContent('uid', $this->seminar->getUid());
 
+		if ($this->hasRecordPropertyInteger('seats')) {
+			$this->setMarkerContent('seats', $this->getRecordPropertyInteger('seats'));
+		} else {
+			$this->readSubpartsToHide('seats', 'field_wrapper');
+		}
+
 		if ($this->seminar->hasAccreditationNumber()) {
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
 		} else {

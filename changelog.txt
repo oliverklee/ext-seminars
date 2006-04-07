@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Added the number of registered seats to the confirmation e-mail (#0001844)
 - Feature: Added configuration for showing detailed location information in single view (#0001999)
 - Feature: When a user signs up for an event, set crdate and tstamp for the registration and update tstamp for the seminar. Original patch by Roman Benz. (#0003036)
 - Fix: Repaired the feature of selecting the CSS file from flexform (#0002825)

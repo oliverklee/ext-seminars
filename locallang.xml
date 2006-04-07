@@ -16,6 +16,7 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
+			<label index="label_seats">Seats</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
@@ -65,6 +66,7 @@ someone just has registered for an event:</label>
 			<label index="label_time">Zeit</label>
 			<label index="label_place">Ort</label>
 			<label index="label_room">Raum</label>
+			<label index="label_seats">Plätze</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_special">Spezialpreis</label>
@@ -268,6 +270,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject" type="integer">106627365</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_seats" type="integer">187299883</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
