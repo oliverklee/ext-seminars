@@ -163,13 +163,13 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			// provide the registration link
 			$result = $plugin->cObj->getTypoLink(
 				$plugin->pi_getLL('label_onlineRegistration'),
-				$plugin->getConfValue('registerPID'),
+				$plugin->getConfValueInteger('registerPID'),
 				array('tx_seminars_pi1[seminar]' => $seminar->getUid())
 			);
 		} else {
 			// provide a link to the login form
 			$result = $plugin->cObj->getTypoLink($this->pi_getLL('message_notLoggedIn'),
-				$plugin->getConfValue('loginPID'));
+				$plugin->getConfValueInteger('loginPID'));
 		}
 
 		return $result;
@@ -387,7 +387,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$seminar->updateStatistics();
 			$this->registration->notifyAttendee($plugin);
 			$this->registration->notifyOrganizers($plugin);
-			if ($this->getConfValue('sendAdditionalNotificationEmails')) {
+			if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
 				$this->registration->sendAdditionalNotification($plugin);
 			}
 

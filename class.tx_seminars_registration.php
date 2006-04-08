@@ -74,7 +74,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['known_from'] = $registrationData['known_from'];
 		$this->recordData['notes'] = $registrationData['notes'];
 
-		$this->recordData['pid'] = $this->getConfValue('attendancesPID');
+		$this->recordData['pid'] = $this->getConfValueInteger('attendancesPID');
 
 		$this->createTitle();
 
@@ -316,7 +316,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	function notifyAttendee(&$plugin) {
 		$this->initializeTemplate();
-		$this->readSubpartsToHide($this->getConfValue('hideFieldsInThankYouMail'), 'field_wrapper');
+		$this->readSubpartsToHide($this->getConfValueString('hideFieldsInThankYouMail'), 'field_wrapper');
 
 		$this->setMarkerContent('hello', sprintf($this->pi_getLL('email_confirmationHello'), $this->getUserName()));
 		$this->setMarkerContent('type', $this->seminar->getType());
@@ -351,7 +351,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->readSubpartsToHide('room', 'field_wrapper');
 		}
 
-		if ($this->getConfValue('generalPriceInMail')) {
+		if ($this->getConfValueBoolean('generalPriceInMail')) {
 			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 		}
 		$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular(' '));
@@ -401,28 +401,25 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	function notifyOrganizers(&$plugin) {
 		$this->initializeTemplate();
-		$this->readSubpartsToHide($this->getConfValue('hideGeneralFieldsInNotificationMail'), 'field_wrapper');
+		$this->readSubpartsToHide($this->getConfValueString('hideGeneralFieldsInNotificationMail'), 'field_wrapper');
 
 		$this->setMarkerContent('hello', $this->pi_getLL('email_notificationHello'));
 		$this->setMarkerContent('summary', $this->getTitle());
 
-		$showSeminarFields = $this->getConfValue('showSeminarFieldsInNotificationMail');
-		if (!empty($showSeminarFields)) {
-			$this->setMarkerContent('seminardata', $this->seminar->dumpSeminarValues($showSeminarFields));
+		if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
+			$this->setMarkerContent('seminardata', $this->seminar->dumpSeminarValues($this->getConfValueString('showSeminarFieldsInNotificationMail')));
 		} else {
 			$this->readSubpartsToHide('seminardata', 'field_wrapper');
 		}
 
-		$showFeUserFields = $this->getConfValue('showFeUserFieldsInNotificationMail');
-		if (!empty($showFeUserFields)) {
-			$this->setMarkerContent('feuserdata', $this->dumpUserValues($showFeUserFields));
+		if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
+			$this->setMarkerContent('feuserdata', $this->dumpUserValues($this->getConfValueString('showFeUserFieldsInNotificationMail')));
 		} else {
 			$this->readSubpartsToHide('feuserdata', 'field_wrapper');
 		}
 
-		$showAttendanceFields = $this->getConfValue('showAttendanceFieldsInNotificationMail');
-		if (!empty($showAttendanceFields)) {
-			$this->setMarkerContent('attendancedata', $this->dumpAttendanceValues($showAttendanceFields));
+		if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
+			$this->setMarkerContent('attendancedata', $this->getConfValueString('showAttendanceFieldsInNotificationMail'));
 		} else {
 			$this->readSubpartsToHide('attendancedata', 'field_wrapper');
 		}
@@ -477,7 +474,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if (!empty($whichEmailToSend)) {
 			$this->setMarkerContent('message', $this->pi_getLL($whichEmailToSend));
 
-			$showSeminarFields = $this->getConfValue('showSeminarFieldsInNotificationMail');
+			$showSeminarFields = $this->getConfValueString('showSeminarFieldsInNotificationMail');
 			if (!empty($showSeminarFields)) {
 				$this->setMarkerContent('seminardata', $this->seminar->dumpSeminarValues($showSeminarFields));
 			} else {

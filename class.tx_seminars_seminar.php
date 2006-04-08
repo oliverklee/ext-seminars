@@ -158,7 +158,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getType() {
-		return $this->getConfValue('eventType');
+		return $this->getConfValueString('eventType');
 	}
 
 	/**
@@ -198,7 +198,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function getLinkedTitle(&$plugin) {
 		return $plugin->cObj->getTypoLink(
 			$this->getTitle(),
-			$plugin->getConfValue('listPID'),
+			$plugin->getConfValueInteger('listPID'),
 			array('tx_seminars_pi1[showUid]' => $this->getUid())
 		);
 	}
@@ -332,25 +332,25 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$beginDate = $this->getRecordPropertyInteger('begin_date');
 			$endDate = $this->getRecordPropertyInteger('end_date');
 
-			$beginDateDay = strftime($this->getConfValue('dateFormatYMD'), $beginDate);
-			$endDateDay = strftime($this->getConfValue('dateFormatYMD'), $endDate);
+			$beginDateDay = strftime($this->getConfValueString('dateFormatYMD'), $beginDate);
+			$endDateDay = strftime($this->getConfValueString('dateFormatYMD'), $endDate);
 
 			// Does the workshop span several days?
 			if ($beginDateDay == $endDateDay) {
 				$result = $beginDateDay;
 			} else {
-				if (!$this->getConfValue('abbreviateDateRanges')) {
+				if (!$this->getConfValueBoolean('abbreviateDateRanges')) {
 					$result = $beginDateDay;
 				} else {
 					// Are the years different? Then include the complete begin date.
-					if (strftime($this->getConfValue('dateFormatY'), $beginDate) !== strftime($this->getConfValue('dateFormatY'), $endDate)) {
+					if (strftime($this->getConfValueString('dateFormatY'), $beginDate) !== strftime($this->getConfValueString('dateFormatY'), $endDate)) {
 						$result = $beginDateDay;
 					} else {
 						// Are the months different? Then include day and month.
-						if (strftime($this->getConfValue('dateFormatM'), $beginDate) !== strftime($this->getConfValue('dateFormatM'), $endDate)) {
-							$result = strftime($this->getConfValue('dateFormatMD'), $beginDate);
+						if (strftime($this->getConfValueString('dateFormatM'), $beginDate) !== strftime($this->getConfValueString('dateFormatM'), $endDate)) {
+							$result = strftime($this->getConfValueString('dateFormatMD'), $beginDate);
 						} else {
-							$result = strftime($this->getConfValue('dateFormatD'), $beginDate);
+							$result = strftime($this->getConfValueString('dateFormatD'), $beginDate);
 						}
 					}
 				}
@@ -391,8 +391,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$beginDate = $this->getRecordPropertyInteger('begin_date');
 			$endDate = $this->getRecordPropertyInteger('end_date');
 
-			$beginTime = strftime($this->getConfValue('timeFormat'), $beginDate);
-			$endTime = strftime($this->getConfValue('timeFormat'), $endDate);
+			$beginTime = strftime($this->getConfValueString('timeFormat'), $beginDate);
+			$endTime = strftime($this->getConfValueString('timeFormat'), $endDate);
 
 			$result = $beginTime;
 
@@ -645,7 +645,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPriceRegular($space = '&nbsp;') {
-		return $this->getRecordPropertyInteger('price_regular').$space.$this->getConfValue('currency');
+		return $this->getRecordPropertyInteger('price_regular').$space.$this->getConfValueString('currency');
 	}
 
 	/**
@@ -671,7 +671,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getPriceSpecial($space = '&nbsp;') {
 		return $this->hasPriceSpecial() ?
-			($this->getRecordPropertyInteger('price_special').$space.$this->getConfValue('currency')) : '';
+			($this->getRecordPropertyInteger('price_special').$space.$this->getConfValueString('currency')) : '';
 	}
 
 	/**
@@ -898,7 +898,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getRegistrationDeadline() {
-		return strftime($this->getConfValue('dateFormatYMD').' '.$this->getConfValue('timeFormat'), $this->getRecordPropertyInteger('deadline_registration'));
+		return strftime($this->getConfValueString('dateFormatYMD').' '.$this->getConfValueString('timeFormat'), $this->getRecordPropertyInteger('deadline_registration'));
 	}
 
 	/**
@@ -1100,9 +1100,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getDetailedViewUrl(&$plugin) {
-		return $plugin->getConfValue('baseURL')
+		return $plugin->getConfValueString('baseURL')
 			.$plugin->cObj->getTypoLink_URL(
-				$plugin->getConfValue('listPID'),
+				$plugin->getConfValueInteger('listPID'),
 				array('tx_seminars_pi1[showUid]' => $this->getUid())
 			);
 	}

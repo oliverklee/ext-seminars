@@ -63,8 +63,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setCSS();
 
 		// include CSS in header of page
-		if ($this->getConfValue('cssFile', 's_template_special', true) !== '') {
-			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValue('cssFile', 's_template_special', true).'";</style>';
+		if ($this->hasConfValueString('cssFile', 's_template_special')) {
+			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValueString('cssFile', 's_template_special', true).'";</style>';
 		}
 
 		/** Name of the registrationManager class in case someone subclasses it. */
@@ -73,7 +73,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$result = '';
 
-		switch ($this->getConfValue('what_to_display')) {
+		switch ($this->getConfValueString('what_to_display')) {
 			case 'seminar_registration':
 				$result = $this->createRegistrationPage();
 				break;
@@ -104,8 +104,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$result = $this->singleView();
 		} else {
 			if (strstr($this->cObj->currentRecord, 'tt_content')) {
-				$this->conf['pidList'] = $this->getConfValue('pages');
-				$this->conf['recursive'] = $this->getConfValue('recursive');
+				$this->conf['pidList'] = $this->getConfValueString('pages');
+				$this->conf['recursive'] = $this->getConfValueInteger('recursive');
 			}
 			$result = $this->listView();
 		}
@@ -122,8 +122,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function listView() {
 		$result = '';
-		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
-		$this->readSubpartsToHide($this->getConfValue('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
+		$this->readSubpartsToHide($this->getConfValueString('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
+		$this->readSubpartsToHide($this->getConfValueString('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
 
 		// hide the registration column if no user is logged in
 		if (!$this->registrationManager->isLoggedIn()) {
@@ -155,7 +155,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// work out from which timeframe we'll display the event list
 		$now = $GLOBALS['SIM_EXEC_TIME'];
 		$additionalQueryParameters = '';
-		switch ($this->getConfValue('timeframeInList', 's_template_special')) {
+		switch ($this->getConfValueString('timeframeInList', 's_template_special')) {
 			case 'past':
 				$additionalQueryParameters = ' AND end_date<='.$now;
 				break;
@@ -181,7 +181,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Check if canceled events should be hidden
-		if ($this->getConfValue('hideCanceledEvents', 's_template_special')) {
+		if ($this->getConfValueBoolean('hideCanceledEvents', 's_template_special')) {
 			$additionalQueryParameters .= ' AND cancelled=0';
 		}
 
@@ -223,7 +223,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function singleView() {
-		$this->readSubpartsToHide($this->getConfValue('hideFields', 's_template_special'), 'FIELD_WRAPPER');
+		$this->readSubpartsToHide($this->getConfValueString('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
 			// This sets the title of the page for use in indexed search results:
@@ -260,7 +260,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('date', $this->seminar->getDate());
 			$this->setMarkerContent('time', $this->seminar->getTime());
 
-			if ($this->getConfValue('showSiteDetails', 's_template_special')) {
+			if ($this->getConfValueBoolean('showSiteDetails', 's_template_special')) {
 				$this->setMarkerContent('place', $this->seminar->getPlaceWithDetails($this));
 			} else {
 				$this->setMarkerContent('place', $this->seminar->getPlaceShort());
@@ -273,7 +273,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			if ($this->seminar->hasSpeakers()) {
-				if ($this->getConfValue('showSpeakerDetails', 's_template_special')) {
+				if ($this->getConfValueBoolean('showSpeakerDetails', 's_template_special')) {
 					$this->setMarkerContent('speakers', $this->seminar->getSpeakersWithDescription($this));
 				} else {
 					$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
@@ -282,7 +282,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}
 
-			if ($this->getConfValue('generalPriceInSingle', 's_template_special')) {
+			if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
 				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 			}
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
@@ -436,7 +436,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$result = $this->pi_getLL('label_title', '<em>title</em>');
 			break;
 		case 'price_regular':
-			if ($this->getConfValue('generalPriceInList', 's_template_special')) {
+			if ($this->getConfValueBoolean('generalPriceInList', 's_template_special')) {
 				$fN = 'price_general';
 			}
 			// fall-through is intended here
@@ -525,7 +525,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$formObj = new $formsLibClassName($this);
 
 			// generate configuration for a single step
-			$formObj->steps[1] = $formObj->createStepConf($this->getConfValue('showRegistrationFields', 's_template_special'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
+			$formObj->steps[1] = $formObj->createStepConf($this->getConfValueString('showRegistrationFields', 's_template_special'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
 			$formObj->init();
 
 			if ($formObj->submitType == 'submit') {
@@ -587,7 +587,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createRegistrationForm(&$formObj) {
-		if ($this->getConfValue('generalPriceInSingle', 's_template_special')) {
+		if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
 			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 		}
 		$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
