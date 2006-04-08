@@ -58,14 +58,13 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 		// If the suffix is allowed and
 		// we have a localized string for the desired salutation, we'll take that.
 		if (isset($this->conf['salutation']) && in_array($this->conf['salutation'], $this->allowedSuffixes, 1)) {
-			
 			// Rewrite the language key to 'default' if it is 'en'. Otherwise, it will not work if language = English.
 			if ($this->LLkey == 'en')	{
 				$internal_LL_key = 'default';
 			} else	{
 				$internal_LL_key = $this->LLkey;
 			}
-			
+
 			$expandedKey = $key.'_'.$this->conf['salutation'];
 
 			if (isset($this->LOCAL_LANG[$internal_LL_key][$expandedKey])) {

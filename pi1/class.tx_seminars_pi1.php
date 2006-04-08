@@ -232,7 +232,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('type', $this->seminar->getType());
 			$this->setMarkerContent('title', $this->seminar->getTitle());
 			$this->setMarkerContent('uid', $this->seminar->getUid());
-			
+
 			if ($this->seminar->hasSubtitle()) {
 				$this->setMarkerContent('subtitle', $this->seminar->getSubtitle());
 			} else {

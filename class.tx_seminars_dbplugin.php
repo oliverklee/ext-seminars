@@ -179,7 +179,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @param	string		the path to the file (without filename), must contain a slash at the end, may contain a slash at the beginning (if not relative)
 	 *
 	 * @return	string		the complete path including file name
-	 * 
+	 *
 	 * @access	protected
 	 */
 	function addPathToFileName($fileName, $path = '') {
