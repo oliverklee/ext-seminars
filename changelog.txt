@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Code cleanup: hasRecordPropertyInteger should cast to a boolean (#0003187)
 - Code cleanup (#0003186)
 - Fix: No output if used together with the extension sb_accessiblecontent (#0003127)
 - Feature: Added configuration to hide canceled events in the list view (#0002013)

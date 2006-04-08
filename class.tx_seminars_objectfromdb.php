@@ -115,7 +115,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function hasRecordPropertyInteger($key) {
-		return $this->getRecordPropertyBoolean($key);
+		return (boolean) $this->getRecordPropertyInteger($key);
 	}
 
 	/**
