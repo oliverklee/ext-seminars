@@ -154,25 +154,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// work out from which timeframe we'll display the event list
 		$now = $GLOBALS['SIM_EXEC_TIME'];
-		$timeframeQueryParameters = '';
+		$additionalQueryParameters = '';
 		switch ($this->getConfValue('timeframeInList', 's_template_special')) {
 			case 'past':
-				$timeframeQueryParameters = ' AND end_date<='.$now;
+				$additionalQueryParameters = ' AND end_date<='.$now;
 				break;
 			case 'pastAndCurrent':
-				$timeframeQueryParameters = ' AND begin_date<='.$now;
+				$additionalQueryParameters = ' AND begin_date<='.$now;
 				break;
 			case 'current':
-				$timeframeQueryParameters = ' AND begin_date<='.$now.' AND end_date>'.$now;
+				$additionalQueryParameters = ' AND begin_date<='.$now.' AND end_date>'.$now;
 				break;
 			case 'currentAndUpcoming':
-				$timeframeQueryParameters = ' AND end_date>'.$now;
+				$additionalQueryParameters = ' AND end_date>'.$now;
 				break;
 			case 'upcoming':
-				$timeframeQueryParameters = ' AND begin_date>'.$now;
+				$additionalQueryParameters = ' AND begin_date>'.$now;
 				break;
 			case 'deadlineNotOver':
-				$timeframeQueryParameters = ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND begin_date>'.$now.'))';
+				$additionalQueryParameters = ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND begin_date>'.$now.'))';
 				break;
 			case 'all':
 			default:
@@ -180,13 +180,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 		}
 
+		// Check if canceled events should be hidden
+		if ($this->getConfValue('hideCanceledEvents', 's_template_special')) {
+			$additionalQueryParameters .= ' AND cancelled=0';
+		}
+
 		// Get number of records
-		$res = $this->pi_exec_query($this->tableSeminars, 1, $timeframeQueryParameters);
+		$res = $this->pi_exec_query($this->tableSeminars, 1, $additionalQueryParameters);
 		list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
 
 		if ($this->internal['res_count']) {
 			// Make listing query, pass query to SQL database
-			$res = $this->pi_exec_query($this->tableSeminars, 0, $timeframeQueryParameters);
+			$res = $this->pi_exec_query($this->tableSeminars, 0, $additionalQueryParameters);
 			$this->internal['currentTable'] = $this->tableSeminars;
 
 			// Put the whole list together:

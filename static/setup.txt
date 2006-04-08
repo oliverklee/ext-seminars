@@ -67,6 +67,8 @@ plugin.tx_seminars_pi1 {
 	salutation = formal
 	# the timeframe from which event should be displayed in the list view
 	timeframeInList = currentAndUpcoming
+	# whether canceled events should be hidden or not
+	hideCanceledEvents = 0
 	hideColumns = accreditation_number,credit_points,price_special,speakers
 	hideFields = credit_points
 	generalPriceInList =
