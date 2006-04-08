@@ -1,3 +1,6 @@
+# make the FE plugin work with sb_accessiblecontent
+tt_content.list.20.seminars_pi1 =< plugin.tx_seminars_pi1
+
 plugin.tx_seminars {
 	# location of the template file
 	templateFile = EXT:seminars/seminars.tmpl
