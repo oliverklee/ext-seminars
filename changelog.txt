@@ -1,7 +1,6 @@
 0.4.4 - work in progress
 - Feature: Only show exact vacancies if the number is below a configurable threshold (#0003067)
-- Code cleanup: hasRecordPropertyInteger should cast to a boolean (#0003187)
-- Code cleanup (#0003186)
+- Code cleanup and refactoring (#0003186, #0003187)
 - Fix: No output if used together with the extension sb_accessiblecontent (#0003127)
 - Feature: Added configuration to hide canceled events in the list view (#0002013)
 - Added the number of registered seats to the confirmation e-mail (#0001844)
@@ -21,7 +20,6 @@
 - Fixed: For some RTE configurations, lists get rendered as <typolist> on the front end. (#0001979)
 - Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format John Doe <john.doe@example.com>. (#0001954)
 - Improved the manual.
-- Code cleanup.
 - Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#0002400)
 - moved the changelog from the manual to this file (#0002435)
 - Fixed: Commas in participant names or organizer names caused problems. (#0002432)
