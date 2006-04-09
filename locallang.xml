@@ -38,6 +38,7 @@
 			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
+			<label index="message_enough">enough</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationHello_formal">Hello %s,
 
@@ -88,6 +89,7 @@ someone just has registered for an event:</label>
 			<label index="message_invalidNumberOfSeats_formal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</label>
 			<label index="message_invalidNumberOfSeats_informal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</label>
 			<label index="message_willBeAnnounced">wird noch bekannt gegeben</label>
+			<label index="message_enough">genug</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
 			<label index="email_confirmationHello_formal">Guten Tag %s,
 
@@ -252,6 +254,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
+			<label index="message_enough" type="integer">249306686</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationHello" type="integer">88233580</label>
 			<label index="email_confirmationHello_informal" type="integer">88233580</label>

@@ -302,7 +302,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
 
 			if ($this->seminar->needsRegistration()) {
-				$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
+				$this->setMarkerContent('vacancies', $this->seminar->getVacanciesString());
 			} else {
 				$this->readSubpartsToHide('vacancies', 'field_wrapper');
 			}
@@ -409,7 +409,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
 			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
-			$this->setMarkerContent('vacancies', $this->seminar->needsRegistration() ? $this->seminar->getVacancies() : '');
+			$this->setMarkerContent('vacancies', $this->seminar->getVacanciesString());
 			$this->setMarkerContent('class_listvacancies', $this->getVacanciesClasses($this->seminar));
 			$this->setMarkerContent('registration', $this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
 				$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) : ''

@@ -22,6 +22,8 @@ plugin.tx_seminars {
 	abbreviateDateRanges = 1
 	currency = EUR
 	eventType = Workshop
+	# If there are at least this many vancancies, "enough" is displayed instead of the exact number.
+	showVacanciesThreshold = 10
 }
 
 plugin.tx_seminars_pi1 {

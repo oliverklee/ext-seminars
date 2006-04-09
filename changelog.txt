@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Feature: Only show exact vacancies if the number is below a configurable threshold (#0003067)
 - Code cleanup: hasRecordPropertyInteger should cast to a boolean (#0003187)
 - Code cleanup (#0003186)
 - Fix: No output if used together with the extension sb_accessiblecontent (#0003127)

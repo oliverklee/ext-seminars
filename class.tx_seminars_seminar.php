@@ -831,7 +831,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the number of vacancies for this seminar
+	 * Gets the number of vacancies for this seminar.
 	 *
 	 * @return	integer		the number of vacancies (will be 0 if the seminar is overbooked)
 	 *
@@ -839,6 +839,30 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getVacancies() {
 		return max(0, $this->getRecordPropertyInteger('attendees_max') - $this->getAttendances());
+	}
+
+	/**
+	 * Gets the number of vacancies for this seminar. If there are at least as
+	 * many vacancies as configured as "showVacanciesThreshold", a localized
+	 * string "enough" is returned instead.
+	 *
+	 * If this seminar does not require a registration, an empty string is returned.
+	 *
+	 * @return	string		string showing the number of vacancies (may be empty)
+	 *
+	 * @access	public
+	 */
+	function getVacanciesString() {
+		$result = '';
+		
+		if ($this->needsRegistration()) {
+			$result =
+				($this->getVacancies() >= $this->getConfValueInteger('showVacanciesThreshold')) ?
+					$this->pi_getLL('message_enough') :
+					$this->getVacancies();
+		}
+		
+		return $result;
 	}
 
 	/**
