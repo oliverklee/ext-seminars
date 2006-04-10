@@ -31,7 +31,7 @@
   display: block;
 }
 
-.tx-seminars-pi1-date, .tx-seminars-pi1-vacancies, .tx-seminars-pi1-price {
+.tx-seminars-pi1-date, .tx-seminars-pi1-vacancies, .tx-seminars-pi1-price, .tx-seminars-pi1-uid {
   text-align: right;
 }
 

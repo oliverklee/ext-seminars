@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Changed alignment of field uid in list view (#0003221)
 - Feature: Only show exact vacancies if the number is below a configurable threshold (#0003067)
 - Code cleanup and refactoring (#0003186, #0003187)
 - Fix: No output if used together with the extension sb_accessiblecontent (#0003127)

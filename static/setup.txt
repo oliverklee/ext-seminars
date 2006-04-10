@@ -53,7 +53,7 @@ plugin.tx_seminars_pi1 {
 
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_listtitle = title
-	class_listuid =
+	class_listuid = uid
 	class_listaccreditation_number =
 	class_listcredit_points =
 	class_listspeakers =
