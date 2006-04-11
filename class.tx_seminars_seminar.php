@@ -854,14 +854,14 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getVacanciesString() {
 		$result = '';
-		
+
 		if ($this->needsRegistration()) {
 			$result =
 				($this->getVacancies() >= $this->getConfValueInteger('showVacanciesThreshold')) ?
 					$this->pi_getLL('message_enough') :
 					$this->getVacancies();
 		}
-		
+
 		return $result;
 	}
 
