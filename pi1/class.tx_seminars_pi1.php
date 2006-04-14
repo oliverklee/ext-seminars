@@ -114,6 +114,54 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Returns the additional query parameters needed to build the list view. This function checks
+	 * - the timeframe to display
+	 * - whether to show canceled events
+	 *
+	 * @return	string		the additional query parameters
+	 *
+	 * @access	private
+	 */
+	function getAdditionalQueryParameters() {
+		// Initialize some variables.
+		$now = $GLOBALS['SIM_EXEC_TIME'];
+		$additionalQueryParameters = '';
+
+		// Work out from which timeframe we'll display the event list.
+		switch ($this->getConfValueString('timeframeInList', 's_template_special')) {
+			case 'past':
+				$additionalQueryParameters .= ' AND end_date<='.$now;
+				break;
+			case 'pastAndCurrent':
+				$additionalQueryParameters .= ' AND begin_date<='.$now;
+				break;
+			case 'current':
+				$additionalQueryParameters .= ' AND begin_date<='.$now.' AND end_date>'.$now;
+				break;
+			case 'currentAndUpcoming':
+				$additionalQueryParameters .= ' AND end_date>'.$now;
+				break;
+			case 'upcoming':
+				$additionalQueryParameters .= ' AND begin_date>'.$now;
+				break;
+			case 'deadlineNotOver':
+				$additionalQueryParameters .= ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND begin_date>'.$now.'))';
+				break;
+			case 'all':
+			default:
+				// To show all events, we don't need any additional parameters.
+				break;
+		}
+
+		// Check if canceled events should be hidden.
+		if ($this->getConfValueBoolean('hideCanceledEvents', 's_template_special')) {
+			$additionalQueryParameters .= ' AND cancelled=0';
+		}
+
+		return $additionalQueryParameters;
+	}
+
+	/**
 	 * Displays a list of upcoming seminars.
 	 *
 	 * @return	string		HTML for the plugin
@@ -155,46 +203,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
 		$this->internal['orderByList'] = 'title,uid,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
-		// work out from which timeframe we'll display the event list
-		$now = $GLOBALS['SIM_EXEC_TIME'];
-		$additionalQueryParameters = '';
-		switch ($this->getConfValueString('timeframeInList', 's_template_special')) {
-			case 'past':
-				$additionalQueryParameters = ' AND end_date<='.$now;
-				break;
-			case 'pastAndCurrent':
-				$additionalQueryParameters = ' AND begin_date<='.$now;
-				break;
-			case 'current':
-				$additionalQueryParameters = ' AND begin_date<='.$now.' AND end_date>'.$now;
-				break;
-			case 'currentAndUpcoming':
-				$additionalQueryParameters = ' AND end_date>'.$now;
-				break;
-			case 'upcoming':
-				$additionalQueryParameters = ' AND begin_date>'.$now;
-				break;
-			case 'deadlineNotOver':
-				$additionalQueryParameters = ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND begin_date>'.$now.'))';
-				break;
-			case 'all':
-			default:
-				// To show all events, we don't need any additional parameters.
-				break;
-		}
-
-		// Check if canceled events should be hidden
-		if ($this->getConfValueBoolean('hideCanceledEvents', 's_template_special')) {
-			$additionalQueryParameters .= ' AND cancelled=0';
-		}
-
 		// Get number of records
-		$res = $this->pi_exec_query($this->tableSeminars, 1, $additionalQueryParameters);
+		$res = $this->pi_exec_query($this->tableSeminars, 1, $this->getAdditionalQueryParameters());
 		list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
 
 		if ($this->internal['res_count']) {
 			// Make listing query, pass query to SQL database
-			$res = $this->pi_exec_query($this->tableSeminars, 0, $additionalQueryParameters);
+			$res = $this->pi_exec_query($this->tableSeminars, 0, $this->getAdditionalQueryParameters());
 			$this->internal['currentTable'] = $this->tableSeminars;
 
 			// Put the whole list together:
