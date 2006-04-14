@@ -64,6 +64,32 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Reads the record data from an DB query result represented as an
+	 * associative array and stores it in $this->recordData.
+	 * The column names will be used as array keys.
+	 * The column names must *not* be prefixed with the table name.
+	 *
+	 * Before this function may be called, $this->tableName must be set
+	 * to the correspondonding DB table name.
+	 *
+	 * If at least one element is taken, this function sets $this->isInDb to true.
+	 *
+	 * Example:
+	 * $dbResultRow['name'] => $this->recordData['name']
+	 *
+	 * @param	array		associative array of a DB query result
+	 *
+	 * @access	protected
+	 */
+	function getDataFromDbResult($dbResultRow) {
+		if (!empty($this->tableName) && !empty($dbResultRow)) {
+			$this->recordData = $dbResultRow;
+			$this->isInDb = true;
+		}
+		return;
+	}
+
+	/**
 	 * Checks whether this object has been properly initialized,
 	 * has a non-empty table name set and thus is basically usable.
 	 *

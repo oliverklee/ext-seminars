@@ -211,7 +211,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		$registrationManager =& t3lib_div::makeInstance('tx_seminars_registrationmanager');
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
-		$seminarBag =& new $seminarBagClassname($registrationManager, 'pid='.intval($this->id));
+		$seminarBag =& new $seminarBagClassname($registrationManager, '', 'pid='.intval($this->id));
 
 		$result .= '<h3>'.$LANG->getLL('message_updatingAttendanceNumbers').'</h3>'.chr(10);
 		while ($currentSeminar =& $seminarBag->getCurrent()) {

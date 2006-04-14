@@ -46,19 +46,20 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * non-deleted and visible seminar records.
 	 *
 	 * @param	object		an instance of a registrationManager (must not be null)
+	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
 	 * @param	string		string that will be prepended to the WHERE clause
 	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
 	 *						spaces are not necessary for this parameter)
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminarbag(&$registrationManager, $queryParameters = '1') {
+	function tx_seminars_seminarbag(&$registrationManager, $additionalTableNames = '', $queryParameters = '1') {
 		$this->registrationManager =& $registrationManager;
 
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSeminars is provided.
 		$this->init();
-		parent::tx_seminars_bag($this->tableSeminars, $queryParameters);
+		parent::tx_seminars_bag($this->tableSeminars, $additionalTableNames, $queryParameters);
 
 		return;
 	}

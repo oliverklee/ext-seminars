@@ -71,8 +71,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		}
 
 	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->recordData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$this->isInDb = true;
+			$this->getDataFromDbResult($GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult));
 	 	}
 
 		return;

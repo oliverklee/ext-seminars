@@ -43,8 +43,10 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_bag.php';
 
-	/** the name of the DB table from which we get the records for this bag */
+	/** the name of the main DB table from which we get the records for this bag */
 	var $dbTableName;
+	/** the comma-separated names of other DB tables which we need for JOINs */
+	var $additionalTableNames;
 	/** an SQL query result (not converted to an associative array yet) */
 	var $dbResult = null;
 	/** the current object (may be null) */
@@ -54,20 +56,31 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * (the AND and the enclosing spaces are not necessary for this parameter)
 	 */
 	var $queryParameters;
+	/**
+	 * string that will be prepended to the WHERE clause, making sure that only
+	 * enabled and non-deleted records will be processed
+	 */
+	var $enabledFieldsQuery;
 
 	/**
 	 * The constructor. Sets the iterator to the first result of a query
 	 *
-	 * @param	string		the name of an SQL table to query
+	 * @param	string		the name of the main DB table to query (comma-separated), may not be empty
+	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
 	 * @param	string		string that will be prepended to the WHERE clause
-	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
-	 *						spaces are not necessary for this parameter)
+	 *						using AND, e.g. 'mytable.pid=42' (the AND and the enclosing
+	 *						spaces are not necessary for this parameter);
+	 *						the table name must be used as a prefix if more than
+	 *						one table is queried
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_bag($dbTableName, $queryParameters = '1') {
+	function tx_seminars_bag($dbTableName, $additionalTableNames = '', $queryParameters = '1') {
 		$this->dbTableName = $dbTableName;
+		$this->additionalTableNames =
+			(!empty($additionalTableNames)) ? ', '.$additionalTableNames : '';
 		$this->queryParameters = trim($queryParameters);
+		$this->createEnabledFieldsQuery();
 
 		$this->init();
 		$this->resetToFirst();
@@ -76,8 +89,32 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * For the main DB table and the additional tables, writes the corresponding
+	 * concatenated output from t3lib_pageSelect::enableFields into
+	 * $this->enabledFieldsQuery.
+	 *
+	 * @access	private
+	 */
+	function createEnabledFieldsQuery() {
+		$allTableNames = explode(',', $this->dbTableName.$this->additionalTableNames);
+		$this->enabledFieldsQuery = '';
+
+		foreach ($allTableNames as $currentTableName) {
+			$trimmedTableName = trim($currentTableName);
+			// Is there a TCA entry for that table?
+			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
+			if (is_array($ctrl)) {
+				$this->enabledFieldsQuery .= t3lib_pageSelect::enableFields($trimmedTableName);
+			}
+		}
+		return;
+	}
+
+	/**
 	 * Sets the iterator to the first object, using additional
 	 * query parameters from $this->queryParameters for the DB query.
+	 * The query works so that the column names are *not*
+	 * prefixed with the table name.
 	 *
 	 * @return	boolean		true if everything went okay, false otherwise
 	 *
@@ -93,12 +130,10 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			// rewritten immediately.
 		}
 
-		// The ' AND' is provided by t3lib_pageSelect::enableFields,
-		// so we don't need to set it explicitely after $this->queryParameters.
 		$this->dbResult =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
+			'DISTINCT '.$this->dbTableName.'.*',
 			$this->dbTableName,
-			$this->queryParameters.t3lib_pageSelect::enableFields($this->dbTableName),
+			$this->queryParameters.$this->enabledFieldsQuery,
 			'',
 			'',
 			''
