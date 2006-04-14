@@ -204,12 +204,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['orderByList'] = 'title,uid,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
 		// Get number of records
-		$res = $this->pi_exec_query($this->tableSeminars, 1, $this->getAdditionalQueryParameters());
+		$res = $this->pi_exec_query($this->tableSeminars, true, $this->getAdditionalQueryParameters());
 		list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
 
 		if ($this->internal['res_count']) {
 			// Make listing query, pass query to SQL database
-			$res = $this->pi_exec_query($this->tableSeminars, 0, $this->getAdditionalQueryParameters());
+			$res = $this->pi_exec_query($this->tableSeminars, false, $this->getAdditionalQueryParameters());
 			$this->internal['currentTable'] = $this->tableSeminars;
 
 			// Put the whole list together:
@@ -396,18 +396,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns a list row as a TR. Gets data from $this->internal['currentRow'];
+	 * Returns a list row as a TR. Gets data from $this->internal['currentRow'].
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
+	 * If $this->internal['currentRow'] is invalid, an empty string is returned.
 	 *
-	 * @param	integer		Row counting. Starts at 0 (zero). Used for alternating class values in the output rows.
+	 * @param	integer		Row counter. Starts at 0 (zero). Used for alternating class values in the output rows.
 	 *
 	 * @return	string		HTML output, a table row with a class attribute set (alternative based on odd/even rows)
 	 *
 	 * @access	protected
 	 */
-	function pi_list_row($c) {
+	function pi_list_row($rowCounter) {
+		$result = '';
+
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
-			$rowClass = ($c % 2) ? 'listrow-odd' : '';
+			$rowClass = ($rowCounter % 2) ? 'listrow-odd' : '';
 			$canceledClass = ($this->seminar->isCanceled()) ? $this->pi_getClassName('cancelled') : '';
 			// If we have two classes, we need a space as a separator.
 			$classSeparator = (!empty($rowClass) && !empty($canceledClass)) ? ' ' : '';
@@ -432,9 +435,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('registration', $this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
 				$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) : ''
 			);
+
+			$result = $this->substituteMarkerArrayCached('LIST_ITEM');
 		}
 
-		return $this->substituteMarkerArrayCached('LIST_ITEM');
+		return $result;
 	}
 
 	/**
@@ -630,31 +635,31 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * $this->pi_list_header() makes the header row for the list
 	 * $this->pi_list_row() is used for rendering each row
 	 *
-	 * @param	pointer		Result pointer to a SQL result which can be traversed.
-	 * @param	string		Attributes for the table tag which is wrapped around the table rows containing the list
-	 * @return	string		Output HTML, wrapped in <div>-tags with a class attribute
+	 * @param	pointer		result pointer to a SQL result which can be traversed
+	 * @param	string		attributes for the table tag which is wrapped around the table rows containing the list
+	 * @return	string		output HTML, wrapped in <div>-tags with a class attribute
 	 *
 	 * @access	protected
 	 *
 	 * @see pi_list_row(), pi_list_header()
 	 */
-	function pi_list_makelist($res, $tableParams = '')	{
+	function pi_list_makelist($dbResult, $tableParams = '')	{
 		// Make list table header
 		$tRows = array();
-		$this->internal['currentRow'] = '';
+		$this->internal['currentRow'] = array();
 		$tRows[] = $this->pi_list_header();
 		$tRows[] = '  <tbody>'.chr(10);
 
 		// Make list table rows
-		$c = 0;
-		while ($this->internal['currentRow'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-			$tRows[] = $this->pi_list_row($c);
-			$c++;
+		$rowCounter = 0;
+		while ($this->internal['currentRow'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$tRows[] = $this->pi_list_row($rowCounter);
+			$rowCounter++;
 		}
 		$tRows[] = '  </tbody>'.chr(10);
 
 		$output = '<div'.$this->pi_classParam('listrow').'>'.chr(10);
-		$output .= '<'.trim('table '.$tableParams).'>'.implode('',$tRows).'</table>'.chr(10);
+		$output .= '<'.trim('table '.$tableParams).'>'.implode('', $tRows).'</table>'.chr(10);
 		$output .= '</div>';
 
 		return $output;
