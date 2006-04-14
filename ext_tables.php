@@ -4,7 +4,8 @@ if (!defined ('TYPO3_MODE')) {
 }
 
 if (TYPO3_MODE=='BE') {
-	t3lib_extMgm::addModule('web','txseminarsM1','',t3lib_extMgm::extPath($_EXTKEY).'mod1/');
+	t3lib_extMgm::addModule('web', 'txseminarsM1', '', t3lib_extMgm::extPath($_EXTKEY).'mod1/');
+	t3lib_extMgm::addModule('web', 'txseminarsM2', '', t3lib_extMgm::extPath($_EXTKEY).'mod2/');
 }
 
 t3lib_div::loadTCA('fe_users');
