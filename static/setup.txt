@@ -76,6 +76,12 @@ plugin.tx_seminars_pi1 {
 	hideCanceledEvents = 0
 	hideColumns = accreditation_number,credit_points,price_special,speakers
 	hideFields = credit_points
+
+	# the default sort order in list view (a field name)
+	listView.orderBy = begin_date
+	# whether to order ascending (0) or descending (1)
+	listView.descFlag = 0
+
 	generalPriceInList =
 	generalPriceInSingle =
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)

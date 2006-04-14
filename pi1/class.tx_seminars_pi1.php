@@ -131,19 +131,22 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
 		}
 
-		// Local settings for the listView function
-		$lConf = $this->conf['listView.'];
-
 		if (!isset($this->piVars['pointer'])) {
 			$this->piVars['pointer'] = 0;
 		}
 
-		// Initializing the query parameters:
-		list($this->internal['orderBy'], $this->internal['descFlag']) = explode(':', $this->piVars['sort']);
-		// If no sort order is given, sort by beginning date.
-		if (empty($this->internal['orderBy'])) {
-			$this->internal['orderBy'] = 'begin_date';
+		// Read the list view settings from the TS setup and write them to the list view configuration.
+		$lConf = $this->conf['listView.'];
+		foreach($lConf as $key => $value) {
+			$this->internal[$key] = $value;
 		}
+
+		// Overwrite the default sort order with values given by the browser.
+		// This happens, if the user changes the sort order manually.
+		if (!empty($this->piVars['sort'])) {
+			list($this->internal['orderBy'], $this->internal['descFlag']) = explode(':', $this->piVars['sort']);
+		}
+
 		// Number of results to show in a listing.
 		$this->internal['results_at_a_time'] = t3lib_div::intInRange($lConf['results_at_a_time'], 0, 1000, 20);
 		// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.

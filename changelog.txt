@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Feature: Added configuration for setting the default order in list view (#0002011)
 - Changed alignment of field uid in list view (#0003221)
 - Feature: Only show exact vacancies if the number is below a configurable threshold (#0003067)
 - Code cleanup and refactoring (#0003186, #0003187)
