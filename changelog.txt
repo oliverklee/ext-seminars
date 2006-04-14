@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Fix: Hide the number of vacancies for canceled events and change the CSS class for TR with canceled seminars from .tx-seminars-pi1-cancelled to .tx-seminars-pi1-canceled (#0003270)
 - Added the new backend module base to work on (#0002002)
 - Feature: Added configuration for setting the default order in list view (#0002011)
 - Changed alignment of field uid in list view (#0003221)

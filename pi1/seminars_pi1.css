@@ -60,13 +60,17 @@
   color: inherit;
 }
 
-.tx-seminars-pi1-vacancies-0 .tx-seminars-pi1-square, .tx-seminars-pi1-cancelled .tx-seminars-pi1-square {
+.tx-seminars-pi1-vacancies-0 .tx-seminars-pi1-square, .tx-seminars-pi1-canceled .tx-seminars-pi1-square {
   background-color: #c30000;
   color: inherit;
 }
 
-.tx-seminars-pi1-cancelled td {
+.tx-seminars-pi1-canceled td {
   text-decoration: line-through;
+}
+
+.tx-seminars-pi1-canceled td.tx-seminars-pi1-vacancies {
+  text-decoration: none;
 }
 
 .tx-seminars-pi1 .tx-frontendformslib-label {

@@ -846,7 +846,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * many vacancies as configured as "showVacanciesThreshold", a localized
 	 * string "enough" is returned instead.
 	 *
-	 * If this seminar does not require a registration, an empty string is returned.
+	 * If this seminar does not require a registration or if it is canceled,
+	 * an empty string is returned.
 	 *
 	 * @return	string		string showing the number of vacancies (may be empty)
 	 *
@@ -855,7 +856,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function getVacanciesString() {
 		$result = '';
 
-		if ($this->needsRegistration()) {
+		if ($this->needsRegistration() && !$this->isCanceled()) {
 			$result =
 				($this->getVacancies() >= $this->getConfValueInteger('showVacanciesThreshold')) ?
 					$this->pi_getLL('message_enough') :

@@ -319,7 +319,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
 
-			if ($this->seminar->needsRegistration()) {
+			if ($this->seminar->needsRegistration() && !$this->seminar->isCanceled()) {
 				$this->setMarkerContent('vacancies', $this->seminar->getVacanciesString());
 			} else {
 				$this->readSubpartsToHide('vacancies', 'field_wrapper');
@@ -411,7 +411,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
 			$rowClass = ($rowCounter % 2) ? 'listrow-odd' : '';
-			$canceledClass = ($this->seminar->isCanceled()) ? $this->pi_getClassName('cancelled') : '';
+			$canceledClass = ($this->seminar->isCanceled()) ? $this->pi_getClassName('canceled') : '';
 			// If we have two classes, we need a space as a separator.
 			$classSeparator = (!empty($rowClass) && !empty($canceledClass)) ? ' ' : '';
 			// Only use the class construct if we actually have a class.
