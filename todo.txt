@@ -183,6 +183,8 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
       t3lib_extMgm::addStaticFile($_EXTKEY,'static/','Seminars');
 - make sure each file has a linefeed as last character
 - use mmQuery where possible (eg. in seminar->getSpeakersShort)
+- in seminar->createListRow(), factor out the creation of the CSS class
+- refactor seminar->createSingleView() so that is a *lot* shorter and better to read
 
 
 Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
@@ -322,6 +324,7 @@ Version 0.4.10, 10/2006 - "Make it nice for the visitors": front end usability a
 - implement sorting for all columns in the list view
 - after registering for a seminar, provide a link back to the seminar details page
 - after logging in, jump back to the seminar details page
+- remove the 3D look from the table, set the table cell border spacing (or whatever it is) to 1px
 
 
 Version 0.5.0, 11/2006 - "Getting real new features"
