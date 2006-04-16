@@ -208,6 +208,7 @@ Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
 - add automated tests using T3unit (requires PHP5)
 - fix the authors's name in properties of the OO.o manual (has to do with a bug in OO.o 2beta)
 - test with a21glossary, gov_accessibility and sb_akronymmanager
+- list view: show "(canceled)" in the vacancies column for canceled events
 
 
 Version 0.4.8, 08/2006 - "Make it fast": performance
