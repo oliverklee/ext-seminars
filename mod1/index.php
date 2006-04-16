@@ -88,7 +88,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 
 		// Define the Database-Tables used in this class.
-		// They are defined also in the the dbplugin class, but cannot be read from here.
+		// They are defined also in the dbplugin class, but cannot be read from here.
 		$this->tableSeminars = 'tx_seminars_seminars';
 		$this->tableAttendances = 'tx_seminars_attendances';
 		$this->tableUsers = 'fe_users';
