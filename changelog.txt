@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Polish the BE flexforms localized strings (#0003280)
 - Feature: Added "My events" content type. (#0001710)
 - Fix: Correctly display open-ended events. Also consider events without a begin date to take place in the future. (#0001995)
 - Made tx_seminars_objectfromdb also work with JOIN queries (#0003194)
