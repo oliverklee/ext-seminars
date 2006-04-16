@@ -4,6 +4,9 @@ tt_content.list.20.seminars_pi1 =< plugin.tx_seminars_pi1
 plugin.tx_seminars {
 	# location of the template file
 	templateFile = EXT:seminars/seminars.tmpl
+	# whether to use formal or informal language
+	salutation = formal
+
 	hideFieldsInThankYouMail = credit_points
 	generalPriceInMail =
 	hideFieldsInNotificationMail =
@@ -31,6 +34,8 @@ plugin.tx_seminars_pi1 {
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
 	# location of the CSS file (leave empty to include no CSS file)
 	cssFile = typo3conf/ext/seminars/pi1/seminars_pi1.css
+	# whether to use formal or informal language
+	salutation = formal
 
 	# CSS class around the table with the events list view (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_eventlist = listrow
@@ -71,7 +76,6 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_error = error
 
-	salutation = formal
 	# the timeframe from which event should be displayed in the list view
 	timeframeInList = currentAndUpcoming
 	# whether canceled events should be hidden or not

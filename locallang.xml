@@ -29,8 +29,8 @@
 			<label index="message_notLoggedIn_informal">Please log in first in order to register for an event.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
-			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
+			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
@@ -241,12 +241,12 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
-			<label index="message_notLoggedIn" type="integer">7945840</label>
+			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
 			<label index="message_notLoggedIn_informal" type="integer">7945840</label>
-			<label index="message_alreadyRegistered" type="integer">72254150</label>
+			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
-			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
@@ -262,9 +262,6 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="email_confirmationPayment_informal" type="integer">213064489</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
-			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="email_confirmationHello_formal" type="integer">88233580</label>
 			<label index="email_confirmationPayment_formal" type="integer">213064489</label>
 			<label index="email_additionalNotificationSubject" type="integer">75541883</label>
@@ -298,11 +295,11 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
-			<label index="message_notLoggedIn" type="integer">7945840</label>
+			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
 			<label index="message_notLoggedIn_informal" type="integer">7945840</label>
-			<label index="message_alreadyRegistered" type="integer">72254150</label>
+			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
@@ -318,9 +315,6 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="email_confirmationPayment_informal" type="integer">213064489</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
-			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="email_confirmationHello_formal" type="integer">88233580</label>
 			<label index="email_confirmationPayment_formal" type="integer">213064489</label>
 		</languageKey>

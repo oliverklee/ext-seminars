@@ -626,20 +626,23 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$errorMessage = '';
 		$registrationForm = '';
 		$registationThankyou = '';
+		$isOkay = false;
 
 		if ($this->createSeminar($this->piVars['seminar'])) {
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar);
 			} else {
-				if (!$this->registrationManager->isLoggedIn()) {
+				if ($this->registrationManager->isLoggedIn()) {
+					$isOkay = true;
+				} else {
 					$errorMessage = $this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar);
 				}
 			}
 		} else {
-			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar'], $this);
+			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar']);
 		}
 
-		if (empty($errorMessage)) {
+		if ($isOkay) {
 			// create the frontend form object
 			$formsLibClassName = t3lib_div::makeInstanceClassName('tx_frontendformslib');
 			$formObj = new $formsLibClassName($this);

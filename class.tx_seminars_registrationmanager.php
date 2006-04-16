@@ -201,13 +201,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @param	string		a given seminar UID (may not neccessarily be an integer)
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
-	 *
 	 * @return	string		empty string if the UID is valid, else a localized error message
 	 *
 	 * @access	public
 	 */
-	function existsSeminarMessage($seminarUid, &$plugin) {
+	function existsSeminarMessage($seminarUid) {
 		/** This is empty as long as no error has occured. */
 		$message = '';
 

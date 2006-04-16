@@ -49,27 +49,30 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 	 *
 	 * Notice that for debugging purposes prefixes for the output values can be set with the internal vars ->LLtestPrefixAlt and ->LLtestPrefix
 	 *
-	 * @param	string		The key from the LOCAL_LANG array for which to return the value.
-	 * @param	string		Alternative string to return IF no value is found set for the key, neither for the local language nor the default.
+	 * @param	string		the key from the LOCAL_LANG array for which to return the value
+	 * @param	string		alternative string to return if no value is found set for the key, neither for the local language nor the default
 	 * @param	boolean		If true, the output label is passed through htmlspecialchars()
-	 * @return	string		The value from LOCAL_LANG.
+	 *
+	 * @return	string		the value from LOCAL_LANG
 	 */
 	function pi_getLL($key, $alt = '', $hsc = FALSE) {
-		// If the suffix is allowed and
-		// we have a localized string for the desired salutation, we'll take that.
 		if (isset($this->conf['salutation']) && in_array($this->conf['salutation'], $this->allowedSuffixes, 1)) {
-			// Rewrite the language key to 'default' if it is 'en'. Otherwise, it will not work if language = English.
-			if ($this->LLkey == 'en')	{
-				$internal_LL_key = 'default';
-			} else	{
-				$internal_LL_key = $this->LLkey;
-			}
+			// If the suffix is allowed, we'll take that.
+			$salutation = $this->conf['salutation'];
+		} else {
+			// If there is no valid salutation mode given, use the default (formal).
+			$salutation = 'formal';
+		}
+		// Rewrite the language key to 'default' if it is 'en'. Otherwise, it will not work if language = English.
+		if ($this->LLkey == 'en')	{
+			$internal_LL_key = 'default';
+		} else	{
+			$internal_LL_key = $this->LLkey;
+		}
 
-			$expandedKey = $key.'_'.$this->conf['salutation'];
-
-			if (isset($this->LOCAL_LANG[$internal_LL_key][$expandedKey])) {
-				$key = $expandedKey;
-			}
+		$expandedKey = $key.'_'.$salutation;
+		if (isset($this->LOCAL_LANG[$internal_LL_key][$expandedKey])) {
+			$key = $expandedKey;
 		}
 
 		return parent::pi_getLL($key, $alt, $hsc);

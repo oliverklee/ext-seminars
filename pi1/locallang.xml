@@ -70,8 +70,8 @@
 			<label index="label_registrationForm">Registration data</label>
 			<label index="label_thankyou_formal">Thank you for your registration. A confirmation e-mail has been sent. We are looking forward to your attendance.</label>
 			<label index="label_thankyou_informal">Thank you for your registration. A confirmation e-mail has been sent. We are looking forward to your attendance.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
-			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster of this. Thank you!</label>
+			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
 			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
@@ -355,12 +355,11 @@
 			<label index="label_registrationForm" type="integer">236130017</label>
 			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="label_thankyou_informal" type="integer">235938949</label>
-			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
-			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
 			<label index="message_registrationForm" type="integer">194008229</label>
 			<label index="message_registrationForm_informal" type="integer">194008229</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
@@ -430,12 +429,11 @@
 			<label index="label_registrationForm" type="integer">236130017</label>
 			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="label_thankyou_informal" type="integer">235938949</label>
-			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noResults" type="integer">15777293</label>
 			<label index="message_registrationForm" type="integer">194008229</label>
 			<label index="message_registrationForm_informal" type="integer">194008229</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
