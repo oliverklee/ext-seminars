@@ -362,7 +362,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 	/**
 	 * Checks whether the seminar has a (begin) date set.
-	 * If the the seminar has an end date but no begin date,
+	 * If the seminar has an end date but no begin date,
 	 * this function still will return false.
 	 *
 	 * @return	boolean		true if we have a begin date, false otherwise.
