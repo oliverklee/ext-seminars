@@ -10,4 +10,5 @@ $MCONF['script'] = 'index.php';
 
 $MLANG['default']['tabs_images']['tab'] = 'moduleicon.gif';
 $MLANG['default']['ll_ref'] = 'LLL:EXT:seminars/mod2/locallang_mod.php';
+
 ?>

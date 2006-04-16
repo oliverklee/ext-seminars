@@ -187,4 +187,5 @@ t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:seminars/flexform_pi
 t3lib_extMgm::addStaticFile($_EXTKEY,'static/','Seminars');
 
 t3lib_extMgm::addPlugin(Array('LLL:EXT:seminars/locallang_db.php:tt_content.list_type_pi1', $_EXTKEY.'_pi1'),'list_type');
+
 ?>
