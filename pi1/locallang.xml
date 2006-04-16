@@ -13,7 +13,7 @@
 			<label index="seminars.pi_flexform.what_to_display">What should be displayed:</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special">Templates and special properties</label>
 			<label index="seminars.pi_flexform.seminar_list">Seminar List</label>
-			<label index="seminars.pi_flexform.my_seminars">My Seminars</label>
+			<label index="seminars.pi_flexform.my_events">My Events</label>
 			<label index="seminars.pi_flexform.seminar_registration">Seminar registration</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
@@ -46,6 +46,8 @@
 			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
+			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents_informal">You are registered for the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
@@ -87,7 +89,7 @@
 			<label index="seminars.pi_flexform.what_to_display">Was soll angezeigt werden:</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special">Templates und spezielle Einstellungen</label>
 			<label index="seminars.pi_flexform.seminar_list">Seminarliste</label>
-			<label index="seminars.pi_flexform.my_seminars">Meine Seminare</label>
+			<label index="seminars.pi_flexform.my_events">Meine Veranstaltungen</label>
 			<label index="seminars.pi_flexform.seminar_registration">Seminaranmeldung</label>
 			<label index="seminars.pi_flexform.baseURL">Basis-URL dieser Typo3-Site, z.B. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Seite mit der Seminarliste:</label>
@@ -120,6 +122,8 @@
 			<label index="pi_list_browseresults_displays">Zeige Ergebnisse ###SPAN_BEGIN###%s bis %s&lt;/span&gt; von ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Es wurden leider keine Veranstaltungen gefunden, die den Suchkriterien entsprechen.</label>
 			<label index="pi_list_searchBox_search">Suchen</label>
+			<label index="label_myevents_formal">Sie sind für die folgenden Veranstaltungen angemeldet:</label>
+			<label index="label_myevents_informal">Du bist für die folgenden Veranstaltungen angemeldet:</label>
 			<label index="label_title">Titel</label>
 			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Akkreditierungsnummer</label>
@@ -161,7 +165,7 @@
 			<label index="seminars.pi_flexform.what_to_display">Wat moet er worden getoond:</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special">Sjablonen en speciale eigenschappen</label>
 			<label index="seminars.pi_flexform.seminar_list">Lijst van seminars</label>
-			<label index="seminars.pi_flexform.my_seminars">Mijn seminars</label>
+			<label index="seminars.pi_flexform.my_events">Mijn seminars</label>
 			<label index="seminars.pi_flexform.seminar_registration">Seminar registratie</label>
 			<label index="seminars.pi_flexform.baseURL">Basis URL van deze Typo3 site, bijv. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Pagina die de seminarlijst bevat:</label>
@@ -297,7 +301,7 @@
 			<label index="seminars.pi_flexform.what_to_display" type="integer">97910403</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
 			<label index="seminars.pi_flexform.seminar_list" type="integer">32827865</label>
-			<label index="seminars.pi_flexform.my_seminars" type="integer">18363047</label>
+			<label index="seminars.pi_flexform.my_events" type="integer">25497076</label>
 			<label index="seminars.pi_flexform.seminar_registration" type="integer">250098610</label>
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
@@ -327,7 +331,10 @@
 			<label index="pi_list_browseresults_displays" type="integer">152851483</label>
 			<label index="pi_list_browseresults_noResults" type="integer">210107189</label>
 			<label index="pi_list_searchBox_search" type="integer">20138052</label>
+			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents_informal" type="integer">177740162</label>
 			<label index="label_title" type="integer">192455458</label>
+			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -346,17 +353,15 @@
 			<label index="label_onlineRegistration" type="integer">20392011</label>
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_registrationForm" type="integer">236130017</label>
-			<label index="label_thankyou" type="integer">235938949</label>
+			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="label_thankyou_informal" type="integer">235938949</label>
 			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noResults" type="integer">15777293</label>
 			<label index="message_registrationForm" type="integer">194008229</label>
 			<label index="message_registrationForm_informal" type="integer">194008229</label>
-			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
-			<label index="label_uid" type="integer">187623698</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">201114697</label>
@@ -374,7 +379,7 @@
 			<label index="seminars.pi_flexform.what_to_display" type="integer">97910403</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
 			<label index="seminars.pi_flexform.seminar_list" type="integer">32827865</label>
-			<label index="seminars.pi_flexform.my_seminars" type="integer">18363047</label>
+			<label index="seminars.pi_flexform.my_events" type="integer">25497076</label>
 			<label index="seminars.pi_flexform.seminar_registration" type="integer">250098610</label>
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
@@ -423,14 +428,13 @@
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_onlineRegistration" type="integer">20392011</label>
 			<label index="label_registrationForm" type="integer">236130017</label>
-			<label index="label_thankyou" type="integer">235938949</label>
+			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="label_thankyou_informal" type="integer">235938949</label>
 			<label index="message_wrongSeminarNumber" type="integer">232548181</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noResults" type="integer">15777293</label>
 			<label index="message_registrationForm" type="integer">194008229</label>
 			<label index="message_registrationForm_informal" type="integer">194008229</label>
-			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
 		</languageKey>

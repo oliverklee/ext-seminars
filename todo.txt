@@ -285,12 +285,10 @@ Version 0.4.10, 10/2006 - "Make it nice for the visitors": front end usability a
 - when a seminar is deleted, remove it from the FE cache (and from the search results)
 - improve CSS for registration form <http://www.alistapart.com/articles/practicalcss/>
 - allow signing up for a seminar without being logged in as a front end user (thus creating a new front end user in the process)
-- add content element "my seminars" for logged-in users, list the following
-  - seminar name and date
-  - link to seminar details page
+- extend the "my events" functionality:
   - paid/unpaid/refunded (if the participation hasn't been deleted yet)
   - attended?
-- feature on the "my seminars" page: edit registration data
+  - edit registration data
 - feature: front end plug in "The next x upcoming seminars"
 - feature: "this seminar is repeated on the following dates"
 - add field for "these seminars go together well"
@@ -458,7 +456,6 @@ Not triaged yet
 - BE: Add export function for participants list (CSV) [from dev-meeting 05/12]
 - Move past events to an other sysfolder (see EXT:mjs_event) [from dev-meeting 05/12]
 - Add timeslot-functionality [from dev-meeting 05/12]
-  - allow open ended events [from dev-meeting 05/12]
 - feature: Let the user select it's price (normal / reduced) and save the price in the registration record [from dev-meeting 05/12]
 - feature: Add pricing engine [from dev-meeting 05/12]
 - feature: Let's have events with sub-events [from dev-meeting 05/12] (already in Bugtracker)

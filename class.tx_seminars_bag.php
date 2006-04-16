@@ -47,6 +47,19 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	var $dbTableName;
 	/** the comma-separated names of other DB tables which we need for JOINs */
 	var $additionalTableNames;
+
+	/** the ORDER BY clause (without the actual string "ORDER BY") */
+	var $orderBy;
+	/** the GROUP BY clause (without the actual string "GROUP BY") */
+	var $groupBy;
+	/** the LIMIT clause (without the actual string "LIMIT") */
+	var $limit;
+
+	/** how many objects this bag actually holds with the LIMIT */
+	var $objectCountWithLimit;
+	/** how many objects this bag would hold without the LIMIT */
+	var $objectCountWithoutLimit;
+
 	/** an SQL query result (not converted to an associative array yet) */
 	var $dbResult = null;
 	/** the current object (may be null) */
@@ -66,21 +79,28 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * The constructor. Sets the iterator to the first result of a query
 	 *
 	 * @param	string		the name of the main DB table to query (comma-separated), may not be empty
-	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
 	 * @param	string		string that will be prepended to the WHERE clause
 	 *						using AND, e.g. 'mytable.pid=42' (the AND and the enclosing
 	 *						spaces are not necessary for this parameter);
 	 *						the table name must be used as a prefix if more than
 	 *						one table is queried
+	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
+	 * @param	string		GROUP BY clause (may be empty), must already by safeguarded against SQL injection
+	 * @param	string		ORDER BY clause (may be empty), must already by safeguarded against SQL injection
+	 * @param	string		LIMIT clause (may be empty), must already by safeguarded against SQL injection
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_bag($dbTableName, $additionalTableNames = '', $queryParameters = '1') {
+	function tx_seminars_bag($dbTableName, $queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
 		$this->dbTableName = $dbTableName;
+		$this->queryParameters = trim($queryParameters);
 		$this->additionalTableNames =
 			(!empty($additionalTableNames)) ? ', '.$additionalTableNames : '';
-		$this->queryParameters = trim($queryParameters);
 		$this->createEnabledFieldsQuery();
+
+		$this->orderBy = $orderBy;
+		$this->groupBy = $groupBy;
+		$this->limit = $limit;
 
 		$this->init();
 		$this->resetToFirst();
@@ -132,15 +152,26 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 
 		$this->dbResult =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'DISTINCT '.$this->dbTableName.'.*',
-			$this->dbTableName,
+			$this->dbTableName.$this->additionalTableNames,
 			$this->queryParameters.$this->enabledFieldsQuery,
-			'',
-			'',
-			''
+			$this->groupBy,
+			$this->orderBy,
+			$this->limit
 		);
 
 		if ($this->dbResult) {
+			$this->objectCountWithLimit = $GLOBALS['TYPO3_DB']->sql_num_rows($this->dbResult);
+			$dbResultWithoutLimit = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'DISTINCT '.$this->dbTableName.'.*',
+				$this->dbTableName.$this->additionalTableNames,
+				$this->queryParameters.$this->enabledFieldsQuery
+			);
+			$this->objectCountWithoutLimit = $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultWithoutLimit);
+
 			$result = (boolean) $this->getNext();
+		} else {
+			$this->objectCountWithLimit = 0;
+			$this->objectCountWithoutLimit = 0;
 		}
 
 		return $result;
@@ -185,6 +216,30 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 */
 	function &getCurrent() {
 		return $this->currentItem;
+	}
+
+	/**
+	 * Retrieves the number of objects this bag would hold if
+	 * the LIMIT part of the query would not have been used.
+	 *
+	 * @return	integer		the total number of objects in this bag (may be zero)
+	 *
+	 * @access	public
+	 */
+	function getObjectCountWithoutLimit() {
+		return $this->objectCountWithoutLimit;
+	}
+
+	/**
+	 * Retrieves the total number of objects in this bag
+	 * (with having applied the LIMIT part of the query).
+	 *
+	 * @return	integer		the total number of objects in this bag (may be zero)
+	 *
+	 * @access	public
+	 */
+	function getObjectCountWithLimit() {
+		return $this->objectCountLimit;
 	}
 }
 

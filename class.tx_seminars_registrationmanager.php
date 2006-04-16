@@ -266,6 +266,18 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Returns the UID of the currently logged-in FE user
+	 * or 0 if no FE user is logged in.
+	 *
+	 * @return	integer		the UID of the logged-in FE user or 0 if no FE user is logged in
+	 *
+	 * @access	public
+	 */
+	function getFeUserUid() {
+		return ($this->isLoggedIn() ? intval($this->feuser['uid']) : 0);
+	}
+
+	/**
 	 * Checks whether a front end user is already registered for this seminar.
 	 *
 	 * This method must not be called when no front end user is logged in!
@@ -277,7 +289,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function isUserRegistered(&$seminar) {
-		return $seminar->isUserRegistered($this->feuser['uid']);
+		return $seminar->isUserRegistered($this->getFeUserUid());
 	}
 
 	/**
@@ -290,7 +302,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function isUserRegisteredMessage(&$seminar) {
-		return $seminar->isUserRegisteredMessage($this->feuser['uid']);
+		return $seminar->isUserRegisteredMessage($this->getFeUserUid());
 	}
 
 	/**
@@ -381,7 +393,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 */
 	function createRegistration(&$seminar, $registrationData, &$plugin) {
 			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-			$this->registration =& new $registrationClassname($seminar, $this->feuser['uid'], $registrationData, $plugin->cObj);
+			$this->registration =& new $registrationClassname($seminar, $this->getFeUserUid(), $registrationData, $plugin->cObj);
 
 			$this->registration->commitToDb();
 			$seminar->updateStatistics();

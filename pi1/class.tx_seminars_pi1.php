@@ -30,6 +30,7 @@
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('frontendformslib').'class.tx_frontendformslib.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
@@ -72,17 +73,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->registrationManager =& new $registrationManagerClassname();
 
 		$result = '';
+		$showOnlyMyEvents = false;
 
 		switch ($this->getConfValueString('what_to_display')) {
 			case 'seminar_registration':
 				$result = $this->createRegistrationPage();
 				break;
-			case 'my_seminars':
-				trigger_error('"My Seminars" is not implemented yet.');
-				break;
+			case 'my_events':
+				if ($this->registrationManager->isLoggedIn()) {
+					$showOnlyMyEvents = true;
+				}
+				// The fallthrough is intended.
 			case 'seminar_list':
 			default:
-				$result = $this->createSeminarList();
+				// Show the single view if a 'showUid' variable is set.
+				if ($this->piVars['showUid']) {
+					$result = $this->createSingleView();
+				} else {
+					$result = $this->createListView($showOnlyMyEvents);
+				}
 				break;
 		}
 
@@ -90,64 +99,71 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Creates the seminar list HTML (either the list view or the single view).
-	 *
-	 * @return	string		HTML code (shouldn't be empty)
-	 *
-	 * @access	private
-	 */
-	function createSeminarList() {
-		// if we have a 'showUid' var set, we'll show the detailed view
-		if ($this->piVars['showUid']) {
-			$this->internal['currentTable'] = $this->tableSeminars;
-			$this->internal['currentRow'] = $this->pi_getRecord($this->tableSeminars, $this->piVars['showUid']);
-			$result = $this->singleView();
-		} else {
-			if (strstr($this->cObj->currentRecord, 'tt_content')) {
-				$this->conf['pidList'] = $this->getConfValueString('pages');
-				$this->conf['recursive'] = $this->getConfValueInteger('recursive');
-			}
-			$result = $this->listView();
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Returns the additional query parameters needed to build the list view. This function checks
 	 * - the timeframe to display
 	 * - whether to show canceled events
+	 * The result always starts with " AND" so that it can be directly appended
+	 * to a WHERE clause.
 	 *
 	 * @return	string		the additional query parameters
 	 *
-	 * @access	private
+	 * @access	protected
 	 */
 	function getAdditionalQueryParameters() {
-		// Initialize some variables.
+		$result = '';
 		$now = $GLOBALS['SIM_EXEC_TIME'];
-		$additionalQueryParameters = '';
+		/** Prefix the column name with the table name so that the query also works with multiple tables. */
+		$tablePrefix = $this->tableSeminars.'.';
 
 		// Work out from which timeframe we'll display the event list.
 		// We also need to deal with the case that an event has no end date set
 		// (ie. it is open-ended).
 		switch ($this->getConfValueString('timeframeInList', 's_template_special')) {
 			case 'past':
-				$additionalQueryParameters .= ' AND begin_date!=0 AND ((end_date!=0 AND end_date<='.$now.') OR (end_date=0 AND begin_date<='.$now.'))';
+				// As past events, show the following:
+				// 1. Generally, only events that have a begin date set, AND:
+				// 2. If the event has an end date, does it lie in the past?, OR
+				// 2. If the event has *no* end date, does the *begin* date lie in the past?
+				$result .= ' AND '.$tablePrefix.'begin_date!=0 AND (('.$tablePrefix.'end_date!=0 AND '.$tablePrefix.'end_date<='.$now.') OR ('.$tablePrefix.'end_date=0 AND '.$tablePrefix.'begin_date<='.$now.'))';
 				break;
 			case 'pastAndCurrent':
-				$additionalQueryParameters .= ' AND begin_date!=0 AND begin_date<='.$now;
+				// As past and current events, show the following:
+				// 1. Generally, only events that have a begin date set, AND
+				// 2. the begin date lies in the past.
+				// (So events without a begin date won't be listed here.)
+				$result .= ' AND '.$tablePrefix.'begin_date!=0 AND '.$tablePrefix.'begin_date<='.$now;
 				break;
 			case 'current':
-				$additionalQueryParameters .= ' AND begin_date!=0 AND begin_date<='.$now.' AND end_date!=0 AND end_date>'.$now;
+				// As current events, show the following:
+				// 1. Events that have both a begin and end date, AND
+				// 2. The begin date lies in the past, AND
+				// 3. The end date lies in the future.
+				$result .= ' AND '.$tablePrefix.'begin_date!=0 AND '.$tablePrefix.'begin_date<='.$now.' AND '.$tablePrefix.'end_date!=0 AND '.$tablePrefix.'end_date>'.$now;
 				break;
 			case 'currentAndUpcoming':
-				$additionalQueryParameters .= ' AND ((end_date!=0 AND end_date>'.$now.') OR (end_date=0 AND begin_date>'.$now.') OR (begin_date=0))';
+				// As current and upcoming events, show the following:
+				// 1. Events with an existing end date in the future, OR
+				// 2. Events without an end date, but with an existing begin date in the future
+				//    (open-ended events that have not started yet), OR
+				// 3. Events that have no (begin) date set yet.
+				$result .= ' AND (('.$tablePrefix.'end_date!=0 AND '.$tablePrefix.'end_date>'.$now.') OR ('.$tablePrefix.'end_date=0 AND '.$tablePrefix.'begin_date>'.$now.') OR (begin_date=0))';
 				break;
 			case 'upcoming':
-				$additionalQueryParameters .= ' AND (begin_date>'.$now.' OR begin_date=0)';
+				// As upcoming events, show the following:
+				// 1. Events with an existing begin date in the future
+				//    (events that have not started yet), OR
+				// 3. Events that have no (begin) date set yet.
+				$result .= ' AND ('.$tablePrefix.'begin_date>'.$now.' OR '.$tablePrefix.'begin_date=0)';
 				break;
 			case 'deadlineNotOver':
-				$additionalQueryParameters .= ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND (begin_date>'.$now.' OR  begin_date=0)))';
+				// As events for which the registration deadline is not over yet,
+				// show the following:
+				// 1. Events that have a deadline set that lies in the future, OR
+				// 2. Events that have *no* deadline set, but
+				//    with an existing begin date in the future
+				//    (events that have not started yet), OR
+				// 3. Events that have no (begin) date set yet.
+				$result .= ' AND (('.$tablePrefix.'deadline_registration!=0 AND '.$tablePrefix.'deadline_registration>'.$now.') OR ('.$tablePrefix.'deadline_registration=0 AND ('.$tablePrefix.'begin_date>'.$now.' OR '.$tablePrefix.'begin_date=0)))';
 				break;
 			case 'all':
 			default:
@@ -157,26 +173,74 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Check if canceled events should be hidden.
 		if ($this->getConfValueBoolean('hideCanceledEvents', 's_template_special')) {
-			$additionalQueryParameters .= ' AND cancelled=0';
+			$result .= ' AND '.$tablePrefix.'cancelled=0';
 		}
 
-		return $additionalQueryParameters;
+		return $result;
 	}
 
 	/**
-	 * Displays a list of upcoming seminars.
+	 * Creates the HTML for the event list view.
+	 * This function is used for the normal event list as well as the
+	 * "my events" list.
 	 *
-	 * @return	string		HTML for the plugin
+	 * @param	boolean		whether to limit the list view to events
+	 * 						for which the logged-in FE user already is registered
+	 *
+	 * @return	string		HTML code with the event list
 	 *
 	 * @access	protected
 	 */
-	function listView() {
+	function createListView($showOnlyMyEvents = false) {
 		$result = '';
+		if ($showOnlyMyEvents) {
+			$result = $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
+		}
+
+		$seminarBag =& $this->initListView($showOnlyMyEvents);
+
+		if ($this->internal['res_count']) {
+			$result .= $this->createListHeader();
+			$rowCounter = 0;
+			while ($this->seminar =& $seminarBag->getCurrent()) {
+				$result .= $this->createListRow($rowCounter);
+				$rowCounter++;
+				$seminarBag->getNext();
+			}
+			$result .= $this->createListFooter();
+		} else {
+			$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
+			$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
+		}
+		// We display the search box even if the list view does not contain any elements.
+		$result .= $this->pi_list_searchBox();
+
+		return $result;
+	}
+
+	/**
+	 * Initializes the list view and creates a seminar bag,
+	 * but does not create any actual HTML output.
+	 *
+	 * @param	boolean		whether to limit the list view to events
+	 * 						for which the logged-in FE user already is registered
+	 *
+	 * @return	object		a seminar bag containing the seminars for the list view
+	 *
+	 * @access	protected
+	 */
+	function &initListView($showOnlyMyEvents = false) {
+		if (strstr($this->cObj->currentRecord, 'tt_content')) {
+			$this->conf['pidList'] = $this->getConfValueString('pages');
+			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
+		}
+
 		$this->readSubpartsToHide($this->getConfValueString('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
 		$this->readSubpartsToHide($this->getConfValueString('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
 
-		// hide the registration column if no user is logged in
-		if (!$this->registrationManager->isLoggedIn()) {
+		// Hide the registration column if no user is logged in
+		// or if the "my events" list should be displayed.
+		if (!$this->registrationManager->isLoggedIn() || $showOnlyMyEvents) {
 			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
 		}
@@ -192,7 +256,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Overwrite the default sort order with values given by the browser.
-		// This happens, if the user changes the sort order manually.
+		// This happens if the user changes the sort order manually.
 		if (!empty($this->piVars['sort'])) {
 			list($this->internal['orderBy'], $this->internal['descFlag']) = explode(':', $this->piVars['sort']);
 		}
@@ -205,33 +269,45 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
 		$this->internal['orderByList'] = 'title,uid,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
-		// Get number of records
-		$res = $this->pi_exec_query($this->tableSeminars, true, $this->getAdditionalQueryParameters());
-		list($this->internal['res_count']) = ($res) ? $GLOBALS['TYPO3_DB']->sql_fetch_row($res) : 0;
-
-		if ($this->internal['res_count']) {
-			// Make listing query, pass query to SQL database
-			$res = $this->pi_exec_query($this->tableSeminars, false, $this->getAdditionalQueryParameters());
-			$this->internal['currentTable'] = $this->tableSeminars;
-
-			// Put the whole list together:
-			// Adds the whole list table
-			$fullTable = $this->pi_list_makelist($res);
-		} else {
-			$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
-			$fullTable = $this->substituteMarkerArrayCached('ERROR_VIEW');
+		$pidList = $this->pi_getPidList($this->getConfValueString('pidList'), $this->getConfValueInteger('recursive'));
+		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')'
+			.$this->getAdditionalQueryParameters();
+		$additionalTables = '';
+		if ($showOnlyMyEvents) {
+			$additionalTables = $this->tableAttendances;
+			$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableAttendances.'.seminar'
+				.' AND '.$this->tableAttendances.'.user='.$this->registrationManager->getFeUserUid();
 		}
 
-		// Adds the search box:
-		$fullTable .= $this->pi_list_searchBox();
+		$orderBy = '';
+		if ($this->internal['orderBy']) {
+			if (t3lib_div::inList($this->internal['orderByList'], $this->internal['orderBy'])) {
+				$orderBy = $this->tableSeminars.'.'.$this->internal['orderBy'].($this->internal['descFlag'] ? ' DESC' : '');
+			}
+		}
 
-		// Adds the result browser:
-		$fullTable .= $this->pi_list_browseresults();
+		$limit = '';
+		$pointer = intval($this->piVars['pointer']);
+		$resultsAtATime = t3lib_div::intInRange($this->internal['results_at_a_time'], 1, 1000);
+		$limit = ($pointer * $resultsAtATime).','.$resultsAtATime;
 
-		// Returns the content from the plugin.
-		$result = $fullTable;
+		if ($this->piVars['sword'] && $this->internal['searchFieldList']) {
+			$queryWhere .= $this->cObj->searchWhere($this->piVars['sword'],  $this->internal['searchFieldList'], $this->tableSeminars);
+		}
 
-		return $result;
+		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
+		$seminarBag =& new $seminarBagClassname(
+			$this->registrationManager,
+			$queryWhere,
+			$additionalTables,
+			'',
+			$orderBy,
+			$limit
+		);
+
+		$this->internal['res_count'] = $seminarBag->getObjectCountWithoutLimit();
+
+		return $seminarBag;
 	}
 
 	/**
@@ -242,7 +318,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @access	protected
 	 */
-	function singleView() {
+	function createSingleView() {
+		$this->internal['currentTable'] = $this->tableSeminars;
+		$this->internal['currentRow'] = $this->pi_getRecord($this->tableSeminars, $this->piVars['showUid']);
+
 		$this->readSubpartsToHide($this->getConfValueString('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
@@ -358,7 +437,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
 	 *
-	 * @access	private
+	 * @access	protected
 	 */
 	function createSeminar($seminarUid) {
 		$result = false;
@@ -374,14 +453,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns a list header row as a TR.
+	 * Returns the list view header: Start of table, header row, start of table body.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
-	 * @return	string		HTML output, a table row
+	 * @return	string		HTML output, the table header
 	 *
 	 * @access	protected
 	 */
-	function pi_list_header() {
+	function createListHeader() {
 		$this->setMarkerContent('header_title', $this->getFieldHeader_sortLink('title'));
 		$this->setMarkerContent('header_uid', $this->getFieldHeader_sortLink('uid'));
 		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader_sortLink('accreditation_number'));
@@ -398,9 +477,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns a list row as a TR. Gets data from $this->internal['currentRow'].
+	 * Returns the list view footer: end of table body, end of table,
+	 * result browser.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
-	 * If $this->internal['currentRow'] is invalid, an empty string is returned.
+	 *
+	 * @return	string		HTML output, the table header
+	 *
+	 * @access	protected
+	 */
+	function createListFooter() {
+		$result = $this->substituteMarkerArrayCached('LIST_FOOTER');
+		$result .= $this->pi_list_browseresults();
+
+		return $result;
+	}
+
+	/**
+	 * Returns a list row as a TR. Gets data from $this->seminar.
+	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
+	 * If $this->seminar is invalid, an empty string is returned.
 	 *
 	 * @param	integer		Row counter. Starts at 0 (zero). Used for alternating class values in the output rows.
 	 *
@@ -408,10 +503,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @access	protected
 	 */
-	function pi_list_row($rowCounter) {
+	function createListRow($rowCounter = 0) {
 		$result = '';
 
-		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
+		if ($this->seminar->isOk()) {
 			$rowClass = ($rowCounter % 2) ? 'listrow-odd' : '';
 			$canceledClass = ($this->seminar->isCanceled()) ? $this->pi_getClassName('canceled') : '';
 			// If we have two classes, we need a space as a separator.
@@ -523,7 +618,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		HTML code for the registration page
 	 *
-	 * @acces	private
+	 * @acces	protected
 	 */
 	function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
@@ -626,43 +721,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// Form has not yet been submitted, so render the form:
 		$output .= $formObj->renderWholeForm();
 		$output .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
-
-		return $output;
-	}
-
-	/**
-	 * Returns the list of items based on the input SQL result pointer.
-	 * For each result row the internal var, $this->internal['currentRow'], is set with the row returned.
-	 *
-	 * $this->pi_list_header() makes the header row for the list
-	 * $this->pi_list_row() is used for rendering each row
-	 *
-	 * @param	pointer		result pointer to a SQL result which can be traversed
-	 * @param	string		attributes for the table tag which is wrapped around the table rows containing the list
-	 * @return	string		output HTML, wrapped in <div>-tags with a class attribute
-	 *
-	 * @access	protected
-	 *
-	 * @see pi_list_row(), pi_list_header()
-	 */
-	function pi_list_makelist($dbResult, $tableParams = '')	{
-		// Make list table header
-		$tRows = array();
-		$this->internal['currentRow'] = array();
-		$tRows[] = $this->pi_list_header();
-		$tRows[] = '  <tbody>'.chr(10);
-
-		// Make list table rows
-		$rowCounter = 0;
-		while ($this->internal['currentRow'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$tRows[] = $this->pi_list_row($rowCounter);
-			$rowCounter++;
-		}
-		$tRows[] = '  </tbody>'.chr(10);
-
-		$output = '<div'.$this->pi_classParam('listrow').'>'.chr(10);
-		$output .= '<'.trim('table '.$tableParams).'>'.implode('', $tRows).'</table>'.chr(10);
-		$output .= '</div>';
 
 		return $output;
 	}

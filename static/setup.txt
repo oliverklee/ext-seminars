@@ -32,6 +32,8 @@ plugin.tx_seminars_pi1 {
 	# location of the CSS file (leave empty to include no CSS file)
 	cssFile = typo3conf/ext/seminars/pi1/seminars_pi1.css
 
+	# CSS class around the table with the events list view (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	class_eventlist = listrow
 	# CSS class for the TR with the header row for the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_headerrow =
 
