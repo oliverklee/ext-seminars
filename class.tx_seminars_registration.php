@@ -44,6 +44,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/** whether we have already initialized the templates (which is done lazily) */
 	var $isTemplateInitialized = false;
 
+	/** This variable stores the data of the user as an array and makes it available without further database queries. It will get filled with data in the constructor. */
+	var $userData;
+
 	/**
 	 * The constructor.
 	 *
@@ -75,6 +78,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['notes'] = $registrationData['notes'];
 
 		$this->recordData['pid'] = $this->getConfValueInteger('attendancesPID');
+
+		// Store the user Data in $this->userData.
+		$this->retrieveUserData();
 
 		$this->createTitle();
 
@@ -109,6 +115,48 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		return;
 	}
 
+ 	/**
+	 * Gets the complete user data as an array.
+	 * The attendee's user data (from fe_users) will be written to $this->userData.
+	 * $this->userData will be null if retrieving the user data fails.
+	 *
+	 * @access	private
+	 */
+	function retrieveUserData() {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'*',
+				'fe_users',
+				'uid='.$this->getUser());
+
+		if ($dbResult) {
+			$this->userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		} else {
+			$this->userData = null;
+		}
+
+		return;
+	}
+
+	/**
+	 * Returns a value out of the userData array. The return value may be an empty string if the key is not defined in the userData array.
+	 *
+	 * @param	string		the key to retrieve
+	 *
+	 * @return	string		the value retrieved from $this->userData, may be empty
+	 *
+	 * @access	protected
+	 */
+	function getUserData($key) {
+		$result = '';
+		if (is_array($this->userData) && !empty($key)) {
+			if (array_key_exists($key, $this->userData)) {
+				$result = $this->userData[$key];
+			}
+		}
+
+		return $result;
+	}
+
 	/**
 	 * Gets the attendee's uid.
 	 *
@@ -128,21 +176,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	private
 	 */
 	function getUserName() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'name',
-				'fe_users',
-				'uid='.$this->getUser(),
-				'',
-				'',
-				'');
-		if ($dbResult) {
-			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$result = $dbResultAssoc['name'];
-		} else {
-			$result = '';
-		}
-
-		return $result;
+		return $this->getUserData('name');
 	}
 
 	/**
@@ -154,21 +188,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	private
 	 */
 	function getUserEmail() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'email',
-				'fe_users',
-				'uid='.$this->getUser(),
-				'',
-				'',
-				'');
-		if ($dbResult) {
-			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$result = $dbResultAssoc['email'];
-		} else {
-			$result = '';
-		}
-
-		return $result;
+		return $this->getUserData('email');
 	}
 
 	/**
@@ -180,21 +200,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	private
 	 */
 	function getUserNameAndEmail() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'name, email',
-				'fe_users',
-				'uid='.$this->getUser(),
-				'',
-				'',
-				'');
-		if ($dbResult) {
-			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$result = '"'.$dbResultAssoc['name'].'" <'.$dbResultAssoc['email'].'>';
-		} else {
-			$result = '';
-		}
-
-		return $result;
+		return '"'.$this->getUserData('name').'" <'.$this->getUserData('email').'>';
 	}
 
 	/**
@@ -544,25 +550,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		$result = '';
-
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				'fe_users',
-				'uid='.$this->getUser(),
-				'',
-				'',
-				'');
-		if ($dbResult) {
-			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-
-			foreach ($keys as $currentKey) {
-				if (array_key_exists($currentKey, $dbResultAssoc)) {
-					$value = $dbResultAssoc[$currentKey];
-				} else {
-					$value = '';
-				}
-				$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
-			}
+		foreach ($keys as $currentKey) {
+			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$this->getUserData($currentKey).chr(10);
 		}
 
 		return $result;
