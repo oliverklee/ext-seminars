@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Fix: Correctly display open-ended events. Also consider events without a begin date to take place in the future. (#0001995)
 - Made tx_seminars_objectfromdb also work with JOIN queries (#0003194)
 - Fix: Hide the number of vacancies for canceled events and change the CSS class for TR with canceled seminars from .tx-seminars-pi1-cancelled to .tx-seminars-pi1-canceled (#0003270)
 - Added the new backend module base to work on (#0002002)

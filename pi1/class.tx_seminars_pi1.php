@@ -128,24 +128,26 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$additionalQueryParameters = '';
 
 		// Work out from which timeframe we'll display the event list.
+		// We also need to deal with the case that an event has no end date set
+		// (ie. it is open-ended).
 		switch ($this->getConfValueString('timeframeInList', 's_template_special')) {
 			case 'past':
-				$additionalQueryParameters .= ' AND end_date<='.$now;
+				$additionalQueryParameters .= ' AND begin_date!=0 AND ((end_date!=0 AND end_date<='.$now.') OR (end_date=0 AND begin_date<='.$now.'))';
 				break;
 			case 'pastAndCurrent':
-				$additionalQueryParameters .= ' AND begin_date<='.$now;
+				$additionalQueryParameters .= ' AND begin_date!=0 AND begin_date<='.$now;
 				break;
 			case 'current':
-				$additionalQueryParameters .= ' AND begin_date<='.$now.' AND end_date>'.$now;
+				$additionalQueryParameters .= ' AND begin_date!=0 AND begin_date<='.$now.' AND end_date!=0 AND end_date>'.$now;
 				break;
 			case 'currentAndUpcoming':
-				$additionalQueryParameters .= ' AND end_date>'.$now;
+				$additionalQueryParameters .= ' AND ((end_date!=0 AND end_date>'.$now.') OR (end_date=0 AND begin_date>'.$now.') OR (begin_date=0))';
 				break;
 			case 'upcoming':
-				$additionalQueryParameters .= ' AND begin_date>'.$now;
+				$additionalQueryParameters .= ' AND (begin_date>'.$now.' OR begin_date=0)';
 				break;
 			case 'deadlineNotOver':
-				$additionalQueryParameters .= ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND begin_date>'.$now.'))';
+				$additionalQueryParameters .= ' AND ( (deadline_registration!=0 AND deadline_registration>'.$now.') OR (deadline_registration=0 AND (begin_date>'.$now.' OR  begin_date=0)))';
 				break;
 			case 'all':
 			default:

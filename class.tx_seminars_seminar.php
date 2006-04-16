@@ -334,8 +334,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$beginDateDay = strftime($this->getConfValueString('dateFormatYMD'), $beginDate);
 			$endDateDay = strftime($this->getConfValueString('dateFormatYMD'), $endDate);
 
-			// Does the workshop span several days?
-			if ($beginDateDay == $endDateDay) {
+			// Does the workshop span only one day (or is open-ended)?
+			if (($beginDateDay == $endDateDay) || !$this->hasEndDate()) {
 				$result = $beginDateDay;
 			} else {
 				if (!$this->getConfValueBoolean('abbreviateDateRanges')) {
@@ -361,14 +361,27 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks whether the seminar has a date set (a begin date and an end date)
+	 * Checks whether the seminar has a (begin) date set.
+	 * If the the seminar has an end date but no begin date,
+	 * this function still will return false.
 	 *
-	 * @return	boolean		true if we have a date, false otherwise.
+	 * @return	boolean		true if we have a begin date, false otherwise.
 	 *
 	 * @access	public
 	 */
 	function hasDate() {
-		return ($this->hasRecordPropertyInteger('begin_date') && $this->hasRecordPropertyInteger('end_date'));
+		return $this->hasRecordPropertyInteger('begin_date');
+	}
+
+	/**
+	 * Checks whether the seminar has an end date set
+	 *
+	 * @return	boolean		true if we have an end date, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasEndDate() {
+		return $this->hasRecordPropertyInteger('end_date');
 	}
 
 	/**
@@ -395,7 +408,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 			$result = $beginTime;
 
-			if ($beginTime !== $endTime) {
+			// Only display the end time if the event has an end date/time set
+			// and the end time is not the same as the begin time.
+			if ($this->hasEndDate() && ($beginTime !== $endTime)) {
 				$result .= $dash.$endTime;
 			}
 		}
@@ -404,17 +419,16 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks whether the seminar has a time set (begin time or end time != 00:00)
+	 * Checks whether the seminar has a time set (begin time != 00:00)
 	 *
-	 * @return	boolean		true if we have a time, false otherwise.
+	 * @return	boolean		true if we have a begin time, false otherwise
 	 *
 	 * @access	public
 	 */
 	function hasTime() {
 		$beginTime = strftime('%H:%M', $this->getRecordPropertyInteger('begin_date'));
-		$endTime = strftime('%H:%M', $this->getRecordPropertyInteger('end_date'));
 
-		return ($beginTime !== '00:00' || $endTime !== '00:00');
+		return ($beginTime !== '00:00');
 	}
 
 	/**
