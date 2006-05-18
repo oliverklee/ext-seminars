@@ -33,6 +33,7 @@
 - moved the changelog from the manual to this file (#0002435)
 - Fixed: Commas in participant names or organizer names caused problems. (#0002432)
 - Added a Dutch localization. (#0001970)
+- Fix: bug in notification mail (#0003420)
 
 0.4.3
 - Fixed: Paid attendances were counted as not paid. (#0001978)

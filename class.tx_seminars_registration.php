@@ -425,7 +425,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
-			$this->setMarkerContent('attendancedata', $this->getConfValueString('showAttendanceFieldsInNotificationMail'));
+			$this->setMarkerContent('attendancedata', $this->dumpAttendanceValues($this->getConfValueString('showAttendanceFieldsInNotificationMail')));
 		} else {
 			$this->readSubpartsToHide('attendancedata', 'field_wrapper');
 		}
