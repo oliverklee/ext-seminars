@@ -460,7 +460,7 @@ $TCA['tx_seminars_speakers'] = Array (
 $TCA['tx_seminars_attendances'] = Array (
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'title,user,seminar,seats,paid,datepaid,method_of_payment,been_there,interests,expectations,background_knowledge,known_from,notes'
+		'showRecordFieldList' => 'title,user,seminar,seats,paid,datepaid,method_of_payment,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
 	),
 	'columns' => Array (
 		'title' => Array (
@@ -575,6 +575,24 @@ $TCA['tx_seminars_attendances'] = Array (
 				'rows' => '5',
 			)
 		),
+		'accommodation' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.accommodation',
+			'config' => Array (
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5',
+			)
+		),
+		'food' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.food',
+			'config' => Array (
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5',
+			)
+		),
 		'known_from' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.known_from',
@@ -595,7 +613,7 @@ $TCA['tx_seminars_attendances'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, seats, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, known_from, notes')
+		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, seats, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')

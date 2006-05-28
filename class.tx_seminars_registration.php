@@ -74,6 +74,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['interests'] = $registrationData['interests'];
 		$this->recordData['expectations'] = $registrationData['expectations'];
 		$this->recordData['background_knowledge'] = $registrationData['background_knowledge'];
+		$this->recordData['accommodation'] = $registrationData['accommodation'];
+		$this->recordData['food'] = $registrationData['food'];
 		$this->recordData['known_from'] = $registrationData['known_from'];
 		$this->recordData['notes'] = $registrationData['notes'];
 

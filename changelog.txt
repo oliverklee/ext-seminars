@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Feature: add fields for lodging and food to the registration form (#0003366)
 - Fix: bug in notification mail (#0003420)
 - Fix: reliably catch wrong seminar UIDs in the piVars plus some cleanup (#0002700)
 - Polish the BE flexforms localized strings (#0003280)
