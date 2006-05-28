@@ -129,18 +129,14 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - reduce code by using the API for COUNT queries
 - add automatic headers (function index) to code files
 - check code with PhpLint once PhpLint is a bit more mature
-- move HTML from pi_list_makelist to template
 - investigate whether the string pi_list_browseresults_noResults actually is used
 - check for unused localization strings once more
 - provide a patch for the frontendformslib extension: remove brackets from URLs
 - investigate whether to use pibase->initMemberArray()
 - remove duplicate code for putting seminar properties into markers in tx_seminars_registration::notifyAttendee(), tx_seminars_pi1::singleView(), tx_seminars_pi1::pi_list_row() and tx_seminars_pi1::createRegistrationForm()
 - refactor the getters in the seminars class, try to remove duplicate code
-- remove redundancies from the templates
 - make it easier to add new fields to the seminar record type
-- include CSS file using TS (without PHP)
 - check for trailing spaces and tabs again
-- clean up the mess in mod1/
 - investige the a4n_edit_locallang extension
 - add class diagram to the extension
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
@@ -186,7 +182,8 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - use mmQuery where possible (eg. in seminar->getSpeakersShort)
 - in seminar->createListRow(), factor out the creation of the CSS class
 - refactor seminar->createSingleView() so that is a *lot* shorter and better to read
-
+- check if the first parameter from the seminar constructor (the registration manager) is needed at all
+- use tt_address for most address data
 
 Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
