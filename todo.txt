@@ -207,7 +207,6 @@ Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
 - add scope="col" to th elements in the list view
 - test with PHP 5 (once Ubuntu 6.04 has been released and suphp supports PHP 5)
 - add automated tests using T3unit (requires PHP5)
-- fix the authors's name in properties of the OO.o manual (has to do with a bug in OO.o 2beta)
 - test with a21glossary, gov_accessibility and sb_akronymmanager
 - list view: show "(canceled)" in the vacancies column for canceled events
 
@@ -326,6 +325,7 @@ Version 0.4.10, 10/2006 - "Make it nice for the visitors": front end usability a
 - after logging in, jump back to the seminar details page
 - remove the 3D look from the table, set the table cell border spacing (or whatever it is) to 1px
 - list view: display a green square (but no number of vacancies) for workshops that don't require a registration
+- allow for the list view and the single view to be on different pages so that navigation works
 
 
 Version 0.5.0, 11/2006 - "Getting real new features"
