@@ -184,6 +184,7 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - refactor seminar->createSingleView() so that is a *lot* shorter and better to read
 - check if the first parameter from the seminar constructor (the registration manager) is needed at all
 - use tt_address for most address data
+- investigate whether we can drop the plugin.tx_seminars_pi1.baseURL parameter as sr_feuser_register seems to do without it quite well
 
 Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
