@@ -297,7 +297,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
 		$seminarBag =& new $seminarBagClassname(
-			$this->registrationManager,
 			$queryWhere,
 			$additionalTables,
 			'',
@@ -445,7 +444,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if (tx_seminars_seminar::existsSeminar($seminarUid)) {
 			/** Name of the seminar class in case someone subclasses it. */
 			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-			$this->seminar =& new $seminarClassname($this->registrationManager, $seminarUid);
+			$this->seminar =& new $seminarClassname($seminarUid);
 			$result = true;
 		}
 

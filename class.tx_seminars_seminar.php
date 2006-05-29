@@ -30,7 +30,6 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 
 class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	/** Same as class name */
@@ -41,19 +40,17 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	/** Organizers data as an array of arrays with their UID as key. Lazily initialized. */
 	var $organizersCache = array();
 
-	/** an instance of registration manager which we want to have around only once (for performance reasons) */
-	var $registrationManager = null;
-
-	/** The number of paid attendances.
-	 *  This variable is only available directly after updateStatistics() has been called.
-	 *  It will go completely away once we have a configuration about whether to count
-	 *  only the paid or all attendances. */
+	/**
+	 * The number of paid attendances.
+	 * This variable is only available directly after updateStatistics() has been called.
+	 * It will go completely away once we have a configuration about whether to count
+	 * only the paid or all attendances.
+	 */
 	var $numberOfAttendancesPaid = 0;
 
 	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
-	 * @param	object		An instance of a registrationManager.
 	 * @param	integer		The UID of the seminar to retrieve from the DB.
 	 * 						This parameter will be ignored if $dbResult is provided.
 	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
@@ -61,10 +58,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminar(&$registrationManager, $seminarUid, $dbResult = null) {
+	function tx_seminars_seminar($seminarUid, $dbResult = null) {
 		$this->init();
 		$this->tableName = $this->tableSeminars;
-		$this->registrationManager =& $registrationManager;
 
 		if (!$dbResult) {
 			$dbResult = $this->retrieveSeminar($seminarUid);

@@ -38,14 +38,10 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_seminarbag.php';
 
-	/** an instance of registration manager which we want to have around only once (for performance reasons) */
-	var $registrationManager;
-
 	/**
 	 * The constructor. Creates a seminar bag that (currently) contains all
 	 * non-deleted and visible seminar records.
 	 *
-	 * @param	object		an instance of a registrationManager (must not be null)
 	 * @param	string		string that will be prepended to the WHERE clause
 	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
 	 *						spaces are not necessary for this parameter)
@@ -56,9 +52,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminarbag(&$registrationManager, $queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
-		$this->registrationManager =& $registrationManager;
-
+	function tx_seminars_seminarbag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSeminars is provided.
 		$this->init();
@@ -77,7 +71,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 */
 	function createItemFromDbResult() {
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$this->currentItem =& new $seminarClassname($this->registrationManager, 0, $this->dbResult);
+		$this->currentItem =& new $seminarClassname(0, $this->dbResult);
 
 		// Null out the seminar object if has not been initialized properly,
 		// e.g. when there was no more data from the DB.

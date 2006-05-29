@@ -35,7 +35,6 @@ $LANG->includeLLFile('EXT:seminars/mod1/locallang.php');
 #include ('locallang.php');
 require_once (PATH_t3lib.'class.t3lib_scbase.php');
 require_once (PATH_t3lib.'class.t3lib_page.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 // This checks permissions and exits if the users has no permission for entry.
@@ -209,9 +208,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		$result = '';
 
-		$registrationManager =& t3lib_div::makeInstance('tx_seminars_registrationmanager');
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
-		$seminarBag =& new $seminarBagClassname($registrationManager, 'pid='.intval($this->id));
+		$seminarBag =& new $seminarBagClassname('pid='.intval($this->id));
 
 		$result .= '<h3>'.$LANG->getLL('message_updatingAttendanceNumbers').'</h3>'.chr(10);
 		while ($currentSeminar =& $seminarBag->getCurrent()) {
