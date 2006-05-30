@@ -20,25 +20,25 @@
 - Fix: Repaired the feature of selecting the CSS file from flexform (#0002825)
 - Fix: Added support for selecting the template file from Flexform (which wasn't working before) (#0002715)
 - Feature: Added configuration for showing detailed speaker information in single view (#0001998)
-- Changed the message shown if an event has begun, is over or registration is closed (#0001848)
+- Fix: Changed the message shown if an event has begun, is over or registration is closed (#0001848)
 - Feature: Added configuration for sending additional notifications to the organizers (#0002770)
 - Fix: Uninitialized variables (#0002779)
 - Feature: Added speakers to list view (disabled by default) (#0002730)
 - Feature: Sending additional notification mails to organizers if event has enough registrations or is full (#0001994)
-- Added the field UID to listview, singleview and outgoing emails (#0002009)
-- Fixed: Problems with formal/informal translations after conversion to XML locallang files. (#0002428)
-- Extended the default CSS file to prevent from having unreadable color combinations. Checked that it validates against the CSS validator. (#0001996)
-- Fixed: For some RTE configurations, lists get rendered as <typolist> on the front end. (#0001979)
-- Fixed: Error 500 on online registration if the SMTP server did no support recipients in the format John Doe <john.doe@example.com>. (#0001954)
+- Feature: Added the field UID to listview, singleview and outgoing emails (#0002009)
+- Fix: Problems with formal/informal translations after conversion to XML locallang files. (#0002428)
+- Fix: Extended the default CSS file to prevent from having unreadable color combinations. Checked that it validates against the CSS validator. (#0001996)
+- Fix: For some RTE configurations, lists get rendered as <typolist> on the front end. (#0001979)
+- Fix: Error 500 on online registration if the SMTP server did no support recipients in the format John Doe <john.doe@example.com>. (#0001954)
 - Improved the manual.
 - Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#0002400)
 - moved the changelog from the manual to this file (#0002435)
-- Fixed: Commas in participant names or organizer names caused problems. (#0002432)
+- Fix: Commas in participant names or organizer names cause problems. (#0002432)
 - Added a Dutch localization. (#0001970)
 - Fix: bug in notification mail (#0003420)
 
 0.4.3
-- Fixed: Paid attendances were counted as not paid. (#0001978)
+- Fix: Paid attendances were counted as not paid. (#0001978)
 
 0.4.2
 - Now an unlimited number of speakers is allowed per seminar.
