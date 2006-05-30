@@ -9,8 +9,8 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Hint regarding the items marked with [from dev-meeting 05/12], they got discussed on the developers meeting that took place at the end of 2005. Details about these points can be read in the notices of this meeting wich can be found at http://www.rimann.li/fileadmin/mario/typo3/Dev_Meeting_0512_060101.pdf (sorry, German only. If you have questions please ask.)
 
-Version 0.4.4, 04/2006: dogfood, part 2
----------------------------------------
+Version 0.5.0 - "Dogfood, part 2"
+---------------------------------
 --> All bugs marked with a star (*) are entered to the bugtracker!
 - bug: at Web > Seminars > Update statistics, there is no number after "paid", and after "not paid", there is always the number of all attendances
 - *investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
@@ -57,9 +57,11 @@ Version 0.4.4, 04/2006: dogfood, part 2
 - announce in the manual that 0.4.5 will depend on oelib
 - *test with Typo3 4.0 and make sure that it works
 - *bug: there's <tr###CLASS_HEADERROW###> in the list view header
+- add support for different kinds of events (workshop, lecture, ...)
 
-Version 0.4.5, 05/2006 - "Make it safer to use": safety, data integrity and sanity
-----------------------------------------------------------------------------------
+
+Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
+-------------------------------------------------------------------------
 - make BE form labels more intuitive
 - remove the old sr_feuser_register template
 - *make it configurable whether to have the university-specific stuff
@@ -124,10 +126,10 @@ Version 0.4.5, 05/2006 - "Make it safer to use": safety, data integrity and sani
 - test with PHP 5 and make sure that it works
 - add automated tests using T3unit (requires PHP5)
 - reread all DB queries if thery are safe from SQL injection
+- test with PostGreSQL
 
-
-Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and documentation
--------------------------------------------------------------------------------------------
+Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
+----------------------------------------------------------------------------------
 - format changelog according to http://www.red-bean.com/cvs2cl/changelogs.html
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
@@ -193,8 +195,8 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - replace all occurances of ")tab*{" with ")space{" (also in oelib)
 
 
-Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
----------------------------------------------------------------
+Version 0.8.0 - "Make it for everybody": accessibility
+------------------------------------------------------
 - clean up code from pibase (search box, results browser)
 - remove layout tables from the search box
 - add labels to forms
@@ -214,8 +216,8 @@ Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
 - list view: show "(canceled)" in the vacancies column for canceled events
 
 
-Version 0.4.8, 08/2006 - "Make it fast": performance
-----------------------------------------------------
+Version 0.9.0 - "Make it fast": performance
+-------------------------------------------
 - cache speaker data
 - cache site data
 - cache payment methods
@@ -230,8 +232,8 @@ Version 0.4.8, 08/2006 - "Make it fast": performance
 - investigate whether we can cache some parts of the BE modules
 
 
-Version 0.4.9, 09/2006 - "Make it nice for the BE users": back end usability and polish
----------------------------------------------------------------------------------------
+Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
+-------------------------------------------------------------------------------
 - move the "seminar is cancelled" checkbox further up in the BE form
 - bug: BE search doesn't find attendance titles
 - work out how to override non-empty TS values with empty flexforms values
@@ -279,8 +281,8 @@ Version 0.4.9, 09/2006 - "Make it nice for the BE users": back end usability and
 - show the status of registrations with color and graphical (progress bar) in BE lists [from dev-meeting 05/12]
 
 
-Version 0.4.10, 10/2006 - "Make it nice for the visitors": front end usability and polish
-----------------------------------------------------------------------------------------
+Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
+--------------------------------------------------------------------------------
 - option to hide seminar without vacancies in the list view
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
 - make some fe_users data editable on the registration page
@@ -322,7 +324,7 @@ Version 0.4.10, 10/2006 - "Make it nice for the visitors": front end usability a
 - allow users to specify which price to pay (regular or special)
 - add more FE examples to the manual
 - add more FE screenshots to the manual
-- Check if we can/should use TemplaVoila before 0.5.0 [from dev-meeting 05/12]
+- Check if we can/should use TemplaVoila [from dev-meeting 05/12]
 - in the list view, add little arrows to the list head indicating the sort field and sort order
 - remove vertical spacing between the table rows
 - implement sorting for all columns in the list view
@@ -331,10 +333,11 @@ Version 0.4.10, 10/2006 - "Make it nice for the visitors": front end usability a
 - remove the 3D look from the table, set the table cell border spacing (or whatever it is) to 1px
 - list view: display a green square (but no number of vacancies) for workshops that don't require a registration
 - allow for the list view and the single view to be on different pages so that navigation works
+- marry this extension to tx_cal
 
 
-Version 0.5.0, 11/2006 - "Getting real new features"
-----------------------------------------------------
+Version 1.0.0 - "Getting real new features"
+-------------------------------------------
 - make it configurable what to do when a participant signs up
   - send an e-mail to the organizer
   - send an e-mail to the participant
@@ -356,18 +359,20 @@ Version 0.5.0, 11/2006 - "Getting real new features"
 - check that links in this extension work correctly on multilingual sites
 - write an article about this extension for the T3N magazine
 - payment reports on the BE (list by seminar: sum of money and who has paid how much with which payment method)
+- switch extension status from "beta" to "stable"
 
 
-Version 0.5.1, 12/2006 - "More back end features"
--------------------------------------------------
+Version 1.1.0 - "More back end features"
+----------------------------------------
 - Define all possible states of an event (in planning, open for registration, cancelled)
 - Feature: Create the select user functionality in the BE
 - Feature: Create the list / select possibility for an attendance of a user in the BE
 - Feature: Create a unified e-mail function for the BE SubModules
 - Investigate on how the payment-workflow could be optimized.
 
-Version 0.5.2, 01/2007 - "The Back end fight :-)"
--------------------------------------------------
+
+Version 1.2.0 - "The Back end fight :-)"
+----------------------------------------
 - Feature: Show some global statistics about the whole seminar extension.
 - Feature: Show statistics for a selected event.
 - Feature: Add BE functionality to confirm attendances (person was really there)
@@ -375,13 +380,15 @@ Version 0.5.2, 01/2007 - "The Back end fight :-)"
 - Feature: Add BE functionality to confirm an event.
 - Feature: Add BE functionality to cancel an event.
 
-Version 0.5.3, 02/2007 - "Back end polish"
-------------------------------------------
+
+Version 1.3.0 - "Back end polish"
+---------------------------------
 - Feature: Add BE functionality to cancel attendances.
 - Check the new BE against the product requirement specifications.
 
-Version 0.6.0, 03/2007 - "Great new FE and BE features"
--------------------------------------------------------
+
+Version 2.0.0 - "Great new FE and BE features"
+----------------------------------------------
 - add possibility for front end users to sign off a seminar if it's early enough
 - add configuration: period before seminar start when signing off is not possible any more (default: 14 days)
 - allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee
@@ -405,23 +412,20 @@ Version 0.6.0, 03/2007 - "Great new FE and BE features"
 - display picture of speakers on seminar page
 - in pi1, implement the default sort order (by begin date) using TCA
 
-Version 0.7.0, 04/2007
-----------------------
+
+Version 2.1.0
+-------------
 - add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions
 - feature for booking assets online (when belonging to the corresponding front end user group)
 - feature: quickly edit the "paid" entry for a participant
 - feature: easily enter after a single seminar who has participated
 - add feature "Teilnahmeliste" to generate a participation-form for each seminar where each participant can sign for each day that he/she has been there, plus a column where he/she can sign if he/she wants to receive seminar announcements, plus space for suggestions on seminar subjects
 - in the seminar list, add (localized) subheadings with month and year, e.g. "May 2006"
-- add support for different kinds of events (workshop, lecture, ...)
 - support periodical events (e.g. each Monday at ten a.m.)
 - add front end page about speakers and their seminars
 - find a way against overly long lists in the back-end (e.g. all registrations)
 - feature: easily enter for a seminar who has attended and who hasn't
 
-Version 1.0.0
--------------
-- switch extension status from "beta" to "stable"
 
 Not triaged yet
 ===============
