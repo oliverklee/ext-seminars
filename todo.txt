@@ -154,6 +154,7 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - investigate whether the seminar class can generate links without the FE, eg. using $this->cObj->typolink?
 - format the code in the manual in a nice way like at http://typo3.org/documentation/document-library/rlmp_eventdb/Reference-24/
 - investigate whether we should use http://typo3.org/extensions/repository/search/bidirectional/
+- remove those &$plugin and &$cObj parameters if possible
 - document why &$plugin sometimes is needed (for e.g. RTE)
 - reduce code duplication by factoring out tx_seminars_seminar::getOrganizers*
 - switch to UTF-8 so that we can also have Polish or Arabic localizations
@@ -163,7 +164,7 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - refactor seminar::getOrganizers*()
 - refactor "trimming array keys and find the maximum length" from registration::dumpUserData(), registration::dumpAttendanceData() and seminar::dumpSeminarValues()
 - investigate whether we should use tslib_fe::pageNotFoundHandler
-- Beautify the code in the manual [from dev-meeting 05/12]
+- beautify the code in the manual [from dev-meeting 05/12]
 - add UML diagrams for the DB structure
 - reduce code duplication in seminar::getPaymentMethods*
 - in the registration class, use $this->tableName instead of $this->tableAttendances
@@ -185,7 +186,6 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - check if the first parameter from the seminar constructor (the registration manager) is needed at all
 - use tt_address for most address data
 - investigate whether we can drop the plugin.tx_seminars_pi1.baseURL parameter as sr_feuser_register seems to do without it quite well
-- inevstigate whether we still need to be able to create a seminar object from a UID instead of from a DB query result
 
 
 Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
