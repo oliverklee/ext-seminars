@@ -121,6 +121,9 @@ Version 0.4.5, 05/2006 - "Make it safer to use": safety, data integrity and sani
 - make our DB scheme conform to 3NF, BCNF, 4NF or even 5NF and document this
 - store redundant data (e.g. the number of participants) in the cache instead of in the seminar records
 - add slashes as a first character for the CSS path
+- test with PHP 5 and make sure that it works
+- add automated tests using T3unit (requires PHP5)
+
 
 Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and documentation
 -------------------------------------------------------------------------------------------
@@ -205,8 +208,6 @@ Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
 - re-check everything on the FE and BE for XHTML 1.0 strict validity
 - investigate XHTML 1.1
 - add scope="col" to th elements in the list view
-- test with PHP 5 (once Ubuntu 6.04 has been released and suphp supports PHP 5)
-- add automated tests using T3unit (requires PHP5)
 - test with a21glossary, gov_accessibility and sb_akronymmanager
 - list view: show "(canceled)" in the vacancies column for canceled events
 
