@@ -245,7 +245,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the unique seminar title, constiting of the seminar title and the date
+	 * Gets the unique seminar title, consisting of the seminar title and the date
 	 * (comma-separated).
 	 *
 	 * If the seminar has no date, just the title is returned.
