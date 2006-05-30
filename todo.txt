@@ -185,6 +185,8 @@ Version 0.4.6, 06/2006 - "Make it nice for developers": code clean-up, qa and do
 - check if the first parameter from the seminar constructor (the registration manager) is needed at all
 - use tt_address for most address data
 - investigate whether we can drop the plugin.tx_seminars_pi1.baseURL parameter as sr_feuser_register seems to do without it quite well
+- inevstigate whether we still need to be able to create a seminar object from a UID instead of from a DB query result
+
 
 Version 0.4.7, 07/2006 - "Make it for everybody": accessibility
 ---------------------------------------------------------------
