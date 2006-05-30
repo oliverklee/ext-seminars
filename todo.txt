@@ -127,6 +127,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - add automated tests using T3unit (requires PHP5)
 - reread all DB queries if thery are safe from SQL injection
 - test with PostGreSQL
+- on the registration page, set a 404 status header if the URL contains an invalid seminar UID
 
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
