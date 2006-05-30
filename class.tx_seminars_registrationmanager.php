@@ -390,18 +390,18 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function createRegistration(&$seminar, $registrationData, &$plugin) {
-			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-			$this->registration =& new $registrationClassname($seminar, $this->getFeUserUid(), $registrationData, $plugin->cObj);
+		$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
+		$this->registration =& new $registrationClassname($seminar, $this->getFeUserUid(), $registrationData, $plugin->cObj);
 
-			$this->registration->commitToDb();
-			$seminar->updateStatistics();
-			$this->registration->notifyAttendee($plugin);
-			$this->registration->notifyOrganizers($plugin);
-			if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
-				$this->registration->sendAdditionalNotification($plugin);
-			}
+		$this->registration->commitToDb();
+		$seminar->updateStatistics();
+		$this->registration->notifyAttendee($plugin);
+		$this->registration->notifyOrganizers($plugin);
+		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
+			$this->registration->sendAdditionalNotification($plugin);
+		}
 
-			return;
+		return;
 	}
 }
 
