@@ -79,11 +79,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * The constructor. Sets the iterator to the first result of a query
 	 *
 	 * @param	string		the name of the main DB table to query (comma-separated), may not be empty
-	 * @param	string		string that will be prepended to the WHERE clause
-	 *						using AND, e.g. 'mytable.pid=42' (the AND and the enclosing
-	 *						spaces are not necessary for this parameter);
-	 *						the table name must be used as a prefix if more than
-	 *						one table is queried
+	 * @param	string		string that will be prepended to the WHERE clause using AND, e.g. 'pid=42' (the AND and the enclosing spaces are not necessary for this parameter)
+	 *						the table name must be used as a prefix if more than one table is queried
 	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
 	 * @param	string		GROUP BY clause (may be empty), must already by safeguarded against SQL injection
 	 * @param	string		ORDER BY clause (may be empty), must already by safeguarded against SQL injection
@@ -146,8 +143,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 		// free old results if there are any
 		if ($this->dbResult) {
 			$GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
-			// We don't need to null out $this->dbResult as this will be
-			// rewritten immediately.
+			// We don't need to null out $this->dbResult as it will be
+			// overwritten immediately anyway.
 		}
 
 		$this->dbResult =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -216,6 +213,23 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 */
 	function &getCurrent() {
 		return $this->currentItem;
+	}
+
+	/**
+	 * Checks isOk() and, in case of failure (e.g. there is no more data
+	 * from the DB), nulls out $this->currentItem.
+	 *
+	 * If the function isOk() returns true, nothing is changed.
+	 *
+	 * @access	protected
+	 */
+	function checkCurrentItem() {
+		// Only test $this->currentItem if it is not null.
+		if ($this->currentItem && (!$this->currentItem->isOk())) {
+			$this->currentItem = null;
+		}
+
+		return;
 	}
 
 	/**

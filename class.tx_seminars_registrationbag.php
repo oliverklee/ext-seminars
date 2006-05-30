@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2006 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2006 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,25 +22,26 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
- * Class 'tx_seminars_seminarbag' for the 'seminars' extension.
+ * Class 'tx_seminars_registrationbag' for the 'seminars' extension.
  *
- * This aggregate class holds a bunch of seminar objects and allows
+ * This aggregate class holds a bunch of registration objects and allows
  * to iterate over them.
  *
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
+require_once(PATH_tslib.'class.tslib_content.php');
 
-class tx_seminars_seminarbag extends tx_seminars_bag {
+class tx_seminars_registrationbag extends tx_seminars_bag {
 	/** Same as class name */
-	var $prefixId = 'tx_seminars_seminar_seminarbag';
+	var $prefixId = 'tx_seminars_registrationbag';
 	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_seminarbag.php';
+	var $scriptRelPath = 'class.tx_seminars_registrationbag.php';
 
 	/**
-	 * The constructor. Creates a seminar bag that contains seminar
+	 * The constructor. Creates a registration bag that contains registration
 	 * records and allows to iterate over them.
 	 *
 	 * @param	string		string that will be prepended to the WHERE clause using AND, e.g. 'pid=42' (the AND and the enclosing spaces are not necessary for this parameter)
@@ -51,11 +52,12 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminarbag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_registrationbag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+		$this->cObj =& t3lib_div::makeInstance('tslib_cObj');
 		// Although the parent class also calls init(), we need to call it
-		// here already so that $this->tableSeminars is provided.
+		// here already so that $this->tableAttendances is provided.
 		$this->init();
-		parent::tx_seminars_bag($this->tableSeminars, $queryParameters, $additionalTableNames, $groupBy, $orderBy, $limit);
+		parent::tx_seminars_bag($this->tableAttendances, $queryParameters, $additionalTableNames, $groupBy, $orderBy, $limit);
 
 		return;
 	}
@@ -69,16 +71,16 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * @access	protected
 	 */
 	function createItemFromDbResult() {
-		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$this->currentItem =& new $seminarClassname(0, $this->dbResult);
+		$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
+		$this->currentItem =& new $registrationClassname($this->cObj, $this->dbResult);
 		$this->checkCurrentItem();
 
 		return;
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationbag.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationbag.php']);
 }
 
 ?>

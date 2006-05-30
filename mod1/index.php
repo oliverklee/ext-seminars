@@ -35,6 +35,8 @@ $LANG->includeLLFile('EXT:seminars/mod1/locallang.php');
 #include ('locallang.php');
 require_once (PATH_t3lib.'class.t3lib_scbase.php');
 require_once (PATH_t3lib.'class.t3lib_page.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 // This checks permissions and exits if the users has no permission for entry.
@@ -45,7 +47,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * @return	[type]		...
 	 */
-	function init()	{
+	function init() {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 
 		parent::init();
@@ -56,7 +58,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 *
 	 * @return	[type]		...
 	 */
-	function menuConfig()	{
+	function menuConfig() {
 		global $LANG, $BE_USER;
 
 		$functionMenu = array();
@@ -83,7 +85,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 *
 	 * @return	[type]		...
 	 */
-	function main()	{
+	function main() {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 
 		// Define the Database-Tables used in this class.
@@ -97,7 +99,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		$access = is_array($this->pageinfo) ? 1 : 0;
 
-		if (($this->id && $access) || ($BE_USER->user['admin'] && !$this->id))	{
+		if (($this->id && $access) || ($BE_USER->user['admin'] && !$this->id)) {
 			// Draw the header.
 			$this->doc = t3lib_div::makeInstance('mediumDoc');
 			$this->doc->backPath = $BACK_PATH;
@@ -107,7 +109,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$this->doc->JScode = '
 				<script language="javascript" type="text/javascript">
 					script_ended = 0;
-					function jumpToUrl(URL)	{
+					function jumpToUrl(URL) {
 						document.location = URL;
 					}
 				</script>
@@ -131,7 +133,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$this->moduleContent();
 
 			// ShortCut
-			if ($BE_USER->mayMakeShortcut())	{
+			if ($BE_USER->mayMakeShortcut()) {
 				$this->content.=$this->doc->spacer(20).$this->doc->section('',$this->doc->makeShortcutIcon('id',implode(',',array_keys($this->MOD_MENU)),$this->MCONF['name']));
 			}
 
@@ -209,7 +211,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$result = '';
 
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
-		$seminarBag =& new $seminarBagClassname('pid='.intval($this->id));
+		$seminarBag =& new $seminarBagClassname('pid='.intval($this->id), '', '', $tableSeminars.'.begin_date');
 
 		$result .= '<h3>'.$LANG->getLL('message_updatingAttendanceNumbers').'</h3>'.chr(10);
 		while ($currentSeminar =& $seminarBag->getCurrent()) {
@@ -284,127 +286,73 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 * @access	private
 	 */
 	function listSeminarDetails() {
-		// Initialize the Localization Functionality
+		// initialize the localization functionality
 		global $LANG;
+
+		$tableSeminars = 'tx_seminars_seminars';
 
 		$result = '';
 
 		$result .= '<h3>'.$LANG->getLL('title_getEmailAddressesForAttendances').'</h3>';
-		$seminars = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			$this->tableSeminars,
-			'pid='.intval($this->id).t3lib_pageSelect::enableFields($this->tableSeminars),
-			'',
-			'begin_date',
-			'' );
 
-		if ($seminars) {
-			while ($currentSeminar = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($seminars)) {
-				$result .= '<h4>'.htmlspecialchars($currentSeminar['title']).'</h4>';
+		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
+		$seminarBag =& new $seminarBagClassname('pid='.intval($this->id), '', '', $tableSeminars.'.begin_date');
 
+		while ($currentSeminar =& $seminarBag->getCurrent()) {
+			$result .= '<h4>'.$currentSeminar->getTitleAndDate().'</h4>';
+			$seminarQuery = $this->tableAttendances.'.seminar='.$currentSeminar->getUid();
 
-				// Get ALL Attendee-Records for this seminar
-				$dbResultAttendeesALL = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'*',
-					$this->tableAttendances,
-					'seminar='.intval($currentSeminar['uid'])
-						.t3lib_pageSelect::enableFields($this->tableAttendances),
-					'',
-					'',
-					''
-				);
+			$result .= $LANG->getLL('label_all').'<br />'.$this->generateEmailList($seminarQuery).'<hr />';
+			$result .= $LANG->getLL('label_paid').'<br />'.$this->generateEmailList($seminarQuery.' AND (paid=1 OR datepaid!="")').'<hr />';
+			$result .= $LANG->getLL('label_unpaid').'<br />'.$this->generateEmailList($seminarQuery.' AND (paid=0 AND datepaid=0)').'<hr />';
 
-				// Get PAID Attendee-Records for this seminar
-				$dbResultAttendeesPAID = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'*',
-					$this->tableAttendances,
-					'seminar='.intval($currentSeminar['uid']).' AND (paid = 1 OR datepaid !="")'
-						.t3lib_pageSelect::enableFields($this->tableAttendances),
-					'',
-					'',
-					''
-				);
-
-				// Get UNPAID Attendee-Records for this seminar
-				$dbResultAttendeesUNPAID = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'*',
-					$this->tableAttendances,
-					'seminar='.intval($currentSeminar['uid']).' AND (paid = 0 AND datepaid = 0)'
-						.t3lib_pageSelect::enableFields($this->tableAttendances),
-					'',
-					'',
-					''
-				);
-
-				$result .= $LANG->getLL('label_all').'<br />'.$this->generateEmailList($dbResultAttendeesALL).'<hr />';
-				$result .= $LANG->getLL('label_paid').'<br />'.$this->generateEmailList($dbResultAttendeesPAID).'<hr />';
-				$result .= $LANG->getLL('label_unpaid').'<br />'.$this->generateEmailList($dbResultAttendeesUNPAID).'<hr />';
-			}
+			$seminarBag->getNext();
 		}
+
+
 		return $result;
 	}
 
 	/**
 	 * Returns a comma separated list of names and e-mail addresses.
-	 * The char to separate the e-mail addresses from each other may be changed. Default is comma.
 	 *
- 	 * @param	array		result of the DB query
- 	 * @return	string		a comma separated list
+	 * @param	string		string that will be prepended to the WHERE clause
+	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
+	 *						spaces are not necessary for this parameter)
+ 	 *
+ 	 * @return	string		a comma separated list of names and e-mail addresses or a localized messages if there are no registration records
  	 *
 	 * @access	private
 	 */
-	 function generateEmailList($dbResult)	{
-		// Initialize the Localization Functionality
+	 function generateEmailList($queryParameters) {
+		// initialize the localization functionality
 		global $LANG;
 
 		$result = '';
 		$emailList = '';
 		$dividerInEmailList = ', ';
 
-		if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult))	{
-			while ($currentAttendance = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult))	{
-				$currentEmail = '';
-				$currentEmail = $this->getUserEmail($currentAttendance['user']);
-				if (empty($emailList))	{
+		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
+		$registrationBag =& new $registrationBagClassname($queryParameters);
+
+		if ($registrationBag->getCurrent()) {
+			while ($currentRegistration =& $registrationBag->getCurrent()) {
+				$currentEmail = htmlspecialchars($currentRegistration->getUserNameAndEmail());
+				if (empty($emailList)) {
 					$emailList = $currentEmail;
 				}	else	{
 					$emailList .= $dividerInEmailList . ' ' . $currentEmail;
 				}
+				$registrationBag->getNext();
 			}
 			$result .= $emailList;
-		}	else	{
-			// Output a message, if no attendances found for this seminar
+		} else {
+			// Display a message if no attendances are found for this seminar.
 			$result .= $LANG->getLL('msg_noAttendancesFound');
 		}
+
 		return $result;
 	}
-
-	/**
-	 * Retrieves the name and e-mail address of a user from the database
-	 * in the form '"Name" <e-mail address>'
-	 * The output of this function is already htmlspecialchars'ed.
-	 *
- 	 * @param	integer		User ID of the user to search for
- 	 * @return	string		the name and e-mail address of the user, already htmlspecialchars'ed
- 	 *
-	 * @access	private
-	 */
-	 function getUserEmail($userID)	{
-		$tableUsers = 'fe_users';
-
-		$dbResultUserDetails = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'name, email',
-			$tableUsers,
-			'uid='.intval($userID)
-				.t3lib_pageSelect::enableFields($tableUsers),
-			'',
-			'',
-			'1'
-		);
-		$currentUser = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultUserDetails);
-		return '&quot;'.htmlspecialchars($currentUser['name']).'&quot;'.' &lt;'.htmlspecialchars($currentUser['email']).'&gt;';
-	}
-
 } // END of class
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod1/index.php']) {

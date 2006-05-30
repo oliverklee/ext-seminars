@@ -50,18 +50,41 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * The constructor.
 	 *
-	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
-	 * @param	integer		the UID of the feuser who wants to sign up
-	 * @param	array		associative array with the registration data the user has just entered
 	 * @param	object		content object (must not be null)
+	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object. If this parameter is not provided or null, setRegistrationData() needs to be called directly after construction or this object will not be usable.
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_registration(&$seminar, $userUid, $registrationData, &$cObj) {
+	function tx_seminars_registration(&$cObj, $dbResult = null) {
+		$this->cObj =& $cObj;
 		$this->init();
 		$this->tableName = $this->tableAttendances;
-		$this->cObj =& $cObj;
 
+	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+			$this->getDataFromDbResult($GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult));
+
+			if ($this->isOk()) {
+				/** Name of the seminar class in case someone subclasses it. */
+				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+				$this->seminar =& new $seminarClassname($this->recordData['seminar']);
+
+				// Store the user data in $this->userData.
+				$this->retrieveUserData();
+			}
+	 	}
+	}
+
+	/**
+	 * Sets this registration's data if this registration is newly created instead of from a DB query.
+	 * This function must be called directly after construction or this object will not be usable.
+	 *
+	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
+	 * @param	integer		the UID of the feuser who wants to sign up
+	 * @param	array		associative array with the registration data the user has just entered
+	 *
+	 * @access	public
+	 */
+	function setRegistrationData(&$seminar, $userUid, $registrationData) {
 		$this->seminar =& $seminar;
 
 		$this->recordData = array();
@@ -81,10 +104,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->recordData['pid'] = $this->getConfValueInteger('attendancesPID');
 
-		// Store the user Data in $this->userData.
-		$this->retrieveUserData();
-
-		$this->createTitle();
+		if ($this->isOk()) {
+			// Store the user data in $this->userData.
+			$this->retrieveUserData();
+			$this->createTitle();
+		}
 
 		return;
 	}
@@ -118,7 +142,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
  	/**
-	 * Gets the complete user data as an array.
+	 * Gets the complete FE user data as an array.
 	 * The attendee's user data (from fe_users) will be written to $this->userData.
 	 * $this->userData will be null if retrieving the user data fails.
 	 *
@@ -464,7 +488,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function sendAdditionalNotification(&$plugin)	{
+	function sendAdditionalNotification(&$plugin) {
 		$whichEmailToSend = '';
 		$whichEmailSubject = '';
 
