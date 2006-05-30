@@ -64,7 +64,7 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 			$salutation = 'formal';
 		}
 		// Rewrite the language key to 'default' if it is 'en'. Otherwise, it will not work if language = English.
-		if ($this->LLkey == 'en')	{
+		if ($this->LLkey == 'en') {
 			$internal_LL_key = 'default';
 		} else	{
 			$internal_LL_key = $this->LLkey;
