@@ -7,7 +7,7 @@
 - Fix: Correctly display open-ended events. Also consider events without a begin date to take place in the future. (#0001995)
 - Made tx_seminars_objectfromdb also work with JOIN queries (#0003194)
 - Fix: Hide the number of vacancies for canceled events and change the CSS class for TR with canceled seminars from .tx-seminars-pi1-cancelled to .tx-seminars-pi1-canceled (#0003270)
-- Added the new backend module base to work on (#0002002)
+- Feature: Added the new backend module base to work on (#0002002)
 - Feature: Added configuration for setting the default order in list view (#0002011)
 - Changed alignment of field uid in list view (#0003221)
 - Feature: Only show exact vacancies if the number is below a configurable threshold (#0003067)
@@ -34,7 +34,7 @@
 - Converted all localization files (locallang*.php) to the new xml format (locallang*.xml) (#0002400)
 - moved the changelog from the manual to this file (#0002435)
 - Fix: Commas in participant names or organizer names cause problems. (#0002432)
-- Added a Dutch localization. (#0001970)
+- Feature: Added a Dutch localization. (#0001970)
 - Fix: bug in notification mail (#0003420)
 
 0.4.3
