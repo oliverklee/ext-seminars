@@ -224,6 +224,7 @@ Version 0.4.8, 08/2006 - "Make it fast": performance
 - cache BE page access rights when showing edit buttons for attendances
 - use isset() instead of array_key_exists()
 - registration bag: when iterating over registrations for the same seminare, don't create a seminar object for each registration but reuse the same object instead
+- investigate whether we can cache some parts of the BE modules
 
 
 Version 0.4.9, 09/2006 - "Make it nice for the BE users": back end usability and polish
