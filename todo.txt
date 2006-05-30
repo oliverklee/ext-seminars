@@ -223,6 +223,7 @@ Version 0.4.8, 08/2006 - "Make it fast": performance
 - investigate performance improvements when using caching or singletons in the template helper class
 - cache BE page access rights when showing edit buttons for attendances
 - use isset() instead of array_key_exists()
+- registration bag: when iterating over registrations for the same seminare, don't create a seminar object for each registration but reuse the same object instead
 
 
 Version 0.4.9, 09/2006 - "Make it nice for the BE users": back end usability and polish
