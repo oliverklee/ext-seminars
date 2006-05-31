@@ -128,6 +128,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - reread all DB queries if thery are safe from SQL injection
 - test with PostGreSQL
 - on the registration page, set a 404 status header if the URL contains an invalid seminar UID
+- registration: use a callback in the constructor to get additional data instead of expecting an additional function call; find a suitable design pattern for this
 
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
