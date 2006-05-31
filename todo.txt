@@ -195,6 +195,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - use tt_address for most address data
 - investigate whether we can drop the plugin.tx_seminars_pi1.baseURL parameter as sr_feuser_register seems to do without it quite well
 - replace all occurances of ")tab*{" with ")space{" (also in oelib)
+- move most of the registrations list from pi1 to the seminar class (where it belongs)
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
