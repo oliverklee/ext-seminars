@@ -129,6 +129,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - test with PostGreSQL
 - on the registration page, set a 404 status header if the URL contains an invalid seminar UID
 - registration: use a callback in the constructor to get additional data instead of expecting an additional function call; find a suitable design pattern for this
+- use require_once instead of require wherever possible
 
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
