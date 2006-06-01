@@ -28,6 +28,8 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
@@ -78,6 +80,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		switch ($this->getConfValueString('what_to_display')) {
 			case 'seminar_registration':
 				$result = $this->createRegistrationPage();
+				break;
+			case 'list_registrations':
+				$result = $this->createRegistrationsListPage();
 				break;
 			case 'my_events':
 				if ($this->registrationManager->isLoggedIn()) {
@@ -416,6 +421,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) :
 					$this->registrationManager->canRegisterIfLoggedInMessage($this->seminar)
 			);
+
+			if ($this->seminar->needsRegistration()
+				&& $this->registrationManager->isLoggedIn()
+				&& $this->hasConfValueInteger('registrationsListPID')) {
+				$link = $this->cObj->getTypoLink(
+					$this->pi_getLL('label_listRegistrationsLink'),
+					$this->getConfValueInteger('registrationsListPID'),
+					array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
+				);
+				$this->setMarkerContent('list_registrations', $link);
+			} else {
+				$this->readSubpartsToHide('list_registrations', 'field_wrapper');
+			}
+
 			$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
 
 			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
@@ -725,6 +744,65 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$output .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
 
 		return $output;
+	}
+
+	/**
+	 * Creates a list of registered participants for an event.
+	 * If there are no registrations yet, a localized message is displayed instead.
+	 *
+	 * @return	string		HTML code for the list
+	 *
+	 * @access	protected
+	 */
+	function createRegistrationsListPage() {
+		if ($this->createSeminar($this->piVars['seminar'])) {
+			$this->setMarkerContent('title', $this->seminar->getTitleAndDate());
+			$this->readSubpartsToHide('error', 'wrapper');
+			$this->createRegistrationsList();
+		} else {
+			$this->setMarkerContent('title', '');
+			$this->setMarkerContent('error_text', $this->registrationManager->existsSeminarMessage($this->piVars['seminar']));
+			// hide stuff we don't need
+			$this->readSubpartsToHide('registrations_list_message', 'wrapper');
+			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
+
+			header('Status: 404 Not Found');
+		}
+
+		$result = $this->substituteMarkerArrayCached('REGISTRATIONS_LIST_VIEW');
+
+		return $result;
+	}
+
+	/**
+	 * Creates the registration list (sorted by creation date) and fills in the
+	 * corresponding subparts.
+	 * If there are no registrations, a localized message is filled in instead.
+	 *
+	 * Before this function can be called, it must be ensured that $this->seminar
+	 * is a valid seminar object.
+	 *
+	 * @access	protected
+	 */
+	function createRegistrationsList() {
+		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
+		$registrationBag =& new $registrationBagClassname($this->tableAttendances.'.seminar='.$this->seminar->getUid(), '', '', 'crdate');
+
+		if ($registrationBag->getCurrent()) {
+			$result = '';
+			while ($currentRegistration =& $registrationBag->getCurrent()) {
+				$this->setMarkerContent('registrations_list_inneritem', $currentRegistration->getUserName());
+				$result .= $this->substituteMarkerArrayCached('REGISTRATIONS_LIST_ITEM');
+				$registrationBag->getNext();
+			}
+			$this->readSubpartsToHide('registrations_list_message', 'wrapper');
+			$this->setMarkerContent('registrations_list_body', $result);
+		} else {
+			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
+			$this->setMarkerContent('message_no_registrations', $this->pi_getLL('message_noRegistrations'));
+		}
+
+		return;
 	}
 }
 
