@@ -201,6 +201,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - move most of the registrations list from pi1 to the seminar class (where it belongs)
 - reduce calls like $this->...->isLoggedIn() to $this->isLoggedIn() if possible
 - reduce calls like $this->..->getFeUserUid() to $this->getFeUserUid() if possible
+- use implode() when comma-separating stuff (e.g. participants lists)
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
