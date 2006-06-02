@@ -339,6 +339,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - list view: display a green square (but no number of vacancies) for workshops that don't require a registration
 - allow for the list view and the single view to be on different pages so that navigation works
 - marry this extension to tx_cal
+- on the list of registrations, provide a link to the login page if the user isn't logged in yet
 
 
 Version 1.0.0 - "Getting real new features"
