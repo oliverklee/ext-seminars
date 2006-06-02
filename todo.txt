@@ -276,19 +276,20 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - allow to use the constants editor for values in plugin.tx_seminars
 - check whether we should rename "attendance" to "participant" or "attendee" in the localized strings (not in the DB field names, though)
 - investigate if we can benefit from joh_advbesearch
+- add a graphical display of the number of attendances in the BE seminar list (a colored bar)
+- add more BE examples to the manual
+- add more BE screenshots to the manual
+- show the status of registrations with color and graphical (progress bar) in BE lists [from dev-meeting 05/12]
+- investigate whether we can set the sorting order etc. via flexforms
+
+
+Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
+--------------------------------------------------------------------------------
 - add FE editing for seminars
 - add FE editing for attendances
 - add FE editing for speakers
 - add FE editing for places
 - add FE editing for payment methods
-- add a graphical display of the number of attendances in the BE seminar list (a colored bar)
-- add more BE examples to the manual
-- add more BE screenshots to the manual
-- show the status of registrations with color and graphical (progress bar) in BE lists [from dev-meeting 05/12]
-
-
-Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
---------------------------------------------------------------------------------
 - option to hide seminar without vacancies in the list view
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
 - make some fe_users data editable on the registration page
