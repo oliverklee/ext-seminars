@@ -52,9 +52,9 @@ Version 0.5.0 - "Dogfood, part 2"
 - Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
 - Add categorization of events [from dev-meeting 05/12]
 - increase the number of lines in the Source Page flexforms element
-- announce the DB changes that will happen for 0.4.5 in the manual
+- announce the DB changes that will happen for 0.5.0 in the manual
 - announce in the manual that the university stuff and the mobile phone number will be moved to their own extensions
-- announce in the manual that 0.4.5 will depend on oelib
+- announce in the manual that 0.5.0 will depend on oelib
 - *test with Typo3 4.0 and make sure that it works
 - *bug: there's <tr###CLASS_HEADERROW###> in the list view header
 - add support for different kinds of events (workshop, lecture, ...)
