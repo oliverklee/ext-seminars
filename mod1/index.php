@@ -333,7 +333,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$dividerInEmailList = ', ';
 
 		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
-		$registrationBag =& new $registrationBagClassname($queryParameters);
+		$registrationBag =& new $registrationBagClassname($queryParameters, '', '', 'crdate');
 
 		if ($registrationBag->getCurrent()) {
 			while ($currentRegistration =& $registrationBag->getCurrent()) {
