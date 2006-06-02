@@ -283,6 +283,7 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - add more BE screenshots to the manual
 - show the status of registrations with color and graphical (progress bar) in BE lists [from dev-meeting 05/12]
 - investigate whether we can set the sorting order etc. via flexforms
+- provide nice checkboxes for hiding/showing columns, fields, stuff in mails etc. instead of those pesky comma-separated strings
 
 
 Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
