@@ -66,8 +66,6 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - remove the old sr_feuser_register template
 - *make it configurable whether to have the university-specific stuff
 - improve the values of <eval> in the flexforms and the BE forms
-- switch extension status from "alpha" to "beta" so that we can get a security review and appear and in the offical part of the TER
-- switch from feformslib to another front end forms lib that is at least beta so that we can get a security review
 - put the template helper, object DB etc. into a separate extension that can also be used by the following extensions: contactslist, dayscountdown, automaticexchangerates
 - document how to use the translation tool and how translaters can help us
 - check that before every sql_fetch_assoc, there is an sql_num_rows to ensure that we have at least one row to operate on
@@ -135,6 +133,8 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
+- switch extension status from "alpha" to "beta" so that we can get a security review and appear and in the offical part of the TER
+- switch from feformslib to another front end forms lib that is at least beta so that we can get a security review
 - format changelog according to http://www.red-bean.com/cvs2cl/changelogs.html
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
