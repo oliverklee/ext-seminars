@@ -25,8 +25,8 @@
 			<label index="label_seminardata">Seminar data</label>
 			<label index="label_feuserdata">Account data</label>
 			<label index="label_attendancedata">Data that has been entered on registration</label>
-			<label index="message_notLoggedIn_formal">Please log in first in order to register for an event.</label>
-			<label index="message_notLoggedIn_informal">Please log in first in order to register for an event.</label>
+			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
@@ -39,6 +39,8 @@
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_enough">enough</label>
+			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationHello_formal">Hello %s,
 
@@ -76,8 +78,8 @@ someone just has registered for an event:</label>
 			<label index="label_seminardata">Daten des Seminars</label>
 			<label index="label_feuserdata">Daten des Accounts</label>
 			<label index="label_attendancedata">Daten, die bei der Anmeldung angegeben wurden</label>
-			<label index="message_notLoggedIn_formal">Bitte loggen Sie sich zuerst ein, um sich für eine Veranstaltung anzumelden.</label>
-			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein, um dich für eine Veranstaltung anzumelden.</label>
+			<label index="message_notLoggedIn_formal">Bitte loggen Sie sich zuerst ein.</label>
+			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein.</label>
 			<label index="message_alreadyRegistered_formal">Sie sind für diese Veranstaltung bereits angemeldet.</label>
 			<label index="message_alreadyRegistered_informal">Du bist für diese Veranstaltung bereits angemeldet.</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
@@ -90,6 +92,8 @@ someone just has registered for an event:</label>
 			<label index="message_invalidNumberOfSeats_informal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</label>
 			<label index="message_willBeAnnounced">wird noch bekannt gegeben</label>
 			<label index="message_enough">genug</label>
+			<label index="message_accessDenied_formal">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
+			<label index="message_accessDenied_informal">Zu diesem Teil der Site hast du leider keine Zugangsberechtigung.</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
 			<label index="email_confirmationHello_formal">Guten Tag %s,
 
@@ -241,8 +245,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
-			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
-			<label index="message_notLoggedIn_informal" type="integer">7945840</label>
+			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
 			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
@@ -255,6 +259,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="message_enough" type="integer">249306686</label>
+			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationHello" type="integer">88233580</label>
 			<label index="email_confirmationHello_informal" type="integer">88233580</label>
@@ -295,8 +301,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
-			<label index="message_notLoggedIn_formal" type="integer">7945840</label>
-			<label index="message_notLoggedIn_informal" type="integer">7945840</label>
+			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
 			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>

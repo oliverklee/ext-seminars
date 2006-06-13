@@ -1213,13 +1213,13 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function isUserRegistered($feuserUid) {
+	function isUserRegistered($feUserUid) {
 		$result = false;
 
 	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$this->tableAttendances,
-			'seminar='.$this->getUid().' AND user='.$feuserUid
+			'seminar='.$this->getUid().' AND user='.$feUserUid
 				.t3lib_pageSelect::enableFields($this->tableAttendances),
 			'',
 			'',
@@ -1241,8 +1241,112 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function isUserRegisteredMessage($feuserUid) {
-		return ($this->isUserRegistered($feuserUid)) ? $this->pi_getLL('message_alreadyRegistered') : '';
+	function isUserRegisteredMessage($feUserUid) {
+		return ($this->isUserRegistered($feUserUid)) ? $this->pi_getLL('message_alreadyRegistered') : '';
+	}
+
+	/**
+	 * Checks whether a certain user is entered as VIP for that seminar,
+	 * ie. he/she is allowed to view the list of registrations for this seminar.
+	 *
+	 * @param	integer		UID of the user to check
+	 *
+	 * @return	boolean		true if the user is a VIP for this seminar, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function isUserVip($feUserUid) {
+		$result = false;
+
+	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'COUNT(*) AS num',
+			$this->tableVipsMM,
+			'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid,
+			'',
+			'',
+			'');
+		if ($dbResult) {
+			$numberOfVips = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$result = ($numberOfVips['num'] > 0);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a FE user is logged in and whether he/she may view this
+	 * seminar's registrations list or see a link to it.
+	 * This function can be used to check whether
+	 * a) a link may be created to the page with the list of registrations
+	 *    (for $whichPlugin = (seminar_list|my_events|my_vip_events))
+	 * b) the user is allowed to view the list of registrations
+	 *    (for $whichPlugin = (list_registrations|list_vip_registrations))
+	 *
+	 * @param	string		the 'what_to_display' value, specifying the type of plugin: (seminar_list|my_events|my_vip_events|list_registrations|list_vip_registrations)
+	 * @param	integer		the value of the registrationsListPID parameter (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param	integer		the value of the registrationsVipListPID parameter (only relevant for (seminar_list|my_events|my_vip_events))
+	 *
+	 * @return	boolean		true if a FE user is logged in and the user may view the registrations list or may see a link to that page, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function canViewRegistrationsList($whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0) {
+		$result = false;
+
+		if ($this->needsRegistration() && $this->isLoggedIn()) {
+			switch ($whichPlugin) {
+				case 'seminar_list':
+					// In the standard list view, we could have any kind of link.
+					$result = $this->canViewRegistrationsList('my_events', $registrationsListPID)
+						|| $this->canViewRegistrationsList('my_vip_events', 0, $registrationsVipListPID);
+					break;
+				case 'my_events':
+					$result = $this->isUserRegistered($this->getFeUserUid())
+						&& ((boolean) $registrationsListPID);
+					break;
+				case 'my_vip_events':
+					$result = $this->isUserVip($this->getFeUserUid())
+						&& ((boolean) $registrationsVipListPID);
+					break;
+				case 'list_registrations':
+					$result = $this->isUserRegistered($this->getFeUserUid());
+					break;
+				case 'list_vip_registrations':
+					$result = $this->isUserVip($this->getFeUserUid());
+					break;
+				default:
+					// For all other plugins, we don't grant access.
+					break;
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a FE user is logged in and whether he/she may view this
+	 * seminar's registrations list.
+	 * This function is intended to be used from the registrations list,
+	 * NOT to check whether a link to that list should be shown.
+	 *
+	 * @param	string		the 'what_to_display' value, specifying the type of plugin: (list_registrations|list_vip_registrations)
+	 *
+	 * @return	string		empty string if everything is OK, otherwise a localized error message
+	 *
+	 * @access	public
+	 */
+	function canViewRegistrationsListMessage($whichPlugin) {
+		$result = '';
+
+		if (!$this->needsRegistration()) {
+			$result = $this->pi_getLL('message_noRegistrationNecessary');
+		} elseif (!$this->isLoggedIn()) {
+			$result = $this->pi_getLL('message_notLoggedIn');
+		} elseif (!$this->canViewRegistrationsList($whichPlugin)) {
+			$result = $this->pi_getLL('message_accessDenied');
+		}
+
+		return $result;
 	}
 
 	/**

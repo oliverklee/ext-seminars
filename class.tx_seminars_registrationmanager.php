@@ -39,9 +39,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_registrationmanager.php';
 
-	/** The frontend user who currently is logged in. */
-	var $feuser;
-
 	/** the data of the current registration (tx_seminars_registration) */
 	var $registration = null;
 
@@ -52,30 +49,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 */
 	function tx_seminars_registrationmanager() {
 		$this->init();
-		$this->retrieveFEUser();
-	}
-
-	/**
-	 * Retrieves the currently logged-in FE user (if at all) and store it in
-	 * $this->feuser.
-	 *
-	 * Note that this will not be null if no user is logged in.
-	 *
-	 * @access	private
-	 */
-	function retrieveFEUser() {
-		$this->feuser = $GLOBALS['TSFE']->fe_user->user;
-	}
-
-	/**
-	 * Checks whether a front end user is logged in.
-	 *
-	 * @return	boolean		true if a user is logged in, false otherwise
-	 *
-	 * @access	public
-	 */
-	function isLoggedIn() {
-		return $GLOBALS['TSFE']->loginUser;
 	}
 
 	/**
@@ -261,18 +234,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$message = $seminar->canSomebodyRegisterMessage();
 		}
 		return $message;
-	}
-
-	/**
-	 * Returns the UID of the currently logged-in FE user
-	 * or 0 if no FE user is logged in.
-	 *
-	 * @return	integer		the UID of the logged-in FE user or 0 if no FE user is logged in
-	 *
-	 * @access	public
-	 */
-	function getFeUserUid() {
-		return ($this->isLoggedIn() ? intval($this->feuser['uid']) : 0);
 	}
 
 	/**

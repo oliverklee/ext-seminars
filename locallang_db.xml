@@ -34,6 +34,7 @@
             <label index="tx_seminars_seminars.attendees"></label>
             <label index="tx_seminars_seminars.enough_attendees"></label>
             <label index="tx_seminars_seminars.is_full"></label>
+            <label index="tx_seminars_seminars.vips"></label>
             <label index="tx_seminars_seminars.notes"></label>
             <label index="tx_seminars_speakers"></label>
             <label index="tx_seminars_speakers.title"></label>
@@ -110,6 +111,7 @@
             <label index="tx_seminars_seminars.attendees">Current number of attendees</label>
             <label index="tx_seminars_seminars.enough_attendees">Has enough registrations</label>
             <label index="tx_seminars_seminars.is_full">Is full</label>
+            <label index="tx_seminars_seminars.vips">Front end users that are allowed to see the list of registrations</label>
             <label index="tx_seminars_seminars.notes">Internal Notes</label>
             <label index="tx_seminars_speakers">Speakers</label>
             <label index="tx_seminars_speakers.title">Name</label>
@@ -186,6 +188,7 @@
             <label index="tx_seminars_seminars.attendees">Momentane Anzahl Anmeldungen</label>
             <label index="tx_seminars_seminars.enough_attendees">Hat genug Anmeldungen</label>
             <label index="tx_seminars_seminars.is_full">Ist voll</label>
+            <label index="tx_seminars_seminars.vips">Frontend-User, die sich die Liste der Anmeldungen ansehen dürfen</label>
             <label index="tx_seminars_seminars.notes">Interne Notizen</label>
             <label index="tx_seminars_speakers">ReferentInnen</label>
             <label index="tx_seminars_speakers.title">Name</label>
@@ -338,6 +341,7 @@
             <label index="tx_seminars_seminars.attendees" type="integer">213201731</label>
             <label index="tx_seminars_seminars.enough_attendees" type="integer">135882580</label>
             <label index="tx_seminars_seminars.is_full" type="integer">13790082</label>
+			<label index="tx_seminars_seminars.vips" type="integer">13469284</label>
             <label index="tx_seminars_seminars.notes" type="integer">134692843</label>
             <label index="tx_seminars_speakers" type="integer">258305227</label>
             <label index="tx_seminars_speakers.title" type="integer">77521672</label>
@@ -412,6 +416,7 @@
             <label index="tx_seminars_seminars.attendees" type="integer">213201731</label>
             <label index="tx_seminars_seminars.enough_attendees" type="integer">135882580</label>
             <label index="tx_seminars_seminars.is_full" type="integer">13790082</label>
+			<label index="tx_seminars_seminars.vips" type="integer">242004556</label>
             <label index="tx_seminars_seminars.notes" type="integer">134692843</label>
             <label index="tx_seminars_speakers" type="integer">258305227</label>
             <label index="tx_seminars_speakers.title" type="integer">77521672</label>

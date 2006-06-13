@@ -14,13 +14,16 @@
 			<label index="seminars.pi_flexform.sheet_template_and_special">Templates and special properties</label>
 			<label index="seminars.pi_flexform.seminar_list">Event List</label>
 			<label index="seminars.pi_flexform.my_events">My Events</label>
+			<label index="seminars.pi_flexform.my_vip_events">My VIP Events</label>
 			<label index="seminars.pi_flexform.seminar_registration">Event Registration</label>
-			<label index="seminars.pi_flexform.list_registrations">List of Registrations</label>
+			<label index="seminars.pi_flexform.list_registrations">List of Registrations (for attendees)</label>
+			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
 			<label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
-			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations:</label>
+			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations (for attendees):</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID">Page that contains the list of registrations (for VIPs):</label>
 			<label index="seminars.pi_flexform.salutation">Salutation mode on the page:</label>
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
@@ -42,6 +45,7 @@
 			<label index="seminars.pi_flexform.showRegistrationFields">Show text input fields for online registration (comma-separated):</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails">Show speaker details</label>
 			<label index="seminars.pi_flexform.showSiteDetails">Show site details</label>
+			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">which FEuser fields to show in the list of registrations for an event</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -50,6 +54,8 @@
 			<label index="pi_list_searchBox_search">Search</label>
 			<label index="label_myevents_formal">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
+			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
@@ -68,12 +74,12 @@
 			<label index="label_deadline_registration">Deadline for registration</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_onlineRegistration">Register online</label>
-			<label index="label_listRegistrationsLink">View the list of registrations for this event</label>
+			<label index="label_list_registrations">List of registrations</label>
+			<label index="label_listRegistrationsLink">View the list of registrations</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_registrationForm">Registration data</label>
 			<label index="label_thankyou_formal">Thank you for your registration. A confirmation e-mail has been sent. We are looking forward to your attendance.</label>
 			<label index="label_thankyou_informal">Thank you for your registration. A confirmation e-mail has been sent. We are looking forward to your attendance.</label>
-			<label index="label_list_registrations">List of registrations</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -95,13 +101,16 @@
 			<label index="seminars.pi_flexform.sheet_template_and_special">Templates und spezielle Einstellungen</label>
 			<label index="seminars.pi_flexform.seminar_list">Veranstaltungsliste</label>
 			<label index="seminars.pi_flexform.my_events">Meine Veranstaltungen</label>
+			<label index="seminars.pi_flexform.my_vip_events">Meine VIP-Veranstaltungen</label>
 			<label index="seminars.pi_flexform.seminar_registration">Veranstaltungsanmeldung</label>
-			<label index="seminars.pi_flexform.list_registrations">Liste der Anmeldungen</label>
+			<label index="seminars.pi_flexform.list_registrations">Liste der Anmeldungen (für TeilnehmerInnen)</label>
+			<label index="seminars.pi_flexform.list_vip_registrations">Liste der Anmeldungen (für VIPs)</label>
 			<label index="seminars.pi_flexform.baseURL">Basis-URL dieser Typo3-Site, z.B. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Seite mit der Seminarliste:</label>
 			<label index="seminars.pi_flexform.registerPID">Seite mit der Seminaranmeldung:</label>
 			<label index="seminars.pi_flexform.loginPID">Seite mit dem Login-Formular:</label>
-			<label index="seminars.pi_flexform.registrationsListPID">Seite mit der Liste der Anmeldungen:</label>
+			<label index="seminars.pi_flexform.registrationsListPID">Seite mit der Liste der Anmeldungen (für TeilnehmerInnen):</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID">Seite mit der Liste der Anmeldungen (für VIPs):</label>
 			<label index="seminars.pi_flexform.salutation">Anredeform auf der Seite:</label>
 			<label index="seminars.pi_flexform.formal">formell</label>
 			<label index="seminars.pi_flexform.informal">informell</label>
@@ -123,6 +132,7 @@
 			<label index="seminars.pi_flexform.showRegistrationFields">Angezeigte Text-Input-Felder bei Online-Anmeldung (komma-separiert):</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails">Referentendetails anzeigen</label>
 			<label index="seminars.pi_flexform.showSiteDetails">Ortsdetails anzeigen</label>
+			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Zeige diese FEuser-Felder in der Liste der Anmeldungen</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorherige</label>
 			<label index="pi_list_browseresults_page">Seite</label>
 			<label index="pi_list_browseresults_next">Nächste &gt;</label>
@@ -131,6 +141,8 @@
 			<label index="pi_list_searchBox_search">Suchen</label>
 			<label index="label_myevents_formal">Sie sind für die folgenden Veranstaltungen angemeldet:</label>
 			<label index="label_myevents_informal">Du bist für die folgenden Veranstaltungen angemeldet:</label>
+			<label index="label_myvipevents_formal">Sie sind für die folgenden Veranstaltungen als VIP eingetragen:</label>
+			<label index="label_myvipevents_informal">Du bist für die folgenden Veranstaltungen als VIP eingetragen:</label>
 			<label index="label_title">Titel</label>
 			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Akkreditierungsnummer</label>
@@ -149,12 +161,12 @@
 			<label index="label_deadline_registration">Anmeldeschluss</label>
 			<label index="label_registration">Anmeldung</label>
 			<label index="label_onlineRegistration">Online anmelden</label>
-			<label index="label_listRegistrationsLink">Liste der Anmeldungen für diese Veranstaltung anzeigen</label>
+			<label index="label_list_registrations">Liste der Anmeldungen</label>
+			<label index="label_listRegistrationsLink">Liste der Anmeldungen anzeigen</label>
 			<label index="label_back">Zur Übersicht</label>
 			<label index="label_registrationForm">Anmeldedaten</label>
 			<label index="label_thankyou_formal">Vielen Dank für Ihre Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.</label>
 			<label index="label_thankyou_informal">Vielen Dank für deine Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf dich und wünschen dir viel Erfolg bei der Veranstaltung.</label>
-			<label index="label_list_registrations">Liste der Anmeldungen</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
@@ -312,13 +324,16 @@
 			<label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
 			<label index="seminars.pi_flexform.seminar_list" type="integer">98496595</label>
 			<label index="seminars.pi_flexform.my_events" type="integer">25497076</label>
+			<label index="seminars.pi_flexform.my_vip_events" type="integer">60045914</label>
 			<label index="seminars.pi_flexform.seminar_registration" type="integer">146873320</label>
-			<label index="seminars.pi_flexform.list_registrations" type="integer">154622240</label>
+			<label index="seminars.pi_flexform.list_vip_registrations" type="integer">4335826</label>
+			<label index="seminars.pi_flexform.list_registrations" type="integer">258526278</label>
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
 			<label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
 			<label index="seminars.pi_flexform.loginPID" type="integer">140600031</label>
-			<label index="seminars.pi_flexform.registrationsListPID" type="integer">154591584</label>
+			<label index="seminars.pi_flexform.registrationsListPID" type="integer">169223862</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID" type="integer">64223433</label>
 			<label index="seminars.pi_flexform.salutation" type="integer">166511775</label>
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
@@ -340,6 +355,7 @@
 			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">201114697</label>
+			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">9843663</label>
 			<label index="pi_list_browseresults_prev" type="integer">20121992</label>
 			<label index="pi_list_browseresults_page" type="integer">26464201</label>
 			<label index="pi_list_browseresults_next" type="integer">232350798</label>
@@ -348,6 +364,8 @@
 			<label index="pi_list_searchBox_search" type="integer">20138052</label>
 			<label index="label_myevents_formal" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
+			<label index="label_myvipevents_formal" type="integer">74285293</label>
+			<label index="label_myvipevents_informal" type="integer">74285293</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
@@ -366,12 +384,12 @@
 			<label index="label_deadline_registration" type="integer">106717060</label>
 			<label index="label_registration" type="integer">16354175</label>
 			<label index="label_onlineRegistration" type="integer">20392011</label>
-			<label index="label_listRegistrationsLink" type="integer">82939238</label>
+			<label index="label_list_registrations" type="integer">206095824</label>
+			<label index="label_listRegistrationsLink" type="integer">169828522</label>
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_registrationForm" type="integer">236130017</label>
 			<label index="label_thankyou_formal" type="integer">235938949</label>
 			<label index="label_thankyou_informal" type="integer">235938949</label>
-			<label index="label_list_registrations" type="integer">206095824</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>

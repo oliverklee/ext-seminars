@@ -1,7 +1,7 @@
 0.4.4 - work in progress
 - Fix: symlink to tslib is still needed in TYPO3 4.0 (#0003553)
 - Feature: sort registrations in mod1 by creation date (#0003606)
-- Feature: front end list of registrations for an event (#0003068, #0003601, #0003603)
+- Feature: front end list of registrations for an event (#0003068, #0003601, #0003602, #0003603)
 - Feature: Display event date to the event details in mod1. Sort seminars in mod1 by date. Added data structures for registration lists (#0001884, #0001875)
 - Feature: add fields for lodging and food to the registration form (#0003366)
 - Fix: bug in notification mail (#0003420)

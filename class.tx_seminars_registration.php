@@ -168,19 +168,56 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @param	string		the key to retrieve
 	 *
-	 * @return	string		the value retrieved from $this->userData, may be empty
+	 * @return	string		the trimmed value retrieved from $this->userData, may be empty
 	 *
 	 * @access	protected
 	 */
 	function getUserData($key) {
 		$result = '';
-		if (is_array($this->userData) && !empty($key)) {
-			if (array_key_exists($key, $this->userData)) {
-				$result = $this->userData[$key];
+		$trimmedKey = trim($key);
+		if (is_array($this->userData) && !empty($trimmedKey)) {
+			if (array_key_exists($trimmedKey, $this->userData)) {
+				$result = trim($this->userData[$trimmedKey]);
 			}
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns values out of the userData array, nicely formatted as safe
+	 * HTML and with the e-mail address as a mailto: link.
+	 * If more than one key is provided, the return values are separated
+	 * by a comma and a space.
+	 * Empty values will be removed from the output.
+	 *
+	 * @param	string		comma-separated list of keys to retrieve
+	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 *
+	 * @return	string		the values retrieved from $this->userData, may be empty
+	 *
+	 * @access	public
+	 */
+	function getUserDataAsHtml($keys, &$plugin) {
+		$singleKeys = explode(',', $keys);
+		$singleValues = array();
+
+		foreach ($singleKeys as $currentKey) {
+			$rawValue = $this->getUserData($currentKey);
+			if (!empty($rawValue)) {
+				switch (trim($currentKey)) {
+					case 'email':
+						$singleValues[$currentKey] = $plugin->cObj->mailto_makelinks('mailto:'.$rawValue, array());
+						break;
+					default:
+						$singleValues[$currentKey] = htmlspecialchars($rawValue);
+						break;
+				}
+			}
+		}
+
+		// And now: Everthing separated by a comma and a space!
+		return implode(', ', $singleValues);
 	}
 
 	/**

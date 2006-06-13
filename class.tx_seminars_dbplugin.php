@@ -46,6 +46,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 	// Database table names. Will be initialized (indirectly) by $this->init.
 	var $tableSeminars;
+	var $tableVipsMM;
 	var $tableSpeakers;
 	var $tableSpeakersMM;
 	var $tableSites;
@@ -53,6 +54,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tableOrganizers;
 	var $tableAttendances;
 	var $tablePaymentMethods;
+
+	/** The frontend user who currently is logged in. */
+	var $feuser = null;
 
 	/**
 	 * Dummy constructor: Does nothing.
@@ -135,6 +139,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableAttendances    = $dbPrefix.'attendances';
 		$this->tablePaymentMethods = $dbPrefix.'payment_methods';
 
+		$this->tableVipsMM         = $dbPrefix.'seminars_feusers_mm';
 		$this->tableSpeakersMM     = $dbPrefix.'seminars_speakers_mm';
 		$this->tableSitesMM        = $dbPrefix.'seminars_place_mm';
 
@@ -274,6 +279,46 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 */
 	function getConfValueBoolean($fieldName, $sheet = 'sDEF') {
 		return (boolean) $this->getConfValue($fieldName, $sheet);
+	}
+
+	/**
+	 * Checks whether a front end user is logged in.
+	 *
+	 * @return	boolean		true if a user is logged in, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isLoggedIn() {
+		return ((boolean) $GLOBALS['TSFE']) && ((boolean) $GLOBALS['TSFE']->loginUser);
+	}
+
+	/**
+	 * If a user logged in, retrieves that user's data as stored in the
+	 * table "feusers" and stores it in $this->feuser.
+	 *
+	 * If no user is logged in, $this->feuser will be null. 
+	 *
+	 * @access	private
+	 */
+	function retrieveFEUser() {
+		$this->feuser = $this->isLoggedIn() ? $GLOBALS['TSFE']->fe_user->user : null;
+	}
+
+	/**
+	 * Returns the UID of the currently logged-in FE user
+	 * or 0 if no FE user is logged in.
+	 *
+	 * @return	integer		the UID of the logged-in FE user or 0 if no FE user is logged in
+	 *
+	 * @access	public
+	 */
+	function getFeUserUid() {
+		// If we don't have the FE user's UID (yet), try to retrieve it.
+		if (!$this->feuser) {
+			$this->retrieveFEUser();
+		}
+
+		return ($this->isLoggedIn() ? intval($this->feuser['uid']) : 0);
 	}
 }
 

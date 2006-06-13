@@ -15,7 +15,6 @@ CREATE TABLE fe_users (
 #
 # Table structure for table 'tx_seminars_seminars_place_mm'
 #
-#
 CREATE TABLE tx_seminars_seminars_place_mm (
   uid_local int(11) unsigned DEFAULT '0' NOT NULL,
   uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
@@ -30,7 +29,6 @@ CREATE TABLE tx_seminars_seminars_place_mm (
 
 #
 # Table structure for table 'tx_seminars_seminars_speakers_mm'
-#
 #
 CREATE TABLE tx_seminars_seminars_speakers_mm (
   uid_local int(11) unsigned DEFAULT '0' NOT NULL,
@@ -78,12 +76,24 @@ CREATE TABLE tx_seminars_seminars (
 	attendees int(11) unsigned DEFAULT '0' NOT NULL,
 	enough_attendees tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	is_full tinyint(3) unsigned DEFAULT '0' NOT NULL,
+	vips int(11) DEFAULT '0' NOT NULL,
 	notes text NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
+#
+# Table structure for table 'tx_seminars_seminars_feusers_mm'
+#
+CREATE TABLE tx_seminars_seminars_feusers_mm (
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
 
 
 #

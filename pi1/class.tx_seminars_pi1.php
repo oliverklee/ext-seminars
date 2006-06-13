@@ -75,27 +75,31 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->registrationManager =& new $registrationManagerClassname();
 
 		$result = '';
-		$showOnlyMyEvents = false;
 
 		switch ($this->getConfValueString('what_to_display')) {
 			case 'seminar_registration':
 				$result = $this->createRegistrationPage();
 				break;
+			case 'list_vip_registrations':
+				// The fallthrough is intended
+				// because createRegistrationsListPage() will differentiate later. 
 			case 'list_registrations':
 				$result = $this->createRegistrationsListPage();
 				break;
 			case 'my_events':
-				if ($this->registrationManager->isLoggedIn()) {
-					$showOnlyMyEvents = true;
-				}
-				// The fallthrough is intended.
+				// The fallthrough is intended
+				// because createListView() will differentiate later. 
+			case 'my_vip_events':
+				// The fallthrough is intended
+				// because createListView() will differentiate later. 
 			case 'seminar_list':
+				// The fallthrough is intended.
 			default:
 				// Show the single view if a 'showUid' variable is set.
 				if ($this->piVars['showUid']) {
 					$result = $this->createSingleView();
 				} else {
-					$result = $this->createListView($showOnlyMyEvents);
+					$result = $this->createListView();
 				}
 				break;
 		}
@@ -187,22 +191,27 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates the HTML for the event list view.
 	 * This function is used for the normal event list as well as the
-	 * "my events" list.
-	 *
-	 * @param	boolean		whether to limit the list view to events
-	 * 						for which the logged-in FE user already is registered
+	 * "my events" and the "my VIP events" list.
 	 *
 	 * @return	string		HTML code with the event list
 	 *
 	 * @access	protected
 	 */
-	function createListView($showOnlyMyEvents = false) {
+	function createListView() {
 		$result = '';
-		if ($showOnlyMyEvents) {
-			$result = $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
+
+		switch ($this->getConfValueString('what_to_display')) {
+			case 'my_events':
+				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
+				break;
+			case 'my_vip_events':
+				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_VIP_EVENTS');
+				break;
+			default:
+				break;
 		}
 
-		$seminarBag =& $this->initListView($showOnlyMyEvents);
+		$seminarBag =& $this->initListView();
 
 		if ($this->internal['res_count']) {
 			$result .= $this->createListHeader();
@@ -224,17 +233,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Initializes the list view and creates a seminar bag,
-	 * but does not create any actual HTML output.
-	 *
-	 * @param	boolean		whether to limit the list view to events
-	 * 						for which the logged-in FE user already is registered
+	 * Initializes the list view (normal list, my events or my VIP events) and
+	 * creates a seminar bag, but does not create any actual HTML output.
 	 *
 	 * @return	object		a seminar bag containing the seminars for the list view
 	 *
 	 * @access	protected
 	 */
-	function &initListView($showOnlyMyEvents = false) {
+	function &initListView() {
+		$whatToDisplay = $this->getConfValueString('what_to_display');
+
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
 			$this->conf['pidList'] = $this->getConfValueString('pages');
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
@@ -245,9 +253,23 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Hide the registration column if no user is logged in
 		// or if the "my events" list should be displayed.
-		if (!$this->registrationManager->isLoggedIn() || $showOnlyMyEvents) {
+		if (!$this->isLoggedIn() || ($whatToDisplay == 'my_events')) {
 			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
+		}
+
+		// Hide the column with the link to the list of registrations if
+		// no user is logged in or there is no page specified to link to.
+		if (!$this->isLoggedIn()
+			|| (($whatToDisplay == 'seminar_list')
+				&& !$this->hasConfValueInteger('registrationsListPID')
+				&& !$this->hasConfValueInteger('registrationsVipListPID'))
+			|| (($whatToDisplay == 'my_events')
+				&& !$this->hasConfValueInteger('registrationsListPID'))
+			|| (($whatToDisplay == 'my_vip_events')
+				&& !$this->hasConfValueInteger('registrationsVipListPID'))) {
+			$this->readSubpartsToHide('list_registrations', 'LISTHEADER_WRAPPER');
+			$this->readSubpartsToHide('list_registrations', 'LISTITEM_WRAPPER');
 		}
 
 		if (!isset($this->piVars['pointer'])) {
@@ -278,10 +300,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')'
 			.$this->getAdditionalQueryParameters();
 		$additionalTables = '';
-		if ($showOnlyMyEvents) {
-			$additionalTables = $this->tableAttendances;
-			$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableAttendances.'.seminar'
-				.' AND '.$this->tableAttendances.'.user='.$this->registrationManager->getFeUserUid();
+		switch ($whatToDisplay) {
+			case 'my_events':
+				$additionalTables = $this->tableAttendances;
+				$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableAttendances.'.seminar'
+					.' AND '.$this->tableAttendances.'.user='.$this->registrationManager->getFeUserUid();
+				break;
+			case 'my_vip_events':
+				$additionalTables = $this->tableVipsMM;
+				$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableVipsMM.'.uid_local'
+					.' AND '.$this->tableVipsMM.'.uid_foreign='.$this->registrationManager->getFeUserUid();
+				break;
+			default:
+				break;
 		}
 
 		$orderBy = '';
@@ -422,15 +453,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$this->registrationManager->canRegisterIfLoggedInMessage($this->seminar)
 			);
 
-			if ($this->seminar->needsRegistration()
-				&& $this->registrationManager->isLoggedIn()
-				&& $this->hasConfValueInteger('registrationsListPID')) {
-				$link = $this->cObj->getTypoLink(
-					$this->pi_getLL('label_listRegistrationsLink'),
-					$this->getConfValueInteger('registrationsListPID'),
-					array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
-				);
-				$this->setMarkerContent('list_registrations', $link);
+			if ($this->seminar->canViewRegistrationsList($this->getConfValueString('what_to_display'),
+				$this->getConfValueInteger('registrationsListPID'),
+				$this->getConfValueInteger('registrationsVipListPID'))) {
+				$this->setMarkerContent('list_registrations', $this->getRegistrationsListLink());
 			} else {
 				$this->readSubpartsToHide('list_registrations', 'field_wrapper');
 			}
@@ -442,6 +468,42 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('error_text', $this->pi_getLL('message_wrongSeminarNumber'));
 			$result = $this->substituteMarkerArrayCached('ERROR_VIEW');
 			header('Status: 404 Not Found');
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the link to the list of registrations for the current seminar.
+	 * Returns an empty string if this link is not allowed.
+	 * For standard lists, a link is created if either the user is a VIP
+	 * or is registered for that seminar (with the link to the VIP list taking precedence).
+	 *
+	 * @return	string		HTML for the link (may be an empty string)
+	 *
+	 * @access	protected
+	 */
+	function getRegistrationsListLink() {
+		$result = '';
+		$targetPageId = 0;
+		$whatToDisplay = $this->getConfValueString('what_to_display');
+
+		if ($this->seminar->canViewRegistrationsList($whatToDisplay, 0,
+			$this->getConfValueInteger('registrationsVipListPID'))) {
+			// So a link to the VIP list is possible.
+			$targetPageId = $this->getConfValueInteger('registrationsVipListPID');
+		// No link to the VIP list ... so maybe to the list for the participants.
+		} elseif ($this->seminar->canViewRegistrationsList($whatToDisplay,
+			$this->getConfValueInteger('registrationsListPID'))) {
+			$targetPageId = $this->getConfValueInteger('registrationsListPID');
+		}
+
+		if ($targetPageId) {
+			$result = $this->cObj->getTypoLink(
+				$this->pi_getLL('label_listRegistrationsLink'),
+				$targetPageId,
+				array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
+			);
 		}
 
 		return $result;
@@ -490,6 +552,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('header_organizers', $this->getFieldHeader_sortLink('organizers'));
 		$this->setMarkerContent('header_vacancies', $this->getFieldHeader('vacancies'));
 		$this->setMarkerContent('header_registration', $this->getFieldHeader('registration'));
+		$this->setMarkerContent('header_list_registrations', $this->getFieldHeader('list_registrations'));
 
 		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
@@ -550,6 +613,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('registration', $this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
 				$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) : ''
 			);
+			$this->setMarkerContent('list_registrations', $this->getRegistrationsListLink());
 
 			$result = $this->substituteMarkerArrayCached('LIST_ITEM');
 		}
@@ -650,7 +714,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar);
 			} else {
-				if ($this->registrationManager->isLoggedIn()) {
+				if ($this->isLoggedIn()) {
 					$isOkay = true;
 				} else {
 					$errorMessage = $this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar);
@@ -755,19 +819,38 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createRegistrationsListPage() {
+		$errorMessage = '';
+		$isOkay = false;
+
 		if ($this->createSeminar($this->piVars['seminar'])) {
+			// Okay, at least the seminar UID is valid so we can show the seminar title and date.
 			$this->setMarkerContent('title', $this->seminar->getTitleAndDate());
+			if ($this->seminar->canViewRegistrationsList($this->getConfValueString('what_to_display'))) {
+				$isOkay = true;
+			} else {
+				$errorMessage = $this->seminar->canViewRegistrationsListMessage($this->getConfValueString('what_to_display'));
+			}
+		} else {
+			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar']);
+			$this->setMarkerContent('title', '');
+			header('Status: 404 Not Found');
+		}
+
+		if ($isOkay) {
 			$this->readSubpartsToHide('error', 'wrapper');
 			$this->createRegistrationsList();
 		} else {
-			$this->setMarkerContent('title', '');
-			$this->setMarkerContent('error_text', $this->registrationManager->existsSeminarMessage($this->piVars['seminar']));
-			// hide stuff we don't need
+			$this->setMarkerContent('error_text', $errorMessage);
 			$this->readSubpartsToHide('registrations_list_message', 'wrapper');
 			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
-
-			header('Status: 404 Not Found');
 		}
+
+		$this->setMarkerContent('backlink', 
+			$this->cObj->getTypoLink(
+				$this->pi_getLL('label_back'),
+				$this->getConfValueInteger('listPID')
+			)
+		);
 
 		$result = $this->substituteMarkerArrayCached('REGISTRATIONS_LIST_VIEW');
 
@@ -791,7 +874,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($registrationBag->getCurrent()) {
 			$result = '';
 			while ($currentRegistration =& $registrationBag->getCurrent()) {
-				$this->setMarkerContent('registrations_list_inneritem', $currentRegistration->getUserName());
+				$this->setMarkerContent('registrations_list_inneritem',
+					$currentRegistration->getUserDataAsHtml(
+						$this->getConfValueString('showFeUserFieldsInRegistrationsList', 's_template_special'),
+						$this
+					)
+				);
 				$result .= $this->substituteMarkerArrayCached('REGISTRATIONS_LIST_ITEM');
 				$registrationBag->getNext();
 			}

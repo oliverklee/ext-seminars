@@ -54,6 +54,7 @@ plugin.tx_seminars_pi1 {
 	class_headerorganizers =
 	class_headervacancies =
 	class_headerregistration =
+	class_headerlist_registrations =
 
 	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_itemrow =
@@ -69,6 +70,7 @@ plugin.tx_seminars_pi1 {
 	class_listprice_special = price
 	class_listorganizers =
 	class_listregistration =
+	class_listlist_registrations =
 
 	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
 	class_square = square
@@ -96,6 +98,8 @@ plugin.tx_seminars_pi1 {
 	showSpeakerDetails = 1
 	# whether detailed information for the site is shown in single view
 	showSiteDetails = 1
+	# which FEuser fields to show in the list of registrations for an event
+	showFeUserFieldsInRegistrationsList = name
 }
 
 plugin.tx_srfeuserregister_pi1 {
