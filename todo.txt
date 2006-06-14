@@ -12,24 +12,15 @@ Hint regarding the items marked with [from dev-meeting 05/12], they got discusse
 Version 0.5.0 - "Dogfood, part 2"
 ---------------------------------
 --> All bugs marked with a star (*) are entered to the bugtracker!
-- bug: at Web > Seminars > Update statistics, there is no number after "paid", and after "not paid", there is always the number of all attendances
 - *investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
 - get a wiki
 - *document what all those *PID configuration variables are used for
 - *document the fields of the attendance record in the manual
-- move bugtracking from bugs.typo3.org (Mantis) to a Bugzilla installation
-- *feature for e-mail notification to the organizer once a seminar has enough attendances or is full
-- *find a way to enter and display open-ended events
-- *check that the CSS file doesn't allow for possibly unreadable color combinations
-- *make it configurable whether to display the speakers' detailed description
-- *make it configurable whether to display the sites' detailed description
-- *make it configurable whether to have the speakers' name or the URL as link text for their homepage
 - *test whether all flexform fields work
 - *Create a back end module (/mod2).
-  - *create the module itself
   - *create the sub-modules (and the base for sub-module-switching)
   - *document it in the manual
-- *Include some basic functionality
+- *Include some basic functionality into md2
   - *output event lists
   - *possibility to select an event
   - *search forms (search for a user / event), maybe use t3lib_db::searchQuery
@@ -40,14 +31,9 @@ Version 0.5.0 - "Dogfood, part 2"
   - *create a function in /mod2 to view the log (standard view, verbose view)
   - investigate if the sys_log table can be used to store the extension's log [from dev-meeting 05/12]
 - *create a new template for sr_feuser_register with CSS
-- *make the default sort order for the list view configurable
-- *make the number of results for the list view configurable
-- *make it configurable whether to also display canceled seminars in the list view
 - *make it configurable whether to have the search box in the list view
 - *make it configurable whether to have the results browser in the list view
 - enter this extension into http://wiki.typo3.org/index.php/Calendar
-- *extend copyright line to 2006
-- *provide a general "bag" class from which a seminar bag or a attendance bag can inherit
 - *move up getSeminarsProperty* and seminarData so that it can be used from both the seminar and the attendance class
 - Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
 - Add categorization of events [from dev-meeting 05/12]
@@ -64,7 +50,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 -------------------------------------------------------------------------
 - make BE form labels more intuitive
 - remove the old sr_feuser_register template
-- *make it configurable whether to have the university-specific stuff
+- remove all university specific stuff and move it to a separate extension (add on to main extension) [from dev-meeting 05/12]
 - improve the values of <eval> in the flexforms and the BE forms
 - put the template helper, object DB etc. into a separate extension that can also be used by the following extensions: contactslist, dayscountdown, automaticexchangerates
 - document how to use the translation tool and how translaters can help us
@@ -73,6 +59,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - simulate transactions when booking a seminar in order to avoid overbooking when two people simultaneously try to register
 - factor out the statistics update into a common function and make it more efficient
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics
+- Stop users from deleting their account if still registered to an event [from dev-meeting 05/12]
 - handle deleted (and "marked as deleted") user accounts and seminars graciously
 - feature: find and display double registrations
 - feature: avoid double registrations when entering registrations manually
@@ -203,6 +190,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - reduce calls like $this->..->getFeUserUid() to $this->getFeUserUid() if possible
 - use implode() when comma-separating stuff (e.g. participants lists)
 - use MVC
+- move speakers addresses to tt_address
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
@@ -286,6 +274,7 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - show the status of registrations with color and graphical (progress bar) in BE lists [from dev-meeting 05/12]
 - investigate whether we can set the sorting order etc. via flexforms
 - provide nice checkboxes for hiding/showing columns, fields, stuff in mails etc. instead of those pesky comma-separated strings
+- add a "notes" field to the organizer records
 
 
 Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
@@ -348,6 +337,9 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - marry this extension to tx_cal
 - on the list of registrations, provide a link to the login page if the user isn't logged in yet
 - make the back link go back to the last list, not to the default list page
+- add the seminar sites to the list view
+- add the subtitle to the list view
+- add the time to the list view
 
 
 Version 1.0.0 - "Getting real new features"
@@ -364,7 +356,6 @@ Version 1.0.0 - "Getting real new features"
   - seminar to which the e-mail refers
 - make the wrap for the number of vacancies (colored square) configurable
 - add entry in participant records whether their money has been refunded
-- add configuration whether to show seminars without date as well
 - separate "signing up" (which includes paying) and "registering a seat" (without paying)
 - automatic signing off if the user hasn't paid after a configurable timespan (x days after registration or x days before start of seminar)
 - add feature: registration queue, so that more people can register than there are vacancies, and the surplus people get served when people sign off
@@ -448,11 +439,9 @@ Not triaged yet
 - feature: graph for total number of registrations per seminar over time
 - feature: notify users if a new seminar for one of their "favorite" speakers has been entered
 - allow using data from jp_staff
-- add "target group/destination group" (Zielgruppe) record type, add this as a field to the seminar type
 - feature: show seminars from a configurable time window in the seminar list
 - add image to seminar record
 - add image to seminar topic
-- attach images to seminars (like in tt_news)
 - attach documents to seminars
 - export events to tt_news
 - export events to jw_calendar
@@ -474,7 +463,6 @@ Not triaged yet
 - export attendance records as bar codes (ask the Fachschaft Informatik Bonn how they do this for their parties)
 - attendance record: if there is no name, use first and last name (this needs sr_feuser_register to be installed)
 - add configuration: maximum number of seats that can be registered for at one time
-- configuration: don't show the exakt number of vacancies, but only the rough state
 - feature: RSS or Atom feed for a list of seminars
 - export seminar data as iCal (in the FE detailed view)
 - Add function to search for location of an event [from dev-meeting 05/12]
@@ -486,15 +474,12 @@ Not triaged yet
 - feature: Add pricing engine [from dev-meeting 05/12]
 - feature: Let's have events with sub-events [from dev-meeting 05/12] (already in Bugtracker)
 - feature: Allow anonymous registration to an event [from dev-meeting 05/12]
-- Remove all university specific stuff and move it to a separate extension (add on to main extension) [from dev-meeting 05/12]
 - Change functions that just get informations to also get info about deleted accounts [from dev-meeting 05/12]
-- Stop users from deleting their account if still registered to an event [from dev-meeting 05/12]
 - Make the mobile number a required field for fe_users [from dev-meeting 05/12]
 - Investigate wich problems the too long filenames can cause [from dev-meeting 05/12]
 - Start working with unit testing on this extension [from dev-meeting 05/12]
 - Change the FlexForm Checkboxes to Selectorboxes allowing to have the value of 0 (zero) [from dev-meeting 05/12]
 - feature: show alternative events (same event, other date/time) in FE [from dev-meeting 05/12]
-- "Translate" all locallang files to new XML format [from dev-meeting 05/12]
 - feature: Add a registration transfer module in BE [from dev-meeting 05/12]
 - calendar view
 - iCal import
@@ -505,3 +490,4 @@ Not triaged yet
 - add URL to seminar record
 - aggregate and show seminar records from several sites using this extension (on different servers)
 - investigate mth_feedit for front end editing of records
+- assign "roles" to speakers (eg. panel members, organizers, facilitators ...)
