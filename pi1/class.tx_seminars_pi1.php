@@ -36,12 +36,12 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php
 require_once(t3lib_extMgm::extPath('frontendformslib').'class.tx_frontendformslib.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
-	/** Same as class name */
+	/** same as class name */
 	var $prefixId = 'tx_seminars_pi1';
-	/**  Path to this script relative to the extension dir. */
+	/** path to this script relative to the extension dir */
 	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
-	/** The seminar which we want to list/show or for which the user wants to register. */
+	/** the seminar which we want to list/show or for which the user wants to register */
 	var $seminar;
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
