@@ -339,6 +339,8 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - add the seminar sites to the list view
 - add the subtitle to the list view
 - add the time to the list view
+- nicely style the messages on the front end (error messages and notifications) using a border, color and an icon
+- nicely style the buttons on the front end using borders and icons
 
 
 Version 1.0.0 - "Getting real new features"
