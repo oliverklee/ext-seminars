@@ -37,12 +37,12 @@ plugin.tx_seminars_pi1 {
 	# whether to use formal or informal language
 	salutation = formal
 
-	# CSS class around the table with the events list view (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	# CSS class around the table with the events list view (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_eventlist = listrow
-	# CSS class for the TR with the header row for the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	# CSS class for the TR with the header row for the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_headerrow =
 
-	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_headertitle =
 	class_headeruid =
 	class_headeraccreditation_number =
@@ -56,10 +56,10 @@ plugin.tx_seminars_pi1 {
 	class_headerregistration =
 	class_headerlist_registrations =
 
-	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_itemrow =
 
-	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_listtitle = title
 	class_listuid = uid
 	class_listaccreditation_number =
@@ -72,10 +72,10 @@ plugin.tx_seminars_pi1 {
 	class_listregistration =
 	class_listlist_registrations =
 
-	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_square = square
 
-	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"),leave empty to set no CSS class
+	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_error = error
 
 	# the timeframe from which event should be displayed in the list view
