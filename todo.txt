@@ -190,6 +190,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - reduce calls like $this->..->getFeUserUid() to $this->getFeUserUid() if possible
 - use implode() when comma-separating stuff (e.g. participants lists)
 - use MVC
+- add a getConfValueArray() to oelib or allow getConfValue to specify array keys
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
