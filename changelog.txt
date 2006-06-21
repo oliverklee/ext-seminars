@@ -1,4 +1,5 @@
 0.4.4 - work in progress
+- Fix: There's an em dash &#8211; in the subject of additional notification mails (#0003551)
 - Fix: there's <tr###CLASS_HEADERROW###> in the list view header (#0003324)
 - Fix: make this extension work with TYPO3 4.0 (#0003553, #0003555)
 - Feature: sort registrations in mod1 by creation date (#0003606)

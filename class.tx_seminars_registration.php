@@ -551,7 +551,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			}
 
 			$content = $this->substituteMarkerArrayCached('MAIL_ADDITIONALNOTIFICATION');
-			$subject = sprintf($this->pi_getLL($whichEmailSubject), $this->seminar->getUid(), $this->seminar->getTitleAndDate());
+			$subject = sprintf($this->pi_getLL($whichEmailSubject), $this->seminar->getUid(), $this->seminar->getTitleAndDate('-'));
 
 			// We use just the organizer's e-mail address as e-mail recipient
 			// as some SMTP servers cannot handle the format
