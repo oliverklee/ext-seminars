@@ -296,7 +296,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * If a user logged in, retrieves that user's data as stored in the
 	 * table "feusers" and stores it in $this->feuser.
 	 *
-	 * If no user is logged in, $this->feuser will be null. 
+	 * If no user is logged in, $this->feuser will be null.
 	 *
 	 * @access	private
 	 */

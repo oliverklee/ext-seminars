@@ -82,16 +82,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 			case 'list_vip_registrations':
 				// The fallthrough is intended
-				// because createRegistrationsListPage() will differentiate later. 
+				// because createRegistrationsListPage() will differentiate later.
 			case 'list_registrations':
 				$result = $this->createRegistrationsListPage();
 				break;
 			case 'my_events':
 				// The fallthrough is intended
-				// because createListView() will differentiate later. 
+				// because createListView() will differentiate later.
 			case 'my_vip_events':
 				// The fallthrough is intended
-				// because createListView() will differentiate later. 
+				// because createListView() will differentiate later.
 			case 'seminar_list':
 				// The fallthrough is intended.
 			default:
@@ -845,7 +845,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
 		}
 
-		$this->setMarkerContent('backlink', 
+		$this->setMarkerContent('backlink',
 			$this->cObj->getTypoLink(
 				$this->pi_getLL('label_back'),
 				$this->getConfValueInteger('listPID')
