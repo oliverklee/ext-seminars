@@ -229,6 +229,9 @@ Version 0.9.0 - "Make it fast": performance
 - use isset() instead of array_key_exists()
 - registration bag: when iterating over registrations for the same seminare, don't create a seminar object for each registration but reuse the same object instead
 - investigate whether we can cache some parts of the BE modules
+- use (int) instead of intval()
+- use ++$i instead of $i++
+- investigate whether to use marker substitution with or without caching (there was a discussion about this for the "cal" extension)
 
 
 Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
