@@ -146,7 +146,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - document how the templates work (labels, wrappers etc.)
 - move code from pi1/class.tx_seminars_pi1.php into separate class where it makes sense
 - investigate whether we should have @package/@subpackage tags
-- add the CVS tag "dollar Id dollar" in the header comment of each document
+- add the SVN tag "dollar Id dollar" in the header comment of each document
 - check that all file names are 31 characters or shorter
 - factor out t3lib_pageSelect::enableFields into objectfromdb
 - investigate whether the seminar class can generate links without the FE, eg. using $this->cObj->typolink?
