@@ -116,6 +116,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - registration: use a callback in the constructor to get additional data instead of expecting an additional function call; find a suitable design pattern for this
 - use require_once instead of require wherever possible
 - test if registration for events without a date is impossible (should be)
+- escape square brackets in URLs (that are part of links as well as in e-mails), see http://bugs.typo3.org/view.php?id=3808
 
 
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
