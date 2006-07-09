@@ -194,6 +194,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - add a getConfValueArray() to oelib or allow getConfValue to specify array keys
 - in the manual, remove references to versions < 0.4.3
 - in the locallang files, always use tabs for indenting
+- make the manual render on typo3.org
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
