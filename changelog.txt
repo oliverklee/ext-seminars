@@ -1,4 +1,7 @@
-0.4.4 - work in progress
+0.4.5
+
+
+0.4.4
 - Polish: Refine the wording of some of the registration fields (#153)
 - Fix: There's an em dash &#8211; in the subject of additional notification mails (#0003551)
 - Fix: there's <tr###CLASS_HEADERROW###> in the list view header (#0003324)
