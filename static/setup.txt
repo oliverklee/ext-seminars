@@ -85,11 +85,6 @@ plugin.tx_seminars_pi1 {
 	hideColumns = accreditation_number,credit_points,price_special,speakers
 	hideFields = credit_points
 
-	# the default sort order in list view (a field name)
-	listView.orderBy = begin_date
-	# whether to order ascending (0) or descending (1)
-	listView.descFlag = 0
-
 	generalPriceInList =
 	generalPriceInSingle =
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
@@ -100,6 +95,18 @@ plugin.tx_seminars_pi1 {
 	showSiteDetails = 1
 	# which FEuser fields to show in the list of registrations for an event
 	showFeUserFieldsInRegistrationsList = name
+}
+
+
+plugin.tx_seminars_pi1.listView {
+	# the default sort order in list view (a field name)
+	orderBy = begin_date
+	# whether to order ascending (0) or descending (1)
+	descFlag = 0
+	# how many results to display per page
+	results_at_a_time = 20
+	# how many neighbouring pages to list in the page browser
+	maxPages = 5
 }
 
 plugin.tx_srfeuserregister_pi1 {
