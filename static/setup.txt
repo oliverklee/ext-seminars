@@ -91,9 +91,10 @@ plugin.tx_seminars_pi1 {
 	showRegistrationFields = interests,expectations,background_knowledge,known_from,notes
 	# whether detailed information for the speakers is shown in single view
 	showSpeakerDetails = 1
-	# whether detailed information for the site is shown in single view
+	# whether detailed information for the location is shown in single view
 	showSiteDetails = 1
-	# which FEuser fields to show in the list of registrations for an event
+
+	# comma-separated list of FEuser fields to show in the list of registrations for an event
 	showFeUserFieldsInRegistrationsList = name
 }
 
@@ -105,7 +106,7 @@ plugin.tx_seminars_pi1.listView {
 	descFlag = 0
 	# how many results to display per page
 	results_at_a_time = 20
-	# how many neighbouring pages to list in the page browser
+	# the number of neighboring pages to list in the page browser
 	maxPages = 5
 }
 
