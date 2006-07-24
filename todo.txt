@@ -343,6 +343,8 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - add the time to the list view
 - nicely style the messages on the front end (error messages and notifications) using a border, color and an icon
 - nicely style the buttons on the front end using borders and icons
+- shop city and ZIP code of the event sites in the list view
+- make it possible to have eg. an asterik after the price in the list view and single view
 
 
 Version 1.0.0 - "Getting real new features"
