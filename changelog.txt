@@ -1,5 +1,5 @@
 0.4.5
-
+- Fix: Flexform is shown twice if a second BE language exists (#188)
 
 0.4.4
 - Polish: Refine the wording of some of the registration fields (#153)
