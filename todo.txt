@@ -189,7 +189,6 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - in the manual, remove references to versions < 0.4.3
 - in the locallang files, always use tabs for indenting
 - make the manual render on typo3.org
-- in templates, replace "<!--###" with "<!-- ###" (might need some modifications for the templatehelper class)
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
