@@ -932,7 +932,11 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getRegistrationDeadline() {
-		return strftime($this->getConfValueString('dateFormatYMD').' '.$this->getConfValueString('timeFormat'), $this->getRecordPropertyInteger('deadline_registration'));
+		$result = strftime($this->getConfValueString('dateFormatYMD'), $this->getRecordPropertyInteger('deadline_registration'));
+		if ($this->getConfValueBoolean('showTimeOfRegistrationDeadline')) {
+			$result .= strftime(' '.$this->getConfValueString('timeFormat'), $this->getRecordPropertyInteger('deadline_registration'));
+		}
+		return $result;
 	}
 
 	/**

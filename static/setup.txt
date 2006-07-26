@@ -25,6 +25,10 @@ plugin.tx_seminars {
 	abbreviateDateRanges = 1
 	currency = EUR
 	eventType = Workshop
+
+	# whether to also show the time of the registration deadline
+	showTimeOfRegistrationDeadline = 0
+
 	# If there are at least this many vancancies, "enough" is displayed instead of the exact number.
 	showVacanciesThreshold = 10
 }
