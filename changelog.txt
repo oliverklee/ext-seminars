@@ -1,4 +1,5 @@
 0.4.5
+- Code cleanup and refactoring (#197)
 - Feature: Make it configurable whether to also show the time of the registration deadline (#196)
 - replace <!--### with <!-- ### in all HTML templates (#195)
 - Fix: Flexform is shown twice if a second BE language exists (#188)
