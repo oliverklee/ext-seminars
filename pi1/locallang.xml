@@ -42,6 +42,7 @@
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>
+			<label index="seminars.pi_flexform.eventFieldsOnRegistrationPage">Event data that should be displayed on the registration page:</label>
 			<label index="seminars.pi_flexform.showRegistrationFields">Show text input fields for online registration (comma-separated):</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails">Show speaker details</label>
 			<label index="seminars.pi_flexform.showSiteDetails">Show site details</label>
@@ -129,6 +130,7 @@
 			<label index="seminars.pi_flexform.hideColumns">Versteckte Felder in Listenansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">&quot;Preis&quot; als Überschrift für den Standardpreis in der Listenansicht benutzen:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">&quot;Preis&quot; als Überschrift für den Standardpreis in der Einzelansicht und bei der Anmeldung benutzen:</label>
+			<label index="seminars.pi_flexform.eventFieldsOnRegistrationPage">Ereignis-Daten, die auf der Anmeldeseite angezeigt werden sollen:</label>
 			<label index="seminars.pi_flexform.showRegistrationFields">Angezeigte Text-Input-Felder bei Online-Anmeldung (komma-separiert):</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails">Referentendetails anzeigen</label>
 			<label index="seminars.pi_flexform.showSiteDetails">Ortsdetails anzeigen</label>
@@ -351,6 +353,7 @@
 			<label index="seminars.pi_flexform.hideColumns" type="integer">70702598</label>
 			<label index="seminars.pi_flexform.generalPriceInList" type="integer">150285299</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle" type="integer">30481588</label>
+			<label index="seminars.pi_flexform.eventFieldsOnRegistrationPage" type="integer">55680867</label>
 			<label index="seminars.pi_flexform.showRegistrationFields" type="integer">128589369</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>

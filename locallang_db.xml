@@ -89,6 +89,7 @@
             <label index="fe_users.tx_seminars_semester">Semester</label>
             <label index="fe_users.tx_seminars_subject">Study subject</label>
             <label index="tx_seminars_seminars">Seminars</label>
+            <label index="tx_seminars_seminars.uid">Event number</label>
             <label index="tx_seminars_seminars.title">Title</label>
             <label index="tx_seminars_seminars.subtitle">Subtitle</label>
             <label index="tx_seminars_seminars.description">Description</label>
@@ -109,6 +110,7 @@
             <label index="tx_seminars_seminars.attendees_max">Maximal number of attendees</label>
             <label index="tx_seminars_seminars.cancelled">Has been canceled</label>
             <label index="tx_seminars_seminars.attendees">Current number of attendees</label>
+            <label index="tx_seminars_seminars.vacancies">Current number of vacancies</label>
             <label index="tx_seminars_seminars.enough_attendees">Has enough registrations</label>
             <label index="tx_seminars_seminars.is_full">Is full</label>
             <label index="tx_seminars_seminars.vips">Front end users that are allowed to see the list of registrations</label>
@@ -166,6 +168,7 @@
             <label index="fe_users.tx_seminars_semester">Semesterzahl</label>
             <label index="fe_users.tx_seminars_subject">Studienfach</label>
             <label index="tx_seminars_seminars">Seminare</label>
+            <label index="tx_seminars_seminars.uid">Veranstaltungsnummer</label>
             <label index="tx_seminars_seminars.title">Titel</label>
             <label index="tx_seminars_seminars.subtitle">Untertitel</label>
             <label index="tx_seminars_seminars.description">Beschreibung</label>
@@ -186,6 +189,7 @@
             <label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen</label>
             <label index="tx_seminars_seminars.cancelled">Wurde abgesagt</label>
             <label index="tx_seminars_seminars.attendees">Momentane Anzahl Anmeldungen</label>
+            <label index="tx_seminars_seminars.vacancies">Momentane Anzahl freie Plätze</label>
             <label index="tx_seminars_seminars.enough_attendees">Hat genug Anmeldungen</label>
             <label index="tx_seminars_seminars.is_full">Ist voll</label>
             <label index="tx_seminars_seminars.vips">Frontend-User, die sich die Liste der Anmeldungen ansehen dürfen</label>
@@ -319,6 +323,7 @@
             <label index="fe_users.tx_seminars_semester" type="integer">94294684</label>
             <label index="fe_users.tx_seminars_subject" type="integer">29929995</label>
             <label index="tx_seminars_seminars" type="integer">146176001</label>
+            <label index="tx_seminars_seminars.uid" type="integer">21390711</label>
             <label index="tx_seminars_seminars.title" type="integer">192455458</label>
             <label index="tx_seminars_seminars.subtitle" type="integer">3536098</label>
             <label index="tx_seminars_seminars.description" type="integer">190479069</label>
@@ -339,6 +344,7 @@
             <label index="tx_seminars_seminars.attendees_max" type="integer">79420038</label>
             <label index="tx_seminars_seminars.cancelled" type="integer">34564851</label>
             <label index="tx_seminars_seminars.attendees" type="integer">213201731</label>
+            <label index="tx_seminars_seminars.vacancies" type="integer">65109627</label>
             <label index="tx_seminars_seminars.enough_attendees" type="integer">135882580</label>
             <label index="tx_seminars_seminars.is_full" type="integer">13790082</label>
             <label index="tx_seminars_seminars.vips" type="integer">242004556</label>

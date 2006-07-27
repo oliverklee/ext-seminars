@@ -710,6 +710,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registationThankyou = '';
 		$isOkay = false;
 
+		$this->toggleEventFieldsOnRegistrationPage();
+
 		if ($this->createSeminar($this->piVars['seminar'])) {
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar);
@@ -772,6 +774,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createRegistrationHeading($errorMessage) {
 		$this->setMarkerContent('registration', $this->pi_getLL('label_registration'));
 		$this->setMarkerContent('title',        ($this->seminar) ? $this->seminar->getTitleAndDate() : '');
+		$this->setMarkerContent('uid',          ($this->seminar) ? $this->seminar->getUid() : '');
 
 		if (empty($errorMessage)) {
 			$this->readSubpartsToHide('error', 'wrapper');
@@ -888,6 +891,42 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		} else {
 			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
 			$this->setMarkerContent('message_no_registrations', $this->pi_getLL('message_noRegistrations'));
+		}
+
+		return;
+	}
+
+	/**
+	 * Enables/disables the display of data from event records on the
+	 * registration page depending on the config variable
+	 * "eventFieldsOnRegistrationPage".
+	 *
+	 * @access	protected
+	 */
+	function toggleEventFieldsOnRegistrationPage() {
+		$fieldsToShow = array();
+		if ($this->hasConfValueString('eventFieldsOnRegistrationPage', 's_template_special')) {
+			$fieldsToShow = explode(',', $this->getConfValueString('eventFieldsOnRegistrationPage', 's_template_special'));
+		}
+
+		// First, we have a list of all fields that are removal candidates.
+		$fieldsToRemove = array(
+			'uid', 'title', 'price_regular', 'price_special', 'vacancies'
+		);
+
+		// Now iterate over the fields to show and delete them from the list
+		// of items to remove.
+		foreach ($fieldsToShow as $currentField) {
+			$key = array_search(trim($currentField), $fieldsToRemove);
+			// $key will be false if the item has not been found.
+			// Zero, on the other hand, is a valid key.
+			if ($key !== false) {
+				unset($fieldsToRemove[$key]);
+			}
+		}
+
+		if (!empty($fieldsToRemove)) {
+			$this->readSubpartsToHide(implode(',', $fieldsToRemove), 'registration_wrapper');
 		}
 
 		return;
