@@ -53,6 +53,8 @@ plugin.tx_seminars_pi1 {
 	class_headercredit_points =
 	class_headerspeakers =
 	class_headerdate =
+	class_headertime =
+	class_headerplace =
 	class_headerprice_regular =
 	class_headerprice_special =
 	class_headerorganizers =
@@ -70,6 +72,8 @@ plugin.tx_seminars_pi1 {
 	class_listcredit_points =
 	class_listspeakers =
 	class_listdate = date
+	class_listtime =
+	class_listplace =
 	class_listprice_regular = price
 	class_listprice_special = price
 	class_listorganizers =
@@ -86,7 +90,7 @@ plugin.tx_seminars_pi1 {
 	timeframeInList = currentAndUpcoming
 	# whether canceled events should be hidden or not
 	hideCanceledEvents = 0
-	hideColumns = accreditation_number,credit_points,price_special,speakers
+	hideColumns = accreditation_number,credit_points,time,place,price_special,speakers
 	hideFields = credit_points
 
 	generalPriceInList =

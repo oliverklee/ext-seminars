@@ -547,6 +547,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('header_credit_points', $this->getFieldHeader_sortLink('credit_points'));
 		$this->setMarkerContent('header_speakers', $this->getFieldHeader('speakers'));
 		$this->setMarkerContent('header_date', $this->getFieldHeader_sortLink('date'));
+		$this->setMarkerContent('header_time', $this->getFieldHeader('time'));
+		$this->setMarkerContent('header_place', $this->getFieldHeader('place'));
 		$this->setMarkerContent('header_price_regular', $this->getFieldHeader_sortLink('price_regular'));
 		$this->setMarkerContent('header_price_special', $this->getFieldHeader_sortLink('price_special'));
 		$this->setMarkerContent('header_organizers', $this->getFieldHeader_sortLink('organizers'));
@@ -605,6 +607,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
 			$this->setMarkerContent('date', $this->seminar->getDate());
+			$this->setMarkerContent('time', $this->seminar->getTime());
+			$this->setMarkerContent('place', $this->seminar->getPlaceShort());
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
 			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
