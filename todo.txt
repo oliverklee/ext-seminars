@@ -338,9 +338,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - marry this extension to tx_cal
 - on the list of registrations, provide a link to the login page if the user isn't logged in yet
 - make the back link go back to the last list, not to the default list page
-- add the seminar sites to the list view
 - add the subtitle to the list view
-- add the time to the list view
 - nicely style the messages on the front end (error messages and notifications) using a border, color and an icon
 - nicely style the buttons on the front end using borders and icons
 - shop city and ZIP code of the event sites in the list view
