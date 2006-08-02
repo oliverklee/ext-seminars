@@ -303,8 +303,6 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - feature: "this seminar is repeated on the following dates"
 - add field for "these seminars go together well"
 - feature: "people who have registered for this seminar have also registered for these seminars"
-- add and document configuration: number of seminars to list per page
-- feature: configure sort order of seminar list
 - add a headline "Thanks for signing up for this event." or something similar after a successfull registration
 - don't display "page 1 of 1" in the list view if there is only 1 page
 - handle singular/plural of "organizer" in headings
@@ -317,9 +315,9 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - conduct FE usability tests
 - in the list view, allow ordering by the number of vacancies
 - online registration: only show the message "an e-mail has been sent" if sending the e-mail has been successful
-- thankyou page: show how many seats have been reserved
-- thankyou page: show the e-mail address to which the e-mail has been sent
-- on the thank you page, provide a link to the list view or to the single view
+- thank-you page: show how many seats have been reserved
+- thank-you page: show the e-mail address to which the e-mail has been sent
+- on the thank-you page, provide a back link to the list view or to the single view
 - use singular for message_invalidNumberOfSeats if there is only 1 vacancy
 - change the online registration button label from "submit" to "sign on" or "register": LLL:EXT:frontendformslib/locallang.php:renderSubmitButtons_submit
 - change the online registration buttons layout (they should be placed according to the OS UI design guidelines)
@@ -343,6 +341,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - nicely style the buttons on the front end using borders and icons
 - shop city and ZIP code of the event sites in the list view
 - make it possible to have eg. an asterik after the price in the list view and single view
+- make the "cancel" button on the registration page either do something useful or remove it
 
 
 Version 1.0.0 - "Getting real new features"
