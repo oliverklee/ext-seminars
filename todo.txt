@@ -342,6 +342,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - shop city and ZIP code of the event sites in the list view
 - make it possible to have eg. an asterik after the price in the list view and single view
 - make the "cancel" button on the registration page either do something useful or remove it
+- the back link in the details view (linked from "my events") doesn't link back to "my events"
 
 
 Version 1.0.0 - "Getting real new features"
