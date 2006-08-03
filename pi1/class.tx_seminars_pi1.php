@@ -779,6 +779,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('registration', $this->pi_getLL('label_registration'));
 		$this->setMarkerContent('title',        ($this->seminar) ? $this->seminar->getTitleAndDate() : '');
 		$this->setMarkerContent('uid',          ($this->seminar) ? $this->seminar->getUid() : '');
+		if ($this->seminar && $this->seminar->hasAccreditationNumber()) {
+			$this->setMarkerContent('accreditation_number', ($this->seminar) ? $this->seminar->getAccreditationNumber() : '');
+		} else {
+			$this->readSubpartsToHide('accreditation_number', 'registration_wrapper');
+		}
 
 		if (empty($errorMessage)) {
 			$this->readSubpartsToHide('error', 'wrapper');
@@ -915,7 +920,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// First, we have a list of all fields that are removal candidates.
 		$fieldsToRemove = array(
-			'uid', 'title', 'price_regular', 'price_special', 'vacancies'
+			'uid', 'title', 'accreditation_number', 'price_regular', 'price_special', 'vacancies'
 		);
 
 		// Now iterate over the fields to show and delete them from the list

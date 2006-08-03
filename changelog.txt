@@ -1,4 +1,5 @@
 0.4.6
+- feature: add accreditation number to the registration page (#220)
 
 0.4.5 (released 2006-08-01)
 - Feature: Display time and place in the list view (#219)

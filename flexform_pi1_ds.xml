@@ -349,14 +349,18 @@
 										<numIndex index="1">title</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.accreditation_number</numIndex>
+										<numIndex index="1">accreditation_number</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
 										<numIndex index="0">LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular</numIndex>
 										<numIndex index="1">price_regular</numIndex>
 									</numIndex>
-									<numIndex index="3" type="array">
+									<numIndex index="4" type="array">
 										<numIndex index="0">LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special</numIndex>
 										<numIndex index="1">price_special</numIndex>
 									</numIndex>
-									<numIndex index="4" type="array">
+									<numIndex index="5" type="array">
 										<numIndex index="0">LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.vacancies</numIndex>
 										<numIndex index="1">vacancies</numIndex>
 									</numIndex>
