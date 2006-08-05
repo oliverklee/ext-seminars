@@ -38,6 +38,7 @@ Version 0.5.0 - "Dogfood, part 2"
 - Add categorization of events [from dev-meeting 05/12]
 - increase the number of lines in the Source Page flexforms element
 - add support for different kinds of events (workshop, lecture, ...)
+- add more sites to the list of live examples
 
 
 Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
