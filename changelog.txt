@@ -1,4 +1,5 @@
 0.4.6
+- feature: Add configuration: hide date in list view if it is the same as the previous event's date (#221)
 - feature: add accreditation number to the registration page (#220)
 
 0.4.5 (released 2006-08-01)

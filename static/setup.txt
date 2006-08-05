@@ -93,8 +93,11 @@ plugin.tx_seminars_pi1 {
 	hideColumns = accreditation_number,credit_points,time,place,price_special,speakers
 	hideFields = credit_points
 
-	generalPriceInList =
-	generalPriceInSingle =
+	generalPriceInList = 0
+	generalPriceInSingle = 0
+
+	# whether to omit the date in the list view if it is the same as the previous item's
+	omitDateIfSameAsPrevious = 0
 
 	# list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
 	eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies

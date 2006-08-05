@@ -44,6 +44,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** the seminar which we want to list/show or for which the user wants to register */
 	var $seminar;
 
+	/** the previous event's date (used for the list view) */
+	var $previousDate;
+
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager;
 
@@ -342,6 +345,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$this->internal['res_count'] = $seminarBag->getObjectCountWithoutLimit();
 
+		$this->previousDate = '';
+
 		return $seminarBag;
 	}
 
@@ -606,7 +611,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
 			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
-			$this->setMarkerContent('date', $this->seminar->getDate());
+
+			$currentDate = $this->seminar->getDate();
+			if (($currentDate === $this->previousDate)
+				&& $this->getConfValueBoolean('omitDateIfSameAsPrevious', 's_template_special')) {
+				$currentDate = '';
+			} else {
+				$this->previousDate = $currentDate;
+			}
+			$this->setMarkerContent('date', $currentDate);
+
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlaceShort());
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
