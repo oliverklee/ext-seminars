@@ -229,8 +229,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
 			$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
 		}
-		// We display the search box even if the list view does not contain any elements.
-		$result .= $this->pi_list_searchBox();
+		// Show the search box (if not deactivated in the configuration).
+		if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
+			// The search box is shown even if the list is empty.
+			$result .= $this->pi_list_searchBox();
+		}
 
 		return $result;
 	}

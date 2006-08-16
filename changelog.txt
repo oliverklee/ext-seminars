@@ -1,4 +1,5 @@
 0.4.6
+- feature: Add configuration: hide the search box in list view (#2014)
 - feature: Add configuration: hide date in list view if it is the same as the previous event's date (#221)
 - feature: add accreditation number to the registration page (#220)
 
