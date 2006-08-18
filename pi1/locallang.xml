@@ -39,6 +39,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7">events with the deadline in the future</label>
 			<label index="seminars.pi_flexform.hideFields">Hide fields in detailed view (comma-separated):</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
+			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
@@ -129,6 +130,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7">Veranstaltungen mit Anmeldeschluss in der Zukunft</label>
 			<label index="seminars.pi_flexform.hideFields">Versteckte Felder in Detailansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Suchformular in der Listenansicht verstecken:</label>
+			<label index="seminars.pi_flexform.hidePageBrowser">Page-Browser in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Abgesagte Veranstaltungen in der Listenansicht nicht anzeigen:</label>
 			<label index="seminars.pi_flexform.hideColumns">Versteckte Felder in Listenansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">&quot;Preis&quot; als Überschrift für den Standardpreis in der Listenansicht benutzen:</label>
@@ -406,6 +408,7 @@
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
+			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -625,6 +628,7 @@
 			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
+			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

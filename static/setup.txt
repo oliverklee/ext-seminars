@@ -92,6 +92,9 @@ plugin.tx_seminars_pi1 {
 	# whether the search form should be hidden in list view
 	hideSearchForm = 0
 
+	# whether the page browser should be hidden in list view
+	hidePageBrowser = 0
+
 	# whether canceled events should be hidden or not
 	hideCanceledEvents = 0
 	hideColumns = accreditation_number,credit_points,time,place,price_special,speakers

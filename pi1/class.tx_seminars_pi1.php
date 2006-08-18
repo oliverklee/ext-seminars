@@ -578,7 +578,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createListFooter() {
 		$result = $this->substituteMarkerArrayCached('LIST_FOOTER');
-		$result .= $this->pi_list_browseresults();
+
+		// Show the page browser (if not deactivated in the configuration).
+		if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
+			$result .= $this->pi_list_browseresults();
+		}
 
 		return $result;
 	}
