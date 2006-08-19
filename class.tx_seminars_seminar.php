@@ -1354,11 +1354,12 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checkes whether it is possible at all to register for this seminar,
+	 * Checks whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
 	 *     has not been canceled,
+	 *     has a date set,
 	 *     has not begun yet,
-	 *     registration deadline is not over yet,
+	 *     the registration deadline is not over yet,
 	 *     and there are still vacancies.
 	 *
 	 * @return	boolean		true if registration is possible, false otherwise.
@@ -1368,14 +1369,16 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function canSomebodyRegister() {
 		return $this->needsRegistration() &&
 			!$this->isCanceled() &&
+			$this->hasDate() &&
 			!$this->isRegistrationDeadlineOver() &&
 			$this->hasVacancies();
 	}
 
 	/**
-	 * Checkes whether it is possible at all to register for this seminar,
+	 * Checks whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
 	 *     has not been canceled,
+	 *     has a date set,
 	 *     has not begun yet,
 	 *     the registration deadline is not over yet
 	 *     and there are still vacancies,
@@ -1392,6 +1395,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$message = $this->pi_getLL('message_noRegistrationNecessary');
 		} elseif ($this->isCanceled()) {
 			$message = $this->pi_getLL('message_seminarCancelled');
+		} elseif (!$this->hasDate()) {
+			$message = $this->pi_getLL('message_noDate');
 		} elseif ($this->isRegistrationDeadlineOver()) {
 			$message = $this->pi_getLL('message_seminarRegistrationIsClosed');
 		} elseif ($this->isFull()) {
