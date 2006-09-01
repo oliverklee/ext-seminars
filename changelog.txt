@@ -1,4 +1,5 @@
 0.4.6
+- Documentation: Documented the attendance record (#1993)
 - Feature: Add event types to the event records (#3605)
 - Fix: Remove functionless cancel button (#225)
 - Fix: Error message in front end (#248)
