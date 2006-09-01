@@ -283,9 +283,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Read the list view settings from the TS setup and write them to the list view configuration.
-		$lConf = $this->conf['listView.'];
-		foreach($lConf as $key => $value) {
-			$this->internal[$key] = $value;
+		$lConf = (isset($this->conf['listView.'])) ? $this->conf['listView.'] : array();
+		if (!empty($lConf)) {
+			foreach($lConf as $key => $value) {
+				$this->internal[$key] = $value;
+			}
 		}
 
 		// Overwrite the default sort order with values given by the browser.
