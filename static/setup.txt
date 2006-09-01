@@ -10,7 +10,7 @@ plugin.tx_seminars {
 	hideFieldsInThankYouMail = credit_points
 	generalPriceInMail =
 	hideFieldsInNotificationMail =
-	showSeminarFieldsInNotificationMail = title,uid,date,place,price_regular,price_special,attendees,vacancies,enough_attendees,is_full
+	showSeminarFieldsInNotificationMail = title,uid,event_type,date,place,price_regular,price_special,attendees,vacancies,enough_attendees,is_full
 	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile,date_of_birth
 	showAttendanceFieldsInNotificationMail = interests,expectations,background_knowledge,known_from,notes
 	sendAdditionalNotificationEmails = 1
@@ -49,6 +49,7 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_headertitle =
 	class_headeruid =
+	class_headerevent_type =
 	class_headeraccreditation_number =
 	class_headercredit_points =
 	class_headerspeakers =
@@ -68,6 +69,7 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_listtitle = title
 	class_listuid = uid
+	class_listevent_type = 
 	class_listaccreditation_number =
 	class_listcredit_points =
 	class_listspeakers =
@@ -97,7 +99,7 @@ plugin.tx_seminars_pi1 {
 
 	# whether canceled events should be hidden or not
 	hideCanceledEvents = 0
-	hideColumns = accreditation_number,credit_points,time,place,price_special,speakers
+	hideColumns = event_type,accreditation_number,credit_points,time,place,price_special,speakers
 	hideFields = credit_points
 
 	generalPriceInList = 0

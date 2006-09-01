@@ -302,7 +302,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['maxPages'] = t3lib_div::intInRange($lConf['maxPages'], 0, 1000, 2);
 
 		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
-		$this->internal['orderByList'] = 'title,uid,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
+		$this->internal['orderByList'] = 'title,uid,event_type,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
 		$pidList = $this->pi_getPidList($this->getConfValueString('pidList'), $this->getConfValueInteger('recursive'));
 		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')'
@@ -373,7 +373,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// This sets the title of the page for use in indexed search results:
 			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
 
-			$this->setMarkerContent('type', $this->seminar->getType());
+			$this->setMarkerContent('event_type', $this->seminar->getEventType());
 			$this->setMarkerContent('title', $this->seminar->getTitle());
 			$this->setMarkerContent('uid', $this->seminar->getUid());
 
@@ -553,6 +553,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createListHeader() {
 		$this->setMarkerContent('header_title', $this->getFieldHeader_sortLink('title'));
 		$this->setMarkerContent('header_uid', $this->getFieldHeader_sortLink('uid'));
+		$this->setMarkerContent('header_event_type', $this->getFieldHeader_sortLink('event_type'));
 		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader_sortLink('accreditation_number'));
 		$this->setMarkerContent('header_credit_points', $this->getFieldHeader_sortLink('credit_points'));
 		$this->setMarkerContent('header_speakers', $this->getFieldHeader('speakers'));
@@ -617,6 +618,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('title_link', $this->seminar->getLinkedTitle($this));
 			$this->setMarkerContent('uid', $this->seminar->getUid($this));
+			$this->setMarkerContent('event_type', $this->seminar->getEventType());
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
 			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
@@ -800,8 +802,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createRegistrationHeading($errorMessage) {
 		$this->setMarkerContent('registration', $this->pi_getLL('label_registration'));
+		$this->setMarkerContent('event_type',	$this->seminar->getEventType());
 		$this->setMarkerContent('title',        ($this->seminar) ? $this->seminar->getTitleAndDate() : '');
 		$this->setMarkerContent('uid',          ($this->seminar) ? $this->seminar->getUid() : '');
+
 		if ($this->seminar && $this->seminar->hasAccreditationNumber()) {
 			$this->setMarkerContent('accreditation_number', ($this->seminar) ? $this->seminar->getAccreditationNumber() : '');
 		} else {

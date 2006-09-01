@@ -388,7 +388,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->readSubpartsToHide($this->getConfValueString('hideFieldsInThankYouMail'), 'field_wrapper');
 
 		$this->setMarkerContent('hello', sprintf($this->pi_getLL('email_confirmationHello'), $this->getUserName()));
-		$this->setMarkerContent('type', $this->seminar->getType());
+		$this->setMarkerContent('event_type', $this->seminar->getEventType());
 		$this->setMarkerContent('title', $this->seminar->getTitle());
 		$this->setMarkerContent('uid', $this->seminar->getUid());
 

@@ -72,6 +72,18 @@ $TCA['tx_seminars_seminars'] = Array (
 				'rows' => '5',
 			)
 		),
+		'event_type' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.event_type',
+			'config' => Array (
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_event_type',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+			)
+		),
 		'accreditation_number' => Array (
 			'exclude' => '1',
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.accreditation_number',
@@ -318,7 +330,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], accreditation_number, credit_points, begin_date, end_date, deadline_registration, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
+		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'starttime, endtime')
@@ -799,6 +811,30 @@ $TCA['tx_seminars_payment_methods'] = Array (
 	),
 	'types' => Array (
 		'0' => Array('showitem' => 'title;;;;2-2-2, description')
+	),
+	'palettes' => Array (
+		'1' => Array('showitem' => '')
+	)
+);
+
+$TCA['tx_seminars_event_type'] = Array (
+	'ctrl' => $TCA['tx_seminars_event_type']['ctrl'],
+	'interface' => Array (
+		'showRecordFieldList' => 'title'
+	),
+	'columns' => Array (
+		'title' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_event_type.title',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'required,trim',
+			)
+		),
+	),
+	'types' => Array (
+		'0' => Array('showitem' => 'title;;;;2-2-2')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')

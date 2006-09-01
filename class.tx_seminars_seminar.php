@@ -146,28 +146,6 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the event type (seminar, workshop, lecture ...).
-	 *
-	 * @return	string	the seminar type (may be empty)
-	 *
-	 * @access	public
-	 */
-	function getType() {
-		return $this->getConfValueString('eventType');
-	}
-
-	/**
-	 * Checks whether the seminar has an event type set
-	 *
-	 * @return	boolean		true if we have a type, false otherwise.
-	 *
-	 * @access	public
-	 */
-	function hasType() {
-		return ($this->getType() !== '');
-	}
-
-	/**
 	 * Gets our title.
 	 *
 	 * @return	string	our seminar title (or '' if there is an error)
@@ -805,6 +783,57 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks whether this seminar has an event type set.
+	 *
+	 * @return	boolean		true if the seminar has an event type set, false if not
+	 *
+	 * @access	public
+	 */
+	function hasEventType() {
+		return $this->hasRecordPropertyInteger('event_type');
+	}
+
+	/**
+	 * Returns the event type as a string (e.g. "Workshop" or "Lecture").
+	 * If the seminar has a event type selected, that one is returned. Otherwise
+	 * the global event type from the TS setup is returned.
+	 *
+	 * @return	string		the type of this event
+	 *
+	 * @access	public
+	 */
+	function getEventType() {
+		$result = '';
+
+		// Check whether this event has an event type set.
+		if ($this->hasEventType()) {
+			$eventTypeUid = $this->getRecordPropertyInteger('event_type');
+
+			// Get the title of this event type.
+			$dbResultEventType = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'title',
+				$this->tableEventType,
+				'uid='.$eventTypeUid
+					.t3lib_pageSelect::enableFields($this->tableEventType),
+				'',
+				'',
+				'1'
+			);
+			if ($dbResultEventType && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultEventType)) {
+				$eventTypeRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultEventType);
+				$result = $eventTypeRow['title'];
+			}
+		}
+
+		// Check whether an event type could be set, otherwise use the default name from TS setup.
+		if (empty($result)) {
+			$result = $this->getConfValueString('eventType');
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Gets the number of attendances for this seminar
 	 * (currently the paid attendances as well as the unpaid ones)
 	 *
@@ -1192,8 +1221,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				case 'titleanddate':
 					$value = $this->getTitleAndDate('-');
 					break;
-				case 'type':
-					$value = $this->getType();
+				case 'event_type':
+					$value = $this->getEventType();
 					break;
 				case 'vacancies':
 					$value = $this->getVacancies();

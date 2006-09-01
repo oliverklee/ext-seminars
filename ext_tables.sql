@@ -68,6 +68,7 @@ CREATE TABLE tx_seminars_seminars (
 	price_regular int(11) unsigned DEFAULT '0' NOT NULL,
 	price_special int(11) unsigned DEFAULT '0' NOT NULL,
 	payment_methods tinytext NOT NULL,
+	event_type int(11) unsigned DEFAULT '0' NOT NULL,
 	organizers tinytext NOT NULL,
 	needs_registration tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
@@ -211,6 +212,23 @@ CREATE TABLE tx_seminars_payment_methods (
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	title tinytext NOT NULL,
 	description text NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
+
+#
+# Table structure for table 'tx_seminars_event_type'
+#
+CREATE TABLE tx_seminars_event_type (
+	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	pid int(11) unsigned DEFAULT '0' NOT NULL,
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	title tinytext NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)

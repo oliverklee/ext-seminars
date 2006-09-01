@@ -1,4 +1,5 @@
 0.4.6
+- Feature: Add event types to the event records (#3605)
 - Fix: Remove functionless cancel button (#225)
 - Fix: Error message in front end (#248)
 - Fix: Events without dates are considered to have a registration deadline that is over. (#3556)
