@@ -783,7 +783,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		$result = $this->createRegistrationHeading($errorMessage);
-		$result .= $registrationForm;
+		$result .= preg_replace('/<input [^\/]*type="submit" name="tx_frontendformslib\[submittype\]\[cancel\]"[^\/]*\/>/', '', $registrationForm);
 		$result .= $registationThankyou;
 
 		return $result;
