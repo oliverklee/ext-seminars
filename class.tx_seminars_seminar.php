@@ -394,6 +394,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 	/**
 	 * Checks whether the seminar has a time set (begin time != 00:00)
+	 * If the event has no date/time set the result will be false.
 	 *
 	 * @return	boolean		true if we have a begin time, false otherwise
 	 *
@@ -402,7 +403,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function hasTime() {
 		$beginTime = strftime('%H:%M', $this->getRecordPropertyInteger('begin_date'));
 
-		return ($beginTime !== '00:00');
+		return ($this->hasDate() && ($beginTime !== '00:00'));
 	}
 
 	/**

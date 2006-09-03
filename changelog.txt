@@ -1,4 +1,5 @@
 0.4.6
+- Fix: Events with no date/time set displayed wrong begin time in FE (#2431)
 - Documentation: Documented the attendance record (#1993)
 - Feature: Add event types to the event records (#3605)
 - Fix: Remove functionless cancel button (#225)
