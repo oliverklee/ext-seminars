@@ -43,20 +43,21 @@ Version 0.5.0 - "Dogfood, part 2"
 
 Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 -------------------------------------------------------------------------
+- opening links in a new window doesn't work as the "_blank" is added without a space
 - make BE form labels more intuitive
 - remove the old sr_feuser_register template
 - remove all university specific stuff and move it to a separate extension (add on to main extension) [from dev-meeting 05/12]
 - improve the values of <eval> in the flexforms and the BE forms
-- put the template helper, object DB etc. into a separate extension that can also be used by the following extensions: contactslist, dayscountdown, automaticexchangerates
-- document how to use the translation tool and how translaters can help us
+- put the template helper, object DB etc. into a separate extension (oelib)
+- document how translaters can help us
 - check that before every sql_fetch_assoc, there is an sql_num_rows to ensure that we have at least one row to operate on
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
 - simulate transactions when booking a seminar in order to avoid overbooking when two people simultaneously try to register
 - factor out the statistics update into a common function and make it more efficient
 - after a seminar or an attendance record has been edited, added or deleted in the back end, automatically update the statistics
-- Stop users from deleting their account if still registered to an event [from dev-meeting 05/12]
+- investigate on what happens if a FE user account is deleted
+- stop users from deleting their account if still registered to an event [from dev-meeting 05/12]
 - handle deleted (and "marked as deleted") user accounts and seminars graciously
-- feature: find and display double registrations
 - feature: avoid double registrations when entering registrations manually
 - automatically update record title if an attendance has been entered or edited in the back end
 - automatically update attendances title if a FE user has been entered or edited in the back end
@@ -89,19 +90,16 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - tx_seminars_objectfromdb::commitToDb() should check for existence of a record before deciding whether to update or insert it
 - prevent tx_seminars_registration::tx_seminars_registration and tx_seminars_registrationmanager::canCreateRegistration from accessing uninitialized array elements
 - check for accesses to uninitialized array elements
-- investigate on what happens if a FE user account is deleted
 - check whether umlauts in sender and recipient names are handled correctly
 - only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
 - use julle_encmailheaders for encoding e-mail headers
 - change all occurances of header(string string) to header (string string, bool replace, int http_response_code)
-- *seminars without a date should automatically have no times set
 - change all tautology '1's to '1=1' in DB queries to make this extension work with PostgreSQL
 - add meta information and constraints (primaray key, foreign key, not null, etc.) to SQL file
 - move the mobile phone number into its own extension
 - have real m:m relations instead of the crappy "1,2,5" format
 - provide an "update" function (like in tt_news) that updates to the real m:m tables
 - make our DB scheme conform to 3NF, BCNF, 4NF or even 5NF and document this
-- store redundant data (e.g. the number of participants) in the cache instead of in the seminar records
 - add slashes as a first character for the CSS path
 - test with PHP 5 and make sure that it works
 - add automated tests using T3unit (requires PHP5)
@@ -195,6 +193,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 Version 0.8.0 - "Make it for everybody": accessibility
 ------------------------------------------------------
 - clean up code from pibase (search box, results browser)
+- take tx_realty's result browser, move it to oelib and use it
 - remove layout tables from the search box
 - add labels to forms
 - add summary for the table element in the list view
@@ -205,7 +204,6 @@ Version 0.8.0 - "Make it for everybody": accessibility
 - check for accessibility according to WAI AAA
 - check for accessibility according to Sec. 508
 - add titles for links
-- add a table summary to the list view
 - re-check everything on the FE and BE for XHTML 1.0 strict validity
 - investigate XHTML 1.1
 - add scope="col" to th elements in the list view
@@ -277,6 +275,7 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - investigate whether we can set the sorting order etc. via flexforms
 - provide nice checkboxes for hiding/showing columns, fields, stuff in mails etc. instead of those pesky comma-separated strings
 - add a "notes" field to the organizer records
+- configure default VIP users 
 
 
 Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
