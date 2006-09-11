@@ -275,7 +275,8 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - investigate whether we can set the sorting order etc. via flexforms
 - provide nice checkboxes for hiding/showing columns, fields, stuff in mails etc. instead of those pesky comma-separated strings
 - add a "notes" field to the organizer records
-- configure default VIP users 
+- configure default VIP users
+- for event sites, have a field "location name" (in addition to the record title) that is part of the address
 
 
 Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
@@ -344,6 +345,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - make the "cancel" button on the registration page either do something useful or remove it
 - the back link in the details view (linked from "my events") doesn't link back to "my events"
 - the "cancel" button on the registration page has no function
+- display "free" as price instead of "0 EUR" if the event is for free
 
 
 Version 1.0.0 - "Getting real new features"
