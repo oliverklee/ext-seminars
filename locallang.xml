@@ -61,6 +61,49 @@ thank you for registering for this event:</label>
 someone just has registered for an event:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="label_uid">Nr</label>
+			<label index="label_accreditation_number">Tilmeldings nr.</label>
+			<label index="label_credit_points">Kredit points</label>
+			<label index="label_date">Dato</label>
+			<label index="label_time">Tid</label>
+			<label index="label_place">Sted</label>
+			<label index="label_room">Rum</label>
+			<label index="label_seats">Pladser</label>
+			<label index="label_price_general">Pris</label>
+			<label index="label_price_regular">Pris</label>
+			<label index="label_price_special">Speciel pris</label>
+			<label index="label_paymentmethods">Betalingsmetoder</label>
+			<label index="label_url">Mere information</label>
+			<label index="label_seminardata">Arrangements info</label>
+			<label index="label_feuserdata">Konto data</label>
+			<label index="label_attendancedata">info p&amp;#229; tilmeldingsformen</label>
+			<label index="message_notLoggedIn_formal">Venligst log in f&amp;#248;rst.</label>
+			<label index="message_notLoggedIn_informal">Venligst log in f&amp;#248;rst.</label>
+			<label index="message_alreadyRegistered_formal">De er allerede tilmeldt dette arrangement.</label>
+			<label index="message_alreadyRegistered_informal">Du er allerede tilmeldt dette arrangement.</label>
+			<label index="message_wrongSeminarNumber_formal">Der er ikke noget arrangement med dette nr. Hvis du f&amp;#229;r denne fejl ved at f&amp;#248;lge et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
+			<label index="message_wrongSeminarNumber_informal">Der ikke noget arrangement med dette nr.. Hvis du f&amp;#229;r denne fejl ved at f&amp;#248;lge et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
+			<label index="message_noRegistrationNecessary">ingen registrering er n&amp;#248;dvendig til dette arrangement</label>
+			<label index="message_seminarCancelled">Desv&amp;#230;rre er dette arrangement blevet aflyst</label>
+			<label index="message_seminarRegistrationIsClosed">Desv&amp;#230;rre er tilmeldingsfristen til dette arrangement overskredet</label>
+			<label index="message_noVacancies">Desv&amp;#230;rre, der er ikke flere pladser</label>
+			<label index="message_invalidNumberOfSeats_formal">Desv&amp;#230;rre kan dette antal ikke tilmeldes. Venligst registrer max %s pladser.</label>
+			<label index="message_invalidNumberOfSeats_informal">Desv&amp;#230;rre kan dette antal ikke tilmeldes. Venligst registrer max %s pladser.</label>
+			<label index="message_willBeAnnounced">Vil blive annonceret</label>
+			<label index="message_enough">&amp;#197;ben</label>
+			<label index="message_accessDenied_formal">Desv&amp;#230;rre har du ikke adgang til denne del af sitet.</label>
+			<label index="message_accessDenied_informal">Desv&amp;#230;rre har du ikke adgang til denne del af sitet.</label>
+			<label index="email_confirmationSubject">Tilmeldings bekr&amp;#230;ftelse</label>
+			<label index="email_confirmationHello_formal">Hej %s, tak for din tilmelding til dette arrangement:</label>
+			<label index="email_confirmationHello_informal">Hej %s, tak for din tilmelding til dette arrangement:</label>
+			<label index="email_confirmationPayment_formal">Hvis du ikke har betalt deltager gebyret endnu kan du g&amp;#248;re det p&amp;#229; f&amp;#248;lgende m&amp;#229;der:</label>
+			<label index="email_confirmationPayment_informal">Hvis du ikke har betalt deltager gebyret endnu kan du g&amp;#248;re det p&amp;#229; f&amp;#248;lgende m&amp;#229;der:</label>
+			<label index="email_additionalNotificationEnoughRegistrations">Dit arrangement har nu nok tilmeldinger til at blive afholdt.</label>
+			<label index="email_additionalNotificationEnoughRegistrationsSubject">Arrangementet har nok tilmeldinger: %d - %s</label>
+			<label index="email_additionalNotificationIsFull">Dit arrangement er fuldtegnet, der er ingen ledige pladser tilbage.</label>
+			<label index="email_additionalNotificationIsFullSubject">Arrangementet er fuldtegnet: %d - %s</label>
+			<label index="email_notificationSubject">Tilmeldings information</label>
+			<label index="email_notificationHello">Hej, der er lige kommet en tilmelding til arrangementet:</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="label_uid">Nummer</label>
@@ -231,6 +274,49 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="dk" type="array">
+			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_accreditation_number" type="integer">251981191</label>
+			<label index="label_credit_points" type="integer">267941596</label>
+			<label index="label_date" type="integer">71780721</label>
+			<label index="label_time" type="integer">175559919</label>
+			<label index="label_place" type="integer">129617664</label>
+			<label index="label_room" type="integer">214150095</label>
+			<label index="label_seats" type="integer">187299883</label>
+			<label index="label_price_general" type="integer">56627526</label>
+			<label index="label_price_regular" type="integer">81309183</label>
+			<label index="label_price_special" type="integer">35819210</label>
+			<label index="label_paymentmethods" type="integer">119552142</label>
+			<label index="label_url" type="integer">179332787</label>
+			<label index="label_seminardata" type="integer">202303574</label>
+			<label index="label_feuserdata" type="integer">104853840</label>
+			<label index="label_attendancedata" type="integer">196013839</label>
+			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
+			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
+			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
+			<label index="message_seminarCancelled" type="integer">154447024</label>
+			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
+			<label index="message_noVacancies" type="integer">139364947</label>
+			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
+			<label index="message_willBeAnnounced" type="integer">181096808</label>
+			<label index="message_enough" type="integer">249306686</label>
+			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied_informal" type="integer">68141847</label>
+			<label index="email_confirmationSubject" type="integer">69825439</label>
+			<label index="email_confirmationHello_formal" type="integer">88233580</label>
+			<label index="email_confirmationHello_informal" type="integer">88233580</label>
+			<label index="email_confirmationPayment_formal" type="integer">213064489</label>
+			<label index="email_confirmationPayment_informal" type="integer">213064489</label>
+			<label index="email_additionalNotificationEnoughRegistrations" type="integer">40292240</label>
+			<label index="email_additionalNotificationEnoughRegistrationsSubject" type="integer">106627365</label>
+			<label index="email_additionalNotificationIsFull" type="integer">125053794</label>
+			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
+			<label index="email_notificationSubject" type="integer">239440327</label>
+			<label index="email_notificationHello" type="integer">108930896</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="label_accreditation_number" type="integer">251981191</label>
@@ -419,6 +505,57 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_noDate">This event has no date yet.</label>
+			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
+			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
+			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_willBeAnnounced">will be announced</label>
+			<label index="message_enough">enough</label>
+			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
+			<label index="email_confirmationSubject">Registration confirmation</label>
+			<label index="email_confirmationHello_formal">Hello %s,
+
+thank you for registering for this event:</label>
+			<label index="email_confirmationHello_informal">Hello %s,
+
+thank you for registering for this event:</label>
+			<label index="email_confirmationPayment_formal">If you haven't paid the attendance fee yet, please pay it using these payment options:</label>
+			<label index="email_confirmationPayment_informal">If you haven't paid the attendance fee yet, please pay it using these payment options:</label>
+			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
+			<label index="email_additionalNotificationEnoughRegistrationsSubject">Event has enough registrations: %d - %s</label>
+			<label index="email_additionalNotificationIsFull">Your event is full, there are no empty seats left.</label>
+			<label index="email_additionalNotificationIsFullSubject">Event is full: %d - %s</label>
+			<label index="email_notificationSubject">Registration notification</label>
+			<label index="email_notificationHello">Hello,
+
+someone just has registered for an event:</label>
+		</languageKey>
+		<languageKey index="dk" type="array">
+			<label index="label_uid">Number</label>
+			<label index="label_accreditation_number">Accreditation number</label>
+			<label index="label_credit_points">Credit points</label>
+			<label index="label_date">Date</label>
+			<label index="label_time">Time</label>
+			<label index="label_place">Place</label>
+			<label index="label_room">Room</label>
+			<label index="label_seats">Seats</label>
+			<label index="label_price_general">Price</label>
+			<label index="label_price_regular">Regular price</label>
+			<label index="label_price_special">Special price</label>
+			<label index="label_paymentmethods">Available methods of payment</label>
+			<label index="label_url">More information</label>
+			<label index="label_seminardata">Seminar data</label>
+			<label index="label_feuserdata">Account data</label>
+			<label index="label_attendancedata">Data that has been entered on registration</label>
+			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn_informal">Please log in first.</label>
+			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
+			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
+			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
 			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>

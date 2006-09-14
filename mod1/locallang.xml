@@ -40,8 +40,23 @@
             <label index="label_isFull">Is full: </label>
             <label index="message_updatingAttendanceNumbers">Updating the attendance numbers</label>
         </languageKey>
-        <languageKey index="dk" type="array">
-        </languageKey>
+		<languageKey index="dk" type="array">
+			<label index="title">Arrangementer</label>
+			<label index="menu_updateStats">Opdater statestik</label>
+			<label index="menu_listSpeakers">Vis talere</label>
+			<label index="menu_listSites">Vis lokationer</label>
+			<label index="menu_listSeminars">Vis Arrangementer</label>
+			<label index="menu_seminarDetails">Vis info om arrangement</label>
+			<label index="title_getEmailAddressesForAttendances">F&amp;#229; email p&amp;#229; deltagere</label>
+			<label index="msg_noAttendancesFound">ingen endnu</label>
+			<label index="label_all">Alle: </label>
+			<label index="label_paid">Betalt: </label>
+			<label index="label_unpaid">Ikke betalt: </label>
+			<label index="label_vacancies">Ledige pladser: </label>
+			<label index="label_hasEnough">Har nok deltagere: </label>
+			<label index="label_isFull">Fuldtegnet: </label>
+			<label index="message_updatingAttendanceNumbers">Opdaterer deltagerantal</label>
+		</languageKey>
         <languageKey index="de" type="array">
             <label index="title">Seminare</label>
             <label index="menu_updateStats">Statistiken aktualisieren</label>
@@ -152,8 +167,23 @@
             <label index="label_isFull" type="integer">223606742</label>
             <label index="message_updatingAttendanceNumbers" type="integer">124308991</label>
         </languageKey>
-        <languageKey index="dk" type="array">
-        </languageKey>
+		<languageKey index="dk" type="array">
+			<label index="title" type="integer">146176001</label>
+			<label index="menu_updateStats" type="integer">175992558</label>
+			<label index="menu_listSpeakers" type="integer">107214947</label>
+			<label index="menu_listSites" type="integer">75019461</label>
+			<label index="menu_listSeminars" type="integer">244953847</label>
+			<label index="menu_seminarDetails" type="integer">145063384</label>
+			<label index="title_getEmailAddressesForAttendances" type="integer">259654871</label>
+			<label index="msg_noAttendancesFound" type="integer">252489978</label>
+			<label index="label_all" type="integer">227874010</label>
+			<label index="label_paid" type="integer">248191216</label>
+			<label index="label_unpaid" type="integer">216945004</label>
+			<label index="label_vacancies" type="integer">13617877</label>
+			<label index="label_hasEnough" type="integer">174881041</label>
+			<label index="label_isFull" type="integer">223606742</label>
+			<label index="message_updatingAttendanceNumbers" type="integer">124308991</label>
+		</languageKey>
         <languageKey index="de" type="array">
             <label index="title" type="integer">146176001</label>
             <label index="menu_updateStats" type="integer">175992558</label>

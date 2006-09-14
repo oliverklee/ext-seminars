@@ -17,6 +17,9 @@
 			<label index="mlang_labels_tablabel">Events</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="mlang_tabs_tab">Arrangementer</label>
+			<label index="mlang_labels_tabdescr">Dette modul g&amp;#248;r det muligt at administrere arrangementer, tilmeldinger, lokationer og talere.</label>
+			<label index="mlang_labels_tablabel">Arrangementer</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="mlang_tabs_tab">Veranstaltungen</label>
@@ -105,6 +108,9 @@
 			<label index="mlang_labels_tablabel" type="integer">146176001</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="mlang_tabs_tab" type="integer">142581619</label>
+			<label index="mlang_labels_tabdescr" type="integer">260990945</label>
+			<label index="mlang_labels_tablabel" type="integer">142581619</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="mlang_tabs_tab" type="integer">142581619</label>
@@ -186,4 +192,11 @@
 		<languageKey index="kr" type="array">
 		</languageKey>
 	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="dk" type="array">
+			<label index="mlang_tabs_tab">Events</label>
+			<label index="mlang_labels_tabdescr">This module allows you to manage events, registrations, event sites and speakers.</label>
+			<label index="mlang_labels_tablabel">Events</label>
+		</languageKey>
+	</orig_text>
 </T3locallang>

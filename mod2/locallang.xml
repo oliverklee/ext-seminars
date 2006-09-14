@@ -15,6 +15,10 @@
 			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="title">Arrangementer</label>
+			<label index="subModuleTitle_registrations">Tilmeldinger</label>
+			<label index="subModuleTitle_events">Arrangementer</label>
+			<label index="notYetImplementedSubModule">Dette sub-modul er ikke implementeret endnu.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="title">Veranstaltungen</label>
@@ -102,6 +106,10 @@
 			<label index="title" type="integer">146176001</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="title" type="integer">142581619</label>
+			<label index="subModuleTitle_registrations" type="integer">170423130</label>
+			<label index="subModuleTitle_events" type="integer">142581619</label>
+			<label index="notYetImplementedSubModule" type="integer">127965110</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -184,4 +192,12 @@
 		<languageKey index="kr" type="array">
 		</languageKey>
 	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="dk" type="array">
+			<label index="title">Events</label>
+			<label index="subModuleTitle_registrations">Registrations</label>
+			<label index="subModuleTitle_events">Events</label>
+			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
+		</languageKey>
+	</orig_text>
 </T3locallang>
