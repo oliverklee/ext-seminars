@@ -328,7 +328,6 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - Check if we can/should use TemplaVoila [from dev-meeting 05/12]
 - in the list view, add little arrows to the list head indicating the sort field and sort order
 - remove vertical spacing between the table rows
-- implement sorting for all columns in the list view
 - after registering for a seminar, provide a link back to the seminar details page
 - after logging in, jump back to the seminar details page
 - remove the 3D look from the table, set the table cell border spacing (or whatever it is) to 1px
@@ -350,6 +349,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 
 Version 1.0.0 - "Getting real new features"
 -------------------------------------------
+- feature: recurring events
 - make it configurable what to do when a participant signs up
   - send an e-mail to the organizer
   - send an e-mail to the participant
