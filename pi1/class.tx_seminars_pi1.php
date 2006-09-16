@@ -51,6 +51,37 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	var $registrationManager;
 
 	/**
+	 * list of field names (as keys) by which we can sort plus the
+	 * corresponding SQL sort criteria (as value)
+	 */
+	var $orderByList = array(
+		'title' => 'tx_seminars_seminars.title',
+		'uid' => 'tx_seminars_seminars.uid',
+		'event_type' => 'tx_seminars_seminars.event_type',
+		'accreditation_number' => 'tx_seminars_seminars.accreditation_number',
+		'credit_points' => 'tx_seminars_seminars.credit_points',
+		// This will sort by the speaker names or the alphabetically lowest
+		// speaker name (if there is more than one speaker).
+		'speakers' => '(SELECT MIN(tx_seminars_speakers.title)
+			FROM tx_seminars_seminars_speakers_mm, tx_seminars_speakers
+			WHERE tx_seminars_seminars_speakers_mm.uid_local=tx_seminars_seminars.uid
+				AND tx_seminars_seminars_speakers_mm.uid_foreign=tx_seminars_speakers.uid)',
+		'date' => 'tx_seminars_seminars.begin_date',
+		// 86400 seconds are one day, so this calculates us just the time of day.
+		'time' => 'tx_seminars_seminars.begin_date % 86400',
+		// This will sort by the place names or the alphabetically lowest
+		// place name (if there is more than one place).
+		'place' => '(SELECT MIN(tx_seminars_sites.title)
+			FROM tx_seminars_seminars_place_mm, tx_seminars_sites
+			WHERE tx_seminars_seminars_place_mm.uid_local=tx_seminars_seminars.uid
+				AND tx_seminars_seminars_place_mm.uid_foreign=tx_seminars_sites.uid)',
+		'price_regular' => 'tx_seminars_seminars.price_regular',
+		'price_special' => 'tx_seminars_seminars.price_special',
+		'organizers' => 'tx_seminars_seminars.organizers',
+		'vacancies' => 'tx_seminars_seminars.attendees_max-tx_seminars_seminars.attendees'
+	);
+
+	/**
 	 * Displays the seminar manager HTML.
 	 *
 	 * @param	string		default content string, ignore
@@ -302,7 +333,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['maxPages'] = t3lib_div::intInRange($lConf['maxPages'], 0, 1000, 2);
 
 		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
-		$this->internal['orderByList'] = 'title,uid,event_type,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
 		$pidList = $this->pi_getPidList($this->getConfValueString('pidList'), $this->getConfValueInteger('recursive'));
 		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')'
@@ -324,10 +354,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		$orderBy = '';
-		if ($this->internal['orderBy']) {
-			if (t3lib_div::inList($this->internal['orderByList'], $this->internal['orderBy'])) {
-				$orderBy = $this->tableSeminars.'.'.$this->internal['orderBy'].($this->internal['descFlag'] ? ' DESC' : '');
-			}
+		if (isset($this->internal['orderBy'])
+			&& isset($this->orderByList[$this->internal['orderBy']])) {
+			$orderBy = $this->orderByList[$this->internal['orderBy']]
+				.($this->internal['descFlag'] ? ' DESC' : '');
 		}
 
 		$limit = '';
@@ -551,18 +581,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createListHeader() {
-		$this->setMarkerContent('header_title', $this->getFieldHeader_sortLink('title'));
-		$this->setMarkerContent('header_uid', $this->getFieldHeader_sortLink('uid'));
-		$this->setMarkerContent('header_event_type', $this->getFieldHeader_sortLink('event_type'));
-		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader_sortLink('accreditation_number'));
-		$this->setMarkerContent('header_credit_points', $this->getFieldHeader_sortLink('credit_points'));
+		$this->setMarkerContent('header_title', $this->getFieldHeader('title'));
+		$this->setMarkerContent('header_uid', $this->getFieldHeader('uid'));
+		$this->setMarkerContent('header_event_type', $this->getFieldHeader('event_type'));
+		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader('accreditation_number'));
+		$this->setMarkerContent('header_credit_points', $this->getFieldHeader('credit_points'));
 		$this->setMarkerContent('header_speakers', $this->getFieldHeader('speakers'));
-		$this->setMarkerContent('header_date', $this->getFieldHeader_sortLink('date'));
+		$this->setMarkerContent('header_date', $this->getFieldHeader('date'));
 		$this->setMarkerContent('header_time', $this->getFieldHeader('time'));
 		$this->setMarkerContent('header_place', $this->getFieldHeader('place'));
-		$this->setMarkerContent('header_price_regular', $this->getFieldHeader_sortLink('price_regular'));
-		$this->setMarkerContent('header_price_special', $this->getFieldHeader_sortLink('price_special'));
-		$this->setMarkerContent('header_organizers', $this->getFieldHeader_sortLink('organizers'));
+		$this->setMarkerContent('header_price_regular', $this->getFieldHeader('price_regular'));
+		$this->setMarkerContent('header_price_special', $this->getFieldHeader('price_special'));
+		$this->setMarkerContent('header_organizers', $this->getFieldHeader('organizers'));
 		$this->setMarkerContent('header_vacancies', $this->getFieldHeader('vacancies'));
 		$this->setMarkerContent('header_registration', $this->getFieldHeader('registration'));
 		$this->setMarkerContent('header_list_registrations', $this->getFieldHeader('list_registrations'));
@@ -651,53 +681,35 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Gets the heading for a field type.
+	 * Gets the heading for a field type, automatically wrapped in a hyperlink
+	 * that sorts by that column if sorting by that column is available.
 	 *
 	 * @param	string		key of the field type for which the heading should be retrieved.
 	 *
-	 * @return	string		the heading
+	 * @return	string		the heading label (may be completely wrapped in a hyperlink for sorting)
 	 *
 	 * @access	protected
 	 */
-	function getFieldHeader($fN) {
+	function getFieldHeader($fieldName) {
 		$result = '';
 
-		switch($fN) {
-		case 'title':
-			$result = $this->pi_getLL('label_title', '<em>title</em>');
-			break;
-		case 'price_regular':
-			if ($this->getConfValueBoolean('generalPriceInList', 's_template_special')) {
-				$fN = 'price_general';
-			}
-			// fall-through is intended here
-		default:
-			$result = $this->pi_getLL('label_'.$fN, '['.$fN.']');
-			break;
+		$label = $result = $this->pi_getLL('label_'.$fieldName, '['.$fieldName.']');
+		if (($fieldName == 'price_regular')
+			&& $this->getConfValueBoolean('generalPriceInList', 's_template_special')) {
+			$label = $result = $this->pi_getLL('label_price_general');
+		}
+
+		// Can we sort by that field?
+		if (isset($this->orderByList[$fieldName])) {
+			$result = $this->pi_linkTP_keepPIvars(
+				$label,
+				array('sort' => $fieldName.':'.($this->internal['descFlag'] ? 0 : 1))
+			);
+		} else {
+			$result = $label;
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Gets the heading for a field type, wrapped in a hyperlink that sorts by that column.
-	 *
-	 * @param	string		key of the field type for which the heading should be retrieved.
-	 *
-	 * @return	string		the heading completely wrapped in a hyperlink
-	 *
-	 * @access	protected
-	 */
-	function getFieldHeader_sortLink($fN) {
-		$sortField = $fN;
-		switch($fN) {
-			case 'date':
-				$sortField = 'begin_date';
-				break;
-			default:
-				break;
-		}
-		return $this->pi_linkTP_keepPIvars($this->getFieldHeader($fN), array('sort' => $sortField.':'.($this->internal['descFlag'] ? 0 : 1)));
 	}
 
 	/**

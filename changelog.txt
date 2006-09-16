@@ -1,4 +1,5 @@
 0.4.6
+- Feature: In the list view, allow sorting by all columns (#223)
 - Feature: Provide a Danish localization (#243)
 - Fix: Events with no date/time set displayed wrong begin time in FE (#2431)
 - Documentation: Documented the attendance record (#1993)
