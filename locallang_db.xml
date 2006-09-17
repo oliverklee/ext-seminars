@@ -159,8 +159,8 @@
             <label index="tx_seminars_payment_methods">Methods of payment</label>
             <label index="tx_seminars_payment_methods.title">Title</label>
             <label index="tx_seminars_payment_methods.description">Detailed description for e-mails:</label>
-            <label index="tx_seminars_event_type">Event type</label>
-            <label index="tx_seminars_event_type.title">Title</label>
+            <label index="tx_seminars_event_types">Event types</label>
+            <label index="tx_seminars_event_types.title">Title</label>
             <label index="tt_content.list_type_pi1">Seminar Manager</label>
         </languageKey>
         <languageKey index="de" type="array">
@@ -241,8 +241,8 @@
             <label index="tx_seminars_payment_methods">Zahlungsarten</label>
             <label index="tx_seminars_payment_methods.title">Titel</label>
             <label index="tx_seminars_payment_methods.description">Detaillierte Beschreibung für E-Mails:</label>
-            <label index="tx_seminars_event_type">Veranstaltungsart</label>
-            <label index="tx_seminars_event_type.title">Titel</label>
+            <label index="tx_seminars_event_types">Veranstaltungsarten</label>
+            <label index="tx_seminars_event_types.title">Titel</label>
             <label index="tt_content.list_type_pi1">Seminar-Manager</label>
         </languageKey>
         <languageKey index="nl" type="array">
@@ -478,8 +478,8 @@
             <label index="tx_seminars_payment_methods" type="integer">175386290</label>
             <label index="tx_seminars_payment_methods.title" type="integer">192455458</label>
             <label index="tx_seminars_payment_methods.description" type="integer">189468887</label>
-            <label index="tx_seminars_event_type" type="integer">99114704</label>
-            <label index="tx_seminars_event_type.title" type="integer">192455458</label>
+			<label index="tx_seminars_event_types" type="integer">143373196</label>
+			<label index="tx_seminars_event_types.title" type="integer">192455458</label>
             <label index="tt_content.list_type_pi1" type="integer">144163361</label>
         </languageKey>
         <languageKey index="nl" type="array">
@@ -633,7 +633,7 @@
 			<label index="tx_seminars_payment_methods" type="integer">175386290</label>
 			<label index="tx_seminars_payment_methods.title" type="integer">192455458</label>
 			<label index="tx_seminars_payment_methods.description" type="integer">189468887</label>
-			<label index="tx_seminars_event_type.title" type="integer">192455458</label>
+			<label index="tx_seminars_event_types.title" type="integer">192455458</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 		</languageKey>
     </orig_hash>
@@ -719,7 +719,7 @@
 			<label index="tx_seminars_payment_methods">Methods of payment</label>
 			<label index="tx_seminars_payment_methods.title">Title</label>
 			<label index="tx_seminars_payment_methods.description">Detailed description for e-mails:</label>
-			<label index="tx_seminars_event_type.title">Title</label>
+			<label index="tx_seminars_event_types.title">Title</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
     </orig_text>

@@ -1,4 +1,5 @@
 0.4.6
+- Code cleanup and refactoring (#267)
 - Feature: In the list view, allow searching in more fields and in connected records (#223)
 - Feature: In the list view, allow sorting by all columns (#223)
 - Feature: Provide a Danish localization (#243)

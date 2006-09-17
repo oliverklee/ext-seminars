@@ -1078,9 +1078,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					// For event types, we have a single foreign key.
 					foreach ($this->searchFieldList['event_types'] as $field) {
 						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableEventType
-								.' WHERE ('.$this->tableEventType.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
-								.' AND '.$this->tableEventType.'.uid='.$this->tableSeminars.'.event_type)'
+							.'SELECT * FROM '.$this->tableEventTypes
+								.' WHERE ('.$this->tableEventTypes.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
+								.' AND '.$this->tableEventTypes.'.uid='.$this->tableSeminars.'.event_type)'
 								.$eventTypeMatcher
 						.')';
 					}

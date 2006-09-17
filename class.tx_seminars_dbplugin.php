@@ -54,7 +54,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tableOrganizers;
 	var $tableAttendances;
 	var $tablePaymentMethods;
-	var $tableEventType;
+	var $tableEventTypes;
 
 	/** The frontend user who currently is logged in. */
 	var $feuser = null;
@@ -139,7 +139,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableOrganizers     = $dbPrefix.'organizers';
 		$this->tableAttendances    = $dbPrefix.'attendances';
 		$this->tablePaymentMethods = $dbPrefix.'payment_methods';
-		$this->tableEventType      = $dbPrefix.'event_type';
+		$this->tableEventTypes     = $dbPrefix.'event_types';
 
 		$this->tableVipsMM         = $dbPrefix.'seminars_feusers_mm';
 		$this->tableSpeakersMM     = $dbPrefix.'seminars_speakers_mm';

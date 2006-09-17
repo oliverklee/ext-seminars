@@ -165,9 +165,9 @@ $TCA['tx_seminars_payment_methods'] = Array (
 	),
 );
 
-$TCA['tx_seminars_event_type'] = Array (
+$TCA['tx_seminars_event_types'] = Array (
 	'ctrl' => Array (
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_event_type',
+		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_event_types',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -175,7 +175,7 @@ $TCA['tx_seminars_event_type'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_event_type.gif',
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_event_types.gif',
 	),
 );
 
@@ -188,7 +188,7 @@ t3lib_extMgm::addToAllTCAtypes('fe_users','tx_seminars_phone_mobile;;;;1-1-1, tx
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_attendances');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_organizers');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_payment_methods');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_event_type');
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_event_types');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_seminars');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_sites');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_speakers');

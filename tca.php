@@ -78,7 +78,7 @@ $TCA['tx_seminars_seminars'] = Array (
 			'config' => Array (
 				'type' => 'group',
 				'internal_type' => 'db',
-				'allowed' => 'tx_seminars_event_type',
+				'allowed' => 'tx_seminars_event_types',
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
@@ -817,15 +817,15 @@ $TCA['tx_seminars_payment_methods'] = Array (
 	)
 );
 
-$TCA['tx_seminars_event_type'] = Array (
-	'ctrl' => $TCA['tx_seminars_event_type']['ctrl'],
+$TCA['tx_seminars_event_types'] = Array (
+	'ctrl' => $TCA['tx_seminars_event_types']['ctrl'],
 	'interface' => Array (
 		'showRecordFieldList' => 'title'
 	),
 	'columns' => Array (
 		'title' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_event_type.title',
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_event_types.title',
 			'config' => Array (
 				'type' => 'input',
 				'size' => '30',

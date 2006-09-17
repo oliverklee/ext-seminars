@@ -22,7 +22,7 @@ t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_payment_methods=1
 ');
 t3lib_extMgm::addUserTSConfig('
-	options.saveDocNew.tx_seminars_event_type=1
+	options.saveDocNew.tx_seminars_event_types=1
 ');
 
 

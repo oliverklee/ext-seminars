@@ -813,9 +813,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			// Get the title of this event type.
 			$dbResultEventType = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title',
-				$this->tableEventType,
+				$this->tableEventTypes,
 				'uid='.$eventTypeUid
-					.t3lib_pageSelect::enableFields($this->tableEventType),
+					.t3lib_pageSelect::enableFields($this->tableEventTypes),
 				'',
 				'',
 				'1'
