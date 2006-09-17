@@ -15,7 +15,6 @@ Version 0.5.0 - "Dogfood, part 2"
 - *investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
 - get a wiki
 - *document what all those *PID configuration variables are used for
-- *document the fields of the attendance record in the manual
 - *test whether all flexform fields work
 - *Create a back end module (/mod2).
   - *create the sub-modules (and the base for sub-module-switching)
@@ -31,14 +30,10 @@ Version 0.5.0 - "Dogfood, part 2"
   - *create a function in /mod2 to view the log (standard view, verbose view)
   - investigate if the sys_log table can be used to store the extension's log [from dev-meeting 05/12]
 - *create a new template for sr_feuser_register with CSS
-- *make it configurable whether to have the search box in the list view
-- *make it configurable whether to have the results browser in the list view
 - enter this extension into http://wiki.typo3.org/index.php/Calendar
 - Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
 - Add categorization of events [from dev-meeting 05/12]
 - increase the number of lines in the Source Page flexforms element
-- add support for different kinds of events (workshop, lecture, ...)
-- add more sites to the list of live examples
 
 
 Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
@@ -289,7 +284,6 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - option to hide seminar without vacancies in the list view
 - make it configurable which feuser fields are required when a user wants to register for a seminar (in addition to the fields required when creating an account)
 - make some fe_users data editable on the registration page
-- provide a patch for drop-down-lists in frontendformslib
 - show a drop-down list of seminars to select from on the registration page
 - test compatibility with indexed_search
 - ensure compatibility with indexed_search (if it doesn't work)
@@ -314,7 +308,6 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - find a way to use the salutation switcher for the form labels and improve the wording
 - add a localized "h" after the time
 - conduct FE usability tests
-- in the list view, allow ordering by the number of vacancies
 - online registration: only show the message "an e-mail has been sent" if sending the e-mail has been successful
 - thank-you page: show how many seats have been reserved
 - thank-you page: show the e-mail address to which the e-mail has been sent
@@ -341,9 +334,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - nicely style the buttons on the front end using borders and icons
 - shop city and ZIP code of the event sites in the list view
 - make it possible to have eg. an asterik after the price in the list view and single view
-- make the "cancel" button on the registration page either do something useful or remove it
 - the back link in the details view (linked from "my events") doesn't link back to "my events"
-- the "cancel" button on the registration page has no function
 - display "free" as price instead of "0 EUR" if the event is for free
 
 
@@ -471,8 +462,7 @@ Not triaged yet
 - add configuration: maximum number of seats that can be registered for at one time
 - feature: RSS or Atom feed for a list of seminars
 - export seminar data as iCal (in the FE detailed view)
-- Add function to search for location of an event [from dev-meeting 05/12]
-  - Split the address field to three single fields: address (street), zip, town [from dev-meeting 05/12]
+- Split the address field to three single fields: address (street), zip, town [from dev-meeting 05/12]
 - BE: Add export function for participants list (CSV) [from dev-meeting 05/12]
 - Move past events to an other sysfolder (see EXT:mjs_event) [from dev-meeting 05/12]
 - Add timeslot-functionality [from dev-meeting 05/12]
