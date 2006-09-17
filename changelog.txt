@@ -1,3 +1,5 @@
+0.4.7
+
 0.4.6 (released 2006-09-17)
 - Code cleanup and refactoring (#267, #268)
 - Feature: In the list view, allow searching in more fields and in connected records (#223)
