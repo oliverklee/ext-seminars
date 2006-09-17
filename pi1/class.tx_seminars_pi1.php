@@ -82,6 +82,30 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	);
 
 	/**
+	 * list of field names in which we can search, grouped by record type
+	 */
+	var $searchFieldList = array(
+		'seminars' => array(
+			'title',
+			'subtitle',
+			'description',
+			'accreditation_number'
+		),
+		'speakers' => array(
+			'title',
+			'organization',
+			'description'
+		),
+		'places' => array(
+			'title',
+			'address'
+		),
+		'event_types' => array(
+			'title'
+		),
+	);
+
+	/**
 	 * Displays the seminar manager HTML.
 	 *
 	 * @param	string		default content string, ignore
@@ -332,7 +356,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
 		$this->internal['maxPages'] = t3lib_div::intInRange($lConf['maxPages'], 0, 1000, 2);
 
-		$this->internal['searchFieldList'] = 'title,subtitle,description,accreditation_number';
+		$this->internal['orderByList'] = 'title,uid,event_type,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
 		$pidList = $this->pi_getPidList($this->getConfValueString('pidList'), $this->getConfValueInteger('recursive'));
 		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')'
@@ -365,8 +389,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$resultsAtATime = t3lib_div::intInRange($this->internal['results_at_a_time'], 1, 1000);
 		$limit = ($pointer * $resultsAtATime).','.$resultsAtATime;
 
-		if ($this->piVars['sword'] && $this->internal['searchFieldList']) {
-			$queryWhere .= $this->cObj->searchWhere($this->piVars['sword'],  $this->internal['searchFieldList'], $this->tableSeminars);
+		if (isset($this->piVars['sword'])
+			&& !empty($this->piVars['sword'])) {
+			$queryWhere .= $this->searchWhere($this->piVars['sword']);
 		}
 
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
@@ -978,6 +1003,116 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return;
+	}
+
+	/**
+	 * Generates a search WHERE clause based on the input search words
+	 * (AND operation - all search words must be found in record.)
+	 * The result will be in conjunctive normal form.
+	 *
+	 * Example: The $searchWords is "content management, system" (from an input
+	 * form) and the search field list is "bodytext,header" then the output
+	 * will be ' AND (bodytext LIKE "%content%" OR header LIKE "%content%")
+	 * AND (bodytext LIKE "%management%" OR header LIKE "%management%")
+	 * AND (bodytext LIKE "%system%" OR header LIKE "%system%")'
+	 *
+	 * @param	string		the search words, separated by spaces or commas
+	 *
+	 * @return	string		the WHERE clause (including the AND at the beginning)
+	 *
+	 * @access	protected
+	 */
+	function searchWhere($searchWords)	{
+		$result = '';
+
+		if (!empty($searchWords)) {
+			$keywords = split('[ ,]', $searchWords);
+
+			foreach ($keywords as $currentKeyword) {
+				$currentPreparedKeyword = $this->escapeAndTrimSearchWord(
+					$currentKeyword,
+					$this->tableSeminars
+				);
+
+				// Only search for words with a certain length.
+				if (strlen($currentPreparedKeyword) >= 2) {
+					$whereParts = array();
+
+					foreach ($this->searchFieldList['seminars'] as $field) {
+						$whereParts[] = $this->tableSeminars.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\'';
+					}
+
+					// For speakers, we have real m-n relations.
+					foreach ($this->searchFieldList['speakers'] as $field) {
+						$whereParts[] = 'EXISTS ('
+							.'SELECT * FROM '.$this->tableSpeakers.', '.$this->tableSpeakersMM
+								.' WHERE '.$this->tableSpeakers.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
+								.' AND '.$this->tableSpeakersMM.'.uid_local='.$this->tableSeminars.'.uid '
+								.'AND '.$this->tableSpeakersMM.'.uid_foreign='.$this->tableSpeakers.'.uid'
+						.')';
+					}
+
+					// For sites, we have real m-n relations.
+					foreach ($this->searchFieldList['places'] as $field) {
+						$whereParts[] = 'EXISTS ('
+							.'SELECT * FROM '.$this->tableSites.', '.$this->tableSitesMM
+								.' WHERE '.$this->tableSites.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
+								.' AND '.$this->tableSitesMM.'.uid_local='.$this->tableSeminars.'.uid '
+								.'AND '.$this->tableSitesMM.'.uid_foreign='.$this->tableSites.'.uid'
+						.')';
+					}
+
+					// Will the default event type match a search?
+					// NB: We ask the registration manager for its configuration
+					// as we need the configuration from plugin.tx_seminars
+					// (which the registration manager uses),
+					// not from plugin.tx_seminars_pi1 (which we use).
+					$eventTypeMatcher = '';
+					if (stristr(
+						$this->registrationManager->getConfValueString('eventType'),
+						$currentPreparedKeyword
+					) !== false) {
+						$eventTypeMatcher = ' OR '.$this->tableSeminars.'.event_type=0';
+					}
+
+					// For event types, we have a single foreign key.
+					foreach ($this->searchFieldList['event_types'] as $field) {
+						$whereParts[] = 'EXISTS ('
+							.'SELECT * FROM '.$this->tableEventType
+								.' WHERE ('.$this->tableEventType.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
+								.' AND '.$this->tableEventType.'.uid='.$this->tableSeminars.'.event_type)'
+								.$eventTypeMatcher
+						.')';
+					}
+
+					if (count($whereParts) > 0)	{
+						$result .= ' AND ('.implode(' OR ', $whereParts).')';
+					}
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Convenience function. SQL-escaped and trims a potential search word.
+	 *
+	 * @param	string		single search word (may be prefixed or postfixed with spaces)
+	 * @param	string		name of the SQL table in which the search word will be used
+	 *
+	 * @return	string		the trimmed and SQL-escaped $searchword
+	 *
+	 * @access	public
+	 */
+	function escapeAndTrimSearchWord($searchword, $tableName) {
+		return $GLOBALS['TYPO3_DB']->escapeStrForLike(
+			$GLOBALS['TYPO3_DB']->quoteStr(
+				trim($searchword),
+				$tableName
+			),
+			$tableName
+		);
 	}
 }
 
