@@ -1,4 +1,5 @@
 0.4.7
+- Fix: Default sort order by date doesn't work any more (#269)
 
 0.4.6 (released 2006-09-17)
 - Code cleanup and refactoring (#267, #268)
