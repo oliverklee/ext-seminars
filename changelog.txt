@@ -1,4 +1,5 @@
 0.4.7
+- Code cleanup and refactoring (#239)
 - Fix: Include some TS configurations in the static template (#284)
 - Fix: List view: date is split into two lines in IE (#275)
 - Fix: Default sort order by date doesn't work any more (#269)
