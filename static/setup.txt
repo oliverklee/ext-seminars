@@ -31,6 +31,13 @@ plugin.tx_seminars {
 
 	# If there are at least this many vancancies, "enough" is displayed instead of the exact number.
 	showVacanciesThreshold = 10
+
+
+	# The following variables don't have any default values provided.
+	# You need to set them yourself for this extension to work correctly.
+
+	# PID of the page (or system folder) where event registrations (attendances) will be stored
+	attendancesPID =
 }
 
 plugin.tx_seminars_pi1 {
@@ -69,7 +76,7 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_listtitle = title
 	class_listuid = uid
-	class_listevent_type = 
+	class_listevent_type =
 	class_listaccreditation_number =
 	class_listcredit_points =
 	class_listspeakers =
@@ -120,6 +127,28 @@ plugin.tx_seminars_pi1 {
 
 	# comma-separated list of FEuser fields to show in the list of registrations for an event
 	showFeUserFieldsInRegistrationsList = name
+
+
+	# The following variables don't have any default values provided.
+	# You need to set them yourself for this extension to work correctly.
+
+	# Base URL of your TYPO3 site (including the protocol and the trailing slash), e.g. http://www.mytypo3site.net/
+	baseURL =
+
+	# PID of the page that contains the login form
+	loginPID =
+
+	# PID of the page that contains the seminar list
+	listPID =
+
+	# PID of the page that contains the seminar registration plug-in
+	registerPID =
+
+	# PID of the page that contains the registrations list for participants
+	registrationsListPID =
+
+	# PID of the page that contains the registrations list for VIPs
+	registrationsVipListPID =
 }
 
 
