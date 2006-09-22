@@ -102,11 +102,6 @@
 		</languageKey>
 	</data>
 	<orig_hash type="array">
-		<languageKey index="default" type="array">
-			<label index="mlang_tabs_tab" type="integer">146176001</label>
-			<label index="mlang_labels_tabdescr" type="integer">117707712</label>
-			<label index="mlang_labels_tablabel" type="integer">146176001</label>
-		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="mlang_tabs_tab" type="integer">142581619</label>
 			<label index="mlang_labels_tabdescr" type="integer">260990945</label>
@@ -194,6 +189,11 @@
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="dk" type="array">
+			<label index="mlang_tabs_tab">Events</label>
+			<label index="mlang_labels_tabdescr">This module allows you to manage events, registrations, event sites and speakers.</label>
+			<label index="mlang_labels_tablabel">Events</label>
+		</languageKey>
+		<languageKey index="de" type="array">
 			<label index="mlang_tabs_tab">Events</label>
 			<label index="mlang_labels_tabdescr">This module allows you to manage events, registrations, event sites and speakers.</label>
 			<label index="mlang_labels_tablabel">Events</label>

@@ -638,8 +638,6 @@
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
-		<languageKey index="default" type="array">
-		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
 			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number</label>
