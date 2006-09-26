@@ -576,7 +576,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/**
 	 * Creates a seminar in $this->seminar.
-	 * $this->registrationManager must have been initialized before this method may be called.
+	 * If the seminar cannot be created, $this->seminar will be null, and
+	 * this function will return false.
+	 *
+	 * $this->registrationManager must have been initialized before this
+	 * method may be called.
 	 *
 	 * @param	int			a seminar UID
 	 *
@@ -592,6 +596,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 			$this->seminar =& new $seminarClassname($seminarUid);
 			$result = true;
+		} else {
+			$this->seminar = null;
 		}
 
 		return $result;
@@ -829,7 +835,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Creates the registration page title and (if applicable) any error messages.
+	 * Creates the registration page title and (if applicable) any error
+	 * messages. Data from the event will only be displayed if $this->seminar
+	 * is non-null.
 	 *
 	 * @param	string	error message to be displayed (may be empty if there is no error)
 	 *
@@ -839,7 +847,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createRegistrationHeading($errorMessage) {
 		$this->setMarkerContent('registration', $this->pi_getLL('label_registration'));
-		$this->setMarkerContent('event_type',	$this->seminar->getEventType());
+		$this->setMarkerContent('event_type',	($this->seminar) ? $this->seminar->getEventType() : '');
 		$this->setMarkerContent('title',        ($this->seminar) ? $this->seminar->getTitleAndDate() : '');
 		$this->setMarkerContent('uid',          ($this->seminar) ? $this->seminar->getUid() : '');
 

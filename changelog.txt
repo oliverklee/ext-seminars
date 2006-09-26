@@ -1,4 +1,5 @@
 0.4.7
+- Fix: Add check to registration form (#292)
 - Code cleanup and refactoring (#239)
 - Fix: Include some TS configurations in the static template (#284)
 - Fix: List view: date is split into two lines in IE (#275)
