@@ -132,9 +132,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
 		$this->registrationManager =& new $registrationManagerClassname();
 
+		// Let warnings from the registration manager bubble up to us.
+		$this->configurationCheck->setErrorMessage($this->registrationManager->checkConfiguration(true));
+
 		$result = '';
 
-		switch ($this->getConfValueString('what_to_display')) {
+		$whatToDisplay = $this->getConfValueString('what_to_display');
+		$this->setFlavor($whatToDisplay);
+
+		switch ($whatToDisplay) {
 			case 'seminar_registration':
 				$result = $this->createRegistrationPage();
 				break;
@@ -155,12 +161,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			default:
 				// Show the single view if a 'showUid' variable is set.
 				if ($this->piVars['showUid']) {
+					// Intentionally overwrite the previously set flavor.
+					$this->setFlavor('single_view');
 					$result = $this->createSingleView();
 				} else {
 					$result = $this->createListView();
 				}
 				break;
 		}
+
+		// Let's check the configuration and display any errors.
+		$result .= $this->checkConfiguration();
 
 		return $this->pi_wrapInBaseClass($result);
 	}
@@ -289,6 +300,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// The search box is shown even if the list is empty.
 			$result .= $this->pi_list_searchBox();
 		}
+
+		// Let warnings from the seminar and the seminar bag bubble up to us.
+		$this->configurationCheck->setErrorMessage($seminarBag->checkConfiguration(true));
 
 		return $result;
 	}
@@ -425,6 +439,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->readSubpartsToHide($this->getConfValueString('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
+			// Let warnings from the seminar bubble up to us.
+			$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
+
 			// This sets the title of the page for use in indexed search results:
 			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
 
@@ -785,6 +802,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->toggleEventFieldsOnRegistrationPage();
 
 		if ($this->createSeminar($this->piVars['seminar'])) {
+			// Let warnings from the seminar bubble up to us.
+			$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
+
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar);
 			} else {
@@ -909,6 +929,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($this->createSeminar($this->piVars['seminar'])) {
 			// Okay, at least the seminar UID is valid so we can show the seminar title and date.
 			$this->setMarkerContent('title', $this->seminar->getTitleAndDate());
+
+			// Let warnings from the seminar bubble up to us.
+			$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
+
 			if ($this->seminar->canViewRegistrationsList($this->getConfValueString('what_to_display'))) {
 				$isOkay = true;
 			} else {
@@ -973,6 +997,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
 			$this->setMarkerContent('message_no_registrations', $this->pi_getLL('message_noRegistrations'));
 		}
+
+		// Let warnings from the registration bag bubble up to us.
+		$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
 
 		return;
 	}

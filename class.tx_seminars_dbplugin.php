@@ -35,6 +35,7 @@
 
 require_once(PATH_t3lib.'class.t3lib_tstemplate.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configcheck.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_salutationswitcher.php');
 
 class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
@@ -58,6 +59,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 	/** The frontend user who currently is logged in. */
 	var $feuser = null;
+
+	/** The configuration check object that will check this object. */
+	var $configurationCheck;
 
 	/**
 	 * Dummy constructor: Does nothing.
@@ -118,6 +122,16 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			$this->pi_loadLL();
 
 			$this->setTableNames();
+
+			// unserialize the configuration array
+			$globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
+
+			if (!$globalConfiguration['disableConfigCheck']) {
+				$configurationCheckClassname = t3lib_div::makeInstanceClassName('tx_seminars_configcheck');
+				$this->configurationCheck =& new $configurationCheckClassname($this);
+			} else {
+				$this->configurationCheck = null;
+			}
 
 			$this->isInitialized = true;
 		}
@@ -209,7 +223,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @return	string		the trimmed value of the corresponding flexforms or TS setup entry (may be empty)
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function getConfValueString($fieldName, $sheet = 'sDEF', $isFileName = false) {
 		return trim($this->getConfValue($fieldName, $sheet, $isFileName));
@@ -226,7 +240,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @return	boolean		whether there is a non-empty value in the corresponding flexforms or TS setup entry
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function hasConfValueString($fieldName, $sheet = 'sDEF') {
 		return ($this->getConfValueString($fieldName, $sheet) != '');
@@ -243,7 +257,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @return	integer		the inval'ed value of the corresponding flexforms or TS setup entry
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function getConfValueInteger($fieldName, $sheet = 'sDEF') {
 		return intval($this->getConfValue($fieldName, $sheet));
@@ -260,7 +274,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @return	boolean		whether there is a non-zero value in the corresponding flexforms or TS setup entry
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function hasConfValueInteger($fieldName, $sheet = 'sDEF') {
 		return (boolean) $this->getConfValueInteger($fieldName, $sheet);
@@ -277,7 +291,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @return	boolean		the boolean value of the corresponding flexforms or TS setup entry
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function getConfValueBoolean($fieldName, $sheet = 'sDEF') {
 		return (boolean) $this->getConfValue($fieldName, $sheet);
@@ -321,6 +335,52 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		}
 
 		return ($this->isLoggedIn() ? intval($this->feuser['uid']) : 0);
+	}
+
+	/**
+	 * Sets the "flavor" of the object to check.
+	 *
+	 * @param	string		a short string identifying the "flavor" of the object to check (may be empty)
+	 *
+	 * @access	public
+	 */
+	function setFlavor($flavor) {
+		if ($this->configurationCheck) {
+			$this->configurationCheck->setFlavor($flavor);
+		}
+
+		return;
+	}
+
+	/**
+	 * Checks this object's configuration and returns a formatted error message
+	 * (if any). If there are several objects of this class, still only one
+	 * error message is created (in order to prevent duplicate messages).
+	 *
+	 * @param	boolean		whether to use the raw message instead of the wrapped message
+	 *
+	 * @return	string		a formatted error message (if there are errors) or an empty string
+	 *
+	 * @access	public
+	 */
+	function checkConfiguration($useRawMessage = false) {
+		static $hasDisplayedMessage = false;
+		$result = '';
+
+		if ($this->configurationCheck) {
+			$message = ($useRawMessage) ?
+				$this->configurationCheck->checkIt() :
+				$this->configurationCheck->checkItAndWrapIt();
+
+			// If we have a message, only return it if it is the first message
+			// for objects of this class.
+			if (!empty($message) && !$hasDisplayedMessage) {
+				$result = $message;
+				$hasDisplayedMessage = true;
+			}
+		}
+
+		return $result;
 	}
 }
 

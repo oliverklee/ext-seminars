@@ -228,6 +228,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$seminarBag->getNext();
 		}
 
+		$result .= $seminarBag->checkConfiguration();
+
 		$result .= '<h3>Titel der Anmeldungen werden aktualisiert</h3>';
 		$dbResultAttendances = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
@@ -309,6 +311,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$seminarBag->getNext();
 		}
 
+		$result .= $seminarBag->checkConfiguration();
 
 		return $result;
 	}
@@ -350,6 +353,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			// Display a message if no attendances are found for this seminar.
 			$result .= $LANG->getLL('msg_noAttendancesFound');
 		}
+
+		$result .= $registrationBag->checkConfiguration();
 
 		return $result;
 	}

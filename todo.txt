@@ -184,6 +184,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - in the locallang files, always use tabs for indenting
 - add comments and explanations to the HTML templates so that they are easier and safer to edit
 - in the reference, make sure all type information entries are valid TYPO3 data types
+- investigate whether to use an Observer pattern for the config check
 
 
 Version 0.8.0 - "Make it for everybody": accessibility

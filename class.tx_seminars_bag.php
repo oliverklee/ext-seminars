@@ -229,6 +229,11 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			$this->currentItem = null;
 		}
 
+		if ($this->currentItem) {
+			// Let warnings from the single records bubble up to us.
+			$this->configurationCheck->setErrorMessage($this->currentItem->checkConfiguration(true));
+		}
+
 		return;
 	}
 

@@ -2,28 +2,61 @@
 tt_content.list.20.seminars_pi1 =< plugin.tx_seminars_pi1
 
 plugin.tx_seminars {
+	# Do not touch this variable! This is needed for checking whether this static template has been included correctly.
+	isStaticTemplateLoaded = 1
+
 	# location of the template file
 	templateFile = EXT:seminars/seminars.tmpl
+
 	# whether to use formal or informal language
 	salutation = formal
 
+	# comma-separated list of section names that shouldn't be displayed in the thank-you e-mail to the user
 	hideFieldsInThankYouMail = credit_points
+
+	# whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
 	generalPriceInMail =
+
+	# Comma-separated list of section names from the registration that shouldn't be displayed in the notification e-mail to the organizers. These fields are the big blocks in that e-mail, and some are further divided.
 	hideFieldsInNotificationMail =
+
+	# comma-separated list of field names from seminars that should be mentioned in the notification e-mail to the organizers (in the "seminardata" section)
 	showSeminarFieldsInNotificationMail = title,uid,event_type,date,place,price_regular,price_special,attendees,vacancies,enough_attendees,is_full
+
+	# comma-separated list of field names from fe_users that should be mentioned in the notification e-mail to the organizers  (in the "feuserdata" section)
 	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile,date_of_birth
+
+	# comma-separated list of field names from attendances that should be mentioned in the notification e-mail to the organizers  (in the "attendancedata" section)
 	showAttendanceFieldsInNotificationMail = interests,expectations,background_knowledge,known_from,notes
+
+	# Whether to send the additional notification e-mails to the organizers or not. Additional notification mails are sent if for example an event gets full.
 	sendAdditionalNotificationEmails = 1
 
+	# the time format (in strftime format)
 	timeFormat = %H:%M
+
+	# the strftime format code to extract the year from a date string
 	dateFormatY = %Y
+
+	# the strftime format code to extract the month from a date string
 	dateFormatM = %m.
+
+	# the strftime format code to extract the day of month from a date string
 	dateFormatD = %d.
+
+	# the strftime format code for the full date
 	dateFormatYMD = %d.%m.%Y
-	dateFormatYM = %m.%Y
+
+	# the strftime format code for the month and day of month
 	dateFormatMD = %d.%m.
+
+	# whether date ranges should be shortened when possible
 	abbreviateDateRanges = 1
+
+	# ISO3 code of the currency to be used (not checked for validity yet)
 	currency = EUR
+
+	# The default event type. This value will be used for events that have no type assigned to them. This value is not checked as any string (even an empty string) is allowed.
 	eventType = Workshop
 
 	# whether to also show the time of the registration deadline
@@ -41,15 +74,21 @@ plugin.tx_seminars {
 }
 
 plugin.tx_seminars_pi1 {
+	# Do not touch this variable! This is needed for checking whether this static template has been included correctly.
+	isStaticTemplateLoaded = 1
+
 	# location of the HTML template file
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
+
 	# location of the CSS file (leave empty to include no CSS file)
 	cssFile = typo3conf/ext/seminars/pi1/seminars_pi1.css
+
 	# whether to use formal or informal language
 	salutation = formal
 
 	# CSS class around the table with the events list view (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_eventlist = listrow
+
 	# CSS class for the TR with the header row for the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_headerrow =
 
@@ -117,11 +156,13 @@ plugin.tx_seminars_pi1 {
 
 	# list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
 	eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
+
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
 	showRegistrationFields = interests,expectations,background_knowledge,known_from,notes
 
 	# whether detailed information for the speakers is shown in single view
 	showSpeakerDetails = 1
+
 	# whether detailed information for the location is shown in single view
 	showSiteDetails = 1
 
@@ -155,10 +196,13 @@ plugin.tx_seminars_pi1 {
 plugin.tx_seminars_pi1.listView {
 	# the default sort order in list view (a sort field name)
 	orderBy = date
+
 	# whether to order ascending (0) or descending (1)
 	descFlag = 0
+
 	# how many results to display per page
 	results_at_a_time = 20
+
 	# the number of neighboring pages to list in the page browser
 	maxPages = 5
 }
