@@ -5,6 +5,9 @@ plugin.tx_seminars {
 	# Do not touch this variable! This is needed for checking whether this static template has been included correctly.
 	isStaticTemplateLoaded = 1
 
+	# Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
+	enableRegistration = 1
+
 	# location of the template file
 	templateFile = EXT:seminars/seminars.tmpl
 
@@ -76,6 +79,9 @@ plugin.tx_seminars {
 plugin.tx_seminars_pi1 {
 	# Do not touch this variable! This is needed for checking whether this static template has been included correctly.
 	isStaticTemplateLoaded = 1
+
+	# Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
+	enableRegistration = 1
 
 	# location of the HTML template file
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl

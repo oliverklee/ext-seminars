@@ -100,14 +100,21 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'might get used.'
 		);
 		$this->checkNotificationMail();
-		$this->checkIfPositiveInteger(
-			'attendancesPID',
-			false,
-			'',
-			'This value specifies the page on which registrations will be '
-				.'stored. If this value is not set correctly, registration '
-				.'records will be dumped in the TYPO3 root page.'
-		);
+		if ($this->objectToCheck->getConfValueInteger('enableRegistration')) { 
+			$this->checkIfPositiveInteger(
+				'attendancesPID',
+				false,
+				'',
+				'This value specifies the page on which registrations will be '
+					.'stored. If this value is not set correctly, registration '
+					.'records will be dumped in the TYPO3 root page. If you '
+					.'ecplicitely do not wish to use the online registration '
+					.'feature, you can disable these checks by setting '
+					.'<strong>plugin.tx_seminars.enableRegistration</strong> and '
+					.'<strong>plugin.tx_seminars.enableRegistration_pi1</strong> '
+					.'to 0.'
+			);
+		}
 
 		return;
 	}

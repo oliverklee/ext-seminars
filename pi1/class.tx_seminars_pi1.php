@@ -326,16 +326,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->readSubpartsToHide($this->getConfValueString('hideColumns', 's_template_special'), 'LISTHEADER_WRAPPER');
 		$this->readSubpartsToHide($this->getConfValueString('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
 
-		// Hide the registration column if no user is logged in
-		// or if the "my events" list should be displayed.
-		if (!$this->isLoggedIn() || ($whatToDisplay == 'my_events')) {
+		// Hide the registration column if online registration is disabled,
+		// no user is logged in or the "my events" list should be displayed.
+		if (!$this->getConfValueBoolean('enableRegistration')
+			|| !$this->isLoggedIn()
+			|| ($whatToDisplay == 'my_events')) {
 			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
 		}
 
 		// Hide the column with the link to the list of registrations if
-		// no user is logged in or there is no page specified to link to.
-		if (!$this->isLoggedIn()
+		// online registration is disabled, no user is logged in or there is
+		// no page specified to link to.
+		if (!$this->getConfValueBoolean('enableRegistration')
+			|| !$this->isLoggedIn()
 			|| (($whatToDisplay == 'seminar_list')
 				&& !$this->hasConfValueInteger('registrationsListPID')
 				&& !$this->hasConfValueInteger('registrationsVipListPID'))
@@ -529,11 +533,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('deadline_registration', 'field_wrapper');
 			}
 
-			$this->setMarkerContent('registration',
-				$this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
-					$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) :
-					$this->registrationManager->canRegisterIfLoggedInMessage($this->seminar)
-			);
+			if ($this->getConfValueBoolean('enableRegistration')) {
+				$this->setMarkerContent('registration',
+					$this->registrationManager->canRegisterIfLoggedIn($this->seminar) ?
+						$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) :
+						$this->registrationManager->canRegisterIfLoggedInMessage($this->seminar)
+				);
+			} else {
+				$this->readSubpartsToHide('registration', 'field_wrapper');
+			}
 
 			if ($this->seminar->canViewRegistrationsList($this->getConfValueString('what_to_display'),
 				$this->getConfValueInteger('registrationsListPID'),
