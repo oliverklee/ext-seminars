@@ -185,6 +185,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - add comments and explanations to the HTML templates so that they are easier and safer to edit
 - in the reference, make sure all type information entries are valid TYPO3 data types
 - investigate whether to use an Observer pattern for the config check
+- have the templates end on .html and include some HTML wrapping so they are easier to edit
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
