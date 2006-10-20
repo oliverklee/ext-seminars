@@ -1,4 +1,5 @@
 0.4.7
+- Changed TCA to allow prices >=10000 (#319)
 - Fix: Add check to registration form (#292)
 - Code cleanup and refactoring (#239)
 - Fix: Include some TS configurations in the static template (#284)
