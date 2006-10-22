@@ -187,6 +187,8 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - investigate whether to use an Observer pattern for the config check
 - remove the LF at the end of all XML files as the TYPO3 style seems to be not to have it
 - registration bag: when iterating over registrations for the same seminare, don't create a seminar object for each registration but reuse the same object instead
+- Make TYPO3 4.x required.
+- Remove the workaround in pi1::escapeAndTrimSearchWord()
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
