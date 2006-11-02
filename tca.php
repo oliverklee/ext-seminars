@@ -328,9 +328,36 @@ $TCA['tx_seminars_seminars'] = Array (
 				'rows' => '5',
 			)
 		),
+		'object_type' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.object_type',
+			'config' => Array (
+			'type' => 'radio',
+				'default' => '0',
+				'items' => Array (
+					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.0', '0'),
+					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.1', '1'),
+					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2'),
+				)
+			)
+		),
+		'topic' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.topic',
+			'config' => Array (
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_seminars',
+				'size' => 1,
+				'minitems' => 1,
+				'maxitems' => 1,
+			)
+		)
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
+		'0' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, place, room, speakers, price_regular, price_special, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes'),
+		'1' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, price_regular, price_special, payment_methods, notes'),
+		'2' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, place, room, speakers, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'starttime, endtime')

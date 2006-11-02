@@ -79,6 +79,7 @@ $TCA['tx_seminars_seminars'] = Array (
 	'ctrl' => Array (
 		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars',
 		'label' => 'title',
+		'type' => 'object_type',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',

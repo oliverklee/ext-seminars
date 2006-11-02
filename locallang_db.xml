@@ -36,6 +36,11 @@
 			<label index="tx_seminars_seminars.is_full"></label>
 			<label index="tx_seminars_seminars.vips"></label>
 			<label index="tx_seminars_seminars.notes"></label>
+			<label index="tx_seminars_seminars.object_type"></label>
+			<label index="tx_seminars_seminars.object_type.I.0"></label>
+			<label index="tx_seminars_seminars.object_type.I.1"></label>
+			<label index="tx_seminars_seminars.object_type.I.2"></label>
+			<label index="tx_seminars_seminars.topic"></label>
 			<label index="tx_seminars_speakers"></label>
 			<label index="tx_seminars_speakers.title"></label>
 			<label index="tx_seminars_speakers.organization"></label>
@@ -116,6 +121,11 @@
 			<label index="tx_seminars_seminars.is_full">Is full</label>
 			<label index="tx_seminars_seminars.vips">Front end users that are allowed to see the list of registrations</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes</label>
+			<label index="tx_seminars_seminars.object_type">Type</label>
+			<label index="tx_seminars_seminars.object_type.I.0">Single event</label>
+			<label index="tx_seminars_seminars.object_type.I.1">Multiple event topic</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Multiple event date</label>
+			<label index="tx_seminars_seminars.topic">Topic</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name</label>
 			<label index="tx_seminars_speakers.organization">Organization</label>
@@ -198,6 +208,11 @@
 			<label index="tx_seminars_seminars.is_full">Ist voll</label>
 			<label index="tx_seminars_seminars.vips">Frontend-User, die sich die Liste der Anmeldungen ansehen dürfen</label>
 			<label index="tx_seminars_seminars.notes">Interne Notizen</label>
+			<label index="tx_seminars_seminars.object_type">Typ</label>
+			<label index="tx_seminars_seminars.object_type.I.0">Einzel-Veranstaltung</label>
+			<label index="tx_seminars_seminars.object_type.I.1">Veranstaltungsreihe: Thema</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Veranstaltungsreihe: Datum</label>
+			<label index="tx_seminars_seminars.topic">Thema</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name</label>
 			<label index="tx_seminars_speakers.organization">Organisation</label>
@@ -481,6 +496,11 @@
 			<label index="tx_seminars_event_types" type="integer">143373196</label>
 			<label index="tx_seminars_event_types.title" type="integer">192455458</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
+			<label index="tx_seminars_seminars.object_type" type="integer">169845367</label>
+			<label index="tx_seminars_seminars.object_type.I.0" type="integer">152387705</label>
+			<label index="tx_seminars_seminars.object_type.I.1" type="integer">250876687</label>
+			<label index="tx_seminars_seminars.object_type.I.2" type="integer">32855575</label>
+			<label index="tx_seminars_seminars.topic" type="integer">39326399</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -719,6 +739,11 @@
 			<label index="tx_seminars_event_types">Event types</label>
 			<label index="tx_seminars_event_types.title">Title</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
+			<label index="tx_seminars_seminars.object_type">Type</label>
+			<label index="tx_seminars_seminars.object_type.I.0">Single event</label>
+			<label index="tx_seminars_seminars.object_type.I.1">Multiple event topic</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Multiple event date</label>
+			<label index="tx_seminars_seminars.topic">Topic</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

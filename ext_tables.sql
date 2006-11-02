@@ -79,6 +79,8 @@ CREATE TABLE tx_seminars_seminars (
 	is_full tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	vips int(11) DEFAULT '0' NOT NULL,
 	notes text NOT NULL,
+	object_type int(11) DEFAULT '0' NOT NULL,
+	topic int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)

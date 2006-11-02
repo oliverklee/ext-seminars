@@ -49,6 +49,12 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	var $numberOfAttendancesPaid = 0;
 
 	/**
+	 * The related topic record as a reference to the object.
+	 * This will be null if we are not a date record.
+	 */
+	var $topic;
+
+	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
 	 * @param	integer		The UID of the seminar to retrieve from the DB.
@@ -66,9 +72,21 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$dbResult = $this->retrieveSeminar($seminarUid);
 		}
 
-	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
 			$this->getDataFromDbResult($GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult));
-	 	}
+		}
+
+		// For date records: Create a reference to the topic record.
+		if ($this->isEventDate()) {
+			$this->topic =& $this->retrieveTopic();
+			// To avoid infinite loops, null out $this->topic if it is a date record, too.
+			// Date records that fail the check isTopicOkay() are used as a complete event record.
+			if ($this->isTopicOkay() && $this->topic->isEventDate()) {
+				$this->topic = null;
+			}
+		} else {
+			$this->topic = null;
+		}
 
 		return;
 	}
@@ -153,7 +171,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getTitle() {
-		return $this->getRecordPropertyString('title');
+		return $this->getTopicString('title');
 	}
 
 	/**
@@ -184,7 +202,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getSubtitle() {
-		return $this->getRecordPropertyString('subtitle');
+		return $this->getTopicString('subtitle');
 	}
 
 	/**
@@ -195,7 +213,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasSubtitle() {
-		return $this->hasRecordPropertyString('subtitle');
+		return $this->hasTopicString('subtitle');
 	}
 
 	/**
@@ -208,7 +226,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getDescription(&$plugin) {
-		return $plugin->pi_RTEcssText($this->getRecordPropertyString('description'));
+		return $plugin->pi_RTEcssText($this->getTopicString('description'));
 	}
 
 	/**
@@ -219,7 +237,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasDescription() {
-		return $this->hasRecordPropertyString('description');
+		return $this->hasTopicString('description');
 	}
 
 	/**
@@ -271,7 +289,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getCreditPoints() {
-		return $this->hasCreditPoints() ? $this->getRecordPropertyInteger('credit_points') : '';
+		return $this->hasCreditPoints() ? $this->getTopicInteger('credit_points') : '';
 	}
 
 	/**
@@ -282,7 +300,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasCreditPoints() {
-		return $this->hasRecordPropertyInteger('credit_points');
+		return $this->hasTopicInteger('credit_points');
 	}
 
 	/**
@@ -633,7 +651,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPriceRegular($space = '&nbsp;') {
-		return $this->getRecordPropertyInteger('price_regular').$space.$this->getConfValueString('currency');
+		return $this->getTopicInteger('price_regular').$space.$this->getConfValueString('currency');
 	}
 
 	/**
@@ -644,7 +662,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasPriceRegular() {
-		return $this->hasRecordPropertyInteger('price_regular');
+		return $this->hasTopicInteger('price_regular');
 	}
 
 	/**
@@ -659,7 +677,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getPriceSpecial($space = '&nbsp;') {
 		return $this->hasPriceSpecial() ?
-			($this->getRecordPropertyInteger('price_special').$space.$this->getConfValueString('currency')) : '';
+			$this->getTopicInteger('price_special').$space.$this->getConfValueString('currency') : '';
 	}
 
 	/**
@@ -670,7 +688,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasPriceSpecial() {
-		return $this->hasRecordPropertyInteger('price_special');
+		return $this->hasTopicInteger('price_special');
 	}
 
 	/**
@@ -690,7 +708,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'payment_methods',
 			$this->tableSeminars,
-			'uid='.$this->getUid()
+			'uid='.$this->getTopicUid()
 				.t3lib_pageSelect::enableFields($this->tableSeminars),
 			'',
 			'',
@@ -739,7 +757,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'payment_methods',
 			$this->tableSeminars,
-			'uid='.$this->getUid()
+			'uid='.$this->getTopicUid()
 				.t3lib_pageSelect::enableFields($this->tableSeminars),
 			'',
 			'',
@@ -780,7 +798,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasPaymentMethods() {
-		return $this->hasRecordPropertyString('payment_methods');
+		return $this->hasTopicString('payment_methods');
 	}
 
 	/**
@@ -791,7 +809,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasEventType() {
-		return $this->hasRecordPropertyInteger('event_type');
+		return $this->hasTopicInteger('event_type');
 	}
 
 	/**
@@ -808,7 +826,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 		// Check whether this event has an event type set.
 		if ($this->hasEventType()) {
-			$eventTypeUid = $this->getRecordPropertyInteger('event_type');
+			$eventTypeUid = $this->getTopicInteger('event_type');
 
 			// Get the title of this event type.
 			$dbResultEventType = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -1228,6 +1246,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				case 'vacancies':
 					$value = $this->getVacancies();
 					break;
+				case 'title':
+					$value = $this->getTitle();
+					break;
 				default:
 					$value = $this->getRecordPropertyString($currentKey);
 					break;
@@ -1292,7 +1313,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function isUserVip($feUserUid) {
 		$result = false;
 
-	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$this->tableVipsMM,
 			'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid,
@@ -1563,6 +1584,157 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		if ($dbResultMultiSeats) {
 			$fieldsMultiSeats = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultMultiSeats);
 			$result += $fieldsMultiSeats['number'];
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Retrieves the topic from the DB and returns it as an object.
+	 *
+	 * In case of an error, the return value will be null.
+	 *
+	 * @return	object		a reference to the topic object (will be null if an error has occured)
+	 *
+	 * @access	private
+	 */
+	function &retrieveTopic() {
+		$result = null;
+
+		// Check whether this event has an topic set.
+		if ($this->hasRecordPropertyInteger('topic')) {
+			if (tx_seminars_seminar::existsSeminar($this->getRecordPropertyInteger('topic'))) {
+			/** Name of the seminar class in case someone subclasses it. */
+				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+				$result =& new $seminarClassname($this->getRecordPropertyInteger('topic'));
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * Checks whether we are a date record.
+	 *
+	 * @return	boolean		true if we are a date record, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function isEventDate() {
+		return ($this->getRecordPropertyInteger('object_type') == 2);
+	}
+
+	/**
+	 * Checks whether we are a date record and have a topic.
+	 *
+	 * @return	boolean		true if we are a date record and have a topic, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function isTopicOkay() {
+		return ($this->isEventDate() && $this->topic && $this->topic->isOk());
+	}
+
+	/**
+	 * Gets the uid of the topic record if we are a date record.
+	 * Otherwise the uid of this record is returned.
+	 *
+	 * @return	integer		the uid of this or its topic record
+	 *
+	 * @access	public
+	 */
+	function getTopicUid() {
+		if ($this->isTopicOkay()) {
+			return $this->topic->getUid();
+		} else {
+			return $this->getUid();
+		}
+	}
+
+	/**
+	 * Checks a integer element of the record data array for existence and non-emptiness.
+	 * If we are a date record, it'll be retrieved from the corresponding topic record.
+	 *
+	 * @param	string		key of the element to check
+	 *
+	 * @return	boolean		true if the corresponding integer exists and is non-empty
+	 *
+	 * @access	private
+	 */
+	function hasTopicInteger($key) {
+		$result = false;
+
+		if ($this->isTopicOkay()) {
+			$result = $this->topic->hasRecordPropertyInteger($key);
+		} else {
+			$result = $this->hasRecordPropertyInteger($key);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets an (intval'ed) integer element of the record data array.
+	 * If the array has not been initialized properly, 0 is returned instead.
+	 * If we are a date record, it'll be retrieved from the corresponding topic record.
+	 *
+	 * @param	string		the integer field
+	 *
+	 * @return	integer		the corresponding element from the record data array
+	 *
+	 * @access	private
+	 */
+	function getTopicInteger($key) {
+		$result = 0;
+
+		if ($this->isTopicOkay()) {
+			$result = $this->topic->getRecordPropertyInteger($key);
+		} else {
+			$result = $this->getRecordPropertyInteger($key);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks a string element of the record data array for existence and non-emptiness.
+	 * If we are a date record, it'll be retrieved from the corresponding topic record.
+	 *
+	 * @param	string		key of the element to check
+	 *
+	 * @return	boolean		true if the corresponding string exists and is non-empty
+	 *
+	 * @access	private
+	 */
+	function hasTopicString($key) {
+		$result = false;
+
+		if ($this->isTopicOkay()) {
+			$result = $this->topic->hasRecordPropertyString($key);
+		} else {
+			$result = $this->hasRecordPropertyString($key);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets a trimmed string element of the record data array.
+	 * If the array has not been initialized properly, an empty string is returned instead.
+	 * If we are a date record, it'll be retrieved from the corresponding topic record.
+	 *
+	 * @param	string		the string field
+	 *
+	 * @return	string		the corresponding element from the record data array
+	 *
+	 * @access	private
+	 */
+	function getTopicString($key) {
+		$result = '';
+
+		if ($this->isTopicOkay()) {
+			$result = $this->topic->getRecordPropertyString($key);
+		} else {
+			$result = $this->getRecordPropertyString($key);
 		}
 
 		return $result;

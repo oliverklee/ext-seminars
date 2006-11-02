@@ -55,11 +55,23 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * corresponding SQL sort criteria (as value)
 	 */
 	var $orderByList = array(
-		'title' => 'tx_seminars_seminars.title',
+		// Sort by title.
+		// Complete event records get the title directly.
+		// Date records get it from their topic record.
+		'title' => '(SELECT s1.title
+			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
+				AND s2.uid=tx_seminars_seminars.uid)',
 		'uid' => 'tx_seminars_seminars.uid',
-		'event_type' => 'tx_seminars_seminars.event_type',
+		'event_type' => '(SELECT s1.event_type
+			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
+				AND s2.uid=tx_seminars_seminars.uid)',
 		'accreditation_number' => 'tx_seminars_seminars.accreditation_number',
-		'credit_points' => 'tx_seminars_seminars.credit_points',
+		'credit_points' => '(SELECT s1.credit_points
+			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
+				AND s2.uid=tx_seminars_seminars.uid)',
 		// This will sort by the speaker names or the alphabetically lowest
 		// speaker name (if there is more than one speaker).
 		'speakers' => '(SELECT MIN(tx_seminars_speakers.title)
@@ -75,21 +87,32 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			FROM tx_seminars_seminars_place_mm, tx_seminars_sites
 			WHERE tx_seminars_seminars_place_mm.uid_local=tx_seminars_seminars.uid
 				AND tx_seminars_seminars_place_mm.uid_foreign=tx_seminars_sites.uid)',
-		'price_regular' => 'tx_seminars_seminars.price_regular',
-		'price_special' => 'tx_seminars_seminars.price_special',
+		'price_regular' => '(SELECT s1.price_regular
+			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
+				AND s2.uid=tx_seminars_seminars.uid)',
+		'price_special' => '(SELECT s1.price_special
+			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
+				AND s2.uid=tx_seminars_seminars.uid)',
 		'organizers' => 'tx_seminars_seminars.organizers',
 		'vacancies' => 'tx_seminars_seminars.attendees_max-tx_seminars_seminars.attendees'
 	);
 
 	/**
-	 * list of field names in which we can search, grouped by record type
+	 * This is a list of field names in which we can search, grouped by record type.
+	 * 'seminars' is the list of fields that are always stored in the seminar record.
+	 * 'seminars_topic' is the list of fields that might be stored in the topic
+	 *  record in if we are a date record (that refers to a topic record).
 	 */
 	var $searchFieldList = array(
 		'seminars' => array(
+			'accreditation_number'
+		),
+		'seminars_topic' => array(
 			'title',
 			'subtitle',
-			'description',
-			'accreditation_number'
+			'description'
 		),
 		'speakers' => array(
 			'title',
@@ -192,6 +215,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$now = $GLOBALS['SIM_EXEC_TIME'];
 		/** Prefix the column name with the table name so that the query also works with multiple tables. */
 		$tablePrefix = $this->tableSeminars.'.';
+
+		// Only show full event records(0) and event dates(2), but no event topics(1).
+		$result .= ' AND '.$tablePrefix.'object_type!=1';
 
 		// Work out from which timeframe we'll display the event list.
 		// We also need to deal with the case that an event has no end date set
@@ -1081,8 +1107,23 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				if (strlen($currentPreparedKeyword) >= 2) {
 					$whereParts = array();
 
+					// Look up the field in the seminar record.
 					foreach ($this->searchFieldList['seminars'] as $field) {
 						$whereParts[] = $this->tableSeminars.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\'';
+					}
+
+					// When this is a date record,
+					// look up the field in the corresponding topic record,
+					// otherwise get it directly.
+					foreach ($this->searchFieldList['seminars_topic'] as $field) {
+						$whereParts[] = 'EXISTS ('
+							.'SELECT * FROM '.$this->tableSeminars.' s1,'
+								.$this->tableSeminars.' s2'
+								.' WHERE (s1.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
+								.' AND ((s1.uid=s2.topic AND s2.object_type=2) '
+								.' OR (s1.uid=s2.uid AND s1.object_type!=2)))'
+								.' AND s2.uid='.$this->tableSeminars.'.uid'
+						.')';
 					}
 
 					// For speakers, we have real m-n relations.
@@ -1115,15 +1156,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						$this->registrationManager->getConfValueString('eventType'),
 						$currentPreparedKeyword
 					) !== false) {
-						$eventTypeMatcher = ' OR '.$this->tableSeminars.'.event_type=0';
+						$eventTypeMatcher = ' OR ('.$this->tableSeminars.'.event_type=0 '
+											.' AND '.$this->tableSeminars.'.object_type!=2)'
+											.' OR (s1.event_type=0 AND s1.uid=s2.topic '
+											.' AND s2.object_type=2 AND s2.uid='.$this->tableSeminars.'.uid)';
 					}
 
 					// For event types, we have a single foreign key.
 					foreach ($this->searchFieldList['event_types'] as $field) {
 						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableEventTypes
+							.'SELECT * FROM '.$this->tableEventTypes.', '.$this->tableSeminars.' s1, '.$this->tableSeminars.' s2'
 								.' WHERE ('.$this->tableEventTypes.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
-								.' AND '.$this->tableEventTypes.'.uid='.$this->tableSeminars.'.event_type)'
+								.' AND '.$this->tableEventTypes.'.uid=s1.event_type'
+								.' AND ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))'
+								.' AND s2.uid='.$this->tableSeminars.'.uid)'
 								.$eventTypeMatcher
 						.')';
 					}
