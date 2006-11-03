@@ -137,7 +137,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * @return	array	Array of matching marker names
 	 *
-	 * @access	private
+	 * @access	public
 	 */
 	function getPrefixedMarkers($prefix) {
 		$matches = array();
@@ -271,7 +271,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		$cssEntries = $this->getPrefixedMarkers('class');
 
 		foreach ($cssEntries as $currentCssEntry) {
-			$this->setMarkerContent($currentCssEntry, $this->createClassAttribute($this->getConfValue(strtolower($currentCssEntry))));
+			$this->setMarkerContent($currentCssEntry, $this->createClassAttribute($this->getConfValueString(strtolower($currentCssEntry))));
 		}
 
 		return;

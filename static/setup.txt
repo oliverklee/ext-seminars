@@ -140,8 +140,13 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_error = error
 
-	# the timeframe from which event should be displayed in the list view
+	# the time-frame from which events should be displayed in the list view
 	timeframeInList = currentAndUpcoming
+
+	# comma-separated list of column names that shouldn't be displayed in the list view, e.g. organizers,price_special
+	hideColumns = event_type,accreditation_number,credit_points,time,place,price_special,speakers
+	# comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
+	hideFields = credit_points
 
 	# whether the search form should be hidden in list view
 	hideSearchForm = 0
@@ -151,10 +156,10 @@ plugin.tx_seminars_pi1 {
 
 	# whether canceled events should be hidden or not
 	hideCanceledEvents = 0
-	hideColumns = event_type,accreditation_number,credit_points,time,place,price_special,speakers
-	hideFields = credit_points
 
+	# whether to use the label "Price" as column header for the standard price (instead of "Standard price")
 	generalPriceInList = 0
+	# whether to use the label "Price" as heading for the standard price (instead of "Standard price") in the detailed view and on the registration page
 	generalPriceInSingle = 0
 
 	# whether to omit the date in the list view if it is the same as the previous item's
@@ -182,11 +187,11 @@ plugin.tx_seminars_pi1 {
 	# Base URL of your TYPO3 site (including the protocol and the trailing slash), e.g. http://www.mytypo3site.net/
 	baseURL =
 
-	# PID of the page that contains the login form
-	loginPID =
-
 	# PID of the page that contains the seminar list
 	listPID =
+
+	# PID of the page that contains the login form
+	loginPID =
 
 	# PID of the page that contains the seminar registration plug-in
 	registerPID =

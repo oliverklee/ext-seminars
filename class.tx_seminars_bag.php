@@ -231,7 +231,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 
 		if ($this->currentItem) {
 			// Let warnings from the single records bubble up to us.
-			$this->configurationCheck->setErrorMessage($this->currentItem->checkConfiguration(true));
+			$this->setErrorMessage($this->currentItem->checkConfiguration(true));
 		}
 
 		return;

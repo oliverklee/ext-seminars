@@ -1,2 +1,2 @@
-# cat=basic/enable; type=boolean; label=SKIP the configuration check.      The automatic configuration check checks the FE and BE setting of this extension for common problems and inconsistencies and will help in getting to a working configuration quickly.
-disableConfigCheck = 0
+# cat=basic/enable; type=boolean; label=Enable configuration check.        This automatic configuration check checks the FE and BE setting of this extension for common problems and inconsistencies and will be helpful in getting to a working configuration quickly.
+enableConfigCheck = 1

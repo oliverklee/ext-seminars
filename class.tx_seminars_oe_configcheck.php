@@ -293,6 +293,66 @@ class tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks whether the CSS file (if a name is provided) actually is a file.
+	 * If no file name is provided, no error will be displayed as this is
+	 * perfectly allowed.
+	 *
+	 * @param	boolean		whether the css File can also be selected via flexforms
+	 *
+	 * @access	protected
+	 */
+	function checkCssFile($canUseFlexforms = false) {
+		if ($this->objectToCheck->hasConfValueString('cssFile', 's_template_special')) {
+			$fileName = $this->objectToCheck->getConfValueString('cssFile', 's_template_special', true);
+			if (!is_file($fileName)) {
+				$message = 'The specified CSS file <strong>'
+					.htmlspecialchars($fileName)
+					.'</strong> cannot be read. '
+					.'If that variable does not point to an existing file, no '
+					.'special CSS will be used for styling this extension\'s HTML. '
+					.'Please either create the the file <strong>'.$fileName.'</strong> or select an existing file using the TS variable <strong>'.$this->getTSSetupPath().'cssFile</strong>';
+				if ($canUseFlexforms) {
+					$message .= ' or via FlexForms';
+				}
+				$message .= '. If you do not want to use any special CSS, you '
+					.'can set that variable to an empty string.';
+				$this->setErrorMessage($message);
+			}
+		}
+		return;
+	}
+
+	/**
+	 * Checks the CSS class names provided in the TS setup for validity.
+	 * Empty values are considered as valid.
+	 *
+	 * @access	protected
+	 */
+	function checkCssClassNames() {
+		$cssEntries = $this->objectToCheck->getPrefixedMarkers('class');
+
+		foreach ($cssEntries as $currentCssEntry) {
+			$setupVariable = strtolower($currentCssEntry);
+			$cssClassName = $this->objectToCheck->getConfValueString($setupVariable);
+			if (!preg_match('/^[A-Za-z0-9\-_\:\.]*$/', $cssClassName)) {
+				$message = 'The specified CSS class name <strong>'
+					.htmlspecialchars($cssClassName)
+					.'</strong> is invalid. '
+					.'This will cause the class to not get correctly applied '
+					.'in web browsers. '
+					.'Please set the TS setup variable <strong>'
+					.$this->getTSSetupPath().$setupVariable
+					.'</strong> to a valid CSS class or an empty string.';
+				$this->setErrorMessage($message);
+			};
+		}
+
+		return;
+	}
+
+
+
+	/**
 	 * Checks whether a configuration value contains a non-empty-string.
 	 *
 	 * @param	string		TS setup field name to extract, must not be empty

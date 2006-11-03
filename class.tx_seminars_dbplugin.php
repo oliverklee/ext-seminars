@@ -127,7 +127,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			// unserialize the configuration array
 			$globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
 
-			if (!$globalConfiguration['disableConfigCheck']) {
+			if ($globalConfiguration['enableConfigCheck']) {
 				$configurationCheckClassname = t3lib_div::makeInstanceClassName('tx_seminars_configcheck');
 				$this->configurationCheck =& new $configurationCheckClassname($this);
 			} else {
@@ -352,6 +352,25 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 		return;
 	}
+
+	/**
+	 * Sets the error text of $this->configurationCheck.
+	 *
+	 * If this->configurationCheck is null, this function is a no-op.
+	 *
+	 * @param	string		error text to set (may be empty)
+	 *
+	 * @access	protected
+	 */
+	function setErrorMessage($message) {
+		if ($this->configurationCheck) {
+			$this->configurationCheck->setErrorMessage($message);
+		}
+
+		return;
+	}
+
+
 
 	/**
 	 * Checks this object's configuration and returns a formatted error message

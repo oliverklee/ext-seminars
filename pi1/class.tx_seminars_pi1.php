@@ -156,7 +156,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->registrationManager =& new $registrationManagerClassname();
 
 		// Let warnings from the registration manager bubble up to us.
-		$this->configurationCheck->setErrorMessage($this->registrationManager->checkConfiguration(true));
+		$this->setErrorMessage($this->registrationManager->checkConfiguration(true));
 
 		$result = '';
 
@@ -328,7 +328,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Let warnings from the seminar and the seminar bag bubble up to us.
-		$this->configurationCheck->setErrorMessage($seminarBag->checkConfiguration(true));
+		$this->setErrorMessage($seminarBag->checkConfiguration(true));
 
 		return $result;
 	}
@@ -470,7 +470,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
 			// Let warnings from the seminar bubble up to us.
-			$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
+			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			// This sets the title of the page for use in indexed search results:
 			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
@@ -837,7 +837,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if ($this->createSeminar($this->piVars['seminar'])) {
 			// Let warnings from the seminar bubble up to us.
-			$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
+			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage = $this->registrationManager->canRegisterIfLoggedInMessage($this->seminar);
@@ -965,7 +965,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('title', $this->seminar->getTitleAndDate());
 
 			// Let warnings from the seminar bubble up to us.
-			$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
+			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			if ($this->seminar->canViewRegistrationsList($this->getConfValueString('what_to_display'))) {
 				$isOkay = true;
@@ -1033,7 +1033,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Let warnings from the registration bag bubble up to us.
-		$this->configurationCheck->setErrorMessage($this->seminar->checkConfiguration(true));
+		$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 		return;
 	}
