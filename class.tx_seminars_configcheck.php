@@ -60,6 +60,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkSalutationMode();
 		$this->checkTimeAndDate();
 		$this->checkShowTimeOfRegistrationDeadline();
+		$this->checkShowTimeOfEarlyBirdDeadline();
 		$this->checkShowVacanciesThreshold();
 
 		return;
@@ -356,6 +357,25 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'',
 			'This value specifies whether to also show the time of '
 				.'registration deadlines. If this value is incorrect, the '
+				.'time might get shown although this is not intended '
+				.'(or vice versa).'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value showTimeOfEarlyBirdDeadline.
+	 *
+	 * @access	private
+	 */
+	function checkShowTimeOfEarlyBirdDeadline() {
+		$this->checkIfBoolean(
+			'showTimeOfEarlyBirdDeadline',
+			false,
+			'',
+			'This value specifies whether to also show the time of '
+				.'early bird deadlines. If this value is incorrect, the '
 				.'time might get shown although this is not intended '
 				.'(or vice versa).'
 		);
@@ -664,7 +684,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'place',
 				'speakers',
 				'price_regular',
+				'price_regular_early',
 				'price_special',
+				'price_special_early',
 				'attendees',
 				'attendees_min',
 				'attendees_max',
@@ -718,7 +740,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'food',
 				'known_from',
 				'notes',
-				'seats'
+				'seats',
+				'price'
 			)
 		);
 

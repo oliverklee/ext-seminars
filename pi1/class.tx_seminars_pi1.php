@@ -528,15 +528,34 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}
 
-			if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
-				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
+			// show the regular price (with or without early bird rebate)
+			if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
+				$this->setMarkerContent('label_price_earlybird_regular', $this->pi_getLL('label_earlybird_price_regular'));
+				$this->setMarkerContent('price_earlybird_regular', $this->seminar->getEarlyBirdPriceRegular());
+				$this->setMarkerContent('message_earlybird_price', sprintf($this->pi_getLL('message_earlybird_price'),
+									$this->seminar->getPriceRegular(), $this->seminar->getEarlyBirdDeadline()));
+				$this->readSubpartsToHide('price_regular', 'field_wrapper');
+			} else {
+				$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
+				if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
+					$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
+				}
+				$this->readSubpartsToHide('price_earlybird_regular', 'field_wrapper');
 			}
-			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
 
+			// show the special price (with or without early bird rebate)
 			if ($this->seminar->hasPriceSpecial()) {
-				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+				if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
+					$this->setMarkerContent('label_price_earlybird_special', $this->pi_getLL('label_earlybird_price_special'));
+					$this->setMarkerContent('price_earlybird_special', $this->seminar->getEarlyBirdPriceSpecial());
+					$this->readSubpartsToHide('price_special', 'field_wrapper');
+				} else {
+					$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+					$this->readSubpartsToHide('price_earlybird_special', 'field_wrapper');
+				}
 			} else {
 				$this->readSubpartsToHide('price_special', 'field_wrapper');
+				$this->readSubpartsToHide('price_earlybird_special', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasPaymentMethods()) {
@@ -746,8 +765,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlaceShort());
-			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
-			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+			$this->setMarkerContent('price_regular', $this->seminar->getCurrentPriceRegular());
+			$this->setMarkerContent('price_special', $this->seminar->getCurrentPriceSpecial());
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
 			$this->setMarkerContent('vacancies', $this->seminar->getVacanciesString());
 			$this->setMarkerContent('class_listvacancies', $this->getVacanciesClasses($this->seminar));
@@ -933,9 +952,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
 			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 		}
-		$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
+		$this->setMarkerContent('price_regular', $this->seminar->getCurrentPriceRegular());
 		if ($this->seminar->hasPriceSpecial()) {
-			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+			$this->setMarkerContent('price_special', $this->seminar->getCurrentPriceSpecial());
 		} else {
 			$this->readSubpartsToHide('price_special', 'registration_wrapper');
 		}

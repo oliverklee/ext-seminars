@@ -103,11 +103,14 @@
 			<label index="tx_seminars_seminars.begin_date">Begin time and date</label>
 			<label index="tx_seminars_seminars.end_date">End time and date</label>
 			<label index="tx_seminars_seminars.deadline_registration">Registration deadline</label>
+			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline</label>
 			<label index="tx_seminars_seminars.place">Place</label>
 			<label index="tx_seminars_seminars.room">Room</label>
 			<label index="tx_seminars_seminars.speakers">Speakers</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price</label>
+			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird)</label>
 			<label index="tx_seminars_seminars.price_special">Special price</label>
+			<label index="tx_seminars_seminars.price_special_early">Special price (early bird)</label>
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment</label>
 			<label index="tx_seminars_seminars.event_type">Event type</label>
 			<label index="tx_seminars_seminars.organizers">Organizers</label>
@@ -143,6 +146,7 @@
 			<label index="tx_seminars_attendances.title">Title</label>
 			<label index="tx_seminars_attendances.user">Frontend User</label>
 			<label index="tx_seminars_attendances.seminar">Seminar</label>
+			<label index="tx_seminars_attendances.price">Price to pay</label>
 			<label index="tx_seminars_attendances.paid">Has paid</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment</label>
@@ -190,11 +194,14 @@
 			<label index="tx_seminars_seminars.begin_date">Anfangszeit und -datum</label>
 			<label index="tx_seminars_seminars.end_date">Endzeit und -datum</label>
 			<label index="tx_seminars_seminars.deadline_registration">Anmelde-Deadline</label>
+			<label index="tx_seminars_seminars.deadline_early_bird">Frühbucher-Deadline</label>
 			<label index="tx_seminars_seminars.place">Ort</label>
 			<label index="tx_seminars_seminars.room">Raum</label>
 			<label index="tx_seminars_seminars.speakers">ReferentInnen</label>
 			<label index="tx_seminars_seminars.price_regular">Standardpreis</label>
+			<label index="tx_seminars_seminars.price_regular_early">Standardpreis für Frühbucher</label>
 			<label index="tx_seminars_seminars.price_special">Sonderpreis</label>
+			<label index="tx_seminars_seminars.price_special_early">Sonderpreis für Frühbucher</label>
 			<label index="tx_seminars_seminars.payment_methods">Erlaubte Zahlungsarten</label>
 			<label index="tx_seminars_seminars.event_type">Veranstaltungsart</label>
 			<label index="tx_seminars_seminars.organizers">Veranstalter</label>
@@ -496,6 +503,9 @@
 			<label index="tx_seminars_event_types" type="integer">143373196</label>
 			<label index="tx_seminars_event_types.title" type="integer">192455458</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
+			<label index="tx_seminars_seminars.deadline_early_bird" type="integer">247736769</label>
+			<label index="tx_seminars_seminars.price_regular_early" type="integer">127612214</label>
+			<label index="tx_seminars_seminars.price_special_early" type="integer">189704447</label>
 			<label index="tx_seminars_seminars.object_type" type="integer">169845367</label>
 			<label index="tx_seminars_seminars.object_type.I.0" type="integer">152387705</label>
 			<label index="tx_seminars_seminars.object_type.I.1" type="integer">250876687</label>
@@ -739,6 +749,9 @@
 			<label index="tx_seminars_event_types">Event types</label>
 			<label index="tx_seminars_event_types.title">Title</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
+			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline</label>
+			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird)</label>
+			<label index="tx_seminars_seminars.price_special_early">Special price (early bird)</label>
 			<label index="tx_seminars_seminars.object_type">Type</label>
 			<label index="tx_seminars_seminars.object_type.I.0">Single event</label>
 			<label index="tx_seminars_seminars.object_type.I.1">Multiple event topic</label>

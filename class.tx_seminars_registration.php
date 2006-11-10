@@ -90,6 +90,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData = array();
 
 		$this->recordData['seminar'] = $seminar->getUid();
+		$this->recordData['price'] = $seminar->getCurrentPriceRegular(' ');
+		if ($seminar->hasPriceSpecial()) {
+			$this->recordData['price'] .= ' / ' . $seminar->getCurrentPriceSpecial(' ');
+		}
 		$this->recordData['user'] = $userUid;
 
 		$this->recordData['seats'] = $registrationData['seats'];
@@ -423,7 +427,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->getConfValueBoolean('generalPriceInMail')) {
 			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
 		}
-		$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular(' '));
+		$this->setMarkerContent('price_regular', $this->seminar->getCurrentPriceRegular(' '));
 
 		if ($this->seminar->hasPriceSpecial()) {
 			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial(' '));

@@ -72,6 +72,8 @@
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
+			<label index="label_earlybird_price_regular">Regular price (early bird)</label>
+			<label index="label_earlybird_price_special">Special price (early bird)</label>
 			<label index="label_paymentmethods">Available methods of payment</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_organizers">Organizers</label>
@@ -91,6 +93,7 @@
 			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
+			<label index="message_earlybird_price">Instead of %s, valid until %s</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">Generalt</label>
@@ -236,6 +239,8 @@
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_special">Spezialpreis</label>
+			<label index="label_earlybird_price_regular">Frühbucherpreis</label>
+			<label index="label_earlybird_price_special">Frühbucherpreis (spezial)</label>
 			<label index="label_paymentmethods">Mögliche Zahlungsarten</label>
 			<label index="label_event_type">Veranstaltungsart</label>
 			<label index="label_organizers">Veranstalter</label>
@@ -255,6 +260,7 @@
 			<label index="message_registrationForm_formal">Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:</label>
 			<label index="message_registrationForm_informal">Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:</label>
 			<label index="message_noRegistrations">Für diese Veranstaltung liegen bisher noch keine Anmeldungen vor.</label>
+			<label index="message_earlybird_price">anstatt %s, Preis gültig bis %s</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -556,6 +562,9 @@
 			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
 			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
 			<label index="label_event_type" type="integer">99114704</label>
+			<label index="label_earlybird_price_regular" type="integer">127612214</label>
+			<label index="label_earlybird_price_special" type="integer">189704447</label>
+			<label index="message_earlybird_price" type="integer">106253979</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -777,6 +786,9 @@
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="label_event_type">Event type</label>
+			<label index="label_earlybird_price_regular">Regular price (early bird)</label>
+			<label index="label_earlybird_price_special">Special price (early bird)</label>
+			<label index="message_earlybird_price">Instead of %s, valid until %s</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

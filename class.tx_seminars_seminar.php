@@ -655,6 +655,62 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Returns the current regular price for this event.
+	 * If there is a valid early bird offer, this price will be returned, otherwise the default price.
+	 *
+	 * @param	string		the character or HTML entity used to separate price and currency
+	 *
+	 * @return	string		the price and the currency
+	 *
+	 * @access	protected
+	 */
+	function getCurrentPriceRegular($space = '&nbsp;') {
+		return ($this->earlyBirdApplies()) ? $this->getEarlyBirdPriceRegular($space) : $this->getPriceRegular($space);
+	}
+
+	/**
+	 * Returns the current price for this event.
+	 * If there is a valid early bird offer, this price will be returned, the default special price otherwise.
+	 *
+	 * @param	string		the character or HTML entity used to separate price and currency
+	 *
+	 * @return	string		the price and the currency
+	 *
+	 * @access	protected
+	 */
+	function getCurrentPriceSpecial($space = '&nbsp;') {
+		return ($this->earlyBirdApplies()) ? $this->getEarlyBirdPriceSpecial($space) : $this->getPriceSpecial($space);
+	}
+
+	/**
+	 * Gets our regular price during the early bird phase as a string containing amount and currency.
+	 *
+	 * @param	string		the character or HTML entity used to separate price and currency
+	 *
+	 * @return	string		the regular early bird event price
+	 *
+	 * @access	protected
+	 */
+	function getEarlyBirdPriceRegular($space = '&nbsp;') {
+		return $this->hasEarlyBirdPriceRegular() ?
+			($this->getTopicInteger('price_regular_early').$space.$this->getConfValueString('currency')) : '';
+	}
+
+	/**
+	 * Gets our special price during the early bird phase as a string containing amount and currency.
+	 *
+	 * @param	string		the character or HTML entity used to separate price and currency
+	 *
+	 * @return	string		the regular early bird event price
+	 *
+	 * @access	protected
+	 */
+	function getEarlyBirdPriceSpecial($space = '&nbsp;') {
+		return $this->hasEarlyBirdPriceSpecial() ?
+			($this->getTopicInteger('price_special_early').$space.$this->getConfValueString('currency')) : '';
+	}
+
+	/**
 	 * Checks whether this seminar has a non-zero regular price set.
 	 *
 	 * @return	boolean		true if the seminar has a non-zero regular price, false if it is free.
@@ -663,6 +719,71 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function hasPriceRegular() {
 		return $this->hasTopicInteger('price_regular');
+	}
+
+	/**
+	 * Checks whether this seminar has a non-zero regular early bird price set.
+	 *
+	 * @return	boolean		true if the seminar has a non-zero regular early bird price, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function hasEarlyBirdPriceRegular() {
+		return $this->hasTopicInteger('price_regular_early');
+	}
+
+	/**
+	 * Checks whether this seminar has a non-zero special early bird price set.
+	 *
+	 * @return	boolean		true if the seminar has a non-zero special early bird price, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function hasEarlyBirdPriceSpecial() {
+		return $this->hasTopicInteger('price_special_early');
+	}
+
+	/**
+	 * Checks whether this event has a deadline for the early bird prices set.
+	 *
+	 * @return	boolean		true if the event has an early bird deadline set, false if not
+	 *
+	 * @access	protected
+	 */
+	function hasEarlyBirdDeadline() {
+		return $this->hasRecordPropertyInteger('deadline_early_bird');
+	}
+
+	/**
+	 * Returns whether an early bird price applies.
+	 *
+	 * @return	boolean		true if this event has an early bird dealine set and this deadline is not over yet
+	 *
+	 * @access	protected
+	 */
+	function earlyBirdApplies() {
+		return ($this->hasEarlyBirdDeadline() && !$this->isEarlyBirdDeadlineOver());
+	}
+
+	/**
+	 * Checks whether this event is sold with early bird prices.
+	 *
+	 * This will return true if the event has a deadline and a price defined for early-bird registrations.
+	 * If the special price (e.g. for students) is not used, then the student's early bird price is not checked.
+	 *
+	 * Attention: Both prices (standard and special) need to have an early-bird version for this
+	 * function to return true (if there is a regular special price).
+	 *
+	 * @return	boolean		true if an early bird deadline and early bird prices are set
+	 *
+	 * @access	protected
+	 */
+	function hasEarlyBirdPrice() {
+		return (($this->hasEarlyBirdDeadline() &&
+				$this->hasTopicInteger('price_regular_early')) &&
+				(!$this->hasPriceSpecial() || ($this->hasPriceSpecial() &&
+				$this->hasTopicInteger('price_regular_early')))
+		);
 	}
 
 	/**
@@ -972,6 +1093,18 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Returns the latest date/time to register with early bird rebate for an event.
+	 * The latest time to register with early bird rebate is exactly at the early bird deadline.
+	 *
+	 * @return	integer		the latest possible moment to register with early bird rebate for an event
+	 *
+	 * @access	protected
+	 */
+	function getLatestPossibleEarlyBirdRegistrationTime() {
+		return $this->getRecordPropertyInteger('deadline_early_bird');
+	}
+
+	/**
 	 * Returns the seminar registration deadline
 	 * The returned string is formatted using the format configured in dateFormatYMD and timeFormat
 	 *
@@ -996,6 +1129,22 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function hasRegistrationDeadline() {
 		return $this->hasRecordPropertyInteger('deadline_registration');
+	}
+
+	/**
+	 * Returns the early bird deadline
+	 * The returned string is formatted using the format configured in dateFormatYMD and timeFormat
+	 *
+	 * @return	string		the date and time of the early bird deadline
+	 *
+	 * @access	protected
+	 */
+	function getEarlyBirdDeadline() {
+		$result = strftime($this->getConfValueString('dateFormatYMD'), $this->getRecordPropertyInteger('deadline_early_bird'));
+		if ($this->getConfValueBoolean('showTimeOfEarlyBirdDeadline')) {
+			$result .= strftime(' '.$this->getConfValueString('timeFormat'), $this->getRecordPropertyInteger('deadline_early_bird'));
+		}
+		return $result;
 	}
 
 	/**
@@ -1228,8 +1377,14 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				case 'price_regular':
 					$value = $this->getPriceRegular(' ');
 					break;
+				case 'price_regular_early':
+					$value = $this->getEarlyBirdPriceRegular(' ');
+					break;
 				case 'price_special':
 					$value = $this->getPriceSpecial(' ');
+					break;
+				case 'price_special_early':
+					$value = $this->getEarlyBirdPriceSpecial(' ');
 					break;
 				case 'speakers':
 					$value = $this->getSpeakersShort();
@@ -1479,6 +1634,19 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function isRegistrationDeadlineOver() {
 		return ($GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleRegistrationTime());
+	}
+
+ 	/**
+	 * Checks whether the latest possibility to register with early bird rebate for this event is over.
+	 *
+	 * The latest moment is just before a set early bird deadline.
+	 *
+	 * @return	boolean		true if the deadline has passed, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function isEarlyBirdDeadlineOver() {
+		return ($GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleEarlyBirdRegistrationTime());
 	}
 
 	/**
