@@ -1,4 +1,5 @@
 0.4.7
+- Feature: Allow to use select boxes instead of the page browser e.g. for speakers (#331)
 - Feature: Early bird prices (#325)
 - Feature : Add "topic" and "date" event subtypes (#298)
 - Fix: Conflict with direct_mail 2.1.5 (#320)

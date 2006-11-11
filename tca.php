@@ -3,6 +3,13 @@ if (!defined ('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
+// unserialize the configuration array
+$globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
+$usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
+$selectTopicsFromAllPages = (boolean) $globalConfiguration['selectTopicsFromAllPages'];
+$selectType = $usePageBrowser ? 'group' : 'select';
+$selectWhereForTopics = ($selectTopicsFromAllPages) ? '' : ' AND tx_seminars_seminars.pid=###STORAGE_PID###';
+
 $TCA['tx_seminars_seminars'] = Array (
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => Array (
@@ -76,12 +83,16 @@ $TCA['tx_seminars_seminars'] = Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.event_type',
 			'config' => Array (
-				'type' => 'group',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_event_types',
+				'foreign_table' => 'tx_seminars_event_types',
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
+				'items' => Array(
+					'' => ''
+				)
 			)
 		),
 		'accreditation_number' => Array (
@@ -161,9 +172,10 @@ $TCA['tx_seminars_seminars'] = Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.place',
 			'config' => Array (
-				'type' => 'group',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_sites',
+				'foreign_table' => 'tx_seminars_sites',
 				'size' => 3,
 				'minitems' => 0,
 				'maxitems' => 3,
@@ -183,11 +195,13 @@ $TCA['tx_seminars_seminars'] = Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.speakers',
 			'config' => Array (
-				'type' => 'group',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
+				'foreign_table' => 'tx_seminars_speakers',
 				'size' => 3,
 				'minitems' => 0,
+				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_speakers_mm',
 			)
 		),
@@ -259,9 +273,10 @@ $TCA['tx_seminars_seminars'] = Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.payment_methods',
 			'config' => Array (
-				'type' => 'group',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
+				'foreign_table' => 'tx_seminars_payment_methods',
 				'size' => 3,
 				'minitems' => 0,
 				'maxitems' => 3,
@@ -271,9 +286,10 @@ $TCA['tx_seminars_seminars'] = Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.organizers',
 			'config' => Array (
-				'type' => 'group',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
+				'foreign_table' => 'tx_seminars_organizers',
 				'size' => 3,
 				'minitems' => 1,
 				'maxitems' => 3,
@@ -389,9 +405,12 @@ $TCA['tx_seminars_seminars'] = Array (
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.topic',
 			'config' => Array (
-				'type' => 'group',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_seminars',
+				'foreign_table' => 'tx_seminars_seminars',
+				// only allow for topic records and complete event records, but not for date records
+				'foreign_table_where' => 'AND (tx_seminars_seminars.object_type=0 OR tx_seminars_seminars.object_type=1)'.$selectWhereForTopics,
 				'size' => 1,
 				'minitems' => 1,
 				'maxitems' => 1,
@@ -637,9 +656,10 @@ $TCA['tx_seminars_attendances'] = Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.method_of_payment',
 			'config' => Array (
-				'type' => 'group',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
+				'foreign_table' => 'tx_seminars_payment_methods',
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,

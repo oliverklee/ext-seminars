@@ -240,7 +240,6 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - for organizers, add field telling in which page new registration records should be stored, overriding the global setting
 - for seminars, add field telling in which page new registration records should be stored, overriding the global and organizers setting
 - improve and clean up flexforms structure for better usability
-- investigate whether some of the DB selectors in the back end can be replaced with select lists (like in the cl_company_database extension) in order to reduce the clickomania
 - slim down back end UI (don't display unneded fields, e.g. unneeded payment methods)
 - re-arrange back end UI for better usability (tca.php)
 - investigate whether in the back end seminar info view and list mode, the titles can be displayed instead of the UIDs for speakers, organizers, sites and payment methods
