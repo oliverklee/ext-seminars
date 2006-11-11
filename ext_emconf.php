@@ -45,6 +45,8 @@ $EM_CONF[$_EXTKEY] = array(
 		'conflicts' => array(
 		),
 		'suggests' => array(
+			'mysql' => '4.1.0-',
+			'erotea_date2cal' => '',
 		),
 	),
 	'suggests' => array(
