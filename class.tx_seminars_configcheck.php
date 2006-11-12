@@ -124,9 +124,24 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkWhatToDisplay();
 
 		$this->checkRegistrationFlag();
-		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
-			$this->checkBaseUrl();
+		if (!$this->objectToCheck->getConfValueBoolean('enableRegistration')) {
+			$message = 'You are using the registration page although online '
+				.'registration is disabled. This will break the registration '
+				.'page and the automatic configuration check. '
+				.'Please either enable online registration by setting the TS '
+				.'setup variable <strong>'.$this->getTSSetupPath()
+				.'enableRegistration</strong> to <strong>1</strong> or remove '
+				.'the registration page.';
+			$this->setErrorMessage($message);
 		}
+
+		$this->checkBaseUrl();
+
+		$this->checkGeneralPriceInSingle();
+		$this->checkEventFieldsOnRegistrationPage();
+		$this->checkShowRegistrationFields();
+		$this->checkListPid();
+		$this->checkLoginPid();
 
 		return;
 	}
@@ -143,8 +158,18 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkSalutationMode(true);
 		$this->checkCssClassNames();
 		$this->checkWhatToDisplay();
+		$this->checkRegistrationFlag();
 
 		$this->checkHideFields();
+		$this->checkGeneralPriceInSingle();
+		$this->checkShowSpeakerDetails();
+		$this->checkShowSiteDetails();
+		if ($this->objectToCheck->getConfValueInteger('enableRegistration')) {
+			$this->checkRegisterPid();
+			$this->checkLoginPid();
+		}
+		$this->checkRegistrationsListPid();
+		$this->checkRegistrationsVipListPidOptional();
 
 		return;
 	}
@@ -161,12 +186,21 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkSalutationMode(true);
 		$this->checkCssClassNames();
 		$this->checkWhatToDisplay();
+		$this->checkRegistrationFlag();
 
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
 		$this->checkHideSearchForm();
 		$this->checkHidePageBrowser();
 		$this->checkHideCanceledEvents();
+		$this->checkGeneralPriceInList();
+		$this->checkOmitDateIfSameAsPrevious();
+		$this->checkListPid();
+		if ($this->objectToCheck->getConfValueInteger('enableRegistration')) {
+			$this->checkRegisterPid();
+		}
+		$this->checkRegistrationsListPid();
+		$this->checkRegistrationsVipListPidOptional();
 
 		return;
 	}
@@ -178,6 +212,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_pi1_my_vip_events() {
 		$this->check_tx_seminars_pi1_seminar_list();
+		$this->checkRegistrationsVipListPid();
 
 		return;
 	}
@@ -205,6 +240,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkSalutationMode(true);
 		$this->checkCssClassNames();
 		$this->checkWhatToDisplay();
+
+		$this->checkShowFeUserFieldsInRegistrationsList();
+		$this->checkListPid();
 
 		return;
 	}
@@ -283,7 +321,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkBaseUrl() {
-		$baseUrl = $this->objectToCheck->getConfValueString('baseURL');
+		$baseUrl = $this->objectToCheck->getConfValueString('baseURL', 's_template_special');
 
 		if (!preg_match('/^http(s?):\/\/[a-z][a-z0-9_\.]+[a-z0-9]+\/([a-z0-9_\.]+\/)*$/', $baseUrl)) {
 			$message = 'The specified base URL <strong>'
@@ -433,7 +471,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the page on which registrations will be '
 				.'stored. If this value is not set correctly, registration '
 				.'records will be dumped in the TYPO3 root page. If you '
-				.'ecplicitely do not wish to use the online registration '
+				.'explicitely do not wish to use the online registration '
 				.'feature, you can disable these checks by setting '
 				.'<strong>plugin.tx_seminars.enableRegistration</strong> and '
 				.'<strong>plugin.tx_seminars.enableRegistration_pi1</strong> '
@@ -454,7 +492,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			true,
 			's_template_special',
 			'This value specifies which section to remove from the list view. '
-				.'Incorrect value will cause the sections to still be displayed.',
+				.'Incorrect values will cause the sections to still be displayed.',
 			array(
 				'title',
 				'subtitle',
@@ -492,7 +530,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			true,
 			's_template_special',
 			'This value specifies which columns to remove from the list view. '
-				.'Incorrect value will cause the colums to still be displayed.',
+				.'Incorrect values will cause the colums to still be displayed.',
 			array(
 				'title',
 				'uid',
@@ -779,6 +817,294 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies whether date ranges will be abbreviated. '
 				.'If this value is incorrect, the values might be abbreviated '
 				.'although this is not intended (or vice versa).'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value generalPriceInList.
+	 *
+	 * @access	private
+	 */
+	function checkGeneralPriceInList() {
+		$this->checkIfBoolean(
+			'generalPriceInList',
+			true,
+			's_template_special',
+			'This value specifies whether the column header for the standard '
+				.'price in the list view will be just <em>Price</em> instead '
+				.'of <em>Standard price</em>. '
+				.'If this value is incorrect, the wrong label might be used.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value generalPriceInSingle.
+	 *
+	 * @access	private
+	 */
+	function checkGeneralPriceInSingle() {
+		$this->checkIfBoolean(
+			'generalPriceInSingle',
+			true,
+			's_template_special',
+			'This value specifies whether the heading for the standard price '
+				.'in the detailed view and on the registration page will be '
+				.'just <em>Price</em> instead of <em>Standard price</em>. '
+				.'If this value is incorrect, the wrong label might be used.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value omitDateIfSameAsPrevious.
+	 *
+	 * @access	private
+	 */
+	function checkOmitDateIfSameAsPrevious() {
+		$this->checkIfBoolean(
+			'omitDateIfSameAsPrevious',
+			true,
+			's_template_special',
+			'This value specifies whether whether to omit the date in the '
+				.'list view if it is the same as the previous item\'s. '
+				.'If this value is incorrect, the date might be ommited '
+				.'although this is not intended (or vice versa).'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value eventFieldsOnRegistrationPage.
+	 *
+	 * @access	private
+	 */
+	function checkEventFieldsOnRegistrationPage() {
+		$this->checkIfMultiInSetNotEmpty(
+			'eventFieldsOnRegistrationPage',
+			true,
+			's_template_special',
+			'This value specifies which data fields of the selected event '
+				.'will be displayed on the registration page. '
+				.'Incorrect values will cause those fields to not get displayed.',
+			array(
+				'uid',
+				'title',
+				'accreditation_number',
+				'price_regular',
+				'price_special',
+				'vacancies'
+			)
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value showRegistrationFields.
+	 *
+	 * @access	private
+	 */
+	function checkShowRegistrationFields() {
+		$this->checkIfMultiInSetNotEmpty(
+			'showRegistrationFields',
+			true,
+			's_template_special',
+			'This value specifies which registration fields '
+				.'will be displayed on the registration page. '
+				.'Incorrect values will cause those fields to not get displayed.',
+			array(
+				'interests',
+				'expectations',
+				'background_knowledge',
+				'accommodation',
+				'food',
+				'known_from',
+				'seats',
+				'notes'
+			)
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value showSpeakerDetails.
+	 *
+	 * @access	private
+	 */
+	function checkShowSpeakerDetails() {
+		$this->checkIfBoolean(
+			'showSpeakerDetails',
+			true,
+			's_template_special',
+			'This value specifies whether to show detailed information of '
+				.'the speakers in the single view. '
+				.'If this value is incorrect, the detailed information might '
+				.'be shown although this is not intended (or vice versa).'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value showSiteDetails.
+	 *
+	 * @access	private
+	 */
+	function checkShowSiteDetails() {
+		$this->checkIfBoolean(
+			'showSiteDetails',
+			true,
+			's_template_special',
+			'This value specifies whether to show detailed information of '
+				.'the locations in the single view. '
+				.'If this value is incorrect, the detailed information might '
+				.'be shown although this is not intended (or vice versa).'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value showFeUserFieldsInRegistrationsList.
+	 *
+	 * @access	private
+	 */
+	function checkShowFeUserFieldsInRegistrationsList() {
+		$this->checkIfMultiInTableOrEmpty(
+			'showFeUserFieldsInRegistrationsList',
+			true,
+			's_template_special',
+			'These values specify the FE user fields to show in the list of '
+				.'registrations for an event. A mistyped field name will '
+				.'cause the contents of the field to not get displayed.',
+			'fe_users'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value listPID.
+	 *
+	 * @access	private
+	 */
+	function checkListPid() {
+		$this->checkIfPositiveInteger(
+			'listPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the list of events. '
+				.'If this value is not set correctly, the links in the list '
+				.'view and the back link on the list of registrations will '
+				.'not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value registerPID.
+	 *
+	 * @access	private
+	 */
+	function checkRegisterPid() {
+		$this->checkIfPositiveInteger(
+			'registerPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the registration '
+				.'form. If this value is not set correctly, the link to the '
+				.'registration page will not work. If you explicitely do not '
+				.'wish to use the online registration feature, you can '
+				.'disable these checks by setting '
+				.'<strong>plugin.tx_seminars.enableRegistration</strong> and '
+				.'<strong>plugin.tx_seminars.enableRegistration_pi1</strong> '
+				.'to 0.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value loginPID.
+	 *
+	 * @access	private
+	 */
+	function checkLoginPid() {
+		$this->checkIfPositiveInteger(
+			'loginPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the login form. '
+				.'If this value is not set correctly, the link to the '
+				.'login page will not work. If you explicitely do not '
+				.'wish to use the online registration feature, you can '
+				.'disable these checks by setting '
+				.'<strong>plugin.tx_seminars.enableRegistration</strong> and '
+				.'<strong>plugin.tx_seminars.enableRegistration_pi1</strong> '
+				.'to 0.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value registrationsListPID.
+	 *
+	 * @access	private
+	 */
+	function checkRegistrationsListPid() {
+		$this->checkIfInteger(
+			'registrationsListPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the list of '
+				.'registrations for an event. If this value is not set '
+				.'correctly, the link to that page will not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value registrationsVipListPID.
+	 *
+	 * @access	private
+	 */
+	function checkRegistrationsVipListPid() {
+		$this->checkIfPositiveInteger(
+			'registrationsVipListPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the list of '
+				.'registrations for an event. If this value is not set '
+				.'correctly, the link to that page will not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value registrationsVipListPID,
+	 * but also allows empty values.
+	 *
+	 * @access	private
+	 */
+	function checkRegistrationsVipListPidOptional() {
+		$this->checkIfInteger(
+			'registrationsVipListPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the list of '
+				.'registrations for an event. If this value is not set '
+				.'correctly, the link to that page will not work.'
 		);
 
 		return;
