@@ -683,7 +683,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our regular price during the early bird phase as a string containing amount and currency.
+	 * Gets our regular price during the early bird phase as a string containing
+	 * amount and currency.
 	 *
 	 * @param	string		the character or HTML entity used to separate price and currency
 	 *
@@ -697,7 +698,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our special price during the early bird phase as a string containing amount and currency.
+	 * Gets our special price during the early bird phase as a string containing
+	 * amount and currency.
 	 *
 	 * @param	string		the character or HTML entity used to separate price and currency
 	 *
@@ -762,28 +764,32 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function earlyBirdApplies() {
-		return ($this->hasEarlyBirdDeadline() && !$this->isEarlyBirdDeadlineOver());
+		return ($this->hasEarlyBirdPrice() && !$this->isEarlyBirdDeadlineOver());
 	}
 
 	/**
 	 * Checks whether this event is sold with early bird prices.
 	 *
-	 * This will return true if the event has a deadline and a price defined for early-bird registrations.
-	 * If the special price (e.g. for students) is not used, then the student's early bird price is not checked.
+	 * This will return true if the event has a deadline and a price defined
+	 * for early-bird registrations. If the special price (e.g. for students)
+	 * is not used, then the student's early bird price is not checked.
 	 *
-	 * Attention: Both prices (standard and special) need to have an early-bird version for this
-	 * function to return true (if there is a regular special price).
+	 * Attention: Both prices (standard and special) need to have an early bird
+	 * version for this function to return true (if there is a regular special price).
 	 *
 	 * @return	boolean		true if an early bird deadline and early bird prices are set
 	 *
 	 * @access	protected
 	 */
 	function hasEarlyBirdPrice() {
-		return (($this->hasEarlyBirdDeadline() &&
-				$this->hasTopicInteger('price_regular_early')) &&
-				(!$this->hasPriceSpecial() || ($this->hasPriceSpecial() &&
-				$this->hasTopicInteger('price_regular_early')))
-		);
+		// whether the event has an early bird deadline an an early bird price set
+		$priceRegularIsOk = ($this->hasPriceRegular() && $this->hasEarlyBirdPriceRegular());
+
+		// whether no special price is set, or both special prices are set
+		$priceSpecialIsOk = (!$this->hasPriceSpecial() ||
+							($this->hasPriceSpecial() && $this->hasEarlyBirdPriceSpecial()));
+
+		return ($this->hasEarlyBirdDeadline() && $priceRegularIsOk && $priceSpecialIsOk);
 	}
 
 	/**
@@ -1132,8 +1138,12 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns the early bird deadline
-	 * The returned string is formatted using the format configured in dateFormatYMD and timeFormat
+	 * Returns the early bird deadline.
+	 * The returned string is formatted using the format configured in dateFormatYMD
+	 * and timeFormat.
+	 *
+	 * The TS parameter 'showTimeOfEarlyBirdDeadline' controls if the time should also
+	 * be returned in addition to the date.
 	 *
 	 * @return	string		the date and time of the early bird deadline
 	 *

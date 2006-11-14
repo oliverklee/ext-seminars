@@ -528,35 +528,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
 			}
 
-			// show the regular price (with or without early bird rebate)
-			if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
-				$this->setMarkerContent('label_price_earlybird_regular', $this->pi_getLL('label_earlybird_price_regular'));
-				$this->setMarkerContent('price_earlybird_regular', $this->seminar->getEarlyBirdPriceRegular());
-				$this->setMarkerContent('message_earlybird_price', sprintf($this->pi_getLL('message_earlybird_price'),
-									$this->seminar->getPriceRegular(), $this->seminar->getEarlyBirdDeadline()));
-				$this->readSubpartsToHide('price_regular', 'field_wrapper');
-			} else {
-				$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
-				if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
-					$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
-				}
-				$this->readSubpartsToHide('price_earlybird_regular', 'field_wrapper');
-			}
-
-			// show the special price (with or without early bird rebate)
-			if ($this->seminar->hasPriceSpecial()) {
-				if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
-					$this->setMarkerContent('label_price_earlybird_special', $this->pi_getLL('label_earlybird_price_special'));
-					$this->setMarkerContent('price_earlybird_special', $this->seminar->getEarlyBirdPriceSpecial());
-					$this->readSubpartsToHide('price_special', 'field_wrapper');
-				} else {
-					$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
-					$this->readSubpartsToHide('price_earlybird_special', 'field_wrapper');
-				}
-			} else {
-				$this->readSubpartsToHide('price_special', 'field_wrapper');
-				$this->readSubpartsToHide('price_earlybird_special', 'field_wrapper');
-			}
+			// set markers for prices
+			$this->setPriceMarkers('field_wrapper');
 
 			if ($this->seminar->hasPaymentMethods()) {
 				$this->setMarkerContent('paymentmethods', $this->seminar->getPaymentMethods($this));
@@ -606,6 +579,47 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Fills in the matching markers for the prices and hides the unused subparts.
+	 *
+	 * @param	string		the subpart wrapper prefix
+	 *
+	 * @access	protected
+	 */
+	function setPriceMarkers($wrapper) {
+		// set the regular price (with or without early bird rebate)
+		if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
+			$this->setMarkerContent('price_earlybird_regular', $this->seminar->getEarlyBirdPriceRegular());
+			$this->setMarkerContent('message_earlybird_price_regular', sprintf($this->pi_getLL('message_earlybird_price'),
+								$this->seminar->getPriceRegular(), $this->seminar->getEarlyBirdDeadline()));
+			$this->readSubpartsToHide('price_regular', $wrapper);
+		} else {
+			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
+			if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
+				$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
+			}
+			$this->readSubpartsToHide('price_earlybird_regular', $wrapper);
+		}
+
+		// set the special price (with or without early bird rebate)
+		if ($this->seminar->hasPriceSpecial()) {
+			if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
+				$this->setMarkerContent('price_earlybird_special', $this->seminar->getEarlyBirdPriceSpecial());
+				$this->setMarkerContent('message_earlybird_price_special', sprintf($this->pi_getLL('message_earlybird_price'),
+								$this->seminar->getPriceSpecial(), $this->seminar->getEarlyBirdDeadline()));
+	
+				$this->readSubpartsToHide('price_special', $wrapper);
+			} else {
+				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
+				$this->readSubpartsToHide('price_earlybird_special', $wrapper);
+			}
+		} else {
+			$this->readSubpartsToHide('price_special', $wrapper);
+			$this->readSubpartsToHide('price_earlybird_special', $wrapper);
+		}
+		return;
 	}
 
 	/**
@@ -949,15 +963,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createRegistrationForm(&$formObj) {
-		if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
-			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
-		}
-		$this->setMarkerContent('price_regular', $this->seminar->getCurrentPriceRegular());
-		if ($this->seminar->hasPriceSpecial()) {
-			$this->setMarkerContent('price_special', $this->seminar->getCurrentPriceSpecial());
-		} else {
-			$this->readSubpartsToHide('price_special', 'registration_wrapper');
-		}
+		// set the markers for the prices
+		$this->setPriceMarkers('registration_wrapper');
+
 		$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
 		$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
 		// Form has not yet been submitted, so render the form:
