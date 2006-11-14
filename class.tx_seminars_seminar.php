@@ -782,12 +782,13 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function hasEarlyBirdPrice() {
-		// whether the event has an early bird deadline an an early bird price set
-		$priceRegularIsOk = ($this->hasPriceRegular() && $this->hasEarlyBirdPriceRegular());
+		// whether the event has regular prices set (a normal one and an early bird)
+		$priceRegularIsOk = $this->hasPriceRegular() && $this->hasEarlyBirdPriceRegular();
 
-		// whether no special price is set, or both special prices are set
-		$priceSpecialIsOk = (!$this->hasPriceSpecial() ||
-							($this->hasPriceSpecial() && $this->hasEarlyBirdPriceSpecial()));
+		// whether no special price is set, or both special prices
+		// (normal and early bird) are set
+		$priceSpecialIsOk = !$this->hasPriceSpecial() ||
+							($this->hasPriceSpecial() && $this->hasEarlyBirdPriceSpecial());
 
 		return ($this->hasEarlyBirdDeadline() && $priceRegularIsOk && $priceSpecialIsOk);
 	}
