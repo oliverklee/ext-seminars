@@ -1,4 +1,5 @@
 0.4.7
+- Fix: Error with suggested extensions when installing tx_seminars (#345)
 - Improved the manual.
 - Feature: Allow to use select boxes instead of the page browser e.g. for speakers (#331)
 - Feature: Early bird prices (#325)
