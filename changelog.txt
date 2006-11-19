@@ -1,10 +1,12 @@
+0.4.8
+
 0.4.7 (released 2006-11-19)
 - Feature: Automatic configuration check (#273)
 - Fix: Error with suggested extensions when installing tx_seminars (#345)
 - Improved the manual.
 - Feature: Allow to use select boxes instead of the page browser e.g. for speakers (#331)
 - Feature: Early bird prices (#325)
-- Feature : Add "topic" and "date" event subtypes (#298)
+- Feature: Add "topic" and "date" event subtypes (#298)
 - Fix: Conflict with direct_mail 2.1.5 (#320)
 - Fix: error on search in TYPO3 3.8.1 (#306)
 - Changed TCA to allow prices >=10000 (#319)
