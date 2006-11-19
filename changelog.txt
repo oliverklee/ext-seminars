@@ -1,4 +1,4 @@
-0.4.7
+0.4.7 (released 2006-11-19)
 - Feature: Automatic configuration check (#273)
 - Fix: Error with suggested extensions when installing tx_seminars (#345)
 - Improved the manual.
