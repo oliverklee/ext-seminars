@@ -81,7 +81,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkThankYouMail();
 		$this->checkGeneralPriceInMail();
 		$this->checkNotificationMail();
-		if ($this->objectToCheck->getConfValueInteger('enableRegistration')) {
+		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
 			$this->checkAttendancesPid();
 		}
 
@@ -116,12 +116,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function check_tx_seminars_pi1_seminar_registration() {
-		$this->checkStaticIncluded();
-		$this->checkTemplateFile(true);
-		$this->checkCssFile(true);
-		$this->checkSalutationMode(true);
-		$this->checkCssClassNames();
-		$this->checkWhatToDisplay();
+		$this->checkCommonFrontEndSettings();
 
 		$this->checkRegistrationFlag();
 		if (!$this->objectToCheck->getConfValueBoolean('enableRegistration')) {
@@ -152,23 +147,19 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function check_tx_seminars_pi1_single_view() {
-		$this->checkStaticIncluded();
-		$this->checkTemplateFile(true);
-		$this->checkCssFile(true);
-		$this->checkSalutationMode(true);
-		$this->checkCssClassNames();
-		$this->checkWhatToDisplay();
+		$this->checkCommonFrontEndSettings();
+
 		$this->checkRegistrationFlag();
 
 		$this->checkHideFields();
 		$this->checkGeneralPriceInSingle();
 		$this->checkShowSpeakerDetails();
 		$this->checkShowSiteDetails();
-		if ($this->objectToCheck->getConfValueInteger('enableRegistration')) {
+		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
 			$this->checkRegisterPid();
 			$this->checkLoginPid();
 		}
-		$this->checkRegistrationsListPid();
+		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
 
 		return;
@@ -180,13 +171,12 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function check_tx_seminars_pi1_seminar_list() {
-		$this->checkStaticIncluded();
-		$this->checkTemplateFile(true);
-		$this->checkCssFile(true);
-		$this->checkSalutationMode(true);
-		$this->checkCssClassNames();
-		$this->checkWhatToDisplay();
+		$this->checkCommonFrontEndSettings();
+
 		$this->checkRegistrationFlag();
+
+		$this->checkPages();
+		$this->checkRecursive();
 
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
@@ -196,10 +186,10 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkGeneralPriceInList();
 		$this->checkOmitDateIfSameAsPrevious();
 		$this->checkListPid();
-		if ($this->objectToCheck->getConfValueInteger('enableRegistration')) {
+		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
 			$this->checkRegisterPid();
 		}
-		$this->checkRegistrationsListPid();
+		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
 
 		return;
@@ -234,12 +224,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function check_tx_seminars_pi1_list_registrations() {
-		$this->checkStaticIncluded();
-		$this->checkTemplateFile(true);
-		$this->checkCssFile(true);
-		$this->checkSalutationMode(true);
-		$this->checkCssClassNames();
-		$this->checkWhatToDisplay();
+		$this->checkCommonFrontEndSettings();
 
 		$this->checkShowFeUserFieldsInRegistrationsList();
 		$this->checkListPid();
@@ -318,23 +303,40 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	/**
 	 * Checks the setting of the configuration value baseUrl.
 	 *
+	 * @see		http://www.ietf.org/rfc/rfc2396.txt
+	 *
 	 * @access	private
 	 */
 	function checkBaseUrl() {
-		$baseUrl = $this->objectToCheck->getConfValueString('baseURL', 's_template_special');
-
-		if (!preg_match('/^http(s?):\/\/[a-z][a-z0-9_\.]+[a-z0-9]+\/([a-z0-9_\.]+\/)*$/', $baseUrl)) {
-			$message = 'The specified base URL <strong>'
-				.htmlspecialchars($baseUrl)
-				.'</strong> is invalid. '
-				.'This will cause incorrect URLs to be created in the e-mails '
-				.'to the participants. '
-				.'Please set the TS setup variable (or the corresponding '
-				.'flexforms field) <strong>'.$this->getTSSetupPath()
-				.'baseURL</strong> to a valid base URL, including the protocal '
-				.'(http:// or https://) and the trailing slash.';
-			$this->setErrorMessage($message);
-		};
+		// The regular expression used for the host name mostly conforms with
+		// http://www.ietf.org/rfc/rfc2396.txt.
+		$this->checkRegExpNotEmpty(
+			'baseURL',
+			true,
+			's_template_special',
+			'This value specifies the base URL that will be used to create '
+				.'links in e-mails. The base URL must include the protocol '
+				.'(http:// or https://) and the trailing slash. '
+				.'If this value is incorrect, invalid URLs will be created '
+				.'in e-mails to the participants.',
+			// the protocol
+			'/^http(s?):\/\/'
+				.'('
+					// either a domain name ...
+					.'(([a-z\d]|[a-z\d][a-z\d\-]*[a-z\d])\.)*'
+						// ... with a top level domain (or a host at the local
+						// network) at the end
+						.'([a-z][a-z\d\-]*[a-z\d])'
+					// or an IPv4 address
+					.'|\d+\.\d+\.\d+\.\d+'
+				.')'
+				// a port (optional)
+				.'(:\d+)?'
+				.'\/'
+				// any number of path segments (including none)
+				.'([a-zA-Z\d_\-\.]+\/)'
+				.'*$/'
+		);
 
 		return;
 	}
@@ -464,7 +466,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkAttendancesPid() {
-		$this->checkIfPositiveInteger(
+		$this->checkIfSingleSysFolderNotEmpty(
 			'attendancesPID',
 			false,
 			'',
@@ -996,7 +998,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkListPid() {
-		$this->checkIfPositiveInteger(
+		$this->checkIfSingleFePageNotEmpty(
 			'listPID',
 			true,
 			'sDEF',
@@ -1015,7 +1017,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkRegisterPid() {
-		$this->checkIfPositiveInteger(
+		$this->checkIfSingleFePageNotEmpty(
 			'registerPID',
 			true,
 			'sDEF',
@@ -1038,7 +1040,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkLoginPid() {
-		$this->checkIfPositiveInteger(
+		$this->checkIfSingleFePageNotEmpty(
 			'loginPID',
 			true,
 			'sDEF',
@@ -1060,8 +1062,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 *
 	 * @access	private
 	 */
-	function checkRegistrationsListPid() {
-		$this->checkIfInteger(
+	function checkRegistrationsListPidOptional() {
+		$this->checkIfSingleFePageOrEmpty(
 			'registrationsListPID',
 			true,
 			'sDEF',
@@ -1079,7 +1081,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkRegistrationsVipListPid() {
-		$this->checkIfPositiveInteger(
+		$this->checkIfSingleFePageNotEmpty(
 			'registrationsVipListPID',
 			true,
 			'sDEF',
@@ -1098,7 +1100,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkRegistrationsVipListPidOptional() {
-		$this->checkIfInteger(
+		$this->checkIfSingleFePageOrEmpty(
 			'registrationsVipListPID',
 			true,
 			'sDEF',
@@ -1106,6 +1108,65 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'registrations for an event. If this value is not set '
 				.'correctly, the link to that page will not work.'
 		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value pages.
+	 *
+	 * @access	private
+	 */
+	function checkPages() {
+		$this->checkIfSysFoldersNotEmpty(
+			'pages',
+			true,
+			'sDEF',
+			'This value specifies the system folders that contain the '
+			.'event records for the list view. If this value is not set '
+			.'correctly, some events might not get displayed in the list '
+			.'view.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value recursive,
+	 * but also allows empty values.
+	 *
+	 * @access	private
+	 */
+	function checkRecursive() {
+		$this->checkIfInteger(
+			'recursive',
+			true,
+			'sDEF',
+			'This value specifies the how deep the recursion will be for '
+				.'selecting the pages that contain the event records for the '
+				.'list view. If this value is not set correctly, some events '
+				.'might not get displayed in the list view.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the settings that are common to all FE plug-in variations of this
+	 * extension: CSS styled content, static TypoScript template included,
+	 * template file, css file, salutation mode, CSS class names, and what to
+	 * display.
+	 *
+	 * @access	protected
+	 */
+	function checkCommonFrontEndSettings() {
+		$this->checkCssStyledContent();
+		$this->checkStaticIncluded();
+		$this->checkTemplateFile(true);
+		$this->checkCssFile(true);
+		$this->checkSalutationMode(true);
+		$this->checkCssClassNames();
+		$this->checkWhatToDisplay();
 
 		return;
 	}

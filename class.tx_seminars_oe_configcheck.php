@@ -167,6 +167,9 @@ class tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Sets the error message in $this->errorText (unless no other error message
+	 * has already been set).
+	 *
 	 * If $this->errorText is empty, it will be set to $message.
 	 *
 	 * $message should explain what the problem is, what its negative effects
@@ -183,6 +186,32 @@ class tx_seminars_oe_configcheck {
 		if (!empty($message) && empty($this->errorText)) {
 			$this->errorText = $message;
 		}
+
+		return;
+	}
+
+	/**
+	 * Sets the error message, consisting of $explanation and a request to
+	 * change the TS setup variable $fieldName (with the current TS setup path
+	 * prepended). If $canUseFlexforms is true, the possibility to change the
+	 * variable via flexforms is mentioned as well.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		error text to set (may be empty)
+	 *
+	 * @access	protected
+	 */
+	function setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $explanation) {
+		$message = $explanation
+			.' Please correct the TS setup variable <strong>'
+			.$this->getTSSetupPath().$fieldName.'</strong> in your TS '
+			.'template setup';
+		if ($canUseFlexforms) {
+			$message .= ' or via FlexForms';
+		}
+		$message .= '.';
+		$this->setErrorMessage($message);
 
 		return;
 	}
@@ -246,6 +275,14 @@ class tx_seminars_oe_configcheck {
 			.'<br />When that is done, please empty the '
 			.'<acronym title="front-end">FE</acronym> cache and reload '
 			.'this page.'
+			// TODO: Remove this warning for the next release.
+			.'<br /><em><strong>Note:</strong> This automatic configuration '
+			.'checking feature still is fairly new. If you think that some of '
+			.'the displayed warnings are bogus, please take a minute and file '
+			.'a bug report at the <a href="https://bugs.oliverklee.com/">bug '
+			.'tracker</a>.</em>'
+			.'<br /><em>The configuration check for this extension can be '
+			.'disabled in the extension manager.</em>'
 			.'</p>';
 	}
 
@@ -256,7 +293,13 @@ class tx_seminars_oe_configcheck {
 	 */
 	function checkStaticIncluded() {
 		if (!$this->objectToCheck->getConfValueBoolean('isStaticTemplateLoaded')) {
-			$this->setErrorMessage('The static template is not included. This has the effect that important default values do not get set. To fix this, please include this extension\'s template under <em>Include static (from extensions)</em> in your TS template.');
+			$this->setErrorMessage(
+				'The static template is not included. This has the effect '
+					.'that important default values do not get set. To fix '
+					.'this, please include this extension\'s template under '
+					.'<em>Include static (from extensions)</em> in your TS '
+					.'template.'
+			);
 		}
 
 		return;
@@ -279,8 +322,12 @@ class tx_seminars_oe_configcheck {
 				$message = 'The specified HTML template file <strong>'
 					.htmlspecialchars($rawFileName)
 					.'</strong> cannot be read. '
-					.'The HTML template file is essential when creating any output from this extension. '
-					.'Please either create the the file <strong>'.$rawFileName.'</strong> or select an existing file using the TS variable <strong>'.$this->getTSSetupPath().'templateFile</strong>';
+					.'The HTML template file is essential when creating any '
+					.'output from this extension. '
+					.'Please either create the file <strong>'.$rawFileName
+					.'</strong> or select an existing file using the TS setup '
+					.'variable <strong>'.$this->getTSSetupPath()
+					.'templateFile</strong>';
 				if ($canUseFlexforms) {
 					$message .= ' or via FlexForms';
 				}
@@ -310,7 +357,10 @@ class tx_seminars_oe_configcheck {
 					.'</strong> cannot be read. '
 					.'If that variable does not point to an existing file, no '
 					.'special CSS will be used for styling this extension\'s HTML. '
-					.'Please either create the the file <strong>'.$fileName.'</strong> or select an existing file using the TS variable <strong>'.$this->getTSSetupPath().'cssFile</strong>';
+					.'Please either create the file <strong>'.$fileName
+					.'</strong> or select an existing file using the TS '
+					.'setup variable <strong>'.$this->getTSSetupPath()
+					.'cssFile</strong>';
 				if ($canUseFlexforms) {
 					$message .= ' or via FlexForms';
 				}
@@ -358,22 +408,17 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for and why it needs to be non-empty, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for and why it needs to be non-empty, must not be empty
 	 *
 	 * @access	protected
 	 */
 	function checkForNonEmptyString($fieldName, $canUseFlexforms, $sheet, $explanation) {
 		if (!$this->objectToCheck->hasConfValueString($fieldName, $sheet)) {
-			$message = '';
-
-			$message = 'The TS setup variable <strong>'.$this->getTSSetupPath().$fieldName.'</strong> currently is empty, but is required to contain a non-empty value. '
-				.$explanation
-				.' Please set the TS setup variable <strong>'.$this->getTSSetupPath().$fieldName.'</strong> in your TS template setup';
-			if ($canUseFlexforms) {
-				$message .= ' or via FlexForms';
-			}
-			$message .= '.';
-			$this->setErrorMessage($message);
+			$message = 'The TS setup variable <strong>'.$this->getTSSetupPath()
+				.$fieldName.'</strong> currently is empty, but is required to '
+				.'contain a non-empty value. '
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
 		}
 
 		return;
@@ -386,7 +431,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	array		array of allowed values (must not be empty)
 	 *
 	 * @access	protected
@@ -404,7 +449,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	array		array of allowed values (must not be empty)
 	 *
 	 * @access	protected
@@ -418,15 +463,12 @@ class tx_seminars_oe_configcheck {
 			if (!in_array($value, $allowedValues, true)) {
 				$message = 'The TS setup variable <strong>'
 					.$this->getTSSetupPath().$fieldName
-					.'</strong> is set to the value <strong>'.htmlspecialchars($value).'</strong>, but only the following values are allowed: '
+					.'</strong> is set to the value <strong>'
+					.htmlspecialchars($value).'</strong>, but only the '
+					.'following values are allowed: '
 					.'<br /><strong>'.$overviewOfValues.'</strong><br />'
-					.$explanation
-					.' Please correct the TS setup variable <strong>'.$this->getTSSetupPath().$fieldName.'</strong> in your TS template setup';
-				if ($canUseFlexforms) {
-					$message .= ' or via FlexForms';
-				}
-				$message .= '.';
-				$this->setErrorMessage($message);
+					.$explanation;
+				$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
 			}
 		}
 
@@ -439,7 +481,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 *
 	 * @access	protected
 	 */
@@ -461,7 +503,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 *
 	 * @access	protected
 	 */
@@ -471,14 +513,11 @@ class tx_seminars_oe_configcheck {
 		if (!preg_match('/^\d*$/', $value)) {
 			$message = 'The TS setup variable <strong>'
 				.$this->getTSSetupPath().$fieldName
-				.'</strong> is set to the value <strong>'.htmlspecialchars($value).'</strong>, but only integers are allowed. '
-				.$explanation
-				.' Please correct the TS setup variable <strong>'.$this->getTSSetupPath().$fieldName.'</strong> in your TS template setup';
-			if ($canUseFlexforms) {
-				$message .= ' or via FlexForms';
-			}
-			$message .= '.';
-			$this->setErrorMessage($message);
+				.'</strong> is set to the value <strong>'
+				.htmlspecialchars($value).'</strong>, but only integers are '
+				.'allowed. '
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
 		}
 
 		return;
@@ -491,7 +530,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 *
 	 * @access	protected
 	 */
@@ -502,13 +541,8 @@ class tx_seminars_oe_configcheck {
 			$message = 'The TS setup variable <strong>'
 				.$this->getTSSetupPath().$fieldName
 				.'</strong> is zero, but needs to be non-zero. '
-				.$explanation
-				.' Please correct the TS setup variable <strong>'.$this->getTSSetupPath().$fieldName.'</strong> in your TS template setup';
-			if ($canUseFlexforms) {
-				$message .= ' or via FlexForms';
-			}
-			$message .= '.';
-			$this->setErrorMessage($message);
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
 		}
 
 		return;
@@ -520,7 +554,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	array		array of allowed values (must not be empty)
 	 *
 	 * @access	protected
@@ -538,7 +572,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	array		array of allowed values (must not be empty)
 	 *
 	 * @access	protected
@@ -557,15 +591,12 @@ class tx_seminars_oe_configcheck {
 				if (!in_array($currentTrimmedValue, $allowedValues, true)) {
 					$message = 'The TS setup variable <strong>'
 						.$this->getTSSetupPath().$fieldName
-						.'</strong> contains the value <strong>'.htmlspecialchars($currentTrimmedValue).'</strong>, but only the following values are allowed: '
+						.'</strong> contains the value <strong>'
+						.htmlspecialchars($currentTrimmedValue).'</strong>, '
+						.'but only the following values are allowed: '
 						.'<br /><strong>'.$overviewOfValues.'</strong><br />'
-						.$explanation
-						.' Please correct the TS setup variable <strong>'.$this->getTSSetupPath().$fieldName.'</strong> in your TS template setup';
-					if ($canUseFlexforms) {
-						$message .= ' or via FlexForms';
-					}
-					$message .= '.';
-					$this->setErrorMessage($message);
+						.$explanation;
+					$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
 				}
 			}
 		}
@@ -580,7 +611,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	string		a DB table name (must not be empty)
 	 *
 	 * @access	protected
@@ -603,7 +634,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	string		a DB table name (must not be empty)
 	 *
 	 * @access	protected
@@ -626,7 +657,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	string		a DB table name (must not be empty)
 	 *
 	 * @access	protected
@@ -649,7 +680,7 @@ class tx_seminars_oe_configcheck {
 	 * @param	string		TS setup field name to extract, must not be empty
 	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
 	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
-	 * @param	string		a sentence explaning what that configuration value is needed for, must be non-empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
 	 * @param	string		a DB table name (must not be empty)
 	 *
 	 * @access	protected
@@ -677,7 +708,9 @@ class tx_seminars_oe_configcheck {
 			'salutation',
 			$canUseFlexforms,
 			'sDEF',
-			'This variable controls the salutation mode (formal or informal). If it is not set correctly, some output cannot be created at all.',
+			'This variable controls the salutation mode (formal or informal). '
+				.'If it is not set correctly, some output cannot be created '
+				.'at all.',
 			array('formal', 'informal')
 		);
 
@@ -719,6 +752,322 @@ class tx_seminars_oe_configcheck {
 		$columns = $GLOBALS['TYPO3_DB']->admin_get_fields($tableName);
 
 		return array_keys($columns);
+	}
+
+	/**
+	 * Checks whether a configuration value matches a regular expression.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 * @param	string		a regular expression (including the delimiting slashes)
+	 *
+	 * @access	protected
+	 */
+	function checkRegExp($fieldName, $canUseFlexforms, $sheet, $explanation, $regExp) {
+		$value = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+
+		if (!preg_match($regExp, $value)) {
+			$message = 'The TS setup variable <strong>'.$this->getTSSetupPath()
+				.$fieldName.'</strong> contains the value <strong>'
+				.htmlspecialchars($value).'</strong> which isn\'t valid. '
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
+		};
+
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value is non-empty and matches a regular
+	 * expression.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 * @param	string		a regular expression (including the delimiting slashes)
+	 *
+	 * @access	protected
+	 */
+	function checkRegExpNotEmpty($fieldName, $canUseFlexforms, $sheet, $explanation, $regExp) {
+		$this->checkForNonEmptyString($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkRegExp($fieldName, $canUseFlexforms, $sheet, $explanation, $regExp);
+
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value either is empty or contains a
+	 * comma-separated list of integers (in this case, PIDs).
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfPidListOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkRegExp(
+			$fieldName,
+			$canUseFlexforms,
+			$sheet,
+			$explanation,
+			'/^([0-9]+(,( *)[0-9]+)*)?$/'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value is non-empty and contains a
+	 * comma-separated list of integers (in this case, PIDs).
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfPidListNotEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkForNonEmptyString($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkIfPidListOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value is non-empty and contains a
+	 * comma-separated list of front-end PIDs.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfFePagesNotEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkForNonEmptyString($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkIfFePagesOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value is non-empty and contains a
+	 * single front-end PID.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfSingleFePageNotEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkIfPositiveInteger($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkIfFePagesOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value either is empty or contains a
+	 * single front-end PID.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfSingleFePageOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkIfInteger($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkIfFePagesOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value either is empty or contains a
+	 * comma-separated list of front-end PIDs.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfFePagesOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$pids = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+
+		// When the configuration value contains a comma, use the plural.
+		if (strrpos($pids, ',') !== false ) {
+			$message = 'All the selected pages need to be front-end pages so '
+				.'that links to them work correctly. '.$explanation;
+		} else {
+			$message = 'The selected page needs to be a front-end page so that '
+				.'links to it work correctly. '.$explanation;
+		}
+		$this->checkPageTypeOrEmpty($fieldName, $canUseFlexforms, $sheet, $message, '<199');
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value is non-empty and contains a
+	 * comma-separated list of system folder PIDs.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfSysFoldersNotEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkForNonEmptyString($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkIfSysFoldersOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value is non-empty and contains a
+	 * single system folder PID.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfSingleSysFolderNotEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkIfPositiveInteger($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkIfSysFoldersOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value either is empty or contains a
+	 * single system folder PID.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfSingleSysFolderOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkIfInteger($fieldName, $canUseFlexforms, $sheet, $explanation);
+		$this->checkIfSysFoldersOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value either is empty or contains a
+	 * comma-separated list of system folder PIDs.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfSysFoldersOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$pids = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+
+		// When the configuration value contains a comma, use the plural.
+		if (strrpos($pids, ',') !== false ) {
+			$message = 'All the selected pages need to be system folders so '
+				.'that data records are tidily separated from front-end '
+				.'content. '.$explanation;
+		} else {
+			$message = 'The selected page needs to be a system folder so that '
+				.'data records are tidily separated from front-end content. '
+				.$explanation;
+		}
+		$this->checkPageTypeOrEmpty($fieldName, $canUseFlexforms, $sheet, $message, '=254');
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value either is empty or contains a
+	 * comma-separated list of PIDs that specify pages or a given type.
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 * @param	string		a comparison operator with a value that will be used in a SQL query to check for the correct page types, e.g. "<199" or "=254", must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkPageTypeOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation, $typeCondition) {
+		$this->checkIfPidListOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation);
+
+		if ($this->objectToCheck->hasConfValueString($fieldName, $sheet)) {
+			$pids = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'uid',
+				'pages',
+				'uid IN ('.$pids.') AND NOT doktype'.$typeCondition
+					.t3lib_pageSelect::enableFields('pages'),
+				'',
+				'',
+				'');
+
+			if ($dbResult) {
+				$dbResultCount = $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult);
+				if ($dbResultCount) {
+					$offendingPids = array();
+					while ($dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+						$offendingPids[] = $dbResultAssoc['uid'];
+					}
+
+					$pageIdPlural = ($dbResultCount > 1) ? 's' : '';
+					$bePlural = ($dbResultCount > 1) ? 'are' : 'is';
+
+					$message = 'The TS setup variable <strong>'
+						.$this->getTSSetupPath().$fieldName
+						.'</strong> contains the page ID'.$pageIdPlural
+						.' <strong>'.implode(',', $offendingPids).'</strong> '
+						.'which '.$bePlural.' of an incorrect page type. '
+						.$explanation.'<br />';
+					$this->setErrorMessageAndRequestCorrection(
+						$fieldName,
+						$canUseFlexforms,
+						$message
+					);
+				}
+			}
+		}
+
+		return;
+	}
+
+	/**
+	 * Checks whether CSS Styled Content is installed and active.
+	 *
+	 * @access	protected
+	 */
+	function checkCssStyledContent() {
+		if (isset($GLOBALS['TSFE'])) {
+			if (!isset($GLOBALS['TSFE']->tmpl->setup['includeLibs.']['tx_cssstyledcontent_pi1'])
+			|| ($GLOBALS['TSFE']->tmpl->setup['includeLibs.']['tx_cssstyledcontent_pi1']
+			!== 'EXT:css_styled_content/pi1/class.tx_cssstyledcontent_pi1.php')) {
+			$this->setErrorMessage('The extension CSS Styled Content is not '
+				.'loaded. This will break some output of this extension. '
+				.'Please install CSS Styled Content and include its '
+				.'configuration in your TS template.');
+			}
+		}
+		return;
 	}
 }
 

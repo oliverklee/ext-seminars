@@ -230,6 +230,20 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @access	protected
 	 */
 	function substituteMarkerArrayCached($key) {
+		if (!isset($this->templateCache[$key])) {
+			$this->setErrorMessage('The subpart <strong>'.$key.'</strong> is '
+				.'missing in the HTML template file <strong>'
+				.$this->getConfValueString(
+					'templateFile',
+					's_template_special',
+					true)
+				.'</strong>. If you are using a modified HTML template, please '
+				.'fix it. If you are using the original HTML template file, '
+				.'please file a bug report in the '
+				.'<a href="https://bugs.oliverklee.com/">bug tracker</a>.'
+			);
+		}
+
 		// remove subparts (lines) that will be hidden
 		$noHiddenSubparts = $this->cObj->substituteMarkerArrayCached($this->templateCache[$key], array(), $this->subpartsToHide);
 
