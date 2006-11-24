@@ -62,6 +62,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkShowTimeOfRegistrationDeadline();
 		$this->checkShowTimeOfEarlyBirdDeadline();
 		$this->checkShowVacanciesThreshold();
+		$this->checkDecimalDigits();
+		$this->checkDecimalSplitChar();
 
 		return;
 	}
@@ -354,6 +356,48 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies whether the extension will use provide online'
 				.'registration. If this value is incorrect, the online registration '
 				.'will not be enabled or disabled correctly.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value decimalDigits.
+	 *
+	 * @access	private
+	 */
+	function checkDecimalDigits() {
+		$explanation = 'This value specifies the amount of digits displayed behind the '
+						.'decimal point in prices. If this value is incorrect, prices '
+						.'may have an unexpected look.';
+		$this->checkForNonEmptyString(
+			'decimalDigits',
+			false,
+			'',
+			$explanation
+		);
+		$this->checkIfInteger(
+			'decimalDigits',
+			false,
+			'',
+			$explanation
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value decimalSplitChar.
+	 *
+	 * @access	private
+	 */
+	function checkDecimalSplitChar() {
+		$this->checkForNonEmptyString(
+			'decimalSplitChar',
+			false,
+			'',
+			'This value specifies the char that is used to split the price. If this '
+			.'value is empty all prices will be shown wrong (missing decimal point).'
 		);
 
 		return;

@@ -651,7 +651,24 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPriceRegular($space = '&nbsp;') {
-		return $this->getTopicInteger('price_regular').$space.$this->getConfValueString('currency');
+		$value = $this->getTopicDecimal('price_regular');
+		$currency = $this->getConfValueString('currency');
+		return $this->formatPrice($value).$space.$currency;
+	}
+
+	/**
+	 * Returns the price, formatted as configured in TS.
+	 * The price must be supplied as integer or floating point value.
+	 *
+	 * @param	string		the price
+	 *
+	 * @return	string		the price, formatted as in configured in TS
+	 */
+	function formatPrice($value) {
+		return number_format($value,
+			$this->getConfValueInteger('decimalDigits'),
+			$this->getConfValueString('decimalSplitChar'),
+			$this->getConfValueString('thousandsSplitChar'));
 	}
 
 	/**
@@ -693,8 +710,10 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function getEarlyBirdPriceRegular($space = '&nbsp;') {
+		$value = $this->getTopicDecimal('price_regular_early');
+		$currency = $this->getConfValueString('currency');
 		return $this->hasEarlyBirdPriceRegular() ?
-			($this->getTopicInteger('price_regular_early').$space.$this->getConfValueString('currency')) : '';
+			$this->formatPrice($value).$space.$currency : '';
 	}
 
 	/**
@@ -708,8 +727,10 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function getEarlyBirdPriceSpecial($space = '&nbsp;') {
+		$value = $this->getTopicDecimal('price_special_early');
+		$currency = $this->getConfValueString('currency');
 		return $this->hasEarlyBirdPriceSpecial() ?
-			($this->getTopicInteger('price_special_early').$space.$this->getConfValueString('currency')) : '';
+			$this->formatPrice($value).$space.$currency : '';
 	}
 
 	/**
@@ -720,7 +741,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasPriceRegular() {
-		return $this->hasTopicInteger('price_regular');
+		return $this->hasTopicDecimal('price_regular');
 	}
 
 	/**
@@ -731,7 +752,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function hasEarlyBirdPriceRegular() {
-		return $this->hasTopicInteger('price_regular_early');
+		return $this->hasTopicDecimal('price_regular_early');
 	}
 
 	/**
@@ -742,7 +763,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function hasEarlyBirdPriceSpecial() {
-		return $this->hasTopicInteger('price_special_early');
+		return $this->hasTopicDecimal('price_special_early');
 	}
 
 	/**
@@ -799,13 +820,15 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @param	string		the character or HTML entity used to separate price and currency
 	 *
-	 * @return	string		the special seminar price
+	 * @return	string		the special event price
 	 *
 	 * @access	public
 	 */
 	function getPriceSpecial($space = '&nbsp;') {
+		$value = $this->getTopicDecimal('price_special');
+		$currency = $this->getConfValueString('currency');
 		return $this->hasPriceSpecial() ?
-			$this->getTopicInteger('price_special').$space.$this->getConfValueString('currency') : '';
+			$this->formatPrice($value).$space.$currency : '';
 	}
 
 	/**
@@ -816,7 +839,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasPriceSpecial() {
-		return $this->hasTopicInteger('price_special');
+		return $this->hasTopicDecimal('price_special');
 	}
 
 	/**
@@ -1914,6 +1937,51 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$result = $this->topic->getRecordPropertyString($key);
 		} else {
 			$result = $this->getRecordPropertyString($key);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks a decimal element of the record data array for existence and a value != 0.00.
+	 * If we are a date record, it'll be retrieved from the corresponding topic record.
+	 *
+	 * @param	string		key of the element to check
+	 *
+	 * @return	boolean		true if the corresponding decimal value exists and is not 0.00
+	 *
+	 * @access	private
+	 */
+	function hasTopicDecimal($key) {
+		$result = false;
+
+		if ($this->isTopicOkay()) {
+			$result = $this->topic->hasRecordPropertyDecimal($key);
+		} else {
+			$result = $this->hasRecordPropertyDecimal($key);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets a decimal element of the record data array.
+	 * If the array has not been initialized properly, an empty string is returned instead.
+	 * If we are a date record, it'll be retrieved from the corresponding topic record.
+	 *
+	 * @param	string		the name of the field to retrieve
+	 *
+	 * @return	string		the corresponding element from the record data array
+	 *
+	 * @access	private
+	 */
+	function getTopicDecimal($key) {
+		$result = '';
+
+		if ($this->isTopicOkay()) {
+			$result = $this->topic->getRecordPropertyDecimal($key);
+		} else {
+			$result = $this->getRecordPropertyDecimal($key);
 		}
 
 		return $result;

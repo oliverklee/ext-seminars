@@ -119,6 +119,23 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Gets a decimal element of the record data array.
+	 * If the array has not been initialized properly, '0.00' is returned instead.
+	 *
+	 * @param	string		key of the element to return
+	 *
+	 * @return	string		the corresponding element from the record data array
+	 *
+	 * @access	protected
+	 */
+	function getRecordPropertyDecimal($key) {
+		$result = $this->hasKey($key)
+			? trim($this->recordData[$key]) : '0.00';
+
+		return $result;
+	}
+
+	/**
 	 * Checks a string element of the record data array for existence and non-emptiness.
 	 *
 	 * @param	string		key of the element to check
@@ -142,6 +159,19 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 */
 	function hasRecordPropertyInteger($key) {
 		return (boolean) $this->getRecordPropertyInteger($key);
+	}
+
+	/**
+	 * Checks a decimal element of the record data array for existence and value != 0.00.
+	 *
+	 * @param	string		key of the element to check
+	 *
+	 * @return	boolean		true if the corresponding field exists and its value is not "0.00".
+	 *
+	 * @access	protected
+	 */
+	function hasRecordPropertyDecimal($key) {
+		return ($this->getRecordPropertyDecimal($key) != '0.00');
 	}
 
 	/**

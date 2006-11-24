@@ -56,6 +56,15 @@ plugin.tx_seminars {
 	# whether date ranges should be shortened when possible
 	abbreviateDateRanges = 1
 
+	# number of digits after the point in event prices
+	decimalDigits = 2
+
+	# the character used to split the thousands in event prices
+	thousandsSplitChar =
+
+	# the character used to split the price and its decimal digits
+	decimalSplitChar = .
+
 	# ISO3 code of the currency to be used (not checked for validity yet)
 	currency = EUR
 
