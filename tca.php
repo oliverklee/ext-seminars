@@ -176,9 +176,9 @@ $TCA['tx_seminars_seminars'] = Array (
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_sites',
 				'foreign_table' => 'tx_seminars_sites',
-				'size' => 3,
+				'size' => 10,
 				'minitems' => 0,
-				'maxitems' => 3,
+				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_place_mm',
 			)
 		),
@@ -199,7 +199,7 @@ $TCA['tx_seminars_seminars'] = Array (
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'size' => 3,
+				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_speakers_mm',
@@ -277,9 +277,9 @@ $TCA['tx_seminars_seminars'] = Array (
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
 				'foreign_table' => 'tx_seminars_payment_methods',
-				'size' => 3,
+				'size' => 5,
 				'minitems' => 0,
-				'maxitems' => 3,
+				'maxitems' => 999,
 			)
 		),
 		'organizers' => Array (
@@ -290,9 +290,9 @@ $TCA['tx_seminars_seminars'] = Array (
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
 				'foreign_table' => 'tx_seminars_organizers',
-				'size' => 3,
+				'size' => 5,
 				'minitems' => 1,
-				'maxitems' => 3,
+				'maxitems' => 999,
 			)
 		),
 		'needs_registration' => Array (
@@ -375,7 +375,7 @@ $TCA['tx_seminars_seminars'] = Array (
 				'allowed' => 'fe_users',
 				'size' => 5,
 				'minitems' => 0,
-				'maxitems' => 100,
+				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_feusers_mm',
 			)
 		),
