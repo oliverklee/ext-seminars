@@ -410,7 +410,9 @@ $TCA['tx_seminars_seminars'] = Array (
 				'allowed' => 'tx_seminars_seminars',
 				'foreign_table' => 'tx_seminars_seminars',
 				// only allow for topic records and complete event records, but not for date records
-				'foreign_table_where' => 'AND (tx_seminars_seminars.object_type=0 OR tx_seminars_seminars.object_type=1)'.$selectWhereForTopics,
+				'foreign_table_where' => 'AND (tx_seminars_seminars.object_type=0 '
+					.'OR tx_seminars_seminars.object_type=1)'.$selectWhereForTopics
+					.' ORDER BY title',
 				'size' => 1,
 				'minitems' => 1,
 				'maxitems' => 1,
