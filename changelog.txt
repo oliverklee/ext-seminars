@@ -1,4 +1,5 @@
 0.4.8
+- Fix: The configuration check doesn't always recognize FE pages (#356)
 
 0.4.7 (released 2006-11-19)
 - Feature: Automatic configuration check (#273)

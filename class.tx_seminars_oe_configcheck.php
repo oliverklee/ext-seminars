@@ -1016,7 +1016,7 @@ class tx_seminars_oe_configcheck {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'uid',
 				'pages',
-				'uid IN ('.$pids.') AND NOT doktype'.$typeCondition
+				'uid IN ('.$pids.') AND NOT (doktype'.$typeCondition.')'
 					.t3lib_pageSelect::enableFields('pages'),
 				'',
 				'',
