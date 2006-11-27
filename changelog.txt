@@ -1,4 +1,5 @@
 0.4.8
+- Fix: Typo in the configuration check (#387)
 - Fix: Event still open for registration after registration deadline is over (#348)
 - Fix: Configuration check warning with showFeUserFieldsInNotificationMail (#359)
 - Code cleanup and refactoring (#351)
