@@ -16,6 +16,19 @@ $TCA['tx_seminars_seminars'] = Array (
 		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,deadline_registration,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,vips,notes'
 	),
 	'columns' => Array (
+		'object_type' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.object_type',
+			'config' => Array (
+			'type' => 'radio',
+				'default' => '0',
+				'items' => Array (
+					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.0', '0'),
+					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.1', '1'),
+					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2'),
+				)
+			)
+		),
 		'hidden' => Array (
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
@@ -59,6 +72,23 @@ $TCA['tx_seminars_seminars'] = Array (
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
+			)
+		),
+		'topic' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.topic',
+			'config' => Array (
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_seminars',
+				'foreign_table' => 'tx_seminars_seminars',
+				// only allow for topic records and complete event records, but not for date records
+				'foreign_table_where' => 'AND (tx_seminars_seminars.object_type=0 '
+					.'OR tx_seminars_seminars.object_type=1)'.$selectWhereForTopics
+					.' ORDER BY title',
+				'size' => 1,
+				'minitems' => 1,
+				'maxitems' => 1,
 			)
 		),
 		'subtitle' => Array (
@@ -386,36 +416,6 @@ $TCA['tx_seminars_seminars'] = Array (
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
-			)
-		),
-		'object_type' => Array (
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.object_type',
-			'config' => Array (
-			'type' => 'radio',
-				'default' => '0',
-				'items' => Array (
-					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.0', '0'),
-					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.1', '1'),
-					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2'),
-				)
-			)
-		),
-		'topic' => Array (
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.topic',
-			'config' => Array (
-				'type' => $selectType,
-				'internal_type' => 'db',
-				'allowed' => 'tx_seminars_seminars',
-				'foreign_table' => 'tx_seminars_seminars',
-				// only allow for topic records and complete event records, but not for date records
-				'foreign_table_where' => 'AND (tx_seminars_seminars.object_type=0 '
-					.'OR tx_seminars_seminars.object_type=1)'.$selectWhereForTopics
-					.' ORDER BY title',
-				'size' => 1,
-				'minitems' => 1,
-				'maxitems' => 1,
 			)
 		)
 	),

@@ -1,4 +1,5 @@
 0.4.8
+- Code cleanup and refactoring (#351)
 - Feature: Allow manual sorting of event records in the BE (#350)
 - Feature: Allow for cent prices (#324)
 - Fix: Make the DB selector boxes a bit higher (#369)
