@@ -1,5 +1,6 @@
 0.4.8
-- Enhancement: Allow for cent prices (#324)
+- Feature: Allow manual sorting of event records in the BE (#350)
+- Feature: Allow for cent prices (#324)
 - Fix: Make the DB selector boxes a bit higher (#369)
 - Fix: In the topic drop-down of event date records, the entries should be sorted alphabetically (#355)
 - Fix: The configuration check doesn't always recognize FE pages (#356)
