@@ -59,12 +59,15 @@
   color: inherit;
 }
 
-.tx-seminars-pi1-vacancies-2 .tx-seminars-pi1-square, .tx-seminars-pi1-vacancies-1 .tx-seminars-pi1-square {
+.tx-seminars-pi1-vacancies-2 .tx-seminars-pi1-square,
+.tx-seminars-pi1-vacancies-1 .tx-seminars-pi1-square {
   background-color: #ffff3c;
   color: inherit;
 }
 
-.tx-seminars-pi1-vacancies-0 .tx-seminars-pi1-square, .tx-seminars-pi1-canceled .tx-seminars-pi1-square {
+.tx-seminars-pi1-vacancies-0 .tx-seminars-pi1-square,
+.tx-seminars-pi1-canceled .tx-seminars-pi1-square,
+.tx-seminars-pi1-registration-deadline-over  .tx-seminars-pi1-square {
   background-color: #c30000;
   color: inherit;
 }
