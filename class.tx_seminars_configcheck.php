@@ -699,6 +699,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			array(
 				'hello',
 				'title',
+				'uid',
+				'seats',
 				'accreditation_number',
 				'credit_points',
 				'date',
