@@ -111,15 +111,13 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
 - switch extension status from "alpha" to "beta" so that we can get a security review and appear and in the offical part of the TER
-- switch from feformslib to another front end forms lib that is at least beta so that we can get a security review
+- switch from feformslib to ameos_formidable (which is at least beta) so that we can get a security review
 - format changelog according to http://www.red-bean.com/cvs2cl/changelogs.html
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
 - add automatic headers (function index) to code files
 - check code with PhpLint once PhpLint is a bit more mature
 - investigate whether the string pi_list_browseresults_noResults actually is used
-- check for unused localization strings once more
-- provide a patch for the frontendformslib extension: remove brackets from URLs
 - investigate whether to use pibase->initMemberArray()
 - remove duplicate code for putting seminar properties into markers in tx_seminars_registration::notifyAttendee(), tx_seminars_pi1::singleView(), tx_seminars_pi1::pi_list_row() and tx_seminars_pi1::createRegistrationForm()
 - refactor the getters in the seminars class, try to remove duplicate code
@@ -130,12 +128,10 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
 - add fields "attendees_paid" and "attendees_unpaid" to the seminar record and fill them in updateStatistics()
 - add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
-- investigate whether to use ameos_formidable instead of frontendformslib
 - check that all functions have a "return" (and only one), except for empty constructors
 - check that constructors don't try to return any values
 - document how the templates work (labels, wrappers etc.)
 - move code from pi1/class.tx_seminars_pi1.php into separate class where it makes sense
-- investigate whether we should have @package/@subpackage tags
 - add the SVN tag "dollar Id dollar" in the header comment of each document
 - check that all file names are 31 characters or shorter
 - factor out t3lib_pageSelect::enableFields into objectfromdb
@@ -158,7 +154,6 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - in the registration class, use $this->tableName instead of $this->tableAttendances
 - in the seminar class, use $this->tableName instead of $this->tableSeminars
 - investigate whether we should use t3lib_flexformtools
-- investigate whether we should recommend TYPO3 4.0 so that we can send e-mails in UTF-8
 - investigate whether to use t3lib_div::plainMailEncoded()
 - add "@author" / "@package TYPO3" and "@subpackage tx_seminars" to all PHP classes (this is required by the TYPO3 coding guidelines)
 - check that all occurances of TYPO3 in comments and strings use the correct case "TYPO3"
@@ -167,12 +162,12 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
       t3lib_extMgm::addStaticFile($_EXTKEY,'static/','Seminar Manager Setup');
   - in ext_tables.php:
       t3lib_extMgm::addStaticFile($_EXTKEY,'static/','Seminars');
-- make sure each file has a linefeed as last character
+- make sure each file has a linefeed as last character (except for the XML files)
 - use mmQuery where possible (eg. in seminar->getSpeakersShort)
 - in seminar->createListRow(), factor out the creation of the CSS class
 - refactor seminar->createSingleView() so that is a *lot* shorter and better to read
 - check if the first parameter from the seminar constructor (the registration manager) is needed at all
-- use the Partner Framework for most address data http://wiki.typo3.org/index.php/Partner_Framework
+- use the Partner (Party) Framework for most address data http://wiki.typo3.org/index.php/Partner_Framework
 - investigate whether we can drop the plugin.tx_seminars_pi1.baseURL parameter as sr_feuser_register seems to do without it quite well
 - replace all occurances of ")tab*{" with ")space{" (also in oelib)
 - move most of the registrations list from pi1 to the seminar class (where it belongs)
@@ -181,7 +176,6 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - use implode() when comma-separating stuff (e.g. participants lists)
 - use MVC
 - add a getConfValueArray() to oelib or allow getConfValue to specify array keys
-- in the manual, remove references to versions < 0.4.3
 - have the templates end on .html and include some HTML wrapping so they are easier to edit
 - add comments and explanations to the HTML templates so that they are easier and safer to edit
 - in the reference, make sure all type information entries are valid TYPO3 data types
