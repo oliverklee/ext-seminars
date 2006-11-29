@@ -413,11 +413,30 @@ class tx_seminars_oe_configcheck {
 	 * @access	protected
 	 */
 	function checkForNonEmptyString($fieldName, $canUseFlexforms, $sheet, $explanation) {
-		if (!$this->objectToCheck->hasConfValueString($fieldName, $sheet)) {
-			$message = 'The TS setup variable <strong>'.$this->getTSSetupPath()
-				.$fieldName.'</strong> currently is empty, but is required to '
-				.'contain a non-empty value. '
-				.$explanation;
+		$value = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+		$this->checkForNonEmptyStringValue($value, $fieldName, $canUseFlexforms, $explanation);
+
+		return;
+	}
+
+	/**
+	 * Checks whether a provided value is a non-empty string. The
+	 * value to check must be provided as a parameter and is not fetched
+	 * automatically; the $fieldName parameter is only used to create the
+	 * warning message.
+	 *
+	 * @param	string		the value to check
+	 * @param	string		TS setup field name to mention in the warning, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		a sentence explaning what that configuration value is needed for and why it needs to be non-empty, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkForNonEmptyStringValue($value, $fieldName, $canUseFlexforms, $explanation) {
+		if ($value === '') {
+			$message = 'The TS setup variable <strong>'
+				.$this->getTSSetupPath().$fieldName
+				.'</strong> is empty, but needs to be non-empty. '.$explanation;
 			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
 		}
 
@@ -457,19 +476,43 @@ class tx_seminars_oe_configcheck {
 	function checkIfSingleInSetOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation, $allowedValues) {
 		if ($this->objectToCheck->hasConfValueString($fieldName, $sheet)) {
 			$value = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+			$this->checkIfSingleInSetOrEmptyValue(
+				$value,
+				$fieldName,
+				$canUseFlexforms,
+				$explanation,
+				$allowedValues
+			);
+		}
 
+		return;
+	}
+
+	/**
+	 * Checks whether a provided value either is empty or lies within a
+	 * set of allowed values. The value to check must be provided as a parameter
+	 * and is not fetched automatically; the $fieldName parameter is only used
+	 * to create the warning message.
+	 *
+	 * @param	string		the value to check
+	 * @param	string		TS setup field name to mention in the warning, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 * @param	array		array of allowed values (must not be empty)
+	 *
+	 * @access	protected
+	 */
+	function checkIfSingleInSetOrEmptyValue($value, $fieldName, $canUseFlexforms, $explanation, $allowedValues) {
+		if (!empty($value) && !in_array($value, $allowedValues, true)) {
 			$overviewOfValues = '('.implode(', ', $allowedValues).')';
-
-			if (!in_array($value, $allowedValues, true)) {
-				$message = 'The TS setup variable <strong>'
-					.$this->getTSSetupPath().$fieldName
-					.'</strong> is set to the value <strong>'
-					.htmlspecialchars($value).'</strong>, but only the '
-					.'following values are allowed: '
-					.'<br /><strong>'.$overviewOfValues.'</strong><br />'
-					.$explanation;
-				$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
-			}
+			$message = 'The TS setup variable <strong>'
+				.$this->getTSSetupPath().$fieldName
+				.'</strong> is set to the value <strong>'
+				.htmlspecialchars($value).'</strong>, but only the '
+				.'following values are allowed: '
+				.'<br /><strong>'.$overviewOfValues.'</strong><br />'
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
 		}
 
 		return;
@@ -486,7 +529,7 @@ class tx_seminars_oe_configcheck {
 	 * @access	protected
 	 */
 	function checkIfBoolean($fieldName, $canUseFlexforms, $sheet, $explanation) {
-		$this->checkIfSingleInSetOrEmpty(
+		$this->checkIfSingleInSetNotEmpty(
 			$fieldName,
 			$canUseFlexforms,
 			$sheet,
@@ -524,6 +567,35 @@ class tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks whether a provided value has an integer value (or is empty). The
+	 * value to check must be provided as a parameter and is not fetched
+	 * automatically; the $fieldName parameter is only used to create the
+	 * warning message.
+	 *
+	 * @param	string		the value to check
+	 * @param	string		TS setup field name to mention in the warning, must not be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfPositiveIntegerValue($value, $fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$this->checkForNonEmptyStringValue($value, $fieldName, $canUseFlexforms, $explanation);
+		if (!preg_match('/^[1-9]\d*$/', $value)) {
+			$message = 'The TS setup variable <strong>'
+				.$this->getTSSetupPath().$fieldName
+				.'</strong> is set to the value <strong>'
+				.htmlspecialchars($value).'</strong>, but only positive '
+				.'integers are allowed. '
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
+		}
+
+		return;
+	}
+
+	/**
 	 * Checks whether a configuration value has a positive (thus non-zero)
 	 * integer value.
 	 *
@@ -535,18 +607,12 @@ class tx_seminars_oe_configcheck {
 	 * @access	protected
 	 */
 	function checkIfPositiveInteger($fieldName, $canUseFlexforms, $sheet, $explanation) {
-		$this->checkIfInteger($fieldName, $canUseFlexforms, $sheet, $explanation);
-
-		if (!$this->objectToCheck->hasConfValueInteger($fieldName, $sheet)) {
-			$message = 'The TS setup variable <strong>'
-				.$this->getTSSetupPath().$fieldName
-				.'</strong> is zero, but needs to be non-zero. '
-				.$explanation;
-			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
-		}
+		$value = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+		$this->checkIfPositiveIntegerValue($value, $fieldName, $canUseFlexforms, $sheet, $explanation);
 
 		return;
 	}
+
 	/**
 	 * Checks whether a configuration value is non-empty and its
 	 * comma-separated values lie within a set of allowed values.
@@ -1067,6 +1133,106 @@ class tx_seminars_oe_configcheck {
 				.'configuration in your TS template.');
 			}
 		}
+		return;
+	}
+
+	/**
+	 * Checks all values within .listView (including .listView itself).
+	 *
+	 * @param	array		allowed sort keys for the list view (must not be empty)
+	 *
+	 * @access	protected
+	 */
+	function checkListView($allowedSortFields) {
+		$fieldName = 'listView.';
+
+		if (!isset($this->objectToCheck->conf[$fieldName])) {
+			$this->setErrorMessageAndRequestCorrection(
+				$fieldName,
+				false,
+				'The TS setup variable group <strong>'.$this->getTSSetupPath()
+					.$fieldName.'</strong> is not set. This setting controls '
+					.'the list view. '
+					.'If this part of the setup is missing, sorting and the '
+					.'result browser will not work correctly.'
+			);
+		} else {
+			$this->checkListViewIfSingleInSetNotEmpty(
+				'orderBy',
+				'This setting controls by which field the list view will be '
+					.'sorted. '
+					.'If this value is not set correctly, sorting will not '
+					.'work correctly.',
+				$allowedSortFields
+			);
+			$this->checkListViewIfSingleInSetNotEmpty(
+				'descFlag',
+				'This setting controls the default sort order (ascending or '
+					.'descending). '
+					.'If this value is not set correctly, the list view might '
+					.'be sorted the wrong way round.',
+				array('0', '1')
+			);
+			$this->checkListViewIfPositiveInteger(
+				'results_at_a_time',
+				'This setting controls how many events per page will be '
+					.'displayed in the list view. '
+					.'If this value is not set correctly, the wrong number of '
+					.'events will be displayed.'
+			);
+			$this->checkListViewIfPositiveInteger(
+				'maxPages',
+				'This setting controls how many result pages will be linked in '
+					.'the list view. '
+					.'If this value is not set correctly, the result browser '
+					.'will not work correctly.'
+			);
+		}
+
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value in listView. is non-empty and lies
+	 * within a set of allowed values.
+	 *
+	 * @param	string		TS setup field name to extract (within listView.), must not be empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 * @param	array		array of allowed values (must not be empty)
+	 *
+	 * @access	protected
+	 */
+	function checkListViewIfSingleInSetNotEmpty($fieldName, $explanation, $allowedValues) {
+		$fieldSubPath = 'listView.'.$fieldName;
+		$value = $this->objectToCheck->getListViewConfValueString($fieldName);
+
+		$this->checkForNonEmptyStringValue($value, $fieldSubPath, false, $explanation);
+		$this->checkIfSingleInSetOrEmptyValue(
+			$value,
+			$fieldSubPath,
+			false,
+			$explanation,
+			$allowedValues
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks whether a configuration value within listView. has a positive
+	 * (thus non-zero) integer value.
+	 *
+	 * @param	string		TS setup field name to extract (within listView.), must not be empty
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkListViewIfPositiveInteger($fieldName, $explanation) {
+		$fieldSubPath = 'listView.'.$fieldName;
+		$value = $this->objectToCheck->getListViewConfValueString($fieldName);
+
+		$this->checkIfPositiveIntegerValue($value, $fieldSubPath, false, '', $explanation);
+
 		return;
 	}
 }

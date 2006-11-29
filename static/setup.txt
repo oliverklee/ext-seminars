@@ -18,7 +18,7 @@ plugin.tx_seminars {
 	hideFieldsInThankYouMail = credit_points
 
 	# whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
-	generalPriceInMail =
+	generalPriceInMail = 0
 
 	# Comma-separated list of section names from the registration that shouldn't be displayed in the notification e-mail to the organizers. These fields are the big blocks in that e-mail, and some are further divided.
 	hideFieldsInNotificationMail =

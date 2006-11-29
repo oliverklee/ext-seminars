@@ -179,6 +179,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 
 		$this->checkPages();
 		$this->checkRecursive();
+		$this->checkListView(array_keys($this->objectToCheck->orderByList));
 
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
