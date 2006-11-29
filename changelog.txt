@@ -1,4 +1,5 @@
 0.4.8
+- Fix: Seminars with open end are displayed as being till 00:00h
 - Feature: Configuration check for plugin.tx_seminars_pi1.listView (#333)
 - Fix: uid and seats cannot be hidden using plugin.tx_seminars.hideFieldsInThankYouMail (#389)
 - Fix: Typo in the configuration check (#387)

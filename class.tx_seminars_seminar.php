@@ -402,7 +402,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 			// Only display the end time if the event has an end date/time set
 			// and the end time is not the same as the begin time.
-			if ($this->hasEndDate() && ($beginTime !== $endTime)) {
+			if ($this->hasEndTime() && ($beginTime !== $endTime)) {
 				$result .= $dash.$endTime;
 			}
 		}
@@ -412,7 +412,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 	/**
 	 * Checks whether the seminar has a time set (begin time != 00:00)
-	 * If the event has no date/time set the result will be false.
+	 * If the event has no date/time set, the result will be false.
 	 *
 	 * @return	boolean		true if we have a begin time, false otherwise
 	 *
@@ -422,6 +422,20 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		$beginTime = strftime('%H:%M', $this->getRecordPropertyInteger('begin_date'));
 
 		return ($this->hasDate() && ($beginTime !== '00:00'));
+	}
+
+	/**
+	 * Checks whether the event has an end time set (end time != 00:00)
+	 * If the event has no end date/time set, the result will be false.
+	 *
+	 * @return	boolean		true if we have an end time, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasEndTime() {
+		$endTime = strftime('%H:%M', $this->getRecordPropertyInteger('end_date'));
+
+		return ($this->hasEndDate() && ($endTime !== '00:00'));
 	}
 
 	/**
