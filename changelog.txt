@@ -1,4 +1,5 @@
 0.4.8
+- Fix: In the registration record BE editing, the drop-down field "payment methods" needs to have a blank (default) entry. (#397)
 - Fix: Seminars with open end are displayed as being till 00:00h
 - Feature: Configuration check for plugin.tx_seminars_pi1.listView (#333)
 - Fix: uid and seats cannot be hidden using plugin.tx_seminars.hideFieldsInThankYouMail (#389)

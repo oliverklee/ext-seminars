@@ -665,6 +665,9 @@ $TCA['tx_seminars_attendances'] = Array (
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
+				'items' => Array(
+					'' => ''
+				)
 			)
 		),
 		'been_there' => Array (
