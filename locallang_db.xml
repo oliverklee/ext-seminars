@@ -28,6 +28,7 @@
 			<label index="tx_seminars_seminars.payment_methods"></label>
 			<label index="tx_seminars_seminars.organizers"></label>
 			<label index="tx_seminars_seminars.needs_registration"></label>
+			<label index="tx_seminars_seminars.allows_multiple_registrations"></label>
 			<label index="tx_seminars_seminars.attendees_min"></label>
 			<label index="tx_seminars_seminars.attendees_max"></label>
 			<label index="tx_seminars_seminars.cancelled"></label>
@@ -115,6 +116,7 @@
 			<label index="tx_seminars_seminars.event_type">Event type</label>
 			<label index="tx_seminars_seminars.organizers">Organizers</label>
 			<label index="tx_seminars_seminars.needs_registration">Needs registration</label>
+			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled</label>
@@ -206,6 +208,7 @@
 			<label index="tx_seminars_seminars.event_type">Veranstaltungsart</label>
 			<label index="tx_seminars_seminars.organizers">Veranstalter</label>
 			<label index="tx_seminars_seminars.needs_registration">Anmeldung nötig</label>
+			<label index="tx_seminars_seminars.allows_multiple_registrations">Lässt mehrfache Anmeldungen derselben Person zu</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimale Anzahl TeilnehmerInnen</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen</label>
 			<label index="tx_seminars_seminars.cancelled">Wurde abgesagt</label>
@@ -448,6 +451,7 @@
 			<label index="tx_seminars_seminars.event_type" type="integer">99114704</label>
 			<label index="tx_seminars_seminars.organizers" type="integer">68798680</label>
 			<label index="tx_seminars_seminars.needs_registration" type="integer">228396671</label>
+			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
 			<label index="tx_seminars_seminars.attendees_min" type="integer">173583662</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">79420038</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">34564851</label>
@@ -694,6 +698,7 @@
 			<label index="tx_seminars_seminars.event_type">Event type</label>
 			<label index="tx_seminars_seminars.organizers">Organizers</label>
 			<label index="tx_seminars_seminars.needs_registration">Needs registration</label>
+			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled</label>

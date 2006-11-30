@@ -774,6 +774,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'price_regular_early',
 				'price_special',
 				'price_special_early',
+				'needs_registration',
+				'allows_multiple_registrations',
 				'attendees',
 				'attendees_min',
 				'attendees_max',

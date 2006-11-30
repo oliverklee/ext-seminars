@@ -13,7 +13,7 @@ $selectWhereForTopics = ($selectTopicsFromAllPages) ? '' : ' AND tx_seminars_sem
 $TCA['tx_seminars_seminars'] = Array (
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,deadline_registration,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,vips,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,deadline_registration,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,vips,notes'
 	),
 	'columns' => Array (
 		'object_type' => Array (
@@ -333,6 +333,14 @@ $TCA['tx_seminars_seminars'] = Array (
 				'default' => 1,
 			)
 		),
+		'allows_multiple_registrations' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.allows_multiple_registrations',
+			'config' => Array (
+				'type' => 'check',
+				'default' => 0,
+			)
+		),
 		'attendees_min' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees_min',
@@ -420,9 +428,9 @@ $TCA['tx_seminars_seminars'] = Array (
 		)
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, price_regular, price_regular_early, price_special, price_special_early, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes'),
+		'0' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, price_regular, price_regular_early, price_special, price_special_early, payment_methods, organizers, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes'),
 		'1' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, price_regular, price_regular_early, price_special, price_special_early, payment_methods, notes'),
-		'2' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
+		'2' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, organizers, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => 'starttime, endtime')

@@ -72,8 +72,12 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	function canRegisterIfLoggedIn(&$seminar) {
 		$result = true;
 
-		if ($this->isLoggedIn() && $this->isUserRegistered($seminar)) {
-			// a user is logged in and is already registered for that seminar
+		$couldThisUserRegister = !$this->isUserRegistered($seminar)
+			|| $seminar->allowsMultipleRegistrations();
+
+		if ($this->isLoggedIn() && !$couldThisUserRegister) {
+			// The current user can not register for this event (no multiple
+			// registrations are possible and the user is already registered).
 			$result = false;
 		} else {
 			// it is not possible to register for this seminar at all (it is canceled, full, etc.)
@@ -105,8 +109,12 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	function canRegisterIfLoggedInMessage(&$seminar) {
 		$result = '';
 
-		if ($this->isLoggedIn() && $this->isUserRegistered($seminar)) {
-			// a user is logged in and is already registered for that seminar
+		$couldThisUserRegister = !$this->isUserRegistered($seminar)
+			|| $seminar->allowsMultipleRegistrations();
+
+		if ($this->isLoggedIn() && !$couldThisUserRegister) {
+			// The current user can not register for this event (no multiple
+			// registrations are possible and the user is already registered).
 			$result = $this->pi_getLL('message_alreadyRegistered');
 		} elseif (!$seminar->canSomebodyRegister()) {
 			// it is not possible to register for this seminar at all (it is canceled, full, etc.)
@@ -189,52 +197,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 		return $message;
 	}
-	/**
-	 * Checks whether it is possible to register for a given seminar at all
-	 * and the logged in user can register for it.
-	 *
-	 * Before calling this method, make sure that a user is logged in.
-	 *
-	 * This method may only be called when a seminar object (with a valid UID) exists.
-	 *
-	 * XXX This function may be needed for the drop-down-list on the registration page
-	 * and else should go away.
-	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)
-	 *
-	 * @return	boolean		true if it is possible to register, false otherwise
-	 *
-	 * @access	public
-	 */
-	function canUserRegisterForSeminar(&$seminar) {
-		return (!$this->isUserRegistered($seminar) && $seminar->canSomebodyRegister());
-	}
-
-	/**
-	 * Checks whether it is possible to register for a given seminar at all
-	 * and the logged in user can register for it.
-	 *
-	 * Before calling this method, make sure that a user is logged in.
-	 *
-	 * This method may only be called when a seminar object (with a valid UID) exists.
-	 *
-	 * XXX This function may be needed for the drop-down-list on the registration page
-	 * and else should go away.
-	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register (may not be null)
-	 *
-	 * @return	string		empty string if everything is OK, else a localized error message.
-	 *
-	 * @access	public
-	 */
-	function canUserRegisterForSeminarMessage(&$seminar) {
-		if ($this->isUserRegistered($seminar)) {
-			$message = $this->isUserRegisteredMessage($seminar);
-		} else {
-			$message = $seminar->canSomebodyRegisterMessage();
-		}
-		return $message;
-	}
 
 	/**
 	 * Checks whether a front end user is already registered for this seminar.
@@ -253,6 +215,8 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
+	 *
+	 * This method must not be called when no front end user is logged in!
 	 *
 	 * @param	object		a seminar for which we'll check if it is possible to register
 	 *

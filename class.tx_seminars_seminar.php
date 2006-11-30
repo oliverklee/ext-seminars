@@ -1709,6 +1709,18 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks whether this event allows multiple registrations by the same
+	 * FE user.
+	 *
+	 * @return	boolean		true if multiple registrations are allowed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function allowsMultipleRegistrations() {
+		return $this->getRecordPropertyBoolean('allows_multiple_registrations');
+	}
+
+	/**
 	 * Recalculates the statistics for this seminar:
 	 *   the number of participants,
 	 *   whether there are enough registrations for this seminar to take place,
