@@ -1,4 +1,5 @@
 0.4.8
+- Fix: Localisation for early bird prices (#325)
 - Feature: Add a switch to allow multiple registrations (#375)
 - Fix: In the registration record BE editing, the drop-down field "payment methods" needs to have a blank (default) entry. (#397)
 - Fix: Seminars with open end are displayed as being till 00:00h
