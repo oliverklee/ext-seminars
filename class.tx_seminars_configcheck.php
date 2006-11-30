@@ -702,6 +702,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'title',
 				'uid',
 				'seats',
+				'attendees_names',
 				'accreditation_number',
 				'credit_points',
 				'date',
@@ -830,6 +831,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'known_from',
 				'notes',
 				'seats',
+				'attendees_names',
 				'price'
 			)
 		);
@@ -977,6 +979,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'food',
 				'known_from',
 				'seats',
+				'attendees_names',
 				'notes'
 			)
 		);

@@ -97,6 +97,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['user'] = $userUid;
 
 		$this->recordData['seats'] = $registrationData['seats'];
+		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
 		$this->recordData['interests'] = $registrationData['interests'];
 		$this->recordData['expectations'] = $registrationData['expectations'];
@@ -400,6 +401,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->setMarkerContent('seats', $this->getRecordPropertyInteger('seats'));
 		} else {
 			$this->readSubpartsToHide('seats', 'field_wrapper');
+		}
+
+		if ($this->hasRecordPropertyString('attendees_names')) {
+			$this->setMarkerContent('attendees_names', $this->getRecordPropertyString('attendees_names'));
+		} else {
+			$this->readSubpartsToHide('attendees_names', 'field_wrapper');
 		}
 
 		if ($this->seminar->hasAccreditationNumber()) {

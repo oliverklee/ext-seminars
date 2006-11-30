@@ -1,4 +1,5 @@
 0.4.8
+- Feature: Registration form: Add a field for the name of additional attendees (#377)
 - Fix: Localisation for early bird prices (#325)
 - Feature: Add a switch to allow multiple registrations (#375)
 - Fix: In the registration record BE editing, the drop-down field "payment methods" needs to have a blank (default) entry. (#397)

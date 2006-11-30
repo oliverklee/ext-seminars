@@ -17,6 +17,7 @@
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
+			<label index="label_attendees_names">Additional attendees</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
@@ -114,6 +115,7 @@ someone just has registered for an event:</label>
 			<label index="label_place">Ort</label>
 			<label index="label_room">Raum</label>
 			<label index="label_seats">Plätze</label>
+			<label index="label_attendees_names">Zusätzlich angemeldete Personen</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_special">Spezialpreis</label>
@@ -319,12 +321,15 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
 		</languageKey>
 		<languageKey index="de" type="array">
+			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
+			<label index="label_seats" type="integer">187299883</label>
+			<label index="label_attendees_names" type="integer">168936155</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_special" type="integer">35819210</label>
@@ -341,6 +346,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
+			<label index="message_noDate" type="integer">11811061</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
 			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
@@ -363,9 +369,6 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="email_additionalNotificationIsFull" type="integer">125053794</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject" type="integer">106627365</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
-			<label index="label_uid" type="integer">187623698</label>
-			<label index="label_seats" type="integer">187299883</label>
-			<label index="message_noDate" type="integer">11811061</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -488,6 +491,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
+			<label index="label_attendees_names">Additional attendees</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
