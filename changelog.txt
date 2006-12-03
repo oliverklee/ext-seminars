@@ -1,4 +1,5 @@
 0.4.8
+- Change: Rename the registration link from "register online" to "register now" (#405)
 - Feature: Registration form: Add a field for the name of additional attendees (#377)
 - Fix: Localisation for early bird prices (#325)
 - Feature: Add a switch to allow multiple registrations (#375)
