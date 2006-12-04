@@ -179,6 +179,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'my_vip_events':
 				// The fallthrough is intended
 				// because createListView() will differentiate later.
+			case 'my_entered_events':
+				// The fallthrough is intended
+				// because createListView() will differentiate later.
 			case 'seminar_list':
 				// The fallthrough is intended.
 			default:
@@ -302,6 +305,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'my_vip_events':
 				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_VIP_EVENTS');
 				break;
+			case 'my_entered_events':
+				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_ENTERED_EVENTS');
+				break;
 			default:
 				break;
 		}
@@ -416,6 +422,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$additionalTables = $this->tableVipsMM;
 				$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableVipsMM.'.uid_local'
 					.' AND '.$this->tableVipsMM.'.uid_foreign='.$this->registrationManager->getFeUserUid();
+				break;
+			case 'my_entered_events':
+				$queryWhere .= ' AND '.$this->tableSeminars.'.owner_feuser='.$this->getFeUserUid();
 				break;
 			default:
 				break;

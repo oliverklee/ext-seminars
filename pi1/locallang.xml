@@ -18,6 +18,7 @@
 			<label index="seminars.pi_flexform.seminar_registration">Event Registration</label>
 			<label index="seminars.pi_flexform.list_registrations">List of Registrations (for attendees)</label>
 			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
+			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
@@ -60,6 +61,8 @@
 			<label index="label_myevents_informal">You are registered for the following events:</label>
 			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
+			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
@@ -185,6 +188,7 @@
 			<label index="seminars.pi_flexform.seminar_registration">Veranstaltungsanmeldung</label>
 			<label index="seminars.pi_flexform.list_registrations">Liste der Anmeldungen (für TeilnehmerInnen)</label>
 			<label index="seminars.pi_flexform.list_vip_registrations">Liste der Anmeldungen (für VIPs)</label>
+			<label index="seminars.pi_flexform.my_entered_events">Veranstaltungen, die ich eingegeben habe</label>
 			<label index="seminars.pi_flexform.baseURL">Basis-URL dieser Typo3-Site, z.B. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Seite mit der Seminarliste:</label>
 			<label index="seminars.pi_flexform.registerPID">Seite mit der Seminaranmeldung:</label>
@@ -227,6 +231,8 @@
 			<label index="label_myevents_informal">Du bist für die folgenden Veranstaltungen angemeldet:</label>
 			<label index="label_myvipevents_formal">Sie sind für die folgenden Veranstaltungen als VIP eingetragen:</label>
 			<label index="label_myvipevents_informal">Du bist für die folgenden Veranstaltungen als VIP eingetragen:</label>
+			<label index="label_myenteredevents_formal">Sie haben die folgenden Veranstaltungen eingetragen:</label>
+			<label index="label_myenteredevents_informal">Du hast die folgenden Veranstaltungen eingetragen:</label>
 			<label index="label_title">Titel</label>
 			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Akkreditierungsnummer</label>
@@ -488,6 +494,7 @@
 			<label index="seminars.pi_flexform.seminar_registration" type="integer">146873320</label>
 			<label index="seminars.pi_flexform.list_vip_registrations" type="integer">4335826</label>
 			<label index="seminars.pi_flexform.list_registrations" type="integer">258526278</label>
+			<label index="seminars.pi_flexform.my_entered_events" type="integer">100155450</label>
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
 			<label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
@@ -528,6 +535,8 @@
 			<label index="label_myevents_informal" type="integer">177740162</label>
 			<label index="label_myvipevents_formal" type="integer">74285293</label>
 			<label index="label_myvipevents_informal" type="integer">74285293</label>
+			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
@@ -713,6 +722,7 @@
 			<label index="seminars.pi_flexform.seminar_registration">Event Registration</label>
 			<label index="seminars.pi_flexform.list_registrations">List of Registrations (for attendees)</label>
 			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
+			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
@@ -754,6 +764,8 @@
 			<label index="label_myevents_informal">You are registered for the following events:</label>
 			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
+			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>

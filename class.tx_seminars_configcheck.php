@@ -247,6 +247,17 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks the configuration for: check_tx_seminars_pi1/my_entered_events.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_pi1_my_entered_events() {
+		$this->check_tx_seminars_pi1_seminar_list();
+
+		return;
+	}
+
+	/**
 	 * Checks the configuration related to thank-you e-mails.
 	 *
 	 * @access	private
@@ -423,7 +434,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'my_vip_events',
 				'seminar_registration',
 				'list_registrations',
-				'list_vip_registrations'
+				'list_vip_registrations',
+				'my_entered_events'
 			)
 		);
 
