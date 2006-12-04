@@ -88,6 +88,10 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 */
 	function init($conf = null) {
 		if (!$this->isInitialized) {
+			if ($GLOBALS['TSFE'] && !isset($GLOBALS['TSFE']->config['config'])) {
+				$GLOBALS['TSFE']->config['config'] = array();
+			}
+
 			// call the base classe's constructor manually as this isn't done automatically
 			parent::tslib_pibase();
 

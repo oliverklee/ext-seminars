@@ -1,4 +1,5 @@
 0.4.8
+- Fix: Deletion of content elements in front-end editing mode fails (#322)
 - Change: Rename the registration link from "register online" to "register now" (#405)
 - Feature: Registration form: Add a field for the name of additional attendees (#377)
 - Fix: Localisation for early bird prices (#325)
