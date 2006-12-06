@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<formidable version="0.5.0">
+	<includexml>
+		<path>EXT:seminars/pi1/form_header.xml</path>
+		<dynaxml><marker><name>entity</name><value>seminars</value></marker></dynaxml>
+	</includexml>
+
+	<elements>
+		<renderlet:TEXT name="title">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.title</label>
+			<validators>
+				<validator:STANDARD>
+					<required>
+						<value>true</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_emptyTitle</message>
+					</required>
+				</validator:STANDARD>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:TEXT name="subtitle">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.subtitle</label>
+		</renderlet:TEXT>
+
+		<renderlet:RTE name="description">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.description</label>
+		</renderlet:RTE>
+
+		<renderlet:LISTBOX name="event_type">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.event_type</label>
+			<data>
+				<defaultvalue />
+				<items>
+					<item>
+						<caption>&amp;nbsp;</caption>
+						<value>0</value>
+					</item>
+				</items>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListEventTypes</method>
+				</userobj>
+			</data>
+		</renderlet:LISTBOX>
+
+		<renderlet:TEXT name="accreditation_number">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.accreditation_number</label>
+		</renderlet:TEXT>
+
+		<renderlet:TEXT name="credit_points">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.credit_points</label>
+		</renderlet:TEXT>
+
+		<renderlet:DATETIME name="begin_date">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.begin_date</label>
+			<data>
+				<datetime>
+					<converttotimestamp>true</converttotimestamp>
+					<format>
+						<userobj>
+							<extension>this</extension>
+							<method>getDateFormat</method>
+						</userobj>
+					</format>
+					<displaytime>true</displaytime>
+				</datetime>
+			</data>
+		</renderlet:DATETIME>
+
+		<renderlet:DATETIME name="end_date">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.end_date</label>
+			<data>
+				<datetime>
+					<converttotimestamp>true</converttotimestamp>
+					<format>
+						<userobj>
+							<extension>this</extension>
+							<method>getDateFormat</method>
+						</userobj>
+					</format>
+					<displaytime>true</displaytime>
+				</datetime>
+			</data>
+		</renderlet:DATETIME>
+
+		<renderlet:DATETIME name="deadline_registration">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.deadline_registration</label>
+			<data>
+				<datetime>
+					<converttotimestamp>true</converttotimestamp>
+					<format>
+						<userobj>
+							<extension>this</extension>
+							<method>getDateFormat</method>
+						</userobj>
+					</format>
+					<displaytime>true</displaytime>
+				</datetime>
+			</data>
+		</renderlet:DATETIME>
+
+		<renderlet:DATETIME name="deadline_early_bird">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.deadline_early_bird</label>
+			<data>
+				<datetime>
+					<converttotimestamp>true</converttotimestamp>
+					<format>
+						<userobj>
+							<extension>this</extension>
+							<method>getDateFormat</method>
+						</userobj>
+					</format>
+					<displaytime>true</displaytime>
+				</datetime>
+			</data>
+		</renderlet:DATETIME>
+
+		<renderlet:CHECKBOX name="place">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.place</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListPlaces</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
+
+		<renderlet:TEXT name="room">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.room</label>
+		</renderlet:TEXT>
+
+		<renderlet:CHECKBOX name="speakers">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.speakers</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListSpeakers</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
+
+		<renderlet:TEXT name="price_regular">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:TEXT name="price_regular_early">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular_early</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:TEXT name="price_special">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:TEXT name="price_special_early">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special_early</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:CHECKBOX name="payment_methods">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.payment_methods</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListPaymentMethods</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
+
+		<renderlet:CHECKBOX name="organizers">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.organizers</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListOrganizers</method>
+				</userobj>
+			</data>
+			<validators>
+				<validator:STANDARD>
+					<required>
+						<value>true</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_emptyOrganizer</message>
+					</required>
+				</validator:STANDARD>
+			</validators>
+		</renderlet:CHECKBOX>
+
+		<renderlet:CHECKSINGLE name="needs_registration">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.needs_registration</label>
+			<data>
+				<defaultvalue>checked="checked"</defaultvalue>
+			</data>
+		</renderlet:CHECKSINGLE>
+
+		<renderlet:CHECKSINGLE name="allows_multiple_registrations">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.allows_multiple_registrations</label>
+		</renderlet:CHECKSINGLE>
+
+		<renderlet:TEXT name="attendees_min">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees_min</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noAttendeesNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:TEXT name="attendees_max">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees_max</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noAttendeesNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:CHECKSINGLE name="cancelled">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.cancelled</label>
+		</renderlet:CHECKSINGLE>
+
+		<renderlet:PASSTHRU name="owner_feuser">
+			<data>
+				<defaultvalue>CURRENT_USERID</defaultvalue>
+			</data>
+		</renderlet:PASSTHRU>
+
+		<renderlet:PASSTHRU name="crdate">
+			<data>
+				<defaultvalue>CURRENT_TIMESTAMP</defaultvalue>
+			</data>
+		</renderlet:PASSTHRU>
+
+		<renderlet:PASSTHRU name="tstamp">
+			<data>
+				<defaultvalue>CURRENT_TIMESTAMP</defaultvalue>
+			</data>
+		</renderlet:PASSTHRU>
+
+		<renderlet:PASSTHRU name="pid">
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getPidForNewEvents</method>
+					</userobj>
+				</defaultvalue>
+			</data>
+		</renderlet:PASSTHRU>
+	</elements>
+
+	<includexml>EXT:seminars/pi1/form_validation.xml</includexml>
+</formidable>

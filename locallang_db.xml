@@ -35,6 +35,7 @@
 			<label index="tx_seminars_seminars.attendees"></label>
 			<label index="tx_seminars_seminars.enough_attendees"></label>
 			<label index="tx_seminars_seminars.is_full"></label>
+			<label index="tx_seminars_seminars.owner_feuser"></label>
 			<label index="tx_seminars_seminars.vips"></label>
 			<label index="tx_seminars_seminars.notes"></label>
 			<label index="tx_seminars_seminars.object_type"></label>
@@ -125,7 +126,8 @@
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations</label>
 			<label index="tx_seminars_seminars.is_full">Is full</label>
-			<label index="tx_seminars_seminars.vips">Front end users that are allowed to see the list of registrations</label>
+			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event</label>
+			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to see the list of registrations</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes</label>
 			<label index="tx_seminars_seminars.object_type">Type</label>
 			<label index="tx_seminars_seminars.object_type.I.0">Single event</label>
@@ -218,6 +220,7 @@
 			<label index="tx_seminars_seminars.vacancies">Momentane Anzahl freie Plätze</label>
 			<label index="tx_seminars_seminars.enough_attendees">Hat genug Anmeldungen</label>
 			<label index="tx_seminars_seminars.is_full">Ist voll</label>
+			<label index="tx_seminars_seminars.owner_feuser">Frontend-User, der diese Veranstaltung eingetragen hat</label>
 			<label index="tx_seminars_seminars.vips">Frontend-User, die sich die Liste der Anmeldungen ansehen dürfen</label>
 			<label index="tx_seminars_seminars.notes">Interne Notizen</label>
 			<label index="tx_seminars_seminars.object_type">Typ</label>
@@ -463,7 +466,8 @@
 			<label index="tx_seminars_seminars.vacancies" type="integer">65109627</label>
 			<label index="tx_seminars_seminars.enough_attendees" type="integer">135882580</label>
 			<label index="tx_seminars_seminars.is_full" type="integer">13790082</label>
-			<label index="tx_seminars_seminars.vips" type="integer">242004556</label>
+			<label index="tx_seminars_seminars.owner_feuser" type="integer">61789105</label>
+			<label index="tx_seminars_seminars.vips" type="integer">46172865</label>
 			<label index="tx_seminars_seminars.notes" type="integer">134692843</label>
 			<label index="tx_seminars_speakers" type="integer">258305227</label>
 			<label index="tx_seminars_speakers.title" type="integer">77521672</label>
@@ -712,7 +716,8 @@
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations</label>
 			<label index="tx_seminars_seminars.is_full">Is full</label>
-			<label index="tx_seminars_seminars.vips">Front end users that are allowed to see the list of registrations</label>
+			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event</label>
+			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to see the list of registrations</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name</label>
@@ -803,7 +808,7 @@
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations</label>
 			<label index="tx_seminars_seminars.is_full">Is full</label>
-			<label index="tx_seminars_seminars.vips">Front end users that are allowed to see the list of registrations</label>
+			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to see the list of registrations</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name</label>

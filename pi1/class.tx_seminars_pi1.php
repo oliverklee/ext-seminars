@@ -33,6 +33,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationba
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('frontendformslib').'class.tx_frontendformslib.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
@@ -164,6 +165,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setFlavor($whatToDisplay);
 
 		switch ($whatToDisplay) {
+			case 'edit_event':
+				$result = $this->createEventEditor();
+				break;
 			case 'seminar_registration':
 				$result = $this->createRegistrationPage();
 				break;
@@ -618,7 +622,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->setMarkerContent('price_earlybird_special', $this->seminar->getEarlyBirdPriceSpecial());
 				$this->setMarkerContent('message_earlybird_price_special', sprintf($this->pi_getLL('message_earlybird_price'),
 								$this->seminar->getPriceSpecial(), $this->seminar->getEarlyBirdDeadline()));
-	
 				$this->readSubpartsToHide('price_special', $wrapper);
 			} else {
 				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
@@ -1256,6 +1259,28 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$tableName
 				)
 			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the event editor.
+	 *
+	 * @return	string		HTML code for the event editor
+	 *
+	 * @access	protected
+	 */
+	function createEventEditor() {
+		$result = '';
+
+		$eventEditorClassname = t3lib_div::makeInstanceClassName('tx_seminars_event_editor');
+		$eventEditor =& new $eventEditorClassname($this);
+
+		if ($eventEditor->hasAccess()) {
+			$result = $eventEditor->_render();
+		} else {
+			$result = $eventEditor->hasAccessMessage();
 		}
 
 		return $result;

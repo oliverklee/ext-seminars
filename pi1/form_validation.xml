@@ -1,0 +1,7 @@
+<validation>
+
+	<renderlet:SUBMIT name="btnsubmit">
+		<label>LLL:EXT:seminars/pi1/locallang.php:label_save</label>
+	</renderlet:SUBMIT>
+
+</validation>

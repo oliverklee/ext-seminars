@@ -84,6 +84,7 @@ CREATE TABLE tx_seminars_seminars (
 	attendees int(11) unsigned DEFAULT '0' NOT NULL,
 	enough_attendees tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	is_full tinyint(3) unsigned DEFAULT '0' NOT NULL,
+	owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,
 	vips int(11) DEFAULT '0' NOT NULL,
 	notes text NOT NULL,
 

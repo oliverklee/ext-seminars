@@ -247,6 +247,21 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks the configuration for: check_tx_seminars_pi1/edit_event.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_pi1_edit_event() {
+		$this->checkCommonFrontEndSettings();
+
+		$this->checkEventEditorFeGroupID();
+		$this->checkCreateEventsPID();
+		$this->checkEventSuccessfullySavedPID();
+
+		return;
+	}
+
+	/**
 	 * Checks the configuration for: check_tx_seminars_pi1/my_entered_events.
 	 *
 	 * @access	private
@@ -435,6 +450,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'seminar_registration',
 				'list_registrations',
 				'list_vip_registrations',
+				'edit_event',
 				'my_entered_events'
 			)
 		);
@@ -1231,6 +1247,60 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkSalutationMode(true);
 		$this->checkCssClassNames();
 		$this->checkWhatToDisplay();
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value eventEditorFeGroupID.
+	 *
+	 * @access	private
+	 */
+	function checkEventEditorFeGroupID() {
+		$this->checkIfPositiveInteger(
+			'eventEditorFeGroupID',
+			true,
+			's_fe_editing',
+			'This value specifies the front-end user group that is allowed to '
+				.'enter and edit event records in the front end. If this value '
+				.'is not set correctly, FE editing for events will not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value createEventsPID.
+	 *
+	 * @access	private
+	 */
+	function checkCreateEventsPID() {
+		$this->checkIfSingleSysFolderNotEmpty(
+			'createEventsPID',
+			true,
+			's_fe_editing',
+			'This value specifies the page on which FE-entered events will be '
+				.'stored. If this value is not set correctly, those event '
+				.'records will be dumped in the TYPO3 root page.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value eventSuccessfullySavedPID.
+	 *
+	 * @access	private
+	 */
+	function checkEventSuccessfullySavedPID() {
+		$this->checkIfSingleFePageNotEmpty(
+			'eventSuccessfullySavedPID',
+			true,
+			's_fe_editing',
+			'This value specifies the page to which the user will be '
+				.'redirected after saving an event record in the front end. If '
+				.'this value is not set correctly, the redirect will not work.'
+		);
 
 		return;
 	}

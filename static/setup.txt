@@ -213,6 +213,15 @@ plugin.tx_seminars_pi1 {
 
 	# PID of the page that contains the registrations list for VIPs
 	registrationsVipListPID =
+
+	# UID of the FE user group that is allowed to enter and edit event records in the FE
+	eventEditorFeGroupID =
+
+	# PID of the sysfolder where FE-created events will be stored
+	createEventsPID =
+
+	# PID of the FE page that will be shown when an event has been successfully entered on the FE
+	eventSuccessfullySavedPID =
 }
 
 
@@ -245,4 +254,8 @@ plugin.tx_srfeuserregister_pi1 {
 		tx_seminars_semester = atMost[3]
 		tx_seminars_subject = atMost[50]
 	}
+}
+
+plugin.tx_rlmpdateselectlib.calConf {
+	weekStartsMonday = 1
 }
