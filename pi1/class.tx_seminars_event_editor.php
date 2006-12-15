@@ -62,6 +62,10 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	/**
 	 * The constructor.
 	 *
+	 * After the constructor has been called, hasAccess() (or hasAccessMessage())
+	 * must be called to ensure that the logged-in user is allowed to edit a
+	 * given seminar.
+	 *
 	 * @param	object		the pi1 object where this event editor will be inserted (must not be null)
 	 *
 	 * @access	public
@@ -79,13 +83,10 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 			true
 		);
 		// Edit an existing record or create a new one?
-		/*
-		$this->iEdition = (array_key_exists('event', $this->plugin->piVars)
-			&& $this->plugin->piVars['event'] == 'EDIT')
-			? intval($this->piVars['uid']) : false;
-		*/
-		// Currently, we can only create new events.
-		$this->iEdition = false;
+		$this->iEdition = (array_key_exists('action', $this->plugin->piVars)
+			&& $this->plugin->piVars['action'] == 'EDIT')
+			&& (intval($this->plugin->piVars['seminar']) > 0)
+			? intval($this->plugin->piVars['seminar']) : false;
 
 		// execute record level events thrown by formidable, such as DELETE
 		$this->_doEvents();
@@ -306,12 +307,15 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * FE group that is allowed to enter and edit event records in the FE.
 	 * This group can be set using plugin.tx_seminars.eventEditorFeGroupID.
 	 *
-	 * @return	boolean		true if a user is logged in and allowed to enter and edit events, false otherwise
+	 * If the "seminar" piVar is set, it also is checked whether that event
+	 * record exists and the logged-in FE user is the owner.
+	 *
+	 * @return	boolean		true if a user is logged in and allowed to enter and edit events (especially the event given in the piVar "seminar"), false otherwise
 	 *
 	 * @access	public
 	 */
 	function hasAccess() {
-		return $this->isLoggedIn()
+		$isOkay = $this->isLoggedIn()
 			&& isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
 				$this->plugin->getConfValueInteger(
 					'eventEditorFeGroupID',
@@ -319,6 +323,27 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 				)
 			]
 		);
+		$seminarUid = (isset($this->plugin->piVars['seminar'])
+			&& (array_key_exists('action', $this->plugin->piVars)
+			&& $this->plugin->piVars['action'] == 'EDIT'))
+			? intval($this->plugin->piVars['seminar']) : 0;
+
+		// Only do the DB query if we are okay so far and an event UID has
+		// been provided for editing.
+		if ($isOkay && $seminarUid) {
+			if (tx_seminars_seminar::existsSeminar($seminarUid)) {
+				/** Name of the seminar class in case someone subclasses it. */
+				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+				$seminar =& new $seminarClassname($seminarUid);
+				$isOkay = $seminar->isOwnerFeUser();
+				unset($seminar);
+			} else {
+				// Deny access if the seminar UID is incorrect.
+				$isOkay = false;
+			}
+		}
+
+		return $isOkay;
 	}
 
 	/**
@@ -344,6 +369,35 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the default value for a checkbox.
+	 *
+	 * This function will only be called if the form has not been submitted yet,
+	 * so it checks whether we are editing an existing record (so the data
+	 * needs to be fetched from the record data) or creating a new record (so
+	 * the default value provided via XML will be used).
+	 *
+	 * @param	array		(unused)
+	 * @param	array		contents of the params node, needs to contain the keys "defaultvalue" (either 0 or 1) and "elementname" (the column name in the DB record)
+	 * @param	object		(unused)
+	 *
+	 * @return	string		either checked="checked" or an empty string
+	 *
+	 * @access	public
+	 */
+	function setCheckboxValue($items, $value, &$form) {
+		$result = false;
+
+		if ($this->iEdition) {
+			$dataHandler =& $this->oForm->oDataHandler;
+			$result = (boolean) $dataHandler->aStoredData[$value['elementname']];
+		} else {
+			$result = (boolean) $value['defaultvalue'];
+		}
+
+		return ($result) ? 'checked="checked"' : '';
 	}
 }
 

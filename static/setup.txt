@@ -126,6 +126,7 @@ plugin.tx_seminars_pi1 {
 	class_headervacancies =
 	class_headerregistration =
 	class_headerlist_registrations =
+	class_headeredit =
 
 	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_itemrow =
@@ -145,6 +146,7 @@ plugin.tx_seminars_pi1 {
 	class_listorganizers =
 	class_listregistration =
 	class_listlist_registrations =
+	class_listedit =
 
 	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_square = square
@@ -217,10 +219,13 @@ plugin.tx_seminars_pi1 {
 	# UID of the FE user group that is allowed to enter and edit event records in the FE
 	eventEditorFeGroupID =
 
+	# PID of the page where the plug-in for editing events is located
+	eventEditorPID =
+
 	# PID of the sysfolder where FE-created events will be stored
 	createEventsPID =
 
-	# PID of the FE page that will be shown when an event has been successfully entered on the FE
+	# PID of the page that will be shown when an event has been successfully entered on the FE
 	eventSuccessfullySavedPID =
 }
 

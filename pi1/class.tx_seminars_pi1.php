@@ -301,6 +301,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createListView() {
 		$result = '';
+		$isOkay = true;
 
 		switch ($this->getConfValueString('what_to_display')) {
 			case 'my_events':
@@ -310,35 +311,42 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_VIP_EVENTS');
 				break;
 			case 'my_entered_events':
-				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_ENTERED_EVENTS');
+				$result .= $this->createEventEditor(true);
+				if (empty($result)) {
+					$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_ENTERED_EVENTS');
+				} else {
+					$isOkay = false;
+				}
 				break;
 			default:
 				break;
 		}
 
-		$seminarBag =& $this->initListView();
+		if ($isOkay) {
+			$seminarBag =& $this->initListView();
 
-		if ($this->internal['res_count']) {
-			$result .= $this->createListHeader();
-			$rowCounter = 0;
-			while ($this->seminar =& $seminarBag->getCurrent()) {
-				$result .= $this->createListRow($rowCounter);
-				$rowCounter++;
-				$seminarBag->getNext();
+			if ($this->internal['res_count']) {
+				$result .= $this->createListHeader();
+				$rowCounter = 0;
+				while ($this->seminar =& $seminarBag->getCurrent()) {
+					$result .= $this->createListRow($rowCounter);
+					$rowCounter++;
+					$seminarBag->getNext();
+				}
+				$result .= $this->createListFooter();
+			} else {
+				$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
+				$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
 			}
-			$result .= $this->createListFooter();
-		} else {
-			$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
-			$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
-		}
-		// Show the search box (if not deactivated in the configuration).
-		if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
-			// The search box is shown even if the list is empty.
-			$result .= $this->pi_list_searchBox();
-		}
+			// Show the search box (if not deactivated in the configuration).
+			if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
+				// The search box is shown even if the list is empty.
+				$result .= $this->pi_list_searchBox();
+			}
 
-		// Let warnings from the seminar and the seminar bag bubble up to us.
-		$this->setErrorMessage($seminarBag->checkConfiguration(true));
+			// Let warnings from the seminar and the seminar bag bubble up to us.
+			$this->setErrorMessage($seminarBag->checkConfiguration(true));
+		}
 
 		return $result;
 	}
@@ -385,6 +393,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				&& !$this->hasConfValueInteger('registrationsVipListPID'))) {
 			$this->readSubpartsToHide('list_registrations', 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide('list_registrations', 'LISTITEM_WRAPPER');
+		}
+
+		// Hide the edit column if the list to display is not the
+		// "events which I have entered" list.
+		if ($whatToDisplay != 'my_entered_events') {
+			$this->readSubpartsToHide('edit', 'LISTHEADER_WRAPPER');
+			$this->readSubpartsToHide('edit', 'LISTITEM_WRAPPER');
 		}
 
 		if (!isset($this->piVars['pointer'])) {
@@ -723,6 +738,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('header_vacancies', $this->getFieldHeader('vacancies'));
 		$this->setMarkerContent('header_registration', $this->getFieldHeader('registration'));
 		$this->setMarkerContent('header_list_registrations', $this->getFieldHeader('list_registrations'));
+		$this->setMarkerContent('header_edit', $this->getFieldHeader('edit'));
 
 		return $this->substituteMarkerArrayCached('LIST_HEADER');
 	}
@@ -762,13 +778,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = '';
 
 		if ($this->seminar->isOk()) {
-			$rowClass = ($rowCounter % 2) ? 'listrow-odd' : '';
-			$canceledClass = ($this->seminar->isCanceled()) ? $this->pi_getClassName('canceled') : '';
-			// If we have two classes, we need a space as a separator.
-			$classSeparator = (!empty($rowClass) && !empty($canceledClass)) ? ' ' : '';
+			$cssClasses = array();
+
+			if ($rowCounter % 2) {
+				$cssClasses[] = 'listrow-odd';
+			}
+			if ($this->seminar->isCanceled()) {
+				$cssClasses[] = $this->pi_getClassName('canceled');
+			}
+			if ($this->seminar->isOwnerFeUser()) {
+				$cssClasses[] = $this->pi_getClassName('owner');
+			}
 			// Only use the class construct if we actually have a class.
-			$completeClass = (!empty($rowClass) || !empty($canceledClass)) ?
-				' class="'.$rowClass.$classSeparator.$canceledClass.'"' :
+			$completeClass = (count($cssClasses)) ?
+				' class="'.implode(' ', $cssClasses).'"' :
 				'';
 
 			$this->setMarkerContent('class_itemrow', $completeClass);
@@ -800,6 +823,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar) : ''
 			);
 			$this->setMarkerContent('list_registrations', $this->getRegistrationsListLink());
+			$this->setMarkerContent('edit', $this->getEditLink());
 
 			$result = $this->substituteMarkerArrayCached('LIST_ITEM');
 		}
@@ -1265,22 +1289,55 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Creates the event editor.
+	 * Checks whether logged-in FE user has access to the event editor and then
+	 * either creates the event editor HTML (or an empty string if
+	 * $accessTestOnly is true) or a localized error message.
 	 *
-	 * @return	string		HTML code for the event editor
+	 * @param	boolean		whether only the access to the event editor should be checked
+	 *
+	 * @return	string		HTML code for the event editor (or an error message if the FE user doesn't have access to the editor)
 	 *
 	 * @access	protected
 	 */
-	function createEventEditor() {
+	function createEventEditor($accessTestOnly = false) {
 		$result = '';
 
 		$eventEditorClassname = t3lib_div::makeInstanceClassName('tx_seminars_event_editor');
 		$eventEditor =& new $eventEditorClassname($this);
 
 		if ($eventEditor->hasAccess()) {
-			$result = $eventEditor->_render();
+			if (!$accessTestOnly) {
+				$result = $eventEditor->_render();
+			}
 		} else {
 			$result = $eventEditor->hasAccessMessage();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the link to the event editor for the current event.
+	 * Returns an empty string if editing this event is not allowed.
+	 *
+	 * A link is created if the logged-in FE user is the owner of the event.
+	 *
+	 * @return	string		HTML for the link (may be an empty string)
+	 *
+	 * @access	protected
+	 */
+	function getEditLink() {
+		$result = '';
+
+		if ($this->seminar->isOwnerFeUser()) {
+			$result = $this->cObj->getTypoLink(
+				$this->pi_getLL('label_edit'),
+				$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
+				array(
+					'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
+					'tx_seminars_pi1[action]' => 'EDIT'
+				)
+			);
 		}
 
 		return $result;

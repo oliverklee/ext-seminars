@@ -268,6 +268,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_pi1_my_entered_events() {
 		$this->check_tx_seminars_pi1_seminar_list();
+		$this->checkEventEditorFeGroupID();
+		$this->checkEventEditorPID();
 
 		return;
 	}
@@ -620,7 +622,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'price_special',
 				'organizers',
 				'vacancies',
-				'registration'
+				'registration',
+				'list_registrations',
+				'edit'
 			)
 		);
 
@@ -1300,6 +1304,25 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the page to which the user will be '
 				.'redirected after saving an event record in the front end. If '
 				.'this value is not set correctly, the redirect will not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value eventEditorPID.
+	 *
+	 * @access	private
+	 */
+	function checkEventEditorPID() {
+		$this->checkIfSingleFePageNotEmpty(
+			'eventEditorPID',
+			true,
+			's_fe_editing',
+			'This value specifies the page that contains the plug-in for '
+				.'editing event records in the front end. If this value is not '
+				.'set correctly, the <em>edit</em> link in the <em>events '
+				.'which I have entered</em> list will not work.'
 		);
 
 		return;

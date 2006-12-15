@@ -2012,6 +2012,19 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 		return $result;
 	}
+
+	/**
+	 * Checks whether the logged-in FE user is the owner of this event.
+	 *
+	 * @return	boolean		true if a FE user is logged in and the user is the owner of this event, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isOwnerFeUser() {
+		return $this->hasRecordPropertyInteger('owner_feuser')
+			&& ($this->getRecordPropertyInteger('owner_feuser')
+				== $this->getFeUserUid());
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

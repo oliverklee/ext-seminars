@@ -218,12 +218,33 @@
 		<renderlet:CHECKSINGLE name="needs_registration">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.needs_registration</label>
 			<data>
-				<defaultvalue>checked="checked"</defaultvalue>
+				<defaultvalue>
+					<userobj>
+						<params>
+							<data name="defaultvalue" value="1" />
+							<data name="elementname" value="needs_registration" />
+						</params>
+						<extension>this</extension>
+						<method>setCheckboxValue</method>
+					</userobj>
+				</defaultvalue>
 			</data>
 		</renderlet:CHECKSINGLE>
 
 		<renderlet:CHECKSINGLE name="allows_multiple_registrations">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.allows_multiple_registrations</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<params>
+							<data name="defaultvalue" value="0" />
+							<data name="elementname" value="allows_multiple_registrations" />
+						</params>
+						<extension>this</extension>
+						<method>setCheckboxValue</method>
+					</userobj>
+				</defaultvalue>
+			</data>
 		</renderlet:CHECKSINGLE>
 
 		<renderlet:TEXT name="attendees_min">
@@ -252,6 +273,18 @@
 
 		<renderlet:CHECKSINGLE name="cancelled">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.cancelled</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<params>
+							<data name="defaultvalue" value="0" />
+							<data name="elementname" value="cancelled" />
+						</params>
+						<extension>this</extension>
+						<method>setCheckboxValue</method>
+					</userobj>
+				</defaultvalue>
+			</data>
 		</renderlet:CHECKSINGLE>
 
 		<renderlet:PASSTHRU name="owner_feuser">
