@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2006 Mario Rimann (typo3-coding@rimann.li)
+* (c) 2006-2007 Mario Rimann (typo3-coding@rimann.org)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,7 @@
 /**
  * Module 'Events' for the 'seminars' extension.
  *
- * @author	Mario Rimann <typo3-coding@rimann.li>
+ * @author	Mario Rimann <typo3-coding@rimann.org>
  */
 
 unset($MCONF);

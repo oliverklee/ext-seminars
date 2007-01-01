@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2006 Mario Rimann (typo3-coding@rimann.li)
+* (c) 2005-2007 Mario Rimann (typo3-coding@rimann.org)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,7 +28,7 @@
  * This class holds functions used to validate submitted forms in the backend.
  * These functions are called from t3lib/class.t3lib_tcemain.php via hooks.
  *
- * @author	Mario Rimann <typo3-coding@rimann.li>
+ * @author	Mario Rimann <typo3-coding@rimann.org>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
