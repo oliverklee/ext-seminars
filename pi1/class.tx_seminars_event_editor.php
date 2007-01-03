@@ -91,7 +91,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		// execute record level events thrown by formidable, such as DELETE
 		$this->_doEvents();
 
-		// initialize the creation/edition Form and the lister form
+		// initialize the creation/edition form and the lister form
 		$this->_initForms();
 
 		return;
