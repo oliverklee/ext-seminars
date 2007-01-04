@@ -6,7 +6,7 @@
 		<!-- as asked in the <includexml> tag calling this XML file -->
 		<formid>tx_seminars_pi1_[entity]</formid>
 	</form>
-	<debug>false</debug>
+	<debug>true</debug>
 	<displaylabels>true</displaylabels>
 </meta>
 <control>

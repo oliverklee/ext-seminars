@@ -34,7 +34,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationma
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_event_editor.php');
-require_once(t3lib_extMgm::extPath('frontendformslib').'class.tx_frontendformslib.php');
+require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_registration_editor.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** same as class name */
@@ -928,37 +928,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		if ($isOkay) {
-			// create the frontend form object
-			$formsLibClassName = t3lib_div::makeInstanceClassName('tx_frontendformslib');
-			$formObj = new $formsLibClassName($this);
-
-			// generate configuration for a single step
-			$formObj->steps[1] = $formObj->createStepConf($this->getConfValueString('showRegistrationFields', 's_template_special'), $this->tableAttendances, $this->pi_getLL('label_registrationForm'), '<p>'.$this->pi_getLL('message_registrationForm').'</p>');
-			$formObj->init();
-
-			if ($formObj->submitType == 'submit') {
-				if ($this->registrationManager->canCreateRegistration(
-						$this->seminar,
-						$formObj->sessionData['data'][$this->tableAttendances])) {
-					$this->registrationManager->createRegistration($this->seminar, $formObj->sessionData['data'][$this->tableAttendances], $this);
-					$registationThankyou = $this->substituteMarkerArrayCached('REGISTRATION_THANKYOU');
-
-					// destroy session data for our submitted form
-					$formObj->destroySessionData();
-				} else {
-					$errorMessage = $this->registrationManager->canCreateRegistrationMessage(
-						$this->seminar,
-						$formObj->sessionData['data'][$this->tableAttendances]);
-					$registrationForm = $this->createRegistrationForm($formObj);
-				}
-			} else {
-				$registrationForm = $this->createRegistrationForm($formObj);
-			}
+			$registrationForm = $this->createRegistrationForm();
 		}
 
 		$result = $this->createRegistrationHeading($errorMessage);
-		$result .= preg_replace('/<input [^\/]*type="submit" name="tx_frontendformslib\[submittype\]\[cancel\]"[^\/]*\/>/', '', $registrationForm);
-		$result .= $registationThankyou;
+		$result .= $registrationForm;
 
 		return $result;
 	}
@@ -998,20 +972,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates the registration form.
 	 *
-	 * @param	object		a frontendformslib object
-	 *
 	 * @return	string		HTML code for the form
 	 *
 	 * @access	protected
 	 */
-	function createRegistrationForm(&$formObj) {
+	function createRegistrationForm() {
 		// set the markers for the prices
 		$this->setPriceMarkers('registration_wrapper');
 
 		$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
+		$this->setMarkerContent(
+			'message_registration_form',
+			$this->pi_getLL('message_registrationForm')
+		);
 		$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
-		// Form has not yet been submitted, so render the form:
-		$output .= $formObj->renderWholeForm();
+
+		$registrationEditorClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration_editor');
+		$registrationEditor =& new $registrationEditorClassname($this);
+
+		$output .= $registrationEditor->_render();
 		$output .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
 
 		return $output;
@@ -1122,7 +1101,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// First, we have a list of all fields that are removal candidates.
 		$fieldsToRemove = array(
-			'uid', 'title', 'accreditation_number', 'price_regular', 'price_special', 'vacancies'
+			'uid',
+			'title',
+			'accreditation_number',
+			'price_regular',
+			'price_special',
+			'vacancies',
+			'message'
 		);
 
 		// Now iterate over the fields to show and delete them from the list

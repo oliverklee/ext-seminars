@@ -79,22 +79,3 @@
 .tx-seminars-pi1-canceled td.tx-seminars-pi1-vacancies {
   text-decoration: none;
 }
-
-.tx-seminars-pi1 .tx-frontendformslib-label {
-  display: block;
-  float: left;
-  width: 20em;
-  vertical-align: top;
-}
-
-.tx-seminars-pi1 .tx-frontendformslib-field {
-  margin-bottom: 1em;
-}
-
-.tx-seminars-pi1 .tx-frontendformslib-submitbuttons {
-  margin: .5em 0;
-}
-
-.tx-seminars-pi1 .tx-frontendformslib-submitbuttons input {
-  margin: 0 .5em 0 0;
-}

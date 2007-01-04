@@ -137,6 +137,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkGeneralPriceInSingle();
 		$this->checkEventFieldsOnRegistrationPage();
 		$this->checkShowRegistrationFields();
+		$this->checkThankYouAfterRegistrationPID();
 		$this->checkListPid();
 		$this->checkLoginPid();
 
@@ -983,7 +984,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'accreditation_number',
 				'price_regular',
 				'price_special',
-				'vacancies'
+				'vacancies',
+				'message'
 			)
 		);
 
@@ -1323,6 +1325,24 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'editing event records in the front end. If this value is not '
 				.'set correctly, the <em>edit</em> link in the <em>events '
 				.'which I have entered</em> list will not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value thankYouAfterRegistrationPID.
+	 *
+	 * @access	private
+	 */
+	function checkThankYouAfterRegistrationPID() {
+		$this->checkIfSingleFePageNotEmpty(
+			'thankYouAfterRegistrationPID',
+			true,
+			's_registration',
+			'This value specifies the page that will displayed after a user '
+				.'signed up for an event. If this value is not set correctly, '
+				.'the user will see the list of events instead.'
 		);
 
 		return;
