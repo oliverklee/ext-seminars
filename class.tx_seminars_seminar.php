@@ -464,28 +464,30 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 			if ($dbResult) {
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					if (!empty($result)) {
-						$result .= chr(10);
-					}
-
 					$name = $row['title'];
 					if (!empty($row['homepage'])) {
 						$name = $plugin->cObj->getTypoLink($name, $row['homepage']);
 					}
-					$result .= $name;
+					$plugin->setMarkerContent('place_item_title', $name);
+
+					$description = '';
 					if (!empty($row['address'])) {
-						$result .= '<br />'.$row['address'];
+						// replace all occurrences of chr(13) (new line) with a comma
+						$description .= str_replace(chr(13), ',', $row['address']);
 					}
 					if (!empty($row['directions'])) {
-						$result .= '<br />'.$row['directions'];
+						$description .= $plugin->pi_RTEcssText($row['directions']);
 					}
+					$plugin->setMarkerContent('place_item_description', $description);
+
+					$result .= $plugin->substituteMarkerArrayCached('PLACE_LIST_ITEM');
 				}
 			}
 		} else {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		}
 
-		return $plugin->pi_RTEcssText($result);
+		return $result;
 	}
 
 	/**
@@ -585,27 +587,26 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 			if ($dbResult) {
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					if (!empty($result)) {
-						$result .= chr(10);
-					}
-
 					$name = $row['title'];
 					if (!empty($row['organization'])) {
 						$name .= ', '.$row['organization'];
 					}
 					if (!empty($row['homepage'])) {
-						$result .= $plugin->cObj->getTypoLink($name, $row['homepage']);
-					} else {
-						$result .= $name;
+						$name = $plugin->cObj->getTypoLink($name, $row['homepage']);
 					}
+					$plugin->setMarkerContent('speaker_item_title', $name);
+					
 					if (!empty($row['description'])) {
-						$result .= chr(10).$row['description'];
+						$description = $plugin->pi_RTEcssText($row['description']);
 					}
+					$plugin->setMarkerContent('speaker_item_description', $description);
+
+					$result .= $plugin->substituteMarkerArrayCached('SPEAKER_LIST_ITEM');
 				}
 			}
 		}
 
-		return $plugin->pi_RTEcssText($result);
+		return $result;
 	}
 
 	/**
