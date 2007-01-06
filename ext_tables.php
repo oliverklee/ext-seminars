@@ -90,8 +90,14 @@ $TCA['tx_seminars_seminars'] = Array (
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
+		'typeicon_column' => 'object_type',
+		'typeicons' => array(
+			'0' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_seminars_complete.gif',
+			'1' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_seminars_topic.gif',
+			'2' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_seminars_date.gif'
+		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_seminars_seminars.gif',
+
 		'hideAtCopy' => true,
 	),
 );
