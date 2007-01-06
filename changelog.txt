@@ -1,4 +1,5 @@
 0.4.8
+- Change: Added some new and replaced some existing icons (#493)
 - Change: HTML output of speakers and organizers in list view (#421)
 - Change: Switch the registration from frontendformslib to FORMidable (#433)
 - Feature: Allow to edit existing seminars (#309)
