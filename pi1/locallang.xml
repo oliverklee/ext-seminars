@@ -83,8 +83,8 @@
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
-			<label index="label_price_earlybird_regular">Regular price (early bird)</label>
-			<label index="label_price_earlybird_special">Special price (early bird)</label>
+			<label index="label_price_earlybird_regular">Early-bird price</label>
+			<label index="label_price_earlybird_special">Early-bird special price</label>
 			<label index="label_paymentmethods">Available methods of payment</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_organizers">Organizers</label>
@@ -113,7 +113,7 @@
 			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
-			<label index="message_earlybird_price">Instead of %s, valid until %s</label>
+			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
@@ -276,7 +276,7 @@
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_special">Spezialpreis</label>
 			<label index="label_price_earlybird_regular">Frühbucherpreis</label>
-			<label index="label_price_earlybird_special">Frühbucherpreis (spezial)</label>
+			<label index="label_price_earlybird_special">Frühbucher-Spezialpreis</label>
 			<label index="label_paymentmethods">Mögliche Zahlungsarten</label>
 			<label index="label_event_type">Veranstaltungsart</label>
 			<label index="label_organizers">Veranstalter</label>
@@ -305,7 +305,7 @@
 			<label index="message_registrationForm_formal">Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:</label>
 			<label index="message_registrationForm_informal">Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:</label>
 			<label index="message_noRegistrations">Für diese Veranstaltung liegen bisher noch keine Anmeldungen vor.</label>
-			<label index="message_earlybird_price">anstatt %s, Preis gültig bis %s</label>
+			<label index="message_earlybird_price">Preis gültig und buchbar bis %s</label>
 			<label index="message_emptyTitle">Bitte geben Sie einen Titel für die Veranstaltung ein.</label>
 			<label index="message_emptyOrganizer">Bitte wählen Sie mindestens einen Veranstalter aus.</label>
 			<label index="message_noAttendeesNumber">Bitte geben Sie nur Zahlen für die minimale und maximale Anzahl Anmeldungen ein.</label>
@@ -600,8 +600,8 @@
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_special" type="integer">35819210</label>
-			<label index="label_price_earlybird_regular" type="integer">127612214</label>
-			<label index="label_price_earlybird_special" type="integer">189704447</label>
+			<label index="label_price_earlybird_regular" type="integer">236870027</label>
+			<label index="label_price_earlybird_special" type="integer">255242535</label>
 			<label index="label_paymentmethods" type="integer">119552142</label>
 			<label index="label_event_type" type="integer">99114704</label>
 			<label index="label_organizers" type="integer">68798680</label>
@@ -631,7 +631,7 @@
 			<label index="message_registrationForm_informal" type="integer">194008229</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
-			<label index="message_earlybird_price" type="integer">106253979</label>
+			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
 			<label index="message_noAttendeesNumber" type="integer">38208342</label>
@@ -850,12 +850,11 @@
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
-			<label index="label_price_earlybird_regular">Regular price (early bird)</label>
-			<label index="label_price_earlybird_special">Special price (early bird)</label>
+			<label index="label_price_earlybird_regular">Early-bird price</label>
+			<label index="label_price_earlybird_special">Early-bird special price</label>
 			<label index="label_paymentmethods">Available methods of payment</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_organizers">Organizers</label>
-			<label index="label_event_type">Event type</label>
 			<label index="label_vacancies">Vacancies</label>
 			<label index="label_deadline_registration">Deadline for registration</label>
 			<label index="label_registration">Registration</label>
@@ -881,7 +880,7 @@
 			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
-			<label index="message_earlybird_price">Instead of %s, valid until %s</label>
+			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>

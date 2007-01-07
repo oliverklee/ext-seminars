@@ -621,8 +621,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
 			$this->setMarkerContent('price_earlybird_regular', $this->seminar->getEarlyBirdPriceRegular());
 			$this->setMarkerContent('message_earlybird_price_regular', sprintf($this->pi_getLL('message_earlybird_price'),
-								$this->seminar->getPriceRegular(), $this->seminar->getEarlyBirdDeadline()));
-			$this->readSubpartsToHide('price_regular', $wrapper);
+								$this->seminar->getEarlyBirdDeadline()));
+			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
 		} else {
 			$this->setMarkerContent('price_regular', $this->seminar->getPriceRegular());
 			if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
@@ -636,8 +636,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
 				$this->setMarkerContent('price_earlybird_special', $this->seminar->getEarlyBirdPriceSpecial());
 				$this->setMarkerContent('message_earlybird_price_special', sprintf($this->pi_getLL('message_earlybird_price'),
-								$this->seminar->getPriceSpecial(), $this->seminar->getEarlyBirdDeadline()));
-				$this->readSubpartsToHide('price_special', $wrapper);
+								$this->seminar->getEarlyBirdDeadline()));
+				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
 			} else {
 				$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial());
 				$this->readSubpartsToHide('price_earlybird_special', $wrapper);
