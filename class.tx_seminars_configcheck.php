@@ -1016,7 +1016,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'known_from',
 				'seats',
 				'attendees_names',
-				'notes'
+				'notes',
+				'terms'
 			)
 		);
 

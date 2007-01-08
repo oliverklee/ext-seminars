@@ -182,6 +182,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Checks whether a checkbox is checked.
+	 *
+	 * @param	integer		the current value of the checkbox (0 or 1)
+	 *
+	 * @return	boolean		true if the checkbox is checked, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isChecked($checkboxValue) {
+		return (boolean) $checkboxValue;
+	}
+
+	/**
 	 * Checks whether a form field should be displayed (and evaluated) at all.
 	 *
 	 * @oaram	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)

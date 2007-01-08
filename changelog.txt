@@ -1,4 +1,5 @@
 0.4.8
+- Feature: Checkbox "I accept the terms" on registration (#378)
 - Feature: Allow selection of payment method (#434)
 - Improved the manual (#380)
 - Change: HTML output of the early bird prices in single view (#423)

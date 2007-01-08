@@ -106,6 +106,7 @@
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Number of seats:</label>
 			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
@@ -122,6 +123,7 @@
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
+			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">Generalt</label>
@@ -298,6 +300,7 @@
 			<label index="label_notes">Weitere Mitteilungen:</label>
 			<label index="label_seats">Anzahl Plätze:</label>
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen:</label>
+			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_submit_registration">Verbindlich anmelden</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
@@ -314,6 +317,7 @@
 			<label index="message_noAccessToEventEditor_informal">Sorry, du hast nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
 			<label index="message_noSeatsNumber">Bitte geben Sie nur Zahlen für die Anzahl der Pätze ein.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, so viele Plätze sind leider nicht mehr frei.</label>
+			<label index="message_acceptTerms">Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen, um sich für diese Veranstaltung anzumelden.</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -623,6 +627,7 @@
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">134941724</label>
 			<label index="label_attendees_names" type="integer">198880077</label>
+			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_submit_registration" type="integer">88697193</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
@@ -640,6 +645,7 @@
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
+			<label index="message_acceptTerms" type="integer">198918363</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -873,6 +879,7 @@
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Number of seats:</label>
 			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
@@ -889,6 +896,7 @@
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
+			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>
