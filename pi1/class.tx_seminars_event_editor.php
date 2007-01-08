@@ -137,42 +137,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Provides data items from the DB.
-	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	string		the table name to query
-	 *
-	 * @return	array		$items with additional items from the $params['what'] table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
-	 */
-	function populateList($items, $tableName) {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			$tableName,
-				'1=1'
-				.t3lib_pageSelect::enableFields($tableName),
-			'',
-			'title',
-			'');
-
-		if ($dbResult) {
-			while ($dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$items[] = array(
-					'caption'	=> $dbResultRow['title'],
-					'value'		=> $dbResultRow['uid']
-				);
-			}
-		}
-
-		// Reset the array pointer as the populateList* functions expect
-		// arrays with a reset array pointer.
-		reset($items);
-
-		return $items;
-	}
-
-	/**
 	 * Provides data items for the list of available event types.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)

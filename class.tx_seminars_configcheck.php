@@ -865,7 +865,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'notes',
 				'seats',
 				'attendees_names',
-				'price'
+				'price',
+				'method_of_payment'
 			)
 		);
 
@@ -1006,6 +1007,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'will be displayed on the registration page. '
 				.'Incorrect values will cause those fields to not get displayed.',
 			array(
+				'method_of_payment',
 				'interests',
 				'expectations',
 				'background_knowledge',

@@ -219,6 +219,43 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 		return $this->plugin->pi_getPageLink($pageId);
 	}
+
+	/**
+	 * Provides data items for the list of available places.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
+	 * @param	object		the current renderlet XML node as a recursive array (unused)
+	 *
+	 * @return	array		$items with additional items from the places table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateListPaymentMethods($items, $params, &$form) {
+		return $this->populateList(
+			$items,
+			$this->tablePaymentMethods,
+			'uid IN ('.$this->seminar->getPaymentMethodsUids().')'
+		);
+	}
+
+	/**
+	 * Checks whether the methods of payment should be displayed at all,
+	 * ie. whether they are enable in the setup and the current event actually
+	 * has any payment methods assigned.
+	 *
+	 * @oaram	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	boolean		true if the payment methods should be displayed, false otherwise
+	 */
+	function showMethodsOfPayment($parameters, $form) {
+		return $this->seminar->hasPaymentMethods()
+			&& $this->hasRegistrationFormField(
+				array('elementname' => 'method_of_payment'),
+				null
+			);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_registration_editor.php']) {

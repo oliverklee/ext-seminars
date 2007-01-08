@@ -423,6 +423,43 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 		return $result;
 	}
+
+	/**
+	 * Provides data items from the DB.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	string		the table name to query
+	 * @param	string		query parameter that will be used as the WHERE clause (may be omitted)
+	 *
+	 * @return	array		$items with additional items from the $params['what'] table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateList($items, $tableName, $queryParameter = '1=1') {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'*',
+			$tableName,
+				$queryParameter
+				.t3lib_pageSelect::enableFields($tableName),
+			'',
+			'title',
+			'');
+
+		if ($dbResult) {
+			while ($dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$items[] = array(
+					'caption'	=> $dbResultRow['title'],
+					'value'		=> $dbResultRow['uid']
+				);
+			}
+		}
+
+		// Reset the array pointer as the populateList* functions expect
+		// arrays with a reset array pointer.
+		reset($items);
+
+		return $items;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_dbplugin.php']) {

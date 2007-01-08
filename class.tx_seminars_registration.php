@@ -99,6 +99,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['seats'] = $registrationData['seats'];
 		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
+		$this->recordData['method_of_payment'] = $registrationData['method_of_payment'];
+
 		$this->recordData['interests'] = $registrationData['interests'];
 		$this->recordData['expectations'] = $registrationData['expectations'];
 		$this->recordData['background_knowledge'] = $registrationData['background_knowledge'];
@@ -442,9 +444,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->readSubpartsToHide('price_special', 'field_wrapper');
 		}
 
-		if ($this->seminar->hasPaymentMethods()) {
-			$this->setMarkerContent('message_paymentmethods', $this->pi_getLL('email_confirmationPayment'));
-			$this->setMarkerContent('paymentmethods', $this->seminar->getPaymentMethodsPlain());
+		// We don't need to check $this->seminar->hasPaymentMethods() here as
+		// method_of_payment can only be set (using the registration form) if
+		// the event has at least one payment method.
+		if ($this->hasRecordPropertyInteger('method_of_payment')) {
+			$this->setMarkerContent(
+				'paymentmethod',
+				$this->seminar->getSinglePaymentMethodPlain(
+					$this->getRecordPropertyInteger('method_of_payment')
+				)
+			);
 		} else {
 			$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
 		}
@@ -657,7 +666,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$result = '';
 
 		foreach ($keys as $currentKey) {
-			$value = $this->getRecordPropertyString($currentKey);
+			switch ($currentKey) {
+				case 'method_of_payment':
+					$value = $this->seminar->getSinglePaymentMethodShort(
+						$this->getRecordPropertyInteger($currentKey)
+					);
+					break;
+				default:
+					$value = $this->getRecordPropertyString($currentKey);
+					break;
+			}
 			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
 		}
 

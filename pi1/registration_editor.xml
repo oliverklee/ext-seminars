@@ -28,6 +28,63 @@
 	</control>
 
 	<elements>
+		<renderlet:RADIOBUTTON name="method_of_payment">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_method_of_payment</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListPaymentMethods</method>
+				</userobj>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>showMethodsOfPayment</method>
+				</userobj>
+			</process>
+		</renderlet:RADIOBUTTON>
+
+		<renderlet:TEXT name="seats">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_seats</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noSeatsNumber</message>
+					</pattern>
+				</validator:PREG>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>canRegisterSeats</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_invalidNumberOfSeats</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="seats" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+
+		<renderlet:TEXTAREA name="attendees_names">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_attendees_names</label>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="attendees_names" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXTAREA>
+
 		<renderlet:TEXTAREA name="interests">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_interests</label>
 			<process>
@@ -101,47 +158,6 @@
 					<method>hasRegistrationFormField</method>
 					<params>
 						<data name="elementname" value="known_from" />
-					</params>
-				</userobj>
-			</process>
-		</renderlet:TEXTAREA>
-
-		<renderlet:TEXT name="seats">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_seats</label>
-			<validators>
-				<validator:PREG>
-					<pattern>
-						<value>/^[\d]*$/</value>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_noSeatsNumber</message>
-					</pattern>
-				</validator:PREG>
-				<validator:STANDARD>
-					<userobj>
-						<extension>this</extension>
-						<method>canRegisterSeats</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_invalidNumberOfSeats</message>
-					</userobj>
-				</validator:STANDARD>
-			</validators>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
-					<params>
-						<data name="elementname" value="seats" />
-					</params>
-				</userobj>
-			</process>
-		</renderlet:TEXT>
-
-		<renderlet:TEXTAREA name="attendees_names">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_attendees_names</label>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
-					<params>
-						<data name="elementname" value="attendees_names" />
 					</params>
 				</userobj>
 			</process>
