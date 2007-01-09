@@ -118,7 +118,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 
 		$this->oForm->init(
 			$this,
-			t3lib_extmgm::extPath($this->extKey) . 'pi1/event_editor.xml',
+			t3lib_extmgm::extPath($this->extKey).'pi1/event_editor.xml',
 			$this->iEdition
 		);
 
