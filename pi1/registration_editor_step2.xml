@@ -11,31 +11,55 @@
 	</meta>
 	<control>
 		<datahandler:RAW>
-			<parentcallback>showConfirmationPage</parentcallback>
+			<parentcallback>processRegistration</parentcallback>
 		</datahandler:RAW>
 		<renderer:STANDARD>
 		</renderer:STANDARD>
+		<actionlets>
+			<actionlet:REDIRECT>
+				<url>
+					<userobj>
+						<extension>this</extension>
+						<method>getThankYouAfterRegistrationUrl</method>
+					</userobj>
+				</url>
+			</actionlet:REDIRECT>
+		</actionlets>
 	</control>
 
 	<elements>
-		<renderlet:RADIOBUTTON name="method_of_payment">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_method_of_payment</label>
+		<renderlet:LABEL name="feuser_data">
 			<data>
-				<userobj>
-					<extension>this</extension>
-					<method>populateListPaymentMethods</method>
-				</userobj>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+					</userobj>
+				</defaultvalue>
 			</data>
+		</renderlet:LABEL>
+
+		<renderlet:LABEL name="registration_data">
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getRegistrationData</method>
+					</userobj>
+				</defaultvalue>
+			</data>
+		</renderlet:LABEL>
+
+		<renderlet:HIDDEN name="method_of_payment">
 			<process>
 				<userobj>
 					<extension>this</extension>
 					<method>showMethodsOfPayment</method>
 				</userobj>
 			</process>
-		</renderlet:RADIOBUTTON>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXT name="seats">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_seats</label>
+		<renderlet:HIDDEN name="seats">
 			<validators>
 				<validator:PREG>
 					<pattern>
@@ -60,10 +84,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXT>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="attendees_names">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_attendees_names</label>
+		<renderlet:HIDDEN name="attendees_names">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -73,10 +96,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="interests">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_interests</label>
+		<renderlet:HIDDEN name="interests">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -86,10 +108,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="expectations">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_expectations</label>
+		<renderlet:HIDDEN name="expectations">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -99,10 +120,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="background_knowledge">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_background_knowledge</label>
+		<renderlet:HIDDEN name="background_knowledge">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -112,10 +132,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="accommodation">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_accommodation</label>
+		<renderlet:HIDDEN name="accommodation">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -125,10 +144,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="food">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_food</label>
+		<renderlet:HIDDEN name="food">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -138,10 +156,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="known_from">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_known_from</label>
+		<renderlet:HIDDEN name="known_from">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -151,10 +168,9 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
 
-		<renderlet:TEXTAREA name="notes">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_notes</label>
+		<renderlet:HIDDEN name="notes">
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -164,12 +180,38 @@
 					</params>
 				</userobj>
 			</process>
-		</renderlet:TEXTAREA>
+		</renderlet:HIDDEN>
+
+		<renderlet:CHECKSINGLE name="terms">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms</label>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="terms" />
+					</params>
+				</userobj>
+			</process>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>isChecked</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_acceptTerms</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+		</renderlet:CHECKSINGLE>
+		<renderlet:SUBMIT name="btncont">
+			<refresh />
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_back_registration</label>
+		</renderlet:SUBMIT>
 	</elements>
 
 	<validation>
 		<renderlet:SUBMIT name="btnsubmit">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_proceed_registration</label>
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_submit_registration</label>
 		</renderlet:SUBMIT>
 	</validation>
 </formidable>

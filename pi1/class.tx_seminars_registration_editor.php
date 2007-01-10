@@ -62,6 +62,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *  the values for performance reasons */
 	var $formFieldsToShow = array();
 
+	/** whether we show the confirmation page (true) or the form (false) */
+	var $isConfirmationPage = false;
+
 	/**
 	 * The constructor.
 	 *
@@ -123,9 +126,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function _initForms() {
 		$this->oForm =& t3lib_div::makeInstance('tx_ameosformidable');
 
+		$xmlFile = (!$this->isConfirmationPage) ?
+			'registration_editor.xml' : 'registration_editor_step2.xml';
+
 		$this->oForm->init(
 			$this,
-			t3lib_extmgm::extPath($this->extKey) . 'pi1/registration_editor.xml',
+			t3lib_extmgm::extPath($this->extKey).'pi1/'.$xmlFile,
 			$this->iEdition
 		);
 
@@ -140,7 +146,26 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function _render() {
-		return $this->oForm->_render();
+		$result = $this->oForm->_render();
+		// For the confirmation page, we need to reload the whole thing.
+		if ($this->isConfirmationPage) {
+			$this->_initForms();
+			$result = $this->oForm->_render();
+		}
+		return $result;
+	}
+
+	/**
+	 * Show the confirmation page.
+	 *
+	 * @param	array		the entered form data with the field names as array keys (including the submit button ...)
+	 *
+	 * @access	public
+	 */
+	function showConfirmationPage($parameters) {
+		$this->isConfirmationPage = true;
+
+		return;
 	}
 
 	/**
@@ -197,7 +222,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Checks whether a form field should be displayed (and evaluated) at all.
 	 *
-	 * @oaram	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
 	 * @param	object		the current FORMidable object
 	 *
 	 * @return	boolean		true if the current form field should be displayed, false otherwise
@@ -208,17 +233,17 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 	/**
 	 * Gets the URL of the page that should be displayed after a user has
-	 * signed up for an event.
+	 * signed up for an event, but only if the form has been submitted from
+	 * stage 2 (the confirmation page).
 	 *
-	 * @param	array		optional third parameter to the _callUserObj function (unused)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	object		the current FORMidable object
 	 *
-	 * @return	string		URL of the FE page with a message
+	 * @return	string		URL of the FE page with a message (or null if the confirmation page has not been submitted yet)
 	 *
 	 * @access	public
 	 */
-	function getThankYouAfterRegistrationUrl() {
+	function getThankYouAfterRegistrationUrl($parameters, &$form) {
 		$pageId = $this->plugin->getConfValueInteger(
 			'thankYouAfterRegistrationPID',
 			's_registration'
@@ -229,7 +254,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		if (!$pageId) {
 			$pageId = $this->plugin->getConfValueInteger('listPID', 'sDEF');
 		}
-
 		return $this->plugin->pi_getPageLink($pageId);
 	}
 
@@ -237,7 +261,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Provides data items for the list of available places.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
+	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
 	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	array		$items with additional items from the places table as an array with the keys "caption" (for the title) and "value" (for the uid)
@@ -257,10 +281,13 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * ie. whether they are enable in the setup and the current event actually
 	 * has any payment methods assigned.
 	 *
-	 * @oaram	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
 	 * @param	object		the current FORMidable object
 	 *
 	 * @return	boolean		true if the payment methods should be displayed, false otherwise
+	 *
+	 * @access	public
 	 */
 	function showMethodsOfPayment($parameters, $form) {
 		return $this->seminar->hasPaymentMethods()
@@ -268,6 +295,105 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				array('elementname' => 'method_of_payment'),
 				null
 			);
+	}
+
+	/**
+	 * Gets the currently logged-in FE user's data nicely formatted as HTML so
+	 * that it can be directly included on the confirmation page.
+	 *
+	 * @param	array		(unused)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	string		the currently logged-in FE user's data
+	 *
+	 * @access	public
+	 */
+	function getFeUserData($unused, $parameters, $form) {
+		$userData = $GLOBALS['TSFE']->fe_user->user;
+		foreach (array(
+			'name',
+			'company',
+			'address',
+			'zip',
+			'city',
+			'country',
+			'telephone',
+			'email'
+		) as $currentKey) {
+			$this->plugin->setMarkerContent(
+				'user_'.$currentKey,
+				htmlspecialchars($userData[$currentKey])
+			);
+		}
+		return $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_FEUSER');
+	}
+
+	/**
+	 * Gets the already entered registration data nicely formatted as HTML so
+	 * that it can be directly included on the confirmation page.
+	 *
+	 * @param	array		(unused)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	string		the already entered registration data, nicely formatted as HTML
+	 *
+	 * @access	public
+	 */
+	function getRegistrationData($unused, $parameters, $form) {
+		$result = '';
+
+		$formData = $form->oDataHandler->__aFormData;
+		$availablePaymentMethods = $this->populateListPaymentMethods(
+			array(),
+			null,
+			$form
+		);
+
+		if (isset($formData['method_of_payment'])
+			&& isset($availablePaymentMethods[$formData['method_of_payment']])) {
+			$this->plugin->setMarkerContent(
+				'registration_data_heading',
+				$this->plugin->pi_getLL('label_selected_paymentmethod')
+			);
+			$this->plugin->setMarkerContent(
+				'registration_data_body',
+				$availablePaymentMethods[$formData['method_of_payment']]['caption']
+			);
+			$result .= $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_DATA');
+		}
+
+		foreach (array(
+			'seats',
+			'attendees_names',
+			'interests',
+			'expectations',
+			'background_knowledge',
+			'accommodation',
+			'food',
+			'known_from',
+			'notes'
+		) as $currentKey) {
+			if (!empty($formData[$currentKey])) {
+				$this->plugin->setMarkerContent(
+					'registration_data_heading',
+					$this->plugin->pi_getLL('label_'.$currentKey)
+				);
+				$fieldContent = str_replace(
+					chr(13),
+					'<br />',
+					htmlspecialchars($formData[$currentKey])
+				);
+				$this->plugin->setMarkerContent(
+					'registration_data_body',
+					$fieldContent
+				);
+				$result .= $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_DATA');
+			}
+		}
+
+		return $result;
 	}
 }
 

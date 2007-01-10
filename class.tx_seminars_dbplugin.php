@@ -447,9 +447,10 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 		if ($dbResult) {
 			while ($dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$items[] = array(
+				$uid = $dbResultRow['uid'];
+				$items[$uid] = array(
 					'caption'	=> $dbResultRow['title'],
-					'value'		=> $dbResultRow['uid']
+					'value'		=> $uid
 				);
 			}
 		}

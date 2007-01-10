@@ -108,6 +108,11 @@
 			<label index="label_attendees_names">Additional attendees:</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
+			<label index="label_proceed_registration">Proceed to checkout</label>
+			<label index="label_back_registration">Back</label>
+			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data_informal">Your address data:</label>
+			<label index="label_selected_paymentmethod">Selected method of payment:</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -302,6 +307,11 @@
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen:</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_submit_registration">Verbindlich anmelden</label>
+			<label index="label_proceed_registration">Weiter</label>
+			<label index="label_back_registration">Zurück</label>
+			<label index="label_your_user_data_formal">Ihre Adressdaten:</label>
+			<label index="label_your_user_data_informal">Deine Adressdaten:</label>
+			<label index="label_selected_paymentmethod">Gewählte Zahlungsart:</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
@@ -629,6 +639,11 @@
 			<label index="label_attendees_names" type="integer">198880077</label>
 			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_submit_registration" type="integer">88697193</label>
+			<label index="label_proceed_registration" type="integer">132169581</label>
+			<label index="label_back_registration" type="integer">5603241</label>
+			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data_informal" type="integer">128811576</label>
+			<label index="label_selected_paymentmethod" type="integer">221962435</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
@@ -881,6 +896,11 @@
 			<label index="label_attendees_names">Additional attendees:</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
+			<label index="label_proceed_registration">Proceed to checkout</label>
+			<label index="label_back_registration">Back</label>
+			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data_informal">Your address data:</label>
+			<label index="label_selected_paymentmethod">Selected method of payment:</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
