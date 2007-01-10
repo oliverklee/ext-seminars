@@ -241,6 +241,30 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets the additional information, complete as RTE'ed HTML.
+	 *
+	 * @param	object		the live pibase object
+	 *
+	 * @return	string		HTML code of the additional information (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getAdditionalInformation(&$plugin) {
+		return $plugin->pi_RTEcssText($this->getTopicString('additional_information'));
+	}
+
+	/**
+	 * Checks whether we have additional information for this event.
+	 *
+	 * @return	boolean		true if we have additional information (field not empty), false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasAdditionalInformation() {
+		return $this->hasTopicString('additional_information');
+	}
+
+	/**
 	 * Gets the unique seminar title, consisting of the seminar title and the date
 	 * (comma-separated).
 	 *

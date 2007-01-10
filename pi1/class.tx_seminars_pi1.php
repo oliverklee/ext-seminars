@@ -565,6 +565,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
 			}
 
+			if ($this->seminar->hasAdditionalInformation()) {
+				$this->setMarkerContent('additional_information', $this->seminar->getAdditionalInformation($this));
+			} else {
+				$this->readSubpartsToHide('additional_information', 'field_wrapper');
+			}
+
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
 
 			if ($this->seminar->needsRegistration() && !$this->seminar->isCanceled()) {

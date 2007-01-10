@@ -74,6 +74,7 @@ CREATE TABLE tx_seminars_seminars (
 	price_regular_early decimal(7,2) DEFAULT '0.00' NOT NULL,
 	price_special decimal(7,2) DEFAULT '0.00' NOT NULL,
 	price_special_early decimal(7,2) DEFAULT '0.00' NOT NULL,
+	additional_information text NOT NULL,
 	payment_methods tinytext NOT NULL,
 	organizers tinytext NOT NULL,
 	needs_registration tinyint(3) unsigned DEFAULT '0' NOT NULL,
