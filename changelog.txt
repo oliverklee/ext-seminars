@@ -1,4 +1,5 @@
 0.4.8
+- Change: Moved all record type icons to a subdirectory (#469)
 - Feature: Added some checking for the early bird prices and the deadline (#335)
 - Change: Added a new RTE field in the seminar record (#453)
 - Feature: Checkbox "I accept the terms" on registration (#378)
