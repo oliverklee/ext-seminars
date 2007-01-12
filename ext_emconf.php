@@ -49,6 +49,7 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 		'suggests' => array(
 			'erotea_date2cal' => '',
+			'newloginbox' => '',
 		),
 	),
 	'suggests' => array(
