@@ -106,6 +106,7 @@
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Number of seats:</label>
 			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_billing_address">Billing address:</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
@@ -305,6 +306,7 @@
 			<label index="label_notes">Weitere Mitteilungen:</label>
 			<label index="label_seats">Anzahl Plätze:</label>
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen:</label>
+			<label index="label_billing_address">Abweichende Rechnungsadresse:</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_submit_registration">Verbindlich anmelden</label>
 			<label index="label_proceed_registration">Weiter</label>
@@ -637,6 +639,7 @@
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">134941724</label>
 			<label index="label_attendees_names" type="integer">198880077</label>
+			<label index="label_billing_address" type="integer">75414087</label>
 			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_submit_registration" type="integer">88697193</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
@@ -894,6 +897,7 @@
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Number of seats:</label>
 			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_billing_address">Billing address:</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>

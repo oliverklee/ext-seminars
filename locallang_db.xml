@@ -63,6 +63,7 @@
 			<label index="tx_seminars_attendances.paid"></label>
 			<label index="tx_seminars_attendances.datepaid"></label>
 			<label index="tx_seminars_attendances.method_of_payment"></label>
+			<label index="tx_seminars_attendances.billing_address"></label>
 			<label index="tx_seminars_attendances.been_there"></label>
 			<label index="tx_seminars_attendances.interests"></label>
 			<label index="tx_seminars_attendances.expectations"></label>
@@ -156,6 +157,7 @@
 			<label index="tx_seminars_attendances.paid">Has paid</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment</label>
+			<label index="tx_seminars_attendances.billing_address">Billing address</label>
 			<label index="tx_seminars_attendances.been_there">Has attended</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
 			<label index="tx_seminars_attendances.expectations">Expectations for the event:</label>
@@ -251,6 +253,7 @@
 			<label index="tx_seminars_attendances.paid">Hat bezahlt</label>
 			<label index="tx_seminars_attendances.datepaid">Datum der Bezahlung</label>
 			<label index="tx_seminars_attendances.method_of_payment">Zahlungsart</label>
+			<label index="tx_seminars_attendances.billing_address">Rechnungsadresse</label>
 			<label index="tx_seminars_attendances.been_there">Hat teilgenommen</label>
 			<label index="tx_seminars_attendances.interests">Spezielle Interessen:</label>
 			<label index="tx_seminars_attendances.expectations">Erwartungen an die Veranstaltung:</label>
@@ -491,6 +494,7 @@
 			<label index="tx_seminars_attendances.paid" type="integer">155079066</label>
 			<label index="tx_seminars_attendances.datepaid" type="integer">75729411</label>
 			<label index="tx_seminars_attendances.method_of_payment" type="integer">138981420</label>
+			<label index="tx_seminars_attendances.billing_address" type="integer">33277925</label>
 			<label index="tx_seminars_attendances.been_there" type="integer">120264388</label>
 			<label index="tx_seminars_attendances.interests" type="integer">236721406</label>
 			<label index="tx_seminars_attendances.expectations" type="integer">159374040</label>
@@ -742,6 +746,7 @@
 			<label index="tx_seminars_attendances.paid">Has paid</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment</label>
+			<label index="tx_seminars_attendances.billing_address">Billing address</label>
 			<label index="tx_seminars_attendances.been_there">Has attended</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
 			<label index="tx_seminars_attendances.expectations">Expectations for the event:</label>

@@ -100,6 +100,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
 		$this->recordData['method_of_payment'] = $registrationData['method_of_payment'];
+		$this->recordData['billing_address'] = $registrationData['billing_address'];
 
 		$this->recordData['interests'] = $registrationData['interests'];
 		$this->recordData['expectations'] = $registrationData['expectations'];
@@ -455,7 +456,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				)
 			);
 		} else {
-			$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
+			$this->readSubpartsToHide('paymentmethod', 'field_wrapper');
+		}
+
+		if ($this->hasRecordPropertyString('billing_address')) {
+			$this->setMarkerContent(
+				'billing_address',
+				$this->getRecordPropertyString('billing_address')
+			);
+		} else {
+			$this->readSubpartsToHide('billing_address', 'field_wrapper');
 		}
 
 		$this->setMarkerContent('url', $this->seminar->getDetailedViewUrl($plugin));
@@ -524,7 +534,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$currentOrganizerEmail,
 				$this->pi_getLL('email_notificationSubject').': '.$this->getTitle(),
 				$content,
-				// We use the attendee's e-mail as sender
+				// We use the attendee's e-mail as sender.
 				'From: '.$this->getUserNameAndEmail(),
 				'8bit'
 			);

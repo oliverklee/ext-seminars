@@ -365,6 +365,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		foreach (array(
+			'billing_address',
 			'seats',
 			'attendees_names',
 			'interests',

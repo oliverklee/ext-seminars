@@ -59,6 +59,18 @@
 			</process>
 		</renderlet:HIDDEN>
 
+		<renderlet:HIDDEN name="billing_address">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="billing_address" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+
 		<renderlet:HIDDEN name="seats">
 			<validators>
 				<validator:PREG>

@@ -744,7 +744,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'room',
 				'price_regular',
 				'price_special',
-				'paymentmethods',
+				'paymentmethod',
+				'billing_address',
 				'url',
 				'footer'
 			)
@@ -866,7 +867,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'seats',
 				'attendees_names',
 				'price',
-				'method_of_payment'
+				'method_of_payment',
+				'billing_address'
 			)
 		);
 
@@ -1008,6 +1010,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'Incorrect values will cause those fields to not get displayed.',
 			array(
 				'method_of_payment',
+				'billing_address',
 				'interests',
 				'expectations',
 				'background_knowledge',
