@@ -220,6 +220,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Checks whether a radiobutton in a radiobutton group is selected.
+	 *
+	 * @param	mixed		the currently selected value (a positive integer) or null if no button is selected
+	 *
+	 * @return	boolean		true if at least a is selected, false if none is selected
+	 *
+	 * @access	public
+	 */
+	function isRadiobuttonSelected($radiogroupValue) {
+		return (boolean) $radiogroupValue;
+	}
+
+	/**
 	 * Checks whether a form field should be displayed (and evaluated) at all.
 	 *
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
