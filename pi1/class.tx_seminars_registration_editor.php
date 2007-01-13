@@ -169,7 +169,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Processes the an entered/edited registration and stores it in the DB.
+	 * Processes the entered/edited registration and stores it in the DB.
 	 *
 	 * @param	array		the entered form data with the field names as array keys (including the submit button ...)
 	 *
@@ -249,8 +249,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			's_registration'
 		);
 
-		// On updates, the page ID might still not be set. Use the event list
-		// for the meantime so the registration form won't be displayed again.
+		// On freshly updated sites, the configuration value might not be set
+		// yet. To avoid breaking the site, we use the event list in this case
+		// so the registration form won't be displayed again.
 		if (!$pageId) {
 			$pageId = $this->plugin->getConfValueInteger('listPID', 'sDEF');
 		}

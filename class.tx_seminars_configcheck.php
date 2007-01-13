@@ -1346,7 +1346,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'thankYouAfterRegistrationPID',
 			true,
 			's_registration',
-			'This value specifies the page that will displayed after a user '
+			'This value specifies the page that will be displayed after a user '
 				.'signed up for an event. If this value is not set correctly, '
 				.'the user will see the list of events instead.'
 		);
