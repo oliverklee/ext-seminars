@@ -1,4 +1,5 @@
 0.4.8
+- Fix: SQL Errors in the registration form (#473)
 - Change: Make choice of payment method obligatory in the registration form (#471)
 - Feature: Redirect user to registration page after login (#376)
 - Feature: Add billing address to attendance record (#431)

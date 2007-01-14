@@ -283,11 +283,17 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListPaymentMethods($items, $params, &$form) {
-		return $this->populateList(
-			$items,
-			$this->tablePaymentMethods,
-			'uid IN ('.$this->seminar->getPaymentMethodsUids().')'
-		);
+		$result = $items;
+
+		if ($this->seminar->hasPaymentMethods()) {
+			$result = $this->populateList(
+				$items,
+				$this->tablePaymentMethods,
+				'uid IN ('.$this->seminar->getPaymentMethodsUids().')'
+			);
+		}
+
+		return $result;
 	}
 
 	/**
