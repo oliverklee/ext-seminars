@@ -1622,10 +1622,10 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function isUserVip($feUserUid, $defaultEventVipsFeGroupId) {
+	function isUserVip($feUserUid, $defaultEventVipsFeGroupID) {
 		$result = false;
 		$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
-				$defaultEventVipsFeGroupId
+				$defaultEventVipsFeGroupID
 			]
 		);
 
@@ -1666,7 +1666,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function canViewRegistrationsList($whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupId = 0) {
+	function canViewRegistrationsList($whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupID = 0) {
 		$result = false;
 
 		if ($this->needsRegistration() && $this->isLoggedIn()) {
@@ -1679,21 +1679,21 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 							'my_vip_events',
 							0,
 							$registrationsVipListPID,
-							$defaultEventVipsFeGroupId);
+							$defaultEventVipsFeGroupID);
 					break;
 				case 'my_events':
 					$result = $this->isUserRegistered($currentUserUid)
 						&& ((boolean) $registrationsListPID);
 					break;
 				case 'my_vip_events':
-					$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupId)
+					$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
 						&& ((boolean) $registrationsVipListPID);
 					break;
 				case 'list_registrations':
 					$result = $this->isUserRegistered($currentUserUid);
 					break;
 				case 'list_vip_registrations':
-					$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupId);
+					$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
 					break;
 				default:
 					// For all other plugins, we don't grant access.

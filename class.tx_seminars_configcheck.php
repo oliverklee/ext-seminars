@@ -1303,8 +1303,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkDefaultEventVipsFeGroupID() {
-		$this->checkIfPositiveInteger(
-			'defaultEventVipsFeGroupId',
+		$this->checkIfPositiveIntegerOrEmpty(
+			'defaultEventVipsFeGroupID',
 			false,
 			'',
 			'This value specifies the front-end user group that is allowed to '

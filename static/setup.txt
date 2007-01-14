@@ -223,7 +223,7 @@ plugin.tx_seminars_pi1 {
 	eventEditorFeGroupID =
 
 	# UID of the FE user group that is allowed to see the registrations for all events
-	defaultEventVipsFeGroupId =
+	defaultEventVipsFeGroupID =
 
 	# PID of the page where the plug-in for editing events is located
 	eventEditorPID =

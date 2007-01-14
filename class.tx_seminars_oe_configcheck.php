@@ -625,6 +625,32 @@ class tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks whether a configuration value has a positive (thus non-zero)
+	 * integer value or is empty.
+	 *
+	 * @param	string		TS setup field name to extract, may be empty
+	 * @param	boolean		whether the value can also be set via flexforms (this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfPositiveIntegerOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation) {
+		$value = $this->objectToCheck->getConfValueString($fieldName, $sheet);
+		if (!empty($value) && !preg_match('/^[1-9]\d*$/', $value)) {
+			$message = 'The TS setup variable <strong>'
+				.$this->getTSSetupPath().$fieldName
+				.'</strong> is set to the value <strong>'
+				.htmlspecialchars($value).'</strong>, but only positive '
+				.'integers and empty strings are allowed. '
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection($fieldName, $canUseFlexforms, $message);
+		}
+
+		return;
+	}
+
+	/**
 	 * Checks whether a configuration value is non-empty and its
 	 * comma-separated values lie within a set of allowed values.
 	 *
