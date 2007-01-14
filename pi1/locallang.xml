@@ -97,6 +97,7 @@
 			<label index="label_listRegistrationsLink">View the list of registrations</label>
 			<label index="label_list_otherdates">Other dates for this topic</label>
 			<label index="label_list_dates">Dates for this topic</label>
+			<label index="label_eventsnextday">Subsequent events</label>
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
@@ -302,6 +303,7 @@
 			<label index="label_listRegistrationsLink">Liste der Anmeldungen anzeigen</label>
 			<label index="label_list_otherdates">Andere Termine für diese Veranstaltung</label>
 			<label index="label_list_dates">Termine für diese Veranstaltung</label>
+			<label index="label_eventsnextday">Veranstaltungen im Anschluss</label>
 			<label index="label_edit">Bearbeiten</label>
 			<label index="label_back">Zur Übersicht</label>
 			<label index="label_save">Speichern</label>
@@ -640,6 +642,7 @@
 			<label index="label_listRegistrationsLink" type="integer">169828522</label>
 			<label index="label_list_otherdates" type="integer">139958574</label>
 			<label index="label_list_dates" type="integer">46235180</label>
+			<label index="label_eventsnextday" type="integer">268130487</label>
 			<label index="label_edit" type="integer">131916066</label>
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_save" type="integer">211601612</label>
@@ -903,6 +906,7 @@
 			<label index="label_listRegistrationsLink">View the list of registrations</label>
 			<label index="label_list_otherdates">Other dates for this topic</label>
 			<label index="label_list_dates">Dates for this topic</label>
+			<label index="label_eventsnextday">Subsequent events</label>
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>

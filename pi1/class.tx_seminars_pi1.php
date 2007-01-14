@@ -391,12 +391,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * creates a seminar bag, but does not create any actual HTML output.
 	 *
 	 * @param	string		a string selecting the flavor of list view: either an empty string (for the default list view), the value from "what_to_display" or "other_dates"
+	 * @param	string		additional query parameters that will be appended to the WHERE clause
 	 *
 	 * @return	object		a seminar bag containing the seminars for the list view
 	 *
 	 * @access	protected
 	 */
-	function &initListView($whatToDisplay = '') {
+	function &initListView($whatToDisplay = '', $additionalQueryParameters = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
 			$this->conf['pidList'] = $this->getConfValueString('pages');
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
@@ -510,12 +511,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'my_entered_events':
 				$queryWhere .= ' AND '.$this->tableSeminars.'.owner_feuser='.$this->getFeUserUid();
 				break;
+			case 'events_next_day':
+				// Here, we rely on the $additonalQueryParameters parameter
+				// because $this->seminar is gone already.
+				break;
 			case 'other_dates':
 				$queryWhere .= $this->seminar->getAdditionalQueryForOtherDates();
 				break;
 			default:
 				break;
 		}
+
+		$queryWhere .= $additionalQueryParameters;
 
 		$orderBy = '';
 		if (isset($this->internal['orderBy'])
@@ -677,14 +684,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide(
 					'accreditation_number,date,time,place,room,speakers,'
 						.'organizers,vacancies,deadline_registration,'
-						.'registration,list_registrations',
+						.'registration,list_registrations,eventsnextday',
 					'field_wrapper'
 				);
 			}
 
-
 			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
-			$result .= $this->createOtherDatesList();
+			// We cache the additional query parameters and the other dates list
+			// because the list view will overwrite $this->seminar.
+			$nextDayQueryParameters = $this->seminar->getAdditionalQueryForNextDay();
+			$otherDatesPart = $this->createOtherDatesList();
+			if (!empty($nextDayQueryParameters)) {
+				$result .= $this->createEventsOnNextDayList($nextDayQueryParameters);
+			}
+			$result .= $otherDatesPart;
 		} else {
 			$this->setMarkerContent('error_text', $this->pi_getLL('message_wrongSeminarNumber'));
 			$result = $this->substituteMarkerArrayCached('ERROR_VIEW');
@@ -738,9 +751,49 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
  	/**
+	 * Creates the list of events that start the next day (after the current
+	 * event has ended). Practically, this is just a special kind of list view.
+	 * In case the current record is a topic record, this function will return
+	 * an empty string.
+	 *
+	 * Note: This function does *not* rely on $this->seminar, but overwrites
+	 * $this->seminar.
+	 *
+	 * @param	string		query parameters that will be appended to the WHERE clause, selecting the correct records
+	 *
+	 * @return	string		HTML for the events list (may be an empty string)
+	 *
+	 * @access	protected
+	 */
+	function createEventsOnNextDayList($additionalQueryParameters) {
+		$result = '';
+
+		$seminarBag =& $this->initListView('events_next_day', $additionalQueryParameters);
+
+		if ($this->internal['res_count']) {
+			$tableEventsNextDay = $this->createListTable($seminarBag);
+
+			$this->setMarkerContent('table_eventsnextday', $tableEventsNextDay);
+
+			$result = $this->substituteMarkerArrayCached('EVENTSNEXTDAY_VIEW');
+		}
+
+		// Let warnings from the seminar and the seminar bag bubble up to us.
+		$this->setErrorMessage($seminarBag->checkConfiguration(true));
+
+		// Let's also check the list view configuration..
+		$this->checkConfiguration(true, 'seminar_list');
+
+		return $result;
+	}
+
+ 	/**
 	 * Creates the list of (other) dates for this topic. Practically, this is
 	 * just a special kind of list view. In case this topic has no other dates,
 	 * this function will return an empty string.
+	 *
+	 * Note: This function relies on $this->seminar, but also overwrites
+	 * $this->seminar.
 	 *
 	 * @return	string		HTML for the events list (may be an empty string)
 	 *

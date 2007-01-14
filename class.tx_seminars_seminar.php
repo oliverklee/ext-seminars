@@ -328,10 +328,39 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
  	/**
+	 * Creates part of a WHERE clause to select events that start later the same
+	 * day the current event ends or the day after.
+	 * The return value of this function always starts with " AND" (except for
+	 * when this event has no end date).
+	 *
+	 * @return	string		part of a WHERE clause that can be appended to the current WHERE clause (or an empty string if this event has no end date)
+	 *
+	 * @access	public
+	 */
+	function getAdditionalQueryForNextDay() {
+		$result = '';
+
+		if ($this->hasEndDate()) {
+			// 86400 seconds are one day.
+			$oneDay = 86400;
+			$endDate = $this->getRecordPropertyInteger('end_date');
+			$midnightBeforeEndDate = $endDate - ($endDate % $oneDay);
+			$secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * $oneDay;
+
+			$result = ' AND begin_date>='.$endDate.
+				' AND begin_date<'.$secondMidnightAfterEndDate;
+		}
+
+		return $result;
+	}
+
+ 	/**
 	 * Creates part of a WHERE clause to select other dates for the current
 	 * topic. The return value of this function always starts with " AND". When
 	 * it is used, the DB query will select records of the same topic that
 	 * are not identical (ie. not with the same UID) with the current event.
+	 *
+	 * @return	string		part of a WHERE clause that can be appended to the current WHERE clause
 	 *
 	 * @access	public
 	 */
@@ -646,7 +675,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 						$name = $plugin->cObj->getTypoLink($name, $row['homepage']);
 					}
 					$plugin->setMarkerContent('speaker_item_title', $name);
-					
+
 					if (!empty($row['description'])) {
 						$description = $plugin->pi_RTEcssText($row['description']);
 					}
@@ -1642,7 +1671,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			if ($dbResult) {
 				$numberOfVips = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 				$result = ($numberOfVips['num'] > 0);
-			}			
+			}
 		}
 
 		return $result;
