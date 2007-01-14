@@ -86,6 +86,15 @@
 
 		<renderlet:TEXTAREA name="attendees_names">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_attendees_names</label>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>hasAttendeesNames</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideAttendeesNames</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
 			<process>
 				<userobj>
 					<extension>this</extension>

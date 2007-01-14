@@ -132,6 +132,7 @@
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
+			<label index="message_provideAttendeesNames">Please provide the attendees' names.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 		</languageKey>
@@ -336,6 +337,7 @@
 			<label index="message_noAccessToEventEditor_informal">Sorry, du hast nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
 			<label index="message_noSeatsNumber">Bitte geben Sie nur Zahlen für die Anzahl der Pätze ein.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, so viele Plätze sind leider nicht mehr frei.</label>
+			<label index="message_provideAttendeesNames">Bitte geben Sie die Namen der anzumeldenden Personen an.</label>
 			<label index="message_chooseMethodOfPayment">Bitte wählen Sie eine Zahlungsart aus.</label>
 			<label index="message_acceptTerms">Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen, um sich für diese Veranstaltung anzumelden.</label>
 		</languageKey>
@@ -674,6 +676,7 @@
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
+			<label index="message_provideAttendeesNames" type="integer">175728129</label>
 			<label index="message_chooseMethodOfPayment" type="integer">209557761</label>
 			<label index="message_acceptTerms" type="integer">198918363</label>
 		</languageKey>
@@ -935,6 +938,7 @@
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
+			<label index="message_provideAttendeesNames">Please provide the attendees' names.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 		</languageKey>

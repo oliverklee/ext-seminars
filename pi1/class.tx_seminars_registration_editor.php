@@ -416,6 +416,25 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 		return $result;
 	}
+
+	/**
+	 * Checks whether the list of attendees' names is non-empty or less than two
+	 * seats are requested.
+	 *
+	 * @param	string		the current value of the field with the attendees' names
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	boolean		true if the field is non-empty or less than two seats are reserved, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasAttendeesNames($attendeesNames, &$form) {
+		$dataHandler = $form->oDataHandler;
+		$seats = isset($dataHandler->__aFormData['seats']) ?
+			intval($dataHandler->__aFormData['seats']) : 1;
+
+		return (!empty($attendeesNames) || ($seats < 2));
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_registration_editor.php']) {
