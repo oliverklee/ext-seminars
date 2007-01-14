@@ -177,6 +177,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'list_registrations':
 				$result = $this->createRegistrationsListPage();
 				break;
+			case 'topic_list':
+				// The fallthrough is intended
+				// because createListView() will differentiate later.
 			case 'my_events':
 				// The fallthrough is intended
 				// because createListView() will differentiate later.
@@ -460,11 +463,31 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->internal['orderByList'] = 'title,uid,event_type,accreditation_number,credit_points,begin_date,price_regular,price_special,organizers';
 
 		$pidList = $this->pi_getPidList($this->getConfValueString('pidList'), $this->getConfValueInteger('recursive'));
-		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')'
-			.$this->getAdditionalQueryParameters();
+		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')';
+
+		// Timeframes and hiding canceled events doesn't make sense for the
+		// topic list.
+		if ($whatToDisplay != 'topic_list') {
+			$queryWhere .= $this->getAdditionalQueryParameters();
+		}
+
 		$additionalTables = '';
 
 		switch ($whatToDisplay) {
+			case 'topic_list':
+				$queryWhere .= ' AND '.$this->tableSeminars.'.object_type='
+					.$this->recordTypeTopic;
+				$this->readSubpartsToHide(
+					'uid,accreditation_number,speakers,date,time,place,'
+						.'organizers,vacancies,registration',
+					'LISTHEADER_WRAPPER'
+				);
+				$this->readSubpartsToHide(
+					'uid,accreditation_number,speakers,date,time,place,'
+						.'organizers,vacancies,registration',
+					'LISTITEM_WRAPPER'
+				);
+				break;
 			case 'my_events':
 				$additionalTables = $this->tableAttendances;
 				$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableAttendances.'.seminar'
@@ -647,6 +670,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			} else {
 				$this->readSubpartsToHide('list_registrations', 'field_wrapper');
 			}
+
+			// Hide unneeded sections for topic records.
+			if ($this->seminar->getRecordPropertyInteger('object_type') ==
+				$this->recordTypeTopic) {
+				$this->readSubpartsToHide(
+					'accreditation_number,date,time,place,room,speakers,'
+						.'organizers,vacancies,deadline_registration,'
+						.'registration,list_registrations',
+					'field_wrapper'
+				);
+			}
+
 
 			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
 			$result .= $this->createOtherDatesList();

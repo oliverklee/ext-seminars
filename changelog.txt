@@ -1,4 +1,5 @@
 0.4.8
+- Feature: List view of all topics (#300)
 - Feature: Added default VIPs that are able to see all registrations on all events (#437)
 - Feature: List other dates for the same event topic (#299)
 - Fix: SQL Errors in the registration form (#473)
