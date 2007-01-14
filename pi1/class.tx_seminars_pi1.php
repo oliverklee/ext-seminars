@@ -471,9 +471,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					.' AND '.$this->tableAttendances.'.user='.$this->registrationManager->getFeUserUid();
 				break;
 			case 'my_vip_events':
-				$additionalTables = $this->tableVipsMM;
-				$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableVipsMM.'.uid_local'
-					.' AND '.$this->tableVipsMM.'.uid_foreign='.$this->registrationManager->getFeUserUid();
+				$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
+						$this->getConfValueInteger('defaultEventVipsFeGroupId')
+					]
+				);
+				if (!$isDefaultVip) {
+					// The current user is not listed as a default VIP for all events.
+					// Change the query to show only events where the current user is manually
+					// added as a VIP.
+					$additionalTables = $this->tableVipsMM;
+					$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableVipsMM.'.uid_local'
+						.' AND '.$this->tableVipsMM.'.uid_foreign='.$this->registrationManager->getFeUserUid();
+				}
 				break;
 			case 'my_entered_events':
 				$queryWhere .= ' AND '.$this->tableSeminars.'.owner_feuser='.$this->getFeUserUid();
@@ -745,8 +754,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$targetPageId = 0;
 		$whatToDisplay = $this->getConfValueString('what_to_display');
 
-		if ($this->seminar->canViewRegistrationsList($whatToDisplay, 0,
-			$this->getConfValueInteger('registrationsVipListPID'))) {
+		if ($this->seminar->canViewRegistrationsList(
+				$whatToDisplay,
+				0,
+				$this->getConfValueInteger('registrationsVipListPID'),
+				$this->getConfValueInteger('defaultEventVipsFeGroupId'))
+			) {
 			// So a link to the VIP list is possible.
 			$targetPageId = $this->getConfValueInteger('registrationsVipListPID');
 		// No link to the VIP list ... so maybe to the list for the participants.
@@ -1087,7 +1100,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Let warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
-			if ($this->seminar->canViewRegistrationsList($this->getConfValueString('what_to_display'))) {
+			if ($this->seminar->canViewRegistrationsList(
+					$this->getConfValueString('what_to_display'),
+					0,
+					0,
+					$this->getConfValueInteger('defaultEventVipsFeGroupId'))
+				) {
 				$isOkay = true;
 			} else {
 				$errorMessage = $this->seminar->canViewRegistrationsListMessage($this->getConfValueString('what_to_display'));

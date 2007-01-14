@@ -1611,28 +1611,38 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks whether a certain user is entered as VIP for that seminar,
-	 * ie. he/she is allowed to view the list of registrations for this seminar.
+	 * Checks whether a certain user is entered as a default VIP for all events but also
+	 * checks whether this user is entered as a VIP for this event,
+	 * ie. he/she is allowed to view the list of registrations for this event.
 	 *
 	 * @param	integer		UID of the user to check
+	 * @param	integer		UID of the default event VIP front-end user group
 	 *
 	 * @return	boolean		true if the user is a VIP for this seminar, false otherwise.
 	 *
 	 * @access	public
 	 */
-	function isUserVip($feUserUid) {
+	function isUserVip($feUserUid, $defaultEventVipsFeGroupId) {
 		$result = false;
+		$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
+				$defaultEventVipsFeGroupId
+			]
+		);
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'COUNT(*) AS num',
-			$this->tableVipsMM,
-			'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid,
-			'',
-			'',
-			'');
-		if ($dbResult) {
-			$numberOfVips = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$result = ($numberOfVips['num'] > 0);
+		if ($isDefaultVip) {
+			$result = true;
+		} else {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'COUNT(*) AS num',
+				$this->tableVipsMM,
+				'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid,
+				'',
+				'',
+				'');
+			if ($dbResult) {
+				$numberOfVips = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+				$result = ($numberOfVips['num'] > 0);
+			}			
 		}
 
 		return $result;
@@ -1650,34 +1660,40 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @param	string		the 'what_to_display' value, specifying the type of plugin: (seminar_list|my_events|my_vip_events|list_registrations|list_vip_registrations)
 	 * @param	integer		the value of the registrationsListPID parameter (only relevant for (seminar_list|my_events|my_vip_events))
 	 * @param	integer		the value of the registrationsVipListPID parameter (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param	integer		the value of the defaultEventVipsGroupID parameter (only relevant for (list_vip_registration|my_vip_events))
 	 *
 	 * @return	boolean		true if a FE user is logged in and the user may view the registrations list or may see a link to that page, false otherwise.
 	 *
 	 * @access	public
 	 */
-	function canViewRegistrationsList($whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0) {
+	function canViewRegistrationsList($whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupId = 0) {
 		$result = false;
 
 		if ($this->needsRegistration() && $this->isLoggedIn()) {
+			$currentUserUid = $this->getFeUserUid();
 			switch ($whichPlugin) {
 				case 'seminar_list':
 					// In the standard list view, we could have any kind of link.
 					$result = $this->canViewRegistrationsList('my_events', $registrationsListPID)
-						|| $this->canViewRegistrationsList('my_vip_events', 0, $registrationsVipListPID);
+						|| $this->canViewRegistrationsList(
+							'my_vip_events',
+							0,
+							$registrationsVipListPID,
+							$defaultEventVipsFeGroupId);
 					break;
 				case 'my_events':
-					$result = $this->isUserRegistered($this->getFeUserUid())
+					$result = $this->isUserRegistered($currentUserUid)
 						&& ((boolean) $registrationsListPID);
 					break;
 				case 'my_vip_events':
-					$result = $this->isUserVip($this->getFeUserUid())
+					$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupId)
 						&& ((boolean) $registrationsVipListPID);
 					break;
 				case 'list_registrations':
-					$result = $this->isUserRegistered($this->getFeUserUid());
+					$result = $this->isUserRegistered($currentUserUid);
 					break;
 				case 'list_vip_registrations':
-					$result = $this->isUserVip($this->getFeUserUid());
+					$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupId);
 					break;
 				default:
 					// For all other plugins, we don't grant access.

@@ -164,6 +164,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		}
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
+		$this->checkDefaultEventVipsFeGroupID();
 
 		return;
 	}
@@ -195,6 +196,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		}
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
+		$this->checkDefaultEventVipsFeGroupID();
 
 		return;
 	}
@@ -207,6 +209,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	function check_tx_seminars_pi1_my_vip_events() {
 		$this->check_tx_seminars_pi1_seminar_list();
 		$this->checkRegistrationsVipListPid();
+		$this->checkDefaultEventVipsFeGroupID();
 
 		return;
 	}
@@ -1277,6 +1280,26 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the front-end user group that is allowed to '
 				.'enter and edit event records in the front end. If this value '
 				.'is not set correctly, FE editing for events will not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value defaultEventVipsFeGroupID.
+	 *
+	 * @access	private
+	 */
+	function checkDefaultEventVipsFeGroupID() {
+		$this->checkIfPositiveInteger(
+			'defaultEventVipsFeGroupId',
+			false,
+			'',
+			'This value specifies the front-end user group that is allowed to '
+				.'see the registrations for all events and get all events listed '
+				.'on their "my VIP events" page. If this value is not set '
+				.'correctly, the users of this group will not be treated as '
+				.'VIPs for all events.'
 		);
 
 		return;
