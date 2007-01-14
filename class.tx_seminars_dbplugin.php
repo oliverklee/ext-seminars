@@ -57,6 +57,11 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tablePaymentMethods;
 	var $tableEventTypes;
 
+	// Constants for the types of records
+	var $recordTypeComplete;
+	var $recordTypeTopic;
+	var $recordTypeDate;
+
 	/** The frontend user who currently is logged in. */
 	var $feuser = null;
 
@@ -127,6 +132,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			$this->pi_loadLL();
 
 			$this->setTableNames();
+			$this->setRecordTypes();
 
 			// unserialize the configuration array
 			$globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
@@ -163,6 +169,19 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableVipsMM         = $dbPrefix.'seminars_feusers_mm';
 		$this->tableSpeakersMM     = $dbPrefix.'seminars_speakers_mm';
 		$this->tableSitesMM        = $dbPrefix.'seminars_place_mm';
+
+		return;
+	}
+
+	/**
+	 * Sets the record types.
+	 *
+	 * @access	private
+	 */
+	function setRecordTypes() {
+		$this->recordTypeComplete	= 0;
+		$this->recordTypeTopic		= 1;
+		$this->recordTypeDate		= 2;
 
 		return;
 	}
@@ -377,6 +396,23 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	}
 
 	/**
+	 * Returns the current flavor of the object to check.
+	 *
+	 * @return	string		the current flavor of the object to check (or an empty string if no flavor is set)
+	 *
+	 * @access	public
+	 */
+	function getFlavor() {
+		$result = '';
+
+		if ($this->configurationCheck) {
+			$result = $this->configurationCheck->getFlavor();
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Sets the error text of $this->configurationCheck.
 	 *
 	 * If this->configurationCheck is null, this function is a no-op.
@@ -399,19 +435,29 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * error message is created (in order to prevent duplicate messages).
 	 *
 	 * @param	boolean		whether to use the raw message instead of the wrapped message
+	 * @param	string		flavor to use temporarily for this call (leave empty to not change the flavor)
 	 *
 	 * @return	string		a formatted error message (if there are errors) or an empty string
 	 *
 	 * @access	public
 	 */
-	function checkConfiguration($useRawMessage = false) {
+	function checkConfiguration($useRawMessage = false, $temporaryFlavor = '') {
 		static $hasDisplayedMessage = false;
 		$result = '';
 
 		if ($this->configurationCheck) {
+			if (!empty($temporaryFlavor)) {
+				$oldFlavor = $this->getFlavor();
+				$this->setFlavor($temporaryFlavor);
+			}
+
 			$message = ($useRawMessage) ?
 				$this->configurationCheck->checkIt() :
 				$this->configurationCheck->checkItAndWrapIt();
+
+			if (!empty($temporaryFlavor)) {
+				$this->setFlavor($oldFlavor);
+			}
 
 			// If we have a message, only return it if it is the first message
 			// for objects of this class.

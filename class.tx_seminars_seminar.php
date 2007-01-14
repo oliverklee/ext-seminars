@@ -327,6 +327,33 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		return $this->hasTopicInteger('credit_points');
 	}
 
+ 	/**
+	 * Creates part of a WHERE clause to select other dates for the current
+	 * topic. The return value of this function always starts with " AND". When
+	 * it is used, the DB query will select records of the same topic that
+	 * are not identical (ie. not with the same UID) with the current event.
+	 *
+	 * @access	public
+	 */
+	function getAdditionalQueryForOtherDates() {
+		$result = ' AND (';
+
+		if ($this->getRecordPropertyInteger('object_type') == $this->recordTypeDate) {
+			$result .= '(topic='.$this->getRecordPropertyInteger('topic').' AND '
+					.'uid!='.$this->getUid().')'
+				.' OR '
+					.'(uid='.$this->getRecordPropertyInteger('topic')
+					.' AND object_type='.$this->recordTypeComplete.')';
+		} else {
+			$result .= 'topic='.$this->getUid()
+				.' AND object_type!='.$this->recordTypeComplete;
+		}
+
+		$result .= ')';
+
+		return $result;
+	}
+
 	/**
 	 * Gets the seminar date.
 	 * Returns a localized string "will be announced" if the seminar has no date set.
@@ -1030,6 +1057,20 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function hasPaymentMethods() {
 		return $this->hasTopicString('payment_methods');
+	}
+
+ 	/**
+	 * Returns the type of the record. This is one out of the following values:
+	 * 0 = single event (and default value of older records)
+	 * 1 = multiple event topic record
+	 * 2 = multiple event date record
+	 *
+	 * @return	integer		the record type
+	 *
+	 * @access	public
+	 */
+	function getRecordType() {
+		return $this->getRecordPropertyInteger('object_type');
 	}
 
 	/**

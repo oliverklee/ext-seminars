@@ -589,6 +589,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'organizers',
 				'vacancies',
 				'deadline_registration',
+				'otherdates',
 				'registration',
 				'back'
 			)

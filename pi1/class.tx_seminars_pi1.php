@@ -201,7 +201,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Let's check the configuration and display any errors.
-		$result .= $this->checkConfiguration();
+		// Here, we don't use the direct return value from
+		// $this->checkConfiguration as this would ignore any previous error
+		// messages.
+		$this->checkConfiguration();
+		$result .= $this->configurationCheck->getWrappedMessage();
 
 		return $this->pi_wrapInBaseClass($result);
 	}
@@ -303,7 +307,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = '';
 		$isOkay = true;
 
-		switch ($this->getConfValueString('what_to_display')) {
+		$whatToDisplay = $this->getConfValueString('what_to_display');
+
+		switch ($whatToDisplay) {
 			case 'my_events':
 				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
 				break;
@@ -323,21 +329,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		if ($isOkay) {
-			$seminarBag =& $this->initListView();
+			$seminarBag =& $this->initListView($whatToDisplay);
 
 			if ($this->internal['res_count']) {
-				$result .= $this->createListHeader();
-				$rowCounter = 0;
-				while ($this->seminar =& $seminarBag->getCurrent()) {
-					$result .= $this->createListRow($rowCounter);
-					$rowCounter++;
-					$seminarBag->getNext();
-				}
-				$result .= $this->createListFooter();
+				$result = $this->createListTable($seminarBag);
 			} else {
 				$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
 				$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
 			}
+
+			// Show the page browser (if not deactivated in the configuration).
+			if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
+				$result .= $this->pi_list_browseresults();
+			}
+
 			// Show the search box (if not deactivated in the configuration).
 			if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
 				// The search box is shown even if the list is empty.
@@ -352,16 +357,43 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Creates just the table for the list view (without any result browser or
+	 * search form).
+	 * This function should only be called when there are actually any list
+	 * items.
+	 *
+	 * @param	object		initialized seminar bag (must not be null)
+	 *
+	 * @return	string		HTML for the table (will not be empty)
+	 *
+	 * @access	protected
+	 */
+	function createListTable(&$seminarBag) {
+		$result = $this->createListHeader();
+		$rowCounter = 0;
+
+		while ($this->seminar =& $seminarBag->getCurrent()) {
+			$result .= $this->createListRow($rowCounter);
+			$rowCounter++;
+			$seminarBag->getNext();
+		}
+
+		$result .= $this->createListFooter();
+
+		return $result;
+	}
+
+	/**
 	 * Initializes the list view (normal list, my events or my VIP events) and
 	 * creates a seminar bag, but does not create any actual HTML output.
+	 *
+	 * @param	string		a string selecting the flavor of list view: either an empty string (for the default list view), the value from "what_to_display" or "other_dates"
 	 *
 	 * @return	object		a seminar bag containing the seminars for the list view
 	 *
 	 * @access	protected
 	 */
-	function &initListView() {
-		$whatToDisplay = $this->getConfValueString('what_to_display');
-
+	function &initListView($whatToDisplay = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
 			$this->conf['pidList'] = $this->getConfValueString('pages');
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
@@ -431,6 +463,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')'
 			.$this->getAdditionalQueryParameters();
 		$additionalTables = '';
+
 		switch ($whatToDisplay) {
 			case 'my_events':
 				$additionalTables = $this->tableAttendances;
@@ -444,6 +477,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 			case 'my_entered_events':
 				$queryWhere .= ' AND '.$this->tableSeminars.'.owner_feuser='.$this->getFeUserUid();
+				break;
+			case 'other_dates':
+				$queryWhere .= $this->seminar->getAdditionalQueryForOtherDates();
 				break;
 			default:
 				break;
@@ -603,14 +639,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('list_registrations', 'field_wrapper');
 			}
 
-			$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
-
 			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
+			$result .= $this->createOtherDatesList();
 		} else {
 			$this->setMarkerContent('error_text', $this->pi_getLL('message_wrongSeminarNumber'));
 			$result = $this->substituteMarkerArrayCached('ERROR_VIEW');
 			header('Status: 404 Not Found');
 		}
+
+		$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
+		$result .= $this->substituteMarkerArrayCached('BACK_VIEW');
 
 		return $result;
 	}
@@ -653,6 +691,43 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('price_earlybird_special', $wrapper);
 		}
 		return;
+	}
+
+ 	/**
+	 * Creates the list of (other) dates for this topic. Practically, this is
+	 * just a special kind of list view. In case this topic has no other dates,
+	 * this function will return an empty string.
+	 *
+	 * @return	string		HTML for the events list (may be an empty string)
+	 *
+	 * @access	protected
+	 */
+	function createOtherDatesList() {
+		$result = '';
+
+		$seminarBag =& $this->initListView('other_dates');
+
+		if ($this->internal['res_count']) {
+			// If we are on a topic record, overwrite the label with an alternative text.
+			if (($this->seminar->getRecordType() == $this->recordTypeComplete)
+				|| ($this->seminar->getRecordType() == $this->recordTypeTopic)) {
+				$this->setMarkerContent('label_list_otherdates', $this->pi_getLL('label_list_dates'));
+			}
+
+			$tableOtherDates = $this->createListTable($seminarBag);
+
+			$this->setMarkerContent('table_otherdates', $tableOtherDates);
+
+			$result = $this->substituteMarkerArrayCached('OTHERDATES_VIEW');
+		}
+
+		// Let warnings from the seminar and the seminar bag bubble up to us.
+		$this->setErrorMessage($seminarBag->checkConfiguration(true));
+
+		// Let's also check the list view configuration..
+		$this->checkConfiguration(true, 'seminar_list');
+
+		return $result;
 	}
 
 	/**
@@ -750,23 +825,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns the list view footer: end of table body, end of table,
-	 * result browser.
-	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
+	 * Returns the list view footer: end of table body, end of table.
 	 *
-	 * @return	string		HTML output, the table header
+	 * @return	string		HTML output, the table footer
 	 *
 	 * @access	protected
 	 */
 	function createListFooter() {
-		$result = $this->substituteMarkerArrayCached('LIST_FOOTER');
-
-		// Show the page browser (if not deactivated in the configuration).
-		if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
-			$result .= $this->pi_list_browseresults();
-		}
-
-		return $result;
+		return $this->substituteMarkerArrayCached('LIST_FOOTER');
 	}
 
 	/**
