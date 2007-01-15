@@ -80,6 +80,7 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
+			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
@@ -286,6 +287,7 @@
 			<label index="label_time">Zeit</label>
 			<label index="label_place">Ort</label>
 			<label index="label_room">Raum</label>
+			<label index="label_additional_times_places">Zeiten und Orte</label>
 			<label index="label_speakers">ReferentInnen</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
@@ -625,6 +627,7 @@
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
+			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_speakers" type="integer">258305227</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
@@ -889,6 +892,7 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
+			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>

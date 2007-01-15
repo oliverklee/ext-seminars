@@ -1,4 +1,5 @@
 0.4.8
+- Feature: Added a field for "times and places" to the event record (#381)
 - Feature: In the details view, show events starting the next day (#379)
 - Change: Make the names of the attendees required if more than one seat is reserved (#472)
 - Feature: List view of all topics (#300)

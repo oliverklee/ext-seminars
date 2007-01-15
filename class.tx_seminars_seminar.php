@@ -241,6 +241,33 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks whether this event has additional informations for times and places set.
+	 *
+	 * @return	boolean		true if the field "times_places" is not empty
+	 *
+	 * @access	public
+	 */
+	function hasAdditionalTimesAndPlaces() {
+		return $this->hasRecordPropertyString('additional_times_places');
+	}
+
+	/**
+	 * Returns the content of the field "times_places" for this event.
+	 * The line breaks of this non-RTE field are replaced with "<br />" for the
+	 * HTML output.
+	 *
+	 * @return	string		the field content
+	 *
+	 * @access	public
+	 */
+	function getAdditionalTimesAndPlaces() {
+		$additionalTimesAndPlaces = htmlspecialchars($this->getRecordPropertyString('additional_times_places'));
+		$result = str_replace(chr(13).chr(10), '<br />', $additionalTimesAndPlaces);
+
+		return $result;
+	}
+
+	/**
 	 * Gets the additional information, complete as RTE'ed HTML.
 	 *
 	 * @param	object		the live pibase object

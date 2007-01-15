@@ -69,6 +69,7 @@ CREATE TABLE tx_seminars_seminars (
 	deadline_early_bird int(11) DEFAULT '0' NOT NULL,
 	place int(11) unsigned DEFAULT '0' NOT NULL,
 	room text NOT NULL,
+	additional_times_places text NOT NULL,
 	speakers int(11) unsigned DEFAULT '0' NOT NULL,
 	price_regular decimal(7,2) DEFAULT '0.00' NOT NULL,
 	price_regular_early decimal(7,2) DEFAULT '0.00' NOT NULL,

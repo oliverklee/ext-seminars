@@ -110,6 +110,7 @@
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline</label>
 			<label index="tx_seminars_seminars.place">Place</label>
 			<label index="tx_seminars_seminars.room">Room</label>
+			<label index="tx_seminars_seminars.additional_times_places">Times and places</label>
 			<label index="tx_seminars_seminars.speakers">Speakers</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price</label>
 			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird)</label>
@@ -206,6 +207,7 @@
 			<label index="tx_seminars_seminars.deadline_early_bird">Frühbucher-Deadline</label>
 			<label index="tx_seminars_seminars.place">Ort</label>
 			<label index="tx_seminars_seminars.room">Raum</label>
+			<label index="tx_seminars_seminars.additional_times_places">Zeiten und Orte</label>
 			<label index="tx_seminars_seminars.speakers">ReferentInnen</label>
 			<label index="tx_seminars_seminars.price_regular">Standardpreis</label>
 			<label index="tx_seminars_seminars.price_regular_early">Standardpreis für Frühbucher</label>
@@ -456,6 +458,7 @@
 			<label index="tx_seminars_seminars.deadline_registration" type="integer">140200370</label>
 			<label index="tx_seminars_seminars.place" type="integer">129617664</label>
 			<label index="tx_seminars_seminars.room" type="integer">214150095</label>
+			<label index="tx_seminars_seminars.additional_times_places" type="integer">178250458</label>
 			<label index="tx_seminars_seminars.speakers" type="integer">258305227</label>
 			<label index="tx_seminars_seminars.price_regular" type="integer">81309183</label>
 			<label index="tx_seminars_seminars.price_special" type="integer">35819210</label>
@@ -708,6 +711,7 @@
 			<label index="tx_seminars_seminars.deadline_registration">Registration deadline</label>
 			<label index="tx_seminars_seminars.place">Place</label>
 			<label index="tx_seminars_seminars.room">Room</label>
+			<label index="tx_seminars_seminars.additional_times_places">Times and places</label>
 			<label index="tx_seminars_seminars.speakers">Speakers</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price</label>
 			<label index="tx_seminars_seminars.price_special">Special price</label>

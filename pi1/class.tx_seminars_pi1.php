@@ -621,6 +621,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('room', 'field_wrapper');
 			}
 
+			if ($this->seminar->hasAdditionalTimesAndPlaces()) {
+				$this->setMarkerContent(
+					'additional_times_places',
+					$this->seminar->getAdditionalTimesAndPlaces()
+				);
+			} else {
+				$this->readSubpartsToHide('additional_times_places', 'field_wrapper');
+			}
+
 			if ($this->seminar->hasSpeakers()) {
 				if ($this->getConfValueBoolean('showSpeakerDetails', 's_template_special')) {
 					$this->setMarkerContent('speakers', $this->seminar->getSpeakersWithDescription($this));
@@ -982,6 +991,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$currentDate = '';
 			} else {
 				$this->previousDate = $currentDate;
+			}
+			if ($this->seminar->hasAdditionalTimesAndPlaces()) {
+				$currentDate .= '<br />' . $this->seminar->getAdditionalTimesAndPlaces();
 			}
 			$this->setMarkerContent('date', $currentDate);
 
