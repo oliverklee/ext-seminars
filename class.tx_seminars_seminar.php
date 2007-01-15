@@ -177,7 +177,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	/**
 	 * Creates a hyperlink to this seminar details page.
 	 *
-	 * If $this->conf['listPID'] (and the corresponding flexforms value) is not set or 0,
+	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is not set or 0,
 	 * the link will use the current page's PID.
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
@@ -189,7 +189,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function getLinkedTitle(&$plugin) {
 		return $plugin->cObj->getTypoLink(
 			$this->getTitle(),
-			$plugin->getConfValueInteger('listPID'),
+			$plugin->getConfValueInteger('detailPID'),
 			array('tx_seminars_pi1[showUid]' => $this->getUid())
 		);
 	}
@@ -1536,7 +1536,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	/**
 	 * Gets the URL to the detailed view of this seminar.
 	 *
-	 * If $this->conf['listPID'] (and the corresponding flexforms value) is not set or 0,
+	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is not set or 0,
 	 * the link will use the current page's PID.
 	 *
 	 * @param	object		a plugin object (for a live page, must not be null)
@@ -1548,7 +1548,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function getDetailedViewUrl(&$plugin) {
 		return $plugin->getConfValueString('baseURL')
 			.$plugin->cObj->getTypoLink_URL(
-				$plugin->getConfValueInteger('listPID'),
+				$plugin->getConfValueInteger('detailPID'),
 				array('tx_seminars_pi1[showUid]' => $this->getUid())
 			);
 	}

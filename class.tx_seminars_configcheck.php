@@ -164,6 +164,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		}
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
+		$this->checkDetailPid();
 		$this->checkDefaultEventVipsFeGroupID();
 
 		return;
@@ -191,6 +192,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkGeneralPriceInList();
 		$this->checkOmitDateIfSameAsPrevious();
 		$this->checkListPid();
+		$this->checkDetailPid();
 		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
 			$this->checkRegisterPid();
 		}
@@ -1115,6 +1117,24 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set correctly, the links in the list '
 				.'view and the back link on the list of registrations will '
 				.'not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value detailPID.
+	 *
+	 * @access	private
+	 */
+	function checkDetailPid() {
+		$this->checkIfSingleFePageNotEmpty(
+			'detailPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the detailed view. '
+				.'If this value is not set correctly, the links to single '
+				.'events will not work as expected.'
 		);
 
 		return;

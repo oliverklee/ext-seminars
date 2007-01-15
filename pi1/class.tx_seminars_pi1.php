@@ -713,7 +713,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			header('Status: 404 Not Found');
 		}
 
-		$this->setMarkerContent('backlink', $this->pi_list_linkSingle($this->pi_getLL('label_back', 'Back'), 0));
+		$this->setMarkerContent(
+			'backlink',
+			$this->pi_linkTP(
+				$this->pi_getLL('label_back', 'Back'),
+				array(),
+				true,
+				$this->getConfValueInteger('listPID')
+			)
+		);
 		$result .= $this->substituteMarkerArrayCached('BACK_VIEW');
 
 		return $result;
