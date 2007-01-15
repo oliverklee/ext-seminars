@@ -1,4 +1,5 @@
 0.4.8
+- Feature: Add fields for bank data (#464)
 - Feature: Allow to have a separate page for the detailed view of events (#468)
 - Feature: Added a field for "times and places" to the event record (#381)
 - Feature: In the details view, show events starting the next day (#379)

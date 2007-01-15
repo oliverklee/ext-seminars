@@ -43,6 +43,91 @@
 			</process>
 		</renderlet:RADIOBUTTON>
 
+		<renderlet:TEXT name="account_number">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_account_number</label>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>hasBankData</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="account_number" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+		<renderlet:TEXT name="bank_code">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_bank_code</label>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>hasBankData</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="bank_code" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+		<renderlet:TEXT name="bank_name">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_bank_name</label>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>hasBankData</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="bank_name" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+		<renderlet:TEXT name="account_owner">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_account_owner</label>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>hasBankData</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="account_owner" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+
 		<renderlet:TEXTAREA name="billing_address">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_billing_address</label>
 			<process>

@@ -100,6 +100,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
 		$this->recordData['method_of_payment'] = $registrationData['method_of_payment'];
+		$this->recordData['account_number'] = $registrationData['account_number'];
+		$this->recordData['bank_code'] = $registrationData['bank_code'];
+		$this->recordData['bank_name'] = $registrationData['bank_name'];
+		$this->recordData['account_owner'] = $registrationData['account_owner'];
 		$this->recordData['billing_address'] = $registrationData['billing_address'];
 
 		$this->recordData['interests'] = $registrationData['interests'];

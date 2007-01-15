@@ -140,6 +140,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkThankYouAfterRegistrationPID();
 		$this->checkListPid();
 		$this->checkLoginPid();
+		$this->checkBankTransferUid();
 
 		return;
 	}
@@ -1029,6 +1030,10 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'Incorrect values will cause those fields to not get displayed.',
 			array(
 				'method_of_payment',
+				'account_number',
+				'bank_code',
+				'bank_name',
+				'account_owner',
 				'billing_address',
 				'interests',
 				'expectations',
@@ -1406,6 +1411,25 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the page that will be displayed after a user '
 				.'signed up for an event. If this value is not set correctly, '
 				.'the user will see the list of events instead.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value bankTransferUID.
+	 *
+	 * @access	private
+	 */
+	function checkBankTransferUid() {
+		$this->checkIfPositiveIntegerOrEmpty(
+			'bankTransferUID',
+			false,
+			'',
+			'This value specifies the payment method that corresponds to '
+				.'a bank transfer. If this value is not set correctly, '
+				.'validation of the bank data in the event registration '
+				.'form will not work correctly.'
 		);
 
 		return;

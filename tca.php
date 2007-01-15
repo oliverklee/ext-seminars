@@ -618,7 +618,7 @@ $TCA['tx_seminars_speakers'] = Array (
 $TCA['tx_seminars_attendances'] = Array (
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => Array (
-		'showRecordFieldList' => 'title,user,seminar,seats,attendees_names,paid,datepaid,method_of_payment,billing_address,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
+		'showRecordFieldList' => 'title,user,seminar,seats,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,billing_address,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
 	),
 	'columns' => Array (
 		'title' => Array (
@@ -720,6 +720,42 @@ $TCA['tx_seminars_attendances'] = Array (
 				)
 			)
 		),
+		'account_number' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.account_number',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'trim',
+			)
+		),
+		'bank_code' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.bank_code',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'trim',
+			)
+		),
+		'bank_name' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.bank_name',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'trim',
+			)
+		),
+		'account_owner' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.account_owner',
+			'config' => Array (
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'trim',
+			)
+		),
 		'billing_address' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.billing_address',
@@ -801,7 +837,7 @@ $TCA['tx_seminars_attendances'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, seats, attendees_names, paid, datepaid, method_of_payment, billing_address, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
+		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, seats, attendees_names, paid, datepaid, method_of_payment, account_number, bank_code, bank_name, account_owner, billing_address, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')

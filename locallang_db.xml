@@ -63,6 +63,10 @@
 			<label index="tx_seminars_attendances.paid"></label>
 			<label index="tx_seminars_attendances.datepaid"></label>
 			<label index="tx_seminars_attendances.method_of_payment"></label>
+			<label index="tx_seminars_attendances.account_number"></label>
+			<label index="tx_seminars_attendances.bank_code"></label>
+			<label index="tx_seminars_attendances.bank_name"></label>
+			<label index="tx_seminars_attendances.account_owner"></label>
 			<label index="tx_seminars_attendances.billing_address"></label>
 			<label index="tx_seminars_attendances.been_there"></label>
 			<label index="tx_seminars_attendances.interests"></label>
@@ -158,6 +162,10 @@
 			<label index="tx_seminars_attendances.paid">Has paid</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment</label>
+			<label index="tx_seminars_attendances.account_number">Account number</label>
+			<label index="tx_seminars_attendances.bank_code">Bank code</label>
+			<label index="tx_seminars_attendances.bank_name">Bank name</label>
+			<label index="tx_seminars_attendances.account_owner">Account owner</label>
 			<label index="tx_seminars_attendances.billing_address">Billing address</label>
 			<label index="tx_seminars_attendances.been_there">Has attended</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
@@ -255,6 +263,10 @@
 			<label index="tx_seminars_attendances.paid">Hat bezahlt</label>
 			<label index="tx_seminars_attendances.datepaid">Datum der Bezahlung</label>
 			<label index="tx_seminars_attendances.method_of_payment">Zahlungsart</label>
+			<label index="tx_seminars_attendances.account_number">Kontonummer</label>
+			<label index="tx_seminars_attendances.bank_code">Bankleitzahl</label>
+			<label index="tx_seminars_attendances.bank_name">Name der Bank</label>
+			<label index="tx_seminars_attendances.account_owner">Kontoinhaber</label>
 			<label index="tx_seminars_attendances.billing_address">Rechnungsadresse</label>
 			<label index="tx_seminars_attendances.been_there">Hat teilgenommen</label>
 			<label index="tx_seminars_attendances.interests">Spezielle Interessen:</label>
@@ -497,6 +509,10 @@
 			<label index="tx_seminars_attendances.paid" type="integer">155079066</label>
 			<label index="tx_seminars_attendances.datepaid" type="integer">75729411</label>
 			<label index="tx_seminars_attendances.method_of_payment" type="integer">138981420</label>
+			<label index="tx_seminars_attendances.account_number" type="integer">15887951</label>
+			<label index="tx_seminars_attendances.bank_code" type="integer">11946365</label>
+			<label index="tx_seminars_attendances.bank_name" type="integer">159664174</label>
+			<label index="tx_seminars_attendances.account_owner" type="integer">139927917</label>
 			<label index="tx_seminars_attendances.billing_address" type="integer">33277925</label>
 			<label index="tx_seminars_attendances.been_there" type="integer">120264388</label>
 			<label index="tx_seminars_attendances.interests" type="integer">236721406</label>
@@ -750,6 +766,10 @@
 			<label index="tx_seminars_attendances.paid">Has paid</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment</label>
+			<label index="tx_seminars_attendances.account_number">Account number</label>
+			<label index="tx_seminars_attendances.bank_code">Bank code</label>
+			<label index="tx_seminars_attendances.bank_name">Bank name</label>
+			<label index="tx_seminars_attendances.account_owner">Account owner</label>
 			<label index="tx_seminars_attendances.billing_address">Billing address</label>
 			<label index="tx_seminars_attendances.been_there">Has attended</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>

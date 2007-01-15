@@ -112,6 +112,10 @@
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Number of seats:</label>
 			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_account_number">Account number:</label>
+			<label index="label_bank_code">Bank code:</label>
+			<label index="label_bank_name">Bank name:</label>
+			<label index="label_account_owner">Account owner:</label>
 			<label index="label_billing_address">Billing address:</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
@@ -137,6 +141,7 @@
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
 			<label index="message_provideAttendeesNames">Please provide the attendees' names.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
+			<label index="message_provideBankData">Please provide your bank data.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
@@ -320,6 +325,10 @@
 			<label index="label_notes">Weitere Mitteilungen:</label>
 			<label index="label_seats">Anzahl Plätze:</label>
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen:</label>
+			<label index="label_account_number">Kontonummer:</label>
+			<label index="label_bank_code">Bankleitzahl:</label>
+			<label index="label_bank_name">Name der Bank:</label>
+			<label index="label_account_owner">Kontoinhaber:</label>
 			<label index="label_billing_address">Abweichende Rechnungsadresse:</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_submit_registration">Verbindlich anmelden</label>
@@ -345,6 +354,7 @@
 			<label index="message_invalidNumberOfSeats">Sorry, so viele Plätze sind leider nicht mehr frei.</label>
 			<label index="message_provideAttendeesNames">Bitte geben Sie die Namen der anzumeldenden Personen an.</label>
 			<label index="message_chooseMethodOfPayment">Bitte wählen Sie eine Zahlungsart aus.</label>
+			<label index="message_provideBankData">Bitte geben Sie Ihre Bankverbindung an.</label>
 			<label index="message_acceptTerms">Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen, um sich für diese Veranstaltung anzumelden.</label>
 		</languageKey>
 		<languageKey index="no" type="array">
@@ -661,6 +671,10 @@
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">134941724</label>
 			<label index="label_attendees_names" type="integer">198880077</label>
+			<label index="label_account_number" type="integer">15650306</label>
+			<label index="label_bank_code" type="integer">171550314</label>
+			<label index="label_bank_name" type="integer">204057381</label>
+			<label index="label_account_owner" type="integer">35539025</label>
 			<label index="label_billing_address" type="integer">75414087</label>
 			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_submit_registration" type="integer">88697193</label>
@@ -687,6 +701,7 @@
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
 			<label index="message_provideAttendeesNames" type="integer">175728129</label>
 			<label index="message_chooseMethodOfPayment" type="integer">209557761</label>
+			<label index="message_provideBankData" type="integer">10940357</label>
 			<label index="message_acceptTerms" type="integer">198918363</label>
 		</languageKey>
 		<languageKey index="no" type="array">
@@ -927,6 +942,10 @@
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Number of seats:</label>
 			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_account_number">Account number:</label>
+			<label index="label_bank_code">Bank code:</label>
+			<label index="label_bank_name">Bank name:</label>
+			<label index="label_account_owner">Account owner:</label>
 			<label index="label_billing_address">Billing address:</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
@@ -952,6 +971,7 @@
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
 			<label index="message_provideAttendeesNames">Please provide the attendees' names.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
+			<label index="message_provideBankData">Please provide your bank data.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">

@@ -385,6 +385,10 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		foreach (array(
+			'account_number',
+			'bank_code',
+			'bank_name',
+			'account_owner',
 			'billing_address',
 			'seats',
 			'attendees_names',
@@ -434,6 +438,37 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			intval($dataHandler->__aFormData['seats']) : 1;
 
 		return (!empty($attendeesNames) || ($seats < 2));
+	}
+
+	/**
+	 * Checks whether the current field is non-empty if the payment method
+	 * "bank transfer" is selected. If a different payment method is selected
+	 * (or none is defined as "bank transfer"), the check is always positive and
+	 * returns true.
+	 *
+	 * @param	string		the value of the current field
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	boolean		true if the field is non-empty or "bank transfer" is not selected
+	 *
+	 * @access	public
+	 */
+	function hasBankData($bankData, &$form) {
+		$result = true;
+
+		if (empty($bankData)) {
+			$bankTransferUid = $this->plugin->getConfValueInteger('bankTransferUID');
+
+			$dataHandler = $form->oDataHandler;
+			$paymentMethod = isset($dataHandler->__aFormData['method_of_payment']) ?
+				intval($dataHandler->__aFormData['method_of_payment']) : 0;
+
+			if ($bankTransferUid && ($paymentMethod == $bankTransferUid)) {
+				$result = false;
+			}
+		}
+
+		return $result;
 	}
 }
 
