@@ -470,6 +470,22 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 		return $result;
 	}
+
+	/**
+	 * Returns the currently logged-in FE user's full name.
+	 *
+	 * This function may only be called when a FE user is logged in.
+	 *
+	 * The caller needs to take care of htmlspecialcharing the user name.
+	 *
+	 * @return	string		the currently logged-in FE user's name
+	 *
+	 * @access	public
+	 */
+	function getUserFullName() {
+		$feUserData = $GLOBALS['TSFE']->fe_user->user;
+		return $feUserData['name'];
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_registration_editor.php']) {

@@ -108,6 +108,14 @@
 		</renderlet:TEXT>
 		<renderlet:TEXT name="account_owner">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_account_owner</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getUserFullName</method>
+					</userobj>
+				</defaultvalue>
+			</data>
 			<validators>
 				<validator:STANDARD>
 					<userobj>
