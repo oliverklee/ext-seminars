@@ -407,9 +407,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->readSubpartsToHide($this->getConfValueString('hideColumns', 's_template_special'), 'LISTITEM_WRAPPER');
 
 		// Hide the registration column if online registration is disabled,
-		// no user is logged in or the "my events" list should be displayed.
+		// or the "my events" list should be displayed.
 		if (!$this->getConfValueBoolean('enableRegistration')
-			|| !$this->isLoggedIn()
 			|| ($whatToDisplay == 'my_events')) {
 			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');

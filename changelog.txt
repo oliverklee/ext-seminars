@@ -1,4 +1,5 @@
 0.4.8
+- Change: Show the register/login column in the list view even when no user is logged in (#485)
 - Change: In the registration form, pre-fill the number of seats with 1 (#490)
 - Change: In the registration form, pre-fill the account owner field with the FE user's name (#486)
 - Feature: Add fields for bank data (#464)
