@@ -1,4 +1,5 @@
 0.4.8
+- Change: In the registration form, pre-fill the number of seats with 1 (#490)
 - Change: In the registration form, pre-fill the account owner field with the FE user's name (#486)
 - Feature: Add fields for bank data (#464)
 - Feature: Allow to have a separate page for the detailed view of events (#468)

@@ -151,6 +151,9 @@
 
 		<renderlet:TEXT name="seats">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_seats</label>
+			<data>
+				<defaultvalue>1</defaultvalue>
+			</data>
 			<validators>
 				<validator:PREG>
 					<pattern>
