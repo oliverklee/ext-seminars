@@ -156,7 +156,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Show the confirmation page.
+	 * Selects the confirmation page (the second step of the registration form)
+	 * for display. This affects $this->_render().
 	 *
 	 * @param	array		the entered form data with the field names as array keys (including the submit button ...)
 	 *
