@@ -269,7 +269,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		if (!$pageId) {
 			$pageId = $this->plugin->getConfValueInteger('listPID', 'sDEF');
 		}
-		return $this->plugin->pi_getPageLink($pageId);
+		return $this->plugin->pi_getPageLink(
+			$pageId,
+			'',
+			array('tx_seminars_pi1[showUid]' => $this->seminar->getUid())
+		);
 	}
 
 	/**
