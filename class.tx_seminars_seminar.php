@@ -178,7 +178,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * Creates a hyperlink to this seminar details page.
 	 *
 	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is not set or 0,
-	 * the link will use the current page's PID.
+	 * the link will point to the list view page.
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
 	 *
@@ -187,9 +187,10 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getLinkedTitle(&$plugin) {
+		$detailPID = $plugin->getConfValueInteger('detailPID');
 		return $plugin->cObj->getTypoLink(
 			$this->getTitle(),
-			$plugin->getConfValueInteger('detailPID'),
+			($detailPID) ? $detailPID : $plugin->getConfValueInteger('listPID'),
 			array('tx_seminars_pi1[showUid]' => $this->getUid())
 		);
 	}
