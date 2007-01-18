@@ -18,7 +18,7 @@ plugin.tx_seminars {
 	hideFieldsInThankYouMail = credit_points
 
 	# whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
-	generalPriceInMail =
+	generalPriceInMail = 0
 
 	# Comma-separated list of section names from the registration that shouldn't be displayed in the notification e-mail to the organizers. These fields are the big blocks in that e-mail, and some are further divided.
 	hideFieldsInNotificationMail =
@@ -27,7 +27,7 @@ plugin.tx_seminars {
 	showSeminarFieldsInNotificationMail = title,uid,event_type,date,place,price_regular,price_regular_early,price_special,price_special_early,attendees,vacancies,enough_attendees,is_full
 
 	# comma-separated list of field names from fe_users that should be mentioned in the notification e-mail to the organizers  (in the "feuserdata" section)
-	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile,date_of_birth
+	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile
 
 	# comma-separated list of field names from attendances that should be mentioned in the notification e-mail to the organizers  (in the "attendancedata" section)
 	showAttendanceFieldsInNotificationMail = price,interests,expectations,background_knowledge,known_from,notes

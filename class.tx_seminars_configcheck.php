@@ -177,6 +177,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 
 		$this->checkPages();
 		$this->checkRecursive();
+		$this->checkListView(array_keys($this->objectToCheck->orderByList));
 
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
@@ -476,7 +477,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'explicitely do not wish to use the online registration '
 				.'feature, you can disable these checks by setting '
 				.'<strong>plugin.tx_seminars.enableRegistration</strong> and '
-				.'<strong>plugin.tx_seminars.enableRegistration_pi1</strong> '
+				.'<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
 				.'to 0.'
 		);
 
@@ -655,6 +656,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			array(
 				'hello',
 				'title',
+				'uid',
+				'seats',
 				'accreditation_number',
 				'credit_points',
 				'date',
@@ -1027,7 +1030,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'wish to use the online registration feature, you can '
 				.'disable these checks by setting '
 				.'<strong>plugin.tx_seminars.enableRegistration</strong> and '
-				.'<strong>plugin.tx_seminars.enableRegistration_pi1</strong> '
+				.'<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
 				.'to 0.'
 		);
 
@@ -1050,7 +1053,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'wish to use the online registration feature, you can '
 				.'disable these checks by setting '
 				.'<strong>plugin.tx_seminars.enableRegistration</strong> and '
-				.'<strong>plugin.tx_seminars.enableRegistration_pi1</strong> '
+				.'<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
 				.'to 0.'
 		);
 

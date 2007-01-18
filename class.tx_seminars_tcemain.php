@@ -66,7 +66,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 */
 	function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, &$reference) {
 		// only do the database query if the right table was modified
-		if ($table == 'tx_seminars_seminars') {
+		if ($table == $this->tableSeminars) {
 			// Get the values from the DB.
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
@@ -76,12 +76,32 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 				'',
 				'1');
 			if ($dbResult) {
+				$updateArray = array();
 				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+
 				// Compare the values and, if necessary, unset the registration deadline
 				if ($row['deadline_registration'] > $row['begin_date']) {
-					$updateArray = array(
-						'deadline_registration' => 0
-					);
+					$updateArray['deadline_registration'] = 0;
+				}
+
+				// Check that the early bird deadline is set to a date prior to
+				// the beginning date of the event.
+				if (($row['deadline_early_bird'] > $row['begin_date'])
+					|| ($row['deadline_early_bird'] > $row['deadline_registration'])) {
+					$updateArray['deadline_early_bird'] = 0;
+				}
+
+				// Check that the early bird prices are lower than the regular
+				// prices. If they are higher, they get unset.
+				if ($row['price_regular_early'] > $row['price_regular']) {
+					$updateArray['price_regular_early'] = '0.00';
+				}
+				if ($row['price_special_early'] > $row['price_special']) {
+					$updateArray['price_special_early'] = '0.00';
+				}
+
+				// Only update the record in the database if needed.
+				if (count($updateArray)) {
 					$GLOBALS['TYPO3_DB']->exec_UPDATEquery($this->tableSeminars, 'uid='.$id, $updateArray);
 				}
 			}

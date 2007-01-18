@@ -846,6 +846,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			} else {
 				$result .= ' '.$this->pi_getClassName('vacancies-0');
 			}
+			// We add this class in addition to the number of vacancies so that
+			// user stylesheets still can use the number of vacancies even for
+			// events for which the registration deadline is over.
+			if ($seminar->isRegistrationDeadlineOver()) {
+				$result .= ' '.$this->pi_getClassName('registration-deadline-over');
+			}
 		}
 
 		return ' class="'.$result.'"';
