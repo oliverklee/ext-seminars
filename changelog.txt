@@ -1,4 +1,4 @@
-0.4.8
+0.5.0
 - Fix: Registration is stuck for events without any payment methods (#498)
 - Change: In the redirect after registering for an event, include the seminar number as URL parameter (#487)
 - Change: Show the register/login column in the list view even when no user is logged in (#485)

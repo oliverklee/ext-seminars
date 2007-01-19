@@ -109,6 +109,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
+- remove unneeded texts and HTML template parts that were used for the thank-you page
 - switch extension status from "alpha" to "beta" so that we can get a security review and appear and in the offical part of the TER
 - format changelog according to http://www.red-bean.com/cvs2cl/changelogs.html
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
