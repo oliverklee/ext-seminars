@@ -221,11 +221,27 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Checks whether a method of payment is selected OR this event has no
+	 * payment methods set at all (in which case it isn't necessary or possible
+	 * to select any payment method)
+	 *
+	 * @param	mixed		the currently selected value (a positive integer) or null if no button is selected
+	 *
+	 * @return	boolean		true if a method of payment is selected (or this event has no payment methods at all), false if none is selected AND this event has at least one payment method
+	 *
+	 * @access	public
+	 */
+	function isMethodOfPaymentSelected($radiogroupValue) {
+		return $this->isRadiobuttonSelected($radiogroupValue)
+			|| !$this->seminar->hasPaymentMethods();
+	}
+
+	/**
 	 * Checks whether a radiobutton in a radiobutton group is selected.
 	 *
 	 * @param	mixed		the currently selected value (a positive integer) or null if no button is selected
 	 *
-	 * @return	boolean		true if at least a is selected, false if none is selected
+	 * @return	boolean		true if a radiobutton is selected, false if none is selected
 	 *
 	 * @access	public
 	 */
@@ -235,6 +251,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 	/**
 	 * Checks whether a form field should be displayed (and evaluated) at all.
+	 * This is specified via TS setup (or flexforms) using the
+	 * "showRegistrationFields" variable.
 	 *
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
 	 * @param	object		the current FORMidable object

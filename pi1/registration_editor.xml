@@ -30,7 +30,7 @@
 				<validator:STANDARD>
 					<userobj>
 						<extension>this</extension>
-						<method>isRadiobuttonSelected</method>
+						<method>isMethodOfPaymentSelected</method>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_chooseMethodOfPayment</message>
 					</userobj>
 				</validator:STANDARD>
