@@ -117,6 +117,16 @@
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
 			<label index="label_billing_address">Billing address:</label>
+			<label index="label_gender">Mr./Mrs.</label>
+			<label index="label_gender.I.0">Mr.</label>
+			<label index="label_gender.I.1">Ms.</label>
+			<label index="label_name">Name</label>
+			<label index="label_address">Street</label>
+			<label index="label_zip">ZIP</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
+			<label index="label_telephone">Phone number</label>
+			<label index="label_email">E-mail address</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
@@ -329,7 +339,17 @@
 			<label index="label_bank_code">Bankleitzahl:</label>
 			<label index="label_bank_name">Name der Bank:</label>
 			<label index="label_account_owner">Kontoinhaber:</label>
-			<label index="label_billing_address">Abweichende Rechnungsadresse:</label>
+			<label index="label_billing_address">Rechnungsadresse:</label>
+			<label index="label_gender">Anrede</label>
+			<label index="label_gender.I.0">Herr</label>
+			<label index="label_gender.I.1">Frau</label>
+			<label index="label_name">Name</label>
+			<label index="label_address">Straße</label>
+			<label index="label_zip">PLZ</label>
+			<label index="label_city">Ort</label>
+			<label index="label_country">Land</label>
+			<label index="label_telephone">Telefon</label>
+			<label index="label_email">E-mail-Adresse</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_submit_registration">Verbindlich anmelden</label>
 			<label index="label_proceed_registration">Weiter</label>
@@ -676,6 +696,16 @@
 			<label index="label_bank_name" type="integer">204057381</label>
 			<label index="label_account_owner" type="integer">35539025</label>
 			<label index="label_billing_address" type="integer">75414087</label>
+			<label index="label_gender" type="integer">161832899</label>
+			<label index="label_gender.I.0" type="integer">19351194</label>
+			<label index="label_gender.I.1" type="integer">43922038</label>
+			<label index="label_name" type="integer">77521672</label>
+			<label index="label_address" type="integer">224521181</label>
+			<label index="label_zip" type="integer">70553491</label>
+			<label index="label_city" type="integer">92079470</label>
+			<label index="label_country" type="integer">93787849</label>
+			<label index="label_telephone" type="integer">33039901</label>
+			<label index="label_email" type="integer">146136420</label>
 			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_submit_registration" type="integer">88697193</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
@@ -947,6 +977,16 @@
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
 			<label index="label_billing_address">Billing address:</label>
+			<label index="label_gender">Mr./Mrs.</label>
+			<label index="label_gender.I.0">Mr.</label>
+			<label index="label_gender.I.1">Ms.</label>
+			<label index="label_name">Name</label>
+			<label index="label_address">Street</label>
+			<label index="label_zip">ZIP</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
+			<label index="label_telephone">Phone number</label>
+			<label index="label_email">E-mail address</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_submit_registration">Finish registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>

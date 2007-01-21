@@ -104,7 +104,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['bank_code'] = $registrationData['bank_code'];
 		$this->recordData['bank_name'] = $registrationData['bank_name'];
 		$this->recordData['account_owner'] = $registrationData['account_owner'];
-		$this->recordData['billing_address'] = $registrationData['billing_address'];
+
+		$this->recordData['gender'] = $registrationData['gender'];
+		$this->recordData['name'] = $registrationData['name'];
+		$this->recordData['address'] = $registrationData['address'];
+		$this->recordData['zip'] = $registrationData['zip'];
+		$this->recordData['city'] = $registrationData['city'];
+		$this->recordData['country'] = $registrationData['country'];
+		$this->recordData['telephone'] = $registrationData['telephone'];
+		$this->recordData['email'] = $registrationData['email'];
 
 		$this->recordData['interests'] = $registrationData['interests'];
 		$this->recordData['expectations'] = $registrationData['expectations'];
@@ -463,14 +471,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->readSubpartsToHide('paymentmethod', 'field_wrapper');
 		}
 
-		if ($this->hasRecordPropertyString('billing_address')) {
-			$this->setMarkerContent(
-				'billing_address',
-				$this->getRecordPropertyString('billing_address')
-			);
-		} else {
-			$this->readSubpartsToHide('billing_address', 'field_wrapper');
-		}
+		$this->setMarkerContent('billing_address', $this->getBillingAddress());
 
 		$this->setMarkerContent('url', $this->seminar->getDetailedViewUrl($plugin));
 
@@ -686,6 +687,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 						$this->getRecordPropertyInteger($currentKey)
 					);
 					break;
+				case 'gender':
+					$value = $this->getGender();
+					break;
 				default:
 					$value = $this->getRecordPropertyString($currentKey);
 					break;
@@ -694,6 +698,60 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the billing address, formatted as plain text.
+	 *
+	 * @return	string		the billing address
+	 *
+	 * @access	protected
+	 */
+	function getBillingAddress() {
+		/**
+		 * the keys of the corresponding fields and whether to add a LF after
+		 * the entry (instead of just a space)
+		 */
+		$billingAddressFields = array(
+			'gender' => false,
+			'name' => true,
+			'address' => true,
+			'zip' => false,
+			'city' => true,
+			'country' => true,
+			'telephone' => true,
+			'email' => true
+		);
+
+		$result = '';
+
+		foreach ($billingAddressFields as $key => $useLf) {
+			if ($this->hasRecordPropertyString($key)) {
+				if ($key == 'gender') {
+					$result = $this->getGender();
+				} else {
+					$result .= $this->getRecordPropertyString($key);
+				}
+				if ($useLf) {
+					$result .= chr(10);
+				} else {
+					$result .= ' ';
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Retrieves the localized string corresponding to the key in the "gender"
+	 * field.
+	 *
+	 * @access	public
+	 */
+	function getGender() {
+		return $this->pi_getLL('label_gender.I.'
+			.$this->getRecordPropertyInteger('gender'));
 	}
 }
 

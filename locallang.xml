@@ -27,6 +27,8 @@
 			<label index="label_seminardata">Seminar data</label>
 			<label index="label_feuserdata">Account data</label>
 			<label index="label_attendancedata">Data that has been entered on registration</label>
+			<label index="label_gender.I.0">Mr.</label>
+			<label index="label_gender.I.1">Ms.</label>
 			<label index="message_notLoggedIn_formal">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
@@ -121,6 +123,8 @@ someone just has registered for an event:</label>
 			<label index="label_seminardata">Daten des Seminars</label>
 			<label index="label_feuserdata">Daten des Accounts</label>
 			<label index="label_attendancedata">Daten, die bei der Anmeldung angegeben wurden</label>
+			<label index="label_gender.I.0">Herr</label>
+			<label index="label_gender.I.1">Frau</label>
 			<label index="message_notLoggedIn_formal">Bitte loggen Sie sich zuerst ein.</label>
 			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein.</label>
 			<label index="message_alreadyRegistered_formal">Sie sind für diese Veranstaltung bereits angemeldet.</label>
@@ -328,6 +332,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
+			<label index="label_gender.I.0" type="integer">19351194</label>
+			<label index="label_gender.I.1" type="integer">43922038</label>
 			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
 			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
@@ -484,6 +490,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seminardata">Seminar data</label>
 			<label index="label_feuserdata">Account data</label>
 			<label index="label_attendancedata">Data that has been entered on registration</label>
+			<label index="label_gender.I.0">Mr.</label>
+			<label index="label_gender.I.1">Ms.</label>
 			<label index="message_notLoggedIn_formal">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>

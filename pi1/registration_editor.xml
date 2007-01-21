@@ -112,7 +112,10 @@
 				<defaultvalue>
 					<userobj>
 						<extension>this</extension>
-						<method>getUserFullName</method>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="name" />
+						</params>
 					</userobj>
 				</defaultvalue>
 			</data>
@@ -136,18 +139,198 @@
 			</process>
 		</renderlet:TEXT>
 
-		<renderlet:TEXTAREA name="billing_address">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_billing_address</label>
+		<renderlet:LISTBOX name="gender">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_gender</label>
+			<data>
+				<items>
+					<item caption="LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.0" value ="0" />
+					<item caption="LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.1" value ="1" />
+				</items>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="gender" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
 			<process>
 				<userobj>
 					<extension>this</extension>
 					<method>hasRegistrationFormField</method>
 					<params>
-						<data name="elementname" value="billing_address" />
+						<data name="elementname" value="gender" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:LISTBOX>
+		<renderlet:TEXT name="name">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_name</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="name" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="name" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+		<renderlet:TEXTAREA name="address">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_address</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="address" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="address" />
 					</params>
 				</userobj>
 			</process>
 		</renderlet:TEXTAREA>
+		<renderlet:TEXT name="zip">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_zip</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="zip" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="zip" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+		<renderlet:TEXT name="city">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_city</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="city" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="city" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+		<renderlet:LISTBOX name="country">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_country</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListCountries</method>
+				</userobj>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="country" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="country" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:LISTBOX>
+		<renderlet:TEXT name="telephone">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_telephone</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="telephone" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="telephone" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
+		<renderlet:TEXT name="email">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_email</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getFeUserData</method>
+						<params>
+							<data name="key" value="email" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="email" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:TEXT>
 
 		<renderlet:TEXT name="seats">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_seats</label>

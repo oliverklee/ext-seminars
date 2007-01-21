@@ -1,6 +1,7 @@
 0.5.0
+- Change: In the registration form, split the field "billing address" (#488)
 - Fix: Event registration is stuck when payment methods are not shown (#508)
-- Change: Hide the column "list of registrations" in the list of events for a certain topic" (#482)
+- Change: Hide the column "list of registrations" in the list of events for a certain topic (#482)
 - Change: Made the date field linked in the list view (#481)
 - Fix: Registration is stuck for events without any payment methods (#498)
 - Change: In the redirect after registering for an event, include the seminar number as URL parameter (#487)

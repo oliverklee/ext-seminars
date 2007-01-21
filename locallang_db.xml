@@ -39,9 +39,6 @@
 			<label index="tx_seminars_seminars.vips"></label>
 			<label index="tx_seminars_seminars.notes"></label>
 			<label index="tx_seminars_seminars.object_type"></label>
-			<label index="tx_seminars_seminars.object_type.I.0"></label>
-			<label index="tx_seminars_seminars.object_type.I.1"></label>
-			<label index="tx_seminars_seminars.object_type.I.2"></label>
 			<label index="tx_seminars_seminars.topic"></label>
 			<label index="tx_seminars_speakers"></label>
 			<label index="tx_seminars_speakers.title"></label>
@@ -67,7 +64,7 @@
 			<label index="tx_seminars_attendances.bank_code"></label>
 			<label index="tx_seminars_attendances.bank_name"></label>
 			<label index="tx_seminars_attendances.account_owner"></label>
-			<label index="tx_seminars_attendances.billing_address"></label>
+			<label index="tx_seminars_attendances.gender"></label>
 			<label index="tx_seminars_attendances.been_there"></label>
 			<label index="tx_seminars_attendances.interests"></label>
 			<label index="tx_seminars_attendances.expectations"></label>
@@ -166,7 +163,9 @@
 			<label index="tx_seminars_attendances.bank_code">Bank code</label>
 			<label index="tx_seminars_attendances.bank_name">Bank name</label>
 			<label index="tx_seminars_attendances.account_owner">Account owner</label>
-			<label index="tx_seminars_attendances.billing_address">Billing address</label>
+			<label index="tx_seminars_attendances.gender">Gender</label>
+			<label index="tx_seminars_attendances.gender.I.0">Mr.</label>
+			<label index="tx_seminars_attendances.gender.I.1">Ms.</label>
 			<label index="tx_seminars_attendances.been_there">Has attended</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
 			<label index="tx_seminars_attendances.expectations">Expectations for the event:</label>
@@ -267,7 +266,9 @@
 			<label index="tx_seminars_attendances.bank_code">Bankleitzahl</label>
 			<label index="tx_seminars_attendances.bank_name">Name der Bank</label>
 			<label index="tx_seminars_attendances.account_owner">Kontoinhaber</label>
-			<label index="tx_seminars_attendances.billing_address">Rechnungsadresse</label>
+			<label index="tx_seminars_attendances.gender">Herr/Frau</label>
+			<label index="tx_seminars_attendances.gender.I.0">Herr</label>
+			<label index="tx_seminars_attendances.gender.I.1">Frau</label>
 			<label index="tx_seminars_attendances.been_there">Hat teilgenommen</label>
 			<label index="tx_seminars_attendances.interests">Spezielle Interessen:</label>
 			<label index="tx_seminars_attendances.expectations">Erwartungen an die Veranstaltung:</label>
@@ -513,7 +514,9 @@
 			<label index="tx_seminars_attendances.bank_code" type="integer">11946365</label>
 			<label index="tx_seminars_attendances.bank_name" type="integer">159664174</label>
 			<label index="tx_seminars_attendances.account_owner" type="integer">139927917</label>
-			<label index="tx_seminars_attendances.billing_address" type="integer">33277925</label>
+			<label index="tx_seminars_attendances.gender" type="integer">1698865</label>
+			<label index="tx_seminars_attendances.gender.I.0" type="integer">19351194</label>
+			<label index="tx_seminars_attendances.gender.I.1" type="integer">43922038</label>
 			<label index="tx_seminars_attendances.been_there" type="integer">120264388</label>
 			<label index="tx_seminars_attendances.interests" type="integer">236721406</label>
 			<label index="tx_seminars_attendances.expectations" type="integer">159374040</label>
@@ -770,7 +773,9 @@
 			<label index="tx_seminars_attendances.bank_code">Bank code</label>
 			<label index="tx_seminars_attendances.bank_name">Bank name</label>
 			<label index="tx_seminars_attendances.account_owner">Account owner</label>
-			<label index="tx_seminars_attendances.billing_address">Billing address</label>
+			<label index="tx_seminars_attendances.gender">Gender</label>
+			<label index="tx_seminars_attendances.gender.I.0">Mr.</label>
+			<label index="tx_seminars_attendances.gender.I.1">Ms.</label>
 			<label index="tx_seminars_attendances.been_there">Has attended</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
 			<label index="tx_seminars_attendances.expectations">Expectations for the event:</label>

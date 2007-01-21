@@ -888,7 +888,14 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'attendees_names',
 				'price',
 				'method_of_payment',
-				'billing_address'
+				'gender',
+				'name',
+				'address',
+				'zip',
+				'city',
+				'country',
+				'telephone',
+				'email'
 			)
 		);
 
@@ -1035,6 +1042,14 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'bank_name',
 				'account_owner',
 				'billing_address',
+				'gender',
+				'name',
+				'address',
+				'zip',
+				'city',
+				'country',
+				'telephone',
+				'email',
 				'interests',
 				'expectations',
 				'background_knowledge',

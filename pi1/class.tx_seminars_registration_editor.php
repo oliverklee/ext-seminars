@@ -31,6 +31,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('ameos_formidable').'api/class.tx_ameosformidable.php');
+require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
 
 class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/** Same as class name */
@@ -64,6 +65,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 	/** whether we show the confirmation page (true) or the form (false) */
 	var $isConfirmationPage = false;
+
+	/** fields that are part of the billing address */
+	var $fieldsInBillingAddress = array(
+		'gender',
+		'name',
+		'address',
+		'zip',
+		'city',
+		'country',
+		'telephone',
+		'email',
+	);
 
 	/**
 	 * The constructor.
@@ -348,7 +361,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function getFeUserData($unused, $parameters, $form) {
+	function getAllFeUserData($unused, $parameters, $form) {
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 		foreach (array(
 			'name',
@@ -408,7 +421,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			'bank_code',
 			'bank_name',
 			'account_owner',
-			'billing_address',
 			'seats',
 			'attendees_names',
 			'interests',
@@ -419,7 +431,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			'known_from',
 			'notes'
 		) as $currentKey) {
-			if (!empty($formData[$currentKey])) {
+			if (isset($formData[$currentKey]) && $formData[$currentKey] != '') {
 				$this->plugin->setMarkerContent(
 					'registration_data_heading',
 					$this->plugin->pi_getLL('label_'.$currentKey)
@@ -438,6 +450,48 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the already entered billing address nicely formatted as HTML so
+	 * that it can be directly included on the confirmation page.
+	 *
+	 * @param	array		(unused)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	string		the already entered registration data, nicely formatted as HTML
+	 *
+	 * @access	public
+	 */
+	function getBillingAddress($unused, $parameters, $form) {
+		$result = '';
+
+		$formData = $form->oDataHandler->__aFormData;
+
+		foreach ($this->fieldsInBillingAddress as $currentKey) {
+			$currentFormData = $formData[$currentKey];
+			if (isset($formData[$currentKey]) && $formData[$currentKey] != '') {
+				// If the gender field is hidden, it would have an empty value,
+				// so we wouldn't be here. So let's convert the "gender" index
+				// into a readable string.
+				if ($currentKey == 'gender') {
+					$currentFormData =
+						$this->pi_getLL('label_gender.I.'.intval($currentFormData));
+				}
+				$processedFormData = str_replace(
+					chr(13),
+					'<br />',
+					htmlspecialchars($currentFormData)
+				);
+
+				$result .= $processedFormData.'<br />';
+			}
+		}
+
+		$this->plugin->setMarkerContent('registration_billing_address', $result);
+
+		return $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_BILLING');
 	}
 
 	/**
@@ -491,19 +545,55 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns the currently logged-in FE user's full name.
+	 * Returns a data item of the currently logged-in FE user.
 	 *
 	 * This function may only be called when a FE user is logged in.
 	 *
-	 * The caller needs to take care of htmlspecialcharing the user name.
+	 * The caller needs to take care of htmlspecialcharing the data.
 	 *
-	 * @return	string		the currently logged-in FE user's name
+	 * @param	array		array that contains any pre-filled data (unused)
+	 * @param	array		contents of the "params" XML child of the userrobj node (needs to contain an element with the key "key")
+	 *
+	 * @return	string		the contents of the element
 	 *
 	 * @access	public
 	 */
-	function getUserFullName() {
+	function getFeUserData($items, $params) {
 		$feUserData = $GLOBALS['TSFE']->fe_user->user;
-		return $feUserData['name'];
+		return $feUserData[$params['key']];
+	}
+
+	/**
+	 * Provides a localized list of country names from static_tables.
+	 *
+	 * @param	array		array that contains any pre-filled data (unused)
+	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
+	 * @param	object		the current renderlet XML node as a recursive array (unused)
+	 *
+	 * @return	array		a list of localized country names from static_tables as an array with the keys "caption" (for the title) and "value" (in this case, the same as the caption)
+	 *
+	 * @access	public
+	 */
+	function populateListCountries($items, $params, &$form) {
+		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+		$this->staticInfo->init();
+		$allCountries = $this->staticInfo->initCountries();
+		$result = array();
+		// Add an empty item at the top so we won't have Afghanistan (the first
+		// entry) pre-selected for empty values.
+		$result = array(
+			'caption' => ' ',
+			'value' => ''
+		);
+
+		foreach ($allCountries as $currentCountry) {
+			$result[] = array(
+				'caption' => $currentCountry,
+				'value' => $currentCountry
+			);
+		}
+
+		return $result;
 	}
 }
 

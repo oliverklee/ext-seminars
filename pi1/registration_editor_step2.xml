@@ -33,7 +33,18 @@
 				<defaultvalue>
 					<userobj>
 						<extension>this</extension>
-						<method>getFeUserData</method>
+						<method>getAllFeUserData</method>
+					</userobj>
+				</defaultvalue>
+			</data>
+		</renderlet:LABEL>
+
+		<renderlet:LABEL name="billing_address">
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getBillingAddress</method>
 					</userobj>
 				</defaultvalue>
 			</data>
@@ -140,13 +151,90 @@
 			</process>
 		</renderlet:HIDDEN>
 
-		<renderlet:HIDDEN name="billing_address">
+		<renderlet:HIDDEN name="gender">
 			<process>
 				<userobj>
 					<extension>this</extension>
 					<method>hasRegistrationFormField</method>
 					<params>
-						<data name="elementname" value="billing_address" />
+						<data name="elementname" value="gender" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+		<renderlet:HIDDEN name="name">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="name" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+		<renderlet:HIDDEN name="address">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="address" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+		<renderlet:HIDDEN name="zip">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="zip" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+		<renderlet:HIDDEN name="city">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="city" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+		<renderlet:HIDDEN name="country">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="country" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+		<renderlet:HIDDEN name="telephone">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="telephone" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+		<renderlet:HIDDEN name="email">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="email" />
 					</params>
 				</userobj>
 			</process>
