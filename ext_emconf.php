@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Seminar Manager',
-	'description' => 'This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events as an overview or as detailed descriptions. In addition, it allows front end users to register for these events.',
+	'description' => 'This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.',
 	'category' => 'plugin',
 	'shy' => 0,
 	'dependencies' => 'cms,css_styled_content,ameos_formidable,formidabledatetime,formidable_va_preg,rc_formidable_rdt_rte',
