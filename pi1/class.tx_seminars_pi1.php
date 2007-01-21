@@ -827,8 +827,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->setMarkerContent('label_list_otherdates', $this->pi_getLL('label_list_dates'));
 			}
 
-			// Hide the "title" column from the list.
-			$this->readSubPartsToHide('listheader_wrapper_title,listitem_wrapper_title');
+			// Hide unneeded columns from the list.
+			$this->readSubPartsToHide('listheader_wrapper_title,listitem_wrapper_title,'
+				.'listheader_wrapper_list_registrations,listitem_wrapper_list_registrations'
+			);
 
 			$tableOtherDates = $this->createListTable($seminarBag);
 
