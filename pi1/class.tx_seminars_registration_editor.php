@@ -222,18 +222,20 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 	/**
 	 * Checks whether a method of payment is selected OR this event has no
-	 * payment methods set at all (in which case it isn't necessary or possible
-	 * to select any payment method)
+	 * payment methods set at all OR the corresponding registration field is
+	 * not visible in the registration form (in which case it is neither
+	 * necessary nor possible to select any payment method).
 	 *
 	 * @param	mixed		the currently selected value (a positive integer) or null if no button is selected
 	 *
-	 * @return	boolean		true if a method of payment is selected (or this event has no payment methods at all), false if none is selected AND this event has at least one payment method
+	 * @return	boolean		true if a method of payment is selected OR no method could have been selected at all, false if none is selected, but could have been selected
 	 *
 	 * @access	public
 	 */
 	function isMethodOfPaymentSelected($radiogroupValue) {
 		return $this->isRadiobuttonSelected($radiogroupValue)
-			|| !$this->seminar->hasPaymentMethods();
+			|| !$this->seminar->hasPaymentMethods()
+			|| !$this->showMethodsOfPayment();
 	}
 
 	/**
@@ -255,11 +257,10 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * "showRegistrationFields" variable.
 	 *
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
-	 * @param	object		the current FORMidable object
 	 *
 	 * @return	boolean		true if the current form field should be displayed, false otherwise
 	 */
-	function hasRegistrationFormField($parameters, $form) {
+	function hasRegistrationFormField($parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
 	}
 
@@ -324,19 +325,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * ie. whether they are enable in the setup and the current event actually
 	 * has any payment methods assigned.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
-	 * @param	object		the current FORMidable object
-	 *
 	 * @return	boolean		true if the payment methods should be displayed, false otherwise
 	 *
 	 * @access	public
 	 */
-	function showMethodsOfPayment($parameters, $form) {
+	function showMethodsOfPayment() {
 		return $this->seminar->hasPaymentMethods()
 			&& $this->hasRegistrationFormField(
-				array('elementname' => 'method_of_payment'),
-				null
+				array('elementname' => 'method_of_payment')
 			);
 	}
 
