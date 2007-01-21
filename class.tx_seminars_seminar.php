@@ -92,6 +92,43 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Creates a hyperlink to this seminar details page. The content of the provided
+	 * fieldn ame will be fetched from the event record, wrapped with link tags and
+	 * returned as a link to the detailed page.
+	 *
+	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is not set or 0,
+	 * the link will point to the list view page.
+	 *
+	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
+	 * @param	string		the name of the field to retrieve and wrap, may not be empty
+	 *
+	 * @return	string		HTML code for the link to the event details page
+	 *
+	 * @access	public
+	 */
+	function getLinkedFieldValue(&$plugin, $fieldName) {
+		$linkedText = '';
+		$detailPID = $plugin->getConfValueInteger('detailPID');
+
+		// Certain fields can be retrieved 1:1 from the database, some need
+		// to be fetched by a special getter function.
+		switch ($fieldName) {
+			case 'date':
+				$linkedText = $this->getDate();
+				break;
+			default:
+				$linkedText = $this->getTopicString($fieldName);
+				break;
+		}
+
+		return $plugin->cObj->getTypoLink(
+			$linkedText,
+			($detailPID) ? $detailPID : $plugin->getConfValueInteger('listPID'),
+			array('tx_seminars_pi1[showUid]' => $this->getUid())
+		);
+	}
+
+	/**
 	 * Checks whether a non-deleted and non-hidden seminar with a given UID exists in the DB.
 	 *
 	 * This method may be called statically.
@@ -172,27 +209,6 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getTitle() {
 		return $this->getTopicString('title');
-	}
-
-	/**
-	 * Creates a hyperlink to this seminar details page.
-	 *
-	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is not set or 0,
-	 * the link will point to the list view page.
-	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_list_linkSingle() on (must not be null)
-	 *
-	 * @return	string		HTML code for the link to the seminar details page
-	 *
-	 * @access	public
-	 */
-	function getLinkedTitle(&$plugin) {
-		$detailPID = $plugin->getConfValueInteger('detailPID');
-		return $plugin->cObj->getTypoLink(
-			$this->getTitle(),
-			($detailPID) ? $detailPID : $plugin->getConfValueInteger('listPID'),
-			array('tx_seminars_pi1[showUid]' => $this->getUid())
-		);
 	}
 
 	/**

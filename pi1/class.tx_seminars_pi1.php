@@ -827,6 +827,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->setMarkerContent('label_list_otherdates', $this->pi_getLL('label_list_dates'));
 			}
 
+			// Hide the "title" column from the list.
+			$this->readSubPartsToHide('listheader_wrapper_title,listitem_wrapper_title');
+
 			$tableOtherDates = $this->createListTable($seminarBag);
 
 			$this->setMarkerContent('table_otherdates', $tableOtherDates);
@@ -985,14 +988,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('class_itemrow', $completeClass);
 
-			$this->setMarkerContent('title_link', $this->seminar->getLinkedTitle($this));
+			$this->setMarkerContent('title_link', $this->seminar->getLinkedFieldValue($this, 'title'));
 			$this->setMarkerContent('uid', $this->seminar->getUid($this));
 			$this->setMarkerContent('event_type', $this->seminar->getEventType());
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
 			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
 
-			$currentDate = $this->seminar->getDate();
+			$currentDate = $this->seminar->getLinkedFieldValue($this, 'date');
 			if (($currentDate === $this->previousDate)
 				&& $this->getConfValueBoolean('omitDateIfSameAsPrevious', 's_template_special')) {
 				$currentDate = '';
