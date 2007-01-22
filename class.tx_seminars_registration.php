@@ -747,6 +747,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Retrieves the localized string corresponding to the key in the "gender"
 	 * field.
 	 *
+	 * @return	string		the localized gender as entered for the billing address (Mr. or Mrs.)
+	 *
 	 * @access	public
 	 */
 	function getGender() {

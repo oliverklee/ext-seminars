@@ -581,7 +581,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$result = array();
 		// Add an empty item at the top so we won't have Afghanistan (the first
 		// entry) pre-selected for empty values.
-		$result = array(
+		$result[] = array(
 			'caption' => ' ',
 			'value' => ''
 		);
