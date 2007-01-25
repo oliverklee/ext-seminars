@@ -102,7 +102,7 @@ $TCA['tx_seminars_seminars'] = Array (
 			'2' => $extIconRelPath.'icon_tx_seminars_seminars_date.gif'
 		),
 		'dynamicConfigFile' => $extPath.'tca.php',
-
+		'dividers2tabs' => true,
 		'hideAtCopy' => true,
 	),
 );

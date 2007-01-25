@@ -1,4 +1,5 @@
 0.5.0
+- Change: BE: Organize the seminars form with tabs (#515)
 - Change: In the registration form, split the field "billing address" (#488)
 - Fix: Event registration is stuck when payment methods are not shown (#508)
 - Change: Hide the column "list of registrations" in the list of events for a certain topic (#482)
