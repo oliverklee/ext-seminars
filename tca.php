@@ -659,6 +659,13 @@ $TCA['tx_seminars_attendances'] = Array (
 				'type' => 'none',
 			)
 		),
+		'total_price' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.total_price',
+			'config' => Array (
+				'type' => 'none',
+			)
+		),
 		'seats' => Array (
 			'exclude' => '1',
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.seats',
@@ -909,7 +916,7 @@ $TCA['tx_seminars_attendances'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, seats, attendees_names, paid, datepaid, method_of_payment;;2, name;;3, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
+		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, total_price, seats, attendees_names, paid, datepaid, method_of_payment;;2, name;;3, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => ''),

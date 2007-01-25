@@ -1,4 +1,5 @@
 0.5.0
+- Change: Show the total price for a registration on the confirmation page (#489)
 - Change: BE: Organize the seminars form with tabs (#515)
 - Change: In the registration form, split the field "billing address" (#488)
 - Fix: Event registration is stuck when payment methods are not shown (#508)

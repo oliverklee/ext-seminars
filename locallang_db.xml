@@ -177,6 +177,7 @@
 			<label index="tx_seminars_attendances.user">Frontend User</label>
 			<label index="tx_seminars_attendances.seminar">Seminar</label>
 			<label index="tx_seminars_attendances.price">Price to pay</label>
+			<label index="tx_seminars_attendances.total_price">Total price for this attendance</label>
 			<label index="tx_seminars_attendances.paid">Has paid</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment</label>
@@ -286,6 +287,7 @@
 			<label index="tx_seminars_attendances.user">Frontend-User</label>
 			<label index="tx_seminars_attendances.seminar">Seminar</label>
 			<label index="tx_seminars_attendances.price">zu bezahlender Preis</label>
+			<label index="tx_seminars_attendances.total_price">Gesamtpreis dieser Buchung</label>
 			<label index="tx_seminars_attendances.paid">Hat bezahlt</label>
 			<label index="tx_seminars_attendances.datepaid">Datum der Bezahlung</label>
 			<label index="tx_seminars_attendances.method_of_payment">Zahlungsart</label>
@@ -549,6 +551,7 @@
 			<label index="tx_seminars_attendances.title" type="integer">192455458</label>
 			<label index="tx_seminars_attendances.user" type="integer">244770478</label>
 			<label index="tx_seminars_attendances.seminar" type="integer">11135941</label>
+			<label index="tx_seminars_attendances.total_price" type="integer">259855529</label>
 			<label index="tx_seminars_attendances.paid" type="integer">155079066</label>
 			<label index="tx_seminars_attendances.datepaid" type="integer">75729411</label>
 			<label index="tx_seminars_attendances.method_of_payment" type="integer">138981420</label>
@@ -799,6 +802,7 @@
 			<label index="tx_seminars_attendances.title">Title</label>
 			<label index="tx_seminars_attendances.user">Frontend User</label>
 			<label index="tx_seminars_attendances.seminar">Seminar</label>
+			<label index="tx_seminars_attendances.total_price">Total price for this attendance</label>
 			<label index="tx_seminars_attendances.paid">Has paid</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment</label>

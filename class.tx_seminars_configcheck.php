@@ -887,6 +887,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'seats',
 				'attendees_names',
 				'price',
+				'total_price',
 				'method_of_payment',
 				'gender',
 				'name',
@@ -1057,6 +1058,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'food',
 				'known_from',
 				'seats',
+				'total_price',
 				'attendees_names',
 				'notes',
 				'terms'

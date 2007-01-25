@@ -97,6 +97,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['user'] = $userUid;
 
 		$this->recordData['seats'] = $registrationData['seats'];
+		$this->recordData['total_price'] = $registrationData['total_price'];
 		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
 		$this->recordData['method_of_payment'] = $registrationData['method_of_payment'];
@@ -397,6 +398,27 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets the saved total price and the currency.
+	 * An empty string will be returned if no total price could be calculated.
+	 *
+	 * @param	string		character(s) used to separate the price from the currency
+	 *
+	 * @return	string		the total price and the currency or an empty string if no total price could be calculated
+	 *
+	 * @access	public
+	 */
+	function getTotalPrice($space = '&nbsp;') {
+		$result = '';
+		$totalPrice = $this->getRecordPropertyDecimal('total_price');
+		$currency = $this->getConfValueString('currency');
+		if ($totalPrice != '0.00') {
+			$result = $this->seminar->formatPrice($totalPrice).$space.$currency;
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Send an e-mail to the attendee, thanking him/her for registering for an event.
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
@@ -455,6 +477,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial(' '));
 		} else {
 			$this->readSubpartsToHide('price_special', 'field_wrapper');
+		}
+
+		if ($this->hasRecordPropertyDecimal('total_price')) {
+			$this->setMarkerContent('total_price', $this->getTotalPrice(' '));
+		} else {
+			$this->readSubpartsToHide('total_price', 'field_wrapper');
 		}
 
 		// We don't need to check $this->seminar->hasPaymentMethods() here as
@@ -686,6 +714,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$value = $this->seminar->getSinglePaymentMethodShort(
 						$this->getRecordPropertyInteger($currentKey)
 					);
+					break;
+				case 'total_price':
+					$value = $this->getTotalPrice(' ');
 					break;
 				case 'gender':
 					$value = $this->getGender();

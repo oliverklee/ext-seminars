@@ -416,12 +416,29 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$result .= $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_DATA');
 		}
 
+		// Build the total price for this registration and add it to the form data
+		// to show it on the confirmation page.
+		// This value will not be saved to the database from here. It will be
+		// calculated again when creating the registration object.
+		// It will not be added if no total price can be calculated (e.g. total price = 0.00)
+		if (isset($formData['seats']) && $formData['seats'] > 0) {
+			$seats = $formData['seats'];
+		} else {
+			$seats = 1;
+		}
+		$totalPrice = $this->registrationManager->calculateTotalPrice($seats, &$this->seminar);
+		$currency = $this->registrationManager->getConfValueString('currency');
+		if ($totalPrice != '0.00') {
+			$formData['total_price'] = $totalPrice.' '.$currency;
+		}
+
 		foreach (array(
 			'account_number',
 			'bank_code',
 			'bank_name',
 			'account_owner',
 			'seats',
+			'total_price',
 			'attendees_names',
 			'interests',
 			'expectations',
