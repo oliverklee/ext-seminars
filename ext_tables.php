@@ -95,6 +95,7 @@ $TCA['tx_seminars_seminars'] = Array (
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_seminars_complete.gif',
 		'typeicon_column' => 'object_type',
 		'typeicons' => array(
 			'0' => $extIconRelPath.'icon_tx_seminars_seminars_complete.gif',
