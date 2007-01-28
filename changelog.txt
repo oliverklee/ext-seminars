@@ -31,7 +31,7 @@
 - Feature: Allow selection of payment method (#434)
 - Improved the manual (#380)
 - Change: HTML output of the early bird prices in single view (#423)
-- Change: Added some new and replaced some existing icons (#493, #470, #494)
+- Change: Added some new and replaced some existing icons (#493, #470, #494, #521)
 - Change: HTML output of speakers and organizers in list view (#421)
 - Change: Switch the registration from frontendformslib to FORMidable (#433)
 - Feature: Allow to edit existing seminars (#309)
