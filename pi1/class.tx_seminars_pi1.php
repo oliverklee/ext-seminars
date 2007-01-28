@@ -161,6 +161,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$result = '';
 
+		// Set the uid of a single event that is requestet (either by the configuration in the
+		// flexform or by a parameter in the URL).
+		if ($this->hasConfValueInteger('showSingleEvent', 's_template_special')) {
+			$this->showUid = $this->getConfValueInteger('showSingleEvent', 's_template_special');
+		} else {
+			$this->showUid = $this->piVars['showUid'];
+		}
+
 		$whatToDisplay = $this->getConfValueString('what_to_display');
 		$this->setFlavor($whatToDisplay);
 
@@ -193,7 +201,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				// The fallthrough is intended.
 			default:
 				// Show the single view if a 'showUid' variable is set.
-				if ($this->piVars['showUid']) {
+				if ($this->showUid) {
 					// Intentionally overwrite the previously set flavor.
 					$this->setFlavor('single_view');
 					$result = $this->createSingleView();
@@ -566,7 +574,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createSingleView() {
 		$this->internal['currentTable'] = $this->tableSeminars;
-		$this->internal['currentRow'] = $this->pi_getRecord($this->tableSeminars, $this->piVars['showUid']);
+		$this->internal['currentRow'] = $this->pi_getRecord($this->tableSeminars, $this->showUid);
 
 		$this->readSubpartsToHide($this->getConfValueString('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 
