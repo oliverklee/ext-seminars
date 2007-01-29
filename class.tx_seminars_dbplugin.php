@@ -38,6 +38,11 @@ require_once(PATH_t3lib.'class.t3lib_page.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configcheck.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_salutationswitcher.php');
 
+// If we are in the back end, we include the extension's locallang.xml.
+if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
+    $LANG->includeLLFile('EXT:seminars/locallang.xml');
+}
+
 class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	/** The extension key. */
 	var $extKey = 'seminars';

@@ -32,6 +32,11 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+// If we are in the back end, we have to include typo3/template.php once.
+if (TYPO3_MODE == 'BE') {
+    require_once($BACK_PATH.'template.php');
+}
+
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
 class tx_seminars_templatehelper extends tx_seminars_dbplugin {
@@ -308,6 +313,33 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function createClassAttribute($className) {
 		return !empty($className) ? $this->pi_classParam($className) : '';
+	}
+
+	/**
+	 * Returns the localized label of the LOCAL_LANG key $key.
+	 * This method checks if we are in the FE or in the BE and then uses the appropriate method.
+	 *
+	 * @param	string		the key from the LOCAL_LANG array for which to return the value
+	 * @param	string		alternative string to return if no value is found set for the key, neither for the local language nor the default.
+	 * @param	boolean		If true, the output label is passed through htmlspecialchars().
+	 * 
+	 * @return	string		the value from LOCAL_LANG
+	 * 
+	 * @access	protected
+	 */
+	function pi_getLL($key, $alternativeString = '', $useHtmlSpecialChars = false) {
+		global $LANG;
+		$result = '';
+
+		if (TYPO3_MODE == 'BE') {
+			$result = $LANG->getLL($key, $useHtmlSpecialChars);
+		} elseif (TYPO3_MODE == 'FE') {
+			$result = parent::pi_getLL($key, $alternativeString, $useHtmlSpecialChars);
+		} else {
+			$result = $alternativeString;
+		}
+
+		return $result;
 	}
 }
 
