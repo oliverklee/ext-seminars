@@ -56,15 +56,6 @@ plugin.tx_seminars {
 	# whether date ranges should be shortened when possible
 	abbreviateDateRanges = 1
 
-	# number of digits after the point in event prices
-	decimalDigits = 2
-
-	# the character used to split the thousands in event prices
-	thousandsSplitChar =
-
-	# the character used to split the price and its decimal digits
-	decimalSplitChar = .
-
 	# ISO3 code of the currency to be used (not checked for validity yet)
 	currency = EUR
 
@@ -79,6 +70,15 @@ plugin.tx_seminars {
 
 	# If there are at least this many vancancies, "enough" is displayed instead of the exact number.
 	showVacanciesThreshold = 10
+
+	# number of digits after the point in event prices
+	decimalDigits = 2
+
+	# the character used to split the thousands in event prices
+	thousandsSplitChar =
+
+	# the character used to split the price and its decimal digits
+	decimalSplitChar = .
 
 
 	# The following variables don't have any default values provided.
@@ -159,6 +159,7 @@ plugin.tx_seminars_pi1 {
 
 	# comma-separated list of column names that shouldn't be displayed in the list view, e.g. organizers,price_special
 	hideColumns = event_type,accreditation_number,credit_points,time,place,price_special,speakers
+
 	# comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
 	hideFields = credit_points,eventsnextday
 
@@ -173,6 +174,7 @@ plugin.tx_seminars_pi1 {
 
 	# whether to use the label "Price" as column header for the standard price (instead of "Standard price")
 	generalPriceInList = 0
+
 	# whether to use the label "Price" as heading for the standard price (instead of "Standard price") in the detailed view and on the registration page
 	generalPriceInSingle = 0
 
@@ -200,6 +202,12 @@ plugin.tx_seminars_pi1 {
 
 	# Base URL of your TYPO3 site (including the protocol and the trailing slash), e.g. http://www.mytypo3site.net/
 	baseURL =
+
+	# PID of the sysfolder that contains all the event records (e.g. the starting point)
+	pages =
+
+	# number of levels to recurse when accessing the starting point
+	recursive =
 
 	# PID of the page that contains the seminar list
 	listPID =
