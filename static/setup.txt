@@ -120,8 +120,10 @@ plugin.tx_seminars_pi1 {
 	class_headerdate =
 	class_headertime =
 	class_headerplace =
+	class_headerseats =
 	class_headerprice_regular =
 	class_headerprice_special =
+	class_headertotal_price =
 	class_headerorganizers =
 	class_headervacancies =
 	class_headerregistration =
@@ -141,8 +143,10 @@ plugin.tx_seminars_pi1 {
 	class_listdate = date
 	class_listtime =
 	class_listplace =
+	class_listseats =
 	class_listprice_regular = price
 	class_listprice_special = price
+	class_listtotal_price =
 	class_listorganizers =
 	class_listregistration =
 	class_listlist_registrations =

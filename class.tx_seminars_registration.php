@@ -149,6 +149,24 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets the number of seats that are registered with this registration.
+	 * If no value is saved in the record, 1 will be returned.
+	 *
+	 * @return	integer		the number of seats
+	 *
+	 * @access	public
+	 */
+	function getSeats() {
+		if ($this->hasRecordPropertyInteger('seats')) {
+			$seats = $this->getRecordPropertyInteger('seats');
+		} else {
+			$seats = 1;
+		}
+
+		return $seats;
+	}
+
+	/**
 	 * Creates our title and writes it to $this->title.
 	 *
 	 * The title is constructed like this:

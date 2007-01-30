@@ -169,10 +169,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->showUid = $this->piVars['showUid'];
 		}
 
-		$whatToDisplay = $this->getConfValueString('what_to_display');
-		$this->setFlavor($whatToDisplay);
+		$this->whatToDisplay = $this->getConfValueString('what_to_display');
+		$this->setFlavor($this->whatToDisplay);
 
-		switch ($whatToDisplay) {
+		switch ($this->whatToDisplay) {
 			case 'edit_event':
 				$result = $this->createEventEditor();
 				break;
@@ -318,9 +318,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = '';
 		$isOkay = true;
 
-		$whatToDisplay = $this->getConfValueString('what_to_display');
-
-		switch ($whatToDisplay) {
+		switch ($this->whatToDisplay) {
 			case 'my_events':
 				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
 				break;
@@ -340,7 +338,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		if ($isOkay) {
-			$seminarBag =& $this->initListView($whatToDisplay);
+			$seminarBag =& $this->initListView($this->whatToDisplay);
 
 			if ($this->internal['res_count']) {
 				$result = $this->createListTable($seminarBag);
@@ -420,6 +418,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			|| ($whatToDisplay == 'my_events')) {
 			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
+		}
+
+		// Hide the number of seats and the total price column when we're not
+		// on the "my events" list.
+		if ($whatToDisplay != 'my_events') {
+			$this->readSubpartsToHide('total_price,seats', 'LISTHEADER_WRAPPER');
+			$this->readSubpartsToHide('total_price,seats', 'LISTITEM_WRAPPER');
 		}
 
 		// Hide the column with the link to the list of registrations if
@@ -686,7 +691,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('registration', 'field_wrapper');
 			}
 
-			if ($this->seminar->canViewRegistrationsList($this->getConfValueString('what_to_display'),
+			if ($this->seminar->canViewRegistrationsList($this->whatToDisplay,
 				$this->getConfValueInteger('registrationsListPID'),
 				$this->getConfValueInteger('registrationsVipListPID'))) {
 				$this->setMarkerContent('list_registrations', $this->getRegistrationsListLink());
@@ -869,10 +874,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function getRegistrationsListLink() {
 		$result = '';
 		$targetPageId = 0;
-		$whatToDisplay = $this->getConfValueString('what_to_display');
 
 		if ($this->seminar->canViewRegistrationsList(
-				$whatToDisplay,
+				$this->whatToDisplay,
 				0,
 				$this->getConfValueInteger('registrationsVipListPID'),
 				$this->getConfValueInteger('defaultEventVipsFeGroupID'))
@@ -880,7 +884,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// So a link to the VIP list is possible.
 			$targetPageId = $this->getConfValueInteger('registrationsVipListPID');
 		// No link to the VIP list ... so maybe to the list for the participants.
-		} elseif ($this->seminar->canViewRegistrationsList($whatToDisplay,
+		} elseif ($this->seminar->canViewRegistrationsList($this->whatToDisplay,
 			$this->getConfValueInteger('registrationsListPID'))) {
 			$targetPageId = $this->getConfValueInteger('registrationsListPID');
 		}
@@ -943,8 +947,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('header_date', $this->getFieldHeader('date'));
 		$this->setMarkerContent('header_time', $this->getFieldHeader('time'));
 		$this->setMarkerContent('header_place', $this->getFieldHeader('place'));
+		$this->setMarkerContent('header_seats', $this->getFieldHeader('seats'));
 		$this->setMarkerContent('header_price_regular', $this->getFieldHeader('price_regular'));
 		$this->setMarkerContent('header_price_special', $this->getFieldHeader('price_special'));
+		$this->setMarkerContent('header_total_price', $this->getFieldHeader('total_price'));
 		$this->setMarkerContent('header_organizers', $this->getFieldHeader('organizers'));
 		$this->setMarkerContent('header_vacancies', $this->getFieldHeader('vacancies'));
 		$this->setMarkerContent('header_registration', $this->getFieldHeader('registration'));
@@ -963,6 +969,55 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createListFooter() {
 		return $this->substituteMarkerArrayCached('LIST_FOOTER');
+	}
+
+	/**
+	 * Get's data from one or more attendance records that belong to the current event
+	 * AND the currently logged in user.
+	 * Attention: The fields are totalized! (e.g. all seats from the different attendance
+	 * records will be counted and returned as one value)
+	 *
+	 * @return	array		associative array containing the needed values
+	 *
+	 * @access	protected
+	 */
+	function getAttendanceData() {
+		$result = array(
+			'seats' => '',
+			'total_price' => ''
+		);
+
+		// Create a registrationbag that contains all registrations for the
+		// currently logged in user and the current event.
+		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
+		$queryWhere = $this->tableAttendances.'.seminar='.$this->seminar->getUid()
+					.' AND '.$this->tableAttendances.'.user='.$this->getFeUserUid();
+		$registrationBag =& new $registrationBagClassname($queryWhere, '', '', 'crdate');
+
+		if ($registrationBag->getObjectCountWithoutLimit()) {
+			$numberOfSeats = 0;
+			$totalPrice = 0;
+			while ($currentRegistration =& $registrationBag->getCurrent()) {
+				$numberOfSeats = $numberOfSeats + $currentRegistration->getSeats();
+				$currentTotalPrice = $currentRegistration->getRecordPropertyDecimal('total_price');
+				$totalPrice += $currentTotalPrice;
+				$registrationBag->getNext();
+			}
+
+			// Add the total number of seats and the total price to the result array.
+			// If the total price is not zero, format the string as needed and add the currency.
+			// But if the total price is zero, set it to an empty string to avoid showing
+			// "0" as total price.
+			$result['seats'] = $numberOfSeats;
+			if ($totalPrice) {
+				$currency = $this->registrationManager->getConfValueString('currency');
+				$result['total_price'] = $this->seminar->formatPrice($totalPrice).'&nbsp;'.$currency;
+			} else {
+				$result['total_price'] = '';
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -998,6 +1053,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('class_itemrow', $completeClass);
 
+			// Retrieve the data for the columns "Number of seats" and
+			// "Total price", but only if we are on the "my_events" list.
+			if ($this->whatToDisplay == 'my_events') {
+				$attendanceData = $this->getAttendanceData();
+			} else {
+				$attendanceData = array(
+					'seats' => '',
+					'total_price' => ''
+				);
+			}
+
 			$this->setMarkerContent('title_link', $this->seminar->getLinkedFieldValue($this, 'title'));
 			$this->setMarkerContent('uid', $this->seminar->getUid($this));
 			$this->setMarkerContent('event_type', $this->seminar->getEventType());
@@ -1019,8 +1085,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlaceShort());
+			$this->setMarkerContent('seats', $attendanceData['seats']);
 			$this->setMarkerContent('price_regular', $this->seminar->getCurrentPriceRegular());
 			$this->setMarkerContent('price_special', $this->seminar->getCurrentPriceSpecial());
+			$this->setMarkerContent('total_price', $attendanceData['total_price']);
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
 			$this->setMarkerContent('vacancies', $this->seminar->getVacanciesString());
 			$this->setMarkerContent('class_listvacancies', $this->getVacanciesClasses($this->seminar));
@@ -1221,14 +1289,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			if ($this->seminar->canViewRegistrationsList(
-					$this->getConfValueString('what_to_display'),
+					$this->whatToDisplay,
 					0,
 					0,
 					$this->getConfValueInteger('defaultEventVipsFeGroupID'))
 				) {
 				$isOkay = true;
 			} else {
-				$errorMessage = $this->seminar->canViewRegistrationsListMessage($this->getConfValueString('what_to_display'));
+				$errorMessage = $this->seminar->canViewRegistrationsListMessage($this->whatToDisplay);
 			}
 		} else {
 			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar']);
