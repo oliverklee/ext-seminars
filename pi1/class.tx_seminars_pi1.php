@@ -223,7 +223,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/**
 	 * Returns the additional query parameters needed to build the list view. This function checks
-	 * - the timeframe to display
+	 * - the time-frame to display
 	 * - whether to show canceled events
 	 * The result always starts with " AND" so that it can be directly appended
 	 * to a WHERE clause.
@@ -241,7 +241,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// Only show full event records(0) and event dates(2), but no event topics(1).
 		$result .= ' AND '.$tablePrefix.'object_type!=1';
 
-		// Work out from which timeframe we'll display the event list.
+		// Work out from which time-frame we'll display the event list.
 		// We also need to deal with the case that an event has no end date set
 		// (ie. it is open-ended).
 		switch ($this->getConfValueString('timeframeInList', 's_template_special')) {
@@ -478,7 +478,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$pidList = $this->pi_getPidList($this->getConfValueString('pidList'), $this->getConfValueInteger('recursive'));
 		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')';
 
-		// Timeframes and hiding canceled events doesn't make sense for the
+		// Time-frames and hiding canceled events doesn't make sense for the
 		// topic list.
 		if ($whatToDisplay != 'topic_list') {
 			$queryWhere .= $this->getAdditionalQueryParameters();

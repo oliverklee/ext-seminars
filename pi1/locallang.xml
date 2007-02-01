@@ -34,7 +34,7 @@
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
 			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
-			<label index="seminars.pi_flexform.timeframeInList">Only show events from this timeframe:</label>
+			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
 			<label index="seminars.pi_flexform.timeframeInList2">past events</label>
 			<label index="seminars.pi_flexform.timeframeInList3">past and current events</label>
@@ -619,7 +619,7 @@
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
 			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
 			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
-			<label index="seminars.pi_flexform.timeframeInList" type="integer">211332464</label>
+			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
 			<label index="seminars.pi_flexform.timeframeInList2" type="integer">36274015</label>
 			<label index="seminars.pi_flexform.timeframeInList3" type="integer">75911135</label>
@@ -903,7 +903,7 @@
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
 			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
-			<label index="seminars.pi_flexform.timeframeInList">Only show events from this timeframe:</label>
+			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
 			<label index="seminars.pi_flexform.timeframeInList2">past events</label>
 			<label index="seminars.pi_flexform.timeframeInList3">past and current events</label>
