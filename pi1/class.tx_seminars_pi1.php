@@ -508,7 +508,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 			case 'my_vip_events':
 				$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
-						$this->getConfValueInteger('defaultEventVipsFeGroupID')
+						$this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special')
 					]
 				);
 				if (!$isDefaultVip) {
@@ -879,7 +879,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->whatToDisplay,
 				0,
 				$this->getConfValueInteger('registrationsVipListPID'),
-				$this->getConfValueInteger('defaultEventVipsFeGroupID'))
+				$this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special'))
 			) {
 			// So a link to the VIP list is possible.
 			$targetPageId = $this->getConfValueInteger('registrationsVipListPID');
@@ -1292,7 +1292,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$this->whatToDisplay,
 					0,
 					0,
-					$this->getConfValueInteger('defaultEventVipsFeGroupID'))
+					$this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special'))
 				) {
 				$isOkay = true;
 			} else {

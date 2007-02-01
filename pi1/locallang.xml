@@ -46,6 +46,7 @@
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>
@@ -271,6 +272,7 @@
 			<label index="seminars.pi_flexform.hideSearchForm">Suchformular in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Page-Browser in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Abgesagte Veranstaltungen in der Listenansicht nicht anzeigen:</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Standard VIPs Benutzergruppe:</label>
 			<label index="seminars.pi_flexform.hideColumns">Versteckte Felder in Listenansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">&quot;Preis&quot; als Überschrift für den Standardpreis in der Listenansicht benutzen:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">&quot;Preis&quot; als Überschrift für den Standardpreis in der Einzelansicht und bei der Anmeldung benutzen:</label>
@@ -628,6 +630,7 @@
 			<label index="seminars.pi_flexform.hideFields" type="integer">25256911</label>
 			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
 			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID" type="integer">91800914</label>
 			<label index="seminars.pi_flexform.hideColumns" type="integer">70702598</label>
 			<label index="seminars.pi_flexform.generalPriceInList" type="integer">150285299</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle" type="integer">30481588</label>
@@ -912,6 +915,7 @@
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>

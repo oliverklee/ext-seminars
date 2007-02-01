@@ -1350,7 +1350,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	function checkDefaultEventVipsFeGroupID() {
 		$this->checkIfPositiveIntegerOrEmpty(
 			'defaultEventVipsFeGroupID',
-			false,
+			true,
 			'',
 			'This value specifies the front-end user group that is allowed to '
 				.'see the registrations for all events and get all events listed '
