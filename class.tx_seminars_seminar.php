@@ -201,14 +201,28 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our title.
+	 * Gets our topic's title. For date records, this will return the
+	 * corresponding topic record's title.
 	 *
-	 * @return	string	our seminar title (or '' if there is an error)
+	 * @return	string	our topic title (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
 	function getTitle() {
 		return $this->getTopicString('title');
+	}
+
+	/**
+	 * Gets our direct title. Even for date records, this will return our
+	 * direct title (which is visible in the back end) instead of the
+	 * corresponding topic record's title.
+	 * 
+	 * @return	string	our direct title (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getRealTitle() {
+		return $this->getRecordPropertyString('title');
 	}
 
 	/**
@@ -1195,6 +1209,30 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the minimum number of attendances required for this event
+	 * (ie. how many registrations are needed so this event can take place).
+	 *
+	 * @return	integer		the minimum number of attendances
+	 *
+	 * @access	public
+	 */
+	function getAttendancesMin() {
+		return $this->getRecordPropertyInteger('attendees_min');
+	}
+	
+	/**
+	 * Gets the maximum number of attendances for this event
+	 * (the total number of seats for this event).
+	 *
+	 * @return	integer		the maximum number of attendances
+	 *
+	 * @access	public
+	 */
+	function getAttendancesMax(){
+		return $this->getRecordPropertyInteger('attendees_max');
 	}
 
 	/**

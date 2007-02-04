@@ -25,6 +25,7 @@
  * Module 'Events' for the 'seminars' extension.
  *
  * @author	Mario Rimann <typo3-coding@rimann.org>
+ * @author	Niels Pardon <mail@niels-pardon.de>
  */
 
 unset($MCONF);
@@ -34,13 +35,19 @@ require_once($BACK_PATH.'init.php');
 require_once($BACK_PATH.'template.php');
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 
 $LANG->includeLLFile('EXT:seminars/mod2/locallang.php');
+$LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
 
 class tx_seminars_module2 extends t3lib_SCbase {
+	/** the seminar which we want to list/show */
+	var $seminar;
+
 	/**
 	 * Initializes some variables and also starts the initialization of the parent class.
 	 *
@@ -50,7 +57,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		/*
 		 * This is a workaround for the wrong generated links. The workaround is needed to
 		 * get the right values from the GET Parameter. This workaround is from Elmar Hinz
-		 * who also noted this in the bugtracker (http://bugs.typo3.org/view.php?id=2178)
+		 * who also noted this in the bug tracker (http://bugs.typo3.org/view.php?id=2178).
 		 */
 		$matches = array();
 		foreach ($GLOBALS['_GET'] as $key => $value) {
@@ -85,12 +92,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		 */
 		$pageInfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		// Access check:
-		// The page will show only if there is a valid page and if this page may be viewed by the user.
+		// The page will show only if there is a valid page and if this page may
+		// be viewed by the user.
 		$hasAccess = is_array($pageInfo);
 
 		if (($this->id && $hasAccess) || ($BE_USER->user['admin'])) {
 			// start the document
-			$this->doc = t3lib_div::makeInstance('mediumDoc');
+			$this->doc = t3lib_div::makeInstance('bigDoc');
 			$this->doc->backPath = $BACK_PATH;
 			$this->doc->form = '<form action="" method="POST">';
 			$this->doc->docType = 'xhtml_strict';
@@ -102,10 +110,10 @@ class tx_seminars_module2 extends t3lib_SCbase {
 
 			// define the sub modules that should be available in the tabmenu
 			$this->availableSubModules = array();
-			$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_registrations');
-			$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_events');
+			$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
+			$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
 
-			// generate the tabmenu
+			// generate the tab menu
 			$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
 				'subModule',
 				$this->subModule,
@@ -116,17 +124,17 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// If no sub module is specified, a default page will be displayed.
 			switch ($this->subModule) {
 				case 1:
-					$this->content .= $LANG->getLL('notYetImplementedSubModule');
+					$this->content .= $this->showEventsList();
 					break;
 				case 2:
-					$this->content .= $LANG->getLL('notYetImplementedSubModule');
+					$this->content .= $this->showRegistrationsList();
 					break;
 				default:
 					$this->content .= $this->showMainPage();
 					break;
 			}
 
-			// Finish the Document (add </html> tags for example).
+			// Finish the document (eg. add a closing html tag).
 			$this->content .= $this->doc->endPage();
 		} else {
 			// The user doesn't have access.
@@ -145,7 +153,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	}
 
 	/**
-	 * Generates and prints out the main page with an introduction about the capabilities of this module.
+	 * Generates and prints out the main page with an introduction about the
+	 * capabilities of this module.
 	 *
 	 * @return	string		the HTML source code to display
 	 *
@@ -153,7 +162,127 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 */
 	function showMainPage() {
 		$content = '';
-		$content .= 'This page will be filled up with a short introduction and maybe needful shortcuts.';
+
+		$content .= 'This page will be filled up with a short introduction and '
+			.'maybe needful shortcuts.';
+
+		return $content;
+	}
+
+	/**
+	 * Generates and prints out an event list.
+	 *
+	 * @return	string		the HTML source code of the event list
+	 *
+	 * @access	public
+	 */	
+	function showEventsList(){
+		global $LANG;
+
+		// Initialize the variable for the HTML source code.
+		$content = '';
+
+		// Initialize variables for the database query.
+		$queryWhere = 'pid='.$this->id;
+		$additionalTables = '';
+		$orderBy = 'sorting';
+		$limit = '';
+
+		// Set the table layout of the event list.
+		$tableLayout = array(
+			'table' => array(
+				'<table cellpadding="0" cellspacing="0" width="100%" '
+					.'class="typo3-dblist">',
+				'</table>'
+			),
+			array(
+				'tr' => array('<thead><tr>', '</tr></thead>'),
+				array('<td class="c-headLineTable">', '</td>'),
+				array('<td class="c-headLineTable">', '</td>'),
+				array('<td class="c-headLineTable">', '</td>'),
+				array('<td class="c-headLineTable">', '</td>'),
+				array('<td class="c-headLineTable">', '</td>'),
+				array('<td class="c-headLineTable">', '</td>'),
+				array('<td class="c-headLineTable">', '</td>'),
+			),
+			'defRow' => array(
+				'tr' => array('<tr>', '</tr>'),
+				'defCol' => array('<td>', '</td>'),
+			),
+		);
+
+		// Fill the first row of the table array with the header.
+		$table = array(
+			array(
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.date').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.title').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.attendees').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.attendees_min').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.attendees_max').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.enough_attendees').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.is_full').'</span>',
+			),
+		);
+
+		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
+		$seminarBag =& new $seminarBagClassname(
+			$queryWhere,
+			$additionalTables,
+			'',
+			$orderBy,
+			$limit
+		);
+
+		$seminarBag->createItemFromDbResult();
+
+		// Reset the result counter to the first element.
+		$seminarBag->resetToFirst();
+
+		while ($this->seminar =& $seminarBag->getCurrent()) {
+			// Add the result row to the table array.
+			$table[] = array(
+				$this->seminar->getDate(),
+				t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45),
+				$this->seminar->getAttendances(),
+				$this->seminar->getAttendancesMin(),
+				$this->seminar->getAttendancesMax(),
+				(!$this->seminar->hasEnoughAttendances()
+					? $LANG->getLL('no') : $LANG->getLL('yes')),
+				(!$this->seminar->isFull()
+					? $LANG->getLL('no') : $LANG->getLL('yes')),
+			);
+			$seminarBag->getNext();
+		}
+
+		// Output the table array using the tableLayout array with the template
+		// class.
+		$content .= $this->doc->table($table, $tableLayout);
+
+		$content .= $seminarBag->checkConfiguration();
+
+		return $content;
+	}
+
+	/**
+	 * Generates and prints out a registrations list.
+	 *
+	 * @return	string		the HTML source code to display
+	 *
+	 * @access	public
+	 */
+	function showRegistrationsList(){
+		global $LANG;
+
+		$content = '';
+
+		$content .= $LANG->getLL('notYetImplementedSubModule');
 
 		return $content;
 	}

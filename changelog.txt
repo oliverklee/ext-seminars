@@ -1,4 +1,5 @@
 0.5.0
+- Feature: New BE module: event lists (#279)
 - Fix: Fixed incorrectly spelled "timeframe" (#187)
 - Change: Added "number of seats" and "total price" on the "my-events" list (#491)
 - Fix: Added some missing entries in the static template (#493)
