@@ -285,7 +285,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
 	 * @param	object		the current FORMidable object
 	 *
-	 * @return	string		URL of the FE page with a message (or null if the confirmation page has not been submitted yet)
+	 * @return	string		complete URL of the FE page with a message (or null if the confirmation page has not been submitted yet)
 	 *
 	 * @access	public
 	 */
@@ -301,11 +301,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		if (!$pageId) {
 			$pageId = $this->plugin->getConfValueInteger('listPID', 'sDEF');
 		}
-		return $this->plugin->pi_getPageLink(
+
+		// We need to manually combine the base URL and the path to the page to
+		// redirect to. Without the baseURL as part of the returned URL, the
+		// combination of formidable and realURL will lead us into troubles with
+		// not existing URLs (and thus showing errors to the user).
+		$baseUrl = $this->getConfValueString('baseURL');
+		$redirectPath = $this->plugin->pi_getPageLink(
 			$pageId,
 			'',
 			array('tx_seminars_pi1[showUid]' => $this->seminar->getUid())
 		);
+
+		return $baseUrl.$redirectPath; 
 	}
 
 	/**
