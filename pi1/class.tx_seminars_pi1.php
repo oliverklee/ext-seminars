@@ -216,7 +216,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// $this->checkConfiguration as this would ignore any previous error
 		// messages.
 		$this->checkConfiguration();
-		$result .= $this->configurationCheck->getWrappedMessage();
+		$result .= $this->getWrappedConfigCheckMessage();
 
 		return $this->pi_wrapInBaseClass($result);
 	}

@@ -250,7 +250,7 @@ class tx_seminars_oe_configcheck {
 	 * directly and it doesn't need to get handled to other configcheck
 	 * objects.
 	 *
-	 * @return	string		$this->errorText wrapped by $this->wrap (or an empty string if there are not errors)
+	 * @return	string		$this->errorText wrapped by $this->wrap (or an empty string if there are no errors)
 	 *
 	 * @access	protected
 	 */

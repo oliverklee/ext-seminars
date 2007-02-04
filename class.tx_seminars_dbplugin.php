@@ -476,6 +476,28 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	}
 
 	/**
+	 * Returns an empty string if there are no configuration errors.
+	 * Otherwise, returns the wrapped error text.
+	 *
+	 * Use this method if you want to display this message pretty
+	 * directly and it doesn't need to get handled to other configcheck
+	 * objects.
+	 *
+	 * @return	string		the wrapped error text (or an empty string if there are no errors)
+	 *
+	 * @access	protected
+	 */
+	function getWrappedConfigCheckMessage() {
+		$result = '';
+
+		if ($this->configurationCheck) {
+			$result = $this->configurationCheck->getWrappedMessage();
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Provides data items from the DB.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
