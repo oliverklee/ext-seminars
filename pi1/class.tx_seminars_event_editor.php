@@ -230,23 +230,32 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Gets the URL of the page that should be displayed when an event has
-	 * been successfully created.
+	 * Gets the URL of the page that should be displayed when an event has been
+	 * successfully created.
 	 *
 	 * @param	array		optional third parameter to the _callUserObj function (unused)
 	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
 	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
-	 * @return	string		URL of the FE page with a message
+	 * @return	string		complete URL of the FE page with a message
 	 *
 	 * @access	public
 	 */
-	function getEventSuccessfullySavedUrl() {
-		return $this->plugin->pi_getPageLink(
-			$this->plugin->getConfValueInteger(
-				'eventSuccessfullySavedPID',
-				's_fe_editing')
+	function getEventSuccessfullySavedUrl($items, $params, &$form) {
+		// We need to manually combine the base URL and the path to the page to
+		// redirect to. Without the baseURL as part of the returned URL, the
+		// combination of formidable and realURL will lead us into troubles with
+		// not existing URLs (and thus showing errors to the user).
+		$pageId = $this->plugin->getConfValueInteger(
+			'eventSuccessfullySavedPID',
+			's_fe_editing'
 		);
+		$baseUrl = $this->getConfValueString('baseURL');
+		$redirectPath = $this->plugin->pi_getPageLink(
+			$pageId
+		);
+
+		return $baseUrl.$redirectPath; 
 	}
 
 	/**

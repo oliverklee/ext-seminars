@@ -1,6 +1,6 @@
 0.5.0
 - Fix: "additional_info" was in the list of allowed values for hideFields (#526)
-- Fix: Fixed issue when using realURL and trying to register to an event (#476)
+- Fix: Fixed issue when using realURL and trying to register to an event (#476, #531)
 - Fix: Crash when disabling the configuration check (#527)
 - Feature: New BE module: event lists (#279)
 - Fix: Fixed incorrectly spelled "timeframe" (#187)
