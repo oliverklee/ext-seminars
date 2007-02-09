@@ -1,3 +1,6 @@
+0.4.9
+- Fix: Crash of TYPO3 4.1 after setting plugin.tx_seminars.attendancesPID (#530)
+
 0.4.8 (released 2007-01-19)
 - Feature: Added some checking for the early bird prices and the deadline (#335)
 - Fix: Deletion of content elements in front-end editing mode fails (#322)
