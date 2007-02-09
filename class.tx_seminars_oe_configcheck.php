@@ -48,6 +48,8 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(PATH_t3lib.'class.t3lib_page.php');
+
 class tx_seminars_oe_configcheck {
 	/** the object whose configuration should be checked */
 	var $objectToCheck;
@@ -1116,11 +1118,13 @@ class tx_seminars_oe_configcheck {
 		if ($this->objectToCheck->hasConfValueString($fieldName, $sheet)) {
 			$pids = $this->objectToCheck->getConfValueString($fieldName, $sheet);
 
+			$pageSelect = t3lib_div::makeInstance('t3lib_pageSelect');
+
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'uid',
 				'pages',
 				'uid IN ('.$pids.') AND NOT (doktype'.$typeCondition.')'
-					.t3lib_pageSelect::enableFields('pages'),
+					.$pageSelect->enableFields('pages'),
 				'',
 				'',
 				'');
