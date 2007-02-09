@@ -1,4 +1,5 @@
 0.4.9
+- Fix: Ordering of seminars doesn't work with MySQL Version 4.1.21 (#500)
 - Fix: Crash of TYPO3 4.1 after setting plugin.tx_seminars.attendancesPID (#530)
 
 0.4.8 (released 2007-01-19)

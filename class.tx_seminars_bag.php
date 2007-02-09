@@ -148,7 +148,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 		}
 
 		$this->dbResult =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'DISTINCT '.$this->dbTableName.'.*',
+			$this->dbTableName.'.*',
 			$this->dbTableName.$this->additionalTableNames,
 			$this->queryParameters.$this->enabledFieldsQuery,
 			$this->groupBy,
