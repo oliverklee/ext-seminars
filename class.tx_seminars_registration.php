@@ -135,20 +135,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our title, containing:
-	 *  the attendee's full name,
-	 *  the seminar title,
-	 *  the seminar date
-	 *
-	 * @return	string		the attendance title
-	 *
-	 * @access	public
-	 */
-	function getTitle() {
-		return $this->getRecordPropertyString('title');
-	}
-
-	/**
 	 * Gets the number of seats that are registered with this registration.
 	 * If no value is saved in the record, 1 will be returned.
 	 *

@@ -129,17 +129,6 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our UID.
-	 *
-	 * @return	integer		our UID (or 0 if there is an error)
-	 *
-	 * @access	public
-	 */
-	function getUid() {
-		return $this->getRecordPropertyInteger('uid');
-	}
-
-	/**
 	 * Gets our topic's title. For date records, this will return the
 	 * corresponding topic record's title.
 	 *
@@ -161,7 +150,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getRealTitle() {
-		return $this->getRecordPropertyString('title');
+		return parent::getTitle();
 	}
 
 	/**

@@ -63,28 +63,6 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our UID.
-	 *
-	 * @return	integer		our UID (or 0 if there is an error)
-	 *
-	 * @access	public
-	 */
-	function getUid() {
-		return $this->getRecordPropertyInteger('uid');
-	}
-
-	/**
-	 * Gets our title.
-	 *
-	 * @return	string		our title (or '' if there is an error)
-	 *
-	 * @access	public
-	 */
-	function getTitle() {
-		return $this->getRecordPropertyString('title');
-	}
-
-	/**
 	 * Gets our organization.
 	 *
 	 * @return	string		our organization (or '' if there is an error)

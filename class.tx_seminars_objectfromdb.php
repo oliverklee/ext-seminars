@@ -336,6 +336,28 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 
 		return $result;
 	}
+
+	/**
+	 * Gets our UID.
+	 *
+	 * @return	integer		our UID (or 0 if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getUid() {
+		return $this->getRecordPropertyInteger('uid');
+	}
+
+	/**
+	 * Gets our title.
+	 *
+	 * @return	string		our title (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getTitle() {
+		return $this->getRecordPropertyString('title');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_objectfromdb.php']) {
