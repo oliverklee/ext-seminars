@@ -64,7 +64,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * Creates the current item in $this->currentItem, using $this->dbResult as a source.
 	 * If the current item cannot be created, $this->currentItem will be nulled out.
 	 *
-	 * $this->dbResult is ensured to be non-null when this function is called.
+	 * $this->dbResult must be ensured to be non-null when this function is called.
 	 *
 	 * @access	protected
 	 */
