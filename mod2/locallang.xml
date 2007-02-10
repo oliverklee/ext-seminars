@@ -12,6 +12,8 @@
 			<label index="title">Events</label>
 			<label index="subModuleTitle_registrations">Registrations</label>
 			<label index="subModuleTitle_events">Events</label>
+			<label index="subModuleTitle_speakers">Speakers</label>
+			<label index="subModuleTitle_organizers">Organizers</label>
 			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
@@ -20,6 +22,10 @@
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Enough</label>
 			<label index="eventlist.is_full">Full</label>
+			<label index="speakerlist.title">Name</label>
+			<label index="organizerlist.title">Name</label>
+			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.seminar.title">Event</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Arrangementer</label>
@@ -31,6 +37,8 @@
 			<label index="title">Veranstaltungen</label>
 			<label index="subModuleTitle_registrations">Anmeldungen</label>
 			<label index="subModuleTitle_events">Veranstaltungen</label>
+			<label index="subModuleTitle_speakers">ReferentInnen</label>
+			<label index="subModuleTitle_organizers">Veranstalter</label>
 			<label index="notYetImplementedSubModule">Dieses Submodul ist noch nicht implementiert.</label>
 			<label index="eventlist.date">Datum</label>
 			<label index="eventlist.title">Titel</label>
@@ -39,6 +47,10 @@
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Genug</label>
 			<label index="eventlist.is_full">Voll</label>
+			<label index="speakerlist.title">Name</label>
+			<label index="organizerlist.title">Name</label>
+			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.seminar.title">Veranstaltung</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -126,6 +138,8 @@
 			<label index="title" type="integer">142581619</label>
 			<label index="subModuleTitle_registrations" type="integer">170423130</label>
 			<label index="subModuleTitle_events" type="integer">142581619</label>
+			<label index="subModuleTitle_speakers" type="integer">258305227</label>
+			<label index="subModuleTitle_organizers" type="integer">68798680</label>
 			<label index="notYetImplementedSubModule" type="integer">127965110</label>
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
@@ -134,6 +148,8 @@
 			<label index="eventlist.attendees_max" type="integer">244016059</label>
 			<label index="eventlist.enough_attendees" type="integer">30455057</label>
 			<label index="eventlist.is_full" type="integer">196953872</label>
+			<label index="speakerlist.title" type="integer">77521672</label>
+			<label index="organizerlist.title" type="integer">77521672</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -229,6 +245,10 @@
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Enough</label>
 			<label index="eventlist.is_full">Full</label>
+			<label index="subModuleTitle_speakers">Speakers</label>
+			<label index="subModuleTitle_organizers">Organizers</label>
+			<label index="speakerlist.title">Name</label>
+			<label index="organizerlist.title">Name</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

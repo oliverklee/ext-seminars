@@ -113,6 +113,50 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks the configuration for: tx_seminars_speakerbag/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_speakerbag() {
+		$this->checkStaticIncluded();
+
+		return;
+	}
+
+	/**
+	 * Checks the configuration for: tx_seminars_speaker/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_speaker() {
+		$this->checkStaticIncluded();
+
+		return;
+	}
+
+	/**
+	 * Checks the configuration for: tx_seminars_organizerbag/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_organizerbag() {
+		$this->checkStaticIncluded();
+
+		return;
+	}
+
+	/**
+	 * Checks the configuration for: tx_seminars_organizer/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_organizer() {
+		$this->checkStaticIncluded();
+
+		return;
+	}
+
+	/**
 	 * Checks the configuration for: tx_seminars_pi1/seminar_registration.
 	 *
 	 * @access	private

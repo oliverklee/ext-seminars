@@ -37,9 +37,15 @@ require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speakerbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speaker.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
 
-$LANG->includeLLFile('EXT:seminars/mod2/locallang.php');
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
+$LANG->includeLLFile('EXT:seminars/mod2/locallang.php');
 
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
@@ -47,6 +53,15 @@ $BE_USER->modAccess($MCONF, 1);
 class tx_seminars_module2 extends t3lib_SCbase {
 	/** the seminar which we want to list/show */
 	var $seminar;
+
+	/** the speaker which we want to list/show */
+	var $speaker;
+
+	/** the organizer which we want to list/show */
+	var $organizer;
+
+	/** the registration which we want to list/show */
+	var $registration;
 
 	/**
 	 * Initializes some variables and also starts the initialization of the parent class.
@@ -112,6 +127,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->availableSubModules = array();
 			$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
 			$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
+			$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
+			$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
 
 			// generate the tab menu
 			$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
@@ -123,14 +140,19 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// Select which sub module to display.
 			// If no sub module is specified, a default page will be displayed.
 			switch ($this->subModule) {
-				case 1:
-					$this->content .= $this->showEventsList();
-					break;
 				case 2:
 					$this->content .= $this->showRegistrationsList();
 					break;
+				case 3:
+					$this->content .= $this->showSpeakersList();
+					break;
+				case 4:
+					$this->content .= $this->showOrganizersList();
+					break;
+				case 1:
+				// The fallthrough is intentional.
 				default:
-					$this->content .= $this->showMainPage();
+					$this->content .= $this->showEventsList();
 					break;
 			}
 
@@ -153,30 +175,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	}
 
 	/**
-	 * Generates and prints out the main page with an introduction about the
-	 * capabilities of this module.
-	 *
-	 * @return	string		the HTML source code to display
-	 *
-	 * @access	public
-	 */
-	function showMainPage() {
-		$content = '';
-
-		$content .= 'This page will be filled up with a short introduction and '
-			.'maybe needful shortcuts.';
-
-		return $content;
-	}
-
-	/**
 	 * Generates and prints out an event list.
 	 *
 	 * @return	string		the HTML source code of the event list
 	 *
 	 * @access	public
 	 */	
-	function showEventsList(){
+	function showEventsList() {
 		global $LANG;
 
 		// Initialize the variable for the HTML source code.
@@ -197,13 +202,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			),
 			array(
 				'tr' => array('<thead><tr>', '</tr></thead>'),
-				array('<td class="c-headLineTable">', '</td>'),
-				array('<td class="c-headLineTable">', '</td>'),
-				array('<td class="c-headLineTable">', '</td>'),
-				array('<td class="c-headLineTable">', '</td>'),
-				array('<td class="c-headLineTable">', '</td>'),
-				array('<td class="c-headLineTable">', '</td>'),
-				array('<td class="c-headLineTable">', '</td>'),
+				'defCol' => array('<td class="c-headLineTable">', '</td>'),
 			),
 			'defRow' => array(
 				'tr' => array('<tr>', '</tr>'),
@@ -240,11 +239,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$limit
 		);
 
-		$seminarBag->createItemFromDbResult();
-
-		// Reset the result counter to the first element.
-		$seminarBag->resetToFirst();
-
 		while ($this->seminar =& $seminarBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
@@ -277,12 +271,209 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 *
 	 * @access	public
 	 */
-	function showRegistrationsList(){
+	function showRegistrationsList() {
 		global $LANG;
 
+		// Initialize the variable for the HTML source code.
 		$content = '';
 
-		$content .= $LANG->getLL('notYetImplementedSubModule');
+		// Initialize variables for the database query.
+		$queryWhere = 'pid='.$this->id;
+		$additionalTables = '';
+		$orderBy = '';
+		$limit = '';
+
+		// Set the table layout of the event list.
+		$tableLayout = array(
+			'table' => array(
+				'<table cellpadding="0" cellspacing="0" width="100%" '
+					.'class="typo3-dblist">',
+				'</table>'
+			),
+			array(
+				'tr' => array('<thead><tr>', '</tr></thead>'),
+				'defCol' => array('<td class="c-headLineTable">', '</td>'),
+			),
+			'defRow' => array(
+				'tr' => array('<tr>', '</tr>'),
+				'defCol' => array('<td>', '</td>'),
+			),
+		);
+
+		// Fill the first row of the table array with the header.
+		$table = array(
+			array(
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('registrationlist.feuser.name').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('registrationlist.seminar.title').'</span>',
+			),
+		);
+
+		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
+		$registrationBag =& new $registrationBagClassname(
+			$queryWhere,
+			$additionalTables,
+			'',
+			$orderBy,
+			$limit
+		);
+
+		while ($this->registration =& $registrationBag->getCurrent()) {
+			$this->registration->getSeminar();
+			// Add the result row to the table array.
+			$table[] = array(
+				$this->registration->getUserName(),
+				$this->registration->seminar->getRealTitle(),
+			);
+			$registrationBag->getNext();
+		}
+
+		// Output the table array using the tableLayout array with the template
+		// class.
+		$content .= $this->doc->table($table, $tableLayout);
+
+		$content .= $registrationBag->checkConfiguration();
+
+		return $content;
+	}
+
+	/**
+	 * Generates and prints out a speakers list.
+	 *
+	 * @return	string		the HTML source code to display
+	 *
+	 * @access	public
+	 */
+	function showSpeakersList() {
+		global $LANG;
+
+		// Initialize the variable for the HTML source code.
+		$content = '';
+
+		// Initialize variables for the database query.
+		$queryWhere = 'pid='.$this->id;
+		$additionalTables = '';
+		$orderBy = '';
+		$limit = '';
+
+		// Set the table layout of the event list.
+		$tableLayout = array(
+			'table' => array(
+				'<table cellpadding="0" cellspacing="0" width="100%" '
+					.'class="typo3-dblist">',
+				'</table>'
+			),
+			array(
+				'tr' => array('<thead><tr>', '</tr></thead>'),
+				'defCol' => array('<td class="c-headLineTable">', '</td>'),
+			),
+			'defRow' => array(
+				'tr' => array('<tr>', '</tr>'),
+				'defCol' => array('<td>', '</td>'),
+			),
+		);
+
+		// Fill the first row of the table array with the header.
+		$table = array(
+			array(
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('speakerlist.title').'</span>',
+			),
+		);
+
+		$speakerBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_speakerbag');
+		$speakerBag =& new $speakerBagClassname(
+			$queryWhere,
+			$additionalTables,
+			'',
+			$orderBy,
+			$limit
+		);
+
+		while ($this->speaker =& $speakerBag->getCurrent()) {
+			// Add the result row to the table array.
+			$table[] = array(
+				$this->speaker->getTitle(),
+			);
+			$speakerBag->getNext();
+		}
+
+		// Output the table array using the tableLayout array with the template
+		// class.
+		$content .= $this->doc->table($table, $tableLayout);
+
+		$content .= $speakerBag->checkConfiguration();
+
+		return $content;
+	}
+
+	/**
+	 * Generates and prints out a organizers list.
+	 *
+	 * @return	string		the HTML source code to display
+	 *
+	 * @access	public
+	 */
+	function showOrganizersList() {
+		global $LANG;
+
+		// Initialize the variable for the HTML source code.
+		$content = '';
+
+		// Initialize variables for the database query.
+		$queryWhere = 'pid='.$this->id;
+		$additionalTables = '';
+		$orderBy = '';
+		$limit = '';
+
+		// Set the table layout of the event list.
+		$tableLayout = array(
+			'table' => array(
+				'<table cellpadding="0" cellspacing="0" width="100%" '
+					.'class="typo3-dblist">',
+				'</table>'
+			),
+			array(
+				'tr' => array('<thead><tr>', '</tr></thead>'),
+				'defCol' => array('<td class="c-headLineTable">', '</td>'),
+			),
+			'defRow' => array(
+				'tr' => array('<tr>', '</tr>'),
+				'defCol' => array('<td>', '</td>'),
+			),
+		);
+
+		// Fill the first row of the table array with the header.
+		$table = array(
+			array(
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('organizerlist.title').'</span>',
+			),
+		);
+
+		$organizerBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_organizerbag');
+		$organizerBag =& new $organizerBagClassname(
+			$queryWhere,
+			$additionalTables,
+			'',
+			$orderBy,
+			$limit
+		);
+
+		while ($this->organizer =& $organizerBag->getCurrent()) {
+			// Add the result row to the table array.
+			$table[] = array(
+				$this->organizer->getTitle(),
+			);
+			$organizerBag->getNext();
+		}
+
+		// Output the table array using the tableLayout array with the template
+		// class.
+		$content .= $this->doc->table($table, $tableLayout);
+
+		$content .= $organizerBag->checkConfiguration();
 
 		return $content;
 	}
