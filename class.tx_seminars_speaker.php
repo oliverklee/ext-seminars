@@ -52,7 +52,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 		$this->tableName = $this->tableSpeakers;
 
 		if (!$dbResult) {
-			$dbResult = $this->retrieveSpeaker($speakerUid);
+			$dbResult = $this->retrieveRecord($speakerUid);
 		}
 
 		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
@@ -61,67 +61,6 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 
 		return;
 	}
-
-	/**
-	 * Checks whether a non-deleted and non-hidden speaker with a given UID exists in the DB.
-	 *
-	 * This method may be called statically.
-	 *
-	 * @param	string		string with a UID (need not necessarily be escaped, will be intval'ed)
-	 *
-	 * @return	boolean		true if a visible speaker with that UID exists; false otherwise.
-	 *
-	 * @access	public
-	 */
-	function existsSpeaker($speakerUid) {
-		$result = is_numeric($speakerUid) && ($speakerUid);
-
-		if ($result) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'COUNT(*) AS num',
-				$this->tableSpeakers,
-				'uid='.intval($speakerUid)
-					.t3lib_pageSelect::enableFields($this->tableSpeakers),
-				'',
-				'',
-				'');
-
-			if ($dbResult) {
-				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				$result = ($dbResultAssoc['num'] == 1);
-			} else {
-				$result = false;
-			}
-		}
-
-		return (boolean) $result;
-	}
-
-	/**
-	 * Retrieves a speaker from the database.
-	 *
-	 * @param	integer		The UID of the speaker to retrieve from the DB.
-	 *
-	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
-	 *
-	 * @access	private
-	 */
-	 function retrieveSpeaker($speakerUid) {
-	 	if ($this->existsSpeaker($speakerUid)) {
-		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				$this->tableSpeakers,
-				'uid='.intval($speakerUid)
-					.t3lib_pageSelect::enableFields($this->tableSpeakers),
-				'',
-				'',
-				'1');
-	 	} else {
-	 		$result = null;
-	 	}
-
-		return $result;
-	 }
 
 	/**
 	 * Gets our UID.

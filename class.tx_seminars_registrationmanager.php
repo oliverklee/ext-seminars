@@ -30,6 +30,7 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 
@@ -201,7 +202,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	function existsSeminar($seminarUid) {
 		// We can't use t3lib_div::makeInstanceClassName in this case as we
 		// cannot use a class function when using a variable as class name.
-		return tx_seminars_seminar::existsSeminar($seminarUid);
+		return tx_seminars_objectfromdb::recordExists($seminarUid, $this->tableSeminars);
 	}
 
 	/**
@@ -220,7 +221,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		/** This is empty as long as no error has occured. */
 		$message = '';
 
-		if (!tx_seminars_seminar::existsSeminar($seminarUid)) {
+		if (!tx_seminars_objectfromdb::recordExists($seminarUid, $this->tableSeminars)) {
 			$message = $this->pi_getLL('message_wrongSeminarNumber');
 			header('Status: 404 Not Found');
 		}

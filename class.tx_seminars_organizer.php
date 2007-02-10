@@ -52,7 +52,7 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 		$this->tableName = $this->tableOrganizers;
 
 		if (!$dbResult) {
-			$dbResult = $this->retrieveOrganizer($organizerUid);
+			$dbResult = $this->retrieveRecord($organizerUid);
 		}
 
 		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
@@ -61,67 +61,6 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 
 		return;
 	}
-
-	/**
-	 * Checks whether a non-deleted and non-hidden organizer with a given UID exists in the DB.
-	 *
-	 * This method may be called statically.
-	 *
-	 * @param	string		string with a UID (need not necessarily be escaped, will be intval'ed)
-	 *
-	 * @return	boolean		true if a visible organizer with that UID exists; false otherwise.
-	 *
-	 * @access	public
-	 */
-	function existsOrganizer($organizerUid) {
-		$result = is_numeric($organizerUid) && ($organizerUid);
-
-		if ($result) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'COUNT(*) AS num',
-				$this->tableOrganizers,
-				'uid='.intval($organizerUid)
-					.t3lib_pageSelect::enableFields($this->tableOrganizers),
-				'',
-				'',
-				'');
-
-			if ($dbResult) {
-				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				$result = ($dbResultAssoc['num'] == 1);
-			} else {
-				$result = false;
-			}
-		}
-
-		return (boolean) $result;
-	}
-
-	/**
-	 * Retrieves a organizer from the database.
-	 *
-	 * @param	integer		The UID of the organizer to retrieve from the DB.
-	 *
-	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
-	 *
-	 * @access	private
-	 */
-	 function retrieveOrganizer($organizerUid) {
-	 	if ($this->existsOrganizer($organizerUid)) {
-		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				$this->tableOrganizers,
-				'uid='.intval($organizerUid)
-					.t3lib_pageSelect::enableFields($this->tableOrganizers),
-				'',
-				'',
-				'1');
-	 	} else {
-	 		$result = null;
-	 	}
-
-		return $result;
-	 }
 
 	/**
 	 * Gets our UID.

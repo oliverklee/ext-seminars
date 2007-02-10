@@ -29,6 +29,7 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('ameos_formidable').'api/class.tx_ameosformidable.php');
@@ -303,7 +304,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		// Only do the DB query if we are okay so far and an event UID has
 		// been provided for editing.
 		if ($isOkay && $seminarUid) {
-			if (tx_seminars_seminar::existsSeminar($seminarUid)) {
+			if (tx_seminars_objectfromdb::recordExists($seminarUid, $this->tableSeminars)) {
 				/** Name of the seminar class in case someone subclasses it. */
 				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 				$seminar =& new $seminarClassname($seminarUid);

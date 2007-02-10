@@ -27,6 +27,7 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
@@ -917,7 +918,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createSeminar($seminarUid) {
 		$result = false;
 
-		if (tx_seminars_seminar::existsSeminar($seminarUid)) {
+		if (tx_seminars_objectfromdb::recordExists($seminarUid, $this->tableSeminars)) {
 			/** Name of the seminar class in case someone subclasses it. */
 			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 			$this->seminar =& new $seminarClassname($seminarUid);

@@ -69,7 +69,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		$this->tableName = $this->tableSeminars;
 
 		if (!$dbResult) {
-			$dbResult = $this->retrieveSeminar($seminarUid);
+			$dbResult = $this->retrieveRecord($seminarUid);
 		}
 
 		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
@@ -127,67 +127,6 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			array('tx_seminars_pi1[showUid]' => $this->getUid())
 		);
 	}
-
-	/**
-	 * Checks whether a non-deleted and non-hidden seminar with a given UID exists in the DB.
-	 *
-	 * This method may be called statically.
-	 *
-	 * @param	string		string with a UID (need not necessarily be escaped, will be intval'ed)
-	 *
-	 * @return	boolean		true if a visible seminar with that UID exists; false otherwise.
-	 *
-	 * @access	public
-	 */
-	function existsSeminar($seminarUid) {
-		$result = is_numeric($seminarUid) && ($seminarUid);
-
-		if ($result) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'COUNT(*) AS num',
-				$this->tableSeminars,
-				'uid='.intval($seminarUid)
-					.t3lib_pageSelect::enableFields($this->tableSeminars),
-				'',
-				'',
-				'');
-
-			if ($dbResult) {
-				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				$result = ($dbResultAssoc['num'] == 1);
-			} else {
-				$result = false;
-			}
-		}
-
-		return (boolean) $result;
-	}
-
-	/**
-	 * Retrieves a seminar from the database.
-	 *
-	 * @param	integer		The UID of the seminar to retrieve from the DB.
-	 *
-	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
-	 *
-	 * @access	private
-	 */
-	 function retrieveSeminar($seminarUid) {
-	 	if ($this->existsSeminar($seminarUid)) {
-		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				$this->tableSeminars,
-				'uid='.intval($seminarUid)
-					.t3lib_pageSelect::enableFields($this->tableSeminars),
-				'',
-				'',
-				'1');
-	 	} else {
-	 		$result = null;
-	 	}
-
-		return $result;
-	 }
 
 	/**
 	 * Gets our UID.
@@ -2065,7 +2004,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 		// Check whether this event has an topic set.
 		if ($this->hasRecordPropertyInteger('topic')) {
-			if (tx_seminars_seminar::existsSeminar($this->getRecordPropertyInteger('topic'))) {
+			if (tx_seminars_objectfromdb::recordExists($this->getRecordPropertyInteger('topic'), $this->tableSeminars)) {
 			/** Name of the seminar class in case someone subclasses it. */
 				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 				$result =& new $seminarClassname($this->getRecordPropertyInteger('topic'));

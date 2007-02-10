@@ -269,6 +269,73 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 
 		return $result;
 	}
+
+	/**
+	 * Checks whether a non-deleted and non-hidden record with a given UID exists in the DB.
+	 *
+	 * This method may be called statically.
+	 *
+	 * @param	string		string with a UID (need not necessarily be escaped, will be intval'ed)
+	 * @param	string		string with the tablename where the UID should be searched for
+	 *
+	 * @return	boolean		true if a visible record with that UID exists; false otherwise.
+	 *
+	 * @access	protected
+	 */
+	function recordExists($uid, $tableName) {
+		$result = is_numeric($uid) && ($uid);
+
+		if ($result && !empty($tableName)) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'COUNT(*) AS num',
+				$tableName,
+				'uid='.intval($uid)
+					.t3lib_pageSelect::enableFields($tableName),
+				'',
+				'',
+				'');
+
+			if ($dbResult) {
+				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+				$result = ($dbResultAssoc['num'] == 1);
+			} else {
+				$result = false;
+			}
+		} else {
+			$result = false;
+		}
+
+		return (boolean) $result;
+	}
+
+	/**
+	 * Retrieves a record from the database.
+	 * 
+	 * The record is retrieved from $this->tableName. Therefore $this->tableName
+	 * has to be set before calling this method.
+	 *
+	 * @param	integer		The UID of the record to retrieve from the DB.
+	 *
+	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
+	 *
+	 * @access	protected
+	 */
+	function retrieveRecord($uid) {
+	 	if ($this->recordExists($uid, $this->tableName)) {
+		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'*',
+				$this->tableName,
+				'uid='.intval($uid)
+					.t3lib_pageSelect::enableFields($this->tableName),
+				'',
+				'',
+				'1');
+	 	} else {
+	 		$result = null;
+	 	}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_objectfromdb.php']) {
