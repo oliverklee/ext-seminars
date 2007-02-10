@@ -150,7 +150,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$this->content .= $this->showOrganizersList();
 					break;
 				case 1:
-				// The fallthrough is intentional.
+					// The fallthrough is intentional.
 				default:
 					$this->content .= $this->showEventsList();
 					break;
