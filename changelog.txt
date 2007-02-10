@@ -1,6 +1,4 @@
 0.5.0
-- Change: Move up getTitle() and getUid() to the objectFromDb class (#539)
-- Change: Move most of seminar::existsSeminar/speaker::existsSpeaker to the objectFromDb class (#538)
 - Feature: Extend BE module "events" with submodules (#509)
 - Fix: Ordering of seminars doesn't work with MySQL Version 4.1.21 (#500)
 - Fix: Crash of TYPO3 4.1 after setting plugin.tx_seminars.attendancesPID (#530)
@@ -62,7 +60,7 @@
 - Fix: Typo in the configuration check (#387)
 - Fix: Event still open for registration after registration deadline is over (#348)
 - Fix: Configuration check warning with showFeUserFieldsInNotificationMail (#359)
-- Code cleanup and refactoring (#351)
+- Code cleanup and refactoring (#351, #538, #539)
 - Feature: Allow manual sorting of event records in the BE (#350)
 - Feature: Allow for cent prices (#324)
 - Fix: Make the DB selector boxes a bit higher (#369)
