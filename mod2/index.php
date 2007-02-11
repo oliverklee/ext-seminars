@@ -98,9 +98,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 
 		$this->content = '';
 
-		// Read the selected sub module (from the tab menu) and make it available within this class.
-		$this->subModule = t3lib_div::_GET('subModule');
-
 		/**
 		 * This variable will hold the information about the page. It will only be filled with values
 		 * if the user has access to the page.
@@ -129,6 +126,14 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
 			$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
 			$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
+
+			// Read the selected sub module (from the tab menu) and make it available within this class.
+			$this->subModule = intval(t3lib_div::_GET('subModule'));
+
+			// If $this->subModule is not a key of $this->availableSubModules, set it to 1 so the first tab is activated.
+			if (!array_key_exists($this->subModule, $this->availableSubModules)) {
+				$this->subModule = 1;
+			}
 
 			// generate the tab menu
 			$this->content .= $this->doc->getTabMenu(array('id' => $this->id),

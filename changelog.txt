@@ -1,11 +1,10 @@
 0.5.0
-- Feature: Extend BE module "events" with submodules (#509)
+- Feature: New BE module: event list, registration list, speaker list and organizer list (#279, #509, #543)
 - Fix: Ordering of seminars doesn't work with MySQL Version 4.1.21 (#500)
 - Fix: Crash of TYPO3 4.1 after setting plugin.tx_seminars.attendancesPID (#530)
 - Fix: "additional_info" was in the list of allowed values for hideFields (#526)
 - Fix: Fixed issue when using realURL and trying to register to an event (#476, #531)
 - Fix: Crash when disabling the configuration check (#527)
-- Feature: New BE module: event lists (#279)
 - Fix: Fixed incorrectly spelled "timeframe" (#187)
 - Change: Added "number of seats" and "total price" on the "my-events" list (#491)
 - Fix: Added some missing entries in the static template (#493)
