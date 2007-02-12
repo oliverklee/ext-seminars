@@ -842,15 +842,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			// Hide unneeded columns from the list.
-			$this->readSubPartsToHide('listheader_wrapper_title,listitem_wrapper_title,'
-				.'listheader_wrapper_list_registrations,listitem_wrapper_list_registrations'
-			);
+			$temporaryHiddenColumns = 'listheader_wrapper_title,listitem_wrapper_title,'
+				.'listheader_wrapper_list_registrations,listitem_wrapper_list_registrations';
+			$this->readSubPartsToHide($temporaryHiddenColumns);
 
 			$tableOtherDates = $this->createListTable($seminarBag);
 
 			$this->setMarkerContent('table_otherdates', $tableOtherDates);
 
 			$result = $this->substituteMarkerArrayCached('OTHERDATES_VIEW');
+
+			// Un-hide the previously hidden columns.
+			$hiddenColumns = $this->getConfValueString('hideColumns', 's_template_special');
+			$this->readSubpartsToUnhide($temporaryHiddenColumns, $hiddenColumns);
 		}
 
 		// Let warnings from the seminar and the seminar bag bubble up to us.
