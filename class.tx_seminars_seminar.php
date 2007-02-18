@@ -2230,6 +2230,41 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets the PID of the system folder where the registration records of this
+	 * event should be stored. If no folder is set in this event's topmost
+	 * organizer record (ie. the page configured in
+	 * plugin.tx_seminars.attendancesPID should be used), this function will
+	 * return 0.
+	 *
+	 * @return	integer		the PID of the systen folder where registration records for this event should be stored (or 0 if no folder is set)
+	 *
+	 * @access	public
+	 */
+	function getAttendancesPid() {
+		$result = 0;
+
+		if ($this->hasOrganizers()) {
+			$organizerUids = explode(',', $this->getRecordPropertyString('organizers'));
+			$firstOrganizerData =& $this->retrieveOrganizer($organizerUids[0]);
+			$result = $firstOrganizerData['attendances_pid'];
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether this event's topmost organizer has a PID set to store the
+	 * registration records in.
+	 *
+	 * @return	boolean		true if a the systen folder for registration records is specified in this event's topmost organizers record, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasAttendancesPid() {
+		return (boolean) $this->getAttendancesPid();
+	}
+
+	/**
 	 * Checks whether the logged-in FE user is the owner of this event.
 	 *
 	 * @return	boolean		true if a FE user is logged in and the user is the owner of this event, false otherwise

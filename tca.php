@@ -1086,9 +1086,22 @@ $TCA['tx_seminars_organizers'] = Array (
 				'rows' => '5',
 			)
 		),
+		'attendances_pid' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers.attendances_pid',
+			'config' => Array (
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'pages',
+				'size' => '1',
+				'maxitems' => '1',
+				'minitems' => '0',
+				'show_thumbs' => '1'
+			)
+		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer')
+		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer, attendances_pid')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => '')

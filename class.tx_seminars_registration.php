@@ -136,7 +136,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['known_from'] = $registrationData['known_from'];
 		$this->recordData['notes'] = $registrationData['notes'];
 
-		$this->recordData['pid'] = $this->getConfValueInteger('attendancesPID');
+		$this->recordData['pid'] = $this->seminar->hasAttendancesPid()
+			? $this->seminar->getAttendancesPid()
+			: $this->getConfValueInteger('attendancesPID');
 
 		if ($this->isOk()) {
 			// Store the user data in $this->userData.

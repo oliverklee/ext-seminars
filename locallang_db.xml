@@ -101,6 +101,7 @@
 			<label index="tx_seminars_organizers.homepage"></label>
 			<label index="tx_seminars_organizers.email"></label>
 			<label index="tx_seminars_organizers.email_footer"></label>
+			<label index="tx_seminars_organizers.attendances_pid"></label>
 			<label index="tx_seminars_payment_methods"></label>
 			<label index="tx_seminars_payment_methods.title"></label>
 			<label index="tx_seminars_payment_methods.description"></label>
@@ -215,6 +216,7 @@
 			<label index="tx_seminars_organizers.homepage">Homepage</label>
 			<label index="tx_seminars_organizers.email">E-mail address</label>
 			<label index="tx_seminars_organizers.email_footer">Footer text for confirmation e-mails:</label>
+			<label index="tx_seminars_organizers.attendances_pid">SysFolder to store the registration records in</label>
 			<label index="tx_seminars_payment_methods">Methods of payment</label>
 			<label index="tx_seminars_payment_methods.title">Title</label>
 			<label index="tx_seminars_payment_methods.description">Detailed description for e-mails:</label>
@@ -329,6 +331,7 @@
 			<label index="tx_seminars_organizers.homepage">Homepage</label>
 			<label index="tx_seminars_organizers.email">E-Mail-Adresse</label>
 			<label index="tx_seminars_organizers.email_footer">Text, der an Bestätigungsmails angehängt wird:</label>
+			<label index="tx_seminars_organizers.attendances_pid">SysOrdner, in dem die Anmeldungen gespeichert werden sollen</label>
 			<label index="tx_seminars_payment_methods">Zahlungsarten</label>
 			<label index="tx_seminars_payment_methods.title">Titel</label>
 			<label index="tx_seminars_payment_methods.description">Detaillierte Beschreibung für E-Mails:</label>
@@ -597,6 +600,7 @@
 			<label index="tx_seminars_organizers.homepage" type="integer">54130594</label>
 			<label index="tx_seminars_organizers.email" type="integer">146136420</label>
 			<label index="tx_seminars_organizers.email_footer" type="integer">182634979</label>
+			<label index="tx_seminars_organizers.attendances_pid" type="integer">206573701</label>
 			<label index="tx_seminars_payment_methods" type="integer">175386290</label>
 			<label index="tx_seminars_payment_methods.title" type="integer">192455458</label>
 			<label index="tx_seminars_payment_methods.description" type="integer">189468887</label>
@@ -851,6 +855,7 @@
 			<label index="tx_seminars_organizers.homepage">Homepage</label>
 			<label index="tx_seminars_organizers.email">E-mail address</label>
 			<label index="tx_seminars_organizers.email_footer">Footer text for confirmation e-mails:</label>
+			<label index="tx_seminars_organizers.attendances_pid">SysFolder to store the registration records in</label>
 			<label index="tx_seminars_payment_methods">Methods of payment</label>
 			<label index="tx_seminars_payment_methods.title">Title</label>
 			<label index="tx_seminars_payment_methods.description">Detailed description for e-mails:</label>
