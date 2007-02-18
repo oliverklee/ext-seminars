@@ -288,6 +288,26 @@
 			</process>
 		</renderlet:HIDDEN>
 
+		<renderlet:HIDDEN name="kids">
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noKidsNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="kids" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+
 		<renderlet:HIDDEN name="interests">
 			<process>
 				<userobj>

@@ -1,4 +1,5 @@
 0.5.0
+- Feature: Add integer field "number of kids" to the attendance record, the registration form, the thank-you and notification e-mails (#452)
 - Feature: Add data type "food type" and allow to select records in the event records (#449)
 - Feature: Add data type "lodging" and allow to select records in the event records (#445)
 - Change: BE editing of event records: Only show the registration-related fields if registration is enabled for this event (#575)

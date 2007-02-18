@@ -19,6 +19,7 @@
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
+			<label index="label_kids">Number of kids</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
@@ -116,6 +117,7 @@ someone just has registered for an event:</label>
 			<label index="label_seats">Plätze</label>
 			<label index="label_total_price">Gesamtpreis</label>
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen</label>
+			<label index="label_kids">Anzahl Kinder</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_special">Spezialpreis</label>
@@ -326,6 +328,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_attendees_names" type="integer">168936155</label>
+			<label index="label_kids" type="integer">18594081</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_special" type="integer">35819210</label>
@@ -485,6 +488,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
+			<label index="label_kids">Number of kids</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>

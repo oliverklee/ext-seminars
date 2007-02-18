@@ -109,6 +109,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['total_price'] = $registrationData['total_price'];
 		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
+		$this->recordData['kids'] = $registrationData['kids'];
+
 		$this->recordData['method_of_payment'] = $registrationData['method_of_payment'];
 		$this->recordData['account_number'] = $registrationData['account_number'];
 		$this->recordData['bank_code'] = $registrationData['bank_code'];
@@ -463,6 +465,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->setMarkerContent('attendees_names', $this->getRecordPropertyString('attendees_names'));
 		} else {
 			$this->readSubpartsToHide('attendees_names', 'field_wrapper');
+		}
+
+		if ($this->hasRecordPropertyInteger('kids')) {
+			$this->setMarkerContent('kids', $this->getRecordPropertyInteger('kids'));
+		} else {
+			$this->readSubpartsToHide('kids', 'field_wrapper');
 		}
 
 		if ($this->seminar->hasAccreditationNumber()) {

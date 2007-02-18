@@ -179,6 +179,7 @@ CREATE TABLE tx_seminars_attendances (
 	notes text NOT NULL,
 	seats int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_names text NOT NULL,
+	kids int(11) unsigned DEFAULT '0' NOT NULL,
 	checkboxes int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),

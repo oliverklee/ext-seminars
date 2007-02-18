@@ -93,6 +93,7 @@
 			<label index="tx_seminars_attendances.notes"></label>
 			<label index="tx_seminars_attendances.seats"></label>
 			<label index="tx_seminars_attendances.attendees_names"></label>
+			<label index="tx_seminars_attendances.kids"></label>
 			<label index="tx_seminars_sites"></label>
 			<label index="tx_seminars_sites.title"></label>
 			<label index="tx_seminars_sites.address"></label>
@@ -215,6 +216,7 @@
 			<label index="tx_seminars_attendances.notes">Additional notes:</label>
 			<label index="tx_seminars_attendances.seats">Number of seats:</label>
 			<label index="tx_seminars_attendances.attendees_names">Additional attendees:</label>
+			<label index="tx_seminars_attendances.kids">Number of kids:</label>
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name</label>
 			<label index="tx_seminars_sites.address">Address</label>
@@ -337,6 +339,7 @@
 			<label index="tx_seminars_attendances.notes">Weitere Mitteilungen:</label>
 			<label index="tx_seminars_attendances.seats">Anzahl Plätze:</label>
 			<label index="tx_seminars_attendances.attendees_names">Zusätzlich angemeldete Personen:</label>
+			<label index="tx_seminars_attendances.kids">Anzahl Kinder:</label>
 			<label index="tx_seminars_sites">Veranstaltungsorte</label>
 			<label index="tx_seminars_sites.title">Name</label>
 			<label index="tx_seminars_sites.address">Adresse</label>
@@ -613,6 +616,7 @@
 			<label index="tx_seminars_attendances.notes" type="integer">67236517</label>
 			<label index="tx_seminars_attendances.seats" type="integer">134941724</label>
 			<label index="tx_seminars_attendances.attendees_names" type="integer">198880077</label>
+			<label index="tx_seminars_attendances.kids" type="integer">7953511</label>
 			<label index="tx_seminars_sites" type="integer">79939835</label>
 			<label index="tx_seminars_sites.title" type="integer">77521672</label>
 			<label index="tx_seminars_sites.address" type="integer">232242979</label>
@@ -875,6 +879,7 @@
 			<label index="tx_seminars_attendances.notes">Additional notes:</label>
 			<label index="tx_seminars_attendances.seats">Number of seats:</label>
 			<label index="tx_seminars_attendances.attendees_names">Additional attendees:</label>
+			<label index="tx_seminars_attendances.kids">Number of kids:</label>
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name</label>
 			<label index="tx_seminars_sites.address">Address</label>
