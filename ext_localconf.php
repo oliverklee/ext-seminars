@@ -30,6 +30,9 @@ t3lib_extMgm::addUserTSConfig('
 t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_checkboxes=1
 ');
+t3lib_extMgm::addUserTSConfig('
+	options.saveDocNew.tx_seminars_lodgings=1
+');
 
 
 // Adds our custom function to a hook in t3lib/class.t3lib_tcemain.php
