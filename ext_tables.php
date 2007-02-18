@@ -220,6 +220,20 @@ $TCA['tx_seminars_lodgings'] = Array (
 	),
 );
 
+$TCA['tx_seminars_foods'] = Array (
+	'ctrl' => Array (
+		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_foods',
+		'label' => 'title',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'default_sortby' => 'ORDER BY title',
+		'delete' => 'deleted',
+		'dynamicConfigFile' => $extPath.'tca.php',
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_foods.gif',
+	),
+);
+
 t3lib_extMgm::addToInsertRecords('tx_seminars_seminars');
 t3lib_extMgm::addToInsertRecords('tx_seminars_speakers');
 
@@ -235,6 +249,7 @@ t3lib_extMgm::allowTableOnStandardPages('tx_seminars_sites');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_speakers');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_checkboxes');
 t3lib_extMgm::allowTableOnStandardPages('tx_seminars_lodgings');
+t3lib_extMgm::allowTableOnStandardPages('tx_seminars_foods');
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,pages,recursive';
 

@@ -52,6 +52,7 @@
 			<label index="tx_seminars_seminars.additional_times_places"></label>
 			<label index="tx_seminars_seminars.divLabelLodging"></label>
 			<label index="tx_seminars_seminars.lodgings"></label>
+			<label index="tx_seminars_seminars.foods"></label>
 			<label index="tx_seminars_seminars.divLabelPayment"></label>
 			<label index="tx_seminars_seminars.price_regular"></label>
 			<label index="tx_seminars_seminars.price_special"></label>
@@ -111,6 +112,8 @@
 			<label index="tx_seminars_checkboxes.title"></label>
 			<label index="tx_seminars_lodgings"></label>
 			<label index="tx_seminars_lodgings.title"></label>
+			<label index="tx_seminars_foods"></label>
+			<label index="tx_seminars_foods.title"></label>
 			<label index="tt_content.list_type_pi1"></label>
 		</labelContext>
 	</meta>
@@ -156,8 +159,9 @@
 			<label index="tx_seminars_seminars.place">Place</label>
 			<label index="tx_seminars_seminars.room">Room</label>
 			<label index="tx_seminars_seminars.additional_times_places">Times and places</label>
-			<label index="tx_seminars_seminars.divLabelLodging">Lodging</label>
+			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options</label>
+			<label index="tx_seminars_seminars.foods">Available food options</label>
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees</label>
@@ -232,6 +236,8 @@
 			<label index="tx_seminars_checkboxes.title">Title</label>
 			<label index="tx_seminars_lodgings">Lodging options</label>
 			<label index="tx_seminars_lodgings.title">Title</label>
+			<label index="tx_seminars_foods">Food options</label>
+			<label index="tx_seminars_foods.title">Title</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -275,8 +281,9 @@
 			<label index="tx_seminars_seminars.place">Ort</label>
 			<label index="tx_seminars_seminars.room">Raum</label>
 			<label index="tx_seminars_seminars.additional_times_places">Zeiten und Orte</label>
-			<label index="tx_seminars_seminars.divLabelLodging">Unterbringung</label>
+			<label index="tx_seminars_seminars.divLabelLodging">Wohnen/Essen</label>
 			<label index="tx_seminars_seminars.lodgings">Verfügbare Unterbringungsmöglichkeiten</label>
+			<label index="tx_seminars_seminars.foods">Verfügbare Verpflegungsmöglichkeiten</label>
 			<label index="tx_seminars_seminars.divLabelAttendees">Teilnehmer</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimale Anzahl TeilnehmerInnen</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen</label>
@@ -351,6 +358,8 @@
 			<label index="tx_seminars_checkboxes.title">Titel</label>
 			<label index="tx_seminars_lodgings">Unterbringungsmöglichkeiten</label>
 			<label index="tx_seminars_lodgings.title">Titel</label>
+			<label index="tx_seminars_foods">Verpflegungsmöglichkeiten</label>
+			<label index="tx_seminars_foods.title">Titel</label>
 			<label index="tt_content.list_type_pi1">Seminar-Manager</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -549,8 +558,9 @@
 			<label index="tx_seminars_seminars.place" type="integer">129617664</label>
 			<label index="tx_seminars_seminars.room" type="integer">214150095</label>
 			<label index="tx_seminars_seminars.additional_times_places" type="integer">178250458</label>
-			<label index="tx_seminars_seminars.divLabelLodging" type="integer">71303596</label>
+			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
 			<label index="tx_seminars_seminars.lodgings" type="integer">64052058</label>
+			<label index="tx_seminars_seminars.foods" type="integer">68306900</label>
 			<label index="tx_seminars_seminars.divLabelAttendees" type="integer">12580046</label>
 			<label index="tx_seminars_seminars.attendees_min" type="integer">173583662</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">79420038</label>
@@ -624,6 +634,8 @@
 			<label index="tx_seminars_checkboxes.title" type="integer">192455458</label>
 			<label index="tx_seminars_lodgings" type="integer">226619047</label>
 			<label index="tx_seminars_lodgings.title" type="integer">192455458</label>
+			<label index="tx_seminars_foods" type="integer">202329490</label>
+			<label index="tx_seminars_foods.title" type="integer">192455458</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 			<label index="tx_seminars_attendances.price" type="integer">193408353</label>
 		</languageKey>
@@ -803,8 +815,9 @@
 			<label index="tx_seminars_seminars.place">Place</label>
 			<label index="tx_seminars_seminars.room">Room</label>
 			<label index="tx_seminars_seminars.additional_times_places">Times and places</label>
-			<label index="tx_seminars_seminars.divLabelLodging">Lodging</label>
+			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options</label>
+			<label index="tx_seminars_seminars.foods">Available food options</label>
 			<label index="tx_seminars_seminars.speakers">Speakers</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price</label>
 			<label index="tx_seminars_seminars.price_special">Special price</label>
@@ -883,6 +896,8 @@
 			<label index="tx_seminars_checkboxes.title">Title</label>
 			<label index="tx_seminars_lodgings">Lodging options</label>
 			<label index="tx_seminars_lodgings.title">Title</label>
+			<label index="tx_seminars_foods">Food options</label>
+			<label index="tx_seminars_foods.title">Title</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline</label>
 			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird)</label>

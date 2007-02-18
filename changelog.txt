@@ -1,4 +1,5 @@
 0.5.0
+- Feature: Add data type "food type" and allow to select records in the event records (#449)
 - Feature: Add data type "lodging" and allow to select records in the event records (#445)
 - Change: BE editing of event records: Only show the registration-related fields if registration is enabled for this event (#575)
 - Feature: Add a field "folder for registration records" to the organizer records (#465)
