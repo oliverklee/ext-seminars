@@ -61,6 +61,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tableAttendances;
 	var $tablePaymentMethods;
 	var $tableEventTypes;
+	var $tableCheckboxes;
+	var $tableSeminarsCheckboxesMM;
+	var $tableAttendancesCheckboxesMM;
 
 	// Constants for the types of records
 	var $recordTypeComplete;
@@ -170,10 +173,13 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableAttendances    = $dbPrefix.'attendances';
 		$this->tablePaymentMethods = $dbPrefix.'payment_methods';
 		$this->tableEventTypes     = $dbPrefix.'event_types';
+		$this->tableCheckboxes     = $dbPrefix.'checkboxes';
 
-		$this->tableVipsMM         = $dbPrefix.'seminars_feusers_mm';
-		$this->tableSpeakersMM     = $dbPrefix.'seminars_speakers_mm';
-		$this->tableSitesMM        = $dbPrefix.'seminars_place_mm';
+		$this->tableVipsMM                  = $dbPrefix.'seminars_feusers_mm';
+		$this->tableSpeakersMM              = $dbPrefix.'seminars_speakers_mm';
+		$this->tableSitesMM                 = $dbPrefix.'seminars_place_mm';
+		$this->tableSeminarsCheckboxesMM    = $dbPrefix.'seminars_checkboxes_mm';
+		$this->tableAttendancesCheckboxesMM = $dbPrefix.'attendances_checkboxes_mm';
 
 		return;
 	}

@@ -144,7 +144,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * Gets our direct title. Even for date records, this will return our
 	 * direct title (which is visible in the back end) instead of the
 	 * corresponding topic record's title.
-	 * 
+	 *
 	 * @return	string	our direct title (or '' if there is an error)
 	 *
 	 * @access	public
@@ -1150,7 +1150,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function getAttendancesMin() {
 		return $this->getRecordPropertyInteger('attendees_min');
 	}
-	
+
 	/**
 	 * Gets the maximum number of attendances for this event
 	 * (the total number of seats for this event).
@@ -2170,6 +2170,60 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$result = $this->topic->getRecordPropertyDecimal($key);
 		} else {
 			$result = $this->getRecordPropertyDecimal($key);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether we have any option checkboxes. If we are a date record,
+	 * the corresponding topic record will be checked.
+	 *
+	 * @return	boolean		true if we have at least one option checkbox, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasCheckboxes() {
+		return $this->hasTopicInteger('checkboxes');
+	}
+
+	/**
+	 * Gets the option checkboxes associated with this event. If we are a date
+	 * record, the option checkboxes of the corresponding topic record will be
+	 * retrieved.
+	 *
+	 * @return	array		an array of option checkboxes, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function getCheckboxes() {
+		$result = array();
+		$where = 'EXISTS (SELECT * FROM '.$this->tableSeminarsCheckboxesMM
+					.' WHERE '.$this->tableSeminarsCheckboxesMM.'.uid_local='
+					.$this->getTopicInteger('uid').' AND '
+					.$this->tableSeminarsCheckboxesMM.'.uid_foreign='
+					.$this->tableCheckboxes.'.uid)'
+					.t3lib_pageSelect::enableFields($this->tableCheckboxes);
+
+		if ($this->hasCheckboxes()) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'uid, title, sorting',
+				$this->tableCheckboxes.', '.$this->tableSeminarsCheckboxesMM,
+				'uid_local='.$this->getTopicInteger('uid').' AND uid_foreign=uid'
+					.t3lib_pageSelect::enableFields($this->tableCheckboxes),
+				'',
+				'sorting'
+			);
+
+			if ($dbResult) {
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+					$result[] = array(
+						'caption' => $row['title'],
+						'value'   => $row['uid']
+					);
+				}
+			}
+
 		}
 
 		return $result;

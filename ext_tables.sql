@@ -88,6 +88,7 @@ CREATE TABLE tx_seminars_seminars (
 	is_full tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,
 	vips int(11) DEFAULT '0' NOT NULL,
+	checkboxes int(11) DEFAULT '0' NOT NULL,
 	notes text NOT NULL,
 
 	PRIMARY KEY (uid),
@@ -176,6 +177,7 @@ CREATE TABLE tx_seminars_attendances (
 	notes text NOT NULL,
 	seats int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_names text NOT NULL,
+	checkboxes int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
@@ -257,4 +259,47 @@ CREATE TABLE tx_seminars_event_types (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
+);
+
+
+#
+# Table structure for table 'tx_seminars_checkboxes'
+#
+CREATE TABLE tx_seminars_checkboxes (
+	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	pid int(11) unsigned DEFAULT '0' NOT NULL,
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	title tinytext NOT NULL,
+	description text NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
+
+#
+# Table structure for table 'tx_seminars_seminars_checkboxes_mm'
+#
+CREATE TABLE tx_seminars_seminars_checkboxes_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tx_seminars_attendances_checkboxes_mm'
+#
+CREATE TABLE tx_seminars_attendances_checkboxes_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
 );

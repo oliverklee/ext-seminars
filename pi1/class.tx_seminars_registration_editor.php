@@ -313,22 +313,22 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			array('tx_seminars_pi1[showUid]' => $this->seminar->getUid())
 		);
 
-		return $baseUrl.$redirectPath; 
+		return $baseUrl.$redirectPath;
 	}
 
 	/**
 	 * Provides data items for the list of available places.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
 	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
 	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
-	 * @return	array		$items with additional items from the places table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return	array		items from the payment methods table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
 	function populateListPaymentMethods($items, $params, &$form) {
-		$result = $items;
+		$result = array();
 
 		if ($this->seminar->hasPaymentMethods()) {
 			$result = $this->populateList(
@@ -371,6 +371,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function getAllFeUserData($unused, $parameters, $form) {
 		$userData = $GLOBALS['TSFE']->fe_user->user;
+
 		foreach (array(
 			'name',
 			'company',
@@ -619,6 +620,42 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Provides data items for the list of option checkboxes for this event.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
+	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
+	 * @param	object		the current renderlet XML node as a recursive array (unused)
+	 *
+	 * @return	array		items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateCheckboxes($items, $params, &$form) {
+		$result = array();
+
+		if ($this->seminar->hasCheckboxes()) {
+			$result = $this->seminar->getCheckboxes();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether our current event has any option checkboxes AND the
+	 * checkboxes should be displayed at all.
+	 *
+	 * @return	boolean		true if we have a non-empty list of checkboxes AND this list should be displayed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasCheckboxes() {
+		return $this->seminar->hasCheckboxes()
+			&& $this->hasRegistrationFormField(
+				array('elementname' => 'checkboxes')
+			);
 	}
 }
 

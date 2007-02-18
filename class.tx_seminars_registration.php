@@ -44,8 +44,17 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/** whether we have already initialized the templates (which is done lazily) */
 	var $isTemplateInitialized = false;
 
-	/** This variable stores the data of the user as an array and makes it available without further database queries. It will get filled with data in the constructor. */
+	/**
+	 * This variable stores the data of the user as an array and makes it
+	 * available without further database queries. It will get filled with data
+	 * in the constructor.
+	 */
 	var $userData;
+
+	/**
+	 * An array of UIDs of option checkboxes associated with this record.
+	 */
+	var $checkboxes = array();
 
 	/**
 	 * The constructor.
@@ -114,6 +123,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['country'] = $registrationData['country'];
 		$this->recordData['telephone'] = $registrationData['telephone'];
 		$this->recordData['email'] = $registrationData['email'];
+
+		$this->checkboxes = isset($registrationData['checkboxes'])
+			? $registrationData['checkboxes'] : array();
+		$this->recordData['checkboxes'] = count($this->checkboxes);
 
 		$this->recordData['interests'] = $registrationData['interests'];
 		$this->recordData['expectations'] = $registrationData['expectations'];
@@ -790,6 +803,49 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		return $this->pi_getLL('label_gender.I.'
 			.$this->getRecordPropertyInteger('gender'));
 	}
+
+	/**
+	 * Writes this record to the DB and adds any needed m:n records.
+	 *
+	 * This function actually calles the same method in the parent class
+	 * (which saves the record to the DB) and then adds any necessary m:n
+	 * relations.
+	 *
+	 * The UID of the parent page must be set in $this->recordData['pid'].
+	 * (otherwise the record will be created in the root page).
+	 *
+	 * @return	boolean		true if everything went OK, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function commitToDb() {
+		$result = parent::commitToDb();
+
+		if ($result) {
+			$uid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+			if ($uid && $this->getRecordPropertyInteger('checkboxes')) {
+					$sorting = 1;
+					foreach ($this->checkboxes as $currentCheckbox) {
+						// We might get unsafe data here, so better be safe.
+						$checkboxValue = intval($currentCheckbox);
+						if ($checkboxValue) {
+							$GLOBALS['TYPO3_DB']->exec_INSERTquery(
+								$this->tableAttendancesCheckboxesMM,
+								array(
+									'uid_local' => $uid,
+									'uid_foreign' => $checkboxValue,
+									'sorting' => $sorting
+								)
+							);
+							$sorting++;
+						}
+					}
+			}
+		}
+
+		return $result;
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registration.php']) {

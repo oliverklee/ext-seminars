@@ -372,6 +372,21 @@
 			</process>
 		</renderlet:HIDDEN>
 
+		<renderlet:CHECKBOX name="checkboxes">
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateCheckboxes</method>
+				</userobj>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasCheckboxes</method>
+				</userobj>
+			</process>
+		</renderlet:CHECKBOX>
+
 		<renderlet:CHECKSINGLE name="terms">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms</label>
 			<process>

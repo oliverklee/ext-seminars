@@ -260,7 +260,10 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 				$this->setRecordPropertyInteger('crdate', $now);
 			}
 
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_INSERTquery($this->tableName, $this->recordData);
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_INSERTquery(
+				$this->tableName,
+				$this->recordData
+			);
 			if ($dbResult) {
 				$this->isInDb = true;
 				$result = true;
@@ -310,7 +313,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 
 	/**
 	 * Retrieves a record from the database.
-	 * 
+	 *
 	 * The record is retrieved from $this->tableName. Therefore $this->tableName
 	 * has to be set before calling this method.
 	 *
