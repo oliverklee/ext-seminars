@@ -1110,7 +1110,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'attendees_names',
 				'checkboxes',
 				'notes',
-				'terms'
+				'terms',
+				'terms_2',
 			)
 		);
 

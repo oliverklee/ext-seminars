@@ -475,6 +475,18 @@
 				</userobj>
 			</process>
 		</renderlet:TEXTAREA>
+
+		<renderlet:HIDDEN name="terms_2">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="terms_2" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
 	</elements>
 
 	<validation>

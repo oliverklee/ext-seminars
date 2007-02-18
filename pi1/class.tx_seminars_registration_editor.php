@@ -234,6 +234,22 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Checks whether the "terms_2" checkbox is checked (if it is enabled in the
+	 * configuration). If the checkbox is disabled in the configuration, this
+	 * function always returns true.
+	 *
+	 * @param	integer		the current value of the checkbox (0 or 1)
+	 *
+	 * @return	boolean		true if the checkbox is checked or disabled in the configuration, false if it is not checked AND enabled in the configuration
+	 *
+	 * @access	public
+	 */
+	function isTerms2CheckedAndEnabled($checkboxValue) {
+		return ((boolean) $checkboxValue) ||
+			!$this->hasRegistrationFormField(array('elementname' => 'terms_2'));
+	}
+
+	/**
 	 * Checks whether a method of payment is selected OR this event has no
 	 * payment methods set at all OR the corresponding registration field is
 	 * not visible in the registration form (in which case it is neither
