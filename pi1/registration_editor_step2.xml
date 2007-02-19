@@ -61,6 +61,73 @@
 			</data>
 		</renderlet:LABEL>
 
+		<renderlet:CHECKBOX name="checkboxes">
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateCheckboxes</method>
+				</userobj>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasCheckboxes</method>
+				</userobj>
+			</process>
+		</renderlet:CHECKBOX>
+
+		<renderlet:CHECKSINGLE name="terms">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms</label>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="terms" />
+					</params>
+				</userobj>
+			</process>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>isChecked</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_acceptTerms</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+		</renderlet:CHECKSINGLE>
+
+		<renderlet:CHECKSINGLE name="terms_2">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms_2</label>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="terms_2" />
+					</params>
+				</userobj>
+			</process>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>isTerms2CheckedAndEnabled</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_acceptTerms2</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+		</renderlet:CHECKSINGLE>
+
+		<renderlet:SUBMIT name="btncont">
+			<refresh />
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_back_registration</label>
+		</renderlet:SUBMIT>
+		<renderlet:SUBMIT name="btnsubmit">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_submit_registration</label>
+		</renderlet:SUBMIT>
+
 		<renderlet:HIDDEN name="method_of_payment">
 			<process>
 				<userobj>
@@ -391,75 +458,5 @@
 				</userobj>
 			</process>
 		</renderlet:HIDDEN>
-
-		<renderlet:CHECKBOX name="checkboxes">
-			<data>
-				<userobj>
-					<extension>this</extension>
-					<method>populateCheckboxes</method>
-				</userobj>
-			</data>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasCheckboxes</method>
-				</userobj>
-			</process>
-		</renderlet:CHECKBOX>
-
-		<renderlet:CHECKSINGLE name="terms">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms</label>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
-					<params>
-						<data name="elementname" value="terms" />
-					</params>
-				</userobj>
-			</process>
-			<validators>
-				<validator:STANDARD>
-					<userobj>
-						<extension>this</extension>
-						<method>isChecked</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_acceptTerms</message>
-					</userobj>
-				</validator:STANDARD>
-			</validators>
-		</renderlet:CHECKSINGLE>
-
-		<renderlet:CHECKSINGLE name="terms_2">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms_2</label>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
-					<params>
-						<data name="elementname" value="terms_2" />
-					</params>
-				</userobj>
-			</process>
-			<validators>
-				<validator:STANDARD>
-					<userobj>
-						<extension>this</extension>
-						<method>isTerms2CheckedAndEnabled</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_acceptTerms2</message>
-					</userobj>
-				</validator:STANDARD>
-			</validators>
-		</renderlet:CHECKSINGLE>
-
-		<renderlet:SUBMIT name="btncont">
-			<refresh />
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_back_registration</label>
-		</renderlet:SUBMIT>
 	</elements>
-
-	<validation>
-		<renderlet:SUBMIT name="btnsubmit">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_submit_registration</label>
-		</renderlet:SUBMIT>
-	</validation>
 </formidable>
