@@ -1695,6 +1695,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *    (for $whichPlugin = (seminar_list|my_events|my_vip_events))
 	 * b) the user is allowed to view the list of registrations
 	 *    (for $whichPlugin = (list_registrations|list_vip_registrations))
+	 * c) the user is allowed to export the list of registrations as CSV
+	 *    ($whichPlugin = csv_export)
 	 *
 	 * @param	string		the 'what_to_display' value, specifying the type of plugin: (seminar_list|my_events|my_vip_events|list_registrations|list_vip_registrations)
 	 * @param	integer		the value of the registrationsListPID parameter (only relevant for (seminar_list|my_events|my_vip_events))
@@ -1732,7 +1734,14 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 					$result = $this->isUserRegistered($currentUserUid);
 					break;
 				case 'list_vip_registrations':
-					$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
+					$result = $this->isUserVip(
+						$currentUserUid, $defaultEventVipsFeGroupID
+					);
+					break;
+				case 'csv_export':
+					$result = $this->isUserVip(
+						$currentUserUid, $defaultEventVipsFeGroupID
+					) && $this->getConfValueBoolean('allowCsvExportForVips');
 					break;
 				default:
 					// For all other plugins, we don't grant access.

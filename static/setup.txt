@@ -81,6 +81,22 @@ plugin.tx_seminars {
 	decimalSplitChar = .
 
 
+	# whether anyone can access the CSV export function without any checks (use this for testing purposes only!)
+	allowAccessToCsv = 0
+
+	# the charset provided in the HTTP header for CSV export
+	charsetForCsv = utf-8
+
+	# the filename proposed for CSV export
+	filenameForRegistrationsCsv = registrations.csv
+
+	# comma-separated list of field names from fe_users that will be used for CSV export
+	fieldsFromFeUserForCsv = gender,name,company,address,zip,city,country,telephone,email
+
+	# comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
+	fieldsFromAttendanceForCsv = price,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
+
+
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.
 
@@ -268,6 +284,32 @@ plugin.tx_seminars_pi1.listView {
 	maxPages = 5
 }
 
+
+tx_seminars_pi2 = PAGE
+tx_seminars_pi2 {
+	# Just some random non-zero number.
+	typeNum = {$plugin.tx_seminars_pi2.typeNumForCsv}
+
+	config {
+		disableCharsetHeader = 1
+		enableContentLengthHeader = 0
+		no_cache = 1
+		disableAllHeaderCode = 1
+		admPanel = 0
+
+		xhtml_cleaning >
+	}
+
+	includeLibs.tx_seminars_pi2 = EXT:seminars/pi2/class.tx_seminars_pi2.php
+
+	10 = USER
+	10 {
+		userFunc = tx_seminars_pi2->main
+
+		# whether to use formal or informal language
+		salutation = formal
+	}
+}
 
 plugin.tx_srfeuserregister_pi1 {
 	create.evalValues {

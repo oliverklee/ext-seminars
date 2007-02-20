@@ -1504,6 +1504,114 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 
 		return;
 	}
+
+	/**
+	 * Checks the CSV-related settings.
+	 *
+	 * @access	private
+	 */
+	function checkCsv() {
+		$this->checkAllowAccessToCsv();
+		$this->checkCharsetForCsv();
+		$this->checkFilenameForRegistrationsCsv();
+		$this->checkFieldsFromFeUserForCsv();
+		$this->checkFieldsFromAttendanceForCsv();
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value allowAccessToCsv.
+	 *
+	 * @access	private
+	 */
+	function checkAllowAccessToCsv() {
+		$this->checkIfBoolean(
+			'allowAccessToCsv',
+			false,
+			'',
+			'This value specifies whether the access check for the CSV export '
+				.'will be overridden. '
+				.'If this value is not set correctly, anyone could use the CSV '
+				.'export, gaining access to sensitive data.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value charsetForCsv.
+	 *
+	 * @access	private
+	 */
+	function checkCharsetForCsv() {
+		$this->checkForNonEmptyString(
+			'charsetForCsv',
+			false,
+			'',
+			'This value specifies the charset to use for the CSV export. '
+				.'If this value is not set, no charset information will be '
+				.'provided for CSV downloads.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value filenameForRegistrationsCsv.
+	 *
+	 * @access	private
+	 */
+	function checkFilenameForRegistrationsCsv() {
+		$this->checkForNonEmptyString(
+			'filenameForRegistrationsCsv',
+			false,
+			'',
+			'This value specifies the file name to suggest for the CSV export. '
+				.'If this value is not set, an empty filename will be used for '
+				.'saving the CSV file which will cause problems.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value fieldsFromFeUserForCsv.
+	 *
+	 * @access	private
+	 */
+	function checkFieldsFromFeUserForCsv() {
+		$this->checkIfMultiInTableOrEmpty(
+			'fieldsFromFeUserForCsv',
+			false,
+			'',
+			'These values specify the FE user fields to export via CSV. '
+				.'A mistyped field name will cause the field to not get '
+				.'included.',
+			'fe_users'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value fieldsFromAttendanceForCsv.
+	 *
+	 * @access	private
+	 */
+	function checkFieldsFromAttendanceForCsv() {
+		$this->checkIfMultiInTableOrEmpty(
+			'fieldsFromAttendanceForCsv',
+			false,
+			'',
+			'These values specify the registration fields to export via CSV. '
+				.'A mistyped field name will cause the field to not get '
+				.'included.',
+			'tx_seminars_attendances'
+		);
+
+		return;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_configcheck.php']) {

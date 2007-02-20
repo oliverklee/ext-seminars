@@ -185,7 +185,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
  	/**
 	 * Gets the complete FE user data as an array.
-	 * The attendee's user data (from fe_users) will be written to $this->userData.
+	 * The attendee's user data (from fe_users) will be written to
+	 * $this->userData.
+	 *
 	 * $this->userData will be null if retrieving the user data fails.
 	 *
 	 * @access	private
@@ -206,20 +208,125 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns a value out of the userData array. The return value may be an empty string if the key is not defined in the userData array.
+	 * Retrieves a value from this record. The return value will be an empty
+	 * string if the key is not defined in $this->recordData or if it has not
+	 * been filled in.
 	 *
-	 * @param	string		the key to retrieve
+	 * If the data needs to be decoded to be readable (eg. the method of
+	 * payment or the gender), this function will already return the clear text
+	 * version.
+	 *
+	 * @param	string		the key of the data to retrieve (the key doesn't need to be trimmed)
+	 *
+	 * @return	string		the trimmed value retrieved from $this->recordData, may be empty
+	 *
+	 * @access	public
+	 */
+	function getRegistrationData($key) {
+		$result = '';
+		$trimmedKey = trim($key);
+
+		switch ($trimmedKey) {
+			case 'crdate':
+				// The fallthrough is intended.
+			case 'tstamp':
+				$result = strftime(
+					$this->getConfValueString('dateFormatYMD').' '
+						.$this->getConfValueString('timeFormat'),
+					$this->getRecordPropertyInteger($trimmedKey)
+				);
+				break;
+			case 'total_price':
+				$result = $this->getTotalPrice(' ');
+				break;
+			case 'paid':
+				// The fallthrough is intended.
+			case 'been_there':
+				$result = ($this->getRecordPropertyBoolean($trimmedKey))
+					? $this->pi_getLL('label_yes')
+					: $this->pi_getLL('label_no');
+				break;
+			case 'datepaid':
+				$result = strftime(
+					$this->getConfValueString('dateFormatYMD'),
+					$this->getRecordPropertyInteger($trimmedKey)
+				);
+				break;
+			case 'method_of_payment':
+				$result = $this->seminar->getSinglePaymentMethodShort(
+					$this->getRecordPropertyInteger($trimmedKey)
+				);
+				break;
+			case 'gender':
+				$result = $this->getGender();
+				break;
+			case 'seats':
+				$result = $this->getSeats();
+				break;
+			default:
+				$result = $this->getRecordPropertyString($trimmedKey);
+				break;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Retrieves a value out of the userData array. The return value will be an
+	 * empty string if the key is not defined in the $this->userData array.
+	 *
+	 * If the data needs to be decoded to be readable (eg. the gender, the date
+	 * of birth or the status), this function will already return the clear text
+	 * version.
+	 *
+	 * @param	string		the key of the data to retrieve (the key doesn't need to be trimmed)
 	 *
 	 * @return	string		the trimmed value retrieved from $this->userData, may be empty
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function getUserData($key) {
 		$result = '';
 		$trimmedKey = trim($key);
+
 		if (is_array($this->userData) && !empty($trimmedKey)) {
 			if (array_key_exists($trimmedKey, $this->userData)) {
-				$result = trim($this->userData[$trimmedKey]);
+				$rawData = trim($this->userData[$trimmedKey]);
+
+				// deal with special cases
+				switch ($trimmedKey) {
+					case 'gender':
+						$result = $this->pi_getLL('label_gender.I.'.$rawData);
+						break;
+					case 'status':
+						if ($rawData) {
+							$result = $this->pi_getLL('label_status.I.'.$rawData);
+						}
+						break;
+					case 'wheelchair':
+						$result = ($rawData)
+							? $this->pi_getLL('label_yes')
+							: $this->pi_getLL('label_no');
+						break;
+					case 'crdate':
+						// The fallthrough is intended.
+					case 'tstamp':
+						$result = strftime(
+							$this->getConfValueString('dateFormatYMD').' '
+								.$this->getConfValueString('timeFormat'),
+							$rawData
+						);
+						break;
+					case 'date_of_birth':
+						$result = strftime(
+							$this->getConfValueString('dateFormatYMD'),
+							$rawData
+						);
+						break;
+					default:
+						$result = $rawData;
+						break;
+				}
 			}
 		}
 
@@ -736,22 +843,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$result = '';
 
 		foreach ($keys as $currentKey) {
-			switch ($currentKey) {
-				case 'method_of_payment':
-					$value = $this->seminar->getSinglePaymentMethodShort(
-						$this->getRecordPropertyInteger($currentKey)
-					);
-					break;
-				case 'total_price':
-					$value = $this->getTotalPrice(' ');
-					break;
-				case 'gender':
-					$value = $this->getGender();
-					break;
-				default:
-					$value = $this->getRecordPropertyString($currentKey);
-					break;
-			}
+			$value = $this->getRegistrationData($currentKey);
 			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
 		}
 
@@ -785,11 +877,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		foreach ($billingAddressFields as $key => $useLf) {
 			if ($this->hasRecordPropertyString($key)) {
-				if ($key == 'gender') {
-					$result = $this->getGender();
-				} else {
-					$result .= $this->getRecordPropertyString($key);
-				}
+				$result .= $this->getRegistrationData($key);
 				if ($useLf) {
 					$result .= chr(10);
 				} else {

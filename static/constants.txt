@@ -1,0 +1,4 @@
+plugin.tx_seminars_pi2 {
+    # cat=plugin.tx_seminars_pi2//; type=int+; label=The page type used for CSV export.
+	typeNumForCsv = 736
+}

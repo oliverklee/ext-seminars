@@ -239,8 +239,6 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars
 - investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees
 - separate date and time fields for seminars and provide a conversion feature
-- in notification e-mail, show user's date of birth as a formatted date instead of an integer
-- in notification e-mail, show user's status as a string instead of an integer
 - in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
 - disable the "save and view" button for all our records (as they are not treated as regular content elements)
 - add different icons
