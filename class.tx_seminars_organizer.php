@@ -95,4 +95,9 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 		return $this->getRecordPropertyString('email_footer');
 	}
 }
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizer.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizer.php']);
+}
+
 ?>
