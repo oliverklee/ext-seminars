@@ -255,7 +255,7 @@
 			<label index="label_thankyou_formal">Vielen Dank für Ihre Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf Sie und wünschen Ihnen viel Erfolg bei der Veranstaltung.</label>
 			<label index="label_thankyou_informal">Vielen Dank für deine Anmeldung! Eine E-Mail mit der Anmeldebestätigung ist unterwegs. Wir freuen uns auf dich und wünschen dir viel Erfolg bei der Veranstaltung.</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
-			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
+			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
 			<label index="message_registrationForm_formal">Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:</label>
 			<label index="message_registrationForm_informal">Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:</label>

@@ -1,4 +1,5 @@
 0.4.9
+- Fix: Typo in pi1/locallang.xml (#583)
 - Fix: Ordering of seminars doesn't work with MySQL Version 4.1.21 (#500)
 - Fix: Crash of TYPO3 4.1 after setting plugin.tx_seminars.attendancesPID (#530)
 
