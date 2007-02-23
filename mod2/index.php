@@ -116,6 +116,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->doc->backPath = $BACK_PATH;
 			$this->doc->form = '<form action="" method="post">';
 			$this->doc->docType = 'xhtml_strict';
+			$this->doc->styleSheetFile2 = '../typo3conf/ext/seminars/mod2/mod2.css';
 
 			// JavaScript function called within getDeleteIcon()
 			$this->doc->JScode = '
@@ -236,6 +237,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			),
 			'defRow' => array(
 				'tr' => array('<tr>', '</tr>'),
+				array('<td class="datecol">', '</td>'),
 				'defCol' => array('<td>', '</td>'),
 			),
 		);
