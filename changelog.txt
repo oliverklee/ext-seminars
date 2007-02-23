@@ -1,4 +1,5 @@
 0.5.0
+- Fix: In mod1 and mod2, lowercast POST (#597)
 - Fix: Configuration check on the wrong object in pi1::createRegistrationsList() (#584)
 - Fix: Typo in pi1/locallang.xml (#583)
 - Feature: CSV export for registrations: data structures and architectural stuff (#313)

@@ -114,7 +114,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// start the document
 			$this->doc = t3lib_div::makeInstance('bigDoc');
 			$this->doc->backPath = $BACK_PATH;
-			$this->doc->form = '<form action="" method="POST">';
+			$this->doc->form = '<form action="" method="post">';
 			$this->doc->docType = 'xhtml_strict';
 
 			// JavaScript function called within getDeleteIcon()
