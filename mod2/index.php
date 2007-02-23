@@ -35,6 +35,7 @@ require_once($BACK_PATH.'init.php');
 require_once($BACK_PATH.'template.php');
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
+require_once(PATH_t3lib.'class.t3lib_befunc.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
@@ -45,6 +46,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.p
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
 
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
+$LANG->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
 $LANG->includeLLFile('EXT:seminars/mod2/locallang.php');
 
 // This checks permissions and exits if the users has no permission for entry.
@@ -94,7 +96,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 * @access	public
 	 */
 	function main() {
-		global $LANG, $BACK_PATH;
+		global $LANG, $BACK_PATH, $BE_USER;
 
 		$this->content = '';
 
@@ -115,6 +117,15 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->doc->form = '<form action="" method="POST">';
 			$this->doc->docType = 'xhtml_strict';
 
+			// JavaScript function called within getDeleteIcon()
+			$this->doc->JScode = '
+				<script type="text/javascript">
+					function jumpToUrl(URL)	{
+						document.location = URL;
+					}
+				</script>
+			';
+
 			// draw the header
 			$this->content .= $this->doc->startPage($LANG->getLL('title'));
 			$this->content .= $this->doc->header($LANG->getLL('title'));
@@ -122,10 +133,23 @@ class tx_seminars_module2 extends t3lib_SCbase {
 
 			// define the sub modules that should be available in the tabmenu
 			$this->availableSubModules = array();
-			$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
-			$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
-			$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
-			$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
+
+			// only show the tabs if the back-end user has access to the corresponding tables
+			if ($BE_USER->check('tables_select', 'tx_seminars_seminars')) {
+				$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
+			}
+
+			if ($BE_USER->check('tables_select', 'tx_seminars_attendances')) {
+				$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
+			}
+
+			if ($BE_USER->check('tables_select', 'tx_seminars_speakers')) {
+				$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
+			}
+
+			if ($BE_USER->check('tables_select', 'tx_seminars_organizers')) {
+				$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
+			}
 
 			// Read the selected sub module (from the tab menu) and make it available within this class.
 			$this->subModule = intval(t3lib_div::_GET('subModule'));
@@ -175,6 +199,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// end page
 			$this->content .= $this->doc->endPage();
 		}
+
 		// Output the whole content.
 		echo $this->content;
 	}
@@ -185,7 +210,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 * @return	string		the HTML source code of the event list
 	 *
 	 * @access	public
-	 */	
+	 */
 	function showEventsList() {
 		global $LANG;
 
@@ -232,6 +257,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$LANG->getLL('eventlist.enough_attendees').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('eventlist.is_full').'</span>',
+				'&nbsp;',
 			),
 		);
 
@@ -256,9 +282,20 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					? $LANG->getLL('no') : $LANG->getLL('yes')),
 				(!$this->seminar->isFull()
 					? $LANG->getLL('no') : $LANG->getLL('yes')),
+				$this->getEditIcon(
+					$this->seminar->tableName,
+					$this->seminar->getUid()
+				)
+					.'&nbsp;'
+					.$this->getDeleteIcon(
+						$this->seminar->tableName,
+						$this->seminar->getUid()
+					),
 			);
 			$seminarBag->getNext();
 		}
+
+		$content .= $this->getNewIcon($seminarBag->tableSeminars, $this->id);
 
 		// Output the table array using the tableLayout array with the template
 		// class.
@@ -312,6 +349,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$LANG->getLL('registrationlist.feuser.name').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('registrationlist.seminar.title').'</span>',
+				'&nbsp;',
 			),
 		);
 
@@ -330,9 +368,20 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$table[] = array(
 				$this->registration->getUserName(),
 				$this->registration->seminar->getRealTitle(),
+				$this->getEditIcon(
+					$this->registration->tableName,
+					$this->registration->getUid()
+				)
+					.'&nbsp;'
+					.$this->getDeleteIcon(
+						$this->registration->tableName,
+						$this->registration->getUid()
+					),
 			);
 			$registrationBag->getNext();
 		}
+
+		$content .= $this->getNewIcon($registrationBag->tableAttendances, $this->id);
 
 		// Output the table array using the tableLayout array with the template
 		// class.
@@ -384,6 +433,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			array(
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('speakerlist.title').'</span>',
+				'&nbsp;',
 			),
 		);
 
@@ -400,9 +450,20 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// Add the result row to the table array.
 			$table[] = array(
 				$this->speaker->getTitle(),
+				$this->getEditIcon(
+					$this->speaker->tableName,
+					$this->speaker->getUid()
+				)
+					.'&nbsp;'
+					.$this->getDeleteIcon(
+						$this->speaker->tableName,
+						$this->speaker->getUid()
+					),
 			);
 			$speakerBag->getNext();
 		}
+
+		$content .= $this->getNewIcon($speakerBag->tableSpeakers, $this->id);
 
 		// Output the table array using the tableLayout array with the template
 		// class.
@@ -454,6 +515,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			array(
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('organizerlist.title').'</span>',
+				'&nbsp;',
 			),
 		);
 
@@ -470,9 +532,20 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// Add the result row to the table array.
 			$table[] = array(
 				$this->organizer->getTitle(),
+				$this->getEditIcon(
+					$this->organizer->tableName,
+					$this->organizer->getUid()
+				)
+					.'&nbsp;'
+					.$this->getDeleteIcon(
+						$this->organizer->tableName,
+						$this->organizer->getUid()
+				),
 			);
 			$organizerBag->getNext();
 		}
+
+		$content .= $this->getNewIcon($organizerBag->tableOrganizers, $this->id);
 
 		// Output the table array using the tableLayout array with the template
 		// class.
@@ -481,6 +554,119 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		$content .= $organizerBag->checkConfiguration();
 
 		return $content;
+	}
+
+	/**
+	 * Generates an edit record icon which is linked to the edit view of
+	 * a record.
+	 *
+	 * @param	string		the name of the table where the record is in
+	 * @param	integer		the uid of the record
+	 *
+	 * @return	string		the HTML source code to return
+	 *
+	 * @access	public
+	 */
+	function getEditIcon($table, $uid) {
+		global $BACK_PATH, $LANG, $BE_USER;
+
+		$result = '';
+
+		if ($BE_USER->check('tables_modify', $table)
+			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
+			$params = '&edit['.$table.']['.$uid.']=edit';
+			$editOnClick = t3lib_BEfunc::editOnClick($params, $BACK_PATH);
+			$langEdit = $LANG->getLL('edit');
+			$result = '<a href="#" onclick="'.htmlspecialchars($editOnClick).'">'.
+				'<img '
+				.t3lib_iconWorks::skinImg(
+					$BACK_PATH,
+					'gfx/edit2.gif',
+					'width="11" height="12"').
+				' title="'.$langEdit.'" alt="'.$langEdit.'" />'.
+				'</a>';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates a linked delete record icon whith a JavaScript confirmation
+	 * window.
+	 *
+	 * @param	string		the name of the table where the record is in
+	 * @param	integer		the uid of the record
+	 *
+	 * @return	string		the HTML source code to return
+	 *
+	 * @access	public
+	 */
+	function getDeleteIcon($table, $uid) {
+		global $BACK_PATH, $LANG, $BE_USER;
+
+		$result = '';
+
+		if ($BE_USER->check('tables_modify', $table)
+			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
+			$params = '&cmd['.$table.']['.$uid.'][delete]=1';
+			$confirmation = htmlspecialchars(
+				'if (confirm('.
+				$LANG->JScharCode(
+					$LANG->getLL('deleteWarning').
+					t3lib_BEfunc::referenceCount(
+						$table,
+						$uid,
+						' (There are %s reference(s) to this record!)')).
+				')) {jumpToUrl(\''.
+				$this->doc->issueCommand($params).
+				'\');} return false;');
+			$langDelete = $LANG->getLL('delete', 1);
+			$result = '<a href="#" onclick="'.$confirmation.'">'.
+				'<img'.
+				t3lib_iconWorks::skinImg(
+					$BACK_PATH,
+					'gfx/garbage.gif',
+					'width="11" height="12"').
+				' title="'.$langDelete.'" alt="'.$langDelete.'" />'.
+				'</a>';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns a "create new record" image tag that is linked to the new record view.
+	 *
+	 * @param	string		the name of the table where the record should be saved to
+	 * @param	integer		the page id where the record should be stored
+	 *
+	 * @return	string		the HTML source code to return
+	 *
+	 * @access	public
+	 */
+	function getNewIcon($table, $pid) {
+		global $BACK_PATH, $LANG, $BE_USER;
+
+		$result = '';
+
+		if ($BE_USER->check('tables_modify', $table)
+			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
+			$params = '&edit['.$table.']['.$pid.']=new';
+			$editOnClick = t3lib_BEfunc::editOnClick($params, $BACK_PATH);
+			$langNew = $LANG->getLL('newRecordGeneral');
+			$result = '<div id="typo3-newRecordLink">'.
+				'<a href="#" onclick="'.htmlspecialchars($editOnClick).'">'.
+				'<img'.
+				t3lib_iconWorks::skinImg(
+					$BACK_PATH,
+					'gfx/new_record.gif',
+					'width="7" height="4"').
+				' title="'.$langNew.'" alt="'.$langNew.'" />'.
+				$langNew.
+				'</a></div>';
+		}
+
+		return $result;
 	}
 }
 
