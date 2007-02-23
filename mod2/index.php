@@ -616,7 +616,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					t3lib_BEfunc::referenceCount(
 						$table,
 						$uid,
-						' (There are %s reference(s) to this record!)')).
+						' '.$LANG->getLL('referencesWarning'))).
 				')) {jumpToUrl(\''.
 				$this->doc->issueCommand($params).
 				'\');} return false;');
