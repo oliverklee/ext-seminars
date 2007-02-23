@@ -1066,7 +1066,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Let warnings from the registration bag bubble up to us.
-		$this->setErrorMessage($this->seminar->checkConfiguration(true));
+		$this->setErrorMessage($registrationBag->checkConfiguration(true));
 
 		return;
 	}
