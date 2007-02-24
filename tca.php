@@ -10,12 +10,12 @@ $selectTopicsFromAllPages = (boolean) $globalConfiguration['selectTopicsFromAllP
 $selectType = $usePageBrowser ? 'group' : 'select';
 $selectWhereForTopics = ($selectTopicsFromAllPages) ? '' : ' AND tx_seminars_seminars.pid=###STORAGE_PID###';
 
-$TCA['tx_seminars_seminars'] = Array (
+$TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
-	'interface' => Array (
+	'interface' => array(
 		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,deadline_registration,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,vips,notes'
 	),
-	'columns' => Array (
+	'columns' => array(
 		'object_type' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.object_type',
@@ -23,9 +23,9 @@ $TCA['tx_seminars_seminars'] = Array (
 			'type' => 'radio',
 				'default' => '0',
 				'items' => array(
-					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.0', '0'),
-					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.1', '1'),
-					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.0', '0'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.1', '1'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2'),
 				)
 			)
 		),
@@ -120,7 +120,7 @@ $TCA['tx_seminars_seminars'] = Array (
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
-				'items' => Array(
+				'items' => array(
 					'' => ''
 				)
 			)
@@ -420,12 +420,12 @@ $TCA['tx_seminars_seminars'] = Array (
 		)
 	),
 	'types' => array(
-		'0' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, price_regular, price_regular_early, price_special, price_special_early, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes'),
-		'1' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, price_regular, price_regular_early, price_special, price_special_early, payment_methods, notes'),
-		'2' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
+		'0' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, price_regular, price_regular_early, price_special, price_special_early, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes'),
+		'1' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, price_regular, price_regular_early, price_special, price_special_early, payment_methods, notes'),
+		'2' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
 	),
 	'palettes' => array(
-		'1' => Array('showitem' => 'starttime, endtime')
+		'1' => array('showitem' => 'starttime, endtime')
 	)
 );
 
@@ -464,9 +464,9 @@ $TCA['tx_seminars_speakers'] = array(
 				'max' => '255',
 				'checkbox' => '',
 				'eval' => 'trim,nospace',
-				'wizards' => Array(
+				'wizards' => array(
 					'_PADDING' => 2,
-					'link' => Array(
+					'link' => array(
 						'type' => 'popup',
 						'title' => 'Link',
 						'icon' => 'link_popup.gif',
@@ -565,10 +565,10 @@ $TCA['tx_seminars_speakers'] = array(
 		),
 	),
 	'types' => array(
-		'0' => Array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], notes, address, phone_work, phone_home, phone_mobile, fax, email')
+		'0' => array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], notes, address, phone_work, phone_home, phone_mobile, fax, email')
 	),
 	'palettes' => array(
-		'1' => Array('showitem' => '')
+		'1' => array('showitem' => '')
 	)
 );
 
@@ -665,7 +665,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
-				'items' => Array(
+				'items' => array(
 					'' => ''
 				)
 			)
@@ -742,10 +742,10 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 	),
 	'types' => array(
-		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, seats, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
+		'0' => array('showitem' => 'user;;;;1-1-1, seminar, price, seats, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
 	),
 	'palettes' => array(
-		'1' => Array('showitem' => '')
+		'1' => array('showitem' => '')
 	)
 );
 
@@ -784,9 +784,9 @@ $TCA['tx_seminars_sites'] = array(
 				'max' => '255',
 				'checkbox' => '',
 				'eval' => 'trim,nospace',
-				'wizards' => Array(
+				'wizards' => array(
 					'_PADDING' => 2,
-					'link' => Array(
+					'link' => array(
 						'type' => 'popup',
 						'title' => 'Link',
 						'icon' => 'link_popup.gif',
@@ -816,10 +816,10 @@ $TCA['tx_seminars_sites'] = array(
 		),
 	),
 	'types' => array(
-		'0' => Array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes')
+		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes')
 	),
 	'palettes' => array(
-		'1' => Array('showitem' => '')
+		'1' => array('showitem' => '')
 	)
 );
 
@@ -849,9 +849,9 @@ $TCA['tx_seminars_organizers'] = array(
 				'max' => '255',
 				'checkbox' => '',
 				'eval' => 'trim,nospace',
-				'wizards' => Array(
+				'wizards' => array(
 					'_PADDING' => 2,
-					'link' => Array(
+					'link' => array(
 						'type' => 'popup',
 						'title' => 'Link',
 						'icon' => 'link_popup.gif',
@@ -881,10 +881,10 @@ $TCA['tx_seminars_organizers'] = array(
 		),
 	),
 	'types' => array(
-		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer')
+		'0' => array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer')
 	),
 	'palettes' => array(
-		'1' => Array('showitem' => '')
+		'1' => array('showitem' => '')
 	)
 );
 
