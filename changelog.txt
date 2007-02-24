@@ -1,5 +1,5 @@
 0.4.9
-- Fix: In mod1, lowercast POST (#597)
+- Fix: In mod1, lowercase POST (#597)
 - Fix: Configuration check on the wrong object in pi1::createRegistrationsList() (#584)
 - Fix: Typo in pi1/locallang.xml (#583)
 - Fix: Ordering of seminars doesn't work with MySQL Version 4.1.21 (#500)
