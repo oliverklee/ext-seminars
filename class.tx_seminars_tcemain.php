@@ -32,6 +32,7 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 
 class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	/**
@@ -79,7 +80,8 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 				$updateArray = array();
 				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 
-				// Compare the values and, if necessary, unset the registration deadline
+				// Compare the values and, if necessary, unset the registration
+				// deadline.
 				if ($row['deadline_registration'] > $row['begin_date']) {
 					$updateArray['deadline_registration'] = 0;
 				}
@@ -102,9 +104,19 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 
 				// Only update the record in the database if needed.
 				if (count($updateArray)) {
-					$GLOBALS['TYPO3_DB']->exec_UPDATEquery($this->tableSeminars, 'uid='.$id, $updateArray);
+					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+						$this->tableSeminars,
+						'uid='.$id,
+						$updateArray
+					);
 				}
 			}
+
+			// Update statistics every time an event record gets saved. For this,
+			// we initialize a seminar object to have all fuctions available.
+			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+			$seminar =& new $seminarClassname($id);
+			$seminar->updateStatistics();
 		}
 
 		return;
