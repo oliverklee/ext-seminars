@@ -16,31 +16,31 @@ $TCA['tx_seminars_seminars'] = Array (
 		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,deadline_registration,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,vips,notes'
 	),
 	'columns' => Array (
-		'object_type' => Array (
+		'object_type' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.object_type',
-			'config' => Array (
+			'config' => array(
 			'type' => 'radio',
 				'default' => '0',
-				'items' => Array (
+				'items' => array(
 					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.0', '0'),
 					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.1', '1'),
 					Array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2'),
 				)
 			)
 		),
-		'hidden' => Array (
+		'hidden' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
-			'config' => Array (
+			'config' => array(
 				'type' => 'check',
 				'default' => '0'
 			)
 		),
-		'starttime' => Array (
+		'starttime' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.starttime',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '8',
 				'max' => '20',
@@ -49,35 +49,35 @@ $TCA['tx_seminars_seminars'] = Array (
 				'checkbox' => '0'
 			)
 		),
-		'endtime' => Array (
+		'endtime' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.endtime',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '8',
 				'max' => '20',
 				'eval' => 'date',
 				'checkbox' => '0',
 				'default' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => mktime(0,0,0,12,31,2020),
 					'lower' => mktime(0,0,0,date('m')-1,date('d'),date('Y'))
 				)
 			)
 		),
-		'title' => Array (
+		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.title',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
-		'topic' => Array (
+		'topic' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.topic',
-			'config' => Array (
+			'config' => array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_seminars',
@@ -91,28 +91,28 @@ $TCA['tx_seminars_seminars'] = Array (
 				'maxitems' => 1,
 			)
 		),
-		'subtitle' => Array (
+		'subtitle' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.subtitle',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim',
 			)
 		),
-		'description' => Array (
+		'description' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.description',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'event_type' => Array (
+		'event_type' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.event_type',
-			'config' => Array (
+			'config' => array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_event_types',
@@ -125,35 +125,35 @@ $TCA['tx_seminars_seminars'] = Array (
 				)
 			)
 		),
-		'accreditation_number' => Array (
+		'accreditation_number' => array(
 			'exclude' => '1',
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.accreditation_number',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '20',
 				'eval' => 'trim',
 			)
 		),
-		'credit_points' => Array (
+		'credit_points' => array(
 			'exclude' => '1',
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.credit_points',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '3',
 				'max' => '3',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '999',
 					'lower' => '0'
 				),
 				'default' => 0
 			)
 		),
-		'begin_date' => Array (
+		'begin_date' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.begin_date',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '12',
 				'max' => '20',
@@ -162,10 +162,10 @@ $TCA['tx_seminars_seminars'] = Array (
 				'default' => '0'
 			)
 		),
-		'end_date' => Array (
+		'end_date' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.end_date',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '12',
 				'max' => '20',
@@ -174,10 +174,10 @@ $TCA['tx_seminars_seminars'] = Array (
 				'default' => '0'
 			)
 		),
-		'deadline_registration' => Array (
+		'deadline_registration' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.deadline_registration',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '12',
 				'max' => '20',
@@ -186,10 +186,10 @@ $TCA['tx_seminars_seminars'] = Array (
 				'default' => '0'
 			)
 		),
-		'deadline_early_bird' => Array (
+		'deadline_early_bird' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.deadline_early_bird',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '12',
 				'max' => '20',
@@ -198,10 +198,10 @@ $TCA['tx_seminars_seminars'] = Array (
 				'default' => '0'
 			)
 		),
-		'place' => Array (
+		'place' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.place',
-			'config' => Array (
+			'config' => array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_sites',
@@ -212,19 +212,19 @@ $TCA['tx_seminars_seminars'] = Array (
 				'MM' => 'tx_seminars_seminars_place_mm',
 			)
 		),
-		'room' => Array (
+		'room' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.room',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'speakers' => Array (
+		'speakers' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.speakers',
-			'config' => Array (
+			'config' => array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
@@ -235,74 +235,74 @@ $TCA['tx_seminars_seminars'] = Array (
 				'MM' => 'tx_seminars_seminars_speakers_mm',
 			)
 		),
-		'price_regular' => Array (
+		'price_regular' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '5',
 				'max' => '5',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '99999',
 					'lower' => '0'
 				),
 				'default' => 0
 			)
 		),
-		'price_regular_early' => Array (
+		'price_regular_early' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular_early',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '5',
 				'max' => '5',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '99999',
 					'lower' => '0'
 				),
 				'default' => 0
 			)
 		),
-		'price_special' => Array (
+		'price_special' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '5',
 				'max' => '5',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '99999',
 					'lower' => '0'
 				),
 				'default' => 0
 			)
 		),
-		'price_special_early' => Array (
+		'price_special_early' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special_early',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '5',
 				'max' => '5',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '99999',
 					'lower' => '0'
 				),
 				'default' => 0
 			)
 		),
-		'payment_methods' => Array (
+		'payment_methods' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.payment_methods',
-			'config' => Array (
+			'config' => array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
@@ -312,10 +312,10 @@ $TCA['tx_seminars_seminars'] = Array (
 				'maxitems' => 999,
 			)
 		),
-		'organizers' => Array (
+		'organizers' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.organizers',
-			'config' => Array (
+			'config' => array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
@@ -325,81 +325,81 @@ $TCA['tx_seminars_seminars'] = Array (
 				'maxitems' => 999,
 			)
 		),
-		'needs_registration' => Array (
+		'needs_registration' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.needs_registration',
-			'config' => Array (
+			'config' => array(
 				'type' => 'check',
 				'default' => 1,
 			)
 		),
-		'attendees_min' => Array (
+		'attendees_min' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees_min',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '3',
 				'max' => '3',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '999',
 					'lower' => '0'
 				),
 				'default' => 0
 			)
 		),
-		'attendees_max' => Array (
+		'attendees_max' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees_max',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '3',
 				'max' => '3',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '999',
 					'lower' => '0'
 				),
 				'default' => 0
 			)
 		),
-		'cancelled' => Array (
+		'cancelled' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.cancelled',
-			'config' => Array (
+			'config' => array(
 				'type' => 'check',
 			)
 		),
-		'attendees' => Array (
+		'attendees' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
-			'config' => Array (
+			'config' => array(
 				'type' => 'none',
 			)
 		),
-		'enough_attendees' => Array (
+		'enough_attendees' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.enough_attendees',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
-			'config' => Array (
+			'config' => array(
 				'type' => 'none',
 			)
 		),
-		'is_full' => Array (
+		'is_full' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.is_full',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
-			'config' => Array (
+			'config' => array(
 				'type' => 'none',
 			)
 		),
-		'vips' => Array (
+		'vips' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.vips',
-			'config' => Array (
+			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',
 				'allowed' => 'fe_users',
@@ -409,56 +409,56 @@ $TCA['tx_seminars_seminars'] = Array (
 				'MM' => 'tx_seminars_seminars_feusers_mm',
 			)
 		),
-		'notes' => Array (
+		'notes' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.notes',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		)
 	),
-	'types' => Array (
+	'types' => array(
 		'0' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, price_regular, price_regular_early, price_special, price_special_early, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes'),
 		'1' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, price_regular, price_regular_early, price_special, price_special_early, payment_methods, notes'),
 		'2' => Array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
 	),
-	'palettes' => Array (
+	'palettes' => array(
 		'1' => Array('showitem' => 'starttime, endtime')
 	)
 );
 
 
 
-$TCA['tx_seminars_speakers'] = Array (
+$TCA['tx_seminars_speakers'] = array(
 	'ctrl' => $TCA['tx_seminars_speakers']['ctrl'],
-	'interface' => Array (
+	'interface' => array(
 		'showRecordFieldList' => 'title,organization,homepage,description,notes,address,phone_work,phone_home,phone_mobile,fax,email'
 	),
-	'columns' => Array (
-		'title' => Array (
+	'columns' => array(
+		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.title',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
-		'organization' => Array (
+		'organization' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.organization',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim',
 			)
 		),
-		'homepage' => Array (
+		'homepage' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.homepage',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '15',
 				'max' => '255',
@@ -476,19 +476,19 @@ $TCA['tx_seminars_speakers'] = Array (
 				)
 			)
 		),
-		'description' => Array (
+		'description' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.description',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'picture' => Array (
+		'picture' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.picture',
-			'config' => Array (
+			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'file',
 				'allowed' => 'gif,png,jpeg,jpg',
@@ -500,97 +500,97 @@ $TCA['tx_seminars_speakers'] = Array (
 				'maxitems' => 1,
 			)
 		),
-		'notes' => Array (
+		'notes' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.notes',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'address' => Array (
+		'address' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.address',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'phone_work' => Array (
+		'phone_work' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.phone_work',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim',
 			)
 		),
-		'phone_home' => Array (
+		'phone_home' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.phone_home',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim',
 			)
 		),
-		'phone_mobile' => Array (
+		'phone_mobile' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.phone_mobile',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim',
 			)
 		),
-		'fax' => Array (
+		'fax' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.fax',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim',
 			)
 		),
-		'email' => Array (
+		'email' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers.email',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim,nospace',
 			)
 		),
 	),
-	'types' => Array (
+	'types' => array(
 		'0' => Array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], notes, address, phone_work, phone_home, phone_mobile, fax, email')
 	),
-	'palettes' => Array (
+	'palettes' => array(
 		'1' => Array('showitem' => '')
 	)
 );
 
 
 
-$TCA['tx_seminars_attendances'] = Array (
+$TCA['tx_seminars_attendances'] = array(
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
-	'interface' => Array (
+	'interface' => array(
 		'showRecordFieldList' => 'title,user,seminar,seats,paid,datepaid,method_of_payment,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
 	),
-	'columns' => Array (
-		'title' => Array (
+	'columns' => array(
+		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.title',
-			'config' => Array (
+			'config' => array(
 				'type' => 'none',
 			)
 		),
-		'user' => Array (
+		'user' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.user',
-			'config' => Array (
+			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',
 				'allowed' => 'fe_users',
@@ -599,10 +599,10 @@ $TCA['tx_seminars_attendances'] = Array (
 				'maxitems' => 1,
 			)
 		),
-		'seminar' => Array (
+		'seminar' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.seminar',
-			'config' => Array (
+			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_seminars',
@@ -611,41 +611,41 @@ $TCA['tx_seminars_attendances'] = Array (
 				'maxitems' => 1,
 			)
 		),
-		'price' => Array (
+		'price' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.price',
 			'displayCond' => '',
-			'config' => Array (
+			'config' => array(
 				'type' => 'none',
 			)
 		),
-		'seats' => Array (
+		'seats' => array(
 			'exclude' => '1',
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.seats',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '3',
 				'max' => '3',
 				'eval' => 'int',
 				'checkbox' => '0',
-				'range' => Array (
+				'range' => array(
 					'upper' => '999',
 					'lower' => '0'
 				),
 				'default' => '1'
 			)
 		),
-		'paid' => Array (
+		'paid' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.paid',
-			'config' => Array (
+			'config' => array(
 				'type' => 'check',
 			)
 		),
-		'datepaid' => Array (
+		'datepaid' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.datepaid',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '8',
 				'max' => '20',
@@ -654,10 +654,10 @@ $TCA['tx_seminars_attendances'] = Array (
 				'default' => '0'
 			)
 		),
-		'method_of_payment' => Array (
+		'method_of_payment' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.method_of_payment',
-			'config' => Array (
+			'config' => array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
@@ -670,115 +670,115 @@ $TCA['tx_seminars_attendances'] = Array (
 				)
 			)
 		),
-		'been_there' => Array (
+		'been_there' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.been_there',
-			'config' => Array (
+			'config' => array(
 				'type' => 'check',
 			)
 		),
-		'interests' => Array (
+		'interests' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.interests',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'expectations' => Array (
+		'expectations' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.expectations',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'background_knowledge' => Array (
+		'background_knowledge' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.background_knowledge',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'accommodation' => Array (
+		'accommodation' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.accommodation',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'food' => Array (
+		'food' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.food',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'known_from' => Array (
+		'known_from' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.known_from',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'notes' => Array (
+		'notes' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.notes',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
 	),
-	'types' => Array (
+	'types' => array(
 		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, seats, paid, datepaid, method_of_payment, been_there, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
 	),
-	'palettes' => Array (
+	'palettes' => array(
 		'1' => Array('showitem' => '')
 	)
 );
 
 
 
-$TCA['tx_seminars_sites'] = Array (
+$TCA['tx_seminars_sites'] = array(
 	'ctrl' => $TCA['tx_seminars_sites']['ctrl'],
-	'interface' => Array (
+	'interface' => array(
 		'showRecordFieldList' => 'title,address,homepage,directions,notes'
 	),
-	'columns' => Array (
-		'title' => Array (
+	'columns' => array(
+		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_sites.title',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
-		'address' => Array (
+		'address' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_sites.address',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'homepage' => Array (
+		'homepage' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_sites.homepage',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '15',
 				'max' => '255',
@@ -796,54 +796,54 @@ $TCA['tx_seminars_sites'] = Array (
 				)
 			)
 		),
-		'directions' => Array (
+		'directions' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_sites.directions',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
-		'notes' => Array (
+		'notes' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_sites.notes',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
 	),
-	'types' => Array (
+	'types' => array(
 		'0' => Array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes')
 	),
-	'palettes' => Array (
+	'palettes' => array(
 		'1' => Array('showitem' => '')
 	)
 );
 
 
 
-$TCA['tx_seminars_organizers'] = Array (
+$TCA['tx_seminars_organizers'] = array(
 	'ctrl' => $TCA['tx_seminars_organizers']['ctrl'],
-	'interface' => Array (
+	'interface' => array(
 		'showRecordFieldList' => 'title,homepage,email,email_footer'
 	),
-	'columns' => Array (
-		'title' => Array (
+	'columns' => array(
+		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers.title',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
-		'homepage' => Array (
+		'homepage' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers.homepage',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '15',
 				'max' => '255',
@@ -861,87 +861,87 @@ $TCA['tx_seminars_organizers'] = Array (
 				)
 			)
 		),
-		'email' => Array (
+		'email' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers.email',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim,nospace',
 			)
 		),
-		'email_footer' => Array (
+		'email_footer' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers.email_footer',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
 			)
 		),
 	),
-	'types' => Array (
+	'types' => array(
 		'0' => Array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer')
 	),
-	'palettes' => Array (
+	'palettes' => array(
 		'1' => Array('showitem' => '')
 	)
 );
 
-$TCA['tx_seminars_payment_methods'] = Array (
+$TCA['tx_seminars_payment_methods'] = array(
 	'ctrl' => $TCA['tx_seminars_payment_methods']['ctrl'],
-	'interface' => Array (
+	'interface' => array(
 		'showRecordFieldList' => 'title, description'
 	),
-	'columns' => Array (
-		'title' => Array (
+	'columns' => array(
+		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_payment_methods.title',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
-		'description' => Array (
+		'description' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_payment_methods.description',
-			'config' => Array (
+			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '10',
 			)
 		),
 	),
-	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2, description')
+	'types' => array(
+		'0' => array('showitem' => 'title;;;;2-2-2, description')
 	),
-	'palettes' => Array (
-		'1' => Array('showitem' => '')
+	'palettes' => array(
+		'1' => array('showitem' => '')
 	)
 );
 
-$TCA['tx_seminars_event_types'] = Array (
+$TCA['tx_seminars_event_types'] = array(
 	'ctrl' => $TCA['tx_seminars_event_types']['ctrl'],
-	'interface' => Array (
+	'interface' => array(
 		'showRecordFieldList' => 'title'
 	),
-	'columns' => Array (
-		'title' => Array (
+	'columns' => array(
+		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_event_types.title',
-			'config' => Array (
+			'config' => array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
 			)
 		),
 	),
-	'types' => Array (
-		'0' => Array('showitem' => 'title;;;;2-2-2')
+	'types' => array(
+		'0' => array('showitem' => 'title;;;;2-2-2')
 	),
-	'palettes' => Array (
-		'1' => Array('showitem' => '')
+	'palettes' => array(
+		'1' => array('showitem' => '')
 	)
 );
 
