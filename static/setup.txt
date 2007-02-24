@@ -87,7 +87,7 @@ plugin.tx_seminars {
 	# the charset provided in the HTTP header for CSV export
 	charsetForCsv = utf-8
 
-	# the filename proposed for CSV export
+	# the filename proposed for CSV export of registration lists
 	filenameForRegistrationsCsv = registrations.csv
 
 	# comma-separated list of field names from fe_users that will be used for CSV export
