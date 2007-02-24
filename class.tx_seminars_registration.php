@@ -275,6 +275,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			case 'lodgings':
 				$result = $this->getLodgings();
 				break;
+			case 'checkboxes':
+				$result = $this->getCheckboxes();
+				break;
 			default:
 				$result = $this->getRecordPropertyString($trimmedKey);
 				break;
@@ -590,6 +593,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->setMarkerContent('lodgings', $this->getLodgings());
 		} else {
 			$this->readSubpartsToHide('lodgings', 'field_wrapper');
+		}
+
+		if ($this->hasCheckboxes()) {
+			$this->setMarkerContent('checkboxes', $this->getCheckboxes());
+		} else {
+			$this->readSubpartsToHide('checkboxes', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyInteger('kids')) {
@@ -918,6 +927,38 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	function getGender() {
 		return $this->pi_getLL('label_gender.I.'
 			.$this->getRecordPropertyInteger('gender'));
+	}
+
+	/**
+	 * Checks whether any option checkboxes are referenced by this record.
+	 *
+	 * @return	boolean		true if at least one option checkbox is referenced by this record, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasCheckboxes() {
+		return $this->hasRecordPropertyInteger('checkboxes');
+	}
+
+	/**
+	 * Gets the selected option checkboxes separated by CRLF. If no option
+	 * checkbox is selected, this function will return an empty string.
+	 *
+	 * @return	string		the titles of the selected option checkboxes separated by CRLF or an empty string if no lodging option is selected
+	 *
+	 * @access	public
+	 */
+	function getCheckboxes() {
+		$result = '';
+
+		if ($this->hasCheckboxes()) {
+			$result = $this->getMmRecords(
+				$this->tableCheckboxes,
+				$this->tableAttendancesCheckboxesMM
+			);
+		}
+
+		return $result;
 	}
 
 	/**
