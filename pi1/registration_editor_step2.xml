@@ -153,10 +153,7 @@
 			<process>
 				<userobj>
 					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
-					<params>
-						<data name="elementname" value="terms_2" />
-					</params>
+					<method>isTerms2Enabled</method>
 				</userobj>
 			</process>
 			<validators>

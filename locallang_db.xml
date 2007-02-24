@@ -26,6 +26,7 @@
 			<label index="tx_seminars_seminars.credit_points"></label>
 			<label index="tx_seminars_seminars.additional_information"></label>
 			<label index="tx_seminars_seminars.checkboxes"></label>
+			<label index="tx_seminars_seminars.uses_terms_2"></label>
 			<label index="tx_seminars_seminars.needs_registration"></label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations"></label>
 			<label index="tx_seminars_seminars.cancelled"></label>
@@ -146,6 +147,7 @@
 			<label index="tx_seminars_seminars.credit_points">Credit points</label>
 			<label index="tx_seminars_seminars.additional_information">Additional information</label>
 			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox</label>
+			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form</label>
 			<label index="tx_seminars_seminars.needs_registration">Needs registration</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled</label>
@@ -271,6 +273,7 @@
 			<label index="tx_seminars_seminars.credit_points">Leistungspunkte</label>
 			<label index="tx_seminars_seminars.additional_information">Zusätzliche Informationen</label>
 			<label index="tx_seminars_seminars.checkboxes">Anmeldeoptionen mit Checkbox</label>
+			<label index="tx_seminars_seminars.uses_terms_2">Reisebedingungen-Checkbox im Anmeldeformular anzeigen</label>
 			<label index="tx_seminars_seminars.needs_registration">Anmeldung nötig</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Lässt mehrfache Anmeldungen derselben Person zu</label>
 			<label index="tx_seminars_seminars.cancelled">Wurde abgesagt</label>
@@ -551,6 +554,7 @@
 			<label index="tx_seminars_seminars.event_type" type="integer">99114704</label>
 			<label index="tx_seminars_seminars.additional_information" type="integer">16157584</label>
 			<label index="tx_seminars_seminars.checkboxes" type="integer">25823877</label>
+			<label index="tx_seminars_seminars.uses_terms_2" type="integer">247331383</label>
 			<label index="tx_seminars_seminars.needs_registration" type="integer">228396671</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">34564851</label>
@@ -838,6 +842,8 @@
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment</label>
 			<label index="tx_seminars_seminars.event_type">Event type</label>
 			<label index="tx_seminars_seminars.organizers">Organizers</label>
+			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox</label>
+			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form</label>
 			<label index="tx_seminars_seminars.needs_registration">Needs registration</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees</label>
@@ -926,7 +932,6 @@
 			<label index="tx_seminars_seminars.topic">Topic</label>
 			<label index="tx_seminars_attendances.price">Price to pay</label>
 			<label index="tx_seminars_seminars.additional_information">Additional information</label>
-			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">General</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Organizer</label>

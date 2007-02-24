@@ -2037,7 +2037,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * Gets the uid of the topic record if we are a date record.
 	 * Otherwise the uid of this record is returned.
 	 *
-	 * @return	integer		the uid of this or its topic record
+	 * @return	integer		either the uid of this record or its topic record, depending on whether we are a date record
 	 *
 	 * @access	public
 	 */
@@ -2076,7 +2076,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * If the array has not been initialized properly, 0 is returned instead.
 	 * If we are a date record, it'll be retrieved from the corresponding topic record.
 	 *
-	 * @param	string		the integer field
+	 * @param	string		the name of the field to retrieve
 	 *
 	 * @return	integer		the corresponding element from the record data array
 	 *
@@ -2121,7 +2121,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * If the array has not been initialized properly, an empty string is returned instead.
 	 * If we are a date record, it'll be retrieved from the corresponding topic record.
 	 *
-	 * @param	string		the string field
+	 * @param	string		the name of the field to retrieve
 	 *
 	 * @return	string		the corresponding element from the record data array
 	 *
@@ -2182,6 +2182,25 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets an element of the record data array, converted to a boolean.
+	 * If the array has not been initialized properly, false is returned.
+	 *
+	 * If we are a date record, it'll be retrieved from the corresponding topic
+	 * record.
+	 *
+	 * @param	string		the name of the field to retrieve
+	 *
+	 * @return	boolean		the corresponding element from the record data array
+	 *
+	 * @access	private
+	 */
+	function getTopicBoolean($key) {
+		return ($this->isTopicOkay())
+			? $this->topic->getRecordPropertyBoolean($key)
+			: $this->getRecordPropertyBoolean($key);
 	}
 
 	/**
@@ -2368,6 +2387,25 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		return $this->hasRecordPropertyInteger('owner_feuser')
 			&& ($this->getRecordPropertyInteger('owner_feuser')
 				== $this->getFeUserUid());
+	}
+
+	/**
+	 * Checkes whether the "travelling terms" checkbox (ie. the second "terms"
+	 * checkbox) should be displayed in the registration form for this event.
+	 *
+	 * If we are a date record, this is checked for the corresponding topic
+	 * record.
+	 *
+	 * Note: This is not related to entries in the showRegistrationFields
+	 * configuration variable. This function checks this on a per-event basis
+	 * whereas showRegistrationFields is a global option.
+	 *
+	 * @return	boolean		true if the "travelling terms" checkbox should be displayed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasTerms2() {
+		return $this->getTopicBoolean('uses_terms_2');
 	}
 }
 

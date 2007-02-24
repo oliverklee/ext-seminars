@@ -234,6 +234,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Checks whether the "travelling terms" checkbox (ie. the second "terms"
+	 * checkbox) is enabled in the event record *and* via TS setup.
+	 *
+	 * @return	boolean		true if the "travelling terms" checkbox is enabled in the event record *and* via TS setup, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isTerms2Enabled() {
+		return $this->hasRegistrationFormField(array('elementname' => 'terms_2'))
+			&& $this->seminar->hasTerms2();
+	}
+
+	/**
 	 * Checks whether the "terms_2" checkbox is checked (if it is enabled in the
 	 * configuration). If the checkbox is disabled in the configuration, this
 	 * function always returns true.
@@ -245,8 +258,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function isTerms2CheckedAndEnabled($checkboxValue) {
-		return ((boolean) $checkboxValue) ||
-			!$this->hasRegistrationFormField(array('elementname' => 'terms_2'));
+		return ((boolean) $checkboxValue) || !$this->isTerms2Enabled();
 	}
 
 	/**

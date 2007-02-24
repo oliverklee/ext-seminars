@@ -10,7 +10,7 @@
 - Change: BE editing of event records: Only show the registration-related fields if registration is enabled for this event (#575)
 - Feature: Add a field "folder for registration records" to the organizer records (#465)
 - Change: "Terms" should be a default field in the registration form (#574)
-- Change: Add a second "terms" checkbox to the registration form (#547)
+- Change: Add a second "terms" checkbox to the registration form (#547. #579)
 - Feature: Add record type for checkboxes in the registration form (#436, #566)
 - Feature: New BE module: event list, registration list, speaker list and organizer list (#279, #509, #543, #591, #546, #598, #596)
 - Fix: Ordering of seminars doesn't work with MySQL Version 4.1.21 (#500)
