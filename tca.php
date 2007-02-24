@@ -983,6 +983,21 @@ $TCA['tx_seminars_attendances'] = array(
 				'rows' => '5',
 			)
 		),
+		'foods' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.foods',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_foods',
+				'foreign_table' => 'tx_seminars_foods',
+				'foreign_table_where' => 'ORDER BY title',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 999,
+				'MM' => 'tx_seminars_attendances_foods_mm',
+			)
+		),
 		'food' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.food',
@@ -1012,7 +1027,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'user;;;;1-1-1, seminar, price, total_price, seats, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, food, known_from, notes')
+		'0' => array('showitem' => 'user;;;;1-1-1, seminar, price, total_price, seats, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

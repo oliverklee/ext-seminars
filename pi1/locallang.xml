@@ -132,6 +132,7 @@
 			<label index="label_telephone">Phone number</label>
 			<label index="label_email">E-mail address</label>
 			<label index="label_lodgings">Lodging</label>
+			<label index="label_foods">Food</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_terms_2">I accept the terms for travelling.</label>
 			<label index="label_submit_registration">Finish registration</label>
@@ -160,6 +161,7 @@
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
 			<label index="message_provideBankData">Please provide your bank data.</label>
 			<label index="message_selectLodging">Please select at least one lodging option.</label>
+			<label index="message_selectFood">Please select at least one food option.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 		</languageKey>
@@ -364,6 +366,7 @@
 			<label index="label_telephone">Telefon</label>
 			<label index="label_email">E-mail-Adresse</label>
 			<label index="label_lodgings">Art der Unterbringung</label>
+			<label index="label_foods">Art der Verpflegung</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_terms_2">Ich akzeptiere die Reisebedingungen.</label>
 			<label index="label_submit_registration">Verbindlich anmelden</label>
@@ -392,6 +395,7 @@
 			<label index="message_chooseMethodOfPayment">Bitte wählen Sie eine Zahlungsart aus.</label>
 			<label index="message_provideBankData">Bitte geben Sie Ihre Bankverbindung an.</label>
 			<label index="message_selectLodging">Bitte wählen Sie mindestens eine Unterbringungsart aus.</label>
+			<label index="message_selectFood">Bitte wählen Sie mindestens eine Verpflegungsart aus.</label>
 			<label index="message_acceptTerms">Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen, um sich für diese Veranstaltung anzumelden.</label>
 			<label index="message_acceptTerms2">Bitte akzeptieren Sie die Reisebedingungen, um sich für diese Veranstaltung anzumelden.</label>
 		</languageKey>
@@ -729,6 +733,7 @@
 			<label index="label_telephone" type="integer">33039901</label>
 			<label index="label_email" type="integer">146136420</label>
 			<label index="label_lodgings" type="integer">71303596</label>
+			<label index="label_foods" type="integer">10718834</label>
 			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_terms_2" type="integer">6400727</label>
 			<label index="label_submit_registration" type="integer">88697193</label>
@@ -758,6 +763,7 @@
 			<label index="message_chooseMethodOfPayment" type="integer">209557761</label>
 			<label index="message_provideBankData" type="integer">10940357</label>
 			<label index="message_selectLodging" type="integer">147185186</label>
+			<label index="message_selectFood" type="integer">148997362</label>
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
 		</languageKey>
@@ -1019,6 +1025,7 @@
 			<label index="label_telephone">Phone number</label>
 			<label index="label_email">E-mail address</label>
 			<label index="label_lodgings">Lodging</label>
+			<label index="label_foods">Food</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_terms_2">I accept the terms for travelling.</label>
 			<label index="label_submit_registration">Finish registration</label>
@@ -1047,6 +1054,7 @@
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
 			<label index="message_provideBankData">Please provide your bank data.</label>
 			<label index="message_selectLodging">Please select at least one lodging option.</label>
+			<label index="message_selectFood">Please select at least one food option.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 		</languageKey>

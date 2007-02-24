@@ -57,6 +57,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	var $lodgings = array();
 
 	/**
+	 * An array of UIDs of food options associated with this record.
+	 */
+	var $foods = array();
+
+	/**
 	 * An array of UIDs of option checkboxes associated with this record.
 	 */
 	var $checkboxes = array();
@@ -134,6 +139,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->lodgings = isset($registrationData['lodgings'])
 			? $registrationData['lodgings'] : array();
 		$this->recordData['lodgings'] = count($this->lodgings);
+
+		$this->foods = isset($registrationData['foods'])
+			? $registrationData['foods'] : array();
+		$this->recordData['foods'] = count($this->foods);
 
 		$this->checkboxes = isset($registrationData['checkboxes'])
 			? $registrationData['checkboxes'] : array();
@@ -274,6 +283,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				break;
 			case 'lodgings':
 				$result = $this->getLodgings();
+				break;
+			case 'foods':
+				$result = $this->getFoods();
 				break;
 			case 'checkboxes':
 				$result = $this->getCheckboxes();
@@ -593,6 +605,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->setMarkerContent('lodgings', $this->getLodgings());
 		} else {
 			$this->readSubpartsToHide('lodgings', 'field_wrapper');
+		}
+
+		if ($this->hasFoods()) {
+			$this->setMarkerContent('foods', $this->getFoods());
+		} else {
+			$this->readSubpartsToHide('foods', 'field_wrapper');
 		}
 
 		if ($this->hasCheckboxes()) {
@@ -930,38 +948,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks whether any option checkboxes are referenced by this record.
-	 *
-	 * @return	boolean		true if at least one option checkbox is referenced by this record, false otherwise
-	 *
-	 * @access	public
-	 */
-	function hasCheckboxes() {
-		return $this->hasRecordPropertyInteger('checkboxes');
-	}
-
-	/**
-	 * Gets the selected option checkboxes separated by CRLF. If no option
-	 * checkbox is selected, this function will return an empty string.
-	 *
-	 * @return	string		the titles of the selected option checkboxes separated by CRLF or an empty string if no lodging option is selected
-	 *
-	 * @access	public
-	 */
-	function getCheckboxes() {
-		$result = '';
-
-		if ($this->hasCheckboxes()) {
-			$result = $this->getMmRecords(
-				$this->tableCheckboxes,
-				$this->tableAttendancesCheckboxesMM
-			);
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Checks whether there are any lodging options referenced by this record.
 	 *
 	 * @return	boolean		true if at least one lodging option is referenced by this record, false otherwise
@@ -987,6 +973,70 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$result = $this->getMmRecords(
 				$this->tableLodgings,
 				$this->tableAttendancesLodgingsMM
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether there are any food options referenced by this record.
+	 *
+	 * @return	boolean		true if at least one food option is referenced by this record, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasFoods() {
+		return $this->hasRecordPropertyInteger('foods');
+	}
+
+	/**
+	 * Gets the selected food options separated by CRLF. If there is no
+	 * food option selected, this function will return an empty string.
+	 *
+	 * @return	string		the titles of the selected loding options separated by CRLF or an empty string if no food option is selected
+	 *
+	 * @access	public
+	 */
+	function getFoods() {
+		$result = '';
+
+		if ($this->hasFoods()) {
+			$result = $this->getMmRecords(
+				$this->tableFoods,
+				$this->tableAttendancesFoodsMM
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether any option checkboxes are referenced by this record.
+	 *
+	 * @return	boolean		true if at least one option checkbox is referenced by this record, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasCheckboxes() {
+		return $this->hasRecordPropertyInteger('checkboxes');
+	}
+
+	/**
+	 * Gets the selected option checkboxes separated by CRLF. If no option
+	 * checkbox is selected, this function will return an empty string.
+	 *
+	 * @return	string		the titles of the selected option checkboxes separated by CRLF or an empty string if no option checkbox is selected
+	 *
+	 * @access	public
+	 */
+	function getCheckboxes() {
+		$result = '';
+
+		if ($this->hasCheckboxes()) {
+			$result = $this->getMmRecords(
+				$this->tableCheckboxes,
+				$this->tableAttendancesCheckboxesMM
 			);
 		}
 
@@ -1049,12 +1099,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
 			if ($this->recordData['uid']) {
 				$this->createMmRecords(
-					$this->tableAttendancesCheckboxesMM,
-					$this->checkboxes
-				);
-				$this->createMmRecords(
 					$this->tableAttendancesLodgingsMM,
 					$this->lodgings
+				);
+				$this->createMmRecords(
+					$this->tableAttendancesFoodsMM,
+					$this->foods
+				);
+				$this->createMmRecords(
+					$this->tableAttendancesCheckboxesMM,
+					$this->checkboxes
 				);
 			}
 		}

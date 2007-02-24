@@ -176,6 +176,7 @@ CREATE TABLE tx_seminars_attendances (
 	accommodation text NOT NULL,
 	lodgings int(11) DEFAULT '0' NOT NULL,
 	food text NOT NULL,
+	foods int(11) DEFAULT '0' NOT NULL,
 	known_from text NOT NULL,
 	notes text NOT NULL,
 	seats int(11) unsigned DEFAULT '0' NOT NULL,
@@ -382,3 +383,15 @@ CREATE TABLE tx_seminars_seminars_foods_mm (
 	KEY uid_foreign (uid_foreign)
 );
 
+
+#
+# Table structure for table 'tx_seminars_attendances_foods_mm'
+#
+CREATE TABLE tx_seminars_attendances_foods_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);

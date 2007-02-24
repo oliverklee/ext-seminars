@@ -69,6 +69,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tableAttendancesLodgingsMM;
 	var $tableFoods;
 	var $tableSeminarsFoodsMM;
+	var $tableAttendancesFoodsMM;
 
 	// Constants for the types of records
 	var $recordTypeComplete;
@@ -190,6 +191,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableSeminarsLodgingsMM      = $dbPrefix.'seminars_lodgings_mm';
 		$this->tableAttendancesLodgingsMM   = $dbPrefix.'attendances_lodgings_mm';
 		$this->tableSeminarsFoodsMM         = $dbPrefix.'seminars_foods_mm';
+		$this->tableAttendancesFoodsMM      = $dbPrefix.'attendances_foods_mm';
 
 		return;
 	}

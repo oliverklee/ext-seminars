@@ -675,7 +675,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Provides data items for the list lodging options for this event.
+	 * Provides data items for the list of lodging options for this event.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
 	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
@@ -696,21 +696,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks whether our current event has any lodging options and the
-	 * lodging options should be displayed at all.
-	 *
-	 * @return	boolean		true if we have a non-empty list of lodgings AND this list should be displayed, false otherwise
-	 *
-	 * @access	public
-	 */
-	function hasLodgings() {
-		return $this->seminar->hasLodgings()
-			&& $this->hasRegistrationFormField(
-				array('elementname' => 'lodgings')
-			);
-	}
-
-	/**
 	 * Checks whether at least one lodging option is selected (if there is at
 	 * least one lodging option for this event and the lodging options should
 	 * be displayed).
@@ -726,6 +711,72 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		return !empty($selection) || !$this->hasLodgings();
 	}
 
+	/**
+	 * Checks whether our current event has any lodging options and the
+	 * lodging options should be displayed at all.
+	 *
+	 * @return	boolean		true if we have a non-empty list of lodging options and this list should be displayed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasLodgings() {
+		return $this->seminar->hasLodgings()
+			&& $this->hasRegistrationFormField(
+				array('elementname' => 'lodgings')
+			);
+	}
+
+	/**
+	 * Provides data items for the list of food options for this event.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
+	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
+	 * @param	object		the current renderlet XML node as a recursive array (unused)
+	 *
+	 * @return	array		items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateFoods($items, $params, &$form) {
+		$result = array();
+
+		if ($this->seminar->hasFoods()) {
+			$result = $this->seminar->getFoods();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether our current event has any food options and the food
+	 * options should be displayed at all.
+	 *
+	 * @return	boolean		true if we have a non-empty list of food options and this list should be displayed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasFoods() {
+		return $this->seminar->hasFoods()
+			&& $this->hasRegistrationFormField(
+				array('elementname' => 'foods')
+			);
+	}
+
+	/**
+	 * Checks whether at least one food option is selected (if there is at
+	 * least one food option for this event and the food options should
+	 * be displayed).
+	 *
+	 * @param	string		the value of the current field
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	boolean		true if at least one item is selected or no food options can be selected
+	 *
+	 * @access	public
+	 */
+	function isFoodSelected($selection, &$form) {
+		return !empty($selection) || !$this->hasFoods();
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_registration_editor.php']) {

@@ -2196,11 +2196,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the option checkboxes associated with this event. If we are a date
-	 * record, the option checkboxes of the corresponding topic record will be
-	 * retrieved.
+	 * Gets the lodging options associated with this event.
 	 *
-	 * @return	array		an array of option checkboxes, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return	array		an array of lodging options, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid), will not be null but might be empty
 	 *
 	 * @access	public
 	 */
@@ -2211,6 +2209,38 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$result = $this->getMmRecords(
 				$this->tableLodgings,
 				$this->tableSeminarsLodgingsMM,
+				false
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether we have any food options.
+	 *
+	 * @return	boolean		true if we have at least one food option, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasFoods() {
+		return $this->hasRecordPropertyInteger('foods');
+	}
+
+	/**
+	 * Gets the food options associated with this event.
+	 *
+	 * @return	array		an array of food options, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid), will not be null but might be empty
+	 *
+	 * @access	public
+	 */
+	function getFoods() {
+		$result = array();
+
+		if ($this->hasFoods()) {
+			$result = $this->getMmRecords(
+				$this->tableFoods,
+				$this->tableSeminarsFoodsMM,
 				false
 			);
 		}
@@ -2235,7 +2265,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * record, the option checkboxes of the corresponding topic record will be
 	 * retrieved.
 	 *
-	 * @return	array		an array of option checkboxes, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return	array		an array of option checkboxes, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid), will not be null but might be empty
 	 *
 	 * @access	public
 	 */
@@ -2261,7 +2291,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @param	string		the name of the foreign table (must not be empty), must have the fields uid and title
 	 * @param	string		the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
 	 *
-	 * @return	array		an array of referenced records, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid), may be empty, will not be null
+	 * @return	array		an array of referenced records, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid), will not be null but might be empty
 	 *
 	 * @access	private
 	 */
