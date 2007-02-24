@@ -959,6 +959,21 @@ $TCA['tx_seminars_attendances'] = Array (
 				'rows' => '5',
 			)
 		),
+		'lodgings' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.lodgings',
+			'config' => Array (
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_lodgings',
+				'foreign_table' => 'tx_seminars_lodgings',
+				'foreign_table_where' => 'ORDER BY title',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 999,
+				'MM' => 'tx_seminars_attendances_lodgings_mm',
+			)
+		),
 		'accommodation' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.accommodation',
@@ -997,7 +1012,7 @@ $TCA['tx_seminars_attendances'] = Array (
 		),
 	),
 	'types' => Array (
-		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, total_price, seats, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, accommodation, food, known_from, notes')
+		'0' => Array('showitem' => 'user;;;;1-1-1, seminar, price, total_price, seats, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, food, known_from, notes')
 	),
 	'palettes' => Array (
 		'1' => Array('showitem' => ''),

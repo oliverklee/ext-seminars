@@ -66,6 +66,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tableAttendancesCheckboxesMM;
 	var $tableLodgings;
 	var $tableSeminarsLodgingsMM;
+	var $tableAttendancesLodgingsMM;
 	var $tableFoods;
 	var $tableSeminarsFoodsMM;
 
@@ -187,6 +188,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableSeminarsCheckboxesMM    = $dbPrefix.'seminars_checkboxes_mm';
 		$this->tableAttendancesCheckboxesMM = $dbPrefix.'attendances_checkboxes_mm';
 		$this->tableSeminarsLodgingsMM      = $dbPrefix.'seminars_lodgings_mm';
+		$this->tableAttendancesLodgingsMM   = $dbPrefix.'attendances_lodgings_mm';
 		$this->tableSeminarsFoodsMM         = $dbPrefix.'seminars_foods_mm';
 
 		return;

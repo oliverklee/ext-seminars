@@ -673,6 +673,59 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				array('elementname' => 'checkboxes')
 			);
 	}
+
+	/**
+	 * Provides data items for the list lodging options for this event.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
+	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
+	 * @param	object		the current renderlet XML node as a recursive array (unused)
+	 *
+	 * @return	array		items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateLodgings($items, $params, &$form) {
+		$result = array();
+
+		if ($this->seminar->hasLodgings()) {
+			$result = $this->seminar->getLodgings();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether our current event has any lodging options and the
+	 * lodging options should be displayed at all.
+	 *
+	 * @return	boolean		true if we have a non-empty list of lodgings AND this list should be displayed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasLodgings() {
+		return $this->seminar->hasLodgings()
+			&& $this->hasRegistrationFormField(
+				array('elementname' => 'lodgings')
+			);
+	}
+
+	/**
+	 * Checks whether at least one lodging option is selected (if there is at
+	 * least one lodging option for this event and the lodging options should
+	 * be displayed).
+	 *
+	 * @param	string		the value of the current field
+	 * @param	object		the current FORMidable object
+	 *
+	 * @return	boolean		true if at least one item is selected or no lodging options can be selected
+	 *
+	 * @access	public
+	 */
+	function isLodgingSelected($selection, &$form) {
+		return !empty($selection) || !$this->hasLodgings();
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_registration_editor.php']) {

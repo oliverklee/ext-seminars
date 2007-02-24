@@ -274,6 +274,41 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Adds m:n records that are referenced by this record.
+	 *
+	 * Before this function may be called, $this->recordData['uid'] must be set
+	 * correctly.
+	 *
+	 * @param	string		the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
+	 * @param	array		array of uids of records from the foreign table to which we should create references
+	 *
+	 * @access	protected
+	 */
+	function createMmRecords($mmTable, $references) {
+		if (!empty($references)) {
+			$sorting = 1;
+
+			foreach ($references as $currentRelation) {
+				// We might get unsafe data here, so better be safe.
+				$foreignUid = intval($currentRelation);
+				if ($foreignUid) {
+					$GLOBALS['TYPO3_DB']->exec_INSERTquery(
+						$mmTable,
+						array(
+							'uid_local' => $this->recordData['uid'],
+							'uid_foreign' => $foreignUid,
+							'sorting' => $sorting
+						)
+					);
+					$sorting++;
+				}
+			}
+		}
+
+		return;
+	}
+
+	/**
 	 * Checks whether a non-deleted and non-hidden record with a given UID exists in the DB.
 	 *
 	 * This method may be called statically.

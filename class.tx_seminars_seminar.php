@@ -2185,6 +2185,40 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks whether we have any lodging options.
+	 *
+	 * @return	boolean		true if we have at least one lodging option, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasLodgings() {
+		return $this->hasRecordPropertyInteger('lodgings');
+	}
+
+	/**
+	 * Gets the option checkboxes associated with this event. If we are a date
+	 * record, the option checkboxes of the corresponding topic record will be
+	 * retrieved.
+	 *
+	 * @return	array		an array of option checkboxes, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function getLodgings() {
+		$result = array();
+
+		if ($this->hasLodgings()) {
+			$result = $this->getMmRecords(
+				$this->tableLodgings,
+				$this->tableSeminarsLodgingsMM,
+				false
+			);
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Checks whether we have any option checkboxes. If we are a date record,
 	 * the corresponding topic record will be checked.
 	 *
@@ -2207,32 +2241,52 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getCheckboxes() {
 		$result = array();
-		$where = 'EXISTS (SELECT * FROM '.$this->tableSeminarsCheckboxesMM
-					.' WHERE '.$this->tableSeminarsCheckboxesMM.'.uid_local='
-					.$this->getTopicInteger('uid').' AND '
-					.$this->tableSeminarsCheckboxesMM.'.uid_foreign='
-					.$this->tableCheckboxes.'.uid)'
-					.t3lib_pageSelect::enableFields($this->tableCheckboxes);
 
 		if ($this->hasCheckboxes()) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'uid, title, sorting',
-				$this->tableCheckboxes.', '.$this->tableSeminarsCheckboxesMM,
-				'uid_local='.$this->getTopicInteger('uid').' AND uid_foreign=uid'
-					.t3lib_pageSelect::enableFields($this->tableCheckboxes),
-				'',
-				'sorting'
+			$result = $this->getMmRecords(
+				$this->tableCheckboxes,
+				$this->tableSeminarsCheckboxesMM,
+				true
 			);
+		}
 
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					$result[] = array(
-						'caption' => $row['title'],
-						'value'   => $row['uid']
-					);
-				}
+		return $result;
+	}
+
+	/**
+	 * Gets the uids and titles of records referenced by this record. If we are
+	 * a date record and $useTopicRecord is true, the referenced records of the
+	 * corresponding topic record will be retrieved.
+	 *
+	 * @param	string		the name of the foreign table (must not be empty), must have the fields uid and title
+	 * @param	string		the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
+	 *
+	 * @return	array		an array of referenced records, consisting each of a nested array with the keys "caption" (for the title) and "value" (for the uid), may be empty, will not be null
+	 *
+	 * @access	private
+	 */
+	function getMmRecords($foreignTable, $mmTable, $useTopicRecord) {
+		$result = array();
+
+		$uid = ($useTopicRecord) ?
+			$this->getTopicInteger('uid') : $this->getUid();
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'uid, title, sorting',
+			$foreignTable.', '.$mmTable,
+			'uid_local='.$uid.' AND uid_foreign=uid'
+				.t3lib_pageSelect::enableFields($foreignTable),
+			'',
+			'sorting'
+		);
+
+		if ($dbResult) {
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$result[] = array(
+					'caption' => $row['title'],
+					'value'   => $row['uid']
+				);
 			}
-
 		}
 
 		return $result;

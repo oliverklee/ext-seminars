@@ -89,6 +89,9 @@
 			<label index="tx_seminars_attendances.interests"></label>
 			<label index="tx_seminars_attendances.expectations"></label>
 			<label index="tx_seminars_attendances.background_knowledge"></label>
+			<label index="tx_seminars_attendances.lodgings"></label>
+			<label index="tx_seminars_attendances.accommodation"></label>
+			<label index="tx_seminars_attendances.food"></label>
 			<label index="tx_seminars_attendances.known_from"></label>
 			<label index="tx_seminars_attendances.notes"></label>
 			<label index="tx_seminars_attendances.seats"></label>
@@ -210,6 +213,7 @@
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
 			<label index="tx_seminars_attendances.expectations">Expectations for the event:</label>
 			<label index="tx_seminars_attendances.background_knowledge">Background knowledge:</label>
+			<label index="tx_seminars_attendances.lodgings">Selected lodging options</label>
 			<label index="tx_seminars_attendances.accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="tx_seminars_attendances.food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="tx_seminars_attendances.known_from">How have you heard of this event?</label>
@@ -333,6 +337,7 @@
 			<label index="tx_seminars_attendances.interests">Spezielle Interessen:</label>
 			<label index="tx_seminars_attendances.expectations">Erwartungen an die Veranstaltung:</label>
 			<label index="tx_seminars_attendances.background_knowledge">Vorkenntnisse:</label>
+			<label index="tx_seminars_attendances.lodgings">Gewählte Unterbringungsmöglichkeiten</label>
 			<label index="tx_seminars_attendances.accommodation">Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, keine Übernachtung):</label>
 			<label index="tx_seminars_attendances.food">Welche Kost bevorzugen Sie (Normalkost, vegetarisch oder eine spezielle Diät):</label>
 			<label index="tx_seminars_attendances.known_from">Wie haben Sie von dieser Veranstaltung erfahren?</label>
@@ -594,6 +599,7 @@
 			<label index="tx_seminars_attendances.title" type="integer">192455458</label>
 			<label index="tx_seminars_attendances.user" type="integer">244770478</label>
 			<label index="tx_seminars_attendances.seminar" type="integer">11135941</label>
+			<label index="tx_seminars_attendances.price" type="integer">193408353</label>
 			<label index="tx_seminars_attendances.total_price" type="integer">259855529</label>
 			<label index="tx_seminars_attendances.paid" type="integer">155079066</label>
 			<label index="tx_seminars_attendances.datepaid" type="integer">75729411</label>
@@ -610,6 +616,7 @@
 			<label index="tx_seminars_attendances.interests" type="integer">236721406</label>
 			<label index="tx_seminars_attendances.expectations" type="integer">159374040</label>
 			<label index="tx_seminars_attendances.background_knowledge" type="integer">17742601</label>
+			<label index="tx_seminars_attendances.lodgings" type="integer">119452104</label>
 			<label index="tx_seminars_attendances.accommodation" type="integer">139911191</label>
 			<label index="tx_seminars_attendances.food" type="integer">230880093</label>
 			<label index="tx_seminars_attendances.known_from" type="integer">243584829</label>
@@ -641,7 +648,6 @@
 			<label index="tx_seminars_foods" type="integer">202329490</label>
 			<label index="tx_seminars_foods.title" type="integer">192455458</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
-			<label index="tx_seminars_attendances.price" type="integer">193408353</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -873,6 +879,7 @@
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
 			<label index="tx_seminars_attendances.expectations">Expectations for the event:</label>
 			<label index="tx_seminars_attendances.background_knowledge">Background knowledge:</label>
+			<label index="tx_seminars_attendances.lodgings">Selected lodging options</label>
 			<label index="tx_seminars_attendances.accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="tx_seminars_attendances.food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="tx_seminars_attendances.known_from">How have you heard of this event?</label>

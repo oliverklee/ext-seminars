@@ -52,6 +52,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	var $userData;
 
 	/**
+	 * An array of UIDs of lodging options associated with this record.
+	 */
+	var $lodgings = array();
+
+	/**
 	 * An array of UIDs of option checkboxes associated with this record.
 	 */
 	var $checkboxes = array();
@@ -125,6 +130,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['country'] = $registrationData['country'];
 		$this->recordData['telephone'] = $registrationData['telephone'];
 		$this->recordData['email'] = $registrationData['email'];
+
+		$this->lodgings = isset($registrationData['lodgings'])
+			? $registrationData['lodgings'] : array();
+		$this->recordData['lodgings'] = count($this->lodgings);
 
 		$this->checkboxes = isset($registrationData['checkboxes'])
 			? $registrationData['checkboxes'] : array();
@@ -262,6 +271,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				break;
 			case 'seats':
 				$result = $this->getSeats();
+				break;
+			case 'lodgings':
+				$result = $this->getLodgings();
 				break;
 			default:
 				$result = $this->getRecordPropertyString($trimmedKey);
@@ -572,6 +584,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->setMarkerContent('attendees_names', $this->getRecordPropertyString('attendees_names'));
 		} else {
 			$this->readSubpartsToHide('attendees_names', 'field_wrapper');
+		}
+
+		if ($this->hasLodgings()) {
+			$this->setMarkerContent('lodgings', $this->getLodgings());
+		} else {
+			$this->readSubpartsToHide('lodgings', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyInteger('kids')) {
@@ -903,6 +921,73 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks whether there are any lodging options referenced by this record.
+	 *
+	 * @return	boolean		true if at least one lodging option is referenced by this record, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasLodgings() {
+		return $this->hasRecordPropertyInteger('lodgings');
+	}
+
+	/**
+	 * Gets the selected lodging options separated by CRLF. If there is no
+	 * lodging option selected, this function will return an empty string.
+	 *
+	 * @return	string		the titles of the selected loding options separated by CRLF or an empty string if no lodging option is selected
+	 *
+	 * @access	public
+	 */
+	function getLodgings() {
+		$result = '';
+
+		if ($this->hasLodgings()) {
+			$result = $this->getMmRecords(
+				$this->tableLodgings,
+				$this->tableAttendancesLodgingsMM
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets a CRLF-separated list of the titles of records referenced by this
+	 * record.
+	 *
+	 * @param	string		the name of the foreign table (must not be empty), must have the fields uid and title
+	 * @param	string		the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
+	 *
+	 * @return	string		the titles of the referenced records separated by CRLF, might be empty if no records are referenced
+	 *
+	 * @access	private
+	 */
+	function getMmRecords($foreignTable, $mmTable) {
+		$result = '';
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title, sorting',
+			$foreignTable.', '.$mmTable,
+			'uid_local='.$this->getUid().' AND uid_foreign=uid'
+				.t3lib_pageSelect::enableFields($foreignTable),
+			'',
+			'sorting'
+		);
+
+		if ($dbResult) {
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				if (!empty($result)) {
+					$result .= chr(13).chr(10);
+				}
+				$result .= $row['title'];
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Writes this record to the DB and adds any needed m:n records.
 	 *
 	 * This function actually calles the same method in the parent class
@@ -920,30 +1005,21 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$result = parent::commitToDb();
 
 		if ($result) {
-			$uid = $GLOBALS['TYPO3_DB']->sql_insert_id();
-			if ($uid && $this->getRecordPropertyInteger('checkboxes')) {
-					$sorting = 1;
-					foreach ($this->checkboxes as $currentCheckbox) {
-						// We might get unsafe data here, so better be safe.
-						$checkboxValue = intval($currentCheckbox);
-						if ($checkboxValue) {
-							$GLOBALS['TYPO3_DB']->exec_INSERTquery(
-								$this->tableAttendancesCheckboxesMM,
-								array(
-									'uid_local' => $uid,
-									'uid_foreign' => $checkboxValue,
-									'sorting' => $sorting
-								)
-							);
-							$sorting++;
-						}
-					}
+			$this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
+			if ($this->recordData['uid']) {
+				$this->createMmRecords(
+					$this->tableAttendancesCheckboxesMM,
+					$this->checkboxes
+				);
+				$this->createMmRecords(
+					$this->tableAttendancesLodgingsMM,
+					$this->lodgings
+				);
 			}
 		}
 
 		return $result;
 	}
-
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registration.php']) {

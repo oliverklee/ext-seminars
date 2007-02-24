@@ -61,6 +61,31 @@
 			</data>
 		</renderlet:LABEL>
 
+		<renderlet:CHECKBOX name="lodgings">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_lodgings</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateLodgings</method>
+				</userobj>
+			</data>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>isLodgingSelected</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_selectLodging</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasLodgings</method>
+				</userobj>
+			</process>
+		</renderlet:CHECKBOX>
+
 		<renderlet:CHECKBOX name="checkboxes">
 			<data>
 				<userobj>
