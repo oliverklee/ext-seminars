@@ -149,15 +149,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 				array('tx_seminars_pi1[seminar]' => $seminar->getUid())
 			);
 		} else {
-			// provide a link to the login form
-			$redirectUrl = $plugin->cObj->getTypoLink_URL(
-				$plugin->getConfValueInteger('registerPID'),
-				array('tx_seminars_pi1[seminar]' => $seminar->getUid())
-			);
-			$result = $plugin->cObj->getTypoLink(
+			// provide the login link
+			$result = $plugin->getLoginLink(
 				$this->pi_getLL('message_notLoggedIn'),
-				$plugin->getConfValueInteger('loginPID'),
-				array('redirect_url' => $redirectUrl)
+				$this->getConfValueInteger('registerPID'),
+				$seminar->getUid()
 			);
 		}
 

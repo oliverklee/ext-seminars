@@ -144,6 +144,10 @@
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
+			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
+			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
@@ -378,6 +382,10 @@
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
+			<label index="message_notLoggedIn_formal">Sie sind nicht eingeloggt.</label>
+			<label index="message_notLoggedIn_informal">Du bist nicht eingeloggt.</label>
+			<label index="message_pleaseLogIn_formal">Bitte loggen Sie sich ein um diese Seite zu sehen.</label>
+			<label index="message_pleaseLogIn_informal">Bitte logge dich ein um diese Seite zu sehen.</label>
 			<label index="message_registrationForm_formal">Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:</label>
 			<label index="message_registrationForm_informal">Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:</label>
 			<label index="message_noRegistrations">Für diese Veranstaltung liegen bisher noch keine Anmeldungen vor.</label>
@@ -745,6 +753,10 @@
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
+			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
+			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
 			<label index="message_registrationForm" type="integer">194008229</label>
 			<label index="message_registrationForm_informal" type="integer">194008229</label>
 			<label index="message_registrationForm_formal" type="integer">194008229</label>
@@ -1037,6 +1049,10 @@
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
+			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
+			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>

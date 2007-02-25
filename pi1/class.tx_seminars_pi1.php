@@ -307,6 +307,40 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Returns a label wrapped in <a> tags. The link points to the login page and
+	 * contains a redirect parameter that points back to a certain page (must be
+	 * provided as a parameter to this function). The user will be redirected to
+	 * this page after a successful login.
+	 *
+	 * If an event uid is provided, the return parameter will contain a showUid
+	 * parameter with this UID.
+	 *
+	 * @param	string		the label to wrap into a link
+	 * @param	integer		the PID of the page to redirect to after login (may not be empty)
+	 * @param	integer		the UID of the event (may be empty)
+	 *
+	 * @return	string		the wrapped label
+	 */
+	function getLoginLink($label, $pageId, $eventId = 0) {
+		$redirectUrlParams = array();
+		if ($eventId) {
+			$redirectUrlParams = array(
+				'tx_seminars_pi1[seminar]' => $eventId
+			);
+		}
+		$redirectUrl = $this->cObj->getTypoLink_URL(
+			$pageId,
+			$redirectUrlParams
+		);
+
+		return $this->cObj->getTypoLink(
+			$label,
+			$this->getConfValueInteger('loginPID'),
+			array('redirect_url' => $redirectUrl)
+		);
+	}
+
+	/**
 	 * Creates the HTML for the event list view.
 	 * This function is used for the normal event list as well as the
 	 * "my events" and the "my VIP events" list.
@@ -321,7 +355,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		switch ($this->whatToDisplay) {
 			case 'my_events':
-				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
+				if ($this->isLoggedIn()) {
+					$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
+				} else {
+					$this->setMarkerContent('error_text', $this->pi_getLL('message_notLoggedIn'));
+					$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
+					$result .= $this->getLoginLink(
+						$this->pi_getLL('message_pleaseLogIn'),
+						$GLOBALS['TSFE']->id
+					);
+					$isOkay = false;
+				}
 				break;
 			case 'my_vip_events':
 				$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_VIP_EVENTS');
@@ -1198,7 +1242,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				if ($this->isLoggedIn()) {
 					$isOkay = true;
 				} else {
-					$errorMessage = $this->registrationManager->getLinkToRegistrationOrLoginPage($this, $this->seminar);
+					$errorMessage = $this->getLoginLink(
+						$this->pi_getLL('message_notLoggedIn'),
+						$GLOBALS['TSFE']->id,
+						$this->seminar->getUid()
+					);
 				}
 			}
 		} else {
