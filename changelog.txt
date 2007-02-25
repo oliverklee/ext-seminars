@@ -1,6 +1,6 @@
 0.4.9
 - Feature: Update statistics every time an event record gets saved (#242)
-- Code cleanup and refactoring (#576)
+- Code cleanup and refactoring (#576, #570)
 - Fix: In mod1, lowercase POST (#597)
 - Fix: Configuration check on the wrong object in pi1::createRegistrationsList() (#584)
 - Fix: Typo in pi1/locallang.xml (#583)

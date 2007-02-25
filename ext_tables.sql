@@ -10,8 +10,6 @@ CREATE TABLE fe_users (
 );
 
 
-
-
 #
 # Table structure for table 'tx_seminars_seminars_place_mm'
 #
@@ -25,8 +23,6 @@ CREATE TABLE tx_seminars_seminars_place_mm (
 );
 
 
-
-
 #
 # Table structure for table 'tx_seminars_seminars_speakers_mm'
 #
@@ -38,7 +34,6 @@ CREATE TABLE tx_seminars_seminars_speakers_mm (
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
-
 
 
 #
@@ -90,6 +85,7 @@ CREATE TABLE tx_seminars_seminars (
 	KEY parent (pid)
 );
 
+
 #
 # Table structure for table 'tx_seminars_seminars_feusers_mm'
 #
@@ -131,7 +127,6 @@ CREATE TABLE tx_seminars_speakers (
 );
 
 
-
 #
 # Table structure for table 'tx_seminars_attendances'
 #
@@ -164,7 +159,6 @@ CREATE TABLE tx_seminars_attendances (
 );
 
 
-
 #
 # Table structure for table 'tx_seminars_sites'
 #
@@ -184,7 +178,6 @@ CREATE TABLE tx_seminars_sites (
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
-
 
 
 #
