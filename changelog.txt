@@ -1,4 +1,5 @@
 0.5.0
+- Fix: Allow for searching also within organizer names (#352)
 - Fix: Corrected error message on my_events page when not logged in (#529)
 - Change: Rework the order of tabs when BE-editing events (#578)
 - Change: BE editing of event records: Move "registration necessary" and "multiple registration allowed" to the "registration" tab (#562)
