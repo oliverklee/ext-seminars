@@ -126,6 +126,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		'event_types' => array(
 			'title'
 		),
+		'organizers' => array(
+			'title'
+		)
 	);
 
 	/**
@@ -1204,6 +1207,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 								.' AND ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))'
 								.' AND s2.uid='.$this->tableSeminars.'.uid)'
 								.$eventTypeMatcher
+						.')';
+					}
+
+					// For organizers, we have a comma-separated list of UIDs.
+					foreach ($this->searchFieldList['organizers'] as $field) {
+						$whereParts[] = 'EXISTS ('
+							.'SELECT * FROM '.$this->tableOrganizers
+								.' WHERE '.$this->tableOrganizers.'.'.$field
+									.' LIKE \'%'.$currentPreparedKeyword.'%\''
+								.' AND FIND_IN_SET('.$this->tableOrganizers.'.uid,'
+									.$this->tableSeminars.'.organizers)'
 						.')';
 					}
 
