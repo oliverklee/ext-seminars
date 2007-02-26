@@ -2412,6 +2412,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid, title, sorting',
 			$foreignTable.', '.$mmTable,
+			// uid_local and uid_foreign are from the m:m table;
+			// uid and sorting are from the foreign table.
 			'uid_local='.$uid.' AND uid_foreign=uid'
 				.t3lib_pageSelect::enableFields($foreignTable),
 			'',
