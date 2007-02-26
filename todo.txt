@@ -16,11 +16,7 @@ Version 0.5.0 - "Dogfood, part 2"
 - get a wiki
 - *document what all those *PID configuration variables are used for
 - *test whether all flexform fields work
-- *Create a back end module (/mod2).
-  - *create the sub-modules (and the base for sub-module-switching)
-  - *document it in the manual
 - *Include some basic functionality into md2
-  - *output event lists
   - *possibility to select an event
   - *search forms (search for a user / event), maybe use t3lib_db::searchQuery
 - *Create a global log-function (write all changes to a log-table)
@@ -67,7 +63,6 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - attendance records: require a payment date if a payment method has been entered
 - attendance records: make it configurable to require a payment method if a payment date has been entered
 - investigate whether more than one seminar manager content element per page is possible (especially regarding the search function)
-- in Web > Seminars, check write permissions for source and destination pages
 - prevent users from deleting their account in sr_feuser_register if they are signed up for an upcoming or running seminar
 - change most "seminar" to "event" as this extension allows for different event types
 - prevent potentially dangerous characters in e-mail headers (CR/LF, commas, <, > ...)
@@ -77,7 +72,6 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - update the titles of all involved attendee records after the title of a seminar has been changed
 - update the titles of all involved attendee records after the name (or first name or last name) of a front end user has been changed
 - make it configurable whether to count all registrations or only the paid ones
-- add configuration: don't check for double registrations (this is useful for theaters)
 - check that all DB accesses use either intval, quoteStr or fullQuoteStr
 - investigate whether to use removeBadHTML (like in the extension ve_guestbook)
 - tx_seminars_objectfromdb::commitToDb() should also be able to update records
@@ -87,7 +81,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - check whether umlauts in sender and recipient names are handled correctly
 - only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
 - use julle_encmailheaders for encoding e-mail headers
-- change all occurances of header(string string) to header (string string, bool replace, int http_response_code)
+- change all occurences of header(string string) to header (string string, bool replace, int http_response_code)
 - change all tautology '1's to '1=1' in DB queries to make this extension work with PostgreSQL
 - add meta information and constraints (primaray key, foreign key, not null, etc.) to SQL file
 - move the mobile phone number into its own extension
@@ -124,6 +118,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - check for trailing spaces and tabs again
 - investige the a4n_edit_locallang extension
 - add class diagram to the extension
+- add a DB relationship diagram
 - document (for developers) how to add new fields to the seminar record type or the attendance record type
 - add fields "attendees_paid" and "attendees_unpaid" to the seminar record and fill them in updateStatistics()
 - add method "getSeenNumberOfAttendances()" (or something like that, but shorter) to the seminar class
@@ -181,9 +176,11 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - investigate whether to use an Observer pattern for the config check
 - remove the LF at the end of all XML files as the TYPO3 style seems to be not to have it
 - registration bag: when iterating over registrations for the same seminare, don't create a seminar object for each registration but reuse the same object instead
-- Make TYPO3 4.x required.
+- make TYPO3 4.x required; remove workarounds for TYPO3 3.8.x
 - Remove the workaround in pi1::escapeAndTrimSearchWord()
 - use exec_SELECTgetRows() where it makes sense
+- move to lib/div
+- howto: "The next x upcoming seminars"
 
 
 Version 0.8.0 - "Make it for everybody": accessibility
@@ -223,7 +220,10 @@ Version 0.9.0 - "Make it fast": performance
 - use (int) instead of intval()
 - use ++$i instead of $i++
 - investigate whether to use marker substitution with or without caching (there was a discussion about this for the "cal" extension)
-
+- profile the list view
+- profile the single view
+- profile the lists in mod2
+- profile the registration page
 
 Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 -------------------------------------------------------------------------------
@@ -273,8 +273,7 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 
 Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 --------------------------------------------------------------------------------
-- add FE editing for seminars
-- add FE editing for attendances
+- add FE editing for registrations
 - add FE editing for speakers
 - add FE editing for places
 - add FE editing for payment methods
@@ -291,11 +290,8 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
   - paid/unpaid/refunded (if the participation hasn't been deleted yet)
   - attended?
   - edit registration data
-- feature: front end plug in "The next x upcoming seminars"
-- feature: "this seminar is repeated on the following dates"
 - add field for "these seminars go together well"
 - feature: "people who have registered for this seminar have also registered for these seminars"
-- add a headline "Thanks for signing up for this event." or something similar after a successfull registration
 - don't display "page 1 of 1" in the list view if there is only 1 page
 - handle singular/plural of "organizer" in headings
 - handle singular/plural and male/female of "speaker" in headings
@@ -328,7 +324,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - add the subtitle to the list view
 - nicely style the messages on the front end (error messages and notifications) using a border, color and an icon
 - nicely style the buttons on the front end using borders and icons
-- shop city and ZIP code of the event sites in the list view
+- show city and ZIP code of the event sites in the list view
 - make it possible to have eg. an asterik after the price in the list view and single view
 - the back link in the details view (linked from "my events") doesn't link back to "my events"
 - display "free" as price instead of "0 EUR" if the event is for free
@@ -395,7 +391,6 @@ Version 2.0.0 - "Great new FE and BE features"
 - allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee
   - make this configurable
   - make this safe (SSL-only or something)
-- add a way to make the seminar fee dependent on the user's status (student, working etc.)
 - allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop)
 - Spanish localization
 - French localization
@@ -438,7 +433,6 @@ Not triaged yet
 - feature: show seminars from a configurable time window in the seminar list
 - attach documents to seminars
 - export events to tt_news
-- export events to jw_calendar
 - export events to other calendar extensions
 - export/import for mjseventpro
 - export/import for rlmp_eventdb and asfk_eventmanagement
@@ -453,15 +447,12 @@ Not triaged yet
 - feature: also notify speakers when one of their seminar has enough participants, is full etc.
 - feature: assign FE user to a speaker record
 - feature: for a speaker, list the seminars which he/she holds (when the corresponding FE user or an organizer is logged in)
-- feature: allow group registrations (so that one person can register a group a participants from e.g. a company)
 - export attendance records as bar codes (ask the Fachschaft Informatik Bonn how they do this for their parties)
 - attendance record: if there is no name, use first and last name (this needs sr_feuser_register to be installed)
 - add configuration: maximum number of seats that can be registered for at one time
 - feature: RSS or Atom feed for a list of seminars
 - export seminar data as iCal (in the FE detailed view)
 - Split the address field to three single fields: address (street), zip, town [from dev-meeting 05/12]
-- BE: Add export function for participants list (CSV) [from dev-meeting 05/12]
-- Move past events to an other sysfolder (see EXT:mjs_event) [from dev-meeting 05/12]
 - Add timeslot-functionality [from dev-meeting 05/12]
 - feature: Let the user select it's price (normal / reduced) and save the price in the registration record [from dev-meeting 05/12]
 - feature: Add pricing engine [from dev-meeting 05/12]
@@ -472,7 +463,6 @@ Not triaged yet
 - Investigate wich problems the too long filenames can cause [from dev-meeting 05/12]
 - Start working with unit testing on this extension [from dev-meeting 05/12]
 - Change the FlexForm Checkboxes to Selectorboxes allowing to have the value of 0 (zero) [from dev-meeting 05/12]
-- feature: show alternative events (same event, other date/time) in FE [from dev-meeting 05/12]
 - feature: Add a registration transfer module in BE [from dev-meeting 05/12]
 - calendar view
 - iCal import
