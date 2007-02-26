@@ -55,6 +55,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tableVipsMM;
 	var $tableSpeakers;
 	var $tableSpeakersMM;
+	var $tablePartnersMM;
+	var $tableTutorsMM;
+	var $tableLeadersMM;
 	var $tableSites;
 	var $tableSitesMM;
 	var $tableOrganizers;
@@ -185,6 +188,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 		$this->tableVipsMM                  = $dbPrefix.'seminars_feusers_mm';
 		$this->tableSpeakersMM              = $dbPrefix.'seminars_speakers_mm';
+		$this->tablePartnersMM              = $dbPrefix.'seminars_speakers_mm_partners';
+		$this->tableTutorsMM                = $dbPrefix.'seminars_speakers_mm_tutors';
+		$this->tableLeadersMM               = $dbPrefix.'seminars_speakers_mm_leaders';
 		$this->tableSitesMM                 = $dbPrefix.'seminars_place_mm';
 		$this->tableSeminarsCheckboxesMM    = $dbPrefix.'seminars_checkboxes_mm';
 		$this->tableAttendancesCheckboxesMM = $dbPrefix.'attendances_checkboxes_mm';

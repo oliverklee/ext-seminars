@@ -35,6 +35,9 @@
 			<label index="tx_seminars_seminars.notes"></label>
 			<label index="tx_seminars_seminars.divLabelSpeakers"></label>
 			<label index="tx_seminars_seminars.speakers"></label>
+			<label index="tx_seminars_seminars.partners"></label>
+			<label index="tx_seminars_seminars.tutors"></label>
+			<label index="tx_seminars_seminars.leaders"></label>
 			<label index="tx_seminars_seminars.divLabelOrganizers"></label>
 			<label index="tx_seminars_seminars.organizers"></label>
 			<label index="tx_seminars_seminars.divLabelAttendees"></label>
@@ -156,6 +159,9 @@
 			<label index="tx_seminars_seminars.notes">Internal Notes</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
 			<label index="tx_seminars_seminars.speakers">Speakers</label>
+			<label index="tx_seminars_seminars.partners">Partners</label>
+			<label index="tx_seminars_seminars.tutors">Tutors</label>
+			<label index="tx_seminars_seminars.leaders">Leaders</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Organizer</label>
 			<label index="tx_seminars_seminars.organizers">Organizers</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
@@ -282,6 +288,9 @@
 			<label index="tx_seminars_seminars.notes">Interne Notizen</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Referenten</label>
 			<label index="tx_seminars_seminars.speakers">ReferentInnen</label>
+			<label index="tx_seminars_seminars.partners">Partner</label>
+			<label index="tx_seminars_seminars.tutors">Kursbegleitung</label>
+			<label index="tx_seminars_seminars.leaders">Kursleitung</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Veranstalter</label>
 			<label index="tx_seminars_seminars.organizers">Veranstalter</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Ort/Zeit</label>
@@ -563,6 +572,9 @@
 			<label index="tx_seminars_seminars.notes" type="integer">134692843</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
 			<label index="tx_seminars_seminars.speakers" type="integer">258305227</label>
+			<label index="tx_seminars_seminars.partners" type="integer">265740084</label>
+			<label index="tx_seminars_seminars.tutors" type="integer">102766940</label>
+			<label index="tx_seminars_seminars.leaders" type="integer">45784650</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers" type="integer">231556830</label>
 			<label index="tx_seminars_seminars.organizers" type="integer">68798680</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime" type="integer">27057202</label>
@@ -837,6 +849,9 @@
 			<label index="tx_seminars_seminars.lodgings">Available lodging options</label>
 			<label index="tx_seminars_seminars.foods">Available food options</label>
 			<label index="tx_seminars_seminars.speakers">Speakers</label>
+			<label index="tx_seminars_seminars.partners">Partners</label>
+			<label index="tx_seminars_seminars.tutors">Tutors</label>
+			<label index="tx_seminars_seminars.leaders">Leaders</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price</label>
 			<label index="tx_seminars_seminars.price_special">Special price</label>
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment</label>

@@ -37,6 +37,45 @@ CREATE TABLE tx_seminars_seminars_speakers_mm (
 
 
 #
+# Table structure for table 'tx_seminars_seminars_speakers_mm_partners'
+#
+CREATE TABLE tx_seminars_seminars_speakers_mm_partners (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+
+#
+# Table structure for table 'tx_seminars_seminars_speakers_mm_tutors'
+#
+CREATE TABLE tx_seminars_seminars_speakers_mm_tutors (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+
+#
+# Table structure for table 'tx_seminars_seminars_speakers_mm_leaders'
+#
+CREATE TABLE tx_seminars_seminars_speakers_mm_leaders (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+
+#
 # Table structure for table 'tx_seminars_seminars'
 #
 CREATE TABLE tx_seminars_seminars (
@@ -68,6 +107,9 @@ CREATE TABLE tx_seminars_seminars (
 	foods int(11) unsigned DEFAULT '0' NOT NULL,
 	additional_times_places text NOT NULL,
 	speakers int(11) unsigned DEFAULT '0' NOT NULL,
+	partners int(11) unsigned DEFAULT '0' NOT NULL,
+	tutors int(11) unsigned DEFAULT '0' NOT NULL,
+	leaders int(11) unsigned DEFAULT '0' NOT NULL,
 	price_regular decimal(7,2) DEFAULT '0.00' NOT NULL,
 	price_regular_early decimal(7,2) DEFAULT '0.00' NOT NULL,
 	price_special decimal(7,2) DEFAULT '0.00' NOT NULL,

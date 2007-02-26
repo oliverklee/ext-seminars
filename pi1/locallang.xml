@@ -85,6 +85,9 @@
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
+			<label index="label_partners">Partners</label>
+			<label index="label_tutors">Tutors</label>
+			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>
@@ -323,6 +326,9 @@
 			<label index="label_room">Raum</label>
 			<label index="label_additional_times_places">Zeiten und Orte</label>
 			<label index="label_speakers">ReferentInnen</label>
+			<label index="label_partners">Partner</label>
+			<label index="label_tutors">Kursbegleitung</label>
+			<label index="label_leaders">Kursleitung</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_special">Spezialpreis</label>
@@ -694,6 +700,9 @@
 			<label index="label_room" type="integer">214150095</label>
 			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_speakers" type="integer">258305227</label>
+			<label index="label_partners" type="integer">265740084</label>
+			<label index="label_tutors" type="integer">102766940</label>
+			<label index="label_leaders" type="integer">45784650</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_special" type="integer">35819210</label>
@@ -990,6 +999,9 @@
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
+			<label index="label_partners">Partners</label>
+			<label index="label_tutors">Tutors</label>
+			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_special">Special price</label>

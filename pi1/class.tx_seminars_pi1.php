@@ -121,6 +121,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'organization',
 			'description'
 		),
+		'partners' => array(
+			'title',
+			'organization',
+			'description'
+		),
+		'tutors' => array(
+			'title',
+			'organization',
+			'description'
+		),
+		'leaders' => array(
+			'title',
+			'organization',
+			'description'
+		),
 		'places' => array(
 			'title',
 			'address'
@@ -692,12 +707,72 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			if ($this->seminar->hasSpeakers()) {
 				if ($this->getConfValueBoolean('showSpeakerDetails', 's_template_special')) {
-					$this->setMarkerContent('speakers', $this->seminar->getSpeakersWithDescription($this));
+					$this->setMarkerContent(
+						'speakers',
+						$this->seminar->getSpeakersWithDescription($this)
+					);
 				} else {
-					$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
+					$this->setMarkerContent(
+						'speakers',
+						$this->seminar->getSpeakersShort()
+					);
 				}
 			} else {
 				$this->readSubpartsToHide('speakers', 'field_wrapper');
+			}
+			if ($this->seminar->hasPartners()) {
+				if ($this->getConfValueBoolean('showSpeakerDetails', 's_template_special')) {
+					$this->setMarkerContent(
+						'partners',
+						$this->seminar->getSpeakersWithDescription(
+							$this,
+							'partners'
+						)
+					);
+				} else {
+					$this->setMarkerContent(
+						'partners',
+						$this->seminar->getSpeakersShort('partners')
+					);
+				}
+			} else {
+				$this->readSubpartsToHide('partners', 'field_wrapper');
+			}
+			if ($this->seminar->hasTutors()) {
+				if ($this->getConfValueBoolean('showSpeakerDetails', 's_template_special')) {
+					$this->setMarkerContent(
+						'tutors',
+						$this->seminar->getSpeakersWithDescription(
+							$this,
+							'tutors'
+						)
+					);
+				} else {
+					$this->setMarkerContent(
+						'tutors',
+						$this->seminar->getSpeakersShort('tutors')
+					);
+				}
+			} else {
+				$this->readSubpartsToHide('tutors', 'field_wrapper');
+			}
+			if ($this->seminar->hasLeaders()) {
+				if ($this->getConfValueBoolean('showSpeakerDetails', 's_template_special')) {
+					$this->setMarkerContent(
+						'leaders',
+						$this->seminar->getSpeakersWithDescription(
+							$this,
+							'leaders'
+						)
+					);
+				} else {
+					$this->setMarkerContent(
+						'leaders',
+						$this->seminar->getSpeakersShort('leaders')
+					);
+				}
+			} else {
+				$this->readSubpartsToHide('leaders', 'field_wrapper');
 			}
 
 			// set markers for prices
@@ -1482,6 +1557,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function searchWhere($searchWords)	{
 		$result = '';
 
+		$mmTables = array(
+			'speakers' => $this->tableSpeakersMM,
+			'partners' => $this->tablePartnersMM,
+			'tutors' => $this->tableTutorsMM,
+			'leaders' => $this->tableLeadersMM
+		);
+
 		if (!empty($searchWords)) {
 			$keywords = split('[ ,]', $searchWords);
 
@@ -1497,7 +1579,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 					// Look up the field in the seminar record.
 					foreach ($this->searchFieldList['seminars'] as $field) {
-						$whereParts[] = $this->tableSeminars.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\'';
+						$whereParts[] = $this->tableSeminars.'.'.$field
+							.' LIKE \'%'.$currentPreparedKeyword.'%\'';
 					}
 
 					// When this is a date record,
@@ -1514,23 +1597,33 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						.')';
 					}
 
-					// For speakers, we have real m-n relations.
-					foreach ($this->searchFieldList['speakers'] as $field) {
-						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableSpeakers.', '.$this->tableSpeakersMM
-								.' WHERE '.$this->tableSpeakers.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
-								.' AND '.$this->tableSpeakersMM.'.uid_local='.$this->tableSeminars.'.uid '
-								.'AND '.$this->tableSpeakersMM.'.uid_foreign='.$this->tableSpeakers.'.uid'
-						.')';
+					// For speakers (and their variants partners, tutors and
+					// leaders), we have real m:n relations.
+					foreach ($mmTables as $key => $currentMmTable) {
+						foreach ($this->searchFieldList[$key] as $field) {
+							$whereParts[] = 'EXISTS ('
+								.'SELECT * FROM '.$this->tableSpeakers.', '
+										.$currentMmTable
+									.' WHERE '.$this->tableSpeakers.'.'.$field
+										.' LIKE \'%'.$currentPreparedKeyword.'%\''
+									.' AND '.$currentMmTable.'.uid_local='
+										.$this->tableSeminars.'.uid '
+									.'AND '.$currentMmTable.'.uid_foreign='
+										.$this->tableSpeakers.'.uid'
+							.')';
+						}
 					}
 
-					// For sites, we have real m-n relations.
+					// For sites, we have real m:n relations, too.
 					foreach ($this->searchFieldList['places'] as $field) {
 						$whereParts[] = 'EXISTS ('
 							.'SELECT * FROM '.$this->tableSites.', '.$this->tableSitesMM
-								.' WHERE '.$this->tableSites.'.'.$field.' LIKE \'%'.$currentPreparedKeyword.'%\''
-								.' AND '.$this->tableSitesMM.'.uid_local='.$this->tableSeminars.'.uid '
-								.'AND '.$this->tableSitesMM.'.uid_foreign='.$this->tableSites.'.uid'
+								.' WHERE '.$this->tableSites.'.'.$field
+									.' LIKE \'%'.$currentPreparedKeyword.'%\''
+								.' AND '.$this->tableSitesMM.'.uid_local='
+									.$this->tableSeminars.'.uid '
+								.'AND '.$this->tableSitesMM.'.uid_foreign='
+									.$this->tableSites.'.uid'
 						.')';
 					}
 

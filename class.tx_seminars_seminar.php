@@ -628,22 +628,50 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our speaker (or speakers), complete as RTE'ed HTML with details and links.
+	 * Gets our speaker (or speakers), complete as RTE'ed HTML with details and
+	 * links.
 	 * Returns an empty paragraph if this seminar doesn't have any speakers.
 	 *
+	 * As speakers can be related to this event as speakers, partners, tutors or
+	 * leaders, the type relation can be specified. The default is "speakers".
+	 *
 	 * @param	object		the live pibase object
+	 * @param	string		the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
 	 *
 	 * @return	string		our speakers (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
-	function getSpeakersWithDescription(&$plugin) {
+	function getSpeakersWithDescription(&$plugin, $speakerRelation = 'speakers') {
 		$result = '';
+		$hasSpeakers = false;
+		$mmTable = '';
 
-		if ($this->hasSpeakers()) {
+		switch ($speakerRelation) {
+			case 'partners':
+				$hasSpeakers = $this->hasPartners();
+				$mmTable = $this->tablePartnersMM;
+				break;
+			case 'tutors':
+				$hasSpeakers = $this->hasTutors();
+				$mmTable = $this->tableTutorsMM;
+				break;
+			case 'leaders':
+				$hasSpeakers = $this->hasLeaders();
+				$mmTable = $this->tableLeadersMM;
+				break;
+			case 'speakers':
+				// The fallthrough is intended.
+			default:
+				$hasSpeakers = $this->hasSpeakers();
+				$mmTable = $this->tableSpeakersMM;
+				break;
+		}
+
+		if ($hasSpeakers) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title, organization, homepage, description',
-				$this->tableSpeakers.', '.$this->tableSpeakersMM,
+				$this->tableSpeakers.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
 					.t3lib_pageSelect::enableFields($this->tableSpeakers),
 				'',
@@ -679,17 +707,45 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * Gets our speaker (or speakers) as a plain text list (just their names).
 	 * Returns an empty string if this seminar doesn't have any speakers.
 	 *
+	 * As speakers can be related to this event as speakers, partners, tutors or
+	 * leaders, the type relation can be specified. The default is "speakers".
+	 *
+	 * @param	string		the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
+	 *
 	 * @return	string		our speakers list (or '' if there is an error)
 	 *
 	 * @access	public
 	 */
-	function getSpeakersShort() {
+	function getSpeakersShort($speakerRelation = 'speakers') {
 		$result = '';
+		$hasSpeakers = false;
+		$mmTable = '';
 
-		if ($this->hasSpeakers()) {
+		switch ($speakerRelation) {
+			case 'partners':
+				$hasSpeakers = $this->hasPartners();
+				$mmTable = $this->tablePartnersMM;
+				break;
+			case 'tutors':
+				$hasSpeakers = $this->hasTutors();
+				$mmTable = $this->tableTutorsMM;
+				break;
+			case 'leaders':
+				$hasSpeakers = $this->hasLeaders();
+				$mmTable = $this->tableLeadersMM;
+				break;
+			case 'speakers':
+				// The fallthrough is intended.
+			default:
+				$hasSpeakers = $this->hasSpeakers();
+				$mmTable = $this->tableSpeakersMM;
+				break;
+		}
+
+		if ($hasSpeakers) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title',
-				$this->tableSpeakers.', '.$this->tableSpeakersMM,
+				$this->tableSpeakers.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
 					.t3lib_pageSelect::enableFields($this->tableSpeakers),
 				'',
@@ -712,14 +768,47 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks whether we have any speakers set, but does not check the validity of that entry.
+	 * Checks whether we have any speakers set.
 	 *
-	 * @return	boolean		true if we have any speakers asssigned to this seminar, false otherwise.
+	 * @return	boolean		true if we have any speakers related to this event, false otherwise.
 	 *
 	 * @access	public
 	 */
 	function hasSpeakers() {
 		return $this->hasRecordPropertyInteger('speakers');
+	}
+
+	/**
+	 * Checks whether we have any partners set.
+	 *
+	 * @return	boolean		true if we have any partners related to this event, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasPartners() {
+		return $this->hasRecordPropertyInteger('partners');
+	}
+
+	/**
+	 * Checks whether we have any tutors set.
+	 *
+	 * @return	boolean		true if we have any tutors related to this event, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasTutors() {
+		return $this->hasRecordPropertyInteger('tutors');
+	}
+
+	/**
+	 * Checks whether we have any leaders set.
+	 *
+	 * @return	boolean		true if we have any leaders related to this event, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasLeaders() {
+		return $this->hasRecordPropertyInteger('leaders');
 	}
 
 	/**
@@ -1508,7 +1597,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether we have any organizers set, but does not check the validity of that entry.
 	 *
-	 * @return	boolean		true if we have any organizers asssigned to this seminar, false otherwise.
+	 * @return	boolean		true if we have any organizers related to this seminar, false otherwise.
 	 *
 	 * @access	public
 	 */
