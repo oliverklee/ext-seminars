@@ -237,6 +237,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			),
 			'defRow' => array(
 				'tr' => array('<tr>', '</tr>'),
+				array('<td>', '</td>'),
 				array('<td class="datecol">', '</td>'),
 				'defCol' => array('<td>', '</td>'),
 			),
@@ -288,7 +289,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$this->seminar->tableName,
 					$this->seminar->getUid()
 				)
-					.'&nbsp;'
 					.$this->getDeleteIcon(
 						$this->seminar->tableName,
 						$this->seminar->getUid()
@@ -374,7 +374,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$this->registration->tableName,
 					$this->registration->getUid()
 				)
-					.'&nbsp;'
 					.$this->getDeleteIcon(
 						$this->registration->tableName,
 						$this->registration->getUid()
@@ -456,7 +455,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$this->speaker->tableName,
 					$this->speaker->getUid()
 				)
-					.'&nbsp;'
 					.$this->getDeleteIcon(
 						$this->speaker->tableName,
 						$this->speaker->getUid()
@@ -538,7 +536,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$this->organizer->tableName,
 					$this->organizer->getUid()
 				)
-					.'&nbsp;'
 					.$this->getDeleteIcon(
 						$this->organizer->tableName,
 						$this->organizer->getUid()
@@ -585,7 +582,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$BACK_PATH,
 					'gfx/edit2.gif',
 					'width="11" height="12"').
-				' title="'.$langEdit.'" alt="'.$langEdit.'" />'.
+				' title="'.$langEdit.'" alt="'.$langEdit.'" class="icon" />'.
 				'</a>';
 		}
 
@@ -627,7 +624,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$BACK_PATH,
 					'gfx/garbage.gif',
 					'width="11" height="12"').
-				' title="'.$langDelete.'" alt="'.$langDelete.'" />'.
+				' title="'.$langDelete.'" alt="'.$langDelete.'" class="deleteicon" />'.
 				'</a>';
 		}
 

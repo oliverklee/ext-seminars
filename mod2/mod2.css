@@ -1,3 +1,12 @@
 td.datecol {
 	text-align: right;
 }
+
+img.icon {
+	margin-right: 4px;
+}
+
+img.deleteicon {
+	margin-left: 4px;
+	margin-right: 4px;
+}
