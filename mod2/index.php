@@ -577,9 +577,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		if ($BE_USER->check('tables_modify', $table)
 			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
 			$params = '&edit['.$table.']['.$uid.']=edit';
-			$editOnClick = t3lib_BEfunc::editOnClick($params, $BACK_PATH);
+			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langEdit = $LANG->getLL('edit');
-			$result = '<a href="#" onclick="'.htmlspecialchars($editOnClick).'">'.
+			$result = '<a href="'.htmlspecialchars($editOnClick).'">'.
 				'<img '
 				.t3lib_iconWorks::skinImg(
 					$BACK_PATH,
@@ -619,11 +619,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 						$table,
 						$uid,
 						' '.$LANG->getLL('referencesWarning'))).
-				')) {jumpToUrl(\''.
-				$this->doc->issueCommand($params).
-				'\');} return false;');
+				')) {return true;} else {return false;}');
 			$langDelete = $LANG->getLL('delete', 1);
-			$result = '<a href="#" onclick="'.$confirmation.'">'.
+			$result = '<a href="'.$this->doc->issueCommand($params).'" onclick="'.$confirmation.'">'.
 				'<img'.
 				t3lib_iconWorks::skinImg(
 					$BACK_PATH,
@@ -654,10 +652,10 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		if ($BE_USER->check('tables_modify', $table)
 			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
 			$params = '&edit['.$table.']['.$pid.']=new';
-			$editOnClick = t3lib_BEfunc::editOnClick($params, $BACK_PATH);
+			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langNew = $LANG->getLL('newRecordGeneral');
 			$result = '<div id="typo3-newRecordLink">'.
-				'<a href="#" onclick="'.htmlspecialchars($editOnClick).'">'.
+				'<a href="'.htmlspecialchars($editOnClick).'">'.
 				'<img'.
 				t3lib_iconWorks::skinImg(
 					$BACK_PATH,
@@ -669,6 +667,22 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns the url for the "create new record" link and the "edit record" link.
+	 *
+	 * @param	string		the parameters for tce
+	 * @param	string		the back-path to the /typo3 directory
+	 *
+	 * @return	string		the url to return
+	 *
+	 * @access	protected
+	 */
+	function editNewUrl($params, $backPath = '') {
+		$returnUrl = 'returnUrl='.rawurlencode(t3lib_div::getIndpEnv('REQUEST_URI'));
+
+		return $backPath.'alt_doc.php?'.$returnUrl.$params;
 	}
 }
 
