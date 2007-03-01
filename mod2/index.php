@@ -246,9 +246,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		$table = array(
 			array(
 				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.date').'</span>',
-				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('eventlist.title').'</span>',
+				'<span style="color: #ffffff; font-weight: bold;">'.
+					$LANG->getLL('eventlist.date').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('eventlist.attendees').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
@@ -275,8 +275,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		while ($this->seminar =& $seminarBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
-				$this->seminar->getDate(),
 				t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45),
+				$this->seminar->getDate(),
 				$this->seminar->getAttendances(),
 				$this->seminar->getAttendancesMin(),
 				$this->seminar->getAttendancesMax(),
