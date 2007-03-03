@@ -1,4 +1,5 @@
 0.5.0
+- Change: Changed localization to have a ":" after each label in the BE (#571)
 - Change: Add 3 additional "speaker" fields in the event record (#550)
 - Fix: Allow for searching also within organizer names (#352)
 - Fix: Corrected error message on my_events page when not logged in (#529)
