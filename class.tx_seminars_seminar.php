@@ -2498,6 +2498,30 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	function hasTerms2() {
 		return $this->getTopicBoolean('uses_terms_2');
 	}
+
+	/**
+	 * Gets the teaser text (not RTE'ed). If this is a date record, the
+	 * corresponding topic's teaser text is retrieved.
+	 *
+	 * @return	string		this event's teaser text (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getTeaser() {
+		return $this->getTopicString('teaser');
+	}
+
+	/**
+	 * Checks whether this event (or this event' topic record) has a teaser
+	 * text.
+	 *
+	 * @return	boolean		true if we have a non-empty teaser text, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasTeaser() {
+		return $this->hasTopicString('teaser');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

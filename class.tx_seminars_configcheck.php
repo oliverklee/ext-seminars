@@ -684,6 +684,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'event_type',
 				'accreditation_number',
 				'credit_points',
+				'teaser',
 				'speakers',
 				'date',
 				'time',

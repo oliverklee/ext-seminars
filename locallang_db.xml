@@ -19,6 +19,7 @@
 			<label index="tx_seminars_seminars.object_type.I.2"></label>
 			<label index="tx_seminars_seminars.title"></label>
 			<label index="tx_seminars_seminars.subtitle"></label>
+			<label index="tx_seminars_seminars.teaser"></label>
 			<label index="tx_seminars_seminars.description"></label>
 			<label index="tx_seminars_seminars.topic"></label>
 			<label index="tx_seminars_seminars.event_type"></label>
@@ -143,6 +144,7 @@
 			<label index="tx_seminars_seminars.object_type.I.2">Multiple event date</label>
 			<label index="tx_seminars_seminars.title">Title:</label>
 			<label index="tx_seminars_seminars.subtitle">Subtitle:</label>
+			<label index="tx_seminars_seminars.teaser">Teaser text:</label>
 			<label index="tx_seminars_seminars.description">Description:</label>
 			<label index="tx_seminars_seminars.topic">Topic:</label>
 			<label index="tx_seminars_seminars.event_type">Event type:</label>
@@ -272,6 +274,7 @@
 			<label index="tx_seminars_seminars.object_type.I.2">Veranstaltungsreihe: Datum</label>
 			<label index="tx_seminars_seminars.title">Titel:</label>
 			<label index="tx_seminars_seminars.subtitle">Untertitel:</label>
+			<label index="tx_seminars_seminars.teaser">Teaser-Text:</label>
 			<label index="tx_seminars_seminars.description">Beschreibung:</label>
 			<label index="tx_seminars_seminars.topic">Thema:</label>
 			<label index="tx_seminars_seminars.event_type">Veranstaltungsart:</label>
@@ -556,6 +559,7 @@
 			<label index="tx_seminars_seminars.object_type.I.2" type="integer">32855575</label>
 			<label index="tx_seminars_seminars.title" type="integer">85903807</label>
 			<label index="tx_seminars_seminars.subtitle" type="integer">252742192</label>
+			<label index="tx_seminars_seminars.teaser" type="integer">247187512</label>
 			<label index="tx_seminars_seminars.description" type="integer">218120871</label>
 			<label index="tx_seminars_seminars.accreditation_number" type="integer">93427878</label>
 			<label index="tx_seminars_seminars.credit_points" type="integer">157709552</label>
@@ -836,6 +840,7 @@
 			<label index="tx_seminars_seminars.uid">Event number:</label>
 			<label index="tx_seminars_seminars.title">Title:</label>
 			<label index="tx_seminars_seminars.subtitle">Subtitle:</label>
+			<label index="tx_seminars_seminars.teaser">Teaser text:</label>
 			<label index="tx_seminars_seminars.description">Description:</label>
 			<label index="tx_seminars_seminars.accreditation_number">Accreditation number:</label>
 			<label index="tx_seminars_seminars.credit_points">Credit points:</label>

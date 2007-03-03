@@ -1196,6 +1196,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('event_type', $this->seminar->getEventType());
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
 			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
+			$this->setMarkerContent('teaser', $this->seminar->getTeaser());
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
 
 			$currentDate = $this->seminar->getLinkedFieldValue($this, 'date');
