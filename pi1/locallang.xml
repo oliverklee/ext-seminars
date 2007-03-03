@@ -90,9 +90,11 @@
 			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
-			<label index="label_price_special">Special price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
+			<label index="label_price_board_regular">Regular price including full board</label>
+			<label index="label_price_special">Special price</label>
 			<label index="label_price_earlybird_special">Early-bird special price</label>
+			<label index="label_price_board_special">Special price including full board</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_paymentmethods">Available methods of payment</label>
 			<label index="label_event_type">Event type</label>
@@ -331,9 +333,11 @@
 			<label index="label_leaders">Kursleitung</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
-			<label index="label_price_special">Spezialpreis</label>
 			<label index="label_price_earlybird_regular">Frühbucherpreis</label>
+			<label index="label_price_board_regular">Standardpreis inklusive Vollpension</label>
+			<label index="label_price_special">Spezialpreis</label>
 			<label index="label_price_earlybird_special">Frühbucher-Spezialpreis</label>
+			<label index="label_price_board_special">Spezialpreis inklusive Vollpension</label>
 			<label index="label_total_price">Gesamtpreis</label>
 			<label index="label_paymentmethods">Mögliche Zahlungsarten</label>
 			<label index="label_event_type">Veranstaltungsart</label>
@@ -705,9 +709,11 @@
 			<label index="label_leaders" type="integer">45784650</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
-			<label index="label_price_special" type="integer">35819210</label>
 			<label index="label_price_earlybird_regular" type="integer">236870027</label>
+			<label index="label_price_board_regular" type="integer">122636477</label>
+			<label index="label_price_special" type="integer">35819210</label>
 			<label index="label_price_earlybird_special" type="integer">255242535</label>
+			<label index="label_price_board_special" type="integer">56248635</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_paymentmethods" type="integer">119552142</label>
 			<label index="label_event_type" type="integer">99114704</label>
@@ -1004,9 +1010,11 @@
 			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
-			<label index="label_price_special">Special price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
+			<label index="label_price_board_regular">Regular price including full board</label>
+			<label index="label_price_special">Special price</label>
 			<label index="label_price_earlybird_special">Early-bird special price</label>
+			<label index="label_price_board_special">Special price including full board</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_paymentmethods">Available methods of payment</label>
 			<label index="label_event_type">Event type</label>

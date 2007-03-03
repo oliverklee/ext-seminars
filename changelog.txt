@@ -1,4 +1,5 @@
 0.5.0
+- Change: Add two additional price fields to the event record (#549)
 - Feature: Add teasers to the event records (#625)
 - Change: Changed localization to have a ":" after each label in the BE (#571)
 - Change: Add 3 additional "speaker" fields in the event record (#550)

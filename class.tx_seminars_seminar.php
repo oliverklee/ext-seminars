@@ -1013,6 +1013,66 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets our regular price (including full board) as a string containing
+	 * amount and currency. Returns an empty string if there is no regular price
+	 * (including full board) set.
+	 *
+	 * @param	string		the character or HTML entity used to separate price and currency
+	 *
+	 * @return	string		the regular event price (including full board)
+	 *
+	 * @access	public
+	 */
+	function getPriceRegularBoard($space = '&nbsp;') {
+		$value = $this->getTopicDecimal('price_regular_board');
+		$currency = $this->getConfValueString('currency');
+		return $this->hasPriceRegularBoard() ?
+			$this->formatPrice($value).$space.$currency : '';
+	}
+
+	/**
+	 * Checks whether this event has a non-zero regular price (including full
+	 * board) set.
+	 *
+	 * @return	boolean		true if the event has a non-zero regular price (including full board), false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasPriceRegularBoard() {
+		return $this->hasTopicDecimal('price_regular_board');
+	}
+
+	/**
+	 * Gets our special price (including full board) as a string containing
+	 * amount and currency. Returns an empty string if there is no special price
+	 * (including full board) set.
+	 *
+	 * @param	string		the character or HTML entity used to separate price and currency
+	 *
+	 * @return	string		the special event price (including full board)
+	 *
+	 * @access	public
+	 */
+	function getPriceSpecialBoard($space = '&nbsp;') {
+		$value = $this->getTopicDecimal('price_special_board');
+		$currency = $this->getConfValueString('currency');
+		return $this->hasPriceSpecialBoard() ?
+			$this->formatPrice($value).$space.$currency : '';
+	}
+
+	/**
+	 * Checks whether this event has a non-zero special price (including full
+	 * board) set.
+	 *
+	 * @return	boolean		true if the event has a non-zero special price (including full board), false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasPriceSpecialBoard() {
+		return $this->hasTopicDecimal('price_special_board');
+	}
+
+	/**
 	 * Gets our allowed payment methods, complete as RTE'ed HTML LI list (with enclosing UL),
 	 * but without the detailed description.
 	 * Returns an empty paragraph if this seminar doesn't have any payment methods.

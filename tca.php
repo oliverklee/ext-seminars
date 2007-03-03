@@ -359,6 +359,22 @@ $TCA['tx_seminars_seminars'] = array(
 				'default' => 0
 			)
 		),
+		'price_regular_board' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular_board',
+			'config' => array(
+				'type' => 'input',
+				'size' => '8',
+				'max' => '8',
+				'eval' => 'double2',
+				'checkbox' => '0.00',
+				'range' => array(
+					'upper' => '99999.99',
+					'lower' => '0'
+				),
+				'default' => 0
+			)
+		),
 		'price_special' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special',
@@ -378,6 +394,22 @@ $TCA['tx_seminars_seminars'] = array(
 		'price_special_early' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special_early',
+			'config' => array(
+				'type' => 'input',
+				'size' => '8',
+				'max' => '8',
+				'eval' => 'double2',
+				'checkbox' => '0.00',
+				'range' => array(
+					'upper' => '99999.99',
+					'lower' => '0'
+				),
+				'default' => 0
+			)
+		),
+		'price_special_board' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special_board',
 			'config' => array(
 				'type' => 'input',
 				'size' => '8',
@@ -576,12 +608,12 @@ $TCA['tx_seminars_seminars'] = array(
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelOrganizers, organizers, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, attendees, enough_attendees, is_full, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelLodging, lodgings, foods, '
-				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_special, price_special_early, payment_methods'
+				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
 			'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
-				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_special, price_special_early, payment_methods'
+				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
 		// Multiple event date
 		'2' => array('showitem' =>

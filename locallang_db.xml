@@ -60,9 +60,11 @@
 			<label index="tx_seminars_seminars.foods"></label>
 			<label index="tx_seminars_seminars.divLabelPayment"></label>
 			<label index="tx_seminars_seminars.price_regular"></label>
-			<label index="tx_seminars_seminars.price_special"></label>
 			<label index="tx_seminars_seminars.price_regular_early"></label>
+			<label index="tx_seminars_seminars.price_regular_board"></label>
+			<label index="tx_seminars_seminars.price_special"></label>
 			<label index="tx_seminars_seminars.price_special_early"></label>
+			<label index="tx_seminars_seminars.price_special_board"></label>
 			<label index="tx_seminars_seminars.payment_methods"></label>
 			<label index="tx_seminars_speakers"></label>
 			<label index="tx_seminars_speakers.title"></label>
@@ -187,8 +189,10 @@
 			<label index="tx_seminars_seminars.divLabelPayment">Payment</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird):</label>
+			<label index="tx_seminars_seminars.price_regular_board">Regular price including full board:</label>
 			<label index="tx_seminars_seminars.price_special">Special price:</label>
 			<label index="tx_seminars_seminars.price_special_early">Special price (early bird):</label>
+			<label index="tx_seminars_seminars.price_special_board">Special price including full board:</label>
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment:</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
@@ -317,8 +321,10 @@
 			<label index="tx_seminars_seminars.divLabelPayment">Bezahlung</label>
 			<label index="tx_seminars_seminars.price_regular">Standardpreis:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Standardpreis für Frühbucher:</label>
+			<label index="tx_seminars_seminars.price_regular_board">Standardpreis inklusive Vollpension:</label>
 			<label index="tx_seminars_seminars.price_special">Sonderpreis:</label>
 			<label index="tx_seminars_seminars.price_special_early">Sonderpreis für Frühbucher:</label>
+			<label index="tx_seminars_seminars.price_special_board">Spezialpreis inklusive Vollpensione:</label>
 			<label index="tx_seminars_seminars.payment_methods">Erlaubte Zahlungsarten:</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
@@ -601,9 +607,11 @@
 			<label index="tx_seminars_seminars.is_full" type="integer">74563993</label>
 			<label index="tx_seminars_seminars.divLabelPayment" type="integer">205863499</label>
 			<label index="tx_seminars_seminars.price_regular" type="integer">240409527</label>
-			<label index="tx_seminars_seminars.price_special" type="integer">86006388</label>
 			<label index="tx_seminars_seminars.price_regular_early" type="integer">216978206</label>
+			<label index="tx_seminars_seminars.price_regular_board" type="integer">76600225</label>
+			<label index="tx_seminars_seminars.price_special" type="integer">86006388</label>
 			<label index="tx_seminars_seminars.price_special_early" type="integer">259655699</label>
+			<label index="tx_seminars_seminars.price_special_board" type="integer">244956940</label>
 			<label index="tx_seminars_seminars.payment_methods" type="integer">168111968</label>
 			<label index="tx_seminars_speakers" type="integer">258305227</label>
 			<label index="tx_seminars_speakers.title" type="integer">81871034</label>
@@ -858,7 +866,11 @@
 			<label index="tx_seminars_seminars.tutors">Tutors:</label>
 			<label index="tx_seminars_seminars.leaders">Leaders:</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price:</label>
+			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird):</label>
+			<label index="tx_seminars_seminars.price_regular_board">Regular price including full board:</label>
 			<label index="tx_seminars_seminars.price_special">Special price:</label>
+			<label index="tx_seminars_seminars.price_special_early">Special price (early bird):</label>
+			<label index="tx_seminars_seminars.price_special_board">Special price including full board:</label>
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment:</label>
 			<label index="tx_seminars_seminars.event_type">Event type:</label>
 			<label index="tx_seminars_seminars.organizers">Organizers:</label>
@@ -943,8 +955,6 @@
 			<label index="tx_seminars_foods.title">Title:</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
-			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird):</label>
-			<label index="tx_seminars_seminars.price_special_early">Special price (early bird):</label>
 			<label index="tx_seminars_seminars.object_type">Type:</label>
 			<label index="tx_seminars_seminars.object_type.I.0">Single event</label>
 			<label index="tx_seminars_seminars.object_type.I.1">Multiple event topic</label>

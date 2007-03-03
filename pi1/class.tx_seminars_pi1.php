@@ -899,6 +899,27 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('price_special', $wrapper);
 			$this->readSubpartsToHide('price_earlybird_special', $wrapper);
 		}
+
+		// set the regular price (including full board)
+		if ($this->seminar->hasPriceRegularBoard()) {
+			$this->setMarkerContent(
+				'price_board_regular',
+				$this->seminar->getPriceRegularBoard()
+			);
+		} else {
+			$this->readSubpartsToHide('price_board_regular', $wrapper);
+		}
+
+		// set the special price (including full board)
+		if ($this->seminar->hasPriceSpecialBoard()) {
+			$this->setMarkerContent(
+				'price_board_special',
+				$this->seminar->getPriceSpecialBoard()
+			);
+		} else {
+			$this->readSubpartsToHide('price_board_special', $wrapper);
+		}
+
 		return;
 	}
 

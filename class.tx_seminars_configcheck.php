@@ -650,7 +650,12 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'tutors',
 				'leaders',
 				'price_regular',
+				// We use "price_board_regular" instead of "price_regular_board"
+				// to keep the subpart names prefix-free.
+				'price_board_regular',
 				'price_special',
+				// Ditto for "price_board_special".
+				'price_board_special',
 				'paymentmethods',
 				'additional_information',
 				'organizers',
