@@ -40,7 +40,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'css_styled_content' => '',
 			'frontendformslib' => '',
 			'php' => '4.0.0-',
-			'typo3' => '3.8.0-',
+			'typo3' => '3.7.0-',
 		),
 		'conflicts' => array(
 		),
