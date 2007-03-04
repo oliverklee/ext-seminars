@@ -623,14 +623,17 @@ class tx_seminars_module2 extends t3lib_SCbase {
 						' '.$LANG->getLL('referencesWarning'))).
 				')) {return true;} else {return false;}');
 			$langDelete = $LANG->getLL('delete', 1);
-			$result = '<a href="'.$this->doc->issueCommand($params).'" onclick="'.$confirmation.'">'.
-				'<img'.
-				t3lib_iconWorks::skinImg(
+			$result = '<a href="'
+				.htmlspecialchars($this->doc->issueCommand($params))
+				.'" onclick="'.$confirmation.'">'
+				.'<img'
+				.t3lib_iconWorks::skinImg(
 					$BACK_PATH,
 					'gfx/garbage.gif',
-					'width="11" height="12"').
-				' title="'.$langDelete.'" alt="'.$langDelete.'" class="deleteicon" />'.
-				'</a>';
+					'width="11" height="12"'
+				)
+				.' title="'.$langDelete.'" alt="'.$langDelete.'" class="deleteicon" />'
+				.'</a>';
 		}
 
 		return $result;
