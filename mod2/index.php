@@ -86,6 +86,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		/* --- END OF Workaround --- */
 
 		parent::init();
+
 		return;
 	}
 
