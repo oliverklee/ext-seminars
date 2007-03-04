@@ -308,7 +308,7 @@ tx_seminars_pi2 {
 	10 {
 		userFunc = tx_seminars_pi2->main
 
-		# whether to use formal or informal language
+		# pro forma salutation mode for the FE; has no effect whatsoever
 		salutation = formal
 	}
 }

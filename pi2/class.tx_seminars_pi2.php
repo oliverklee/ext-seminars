@@ -27,6 +27,7 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(PATH_t3lib.'class.t3lib_befunc.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
@@ -59,9 +60,6 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	function main($content, $conf) {
 		$this->init($conf);
 
-		$this->configGetter =& t3lib_div::makeInstance('tx_seminars_configgetter');
-		$this->configGetter->init();
-
 		$result = '';
 
 		switch ($this->piVars['table']) {
@@ -75,6 +73,22 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Initializes this object and its configuration getter.
+	 *
+ 	 * @param	array		TypoScript configuration for the plugin
+	 *
+	 * @access	public
+	 */
+	function init($conf = null) {
+		parent::init($conf);
+
+		$this->configGetter =& t3lib_div::makeInstance('tx_seminars_configgetter');
+		$this->configGetter->init();
+
+		return;
 	}
 
 	/**
@@ -172,18 +186,57 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 	/**
 	 * Checks whether the list of registrations is accessible, ie.
-	 * CSV access is allowed for testing purposes.
+	 * 1. CSV access is allowed for testing purposes, or
+	 * 2. the logged-in BE user has read access to the registrations table and
+	 *    read access to *all* pages where the registration records of the
+	 *    selected event are stored.
 	 *
 	 * TODO: When additional ways to access the CSV data are added (e.g. FE
-	 * links or in the BE in mod2), the corresponding access checks need to be
-	 * added to this function.
+	 * links), the corresponding access checks need to be added to this
+	 * function.
+	 *
+	 * @param	integer		UID of the event record for which access should be checked; leave empty to use the event set via piVars
 	 *
 	 * @return	boolean		true if the list of registrations may be exported as CSV
 	 *
 	 * @access	protected
 	 */
-	function canAccessListOfRegistrations() {
+	function canAccessListOfRegistrations($eventUid = 0) {
+		global $BE_USER;
+
 		$result = $this->configGetter->getConfValueBoolean('allowAccessToCsv');
+
+		// Only bother to check other permissions if we don't already have
+		// global access.
+		if (!$result) {
+			if (TYPO3_MODE == 'BE') {
+				// Check read access to the registrations table.
+				$result = $BE_USER->check(
+					'tables_select',
+					'tx_seminars_attendances'
+				);
+				// Check read access to all pages with registrations from the
+				// selected event.
+				if (!$eventUid) {
+					$eventUid = intval($this->piVars['seminar']);
+				}
+				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'DISTINCT pid',
+					$this->tableAttendances,
+					'seminar='.$eventUid
+						.t3lib_pageSelect::enableFields($this->tableAttendances)
+				);
+				if ($dbResult) {
+					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+						// Check read access for the current page.
+						$result &= $BE_USER->doesUserHaveAccess(
+							t3lib_BEfunc::getRecord('pages', $row['pid']),
+							1
+						);
+					}
+				}
+			}
+		}
 
 		return $result;
 	}

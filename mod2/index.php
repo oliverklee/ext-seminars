@@ -44,6 +44,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speakerbag.php
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speaker.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
+require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 $LANG->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
@@ -278,7 +279,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$table[] = array(
 				t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45),
 				$this->seminar->getDate(),
-				$this->seminar->getAttendances(),
+				$this->seminar->getAttendances()
+					.$this->getCsvIcon(),
 				$this->seminar->getAttendancesMin(),
 				$this->seminar->getAttendancesMax(),
 				(!$this->seminar->hasEnoughAttendances()
@@ -303,7 +305,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// class.
 		$content .= $this->doc->table($table, $tableLayout);
 
+		// Check the BE configuration and the CSV export configuration.
 		$content .= $seminarBag->checkConfiguration();
+		$content .= $seminarBag->checkConfiguration(false, 'csv');
 
 		return $content;
 	}
@@ -681,6 +685,50 @@ class tx_seminars_module2 extends t3lib_SCbase {
 
 		return $backPath.'alt_doc.php?'.$returnUrl.$params;
 	}
+
+	/**
+	 * Generates a linked CSV export icon for registrations from $this->seminar
+	 * if that event has at least one registration and access to all involved
+	 * registration records is granted.
+	 *
+	 * $this->seminar must be initialized when this function is called.
+	 *
+	 * @return	string		the HTML for the linked image or an empty string
+	 *
+	 * @access	public
+	 */
+	function getCsvIcon() {
+		global $BACK_PATH, $LANG;
+
+		static $accessChecker = null;
+		if (!$accessChecker) {
+			$accessChecker =& t3lib_div::makeInstance('tx_seminars_pi2');
+			$accessChecker->init();
+		}
+
+		$result = '';
+
+		$eventUid = $this->seminar->getUid();
+
+		if ($this->seminar->hasAttendances()
+			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
+			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.csv', 1);
+			$result = '<a href="class.tx_seminars_csv.php?id='.$this->id
+				.'&amp;tx_seminars_pi2[table]=registrations'
+				.'&amp;tx_seminars_pi2[seminar]='.$eventUid.'">'
+				.'<img'
+				.t3lib_iconWorks::skinImg(
+					$BACK_PATH,
+					'gfx/csv.gif',
+					'width="27" height="14"'
+				).
+				' title="'.$langCsv.'" alt="'.$langCsv.'" class="icon" />'.
+				'</a>';
+		}
+
+		return $result;
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/index.php']) {

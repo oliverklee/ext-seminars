@@ -9,34 +9,26 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="message_404_formal">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_404_informal">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_403_formal">Error 403. Sorry, you don't have access to this data.</label>
-			<label index="message_403_informal">Error 403. Sorry, you don't have access to this data.</label>
+			<label index="message_404">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_403">Error 403. Sorry, you don't have access to this data.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="message_404_formal">Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
-			<label index="message_404_informal">Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
-			<label index="message_403_formal">Fehler 403. Sorry, Sie haben nicht die Berechtigung, auf diese Daten zuzugreifen.</label>
-			<label index="message_403_informal">Fehler 403. Sorry, du hast nicht die Berechtigung, auf diese Daten zuzugreifen.</label>
+			<label index="message_404">Fehler 404. Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
+			<label index="message_403">Fehler 403. Sorry, Sie haben nicht die Berechtigung, auf diese Daten zuzugreifen.</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="dk" type="array">
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="message_404_formal" type="integer">37742123</label>
-			<label index="message_404_informal" type="integer">37742123</label>
-			<label index="message_403_formal" type="integer">211477492</label>
-			<label index="message_403_informal" type="integer">211477492</label>
+			<label index="message_404" type="integer">37742123</label>
+			<label index="message_403" type="integer">211477492</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
-			<label index="message_404_formal">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_404_informal">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_403_formal">Error 403. Sorry, you don't have access to this data.</label>
-			<label index="message_403_informal">Error 403. Sorry, you don't have access to this data.</label>
+			<label index="message_404">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_403">Error 403. Sorry, you don't have access to this data.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

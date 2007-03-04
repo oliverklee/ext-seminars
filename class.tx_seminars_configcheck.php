@@ -1527,7 +1527,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 *
 	 * @access	private
 	 */
-	function checkCsv() {
+	function check_tx_seminars_seminarbag_csv() {
 		$this->checkAllowAccessToCsv();
 		$this->checkCharsetForCsv();
 		$this->checkFilenameForRegistrationsCsv();

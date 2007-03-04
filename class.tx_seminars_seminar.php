@@ -1314,7 +1314,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 	/**
 	 * Gets the number of attendances for this seminar
-	 * (currently the paid attendances as well as the unpaid ones)
+	 * (currently the paid attendances as well as the unpaid ones).
 	 *
 	 * @return	integer		the number of attendances
 	 *
@@ -1322,6 +1322,18 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getAttendances() {
 		return $this->getRecordPropertyInteger('attendees');
+	}
+
+	/**
+	 * Checks whether there is at least one registration for this event
+	 * (counting the paid attendances as well as the unpaid ones).
+	 *
+	 * @return	boolean		true if there is at least one registration for this event, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasAttendances() {
+		return $this->hasRecordPropertyInteger('attendees');
 	}
 
 	/**

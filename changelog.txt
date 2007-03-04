@@ -1,4 +1,5 @@
 0.5.0
+- Feature: CSV-export of registrations from the BE in mod2 (#525)
 - Change: Lower the TYPO3 version requirement to 3.7 (#631)
 - Change: Add two additional price fields to the event record (#549)
 - Feature: Add teasers to the event records (#625)
