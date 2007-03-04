@@ -288,12 +288,6 @@ class tx_seminars_oe_configcheck {
 			.'<br />When that is done, please empty the '
 			.'<acronym title="front-end">FE</acronym> cache and reload '
 			.'this page.'
-			// TODO: Remove this warning for the next release.
-			.'<br /><em><strong>Note:</strong> This automatic configuration '
-			.'checking feature still is fairly new. If you think that some of '
-			.'the displayed warnings are bogus, please take a minute and file '
-			.'a bug report at the <a href="https://bugs.oliverklee.com/">bug '
-			.'tracker</a>.</em>'
 			.'<br /><em>The configuration check for this extension can be '
 			.'disabled in the extension manager.</em>'
 			.'</p>';
