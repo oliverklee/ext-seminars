@@ -1,4 +1,4 @@
-0.4.9
+0.4.9 (released 2007-03-06)
 - Fix: Wrong reset of a field in TCE checking (#605)
 - Change: Lower the TYPO3 version requirement to 3.7 (#631)
 - Fix: Allow for searching also within organizer names (#352)
