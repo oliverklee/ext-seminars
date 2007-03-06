@@ -32,6 +32,7 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 
 class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	/**
@@ -85,10 +86,12 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 					$updateArray['deadline_registration'] = 0;
 				}
 
-				// Check that the early bird deadline is set to a date prior to
-				// the beginning date of the event.
+				// Check that the early bird deadline is
+				// a) set to a date prior to the beginning date of the event
+				// b) set to a date prior to the registration deadline (if set)
 				if (($row['deadline_early_bird'] > $row['begin_date'])
-					|| ($row['deadline_early_bird'] > $row['deadline_registration'])) {
+					|| ($row['deadline_registration']
+					&& ($row['deadline_early_bird'] > $row['deadline_registration']))) {
 					$updateArray['deadline_early_bird'] = 0;
 				}
 
