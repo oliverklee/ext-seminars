@@ -685,6 +685,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'Incorrect values will cause the colums to still be displayed.',
 			array(
 				'title',
+				'subtitle',
 				'uid',
 				'event_type',
 				'accreditation_number',

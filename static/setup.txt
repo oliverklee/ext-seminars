@@ -128,6 +128,7 @@ plugin.tx_seminars_pi1 {
 
 	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_headertitle =
+	class_headersubtitle =
 	class_headeruid =
 	class_headerevent_type =
 	class_headeraccreditation_number =
@@ -152,6 +153,7 @@ plugin.tx_seminars_pi1 {
 
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_listtitle = title
+	class_listsubtitle =
 	class_listuid = uid
 	class_listevent_type =
 	class_listaccreditation_number =
@@ -180,7 +182,7 @@ plugin.tx_seminars_pi1 {
 	timeframeInList = currentAndUpcoming
 
 	# comma-separated list of column names that shouldn't be displayed in the list view, e.g. organizers,price_special
-	hideColumns = event_type,accreditation_number,credit_points,teaser,time,place,price_special,speakers
+	hideColumns = subtitle,event_type,accreditation_number,credit_points,teaser,time,place,price_special,speakers
 
 	# comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
 	hideFields = credit_points,eventsnextday

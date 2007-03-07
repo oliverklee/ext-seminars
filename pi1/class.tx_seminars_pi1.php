@@ -64,6 +64,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
 			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
 				AND s2.uid=tx_seminars_seminars.uid)',
+		'subtitle' => '(SELECT s1.subtitle
+			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
+				AND s2.uid=tx_seminars_seminars.uid)',
 		'uid' => 'tx_seminars_seminars.uid',
 		'event_type' => '(SELECT s1.event_type
 			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
@@ -1087,6 +1091,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createListHeader() {
 		$this->setMarkerContent('header_title', $this->getFieldHeader('title'));
+		$this->setMarkerContent('header_subtitle', $this->getFieldHeader('subtitle'));
 		$this->setMarkerContent('header_uid', $this->getFieldHeader('uid'));
 		$this->setMarkerContent('header_event_type', $this->getFieldHeader('event_type'));
 		$this->setMarkerContent('header_accreditation_number', $this->getFieldHeader('accreditation_number'));
@@ -1213,6 +1218,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			$this->setMarkerContent('title_link', $this->seminar->getLinkedFieldValue($this, 'title'));
+			$this->setMarkerContent('subtitle', $this->seminar->getSubtitle());
 			$this->setMarkerContent('uid', $this->seminar->getUid($this));
 			$this->setMarkerContent('event_type', $this->seminar->getEventType());
 			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
