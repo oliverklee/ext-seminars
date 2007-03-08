@@ -1,4 +1,5 @@
 0.4.10
+- Fix: In mod2, lowercase POST (#597)
 - Change: Move the "needs registration" checkbox from the date records to the topic records (#651)
 - Fix: Problem with creation of new event records (#648)
 

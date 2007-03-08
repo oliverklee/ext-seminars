@@ -92,7 +92,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// start the document
 			$this->doc = t3lib_div::makeInstance('mediumDoc');
 			$this->doc->backPath = $BACK_PATH;
-			$this->doc->form = '<form action="" method="POST">';
+			$this->doc->form = '<form action="" method="post">';
 			$this->doc->docType = 'xhtml_strict';
 
 			// draw the header
