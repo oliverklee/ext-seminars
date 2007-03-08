@@ -1,4 +1,5 @@
 0.4.10
+- Code cleanup and refactoring (#665)
 - Fix: Config check warning in mod1 in about any folder (#592)
 - Fix: In mod2, lowercase POST (#597)
 - Change: Move the "needs registration" checkbox from the date records to the topic records (#651)
