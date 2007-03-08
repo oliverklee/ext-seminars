@@ -36,6 +36,7 @@ require_once($BACK_PATH.'template.php');
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
@@ -108,11 +109,14 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		 */
 		$pageInfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		// Access check:
-		// The page will show only if there is a valid page and if this page may
-		// be viewed by the user.
+		// The page will only be displayed if there is a valid page, if this
+		// page may be viewed by the current BE user and if the static template
+		// has been included or there actually are any records that will be
+		// listed by this module on the current page.
 		$hasAccess = is_array($pageInfo);
 
-		if (($this->id && $hasAccess) || ($BE_USER->user['admin'])) {
+		if ((($this->id && $hasAccess) || ($BE_USER->user['admin']))
+			&& $this->hasStaticTemplateOrRecords()) {
 			// start the document
 			$this->doc = t3lib_div::makeInstance('bigDoc');
 			$this->doc->backPath = $BACK_PATH;
@@ -733,6 +737,43 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		return $result;
 	}
 
+	/**
+	 * Checks whether this extension's static template is included on the
+	 * current page or there is at least one event, attendance, organizer or
+	 * speaker record (and be it even hidden or deleted) on the current page.
+	 *
+	 * @return	boolean		true if the static template has been included or there is at least one event, attendance, organizer or speaker record on the current page, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function hasStaticTemplateOrRecords() {
+		$configGetterClassname = t3lib_div::makeInstanceClassName('tx_seminars_configgetter');
+		$configGetter =& new $configGetterClassname();
+		$configGetter->init();
+
+		$result = $configGetter->getConfValueBoolean('isStaticTemplateLoaded');
+
+		// Only bother to check the existence of records on this page if there
+		// is *no* static template.
+		if (!$result) {
+			$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
+				'(SELECT COUNT(*) AS num FROM '.$configGetter->tableSeminars
+					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
+					.'(SELECT COUNT(*) AS num FROM '.$configGetter->tableAttendances
+					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
+					.'(SELECT COUNT(*) AS num FROM '.$configGetter->tableOrganizers
+					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
+					.'(SELECT COUNT(*) AS num FROM '.$configGetter->tableSpeakers
+					.' WHERE deleted=0 AND pid='.$this->id.')'
+			);
+			if ($dbResult) {
+				$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+				$result = ($dbResultRow['num'] > 0);
+			}
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/index.php']) {
