@@ -421,8 +421,8 @@ $TCA['tx_seminars_seminars'] = array(
 	),
 	'types' => array(
 		'0' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, price_regular, price_regular_early, price_special, price_special_early, payment_methods, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes'),
-		'1' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, price_regular, price_regular_early, price_special, price_special_early, payment_methods, notes'),
-		'2' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, organizers, needs_registration, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
+		'1' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, price_regular, price_regular_early, price_special, price_special_early, payment_methods, needs_registration, notes'),
+		'2' => array('showitem' => 'object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, speakers, organizers, attendees_min, attendees_max, cancelled, attendees, enough_attendees, is_full, vips, notes')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => 'starttime, endtime')
