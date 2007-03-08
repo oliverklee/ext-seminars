@@ -1,4 +1,5 @@
 0.4.10
+- Fix: Problem with creation of new event records (#648)
 
 0.4.9 (released 2007-03-06)
 - Fix: Wrong reset of a field in TCE checking (#605)

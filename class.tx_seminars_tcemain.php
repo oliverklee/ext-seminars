@@ -57,15 +57,25 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 * Some of the parameters of this function are not used in this function. But they
 	 * are given by the hook in t3lib/class.t3lib_tcemain.php.
 	 *
+	 * Note: When using the hook after INSERT operations, you will only get the
+	 * temporary NEW... id passed to your hook as $id, but you can easily translate
+	 * it to the real uid of the inserted record using the $pObj->substNEWwithIDs
+	 * array.
+	 *
 	 * @param	string		the status of this record (new/update)
 	 * @param	string		the affected table name
 	 * @param	integer		the uid of the affected record (may be zero)
 	 * @param	array		an array of all fields that got changed (as reference)
-	 * @param	object		??? (not used in this function)
+	 * @param	object		reference to tcemain calling object (as reference)
 	 *
 	 * @access	public
 	 */
-	function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, &$reference) {
+	function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, &$pObj) {
+		// Translate new UIDs.
+		if ($status == 'new') {
+			$id = $pObj->substNEWwithIDs[$id];
+		}
+
 		// only do the database query if the right table was modified
 		if ($table == $this->tableSeminars) {
 			// Get the values from the DB.
