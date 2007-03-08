@@ -99,7 +99,21 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		$access = is_array($this->pageinfo) ? 1 : 0;
 
-		if (($this->id && $access) || ($BE_USER->user['admin'] && !$this->id)) {
+		$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
+			'(SELECT COUNT(*) AS num FROM '.$this->tableSeminars
+				.' WHERE deleted=0 AND pid='.$this->id.') UNION '
+				.'(SELECT COUNT(*) AS num FROM '.$this->tableAttendances
+				.' WHERE deleted=0 AND pid='.$this->id.')'
+		);
+		if ($dbResult) {
+			$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$numberOfRecordsOnCurrentPage = $dbResultRow['num'];
+		} else {
+			$numberOfRecordsOnCurrentPage = 0;
+		}
+
+		if ((($this->id && $access) || ($BE_USER->user['admin'] && !$this->id))
+			&& ($numberOfRecordsOnCurrentPage)) {
 			// Draw the header.
 			$this->doc = t3lib_div::makeInstance('mediumDoc');
 			$this->doc->backPath = $BACK_PATH;
@@ -139,8 +153,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 			$this->content.=$this->doc->spacer(10);
 		} else {
-			// If no access or if ID == zero
-
+			// Either the user has no acces, the page ID is zero or there are no
+			// seminar or attendance records on the current page.
 			$this->doc = t3lib_div::makeInstance('mediumDoc');
 			$this->doc->backPath = $BACK_PATH;
 
@@ -149,6 +163,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$this->content.=$this->doc->spacer(5);
 			$this->content.=$this->doc->spacer(10);
 		}
+
+		return;
 	}
 
 	/**
