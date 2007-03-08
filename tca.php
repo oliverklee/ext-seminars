@@ -613,6 +613,7 @@ $TCA['tx_seminars_seminars'] = array(
 		// Multiple event topic
 		'1' => array('showitem' =>
 			'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
+				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
 		// Multiple event date
@@ -621,7 +622,7 @@ $TCA['tx_seminars_seminars'] = array(
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, additional_times_places, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelOrganizers, organizers, '
-				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, attendees, enough_attendees, is_full, '
+				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelAttendees, attendees_min, attendees_max, attendees, enough_attendees, is_full, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelLodging, lodgings, foods'
 		)
 	),

@@ -2048,7 +2048,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function needsRegistration() {
-		return $this->getRecordPropertyBoolean('needs_registration');
+		return $this->getTopicBoolean('needs_registration');
 	}
 
 	/**
@@ -2060,7 +2060,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function allowsMultipleRegistrations() {
-		return $this->getRecordPropertyBoolean('allows_multiple_registrations');
+		return $this->getTopicBoolean('allows_multiple_registrations');
 	}
 
 	/**
