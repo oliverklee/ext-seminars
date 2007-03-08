@@ -53,6 +53,7 @@
 			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
+			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
@@ -159,6 +160,7 @@ someone just has registered for an event:</label>
 			<label index="message_invalidNumberOfSeats_formal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</label>
 			<label index="message_invalidNumberOfSeats_informal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</label>
 			<label index="message_willBeAnnounced">wird noch bekannt gegeben</label>
+			<label index="message_forFree">kostenlos</label>
 			<label index="message_enough">genug</label>
 			<label index="message_accessDenied_formal">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
 			<label index="message_accessDenied_informal">Zu diesem Teil der Site hast du leider keine Zugangsberechtigung.</label>
@@ -378,6 +380,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
+			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_enough" type="integer">249306686</label>
 			<label index="message_accessDenied_formal" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
@@ -546,6 +549,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
+			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>

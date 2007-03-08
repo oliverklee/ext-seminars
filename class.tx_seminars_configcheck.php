@@ -64,6 +64,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkShowVacanciesThreshold();
 		$this->checkDecimalDigits();
 		$this->checkDecimalSplitChar();
+		$this->checkShowToBeAnnouncedForEmptyPrice();
 
 		return;
 	}
@@ -1626,6 +1627,26 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'A mistyped field name will cause the field to not get '
 				.'included.',
 			'tx_seminars_attendances'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value showToBeAnnouncedForEmptyPrice.
+	 *
+	 * @access	private
+	 */
+	function checkShowToBeAnnouncedForEmptyPrice() {
+		$this->checkIfBoolean(
+			'showToBeAnnouncedForEmptyPrice',
+			false,
+			'',
+			'This value specifies whether &quot;to be announced&quot; should be '
+				.'displayed instead of &quot;free&quot; if an event has no '
+				.'regular price set yet.'
+				.'If this value is not set correctly, the wrong wording '
+				.'might get displayed.'
 		);
 
 		return;

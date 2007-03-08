@@ -1,4 +1,5 @@
 0.5.0
+- Change: Change FE display for price = 0 (#390)
 - Change: Remove "times and places" from the list view (#652)
 - Fix: Problem with creation of new event records (#648)
 - Change: Allow to show the subtitle in the list view (#647)

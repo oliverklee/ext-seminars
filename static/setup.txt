@@ -80,6 +80,9 @@ plugin.tx_seminars {
 	# the character used to split the price and its decimal digits
 	decimalSplitChar = .
 
+	# whether events that have no standard price set should have "to be announced" as price instead of "free"
+	showToBeAnnouncedForEmptyPrice = 0
+
 
 	# whether anyone can access the CSV export function without any checks (use this for testing purposes only!)
 	allowAccessToCsv = 0

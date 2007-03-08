@@ -812,7 +812,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our regular price as a string containing amount and currency.
+	 * Gets our regular price as a string containing amount and currency. If
+	 * no regular price has been set, either "free" or "to be announced" will
+	 * be returned, depending on the TS variable showToBeAnnouncedForEmptyPrice.
 	 *
 	 * @param	string		the character or HTML entity used to separate price and currency
 	 *
@@ -821,9 +823,18 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPriceRegular($space = '&nbsp;') {
-		$value = $this->getTopicDecimal('price_regular');
-		$currency = $this->getConfValueString('currency');
-		return $this->formatPrice($value).$space.$currency;
+		if ($this->hasPriceRegular()) {
+			$value = $this->getTopicDecimal('price_regular');
+			$currency = $this->getConfValueString('currency');
+			$result = $this->formatPrice($value).$space.$currency;
+		} else {
+			$result =
+				($this->getConfValueBoolean('showToBeAnnouncedForEmptyPrice'))
+				? $this->pi_getLL('message_willBeAnnounced')
+				: $this->pi_getLL('message_forFree');
+		}
+
+		return $result;
 	}
 
 	/**
