@@ -168,6 +168,7 @@
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
 			<label index="message_provideAttendeesNames">Please provide the attendees' names.</label>
 			<label index="message_noKidsNumber">Please enter only numbers for the number of kids.</label>
+			<label index="message_choosePrice">Please select a price.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
 			<label index="message_provideBankData">Please provide your bank data.</label>
 			<label index="message_selectLodging">Please select at least one lodging option.</label>
@@ -412,6 +413,7 @@
 			<label index="message_invalidNumberOfSeats">Sorry, so viele Plätze sind leider nicht mehr frei.</label>
 			<label index="message_provideAttendeesNames">Bitte geben Sie die Namen der anzumeldenden Personen an.</label>
 			<label index="message_noKidsNumber">Bitte geben Sie nur Zahlen für die Anzahl der Kinder ein.</label>
+			<label index="message_choosePrice">Bitte wählen Sie einen Preis aus.</label>
 			<label index="message_chooseMethodOfPayment">Bitte wählen Sie eine Zahlungsart aus.</label>
 			<label index="message_provideBankData">Bitte geben Sie Ihre Bankverbindung an.</label>
 			<label index="message_selectLodging">Bitte wählen Sie mindestens eine Unterbringungsart aus.</label>
@@ -790,6 +792,7 @@
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
 			<label index="message_provideAttendeesNames" type="integer">175728129</label>
 			<label index="message_noKidsNumber" type="integer">211979974</label>
+			<label index="message_choosePrice" type="integer">38008569</label>
 			<label index="message_chooseMethodOfPayment" type="integer">209557761</label>
 			<label index="message_provideBankData" type="integer">10940357</label>
 			<label index="message_selectLodging" type="integer">147185186</label>
@@ -1091,6 +1094,7 @@
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
 			<label index="message_provideAttendeesNames">Please provide the attendees' names.</label>
 			<label index="message_noKidsNumber">Please enter only numbers for the number of kids.</label>
+			<label index="message_choosePrice">Please select a price.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
 			<label index="message_provideBankData">Please provide your bank data.</label>
 			<label index="message_selectLodging">Please select at least one lodging option.</label>

@@ -971,7 +971,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function getPriceRegular($space = '&nbsp;') {
 		if ($this->hasPriceRegular()) {
-			$value = $this->getTopicDecimal('price_regular');
+			$value = $this->getPriceRegularAmount();
 			$currency = $this->getConfValueString('currency');
 			$result = $this->formatPrice($value).$space.$currency;
 		} else {
@@ -985,12 +985,25 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets our regular price as a decimal.
+	 *
+	 * @return	decimal		the regular event price
+	 *
+	 * @access	private
+	 */
+	function getPriceRegularAmount() {
+		return $this->getTopicDecimal('price_regular');
+	}
+
+	/**
 	 * Returns the price, formatted as configured in TS.
 	 * The price must be supplied as integer or floating point value.
 	 *
 	 * @param	string		the price
 	 *
 	 * @return	string		the price, formatted as in configured in TS
+	 *
+	 * @access	public
 	 */
 	function formatPrice($value) {
 		return number_format($value,
@@ -1038,10 +1051,23 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function getEarlyBirdPriceRegular($space = '&nbsp;') {
-		$value = $this->getTopicDecimal('price_regular_early');
+		$value = $this->getEarlyBirdPriceRegularAmount();
 		$currency = $this->getConfValueString('currency');
 		return $this->hasEarlyBirdPriceRegular() ?
 			$this->formatPrice($value).$space.$currency : '';
+	}
+
+	/**
+	 * Gets our regular price during the early bird phase as a decimal.
+	 *
+	 * If there is no regular early bird price, this function returns "0.00".
+	 *
+	 * @return	decimal		the regular early bird event price
+	 *
+	 * @access	private
+	 */
+	function getEarlyBirdPriceRegularAmount() {
+		return $this->getTopicDecimal('price_regular_early');
 	}
 
 	/**
@@ -1055,10 +1081,24 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	protected
 	 */
 	function getEarlyBirdPriceSpecial($space = '&nbsp;') {
-		$value = $this->getTopicDecimal('price_special_early');
+		$value = $this->getEarlyBirdPriceSpecialAmount();
 		$currency = $this->getConfValueString('currency');
 		return $this->hasEarlyBirdPriceSpecial() ?
 			$this->formatPrice($value).$space.$currency : '';
+	}
+
+	/**
+	 * Gets our special price during the early bird phase as a decimal.
+	 *
+	 * If there is no special price during the early bird phase, this function
+	 * returns "0.00".
+	 *
+	 * @return	decimal		the special event price during the early bird phase
+	 *
+	 * @access	private
+	 */
+	function getEarlyBirdPriceSpecialAmount() {
+		return $this->getTopicDecimal('price_special_early');
 	}
 
 	/**
@@ -1132,14 +1172,17 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function hasEarlyBirdPrice() {
 		// whether the event has regular prices set (a normal one and an early bird)
-		$priceRegularIsOk = $this->hasPriceRegular() && $this->hasEarlyBirdPriceRegular();
+		$priceRegularIsOk = $this->hasPriceRegular()
+			&& $this->hasEarlyBirdPriceRegular();
 
 		// whether no special price is set, or both special prices
 		// (normal and early bird) are set
-		$priceSpecialIsOk = !$this->hasPriceSpecial() ||
-							($this->hasPriceSpecial() && $this->hasEarlyBirdPriceSpecial());
+		$priceSpecialIsOk = !$this->hasPriceSpecial()
+			|| ($this->hasPriceSpecial() && $this->hasEarlyBirdPriceSpecial());
 
-		return ($this->hasEarlyBirdDeadline() && $priceRegularIsOk && $priceSpecialIsOk);
+		return ($this->hasEarlyBirdDeadline()
+			&& $priceRegularIsOk
+			&& $priceSpecialIsOk);
 	}
 
 	/**
@@ -1153,10 +1196,23 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPriceSpecial($space = '&nbsp;') {
-		$value = $this->getTopicDecimal('price_special');
+		$value = $this->getPriceSpecialAmount();
 		$currency = $this->getConfValueString('currency');
 		return $this->hasPriceSpecial() ?
 			$this->formatPrice($value).$space.$currency : '';
+	}
+
+	/**
+	 * Gets our special price as a decimal.
+	 *
+	 * If there is no special price, this function returns "0.00".
+	 *
+	 * @return	decimal		the special event price
+	 *
+	 * @access	private
+	 */
+	function getPriceSpecialAmount() {
+		return $this->getTopicDecimal('price_special');
 	}
 
 	/**
@@ -1182,10 +1238,24 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPriceRegularBoard($space = '&nbsp;') {
-		$value = $this->getTopicDecimal('price_regular_board');
+		$value = $this->getPriceRegularBoardAmount();
 		$currency = $this->getConfValueString('currency');
 		return $this->hasPriceRegularBoard() ?
 			$this->formatPrice($value).$space.$currency : '';
+	}
+
+	/**
+	 * Gets our regular price (including full board) as a decimal.
+	 *
+	 * If there is no regular price (including full board), this function
+	 * returns "0.00".
+	 *
+	 * @return	decimal		the regular event price (including full board)
+	 *
+	 * @access	private
+	 */
+	function getPriceRegularBoardAmount() {
+		return $this->getTopicDecimal('price_regular_board');
 	}
 
 	/**
@@ -1212,10 +1282,24 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getPriceSpecialBoard($space = '&nbsp;') {
-		$value = $this->getTopicDecimal('price_special_board');
+		$value = $this->getPriceSpecialBoardAmount();
 		$currency = $this->getConfValueString('currency');
 		return $this->hasPriceSpecialBoard() ?
 			$this->formatPrice($value).$space.$currency : '';
+	}
+
+	/**
+	 * Gets our special price (including full board) as a decimal.
+	 *
+	 * If there is no special price (including full board), this function
+	 * returns "0.00".
+	 *
+	 * @return	decimal		the special event price (including full board)
+	 *
+	 * @access	private
+	 */
+	function getPriceSpecialBoardAmount() {
+		return $this->getTopicDecimal('price_special_board');
 	}
 
 	/**
@@ -3013,6 +3097,116 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the list of available prices, prepared for a drop-down list.
+	 * In the sub-arrays, the "caption" element contains the description of
+	 * the price (e.g. "Standard price" or "Early-bird price"), the "value"
+	 * element contains a code for the price, but not the price itself (so two
+	 * different price categories that cost the same are no problem). In
+	 * addition, the "amount" element contains the amount (without currency).
+	 *
+	 * If there is an early-bird price available and the early-bird deadline has
+	 * not passed yet, the early-bird price is used.
+	 *
+	 * This function returns an array of arrays, e.g.
+	 *
+	 * 'regular' => (
+	 *   'value'   => 'regular',
+	 *   'amount'  => '50.00',
+	 *   'caption' => 'Regular price: 50 EUR'
+	 * ),
+	 * 'regular_board' => (
+	 *   'value'   => 'regular_board',
+	 *   'amount'  => '80.00',
+	 *   'caption' => 'Regular price with full board: 80 EUR'
+	 * )
+	 *
+	 * So the keys for the sub-arrays and their "value" elements are the same.
+	 *
+	 * The possible keys are:
+	 * regular, regular_early, regular_board,
+	 * special, special_early, special_board
+	 *
+	 * @return	array		the available prices as an array of arrays with the keys "caption" (for the title) and "value" (for the price code), might be empty, will not be null
+	 *
+	 * @access	public
+	 */
+	function getAvailablePrices() {
+		$result = array();
+
+		if ($this->hasEarlyBirdPriceRegular() && $this->earlyBirdApplies()) {
+			$result['regular_early'] = array(
+				'value' => 'regular_early',
+				'amount' => $this->getEarlyBirdPriceRegularAmount(),
+				'caption' => $this->pi_getLL('label_price_earlybird_regular')
+					.': '.$this->getEarlyBirdPriceRegular(' ')
+			);
+		} else {
+			$result['regular'] = array(
+				'value' => 'regular',
+				'amount' => $this->getPriceRegularAmount(),
+				'caption' => $this->pi_getLL('label_price_regular')
+					.': '.$this->getPriceRegular(' ')
+			);
+		}
+		if ($this->hasPriceRegularBoard()) {
+			$result['regular_board'] = array(
+				'value' => 'regular_board',
+				'amount' => $this->getPriceRegularBoardAmount(),
+				'caption' => $this->pi_getLL('label_price_board_regular')
+					.': '.$this->getPriceRegularBoard(' ')
+			);
+		}
+
+		if ($this->hasPriceSpecial()) {
+			if ($this->hasEarlyBirdPriceSpecial() && $this->earlyBirdApplies()) {
+				$result['special_early'] = array(
+					'value' => 'special_early',
+					'amount' => $this->getEarlyBirdPriceSpecialAmount(),
+					'caption' => $this->pi_getLL('label_price_earlybird_special')
+						.': '.$this->getEarlyBirdPriceSpecial(' ')
+				);
+			} else {
+				$result['special'] = array(
+					'value' => 'special',
+					'amount' => $this->getPriceSpecialAmount(),
+					'caption' => $this->pi_getLL('label_price_special')
+						.': '.$this->getPriceSpecial(' ')
+				);
+			}
+		}
+		if ($this->hasPriceSpecialBoard()) {
+			$result['special_board'] = array(
+				'value' => 'special_board',
+					'amount' => $this->getPriceSpecialBoardAmount(),
+				'caption' => $this->pi_getLL('label_price_board_special')
+					.': '.$this->getPriceSpecialBoard(' ')
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a given price category currently is available for this
+	 * event.
+	 *
+	 * The allowed price category codes are:
+	 * regular, regular_early, regular_board,
+	 * special, special_early, special_board
+	 *
+	 * @param	string		code for the price category to check, may be empty or null
+	 *
+	 * @return	boolean		true if $priceCode matches a currently available price, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isPriceAvailable($priceCode) {
+		$availablePrices = $this->getAvailablePrices();
+
+		return !empty($priceCode) && isset($availablePrices[$priceCode]);
 	}
 }
 

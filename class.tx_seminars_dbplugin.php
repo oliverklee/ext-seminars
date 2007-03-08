@@ -533,7 +533,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @param	string		the table name to query
 	 * @param	string		query parameter that will be used as the WHERE clause (may be omitted)
 	 *
-	 * @return	array		$items with additional items from the $params['what'] table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return	array		$items with additional items from the $params['what'] table as an array with the keys "caption" (for the title) and "value" (for the uid), might be empty, will not be null
 	 *
 	 * @access	public
 	 */

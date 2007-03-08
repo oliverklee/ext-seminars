@@ -161,29 +161,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Calculates the total price for a registration.
-	 * If a special price is available for this event, no total price will
-	 * be calculated.
-	 *
-	 * @param	integer		the number of seats to book
-	 * @param	object		a seminar object from which we will get the price (may be null)
-	 *
-	 * @return	string		the total price for this attendance or 0.00 if no total price can be calculated
-	 *
-	 * @access	public
-	 */
-	function calculateTotalPrice($seats, &$seminar) {
-		if ($seminar->hasPriceSpecial()) {
-			$totalPrice = '0.00';
-		} else {
-			$eventPrice = $seminar->getCurrentPriceRegular();
-			$totalPrice = $eventPrice * $seats;
-		}
-
-		return $totalPrice;
-	}
-
-	/**
 	 * Checks whether a seminar UID is valid,
 	 * ie. a non-deleted and non-hidden seminar with the given number exists.
 	 *
@@ -349,7 +326,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		} else {
 			$seats = 1;
 		}
-		$registrationData['total_price'] = $this->calculateTotalPrice($seats, $seminar);
 
 		$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
 		$this->registration =& new $registrationClassname($plugin->cObj);

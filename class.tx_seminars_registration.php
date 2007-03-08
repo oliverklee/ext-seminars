@@ -94,8 +94,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Sets this registration's data if this registration is newly created instead of from a DB query.
-	 * This function must be called directly after construction or this object will not be usable.
+	 * Sets this registration's data if this registration is newly created
+	 * instead of from a DB query.
+	 * This function must be called directly after construction or this object
+	 * will not be usable.
 	 *
 	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
 	 * @param	integer		the UID of the feuser who wants to sign up
@@ -109,14 +111,23 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData = array();
 
 		$this->recordData['seminar'] = $seminar->getUid();
-		$this->recordData['price'] = $seminar->getCurrentPriceRegular(' ');
-		if ($seminar->hasPriceSpecial()) {
-			$this->recordData['price'] .= ' / ' . $seminar->getCurrentPriceSpecial(' ');
-		}
 		$this->recordData['user'] = $userUid;
 
-		$this->recordData['seats'] = $registrationData['seats'];
-		$this->recordData['total_price'] = $registrationData['total_price'];
+		$seats = intval($registrationData['seats']);
+		if ($seats < 1) {
+			$seats = 1;
+		}
+		$this->recordData['seats'] = $seats;
+
+		$availablePrices = $seminar->getAvailablePrices();
+		$selectedPrice = (isset($registrationData['price'])
+			&& $seminar->isPriceAvailable($registrationData['price']))
+			? $registrationData['price'] : 'regular';
+		$this->recordData['price'] = $availablePrices[$selectedPrice]['caption'];
+
+		$this->recordData['total_price'] =
+			$seats * $availablePrices[$selectedPrice]['amount'];
+
 		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
 		$this->recordData['kids'] = $registrationData['kids'];
@@ -253,6 +264,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 						.$this->getConfValueString('timeFormat'),
 					$this->getRecordPropertyInteger($trimmedKey)
 				);
+				break;
+			case 'price':
+				$result = $this->getPrice();
 				break;
 			case 'total_price':
 				$result = $this->getTotalPrice(' ');
@@ -553,6 +567,18 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets the saved price category name and its single price, all in one long
+	 * string.
+	 *
+	 * @return	string		the saved price category name and its single price or an empty string if no price had been saved
+	 *
+	 * @access	public
+	 */
+	function getPrice() {
+		return $this->getRecordPropertyString('price');
+	}
+
+	/**
 	 * Gets the saved total price and the currency.
 	 * An empty string will be returned if no total price could be calculated.
 	 *
@@ -647,15 +673,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->readSubpartsToHide('room', 'field_wrapper');
 		}
 
-		if ($this->getConfValueBoolean('generalPriceInMail')) {
-			$this->setMarkerContent('label_price_regular', $this->pi_getLL('label_price_general'));
-		}
-		$this->setMarkerContent('price_regular', $this->seminar->getCurrentPriceRegular(' '));
-
-		if ($this->seminar->hasPriceSpecial()) {
-			$this->setMarkerContent('price_special', $this->seminar->getPriceSpecial(' '));
+		if ($this->hasRecordPropertyString('price')) {
+			$this->setMarkerContent('price', $this->getPrice());
 		} else {
-			$this->readSubpartsToHide('price_special', 'field_wrapper');
+			$this->readSubpartsToHide('price', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyDecimal('total_price')) {

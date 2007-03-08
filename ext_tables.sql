@@ -194,7 +194,9 @@ CREATE TABLE tx_seminars_attendances (
 	user int(11) unsigned DEFAULT '0' NOT NULL,
 	seminar int(11) unsigned DEFAULT '0' NOT NULL,
 	price text NOT NULL,
+	seats int(11) unsigned DEFAULT '0' NOT NULL,
 	total_price decimal(7,2) DEFAULT '0.00' NOT NULL,
+	attendees_names text NOT NULL,
 	paid tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	datepaid int(11) DEFAULT '0' NOT NULL,
 	method_of_payment int(11) unsigned DEFAULT '0' NOT NULL,
@@ -220,8 +222,6 @@ CREATE TABLE tx_seminars_attendances (
 	foods int(11) DEFAULT '0' NOT NULL,
 	known_from text NOT NULL,
 	notes text NOT NULL,
-	seats int(11) unsigned DEFAULT '0' NOT NULL,
-	attendees_names text NOT NULL,
 	kids int(11) unsigned DEFAULT '0' NOT NULL,
 	checkboxes int(11) DEFAULT '0' NOT NULL,
 

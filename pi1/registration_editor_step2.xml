@@ -175,6 +175,27 @@
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_submit_registration</label>
 		</renderlet:SUBMIT>
 
+		<renderlet:HIDDEN name="price">
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>isValidPriceSelected</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_choosePrice</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="price" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+
 		<renderlet:HIDDEN name="method_of_payment">
 			<validators>
 				<validator:STANDARD>

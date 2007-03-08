@@ -267,7 +267,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * not visible in the registration form (in which case it is neither
 	 * necessary nor possible to select any payment method).
 	 *
-	 * @param	mixed		the currently selected value (a positive integer) or null if no button is selected
+	 * @param	mixed		the currently selected value (a positive integer) or null if no radiobutton is selected
 	 *
 	 * @return	boolean		true if a method of payment is selected OR no method could have been selected at all, false if none is selected, but could have been selected
 	 *
@@ -415,7 +415,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				htmlspecialchars($userData[$currentKey])
 			);
 		}
-		return $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_FEUSER');
+		return $this->plugin->substituteMarkerArrayCached(
+			'REGISTRATION_CONFIRMATION_FEUSER'
+		);
 	}
 
 	/**
@@ -450,8 +452,26 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				'registration_data_body',
 				$availablePaymentMethods[$formData['method_of_payment']]['caption']
 			);
-			$result .= $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_DATA');
+			$result .= $this->plugin->substituteMarkerArrayCached(
+				'REGISTRATION_CONFIRMATION_DATA'
+			);
 		}
+
+		$availablePrices = $this->seminar->getAvailablePrices();
+		$selectedPrice = (isset($formData['price'])
+			&& $this->seminar->isPriceAvailable($formData['price']))
+			? $formData['price'] : 'regular';
+		$this->plugin->setMarkerContent(
+			'registration_data_heading',
+			$this->plugin->pi_getLL('label_price_general')
+		);
+		$this->plugin->setMarkerContent(
+			'registration_data_body',
+			$availablePrices[$selectedPrice]['caption']
+		);
+		$result .= $this->plugin->substituteMarkerArrayCached(
+			'REGISTRATION_CONFIRMATION_DATA'
+		);
 
 		// Build the total price for this registration and add it to the form data
 		// to show it on the confirmation page.
@@ -463,9 +483,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		} else {
 			$seats = 1;
 		}
-		$totalPrice = $this->registrationManager->calculateTotalPrice($seats, &$this->seminar);
-		$currency = $this->registrationManager->getConfValueString('currency');
-		if ($totalPrice != '0.00') {
+		if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
+			$totalPrice = $this->seminar->formatPrice(
+				$seats * $availablePrices[$selectedPrice]['amount']
+			);
+			$currency = $this->registrationManager->getConfValueString('currency');
 			$formData['total_price'] = $totalPrice.' '.$currency;
 		}
 
@@ -499,7 +521,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 					'registration_data_body',
 					$fieldContent
 				);
-				$result .= $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_DATA');
+				$result .= $this->plugin->substituteMarkerArrayCached(
+					'REGISTRATION_CONFIRMATION_DATA'
+				);
 			}
 		}
 
@@ -792,6 +816,39 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function isFoodSelected($selection, &$form) {
 		return !empty($selection) || !$this->hasFoods();
+	}
+
+	/**
+	 * Provides data items for the prices for this event.
+	 *
+	 * @param	array		array that contains any pre-filled data (unused)
+	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
+	 * @param	object		the current renderlet XML node as a recursive array (unused)
+	 *
+	 * @return	array		available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populatePrices($items, $params, &$form) {
+		return $this->seminar->getAvailablePrices();
+	}
+
+	/**
+	 * Checks whether a valid price is selected or the "price" registration
+	 * field is not visible in the registration form (in which case it is not
+	 * possible to select a price).
+	 *
+	 * @param	mixed		the currently selected value (a positive integer) or null if no radiobutton is selected
+	 *
+	 * @return	boolean		true if a valid price is selected or the price field is hidden, false if none is selected, but could have been selected
+	 *
+	 * @access	public
+	 */
+	function isValidPriceSelected($radiogroupValue) {
+		return $this->seminar->isPriceAvailable($radiogroupValue)
+			|| !$this->hasRegistrationFormField(
+				array('elementname' => 'price')
+			);
 	}
 }
 
