@@ -1934,6 +1934,25 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 		return $result;
 	}
+
+	/**
+	 * Gets an element of the record data array, converted to a boolean.
+	 * If the array has not been initialized properly, false is returned.
+	 *
+	 * If we are a date record, it'll be retrieved from the corresponding topic
+	 * record.
+	 *
+	 * @param	string		the name of the field to retrieve
+	 *
+	 * @return	boolean		the corresponding element from the record data array
+	 *
+	 * @access	private
+	 */
+	function getTopicBoolean($key) {
+		return ($this->isTopicOkay())
+			? $this->topic->getRecordPropertyBoolean($key)
+			: $this->getRecordPropertyBoolean($key);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {
