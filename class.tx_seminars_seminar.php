@@ -1109,8 +1109,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				''
 			);
 
-			// we expect just one result
-			if ($dbResultPaymentMethod && $GLOBALS['TYPO3_DB']->sql_num_rows ($dbResultPaymentMethod)) {
+			// We expect just one result.
+			if ($dbResultPaymentMethod
+				&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)) {
 				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
 				$result .= '  <li>'.$row['title'].'</li>'.chr(10);
 			}
@@ -1167,8 +1168,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			''
 		);
 
-		// we expect just one result
-		if ($dbResultPaymentMethod && $GLOBALS['TYPO3_DB']->sql_num_rows ($dbResultPaymentMethod)) {
+		// We expect just one result.
+		if ($dbResultPaymentMethod
+			&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
 			$result = $row['title'].': ';
 			$result .= $row['description'].chr(10).chr(10);
@@ -1202,8 +1204,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			''
 		);
 
-		// we expect just one result
-		if ($dbResultPaymentMethod && $GLOBALS['TYPO3_DB']->sql_num_rows ($dbResultPaymentMethod)) {
+		// We expect just one result.
+		if ($dbResultPaymentMethod
+			&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
 			$result = $row['title'];
 		}
