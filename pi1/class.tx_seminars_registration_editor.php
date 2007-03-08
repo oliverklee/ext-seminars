@@ -550,12 +550,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 	/**
 	 * Checks whether the list of attendees' names is non-empty or less than two
-	 * seats are requested.
+	 * seats are requested or the field "attendees names" is not displayed.
 	 *
 	 * @param	string		the current value of the field with the attendees' names
 	 * @param	object		the current FORMidable object
 	 *
-	 * @return	boolean		true if the field is non-empty or less than two seats are reserved, false otherwise
+	 * @return	boolean		true if the field is non-empty or less than two seats are reserved or this field is not displayed at all, false otherwise
 	 *
 	 * @access	public
 	 */
@@ -564,7 +564,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$seats = isset($dataHandler->__aFormData['seats']) ?
 			intval($dataHandler->__aFormData['seats']) : 1;
 
-		return (!empty($attendeesNames) || ($seats < 2));
+		return (!empty($attendeesNames) || ($seats < 2)
+			|| !$this->hasRegistrationFormField(
+				array('elementname' => 'attendees_names')
+			)
+		);
 	}
 
 	/**
