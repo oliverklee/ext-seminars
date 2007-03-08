@@ -1233,9 +1233,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			} else {
 				$this->previousDate = $currentDate;
 			}
-			if ($this->seminar->hasAdditionalTimesAndPlaces()) {
-				$currentDate .= '<br />' . $this->seminar->getAdditionalTimesAndPlaces();
-			}
 			$this->setMarkerContent('date', $currentDate);
 
 			$this->setMarkerContent('time', $this->seminar->getTime());
