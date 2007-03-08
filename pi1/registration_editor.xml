@@ -19,7 +19,7 @@
 
 	<elements>
 		<renderlet:RADIOBUTTON name="method_of_payment">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_method_of_payment</label>
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_paymentmethods</label>
 			<data>
 				<userobj>
 					<extension>this</extension>
