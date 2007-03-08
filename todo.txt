@@ -12,10 +12,6 @@ Hint regarding the items marked with [from dev-meeting 05/12], they got discusse
 Version 0.5.0 - "Dogfood, part 2"
 ---------------------------------
 --> All bugs marked with a star (*) are entered to the bugtracker!
-- *investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
-- get a wiki
-- *document what all those *PID configuration variables are used for
-- *test whether all flexform fields work
 - *Include some basic functionality into md2
   - *possibility to select an event
   - *search forms (search for a user / event), maybe use t3lib_db::searchQuery
@@ -103,6 +99,8 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 
 Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
+- investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
+- document what all those *PID configuration variables are used for
 - remove unneeded texts and HTML template parts that were used for the thank-you page
 - switch extension status from "alpha" to "beta" so that we can get a security review and appear and in the offical part of the TER
 - format changelog according to http://www.red-bean.com/cvs2cl/changelogs.html
