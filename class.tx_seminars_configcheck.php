@@ -1532,7 +1532,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	function check_tx_seminars_seminarbag_csv() {
 		$this->checkAllowAccessToCsv();
 		$this->checkCharsetForCsv();
+		$this->checkFilenameForEventsCsv();
 		$this->checkFilenameForRegistrationsCsv();
+		$this->checkFieldsFromEventsForCsv();
 		$this->checkFieldsFromFeUserForCsv();
 		$this->checkFieldsFromAttendanceForCsv();
 
@@ -1577,6 +1579,25 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks the setting of the configuration value filenameForEventsCsv.
+	 *
+	 * @access	private
+	 */
+	function checkFilenameForEventsCsv() {
+		$this->checkForNonEmptyString(
+			'filenameForEventsCsv',
+			false,
+			'',
+			'This value specifies the file name to suggest for the CSV export '
+				.'of event records. '
+				.'If this value is not set, an empty filename will be used for '
+				.'saving the CSV file which will cause problems.'
+		);
+
+		return;
+	}
+
+	/**
 	 * Checks the setting of the configuration value filenameForRegistrationsCsv.
 	 *
 	 * @access	private
@@ -1586,9 +1607,69 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'filenameForRegistrationsCsv',
 			false,
 			'',
-			'This value specifies the file name to suggest for the CSV export. '
+			'This value specifies the file name to suggest for the CSV export '
+				.'of registration records. '
 				.'If this value is not set, an empty filename will be used for '
 				.'saving the CSV file which will cause problems.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value fieldsFromEventsForCsv.
+	 *
+	 * @access	private
+	 */
+	function checkFieldsFromEventsForCsv() {
+		$this->checkIfMultiInSetNotEmpty(
+			'fieldsFromEventsForCsv',
+			false,
+			'',
+			'These values specify the event fields to export via CSV. '
+				.'A mistyped field name will cause the field to not get '
+				.'included.',
+			array(
+				'uid',
+				'tstamp',
+				'crdate',
+				'title',
+				'subtitle',
+				'teaser',
+				'description',
+				'event_type',
+				'accreditation_number',
+				'credit_points',
+				'date',
+				'time',
+				'deadline_registration',
+				'deadline_early_bird',
+				'place',
+				'room',
+				'lodgings',
+				'foods',
+				'additional_times_places',
+				'speakers',
+				'partners',
+				'tutors',
+				'leaders',
+				'price_regular',
+				'price_regular_early',
+				'price_regular_board',
+				'price_special',
+				'price_special_early',
+				'price_special_board',
+				'additional_information',
+				'payment_methods',
+				'organizers',
+				'attendees_min',
+				'attendees_max',
+				'attendees',
+				'vacancies',
+				'enough_attendees',
+				'is_full',
+				'cancelled'
+			)
 		);
 
 		return;

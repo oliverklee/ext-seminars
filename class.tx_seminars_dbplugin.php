@@ -33,6 +33,11 @@
  * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+// the UTF-8 representation of an en dash
+DEFINE(UTF8_EN_DASH, chr(0xE2).chr(0x80).chr(0x93));
+// a CR-LF combination (the default Unix line ending)
+DEFINE(CRLF, chr(0x0D).chr(0x0A));
+
 require_once(PATH_t3lib.'class.t3lib_tstemplate.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configcheck.php');

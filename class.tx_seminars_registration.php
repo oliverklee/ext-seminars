@@ -1069,7 +1069,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($dbResult) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 				if (!empty($result)) {
-					$result .= chr(13).chr(10);
+					$result .= CRLF;
 				}
 				$result .= $row['title'];
 			}

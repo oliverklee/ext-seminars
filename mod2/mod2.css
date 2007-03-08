@@ -9,3 +9,32 @@ img.icon {
 img.deleteicon {
 	margin-left: 8px;
 }
+
+table {
+	clear: both;
+}
+
+#typo3-newRecordLink {
+	width: 20em;
+	float: left;
+}
+
+/*
+ * The following is mostly the same as the style for the new record link
+ * provided by the TYPO3 4.1 default skin.
+ */
+#typo3-csvLink {
+	font-weight: bold;
+	margin: 10px 0 5px;
+	width: 20em;
+	float: right;
+}
+
+#typo3-csvLink img {
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+#typo3-csvLink a {
+	vertical-align: middle;
+}

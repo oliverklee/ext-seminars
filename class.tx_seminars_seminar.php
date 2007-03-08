@@ -185,7 +185,18 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getDescription(&$plugin) {
-		return $plugin->pi_RTEcssText($this->getTopicString('description'));
+		return $plugin->pi_RTEcssText($this->getDescriptionRaw());
+	}
+
+	/**
+	 * Gets our description as HTML, not RTE'ed yet.
+	 *
+	 * @return	string		our seminar description (or '' if there is an error)
+	 *
+	 * @access	private
+	 */
+	function getDescriptionRaw() {
+		return $this->getTopicString('description');
 	}
 
 	/**
@@ -220,10 +231,23 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getAdditionalTimesAndPlaces() {
-		$additionalTimesAndPlaces = htmlspecialchars($this->getRecordPropertyString('additional_times_places'));
-		$result = str_replace(chr(13).chr(10), '<br />', $additionalTimesAndPlaces);
+		$additionalTimesAndPlaces
+			= htmlspecialchars($this->getAdditionalTimesAndPlacesRaw());
+		$result = str_replace(CRLF, '<br />', $additionalTimesAndPlaces);
 
 		return $result;
+	}
+
+	/**
+	 * Returns the content of the field "times_places" for this event.
+	 * The line breaks of this non-RTE field are returned unchanged.
+	 *
+	 * @return	string		the field content
+	 *
+	 * @access	private
+	 */
+	function getAdditionalTimesAndPlacesRaw() {
+		return $this->getRecordPropertyString('additional_times_places');
 	}
 
 	/**
@@ -236,7 +260,18 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getAdditionalInformation(&$plugin) {
-		return $plugin->pi_RTEcssText($this->getTopicString('additional_information'));
+		return $plugin->pi_RTEcssText($this->getAdditionalInformationRaw());
+	}
+
+	/**
+	 * Gets the additional information as HTML, not RTE'ed yet.
+	 *
+	 * @return	string		HTML code of the additional information (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getAdditionalInformationRaw() {
+		return $this->getTopicString('additional_information');
 	}
 
 	/**
@@ -557,6 +592,49 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets our place (or places) with address and links as HTML, not RTE'ed yet,
+	 * separated by CRLF.
+	 * Returns a localized string "will be announced" if the seminar has no places set.
+	 *
+	 * @return	string		our places description (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getPlaceWithDetailsRaw() {
+		$result = '';
+
+		if ($this->hasPlace()) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'title, address, homepage, directions',
+				$this->tableSites.', '.$this->tableSitesMM,
+				'uid_local='.$this->getUid().' AND uid=uid_foreign'
+					.t3lib_pageSelect::enableFields($this->tableSites)
+			);
+
+			if ($dbResult) {
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+					$result .= $row['title'];
+					if (!empty($row['homepage'])) {
+						$result .= CRLF.$row['homepage'];
+					}
+
+					if (!empty($row['address'])) {
+						// replace all occurrences of chr(13) (new line) with a comma
+						$result .= CRLF.str_replace(chr(13), ',', $row['address']);
+					}
+					if (!empty($row['directions'])) {
+						$result .= CRLF.str_replace(chr(13), ',', $row['directions']);
+					}
+				}
+			}
+		} else {
+			$result = $this->pi_getLL('message_willBeAnnounced');
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Gets our place (or places) as a plain test list (just the place names).
 	 * Returns a localized string "will be announced" if the seminar has no places set.
 	 *
@@ -696,6 +774,75 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 					$plugin->setMarkerContent('speaker_item_description', $description);
 
 					$result .= $plugin->substituteMarkerArrayCached('SPEAKER_LIST_ITEM');
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets our speaker (or speakers), as HTML with details and URLs, but not
+	 * RTE'ed yet.
+	 * Returns an empty string if this event doesn't have any speakers.
+	 *
+	 * As speakers can be related to this event as speakers, partners, tutors or
+	 * leaders, the type relation can be specified. The default is "speakers".
+	 *
+	 * @param	string		the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
+	 *
+	 * @return	string		our speakers (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers') {
+		$result = '';
+		$hasSpeakers = false;
+		$mmTable = '';
+
+		switch ($speakerRelation) {
+			case 'partners':
+				$hasSpeakers = $this->hasPartners();
+				$mmTable = $this->tablePartnersMM;
+				break;
+			case 'tutors':
+				$hasSpeakers = $this->hasTutors();
+				$mmTable = $this->tableTutorsMM;
+				break;
+			case 'leaders':
+				$hasSpeakers = $this->hasLeaders();
+				$mmTable = $this->tableLeadersMM;
+				break;
+			case 'speakers':
+				// The fallthrough is intended.
+			default:
+				$hasSpeakers = $this->hasSpeakers();
+				$mmTable = $this->tableSpeakersMM;
+				break;
+		}
+
+		if ($hasSpeakers) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'title, organization, homepage, description',
+				$this->tableSpeakers.', '.$mmTable,
+				'uid_local='.$this->getUid().' AND uid=uid_foreign'
+					.t3lib_pageSelect::enableFields($this->tableSpeakers)
+			);
+
+			if ($dbResult) {
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+					$result .= $row['title'];
+					if (!empty($row['organization'])) {
+						$result .= ', '.$row['organization'];
+					}
+					if (!empty($row['homepage'])) {
+						$result .= ', '.$row['homepage'];
+					}
+					$result .= CRLF;
+
+					if (!empty($row['description'])) {
+						$result .= $row['description'].CRLF;
+					}
 				}
 			}
 		}
@@ -1084,8 +1231,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our allowed payment methods, complete as RTE'ed HTML LI list (with enclosing UL),
-	 * but without the detailed description.
+	 * Gets the titles of allowed payment methods, complete as a RTE'ed HTML
+	 * LI list (with enclosing UL), but without the detailed description.
 	 * Returns an empty paragraph if this seminar doesn't have any payment methods.
 	 *
 	 * @param	object		the live pibase object
@@ -1138,6 +1285,32 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 		foreach ($paymentMethodsUids as $currentPaymentMethod) {
 			$result .= $this->getSinglePaymentMethodPlain($currentPaymentMethod);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets our allowed payment methods, just as plain text separated by CRLF,
+	 * without the detailed description.
+	 * Returns an empty string if this seminar doesn't have any payment methods.
+	 *
+	 * @return	string		our payment methods as plain text (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getPaymentMethodsPlainShort() {
+		$result = '';
+
+		if ($this->hasPaymentMethods()) {
+			$paymentMethodsUids = explode(',', $this->getTopicString('payment_methods'));
+			$paymentMethods = array();
+
+			foreach ($paymentMethodsUids as $currentPaymentMethod) {
+				$paymentMethods[] = $this->getSinglePaymentMethodShort($currentPaymentMethod);
+			}
+
+			$result = implode(CRLF, $paymentMethods);
 		}
 
 		return $result;
@@ -1470,18 +1643,34 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns the seminar registration deadline
-	 * The returned string is formatted using the format configured in dateFormatYMD and timeFormat
+	 * Returns the seminar registration deadline: the date and also the time
+	 * (depending on the TS variable showTimeOfRegistrationDeadline).
+	 * The returned string is formatted using the format configured in
+	 * dateFormatYMD and timeFormat.
 	 *
-	 * @return	string		the date + time of the deadline
+	 * This function will return an empty string if this event does not have a
+	 * registration deadline.
+	 *
+	 * @return	string		the date + time of the deadline or an empty string if this event has no registration deadline
 	 *
 	 * @access	public
 	 */
 	function getRegistrationDeadline() {
-		$result = strftime($this->getConfValueString('dateFormatYMD'), $this->getRecordPropertyInteger('deadline_registration'));
-		if ($this->getConfValueBoolean('showTimeOfRegistrationDeadline')) {
-			$result .= strftime(' '.$this->getConfValueString('timeFormat'), $this->getRecordPropertyInteger('deadline_registration'));
+		$result = '';
+
+		if ($this->hasRegistrationDeadline()) {
+			$result = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$this->getRecordPropertyInteger('deadline_registration')
+			);
+			if ($this->getConfValueBoolean('showTimeOfRegistrationDeadline')) {
+				$result .= strftime(
+					' '.$this->getConfValueString('timeFormat'),
+					$this->getRecordPropertyInteger('deadline_registration')
+				);
+			}
 		}
+
 		return $result;
 	}
 
@@ -1498,21 +1687,35 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 
 	/**
 	 * Returns the early bird deadline.
-	 * The returned string is formatted using the format configured in dateFormatYMD
-	 * and timeFormat.
+	 * The returned string is formatted using the format configured in
+	 * dateFormatYMD and timeFormat.
 	 *
-	 * The TS parameter 'showTimeOfEarlyBirdDeadline' controls if the time should also
-	 * be returned in addition to the date.
+	 * The TS parameter 'showTimeOfEarlyBirdDeadline' controls if the time
+	 * should also be returned in addition to the date.
 	 *
-	 * @return	string		the date and time of the early bird deadline
+	 * This function will return an empty string if this event does not have an
+	 * early-bird deadline.
+	 *
+	 * @return	string		the date and time of the early bird deadline or an early string if this event has no early-bird deadline
 	 *
 	 * @access	protected
 	 */
 	function getEarlyBirdDeadline() {
-		$result = strftime($this->getConfValueString('dateFormatYMD'), $this->getRecordPropertyInteger('deadline_early_bird'));
-		if ($this->getConfValueBoolean('showTimeOfEarlyBirdDeadline')) {
-			$result .= strftime(' '.$this->getConfValueString('timeFormat'), $this->getRecordPropertyInteger('deadline_early_bird'));
+		$result = '';
+
+		if ($this->hasEarlyBirdDeadline()) {
+			$result = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$this->getRecordPropertyInteger('deadline_early_bird')
+			);
+			if ($this->getConfValueBoolean('showTimeOfEarlyBirdDeadline')) {
+				$result .= strftime(
+					' '.$this->getConfValueString('timeFormat'),
+					$this->getRecordPropertyInteger('deadline_early_bird')
+				);
+			}
 		}
+
 		return $result;
 	}
 
@@ -1543,7 +1746,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
 	 *
-	 * @return	string		the hyperlinked names and descriptions of our organizers
+	 * @return	string		the hyperlinked names of our organizers
 	 *
 	 * @access	public
 	 */
@@ -1560,6 +1763,36 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 						$result .= ', ';
 					}
 					$result .= $plugin->cObj->getTypoLink($currentOrganizerData['title'], $currentOrganizerData['homepage']);
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets our organizer's names (and URLs), separated by CRLF.
+	 *
+	 * @return	string		names and homepages of our organizers or an empty string if there are no organizers
+	 *
+	 * @access	private
+	 */
+	function getOrganizersRaw() {
+		$result = '';
+
+		if ($this->hasOrganizers()) {
+			$organizerUids = explode(',', $this->getRecordPropertyString('organizers'));
+			foreach ($organizerUids as $currentOrganizerUid) {
+				$currentOrganizerData =& $this->retrieveOrganizer($currentOrganizerUid);
+
+				if ($currentOrganizerData) {
+					if (!empty($result)) {
+						$result .= CRLF;
+					}
+					$result .= $currentOrganizerData['title'];
+					if (!empty($currentOrganizerData['homepage'])) {
+						$result .= ', '.$currentOrganizerData['homepage'];
+					}
 				}
 			}
 		}
@@ -2519,6 +2752,29 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Converts an array m:m records (each having a "value" and a "caption"
+	 * element) to a CRLF-separated string.
+	 *
+	 * @param	array		m:m elements, each having a "value" and "caption" element, may be empty
+	 *
+	 * @return	string		the captions of the array contents separated by CRLF, will be empty if the array is empty
+	 */
+	function mmRecordsToText($records) {
+		$result = '';
+
+		if (!empty($records)) {
+			foreach ($records as $currentRecord) {
+				if (!empty($result)) {
+					$result .= CRLF;
+				}
+				$result .= $currentRecord['caption'];
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Gets the PID of the system folder where the registration records of this
 	 * event should be stored. If no folder is set in this event's topmost
 	 * organizer record (ie. the page configured in
@@ -2607,6 +2863,156 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function hasTeaser() {
 		return $this->hasTopicString('teaser');
+	}
+
+	/**
+	 * Retrieves a value from this record. The return value will be an empty
+	 * string if the key is not defined in $this->recordData or if it has not
+	 * been filled in.
+	 *
+	 * If the data needs to be decoded to be readable (eg. the speakers
+	 * payment or the gender), this function will already return the clear text
+	 * version.
+	 *
+	 * @param	string		the key of the data to retrieve (the key doesn't need to be trimmed)
+	 *
+	 * @return	string		the data retrieved from $this->recordData, may be empty
+	 *
+	 * @access	public
+	 */
+	function getEventData($key) {
+		$trimmedKey = trim($key);
+
+		switch ($trimmedKey) {
+			case 'uid':
+				$result = $this->getUid();
+				break;
+			case 'tstamp':
+				// The fallthrough is intended.
+			case 'crdate':
+				$result = strftime(
+					$this->getConfValueString('dateFormatYMD').' '
+						.$this->getConfValueString('timeFormat'),
+					$this->getRecordPropertyInteger($trimmedKey)
+				);
+				break;
+			case 'title':
+				$result = $this->getTitle();
+				break;
+			case 'subtitle':
+				$result = $this->getSubtitle();
+				break;
+			case 'teaser':
+				$result = $this->getTeaser();
+				break;
+			case 'description':
+				$result = $this->getDescriptionRaw();
+				break;
+			case 'event_type':
+				$result = $this->getEventType();
+				break;
+			case 'accreditation_number':
+				$result = $this->getAccreditationNumber();
+				break;
+			case 'credit_points':
+				$result = $this->getCreditPoints();
+				break;
+			case 'date':
+				$result = $this->getDate(UTF8_EN_DASH);
+				break;
+			case 'time':
+				$result = $this->getTime(UTF8_EN_DASH);
+				break;
+			case 'deadline_registration':
+				$result = $this->getRegistrationDeadline();
+				break;
+			case 'deadline_early_bird':
+				$result = $this->getEarlyBirdDeadline();
+				break;
+			case 'place':
+				$result = $this->getPlaceWithDetailsRaw();
+				break;
+			case 'room':
+				$result = $this->getRoom();
+				break;
+			case 'lodgings':
+				$result = $this->mmRecordsToText($this->getLodgings());
+				break;
+			case 'foods':
+				$result = $this->mmRecordsToText($this->getFoods());
+				break;
+			case 'additional_times_places':
+				$result = $this->getAdditionalTimesAndPlacesRaw();
+				break;
+			case 'speakers':
+				// The fallthrough is intended.
+			case 'partners':
+				// The fallthrough is intended.
+			case 'tutors':
+				// The fallthrough is intended.
+			case 'leaders':
+				$result = $this->getSpeakersWithDescriptionRaw($trimmedKey);
+				break;
+			case 'price_regular':
+				$result = $this->getPriceRegular(' ');
+				break;
+			case 'price_regular_early':
+				$result = $this->getEarlyBirdPriceRegular(' ');
+				break;
+			case 'price_regular_board':
+				$result = $this->getPriceRegularBoard(' ');
+				break;
+			case 'price_special':
+				$result = $this->getPriceSpecial(' ');
+				break;
+			case 'price_special_early':
+				$result = $this->getEarlyBirdPriceSpecial(' ');
+				break;
+			case 'price_special_board':
+				$result = $this->getPriceSpecialBoard(' ');
+				break;
+			case 'additional_information':
+				$result = $this->getAdditionalInformationRaw();
+				break;
+			case 'payment_methods':
+				$result = $this->getPaymentMethodsPlainShort();
+				break;
+			case 'organizers':
+				$result = $this->getOrganizersRaw();
+				break;
+			case 'attendees_min':
+				$result = $this->getAttendancesMin();
+				break;
+			case 'attendees_max':
+				$result = $this->getAttendancesMax();
+				break;
+			case 'attendees':
+				$result = $this->getAttendances();
+				break;
+			case 'vacancies':
+				$result = $this->getVacancies();
+				break;
+			case 'enough_attendees':
+				$result = ($this->hasEnoughAttendances())
+					? $this->pi_getLL('label_yes')
+					: $this->pi_getLL('label_no');
+				break;
+			case 'is_full':
+				$result = ($this->isFull())
+					? $this->pi_getLL('label_yes')
+					: $this->pi_getLL('label_no');
+				break;
+			case 'cancelled':
+				$result = ($this->isCanceled())
+					? $this->pi_getLL('label_yes')
+					: $this->pi_getLL('label_no');
+				break;
+			default:
+				$result = '';
+				break;
+		}
+
+		return $result;
 	}
 }
 

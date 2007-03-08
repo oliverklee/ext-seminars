@@ -34,6 +34,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 
 class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/** same as class name */
@@ -63,6 +64,9 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		$result = '';
 
 		switch ($this->piVars['table']) {
+			case 'events':
+				$result = $this->createListOfEvents();
+				break;
 			case 'registrations':
 				$result = $this->createListOfRegistrations();
 				break;
@@ -95,10 +99,15 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * Creates a CSV list of registrations for the event given in
 	 * $this->piVars['seminar'].
 	 *
-	 * If the seminar does not exist, an empty string is returned, and an error
+	 * If the seminar does not exist, an error message is returned, and an error
 	 * 404 is set.
 	 *
-	 * @return	string		CSV list of registrations for the given seminar or an empty string in case of an error
+	 * If access is denied, an error message is returned, and an error 403 is
+	 * set.
+	 *
+	 * @return	string		CSV list of registrations for the given seminar or an error message in case of an error
+	 *
+	 * @access	protected
 	 */
 	function createListOfRegistrations() {
 		$result = '';
@@ -116,8 +125,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 					$this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
 						.','
 						.$this->configGetter->getConfValueString('fieldsFromAttendanceForCsv')
-						.'"'.chr(13).chr(10)
-					);
+						.'"'.CRLF
+				);
 
 				// Now let's have a registration bag to iterate over all
 				// registrations of this event.
@@ -140,7 +149,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 					$result .= implode(
 						',',
 						array_merge($userData, $registrationData)
-					).chr(13).chr(10);
+					).CRLF;
 
 					$registrationBag->getNext();
 				}
@@ -151,6 +160,79 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			}
 		} else {
 			// Wrong or missing UID.
+			header('Status: 404 Not Found');
+			$result = $this->pi_getLL('message_404_registrations');
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates a CSV list of events for the page given in
+	 * $this->piVars['pid'].
+	 *
+	 * If the page does not exist, an error message is returned, and an error
+	 * 404 is set.
+	 *
+	 * If access is denied, an error message is returned, and an error 403 is
+	 * set.
+	 *
+	 * @return	string		CSV list of events for the given page or an error message in case of an error
+	 *
+	 * @access	protected
+	 */
+	function createListOfEvents() {
+		$result = '';
+
+		$pid = intval($this->piVars['pid']);
+
+		if ($pid) {
+			if ($this->canAccessListOfEvents()) {
+				$this->setContentTypeForEventLists();
+
+				// Create the heading first.
+				$result .= '"'.str_replace(
+					',',
+					'","',
+					$this->configGetter->getConfValueString(
+						'fieldsFromEventsForCsv'
+					).'"'.chr(13).chr(10)
+				);
+
+				// Now let's have a seminar bag to iterate over events
+				// on this page.
+				$seminarBagClassname
+					= t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
+				$seminarBag =& new $seminarBagClassname(
+					'pid='.$pid,
+					'',
+					'',
+					'sorting'
+				);
+
+				while ($currentSeminar =& $seminarBag->getCurrent()) {
+					$seminarData = $this->retrieveData(
+						$currentSeminar,
+						'getEventData',
+						$this->configGetter->getConfValueString(
+							'fieldsFromEventsForCsv'
+						)
+					);
+					// Create a list of comma-separated values of the event data.
+					$result .= implode(
+						',',
+						$seminarData
+					).CRLF;
+
+					$seminarBag->getNext();
+				}
+			} else {
+				// Access is denied.
+				header('Status: 403 Forbidden');
+				$result = $this->pi_getLL('message_403');
+			}
+		} else {
+			// Missing PID.
 			header('Status: 404 Not Found');
 			$result = $this->pi_getLL('message_404');
 		}
@@ -242,19 +324,88 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Sets the HTTP header: the content type and filename (content disposition).
+	 * Checks whether the list of registrations is accessible, ie.
+	 * 1. CSV access is allowed for testing purposes, or
+	 * 2. the logged-in BE user has read access to the registrations table and
+	 *    read access to *all* pages where the registration records of the
+	 *    selected event are stored.
+	 *
+	 * TODO: When additional ways to access the CSV data are added (e.g. FE
+	 * links), the corresponding access checks need to be added to this
+	 * function.
+	 *
+	 * @return	boolean		true if the list of registrations may be exported as CSV
+	 *
+	 * @access	protected
+	 */
+	function canAccessListOfEvents() {
+		global $BE_USER;
+
+		$result = $this->configGetter->getConfValueBoolean('allowAccessToCsv');
+
+		// Only bother to check other permissions if we don't already have
+		// global access.
+		if (!$result) {
+			if (TYPO3_MODE == 'BE') {
+				// Check read access to the events table.
+				$result = $BE_USER->check(
+					'tables_select',
+					'tx_seminars_seminars'
+				);
+				// Check read access to the given page.
+				$pid = intval($this->piVars['pid']);
+				$result &= $BE_USER->doesUserHaveAccess(
+					t3lib_BEfunc::getRecord('pages', $pid),
+					1
+				);
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Sets the HTTP header: the content type and filename (content disposition)
+	 * for registration lists.
 	 *
 	 * @access	protected
 	 */
 	function setContentTypeForRegistrationLists() {
-		// In addition to the CSV content type and the charset, announce that
-		// we provide a CSV header line.
-		header('Content-type: text/csv; header=present; charset='
-			.$this->configGetter->getConfValueString('charsetForCsv'), true);
+		$this->setCsvContentType();
 		header('Content-disposition: attachment; filename='
 			.$this->configGetter->getConfValueString('filenameForRegistrationsCsv'),
 			true
 		);
+
+		return;
+	}
+
+	/**
+	 * Sets the HTTP header: the content type and filename (content disposition)
+	 * for event lists.
+	 *
+	 * @access	protected
+	 */
+	function setContentTypeForEventLists() {
+		$this->setCsvContentType();
+		header('Content-disposition: attachment; filename='
+			.$this->configGetter->getConfValueString('filenameForEventsCsv'),
+			true
+		);
+
+		return;
+	}
+
+	/**
+	 * Sets the HTTP header: the content type for CSV.
+	 *
+	 * @access	private
+	 */
+	function setCsvContentType() {
+		// In addition to the CSV content type and the charset, announce that
+		// we provide a CSV header line.
+		header('Content-type: text/csv; header=present; charset='
+			.$this->configGetter->getConfValueString('charsetForCsv'), true);
 
 		return;
 	}

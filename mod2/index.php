@@ -285,7 +285,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45),
 				$this->seminar->getDate(),
 				$this->seminar->getAttendances()
-					.$this->getCsvIcon(),
+					.$this->getRegistrationsCsvIcon(),
 				$this->seminar->getAttendancesMin(),
 				$this->seminar->getAttendancesMax(),
 				(!$this->seminar->hasEnoughAttendances()
@@ -305,6 +305,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		}
 
 		$content .= $this->getNewIcon($seminarBag->tableSeminars, $this->id);
+		$content .= $this->getCsvIcon('events');
 
 		// Output the table array using the tableLayout array with the template
 		// class.
@@ -670,7 +671,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$BACK_PATH,
 					'gfx/new_record.gif',
 					'width="7" height="4"').
-				' title="'.$langNew.'" alt="'.$langNew.'" />'.
+				// We use an empty alt attribute as we already have a textual
+				// representation directly next to the icon.
+				' title="'.$langNew.'" alt="" />'.
 				$langNew.
 				'</a></div>';
 		}
@@ -705,7 +708,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 *
 	 * @access	public
 	 */
-	function getCsvIcon() {
+	function getRegistrationsCsvIcon() {
 		global $BACK_PATH, $LANG;
 
 		static $accessChecker = null;
@@ -771,6 +774,41 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				$result = ($dbResultRow['num'] > 0);
 			}
 		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns a "CSV export" image tag that is linked to the CSV export,
+	 * corresponding to the list that is visible in the BE.
+	 *
+	 * This icon is intended to be used next to the "create new record" icon.
+	 *
+	 * @param	string		the simplified name of the table from which the records should be exported, eg. "events"
+	 *
+	 * @return	string		the HTML source code of the linked CSV icon
+	 *
+	 * @access	protected
+	 */
+	function getCsvIcon($table) {
+		global $BACK_PATH, $LANG;
+
+		$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.csv', 1);
+		$result = '<div id="typo3-csvLink">'
+			.'<a href="class.tx_seminars_csv.php?id='.$this->id
+			.'&amp;tx_seminars_pi2[table]='.$table
+			.'&amp;tx_seminars_pi2[pid]='.$this->id.'">'
+			.'<img'
+			.t3lib_iconWorks::skinImg(
+				$BACK_PATH,
+				'gfx/csv.gif',
+				'width="27" height="14"'
+			)
+			// We use an empty alt attribute as we already have a textual
+			// representation directly next to the icon.
+			.' title="'.$langCsv.'" alt="" />'
+			.$langCsv
+			.'</a></div>';
 
 		return $result;
 	}
