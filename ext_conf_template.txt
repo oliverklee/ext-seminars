@@ -6,3 +6,6 @@ usePageBrowser = 0
 
 # cat=basic/enable; type=boolean; label=Select topic records from all pages, not just from the general storage page. This only applies if the page browser is not used.
 selectTopicsFromAllPages = 1
+
+# cat=basic/enable; type=boolean; label=Manual sorting of events.
+useManualSorting = 0

@@ -199,6 +199,13 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 					).'"'.chr(13).chr(10)
 				);
 
+				// unserialize the configuration array
+				$globalConfiguration = unserialize(
+					$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
+				);
+				$orderBy = ($globalConfiguration['useManualSorting'])
+					? 'sorting' : 'begin_date';
+
 				// Now let's have a seminar bag to iterate over events
 				// on this page.
 				$seminarBagClassname
@@ -207,7 +214,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 					'pid='.$pid,
 					'',
 					'',
-					'sorting'
+					$orderBy
 				);
 
 				while ($currentSeminar =& $seminarBag->getCurrent()) {

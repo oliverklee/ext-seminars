@@ -78,8 +78,6 @@ $tempColumns = Array (
 	),
 );
 
-
-
 $TCA['tx_seminars_seminars'] = Array (
 	'ctrl' => Array (
 		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars',
@@ -88,7 +86,7 @@ $TCA['tx_seminars_seminars'] = Array (
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'sortby' => 'sorting',
+		'default_sortby' => 'ORDER BY begin_date',
 		'delete' => 'deleted',
 		'enablecolumns' => Array (
 			'disabled' => 'hidden',
@@ -107,6 +105,14 @@ $TCA['tx_seminars_seminars'] = Array (
 		'hideAtCopy' => true,
 	),
 );
+
+// unserialize the configuration array
+$globalConfiguration = unserialize(
+	$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
+);
+if ($globalConfiguration['useManualSorting']) {
+	$TCA['tx_seminars_seminars']['ctrl']['sortby'] = 'sorting';
+}
 
 $TCA['tx_seminars_speakers'] = Array (
 	'ctrl' => Array (

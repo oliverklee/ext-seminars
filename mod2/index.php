@@ -224,10 +224,16 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Initialize the variable for the HTML source code.
 		$content = '';
 
+		// unserialize the configuration array
+		$globalConfiguration = unserialize(
+			$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
+		);
+
 		// Initialize variables for the database query.
 		$queryWhere = 'pid='.$this->id;
 		$additionalTables = '';
-		$orderBy = 'sorting';
+		$orderBy = ($globalConfiguration['useManualSorting'])
+			? 'sorting' : 'begin_date';
 		$limit = '';
 
 		// Set the table layout of the event list.
