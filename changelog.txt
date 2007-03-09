@@ -1,4 +1,5 @@
 0.5.0
+- Change: In the list view, use "register now" as link text even if the user is not logged in yet (#616)
 - Feature: Allow to select the price in the registration form (#551)
 - Feature: CSV export of events from the BE (#548)
 - Fix: If the field "additional participants" is hidden, no registration is possible (#510)
