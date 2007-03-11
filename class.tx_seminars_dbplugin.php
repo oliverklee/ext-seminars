@@ -114,6 +114,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @access	protected
 	 */
 	function init($conf = null) {
+		static $cachedConfigs = array();
+
 		if (!$this->isInitialized) {
 			if ($GLOBALS['TSFE'] && !isset($GLOBALS['TSFE']->config['config'])) {
 				$GLOBALS['TSFE']->config['config'] = array();
@@ -128,25 +130,32 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 				// We need to create our own template setup if we are in the BE
 				// and we aren't currently creating a DirectMail page.
 				if ((TYPO3_MODE == 'BE') && !is_object($GLOBALS['TSFE'])) {
-					$template = t3lib_div::makeInstance('t3lib_TStemplate');
-					// do not log time-performance information
-					$template->tt_track = 0;
-					$template->init();
+					$pageId = intval(t3lib_div::_GP('id'));
 
-					// Get the root line
-					$sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
-					// the selected page in the BE is found
-					// exactly as in t3lib_SCbase::init()
-					$rootline = $sys_page->getRootLine(intval(t3lib_div::_GP('id')));
+					if (isset($cachedConfigs[$pageId])) {
+						$this->conf =& $cachedConfigs[$pageId];
+					} else {
+						$template = t3lib_div::makeInstance('t3lib_TStemplate');
+						// do not log time-performance information
+						$template->tt_track = 0;
+						$template->init();
 
-					// This generates the constants/config + hierarchy info for the template.
-					$template->runThroughTemplates($rootline, 0);
-					$template->generateConfig();
+						// Get the root line
+						$sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
+						// the selected page in the BE is found
+						// exactly as in t3lib_SCbase::init()
+						$rootline = $sys_page->getRootLine($pageId);
 
-					$this->conf = $template->setup['plugin.']['tx_'.$this->extKey.'.'];
+						// This generates the constants/config + hierarchy info for the template.
+						$template->runThroughTemplates($rootline, 0);
+						$template->generateConfig();
+
+						$this->conf =& $template->setup['plugin.']['tx_'.$this->extKey.'.'];
+						$cachedConfigs[$pageId] =& $this->conf;
+					}
 				} else {
 					// On the front end, we can use the provided template setup.
-					$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
+					$this->conf =& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
 				}
 			}
 

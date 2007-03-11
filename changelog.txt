@@ -1,5 +1,5 @@
 0.5.0
-- Change: Cache seminars in the registration class (#672)
+- Change: Speed up the back-end modules with caching (#670, #672)
 - Change: Make the sorting order of events in the BE configurable (#517)
 - Change: In the list view, use "register now" as link text even if the user is not logged in yet (#616)
 - Feature: Allow to select the price in the registration form (#551)
