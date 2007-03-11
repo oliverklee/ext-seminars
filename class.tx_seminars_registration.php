@@ -56,6 +56,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function tx_seminars_registration(&$cObj, $dbResult = null) {
+		static $cachedSeminars = array();
+
 		$this->cObj =& $cObj;
 		$this->init();
 		$this->tableName = $this->tableAttendances;
@@ -64,9 +66,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->getDataFromDbResult($GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult));
 
 			if ($this->isOk()) {
-				/** Name of the seminar class in case someone subclasses it. */
-				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-				$this->seminar =& new $seminarClassname($this->recordData['seminar']);
+				$seminarUid = $this->recordData['seminar'];
+				if (isset($cachedSeminars[$seminarUid])) {
+					$this->seminar =& $cachedSeminars[$seminarUid];
+				} else {
+					/** Name of the seminar class in case someone subclasses it. */
+					$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+					$this->seminar =& new $seminarClassname($seminarUid);
+					$cachedSeminars[$seminarUid] =& $this->seminar;
+				}
 
 				// Store the user data in $this->userData.
 				$this->retrieveUserData();

@@ -1,4 +1,5 @@
 0.4.10
+- Change: Cache seminars in the registration class (#672)
 - Change: Make the sorting order of events in the BE configurable (#517)
 - Code cleanup and refactoring (#665)
 - Fix: Config check warning in mod1 in about any folder (#592)
