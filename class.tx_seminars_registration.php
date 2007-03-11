@@ -128,9 +128,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['seats'] = $seats;
 
 		$availablePrices = $seminar->getAvailablePrices();
+		// If no (available) price is selected, use the first price by default.
 		$selectedPrice = (isset($registrationData['price'])
 			&& $seminar->isPriceAvailable($registrationData['price']))
-			? $registrationData['price'] : 'regular';
+			? $registrationData['price'] : key($availablePrices);
 		$this->recordData['price'] = $availablePrices[$selectedPrice]['caption'];
 
 		$this->recordData['total_price'] =

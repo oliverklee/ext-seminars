@@ -3129,7 +3129,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * regular, regular_early, regular_board,
 	 * special, special_early, special_board
 	 *
-	 * @return	array		the available prices as an array of arrays with the keys "caption" (for the title) and "value" (for the price code), might be empty, will not be null
+	 * The return array's pointer will already be reset to its first element.
+	 *
+	 * @return	array		the available prices as a reset array of arrays with the keys "caption" (for the title) and "value" (for the price code), might be empty, will not be null
 	 *
 	 * @access	public
 	 */
@@ -3185,6 +3187,9 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 					.': '.$this->getPriceSpecialBoard(' ')
 			);
 		}
+
+		// reset the pointer for the result array to the first element
+		reset($result);
 
 		return $result;
 	}

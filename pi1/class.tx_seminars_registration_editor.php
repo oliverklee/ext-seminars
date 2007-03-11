@@ -458,9 +458,10 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		$availablePrices = $this->seminar->getAvailablePrices();
+		// If no (available) price is selected, use the first price by default.
 		$selectedPrice = (isset($formData['price'])
 			&& $this->seminar->isPriceAvailable($formData['price']))
-			? $formData['price'] : 'regular';
+			? $formData['price'] : key($availablePrices);
 		$this->plugin->setMarkerContent(
 			'registration_data_heading',
 			$this->plugin->pi_getLL('label_price_general')
