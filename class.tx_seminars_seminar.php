@@ -57,19 +57,25 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
+	 * By default, the process of creating a seminar object from a hidden record
+	 * fails. If we need the seminar object although it's hidden, theparameter
+	 * $allowHiddenRecords should be set to true.
+	 *
 	 * @param	integer		The UID of the seminar to retrieve from the DB.
 	 * 						This parameter will be ignored if $dbResult is provided.
 	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
 	 * 						If this parameter is provided, $uid will be ignored.
+	 * @param	boolean		whether it is possible to create a seminar object from
+	 * 						a hidden record
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminar($seminarUid, $dbResult = null) {
+	function tx_seminars_seminar($seminarUid, $dbResult = null, $allowHiddenRecords = false) {
 		$this->init();
 		$this->tableName = $this->tableSeminars;
 
 		if (!$dbResult) {
-			$dbResult = $this->retrieveRecord($seminarUid);
+			$dbResult = $this->retrieveRecord($seminarUid, $allowHiddenRecords);
 		}
 
 		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
@@ -89,6 +95,104 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		}
 
 		return;
+	}
+
+	/**
+	 * Checks certain fields to contain pausible values. Example: The registration
+	 * deadline must not be later than the event's starting time.
+	 *
+	 * This function is used in order to check values entered in the TCE forms
+	 * in the TYPO3 back end.
+	 *
+	 * @param	string		the name of the field to check
+	 * @param	string		the value that was entered in the TCE form that needs to be validated
+	 *
+	 * @return	array		associative array containing the field "status" and "newValue" (if needed)
+	 *
+	 * @access	private
+	 */
+	function validateTceValues($fieldName, $value) {
+		$result = array(
+			'status' => true
+		);
+
+		switch($fieldName) {
+			case 'deadline_registration':
+				// Check that the registration deadline is not later than the
+				// begin date.
+				if ($value > $this->getRecordPropertyInteger('begin_date')) {
+					$result['status'] = false;
+					$result['newValue'] = 0;
+				}
+				break;
+			case 'deadline_early_bird':
+				// Check that the early-bird deadline is
+				// a) not later than the begin date
+				// b) not later than the registration deadline (if set).
+				if ($value > $this->getRecordPropertyInteger('begin_date')
+					|| ($this->getRecordPropertyInteger('deadline_registration')
+					&& ($value > $this->getRecordPropertyInteger('deadline_registration')))) {
+					$result['status'] = false;
+					$result['newValue'] = 0;
+				}
+				break;
+			case 'price_regular_early':
+				// Check that the regular early bird price is not higher than
+				// the regular price for this event.
+				if ($value > $this->getRecordPropertyDecimal('price_regular')) {
+					$result['status'] = false;
+					$result['newValue'] = '0.00';
+				}
+				break;
+			case 'price_special_early':
+				// Check that the special early bird price is not higher than
+				// the special price for this event.
+				if ($value > $this->getRecordPropertyDecimal('price_special')) {
+					$result['status'] = false;
+					$result['newValue'] = '0.00';
+				}
+				break;
+			default:
+				// no action if no case is matched
+				break;	
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns an associative array, containing fieldname/value pairs that need
+	 * to be updated in the database. Update means "reset to zero/empty" so far.
+	 *
+	 * This function is used in order to check values entered in the TCE forms
+	 * in the TYPO3 back end. It is called through a hook in the TCE class.
+	 *
+	 * @param	array		associative array containing the values entered in the TCE form (as a reference, may not be null)
+	 *
+	 * @return	array		associative array containing data to update the database entry of this event, may be empty but not null
+	 *
+	 * @access	public
+	 */
+	function getUpdateArray(&$fieldArray) {
+		$updateArray = array();
+		$fieldNamesToCheck = array(
+			'deadline_registration',
+			'deadline_early_bird',
+			'price_regular_early',
+			'price_special_early'
+		);
+
+		foreach($fieldNamesToCheck as $currentFieldName) {
+			$result = $this->validateTceValues(
+				$currentFieldName,
+				$fieldArray[$currentFieldName]
+			);
+			if (!$result['status']) {
+				$updateArray[$currentFieldName] = $result['newValue'];
+			}
+		}
+
+		return $updateArray;
 	}
 
 	/**

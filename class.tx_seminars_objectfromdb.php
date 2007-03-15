@@ -309,26 +309,33 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks whether a non-deleted and non-hidden record with a given UID exists in the DB.
+	 * Checks whether a non-deleted and non-hidden record with a given UID exists
+	 * in the DB. If the parameter $allowHiddenRecords is set to true, hidden
+	 * records will be selected, too.
 	 *
 	 * This method may be called statically.
 	 *
 	 * @param	string		string with a UID (need not necessarily be escaped, will be intval'ed)
 	 * @param	string		string with the tablename where the UID should be searched for
+	 * @param	boolean		whether hidden records should be accepted
 	 *
 	 * @return	boolean		true if a visible record with that UID exists; false otherwise.
 	 *
 	 * @access	protected
 	 */
-	function recordExists($uid, $tableName) {
+	function recordExists($uid, $tableName, $allowHiddenRecords = false) {
 		$result = is_numeric($uid) && ($uid);
+		$enableFields = tx_seminars_objectfromdb::retrieveEnableFields(
+			$tableName,
+			$allowHiddenRecords
+		);
 
 		if ($result && !empty($tableName)) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'COUNT(*) AS num',
 				$tableName,
 				'uid='.intval($uid)
-					.t3lib_pageSelect::enableFields($tableName),
+					.$enableFields,
 				'',
 				'',
 				'');
@@ -347,24 +354,52 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Returns additional parameters for an SQL query. They depend on the
+	 * table name and whether hidden records should be selected, too.
+	 *
+	 * The returned string will always start with " AND" so that it can
+	 * simply beeing attached to an existing SQL Query.
+	 *
+	 * This function can be called statically.
+	 *
+	 * @param	string		the name of the database table
+	 * @param	boolean		whether hidden records are allowed
+	 *
+	 * @return	string		the additional query parameters that need to be added to a SQL query
+	 *
+	 * @access	public
+	 */
+	function retrieveEnableFields($tableName, $allowHiddenRecords = false) {
+		// The second parameter for the enableFields() function controls
+		// whether hidden records should be ignored.
+		return t3lib_pageSelect::enableFields(
+			$tableName,
+			intval($allowHiddenRecords)
+		);
+	}
+
+	/**
 	 * Retrieves a record from the database.
 	 *
 	 * The record is retrieved from $this->tableName. Therefore $this->tableName
 	 * has to be set before calling this method.
 	 *
 	 * @param	integer		The UID of the record to retrieve from the DB.
+	 * @param	boolean		whether to allow hidden records
 	 *
 	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
 	 *
 	 * @access	protected
 	 */
-	function retrieveRecord($uid) {
-	 	if ($this->recordExists($uid, $this->tableName)) {
+	function retrieveRecord($uid, $allowHiddenRecords = false) {
+		$enableFields = $this->retrieveEnableFields($this->tableName, $allowHiddenRecords);
+
+		if ($this->recordExists($uid, $this->tableName, $allowHiddenRecords)) {
 		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				$this->tableName,
 				'uid='.intval($uid)
-					.t3lib_pageSelect::enableFields($this->tableName),
+					.$enableFields,
 				'',
 				'',
 				'1');
