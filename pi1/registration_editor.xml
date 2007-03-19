@@ -85,7 +85,7 @@
 			<process>
 				<userobj>
 					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
+					<method>hasBankDataFormField</method>
 					<params>
 						<data name="elementname" value="account_number" />
 					</params>
@@ -106,7 +106,7 @@
 			<process>
 				<userobj>
 					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
+					<method>hasBankDataFormField</method>
 					<params>
 						<data name="elementname" value="bank_code" />
 					</params>
@@ -127,7 +127,7 @@
 			<process>
 				<userobj>
 					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
+					<method>hasBankDataFormField</method>
 					<params>
 						<data name="elementname" value="bank_name" />
 					</params>
@@ -159,7 +159,7 @@
 			<process>
 				<userobj>
 					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
+					<method>hasBankDataFormField</method>
 					<params>
 						<data name="elementname" value="account_owner" />
 					</params>

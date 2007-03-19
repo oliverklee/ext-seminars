@@ -265,17 +265,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Checks whether a method of payment is selected OR this event has no
 	 * payment methods set at all OR the corresponding registration field is
 	 * not visible in the registration form (in which case it is neither
-	 * necessary nor possible to select any payment method).
+	 * necessary nor possible to select any payment method) OR this event has
+	 * no price at all.
 	 *
 	 * @param	mixed		the currently selected value (a positive integer) or null if no radiobutton is selected
 	 *
-	 * @return	boolean		true if a method of payment is selected OR no method could have been selected at all, false if none is selected, but could have been selected
+	 * @return	boolean		true if a method of payment is selected OR no method could have been selected at all OR this event has no price, false if none is selected, but should have been selected
 	 *
 	 * @access	public
 	 */
 	function isMethodOfPaymentSelected($radiogroupValue) {
 		return $this->isRadiobuttonSelected($radiogroupValue)
 			|| !$this->seminar->hasPaymentMethods()
+			|| !$this->seminar->hasAnyPrice()
 			|| !$this->showMethodsOfPayment();
 	}
 
@@ -300,9 +302,31 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
 	 *
 	 * @return	boolean		true if the current form field should be displayed, false otherwise
+	 *
+	 * @access	public
 	 */
 	function hasRegistrationFormField($parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
+	}
+
+	/**
+	 * Checks whether a form field should be displayed (and evaluated) at all.
+	 * This is specified via TS setup (or flexforms) using the
+	 * "showRegistrationFields" variable.
+	 *
+	 * This function also checks if the current event has a price set at all,
+	 * and returns only true if the event has a price (ie. is not completely for
+	 * free) and the current form field should be displayed.
+	 *
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 *
+	 * @return	boolean		true if the current form field should be displayed AND the current event is not completely for free, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasBankDataFormField($parameters) {
+		return $this->hasRegistrationFormField($parameters)
+			&& $this->seminar->hasAnyPrice();
 	}
 
 	/**

@@ -154,7 +154,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				break;
 			default:
 				// no action if no case is matched
-				break;	
+				break;
 		}
 
 		return $result;
@@ -3316,6 +3316,30 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 		$availablePrices = $this->getAvailablePrices();
 
 		return !empty($priceCode) && isset($availablePrices[$priceCode]);
+	}
+
+	/**
+	 * Checks whether this event currently has at least one non-free price
+	 * (taking into account whether we still are in the early-bird period).
+	 *
+	 * @return	boolean		true if this event currently has at least one non-zero price, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasAnyPrice() {
+		if ($this->earlyBirdApplies()) {
+			$result = $this->hasEarlyBirdPriceRegular()
+				|| $this->hasEarlyBirdPriceSpecial();
+		} else {
+			$result = $this->hasPriceRegular()
+				|| $this->hasPriceSpecial();
+		}
+
+		// There is no early-bird version of the prices that include full board.
+		$result |= $this->hasPriceRegularBoard()
+			|| $this->hasPriceSpecialBoard();
+
+		return $result;
 	}
 }
 
