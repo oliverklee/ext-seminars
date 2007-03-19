@@ -13,7 +13,7 @@
 - Change: Change FE display for price = 0 (#390)
 - Change: Remove "times and places" from the list view (#652)
 - Fix: Problem with creation of new event records (#648)
-- Change: Allow to show the subtitle in the list view (#647)
+- Change: Allow to show the subtitle in the list view (#647, #693)
 - Fix: mod2: escape the & to &amp; in the delete icon links (#624)
 - Change: Removed the "This feature is new" message from the config check (#388)
 - Feature: CSV-export of registrations from the BE in mod2 (#525)
