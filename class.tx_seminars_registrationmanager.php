@@ -152,7 +152,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			// provide the login link
 			$result = $plugin->getLoginLink(
 				$plugin->pi_getLL('label_onlineRegistration'),
-				$this->getConfValueInteger('registerPID'),
+				$plugin->getConfValueInteger('registerPID'),
 				$seminar->getUid()
 			);
 		}

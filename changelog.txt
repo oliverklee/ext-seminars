@@ -73,7 +73,7 @@
 - Feature: List other dates for the same event topic (#299)
 - Fix: SQL Errors in the registration form (#473)
 - Change: Make choice of payment method obligatory in the registration form (#471)
-- Feature: Redirect user to registration page after login (#376)
+- Feature: Redirect user to registration page after login (#376, #696)
 - Feature: Add billing address to attendance record (#431)
 - Feature: Confirmation page before registering for an event (#374)
 - Change: Moved all record type icons to a subdirectory (#469)
