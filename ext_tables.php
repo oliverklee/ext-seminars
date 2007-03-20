@@ -23,7 +23,7 @@ $tempColumns = Array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => '30',
-			'eval' => 'trim',
+			'eval' => 'trim'
 		)
 	),
 	'tx_seminars_matriculation_number' => Array (
@@ -48,7 +48,7 @@ $tempColumns = Array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => '30',
-			'eval' => 'trim',
+			'eval' => 'trim'
 		)
 	),
 	'tx_seminars_semester' => Array (
@@ -73,9 +73,9 @@ $tempColumns = Array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => '30',
-			'eval' => 'trim',
+			'eval' => 'trim'
 		)
-	),
+	)
 );
 
 $TCA['tx_seminars_seminars'] = Array (
@@ -102,8 +102,8 @@ $TCA['tx_seminars_seminars'] = Array (
 		),
 		'dynamicConfigFile' => $extPath.'tca.php',
 		'dividers2tabs' => true,
-		'hideAtCopy' => true,
-	),
+		'hideAtCopy' => true
+	)
 );
 
 // unserialize the configuration array
@@ -124,8 +124,8 @@ $TCA['tx_seminars_speakers'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_speakers.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_speakers.gif'
+	)
 );
 
 $TCA['tx_seminars_attendances'] = Array (
@@ -138,8 +138,8 @@ $TCA['tx_seminars_attendances'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_attendances.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_attendances.gif'
+	)
 );
 
 $TCA['tx_seminars_sites'] = Array (
@@ -152,8 +152,8 @@ $TCA['tx_seminars_sites'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_sites.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_sites.gif'
+	)
 );
 
 $TCA['tx_seminars_organizers'] = Array (
@@ -166,8 +166,8 @@ $TCA['tx_seminars_organizers'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_organizers.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_organizers.gif'
+	)
 );
 
 $TCA['tx_seminars_payment_methods'] = Array (
@@ -180,8 +180,8 @@ $TCA['tx_seminars_payment_methods'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_payment_methods.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_payment_methods.gif'
+	)
 );
 
 $TCA['tx_seminars_event_types'] = Array (
@@ -194,8 +194,8 @@ $TCA['tx_seminars_event_types'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_event_types.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_event_types.gif'
+	)
 );
 
 $TCA['tx_seminars_checkboxes'] = Array (
@@ -208,8 +208,8 @@ $TCA['tx_seminars_checkboxes'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_checkboxes.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_checkboxes.gif'
+	)
 );
 
 $TCA['tx_seminars_lodgings'] = Array (
@@ -222,8 +222,8 @@ $TCA['tx_seminars_lodgings'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_lodgings.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_lodgings.gif'
+	)
 );
 
 $TCA['tx_seminars_foods'] = Array (
@@ -236,8 +236,8 @@ $TCA['tx_seminars_foods'] = Array (
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_foods.gif',
-	),
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_foods.gif'
+	)
 );
 
 t3lib_extMgm::addToInsertRecords('tx_seminars_seminars');

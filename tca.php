@@ -25,7 +25,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'items' => array(
 					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.0', '0'),
 					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.1', '1'),
-					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.object_type.I.2', '2')
 				)
 			)
 		),
@@ -71,7 +71,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
 		),
 		'topic' => array(
@@ -88,7 +88,7 @@ $TCA['tx_seminars_seminars'] = array(
 					.' ORDER BY title',
 				'size' => 1,
 				'minitems' => 1,
-				'maxitems' => 1,
+				'maxitems' => 1
 			)
 		),
 		'subtitle' => array(
@@ -97,7 +97,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'teaser' => array(
@@ -106,7 +106,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'description' => array(
@@ -115,7 +115,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'event_type' => array(
@@ -140,7 +140,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '20',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'credit_points' => array(
@@ -218,7 +218,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_place_mm',
+				'MM' => 'tx_seminars_seminars_place_mm'
 			)
 		),
 		'room' => array(
@@ -227,7 +227,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'additional_times_places' => array(
@@ -236,7 +236,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'lodgings' => array(
@@ -252,7 +252,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_lodgings_mm',
+				'MM' => 'tx_seminars_seminars_lodgings_mm'
 			)
 		),
 		'foods' => array(
@@ -268,7 +268,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_foods_mm',
+				'MM' => 'tx_seminars_seminars_foods_mm'
 			)
 		),
 		'speakers' => array(
@@ -282,7 +282,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_speakers_mm',
+				'MM' => 'tx_seminars_seminars_speakers_mm'
 			)
 		),
 		'partners' => array(
@@ -296,7 +296,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_speakers_mm_partners',
+				'MM' => 'tx_seminars_seminars_speakers_mm_partners'
 			)
 		),
 		'tutors' => array(
@@ -310,7 +310,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_speakers_mm_tutors',
+				'MM' => 'tx_seminars_seminars_speakers_mm_tutors'
 			)
 		),
 		'leaders' => array(
@@ -324,7 +324,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_speakers_mm_leaders',
+				'MM' => 'tx_seminars_seminars_speakers_mm_leaders'
 			)
 		),
 		'price_regular' => array(
@@ -429,7 +429,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'checkboxes' => array(
@@ -445,7 +445,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_checkboxes_mm',
+				'MM' => 'tx_seminars_seminars_checkboxes_mm'
 			)
 		),
 		'uses_terms_2' => array(
@@ -454,7 +454,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
 				'type' => 'check',
-				'default' => 0,
+				'default' => 0
 			)
 		),
 		'payment_methods' => array(
@@ -467,7 +467,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'foreign_table' => 'tx_seminars_payment_methods',
 				'size' => 5,
 				'minitems' => 0,
-				'maxitems' => 999,
+				'maxitems' => 999
 			)
 		),
 		'organizers' => array(
@@ -480,7 +480,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'foreign_table' => 'tx_seminars_organizers',
 				'size' => 5,
 				'minitems' => 1,
-				'maxitems' => 999,
+				'maxitems' => 999
 			)
 		),
 		'needs_registration' => array(
@@ -488,7 +488,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.needs_registration',
 			'config' => array(
 				'type' => 'check',
-				'default' => 1,
+				'default' => 1
 			)
 		),
 		'allows_multiple_registrations' => array(
@@ -497,7 +497,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
 				'type' => 'check',
-				'default' => 0,
+				'default' => 0
 			)
 		),
 		'attendees_min' => array(
@@ -545,7 +545,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.attendees',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
-				'type' => 'none',
+				'type' => 'none'
 			)
 		),
 		'enough_attendees' => array(
@@ -553,7 +553,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.enough_attendees',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
-				'type' => 'none',
+				'type' => 'none'
 			)
 		),
 		'is_full' => array(
@@ -561,7 +561,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.is_full',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
-				'type' => 'none',
+				'type' => 'none'
 			)
 		),
 		'owner_feuser' => array(
@@ -586,7 +586,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 5,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_seminars_feusers_mm',
+				'MM' => 'tx_seminars_seminars_feusers_mm'
 			)
 		),
 		'notes' => array(
@@ -595,7 +595,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		)
 	),
@@ -644,7 +644,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
 		),
 		'organization' => array(
@@ -653,7 +653,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'homepage' => array(
@@ -683,7 +683,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'picture' => array(
@@ -698,7 +698,7 @@ $TCA['tx_seminars_speakers'] = array(
 				'show_thumbs' => 1,
 				'size' => 1,
 				'minitems' => 0,
-				'maxitems' => 1,
+				'maxitems' => 1
 			)
 		),
 		'notes' => array(
@@ -707,7 +707,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'address' => array(
@@ -716,7 +716,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'phone_work' => array(
@@ -725,7 +725,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'phone_home' => array(
@@ -734,7 +734,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'phone_mobile' => array(
@@ -743,7 +743,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'fax' => array(
@@ -752,7 +752,7 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'email' => array(
@@ -761,9 +761,9 @@ $TCA['tx_seminars_speakers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim,nospace',
+				'eval' => 'trim,nospace'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], notes, address, phone_work, phone_home, phone_mobile, fax, email')
@@ -785,7 +785,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.title',
 			'config' => array(
-				'type' => 'none',
+				'type' => 'none'
 			)
 		),
 		'user' => array(
@@ -797,7 +797,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'allowed' => 'fe_users',
 				'size' => 1,
 				'minitems' => 1,
-				'maxitems' => 1,
+				'maxitems' => 1
 			)
 		),
 		'seminar' => array(
@@ -809,7 +809,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'allowed' => 'tx_seminars_seminars',
 				'size' => 1,
 				'minitems' => 1,
-				'maxitems' => 1,
+				'maxitems' => 1
 			)
 		),
 		'price' => array(
@@ -859,7 +859,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'kids' => array(
@@ -882,7 +882,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.paid',
 			'config' => array(
-				'type' => 'check',
+				'type' => 'check'
 			)
 		),
 		'datepaid' => array(
@@ -919,7 +919,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'bank_code' => array(
@@ -928,7 +928,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'bank_name' => array(
@@ -937,7 +937,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'account_owner' => array(
@@ -946,7 +946,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'trim',
+				'eval' => 'trim'
 			)
 		),
 		'gender' => array(
@@ -956,7 +956,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'type' => 'select',
 				'items' => array(
 					array('LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.0', '0'),
-					array('LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.1', '1'),
+					array('LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.1', '1')
 				),
 				'size' => 1,
 				'maxitems' => 1
@@ -978,7 +978,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '20',
-				'rows' => '3',
+				'rows' => '3'
 			)
 		),
 		'zip' => array(
@@ -1035,7 +1035,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.been_there',
 			'config' => array(
-				'type' => 'check',
+				'type' => 'check'
 			)
 		),
 		'checkboxes' => array(
@@ -1050,7 +1050,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_attendances_checkboxes_mm',
+				'MM' => 'tx_seminars_attendances_checkboxes_mm'
 			)
 		),
 		'interests' => array(
@@ -1059,7 +1059,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'expectations' => array(
@@ -1068,7 +1068,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'background_knowledge' => array(
@@ -1077,7 +1077,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'lodgings' => array(
@@ -1092,7 +1092,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_attendances_lodgings_mm',
+				'MM' => 'tx_seminars_attendances_lodgings_mm'
 			)
 		),
 		'accommodation' => array(
@@ -1101,7 +1101,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'foods' => array(
@@ -1116,7 +1116,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
-				'MM' => 'tx_seminars_attendances_foods_mm',
+				'MM' => 'tx_seminars_attendances_foods_mm'
 			)
 		),
 		'food' => array(
@@ -1125,7 +1125,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'known_from' => array(
@@ -1134,7 +1134,7 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'notes' => array(
@@ -1143,9 +1143,9 @@ $TCA['tx_seminars_attendances'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'user;;;;1-1-1, seminar, price, seats, total_price, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes')
@@ -1171,7 +1171,7 @@ $TCA['tx_seminars_sites'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
 		),
 		'address' => array(
@@ -1180,7 +1180,7 @@ $TCA['tx_seminars_sites'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'homepage' => array(
@@ -1210,7 +1210,7 @@ $TCA['tx_seminars_sites'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'notes' => array(
@@ -1219,9 +1219,9 @@ $TCA['tx_seminars_sites'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes')
@@ -1245,7 +1245,7 @@ $TCA['tx_seminars_organizers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
 		),
 		'homepage' => array(
@@ -1275,7 +1275,7 @@ $TCA['tx_seminars_organizers'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim,nospace',
+				'eval' => 'required,trim,nospace'
 			)
 		),
 		'email_footer' => array(
@@ -1284,7 +1284,7 @@ $TCA['tx_seminars_organizers'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5',
+				'rows' => '5'
 			)
 		),
 		'attendances_pid' => array(
@@ -1299,7 +1299,7 @@ $TCA['tx_seminars_organizers'] = array(
 				'minitems' => '0',
 				'show_thumbs' => '1'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer, attendances_pid')
@@ -1321,7 +1321,7 @@ $TCA['tx_seminars_payment_methods'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
 		),
 		'description' => array(
@@ -1330,9 +1330,9 @@ $TCA['tx_seminars_payment_methods'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '10',
+				'rows' => '10'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2, description')
@@ -1354,9 +1354,9 @@ $TCA['tx_seminars_event_types'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2')
@@ -1378,9 +1378,9 @@ $TCA['tx_seminars_checkboxes'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2')
@@ -1402,9 +1402,9 @@ $TCA['tx_seminars_lodgings'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2')
@@ -1426,9 +1426,9 @@ $TCA['tx_seminars_foods'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
-				'eval' => 'required,trim',
+				'eval' => 'required,trim'
 			)
-		),
+		)
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2')
