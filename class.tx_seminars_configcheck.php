@@ -249,6 +249,18 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		return;
 	}
 
+ 	/**
+	 * Checks the configuration for: tx_seminars_pi1/countdown.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_pi1_countdown() {
+		$this->checkCommonFrontEndSettings();
+		$this->checkPages();
+
+		return;
+	}
+
 	/**
 	 * Checks the configuration for: tx_seminars_pi1/my_vip_events.
 	 *
@@ -445,7 +457,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'enableRegistration',
 			false,
 			'',
-			'This value specifies whether the extension will use provide online'
+			'This value specifies whether the extension will provide online'
 				.'registration. If this value is incorrect, the online registration '
 				.'will not be enabled or disabled correctly.'
 		);
@@ -517,7 +529,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'list_registrations',
 				'list_vip_registrations',
 				'edit_event',
-				'my_entered_events'
+				'my_entered_events',
+				'countdown'
 			)
 		);
 
@@ -1054,7 +1067,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'omitDateIfSameAsPrevious',
 			true,
 			's_template_special',
-			'This value specifies whether whether to omit the date in the '
+			'This value specifies whether to omit the date in the '
 				.'list view if it is the same as the previous item\'s. '
 				.'If this value is incorrect, the date might be ommited '
 				.'although this is not intended (or vice versa).'

@@ -208,6 +208,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'list_registrations':
 				$result = $this->createRegistrationsListPage();
 				break;
+			case 'countdown':
+				$result = $this->createCountdown();
+				break;
 			case 'topic_list':
 				// The fallthrough is intended
 				// because createListView() will differentiate later.
@@ -1789,6 +1792,110 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Creates a countdown to the next upcoming event.
+	 *
+	 * @return	string		HTML code of the countdown or a message if no upcoming event found
+	 *
+	 * @access	protected
+	 */
+	function createCountdown() {
+		$message = '';
+		$now = time();
+
+		// define the additional where clause for the database query
+		$additionalWhere = 'tx_seminars_seminars.cancelled=0'
+			.t3lib_pageSelect::enableFields($this->tableSeminars)
+			.' AND tx_seminars_seminars.object_type!='.$this->recordTypeTopic
+			.' AND tx_seminars_seminars.begin_date>'.$now;
+
+		// query the database
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'uid',
+			$this->tableSeminars,
+			$additionalWhere,
+			'',
+			'begin_date ASC',
+			'1'
+		);
+
+		if ($dbResult) {
+			if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+				if ($this->createSeminar($row['uid'])) {
+					// Let warnings from the seminar bubble up to us.
+					$this->setErrorMessage($this->seminar->checkConfiguration(true));
+
+					// calculate the time left until the event starts
+					$eventStartTime = $this->seminar->getRecordPropertyInteger('begin_date');
+					$timeLeft = $eventStartTime - $now;
+
+					$message = $this->createCountdownMessage($timeLeft);
+				}
+			} else {
+				// no event found - show a message
+				$message = $this->pi_getLL('message_countdown_noEventFound');
+			}
+		}
+
+		$this->setMarkerContent('count_down_message', $message);
+		$result = $this->substituteMarkerArrayCached('COUNTDOWN');
+
+		return $result;
+	}
+
+	/**
+	 * Returns a localized string representing an amount of seconds in words.
+	 * For example:
+	 * 150000 seconds -> "1 day"
+	 * 200000 seconds -> "2 days"
+	 * 50000 seconds -> "13 hours"
+	 * The function uses localized strings and also looks for proper usage of
+	 * singular/plural.
+	 *
+	 * @param	integer		the amount of seconds to rewrite into words
+	 *
+	 * @return	string		a localized string representing the time left until the event starts
+	 *
+	 * @access	protected
+	 */
+	function createCountdownMessage($seconds) {
+		if ($seconds > 82800) {
+			// more than 23 hours left, show the time in days
+			$countdownValue = round($seconds / 86400);
+			if ($countdownValue > 1) {
+				$countdownText = $this->pi_getLL('countdown_days_plural');
+			} else {
+				$countdownText = $this->pi_getLL('countdown_days_singular');
+			}
+		} elseif ($seconds > 3540) {
+			// more than 59 minutes left, show the time in hours
+			$countdownValue = round($seconds / 3600);
+			if ($countdownValue > 1) {
+				$countdownText = $this->pi_getLL('countdown_hours_plural');
+			} else {
+				$countdownText = $this->pi_getLL('countdown_hours_singular');				}
+		} elseif ($seconds > 59) {
+			// more than 59 seconds left, show the time in minutes
+			$countdownValue = round($seconds / 60);
+			if ($countdownValue > 1) {
+				$countdownText = $this->pi_getLL('countdown_minutes_plural');
+			} else {
+				$countdownText = $this->pi_getLL('countdown_minutes_singular');
+			}
+		} else {
+			// less than 60 seconds left, show the time in seconds
+			$countdownValue = $seconds;
+			$countdownText = $this->pi_getLL('countdown_seconds_plural');
+		}
+
+		return sprintf(
+			$this->pi_getLL('message_countdown'),
+			$countdownValue,
+			$countdownText
+		);
 	}
 }
 

@@ -21,6 +21,7 @@
 			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
 			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
+			<label index="seminars.pi_flexform.countdown">Countdown to the next event</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.detailPID">Page that contains the detailed view:</label>
@@ -175,6 +176,16 @@
 			<label index="message_selectFood">Please select at least one food option.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
+			<label index="message_countdown">%d %s left until the next event starts!</label>
+			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
+			<label index="countdown_days_plural">days</label>
+			<label index="countdown_days_singular">day</label>
+			<label index="countdown_hours_plural">hours</label>
+			<label index="countdown_hours_singular">hour</label>
+			<label index="countdown_minutes_plural">minutes</label>
+			<label index="countdown_minutes_singular">minute</label>
+			<label index="countdown_seconds_plural">seconds</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">Generalt</label>
@@ -266,6 +277,7 @@
 			<label index="seminars.pi_flexform.list_vip_registrations">Liste der Anmeldungen (für VIPs)</label>
 			<label index="seminars.pi_flexform.event_editor">Veranstaltungs-Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Veranstaltungen, die ich eingegeben habe</label>
+			<label index="seminars.pi_flexform.countdown">Countdown zur nächsten Veranstaltung</label>
 			<label index="seminars.pi_flexform.baseURL">Basis-URL dieser Typo3-Site, z.B. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Seite mit der Seminarliste:</label>
 			<label index="seminars.pi_flexform.detailPID">Seite mit der Detailansicht:</label>
@@ -420,6 +432,16 @@
 			<label index="message_selectFood">Bitte wählen Sie mindestens eine Verpflegungsart aus.</label>
 			<label index="message_acceptTerms">Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen, um sich für diese Veranstaltung anzumelden.</label>
 			<label index="message_acceptTerms2">Bitte akzeptieren Sie die Reisebedingungen, um sich für diese Veranstaltung anzumelden.</label>
+			<label index="message_countdown">Noch %d %s bis zur nächsten Veranstaltung!</label>
+			<label index="message_countdown_noEventFound_formal">Es konnten keine geplanten Veranstaltungen gefunden werden. Bitte besuchen Sie uns später noch einmal.</label>
+			<label index="message_countdown_noEventFound_informal">Es konnten keine geplanten Veranstaltungen gefunden werden. Bitte besuche uns später noch einmal.</label>
+			<label index="countdown_days_plural">Tage</label>
+			<label index="countdown_days_singular">Tag</label>
+			<label index="countdown_hours_plural">Stunden</label>
+			<label index="countdown_hours_singular">Stunde</label>
+			<label index="countdown_minutes_plural">Minuten</label>
+			<label index="countdown_minutes_singular">Minute</label>
+			<label index="countdown_seconds_plural">Sekunden</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -644,6 +666,7 @@
 			<label index="seminars.pi_flexform.list_vip_registrations" type="integer">4335826</label>
 			<label index="seminars.pi_flexform.event_editor" type="integer">243089187</label>
 			<label index="seminars.pi_flexform.my_entered_events" type="integer">100155450</label>
+			<label index="seminars.pi_flexform.countdown" type="integer">104673252</label>
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
 			<label index="seminars.pi_flexform.detailPID" type="integer">252951912</label>
@@ -799,6 +822,16 @@
 			<label index="message_selectFood" type="integer">148997362</label>
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
+			<label index="message_countdown" type="integer">3805429</label>
+			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
+			<label index="countdown_days_plural" type="integer">72343236</label>
+			<label index="countdown_days_singular" type="integer">103331803</label>
+			<label index="countdown_hours_plural" type="integer">121429469</label>
+			<label index="countdown_hours_singular" type="integer">144098652</label>
+			<label index="countdown_minutes_plural" type="integer">104922380</label>
+			<label index="countdown_minutes_singular" type="integer">10999131</label>
+			<label index="countdown_seconds_plural" type="integer">126085346</label>
 		</languageKey>
 		<languageKey index="no" type="array">
 		</languageKey>
@@ -947,6 +980,7 @@
 			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
 			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
+			<label index="seminars.pi_flexform.countdown">Countdown to the next event</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.detailPID">Page that contains the detailed view:</label>
@@ -1101,6 +1135,16 @@
 			<label index="message_selectFood">Please select at least one food option.</label>
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
+			<label index="message_countdown">%d %s left until the next event starts!</label>
+			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
+			<label index="countdown_days_plural">days</label>
+			<label index="countdown_days_singular">day</label>
+			<label index="countdown_hours_plural">hours</label>
+			<label index="countdown_hours_singular">hour</label>
+			<label index="countdown_minutes_plural">minutes</label>
+			<label index="countdown_minutes_singular">minute</label>
+			<label index="countdown_seconds_plural">seconds</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>
