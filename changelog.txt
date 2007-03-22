@@ -1,3 +1,5 @@
+0.4.11
+
 0.4.10 (released 2007-03-22)
 - Change: Events with a maximal number of 0 vacancies should be considered to not require registration (#703)
 - Change: Speed up the back-end modules with caching (#670, #672)
