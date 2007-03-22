@@ -396,7 +396,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Checks whether the methods of payment should be displayed at all,
 	 * ie. whether they are enable in the setup and the current event actually
-	 * has any payment methods assigned.
+	 * has any payment methods assigned and has at least one price.
 	 *
 	 * @return	boolean		true if the payment methods should be displayed, false otherwise
 	 *
@@ -404,6 +404,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function showMethodsOfPayment() {
 		return $this->seminar->hasPaymentMethods()
+			&& $this->seminar->hasAnyPrice()
 			&& $this->hasRegistrationFormField(
 				array('elementname' => 'method_of_payment')
 			);
@@ -874,6 +875,27 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			|| !$this->hasRegistrationFormField(
 				array('elementname' => 'price')
 			);
+	}
+
+	/**
+	 * Returns the UID of the only available payment method if there is only one
+	 * payment method available. Returns 0 if there is either more than one or
+	 * no payment method available
+	 *
+	 * @param	integer		the UID of the only available payment method or 0 if there is more than one or no payment method available
+	 *
+	 * @access	public
+	 */
+	function getSinglePaymentMethod() {
+		$result = 0;
+
+		// TODO: Remove these dummy parameters once bug 659 has been commited.
+		$availablePaymentMethods = $this->populateListPaymentMethods(null, null, $this);
+		if (count($availablePaymentMethods) == 1) {
+			$result = key($availablePaymentMethods);
+		}
+
+		return $result;
 	}
 }
 

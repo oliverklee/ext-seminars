@@ -141,7 +141,20 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->recordData['kids'] = $registrationData['kids'];
 
-		$this->recordData['method_of_payment'] = $registrationData['method_of_payment'];
+		$methodOfPayment = $registrationData['method_of_payment'];
+		// Auto-select the only payment method if no payment method has been
+		// selected, there actually is anything to pay and only one payment
+		// method is provided.
+		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00)
+			&& ($seminar->getNumberOfPaymentMethods() == 1)) {
+				$availablePaymentMethods = explode(
+					',',
+					$seminar->getPaymentMethodsUids()
+				);
+				$methodOfPayment = $availablePaymentMethods[0];
+		}
+		$this->recordData['method_of_payment'] = $methodOfPayment;
+
 		$this->recordData['account_number'] = $registrationData['account_number'];
 		$this->recordData['bank_code'] = $registrationData['bank_code'];
 		$this->recordData['bank_name'] = $registrationData['bank_name'];

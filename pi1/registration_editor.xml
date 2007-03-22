@@ -53,6 +53,12 @@
 					<extension>this</extension>
 					<method>populateListPaymentMethods</method>
 				</userobj>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>getSinglePaymentMethod</method>
+					</userobj>
+				</defaultvalue>
 			</data>
 			<validators>
 				<validator:STANDARD>

@@ -1,6 +1,6 @@
 0.5.0
 - Feature: Added a countdown function (#425)
-- Change: Hide payment-related fields from the registration form if the event doesn't have a price (#692)
+- Change: Hide payment-related fields from the registration form if the event doesn't have a price (#691, #692)
 - Change: Moved the TCE value checking stuff to the seminar class (#605)
 - Change: Speed up the back-end modules with caching (#670, #672)
 - Change: Make the sorting order of events in the BE configurable (#517)

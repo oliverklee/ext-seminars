@@ -1588,7 +1588,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks whether this seminar has any paxment methods set.
+	 * Checks whether this seminar has any payment methods set.
 	 *
 	 * @return	boolean		true if the seminar has any payment methods, false if it is free.
 	 *
@@ -1596,6 +1596,28 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 */
 	function hasPaymentMethods() {
 		return $this->hasTopicString('payment_methods');
+	}
+
+	/**
+	 * Gets the number of available payment methods.
+	 *
+	 * @return	integer		the number of available payment methods, might 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfPaymentMethods() {
+		$result = 0;
+
+		if ($this->hasPaymentMethods()) {
+			$availablePaymentMethods = explode(
+				',',
+				$this->getPaymentMethodsUids()
+			);
+
+			$result = count($availablePaymentMethods);
+		}
+
+		return $result;
 	}
 
  	/**
