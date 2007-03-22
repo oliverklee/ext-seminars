@@ -997,6 +997,18 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets the maximum number of attendances for this event
+	 * (the total number of seats for this event).
+	 *
+	 * @return	integer		the maximum number of attendances
+	 *
+	 * @access	public
+	 */
+	function getAttendancesMax(){
+		return $this->getRecordPropertyInteger('attendees_max');
+	}
+
+	/**
 	 * Gets the number of attendances for this seminar
 	 * (currently the paid attendances as well as the unpaid ones)
 	 *
@@ -1684,7 +1696,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function needsRegistration() {
-		return $this->getTopicBoolean('needs_registration');
+		return $this->getTopicBoolean('needs_registration')
+			&& ($this->getAttendancesMax() > 0);
 	}
 
 	/**
