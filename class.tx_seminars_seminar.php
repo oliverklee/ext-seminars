@@ -2494,7 +2494,8 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function needsRegistration() {
-		return $this->getTopicBoolean('needs_registration');
+		return $this->getTopicBoolean('needs_registration')
+			&& ($this->getAttendancesMax() > 0);
 	}
 
 	/**

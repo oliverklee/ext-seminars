@@ -1,4 +1,5 @@
 0.5.0
+- Change: Events with a maximal number of 0 vacancies should be considered to not require registration (#703)
 - Feature: Added a countdown function (#425)
 - Change: Hide payment-related fields from the registration form if the event doesn't have a price (#691, #692)
 - Change: Moved the TCE value checking stuff to the seminar class (#605)
