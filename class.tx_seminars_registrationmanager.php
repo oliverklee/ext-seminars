@@ -203,9 +203,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks whether a front end user is already registered for this seminar.
+	 * Checks whether a front-end user is already registered for this seminar.
 	 *
-	 * This method must not be called when no front end user is logged in!
+	 * This method must not be called when no front-end user is logged in!
 	 *
 	 * @param	object		a seminar for which we'll check if it is possible to register
 	 *
@@ -220,7 +220,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
 	 *
-	 * This method must not be called when no front end user is logged in!
+	 * This method must not be called when no front-end user is logged in!
 	 *
 	 * @param	object		a seminar for which we'll check if it is possible to register
 	 *

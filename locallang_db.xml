@@ -209,7 +209,7 @@
 			<label index="tx_seminars_speakers.email">E-mail address:</label>
 			<label index="tx_seminars_attendances">Attendances</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
-			<label index="tx_seminars_attendances.user">Frontend User:</label>
+			<label index="tx_seminars_attendances.user">Front-end User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
 			<label index="tx_seminars_attendances.price">Price to pay:</label>
 			<label index="tx_seminars_attendances.total_price">Total price for this attendance:</label>
@@ -628,7 +628,7 @@
 			<label index="tx_seminars_speakers.email" type="integer">126760538</label>
 			<label index="tx_seminars_attendances" type="integer">201645653</label>
 			<label index="tx_seminars_attendances.title" type="integer">85903807</label>
-			<label index="tx_seminars_attendances.user" type="integer">83901510</label>
+			<label index="tx_seminars_attendances.user" type="integer">189069825</label>
 			<label index="tx_seminars_attendances.seminar" type="integer">169385390</label>
 			<label index="tx_seminars_attendances.price" type="integer">253734840</label>
 			<label index="tx_seminars_attendances.total_price" type="integer">83487492</label>
@@ -903,7 +903,7 @@
 			<label index="tx_seminars_speakers.email">E-mail address:</label>
 			<label index="tx_seminars_attendances">Attendances</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
-			<label index="tx_seminars_attendances.user">Frontend User:</label>
+			<label index="tx_seminars_attendances.user">Front-end User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
 			<label index="tx_seminars_attendances.total_price">Total price for this attendance:</label>
 			<label index="tx_seminars_attendances.paid">Has paid:</label>

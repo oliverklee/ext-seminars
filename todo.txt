@@ -66,7 +66,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - use htmlentities() for many strings that are output on the BE or FE
 - check all uses of references for correctness: that the function is &functionname() _and_ that the user uses "=& functionname();"
 - update the titles of all involved attendee records after the title of a seminar has been changed
-- update the titles of all involved attendee records after the name (or first name or last name) of a front end user has been changed
+- update the titles of all involved attendee records after the name (or first name or last name) of a front-end user has been changed
 - make it configurable whether to count all registrations or only the paid ones
 - check that all DB accesses use either intval, quoteStr or fullQuoteStr
 - investigate whether to use removeBadHTML (like in the extension ve_guestbook)
@@ -269,7 +269,7 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - for event sites, have a field "location name" (in addition to the record title) that is part of the address
 
 
-Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
+Version 0.11.0 - "Make it nice for the visitors": front-end usability and polish
 --------------------------------------------------------------------------------
 - add FE editing for registrations
 - add FE editing for speakers
@@ -283,7 +283,7 @@ Version 0.11.0 - "Make it nice for the visitors": front end usability and polish
 - ensure compatibility with indexed_search (if it doesn't work)
 - when a seminar is deleted, remove it from the FE cache (and from the search results)
 - improve CSS for registration form <http://www.alistapart.com/articles/practicalcss/>
-- allow signing up for a seminar without being logged in as a front end user (thus creating a new front end user in the process)
+- allow signing up for a seminar without being logged in as a front-end user (thus creating a new front-end user in the process)
 - extend the "my events" functionality:
   - paid/unpaid/refunded (if the participation hasn't been deleted yet)
   - attended?
@@ -384,9 +384,9 @@ Version 1.3.0 - "Back end polish"
 
 Version 2.0.0 - "Great new FE and BE features"
 ----------------------------------------------
-- add possibility for front end users to sign off a seminar if it's early enough
+- add possibility for front-end users to sign off a seminar if it's early enough
 - add configuration: period before seminar start when signing off is not possible any more (default: 14 days)
-- allow front end users to enter their bank account information so that the seminar organizer can debit the seminar fee
+- allow front-end users to enter their bank account information so that the seminar organizer can debit the seminar fee
   - make this configurable
   - make this safe (SSL-only or something)
 - allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop)
@@ -410,13 +410,13 @@ Version 2.0.0 - "Great new FE and BE features"
 Version 2.1.0
 -------------
 - add an assets manager for flipcharts etc. that shows what is booked when and warns of collisions
-- feature for booking assets online (when belonging to the corresponding front end user group)
+- feature for booking assets online (when belonging to the corresponding front-end user group)
 - feature: quickly edit the "paid" entry for a participant
 - feature: easily enter after a single seminar who has participated
 - add feature "Teilnahmeliste" to generate a participation-form for each seminar where each participant can sign for each day that he/she has been there, plus a column where he/she can sign if he/she wants to receive seminar announcements, plus space for suggestions on seminar subjects
 - in the seminar list, add (localized) subheadings with month and year, e.g. "May 2006"
 - support periodical events (e.g. each Monday at ten a.m.)
-- add front end page about speakers and their seminars
+- add front-end page about speakers and their seminars
 - find a way against overly long lists in the back-end (e.g. all registrations)
 - feature: easily enter for a seminar who has attended and who hasn't
 
@@ -470,6 +470,6 @@ Not triaged yet
 - translation feature for seminars, locations and speakers
 - add URL to seminar record
 - aggregate and show seminar records from several sites using this extension (on different servers)
-- investigate mth_feedit for front end editing of records
+- investigate mth_feedit for front-end editing of records
 - assign "roles" to speakers (eg. panel members, organizers, facilitators ...)
 - add a field "entrance time" to the seminar records

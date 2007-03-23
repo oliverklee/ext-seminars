@@ -84,7 +84,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $recordTypeTopic;
 	var $recordTypeDate;
 
-	/** The frontend user who currently is logged in. */
+	/** The front-end user who currently is logged in. */
 	var $feuser = null;
 
 	/** The configuration check object that will check this object. */
@@ -255,7 +255,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 	/**
 	 * Adds a path in front of the file name.
-	 * This is used for files that are selected in the Flexform of the front end plugin.
+	 * This is used for files that are selected in the Flexform of the front-end plugin.
 	 *
 	 * If no path is provided, the default (uploads/[extension_name]/) is used as path.
 	 *
@@ -384,7 +384,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	}
 
 	/**
-	 * Checks whether a front end user is logged in.
+	 * Checks whether a front-end user is logged in.
 	 *
 	 * @return	boolean		true if a user is logged in, false otherwise
 	 *
