@@ -223,7 +223,7 @@ Version 0.9.0 - "Make it fast": performance
 - profile the lists in mod2
 - profile the registration page
 
-Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
+Version 0.10.0 - "Make it nice for the BE users": back-end usability and polish
 -------------------------------------------------------------------------------
 - move the "seminar is cancelled" checkbox further up in the BE form
 - bug: BE search doesn't find attendance titles
@@ -231,16 +231,16 @@ Version 0.10.0 - "Make it nice for the BE users": back end usability and polish
 - for organizers, add field telling in which page new registration records should be stored, overriding the global setting
 - for seminars, add field telling in which page new registration records should be stored, overriding the global and organizers setting
 - improve and clean up flexforms structure for better usability
-- slim down back end UI (don't display unneded fields, e.g. unneeded payment methods)
-- re-arrange back end UI for better usability (tca.php)
-- investigate whether in the back end seminar info view and list mode, the titles can be displayed instead of the UIDs for speakers, organizers, sites and payment methods
-- investigate whether in the back end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars
-- investigate whether in the back end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees
+- slim down back-end UI (don't display unneded fields, e.g. unneeded payment methods)
+- re-arrange back-end UI for better usability (tca.php)
+- investigate whether in the back-end seminar info view and list mode, the titles can be displayed instead of the UIDs for speakers, organizers, sites and payment methods
+- investigate whether in the back-end attendance info view and list mode, the titles can be displayed instead of the UIDs for feusers and seminars
+- investigate whether in the back-end seminar info view and list mode, yes/no can be displayed instead of 1/0 for is_full and enough_attendees
 - separate date and time fields for seminars and provide a conversion feature
-- in back end listings and statistics, make seminars, organizers, sites etc. links for editing the records
+- in back-end listings and statistics, make seminars, organizers, sites etc. links for editing the records
 - disable the "save and view" button for all our records (as they are not treated as regular content elements)
 - add different icons
-- make the back end forms prettier and clean them up (using TCA.php)
+- make the back-end forms prettier and clean them up (using TCA.php)
 - in the back end, remove many checkboxes next to text fields
 - for all homepage fields, add http:// and / after editing if it has been left out
 - function to add the http:// and the trailing slash to URLs if they are missing (for e-mails to participants and links online)
@@ -357,7 +357,7 @@ Version 1.0.0 - "Getting real new features"
 - switch extension status from "beta" to "stable"
 
 
-Version 1.1.0 - "More back end features"
+Version 1.1.0 - "More back-end features"
 ----------------------------------------
 - Define all possible states of an event (in planning, open for registration, cancelled)
 - Feature: Create the select user functionality in the BE
@@ -366,7 +366,7 @@ Version 1.1.0 - "More back end features"
 - Investigate on how the payment-workflow could be optimized.
 
 
-Version 1.2.0 - "The Back end fight :-)"
+Version 1.2.0 - "The back-end fight :-)"
 ----------------------------------------
 - Feature: Show some global statistics about the whole seminar extension.
 - Feature: Show statistics for a selected event.
@@ -376,7 +376,7 @@ Version 1.2.0 - "The Back end fight :-)"
 - Feature: Add BE functionality to cancel an event.
 
 
-Version 1.3.0 - "Back end polish"
+Version 1.3.0 - "Back-end polish"
 ---------------------------------
 - Feature: Add BE functionality to cancel attendances.
 - Check the new BE against the product requirement specifications.
@@ -389,13 +389,13 @@ Version 2.0.0 - "Great new FE and BE features"
 - allow front-end users to enter their bank account information so that the seminar organizer can debit the seminar fee
   - make this configurable
   - make this safe (SSL-only or something)
-- allow back end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop)
+- allow back-end users to easily enter complete registrations (e.g. when someone comes with the cash in hand and wants to sign up for a workshop)
 - Spanish localization
 - French localization
 - Polish localization
 - Italian localization
 - feature: room manager
-- add further back end statistics:
+- add further back-end statistics:
   - list of sites and which seminars take place there
   - list of speakers and which seminars they hold
   - overview list of seminars

@@ -25,7 +25,7 @@
 /**
  * Class 'tx_seminars_tcemainprocdm' for the 'seminars' extension.
  *
- * This class holds functions used to validate submitted forms in the backend.
+ * This class holds functions used to validate submitted forms in the back end.
  * These functions are called from t3lib/class.t3lib_tcemain.php via hooks.
  *
  * @author	Mario Rimann <typo3-coding@rimann.org>
