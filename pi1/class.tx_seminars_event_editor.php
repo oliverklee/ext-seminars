@@ -141,14 +141,12 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Provides data items for the list of available event types.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	array		$items with additional items from the event_types table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateListEventTypes($items, $params, &$form) {
+	function populateListEventTypes($items) {
 		return $this->populateList($items, $this->tableEventTypes);
 	}
 
@@ -156,14 +154,12 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Provides data items for the list of available payment methods.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	array		$items with additional items from payment_methods table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateListPaymentMethods($items, $params, &$form) {
+	function populateListPaymentMethods($items) {
 		return $this->populateList($items, $this->tablePaymentMethods);
 	}
 
@@ -171,14 +167,12 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Provides data items for the list of available organizers.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	array		$items with additional items from the organizers table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateListOrganizers($items, $params, &$form) {
+	function populateListOrganizers($items) {
 		return $this->populateList($items, $this->tableOrganizers);
 	}
 
@@ -186,14 +180,12 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Provides data items for the list of available places.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	array		$items with additional items from the places table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateListPlaces($items, $params, &$form) {
+	function populateListPlaces($items) {
 		return $this->populateList($items, $this->tableSites);
 	}
 
@@ -201,29 +193,23 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Provides data items for the list of available speakers.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	array		$items with additional items from the speakers table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateListSpeakers($items, $params, &$form) {
+	function populateListSpeakers($items) {
 		return $this->populateList($items, $this->tableSpeakers);
 	}
 
 	/**
 	 * Gets the PID of the page where FE-created events will be stored.
 	 *
-	 * @param	array		optional third parameter to the _callUserObj function (unused)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
-	 *
 	 * @return	integer		the PID of the page where FE-created events will be stored
 	 *
 	 * @access	public
 	 */
-	function getPidForNewEvents($items, $params, &$form) {
+	function getPidForNewEvents() {
 		return $this->plugin->getConfValueInteger(
 			'createEventsPID',
 			's_fe_editing'
@@ -234,15 +220,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Gets the URL of the page that should be displayed when an event has been
 	 * successfully created.
 	 *
-	 * @param	array		optional third parameter to the _callUserObj function (unused)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
-	 *
 	 * @return	string		complete URL of the FE page with a message
 	 *
 	 * @access	public
 	 */
-	function getEventSuccessfullySavedUrl($items, $params, &$form) {
+	function getEventSuccessfullySavedUrl() {
 		// We need to manually combine the base URL and the path to the page to
 		// redirect to. Without the baseURL as part of the returned URL, the
 		// combination of formidable and realURL will lead us into troubles with
@@ -261,10 +243,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 
 	/**
 	 * Gets the date and time format provided via TS setup.
-	 *
-	 * @param	array		optional third parameter to the _callUserObj function (unused)
-	 * @param	array		contents of the "param" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	string		date and time format as provided via TS setup
 	 *
@@ -354,13 +332,12 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 *
 	 * @param	array		(unused)
 	 * @param	array		contents of the params node, needs to contain the keys "defaultvalue" (either 0 or 1) and "elementname" (the column name in the DB record)
-	 * @param	object		(unused)
 	 *
 	 * @return	string		either checked="checked" or an empty string
 	 *
 	 * @access	public
 	 */
-	function setCheckboxValue($items, $value, &$form) {
+	function setCheckboxValue($items, $value) {
 		$result = false;
 
 		if ($this->iEdition) {

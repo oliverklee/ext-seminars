@@ -335,13 +335,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * stage 2 (the confirmation page).
 	 *
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
-	 * @param	object		the current FORMidable object
 	 *
 	 * @return	string		complete URL of the FE page with a message (or null if the confirmation page has not been submitted yet)
 	 *
 	 * @access	public
 	 */
-	function getThankYouAfterRegistrationUrl($parameters, &$form) {
+	function getThankYouAfterRegistrationUrl($parameters) {
 		$pageId = $this->plugin->getConfValueInteger(
 			'thankYouAfterRegistrationPID',
 			's_registration'
@@ -372,14 +371,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Provides data items for the list of available places.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
-	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
 	 *
 	 * @return	array		items from the payment methods table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateListPaymentMethods($items, $params, &$form) {
+	function populateListPaymentMethods($items) {
 		$result = array();
 
 		if ($this->seminar->hasPaymentMethods()) {
@@ -414,15 +411,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the currently logged-in FE user's data nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @param	array		(unused)
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
-	 * @param	object		the current FORMidable object
-	 *
 	 * @return	string		the currently logged-in FE user's data
 	 *
 	 * @access	public
 	 */
-	function getAllFeUserData($unused, $parameters, $form) {
+	function getAllFeUserData() {
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 
 		foreach (array(
@@ -449,22 +442,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the already entered registration data nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @param	array		(unused)
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
-	 * @param	object		the current FORMidable object
-	 *
 	 * @return	string		the already entered registration data, nicely formatted as HTML
 	 *
 	 * @access	public
 	 */
-	function getRegistrationData($unused, $parameters, $form) {
+	function getRegistrationData() {
 		$result = '';
 
 		$formData = $form->oDataHandler->__aFormData;
 		$availablePaymentMethods = $this->populateListPaymentMethods(
-			array(),
-			null,
-			$form
+			array()
 		);
 
 		if (isset($formData['method_of_payment'])
@@ -560,15 +547,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the already entered billing address nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @param	array		(unused)
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
-	 * @param	object		the current FORMidable object
-	 *
 	 * @return	string		the already entered registration data, nicely formatted as HTML
 	 *
 	 * @access	public
 	 */
-	function getBillingAddress($unused, $parameters, $form) {
+	function getBillingAddress() {
 		$result = '';
 
 		$formData = $form->oDataHandler->__aFormData;
@@ -666,7 +649,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function getFeUserData($items, $params) {
+	function getFeUserData($unused, $params) {
 		$feUserData = $GLOBALS['TSFE']->fe_user->user;
 		return $feUserData[$params['key']];
 	}
@@ -674,15 +657,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Provides a localized list of country names from static_tables.
 	 *
-	 * @param	array		array that contains any pre-filled data (unused)
-	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
-	 *
 	 * @return	array		a list of localized country names from static_tables as an array with the keys "caption" (for the title) and "value" (in this case, the same as the caption)
 	 *
 	 * @access	public
 	 */
-	function populateListCountries($items, $params, &$form) {
+	function populateListCountries() {
 		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
 		$this->staticInfo->init();
 		$allCountries = $this->staticInfo->initCountries();
@@ -707,15 +686,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Provides data items for the list of option checkboxes for this event.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
-	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
-	 *
 	 * @return	array		items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateCheckboxes($items, $params, &$form) {
+	function populateCheckboxes() {
 		$result = array();
 
 		if ($this->seminar->hasCheckboxes()) {
@@ -743,15 +718,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Provides data items for the list of lodging options for this event.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
-	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
-	 *
 	 * @return	array		items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateLodgings($items, $params, &$form) {
+	function populateLodgings() {
 		$result = array();
 
 		if ($this->seminar->hasLodgings()) {
@@ -767,13 +738,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * be displayed).
 	 *
 	 * @param	string		the value of the current field
-	 * @param	object		the current FORMidable object
 	 *
 	 * @return	boolean		true if at least one item is selected or no lodging options can be selected
 	 *
 	 * @access	public
 	 */
-	function isLodgingSelected($selection, &$form) {
+	function isLodgingSelected($selection) {
 		return !empty($selection) || !$this->hasLodgings();
 	}
 
@@ -795,15 +765,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Provides data items for the list of food options for this event.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
-	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
-	 *
 	 * @return	array		items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populateFoods($items, $params, &$form) {
+	function populateFoods() {
 		$result = array();
 
 		if ($this->seminar->hasFoods()) {
@@ -834,28 +800,23 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * be displayed).
 	 *
 	 * @param	string		the value of the current field
-	 * @param	object		the current FORMidable object
 	 *
 	 * @return	boolean		true if at least one item is selected or no food options can be selected
 	 *
 	 * @access	public
 	 */
-	function isFoodSelected($selection, &$form) {
+	function isFoodSelected($selection) {
 		return !empty($selection) || !$this->hasFoods();
 	}
 
 	/**
 	 * Provides data items for the prices for this event.
 	 *
-	 * @param	array		array that contains any pre-filled data (unused)
-	 * @param	array		contents of the "params" XML child of the userrobj node (unused)
-	 * @param	object		the current renderlet XML node as a recursive array (unused)
-	 *
 	 * @return	array		available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 *
 	 * @access	public
 	 */
-	function populatePrices($items, $params, &$form) {
+	function populatePrices() {
 		return $this->seminar->getAvailablePrices();
 	}
 
@@ -889,8 +850,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function getSinglePaymentMethod() {
 		$result = 0;
 
-		// TODO: Remove these dummy parameters once bug 659 has been commited.
-		$availablePaymentMethods = $this->populateListPaymentMethods(null, null, $this);
+		$availablePaymentMethods = $this->populateListPaymentMethods(array());
 		if (count($availablePaymentMethods) == 1) {
 			$result = key($availablePaymentMethods);
 		}
