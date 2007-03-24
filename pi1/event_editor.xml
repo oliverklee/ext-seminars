@@ -22,9 +22,9 @@
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.subtitle</label>
 		</renderlet:TEXT>
 
-		<renderlet:RTE name="description">
+		<renderlet:TEXTAREA name="description">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.description</label>
-		</renderlet:RTE>
+		</renderlet:TEXTAREA>
 
 		<renderlet:LISTBOX name="event_type">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.event_type</label>
