@@ -68,11 +68,20 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * Please note that each subpart may only occur once in the template file.
 	 *
+	 * @param	boolean		whether the settings in the Flexform should be ignored, defaults to false, may be empty
+	 *
 	 * @access	protected
 	 */
-	function getTemplateCode() {
+	function getTemplateCode($ignoreFlexform = false) {
 		/** the whole template file as a string */
-		$templateRawCode = $this->cObj->fileResource($this->getConfValueString('templateFile', 's_template_special', true));
+		$templateRawCode = $this->cObj->fileResource(
+			$this->getConfValueString(
+				'templateFile',
+				's_template_special',
+				true,
+				$ignoreFlexform
+			)
+		);
 		$this->markerNames = $this->findMarkers($templateRawCode);
 
 		$subpartNames = $this->findSubparts($templateRawCode);

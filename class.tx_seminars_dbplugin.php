@@ -184,14 +184,22 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @param	string		field name to extract
 	 * @param	string		sheet pointer, eg. "sDEF"
-	 * @param	string		whether this is a filename, which has to be combined with a path
+	 * @param	boolean		whether this is a filename, which has to be combined with a path
+	 * @param	boolean		whether to ignore the flexform values and just get the settings from TypoScript, may be empty
 	 *
 	 * @return	string		the value of the corresponding flexforms or TS setup entry (may be empty)
 	 *
 	 * @access	private
 	 */
-	function getConfValue($fieldName, $sheet = 'sDEF', $isFileName = false) {
-		$flexformsValue = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $fieldName, $sheet);
+	function getConfValue($fieldName, $sheet = 'sDEF', $isFileName = false, $ignoreFlexform = false) {
+		$flexformsValue = '';
+		if (!$ignoreFlexform) {
+			$flexformsValue = $this->pi_getFFvalue(
+				$this->cObj->data['pi_flexform'],
+				$fieldName,
+				$sheet
+			);
+		}
 		if ($isFileName && !empty($flexformsValue)) {
 			$flexformsValue = $this->addPathToFileName($flexformsValue);
 		}
@@ -233,14 +241,15 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @param	string		field name to extract
 	 * @param	string		sheet pointer, eg. "sDEF"
-	 * @param	string		whether this is a filename, which has to be combined with a path
+	 * @param	boolean		whether this is a filename, which has to be combined with a path
+	 * @param	boolean		whether to ignore the flexform values and just get the settings from TypoScript, may be empty
 	 *
 	 * @return	string		the trimmed value of the corresponding flexforms or TS setup entry (may be empty)
 	 *
 	 * @access	public
 	 */
-	function getConfValueString($fieldName, $sheet = 'sDEF', $isFileName = false) {
-		return trim($this->getConfValue($fieldName, $sheet, $isFileName));
+	function getConfValueString($fieldName, $sheet = 'sDEF', $isFileName = false, $ignoreFlexform = false) {
+		return trim($this->getConfValue($fieldName, $sheet, $isFileName, $ignoreFlexform));
 	}
 
 	/**
@@ -251,13 +260,14 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * @param	string		field name to extract
 	 * @param	string		sheet pointer, eg. "sDEF"
+	 * @param	boolean		whether to ignore the flexform values and just get the settings from TypoScript, may be empty
 	 *
 	 * @return	boolean		whether there is a non-empty value in the corresponding flexforms or TS setup entry
 	 *
 	 * @access	public
 	 */
-	function hasConfValueString($fieldName, $sheet = 'sDEF') {
-		return ($this->getConfValueString($fieldName, $sheet) != '');
+	function hasConfValueString($fieldName, $sheet = 'sDEF', $ignoreFlexform = false) {
+		return ($this->getConfValueString($fieldName, $sheet, false, $ignoreFlexform) != '');
 	}
 
 	/**

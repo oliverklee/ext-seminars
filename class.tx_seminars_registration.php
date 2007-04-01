@@ -588,11 +588,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Reads and initializes the templates.
 	 * If this has already been called for this instance, this function does nothing.
 	 *
+	 * This function will read the template file as it is set in the TypoScript
+	 * setup. If there is a template file set in the flexform of pi1, this will
+	 * be ignored!
+	 *
 	 * @access	private
 	 */
 	function initializeTemplate() {
 		if (!$this->isTemplateInitialized) {
-			$this->getTemplateCode();
+			$this->getTemplateCode(true);
 			$this->setLabels();
 
 			$this->isTemplateInitialized = true;
