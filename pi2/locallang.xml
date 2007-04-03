@@ -20,8 +20,6 @@
 		</languageKey>
 	</data>
 	<orig_hash type="array">
-		<languageKey index="dk" type="array">
-		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="message_403" type="integer">211477492</label>
 			<label index="message_404" type="integer">239401565</label>

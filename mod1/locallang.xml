@@ -42,12 +42,12 @@
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Arrangementer</label>
-			<label index="menu_updateStats">Opdater statestik</label>
-			<label index="menu_listSpeakers">Vis talere</label>
+			<label index="menu_updateStats">Opdater statistik</label>
+			<label index="menu_listSpeakers">Vis foredragsholdere</label>
 			<label index="menu_listSites">Vis lokationer</label>
-			<label index="menu_listSeminars">Vis Arrangementer</label>
+			<label index="menu_listSeminars">Vis arrangementer</label>
 			<label index="menu_seminarDetails">Vis info om arrangement</label>
-			<label index="title_getEmailAddressesForAttendances">F&amp;#229; email p&amp;#229; deltagere</label>
+			<label index="title_getEmailAddressesForAttendances">Få email på deltagere</label>
 			<label index="msg_noAttendancesFound">ingen endnu</label>
 			<label index="label_all">Alle: </label>
 			<label index="label_paid">Betalt: </label>

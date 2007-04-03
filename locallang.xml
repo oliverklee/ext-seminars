@@ -86,13 +86,32 @@ someone just has registered for an event:</label>
 			<label index="label_place">Sted</label>
 			<label index="label_room">Rum</label>
 			<label index="label_seats">Pladser</label>
+			<label index="label_total_price">Pris i alt</label>
+			<label index="label_attendees_names">Yderligere tilmeldte personer</label>
+			<label index="label_lodgings">Vælg overnatningstype</label>
+			<label index="label_foods">Vælg mad</label>
+			<label index="label_kids">Antal børn</label>
 			<label index="label_price_general">Pris</label>
 			<label index="label_price_regular">Pris</label>
+			<label index="label_price_earlybird_regular">Tidlig booking pris</label>
+			<label index="label_price_board_regular">Pris inkl. helpension</label>
 			<label index="label_price_special">Speciel pris</label>
+			<label index="label_price_earlybird_special">Tidlige booking speciel pris</label>
+			<label index="label_price_board_special">Special pris inkl. helpension</label>
+			<label index="label_paymentmethod">Vælg betalingsmetode</label>
+			<label index="label_billing_address">Faktureringsadresse</label>
 			<label index="label_url">Mere information</label>
 			<label index="label_seminardata">Arrangements info</label>
 			<label index="label_feuserdata">Konto data</label>
-			<label index="label_attendancedata">info p&amp;#229; tilmeldingsformen</label>
+			<label index="label_attendancedata">info på tilmeldingsformen</label>
+			<label index="label_gender.I.0">Hr.</label>
+			<label index="label_gender.I.1">Frk.</label>
+			<label index="label_status.I.1">Studerende</label>
+			<label index="label_status.I.2">Jobsøgende</label>
+			<label index="label_status.I.3">Arbejdende</label>
+			<label index="label_status.I.4">Pensioneret</label>
+			<label index="label_yes">Ja</label>
+			<label index="label_no">Nej</label>
 			<label index="message_notLoggedIn_formal">Venligst log in f&amp;#248;rst.</label>
 			<label index="message_notLoggedIn_informal">Venligst log in f&amp;#248;rst.</label>
 			<label index="message_alreadyRegistered_formal">De er allerede tilmeldt dette arrangement.</label>
@@ -101,11 +120,13 @@ someone just has registered for an event:</label>
 			<label index="message_wrongSeminarNumber_informal">Der ikke noget arrangement med dette nr.. Hvis du f&amp;#229;r denne fejl ved at f&amp;#248;lge et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_noRegistrationNecessary">ingen registrering er n&amp;#248;dvendig til dette arrangement</label>
 			<label index="message_seminarCancelled">Desv&amp;#230;rre er dette arrangement blevet aflyst</label>
+			<label index="message_noDate">Dette arrangement har ikke nogen fastsat dato endnu</label>
 			<label index="message_seminarRegistrationIsClosed">Desv&amp;#230;rre er tilmeldingsfristen til dette arrangement overskredet</label>
 			<label index="message_noVacancies">Desv&amp;#230;rre, der er ikke flere pladser</label>
 			<label index="message_invalidNumberOfSeats_formal">Desv&amp;#230;rre kan dette antal ikke tilmeldes. Venligst registrer max %s pladser.</label>
 			<label index="message_invalidNumberOfSeats_informal">Desv&amp;#230;rre kan dette antal ikke tilmeldes. Venligst registrer max %s pladser.</label>
 			<label index="message_willBeAnnounced">Vil blive annonceret</label>
+			<label index="message_forFree">Gratis</label>
 			<label index="message_enough">&amp;#197;ben</label>
 			<label index="message_accessDenied_formal">Desv&amp;#230;rre har du ikke adgang til denne del af sitet.</label>
 			<label index="message_accessDenied_informal">Desv&amp;#230;rre har du ikke adgang til denne del af sitet.</label>
@@ -409,6 +430,27 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
+			<label index="label_total_price" type="integer">15654485</label>
+			<label index="label_attendees_names" type="integer">168936155</label>
+			<label index="label_lodgings" type="integer">119452104</label>
+			<label index="label_foods" type="integer">48275051</label>
+			<label index="label_kids" type="integer">18594081</label>
+			<label index="label_price_earlybird_regular" type="integer">236870027</label>
+			<label index="label_price_board_regular" type="integer">122636477</label>
+			<label index="label_price_earlybird_special" type="integer">255242535</label>
+			<label index="label_price_board_special" type="integer">56248635</label>
+			<label index="label_paymentmethod" type="integer">145013843</label>
+			<label index="label_billing_address" type="integer">33277925</label>
+			<label index="label_gender.I.0" type="integer">19351194</label>
+			<label index="label_gender.I.1" type="integer">43922038</label>
+			<label index="label_status.I.1" type="integer">257690140</label>
+			<label index="label_status.I.2" type="integer">138303616</label>
+			<label index="label_status.I.3" type="integer">136964828</label>
+			<label index="label_status.I.4" type="integer">219192007</label>
+			<label index="label_yes" type="integer">174130624</label>
+			<label index="label_no" type="integer">133839734</label>
+			<label index="message_forFree" type="integer">178444004</label>
+			<label index="message_noDate" type="integer">11811061</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="label_uid" type="integer">187623698</label>
@@ -760,6 +802,27 @@ thank you for registering for this event:</label>
 			<label index="email_notificationHello">Hello,
 
 someone just has registered for an event:</label>
+			<label index="label_total_price">Total price</label>
+			<label index="label_attendees_names">Additional attendees</label>
+			<label index="label_lodgings">Selected lodging options</label>
+			<label index="label_foods">Selected food options</label>
+			<label index="label_kids">Number of kids</label>
+			<label index="label_price_earlybird_regular">Early-bird price</label>
+			<label index="label_price_board_regular">Regular price including full board</label>
+			<label index="label_price_earlybird_special">Early-bird special price</label>
+			<label index="label_price_board_special">Special price including full board</label>
+			<label index="label_paymentmethod">Selected method of payment</label>
+			<label index="label_billing_address">Billing address</label>
+			<label index="label_gender.I.0">Mr.</label>
+			<label index="label_gender.I.1">Ms.</label>
+			<label index="label_status.I.1">Student</label>
+			<label index="label_status.I.2">Job seeking</label>
+			<label index="label_status.I.3">Working</label>
+			<label index="label_status.I.4">Retired</label>
+			<label index="label_yes">yes</label>
+			<label index="label_no">no</label>
+			<label index="message_forFree">free</label>
+			<label index="message_noDate">This event has no date yet.</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="label_uid">Number</label>

@@ -18,7 +18,7 @@
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="mlang_tabs_tab">Arrangementer</label>
-			<label index="mlang_labels_tabdescr">Dette modul g&amp;#248;r det muligt at administrere, tilmeldinger, lokationer og talere.</label>
+			<label index="mlang_labels_tabdescr">Dette modul gør det muligt at administrere, tilmeldinger, lokationer og foredragsholdere.</label>
 			<label index="mlang_labels_tablabel">Arrangementer</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -189,6 +189,9 @@
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="dk" type="array">
+			<label index="mlang_tabs_tab">Seminars</label>
+			<label index="mlang_labels_tabdescr">This module allows you to manage seminars, registrations, seminar sites and speakers.</label>
+			<label index="mlang_labels_tablabel">Seminars</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="mlang_tabs_tab">Seminars</label>
