@@ -467,7 +467,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$content,
 			// We just use the first organizer as sender
 			'From: '.$froms[0],
-			'8bit'
+			'quoted-printable',
+			'UTF-8'
 		);
 
 		return;
@@ -518,7 +519,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$content,
 				// We use the attendee's e-mail as sender
 				'From: '.$this->getUserNameAndEmail(),
-				'8bit'
+				'quoted-printable',
+				'UTF-8'
 			);
 		}
 
@@ -577,7 +579,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$content,
 					// We use the first organizer's e-mail as sender.
 					'From: '.$froms[0],
-					'8bit'
+					'quoted-printable',
+					'UTF-8'
 				);
 			}
 		}

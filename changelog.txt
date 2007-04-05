@@ -1,4 +1,5 @@
 0.4.11
+- Fix: Subject in confirmation mail is scrambled (#285)
 - Fix: E-mails are empty if a HTML template is selected via flexforms (#710)
 
 0.4.10 (released 2007-03-22)
