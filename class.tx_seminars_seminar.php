@@ -315,9 +315,10 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks whether this event has additional informations for times and places set.
+	 * Checks whether this event has additional informations for times and
+	 * places set.
 	 *
-	 * @return	boolean		true if the field "times_places" is not empty
+	 * @return	boolean		true if the field "additional_times_places" is not empty
 	 *
 	 * @access	public
 	 */
@@ -326,7 +327,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns the content of the field "times_places" for this event.
+	 * Returns the content of the field "additional_times_places" for this event.
 	 * The line breaks of this non-RTE field are replaced with "<br />" for the
 	 * HTML output.
 	 *
@@ -343,12 +344,12 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns the content of the field "times_places" for this event.
+	 * Returns the content of the field "additional_times_places" for this event.
 	 * The line breaks of this non-RTE field are returned unchanged.
 	 *
 	 * @return	string		the field content
 	 *
-	 * @access	private
+	 * @access	public
 	 */
 	function getAdditionalTimesAndPlacesRaw() {
 		return $this->getRecordPropertyString('additional_times_places');

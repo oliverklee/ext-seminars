@@ -695,6 +695,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->readSubpartsToHide('room', 'field_wrapper');
 		}
 
+		if ($this->seminar->hasAdditionalTimesAndPlaces()) {
+			$this->setMarkerContent(
+				'additional_times_places',
+				$this->seminar->getAdditionalTimesAndPlacesRaw()
+			);
+		} else {
+			$this->readSubpartsToHide('additional_times_places', 'field_wrapper');
+		}
+
 		if ($this->hasRecordPropertyString('price')) {
 			$this->setMarkerContent('price', $this->getPrice());
 		} else {

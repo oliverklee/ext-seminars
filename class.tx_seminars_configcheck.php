@@ -840,6 +840,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'time',
 				'place',
 				'room',
+				'additional_times_places',
 				'paymentmethod',
 				'billing_address',
 				'url',

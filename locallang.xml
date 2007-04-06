@@ -16,6 +16,7 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
+			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
@@ -148,6 +149,7 @@ someone just has registered for an event:</label>
 			<label index="label_time">Zeit</label>
 			<label index="label_place">Ort</label>
 			<label index="label_room">Raum</label>
+			<label index="label_additional_times_places">Zeiten und Orte</label>
 			<label index="label_seats">Plätze</label>
 			<label index="label_total_price">Gesamtpreis</label>
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen</label>
@@ -460,6 +462,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
+			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_attendees_names" type="integer">168936155</label>
@@ -694,6 +697,7 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
+			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
