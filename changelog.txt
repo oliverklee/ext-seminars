@@ -1,4 +1,5 @@
 0.4.11
+- Fix: Missing additional link parameters (e.g. target) in seminar place, speaker and organizer records (#682)
 - Fix: Subject in confirmation mail is scrambled (#285)
 - Fix: E-mails are empty if a HTML template is selected via flexforms (#710)
 
