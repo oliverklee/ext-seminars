@@ -431,6 +431,23 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	function getTitle() {
 		return $this->getRecordPropertyString('title');
 	}
+
+	/**
+	 * Gets our PID.
+	 *
+	 * @return	integer		our PID (or 0 if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getCurrentBePageId() {
+		$result = parent::getCurrentBePageId();
+
+		if (!$result) {
+			$result = $this->getRecordPropertyInteger('pid');
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_objectfromdb.php']) {

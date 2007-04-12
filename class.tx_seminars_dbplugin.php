@@ -130,7 +130,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 				// We need to create our own template setup if we are in the BE
 				// and we aren't currently creating a DirectMail page.
 				if ((TYPO3_MODE == 'BE') && !is_object($GLOBALS['TSFE'])) {
-					$pageId = intval(t3lib_div::_GP('id'));
+					$pageId = $this->getCurrentBePageId();
 
 					if (isset($cachedConfigs[$pageId])) {
 						$this->conf =& $cachedConfigs[$pageId];
@@ -581,6 +581,17 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		reset($items);
 
 		return $items;
+	}
+
+	/**
+	 * Gets the ID of the currently selected back-end page.
+	 *
+	 * @return	integer		the current back-end page ID (or 0 if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getCurrentBePageId() {
+		return intval(t3lib_div::_GP('id'));
 	}
 }
 
