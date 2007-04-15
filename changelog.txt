@@ -1,4 +1,5 @@
 0.5.0
+- Change: Allow up to 9999 vacancies (#756)
 - Change: When prefilling the country field, also use static_info_country from fe_users (#754)
 - Change: Improve the list view formatting (#753)
 - Feature: Remember the selected payment data (#750)
