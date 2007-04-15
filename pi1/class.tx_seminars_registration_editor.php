@@ -554,7 +554,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function getBillingAddress() {
 		$result = '';
 
-		$formData = $form->oDataHandler->__aFormData;
+		$formData = $this->oForm->oDataHandler->__aFormData;
 
 		foreach ($this->fieldsInBillingAddress as $currentKey) {
 			$currentFormData = $formData[$currentKey];
