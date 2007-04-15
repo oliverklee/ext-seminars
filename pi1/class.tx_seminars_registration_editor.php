@@ -185,11 +185,15 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Processes the entered/edited registration and stores it in the DB.
 	 *
+	 * In addition, the entered payment data is stored in the FE user session.
+	 *
 	 * @param	array		the entered form data with the field names as array keys (including the submit button ...)
 	 *
 	 * @access	public
 	 */
 	function processRegistration($parameters) {
+		$this->saveDataToSession($parameters);
+
 		if ($this->registrationManager->canCreateRegistration(
 				$this->seminar,
 				$parameters)
@@ -636,7 +640,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns a data item of the currently logged-in FE user.
+	 * Returns a data item of the currently logged-in FE user or, if that data
+	 * has additionally been stored in the FE user session (as billing address),
+	 * the data from the session.
 	 *
 	 * This function may only be called when a FE user is logged in.
 	 *
@@ -650,8 +656,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getFeUserData($unused, $params) {
-		$feUserData = $GLOBALS['TSFE']->fe_user->user;
-		return $feUserData[$params['key']];
+		$result = $this->retrieveDataFromSession(null, $params);
+		if (empty($result)) {
+			$feUserData = $GLOBALS['TSFE']->fe_user->user;
+			$result = $feUserData[$params['key']];
+		}
+		return $result;
 	}
 
 	/**
@@ -839,20 +849,142 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns the UID of the only available payment method if there is only one
-	 * payment method available. Returns 0 if there is either more than one or
-	 * no payment method available
+	 * Returns the UID of the preselected payment method.
 	 *
-	 * @param	integer		the UID of the only available payment method or 0 if there is more than one or no payment method available
+	 * This will be:
+	 * a) the same payment method as previously selected (within the current
+	 * session) if that method is available for the current event
+	 * b) if only one payment method is available, that payment method
+	 * c) 0 in all other cases
+	 *
+	 * @return	integer		the UID of the preselected payment method or 0 if should will be preselected
 	 *
 	 * @access	public
 	 */
-	function getSinglePaymentMethod() {
+	function getPreselectedPaymentMethod() {
 		$result = 0;
 
 		$availablePaymentMethods = $this->populateListPaymentMethods(array());
 		if (count($availablePaymentMethods) == 1) {
 			$result = key($availablePaymentMethods);
+		} else {
+			$paymentMethodFromSession = $this->retrieveSavedMethodOfPayment();
+			if (isset($availablePaymentMethods[$paymentMethodFromSession])) {
+				$result = $paymentMethodFromSession;
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Saves the following data to the FE user session:
+	 * - payment method
+	 * - account number
+	 * - bank code
+	 * - bank name
+	 * - account_owner
+	 * - gender
+	 * - name
+	 * - address
+	 * - zip
+	 * - city
+	 * - country
+	 * - telephone
+	 * - email
+	 *
+	 * @param	array		the form data (may be empty or null)
+	 *
+	 * @access	private
+	 */
+	function saveDataToSession($parameters) {
+		if (!empty($parameters)) {
+			$parametersToSave = array(
+				'method_of_payment',
+				'account_number',
+				'bank_code',
+				'bank_name',
+				'account_owner',
+				'gender',
+				'name',
+				'address',
+				'zip',
+				'city',
+				'country',
+				'telephone',
+				'email'
+			);
+
+			foreach ($parametersToSave as $currentKey) {
+				if (isset($parameters[$currentKey])) {
+					$GLOBALS['TSFE']->fe_user->setKey(
+						'user',
+						$this->prefixId.'_'.$currentKey,
+						$parameters[$currentKey]
+					);
+				}
+			}
+		}
+
+		return;
+	}
+
+	/**
+	 * Retrieves the saved payment method from the FE user session.
+	 *
+	 * @return	integer		the UID of the payment method that has been saved in the FE user session or 0 if there is none
+	 *
+	 * @access	private
+	 */
+	function retrieveSavedMethodOfPayment() {
+		return intval(
+			$this->retrieveDataFromSession(
+				null,
+				array('key' => 'method_of_payment')
+			)
+		);
+	}
+
+	/**
+	 * Retrieves the data for a given key from the FE user session. Returns an
+	 * empty string if no data for that key is stored.
+	 *
+	 * @param	array		array that contains any pre-filled data (unused)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 *
+	 * @return	string		the data stored in the FE user session under the given key (might be empty)
+	 *
+	 * @access	public
+	 */
+	function retrieveDataFromSession($unused, $parameters) {
+		$key = $parameters['key'];
+
+		return $GLOBALS['TSFE']->fe_user->getKey(
+			'user',
+			$this->prefixId.'_'.$key
+		);
+	}
+
+	/**
+	 * Gets the prefill value for the account owner: If it is provided, the
+	 * account owner from a previous registration in the same FE user session,
+	 * or the FE user's name.
+	 *
+	 * @return	string		a name to prefill the account owner
+	 *
+	 * @access	public
+	 */
+	function prefillAccountOwner() {
+		$result = $this->retrieveDataFromSession(
+			null,
+			array('key' => 'account_owner')
+		);
+
+		if (empty($result)) {
+			$result = $this->getFeUserData(
+				null,
+				array('key' => 'name')
+			);
 		}
 
 		return $result;

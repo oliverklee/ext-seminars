@@ -56,7 +56,7 @@
 				<defaultvalue>
 					<userobj>
 						<extension>this</extension>
-						<method>getSinglePaymentMethod</method>
+						<method>getPreselectedPaymentMethod</method>
 					</userobj>
 				</defaultvalue>
 			</data>
@@ -79,6 +79,17 @@
 
 		<renderlet:TEXT name="account_number">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_account_number</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>retrieveDataFromSession</method>
+						<params>
+							<data name="key" value="account_number" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
 			<validators>
 				<validator:STANDARD>
 					<userobj>
@@ -100,6 +111,17 @@
 		</renderlet:TEXT>
 		<renderlet:TEXT name="bank_code">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_bank_code</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>retrieveDataFromSession</method>
+						<params>
+							<data name="key" value="bank_code" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
 			<validators>
 				<validator:STANDARD>
 					<userobj>
@@ -121,6 +143,17 @@
 		</renderlet:TEXT>
 		<renderlet:TEXT name="bank_name">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_bank_name</label>
+			<data>
+				<defaultvalue>
+					<userobj>
+						<extension>this</extension>
+						<method>retrieveDataFromSession</method>
+						<params>
+							<data name="key" value="bank_name" />
+						</params>
+					</userobj>
+				</defaultvalue>
+			</data>
 			<validators>
 				<validator:STANDARD>
 					<userobj>
@@ -146,10 +179,7 @@
 				<defaultvalue>
 					<userobj>
 						<extension>this</extension>
-						<method>getFeUserData</method>
-						<params>
-							<data name="key" value="name" />
-						</params>
+						<method>prefillAccountOwner</method>
 					</userobj>
 				</defaultvalue>
 			</data>
