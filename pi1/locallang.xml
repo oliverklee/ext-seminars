@@ -120,7 +120,7 @@
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_seats">Number of seats:</label>
+			<label index="label_seats">Seats</label>
 			<label index="label_attendees_names">Additional attendees:</label>
 			<label index="label_kids">Number of kids:</label>
 			<label index="label_account_number">Account number:</label>
@@ -478,7 +478,7 @@
 			<label index="label_food">Welche Kost bevorzugen Sie (Normalkost, vegetarisch oder eine spezielle Diät):</label>
 			<label index="label_known_from">Wie haben Sie von dieser Veranstaltung erfahren?</label>
 			<label index="label_notes">Weitere Mitteilungen:</label>
-			<label index="label_seats">Anzahl Plätze:</label>
+			<label index="label_seats">Plätze</label>
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen:</label>
 			<label index="label_kids">Anzahl Kinder:</label>
 			<label index="label_account_number">Kontonummer:</label>
@@ -1146,7 +1146,7 @@
 			<label index="label_food" type="integer">230880093</label>
 			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
-			<label index="label_seats" type="integer">134941724</label>
+			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_attendees_names" type="integer">198880077</label>
 			<label index="label_kids" type="integer">7953511</label>
 			<label index="label_account_number" type="integer">15650306</label>
@@ -1637,7 +1637,7 @@
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_seats">Number of seats:</label>
+			<label index="label_seats">Seats</label>
 			<label index="label_attendees_names">Additional attendees:</label>
 			<label index="label_kids">Number of kids:</label>
 			<label index="label_account_number">Account number:</label>

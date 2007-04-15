@@ -136,7 +136,7 @@ plugin.tx_seminars_pi1 {
 	class_headerrow =
 
 	# CSS classes for the TH of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
-	class_headertitle =
+	class_headertitle = title
 	class_headersubtitle =
 	class_headeruid =
 	class_headerevent_type =
@@ -172,7 +172,7 @@ plugin.tx_seminars_pi1 {
 	class_listdate = date
 	class_listtime =
 	class_listplace =
-	class_listseats =
+	class_listseats = seats
 	class_listprice_regular = price
 	class_listprice_special = price
 	class_listtotal_price =
