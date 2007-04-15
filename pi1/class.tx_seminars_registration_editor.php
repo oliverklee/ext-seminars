@@ -78,6 +78,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		'email',
 	);
 
+	/** an instance of tx_staticinfotables_pi1 */
+	var $staticInfo = null;
+
 	/**
 	 * The constructor.
 	 *
@@ -657,10 +660,25 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function getFeUserData($unused, $params) {
 		$result = $this->retrieveDataFromSession(null, $params);
+
 		if (empty($result)) {
+			$key = $params['key'];
 			$feUserData = $GLOBALS['TSFE']->fe_user->user;
-			$result = $feUserData[$params['key']];
+			$result = $feUserData[$key];
+
+			// If the country is empty, try the static info country instead.
+			if (empty($result) && ($key == 'country')) {
+				$static_info_country = $feUserData['static_info_country'];
+				if (!empty($static_info_country)) {
+					$this->initStaticInfo();
+					$result = $this->staticInfo->getStaticInfoName(
+						'COUNTRIES',
+						$static_info_country
+					);
+				}
+			}
 		}
+
 		return $result;
 	}
 
@@ -672,9 +690,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListCountries() {
-		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
-		$this->staticInfo->init();
+		$this->initStaticInfo();
 		$allCountries = $this->staticInfo->initCountries();
+
 		$result = array();
 		// Add an empty item at the top so we won't have Afghanistan (the first
 		// entry) pre-selected for empty values.
@@ -988,6 +1006,21 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Creates and initializes $this->staticInfo (if that hasn't been done yet).
+	 *
+	 * @access	private
+	 */
+	function initStaticInfo() {
+		if (!$this->staticInfo) {
+			$this->staticInfo
+				= t3lib_div::makeInstance('tx_staticinfotables_pi1');
+			$this->staticInfo->init();
+		}
+
+		return;
 	}
 }
 

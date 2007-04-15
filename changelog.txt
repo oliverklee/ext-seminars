@@ -1,4 +1,5 @@
 0.5.0
+- Change: When prefilling the country field, also use static_info_country from fe_users (#754)
 - Change: Improve the list view formatting (#753)
 - Feature: Remember the selected payment data (#750)
 - Fix: Billing address is not displayed in the second step of the registration process (#752)
