@@ -981,6 +981,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		foreach ($billingAddressFields as $key => $useLf) {
 			if ($this->hasRecordPropertyString($key)) {
+				// Add labels before the phone number and the e-mail address.
+				if (($key == 'telephone') || ($key == 'email')) {
+					$result .= $this->pi_getLL('label_'.$key).': ';
+				}
 				$result .= $this->getRegistrationData($key);
 				if ($useLf) {
 					$result .= chr(10);

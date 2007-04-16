@@ -495,7 +495,7 @@
 			<label index="label_city">Ort</label>
 			<label index="label_country">Land</label>
 			<label index="label_telephone">Telefon</label>
-			<label index="label_email">E-mail-Adresse</label>
+			<label index="label_email">E-Mail-Adresse</label>
 			<label index="label_lodgings">Art der Unterbringung</label>
 			<label index="label_foods">Art der Verpflegung</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>

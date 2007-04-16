@@ -66,16 +66,20 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/** whether we show the confirmation page (true) or the form (false) */
 	var $isConfirmationPage = false;
 
-	/** fields that are part of the billing address */
+	/**
+	 * fields that are part of the billing address, with the value controlling
+	 * if the field will be displayed with a label on the second page of the
+	 * registration form
+	 */
 	var $fieldsInBillingAddress = array(
-		'gender',
-		'name',
-		'address',
-		'zip',
-		'city',
-		'country',
-		'telephone',
-		'email',
+		'gender' => false,
+		'name' => false,
+		'address' => false,
+		'zip' => false,
+		'city' => false,
+		'country' => false,
+		'telephone' => true,
+		'email' => true
 	);
 
 	/** an instance of tx_staticinfotables_pi1 */
@@ -418,6 +422,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the currently logged-in FE user's data nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
+	 * The telephone number and the e-mail address will have labels in front of
+	 * them.
+	 *
 	 * @return	string		the currently logged-in FE user's data
 	 *
 	 * @access	public
@@ -426,18 +433,23 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 
 		foreach (array(
-			'name',
-			'company',
-			'address',
-			'zip',
-			'city',
-			'country',
-			'telephone',
-			'email'
-		) as $currentKey) {
+			'name' => false,
+			'company' => false,
+			'address' => false,
+			'zip' => false,
+			'city' => false,
+			'country' => false,
+			'telephone' => true,
+			'email' => true
+		) as $currentKey => $hasLabel) {
+			$value = htmlspecialchars($userData[$currentKey]);
+			if ($hasLabel) {
+				$value = $this->plugin->pi_getLL('label_'.$currentKey)
+					.': '.$value;
+			}
 			$this->plugin->setMarkerContent(
 				'user_'.$currentKey,
-				htmlspecialchars($userData[$currentKey])
+				$value
 			);
 		}
 		return $this->plugin->substituteMarkerArrayCached(
@@ -493,11 +505,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			'REGISTRATION_CONFIRMATION_DATA'
 		);
 
-		// Build the total price for this registration and add it to the form data
-		// to show it on the confirmation page.
+		// Build the total price for this registration and add it to the form
+		// data to show it on the confirmation page.
 		// This value will not be saved to the database from here. It will be
 		// calculated again when creating the registration object.
-		// It will not be added if no total price can be calculated (e.g. total price = 0.00)
+		// It will not be added if no total price can be calculated (e.g.
+		// total price = 0.00)
 		if (isset($formData['seats']) && $formData['seats'] > 0) {
 			$seats = $formData['seats'];
 		} else {
@@ -563,7 +576,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 		$formData = $this->oForm->oDataHandler->__aFormData;
 
-		foreach ($this->fieldsInBillingAddress as $currentKey) {
+		foreach ($this->fieldsInBillingAddress as $currentKey => $hasLabel) {
 			$currentFormData = $formData[$currentKey];
 			if (isset($formData[$currentKey]) && $formData[$currentKey] != '') {
 				// If the gender field is hidden, it would have an empty value,
@@ -578,6 +591,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 					'<br />',
 					htmlspecialchars($currentFormData)
 				);
+				if ($hasLabel) {
+					$processedFormData
+						= $this->plugin->pi_getLL('label_'.$currentKey)
+							.': '.$processedFormData;
+				}
 
 				$result .= $processedFormData.'<br />';
 			}

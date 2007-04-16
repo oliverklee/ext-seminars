@@ -32,6 +32,8 @@
 			<label index="label_price_board_special">Special price including full board</label>
 			<label index="label_paymentmethod">Selected method of payment</label>
 			<label index="label_billing_address">Billing address</label>
+			<label index="label_telephone">Phone</label>
+			<label index="label_email">E-mail address</label>
 			<label index="label_url">More information</label>
 			<label index="label_seminardata">Seminar data</label>
 			<label index="label_feuserdata">Account data</label>
@@ -165,6 +167,8 @@ someone just has registered for an event:</label>
 			<label index="label_price_board_special">Spezialpreis inklusive Vollpension</label>
 			<label index="label_paymentmethod">Gewählte Zahlungsart</label>
 			<label index="label_billing_address">Rechnungsadresse</label>
+			<label index="label_telephone">Telefon</label>
+			<label index="label_email">E-Mail-Adresse</label>
 			<label index="label_url">Mehr Informationen</label>
 			<label index="label_seminardata">Daten des Seminars</label>
 			<label index="label_feuserdata">Daten des Accounts</label>
@@ -478,6 +482,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_price_board_special" type="integer">56248635</label>
 			<label index="label_paymentmethod" type="integer">145013843</label>
 			<label index="label_billing_address" type="integer">33277925</label>
+			<label index="label_telephone" type="integer">197928267</label>
+			<label index="label_email" type="integer">146136420</label>
 			<label index="label_url" type="integer">179332787</label>
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
@@ -713,6 +719,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_price_board_special">Special price including full board</label>
 			<label index="label_paymentmethod">Selected method of payment</label>
 			<label index="label_billing_address">Billing address</label>
+			<label index="label_telephone">Phone</label>
+			<label index="label_email">E-mail address</label>
 			<label index="label_url">More information</label>
 			<label index="label_seminardata">Seminar data</label>
 			<label index="label_feuserdata">Account data</label>
