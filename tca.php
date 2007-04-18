@@ -222,7 +222,7 @@ $TCA['tx_seminars_seminars'] = array(
 			)
 		),
 		'room' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.room',
 			'config' => array(
 				'type' => 'text',
@@ -231,7 +231,7 @@ $TCA['tx_seminars_seminars'] = array(
 			)
 		),
 		'additional_times_places' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.additional_times_places',
 			'config' => array(
 				'type' => 'text',
@@ -424,7 +424,7 @@ $TCA['tx_seminars_seminars'] = array(
 			)
 		),
 		'additional_information' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.additional_information',
 			'config' => array(
 				'type' => 'text',
@@ -492,7 +492,7 @@ $TCA['tx_seminars_seminars'] = array(
 			)
 		),
 		'allows_multiple_registrations' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.allows_multiple_registrations',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
@@ -590,7 +590,7 @@ $TCA['tx_seminars_seminars'] = array(
 			)
 		),
 		'notes' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.notes',
 			'config' => array(
 				'type' => 'text',
