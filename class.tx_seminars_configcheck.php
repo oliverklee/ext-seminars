@@ -158,6 +158,28 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks the configuration for: tx_seminars_placebag/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_placebag() {
+		$this->checkStaticIncluded();
+
+		return;
+	}
+
+	/**
+	 * Checks the configuration for: tx_seminars_place/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_place() {
+		$this->checkStaticIncluded();
+
+		return;
+	}
+
+	/**
 	 * Checks the configuration for: tx_seminars_pi1/seminar_registration.
 	 *
 	 * @access	private
