@@ -41,7 +41,6 @@ $EM_CONF[$_EXTKEY] = array(
 			'ameos_formidable' => '0.5.0-0.5.0',
 			'formidabledatetime' => '0.2.0-0.3.0',
 			'formidable_va_preg' => '',
-			'rc_formidable_rdt_rte' => '',
 			'static_info_tables' => '2.0.0-',
 			'php' => '4.0.0-0.0.0',
 			'typo3' => '3.7.0-0.0.0',
