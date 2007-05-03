@@ -110,7 +110,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'COUNT(*) AS num',
 				$this->tableSeminars,
 				'uid='.intval($seminarUid)
-					.t3lib_pageSelect::enableFields($this->tableSeminars),
+					.$this->enableFields($this->tableSeminars),
 				'',
 				'',
 				'');
@@ -141,7 +141,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'*',
 				$this->tableSeminars,
 				'uid='.intval($seminarUid)
-					.t3lib_pageSelect::enableFields($this->tableSeminars),
+					.$this->enableFields($this->tableSeminars),
 				'',
 				'',
 				'1');
@@ -456,7 +456,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'title, address, homepage, directions',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSites),
+					.$this->enableFields($this->tableSites),
 				'',
 				'',
 				''
@@ -504,7 +504,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'title',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSites),
+					.$this->enableFields($this->tableSites),
 				'',
 				'',
 				''
@@ -577,7 +577,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'title, organization, homepage, description',
 				$this->tableSpeakers.', '.$this->tableSpeakersMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSpeakers),
+					.$this->enableFields($this->tableSpeakers),
 				'',
 				'',
 				''
@@ -624,7 +624,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'title',
 				$this->tableSpeakers.', '.$this->tableSpeakersMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSpeakers),
+					.$this->enableFields($this->tableSpeakers),
 				'',
 				'',
 				''
@@ -851,7 +851,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			'payment_methods',
 			$this->tableSeminars,
 			'uid='.$this->getTopicUid()
-				.t3lib_pageSelect::enableFields($this->tableSeminars),
+				.$this->enableFields($this->tableSeminars),
 			'',
 			'',
 			''
@@ -865,7 +865,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 					'title',
 					$this->tablePaymentMethods,
 					'uid='.intval($currentPaymentMethod)
-						.t3lib_pageSelect::enableFields($this->tablePaymentMethods),
+						.$this->enableFields($this->tablePaymentMethods),
 					'',
 					'',
 					''
@@ -901,7 +901,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			'payment_methods',
 			$this->tableSeminars,
 			'uid='.$this->getTopicUid()
-				.t3lib_pageSelect::enableFields($this->tableSeminars),
+				.$this->enableFields($this->tableSeminars),
 			'',
 			'',
 			''
@@ -915,7 +915,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 					'title, description',
 					$this->tablePaymentMethods,
 					'uid='.intval($currentPaymentMethod)
-						.t3lib_pageSelect::enableFields($this->tablePaymentMethods),
+						.$this->enableFields($this->tablePaymentMethods),
 					'',
 					'',
 					''
@@ -977,7 +977,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'title',
 				$this->tableEventTypes,
 				'uid='.$eventTypeUid
-					.t3lib_pageSelect::enableFields($this->tableEventTypes),
+					.$this->enableFields($this->tableEventTypes),
 				'',
 				'',
 				'1'
@@ -1335,7 +1335,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 				'*',
 				$this->tableOrganizers,
 				'uid='.intval($organizerUid)
-					.t3lib_pageSelect::enableFields($this->tableOrganizers),
+					.$this->enableFields($this->tableOrganizers),
 				'',
 				'',
 				''
@@ -1469,7 +1469,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			'COUNT(*) AS num',
 			$this->tableAttendances,
 			'seminar='.$this->getUid().' AND user='.$feUserUid
-				.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.$this->enableFields($this->tableAttendances),
 			'',
 			'',
 			'');
@@ -1767,7 +1767,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats=0'
-				.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.$this->enableFields($this->tableAttendances),
 			'',
 			'',
 			''
@@ -1783,7 +1783,7 @@ class tx_seminars_seminar extends tx_seminars_objectfromdb {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats!=0'
-				.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.$this->enableFields($this->tableAttendances),
 			'',
 			'',
 			''
