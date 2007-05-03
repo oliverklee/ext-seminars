@@ -368,9 +368,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @param	string		the key from the LOCAL_LANG array for which to return the value
 	 * @param	string		alternative string to return if no value is found set for the key, neither for the local language nor the default.
 	 * @param	boolean		If true, the output label is passed through htmlspecialchars().
-	 * 
+	 *
 	 * @return	string		the value from LOCAL_LANG
-	 * 
+	 *
 	 * @access	protected
 	 */
 	function pi_getLL($key, $alternativeString = '', $useHtmlSpecialChars = false) {
