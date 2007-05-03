@@ -73,10 +73,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	function canRegisterIfLoggedIn(&$seminar) {
 		$result = true;
 
-		$couldThisUserRegister = !$this->isUserRegistered($seminar)
-			|| $seminar->allowsMultipleRegistrations();
-
-		if ($this->isLoggedIn() && !$couldThisUserRegister) {
+		if ($this->isLoggedIn() && !$this->couldThisUserRegister($seminar)) {
 			// The current user can not register for this event (no multiple
 			// registrations are possible and the user is already registered).
 			$result = false;
@@ -110,19 +107,42 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	function canRegisterIfLoggedInMessage(&$seminar) {
 		$result = '';
 
-		$couldThisUserRegister = !$this->isUserRegistered($seminar)
-			|| $seminar->allowsMultipleRegistrations();
-
-		if ($this->isLoggedIn() && !$couldThisUserRegister) {
+		if ($this->isLoggedIn() && $this->isUserBlocked($seminar)) {
+			// The current user is already blocked for this event.
+			$result = $this->pi_getLL('message_userIsBlocked');
+		} elseif ($this->isLoggedIn() && !$this->couldThisUserRegister($seminar)) {
 			// The current user can not register for this event (no multiple
 			// registrations are possible and the user is already registered).
 			$result = $this->pi_getLL('message_alreadyRegistered');
 		} elseif (!$seminar->canSomebodyRegister()) {
-			// it is not possible to register for this seminar at all (it is canceled, full, etc.)
+			// it is not possible to register for this seminar at all (it is
+			// canceled, full, etc.)
 			$result = $seminar->canSomebodyRegisterMessage();
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Checks whether the current FE user (if any is logged in) could register
+	 * for the current event, not checking the event's vacancies yet.
+	 * So this function only checks whether the user is logged in and isn't
+	 * blocked for the event's duration yet.
+	 *
+	 * @param	object		a seminar for which we'll check if it is possible to register (must not be null)
+	 *
+	 * @return	boolean		true if the user could register for the given event, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function couldThisUserRegister(&$seminar) {
+		// A user can register either if the event allows multiple registrations
+		// or the user isn't registered yet and isn't blocked either.
+		return $seminar->allowsMultipleRegistrations()
+			|| (
+				!$this->isUserRegistered($seminar)
+				&& !$this->isUserBlocked($seminar)
+			);
 	}
 
 	/**
@@ -230,6 +250,22 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 */
 	function isUserRegisteredMessage(&$seminar) {
 		return $seminar->isUserRegisteredMessage($this->getFeUserUid());
+	}
+
+	/**
+	 * Checks whether a front-end user is already blocked during the time for
+	 * a given event by other booked events.
+	 *
+	 * For this, only events that forbid multiple registrations are checked.
+	 *
+	 * @param	object		a seminar for which we'll check whether the user already is blocked by an other seminars
+	 *
+	 * @return	boolean		true if user is blocked by another registration, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function isUserBlocked(&$seminar) {
+		return $seminar->isUserBlocked($this->getFeUserUid());
 	}
 
 	/**

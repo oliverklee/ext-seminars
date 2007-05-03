@@ -50,6 +50,8 @@
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
+			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
@@ -185,6 +187,8 @@ someone just has registered for an event:</label>
 			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein.</label>
 			<label index="message_alreadyRegistered_formal">Sie sind für diese Veranstaltung bereits angemeldet.</label>
 			<label index="message_alreadyRegistered_informal">Du bist für diese Veranstaltung bereits angemeldet.</label>
+			<label index="message_userIsBlocked_formal">Sie sind schon für eine Veranstaltung angemeldet, deren Zeiten mit dieser Veranstaltung kollidieren.</label>
+			<label index="message_userIsBlocked_informal">Du bist schon für eine Veranstaltung angemeldet, deren Zeiten mit dieser Veranstaltung kollidieren.</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noRegistrationNecessary">Für diese Veranstaltung ist keine Anmeldung erforderlich.</label>
@@ -500,6 +504,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
 			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
+			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
@@ -737,6 +743,8 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
+			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>

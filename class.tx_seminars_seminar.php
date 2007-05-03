@@ -30,6 +30,7 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 
 class tx_seminars_seminar extends tx_seminars_timespan {
 	/** Same as class name */
@@ -120,7 +121,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			case 'deadline_registration':
 				// Check that the registration deadline is not later than the
 				// begin date.
-				if ($value > $this->getRecordPropertyInteger('begin_date')) {
+				if ($value > $this->getBeginDateAsTimestamp()) {
 					$result['status'] = false;
 					$result['newValue'] = 0;
 				}
@@ -129,7 +130,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				// Check that the early-bird deadline is
 				// a) not later than the begin date
 				// b) not later than the registration deadline (if set).
-				if ($value > $this->getRecordPropertyInteger('begin_date')
+				if ($value > $this->getBeginDateAsTimestamp()
 					|| ($this->getRecordPropertyInteger('deadline_registration')
 					&& ($value > $this->getRecordPropertyInteger('deadline_registration')))) {
 					$result['status'] = false;
@@ -467,11 +468,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		if ($this->hasEndDate()) {
-			// 86400 seconds are one day.
-			$oneDay = 86400;
-			$endDate = $this->getRecordPropertyInteger('end_date');
-			$midnightBeforeEndDate = $endDate - ($endDate % $oneDay);
-			$secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * $oneDay;
+			$endDate = $this->getEndDateAsTimestamp();
+			$midnightBeforeEndDate = $endDate - ($endDate % ONE_DAY);
+			$secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * ONE_DAY;
 
 			$result = ' AND begin_date>='.$endDate.
 				' AND begin_date<'.$secondMidnightAfterEndDate;
@@ -1702,7 +1701,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	function getLatestPossibleRegistrationTime() {
 		return (($this->hasRegistrationDeadline()) ?
 			$this->getRecordPropertyInteger('deadline_registration') :
-			$this->getRecordPropertyInteger('begin_date')
+			$this->getBeginDateAsTimestamp()
 		);
 	}
 
@@ -2095,7 +2094,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
 	 *
-	 * @param	integer		UID of the user to check
+	 * @param	integer		UID of the FE user to check
 	 *
 	 * @return	boolean		true if the user already is registered, false otherwise.
 	 *
@@ -2123,7 +2122,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
 	 *
-	 * @param	integer		UID of the user to check
+	 * @param	integer		UID of the FE user to check
 	 *
 	 * @return	string		empty string if everything is OK, else a localized error message.
 	 *
@@ -2138,7 +2137,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * checks whether this user is entered as a VIP for this event,
 	 * ie. he/she is allowed to view the list of registrations for this event.
 	 *
-	 * @param	integer		UID of the user to check
+	 * @param	integer		UID of the FE user to check
 	 * @param	integer		UID of the default event VIP front-end user group
 	 *
 	 * @return	boolean		true if the user is a VIP for this seminar, false otherwise.
@@ -3227,6 +3226,88 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// There is no early-bird version of the prices that include full board.
 		$result |= $this->hasPriceRegularBoard()
 			|| $this->hasPriceSpecialBoard();
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a front-end user is already blocked during the time for
+	 * a given event by other booked events.
+	 *
+	 * For this, only events that forbid multiple registrations are checked.
+	 *
+	 * @param	integer		UID of the FE user to check
+	 *
+	 * @return	boolean		true if user is blocked by another registration, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function isUserBlocked($feUserUid) {
+		$result = false;
+
+		// If no user is logged in or this event allows multiple registrations,
+		// the user is not considered to be blocked for this event.
+		// If this event doesn't have a date yet, the time cannot be blocked
+		// either.
+		if (($feUserUid > 0) && !$this->allowsMultipleRegistrations()
+			&& $this->hasDate()) {
+
+			$additionalTables = $this->tableAttendances;
+			$queryWhere = $this->getQueryForCollidingEvents();
+			// Filter to those events to which the given FE user is registered.
+			$queryWhere .= ' AND '.$this->tableSeminars.'.uid='
+					.$this->tableAttendances.'.seminar'
+				.' AND '.$this->tableAttendances.'.user='.$feUserUid;
+
+			$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
+			$seminarBag =& new $seminarBagClassname(
+				$queryWhere,
+				$additionalTables
+			);
+
+			// One blocking event is enough.
+			$result = ($seminarBag->getObjectCountWithoutLimit() > 0);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates a WHERE clause that selects events that collide with this event's
+	 * times.
+	 *
+	 * This query will only take events into account that do *not* allow
+	 * multiple registrations.
+	 *
+	 * For open-ended events, only the begin date is checked.
+	 *
+	 * @return	string		WHERE clause (without the "WHERE" keyword), will not be empty
+	 *
+	 * @access	protected
+	 */
+	function getQueryForCollidingEvents() {
+		$beginDate = $this->getBeginDateAsTimestamp();
+		$endDate = $this->getEndDateAsTimestampEvenIfOpenEnded();
+
+		$result = $this->tableSeminars.'.uid!='.$this->getUid()
+			.' AND allows_multiple_registrations=0'
+			.' AND ('
+				.'('
+					// Check for events that have a begin date in our
+					// time-frame.
+					// This will automatically rule out events without a date.
+					.'begin_date>'.$beginDate.' AND begin_date<'.$endDate
+				.') OR ('
+					// Check for events that have an end date in our time-frame.
+					// This will automatically rule out events without a date.
+					.'end_date>'.$beginDate.' AND end_date<'.$endDate
+				.') OR ('
+					// Check for events that have a non-zero start date,
+					// start before this event and end after it.
+					.'begin_date>0 AND '
+					.'begin_date<='.$beginDate.' AND end_date>='.$endDate
+				.')'
+			.')';
 
 		return $result;
 	}

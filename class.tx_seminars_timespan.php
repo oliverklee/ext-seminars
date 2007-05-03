@@ -27,9 +27,13 @@
  * This class offers timespan-related methods for the timeslot and seminar classes.
  *
  * @author	Niels Pardon <mail@niels-pardon.de>
+ * @author	Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
+
+/** one day in seconds */
+define('ONE_DAY', 86400);
 
 class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/** same as class name */
@@ -40,7 +44,7 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/**
 	 * Gets the begin date.
 	 *
-	 * @return	string		the begin date (or the localized string "will be 
+	 * @return	string		the begin date (or the localized string "will be
 	 * 						announced" if no begin date is set)
 	 *
 	 * @access	public
@@ -49,8 +53,10 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 		if (!$this->hasBeginDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
-			$beginDate = $this->getRecordPropertyInteger('begin_date');
-			$result = strftime($this->getConfValueString('dateFormatYMD'), $beginDate);
+			$result = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$this->getBeginDateAsTimestamp()
+			);
 		}
 
 		return $result;
@@ -79,8 +85,10 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 		if (!$this->hasEndDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
-			$endDate = $this->getRecordPropertyInteger('end_date');
-			$result = strftime($this->getConfValueString('dateFormatYMD'), $endDate);
+			$result = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$this->getEndDateAsTimestamp()
+			);
 		}
 
 		return $result;
@@ -114,8 +122,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 		if (!$this->hasDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
-			$beginDate = $this->getRecordPropertyInteger('begin_date');
-			$endDate = $this->getRecordPropertyInteger('end_date');
+			$beginDate = $this->getBeginDateAsTimestamp();
+			$endDate = $this->getEndDateAsTimestamp();
 
 			$beginDateDay = strftime($this->getConfValueString('dateFormatYMD'), $beginDate);
 			$endDateDay = strftime($this->getConfValueString('dateFormatYMD'), $endDate);
@@ -175,11 +183,14 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 		if (!$this->hasTime()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
-			$beginDate = $this->getRecordPropertyInteger('begin_date');
-			$endDate = $this->getRecordPropertyInteger('end_date');
-
-			$beginTime = strftime($this->getConfValueString('timeFormat'), $beginDate);
-			$endTime = strftime($this->getConfValueString('timeFormat'), $endDate);
+			$beginTime = strftime(
+				$this->getConfValueString('timeFormat'),
+				$this->getBeginDateAsTimestamp()
+			);
+			$endTime = strftime(
+				$this->getConfValueString('timeFormat'),
+				$this->getEndDateAsTimestamp()
+			);
 
 			$result = $beginTime;
 
@@ -202,7 +213,7 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasTime() {
-		$beginTime = strftime('%H:%M', $this->getRecordPropertyInteger('begin_date'));
+		$beginTime = strftime('%H:%M', $this->getBeginDateAsTimestamp());
 
 		return ($this->hasDate() && ($beginTime !== '00:00'));
 	}
@@ -216,9 +227,56 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasEndTime() {
-		$endTime = strftime('%H:%M', $this->getRecordPropertyInteger('end_date'));
+		$endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
 
 		return ($this->hasEndDate() && ($endTime !== '00:00'));
+	}
+
+	/**
+	 * Returns our begin date and time as a UNIX timestamp.
+	 *
+	 * @return	integer		our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
+	 *
+	 * @access	protected
+	 */
+	function getBeginDateAsTimestamp() {
+		return $this->getRecordPropertyInteger('begin_date');
+	}
+
+	/**
+	 * Returns our end date and time as a UNIX timestamp.
+	 *
+	 * @return	integer		our end date and time as a UNIX timestamp or 0 if we don't have an end date
+	 *
+	 * @access	protected
+	 */
+	function getEndDateAsTimestamp() {
+		return $this->getRecordPropertyInteger('end_date');
+	}
+
+	/**
+	 * Gets our end date and time as a UNIX timestamp. If this event is
+	 * open-ended, midnight after the begin date and time is returned.
+	 * If we don't even have a begin date, 0 is returned.
+	 *
+	 * @return	integer		our end date and time as a UNIX timestamp, 0 if we don't have a begin date
+	 *
+	 * @access	protected
+	 */
+	function getEndDateAsTimestampEvenIfOpenEnded() {
+		$result = 0;
+
+		if ($this->hasBeginDate()) {
+			$result = $this->getEndDateAsTimestamp();
+			// If there is no end date, we are open-ended.
+			if ($result == 0) {
+				$beginDate = $this->getBeginDateAsTimestamp();
+				$midnightAfterEndDate = $beginDate - ($beginDate % ONE_DAY)
+					+ ONE_DAY;
+			}
+		}
+
+		return $result;
 	}
 }
 

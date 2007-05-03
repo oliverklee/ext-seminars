@@ -1864,7 +1864,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createCountdownMessage($seconds) {
 		if ($seconds > 82800) {
 			// more than 23 hours left, show the time in days
-			$countdownValue = round($seconds / 86400);
+			$countdownValue = round($seconds / ONE_DAY);
 			if ($countdownValue > 1) {
 				$countdownText = $this->pi_getLL('countdown_days_plural');
 			} else {
