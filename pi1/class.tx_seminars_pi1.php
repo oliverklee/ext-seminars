@@ -1807,7 +1807,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// define the additional where clause for the database query
 		$additionalWhere = 'tx_seminars_seminars.cancelled=0'
-			.t3lib_pageSelect::enableFields($this->tableSeminars)
+			.$this->enableFields($this->tableSeminars)
 			.' AND tx_seminars_seminars.object_type!='.$this->recordTypeTopic
 			.' AND tx_seminars_seminars.begin_date>'.$now;
 

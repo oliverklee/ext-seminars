@@ -224,6 +224,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$tableAttendances = 'tx_seminars_attendances';
 		$tableUsers = 'fe_users';
 
+		$pageSelect = t3lib_div::makeInstance('t3lib_pageSelect');
+
 		$result = '';
 
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
@@ -250,7 +252,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$dbResultAttendances = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
 			$this->tableAttendances,
-			'1'.t3lib_pageSelect::enableFields($this->tableAttendances),
+			'1'.$pageSelect->enableFields($this->tableAttendances),
 			'',
 			'',
 			''
@@ -261,7 +263,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 					'uid,name,username',
 					$this->tableUsers,
 					'uid='.intval($currentAttendance['user'])
-						.t3lib_pageSelect::enableFields($this->tableUsers),
+						.$pageSelect->enableFields($this->tableUsers),
 					'',
 					'',
 					''
@@ -270,7 +272,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 					'title, begin_date',
 					$this->tableSeminars,
 					'uid='.intval($currentAttendance['seminar'])
-						.t3lib_pageSelect::enableFields($this->tableSeminars),
+						.$pageSelect->enableFields($this->tableSeminars),
 					'',
 					'',
 					''

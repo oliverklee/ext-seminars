@@ -1124,7 +1124,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			'title, sorting',
 			$foreignTable.', '.$mmTable,
 			'uid_local='.$this->getUid().' AND uid_foreign=uid'
-				.t3lib_pageSelect::enableFields($foreignTable),
+				.$this->enableFields($foreignTable),
 			'',
 			'sorting'
 		);

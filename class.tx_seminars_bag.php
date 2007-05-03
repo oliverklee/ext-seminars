@@ -121,7 +121,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			// Is there a TCA entry for that table?
 			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
 			if (is_array($ctrl)) {
-				$this->enabledFieldsQuery .= t3lib_pageSelect::enableFields($trimmedTableName);
+				$this->enabledFieldsQuery .= $this->enableFields($trimmedTableName);
 			}
 		}
 		return;

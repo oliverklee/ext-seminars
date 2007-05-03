@@ -526,7 +526,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title, address, homepage, directions',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSites),
+					.$this->enableFields($this->tableSites),
 				'',
 				'',
 				''
@@ -577,7 +577,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title, address, homepage, directions',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSites)
+					.$this->enableFields($this->tableSites)
 			);
 
 			if ($dbResult) {
@@ -619,7 +619,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSites),
+					.$this->enableFields($this->tableSites),
 				'',
 				'',
 				''
@@ -720,7 +720,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title, organization, homepage, description',
 				$this->tableSpeakers.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSpeakers),
+					.$this->enableFields($this->tableSpeakers),
 				'',
 				'',
 				''
@@ -795,7 +795,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title, organization, homepage, description',
 				$this->tableSpeakers.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSpeakers)
+					.$this->enableFields($this->tableSpeakers)
 			);
 
 			if ($dbResult) {
@@ -863,7 +863,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title',
 				$this->tableSpeakers.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.t3lib_pageSelect::enableFields($this->tableSpeakers),
+					.$this->enableFields($this->tableSpeakers),
 				'',
 				'',
 				''
@@ -1303,7 +1303,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title',
 				$this->tablePaymentMethods,
 				'uid='.intval($currentPaymentMethod)
-					.t3lib_pageSelect::enableFields($this->tablePaymentMethods),
+					.$this->enableFields($this->tablePaymentMethods),
 				'',
 				'',
 				''
@@ -1388,7 +1388,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title, description',
 			$this->tablePaymentMethods,
 			'uid='.$paymentMethodUid
-				.t3lib_pageSelect::enableFields($this->tablePaymentMethods),
+				.$this->enableFields($this->tablePaymentMethods),
 			'',
 			'',
 			''
@@ -1424,7 +1424,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title',
 			$this->tablePaymentMethods,
 			'uid='.$paymentMethodUid
-				.t3lib_pageSelect::enableFields($this->tablePaymentMethods),
+				.$this->enableFields($this->tablePaymentMethods),
 			'',
 			'',
 			''
@@ -1531,7 +1531,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title',
 				$this->tableEventTypes,
 				'uid='.$eventTypeUid
-					.t3lib_pageSelect::enableFields($this->tableEventTypes),
+					.$this->enableFields($this->tableEventTypes),
 				'',
 				'',
 				'1'
@@ -1973,7 +1973,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'*',
 				$this->tableOrganizers,
 				'uid='.intval($organizerUid)
-					.t3lib_pageSelect::enableFields($this->tableOrganizers),
+					.$this->enableFields($this->tableOrganizers),
 				'',
 				'',
 				''
@@ -2107,7 +2107,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'COUNT(*) AS num',
 			$this->tableAttendances,
 			'seminar='.$this->getUid().' AND user='.$feUserUid
-				.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.$this->enableFields($this->tableAttendances),
 			'',
 			'',
 			'');
@@ -2442,7 +2442,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats=0'
-				.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.$this->enableFields($this->tableAttendances),
 			'',
 			'',
 			''
@@ -2458,7 +2458,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats!=0'
-				.t3lib_pageSelect::enableFields($this->tableAttendances),
+				.$this->enableFields($this->tableAttendances),
 			'',
 			'',
 			''
@@ -2810,7 +2810,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			// uid_local and uid_foreign are from the m:m table;
 			// uid and sorting are from the foreign table.
 			'uid_local='.$uid.' AND uid_foreign=uid'
-				.t3lib_pageSelect::enableFields($foreignTable),
+				.$this->enableFields($foreignTable),
 			'',
 			'sorting'
 		);

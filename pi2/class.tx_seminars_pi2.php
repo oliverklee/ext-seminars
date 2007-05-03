@@ -313,7 +313,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 					'DISTINCT pid',
 					$this->tableAttendances,
 					'seminar='.$eventUid
-						.t3lib_pageSelect::enableFields($this->tableAttendances)
+						.$this->enableFields($this->tableAttendances)
 				);
 				if ($dbResult) {
 					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {

@@ -372,7 +372,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	function retrieveEnableFields($tableName, $allowHiddenRecords = false) {
 		// The second parameter for the enableFields() function controls
 		// whether hidden records should be ignored.
-		return t3lib_pageSelect::enableFields(
+		return $this->enableFields(
 			$tableName,
 			intval($allowHiddenRecords)
 		);
