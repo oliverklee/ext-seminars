@@ -161,20 +161,26 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// Read the selected sub module (from the tab menu) and make it available within this class.
 			$this->subModule = intval(t3lib_div::_GET('subModule'));
 
-			// If $this->subModule is not a key of $this->availableSubModules, set it to 1 so the first tab is activated.
+			// If $this->subModule is not a key of $this->availableSubModules, 
+			// set it to the key of the first element in $this->availableSubModules
+			// so the first tab is activated.
 			if (!array_key_exists($this->subModule, $this->availableSubModules)) {
-				$this->subModule = 1;
+				reset($this->availableSubModules);
+				$this->subModule = key($this->availableSubModules);
 			}
 
-			// generate the tab menu
-			$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
-				'subModule',
-				$this->subModule,
-				$this->availableSubModules);
-			$this->content .= $this->doc->spacer(5);
+			// Only generate the tab menu if the current back-end user has the
+			// rights to show any of the tabs.
+			if ($this->subModule) {
+				$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
+					'subModule',
+					$this->subModule,
+					$this->availableSubModules);
+				$this->content .= $this->doc->spacer(5);
+			}
 
 			// Select which sub module to display.
-			// If no sub module is specified, a default page will be displayed.
+			// If no sub module is specified, an empty page will be displayed.
 			switch ($this->subModule) {
 				case 2:
 					$this->content .= $this->showRegistrationsList();
@@ -186,9 +192,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$this->content .= $this->showOrganizersList();
 					break;
 				case 1:
-					// The fallthrough is intentional.
-				default:
 					$this->content .= $this->showEventsList();
+				default:
+					$this->content .= '';
 					break;
 			}
 
