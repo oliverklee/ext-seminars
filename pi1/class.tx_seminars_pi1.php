@@ -1413,10 +1413,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setPriceMarkers('registration_wrapper');
 
 		$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
-		$this->setMarkerContent(
-			'message_registration_form',
-			$this->pi_getLL('message_registrationForm')
-		);
 		$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
 
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration_editor');

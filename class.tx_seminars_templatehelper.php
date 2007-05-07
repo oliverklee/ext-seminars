@@ -40,6 +40,9 @@ if (TYPO3_MODE == 'BE') {
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
 class tx_seminars_templatehelper extends tx_seminars_dbplugin {
+	/** the complete HTML template */
+	var $templateCode;
+
 	/** all HTML template subparts, using the marker name without ### as keys (e.g. 'MY_MARKER') */
 	var $templateCache = array();
 
@@ -64,21 +67,15 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Retrieves all subparts from the plugin template and write them to $this->templateCache.
-	 *
-	 * The subpart names are automatically retrieved from the template file set in $this->conf['templateFile']
-	 * (or via flexforms) and are used as array keys. For this, the ### are removed, but the names stay uppercase.
-	 *
-	 * Example: The subpart ###MY_SUBPART### will be stored with the array key 'MY_SUBPART'.
-	 *
-	 * Please note that each subpart may only occur once in the template file.
+	 * Retrieves the plugin template file set in $this->conf['templateFile'] (or
+	 * via flexforms) and writes it to $this->templateCode. The subparts will
+	 * be written to $this->templateCache.
 	 *
 	 * @param	boolean		whether the settings in the Flexform should be ignored, defaults to false, may be empty
 	 *
 	 * @access	protected
 	 */
 	function getTemplateCode($ignoreFlexform = false) {
-		/** the whole template file as a string */
 		$templateRawCode = $this->cObj->fileResource(
 			$this->getConfValueString(
 				'templateFile',
@@ -87,51 +84,81 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 				$ignoreFlexform
 			)
 		);
-		$this->markerNames = $this->findMarkers($templateRawCode);
 
-		$subpartNames = $this->findSubparts($templateRawCode);
+		$this->processTemplate($templateRawCode);
+
+		return;
+	}
+
+	/**
+	 * Stores the given HTML template and retrieves all subparts, writing them
+	 * to $this->templateCache.
+	 *
+	 * The subpart names are automatically retrieved from $templateRawCode and
+	 * are used as array keys. For this, the ### are removed, but the names stay
+	 * uppercase.
+	 *
+	 * Example: The subpart ###MY_SUBPART### will be stored with the array key
+	 * 'MY_SUBPART'.
+	 *
+	 * Please note that each subpart may only occur once in the template.
+	 *
+	 * @param	string		the content of the HTML template
+	 *
+	 * @access	protected
+	 */
+	function processTemplate($templateRawCode) {
+		$this->templateCode = $templateRawCode;
+		$this->markerNames = $this->findMarkers();
+
+		$subpartNames = $this->findSubparts();
 
 		foreach ($subpartNames as $currentSubpartName) {
-			$this->templateCache[$currentSubpartName] = $this->cObj->getSubpart($templateRawCode, $currentSubpartName);
+			$this->templateCache[$currentSubpartName] = $this->cObj->getSubpart(
+				$templateRawCode,
+				$currentSubpartName
+			);
 		}
 
 		return;
 	}
 
 	/**
-	 * Finds all subparts within a template.
+	 * Finds all subparts within the current HTML template.
 	 * The subparts must be within HTML comments.
-	 *
-	 * @param	string		the whole template file as a string
 	 *
 	 * @return	array		a list of the subpart names (uppercase, without ###, e.g. 'MY_SUBPART')
 	 *
 	 * @access	protected
 	 */
-	function findSubparts($templateRawCode) {
+	function findSubparts() {
 		$matches = array();
-		preg_match_all('/<!-- *(###)([^#]+)(###)/', $templateRawCode, $matches);
+		preg_match_all(
+			'/<!-- *(###)([^#]+)(###)/',
+			$this->templateCode,
+			$matches
+		);
 
 		return array_unique($matches[2]);
 	}
 
 	/**
-	 * Finds all markers within a template.
+	 * Finds all markers within the current HTML template.
 	 * Note: This also finds subpart names.
 	 *
-	 * The result is one long string that is easy to process using regular expressions.
+	 * The result is one long string that is easy to process using regular
+	 * expressions.
 	 *
-	 * Example: If the markers ###FOO### and ###BAR### are found, the string "#FOO#BAR#" would be returned.
-	 *
-	 * @param	string		the whole template file as a string
+	 * Example: If the markers ###FOO### and ###BAR### are found, the string
+	 * "#FOO#BAR#" would be returned.
 	 *
 	 * @return	string		a list of markes as one long string, separated, prefixed and postfixed by '#'
 	 *
 	 * @access	private
 	 */
-	function findMarkers($templateRawCode) {
+	function findMarkers() {
 		$matches = array();
-		preg_match_all('/(###)([^#]+)(###)/', $templateRawCode, $matches);
+		preg_match_all('/(###)([^#]+)(###)/', $this->templateCode, $matches);
 
 		$markerNames = array_unique($matches[2]);
 
@@ -266,22 +293,27 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Multi substitution function with caching. Wrapper function for cObj->substituteMarkerArrayCached(),
-	 * using $this->markers and $this->subparts as defaults.
+	 * Multi substitution function with caching. Wrapper function for
+	 * cObj->substituteMarkerArrayCached(), using $this->markers and
+	 * $this->subparts as defaults.
 	 *
 	 * During the process, the following happens:
 	 * 1. $this->subpartsTohide will be removed
 	 * 2. for the other subparts, the subpart marker comments will be removed
 	 * 3. markes are replaced with their corresponding contents.
 	 *
-	 * @param	string		key of the subpart from $this->templateCache, e.g. 'LIST_ITEM' (without the ###)
+	 * This function either works on the subpart with the name $key or the
+	 * complete HTML template if $key is an empty string.
+	 *
+	 * @param	string		key of the subpart from $this->templateCache, e.g. 'LIST_ITEM' (without the ###), or an empty string to use the complete HTML template
+	 * @param	integer		recursion level when substituting subparts within subparts, use 0 to disable recursion
 	 *
 	 * @return	string		content stream with the markers replaced
 	 *
 	 * @access	protected
 	 */
-	function substituteMarkerArrayCached($key) {
-		if (!isset($this->templateCache[$key])) {
+	function substituteMarkerArrayCached($key = '', $recursionLevel = 0) {
+		if (($key != '') && !isset($this->templateCache[$key])) {
 			$this->setErrorMessage('The subpart <strong>'.$key.'</strong> is '
 				.'missing in the HTML template file <strong>'
 				.$this->getConfValueString(
@@ -295,14 +327,40 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 			);
 		}
 
+		$templateCode = ($key != '')
+			? $this->templateCache[$key] : $this->templateCode;
+
 		// remove subparts (lines) that will be hidden
-		$noHiddenSubparts = $this->cObj->substituteMarkerArrayCached($this->templateCache[$key], array(), $this->subpartsToHide);
+		$noHiddenSubparts = $this->cObj->substituteMarkerArrayCached(
+			$templateCode,
+			array(),
+			$this->subpartsToHide
+		);
+
+		if ($recursionLevel) {
+			$subparts = array();
+			foreach ($this->templateCache as $key => $content) {
+				$subparts[$key] = $this->substituteMarkerArrayCached(
+					$key,
+					$recursionLevel - 1
+				);
+			}
+		} else {
+			$subparts =& $this->templateCache;
+		}
 
 		// remove subpart markers by replacing the subparts with just their content
-		$noSubpartMarkers = $this->cObj->substituteMarkerArrayCached($noHiddenSubparts, array(), $this->templateCache);
+		$noSubpartMarkers = $this->cObj->substituteMarkerArrayCached(
+			$noHiddenSubparts,
+			array(),
+			$subparts
+		);
 
 		// replace markers with their content
-		return $this->cObj->substituteMarkerArrayCached($noSubpartMarkers, $this->markers);
+		return $this->cObj->substituteMarkerArrayCached(
+			$noSubpartMarkers,
+			$this->markers
+		);
 	}
 
 	/**

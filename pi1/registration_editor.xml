@@ -7,14 +7,19 @@
 			<formid>tx_seminars_pi1_registration_editor</formid>
 		</form>
 		<debug>false</debug>
-		<displaylabels>true</displaylabels>
+		<displaylabels>false</displaylabels>
 	</meta>
 	<control>
 		<datahandler:RAW>
 			<parentcallback>showConfirmationPage</parentcallback>
 		</datahandler:RAW>
-		<renderer:STANDARD>
-		</renderer:STANDARD>
+		<renderer:TEMPLATE>
+			<template>
+				<path>EXT:seminars/pi1/registration_editor.html</path>
+				<subpart>###REGISTRATION_EDITOR_STEP_1###</subpart>
+				<errortag>errors</errortag>
+			</template>
+		</renderer:TEMPLATE>
 	</control>
 
 	<elements>

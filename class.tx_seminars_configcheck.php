@@ -1118,8 +1118,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'accreditation_number',
 				'price_regular',
 				'price_special',
-				'vacancies',
-				'message'
+				'vacancies'
 			)
 		);
 
@@ -1169,7 +1168,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'checkboxes',
 				'notes',
 				'terms',
-				'terms_2',
+				'terms_2'
 			)
 		);
 

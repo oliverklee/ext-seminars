@@ -215,7 +215,7 @@ plugin.tx_seminars_pi1 {
 	omitDateIfSameAsPrevious = 0
 
 	# list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
-	eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies,message
+	eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
 	showRegistrationFields = price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,terms,terms_2

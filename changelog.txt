@@ -1,4 +1,5 @@
 0.5.0
+- Change: Switch the registration form from the default form renderer to HTML templates (#474)
 - Fix: Remove mod2/clear.gif (#642)
 - Fix: Remove all static calls to t3lib_pageSelect::enableFields() (#764)
 - Fix: Mod2: event list is displayed although the user is not allowed to access them (#637)

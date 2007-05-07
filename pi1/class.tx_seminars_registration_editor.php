@@ -98,6 +98,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function tx_seminars_registration_editor(&$plugin) {
 		$this->plugin =& $plugin;
+		$this->cObj =& $plugin->cObj;
 		$this->registrationManager =& $plugin->registrationManager;
 		$this->seminar =& $plugin->seminar;
 
@@ -166,13 +167,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function _render() {
-		$result = $this->oForm->_render();
-		// For the confirmation page, we need to reload the whole thing.
+		$rawForm = $this->oForm->_render();
+		// For the confirmation page, we need to reload the whole thing. Yet,
+		// the previous rendering still is necessary for processing the data.
 		if ($this->isConfirmationPage) {
 			$this->_initForms();
-			$result = $this->oForm->_render();
+			$rawForm = $this->oForm->_render();
 		}
-		return $result;
+
+		$this->processTemplate($rawForm);
+		$this->setLabels();
+		$this->hideUnusedFormFields();
+
+		return $this->substituteMarkerArrayCached('', 2);
 	}
 
 	/**
@@ -318,6 +325,97 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function hasRegistrationFormField($parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
+	}
+
+	/**
+	 * Checks whether a form field should be displayed (and evaluated) at all.
+	 * This is specified via TS setup (or flexforms) using the
+	 * "showRegistrationFields" variable.
+	 *
+	 * In addition, this function takes into account whether the form field
+	 * actually has any meaningful content.
+	 * Example: The payment methods field will be disabled if the current event
+	 * does not have any payment methods.
+	 *
+	 * After some refactoring, this function will replace the function
+	 * hasRegistrationFormField.
+	 *
+	 * @param	string		the key of the field to test, must not be empty
+	 *
+	 * @return	boolean		true if the current form field should be displayed, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isFormFieldEnabled($key) {
+		// Some containers cannot be enabled or disabled via TS setup, but
+		// are containers and depend on their content being displayed.
+		switch ($key) {
+			case 'payment':
+				$result = $this->isFormFieldEnabled('price')
+					|| $this->isFormFieldEnabled('method_of_payment')
+					|| $this->isFormFieldEnabled('banking_data');
+				break;
+			case 'banking_data':
+				$result = $this->isFormFieldEnabled('account_number')
+					|| $this->isFormFieldEnabled('account_owner')
+					|| $this->isFormFieldEnabled('bank_code')
+					|| $this->isFormFieldEnabled('bank_name');
+				break;
+			case 'billing_address':
+				// This fields actually can also be disabled via TS setup.
+				$result = isset($this->formFieldsToShow[$key])
+					&& (
+						$this->isFormFieldEnabled('gender')
+						|| $this->isFormFieldEnabled('name')
+						|| $this->isFormFieldEnabled('address')
+						|| $this->isFormFieldEnabled('zip')
+						|| $this->isFormFieldEnabled('city')
+						|| $this->isFormFieldEnabled('country')
+						|| $this->isFormFieldEnabled('telephone')
+						|| $this->isFormFieldEnabled('email')
+					);
+				break;
+			case 'more_seats':
+				$result = $this->isFormFieldEnabled('seats')
+					|| $this->isFormFieldEnabled('attendees_names')
+					|| $this->isFormFieldEnabled('kids');
+				break;
+			case 'lodging_and_food':
+				$result = $this->isFormFieldEnabled('accommodation')
+					|| $this->isFormFieldEnabled('food');
+				break;
+			case 'additional_information':
+				$result = $this->isFormFieldEnabled('interests')
+					|| $this->isFormFieldEnabled('expectations')
+					|| $this->isFormFieldEnabled('background_knowledge')
+					|| $this->isFormFieldEnabled('known_from')
+					|| $this->isFormFieldEnabled('notes');
+				break;
+			default:
+				$result = isset($this->formFieldsToShow[$key]);
+				break;
+		}
+
+		// Some fields depend on the availability of their data.
+		switch ($key) {
+			case 'method_of_payment':
+				$result &= $this->showMethodsOfPayment();
+				break;
+			case 'account_number':
+				// The fallthrough is intended.
+			case 'bank_code':
+				// The fallthrough is intended.
+			case 'bank_name':
+				// The fallthrough is intended.
+			case 'account_owner':
+				// The fallthrough is intended.
+				$result &= $this->seminar->hasAnyPrice();
+				break;
+			default:
+				break;
+		}
+
+		return $result;
 	}
 
 	/**
@@ -1037,6 +1135,68 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				= t3lib_div::makeInstance('tx_staticinfotables_pi1');
 			$this->staticInfo->init();
 		}
+
+		return;
+	}
+
+	/**
+	 * Hides form fields that are either disabled via TS setup or that have
+	 * nothing to select (e.g. if there are no payment methods) from the
+	 * templating process.
+	 *
+	 * @access	protected
+	 */
+	function hideUnusedFormFields() {
+		static $availableFormFields = array(
+				'payment',
+				'price',
+				'method_of_payment',
+				'banking_data',
+				'account_number',
+				'bank_code',
+				'bank_name',
+				'account_owner',
+				'billing_address',
+				'gender',
+				'name',
+				'address',
+				'zip',
+				'city',
+				'country',
+				'telephone',
+				'email',
+				'additional_information',
+				'interests',
+				'expectations',
+				'background_knowledge',
+				'lodging_and_food',
+				'accommodation',
+				'food',
+				'known_from',
+				'more_seats',
+				'seats',
+				'attendees_names',
+				'kids',
+				'lodgings',
+				'foods',
+				'checkboxes',
+				'notes',
+				'terms',
+				'terms_2',
+		);
+
+		$formFieldsToHide = array();
+
+		foreach ($availableFormFields as $key) {
+			if (!$this->isFormFieldEnabled($key)) {
+				$formFieldsToHide[$key] = $key;
+			}
+		}
+
+		$this->readSubpartsToHide(
+			implode(',', $formFieldsToHide),
+			'registration_wrapper'
+		);
 
 		return;
 	}

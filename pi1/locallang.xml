@@ -91,6 +91,7 @@
 			<label index="label_tutors">Tutors</label>
 			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
+			<label index="label_select_price">Price:</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_board_regular">Regular price including full board</label>
@@ -99,6 +100,7 @@
 			<label index="label_price_board_special">Special price including full board</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_paymentmethods">Available methods of payment</label>
+			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_organizers">Organizers</label>
 			<label index="label_vacancies">Vacancies</label>
@@ -113,31 +115,36 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
+			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_interests">Special interests:</label>
 			<label index="label_expectations">Expectations for the event:</label>
 			<label index="label_background_knowledge">Background knowledge:</label>
+			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
+			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
-			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_register_seats">Total number of seats to book:</label>
+			<label index="label_attendees_names">Names of additional persons to register:</label>
 			<label index="label_kids">Number of kids:</label>
+			<label index="label_legend_payment">Payment</label>
 			<label index="label_account_number">Account number:</label>
 			<label index="label_bank_code">Bank code:</label>
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
-			<label index="label_billing_address">Billing address:</label>
+			<label index="label_billing_address">Billing address</label>
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
-			<label index="label_name">Name</label>
-			<label index="label_address">Street</label>
-			<label index="label_zip">ZIP</label>
-			<label index="label_city">City</label>
-			<label index="label_country">Country</label>
-			<label index="label_telephone">Phone number</label>
-			<label index="label_email">E-mail address</label>
+			<label index="label_name">Name:</label>
+			<label index="label_address">Street:</label>
+			<label index="label_zip">ZIP:</label>
+			<label index="label_city">City:</label>
+			<label index="label_country">Country:</label>
+			<label index="label_telephone">Phone number:</label>
+			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging</label>
 			<label index="label_foods">Food</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
@@ -155,8 +162,6 @@
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
 			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
-			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
-			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
@@ -334,8 +339,6 @@
 			<label index="message_notLoggedIn_informal">Beklager, du skal være logget ind.</label>
 			<label index="message_pleaseLogIn_formal">Log ind for at se denne side.</label>
 			<label index="message_pleaseLogIn_informal">Log ind for at se denne side.</label>
-			<label index="message_registrationForm_formal">Hvis du har lyst, kan du intaste info omkring din tilmelding her:</label>
-			<label index="message_registrationForm_informal">Hvis du har lyst, kan du intaste info omkring din tilmelding her:</label>
 			<label index="message_noRegistrations">Der er ingen tilmeldinger til dette arrangement endnu.</label>
 			<label index="message_earlybird_price">Denne pris er gyldig og kan bookes frem til %s</label>
 			<label index="message_emptyTitle">Indtast en overskrift for dette arrangement.</label>
@@ -449,6 +452,7 @@
 			<label index="label_tutors">Kursbegleitung</label>
 			<label index="label_leaders">Kursleitung</label>
 			<label index="label_price_general">Preis</label>
+			<label index="label_select_price">Preis:</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_earlybird_regular">Frühbucherpreis</label>
 			<label index="label_price_board_regular">Standardpreis inklusive Vollpension</label>
@@ -457,6 +461,7 @@
 			<label index="label_price_board_special">Spezialpreis inklusive Vollpension</label>
 			<label index="label_total_price">Gesamtpreis</label>
 			<label index="label_paymentmethods">Mögliche Zahlungsarten</label>
+			<label index="label_select_paymentmethod">Zahlungsart:</label>
 			<label index="label_event_type">Veranstaltungsart</label>
 			<label index="label_organizers">Veranstalter</label>
 			<label index="label_vacancies">Freie Plätze</label>
@@ -471,31 +476,36 @@
 			<label index="label_edit">Bearbeiten</label>
 			<label index="label_back">Zur Übersicht</label>
 			<label index="label_save">Speichern</label>
+			<label index="label_register_additional_information">Weitere Informationen</label>
 			<label index="label_interests">Spezielle Interessen:</label>
 			<label index="label_expectations">Erwartungen an die Veranstaltung:</label>
 			<label index="label_background_knowledge">Vorkenntnisse:</label>
+			<label index="label_register_lodging_and_food">Unterbringung und Verpflegung</label>
 			<label index="label_accommodation">Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, keine Übernachtung):</label>
 			<label index="label_food">Welche Kost bevorzugen Sie (Normalkost, vegetarisch oder eine spezielle Diät):</label>
 			<label index="label_known_from">Wie haben Sie von dieser Veranstaltung erfahren?</label>
 			<label index="label_notes">Weitere Mitteilungen:</label>
+			<label index="label_register_additional_attendees">Weitere Personen anmelden</label>
 			<label index="label_seats">Plätze</label>
-			<label index="label_attendees_names">Zusätzlich angemeldete Personen:</label>
+			<label index="label_register_seats">Gesamtzahl der zu buchenden Plätze:</label>
+			<label index="label_attendees_names">Namen der zusätzlich anzumeldenden Personen:</label>
 			<label index="label_kids">Anzahl Kinder:</label>
+			<label index="label_legend_payment">Bezahlung</label>
 			<label index="label_account_number">Kontonummer:</label>
 			<label index="label_bank_code">Bankleitzahl:</label>
 			<label index="label_bank_name">Name der Bank:</label>
 			<label index="label_account_owner">Kontoinhaber:</label>
-			<label index="label_billing_address">Rechnungsadresse:</label>
+			<label index="label_billing_address">Rechnungsadresse</label>
 			<label index="label_gender">Anrede</label>
 			<label index="label_gender.I.0">Herr</label>
 			<label index="label_gender.I.1">Frau</label>
-			<label index="label_name">Name</label>
-			<label index="label_address">Straße</label>
-			<label index="label_zip">PLZ</label>
-			<label index="label_city">Ort</label>
-			<label index="label_country">Land</label>
-			<label index="label_telephone">Telefon</label>
-			<label index="label_email">E-Mail-Adresse</label>
+			<label index="label_name">Name:</label>
+			<label index="label_address">Straße:</label>
+			<label index="label_zip">PLZ:</label>
+			<label index="label_city">Ort:</label>
+			<label index="label_country">Land:</label>
+			<label index="label_telephone">Telefon:</label>
+			<label index="label_email">E-Mail:</label>
 			<label index="label_lodgings">Art der Unterbringung</label>
 			<label index="label_foods">Art der Verpflegung</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
@@ -513,8 +523,6 @@
 			<label index="message_notLoggedIn_informal">Du bist nicht eingeloggt.</label>
 			<label index="message_pleaseLogIn_formal">Bitte loggen Sie sich ein um diese Seite zu sehen.</label>
 			<label index="message_pleaseLogIn_informal">Bitte logge dich ein um diese Seite zu sehen.</label>
-			<label index="message_registrationForm_formal">Wenn Sie möchten, können Sie hier noch ein paar Daten zu Ihrer Anmeldung eintragen:</label>
-			<label index="message_registrationForm_informal">Wenn du möchtest, kannst du hier noch ein paar Daten zu deiner Anmeldung eintragen:</label>
 			<label index="message_noRegistrations">Für diese Veranstaltung liegen bisher noch keine Anmeldungen vor.</label>
 			<label index="message_earlybird_price">Preis gültig und buchbar bis %s</label>
 			<label index="message_emptyTitle">Bitte geben Sie einen Titel für die Veranstaltung ein.</label>
@@ -609,8 +617,6 @@
 			<label index="message_wrongSeminarNumber_formal">Er is een bijeenkomst bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link wilt u dan de webmaster hiervan op de hoogte brengen? Dank u!</label>
 			<label index="message_wrongSeminarNumber_informal">Een bijeenkomst met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
 			<label index="message_noResults">Sorry, op dit moment zijn er geen bijeenkomsten gevonden.</label>
-			<label index="message_registrationForm_formal">Wanneer u dat wilt kunt u bepaalde gegevens invullen ten behoeve van uw registratie:</label>
-			<label index="message_registrationForm_informal">Wanneer je dat wilt kunt je hier nog een paar opmerkingen met betrekking tot de registratie invullen:</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -745,7 +751,7 @@
 			<label index="label_bank_code">Код банка:</label>
 			<label index="label_bank_name">Название банка:</label>
 			<label index="label_account_owner">Владелец счета:</label>
-			<label index="label_billing_address">Адрес отправки счета:</label>
+			<label index="label_billing_address">Адрес отправки счета</label>
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
@@ -773,8 +779,6 @@
 			<label index="message_notLoggedIn_informal">Извините, вы не вошли в систему.</label>
 			<label index="message_pleaseLogIn_formal">Пожалуйста, войдите в систему чтобы просмотреть эту страницу.</label>
 			<label index="message_pleaseLogIn_informal">Пожалуйста, войдите в систему чтобы просмотреть эту страницу.</label>
-			<label index="message_registrationForm_formal">Вы можете ввести некоторые данные о вашей регистрации здесь:</label>
-			<label index="message_registrationForm_informal">Вы можете ввести некоторые данные о вашей регистрации здесь:</label>
 			<label index="message_noRegistrations">На это событие регистрация еще не открыта.</label>
 			<label index="message_earlybird_price">цена действительна до %s</label>
 			<label index="message_emptyTitle">Введите название события.</label>
@@ -928,8 +932,6 @@
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
-			<label index="message_registrationForm_formal" type="integer">194008229</label>
-			<label index="message_registrationForm_informal" type="integer">194008229</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="seminars.pi_flexform.topic_list" type="integer">105969965</label>
 			<label index="seminars.pi_flexform.event_editor" type="integer">243089187</label>
@@ -1117,6 +1119,7 @@
 			<label index="label_tutors" type="integer">102766940</label>
 			<label index="label_leaders" type="integer">45784650</label>
 			<label index="label_price_general" type="integer">56627526</label>
+			<label index="label_select_price" type="integer">254546606</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_earlybird_regular" type="integer">236870027</label>
 			<label index="label_price_board_regular" type="integer">122636477</label>
@@ -1125,6 +1128,7 @@
 			<label index="label_price_board_special" type="integer">56248635</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_paymentmethods" type="integer">119552142</label>
+			<label index="label_select_paymentmethod" type="integer">203383656</label>
 			<label index="label_event_type" type="integer">99114704</label>
 			<label index="label_organizers" type="integer">68798680</label>
 			<label index="label_vacancies" type="integer">99017107</label>
@@ -1139,31 +1143,36 @@
 			<label index="label_edit" type="integer">131916066</label>
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_save" type="integer">211601612</label>
+			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_interests" type="integer">236721406</label>
 			<label index="label_expectations" type="integer">159374040</label>
 			<label index="label_background_knowledge" type="integer">17742601</label>
+			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
 			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
+			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_seats" type="integer">187299883</label>
-			<label index="label_attendees_names" type="integer">198880077</label>
+			<label index="label_register_seats" type="integer">76212082</label>
+			<label index="label_attendees_names" type="integer">43575953</label>
 			<label index="label_kids" type="integer">7953511</label>
+			<label index="label_legend_payment" type="integer">205863499</label>
 			<label index="label_account_number" type="integer">15650306</label>
 			<label index="label_bank_code" type="integer">171550314</label>
 			<label index="label_bank_name" type="integer">204057381</label>
 			<label index="label_account_owner" type="integer">35539025</label>
-			<label index="label_billing_address" type="integer">75414087</label>
+			<label index="label_billing_address" type="integer">33277925</label>
 			<label index="label_gender" type="integer">161832899</label>
 			<label index="label_gender.I.0" type="integer">19351194</label>
 			<label index="label_gender.I.1" type="integer">43922038</label>
-			<label index="label_name" type="integer">77521672</label>
-			<label index="label_address" type="integer">224521181</label>
-			<label index="label_zip" type="integer">70553491</label>
-			<label index="label_city" type="integer">92079470</label>
-			<label index="label_country" type="integer">93787849</label>
-			<label index="label_telephone" type="integer">33039901</label>
-			<label index="label_email" type="integer">146136420</label>
+			<label index="label_name" type="integer">81871034</label>
+			<label index="label_address" type="integer">252788963</label>
+			<label index="label_zip" type="integer">234550549</label>
+			<label index="label_city" type="integer">201307921</label>
+			<label index="label_country" type="integer">258260574</label>
+			<label index="label_telephone" type="integer">130029308</label>
+			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">71303596</label>
 			<label index="label_foods" type="integer">10718834</label>
 			<label index="label_terms" type="integer">112775823</label>
@@ -1181,9 +1190,6 @@
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
 			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
-			<label index="message_registrationForm" type="integer">194008229</label>
-			<label index="message_registrationForm_informal" type="integer">194008229</label>
-			<label index="message_registrationForm_formal" type="integer">194008229</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
@@ -1278,9 +1284,6 @@
 			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
 			<label index="message_noResults" type="integer">15777293</label>
-			<label index="message_registrationForm" type="integer">194008229</label>
-			<label index="message_registrationForm_informal" type="integer">194008229</label>
-			<label index="message_registrationForm_formal" type="integer">194008229</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -1443,8 +1446,6 @@
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
 			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
-			<label index="message_registrationForm_formal" type="integer">194008229</label>
-			<label index="message_registrationForm_informal" type="integer">194008229</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
@@ -1608,6 +1609,7 @@
 			<label index="label_tutors">Tutors</label>
 			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
+			<label index="label_select_price">Price:</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_board_regular">Regular price including full board</label>
@@ -1616,6 +1618,7 @@
 			<label index="label_price_board_special">Special price including full board</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_paymentmethods">Available methods of payment</label>
+			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_organizers">Organizers</label>
 			<label index="label_vacancies">Vacancies</label>
@@ -1630,31 +1633,36 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
+			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_interests">Special interests:</label>
 			<label index="label_expectations">Expectations for the event:</label>
 			<label index="label_background_knowledge">Background knowledge:</label>
+			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
+			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
-			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_register_seats">Total number of seats to book:</label>
+			<label index="label_attendees_names">Names of additional persons to register:</label>
 			<label index="label_kids">Number of kids:</label>
+			<label index="label_legend_payment">Payment</label>
 			<label index="label_account_number">Account number:</label>
 			<label index="label_bank_code">Bank code:</label>
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
-			<label index="label_billing_address">Billing address:</label>
+			<label index="label_billing_address">Billing address</label>
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
-			<label index="label_name">Name</label>
-			<label index="label_address">Street</label>
-			<label index="label_zip">ZIP</label>
-			<label index="label_city">City</label>
-			<label index="label_country">Country</label>
-			<label index="label_telephone">Phone number</label>
-			<label index="label_email">E-mail address</label>
+			<label index="label_name">Name:</label>
+			<label index="label_address">Street:</label>
+			<label index="label_zip">ZIP:</label>
+			<label index="label_city">City:</label>
+			<label index="label_country">Country:</label>
+			<label index="label_telephone">Phone number:</label>
+			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging</label>
 			<label index="label_foods">Food</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
@@ -1672,8 +1680,6 @@
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
 			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
-			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
-			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
@@ -1777,8 +1783,6 @@
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
-			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
-			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="seminars.pi_flexform.topic_list">Topic List</label>
 			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
@@ -1829,7 +1833,7 @@
 			<label index="label_bank_code">Bank code:</label>
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
-			<label index="label_billing_address">Billing address:</label>
+			<label index="label_billing_address">Billing address</label>
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
@@ -2002,7 +2006,7 @@
 			<label index="label_bank_code">Bank code:</label>
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
-			<label index="label_billing_address">Billing address:</label>
+			<label index="label_billing_address">Billing address</label>
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
@@ -2030,8 +2034,6 @@
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
 			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
-			<label index="message_registrationForm_formal">If you like, you can enter some data for your registration here:</label>
-			<label index="message_registrationForm_informal">If you like, you can enter some data for your registration here:</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
