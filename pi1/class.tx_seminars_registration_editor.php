@@ -559,11 +559,15 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the already entered registration data nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
+	 * @param	array		(unused)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	object		the current FORMidable object
+	 *
 	 * @return	string		the already entered registration data, nicely formatted as HTML
 	 *
 	 * @access	public
 	 */
-	function getRegistrationData() {
+	function getRegistrationData($unused, $parameters, $form) {
 		$result = '';
 
 		$formData = $form->oDataHandler->__aFormData;
@@ -665,14 +669,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the already entered billing address nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
+	 * @param	array		(unused)
+	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	object		the current FORMidable object
+	 *
 	 * @return	string		the already entered registration data, nicely formatted as HTML
 	 *
 	 * @access	public
 	 */
-	function getBillingAddress() {
+	function getBillingAddress($unused, $parameters, $form) {
 		$result = '';
 
-		$formData = $this->oForm->oDataHandler->__aFormData;
+		$formData = $form->oDataHandler->__aFormData;
 
 		foreach ($this->fieldsInBillingAddress as $currentKey => $hasLabel) {
 			$currentFormData = $formData[$currentKey];
