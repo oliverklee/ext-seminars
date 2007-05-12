@@ -218,7 +218,7 @@
 			<label index="tx_seminars_seminars.object_type">Typ</label>
 			<label index="tx_seminars_seminars.object_type.I.0">Einzel-Veranstaltung</label>
 			<label index="tx_seminars_seminars.object_type.I.1">Veranstaltungsreihe: Thema</label>
-			<label index="tx_seminars_seminars.object_type.I.2">Veranstaltungsreihe: Datum</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Veranstaltungsreihe: Termin</label>
 			<label index="tx_seminars_seminars.topic">Thema</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name</label>
