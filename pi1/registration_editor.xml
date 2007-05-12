@@ -24,7 +24,6 @@
 
 	<elements>
 		<renderlet:LISTBOX name="price">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_price_general</label>
 			<data>
 				<userobj>
 					<extension>this</extension>
@@ -52,7 +51,6 @@
 		</renderlet:LISTBOX>
 
 		<renderlet:RADIOBUTTON name="method_of_payment">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_paymentmethods</label>
 			<data>
 				<userobj>
 					<extension>this</extension>
@@ -83,7 +81,6 @@
 		</renderlet:RADIOBUTTON>
 
 		<renderlet:TEXT name="account_number">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_account_number</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -115,7 +112,6 @@
 			</process>
 		</renderlet:TEXT>
 		<renderlet:TEXT name="bank_code">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_bank_code</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -147,7 +143,6 @@
 			</process>
 		</renderlet:TEXT>
 		<renderlet:TEXT name="bank_name">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_bank_name</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -179,7 +174,6 @@
 			</process>
 		</renderlet:TEXT>
 		<renderlet:TEXT name="account_owner">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_account_owner</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -209,7 +203,6 @@
 		</renderlet:TEXT>
 
 		<renderlet:LISTBOX name="gender">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_gender</label>
 			<data>
 				<items>
 					<item caption="LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.0" value ="0" />
@@ -236,7 +229,6 @@
 			</process>
 		</renderlet:LISTBOX>
 		<renderlet:TEXT name="name">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_name</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -259,7 +251,6 @@
 			</process>
 		</renderlet:TEXT>
 		<renderlet:TEXTAREA name="address">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_address</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -282,7 +273,6 @@
 			</process>
 		</renderlet:TEXTAREA>
 		<renderlet:TEXT name="zip">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_zip</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -305,7 +295,6 @@
 			</process>
 		</renderlet:TEXT>
 		<renderlet:TEXT name="city">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_city</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -328,7 +317,6 @@
 			</process>
 		</renderlet:TEXT>
 		<renderlet:LISTBOX name="country">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_country</label>
 			<data>
 				<userobj>
 					<extension>this</extension>
@@ -355,7 +343,6 @@
 			</process>
 		</renderlet:LISTBOX>
 		<renderlet:TEXT name="telephone">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_telephone</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -378,7 +365,6 @@
 			</process>
 		</renderlet:TEXT>
 		<renderlet:TEXT name="email">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_email</label>
 			<data>
 				<defaultvalue>
 					<userobj>
@@ -402,7 +388,6 @@
 		</renderlet:TEXT>
 
 		<renderlet:TEXT name="seats">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_seats</label>
 			<data>
 				<defaultvalue>1</defaultvalue>
 			</data>
@@ -433,7 +418,6 @@
 		</renderlet:TEXT>
 
 		<renderlet:TEXTAREA name="attendees_names">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_attendees_names</label>
 			<validators>
 				<validator:STANDARD>
 					<userobj>
@@ -455,7 +439,6 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:TEXT name="kids">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_kids</label>
 			<validators>
 				<validator:PREG>
 					<pattern>
@@ -476,7 +459,6 @@
 		</renderlet:TEXT>
 
 		<renderlet:TEXTAREA name="interests">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_interests</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -489,7 +471,6 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:TEXTAREA name="expectations">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_expectations</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -502,7 +483,6 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:TEXTAREA name="background_knowledge">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_background_knowledge</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -515,7 +495,6 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:TEXTAREA name="accommodation">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_accommodation</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -528,7 +507,6 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:TEXTAREA name="food">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_food</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -541,7 +519,6 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:TEXTAREA name="known_from">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_known_from</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -554,7 +531,6 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:TEXTAREA name="notes">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_notes</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -566,7 +542,7 @@
 			</process>
 		</renderlet:TEXTAREA>
 
-		<renderlet:SUBMIT name="btnsubmit">
+		<renderlet:SUBMIT name="button_continue">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_proceed_registration</label>
 		</renderlet:SUBMIT>
 

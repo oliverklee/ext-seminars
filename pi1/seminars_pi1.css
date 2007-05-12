@@ -10,6 +10,11 @@
   font-weight: bold;
 }
 
+.tx-seminars-pi1-hidden {
+	display: none;
+	visibility: hidden;
+}
+
 .tx-seminars-pi1-listrow table {
   background-color: #fff;
   color: #000;
@@ -132,15 +137,12 @@ th.tx-seminars-pi1-title {
 	height: 6em;
 }
 
-
-#tx-seminars-pi1-registration-form
-	#tx-seminars-pi1-registration-banking-data input {
+#tx-seminars-pi1-registration-form #tx-seminars-pi1-registration-banking-data input {
 	width: 14em;
 }
 
-
 #tx-seminars-pi1-registration-form
-	.tx-seminars-pi1-registration-payment-method input {
+	.tx-seminars-pi1-checkbox input {
 	width: auto;
 }
 

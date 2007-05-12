@@ -22,7 +22,7 @@
 		<dt>
 			<label>###LABEL_SELECT_PAYMENTMETHOD###</label>
 		</dt>
-		<dd class="tx-seminars-pi1-registration-payment-method">
+		<dd class="tx-seminars-pi1-checkbox">
 			{method_of_payment}
 		</dd>
 	</dl>
@@ -292,8 +292,133 @@
 <!-- ###REGISTRATION_WRAPPER_ADDITIONAL_INFORMATION### -->
 
 <dl>
-	<dd class="tx-seminars-pi1-submit">{btnsubmit}</dd>
+	<dd class="tx-seminars-pi1-submit">{button_continue}</dd>
 </dl>
 
 </div>
 <!-- ###REGISTRATION_EDITOR_STEP_1### -->
+
+
+
+
+<!-- ###REGISTRATION_EDITOR_STEP_2### -->
+<div id="tx-seminars-pi1-registration-form">
+<p class="tx-seminars-pi1-error">
+	{errors}
+</p>
+
+<!-- ###REGISTRATION_WRAPPER_LODGING_AND_FOOD_2### -->
+<fieldset>
+	<legend>###LABEL_REGISTER_LODGING_AND_FOOD###</legend>
+
+	<dl>
+<!-- ###REGISTRATION_WRAPPER_LODGINGS### -->
+		<dt>
+			<label for="tx_seminars_pi1_registration_editor[lodgings]">
+				###LABEL_LODGINGS###
+			</label>
+		</dt>
+		<dd class="tx-seminars-pi1-checkbox">
+			{lodgings}
+		</dd>
+<!-- ###REGISTRATION_WRAPPER_LODGINGS### -->
+
+<!-- ###REGISTRATION_WRAPPER_FOODS### -->
+		<dt>
+			<label for="tx_seminars_pi1_registration_editor[foods]">
+				###LABEL_FOODS###
+			</label>
+		</dt>
+		<dd class="tx-seminars-pi1-checkbox">
+			{foods}
+		</dd>
+<!-- ###REGISTRATION_WRAPPER_FOODS### -->
+	</dl>
+</fieldset>
+<!-- ###REGISTRATION_WRAPPER_LODGING_AND_FOOD_2### -->
+
+<!-- ###REGISTRATION_WRAPPER_CHECKBOXES### -->
+<fieldset>
+	<legend>###LABEL_REGISTER_ADDITIONAL_INFORMATION###</legend>
+
+	<dl>
+		<dd class="tx-seminars-pi1-checkbox">
+			{checkboxes}
+		</dd>
+	</dl>
+</fieldset>
+<!-- ###REGISTRATION_WRAPPER_CHECKBOXES### -->
+
+<!-- ###REGISTRATION_WRAPPER_ENTERED_DATA### -->
+<fieldset>
+	<legend>###LABEL_REGISTER_ENTERED_DATA###</legend>
+
+<!-- ###REGISTRATION_WRAPPER_FEUSER_DATA### -->
+		{feuser_data}
+<!-- ###REGISTRATION_WRAPPER_FEUSER_DATA### -->
+
+<!-- ###REGISTRATION_WRAPPER_BILLING_DATA### -->
+		{billing_address}
+<!-- ###REGISTRATION_WRAPPER_BILLING_DATA### -->
+
+<!-- ###REGISTRATION_WRAPPER_REGISTRATION_DATA### -->
+		{registration_data}
+<!-- ###REGISTRATION_WRAPPER_REGISTRATION_DATA### -->
+</fieldset>
+<!-- ###REGISTRATION_WRAPPER_ENTERED_DATA### -->
+
+<!-- ###REGISTRATION_WRAPPER_ALL_TERMS### -->
+<fieldset>
+<!-- ###REGISTRATION_WRAPPER_TERMS### -->
+	<legend>###LABEL_REGISTER_ALL_TERMS###</legend>
+
+	<p class="tx-seminars-pi1-checkbox">
+		{terms} <label for="tx_seminars_pi1_registration_editor[terms]">###LABEL_TERMS###</label>
+	</p>
+<!-- ###REGISTRATION_WRAPPER_TERMS### -->
+
+<!-- ###REGISTRATION_WRAPPER_TRAVELING_TERMS### -->
+	<p class="tx-seminars-pi1-checkbox">
+		{terms_2} <label for="tx_seminars_pi1_registration_editor[terms_2]">###LABEL_TERMS_2###</label>
+	</p>
+<!-- ###REGISTRATION_WRAPPER_TRAVELING_TERMS### -->
+</fieldset>
+<!-- ###REGISTRATION_WRAPPER_ALL_TERMS### -->
+
+<dl>
+	<dd class="tx-seminars-pi1-submit">
+		{button_back}
+		{button_submit}
+	</dd>
+</dl>
+
+</div>
+
+<div class="tx-seminars-pi1-hidden">
+	{price}
+	{method_of_payment}
+	{account_number}
+	{bank_code}
+	{bank_name}
+	{account_owner}
+	{gender}
+	{name}
+	{address}
+	{zip}
+	{city}
+	{country}
+	{telephone}
+	{email}
+	{seats}
+	{attendees_names}
+	{kids}
+	{interests}
+	{expectations}
+	{background_knowledge}
+	{accommodation}
+	{food}
+	{known_from}
+	{notes}
+</div>
+<!-- ###REGISTRATION_EDITOR_STEP_2### -->
+

@@ -7,14 +7,19 @@
 			<formid>tx_seminars_pi1_registration_editor</formid>
 		</form>
 		<debug>false</debug>
-		<displaylabels>true</displaylabels>
+		<displaylabels>false</displaylabels>
 	</meta>
 	<control>
 		<datahandler:RAW>
 			<parentcallback>processRegistration</parentcallback>
 		</datahandler:RAW>
-		<renderer:STANDARD>
-		</renderer:STANDARD>
+		<renderer:TEMPLATE>
+			<template>
+				<path>EXT:seminars/pi1/registration_editor.html</path>
+				<subpart>###REGISTRATION_EDITOR_STEP_2###</subpart>
+				<errortag>errors</errortag>
+			</template>
+		</renderer:TEMPLATE>
 		<actionlets>
 			<actionlet:REDIRECT>
 				<url>
@@ -62,7 +67,6 @@
 		</renderlet:LABEL>
 
 		<renderlet:CHECKBOX name="lodgings">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_lodgings</label>
 			<data>
 				<userobj>
 					<extension>this</extension>
@@ -87,7 +91,6 @@
 		</renderlet:CHECKBOX>
 
 		<renderlet:CHECKBOX name="foods">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_foods</label>
 			<data>
 				<userobj>
 					<extension>this</extension>
@@ -127,7 +130,6 @@
 		</renderlet:CHECKBOX>
 
 		<renderlet:CHECKSINGLE name="terms">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -149,7 +151,6 @@
 		</renderlet:CHECKSINGLE>
 
 		<renderlet:CHECKSINGLE name="terms_2">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_terms_2</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -167,11 +168,11 @@
 			</validators>
 		</renderlet:CHECKSINGLE>
 
-		<renderlet:SUBMIT name="btncont">
+		<renderlet:SUBMIT name="button_back">
 			<refresh />
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_back_registration</label>
 		</renderlet:SUBMIT>
-		<renderlet:SUBMIT name="btnsubmit">
+		<renderlet:SUBMIT name="button_submit">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_submit_registration</label>
 		</renderlet:SUBMIT>
 

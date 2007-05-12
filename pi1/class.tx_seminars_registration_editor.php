@@ -384,12 +384,36 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				$result = $this->isFormFieldEnabled('accommodation')
 					|| $this->isFormFieldEnabled('food');
 				break;
+			case 'lodging_and_food_2':
+				// TODO: Combine this with the former case (bug 564).
+				$result = $this->isFormFieldEnabled('lodgings')
+					|| $this->isFormFieldEnabled('foods');
+				break;
 			case 'additional_information':
 				$result = $this->isFormFieldEnabled('interests')
 					|| $this->isFormFieldEnabled('expectations')
 					|| $this->isFormFieldEnabled('background_knowledge')
 					|| $this->isFormFieldEnabled('known_from')
 					|| $this->isFormFieldEnabled('notes');
+				break;
+			case 'entered_data':
+				$result = $this->isFormFieldEnabled('feuser_data')
+					|| $this->isFormFieldEnabled('billing_address')
+					|| $this->isFormFieldEnabled('registration_data');
+				break;
+			case 'all_terms':
+				$result = $this->isFormFieldEnabled('terms')
+					|| $this->isFormFieldEnabled('terms_2');
+				break;
+			case 'traveling_terms':
+				// "traveling_terms" is an alias for "terms_2" which we use to
+				// avoid the problem that subpart names need to be prefix-free.
+				$result = $this->isFormFieldEnabled('terms_2');
+				break;
+			case 'billing_data':
+				// "billing_data" is an alias for "billing_address" which we use
+				// to prevent two subparts from having the same name.
+				$result = $this->isFormFieldEnabled('billing_address');
 				break;
 			default:
 				$result = isset($this->formFieldsToShow[$key]);
@@ -408,8 +432,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			case 'bank_name':
 				// The fallthrough is intended.
 			case 'account_owner':
-				// The fallthrough is intended.
 				$result &= $this->seminar->hasAnyPrice();
+				break;
+			case 'lodgings':
+				$result &= $this->hasLodgings();
+				break;
+			case 'foods':
+				$result &= $this->hasFoods();
+				break;
+			case 'checkboxes':
+				$result &= $this->hasCheckboxes();
+				break;
+			case 'terms_2':
+				$result &= $this->isTerms2Enabled();
 				break;
 			default:
 				break;
@@ -543,7 +578,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$value = htmlspecialchars($userData[$currentKey]);
 			if ($hasLabel) {
 				$value = $this->plugin->pi_getLL('label_'.$currentKey)
-					.': '.$value;
+					.' '.$value;
 			}
 			$this->plugin->setMarkerContent(
 				'user_'.$currentKey,
@@ -700,7 +735,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				if ($hasLabel) {
 					$processedFormData
 						= $this->plugin->pi_getLL('label_'.$currentKey)
-							.': '.$processedFormData;
+							.' '.$processedFormData;
 				}
 
 				$result .= $processedFormData.'<br />';
@@ -1165,6 +1200,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				'bank_name',
 				'account_owner',
 				'billing_address',
+				'billing_data',
 				'gender',
 				'name',
 				'address',
@@ -1178,6 +1214,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				'expectations',
 				'background_knowledge',
 				'lodging_and_food',
+				'lodging_and_food_2',
 				'accommodation',
 				'food',
 				'known_from',
@@ -1189,8 +1226,13 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				'foods',
 				'checkboxes',
 				'notes',
+				'entered_data',
+				'feuser_data',
+				'registration_data',
+				'all_terms',
 				'terms',
 				'terms_2',
+				'traveling_terms'
 		);
 
 		$formFieldsToHide = array();

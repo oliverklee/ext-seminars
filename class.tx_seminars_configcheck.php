@@ -1167,6 +1167,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'foods',
 				'checkboxes',
 				'notes',
+				'feuser_data',
+				'billing_address',
+				'registration_data',
 				'terms',
 				'terms_2'
 			)

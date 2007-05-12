@@ -145,11 +145,14 @@
 			<label index="label_country">Country:</label>
 			<label index="label_telephone">Phone number:</label>
 			<label index="label_email">E-mail address:</label>
-			<label index="label_lodgings">Lodging</label>
-			<label index="label_foods">Food</label>
+			<label index="label_lodgings">Lodging:</label>
+			<label index="label_foods">Food:</label>
+			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data_informal">Your registration data</label>
+			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_terms_2">I accept the terms for travelling.</label>
-			<label index="label_submit_registration">Finish registration</label>
+			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
@@ -506,15 +509,18 @@
 			<label index="label_country">Land:</label>
 			<label index="label_telephone">Telefon:</label>
 			<label index="label_email">E-Mail:</label>
-			<label index="label_lodgings">Art der Unterbringung</label>
-			<label index="label_foods">Art der Verpflegung</label>
+			<label index="label_lodgings">Art der Unterbringung:</label>
+			<label index="label_foods">Art der Verpflegung:</label>
+			<label index="label_register_entered_data_formal">Ihre Anmeldungsdaten</label>
+			<label index="label_register_entered_data_informal">Deine Anmeldungsdaten</label>
+			<label index="label_register_all_terms">Anmeldebedingungen</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_terms_2">Ich akzeptiere die Reisebedingungen.</label>
-			<label index="label_submit_registration">Verbindlich anmelden</label>
+			<label index="label_submit_registration">Anmeldung abschicken</label>
 			<label index="label_proceed_registration">Weiter</label>
 			<label index="label_back_registration">Zurück</label>
-			<label index="label_your_user_data_formal">Ihre Adressdaten:</label>
-			<label index="label_your_user_data_informal">Deine Adressdaten:</label>
+			<label index="label_your_user_data_formal">Ihre Adressdaten</label>
+			<label index="label_your_user_data_informal">Deine Adressdaten</label>
 			<label index="label_selected_paymentmethod">Gewählte Zahlungsart:</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
@@ -1173,11 +1179,14 @@
 			<label index="label_country" type="integer">258260574</label>
 			<label index="label_telephone" type="integer">130029308</label>
 			<label index="label_email" type="integer">126760538</label>
-			<label index="label_lodgings" type="integer">71303596</label>
-			<label index="label_foods" type="integer">10718834</label>
+			<label index="label_lodgings" type="integer">100712032</label>
+			<label index="label_foods" type="integer">253668178</label>
+			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data_informal" type="integer">250390933</label>
+			<label index="label_register_all_terms" type="integer">246270935</label>
 			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_terms_2" type="integer">6400727</label>
-			<label index="label_submit_registration" type="integer">88697193</label>
+			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
@@ -1663,11 +1672,14 @@
 			<label index="label_country">Country:</label>
 			<label index="label_telephone">Phone number:</label>
 			<label index="label_email">E-mail address:</label>
-			<label index="label_lodgings">Lodging</label>
-			<label index="label_foods">Food</label>
+			<label index="label_lodgings">Lodging:</label>
+			<label index="label_foods">Food:</label>
+			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data_informal">Your registration data</label>
+			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_terms_2">I accept the terms for travelling.</label>
-			<label index="label_submit_registration">Finish registration</label>
+			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
