@@ -30,11 +30,7 @@
 
 // In case we're on the back end, PATH_tslib isn't defined yet.
 if (!defined('PATH_tslib')) {
-	if (@is_dir(PATH_site.'typo3/sysext/cms/tslib/')) {
-		define('PATH_tslib', PATH_site.'typo3/sysext/cms/tslib/');
-	} elseif (@is_dir(PATH_site.'tslib/')) {
-		define('PATH_tslib', PATH_site.'tslib/');
-	}
+	define('PATH_tslib', t3lib_extMgm::extPath('cms').'tslib/');
 }
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
