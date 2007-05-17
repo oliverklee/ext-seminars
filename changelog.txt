@@ -8,7 +8,7 @@
 - Feature: Check for overlapping events on registration (#762)
 - Feature: Add tx_seminars_place and tx_seminars_placebag classes (#767)
 - Change: Put some of the date- and time methods into a separate class (#766)
-- Change: Make more fields in the BE excludefields (#759)
+- Change: Make more fields in the BE excludefields (#759, #810), second patch by Stefan Galinski
 - Change: Add labels "telephone" and "E-mail address" on the second registration page and in the thank-you e-mail (#755)
 - Change: Allow up to 9999 vacancies (#756)
 - Change: When prefilling the country field, also use static_info_country from fe_users (#754)
