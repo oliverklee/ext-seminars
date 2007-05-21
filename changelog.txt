@@ -112,7 +112,7 @@
 - Change: HTML output of speakers and organizers in list view (#421)
 - Change: Switch the registration from frontendformslib to FORMidable (#433)
 - Feature: Allow to edit existing seminars (#309)
-- Feature: Allow to enter an event in the FE (#307)
+- Feature: Allow to enter an event in the FE (#307, #821)
 - Feature: List of the events a FE user has entered (#309)
 - Fix: Deletion of content elements in front-end editing mode fails (#322)
 - Change: Rename the registration link from "register online" to "register now" (#405)

@@ -4,6 +4,11 @@
   height: 1px;
 }
 
+.tx-seminars-pi1-event-editor textarea {
+	width: 30em;
+	height: 15em;
+}
+
 .tx-seminars-pi1-error {
   color: #f00;
   background-color: inherit;
