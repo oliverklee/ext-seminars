@@ -153,6 +153,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	);
 
 	/**
+	 * An array of hook objects for this class.
+	 */
+	var $hookObjects = array();
+
+	/**
 	 * Displays the seminar manager HTML.
 	 *
 	 * @param	string		default content string, ignore
@@ -169,6 +174,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->getTemplateCode();
 		$this->setLabels();
 		$this->setCSS();
+		$this->getHookObjects();
 
 		// include CSS in header of page
 		if ($this->hasConfValueString('cssFile', 's_template_special')) {
@@ -838,6 +844,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						.'registration,list_registrations,eventsnextday',
 					'field_wrapper'
 				);
+			}
+
+			// modify single view hook
+			foreach ($this->hookObjects as $hookObject) {
+				if (method_exists($hookObject, 'modifySingleView')) {
+					$hookObject->modifySingleView($this);
+				}
 			}
 
 			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
@@ -1892,6 +1905,22 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$countdownValue,
 			$countdownText
 		);
+	}
+
+	/**
+	 * Gets all hook objects for this class.
+	 *
+	 * @access	private
+	 */
+	function getHookObjects() {
+		$extensionConfiguration =& $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+		$hooks =& $extensionConfiguration['seminars/pi1/class.tx_seminars_pi1.php']['hooks'];
+		if (is_array($hooks)) {
+			foreach ($hooks as $classReference) {
+				$this->hookObjects[] = t3lib_div::getUserObj($classReference);
+			}
+		}
+		return;
 	}
 }
 
