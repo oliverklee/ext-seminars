@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<formidable version="0.5.0">
-	<includexml>
-		<path>EXT:seminars/pi1/form_header.xml</path>
-		<dynaxml><marker><name>entity</name><value>seminars</value></marker></dynaxml>
-	</includexml>
-
+<formidable version="0.7.0">
+	<meta>
+		<name>Seminar Manager FE Editor</name>
+		<description>This editor provides a FE editing feature for events.</description>
+		<form>
+			<formid>tx_seminars_pi1_seminars</formid>
+		</form>
+		<debug>false</debug>
+		<displaylabels>true</displaylabels>
+	</meta>
+	<control>
+		<datahandler:DBMM>
+			<tablename>tx_seminars_seminars</tablename>
+			<keyname>uid</keyname>
+			<labelname>title</labelname>
+			<mmrelations>
+				<relation field="place" mmtable="tx_seminars_seminars_place_mm" />
+				<relation field="speakers" mmtable="tx_seminars_seminars_speakers_mm" />
+			</mmrelations>
+		</datahandler:DBMM>
+		<renderer:TEMPLATE>
+			<template>
+				<path>EXT:seminars/pi1/seminars_pi1.tmpl</path>
+				<subpart>###seminars_FORM###</subpart>
+				<errortag>errors</errortag>
+			</template>
+		</renderer:TEMPLATE>
+		<actionlets>
+			<actionlet:REDIRECT>
+				<url>
+					<userobj>
+						<extension>this</extension>
+						<method>getEventSuccessfullySavedUrl</method>
+					</userobj>
+				</url>
+			</actionlet:REDIRECT>
+		</actionlets>
+	</control>
 	<elements>
 		<renderlet:TEXT name="title">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.title</label>
 			<validators>
 				<validator:STANDARD>
 					<required>
-						<value>true</value>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_emptyTitle</message>
 					</required>
 				</validator:STANDARD>
@@ -29,7 +60,6 @@
 		<renderlet:LISTBOX name="event_type">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.event_type</label>
 			<data>
-				<defaultvalue />
 				<items>
 					<item>
 						<caption>&amp;nbsp;</caption>
@@ -51,69 +81,37 @@
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.credit_points</label>
 		</renderlet:TEXT>
 
-		<renderlet:DATETIME name="begin_date">
+		<renderlet:DATE name="begin_date">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.begin_date</label>
 			<data>
-				<datetime>
-					<converttotimestamp>true</converttotimestamp>
-					<format>
-						<userobj>
-							<extension>this</extension>
-							<method>getDateFormat</method>
-						</userobj>
-					</format>
-					<displaytime>true</displaytime>
-				</datetime>
+				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
+					converttotimestamp="true" />
 			</data>
-		</renderlet:DATETIME>
+		</renderlet:DATE>
 
-		<renderlet:DATETIME name="end_date">
+		<renderlet:DATE name="end_date">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.end_date</label>
 			<data>
-				<datetime>
-					<converttotimestamp>true</converttotimestamp>
-					<format>
-						<userobj>
-							<extension>this</extension>
-							<method>getDateFormat</method>
-						</userobj>
-					</format>
-					<displaytime>true</displaytime>
-				</datetime>
+				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
+					converttotimestamp="true" />
 			</data>
-		</renderlet:DATETIME>
+		</renderlet:DATE>
 
-		<renderlet:DATETIME name="deadline_registration">
+		<renderlet:DATE name="deadline_registration">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.deadline_registration</label>
 			<data>
-				<datetime>
-					<converttotimestamp>true</converttotimestamp>
-					<format>
-						<userobj>
-							<extension>this</extension>
-							<method>getDateFormat</method>
-						</userobj>
-					</format>
-					<displaytime>true</displaytime>
-				</datetime>
+				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
+					converttotimestamp="true" />
 			</data>
-		</renderlet:DATETIME>
+		</renderlet:DATE>
 
-		<renderlet:DATETIME name="deadline_early_bird">
+		<renderlet:DATE name="deadline_early_bird">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.deadline_early_bird</label>
 			<data>
-				<datetime>
-					<converttotimestamp>true</converttotimestamp>
-					<format>
-						<userobj>
-							<extension>this</extension>
-							<method>getDateFormat</method>
-						</userobj>
-					</format>
-					<displaytime>true</displaytime>
-				</datetime>
+				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
+					converttotimestamp="true" />
 			</data>
-		</renderlet:DATETIME>
+		</renderlet:DATE>
 
 		<renderlet:CHECKBOX name="place">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.place</label>
@@ -207,44 +205,23 @@
 			</data>
 			<validators>
 				<validator:STANDARD>
-					<required>
-						<value>true</value>
+					<userobj>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_emptyOrganizer</message>
-					</required>
+						<php><![CDATA[
+							$value = array_pop(func_get_args());
+							return (!empty($value));
+						]]></php>
+					</userobj>
 				</validator:STANDARD>
 			</validators>
 		</renderlet:CHECKBOX>
 
 		<renderlet:CHECKSINGLE name="needs_registration">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.needs_registration</label>
-			<data>
-				<defaultvalue>
-					<userobj>
-						<params>
-							<data name="defaultvalue" value="1" />
-							<data name="elementname" value="needs_registration" />
-						</params>
-						<extension>this</extension>
-						<method>setCheckboxValue</method>
-					</userobj>
-				</defaultvalue>
-			</data>
 		</renderlet:CHECKSINGLE>
 
 		<renderlet:CHECKSINGLE name="allows_multiple_registrations">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.allows_multiple_registrations</label>
-			<data>
-				<defaultvalue>
-					<userobj>
-						<params>
-							<data name="defaultvalue" value="0" />
-							<data name="elementname" value="allows_multiple_registrations" />
-						</params>
-						<extension>this</extension>
-						<method>setCheckboxValue</method>
-					</userobj>
-				</defaultvalue>
-			</data>
 		</renderlet:CHECKSINGLE>
 
 		<renderlet:TEXT name="attendees_min">
@@ -273,49 +250,39 @@
 
 		<renderlet:CHECKSINGLE name="cancelled">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.cancelled</label>
-			<data>
-				<defaultvalue>
-					<userobj>
-						<params>
-							<data name="defaultvalue" value="0" />
-							<data name="elementname" value="cancelled" />
-						</params>
-						<extension>this</extension>
-						<method>setCheckboxValue</method>
-					</userobj>
-				</defaultvalue>
-			</data>
 		</renderlet:CHECKSINGLE>
+
+		<renderlet:SUBMIT name="btnsubmit">
+			<label>LLL:EXT:seminars/pi1/locallang.php:label_save</label>
+		</renderlet:SUBMIT>
 
 		<renderlet:PASSTHRU name="owner_feuser">
 			<data>
-				<defaultvalue>CURRENT_USERID</defaultvalue>
+				<value>CURRENT_USERID</value>
 			</data>
 		</renderlet:PASSTHRU>
 
 		<renderlet:PASSTHRU name="crdate">
 			<data>
-				<defaultvalue>CURRENT_TIMESTAMP</defaultvalue>
+				<value>CURRENT_TIMESTAMP</value>
 			</data>
 		</renderlet:PASSTHRU>
 
 		<renderlet:PASSTHRU name="tstamp">
 			<data>
-				<defaultvalue>CURRENT_TIMESTAMP</defaultvalue>
+				<value>CURRENT_TIMESTAMP</value>
 			</data>
 		</renderlet:PASSTHRU>
 
 		<renderlet:PASSTHRU name="pid">
 			<data>
-				<defaultvalue>
+				<value>
 					<userobj>
 						<extension>this</extension>
 						<method>getPidForNewEvents</method>
 					</userobj>
-				</defaultvalue>
+				</value>
 			</data>
 		</renderlet:PASSTHRU>
 	</elements>
-
-	<includexml>EXT:seminars/pi1/form_validation.xml</includexml>
 </formidable>

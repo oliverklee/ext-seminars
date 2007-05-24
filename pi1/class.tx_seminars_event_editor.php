@@ -31,7 +31,6 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('ameos_formidable').'api/class.tx_ameosformidable.php');
 
 class tx_seminars_event_editor extends tx_seminars_templatehelper {
@@ -43,9 +42,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 
 	/** the pi1 object where this event editor will be inserted */
 	var $plugin;
-
-	/** This objects provides access to config values in plugin.tx_seminars. */
-	var $configGetter;
 
 	/** Formidable object that creates the edit form. */
 	var $oForm = null;
@@ -74,9 +70,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	function tx_seminars_event_editor(&$plugin) {
 		$this->plugin =& $plugin;
 		$this->init($this->plugin->conf);
-
-		$this->configGetter =& t3lib_div::makeInstance('tx_seminars_configgetter');
-		$this->configGetter->init();
 
 		$this->sTemplatePath = $this->plugin->getConfValueString(
 			'templateFile',
@@ -238,19 +231,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 			$pageId
 		);
 
-		return $baseUrl.$redirectPath; 
-	}
-
-	/**
-	 * Gets the date and time format provided via TS setup.
-	 *
-	 * @return	string		date and time format as provided via TS setup
-	 *
-	 * @access	public
-	 */
-	function getDateFormat() {
-		return $this->configGetter->getConfValueString('dateFormatYMD').' '
-			.$this->configGetter->getConfValueString('timeFormat');
+		return $baseUrl.$redirectPath;
 	}
 
 	/**
@@ -320,34 +301,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Gets the default value for a checkbox.
-	 *
-	 * This function will only be called if the form has not been submitted yet,
-	 * so it checks whether we are editing an existing record (so the data
-	 * needs to be fetched from the record data) or creating a new record (so
-	 * the default value provided via XML will be used).
-	 *
-	 * @param	array		(unused)
-	 * @param	array		contents of the params node, needs to contain the keys "defaultvalue" (either 0 or 1) and "elementname" (the column name in the DB record)
-	 *
-	 * @return	string		either checked="checked" or an empty string
-	 *
-	 * @access	public
-	 */
-	function setCheckboxValue($items, $value) {
-		$result = false;
-
-		if ($this->iEdition) {
-			$dataHandler =& $this->oForm->oDataHandler;
-			$result = (boolean) $dataHandler->aStoredData[$value['elementname']];
-		} else {
-			$result = (boolean) $value['defaultvalue'];
-		}
-
-		return ($result) ? 'checked="checked"' : '';
 	}
 }
 
