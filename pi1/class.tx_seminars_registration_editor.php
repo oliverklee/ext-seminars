@@ -46,12 +46,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/** Formidable object that creates the edit form. */
 	var $oForm = null;
 
-	/** the UID of the registration to edit (or false (not 0!) if we are creating an event) */
+	/**
+	 * the UID of the registration to edit (or false (not 0!) if we are creating
+	 * an event)
+	 */
 	var $iEdition = false;
-
-	// Currently, we can only edit registration (attendance) records.
-	/** the table to edit (without the extension prefix) */
-	var $sEntity = 'attandances';
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager;
