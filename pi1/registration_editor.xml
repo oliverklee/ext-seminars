@@ -464,11 +464,11 @@
 			<data>
 				<items>
 					<item caption="&amp;nbsp;">0</item>
-					<item>1</item>
-					<item>2</item>
-					<item>3</item>
-					<item>4</item>
-					<item>5</item>
+					<item value="1" caption="1" />
+					<item value="2" caption="2" />
+					<item value="3" caption="3" />
+					<item value="4" caption="4" />
+					<item value="5" caption="5" />
 				</items>
 			</data>
 			<validators>
