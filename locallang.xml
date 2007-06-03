@@ -90,6 +90,7 @@ someone just has registered for an event:</label>
 			<label index="label_time">Tid</label>
 			<label index="label_place">Sted</label>
 			<label index="label_room">Rum</label>
+			<label index="label_additional_times_places">Tider og steder</label>
 			<label index="label_seats">Pladser</label>
 			<label index="label_total_price">Pris i alt</label>
 			<label index="label_attendees_names">Yderligere tilmeldte personer</label>
@@ -105,6 +106,8 @@ someone just has registered for an event:</label>
 			<label index="label_price_board_special">Special pris inkl. helpension</label>
 			<label index="label_paymentmethod">Vælg betalingsmetode</label>
 			<label index="label_billing_address">Faktureringsadresse</label>
+			<label index="label_telephone">Telefon</label>
+			<label index="label_email">Email</label>
 			<label index="label_url">Mere information</label>
 			<label index="label_seminardata">Arrangements info</label>
 			<label index="label_feuserdata">Konto data</label>
@@ -121,6 +124,8 @@ someone just has registered for an event:</label>
 			<label index="message_notLoggedIn_informal">Venligst log in f&amp;#248;rst.</label>
 			<label index="message_alreadyRegistered_formal">De er allerede tilmeldt dette arrangement.</label>
 			<label index="message_alreadyRegistered_informal">Du er allerede tilmeldt dette arrangement.</label>
+			<label index="message_userIsBlocked_formal">Du er tilmeldt et andet arrangement der konflikter med dette.</label>
+			<label index="message_userIsBlocked_informal">Du er tilmeldt et andet arrangement der konflikter med dette.</label>
 			<label index="message_wrongSeminarNumber_formal">Der er ikke noget arrangement med dette nr. Hvis du f&amp;#229;r denne fejl ved at f&amp;#248;lge et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_wrongSeminarNumber_informal">Der ikke noget arrangement med dette nr.. Hvis du f&amp;#229;r denne fejl ved at f&amp;#248;lge et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_noRegistrationNecessary">ingen registrering er n&amp;#248;dvendig til dette arrangement</label>
@@ -461,6 +466,11 @@ iemand heeft zich zojuist voor een bijeenkomst geregistreerd:</label>
 			<label index="label_no" type="integer">133839734</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_noDate" type="integer">11811061</label>
+			<label index="label_additional_times_places" type="integer">178250458</label>
+			<label index="label_telephone" type="integer">197928267</label>
+			<label index="label_email" type="integer">146136420</label>
+			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="label_uid" type="integer">187623698</label>
@@ -843,6 +853,11 @@ someone just has registered for an event:</label>
 			<label index="label_no">no</label>
 			<label index="message_forFree">free</label>
 			<label index="message_noDate">This event has no date yet.</label>
+			<label index="label_additional_times_places">Times and places</label>
+			<label index="label_telephone">Phone</label>
+			<label index="label_email">E-mail address</label>
+			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="label_uid">Number</label>

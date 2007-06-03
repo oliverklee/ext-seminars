@@ -278,6 +278,7 @@
 			<label index="label_tutors">Tutorer</label>
 			<label index="label_leaders">Ledere</label>
 			<label index="label_price_general">Pris</label>
+			<label index="label_select_price">Pris:</label>
 			<label index="label_price_regular">Pris</label>
 			<label index="label_price_earlybird_regular">Tidlig tilmeldingspris</label>
 			<label index="label_price_board_regular">Pris inkl. helpension</label>
@@ -286,6 +287,7 @@
 			<label index="label_price_board_special">Special pris inkl. helpension</label>
 			<label index="label_total_price">Pris i alt</label>
 			<label index="label_paymentmethods">Betalingsmetoder</label>
+			<label index="label_select_paymentmethod">Betalingsmetode:</label>
 			<label index="label_event_type">Arrangementstype</label>
 			<label index="label_organizers">Arrangør</label>
 			<label index="label_vacancies">Ledige pladser</label>
@@ -300,16 +302,21 @@
 			<label index="label_edit">Redigér</label>
 			<label index="label_back">Tilbage til liste</label>
 			<label index="label_save">Gem</label>
+			<label index="label_register_additional_information">Yderlig information</label>
 			<label index="label_interests">Specielle interesser:</label>
 			<label index="label_expectations">Forventninger til dette arrangement:</label>
 			<label index="label_background_knowledge">Baggrundsviden:</label>
+			<label index="label_register_lodging_and_food">Kost og logi</label>
 			<label index="label_accommodation">Hvad er dine logi-præferencer (hvis det er muligt,- et enkeltværelse, dobbeltværelse eller uden overnatning)?</label>
 			<label index="label_food">Hvilken slags mad foretrækker du (normal, vegetar, eller en speciel diæt):</label>
 			<label index="label_known_from">Hvordan har du hørt om dette arrangement?</label>
 			<label index="label_notes">Yderligere bemærkninger:</label>
+			<label index="label_register_additional_attendees">Tilmeld flere personer</label>
 			<label index="label_seats">Antal pladser:</label>
-			<label index="label_attendees_names">Yderligere tilmeldte:</label>
+			<label index="label_register_seats">Samlet antal pladser der ønskes bestilt:</label>
+			<label index="label_attendees_names">Navne på yderligere tilmeldte:</label>
 			<label index="label_kids">Antal børn:</label>
+			<label index="label_legend_payment">Betaling</label>
 			<label index="label_account_number">Kontonr:</label>
 			<label index="label_bank_code">Bank kode:</label>
 			<label index="label_bank_name">Bank navn:</label>
@@ -318,18 +325,21 @@
 			<label index="label_gender">Hr/Fr</label>
 			<label index="label_gender.I.0">Hr</label>
 			<label index="label_gender.I.1">Frk</label>
-			<label index="label_name">Navn</label>
-			<label index="label_address">Gade</label>
-			<label index="label_zip">Postnr.</label>
-			<label index="label_city">By</label>
-			<label index="label_country">Land</label>
-			<label index="label_telephone">Tlf.</label>
-			<label index="label_email">Email</label>
-			<label index="label_lodgings">Logi</label>
-			<label index="label_foods">Kost</label>
+			<label index="label_name">Navn:</label>
+			<label index="label_address">Gade:</label>
+			<label index="label_zip">Postnr.:</label>
+			<label index="label_city">By:</label>
+			<label index="label_country">Land:</label>
+			<label index="label_telephone">Tlf.:</label>
+			<label index="label_email">Email:</label>
+			<label index="label_lodgings">Logi:</label>
+			<label index="label_foods">Kost:</label>
+			<label index="label_register_entered_data_formal">Dine registrerede informationer</label>
+			<label index="label_register_entered_data_informal">Dine registrerede informationer</label>
+			<label index="label_register_all_terms">Tilmeldingsbetingelser</label>
 			<label index="label_terms">Jeg accepterer betingelserne.</label>
 			<label index="label_terms_2">Jeg accepterer betingelser for rejse.</label>
-			<label index="label_submit_registration">Afslut tilmelding</label>
+			<label index="label_submit_registration">Send tilmelding</label>
 			<label index="label_proceed_registration">Fortsæt til betaling</label>
 			<label index="label_back_registration">Tilbage</label>
 			<label index="label_your_user_data_formal">Dine adresse informationer:</label>
@@ -981,29 +991,29 @@
 			<label index="label_food" type="integer">230880093</label>
 			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
-			<label index="label_seats" type="integer">134941724</label>
-			<label index="label_attendees_names" type="integer">198880077</label>
+			<label index="label_seats" type="integer">187299883</label>
+			<label index="label_attendees_names" type="integer">43575953</label>
 			<label index="label_kids" type="integer">7953511</label>
 			<label index="label_account_number" type="integer">15650306</label>
 			<label index="label_bank_code" type="integer">171550314</label>
 			<label index="label_bank_name" type="integer">204057381</label>
 			<label index="label_account_owner" type="integer">35539025</label>
-			<label index="label_billing_address" type="integer">75414087</label>
+			<label index="label_billing_address" type="integer">33277925</label>
 			<label index="label_gender" type="integer">161832899</label>
 			<label index="label_gender.I.0" type="integer">19351194</label>
 			<label index="label_gender.I.1" type="integer">43922038</label>
-			<label index="label_name" type="integer">77521672</label>
-			<label index="label_address" type="integer">224521181</label>
-			<label index="label_zip" type="integer">70553491</label>
-			<label index="label_city" type="integer">92079470</label>
-			<label index="label_country" type="integer">93787849</label>
-			<label index="label_telephone" type="integer">33039901</label>
-			<label index="label_email" type="integer">146136420</label>
-			<label index="label_lodgings" type="integer">71303596</label>
-			<label index="label_foods" type="integer">10718834</label>
+			<label index="label_name" type="integer">81871034</label>
+			<label index="label_address" type="integer">252788963</label>
+			<label index="label_zip" type="integer">234550549</label>
+			<label index="label_city" type="integer">201307921</label>
+			<label index="label_country" type="integer">258260574</label>
+			<label index="label_telephone" type="integer">130029308</label>
+			<label index="label_email" type="integer">126760538</label>
+			<label index="label_lodgings" type="integer">100712032</label>
+			<label index="label_foods" type="integer">253668178</label>
 			<label index="label_terms" type="integer">112775823</label>
 			<label index="label_terms_2" type="integer">6400727</label>
-			<label index="label_submit_registration" type="integer">88697193</label>
+			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
@@ -1041,6 +1051,16 @@
 			<label index="countdown_minutes_plural" type="integer">104922380</label>
 			<label index="countdown_minutes_singular" type="integer">10999131</label>
 			<label index="countdown_seconds_plural" type="integer">126085346</label>
+			<label index="label_select_price" type="integer">254546606</label>
+			<label index="label_select_paymentmethod" type="integer">203383656</label>
+			<label index="label_register_additional_information" type="integer">16157584</label>
+			<label index="label_register_lodging_and_food" type="integer">246916949</label>
+			<label index="label_register_additional_attendees" type="integer">70729970</label>
+			<label index="label_register_seats" type="integer">76212082</label>
+			<label index="label_legend_payment" type="integer">205863499</label>
+			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data_informal" type="integer">250390933</label>
+			<label index="label_register_all_terms" type="integer">246270935</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -1838,8 +1858,8 @@
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_seats">Number of seats:</label>
-			<label index="label_attendees_names">Additional attendees:</label>
+			<label index="label_seats">Seats</label>
+			<label index="label_attendees_names">Names of additional persons to register:</label>
 			<label index="label_kids">Number of kids:</label>
 			<label index="label_account_number">Account number:</label>
 			<label index="label_bank_code">Bank code:</label>
@@ -1849,18 +1869,18 @@
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
-			<label index="label_name">Name</label>
-			<label index="label_address">Street</label>
-			<label index="label_zip">ZIP</label>
-			<label index="label_city">City</label>
-			<label index="label_country">Country</label>
-			<label index="label_telephone">Phone number</label>
-			<label index="label_email">E-mail address</label>
-			<label index="label_lodgings">Lodging</label>
-			<label index="label_foods">Food</label>
+			<label index="label_name">Name:</label>
+			<label index="label_address">Street:</label>
+			<label index="label_zip">ZIP:</label>
+			<label index="label_city">City:</label>
+			<label index="label_country">Country:</label>
+			<label index="label_telephone">Phone number:</label>
+			<label index="label_email">E-mail address:</label>
+			<label index="label_lodgings">Lodging:</label>
+			<label index="label_foods">Food:</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
 			<label index="label_terms_2">I accept the terms for travelling.</label>
-			<label index="label_submit_registration">Finish registration</label>
+			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
@@ -1898,6 +1918,16 @@
 			<label index="countdown_minutes_plural">minutes</label>
 			<label index="countdown_minutes_singular">minute</label>
 			<label index="countdown_seconds_plural">seconds</label>
+			<label index="label_select_price">Price:</label>
+			<label index="label_select_paymentmethod">Payment method:</label>
+			<label index="label_register_additional_information">Additional information</label>
+			<label index="label_register_lodging_and_food">Lodging and food</label>
+			<label index="label_register_additional_attendees">Register additional persons</label>
+			<label index="label_register_seats">Total number of seats to book:</label>
+			<label index="label_legend_payment">Payment</label>
+			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data_informal">Your registration data</label>
+			<label index="label_register_all_terms">Registration terms</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>
