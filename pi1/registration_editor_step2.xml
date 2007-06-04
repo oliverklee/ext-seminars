@@ -35,34 +35,34 @@
 	<elements>
 		<renderlet:LABEL name="feuser_data">
 			<data>
-				<defaultvalue>
+				<value>
 					<userobj>
 						<extension>this</extension>
 						<method>getAllFeUserData</method>
 					</userobj>
-				</defaultvalue>
+				</value>
 			</data>
 		</renderlet:LABEL>
 
 		<renderlet:LABEL name="billing_address">
 			<data>
-				<defaultvalue>
+				<value>
 					<userobj>
 						<extension>this</extension>
 						<method>getBillingAddress</method>
 					</userobj>
-				</defaultvalue>
+				</value>
 			</data>
 		</renderlet:LABEL>
 
 		<renderlet:LABEL name="registration_data">
 			<data>
-				<defaultvalue>
+				<value>
 					<userobj>
 						<extension>this</extension>
 						<method>getRegistrationData</method>
 					</userobj>
-				</defaultvalue>
+				</value>
 			</data>
 		</renderlet:LABEL>
 

@@ -593,31 +593,27 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the already entered registration data nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @param	array		(unused)
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
-	 * @param	object		the current FORMidable object
-	 *
-	 * @return	string		the already entered registration data, nicely formatted as HTML
+	 * @return	string		the entered registration data, nicely formatted as HTML
 	 *
 	 * @access	public
 	 */
-	function getRegistrationData($unused, $parameters, $form) {
+	function getRegistrationData() {
 		$result = '';
 
-		$formData = $form->oDataHandler->__aFormData;
+		$dataHandler =& $this->oForm->oDataHandler;
+
 		$availablePaymentMethods = $this->populateListPaymentMethods(
 			array()
 		);
 
-		if (isset($formData['method_of_payment'])
-			&& isset($availablePaymentMethods[$formData['method_of_payment']])) {
+		if (isset($availablePaymentMethods[$dataHandler->_getThisFormData('method_of_payment')])) {
 			$this->plugin->setMarkerContent(
 				'registration_data_heading',
 				$this->plugin->pi_getLL('label_selected_paymentmethod')
 			);
 			$this->plugin->setMarkerContent(
 				'registration_data_body',
-				$availablePaymentMethods[$formData['method_of_payment']]['caption']
+				$availablePaymentMethods[$dataHandler->_getThisFormData('method_of_payment')]['caption']
 			);
 			$result .= $this->plugin->substituteMarkerArrayCached(
 				'REGISTRATION_CONFIRMATION_DATA'
@@ -625,10 +621,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		$availablePrices = $this->seminar->getAvailablePrices();
+		$selectedPrice = $dataHandler->_getThisFormData('price');
 		// If no (available) price is selected, use the first price by default.
-		$selectedPrice = (isset($formData['price'])
-			&& $this->seminar->isPriceAvailable($formData['price']))
-			? $formData['price'] : key($availablePrices);
+		if (!$this->seminar->isPriceAvailable($selectedPrice)) {
+			$selectedPrice = key($availablePrices);
+		}
 		$this->plugin->setMarkerContent(
 			'registration_data_heading',
 			$this->plugin->pi_getLL('label_price_general')
@@ -647,17 +644,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		// calculated again when creating the registration object.
 		// It will not be added if no total price can be calculated (e.g.
 		// total price = 0.00)
-		if (isset($formData['seats']) && $formData['seats'] > 0) {
-			$seats = $formData['seats'];
+		if (intval($dataHandler->_getThisFormData('seats')) > 0) {
+			$seats = intval($dataHandler->_getThisFormData('seats'));
 		} else {
 			$seats = 1;
 		}
+		$totalPriceWithUnit = '';
 		if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
 			$totalPrice = $this->seminar->formatPrice(
 				$seats * $availablePrices[$selectedPrice]['amount']
 			);
 			$currency = $this->registrationManager->getConfValueString('currency');
-			$formData['total_price'] = $totalPrice.' '.$currency;
+			$totalPriceWithUnit = $totalPrice.' '.$currency;
 		}
 
 		foreach (array(
@@ -676,7 +674,13 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			'known_from',
 			'notes'
 		) as $currentKey) {
-			if (isset($formData[$currentKey]) && $formData[$currentKey] != '') {
+			// The total price is a special case as it is pre-processed.
+			if ($currentKey == 'total_price') {
+				$currentFormData = $totalPriceWithUnit;
+			} else {
+				$currentFormData = $dataHandler->_getThisFormData($currentKey);
+			}
+			if ($currentFormData != '') {
 				$this->plugin->setMarkerContent(
 					'registration_data_heading',
 					$this->plugin->pi_getLL('label_'.$currentKey)
@@ -684,7 +688,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				$fieldContent = str_replace(
 					chr(13),
 					'<br />',
-					htmlspecialchars($formData[$currentKey])
+					htmlspecialchars($currentFormData)
 				);
 				$this->plugin->setMarkerContent(
 					'registration_data_body',
@@ -703,22 +707,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Gets the already entered billing address nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @param	array		(unused)
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
-	 * @param	object		the current FORMidable object
-	 *
 	 * @return	string		the already entered registration data, nicely formatted as HTML
 	 *
 	 * @access	public
 	 */
-	function getBillingAddress($unused, $parameters, $form) {
+	function getBillingAddress() {
 		$result = '';
 
-		$formData = $form->oDataHandler->__aFormData;
-
 		foreach ($this->fieldsInBillingAddress as $currentKey => $hasLabel) {
-			$currentFormData = $formData[$currentKey];
-			if (isset($formData[$currentKey]) && $formData[$currentKey] != '') {
+			$currentFormData = $this->oForm->oDataHandler->_getThisFormData($currentKey);
+			if ($currentFormData != '') {
 				// If the gender field is hidden, it would have an empty value,
 				// so we wouldn't be here. So let's convert the "gender" index
 				// into a readable string.
@@ -759,8 +757,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function hasAttendeesNames($attendeesNames, &$form) {
 		$dataHandler = $form->oDataHandler;
-		$seats = isset($dataHandler->__aFormData['seats']) ?
-			intval($dataHandler->__aFormData['seats']) : 1;
+		$seats = (intval($dataHandler->_getThisFormData('seats')) > 0) ?
+			intval($dataHandler->_getThisFormData('seats')) : 1;
 
 		return (!empty($attendeesNames) || ($seats < 2)
 			|| !$this->hasRegistrationFormField(
@@ -789,8 +787,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$bankTransferUid = $this->plugin->getConfValueInteger('bankTransferUID');
 
 			$dataHandler = $form->oDataHandler;
-			$paymentMethod = isset($dataHandler->__aFormData['method_of_payment']) ?
-				intval($dataHandler->__aFormData['method_of_payment']) : 0;
+			$paymentMethod
+				= intval($dataHandler->_getThisFormData('method_of_payment'));
 
 			if ($bankTransferUid && ($paymentMethod == $bankTransferUid)) {
 				$result = false;
