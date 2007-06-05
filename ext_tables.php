@@ -246,17 +246,6 @@ t3lib_extMgm::addToInsertRecords('tx_seminars_speakers');
 t3lib_extMgm::addTCAcolumns('fe_users',$tempColumns,1);
 t3lib_extMgm::addToAllTCAtypes('fe_users','tx_seminars_phone_mobile;;;;1-1-1, tx_seminars_matriculation_number, tx_seminars_planned_degree, tx_seminars_semester, tx_seminars_subject');
 
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_attendances');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_organizers');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_payment_methods');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_event_types');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_seminars');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_sites');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_speakers');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_checkboxes');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_lodgings');
-t3lib_extMgm::allowTableOnStandardPages('tx_seminars_foods');
-
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,pages,recursive';
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'pi_flexform';

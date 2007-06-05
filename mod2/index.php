@@ -67,6 +67,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	/** the registration which we want to list/show */
 	var $registration;
 
+	/** Holds information about the current page. */
+	var $pageInfo;
+
 	/**
 	 * Initializes some variables and also starts the initialization of the parent class.
 	 *
@@ -107,13 +110,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		 * This variable will hold the information about the page. It will only be filled with values
 		 * if the user has access to the page.
 		 */
-		$pageInfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+		$this->pageInfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		// Access check:
 		// The page will only be displayed if there is a valid page, if this
 		// page may be viewed by the current BE user and if the static template
 		// has been included or there actually are any records that will be
 		// listed by this module on the current page.
-		$hasAccess = is_array($pageInfo);
+		$hasAccess = is_array($this->pageInfo);
 
 		if ((($this->id && $hasAccess) || ($BE_USER->user['admin']))
 			&& $this->hasStaticTemplateOrRecords()) {
@@ -672,7 +675,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		$result = '';
 
 		if ($BE_USER->check('tables_modify', $table)
-			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
+			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)
+			&& $this->pageInfo['doktype'] == 254) {
 			$params = '&edit['.$table.']['.$pid.']=new';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langNew = $LANG->getLL('newRecordGeneral');
