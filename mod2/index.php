@@ -512,6 +512,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					.'<span style="color: #ffffff; font-weight: bold;">'
 					.$LANG->getLL('registrationlist.seminar.title').'</span>'.chr(10),
 				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('registrationlist.seminar.date').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
 					.'&nbsp;'.chr(10)
 			)
 		);
@@ -535,6 +538,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					.$this->registration->getUserName().chr(10),
 				TAB.TAB.TAB.TAB.TAB
 					.$this->registration->seminar->getRealTitle().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->registration->seminar->getDate().chr(10),
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getEditIcon(
 						$this->registration->tableName,
