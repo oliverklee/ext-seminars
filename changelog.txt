@@ -1,4 +1,5 @@
 0.5.0
+- Change: Remove any literal DB table names from mod2 (#653)
 - Change: Don't display the "CSV-export of events" if there are no event records on the current page (#655)
 - Change: mod2: use maximum title lenth from be user profile (#849)
 - Change: Don't show "will be announced" for the date of topic records (#724)

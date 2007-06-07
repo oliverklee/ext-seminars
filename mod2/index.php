@@ -143,23 +143,26 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->content .= $this->doc->header($LANG->getLL('title'));
 			$this->content .= $this->doc->spacer(5);
 
+			$databasePlugin =& t3lib_div::makeInstance('tx_seminars_dbplugin');
+			$databasePlugin->setTableNames();
+
 			// define the sub modules that should be available in the tabmenu
 			$this->availableSubModules = array();
 
 			// only show the tabs if the back-end user has access to the corresponding tables
-			if ($BE_USER->check('tables_select', 'tx_seminars_seminars')) {
+			if ($BE_USER->check('tables_select', $databasePlugin->tableSeminars)) {
 				$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
 			}
 
-			if ($BE_USER->check('tables_select', 'tx_seminars_attendances')) {
+			if ($BE_USER->check('tables_select', $databasePlugin->tableAttendances)) {
 				$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
 			}
 
-			if ($BE_USER->check('tables_select', 'tx_seminars_speakers')) {
+			if ($BE_USER->check('tables_select', $databasePlugin->tableSpeakers)) {
 				$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
 			}
 
-			if ($BE_USER->check('tables_select', 'tx_seminars_organizers')) {
+			if ($BE_USER->check('tables_select', $databasePlugin->tableOrganizers)) {
 				$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
 			}
 
