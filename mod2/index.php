@@ -401,8 +401,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 						$this->seminar->getUid()
 					).chr(10),
 				TAB.TAB.TAB.TAB.TAB
-					.$this->seminar->getAttendances()
-					.$this->getRegistrationsCsvIcon().chr(10),
+					.$this->getRegistrationsCsvIcon()
+					.$this->seminar->getAttendances().chr(10),
 				TAB.TAB.TAB.TAB.TAB
 					.$this->seminar->getAttendancesMin().chr(10),
 				TAB.TAB.TAB.TAB.TAB
