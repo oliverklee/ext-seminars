@@ -272,6 +272,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$LANG->getLL('eventlist.title').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('eventlist.date').'</span>',
+				'&nbsp;',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('eventlist.attendees').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
@@ -281,8 +282,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('eventlist.enough_attendees').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.is_full').'</span>',
-				'&nbsp;',
+					$LANG->getLL('eventlist.is_full').'</span>'
 			),
 		);
 
@@ -301,14 +301,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				$this->seminar->getRecordIcon(),
 				t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45),
 				$this->seminar->getDate(),
-				$this->seminar->getAttendances()
-					.$this->getRegistrationsCsvIcon(),
-				$this->seminar->getAttendancesMin(),
-				$this->seminar->getAttendancesMax(),
-				(!$this->seminar->hasEnoughAttendances()
-					? $LANG->getLL('no') : $LANG->getLL('yes')),
-				(!$this->seminar->isFull()
-					? $LANG->getLL('no') : $LANG->getLL('yes')),
 				$this->getEditIcon(
 					$this->seminar->tableName,
 					$this->seminar->getUid()
@@ -317,6 +309,14 @@ class tx_seminars_module2 extends t3lib_SCbase {
 						$this->seminar->tableName,
 						$this->seminar->getUid()
 					),
+				$this->seminar->getAttendances()
+					.$this->getRegistrationsCsvIcon(),
+				$this->seminar->getAttendancesMin(),
+				$this->seminar->getAttendancesMax(),
+				(!$this->seminar->hasEnoughAttendances()
+					? $LANG->getLL('no') : $LANG->getLL('yes')),
+				(!$this->seminar->isFull()
+					? $LANG->getLL('no') : $LANG->getLL('yes'))
 			);
 			$seminarBag->getNext();
 		}
