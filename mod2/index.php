@@ -248,8 +248,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" width="100%" '
-					.'class="typo3-dblist">',
+				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
 				'</table>'
 			),
 			array(
@@ -358,8 +357,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" width="100%" '
-					.'class="typo3-dblist">',
+				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
 				'</table>'
 			),
 			array(
@@ -445,8 +443,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" width="100%" '
-					.'class="typo3-dblist">',
+				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
 				'</table>'
 			),
 			array(
@@ -528,8 +525,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" width="100%" '
-					.'class="typo3-dblist">',
+				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
 				'</table>'
 			),
 			array(
