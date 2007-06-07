@@ -3311,6 +3311,32 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $result;
 	}
+
+	/**
+	 * Gets the date.
+	 * Returns an empty string if the seminar record is a topic record.
+	 * Otherwise will return the date or a localized string "will be 
+	 * announced" if there's no date set.
+	 *
+	 * Returns just one day if we take place on only one day.
+	 * Returns a date range if we take several days. 
+	 * 
+	 * @param	string		the character or HTML entity used to separate start date and end date
+	 *
+	 * @return	string		the seminar date (or an empty string or a localized message)
+	 * 
+	 * @access	public
+	 */
+	function getDate($dash = '&#8211;') {
+		$result = '';
+
+		if ($this->getRecordPropertyInteger('object_type')
+			!= $this->recordTypeTopic) {
+			$result = parent::getDate($dash);
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {
