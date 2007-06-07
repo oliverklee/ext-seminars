@@ -486,7 +486,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 
 		if (!empty($imageURL)) {
 			$imageURL = t3lib_div::getIndpEnv('TYPO3_SITE_URL').TYPO3_mainDir.$imageURL;
-			$result = '<img src="'.$imageURL.'" alt="" />'; 
+			$result = '<img src="'.$imageURL.'" title="id='.$this->getUid()
+				.'" alt="'.$this->getUid().'" />'; 
 		}
 
 		return $result;
