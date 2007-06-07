@@ -1,4 +1,5 @@
 0.5.0
+- Change: mod2: use maximum title lenth from be user profile (#849)
 - Change: Don't show "will be announced" for the date of topic records (#724)
 - Change: Put the CSV export icons to the left of the number of attendees (#848)
 - Change: Mod2: split the long line for the tables (#639)

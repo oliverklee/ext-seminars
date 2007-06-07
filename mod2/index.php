@@ -230,7 +230,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 * @access	public
 	 */
 	function showEventsList() {
-		global $LANG;
+		global $LANG, $BE_USER;
 
 		// Initialize the variable for the HTML source code.
 		$content = '';
@@ -388,7 +388,10 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				TAB.TAB.TAB.TAB.TAB
 					.$this->seminar->getRecordIcon().chr(10),
 				TAB.TAB.TAB.TAB.TAB
-					.t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45).chr(10),
+					.t3lib_div::fixed_lgd_cs(
+						$this->seminar->getRealTitle(),
+						$BE_USER->uc['titleLen']
+					).chr(10),
 				TAB.TAB.TAB.TAB.TAB
 					.$this->seminar->getDate().chr(10),
 				TAB.TAB.TAB.TAB.TAB
