@@ -448,6 +448,49 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 
 		return $result;
 	}
+
+	/**
+	 * Gets an HTML image tag with the URL of the icon file of the record as
+	 * configured in TCA.
+	 *
+	 * @return	integer		our HTML image tag (or an empty string if there is
+	 * 						no icon file configured in TCA)
+	 *
+	 * @access	public
+	 */
+	function getRecordIcon() {
+		$result = '';
+		$imageURL = '';
+
+		t3lib_div::loadTCA($this->tableName);
+		$tableConfiguration =& $GLOBALS['TCA'][$this->tableName]['ctrl'];
+
+		$typeIconColumnExists = $tableConfiguration['typeicon_column']
+			&& $this->hasRecordPropertyInteger($tableConfiguration['typeicon_column']);
+
+		$typeIconExists = is_array($tableConfiguration['typeicons'])
+			&& array_key_exists(
+				$this->getRecordPropertyInteger($tableConfiguration['typeicon_column']),
+				$tableConfiguration['typeicons']
+			);
+
+		if ($typeIconColumnExists && $typeIconExists) {
+			$recordType = $this->getRecordPropertyInteger(
+				$tableConfiguration['typeicon_column']
+			);
+
+			$imageURL = $tableConfiguration['typeicons'][$recordType];
+		} elseif ($tableConfiguration['iconfile']) {
+			$imageURL = $tableConfiguration['iconfile'];
+		}
+
+		if (!empty($imageURL)) {
+			$imageURL = t3lib_div::getIndpEnv('TYPO3_SITE_URL').TYPO3_mainDir.$imageURL;
+			$result = '<img src="'.$imageURL.'" alt="" />'; 
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_objectfromdb.php']) {

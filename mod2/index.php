@@ -259,6 +259,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			'defRow' => array(
 				'tr' => array('<tr>', '</tr>'),
 				array('<td>', '</td>'),
+				array('<td>', '</td>'),
 				array('<td class="datecol">', '</td>'),
 				'defCol' => array('<td>', '</td>'),
 			),
@@ -267,6 +268,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
+				'',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('eventlist.title').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
@@ -297,6 +299,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		while ($this->seminar =& $seminarBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
+				$this->seminar->getRecordIcon(),
 				t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45),
 				$this->seminar->getDate(),
 				$this->seminar->getAttendances()
@@ -372,6 +375,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
+				'',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('registrationlist.feuser.name').'</span>',
 				'<span style="color: #ffffff; font-weight: bold;">'.
@@ -393,6 +397,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->registration->getSeminar();
 			// Add the result row to the table array.
 			$table[] = array(
+				$this->registration->getRecordIcon(),
 				$this->registration->getUserName(),
 				$this->registration->seminar->getRealTitle(),
 				$this->getEditIcon(
@@ -457,6 +462,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
+				'',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('speakerlist.title').'</span>',
 				'&nbsp;',
@@ -475,6 +481,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		while ($this->speaker =& $speakerBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
+				$this->speaker->getRecordIcon(),
 				$this->speaker->getTitle(),
 				$this->getEditIcon(
 					$this->speaker->tableName,
@@ -538,6 +545,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
+				'',
 				'<span style="color: #ffffff; font-weight: bold;">'.
 					$LANG->getLL('organizerlist.title').'</span>',
 				'&nbsp;',
@@ -556,6 +564,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		while ($this->organizer =& $organizerBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
+				$this->organizer->getRecordIcon(),
 				$this->organizer->getTitle(),
 				$this->getEditIcon(
 					$this->organizer->tableName,
