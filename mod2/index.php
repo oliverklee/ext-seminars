@@ -421,7 +421,10 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		}
 
 		$content .= $this->getNewIcon($seminarBag->tableSeminars, $this->id);
-		$content .= $this->getCsvIcon('events');
+
+		if ($seminarBag->objectCountWithoutLimit) {
+			$content .= $this->getCsvIcon('events');
+		}
 
 		// Output the table array using the tableLayout array with the template
 		// class.
