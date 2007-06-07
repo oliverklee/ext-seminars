@@ -260,6 +260,12 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				array('<td>', '</td>'),
 				array('<td>', '</td>'),
 				array('<td class="datecol">', '</td>'),
+				array('<td>', '</td>'),
+				array('<td class="attendees">', '</td>'),
+				array('<td class="attendees_min">', '</td>'),
+				array('<td class="attendees_max">', '</td>'),
+				array('<td class="enough_attendees">', '</td>'),
+				array('<td class="is_full">', '</td>'),
 				'defCol' => array('<td>', '</td>'),
 			),
 		);

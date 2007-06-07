@@ -4,7 +4,12 @@ table.typo3-dblist {
 	border-spacing: 0;
 }
 
-td.datecol {
+td.datecol,
+td.attendees,
+td.attendees_min,
+td.attendees_max,
+td.enough_attendees,
+td.is_full {
 	text-align: right;
 }
 
