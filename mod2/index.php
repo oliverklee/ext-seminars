@@ -54,6 +54,8 @@ $LANG->includeLLFile('EXT:seminars/mod2/locallang.php');
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
 
+define('TAB', chr(9));
+
 class tx_seminars_module2 extends t3lib_SCbase {
 	/** the seminar which we want to list/show */
 	var $seminar;
@@ -248,48 +250,127 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
-				'</table>'
+				TAB.TAB
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.chr(10),
+				TAB.TAB
+					.'</table>'.chr(10)
 			),
 			array(
-				'tr' => array('<thead><tr>', '</tr></thead>'),
-				'defCol' => array('<td class="c-headLineTable">', '</td>'),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<thead>'.chr(10)
+						.TAB.TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</tr>'.chr(10)
+						.TAB.TAB.TAB
+						.'</thead>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB.TAB
+						.'<td class="c-headLineTable">'.chr(10),
+					TAB.TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
 			),
 			'defRow' => array(
-				'tr' => array('<tr>', '</tr>'),
-				array('<td>', '</td>'),
-				array('<td>', '</td>'),
-				array('<td class="datecol">', '</td>'),
-				array('<td>', '</td>'),
-				array('<td class="attendees">', '</td>'),
-				array('<td class="attendees_min">', '</td>'),
-				array('<td class="attendees_max">', '</td>'),
-				array('<td class="enough_attendees">', '</td>'),
-				array('<td class="is_full">', '</td>'),
-				'defCol' => array('<td>', '</td>'),
-			),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB
+						.'</tr>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td class="datecol">'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td class="attendees">'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td class="attendees_min">'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td class="attendees_max">'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td class="enough_attendees">'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				array(
+					TAB.TAB.TAB.TAB
+						.'<td class="is_full">'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB
+						.'<td>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
+			)
 		);
 
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
 				'',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.title').'</span>',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.date').'</span>',
-				'&nbsp;',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.attendees').'</span>',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.attendees_min').'</span>',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.attendees_max').'</span>',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.enough_attendees').'</span>',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('eventlist.is_full').'</span>'
-			),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.title').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.date').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'&nbsp;'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.attendees').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.attendees_min').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.attendees_max').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.enough_attendees').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.is_full').'</span>'.chr(10)
+			)
 		);
 
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
@@ -304,25 +385,34 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		while ($this->seminar =& $seminarBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
-				$this->seminar->getRecordIcon(),
-				t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45),
-				$this->seminar->getDate(),
-				$this->getEditIcon(
-					$this->seminar->tableName,
-					$this->seminar->getUid()
-				)
+				TAB.TAB.TAB.TAB.TAB
+					.$this->seminar->getRecordIcon().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.t3lib_div::fixed_lgd_cs($this->seminar->getRealTitle(), 45).chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->seminar->getDate().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->getEditIcon(
+						$this->seminar->tableName,
+						$this->seminar->getUid()
+					)
 					.$this->getDeleteIcon(
 						$this->seminar->tableName,
 						$this->seminar->getUid()
-					),
-				$this->seminar->getAttendances()
-					.$this->getRegistrationsCsvIcon(),
-				$this->seminar->getAttendancesMin(),
-				$this->seminar->getAttendancesMax(),
-				(!$this->seminar->hasEnoughAttendances()
-					? $LANG->getLL('no') : $LANG->getLL('yes')),
-				(!$this->seminar->isFull()
-					? $LANG->getLL('no') : $LANG->getLL('yes'))
+					).chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->seminar->getAttendances()
+					.$this->getRegistrationsCsvIcon().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->seminar->getAttendancesMin().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->seminar->getAttendancesMax().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.(!$this->seminar->hasEnoughAttendances()
+					? $LANG->getLL('no') : $LANG->getLL('yes')).chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.(!$this->seminar->isFull()
+					? $LANG->getLL('no') : $LANG->getLL('yes')).chr(10)
 			);
 			$seminarBag->getNext();
 		}
@@ -363,29 +453,58 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
-				'</table>'
+				TAB.TAB
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.chr(10),
+				TAB.TAB
+					.'</table>'.chr(10)
 			),
 			array(
-				'tr' => array('<thead><tr>', '</tr></thead>'),
-				'defCol' => array('<td class="c-headLineTable">', '</td>'),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<thead>'.chr(10)
+						.TAB.TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</tr>'.chr(10)
+						.TAB.TAB.TAB
+						.'</thead>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB.TAB
+						.'<td class="c-headLineTable">'.chr(10),
+					TAB.TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
 			),
 			'defRow' => array(
-				'tr' => array('<tr>', '</tr>'),
-				'defCol' => array('<td>', '</td>'),
-			),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB
+						.'</tr>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB
+						.'<td>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
+			)
 		);
 
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
 				'',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('registrationlist.feuser.name').'</span>',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('registrationlist.seminar.title').'</span>',
-				'&nbsp;',
-			),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('registrationlist.feuser.name').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('registrationlist.seminar.title').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'&nbsp;'.chr(10)
+			)
 		);
 
 		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
@@ -401,17 +520,21 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->registration->getSeminar();
 			// Add the result row to the table array.
 			$table[] = array(
-				$this->registration->getRecordIcon(),
-				$this->registration->getUserName(),
-				$this->registration->seminar->getRealTitle(),
-				$this->getEditIcon(
-					$this->registration->tableName,
-					$this->registration->getUid()
-				)
+				TAB.TAB.TAB.TAB.TAB
+					.$this->registration->getRecordIcon().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->registration->getUserName().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->registration->seminar->getRealTitle().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->getEditIcon(
+						$this->registration->tableName,
+						$this->registration->getUid()
+					)
 					.$this->getDeleteIcon(
 						$this->registration->tableName,
 						$this->registration->getUid()
-					),
+					).chr(10)
 			);
 			$registrationBag->getNext();
 		}
@@ -449,27 +572,55 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
-				'</table>'
+				TAB.TAB
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.chr(10),
+				TAB.TAB
+					.'</table>'.chr(10)
 			),
 			array(
-				'tr' => array('<thead><tr>', '</tr></thead>'),
-				'defCol' => array('<td class="c-headLineTable">', '</td>'),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<thead>'.chr(10)
+						.TAB.TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</tr>'.chr(10)
+						.TAB.TAB.TAB
+						.'</thead>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB.TAB
+						.'<td class="c-headLineTable">'.chr(10),
+					TAB.TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
 			),
 			'defRow' => array(
-				'tr' => array('<tr>', '</tr>'),
-				'defCol' => array('<td>', '</td>'),
-			),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB
+						.'</tr>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB
+						.'<td>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
+			)
 		);
 
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
 				'',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('speakerlist.title').'</span>',
-				'&nbsp;',
-			),
+				TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('speakerlist.title').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.'&nbsp;'.chr(10)
+			)
 		);
 
 		$speakerBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_speakerbag');
@@ -484,16 +635,19 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		while ($this->speaker =& $speakerBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
-				$this->speaker->getRecordIcon(),
-				$this->speaker->getTitle(),
-				$this->getEditIcon(
-					$this->speaker->tableName,
-					$this->speaker->getUid()
-				)
+				TAB.TAB.TAB.TAB.TAB
+					.$this->speaker->getRecordIcon().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->speaker->getTitle().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->getEditIcon(
+						$this->speaker->tableName,
+						$this->speaker->getUid()
+					)
 					.$this->getDeleteIcon(
 						$this->speaker->tableName,
 						$this->speaker->getUid()
-					),
+					).chr(10)
 			);
 			$speakerBag->getNext();
 		}
@@ -531,27 +685,55 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				'<table cellpadding="0" cellspacing="0" class="typo3-dblist">',
-				'</table>'
+				TAB.TAB
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.chr(10),
+				TAB.TAB
+					.'</table>'.chr(10)
 			),
 			array(
-				'tr' => array('<thead><tr>', '</tr></thead>'),
-				'defCol' => array('<td class="c-headLineTable">', '</td>'),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<thead>'.chr(10)
+						.TAB.TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</tr>'.chr(10)
+						.TAB.TAB.TAB
+						.'</thead>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB.TAB
+						.'<td class="c-headLineTable">'.chr(10),
+					TAB.TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
 			),
 			'defRow' => array(
-				'tr' => array('<tr>', '</tr>'),
-				'defCol' => array('<td>', '</td>'),
-			),
+				'tr' => array(
+					TAB.TAB.TAB
+						.'<tr>'.chr(10),
+					TAB.TAB.TAB
+						.'</tr>'.chr(10)
+				),
+				'defCol' => array(
+					TAB.TAB.TAB.TAB
+						.'<td>'.chr(10),
+					TAB.TAB.TAB.TAB
+						.'</td>'.chr(10)
+				)
+			)
 		);
 
 		// Fill the first row of the table array with the header.
 		$table = array(
 			array(
 				'',
-				'<span style="color: #ffffff; font-weight: bold;">'.
-					$LANG->getLL('organizerlist.title').'</span>',
-				'&nbsp;',
-			),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('organizerlist.title').'</span>'.chr(10),
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'&nbsp;'.chr(10)
+			)
 		);
 
 		$organizerBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_organizerbag');
@@ -566,16 +748,19 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		while ($this->organizer =& $organizerBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
-				$this->organizer->getRecordIcon(),
-				$this->organizer->getTitle(),
-				$this->getEditIcon(
-					$this->organizer->tableName,
-					$this->organizer->getUid()
-				)
+				TAB.TAB.TAB.TAB.TAB
+					.$this->organizer->getRecordIcon().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->organizer->getTitle().chr(10),
+				TAB.TAB.TAB.TAB.TAB
+					.$this->getEditIcon(
+						$this->organizer->tableName,
+						$this->organizer->getUid()
+					)
 					.$this->getDeleteIcon(
 						$this->organizer->tableName,
 						$this->organizer->getUid()
-				),
+				).chr(10)
 			);
 			$organizerBag->getNext();
 		}
@@ -612,14 +797,14 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$params = '&edit['.$table.']['.$uid.']=edit';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langEdit = $LANG->getLL('edit');
-			$result = '<a href="'.htmlspecialchars($editOnClick).'">'.
-				'<img '
+			$result = '<a href="'.htmlspecialchars($editOnClick).'">'
+				.'<img '
 				.t3lib_iconWorks::skinImg(
 					$BACK_PATH,
 					'gfx/edit2.gif',
-					'width="11" height="12"').
-				' title="'.$langEdit.'" alt="'.$langEdit.'" class="icon" />'.
-				'</a>';
+					'width="11" height="12"')
+				.' title="'.$langEdit.'" alt="'.$langEdit.'" class="icon" />'
+				.'</a>';
 		}
 
 		return $result;
@@ -645,14 +830,14 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
 			$params = '&cmd['.$table.']['.$uid.'][delete]=1';
 			$confirmation = htmlspecialchars(
-				'if (confirm('.
-				$LANG->JScharCode(
-					$LANG->getLL('deleteWarning').
-					t3lib_BEfunc::referenceCount(
+				'if (confirm('
+				.$LANG->JScharCode(
+					$LANG->getLL('deleteWarning')
+					.t3lib_BEfunc::referenceCount(
 						$table,
 						$uid,
-						' '.$LANG->getLL('referencesWarning'))).
-				')) {return true;} else {return false;}');
+						' '.$LANG->getLL('referencesWarning')))
+				.')) {return true;} else {return false;}');
 			$langDelete = $LANG->getLL('delete', 1);
 			$result = '<a href="'
 				.htmlspecialchars($this->doc->issueCommand($params))
@@ -691,18 +876,25 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$params = '&edit['.$table.']['.$pid.']=new';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langNew = $LANG->getLL('newRecordGeneral');
-			$result = '<div id="typo3-newRecordLink">'.
-				'<a href="'.htmlspecialchars($editOnClick).'">'.
-				'<img'.
-				t3lib_iconWorks::skinImg(
+			$result = TAB.TAB
+				.'<div id="typo3-newRecordLink">'.chr(10)
+				.TAB.TAB.TAB
+				.'<a href="'.htmlspecialchars($editOnClick).'">'.chr(10)
+				.TAB.TAB.TAB.TAB
+				.'<img'
+				.t3lib_iconWorks::skinImg(
 					$BACK_PATH,
 					'gfx/new_record.gif',
-					'width="7" height="4"').
+					'width="7" height="4"')
 				// We use an empty alt attribute as we already have a textual
 				// representation directly next to the icon.
-				' title="'.$langNew.'" alt="" />'.
-				$langNew.
-				'</a></div>';
+				.' title="'.$langNew.'" alt="" />'.chr(10)
+				.TAB.TAB.TAB.TAB
+				.$langNew.chr(10)
+				.TAB.TAB.TAB
+				.'</a>'.chr(10)
+				.TAB.TAB
+				.'</div>'.chr(10);
 		}
 
 		return $result;
@@ -759,9 +951,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					$BACK_PATH,
 					'gfx/csv.gif',
 					'width="27" height="14"'
-				).
-				' title="'.$langCsv.'" alt="'.$langCsv.'" class="icon" />'.
-				'</a>';
+				)
+				.' title="'.$langCsv.'" alt="'.$langCsv.'" class="icon" />'
+				.'</a>';
 		}
 
 		return $result;
@@ -821,10 +1013,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		global $BACK_PATH, $LANG;
 
 		$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.csv', 1);
-		$result = '<div id="typo3-csvLink">'
+		$result = TAB.TAB
+			.'<div id="typo3-csvLink">'.chr(10)
+			.TAB.TAB.TAB
 			.'<a href="class.tx_seminars_csv.php?id='.$this->id
 			.'&amp;tx_seminars_pi2[table]='.$table
-			.'&amp;tx_seminars_pi2[pid]='.$this->id.'">'
+			.'&amp;tx_seminars_pi2[pid]='.$this->id.'">'.chr(10)
+			.TAB.TAB.TAB.TAB
 			.'<img'
 			.t3lib_iconWorks::skinImg(
 				$BACK_PATH,
@@ -833,9 +1028,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			)
 			// We use an empty alt attribute as we already have a textual
 			// representation directly next to the icon.
-			.' title="'.$langCsv.'" alt="" />'
-			.$langCsv
-			.'</a></div>';
+			.' title="'.$langCsv.'" alt="" />'.chr(10)
+			.TAB.TAB.TAB.TAB
+			.$langCsv.chr(10)
+			.TAB.TAB.TAB
+			.'</a>'.chr(10)
+			.TAB.TAB
+			.'</div>'.chr(10);
 
 		return $result;
 	}
