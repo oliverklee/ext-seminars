@@ -808,7 +808,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * The caller needs to take care of htmlspecialcharing the data.
 	 *
 	 * @param	array		array that contains any pre-filled data (unused)
-	 * @param	array		contents of the "params" XML child of the userrobj node (needs to contain an element with the key "key")
+	 * @param	array		contents of the "params" XML child of the userobj node (needs to contain an element with the key "key")
 	 *
 	 * @return	string		the contents of the element
 	 *
