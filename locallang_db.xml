@@ -126,6 +126,14 @@
 			<label index="tx_seminars_lodgings.title"></label>
 			<label index="tx_seminars_foods"></label>
 			<label index="tx_seminars_foods.title"></label>
+			<label index="tx_seminars_timeslots"></label>
+			<label index="tx_seminars_timeslots.title"></label>
+			<label index="tx_seminars_timeslots.begin_date"></label>
+			<label index="tx_seminars_timeslots.end_date"></label>
+			<label index="tx_seminars_timeslots.entry_date"></label>
+			<label index="tx_seminars_timeslots.speakers"></label>
+			<label index="tx_seminars_timeslots.place"></label>
+			<label index="tx_seminars_timeslots.room"></label>
 			<label index="tt_content.list_type_pi1"></label>
 		</labelContext>
 	</meta>
@@ -260,6 +268,14 @@
 			<label index="tx_seminars_lodgings.title">Title:</label>
 			<label index="tx_seminars_foods">Food options</label>
 			<label index="tx_seminars_foods.title">Title:</label>
+			<label index="tx_seminars_timeslots">Timeslot</label>
+			<label index="tx_seminars_timeslots.title">Title</label>
+			<label index="tx_seminars_timeslots.begin_date">Begin date</label>
+			<label index="tx_seminars_timeslots.end_date">End date</label>
+			<label index="tx_seminars_timeslots.entry_date">Entry date</label>
+			<label index="tx_seminars_timeslots.speakers">Speakers</label>
+			<label index="tx_seminars_timeslots.place">Place</label>
+			<label index="tx_seminars_timeslots.room">Room</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -392,6 +408,14 @@
 			<label index="tx_seminars_lodgings.title">Titel:</label>
 			<label index="tx_seminars_foods">Verpflegungsmöglichkeiten</label>
 			<label index="tx_seminars_foods.title">Titel:</label>
+			<label index="tx_seminars_timeslots">Zeitblock</label>
+			<label index="tx_seminars_timeslots.title">Titel</label>
+			<label index="tx_seminars_timeslots.begin_date">Anfangszeit und -datum</label>
+			<label index="tx_seminars_timeslots.end_date">Endzeit und -datum</label>
+			<label index="tx_seminars_timeslots.entry_date">Einlasszeit und -datum</label>
+			<label index="tx_seminars_timeslots.speakers">Referenten</label>
+			<label index="tx_seminars_timeslots.place">Ort</label>
+			<label index="tx_seminars_timeslots.room">Raum</label>
 			<label index="tt_content.list_type_pi1">Seminar-Manager</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -864,6 +888,14 @@
 			<label index="tx_seminars_lodgings.title" type="integer">85903807</label>
 			<label index="tx_seminars_foods" type="integer">202329490</label>
 			<label index="tx_seminars_foods.title" type="integer">85903807</label>
+			<label index="tx_seminars_timeslots" type="integer">151829616</label>
+			<label index="tx_seminars_timeslots.title" type="integer">192455458</label>
+			<label index="tx_seminars_timeslots.begin_date" type="integer">230060070</label>
+			<label index="tx_seminars_timeslots.end_date" type="integer">192800740</label>
+			<label index="tx_seminars_timeslots.entry_date" type="integer">17175357</label>
+			<label index="tx_seminars_timeslots.speakers" type="integer">258305227</label>
+			<label index="tx_seminars_timeslots.place" type="integer">129617664</label>
+			<label index="tx_seminars_timeslots.room" type="integer">214150095</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1337,6 +1369,15 @@
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.divLabelPayment">Payment</label>
+			<label index="tx_seminars_timeslots">Timeslot</label>
+			<label index="tx_seminars_timeslots.title">Title</label>
+			<label index="tx_seminars_timeslots.speakers">Speakers</label>
+			<label index="tx_seminars_timeslots.site">Site</label>
+			<label index="tx_seminars_timeslots.room">Room</label>
+			<label index="tx_seminars_timeslots.begin_date">Begin date</label>
+			<label index="tx_seminars_timeslots.end_date">End date</label>
+			<label index="tx_seminars_timeslots.entry_date">Entry date</label>
+			<label index="tx_seminars_timeslots.place">Place</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

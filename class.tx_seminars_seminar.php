@@ -653,28 +653,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets the seminar room (not the site).
-	 *
-	 * @return	string		the seminar room (may be empty)
-	 *
-	 * @access	public
-	 */
-	function getRoom() {
-		return $this->getRecordPropertyString('room');
-	}
-
-	/**
-	 * Checks whether we have a room set.
-	 *
-	 * @return	boolean		true if we have a non-empty room, false otherwise.
-	 *
-	 * @access	public
-	 */
-	function hasRoom() {
-		return $this->hasRecordPropertyString('room');
-	}
-
-	/**
 	 * Gets our speaker (or speakers), complete as RTE'ed HTML with details and
 	 * links.
 	 * Returns an empty paragraph if this seminar doesn't have any speakers.

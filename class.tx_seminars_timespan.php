@@ -278,6 +278,28 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 
 		return $result;
 	}
+
+	/**
+	 * Gets the seminar room (not the site).
+	 *
+	 * @return	string		the seminar room (may be empty)
+	 *
+	 * @access	public
+	 */
+	function getRoom() {
+		return $this->getRecordPropertyString('room');
+	}
+
+	/**
+	 * Checks whether we have a room set.
+	 *
+	 * @return	boolean		true if we have a non-empty room, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasRoom() {
+		return $this->hasRecordPropertyString('room');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_timespan.php']) {

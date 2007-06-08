@@ -435,3 +435,40 @@ CREATE TABLE tx_seminars_attendances_foods_mm (
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
+
+
+#
+# Table structure for table 'tx_seminars_timeslots'
+#
+CREATE TABLE tx_seminars_timeslots (
+	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	pid int(11) unsigned DEFAULT '0' NOT NULL,
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	seminar int(11) unsigned DEFAULT '0' NOT NULL,
+	title tinytext NOT NULL,
+	begin_date int(11) DEFAULT '0' NOT NULL,
+	end_date int(11) DEFAULT '0' NOT NULL,
+	entry_date int(11) DEFAULT '0' NOT NULL,
+	speakers tinytext NOT NULL,
+	place int(11) unsigned DEFAULT '0' NOT NULL,
+	room text NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
+
+#
+# Table structure for table 'tx_seminars_timeslots_speakers_mm'
+#
+CREATE TABLE tx_seminars_timeslots_speakers_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);

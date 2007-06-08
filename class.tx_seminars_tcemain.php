@@ -33,6 +33,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
 
 class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	/**
@@ -77,28 +78,53 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 		}
 
 		// only do the database query if the right table was modified
-		if ($table == $this->tableSeminars) {
-			// Initialize a seminar object to have all functions available.
-			$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-			$seminar =& new $seminarClassname($id, null, true);
+		switch ($table) {
+			case $this->tableSeminars:
+				// Initialize a seminar object to have all functions available.
+				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+				$seminar =& new $seminarClassname($id, null, true);
+	
+				if ($seminar->isOk()) {
+					// Get an associative array of fields that need to be updated
+					// in the database.
+					$updateArray = $seminar->getUpdateArray($fieldArray);
+	
+					// Only update the record in the database if needed.
+					if (count($updateArray)) {
+						$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+							$this->tableSeminars,
+							'uid='.$id,
+							$updateArray
+						);
+					}
 
-			if ($seminar->isOk()) {
-				// Get an associative array of fields that need to be updated
-				// in the database.
-				$updateArray = $seminar->getUpdateArray($fieldArray);
-
-				// Only update the record in the database if needed.
-				if (count($updateArray)) {
-					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-						$this->tableSeminars,
-						'uid='.$id,
-						$updateArray
-					);
+					// Update statistics every time an event record gets saved. 
+					$seminar->updateStatistics();
 				}
-			}
+				break;
+			case $this->tableTimeslots:
+				// Initialize a timeslot object to have all functions available
+				$timeslotClassname = t3lib_div::makeInstanceClassName('tx_seminars_timeslot');
+				$timeslot =& new $timeslotClassname($id, null);
 
-			// Update statistics every time an event record gets saved. 
-			$seminar->updateStatistics();
+				if ($timeslot->isOk()) {
+					// Get an associative array of fields that need to be updated
+					// in the database.
+					$updateArray = $timeslot->getUpdateArray($fieldArray);
+
+					// Only update the record in the database if needed.
+					if (count($updateArray)) {
+						$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+							$this->tableTimeslots,
+							'uid='.$id,
+							$updateArray
+						);
+					}
+				}
+				break;
+			default:
+				// Do nothing.
+				break;
 		}
 
 		return;

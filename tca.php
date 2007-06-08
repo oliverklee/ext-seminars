@@ -1438,4 +1438,122 @@ $TCA['tx_seminars_foods'] = array(
 	)
 );
 
+$TCA['tx_seminars_timeslots'] = array(
+	'ctrl' => $TCA['tx_seminars_timeslots']['ctrl'],
+	'interface' => array(
+		'showRecordFieldList' => 'begin_date, end_date, entry_date, speakers, place, room'
+	),
+	'columns' => array(
+		'seminar' => array(
+			'config' => array(
+				'type' => 'input',
+				'size' => '30'
+			)
+		),
+		'title' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots.title',
+			'config' => array(
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'trim'
+			)
+		),
+		'begin_date' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots.begin_date',
+			'config' => array(
+				'type' => 'input',
+				'size' => '12',
+				'max' => '20',
+				'eval' => 'datetime',
+				'checkbox' => '0',
+				'default' => '0'
+			)
+		),
+		'end_date' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots.end_date',
+			'config' => array(
+				'type' => 'input',
+				'size' => '12',
+				'max' => '20',
+				'eval' => 'datetime',
+				'checkbox' => '0',
+				'default' => '0'
+			)
+		),
+		'entry_date' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots.entry_date',
+			'config' => array(
+				'type' => 'input',
+				'size' => '12',
+				'max' => '20',
+				'eval' => 'datetime',
+				'checkbox' => '0',
+				'default' => '0'
+			)
+		),
+		'speakers' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots.speakers',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_speakers',
+				'foreign_table' => 'tx_seminars_speakers',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 999,
+				'MM' => 'tx_seminars_timeslots_speakers_mm'
+			)
+		),
+		'place' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots.place',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_sites',
+				'foreign_table' => 'tx_seminars_sites',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1
+			)
+		),
+		'room' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots.room',
+			'config' => array(
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5'
+			)
+		)
+	),
+	'types' => array(
+		'0' => array('showitem' => 'begin_date, end_date, entry_date, speakers, place, room')
+	),
+	'palettes' => array(
+		'1' => array('showitem' => '')
+	)
+);
+
+// Check if our extension is used on TYPO3 4.1 to keep the compatibility to
+// older TYPO3 versions.
+if ((float) $GLOBALS['TYPO3_CONF_VARS']['SYS']['compat_version'] >= 4.1) {
+	unset($TCA['tx_seminars_seminars']['columns']['timeslots']);
+	$TCA['tx_seminars_seminars']['columns']['timeslots'] = array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.timeslots',
+		'config' => array(
+			'type' => 'inline',
+			'foreign_table' => 'tx_seminars_timeslots',
+			'foreign_field' => 'seminar',
+			'maxitems' => 999
+		)
+	);
+}
+
 ?>
