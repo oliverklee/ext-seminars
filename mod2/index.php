@@ -937,7 +937,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 *
 	 * $this->seminar must be initialized when this function is called.
 	 *
-	 * @return	string		the HTML for the linked image or an empty string
+	 * @return	string		the HTML for the linked image (followed by a non-breaking space) or an empty string
 	 *
 	 * @access	public
 	 */
@@ -967,7 +967,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					'width="27" height="14"'
 				)
 				.' title="'.$langCsv.'" alt="'.$langCsv.'" class="icon" />'
-				.'</a>';
+				.'</a>&nbsp;';
 		}
 
 		return $result;
