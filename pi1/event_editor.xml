@@ -21,7 +21,12 @@
 		</datahandler:DBMM>
 		<renderer:TEMPLATE>
 			<template>
-				<path>EXT:seminars/pi1/seminars_pi1.tmpl</path>
+				<path>
+					<userobj>
+						<extension>this</extension>
+						<method>getTemplatePath</method>
+					</userobj>
+				</path>
 				<subpart>###seminars_FORM###</subpart>
 				<errortag>errors</errortag>
 			</template>

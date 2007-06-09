@@ -49,9 +49,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	/** the UID of the event to edit (or false (not 0!) if we are creating an event) */
 	var $iEdition = false;
 
-	/** path to the HTML template */
-	var $sTemplatePath = '';
-
 	// Currently, we can only edit event (seminar) records.
 	/** the table to edit (without the extension prefix) */
 	var $sEntity = 'seminars';
@@ -71,11 +68,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		$this->plugin =& $plugin;
 		$this->init($this->plugin->conf);
 
-		$this->sTemplatePath = $this->plugin->getConfValueString(
-			'templateFile',
-			's_template_special',
-			true
-		);
 		// Edit an existing record or create a new one?
 		$this->iEdition = (array_key_exists('action', $this->plugin->piVars)
 			&& $this->plugin->piVars['action'] == 'EDIT')
@@ -117,6 +109,25 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		);
 
 		return;
+	}
+
+	/**
+	 * Gets the path to the HTML template as set in the TS setup or flexforms.
+	 * The returned path will always be an absolute path in the file system;
+	 * EXT: references will automatically get resolved.
+	 *
+	 * @return	string		the path to the HTML template as an absolute path in the file system, will not be empty in a correct configuration, will never be null
+	 *
+	 * @access	public
+	 */
+	function getTemplatePath() {
+		return t3lib_div::getFileAbsFileName(
+			$this->plugin->getConfValueString(
+				'templateFile',
+				's_template_special',
+				true
+			)
+		);
 	}
 
 	/**

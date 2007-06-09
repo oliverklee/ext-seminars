@@ -211,6 +211,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		}
 
 		$this->checkBaseUrl();
+		$this->checkRegistrationEditorTemplateFile();
 
 		$this->checkGeneralPriceInSingle();
 		$this->checkEventFieldsOnRegistrationPage();
@@ -1778,6 +1779,43 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set correctly, the wrong wording '
 				.'might get displayed.'
 		);
+
+		return;
+	}
+
+	/**
+	 * Checks whether the HTML template for the registration form is provided
+	 * and the file exists.
+	 *
+	 * @access	protected
+	 */
+	function checkRegistrationEditorTemplateFile() {
+		$this->checkForNonEmptyString(
+			'registrationEditorTemplateFile',
+			true,
+			's_registration',
+			'This specifies the HTML template for the registration form.'
+		);
+
+		if ($this->objectToCheck->hasConfValueString(
+			'registrationEditorTemplateFile', 's_registration'
+		)) {
+			$rawFileName = $this->objectToCheck->getConfValueString(
+				'registrationEditorTemplateFile',
+				's_template_special'
+			);
+			if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
+				$message = 'The specified HTML template file <strong>'
+					.htmlspecialchars($rawFileName)
+					.'</strong> cannot be read. '
+					.'This specifies the HTML template for the registration form. '
+					.'Please either create the file <strong>'.$rawFileName
+					.'</strong> or select an existing file using the TS setup '
+					.'variable <strong>'.$this->getTSSetupPath()
+					.'templateFile</strong> or via FlexForms.';
+				$this->setErrorMessage($message);
+			}
+		}
 
 		return;
 	}

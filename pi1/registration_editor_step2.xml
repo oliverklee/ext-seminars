@@ -15,7 +15,12 @@
 		</datahandler:RAW>
 		<renderer:TEMPLATE>
 			<template>
-				<path>EXT:seminars/pi1/registration_editor.html</path>
+				<path>
+					<userobj>
+						<extension>this</extension>
+						<method>getTemplatePath</method>
+					</userobj>
+				</path>
 				<subpart>###REGISTRATION_EDITOR_STEP_2###</subpart>
 				<errortag>errors</errortag>
 			</template>

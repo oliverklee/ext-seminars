@@ -123,6 +123,9 @@ plugin.tx_seminars_pi1 {
 	# location of the HTML template file
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
 
+	# location of the template file for the registration form
+	registrationEditorTemplateFile = EXT:seminars/pi1/registration_editor.html
+
 	# location of the CSS file (leave empty to include no CSS file)
 	cssFile = typo3conf/ext/seminars/pi1/seminars_pi1.css
 
