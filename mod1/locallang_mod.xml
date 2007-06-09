@@ -35,6 +35,9 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="mlang_tabs_tab">Seminars</label>
+			<label index="mlang_labels_tabdescr">Deze module biedt de functionaliteit: beheer seminars, regestraties, seminar locaties en sprekers.</label>
+			<label index="mlang_labels_tablabel">Seminars</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -121,6 +124,9 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="mlang_tabs_tab" type="integer">146176001</label>
+			<label index="mlang_labels_tabdescr" type="integer">117707712</label>
+			<label index="mlang_labels_tablabel" type="integer">146176001</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -207,6 +213,9 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="mlang_tabs_tab">Seminars</label>
+			<label index="mlang_labels_tabdescr">This module allows you to manage seminars, registrations, seminar sites and speakers.</label>
+			<label index="mlang_labels_tablabel">Seminars</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>

@@ -581,58 +581,188 @@
 			<label index="seminars.pi_flexform.sheet_general">Algemeen</label>
 			<label index="seminars.pi_flexform.what_to_display">Wat moet er worden getoond:</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special">Sjablonen en speciale eigenschappen</label>
-			<label index="seminars.pi_flexform.seminar_list">Lijst van seminars</label>
-			<label index="seminars.pi_flexform.my_events">Mijn seminars</label>
-			<label index="seminars.pi_flexform.seminar_registration">Seminar registratie</label>
+			<label index="seminars.pi_flexform.seminar_list">Lijst van Evenementen</label>
+			<label index="seminars.pi_flexform.topic_list">Lijst van onderwerpen</label>
+			<label index="seminars.pi_flexform.my_events">Mijn Evenementen</label>
+			<label index="seminars.pi_flexform.my_vip_events">Mijn VIP Evenementen</label>
+			<label index="seminars.pi_flexform.seminar_registration">Evenement registratie</label>
+			<label index="seminars.pi_flexform.list_registrations">Lijst van registraties (voor deelnemers)</label>
+			<label index="seminars.pi_flexform.list_vip_registrations">Lijst van registraties (voor VIP's)</label>
+			<label index="seminars.pi_flexform.event_editor">Evenement editor</label>
+			<label index="seminars.pi_flexform.my_entered_events">Evenementen die ik heb ingevoerd</label>
+			<label index="seminars.pi_flexform.countdown">Aftellen naar het volgende evenement</label>
 			<label index="seminars.pi_flexform.baseURL">Basis URL van deze Typo3 site, bijv. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Pagina die de seminarlijst bevat:</label>
-			<label index="seminars.pi_flexform.registerPID">Pagina die het registratieformulier van de bijeenkomst bevat:</label>
+			<label index="seminars.pi_flexform.detailPID">Pagina die de details bevat:</label>
+			<label index="seminars.pi_flexform.registerPID">Pagina die het registratieformulier van het evenement bevat:</label>
 			<label index="seminars.pi_flexform.loginPID">Pagina die het inlogformulier bevat:</label>
+			<label index="seminars.pi_flexform.registrationsListPID">Pagina die de lijst van registraties (voor deelnemers) bevat:</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID">pagina die de lijst van registraties (voor VIP's) bevat:</label>
 			<label index="seminars.pi_flexform.salutation">Begroetingswijze op de pagina:</label>
 			<label index="seminars.pi_flexform.formal">formeel</label>
 			<label index="seminars.pi_flexform.informal">informeel</label>
 			<label index="seminars.pi_flexform.templateFile">Bestandsnaam van het HTML-sjabloon:</label>
 			<label index="seminars.pi_flexform.cssFile">Bestandsnaam van de CSS stylesheet:</label>
-			<label index="seminars.pi_flexform.timeframeInList">Toon alleen bijeenkomsten binnen deze tijdsperiode:</label>
-			<label index="seminars.pi_flexform.timeframeInList1">alle bijeenkomsten</label>
-			<label index="seminars.pi_flexform.timeframeInList2">oude bijeenkomsten</label>
-			<label index="seminars.pi_flexform.timeframeInList3">oude en actuele bijeenkomsten</label>
-			<label index="seminars.pi_flexform.timeframeInList4">actuele bijeenkomsten</label>
-			<label index="seminars.pi_flexform.timeframeInList5">actuele en komende bijeenkomsten</label>
-			<label index="seminars.pi_flexform.timeframeInList6">komende bijeenkomsten</label>
-			<label index="seminars.pi_flexform.timeframeInList7">bijeenkomsten met sluitingsdatum in de toekomst</label>
+			<label index="seminars.pi_flexform.showSingleEvent">Welke evenement moet in de detailweergave getoond worden</label>
+			<label index="seminars.pi_flexform.timeframeInList">Toon alleen evenementen binnen deze tijdsperiode:</label>
+			<label index="seminars.pi_flexform.timeframeInList1">alle evenementen</label>
+			<label index="seminars.pi_flexform.timeframeInList2">evenementen uit verleden</label>
+			<label index="seminars.pi_flexform.timeframeInList3">oude en actuele Evenementen</label>
+			<label index="seminars.pi_flexform.timeframeInList4">actuele Evenementen</label>
+			<label index="seminars.pi_flexform.timeframeInList5">actuele en komende Evenementen</label>
+			<label index="seminars.pi_flexform.timeframeInList6">komende Evenementen</label>
+			<label index="seminars.pi_flexform.timeframeInList7">Evenementen met sluitingsdatum in de toekomst</label>
 			<label index="seminars.pi_flexform.hideFields">Verberg velden in detailaanzicht (comma-separated):</label>
+			<label index="seminars.pi_flexform.hideSearchForm">Verberg het zoek formulier in de lijst weergave:</label>
+			<label index="seminars.pi_flexform.hidePageBrowser">Verberg de pagina browser in de lijst weergave:</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents">Verberg geanulleerde seminars in de lijst weergave</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIP's FE User groep:</label>
 			<label index="seminars.pi_flexform.hideColumns">Verberg kolomnamen in lijstaanzicht (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">&quot;Prijs&quot; als kop gebruiken voor de standaardprijs in de lijstaanzicht:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">&quot;Prijs&quot; als kop gebruiken voor de standaardprijs in detailaanzicht en bij de registratie zelf:</label>
+			<label index="seminars.pi_flexform.omitDateIfSameAsPrevious">Laat de gegevens weg in de lijstweergave indien hetzelfde is als vorig</label>
+			<label index="seminars.pi_flexform.eventFieldsOnRegistrationPage">Seminar gegeven die getoond moet worden op de registratie pagina</label>
 			<label index="seminars.pi_flexform.showRegistrationFields">Toon tekst invoervelden voor online registratie (comma-separated):</label>
+			<label index="seminars.pi_flexform.showSpeakerDetails">Toon spreker details.</label>
+			<label index="seminars.pi_flexform.showSiteDetails">Toon locatie details</label>
+			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Welke FE user velden wil je tonen in het overzicht van registratie voor een seminar</label>
+			<label index="seminars.pi_flexform.sheet_registration">Registratie</label>
+			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">pagina die getoond wordt nadat de gebruiker voor een seminar heeft geregistreerd</label>
+			<label index="seminars.pi_flexform.sheet_fe_editing">Front end editing</label>
+			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user groep die seminars mag toevoegen en wijzigen</label>
+			<label index="seminars.pi_flexform.eventEditorPID">Pagina die de plug-in voor wijzigen van Seminar records.</label>
+			<label index="seminars.pi_flexform.createEventsPID">Systeemmap om de FE aangemaakte seminars in op te slaan</label>
+			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Pagina waarnaar wordt gesprongen na het opslaan van een seminar</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorige</label>
 			<label index="pi_list_browseresults_page">Pag</label>
 			<label index="pi_list_browseresults_next">Volgende &gt;</label>
 			<label index="pi_list_browseresults_displays">Toon resultaten ###SPAN_BEGIN###%s tot %s&lt;/span&gt; van in totaal ###SPAN_BEGIN###%s&lt;/span&gt;</label>
-			<label index="pi_list_browseresults_noResults">Sorry, geen bijeenkomsten gevonden.</label>
+			<label index="pi_list_browseresults_noResults">Sorry, geen evenementen gevonden.</label>
 			<label index="pi_list_searchBox_search">Zoek</label>
+			<label index="label_myevents_formal">U bent voor de volgende evenementen geregistreerd:</label>
+			<label index="label_myevents_informal">Jij bent voor de volgende evenementen geregistreerd:</label>
+			<label index="label_myvipevents_formal">U bent een VIP voor de volgende evenementen:</label>
+			<label index="label_myvipevents_informal">Jij bent een VIP voor de volgende evenementen:</label>
+			<label index="label_myenteredevents_formal">U heeft de volgende evenementen ingevoerd:</label>
+			<label index="label_myenteredevents_informal">Jij hebt de volgende evenementen ingevoerd:</label>
 			<label index="label_title">Titel</label>
+			<label index="label_subtitle">Sub titel</label>
+			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Accrediteringsnummer</label>
 			<label index="label_credit_points">Kredietpunten</label>
 			<label index="label_date">Datum</label>
 			<label index="label_time">Tijd</label>
 			<label index="label_place">Plaats</label>
 			<label index="label_room">Kamer</label>
+			<label index="label_additional_times_places">Tijd en plaats</label>
 			<label index="label_speakers">Sprekers</label>
+			<label index="label_partners">Partners</label>
+			<label index="label_tutors">Docenten</label>
+			<label index="label_leaders">Leiders</label>
 			<label index="label_price_general">Prijs</label>
+			<label index="label_select_price">Prijs:</label>
 			<label index="label_price_regular">Reguliere prijs</label>
+			<label index="label_price_earlybird_regular">Vroegboek prijs</label>
+			<label index="label_price_board_regular">Reguliere prijs inclusief vol pension</label>
 			<label index="label_price_special">Speciale prijs</label>
+			<label index="label_price_earlybird_special">Vroegboek speciale prijs</label>
+			<label index="label_price_board_special">Speciale prijs inclusief volpension</label>
+			<label index="label_total_price">Totale prijs</label>
 			<label index="label_paymentmethods">Beschikbare betaalwijzen</label>
+			<label index="label_select_paymentmethod">Betaal methode</label>
+			<label index="label_event_type">Seminar type</label>
 			<label index="label_organizers">Organiseerders</label>
-			<label index="label_vacancies">Plaatsen</label>
+			<label index="label_vacancies">Vrije Plaatsen</label>
 			<label index="label_deadline_registration">Sluitingsdatum voor registratie</label>
 			<label index="label_registration">Registratie</label>
-			<label index="label_onlineRegistration">Online registratie</label>
+			<label index="label_onlineRegistration">Registreer nu</label>
+			<label index="label_list_registrations">Lijst van registraties</label>
+			<label index="label_listRegistrationsLink">Toon de lijst van registraties</label>
+			<label index="label_list_otherdates">Andere datums voor dit onderwerp</label>
+			<label index="label_list_dates">Datums voor dit onderwerp</label>
+			<label index="label_eventsnextday">Opvolgende seminars</label>
+			<label index="label_edit">Edit</label>
 			<label index="label_back">Terug naar overzicht</label>
-			<label index="message_wrongSeminarNumber_formal">Er is een bijeenkomst bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link wilt u dan de webmaster hiervan op de hoogte brengen? Dank u!</label>
-			<label index="message_wrongSeminarNumber_informal">Een bijeenkomst met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
-			<label index="message_noResults">Sorry, op dit moment zijn er geen bijeenkomsten gevonden.</label>
+			<label index="label_save">Bewaar</label>
+			<label index="label_register_additional_information">Extra informatie</label>
+			<label index="label_interests">Speciale belangstelling</label>
+			<label index="label_expectations">Verwachtingen van dit seminar</label>
+			<label index="label_background_knowledge">Achtergrond kennis:</label>
+			<label index="label_register_lodging_and_food">Acomodatie en voeding</label>
+			<label index="label_accommodation">Wat zijn je accommodatie wensen ?</label>
+			<label index="label_food">Welk voedsel geef je de voorkeur aan?</label>
+			<label index="label_known_from">Hoe ben je geinformeerd over dit evenement.</label>
+			<label index="label_notes">extra notities</label>
+			<label index="label_register_additional_attendees">Registreer extra personen</label>
+			<label index="label_seats">Stoelen</label>
+			<label index="label_register_seats">Totaal aantal stoelen voor deze boeking:</label>
+			<label index="label_attendees_names">Namen van extra personen voor de registratie:</label>
+			<label index="label_kids">Aantal kinderen:</label>
+			<label index="label_legend_payment">Betaling</label>
+			<label index="label_account_number">Rekening nummer</label>
+			<label index="label_bank_code">Bank code:</label>
+			<label index="label_bank_name">Bank naam:</label>
+			<label index="label_account_owner">Eigenaar van de rekening</label>
+			<label index="label_billing_address">Factuur adres</label>
+			<label index="label_gender">Hr./mv.</label>
+			<label index="label_gender.I.0">Hr.</label>
+			<label index="label_gender.I.1">Mv.</label>
+			<label index="label_name">Naam:</label>
+			<label index="label_address">Straat:</label>
+			<label index="label_zip">pc:</label>
+			<label index="label_city">Stad:</label>
+			<label index="label_country">Provincie:</label>
+			<label index="label_telephone">Telefoon:</label>
+			<label index="label_email">E-mail adres:</label>
+			<label index="label_lodgings">Acomodatie:</label>
+			<label index="label_foods">Voeding:</label>
+			<label index="label_register_entered_data_formal">Uw registratie gegevens</label>
+			<label index="label_register_entered_data_informal">Jouw registratie gegevens</label>
+			<label index="label_register_all_terms">Registratie voorwaarden</label>
+			<label index="label_terms">Ik accepteer de voorwaarden.</label>
+			<label index="label_terms_2">Ik accepteer de voorwaarden.</label>
+			<label index="label_submit_registration">Verstuur de registratie</label>
+			<label index="label_proceed_registration">Ga verder met uitcheken</label>
+			<label index="label_back_registration">Terug</label>
+			<label index="label_your_user_data_formal">U adres gegevens:</label>
+			<label index="label_your_user_data_informal">Jouw adres gegevens:</label>
+			<label index="label_selected_paymentmethod">Gekozen methode van betalen:</label>
+			<label index="message_wrongSeminarNumber_formal">Er is geen evenement bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link wilt u dan de webmaster hiervan op de hoogte brengen? Dank u!</label>
+			<label index="message_wrongSeminarNumber_informal">Een evenement met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
+			<label index="message_noResults">Sorry, op dit moment zijn er geen evenementen gevonden.</label>
+			<label index="message_notLoggedIn_formal">Sorry, U bent niet ingelogd.</label>
+			<label index="message_notLoggedIn_informal">Sorry, je bent niet ingelogd.</label>
+			<label index="message_pleaseLogIn_formal">Log in om deze pagina te kunnen zien.</label>
+			<label index="message_pleaseLogIn_informal">Log in om deze pagina te kunnen zien.</label>
+			<label index="message_noRegistrations">Voor dit Seminar zijn nog geen registraties.</label>
+			<label index="message_earlybird_price">Prijs is geldig en er kan geboekt worden tot %s</label>
+			<label index="message_emptyTitle">Vul een titel in voor dit Seminar.</label>
+			<label index="message_emptyOrganizer">Vul tenminste 1 organisator in.</label>
+			<label index="message_noAttendeesNumber">Vul alleen het minimum en maximum aantatl deelnemers in.</label>
+			<label index="message_noPriceNumber">Vul alleen cijfers in en gebruik een punt voor decimalen.</label>
+			<label index="message_noAccessToEventEditor_formal">Sorry, U heeft geen toegang tot de Evenementen Editor.</label>
+			<label index="message_noAccessToEventEditor_informal">Sorry, Je hebt geen toegang tot de Evenementen Editor.</label>
+			<label index="message_noSeatsNumber">Geef alleen cijfers voor het aantal plaatsen.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, er zijn genoeg vrije plaatsen voor dit evenement.</label>
+			<label index="message_provideAttendeesNames">Geef de naam van de deelnemer.</label>
+			<label index="message_noKidsNumber">Geef alleen cijfers voor het aantal kinderen.</label>
+			<label index="message_choosePrice">Kies een prijs.</label>
+			<label index="message_chooseMethodOfPayment">Kies een betaal methode.</label>
+			<label index="message_provideBankData">Geef uw bank gegevens.</label>
+			<label index="message_selectLodging">Geef tenminste 1 acomodatie optie.</label>
+			<label index="message_selectFood">Geef tenminste 1 voeding keuze.</label>
+			<label index="message_acceptTerms">Accepteer de voorwaarden om voor dit Seminar te registreren</label>
+			<label index="message_acceptTerms2">Accepteer de reisvoorwaarden om voor dit Seminar te registreren.</label>
+			<label index="message_countdown">%d %s over tot de volgende begint.</label>
+			<label index="message_countdown_noEventFound_formal">Er zijn geen Evenementen meer. Kom later terug.</label>
+			<label index="message_countdown_noEventFound_informal">Er zijn geen Evenementen meer. Kom later terug.</label>
+			<label index="countdown_days_plural">dagen</label>
+			<label index="countdown_days_singular">dag</label>
+			<label index="countdown_hours_plural">uren</label>
+			<label index="countdown_hours_singular">uur</label>
+			<label index="countdown_minutes_plural">minuten</label>
+			<label index="countdown_minutes_singular">minuut</label>
+			<label index="countdown_seconds_plural">seconden</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -1261,9 +1391,9 @@
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
 			<label index="seminars.pi_flexform.what_to_display" type="integer">97910403</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
-			<label index="seminars.pi_flexform.seminar_list" type="integer">32827865</label>
+			<label index="seminars.pi_flexform.seminar_list" type="integer">98496595</label>
 			<label index="seminars.pi_flexform.my_events" type="integer">25497076</label>
-			<label index="seminars.pi_flexform.seminar_registration" type="integer">250098610</label>
+			<label index="seminars.pi_flexform.seminar_registration" type="integer">146873320</label>
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
 			<label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
@@ -1273,7 +1403,7 @@
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
 			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
-			<label index="seminars.pi_flexform.timeframeInList" type="integer">211332464</label>
+			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
 			<label index="seminars.pi_flexform.timeframeInList2" type="integer">36274015</label>
 			<label index="seminars.pi_flexform.timeframeInList3" type="integer">75911135</label>
@@ -1308,11 +1438,141 @@
 			<label index="label_vacancies" type="integer">99017107</label>
 			<label index="label_deadline_registration" type="integer">106717060</label>
 			<label index="label_registration" type="integer">16354175</label>
-			<label index="label_onlineRegistration" type="integer">20392011</label>
+			<label index="label_onlineRegistration" type="integer">201391585</label>
 			<label index="label_back" type="integer">168615651</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">232548181</label>
-			<label index="message_wrongSeminarNumber_informal" type="integer">232548181</label>
+			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
+			<label index="seminars.pi_flexform.topic_list" type="integer">105969965</label>
+			<label index="seminars.pi_flexform.my_vip_events" type="integer">60045914</label>
+			<label index="seminars.pi_flexform.list_registrations" type="integer">258526278</label>
+			<label index="seminars.pi_flexform.list_vip_registrations" type="integer">4335826</label>
+			<label index="seminars.pi_flexform.event_editor" type="integer">243089187</label>
+			<label index="seminars.pi_flexform.my_entered_events" type="integer">100155450</label>
+			<label index="seminars.pi_flexform.countdown" type="integer">104673252</label>
+			<label index="seminars.pi_flexform.detailPID" type="integer">252951912</label>
+			<label index="seminars.pi_flexform.registrationsListPID" type="integer">169223862</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID" type="integer">64223433</label>
+			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
+			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
+			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">201114697</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID" type="integer">91800914</label>
+			<label index="countdown_days_plural" type="integer">72343236</label>
+			<label index="countdown_days_singular" type="integer">103331803</label>
+			<label index="countdown_hours_plural" type="integer">121429469</label>
+			<label index="countdown_hours_singular" type="integer">144098652</label>
+			<label index="countdown_minutes_plural" type="integer">104922380</label>
+			<label index="countdown_minutes_singular" type="integer">10999131</label>
+			<label index="countdown_seconds_plural" type="integer">126085346</label>
+			<label index="seminars.pi_flexform.omitDateIfSameAsPrevious" type="integer">167609947</label>
+			<label index="seminars.pi_flexform.eventFieldsOnRegistrationPage" type="integer">55680867</label>
+			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
+			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
+			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
+			<label index="seminars.pi_flexform.sheet_registration" type="integer">16354175</label>
+			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID" type="integer">144873436</label>
+			<label index="seminars.pi_flexform.sheet_fe_editing" type="integer">74816411</label>
+			<label index="seminars.pi_flexform.eventEditorFeGroupID" type="integer">6056414</label>
+			<label index="seminars.pi_flexform.eventEditorPID" type="integer">236783633</label>
+			<label index="seminars.pi_flexform.createEventsPID" type="integer">130277073</label>
+			<label index="seminars.pi_flexform.eventSuccessfullySavedPID" type="integer">107570988</label>
+			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents_informal" type="integer">177740162</label>
+			<label index="label_myvipevents_formal" type="integer">74285293</label>
+			<label index="label_myvipevents_informal" type="integer">74285293</label>
+			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents_informal" type="integer">250348827</label>
+			<label index="label_subtitle" type="integer">3536098</label>
+			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_additional_times_places" type="integer">178250458</label>
+			<label index="label_partners" type="integer">265740084</label>
+			<label index="label_tutors" type="integer">102766940</label>
+			<label index="label_leaders" type="integer">45784650</label>
+			<label index="label_select_price" type="integer">254546606</label>
+			<label index="label_price_earlybird_regular" type="integer">236870027</label>
+			<label index="label_price_board_regular" type="integer">122636477</label>
+			<label index="label_price_earlybird_special" type="integer">255242535</label>
+			<label index="label_price_board_special" type="integer">56248635</label>
+			<label index="label_total_price" type="integer">15654485</label>
+			<label index="label_select_paymentmethod" type="integer">203383656</label>
+			<label index="label_event_type" type="integer">99114704</label>
+			<label index="label_list_registrations" type="integer">206095824</label>
+			<label index="label_listRegistrationsLink" type="integer">169828522</label>
+			<label index="label_list_otherdates" type="integer">139958574</label>
+			<label index="label_list_dates" type="integer">46235180</label>
+			<label index="label_eventsnextday" type="integer">268130487</label>
+			<label index="label_edit" type="integer">131916066</label>
+			<label index="label_save" type="integer">211601612</label>
+			<label index="label_register_additional_information" type="integer">16157584</label>
+			<label index="label_interests" type="integer">236721406</label>
+			<label index="label_expectations" type="integer">159374040</label>
+			<label index="label_background_knowledge" type="integer">17742601</label>
+			<label index="label_register_lodging_and_food" type="integer">246916949</label>
+			<label index="label_accommodation" type="integer">139911191</label>
+			<label index="label_food" type="integer">230880093</label>
+			<label index="label_known_from" type="integer">243584829</label>
+			<label index="label_notes" type="integer">67236517</label>
+			<label index="label_register_additional_attendees" type="integer">70729970</label>
+			<label index="label_seats" type="integer">187299883</label>
+			<label index="label_register_seats" type="integer">76212082</label>
+			<label index="label_attendees_names" type="integer">43575953</label>
+			<label index="label_kids" type="integer">7953511</label>
+			<label index="label_legend_payment" type="integer">205863499</label>
+			<label index="label_account_number" type="integer">15650306</label>
+			<label index="label_bank_code" type="integer">171550314</label>
+			<label index="label_bank_name" type="integer">204057381</label>
+			<label index="label_account_owner" type="integer">35539025</label>
+			<label index="label_billing_address" type="integer">33277925</label>
+			<label index="label_gender" type="integer">161832899</label>
+			<label index="label_gender.I.0" type="integer">19351194</label>
+			<label index="label_gender.I.1" type="integer">43922038</label>
+			<label index="label_name" type="integer">81871034</label>
+			<label index="label_address" type="integer">252788963</label>
+			<label index="label_zip" type="integer">234550549</label>
+			<label index="label_city" type="integer">201307921</label>
+			<label index="label_country" type="integer">258260574</label>
+			<label index="label_telephone" type="integer">130029308</label>
+			<label index="label_email" type="integer">126760538</label>
+			<label index="label_lodgings" type="integer">100712032</label>
+			<label index="label_foods" type="integer">253668178</label>
+			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data_informal" type="integer">250390933</label>
+			<label index="label_register_all_terms" type="integer">246270935</label>
+			<label index="label_terms" type="integer">112775823</label>
+			<label index="label_terms_2" type="integer">6400727</label>
+			<label index="label_submit_registration" type="integer">78670567</label>
+			<label index="label_proceed_registration" type="integer">132169581</label>
+			<label index="label_back_registration" type="integer">5603241</label>
+			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data_informal" type="integer">128811576</label>
+			<label index="label_selected_paymentmethod" type="integer">221962435</label>
+			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
+			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
+			<label index="message_noRegistrations" type="integer">261689699</label>
+			<label index="message_earlybird_price" type="integer">46171995</label>
+			<label index="message_emptyTitle" type="integer">246835141</label>
+			<label index="message_emptyOrganizer" type="integer">144184241</label>
+			<label index="message_noAttendeesNumber" type="integer">38208342</label>
+			<label index="message_noPriceNumber" type="integer">117507923</label>
+			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
+			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
+			<label index="message_noSeatsNumber" type="integer">314941</label>
+			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
+			<label index="message_provideAttendeesNames" type="integer">175728129</label>
+			<label index="message_noKidsNumber" type="integer">211979974</label>
+			<label index="message_choosePrice" type="integer">38008569</label>
+			<label index="message_chooseMethodOfPayment" type="integer">209557761</label>
+			<label index="message_provideBankData" type="integer">10940357</label>
+			<label index="message_selectLodging" type="integer">147185186</label>
+			<label index="message_selectFood" type="integer">148997362</label>
+			<label index="message_acceptTerms" type="integer">198918363</label>
+			<label index="message_acceptTerms2" type="integer">220063200</label>
+			<label index="message_countdown" type="integer">3805429</label>
+			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -2105,6 +2365,193 @@
 			<label index="countdown_minutes_plural">minutes</label>
 			<label index="countdown_minutes_singular">minute</label>
 			<label index="countdown_seconds_plural">seconds</label>
+		</languageKey>
+		<languageKey index="nl" type="array">
+			<label index="seminars.pi_flexform.sheet_general">General</label>
+			<label index="seminars.pi_flexform.what_to_display">What should be displayed:</label>
+			<label index="seminars.pi_flexform.sheet_template_and_special">Templates and special properties</label>
+			<label index="seminars.pi_flexform.seminar_list">Event List</label>
+			<label index="seminars.pi_flexform.topic_list">Topic List</label>
+			<label index="seminars.pi_flexform.my_events">My Events</label>
+			<label index="seminars.pi_flexform.my_vip_events">My VIP Events</label>
+			<label index="seminars.pi_flexform.seminar_registration">Event Registration</label>
+			<label index="seminars.pi_flexform.list_registrations">List of Registrations (for attendees)</label>
+			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
+			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
+			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
+			<label index="seminars.pi_flexform.countdown">Countdown to the next event</label>
+			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
+			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
+			<label index="seminars.pi_flexform.detailPID">Page that contains the detailed view:</label>
+			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
+			<label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
+			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations (for attendees):</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID">Page that contains the list of registrations (for VIPs):</label>
+			<label index="seminars.pi_flexform.salutation">Salutation mode on the page:</label>
+			<label index="seminars.pi_flexform.formal">formal</label>
+			<label index="seminars.pi_flexform.informal">informal</label>
+			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
+			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
+			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
+			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
+			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
+			<label index="seminars.pi_flexform.timeframeInList2">past events</label>
+			<label index="seminars.pi_flexform.timeframeInList3">past and current events</label>
+			<label index="seminars.pi_flexform.timeframeInList4">current events</label>
+			<label index="seminars.pi_flexform.timeframeInList5">current and upcoming events</label>
+			<label index="seminars.pi_flexform.timeframeInList6">upcoming events</label>
+			<label index="seminars.pi_flexform.timeframeInList7">events with the deadline in the future</label>
+			<label index="seminars.pi_flexform.hideFields">Hide fields in detailed view (comma-separated):</label>
+			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
+			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
+			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
+			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
+			<label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>
+			<label index="seminars.pi_flexform.showRegistrationFields">Show text input fields for online registration (comma-separated):</label>
+			<label index="pi_list_browseresults_prev">&lt; Previous</label>
+			<label index="pi_list_browseresults_page">Page</label>
+			<label index="pi_list_browseresults_next">Next &gt;</label>
+			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
+			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
+			<label index="pi_list_searchBox_search">Search</label>
+			<label index="label_title">Title</label>
+			<label index="label_accreditation_number">Accreditation number</label>
+			<label index="label_credit_points">Credit points</label>
+			<label index="label_date">Date</label>
+			<label index="label_time">Time</label>
+			<label index="label_place">Place</label>
+			<label index="label_room">Room</label>
+			<label index="label_speakers">Speakers</label>
+			<label index="label_price_general">Price</label>
+			<label index="label_price_regular">Regular price</label>
+			<label index="label_price_special">Special price</label>
+			<label index="label_paymentmethods">Available methods of payment</label>
+			<label index="label_organizers">Organizers</label>
+			<label index="label_vacancies">Vacancies</label>
+			<label index="label_deadline_registration">Deadline for registration</label>
+			<label index="label_registration">Registration</label>
+			<label index="label_onlineRegistration">Register now</label>
+			<label index="label_back">Back to listing</label>
+			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_noResults">Sorry, currently no events could be found.</label>
+			<label index="countdown_days_plural">days</label>
+			<label index="countdown_days_singular">day</label>
+			<label index="countdown_hours_plural">hours</label>
+			<label index="countdown_hours_singular">hour</label>
+			<label index="countdown_minutes_plural">minutes</label>
+			<label index="countdown_minutes_singular">minute</label>
+			<label index="countdown_seconds_plural">seconds</label>
+			<label index="seminars.pi_flexform.omitDateIfSameAsPrevious">Omit the date in the list view if it is the same as the previous item's:</label>
+			<label index="seminars.pi_flexform.eventFieldsOnRegistrationPage">Event data that should be displayed on the registration page:</label>
+			<label index="seminars.pi_flexform.showSpeakerDetails">Show speaker details</label>
+			<label index="seminars.pi_flexform.showSiteDetails">Show site details</label>
+			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
+			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
+			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
+			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end editing</label>
+			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user group that is allowed to enter and edit events</label>
+			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
+			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
+			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
+			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents_informal">You are registered for the following events:</label>
+			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
+			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents_informal">You have entered the following events:</label>
+			<label index="label_subtitle">Subtitle</label>
+			<label index="label_uid">Number</label>
+			<label index="label_additional_times_places">Times and places</label>
+			<label index="label_partners">Partners</label>
+			<label index="label_tutors">Tutors</label>
+			<label index="label_leaders">Leaders</label>
+			<label index="label_select_price">Price:</label>
+			<label index="label_price_earlybird_regular">Early-bird price</label>
+			<label index="label_price_board_regular">Regular price including full board</label>
+			<label index="label_price_earlybird_special">Early-bird special price</label>
+			<label index="label_price_board_special">Special price including full board</label>
+			<label index="label_total_price">Total price</label>
+			<label index="label_select_paymentmethod">Payment method:</label>
+			<label index="label_event_type">Event type</label>
+			<label index="label_list_registrations">List of registrations</label>
+			<label index="label_listRegistrationsLink">View the list of registrations</label>
+			<label index="label_list_otherdates">Other dates for this topic</label>
+			<label index="label_list_dates">Dates for this topic</label>
+			<label index="label_eventsnextday">Subsequent events</label>
+			<label index="label_edit">Edit</label>
+			<label index="label_save">Save</label>
+			<label index="label_register_additional_information">Additional information</label>
+			<label index="label_interests">Special interests:</label>
+			<label index="label_expectations">Expectations for the event:</label>
+			<label index="label_background_knowledge">Background knowledge:</label>
+			<label index="label_register_lodging_and_food">Lodging and food</label>
+			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
+			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
+			<label index="label_known_from">How have you heard of this event?</label>
+			<label index="label_notes">Additional notes:</label>
+			<label index="label_register_additional_attendees">Register additional persons</label>
+			<label index="label_seats">Seats</label>
+			<label index="label_register_seats">Total number of seats to book:</label>
+			<label index="label_attendees_names">Names of additional persons to register:</label>
+			<label index="label_kids">Number of kids:</label>
+			<label index="label_legend_payment">Payment</label>
+			<label index="label_account_number">Account number:</label>
+			<label index="label_bank_code">Bank code:</label>
+			<label index="label_bank_name">Bank name:</label>
+			<label index="label_account_owner">Account owner:</label>
+			<label index="label_billing_address">Billing address</label>
+			<label index="label_gender">Mr./Mrs.</label>
+			<label index="label_gender.I.0">Mr.</label>
+			<label index="label_gender.I.1">Ms.</label>
+			<label index="label_name">Name:</label>
+			<label index="label_address">Street:</label>
+			<label index="label_zip">ZIP:</label>
+			<label index="label_city">City:</label>
+			<label index="label_country">Country:</label>
+			<label index="label_telephone">Phone number:</label>
+			<label index="label_email">E-mail address:</label>
+			<label index="label_lodgings">Lodging:</label>
+			<label index="label_foods">Food:</label>
+			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data_informal">Your registration data</label>
+			<label index="label_register_all_terms">Registration terms</label>
+			<label index="label_terms">I accept the terms and conditions.</label>
+			<label index="label_terms_2">I accept the terms for travelling.</label>
+			<label index="label_submit_registration">Submit registration</label>
+			<label index="label_proceed_registration">Proceed to checkout</label>
+			<label index="label_back_registration">Back</label>
+			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data_informal">Your address data:</label>
+			<label index="label_selected_paymentmethod">Selected method of payment:</label>
+			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
+			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
+			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
+			<label index="message_earlybird_price">price valid and bookable until %s</label>
+			<label index="message_emptyTitle">Please enter a title for this event.</label>
+			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
+			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
+			<label index="message_noPriceNumber">Please enter only numbers as prices (using a dot as decimal point, omitting the currency).</label>
+			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
+			<label index="message_provideAttendeesNames">Please provide the attendees' names.</label>
+			<label index="message_noKidsNumber">Please enter only numbers for the number of kids.</label>
+			<label index="message_choosePrice">Please select a price.</label>
+			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
+			<label index="message_provideBankData">Please provide your bank data.</label>
+			<label index="message_selectLodging">Please select at least one lodging option.</label>
+			<label index="message_selectFood">Please select at least one food option.</label>
+			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
+			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
+			<label index="message_countdown">%d %s left until the next event starts!</label>
+			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

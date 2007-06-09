@@ -83,6 +83,21 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="title">Seminars</label>
+			<label index="menu_updateStats">Update statistieken</label>
+			<label index="menu_listSpeakers">Overzicht sprekers</label>
+			<label index="menu_listSites">Overzicht Seminar locaties</label>
+			<label index="menu_listSeminars">Overzicht evenementen</label>
+			<label index="menu_seminarDetails">Toon evenement details</label>
+			<label index="title_getEmailAddressesForAttendances">Vraag E-mail adres van deelnemers</label>
+			<label index="msg_noAttendancesFound">Nog geen</label>
+			<label index="label_all">Allen:</label>
+			<label index="label_paid">Betaald:</label>
+			<label index="label_unpaid">Niet betaald:</label>
+			<label index="label_vacancies">Lege plaatsen:</label>
+			<label index="label_hasEnough">Heeft genoeg deelnemers:</label>
+			<label index="label_isFull">Is vol:</label>
+			<label index="message_updatingAttendanceNumbers">Verwerken aantal deelnemers</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -193,6 +208,21 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="title" type="integer">146176001</label>
+			<label index="menu_updateStats" type="integer">175992558</label>
+			<label index="menu_listSpeakers" type="integer">107214947</label>
+			<label index="menu_listSites" type="integer">75019461</label>
+			<label index="menu_listSeminars" type="integer">244953847</label>
+			<label index="menu_seminarDetails" type="integer">145063384</label>
+			<label index="title_getEmailAddressesForAttendances" type="integer">259654871</label>
+			<label index="msg_noAttendancesFound" type="integer">252489978</label>
+			<label index="label_all" type="integer">227874010</label>
+			<label index="label_paid" type="integer">248191216</label>
+			<label index="label_unpaid" type="integer">216945004</label>
+			<label index="label_vacancies" type="integer">13617877</label>
+			<label index="label_hasEnough" type="integer">174881041</label>
+			<label index="label_isFull" type="integer">223606742</label>
+			<label index="message_updatingAttendanceNumbers" type="integer">124308991</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -288,6 +318,21 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="title">Seminars</label>
+			<label index="menu_updateStats">Update statistics</label>
+			<label index="menu_listSpeakers">List speakers</label>
+			<label index="menu_listSites">List seminar sites</label>
+			<label index="menu_listSeminars">List Events</label>
+			<label index="menu_seminarDetails">Show event details</label>
+			<label index="title_getEmailAddressesForAttendances">Get e-mail addresses for attendances</label>
+			<label index="msg_noAttendancesFound">none yet</label>
+			<label index="label_all">All: </label>
+			<label index="label_paid">Paid: </label>
+			<label index="label_unpaid">Not paid: </label>
+			<label index="label_vacancies">Vacancies: </label>
+			<label index="label_hasEnough">Has enough attendances: </label>
+			<label index="label_isFull">Is full: </label>
+			<label index="message_updatingAttendanceNumbers">Updating the attendance numbers</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>

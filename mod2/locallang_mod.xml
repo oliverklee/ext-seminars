@@ -35,6 +35,9 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="mlang_tabs_tab">Bijeenkomsten</label>
+			<label index="mlang_labels_tabdescr">Deze module biedt de functionaliteit, beheer van evenementen, registraties, evenement locaties en sprekers.</label>
+			<label index="mlang_labels_tablabel">Bijeenkomsten</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -121,6 +124,9 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="mlang_tabs_tab" type="integer">142581619</label>
+			<label index="mlang_labels_tabdescr" type="integer">260990945</label>
+			<label index="mlang_labels_tablabel" type="integer">142581619</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -194,6 +200,11 @@
 			<label index="mlang_labels_tablabel">Events</label>
 		</languageKey>
 		<languageKey index="de" type="array">
+			<label index="mlang_tabs_tab">Events</label>
+			<label index="mlang_labels_tabdescr">This module allows you to manage events, registrations, event sites and speakers.</label>
+			<label index="mlang_labels_tablabel">Events</label>
+		</languageKey>
+		<languageKey index="nl" type="array">
 			<label index="mlang_tabs_tab">Events</label>
 			<label index="mlang_labels_tabdescr">This module allows you to manage events, registrations, event sites and speakers.</label>
 			<label index="mlang_labels_tablabel">Events</label>

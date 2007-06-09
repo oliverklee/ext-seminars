@@ -1,4 +1,5 @@
 0.5.0
+- Change: Update the Dutch localization, patch by Kees van der Hall (#274)
 - Change: Allow to set the path to the HTML template for the registration form and the event editor via TS setup (#522)
 - Change: Make TYPO3 3.8 required (#855)
 - Feature: Prepare everything for the integration of timeslots (BE) (#633)

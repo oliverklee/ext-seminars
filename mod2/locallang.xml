@@ -80,6 +80,24 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="title">Evenementen</label>
+			<label index="subModuleTitle_registrations">Registraties</label>
+			<label index="subModuleTitle_events">Evenementen</label>
+			<label index="subModuleTitle_speakers">Sprekers</label>
+			<label index="subModuleTitle_organizers">Organisatoren</label>
+			<label index="notYetImplementedSubModule">Deze sub module is nog niet geimplementeerd</label>
+			<label index="eventlist.date">Datum</label>
+			<label index="eventlist.title">Titel</label>
+			<label index="eventlist.attendees">Cur.</label>
+			<label index="eventlist.attendees_min">Min.</label>
+			<label index="eventlist.attendees_max">Max.</label>
+			<label index="eventlist.enough_attendees">Genoeg</label>
+			<label index="eventlist.is_full">Vol</label>
+			<label index="speakerlist.title">Naam</label>
+			<label index="organizerlist.title">Naam</label>
+			<label index="registrationlist.feuser.name">Naam</label>
+			<label index="registrationlist.seminar.title">Evenement</label>
+			<label index="referencesWarning">Er zijn %s referenties naar dit record!</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -198,6 +216,24 @@
 		<languageKey index="es" type="array">
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="title" type="integer">142581619</label>
+			<label index="subModuleTitle_registrations" type="integer">170423130</label>
+			<label index="subModuleTitle_events" type="integer">142581619</label>
+			<label index="subModuleTitle_speakers" type="integer">258305227</label>
+			<label index="subModuleTitle_organizers" type="integer">68798680</label>
+			<label index="notYetImplementedSubModule" type="integer">127965110</label>
+			<label index="eventlist.date" type="integer">71780721</label>
+			<label index="eventlist.title" type="integer">192455458</label>
+			<label index="eventlist.attendees" type="integer">95736411</label>
+			<label index="eventlist.attendees_min" type="integer">51517544</label>
+			<label index="eventlist.attendees_max" type="integer">244016059</label>
+			<label index="eventlist.enough_attendees" type="integer">30455057</label>
+			<label index="eventlist.is_full" type="integer">196953872</label>
+			<label index="speakerlist.title" type="integer">77521672</label>
+			<label index="organizerlist.title" type="integer">77521672</label>
+			<label index="registrationlist.feuser.name" type="integer">77521672</label>
+			<label index="registrationlist.seminar.title" type="integer">172937159</label>
+			<label index="referencesWarning" type="integer">94848684</label>
 		</languageKey>
 		<languageKey index="cz" type="array">
 		</languageKey>
@@ -306,6 +342,26 @@
 			<label index="registrationlist.seminar.title">Event</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 			<label index="registrationlist.seminar.date">Event date</label>
+		</languageKey>
+		<languageKey index="nl" type="array">
+			<label index="title">Events</label>
+			<label index="subModuleTitle_registrations">Registrations</label>
+			<label index="subModuleTitle_events">Events</label>
+			<label index="subModuleTitle_speakers">Speakers</label>
+			<label index="subModuleTitle_organizers">Organizers</label>
+			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
+			<label index="eventlist.date">Date</label>
+			<label index="eventlist.title">Title</label>
+			<label index="eventlist.attendees">Cur.</label>
+			<label index="eventlist.attendees_min">Min.</label>
+			<label index="eventlist.attendees_max">Max.</label>
+			<label index="eventlist.enough_attendees">Enough</label>
+			<label index="eventlist.is_full">Full</label>
+			<label index="speakerlist.title">Name</label>
+			<label index="organizerlist.title">Name</label>
+			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.seminar.title">Event</label>
+			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>
