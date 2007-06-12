@@ -603,7 +603,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			'email' => true
 		) as $currentKey => $hasLabel) {
 			$value = htmlspecialchars($userData[$currentKey]);
-			if ($hasLabel) {
+			// Only show a label if we have any data following it.
+			if ($hasLabel && !empty($value)) {
 				$value = $this->plugin->pi_getLL('label_'.$currentKey)
 					.' '.$value;
 			}
