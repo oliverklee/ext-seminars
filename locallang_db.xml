@@ -50,6 +50,7 @@
 			<label index="tx_seminars_seminars.divLabelPlaceTime"></label>
 			<label index="tx_seminars_seminars.begin_date"></label>
 			<label index="tx_seminars_seminars.end_date"></label>
+			<label index="tx_seminars_seminars.timeslots"></label>
 			<label index="tx_seminars_seminars.deadline_registration"></label>
 			<label index="tx_seminars_seminars.deadline_early_bird"></label>
 			<label index="tx_seminars_seminars.place"></label>
@@ -179,6 +180,7 @@
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
 			<label index="tx_seminars_seminars.begin_date">Begin time and date:</label>
 			<label index="tx_seminars_seminars.end_date">End time and date:</label>
+			<label index="tx_seminars_seminars.timeslots">Time slots</label>
 			<label index="tx_seminars_seminars.deadline_registration">Registration deadline:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
@@ -268,7 +270,7 @@
 			<label index="tx_seminars_lodgings.title">Title:</label>
 			<label index="tx_seminars_foods">Food options</label>
 			<label index="tx_seminars_foods.title">Title:</label>
-			<label index="tx_seminars_timeslots">Timeslot</label>
+			<label index="tx_seminars_timeslots">Time slots</label>
 			<label index="tx_seminars_timeslots.title">Title</label>
 			<label index="tx_seminars_timeslots.begin_date">Begin date</label>
 			<label index="tx_seminars_timeslots.end_date">End date</label>
@@ -319,6 +321,7 @@
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Ort/Zeit</label>
 			<label index="tx_seminars_seminars.begin_date">Anfangszeit und -datum:</label>
 			<label index="tx_seminars_seminars.end_date">Endzeit und -datum:</label>
+			<label index="tx_seminars_seminars.timeslots">Zeitblöcke</label>
 			<label index="tx_seminars_seminars.deadline_registration">Anmelde-Deadline:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Frühbucher-Deadline:</label>
 			<label index="tx_seminars_seminars.place">Ort:</label>
@@ -408,7 +411,7 @@
 			<label index="tx_seminars_lodgings.title">Titel:</label>
 			<label index="tx_seminars_foods">Verpflegungsmöglichkeiten</label>
 			<label index="tx_seminars_foods.title">Titel:</label>
-			<label index="tx_seminars_timeslots">Zeitblock</label>
+			<label index="tx_seminars_timeslots">Zeitblöcke</label>
 			<label index="tx_seminars_timeslots.title">Titel</label>
 			<label index="tx_seminars_timeslots.begin_date">Anfangszeit und -datum</label>
 			<label index="tx_seminars_timeslots.end_date">Endzeit und -datum</label>
@@ -857,6 +860,7 @@
 			<label index="tx_seminars_seminars.divLabelPlaceTime" type="integer">27057202</label>
 			<label index="tx_seminars_seminars.begin_date" type="integer">188111362</label>
 			<label index="tx_seminars_seminars.end_date" type="integer">45211304</label>
+			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
 			<label index="tx_seminars_seminars.deadline_registration" type="integer">207972934</label>
 			<label index="tx_seminars_seminars.deadline_early_bird" type="integer">256893079</label>
 			<label index="tx_seminars_seminars.place" type="integer">24143558</label>
@@ -946,7 +950,7 @@
 			<label index="tx_seminars_lodgings.title" type="integer">85903807</label>
 			<label index="tx_seminars_foods" type="integer">202329490</label>
 			<label index="tx_seminars_foods.title" type="integer">85903807</label>
-			<label index="tx_seminars_timeslots" type="integer">151829616</label>
+			<label index="tx_seminars_timeslots" type="integer">147000660</label>
 			<label index="tx_seminars_timeslots.title" type="integer">192455458</label>
 			<label index="tx_seminars_timeslots.begin_date" type="integer">230060070</label>
 			<label index="tx_seminars_timeslots.end_date" type="integer">192800740</label>
@@ -1485,7 +1489,8 @@
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.divLabelPayment">Payment</label>
-			<label index="tx_seminars_timeslots">Timeslot</label>
+			<label index="tx_seminars_seminars.timeslots">Time slots</label>
+			<label index="tx_seminars_timeslots">Time slots</label>
 			<label index="tx_seminars_timeslots.title">Title</label>
 			<label index="tx_seminars_timeslots.speakers">Speakers</label>
 			<label index="tx_seminars_timeslots.site">Site</label>

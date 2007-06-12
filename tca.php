@@ -13,7 +13,7 @@ $selectWhereForTopics = ($selectTopicsFromAllPages) ? '' : ' AND tx_seminars_sem
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,deadline_registration,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,owner_feuser,vips,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,place,room,speakers,price_regular,price_special,payment_methods,organizers,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,cancelled,attendees,enough_attendees,is_full,owner_feuser,vips,notes'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -181,6 +181,40 @@ $TCA['tx_seminars_seminars'] = array(
 				'eval' => 'datetime',
 				'checkbox' => '0',
 				'default' => '0'
+			)
+		),
+		'timeslots' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.timeslots',
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'tx_seminars_timeslots',
+				'foreign_table_where' => 'AND seminar=###THIS_UID###',
+				'size' => '10',
+				'maxitems' => 999,
+				'wizards' => array(
+					'_PADDING' => 1,
+					'_VERTICAL' => 1,
+					'edit' => array(
+						'type' => 'popup',
+						'title' => 'LLL:EXT:lang/locallang_mod_web_list.xml:edit',
+						'script' => 'wizard_edit.php',
+						'popup_onlyOpenIfSelected' => 1,
+						'icon' => 'edit2.gif',
+						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1'
+					),
+					'add' => array(
+						'type' => 'script',
+						'title' =>'LLL:EXT:lang/locallang_mod_web_list.xml:new',
+						'script' => 'wizard_add.php',
+						'icon' => 'add.gif',
+						'params' => array(
+							'table' => 'tx_seminars_timeslots',
+							'pid' => '###STORAGE_PID###',
+							'setValue' => 'prepend'
+						)
+					)
+				)
 			)
 		),
 		'deadline_registration' => array(
@@ -603,7 +637,7 @@ $TCA['tx_seminars_seminars'] = array(
 		// Single event
 		'0' => array('showitem' => '' .
 			'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, owner_feuser, vips, notes, '
-				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, additional_times_places, '
+				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, place, room, additional_times_places, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelOrganizers, organizers, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, attendees, enough_attendees, is_full, '
@@ -619,7 +653,7 @@ $TCA['tx_seminars_seminars'] = array(
 		// Multiple event date
 		'2' => array('showitem' =>
 			'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, accreditation_number, cancelled, vips, notes, '
-				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, deadline_registration, deadline_early_bird, place, room, additional_times_places, '
+				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, place, room, additional_times_places, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelOrganizers, organizers, '
 				.'--div--;LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.divLabelAttendees, attendees_min, attendees_max, attendees, enough_attendees, is_full, '
