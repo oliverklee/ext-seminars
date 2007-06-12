@@ -232,6 +232,9 @@ plugin.tx_seminars_pi1 {
 	# comma-separated list of FEuser fields to show in the list of registrations for an event
 	showFeUserFieldsInRegistrationsList = name
 
+	# whether one-time FE users will be automatically logged out after registering for an event
+	logOutOneTimeAccountsAfterRegistration = 1
+
 
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.

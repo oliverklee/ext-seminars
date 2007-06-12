@@ -496,6 +496,10 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * signed up for an event, but only if the form has been submitted from
 	 * stage 2 (the confirmation page).
 	 *
+	 * If the current FE user account is a one-time account and
+	 * checkLogOutOneTimeAccountsAfterRegistration is enabled in the TS setup,
+	 * the FE user will be automatically logged out.
+	 *
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
 	 *
 	 * @return	string		complete URL of the FE page with a message (or null if the confirmation page has not been submitted yet)
@@ -525,6 +529,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			'',
 			array('tx_seminars_pi1[showUid]' => $this->seminar->getUid())
 		);
+
+		if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
+				&& $GLOBALS['TSFE']->fe_user->getKey('user', 'onetimeaccount')) {
+			$GLOBALS['TSFE']->fe_user->logoff();
+		}
 
 		return $baseUrl.$redirectPath;
 	}

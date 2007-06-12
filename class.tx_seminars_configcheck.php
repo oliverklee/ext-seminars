@@ -220,6 +220,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkListPid();
 		$this->checkLoginPid();
 		$this->checkBankTransferUid();
+		$this->checkLogOutOneTimeAccountsAfterRegistration();
 
 		return;
 	}
@@ -1816,6 +1817,25 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				$this->setErrorMessage($message);
 			}
 		}
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * logOutOneTimeAccountsAfterRegistration.
+	 *
+	 * @access	private
+	 */
+	function checkLogOutOneTimeAccountsAfterRegistration() {
+		$this->checkIfBoolean(
+			'logOutOneTimeAccountsAfterRegistration',
+			false,
+			'',
+			'This value specifies whether one-time FE user accounts will '
+				.'automatically be logged out after registering for an event. '
+				.'If this value is incorrect, the automatic logout will not work.'
+		);
 
 		return;
 	}

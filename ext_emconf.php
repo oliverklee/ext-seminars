@@ -39,7 +39,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'cms' => '',
 			'css_styled_content' => '',
 			'ameos_formidable' => '0.7.0-',
-			'static_info_tables' => '2.0.0-',
+			'static_info_tables' => '',
 			'php' => '4.0.0-0.0.0',
 			'typo3' => '3.8.0-0.0.0',
 		),
@@ -48,6 +48,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'suggests' => array(
 			'erotea_date2cal' => '',
 			'newloginbox' => '',
+			'static_info_tables' => '2.0.2-',
 		),
 	),
 	'suggests' => array(
