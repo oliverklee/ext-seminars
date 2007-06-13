@@ -3315,6 +3315,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $result;
 	}
+
+	/**
+	 * Returns true if the seminar is hidden otherwise false.
+	 * 
+	 * @return	boolean		true if the seminar is hidden otherwise false
+	 * 
+	 * @access	public
+	 */
+	function isHidden() {
+		return $this->getRecordPropertyBoolean('hidden');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

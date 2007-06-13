@@ -21,6 +21,10 @@ img.deleteicon {
 	margin-left: 8px;
 }
 
+img.hideicon {
+	margin-left: 4px;
+}
+
 table {
 	clear: both;
 }

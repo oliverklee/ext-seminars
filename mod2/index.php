@@ -382,7 +382,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$additionalTables,
 			'',
 			$orderBy,
-			$limit
+			$limit,
+			1
 		);
 
 		while ($this->seminar =& $seminarBag->getCurrent()) {
@@ -405,6 +406,11 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					.$this->getDeleteIcon(
 						$this->seminar->tableName,
 						$this->seminar->getUid()
+					).chr(10)
+					.$this->getHideUnhideIcon(
+						$this->seminar->tableName,
+						$this->seminar->getUid(),
+						$this->seminar->isHidden()
 					).chr(10),
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getRegistrationsCsvIcon()
@@ -774,7 +780,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					.$this->getDeleteIcon(
 						$this->organizer->tableName,
 						$this->organizer->getUid()
-				).chr(10)
+					).chr(10)
 			);
 			$organizerBag->getNext();
 		}
@@ -1049,6 +1055,49 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			.'</a>'.chr(10)
 			.TAB.TAB
 			.'</div>'.chr(10);
+
+		return $result;
+	}
+
+	/**
+	 * Generates a linked hide or unhide icon depending on the record's hidden
+	 * status.
+	 * 
+	 * @param	string		the name of the table where the record is in
+	 * @param	integer		the UID of the record
+	 * @param	boolean		indicates if the record is hidden (true) or is visible (false)
+	 * 
+	 * @return	string		the HTML source code of the linked hide or unhide icon
+	 * 
+	 * @access	protected
+	 */
+	function getHideUnhideIcon($table, $uid, $hidden) {
+		global $BACK_PATH, $LANG, $BE_USER;
+		$result = '';
+
+		if ($BE_USER->check('tables_modify', $table)
+			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
+			if ($hidden) {
+				$params = '&data['.$table.']['.$uid.'][hidden]=0';
+				$icon = 'gfx/button_unhide.gif';
+				$langHide = $LANG->getLL('unHide');
+			} else {
+				$params = '&data['.$table.']['.$uid.'][hidden]=1';
+				$icon = 'gfx/button_hide.gif';
+				$langHide = $LANG->getLL('hide');
+			}
+
+			$result = '<a href="'
+				.htmlspecialchars($this->doc->issueCommand($params)).'">'
+				.'<img'
+				.t3lib_iconWorks::skinImg(
+					$BACK_PATH,
+					$icon,
+					'width="11" height="12"'
+				)
+				.' title="'.$langHide.'" alt="'.$langHide.'" class="hideicon" />'
+				.'</a>';
+		}
 
 		return $result;
 	}

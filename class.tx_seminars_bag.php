@@ -85,15 +85,16 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * @param	string		GROUP BY clause (may be empty), must already by safeguarded against SQL injection
 	 * @param	string		ORDER BY clause (may be empty), must already by safeguarded against SQL injection
 	 * @param	string		LIMIT clause (may be empty), must already by safeguarded against SQL injection
+	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_bag($dbTableName, $queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_bag($dbTableName, $queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
 		$this->dbTableName = $dbTableName;
 		$this->queryParameters = trim($queryParameters);
 		$this->additionalTableNames =
 			(!empty($additionalTableNames)) ? ', '.$additionalTableNames : '';
-		$this->createEnabledFieldsQuery();
+		$this->createEnabledFieldsQuery($showHiddenRecords);
 
 		$this->orderBy = $orderBy;
 		$this->groupBy = $groupBy;
@@ -109,10 +110,12 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * For the main DB table and the additional tables, writes the corresponding
 	 * concatenated output from t3lib_pageSelect::enableFields into
 	 * $this->enabledFieldsQuery.
+	 * 
+	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
 	 *
 	 * @access	private
 	 */
-	function createEnabledFieldsQuery() {
+	function createEnabledFieldsQuery($showHiddenRecords = -1) {
 		$allTableNames = explode(',', $this->dbTableName.$this->additionalTableNames);
 		$this->enabledFieldsQuery = '';
 
@@ -121,7 +124,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			// Is there a TCA entry for that table?
 			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
 			if (is_array($ctrl)) {
-				$this->enabledFieldsQuery .= $this->enableFields($trimmedTableName);
+				$this->enabledFieldsQuery .= $this->enableFields($trimmedTableName, $showHiddenRecords);
 			}
 		}
 		return;

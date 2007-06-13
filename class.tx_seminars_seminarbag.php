@@ -48,14 +48,15 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * @param	string		GROUP BY clause (may be empty), must already by safeguarded against SQL injection
 	 * @param	string		ORDER BY clause (may be empty), must already by safeguarded against SQL injection
 	 * @param	string		LIMIT clause (may be empty), must already by safeguarded against SQL injection
+	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminarbag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_seminarbag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSeminars is provided.
 		$this->init();
-		parent::tx_seminars_bag($this->tableSeminars, $queryParameters, $additionalTableNames, $groupBy, $orderBy, $limit);
+		parent::tx_seminars_bag($this->tableSeminars, $queryParameters, $additionalTableNames, $groupBy, $orderBy, $limit, $showHiddenRecords);
 
 		return;
 	}
