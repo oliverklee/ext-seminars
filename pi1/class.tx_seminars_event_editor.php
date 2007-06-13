@@ -154,6 +154,32 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		return $this->populateList($items, $this->tableEventTypes);
 	}
 
+ 	/**
+	 * Provides data items for the list of available lodgings.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 *
+	 * @return	array		$items with additional items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateListLodgings($items) {
+		return $this->populateList($items, $this->tableLodgings);
+	}
+
+	/**
+	 * Provides data items for the list of available foods.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 *
+	 * @return	array		$items with additional items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateListFoods($items) {
+		return $this->populateList($items, $this->tableFoods);
+	}
+
 	/**
 	 * Provides data items for the list of available payment methods.
 	 *
@@ -204,6 +230,19 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 */
 	function populateListSpeakers($items) {
 		return $this->populateList($items, $this->tableSpeakers);
+	}
+
+	/**
+	 * Provides data items for the list of available checkboxes.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 *
+	 * @return	array		$items with additional items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateListCheckboxes($items) {
+		return $this->populateList($items, $this->tableCheckboxes);
 	}
 
 	/**

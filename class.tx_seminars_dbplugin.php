@@ -551,6 +551,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 	/**
 	 * Provides data items from the DB.
+	 * 
+	 * By default, the field "title" is used as the name that will be returned
+	 * within the array (as caption). For FE users, the field "name" is used.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
 	 * @param	string		the table name to query
@@ -573,8 +576,15 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		if ($dbResult) {
 			while ($dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 				$uid = $dbResultRow['uid'];
+				// Use the field "name" instead of "title" if we are
+				// selecting FE users.
+				if ($tableName == 'fe_users') {
+					$title = $dbResultRow['name'];
+				} else {
+					$title = $dbResultRow['title'];
+				}
 				$items[$uid] = array(
-					'caption'	=> $dbResultRow['title'],
+					'caption'	=> $title,
 					'value'		=> $uid
 				);
 			}

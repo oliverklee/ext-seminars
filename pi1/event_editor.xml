@@ -17,6 +17,11 @@
 			<mmrelations>
 				<relation field="place" mmtable="tx_seminars_seminars_place_mm" />
 				<relation field="speakers" mmtable="tx_seminars_seminars_speakers_mm" />
+				<relation field="lodgings" mmtable="tx_seminars_seminars_lodgings_mm" />
+				<relation field="foods" mmtable="tx_seminars_seminars_foods_mm" />
+				<relation field="partners" mmtable="tx_seminars_seminars_speakers_mm_partners" />
+				<relation field="tutors" mmtable="tx_seminars_seminars_speakers_mm_tutors" />
+				<relation field="leaders" mmtable="tx_seminars_seminars_speakers_mm_leaders" />
 			</mmrelations>
 		</datahandler:DBMM>
 		<renderer:TEMPLATE>
@@ -57,6 +62,10 @@
 		<renderlet:TEXT name="subtitle">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.subtitle</label>
 		</renderlet:TEXT>
+
+		<renderlet:TEXTAREA name="teaser">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.teaser</label>
+		</renderlet:TEXTAREA>
 
 		<renderlet:TEXTAREA name="description">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.description</label>
@@ -132,8 +141,76 @@
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.room</label>
 		</renderlet:TEXT>
 
+		<renderlet:TEXTAREA name="additional_times_places">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.additional_times_places</label>
+		</renderlet:TEXTAREA>
+
+		<renderlet:LISTBOX name="lodgings">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.lodgings</label>
+			<data>
+				<defaultvalue />
+				<items>
+					<item>
+						<caption>&amp;nbsp;</caption>
+						<value>0</value>
+					</item>
+				</items>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListLodgings</method>
+				</userobj>
+			</data>
+		</renderlet:LISTBOX>
+
+		<renderlet:LISTBOX name="foods">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.foods</label>
+			<data>
+				<defaultvalue />
+				<items>
+					<item>
+						<caption>&amp;nbsp;</caption>
+						<value>0</value>
+					</item>
+				</items>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListFoods</method>
+				</userobj>
+			</data>
+		</renderlet:LISTBOX>
+
 		<renderlet:CHECKBOX name="speakers">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.speakers</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListSpeakers</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
+
+		<renderlet:CHECKBOX name="partners">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.partners</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListSpeakers</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
+
+		<renderlet:CHECKBOX name="tutors">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.tutors</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListSpeakers</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
+
+		<renderlet:CHECKBOX name="leaders">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.leaders</label>
 			<data>
 				<userobj>
 					<extension>this</extension>
@@ -156,6 +233,18 @@
 
 		<renderlet:TEXT name="price_regular_early">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular_early</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:TEXT name="price_regular_board">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_regular_board</label>
 			<validators>
 				<validator:PREG>
 					<pattern>
@@ -189,6 +278,32 @@
 				</validator:PREG>
 			</validators>
 		</renderlet:TEXT>
+
+		<renderlet:TEXT name="price_special_board">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.price_special_board</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
+		<renderlet:TEXTAREA name="additional_information">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.additional_information</label>
+		</renderlet:TEXTAREA>
+
+		<renderlet:CHECKBOX name="checkboxes">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.checkboxes</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListCheckboxes</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
 
 		<renderlet:CHECKBOX name="payment_methods">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.payment_methods</label>
@@ -256,6 +371,14 @@
 		<renderlet:CHECKSINGLE name="cancelled">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.cancelled</label>
 		</renderlet:CHECKSINGLE>
+
+		<renderlet:CHECKSINGLE name="uses_terms_2">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.uses_terms_2</label>
+		</renderlet:CHECKSINGLE>
+
+		<renderlet:TEXTAREA name="notes">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.notes</label>
+		</renderlet:TEXTAREA>
 
 		<renderlet:SUBMIT name="btnsubmit">
 			<label>LLL:EXT:seminars/pi1/locallang.php:label_save</label>
