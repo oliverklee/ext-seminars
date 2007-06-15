@@ -1,4 +1,5 @@
 0.5.0
+- Fix: In e-mails, enclose the URL with <> (#867)
 - Feature: Add hide/unhide buttons to the event list in mod2 (#626)
 - Change: Added all necessary fields to the FE event-editor (#524)
 - Fix: On the confirmation page, the label "Phone:" for the FE user address is displayed even if the phone number is empty and the e-mail is never displayed (#860)
