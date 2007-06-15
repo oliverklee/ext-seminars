@@ -1,4 +1,5 @@
 0.4.11
+- Fix: In e-mails, enclose the URL with <> (#867)
 - Feature: Add a hook to the single view (#793)
 - Change: Change the German record type label "Veranstaltungsreihe: Datum" to "Veranstaltungsreihe: Termin" (#595), patch by Simon Harhues
 - Fix: Remove all static calls to t3lib_pageSelect::enableFields() (#764)
