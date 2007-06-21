@@ -34,6 +34,13 @@ table {
 	float: left;
 }
 
+.clearUpDownButton {
+	padding: 0;
+	margin: 0;
+	padding-left: 12px;
+	margin-left: 4px;
+}
+
 /*
  * The following is mostly the same as the style for the new record link
  * provided by the TYPO3 4.1 default skin.

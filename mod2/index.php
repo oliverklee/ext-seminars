@@ -386,6 +386,62 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			1
 		);
 
+		$sortList = array();
+
+		$useManualSorting = $globalConfiguration['useManualSorting']
+			&& $BE_USER->check('tables_modify', $seminarBag->tableSeminars)
+			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16);
+
+		if ($useManualSorting) {
+			// Initialize the array which holds the two previous records' UIDs.
+			$previousUids = array(
+				// will contain the UID of the predecessor of the current record
+				0,
+				// will contain the negative UID of the predecessor's predecessor
+				// or the current PID
+				0
+			);
+
+			while ($this->seminar =& $seminarBag->getCurrent()) {
+				$uid = $this->seminar->getUid();
+
+				// We can only set the "previous" and "next" elements in the
+				// $sortList array if we already got the predecessor of the
+				// current record in $previousUids[0]. This will be the case
+				// after the first iteration.
+				if ($previousUids[0]) {
+					// Set the "previous" element of the current record to the
+					// predecessor of the previous record.
+					// This means when clicking on the "up" button the current
+					// record will be moved after the predecessor of the previous
+					// record.
+					$sortList[$uid]['previous'] = $previousUids[1];
+
+					// Set the "next" element of the previous record to the
+					// negative UID of the current record.
+					// This means when clicking on the "down" button the previous
+					// record will be moved after the current record.
+					$sortList[$previousUids[0]]['next'] = -$uid;
+				}
+
+				// Set the predecessor of the previous record to the negative
+				// UID of the previous record if the previous record of the 
+				// current record is set already. Else set the predecessor of
+				// the previous record to the PID.
+				// That means if no predecessor of the previous record exists
+				// than move the current record to top of the current page.
+				$previousUids[1] = isset($sortList[$uid]['previous'])
+					? -$previousUids[0] : $this->id;
+
+				// Set previous record to the current record's UID.  
+				$previousUids[0] = $uid;
+
+				// Get the next record and go to the start of the loop.
+				$seminarBag->getNext();
+			}
+			$seminarBag->resetToFirst();
+		}
+
 		while ($this->seminar =& $seminarBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
@@ -402,15 +458,24 @@ class tx_seminars_module2 extends t3lib_SCbase {
 					.$this->getEditIcon(
 						$this->seminar->tableName,
 						$this->seminar->getUid()
-					)
+					).chr(10)
+					.TAB.TAB.TAB.TAB.TAB
 					.$this->getDeleteIcon(
 						$this->seminar->tableName,
 						$this->seminar->getUid()
 					).chr(10)
+					.TAB.TAB.TAB.TAB.TAB
 					.$this->getHideUnhideIcon(
 						$this->seminar->tableName,
 						$this->seminar->getUid(),
 						$this->seminar->isHidden()
+					).chr(10)
+					.TAB.TAB.TAB.TAB.TAB
+					.$this->getUpDownIcons(
+						$useManualSorting,
+						$sortList,
+						$this->seminar->tableName,
+						$this->seminar->getUid()
 					).chr(10),
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getRegistrationsCsvIcon()
@@ -1097,6 +1162,85 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				)
 				.' title="'.$langHide.'" alt="'.$langHide.'" class="hideicon" />'
 				.'</a>';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates linked up and/or down icons depending on the manual sorting.
+	 * 
+	 * @param	boolean		if true the linked up and/or down icons get generated
+	 * 						else they won't get generated
+	 * @param	array		An array which contains elements that have the record's
+	 * 						UIDs as keys and an array with the two elements "previous"
+	 * 						and "next" as values. The two elements' values are the
+	 * 						negative UIDs of the records they should be moved after
+	 * 						when the up (previous) or down (next) button is clicked.
+	 * 						Except the second record's "previous" entry will be the
+	 * 						PID of the current page so the record will be moved to
+	 * 						the top of the current page when the up button is clicked.
+	 * @param	string		the name of the table where the sorting takes place
+	 * @param	integer		the UID of the current record
+	 * 
+	 * @return	string		the HTML source code of the linked up and/or down
+	 * 						icons (or an empty string if manual sorting is deactivated)
+	 * 
+	 * @access	protected
+	 */
+	function getUpDownIcons($useManualSorting, &$sortList, $table, $uid) {
+		$result = '';
+
+		if ($useManualSorting) {
+			$params = '&cmd['.$table.']['.$uid.'][move]=';
+
+			$result = $this->getSingleUpOrDownIcon(
+					'up',
+					$params.$sortList[$uid]['previous'],
+					$sortList[$uid]['previous']
+				)
+				.$this->getSingleUpOrDownIcon(
+					'down',
+					$params.$sortList[$uid]['next'],
+					$sortList[$uid]['next']
+				);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates a single linked up or down icon depending on the type parameter.
+	 * 
+	 * @param	string		the type of the icon ("up" or "down")
+	 * @param	string		the command for TCEmain
+	 * @param	integer		the negative UID of the record where the current record
+	 * 						will be moved after if the button was clicked or the
+	 * 						positive PID if the current icon is the second in the
+	 * 						list and we should generate an up button
+	 * 
+	 * @return	string		the HTML source code of a single linked up or down icon
+	 * 
+	 * @access	protected
+	 */
+	function getSingleUpOrDownIcon($type, $params, $moveToUid) {
+		global $LANG, $BACK_PATH;
+
+		$result = '';
+
+		if (isset($moveToUid)) {
+			$result = '<a href="'.htmlspecialchars(
+					$this->doc->issueCommand($params)
+				).'">'
+				.'<img'.t3lib_iconWorks::skinImg(
+					$BACK_PATH,
+					'gfx/button_'.$type.'.gif',
+					'width="11" height="10"'
+				).' title="'.$LANG->getLL('move'.ucfirst($type), 1).'"'
+				.' alt="'.$LANG->getLL('move'.ucfirst($type), 1).'" />'
+				.'</a>';
+		} else {
+			$result = '<span class="clearUpDownButton"></span>';
 		}
 
 		return $result;
