@@ -106,15 +106,11 @@ th.tx-seminars-pi1-title {
 	margin: 0;
 }
 
-#tx-seminars-pi1-registration-form dt,
-#tx-seminars-pi1-registration-form dd {
-	float: left;
-}
-
 #tx-seminars-pi1-registration-form dt {
 	width: 11em;
 	margin: 0 .5em .5em 0;
 	clear: both;
+	float: left;
 }
 
 #tx-seminars-pi1-registration-form dd {

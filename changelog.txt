@@ -1,4 +1,5 @@
 0.5.0
+- Fix: Test the registration page CSS with IE6 (#823)
 - Fix: In e-mails, enclose the URL with <> (#867)
 - Feature: Add hide/unhide buttons to the event list in mod2 (#626)
 - Change: Added all necessary fields to the FE event-editor (#524)
