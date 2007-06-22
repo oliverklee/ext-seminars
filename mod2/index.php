@@ -169,7 +169,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// Read the selected sub module (from the tab menu) and make it available within this class.
 			$this->subModule = intval(t3lib_div::_GET('subModule'));
 
-			// If $this->subModule is not a key of $this->availableSubModules, 
+			// If $this->subModule is not a key of $this->availableSubModules,
 			// set it to the key of the first element in $this->availableSubModules
 			// so the first tab is activated.
 			if (!array_key_exists($this->subModule, $this->availableSubModules)) {
@@ -425,7 +425,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				}
 
 				// Set the predecessor of the previous record to the negative
-				// UID of the previous record if the previous record of the 
+				// UID of the previous record if the previous record of the
 				// current record is set already. Else set the predecessor of
 				// the previous record to the PID.
 				// That means if no predecessor of the previous record exists
@@ -433,7 +433,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 				$previousUids[1] = isset($sortList[$uid]['previous'])
 					? -$previousUids[0] : $this->id;
 
-				// Set previous record to the current record's UID.  
+				// Set previous record to the current record's UID.
 				$previousUids[0] = $uid;
 
 				// Get the next record and go to the start of the loop.
@@ -914,14 +914,20 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		if ($BE_USER->check('tables_modify', $table)
 			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->id), 16)) {
 			$params = '&cmd['.$table.']['.$uid.'][delete]=1';
+
+			$referenceWarning = '';
+			if ((float) $GLOBALS['TYPO3_CONF_VARS']['SYS']['compat_version'] >= 4.0) {
+				$referenceWarning = t3lib_BEfunc::referenceCount(
+					$table,
+					$uid,
+					' '.$LANG->getLL('referencesWarning'));
+			}
+
 			$confirmation = htmlspecialchars(
 				'if (confirm('
 				.$LANG->JScharCode(
 					$LANG->getLL('deleteWarning')
-					.t3lib_BEfunc::referenceCount(
-						$table,
-						$uid,
-						' '.$LANG->getLL('referencesWarning')))
+					.$referenceWarning)
 				.')) {return true;} else {return false;}');
 			$langDelete = $LANG->getLL('delete', 1);
 			$result = '<a href="'
@@ -1127,13 +1133,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	/**
 	 * Generates a linked hide or unhide icon depending on the record's hidden
 	 * status.
-	 * 
+	 *
 	 * @param	string		the name of the table where the record is in
 	 * @param	integer		the UID of the record
 	 * @param	boolean		indicates if the record is hidden (true) or is visible (false)
-	 * 
+	 *
 	 * @return	string		the HTML source code of the linked hide or unhide icon
-	 * 
+	 *
 	 * @access	protected
 	 */
 	function getHideUnhideIcon($table, $uid, $hidden) {
@@ -1169,7 +1175,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 
 	/**
 	 * Generates linked up and/or down icons depending on the manual sorting.
-	 * 
+	 *
 	 * @param	boolean		if true the linked up and/or down icons get generated
 	 * 						else they won't get generated
 	 * @param	array		An array which contains elements that have the record's
@@ -1182,10 +1188,10 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 * 						the top of the current page when the up button is clicked.
 	 * @param	string		the name of the table where the sorting takes place
 	 * @param	integer		the UID of the current record
-	 * 
+	 *
 	 * @return	string		the HTML source code of the linked up and/or down
 	 * 						icons (or an empty string if manual sorting is deactivated)
-	 * 
+	 *
 	 * @access	protected
 	 */
 	function getUpDownIcons($useManualSorting, &$sortList, $table, $uid) {
@@ -1211,16 +1217,16 @@ class tx_seminars_module2 extends t3lib_SCbase {
 
 	/**
 	 * Generates a single linked up or down icon depending on the type parameter.
-	 * 
+	 *
 	 * @param	string		the type of the icon ("up" or "down")
 	 * @param	string		the command for TCEmain
 	 * @param	integer		the negative UID of the record where the current record
 	 * 						will be moved after if the button was clicked or the
 	 * 						positive PID if the current icon is the second in the
 	 * 						list and we should generate an up button
-	 * 
+	 *
 	 * @return	string		the HTML source code of a single linked up or down icon
-	 * 
+	 *
 	 * @access	protected
 	 */
 	function getSingleUpOrDownIcon($type, $params, $moveToUid) {

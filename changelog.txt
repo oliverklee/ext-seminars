@@ -1,6 +1,7 @@
 0.5.0
+- Fix: Ensure TYPO3 3.8.1 compatibility (#857)
 - Feature: Add the up/down buttons for the list of events in mod2 (#607)
-- Fix: Test the registration page CSS with IE6 (#823)
+- Fix: Make the registration page CSS cross-browser compatible (#823)
 - Fix: In e-mails, enclose the URL with <> (#867)
 - Feature: Add hide/unhide buttons to the event list in mod2 (#626)
 - Change: Added all necessary fields to the FE event-editor (#524)

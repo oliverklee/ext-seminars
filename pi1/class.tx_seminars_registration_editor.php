@@ -31,7 +31,15 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('ameos_formidable').'api/class.tx_ameosformidable.php');
-require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
+
+if (is_file(
+	t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php'
+)) {
+	require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
+} else {
+	// Use sr_static_info as a fallback for TYPO3 < 4.x.
+	require_once(t3lib_extMgm::extPath('sr_static_info').'pi1/class.tx_srstaticinfo_pi1.php');
+}
 
 class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/** Same as class name */
@@ -1200,8 +1208,17 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function initStaticInfo() {
 		if (!$this->staticInfo) {
-			$this->staticInfo
-				= t3lib_div::makeInstance('tx_staticinfotables_pi1');
+			if (is_file(
+				t3lib_extMgm::extPath('static_info_tables')
+					.'pi1/class.tx_staticinfotables_pi1.php'
+			)) {
+				$this->staticInfo
+					=& t3lib_div::makeInstance('tx_staticinfotables_pi1');
+			} else  {
+				// Use sr_static_info as a fallback for TYPO3 < 4.x.
+				$this->staticInfo =& t3lib_div::makeInstance('tx_srstaticinfo_pi1');
+			}
+
 			$this->staticInfo->init();
 		}
 
