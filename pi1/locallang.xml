@@ -116,6 +116,7 @@
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
 			<label index="label_register_additional_information">Additional information</label>
+			<label index="label_checkboxes">Additional information:</label>
 			<label index="label_interests">Special interests:</label>
 			<label index="label_expectations">Expectations for the event:</label>
 			<label index="label_background_knowledge">Background knowledge:</label>
@@ -490,6 +491,7 @@
 			<label index="label_back">Zur Übersicht</label>
 			<label index="label_save">Speichern</label>
 			<label index="label_register_additional_information">Weitere Informationen</label>
+			<label index="label_checkboxes">Weitere Informationen:</label>
 			<label index="label_interests">Spezielle Interessen:</label>
 			<label index="label_expectations">Erwartungen an die Veranstaltung:</label>
 			<label index="label_background_knowledge">Vorkenntnisse:</label>
@@ -1300,6 +1302,7 @@
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_save" type="integer">211601612</label>
 			<label index="label_register_additional_information" type="integer">16157584</label>
+			<label index="label_checkboxes" type="integer">15950088</label>
 			<label index="label_interests" type="integer">236721406</label>
 			<label index="label_expectations" type="integer">159374040</label>
 			<label index="label_background_knowledge" type="integer">17742601</label>
@@ -1923,6 +1926,7 @@
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
 			<label index="label_register_additional_information">Additional information</label>
+			<label index="label_checkboxes">Additional information:</label>
 			<label index="label_interests">Special interests:</label>
 			<label index="label_expectations">Expectations for the event:</label>
 			<label index="label_background_knowledge">Background knowledge:</label>

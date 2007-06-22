@@ -407,16 +407,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 					|| $this->isFormFieldEnabled('kids');
 				break;
 			case 'lodging_and_food':
-				$result = $this->isFormFieldEnabled('accommodation')
+				$result = $this->isFormFieldEnabled('lodgings')
+					|| $this->isFormFieldEnabled('accommodation')
+					|| $this->isFormFieldEnabled('foods')
 					|| $this->isFormFieldEnabled('food');
 				break;
-			case 'lodging_and_food_2':
-				// TODO: Combine this with the former case (bug 564).
-				$result = $this->isFormFieldEnabled('lodgings')
-					|| $this->isFormFieldEnabled('foods');
-				break;
 			case 'additional_information':
-				$result = $this->isFormFieldEnabled('interests')
+				$result = $this->isFormFieldEnabled('checkboxes')
+					|| $this->isFormFieldEnabled('interests')
 					|| $this->isFormFieldEnabled('expectations')
 					|| $this->isFormFieldEnabled('background_knowledge')
 					|| $this->isFormFieldEnabled('known_from')
@@ -637,20 +635,124 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function getRegistrationData() {
 		$result = '';
 
+		foreach (array(
+			'account_number',
+			'bank_code',
+			'bank_name',
+			'account_owner',
+			'seats',
+			'total_price',
+			'attendees_names',
+			'lodgings',
+			'accommodation',
+			'foods',
+			'food',
+			'checkboxes',
+			'interests',
+			'expectations',
+			'background_knowledge',
+			'known_from',
+			'notes'
+		) as $currentKey) {
+			$result .= $this->getFormDataItemForConfirmation($currentKey);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Formats one data item from the form as HTML, including a heading.
+	 * If the entered data is empty, an empty string will be returned (so the
+	 * heading will only be included for non-empty data).
+	 *
+	 * @param	string		key of the field for which the data should be displayed
+	 *
+	 * @return	string		the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data is empty)
+	 *
+	 * @access	protected
+	 */
+	function getFormDataItemForConfirmation($key) {
+		$result = '';
+
+		$currentFormData = $this->oForm->oDataHandler->_getThisFormData($key);
+
+		switch ($key) {
+			case 'total_price':
+				$currentFormData = $this->getTotalPriceWithUnit();
+				break;
+			case 'lodgings':
+				$currentFormData = $this->getCaptionsForSelectedOptions(
+					$this->seminar->getLodgings(),
+					$currentFormData
+				);
+				break;
+			case 'foods':
+				$currentFormData = $this->getCaptionsForSelectedOptions(
+					$this->seminar->getFoods(),
+					$currentFormData
+				);
+				break;
+			case 'checkboxes':
+				$currentFormData = $this->getCaptionsForSelectedOptions(
+					$this->seminar->getCheckboxes(),
+					$currentFormData
+				);
+				break;
+			default:
+				break;
+		}
+		if ($currentFormData != '') {
+			$this->plugin->setMarkerContent(
+				'registration_data_heading',
+				$this->plugin->pi_getLL('label_'.$key)
+			);
+			$fieldContent = str_replace(
+				chr(13),
+				'<br />',
+				htmlspecialchars($currentFormData)
+			);
+			$this->plugin->setMarkerContent(
+				'registration_data_body',
+				$fieldContent
+			);
+			$result = $this->plugin->substituteMarkerArrayCached(
+				'REGISTRATION_CONFIRMATION_DATA'
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Takes the selected price and the selected number of seats and calculates
+	 * the total price. The total price will be returned with the currency
+	 * unit appended.
+	 *
+	 * @return	string		the total price calculated from the form data including the currency unit, eg. "240.00 EUR"
+	 *
+	 * @access	protected
+	 */
+	function getTotalPriceWithUnit() {
+		$result = '';
+
 		$dataHandler =& $this->oForm->oDataHandler;
 
 		$availablePaymentMethods = $this->populateListPaymentMethods(
 			array()
 		);
 
-		if (isset($availablePaymentMethods[$dataHandler->_getThisFormData('method_of_payment')])) {
+		if (isset($availablePaymentMethods[
+			$dataHandler->_getThisFormData('method_of_payment')
+		])) {
 			$this->plugin->setMarkerContent(
 				'registration_data_heading',
 				$this->plugin->pi_getLL('label_selected_paymentmethod')
 			);
 			$this->plugin->setMarkerContent(
 				'registration_data_body',
-				$availablePaymentMethods[$dataHandler->_getThisFormData('method_of_payment')]['caption']
+				$availablePaymentMethods
+					[$dataHandler->_getThisFormData('method_of_payment')]
+					['caption']
 			);
 			$result .= $this->plugin->substituteMarkerArrayCached(
 				'REGISTRATION_CONFIRMATION_DATA'
@@ -686,54 +788,37 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		} else {
 			$seats = 1;
 		}
-		$totalPriceWithUnit = '';
 		if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
 			$totalPrice = $this->seminar->formatPrice(
 				$seats * $availablePrices[$selectedPrice]['amount']
 			);
 			$currency = $this->registrationManager->getConfValueString('currency');
-			$totalPriceWithUnit = $totalPrice.' '.$currency;
+			$result = $totalPrice.' '.$currency;
 		}
 
-		foreach (array(
-			'account_number',
-			'bank_code',
-			'bank_name',
-			'account_owner',
-			'seats',
-			'total_price',
-			'attendees_names',
-			'interests',
-			'expectations',
-			'background_knowledge',
-			'accommodation',
-			'food',
-			'known_from',
-			'notes'
-		) as $currentKey) {
-			// The total price is a special case as it is pre-processed.
-			if ($currentKey == 'total_price') {
-				$currentFormData = $totalPriceWithUnit;
-			} else {
-				$currentFormData = $dataHandler->_getThisFormData($currentKey);
-			}
-			if ($currentFormData != '') {
-				$this->plugin->setMarkerContent(
-					'registration_data_heading',
-					$this->plugin->pi_getLL('label_'.$currentKey)
-				);
-				$fieldContent = str_replace(
-					chr(13),
-					'<br />',
-					htmlspecialchars($currentFormData)
-				);
-				$this->plugin->setMarkerContent(
-					'registration_data_body',
-					$fieldContent
-				);
-				$result .= $this->plugin->substituteMarkerArrayCached(
-					'REGISTRATION_CONFIRMATION_DATA'
-				);
+		return $result;
+	}
+
+	/**
+	 * Takes the selected options for a list of options and displays it
+	 * nicely using their captions, separated by a carriage return (ASCII 13).
+	 *
+	 * @param	array		all available options for this form element as a nested array, the outer array having the UIDs of the options as keys, the inner array having the keys "caption" (for the visible captions) and "value" (the UID again), may be empty, must not be null
+	 * @param	array		the selected options with the array values being the UIDs of the corresponding options, may be empty or even null
+	 *
+	 * @return	string		the captions of the selected options, separated by CR
+	 */
+	function getCaptionsForSelectedOptions($availableOptions, $selectedOptions) {
+		$result = '';
+
+		if (!empty($selectedOptions)) {
+			$captions = array();
+
+			foreach ($selectedOptions as $currentSelection) {
+				if (isset($availableOptions[$currentSelection])) {
+					$captions[]	= $availableOptions[$currentSelection]['caption'];
+				}
+				$result = implode(chr(13), $captions);
 			}
 		}
 
@@ -1257,7 +1342,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				'expectations',
 				'background_knowledge',
 				'lodging_and_food',
-				'lodging_and_food_2',
 				'accommodation',
 				'food',
 				'known_from',

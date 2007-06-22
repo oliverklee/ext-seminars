@@ -2795,7 +2795,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($dbResult) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$result[] = array(
+				$result[$row['uid']] = array(
 					'caption' => $row['title'],
 					'value'   => $row['uid']
 				);
@@ -3293,16 +3293,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets the date.
 	 * Returns an empty string if the seminar record is a topic record.
-	 * Otherwise will return the date or a localized string "will be 
+	 * Otherwise will return the date or a localized string "will be
 	 * announced" if there's no date set.
 	 *
 	 * Returns just one day if we take place on only one day.
-	 * Returns a date range if we take several days. 
-	 * 
+	 * Returns a date range if we take several days.
+	 *
 	 * @param	string		the character or HTML entity used to separate start date and end date
 	 *
 	 * @return	string		the seminar date (or an empty string or a localized message)
-	 * 
+	 *
 	 * @access	public
 	 */
 	function getDate($dash = '&#8211;') {
@@ -3318,9 +3318,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Returns true if the seminar is hidden otherwise false.
-	 * 
+	 *
 	 * @return	boolean		true if the seminar is hidden otherwise false
-	 * 
+	 *
 	 * @access	public
 	 */
 	function isHidden() {

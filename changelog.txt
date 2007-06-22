@@ -1,4 +1,5 @@
 0.5.0
+- Change: Move the checkboxes, the lodging options and the food options to the first registration page (#564)
 - Fix: Ensure TYPO3 3.8.1 compatibility (#857)
 - Feature: Add the up/down buttons for the list of events in mod2 (#607)
 - Fix: Make the registration page CSS cross-browser compatible (#823)

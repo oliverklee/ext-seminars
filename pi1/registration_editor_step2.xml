@@ -38,17 +38,6 @@
 	</control>
 
 	<elements>
-		<renderlet:LABEL name="feuser_data">
-			<data>
-				<value>
-					<userobj>
-						<extension>this</extension>
-						<method>getAllFeUserData</method>
-					</userobj>
-				</value>
-			</data>
-		</renderlet:LABEL>
-
 		<renderlet:LABEL name="billing_address">
 			<data>
 				<value>
@@ -70,69 +59,6 @@
 				</value>
 			</data>
 		</renderlet:LABEL>
-
-		<renderlet:CHECKBOX name="lodgings">
-			<data>
-				<userobj>
-					<extension>this</extension>
-					<method>populateLodgings</method>
-				</userobj>
-			</data>
-			<validators>
-				<validator:STANDARD>
-					<userobj>
-						<extension>this</extension>
-						<method>isLodgingSelected</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_selectLodging</message>
-					</userobj>
-				</validator:STANDARD>
-			</validators>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasLodgings</method>
-				</userobj>
-			</process>
-		</renderlet:CHECKBOX>
-
-		<renderlet:CHECKBOX name="foods">
-			<data>
-				<userobj>
-					<extension>this</extension>
-					<method>populateFoods</method>
-				</userobj>
-			</data>
-			<validators>
-				<validator:STANDARD>
-					<userobj>
-						<extension>this</extension>
-						<method>isFoodSelected</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_selectFood</message>
-					</userobj>
-				</validator:STANDARD>
-			</validators>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasFoods</method>
-				</userobj>
-			</process>
-		</renderlet:CHECKBOX>
-
-		<renderlet:CHECKBOX name="checkboxes">
-			<data>
-				<userobj>
-					<extension>this</extension>
-					<method>populateCheckboxes</method>
-				</userobj>
-			</data>
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasCheckboxes</method>
-				</userobj>
-			</process>
-		</renderlet:CHECKBOX>
 
 		<renderlet:CHECKSINGLE name="terms">
 			<process>
@@ -458,6 +384,91 @@
 			</process>
 		</renderlet:HIDDEN>
 
+		<renderlet:CHECKBOX name="lodgings">
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateLodgings</method>
+				</userobj>
+			</data>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>isLodgingSelected</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_selectLodging</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasLodgings</method>
+				</userobj>
+			</process>
+		</renderlet:CHECKBOX>
+		<renderlet:HIDDEN name="accommodation">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="accommodation" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+
+		<renderlet:CHECKBOX name="foods">
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateFoods</method>
+				</userobj>
+			</data>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>isFoodSelected</method>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_selectFood</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasFoods</method>
+				</userobj>
+			</process>
+		</renderlet:CHECKBOX>
+		<renderlet:HIDDEN name="food">
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasRegistrationFormField</method>
+					<params>
+						<data name="elementname" value="food" />
+					</params>
+				</userobj>
+			</process>
+		</renderlet:HIDDEN>
+
+		<renderlet:CHECKBOX name="checkboxes">
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateCheckboxes</method>
+				</userobj>
+			</data>
+			<process>
+				<userobj>
+					<extension>this</extension>
+					<method>hasCheckboxes</method>
+				</userobj>
+			</process>
+		</renderlet:CHECKBOX>
+
 		<renderlet:HIDDEN name="interests">
 			<process>
 				<userobj>
@@ -489,30 +500,6 @@
 					<method>hasRegistrationFormField</method>
 					<params>
 						<data name="elementname" value="background_knowledge" />
-					</params>
-				</userobj>
-			</process>
-		</renderlet:HIDDEN>
-
-		<renderlet:HIDDEN name="accommodation">
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
-					<params>
-						<data name="elementname" value="accommodation" />
-					</params>
-				</userobj>
-			</process>
-		</renderlet:HIDDEN>
-
-		<renderlet:HIDDEN name="food">
-			<process>
-				<userobj>
-					<extension>this</extension>
-					<method>hasRegistrationFormField</method>
-					<params>
-						<data name="elementname" value="food" />
 					</params>
 				</userobj>
 			</process>
