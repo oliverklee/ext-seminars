@@ -390,6 +390,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkThankYouMail() {
+		$this->checkCharsetForEMails();
 		$this->checkHideFieldsInThankYouMail();
 
 		return;
@@ -401,6 +402,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkNotificationMail() {
+		$this->checkCharsetForEMails();
 		$this->checkHideFieldsInNotificationMail();
 		$this->checkShowSeminarFieldsInNotificationMail();
 		$this->checkShowFeUserFieldsInNotificationMail();
@@ -1835,6 +1837,26 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies whether one-time FE user accounts will '
 				.'automatically be logged out after registering for an event. '
 				.'If this value is incorrect, the automatic logout will not work.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * charsetForEMails.
+	 *
+	 * @access	private
+	 */
+	function checkCharsetForEMails() {
+		$this->checkForNonEmptyString(
+			'charsetForEMails',
+			false,
+			'',
+			'This value specifies the charset that will be used in e-mails to '
+				.'the organizers and the attendees. '
+				.'If this value is empty, special characters in these e-mails '
+				.'will appear garbled.'
 		);
 
 		return;
