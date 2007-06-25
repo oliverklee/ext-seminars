@@ -14,6 +14,10 @@ plugin.tx_seminars {
 	# whether to use formal or informal language
 	salutation = formal
 
+	# the charset used for e-mails to the organizers and the attendees; should
+	# match the charset used in the BE and FE; this is usually UTF-8 or ISO-8859-1
+	charsetForEMails = UTF-8
+
 	# comma-separated list of section names that shouldn't be displayed in the thank-you e-mail to the user
 	hideFieldsInThankYouMail = credit_points
 
