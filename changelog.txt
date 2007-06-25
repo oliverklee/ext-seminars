@@ -1,4 +1,4 @@
-0.4.11
+0.4.11 (released 2007-06-25)
 - Change: Allow to send e-mails as ISO-8859-1 instead of UTF-8 (#881)
 - Fix: In e-mails, enclose the URL with <> (#867)
 - Feature: Add a hook to the single view (#793)
