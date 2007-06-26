@@ -64,10 +64,10 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		$result = '';
 
 		switch ($this->piVars['table']) {
-			case 'events':
+			case $this->tableSeminars:
 				$result = $this->createListOfEvents();
 				break;
-			case 'registrations':
+			case $this->tableAttendances:
 				$result = $this->createListOfRegistrations();
 				break;
 			default:

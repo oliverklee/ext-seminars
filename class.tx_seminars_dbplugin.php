@@ -186,7 +186,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	/**
 	 * Sets the table names.
 	 *
-	 * @access	private
+	 * @access	protected
 	 */
 	function setTableNames() {
 		$dbPrefix = 'tx_'.$this->extKey.'_';
