@@ -54,6 +54,12 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	/** Holds information about the current page. */
 	var $pageInfo;
 
+	/** an array of available sub modules */
+	var $availableSubModules;
+
+	/** the currently selected sub module */
+	var $subModule;
+
 	/**
 	 * Initializes some variables and also starts the initialization of the parent class.
 	 *

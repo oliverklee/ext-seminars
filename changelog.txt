@@ -1,4 +1,5 @@
 0.5.0
+- Fix: mod2: some member variables are used, but not declared (#889)
 - Change: Split mod2/index.php to several classes (#888)
 - Change: Allow to send e-mails as ISO-8859-1 instead of UTF-8 (#881)
 - Change: Move the checkboxes, the lodging options and the food options to the first registration page (#564)
