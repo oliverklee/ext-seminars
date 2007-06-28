@@ -70,8 +70,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *  the values for performance reasons */
 	var $formFieldsToShow = array();
 
-	/** whether we show the confirmation page (true) or the form (false) */
-	var $isConfirmationPage = false;
+	/**
+	 * the number of the current page of the form (starting with 0 for the first
+	 * page)
+	 */
+	var $currentPageNumber = 0;
 
 	/**
 	 * fields that are part of the billing address, with the value controlling
@@ -154,8 +157,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function _initForms() {
 		$this->oForm =& t3lib_div::makeInstance('tx_ameosformidable');
 
-		$xmlFile = (!$this->isConfirmationPage) ?
-			'registration_editor.xml' : 'registration_editor_step2.xml';
+		switch ($this->currentPageNumber) {
+			case 1:
+				$xmlFile = 'registration_editor_step2.xml';
+				break;
+			case 0:
+				// The fall-through is intended.
+			default;
+				$xmlFile = 'registration_editor.xml';
+				break;
+		}
 
 		$this->oForm->init(
 			$this,
@@ -196,7 +207,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$rawForm = $this->oForm->_render();
 		// For the confirmation page, we need to reload the whole thing. Yet,
 		// the previous rendering still is necessary for processing the data.
-		if ($this->isConfirmationPage) {
+		if ($this->currentPageNumber > 0) {
 			$this->_initForms();
 			$rawForm = $this->oForm->_render();
 		}
@@ -212,14 +223,26 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Selects the confirmation page (the second step of the registration form)
 	 * for display. This affects $this->_render().
 	 *
-	 * @param	array		the entered form data with the field names as array keys (including the submit button ...)
+	 * @param	array		the entered form data with the field names as array keys (including the submit button)
 	 *
 	 * @access	public
 	 */
-	function showConfirmationPage($parameters) {
-		$this->isConfirmationPage = true;
+	function setPage($parameters) {
+		$this->currentPageNumber = $parameters['next_page'];
 
 		return;
+	}
+
+	/**
+	 * Checks whether we are on the last page of the registration form and we
+	 * can proceed to saving the registration.
+	 *
+	 * @return	boolean		true if we can proceed to saving the registration, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isLastPage() {
+		return ($this->currentPageNumber == 2);
 	}
 
 	/**

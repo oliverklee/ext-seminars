@@ -1,4 +1,5 @@
 0.5.0
+- Change: The terms checkbox now isn't required anymore for the two-step registration form (#374)
 - Fix: mod2: some member variables are used, but not declared (#889)
 - Change: Split mod2/index.php to several classes (#888)
 - Change: Allow to send e-mails as ISO-8859-1 instead of UTF-8 (#881)
