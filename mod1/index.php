@@ -32,15 +32,17 @@ require ('conf.php');
 require ($BACK_PATH.'init.php');
 require ($BACK_PATH.'template.php');
 $LANG->includeLLFile('EXT:seminars/mod1/locallang.php');
-#include ('locallang.php');
+
 require_once (PATH_t3lib.'class.t3lib_scbase.php');
 require_once (PATH_t3lib.'class.t3lib_page.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
+
 class tx_seminars_module1 extends t3lib_SCbase {
 	var $pageinfo;
 
@@ -294,9 +296,6 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		}
 		return $result;
 	}
-
-
-
 
 	/**
 	 * Returns a list of the emailadresses of the registered attendees.
