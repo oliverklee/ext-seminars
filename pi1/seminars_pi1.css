@@ -122,9 +122,22 @@ th.tx-seminars-pi1-title {
 	margin: 0 .5em 0 0;
 }
 
+#tx-seminars-pi1-registration-payment {
+	position: relative;
+	height: 8em;
+}
+
+#tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-method-of-payment dd {
+	margin-right: 25em;
+}
+
 #tx-seminars-pi1-registration-banking-data {
-	width: 23em;
-	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 24.5em;
+	margin: 0;
+	padding: 0;
 }
 
 #tx-seminars-pi1-registration-form input,

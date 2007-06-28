@@ -11,72 +11,74 @@
 <!-- ###REGISTRATION_WRAPPER_PAYMENT### -->
 <fieldset>
 	<legend>###LABEL_LEGEND_PAYMENT###</legend>
+	<div id="tx-seminars-pi1-registration-payment">
 <!-- ###REGISTRATION_WRAPPER_PRICE### -->
-	<dl class="tx-seminars-pi1-registration-price">
-		<dt>
-			<label>###LABEL_SELECT_PRICE###</label>
-		</dt>
-		<dd>
-			{price}
-		</dd>
-	</dl>
+		<dl class="tx-seminars-pi1-registration-price">
+			<dt>
+				<label>###LABEL_SELECT_PRICE###</label>
+			</dt>
+			<dd>
+				{price}
+			</dd>
+		</dl>
 <!-- ###REGISTRATION_WRAPPER_PRICE### -->
 <!-- ###REGISTRATION_WRAPPER_METHOD_OF_PAYMENT### -->
-	<dl>
-		<dt>
-			<label>###LABEL_SELECT_PAYMENTMETHOD###</label>
-		</dt>
-		<dd class="tx-seminars-pi1-checkbox">
-			{method_of_payment}
-		</dd>
-	</dl>
+		<dl class="tx-seminars-pi1-registration-method-of-payment">
+			<dt>
+				<label>###LABEL_SELECT_PAYMENTMETHOD###</label>
+			</dt>
+			<dd class="tx-seminars-pi1-checkbox">
+				{method_of_payment}
+			</dd>
+		</dl>
 <!-- ###REGISTRATION_WRAPPER_METHOD_OF_PAYMENT### -->
 
 <!-- ###REGISTRATION_WRAPPER_BANKING_DATA### -->
-	<div id="tx-seminars-pi1-registration-banking-data">
-		<dl>
+		<div id="tx-seminars-pi1-registration-banking-data">
+			<dl>
 <!-- ###REGISTRATION_WRAPPER_ACCOUNT_NUMBER### -->
-			<dt>
-				<label for="tx_seminars_pi1_registration_editor[account_number]">###LABEL_ACCOUNT_NUMBER###</label>
-			</dt>
-			<dd>
-				{account_number}
-			</dd>
+				<dt>
+					<label for="tx_seminars_pi1_registration_editor[account_number]">###LABEL_ACCOUNT_NUMBER###</label>
+				</dt>
+				<dd>
+					{account_number}
+				</dd>
 <!-- ###REGISTRATION_WRAPPER_ACCOUNT_NUMBER### -->
 
 <!-- ###REGISTRATION_WRAPPER_ACCOUNT_OWNER### -->
-			<dt>
-				<label for="tx_seminars_pi1_registration_editor[account_owner]">
-					###LABEL_ACCOUNT_OWNER###
-				</label>
-			</dt>
-			<dd>
-				{account_owner}
-			</dd>
+				<dt>
+					<label for="tx_seminars_pi1_registration_editor[account_owner]">
+						###LABEL_ACCOUNT_OWNER###
+					</label>
+				</dt>
+				<dd>
+					{account_owner}
+				</dd>
 <!-- ###REGISTRATION_WRAPPER_ACCOUNT_OWNER### -->
 
 <!-- ###REGISTRATION_WRAPPER_BANK_CODE### -->
-			<dt>
-				<label for="tx_seminars_pi1_registration_editor[bank_code]">
-					###LABEL_BANK_CODE###
-				</label>
-			</dt>
-			<dd>
-				{bank_code}
-			</dd>
+				<dt>
+					<label for="tx_seminars_pi1_registration_editor[bank_code]">
+						###LABEL_BANK_CODE###
+					</label>
+				</dt>
+				<dd>
+					{bank_code}
+				</dd>
 <!-- ###REGISTRATION_WRAPPER_BANK_CODE### -->
 
 <!-- ###REGISTRATION_WRAPPER_BANK_NAME### -->
-			<dt>
-				<label for="tx_seminars_pi1_registration_editor[bank_name]">
-					###LABEL_BANK_NAME###
-				</label>
-			</dt>
-			<dd>
-				{bank_name}
-			</dd>
+				<dt>
+					<label for="tx_seminars_pi1_registration_editor[bank_name]">
+						###LABEL_BANK_NAME###
+					</label>
+				</dt>
+				<dd>
+					{bank_name}
+				</dd>
 <!-- ###REGISTRATION_WRAPPER_BANK_NAME### -->
-		</dl>
+			</dl>
+		</div>
 	</div>
 <!-- ###REGISTRATION_WRAPPER_BANKING_DATA### -->
 </fieldset>
@@ -229,6 +231,7 @@
 		</dt>
 		<dd>
 			{accommodation}
+			<div class="tx-seminars-pi1-clear"></div>
 		</dd>
 <!-- ###REGISTRATION_WRAPPER_ACCOMMODATION### -->
 
