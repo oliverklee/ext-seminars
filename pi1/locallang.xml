@@ -92,6 +92,7 @@
 			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_select_price">Price:</label>
+			<label index="label_price">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_board_regular">Regular price including full board</label>
@@ -159,7 +160,7 @@
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
-			<label index="label_selected_paymentmethod">Selected method of payment:</label>
+			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -281,6 +282,7 @@
 			<label index="label_leaders">Ledere</label>
 			<label index="label_price_general">Pris</label>
 			<label index="label_select_price">Pris:</label>
+			<label index="label_price">Pris</label>
 			<label index="label_price_regular">Pris</label>
 			<label index="label_price_earlybird_regular">Tidlig tilmeldingspris</label>
 			<label index="label_price_board_regular">Pris inkl. helpension</label>
@@ -346,7 +348,7 @@
 			<label index="label_back_registration">Tilbage</label>
 			<label index="label_your_user_data_formal">Dine adresse informationer:</label>
 			<label index="label_your_user_data_informal">Dine adresse informationer:</label>
-			<label index="label_selected_paymentmethod">Valgte betalingsmetode:</label>
+			<label index="label_method_of_payment">Valgte betalingsmetode:</label>
 			<label index="message_wrongSeminarNumber_formal">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_wrongSeminarNumber_informal">Der findes ikke noget arrangement med dette nummer. Hvis du f&amp;#229;r denne fejl n&amp;#229;r du bruger et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_noResults">Beklager, ingen arrangementer fundet</label>
@@ -468,6 +470,7 @@
 			<label index="label_leaders">Kursleitung</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_select_price">Preis:</label>
+			<label index="label_price">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_earlybird_regular">Frühbucherpreis</label>
 			<label index="label_price_board_regular">Standardpreis inklusive Vollpension</label>
@@ -535,7 +538,7 @@
 			<label index="label_back_registration">Zurück</label>
 			<label index="label_your_user_data_formal">Ihre Adressdaten</label>
 			<label index="label_your_user_data_informal">Deine Adressdaten</label>
-			<label index="label_selected_paymentmethod">Gewählte Zahlungsart:</label>
+			<label index="label_method_of_payment">Gewählte Zahlungsart:</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
@@ -665,6 +668,7 @@
 			<label index="label_leaders">Leiders</label>
 			<label index="label_price_general">Prijs</label>
 			<label index="label_select_price">Prijs:</label>
+			<label index="label_price">Prijs</label>
 			<label index="label_price_regular">Reguliere prijs</label>
 			<label index="label_price_earlybird_regular">Vroegboek prijs</label>
 			<label index="label_price_board_regular">Reguliere prijs inclusief vol pension</label>
@@ -730,7 +734,7 @@
 			<label index="label_back_registration">Terug</label>
 			<label index="label_your_user_data_formal">U adres gegevens:</label>
 			<label index="label_your_user_data_informal">Jouw adres gegevens:</label>
-			<label index="label_selected_paymentmethod">Gekozen methode van betalen:</label>
+			<label index="label_method_of_payment">Gekozen methode van betalen:</label>
 			<label index="message_wrongSeminarNumber_formal">Er is geen evenement bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link wilt u dan de webmaster hiervan op de hoogte brengen? Dank u!</label>
 			<label index="message_wrongSeminarNumber_informal">Een evenement met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
 			<label index="message_noResults">Sorry, op dit moment zijn er geen evenementen gevonden.</label>
@@ -921,7 +925,7 @@
 			<label index="label_back_registration">Назад</label>
 			<label index="label_your_user_data_formal">Ваш адрес:</label>
 			<label index="label_your_user_data_informal">Ваш адрес:</label>
-			<label index="label_selected_paymentmethod">Выбранные методы оплаты:</label>
+			<label index="label_method_of_payment">Выбранные методы оплаты:</label>
 			<label index="message_wrongSeminarNumber_formal">Не существует события с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_wrongSeminarNumber_informal">Не существует события с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_noResults">Не найдено ни одного события.</label>
@@ -1152,7 +1156,7 @@
 			<label index="label_back_registration" type="integer">5603241</label>
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
-			<label index="label_selected_paymentmethod" type="integer">221962435</label>
+			<label index="label_method_of_payment" type="integer">221962435</label>
 			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
 			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
@@ -1186,6 +1190,7 @@
 			<label index="countdown_minutes_singular" type="integer">10999131</label>
 			<label index="countdown_seconds_plural" type="integer">126085346</label>
 			<label index="label_select_price" type="integer">254546606</label>
+			<label index="label_price" type="integer">254546606</label>
 			<label index="label_select_paymentmethod" type="integer">203383656</label>
 			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
@@ -1280,6 +1285,7 @@
 			<label index="label_leaders" type="integer">45784650</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_select_price" type="integer">254546606</label>
+			<label index="label_price" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_earlybird_regular" type="integer">236870027</label>
 			<label index="label_price_board_regular" type="integer">122636477</label>
@@ -1347,7 +1353,7 @@
 			<label index="label_back_registration" type="integer">5603241</label>
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
-			<label index="label_selected_paymentmethod" type="integer">221962435</label>
+			<label index="label_method_of_payment" type="integer">221962435</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
@@ -1496,6 +1502,7 @@
 			<label index="label_tutors" type="integer">102766940</label>
 			<label index="label_leaders" type="integer">45784650</label>
 			<label index="label_select_price" type="integer">254546606</label>
+			<label index="label_price" type="integer">254546606</label>
 			<label index="label_price_earlybird_regular" type="integer">236870027</label>
 			<label index="label_price_board_regular" type="integer">122636477</label>
 			<label index="label_price_earlybird_special" type="integer">255242535</label>
@@ -1552,7 +1559,7 @@
 			<label index="label_back_registration" type="integer">5603241</label>
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
-			<label index="label_selected_paymentmethod" type="integer">221962435</label>
+			<label index="label_method_of_payment" type="integer">221962435</label>
 			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
 			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
@@ -1733,7 +1740,7 @@
 			<label index="label_back_registration" type="integer">5603241</label>
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
-			<label index="label_selected_paymentmethod" type="integer">221962435</label>
+			<label index="label_method_of_payment" type="integer">221962435</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
@@ -1905,6 +1912,7 @@
 			<label index="label_leaders">Leaders</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_select_price">Price:</label>
+			<label index="label_price">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_board_regular">Regular price including full board</label>
@@ -1972,7 +1980,7 @@
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
-			<label index="label_selected_paymentmethod">Selected method of payment:</label>
+			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -2153,7 +2161,7 @@
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
-			<label index="label_selected_paymentmethod">Selected method of payment:</label>
+			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
 			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
@@ -2187,6 +2195,7 @@
 			<label index="countdown_minutes_singular">minute</label>
 			<label index="countdown_seconds_plural">seconds</label>
 			<label index="label_select_price">Price:</label>
+			<label index="label_price">Price</label>
 			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_register_lodging_and_food">Lodging and food</label>
@@ -2336,7 +2345,7 @@
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
-			<label index="label_selected_paymentmethod">Selected method of payment:</label>
+			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -2477,6 +2486,7 @@
 			<label index="label_tutors">Tutors</label>
 			<label index="label_leaders">Leaders</label>
 			<label index="label_select_price">Price:</label>
+			<label index="label_price">Price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_board_regular">Regular price including full board</label>
 			<label index="label_price_earlybird_special">Early-bird special price</label>
@@ -2533,7 +2543,7 @@
 			<label index="label_back_registration">Back</label>
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
-			<label index="label_selected_paymentmethod">Selected method of payment:</label>
+			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
 			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>

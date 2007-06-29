@@ -659,12 +659,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$result = '';
 
 		foreach (array(
+			'price',
+			'seats',
+			'total_price',
+			'method_of_payment',
 			'account_number',
 			'bank_code',
 			'bank_name',
 			'account_owner',
-			'seats',
-			'total_price',
 			'attendees_names',
 			'lodgings',
 			'accommodation',
@@ -703,8 +705,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			? $this->oForm->oDataHandler->_getThisFormData($key) : '';
 
 		switch ($key) {
+			case 'price':
+				$currentFormData = $this->getSelectedPrice();
+				break;
 			case 'total_price':
 				$currentFormData = $this->getTotalPriceWithUnit();
+				break;
+			case 'method_of_payment':
+				$currentFormData = $this->getSelectedPaymentMethod();
 				break;
 			case 'lodgings':
 				$currentFormData = $this->getCaptionsForSelectedOptions(
@@ -750,6 +758,30 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Retrieves the selected price, completely with caption (for example:
+	 * "Standard price") and currency.
+	 *
+	 * If no price has been selected, the first available price will be used.
+	 *
+	 * @return	string		the selected price with caption and unit
+	 *
+	 * @access	protected
+	 */
+	function getSelectedPrice() {
+		$dataHandler =& $this->oForm->oDataHandler;
+
+		$availablePrices = $this->seminar->getAvailablePrices();
+		$selectedPrice = $dataHandler->_getThisFormData('price');
+
+		// If no (available) price is selected, use the first price by default.
+		if (!$this->seminar->isPriceAvailable($selectedPrice)) {
+			$selectedPrice = key($availablePrices);
+		}
+
+		return $availablePrices[$selectedPrice]['caption'];
+	}
+
+	/**
 	 * Takes the selected price and the selected number of seats and calculates
 	 * the total price. The total price will be returned with the currency
 	 * unit appended.
@@ -763,45 +795,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 		$dataHandler =& $this->oForm->oDataHandler;
 
-		$availablePaymentMethods = $this->populateListPaymentMethods(
-			array()
-		);
-
-		if (isset($availablePaymentMethods[
-			$dataHandler->_getThisFormData('method_of_payment')
-		])) {
-			$this->plugin->setMarkerContent(
-				'registration_data_heading',
-				$this->plugin->pi_getLL('label_selected_paymentmethod')
-			);
-			$this->plugin->setMarkerContent(
-				'registration_data_body',
-				$availablePaymentMethods
-					[$dataHandler->_getThisFormData('method_of_payment')]
-					['caption']
-			);
-			$result .= $this->plugin->substituteMarkerArrayCached(
-				'REGISTRATION_CONFIRMATION_DATA'
-			);
-		}
-
 		$availablePrices = $this->seminar->getAvailablePrices();
 		$selectedPrice = $dataHandler->_getThisFormData('price');
-		// If no (available) price is selected, use the first price by default.
-		if (!$this->seminar->isPriceAvailable($selectedPrice)) {
-			$selectedPrice = key($availablePrices);
-		}
-		$this->plugin->setMarkerContent(
-			'registration_data_heading',
-			$this->plugin->pi_getLL('label_price_general')
-		);
-		$this->plugin->setMarkerContent(
-			'registration_data_body',
-			$availablePrices[$selectedPrice]['caption']
-		);
-		$result .= $this->plugin->substituteMarkerArrayCached(
-			'REGISTRATION_CONFIRMATION_DATA'
-		);
 
 		// Build the total price for this registration and add it to the form
 		// data to show it on the confirmation page.
@@ -820,6 +815,33 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			);
 			$currency = $this->registrationManager->getConfValueString('currency');
 			$result = $totalPrice.' '.$currency;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the caption of the selected payment method. If no valid payment
+	 * method has been selected, this function returns an empty string.
+	 *
+	 * @return	string		the caption of the selected payment method or an empty string if no valid payment method has been selected
+	 *
+	 * @access	protected
+	 */
+	function getSelectedPaymentMethod() {
+		$result = '';
+
+		$dataHandler =& $this->oForm->oDataHandler;
+
+		$availablePaymentMethods = $this->populateListPaymentMethods(
+			array()
+		);
+
+		if (isset($availablePaymentMethods[
+			$dataHandler->_getThisFormData('method_of_payment')
+		])) {
+			$result = $availablePaymentMethods
+				[$dataHandler->_getThisFormData('method_of_payment')]['caption'];
 		}
 
 		return $result;
