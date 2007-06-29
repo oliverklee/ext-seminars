@@ -240,19 +240,6 @@ $TCA['tx_seminars_foods'] = Array (
 	)
 );
 
-$TCA['tx_seminars_timeslots'] = Array (
-	'ctrl' => Array (
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots',
-		'label' => 'title',
-		'tstamp' => 'tstamp',
-		'crdate' => 'crdate',
-		'cruser_id' => 'cruser_id',
-		'delete' => 'deleted',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_timeslots.gif',
-		'dynamicConfigFile' => $extPath.'tca.php'
-	)
-);
-
 t3lib_extMgm::addToInsertRecords('tx_seminars_seminars');
 t3lib_extMgm::addToInsertRecords('tx_seminars_speakers');
 
