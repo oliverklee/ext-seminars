@@ -697,7 +697,10 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function getFormDataItemForConfirmation($key) {
 		$result = '';
 
-		$currentFormData = $this->oForm->oDataHandler->_getThisFormData($key);
+		// The "total_price" field doesn't exist as an actual renderlet and
+		// so cannot be read.
+		$currentFormData = ($key != 'total_price')
+			? $this->oForm->oDataHandler->_getThisFormData($key) : '';
 
 		switch ($key) {
 			case 'total_price':
