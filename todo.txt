@@ -9,28 +9,8 @@ Development speed of this extension mainly depends on whether it is funded. So i
 
 Hint regarding the items marked with [from dev-meeting 05/12], they got discussed on the developers meeting that took place at the end of 2005. Details about these points can be read in the notices of this meeting wich can be found at http://www.rimann.li/fileadmin/mario/typo3/Dev_Meeting_0512_060101.pdf (sorry, German only. If you have questions please ask.)
 
-Version 0.5.0 - "Dogfood, part 2"
----------------------------------
---> All bugs marked with a star (*) are entered to the bugtracker!
-- *Include some basic functionality into md2
-  - *possibility to select an event
-  - *search forms (search for a user / event), maybe use t3lib_db::searchQuery
-- *Create a global log-function (write all changes to a log-table)
-  - *with alle changes and registrations so that everything is traceable
-  - *define the table-structure
-  - *create a function to write to the db
-  - *create a function in /mod2 to view the log (standard view, verbose view)
-  - investigate if the sys_log table can be used to store the extension's log [from dev-meeting 05/12]
-- *create a new template for sr_feuser_register with CSS
-- enter this extension into http://wiki.typo3.org/index.php/Calendar
-- Add new fields to the event records: target group, pre-knowledge [from dev-meeting 05/12]
-- Add categorization of events [from dev-meeting 05/12]
-- increase the number of lines in the Source Page flexforms element
-
-
 Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 -------------------------------------------------------------------------
-- opening links in a new window doesn't work as the "_blank" is added without a space
 - make BE form labels more intuitive
 - remove the old sr_feuser_register template
 - remove all university specific stuff and move it to a separate extension (add on to main extension) [from dev-meeting 05/12]
