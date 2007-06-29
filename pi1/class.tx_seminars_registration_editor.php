@@ -1345,47 +1345,48 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function hideUnusedFormFields() {
 		static $availableFormFields = array(
-				'payment',
-				'price',
-				'method_of_payment',
-				'banking_data',
-				'account_number',
-				'bank_code',
-				'bank_name',
-				'account_owner',
-				'billing_address',
-				'billing_data',
-				'gender',
-				'name',
-				'address',
-				'zip',
-				'city',
-				'country',
-				'telephone',
-				'email',
-				'additional_information',
-				'interests',
-				'expectations',
-				'background_knowledge',
-				'lodging_and_food',
-				'accommodation',
-				'food',
-				'known_from',
-				'more_seats',
-				'seats',
-				'attendees_names',
-				'kids',
-				'lodgings',
-				'foods',
-				'checkboxes',
-				'notes',
-				'entered_data',
-				'feuser_data',
-				'registration_data',
-				'all_terms',
-				'terms',
-				'terms_2',
-				'traveling_terms'
+			'step_counter',
+			'payment',
+			'price',
+			'method_of_payment',
+			'banking_data',
+			'account_number',
+			'bank_code',
+			'bank_name',
+			'account_owner',
+			'billing_address',
+			'billing_data',
+			'gender',
+			'name',
+			'address',
+			'zip',
+			'city',
+			'country',
+			'telephone',
+			'email',
+			'additional_information',
+			'interests',
+			'expectations',
+			'background_knowledge',
+			'lodging_and_food',
+			'accommodation',
+			'food',
+			'known_from',
+			'more_seats',
+			'seats',
+			'attendees_names',
+			'kids',
+			'lodgings',
+			'foods',
+			'checkboxes',
+			'notes',
+			'entered_data',
+			'feuser_data',
+			'registration_data',
+			'all_terms',
+			'terms',
+			'terms_2',
+			'traveling_terms'
 		);
 
 		$formFieldsToHide = array();
@@ -1402,6 +1403,27 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		);
 
 		return;
+	}
+
+	/**
+	 * Provides a string "Registration form: step x of y" for the current page.
+	 * The number of the first and last page can be configured via TS setup.
+	 *
+	 * @return	string		a localized string displaying the number of the current and the last page
+	 *
+	 * @access	public
+	 */
+	function getStepCounter() {
+		$currentPageNumberForDisplay = $this->plugin->getConfValueInteger(
+			'numberOfFirstRegistrationPage'
+		) + $this->currentPageNumber;
+		$lastPageNumberForDisplay = $this->plugin->getConfValueInteger(
+			'numberOfLastRegistrationPage'
+		);
+		return sprintf(
+			$this->plugin->pi_getLL('label_step_counter'),
+			$currentPageNumberForDisplay, $lastPageNumberForDisplay
+		);
 	}
 }
 

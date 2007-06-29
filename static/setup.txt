@@ -225,7 +225,13 @@ plugin.tx_seminars_pi1 {
 	eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
-	showRegistrationFields = price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,feuser_data,billing_address,registration_data,terms_2
+	showRegistrationFields = step_counter,price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,feuser_data,billing_address,registration_data,terms_2
+
+	# the displayed number of the first registration page (for "step x of y")
+	numberOfFirstRegistrationPage = 1
+
+	# the displayed number of the last registration page (for "step x of y")
+	numberOfLastRegistrationPage = 2
 
 	# whether detailed information for the speakers is shown in the single view
 	showSpeakerDetails = 1

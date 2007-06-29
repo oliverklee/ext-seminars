@@ -1,4 +1,5 @@
 0.5.0
+- Feature: Add a headline to the registration form: "Registration form: step x of y" (#830)
 - Fix: FORMidable mayday message on page 2 of the registration form (#891)
 - Change: The terms checkbox now isn't required anymore for the two-step registration form (#374)
 - Fix: mod2: some member variables are used, but not declared (#889)

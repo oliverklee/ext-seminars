@@ -213,6 +213,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkBaseUrl();
 		$this->checkRegistrationEditorTemplateFile();
 
+		$this->checkNumberOfFirstRegistrationPage();
+		$this->checkNumberOfLastRegistrationPage();
 		$this->checkGeneralPriceInSingle();
 		$this->checkEventFieldsOnRegistrationPage();
 		$this->checkShowRegistrationFields();
@@ -1154,6 +1156,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'will be displayed on the registration page. '
 				.'Incorrect values will cause those fields to not get displayed.',
 			array(
+				'step_counter',
 				'price',
 				'method_of_payment',
 				'account_number',
@@ -1857,6 +1860,46 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'the organizers and the attendees. '
 				.'If this value is empty, special characters in these e-mails '
 				.'will appear garbled.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * numberOfFirstRegistrationPage.
+	 *
+	 * @access	private
+	 */
+	function checkNumberOfFirstRegistrationPage() {
+		$this->checkIfPositiveInteger(
+			'numberOfFirstRegistrationPage',
+			false,
+			'',
+			'This value specifies the number of the first registration page '
+				.'(for the <em>Step x of y</em> heading). '
+				.'If this value is not set correctly, the number of the current '
+				.'page will not be displayed correctly.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * numberOfLastRegistrationPage.
+	 *
+	 * @access	private
+	 */
+	function checkNumberOfLastRegistrationPage() {
+		$this->checkIfPositiveInteger(
+			'numberOfLastRegistrationPage',
+			false,
+			'',
+			'This value specifies the number of the last registration page '
+				.'(for the <em>Step x of y</em> heading). '
+				.'If this value is not set correctly, the number of the last '
+				.'page will not be displayed correctly.'
 		);
 
 		return;

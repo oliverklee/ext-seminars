@@ -38,6 +38,17 @@
 	</control>
 
 	<elements>
+		<renderlet:LABEL name="step_counter">
+			<data>
+				<value>
+					<userobj>
+						<extension>this</extension>
+						<method>getStepCounter</method>
+					</userobj>
+				</value>
+			</data>
+		</renderlet:LABEL>
+
 		<renderlet:LABEL name="billing_address">
 			<data>
 				<value>
