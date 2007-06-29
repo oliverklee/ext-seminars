@@ -1,4 +1,4 @@
-0.5.0
+0.5.0 (released 2007-06-29)
 - Fix: On the confirmation page, the selected price and the payment method are not displayed (#893)
 - Fix: redirect_url is wrong when used with realUrl, initial patch by Sinian Zhang (#894)
 - Feature: Add a headline to the registration form: "Registration form: step x of y" (#830)
@@ -145,7 +145,7 @@
 - Change: Added a new RTE field in the seminar record (#453)
 - Feature: Checkbox "I accept the terms" on registration (#378)
 - Feature: Allow selection of payment method (#434)
-- Improved the manual (#380, #620)
+- Improved the manual (#380, #402, #620)
 - Change: HTML output of the early bird prices in single view (#423)
 - Change: Added some new and replaced some existing icons (#493, #470, #494, #521)
 - Change: HTML output of speakers and organizers in list view (#421)
