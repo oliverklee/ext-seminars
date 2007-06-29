@@ -359,9 +359,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				'tx_seminars_pi1[seminar]' => $eventId
 			);
 		}
-		$redirectUrl = $this->cObj->getTypoLink_URL(
-			$pageId,
-			$redirectUrlParams
+		$redirectUrl = t3lib_div::locationHeaderUrl(
+			$this->cObj->getTypoLink_URL(
+				$pageId,
+				$redirectUrlParams
+			)
 		);
 
 		return $this->cObj->getTypoLink(
