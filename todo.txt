@@ -19,14 +19,10 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - automatically update attendances title if a FE user has been entered or edited in the back end
 - automatically update attendances titles if a FE user has been entered or edited by sr_feuser_register
 - automatically update attendances titles if a seminar has been entered or edited in the back end
-- notification e-mail: Use the organizer as From: and the attendee as Reply-to: (if the attendee's e-mail address is provided)
-- add all organizers as Reply-To: in registration confirmation e-mail
 - flag: enfore payment methods if the price is > 0
 - add configuration for default values for most of the seminar record fields
 - remove the "has paid" attribute and use "has paid date set" instead; warn if there are records without paid date
 - attendance records: make it configurable to require a payment method if a payment date has been entered
-- prevent users from deleting their account in sr_feuser_register if they are signed up for an upcoming or running seminar
-- change most "seminar" to "event" as this extension allows for different event types
 - prevent potentially dangerous characters in e-mail headers (CR/LF, commas, <, > ...)
 - only send e-mails if the sender and recipient address look valid
 - use htmlentities() for many strings that are output on the BE or FE
@@ -39,12 +35,10 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - tx_seminars_objectfromdb::commitToDb() should check for existence of a record before deciding whether to update or insert it
 - prevent tx_seminars_registration::tx_seminars_registration and tx_seminars_registrationmanager::canCreateRegistration from accessing uninitialized array elements
 - check for accesses to uninitialized array elements
-- check whether umlauts in sender and recipient names are handled correctly
 - only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
-- use julle_encmailheaders for encoding e-mail headers
+- investigate whether use julle_encmailheaders for encoding e-mail headers
 - change all occurences of header(string string) to header (string string, bool replace, int http_response_code)
-- change all tautology '1's to '1=1' in DB queries to make this extension work with PostgreSQL
-- add meta information and constraints (primaray key, foreign key, not null, etc.) to SQL file
+- add meta information and constraints (primary key, foreign key, not null, etc.) to SQL file
 - move the mobile phone number into its own extension
 - have real m:m relations instead of the crappy "1,2,5" format
 - provide an "update" function (like in tt_news) that updates to the real m:m tables
