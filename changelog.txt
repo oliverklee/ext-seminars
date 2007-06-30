@@ -1,4 +1,5 @@
 0.5.1 (currently working on)
+- [#898] Fix: Typo in the German translation of "special price including boarding"
 - [#883] Fix: Fix the CSS in the mod2 lists for Safari
 - [#853] Change: Remove end-of-file newlines from XML files
 
