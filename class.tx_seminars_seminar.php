@@ -1984,17 +1984,31 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * the link will use the current page's PID.
 	 *
 	 * @param	object		a plugin object (for a live page, must not be null)
+	 * @param	boolean		true to create a full URL including the host instead of just a URI without the host
 	 *
 	 * @return	string		URL of the seminar details page
 	 *
 	 * @access	public
 	 */
-	function getDetailedViewUrl(&$plugin) {
-		return $plugin->getConfValueString('baseURL')
-			.$plugin->cObj->getTypoLink_URL(
-				$plugin->getConfValueInteger('detailPID'),
-				array('tx_seminars_pi1[showUid]' => $this->getUid())
-			);
+	function getDetailedViewUrl(&$plugin, $createFullUrl = true) {
+		$path = $plugin->cObj->getTypoLink_URL(
+			$plugin->getConfValueInteger('detailPID'),
+			array('tx_seminars_pi1[showUid]' => $this->getUid())
+		);
+		// XXX We need to do this workaround of manually encoding brackets in
+		// the URL due to a bug in the TYPO3 core:
+		// http://bugs.typo3.org/view.php?id=3808
+		$result = preg_replace(
+			array('/\[/', '/\]/'),
+			array('%5B', '%5D'),
+			$path
+		);
+
+		if ($createFullUrl) {
+			$result = $plugin->getConfValueString('baseURL').$result;
+		}
+
+		return $result;
 	}
 
 	/**
