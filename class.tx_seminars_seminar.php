@@ -213,7 +213,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	function getLinkedFieldValue(&$plugin, $fieldName) {
 		$linkedText = '';
-		$detailPID = $plugin->getConfValueInteger('detailPID');
 
 		// Certain fields can be retrieved 1:1 from the database, some need
 		// to be fetched by a special getter function.
@@ -228,7 +227,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $plugin->cObj->getTypoLink(
 			$linkedText,
-			($detailPID) ? $detailPID : $plugin->getConfValueInteger('listPID'),
+			$plugin->getConfValueInteger('detailPID'),
 			array('tx_seminars_pi1[showUid]' => $this->getUid())
 		);
 	}
