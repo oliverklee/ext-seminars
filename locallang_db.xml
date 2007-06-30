@@ -343,7 +343,7 @@
 			<label index="tx_seminars_seminars.price_regular_board">Standardpreis inklusive Vollpension:</label>
 			<label index="tx_seminars_seminars.price_special">Sonderpreis:</label>
 			<label index="tx_seminars_seminars.price_special_early">Sonderpreis für Frühbucher:</label>
-			<label index="tx_seminars_seminars.price_special_board">Spezialpreis inklusive Vollpensione:</label>
+			<label index="tx_seminars_seminars.price_special_board">Spezialpreis inklusive Vollpension:</label>
 			<label index="tx_seminars_seminars.payment_methods">Erlaubte Zahlungsarten:</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
