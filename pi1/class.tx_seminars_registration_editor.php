@@ -156,7 +156,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			case 0:
 				// The fall-through is intended.
 			default;
-				$xmlFile = 'registration_editor.xml';
+				$xmlFile = 'registration_editor_step1.xml';
 				break;
 		}
 
