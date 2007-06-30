@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#444] Change: Recommend date2cal instead of erotea_date2cal
 
 0.5.0 (released 2007-06-29)
 - Fix: On the confirmation page, the selected price and the payment method are not displayed (#893)

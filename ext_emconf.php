@@ -46,7 +46,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'conflicts' => array(
 		),
 		'suggests' => array(
-			'erotea_date2cal' => '',
+			'date2cal' => '',
 			'newloginbox' => '',
 			'static_info_tables' => '2.0.2-',
 		),
