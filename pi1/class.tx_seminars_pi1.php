@@ -1726,28 +1726,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function escapeAndTrimSearchWord($searchword, $tableName) {
-		$result = '';
-
-		if (method_exists($GLOBALS['TYPO3_DB'], 'escapeStrForLike')) {
-			$result = $GLOBALS['TYPO3_DB']->escapeStrForLike(
-				$GLOBALS['TYPO3_DB']->quoteStr(
-					trim($searchword),
-					$tableName
-				),
+		return $GLOBALS['TYPO3_DB']->escapeStrForLike(
+			$GLOBALS['TYPO3_DB']->quoteStr(
+				trim($searchword),
 				$tableName
-			);
-		} else {
-			// xxx: This workaround can be removed once we require TYPO3 >= 4.0,
-			// dropping support for TYPO3 3.8.x.
-			$result = preg_replace('/[_%]/', '\\\$0',
-				$GLOBALS['TYPO3_DB']->quoteStr(
-					trim($searchword),
-					$tableName
-				)
-			);
-		}
-
-		return $result;
+			),
+			$tableName
+		);
 	}
 
 	/**

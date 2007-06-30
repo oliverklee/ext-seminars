@@ -107,13 +107,11 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->page->pageInfo['uid']), 16)) {
 			$params = '&cmd['.$this->tableName.']['.$uid.'][delete]=1';
 
-			$referenceWarning = '';
-			if ((float) $GLOBALS['TYPO3_CONF_VARS']['SYS']['compat_version'] >= 4.0) {
-				$referenceWarning = t3lib_BEfunc::referenceCount(
-					$this->tableName,
-					$uid,
-					' '.$LANG->getLL('referencesWarning'));
-			}
+			$referenceWarning = t3lib_BEfunc::referenceCount(
+				$this->tableName,
+				$uid,
+				' '.$LANG->getLL('referencesWarning')
+			);
 
 			$confirmation = htmlspecialchars(
 				'if (confirm('
