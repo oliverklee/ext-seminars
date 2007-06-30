@@ -11,15 +11,7 @@ Hint regarding the items marked with [from dev-meeting 05/12], they got discusse
 
 Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 -------------------------------------------------------------------------
-- make BE form labels more intuitive
-- remove the old sr_feuser_register template
-- remove all university specific stuff and move it to a separate extension (add on to main extension) [from dev-meeting 05/12]
-- improve the values of <eval> in the flexforms and the BE forms
-- put the template helper, object DB etc. into a separate extension (oelib)
-- document how translaters can help us
-- check that before every sql_fetch_assoc, there is an sql_num_rows to ensure that we have at least one row to operate on
 - add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
-- investigate on what happens if a FE user account is deleted
 - stop users from deleting their account if still registered to an event [from dev-meeting 05/12]
 - handle deleted (and "marked as deleted") user accounts and seminars graciously
 - feature: avoid double registrations when entering registrations manually
