@@ -4,6 +4,10 @@ table.typo3-dblist {
 	border-spacing: 0;
 }
 
+td {
+	white-space: nowrap;	
+}
+
 td.datecol,
 td.attendees,
 td.attendees_min,
