@@ -1,4 +1,5 @@
 0.5.1 (currently working on)
+- [#853] Change: Remove end-of-file newlines from XML files
 
 0.5.0 (released 2007-06-29)
 - Change: Hide the time slots from BE for the 0.5.0 branch (#866)
