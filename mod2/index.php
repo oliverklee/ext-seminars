@@ -81,6 +81,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 
 		parent::init();
 
+		$this->id = intval($this->id);
+
 		return;
 	}
 
@@ -108,7 +110,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// listed by this module on the current page.
 		$hasAccess = is_array($this->pageInfo);
 
-		if ((($this->id && $hasAccess) || ($BE_USER->user['admin']))
+		if ($this->id && ($hasAccess || $BE_USER->user['admin'])
 			&& $this->hasStaticTemplateOrRecords()) {
 			// start the document
 			$this->doc = t3lib_div::makeInstance('bigDoc');

@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#901] Fix: SQL error when visiting mod2 directly after login
 - [#409] Change: Check the SQL file: all uids and references to them need to be *unsigned* ints
 - [#777] Change: Rename pi1/registration_editor.xml to pi1/registration_editor_step1.xml
 - [#898] Fix: Typo in the German translation of "special price including boarding"

@@ -53,6 +53,10 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 
 		parent::init();
+
+		$this->id = intval($this->id);
+
+		return;
 	}
 
 	/**
@@ -114,7 +118,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$numberOfRecordsOnCurrentPage = 0;
 		}
 
-		if ((($this->id && $access) || ($BE_USER->user['admin'] && !$this->id))
+		if ($this->id && ($access || $BE_USER->user['admin'])
 			&& ($numberOfRecordsOnCurrentPage)) {
 			// Draw the header.
 			$this->doc = t3lib_div::makeInstance('mediumDoc');
