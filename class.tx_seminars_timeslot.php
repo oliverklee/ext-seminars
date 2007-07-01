@@ -24,9 +24,11 @@
 /**
  * Class 'tx_seminars_timeslot' for the 'seminars' extension.
  *
- * This class represents a timeslot.
+ * This class represents a time slot.
  *
- * @author	Niels Pardon <mail@niels-pardon.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');

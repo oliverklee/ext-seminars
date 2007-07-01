@@ -27,7 +27,9 @@
  * This class provides a way to access config values from plugin.tx_seminars to
  * classes within pi1.
  *
- * @author	Oliver Klee <typo3-coding@oliverklee.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
