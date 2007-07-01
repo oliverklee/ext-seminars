@@ -24,8 +24,10 @@
 /**
  * Module 'Events' for the 'seminars' extension.
  *
- * @author	Mario Rimann <typo3-coding@rimann.org>
- * @author	Niels Pardon <mail@niels-pardon.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Mario Rimann <typo3-coding@rimann.org>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 unset($MCONF);

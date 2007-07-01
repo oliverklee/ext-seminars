@@ -24,7 +24,9 @@
 /**
  * Plugin 'CSV export' for the 'seminars' extension.
  *
- * @author	Oliver Klee <typo3-coding@oliverklee.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(PATH_t3lib.'class.t3lib_befunc.php');

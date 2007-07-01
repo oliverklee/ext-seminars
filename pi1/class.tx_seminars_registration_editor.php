@@ -26,7 +26,9 @@
  *
  * This class is a controller which allows to create registrations on the FE.
  *
- * @author	Oliver Klee <typo3-coding@oliverklee.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');

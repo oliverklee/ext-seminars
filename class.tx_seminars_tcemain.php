@@ -28,7 +28,9 @@
  * This class holds functions used to validate submitted forms in the back end.
  * These functions are called from t3lib/class.t3lib_tcemain.php via hooks.
  *
- * @author	Mario Rimann <typo3-coding@rimann.org>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Mario Rimann <typo3-coding@rimann.org>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');

@@ -30,7 +30,9 @@
  * The correct functioning of this class does not rely on any HTML templates or
  * language files so it works even under the worst of circumstances.
  *
- * @author	Oliver Klee <typo3-coding@oliverklee.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_oe_configcheck.php');

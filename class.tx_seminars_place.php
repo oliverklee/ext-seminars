@@ -26,7 +26,9 @@
  *
  * This class represents a place.
  *
- * @author	Niels Pardon <mail@niels-pardon.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');

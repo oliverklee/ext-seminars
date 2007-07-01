@@ -27,7 +27,9 @@
  * This aggregate class holds a bunch of speaker objects and allows
  * to iterate over them.
  *
- * @author	Niels Pardon <mail@niels-pardon.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');

@@ -29,7 +29,9 @@
  *
  * This is an abstract class; don't instantiate it.
  *
- * @author	Oliver Klee <typo3-coding@oliverklee.de>
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 // If we are in the back end, we have to include typo3/template.php once.
