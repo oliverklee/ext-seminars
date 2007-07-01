@@ -109,7 +109,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 *
 	 * This is merely a convenience function.
 	 *
-	 * If the parameter is ommited, the configuration for plugin.tx_seminar is used instead.
+	 * If the parameter is omited, the configuration for plugin.tx_seminar is used instead.
 	 *
  	 * @param	array		TypoScript configuration for the plugin
 	 *
