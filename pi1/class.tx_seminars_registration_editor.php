@@ -282,16 +282,17 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks whether a checkbox is checked.
+	 * Checks whether a checkbox is checked OR the "finish registration" button
+	 * hasn't just been clicked.
 	 *
 	 * @param	integer		the current value of the checkbox (0 or 1)
 	 *
-	 * @return	boolean		true if the checkbox is checked, false otherwise
+	 * @return	boolean		true if the checkbox is checked or we are not on the confirmation page, false otherwise
 	 *
 	 * @access	public
 	 */
-	function isChecked($checkboxValue) {
-		return (boolean) $checkboxValue;
+	function isTermsChecked($checkboxValue) {
+		return ((boolean) $checkboxValue) || ($this->currentPageNumber != 2);
 	}
 
 	/**
@@ -310,16 +311,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Checks whether the "terms_2" checkbox is checked (if it is enabled in the
 	 * configuration). If the checkbox is disabled in the configuration, this
-	 * function always returns true.
+	 * function always returns true. It also always returns true if the
+	 * "finish registration" button hasn't just been clicked.
 	 *
 	 * @param	integer		the current value of the checkbox (0 or 1)
 	 *
-	 * @return	boolean		true if the checkbox is checked or disabled in the configuration, false if it is not checked AND enabled in the configuration
+	 * @return	boolean		true if the checkbox is checked or disabled in the configuration or if the "finish registration" button hasn't just been clicked, false if it is not checked AND enabled in the configuration
 	 *
 	 * @access	public
 	 */
 	function isTerms2CheckedAndEnabled($checkboxValue) {
-		return ((boolean) $checkboxValue) || !$this->isTerms2Enabled();
+		return ((boolean) $checkboxValue) || !$this->isTerms2Enabled()
+			|| ($this->currentPageNumber != 2);
 	}
 
 	/**

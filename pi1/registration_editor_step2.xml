@@ -85,7 +85,7 @@
 				<validator:STANDARD>
 					<userobj>
 						<extension>this</extension>
-						<method>isChecked</method>
+						<method>isTermsChecked</method>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_acceptTerms</message>
 					</userobj>
 				</validator:STANDARD>

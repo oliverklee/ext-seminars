@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#831] Fix: Red warning during registration
 - [#935] Change: Add @author, @package and @subpackage tags to all PHP classes
 - [#906] Fix: FE-Editing of events: foods and lodgings need multi-selection
 - [#776] Fix: Call $GLOBALS["TSFE"]->fe_user->storeSessionData() after storing data in the session
