@@ -16,9 +16,9 @@
 			<labelname>title</labelname>
 			<mmrelations>
 				<relation field="place" mmtable="tx_seminars_seminars_place_mm" />
-				<relation field="speakers" mmtable="tx_seminars_seminars_speakers_mm" />
 				<relation field="lodgings" mmtable="tx_seminars_seminars_lodgings_mm" />
 				<relation field="foods" mmtable="tx_seminars_seminars_foods_mm" />
+				<relation field="speakers" mmtable="tx_seminars_seminars_speakers_mm" />
 				<relation field="partners" mmtable="tx_seminars_seminars_speakers_mm_partners" />
 				<relation field="tutors" mmtable="tx_seminars_seminars_speakers_mm_tutors" />
 				<relation field="leaders" mmtable="tx_seminars_seminars_speakers_mm_leaders" />
@@ -145,39 +145,25 @@
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.additional_times_places</label>
 		</renderlet:TEXTAREA>
 
-		<renderlet:LISTBOX name="lodgings">
+		<renderlet:CHECKBOX name="lodgings">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.lodgings</label>
 			<data>
-				<defaultvalue />
-				<items>
-					<item>
-						<caption>&amp;nbsp;</caption>
-						<value>0</value>
-					</item>
-				</items>
 				<userobj>
 					<extension>this</extension>
 					<method>populateListLodgings</method>
 				</userobj>
 			</data>
-		</renderlet:LISTBOX>
+		</renderlet:CHECKBOX>
 
-		<renderlet:LISTBOX name="foods">
+		<renderlet:CHECKBOX name="foods">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.foods</label>
 			<data>
-				<defaultvalue />
-				<items>
-					<item>
-						<caption>&amp;nbsp;</caption>
-						<value>0</value>
-					</item>
-				</items>
 				<userobj>
 					<extension>this</extension>
 					<method>populateListFoods</method>
 				</userobj>
 			</data>
-		</renderlet:LISTBOX>
+		</renderlet:CHECKBOX>
 
 		<renderlet:CHECKBOX name="speakers">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.speakers</label>
