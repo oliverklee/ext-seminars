@@ -23,11 +23,9 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - add configuration for default values for most of the seminar record fields
 - remove the "has paid" attribute and use "has paid date set" instead; warn if there are records without paid date
 - attendance records: make it configurable to require a payment method if a payment date has been entered
-- prevent potentially dangerous characters in e-mail headers (CR/LF, commas, <, > ...)
-- only send e-mails if the sender and recipient address look valid
 - use htmlentities() for many strings that are output on the BE or FE
 - check all uses of references for correctness: that the function is &functionname() _and_ that the user uses "=& functionname();"
-- use te event title and user's Real Name as title for registration records
+- use the event title and user's Real Name as title for registration records
 - make it configurable whether to count all registrations or only the paid ones
 - check that all DB accesses use either intval, quoteStr or fullQuoteStr
 - investigate whether to use removeBadHTML (like in the extension ve_guestbook)
@@ -35,21 +33,14 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - tx_seminars_objectfromdb::commitToDb() should check for existence of a record before deciding whether to update or insert it
 - prevent tx_seminars_registration::tx_seminars_registration and tx_seminars_registrationmanager::canCreateRegistration from accessing uninitialized array elements
 - check for accesses to uninitialized array elements
-- only allow [[:print:]] characters in e-mail headers (Subject, To, Cc, Reply-To, Return-path)
-- investigate whether use julle_encmailheaders for encoding e-mail headers
 - change all occurences of header(string string) to header (string string, bool replace, int http_response_code)
-- add meta information and constraints (primary key, foreign key, not null, etc.) to SQL file
 - move the mobile phone number into its own extension
 - have real m:m relations instead of the crappy "1,2,5" format
 - provide an "update" function (like in tt_news) that updates to the real m:m tables
 - make our DB scheme conform to 3NF, BCNF, 4NF or even 5NF and document this
-- add slashes as a first character for the CSS path
 - add automated tests using T3unit (requires PHP5)
 - reread all DB queries if they are safe from SQL injection
-- test with PostgreSQL
-- on the registration page, set a 404 status header if the URL contains an invalid seminar UID
 - registration: use a callback in the constructor to get additional data instead of expecting an additional function call; find a suitable design pattern for this
-- test if registration for events without a date is impossible (should be)
 - escape square brackets in URLs (that are part of links as well as in e-mails), see http://bugs.typo3.org/view.php?id=3808
 - use striphtml or htmlspecialchars as much as possible for BE and FE output
 
