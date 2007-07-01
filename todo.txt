@@ -53,7 +53,6 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - format changelog according to http://www.red-bean.com/cvs2cl/changelogs.html
 - rip out that mess of the BE "update statistics" once the functionality has moved somewhere else
 - reduce code by using the API for COUNT queries
-- add automatic headers (function index) to code files
 - check code with PhpLint once PhpLint is a bit more mature
 - investigate whether the string pi_list_browseresults_noResults actually is used
 - investigate whether to use pibase->initMemberArray()
