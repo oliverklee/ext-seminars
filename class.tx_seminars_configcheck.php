@@ -1109,7 +1109,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			's_template_special',
 			'This value specifies whether to omit the date in the '
 				.'list view if it is the same as the previous item\'s. '
-				.'If this value is incorrect, the date might be ommited '
+				.'If this value is incorrect, the date might be omited '
 				.'although this is not intended (or vice versa).'
 		);
 
