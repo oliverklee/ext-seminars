@@ -1268,6 +1268,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 					);
 				}
 			}
+
+			$GLOBALS['TSFE']->fe_user->storeSessionData();
 		}
 
 		return;
