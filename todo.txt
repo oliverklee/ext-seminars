@@ -45,7 +45,7 @@ Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
 - use striphtml or htmlspecialchars as much as possible for BE and FE output
 
 
-Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentation
+Version 0.8.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
 - investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
 - document what all those *PID configuration variables are used for
@@ -124,7 +124,7 @@ Version 0.7.0 - "Make it nice for developers": code clean-up, qa and documentati
 - add more FE screenshots to the manual
 
 
-Version 0.8.0 - "Make it for everybody": accessibility
+Version 0.9.0 - "Make it for everybody": accessibility
 ------------------------------------------------------
 - clean up code from pibase (search box, results browser)
 - take tx_realty's result browser, move it to oelib and use it
@@ -144,7 +144,7 @@ Version 0.8.0 - "Make it for everybody": accessibility
 - list view: show "(canceled)" in the vacancies column for canceled events
 
 
-Version 0.9.0 - "Make it fast": performance
+Version 0.10.0 - "Make it fast": performance
 -------------------------------------------
 - cache speaker data
 - cache site data
@@ -164,7 +164,7 @@ Version 0.9.0 - "Make it fast": performance
 - profile the lists in mod2
 - profile the registration page
 
-Version 0.10.0 - "Make it nice for the BE users": back-end usability and polish
+Version 0.11.0 - "Make it nice for the BE users": back-end usability and polish
 -------------------------------------------------------------------------------
 - move the "seminar is cancelled" checkbox further up in the BE form
 - bug: BE search doesn't find attendance titles
@@ -202,7 +202,7 @@ Version 0.10.0 - "Make it nice for the BE users": back-end usability and polish
 - for event sites, have a field "location name" (in addition to the record title) that is part of the address
 
 
-Version 0.11.0 - "Make it nice for the visitors": front-end usability and polish
+Version 0.12.0 - "Make it nice for the visitors": front-end usability and polish
 --------------------------------------------------------------------------------
 - add FE editing for registrations
 - add FE editing for speakers
