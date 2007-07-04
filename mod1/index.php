@@ -30,6 +30,7 @@
  */
 
 unset($MCONF);
+$MCONF = array();
 require ('conf.php');
 require ($BACK_PATH.'init.php');
 require ($BACK_PATH.'template.php');
