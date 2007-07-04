@@ -1,4 +1,5 @@
 0.5.1 (currently working on)
+- [#950] Fix: Call time pass by reference warnings
 - [#956] Fix: $MCONF is used uninitialized in mod1 and mod2
 - [#952] Fix: Set FORMidable max version to 0.7.0
 - [#831] Fix: Red warning during registration
