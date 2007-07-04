@@ -229,7 +229,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $plugin->cObj->getTypoLink(
 			$linkedText,
-			$this->getDetailedViewUrl(&$plugin, false)
+			$this->getDetailedViewUrl($plugin, false)
 		);
 	}
 

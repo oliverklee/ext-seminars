@@ -82,7 +82,7 @@ class tx_seminars extends tx_dhdb {
 
 			if ($tablename != "" && $keyname != "") {
 				if (count($aFormData) > 0) {
-					$this->_extractMmRelationsFromFormData(&$aFormData);
+					$this->_extractMmRelationsFromFormData($aFormData);
 
 					$editEntry = $this->_currentEntryId();
 
