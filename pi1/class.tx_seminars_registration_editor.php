@@ -773,6 +773,21 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function getSelectedPrice() {
+		$availablePrices = $this->seminar->getAvailablePrices();
+
+		return $availablePrices[$this->getKeyOfSelectedPrice()]['caption'];
+	}
+
+	/**
+	 * Retrieves the key of the selected price.
+	 *
+	 * If no price has been selected, the first available price will be used.
+	 *
+	 * @return	string		the key of the selected price, will always be a valid key
+	 *
+	 * @access	protected
+	 */
+	function getKeyOfSelectedPrice() {
 		$dataHandler =& $this->oForm->oDataHandler;
 
 		$availablePrices = $this->seminar->getAvailablePrices();
@@ -783,7 +798,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$selectedPrice = key($availablePrices);
 		}
 
-		return $availablePrices[$selectedPrice]['caption'];
+		return $selectedPrice;
 	}
 
 	/**
@@ -801,7 +816,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$dataHandler =& $this->oForm->oDataHandler;
 
 		$availablePrices = $this->seminar->getAvailablePrices();
-		$selectedPrice = $dataHandler->_getThisFormData('price');
+		$selectedPrice = $this->getKeyOfSelectedPrice();
 
 		// Build the total price for this registration and add it to the form
 		// data to show it on the confirmation page.

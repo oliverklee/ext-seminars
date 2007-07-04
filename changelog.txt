@@ -1,4 +1,5 @@
 0.5.1 (currently working on)
+- [#941] The displayed total price is 0 if the "price" field is not in showRegistrationFields
 - [#950] Fix: Call time pass by reference warnings
 - [#956] Fix: $MCONF is used uninitialized in mod1 and mod2
 - [#952] Fix: Set FORMidable max version to 0.7.0
