@@ -41,6 +41,8 @@ if (TYPO3_MODE == 'BE') {
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
+define('LF', chr(10));
+
 class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/** the complete HTML template */
 	var $templateCode;

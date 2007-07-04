@@ -198,7 +198,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 					'","',
 					$this->configGetter->getConfValueString(
 						'fieldsFromEventsForCsv'
-					).'"'.chr(13).chr(10)
+					).'"'.chr(13).LF
 				);
 
 				// unserialize the configuration array

@@ -46,6 +46,8 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
 
+define('LF', chr(10));
+
 class tx_seminars_module1 extends t3lib_SCbase {
 	var $pageinfo;
 
@@ -240,11 +242,11 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
 		$seminarBag =& new $seminarBagClassname('pid='.intval($this->id), '', '', $tableSeminars.'.begin_date');
 
-		$result .= '<h3>'.$LANG->getLL('message_updatingAttendanceNumbers').'</h3>'.chr(10);
+		$result .= '<h3>'.$LANG->getLL('message_updatingAttendanceNumbers').'</h3>'.LF;
 		while ($currentSeminar =& $seminarBag->getCurrent()) {
 			$currentSeminar->updateStatistics();
 
-			$result .= '<h4>'.htmlspecialchars($currentSeminar->getTitleAndDate('-')).'</h4>'.chr(10);
+			$result .= '<h4>'.htmlspecialchars($currentSeminar->getTitleAndDate('-')).'</h4>'.LF;
 			$result .= '<p>'.$LANG->getLL('label_all').$currentSeminar->getAttendances().'</p>';
 			$result .= '<p>'.$LANG->getLL('label_paid').$currentSeminar->getAttendancesPaid().'</p>';
 			$result .= '<p>'.$LANG->getLL('label_unpaid').$currentSeminar->getAttendancesNotPaid().'</p>';
