@@ -1,4 +1,5 @@
 0.5.1 (currently working on)
+- [#952] Fix: Set FORMidable max version to 0.7.0
 - [#831] Fix: Red warning during registration
 - [#935] Change: Add @author, @package and @subpackage tags to all PHP classes
 - [#906] Fix: FE-Editing of events: foods and lodgings need multi-selection
