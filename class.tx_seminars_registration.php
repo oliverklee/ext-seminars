@@ -917,7 +917,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$result = '';
 		foreach ($keys as $currentKey) {
-			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$this->getUserData($currentKey).chr(10);
+			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$this->getUserData($currentKey).LF;
 		}
 
 		return $result;
@@ -950,7 +950,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		foreach ($keys as $currentKey) {
 			$value = $this->getRegistrationData($currentKey);
-			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
+			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.LF;
 		}
 
 		return $result;
@@ -989,7 +989,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				}
 				$result .= $this->getRegistrationData($key);
 				if ($useLf) {
-					$result .= chr(10);
+					$result .= LF;
 				} else {
 					$result .= ' ';
 				}

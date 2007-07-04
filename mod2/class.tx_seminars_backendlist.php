@@ -35,6 +35,7 @@ require_once($BACK_PATH.'template.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
 define('TAB', chr(9));
+define('LF', chr(10));
 
 class tx_seminars_backendlist extends tx_seminars_dbplugin {
 	/** the table we're working on */
@@ -160,9 +161,9 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langNew = $LANG->getLL('newRecordGeneral');
 			$result = TAB.TAB
-				.'<div id="typo3-newRecordLink">'.chr(10)
+				.'<div id="typo3-newRecordLink">'.LF
 				.TAB.TAB.TAB
-				.'<a href="'.htmlspecialchars($editOnClick).'">'.chr(10)
+				.'<a href="'.htmlspecialchars($editOnClick).'">'.LF
 				.TAB.TAB.TAB.TAB
 				.'<img'
 				.t3lib_iconWorks::skinImg(
@@ -171,13 +172,13 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 					'width="7" height="4"')
 				// We use an empty alt attribute as we already have a textual
 				// representation directly next to the icon.
-				.' title="'.$langNew.'" alt="" />'.chr(10)
+				.' title="'.$langNew.'" alt="" />'.LF
 				.TAB.TAB.TAB.TAB
-				.$langNew.chr(10)
+				.$langNew.LF
 				.TAB.TAB.TAB
-				.'</a>'.chr(10)
+				.'</a>'.LF
 				.TAB.TAB
-				.'</div>'.chr(10);
+				.'</div>'.LF;
 		}
 
 		return $result;
@@ -216,11 +217,11 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 
 		$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.csv', 1);
 		$result = TAB.TAB
-			.'<div id="typo3-csvLink">'.chr(10)
+			.'<div id="typo3-csvLink">'.LF
 			.TAB.TAB.TAB
 			.'<a href="class.tx_seminars_csv.php?id='.$this->page->pageInfo['uid']
 			.'&amp;tx_seminars_pi2[table]='.$this->tableName
-			.'&amp;tx_seminars_pi2[pid]='.$this->page->pageInfo['uid'].'">'.chr(10)
+			.'&amp;tx_seminars_pi2[pid]='.$this->page->pageInfo['uid'].'">'.LF
 			.TAB.TAB.TAB.TAB
 			.'<img'
 			.t3lib_iconWorks::skinImg(
@@ -230,13 +231,13 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 			)
 			// We use an empty alt attribute as we already have a textual
 			// representation directly next to the icon.
-			.' title="'.$langCsv.'" alt="" />'.chr(10)
+			.' title="'.$langCsv.'" alt="" />'.LF
 			.TAB.TAB.TAB.TAB
-			.$langCsv.chr(10)
+			.$langCsv.LF
 			.TAB.TAB.TAB
-			.'</a>'.chr(10)
+			.'</a>'.LF
 			.TAB.TAB
-			.'</div>'.chr(10);
+			.'</div>'.LF;
 
 		return $result;
 	}

@@ -68,40 +68,40 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 		$tableLayout = array(
 			'table' => array(
 				TAB.TAB
-					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.chr(10),
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.LF,
 				TAB.TAB
-					.'</table>'.chr(10)
+					.'</table>'.LF
 			),
 			array(
 				'tr' => array(
 					TAB.TAB.TAB
-						.'<thead>'.chr(10)
+						.'<thead>'.LF
 						.TAB.TAB.TAB.TAB
-						.'<tr>'.chr(10),
+						.'<tr>'.LF,
 					TAB.TAB.TAB.TAB
-						.'</tr>'.chr(10)
+						.'</tr>'.LF
 						.TAB.TAB.TAB
-						.'</thead>'.chr(10)
+						.'</thead>'.LF
 				),
 				'defCol' => array(
 					TAB.TAB.TAB.TAB.TAB
-						.'<td class="c-headLineTable">'.chr(10),
+						.'<td class="c-headLineTable">'.LF,
 					TAB.TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				)
 			),
 			'defRow' => array(
 				'tr' => array(
 					TAB.TAB.TAB
-						.'<tr>'.chr(10),
+						.'<tr>'.LF,
 					TAB.TAB.TAB
-						.'</tr>'.chr(10)
+						.'</tr>'.LF
 				),
 				'defCol' => array(
 					TAB.TAB.TAB.TAB
-						.'<td>'.chr(10),
+						.'<td>'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				)
 			)
 		);
@@ -112,9 +112,9 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 				'',
 				TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('speakerlist.title').'</span>'.chr(10),
+					.$LANG->getLL('speakerlist.title').'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB
-					.'&nbsp;'.chr(10)
+					.'&nbsp;'.LF
 			)
 		);
 
@@ -137,16 +137,16 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB
-					.$this->speaker->getRecordIcon().chr(10),
+					.$this->speaker->getRecordIcon().LF,
 				TAB.TAB.TAB.TAB.TAB
-					.$this->speaker->getTitle().chr(10),
+					.$this->speaker->getTitle().LF,
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getEditIcon(
 						$this->speaker->getUid()
 					)
 					.$this->getDeleteIcon(
 						$this->speaker->getUid()
-					).chr(10)
+					).LF
 			);
 			$speakerBag->getNext();
 		}

@@ -1291,11 +1291,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			if ($dbResultPaymentMethod
 				&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)) {
 				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
-				$result .= '  <li>'.$row['title'].'</li>'.chr(10);
+				$result .= '  <li>'.$row['title'].'</li>'.LF;
 			}
 		}
 
-		$result = '<ul>'.chr(10).$result.'</ul>'.chr(10);
+		$result = '<ul>'.LF.$result.'</ul>'.LF;
 
 		return $plugin->pi_RTEcssText($result);
 	}
@@ -1377,7 +1377,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
 			$result = $row['title'].': ';
-			$result .= $row['description'].chr(10).chr(10);
+			$result .= $row['description'].LF.LF;
 		}
 
 		return $result;
@@ -2077,7 +2077,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$value = $this->getRecordPropertyString($currentKey);
 					break;
 			}
-			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.chr(10);
+			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.LF;
 		}
 
 		return $result;

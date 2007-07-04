@@ -68,94 +68,94 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 		$tableLayout = array(
 			'table' => array(
 				TAB.TAB
-					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.chr(10),
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.LF,
 				TAB.TAB
-					.'</table>'.chr(10)
+					.'</table>'.LF
 			),
 			array(
 				'tr' => array(
 					TAB.TAB.TAB
-						.'<thead>'.chr(10)
+						.'<thead>'.LF
 						.TAB.TAB.TAB.TAB
-						.'<tr>'.chr(10),
+						.'<tr>'.LF,
 					TAB.TAB.TAB.TAB
-						.'</tr>'.chr(10)
+						.'</tr>'.LF
 						.TAB.TAB.TAB
-						.'</thead>'.chr(10)
+						.'</thead>'.LF
 				),
 				'defCol' => array(
 					TAB.TAB.TAB.TAB.TAB
-						.'<td class="c-headLineTable">'.chr(10),
+						.'<td class="c-headLineTable">'.LF,
 					TAB.TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				)
 			),
 			'defRow' => array(
 				'tr' => array(
 					TAB.TAB.TAB
-						.'<tr>'.chr(10),
+						.'<tr>'.LF,
 					TAB.TAB.TAB
-						.'</tr>'.chr(10)
+						.'</tr>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td>'.chr(10),
+						.'<td>'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td>'.chr(10),
+						.'<td>'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td class="datecol">'.chr(10),
+						.'<td class="datecol">'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td>'.chr(10),
+						.'<td>'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td class="attendees">'.chr(10),
+						.'<td class="attendees">'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td class="attendees_min">'.chr(10),
+						.'<td class="attendees_min">'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td class="attendees_max">'.chr(10),
+						.'<td class="attendees_max">'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td class="enough_attendees">'.chr(10),
+						.'<td class="enough_attendees">'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				array(
 					TAB.TAB.TAB.TAB
-						.'<td class="is_full">'.chr(10),
+						.'<td class="is_full">'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				),
 				'defCol' => array(
 					TAB.TAB.TAB.TAB
-						.'<td>'.chr(10),
+						.'<td>'.LF,
 					TAB.TAB.TAB.TAB
-						.'</td>'.chr(10)
+						.'</td>'.LF
 				)
 			)
 		);
@@ -166,27 +166,27 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 				'',
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('eventlist.title').'</span>'.chr(10),
+					.$LANG->getLL('eventlist.title').'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('eventlist.date').'</span>'.chr(10),
+					.$LANG->getLL('eventlist.date').'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB.TAB
-					.'&nbsp;'.chr(10),
-				TAB.TAB.TAB.TAB.TAB.TAB
-					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('eventlist.attendees').'</span>'.chr(10),
+					.'&nbsp;'.LF,
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('eventlist.attendees_min').'</span>'.chr(10),
+					.$LANG->getLL('eventlist.attendees').'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('eventlist.attendees_max').'</span>'.chr(10),
+					.$LANG->getLL('eventlist.attendees_min').'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('eventlist.enough_attendees').'</span>'.chr(10),
+					.$LANG->getLL('eventlist.attendees_max').'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('eventlist.is_full').'</span>'.chr(10)
+					.$LANG->getLL('eventlist.enough_attendees').'</span>'.LF,
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.is_full').'</span>'.LF
 			)
 		);
 
@@ -272,46 +272,46 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB
-					.$this->seminar->getRecordIcon().chr(10),
+					.$this->seminar->getRecordIcon().LF,
 				TAB.TAB.TAB.TAB.TAB
 					.t3lib_div::fixed_lgd_cs(
 						$this->seminar->getRealTitle(),
 						$BE_USER->uc['titleLen']
-					).chr(10),
+					).LF,
 				TAB.TAB.TAB.TAB.TAB
-					.$this->seminar->getDate().chr(10),
+					.$this->seminar->getDate().LF,
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getEditIcon(
 						$this->seminar->getUid()
-					).chr(10)
+					).LF
 					.TAB.TAB.TAB.TAB.TAB
 					.$this->getDeleteIcon(
 						$this->seminar->getUid()
-					).chr(10)
+					).LF
 					.TAB.TAB.TAB.TAB.TAB
 					.$this->getHideUnhideIcon(
 						$this->seminar->getUid(),
 						$this->seminar->isHidden()
-					).chr(10)
+					).LF
 					.TAB.TAB.TAB.TAB.TAB
 					.$this->getUpDownIcons(
 						$useManualSorting,
 						$sortList,
 						$this->seminar->getUid()
-					).chr(10),
+					).LF,
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getRegistrationsCsvIcon()
-					.$this->seminar->getAttendances().chr(10),
+					.$this->seminar->getAttendances().LF,
 				TAB.TAB.TAB.TAB.TAB
-					.$this->seminar->getAttendancesMin().chr(10),
+					.$this->seminar->getAttendancesMin().LF,
 				TAB.TAB.TAB.TAB.TAB
-					.$this->seminar->getAttendancesMax().chr(10),
+					.$this->seminar->getAttendancesMax().LF,
 				TAB.TAB.TAB.TAB.TAB
 					.(!$this->seminar->hasEnoughAttendances()
-					? $LANG->getLL('no') : $LANG->getLL('yes')).chr(10),
+					? $LANG->getLL('no') : $LANG->getLL('yes')).LF,
 				TAB.TAB.TAB.TAB.TAB
 					.(!$this->seminar->isFull()
-					? $LANG->getLL('no') : $LANG->getLL('yes')).chr(10)
+					? $LANG->getLL('no') : $LANG->getLL('yes')).LF
 			);
 			$seminarBag->getNext();
 		}
