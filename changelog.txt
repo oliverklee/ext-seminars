@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#956] Fix: $MCONF is used uninitialized in mod1 and mod2
 - [#952] Fix: Set FORMidable max version to 0.7.0
 - [#831] Fix: Red warning during registration
 - [#935] Change: Add @author, @package and @subpackage tags to all PHP classes

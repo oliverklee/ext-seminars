@@ -31,6 +31,7 @@
  */
 
 unset($MCONF);
+$MCONF = array();
 
 require_once('conf.php');
 require_once($BACK_PATH.'init.php');
