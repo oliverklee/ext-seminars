@@ -354,6 +354,31 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 
 		return $result;
 	}
+
+	/**
+	 * Changes all potential decimal separators (commas and dots) in price
+	 * fields to dots.
+	 *
+	 * @param	array		all entered form data with the field names as keys
+	 *
+	 * @return	array		the entered form data with all commas in all price fields changed to dots
+	 *
+	 * @access	public
+	 */
+	function unifyDecimalSeparators(&$formData) {
+		$priceFields = array(
+			'price_regular', 'price_regular_early', 'price_regular_board',
+			'price_special', 'price_special_early', 'price_special_board'
+		);
+
+		foreach ($priceFields as $key) {
+			if (isset($formData[$key])) {
+				$formData[$key] = str_replace(',', '.', $formData[$key]);
+			}
+		}
+
+		return $formData;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_event_editor.php']) {

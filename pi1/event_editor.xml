@@ -23,6 +23,14 @@
 				<relation field="tutors" mmtable="tx_seminars_seminars_speakers_mm_tutors" />
 				<relation field="leaders" mmtable="tx_seminars_seminars_speakers_mm_leaders" />
 			</mmrelations>
+			<process>
+				<beforeinsertion>
+					<userobj>
+						<extension>this</extension>
+						<method>unifyDecimalSeparators</method>
+					</userobj>
+				</beforeinsertion>
+			</process>
 		</datahandler:DBMM>
 		<renderer:TEMPLATE>
 			<template>
@@ -210,7 +218,7 @@
 			<validators>
 				<validator:PREG>
 					<pattern>
-						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<value>/^[\d]*((\.|,)[\d]{1,2})?$/</value>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
 					</pattern>
 				</validator:PREG>
@@ -222,7 +230,7 @@
 			<validators>
 				<validator:PREG>
 					<pattern>
-						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<value>/^[\d]*((\.|,)[\d]{1,2})?$/</value>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
 					</pattern>
 				</validator:PREG>
@@ -234,7 +242,7 @@
 			<validators>
 				<validator:PREG>
 					<pattern>
-						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<value>/^[\d]*((\.|,)[\d]{1,2})?$/</value>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
 					</pattern>
 				</validator:PREG>
@@ -246,7 +254,7 @@
 			<validators>
 				<validator:PREG>
 					<pattern>
-						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<value>/^[\d]*((\.|,)[\d]{1,2})?$/</value>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
 					</pattern>
 				</validator:PREG>
@@ -258,7 +266,7 @@
 			<validators>
 				<validator:PREG>
 					<pattern>
-						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<value>/^[\d]*((\.|,)[\d]{1,2})?$/</value>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
 					</pattern>
 				</validator:PREG>
@@ -270,7 +278,7 @@
 			<validators>
 				<validator:PREG>
 					<pattern>
-						<value>/^[\d]*(\.[\d]{1,2})?$/</value>
+						<value>/^[\d]*((\.|,)[\d]{1,2})?$/</value>
 						<message>LLL:EXT:seminars/pi1/locallang.php:message_noPriceNumber</message>
 					</pattern>
 				</validator:PREG>

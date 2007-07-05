@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#416] Change: Allow commas as decimal separator in prices, too (in the FE editing)
 - [#953] Change: Define LF as chr(10) and use that instead of chr(10)
 - [#941] The displayed total price is 0 if the "price" field is not in showRegistrationFields
 - [#950] Fix: Call time pass by reference warnings, patch by Stefan Galinski
