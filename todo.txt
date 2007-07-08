@@ -3,50 +3,20 @@ To-do list and milestone plan for tx_seminars
 
 For this extension, there are still many unimplemented feature ideas. Help is very welcome! Contact the author if you want to help in any way.
 
-If you find any bugs in this extension, please report them in the Typo3 bugtracker under the project tx_seminars.
+If you find any bugs in this extension, please report them in the bugtracker at <https://bugs.oliverklee.com/> under the project "Seminar Manager".
 
 Development speed of this extension mainly depends on whether it is funded. So if you'd like this extension to get developed quickly (or you need a certain feature), please pay for the author's time.
 
-Hint regarding the items marked with [from dev-meeting 05/12], they got discussed on the developers meeting that took place at the end of 2005. Details about these points can be read in the notices of this meeting wich can be found at http://www.rimann.li/fileadmin/mario/typo3/Dev_Meeting_0512_060101.pdf (sorry, German only. If you have questions please ask.)
+Hint regarding the items marked with [from dev-meeting 05/12], they got discussed on the developers meeting that took place at the end of 2005. Details about these points can be read in the notices of this meeting wich can be found at http://www.rimann.org/fileadmin/mario/typo3/Dev_Meeting_0512_060101.pdf (sorry, German only. If you have questions please ask.)
 
-Version 0.6.0 - "Make it safer to use": safety, data integrity and sanity
+Version 0.6.0 / 0.7.0 - "Make it safer to use": safety, data integrity and sanity
 -------------------------------------------------------------------------
-- add an additional live check whether there actual are vacancies during online registration (in case of data inconsistencies)
-- stop users from deleting their account if still registered to an event [from dev-meeting 05/12]
-- handle deleted (and "marked as deleted") user accounts and seminars graciously
-- feature: avoid double registrations when entering registrations manually
-- automatically update record title if an attendance has been entered or edited in the back end
-- automatically update attendances title if a FE user has been entered or edited in the back end
-- automatically update attendances titles if a FE user has been entered or edited by sr_feuser_register
-- automatically update attendances titles if a seminar has been entered or edited in the back end
-- flag: enfore payment methods if the price is > 0
-- add configuration for default values for most of the seminar record fields
-- remove the "has paid" attribute and use "has paid date set" instead; warn if there are records without paid date
-- attendance records: make it configurable to require a payment method if a payment date has been entered
-- use htmlentities() for many strings that are output on the BE or FE
-- check all uses of references for correctness: that the function is &functionname() _and_ that the user uses "=& functionname();"
-- use the event title and user's Real Name as title for registration records
-- make it configurable whether to count all registrations or only the paid ones
-- check that all DB accesses use either intval, quoteStr or fullQuoteStr
-- investigate whether to use removeBadHTML (like in the extension ve_guestbook)
-- tx_seminars_objectfromdb::commitToDb() should also be able to update records
-- tx_seminars_objectfromdb::commitToDb() should check for existence of a record before deciding whether to update or insert it
-- prevent tx_seminars_registration::tx_seminars_registration and tx_seminars_registrationmanager::canCreateRegistration from accessing uninitialized array elements
-- check for accesses to uninitialized array elements
-- change all occurences of header(string string) to header (string string, bool replace, int http_response_code)
-- move the mobile phone number into its own extension
-- have real m:m relations instead of the crappy "1,2,5" format
-- provide an "update" function (like in tt_news) that updates to the real m:m tables
-- make our DB scheme conform to 3NF, BCNF, 4NF or even 5NF and document this
-- add automated tests using T3unit (requires PHP5)
-- reread all DB queries if they are safe from SQL injection
-- registration: use a callback in the constructor to get additional data instead of expecting an additional function call; find a suitable design pattern for this
-- escape square brackets in URLs (that are part of links as well as in e-mails), see http://bugs.typo3.org/view.php?id=3808
-- use striphtml or htmlspecialchars as much as possible for BE and FE output
+All planned stuff for the upcoming 0.6.0 and 0.7.0 release got entered into the bugtracker.
 
 
 Version 0.8.0 - "Make it nice for developers": code clean-up, qa and documentation
 ----------------------------------------------------------------------------------
+- move the mobile phone number into its own extension
 - investigate $TYPO3_CONF_VARS['SYS']['forceReturnPath'] and document this in the manual
 - document what all those *PID configuration variables are used for
 - switch extension status from "alpha" to "beta" so that we can get a security review and appear and in the offical part of the TER
