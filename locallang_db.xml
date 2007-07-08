@@ -341,8 +341,8 @@
 			<label index="tx_seminars_seminars.price_regular">Standardpreis:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Standardpreis für Frühbucher:</label>
 			<label index="tx_seminars_seminars.price_regular_board">Standardpreis inklusive Vollpension:</label>
-			<label index="tx_seminars_seminars.price_special">Sonderpreis:</label>
-			<label index="tx_seminars_seminars.price_special_early">Sonderpreis für Frühbucher:</label>
+			<label index="tx_seminars_seminars.price_special">Spezialpreis:</label>
+			<label index="tx_seminars_seminars.price_special_early">Spezialpreis für Frühbucher:</label>
 			<label index="tx_seminars_seminars.price_special_board">Spezialpreis inklusive Vollpension:</label>
 			<label index="tx_seminars_seminars.payment_methods">Erlaubte Zahlungsarten:</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
