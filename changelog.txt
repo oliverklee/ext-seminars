@@ -1,4 +1,5 @@
 0.5.1 (currently working on)
+- [#902] Change: Registrations should be counted as references to event records and FE user records
 - [#940] Change: Unified the German wording for "special price".
 - [#416] Change: Allow commas as decimal separator in prices, too (in the FE editing)
 - [#953] Change: Define LF as chr(10) and use that instead of chr(10)

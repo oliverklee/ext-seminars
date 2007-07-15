@@ -1176,6 +1176,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$this->checkboxes
 				);
 			}
+
+			if ((float) $GLOBALS['TYPO3_CONF_VARS']['SYS']['compat_version'] >= 4.0) {
+				// update the reference index
+				$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
+				$referenceIndex->updateRefIndexTable($this->tableAttendances, $this->getUid());
+			}
 		}
 
 		return $result;
