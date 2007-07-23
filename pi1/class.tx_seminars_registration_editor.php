@@ -588,7 +588,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$result = $this->populateList(
 				$items,
 				$this->tablePaymentMethods,
-				'uid IN ('.$this->seminar->getPaymentMethodsUids().')'
+				'uid IN ('.$this->seminar->getPaymentMethodsUids().')',
+				true
 			);
 		}
 

@@ -1,4 +1,5 @@
 0.5.1 (currently working on)
+- [#1015] Fix: Registration page: Radiobuttons for the payment methods should be vertically arranged
 - [#963] Change: Only show the total price on the confirmation page if the "seats" element is enabled
 - [#902] Change: Registrations should be counted as references to event records and FE user records
 - [#940] Change: Unified the German wording for "special price".
