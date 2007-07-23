@@ -806,27 +806,27 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$result = '';
 
 		$dataHandler =& $this->oForm->oDataHandler;
+		$seats = intval($dataHandler->_getThisFormData('seats'));
 
-		$availablePrices = $this->seminar->getAvailablePrices();
-		$selectedPrice = $this->getKeyOfSelectedPrice();
+		// Only show the total price if the seats selector is displayed
+		// (otherwise the total price will be same as the price anyway).
+		if ($seats > 0) {
+			// Build the total price for this registration and add it to the form
+			// data to show it on the confirmation page.
+			// This value will not be saved to the database from here. It will be
+			// calculated again when creating the registration object.
+			// It will not be added if no total price can be calculated (e.g.
+			// total price = 0.00)
+			$availablePrices = $this->seminar->getAvailablePrices();
+			$selectedPrice = $this->getKeyOfSelectedPrice();
 
-		// Build the total price for this registration and add it to the form
-		// data to show it on the confirmation page.
-		// This value will not be saved to the database from here. It will be
-		// calculated again when creating the registration object.
-		// It will not be added if no total price can be calculated (e.g.
-		// total price = 0.00)
-		if (intval($dataHandler->_getThisFormData('seats')) > 0) {
-			$seats = intval($dataHandler->_getThisFormData('seats'));
-		} else {
-			$seats = 1;
-		}
-		if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
-			$totalPrice = $this->seminar->formatPrice(
-				$seats * $availablePrices[$selectedPrice]['amount']
-			);
-			$currency = $this->registrationManager->getConfValueString('currency');
-			$result = $totalPrice.' '.$currency;
+			if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
+				$totalPrice = $this->seminar->formatPrice(
+					$seats * $availablePrices[$selectedPrice]['amount']
+				);
+				$currency = $this->registrationManager->getConfValueString('currency');
+				$result = $totalPrice.' '.$currency;
+			}
 		}
 
 		return $result;
