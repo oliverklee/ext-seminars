@@ -1,3 +1,5 @@
+0.5.2 (currently working on)
+
 0.5.1 (released 2007-07-29)
 - [#1015] Fix: Registration page: Radiobuttons for the payment methods should be vertically arranged
 - [#963] Change: Only show the total price on the confirmation page if the "seats" element is enabled
