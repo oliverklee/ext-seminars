@@ -2025,17 +2025,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	function dumpSeminarValues($keysList) {
 		$keys = explode(',', $keysList);
+		$keysWithLabels = array();
 
 		$maxLength = 0;
-		foreach ($keys as $index => $currentKey) {
-			$currentKeyTrimmed = strtolower(trim($currentKey));
-			// write the trimmed key back so that we don't have to trim again
-			$keys[$index] = $currentKeyTrimmed;
-			$maxLength = max($maxLength, strlen($currentKeyTrimmed));
-		}
-
-		$result = '';
 		foreach ($keys as $currentKey) {
+			$currentKeyTrimmed = strtolower(trim($currentKey));
+			$currentLabel = $this->pi_getLL('label_'.$currentKey);
+			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
+			$maxLength = max($maxLength, strlen($currentLabel));
+		}
+		$result = '';
+		foreach ($keysWithLabels as $currentKey => $currentLabel) {
 			switch ($currentKey) {
 				case 'date':
 					$value = $this->getDate('-');
@@ -2077,7 +2077,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$value = $this->getRecordPropertyString($currentKey);
 					break;
 			}
-			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.LF;
+
+			// Check whether there is a value to display. If not, we don't use
+			// the padding and break the line directly after the label.
+			if ($value != '') {
+				$result .= str_pad(
+					$currentLabel.': ',
+					$maxLength + 2,
+					' '
+				).$value.LF;	
+			} else {
+				$result .= $currentLabel.':'.LF;
+			}
 		}
 
 		return $result;

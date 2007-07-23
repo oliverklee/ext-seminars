@@ -906,18 +906,30 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	function dumpUserValues($keysList) {
 		$keys = explode(',', $keysList);
+		$keysWithLabels = array();
 
 		$maxLength = 0;
-		foreach ($keys as $index => $currentKey) {
+		foreach ($keys as $currentKey) {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
-			// write the trimmed key back so that we don't have to trim again
-			$keys[$index] = $currentKeyTrimmed;
-			$maxLength = max($maxLength, strlen($currentKeyTrimmed));
+			$currentLabel = $this->pi_getLL('label_'.$currentKey);
+			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
+			$maxLength = max($maxLength, strlen($currentLabel));
 		}
 
 		$result = '';
-		foreach ($keys as $currentKey) {
-			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$this->getUserData($currentKey).LF;
+		foreach ($keysWithLabels as $currentKey => $currentLabel) {
+			$value = $this->getUserData($currentKey);
+			// Check whether there is a value to display. If not, we don't use
+			// the padding and break the line directly after the label.
+			if ($value != '') {
+				$result .= str_pad(
+					$currentLabel.': ',
+					$maxLength + 2,
+					' '
+				).$value.LF;	
+			} else {
+				$result .= $currentLabel.':'.LF;
+			}
 		}
 
 		return $result;
@@ -937,20 +949,31 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	function dumpAttendanceValues($keysList) {
 		$keys = explode(',', $keysList);
+		$keysWithLabels = array();
 
 		$maxLength = 0;
-		foreach ($keys as $index => $currentKey) {
+		foreach ($keys as $currentKey) {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
-			// write the trimmed key back so that we don't have to trim again
-			$keys[$index] = $currentKeyTrimmed;
-			$maxLength = max($maxLength, strlen($currentKeyTrimmed));
+			$currentLabel = $this->pi_getLL('label_'.$currentKey);
+			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
+			$maxLength = max($maxLength, strlen($currentLabel));
 		}
 
 		$result = '';
-
-		foreach ($keys as $currentKey) {
+		foreach ($keysWithLabels as $currentKey => $currentLabel) {
 			$value = $this->getRegistrationData($currentKey);
-			$result .= str_pad($currentKey.': ', $maxLength + 2, ' ').$value.LF;
+
+			// Check whether there is a value to display. If not, we don't use
+			// the padding and break the line directly after the label.
+			if ($value != '') {
+				$result .= str_pad(
+					$currentLabel.': ',
+					$maxLength + 2,
+					' '
+				).$value.LF;	
+			} else {
+				$result .= $currentLabel.':'.LF;
+			}
 		}
 
 		return $result;
