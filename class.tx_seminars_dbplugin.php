@@ -553,19 +553,20 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 	/**
 	 * Provides data items from the DB.
-	 * 
+	 *
 	 * By default, the field "title" is used as the name that will be returned
 	 * within the array (as caption). For FE users, the field "name" is used.
 	 *
 	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
 	 * @param	string		the table name to query
 	 * @param	string		query parameter that will be used as the WHERE clause (may be omitted)
+	 * @param	string		whether to append a <br /> at the end of each caption
 	 *
 	 * @return	array		$items with additional items from the $params['what'] table as an array with the keys "caption" (for the title) and "value" (for the uid), might be empty, will not be null
 	 *
 	 * @access	public
 	 */
-	function populateList($items, $tableName, $queryParameter = '1=1') {
+	function populateList($items, $tableName, $queryParameter = '1=1', $appendBr = false) {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
 			$tableName,
@@ -574,6 +575,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			'',
 			'title',
 			'');
+
+		$titlePostfix = $appendBr ? '<br />' : '';
 
 		if ($dbResult) {
 			while ($dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
@@ -585,8 +588,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 				} else {
 					$title = $dbResultRow['title'];
 				}
+
 				$items[$uid] = array(
-					'caption'	=> $title,
+					'caption'	=> $title.$titlePostfix,
 					'value'		=> $uid
 				);
 			}
