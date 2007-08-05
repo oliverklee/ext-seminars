@@ -1,4 +1,5 @@
 0.5.2 (currently working on)
+- [#1040] Fix: <br /> is displayed on the confirmation page after the selected method of payment
 - [#1045] Fix: Use require_once instead of require in mod1/index.php
 - [#936] Fix: Empty label tags for the "terms" and "terms_2" checkboxes
 - [#1042] Fix: Another PHP error on the registration page
