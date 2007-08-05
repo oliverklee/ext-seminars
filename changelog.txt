@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#936] Fix: Empty label tags for the "terms" and "terms_2" checkboxes
 - [#1010] Change: Notification mails to organizers now use real labels instead of DB field names.
 - [#1015] Fix: Registration page: Radiobuttons for the payment methods should be vertically arranged
 - [#963] Change: Only show the total price on the confirmation page if the "seats" element is enabled
