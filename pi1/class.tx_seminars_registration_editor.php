@@ -860,7 +860,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				[$dataHandler->_getThisFormData('method_of_payment')]['caption'];
 		}
 
-		return $result;
+		// We use strip_tags to remove any trailing <br /> tags.
+		return strip_tags($result);
 	}
 
 	/**
