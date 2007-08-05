@@ -1,3 +1,5 @@
+0.5.3 (currently working on)
+
 0.5.2 (released 2007-08-05)
 - [#1040] Fix: <br /> is displayed on the confirmation page after the selected method of payment
 - [#1045] Fix: Use require_once instead of require in mod1/index.php
