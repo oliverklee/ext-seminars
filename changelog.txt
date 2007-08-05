@@ -1,4 +1,6 @@
 0.6.0 (currently working on)
+- [#1042] Fix: Another PHP error on the registration page
+- [#1039] Fix: Error on register attendances
 - [#936] Fix: Empty label tags for the "terms" and "terms_2" checkboxes
 - [#1010] Change: Notification mails to organizers now use real labels instead of DB field names.
 - [#1015] Fix: Registration page: Radiobuttons for the payment methods should be vertically arranged

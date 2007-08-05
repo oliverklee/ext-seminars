@@ -32,6 +32,8 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(PATH_t3lib.'class.t3lib_befunc.php');
+require_once(PATH_t3lib.'class.t3lib_refindex.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
 class tx_seminars_registration extends tx_seminars_objectfromdb {
