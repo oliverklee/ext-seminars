@@ -214,6 +214,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$rawForm = $this->oForm->_render();
 		}
 
+		// Remove empty label tags that have been created due to a bug in
+		// FORMidable.
+		$rawForm = preg_replace('/<label[^>]*><\/label>/', '', $rawForm);
 		$this->processTemplate($rawForm);
 		$this->setLabels();
 		$this->hideUnusedFormFields();
