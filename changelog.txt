@@ -1,4 +1,6 @@
 0.5.2 (currently working on)
+- [#1042] Fix: Another PHP error on the registration page
+- [#1039] Fix: Error on register attendances
 
 0.5.1 (released 2007-07-29)
 - [#1015] Fix: Registration page: Radiobuttons for the payment methods should be vertically arranged
