@@ -43,13 +43,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/** Organizers data as an array of arrays with their UID as key. Lazily initialized. */
 	var $organizersCache = array();
 
-	/**
-	 * The number of paid attendances.
-	 * This variable is only available directly after updateStatistics() has been called.
-	 * It will go completely away once we have a configuration about whether to count
-	 * only the paid or all attendances.
-	 */
+	/** The number of all attendances. */
+	var $numberOfAttendances = 0;
+
+	/** The number of paid attendances. */
 	var $numberOfAttendancesPaid = 0;
+
+	/** Flag which shows if the statistics have been already calculated. */
+	var $statisticsHaveBeenCalculated = false;
 
 	/**
 	 * The related topic record as a reference to the object.
@@ -1563,7 +1564,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getAttendances() {
-		return $this->getRecordPropertyInteger('attendees');
+		if (!$this->statisticsHaveBeenCalculated) {
+			$this->calculateStatistics();
+		}
+
+		return $this->numberOfAttendances;
 	}
 
 	/**
@@ -1575,18 +1580,21 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function hasAttendances() {
-		return $this->hasRecordPropertyInteger('attendees');
+		return (boolean) $this->getAttendances();
 	}
 
 	/**
 	 * Gets the number of paid attendances for this seminar.
-	 * This function may only be called after updateStatistics() has been called.
 	 *
 	 * @return	integer		the number of paid attendances
 	 *
 	 * @access	public
 	 */
 	function getAttendancesPaid() {
+		if (!$this->statisticsHaveBeenCalculated) {
+			$this->calculateStatistics();
+		}
+
 		return $this->numberOfAttendancesPaid;
 	}
 
@@ -1609,7 +1617,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getVacancies() {
-		return max(0, $this->getRecordPropertyInteger('attendees_max') - $this->getAttendances());
+		return max(0, $this->getAttendancesMax() - $this->getAttendances());
 	}
 
 	/**
@@ -1656,7 +1664,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function isFull() {
-		return $this->getRecordPropertyBoolean('is_full');
+		return ($this->getAttendances() >= $this->getAttendancesMax());
 	}
 
 	/**
@@ -1667,7 +1675,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function hasEnoughAttendances() {
-		return $this->getRecordPropertyBoolean('enough_attendees');
+		return ($this->getAttendances() >= $this->getAttendancesMin());
 	}
 
 	/**
@@ -2370,38 +2378,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Recalculates the statistics for this seminar:
-	 *   the number of participants,
-	 *   whether there are enough registrations for this seminar to take place,
-	 *   and whether this seminar even is full.
+	 * (Re-)calculates the number of participants for this seminar.
 	 *
 	 * @access	public
 	 */
-	function updateStatistics() {
-		$numberOfAttendances = $this->countAttendances();
-		$numberOfAttendancesPaid = $this->countAttendances('(paid=1 OR datepaid!=0)');
-
-		// We count paid and unpaid registrations.
-		// This behaviour will be configurable in a later version.
-		$this->recordData['attendees'] = $numberOfAttendances;
-		// Let's store the other result in case someone needs it.
-		$this->numberOfAttendancesPaid = $numberOfAttendancesPaid;
-
-		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-		$this->recordData['enough_attendees'] = ($this->getAttendances() >= $this->getRecordPropertyInteger('attendees_min')) ? 1 : 0;
-		// We use 1 and 0 instead of boolean values as we need to write a number into the DB
-		$this->recordData['is_full'] = ($this->getAttendances() >= $this->getRecordPropertyInteger('attendees_max')) ? 1 : 0;
-
-		$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-			$this->tableSeminars,
-			'uid='.$this->getUid(),
-			array(
-				'attendees' => $this->getRecordPropertyInteger('attendees'),
-				'enough_attendees' => $this->getRecordPropertyInteger('enough_attendees'),
-				'is_full' => $this->getRecordPropertyInteger('is_full'),
-				'tstamp' => time()
-			)
-		);
+	function calculateStatistics() {
+		$this->numberOfAttendances = $this->countAttendances();
+		$this->numberOfAttendancesPaid = $this->countAttendances('(paid=1 OR datepaid!=0)');
+		$this->statisticsHaveBeenCalculated = true;
 
 		return;
 	}

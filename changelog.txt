@@ -1,4 +1,5 @@
 0.5.3 (currently working on)
+- [#923] Change: Calculate the vacancies and registration number on the fly
 
 0.5.2 (released 2007-08-05)
 - [#1040] Fix: <br /> is displayed on the confirmation page after the selected method of payment

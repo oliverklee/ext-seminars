@@ -104,7 +104,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
 				AND s2.uid=tx_seminars_seminars.uid)',
 		'organizers' => 'tx_seminars_seminars.organizers',
-		'vacancies' => 'tx_seminars_seminars.attendees_max-tx_seminars_seminars.attendees'
+		'vacancies' => 'tx_seminars_seminars.attendees_max
+				-(
+					(SELECT COUNT(*)
+					FROM tx_seminars_attendances
+					WHERE tx_seminars_attendances.seminar=tx_seminars_seminars.uid
+						AND tx_seminars_attendances.seats=0
+						AND tx_seminars_attendances.deleted=0)
+					+(SELECT SUM(tx_seminars_attendances.seats)
+					FROM tx_seminars_attendances
+					WHERE tx_seminars_attendances.seminar=tx_seminars_seminars.uid
+						AND  tx_seminars_attendances.seats!=0
+						AND tx_seminars_attendances.deleted=0)
+				)'
 	);
 
 	/**

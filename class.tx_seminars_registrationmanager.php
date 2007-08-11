@@ -370,7 +370,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		$this->registration->setRegistrationData($seminar, $this->getFeUserUid(), $registrationData);
 		$this->registration->commitToDb();
 
-		$seminar->updateStatistics();
+		$seminar->calculateStatistics();
 
 		$this->registration->notifyAttendee($plugin);
 		$this->registration->notifyOrganizers($plugin);

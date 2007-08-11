@@ -74,13 +74,6 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		$functionMenu = array();
 
-		// check whether the user has write access to the page before allowing
-		// to update the statistics
-		$sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
-		if ($BE_USER->doesUserHaveAccess($sys_page->getPage($this->id), 16)) {
-			$functionMenu['updateStats'] = $LANG->getLL('menu_updateStats');
-		}
-
 		$functionMenu['seminarDetails'] = $LANG->getLL('menu_seminarDetails');
 
 		$this->MOD_MENU = array(
@@ -197,113 +190,14 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		global $LANG;
 
 		switch ((string)$this->MOD_SETTINGS['function']) {
-			case 'updateStats':
-				$content = $this->updateStats();
-				$this->content.=$this->doc->section($LANG->getLL('menu_updateStats'),$content,0,1);
-			break;
 			case 'seminarDetails':
 				$content = $this->listSeminarDetails();
 				$this->content.=$this->doc->section($LANG->getLL('menu_seminarDetails'),$content,0,1);
-			break;
-			case 'listSpeakers':
-				$content='<div align=center><strong>List Speakers</strong></div>';
-				$this->content.=$this->doc->section('Message #2:',$content,0,1);
-			break;
-			case 'listSites':
-				$content='<div align=center><strong>List Sites</strong></div>';
-				$this->content.=$this->doc->section('Message #3:',$content,0,1);
-			break;
-			case 'listSeminars':
-				$content='<div align=center><strong>List Seminars</strong></div>';
-				$this->content.=$this->doc->section('Message #3:',$content,0,1);
-			break;
+				break;
+			default:
+				// Do nothing.
+				break;
 		}
-	}
-
-	/**
-	 * Updates the seminar statistics (number of attendances, is full,
-	 * has enough attendances etc.).
-	 *
-	 * @return	string		HTML code displaying the updated statistics
-	 *
-	 * @access	private
-	 */
-	function updateStats() {
-		global $LANG;
-
-		$tableSeminars = 'tx_seminars_seminars';
-		$tableAttendances = 'tx_seminars_attendances';
-		$tableUsers = 'fe_users';
-
-		$pageSelect = t3lib_div::makeInstance('t3lib_pageSelect');
-
-		$result = '';
-
-		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
-		$seminarBag =& new $seminarBagClassname('pid='.intval($this->id), '', '', $tableSeminars.'.begin_date');
-
-		$result .= '<h3>'.$LANG->getLL('message_updatingAttendanceNumbers').'</h3>'.LF;
-		while ($currentSeminar =& $seminarBag->getCurrent()) {
-			$currentSeminar->updateStatistics();
-
-			$result .= '<h4>'.htmlspecialchars($currentSeminar->getTitleAndDate('-')).'</h4>'.LF;
-			$result .= '<p>'.$LANG->getLL('label_all').$currentSeminar->getAttendances().'</p>';
-			$result .= '<p>'.$LANG->getLL('label_paid').$currentSeminar->getAttendancesPaid().'</p>';
-			$result .= '<p>'.$LANG->getLL('label_unpaid').$currentSeminar->getAttendancesNotPaid().'</p>';
-			$result .= '<p>'.$LANG->getLL('label_vacancies').$currentSeminar->getVacancies().'</p>';
-			$result .= '<p>'.$LANG->getLL('label_hasEnough').((integer) $currentSeminar->hasEnoughAttendances()).'</p>';
-			$result .= '<p>'.$LANG->getLL('label_isFull').((integer) $currentSeminar->isFull()).'</p>';
-
-			$seminarBag->getNext();
-		}
-
-		$result .= $seminarBag->checkConfiguration();
-
-		$result .= '<h3>Titel der Anmeldungen werden aktualisiert</h3>';
-		$dbResultAttendances = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			$this->tableAttendances,
-			'1'.$pageSelect->enableFields($this->tableAttendances),
-			'',
-			'',
-			''
-		);
-		if ($dbResultAttendances) {
-			while ($currentAttendance = mysql_fetch_assoc($dbResultAttendances)) {
-				$dbResultAttendee = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'uid,name,username',
-					$this->tableUsers,
-					'uid='.intval($currentAttendance['user'])
-						.$pageSelect->enableFields($this->tableUsers),
-					'',
-					'',
-					''
-				);
-				$dbResultSeminar = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'title, begin_date',
-					$this->tableSeminars,
-					'uid='.intval($currentAttendance['seminar'])
-						.$pageSelect->enableFields($this->tableSeminars),
-					'',
-					'',
-					''
-				);
-
-				if ($dbResultAttendee && $dbResultSeminar) {
-					$attendeeName = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultAttendee);
-					$seminarData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultSeminar);
-					$newTitle = $attendeeName['name'].' / '.$seminarData['title'].' '.strftime('%d.%m.%Y', $seminarData['begin_date']);
-					$displayTitle = $attendeeName['name'].' ['.$attendeeName['username'].':'.$attendeeName['uid'].'] / '.$seminarData['title'].' '.strftime('%d.%m.%Y', $seminarData['begin_date']);
-					$result .= '<p>'.$displayTitle.'</p>';
-					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-						$this->tableAttendances,
-						'uid='.intval($currentAttendance['uid']),
-						array('title' => $GLOBALS['TYPO3_DB']->quoteStr($newTitle, $this->tableAttendances))
-					);
-				}
-			}
-		}
-		return $result;
 	}
 
 	/**
