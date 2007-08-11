@@ -99,9 +99,6 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 							$updateArray
 						);
 					}
-
-					// Update statistics every time an event record gets saved. 
-					$seminar->updateStatistics();
 				}
 				break;
 			case $this->tableTimeslots:
