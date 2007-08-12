@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1056] Fix: Teaser text not included in list view search
 - [#923] Change: Calculate the vacancies and registration number on the fly
 - [#1040] Fix: <br /> is displayed on the confirmation page after the selected method of payment
 - [#1045] Fix: Use require_once instead of require in mod1/index.php
