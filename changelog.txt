@@ -1,4 +1,5 @@
 0.5.3 (currently working on)
+- [#1056] Fix: Teaser text not included in list view search
 - [#923] Change: Calculate the vacancies and registration number on the fly
 
 0.5.2 (released 2007-08-05)
