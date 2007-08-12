@@ -2083,6 +2083,19 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				case 'title':
 					$value = $this->getTitle();
 					break;
+				case 'attendees':
+					$value = $this->getAttendances();
+					break;
+				case 'enough_attendees':
+					$value = ($this->hasEnoughAttendances())
+						? $this->pi_getLL('label_yes')
+						: $this->pi_getLL('label_no');
+					break;
+				case 'is_full':
+					$value = ($this->isFull())
+						? $this->pi_getLL('label_yes')
+						: $this->pi_getLL('label_no');
+					break;
 				default:
 					$value = $this->getRecordPropertyString($currentKey);
 					break;
