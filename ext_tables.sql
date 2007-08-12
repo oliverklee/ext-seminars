@@ -125,6 +125,7 @@ CREATE TABLE tx_seminars_seminars (
 	allows_multiple_registrations tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_max int(11) unsigned DEFAULT '0' NOT NULL,
+	queue_size int(11) unsigned DEFAULT '0' NOT NULL,
 	cancelled tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,
 	vips int(11) unsigned DEFAULT '0' NOT NULL,

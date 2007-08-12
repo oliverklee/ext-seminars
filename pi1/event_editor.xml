@@ -362,6 +362,18 @@
 			</validators>
 		</renderlet:TEXT>
 
+		<renderlet:TEXT name="queue_size">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.queue_size</label>
+			<validators>
+				<validator:PREG>
+					<pattern>
+						<value>/^[\d]*$/</value>
+						<message>LLL:EXT:seminars/pi1/locallang.php:message_noQueueNumber</message>
+					</pattern>
+				</validator:PREG>
+			</validators>
+		</renderlet:TEXT>
+
 		<renderlet:CHECKSINGLE name="cancelled">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.cancelled</label>
 		</renderlet:CHECKSINGLE>

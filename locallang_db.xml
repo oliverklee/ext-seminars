@@ -44,6 +44,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees"></label>
 			<label index="tx_seminars_seminars.attendees_min"></label>
 			<label index="tx_seminars_seminars.attendees_max"></label>
+			<label index="tx_seminars_seminars.queue_size"></label>
 			<label index="tx_seminars_seminars.attendees"></label>
 			<label index="tx_seminars_seminars.enough_attendees"></label>
 			<label index="tx_seminars_seminars.is_full"></label>
@@ -192,6 +193,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
+			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>
@@ -333,6 +335,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Teilnehmer</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen:</label>
+			<label index="tx_seminars_seminars.queue_size">Größe der Warteliste:</label>
 			<label index="tx_seminars_seminars.attendees">Momentane Anzahl Anmeldungen:</label>
 			<label index="tx_seminars_seminars.vacancies">Momentane Anzahl freie Plätze:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Hat genug Anmeldungen:</label>
@@ -872,6 +875,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees" type="integer">12580046</label>
 			<label index="tx_seminars_seminars.attendees_min" type="integer">190118002</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">111778233</label>
+			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
 			<label index="tx_seminars_seminars.attendees" type="integer">5740012</label>
 			<label index="tx_seminars_seminars.vacancies" type="integer">7812058</label>
 			<label index="tx_seminars_seminars.enough_attendees" type="integer">219975728</label>
@@ -1401,6 +1405,7 @@
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person:</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
+			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
