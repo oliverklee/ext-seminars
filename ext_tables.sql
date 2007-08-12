@@ -121,7 +121,6 @@ CREATE TABLE tx_seminars_seminars (
 	additional_information text NOT NULL,
 	payment_methods tinytext NOT NULL,
 	organizers tinytext NOT NULL,
-	needs_registration tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	allows_multiple_registrations tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_max int(11) unsigned DEFAULT '0' NOT NULL,

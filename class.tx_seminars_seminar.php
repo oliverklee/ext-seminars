@@ -2093,7 +2093,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$currentLabel.': ',
 					$maxLength + 2,
 					' '
-				).$value.LF;	
+				).$value.LF;
 			} else {
 				$result .= $currentLabel.':'.LF;
 			}
@@ -2363,15 +2363,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Checks whether for this event, registration is necessary at all.
+	 * Checks whether for this event, registration is necessary at all (events
+	 * with a maximum number of attendees are considered to not require
+	 * registration).
 	 *
 	 * @return	boolean		true if registration is necessary, false otherwise
 	 *
 	 * @access	public
 	 */
 	function needsRegistration() {
-		return $this->getTopicBoolean('needs_registration')
-			&& ($this->getAttendancesMax() > 0);
+		return ($this->getAttendancesMax() > 0);
 	}
 
 	/**

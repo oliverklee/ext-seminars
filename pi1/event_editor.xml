@@ -330,10 +330,6 @@
 			</validators>
 		</renderlet:CHECKBOX>
 
-		<renderlet:CHECKSINGLE name="needs_registration">
-			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.needs_registration</label>
-		</renderlet:CHECKSINGLE>
-
 		<renderlet:CHECKSINGLE name="allows_multiple_registrations">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.allows_multiple_registrations</label>
 		</renderlet:CHECKSINGLE>
