@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#669] Code cleanup
 - [#712] Change: Remove the "needs registration" checkbox
 - [#1025] Feature: Add a field "size of registration queue" to the BE and FE editing of events records
 - [#1056] Fix: Teaser text not included in list view search
