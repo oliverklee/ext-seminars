@@ -1,7 +1,7 @@
 .tx-seminars-pi1-clear {
-  clear: both;
-  width: 1px;
-  height: 1px;
+	clear: both;
+	width: 1px;
+	height: 1px;
 }
 
 .tx-seminars-pi1-event-editor textarea {
@@ -10,9 +10,9 @@
 }
 
 .tx-seminars-pi1-error {
-  color: #f00;
-  background-color: inherit;
-  font-weight: bold;
+	color: #f00;
+	background-color: inherit;
+	font-weight: bold;
 }
 
 .tx-seminars-pi1-hidden {
@@ -21,20 +21,21 @@
 }
 
 .tx-seminars-pi1-listrow table {
-  background-color: #fff;
-  color: #000;
+	background-color: #fff;
+	color: #000;
 }
 
-.tx-seminars-pi1-listrow th, .tx-seminars-pi1-listrow td {
-  padding: .2em .5em;
-  margin: 0;
-  border-spacing: 0;
-  vertical-align: top;
+.tx-seminars-pi1-listrow th,
+.tx-seminars-pi1-listrow td {
+	padding: .2em .5em;
+	margin: 0;
+	border-spacing: 0;
+	vertical-align: top;
 }
 
 .tx-seminars-pi1-listrow th {
-  font-weight: bold;
-  text-align: center;
+	font-weight: bold;
+	text-align: center;
 }
 
 th.tx-seminars-pi1-title {
@@ -42,60 +43,64 @@ th.tx-seminars-pi1-title {
 }
 
 .tx-seminars-pi1-title a {
-  display: block;
+	display: block;
 }
 
-.tx-seminars-pi1-date, .tx-seminars-pi1-vacancies, .tx-seminars-pi1-price, .tx-seminars-pi1-uid {
-  text-align: right;
+.tx-seminars-pi1-date,
+.tx-seminars-pi1-vacancies,
+.tx-seminars-pi1-price,
+.tx-seminars-pi1-uid {
+	text-align: right;
 }
 
 .tx-seminars-pi1-date {
-  white-space: nowrap;
+	white-space: nowrap;
 }
 
 .tx-seminars-pi1-seats {
 	text-align: center;
 }
 
-.tx-seminars-pi1-listrow .listrow-odd, .tx-seminars-pi1-listrow th {
-  background-color: #f0f0f0;
-  color: inherit;
+.tx-seminars-pi1-listrow .listrow-odd,
+.tx-seminars-pi1-listrow th {
+	background-color: #f0f0f0;
+	color: inherit;
 }
 
 .tx-seminars-pi1-listrow tr {
-  background-color: #fff;
-  color: inherit;
+	background-color: #fff;
+	color: inherit;
 }
 
 .tx-seminars-pi1-listrow tr:hover {
-  background-color: #e0e0e0;
-  color: inherit;
+	background-color: #e0e0e0;
+	color: inherit;
 }
 
 .tx-seminars-pi1-vacancies-available .tx-seminars-pi1-square {
-  background-color: #00a500;
-  color: inherit;
+	background-color: #00a500;
+	color: inherit;
 }
 
 .tx-seminars-pi1-vacancies-2 .tx-seminars-pi1-square,
 .tx-seminars-pi1-vacancies-1 .tx-seminars-pi1-square {
-  background-color: #ffff3c;
-  color: inherit;
+	background-color: #ffff3c;
+	color: inherit;
 }
 
 .tx-seminars-pi1-vacancies-0 .tx-seminars-pi1-square,
 .tx-seminars-pi1-canceled .tx-seminars-pi1-square,
-.tx-seminars-pi1-registration-deadline-over  .tx-seminars-pi1-square {
-  background-color: #c30000;
-  color: inherit;
+.tx-seminars-pi1-registration-deadline-over	.tx-seminars-pi1-square {
+	background-color: #c30000;
+	color: inherit;
 }
 
 .tx-seminars-pi1-canceled td {
-  text-decoration: line-through;
+	text-decoration: line-through;
 }
 
 .tx-seminars-pi1-canceled td.tx-seminars-pi1-vacancies {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 #tx-seminars-pi1-registration-form fieldset {
