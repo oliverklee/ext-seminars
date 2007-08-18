@@ -1,4 +1,5 @@
 0.5.3 (currently working on)
+- [#1059] Fix: Error with strrpos in the config check
 - [#602] Change: In the SQL file, remove NOT NULL from all text and blob fields
 - [#669] Code cleanup
 - [#1056] Fix: Teaser text not included in list view search
