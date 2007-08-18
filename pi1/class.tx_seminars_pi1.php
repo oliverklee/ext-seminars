@@ -1482,6 +1482,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$isOkay = true;
 			} else {
 				$errorMessage = $this->seminar->canViewRegistrationsListMessage($this->whatToDisplay);
+				header('Status: 403 Forbidden');
 			}
 		} else {
 			$errorMessage = $this->registrationManager->existsSeminarMessage($this->piVars['seminar']);
@@ -1773,6 +1774,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 		} else {
 			$result = $eventEditor->hasAccessMessage();
+			header('Status: 403 Forbidden');
 		}
 
 		return $result;
