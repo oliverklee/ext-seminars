@@ -2375,6 +2375,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	function needsRegistration() {
 		return $this->getTopicBoolean('needs_registration')
+			&& !$this->isEventTopic()
 			&& ($this->getAttendancesMax() > 0);
 	}
 
@@ -2495,6 +2496,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	function isEventDate() {
 		return ($this->getRecordPropertyInteger('object_type') == 2);
+	}
+
+	/**
+	 * Checks whether we are a topic record.
+	 *
+	 * @return	boolean		true if we are a topic record, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function isEventTopic() {
+		return ($this->getRecordPropertyInteger('object_type') == 1);
 	}
 
 	/**
