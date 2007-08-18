@@ -53,7 +53,7 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_speakerbag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_speakerbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSpeakers is provided.
 		$this->init();

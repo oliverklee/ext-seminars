@@ -54,7 +54,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminarbag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
+	function tx_seminars_seminarbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSeminars is provided.
 		$this->init();

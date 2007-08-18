@@ -2434,7 +2434,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	protected
 	 */
-	function countAttendances($queryParameters = '1') {
+	function countAttendances($queryParameters = '1=1') {
 		$result = 0;
 
 		$dbResultSingleSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
