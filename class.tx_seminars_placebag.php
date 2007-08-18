@@ -53,7 +53,7 @@ class tx_seminars_placebag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_placebag($queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_placebag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSites is provided.
 		$this->init();

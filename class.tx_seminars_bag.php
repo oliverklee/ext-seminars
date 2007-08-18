@@ -91,7 +91,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_bag($dbTableName, $queryParameters = '1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
+	function tx_seminars_bag($dbTableName, $queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
 		$this->dbTableName = $dbTableName;
 		$this->queryParameters = trim($queryParameters);
 		$this->additionalTableNames =
@@ -112,7 +112,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * For the main DB table and the additional tables, writes the corresponding
 	 * concatenated output from t3lib_pageSelect::enableFields into
 	 * $this->enabledFieldsQuery.
-	 * 
+	 *
 	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
 	 *
 	 * @access	private
