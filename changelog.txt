@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#909] Change: Remove the old sr_feuser_register template
 - [#900] Change: Suggest the onetimeaccount extension
 - [#415] Change: Send "access denied" HTTP headers if access has been denied
 - [#1059] Fix: Error with strrpos in the config check
