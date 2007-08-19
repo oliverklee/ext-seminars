@@ -4,7 +4,7 @@
 - [#415] Change: Send "access denied" HTTP headers if access has been denied
 - [#1059] Fix: Error with strrpos in the config check
 - [#602] Change: In the SQL file, remove NOT NULL from all text and blob fields
-- [#669, #802] Code cleanup
+- [#669, #802, #1061] Code cleanup
 - [#1056] Fix: Teaser text not included in list view search
 - [#923] Change: Calculate the vacancies and registration number on the fly
 
