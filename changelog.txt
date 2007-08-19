@@ -7,11 +7,11 @@
 - [#415] Change: Send "access denied" HTTP headers if access has been denied
 - [#1059] Fix: Error with strrpos in the config check
 - [#602] Change: In the SQL file, remove NOT NULL from all text and blob fields
-- [#669, #802] Code cleanup
+- [#669, #802, #1050, #1061] Code cleanup
 - [#712] Change: Remove the "needs registration" checkbox
 - [#1025] Feature: Add a field "size of registration queue" to the BE and FE editing of events records
 - [#1056] Fix: Teaser text not included in list view search
-- [#923] Change: Calculate the vacancies and registration number on the fly
+- [#923] Change: Calculate the vacancies and registration numbers on the fly
 - [#1040] Fix: <br /> is displayed on the confirmation page after the selected method of payment
 - [#1045] Fix: Use require_once instead of require in mod1/index.php
 - [#1042] Fix: Another PHP error on the registration page

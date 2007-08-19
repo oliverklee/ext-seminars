@@ -1781,28 +1781,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Checks whether this seminar has a minimum of attendees set.
-	 *
-	 * @return	boolean		true if the seminar has a minimum of attendees set.
-	 *
-	 * @access	public
-	 */
-	function hasMinimumAttendees() {
-		return $this->hasRecordPropertyInteger('attendees_min');
-	}
-
-	/**
-	 * Returns the minimum amount of attendees required for this event to be held.
-	 *
-	 * @return	integer		the minimum amount of attendees
-	 *
-	 * @access	public
-	 */
-	function getMinimumAttendees() {
-		return $this->getRecordPropertyInteger('attendees_min');
-	}
-
-	/**
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if they have any).
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)

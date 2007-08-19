@@ -832,9 +832,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->seminar->isFull()) {
 			$whichEmailToSend = 'email_additionalNotificationIsFull';
 			$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
-		}
-		// The second check ensures that only one set of e-mails is sent to the organizers.
-		elseif ($this->seminar->getMinimumAttendees() == $this->seminar->getAttendances()) {
+		// The second check ensures that only one set of e-mails is sent to the
+		// organizers.
+		} elseif ($this->seminar->getAttendancesMin() == $this->seminar->getAttendances()) {
 			$whichEmailToSend = 'email_additionalNotificationEnoughRegistrations';
 			$whichEmailSubject = 'email_additionalNotificationEnoughRegistrationsSubject';
 		}
@@ -928,7 +928,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$currentLabel.': ',
 					$maxLength + 2,
 					' '
-				).$value.LF;	
+				).$value.LF;
 			} else {
 				$result .= $currentLabel.':'.LF;
 			}
@@ -972,7 +972,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$currentLabel.': ',
 					$maxLength + 2,
 					' '
-				).$value.LF;	
+				).$value.LF;
 			} else {
 				$result .= $currentLabel.':'.LF;
 			}
