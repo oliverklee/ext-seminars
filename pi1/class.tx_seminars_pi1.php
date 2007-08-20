@@ -820,6 +820,26 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('additional_information', 'field_wrapper');
 			}
 
+			// XXX: When the adaption to oelib has took place the direct access
+			// to $this->templateCache should be removed and the methods provided
+			// by oelib should be used.
+			if ($this->seminar->hasTargetGroups()) {
+				$targetGroupSubpart = $this->templateCache['SINGLE_TARGET_GROUP'];
+				$this->templateCache['SINGLE_TARGET_GROUP'] = '';
+
+				$targetGroups = $this->seminar->getTargetGroupsAsArray();
+				foreach ($targetGroups as $targetGroup) {
+						$this->templateCache['SINGLE_TARGET_GROUP'] .=
+							$this->cObj->substituteMarker(
+								$targetGroupSubpart,
+								'###TARGET_GROUP###',
+								$targetGroup
+							);
+				}
+			} else {
+				$this->readSubpartsToHide('target_groups', 'field_wrapper');
+			}
+
 			$this->setMarkerContent('organizers', $this->seminar->getOrganizers($this));
 
 			if ($this->seminar->needsRegistration() && !$this->seminar->isCanceled()) {

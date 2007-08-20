@@ -144,7 +144,14 @@
 <!-- ###FIELD_WRAPPER_ADDITIONAL_INFORMATION### --><!-- ###FIELD_WRAPPER_PAYMENTMETHODS### --><h3>###LABEL_PAYMENTMETHODS###</h3>
 ###PAYMENTMETHODS###
 
-<!-- ###FIELD_WRAPPER_PAYMENTMETHODS### --><!-- ###FIELD_WRAPPER_ORGANIZERS### --><h3>###LABEL_ORGANIZERS###</h3>
+<!-- ###FIELD_WRAPPER_PAYMENTMETHODS### --><!-- ###FIELD_WRAPPER_TARGET_GROUPS### --><h3>###LABEL_TARGET_GROUPS###</h3>
+<ul>
+	<!-- ###SINGLE_TARGET_GROUP### -->
+	<li>###TARGET_GROUP###</li>
+	<!-- ###SINGLE_TARGET_GROUP### -->
+</ul>
+
+<!-- ###FIELD_WRAPPER_TARGET_GROUPS### --><!-- ###FIELD_WRAPPER_ORGANIZERS### --><h3>###LABEL_ORGANIZERS###</h3>
 <p>###ORGANIZERS###</p>
 
 <!-- ###FIELD_WRAPPER_ORGANIZERS### --><!-- ###FIELD_WRAPPER_VACANCIES### --><h3>###LABEL_VACANCIES###</h3>
@@ -364,6 +371,9 @@
 		</tr>
 		<tr>
 			<td>{queue_size}</td>
+		</tr>
+		<tr>
+			<td><fieldset>{target_groups}</fieldset></td>
 		</tr>
 		<tr>
 			<td>{cancelled}</td>

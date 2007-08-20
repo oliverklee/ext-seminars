@@ -1678,6 +1678,48 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns true if this seminar has at least one target group, false otherwise.
+	 *
+	 * @return	boolean		true if this seminar has at least one target group, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasTargetGroups() {
+		return $this->hasTopicInteger('target_groups');
+	}
+
+	/**
+	 * Returns an array of our seminar's target groups (or an empty array if
+	 * there aren't any).
+	 *
+	 * @return	array		the target groups of this seminar (or an empty array)
+	 *
+	 * @access	public
+	 */
+	function getTargetGroupsAsArray() {
+		$result = array();
+
+		if ($this->hasTargetGroups()) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				$this->tableTargetGroups.'.*',
+				$this->tableTargetGroups.', '.$this->tableTargetGroupsMM,
+				$this->tableTargetGroupsMM.'.uid_local='.$this->getTopicUid()
+					.' AND '.$this->tableTargetGroups.'.uid='
+					.$this->tableTargetGroupsMM.'.uid_foreign'
+					.$this->enableFields($this->tableTargetGroups)
+			);
+	
+			if ($dbResult) {
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+					$result[] = $row['title'];
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Returns the latest date/time to register for a seminar.
 	 * This is either the registration deadline (if set) or the begin date of an event.
 	 *

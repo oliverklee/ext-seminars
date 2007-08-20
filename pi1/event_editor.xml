@@ -22,6 +22,7 @@
 				<relation field="partners" mmtable="tx_seminars_seminars_speakers_mm_partners" />
 				<relation field="tutors" mmtable="tx_seminars_seminars_speakers_mm_tutors" />
 				<relation field="leaders" mmtable="tx_seminars_seminars_speakers_mm_leaders" />
+				<relation field="target_groups" mmtable="tx_seminars_seminars_target_groups_mm" />
 			</mmrelations>
 			<process>
 				<beforeinsertion>
@@ -369,6 +370,16 @@
 				</validator:PREG>
 			</validators>
 		</renderlet:TEXT>
+
+		<renderlet:CHECKBOX name="target_groups">
+			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.target_groups</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListTargetGroups</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
 
 		<renderlet:CHECKSINGLE name="cancelled">
 			<label>LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars.cancelled</label>

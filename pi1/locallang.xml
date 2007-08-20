@@ -103,6 +103,7 @@
 			<label index="label_paymentmethods">Available methods of payment</label>
 			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_event_type">Event type</label>
+			<label index="label_target_groups">Target Groups</label>
 			<label index="label_organizers">Organizers</label>
 			<label index="label_vacancies">Vacancies</label>
 			<label index="label_deadline_registration">Deadline for registration</label>
@@ -482,6 +483,7 @@
 			<label index="label_paymentmethods">Mögliche Zahlungsarten</label>
 			<label index="label_select_paymentmethod">Zahlungsart:</label>
 			<label index="label_event_type">Veranstaltungsart</label>
+			<label index="label_target_groups">Zielgruppen</label>
 			<label index="label_organizers">Veranstalter</label>
 			<label index="label_vacancies">Freie Plätze</label>
 			<label index="label_deadline_registration">Anmeldeschluss</label>

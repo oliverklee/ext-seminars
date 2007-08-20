@@ -76,6 +76,19 @@ CREATE TABLE tx_seminars_seminars_speakers_mm_leaders (
 
 
 #
+# Table structure for table 'tx_seminars_seminars_target_groups_mm'
+#
+CREATE TABLE tx_seminars_seminars_target_groups_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+
+#
 # Table structure for table 'tx_seminars_seminars'
 #
 CREATE TABLE tx_seminars_seminars (
@@ -125,6 +138,7 @@ CREATE TABLE tx_seminars_seminars (
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_max int(11) unsigned DEFAULT '0' NOT NULL,
 	queue_size int(11) unsigned DEFAULT '0' NOT NULL,
+	target_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	cancelled tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,
 	vips int(11) unsigned DEFAULT '0' NOT NULL,
@@ -469,4 +483,21 @@ CREATE TABLE tx_seminars_timeslots_speakers_mm (
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
+);
+
+
+#
+# Table structure for table 'tx_seminars_target_groups'
+#
+CREATE TABLE tx_seminars_target_groups (
+	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	pid int(11) unsigned DEFAULT '0' NOT NULL,
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	title tinytext,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid)
 );

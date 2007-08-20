@@ -248,6 +248,19 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Provides data items for the list of available target groups.
+	 *
+	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 *
+	 * @return	array		$items with additional items from the target groups table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 *
+	 * @access	public
+	 */
+	function populateListTargetGroups($items) {
+		return $this->populateList($items, $this->tableTargetGroups);
+	}
+
+	/**
 	 * Gets the PID of the page where FE-created events will be stored.
 	 *
 	 * @return	integer		the PID of the page where FE-created events will be stored

@@ -44,6 +44,7 @@
 			<label index="tx_seminars_seminars.attendees_min"></label>
 			<label index="tx_seminars_seminars.attendees_max"></label>
 			<label index="tx_seminars_seminars.queue_size"></label>
+			<label index="tx_seminars_seminars.target_groups"></label>
 			<label index="tx_seminars_seminars.attendees"></label>
 			<label index="tx_seminars_seminars.enough_attendees"></label>
 			<label index="tx_seminars_seminars.is_full"></label>
@@ -135,6 +136,8 @@
 			<label index="tx_seminars_timeslots.speakers"></label>
 			<label index="tx_seminars_timeslots.place"></label>
 			<label index="tx_seminars_timeslots.room"></label>
+			<label index="tx_seminars_target_groups"></label>
+			<label index="tx_seminars_target_groups.title"></label>
 			<label index="tt_content.list_type_pi1"></label>
 		</labelContext>
 	</meta>
@@ -192,6 +195,7 @@
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
+			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>
@@ -278,6 +282,8 @@
 			<label index="tx_seminars_timeslots.speakers">Speakers</label>
 			<label index="tx_seminars_timeslots.place">Place</label>
 			<label index="tx_seminars_timeslots.room">Room</label>
+			<label index="tx_seminars_target_groups">Target Groups</label>
+			<label index="tx_seminars_target_groups.title">Title:</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -333,6 +339,7 @@
 			<label index="tx_seminars_seminars.attendees_min">Minimale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.queue_size">Größe der Warteliste:</label>
+			<label index="tx_seminars_seminars.target_groups">Zielgruppen:</label>
 			<label index="tx_seminars_seminars.attendees">Momentane Anzahl Anmeldungen:</label>
 			<label index="tx_seminars_seminars.vacancies">Momentane Anzahl freie Plätze:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Hat genug Anmeldungen:</label>
@@ -419,6 +426,8 @@
 			<label index="tx_seminars_timeslots.speakers">Referenten</label>
 			<label index="tx_seminars_timeslots.place">Ort</label>
 			<label index="tx_seminars_timeslots.room">Raum</label>
+			<label index="tx_seminars_target_groups">Zielgruppen</label>
+			<label index="tx_seminars_target_groups.title">Titel:</label>
 			<label index="tt_content.list_type_pi1">Seminar-Manager</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -869,6 +878,7 @@
 			<label index="tx_seminars_seminars.attendees_min" type="integer">190118002</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">111778233</label>
 			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
+			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
 			<label index="tx_seminars_seminars.attendees" type="integer">5740012</label>
 			<label index="tx_seminars_seminars.vacancies" type="integer">7812058</label>
 			<label index="tx_seminars_seminars.enough_attendees" type="integer">219975728</label>
@@ -955,6 +965,8 @@
 			<label index="tx_seminars_timeslots.speakers" type="integer">258305227</label>
 			<label index="tx_seminars_timeslots.place" type="integer">129617664</label>
 			<label index="tx_seminars_timeslots.room" type="integer">214150095</label>
+			<label index="tx_seminars_target_groups" type="integer">206184555</label>
+			<label index="tx_seminars_target_groups.title" type="integer">85903807</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1395,6 +1407,7 @@
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
+			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
@@ -1493,6 +1506,8 @@
 			<label index="tx_seminars_timeslots.end_date">End date</label>
 			<label index="tx_seminars_timeslots.entry_date">Entry date</label>
 			<label index="tx_seminars_timeslots.place">Place</label>
+			<label index="tx_seminars_target_groups">Target Groups</label>
+			<label index="tx_seminars_target_groups.title">Title:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
