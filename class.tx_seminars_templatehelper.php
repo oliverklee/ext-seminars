@@ -354,11 +354,14 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		}
 
 		// remove subpart markers by replacing the subparts with just their content
-		$noSubpartMarkers = $this->cObj->substituteMarkerArrayCached(
-			$noHiddenSubparts,
-			array(),
-			$subparts
-		);
+		$noSubpartMarkers = $noHiddenSubparts;
+		foreach ($subparts as $subpartName => $subpartContent) {
+			$noSubpartMarkers = $this->cObj->substituteSubpart(
+				$noSubpartMarkers,
+				'###'.$subpartName.'###',
+				$subpartContent
+			);
+		}
 
 		// replace markers with their content
 		return $this->cObj->substituteMarkerArrayCached(
