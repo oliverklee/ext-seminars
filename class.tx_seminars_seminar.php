@@ -718,6 +718,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					}
 					$plugin->setMarkerContent('speaker_item_title', $name);
 
+					$description = '';
 					if (!empty($row['description'])) {
 						$description = $plugin->pi_RTEcssText($row['description']);
 					}
