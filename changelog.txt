@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1093] Fix: Problem with the description of speakers in the seminar single view
 - [#3] Fix: Allow marker names to be the prefix of others
 - [#905] Change: Hide the P for the error message if there are no errors in the FORMidable forms
 - [#921] Change: Change all tautology '1's to '1=1' in DB queries to make this extension work with PostgreSQL
