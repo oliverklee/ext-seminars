@@ -713,6 +713,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'price_board_special',
 				'paymentmethods',
 				'additional_information',
+				'target_groups',
 				'organizers',
 				'vacancies',
 				'deadline_registration',
