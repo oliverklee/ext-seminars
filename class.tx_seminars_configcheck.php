@@ -686,7 +686,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'hideFields',
 			true,
 			's_template_special',
-			'This value specifies which section to remove from the list view. '
+			'This value specifies which section to remove from the details view. '
 				.'Incorrect values will cause the sections to still be displayed.',
 			array(
 				'title',
