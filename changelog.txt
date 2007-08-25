@@ -1,4 +1,5 @@
 0.5.3 (currently working on)
+- [#1108] Fix: Number of seats in the "my events" view is incorrect for multi-registration events
 - [#1096] Fix: Wrong message in configcheck::hideFields()
 - [#1097] Fix: Config check warning if sr_feuser_register is not installed
 - [#1093] Fix: Problem with the description of speakers in the seminar single view

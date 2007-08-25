@@ -48,6 +48,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** the seminar which we want to list/show or for which the user wants to register */
 	var $seminar;
 
+	/** the registration which we want to list/show in the "my events" view */
+	var $registration;
+
 	/** the previous event's date (used for the list view) */
 	var $previousDate;
 
@@ -431,10 +434,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		if ($isOkay) {
-			$seminarBag =& $this->initListView($this->whatToDisplay);
+			$seminarOrRegistrationBag =& $this->initListView($this->whatToDisplay);
 
 			if ($this->internal['res_count']) {
-				$result = $this->createListTable($seminarBag);
+				$result = $this->createListTable($seminarOrRegistrationBag);
 			} else {
 				$this->setMarkerContent('error_text', $this->pi_getLL('message_noResults'));
 				$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
@@ -452,7 +455,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			// Let warnings from the seminar and the seminar bag bubble up to us.
-			$this->setErrorMessage($seminarBag->checkConfiguration(true));
+			$this->setErrorMessage($seminarOrRegistrationBag->checkConfiguration(true));
 		}
 
 		return $result;
@@ -464,20 +467,27 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * This function should only be called when there are actually any list
 	 * items.
 	 *
-	 * @param	object		initialized seminar bag (must not be null)
+	 * @param	object		initialized seminar or registration bag (must not be null)
 	 *
 	 * @return	string		HTML for the table (will not be empty)
 	 *
 	 * @access	protected
 	 */
-	function createListTable(&$seminarBag) {
+	function createListTable(&$seminarOrRegistrationBag) {
 		$result = $this->createListHeader();
 		$rowCounter = 0;
 
-		while ($this->seminar =& $seminarBag->getCurrent()) {
+		while ($currentItem =& $seminarOrRegistrationBag->getCurrent()) {
+			if ($this->whatToDisplay == 'my_events') {
+				$this->registration =& $currentItem;
+				$this->seminar =& $this->registration->getSeminarObject();
+			} else {
+				$this->seminar =& $currentItem;
+			}
+
 			$result .= $this->createListRow($rowCounter);
 			$rowCounter++;
-			$seminarBag->getNext();
+			$seminarOrRegistrationBag->getNext();
 		}
 
 		$result .= $this->createListFooter();
@@ -487,12 +497,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/**
 	 * Initializes the list view (normal list, my events or my VIP events) and
-	 * creates a seminar bag, but does not create any actual HTML output.
+	 * creates a seminar bag or a registration bag (for the "my events" view),
+	 * but does not create any actual HTML output.
 	 *
 	 * @param	string		a string selecting the flavor of list view: either an empty string (for the default list view), the value from "what_to_display" or "other_dates"
 	 * @param	string		additional query parameters that will be appended to the WHERE clause
 	 *
-	 * @return	object		a seminar bag containing the seminars for the list view
+	 * @return	object		a seminar bag or a registration bag containing the seminars or registrations for the list view
 	 *
 	 * @access	protected
 	 */
@@ -595,7 +606,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 				break;
 			case 'my_events':
-				$additionalTables = $this->tableAttendances;
+				$additionalTables = $this->tableSeminars;
 				$queryWhere .= ' AND '.$this->tableSeminars.'.uid='.$this->tableAttendances.'.seminar'
 					.' AND '.$this->tableAttendances.'.user='.$this->registrationManager->getFeUserUid();
 				break;
@@ -646,8 +657,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$queryWhere .= $this->searchWhere($this->piVars['sword']);
 		}
 
-		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
-		$seminarBag =& new $seminarBagClassname(
+		if ($whatToDisplay == 'my_events') {
+			$className = 'tx_seminars_registrationbag';
+		} else {
+			$className = 'tx_seminars_seminarbag';
+		}
+
+		$registrationOrSeminarBagClassname = t3lib_div::makeInstanceClassName($className);
+		$registrationOrSeminarBag =& new $registrationOrSeminarBagClassname(
 			$queryWhere,
 			$additionalTables,
 			'',
@@ -655,11 +672,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$limit
 		);
 
-		$this->internal['res_count'] = $seminarBag->getObjectCountWithoutLimit();
+		$this->internal['res_count'] = $registrationOrSeminarBag->getObjectCountWithoutLimit();
 
 		$this->previousDate = '';
 
-		return $seminarBag;
+		return $registrationOrSeminarBag;
 	}
 
 	/**
@@ -1158,55 +1175,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Get's data from one or more attendance records that belong to the current event
-	 * AND the currently logged in user.
-	 * Attention: The fields are totalized! (e.g. all seats from the different attendance
-	 * records will be counted and returned as one value)
-	 *
-	 * @return	array		associative array containing the needed values
-	 *
-	 * @access	protected
-	 */
-	function getAttendanceData() {
-		$result = array(
-			'seats' => '',
-			'total_price' => ''
-		);
-
-		// Create a registrationbag that contains all registrations for the
-		// currently logged in user and the current event.
-		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
-		$queryWhere = $this->tableAttendances.'.seminar='.$this->seminar->getUid()
-					.' AND '.$this->tableAttendances.'.user='.$this->getFeUserUid();
-		$registrationBag =& new $registrationBagClassname($queryWhere, '', '', 'crdate');
-
-		if ($registrationBag->getObjectCountWithoutLimit()) {
-			$numberOfSeats = 0;
-			$totalPrice = 0;
-			while ($currentRegistration =& $registrationBag->getCurrent()) {
-				$numberOfSeats = $numberOfSeats + $currentRegistration->getSeats();
-				$currentTotalPrice = $currentRegistration->getRecordPropertyDecimal('total_price');
-				$totalPrice += $currentTotalPrice;
-				$registrationBag->getNext();
-			}
-
-			// Add the total number of seats and the total price to the result array.
-			// If the total price is not zero, format the string as needed and add the currency.
-			// But if the total price is zero, set it to an empty string to avoid showing
-			// "0" as total price.
-			$result['seats'] = $numberOfSeats;
-			if ($totalPrice) {
-				$currency = $this->registrationManager->getConfValueString('currency');
-				$result['total_price'] = $this->seminar->formatPrice($totalPrice).'&nbsp;'.$currency;
-			} else {
-				$result['total_price'] = '';
-			}
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Returns a list row as a TR. Gets data from $this->seminar.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 * If $this->seminar is invalid, an empty string is returned.
@@ -1242,7 +1210,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Retrieve the data for the columns "Number of seats" and
 			// "Total price", but only if we are on the "my_events" list.
 			if ($this->whatToDisplay == 'my_events') {
-				$attendanceData = $this->getAttendanceData();
+				$attendanceData = array(
+					'seats' => $this->registration->getSeats(),
+					'total_price' => $this->registration->getTotalPrice()
+				);
 			} else {
 				$attendanceData = array(
 					'seats' => '',
