@@ -494,6 +494,17 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Gets the seminar to which this registration belongs.
+	 *
+	 * @return	object		the seminar to which this registration belongs
+	 *
+	 * @access	public
+	 */
+	function getSeminarObject() {
+		return $this->seminar;
+	}
+
+	/**
 	 * Gets whether this attendance has already been paid for.
 	 *
 	 * @return	boolean		whether this attendance has already been paid for
