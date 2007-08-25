@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#773] Change: Make our enableFields() wrapper use $GLOBALS['TSFE'] and a singleton cache
 - [#1096] Fix: Wrong message in configcheck::hideFields()
 - [#1097] Fix: Config check warning if sr_feuser_register is not installed
 - [#1092] Feature: Add a field "target groups" to the seminar record

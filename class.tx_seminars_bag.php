@@ -110,7 +110,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 
 	/**
 	 * For the main DB table and the additional tables, writes the corresponding
-	 * concatenated output from t3lib_pageSelect::enableFields into
+	 * concatenated output from $this->enableFields into
 	 * $this->enabledFieldsQuery.
 	 *
 	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
@@ -126,7 +126,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			// Is there a TCA entry for that table?
 			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
 			if (is_array($ctrl)) {
-				$this->enabledFieldsQuery .= $this->enableFields($trimmedTableName, $showHiddenRecords);
+				$this->enabledFieldsQuery
+					.= $this->enableFields($trimmedTableName, $showHiddenRecords);
 			}
 		}
 		return;

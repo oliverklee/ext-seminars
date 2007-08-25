@@ -648,8 +648,18 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @access	protected
 	 */
 	function enableFields($table, $show_hidden = -1, $ignore_array = array(), $noVersionPreview = false) {
-		$pageSelect = t3lib_div::makeInstance('t3lib_pageSelect');
-		return $pageSelect->enableFields(
+		// We need to use an array as the singleton otherwise won't work.
+		static $pageCache = array();
+
+		if (!$pageCache[0]) {
+			if ($GLOBALS['TSFE'] && $GLOBALS['TSFE']->sys_page) {
+				$pageCache[0] =& $GLOBALS['TSFE']->sys_page;
+			} else {
+				$pageCache[0] = t3lib_div::makeInstance('t3lib_pageSelect');
+			}
+		}
+
+		return $pageCache[0]->enableFields(
 			$table,
 			$show_hidden,
 			$ignore_array,
