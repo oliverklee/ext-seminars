@@ -108,7 +108,7 @@ $TCA['tx_seminars_seminars'] = array(
 
 // unserialize the configuration array
 $globalConfiguration = unserialize(
-	$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
+	$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]
 );
 if ($globalConfiguration['useManualSorting']) {
 	$TCA['tx_seminars_seminars']['ctrl']['sortby'] = 'sorting';
