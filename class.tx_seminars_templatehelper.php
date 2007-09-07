@@ -45,7 +45,7 @@ define('LF', chr(10));
 
 class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/** the complete HTML template */
-	var $templateCode;
+	var $templateCode = '';
 
 	/** all HTML template subparts, using the marker name without ### as keys (e.g. 'MY_MARKER') */
 	var $templateCache = array();
@@ -58,7 +58,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	var $markers = array();
 
 	/** list of the names of all markers (and subparts) of a template */
-	var $markerNames;
+	var $markerNames = '';
 
 	/**
 	 * Dummy constructor: Does nothing.
