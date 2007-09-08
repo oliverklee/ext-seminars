@@ -5,9 +5,6 @@
 		<type>module</type>
 		<fileId>EXT:seminars/mod1/locallang_mod.xml</fileId>
 		<labelContext type="array">
-			<label index="mlang_tabs_tab"></label>
-			<label index="mlang_labels_tabdescr"></label>
-			<label index="mlang_labels_tablabel"></label>
 		</labelContext>
 	</meta>
 	<data type="array">

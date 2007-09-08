@@ -5,13 +5,6 @@
 		<type>module</type>
 		<fileId>EXT:seminars/mod1/locallang.xml</fileId>
 		<labelContext type="array">
-			<label index="title"></label>
-			<label index="menu_seminarDetails"></label>
-			<label index="title_getEmailAddressesForAttendances"></label>
-			<label index="msg_noAttendancesFound"></label>
-			<label index="label_all"></label>
-			<label index="label_paid"></label>
-			<label index="label_unpaid"></label>
 		</labelContext>
 	</meta>
 	<data type="array">
