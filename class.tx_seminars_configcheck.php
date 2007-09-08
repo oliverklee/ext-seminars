@@ -498,9 +498,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'enableRegistration',
 			false,
 			'',
-			'This value specifies whether the extension will provide online'
-				.'registration. If this value is incorrect, the online registration '
-				.'will not be enabled or disabled correctly.'
+			'This value specifies whether the extension will provide online '
+				.'registration. If this value is incorrect, the online '
+				.'registration will not be enabled or disabled correctly.'
 		);
 
 		return;
@@ -512,9 +512,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function checkDecimalDigits() {
-		$explanation = 'This value specifies the amount of digits displayed behind the '
-						.'decimal point in prices. If this value is incorrect, prices '
-						.'may have an unexpected look.';
+		$explanation = 'This value specifies the amount of digits displayed '
+			.'behind the decimal point in prices. If this value is incorrect, '
+			.'prices may have an unexpected look.';
 		$this->checkForNonEmptyString(
 			'decimalDigits',
 			false,
@@ -541,8 +541,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'decimalSplitChar',
 			false,
 			'',
-			'This value specifies the char that is used to split the price. If this '
-			.'value is empty all prices will be shown wrong (missing decimal point).'
+			'This value specifies the char that is used to split the price. '
+			.'If this value is empty all prices will be shown wrong (missing '
+			.'decimal point).'
 		);
 
 		return;

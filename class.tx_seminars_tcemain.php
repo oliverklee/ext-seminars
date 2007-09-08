@@ -50,20 +50,20 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks that the registration deadline set by the user is in no way larger (=later)
-	 * than the beginning of the event.
-	 * It doesn't matter which field got changed in the form because this function is
-	 * called AFTER writing the data from the form to the database.
-	 * In the case that the deadline is later than the beginning time, the deadline will
-	 * be set to zero (wich means: not set).
+	 * Checks that the registration deadline set by the user is in no way larger
+	 * (=later) than the beginning of the event.
+	 * It doesn't matter which field got changed in the form because this
+	 * function is called AFTER writing the data from the form to the database.
+	 * In the case that the deadline is later than the beginning time, the
+	 * deadline will be set to zero (wich means: not set).
 	 *
-	 * Some of the parameters of this function are not used in this function. But they
-	 * are given by the hook in t3lib/class.t3lib_tcemain.php.
+	 * Some of the parameters of this function are not used in this function.
+	 * But they are given by the hook in t3lib/class.t3lib_tcemain.php.
 	 *
 	 * Note: When using the hook after INSERT operations, you will only get the
-	 * temporary NEW... id passed to your hook as $id, but you can easily translate
-	 * it to the real uid of the inserted record using the $pObj->substNEWwithIDs
-	 * array.
+	 * temporary NEW... id passed to your hook as $id, but you can easily
+	 * translate it to the real uid of the inserted record using the
+	 * $pObj->substNEWwithIDs array.
 	 *
 	 * @param	string		the status of this record (new/update)
 	 * @param	string		the affected table name
@@ -83,7 +83,9 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 		switch ($table) {
 			case $this->tableSeminars:
 				// Initialize a seminar object to have all functions available.
-				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+				$seminarClassname = t3lib_div::makeInstanceClassName(
+					'tx_seminars_seminar'
+				);
 				$seminar =& new $seminarClassname($id, null, true);
 	
 				if ($seminar->isOk()) {
@@ -103,7 +105,9 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 				break;
 			case $this->tableTimeslots:
 				// Initialize a timeslot object to have all functions available
-				$timeslotClassname = t3lib_div::makeInstanceClassName('tx_seminars_timeslot');
+				$timeslotClassname = t3lib_div::makeInstanceClassName(
+					'tx_seminars_timeslot'
+				);
 				$timeslot =& new $timeslotClassname($id, null);
 
 				if ($timeslot->isOk()) {

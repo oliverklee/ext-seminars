@@ -153,7 +153,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 						// exactly as in t3lib_SCbase::init()
 						$rootline = $sys_page->getRootLine($pageId);
 
-						// This generates the constants/config + hierarchy info for the template.
+						// This generates the constants/config + hierarchy info
+						// for the template.
 						$template->runThroughTemplates($rootline, 0);
 						$template->generateConfig();
 
@@ -176,7 +177,9 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			$globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
 
 			if ($globalConfiguration['enableConfigCheck']) {
-				$configurationCheckClassname = t3lib_div::makeInstanceClassName('tx_seminars_configcheck');
+				$configurationCheckClassname = t3lib_div::makeInstanceClassName(
+					'tx_seminars_configcheck'
+				);
 				$this->configurationCheck =& new $configurationCheckClassname($this);
 			} else {
 				$this->configurationCheck = null;
@@ -313,7 +316,12 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @access	public
 	 */
 	function getConfValueString($fieldName, $sheet = 'sDEF', $isFileName = false, $ignoreFlexform = false) {
-		return trim($this->getConfValue($fieldName, $sheet, $isFileName, $ignoreFlexform));
+		return trim($this->getConfValue(
+			$fieldName,
+			$sheet,
+			$isFileName,
+			$ignoreFlexform)
+		);
 	}
 
 	/**
@@ -331,7 +339,12 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @access	public
 	 */
 	function hasConfValueString($fieldName, $sheet = 'sDEF', $ignoreFlexform = false) {
-		return ($this->getConfValueString($fieldName, $sheet, false, $ignoreFlexform) != '');
+		return ($this->getConfValueString(
+			$fieldName,
+			$sheet,
+			false,
+			$ignoreFlexform) != ''
+		);
 	}
 
 	/**
@@ -352,10 +365,10 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	}
 
 	/**
-	 * Checks whether an integer value from flexforms or TS setup is set and non-zero.
-	 * The priority lies on flexforms; if nothing is found there, the value
-	 * from TS setup is checked. If there is no field with that name in TS setup,
-	 * false is returned.
+	 * Checks whether an integer value from flexforms or TS setup is set and
+	 * non-zero. The priority lies on flexforms; if nothing is found there, the
+	 * value from TS setup is checked. If there is no field with that name in
+	 * TS setup, false is returned.
 	 *
 	 * @param	string		field name to extract
 	 * @param	string		sheet pointer, eg. "sDEF"
@@ -412,11 +425,14 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @access	public
 	 */
 	function isLoggedIn() {
-		return ((boolean) $GLOBALS['TSFE']) && ((boolean) $GLOBALS['TSFE']->loginUser);
+		return (
+			(boolean) $GLOBALS['TSFE'])
+			&& ((boolean) $GLOBALS['TSFE']->loginUser
+		);
 	}
 
 	/**
-	 * If a user logged in, retrieves that user's data as stored in the
+	 * If a user is logged in, retrieves that user's data as stored in the
 	 * table "feusers" and stores it in $this->feuser.
 	 *
 	 * If no user is logged in, $this->feuser will be null.
@@ -424,7 +440,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * @access	private
 	 */
 	function retrieveFEUser() {
-		$this->feuser = $this->isLoggedIn() ? $GLOBALS['TSFE']->fe_user->user : null;
+		$this->feuser = $this->isLoggedIn()
+			? $GLOBALS['TSFE']->fe_user->user : null;
 	}
 
 	/**

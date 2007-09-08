@@ -118,7 +118,10 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * @access	private
 	 */
 	function createEnabledFieldsQuery($showHiddenRecords = -1) {
-		$allTableNames = explode(',', $this->dbTableName.$this->additionalTableNames);
+		$allTableNames = explode(
+			',',
+			$this->dbTableName.$this->additionalTableNames
+		);
 		$this->enabledFieldsQuery = '';
 
 		foreach ($allTableNames as $currentTableName) {
@@ -127,7 +130,10 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
 			if (is_array($ctrl)) {
 				$this->enabledFieldsQuery
-					.= $this->enableFields($trimmedTableName, $showHiddenRecords);
+					.= $this->enableFields(
+						$trimmedTableName,
+						$showHiddenRecords
+					);
 			}
 		}
 		return;
@@ -163,13 +169,17 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 		);
 
 		if ($this->dbResult) {
-			$this->objectCountWithLimit = $GLOBALS['TYPO3_DB']->sql_num_rows($this->dbResult);
+			$this->objectCountWithLimit = $GLOBALS['TYPO3_DB']->sql_num_rows(
+				$this->dbResult
+			);
 			$dbResultWithoutLimit = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'DISTINCT '.$this->dbTableName.'.*',
 				$this->dbTableName.$this->additionalTableNames,
 				$this->queryParameters.$this->enabledFieldsQuery
 			);
-			$this->objectCountWithoutLimit = $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultWithoutLimit);
+			$this->objectCountWithoutLimit = $GLOBALS['TYPO3_DB']->sql_num_rows(
+				$dbResultWithoutLimit
+			);
 
 			$result = (boolean) $this->getNext();
 		} else {
@@ -207,7 +217,9 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * @access	protected
 	 */
 	function createItemFromDbResult() {
-		trigger_error('The function tx_seminars_bag::createItemFromDbResult() needs to be implemented in a derived class.');
+		trigger_error('The function tx_seminars_bag::createItemFromDbResult() '
+			.'needs to be implemented in a derived class.'
+		);
 	}
 
 	/**

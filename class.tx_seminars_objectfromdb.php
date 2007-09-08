@@ -138,7 +138,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks a string element of the record data array for existence and non-emptiness.
+	 * Checks a string element of the record data array for existence and
+	 * non-emptiness.
 	 *
 	 * @param	string		key of the element to check
 	 *
@@ -151,7 +152,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks an integer element of the record data array for existence and non-zeroness.
+	 * Checks an integer element of the record data array for existence and
+	 * non-zeroness.
 	 *
 	 * @param	string		key of the element to check
 	 *
@@ -164,11 +166,13 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks a decimal element of the record data array for existence and value != 0.00.
+	 * Checks a decimal element of the record data array for existence and
+	 * value != 0.00.
 	 *
 	 * @param	string		key of the element to check
 	 *
-	 * @return	boolean		true if the corresponding field exists and its value is not "0.00".
+	 * @return	boolean		true if the corresponding field exists and its value
+	 * 						is not "0.00".
 	 *
 	 * @access	protected
 	 */
@@ -394,7 +398,10 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function retrieveRecord($uid, $allowHiddenRecords = false) {
-		$enableFields = $this->retrieveEnableFields($this->tableName, $allowHiddenRecords);
+		$enableFields = $this->retrieveEnableFields(
+			$this->tableName,
+			$allowHiddenRecords
+		);
 
 		if ($this->recordExists($uid, $this->tableName, $allowHiddenRecords)) {
 		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -468,11 +475,15 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 		$tableConfiguration =& $GLOBALS['TCA'][$this->tableName]['ctrl'];
 
 		$typeIconColumnExists = $tableConfiguration['typeicon_column']
-			&& $this->hasRecordPropertyInteger($tableConfiguration['typeicon_column']);
+			&& $this->hasRecordPropertyInteger(
+				$tableConfiguration['typeicon_column']
+			);
 
 		$typeIconExists = is_array($tableConfiguration['typeicons'])
 			&& array_key_exists(
-				$this->getRecordPropertyInteger($tableConfiguration['typeicon_column']),
+				$this->getRecordPropertyInteger(
+					$tableConfiguration['typeicon_column']
+				),
 				$tableConfiguration['typeicons']
 			);
 
@@ -487,7 +498,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 		}
 
 		if (!empty($imageURL)) {
-			$imageURL = t3lib_div::getIndpEnv('TYPO3_SITE_URL').TYPO3_mainDir.$imageURL;
+			$imageURL = t3lib_div::getIndpEnv('TYPO3_SITE_URL')
+				.TYPO3_mainDir.$imageURL;
 			$result = '<img src="'.$imageURL.'" title="id='.$this->getUid()
 				.'" alt="'.$this->getUid().'" />'; 
 		}

@@ -58,7 +58,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 		}
 
 		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult($GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult));
+			$this->getDataFromDbResult(
+				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
+			);
 		}
 
 		$this->init();
@@ -111,7 +113,10 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	function getEntryDate() {
 		if ($this->hasEntryDate()) {
 			$entryDate = $this->getRecordPropertyInteger('entry_date');
-			$result = strftime($this->getConfValueString('dateFormatYMD'), $entryDate);
+			$result = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$entryDate
+			);
 		} else {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		}

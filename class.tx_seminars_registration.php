@@ -86,7 +86,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->tableName = $this->tableAttendances;
 
 	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult($GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult));
+			$this->getDataFromDbResult(
+				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
+			);
 
 			if ($this->isOk()) {
 				$seminarUid = $this->recordData['seminar'];
@@ -94,7 +96,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$this->seminar =& $cachedSeminars[$seminarUid];
 				} else {
 					/** Name of the seminar class in case someone subclasses it. */
-					$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+					$seminarClassname = t3lib_div::makeInstanceClassName(
+						'tx_seminars_seminar'
+					);
 					$this->seminar =& new $seminarClassname($seminarUid);
 					$cachedSeminars[$seminarUid] =& $this->seminar;
 				}
@@ -233,7 +237,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	private
 	 */
 	function createTitle() {
-		$this->recordData['title'] = $this->getUserName().' / '.$this->seminar->getTitle().', '.$this->seminar->getDate('-');
+		$this->recordData['title'] = $this->getUserName()
+			.' / '.$this->seminar->getTitle()
+			.', '.$this->seminar->getDate('-');
 
 		return;
 	}
@@ -423,7 +429,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			if (!empty($rawValue)) {
 				switch (trim($currentKey)) {
 					case 'email':
-						$singleValues[$currentKey] = $plugin->cObj->mailto_makelinks('mailto:'.$rawValue, array());
+						$singleValues[$currentKey]
+							= $plugin->cObj->mailto_makelinks(
+								'mailto:'.$rawValue,
+								array()
+							);
 						break;
 					default:
 						$singleValues[$currentKey] = htmlspecialchars($rawValue);
@@ -512,7 +522,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getIsPaid() {
-		trigger_error('Member function tx_seminars_registration->getIsPaid not implemented yet.');
+		trigger_error('Member function tx_seminars_registration->getIsPaid not '
+			.'implemented yet.'
+		);
 	}
 
 	/**
@@ -523,18 +535,23 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getDatePaid() {
-		trigger_error('Member function tx_seminars_registration->getDatePaid not implemented yet.');
+		trigger_error('Member function tx_seminars_registration->getDatePaid '
+			.'not implemented yet.'
+		);
 	}
 
 	/**
 	 * Gets the method of payment.
 	 *
-	 * @return	integer		the uid of the method of payment (may be 0 if none is given)
+	 * @return	integer		the uid of the method of payment (may be 0 if none
+	 * 						is given)
 	 *
 	 * @access	public
 	 */
 	function getMethodOfPayment() {
-		trigger_error('Member function tx_seminars_registration->getMethodOfPayment not implemented yet.');
+		trigger_error('Member function '
+			.'tx_seminars_registration->getMethodOfPayment not implemented yet.'
+		);
 	}
 
 	/**
@@ -545,13 +562,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getHasBeenThere() {
-		trigger_error('Member function tx_seminars_registration->getHasBeenThere not implemented yet.');
+		trigger_error('Member function tx_seminars_registration->getHasBeenThere '
+			.'not implemented yet.'
+		);
 	}
 
 	/**
 	 * Gets the attendee's special interests in the subject.
 	 *
-	 * @return	string		a description of the attendee's special interests (may be empty)
+	 * @return	string		a description of the attendee's special interests
+	 * 						(may be empty)
 	 *
 	 * @access	public
 	 */
@@ -560,9 +580,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the attendee's expectations for the seminar.
+	 * Gets the attendee's expectations for the event.
 	 *
-	 * @return	string		a description of the attendee's expectations for the seminar (may be empty)
+	 * @return	string		a description of the attendee's expectations for the
+	 * 						event (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -573,7 +594,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Gets the attendee's background knowledge on the subject.
 	 *
-	 * @return	string		a description of the attendee's background knowledge (may be empty)
+	 * @return	string		a description of the attendee's background knowledge
+	 * 						(may be empty)
 	 *
 	 * @access	public
 	 */
@@ -582,9 +604,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets where the attendee has heard about this seminar.
+	 * Gets where the attendee has heard about this event.
 	 *
-	 * @return	string		a description of where the attendee has heard about this seminar (may be empty)
+	 * @return	string		a description of where the attendee has heard about
+	 * 						this event (may be empty)
 	 *
 	 * @access	public
 	 */
@@ -593,7 +616,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets text from the "additional notes" field the attendee could fill at online registration.
+	 * Gets text from the "additional notes" field the attendee could fill at
+	 * online registration.
 	 *
 	 * @return	string		additional notes on registration (may be empty)
 	 *
@@ -607,7 +631,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the saved price category name and its single price, all in one long
 	 * string.
 	 *
-	 * @return	string		the saved price category name and its single price or an empty string if no price had been saved
+	 * @return	string		the saved price category name and its single price
+	 * 						or an empty string if no price had been saved
 	 *
 	 * @access	public
 	 */
@@ -619,9 +644,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the saved total price and the currency.
 	 * An empty string will be returned if no total price could be calculated.
 	 *
-	 * @param	string		character(s) used to separate the price from the currency
+	 * @param	string		character(s) used to separate the price from the
+	 * 						currency
 	 *
-	 * @return	string		the total price and the currency or an empty string if no total price could be calculated
+	 * @return	string		the total price and the currency or an empty string
+	 * 						if no total price could be calculated
 	 *
 	 * @access	public
 	 */
@@ -639,27 +666,40 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Send an e-mail to the attendee, thanking him/her for registering for an event.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 * @param	object		a tx_seminars_templatehelper object (for a live
+	 * 						page, must not be null)
 	 *
 	 * @access	public
 	 */
 	function notifyAttendee(&$plugin) {
 		$this->initializeTemplate();
-		$this->readSubpartsToHide($this->getConfValueString('hideFieldsInThankYouMail'), 'field_wrapper');
+		$this->readSubpartsToHide(
+			$this->getConfValueString('hideFieldsInThankYouMail'),
+			'field_wrapper'
+		);
 
-		$this->setMarkerContent('hello', sprintf($this->pi_getLL('email_confirmationHello'), $this->getUserName()));
+		$this->setMarkerContent('hello', sprintf(
+			$this->pi_getLL('email_confirmationHello'),
+			$this->getUserName())
+		);
 		$this->setMarkerContent('event_type', $this->seminar->getEventType());
 		$this->setMarkerContent('title', $this->seminar->getTitle());
 		$this->setMarkerContent('uid', $this->seminar->getUid());
 
 		if ($this->hasRecordPropertyInteger('seats')) {
-			$this->setMarkerContent('seats', $this->getRecordPropertyInteger('seats'));
+			$this->setMarkerContent(
+				'seats',
+				$this->getRecordPropertyInteger('seats')
+			);
 		} else {
 			$this->readSubpartsToHide('seats', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyString('attendees_names')) {
-			$this->setMarkerContent('attendees_names', $this->getRecordPropertyString('attendees_names'));
+			$this->setMarkerContent(
+				'attendees_names',
+				$this->getRecordPropertyString('attendees_names')
+			);
 		} else {
 			$this->readSubpartsToHide('attendees_names', 'field_wrapper');
 		}
@@ -683,19 +723,28 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		if ($this->hasRecordPropertyInteger('kids')) {
-			$this->setMarkerContent('kids', $this->getRecordPropertyInteger('kids'));
+			$this->setMarkerContent(
+				'kids',
+				$this->getRecordPropertyInteger('kids')
+			);
 		} else {
 			$this->readSubpartsToHide('kids', 'field_wrapper');
 		}
 
 		if ($this->seminar->hasAccreditationNumber()) {
-			$this->setMarkerContent('accreditation_number', $this->seminar->getAccreditationNumber());
+			$this->setMarkerContent(
+				'accreditation_number',
+				$this->seminar->getAccreditationNumber()
+			);
 		} else {
 			$this->readSubpartsToHide('accreditation_number', 'field_wrapper');
 		}
 
 		if ($this->seminar->hasCreditPoints()) {
-			$this->setMarkerContent('credit_points', $this->seminar->getCreditPoints());
+			$this->setMarkerContent(
+				'credit_points',
+				$this->seminar->getCreditPoints()
+			);
 		} else {
 			$this->readSubpartsToHide('credit_points', 'field_wrapper');
 		}
@@ -747,7 +796,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->setMarkerContent('billing_address', $this->getBillingAddress());
 
-		$this->setMarkerContent('url', $this->seminar->getDetailedViewUrl($plugin));
+		$this->setMarkerContent(
+			'url',
+			$this->seminar->getDetailedViewUrl($plugin)
+		);
 
 		$footers = $this->seminar->getOrganizersFooter();
 		$this->setMarkerContent('footer', $footers[0]);
@@ -760,7 +812,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// "John Doe <john.doe@example.com>".
 		t3lib_div::plainMailEncoded(
 			$this->getUserEmail(),
-			$this->pi_getLL('email_confirmationSubject').': '.$this->seminar->getTitleAndDate('-'),
+			$this->pi_getLL('email_confirmationSubject').': '
+				.$this->seminar->getTitleAndDate('-'),
 			$content,
 			// We just use the first organizer as sender
 			'From: '.$froms[0],
@@ -780,25 +833,50 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	function notifyOrganizers(&$plugin) {
 		$this->initializeTemplate();
-		$this->readSubpartsToHide($this->getConfValueString('hideGeneralFieldsInNotificationMail'), 'field_wrapper');
+		$this->readSubpartsToHide(
+			$this->getConfValueString('hideGeneralFieldsInNotificationMail'),
+			'field_wrapper'
+		);
 
-		$this->setMarkerContent('hello', $this->pi_getLL('email_notificationHello'));
+		$this->setMarkerContent(
+			'hello',
+			$this->pi_getLL('email_notificationHello')
+		);
 		$this->setMarkerContent('summary', $this->getTitle());
 
 		if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
-			$this->setMarkerContent('seminardata', $this->seminar->dumpSeminarValues($this->getConfValueString('showSeminarFieldsInNotificationMail')));
+			$this->setMarkerContent(
+				'seminardata',
+				$this->seminar->dumpSeminarValues(
+					$this->getConfValueString(
+						'showSeminarFieldsInNotificationMail'
+					)
+				)
+			);
 		} else {
 			$this->readSubpartsToHide('seminardata', 'field_wrapper');
 		}
 
 		if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
-			$this->setMarkerContent('feuserdata', $this->dumpUserValues($this->getConfValueString('showFeUserFieldsInNotificationMail')));
+			$this->setMarkerContent(
+				'feuserdata',
+				$this->dumpUserValues(
+					$this->getConfValueString('showFeUserFieldsInNotificationMail')
+				)
+			);
 		} else {
 			$this->readSubpartsToHide('feuserdata', 'field_wrapper');
 		}
 
 		if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
-			$this->setMarkerContent('attendancedata', $this->dumpAttendanceValues($this->getConfValueString('showAttendanceFieldsInNotificationMail')));
+			$this->setMarkerContent(
+				'attendancedata',
+				$this->dumpAttendanceValues(
+					$this->getConfValueString(
+						'showAttendanceFieldsInNotificationMail'
+					)
+				)
+			);
 		} else {
 			$this->readSubpartsToHide('attendancedata', 'field_wrapper');
 		}
@@ -812,7 +890,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		foreach ($organizers as $currentOrganizerEmail) {
 			t3lib_div::plainMailEncoded(
 				$currentOrganizerEmail,
-				$this->pi_getLL('email_notificationSubject').': '.$this->getTitle(),
+				$this->pi_getLL('email_notificationSubject').': '
+					.$this->getTitle(),
 				$content,
 				// We use the attendee's e-mail as sender.
 				'From: '.$this->getUserNameAndEmail(),
@@ -825,14 +904,17 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checks if additional notifications to the organizers are necessary. In that case, the notification e-mails will be sent to all organizers.
+	 * Checks if additional notifications to the organizers are necessary.
+	 * In that case, the notification e-mails will be sent to all organizers.
 	 *
 	 * Additional notifications mails will be sent out upon the following events:
 	 * - an event now has enough registrations
 	 * - an event is fully booked
-	 * If both things happen at the same time (minimum and maximum count of attendees are the same), only the "event is full" message will be sent.
+	 * If both things happen at the same time (minimum and maximum count of
+	 * attendees are the same), only the "event is full" message will be sent.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 * @param	object		a tx_seminars_templatehelper object (for a live
+	 * 						page, must not be null)
 	 *
 	 * @access	public
 	 */
@@ -854,15 +936,26 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if (!empty($whichEmailToSend)) {
 			$this->setMarkerContent('message', $this->pi_getLL($whichEmailToSend));
 
-			$showSeminarFields = $this->getConfValueString('showSeminarFieldsInNotificationMail');
+			$showSeminarFields = $this->getConfValueString(
+				'showSeminarFieldsInNotificationMail'
+			);
 			if (!empty($showSeminarFields)) {
-				$this->setMarkerContent('seminardata', $this->seminar->dumpSeminarValues($showSeminarFields));
+				$this->setMarkerContent(
+					'seminardata',
+					$this->seminar->dumpSeminarValues($showSeminarFields)
+				);
 			} else {
 				$this->readSubpartsToHide('seminardata', 'field_wrapper');
 			}
 
-			$content = $this->substituteMarkerArrayCached('MAIL_ADDITIONALNOTIFICATION');
-			$subject = sprintf($this->pi_getLL($whichEmailSubject), $this->seminar->getUid(), $this->seminar->getTitleAndDate('-'));
+			$content = $this->substituteMarkerArrayCached(
+				'MAIL_ADDITIONALNOTIFICATION'
+			);
+			$subject = sprintf(
+				$this->pi_getLL($whichEmailSubject),
+				$this->seminar->getUid(),
+				$this->seminar->getTitleAndDate('-')
+			);
 
 			// We use just the organizer's e-mail address as e-mail recipient
 			// as some SMTP servers cannot handle the format
@@ -949,8 +1042,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets a plain text list of attendance (registration) property values (if they exist),
-	 * formatted as strings (and nicely lined up) in the following format:
+	 * Gets a plain text list of attendance (registration) property values
+	 * (if they exist), formatted as strings (and nicely lined up) in the
+	 * following format:
 	 *
 	 * key1: value1
 	 *
@@ -1215,7 +1309,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 			// update the reference index
 			$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
-			$referenceIndex->updateRefIndexTable($this->tableAttendances, $this->getUid());
+			$referenceIndex->updateRefIndexTable(
+				$this->tableAttendances,
+				$this->getUid()
+			);
 		}
 
 		return $result;

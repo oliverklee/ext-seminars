@@ -58,14 +58,23 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSeminars is provided.
 		$this->init();
-		parent::tx_seminars_bag($this->tableSeminars, $queryParameters, $additionalTableNames, $groupBy, $orderBy, $limit, $showHiddenRecords);
+		parent::tx_seminars_bag(
+			$this->tableSeminars,
+			$queryParameters,
+			$additionalTableNames,
+			$groupBy,
+			$orderBy,
+			$limit,
+			$showHiddenRecords
+		);
 
 		return;
 	}
 
 	/**
-	 * Creates the current item in $this->currentItem, using $this->dbResult as a source.
-	 * If the current item cannot be created, $this->currentItem will be nulled out.
+	 * Creates the current item in $this->currentItem, using $this->dbResult
+	 * as a source. If the current item cannot be created, $this->currentItem
+	 * will be nulled out.
 	 *
 	 * $this->dbResult must be ensured to be non-null when this function is called.
 	 *

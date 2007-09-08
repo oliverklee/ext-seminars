@@ -58,7 +58,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 		}
 
 		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult($GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult));
+			$this->getDataFromDbResult(
+				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
+			);
 		}
 
 		return;
@@ -96,7 +98,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getDescription(&$plugin) {
-		return $plugin->pi_RTEcssText($this->getRecordPropertyString('description'));
+		return $plugin->pi_RTEcssText(
+			$this->getRecordPropertyString('description')
+		);
 	}
 
 	/**

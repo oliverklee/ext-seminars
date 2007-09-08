@@ -80,7 +80,8 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			// registrations are possible and the user is already registered).
 			$result = false;
 		} else {
-			// it is not possible to register for this seminar at all (it is canceled, full, etc.)
+			// it is not possible to register for this seminar at all
+			// (it is canceled, full, etc.)
 			$result = $seminar->canSomebodyRegister();
 		}
 
@@ -148,15 +149,19 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Creates an HTML link to either the registration page (if a user is logged in)
-	 * or the login page (if no user is logged in).
+	 * Creates an HTML link to either the registration page (if a user is
+	 * logged in) or the login page (if no user is logged in).
 	 *
-	 * Before you can call this function, you should make sure that the link makes sense
-	 * (ie. the seminar still has vacancies, the user hasn't registered for this seminar etc.).
+	 * Before you can call this function, you should make sure that the link
+	 * makes sense (ie. the seminar still has vacancies, the user hasn't
+	 * registered for this seminar etc.).
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page) which we can call pi_linkTP() on (must not be null)
+	 * @param	object		a tx_seminars_templatehelper object (for a live page)
+	 * 						which we can call pi_linkTP() on (must not be null)
 	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register (may be null), if this is null, the seminar UID parameter will be disregarded
+	 * @param	object		a seminar for which we'll check if it is possible
+	 * 						to register (may be null), if this is null, the
+	 * 						seminar UID parameter will be disregarded
 	 *
 	 * @return	string		HTML code with the link
 	 *
@@ -197,7 +202,10 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	function existsSeminar($seminarUid) {
 		// We can't use t3lib_div::makeInstanceClassName in this case as we
 		// cannot use a class function when using a variable as class name.
-		return tx_seminars_objectfromdb::recordExists($seminarUid, $this->tableSeminars);
+		return tx_seminars_objectfromdb::recordExists(
+			$seminarUid,
+			$this->tableSeminars
+		);
 	}
 
 	/**
@@ -216,7 +224,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		/** This is empty as long as no error has occured. */
 		$message = '';
 
-		if (!tx_seminars_objectfromdb::recordExists($seminarUid, $this->tableSeminars)) {
+		if (!tx_seminars_objectfromdb::recordExists(
+				$seminarUid,
+				$this->tableSeminars
+			)
+		) {
 			$message = $this->pi_getLL('message_wrongSeminarNumber');
 			header('Status: 404 Not Found');
 		}
@@ -365,9 +377,15 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$seats = 1;
 		}
 
-		$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
+		$registrationClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registration'
+		);
 		$this->registration =& new $registrationClassname($plugin->cObj);
-		$this->registration->setRegistrationData($seminar, $this->getFeUserUid(), $registrationData);
+		$this->registration->setRegistrationData(
+			$seminar,
+			$this->getFeUserUid(),
+			$registrationData
+		);
 		$this->registration->commitToDb();
 
 		$seminar->calculateStatistics();

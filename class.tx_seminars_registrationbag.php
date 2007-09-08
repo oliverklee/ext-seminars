@@ -59,22 +59,35 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableAttendances is provided.
 		$this->init();
-		parent::tx_seminars_bag($this->tableAttendances, $queryParameters, $additionalTableNames, $groupBy, $orderBy, $limit);
+		parent::tx_seminars_bag(
+			$this->tableAttendances,
+			$queryParameters,
+			$additionalTableNames,
+			$groupBy,
+			$orderBy,
+			$limit
+		);
 
 		return;
 	}
 
 	/**
-	 * Creates the current item in $this->currentItem, using $this->dbResult as a source.
-	 * If the current item cannot be created, $this->currentItem will be nulled out.
+	 * Creates the current item in $this->currentItem, using $this->dbResult
+	 * as a source. If the current item cannot be created, $this->currentItem
+	 * will be nulled out.
 	 *
 	 * $this->dbResult is ensured to be non-null when this function is called.
 	 *
 	 * @access	protected
 	 */
 	function createItemFromDbResult() {
-		$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-		$this->currentItem =& new $registrationClassname($this->cObj, $this->dbResult);
+		$registrationClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registration'
+		);
+		$this->currentItem =& new $registrationClassname(
+			$this->cObj,
+			$this->dbResult
+		);
 		$this->checkCurrentItem();
 
 		return;

@@ -127,8 +127,14 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 			$beginDate = $this->getBeginDateAsTimestamp();
 			$endDate = $this->getEndDateAsTimestamp();
 
-			$beginDateDay = strftime($this->getConfValueString('dateFormatYMD'), $beginDate);
-			$endDateDay = strftime($this->getConfValueString('dateFormatYMD'), $endDate);
+			$beginDateDay = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$beginDate
+			);
+			$endDateDay = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$endDate
+			);
 
 			// Does the workshop span only one day (or is open-ended)?
 			if (($beginDateDay == $endDateDay) || !$this->hasEndDate()) {
@@ -138,14 +144,32 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 					$result = $beginDateDay;
 				} else {
 					// Are the years different? Then include the complete begin date.
-					if (strftime($this->getConfValueString('dateFormatY'), $beginDate) !== strftime($this->getConfValueString('dateFormatY'), $endDate)) {
+					if (strftime(
+							$this->getConfValueString('dateFormatY'),
+							$beginDate
+						) !== strftime(
+							$this->getConfValueString('dateFormatY'),
+							$endDate)
+					) {
 						$result = $beginDateDay;
 					} else {
 						// Are the months different? Then include day and month.
-						if (strftime($this->getConfValueString('dateFormatM'), $beginDate) !== strftime($this->getConfValueString('dateFormatM'), $endDate)) {
-							$result = strftime($this->getConfValueString('dateFormatMD'), $beginDate);
+						if (strftime(
+								$this->getConfValueString('dateFormatM'),
+								$beginDate
+							) !== strftime(
+								$this->getConfValueString('dateFormatM'),
+								$endDate)
+						) {
+							$result = strftime(
+								$this->getConfValueString('dateFormatMD'),
+								$beginDate
+							);
 						} else {
-							$result = strftime($this->getConfValueString('dateFormatD'), $beginDate);
+							$result = strftime(
+								$this->getConfValueString('dateFormatD'),
+								$beginDate
+							);
 						}
 					}
 				}
@@ -175,7 +199,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * (i.e. both begin time and end time are 00:00).
 	 * Returns only the begin time if begin time and end time are the same.
 	 *
-	 * @param	string		the character or HTML entity used to separate begin time and end time
+	 * @param	string		the character or HTML entity used to separate begin
+	 * 						time and end time
 	 *
 	 * @return	string		the time
 	 *
@@ -237,7 +262,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/**
 	 * Returns our begin date and time as a UNIX timestamp.
 	 *
-	 * @return	integer		our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
+	 * @return	integer		our begin date and time as a UNIX timestamp or 0 if
+	 * 						we don't have a begin date
 	 *
 	 * @access	protected
 	 */
@@ -248,7 +274,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/**
 	 * Returns our end date and time as a UNIX timestamp.
 	 *
-	 * @return	integer		our end date and time as a UNIX timestamp or 0 if we don't have an end date
+	 * @return	integer		our end date and time as a UNIX timestamp or 0 if
+	 * 						we don't have an end date
 	 *
 	 * @access	protected
 	 */
@@ -261,7 +288,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * open-ended, midnight after the begin date and time is returned.
 	 * If we don't even have a begin date, 0 is returned.
 	 *
-	 * @return	integer		our end date and time as a UNIX timestamp, 0 if we don't have a begin date
+	 * @return	integer		our end date and time as a UNIX timestamp, 0 if
+	 * 						we don't have a begin date
 	 *
 	 * @access	protected
 	 */
