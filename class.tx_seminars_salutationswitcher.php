@@ -37,47 +37,154 @@ if (!defined('PATH_tslib')) {
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
 class tx_seminars_salutationswitcher extends tslib_pibase {
-	/** list of allowed suffixes */
-	var $allowedSuffixes = array('formal', 'informal');
+	/**
+	  * Pointer to alternative fall-back language to use. This is non-empty so
+	  * we always have a valid fallback language even if it hasn't been
+	  * explicitely set.
+	  */
+	var $altLLkey = 'default';
+
+	/**
+	 * A list of language keys for which the localizations have been loaded
+	 * (or null if the list has not been compiled yet).
+	 */
+	var $availableLanguages = null;
+
+	/**
+	 * An ordered list of language label suffixes that should be tried to get
+	 * localizations in the preferred order of formality (or null if the list
+	 * has not been compiled yet).
+	 */
+	var $suffixesToTry = null;
 
 	/**
 	 * Returns the localized label of the LOCAL_LANG key, $key
-	 * In $this->conf['salutation'], a suffix to the key may be set (which may be either 'formal' or 'informal').
-	 * If a corresponding key exists, the formal/informal localized string is used instead.
+	 * In $this->conf['salutation'], a suffix to the key may be set (which may
+	 * be either 'formal' or 'informal'). If a corresponding key exists, the
+	 * formal/informal localized string is used instead.
 	 * If the key doesn't exist, we just use the normal string.
 	 *
-	 * Example: key = 'greeting', suffix = 'informal'. If the key 'greeting_informal' exists, that string is used.
+	 * Example: key = 'greeting', suffix = 'informal'. If the key
+	 * 'greeting_informal' exists, that string is used.
 	 * If it doesn't exist, we'll try to use the string with the key 'greeting'.
 	 *
-	 * Notice that for debugging purposes prefixes for the output values can be set with the internal vars ->LLtestPrefixAlt and ->LLtestPrefix
-	 *
 	 * @param	string		the key from the LOCAL_LANG array for which to return the value
-	 * @param	string		alternative string to return if no value is found set for the key, neither for the local language nor the default
-	 * @param	boolean		If true, the output label is passed through htmlspecialchars()
+	 * @param	string		(unused, for legacy purposes)
+	 * @param	boolean		whether the output label should be passed through htmlspecialchars()
 	 *
 	 * @return	string		the value from LOCAL_LANG
+	 *
+	 * @deprecated	2007-08-22	Use translate instead.
 	 */
-	function pi_getLL($key, $alt = '', $hsc = FALSE) {
-		if (isset($this->conf['salutation']) && in_array($this->conf['salutation'], $this->allowedSuffixes, 1)) {
-			// If the suffix is allowed, we'll take that.
-			$salutation = $this->conf['salutation'];
-		} else {
-			// If there is no valid salutation mode given, use the default (formal).
-			$salutation = 'formal';
-		}
-		// Rewrite the language key to 'default' if it is 'en'. Otherwise, it will not work if language = English.
-		if ($this->LLkey == 'en') {
-			$internal_LL_key = 'default';
-		} else	{
-			$internal_LL_key = $this->LLkey;
+	function pi_getLL($key, $unused = '', $useHtmlSpecialChars = false) {
+		return $this->translate($key, $useHtmlSpecialChars);
+	}
+
+	/**
+	 * Returns the localized label of the LOCAL_LANG key, $key
+	 * In $this->conf['salutation'], a suffix to the key may be set (which may
+	 * be either 'formal' or 'informal'). If a corresponding key exists, the
+	 * formal/informal localized string is used instead.
+	 * If the formal/informal key doesn't exist, we just use the normal string.
+	 *
+	 * Example: key = 'greeting', suffix = 'informal'. If the key
+	 * 'greeting_informal' exists, that string is used.
+	 * If it doesn't exist, we'll try to use the string with the key 'greeting'.
+	 *
+	 * @param	string		the key from the LOCAL_LANG array for which to return the value
+	 * @param	boolean		whether the output label should be passed through htmlspecialchars()
+	 *
+	 * @return	string		the value from LOCAL_LANG
+	 *
+	 * @access	public
+	 */
+	function translate($key, $useHtmlSpecialChars = false) {
+		$hasFoundATranslation = false;
+
+		$availableLanguages = $this->getAvailableLanguages();
+		$suffixesToTry = $this->getSuffixesToTry();
+
+		foreach ($availableLanguages as $language) {
+			foreach ($suffixesToTry as $suffix) {
+				$completeKey = $key.$suffix;
+				if (isset($this->LOCAL_LANG[$language][$completeKey])) {
+					$result = parent::pi_getLL($completeKey);
+					$hasFoundATranslation = true;
+					break 2;
+				}
+			}
 		}
 
-		$expandedKey = $key.'_'.$salutation;
-		if (isset($this->LOCAL_LANG[$internal_LL_key][$expandedKey])) {
-			$key = $expandedKey;
+		// If still nothing has been found, just return the key.
+		if (!$hasFoundATranslation) {
+			$result = $key;
 		}
 
-		return parent::pi_getLL($key, $alt, $hsc);
+		if ($useHtmlSpecialChars) {
+			$result = htmlspecialchars($result);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Compiles a list of language keys for which localizations have been loaded.
+	 *
+	 * @return	array		a list of language keys (may be empty)
+	 *
+	 * @access	private
+	 */
+	function getAvailableLanguages() {
+		if ($this->availableLanguages === null) {
+			$this->availableLanguages = array();
+
+			if (!empty($this->LLkey)) {
+				$this->availableLanguages[] = $this->LLkey;
+			}
+			if (!empty($this->altLLkey)) {
+				$this->availableLanguages[] = $this->altLLkey;
+			}
+			// The key for English is "default", not "en".
+			$this->availableLanguages = preg_replace(
+				'/en/', 'default', $this->availableLanguages
+			);
+			// Remove duplicates in case the default language is the same as the
+			// fall-back language.
+			$this->availableLanguages = array_unique($this->availableLanguages);
+
+			// Now check that we only keep languages for which we have
+			// translations.
+			foreach ($this->availableLanguages as $index => $code) {
+				if (!isset($this->LOCAL_LANG[$code])) {
+					unset($this->availableLanguages[$index]);
+				}
+			}
+		}
+
+		return $this->availableLanguages;
+	}
+
+	/**
+	 * Gets an ordered list of language label suffixes that should be tried to
+	 * get localizations in the preferred order of formality.
+	 *
+	 * @return	array		ordered list of suffixes from "", "_formal" and "_informal", will not be empty
+	 *
+	 * @access	private
+	 */
+	function getSuffixesToTry() {
+		if ($this->suffixesToTry === null) {
+			$this->suffixesToTry = array();
+
+			if (isset($this->conf['salutation'])
+				&& ($this->conf['salutation'] == 'informal')) {
+				$this->suffixesToTry[] = '_informal';
+			}
+			$this->suffixesToTry[] = '_formal';
+			$this->suffixesToTry[] = '';
+		}
+
+		return $this->suffixesToTry;
 	}
 }
 
