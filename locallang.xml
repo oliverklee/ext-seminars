@@ -270,14 +270,6 @@ vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
 
 jemand hat sich gerade für eine Veranstaltung angemeldet:</label>
 		</languageKey>
-		<languageKey index="no" type="array">
-		</languageKey>
-		<languageKey index="it" type="array">
-		</languageKey>
-		<languageKey index="fr" type="array">
-		</languageKey>
-		<languageKey index="es" type="array">
-		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Accrediteringsnummer</label>
@@ -352,20 +344,6 @@ Bedankt voor je aanmelding voor dit evenement:</label>
 
 iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 		</languageKey>
-		<languageKey index="cz" type="array">
-		</languageKey>
-		<languageKey index="pl" type="array">
-		</languageKey>
-		<languageKey index="si" type="array">
-		</languageKey>
-		<languageKey index="fi" type="array">
-		</languageKey>
-		<languageKey index="tr" type="array">
-		</languageKey>
-		<languageKey index="se" type="array">
-		</languageKey>
-		<languageKey index="pt" type="array">
-		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="label_uid">Номер</label>
 			<label index="label_accreditation_number">Номер аккредитации</label>
@@ -434,54 +412,6 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="email_notificationHello">Здравствуйте,
 
 кто-то только что зарегистрировался:</label>
-		</languageKey>
-		<languageKey index="ro" type="array">
-		</languageKey>
-		<languageKey index="ch" type="array">
-		</languageKey>
-		<languageKey index="sk" type="array">
-		</languageKey>
-		<languageKey index="lt" type="array">
-		</languageKey>
-		<languageKey index="is" type="array">
-		</languageKey>
-		<languageKey index="hr" type="array">
-		</languageKey>
-		<languageKey index="hu" type="array">
-		</languageKey>
-		<languageKey index="gl" type="array">
-		</languageKey>
-		<languageKey index="th" type="array">
-		</languageKey>
-		<languageKey index="gr" type="array">
-		</languageKey>
-		<languageKey index="hk" type="array">
-		</languageKey>
-		<languageKey index="eu" type="array">
-		</languageKey>
-		<languageKey index="bg" type="array">
-		</languageKey>
-		<languageKey index="br" type="array">
-		</languageKey>
-		<languageKey index="et" type="array">
-		</languageKey>
-		<languageKey index="ar" type="array">
-		</languageKey>
-		<languageKey index="he" type="array">
-		</languageKey>
-		<languageKey index="ua" type="array">
-		</languageKey>
-		<languageKey index="lv" type="array">
-		</languageKey>
-		<languageKey index="jp" type="array">
-		</languageKey>
-		<languageKey index="vn" type="array">
-		</languageKey>
-		<languageKey index="ca" type="array">
-		</languageKey>
-		<languageKey index="ba" type="array">
-		</languageKey>
-		<languageKey index="kr" type="array">
 		</languageKey>
 	</data>
 	<orig_hash type="array">
@@ -646,14 +576,6 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="label_notes" type="integer">256667525</label>
 			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 		</languageKey>
-		<languageKey index="no" type="array">
-		</languageKey>
-		<languageKey index="it" type="array">
-		</languageKey>
-		<languageKey index="fr" type="array">
-		</languageKey>
-		<languageKey index="es" type="array">
-		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
@@ -723,20 +645,6 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="email_additionalNotificationIsFull" type="integer">125053794</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
 		</languageKey>
-		<languageKey index="cz" type="array">
-		</languageKey>
-		<languageKey index="pl" type="array">
-		</languageKey>
-		<languageKey index="si" type="array">
-		</languageKey>
-		<languageKey index="fi" type="array">
-		</languageKey>
-		<languageKey index="tr" type="array">
-		</languageKey>
-		<languageKey index="se" type="array">
-		</languageKey>
-		<languageKey index="pt" type="array">
-		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
@@ -799,54 +707,6 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
-		</languageKey>
-		<languageKey index="ro" type="array">
-		</languageKey>
-		<languageKey index="ch" type="array">
-		</languageKey>
-		<languageKey index="sk" type="array">
-		</languageKey>
-		<languageKey index="lt" type="array">
-		</languageKey>
-		<languageKey index="is" type="array">
-		</languageKey>
-		<languageKey index="hr" type="array">
-		</languageKey>
-		<languageKey index="hu" type="array">
-		</languageKey>
-		<languageKey index="gl" type="array">
-		</languageKey>
-		<languageKey index="th" type="array">
-		</languageKey>
-		<languageKey index="gr" type="array">
-		</languageKey>
-		<languageKey index="hk" type="array">
-		</languageKey>
-		<languageKey index="eu" type="array">
-		</languageKey>
-		<languageKey index="bg" type="array">
-		</languageKey>
-		<languageKey index="br" type="array">
-		</languageKey>
-		<languageKey index="et" type="array">
-		</languageKey>
-		<languageKey index="ar" type="array">
-		</languageKey>
-		<languageKey index="he" type="array">
-		</languageKey>
-		<languageKey index="ua" type="array">
-		</languageKey>
-		<languageKey index="lv" type="array">
-		</languageKey>
-		<languageKey index="jp" type="array">
-		</languageKey>
-		<languageKey index="vn" type="array">
-		</languageKey>
-		<languageKey index="ca" type="array">
-		</languageKey>
-		<languageKey index="ba" type="array">
-		</languageKey>
-		<languageKey index="kr" type="array">
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">

@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#210] Change: Cleaned up the locallang*.xml files
 - [#212] Fix: Fallback to default language doesn't work consistently
 - [#1222] Fix: In the template helper class, provide default values for templateCode and markerNames
 - [#1108] Fix: Number of seats in the "my events" view is incorrect for multi-registration events
