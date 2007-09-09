@@ -19,7 +19,7 @@ t3lib_div::loadTCA('tt_content');
 $tempColumns = array(
 	'tx_seminars_phone_mobile' => array(
 		'exclude' => 0,
-		'label' => 'LLL:EXT:seminars/locallang_db.php:fe_users.tx_seminars_phone_mobile',
+		'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_users.tx_seminars_phone_mobile',
 		'config' => array(
 			'type' => 'input',
 			'size' => '30',
@@ -28,7 +28,7 @@ $tempColumns = array(
 	),
 	'tx_seminars_matriculation_number' => array(
 		'exclude' => 0,
-		'label' => 'LLL:EXT:seminars/locallang_db.php:fe_users.tx_seminars_matriculation_number',
+		'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_users.tx_seminars_matriculation_number',
 		'config' => array(
 			'type' => 'input',
 			'size' => '10',
@@ -44,7 +44,7 @@ $tempColumns = array(
 	),
 	'tx_seminars_planned_degree' => array(
 		'exclude' => 0,
-		'label' => 'LLL:EXT:seminars/locallang_db.php:fe_users.tx_seminars_planned_degree',
+		'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_users.tx_seminars_planned_degree',
 		'config' => array(
 			'type' => 'input',
 			'size' => '30',
@@ -53,7 +53,7 @@ $tempColumns = array(
 	),
 	'tx_seminars_semester' => array(
 		'exclude' => 0,
-		'label' => 'LLL:EXT:seminars/locallang_db.php:fe_users.tx_seminars_semester',
+		'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_users.tx_seminars_semester',
 		'config' => array(
 			'type' => 'input',
 			'size' => '3',
@@ -69,7 +69,7 @@ $tempColumns = array(
 	),
 	'tx_seminars_subject' => array(
 		'exclude' => 0,
-		'label' => 'LLL:EXT:seminars/locallang_db.php:fe_users.tx_seminars_subject',
+		'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_users.tx_seminars_subject',
 		'config' => array(
 			'type' => 'input',
 			'size' => '30',
@@ -80,7 +80,7 @@ $tempColumns = array(
 
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_seminars',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars',
 		'label' => 'title',
 		'type' => 'object_type',
 		'tstamp' => 'tstamp',
@@ -116,7 +116,7 @@ if ($globalConfiguration['useManualSorting']) {
 
 $TCA['tx_seminars_speakers'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_speakers',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -130,7 +130,7 @@ $TCA['tx_seminars_speakers'] = array(
 
 $TCA['tx_seminars_attendances'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -144,7 +144,7 @@ $TCA['tx_seminars_attendances'] = array(
 
 $TCA['tx_seminars_sites'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_sites',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -158,7 +158,7 @@ $TCA['tx_seminars_sites'] = array(
 
 $TCA['tx_seminars_organizers'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_organizers',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_organizers',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -172,7 +172,7 @@ $TCA['tx_seminars_organizers'] = array(
 
 $TCA['tx_seminars_payment_methods'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_payment_methods',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_payment_methods',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -186,7 +186,7 @@ $TCA['tx_seminars_payment_methods'] = array(
 
 $TCA['tx_seminars_event_types'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_event_types',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_event_types',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -200,7 +200,7 @@ $TCA['tx_seminars_event_types'] = array(
 
 $TCA['tx_seminars_checkboxes'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_checkboxes',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_checkboxes',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -214,7 +214,7 @@ $TCA['tx_seminars_checkboxes'] = array(
 
 $TCA['tx_seminars_lodgings'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_lodgings',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_lodgings',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -228,7 +228,7 @@ $TCA['tx_seminars_lodgings'] = array(
 
 $TCA['tx_seminars_foods'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_foods',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_foods',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -242,7 +242,7 @@ $TCA['tx_seminars_foods'] = array(
 
 $TCA['tx_seminars_timeslots'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_timeslots',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_timeslots',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -255,7 +255,7 @@ $TCA['tx_seminars_timeslots'] = array(
 
 $TCA['tx_seminars_target_groups'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.php:tx_seminars_target_groups',
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -281,6 +281,6 @@ t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:seminars/flexform_pi
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'static/', 'Seminars');
 
-t3lib_extMgm::addPlugin(Array('LLL:EXT:seminars/locallang_db.php:tt_content.list_type_pi1', $_EXTKEY.'_pi1'), 'list_type');
+t3lib_extMgm::addPlugin(Array('LLL:EXT:seminars/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY.'_pi1'), 'list_type');
 
 ?>

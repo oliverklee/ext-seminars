@@ -234,7 +234,7 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 	function getCsvIcon() {
 		global $BACK_PATH, $LANG;
 
-		$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.csv', 1);
+		$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
 		$result = TAB.TAB
 			.'<div id="typo3-csvLink">'.LF
 			.TAB.TAB.TAB

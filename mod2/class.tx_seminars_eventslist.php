@@ -368,7 +368,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 
 		if ($this->seminar->hasAttendances()
 			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
-			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.csv', 1);
+			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
 			$result = '<a href="class.tx_seminars_csv.php?id='
 				.$this->page->pageInfo['uid']
 				.'&amp;tx_seminars_pi2[table]='.$this->tableAttendances
