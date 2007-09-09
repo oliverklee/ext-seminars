@@ -83,7 +83,9 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		parent::menuConfig();
 	}
 
-	// If you chose 'web' as main module, you will need to consider the $this->id parameter which will contain the uid-number of the page clicked in the page tree
+	// If you chose 'web' as main module, you will need to consider the
+	// $this->id parameter which will contain the uid-number of the page
+	// clicked in the page tree
 	/**
 	 * Main function of the module. Writes the content to $this->content
 	 *
@@ -99,8 +101,12 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$this->tableUsers = 'fe_users';
 
 		// Access check!
-		// The page will show only if there is a valid page and if this page may be viewed by the user
-		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+		// The page will show only if there is a valid page and if this page
+		//may be viewed by the user
+		$this->pageinfo = t3lib_BEfunc::readPageAccess(
+			$this->id,
+			$this->perms_clause
+		);
 		$access = is_array($this->pageinfo) ? 1 : 0;
 
 		$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
@@ -135,16 +141,35 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			$this->doc->postCode='
 				<script language="javascript" type="text/javascript">
 					script_ended = 1;
-					if (top.fsMod) top.fsMod.recentIds["web"] = '.intval($this->id).';
+					if (top.fsMod) top.fsMod.recentIds["web"] = '
+					.intval($this->id).';
 				</script>
 			';
 
-			$headerSection = $this->doc->getHeader('pages',$this->pageinfo,$this->pageinfo['_thePath']).'<br>'.$LANG->sL('LLL:EXT:lang/locallang_core.php:labels.path').': '.t3lib_div::fixed_lgd_pre($this->pageinfo['_thePath'],50);
+			$headerSection = $this->doc->getHeader(
+				'pages',
+				$this->pageinfo,
+				$this->pageinfo['_thePath'])
+					.'<br>'
+					.$LANG->sL('LLL:EXT:lang/locallang_core.php:labels.path')
+					.': '
+					.t3lib_div::fixed_lgd_pre($this->pageinfo['_thePath'],50);
 
 			$this->content.=$this->doc->startPage($LANG->getLL('title'));
 			$this->content.=$this->doc->header($LANG->getLL('title'));
 			$this->content.=$this->doc->spacer(5);
-			$this->content.=$this->doc->section('',$this->doc->funcMenu($headerSection,t3lib_BEfunc::getFuncMenu($this->id,'SET[function]',$this->MOD_SETTINGS['function'],$this->MOD_MENU['function'])));
+			$this->content.=$this->doc->section(
+				'',
+				$this->doc->funcMenu(
+					$headerSection,
+					t3lib_BEfunc::getFuncMenu(
+						$this->id,
+						'SET[function]',
+						$this->MOD_SETTINGS['function'],
+						$this->MOD_MENU['function']
+					)
+				)
+			);
 			$this->content.=$this->doc->divider(5);
 
 			// Render content:
@@ -152,7 +177,15 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 			// ShortCut
 			if ($BE_USER->mayMakeShortcut()) {
-				$this->content.=$this->doc->spacer(20).$this->doc->section('',$this->doc->makeShortcutIcon('id',implode(',',array_keys($this->MOD_MENU)),$this->MCONF['name']));
+				$this->content.=$this->doc->spacer(20)
+				.$this->doc->section(
+					'',
+					$this->doc->makeShortcutIcon(
+						'id',
+						implode(',',array_keys($this->MOD_MENU)),
+						$this->MCONF['name']
+					)
+				);
 			}
 
 			$this->content.=$this->doc->spacer(10);
@@ -192,7 +225,12 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		switch ((string)$this->MOD_SETTINGS['function']) {
 			case 'seminarDetails':
 				$content = $this->listSeminarDetails();
-				$this->content.=$this->doc->section($LANG->getLL('menu_seminarDetails'),$content,0,1);
+				$this->content.=$this->doc->section(
+					$LANG->getLL('menu_seminarDetails'),
+					$content,
+					0,
+					1
+				);
 				break;
 			default:
 				// Do nothing.
@@ -215,18 +253,34 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		$result = '';
 
-		$result .= '<h3>'.$LANG->getLL('title_getEmailAddressesForAttendances').'</h3>';
+		$result .= '<h3>'
+			.$LANG->getLL('title_getEmailAddressesForAttendances').'</h3>';
 
-		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
-		$seminarBag =& new $seminarBagClassname('pid='.intval($this->id), '', '', $tableSeminars.'.begin_date');
+		$seminarBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_seminarbag'
+		);
+		$seminarBag =& new $seminarBagClassname(
+			'pid='.intval($this->id),
+			'',
+			'',
+			$tableSeminars.'.begin_date'
+		);
 
 		while ($currentSeminar =& $seminarBag->getCurrent()) {
 			$result .= '<h4>'.$currentSeminar->getTitleAndDate().'</h4>';
-			$seminarQuery = $this->tableAttendances.'.seminar='.$currentSeminar->getUid();
+			$seminarQuery = $this->tableAttendances.'.seminar='
+				.$currentSeminar->getUid();
 
-			$result .= $LANG->getLL('label_all').'<br />'.$this->generateEmailList($seminarQuery).'<hr />';
-			$result .= $LANG->getLL('label_paid').'<br />'.$this->generateEmailList($seminarQuery.' AND (paid=1 OR datepaid!="")').'<hr />';
-			$result .= $LANG->getLL('label_unpaid').'<br />'.$this->generateEmailList($seminarQuery.' AND (paid=0 AND datepaid=0)').'<hr />';
+			$result .= $LANG->getLL('label_all').'<br />'
+				.$this->generateEmailList($seminarQuery).'<hr />';
+			$result .= $LANG->getLL('label_paid').'<br />'
+				.$this->generateEmailList(
+					$seminarQuery.' AND (paid=1 OR datepaid!="")'
+				).'<hr />';
+			$result .= $LANG->getLL('label_unpaid').'<br />'
+				.$this->generateEmailList(
+					$seminarQuery.' AND (paid=0 AND datepaid=0)'
+				).'<hr />';
 
 			$seminarBag->getNext();
 		}
@@ -255,12 +309,21 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$emailList = '';
 		$dividerInEmailList = ', ';
 
-		$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
-		$registrationBag =& new $registrationBagClassname($queryParameters, '', '', 'crdate');
+		$registrationBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registrationbag'
+		);
+		$registrationBag =& new $registrationBagClassname(
+			$queryParameters,
+				'',
+				'',
+				'crdate'
+			);
 
 		if ($registrationBag->getCurrent()) {
 			while ($currentRegistration =& $registrationBag->getCurrent()) {
-				$currentEmail = htmlspecialchars($currentRegistration->getUserNameAndEmail());
+				$currentEmail = htmlspecialchars(
+					$currentRegistration->getUserNameAndEmail()
+				);
 				if (empty($emailList)) {
 					$emailList = $currentEmail;
 				}	else	{

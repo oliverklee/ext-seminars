@@ -828,7 +828,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				$totalPrice = $this->seminar->formatPrice(
 					$seats * $availablePrices[$selectedPrice]['amount']
 				);
-				$currency = $this->registrationManager->getConfValueString('currency');
+				$currency = $this->registrationManager->getConfValueString(
+					'currency'
+				);
 				$result = $totalPrice.' '.$currency;
 			}
 		}
@@ -902,7 +904,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$result = '';
 
 		foreach ($this->fieldsInBillingAddress as $currentKey => $hasLabel) {
-			$currentFormData = $this->oForm->oDataHandler->_getThisFormData($currentKey);
+			$currentFormData = $this->oForm->oDataHandler->_getThisFormData(
+				$currentKey
+			);
 			if ($currentFormData != '') {
 				// If the gender field is hidden, it would have an empty value,
 				// so we wouldn't be here. So let's convert the "gender" index

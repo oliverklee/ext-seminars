@@ -328,9 +328,14 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		// Only do the DB query if we are okay so far and an event UID has
 		// been provided for editing.
 		if ($isOkay && $seminarUid) {
-			if (tx_seminars_objectfromdb::recordExists($seminarUid, $this->tableSeminars)) {
+			if (tx_seminars_objectfromdb::recordExists(
+				$seminarUid,
+				$this->tableSeminars)
+			) {
 				/** Name of the seminar class in case someone subclasses it. */
-				$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
+				$seminarClassname = t3lib_div::makeInstanceClassName(
+					'tx_seminars_seminar'
+				);
 				$seminar =& new $seminarClassname($seminarUid);
 				$isOkay = $seminar->isOwnerFeUser();
 				unset($seminar);

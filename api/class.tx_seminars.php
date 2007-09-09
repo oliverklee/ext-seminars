@@ -88,7 +88,12 @@ class tx_seminars extends tx_dhdb {
 
 					if ($editEntry) {
 						// We update the record in the database.
-						$this->oForm->_debug($aFormData, "EXECUTION OF DATAHANDLER DB - EDITION MODE in " . $tablename . "[" . $keyname . "=" . $editEntry . "]");
+						$this->oForm->_debug(
+							$aFormData,
+							"EXECUTION OF DATAHANDLER DB - EDITION MODE in "
+								.$tablename
+								."[" . $keyname . "=" . $editEntry . "]"
+						);
 						$this->oForm->_watchOutDB(
 							$GLOBALS["TYPO3_DB"]->exec_UPDATEquery(
 								$tablename,
@@ -98,10 +103,17 @@ class tx_seminars extends tx_dhdb {
 						);
 						$this->_storeMmRelations($editEntry);
 
-						$this->oForm->_debug($GLOBALS["TYPO3_DB"]->debug_lastBuiltQuery, "DATAHANDLER DB - SQL EXECUTED");
+						$this->oForm->_debug(
+							$GLOBALS["TYPO3_DB"]->debug_lastBuiltQuery,
+							"DATAHANDLER DB - SQL EXECUTED"
+						);
 					} else {
 						// We insert a new record into the database.
-						$this->oForm->_debug($aFormData, "EXECUTION OF DATAHANDLER DB - INSERTION MODE in " . $tablename);
+						$this->oForm->_debug(
+							$aFormData,
+							"EXECUTION OF DATAHANDLER DB - INSERTION MODE in "
+								.$tablename
+						);
 
 						$this->oForm->_watchOutDB(
 							$GLOBALS["TYPO3_DB"]->exec_INSERTquery(
@@ -110,18 +122,31 @@ class tx_seminars extends tx_dhdb {
 							)
 						);
 
-						$this->oForm->_debug($GLOBALS["TYPO3_DB"]->debug_lastBuiltQuery, "DATAHANDLER DB - SQL EXECUTED");
+						$this->oForm->_debug(
+							$GLOBALS["TYPO3_DB"]->debug_lastBuiltQuery,
+							"DATAHANDLER DB - SQL EXECUTED"
+						);
 
 						$this->newEntryId = $GLOBALS["TYPO3_DB"]->sql_insert_id();
-						$this->oForm->_debug("", "NEW ENTRY ID [" . $keyname . "=" . $this->newEntryId . "]");
+						$this->oForm->_debug(
+							"", "NEW ENTRY ID [" . $keyname . "="
+							.$this->newEntryId . "]"
+						);
 
 						$this->_storeMmRelations($this->newEntryId);
 					}
 				} else {
-					$this->oForm->_debug("", "EXECUTION OF DATAHANDLER DB - NOTHING TO DO - SKIPPING PROCESS " . $tablename);
+					$this->oForm->_debug(
+						"",
+						"EXECUTION OF DATAHANDLER DB - NOTHING TO DO "
+						."- SKIPPING PROCESS ".$tablename
+					);
 				}
 			} else {
-				$oForm->mayday("DATAHANDLER configuration isn't correct : check tablename AND keyname in your datahandler conf");
+				$oForm->mayday(
+					"DATAHANDLER configuration isn't correct : check tablename "
+					."AND keyname in your datahandler conf"
+				);
 			}
 		}
 	}

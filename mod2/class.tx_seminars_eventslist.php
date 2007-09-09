@@ -68,7 +68,8 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 		$tableLayout = array(
 			'table' => array(
 				TAB.TAB
-					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.LF,
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'
+					.LF,
 				TAB.TAB
 					.'</table>'.LF
 			),
@@ -202,7 +203,9 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 			? 'sorting' : 'begin_date';
 		$limit = '';
 
-		$seminarBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
+		$seminarBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_seminarbag'
+		);
 		$seminarBag =& new $seminarBagClassname(
 			$queryWhere,
 			$additionalTables,
@@ -216,7 +219,13 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 
 		$useManualSorting = $globalConfiguration['useManualSorting']
 			&& $BE_USER->check('tables_modify', $seminarBag->tableSeminars)
-			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->page->pageInfo['uid']), 16);
+			&& $BE_USER->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord(
+					'pages',
+					$this->page->pageInfo['uid']
+				),
+				16
+			);
 
 		if ($useManualSorting) {
 			// Initialize the array which holds the two previous records' UIDs.
@@ -360,7 +369,8 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 		if ($this->seminar->hasAttendances()
 			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
 			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.csv', 1);
-			$result = '<a href="class.tx_seminars_csv.php?id='.$this->page->pageInfo['uid']
+			$result = '<a href="class.tx_seminars_csv.php?id='
+				.$this->page->pageInfo['uid']
 				.'&amp;tx_seminars_pi2[table]='.$this->tableAttendances
 				.'&amp;tx_seminars_pi2[seminar]='.$eventUid.'">'
 				.'<img'
@@ -393,7 +403,14 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 		$result = '';
 
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->page->pageInfo['uid']), 16)) {
+			&& $BE_USER->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord(
+					'pages',
+					$this->page->pageInfo['uid']
+				),
+				16
+			)
+		) {
 			if ($hidden) {
 				$params = '&data['.$this->tableName.']['.$uid.'][hidden]=0';
 				$icon = 'gfx/button_unhide.gif';

@@ -73,7 +73,13 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 		$result = '';
 
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->page->pageInfo['uid']), 16)) {
+			&& $BE_USER->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord(
+					'pages',
+					$this->page->pageInfo['uid']
+				),
+			16)
+		) {
 			$params = '&edit['.$this->tableName.']['.$uid.']=edit';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langEdit = $LANG->getLL('edit');
@@ -107,7 +113,14 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 		$result = '';
 
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->page->pageInfo['uid']), 16)) {
+			&& $BE_USER->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord(
+					'pages',
+					$this->page->pageInfo['uid']
+				),
+				16
+			)
+		) {
 			$params = '&cmd['.$this->tableName.']['.$uid.'][delete]=1';
 
 			$referenceWarning = t3lib_BEfunc::referenceCount(
@@ -132,8 +145,8 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 					'gfx/garbage.gif',
 					'width="11" height="12"'
 				)
-				.' title="'.$langDelete.'" alt="'.$langDelete.'" class="deleteicon" />'
-				.'</a>';
+				.' title="'.$langDelete.'" alt="'.$langDelete
+				.'" class="deleteicon" /></a>';
 		}
 
 		return $result;
@@ -142,7 +155,8 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 	/**
 	 * Returns a "create new record" image tag that is linked to the new record view.
 	 *
-	 * @param	string		the name of the table where the record should be saved to
+	 * @param	string		the name of the table where the record should be
+	 * 						saved to
 	 * @param	integer		the page id where the record should be stored
 	 *
 	 * @return	string		the HTML source code to return
@@ -155,7 +169,12 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 		$result = '';
 
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $this->page->pageInfo['uid']), 16)
+			&& $BE_USER->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord(
+					'pages',
+					$this->page->pageInfo['uid']
+				),
+				16)
 			&& $this->page->pageInfo['doktype'] == 254) {
 			$params = '&edit['.$this->tableName.']['.$pid.']=new';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);

@@ -116,7 +116,10 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 		$eventUid = intval($this->piVars['seminar']);
 
-		if (tx_seminars_objectfromdb::recordExists($eventUid, $this->tableSeminars)) {
+		if (tx_seminars_objectfromdb::recordExists(
+			$eventUid,
+			$this->tableSeminars)
+		) {
 			if ($this->canAccessListOfRegistrations()) {
 				$this->setContentTypeForRegistrationLists();
 
@@ -126,25 +129,35 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 					'","',
 					$this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
 						.','
-						.$this->configGetter->getConfValueString('fieldsFromAttendanceForCsv')
+						.$this->configGetter->getConfValueString(
+							'fieldsFromAttendanceForCsv'
+						)
 						.'"'.CRLF
 				);
 
 				// Now let's have a registration bag to iterate over all
 				// registrations of this event.
-				$registrationBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationbag');
-				$registrationBag =& new $registrationBagClassname('seminar='.$eventUid);
+				$registrationBagClassname = t3lib_div::makeInstanceClassName(
+					'tx_seminars_registrationbag'
+				);
+				$registrationBag =& new $registrationBagClassname(
+					'seminar='.$eventUid
+				);
 
 				while ($currentRegistration =& $registrationBag->getCurrent()) {
 					$userData = $this->retrieveData(
 						$currentRegistration,
 						'getUserData',
-						$this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
+						$this->configGetter->getConfValueString(
+							'fieldsFromFeUserForCsv'
+						)
 					);
 					$registrationData = $this->retrieveData(
 						$currentRegistration,
 						'getRegistrationData',
-						$this->configGetter->getConfValueString('fieldsFromAttendanceForCsv')
+						$this->configGetter->getConfValueString(
+							'fieldsFromAttendanceForCsv'
+						)
 					);
 					// Combine the arrays with the user and registration data
 					// and create a list of comma-separated values from them.

@@ -68,7 +68,8 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 		$tableLayout = array(
 			'table' => array(
 				TAB.TAB
-					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'.LF,
+					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'
+					.LF,
 				TAB.TAB
 					.'</table>'.LF
 			),
@@ -124,7 +125,9 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 		$orderBy = '';
 		$limit = '';
 
-		$speakerBagClassname = t3lib_div::makeInstanceClassName('tx_seminars_speakerbag');
+		$speakerBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_speakerbag'
+		);
 		$speakerBag =& new $speakerBagClassname(
 			$queryWhere,
 			$additionalTables,

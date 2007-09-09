@@ -64,15 +64,17 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	var $subModule;
 
 	/**
-	 * Initializes some variables and also starts the initialization of the parent class.
+	 * Initializes some variables and also starts the initialization of the
+	 * parent class.
 	 *
 	 * @access	public
 	 */
 	function init() {
 		/*
-		 * This is a workaround for the wrong generated links. The workaround is needed to
-		 * get the right values from the GET Parameter. This workaround is from Elmar Hinz
-		 * who also noted this in the bug tracker (http://bugs.typo3.org/view.php?id=2178).
+		 * This is a workaround for the wrong generated links. The workaround
+		 * is needed to get the right values from the GET Parameter. This
+		 * workaround is from Elmar Hinz who also noted this in the bug tracker:
+		 * http://bugs.typo3.org/view.php?id=2178
 		 */
 		$matches = array();
 		foreach ($GLOBALS['_GET'] as $key => $value) {
@@ -102,10 +104,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		$this->content = '';
 
 		/**
-		 * This variable will hold the information about the page. It will only be filled with values
-		 * if the user has access to the page.
+		 * This variable will hold the information about the page. It will only
+		 * be filled with values if the user has access to the page.
 		 */
-		$this->pageInfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+		$this->pageInfo = t3lib_BEfunc::readPageAccess(
+			$this->id,
+			$this->perms_clause
+		);
 		// Access check:
 		// The page will only be displayed if there is a valid page, if this
 		// page may be viewed by the current BE user and if the static template
@@ -142,7 +147,8 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// define the sub modules that should be available in the tabmenu
 			$this->availableSubModules = array();
 
-			// only show the tabs if the back-end user has access to the corresponding tables
+			// only show the tabs if the back-end user has access to the
+			// corresponding tables
 			if ($BE_USER->check('tables_select', $databasePlugin->tableSeminars)) {
 				$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
 			}
@@ -184,22 +190,30 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// If no sub module is specified, an empty page will be displayed.
 			switch ($this->subModule) {
 				case 2:
-					$registrationsListClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationslist');
+					$registrationsListClassname = t3lib_div::makeInstanceClassName(
+						'tx_seminars_registrationslist'
+					);
 					$registrationsList = new $registrationsListClassname($this);
 					$this->content .= $registrationsList->show();
 					break;
 				case 3:
-					$speakersListClassname = t3lib_div::makeInstanceClassName('tx_seminars_speakerslist');
+					$speakersListClassname = t3lib_div::makeInstanceClassName(
+						'tx_seminars_speakerslist'
+					);
 					$speakersList = new $speakersListClassname($this);
 					$this->content .= $speakersList->show();
 					break;
 				case 4:
-					$organizersListClassname = t3lib_div::makeInstanceClassName('tx_seminars_organizerslist');
+					$organizersListClassname = t3lib_div::makeInstanceClassName(
+						'tx_seminars_organizerslist'
+					);
 					$organizersList = new $organizersListClassname($this);
 					$this->content .= $organizersList->show();
 					break;
 				case 1:
-					$eventsListClassname = t3lib_div::makeInstanceClassName('tx_seminars_eventslist');
+					$eventsListClassname = t3lib_div::makeInstanceClassName(
+						'tx_seminars_eventslist'
+					);
 					$eventsList = new $eventsListClassname($this);
 					$this->content .= $eventsList->show();
 				default:
@@ -236,7 +250,9 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 * @access	protected
 	 */
 	function hasStaticTemplateOrRecords() {
-		$configGetterClassname = t3lib_div::makeInstanceClassName('tx_seminars_configgetter');
+		$configGetterClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_configgetter'
+		);
 		$configGetter =& new $configGetterClassname();
 		$configGetter->init();
 
