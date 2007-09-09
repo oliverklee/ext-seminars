@@ -62,7 +62,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>isValidPriceSelected</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_choosePrice</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_choosePrice</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -95,7 +95,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>isMethodOfPaymentSelected</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_chooseMethodOfPayment</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_chooseMethodOfPayment</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -124,7 +124,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>hasBankData</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_provideBankData</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -155,7 +155,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>hasBankData</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_provideBankData</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -186,7 +186,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>hasBankData</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_provideBankData</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -214,7 +214,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>hasBankData</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideBankData</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_provideBankData</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -232,8 +232,8 @@
 		<renderlet:LISTBOX name="gender">
 			<data>
 				<items>
-					<item caption="LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.0" value ="0" />
-					<item caption="LLL:EXT:seminars/locallang_db.php:tx_seminars_attendances.gender.I.1" value ="1" />
+					<item caption="LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.gender.I.0" value ="0" />
+					<item caption="LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.gender.I.1" value ="1" />
 				</items>
 				<defaultvalue>
 					<userobj>
@@ -444,14 +444,14 @@
 				<validator:PREG>
 					<pattern>
 						<value>/^[\d]*$/</value>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_noSeatsNumber</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_noSeatsNumber</message>
 					</pattern>
 				</validator:PREG>
 				<validator:STANDARD>
 					<userobj>
 						<extension>this</extension>
 						<method>canRegisterSeats</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_invalidNumberOfSeats</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_invalidNumberOfSeats</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -472,7 +472,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>hasAttendeesNames</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_provideAttendeesNames</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_provideAttendeesNames</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -502,7 +502,7 @@
 				<validator:PREG>
 					<pattern>
 						<value>/^[\d]*$/</value>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_noKidsNumber</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_noKidsNumber</message>
 					</pattern>
 				</validator:PREG>
 			</validators>
@@ -529,7 +529,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>isLodgingSelected</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_selectLodging</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_selectLodging</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -564,7 +564,7 @@
 					<userobj>
 						<extension>this</extension>
 						<method>isFoodSelected</method>
-						<message>LLL:EXT:seminars/pi1/locallang.php:message_selectFood</message>
+						<message>LLL:EXT:seminars/pi1/locallang.xml:message_selectFood</message>
 					</userobj>
 				</validator:STANDARD>
 			</validators>
@@ -663,7 +663,7 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:SUBMIT name="button_continue">
-			<label>LLL:EXT:seminars/pi1/locallang.php:label_proceed_registration</label>
+			<label>LLL:EXT:seminars/pi1/locallang.xml:label_proceed_registration</label>
 		</renderlet:SUBMIT>
 
 		<renderlet:PASSTHRU name="next_page">

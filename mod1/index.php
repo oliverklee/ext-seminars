@@ -34,7 +34,7 @@ $MCONF = array();
 require_once('conf.php');
 require_once($BACK_PATH.'init.php');
 require_once($BACK_PATH.'template.php');
-$LANG->includeLLFile('EXT:seminars/mod1/locallang.php');
+$LANG->includeLLFile('EXT:seminars/mod1/locallang.xml');
 
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');

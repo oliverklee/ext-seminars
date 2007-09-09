@@ -48,7 +48,7 @@ require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 $LANG->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
-$LANG->includeLLFile('EXT:seminars/mod2/locallang.php');
+$LANG->includeLLFile('EXT:seminars/mod2/locallang.xml');
 
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
