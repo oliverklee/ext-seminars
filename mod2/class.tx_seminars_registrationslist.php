@@ -128,7 +128,7 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		// Initialize variables for the database query.
 		$queryWhere = 'pid='.$this->page->pageInfo['uid'];
 		$additionalTables = '';
-		$orderBy = '';
+		$orderBy = 'crdate DESC';
 		$limit = '';
 
 		$registrationBagClassname = t3lib_div::makeInstanceClassName(
