@@ -43,7 +43,7 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 	/**
 	 * The constructor. Calls the constructor of the parent class and sets
 	 * $this->tableName.
-	 * 
+	 *
 	 * @param	object		the current back-end page object
 	 */
 	function tx_seminars_registrationslist(&$page) {
@@ -151,7 +151,7 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 				TAB.TAB.TAB.TAB.TAB
 					.$this->registration->getUserName().LF,
 				TAB.TAB.TAB.TAB.TAB
-					.$this->registration->seminar->getRealTitle().LF,
+					.$this->registration->seminar->getTitle().LF,
 				TAB.TAB.TAB.TAB.TAB
 					.$this->registration->seminar->getDate().LF,
 				TAB.TAB.TAB.TAB.TAB
