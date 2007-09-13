@@ -59,6 +59,7 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
+			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page that will be displayed after a user has unregistered for an event</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end editing</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user group that is allowed to enter and edit events</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
@@ -109,6 +110,7 @@
 			<label index="label_deadline_registration">Deadline for registration</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_onlineRegistration">Register now</label>
+			<label index="label_onlineUnregistration">Unregister now</label>
 			<label index="label_list_registrations">List of registrations</label>
 			<label index="label_listRegistrationsLink">View the list of registrations</label>
 			<label index="label_list_otherdates">Other dates for this topic</label>
@@ -162,6 +164,9 @@
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
+			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
+			<label index="label_unregister">Unregister</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -192,6 +197,8 @@
 			<label index="message_countdown">%d %s left until the next event starts!</label>
 			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
+			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="countdown_days_plural">days</label>
 			<label index="countdown_days_singular">day</label>
 			<label index="countdown_hours_plural">hours</label>
@@ -439,6 +446,7 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Zeige diese FEuser-Felder in der Liste der Anmeldungen</label>
 			<label index="seminars.pi_flexform.sheet_registration">Veranstaltungsanmeldung</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Seite, die nach erfolgreicher Anmeldung für eine Veranstaltung angezeigt wird</label>
+			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Seite, die nach erfolgreicher Abmeldung für eine Veranstaltung angezeigt wird</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end-Bearbeitung</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE-User-Gruppe, die Veranstaltungen eingeben und bearbeiten darf</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Seite mit dem Plugin zum Bearbeiten von Veranstaltungen</label>
@@ -489,6 +497,7 @@
 			<label index="label_deadline_registration">Anmeldeschluss</label>
 			<label index="label_registration">Anmeldung</label>
 			<label index="label_onlineRegistration">Jetzt anmelden</label>
+			<label index="label_onlineUnregistration">Jetzt abmelden</label>
 			<label index="label_list_registrations">Liste der Anmeldungen</label>
 			<label index="label_listRegistrationsLink">Liste der Anmeldungen anzeigen</label>
 			<label index="label_list_otherdates">Andere Termine für diese Veranstaltung</label>
@@ -542,6 +551,9 @@
 			<label index="label_your_user_data_formal">Ihre Adressdaten</label>
 			<label index="label_your_user_data_informal">Deine Adressdaten</label>
 			<label index="label_method_of_payment">Gewählte Zahlungsart:</label>
+			<label index="label_unregistration_message_formal">Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</label>
+			<label index="label_unregistration_message_informal">Willst du dich wirklich von dieser Veranstaltung abmelden?</label>
+			<label index="label_unregister">Abmelden</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
@@ -572,6 +584,8 @@
 			<label index="message_countdown">Noch %d %s bis zur nächsten Veranstaltung!</label>
 			<label index="message_countdown_noEventFound_formal">Es konnten keine geplanten Veranstaltungen gefunden werden. Bitte besuchen Sie uns später noch einmal.</label>
 			<label index="message_countdown_noEventFound_informal">Es konnten keine geplanten Veranstaltungen gefunden werden. Bitte besuche uns später noch einmal.</label>
+			<label index="message_notRegisteredForThisEvent_formal">Sie sind nicht für diese Veranstaltung angemeldet.</label>
+			<label index="message_notRegisteredForThisEvent_informal">Du bist nicht für diese Veranstaltung angemeldet.</label>
 			<label index="countdown_days_plural">Tage</label>
 			<label index="countdown_days_singular">Tag</label>
 			<label index="countdown_hours_plural">Stunden</label>
@@ -1186,6 +1200,7 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
 			<label index="seminars.pi_flexform.sheet_registration" type="integer">16354175</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID" type="integer">144873436</label>
+			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID" type="integer">50906970</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing" type="integer">74816411</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID" type="integer">6056414</label>
 			<label index="seminars.pi_flexform.eventEditorPID" type="integer">236783633</label>
@@ -1230,11 +1245,13 @@
 			<label index="label_paymentmethods" type="integer">119552142</label>
 			<label index="label_select_paymentmethod" type="integer">203383656</label>
 			<label index="label_event_type" type="integer">99114704</label>
+			<label index="label_target_groups" type="integer">206184555</label>
 			<label index="label_organizers" type="integer">68798680</label>
 			<label index="label_vacancies" type="integer">99017107</label>
 			<label index="label_deadline_registration" type="integer">106717060</label>
 			<label index="label_registration" type="integer">16354175</label>
 			<label index="label_onlineRegistration" type="integer">201391585</label>
+			<label index="label_onlineUnregistration" type="integer">213082454</label>
 			<label index="label_list_registrations" type="integer">206095824</label>
 			<label index="label_listRegistrationsLink" type="integer">169828522</label>
 			<label index="label_list_otherdates" type="integer">139958574</label>
@@ -1288,6 +1305,9 @@
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
+			<label index="label_unregistration_message_formal" type="integer">42111281</label>
+			<label index="label_unregistration_message_informal" type="integer">42111281</label>
+			<label index="label_unregister" type="integer">164931826</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
@@ -1318,6 +1338,8 @@
 			<label index="message_countdown" type="integer">3805429</label>
 			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
 			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
+			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
+			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="countdown_days_plural" type="integer">72343236</label>
 			<label index="countdown_days_singular" type="integer">103331803</label>
 			<label index="countdown_hours_plural" type="integer">121429469</label>

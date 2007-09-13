@@ -189,3 +189,7 @@ th.tx-seminars-pi1-title {
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-submit input {
 	width: auto;
 }
+
+#tx-seminars-pi1-unregistration-form .tx-seminars-pi1-submit {
+	margin: .5em 0;
+}

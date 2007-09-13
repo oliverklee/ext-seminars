@@ -173,7 +173,10 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$result = $plugin->cObj->getTypoLink(
 				$plugin->pi_getLL('label_onlineRegistration'),
 				$plugin->getConfValueInteger('registerPID'),
-				array('tx_seminars_pi1[seminar]' => $seminar->getUid())
+				array(
+					'tx_seminars_pi1[seminar]' => $seminar->getUid(),
+					'tx_seminars_pi1[action]' => 'register'
+				)
 			);
 		} else {
 			// provide the login link
@@ -185,6 +188,30 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Creates an HTML link to the unregistration page (if a user is logged in).
+	 *
+	 * @param	object		a tx_seminars_templatehelper object (for a live page)
+	 * 						which we can call pi_linkTP() on (must not be null)
+	 *
+	 * @param	object		a registration from which we'll get the UID for our
+	 * 						GET parameters (must not be null)
+	 *
+	 * @return	string		HTML code with the link
+	 *
+	 * @access	public
+	 */
+	function getLinkToUnregistrationPage(&$plugin, &$registration) {
+		return $plugin->cObj->getTypoLink(
+			$plugin->pi_getLL('label_onlineUnregistration'),
+			$plugin->getConfValueInteger('registerPID'),
+			array(
+				'tx_seminars_pi1[registration]' => $registration->getUid(),
+				'tx_seminars_pi1[action]' => 'unregister'
+			)
+		);
 	}
 
 	/**
@@ -397,6 +424,47 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		}
 
 		return;
+	}
+
+	/**
+	 * Removes the given registration (if it exists and if it belongs to the
+	 * currently logged in FE user).
+	 *
+	 * @param	integer		the registration that should be removed
+	 * @param	object		live plugin object (must not be null)
+	 *
+	 * @access	public
+	 */
+	function removeRegistration($registrationUid, &$plugin) {
+		if (tx_seminars_objectfromdb::recordExists(
+				$registrationUid,
+				$this->tableAttendances
+		)){
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'*',
+				$this->tableAttendances,
+				$this->tableAttendances.'.uid='.$registrationUid
+					.$this->enableFields($this->tableAttendances)
+			);
+
+			if ($dbResult) {
+				$registrationClassname =& t3lib_div::makeInstanceClassname(
+					'tx_seminars_registration'
+				);
+				$this->registration =& new $registrationClassname(
+					$plugin->cObj,
+					$dbResult
+				);
+
+				if ($this->registration->getUser() == $this->getFeUserUid()) {
+					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+						$this->tableAttendances,
+						$this->tableAttendances.'.uid='.$registrationUid,
+						array('deleted' => 1)
+					);
+				}
+			}
+		}
 	}
 }
 

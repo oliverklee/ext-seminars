@@ -270,6 +270,9 @@ plugin.tx_seminars_pi1 {
 	# PID of the thank-you page that will be displayed after a FE user has registered for an event
 	thankYouAfterRegistrationPID =
 
+	# PID of the thank-you page that will be displayed after a FE user has unregistered from an event
+	pageToShowAfterUnregistrationPID =
+
 	# PID of the page that contains the login form
 	loginPID =
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<formidable version="0.7.0">
+	<meta>
+		<name>Seminar Manager unregistration form</name>
+		<description>This form allows FE users to unregister for events.</description>
+		<form>
+			<formid>tx_seminars_pi1_registration_editor</formid>
+		</form>
+		<debug>false</debug>
+		<displaylabels>false</displaylabels>
+	</meta>
+	<control>
+		<datahandler:RAW>
+			<parentcallback>processUnregistration</parentcallback>
+		</datahandler:RAW>
+		<renderer:TEMPLATE>
+			<template>
+				<path>
+					<userobj>
+						<extension>this</extension>
+						<method>getTemplatePath</method>
+					</userobj>
+				</path>
+				<subpart>###REGISTRATION_EDITOR_UNREGISTRATION###</subpart>
+				<errortag>errors</errortag>
+			</template>
+		</renderer:TEMPLATE>
+		<actionlets>
+			<actionlet:REDIRECT>
+				<url>
+					<userobj>
+						<extension>this</extension>
+						<method>getPageToShowAfterUnregistrationUrl</method>
+					</userobj>
+				</url>
+			</actionlet:REDIRECT>
+		</actionlets>
+	</control>
+
+	<elements>
+		<renderlet:SUBMIT name="button_unregister">
+			<label>LLL:EXT:seminars/pi1/locallang.xml:label_unregister</label>
+		</renderlet:SUBMIT>
+		<renderlet:SUBMIT name="button_cancel">
+			<onclick runat="server" submit="full">
+				<userobj>
+					<php><![CDATA[
+						header('Location:'.$this->_oParent->plugin->pi_getPageLink(
+								$this->_oParent->getConfValueInteger('listPID')));
+					]]></php>
+				</userobj>
+			</onclick>
+			<label>LLL:EXT:lang/locallang_core.xml:labels.cancel</label>
+		</renderlet:SUBMIT>
+	</elements>
+</formidable>

@@ -221,6 +221,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkEventFieldsOnRegistrationPage();
 		$this->checkShowRegistrationFields();
 		$this->checkThankYouAfterRegistrationPID();
+		$this->checkPageToShowAfterUnregistrationPID();
 		$this->checkListPid();
 		$this->checkLoginPid();
 		$this->checkBankTransferUid();
@@ -1558,6 +1559,24 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			's_registration',
 			'This value specifies the page that will be displayed after a user '
 				.'signed up for an event. If this value is not set correctly, '
+				.'the user will see the list of events instead.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value pageToShowAfterUnregistrationPID.
+	 *
+	 * @access	private
+	 */
+	function checkPageToShowAfterUnregistrationPID() {
+		$this->checkIfSingleFePageNotEmpty(
+			'pageToShowAfterUnregistrationPID',
+			true,
+			's_registration',
+			'This value specifies the page that will be displayed after a user '
+				.'has unregistered from an event. If this value is not set correctly, '
 				.'the user will see the list of events instead.'
 		);
 

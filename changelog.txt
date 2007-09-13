@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#400] Feature: FE users (participants) should be able to unregister from an event (remove their registration)
 - [#1143] Change: Sorting for registrations in mod2 and the list view should be descending by crdate
 - [#501] Change: Changed the references to locallang*.php to locallang*.xml
 - [#210] Change: Cleaned up the locallang*.xml files

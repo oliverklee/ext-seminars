@@ -405,7 +405,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$redirectUrlParams = array();
 		if ($eventId) {
 			$redirectUrlParams = array(
-				'tx_seminars_pi1[seminar]' => $eventId
+				'tx_seminars_pi1[seminar]' => $eventId,
+				'tx_seminars_pi1[action]' => 'register'
 			);
 		}
 		$redirectUrl = t3lib_div::locationHeaderUrl(
@@ -569,10 +570,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'LISTITEM_WRAPPER'
 		);
 
-		// Hide the registration column if online registration is disabled,
-		// or the "my events" list should be displayed.
-		if (!$this->getConfValueBoolean('enableRegistration')
-			|| ($whatToDisplay == 'my_events')) {
+		// Hide the registration column if online registration is disabled.
+		if (!$this->getConfValueBoolean('enableRegistration')) {
 			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
 		}
@@ -1360,6 +1359,46 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Creates a registration in $this->registration from the database record with
+	 * the UID specified in the parameter $registrationUid.
+	 * If the registration cannot be created, $this->registration will be null, and
+	 * this function will return false.
+	 *
+	 * $this->registrationManager must have been initialized before this
+	 * method may be called.
+	 *
+	 * @param	integer		a registration UID
+	 *
+	 * @return	boolean		true if the registration UID is valid and the object
+	 * 						has been created, false otherwise
+	 *
+	 * @access	protected
+	 */
+	function createRegistration($registrationUid) {
+		$result = false;
+
+		if (tx_seminars_objectfromdb::recordExists($registrationUid, $this->tableAttendances)) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'*',
+				$this->tableAttendances,
+				$this->tableAttendances.'.uid='.$registrationUid
+					.$this->enableFields($this->tableAttendances)
+			);
+			/** Name of the registration class in case someone subclasses it. */
+			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
+			$this->registration =& new $registrationClassname($this->cObj, $dbResult);
+			$result = $this->registration->isOk();
+			if (!$result) {
+				$this->registration = null;
+			}
+		} else {
+			$this->registration = null;
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Returns the list view header: Start of table, header row, start of table body.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
@@ -1539,14 +1578,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				'class_listvacancies',
 				$this->getVacanciesClasses($this->seminar)
 			);
-			$this->setMarkerContent(
-				'registration',
-				$this->registrationManager->canRegisterIfLoggedIn($this->seminar)
-					? $this->registrationManager->getLinkToRegistrationOrLoginPage(
-						$this,
-						$this->seminar)
-					: ''
-			);
+
+			$registrationLink = '';
+			if ($this->registrationManager->canRegisterIfLoggedIn($this->seminar)
+				&& ($this->whatToDisplay != 'my_events')) {
+				$registrationLink = $this->registrationManager->getLinkToRegistrationOrLoginPage(
+					$this,
+					$this->seminar
+				);
+			} elseif ($this->whatToDisplay == 'my_events') {
+				$registrationLink = $this->registrationManager->getLinkToUnregistrationPage(
+					$this,
+					$this->registration
+				);
+			}
+			$this->setMarkerContent('registration', $registrationLink);
 			$this->setMarkerContent(
 				'list_registrations',
 				$this->getRegistrationsListLink()
@@ -1664,14 +1710,40 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					);
 				}
 			}
+		} elseif ($this->createRegistration(
+			intval($this->piVars['registration'])
+		)) {
+			if ($this->createSeminar($this->registration->getSeminar())) {
+				$isOkay = true;
+			}
 		} else {
-			$errorMessage = $this->registrationManager->existsSeminarMessage(
-				$this->piVars['seminar']
-			);
+			switch ($this->piVars['action']) {
+				case 'unregister':
+					$errorMessage = $this->pi_getLL(
+						'message_notRegisteredForThisEvent'
+					);
+					break;
+				case 'register':
+					// The fall-through is intended.
+				default:
+					$errorMessage = $this->registrationManager->existsSeminarMessage(
+						$this->piVars['seminar']
+					);
+					break;
+			}
 		}
 
 		if ($isOkay) {
-			$registrationForm = $this->createRegistrationForm();
+			switch ($this->piVars['action']) {
+				case 'unregister':
+					$registrationForm = $this->createUnregistrationForm();
+					break;
+				case 'register':
+					// The fall-through is intended.
+				default:
+					$registrationForm = $this->createRegistrationForm();
+					break;
+			}
 		}
 
 		$result = $this->createRegistrationHeading($errorMessage);
@@ -1927,6 +1999,24 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return;
+	}
+
+	/**
+	 * Creates the unregistration form.
+	 * $this->registration has to be created before this method is called.
+	 *
+	 * @return	string		HTML code for the form
+	 *
+	 * @access	protected
+	 */
+	function createUnregistrationForm() {
+		$registrationEditorClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration_editor');
+		$registrationEditor =& new $registrationEditorClassname($this);
+
+		$result = $registrationEditor->_render();
+		$result .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
+
+		return $result;
 	}
 
 	/**

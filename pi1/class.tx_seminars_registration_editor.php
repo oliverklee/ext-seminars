@@ -151,14 +151,22 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function _initForms() {
 		$this->oForm =& t3lib_div::makeInstance('tx_ameosformidable');
 
-		switch ($this->currentPageNumber) {
-			case 1:
-				$xmlFile = 'registration_editor_step2.xml';
+		switch ($this->plugin->piVars['action']) {
+			case 'unregister':
+				$xmlFile = 'registration_editor_unregistration.xml';
 				break;
-			case 0:
+			case 'register':
 				// The fall-through is intended.
-			default;
-				$xmlFile = 'registration_editor_step1.xml';
+				switch ($this->currentPageNumber) {
+					case 1:
+						$xmlFile = 'registration_editor_step2.xml';
+						break;
+					case 0:
+						// The fall-through is intended.
+					default;
+						$xmlFile = 'registration_editor_step1.xml';
+						break;
+				}
 				break;
 		}
 
@@ -541,9 +549,46 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			's_registration'
 		);
 
+		if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
+				&& $GLOBALS['TSFE']->fe_user->getKey('user', 'onetimeaccount')) {
+			$GLOBALS['TSFE']->fe_user->logoff();
+		}
+
+		return $this->createUrlForRedirection($pageId);
+	}
+
+	/**
+	 * Gets the URL of the page that should be displayed after a user has
+	 * unregistered from an event.
+	 *
+	 * @return	string		complete URL of the FE page with a message (or null
+	 * 						if the confirmation page has not been submitted yet)
+	 *
+	 * @access	public
+	 */
+	function getPageToShowAfterUnregistrationUrl() {
+		$pageId = $this->plugin->getConfValueInteger(
+			'pageToShowAfterUnregistrationPID',
+			's_registration'
+		);
+
+		return $this->createUrlForRedirection($pageId);
+	}
+
+	/**
+	 * Creates a URL for redirection. This is a utility function for
+	 * getThankYouAfterRegistrationUrl() and getPageToShowAfterUnregistration().
+	 *
+	 * @param	string		the page UID
+	 *
+	 * @return	string		complete URL of the FE page with a message (or null
+	 * 						if the confirmation page has not been submitted yet)
+	 *
+	 * @access	protected
+	 */
+	function createUrlForRedirection($pageId) {
 		// On freshly updated sites, the configuration value might not be set
-		// yet. To avoid breaking the site, we use the event list in this case
-		// so the registration form won't be displayed again.
+		// yet. To avoid breaking the site, we use the event list in this case.
 		if (!$pageId) {
 			$pageId = $this->plugin->getConfValueInteger('listPID', 'sDEF');
 		}
@@ -558,11 +603,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			'',
 			array('tx_seminars_pi1[showUid]' => $this->seminar->getUid())
 		);
-
-		if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-				&& $GLOBALS['TSFE']->fe_user->getKey('user', 'onetimeaccount')) {
-			$GLOBALS['TSFE']->fe_user->logoff();
-		}
 
 		return $baseUrl.$redirectPath;
 	}
@@ -1458,6 +1498,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		return sprintf(
 			$this->plugin->pi_getLL('label_step_counter'),
 			$currentPageNumberForDisplay, $lastPageNumberForDisplay
+		);
+	}
+
+	/**
+	 * Processes the registration that should be removed.
+	 *
+	 * @access	public
+	 */
+	function processUnregistration() {
+		$this->registrationManager->removeRegistration(
+			$this->plugin->registration->getUid(),
+			$this->plugin
 		);
 	}
 }
