@@ -139,7 +139,8 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 			$additionalTables,
 			'',
 			$orderBy,
-			$limit
+			$limit,
+			1
 		);
 
 		while ($this->registration =& $registrationBag->getCurrent()) {

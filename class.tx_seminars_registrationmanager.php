@@ -460,7 +460,10 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 						$this->tableAttendances,
 						$this->tableAttendances.'.uid='.$registrationUid,
-						array('deleted' => 1)
+						array(
+							'hidden' => 1,
+							'tstamp' => time()
+						)
 					);
 				}
 			}

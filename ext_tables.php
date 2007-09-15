@@ -137,6 +137,9 @@ $TCA['tx_seminars_attendances'] = array(
 		'cruser_id' => 'cruser_id',
 		'default_sortby' => 'ORDER BY crdate DESC',
 		'delete' => 'deleted',
+		'enablecolumns' => array(
+			'disabled' => 'hidden'
+		),
 		'dynamicConfigFile' => $extPath.'tca.php',
 		'iconfile' => $extIconRelPath.'icon_tx_seminars_attendances.gif'
 	)

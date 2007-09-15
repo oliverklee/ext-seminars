@@ -54,7 +54,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_registrationbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_registrationbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
 		$this->cObj =& t3lib_div::makeInstance('tslib_cObj');
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableAttendances is provided.
@@ -65,7 +65,8 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 			$additionalTableNames,
 			$groupBy,
 			$orderBy,
-			$limit
+			$limit,
+			$showHiddenRecords
 		);
 
 		return;
