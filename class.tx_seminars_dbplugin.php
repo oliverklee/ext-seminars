@@ -236,6 +236,31 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		return;
 	}
 
+ 	/**
+	 * Converts a boolean value into a localized string representing that
+	 * boolean value.
+	 *
+	 * Example:
+	 * A boolean true gets converted to the string "yes".
+	 *
+	 * @param	mixed		the value that should be converted to text
+	 *
+	 * @return	string		the converted boolean value as localized string
+	 *
+	 * @access	public
+	 */
+	function getBooleanAsText($booleanValue) {
+		$textValue = '';
+
+		if ((boolean) $booleanValue) {
+			$textValue = $this->translate('label_yes');
+		} else {
+			$textValue = $this->translate('label_no');
+		}
+
+		return $textValue;
+	}
+
 	/**
 	 * Gets a value from flexforms or TS setup.
 	 * The priority lies on flexforms; if nothing is found there, the value
