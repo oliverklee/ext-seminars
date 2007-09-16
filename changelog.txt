@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#257] Change: Catch empty config value for event-type
 - [#1027] Change: When a user unregisters, hide the registration record
 - [#1149] Fix: Registrations in mod2 show the event date's title instead of the topic title
 - [#400] Feature: FE users (participants) should be able to unregister from an event (remove their registration)

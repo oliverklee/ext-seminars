@@ -67,6 +67,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkDecimalDigits();
 		$this->checkDecimalSplitChar();
 		$this->checkShowToBeAnnouncedForEmptyPrice();
+		$this->checkEventType();
 
 		return;
 	}
@@ -1526,6 +1527,23 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		);
 
 		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value eventType.
+	 *
+	 * @access	private
+	 */
+	function checkEventType() {
+		$this->checkForNonEmptyString(
+			'eventType',
+			false,
+			'',
+			'This value specifies the default event type. In the default TS '
+				.'setup that comes with the extension, it is "Workshop". '
+				.'If this value is not set correctly, the page might look '
+				.'ugly.'
+		);
 	}
 
 	/**
