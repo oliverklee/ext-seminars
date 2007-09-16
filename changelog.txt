@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1058] Change: Added helper function to convert boolean values into text
 - [#257] Change: Catch empty config value for event-type
 - [#1027] Change: When a user unregisters, hide the registration record
 - [#1149] Fix: Registrations in mod2 show the event date's title instead of the topic title

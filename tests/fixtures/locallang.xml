@@ -8,10 +8,24 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="label_yes">yes</label>
+			<label index="label_no">no</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="label_yes">ja</label>
+			<label index="label_no">nein</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="label_yes" type="integer">174130624</label>
+			<label index="label_no" type="integer">133839734</label>
+		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="label_yes">yes</label>
+			<label index="label_no">no</label>
+		</languageKey>
 	</orig_text>
 </T3locallang>
