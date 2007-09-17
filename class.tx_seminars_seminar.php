@@ -3285,7 +3285,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * For open-ended events, only the begin date is checked.
 	 *
-	 * @return	string		WHERE clause (without the "WHERE" keyword), will not be empty
+	 * @return	string		WHERE clause (without the "WHERE" keyword), will not
+	 * 						be empty
 	 *
 	 * @access	protected
 	 */
