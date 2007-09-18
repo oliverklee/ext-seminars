@@ -209,8 +209,20 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 		if (!empty($key)) {
 			$this->recordData[$key] = intval($value);
 		}
+	}
 
-		return;
+	/**
+	 * Sets a string element of the record data array (and trims it).
+	 *
+	 * @param	string		key of the element to set (must be non-empty)
+	 * @param	string		the value that will be written into the element
+	 *
+	 * @access	protected
+	 */
+	function setRecordPropertyString($key, $value) {
+		if (!empty($key)) {
+			$this->recordData[$key] = trim((string) $value);
+		}
 	}
 
 	/**
@@ -501,7 +513,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 			$imageURL = t3lib_div::getIndpEnv('TYPO3_SITE_URL')
 				.TYPO3_mainDir.$imageURL;
 			$result = '<img src="'.$imageURL.'" title="id='.$this->getUid()
-				.'" alt="'.$this->getUid().'" />'; 
+				.'" alt="'.$this->getUid().'" />';
 		}
 
 		return $result;
