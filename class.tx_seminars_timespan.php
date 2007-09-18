@@ -310,7 +310,7 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Checked whether this time span is open-ended.
+	 * Checks whether this time span is open-ended.
 	 *
 	 * A time span is considered to be open-ended if it does not have an end
 	 * date.
