@@ -26,6 +26,8 @@
  *
  * This class offers timespan-related methods for the timeslot and seminar classes.
  *
+ * This is an abstract class; don't instantiate it.
+ *
  * @package		TYPO3
  * @subpackage	tx_seminars
  * @author		Niels Pardon <mail@niels-pardon.de>
@@ -269,12 +271,16 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 		$result = 0;
 
 		if ($this->hasBeginDate()) {
-			$result = $this->getEndDateAsTimestamp();
-			// If there is no end date, we are open-ended.
-			if ($result == 0) {
-				$beginDate = $this->getBeginDateAsTimestamp();
-				$midnightAfterEndDate = $beginDate - ($beginDate % ONE_DAY)
-					+ ONE_DAY;
+			if (!$this->isOpenEnded()) {
+				$result = $this->getEndDateAsTimestamp();
+			} else {
+				$splitBeginDate = getdate($this->getBeginDateAsTimestamp());
+				$result = mktime(
+					0, 0, 0,
+					$splitBeginDate['mon'],
+					$splitBeginDate['mday'] + 1,
+					$splitBeginDate['year']
+				);
 			}
 		}
 
@@ -301,6 +307,20 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 */
 	function hasRoom() {
 		return $this->hasRecordPropertyString('room');
+	}
+
+	/**
+	 * Checked whether this time span is open-ended.
+	 *
+	 * A time span is considered to be open-ended if it does not have an end
+	 * date.
+	 *
+	 * @return	boolean		true if this time span is open-ended, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isOpenEnded() {
+		return !$this->hasEndDate();
 	}
 }
 
