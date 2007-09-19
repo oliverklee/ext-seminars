@@ -31,6 +31,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
@@ -44,6 +45,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	var $prefixId = 'tx_seminars_pi1';
 	/** path to this script relative to the extension dir */
 	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
+
+	/** a config getter that gets us the configuration in plugin.tx_seminars */
+	var $configGetter;
 
 	/** the seminar which we want to list/show or for which the user wants to register */
 	var $seminar;
@@ -199,9 +203,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$GLOBALS['TSFE']->additionalHeaderData[] = '<style type="text/css">@import "'.$this->getConfValueString('cssFile', 's_template_special', true).'";</style>';
 		}
 
-		/** Name of the registrationManager class in case someone subclasses it. */
-		$registrationManagerClassname = t3lib_div::makeInstanceClassName('tx_seminars_registrationmanager');
-		$this->registrationManager =& new $registrationManagerClassname();
+		$this->createHelperObjects();
 
 		// Let warnings from the registration manager bubble up to us.
 		$this->setErrorMessage($this->registrationManager->checkConfiguration(true));
@@ -1572,11 +1574,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * form) and the search field list is "bodytext,header" then the output
 	 * will be ' AND (bodytext LIKE "%content%" OR header LIKE "%content%")
 	 * AND (bodytext LIKE "%management%" OR header LIKE "%management%")
-	 * AND (bodytext LIKE "%system%" OR header LIKE "%system%")'
+	 * AND (bodytext LIKE "%system%" OR header LIKE "%system%")'.
 	 *
-	 * @param	string		the search words, separated by spaces or commas
+	 * For non-empty $searchWords, this function's return value will always
+	 * start with " AND ".
 	 *
-	 * @return	string		the WHERE clause (including the AND at the beginning)
+	 * @param	string		the search words, separated by spaces or commas,
+	 * 						may be empty
+	 *
+	 * @return	string		the WHERE clause (including the AND at the beginning),
+	 * 						will be an empty string if $searchWords is empty
 	 *
 	 * @access	protected
 	 */
@@ -1660,7 +1667,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					// not from plugin.tx_seminars_pi1 (which we use).
 					$eventTypeMatcher = '';
 					if (stristr(
-						$this->registrationManager->getConfValueString('eventType'),
+						$this->configGetter->getConfValueString('eventType'),
 						$currentPreparedKeyword
 					) !== false) {
 						$eventTypeMatcher = ' OR ('.$this->tableSeminars.'.event_type=0 '
@@ -1911,6 +1918,53 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 		}
 		return;
+	}
+
+	/**
+	 * Creates the config getter and the registration manager.
+	 *
+	 * @access	public
+	 */
+	function createHelperObjects() {
+		/** Name of the configGetter class in case someone subclasses it. */
+		$configGetterClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_configgetter'
+		);
+		$this->configGetter = new $configGetterClassname();
+
+		/** Name of the registrationManager class in case someone subclasses it. */
+		$registrationManagerClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registrationmanager'
+		);
+		$this->registrationManager = new $registrationManagerClassname();
+	}
+
+	/**
+	 * Checks that we are properly initialized and that we have a config getter
+	 * and a registration manager.
+	 *
+	 * @return	boolean		true if we are properly initialized, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isInitialized() {
+		return ($this->isInitialized
+			&& is_object($this->configGetter)
+			&& is_object($this->registrationManager));
+	}
+
+	/**
+	 * Returns our config getter (which might be null if we aren't initialized
+	 * properly yet).
+	 *
+	 * This function is intended for testing purposes only.
+	 *
+	 * @return	object		our config getter, might be null
+	 *
+	 * @access	public
+	 */
+	function getConfigGetter() {
+		return $this->configGetter;
 	}
 }
 

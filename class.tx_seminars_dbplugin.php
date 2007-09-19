@@ -294,6 +294,24 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	}
 
 	/**
+	 * Sets a configuration value.
+	 *
+	 * This function is intended to be used for testing purposes only.
+	 *
+	 * @param	string		key of the configuration property to set, must not be empty
+	 * @param	mixed		value of the configuration property, may be empty or zero
+	 *
+	 * @access	public
+	 */
+	function setConfigurationValue($key, $value) {
+		if (!is_array($this->conf)) {
+			$this->conf = array();
+		}
+
+		$this->conf[$key] = $value;
+	}
+
+	/**
 	 * Adds a path in front of the file name.
 	 * This is used for files that are selected in the Flexform of the front-end plugin.
 	 *
