@@ -113,7 +113,9 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * @param	integer		value for showTimeOfUnregistrationDeadline (0 or 1)
 	 */
 	public function setShowTimeOfUnregistrationDeadline($value) {
-		$this->conf['showTimeOfUnregistrationDeadline'] = $value;
+		$this->setConfigurationValue(
+			'showTimeOfUnregistrationDeadline', $value
+		);
 	}
 
 	/**
@@ -124,7 +126,9 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *						should be possible
 	 */
 	public function setGlobalUnregistrationDeadline($days) {
-		$this->conf['unregistrationDeadlineDaysBeforeBeginDate'] = $days;
+		$this->setConfigurationValue(
+			'unregistrationDeadlineDaysBeforeBeginDate', $days
+		);
 	}
 }
 

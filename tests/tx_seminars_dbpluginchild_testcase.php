@@ -92,6 +92,18 @@ class tx_seminars_dbpluginchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getBooleanAsText(false)
 		);
 	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests for setting and reading configuration values.
+	///////////////////////////////////////////////////////
+
+	public function testSetConfigurationValueStringNotEmpty() {
+		$this->fixture->setConfigurationValue('test', 'This is a test.');
+		$this->assertEquals(
+			'This is a test.', $this->fixture->getConfValueString('test')
+		);
+	}
 }
 
 ?>

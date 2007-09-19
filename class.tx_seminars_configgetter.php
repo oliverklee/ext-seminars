@@ -45,10 +45,8 @@ class tx_seminars_configgetter extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_event_editor() {
+	function tx_seminars_configgetter() {
 		$this->init();
-
-		return;
 	}
 }
 
