@@ -1586,7 +1586,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$this,
 					$this->seminar
 				);
-			} elseif ($this->whatToDisplay == 'my_events') {
+			} elseif ($this->whatToDisplay == 'my_events'
+				&& $this->registrationManager->isUnregistrationPossible(
+					$this->seminar
+				)) {
 				$registrationLink = $this->registrationManager->getLinkToUnregistrationPage(
 					$this,
 					$this->registration
@@ -1714,7 +1717,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			intval($this->piVars['registration'])
 		)) {
 			if ($this->createSeminar($this->registration->getSeminar())) {
-				$isOkay = true;
+				if ($this->registrationManager->isUnregistrationPossible(
+					$this->seminar
+				)) {
+					$isOkay = true;
+				} else {
+					$errorMessage = $this->pi_getLL(
+						'message_unregistrationNotPossible'
+					);
+				}
 			}
 		} else {
 			switch ($this->piVars['action']) {

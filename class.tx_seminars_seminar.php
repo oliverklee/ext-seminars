@@ -1932,6 +1932,62 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns the seminar unregistration deadline: the date and also the time
+	 * (depending on the TS variable showTimeOfUnregistrationDeadline).
+	 * The returned string is formatted using the format configured in
+	 * dateFormatYMD and timeFormat.
+	 *
+	 * This function will return an empty string if this event does not have a
+	 * unregistration deadline.
+	 *
+	 * @return	string		the date + time of the deadline or an empty string
+	 * 						if this event has no unregistration deadline
+	 *
+	 * @access	public
+	 */
+	function getUnregistrationDeadline() {
+		$result = '';
+
+		if ($this->hasUnregistrationDeadline()) {
+			$result = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$this->getRecordPropertyInteger('deadline_unregistration')
+			);
+			if ($this->getConfValueBoolean('showTimeOfUnregistrationDeadline')) {
+				$result .= strftime(
+					' '.$this->getConfValueString('timeFormat'),
+					$this->getRecordPropertyInteger('deadline_unregistration')
+				);
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether this seminar has a deadline for unregistration set.
+	 *
+	 * @return	boolean		true if the seminar has a unregistration deadline set.
+	 *
+	 * @access	public
+	 */
+	function hasUnregistrationDeadline() {
+		return $this->hasRecordPropertyInteger('deadline_unregistration');
+	}
+
+	/**
+	 * Gets the event's unregistration deadline as UNIX timestamp. Will be 0
+	 * if the event has no unregistration deadline set.
+	 *
+	 * @return	integer		the unregistration deadline as UNIX timestamp
+	 *
+	 * @access	public
+	 */
+	function getUnregistrationDeadlineAsTimestamp() {
+		return $this->getRecordPropertyInteger('deadline_unregistration');
+	}
+
+	/**
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if
 	 * they have any).
 	 *
@@ -3257,6 +3313,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 			case 'deadline_early_bird':
 				$result = $this->getEarlyBirdDeadline();
+				break;
+			case 'deadline_unregistration':
+				$result = $this->getUnregistrationDeadline();
 				break;
 			case 'place':
 				$result = $this->getPlaceWithDetailsRaw();

@@ -136,6 +136,14 @@
 			</data>
 		</renderlet:DATE>
 
+		<renderlet:DATE name="deadline_unregistration">
+			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.deadline_unregistration</label>
+			<data>
+				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
+					converttotimestamp="true" />
+			</data>
+		</renderlet:DATE>
+
 		<renderlet:CHECKBOX name="place">
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.place</label>
 			<data>

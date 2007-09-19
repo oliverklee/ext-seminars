@@ -51,6 +51,7 @@
 			<label index="tx_seminars_seminars.timeslots">Time slots</label>
 			<label index="tx_seminars_seminars.deadline_registration">Registration deadline:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
+			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
 			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
@@ -195,6 +196,7 @@
 			<label index="tx_seminars_seminars.timeslots">Zeitblöcke</label>
 			<label index="tx_seminars_seminars.deadline_registration">Anmelde-Deadline:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Frühbucher-Deadline:</label>
+			<label index="tx_seminars_seminars.deadline_unregistration">Abmelde-Deadline:</label>
 			<label index="tx_seminars_seminars.place">Ort:</label>
 			<label index="tx_seminars_seminars.room">Raum:</label>
 			<label index="tx_seminars_seminars.additional_times_places">Zeiten und Orte:</label>
@@ -734,6 +736,7 @@
 			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
 			<label index="tx_seminars_seminars.deadline_registration" type="integer">207972934</label>
 			<label index="tx_seminars_seminars.deadline_early_bird" type="integer">256893079</label>
+			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
 			<label index="tx_seminars_seminars.place" type="integer">24143558</label>
 			<label index="tx_seminars_seminars.room" type="integer">121727316</label>
 			<label index="tx_seminars_seminars.additional_times_places" type="integer">61400755</label>

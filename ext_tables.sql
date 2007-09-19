@@ -116,6 +116,7 @@ CREATE TABLE tx_seminars_seminars (
 	timeslots text,
 	deadline_registration int(11) unsigned DEFAULT '0' NOT NULL,
 	deadline_early_bird int(11) unsigned DEFAULT '0' NOT NULL,
+	deadline_unregistration int(11) unsigned DEFAULT '0' NOT NULL,
 	place int(11) unsigned DEFAULT '0' NOT NULL,
 	room text,
 	lodgings int(11) unsigned DEFAULT '0' NOT NULL,

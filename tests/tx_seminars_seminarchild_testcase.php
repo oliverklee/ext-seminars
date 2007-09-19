@@ -1,0 +1,168 @@
+<?php
+/***************************************************************
+* Copyright notice
+*
+* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* All rights reserved
+*
+* This script is part of the TYPO3 project. The TYPO3 project is
+* free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* The GNU General Public License can be found at
+* http://www.gnu.org/copyleft/gpl.html.
+*
+* This script is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
+/**
+ * Testcase for the seminar class in the 'seminars' extensions.
+ *
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ * @author		Niels Pardon <mail@niels-pardon.de>
+ */
+
+require_once(t3lib_extMgm::extPath('seminars')
+	.'tests/fixtures/class.tx_seminars_seminarchild.php');
+
+class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
+	private $fixture;
+	private $beginDate;
+	private $unregistrationDeadline;
+
+	protected function setUp() {
+		$this->fixture = new tx_seminars_seminarchild(
+			array(
+				'dateFormatYMD' => '%d.%m.%Y',
+				'timeFormat' => '%H:%M',
+				'showTimeOfUnregistrationDeadline' => 0
+			)
+		);
+
+		$this->beginDate = (time() + ONE_WEEK);
+		$this->unregistrationDeadline = (time() + ONE_WEEK);
+
+		$this->fixture->setEventData(
+			array(
+				'uid' => 1,
+				'begin_date' => $this->beginDate,
+				'deadline_unregistration' => $this->unregistrationDeadline,
+				'attendees_min' => 5,
+				'attendees_max' => 10
+			)
+		);
+	}
+
+	protected function tearDown() {
+		unset($this->fixture);
+	}
+
+
+	public function testIsOk() {
+		$this->assertTrue(
+			$this->fixture->isOk()
+		);
+	}
+
+	public function testGetBeginDateAsTimestamp() {
+		$this->fixture->setBeginDate($this->beginDate);
+		$this->assertEquals(
+			$this->beginDate,
+			$this->fixture->getBeginDateAsTimestamp()
+		);
+
+		$this->fixture->setBeginDate(0);
+		$this->assertEquals(
+			0,
+			$this->fixture->getBeginDateAsTimestamp()
+		);
+	}
+
+	public function testGetUnregistrationDeadlineAsTimestamp() {
+		$this->fixture->setUnregistrationDeadline($this->unregistrationDeadline);
+		$this->assertEquals(
+			$this->unregistrationDeadline,
+			$this->fixture->getUnregistrationDeadlineAsTimestamp()
+		);
+
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->assertEquals(
+			0,
+			$this->fixture->getUnregistrationDeadlineAsTimestamp()
+		);
+	}
+
+	public function testNeedsRegistration() {
+		$this->fixture->setAttendancesMax(10);
+		$this->assertTrue(
+			$this->fixture->needsRegistration()
+		);
+
+		$this->fixture->setAttendancesMax(0);
+		$this->assertFalse(
+			$this->fixture->needsRegistration()
+		);
+	}
+
+	public function testHasUnregistrationDeadline() {
+		$this->fixture->setUnregistrationDeadline($this->unregistrationDeadline);
+		$this->assertTrue(
+			$this->fixture->hasUnregistrationDeadline()
+		);
+
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->assertFalse(
+			$this->fixture->hasUnregistrationDeadline()
+		);
+	}
+
+	public function testGetUnregistrationDeadline() {
+		$this->fixture->setUnregistrationDeadline(1893488400);
+		$this->assertEquals(
+			'01.01.2030',
+			$this->fixture->getUnregistrationDeadline()
+		);
+
+		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
+		$this->assertEquals(
+			'01.01.2030 10:00',
+			$this->fixture->getUnregistrationDeadline()
+		);
+
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->assertEquals(
+			'',
+			$this->fixture->getUnregistrationDeadline()
+		);
+	}
+
+	public function testGetEventData() {
+		$this->fixture->setUnregistrationDeadline(1893488400);
+		$this->fixture->setShowTimeOfUnregistrationDeadline(0);
+		$this->assertEquals(
+			'01.01.2030',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+
+		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
+		$this->assertEquals(
+			'01.01.2030 10:00',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->assertEquals(
+			'',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+	}
+}
+
+?>

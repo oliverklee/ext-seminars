@@ -36,9 +36,6 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
-/** one day in seconds */
-define('ONE_DAY', 86400);
-
 class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/** same as class name */
 	var $prefixId = 'tx_seminars_timespan';

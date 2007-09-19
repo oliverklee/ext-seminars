@@ -39,6 +39,10 @@
 DEFINE(UTF8_EN_DASH, chr(0xE2).chr(0x80).chr(0x93));
 // a CR-LF combination (the default Unix line ending)
 DEFINE(CRLF, chr(0x0D).chr(0x0A));
+// one day in seconds
+define('ONE_DAY', 86400);
+// one week in seconds
+define('ONE_WEEK', 604800);
 
 require_once(PATH_t3lib.'class.t3lib_tstemplate.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
