@@ -38,9 +38,6 @@
 	</control>
 
 	<elements>
-		<renderlet:SUBMIT name="button_unregister">
-			<label>LLL:EXT:seminars/pi1/locallang.xml:label_unregister</label>
-		</renderlet:SUBMIT>
 		<renderlet:SUBMIT name="button_cancel">
 			<onclick runat="server" submit="full">
 				<userobj>
@@ -51,6 +48,9 @@
 				</userobj>
 			</onclick>
 			<label>LLL:EXT:lang/locallang_core.xml:labels.cancel</label>
+		</renderlet:SUBMIT>
+		<renderlet:SUBMIT name="button_unregister">
+			<label>LLL:EXT:seminars/pi1/locallang.xml:label_unregister</label>
 		</renderlet:SUBMIT>
 	</elements>
 </formidable>
