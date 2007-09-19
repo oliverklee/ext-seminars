@@ -3671,6 +3671,40 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	function isHidden() {
 		return $this->getRecordPropertyBoolean('hidden');
 	}
+
+	/**
+	 * Returns true if unregistration is possible. That means the unregistration
+	 * deadline isn't already reached.
+	 * If the unregistration deadline is not set globally via TypoScript and not
+	 * set in the current event record, the unregistration will not be possible
+	 * and this method returns false.
+	 *
+	 * @return	boolean		true if unregistration is possible, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isUnregistrationPossible() {
+		$result = false;
+
+		if ($this->needsRegistration()) {
+			if ($this->hasUnregistrationDeadline()) {
+				if ($this->getUnregistrationDeadlineAsTimestamp() > time()) {
+					$result = true;
+				}
+			} elseif ($this->hasBeginDate()
+				&& $this->hasConfValueInteger(
+					'unregistrationDeadlineDaysBeforeBeginDate')
+				&& (($this->getBeginDateAsTimestamp()
+					- ($this->getConfValue(
+					'unregistrationDeadlineDaysBeforeBeginDate')*ONE_DAY))
+					> time())
+			) {
+				$result = true;
+			}
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

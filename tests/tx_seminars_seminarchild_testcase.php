@@ -36,18 +36,21 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $beginDate;
 	private $unregistrationDeadline;
+	private $currentTimestamp;
 
 	protected function setUp() {
 		$this->fixture = new tx_seminars_seminarchild(
 			array(
 				'dateFormatYMD' => '%d.%m.%Y',
 				'timeFormat' => '%H:%M',
-				'showTimeOfUnregistrationDeadline' => 0
+				'showTimeOfUnregistrationDeadline' => 0,
+				'unregistrationDeadlineDaysBeforeBeginDate' => 0
 			)
 		);
 
-		$this->beginDate = (time() + ONE_WEEK);
-		$this->unregistrationDeadline = (time() + ONE_WEEK);
+		$this->currentTimestamp = time();
+		$this->beginDate = ($this->currentTimestamp + ONE_WEEK);
+		$this->unregistrationDeadline = ($this->currentTimestamp + ONE_WEEK);
 
 		$this->fixture->setEventData(
 			array(
@@ -55,7 +58,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'begin_date' => $this->beginDate,
 				'deadline_unregistration' => $this->unregistrationDeadline,
 				'attendees_min' => 5,
-				'attendees_max' => 10
+				'attendees_max' => 10,
+				'object_type' => 0
 			)
 		);
 	}
@@ -161,6 +165,114 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$this->fixture->getEventData('deadline_unregistration')
+		);
+	}
+
+	public function testIsUnregistrationPossibleWithNoDeadlineSet() {
+		$this->fixture->setGlobalUnregistrationDeadline(0);
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
+		$this->fixture->setAttendancesMax(10);
+
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleWithGlobalDeadlineSet() {
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
+		$this->fixture->setAttendancesMax(10);
+
+		$this->assertTrue(
+			$this->fixture->isUnregistrationPossible()
+		);
+
+
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setBeginDate($this->currentTimestamp);
+
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleWithEventDeadlineSet() {
+		$this->fixture->setGlobalUnregistrationDeadline(0);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
+		$this->fixture->setAttendancesMax(10);
+
+		$this->assertTrue(
+			$this->fixture->isUnregistrationPossible()
+		);
+
+
+		$this->fixture->setBeginDate($this->currentTimestamp);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp - ONE_DAY)
+		);
+
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleWithBothDeadlinesSet() {
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
+		$this->fixture->setAttendancesMax(10);
+
+		$this->assertTrue(
+			$this->fixture->isUnregistrationPossible()
+		);
+
+
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp - ONE_DAY)
+		);
+		$this->fixture->setBeginDate($this->currentTimestamp);
+
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleWithNoRegistrationNeeded() {
+		$this->fixture->setAttendancesMax(10);
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+
+		$this->assertTrue(
+			$this->fixture->isUnregistrationPossible()
+		);
+
+
+		$this->fixture->setAttendancesMax(0);
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleWithPassedEventUnregistrationDeadlineSet() {
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setBeginDate($this->currentTimestamp + (2*ONE_DAY));
+		$this->fixture->setUnregistrationDeadline(
+			$this->currentTimestamp - ONE_DAY
+		);
+		$this->fixture->setAttendancesMax(10);
+
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
 		);
 	}
 }

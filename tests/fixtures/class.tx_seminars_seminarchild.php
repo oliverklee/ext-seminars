@@ -115,6 +115,17 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setShowTimeOfUnregistrationDeadline($value) {
 		$this->conf['showTimeOfUnregistrationDeadline'] = $value;
 	}
+
+	/**
+	 * Sets the TypoScript configuration for the parameter
+	 * unregistrationDeadlineDaysBeforeBeginDate.
+	 *
+	 * @param	integer		days before the begin date until unregistration
+	 *						should be possible
+	 */
+	public function setGlobalUnregistrationDeadline($days) {
+		$this->conf['unregistrationDeadlineDaysBeforeBeginDate'] = $days;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

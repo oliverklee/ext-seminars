@@ -469,42 +469,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			}
 		}
 	}
-
-	/**
-	 * Returns true if unregistration is possible. That means the unregistration
-	 * deadline isn't already reached.
-	 * If the unregistration deadline is not set globally via TypoScript and not
-	 * set in the current event record, the unregistration will not be possible
-	 * and this method returns false.
-	 *
-	 * @param	object		seminar object (must not be null)
-	 *
-	 * @return	boolean		true if unregistration is possible, false otherwise
-	 *
-	 * @access	public
-	 */
-	function isUnregistrationPossible(&$seminar) {
-		$result = false;
-
-		if ($seminar->needsRegistration()) {
-			if ($seminar->hasUnregistrationDeadline()) {
-				if ($seminar->getUnregistrationDeadlineAsTimestamp() > time()) {
-					$result = true;
-				}
-			} elseif ($seminar->hasBeginDate()
-				&& $this->hasConfValueInteger(
-					'unregistrationDeadlineDaysBeforeBeginDate')
-				&& (($seminar->getBeginDateAsTimestamp()
-					- ($this->getConfValue(
-					'unregistrationDeadlineDaysBeforeBeginDate')*ONE_DAY))
-					> time())
-			) {
-				$result = true;
-			}
-		}
-
-		return $result;
-	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationmanager.php']) {

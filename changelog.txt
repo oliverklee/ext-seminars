@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1179] Change: Move isUnregistrationPossible() to tx_seminars_seminar
 - [#1026] Feature: Add configuration: unregistration deadline
 - [#1162] Fix: Cannot register for open-ended events
 - [#1058] Change: Added helper function to convert boolean values into text
