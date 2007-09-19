@@ -44,7 +44,7 @@ class tx_seminars_dbpluginchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	public function testGetBooleanAsText_withBooleanValues() {
+	public function testGetBooleanAsTextWithBooleanValues() {
 		$this->assertEquals(
 			'yes',
 			$this->fixture->getBooleanAsText(true)
@@ -55,7 +55,7 @@ class tx_seminars_dbpluginchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetBooleanAsText_withIntegerValues() {
+	public function testGetBooleanAsTextWithIntegerValues() {
 		$this->assertEquals(
 			'yes',
 			$this->fixture->getBooleanAsText(1)
@@ -66,7 +66,7 @@ class tx_seminars_dbpluginchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetBooleanAsText_withStringValues() {
+	public function testGetBooleanAsTextWithStringValues() {
 		$this->assertEquals(
 			'no',
 			$this->fixture->getBooleanAsText('0')
@@ -81,7 +81,7 @@ class tx_seminars_dbpluginchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetBooleanAsText_withBooleanValuesForeignLanguage() {
+	public function testGetBooleanAsTextWithBooleanValuesForeignLanguage() {
 		$this->fixture->setLanguage('de');
 		$this->assertEquals(
 			'ja',
