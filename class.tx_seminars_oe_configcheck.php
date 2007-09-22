@@ -1120,10 +1120,8 @@ class tx_seminars_oe_configcheck {
 				'uid',
 				'pages',
 				'uid IN ('.$pids.') AND NOT (doktype'.$typeCondition.')'
-					.$pageSelect->enableFields('pages'),
-				'',
-				'',
-				'');
+					.$pageSelect->enableFields('pages')
+			);
 
 			if ($dbResult) {
 				$dbResultCount = $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult);

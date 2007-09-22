@@ -349,10 +349,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 				'COUNT(*) AS num',
 				$tableName,
 				'uid='.intval($uid)
-					.$enableFields,
-				'',
-				'',
-				'');
+					.$enableFields
+			);
 
 			if ($dbResult) {
 				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
@@ -416,7 +414,9 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 					.$enableFields,
 				'',
 				'',
-				'1');
+				'1'
+			);
+
 	 	} else {
 	 		$result = null;
 	 	}

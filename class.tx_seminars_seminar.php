@@ -529,10 +529,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title, address, homepage, directions',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSites),
-				'',
-				'',
-				''
+					.$this->enableFields($this->tableSites)
 			);
 
 			if ($dbResult) {
@@ -622,10 +619,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSites),
-				'',
-				'',
-				''
+					.$this->enableFields($this->tableSites)
 			);
 
 			if ($dbResult) {
@@ -701,10 +695,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title, organization, homepage, description',
 				$this->tableSpeakers.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSpeakers),
-				'',
-				'',
-				''
+					.$this->enableFields($this->tableSpeakers)
 			);
 
 			if ($dbResult) {
@@ -845,10 +836,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title',
 				$this->tableSpeakers.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSpeakers),
-				'',
-				'',
-				''
+					.$this->enableFields($this->tableSpeakers)
 			);
 
 			if ($dbResult) {
@@ -1285,10 +1273,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'title',
 				$this->tablePaymentMethods,
 				'uid='.intval($currentPaymentMethod)
-					.$this->enableFields($this->tablePaymentMethods),
-				'',
-				'',
-				''
+					.$this->enableFields($this->tablePaymentMethods)
 			);
 
 			// We expect just one result.
@@ -1370,10 +1355,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title, description',
 			$this->tablePaymentMethods,
 			'uid='.$paymentMethodUid
-				.$this->enableFields($this->tablePaymentMethods),
-			'',
-			'',
-			''
+				.$this->enableFields($this->tablePaymentMethods)
 		);
 
 		// We expect just one result.
@@ -1406,10 +1388,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title',
 			$this->tablePaymentMethods,
 			'uid='.$paymentMethodUid
-				.$this->enableFields($this->tablePaymentMethods),
-			'',
-			'',
-			''
+				.$this->enableFields($this->tablePaymentMethods)
 		);
 
 		// We expect just one result.
@@ -1518,6 +1497,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'',
 				'1'
 			);
+
 			if ($dbResultEventType && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultEventType)) {
 				$eventTypeRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultEventType);
 				$result = $eventTypeRow['title'];
@@ -1962,10 +1942,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'*',
 				$this->tableOrganizers,
 				'uid='.intval($organizerUid)
-					.$this->enableFields($this->tableOrganizers),
-				'',
-				'',
-				''
+					.$this->enableFields($this->tableOrganizers)
 			);
 
 			if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
@@ -2123,10 +2100,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'COUNT(*) AS num',
 			$this->tableAttendances,
 			'seminar='.$this->getUid().' AND user='.$feUserUid
-				.$this->enableFields($this->tableAttendances),
-			'',
-			'',
-			'');
+				.$this->enableFields($this->tableAttendances)
+		);
+
 		if ($dbResult) {
 			$numberOfRegistrations = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 			$result = ($numberOfRegistrations['num'] > 0);
@@ -2173,10 +2149,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'COUNT(*) AS num',
 				$this->tableVipsMM,
-				'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid,
-				'',
-				'',
-				'');
+				'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid
+			);
+
 			if ($dbResult) {
 				$numberOfVips = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 				$result = ($numberOfVips['num'] > 0);
@@ -2435,11 +2410,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats=0'
-				.$this->enableFields($this->tableAttendances),
-			'',
-			'',
-			''
+				.$this->enableFields($this->tableAttendances)
 		);
+
 		if ($dbResultSingleSeats) {
 			$fieldsSingleSeats = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultSingleSeats);
 			$result += $fieldsSingleSeats['number'];
@@ -2451,10 +2424,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats!=0'
-				.$this->enableFields($this->tableAttendances),
-			'',
-			'',
-			''
+				.$this->enableFields($this->tableAttendances)
 		);
 
 		if ($dbResultMultiSeats) {
