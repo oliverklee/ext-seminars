@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#636] Change: Remove surplus empty parameters from exec_SELECTquery calls, patch by Saskia Metzler
 - [#903] Change: Add scope="col" to TH elements in the list view, patch by Saskia Metzler
 - [#412] Change: Use the config getter instead of the registration manager in pi1::searchWhere to retrieve configuration data from plugin.tx_seminars
 - [#1170] Change: Switch the order of the buttons on the unregistration page

@@ -642,8 +642,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 				$queryParameter
 				.$this->enableFields($tableName),
 			'',
-			'title',
-			'');
+			'title'
+		);
 
 		$titlePostfix = $appendBr ? '<br />' : '';
 
