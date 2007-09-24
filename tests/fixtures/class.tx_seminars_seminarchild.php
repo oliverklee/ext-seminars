@@ -130,6 +130,25 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'unregistrationDeadlineDaysBeforeBeginDate', $days
 		);
 	}
+
+	/**
+	 * Sets the registration queue size.
+	 *
+	 * @param	integer		size of the registration queue
+	 */
+	public function setRegistrationQueueSize($size) {
+		$this->setRecordPropertyInteger('queue_size', $size);
+	}
+
+	/**
+	 * Sets the number of attendances.
+	 *
+	 * @param	integer		number of attendances
+	 */
+	public function setNumberOfAttendances($number) {
+		$this->numberOfAttendances = $number;
+		$this->statisticsHaveBeenCalculated = true;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

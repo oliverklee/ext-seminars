@@ -59,7 +59,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'deadline_unregistration' => $this->unregistrationDeadline,
 				'attendees_min' => 5,
 				'attendees_max' => 10,
-				'object_type' => 0
+				'object_type' => 0,
+				'queue_size' => 0
 			)
 		);
 	}
@@ -273,6 +274,52 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testGetRegistrationQueueSize() {
+		$this->fixture->setRegistrationQueueSize(10);
+		$this->assertEquals(
+			10,
+			$this->fixture->getRegistrationQueueSize()
+		);
+	}
+
+	public function testHasRegistrationQueueSize() {
+		$this->fixture->setRegistrationQueueSize(5);
+		$this->assertTrue(
+			$this->fixture->hasRegistrationQueueSize()
+		);
+
+		$this->fixture->setRegistrationQueueSize(0);
+		$this->assertFalse(
+			$this->fixture->hasRegistrationQueueSize()
+		);
+	}
+
+	public function testHasVacanciesOnUnregistrationQueue() {
+		$this->fixture->setNumberOfAttendances(
+			$this->fixture->getAttendancesMax()
+		);
+		$this->fixture->setRegistrationQueueSize(5);
+		$this->assertTrue(
+			$this->fixture->hasVacanciesOnRegistrationQueue()
+		);
+
+		$this->fixture->setRegistrationQueueSize(0);
+		$this->assertFalse(
+			$this->fixture->hasVacanciesOnRegistrationQueue()
+		);
+	}
+
+	public function testGetVacanciesOnRegistrationQueue() {
+		$this->fixture->setNumberOfAttendances(
+			$this->fixture->getAttendancesMax()
+		);
+		$this->fixture->setRegistrationQueueSize(5);
+		$this->assertEquals(
+			5,
+			$this->fixture->getVacanciesOnRegistrationQueue()
 		);
 	}
 }

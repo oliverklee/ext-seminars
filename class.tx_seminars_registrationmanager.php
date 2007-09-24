@@ -168,10 +168,20 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function getLinkToRegistrationOrLoginPage(&$plugin, &$seminar) {
+		$label = '';
+
+		if (!$seminar->hasVacancies()
+			&& $seminar->hasVacanciesOnRegistrationQueue()
+		) {
+			$label = $plugin->pi_getLL('label_onlineRegistrationOnQueue');
+		} else {
+			$label = $plugin->pi_getLL('label_onlineRegistration');
+		}
+
 		if ($this->isLoggedIn()) {
 			// provide the registration link
 			$result = $plugin->cObj->getTypoLink(
-				$plugin->pi_getLL('label_onlineRegistration'),
+				$label,
 				$plugin->getConfValueInteger('registerPID'),
 				array(
 					'tx_seminars_pi1[seminar]' => $seminar->getUid(),
@@ -181,7 +191,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		} else {
 			// provide the login link
 			$result = $plugin->getLoginLink(
-				$plugin->pi_getLL('label_onlineRegistration'),
+				$label,
 				$plugin->getConfValueInteger('registerPID'),
 				$seminar->getUid()
 			);
@@ -375,7 +385,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 		// Check whether we have a valid number
 		if ($numberOfSeats == strval($numberOfSeatsInt)) {
-			$result = ($seminar->getVacancies() >= $numberOfSeatsInt);
+			$result = ($seminar->getVacanciesOnRegistrationQueue() >= $numberOfSeatsInt);
 		} else {
 			$result = false;
 		}

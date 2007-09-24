@@ -2515,7 +2515,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			!$this->isCanceled() &&
 			$this->hasDate() &&
 			!$this->isRegistrationDeadlineOver() &&
-			$this->hasVacancies();
+			$this->hasVacanciesOnRegistrationQueue();
 	}
 
 	/**
@@ -2544,7 +2544,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$message = $this->pi_getLL('message_noDate');
 		} elseif ($this->isRegistrationDeadlineOver()) {
 			$message = $this->pi_getLL('message_seminarRegistrationIsClosed');
-		} elseif ($this->isFull()) {
+		} elseif ($this->isFull()
+			&& !$this->hasVacanciesOnRegistrationQueue()) {
 			$message = $this->pi_getLL('message_noVacancies');
 		}
 
@@ -3674,6 +3675,60 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns true if there are vacancies on the waiting list, otherwise false.
+	 *
+	 * @return	boolean		true if there are vancancies on the waiting list,
+	 * 						otherwise false
+	 *
+	 * @access	public
+	 */
+	function hasVacanciesOnRegistrationQueue() {
+		return ($this->getVacanciesOnRegistrationQueue() > 0);
+	}
+
+	/**
+	 * Gets the size of the registration queue of this event.
+	 *
+	 * @return	integer		size of the registration queue of this event
+	 *
+	 * @access	public
+	 */
+	function getRegistrationQueueSize() {
+		return $this->getRecordPropertyInteger('queue_size');
+	}
+
+	/**
+	 * Returns true if the current event has a registration queue size,
+	 * otherwise false.
+	 *
+	 * @return	boolean		true if the current event has a registration queue
+	 * 						size, otherwise false
+	 *
+	 * @access	public
+	 */
+	function hasRegistrationQueueSize() {
+		return $this->hasRecordPropertyInteger('queue_size');
+	}
+
+	/**
+	 * Gets the number of vacancies including the vacancies on the registration
+	 * queue for this seminar.
+	 *
+	 * @return	integer		the number of vacancies including the vacancies on
+	 * 						the registration queue (will be 0 if the seminar is
+	 * 						overbooked)
+	 *
+	 * @access	public
+	 */
+	function getVacanciesOnRegistrationQueue() {
+		return max(
+			0,
+			($this->getAttendancesMax() + $this->getRegistrationQueueSize())
+				- $this->getAttendances()
+		);
 	}
 }
 
