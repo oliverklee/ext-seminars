@@ -816,9 +816,17 @@ $TCA['tx_seminars_speakers'] = array(
 $TCA['tx_seminars_attendances'] = array(
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,user,seminar,price,seats,total_price,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
+		'showRecordFieldList' => 'hidden,title,user,seminar,price,seats,total_price,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
 	),
 	'columns' => array(
+		'hidden' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+			'config' => array(
+				'type' => 'check',
+				'default' => '0'
+			)
+		),
 		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.title',
@@ -1186,7 +1194,7 @@ $TCA['tx_seminars_attendances'] = array(
 		)
 	),
 	'types' => array(
-		'0' => array('showitem' => 'user;;;;1-1-1, seminar, price, seats, total_price, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes')
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, user;;;;1-1-1, seminar, price, seats, total_price, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
