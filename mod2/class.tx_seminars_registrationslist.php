@@ -40,6 +40,9 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 	/** the registration which we want to list/show */
 	var $registration;
 
+	/** the registration bag containing the registrations we want to list/show */
+	var $registrationBag = null;
+
 	/**
 	 * The constructor. Calls the constructor of the parent class and sets
 	 * $this->tableName.
@@ -64,7 +67,48 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		// Initialize the variable for the HTML source code.
 		$content = '';
 
-		// Set the table layout of the event list.
+		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
+
+		// Generate the table with the regular attendances.
+		$registrationTable .= $this->getRegistrationTable(false);
+		$content .= TAB.TAB.'<div style="clear: both;"></div>'.LF;
+		$content .= TAB.TAB.'<h3>'
+			.$LANG->getLL('registrationlist.label_regularRegistrations')
+			.' ('.$this->registrationBag->getObjectCountWithoutLimit().')'
+			.'</h3>'.LF;
+		$content .= $registrationTable;
+
+		// Generate the table with the attendances on the registration queue.
+		$registrationQueueTable = $this->getRegistrationTable(true);
+		$content .= TAB.TAB.'<h3>'
+			.$LANG->getLL('registrationlist.label_queueRegistrations')
+			.' ('.$this->registrationBag->getObjectCountWithoutLimit().')'
+			.'</h3>'.LF;
+		$content .= $registrationQueueTable;
+
+		$content .= $this->registrationBag->checkConfiguration();
+
+		return $content;
+	}
+
+	/**
+	 * Gets the registration table for regular attendances and attendances on
+	 * the registration queue.
+	 *
+	 * @param	boolean		True if the registration table for the registration
+	 * 						queue should be generated and false if the table for
+	 * 						the regular attendances should be generated.
+	 *
+	 * @return	string		the registration table, nicely formatted as HTML
+	 *
+	 * @access	public
+	 */
+	function getRegistrationTable($showRegistrationQueue) {
+		global $LANG;
+
+		$content = '';
+
+		// Set the table layout of the registration list.
 		$tableLayout = array(
 			'table' => array(
 				TAB.TAB
@@ -126,7 +170,8 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		);
 
 		// Initialize variables for the database query.
-		$queryWhere = 'pid='.$this->page->pageInfo['uid'];
+		$queryWhere = 'pid='.$this->page->pageInfo['uid']
+			.' AND registration_queue='.($showRegistrationQueue ? 1 : 0);
 		$additionalTables = '';
 		$orderBy = 'crdate DESC';
 		$limit = '';
@@ -134,17 +179,15 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		$registrationBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registrationbag'
 		);
-		$registrationBag =& new $registrationBagClassname(
+		$this->registrationBag =& new $registrationBagClassname(
 			$queryWhere,
 			$additionalTables,
 			'',
 			$orderBy,
-			$limit,
-			1
+			$limit
 		);
 
-		while ($this->registration =& $registrationBag->getCurrent()) {
-			$this->registration->getSeminar();
+		while ($this->registration =& $this->registrationBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB
@@ -163,16 +206,12 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 						$this->registration->getUid()
 					).LF
 			);
-			$registrationBag->getNext();
+			$this->registrationBag->getNext();
 		}
-
-		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
 
 		// Output the table array using the tableLayout array with the template
 		// class.
 		$content .= $this->page->doc->table($table, $tableLayout);
-
-		$content .= $registrationBag->checkConfiguration();
 
 		return $content;
 	}

@@ -112,6 +112,9 @@ plugin.tx_seminars {
 	# comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
 	fieldsFromAttendanceForCsv = price,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
 
+	# wether to show attendances on the registration queue in the CSV export or not
+	showAttendancesOnRegistrationQueueInCSV = 0
+
 
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.

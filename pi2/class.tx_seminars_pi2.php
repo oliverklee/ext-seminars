@@ -135,13 +135,21 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 						.'"'.CRLF
 				);
 
+				$additionalWhere = '';
+
+				if (!$this->configGetter->getConfValueBoolean(
+						'showAttendancesOnRegistrationQueueInCSV')
+				) {
+					$additionalWhere = ' AND registration_queue=0';
+				}
+
 				// Now let's have a registration bag to iterate over all
 				// registrations of this event.
 				$registrationBagClassname = t3lib_div::makeInstanceClassName(
 					'tx_seminars_registrationbag'
 				);
 				$registrationBag =& new $registrationBagClassname(
-					'seminar='.$eventUid
+					'seminar='.$eventUid.$additionalWhere
 				);
 
 				while ($currentRegistration =& $registrationBag->getCurrent()) {

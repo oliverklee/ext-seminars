@@ -27,6 +27,8 @@
 			<label index="registrationlist.feuser.name">Name</label>
 			<label index="registrationlist.seminar.title">Event</label>
 			<label index="registrationlist.seminar.date">Event date</label>
+			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
+			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
@@ -69,6 +71,8 @@
 			<label index="registrationlist.feuser.name">Name</label>
 			<label index="registrationlist.seminar.title">Veranstaltung</label>
 			<label index="registrationlist.seminar.date">Veranstaltungsdatum</label>
+			<label index="registrationlist.label_regularRegistrations">Reguläre Anmeldungen</label>
+			<label index="registrationlist.label_queueRegistrations">Anmeldungen auf der Warteliste</label>
 			<label index="referencesWarning">(Es gibt %s Verbindung(en) zu diesem Datensatz!)</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -111,8 +115,8 @@
 			<label index="organizerlist.title" type="integer">77521672</label>
 			<label index="registrationlist.feuser.name" type="integer">77521672</label>
 			<label index="registrationlist.seminar.title" type="integer">172937159</label>
-			<label index="referencesWarning" type="integer">94848684</label>
 			<label index="registrationlist.seminar.date" type="integer">56229706</label>
+			<label index="referencesWarning" type="integer">94848684</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -132,8 +136,10 @@
 			<label index="organizerlist.title" type="integer">77521672</label>
 			<label index="registrationlist.feuser.name" type="integer">77521672</label>
 			<label index="registrationlist.seminar.title" type="integer">172937159</label>
-			<label index="referencesWarning" type="integer">94848684</label>
 			<label index="registrationlist.seminar.date" type="integer">56229706</label>
+			<label index="registrationlist.label_regularRegistrations" type="integer">52997146</label>
+			<label index="registrationlist.label_queueRegistrations" type="integer">122173419</label>
+			<label index="referencesWarning" type="integer">94848684</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -175,8 +181,8 @@
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
 			<label index="registrationlist.seminar.title">Event</label>
-			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 			<label index="registrationlist.seminar.date">Event date</label>
+			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="title">Events</label>
@@ -196,8 +202,10 @@
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
 			<label index="registrationlist.seminar.title">Event</label>
-			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 			<label index="registrationlist.seminar.date">Event date</label>
+			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
+			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
+			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>

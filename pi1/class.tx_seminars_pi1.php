@@ -1915,7 +1915,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'tx_seminars_registrationbag'
 		);
 		$registrationBag =& new $registrationBagClassname(
-			$this->tableAttendances.'.seminar='.$this->seminar->getUid(),
+			$this->tableAttendances.'.seminar='.$this->seminar->getUid()
+				.' AND '.$this->tableAttendances.'.registration_queue=0',
 			'',
 			'',
 			'crdate'
