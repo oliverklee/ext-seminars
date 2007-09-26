@@ -35,6 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php')
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 
 class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/** Same as class name */
@@ -475,7 +476,52 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 							'tstamp' => time()
 						)
 					);
+
+					$this->fillVacancies();
 				}
+			}
+		}
+	}
+
+	/**
+	 * Fills vacancies created through a unregistration with attendees from the
+	 * registration queue.
+	 *
+	 * @access	public
+	 */
+	function fillVacancies() {
+		$seminar = $this->registration->getSeminarObject();
+		$seminar->calculateStatistics();
+
+		if ($seminar->hasVacancies()) {
+			$vacancies = $seminar->getVacancies();
+
+			$registrationBagClassname =& t3lib_div::makeInstanceClassname(
+				'tx_seminars_registrationbag'
+			);
+			$registrationBag =& new $registrationBagClassname(
+				'seminar='.$seminar->getUid()
+					.' AND seats<='.$seminar->getVacancies()
+					.' AND registration_queue=1',
+				'',
+				'',
+				'crdate ASC'
+			);
+
+			while ($registration =& $registrationBag->getCurrent()
+				&& ($vacancies > 0)
+			) {
+				if ($registration->getSeats() <= $vacancies) {
+					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+						$this->tableAttendances,
+						'uid='.$registration->getUid(),
+						array(
+							'registration_queue' => 0
+						)
+					);
+					$vacancies -= $registration->getSeats();
+				}
+				$registrationBag->getNext();
 			}
 		}
 	}

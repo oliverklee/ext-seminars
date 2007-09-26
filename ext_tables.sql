@@ -207,6 +207,7 @@ CREATE TABLE tx_seminars_attendances (
 	title tinytext,
 	user int(11) unsigned DEFAULT '0' NOT NULL,
 	seminar int(11) unsigned DEFAULT '0' NOT NULL,
+	registration_queue tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	price text,
 	seats int(11) unsigned DEFAULT '0' NOT NULL,
 	total_price decimal(7,2) DEFAULT '0.00' NOT NULL,

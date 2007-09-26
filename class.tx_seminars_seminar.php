@@ -2663,6 +2663,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats=0'
+				.' AND registration_queue=0'
 				.$this->enableFields($this->tableAttendances)
 		);
 
@@ -2679,6 +2680,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats!=0'
+				.' AND registration_queue=0'
 				.$this->enableFields($this->tableAttendances)
 		);
 

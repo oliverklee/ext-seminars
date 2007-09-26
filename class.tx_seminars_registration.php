@@ -128,6 +128,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->recordData['seminar'] = $seminar->getUid();
 		$this->recordData['user'] = $userUid;
+		$this->recordData['registration_queue']
+			= (!$seminar->hasVacancies()) ? 1 : 0;
 
 		$seats = intval($registrationData['seats']);
 		if ($seats < 1) {
