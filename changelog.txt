@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1030] Feature: Show the current number of people on the registration queue
 - [#1032] Change: Handle people that are on the waiting list
 - [#1029] Feature: When a user unregisters, make the first person in the queue a regular attendee
 - [#1031] Feature: Registration queue: Users should be able to sign up for full-booked events if there are still vacancies in the waiting list

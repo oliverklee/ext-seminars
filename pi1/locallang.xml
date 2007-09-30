@@ -110,7 +110,7 @@
 			<label index="label_deadline_registration">Deadline for registration</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_onlineRegistration">Register now</label>
-			<label index="label_onlineRegistrationOnQueue">Register for the waiting list</label>
+			<label index="label_onlineRegistrationOnQueue">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</label>
 			<label index="label_onlineUnregistration">Unregister now</label>
 			<label index="label_list_registrations">List of registrations</label>
 			<label index="label_listRegistrationsLink">View the list of registrations</label>
@@ -499,7 +499,7 @@
 			<label index="label_deadline_registration">Anmeldeschluss</label>
 			<label index="label_registration">Anmeldung</label>
 			<label index="label_onlineRegistration">Jetzt anmelden</label>
-			<label index="label_onlineRegistrationOnQueue">Für die Warteliste anmelden</label>
+			<label index="label_onlineRegistrationOnQueue">Für die Warteliste anmelden&lt;br /&gt;(%d Anmeldungen auf der Warteliste)</label>
 			<label index="label_onlineUnregistration">Jetzt abmelden</label>
 			<label index="label_list_registrations">Liste der Anmeldungen</label>
 			<label index="label_listRegistrationsLink">Liste der Anmeldungen anzeigen</label>
@@ -1255,7 +1255,7 @@
 			<label index="label_deadline_registration" type="integer">106717060</label>
 			<label index="label_registration" type="integer">16354175</label>
 			<label index="label_onlineRegistration" type="integer">201391585</label>
-			<label index="label_onlineRegistrationOnQueue" type="integer">13624152</label>
+			<label index="label_onlineRegistrationOnQueue" type="integer">240607496</label>
 			<label index="label_onlineUnregistration" type="integer">213082454</label>
 			<label index="label_list_registrations" type="integer">206095824</label>
 			<label index="label_listRegistrationsLink" type="integer">169828522</label>
@@ -1821,7 +1821,7 @@
 			<label index="label_deadline_registration">Deadline for registration</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_onlineRegistration">Register now</label>
-			<label index="label_onlineRegistrationOnQueue">Register for the waiting list</label>
+			<label index="label_onlineRegistrationOnQueue">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</label>
 			<label index="label_onlineUnregistration">Unregister now</label>
 			<label index="label_list_registrations">List of registrations</label>
 			<label index="label_listRegistrationsLink">View the list of registrations</label>

@@ -322,6 +322,19 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getVacanciesOnRegistrationQueue()
 		);
 	}
+
+	public function testGetAttendancesOnRegistrationQueue() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getAttendancesOnRegistrationQueue()
+		);
+
+		$this->fixture->setNumberOfAttendancesOnQueue(4);
+		$this->assertEquals(
+			4,
+			$this->fixture->getAttendancesOnRegistrationQueue()
+		);
+	}
 }
 
 ?>

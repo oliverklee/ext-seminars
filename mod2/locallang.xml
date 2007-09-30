@@ -18,6 +18,7 @@
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">On queue</label>
 			<label index="eventlist.attendees_min">Min.</label>
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Enough</label>
@@ -62,6 +63,7 @@
 			<label index="eventlist.date">Datum</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Akt.</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">Auf Warteliste</label>
 			<label index="eventlist.attendees_min">Min.</label>
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Genug</label>
@@ -128,6 +130,7 @@
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
+			<label index="eventlist.attendeesOnRegistrationQueue" type="integer">117662364</label>
 			<label index="eventlist.attendees_min" type="integer">51517544</label>
 			<label index="eventlist.attendees_max" type="integer">244016059</label>
 			<label index="eventlist.enough_attendees" type="integer">30455057</label>
@@ -192,6 +195,7 @@
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">On queue</label>
 			<label index="eventlist.attendees_min">Min.</label>
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Enough</label>

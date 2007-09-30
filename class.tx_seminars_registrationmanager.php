@@ -174,7 +174,10 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		if (!$seminar->hasVacancies()
 			&& $seminar->hasVacanciesOnRegistrationQueue()
 		) {
-			$label = $plugin->pi_getLL('label_onlineRegistrationOnQueue');
+			$label = sprintf(
+				$plugin->pi_getLL('label_onlineRegistrationOnQueue'),
+				$seminar->getAttendancesOnRegistrationQueue()
+			);
 		} else {
 			$label = $plugin->pi_getLL('label_onlineRegistration');
 		}

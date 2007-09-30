@@ -49,6 +49,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/** The number of paid attendances. */
 	var $numberOfAttendancesPaid = 0;
 
+	/** The number of attendances on the registration queue. */
+	var $numberOfAttendancesOnQueue = 0;
+
 	/** Flag which shows if the statistics have been already calculated. */
 	var $statisticsHaveBeenCalculated = false;
 
@@ -2624,9 +2627,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function calculateStatistics() {
-		$this->numberOfAttendances = $this->countAttendances();
+		$this->numberOfAttendances = $this->countAttendances(
+			'registration_queue=0'
+		);
 		$this->numberOfAttendancesPaid = $this->countAttendances(
-			'(paid=1 OR datepaid!=0)'
+			'(paid=1 OR datepaid!=0) AND registration_queue=0'
+		);
+		$this->numberOfAttendancesOnQueue = $this->countAttendances(
+			'registration_queue=1'
 		);
 		$this->statisticsHaveBeenCalculated = true;
 
@@ -2663,7 +2671,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats=0'
-				.' AND registration_queue=0'
 				.$this->enableFields($this->tableAttendances)
 		);
 
@@ -2680,7 +2687,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats!=0'
-				.' AND registration_queue=0'
 				.$this->enableFields($this->tableAttendances)
 		);
 
@@ -3731,6 +3737,21 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			($this->getAttendancesMax() + $this->getRegistrationQueueSize())
 				- $this->getAttendances()
 		);
+	}
+
+	/**
+	 * Gets the number of attendances on the registration queue.
+	 *
+	 * @return	integer		number of attendances on the registration queue
+	 *
+	 * @access	public
+	 */
+	function getAttendancesOnRegistrationQueue() {
+		if (!$this->statisticsHaveBeenCalculated) {
+			$this->calculateStatistics();
+		}
+
+		return $this->numberOfAttendancesOnQueue;
 	}
 }
 

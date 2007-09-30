@@ -43,7 +43,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 	/**
 	 * The constructor. Calls the constructor of the parent class and sets
 	 * $this->tableName.
-	 * 
+	 *
 	 * @param	object		the current back-end page object
 	 */
 	function tx_seminars_eventslist(&$page) {
@@ -176,6 +176,10 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
 					.$LANG->getLL('eventlist.attendees').'</span>'.LF,
+				TAB.TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('eventlist.attendeesOnRegistrationQueue')
+					.'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB.TAB
 					.'<span style="color: #ffffff; font-weight: bold;">'
 					.$LANG->getLL('eventlist.attendees_min').'</span>'.LF,
@@ -311,6 +315,8 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getRegistrationsCsvIcon()
 					.$this->seminar->getAttendances().LF,
+				TAB.TAB.TAB.TAB.TAB
+					.$this->seminar->getAttendancesOnRegistrationQueue().LF,
 				TAB.TAB.TAB.TAB.TAB
 					.$this->seminar->getAttendancesMin().LF,
 				TAB.TAB.TAB.TAB.TAB
