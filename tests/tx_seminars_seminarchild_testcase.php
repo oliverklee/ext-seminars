@@ -323,12 +323,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetAttendancesOnRegistrationQueue() {
+	public function testGetAttendancesOnRegistrationQueueIsInitiallyZero() {
 		$this->assertEquals(
 			0,
 			$this->fixture->getAttendancesOnRegistrationQueue()
 		);
+	}
 
+	public function testGetAttendancesOnRegistrationQueue() {
 		$this->fixture->setNumberOfAttendancesOnQueue(4);
 		$this->assertEquals(
 			4,
