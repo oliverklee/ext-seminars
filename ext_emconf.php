@@ -46,7 +46,6 @@ $EM_CONF[$_EXTKEY] = array(
 		'conflicts' => array(
 		),
 		'suggests' => array(
-			'typo3' => '4.1.2-0.0.0',
 			'date2cal' => '',
 			'newloginbox' => '',
 			'sr_feuser_register' => '',
@@ -54,7 +53,6 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 	),
 	'suggests' => array(
-		'typo3' => '4.1.2-0.0.0',
 		'date2cal' => '',
 		'newloginbox' => '',
 		'sr_feuser_register' => '',
