@@ -586,11 +586,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// Hide the column with the link to the list of registrations if
 		// online registration is disabled, no user is logged in or there is
 		// no page specified to link to.
+		// Also hide it for the "other dates" and "events next day" lists.
 		if (!$this->getConfValueBoolean('enableRegistration')
 			|| !$this->isLoggedIn()
 			|| (($whatToDisplay == 'seminar_list')
 				&& !$this->hasConfValueInteger('registrationsListPID')
 				&& !$this->hasConfValueInteger('registrationsVipListPID'))
+			|| ($whatToDisplay == 'other_dates')
+			|| ($whatToDisplay == 'events_next_day')
 			|| (($whatToDisplay == 'my_events')
 				&& !$this->hasConfValueInteger('registrationsListPID'))
 			|| (($whatToDisplay == 'my_vip_events')
