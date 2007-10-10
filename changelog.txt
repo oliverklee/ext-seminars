@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1037] Provide a German tutorial/manual
 - [#1195] Fix: List view column "list of registrations" is visible in the "subsequent events" list
 - [#1176] Fix: ext_emconf: typo3 can only be in the requirements, not in the suggestions
 - [#1030] Feature: Show the current number of people on the registration queue
