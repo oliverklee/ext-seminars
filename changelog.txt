@@ -1,4 +1,5 @@
 0.5.3 (currently working on)
+- [#1037] Provide a German tutorial/manual
 - [#1195] Fix: List view column "list of registrations" is visible in the "subsequent events" list
 - [#636] Change: Remove surplus empty parameters from exec_SELECTquery calls, patch by Saskia Metzler
 - [#903] Change: Add scope="col" to TH elements in the list view, patch by Saskia Metzler
