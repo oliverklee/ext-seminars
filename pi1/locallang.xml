@@ -129,7 +129,8 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from">How have you heard of this event?</label>
+			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
@@ -324,7 +325,8 @@
 			<label index="label_register_lodging_and_food">Kost og logi</label>
 			<label index="label_accommodation">Hvad er dine logi-præferencer (hvis det er muligt,- et enkeltværelse, dobbeltværelse eller uden overnatning)?</label>
 			<label index="label_food">Hvilken slags mad foretrækker du (normal, vegetar, eller en speciel diæt):</label>
-			<label index="label_known_from">Hvordan har du hørt om dette arrangement?</label>
+			<label index="label_known_from_formal">Hvordan har du hørt om dette arrangement?</label>
+			<label index="label_known_from_informal">Hvordan har du hørt om dette arrangement?</label>
 			<label index="label_notes">Yderligere bemærkninger:</label>
 			<label index="label_register_additional_attendees">Tilmeld flere personer</label>
 			<label index="label_seats">Antal pladser:</label>
@@ -518,7 +520,8 @@
 			<label index="label_register_lodging_and_food">Unterbringung und Verpflegung</label>
 			<label index="label_accommodation">Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, keine Übernachtung):</label>
 			<label index="label_food">Welche Kost bevorzugen Sie (Normalkost, vegetarisch oder eine spezielle Diät):</label>
-			<label index="label_known_from">Wie haben Sie von dieser Veranstaltung erfahren?</label>
+			<label index="label_known_from_formal">Wie haben Sie von dieser Veranstaltung erfahren?</label>
+			<label index="label_known_from_informal">Wie hast du von dieser Veranstaltung erfahren?</label>
 			<label index="label_notes">Weitere Mitteilungen:</label>
 			<label index="label_register_additional_attendees">Weitere Personen anmelden</label>
 			<label index="label_seats">Plätze</label>
@@ -713,7 +716,8 @@
 			<label index="label_register_lodging_and_food">Acomodatie en voeding</label>
 			<label index="label_accommodation">Wat zijn je accommodatie wensen ?</label>
 			<label index="label_food">Welk voedsel geef je de voorkeur aan?</label>
-			<label index="label_known_from">Hoe ben je geinformeerd over dit evenement.</label>
+			<label index="label_known_from_formal">Hoe ben je geinformeerd over dit evenement.</label>
+			<label index="label_known_from_informal">Hoe ben je geinformeerd over dit evenement.</label>
 			<label index="label_notes">extra notities</label>
 			<label index="label_register_additional_attendees">Registreer extra personen</label>
 			<label index="label_seats">Stoelen</label>
@@ -896,7 +900,8 @@
 			<label index="label_background_knowledge">Базовые знания:</label>
 			<label index="label_accommodation">Ваши пожелания к размещению (отдельная комната, двойная комната, без размещения)?</label>
 			<label index="label_food">Предпочтения по питанию (вегетарианская пища, специальная диета):</label>
-			<label index="label_known_from">Как вы узнали об этом событии?</label>
+			<label index="label_known_from_formal">Как вы узнали об этом событии?</label>
+			<label index="label_known_from_informal">Как вы узнали об этом событии?</label>
 			<label index="label_notes">Дополнительные заметки:</label>
 			<label index="label_seats">Количество мест:</label>
 			<label index="label_attendees_names">Дополнительные посетители:</label>
@@ -1079,7 +1084,8 @@
 			<label index="label_background_knowledge" type="integer">17742601</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from" type="integer">243584829</label>
+			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_attendees_names" type="integer">43575953</label>
@@ -1274,7 +1280,8 @@
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from" type="integer">243584829</label>
+			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_seats" type="integer">187299883</label>
@@ -1479,7 +1486,8 @@
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from" type="integer">243584829</label>
+			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_seats" type="integer">187299883</label>
@@ -1652,7 +1660,8 @@
 			<label index="label_background_knowledge" type="integer">17742601</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from" type="integer">243584829</label>
+			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">134941724</label>
 			<label index="label_attendees_names" type="integer">198880077</label>
@@ -1772,6 +1781,7 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
+			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page that will be displayed after a user has unregistered for an event</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end editing</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user group that is allowed to enter and edit events</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
@@ -1816,6 +1826,7 @@
 			<label index="label_paymentmethods">Available methods of payment</label>
 			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_event_type">Event type</label>
+			<label index="label_target_groups">Target Groups</label>			
 			<label index="label_organizers">Organizers</label>
 			<label index="label_vacancies">Vacancies</label>
 			<label index="label_deadline_registration">Deadline for registration</label>
@@ -1840,7 +1851,8 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from">How have you heard of this event?</label>
+			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
@@ -1878,6 +1890,8 @@
 			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
+			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>			
 			<label index="label_unregister">Unregister</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
@@ -1909,8 +1923,6 @@
 			<label index="message_countdown">%d %s left until the next event starts!</label>
 			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
-			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 			<label index="countdown_days_plural">days</label>
 			<label index="countdown_days_singular">day</label>
@@ -2034,7 +2046,8 @@
 			<label index="label_background_knowledge">Background knowledge:</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from">How have you heard of this event?</label>
+			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
@@ -2218,7 +2231,8 @@
 			<label index="label_background_knowledge">Background knowledge:</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from">How have you heard of this event?</label>
+			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Number of seats:</label>
 			<label index="label_attendees_names">Additional attendees:</label>
@@ -2410,7 +2424,8 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from">How have you heard of this event?</label>
+			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
