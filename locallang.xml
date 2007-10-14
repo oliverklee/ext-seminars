@@ -50,6 +50,7 @@
 			<label index="label_paymentmethod">Selected method of payment</label>
 			<label index="label_billing_address">Billing address</label>
 			<label index="label_telephone">Phone</label>
+			<label index="label_fax">Fax</label>
 			<label index="label_email">E-mail address</label>
 			<label index="label_interests">Special interests</label>
 			<label index="label_expectations">Expectations</label>
@@ -248,6 +249,7 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_paymentmethod">Gewählte Zahlungsart</label>
 			<label index="label_billing_address">Rechnungsadresse</label>
 			<label index="label_telephone">Telefon</label>
+			<label index="label_fax">Fax</label>
 			<label index="label_email">E-Mail-Adresse</label>
 			<label index="label_interests">Interessen</label>
 			<label index="label_expectations">Erwartungen</label>
@@ -574,6 +576,7 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="label_paymentmethod" type="integer">145013843</label>
 			<label index="label_billing_address" type="integer">33277925</label>
 			<label index="label_telephone" type="integer">197928267</label>
+			<label index="label_fax" type="integer">159451810</label>
 			<label index="label_email" type="integer">146136420</label>
 			<label index="label_url" type="integer">179332787</label>
 			<label index="label_seminardata" type="integer">202303574</label>
@@ -816,6 +819,7 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="label_paymentmethod">Selected method of payment</label>
 			<label index="label_billing_address">Billing address</label>
 			<label index="label_telephone">Phone</label>
+			<label index="label_fax">Fax</label>
 			<label index="label_email">E-mail address</label>
 			<label index="label_url">More information</label>
 			<label index="label_seminardata">Seminar data</label>
