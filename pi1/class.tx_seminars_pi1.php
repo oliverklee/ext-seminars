@@ -454,9 +454,22 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				}
 				break;
 			case 'my_vip_events':
-				$result .= $this->substituteMarkerArrayCached(
-					'MESSAGE_MY_VIP_EVENTS'
-				);
+				if ($this->isLoggedIn()) {
+					$result .= $this->substituteMarkerArrayCached(
+						'MESSAGE_MY_VIP_EVENTS'
+					);
+				} else {
+					$this->setMarkerContent(
+						'error_text',
+						$this->pi_getLL('message_notLoggedIn')
+					);
+					$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
+					$result .= $this->getLoginLink(
+						$this->pi_getLL('message_pleaseLogIn'),
+						$GLOBALS['TSFE']->id
+					);
+					$isOkay = false;
+				}
 				break;
 			case 'my_entered_events':
 				$result .= $this->createEventEditor(true);

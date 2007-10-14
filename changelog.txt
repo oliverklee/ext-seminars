@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1060] Fix: Wrong error message on "my VIP events" list if not logged in
 - [#1228] Fix: The fax number doesn't have a label in the notification e-mails
 - [#779] Change: Use labels for different saluations for "How have you heard of this event?"
 - [#1037] Provide a German tutorial/manual
