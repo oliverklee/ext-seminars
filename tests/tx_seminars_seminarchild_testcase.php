@@ -57,6 +57,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'uid' => 1,
 				'begin_date' => $this->beginDate,
 				'deadline_unregistration' => $this->unregistrationDeadline,
+				'language' => 'de',
 				'attendees_min' => 5,
 				'attendees_max' => 10,
 				'object_type' => 0,
@@ -75,6 +76,105 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->isOk()
 		);
 	}
+
+	//////////////////////////////////////////////
+	// Tests regarding the language of an event:
+	//////////////////////////////////////////////
+
+	public function testGetLanguageFromIsoCodeWithValidLanguage() {
+		$this->assertEquals(
+			'Deutsch',
+			$this->fixture->getLanguageNameFromIsoCode('de')
+		);
+	}
+
+	public function testGetLanguageFromIsoCodeWithInvalidLanguage() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getLanguageNameFromIsoCode('xy')
+		);
+	}
+
+	public function testGetLanguageFromIsoCodeWithVeryInvalidLanguage() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getLanguageNameFromIsoCode('foobar')
+		);
+	}
+
+	public function testGetLanguageFromIsoCodeWithEmptyLanguage() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getLanguageNameFromIsoCode('')
+		);
+	}
+
+	public function testHasLanguageWithDefaultLanguage() {
+		$this->assertTrue(
+			$this->fixture->hasLanguage()
+		);
+	}
+
+	public function testHasLanguageWithNoLanguage() {
+		// unset the language field
+		$this->fixture->setEventData(
+			array(
+				'language' => ''
+			)
+		);
+		$this->assertFalse(
+			$this->fixture->hasLanguage()
+		);
+	}
+
+	public function testGetLanguageNameWithDefaultLanguage() {
+		$this->assertEquals(
+			'Deutsch',
+			$this->fixture->getLanguageName()
+		);
+	}
+
+	public function testGetLanguageNameWithValidLanguage() {
+		$this->fixture->setEventData(
+			array(
+				'language' => 'en'
+			)
+		);
+		$this->assertEquals(
+			'English',
+			$this->fixture->getLanguageName()
+		);
+	}
+
+	public function testGetLanguageNameWithInvalidLanguage() {
+		$this->fixture->setEventData(
+			array(
+				'language' => 'xy'
+			)
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getLanguageName()
+		);
+	}
+
+
+	public function testGetLanguageNameWithNoLanguage() {
+		$this->fixture->setEventData(
+			array(
+				'language' => ''
+			)
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getLanguageName()
+		);
+	}
+
+
+	/////////////////////////////////////////////////
+	// Tests regarding the date fields of an event:
+	/////////////////////////////////////////////////
 
 	public function testGetBeginDateAsTimestamp() {
 		$this->fixture->setBeginDate($this->beginDate);

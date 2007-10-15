@@ -28,6 +28,7 @@
 			<label index="tx_seminars_seminars.description">Description:</label>
 			<label index="tx_seminars_seminars.topic">Topic:</label>
 			<label index="tx_seminars_seminars.event_type">Event type:</label>
+			<label index="tx_seminars_seminars.language">Language:</label>
 			<label index="tx_seminars_seminars.accreditation_number">Accreditation number:</label>
 			<label index="tx_seminars_seminars.credit_points">Credit points:</label>
 			<label index="tx_seminars_seminars.additional_information">Additional information:</label>
@@ -174,6 +175,7 @@
 			<label index="tx_seminars_seminars.description">Beschreibung:</label>
 			<label index="tx_seminars_seminars.topic">Thema:</label>
 			<label index="tx_seminars_seminars.event_type">Veranstaltungsart:</label>
+			<label index="tx_seminars_seminars.language">Sprache:</label>
 			<label index="tx_seminars_seminars.accreditation_number">Akkreditierungsnummer:</label>
 			<label index="tx_seminars_seminars.credit_points">Leistungspunkte:</label>
 			<label index="tx_seminars_seminars.additional_information">Zusätzliche Informationen:</label>
@@ -717,6 +719,7 @@
 			<label index="tx_seminars_seminars.credit_points" type="integer">157709552</label>
 			<label index="tx_seminars_seminars.topic" type="integer">200590756</label>
 			<label index="tx_seminars_seminars.event_type" type="integer">130389991</label>
+			<label index="tx_seminars_seminars.language" type="integer">8937228</label>
 			<label index="tx_seminars_seminars.additional_information" type="integer">15950088</label>
 			<label index="tx_seminars_seminars.checkboxes" type="integer">204622860</label>
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">261565721</label>
@@ -1273,6 +1276,7 @@
 			<label index="tx_seminars_seminars.price_special_board">Special price including full board:</label>
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment:</label>
 			<label index="tx_seminars_seminars.event_type">Event type:</label>
+			<label index="tx_seminars_seminars.language">Language:</label>
 			<label index="tx_seminars_seminars.organizers">Organizers:</label>
 			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form:</label>

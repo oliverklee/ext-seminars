@@ -948,6 +948,37 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Checks whether we have a language set.
+	 *
+	 * @return	boolean		true if we have a language set for this event,
+	 * 						false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasLanguage() {
+		return $this->hasRecordPropertyString('language');
+	}
+
+	/**
+	 * Returns the localized name of the language for this event. In the case
+	 * that no language is selected, an empty string will be returned.
+	 *
+	 * @return	string		the localized name of the language of this event or
+	 * 						an empty string if no language is set
+	 *
+	 * @access	public
+	 */
+	function getLanguageName() {
+		$language = '';
+		if ($this->hasLanguage()) {
+			$language = $this->getLanguageNameFromISOCode(
+				$this->getRecordPropertyString('language')
+			);
+		}
+		return $language;
+	}
+
+	/**
 	 * Gets our regular price as a string containing amount and currency. If
 	 * no regular price has been set, either "free" or "to be announced" will
 	 * be returned, depending on the TS variable showToBeAnnouncedForEmptyPrice.
@@ -1536,6 +1567,33 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns the name of the requested language from the static info tables.
+	 * If no language with this ISO code could not be found in the database,
+	 * an empty string is returned instead.
+	 *
+	 * @param	string		the ISO 639 alpha-2 code of the language
+	 *
+	 * @return	string		the short local name of the language or an empty string
+	 * 						if the language couldn't be found
+	 *
+	 * @access	public
+	 */
+	function getLanguageNameFromIsoCode($isoCode) {
+		$languageName = '';
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'lg_name_local',
+			'static_languages',
+			'lg_iso_2="'.$isoCode.'"'
+		);
+		if ($dbResult) {
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$languageName = $row['lg_name_local'];
+		}	
+
+		return $languageName;
 	}
 
  	/**

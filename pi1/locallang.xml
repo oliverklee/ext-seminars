@@ -91,6 +91,7 @@
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
 			<label index="label_leaders">Leaders</label>
+			<label index="label_language">Language</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_select_price">Price:</label>
 			<label index="label_price">Price</label>
@@ -482,6 +483,7 @@
 			<label index="label_partners">Partner</label>
 			<label index="label_tutors">Kursbegleitung</label>
 			<label index="label_leaders">Kursleitung</label>
+			<label index="label_language">Sprache</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_select_price">Preis:</label>
 			<label index="label_price">Preis</label>
@@ -1242,6 +1244,7 @@
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
 			<label index="label_leaders" type="integer">45784650</label>
+			<label index="label_language" type="integer">77154959</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_select_price" type="integer">254546606</label>
 			<label index="label_price" type="integer">56627526</label>
@@ -1810,6 +1813,7 @@
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
+			<label index="label_language">Language</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
 			<label index="label_leaders">Leaders</label>

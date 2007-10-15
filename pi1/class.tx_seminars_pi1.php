@@ -954,6 +954,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('leaders', 'field_wrapper');
 			}
 
+			if ($this->seminar->hasLanguage()) {
+				$this->setMarkerContent(
+					'language',
+					$this->seminar->getLanguageName()
+				);
+			} else {
+				$this->readSubpartsToHide('language', 'field_wrapper');
+			}
+
 			// set markers for prices
 			$this->setPriceMarkers('field_wrapper');
 
@@ -1445,6 +1454,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'header_speakers',
 			$this->getFieldHeader('speakers')
 		);
+		$this->setMarkerContent(
+			'header_language',
+			$this->getFieldHeader('language')
+		);
 		$this->setMarkerContent('header_date', $this->getFieldHeader('date'));
 		$this->setMarkerContent('header_time', $this->getFieldHeader('time'));
 		$this->setMarkerContent('header_place', $this->getFieldHeader('place'));
@@ -1557,6 +1570,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			);
 			$this->setMarkerContent('teaser', $this->seminar->getTeaser());
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
+			$this->setMarkerContent('language', $this->seminar->getLanguageName());
 
 			$currentDate = $this->seminar->getLinkedFieldValue($this, 'date');
 			if (($currentDate === $this->previousDate)

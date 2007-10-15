@@ -371,6 +371,25 @@ $TCA['tx_seminars_seminars'] = array(
 				'MM' => 'tx_seminars_seminars_speakers_mm_leaders'
 			)
 		),
+		'language' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.language',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array('', 0)
+				),
+				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
+				'itemsProcFunc_config' => array (
+					'table' => 'static_languages',
+					'where' => '',
+					'indexField' => 'lg_iso_2'
+				),
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1
+			)
+		),
 		'price_regular' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular',
@@ -640,7 +659,7 @@ $TCA['tx_seminars_seminars'] = array(
 	'types' => array(
 		// Single event
 		'0' => array('showitem' => '' .
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, accreditation_number, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, owner_feuser, vips, notes, '
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, owner_feuser, vips, notes, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, '
@@ -650,7 +669,7 @@ $TCA['tx_seminars_seminars'] = array(
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
