@@ -161,6 +161,7 @@ plugin.tx_seminars_pi1 {
 	class_headerdate =
 	class_headertime =
 	class_headerplace =
+	class_headercountry =
 	class_headerseats =
 	class_headerprice_regular =
 	class_headerprice_special =
@@ -187,6 +188,7 @@ plugin.tx_seminars_pi1 {
 	class_listdate = date
 	class_listtime =
 	class_listplace =
+	class_listcountry =
 	class_listseats = seats
 	class_listprice_regular = price
 	class_listprice_special = price
@@ -206,7 +208,7 @@ plugin.tx_seminars_pi1 {
 	timeframeInList = currentAndUpcoming
 
 	# comma-separated list of column names that shouldn't be displayed in the list view, e.g. organizers,price_special
-	hideColumns = subtitle,event_type,accreditation_number,credit_points,teaser,time,place,price_special,speakers,language
+	hideColumns = subtitle,event_type,accreditation_number,credit_points,teaser,time,place,country,price_special,speakers,language
 
 	# comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
 	hideFields = credit_points,eventsnextday

@@ -64,12 +64,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'queue_size' => 0
 			)
 		);
+		// Add the place records that we need for some of the tests.
+		$this->fixture->createPlaces();
 	}
 
 	protected function tearDown() {
+		$this->fixture->removePlacesFixture();
 		unset($this->fixture);
 	}
-
 
 	public function testIsOk() {
 		$this->assertTrue(
@@ -435,6 +437,157 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			4,
 			$this->fixture->getAttendancesOnRegistrationQueue()
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests regarding the country field of the place records.
+	///////////////////////////////////////////////////////////
+
+	public function testGetPlacesWithCountry() {
+		$this->fixture->setPlaceMM(PLACE_VALID_COUNTRY_UID);
+		$this->assertEquals(
+			array('ch'),
+			$this->fixture->getPlacesWithCountry()
+		);
+	}
+
+	public function testGetPlacesWithCountryWithNoCountry() {
+		$this->fixture->setPlaceMM(PLACE_NO_COUNTRY_UID);
+		$this->assertEquals(
+			array(),
+			$this->fixture->getPlacesWithCountry()
+		);
+	}
+
+	public function testGetPlacesWithCountryWithInvalidCountry() {
+		$this->fixture->setPlaceMM(PLACE_INVALID_COUNTRY_UID);
+		$this->assertEquals(
+			array('xy'),
+			$this->fixture->getPlacesWithCountry()
+		);
+	}
+
+	public function testGetPlacesWithCountryWithNoPlace() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getPlacesWithCountry()
+		);
+	}
+
+	public function testGetPlacesWithCountryWithDeletedPlace() {
+		$this->fixture->setPlaceMM(PLACE_DELETED_UID);
+		$this->assertEquals(
+			array(),
+			$this->fixture->getPlacesWithCountry()
+		);
+	}
+
+
+	public function testGetPlacesWithCountryWithMultipleCountries() {
+		$this->fixture->setPlaceMM(
+			PLACE_VALID_COUNTRY_UID.','.PLACE_OTHER_VALID_COUNTRY_UID
+		);
+		$this->assertEquals(
+			array('ch', 'de'),
+			$this->fixture->getPlacesWithCountry()
+		);
+	}
+
+	public function testHasCountry() {
+		$this->fixture->setPlaceMM(PLACE_VALID_COUNTRY_UID);
+		$this->assertTrue(
+			$this->fixture->hasCountry()
+		);
+	}
+
+	public function testHasCountryWithNoCountry() {
+		$this->fixture->setPlaceMM(PLACE_NO_COUNTRY_UID);
+		$this->assertFalse(
+			$this->fixture->hasCountry()
+		);
+	}
+
+	public function testHasCountryWithInvalicCountry() {
+		// We expect a true even if the country code is invalid! See function's
+		// comment on this.
+		$this->fixture->setPlaceMM(PLACE_INVALID_COUNTRY_UID);
+		$this->assertTrue(
+			$this->fixture->hasCountry()
+		);
+	}
+
+	public function testHasCountryWithNoPlace() {
+		$this->assertFalse(
+			$this->fixture->hasCountry()
+		);
+	}
+
+	public function testHasCountryWithMultipleCountries() {
+		$this->fixture->setPlaceMM(
+			PLACE_VALID_COUNTRY_UID.','.PLACE_OTHER_VALID_COUNTRY_UID
+		);
+		$this->assertTrue(
+			$this->fixture->hasCountry()
+		);
+	}
+
+	public function testGetCountry() {
+		$this->fixture->setPlaceMM(PLACE_VALID_COUNTRY_UID);
+		$this->assertEquals(
+			'Schweiz',
+			$this->fixture->getCountry()
+		);
+	}
+
+	public function testGetCountryWithNoCountry() {
+		$this->fixture->setPlaceMM(PLACE_NO_COUNTRY_UID);
+		$this->assertEquals(
+			'',
+			$this->fixture->getCountry()
+		);
+	}
+
+	public function testGetCountryWithInvalidCountry() {
+		$this->fixture->setPlaceMM(PLACE_INVALID_COUNTRY_UID);
+		$this->assertEquals(
+			'',
+			$this->fixture->getCountry()
+		);
+	}
+
+	public function testGetCountryWithMultipleCountries() {
+		$this->fixture->setPlaceMM(
+			PLACE_VALID_COUNTRY_UID.','.PLACE_OTHER_VALID_COUNTRY_UID
+		);
+		$this->assertEquals(
+			'Schweiz, Deutschland',
+			$this->fixture->getCountry()
+		);
+	}
+
+	public function testGetCountryWithNoPlace() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getCountry()
+		);
+	}
+
+	public function testGetCountryNameFromIsoCode() {
+		$this->assertEquals(
+			'Schweiz',
+			$this->fixture->getCountryNameFromIsoCode('ch')
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getCountryNameFromIsoCode('xy')
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getCountryNameFromIsoCode('')
 		);
 	}
 }

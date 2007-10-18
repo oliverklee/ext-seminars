@@ -380,7 +380,7 @@ $TCA['tx_seminars_seminars'] = array(
 					array('', 0)
 				),
 				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
-				'itemsProcFunc_config' => array (
+				'itemsProcFunc_config' => array(
 					'table' => 'static_languages',
 					'where' => '',
 					'indexField' => 'lg_iso_2'
@@ -1255,6 +1255,25 @@ $TCA['tx_seminars_sites'] = array(
 				'rows' => '5'
 			)
 		),
+		'country' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.country',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array('', 0)
+				),
+				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
+				'itemsProcFunc_config' => array(
+					'table' => 'static_countries',
+					'where' => '',
+					'indexField' => 'cn_iso_2'
+				),
+			'size' => 1,
+			'minitems' => 0,
+			'maxitems' => 1
+			)
+		),
 		'homepage' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.homepage',
@@ -1296,7 +1315,7 @@ $TCA['tx_seminars_sites'] = array(
 		)
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes')
+		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, country, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

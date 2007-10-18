@@ -123,6 +123,7 @@
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Address:</label>
+			<label index="tx_seminars_sites.country">Country:</label>
 			<label index="tx_seminars_sites.homepage">Homepage:</label>
 			<label index="tx_seminars_sites.directions">Directions:</label>
 			<label index="tx_seminars_sites.notes">Internal Notes:</label>
@@ -270,6 +271,7 @@
 			<label index="tx_seminars_sites">Veranstaltungsorte</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Adresse:</label>
+			<label index="tx_seminars_sites.country">Land:</label>
 			<label index="tx_seminars_sites.homepage">Homepage:</label>
 			<label index="tx_seminars_sites.directions">Anfahrtsbeschreibung:</label>
 			<label index="tx_seminars_sites.notes">Interne Notizen:</label>
@@ -812,6 +814,7 @@
 			<label index="tx_seminars_sites" type="integer">79939835</label>
 			<label index="tx_seminars_sites.title" type="integer">81871034</label>
 			<label index="tx_seminars_sites.address" type="integer">46079327</label>
+			<label index="tx_seminars_sites.country" type="integer">258260574</label>
 			<label index="tx_seminars_sites.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_sites.directions" type="integer">267876986</label>
 			<label index="tx_seminars_sites.notes" type="integer">121419833</label>
@@ -1339,6 +1342,7 @@
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Address:</label>
+			<label index="tx_seminars_sites.country">Country:</label>
 			<label index="tx_seminars_sites.homepage">Homepage:</label>
 			<label index="tx_seminars_sites.directions">Directions:</label>
 			<label index="tx_seminars_sites.notes">Internal Notes:</label>

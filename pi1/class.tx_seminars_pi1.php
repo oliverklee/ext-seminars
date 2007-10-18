@@ -1461,6 +1461,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent('header_date', $this->getFieldHeader('date'));
 		$this->setMarkerContent('header_time', $this->getFieldHeader('time'));
 		$this->setMarkerContent('header_place', $this->getFieldHeader('place'));
+		$this->setMarkerContent(
+			'header_country',
+			$this->getFieldHeader('country')
+		);
 		$this->setMarkerContent('header_seats', $this->getFieldHeader('seats'));
 		$this->setMarkerContent(
 			'header_price_regular',
@@ -1586,6 +1590,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlaceShort());
+			$this->setMarkerContent(
+				'country',
+				$this->seminar->getCountry()
+			);
 			$this->setMarkerContent('seats', $attendanceData['seats']);
 			$this->setMarkerContent(
 				'price_regular',

@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1207] Change: Add country to location records
 - [#1206] Change: Added language to event records
 - [#1060] Fix: Wrong error message on "my VIP events" list if not logged in
 - [#1228] Fix: The fax number doesn't have a label in the notification e-mails

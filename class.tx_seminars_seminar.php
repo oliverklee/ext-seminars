@@ -33,6 +33,9 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath(
+	'static_info_tables').'pi1/class.tx_staticinfotables_pi1.php'
+);
 
 class tx_seminars_seminar extends tx_seminars_timespan {
 	/** Same as class name */
@@ -537,7 +540,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->hasPlace()) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, address, homepage, directions',
+				'title, address, country, homepage, directions',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
 					.$this->enableFields($this->tableSites)
@@ -560,6 +563,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 							',',
 							$row['address']
 						);
+					}
+					if (!empty($row['country'])) {
+						$countryName = $this->getCountryNameFromIsoCode(
+							$row['country']
+						);
+						if (!empty($countryName)) {
+							$description .= ', '.$countryName;
+						}
 					}
 					if (!empty($row['directions'])) {
 						$description .= $plugin->pi_RTEcssText(
@@ -584,6 +595,136 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Checks whether the current event has at least one place set, and if
+	 * this/these pace(s) have a country set.
+	 * Returns a boolean true if at least one of the set places has a
+	 * country set, returns false otherwise.
+	 *
+	 * IMPORTANT: This function does not check whether the saved ISO code is
+	 * valid at all. As this field is filled through the BE from a prefilled
+	 * list, this should never be an issue at all.
+	 *
+	 * @return	boolean		whether at least one place with country are set for the current event
+	 *
+	 * @access	public
+	 */
+	function hasCountry() {
+		return $this->hasPlace() && (boolean) count($this->getPlacesWithCountry());
+	}
+
+	/**
+	 * Returns an array of two-char ISO codes of countries for this event.
+	 * These are fetched from the referenced place records of this event. If no
+	 * place is set, or the set place(s) don't have any country set, an empty
+	 * array will be returned.
+	 *
+	 * TODO: This function could be simplified by using a join in the MySQL
+	 * query. See Bug 1217 that is filed about this.
+	 *
+	 * @return	array		the list of ISO codes for the countries of this event, may be empty
+	 *
+	 * @access	public
+	 */
+	function getPlacesWithCountry() {
+		$countries = array();
+
+		// Fetch all the corresponding place records for this event from the m-m table.
+		$dbResultMM = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'uid_foreign',
+			$this->tableSitesMM,
+			'uid_local='.$this->getUid(),
+			'uid_foreign'
+		);
+
+		if ($dbResultMM) {
+			while ($rowMM = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultMM)) {
+				// Fetch the country field from the found place records.
+				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+					'country',
+					$this->tableSites,
+					'uid='.$rowMM['uid_foreign']
+						.' AND country != ""'
+						.$this->enableFields($this->tableSites)
+				);
+
+				// Check whether we have found any country at all. If something
+				// was found, add it to the array that will be returned.
+				if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+					$countries[] = $row['country'];
+				}
+			}
+		}
+
+		return $countries;
+	}
+
+
+	/**
+	 * Returns a comma-separated list of country names that were set in the
+	 * place record(s).
+	 * If no places are set, or no countries are selected in the set places,
+	 * an empty string will be returned.
+	 *
+	 * @return	string	comma-separated list of countries for this event, may be empty
+	 *
+	 * @access	public
+	 */
+	function getCountry() {
+		$result = '';
+		if ($this->hasCountry()) {
+			$countryList = array();
+
+			// Fetch the countries from the corresponding place records, may be
+			// an empty array.
+			$countries = $this->getPlacesWithCountry();
+			// Get the real country names from the ISO codes.
+			foreach ($countries as $currentCountry) {
+				$countryList[] = $this->getCountryNameFromIsoCode(
+					$currentCountry
+				);
+			}
+
+			// Make sure that each country is exactly once in the array and
+			// then return this list.
+			$countryListUnique = array_unique($countryList);
+			$result .= implode(', ', $countryListUnique);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns the name of the requested country from the static info tables.
+	 * If the country with this ISO code could not be found in the database,
+	 * an empty string is returned instead.
+	 *
+	 * @param	string		the ISO 3166-1 alpha-2 code of the country
+	 *
+	 * @return	string		the short local name of the country or an empty string if the country couldn't be found
+	 *
+	 * @access	public
+	 */
+	function getCountryNameFromIsoCode($isoCode) {
+		// Sanitizes the provided parameter agaings SQL injection as this function
+		// can be used for searching.
+		$isoCode = $GLOBALS['TYPO3_DB']->quoteStr($isoCode, 'static_countries');
+
+		$countryName = '';
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'cn_short_local',
+			'static_countries',
+			'cn_iso_2="'.$isoCode.'"'
+		);
+		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$countryName = $row['cn_short_local'];
+		}
+
+		return $countryName;
+	}
+
+	/**
 	 * Gets our place (or places) with address and links as HTML, not RTE'ed yet,
 	 * separated by CRLF.
 	 * Returns a localized string "will be announced" if the seminar has no places set.
@@ -597,7 +738,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->hasPlace()) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, address, homepage, directions',
+				'title, address, country, homepage, directions',
 				$this->tableSites.', '.$this->tableSitesMM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
 					.$this->enableFields($this->tableSites)
@@ -618,6 +759,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 							',',
 							$row['address']
 						);
+					}
+					if (!empty($row['country'])) {
+						$countryName = $this->getCountryNameFromIsoCode(
+							$row['country']
+						);
+						if (!empty($countryName)) {
+							$description .= ', '.$countryName;
+						}
 					}
 					if (!empty($row['directions'])) {
 						$result .= CRLF.str_replace(

@@ -757,6 +757,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'time',
 				'place',
 				'seats',
+				'country',
 				'price_regular',
 				'price_special',
 				'total_price',
