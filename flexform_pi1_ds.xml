@@ -371,6 +371,14 @@
 							</config>
 						</TCEforms>
 					</hideFields>
+					<hideSelectorWidget>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideSelectorWidget</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</hideSelectorWidget>
 					<hideSearchForm>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideSearchForm</label>

@@ -486,10 +486,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		if ($isOkay) {
+			// Shows the selector widget on top of the list view.
+			// Hides it if it's deactivated in the configuration or we are on a
+			// special list view like "my_vip_events".
+			if ((!$this->getConfValueBoolean('hideSelectorWidget', 's_template_special'))
+				&& ($this->whatToDisplay == 'seminar_list')
+			) {
+				$result .= $this->createSelectorWidget();
+			}
+
 			$seminarOrRegistrationBag =& $this->initListView($this->whatToDisplay);
 
 			if ($this->internal['res_count']) {
-				$result = $this->createListTable($seminarOrRegistrationBag);
+				$result .= $this->createListTable($seminarOrRegistrationBag);
 			} else {
 				$this->setMarkerContent(
 					'error_text',
@@ -2464,6 +2473,106 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function getConfigGetter() {
 		return $this->configGetter;
+	}
+
+	/**
+	 * Creates the selector widget HTML that is shown on the list view.
+	 *
+	 * The selector widget is a form on which the user can set filter criteria
+	 * that should apply to the list view of events. There is a text field for
+	 * a text search. And there are multiple option boxes that contain the allowed
+	 * values for e.g. the field "language".
+	 *
+	 * @return	string		the HTML source for the selector widget
+	 *
+	 * @access	protected
+	 */
+	function createSelectorWidget() {
+		$this->setMarkerContent(
+			'searchbox_name',
+			$this->prefixId.'[sword]'
+		);
+
+		// Defines the list of option boxes that should be shown in the form.
+		$allOptionBoxes = array(
+			'language',
+			'country',
+			'place'
+		);
+
+		// Renders each option box.	
+		foreach ($allOptionBoxes as $currentOptionBox) {
+			$this->createOptionBox($currentOptionBox);
+		}
+
+		return $this->substituteMarkerArrayCached('SELECTOR_WIDGET');
+	}
+
+	/**
+	 * Creates the HTML code for a single option box of the selector widget.
+	 *
+	 * The selector widget contains multiple option boxes. Each of them contains
+	 * a list of options for a certain sort of records. The option box for the
+	 * field "language" could contain the entries "English" and "German".
+	 *
+	 * @param	string		the name of the option box to generate, must not contain
+	 * 						spaces and there must be a localized label "label_xyz"
+	 * 						with this name, may not be empty
+	 *
+	 * @access	protected
+	 */
+	function createOptionBox($optionBoxName) {
+		// These 3 arrays will be removed ASAP! This step is only about the HTML
+		// template. For testing we have these three arrays. In the future, this
+		// data will be dynamically generated.
+		$availableLanguages = array('Language A', 'Language B', 'Language C');
+		$availableCountries = array('Country A', 'Country B', 'Country C');
+		$availablePlaces = array('Location A', 'Location B', 'Location C');
+
+		// Sets the header that is shown in the label of this selector box.
+		$this->setMarkerContent(
+			'options_header',
+			$this->pi_getLL('label_' . $optionBoxName)
+		);
+
+		// Sets the name of this option box in the HTML source. This is needed
+		// to separate the different option boxes for further form processing.
+		// The additional pair of brackets is needed as we need to submit multiple
+		// values per field.
+		$this->setMarkerContent(
+			'optionbox_name',
+			$this->prefixId.'['.$optionBoxName.'][]'
+		);
+
+		// Fetches the possible entries for the current option box and renders
+		// them as HTML <option> entries for the <select> field.
+		$optionsList = '';
+		switch ($optionBoxName) {
+			case 'language':
+				$availableOptions = $availableLanguages;
+				break;
+			case 'country':
+				$availableOptions = $availableCountries;
+				break;
+			case 'place':
+				$availableOptions = $availablePlaces;
+				break;
+			default:
+				$availableOptions = array();
+				break;
+		}
+		foreach ($availableOptions as $currentOption) {
+			$this->setMarkerContent('option_label', $currentOption);
+			$this->setMarkerContent('option_value', $currentOption);
+			$optionsList .= $this->substituteMarkerArrayCached('OPTIONS_ENTRY');
+		}
+		$this->setMarkerContent('options', $optionsList);
+
+		$this->setMarkerContent(
+			'options_'.$optionBoxName,
+			$this->substituteMarkerArrayCached('OPTIONS_BOX')
+		);
+
 	}
 }
 

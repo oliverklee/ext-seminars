@@ -145,6 +145,9 @@ plugin.tx_seminars_pi1 {
 	# CSS class around the table with the events list view (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_eventlist = listrow
 
+	# CSS class around the selector widget (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
+	class_selectorwidget = selectorwidget
+
 	# CSS class for the TR with the header row for the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_headerrow =
 
@@ -212,6 +215,9 @@ plugin.tx_seminars_pi1 {
 
 	# comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
 	hideFields = credit_points,eventsnextday
+
+	# whether the selector widget should be hidden in list view
+	hideSelectorWidget = 1
 
 	# whether the search form should be hidden in list view
 	hideSearchForm = 0

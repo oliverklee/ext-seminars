@@ -103,6 +103,27 @@ th.tx-seminars-pi1-title {
 	text-decoration: none;
 }
 
+div.tx-seminars-pi1-selectorwidget {
+	border: 1px solid #ccc;
+}
+
+.tx-seminars-pi1-selectorwidget p {
+	clear: left;
+}
+
+.tx-seminars-pi1-selectorwidget .optionbox {
+	float: left;
+	padding-bottom: .5em;
+}
+
+.tx-seminars-pi1-selectorwidget .optionbox select {
+	width: 100%;
+}
+
+#optionbox-1, #optionbox-2, #optionbox-3 {
+	width: 33%;
+}
+
 #tx-seminars-pi1-registration-form fieldset {
 	margin: 0 0 1em;
 }

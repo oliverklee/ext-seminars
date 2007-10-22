@@ -273,6 +273,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
+		$this->checkHideSelectorWidget();
 		$this->checkHideSearchForm();
 		$this->checkHidePageBrowser();
 		$this->checkHideCanceledEvents();
@@ -798,6 +799,23 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		);
 
 		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value hideSelectorWidget.
+	 *
+	 * @access	private
+	 */
+	function checkHideSelectorWidget() {
+		$this->checkIfBoolean(
+			'hideSelectorWidget',
+			true,
+			's_template_special',
+			'This value specifies whether the selector widget in the list view '
+				.'will be displayed. If this value is incorrect, the selector '
+				.'widget might get displayed when this is not intended (or '
+				.'vice versa).'
+		);
 	}
 
 	/**
