@@ -2567,7 +2567,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$optionsList .= $this->substituteMarkerArrayCached('OPTIONS_ENTRY');
 		}
 		$this->setMarkerContent('options', $optionsList);
-
 		$this->setMarkerContent(
 			'options_'.$optionBoxName,
 			$this->substituteMarkerArrayCached('OPTIONS_BOX')
