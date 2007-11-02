@@ -39,6 +39,30 @@ plugin.tx_seminars {
 	# Whether to send the additional notification e-mails to the organizers or not. Additional notification mails are sent if for example an event gets full.
 	sendAdditionalNotificationEmails = 1
 
+	# Whether to send a notification to the organizers if a user has registered.
+	sendNotification = 1
+
+	# Whether to send a notification to the organizers if a user has unregistered.
+	sendNotificationOnUnregistration = 1
+
+	# Whether to send a notification to the organizers if someone registered for the queue.
+	sendNotificationOnRegistrationForQueue = 1
+
+	# Whether to send a notification to the organizers if the queue has been updated.
+	sendNotificationOnQueueUpdate = 1
+
+	# Whether to send a confirmation to the user after the user has registered.
+	sendConfirmation = 1
+
+	# Whether to send a confirmation to the user if the user has unregistered.
+	sendConfirmationOnUnregistration = 1
+
+	# Whether to send a confirmation to the user if the user has registered for the queue.
+	sendConfirmationOnRegistrationForQueue = 1
+
+	# Whether to send a confirmation to the user if the queue has been updated.
+	sendConfirmationOnQueueUpdate = 1
+
 	# the time format (in strftime format)
 	timeFormat = %H:%M
 

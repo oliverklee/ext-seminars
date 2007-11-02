@@ -683,6 +683,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function notifyAttendee(&$plugin, $helloSubjectPrefix = 'confirmation') {
+		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
+			return;
+		}
+
 		$this->initializeTemplate();
 		$this->readSubpartsToHide(
 			$this->getConfValueString('hideFieldsInThankYouMail'),
@@ -853,6 +857,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function notifyOrganizers(&$plugin, $helloSubjectPrefix = 'notification') {
+		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
+			return;
+		}
+
 		$this->initializeTemplate();
 		$this->readSubpartsToHide(
 			$this->getConfValueString('hideGeneralFieldsInNotificationMail'),
