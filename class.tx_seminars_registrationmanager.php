@@ -431,8 +431,20 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 		$seminar->calculateStatistics();
 
-		$this->registration->notifyAttendee($plugin);
-		$this->registration->notifyOrganizers($plugin);
+		if ($this->registration->isOnRegistrationQueue()) {
+			$this->registration->notifyAttendee(
+				$plugin,
+				'confirmationOnRegistrationForQueue'
+			);
+			$this->registration->notifyOrganizers(
+				$plugin,
+				'notificationOnRegistrationForQueue'
+			);
+		} else {
+			$this->registration->notifyAttendee($plugin, 'confirmation');
+			$this->registration->notifyOrganizers($plugin, 'notification');
+		}
+
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
 			$this->registration->sendAdditionalNotification($plugin);
 		}
@@ -480,7 +492,16 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 						)
 					);
 
-					$this->fillVacancies();
+					$this->registration->notifyAttendee(
+						$plugin,
+						'confirmationOnUnregistration'
+					);
+					$this->registration->notifyOrganizers(
+						$plugin,
+						'notificationOnUnregistration'
+					);
+
+					$this->fillVacancies($plugin);
 				}
 			}
 		}
@@ -490,9 +511,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Fills vacancies created through a unregistration with attendees from the
 	 * registration queue.
 	 *
+	 * @param	object		live plugin object (must not be null)
+	 *
 	 * @access	public
 	 */
-	function fillVacancies() {
+	function fillVacancies(&$plugin) {
 		$seminar = $this->registration->getSeminarObject();
 		$seminar->calculateStatistics();
 
@@ -523,6 +546,23 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 						)
 					);
 					$vacancies -= $registration->getSeats();
+
+					$registration->notifyAttendee(
+						$plugin,
+						'confirmationOnQueueUpdate'
+					);
+					$registration->notifyOrganizers(
+						$plugin,
+						'notificationOnQueueUpdate'
+					);
+
+					if (
+						$this->getConfValueBoolean(
+							'sendAdditionalNotificationEmails'
+						)
+					) {
+						$registration->sendAdditionalNotification($plugin);
+					}
 				}
 				$registrationBag->getNext();
 			}

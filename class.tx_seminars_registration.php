@@ -666,14 +666,23 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Send an e-mail to the attendee, thanking him/her for registering for an event.
+	 * Sends an e-mail to the attendee with a message concerning his/her
+	 * registration or unregistration.
 	 *
 	 * @param	object		a tx_seminars_templatehelper object (for a live
 	 * 						page, must not be null)
+	 * @param	string		prefix for the locallang key of the localized hello
+	 * 						and subject string, allowed values are:
+	 * 						- confirmation
+	 * 						- confirmationOnUnregistration
+	 * 						- confirmationOnRegistrationForQueue
+	 * 						- confirmationOnQueueUpdate
+	 * 						In the following the parameter is prefixed with
+	 * 						"email_" and postfixed with "Hello" or "Subject".
 	 *
 	 * @access	public
 	 */
-	function notifyAttendee(&$plugin) {
+	function notifyAttendee(&$plugin, $helloSubjectPrefix = 'confirmation') {
 		$this->initializeTemplate();
 		$this->readSubpartsToHide(
 			$this->getConfValueString('hideFieldsInThankYouMail'),
@@ -681,7 +690,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		);
 
 		$this->setMarkerContent('hello', sprintf(
-			$this->pi_getLL('email_confirmationHello'),
+			$this->pi_getLL('email_'.$helloSubjectPrefix.'Hello'),
 			$this->getUserName())
 		);
 		$this->setMarkerContent('event_type', $this->seminar->getEventType());
@@ -814,7 +823,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// "John Doe <john.doe@example.com>".
 		t3lib_div::plainMailEncoded(
 			$this->getUserEmail(),
-			$this->pi_getLL('email_confirmationSubject').': '
+			$this->pi_getLL('email_'.$helloSubjectPrefix.'Subject').': '
 				.$this->seminar->getTitleAndDate('-'),
 			$content,
 			// We just use the first organizer as sender
@@ -827,13 +836,23 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Send an e-mail to all organizers, notifying them of the registration
+	 * Sends an e-mail to all organizers with a message about a registration or
+	 * unregistration.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 * @param	object		a tx_seminars_templatehelper object (for a live page,
+	 * 						must not be null)
+	 * @param	string		prefix for the locallang key of the localized hello
+	 * 						and subject string, allowed values are:
+	 * 						- notification
+	 * 						- notificationOnUnregistration
+	 * 						- notificationOnRegistrationForQueue
+	 * 						- notificationOnQueueUpdate
+	 * 						In the following the parameter is prefixed with
+	 * 						"email_" and postfixed with "Hello" or "Subject".
 	 *
 	 * @access	public
 	 */
-	function notifyOrganizers(&$plugin) {
+	function notifyOrganizers(&$plugin, $helloSubjectPrefix = 'notification') {
 		$this->initializeTemplate();
 		$this->readSubpartsToHide(
 			$this->getConfValueString('hideGeneralFieldsInNotificationMail'),
@@ -842,7 +861,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->setMarkerContent(
 			'hello',
-			$this->pi_getLL('email_notificationHello')
+			$this->pi_getLL('email_'.$helloSubjectPrefix.'Hello')
 		);
 		$this->setMarkerContent('summary', $this->getTitle());
 
@@ -892,7 +911,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		foreach ($organizers as $currentOrganizerEmail) {
 			t3lib_div::plainMailEncoded(
 				$currentOrganizerEmail,
-				$this->pi_getLL('email_notificationSubject').': '
+				$this->pi_getLL('email_'.$helloSubjectPrefix.'Subject').': '
 					.$this->getTitle(),
 				$content,
 				// We use the attendee's e-mail as sender.
@@ -924,14 +943,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$whichEmailToSend = '';
 		$whichEmailSubject = '';
 
-		if ($this->seminar->isFull()) {
-			$whichEmailToSend = 'email_additionalNotificationIsFull';
-			$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
-		// The second check ensures that only one set of e-mails is sent to the
-		// organizers.
-		} elseif ($this->seminar->getAttendancesMin() == $this->seminar->getAttendances()) {
-			$whichEmailToSend = 'email_additionalNotificationEnoughRegistrations';
-			$whichEmailSubject = 'email_additionalNotificationEnoughRegistrationsSubject';
+		if (!$this->isOnRegistrationQueue()) {
+			if ($this->seminar->isFull()) {
+				$whichEmailToSend = 'email_additionalNotificationIsFull';
+				$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
+			// The second check ensures that only one set of e-mails is sent to the
+			// organizers.
+			} elseif ($this->seminar->getAttendancesMin() == $this->seminar->getAttendances()) {
+				$whichEmailToSend = 'email_additionalNotificationEnoughRegistrations';
+				$whichEmailSubject = 'email_additionalNotificationEnoughRegistrationsSubject';
+			}
 		}
 
 		// Only send an e-mail if there's a reason for it.
@@ -1318,6 +1339,19 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns true if this registration is on the registration queue, false
+	 * otherwise.
+	 *
+	 * @return	boolean		true if this registration is on the registration
+	 * 						queue, false otherwise
+	 *
+	 * @access	public
+	 */
+	function isOnRegistrationQueue() {
+		return $this->getRecordPropertyBoolean('registration_queue');
 	}
 }
 
