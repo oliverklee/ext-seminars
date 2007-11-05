@@ -23,6 +23,11 @@
 			<label index="message_404">Fejlkode 404: Den forespurgte side eksisterer ikke. Hvis du kom til den side via et link fra dette domæne må du meget gerne underrette webmasteren. Tak!</label>
 			<label index="message_404_registrations">Fejlkode 404. Der er ikke noget arrangement med dette nummer. Hvis du kom til den side via et link fra dette domæne må du meget gerne underrette webmasteren. Tak!</label>
 		</languageKey>
+		<languageKey index="it" type="array">
+			<label index="message_403">Errore 403. Spiacente, non hai accesso a questa pagina.</label>
+			<label index="message_404">Errore 404. La pagina richiesta non esiste. Sei pregato di contattare il webmaster e avvertirlo del problema. Grazie!</label>
+			<label index="message_404_registrations">Errore 404. Non c'è nessun evento con questo codice. Sei pregato di contattare il webmaster e avvertirlo del problema. Grazie!</label>
+		</languageKey>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="de" type="array">
@@ -35,6 +40,11 @@
 			<label index="message_404" type="integer">239401565</label>
 			<label index="message_404_registrations" type="integer">37742123</label>
 		</languageKey>
+		<languageKey index="it" type="array">
+			<label index="message_403" type="integer">211477492</label>
+			<label index="message_404" type="integer">239401565</label>
+			<label index="message_404_registrations" type="integer">37742123</label>
+		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
@@ -43,6 +53,11 @@
 			<label index="message_404_registrations">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="message_403">Error 403. Sorry, you don't have access to this data.</label>
+			<label index="message_404">Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_404_registrations">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+		</languageKey>
+		<languageKey index="it" type="array">
 			<label index="message_403">Error 403. Sorry, you don't have access to this data.</label>
 			<label index="message_404">Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_404_registrations">Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
