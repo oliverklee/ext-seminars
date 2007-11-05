@@ -524,6 +524,14 @@
 							</config>
 						</TCEforms>
 					</thankYouAfterRegistrationPID>
+					<sendParametersToThankYouAfterRegistrationPageUrl>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</sendParametersToThankYouAfterRegistrationPageUrl>
 					<pageToShowAfterUnregistrationPID>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -539,6 +547,14 @@
 							</config>
 						</TCEforms>
 					</pageToShowAfterUnregistrationPID>
+					<sendParametersToPageToShowAfterUnregistrationUrl>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</sendParametersToPageToShowAfterUnregistrationUrl>
 					<registrationEditorTemplateFile>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.templateFile</label>

@@ -313,8 +313,14 @@ plugin.tx_seminars_pi1 {
 	# PID of the thank-you page that will be displayed after a FE user has registered for an event
 	thankYouAfterRegistrationPID =
 
+	# Wether to send GET parameters to the thank-you-after-registration-page-URL.
+	sendParametersToThankYouAfterRegistrationPageUrl = 1
+
 	# PID of the thank-you page that will be displayed after a FE user has unregistered from an event
 	pageToShowAfterUnregistrationPID =
+
+	# Wether to send GET parameters to the thank-you-after-registration-page-URL.
+	sendParametersToPageToShowAfterUnregistrationUrl = 1
 
 	# PID of the page that contains the login form
 	loginPID =

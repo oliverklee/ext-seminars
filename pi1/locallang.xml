@@ -60,7 +60,9 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
+			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Send parameters to page which is displayed after registration</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page that will be displayed after a user has unregistered for an event</label>
+			<label index="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl">Send parameters to page which is displayed after unregistration</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end editing</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user group that is allowed to enter and edit events</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
@@ -458,7 +460,9 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Zeige diese FEuser-Felder in der Liste der Anmeldungen</label>
 			<label index="seminars.pi_flexform.sheet_registration">Veranstaltungsanmeldung</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Seite, die nach erfolgreicher Anmeldung für eine Veranstaltung angezeigt wird</label>
+			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Parameter an Seite schicken, die nach erfolgreicher Anmeldung angezeigt wird</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Seite, die nach erfolgreicher Abmeldung für eine Veranstaltung angezeigt wird</label>
+			<label index="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl">Parameter an Seite schicken, die nach erfolgreicher Abmeldung angezeigt wird</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end-Bearbeitung</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE-User-Gruppe, die Veranstaltungen eingeben und bearbeiten darf</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Seite mit dem Plugin zum Bearbeiten von Veranstaltungen</label>
@@ -1225,7 +1229,9 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
 			<label index="seminars.pi_flexform.sheet_registration" type="integer">16354175</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID" type="integer">144873436</label>
+			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" type="integer">159378554</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID" type="integer">50906970</label>
+			<label index="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" type="integer">234489648</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing" type="integer">74816411</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID" type="integer">6056414</label>
 			<label index="seminars.pi_flexform.eventEditorPID" type="integer">236783633</label>
@@ -1803,7 +1809,9 @@
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
+			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Send parameters to page which is displayed after registration</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page that will be displayed after a user has unregistered for an event</label>
+			<label index="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl">Send parameters to page which is displayed after unregistration</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end editing</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user group that is allowed to enter and edit events</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>

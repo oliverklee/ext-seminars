@@ -544,6 +544,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getThankYouAfterRegistrationUrl($parameters) {
+		$sendParameters = false;
 		$pageId = $this->plugin->getConfValueInteger(
 			'thankYouAfterRegistrationPID',
 			's_registration'
@@ -554,7 +555,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$GLOBALS['TSFE']->fe_user->logoff();
 		}
 
-		return $this->createUrlForRedirection($pageId);
+		if (
+			$this->plugin->getConfValueBoolean(
+				'sendParametersToThankYouAfterRegistrationPageUrl',
+				's_registration'
+			)
+		) {
+			$sendParameters = true;
+		}
+
+		return $this->createUrlForRedirection($pageId, $sendParameters);
 	}
 
 	/**
@@ -567,12 +577,22 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function getPageToShowAfterUnregistrationUrl() {
+		$sendParameters = false;
 		$pageId = $this->plugin->getConfValueInteger(
 			'pageToShowAfterUnregistrationPID',
 			's_registration'
 		);
 
-		return $this->createUrlForRedirection($pageId);
+		if (
+			$this->plugin->getConfValueBoolean(
+				'sendParametersToPageToShowAfterUnregistrationUrl',
+				's_registration'
+			)
+		) {
+			$sendParameters = true;
+		}
+
+		return $this->createUrlForRedirection($pageId, $sendParameters);
 	}
 
 	/**
@@ -580,13 +600,15 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * getThankYouAfterRegistrationUrl() and getPageToShowAfterUnregistration().
 	 *
 	 * @param	string		the page UID
+	 * @param	boolean		true if GET parameters should be added to the URL,
+	 * 						otherwise false 
 	 *
 	 * @return	string		complete URL of the FE page with a message (or null
 	 * 						if the confirmation page has not been submitted yet)
 	 *
 	 * @access	protected
 	 */
-	function createUrlForRedirection($pageId) {
+	function createUrlForRedirection($pageId, $sendParameters = true) {
 		// On freshly updated sites, the configuration value might not be set
 		// yet. To avoid breaking the site, we use the event list in this case.
 		if (!$pageId) {
@@ -598,10 +620,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		// combination of formidable and realURL will lead us into troubles with
 		// not existing URLs (and thus showing errors to the user).
 		$baseUrl = $this->getConfValueString('baseURL');
+		$parameters = array();
+
+		if ($sendParameters) {
+			$parameters = array(
+				'tx_seminars_pi1[showUid]' => $this->seminar->getUid()
+			);
+		}
+
 		$redirectPath = $this->plugin->pi_getPageLink(
 			$pageId,
 			'',
-			array('tx_seminars_pi1[showUid]' => $this->seminar->getUid())
+			$parameters
 		);
 
 		return $baseUrl.$redirectPath;
