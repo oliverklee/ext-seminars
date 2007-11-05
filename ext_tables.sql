@@ -258,7 +258,7 @@ CREATE TABLE tx_seminars_sites (
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	address text,
-	country varchar(2),
+	country varchar(2) DEFAULT '',
 	homepage tinytext,
 	directions text,
 	notes text,
