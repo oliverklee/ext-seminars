@@ -3960,6 +3960,46 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $this->numberOfAttendancesOnQueue;
 	}
+
+	/**
+	 * Returns an array of UIDs for records of a given m:n table that contains
+	 * relations to this event record.
+	 *
+	 * Example: To find out which places are related to this event, just call
+	 * this method with the name of the seminars -> places m:n table. The result
+	 * is an array that contains the UIDs of all the places that are related to
+	 * this event.
+	 *
+	 * @param	string		the name of the m:n table to query, must not be empty
+	 *
+	 * @return	array		array of foreign record's UIDs, ordered by the field
+	 * 						uid_foreign in the m:n table, may be empty
+	 *
+	 * @access	public
+	 */
+	function getRelatedMmRecordUids($tableName) {
+		$result = array();
+
+		// Fetches all the corresponding records for this event from the
+		// selected m:n table.
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'uid_foreign',
+			$tableName,
+			'uid_local='.$this->getUid(),
+			'',
+			'sorting'
+		);
+
+		// Adds the uid to the result array when the DB result contains at least
+		// one entry.
+		if ($dbResult) {
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$result[] = $row['uid_foreign'];
+			}
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

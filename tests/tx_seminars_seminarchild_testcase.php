@@ -590,6 +590,43 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getCountryNameFromIsoCode('')
 		);
 	}
+
+	public function testGetRelatedMmRecordUidsWithNoPlace() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getRelatedMmRecordUids($this->fixture->tableSitesMM)
+		);
+		
+	}
+
+	public function testGetRelatedMmRecordUidsWithOnePlace() {
+		$this->fixture->setPlaceMM(
+			PLACE_VALID_COUNTRY_UID
+		);
+		$this->assertEquals(
+			array(PLACE_VALID_COUNTRY_UID),
+			$this->fixture->getRelatedMmRecordUids($this->fixture->tableSitesMM)
+		);
+		
+	}
+
+	public function testGetRelatedMmRecordUidsWithTwoPlaces() {
+		$this->fixture->setPlaceMM(
+			PLACE_VALID_COUNTRY_UID
+		);
+		$this->fixture->setPlaceMM(
+			PLACE_OTHER_VALID_COUNTRY_UID
+		);
+		$result = $this->fixture->getRelatedMmRecordUids(
+			$this->fixture->tableSitesMM
+		);
+		sort($result);
+		$this->assertEquals(
+			array(PLACE_VALID_COUNTRY_UID, PLACE_OTHER_VALID_COUNTRY_UID),
+			$result
+		);
+		
+	}
 }
 
 ?>

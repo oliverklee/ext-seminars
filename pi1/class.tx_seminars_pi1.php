@@ -37,8 +37,10 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationba
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_placebag.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_registration_editor.php');
+require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** same as class name */
@@ -60,6 +62,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager;
+
+	/** an instance of static info tables which we need for the list view to convert ISO codes to country names and languages */
+	var $staticInfo = null;
+
+	/** all languages that may be shown in the option box of the selector widget  */
+	var $allLanguages = array();
+
+	/** all countries that may be shown in the option box of the selector widget  */
+	var $allCountries = array();
+
+	/** all places that may be shown in the option box of the selector widget  */
+	var $allPlaces = array();
 
 	/**
 	 * list of field names (as keys) by which we can sort plus the
@@ -436,6 +450,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = '';
 		$isOkay = true;
 
+		// Instantiates the static info tables API.
+		if (!$this->staticInfo) {
+			$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+			$this->staticInfo->init();
+		}
+
 		switch ($this->whatToDisplay) {
 			case 'my_events':
 				if ($this->isLoggedIn()) {
@@ -492,9 +512,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			if ((!$this->getConfValueBoolean('hideSelectorWidget', 's_template_special'))
 				&& ($this->whatToDisplay == 'seminar_list')
 			) {
+				// Prepares the arrays that contain the possible entries for the
+				// option boxes in the selector widget.
+				$this->createAllowedValuesForSelectorWidget();
+
 				$result .= $this->createSelectorWidget();
+
+				// Unsets the seminar bag for performance reasons.
+				unset($this->seminarBagForSelectorWidget);
 			}
 
+			// Creates the seminar or registration bag for the list view (with
+			// all the filtering applied).
 			$seminarOrRegistrationBag =& $this->initListView($this->whatToDisplay);
 
 			if ($this->internal['res_count']) {
@@ -525,6 +554,102 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gathers all the allowed entries for the option boxes of the selector
+	 * widget. This includes the languages, places and countries of the events
+	 * that are selected and in the seminar bag for the current list view.
+	 *
+	 * IMPORTANT: The lists for each option box contain only the values that
+	 * are coming from the selected events! So there's not a huge list of languages
+	 * of which 99% are not selected for any event (and thus would result in
+	 * no found events).
+	 *
+	 * The data will be written to global variables as arrays that contain
+	 * the value (value of the form field) and the label (text shown in the option
+	 * box) for each entry.
+	 *
+	 * @access	protected
+	 */
+	function createAllowedValuesForSelectorWidget() {
+		$allPlaceUids = array();
+
+		// Creates a separate seminar bag that contains all the events.
+		// We can't use the regular seminar bag that is used for the list
+		// view as it contains only part of the events.
+		$seminarBag = $this->createSeminarBagForSelectorWidget();
+
+		// Walks through all events in the seminar bag to read the needed data
+		// from each event object.
+		while ($currentEvent =& $seminarBag->getCurrent()) {
+			// Reads the language from the event record.
+			$languageIsoCode = $currentEvent->getRecordPropertyString('language');
+			if ((!empty($languageIsoCode))
+				&& !isset($this->allLanguages[$languageIsoCode])) {
+				$languageName = $this->staticInfo->getStaticInfoName(
+					'LANGUAGES',
+					$languageIsoCode,
+					'',
+					'',
+					0
+				);
+				$this->allLanguages[$languageIsoCode] = $languageName;
+			}
+
+			// Reads the place(s) from the event record. The country will be
+			// read from the place record later.
+			$placeUids = $currentEvent->getRelatedMmRecordUids($this->tableSitesMM);
+			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
+
+			$seminarBag->getNext();
+		}
+		unset($seminarBag);
+
+		// Assures that each language is just once in the resulting array.
+		$this->allLanguages = array_unique($this->allLanguages);
+
+		// Fetches the name of the location and adds it to the final array.
+		$placeBag = $this->createPlaceBag($allPlaceUids);
+		while ($currentPlace =& $placeBag->getCurrent()) {
+			if (!isset($this->allPlaces[$currentPlace->getUid()])) {
+				$this->allPlaces[$currentPlace->getUid()] = $currentPlace->getTitle();
+			}
+			$countryIsoCode = $currentPlace->getCountryIsoCode();
+			if (!isset($this->allCountries[$countryIsoCode])) {
+				$this->allCountries[$countryIsoCode] = $this->staticInfo->getStaticInfoName(
+					'COUNTRIES',
+					$countryIsoCode
+				);
+			}
+
+			$placeBag->getNext();
+		}
+		unset($placeBag);
+	}
+
+	/**
+	 * Returns a place bag object that contains all seminar places that are in
+	 * the list of given UIDs.
+	 *
+	 * @param	array		all the UIDs to include in the bag, must not be empty
+	 *
+	 * @return	object		place bag object
+	 *
+	 * @access	protected
+	 */
+	function createPlaceBag($placeUids) {
+		$placeUidsAsCommaSeparatedList = implode(',', $placeUids);
+		$queryWhere = 'uid IN('.$placeUidsAsCommaSeparatedList.')';
+		$className = 'tx_seminars_placebag';
+		$placeBagClassname = t3lib_div::makeInstanceClassName(
+			$className
+		);
+		$placeBag =& new $placeBagClassname(
+			$queryWhere
+		);
+
+		return $placeBag;		
 	}
 
 	/**
@@ -783,6 +908,28 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->previousDate = '';
 
 		return $registrationOrSeminarBag;
+	}
+
+	/**
+	 * Initializes a seminar bag that contains all events for retrieving the
+	 * allowed values for the option boxes of the selector widget.
+	 *
+	 * This must be a separate seminar bag just for the selector widget to have
+	 * all events (and with this also all languages, places and countries)
+	 * covered.
+	 *
+	 * @return	object		a seminar bag containing all events of this website
+	 *
+	 * @access	protected
+	 */
+	function createSeminarBagForSelectorWidget() {
+		$className = 'tx_seminars_seminarbag';
+		$seminarBagClassname = t3lib_div::makeInstanceClassName(
+			$className
+		);
+		$seminarBag =& new $seminarBagClassname();
+
+		return $seminarBag;
 	}
 
 	/**
@@ -2549,21 +2696,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$optionsList = '';
 		switch ($optionBoxName) {
 			case 'language':
-				$availableOptions = $availableLanguages;
+				$availableOptions = $this->allLanguages;
 				break;
 			case 'country':
-				$availableOptions = $availableCountries;
+				$availableOptions = $this->allCountries;
 				break;
 			case 'place':
-				$availableOptions = $availablePlaces;
+				$availableOptions = $this->allPlaces;
 				break;
 			default:
 				$availableOptions = array();
 				break;
 		}
-		foreach ($availableOptions as $currentOption) {
-			$this->setMarkerContent('option_label', $currentOption);
-			$this->setMarkerContent('option_value', $currentOption);
+		foreach ($availableOptions as $currentValue => $currentLabel) {
+			$this->setMarkerContent('option_label', $currentLabel);
+			$this->setMarkerContent('option_value', $currentValue);
 			$optionsList .= $this->substituteMarkerArrayCached('OPTIONS_ENTRY');
 		}
 		$this->setMarkerContent('options', $optionsList);

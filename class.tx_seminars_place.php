@@ -63,6 +63,45 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 			);
 		}
 	}
+
+	/**
+	 * Returns the UID of this place record.
+	 *
+	 * @return	integer		the UID of this record, will always be > 0
+	 *
+	 * @access	public
+	 */
+	function getUid() {
+		return $this->getRecordPropertyInteger('uid');
+	}
+
+	/**
+	 * Returns the title of this place record.
+	 *
+	 * @return	string		the title of this record, will not be empty
+	 *
+	 * @param	public
+	 */
+	function getTitle() {
+		return $this->getRecordPropertyString('title');
+	}
+
+	/**
+	 * Returns the ISO 3166-1 alpha-2 code for the country of this place or an
+	 * empty string if this place has no country set.
+	 *
+	 * This method does not validate the value of the saved field value. As the
+	 * country is selected and saved through the backend from a prefilled list,
+	 * those values should be valid.
+	 *
+	 * @return	string		the ISO 3166-1 alpha-2 code of the country or an
+	 * 						empty string if this place has no country set
+	 *
+	 * @access	public
+	 */
+	function getCountryIsoCode() {
+		return $this->getRecordPropertyString('country');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_place.php']) {

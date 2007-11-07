@@ -1,7 +1,7 @@
 0.6.0 (currently working on)
+- [#1208, #1209] Feature: Added new Selector Widget to the list view
 - [#1205] Feature: Added Italian translation by Mauro Lorenzutti
 - [#1028] Feature: When a user unregisters, inform the user, organizers and new attendee via e-mail
-- [#1208] Change: Added XHTML template for the selector widget
 - [#1225] Fix: Missing empty line in confirmation mail
 - [#1207] Change: Add country to location records
 - [#1206] Change: Added language to event records
