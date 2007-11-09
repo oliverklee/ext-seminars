@@ -187,34 +187,10 @@ $TCA['tx_seminars_seminars'] = array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.timeslots',
 			'config' => array(
-				'type' => 'select',
+				'type' => 'inline',
 				'foreign_table' => 'tx_seminars_timeslots',
-				'foreign_table_where' => 'AND seminar=###THIS_UID###',
-				'size' => '10',
-				'maxitems' => 999,
-				'wizards' => array(
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'LLL:EXT:lang/locallang_mod_web_list.xml:edit',
-						'script' => 'wizard_edit.php',
-						'popup_onlyOpenIfSelected' => 1,
-						'icon' => 'edit2.gif',
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1'
-					),
-					'add' => array(
-						'type' => 'script',
-						'title' =>'LLL:EXT:lang/locallang_mod_web_list.xml:new',
-						'script' => 'wizard_add.php',
-						'icon' => 'add.gif',
-						'params' => array(
-							'table' => 'tx_seminars_timeslots',
-							'pid' => '###STORAGE_PID###',
-							'setValue' => 'prepend'
-						)
-					)
-				)
+				'foreign_field' => 'seminar',
+				'maxitems' => 999
 			)
 		),
 		'deadline_registration' => array(
@@ -1654,21 +1630,5 @@ $TCA['tx_seminars_target_groups'] = array(
 		'1' => array('showitem' => '')
 	)
 );
-
-// Check if our extension is used on TYPO3 4.1 to keep the compatibility to
-// older TYPO3 versions.
-if ((float) $GLOBALS['TYPO3_CONF_VARS']['SYS']['compat_version'] >= 4.1) {
-	unset($TCA['tx_seminars_seminars']['columns']['timeslots']);
-	$TCA['tx_seminars_seminars']['columns']['timeslots'] = array(
-		'exclude' => 1,
-		'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.timeslots',
-		'config' => array(
-			'type' => 'inline',
-			'foreign_table' => 'tx_seminars_timeslots',
-			'foreign_field' => 'seminar',
-			'maxitems' => 999
-		)
-	);
-}
 
 ?>
