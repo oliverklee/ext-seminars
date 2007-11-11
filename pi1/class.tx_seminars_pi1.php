@@ -318,6 +318,29 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// topics(1).
 		$result .= ' AND '.$tablePrefix.'object_type!=1';
 
+		// Adds the query parameter that result from the user selection in the
+		// selector widget (including the search form).
+		if (is_array($this->piVars['language'])) {
+			$result .= tx_seminars_seminarbag::getAdditionalQueryForLanguage(
+				$this->piVars['language']
+			);
+		}
+		if (is_array($this->piVars['place'])) {
+			$result .= tx_seminars_seminarbag::getAdditionalQueryForPlace(
+				$this->piVars['place']
+			);
+		}
+		if (is_array($this->piVars['country'])) {
+			$result .= tx_seminars_seminarbag::getAdditionalQueryForCountry(
+				$this->piVars['country']
+			);
+		}
+		if (isset($this->piVars['sword'])
+			&& !empty($this->piVars['sword'])
+		) {
+			$result .= $this->searchWhere($this->piVars['sword']);
+		}
+
 		// Work out from which time-frame we'll display the event list.
 		// We also need to deal with the case that an event has no end date set
 		// (ie. it is open-ended).
@@ -879,11 +902,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$pointer = intval($this->piVars['pointer']);
 		$resultsAtATime = t3lib_div::intInRange($this->internal['results_at_a_time'], 1, 1000);
 		$limit = ($pointer * $resultsAtATime).','.$resultsAtATime;
-
-		if (isset($this->piVars['sword'])
-			&& !empty($this->piVars['sword'])) {
-			$queryWhere .= $this->searchWhere($this->piVars['sword']);
-		}
 
 		if ($whatToDisplay == 'my_events') {
 			$className = 'tx_seminars_registrationbag';

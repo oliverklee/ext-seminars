@@ -87,6 +87,159 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 
 		return;
 	}
+
+	/**
+	 * Returns the additional query parameters for the country selection from
+	 * the selector widget. If the user has not selected any country, an empty
+	 * string will be returned.
+	 *
+	 * If the user has selected at least one country, the POST data is an array
+	 * in any case (i.e. it doesn't matter whether the user selected exactly one
+	 * language or five of them).
+	 *
+	 * @param	array		array of ISO codes for the countries, from POST data
+	 *
+	 * @return	string		the additional query parameter starting with ' AND',
+	 * 						can be appended to existing query string, may be empty
+	 *
+	 * @access	private
+	 */
+	function getAdditionalQueryForCountry($countries) {
+		$result = '';
+
+		if (!empty($countries)) {
+			// Implodes the array to a comma-separated list and adds quotes
+			// around each entry to make it work with the database. This is needed
+			// because the values are of type string.
+			$countryIsoCodes = implode(
+				',',
+				$GLOBALS['TYPO3_DB']->fullQuoteArray(
+					$countries,
+					$this->tableSites
+				)
+			);
+
+			// Checks whether there are places that have one of the selected
+			// countries set and if there are events that have those places
+			// set (looked up in the m:n table).
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				$this->tableSeminars.'.uid',
+				$this->tableSeminars
+					.' LEFT JOIN '.$this->tableSitesMM.' ON '
+					.$this->tableSeminars.'.uid='.$this->tableSitesMM.'.uid_local'
+					.' LEFT JOIN '.$this->tableSites.' ON '
+					.$this->tableSitesMM.'.uid_foreign='.$this->tableSites.'.uid',
+				$this->tableSites.'.country IN('.$countryIsoCodes.')'
+			);
+
+			// Adds the additional part of the query only if there was at least
+			// one matching entry found in the m:n table.
+			if ($dbResult) {
+				$seminarUids = array();
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+					$seminarUids[] = $row['uid'];
+				}
+				if (!empty($seminarUids)) {
+					$seminarUidsWithThisCountry = implode(',', $seminarUids);
+					$result = ' AND '.$this->tableSeminars
+						.'.uid IN('.$seminarUidsWithThisCountry.')';
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns the additional query parameters for the language selection from
+	 * the selector widget. If the user has not selected any language, an empty
+	 * string will be returned.
+	 *
+	 * If the user has selected at least one language, the POST data is an array
+	 * in any case (i.e. it doesn't matter whether the user selected exactly one
+	 * language or five of them).
+	 *
+	 * @param	array		array of ISO codes for the language, from POST data,
+	 * 						may be empty
+	 *
+	 * @return	string		the additional query parameter starting with ' AND',
+	 * 						can be appended to existing query string, may be empty
+	 *
+	 * @access	private
+	 */
+	function getAdditionalQueryForLanguage($languages) {
+		$result = '';
+
+		if (!empty($languages)) {
+			// Implodes the array to a comma-separated list and adds quotes
+			// around each entry to make it work with the database. This is needed
+			// because the values are of type string.
+			$languageUids = implode(
+				',',
+				$GLOBALS['TYPO3_DB']->fullQuoteArray(
+					$languages,
+					$this->tableSeminars
+				)
+			);
+			$result = ' AND '.$this->tableSeminars.'.language IN('
+				.$languageUids.')';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns the additional query parameters for the place selection from
+	 * the selector widget. If the user has not selected any place, an empty
+	 * string will be returned.
+	 *
+	 * If the user has selected at least one place, the POST data is an array
+	 * in any case (i.e. it doesn't matter whether the user selected exactly one
+	 * language or five of them).
+	 *
+	 * @param	array		array of UIDs from the POST data, may be empty
+	 *
+	 * @return	string		the additional query parameter starting with ' AND',
+	 * 						can be appended to existing query string, may be empty
+	 *
+	 * @access	private
+	 */
+	function getAdditionalQueryForPlace($placeUids) {
+		$result = '';
+		$sanitizedPlaceUids = array();
+
+		foreach ($placeUids as $currentPlaceUid) {
+			if (intval($currentPlaceUid) > 0) {
+				$sanitizedPlaceUids[] = intval($currentPlaceUid);
+			}
+		}
+
+		if (!empty($sanitizedPlaceUids)) {
+			// Checks whether there are places with the given UIDs that are
+			// selected in any event record (looked up in the m:n table).
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'uid_local',
+				$this->tableSitesMM,
+				'uid_foreign IN('.implode(',', $sanitizedPlaceUids).')'
+			);
+
+			// Adds the additional part of the query only if there was at least
+			// one matching entry found in the m:n table.
+			if ($dbResult) {
+				$seminarUids = array();
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+					$seminarUids[] = $row['uid_local'];
+				}
+				if (!empty($seminarUids)) {
+					$seminarUidsWithThisPlace = implode(',', $seminarUids);
+					$result = ' AND '.$this->tableSeminars
+						.'.uid IN('.$seminarUidsWithThisPlace.')';	
+				}
+			}
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbag.php']) {
