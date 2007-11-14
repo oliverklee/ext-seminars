@@ -54,7 +54,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setEventData(
 			array(
-				'uid' => 1,
+				'uid' => 10000,
 				'begin_date' => $this->beginDate,
 				'deadline_unregistration' => $this->unregistrationDeadline,
 				'language' => 'de',
