@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1311] Change: Sort the time slots relations in the event record form by the begin date of the time slots
 - [#946] Change: Require TYPO3 4.1.2
 - [#1208, #1209, #1210] Feature: Added new Selector Widget to the list view
 - [#1205] Feature: Added Italian translation by Mauro Lorenzutti

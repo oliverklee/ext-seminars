@@ -190,6 +190,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_seminars_timeslots',
 				'foreign_field' => 'seminar',
+				'foreign_default_sortby' => 'tx_seminars_timeslots.begin_date',
 				'maxitems' => 999
 			)
 		),
