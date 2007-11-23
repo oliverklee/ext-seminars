@@ -1338,7 +1338,7 @@ $TCA['tx_seminars_organizers'] = array(
 			)
 		),
 		'email' => array(
-			'exclude' => 1,
+			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_organizers.email',
 			'config' => array(
 				'type' => 'input',
