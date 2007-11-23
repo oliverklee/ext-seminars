@@ -467,44 +467,50 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * Gets an HTML image tag with the URL of the icon file of the record as
 	 * configured in TCA.
 	 *
-	 * @return	integer		our HTML image tag (or an empty string if there is
-	 * 						no icon file configured in TCA)
+	 * @return	integer		our HTML image tag with the URL of the icon file of
+	 * 						the record or a "not found" icon if there's no icon
+	 * 						for this record
 	 *
 	 * @access	public
 	 */
 	function getRecordIcon() {
+		global $BACK_PATH;
+
 		$result = '';
 		$imageURL = '';
+		$enableFields = array();
 
 		t3lib_div::loadTCA($this->tableName);
 		$tableConfiguration =& $GLOBALS['TCA'][$this->tableName]['ctrl'];
 
-		$typeIconColumnExists = $tableConfiguration['typeicon_column']
-			&& $this->hasRecordPropertyInteger($tableConfiguration['typeicon_column']);
+		$hiddenColumn = $tableConfiguration['enablecolumns']['disabled'];
+		$startTimeColumn = $tableConfiguration['enablecolumns']['starttime'];
+		$endTimeColumn = $tableConfiguration['enablecolumns']['endtime'];
 
-		$typeIconExists = is_array($tableConfiguration['typeicons'])
-			&& array_key_exists(
-				$this->getRecordPropertyInteger($tableConfiguration['typeicon_column']),
-				$tableConfiguration['typeicons']
+		// Checks if there are enable columns configured in TCA and sends them
+		// as parameter to t3lib_iconworks::getIcon().
+		if ($this->getRecordPropertyBoolean($hiddenColumn)) {
+			$enableFields[$hiddenColumn] = $this->getRecordPropertyInteger(
+				$hiddenColumn
 			);
-
-		if ($typeIconColumnExists && $typeIconExists) {
-			$recordType = $this->getRecordPropertyInteger(
-				$tableConfiguration['typeicon_column']
+		}
+		if ($this->hasRecordPropertyInteger($startTimeColumn)) {
+			$enableFields[$startTimeColumn] = $this->getRecordPropertyInteger(
+				$startTimeColumn
 			);
-
-			$imageURL = $tableConfiguration['typeicons'][$recordType];
-		} elseif ($tableConfiguration['iconfile']) {
-			$imageURL = $tableConfiguration['iconfile'];
+		}
+		if ($this->hasRecordPropertyInteger($endTimeColumn)) {
+			$enableFields[$endTimeColumn] = $this->getRecordPropertyInteger(
+				$endTimeColumn
+			);
 		}
 
-		if (!empty($imageURL)) {
-			$imageURL = t3lib_div::getIndpEnv('TYPO3_SITE_URL').TYPO3_mainDir.$imageURL;
-			$result = '<img src="'.$imageURL.'" title="id='.$this->getUid()
-				.'" alt="'.$this->getUid().'" />';
-		}
+		$imageURL = $BACK_PATH.t3lib_iconworks::getIcon(
+			$this->tableName, $enableFields
+		);
 
-		return $result;
+		return '<img src="'.$imageURL.'" title="id='.$this->getUid()
+			.'" alt="'.$this->getUid().'" />';
 	}
 }
 
