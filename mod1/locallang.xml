@@ -53,6 +53,15 @@
 			<label index="label_paid">Hanno pagato:</label>
 			<label index="label_unpaid">Non hanno pagato:</label>
 		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="title">Séminaires</label>
+			<label index="menu_seminarDetails">Afficher les détails de l'événement</label>
+			<label index="title_getEmailAddressesForAttendances">Récupérer les adresses mails des participants</label>
+			<label index="msg_noAttendancesFound">Aucun pour l'instant</label>
+			<label index="label_all">Tous:</label>
+			<label index="label_paid">Payés:</label>
+			<label index="label_unpaid">Non payés:</label>
+		</languageKey>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="dk" type="array">
@@ -91,6 +100,15 @@
 			<label index="label_paid" type="integer">248191216</label>
 			<label index="label_unpaid" type="integer">216945004</label>
 		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="title" type="integer">146176001</label>
+			<label index="menu_seminarDetails" type="integer">145063384</label>
+			<label index="title_getEmailAddressesForAttendances" type="integer">259654871</label>
+			<label index="msg_noAttendancesFound" type="integer">252489978</label>
+			<label index="label_all" type="integer">227874010</label>
+			<label index="label_paid" type="integer">248191216</label>
+			<label index="label_unpaid" type="integer">216945004</label>
+		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
@@ -112,6 +130,15 @@
 			<label index="label_unpaid">Not paid: </label>
 		</languageKey>
 		<languageKey index="it" type="array">
+			<label index="title">Seminars</label>
+			<label index="menu_seminarDetails">Show event details</label>
+			<label index="title_getEmailAddressesForAttendances">Get e-mail addresses for attendances</label>
+			<label index="msg_noAttendancesFound">none yet</label>
+			<label index="label_all">All: </label>
+			<label index="label_paid">Paid: </label>
+			<label index="label_unpaid">Not paid: </label>
+		</languageKey>
+		<languageKey index="fr" type="array">
 			<label index="title">Seminars</label>
 			<label index="menu_seminarDetails">Show event details</label>
 			<label index="title_getEmailAddressesForAttendances">Get e-mail addresses for attendances</label>

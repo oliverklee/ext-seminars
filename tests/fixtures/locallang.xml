@@ -19,6 +19,10 @@
 			<label index="label_yes">Si</label>
 			<label index="label_no">No</label>
 		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="label_yes">oui</label>
+			<label index="label_no">non</label>
+		</languageKey>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="de" type="array">
@@ -29,6 +33,10 @@
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
 		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="label_yes" type="integer">174130624</label>
+			<label index="label_no" type="integer">133839734</label>
+		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
@@ -36,6 +44,10 @@
 			<label index="label_no">no</label>
 		</languageKey>
 		<languageKey index="it" type="array">
+			<label index="label_yes">yes</label>
+			<label index="label_no">no</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
 		</languageKey>

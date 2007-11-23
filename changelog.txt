@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1204] Feature: Added French translation by François Suter
 - [#1095] Feature: Show the target groups in the list view and allow to sort by and search for them
 - [#1180] Feature: Modify tx_seminars_objectfromdb::getRecordIcon() so it returns hidden and timed icons
 - [#1314] Fix: tx_seminars_organizers.email shouldn't be an exclude field

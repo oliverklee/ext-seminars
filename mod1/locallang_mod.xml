@@ -33,6 +33,11 @@
 			<label index="mlang_labels_tabdescr">Questo modulo gestisce seminari, registrazioni, luoghi dei seminari e gli oratori.</label>
 			<label index="mlang_labels_tablabel">Seminari</label>
 		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="mlang_tabs_tab">Séminaires</label>
+			<label index="mlang_labels_tabdescr">Ce module vous permet de gérer les séminaires, les inscriptions, les lieux de séminaire et les conférenciers</label>
+			<label index="mlang_labels_tablabel">Séminaires</label>
+		</languageKey>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="dk" type="array">
@@ -55,6 +60,11 @@
 			<label index="mlang_labels_tabdescr" type="integer">117707712</label>
 			<label index="mlang_labels_tablabel" type="integer">146176001</label>
 		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="mlang_tabs_tab" type="integer">146176001</label>
+			<label index="mlang_labels_tabdescr" type="integer">117707712</label>
+			<label index="mlang_labels_tablabel" type="integer">146176001</label>
+		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="dk" type="array">
@@ -73,6 +83,11 @@
 			<label index="mlang_labels_tablabel">Seminars</label>
 		</languageKey>
 		<languageKey index="it" type="array">
+			<label index="mlang_tabs_tab">Seminars</label>
+			<label index="mlang_labels_tabdescr">This module allows you to manage seminars, registrations, seminar sites and speakers.</label>
+			<label index="mlang_labels_tablabel">Seminars</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
 			<label index="mlang_tabs_tab">Seminars</label>
 			<label index="mlang_labels_tabdescr">This module allows you to manage seminars, registrations, seminar sites and speakers.</label>
 			<label index="mlang_labels_tablabel">Seminars</label>
