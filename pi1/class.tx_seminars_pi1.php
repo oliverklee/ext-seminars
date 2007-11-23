@@ -137,7 +137,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					WHERE tx_seminars_attendances.seminar=tx_seminars_seminars.uid
 						AND  tx_seminars_attendances.seats!=0
 						AND tx_seminars_attendances.deleted=0)
-				)'
+				)',
+		// This will sort by the target groups titles or the alphabetically lowest
+		// target group title (if there is more than one speaker).
+		'target_groups' => '(SELECT MIN(tx_seminars_target_groups.title)
+			FROM tx_seminars_seminars_target_groups_mm, tx_seminars_target_groups
+			WHERE tx_seminars_seminars_target_groups_mm.uid_local=tx_seminars_seminars.uid
+				AND tx_seminars_seminars_target_groups_mm.uid_foreign=tx_seminars_target_groups.uid)'
 	);
 
 	/**
@@ -184,6 +190,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'title'
 		),
 		'organizers' => array(
+			'title'
+		),
+		'target_groups' => array(
 			'title'
 		)
 	);
@@ -818,7 +827,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		);
 
 		$this->internal['orderByList'] = 'title,uid,event_type,accreditation_number'
-			.',credit_points,begin_date,price_regular,price_special,organizers';
+			.',credit_points,begin_date,price_regular,price_special,organizers,'
+			.'target_groups';
 
 		$pidList = $this->pi_getPidList(
 			$this->getConfValueString('pidList'),
@@ -1657,6 +1667,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->getFieldHeader('organizers')
 		);
 		$this->setMarkerContent(
+			'header_target_groups',
+			$this->getFieldHeader('target_groups')
+		);
+		$this->setMarkerContent(
 			'header_vacancies',
 			$this->getFieldHeader('vacancies')
 		);
@@ -1781,6 +1795,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent(
 				'organizers',
 				$this->seminar->getOrganizers($this)
+			);
+			$this->setMarkerContent(
+				'target_groups',
+				$this->seminar->getTargetGroupNames()
 			);
 			$this->setMarkerContent(
 				'vacancies',
@@ -2378,6 +2396,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 									.' LIKE \'%'.$currentPreparedKeyword.'%\''
 								.' AND FIND_IN_SET('.$this->tableOrganizers.'.uid,'
 									.$this->tableSeminars.'.organizers)'
+						.')';
+					}
+
+					// For target groups, we have real m:n relations, too.
+					foreach ($this->searchFieldList['target_groups'] as $field) {
+						$whereParts[] = 'EXISTS ('
+							.'SELECT * FROM '.$this->tableTargetGroups.', '
+								.$this->tableTargetGroupsMM
+							.' WHERE '.$this->tableTargetGroups.'.'.$field
+								.' LIKE \'%'.$currentPreparedKeyword.'%\''
+							.' AND '.$this->tableTargetGroupsMM.'.uid_local='
+								.$this->tableSeminars.'.uid '
+							.'AND '.$this->tableTargetGroupsMM.'.uid_foreign='
+								.$this->tableTargetGroups.'.uid'
 						.')';
 					}
 

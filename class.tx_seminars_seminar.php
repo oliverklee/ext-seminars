@@ -1982,6 +1982,40 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns a string of our event's target group titles separated by a comma
+	 * (or an empty string if there aren't any).
+	 *
+	 * @return	string		the target group titles of this seminar separated by
+	 * 						a comma (or an empty string)
+	 *
+	 * @access	public
+	 */
+	function getTargetGroupNames() {
+		if (!$this->hasTargetGroups()) {
+			return '';
+		}
+
+		$result = array();
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			$this->tableTargetGroups.'.title',
+			$this->tableTargetGroups.', '.$this->tableTargetGroupsMM,
+			$this->tableTargetGroupsMM.'.uid_local='.$this->getTopicUid()
+				.' AND '.$this->tableTargetGroups.'.uid='
+				.$this->tableTargetGroupsMM.'.uid_foreign'
+				.$this->enableFields($this->tableTargetGroups)
+		);
+
+		if ($dbResult) {
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$result[] = $row['title'];
+			}
+		}
+
+		return implode(', ', $result);
+	}
+
+	/**
 	 * Returns an array of our seminar's target groups (or an empty array if
 	 * there aren't any).
 	 *

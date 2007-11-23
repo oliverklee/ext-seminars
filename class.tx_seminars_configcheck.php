@@ -763,6 +763,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'price_special',
 				'total_price',
 				'organizers',
+				'target_groups',
 				'vacancies',
 				'registration',
 				'list_registrations',
