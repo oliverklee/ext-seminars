@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1316] Feature: In mod2 also show timed events
 - [#1315] Feature: In tx_seminars_bag allow to ignore the timing of records
 - [#1204] Feature: Added French translation by François Suter
 - [#1095] Feature: Show the target groups in the list view and allow to sort by and search for them
