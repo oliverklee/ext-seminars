@@ -80,23 +80,45 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	/**
 	 * The constructor. Sets the iterator to the first result of a query
 	 *
-	 * @param	string		the name of the main DB table to query (comma-separated), may not be empty
-	 * @param	string		string that will be prepended to the WHERE clause using AND, e.g. 'pid=42' (the AND and the enclosing spaces are not necessary for this parameter)
-	 *						the table name must be used as a prefix if more than one table is queried
-	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
+	 * @param	string		the name of the main DB table to query (comma-
+	 * 						separated), may not be empty
+	 * @param	string		string that will be prepended to the WHERE clause
+	 * 						using AND, e.g. 'pid=42' (the AND and the enclosing
+	 * 						spaces are not necessary for this parameter)
+	 *						the table name must be used as a prefix if more than
+	 * 						one table is queried
+	 * @param	string		comma-separated names of additional DB tables used
+	 * 						for JOINs, may be empty
+	 * @param	string		GROUP BY clause (may be empty), must already by
+	 * 						safeguarded against SQL injection
+	 * @param	string		ORDER BY clause (may be empty), must already by
+	 * 						safeguarded against SQL injection
+	 * @param	string		LIMIT clause (may be empty), must already by
+	 * 						safeguarded against SQL injection
+	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
+	 * 						fields in records are ignored.
+	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
+	 * 						records is ignored.
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_bag($dbTableName, $queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
+	function tx_seminars_bag(
+		$dbTableName,
+		$queryParameters = '1=1',
+		$additionalTableNames = '',
+		$groupBy = '',
+		$orderBy = '',
+		$limit = '',
+		$showHiddenRecords = -1,
+		$ignoreTimingOfRecords = false
+	) {
 		$this->dbTableName = $dbTableName;
 		$this->queryParameters = trim($queryParameters);
 		$this->additionalTableNames =
 			(!empty($additionalTableNames)) ? ', '.$additionalTableNames : '';
-		$this->createEnabledFieldsQuery($showHiddenRecords);
+		$this->createEnabledFieldsQuery(
+			$showHiddenRecords, $ignoreTimingOfRecords
+		);
 
 		$this->orderBy = $orderBy;
 		$this->groupBy = $groupBy;
@@ -113,12 +135,28 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * concatenated output from t3lib_pageSelect::enableFields into
 	 * $this->enabledFieldsQuery.
 	 *
-	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
+	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
+	 * 						fields in records are ignored.
+	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
+	 * 						records is ignored.
 	 *
 	 * @access	private
 	 */
-	function createEnabledFieldsQuery($showHiddenRecords = -1) {
-		$allTableNames = explode(',', $this->dbTableName.$this->additionalTableNames);
+	function createEnabledFieldsQuery(
+		$showHiddenRecords = -1, $ignoreTimingOfRecords = false
+	) {
+		$ignoreColumns = array();
+
+		if ($ignoreTimingOfRecords) {
+			$ignoreColumns = array(
+				'starttime' => true,
+				'endtime' => true
+			);
+		}
+
+		$allTableNames = explode(
+			',', $this->dbTableName.$this->additionalTableNames
+		);
 		$this->enabledFieldsQuery = '';
 
 		foreach ($allTableNames as $currentTableName) {
@@ -126,7 +164,11 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			// Is there a TCA entry for that table?
 			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
 			if (is_array($ctrl)) {
-				$this->enabledFieldsQuery .= $this->enableFields($trimmedTableName, $showHiddenRecords);
+				$this->enabledFieldsQuery .= $this->enableFields(
+					$trimmedTableName,
+					$showHiddenRecords,
+					$ignoreColumns
+				);
 			}
 		}
 		return;
