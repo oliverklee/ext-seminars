@@ -209,7 +209,8 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 			'',
 			$orderBy,
 			$limit,
-			1
+			1,
+			true
 		);
 
 		$sortList = array();

@@ -45,20 +45,46 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * The constructor. Creates a seminar bag that contains seminar
 	 * records and allows to iterate over them.
 	 *
-	 * @param	string		string that will be prepended to the WHERE clause using AND, e.g. 'pid=42' (the AND and the enclosing spaces are not necessary for this parameter)
-	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
+	 * @param	string		string that will be prepended to the WHERE clause
+	 * 						using AND, e.g. 'pid=42' (the AND and the enclosing
+	 * 						spaces are not necessary for this parameter)
+	 * @param	string		comma-separated names of additional DB tables used
+	 * 						for JOINs, may be empty
+	 * @param	string		GROUP BY clause (may be empty), must already by
+	 * 						safeguarded against SQL injection
+	 * @param	string		ORDER BY clause (may be empty), must already by
+	 * 						safeguarded against SQL injection
+	 * @param	string		LIMIT clause (may be empty), must already by
+	 * 						safeguarded against SQL injection
+	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
+	 * 						fields in records are ignored.
+	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
+	 * 						records is ignored.
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminarbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
+	function tx_seminars_seminarbag(
+		$queryParameters = '1=1',
+		$additionalTableNames = '',
+		$groupBy = '',
+		$orderBy = '',
+		$limit = '',
+		$showHiddenRecords = -1,
+		$ignoreTimingOfRecords = false
+	) {
 		// Although the parent class also calls init(), we need to call it
 		// here already so that $this->tableSeminars is provided.
 		$this->init();
-		parent::tx_seminars_bag($this->tableSeminars, $queryParameters, $additionalTableNames, $groupBy, $orderBy, $limit, $showHiddenRecords);
+		parent::tx_seminars_bag(
+			$this->tableSeminars,
+			$queryParameters,
+			$additionalTableNames,
+			$groupBy,
+			$orderBy,
+			$limit,
+			$showHiddenRecords,
+			$ignoreTimingOfRecords
+		);
 
 		return;
 	}
