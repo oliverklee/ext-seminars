@@ -172,6 +172,7 @@
 			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
+			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
 			<label index="label_selector_submit">Apply filter</label>
 			<label index="label_selector_reset">Reset</label>
@@ -572,6 +573,7 @@
 			<label index="label_method_of_payment">Gewählte Zahlungsart:</label>
 			<label index="label_unregistration_message_formal">Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</label>
 			<label index="label_unregistration_message_informal">Willst du dich wirklich von dieser Veranstaltung abmelden?</label>
+			<label index="label_cancel">Abbrechen</label>
 			<label index="label_unregister">Abmelden</label>
 			<label index="label_selector_submit">Filter anwenden</label>
 			<label index="label_selector_reset">zurücksetzen</label>
@@ -1761,6 +1763,7 @@
 			<label index="label_method_of_payment" type="integer">221962435</label>
 			<label index="label_unregistration_message_formal" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
+			<label index="label_cancel" type="integer">245659783</label>
 			<label index="label_unregister" type="integer">164931826</label>
 			<label index="label_selector_submit" type="integer">131190777</label>
 			<label index="label_selector_reset" type="integer">86431368</label>
@@ -2768,6 +2771,7 @@
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
+			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>

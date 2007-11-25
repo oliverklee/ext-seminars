@@ -112,10 +112,10 @@
 
 		<renderlet:SUBMIT name="button_back">
 			<refresh />
-			<label>LLL:EXT:seminars/pi1/locallang.xml:label_back_registration</label>
+			<label>###LABEL_BACK_REGISTRATION###</label>
 		</renderlet:SUBMIT>
 		<renderlet:SUBMIT name="button_submit">
-			<label>LLL:EXT:seminars/pi1/locallang.xml:label_submit_registration</label>
+			<label>###LABEL_SUBMIT_REGISTRATION###</label>
 			<onclick runat="server" submit="full">
 				<userobj>
 					<php><![CDATA[

@@ -663,7 +663,7 @@
 		</renderlet:TEXTAREA>
 
 		<renderlet:SUBMIT name="button_continue">
-			<label>LLL:EXT:seminars/pi1/locallang.xml:label_proceed_registration</label>
+			<label>###LABEL_PROCEED_REGISTRATION###</label>
 		</renderlet:SUBMIT>
 
 		<renderlet:PASSTHRU name="next_page">

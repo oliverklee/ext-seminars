@@ -47,10 +47,10 @@
 					]]></php>
 				</userobj>
 			</onclick>
-			<label>LLL:EXT:lang/locallang_core.xml:labels.cancel</label>
+			<label>###LABEL_CANCEL###</label>
 		</renderlet:SUBMIT>
 		<renderlet:SUBMIT name="button_unregister">
-			<label>LLL:EXT:seminars/pi1/locallang.xml:label_unregister</label>
+			<label>###LABEL_UNREGISTER###</label>
 		</renderlet:SUBMIT>
 	</elements>
 </formidable>
