@@ -140,7 +140,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function _render() {
-		return $this->oForm->_render();
+		$rawForm = $this->oForm->_render();
+		$this->plugin->processTemplate($rawForm);
+		$this->plugin->setLabels();
+
+		return $this->plugin->substituteMarkerArrayCached();
 	}
 
 	/**
