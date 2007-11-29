@@ -111,17 +111,18 @@ div.tx-seminars-pi1-selectorwidget {
 	clear: left;
 }
 
-.tx-seminars-pi1-selectorwidget .optionbox {
+.tx-seminars-pi1-selectorwidget .tx-seminars-pi1-optionbox {
 	float: left;
 	padding-bottom: .5em;
 }
 
-.tx-seminars-pi1-selectorwidget .optionbox select {
+.tx-seminars-pi1-selectorwidget .tx-seminars-pi1-optionbox select {
 	width: 100%;
 }
 
-#optionbox-1, #optionbox-2, #optionbox-3 {
-	width: 33%;
+#tx-seminars-pi1-optionbox-1, #tx-seminars-pi1-optionbox-2,
+#tx-seminars-pi1-optionbox-3, #tx-seminars-pi1-optionbox-4 {
+	width: 25%;
 }
 
 #tx-seminars-pi1-registration-form fieldset {

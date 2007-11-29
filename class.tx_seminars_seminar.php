@@ -1771,6 +1771,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns the UID of the event type that was selected for this event. If no
+	 * event type has been set, 0 will be returned.
+	 *
+	 * @return	integer		UID of the event type for this event or 0 if no event
+	 * 						type is set
+	 */
+	function getEventTypeUid() {
+		return $this->getRecordPropertyInteger('event_type');
+	}
+
+	/**
 	 * Returns the event type as a string (e.g. "Workshop" or "Lecture").
 	 * If the seminar has a event type selected, that one is returned. Otherwise
 	 * the global event type from the TS setup is returned.

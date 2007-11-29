@@ -169,6 +169,41 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	}
 
 	/**
+	 * Returns the additional query parameters for the event type selection from
+	 * the selector widget. If the user has not selected an event type, an empty
+	 * string will be returned.
+	 *
+	 * If the user has selected at least one event type, the POST data is an array
+	 * in any case (i.e. it doesn't matter whether the user selected exactly one
+	 * event type or five of them).
+	 *
+	 * @param	array		array of UIDs for the event type, from POST data,
+	 * 						may be empty
+	 *
+	 * @return	string		the additional query parameter starting with ' AND',
+	 * 						can be appended to existing query string, may be empty
+	 *
+	 * @access	private
+	 */
+	function getAdditionalQueryForEventType($eventTypeUids) {
+		$result = '';
+		$sanitizedEventTypeUids = array();
+
+		foreach ($eventTypeUids as $currentEventTypeUid) {
+			if (intval($currentEventTypeUid) >= 0) {
+				$sanitizedEventTypeUids[] = intval($currentEventTypeUid);
+			}
+		}
+
+		if (!empty($sanitizedEventTypeUids)) {
+			$result = ' AND '.$this->tableSeminars.'.event_type IN('
+				. implode(',', $sanitizedEventTypeUids).')';
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Returns the additional query parameters for the language selection from
 	 * the selector widget. If the user has not selected any language, an empty
 	 * string will be returned.

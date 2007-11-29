@@ -91,6 +91,50 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testGetAdditionalQueryForEventTypeIsEmptyWithNoEventType() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getAdditionalQueryForEventType(array())
+		);
+	}
+
+	public function testGetAdditionalQueryForEventTypeWithOneValidEventType() {
+		$this->assertEquals(
+			' AND tx_seminars_seminars.event_type IN(3)',
+			$this->fixture->getAdditionalQueryForEventType(array(3))
+		);
+	}
+
+	public function testGetAdditionalQueryForEventTypeWithTwoValidEventTypes() {
+		$this->assertEquals(
+			' AND tx_seminars_seminars.event_type IN(1,42)',
+			$this->fixture->getAdditionalQueryForEventType(array(1, 42))
+		);
+	}
+
+	public function testGetAdditionalQueryForEventTypeWithEvilData() {
+		// Querying this method with evil data should theoretically return an
+		// empty string. But as we intval() the input values, and zero is an allowed
+		// value for the event type, the returned string will not be empty as the
+		// evil data has an integer value of zero.
+		$this->assertEquals(
+			' AND tx_seminars_seminars.event_type IN(0)',
+			$this->fixture->getAdditionalQueryForEventType(
+				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
+			)
+		);
+	}
+
+	public function testGetAdditionalQueryForEventTypeWithUidZero() {
+		// This covers a special case: If no event type is set, the value of the
+		// field in the database is set to zero by default. So zero is an allowed
+		// value for the event type.
+		$this->assertEquals(
+			' AND tx_seminars_seminars.event_type IN(0)',
+			$this->fixture->getAdditionalQueryForEventType(array(0))
+		);
+	}
+
 	public function testGetAdditionalQueryForLanguageIsEmptyWithNoLanguage() {
 		$this->assertEquals(
 			'',

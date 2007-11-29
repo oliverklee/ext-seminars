@@ -329,6 +329,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Adds the query parameter that result from the user selection in the
 		// selector widget (including the search form).
+		if (is_array($this->piVars['event_type'])) {
+			$result .= tx_seminars_seminarbag::getAdditionalQueryForEventType(
+				$this->piVars['event_type']
+			);
+		}
 		if (is_array($this->piVars['language'])) {
 			$result .= tx_seminars_seminarbag::getAdditionalQueryForLanguage(
 				$this->piVars['language']
@@ -633,6 +638,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// read from the place record later.
 			$placeUids = $currentEvent->getRelatedMmRecordUids($this->tableSitesMM);
 			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
+
+			// Reads the event type from the event record.
+			$eventTypeUid = $currentEvent->getEventTypeUid();
+			$eventTypeName = $currentEvent->getEventType();
+			if (!isset($this->allEventTypes[$eventTypeUid])) {
+				$this->allEventTypes[$eventTypeUid] = $eventTypeName;
+			}
 
 			$seminarBag->getNext();
 		}
@@ -2692,6 +2704,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Defines the list of option boxes that should be shown in the form.
 		$allOptionBoxes = array(
+			'event_type',
 			'language',
 			'country',
 			'place'
@@ -2719,13 +2732,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createOptionBox($optionBoxName) {
-		// These 3 arrays will be removed ASAP! This step is only about the HTML
-		// template. For testing we have these three arrays. In the future, this
-		// data will be dynamically generated.
-		$availableLanguages = array('Language A', 'Language B', 'Language C');
-		$availableCountries = array('Country A', 'Country B', 'Country C');
-		$availablePlaces = array('Location A', 'Location B', 'Location C');
-
 		// Sets the header that is shown in the label of this selector box.
 		$this->setMarkerContent(
 			'options_header',
@@ -2745,6 +2751,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// them as HTML <option> entries for the <select> field.
 		$optionsList = '';
 		switch ($optionBoxName) {
+			case 'event_type':
+				$availableOptions = $this->allEventTypes;
+				break;
 			case 'language':
 				$availableOptions = $this->allLanguages;
 				break;
