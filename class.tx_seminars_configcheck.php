@@ -223,7 +223,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkEventFieldsOnRegistrationPage();
 		$this->checkShowRegistrationFields();
 		$this->checkThankYouAfterRegistrationPID();
+		$this->checkSendParametersToThankYouAfterRegistrationPageUrl();
 		$this->checkPageToShowAfterUnregistrationPID();
+		$this->checkSendParametersToPageToShowAfterUnregistrationUrl();
 		$this->checkListPid();
 		$this->checkLoginPid();
 		$this->checkBankTransferUid();
@@ -1991,6 +1993,42 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			true,
 			's_registration',
 			'This specifies the number of clicks for registration.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendParametersToThankYouAfterRegistrationPageUrl.
+	 *
+	 * @access	private
+	 */
+	function checkSendParametersToThankYouAfterRegistrationPageUrl() {
+		$this->checkIfBoolean(
+			'sendParametersToThankYouAfterRegistrationPageUrl',
+			true,
+			's_registration',
+			'This value specifies whether the sending of parameters to the '
+				.'thank you page after a registration should be enabled or not. '
+				.'If this value is incorrect the sending of parameters will '
+				.'not be enabled or disabled correctly.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendParametersToPageToShowAfterUnregistrationUrl.
+	 *
+	 * @access	private
+	 */
+	function checkSendParametersToPageToShowAfterUnregistrationUrl() {
+		$this->checkIfBoolean(
+			'sendParametersToPageToShowAfterUnregistrationUrl',
+			true,
+			's_registration',
+			'This value specifies wether the sending of parameters to the page '
+				.'which is shown after an unregistration should be enabled or '
+				.'not. If this value is incorrect the sending of parameters '
+				.'will not be enabled or disabled correctly.'
 		);
 	}
 }
