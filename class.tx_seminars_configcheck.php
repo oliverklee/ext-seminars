@@ -216,6 +216,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkBaseUrl();
 		$this->checkRegistrationEditorTemplateFile();
 
+		$this->checkNumberOfClicksForRegistration();
 		$this->checkNumberOfFirstRegistrationPage();
 		$this->checkNumberOfLastRegistrationPage();
 		$this->checkGeneralPriceInSingle();
@@ -1967,6 +1968,30 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		);
 
 		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * numberOfClicksForRegistration.
+	 *
+	 * @access	private
+	 */
+	function checkNumberOfClicksForRegistration() {
+		$this->checkIfInteger(
+			'numberOfClicksForRegistration',
+			true,
+			's_registration',
+			'This specifies the number of clicks for registration'
+		);
+
+		$this->checkIfIntegerInRange(
+			'numberOfClicksForRegistration',
+			2,
+			3,
+			true,
+			's_registration',
+			'This specifies the number of clicks for registration.'
+		);
 	}
 }
 

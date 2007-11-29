@@ -665,6 +665,16 @@
 		<renderlet:SUBMIT name="button_continue">
 			<label>###LABEL_PROCEED_REGISTRATION###</label>
 		</renderlet:SUBMIT>
+		<renderlet:SUBMIT name="button_submit">
+			<label>###LABEL_SUBMIT_REGISTRATION###</label>
+			<onclick runat="server" submit="full">
+				<userobj>
+					<php><![CDATA[
+						$this->_oParent->currentPageNumber = 2;
+					]]></php>
+				</userobj>
+			</onclick>
+		</renderlet:SUBMIT>
 
 		<renderlet:PASSTHRU name="next_page">
 			<data>

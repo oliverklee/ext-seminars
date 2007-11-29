@@ -627,6 +627,55 @@ class tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks whether a configuration value has an integer value in a specified
+	 * range (or is empty).
+	 *
+	 * @param	string		TS setup field name to extract, must not be empty
+	 * @param	integer		the first value of the range which is allowed
+	 * @param	integer		the last value of the range which is allowed
+	 * @param	boolean		whether the value can also be set via flexforms
+	 * 						(this will be mentioned in the error message)
+	 * @param	string		flexforms sheet pointer, eg. "sDEF", will be ignored
+	 * 						if $canUseFlexforms is set to false
+	 * @param	string		a sentence explaning what that configuration value
+	 * 						is needed for, must not be empty
+	 *
+	 * @access	protected
+	 */
+	function checkIfIntegerInRange(
+		$fieldName,
+		$minValue,
+		$maxValue,
+		$canUseFlexforms,
+		$sheet,
+		$explanation
+	) {
+		// Checks if our minimum value is bigger then our maximum value and
+		// swaps their values if this is the case.
+		if ($minValue > $maxValue) {
+			$temp = $maxValue;
+			$maxValue = $minValue;
+			$minValue = $temp;
+		}
+
+		$value = $this->objectToCheck->getConfValueInteger($fieldName, $sheet);
+
+		if (($value < $minValue) || ($value > $maxValue)) {
+			$message = 'The TS setup variable <strong>'
+				.$this->getTSSetupPath().$fieldName
+				.'</strong> is set to the value <strong>'
+				.htmlspecialchars($value).'</strong>, but only integers from '
+				.$minValue.' to '.$maxValue.' are allowed. '
+				.$explanation;
+			$this->setErrorMessageAndRequestCorrection(
+				$fieldName,
+				$canUseFlexforms,
+				$message
+			);
+		}
+	}
+
+	/**
 	 * Checks whether a provided value has an integer value (or is empty). The
 	 * value to check must be provided as a parameter and is not fetched
 	 * automatically; the $fieldName parameter is only used to create the

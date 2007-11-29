@@ -1502,6 +1502,28 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			}
 		}
 
+		$numberOfClicks = $this->plugin->getConfValueInteger(
+			'numberOfClicksForRegistration',
+			's_registration'
+		);
+
+		// If we first visit the registration form, the value of
+		// $this->currentPageNumber is 0.
+		// If we had an error in our form input and we were send back to the
+		// registration form, $this->currentPageNumber is 2.
+		if (($this->currentPageNumber == 0) || ($this->currentPageNumber == 2)) {
+			switch ($numberOfClicks) {
+				case 2:
+					$formFieldsToHide['button_continue'] = 'button_continue';
+					break;
+				case 3:
+					// The fall-through is intended.
+				default:
+					$formFieldsToHide['button_submit'] = 'button_submit';
+					break;
+			}
+		}
+
 		$this->readSubpartsToHide(
 			implode(',', $formFieldsToHide),
 			'registration_wrapper'
@@ -1525,6 +1547,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$lastPageNumberForDisplay = $this->plugin->getConfValueInteger(
 			'numberOfLastRegistrationPage'
 		);
+
+		// Decreases $lastPageNumberForDisplay by one if we only have 2 clicks
+		// to registration.
+		$numberOfClicks = $this->plugin->getConfValueInteger(
+			'numberOfClicksForRegistration',
+			's_registration'
+		);
+
+		if ($numberOfClicks == 2) {
+			$lastPageNumberForDisplay--;
+		}
+
 		return sprintf(
 			$this->plugin->pi_getLL('label_step_counter'),
 			$currentPageNumberForDisplay, $lastPageNumberForDisplay

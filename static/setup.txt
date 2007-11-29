@@ -154,6 +154,9 @@ plugin.tx_seminars_pi1 {
 	# Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
 	enableRegistration = 1
 
+	# number of clicks to registration (valid options are 2 or 3)
+	numberOfClicksForRegistration = 3
+
 	# location of the HTML template file
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
 

@@ -59,6 +59,7 @@
 			<label index="seminars.pi_flexform.showSiteDetails">Show site details</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
 			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Send parameters to page which is displayed after registration</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page that will be displayed after a user has unregistered for an event</label>
@@ -461,6 +462,7 @@
 			<label index="seminars.pi_flexform.showSiteDetails">Ortsdetails anzeigen</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Zeige diese FEuser-Felder in der Liste der Anmeldungen</label>
 			<label index="seminars.pi_flexform.sheet_registration">Veranstaltungsanmeldung</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Anzahl an Klicks bis zur Anmeldung</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Seite, die nach erfolgreicher Anmeldung für eine Veranstaltung angezeigt wird</label>
 			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Parameter an Seite schicken, die nach erfolgreicher Anmeldung angezeigt wird</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Seite, die nach erfolgreicher Abmeldung für eine Veranstaltung angezeigt wird</label>
@@ -1652,6 +1654,7 @@
 			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">201114697</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
 			<label index="seminars.pi_flexform.sheet_registration" type="integer">16354175</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID" type="integer">144873436</label>
 			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" type="integer">159378554</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID" type="integer">50906970</label>
@@ -2654,6 +2657,7 @@
 			<label index="seminars.pi_flexform.showSiteDetails">Show site details</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
 			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Send parameters to page which is displayed after registration</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page that will be displayed after a user has unregistered for an event</label>
