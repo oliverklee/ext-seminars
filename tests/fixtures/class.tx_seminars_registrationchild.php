@@ -58,12 +58,13 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the "registration_queue" field of the registration record.
 	 *
-	 * @param	integer		1 if registration is on queue, 0 otherwise
+	 * @param	boolean		true if the registration should be on the waiting
+	 * 						list, false otherwise
 	 */
 	public function setIsOnRegistrationQueue($isOnRegistrationQueueValue) {
 		$this->setRecordPropertyInteger(
 			'registration_queue',
-			$isOnRegistrationQueueValue
+			intval($isOnRegistrationQueueValue)
 		);
 	}
 }

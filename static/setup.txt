@@ -196,6 +196,7 @@ plugin.tx_seminars_pi1 {
 	class_headerorganizers =
 	class_headertarget_groups =
 	class_headervacancies =
+	class_headerstatus_registration =
 	class_headerregistration =
 	class_headerlist_registrations =
 	class_headeredit =
@@ -223,6 +224,7 @@ plugin.tx_seminars_pi1 {
 	class_listtotal_price =
 	class_listorganizers =
 	class_listtarget_groups =
+	class_liststatus_registration =
 	class_listregistration =
 	class_listlist_registrations =
 	class_listedit =

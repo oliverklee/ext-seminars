@@ -1361,6 +1361,20 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	function isOnRegistrationQueue() {
 		return $this->getRecordPropertyBoolean('registration_queue');
 	}
+
+	/**
+	 * Gets this registration's status as a localized string.
+	 *
+	 * @return	string		a localized version of either "waiting list" or
+	 * 						"regular", will not be empty
+	 *
+	 * @access	public
+	 */
+	function getStatus() {
+		$languageKey = 'label_'
+			.($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
+		return $this->translate($languageKey);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registration.php']) {

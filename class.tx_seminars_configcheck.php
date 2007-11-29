@@ -765,6 +765,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'organizers',
 				'target_groups',
 				'vacancies',
+				'status_registration',
 				'registration',
 				'list_registrations',
 				'edit'

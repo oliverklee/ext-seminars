@@ -112,6 +112,7 @@
 			<label index="label_organizers">Organizers</label>
 			<label index="label_vacancies">Vacancies</label>
 			<label index="label_deadline_registration">Deadline for registration</label>
+			<label index="label_status_registration">Status</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_onlineRegistration">Register now</label>
 			<label index="label_onlineRegistrationOnQueue">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</label>
@@ -513,6 +514,7 @@
 			<label index="label_organizers">Veranstalter</label>
 			<label index="label_vacancies">Freie Plätze</label>
 			<label index="label_deadline_registration">Anmeldeschluss</label>
+			<label index="label_status_registration">Status</label>
 			<label index="label_registration">Anmeldung</label>
 			<label index="label_onlineRegistration">Jetzt anmelden</label>
 			<label index="label_onlineRegistrationOnQueue">Für die Warteliste anmelden&lt;br /&gt;(%d Anmeldungen auf der Warteliste)</label>
@@ -1703,6 +1705,7 @@
 			<label index="label_organizers" type="integer">68798680</label>
 			<label index="label_vacancies" type="integer">99017107</label>
 			<label index="label_deadline_registration" type="integer">106717060</label>
+			<label index="label_status_registration" type="integer">247806604</label>
 			<label index="label_registration" type="integer">16354175</label>
 			<label index="label_onlineRegistration" type="integer">201391585</label>
 			<label index="label_onlineRegistrationOnQueue" type="integer">240607496</label>
@@ -2704,6 +2707,7 @@
 			<label index="label_organizers">Organizers</label>
 			<label index="label_vacancies">Vacancies</label>
 			<label index="label_deadline_registration">Deadline for registration</label>
+			<label index="label_status_registration">Status</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_onlineRegistration">Register now</label>
 			<label index="label_onlineRegistrationOnQueue">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</label>

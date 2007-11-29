@@ -61,6 +61,31 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->isOnRegistrationQueue()
 		);
 	}
+
+	public function testStatusIsInitiallyRegular() {
+		$this->assertEquals(
+			'regular',
+			$this->fixture->getStatus()
+		);
+	}
+
+	public function testStatusIsRegularIfNotOnQueue() {
+		$this->fixture->setIsOnRegistrationQueue(false);
+
+		$this->assertEquals(
+			'regular',
+			$this->fixture->getStatus()
+		);
+	}
+
+	public function testStatusIsWaitingListIfOnQueue() {
+		$this->fixture->setIsOnRegistrationQueue(true);
+
+		$this->assertEquals(
+			'waiting list',
+			$this->fixture->getStatus()
+		);
+	}
 }
 
 ?>

@@ -143,7 +143,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		'target_groups' => '(SELECT MIN(tx_seminars_target_groups.title)
 			FROM tx_seminars_seminars_target_groups_mm, tx_seminars_target_groups
 			WHERE tx_seminars_seminars_target_groups_mm.uid_local=tx_seminars_seminars.uid
-				AND tx_seminars_seminars_target_groups_mm.uid_foreign=tx_seminars_target_groups.uid)'
+				AND tx_seminars_seminars_target_groups_mm.uid_foreign=tx_seminars_target_groups.uid)',
+		'status_registration' => 'tx_seminars_attendances.registration_queue'
 	);
 
 	/**
@@ -693,7 +694,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$queryWhere
 		);
 
-		return $placeBag;		
+		return $placeBag;
 	}
 
 	/**
@@ -767,11 +768,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
 		}
 
-		// Hide the number of seats and the total price column when we're not
-		// on the "my events" list.
+		// Hides the number of seats, the total price and the registration
+		// status columns when we're not on the "my events" list.
 		if ($whatToDisplay != 'my_events') {
-			$this->readSubpartsToHide('total_price,seats', 'LISTHEADER_WRAPPER');
-			$this->readSubpartsToHide('total_price,seats', 'LISTITEM_WRAPPER');
+			$this->readSubpartsToHide(
+				'total_price,seats,status_registration', 'LISTHEADER_WRAPPER'
+			);
+			$this->readSubpartsToHide(
+				'total_price,seats,status_registration', 'LISTITEM_WRAPPER'
+			);
 		}
 
 		// Hide the column with the link to the list of registrations if
@@ -1687,6 +1692,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->getFieldHeader('vacancies')
 		);
 		$this->setMarkerContent(
+			'header_status_registration',
+			$this->getFieldHeader('status_registration')
+		);
+		$this->setMarkerContent(
 			'header_registration',
 			$this->getFieldHeader('registration')
 		);
@@ -1743,12 +1752,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$this->setMarkerContent('class_itemrow', $completeClass);
 
-			// Retrieve the data for the columns "Number of seats" and
-			// "Total price", but only if we are on the "my_events" list.
+			// Retrieves the data for the columns "number of seats", "total
+			// price" and "status", but only if we are on the "my_events" list.
 			if ($this->whatToDisplay == 'my_events') {
 				$attendanceData = array(
 					'seats' => $this->registration->getSeats(),
 					'total_price' => $this->registration->getTotalPrice()
+				);
+				$this->setMarkerContent(
+					'status_registration',
+					$this->registration->getStatus()
 				);
 			} else {
 				$attendanceData = array(
@@ -2710,7 +2723,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'place'
 		);
 
-		// Renders each option box.	
+		// Renders each option box.
 		foreach ($allOptionBoxes as $currentOptionBox) {
 			$this->createOptionBox($currentOptionBox);
 		}
