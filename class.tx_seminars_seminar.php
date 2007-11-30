@@ -3926,8 +3926,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				&& $this->hasConfValueInteger(
 					'unregistrationDeadlineDaysBeforeBeginDate')
 				&& (($this->getBeginDateAsTimestamp()
-					- ($this->getConfValue(
-					'unregistrationDeadlineDaysBeforeBeginDate')*ONE_DAY))
+					- ($this->getConfValueInteger(
+					'unregistrationDeadlineDaysBeforeBeginDate') * ONE_DAY))
 					> time())
 			) {
 				$result = true;

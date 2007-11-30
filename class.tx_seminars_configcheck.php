@@ -68,8 +68,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkDecimalSplitChar();
 		$this->checkShowToBeAnnouncedForEmptyPrice();
 		$this->checkEventType();
-
-		return;
+		$this->checkUnregistrationDeadlineDaysBeforeBeginDate();
 	}
 
 	/**
@@ -2029,6 +2028,26 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'which is shown after an unregistration should be enabled or '
 				.'not. If this value is incorrect the sending of parameters '
 				.'will not be enabled or disabled correctly.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * unregistrationDeadlineDaysBeforeBeginDate.
+	 *
+	 * @access	private
+	 */
+	function checkUnregistrationDeadlineDaysBeforeBeginDate() {
+		$this->checkIfPositiveIntegerOrEmpty(
+			'unregistrationDeadlineDaysBeforeBeginDate',
+			false,
+			'',
+			'This value specifies the number of days before the start of an '
+				.'event until unregistration is possible. (If you want to '
+				.'disable this feature, just leave this value empty.) If this '
+				.'value is incorrect, unregistration will fail to work or the '
+				.'unregistration period will be a different number of days than '
+				.'desired.'
 		);
 	}
 }

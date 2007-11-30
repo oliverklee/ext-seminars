@@ -99,6 +99,9 @@ plugin.tx_seminars {
 	# whether to also show the time of the unregistration deadline
 	showTimeOfUnregistrationDeadline = 0
 
+	# Number of days before the start of an event until unregistration is possible. (If you want to disable this feature, just leave this value empty.)
+	unregistrationDeadlineDaysBeforeBeginDate =
+
 	# If there are at least this many vancancies, "enough" is displayed instead of the exact number.
 	showVacanciesThreshold = 10
 
@@ -279,9 +282,6 @@ plugin.tx_seminars_pi1 {
 
 	# the displayed number of the last registration page (for "step x of y")
 	numberOfLastRegistrationPage = 2
-
-	# Number of days before the start of an event until unregistration is possible. (If you want to disable this feature, just set the value to 0.)
-	unregistrationDeadlineDaysBeforeBeginDate = 0
 
 	# whether detailed information for the speakers is shown in the single view
 	showSpeakerDetails = 1
