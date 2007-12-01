@@ -39,11 +39,16 @@
 
 	<elements>
 		<renderlet:SUBMIT name="button_cancel">
-			<onclick runat="server" submit="full">
+			<onclick runat="server">
 				<userobj>
 					<php><![CDATA[
-						header('Location:'.$this->_oParent->plugin->pi_getPageLink(
-								$this->_oParent->getConfValueInteger('listPID')));
+						header(
+							'Location:'.$this->_oParent->plugin->pi_getPageLink(
+									$this->_oParent->getConfValueInteger(
+										'myEventsPID'
+									)
+								)
+						);
 					]]></php>
 				</userobj>
 			</onclick>

@@ -229,8 +229,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkLoginPid();
 		$this->checkBankTransferUid();
 		$this->checkLogOutOneTimeAccountsAfterRegistration();
-
-		return;
+		$this->checkMyEventsPid();
 	}
 
 	/**
@@ -336,8 +335,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_pi1_my_events() {
 		$this->check_tx_seminars_pi1_seminar_list();
-
-		return;
 	}
 
 	/**
@@ -1315,6 +1312,25 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the page that contains the detailed view. '
 				.'If this value is not set correctly, the links to single '
 				.'events will not work as expected.'
+		);
+
+		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value myEventsPID.
+	 *
+	 * @access	private
+	 */
+	function checkMyEventsPid() {
+		$this->checkIfSingleFePageNotEmpty(
+			'myEventsPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the <em>my events</em> '
+				.'list. If this value is not set correctly, the redirection to '
+				.'the my events list after canceling the unregistration process '
+				.'will not work correctly.'
 		);
 
 		return;

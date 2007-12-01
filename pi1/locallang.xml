@@ -25,6 +25,7 @@
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.detailPID">Page that contains the detailed view:</label>
+			<label index="seminars.pi_flexform.myEventsPID">Page that contains the &quot;my events&quot; list:</label>
 			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
 			<label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations (for attendees):</label>
@@ -428,6 +429,7 @@
 			<label index="seminars.pi_flexform.baseURL">Basis-URL dieser Typo3-Site, z.B. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Seite mit der Seminarliste:</label>
 			<label index="seminars.pi_flexform.detailPID">Seite mit der Detailansicht:</label>
+			<label index="seminars.pi_flexform.myEventsPID">Seite mit der &quot;Meine Veranstaltungen&quot;-Liste:</label>
 			<label index="seminars.pi_flexform.registerPID">Seite mit der Seminaranmeldung:</label>
 			<label index="seminars.pi_flexform.loginPID">Seite mit dem Login-Formular:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Seite mit der Liste der Anmeldungen (für TeilnehmerInnen):</label>
@@ -1620,6 +1622,7 @@
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
 			<label index="seminars.pi_flexform.detailPID" type="integer">252951912</label>
+			<label index="seminars.pi_flexform.myEventsPID" type="integer">58335550</label>
 			<label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
 			<label index="seminars.pi_flexform.loginPID" type="integer">140600031</label>
 			<label index="seminars.pi_flexform.registrationsListPID" type="integer">169223862</label>
@@ -2623,6 +2626,7 @@
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.detailPID">Page that contains the detailed view:</label>
+			<label index="seminars.pi_flexform.myEventsPID">Page that contains the &quot;my events&quot; list:</label>
 			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
 			<label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations (for attendees):</label>
