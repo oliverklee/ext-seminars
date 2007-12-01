@@ -72,7 +72,7 @@ plugin.tx_seminars {
 	# whether to also show the time of the early bird deadline
 	showTimeOfEarlyBirdDeadline = 0
 
-	# If there are at least this many vancancies, "enough" is displayed instead of the exact number.
+	# If there are at least this many vacancies, "enough" is displayed instead of the exact number.
 	showVacanciesThreshold = 10
 
 	# number of digits after the point in event prices
