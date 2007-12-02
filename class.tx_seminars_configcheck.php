@@ -398,8 +398,10 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	function checkThankYouMail() {
 		$this->checkCharsetForEMails();
 		$this->checkHideFieldsInThankYouMail();
-
-		return;
+		$this->checkSendConfirmation();
+		$this->checkSendConfirmationOnQueueUpdate();
+		$this->checkSendConfirmationOnRegistrationForQueue();
+		$this->checkSendConfirmationOnUnregistration();
 	}
 
 	/**
@@ -414,8 +416,10 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkShowFeUserFieldsInNotificationMail();
 		$this->checkShowAttendanceFieldsInNotificationMail();
 		$this->checkSendAdditionalNotificationEmails();
-
-		return;
+		$this->checkSendNotification();
+		$this->checkSendNotificationOnQueueUpdate();
+		$this->checkSendNotificationOnRegistrationForQueue();
+		$this->checkSendNotificationOnUnregistration();
 	}
 
 	/**
@@ -2064,6 +2068,148 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'value is incorrect, unregistration will fail to work or the '
 				.'unregistration period will be a different number of days than '
 				.'desired.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value sendNotification.
+	 *
+	 * @access	private
+	 */
+	function checkSendNotification() {
+		$this->checkIfBoolean(
+			'sendNotification',
+			false,
+			'',
+			'This value specifies wether a notification e-mail should be send '
+				.'to the organizer after a user has registered. If this value '
+				.'is not set correctly, the sending of notifications probably '
+				.'will not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendNotificationOnUnregistration.
+	 *
+	 * @access	private
+	 */
+	function checkSendNotificationOnUnregistration() {
+		$this->checkIfBoolean(
+			'sendNotificationOnUnregistration',
+			false,
+			'',
+			'This value specifies wether a notification e-mail should be send '
+				.'to the organizer after a user has unregistered. If this value '
+				.'is not set correctly, the sending of notifications probably '
+				.'will not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendNotificationOnRegistrationForQueue.
+	 *
+	 * @access	private
+	 */
+	function checkSendNotificationOnRegistrationForQueue() {
+		$this->checkIfBoolean(
+			'sendNotificationOnRegistrationForQueue',
+			false,
+			'',
+			'This value specifies wether a notification e-mail should be send '
+				.'to the organizer after someone registered for the queue. If '
+				.'this value is not set correctly, the sending of notifications '
+				.'probably will not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendNotificationOnQueueUpdate.
+	 *
+	 * @access	private
+	 */
+	function checkSendNotificationOnQueueUpdate() {
+		$this->checkIfBoolean(
+			'sendNotificationOnQueueUpdate',
+			false,
+			'',
+			'This value specifies wether a notification e-mail should be send '
+				.'to the organizer after the queue has been updated. If '
+				.'this value is not set correctly, the sending of notifications '
+				.'probably will not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value sendConfirmation.
+	 *
+	 * @access	private
+	 */
+	function checkSendConfirmation() {
+		$this->checkIfBoolean(
+			'sendConfirmation',
+			false,
+			'',
+			'This value specifies wether a confirmation e-mail should be send '
+				.'to the user after the user has registered. If this value is '
+				.'not set correctly, the sending of notifications probably will '
+				.'not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendConfirmationOnUnregistration.
+	 *
+	 * @access	private
+	 */
+	function checkSendConfirmationOnUnregistration() {
+		$this->checkIfBoolean(
+			'sendConfirmationOnUnregistration',
+			false,
+			'',
+			'This value specifies wether a confirmation e-mail should be send '
+				.'to the user after the user has unregistered. If this value is '
+				.'not set correctly, the sending of notifications probably will '
+				.'not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendConfirmationOnRegistrationForQueue.
+	 *
+	 * @access	private
+	 */
+	function checkSendConfirmationOnRegistrationForQueue() {
+		$this->checkIfBoolean(
+			'sendConfirmationOnRegistrationForQueue',
+			false,
+			'',
+			'This value specifies wether a confirmation e-mail should be send '
+				.'to the user after the user has registered for the queue. If '
+				.'this value is not set correctly, the sending of notifications '
+				.'probably will not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sendConfirmationOnQueueUpdate.
+	 *
+	 * @access	private
+	 */
+	function checkSendConfirmationOnQueueUpdate() {
+		$this->checkIfBoolean(
+			'sendConfirmationOnQueueUpdate',
+			false,
+			'',
+			'This value specifies wether a confirmation e-mail should be send '
+				.'to the user after the queue has been updated. If this value is '
+				.'not set correctly, the sending of notifications probably will '
+				.'not work as expected.'
 		);
 	}
 }
