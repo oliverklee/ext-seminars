@@ -275,6 +275,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
 		$this->checkHideSelectorWidget();
+		$this->checkShowEmptyEntryInOptionLists();
 		$this->checkHideSearchForm();
 		$this->checkHidePageBrowser();
 		$this->checkHideCanceledEvents();
@@ -820,6 +821,24 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'will be displayed. If this value is incorrect, the selector '
 				.'widget might get displayed when this is not intended (or '
 				.'vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value showEmptyEntryInOptionLists.
+	 *
+	 * @access	private
+	 */
+	function checkShowEmptyEntryInOptionLists() {
+		$this->checkIfBoolean(
+			'showEmptyEntryInOptionLists',
+			true,
+			's_template_special',
+			'This value specifies whether the option boxes in the selector widget '
+				.'will contain a dummy entry called "not selected". This is only '
+				.'needed if you changed the HTML template to show the selectors '
+				.'as dropdown menues. If this value is incorrect, the dummy entry '
+				.'might get displayed when this is not intended (or vice versa).'
 		);
 	}
 

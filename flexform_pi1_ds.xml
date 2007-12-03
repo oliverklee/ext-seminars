@@ -394,6 +394,14 @@
 							</config>
 						</TCEforms>
 					</hideSelectorWidget>
+					<showEmptyEntryInOptionLists>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showEmptyEntryInOptionLists</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</showEmptyEntryInOptionLists>
 					<hideSearchForm>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideSearchForm</label>

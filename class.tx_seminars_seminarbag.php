@@ -107,6 +107,27 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	}
 
 	/**
+	 * Removes the dummy option from the submitted form data.
+	 *
+	 * @param	array		the POST data submitted from the form, may be empty
+	 *
+	 * @return	array		the POST data without the dummy option
+	 *
+	 * @access	public
+	 */
+	function removeDummyOptionFromFormData($formData) {
+		$cleanedFormData = array();
+
+		foreach ($formData as $value) {
+			if (($value != 'none') || ($value === 0)) {
+				$cleanedFormData[] = $value;
+			}
+		}
+
+		return $cleanedFormData;
+	}
+
+	/**
 	 * Returns the additional query parameters for the country selection from
 	 * the selector widget. If the user has not selected any country, an empty
 	 * string will be returned.
@@ -124,6 +145,9 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 */
 	function getAdditionalQueryForCountry($countries) {
 		$result = '';
+
+		// Removes the dummy option from the form data if the user selected it.
+		$countries = $this->removeDummyOptionFromFormData($countries);
 
 		if (!empty($countries)) {
 			// Implodes the array to a comma-separated list and adds quotes
@@ -189,6 +213,11 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		$result = '';
 		$sanitizedEventTypeUids = array();
 
+		// Removes the dummy option from the form data if the user selected it.
+		$eventTypeUids = $this->removeDummyOptionFromFormData(
+			$eventTypeUids
+		);
+
 		foreach ($eventTypeUids as $currentEventTypeUid) {
 			if (intval($currentEventTypeUid) >= 0) {
 				$sanitizedEventTypeUids[] = intval($currentEventTypeUid);
@@ -222,6 +251,11 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 */
 	function getAdditionalQueryForLanguage($languages) {
 		$result = '';
+
+		// Removes the dummy option from the form data if the user selected it.
+		$languages = $this->removeDummyOptionFromFormData(
+			$languages
+		);
 
 		if (!empty($languages)) {
 			// Implodes the array to a comma-separated list and adds quotes
@@ -260,6 +294,11 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	function getAdditionalQueryForPlace($placeUids) {
 		$result = '';
 		$sanitizedPlaceUids = array();
+
+		// Removes the dummy option from the form data if the user selected it.
+		$placeUids = $this->removeDummyOptionFromFormData(
+			$placeUids
+		);
 
 		foreach ($placeUids as $currentPlaceUid) {
 			if (intval($currentPlaceUid) > 0) {

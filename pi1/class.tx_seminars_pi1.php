@@ -328,25 +328,32 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// topics(1).
 		$result .= ' AND '.$tablePrefix.'object_type!=1';
 
+		$seminarBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_seminarbag'
+		);
+		$temporarySeminarBag =& new $seminarBagClassname(
+			'uid=0'
+		);
+
 		// Adds the query parameter that result from the user selection in the
 		// selector widget (including the search form).
 		if (is_array($this->piVars['event_type'])) {
-			$result .= tx_seminars_seminarbag::getAdditionalQueryForEventType(
+			$result .= $temporarySeminarBag->getAdditionalQueryForEventType(
 				$this->piVars['event_type']
 			);
 		}
 		if (is_array($this->piVars['language'])) {
-			$result .= tx_seminars_seminarbag::getAdditionalQueryForLanguage(
+			$result .= $temporarySeminarBag->getAdditionalQueryForLanguage(
 				$this->piVars['language']
 			);
 		}
 		if (is_array($this->piVars['place'])) {
-			$result .= tx_seminars_seminarbag::getAdditionalQueryForPlace(
+			$result .= $temporarySeminarBag->getAdditionalQueryForPlace(
 				$this->piVars['place']
 			);
 		}
 		if (is_array($this->piVars['country'])) {
-			$result .= tx_seminars_seminarbag::getAdditionalQueryForCountry(
+			$result .= $temporarySeminarBag->getAdditionalQueryForCountry(
 				$this->piVars['country']
 			);
 		}
@@ -355,6 +362,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		) {
 			$result .= $this->searchWhere($this->piVars['sword']);
 		}
+
+		// Unsets the temporary seminar bag we used above.
+		unset($temporarySeminarBag);
 
 		// Work out from which time-frame we'll display the event list.
 		// We also need to deal with the case that an event has no end date set
@@ -671,6 +681,42 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$placeBag->getNext();
 		}
 		unset($placeBag);
+
+		// Adds an empty option to each list of options if this is needed.
+		$this->addEmptyOptionIfNeeded($this->allLanguages);
+		$this->addEmptyOptionIfNeeded($this->allPlaces);
+		$this->addEmptyOptionIfNeeded($this->allCountries);
+		$this->addEmptyOptionIfNeeded($this->allEventTypes);
+	}
+
+	/**
+	 * Adds a dummy option to the array of allowed values. This is needed if the
+	 * user wants to show the option box as drop-down selector instead of
+	 * a multi-line select.
+	 *
+	 * With the default configuration, this method is a no-op as
+	 * "showEmptyEntryInOptionLists" is disabled.
+	 *
+	 * If this option is activated in the TS configuration, the dummy option will
+	 * be prepended to the existing arrays. So we can be sure that the dummy
+	 * option will always be the first one in the array and thus shown first in
+	 * the drop-down.
+	 *
+	 * @param	array		array of options, as reference
+	 *
+	 * @access	private
+	 */
+	function addEmptyOptionIfNeeded(&$options) {
+		if ($this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
+			$completeOptionList = array(
+				'none' => $this->pi_getLL('label_selector_pleaseChoose')
+			);
+			foreach ($options as $key => $value) {
+				$completeOptionList[$key] = $value;
+			}
+
+			$options = $completeOptionList;
+		}
 	}
 
 	/**

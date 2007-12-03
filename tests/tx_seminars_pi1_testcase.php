@@ -111,6 +111,41 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'.event_type=0', $this->fixture->searchWhere('Seminar')
 		);
 	}
+
+	public function testAddEmptyOptionIfNeededDisabled() {
+		$allLanguages = array(
+			'DE' => 'Deutsch',
+			'FR' => 'French'
+		);
+		$this->fixture->addEmptyOptionIfNeeded($allLanguages);
+		$this->assertEquals(
+			array(
+				'DE' => 'Deutsch',
+				'FR' => 'French'
+			),
+			$allLanguages
+		);
+	}
+
+	public function testAddEmptyOptionIfNeededActivated() {
+		$this->fixture->setConfigurationValue(
+			'showEmptyEntryInOptionLists', '1'
+		);
+
+		$allOptions = array(
+			'DE' => 'Deutsch',
+			'FR' => 'French'
+		);
+		$this->fixture->addEmptyOptionIfNeeded($allOptions);
+		$this->assertEquals(
+			array(
+				'none' => '',
+				'DE' => 'Deutsch',
+				'FR' => 'French'
+			),
+			$allOptions
+		);
+	}
 }
 
 ?>

@@ -46,6 +46,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7">events with the deadline in the future</label>
 			<label index="seminars.pi_flexform.hideFields">Hide fields in detailed view (comma-separated):</label>
 			<label index="seminars.pi_flexform.hideSelectorWidget">Hide the selector widget in list view:</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
@@ -178,6 +179,7 @@
 			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
 			<label index="label_selector_submit">Apply filter</label>
+			<label index="label_selector_pleaseChoose">please choose...</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Search term</label>
 			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
@@ -450,6 +452,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7">Veranstaltungen mit Anmeldeschluss in der Zukunft</label>
 			<label index="seminars.pi_flexform.hideFields">Versteckte Felder in Detailansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.hideSelectorWidget">Auswahl-Widget in der Listenansicht verstecken:</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Zeige leere Option im Auswahl-Widget:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Suchformular in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Page-Browser in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Abgesagte Veranstaltungen in der Listenansicht nicht anzeigen:</label>
@@ -582,6 +585,7 @@
 			<label index="label_cancel">Abbrechen</label>
 			<label index="label_unregister">Abmelden</label>
 			<label index="label_selector_submit">Filter anwenden</label>
+			<label index="label_selector_pleaseChoose">bitte auswählen...</label>
 			<label index="label_selector_reset">zurücksetzen</label>
 			<label index="label_selector_searchbox">Suchbegriff</label>
 			<label index="label_searching_hints_formal">Sie können die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setzen Sie den Filter bitte zurück.</label>
@@ -1643,6 +1647,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7" type="integer">187059203</label>
 			<label index="seminars.pi_flexform.hideFields" type="integer">25256911</label>
 			<label index="seminars.pi_flexform.hideSelectorWidget" type="integer">98049188</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists" type="integer">27709563</label>
 			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
 			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID" type="integer">91800914</label>
@@ -1775,6 +1780,7 @@
 			<label index="label_cancel" type="integer">245659783</label>
 			<label index="label_unregister" type="integer">164931826</label>
 			<label index="label_selector_submit" type="integer">131190777</label>
+			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
 			<label index="label_selector_reset" type="integer">86431368</label>
 			<label index="label_selector_searchbox" type="integer">151546043</label>
 			<label index="label_searching_hints_formal" type="integer">130447560</label>
@@ -2648,6 +2654,7 @@
 			<label index="seminars.pi_flexform.hideFields">Hide fields in detailed view (comma-separated):</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideSelectorWidget">Hide the selector widget in list view:</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
@@ -2777,6 +2784,7 @@
 			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="label_selector_submit">Apply filter</label>
+			<label index="label_selector_pleaseChoose">please choose...</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Search term</label>
 			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
