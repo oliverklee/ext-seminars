@@ -71,7 +71,7 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasBeginDate() {
-		return $this->hasRecordPropertyInteger('begin_date');
+		return ($this->getBeginDateAsTimestamp() > 0);
 	}
 
 	/**
@@ -103,7 +103,7 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function hasEndDate() {
-		return $this->hasRecordPropertyInteger('end_date');
+		return ($this->getEndDateAsTimestamp() > 0);
 	}
 
 	/**
@@ -346,6 +346,18 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 */
 	function isOpenEnded() {
 		return !$this->hasEndDate();
+	}
+
+	/**
+	 * Checks whether we have a place (or places) set.
+	 *
+	 * @return	boolean		true if we have a non-empty places list, false
+	 * 						otherwise
+	 *
+	 * @access	public
+	 */
+	function hasPlace() {
+		return $this->hasRecordPropertyInteger('place');
 	}
 }
 

@@ -55,7 +55,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setEventData(
 			array(
 				'uid' => 10000,
-				'begin_date' => $this->beginDate,
 				'deadline_unregistration' => $this->unregistrationDeadline,
 				'language' => 'de',
 				'attendees_min' => 5,
@@ -178,17 +177,59 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests regarding the date fields of an event:
 	/////////////////////////////////////////////////
 
+	public function testGetBeginDateAsTimestampIsInitiallyZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getBeginDateAsTimestamp()
+		);
+	}
+
 	public function testGetBeginDateAsTimestamp() {
 		$this->fixture->setBeginDate($this->beginDate);
 		$this->assertEquals(
 			$this->beginDate,
 			$this->fixture->getBeginDateAsTimestamp()
 		);
+	}
 
-		$this->fixture->setBeginDate(0);
+	public function testHasBeginDateIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasBeginDate()
+		);
+	}
+
+	public function testHasBeginDate() {
+		$this->fixture->setBeginDate($this->beginDate);
+		$this->assertTrue(
+			$this->fixture->hasBeginDate()
+		);
+	}
+
+	public function testGetEndDateAsTimestampIsInitiallyZero() {
 		$this->assertEquals(
 			0,
-			$this->fixture->getBeginDateAsTimestamp()
+			$this->fixture->getEndDateAsTimestamp()
+		);
+	}
+
+	public function testGetEndDateAsTimestamp () {
+		$this->fixture->setEndDate($this->beginDate);
+		$this->assertEquals(
+			$this->beginDate,
+			$this->fixture->getEndDateAsTimestamp()
+		);
+	}
+
+	public function testHasEndDateIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasEndDate()
+		);
+	}
+
+	public function testHasEndDate () {
+		$this->fixture->setEndDate($this->beginDate);
+		$this->assertTrue(
+			$this->fixture->hasEndDate()
 		);
 	}
 

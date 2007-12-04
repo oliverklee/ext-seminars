@@ -93,6 +93,7 @@
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
+			<label index="label_timeslots">Time slots</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
@@ -174,6 +175,12 @@
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
+			<label index="label_timeslot_date">Date</label>
+			<label index="label_timeslot_time">Time</label>
+			<label index="label_timeslot_entry_date">Entry date</label>
+			<label index="label_timeslot_room">Room</label>
+			<label index="label_timeslot_place">Place</label>
+			<label index="label_timeslot_speakers">Speakers</label>
 			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_cancel">Cancel</label>
@@ -499,6 +506,7 @@
 			<label index="label_place">Ort</label>
 			<label index="label_room">Raum</label>
 			<label index="label_additional_times_places">Zeiten und Orte</label>
+			<label index="label_timeslots">Zeitblöcke</label>
 			<label index="label_speakers">ReferentInnen</label>
 			<label index="label_partners">Partner</label>
 			<label index="label_tutors">Kursbegleitung</label>
@@ -580,6 +588,12 @@
 			<label index="label_your_user_data_formal">Ihre Adressdaten</label>
 			<label index="label_your_user_data_informal">Deine Adressdaten</label>
 			<label index="label_method_of_payment">Gewählte Zahlungsart:</label>
+			<label index="label_timeslot_date">Datum</label>
+			<label index="label_timeslot_time">Zeit</label>
+			<label index="label_timeslot_entry_date">Einlass</label>
+			<label index="label_timeslot_room">Raum</label>
+			<label index="label_timeslot_place">Ort</label>
+			<label index="label_timeslot_speakers">Referenten</label>
 			<label index="label_unregistration_message_formal">Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</label>
 			<label index="label_unregistration_message_informal">Willst du dich wirklich von dieser Veranstaltung abmelden?</label>
 			<label index="label_cancel">Abbrechen</label>
@@ -1694,6 +1708,7 @@
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
 			<label index="label_additional_times_places" type="integer">178250458</label>
+			<label index="label_timeslots" type="integer">147000660</label>
 			<label index="label_speakers" type="integer">258305227</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
@@ -1775,6 +1790,13 @@
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
+			<label index="label_target_groups" type="integer">206184555</label>
+			<label index="label_timeslot_date" type="integer">71780721</label>
+			<label index="label_timeslot_time" type="integer">175559919</label>
+			<label index="label_timeslot_entry_date" type="integer">17175357</label>
+			<label index="label_timeslot_room" type="integer">214150095</label>
+			<label index="label_timeslot_place" type="integer">129617664</label>
+			<label index="label_timeslot_speakers" type="integer">258305227</label>
 			<label index="label_unregistration_message_formal" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
 			<label index="label_cancel" type="integer">245659783</label>
@@ -2700,6 +2722,7 @@
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
+			<label index="label_timeslots">Time slots</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_language">Language</label>
 			<label index="label_partners">Partners</label>
@@ -2781,6 +2804,13 @@
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
+			<label index="label_target_groups">Target Groups</label>
+			<label index="label_timeslot_date">Date</label>
+			<label index="label_timeslot_time">Time</label>
+			<label index="label_timeslot_entry_date">Entry date</label>
+			<label index="label_timeslot_room">Room</label>
+			<label index="label_timeslot_place">Place</label>
+			<label index="label_timeslot_speakers">Speakers</label>
 			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="label_selector_submit">Apply filter</label>

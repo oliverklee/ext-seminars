@@ -703,6 +703,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'accreditation_number',
 				'credit_points',
 				'date',
+				'timeslots',
 				'uid',
 				'time',
 				'place',

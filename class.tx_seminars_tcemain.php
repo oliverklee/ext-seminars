@@ -31,6 +31,7 @@
  * @package		TYPO3
  * @subpackage	tx_seminars
  * @author		Mario Rimann <typo3-coding@rimann.org>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
@@ -38,6 +39,8 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
 
 class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
+	var $tceMainFieldArrays = array();
+
 	/**
 	 * The constructor.
 	 *
@@ -50,12 +53,19 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Checks that the registration deadline set by the user is in no way larger
-	 * (=later) than the beginning of the event.
-	 * It doesn't matter which field got changed in the form because this
-	 * function is called AFTER writing the data from the form to the database.
-	 * In the case that the deadline is later than the beginning time, the
-	 * deadline will be set to zero (wich means: not set).
+	 * Handles data after everything had been written to the database.
+	 *
+	 * @param	object		the calling TCEmain object as reference
+	 *
+	 * @access	public
+	 */
+	function processDatamap_afterAllOperations(&$parentObj) {
+		$this->processTimeSlots();
+		$this->processEvents();
+	}
+
+	/**
+	 * Builds $this->tceMainFieldArrays if the right tables were modified.
 	 *
 	 * Some of the parameters of this function are not used in this function.
 	 * But they are given by the hook in t3lib/class.t3lib_tcemain.php.
@@ -73,64 +83,101 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, &$pObj) {
-		// Translate new UIDs.
+	function processDatamap_afterDatabaseOperations($status, $table, $uid, &$fieldArray, &$pObj) {
+		// Translates new UIDs.
 		if ($status == 'new') {
-			$id = $pObj->substNEWwithIDs[$id];
+			$uid = $pObj->substNEWwithIDs[$uid];
 		}
 
-		// only do the database query if the right table was modified
-		switch ($table) {
-			case $this->tableSeminars:
-				// Initialize a seminar object to have all functions available.
-				$seminarClassname = t3lib_div::makeInstanceClassName(
-					'tx_seminars_seminar'
-				);
-				$seminar =& new $seminarClassname($id, null, true);
-	
-				if ($seminar->isOk()) {
-					// Get an associative array of fields that need to be updated
-					// in the database.
-					$updateArray = $seminar->getUpdateArray($fieldArray);
-	
-					// Only update the record in the database if needed.
-					if (count($updateArray)) {
-						$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-							$this->tableSeminars,
-							'uid='.$id,
-							$updateArray
-						);
-					}
-				}
-				break;
-			case $this->tableTimeslots:
-				// Initialize a timeslot object to have all functions available
-				$timeslotClassname = t3lib_div::makeInstanceClassName(
-					'tx_seminars_timeslot'
-				);
-				$timeslot =& new $timeslotClassname($id, null);
-
-				if ($timeslot->isOk()) {
-					// Get an associative array of fields that need to be updated
-					// in the database.
-					$updateArray = $timeslot->getUpdateArray($fieldArray);
-
-					// Only update the record in the database if needed.
-					if (count($updateArray)) {
-						$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-							$this->tableTimeslots,
-							'uid='.$id,
-							$updateArray
-						);
-					}
-				}
-				break;
-			default:
-				// Do nothing.
-				break;
+		if (($table == $this->tableSeminars) || ($table == $this->tableTimeslots)) {
+			$this->tceMainFieldArrays[$table][$uid] = $fieldArray;
 		}
+	}
 
-		return;
+	/**
+	 * Processes all time slots.
+	 *
+	 * @access	protected
+	 */
+	function processTimeSlots() {
+		$table = $this->tableTimeslots;
+
+		if (
+			isset($this->tceMainFieldArrays[$table])
+			&& is_array($this->tceMainFieldArrays[$table])
+		) {
+			foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
+				$this->processSingleTimeSlot($uid, $fieldArray);
+			}
+		}
+	}
+
+	/**
+	 * Processes all events.
+	 *
+	 * @access	protected
+	 */
+	function processEvents() {
+		$table = $this->tableSeminars;
+
+		if (
+			isset($this->tceMainFieldArrays[$table])
+			&& is_array($this->tceMainFieldArrays[$table])
+		) {
+			foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
+				$this->processSingleEvent($uid, $fieldArray);
+			}
+		}
+	}
+
+	/**
+	 * Processes a single time slot.
+	 *
+	 * @param	integer		the UID of the affected record (may be 0)
+	 * @param	array		an array of all fields that got changed
+	 *
+	 * @access	protected
+	 */
+	function processSingleTimeSlot($uid, $fieldArray) {
+		// Initializes a timeslot object to have all
+		// functions available.
+		$timeslotClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_timeslot'
+		);
+		$timeslot =& new $timeslotClassname($uid, null);
+
+		if ($timeslot->isOk()) {
+			// Gets an associative array of fields that need
+			// to be updated in the database and update them.
+			$timeslot->saveToDatabase(
+				$timeslot->getUpdateArray($fieldArray)
+			);
+		}
+	}
+
+	/**
+	 * Processes a single event.
+	 *
+	 * @param	integer		the UID of the affected record (may be 0)
+	 * @param	array		an array of all fields that got changed
+	 *
+	 * @access	protected
+	 */
+	function processSingleEvent($uid, $fieldArray) {
+		// Initializes a seminar object to have all functions
+		// available.
+		$seminarClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_seminar'
+		);
+		$seminar =& new $seminarClassname($uid, null, true);
+
+		if ($seminar->isOk()) {
+			// Gets an associative array of fields that need
+			// to be updated in the database.
+			$seminar->saveToDatabase(
+				$seminar->getUpdateArray($fieldArray)
+			);
+		}
 	}
 }
 

@@ -32,6 +32,7 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speakerbag.php');
 
 class tx_seminars_timeslot extends tx_seminars_timespan {
 	/** same as class name */
@@ -92,6 +93,65 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Gets the speakers of the time slot as a plain text comma-separated list.
+	 *
+	 * @return	string	the comma-separated plain text list of speakers (or ''
+	 * 					if there was an error)
+	 *
+	 * @access	public
+	 */
+	function getSpeakersShortCommaSeparated() {
+		$result = array();
+
+		$speakerBagClassname = t3lib_div::makeInstanceClassname(
+			'tx_seminars_speakerbag'
+		);
+		$speakerBag =& new $speakerBagClassname(
+			$this->tableTimeslotsSpeakersMM.'.uid_local='.$this->getUid()
+				.' AND uid=uid_foreign',
+			$this->tableTimeslotsSpeakersMM
+		);
+
+		while ($speaker =& $speakerBag->getCurrent()) {
+			$result[] = $speaker->getTitle();
+			$speakerBag->getNext();
+		}
+
+		return implode(', ', $result);
+	}
+
+	/**
+	 * Gets our place as plain text (just the place name).
+	 * Returns a localized string "will be announced" if the time slot has no
+	 * place set.
+	 *
+	 * @return	string		our place (or '' if there is an error)
+	 *
+	 * @access	public
+	 */
+	function getPlaceShort() {
+		if (!$this->hasPlace()) {
+			return $this->pi_getLL('message_willBeAnnounced');
+		}
+
+		$result = '';
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title',
+			$this->tableSites,
+			'uid='.$this->getPlace().$this->enableFields($this->tableSites)
+		);
+
+		if ($dbResult) {
+			if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$result = $row['title'];
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Gets the place.
 	 *
 	 * @return	integer		the place UID
@@ -111,15 +171,15 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getEntryDate() {
-		if ($this->hasEntryDate()) {
-			$entryDate = $this->getRecordPropertyInteger('entry_date');
-			$result = strftime(
-				$this->getConfValueString('dateFormatYMD'),
-				$entryDate
-			);
-		} else {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+		if (!$this->hasEntryDate()) {
+			return $this->pi_getLL('message_willBeAnnounced');
 		}
+
+		$entryDate = $this->getRecordPropertyInteger('entry_date');
+		$result = strftime(
+			$this->getConfValueString('dateFormatYMD'),
+			$entryDate
+		);
 
 		return $result;
 	}

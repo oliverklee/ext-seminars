@@ -59,4 +59,11 @@ t3lib_extMgm::addTypoScript($_EXTKEY, 'setup','
 // add a FORMidable data handler that also can create M:M relations
 tx_ameosformidable::declareDataHandler($_EXTKEY, 'DBMM', false);
 
+// XCLASSes t3lib_tcemain as the hook processDatamap_afterAllOperations is only
+// available from TYPO3 4.2.
+if ((float) $GLOBALS['TYPO3_CONF_VARS']['SYS']['compat_version'] == 4.1) {
+	$TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['t3lib/class.t3lib_tcemain.php'] =
+		t3lib_extMgm::extPath($_EXTKEY).'class.ux_t3lib_tcemain.php';
+}
+
 ?>

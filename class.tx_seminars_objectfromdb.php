@@ -292,19 +292,25 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Adds m:n records that are referenced by this record.
+	 * Adds m:m records that are referenced by this record.
 	 *
 	 * Before this function may be called, $this->recordData['uid'] must be set
 	 * correctly.
 	 *
-	 * @param	string		the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
-	 * @param	array		array of uids of records from the foreign table to which we should create references
+	 * @param	string		the name of the m:m table, having the fields
+	 * 						uid_local, uid_foreign and sorting, must not be empty
+	 * @param	array		array of uids of records from the foreign table to
+	 * 						which we should create references
+	 *
+	 * @return	integer		the number of created m:m records
 	 *
 	 * @access	protected
 	 */
 	function createMmRecords($mmTable, $references) {
+		$numberOfCreatedMmRecords = 0;
+
 		if (!empty($references)) {
-			$sorting = 1;
+			$sorting = 256;
 
 			foreach ($references as $currentRelation) {
 				// We might get unsafe data here, so better be safe.
@@ -313,17 +319,18 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 					$GLOBALS['TYPO3_DB']->exec_INSERTquery(
 						$mmTable,
 						array(
-							'uid_local' => $this->recordData['uid'],
+							'uid_local' => $this->getUid(),
 							'uid_foreign' => $foreignUid,
 							'sorting' => $sorting
 						)
 					);
-					$sorting++;
+					$sorting += 256;
+					$numberOfCreatedMmRecords++;
 				}
 			}
 		}
 
-		return;
+		return $numberOfCreatedMmRecords;
 	}
 
 	/**
@@ -518,6 +525,24 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 
 		return '<img src="'.$imageURL.'" title="id='.$this->getUid()
 			.'" alt="'.$this->getUid().'" />';
+	}
+
+	/**
+	 * Commits the changes of an record to the database.
+	 *
+	 * @param	array	an associative array with the keys being the field names
+	 * 					and the value being the field values
+	 *
+	 * @access	public
+	 */
+	function saveToDatabase($updateArray) {
+		if (count($updateArray)) {
+			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+				$this->tableName,
+				'uid='.$this->getUid(),
+				$updateArray
+			);
+		}
 	}
 }
 

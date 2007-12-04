@@ -33,6 +33,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslotbag.php');
 require_once(t3lib_extMgm::extPath(
 	'static_info_tables').'pi1/class.tx_staticinfotables_pi1.php'
 );
@@ -206,6 +207,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			if (!$result['status']) {
 				$updateArray[$currentFieldName] = $result['newValue'];
 			}
+		}
+
+		if ($this->hasTimeslots()) {
+			$updateArray['begin_date'] = $this->getBeginDateAsTimestamp();
+			$updateArray['end_date'] = $this->getEndDateAsTimestamp();
+			$updateArray['place'] = $this->updatePlaceRelationsFromTimeSlots();
 		}
 
 		return $updateArray;
@@ -817,17 +824,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Checks whether we have a place (or places) set.
-	 *
-	 * @return	boolean		true if we have a non-empty places list, false otherwise.
-	 *
-	 * @access	public
-	 */
-	function hasPlace() {
-		return $this->hasRecordPropertyInteger('place');
 	}
 
 	/**
@@ -3317,6 +3313,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						must have the fields uid and title
 	 * @param	string		the name of the m:m table, having the fields uid_local,
 	 * 						uid_foreign and sorting, must not be empty
+	 * @param	boolean		true if the referenced records of the corresponding
+	 * 						topic record should be retrieved, false otherwise
 	 *
 	 * @return	array		an array of referenced records, consisting each of
 	 * 						a nested array with the keys "caption" (for the title)
@@ -4041,6 +4039,193 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 				$result[] = $row['uid_foreign'];
 			}
+		}
+
+		return $result;
+	}
+
+ 	/**
+	 * Checks whether there's a (begin) date set or any time slots exist.
+	 * If there's an end date but no begin date, this function still will return
+	 * false.
+	 *
+	 * @return	boolean		true if we have a begin date, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasDate() {
+		return ($this->hasBeginDate() || $this->hasTimeslots());
+	}
+
+	/**
+	 * Returns true if the seminar has at least one time slot, otherwise false.
+	 *
+	 * @return	boolean		true if the seminar has at least one time slot,
+	 * 						otherwise false
+	 *
+	 * @access	public
+	 */
+	function hasTimeslots() {
+		return $this->hasRecordPropertyInteger('timeslots');
+	}
+
+	/**
+	 * Returns our begin date and time as a UNIX timestamp.
+	 *
+	 * @return	integer		our begin date and time as a UNIX timestamp or 0 if
+	 * 						we don't have a begin date
+	 *
+	 * @access	public
+	 */
+	function getBeginDateAsTimestamp() {
+		if (!$this->hasTimeslots()) {
+			return parent::getBeginDateAsTimestamp();
+		}
+
+		$result = 0;
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'MIN('.$this->tableTimeslots.'.begin_date) AS begin_date',
+			$this->tableTimeslots,
+			$this->tableTimeslots.'.seminar='.$this->getUid()
+				.$this->enableFields($this->tableTimeslots)
+		);
+
+		if ($dbResult) {
+			if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$result = $row['begin_date'];
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns our end date and time as a UNIX timestamp.
+	 *
+	 * @return	integer		our end date and time as a UNIX timestamp or 0 if we
+	 * 						don't have an end date
+	 *
+	 * @access	public
+	 */
+	function getEndDateAsTimestamp() {
+		if (!$this->hasTimeslots()) {
+			return parent::getEndDateAsTimestamp();
+		}
+
+		$result = 0;
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			$this->tableTimeslots.'.end_date AS end_date',
+			$this->tableTimeslots,
+			$this->tableTimeslots.'.seminar='.$this->getUid()
+				.$this->enableFields($this->tableTimeslots),
+			'',
+			$this->tableTimeslots.'.begin_date DESC',
+			'0,1'
+		);
+
+		if ($dbResult) {
+			if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$result = $row['end_date'];
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Updates the place relations of the event in replacing them with the place
+	 * relations of the time slots.
+	 * This function will remove existing place relations and adds relations to
+	 * all places of the event's time slots in the database.
+	 * This function is a no-op for events without time slots.
+	 *
+	 * @return	integer		the number of place relations of the event
+	 *
+	 * @access	public
+	 */
+	function updatePlaceRelationsFromTimeSlots() {
+		if (!$this->hasTimeslots()) {
+			return;
+		}
+
+		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(
+			'tx_seminars_timeslotbag'
+		);
+		$timeSlotBag =& new $timeSlotBagClassname(
+			$this->tableTimeslots.'.seminar='.$this->getUid()
+				.' AND '.$this->tableTimeslots.'.place>0',
+			'',
+			$this->tableTimeslots.'.place',
+			$this->tableTimeslots.'.begin_date ASC'
+		);
+
+		// Removes all place relations of the current event.
+		$GLOBALS['TYPO3_DB']->exec_DELETEquery(
+			$this->tableSitesMM,
+			$this->tableSitesMM.'.uid_local='.$this->getUid()
+		);
+
+		// Creates an array with all place UIDs which should be related to this
+		// event.
+		$placesOfTimeSlots = array();
+		while ($timeSlot =& $timeSlotBag->getCurrent()) {
+			if ($timeSlot->hasPlace()) {
+				$placesOfTimeSlots[] = $timeSlot->getPlace();
+			}
+			$timeSlotBag->getNext();
+		}
+
+		return $this->createMmRecords($this->tableSitesMM, $placesOfTimeSlots);
+	}
+
+	/**
+	 * Returns our time slots in an array.
+	 *
+	 * @return	array		an array of time slots or an empty array if there
+	 * 						are no time slots
+	 * 						the array contains the following elements:
+	 * 						- ###TIMESLOT_DATE### as key and the timeslot's
+	 * 						  begin date as value
+	 * 						- ###TIMESLOT_TIME### as key and the timeslot's time
+	 * 						  as value
+	 * 						- ###TIMESLOT_ENTRY_DATE### as key and the
+	 * 						  timeslot's entry date as value
+	 * 						- ###TIMESLOT_ROOM### as key and the timeslot's room
+	 * 						  as value
+	 * 						- ###TIMESLOT_PLACE### as key and the timeslot's
+	 * 						  place as value
+	 * 						- ###TIMESLOT_SPEAKERS### as key and the timeslot's
+	 * 						  speakers as value
+	 *
+	 * @access	public
+	 */
+	function getTimeslotsAsArrayWithMarkers() {
+		$result = array();
+
+		$timeslotBagClassname = t3lib_div::makeInstanceClassname(
+			'tx_seminars_timeslotbag',
+			'',
+			'',
+			$this->tableTimeslots.'.begin_date ASC'
+		);
+		$timeslotBag =& new $timeslotBagClassname(
+			$this->tableTimeslots.'.seminar='.$this->getUid()
+		);
+
+		while ($timeslot =& $timeslotBag->getCurrent()) {
+			$result[] = array(
+				'###TIMESLOT_DATE###' => $timeslot->getDate(),
+				'###TIMESLOT_TIME###' => $timeslot->getTime(),
+				'###TIMESLOT_ENTRY_DATE###' => $timeslot->getEntryDate(),
+				'###TIMESLOT_ROOM###' => $timeslot->getRoom(),
+				'###TIMESLOT_PLACE###' => $timeslot->getPlaceShort(),
+				'###TIMESLOT_SPEAKERS###' =>
+					$timeslot->getSpeakersShortCommaSeparated()
+			);
+
+			$timeslotBag->getNext();
 		}
 
 		return $result;

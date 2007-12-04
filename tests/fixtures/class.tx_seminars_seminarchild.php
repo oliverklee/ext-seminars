@@ -92,10 +92,21 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the event's begin date.
 	 *
-	 * @param	integer		begin date as UNIX timestamp
+	 * @param	integer		begin date as UNIX timestamp (has to be >= 0, 0 will
+	 * 						unset the begin date)
 	 */
 	public function setBeginDate($beginDate) {
 		$this->setRecordPropertyInteger('begin_date', $beginDate);
+	}
+
+	/**
+	 * Sets the event's end date.
+	 *
+	 * @param	integer		end date as UNIX timestamp (has to be >= 0, 0 will
+	 * 						unset the end date)
+	 */
+	public function setEndDate($endDate) {
+		$this->setRecordPropertyInteger('end_date', $endDate);
 	}
 
 	/**
@@ -266,6 +277,17 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setNumberOfAttendancesOnQueue($number) {
 		$this->numberOfAttendancesOnQueue = $number;
 		$this->statisticsHaveBeenCalculated = true;
+	}
+
+	/**
+	 * Returns always false so we are sure that we are testing
+	 * tx_seminars_timespan::getBeginDateAsTimestamp() as we currently can't
+	 * test tx_seminars_seminar::getBeginDateAsTimestamp().
+	 *
+	 * @return	boolean		always false
+	 */
+	public function hasTimeslots() {
+		return false;
 	}
 }
 

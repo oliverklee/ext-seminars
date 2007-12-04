@@ -1119,6 +1119,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
+			if ($this->seminar->hasTimeslots()) {
+				$this->readSubpartsToHide('date', 'field_wrapper');
+				$this->readSubpartsToHide('time', 'field_wrapper');
+
+				$timeslotsSubpart = $this->templateCache['SINGLE_TIMESLOT'];
+				$this->templateCache['SINGLE_TIMESLOT'] = '';
+
+				$timeslots = $this->seminar->getTimeslotsAsArrayWithMarkers();
+				foreach ($timeslots as $timeslot) {
+					$this->templateCache['SINGLE_TIMESLOT'] .=
+						$this->cObj->substituteMarkerArrayCached(
+							$timeslotsSubpart,
+							$timeslot
+						);
+				}
+			} else {
+				$this->readSubpartsToHide('timeslots', 'field_wrapper');
+			}
+
 			if ($this->seminar->hasSpeakers()) {
 				if ($this->getConfValueBoolean(
 					'showSpeakerDetails',

@@ -125,6 +125,23 @@ div.tx-seminars-pi1-selectorwidget {
 	width: 25%;
 }
 
+table.tx-seminars-pi1-timeslots {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #000;
+}
+
+table.tx-seminars-pi1-timeslots th {
+	background-color: #f0f0f0;
+	color: inherit;
+	text-align: left;
+	padding: 5px;
+}
+
+table.tx-seminars-pi1-timeslots td {
+	padding: 5px;
+}
+
 #tx-seminars-pi1-registration-form fieldset {
 	margin: 0 0 1em;
 }
