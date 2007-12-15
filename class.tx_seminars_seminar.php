@@ -635,7 +635,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	function getPlacesWithCountry() {
 		$countries = array();
 
-		// Fetch all the corresponding place records for this event from the m-m table.
+		// Fetches all the corresponding place records for this event from the m:m table.
 		$dbResultMM = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid_foreign',
 			$this->tableSitesMM,
@@ -665,7 +665,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $countries;
 	}
-
 
 	/**
 	 * Returns a comma-separated list of country names that were set in the
@@ -699,6 +698,74 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns a comma-separated list of city names that were set in the place
+	 * record(s).
+	 * If no places are set, or no cities are selected in the set places, an
+	 * empty string will be returned.
+	 *
+	 * @return	string		comma-separated list of cities for this event, may be empty
+	 *
+	 * @access	public
+	 */
+	function getCities() {
+		if (!$this->hasCities()) {
+			return '';
+		}
+
+		$cityList = $this->getCitiesFromPlaces();
+
+		// Makes sure that each city is exactly once in the array and then
+		// returns this list.
+		$cityListUnique = array_unique($cityList);
+		return implode(', ', $cityListUnique);
+	}
+
+	/**
+	 * Checks whether the current event has at least one place set, and if
+	 * this/these pace(s) have a city set.
+	 * Returns a boolean true if at least one of the set places has a
+	 * city set, returns false otherwise.
+	 *
+	 * @return	boolean		whether at least one place with city are set for the current event
+	 *
+	 * @access	public
+	 */
+	function hasCities() {
+		return $this->hasPlace() && (boolean) count($this->getCitiesFromPlaces());
+	}
+
+	/**
+	 * Returns an array of city names for this event.
+	 * These are fetched from the referenced place records of this event. If no
+	 * place is set, or the set place(s) don't have any city set, an empty
+	 * array will be returned.
+	 *
+	 * @return	array		the list of city names for this event, may be empty
+	 *
+	 * @access	public
+	 */
+	function getCitiesFromPlaces() {
+		$cities = array();
+
+		// Fetches the city name from the corresponding place record(s).
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'city',
+			$this->tableSites.' LEFT JOIN '.$this->tableSitesMM
+				.' ON '.$this->tableSites.'.uid='.$this->tableSitesMM.'.uid_foreign',
+			'uid_local='.$this->getUid(),
+			'uid_foreign'
+		);
+
+		if ($dbResult) {
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$cities[] = $row['city'];
+			}
+		}
+
+		return $cities;
 	}
 
 	/**

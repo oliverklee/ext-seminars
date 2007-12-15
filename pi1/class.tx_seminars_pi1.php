@@ -185,7 +185,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		),
 		'places' => array(
 			'title',
-			'address'
+			'address',
+			'city'
 		),
 		'event_types' => array(
 			'title'
@@ -1722,6 +1723,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'header_country',
 			$this->getFieldHeader('country')
 		);
+		$this->setMarkerContent(
+			'header_city',
+			$this->getFieldHeader('city')
+		);
 		$this->setMarkerContent('header_seats', $this->getFieldHeader('seats'));
 		$this->setMarkerContent(
 			'header_price_regular',
@@ -1862,6 +1867,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent(
 				'country',
 				$this->seminar->getCountry()
+			);
+			$this->setMarkerContent(
+				'city',
+				$this->seminar->getCities()
 			);
 			$this->setMarkerContent('seats', $attendanceData['seats']);
 			$this->setMarkerContent(
