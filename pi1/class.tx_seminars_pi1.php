@@ -221,15 +221,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setLabels();
 		$this->setCSS();
 		$this->getHookObjects();
-
-		// include CSS in header of page
-		if ($this->hasConfValueString('cssFile', 's_template_special')) {
-			$GLOBALS['TSFE']->additionalHeaderData[]
-				= '<style type="text/css">@import "'
-				.$this->getConfValueString('cssFile', 's_template_special', true)
-				.'";</style>';
-		}
-
 		$this->createHelperObjects();
 
 		// Let warnings from the registration manager bubble up to us.

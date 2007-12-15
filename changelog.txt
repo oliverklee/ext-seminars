@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1381] Change: Change the way the CSS file is included
 - [#634] Feature: Add time slots to the seminar records (FE)
 - [#1046] Feature: Two-click registration
 - [#1327] Feature: Add a column "status" to the "my events" list

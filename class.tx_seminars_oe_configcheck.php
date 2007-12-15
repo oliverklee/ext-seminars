@@ -369,39 +369,36 @@ class tx_seminars_oe_configcheck {
 	 * If no file name is provided, no error will be displayed as this is
 	 * perfectly allowed.
 	 *
-	 * @param	boolean		whether the css File can also be selected via flexforms
-	 *
 	 * @access	protected
 	 */
-	function checkCssFile($canUseFlexforms = false) {
-		if ($this->objectToCheck->hasConfValueString(
-			'cssFile',
-			's_template_special')
-		) {
-			$fileName = $this->objectToCheck->getConfValueString(
-				'cssFile',
-				's_template_special',
-				true
-			);
+	function checkCssFileFromConstants() {
+		if ($this->objectToCheck->hasConfValueString('cssFile')) {
+			$message = 'The TS setup variable <strong>'.$this->getTSSetupPath()
+				.'cssFile</strong> is set, but should not be set. You will have to unset '
+				.'the TS setup variable and set <strong>'.$this->getTSSetupPath()
+				.'cssFile</strong> in your TS constants instead.';
+			$this->setErrorMessage($message);
+		}
+
+		$typoScriptSetupPage =& $GLOBALS['TSFE']->tmpl->setup['page.'];
+		$fileName = $typoScriptSetupPage['includeCSS.'][$this->objectToCheck->prefixId];
+		if (!empty($fileName)) {
+			$fileName = $GLOBALS['TSFE']->tmpl->getFileName($fileName);
 			if (!is_file($fileName)) {
-				$message = 'The specified CSS file <strong>'
+				$message .= 'The specified CSS file <strong>'
 					.htmlspecialchars($fileName)
 					.'</strong> cannot be read. '
-					.'If that variable does not point to an existing file, no '
+					.'If that constant does not point to an existing file, no '
 					.'special CSS will be used for styling this extension\'s '
 					.'HTML. Please either create the file <strong>'.$fileName
 					.'</strong> or select an existing file using the TS '
-					.'setup variable <strong>'.$this->getTSSetupPath()
-					.'cssFile</strong>';
-				if ($canUseFlexforms) {
-					$message .= ' or via FlexForms';
-				}
-				$message .= '. If you do not want to use any special CSS, you '
+					.'constant <strong>'.$this->getTSSetupPath()
+					.'cssFile</strong>'
+					.'. If you do not want to use any special CSS, you '
 					.'can set that variable to an empty string.';
 				$this->setErrorMessage($message);
 			}
 		}
-		return;
 	}
 
 	/**

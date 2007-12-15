@@ -166,9 +166,6 @@ plugin.tx_seminars_pi1 {
 	# location of the template file for the registration form
 	registrationEditorTemplateFile = EXT:seminars/pi1/registration_editor.html
 
-	# location of the CSS file (leave empty to include no CSS file)
-	cssFile = typo3conf/ext/seminars/pi1/seminars_pi1.css
-
 	# whether to use formal or informal language
 	salutation = formal
 
@@ -421,4 +418,9 @@ plugin.tx_srfeuserregister_pi1 {
 		tx_seminars_semester = atMost[3]
 		tx_seminars_subject = atMost[50]
 	}
+}
+
+
+page.includeCSS {
+	tx_seminars_pi1 = {$plugin.tx_seminars_pi1.cssFile}
 }

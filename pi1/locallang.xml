@@ -34,7 +34,6 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
-			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
@@ -257,7 +256,6 @@
 			<label index="seminars.pi_flexform.formal">Formel</label>
 			<label index="seminars.pi_flexform.informal">Uformel</label>
 			<label index="seminars.pi_flexform.templateFile">Filnavnet på HTML-skabelonen:</label>
-			<label index="seminars.pi_flexform.cssFile">Filnavnet på CSS-filen:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Hvilket arrangement skal vises på enkeltvisningssiden?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Vis kun arrangementer indenfor denne tidsramme:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">alle arrangementer</label>
@@ -447,7 +445,6 @@
 			<label index="seminars.pi_flexform.formal">formell</label>
 			<label index="seminars.pi_flexform.informal">informell</label>
 			<label index="seminars.pi_flexform.templateFile">Dateiname des HTML-Templates:</label>
-			<label index="seminars.pi_flexform.cssFile">Dateiname des CSS-Stylesheets:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Welche Veranstaltung soll als Detailansicht angezeigt werden?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Nur Veranstaltungen aus diesem Zeitabschnitt zeigen:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">alle Veranstaltungen</label>
@@ -670,7 +667,6 @@
 			<label index="seminars.pi_flexform.formal">formeel</label>
 			<label index="seminars.pi_flexform.informal">informeel</label>
 			<label index="seminars.pi_flexform.templateFile">Bestandsnaam van het HTML-sjabloon:</label>
-			<label index="seminars.pi_flexform.cssFile">Bestandsnaam van de CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Welke evenement moet in de detailweergave getoond worden</label>
 			<label index="seminars.pi_flexform.timeframeInList">Toon alleen evenementen binnen deze tijdsperiode:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">alle evenementen</label>
@@ -859,7 +855,6 @@
 			<label index="seminars.pi_flexform.formal">формальное</label>
 			<label index="seminars.pi_flexform.informal">неформальное</label>
 			<label index="seminars.pi_flexform.templateFile">Файл HTML-шаблона:</label>
-			<label index="seminars.pi_flexform.cssFile">Файл CSS:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Какое событие показывать в детализированном виде?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Показывать только события:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">все</label>
@@ -1037,7 +1032,6 @@
 			<label index="seminars.pi_flexform.formal">formale</label>
 			<label index="seminars.pi_flexform.informal">informale</label>
 			<label index="seminars.pi_flexform.templateFile">Nome del file del template HTML:</label>
-			<label index="seminars.pi_flexform.cssFile">Nome del file del CSS:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Che evento deve essere visualizzato in modo dettaglio?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Visualizza solo gli eventi in questa finestra temporale:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">tutti gli eventi</label>
@@ -1246,7 +1240,6 @@
 			<label index="seminars.pi_flexform.formal">formel</label>
 			<label index="seminars.pi_flexform.informal">informel</label>
 			<label index="seminars.pi_flexform.templateFile">Nom du modèle HTML:</label>
-			<label index="seminars.pi_flexform.cssFile">Nom du fichier CSS:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Quel événement devrait être montré en détail?</label>
 			<label index="seminars.pi_flexform.timeframeInList">N'afficher que les éléments de la période:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">tous les événements</label>
@@ -1460,7 +1453,6 @@
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
-			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
 			<label index="seminars.pi_flexform.timeframeInList2" type="integer">36274015</label>
@@ -1649,7 +1641,6 @@
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
-			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
 			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
@@ -1863,7 +1854,6 @@
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
-			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
 			<label index="seminars.pi_flexform.timeframeInList2" type="integer">36274015</label>
@@ -2062,7 +2052,6 @@
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
-			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
 			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
@@ -2240,7 +2229,6 @@
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
-			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
 			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
@@ -2449,7 +2437,6 @@
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
-			<label index="seminars.pi_flexform.cssFile" type="integer">21776184</label>
 			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
 			<label index="seminars.pi_flexform.timeframeInList1" type="integer">113225835</label>
@@ -2663,7 +2650,6 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
-			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
@@ -2882,7 +2868,6 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
-			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
 			<label index="seminars.pi_flexform.timeframeInList2">past events</label>
@@ -3076,7 +3061,6 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
-			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
@@ -3254,7 +3238,6 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
-			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
@@ -3443,7 +3426,6 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
-			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>
@@ -3652,7 +3634,6 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
-			<label index="seminars.pi_flexform.cssFile">File name of the CSS stylesheet:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
 			<label index="seminars.pi_flexform.timeframeInList1">all events</label>

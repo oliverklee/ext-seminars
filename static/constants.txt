@@ -1,3 +1,8 @@
+plugin.tx_seminars_pi1 {
+	# cat=plugin.tx_seminars_pi1//; type=string; label=Path to CSS file: location of the CSS file (leave empty to include no CSS file)
+	cssFile = EXT:seminars/pi1/seminars_pi1.css
+}
+
 plugin.tx_seminars_pi2 {
     # cat=plugin.tx_seminars_pi2//; type=int+; label=The page type used for CSV export.
 	typeNumForCsv = 736

@@ -1512,7 +1512,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkCssStyledContent();
 		$this->checkStaticIncluded();
 		$this->checkTemplateFile(true);
-		$this->checkCssFile(true);
+		$this->checkCssFileFromConstants();
 		$this->checkSalutationMode(true);
 		$this->checkCssClassNames();
 		$this->checkWhatToDisplay();
