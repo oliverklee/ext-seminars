@@ -9,6 +9,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_event_type">Event type</label>
@@ -142,6 +143,7 @@ someone just has registered for the waiting list of an event:</label>
 someone's registration just has become a regular registration of an event:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="pi1_title">Arrangementsmanager</label>
 			<label index="label_uid">Nr</label>
 			<label index="label_accreditation_number">Tilmeldings nr.</label>
 			<label index="label_credit_points">Kredit points</label>
@@ -210,6 +212,7 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="email_notificationHello">Hej, der er lige kommet en tilmelding til arrangementet:</label>
 		</languageKey>
 		<languageKey index="de" type="array">
+			<label index="pi1_title">Seminar-Manager</label>
 			<label index="label_title">Titel</label>
 			<label index="label_uid">Nummer</label>
 			<label index="label_event_type">Veranstaltungsart</label>
@@ -343,6 +346,7 @@ jemand hat sich gerade für die Warteliste von einer Veranstaltung angemeldet:</
 die Anmeldung von jemandem wurde gerade zu einer regulären Anmeldung von einer Veranstaltung:</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="pi1_title">Seminar manager</label>
 			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Accrediteringsnummer</label>
 			<label index="label_credit_points">Kredietpunten</label>
@@ -417,6 +421,7 @@ Bedankt voor je aanmelding voor dit evenement:</label>
 iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
+			<label index="pi1_title">Управление семинарами</label>
 			<label index="label_uid">Номер</label>
 			<label index="label_accreditation_number">Номер аккредитации</label>
 			<label index="label_credit_points">Кредитные очки</label>
@@ -486,6 +491,7 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 кто-то только что зарегистрировался:</label>
 		</languageKey>
 		<languageKey index="it" type="array">
+			<label index="pi1_title">Gestore seminari</label>
 			<label index="label_title">Titolo</label>
 			<label index="label_uid">Numero</label>
 			<label index="label_event_type">Tipo evento</label>
@@ -617,6 +623,7 @@ qualcuno si è appena registrato alla lista d'attesa di un evento:</label>
 la registrazione di un partecipante è stata promossa a regolare per un evento:</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
+			<label index="pi1_title">Gestionnaire de séminaires</label>
 			<label index="label_title">Titre</label>
 			<label index="label_uid">Identifiant</label>
 			<label index="label_event_type">Type d'événement</label>
@@ -750,6 +757,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="dk" type="array">
+			<label index="pi1_title" type="integer">144163361</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
@@ -818,6 +826,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
 		</languageKey>
 		<languageKey index="de" type="array">
+			<label index="pi1_title" type="integer">144163361</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
@@ -929,6 +938,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="pi1_title" type="integer">144163361</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -998,6 +1008,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
+			<label index="pi1_title" type="integer">144163361</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
@@ -1061,6 +1072,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
 		</languageKey>
 		<languageKey index="it" type="array">
+			<label index="pi1_title" type="integer">144163361</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_event_type" type="integer">99114704</label>
@@ -1168,6 +1180,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_price_earlybird_special" type="integer">255242535</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
+			<label index="pi1_title" type="integer">144163361</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_event_type" type="integer">99114704</label>
@@ -1277,6 +1290,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
+			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -1410,6 +1424,7 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
+			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -1484,6 +1499,7 @@ someone just has registered for an event:</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
+			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -1553,6 +1569,7 @@ thank you for registering for this event:</label>
 someone just has registered for an event:</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
+			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -1627,6 +1644,7 @@ thank you for registering for this event:</label>
 someone just has registered for an event:</label>
 		</languageKey>
 		<languageKey index="it" type="array">
+			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_event_type">Event type</label>
@@ -1758,6 +1776,7 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_price_earlybird_special">Early-bird special price</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
+			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_event_type">Event type</label>
