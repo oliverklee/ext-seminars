@@ -75,6 +75,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** all places that may be shown in the option box of the selector widget  */
 	var $allPlaces = array();
 
+	/** all cities that may be shown in the option box of the selector widget */
+	var $allCities = array();
+
 	/**
 	 * list of field names (as keys) by which we can sort plus the
 	 * corresponding SQL sort criteria (as value)
@@ -342,6 +345,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if (is_array($this->piVars['place'])) {
 			$result .= $temporarySeminarBag->getAdditionalQueryForPlace(
 				$this->piVars['place']
+			);
+		}
+		if (is_array($this->piVars['city'])) {
+			$result .= $temporarySeminarBag->getAdditionalQueryForCity(
+				$this->piVars['city']
 			);
 		}
 		if (is_array($this->piVars['country'])) {
@@ -670,6 +678,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
+			$cityName = $currentPlace->getCity();
+			if (!isset($this->allCities[$cityName])) {
+				$this->allCities[$cityName] = $cityName;
+			}
+
 			$placeBag->getNext();
 		}
 		unset($placeBag);
@@ -677,6 +690,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// Adds an empty option to each list of options if this is needed.
 		$this->addEmptyOptionIfNeeded($this->allLanguages);
 		$this->addEmptyOptionIfNeeded($this->allPlaces);
+		$this->addEmptyOptionIfNeeded($this->allCities);
 		$this->addEmptyOptionIfNeeded($this->allCountries);
 		$this->addEmptyOptionIfNeeded($this->allEventTypes);
 	}
@@ -2785,6 +2799,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'event_type',
 			'language',
 			'country',
+			'city',
 			'place'
 		);
 
@@ -2837,6 +2852,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 			case 'country':
 				$availableOptions = $this->allCountries;
+				break;
+			case 'city':
+				$availableOptions = $this->allCities;
 				break;
 			case 'place':
 				$availableOptions = $this->allPlaces;

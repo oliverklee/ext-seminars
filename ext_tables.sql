@@ -16,6 +16,7 @@ CREATE TABLE fe_users (
 CREATE TABLE tx_seminars_seminars_place_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -29,6 +30,7 @@ CREATE TABLE tx_seminars_seminars_place_mm (
 CREATE TABLE tx_seminars_seminars_speakers_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -42,6 +44,7 @@ CREATE TABLE tx_seminars_seminars_speakers_mm (
 CREATE TABLE tx_seminars_seminars_speakers_mm_partners (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -55,6 +58,7 @@ CREATE TABLE tx_seminars_seminars_speakers_mm_partners (
 CREATE TABLE tx_seminars_seminars_speakers_mm_tutors (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -68,6 +72,7 @@ CREATE TABLE tx_seminars_seminars_speakers_mm_tutors (
 CREATE TABLE tx_seminars_seminars_speakers_mm_leaders (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -81,6 +86,7 @@ CREATE TABLE tx_seminars_seminars_speakers_mm_leaders (
 CREATE TABLE tx_seminars_seminars_target_groups_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -99,6 +105,7 @@ CREATE TABLE tx_seminars_seminars (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	object_type int(11) unsigned DEFAULT '0' NOT NULL,
 	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	starttime int(11) unsigned DEFAULT '0' NOT NULL,
@@ -159,6 +166,7 @@ CREATE TABLE tx_seminars_seminars (
 CREATE TABLE tx_seminars_seminars_feusers_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -176,6 +184,7 @@ CREATE TABLE tx_seminars_speakers (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	organization tinytext,
 	homepage tinytext,
@@ -204,6 +213,7 @@ CREATE TABLE tx_seminars_attendances (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	user int(11) unsigned DEFAULT '0' NOT NULL,
@@ -256,6 +266,7 @@ CREATE TABLE tx_seminars_sites (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	address text,
 	city tinytext,
@@ -279,6 +290,7 @@ CREATE TABLE tx_seminars_organizers (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	homepage tinytext,
 	email tinytext,
@@ -300,6 +312,7 @@ CREATE TABLE tx_seminars_payment_methods (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	description text,
 
@@ -318,6 +331,7 @@ CREATE TABLE tx_seminars_event_types (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -335,6 +349,7 @@ CREATE TABLE tx_seminars_checkboxes (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	description text,
 
@@ -349,6 +364,7 @@ CREATE TABLE tx_seminars_checkboxes (
 CREATE TABLE tx_seminars_seminars_checkboxes_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -362,6 +378,7 @@ CREATE TABLE tx_seminars_seminars_checkboxes_mm (
 CREATE TABLE tx_seminars_attendances_checkboxes_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -379,6 +396,7 @@ CREATE TABLE tx_seminars_lodgings (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -392,6 +410,7 @@ CREATE TABLE tx_seminars_lodgings (
 CREATE TABLE tx_seminars_seminars_lodgings_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -405,6 +424,7 @@ CREATE TABLE tx_seminars_seminars_lodgings_mm (
 CREATE TABLE tx_seminars_attendances_lodgings_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -422,6 +442,7 @@ CREATE TABLE tx_seminars_foods (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -435,6 +456,7 @@ CREATE TABLE tx_seminars_foods (
 CREATE TABLE tx_seminars_seminars_foods_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -448,6 +470,7 @@ CREATE TABLE tx_seminars_seminars_foods_mm (
 CREATE TABLE tx_seminars_attendances_foods_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -465,6 +488,7 @@ CREATE TABLE tx_seminars_timeslots (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	seminar int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	begin_date int(11) unsigned DEFAULT '0' NOT NULL,
@@ -485,6 +509,7 @@ CREATE TABLE tx_seminars_timeslots (
 CREATE TABLE tx_seminars_timeslots_speakers_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(30) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
@@ -502,6 +527,7 @@ CREATE TABLE tx_seminars_target_groups (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),

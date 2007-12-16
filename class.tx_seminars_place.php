@@ -80,10 +80,26 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	 *
 	 * @return	string		the title of this record, will not be empty
 	 *
-	 * @param	public
+	 * @access	public
 	 */
 	function getTitle() {
 		return $this->getRecordPropertyString('title');
+	}
+
+	/**
+	 * Returns the name of the city of this place record.
+	 *
+	 * This should not return an empty string as the city field is a required
+	 * field. But records that existed before, an empty string will be returned
+	 * as they don't have the city set yet.
+	 *
+	 * @return	string		the name of the city, will be empty if the place
+	 * 						record has no city set
+	 *
+	 * @access	public
+	 */
+	function getCity() {
+		return $this->getRecordPropertyString('city');
 	}
 
 	/**

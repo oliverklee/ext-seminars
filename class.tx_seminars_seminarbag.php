@@ -332,6 +332,74 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 
 		return $result;
 	}
+
+	/**
+	 * Returns the additional query parameters for the city selection from the
+	 * selector widget. If the user has not selected any city, an empty string
+	 * will be returned.
+	 *
+	 * If the user has selected at least one city, the POST data is an array in
+	 * any case (i.e. it doesn't matter whether the user selected exactly one
+	 * city or five of them).
+	 *
+	 * @param	array		city names, from POST data
+	 *
+	 * @return	string		the additional query parameter starting with ' AND',
+	 * 						can be appended to existing query string, may be empty
+	 *
+	 * @access	private
+	 */
+	function getAdditionalQueryForCity($cities) {
+		// Removes the dummy option from the form data if the user selected it.
+		$cities = $this->removeDummyOptionFromFormData($cities);
+
+		// Exits if the provided array of POST data is empty.
+		if (empty($cities)) {
+			return '';
+		}
+
+		$result = '';
+
+		// Implodes the array to a comma-separated list and adds quotes
+		// around each entry to make it work with the database. This is needed
+		// because the values are of type string.
+		$citiesSanitized = implode(
+			',',
+			$GLOBALS['TYPO3_DB']->fullQuoteArray(
+				$cities,
+				$this->tableSites
+			)
+		);
+
+		// Checks whether there are places that have one of the selected
+		// cities set and if there are events that have those places
+		// set (looked up in the m:n table).
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			$this->tableSeminars.'.uid',
+			$this->tableSeminars
+				.' LEFT JOIN '.$this->tableSitesMM.' ON '
+				.$this->tableSeminars.'.uid='.$this->tableSitesMM.'.uid_local'
+				.' LEFT JOIN '.$this->tableSites.' ON '
+				.$this->tableSitesMM.'.uid_foreign='.$this->tableSites.'.uid',
+			$this->tableSites.'.city IN('.$citiesSanitized.')'
+		);
+
+		// Adds the additional part of the query only if there was at least
+		// one matching entry found in the m:n table.
+		if ($dbResult) {
+			$seminarUids = array();
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$seminarUids[] = $row['uid'];
+			}
+			if (!empty($seminarUids)) {
+				$seminarUidsWithThisCity = implode(',', $seminarUids);
+				$result = ' AND '.$this->tableSeminars
+					.'.uid IN('.$seminarUidsWithThisCity.')';
+			}
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbag.php']) {

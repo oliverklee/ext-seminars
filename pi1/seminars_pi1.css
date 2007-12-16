@@ -121,8 +121,9 @@ div.tx-seminars-pi1-selectorwidget {
 }
 
 #tx-seminars-pi1-optionbox-1, #tx-seminars-pi1-optionbox-2,
-#tx-seminars-pi1-optionbox-3, #tx-seminars-pi1-optionbox-4 {
-	width: 25%;
+#tx-seminars-pi1-optionbox-3, #tx-seminars-pi1-optionbox-4,
+#tx-seminars-pi1-optionbox-5 {
+	width: 20%;
 }
 
 table.tx-seminars-pi1-timeslots {

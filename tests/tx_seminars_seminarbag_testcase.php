@@ -31,16 +31,24 @@
 
 require_once(t3lib_extMgm::extPath('seminars')
 	.'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('oelib')
+	.'tests/fixtures/class.tx_oelib_testingframework.php');
 
 class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 	private $fixture;
 
+	/** our instance of the testing framework */
+	private $testingFramework;
+
 	protected function setUp() {
+		$this->testingFramework = new tx_oelib_testingframework('tx_seminars');
 		$this->fixture = new tx_seminars_seminarbag();
 	}
 
 	protected function tearDown() {
+		$this->testingFramework->cleanUp();
 		unset($this->fixture);
+		unset($this->testingFramework);
 	}
 
 	public function testGetAdditionalQueryForPlaceIsEmptyWithNoPlace() {
@@ -197,6 +205,68 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$this->fixture->getAdditionalQueryForCountry(
+				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
+			)
+		);
+	}
+
+	public function testGetAdditionalQueryForCityWithOneCity() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars'
+		);
+		$placeUid =	$this->testingFramework->createRecord(
+			'tx_seminars_sites',
+			array('city' => 'Basel')
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_place_mm',
+			$eventUid,
+			$placeUid
+		);
+
+		$this->assertEquals(
+			' AND tx_seminars_seminars.uid IN('.$eventUid.')',
+			$this->fixture->getAdditionalQueryForCity(
+				array('Basel')
+			)
+		);
+	}
+
+	public function testGetAdditionalQueryForCityWithTwoCities() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars'
+		);
+		$placeUid =	$this->testingFramework->createRecord(
+			'tx_seminars_sites',
+			array('city' => 'Basel')
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_place_mm',
+			$eventUid,
+			$placeUid
+		);
+
+		$this->assertEquals(
+			' AND tx_seminars_seminars.uid IN('.$eventUid.')',
+			$this->fixture->getAdditionalQueryForCity(
+				array('Basel', 'Zürich')
+			)
+		);
+	}
+
+	public function testGetAdditionalQueryForCityIsEmptyWithNoCity() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getAdditionalQueryForCity(
+				array()
+			)
+		);
+	}
+
+	public function testGetAdditionalQueryForCityIsEmptyWithEvilData() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getAdditionalQueryForCity(
 				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
 			)
 		);
