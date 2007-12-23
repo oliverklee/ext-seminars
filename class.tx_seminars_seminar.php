@@ -611,12 +611,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * valid at all. As this field is filled through the BE from a prefilled
 	 * list, this should never be an issue at all.
 	 *
-	 * @return	boolean		whether at least one place with country are set for the current event
+	 * @return	boolean		whether at least one place with country are set
+	 * 						for the current event
 	 *
 	 * @access	public
 	 */
 	function hasCountry() {
-		return $this->hasPlace() && (boolean) count($this->getPlacesWithCountry());
+		return $this->hasPlace()
+			&& (boolean) count($this->getPlacesWithCountry());
 	}
 
 	/**
@@ -1803,7 +1805,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($dbResult) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 			$languageName = $row['lg_name_local'];
-		}	
+		}
 
 		return $languageName;
 	}
