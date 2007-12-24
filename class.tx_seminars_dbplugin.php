@@ -88,6 +88,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $tableTimeslotsSpeakersMM;
 	var $tableTargetGroups;
 	var $tableTargetGroupsMM;
+	var $tableCategories;
+	var $tableCategoriesMM;
 
 	// Constants for the types of records
 	var $recordTypeComplete;
@@ -215,6 +217,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableFoods          = $dbPrefix.'foods';
 		$this->tableTimeslots      = $dbPrefix.'timeslots';
 		$this->tableTargetGroups   = $dbPrefix.'target_groups';
+		$this->tableCategories     = $dbPrefix.'categories';
 
 		$this->tableVipsMM                  = $dbPrefix.'seminars_feusers_mm';
 		$this->tableSpeakersMM              = $dbPrefix.'seminars_speakers_mm';
@@ -230,6 +233,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		$this->tableAttendancesFoodsMM      = $dbPrefix.'attendances_foods_mm';
 		$this->tableTimeslotsSpeakersMM     = $dbPrefix.'timeslots_speakers_mm';
 		$this->tableTargetGroupsMM          = $dbPrefix.'seminars_target_groups_mm';
+		$this->tableCategoriesMM            = $dbPrefix.'seminars_categories_mm';
 
 		return;
 	}

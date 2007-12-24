@@ -13,7 +13,7 @@ $selectWhereForTopics = ($selectTopicsFromAllPages) ? '' : ' AND tx_seminars_sem
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,price_regular,price_special,payment_methods,organizers,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,cancelled,owner_feuser,vips,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,price_regular,price_special,payment_methods,organizers,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,cancelled,owner_feuser,vips,notes'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -98,6 +98,20 @@ $TCA['tx_seminars_seminars'] = array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'trim'
+			)
+		),
+		'categories' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.categories',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_categories',
+				'foreign_table' => 'tx_seminars_categories',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 999,
+				'MM' => 'tx_seminars_seminars_categories_mm'
 			)
 		),
 		'teaser' => array(
@@ -636,7 +650,7 @@ $TCA['tx_seminars_seminars'] = array(
 	'types' => array(
 		// Single event
 		'0' => array('showitem' => '' .
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, owner_feuser, vips, notes, '
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, categories, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, owner_feuser, vips, notes, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, '
@@ -646,7 +660,7 @@ $TCA['tx_seminars_seminars'] = array(
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, categories, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
@@ -1626,6 +1640,30 @@ $TCA['tx_seminars_target_groups'] = array(
 		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.title',
+			'config' => array(
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'required,trim'
+			)
+		)
+	),
+	'types' => array(
+		'0' => array('showitem' => 'title;;;;2-2-2')
+	),
+	'palettes' => array(
+		'1' => array('showitem' => '')
+	)
+);
+
+$TCA['tx_seminars_categories'] = array(
+	'ctrl' => $TCA['tx_seminars_categories']['ctrl'],
+	'interface' => array(
+		'showRecordFieldList' => 'title'
+	),
+	'columns' => array(
+		'title' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_categories.title',
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',
