@@ -272,6 +272,33 @@ class tx_seminars_timespanchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////
+	// Tests concerning the places.
+	/////////////////////////////////
+
+	public function testNumberOfPlacesIsInitiallyZero() {
+		$this->assertEquals(
+			0, $this->fixture->getNumberOfPlaces()
+		);
+	}
+
+	public function testSetNumberOfPlacesToZero() {
+		$this->fixture->setNumberOfPlaces(0);
+
+		$this->assertEquals(
+			0, $this->fixture->getNumberOfPlaces()
+		);
+	}
+
+	public function testSetNumberOfPlacesToPositiveInteger() {
+		$this->fixture->setNumberOfPlaces(42);
+
+		$this->assertEquals(
+			42, $this->fixture->getNumberOfPlaces()
+		);
+	}
+
+
 	////////////////////////////////
 	// Tests for getting the room.
 	////////////////////////////////

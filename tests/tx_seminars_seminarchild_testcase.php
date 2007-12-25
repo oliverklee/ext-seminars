@@ -30,31 +30,31 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars')
+	.'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars')
 	.'tests/fixtures/class.tx_seminars_seminarchild.php');
+require_once(t3lib_extMgm::extPath('oelib')
+	.'tests/fixtures/class.tx_oelib_testingframework.php');
 
 class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
+	private $testingFramework;
+
 	private $beginDate;
 	private $unregistrationDeadline;
 	private $currentTimestamp;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_seminarchild(
-			array(
-				'dateFormatYMD' => '%d.%m.%Y',
-				'timeFormat' => '%H:%M',
-				'showTimeOfUnregistrationDeadline' => 0,
-				'unregistrationDeadlineDaysBeforeBeginDate' => 0
-			)
-		);
+		$this->testingFramework
+			= new tx_oelib_testingframework('tx_seminars');
 
 		$this->currentTimestamp = time();
 		$this->beginDate = ($this->currentTimestamp + ONE_WEEK);
 		$this->unregistrationDeadline = ($this->currentTimestamp + ONE_WEEK);
 
-		$this->fixture->setEventData(
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
 			array(
-				'uid' => 10000,
 				'deadline_unregistration' => $this->unregistrationDeadline,
 				'language' => 'de',
 				'attendees_min' => 5,
@@ -63,13 +63,22 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'queue_size' => 0
 			)
 		);
-		// Add the place records that we need for some of the tests.
-		$this->fixture->createPlaces();
+
+		$this->fixture = new tx_seminars_seminarchild(
+			$uid,
+			array(
+				'dateFormatYMD' => '%d.%m.%Y',
+				'timeFormat' => '%H:%M',
+				'showTimeOfUnregistrationDeadline' => 0,
+				'unregistrationDeadlineDaysBeforeBeginDate' => 0
+			)
+		);
 	}
 
 	protected function tearDown() {
-		$this->fixture->removePlacesFixture();
+		$this->testingFramework->cleanUp();
 		unset($this->fixture);
+		unset($this->testingFramework);
 	}
 
 	public function testIsOk() {
@@ -77,6 +86,100 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->isOk()
 		);
 	}
+
+
+	///////////////////////
+	// Utility functions.
+	///////////////////////
+
+	/**
+	 * Inserts a place records into the database and creates a relation to it
+	 * from the fixture.
+	 *
+	 * @param	array		data of the place to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be 0 if an error
+	 * 						has occurred
+	 */
+	private function addPlaceRelation(array $placeData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, $placeData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfPlaces(
+			$this->fixture->getNumberOfPlaces() + 1
+		);
+
+		return $uid;
+	}
+
+
+	/////////////////////////////////////
+	// Tests for the utility functions.
+	/////////////////////////////////////
+
+	public function testAddPlaceRelationReturnsUid() {
+		$this->assertTrue(
+			$this->addPlaceRelation(array()) > 0
+		);
+	}
+
+	public function testAddPlaceRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addPlaceRelation(array()),
+			$this->addPlaceRelation(array())
+		);
+	}
+
+	public function testAddPlaceRelationIncreasesTheNumberOfPlaces() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfPlaces()
+		);
+
+		$this->addPlaceRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfPlaces()
+		);
+
+		$this->addPlaceRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfPlaces()
+		);
+	}
+
+	public function testAddPlaceRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+			)
+
+		);
+
+		$this->addPlaceRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addPlaceRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
+
 
 	//////////////////////////////////////////////
 	// Tests regarding the language of an event:
@@ -487,7 +590,12 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////////
 
 	public function testGetPlacesWithCountry() {
-		$this->fixture->setPlaceMM(PLACE_VALID_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
+		);
+
 		$this->assertEquals(
 			array('ch'),
 			$this->fixture->getPlacesWithCountry()
@@ -495,7 +603,12 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlacesWithCountryWithNoCountry() {
-		$this->fixture->setPlaceMM(PLACE_NO_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => ''
+			)
+		);
+
 		$this->assertEquals(
 			array(),
 			$this->fixture->getPlacesWithCountry()
@@ -503,7 +616,12 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlacesWithCountryWithInvalidCountry() {
-		$this->fixture->setPlaceMM(PLACE_INVALID_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'xy'
+			)
+		);
+
 		$this->assertEquals(
 			array('xy'),
 			$this->fixture->getPlacesWithCountry()
@@ -518,18 +636,31 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlacesWithCountryWithDeletedPlace() {
-		$this->fixture->setPlaceMM(PLACE_DELETED_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'at',
+				'deleted' => 1
+			)
+		);
+
 		$this->assertEquals(
 			array(),
 			$this->fixture->getPlacesWithCountry()
 		);
 	}
 
-
 	public function testGetPlacesWithCountryWithMultipleCountries() {
-		$this->fixture->setPlaceMM(
-			PLACE_VALID_COUNTRY_UID.','.PLACE_OTHER_VALID_COUNTRY_UID
+		$this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
 		);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'de'
+			)
+		);
+
 		$this->assertEquals(
 			array('ch', 'de'),
 			$this->fixture->getPlacesWithCountry()
@@ -537,23 +668,38 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testHasCountry() {
-		$this->fixture->setPlaceMM(PLACE_VALID_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
+		);
+
 		$this->assertTrue(
 			$this->fixture->hasCountry()
 		);
 	}
 
 	public function testHasCountryWithNoCountry() {
-		$this->fixture->setPlaceMM(PLACE_NO_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => ''
+			)
+		);
+
 		$this->assertFalse(
 			$this->fixture->hasCountry()
 		);
 	}
 
 	public function testHasCountryWithInvalicCountry() {
+		$this->addPlaceRelation(
+			array(
+				'country' => 'xy'
+			)
+		);
+
 		// We expect a true even if the country code is invalid! See function's
 		// comment on this.
-		$this->fixture->setPlaceMM(PLACE_INVALID_COUNTRY_UID);
 		$this->assertTrue(
 			$this->fixture->hasCountry()
 		);
@@ -566,16 +712,29 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testHasCountryWithMultipleCountries() {
-		$this->fixture->setPlaceMM(
-			PLACE_VALID_COUNTRY_UID.','.PLACE_OTHER_VALID_COUNTRY_UID
+		$this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
 		);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'de'
+			)
+		);
+
 		$this->assertTrue(
 			$this->fixture->hasCountry()
 		);
 	}
 
 	public function testGetCountry() {
-		$this->fixture->setPlaceMM(PLACE_VALID_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
+		);
+
 		$this->assertEquals(
 			'Schweiz',
 			$this->fixture->getCountry()
@@ -583,7 +742,12 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetCountryWithNoCountry() {
-		$this->fixture->setPlaceMM(PLACE_NO_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => ''
+			)
+		);
+
 		$this->assertEquals(
 			'',
 			$this->fixture->getCountry()
@@ -591,7 +755,12 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetCountryWithInvalidCountry() {
-		$this->fixture->setPlaceMM(PLACE_INVALID_COUNTRY_UID);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'xy'
+			)
+		);
+
 		$this->assertEquals(
 			'',
 			$this->fixture->getCountry()
@@ -599,9 +768,17 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetCountryWithMultipleCountries() {
-		$this->fixture->setPlaceMM(
-			PLACE_VALID_COUNTRY_UID.','.PLACE_OTHER_VALID_COUNTRY_UID
+		$this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
 		);
+		$this->addPlaceRelation(
+			array(
+				'country' => 'de'
+			)
+		);
+
 		$this->assertEquals(
 			'Schweiz, Deutschland',
 			$this->fixture->getCountry()
@@ -635,38 +812,43 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testGetRelatedMmRecordUidsWithNoPlace() {
 		$this->assertEquals(
 			array(),
-			$this->fixture->getRelatedMmRecordUids($this->fixture->tableSitesMM)
+			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SITES_MM)
 		);
-		
 	}
 
 	public function testGetRelatedMmRecordUidsWithOnePlace() {
-		$this->fixture->setPlaceMM(
-			PLACE_VALID_COUNTRY_UID
+		$uid = $this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
 		);
+
 		$this->assertEquals(
-			array(PLACE_VALID_COUNTRY_UID),
-			$this->fixture->getRelatedMmRecordUids($this->fixture->tableSitesMM)
+			array($uid),
+			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SITES_MM)
 		);
-		
 	}
 
 	public function testGetRelatedMmRecordUidsWithTwoPlaces() {
-		$this->fixture->setPlaceMM(
-			PLACE_VALID_COUNTRY_UID
+		$uid1 = $this->addPlaceRelation(
+			array(
+				'country' => 'ch'
+			)
 		);
-		$this->fixture->setPlaceMM(
-			PLACE_OTHER_VALID_COUNTRY_UID
+		$uid2 = $this->addPlaceRelation(
+			array(
+				'country' => 'de'
+			)
 		);
+
 		$result = $this->fixture->getRelatedMmRecordUids(
-			$this->fixture->tableSitesMM
+			SEMINARS_TABLE_SITES_MM
 		);
 		sort($result);
 		$this->assertEquals(
-			array(PLACE_VALID_COUNTRY_UID, PLACE_OTHER_VALID_COUNTRY_UID),
+			array($uid1, $uid2),
 			$result
 		);
-		
 	}
 }
 

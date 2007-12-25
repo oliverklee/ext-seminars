@@ -86,6 +86,16 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	public function setRoom($room) {
 		$this->setRecordPropertyString('room', $room);
 	}
+
+	/**
+	 * Sets the number of places for this time span.
+	 *
+	 * @param	integer		the number of places that are associated with this
+	 * 						time span
+	 */
+	public function setNumberOfPlaces($places) {
+		$this->setRecordPropertyInteger('place', $places);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_timespanchild.php']) {

@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1404] Change: Make use of the oelib testing framework for creating Seminar Manager dummy records
 - [#1389] Feature: Add categories in the BE
 - [#1380] Feature: Add a wizard to tx_seminars
 - [#1371] Feature: Add city to list view

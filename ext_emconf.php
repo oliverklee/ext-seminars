@@ -50,6 +50,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'newloginbox' => '',
 			'sr_feuser_register' => '',
 			'onetimeaccount' => '',
+			'oelib' => '0.3.99-',
 		),
 	),
 	'suggests' => array(
@@ -57,6 +58,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'newloginbox' => '',
 		'sr_feuser_register' => '',
 		'onetimeaccount' => '',
+		'oelib' => '0.3.99-',
 	),
 );
 

@@ -30,6 +30,8 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars')
+	.'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars')
 	.'class.tx_seminars_place.php');
 require_once(t3lib_extMgm::extPath('oelib')
 	.'tests/fixtures/class.tx_oelib_testingframework.php');
@@ -48,7 +50,7 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingframework('tx_seminars');
 
 		$this->uidOfDefaultFixture = $this->testingFramework->createRecord(
-			'tx_seminars_sites',
+			SEMINARS_TABLE_SITES,
 			array(
 				'title' => 'TEST Place 1',
 				'city' => 'Tokyo',

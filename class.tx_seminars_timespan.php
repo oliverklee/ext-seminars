@@ -359,6 +359,18 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	function hasPlace() {
 		return $this->hasRecordPropertyInteger('place');
 	}
+
+	/**
+	 * Gets the number of places associated with this record.
+	 *
+	 * @return	integer		the number of places associated with this record,
+	 * 						will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfPlaces() {
+		return $this->getRecordPropertyInteger('place');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_timespan.php']) {
