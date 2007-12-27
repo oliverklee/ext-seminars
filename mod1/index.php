@@ -42,6 +42,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.p
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
 
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
@@ -256,15 +257,10 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$result .= '<h3>'
 			.$LANG->getLL('title_getEmailAddressesForAttendances').'</h3>';
 
-		$seminarBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminarbag'
-		);
-		$seminarBag =& new $seminarBagClassname(
-			'pid='.intval($this->id),
-			'',
-			'',
-			$tableSeminars.'.begin_date'
-		);
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder->setBackEndMode();
+		$builder->setSourcePages(intval($this->id));
+		$seminarBag = $builder->build();
 
 		while ($currentSeminar =& $seminarBag->getCurrent()) {
 			$result .= '<h4>'.$currentSeminar->getTitleAndDate().'</h4>';

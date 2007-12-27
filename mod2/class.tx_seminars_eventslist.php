@@ -29,12 +29,11 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once('conf.php');
-require_once($BACK_PATH.'init.php');
-require_once($BACK_PATH.'template.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_backendlist.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
 class tx_seminars_eventslist extends tx_seminars_backendlist{
 	/** the seminar which we want to list/show */
@@ -195,32 +194,17 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 			)
 		);
 
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder->setBackEndMode();
+		$builder->setSourcePages($this->page->pageInfo['uid']);
+		$seminarBag = $builder->build();
+
+		$sortList = array();
+
 		// unserialize the configuration array
 		$globalConfiguration = unserialize(
 			$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
 		);
-
-		// Initialize variables for the database query.
-		$queryWhere = 'pid='.$this->page->pageInfo['uid'];
-		$additionalTables = '';
-		$orderBy = ($globalConfiguration['useManualSorting'])
-			? 'sorting' : 'begin_date';
-		$limit = '';
-
-		$seminarBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminarbag'
-		);
-		$seminarBag =& new $seminarBagClassname(
-			$queryWhere,
-			$additionalTables,
-			'',
-			$orderBy,
-			$limit,
-			1,
-			true
-		);
-
-		$sortList = array();
 
 		$useManualSorting = $globalConfiguration['useManualSorting']
 			&& $BE_USER->check('tables_modify', $seminarBag->tableSeminars)

@@ -29,9 +29,6 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once('conf.php');
-require_once($BACK_PATH.'init.php');
-require_once($BACK_PATH.'template.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_backendlist.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
@@ -43,7 +40,7 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 	/**
 	 * The constructor. Calls the constructor of the parent class and sets
 	 * $this->tableName.
-	 * 
+	 *
 	 * @param	object		the current back-end page object
 	 */
 	function tx_seminars_organizerslist(&$page) {

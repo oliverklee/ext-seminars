@@ -29,9 +29,6 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once('conf.php');
-require_once($BACK_PATH.'init.php');
-require_once($BACK_PATH.'template.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_backendlist.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');

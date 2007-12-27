@@ -37,6 +37,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.p
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
 
 class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/** same as class name */

@@ -29,9 +29,6 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once('conf.php');
-require_once($BACK_PATH.'init.php');
-require_once($BACK_PATH.'template.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
 define('TAB', chr(9));
@@ -46,9 +43,9 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
-	 * 
+	 *
 	 * @param	object		the current back-end page object
-	 * 
+	 *
 	 * @access	public
 	 */
 	function tx_seminars_backendlist(&$page) {
