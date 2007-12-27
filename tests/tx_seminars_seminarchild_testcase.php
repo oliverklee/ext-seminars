@@ -29,12 +29,9 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars')
-	.'tests/fixtures/class.tx_seminars_seminarchild.php');
-require_once(t3lib_extMgm::extPath('oelib')
-	.'tests/fixtures/class.tx_oelib_testingframework.php');
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_seminarchild.php');
+require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testingframework.php');
 
 class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -220,7 +217,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testHasLanguageWithNoLanguage() {
-		// unset the language field
+		// unsets the language field
 		$this->fixture->setEventData(
 			array(
 				'language' => ''
