@@ -165,7 +165,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Gets the entry date as a formatted date.
 	 *
-	 * @return	string		the entry date (or the localized string "will be 
+	 * @return	string		the entry date (or the localized string "will be
 	 * 						announced" if no entry date is set)
 	 *
 	 * @access	public
