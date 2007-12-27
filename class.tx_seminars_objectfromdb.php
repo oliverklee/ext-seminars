@@ -430,7 +430,6 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 				'',
 				'1'
 			);
-
 	 	} else {
 	 		$result = null;
 	 	}
