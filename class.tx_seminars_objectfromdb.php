@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2007 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -39,30 +39,54 @@
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 
 class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
-	/** Same as class name */
-	var $prefixId = 'tx_seminars_objectfromdb';
-	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_objectfromdb.php';
-
-	/** string with the name of the SQL table this class corresponds to
-	 *  (must be set in $this->init()) */
-	var $tableName = null;
+	/** string with the name of the SQL table this class corresponds to */
+	var $tableName = '';
 	/** associative array with the values from/for the DB */
-	var $recordData = null;
+	var $recordData = array();
 	/** whether this record already is stored in the DB */
 	var $isInDb = false;
 
 	/**
-	 * Dummy constructor: Does nothing.
+	 * The constructor. Creates a test instance from a DB record.
 	 *
-	 * Child classes MUST do the following:
-	 * 1. call $this->init()
-	 * 2. set $this->tableName
-	 * 3. fill $this->recordData with data
+	 * @param	integer		The UID of the record to retrieve from the DB. This
+	 * 						parameter will be ignored if $dbResult is provided.
+	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
+	 * 						If this parameter is provided, $uid will be
+	 * 						ignored.
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_objectfromdb() {
+	function tx_seminars_objectfromdb($uid, $dbResult = null) {
+		$this->init();
+		$this->retrieveRecordAndGetData($uid, $dbResult);
+	}
+
+	/**
+	 * Retrieves this record's data from the DB (if it has not been retrieved
+	 * yet) and gets the record data from the DB result.
+	 *
+	 * @param	integer		The UID of the record to retrieve from the DB. This
+	 * 						parameter will be ignored if $dbResult is provided.
+	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
+	 * 						If this parameter is provided, $uid will be ignored.
+	 * @param	boolean		whether it is possible to create an object from a
+	 * 						hidden record
+	 *
+	 * @access	protected
+	 */
+	function retrieveRecordAndGetData(
+		$uid, $dbResult = null, $allowHiddenRecords = false
+	) {
+		if (!$dbResult) {
+			$dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
+		}
+
+		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+			$this->getDataFromDbResult(
+				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
+			);
+		}
 	}
 
 	/**
@@ -88,7 +112,6 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 			$this->recordData = $dbResultRow;
 			$this->isInDb = true;
 		}
-		return;
 	}
 
 	/**

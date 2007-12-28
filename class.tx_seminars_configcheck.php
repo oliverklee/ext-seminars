@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2006-2007 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2006-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -168,6 +168,24 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 * @access	private
 	 */
 	function check_tx_seminars_timeslot() {
+		$this->checkStaticIncluded();
+	}
+
+	/**
+	 * Checks the configuration for: check_tx_seminars_test/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_test() {
+		$this->checkStaticIncluded();
+	}
+
+	/**
+	 * Checks the configuration for: check_tx_seminars_testbag/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_testbag() {
 		$this->checkStaticIncluded();
 	}
 
