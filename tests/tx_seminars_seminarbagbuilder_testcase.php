@@ -29,13 +29,10 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('oelib')
-	.'tests/fixtures/class.tx_oelib_testingframework.php');
+require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testingframework.php');
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars')
-	.'class.tx_seminars_seminarbagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
 
 define('SEMINARS_SYSFOLDER_TITLE', 'tx_seminars unit test page');
 
