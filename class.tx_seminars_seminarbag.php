@@ -169,7 +169,9 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 					.SEMINARS_TABLE_SEMINARS.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_local'
 					.' LEFT JOIN '.SEMINARS_TABLE_SITES.' ON '
 					.SEMINARS_TABLE_SITES_MM.'.uid_foreign='.SEMINARS_TABLE_SITES.'.uid',
-				SEMINARS_TABLE_SITES.'.country IN('.$countryIsoCodes.')'
+				SEMINARS_TABLE_SITES.'.country IN('.$countryIsoCodes.')',
+				'',
+				SEMINARS_TABLE_SEMINARS.'.uid'
 			);
 
 			// Adds the additional part of the query only if there was at least
@@ -379,7 +381,9 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 				.SEMINARS_TABLE_SEMINARS.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_local'
 				.' LEFT JOIN '.SEMINARS_TABLE_SITES.' ON '
 				.SEMINARS_TABLE_SITES_MM.'.uid_foreign='.SEMINARS_TABLE_SITES.'.uid',
-			SEMINARS_TABLE_SITES.'.city IN('.$citiesSanitized.')'
+			SEMINARS_TABLE_SITES.'.city IN('.$citiesSanitized.')',
+			'',
+			SEMINARS_TABLE_SEMINARS.'.uid'
 		);
 
 		// Adds the additional part of the query only if there was at least

@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1429] Fix: Failing test: testGetAdditionalQueryForCountryWithMultipleValidCountries
 - [#1337] Change: Move the table names to constants
 - [#1400] Feature: Create a seminarbag builder and move creating the WHERE clause for the list view out of pi1
 - [#1404] Change: Make use of the oelib testing framework for creating Seminar Manager dummy records
