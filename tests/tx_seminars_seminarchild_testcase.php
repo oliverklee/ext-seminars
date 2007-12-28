@@ -140,6 +140,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+
 	/////////////////////////////////////
 	// Tests for the utility functions.
 	/////////////////////////////////////
@@ -198,6 +199,67 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			2,
 			$this->testingFramework->countRecords(
 				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
+
+	public function testAddTargetGroupRelationReturnsUid() {
+		$this->assertTrue(
+			$this->addTargetGroupRelation(array()) > 0
+		);
+	}
+
+	public function testAddTargetGroupRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addTargetGroupRelation(array()),
+			$this->addTargetGroupRelation(array())
+		);
+	}
+
+	public function testAddTargetGroupRelationIncreasesTheNumberOfTargetGroups() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfTargetGroups()
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfTargetGroups()
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfTargetGroups()
+		);
+	}
+
+	public function testAddTargetGroupRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TARGET_GROUPS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TARGET_GROUPS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TARGET_GROUPS_MM,
+				'uid_local='.$this->fixture->getUid()
 			)
 		);
 	}
