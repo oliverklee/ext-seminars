@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -35,57 +35,8 @@ require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
 class tx_seminars_place extends tx_seminars_objectfromdb {
-	/** same as class name */
-	var $prefixId = 'tx_seminars_place';
-	/**  path to this script relative to the extension dir */
-	var $scriptRelPath = 'class.tx_seminars_place.php';
-
-	/**
-	 * The constructor. Creates a place instance from a DB record.
-	 *
-	 * @param	integer		The UID of the place to retrieve from the DB.
-	 * 						This parameter will be ignored if $dbResult is provided.
-	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
-	 * 						If this parameter is provided, $uid will be ignored.
-	 *
-	 * @access	public
-	 */
-	function tx_seminars_place($sitesUid, $dbResult = null) {
-		$this->init();
-		$this->tableName = SEMINARS_TABLE_SITES;
-
-		if (!$dbResult) {
-			$dbResult = $this->retrieveRecord($sitesUid);
-		}
-
-		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult(
-				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
-			);
-		}
-	}
-
-	/**
-	 * Returns the UID of this place record.
-	 *
-	 * @return	integer		the UID of this record, will always be > 0
-	 *
-	 * @access	public
-	 */
-	function getUid() {
-		return $this->getRecordPropertyInteger('uid');
-	}
-
-	/**
-	 * Returns the title of this place record.
-	 *
-	 * @return	string		the title of this record, will not be empty
-	 *
-	 * @access	public
-	 */
-	function getTitle() {
-		return $this->getRecordPropertyString('title');
-	}
+	/** string with the name of the SQL table this class corresponds to */
+	var $tableName = SEMINARS_TABLE_SITES;
 
 	/**
 	 * Returns the name of the city of this place record.

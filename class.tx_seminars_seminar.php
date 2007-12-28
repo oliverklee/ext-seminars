@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2007 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -43,7 +43,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'class.tx_seminars_seminar.php';
 
-	/** Organizers data as an array of arrays with their UID as key. Lazily initialized. */
+	/** string with the name of the SQL table this class corresponds to */
+	var $tableName = SEMINARS_TABLE_SEMINARS;
+
+	/**
+	 * Organizers data as an array of arrays with their UID as key. Lazily
+	 * initialized.
+	 */
 	var $organizersCache = array();
 
 	/** The number of all attendances. */
@@ -80,19 +86,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminar($seminarUid, $dbResult = null, $allowHiddenRecords = false) {
-		$this->init();
-		$this->tableName = SEMINARS_TABLE_SEMINARS;
-
-		if (!$dbResult) {
-			$dbResult = $this->retrieveRecord($seminarUid, $allowHiddenRecords);
-		}
-
-		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult(
-				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
-			);
-		}
+	function tx_seminars_seminar(
+		$uid, $dbResult = null, $allowHiddenRecords = false
+	) {
+		parent::tx_seminars_objectfromdb($uid, $dbResult, $allowHiddenRecords);
 
 		// For date records: Create a reference to the topic record.
 		if ($this->isEventDate()) {
@@ -106,8 +103,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		} else {
 			$this->topic = null;
 		}
-
-		return;
 	}
 
 	/**
@@ -2135,7 +2130,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	function getNumberOfTargetGroups() {
 		return $this->getRecordPropertyInteger('target_groups');
-	}	
+	}
 
 
 	/**

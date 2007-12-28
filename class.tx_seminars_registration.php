@@ -39,6 +39,9 @@ require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
 class tx_seminars_registration extends tx_seminars_objectfromdb {
+	/** string with the name of the SQL table this class corresponds to */
+	var $tableName = SEMINARS_TABLE_ATTENDANCES;
+
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_registration';
 	/**  Path to this script relative to the extension dir. */
@@ -85,7 +88,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->cObj =& $cObj;
 		$this->init();
-		$this->tableName = SEMINARS_TABLE_ATTENDANCES;
 
 	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
 			$this->getDataFromDbResult(

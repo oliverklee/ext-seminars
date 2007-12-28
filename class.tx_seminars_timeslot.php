@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,36 +36,8 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php')
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speakerbag.php');
 
 class tx_seminars_timeslot extends tx_seminars_timespan {
-	/** same as class name */
-	var $prefixId = 'tx_seminars_timeslot';
-	/**  path to this script relative to the extension dir */
-	var $scriptRelPath = 'class.tx_seminars_timeslot.php';
-
-	/**
-	 * The constructor. Creates a timeslot instance from a DB record.
-	 *
-	 * @param	integer		The UID of the timeslot to retrieve from the DB.
-	 * 						This parameter will be ignored if $dbResult is provided.
-	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
-	 * 						If this parameter is provided, $uid will be ignored.
-	 *
-	 * @access	public
-	 */
-	function tx_seminars_timeslot($timeslotUid, $dbResult = null) {
-		$this->tableName = SEMINARS_TABLE_TIME_SLOTS;
-
-		if (!$dbResult) {
-			$dbResult = $this->retrieveRecord($timeslotUid);
-		}
-
-		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult(
-				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
-			);
-		}
-
-		$this->init();
-	}
+	/** string with the name of the SQL table this class corresponds to */
+	var $tableName = SEMINARS_TABLE_TIME_SLOTS;
 
 	/**
 	 * Gets the speaker UIDs.
