@@ -40,7 +40,13 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingframework('tx_seminars');
-		$this->fixture = new tx_seminars_seminarbag();
+
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'test event')
+		);
+
+		$this->fixture = new tx_seminars_seminarbag('uid='.$uid);
 	}
 
 	protected function tearDown() {
@@ -48,6 +54,29 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		unset($this->fixture);
 		unset($this->testingFramework);
 	}
+
+
+	///////////////////////////////////////////
+	// Tests for the basic bag functionality.
+	///////////////////////////////////////////
+
+	public function testBagCanHaveAtLeastOneElement() {
+		$this->assertGreaterThan(
+			0, $this->fixture->getObjectCountWithoutLimit()
+		);
+
+		$this->assertNotNull(
+			$this->fixture->getCurrent()
+		);
+		$this->assertTrue(
+			$this->fixture->getCurrent()->isOk()
+		);
+	}
+
+
+	/////////////////////////////////////////
+	// Tests for queries about event sites.
+	/////////////////////////////////////////
 
 	public function testGetAdditionalQueryForPlaceIsEmptyWithNoPlace() {
 		$this->assertEquals(
@@ -107,7 +136,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetAdditionalQueryForPlaceIsEemptyWithInvalidPlace() {
+	public function testGetAdditionalQueryForPlaceIsEmptyWithInvalidPlace() {
 		$this->assertEquals(
 			'',
 			$this->fixture->getAdditionalQueryForPlace(
@@ -124,6 +153,11 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Tests for queries about event types.
+	/////////////////////////////////////////
 
 	public function testGetAdditionalQueryForEventTypeIsEmptyWithNoEventType() {
 		$this->assertEquals(
@@ -169,6 +203,11 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	/////////////////////////////////////////////
+	// Tests for queries about event languages.
+	/////////////////////////////////////////////
+
 	public function testGetAdditionalQueryForLanguageIsEmptyWithNoLanguage() {
 		$this->assertEquals(
 			'',
@@ -201,6 +240,11 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+
+	/////////////////////////////////////////////
+	// Tests for queries about event countries.
+	/////////////////////////////////////////////
 
 	public function testGetAdditionalQueryForCountryIsEmptyWithNoCountry() {
 		$this->assertEquals(
@@ -268,6 +312,11 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	//////////////////////////////////////////
+	// Tests for queries about event cities.
+	//////////////////////////////////////////
+
 	public function testGetAdditionalQueryForCityWithOneCity() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -329,6 +378,11 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests for general form data handling.
+	//////////////////////////////////////////
 
 	public function testRemoveDummyOptionFromFormData() {
 		$this->assertEquals(
