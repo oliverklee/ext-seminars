@@ -56,34 +56,62 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-/* The following unit tests are disabled until they can be really tested. For
- * this, the testing framework for generating dummy records needs to be set up
- * first. See https://bugs.oliverklee.com/show_bug.cgi?id=1237
-
 	public function testGetAdditionalQueryForPlaceWithOneValidPlace() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid, $siteUid
+		);
+
 		$this->assertEquals(
-			' AND tx_seminars_seminars.uid IN(EVENT_UID)',
+			' AND tx_seminars_seminars.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForPlace(
-				array(VALID_PLACE_UID)
+				array($siteUid)
 			)
 		);
 	}
 
 	public function testGetAdditionalQueryForPlaceWithMultipleValidPlaces() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1, $siteUid1
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid2, $siteUid2
+		);
+
 		$this->assertEquals(
-			' AND tx_seminars_seminars.uid IN(EVENT_UID, SECOND_EVENT_UID)',
+			' AND tx_seminars_seminars.uid IN('.$eventUid1.','.$eventUid2.')',
 			$this->fixture->getAdditionalQueryForPlace(
-				array(VALID_PLACE_UID, SECOND_VALID_PLACE_UID)
+				array($siteUid1, $siteUid2)
 			)
 		);
 	}
-*/
 
 	public function testGetAdditionalQueryForPlaceIsEemptyWithInvalidPlace() {
 		$this->assertEquals(
 			'',
 			$this->fixture->getAdditionalQueryForPlace(
-				array(70685)
+				array(706851)
 			)
 		);
 	}
@@ -120,9 +148,9 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 	public function testGetAdditionalQueryForEventTypeWithEvilData() {
 		// Querying this method with evil data should theoretically return an
-		// empty string. But as we intval() the input values, and zero is an allowed
-		// value for the event type, the returned string will not be empty as the
-		// evil data has an integer value of zero.
+		// empty string. But as we intval() the input values, and zero is an
+		// allowed value for the event type, the returned string will not be
+		// empty as the evil data has an integer value of zero.
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(0)',
 			$this->fixture->getAdditionalQueryForEventType(
@@ -133,8 +161,8 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 	public function testGetAdditionalQueryForEventTypeWithUidZero() {
 		// This covers a special case: If no event type is set, the value of the
-		// field in the database is set to zero by default. So zero is an allowed
-		// value for the event type.
+		// field in the database is set to zero by default. So zero is an
+		// allowed value for the event type.
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(0)',
 			$this->fixture->getAdditionalQueryForEventType(array(0))
@@ -181,24 +209,56 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-/* The following unit tests are disabled until they can be really tested. For
- * this, the testing framework for generating dummy records needs to be set up
- * first. See https://bugs.oliverklee.com/show_bug.cgi?id=1237
-
 	public function testGetAdditionalQueryForCountryWithOneValidCountry() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'ch')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid, $siteUid
+		);
+
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN(EVENT_UID)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForCountry(array('ch'))
 		);
 	}
 
 	public function testGetAdditionalQueryForCountryWithMultipleValidCountries() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'ch')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1, $siteUid1
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'de')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid2, $siteUid2
+		);
+
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN(EVENT_UID, SECOND_EVENT_UID)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid1.','.$eventUid2.')',
 			$this->fixture->getAdditionalQueryForCountry(array('ch', 'de'))
 		);
 	}
-*/
+
 	public function testGetAdditionalQueryForCountryIsEmptyWithEvilData() {
 		$this->assertEquals(
 			'',

@@ -32,15 +32,35 @@
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_timeslotchild.php');
 
+require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testingframework.php');
+
 class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
+	private $testingFramework;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_timeslotchild(array());
+		$this->testingFramework
+			= new tx_oelib_testingframework('tx_seminars');
+
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$timeSlotUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'seminar' => $seminarUid,
+				'entry_date' => 0,
+				'place' => 0
+			)
+		);
+
+		$this->fixture = new tx_seminars_timeslotchild($timeSlotUid);
 	}
 
 	protected function tearDown() {
+		$this->testingFramework->cleanUp();
 		unset($this->fixture);
+		unset($this->testingFramework);
 	}
 
 
@@ -64,16 +84,22 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSetAndGetPlace() {
-		$this->fixture->setPlace(100000);
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES
+		);
+		$this->fixture->setPlace($siteUid);
 
 		$this->assertEquals(
-			100000,
+			$siteUid,
 			$this->fixture->getPlace()
 		);
 	}
 
 	public function testHasPlace() {
-		$this->fixture->setPlace(100000);
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES
+		);
+		$this->fixture->setPlace($siteUid);
 
 		$this->assertTrue(
 			$this->fixture->hasPlace()

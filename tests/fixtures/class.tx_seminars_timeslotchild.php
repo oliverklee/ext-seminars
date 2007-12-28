@@ -44,15 +44,12 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 
 	/**
 	 * The constructor.
+	 *
+	 * @param	integer		the UID of the event to retrieve from the DB, must
+	 * 						be > 0
 	 */
-	public function __construct() {
-		$this->recordData = array(
-			'uid' => 1,
-			'entry_date' => 0,
-			'place' => 0
-		);
-
-		$this->tableName = SEMINARS_TABLE_TIME_SLOTS;
+	public function __construct($uid) {
+		parent::tx_seminars_timeslot($uid);
 	}
 
 	/**
