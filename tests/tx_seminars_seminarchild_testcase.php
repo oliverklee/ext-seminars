@@ -91,7 +91,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	///////////////////////
 
 	/**
-	 * Inserts a place records into the database and creates a relation to it
+	 * Inserts a place record into the database and creates a relation to it
 	 * from the fixture.
 	 *
 	 * @param	array		data of the place to add, may be empty
@@ -115,6 +115,30 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Inserts a target group record into the database and creates a relation to
+	 * it from the fixture.
+	 *
+	 * @param	array		data of the target group to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be 0 if an error
+	 * 						has occurred
+	 */
+	private function addTargetGroupRelation(array $targetGroupData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS, $targetGroupData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TARGET_GROUPS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfTargetGroups(
+			$this->fixture->getNumberOfTargetGroups() + 1
+		);
+
+		return $uid;
+	}
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -846,6 +870,85 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			array($uid1, $uid2),
 			$result
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests regarding the target groups.
+	///////////////////////////////////////////////////////////
+
+	public function testHasTargetGroupsIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasTargetGroups()
+		);
+	}
+
+	public function testHasTargetGroups() {
+		$this->addTargetGroupRelation(array());
+
+		$this->assertTrue(
+			$this->fixture->hasTargetGroups()
+		);
+	}
+
+	public function testGetTargetGroupNamesWithNoTargetGroup() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getTargetGroupNames()
+		);
+	}
+
+	public function testGetTargetGroupNamesWithSingleTargetGroup() {
+		$title = 'TEST target group 1';
+		$this->addTargetGroupRelation(array('title' => $title));
+
+		$this->assertEquals(
+			$title,
+			$this->fixture->getTargetGroupNames()
+		);
+	}
+
+	public function testGetTargetGroupNamesWithMultipleTargetGroups() {
+		$titleTargetGroup1 = 'TEST target group 1';
+		$this->addTargetGroupRelation(array('title' => $titleTargetGroup1));
+
+		$titleTargetGroup2 = 'TEST target group 2';
+		$this->addTargetGroupRelation(array('title' => $titleTargetGroup2));
+
+		$this->assertEquals(
+			$titleTargetGroup1.', '.$titleTargetGroup2,
+			$this->fixture->getTargetGroupNames()
+		);
+	}
+
+	public function testGetTargetGroupsAsArrayWithNoTargetGroups() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getTargetGroupsAsArray()
+		);
+	}
+
+	public function testGetTargetGroupsAsArrayWithSingleTargetGroup() {
+		$title = 'TEST target group 1';
+		$this->addTargetGroupRelation(array('title' => $title));
+
+		$this->assertEquals(
+			array($title),
+			$this->fixture->getTargetGroupsAsArray()
+		);
+	}
+
+	public function testGetTargetGroupsAsArrayWithMultipleTargetGroups() {
+		$titleTargetGroup1 = 'TEST target group 1';
+		$this->addTargetGroupRelation(array('title' => $titleTargetGroup1));
+
+		$titleTargetGroup2 = 'TEST target group 2';
+		$this->addTargetGroupRelation(array('title' => $titleTargetGroup2));
+
+		$this->assertEquals(
+			array($titleTargetGroup1, $titleTargetGroup2),
+			$this->fixture->getTargetGroupsAsArray()
 		);
 	}
 }

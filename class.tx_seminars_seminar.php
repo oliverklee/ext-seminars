@@ -2078,7 +2078,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
 				.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
 				.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
-				.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS)
+				.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS),
+			'',
+			SEMINARS_TABLE_TARGET_GROUPS_MM.'.sorting'
 		);
 
 		if ($dbResult) {
@@ -2108,7 +2110,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
 					.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
 					.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS)
+					.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS),
+				'',
+				SEMINARS_TABLE_TARGET_GROUPS_MM.'.sorting'
 			);
 
 			if ($dbResult) {
@@ -2120,6 +2124,19 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $result;
 	}
+
+	/**
+	 * Gets the number of target groups associated with this event.
+	 *
+	 * @return	integer		the number of target groups associated with this
+	 * 						event, will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfTargetGroups() {
+		return $this->getRecordPropertyInteger('target_groups');
+	}	
+
 
 	/**
 	 * Returns the latest date/time to register for a seminar.

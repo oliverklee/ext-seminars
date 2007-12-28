@@ -189,6 +189,21 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setNumberOfPlaces($places) {
 		$this->setRecordPropertyInteger('place', $places);
 	}
+
+	/**
+	 * Sets the number of target groups for this record.
+	 *
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of target groups.
+	 *
+	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param	integer		the number of target groups that are associated with
+	 * 						this event
+	 */
+	public function setNumberOfTargetGroups($targetGroups) {
+		$this->setRecordPropertyInteger('target_groups', $targetGroups);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {
