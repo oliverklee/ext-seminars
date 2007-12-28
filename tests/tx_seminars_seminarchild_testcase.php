@@ -183,7 +183,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->countRecords(
 				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
 			)
-
 		);
 
 		$this->addPlaceRelation(array());
