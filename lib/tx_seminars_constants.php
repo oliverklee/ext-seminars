@@ -22,17 +22,30 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+// the UTF-8 representation of an en dash
+define(UTF8_EN_DASH, chr(0xE2).chr(0x80).chr(0x93));
+// a tabulator
+define('TAB', chr(9));
+// a linefeed
+define('LF', chr(10));
+// a CR-LF combination (the default Unix line ending)
+define(CRLF, chr(0x0D).chr(0x0A));
+// one day in seconds
+define('ONE_DAY', 86400);
+// one week in seconds
+define('ONE_WEEK', 604800);
+
 define('SEMINARS_TABLE_SEMINARS', 'tx_seminars_seminars');
 define('SEMINARS_TABLE_SPEAKERS', 'tx_seminars_speakers');
 define('SEMINARS_TABLE_SITES', 'tx_seminars_sites');
 define('SEMINARS_TABLE_ORGANIZERS', 'tx_seminars_organizers');
 define('SEMINARS_TABLE_ATTENDANCES', 'tx_seminars_attendances');
 define('SEMINARS_TABLE_PAYMENT_METHODS', 'tx_seminars_payment_methods');
-define('SEMINARS_TABLE_EVENTTYPES', 'tx_seminars_event_types');
+define('SEMINARS_TABLE_EVENT_TYPES', 'tx_seminars_event_types');
 define('SEMINARS_TABLE_CHECKBOXES', 'tx_seminars_checkboxes');
 define('SEMINARS_TABLE_LODGINGS', 'tx_seminars_lodgings');
 define('SEMINARS_TABLE_FOODS', 'tx_seminars_foods');
-define('SEMINARS_TABLE_TIMESLOTS', 'tx_seminars_timeslots');
+define('SEMINARS_TABLE_TIME_SLOTS', 'tx_seminars_timeslots');
 define('SEMINARS_TABLE_TARGET_GROUPS', 'tx_seminars_target_groups');
 define('SEMINARS_TABLE_CATEGORIES', 'tx_seminars_categories');
 
@@ -51,5 +64,9 @@ define('SEMINARS_TABLE_ATTENDANCES_FOODS_MM', 'tx_seminars_attendances_foods_mm'
 define('SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM', 'tx_seminars_timeslots_speakers_mm');
 define('SEMINARS_TABLE_TARGET_GROUPS_MM', 'tx_seminars_seminars_target_groups_mm');
 define('SEMINARS_TABLE_CATEGORIES_MM', 'tx_seminars_seminars_categories_mm');
+
+define('SEMINARS_RECORD_TYPE_COMPLETE', 0);
+define('SEMINARS_RECORD_TYPE_TOPIC', 1);
+define('SEMINARS_RECORD_TYPE_DATE', 2);
 
 ?>

@@ -39,6 +39,8 @@ require_once($BACK_PATH.'template.php');
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
+
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_eventslist.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_registrationslist.php');
@@ -141,27 +143,24 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			$this->content .= $this->doc->header($LANG->getLL('title'));
 			$this->content .= $this->doc->spacer(5);
 
-			$databasePlugin =& t3lib_div::makeInstance('tx_seminars_dbplugin');
-			$databasePlugin->setTableNames();
-
 			// define the sub modules that should be available in the tabmenu
 			$this->availableSubModules = array();
 
 			// only show the tabs if the back-end user has access to the
 			// corresponding tables
-			if ($BE_USER->check('tables_select', $databasePlugin->tableSeminars)) {
+			if ($BE_USER->check('tables_select', SEMINARS_TABLE_SEMINARS)) {
 				$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
 			}
 
-			if ($BE_USER->check('tables_select', $databasePlugin->tableAttendances)) {
+			if ($BE_USER->check('tables_select', SEMINARS_TABLE_ATTENDANCES)) {
 				$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
 			}
 
-			if ($BE_USER->check('tables_select', $databasePlugin->tableSpeakers)) {
+			if ($BE_USER->check('tables_select', SEMINARS_TABLE_SPEAKERS)) {
 				$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
 			}
 
-			if ($BE_USER->check('tables_select', $databasePlugin->tableOrganizers)) {
+			if ($BE_USER->check('tables_select', SEMINARS_TABLE_ORGANIZERS)) {
 				$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
 			}
 
@@ -262,13 +261,13 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		// is *no* static template.
 		if (!$result) {
 			$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
-				'(SELECT COUNT(*) AS num FROM '.$configGetter->tableSeminars
+				'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_SEMINARS
 					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-					.'(SELECT COUNT(*) AS num FROM '.$configGetter->tableAttendances
+					.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_ATTENDANCES
 					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-					.'(SELECT COUNT(*) AS num FROM '.$configGetter->tableOrganizers
+					.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_ORGANIZERS
 					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-					.'(SELECT COUNT(*) AS num FROM '.$configGetter->tableSpeakers
+					.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_SPEAKERS
 					.' WHERE deleted=0 AND pid='.$this->id.')'
 			);
 			if ($dbResult) {

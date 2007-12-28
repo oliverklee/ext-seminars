@@ -29,6 +29,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_backendlist.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
@@ -45,7 +46,7 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 	 */
 	function tx_seminars_organizerslist(&$page) {
 		parent::tx_seminars_backendlist($page);
-		$this->tableName = $this->tableOrganizers;
+		$this->tableName = SEMINARS_TABLE_ORGANIZERS;
 	}
 
 	/**

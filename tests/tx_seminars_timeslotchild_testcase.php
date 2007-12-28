@@ -29,8 +29,8 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'tests/fixtures/class.tx_seminars_timeslotchild.php');
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_timeslotchild.php');
 
 class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 	private $fixture;

@@ -31,8 +31,10 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
+
 require_once(t3lib_extMgm::extPath('ameos_formidable').'api/class.tx_ameosformidable.php');
 
 class tx_seminars_event_editor extends tx_seminars_templatehelper {
@@ -157,7 +159,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListEventTypes($items) {
-		return $this->populateList($items, $this->tableEventTypes);
+		return $this->populateList($items, SEMINARS_TABLE_EVENT_TYPES);
 	}
 
  	/**
@@ -170,7 +172,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListLodgings($items) {
-		return $this->populateList($items, $this->tableLodgings);
+		return $this->populateList($items, SEMINARS_TABLE_LODGINGS);
 	}
 
 	/**
@@ -183,7 +185,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListFoods($items) {
-		return $this->populateList($items, $this->tableFoods);
+		return $this->populateList($items, SEMINARS_TABLE_FOODS);
 	}
 
 	/**
@@ -196,7 +198,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListPaymentMethods($items) {
-		return $this->populateList($items, $this->tablePaymentMethods);
+		return $this->populateList($items, SEMINARS_TABLE_PAYMENT_METHODS);
 	}
 
 	/**
@@ -209,7 +211,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListOrganizers($items) {
-		return $this->populateList($items, $this->tableOrganizers);
+		return $this->populateList($items, SEMINARS_TABLE_ORGANIZERS);
 	}
 
 	/**
@@ -222,7 +224,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListPlaces($items) {
-		return $this->populateList($items, $this->tableSites);
+		return $this->populateList($items, SEMINARS_TABLE_SITES);
 	}
 
 	/**
@@ -235,7 +237,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListSpeakers($items) {
-		return $this->populateList($items, $this->tableSpeakers);
+		return $this->populateList($items, SEMINARS_TABLE_SPEAKERS);
 	}
 
 	/**
@@ -248,7 +250,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListCheckboxes($items) {
-		return $this->populateList($items, $this->tableCheckboxes);
+		return $this->populateList($items, SEMINARS_TABLE_CHECKBOXES);
 	}
 
 	/**
@@ -261,7 +263,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function populateListTargetGroups($items) {
-		return $this->populateList($items, $this->tableTargetGroups);
+		return $this->populateList($items, SEMINARS_TABLE_TARGET_GROUPS);
 	}
 
 	/**
@@ -334,7 +336,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		if ($isOkay && $seminarUid) {
 			if (tx_seminars_objectfromdb::recordExists(
 				$seminarUid,
-				$this->tableSeminars)
+				SEMINARS_TABLE_SEMINARS)
 			) {
 				/** Name of the seminar class in case someone subclasses it. */
 				$seminarClassname = t3lib_div::makeInstanceClassName(

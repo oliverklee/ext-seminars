@@ -29,13 +29,10 @@
  * @author		Mario Rimann <typo3-coding@rimann.org>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars')
-	.'class.tx_seminars_place.php');
-require_once(t3lib_extMgm::extPath('oelib')
-	.'tests/fixtures/class.tx_oelib_testingframework.php');
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_place.php');
 
+require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testingframework.php');
 
 class tx_seminars_place_testcase extends tx_phpunit_testcase {
 	private $fixture;

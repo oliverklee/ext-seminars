@@ -31,6 +31,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
 class tx_seminars_place extends tx_seminars_objectfromdb {
@@ -51,7 +52,7 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	 */
 	function tx_seminars_place($sitesUid, $dbResult = null) {
 		$this->init();
-		$this->tableName = $this->tableSites;
+		$this->tableName = SEMINARS_TABLE_SITES;
 
 		if (!$dbResult) {
 			$dbResult = $this->retrieveRecord($sitesUid);

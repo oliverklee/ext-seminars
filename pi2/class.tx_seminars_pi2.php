@@ -30,6 +30,8 @@
  */
 
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
+
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
@@ -67,10 +69,10 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		$result = '';
 
 		switch ($this->piVars['table']) {
-			case $this->tableSeminars:
+			case SEMINARS_TABLE_SEMINARS:
 				$result = $this->createListOfEvents();
 				break;
-			case $this->tableAttendances:
+			case SEMINARS_TABLE_ATTENDANCES:
 				$result = $this->createListOfRegistrations();
 				break;
 			default:
@@ -119,7 +121,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 		if (tx_seminars_objectfromdb::recordExists(
 			$eventUid,
-			$this->tableSeminars)
+			SEMINARS_TABLE_SEMINARS)
 		) {
 			if ($this->canAccessListOfRegistrations()) {
 				$this->setContentTypeForRegistrationLists();
@@ -326,7 +328,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				// Check read access to the registrations table.
 				$result = $BE_USER->check(
 					'tables_select',
-					'tx_seminars_attendances'
+					SEMINARS_TABLE_ATTENDANCES
 				);
 				// Check read access to all pages with registrations from the
 				// selected event.
@@ -335,9 +337,9 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				}
 				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'DISTINCT pid',
-					$this->tableAttendances,
+					SEMINARS_TABLE_ATTENDANCES,
 					'seminar='.$eventUid
-						.$this->enableFields($this->tableAttendances)
+						.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
 				);
 				if ($dbResult) {
 					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
@@ -381,7 +383,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				// Check read access to the events table.
 				$result = $BE_USER->check(
 					'tables_select',
-					'tx_seminars_seminars'
+					SEMINARS_TABLE_SEMINARS
 				);
 				// Check read access to the given page.
 				$pid = intval($this->piVars['pid']);

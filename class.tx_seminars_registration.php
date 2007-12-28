@@ -34,6 +34,8 @@
 
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
 require_once(PATH_t3lib.'class.t3lib_refindex.php');
+
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
 class tx_seminars_registration extends tx_seminars_objectfromdb {
@@ -83,7 +85,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->cObj =& $cObj;
 		$this->init();
-		$this->tableName = $this->tableAttendances;
+		$this->tableName = SEMINARS_TABLE_ATTENDANCES;
 
 	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
 			$this->getDataFromDbResult(
@@ -1197,8 +1199,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		if ($this->hasLodgings()) {
 			$result = $this->getMmRecords(
-				$this->tableLodgings,
-				$this->tableAttendancesLodgingsMM
+				SEMINARS_TABLE_LODGINGS,
+				SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM
 			);
 		}
 
@@ -1229,8 +1231,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		if ($this->hasFoods()) {
 			$result = $this->getMmRecords(
-				$this->tableFoods,
-				$this->tableAttendancesFoodsMM
+				SEMINARS_TABLE_FOODS,
+				SEMINARS_TABLE_ATTENDANCES_FOODS_MM
 			);
 		}
 
@@ -1261,8 +1263,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		if ($this->hasCheckboxes()) {
 			$result = $this->getMmRecords(
-				$this->tableCheckboxes,
-				$this->tableAttendancesCheckboxesMM
+				SEMINARS_TABLE_CHECKBOXES,
+				SEMINARS_TABLE_ATTENDANCES_CHECKBOXES_MM
 			);
 		}
 
@@ -1325,15 +1327,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
 			if ($this->recordData['uid']) {
 				$this->createMmRecords(
-					$this->tableAttendancesLodgingsMM,
+					SEMINARS_TABLE_ATTENDANCES_LODGINGS_MMM,
 					$this->lodgings
 				);
 				$this->createMmRecords(
-					$this->tableAttendancesFoodsMM,
+					SEMINARS_TABLE_ATTENDANCES_FOODS_MM,
 					$this->foods
 				);
 				$this->createMmRecords(
-					$this->tableAttendancesCheckboxesMM,
+					SEMINARS_TABLE_ATTENDANCES_CHECKBOXES_MM,
 					$this->checkboxes
 				);
 			}
@@ -1341,7 +1343,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			// update the reference index
 			$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
 			$referenceIndex->updateRefIndexTable(
-				$this->tableAttendances,
+				SEMINARS_TABLE_ATTENDANCES,
 				$this->getUid()
 			);
 		}

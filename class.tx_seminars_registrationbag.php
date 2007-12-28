@@ -32,9 +32,11 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(PATH_tslib.'class.tslib_content.php');
+
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
-require_once(PATH_tslib.'class.tslib_content.php');
 
 class tx_seminars_registrationbag extends tx_seminars_bag {
 	/** Same as class name */
@@ -56,11 +58,8 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 */
 	function tx_seminars_registrationbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '', $showHiddenRecords = -1) {
 		$this->cObj =& t3lib_div::makeInstance('tslib_cObj');
-		// Although the parent class also calls init(), we need to call it
-		// here already so that $this->tableAttendances is provided.
-		$this->init();
 		parent::tx_seminars_bag(
-			$this->tableAttendances,
+			SEMINARS_TABLE_ATTENDANCES,
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

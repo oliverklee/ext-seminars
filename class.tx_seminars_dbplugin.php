@@ -35,17 +35,10 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-// the UTF-8 representation of an en dash
-DEFINE(UTF8_EN_DASH, chr(0xE2).chr(0x80).chr(0x93));
-// a CR-LF combination (the default Unix line ending)
-DEFINE(CRLF, chr(0x0D).chr(0x0A));
-// one day in seconds
-define('ONE_DAY', 86400);
-// one week in seconds
-define('ONE_WEEK', 604800);
-
 require_once(PATH_t3lib.'class.t3lib_tstemplate.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
+
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configcheck.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_salutationswitcher.php');
 
@@ -176,11 +169,10 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			$this->pi_setPiVarDefaults();
 			$this->pi_loadLL();
 
-			$this->setTableNames();
-			$this->setRecordTypes();
-
 			// unserialize the configuration array
-			$globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
+			$globalConfiguration = unserialize(
+				$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
+			);
 
 			if ($globalConfiguration['enableConfigCheck']) {
 				$configurationCheckClassname = t3lib_div::makeInstanceClassName(
@@ -193,62 +185,6 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 			$this->isInitialized = true;
 		}
-
-		return;
-	}
-
-	/**
-	 * Sets the table names.
-	 *
-	 * @access	protected
-	 */
-	function setTableNames() {
-		$dbPrefix = 'tx_'.$this->extKey.'_';
-
-		$this->tableSeminars       = $dbPrefix.'seminars';
-		$this->tableSpeakers       = $dbPrefix.'speakers';
-		$this->tableSites          = $dbPrefix.'sites';
-		$this->tableOrganizers     = $dbPrefix.'organizers';
-		$this->tableAttendances    = $dbPrefix.'attendances';
-		$this->tablePaymentMethods = $dbPrefix.'payment_methods';
-		$this->tableEventTypes     = $dbPrefix.'event_types';
-		$this->tableCheckboxes     = $dbPrefix.'checkboxes';
-		$this->tableLodgings       = $dbPrefix.'lodgings';
-		$this->tableFoods          = $dbPrefix.'foods';
-		$this->tableTimeslots      = $dbPrefix.'timeslots';
-		$this->tableTargetGroups   = $dbPrefix.'target_groups';
-		$this->tableCategories     = $dbPrefix.'categories';
-
-		$this->tableVipsMM                  = $dbPrefix.'seminars_feusers_mm';
-		$this->tableSpeakersMM              = $dbPrefix.'seminars_speakers_mm';
-		$this->tablePartnersMM              = $dbPrefix.'seminars_speakers_mm_partners';
-		$this->tableTutorsMM                = $dbPrefix.'seminars_speakers_mm_tutors';
-		$this->tableLeadersMM               = $dbPrefix.'seminars_speakers_mm_leaders';
-		$this->tableSitesMM                 = $dbPrefix.'seminars_place_mm';
-		$this->tableSeminarsCheckboxesMM    = $dbPrefix.'seminars_checkboxes_mm';
-		$this->tableAttendancesCheckboxesMM = $dbPrefix.'attendances_checkboxes_mm';
-		$this->tableSeminarsLodgingsMM      = $dbPrefix.'seminars_lodgings_mm';
-		$this->tableAttendancesLodgingsMM   = $dbPrefix.'attendances_lodgings_mm';
-		$this->tableSeminarsFoodsMM         = $dbPrefix.'seminars_foods_mm';
-		$this->tableAttendancesFoodsMM      = $dbPrefix.'attendances_foods_mm';
-		$this->tableTimeslotsSpeakersMM     = $dbPrefix.'timeslots_speakers_mm';
-		$this->tableTargetGroupsMM          = $dbPrefix.'seminars_target_groups_mm';
-		$this->tableCategoriesMM            = $dbPrefix.'seminars_categories_mm';
-
-		return;
-	}
-
-	/**
-	 * Sets the record types.
-	 *
-	 * @access	private
-	 */
-	function setRecordTypes() {
-		$this->recordTypeComplete	= 0;
-		$this->recordTypeTopic		= 1;
-		$this->recordTypeDate		= 2;
-
-		return;
 	}
 
 	/**
@@ -523,8 +459,6 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		if ($this->configurationCheck) {
 			$this->configurationCheck->setFlavor($flavor);
 		}
-
-		return;
 	}
 
 	/**
@@ -557,8 +491,6 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		if ($this->configurationCheck) {
 			$this->configurationCheck->setErrorMessage($message);
 		}
-
-		return;
 	}
 
 	/**

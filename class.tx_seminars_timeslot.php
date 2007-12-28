@@ -31,6 +31,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speakerbag.php');
 
@@ -51,8 +52,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function tx_seminars_timeslot($timeslotUid, $dbResult = null) {
-		$this->setTableNames();
-		$this->tableName = $this->tableTimeslots;
+		$this->tableName = SEMINARS_TABLE_TIME_SLOTS;
 
 		if (!$dbResult) {
 			$dbResult = $this->retrieveRecord($timeslotUid);
@@ -79,7 +79,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid_foreign',
-			$this->tableTimeslotsSpeakersMM,
+			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM,
 			'uid_local='.$this->getUid()
 		);
 
@@ -107,9 +107,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 			'tx_seminars_speakerbag'
 		);
 		$speakerBag =& new $speakerBagClassname(
-			$this->tableTimeslotsSpeakersMM.'.uid_local='.$this->getUid()
+			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM.'.uid_local='.$this->getUid()
 				.' AND uid=uid_foreign',
-			$this->tableTimeslotsSpeakersMM
+			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM
 		);
 
 		while ($speaker =& $speakerBag->getCurrent()) {
@@ -138,8 +138,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			$this->tableSites,
-			'uid='.$this->getPlace().$this->enableFields($this->tableSites)
+			SEMINARS_TABLE_SITES,
+			'uid='.$this->getPlace().$this->enableFields(SEMINARS_TABLE_SITES)
 		);
 
 		if ($dbResult) {

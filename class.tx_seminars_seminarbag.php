@@ -32,6 +32,7 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 
@@ -72,11 +73,8 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		$showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
 	) {
-		// Although the parent class also calls init(), we need to call it
-		// here already so that $this->tableSeminars is provided.
-		$this->init();
 		parent::tx_seminars_bag(
-			$this->tableSeminars,
+			SEMINARS_TABLE_SEMINARS,
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,
@@ -157,7 +155,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 				',',
 				$GLOBALS['TYPO3_DB']->fullQuoteArray(
 					$countries,
-					$this->tableSites
+					SEMINARS_TABLE_SITES
 				)
 			);
 
@@ -165,13 +163,13 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 			// countries set and if there are events that have those places
 			// set (looked up in the m:n table).
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				$this->tableSeminars.'.uid',
-				$this->tableSeminars
-					.' LEFT JOIN '.$this->tableSitesMM.' ON '
-					.$this->tableSeminars.'.uid='.$this->tableSitesMM.'.uid_local'
-					.' LEFT JOIN '.$this->tableSites.' ON '
-					.$this->tableSitesMM.'.uid_foreign='.$this->tableSites.'.uid',
-				$this->tableSites.'.country IN('.$countryIsoCodes.')'
+				SEMINARS_TABLE_SEMINARS.'.uid',
+				SEMINARS_TABLE_SEMINARS
+					.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM.' ON '
+					.SEMINARS_TABLE_SEMINARS.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_local'
+					.' LEFT JOIN '.SEMINARS_TABLE_SITES.' ON '
+					.SEMINARS_TABLE_SITES_MM.'.uid_foreign='.SEMINARS_TABLE_SITES.'.uid',
+				SEMINARS_TABLE_SITES.'.country IN('.$countryIsoCodes.')'
 			);
 
 			// Adds the additional part of the query only if there was at least
@@ -183,7 +181,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 				}
 				if (!empty($seminarUids)) {
 					$seminarUidsWithThisCountry = implode(',', $seminarUids);
-					$result = ' AND '.$this->tableSeminars
+					$result = ' AND '.SEMINARS_TABLE_SEMINARS
 						.'.uid IN('.$seminarUidsWithThisCountry.')';
 				}
 			}
@@ -225,7 +223,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		}
 
 		if (!empty($sanitizedEventTypeUids)) {
-			$result = ' AND '.$this->tableSeminars.'.event_type IN('
+			$result = ' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN('
 				. implode(',', $sanitizedEventTypeUids).')';
 		}
 
@@ -265,10 +263,10 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 				',',
 				$GLOBALS['TYPO3_DB']->fullQuoteArray(
 					$languages,
-					$this->tableSeminars
+					SEMINARS_TABLE_SEMINARS
 				)
 			);
-			$result = ' AND '.$this->tableSeminars.'.language IN('
+			$result = ' AND '.SEMINARS_TABLE_SEMINARS.'.language IN('
 				.$languageUids.')';
 		}
 
@@ -311,7 +309,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 			// selected in any event record (looked up in the m:n table).
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'uid_local',
-				$this->tableSitesMM,
+				SEMINARS_TABLE_SITES_MM,
 				'uid_foreign IN('.implode(',', $sanitizedPlaceUids).')'
 			);
 
@@ -324,8 +322,8 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 				}
 				if (!empty($seminarUids)) {
 					$seminarUidsWithThisPlace = implode(',', $seminarUids);
-					$result = ' AND '.$this->tableSeminars
-						.'.uid IN('.$seminarUidsWithThisPlace.')';	
+					$result = ' AND '.SEMINARS_TABLE_SEMINARS
+						.'.uid IN('.$seminarUidsWithThisPlace.')';
 				}
 			}
 		}
@@ -367,7 +365,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 			',',
 			$GLOBALS['TYPO3_DB']->fullQuoteArray(
 				$cities,
-				$this->tableSites
+				SEMINARS_TABLE_SITES
 			)
 		);
 
@@ -375,13 +373,13 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		// cities set and if there are events that have those places
 		// set (looked up in the m:n table).
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$this->tableSeminars.'.uid',
-			$this->tableSeminars
-				.' LEFT JOIN '.$this->tableSitesMM.' ON '
-				.$this->tableSeminars.'.uid='.$this->tableSitesMM.'.uid_local'
-				.' LEFT JOIN '.$this->tableSites.' ON '
-				.$this->tableSitesMM.'.uid_foreign='.$this->tableSites.'.uid',
-			$this->tableSites.'.city IN('.$citiesSanitized.')'
+			SEMINARS_TABLE_SEMINARS.'.uid',
+			SEMINARS_TABLE_SEMINARS
+				.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM.' ON '
+				.SEMINARS_TABLE_SEMINARS.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_local'
+				.' LEFT JOIN '.SEMINARS_TABLE_SITES.' ON '
+				.SEMINARS_TABLE_SITES_MM.'.uid_foreign='.SEMINARS_TABLE_SITES.'.uid',
+			SEMINARS_TABLE_SITES.'.city IN('.$citiesSanitized.')'
 		);
 
 		// Adds the additional part of the query only if there was at least
@@ -393,7 +391,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 			}
 			if (!empty($seminarUids)) {
 				$seminarUidsWithThisCity = implode(',', $seminarUids);
-				$result = ' AND '.$this->tableSeminars
+				$result = ' AND '.SEMINARS_TABLE_SEMINARS
 					.'.uid IN('.$seminarUidsWithThisCity.')';
 			}
 		}

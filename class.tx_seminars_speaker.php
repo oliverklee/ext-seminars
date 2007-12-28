@@ -31,6 +31,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
 class tx_seminars_speaker extends tx_seminars_objectfromdb {
@@ -51,7 +52,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 */
 	function tx_seminars_speaker($speakerUid, $dbResult = null) {
 		$this->init();
-		$this->tableName = $this->tableSpeakers;
+		$this->tableName = SEMINARS_TABLE_SPEAKERS;
 
 		if (!$dbResult) {
 			$dbResult = $this->retrieveRecord($speakerUid);
@@ -62,8 +63,6 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
 			);
 		}
-
-		return;
 	}
 
 	/**

@@ -34,6 +34,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
@@ -83,13 +84,17 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function processDatamap_afterDatabaseOperations($status, $table, $uid, &$fieldArray, &$pObj) {
+	function processDatamap_afterDatabaseOperations(
+		$status, $table, $uid, &$fieldArray, &$pObj
+	) {
 		// Translates new UIDs.
 		if ($status == 'new') {
 			$uid = $pObj->substNEWwithIDs[$uid];
 		}
 
-		if (($table == $this->tableSeminars) || ($table == $this->tableTimeslots)) {
+		if (($table == SEMINARS_TABLE_SEMINARS)
+			|| ($table == SEMINARS_TABLE_TIME_SLOTS)
+		) {
 			$this->tceMainFieldArrays[$table][$uid] = $fieldArray;
 		}
 	}
@@ -100,7 +105,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 * @access	protected
 	 */
 	function processTimeSlots() {
-		$table = $this->tableTimeslots;
+		$table = SEMINARS_TABLE_TIME_SLOTS;
 
 		if (
 			isset($this->tceMainFieldArrays[$table])
@@ -118,7 +123,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 * @access	protected
 	 */
 	function processEvents() {
-		$table = $this->tableSeminars;
+		$table = SEMINARS_TABLE_SEMINARS;
 
 		if (
 			isset($this->tceMainFieldArrays[$table])

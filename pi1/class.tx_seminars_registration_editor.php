@@ -31,7 +31,9 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
+
 require_once(t3lib_extMgm::extPath('ameos_formidable').'api/class.tx_ameosformidable.php');
 require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -601,7 +603,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @param	string		the page UID
 	 * @param	boolean		true if GET parameters should be added to the URL,
-	 * 						otherwise false 
+	 * 						otherwise false
 	 *
 	 * @return	string		complete URL of the FE page with a message (or null
 	 * 						if the confirmation page has not been submitted yet)
@@ -652,7 +654,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		if ($this->seminar->hasPaymentMethods()) {
 			$result = $this->populateList(
 				$items,
-				$this->tablePaymentMethods,
+				SEMINARS_TABLE_PAYMENT_METHODS,
 				'uid IN ('.$this->seminar->getPaymentMethodsUids().')',
 				true
 			);

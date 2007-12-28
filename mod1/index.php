@@ -38,6 +38,8 @@ $LANG->includeLLFile('EXT:seminars/mod1/locallang.xml');
 
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(PATH_t3lib.'class.t3lib_page.php');
+
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
@@ -46,8 +48,6 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuil
 
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
-
-define('LF', chr(10));
 
 class tx_seminars_module1 extends t3lib_SCbase {
 	var $pageinfo;
@@ -95,15 +95,11 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	function main() {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 
-		// Define the Database-Tables used in this class.
-		// They are defined also in the dbplugin class, but cannot be read from here.
-		$this->tableSeminars = 'tx_seminars_seminars';
-		$this->tableAttendances = 'tx_seminars_attendances';
 		$this->tableUsers = 'fe_users';
 
 		// Access check!
 		// The page will show only if there is a valid page and if this page
-		//may be viewed by the user
+		// may be viewed by the user
 		$this->pageinfo = t3lib_BEfunc::readPageAccess(
 			$this->id,
 			$this->perms_clause
@@ -111,9 +107,9 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$access = is_array($this->pageinfo) ? 1 : 0;
 
 		$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
-			'(SELECT COUNT(*) AS num FROM '.$this->tableSeminars
+			'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_SEMINARS
 				.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-				.'(SELECT COUNT(*) AS num FROM '.$this->tableAttendances
+				.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_ATTENDANCES
 				.' WHERE deleted=0 AND pid='.$this->id.')'
 		);
 		if ($dbResult) {
@@ -250,8 +246,6 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		// initialize the localization functionality
 		global $LANG;
 
-		$tableSeminars = 'tx_seminars_seminars';
-
 		$result = '';
 
 		$result .= '<h3>'
@@ -264,7 +258,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		while ($currentSeminar =& $seminarBag->getCurrent()) {
 			$result .= '<h4>'.$currentSeminar->getTitleAndDate().'</h4>';
-			$seminarQuery = $this->tableAttendances.'.seminar='
+			$seminarQuery = SEMINARS_TABLE_ATTENDANCES.'.seminar='
 				.$currentSeminar->getUid();
 
 			$result .= $LANG->getLL('label_all').'<br />'

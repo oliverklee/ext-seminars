@@ -29,15 +29,13 @@
  * @author		Mario Rimann <typo3-coding@rimann.org>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('oelib')
-	.'tests/fixtures/class.tx_oelib_testingframework.php');
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testingframework.php');
 
 class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 	private $fixture;
-
-	/** our instance of the testing framework */
 	private $testingFramework;
 
 	protected function setUp() {
@@ -94,7 +92,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$this->fixture->getAdditionalQueryForPlace(
-				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
+				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;')
 			)
 		);
 	}
@@ -108,14 +106,14 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 	public function testGetAdditionalQueryForEventTypeWithOneValidEventType() {
 		$this->assertEquals(
-			' AND tx_seminars_seminars.event_type IN(3)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(3)',
 			$this->fixture->getAdditionalQueryForEventType(array(3))
 		);
 	}
 
 	public function testGetAdditionalQueryForEventTypeWithTwoValidEventTypes() {
 		$this->assertEquals(
-			' AND tx_seminars_seminars.event_type IN(1,42)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(1,42)',
 			$this->fixture->getAdditionalQueryForEventType(array(1, 42))
 		);
 	}
@@ -126,9 +124,9 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		// value for the event type, the returned string will not be empty as the
 		// evil data has an integer value of zero.
 		$this->assertEquals(
-			' AND tx_seminars_seminars.event_type IN(0)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(0)',
 			$this->fixture->getAdditionalQueryForEventType(
-				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
+				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;')
 			)
 		);
 	}
@@ -138,7 +136,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		// field in the database is set to zero by default. So zero is an allowed
 		// value for the event type.
 		$this->assertEquals(
-			' AND tx_seminars_seminars.event_type IN(0)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(0)',
 			$this->fixture->getAdditionalQueryForEventType(array(0))
 		);
 	}
@@ -152,14 +150,14 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 	public function testGetAdditionalQueryForLanguageWithOneValidLanguage() {
 		$this->assertEquals(
-			' AND tx_seminars_seminars.language IN(\'de\')',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.language IN(\'de\')',
 			$this->fixture->getAdditionalQueryForLanguage(array('de'))
 		);
 	}
 
 	public function testGetAdditionalQueryForLanguageWithTwoValidLanguages() {
 		$this->assertEquals(
-			' AND tx_seminars_seminars.language IN(\'de\',\'en\')',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.language IN(\'de\',\'en\')',
 			$this->fixture->getAdditionalQueryForLanguage(array('de', 'en'))
 		);
 	}
@@ -168,10 +166,10 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		// We're just checking whether the evil data is escaped. The list will
 		// be empty, but the data in the database will not be harmed.
 		$this->assertEquals(
-			' AND tx_seminars_seminars.language IN(\'; DELETE FROM '
-				.'tx_seminars_seminars WHERE 1=1;\')',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.language IN(\'; DELETE FROM '
+				.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;\')',
 			$this->fixture->getAdditionalQueryForLanguage(
-				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
+				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;')
 			)
 		);
 	}
@@ -189,14 +187,14 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 	public function testGetAdditionalQueryForCountryWithOneValidCountry() {
 		$this->assertEquals(
-			' AND tx_seminars_seminars.uid IN(EVENT_UID)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN(EVENT_UID)',
 			$this->fixture->getAdditionalQueryForCountry(array('ch'))
 		);
 	}
 
 	public function testGetAdditionalQueryForCountryWithMultipleValidCountries() {
 		$this->assertEquals(
-			' AND tx_seminars_seminars.uid IN(EVENT_UID, SECOND_EVENT_UID)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN(EVENT_UID, SECOND_EVENT_UID)',
 			$this->fixture->getAdditionalQueryForCountry(array('ch', 'de'))
 		);
 	}
@@ -205,27 +203,27 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$this->fixture->getAdditionalQueryForCountry(
-				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
+				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;')
 			)
 		);
 	}
 
 	public function testGetAdditionalQueryForCityWithOneCity() {
 		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
+			SEMINARS_TABLE_SEMINARS
 		);
 		$placeUid =	$this->testingFramework->createRecord(
-			'tx_seminars_sites',
+			SEMINARS_TABLE_SITES,
 			array('city' => 'Basel')
 		);
 		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_place_mm',
+			SEMINARS_TABLE_SITES_MM,
 			$eventUid,
 			$placeUid
 		);
 
 		$this->assertEquals(
-			' AND tx_seminars_seminars.uid IN('.$eventUid.')',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForCity(
 				array('Basel')
 			)
@@ -234,20 +232,20 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 	public function testGetAdditionalQueryForCityWithTwoCities() {
 		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
+			SEMINARS_TABLE_SEMINARS
 		);
 		$placeUid =	$this->testingFramework->createRecord(
-			'tx_seminars_sites',
+			SEMINARS_TABLE_SITES,
 			array('city' => 'Basel')
 		);
 		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_place_mm',
+			SEMINARS_TABLE_SITES_MM,
 			$eventUid,
 			$placeUid
 		);
 
 		$this->assertEquals(
-			' AND tx_seminars_seminars.uid IN('.$eventUid.')',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForCity(
 				array('Basel', 'Zürich')
 			)
@@ -267,7 +265,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$this->fixture->getAdditionalQueryForCity(
-				array('; DELETE FROM tx_seminars_seminars WHERE 1=1;')
+				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;')
 			)
 		);
 	}

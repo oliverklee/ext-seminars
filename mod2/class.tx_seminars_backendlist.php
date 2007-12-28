@@ -29,12 +29,9 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 
-define('TAB', chr(9));
-define('LF', chr(10));
-
-class tx_seminars_backendlist extends tx_seminars_dbplugin {
+class tx_seminars_backendlist {
 	/** the table we're working on */
 	var $tableName;
 
@@ -49,7 +46,6 @@ class tx_seminars_backendlist extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function tx_seminars_backendlist(&$page) {
-		$this->setTableNames();
 		$this->page =& $page;
 	}
 

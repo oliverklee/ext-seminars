@@ -31,6 +31,7 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
@@ -245,7 +246,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		// cannot use a class function when using a variable as class name.
 		return tx_seminars_objectfromdb::recordExists(
 			$seminarUid,
-			$this->tableSeminars
+			SEMINARS_TABLE_SEMINARS
 		);
 	}
 
@@ -267,7 +268,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 		if (!tx_seminars_objectfromdb::recordExists(
 				$seminarUid,
-				$this->tableSeminars
+				SEMINARS_TABLE_SEMINARS
 			)
 		) {
 			$message = $this->pi_getLL('message_wrongSeminarNumber');
@@ -464,13 +465,13 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	function removeRegistration($registrationUid, &$plugin) {
 		if (tx_seminars_objectfromdb::recordExists(
 				$registrationUid,
-				$this->tableAttendances
+				SEMINARS_TABLE_ATTENDANCES
 		)){
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
-				$this->tableAttendances,
-				$this->tableAttendances.'.uid='.$registrationUid
-					.$this->enableFields($this->tableAttendances)
+				SEMINARS_TABLE_ATTENDANCES,
+				SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid
+					.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
 			);
 
 			if ($dbResult) {
@@ -484,8 +485,8 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 				if ($this->registration->getUser() == $this->getFeUserUid()) {
 					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-						$this->tableAttendances,
-						$this->tableAttendances.'.uid='.$registrationUid,
+						SEMINARS_TABLE_ATTENDANCES,
+						SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid,
 						array(
 							'hidden' => 1,
 							'tstamp' => time()
@@ -539,7 +540,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			) {
 				if ($registration->getSeats() <= $vacancies) {
 					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-						$this->tableAttendances,
+						SEMINARS_TABLE_ATTENDANCES,
 						'uid='.$registration->getUid(),
 						array(
 							'registration_queue' => 0

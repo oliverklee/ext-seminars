@@ -32,6 +32,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speaker.php');
 
@@ -54,11 +55,8 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 	 * @access	public
 	 */
 	function tx_seminars_speakerbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
-		// Although the parent class also calls init(), we need to call it
-		// here already so that $this->tableSpeakers is provided.
-		$this->init();
 		parent::tx_seminars_bag(
-			$this->tableSpeakers,
+			SEMINARS_TABLE_SPEAKERS,
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

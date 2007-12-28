@@ -33,9 +33,8 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once(
-	t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php'
-);
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 
 final class tx_seminars_registrationchild extends tx_seminars_registration {
 	public $prefixId = 'tx_seminars_registrationchild';
@@ -52,7 +51,7 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 		$this->recordData = array(
 			'registration_queue' => 0
 		);
-		$this->tableName = $this->tableAttendances;
+		$this->tableName = SEMINARS_TABLE_ATTENDANCES;
 	}
 
 	/**

@@ -29,6 +29,7 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
@@ -79,8 +80,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	var $allCities = array();
 
 	/**
-	 * list of field names (as keys) by which we can sort plus the
-	 * corresponding SQL sort criteria (as value)
+	 * List of field names (as keys) by which we can sort plus the
+	 * corresponding SQL sort criteria (as value).
+	 *
+	 * We cannot use the database table name constants here because default
+	 * values for member variable don't allow for compound expression.
 	 */
 	var $orderByList = array(
 		// Sort by title.
@@ -317,7 +321,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$now = $GLOBALS['SIM_EXEC_TIME'];
 		/** Prefix the column name with the table name so that the query also
 		 * works with multiple tables. */
-		$tablePrefix = $this->tableSeminars.'.';
+		$tablePrefix = SEMINARS_TABLE_SEMINARS.'.';
 
 		// Only show full event records(0) and event dates(2), but no event
 		// topics(1).
@@ -647,7 +651,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Reads the place(s) from the event record. The country will be
 			// read from the place record later.
-			$placeUids = $currentEvent->getRelatedMmRecordUids($this->tableSitesMM);
+			$placeUids = $currentEvent->getRelatedMmRecordUids(
+				SEMINARS_TABLE_SITES_MM
+			);
 			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
 
 			// Reads the event type from the event record.
@@ -903,7 +909,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->getConfValueString('pidList'),
 			$this->getConfValueInteger('recursive')
 		);
-		$queryWhere = $this->tableSeminars.'.pid IN ('.$pidList.')';
+		$queryWhere = SEMINARS_TABLE_SEMINARS.'.pid IN ('.$pidList.')';
 
 		// Time-frames and hiding canceled events doesn't make sense for the
 		// topic list.
@@ -915,8 +921,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		switch ($whatToDisplay) {
 			case 'topic_list':
-				$queryWhere .= ' AND '.$this->tableSeminars.'.object_type='
-					.$this->recordTypeTopic;
+				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.object_type='
+					.SEMINARS_RECORD_TYPE_TOPIC;
 				$this->readSubpartsToHide(
 					'uid,accreditation_number,speakers,date,time,place,'
 						.'organizers,vacancies,registration',
@@ -929,10 +935,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 				break;
 			case 'my_events':
-				$additionalTables = $this->tableSeminars;
-				$queryWhere .= ' AND '.$this->tableSeminars.'.uid='
-					.$this->tableAttendances.'.seminar AND '
-					.$this->tableAttendances.'.user='
+				$additionalTables = SEMINARS_TABLE_SEMINARS;
+				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
+					.SEMINARS_TABLE_ATTENDANCES.'.seminar AND '
+					.SEMINARS_TABLE_ATTENDANCES.'.user='
 					.$this->registrationManager->getFeUserUid();
 				break;
 			case 'my_vip_events':
@@ -947,14 +953,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					// The current user is not listed as a default VIP for all
 					// events. Change the query to show only events where the
 					// current user is manually added as a VIP.
-					$additionalTables = $this->tableVipsMM;
-					$queryWhere .= ' AND '.$this->tableSeminars.'.uid='
-						.$this->tableVipsMM.'.uid_local AND '.$this->tableVipsMM
+					$additionalTables = SEMINARS_TABLE_VIPS_MM;
+					$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
+						.SEMINARS_TABLE_VIPS_MM.'.uid_local AND '.SEMINARS_TABLE_VIPS_MM
 						.'.uid_foreign='.$this->registrationManager->getFeUserUid();
 				}
 				break;
 			case 'my_entered_events':
-				$queryWhere .= ' AND '.$this->tableSeminars.'.owner_feuser='
+				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.owner_feuser='
 					.$this->getFeUserUid();
 				break;
 			case 'events_next_day':
@@ -1038,9 +1044,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createSingleView() {
-		$this->internal['currentTable'] = $this->tableSeminars;
+		$this->internal['currentTable'] = SEMINARS_TABLE_SEMINARS;
 		$this->internal['currentRow'] = $this->pi_getRecord(
-			$this->tableSeminars,
+			SEMINARS_TABLE_SEMINARS,
 			$this->showUid
 		);
 
@@ -1330,8 +1336,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			// Hide unneeded sections for topic records.
-			if ($this->seminar->getRecordPropertyInteger('object_type') ==
-				$this->recordTypeTopic) {
+			if ($this->seminar->getRecordPropertyInteger('object_type')
+				== SEMINARS_RECORD_TYPE_TOPIC
+			) {
 				$this->readSubpartsToHide(
 					'accreditation_number,date,time,place,room,speakers,'
 						.'organizers,vacancies,deadline_registration,'
@@ -1541,8 +1548,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($this->internal['res_count']) {
 			// If we are on a topic record, overwrite the label with an
 			// alternative text.
-			if (($this->seminar->getRecordType() == $this->recordTypeComplete)
-				|| ($this->seminar->getRecordType() == $this->recordTypeTopic)
+			if (($this->seminar->getRecordType() == SEMINARS_RECORD_TYPE_COMPLETE)
+				|| ($this->seminar->getRecordType() == SEMINARS_RECORD_TYPE_TOPIC)
 			) {
 				$this->setMarkerContent(
 					'label_list_otherdates',
@@ -1640,7 +1647,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if (tx_seminars_objectfromdb::recordExists(
 			$seminarUid,
-			$this->tableSeminars)
+			SEMINARS_TABLE_SEMINARS)
 		) {
 			/** Name of the seminar class in case someone subclasses it. */
 			$seminarClassname = t3lib_div::makeInstanceClassName(
@@ -1674,12 +1681,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createRegistration($registrationUid) {
 		$result = false;
 
-		if (tx_seminars_objectfromdb::recordExists($registrationUid, $this->tableAttendances)) {
+		if (tx_seminars_objectfromdb::recordExists(
+			$registrationUid, SEMINARS_TABLE_ATTENDANCES)
+		) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
-				$this->tableAttendances,
-				$this->tableAttendances.'.uid='.$registrationUid
-					.$this->enableFields($this->tableAttendances)
+				SEMINARS_TABLE_ATTENDANCES,
+				SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid
+					.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
 			);
 			/** Name of the registration class in case someone subclasses it. */
 			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
@@ -2249,8 +2258,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'tx_seminars_registrationbag'
 		);
 		$registrationBag =& new $registrationBagClassname(
-			$this->tableAttendances.'.seminar='.$this->seminar->getUid()
-				.' AND '.$this->tableAttendances.'.registration_queue=0',
+			SEMINARS_TABLE_ATTENDANCES.'.seminar='.$this->seminar->getUid()
+				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.registration_queue=0',
 			'',
 			'',
 			'crdate'
@@ -2353,7 +2362,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createUnregistrationForm() {
-		$registrationEditorClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration_editor');
+		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registration_editor'
+		);
 		$registrationEditor =& new $registrationEditorClassname($this);
 
 		$result = $registrationEditor->_render();
@@ -2388,10 +2399,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = '';
 
 		$mmTables = array(
-			'speakers' => $this->tableSpeakersMM,
-			'partners' => $this->tablePartnersMM,
-			'tutors' => $this->tableTutorsMM,
-			'leaders' => $this->tableLeadersMM
+			'speakers' => SEMINARS_TABLE_SPEAKERS_MM,
+			'partners' => SEMINARS_TABLE_PARTNERS_MM,
+			'tutors' => SEMINARS_TABLE_TUTORS_MM,
+			'leaders' => SEMINARS_TABLE_LEADERS_MM
 		);
 
 		if (!empty($searchWords)) {
@@ -2400,7 +2411,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			foreach ($keywords as $currentKeyword) {
 				$currentPreparedKeyword = $this->escapeAndTrimSearchWord(
 					$currentKeyword,
-					$this->tableSeminars
+					SEMINARS_TABLE_SEMINARS
 				);
 
 				// Only search for words with a certain length.
@@ -2409,7 +2420,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 					// Look up the field in the seminar record.
 					foreach ($this->searchFieldList['seminars'] as $field) {
-						$whereParts[] = $this->tableSeminars.'.'.$field
+						$whereParts[] = SEMINARS_TABLE_SEMINARS.'.'.$field
 							.' LIKE \'%'.$currentPreparedKeyword.'%\'';
 					}
 
@@ -2418,13 +2429,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					// otherwise get it directly.
 					foreach ($this->searchFieldList['seminars_topic'] as $field) {
 						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableSeminars.' s1,'
-								.$this->tableSeminars.' s2'
+							.'SELECT * FROM '.SEMINARS_TABLE_SEMINARS.' s1,'
+								.SEMINARS_TABLE_SEMINARS.' s2'
 								.' WHERE (s1.'.$field.' LIKE \'%'
 								.$currentPreparedKeyword.'%\''
 								.' AND ((s1.uid=s2.topic AND s2.object_type=2) '
 								.' OR (s1.uid=s2.uid AND s1.object_type!=2)))'
-								.' AND s2.uid='.$this->tableSeminars.'.uid'
+								.' AND s2.uid='.SEMINARS_TABLE_SEMINARS.'.uid'
 						.')';
 					}
 
@@ -2433,14 +2444,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					foreach ($mmTables as $key => $currentMmTable) {
 						foreach ($this->searchFieldList[$key] as $field) {
 							$whereParts[] = 'EXISTS ('
-								.'SELECT * FROM '.$this->tableSpeakers.', '
+								.'SELECT * FROM '.SEMINARS_TABLE_SPEAKERS.', '
 										.$currentMmTable
-									.' WHERE '.$this->tableSpeakers.'.'.$field
+									.' WHERE '.SEMINARS_TABLE_SPEAKERS.'.'.$field
 										.' LIKE \'%'.$currentPreparedKeyword.'%\''
 									.' AND '.$currentMmTable.'.uid_local='
-										.$this->tableSeminars.'.uid '
+										.SEMINARS_TABLE_SEMINARS.'.uid '
 									.'AND '.$currentMmTable.'.uid_foreign='
-										.$this->tableSpeakers.'.uid'
+										.SEMINARS_TABLE_SPEAKERS.'.uid'
 							.')';
 						}
 					}
@@ -2448,14 +2459,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					// For sites, we have real m:n relations, too.
 					foreach ($this->searchFieldList['places'] as $field) {
 						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableSites.', '
-								.$this->tableSitesMM
-							.' WHERE '.$this->tableSites.'.'.$field
+							.'SELECT * FROM '.SEMINARS_TABLE_SITES.', '
+								.SEMINARS_TABLE_SITES_MM
+							.' WHERE '.SEMINARS_TABLE_SITES.'.'.$field
 								.' LIKE \'%'.$currentPreparedKeyword.'%\''
-							.' AND '.$this->tableSitesMM.'.uid_local='
-								.$this->tableSeminars.'.uid '
-							.'AND '.$this->tableSitesMM.'.uid_foreign='
-								.$this->tableSites.'.uid'
+							.' AND '.SEMINARS_TABLE_SITES_MM.'.uid_local='
+								.SEMINARS_TABLE_SEMINARS.'.uid '
+							.'AND '.SEMINARS_TABLE_SITES_MM.'.uid_foreign='
+								.SEMINARS_TABLE_SITES.'.uid'
 						.')';
 					}
 
@@ -2469,25 +2480,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						$this->configGetter->getConfValueString('eventType'),
 						$currentPreparedKeyword
 					) !== false) {
-						$eventTypeMatcher = ' OR ('.$this->tableSeminars.'.event_type=0 '
-											.' AND '.$this->tableSeminars.'.object_type!=2)'
+						$eventTypeMatcher = ' OR ('.SEMINARS_TABLE_SEMINARS.'.event_type=0 '
+											.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!=2)'
 											.' OR (s1.event_type=0 AND s1.uid=s2.topic '
 											.' AND s2.object_type=2 AND s2.uid='
-											.$this->tableSeminars.'.uid)';
+											.SEMINARS_TABLE_SEMINARS.'.uid)';
 					}
 
 					// For event types, we have a single foreign key.
 					foreach ($this->searchFieldList['event_types'] as $field) {
 						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableEventTypes
-								.', '.$this->tableSeminars.' s1, '
-								.$this->tableSeminars.' s2'
-							.' WHERE ('.$this->tableEventTypes.'.'.$field
+							.'SELECT * FROM '.SEMINARS_TABLE_EVENT_TYPES
+								.', '.SEMINARS_TABLE_SEMINARS.' s1, '
+								.SEMINARS_TABLE_SEMINARS.' s2'
+							.' WHERE ('.SEMINARS_TABLE_EVENT_TYPES.'.'.$field
 								.' LIKE \'%'.$currentPreparedKeyword.'%\''
-							.' AND '.$this->tableEventTypes.'.uid=s1.event_type'
+							.' AND '.SEMINARS_TABLE_EVENT_TYPES.'.uid=s1.event_type'
 							.' AND ((s1.uid=s2.topic AND s2.object_type=2) '
 								.'OR (s1.uid=s2.uid AND s1.object_type!=2))'
-							.' AND s2.uid='.$this->tableSeminars.'.uid)'
+							.' AND s2.uid='.SEMINARS_TABLE_SEMINARS.'.uid)'
 							.$eventTypeMatcher
 						.')';
 					}
@@ -2495,25 +2506,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					// For organizers, we have a comma-separated list of UIDs.
 					foreach ($this->searchFieldList['organizers'] as $field) {
 						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableOrganizers
-								.' WHERE '.$this->tableOrganizers.'.'.$field
+							.'SELECT * FROM '.SEMINARS_TABLE_ORGANIZERS
+								.' WHERE '.SEMINARS_TABLE_ORGANIZERS.'.'.$field
 									.' LIKE \'%'.$currentPreparedKeyword.'%\''
-								.' AND FIND_IN_SET('.$this->tableOrganizers.'.uid,'
-									.$this->tableSeminars.'.organizers)'
+								.' AND FIND_IN_SET('.SEMINARS_TABLE_ORGANIZERS.'.uid,'
+									.SEMINARS_TABLE_SEMINARS.'.organizers)'
 						.')';
 					}
 
 					// For target groups, we have real m:n relations, too.
 					foreach ($this->searchFieldList['target_groups'] as $field) {
 						$whereParts[] = 'EXISTS ('
-							.'SELECT * FROM '.$this->tableTargetGroups.', '
-								.$this->tableTargetGroupsMM
-							.' WHERE '.$this->tableTargetGroups.'.'.$field
+							.'SELECT * FROM '.SEMINARS_TABLE_TARGET_GROUPS.', '
+								.SEMINARS_TABLE_TARGET_GROUPS_MM
+							.' WHERE '.SEMINARS_TABLE_TARGET_GROUPS.'.'.$field
 								.' LIKE \'%'.$currentPreparedKeyword.'%\''
-							.' AND '.$this->tableTargetGroupsMM.'.uid_local='
-								.$this->tableSeminars.'.uid '
-							.'AND '.$this->tableTargetGroupsMM.'.uid_foreign='
-								.$this->tableTargetGroups.'.uid'
+							.' AND '.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='
+								.SEMINARS_TABLE_SEMINARS.'.uid '
+							.'AND '.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign='
+								.SEMINARS_TABLE_TARGET_GROUPS.'.uid'
 						.')';
 					}
 
@@ -2618,14 +2629,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// define the additional where clause for the database query
 		$additionalWhere = 'tx_seminars_seminars.cancelled=0'
-			.$this->enableFields($this->tableSeminars)
-			.' AND tx_seminars_seminars.object_type!='.$this->recordTypeTopic
-			.' AND tx_seminars_seminars.begin_date>'.$now;
+			.$this->enableFields(SEMINARS_TABLE_SEMINARS)
+			.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!='.$this->recordTypeTopic
+			.' AND '.SEMINARS_TABLE_SEMINARS.'.begin_date>'.$now;
 
 		// query the database
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid',
-			$this->tableSeminars,
+			SEMINARS_TABLE_SEMINARS,
 			$additionalWhere,
 			'',
 			'begin_date ASC',

@@ -31,12 +31,11 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslotbag.php');
-require_once(t3lib_extMgm::extPath(
-	'static_info_tables').'pi1/class.tx_staticinfotables_pi1.php'
-);
+require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
 
 class tx_seminars_seminar extends tx_seminars_timespan {
 	/** Same as class name */
@@ -83,7 +82,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	function tx_seminars_seminar($seminarUid, $dbResult = null, $allowHiddenRecords = false) {
 		$this->init();
-		$this->tableName = $this->tableSeminars;
+		$this->tableName = SEMINARS_TABLE_SEMINARS;
 
 		if (!$dbResult) {
 			$dbResult = $this->retrieveRecord($seminarUid, $allowHiddenRecords);
@@ -516,15 +515,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	function getAdditionalQueryForOtherDates() {
 		$result = ' AND (';
 
-		if ($this->getRecordPropertyInteger('object_type') == $this->recordTypeDate) {
+		if ($this->getRecordPropertyInteger('object_type') == SEMINARS_RECORD_TYPE_DATE) {
 			$result .= '(topic='.$this->getRecordPropertyInteger('topic').' AND '
 				.'uid!='.$this->getUid().')'
 				.' OR '
 				.'(uid='.$this->getRecordPropertyInteger('topic')
-				.' AND object_type='.$this->recordTypeComplete.')';
+				.' AND object_type='.SEMINARS_RECORD_TYPE_COMPLETE.')';
 		} else {
 			$result .= 'topic='.$this->getUid()
-				.' AND object_type!='.$this->recordTypeComplete;
+				.' AND object_type!='.SEMINARS_RECORD_TYPE_COMPLETE;
 		}
 
 		$result .= ')';
@@ -548,9 +547,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($this->hasPlace()) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title, address, country, homepage, directions',
-				$this->tableSites.', '.$this->tableSitesMM,
+				SEMINARS_TABLE_SITES.', '.SEMINARS_TABLE_SITES_MM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSites)
+					.$this->enableFields(SEMINARS_TABLE_SITES)
 			);
 
 			if ($dbResult) {
@@ -640,7 +639,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// Fetches all the corresponding place records for this event from the m:m table.
 		$dbResultMM = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid_foreign',
-			$this->tableSitesMM,
+			SEMINARS_TABLE_SITES_MM,
 			'uid_local='.$this->getUid(),
 			'uid_foreign'
 		);
@@ -650,10 +649,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				// Fetch the country field from the found place records.
 				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'country',
-					$this->tableSites,
+					SEMINARS_TABLE_SITES,
 					'uid='.$rowMM['uid_foreign']
 						.' AND country != ""'
-						.$this->enableFields($this->tableSites)
+						.$this->enableFields(SEMINARS_TABLE_SITES)
 				);
 
 				// Check whether we have found any country at all. If something
@@ -755,8 +754,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// Fetches the city name from the corresponding place record(s).
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'city',
-			$this->tableSites.' LEFT JOIN '.$this->tableSitesMM
-				.' ON '.$this->tableSites.'.uid='.$this->tableSitesMM.'.uid_foreign',
+			SEMINARS_TABLE_SITES.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM
+				.' ON '.SEMINARS_TABLE_SITES.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_foreign',
 			'uid_local='.$this->getUid(),
 			'uid_foreign'
 		);
@@ -815,9 +814,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($this->hasPlace()) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title, address, country, homepage, directions',
-				$this->tableSites.', '.$this->tableSitesMM,
+				SEMINARS_TABLE_SITES.', '.SEMINARS_TABLE_SITES_MM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSites)
+					.$this->enableFields(SEMINARS_TABLE_SITES)
 			);
 
 			if ($dbResult) {
@@ -874,9 +873,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($this->hasPlace()) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title',
-				$this->tableSites.', '.$this->tableSitesMM,
+				SEMINARS_TABLE_SITES.', '.SEMINARS_TABLE_SITES_MM,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSites)
+					.$this->enableFields(SEMINARS_TABLE_SITES)
 			);
 
 			if ($dbResult) {
@@ -918,30 +917,30 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		switch ($speakerRelation) {
 			case 'partners':
 				$hasSpeakers = $this->hasPartners();
-				$mmTable = $this->tablePartnersMM;
+				$mmTable = SEMINARS_TABLE_PARTNERS_MM;
 				break;
 			case 'tutors':
 				$hasSpeakers = $this->hasTutors();
-				$mmTable = $this->tableTutorsMM;
+				$mmTable = SEMINARS_TABLE_TUTORS_MM;
 				break;
 			case 'leaders':
 				$hasSpeakers = $this->hasLeaders();
-				$mmTable = $this->tableLeadersMM;
+				$mmTable = SEMINARS_TABLE_LEADERS_MM;
 				break;
 			case 'speakers':
 				// The fallthrough is intended.
 			default:
 				$hasSpeakers = $this->hasSpeakers();
-				$mmTable = $this->tableSpeakersMM;
+				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
 				break;
 		}
 
 		if ($hasSpeakers) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title, organization, homepage, description',
-				$this->tableSpeakers.', '.$mmTable,
+				SEMINARS_TABLE_SPEAKERS.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSpeakers)
+					.$this->enableFields(SEMINARS_TABLE_SPEAKERS)
 			);
 
 			if ($dbResult) {
@@ -1003,30 +1002,30 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		switch ($speakerRelation) {
 			case 'partners':
 				$hasSpeakers = $this->hasPartners();
-				$mmTable = $this->tablePartnersMM;
+				$mmTable = SEMINARS_TABLE_PARTNERS_MM;
 				break;
 			case 'tutors':
 				$hasSpeakers = $this->hasTutors();
-				$mmTable = $this->tableTutorsMM;
+				$mmTable = SEMINARS_TABLE_TUTORS_MM;
 				break;
 			case 'leaders':
 				$hasSpeakers = $this->hasLeaders();
-				$mmTable = $this->tableLeadersMM;
+				$mmTable = SEMINARS_TABLE_LEADERS_MM;
 				break;
 			case 'speakers':
 				// The fallthrough is intended.
 			default:
 				$hasSpeakers = $this->hasSpeakers();
-				$mmTable = $this->tableSpeakersMM;
+				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
 				break;
 		}
 
 		if ($hasSpeakers) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title, organization, homepage, description',
-				$this->tableSpeakers.', '.$mmTable,
+				SEMINARS_TABLE_SPEAKERS.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSpeakers)
+					.$this->enableFields(SEMINARS_TABLE_SPEAKERS)
 			);
 
 			if ($dbResult) {
@@ -1073,30 +1072,30 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		switch ($speakerRelation) {
 			case 'partners':
 				$hasSpeakers = $this->hasPartners();
-				$mmTable = $this->tablePartnersMM;
+				$mmTable = SEMINARS_TABLE_PARTNERS_MM;
 				break;
 			case 'tutors':
 				$hasSpeakers = $this->hasTutors();
-				$mmTable = $this->tableTutorsMM;
+				$mmTable = SEMINARS_TABLE_TUTORS_MM;
 				break;
 			case 'leaders':
 				$hasSpeakers = $this->hasLeaders();
-				$mmTable = $this->tableLeadersMM;
+				$mmTable = SEMINARS_TABLE_LEADERS_MM;
 				break;
 			case 'speakers':
 				// The fallthrough is intended.
 			default:
 				$hasSpeakers = $this->hasSpeakers();
-				$mmTable = $this->tableSpeakersMM;
+				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
 				break;
 		}
 
 		if ($hasSpeakers) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title',
-				$this->tableSpeakers.', '.$mmTable,
+				SEMINARS_TABLE_SPEAKERS.', '.$mmTable,
 				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields($this->tableSpeakers)
+					.$this->enableFields(SEMINARS_TABLE_SPEAKERS)
 			);
 
 			if ($dbResult) {
@@ -1593,9 +1592,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		foreach ($paymentMethodsUids as $currentPaymentMethod) {
 			$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title',
-				$this->tablePaymentMethods,
+				SEMINARS_TABLE_PAYMENT_METHODS,
 				'uid='.intval($currentPaymentMethod)
-					.$this->enableFields($this->tablePaymentMethods)
+					.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 			);
 
 			// We expect just one result.
@@ -1687,9 +1686,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
-			$this->tablePaymentMethods,
+			SEMINARS_TABLE_PAYMENT_METHODS,
 			'uid='.$paymentMethodUid
-				.$this->enableFields($this->tablePaymentMethods)
+				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
 		// We expect just one result.
@@ -1721,9 +1720,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			$this->tablePaymentMethods,
+			SEMINARS_TABLE_PAYMENT_METHODS,
 			'uid='.$paymentMethodUid
-				.$this->enableFields($this->tablePaymentMethods)
+				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
 		// We expect just one result.
@@ -1865,9 +1864,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			// Get the title of this event type.
 			$dbResultEventType = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'title',
-				$this->tableEventTypes,
+				SEMINARS_TABLE_EVENT_TYPES,
 				'uid='.$eventTypeUid
-					.$this->enableFields($this->tableEventTypes),
+					.$this->enableFields(SEMINARS_TABLE_EVENT_TYPES),
 				'',
 				'',
 				'1'
@@ -2074,12 +2073,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$this->tableTargetGroups.'.title',
-			$this->tableTargetGroups.', '.$this->tableTargetGroupsMM,
-			$this->tableTargetGroupsMM.'.uid_local='.$this->getTopicUid()
-				.' AND '.$this->tableTargetGroups.'.uid='
-				.$this->tableTargetGroupsMM.'.uid_foreign'
-				.$this->enableFields($this->tableTargetGroups)
+			SEMINARS_TABLE_TARGET_GROUPS.'.title',
+			SEMINARS_TABLE_TARGET_GROUPS.', '.SEMINARS_TABLE_TARGET_GROUPS_MM,
+			SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
+				.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
+				.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
+				.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS)
 		);
 
 		if ($dbResult) {
@@ -2104,12 +2103,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->hasTargetGroups()) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				$this->tableTargetGroups.'.*',
-				$this->tableTargetGroups.', '.$this->tableTargetGroupsMM,
-				$this->tableTargetGroupsMM.'.uid_local='.$this->getTopicUid()
-					.' AND '.$this->tableTargetGroups.'.uid='
-					.$this->tableTargetGroupsMM.'.uid_foreign'
-					.$this->enableFields($this->tableTargetGroups)
+				SEMINARS_TABLE_TARGET_GROUPS.'.*',
+				SEMINARS_TABLE_TARGET_GROUPS.', '.SEMINARS_TABLE_TARGET_GROUPS_MM,
+				SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
+					.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
+					.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
+					.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS)
 			);
 
 			if ($dbResult) {
@@ -2475,9 +2474,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 	} else {
 		 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
-				$this->tableOrganizers,
+				SEMINARS_TABLE_ORGANIZERS,
 				'uid='.intval($organizerUid)
-					.$this->enableFields($this->tableOrganizers)
+					.$this->enableFields(SEMINARS_TABLE_ORGANIZERS)
 			);
 
 			if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
@@ -2647,9 +2646,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
-			$this->tableAttendances,
+			SEMINARS_TABLE_ATTENDANCES,
 			'seminar='.$this->getUid().' AND user='.$feUserUid
-				.$this->enableFields($this->tableAttendances)
+				.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
 		);
 
 		if ($dbResult) {
@@ -2700,7 +2699,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		} else {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'COUNT(*) AS num',
-				$this->tableVipsMM,
+				SEMINARS_TABLE_VIPS_MM,
 				'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid
 			);
 
@@ -2984,11 +2983,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultSingleSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS number',
-			$this->tableAttendances,
+			SEMINARS_TABLE_ATTENDANCES,
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats=0'
-				.$this->enableFields($this->tableAttendances)
+				.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
 		);
 
 		if ($dbResultSingleSeats) {
@@ -3000,11 +2999,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultMultiSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'SUM(seats) AS number',
-			$this->tableAttendances,
+			SEMINARS_TABLE_ATTENDANCES,
 			$queryParameters
 				.' AND seminar='.$this->getUid()
 				.' AND seats!=0'
-				.$this->enableFields($this->tableAttendances)
+				.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
 		);
 
 		if ($dbResultMultiSeats) {
@@ -3034,7 +3033,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($this->hasRecordPropertyInteger('topic')) {
 			if (tx_seminars_objectfromdb::recordExists(
 				$this->getRecordPropertyInteger('topic'),
-				$this->tableSeminars)
+				SEMINARS_TABLE_SEMINARS)
 			) {
 				/** Name of the seminar class in case someone subclasses it. */
 				$seminarClassname = t3lib_div::makeInstanceClassName(
@@ -3289,8 +3288,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->hasLodgings()) {
 			$result = $this->getMmRecords(
-				$this->tableLodgings,
-				$this->tableSeminarsLodgingsMM,
+				SEMINARS_TABLE_LODGINGS,
+				SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
 				false
 			);
 		}
@@ -3325,8 +3324,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->hasFoods()) {
 			$result = $this->getMmRecords(
-				$this->tableFoods,
-				$this->tableSeminarsFoodsMM,
+				SEMINARS_TABLE_FOODS,
+				SEMINARS_TABLE_SEMINARS_FOODS_MM,
 				false
 			);
 		}
@@ -3364,8 +3363,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->hasCheckboxes()) {
 			$result = $this->getMmRecords(
-				$this->tableCheckboxes,
-				$this->tableSeminarsCheckboxesMM,
+				SEMINARS_TABLE_CHECKBOXES,
+				SEMINARS_TABLE_SEMINARS_CHECKBOXES_MM,
 				true
 			);
 		}
@@ -3868,12 +3867,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if (($feUserUid > 0) && !$this->allowsMultipleRegistrations()
 			&& $this->hasDate()) {
 
-			$additionalTables = $this->tableAttendances;
+			$additionalTables = SEMINARS_TABLE_ATTENDANCES;
 			$queryWhere = $this->getQueryForCollidingEvents();
 			// Filter to those events to which the given FE user is registered.
-			$queryWhere .= ' AND '.$this->tableSeminars.'.uid='
-					.$this->tableAttendances.'.seminar'
-				.' AND '.$this->tableAttendances.'.user='.$feUserUid;
+			$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
+					.SEMINARS_TABLE_ATTENDANCES.'.seminar'
+				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.user='.$feUserUid;
 
 			$seminarBagClassname = t3lib_div::makeInstanceClassName(
 				'tx_seminars_seminarbag'
@@ -3908,7 +3907,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$beginDate = $this->getBeginDateAsTimestamp();
 		$endDate = $this->getEndDateAsTimestampEvenIfOpenEnded();
 
-		$result = $this->tableSeminars.'.uid!='.$this->getUid()
+		$result = SEMINARS_TABLE_SEMINARS.'.uid!='.$this->getUid()
 			.' AND allows_multiple_registrations=0'
 			.' AND ('
 				.'('
@@ -3952,7 +3951,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		if ($this->getRecordPropertyInteger('object_type')
-			!= $this->recordTypeTopic) {
+			!= SEMINARS_RECORD_TYPE_TOPIC
+		) {
 			$result = parent::getDate($dash);
 		}
 
@@ -4154,10 +4154,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = 0;
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'MIN('.$this->tableTimeslots.'.begin_date) AS begin_date',
-			$this->tableTimeslots,
-			$this->tableTimeslots.'.seminar='.$this->getUid()
-				.$this->enableFields($this->tableTimeslots)
+			'MIN('.SEMINARS_TABLE_TIME_SLOTS.'.begin_date) AS begin_date',
+			SEMINARS_TABLE_TIME_SLOTS,
+			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
+				.$this->enableFields(SEMINARS_TABLE_TIME_SLOTS)
 		);
 
 		if ($dbResult) {
@@ -4185,12 +4185,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = 0;
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$this->tableTimeslots.'.end_date AS end_date',
-			$this->tableTimeslots,
-			$this->tableTimeslots.'.seminar='.$this->getUid()
-				.$this->enableFields($this->tableTimeslots),
+			SEMINARS_TABLE_TIME_SLOTS.'.end_date AS end_date',
+			SEMINARS_TABLE_TIME_SLOTS,
+			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
+				.$this->enableFields(SEMINARS_TABLE_TIME_SLOTS),
 			'',
-			$this->tableTimeslots.'.begin_date DESC',
+			SEMINARS_TABLE_TIME_SLOTS.'.begin_date DESC',
 			'0,1'
 		);
 
@@ -4223,17 +4223,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_timeslotbag'
 		);
 		$timeSlotBag =& new $timeSlotBagClassname(
-			$this->tableTimeslots.'.seminar='.$this->getUid()
-				.' AND '.$this->tableTimeslots.'.place>0',
+			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
+				.' AND '.SEMINARS_TABLE_TIME_SLOTS.'.place>0',
 			'',
-			$this->tableTimeslots.'.place',
-			$this->tableTimeslots.'.begin_date ASC'
+			SEMINARS_TABLE_TIME_SLOTS.'.place',
+			SEMINARS_TABLE_TIME_SLOTS.'.begin_date ASC'
 		);
 
 		// Removes all place relations of the current event.
 		$GLOBALS['TYPO3_DB']->exec_DELETEquery(
-			$this->tableSitesMM,
-			$this->tableSitesMM.'.uid_local='.$this->getUid()
+			SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SITES_MM.'.uid_local='.$this->getUid()
 		);
 
 		// Creates an array with all place UIDs which should be related to this
@@ -4246,7 +4246,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$timeSlotBag->getNext();
 		}
 
-		return $this->createMmRecords($this->tableSitesMM, $placesOfTimeSlots);
+		return $this->createMmRecords(
+			SEMINARS_TABLE_SITES_MM, $placesOfTimeSlots
+		);
 	}
 
 	/**
@@ -4280,7 +4282,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$this->tableTimeslots.'.begin_date ASC'
 		);
 		$timeslotBag =& new $timeslotBagClassname(
-			$this->tableTimeslots.'.seminar='.$this->getUid()
+			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
 		);
 
 		while ($timeslot =& $timeslotBag->getCurrent()) {

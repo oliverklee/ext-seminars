@@ -32,6 +32,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
 
@@ -66,11 +67,8 @@ class tx_seminars_timeslotbag extends tx_seminars_bag {
 		$orderBy = '',
 		$limit = ''
 	) {
-		// Although the parent class also calls init(), we need to call it
-		// here already so that $this->tableTimeslots is provided.
-		$this->init();
 		parent::tx_seminars_bag(
-			$this->tableTimeslots,
+			SEMINARS_TABLE_TIME_SLOTS,
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

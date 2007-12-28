@@ -35,6 +35,7 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_oe_configcheck.php');
 
 class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
@@ -1870,10 +1871,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'These values specify the registration fields to export via CSV. '
 				.'A mistyped field name will cause the field to not get '
 				.'included.',
-			'tx_seminars_attendances'
+			SEMINARS_TABLE_ATTENDANCES
 		);
-
-		return;
 	}
 
 	/**

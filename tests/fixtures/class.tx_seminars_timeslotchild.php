@@ -33,6 +33,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
 
 final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
@@ -45,16 +46,13 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	 * The constructor.
 	 */
 	public function __construct() {
-		$this->setTableNames();
-		$this->setRecordTypes();
-
 		$this->recordData = array(
 			'uid' => 1,
 			'entry_date' => 0,
 			'place' => 0
 		);
 
-		$this->tableName = $this->tableTimeslots;
+		$this->tableName = SEMINARS_TABLE_TIME_SLOTS;
 	}
 
 	/**

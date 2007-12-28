@@ -29,6 +29,7 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_backendlist.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
@@ -47,7 +48,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 	 */
 	function tx_seminars_eventslist(&$page) {
 		parent::tx_seminars_backendlist($page);
-		$this->tableName = $this->tableSeminars;
+		$this->tableName = SEMINARS_TABLE_SEMINARS;
 	}
 
 	/**
@@ -207,7 +208,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 		);
 
 		$useManualSorting = $globalConfiguration['useManualSorting']
-			&& $BE_USER->check('tables_modify', $seminarBag->tableSeminars)
+			&& $BE_USER->check('tables_modify', SEMINARS_TABLE_SEMINARS)
 			&& $BE_USER->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
 					'pages',
@@ -362,7 +363,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
 			$result = '<a href="class.tx_seminars_csv.php?id='
 				.$this->page->pageInfo['uid']
-				.'&amp;tx_seminars_pi2[table]='.$this->tableAttendances
+				.'&amp;tx_seminars_pi2[table]='.SEMINARS_TABLE_ATTENDANCES
 				.'&amp;tx_seminars_pi2[seminar]='.$eventUid.'">'
 				.'<img'
 				.t3lib_iconWorks::skinImg(
