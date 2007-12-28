@@ -49,8 +49,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		// objects. So we check whether the prerequisites for registrations
 		// are fullfilled as well.
 		$this->check_tx_seminars_registration();
-
-		return;
 	}
 
 	/**
@@ -90,8 +88,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
 			$this->checkAttendancesPid();
 		}
-
-		return;
 	}
 
 	/**
@@ -101,8 +97,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_seminarbag() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -112,8 +106,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_registrationbag() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -123,8 +115,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_speakerbag() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -134,8 +124,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_speaker() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -145,8 +133,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_organizerbag() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -156,8 +142,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_organizer() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -167,8 +151,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_placebag() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -178,8 +160,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_place() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -189,8 +169,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_timeslot() {
 		$this->checkStaticIncluded();
-
-		return;
 	}
 
 	/**
@@ -255,8 +233,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsVipListPidOptional();
 		$this->checkDetailPid();
 		$this->checkDefaultEventVipsFeGroupID();
-
-		return;
 	}
 
 	/**
@@ -290,8 +266,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
 		$this->checkDefaultEventVipsFeGroupID();
-
-		return;
 	}
 
  	/**
@@ -302,8 +276,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	function check_tx_seminars_pi1_countdown() {
 		$this->checkCommonFrontEndSettings();
 		$this->checkPages();
-
-		return;
 	}
 
 	/**
@@ -315,8 +287,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->check_tx_seminars_pi1_seminar_list();
 		$this->checkRegistrationsVipListPid();
 		$this->checkDefaultEventVipsFeGroupID();
-
-		return;
 	}
 
 	/**
@@ -326,8 +296,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_pi1_topic_list() {
 		$this->check_tx_seminars_pi1_seminar_list();
-
-		return;
 	}
 
 	/**
@@ -349,8 +317,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 
 		$this->checkShowFeUserFieldsInRegistrationsList();
 		$this->checkListPid();
-
-		return;
 	}
 
 	/**
@@ -360,8 +326,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	function check_tx_seminars_pi1_list_vip_registrations() {
 		$this->check_tx_seminars_pi1_list_registrations();
-
-		return;
 	}
 
 	/**
@@ -375,8 +339,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkEventEditorFeGroupID();
 		$this->checkCreateEventsPID();
 		$this->checkEventSuccessfullySavedPID();
-
-		return;
 	}
 
 	/**
@@ -388,8 +350,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->check_tx_seminars_pi1_seminar_list();
 		$this->checkEventEditorFeGroupID();
 		$this->checkEventEditorPID();
-
-		return;
 	}
 
 	/**
@@ -451,8 +411,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		}
 
 		$this->checkAbbreviateDateRanges();
-
-		return;
 	}
 
 	/**
@@ -492,8 +450,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'([a-zA-Z\d_\-\.]+\/)'
 				.'*$/'
 		);
-
-		return;
 	}
 
 	/**
@@ -510,8 +466,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'registration. If this value is incorrect, the online '
 				.'registration will not be enabled or disabled correctly.'
 		);
-
-		return;
 	}
 
 	/**
@@ -535,8 +489,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'',
 			$explanation
 		);
-
-		return;
 	}
 
 	/**
@@ -553,8 +505,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			.'If this value is empty all prices will be shown wrong (missing '
 			.'decimal point).'
 		);
-
-		return;
 	}
 
 	/**
@@ -583,8 +533,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'countdown'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -602,8 +550,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'time might get shown although this is not intended '
 				.'(or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -621,8 +567,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'time might get shown although this is not intended '
 				.'(or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -640,8 +584,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'the number might get shown although this is not intended '
 				.'(or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -658,8 +600,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'in e-mails. If this value is incorrect, the wrong wording '
 				.'might get used.'
 		);
-
-		return;
 	}
 
 	/**
@@ -681,8 +621,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
 				.'to 0.'
 		);
-
-		return;
 	}
 
 	/**
@@ -734,8 +672,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'back'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -778,8 +714,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'edit'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -806,8 +740,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'deadlineNotOver'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -860,8 +792,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'form might get displayed when this is not intended (or '
 				.'vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -879,8 +809,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'browser might get displayed when this is not intended (or '
 				.'vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -898,8 +826,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'events might get displayed when this is not intended (or '
 				.'vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -940,8 +866,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'footer'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -965,8 +889,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'attendancedata'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -1009,8 +931,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'notes'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -1028,8 +948,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'not get included.',
 			'fe_users'
 		);
-
-		return;
 	}
 
 	/**
@@ -1072,8 +990,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'email'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -1090,8 +1006,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'notification e-mails. If this value is incorrect, e-mails '
 				.'might get sent when this is not intended (or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -1108,8 +1022,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is incorrect, the values might be abbreviated '
 				.'although this is not intended (or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -1127,8 +1039,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'of <em>Standard price</em>. '
 				.'If this value is incorrect, the wrong label might be used.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1146,8 +1056,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'just <em>Price</em> instead of <em>Standard price</em>. '
 				.'If this value is incorrect, the wrong label might be used.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1165,8 +1073,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is incorrect, the date might be omited '
 				.'although this is not intended (or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -1191,8 +1097,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'vacancies'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -1245,8 +1149,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'terms_2'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -1264,8 +1166,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is incorrect, the detailed information might '
 				.'be shown although this is not intended (or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -1283,8 +1183,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is incorrect, the detailed information might '
 				.'be shown although this is not intended (or vice versa).'
 		);
-
-		return;
 	}
 
 	/**
@@ -1302,8 +1200,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'cause the contents of the field to not get displayed.',
 			'fe_users'
 		);
-
-		return;
 	}
 
 	/**
@@ -1321,8 +1217,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'view and the back link on the list of registrations will '
 				.'not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1339,8 +1233,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set correctly, the links to single '
 				.'events will not work as expected.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1358,8 +1250,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'the my events list after canceling the unregistration process '
 				.'will not work correctly.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1381,8 +1271,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
 				.'to 0.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1404,8 +1292,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
 				.'to 0.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1422,8 +1308,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'registrations for an event. If this value is not set '
 				.'correctly, the link to that page will not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1440,8 +1324,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'registrations for an event. If this value is not set '
 				.'correctly, the link to that page will not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1459,8 +1341,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'registrations for an event. If this value is not set '
 				.'correctly, the link to that page will not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1478,8 +1358,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			.'correctly, some events might not get displayed in the list '
 			.'view.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1498,8 +1376,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'list view. If this value is not set correctly, some events '
 				.'might not get displayed in the list view.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1518,8 +1394,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkSalutationMode(true);
 		$this->checkCssClassNames();
 		$this->checkWhatToDisplay();
-
-		return;
 	}
 
 	/**
@@ -1536,8 +1410,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'enter and edit event records in the front end. If this value '
 				.'is not set correctly, FE editing for events will not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1556,8 +1428,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'correctly, the users of this group will not be treated as '
 				.'VIPs for all events.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1574,8 +1444,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'stored. If this value is not set correctly, those event '
 				.'records will be dumped in the TYPO3 root page.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1592,8 +1460,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'redirected after saving an event record in the front end. If '
 				.'this value is not set correctly, the redirect will not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1628,8 +1494,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'set correctly, the <em>edit</em> link in the <em>events '
 				.'which I have entered</em> list will not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1646,8 +1510,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'signed up for an event. If this value is not set correctly, '
 				.'the user will see the list of events instead.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1664,8 +1526,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'has unregistered from an event. If this value is not set correctly, '
 				.'the user will see the list of events instead.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1683,8 +1543,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'validation of the bank data in the event registration '
 				.'form will not work correctly.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1700,8 +1558,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkFieldsFromEventsForCsv();
 		$this->checkFieldsFromFeUserForCsv();
 		$this->checkFieldsFromAttendanceForCsv();
-
-		return;
 	}
 
 	/**
@@ -1719,8 +1575,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set correctly, anyone could use the CSV '
 				.'export, gaining access to sensitive data.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1737,8 +1591,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set, no charset information will be '
 				.'provided for CSV downloads.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1756,8 +1608,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set, an empty filename will be used for '
 				.'saving the CSV file which will cause problems.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1775,8 +1625,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set, an empty filename will be used for '
 				.'saving the CSV file which will cause problems.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1835,8 +1683,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'cancelled'
 			)
 		);
-
-		return;
 	}
 
 	/**
@@ -1854,8 +1700,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'included.',
 			'fe_users'
 		);
-
-		return;
 	}
 
 	/**
@@ -1891,8 +1735,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set correctly, the wrong wording '
 				.'might get displayed.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1928,8 +1770,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				$this->setErrorMessage($message);
 			}
 		}
-
-		return;
 	}
 
 	/**
@@ -1947,8 +1787,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'automatically be logged out after registering for an event. '
 				.'If this value is incorrect, the automatic logout will not work.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1967,8 +1805,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is empty, special characters in these e-mails '
 				.'will appear garbled.'
 		);
-
-		return;
 	}
 
 	/**
@@ -1987,8 +1823,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set correctly, the number of the current '
 				.'page will not be displayed correctly.'
 		);
-
-		return;
 	}
 
 	/**
@@ -2007,8 +1841,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'If this value is not set correctly, the number of the last '
 				.'page will not be displayed correctly.'
 		);
-
-		return;
 	}
 
 	/**
