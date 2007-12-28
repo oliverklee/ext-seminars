@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -38,14 +38,14 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
 
-	protected function setUp() {
+	public function setUp() {
 		$this->testingFramework
 			= new tx_oelib_testingframework('tx_seminars');
 
 		$seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
-		$timeSlotUid = $this->testingFramework->createRecord(
+		$fixtureUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_TIME_SLOTS,
 			array(
 				'seminar' => $seminarUid,
@@ -54,21 +54,30 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_timeslotchild($timeSlotUid);
+		$this->fixture = new tx_seminars_timeslotchild($fixtureUid);
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture);
 		unset($this->testingFramework);
 	}
 
 
-	public function testIsOk() {
+	//////////////////////////////////////////
+	// Tests for creating time slot objects.
+	//////////////////////////////////////////
+
+	public function testCreateFromUid() {
 		$this->assertTrue(
 			$this->fixture->isOk()
 		);
 	}
+
+
+	/////////////////////////////////////
+	// Tests for the time slot's sites.
+	/////////////////////////////////////
 
 	public function testPlaceIsInitiallyZero() {
 		$this->assertEquals(
@@ -105,6 +114,11 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasPlace()
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests for the time slot's entry date.
+	//////////////////////////////////////////
 
 	public function testHasEntryDateIsInitiallyFalse() {
 		$this->assertFalse(

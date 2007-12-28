@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Mario Rimann (typo3-coding@rimann.org)
+* (c) 2007-2008 Mario Rimann (typo3-coding@rimann.org)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -40,13 +40,10 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 	/** our instance of the testing framework */
 	private $testingFramework;
 
-	/** UID of the default fixture (i.e. of the dummy place record) */
-	private $uidOfDefaultFixture;
-
-	protected function setUp() {
+	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingframework('tx_seminars');
 
-		$this->uidOfDefaultFixture = $this->testingFramework->createRecord(
+		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array(
 				'title' => 'TEST Place 1',
@@ -54,29 +51,30 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 				'country' => 'JP'
 			)
 		);
-		$this->fixture = new tx_seminars_place($this->uidOfDefaultFixture);
+		$this->fixture = new tx_seminars_place($uid);
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->testingFramework);
 		unset($this->fixture);
 	}
 
 
-	public function testGetUid() {
-		$this->assertEquals(
-			$this->uidOfDefaultFixture,
-			$this->fixture->getUid()
+	/////////////////////////////////////
+	// Tests for creating site objects.
+	/////////////////////////////////////
+
+	public function testCreateFromUid() {
+		$this->assertTrue(
+			$this->fixture->isOk()
 		);
 	}
 
-	public function testGetTitle() {
-		$this->assertEquals(
-			'TEST Place 1',
-			$this->fixture->getTitle()
-		);
-	}
+
+	///////////////////////////////////////////
+	// Tests for getting the site attributes.
+	///////////////////////////////////////////
 
 	public function testGetCity() {
 		$this->assertEquals(
