@@ -15,6 +15,8 @@
 			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
 			<label index="fe_users.tx_seminars_semester">Semester:</label>
 			<label index="fe_users.tx_seminars_subject">Study subject:</label>
+			<label index="tx_seminars_test">Test records</label>
+			<label index="tx_seminars_test.title">Title:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">General</label>
 			<label index="tx_seminars_seminars.uid">Event number:</label>
@@ -167,6 +169,8 @@
 			<label index="fe_users.tx_seminars_planned_degree">Angestrebter Abschluss:</label>
 			<label index="fe_users.tx_seminars_semester">Semesterzahl:</label>
 			<label index="fe_users.tx_seminars_subject">Studienfach:</label>
+			<label index="tx_seminars_test">Test-Datensätze</label>
+			<label index="tx_seminars_test.title">Titel:</label>
 			<label index="tx_seminars_seminars">Seminare</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">Allgemein</label>
 			<label index="tx_seminars_seminars.uid">Veranstaltungsnummer:</label>
@@ -1010,6 +1014,8 @@
 			<label index="fe_users.tx_seminars_planned_degree" type="integer">19946302</label>
 			<label index="fe_users.tx_seminars_semester" type="integer">157856746</label>
 			<label index="fe_users.tx_seminars_subject" type="integer">159112742</label>
+			<label index="tx_seminars_test" type="integer">56221404</label>
+			<label index="tx_seminars_test.title" type="integer">85903807</label>
 			<label index="tx_seminars_seminars" type="integer">146176001</label>
 			<label index="tx_seminars_seminars.divLabelGeneral" type="integer">14366585</label>
 			<label index="tx_seminars_seminars.uid" type="integer">205487650</label>
@@ -1853,6 +1859,8 @@
 			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
 			<label index="fe_users.tx_seminars_semester">Semester:</label>
 			<label index="fe_users.tx_seminars_subject">Study subject:</label>
+			<label index="tx_seminars_test">Test records</label>
+			<label index="tx_seminars_test.title">Title:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.uid">Event number:</label>
 			<label index="tx_seminars_seminars.title">Title:</label>

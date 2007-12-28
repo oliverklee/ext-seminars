@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2007-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -48,6 +48,7 @@ define('SEMINARS_TABLE_FOODS', 'tx_seminars_foods');
 define('SEMINARS_TABLE_TIME_SLOTS', 'tx_seminars_timeslots');
 define('SEMINARS_TABLE_TARGET_GROUPS', 'tx_seminars_target_groups');
 define('SEMINARS_TABLE_CATEGORIES', 'tx_seminars_categories');
+define('SEMINARS_TABLE_TEST', 'tx_seminars_test');
 
 define('SEMINARS_TABLE_VIPS_MM', 'tx_seminars_seminars_feusers_mm');
 define('SEMINARS_TABLE_SPEAKERS_MM', 'tx_seminars_seminars_speakers_mm');

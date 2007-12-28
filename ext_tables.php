@@ -78,6 +78,28 @@ $tempColumns = array(
 	)
 );
 
+$TCA['tx_seminars_test'] = array(
+	'ctrl' => array(
+		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_test',
+		'readOnly' => 1,
+		'adminOnly' => 1,
+		'rootLevel' => 1,
+		'label' => 'title',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'default_sortby' => 'ORDER BY uid',
+		'delete' => 'deleted',
+		'enablecolumns' => array(
+			'disabled' => 'hidden',
+			'starttime' => 'starttime',
+			'endtime' => 'endtime'
+		),
+		'dynamicConfigFile' => $extPath.'tca.php',
+		'iconfile' => $extIconRelPath.'icon_tx_seminars_test.gif'
+	)
+);
+
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars',
