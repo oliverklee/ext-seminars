@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2007 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -53,41 +53,6 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 	/** whether init() already has been called (in order to avoid double calls) */
 	var $isInitialized = false;
-
-	// Database table names. Will be initialized (indirectly) by $this->init.
-	var $tableSeminars;
-	var $tableVipsMM;
-	var $tableSpeakers;
-	var $tableSpeakersMM;
-	var $tablePartnersMM;
-	var $tableTutorsMM;
-	var $tableLeadersMM;
-	var $tableSites;
-	var $tableSitesMM;
-	var $tableOrganizers;
-	var $tableAttendances;
-	var $tablePaymentMethods;
-	var $tableEventTypes;
-	var $tableCheckboxes;
-	var $tableSeminarsCheckboxesMM;
-	var $tableAttendancesCheckboxesMM;
-	var $tableLodgings;
-	var $tableSeminarsLodgingsMM;
-	var $tableAttendancesLodgingsMM;
-	var $tableFoods;
-	var $tableSeminarsFoodsMM;
-	var $tableAttendancesFoodsMM;
-	var $tableTimeslots;
-	var $tableTimeslotsSpeakersMM;
-	var $tableTargetGroups;
-	var $tableTargetGroupsMM;
-	var $tableCategories;
-	var $tableCategoriesMM;
-
-	// Constants for the types of records
-	var $recordTypeComplete;
-	var $recordTypeTopic;
-	var $recordTypeDate;
 
 	/** The front-end user who currently is logged in. */
 	var $feuser = null;
