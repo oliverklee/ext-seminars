@@ -37,11 +37,6 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 
 class tx_seminars_seminarbag extends tx_seminars_bag {
-	/** Same as class name */
-	var $prefixId = 'tx_seminars_seminar_seminarbag';
-	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_seminarbag.php';
-
 	/**
 	 * The constructor. Creates a seminar bag that contains seminar
 	 * records and allows to iterate over them.
@@ -83,8 +78,6 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 			$showHiddenRecords,
 			$ignoreTimingOfRecords
 		);
-
-		return;
 	}
 
 	/**

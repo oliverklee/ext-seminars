@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,24 +37,29 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speaker.php');
 
 class tx_seminars_speakerbag extends tx_seminars_bag {
-	/** Same as class name */
-	var $prefixId = 'tx_seminars_speakerbag';
-	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_speakerbag.php';
-
 	/**
 	 * The constructor. Creates a speaker bag that contains speaker
 	 * records and allows to iterate over them.
 	 *
-	 * @param	string		string that will be prepended to the WHERE clause using AND, e.g. 'pid=42' (the AND and the enclosing spaces are not necessary for this parameter)
-	 * @param	string		comma-separated names of additional DB tables used for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already by safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already by safeguarded against SQL injection
+	 * @param	string		string that will be prepended to the WHERE
+	 * 						clause using AND, e.g. 'pid=42' (the AND and the
+	 * 						enclosing spaces are not necessary for this
+	 * 						parameter)
+	 * @param	string		comma-separated names of additional DB tables used
+	 * 						for JOINs, may be empty
+	 * @param	string		GROUP BY clause (may be empty), must already be
+	 * 						safeguarded against SQL injection
+	 * @param	string		ORDER BY clause (may be empty), must already be
+	 * 						safeguarded against SQL injection
+	 * @param	string		LIMIT clause (may be empty), must already be
+	 * 						safeguarded against SQL injection
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_speakerbag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_speakerbag(
+		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
+		$orderBy = '', $limit = ''
+	) {
 		parent::tx_seminars_bag(
 			SEMINARS_TABLE_SPEAKERS,
 			$queryParameters,
@@ -78,8 +83,6 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 		$speakerClassname = t3lib_div::makeInstanceClassName('tx_seminars_speaker');
 		$this->currentItem =& new $speakerClassname(0, $this->dbResult);
 		$this->checkCurrentItem();
-
-		return;
 	}
 }
 

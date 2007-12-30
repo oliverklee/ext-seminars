@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,11 +37,6 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
 
 class tx_seminars_timeslotbag extends tx_seminars_bag {
-	/** Same as class name */
-	var $prefixId = 'tx_seminars_timeslotbag';
-	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_timeslotbag.php';
-
 	/**
 	 * The constructor. Creates a timeslot bag that contains timeslot
 	 * records and allows to iterate over them.
@@ -51,11 +46,11 @@ class tx_seminars_timeslotbag extends tx_seminars_bag {
 	 * 						spaces are not necessary for this parameter)
 	 * @param	string		comma-separated names of additional DB tables used
 	 * 						for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already by
+	 * @param	string		GROUP BY clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already by
+	 * @param	string		ORDER BY clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already by
+	 * @param	string		LIMIT clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
 	 *
 	 * @access	public

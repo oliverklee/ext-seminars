@@ -40,42 +40,40 @@
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
 class tx_seminars_bag extends tx_seminars_dbplugin {
-	/** Same as class name */
-	var $prefixId = 'tx_seminars_seminar_bag';
-	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_bag.php';
-
 	/** the name of the main DB table from which we get the records for this bag */
-	var $dbTableName;
+	var $dbTableName = '';
 	/** the comma-separated names of other DB tables which we need for JOINs */
-	var $additionalTableNames;
+	var $additionalTableNames = '';
 
 	/** the ORDER BY clause (without the actual string "ORDER BY") */
-	var $orderBy;
+	var $orderBy = '';
 	/** the GROUP BY clause (without the actual string "GROUP BY") */
-	var $groupBy;
+	var $groupBy = '';
 	/** the LIMIT clause (without the actual string "LIMIT") */
-	var $limit;
+	var $limit = '';
 
 	/** how many objects this bag actually holds with the LIMIT */
-	var $objectCountWithLimit;
+	var $objectCountWithLimit = 0;
 	/** how many objects this bag would hold without the LIMIT */
-	var $objectCountWithoutLimit;
+	var $objectCountWithoutLimit = 0;
 
 	/** an SQL query result (not converted to an associative array yet) */
-	var $dbResult = null;
+	var $dbResult = false;
+
 	/** the current object (may be null) */
 	var $currentItem = null;
+
 	/**
 	 * string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
 	 * (the AND and the enclosing spaces are not necessary for this parameter)
 	 */
-	var $queryParameters;
+	var $queryParameters = '';
+
 	/**
 	 * string that will be prepended to the WHERE clause, making sure that only
 	 * enabled and non-deleted records will be processed
 	 */
-	var $enabledFieldsQuery;
+	var $enabledFieldsQuery = '';
 
 	/**
 	 * The constructor. Sets the iterator to the first result of a query
@@ -89,11 +87,11 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * 						one table is queried
 	 * @param	string		comma-separated names of additional DB tables used
 	 * 						for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already by
+	 * @param	string		GROUP BY clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already by
+	 * @param	string		ORDER BY clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already by
+	 * @param	string		LIMIT clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
 	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
 	 * 						fields in records are ignored.
@@ -126,8 +124,6 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 
 		$this->init();
 		$this->resetToFirst();
-
-		return;
 	}
 
 	/**
@@ -173,7 +169,6 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 					);
 			}
 		}
-		return;
 	}
 
 	/**
@@ -228,7 +223,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Advances to the next event record and returns a reference to that object.
+	 * Advances to the next record and returns a reference to that object.
 	 *
 	 * @return	object		a reference to the now current object
 	 *						(may be null if there is no next object)
@@ -260,9 +255,10 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Returns the current seminar object (which may be null).
+	 * Returns the current object (which may be null).
 	 *
-	 * @return	object		a reference to the current seminar object (may be null if there is no current object)
+	 * @return	object		a reference to the current object (will be null if
+	 * 						there is no current object)
 	 *
 	 * @access	public
 	 */
@@ -288,8 +284,6 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			// Let warnings from the single records bubble up to us.
 			$this->setErrorMessage($this->currentItem->checkConfiguration(true));
 		}
-
-		return;
 	}
 
 	/**

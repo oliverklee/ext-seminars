@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,24 +22,24 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
- * Class 'tx_seminars_organizerbag' for the 'seminars' extension.
+ * Class 'tx_seminars_testbag' for the 'seminars' extension.
  *
- * This aggregate class holds a bunch of organizer objects and allows
- * to iterate over them.
+ * This aggregate class holds a bunch of test objects and allows to iterate over
+ * them.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
+require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_test.php');
 
-class tx_seminars_organizerbag extends tx_seminars_bag {
+class tx_seminars_testbag extends tx_seminars_bag {
 	/**
-	 * The constructor. Creates a organizer bag that contains organizer
-	 * records and allows to iterate over them.
+	 * The constructor. Creates a bag that contains test records and allows to
+	 * iterate over them.
 	 *
 	 * @param	string		string that will be prepended to the WHERE
 	 * 						clause using AND, e.g. 'pid=42' (the AND and the
@@ -53,43 +53,49 @@ class tx_seminars_organizerbag extends tx_seminars_bag {
 	 * 						safeguarded against SQL injection
 	 * @param	string		LIMIT clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
+	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
+	 * 						fields in records are ignored.
+	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
+	 * 						records is ignored.
+	 *
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_organizerbag(
+	function tx_seminars_testbag(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-		$orderBy = '', $limit = ''
+		$orderBy = '', $limit = '',	$showHiddenRecords = -1,
+		$ignoreTimingOfRecords = false
 	) {
 		parent::tx_seminars_bag(
-			SEMINARS_TABLE_ORGANIZERS,
+			SEMINARS_TABLE_TEST,
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,
 			$orderBy,
-			$limit
+			$limit,
+			$showHiddenRecords,
+			$ignoreTimingOfRecords
 		);
 	}
 
 	/**
-	 * Creates the current item in $this->currentItem, using $this->dbResult as
-	 * a source. If the current item cannot be created, $this->currentItem will
-	 * be nulled out.
+	 * Creates the current item in $this->currentItem, using $this->dbResult
+	 * as a source. If the current item cannot be created, $this->currentItem
+	 * will be nulled out.
 	 *
 	 * $this->dbResult must be ensured to be non-null when this function is called.
 	 *
 	 * @access	protected
 	 */
 	function createItemFromDbResult() {
-		$organizerClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_organizer'
-		);
-		$this->currentItem =& new $organizerClassname(0, $this->dbResult);
+		$testClassname = t3lib_div::makeInstanceClassName('tx_seminars_test');
+		$this->currentItem =& new $testClassname(0, $this->dbResult);
 		$this->checkCurrentItem();
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizerbag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizerbag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_testbag.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_testbag.php']);
 }
 
 ?>
