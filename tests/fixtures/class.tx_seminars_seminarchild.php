@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -47,8 +47,6 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * @param	array		TS setup configuration array, may be empty
 	 */
 	public function __construct($uid, array $configuration) {
-		// Call the base classe's constructor manually as this isn't done
-		// automatically.
 		parent::tx_seminars_seminar($uid);
 
 		$this->conf = $configuration;
