@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2007-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,15 +29,13 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'pi1/class.tx_seminars_pi1.php');
-require_once(t3lib_extMgm::extPath('seminars')
-	.'class.tx_seminars_registrationmanager.php');
+require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 
 class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private $fixture;
 
-	protected function setUp() {
+	public function setUp() {
 		$this->fixture = new tx_seminars_pi1();
 		$this->fixture->init(array());
 		$this->fixture->createHelperObjects();
@@ -46,7 +44,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		unset($this->fixture);
 	}
 
