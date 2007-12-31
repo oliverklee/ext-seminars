@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2007 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2008 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -46,11 +46,11 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * 						spaces are not necessary for this parameter)
 	 * @param	string		comma-separated names of additional DB tables used
 	 * 						for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already by
+	 * @param	string		GROUP BY clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already by
+	 * @param	string		ORDER BY clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already by
+	 * @param	string		LIMIT clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
 	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
 	 * 						fields in records are ignored.
@@ -93,8 +93,6 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$this->currentItem =& new $seminarClassname(0, $this->dbResult);
 		$this->checkCurrentItem();
-
-		return;
 	}
 
 	/**
