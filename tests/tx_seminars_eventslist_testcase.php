@@ -70,7 +70,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->deleteDummySystemFolder();
-		$this->resetAutoIncrement('pages');
+		$this->testingFramework->resetAutoIncrement('pages');
 		$this->testingFramework->cleanUp();
 		unset($this->page);
 		unset($this->fixture);
@@ -117,85 +117,6 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->dummySysFolderPid = 0;
 	}
 
-	/**
-	 * Counts the records on the table given by the first parameter $table that
-	 * match a given WHERE clause.
-	 *
-	 * Note: This function has been copied from the oelib unit testing
-	 * framework. This function can be removed once the unit testing framework
-	 * supports the table "pages" (bug 1418).
-	 *
-	 * @see	https://bugs.oliverklee.com/show_bug.cgi?id=1418
-	 *
-	 * @param	string		the name of the table to query, must not be empty
-	 * @param	string		the where part of the query, may be empty (all records
-	 * 						will be counted in that case)
-	 *
-	 * @return	integer		the number of records that have been found
-	 */
-	private function countRecords($table, $whereClause = '1=1') {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'COUNT(*) AS number',
-			$table,
-			$whereClause
-		);
-		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
-		}
-		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-		if (!$row) {
-			throw new Exception(
-				'There was an error with the result of the database query.'
-			);
-		}
-
-		return intval($row['number']);
-	}
-
-	/**
-	 * Resets the auto increment value for a given table to the highest existing
-	 * UID + 1. This is required to leave the table in the same status that it
-	 * had before adding dummy records.
-	 *
-	 * Note: This function has been copied from the oelib unit testing
-	 * framework. This function can be removed once the unit testing framework
-	 * supports the table "pages" (bug 1418).
-	 *
-	 * @see	https://bugs.oliverklee.com/show_bug.cgi?id=1418
-	 *
-	 * @param	string		the name of the table on which we're going to reset
-	 * 						the auto increment entry, must not be empty
-	 */
-	private function resetAutoIncrement($table) {
-		// Checks whether the current table qualifies for this method. If there
-		// is no column "uid" that has the "auto_icrement" flag set, we should not
-		// try to reset this inexistent auto increment index to avoid DB errors.
-		if (!$this->testingFramework->hasTableColumnUid($table)) {
-			return;
-		}
-
-		// Searches for the record with the highest UID in this table.
-		$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
-			'SELECT MAX(uid) AS uid FROM '.$table.';'
-		);
-		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
-		}
-		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-		if (!$row) {
-			throw new Exception(
-				'There was an error with the result of the database query.'
-			);
-		}
-		$newAutoIncrementValue = $row['uid'] + 1;
-
-		// Updates the auto increment index for this table. The index will be set
-		// to one UID above the highest existing UID.
-		$GLOBALS['TYPO3_DB']->sql_query(
-			'ALTER TABLE '.$table.' AUTO_INCREMENT='.$newAutoIncrementValue.';'
-		);
-	}
-
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -209,7 +130,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotEquals(
 			0,
-			$this->countRecords(
+			$this->testingFramework->countRecords(
 				'pages', 'uid='.$this->dummySysFolderPid
 			)
 		);
@@ -225,7 +146,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			0,
-			$this->countRecords(
+			$this->testingFramework->countRecords(
 				'pages', 'title="'.SEMINARS_SYSFOLDER_TITLE.'"'
 			)
 		);
