@@ -31,69 +31,14 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bagbuilder.php');
+
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 
-class tx_seminars_seminarbagbuilder {
-	/**
-	 * associative array with the WHERE clause parts (they will be concatenated
-	 * with " AND " later)
-	 */
-	var $whereClauseParts = array();
-
-	/** the sorting field */
-	var $orderBy = '';
-
-	/** the field by which the DB query result should be grouped */
-	var $groupBy = '';
-
-	/** the number of records to retrieve; leave empty to set no limit */
-	var $limit = '';
-
-	/** comma-separated list of additional table names for the query */
-	var $additionalTableNames = '';
-
-	/** whether the timing of events should be ignored */
-	var $ignoreTimingOfRecords = false;
-
-	/** whether hidden records should be shown, too */
-	var $showHiddenRecords = false;
-
-	/**
-	 * The constructor. Currently does nothing.
-	 *
-	 * @access	public
-	 */
-	function tx_seminars_seminarbagbuilder() {
-	}
-
-	/**
-	 * Creates and returns the customized bag.
-	 *
-	 * @return	tx_seminars_seminarbag	customized, newly-created seminar bag
-	 *
-	 * @access	public
-	 */
-	function build() {
-		if (!empty($this->whereClauseParts)) {
-			$whereClause = implode(' AND ', $this->whereClauseParts);
-		} else {
-			$whereClause = '1=1';
-		}
-
-		$seminarBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminarbag'
-		);
-		return new $seminarBagClassname(
-			$whereClause,
-			$this->additionalTableNames,
-			$this->groupBy,
-			$this->orderBy,
-			$this->limit,
-			($this->showHiddenRecords ? 1 : -1),
-			$this->ignoreTimingOfRecords
-		);
-	}
+class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
+	/** class name of the bag class that will be built */
+	var $bagClassName = 'tx_seminars_seminarbag';
 
 	/**
 	 * Configures the seminar bag to work like a BE list: It will use the
@@ -103,15 +48,13 @@ class tx_seminars_seminarbagbuilder {
 	 */
 	function setBackEndMode() {
 		$this->useBackEndSorting();
-
-		$this->showHiddenRecords = true;
-		$this->ignoreTimingOfRecords = true;
+		parent::setBackEndMode();
 	}
 
 	/**
 	 * Sets the sorting to be the same as in the BE.
 	 *
-	 * @access	public
+	 * @access	private
 	 */
 	function useBackEndSorting() {
 		// unserializes the configuration array
@@ -120,45 +63,6 @@ class tx_seminars_seminarbagbuilder {
 		);
 		$this->orderBy = ($globalConfiguration['useManualSorting'])
 			? 'sorting' : 'begin_date';
-	}
-
-	/**
-	 * Sets the PIDs of the system folders that contain the event records.
-	 *
-	 * @param	string		comma-separated list of PIDs of the system folders
-	 * 						with the event records; must not be empty; need not
-	 * 						be safeguarded against SQL injection
-	 *
-	 * @access	public
-	 */
-	function setSourcePages($sourcePagePids) {
-		if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
-			return;
-		}
-
-		$this->whereClauseParts['pages'] = 'pid IN('.$sourcePagePids.')';
-	}
-
-	/**
-	 * Checks whether some source pages have already been set.
-	 *
-	 * @return	boolean		true if source pages have already been set, false
-	 * 						otherwise
-	 *
-	 * @access	public
-	 */
-	public function hasSourcePages() {
-		return isset($this->whereClauseParts['pages']);
-	}
-
-	/**
-	 * Sets the created bag to only take records into account that have been
-	 * created with the oelib testing framework.
-	 *
-	 * @access	public
-	 */
-	function setTestMode() {
-		$this->whereClauseParts['tests'] = 'is_dummy_record = 1';
 	}
 }
 
