@@ -220,106 +220,9 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	// Tests for the basic builder functions.
 	///////////////////////////////////////////
 
-	public function testBuilderBuildsAnObject() {
-		$this->assertTrue(
-			is_object($this->fixture->build())
-		);
-	}
-
 	public function testBuilderBuildsABagChildObject() {
 		$this->assertTrue(
 			is_subclass_of($this->fixture->build(), 'tx_seminars_bag')
-		);
-	}
-
-	public function testBuilderInitiallyHasNoSourcePages() {
-		$this->assertFalse(
-			$this->fixture->hasSourcePages()
-		);
-	}
-
-	public function testBuilderHasSourcePagesWithOnePage() {
-		$this->fixture->setSourcePages($this->dummySysFolderPid);
-
-		$this->assertTrue(
-			$this->fixture->hasSourcePages()
-		);
-	}
-
-	public function testBuilderHasSourcePagesWithTwoPages() {
-		$this->fixture->setSourcePages(
-			$this->dummySysFolderPid.','.($this->dummySysFolderPid + 1)
-		);
-
-		$this->assertTrue(
-			$this->fixture->hasSourcePages()
-		);
-	}
-
-	public function testBuilderHasNoSourcePagesWithEvilSql() {
-		$this->fixture->setSourcePages(
-			'; DROP TABLE '.SEMINARS_TABLE_SEMINARS.';'
-		);
-
-		$this->assertFalse(
-			$this->fixture->hasSourcePages()
-		);
-	}
-
-	public function testBuilderSelectsEventsFromAllPagesByDefault() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->dummySysFolderPid)
-		);
-		// Puts this record on a non-existing page. This is intentional.
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->dummySysFolderPid + 1)
-		);
-
-		$this->assertEquals(
-			2,
-			$this->fixture->build()->getObjectCountWithoutLimit()
-		);
-	}
-
-	public function testBuilderSelectsEventsFromOnePage() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->dummySysFolderPid)
-		);
-		// Puts this record on a non-existing page. This is intentional.
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->dummySysFolderPid + 1)
-		);
-
-		$this->fixture->setSourcePages($this->dummySysFolderPid);
-
-		$this->assertEquals(
-			1,
-			$this->fixture->build()->getObjectCountWithoutLimit()
-		);
-	}
-
-	public function testBuilderSelectsEventsFromTwoPages() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->dummySysFolderPid)
-		);
-		// Puts this record on a non-existing page. This is intentional.
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->dummySysFolderPid + 1)
-		);
-
-		$this->fixture->setSourcePages(
-			$this->dummySysFolderPid.','.($this->dummySysFolderPid + 1)
-		);
-
-		$this->assertEquals(
-			2,
-			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
 
@@ -371,32 +274,6 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->getObjectCountWithoutLimit()
-		);
-	}
-
-	public function testBuilderIgnoresDeletedEventsByDefault() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('deleted' => 1)
-		);
-
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
-		);
-	}
-
-	public function testBuilderIgnoresDeletedEventsInBackEndMode() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('deleted' => 1)
-		);
-
-		$this->fixture->setBackEndMode();
-
-		$this->assertEquals(
-			0,
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}

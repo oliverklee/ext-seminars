@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2008 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,11 +37,6 @@ require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
 
 final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
-	public $prefixId = 'tx_seminars_timeslotchild';
-	public $scriptRelPath
-		= 'tests/fixtures/class.tx_seminars_timeslotchild.php';
-	public $extKey = 'seminars';
-
 	/**
 	 * The constructor.
 	 *
