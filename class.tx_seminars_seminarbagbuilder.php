@@ -32,7 +32,6 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bagbuilder.php');
-
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
 
