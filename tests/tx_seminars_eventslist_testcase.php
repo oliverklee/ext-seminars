@@ -36,8 +36,6 @@ require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testi
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_eventslist.php');
 
-define('SEMINARS_SYSFOLDER_TITLE', 'tx_seminars unit test page');
-
 class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
@@ -55,8 +53,8 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 			= new tx_oelib_testingframework('tx_seminars');
 
 		$this->fixture = new tx_seminars_eventslist($this->page);
-
-		$this->createDummySystemFolder();
+		$this->dummySysFolderPid
+			= $this->testingFramework->createSystemFolder();
 
 		$this->page = new t3lib_SCbase();
 		$this->page->id = $this->dummySysFolderPid;
@@ -69,87 +67,10 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->deleteDummySystemFolder();
-		$this->testingFramework->resetAutoIncrement('pages');
 		$this->testingFramework->cleanUp();
 		unset($this->page);
 		unset($this->fixture);
 		unset($this->testingFramework);
-	}
-
-
-	///////////////////////
-	// Utility functions.
-	///////////////////////
-
-	/**
-	 * Creates a system folder and stores its PID in $this->dummySysFolderPid.
-	 */
-	private function createDummySystemFolder() {
-		$GLOBALS['TYPO3_DB']->exec_INSERTquery(
-			'pages',
-			array(
-				'pid' => 0,
-				'doktype' => 254,
-				'title' => SEMINARS_SYSFOLDER_TITLE
-			)
-		);
-
-		$this->dummySysFolderPid = $GLOBALS['TYPO3_DB']->sql_insert_id();
-	}
-
-	/**
-	 * Deletes the dummy system folder that has been created using
-	 * createDummySystemFolder.
-	 *
-	 * If no such folder has been created, this function is a no-op.
-	 */
-	private function deleteDummySystemFolder() {
-		if ($this->dummySysFolderPid == 0) {
-			return;
-		}
-
-		$GLOBALS['TYPO3_DB']->exec_DELETEquery(
-			'pages',
-			'uid = '.$this->dummySysFolderPid
-		);
-
-		$this->dummySysFolderPid = 0;
-	}
-
-
-	/////////////////////////////////////
-	// Tests for the utility functions.
-	/////////////////////////////////////
-
-	public function testDummySystemFolderHasBeenCreated() {
-		$this->assertNotEquals(
-			0,
-			$this->dummySysFolderPid
-		);
-
-		$this->assertNotEquals(
-			0,
-			$this->testingFramework->countRecords(
-				'pages', 'uid='.$this->dummySysFolderPid
-			)
-		);
-	}
-
-	public function testDummySystemFolderCanBeDeleted() {
-		$this->deleteDummySystemFolder();
-
-		$this->assertEquals(
-			0,
-			$this->dummySysFolderPid
-		);
-
-		$this->assertEquals(
-			0,
-			$this->testingFramework->countRecords(
-				'pages', 'title="'.SEMINARS_SYSFOLDER_TITLE.'"'
-			)
-		);
 	}
 
 
