@@ -172,7 +172,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: check_tx_seminars_test/.
+	 * Checks the configuration for: tx_seminars_test/.
 	 *
 	 * @access	private
 	 */
@@ -181,11 +181,29 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: check_tx_seminars_testbag/.
+	 * Checks the configuration for: tx_seminars_testbag/.
 	 *
 	 * @access	private
 	 */
 	function check_tx_seminars_testbag() {
+		$this->checkStaticIncluded();
+	}
+
+	/**
+	 * Checks the configuration for: tx_seminars_category/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_category() {
+		$this->checkStaticIncluded();
+	}
+
+	/**
+	 * Checks the configuration for: tx_seminars_categorybag/.
+	 *
+	 * @access	private
+	 */
+	function check_tx_seminars_categorybag() {
 		$this->checkStaticIncluded();
 	}
 
