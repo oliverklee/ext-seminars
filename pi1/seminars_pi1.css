@@ -27,15 +27,28 @@
 
 .tx-seminars-pi1-listrow th,
 .tx-seminars-pi1-listrow td {
-	padding: .2em .5em;
 	margin: 0;
 	border-spacing: 0;
 	vertical-align: top;
 }
 
+.tx-seminars-pi1-listrow td {
+	padding: .2em .5em;
+}
+
 .tx-seminars-pi1-listrow th {
 	font-weight: bold;
 	text-align: center;
+}
+
+.tx-seminars-pi1-listrow th a {
+	display: block;
+	padding: .2em .5em;
+}
+
+th.tx-seminars-pi1-registration,
+th.tx-seminars-pi1-list-registrations {
+	padding: .2em .5em;
 }
 
 th.tx-seminars-pi1-title {

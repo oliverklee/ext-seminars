@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#354] Change: Make all links in the list view display:block
 - [#1419] Feature: Add functions in the testing framework to create dummy FE pages and dummy system folders
 - [#1418] Change: testingframework::resetAutoIncrement and ::countRecords should allow every existing table
 - [#1424] Feature: Add classes: category, categorybag, categorybagbuilder

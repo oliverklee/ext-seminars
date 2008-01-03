@@ -201,8 +201,8 @@ plugin.tx_seminars_pi1 {
 	class_headertarget_groups =
 	class_headervacancies =
 	class_headerstatus_registration =
-	class_headerregistration =
-	class_headerlist_registrations =
+	class_headerregistration = registration
+	class_headerlist_registrations = list-registrations
 	class_headeredit =
 
 	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
