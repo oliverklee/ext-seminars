@@ -3,8 +3,18 @@ if (!defined ('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-// FORMidable declaration
-require_once(t3lib_extMgm::extPath('ameos_formidable').'api/class.tx_ameosformidable.php');
+if (t3lib_extMgm::isLoaded('ameos_formidable')) {
+	$formidableClassFile = t3lib_extMgm::extPath('ameos_formidable')
+		.'api/class.tx_ameosformidable.php';
+
+	if (is_file($formidableClassFile)) {
+		require_once($formidableClassFile);
+		// adds a FORMidable data handler that also can create M:M relations
+		tx_ameosformidable::declareDataHandler($_EXTKEY, 'DBMM', false);
+	}
+
+	unset($formidableClassFile);
+}
 
 t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_seminars=1
@@ -55,8 +65,5 @@ t3lib_extMgm::addTypoScript($_EXTKEY, 'setup','
 	tt_content.shortcut.20.0.conf.tx_seminars_seminars = < plugin.'.t3lib_extMgm::getCN($_EXTKEY).'_pi1
 	tt_content.shortcut.20.0.conf.tx_seminars_seminars.CMD = singleView
 ',43);
-
-// add a FORMidable data handler that also can create M:M relations
-tx_ameosformidable::declareDataHandler($_EXTKEY, 'DBMM', false);
 
 ?>
