@@ -43,7 +43,6 @@ class tx_seminars_categorybag_testcase extends tx_phpunit_testcase {
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingframework('tx_seminars');
-		$this->fixture = new tx_seminars_categorybag();
 
 		$this->uidOfFirstCategory = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
@@ -53,6 +52,8 @@ class tx_seminars_categorybag_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES,
 			array('title' => 'test category 2')
 		);
+
+		$this->fixture = new tx_seminars_categorybag();
 	}
 
 	protected function tearDown() {
