@@ -83,7 +83,7 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetCountry() {
+	public function testGetCountryIsoCode() {
 		$this->assertEquals(
 			'JP',
 			$this->fixture->getCountryIsoCode()
