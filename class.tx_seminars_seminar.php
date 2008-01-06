@@ -621,9 +621,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * place is set, or the set place(s) don't have any country set, an empty
 	 * array will be returned.
 	 *
-	 * TODO: This function could be simplified by using a join in the MySQL
-	 * query. See Bug 1217 that is filed about this.
-	 *
 	 * @return	array		the list of ISO codes for the countries of this event, may be empty
 	 *
 	 * @access	public
@@ -631,31 +628,23 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	function getPlacesWithCountry() {
 		$countries = array();
 
-		// Fetches all the corresponding place records for this event from the m:m table.
-		$dbResultMM = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'uid_foreign',
-			SEMINARS_TABLE_SITES_MM,
-			'uid_local='.$this->getUid(),
-			'uid_foreign'
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'country',
+			SEMINARS_TABLE_SITES.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM
+				.' ON '.SEMINARS_TABLE_SITES.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_foreign'
+				.' LEFT JOIN '.SEMINARS_TABLE_SEMINARS
+				.' ON '.SEMINARS_TABLE_SITES_MM.'.uid_local='.SEMINARS_TABLE_SEMINARS.'.uid',
+			SEMINARS_TABLE_SEMINARS.'.uid='.$this->getUid()
+				.' AND '.SEMINARS_TABLE_SITES.'.country!=""'
+				.$this->enableFields(SEMINARS_TABLE_SITES),
+			'country'
 		);
 
-		if ($dbResultMM) {
-			while ($rowMM = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultMM)) {
-				// Fetch the country field from the found place records.
-				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'country',
-					SEMINARS_TABLE_SITES,
-					'uid='.$rowMM['uid_foreign']
-						.' AND country != ""'
-						.$this->enableFields(SEMINARS_TABLE_SITES)
-				);
-
-				// Check whether we have found any country at all. If something
-				// was found, add it to the array that will be returned.
-				if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-					$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-					$countries[] = $row['country'];
-				}
+		// Checks whether we have found any country at all. If something
+		// was found, adds it to the array that will be returned.
+		if ($dbResult) {
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$countries[] = $row['country'];
 			}
 		}
 
