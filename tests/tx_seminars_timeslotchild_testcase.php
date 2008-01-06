@@ -32,7 +32,7 @@
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_timeslotchild.php');
 
-require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testingframework.php');
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
 
 class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -40,7 +40,7 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 
 	public function setUp() {
 		$this->testingFramework
-			= new tx_oelib_testingframework('tx_seminars');
+			= new tx_oelib_testingFramework('tx_seminars');
 
 		$seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS

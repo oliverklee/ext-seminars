@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1471] Change: Move the testing framework from tests/fixtures/ to the oelib main directory and rename it
 - [#1454] Fix: Failing test: tx_seminars_categorybag_testcase::testBagCanHaveAtLeastOneElement
 - [#1294] Fix: Installing seminars without FORMidable will break BE login
 - [#354] Change: Make all links in the list view display:block

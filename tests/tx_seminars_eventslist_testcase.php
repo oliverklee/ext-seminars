@@ -31,10 +31,10 @@
 
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 
-require_once(t3lib_extMgm::extPath('oelib').'tests/fixtures/class.tx_oelib_testingframework.php');
-
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_eventslist.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
 
 class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -50,7 +50,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		global $BACK_PATH;
 
 		$this->testingFramework
-			= new tx_oelib_testingframework('tx_seminars');
+			= new tx_oelib_testingFramework('tx_seminars');
 
 		$this->fixture = new tx_seminars_eventslist($this->page);
 		$this->dummySysFolderPid
