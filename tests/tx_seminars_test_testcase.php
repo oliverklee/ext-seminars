@@ -128,6 +128,32 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			$this->fixture->getTitle()
 		);
 	}
+
+
+	//////////////////////////////////
+	// Tests for setting attributes.
+	//////////////////////////////////
+
+	public function testSetAndGetRecordPropertyBoolean() {
+		$this->assertFalse(
+			$this->fixture->getRecordPropertyBoolean('test')
+		);
+
+		$this->fixture->setRecordPropertyBoolean('test', true);
+		$this->assertTrue(
+			$this->fixture->getRecordPropertyBoolean('test')
+		);
+	}
+
+	public function testSetAndGetTitle() {
+		$title = 'Test';
+		$this->fixture->setTitle($title);
+
+		$this->assertEquals(
+			$title,
+			$this->fixture->getTitle()
+		);
+	}
 }
 
 ?>

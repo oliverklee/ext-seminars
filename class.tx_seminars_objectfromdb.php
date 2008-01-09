@@ -249,6 +249,20 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Sets a boolean element of the record data array.
+	 *
+	 * @param	string		key of the element to set (must be non-empty)
+	 * @param	boolean		the value that will be written into the element
+	 *
+	 * @access	protected
+	 */
+	function setRecordPropertyBoolean($key, $value) {
+		if (!empty($key)) {
+			$this->recordData[$key] = (boolean) $value;
+		}
+	}
+
+	/**
 	 * Gets an element of the record data array, converted to a boolean.
 	 * If the array has not been initialized properly, false is returned.
 	 *
@@ -480,6 +494,17 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 */
 	function getTitle() {
 		return $this->getRecordPropertyString('title');
+	}
+
+	/**
+	 * Sets the title element of the record data array.
+	 *
+	 * @param	string		the value that will be written into the title element
+	 *
+	 * @access	public
+	 */
+	function setTitle($title) {
+		$this->setRecordPropertyString('title', $title);
 	}
 
 	/**
