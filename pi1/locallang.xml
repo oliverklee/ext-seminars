@@ -590,7 +590,7 @@
 			<label index="label_timeslot_entry_date">Einlass</label>
 			<label index="label_timeslot_room">Raum</label>
 			<label index="label_timeslot_place">Ort</label>
-			<label index="label_timeslot_speakers">Referenten</label>
+			<label index="label_timeslot_speakers">ReferentInnen</label>
 			<label index="label_unregistration_message_formal">Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</label>
 			<label index="label_unregistration_message_informal">Willst du dich wirklich von dieser Veranstaltung abmelden?</label>
 			<label index="label_cancel">Abbrechen</label>
