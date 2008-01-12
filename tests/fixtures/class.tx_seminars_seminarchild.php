@@ -202,6 +202,32 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setNumberOfTargetGroups($targetGroups) {
 		$this->setRecordPropertyInteger('target_groups', $targetGroups);
 	}
+
+	/**
+	 * Adds a payment method to this event.
+	 *
+	 * @param	integer		the UID of the payment method to add
+	 */
+	public function addPaymentMethod($uid) {
+		if ($uid == 0) {
+			return;
+		}
+
+		$paymentMethods = t3lib_div::trimExplode(
+			',',
+			$this->getPaymentMethodsUids(),
+			1
+		);
+
+		if (!in_array($uid, $paymentMethods)) {
+			$paymentMethods[] = $uid;
+		}
+
+		$this->setRecordPropertyString(
+			'payment_methods',
+			implode(',', $paymentMethods)
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

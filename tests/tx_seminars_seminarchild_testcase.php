@@ -140,6 +140,24 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Inserts a payment method record into the database and creates a relation
+	 * to it from the fixture.
+	 *
+	 * @param	array		data of the payment method to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will always be > 0
+	 */
+	private function addPaymentMethodRelation(array $paymentMethodData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, $paymentMethodData
+		);
+
+		$this->fixture->addPaymentMethod($uid);
+
+		return $uid;
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -260,6 +278,38 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				SEMINARS_TABLE_TARGET_GROUPS_MM,
 				'uid_local='.$this->fixture->getUid()
 			)
+		);
+	}
+
+	public function testAddPaymentMethodRelationReturnsUid() {
+		$this->assertTrue(
+			$this->addPaymentMethodRelation(array()) > 0
+		);
+	}
+
+	public function testAddPaymentMethodRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addPaymentMethodRelation(array()),
+			$this->addPaymentMethodRelation(array())
+		);
+	}
+
+	public function testAddPaymentMethodRelationIncreasesTheNumberOfPaymentMethods() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfPaymentMethods()
+		);
+
+		$this->addPaymentMethodRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfPaymentMethods()
+		);
+
+		$this->addPaymentMethodRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfPaymentMethods()
 		);
 	}
 
@@ -1010,6 +1060,117 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			array($titleTargetGroup1, $titleTargetGroup2),
 			$this->fixture->getTargetGroupsAsArray()
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests regarding the payment methods.
+	///////////////////////////////////////////////////////////
+
+	public function testHasPaymentMethodsReturnsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasPaymentMethods()
+		);
+	}
+
+	public function testCanHaveOnePaymentMethod() {
+		$this->addPaymentMethodRelation(array());
+
+		$this->assertTrue(
+			$this->fixture->hasPaymentMethods()
+		);
+	}
+
+	public function testGetPaymentMethodsUidsWithNoPaymentMethodReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getPaymentMethodsUids()
+		);
+	}
+
+	public function testGetPaymentMethodsUidsWithSinglePaymentMethodReturnsASingleUid() {
+		$uid = $this->addPaymentMethodRelation(array());
+
+		$this->assertEquals(
+			$uid,
+			$this->fixture->getPaymentMethodsUids()
+		);
+	}
+
+	public function testGetPaymentMethodsUidsWithMultiplePaymentMethodsReturnsMultipleUidsSeparatedByComma() {
+		$firstUid = $this->addPaymentMethodRelation(array());
+		$secondUid = $this->addPaymentMethodRelation(array());
+
+		$this->assertEquals(
+			$firstUid.','.$secondUid,
+			$this->fixture->getPaymentMethodsUids()
+		);
+	}
+
+	public function testGetPaymentMethodsPlainWithNoPaymentMethodReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getPaymentMethodsPlain()
+		);
+	}
+
+	public function testGetPaymentMethodsPlainWithSinglePaymentMethodReturnsASinglePaymentMethod() {
+		$title = 'Test title';
+		$this->addPaymentMethodRelation(array('title' => $title));
+
+		$this->assertContains(
+			$title,
+			$this->fixture->getPaymentMethodsPlain()
+		);
+	}
+
+	public function testGetPaymentMethodsPlainWithMultiplePaymentMethodsReturnsMultiplePaymentMethods() {
+		$firstTitle = 'Payment Method 1';
+		$secondTitle = 'Payment Method 2';
+		$this->addPaymentMethodRelation(array('title' => $firstTitle));
+		$this->addPaymentMethodRelation(array('title' => $secondTitle));
+
+		$this->assertContains(
+			$firstTitle,
+			$this->fixture->getPaymentMethodsPlain()
+		);
+		$this->assertContains(
+			$secondTitle,
+			$this->fixture->getPaymentMethodsPlain()
+		);
+	}
+
+	public function testGetPaymentMethodsPlainShortWithNoPaymentMethodReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getPaymentMethodsPlainShort()
+		);
+	}
+
+	public function testGetPaymentMethodsPlainShortWithSinglePaymentMethodReturnsASinglePaymentMethod() {
+		$title = 'Test title';
+		$this->addPaymentMethodRelation(array('title' => $title));
+
+		$this->assertContains(
+			$title,
+			$this->fixture->getPaymentMethodsPlainShort()
+		);
+	}
+
+	public function testGetPaymentMethodsPlainShortWithMultiplePaymentMethodsReturnsMultiplePaymentMethods() {
+		$firstTitle = 'Payment Method 1';
+		$secondTitle = 'Payment Method 2';
+		$this->addPaymentMethodRelation(array('title' => $firstTitle));
+		$this->addPaymentMethodRelation(array('title' => $secondTitle));
+
+		$this->assertContains(
+			$firstTitle,
+			$this->fixture->getPaymentMethodsPlainShort()
+		);
+		$this->assertContains(
+			$secondTitle,
+			$this->fixture->getPaymentMethodsPlainShort()
 		);
 	}
 }
