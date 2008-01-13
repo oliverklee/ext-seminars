@@ -364,14 +364,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageNameWithDefaultLanguage() {
+	public function testGetLanguageNameWithDefaultLanguageOnSingleEvent() {
 		$this->assertEquals(
 			'Deutsch',
 			$this->fixture->getLanguageName()
 		);
 	}
 
-	public function testGetLanguageNameWithValidLanguage() {
+	public function testGetLanguageNameWithValidLanguageOnSingleEvent() {
 		$this->fixture->setEventData(
 			array(
 				'language' => 'en'
@@ -383,7 +383,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageNameWithInvalidLanguage() {
+	public function testGetLanguageNameWithInvalidLanguageOnSingleEvent() {
 		$this->fixture->setEventData(
 			array(
 				'language' => 'xy'
@@ -396,7 +396,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	public function testGetLanguageNameWithNoLanguage() {
+	public function testGetLanguageNameWithNoLanguageOnSingleEvent() {
 		$this->fixture->setEventData(
 			array(
 				'language' => ''
@@ -406,6 +406,63 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'',
 			$this->fixture->getLanguageName()
 		);
+	}
+
+	public function testGetLanguageNameOnDateRecord() {
+		// This was an issue with bug #1518 and #1517.
+		// The method getLanguage() needs to return the language from the date
+		// record instead of the topic record.
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('language' => 'de')
+		);
+
+		$dateRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicRecordUid,
+				'language' => 'it'
+			)
+		);
+
+		$seminar = new tx_seminars_seminar($dateRecordUid);
+
+		$this->assertEquals(
+			'Italiano',
+			$seminar->getLanguageName()
+		);
+	}
+
+	public function testGetLanguageOnSingleRecordThatWasADateRecord() {
+		// This test comes from bug 1518 and covers the following situation:
+		// We have an event record that has the topic field set as it was a
+		// date record. But then it was switched to be a single event record.
+		// In that case, the language from the single event record must be
+		// returned, not the one from the referenced topic record.
+
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('language' => 'de')
+		);
+
+		$singleRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'topic' => $topicRecordUid,
+				'language' => 'it'
+			)
+		);
+
+		$seminar = new tx_seminars_seminar($singleRecordUid);
+
+		$this->assertEquals(
+			'Italiano',
+			$seminar->getLanguageName()
+		);
+
+
 	}
 
 

@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1518] Change: Moved field "language" from topic to date records
 - [#1515] Fix: Selector Widget shows event type twice in the drop-down
 - [#463] Change: The seminar->getPaymentMethods* functions use too many DB queries
 - [#1509] Fix: Correct the German translation of the speakers label of the timeslots table
