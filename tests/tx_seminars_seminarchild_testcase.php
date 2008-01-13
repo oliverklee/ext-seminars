@@ -1173,6 +1173,32 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getPaymentMethodsPlainShort()
 		);
 	}
+
+
+	public function testGetEventTypeUidReturnsUidFromTopicRecord() {
+		// This test comes from bug #1515.
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'event_type' => 99999
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicRecordUid,
+				'event_type' => 199999
+			)
+		);
+		$seminar = new tx_seminars_seminar($dateRecordUid);
+
+		$this->assertEquals(
+			99999,
+			$seminar->getEventTypeUid()
+		);
+	}
 }
 
 ?>

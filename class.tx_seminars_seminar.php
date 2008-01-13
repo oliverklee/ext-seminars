@@ -1771,7 +1771,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						type is set
 	 */
 	function getEventTypeUid() {
-		return $this->getRecordPropertyInteger('event_type');
+		return $this->getTopicInteger('event_type');
 	}
 
 	/**
