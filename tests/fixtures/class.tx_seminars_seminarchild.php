@@ -228,6 +228,23 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			implode(',', $paymentMethods)
 		);
 	}
+
+	/**
+	 * Sets the number of organizing partners for this record.
+	 *
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of organizing partners.
+	 *
+	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param	integer		the number of organizing partners that are
+	 * 						associated with this event, must be >= 0
+	 */
+	public function setNumberOfOrganizingPartners($numberOfOrganizingPartners) {
+		$this->setRecordPropertyInteger(
+			'organizing_partners', $numberOfOrganizingPartners
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

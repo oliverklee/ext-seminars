@@ -2448,6 +2448,76 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Gets our organizing partners comma-separated (as HTML code with
+	 * hyperlinks to their homepage, if they have any).
+	 *
+	 * Returns an empty string if this event has no organizing partners or
+	 * something went wrong with the database query.
+	 *
+	 * @param	object		a tx_seminars_templatehelper object (for a live
+	 * 						page, must not be null)
+	 *
+	 * @return	string		the hyperlinked names of our organizing partners, or
+	 * 						an empty string
+	 *
+	 * @access	public
+	 */
+	function getOrganizingPartners(&$plugin) {
+		if (!$this->hasOrganizingPartners()) {
+			return '';
+		}
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			SEMINARS_TABLE_ORGANIZERS.'.title, '
+				.SEMINARS_TABLE_ORGANIZERS.'.homepage',
+			SEMINARS_TABLE_ORGANIZERS.', '
+				.SEMINARS_TABLE_ORGANIZING_PARTNERS_MM,
+			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM.'.uid_local='
+				.$this->getUid().' AND '
+				.SEMINARS_TABLE_ORGANIZING_PARTNERS_MM.'.uid_foreign='
+				.SEMINARS_TABLE_ORGANIZERS.'.uid'
+		);
+
+		if (!$dbResult) {
+			return '';
+		}
+
+		$organizingPartners = array();
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$organizingPartners[] = $plugin->cObj->getTypoLink(
+				$row['title'],
+				$row['homepage']
+			);
+		}
+
+		return implode(', ', $organizingPartners);
+	}
+
+	/**
+	 * Checks whether we have any organizing partners set.
+	 *
+	 * @return	boolean		true if we have any organizing partners related to
+	 * 						this event, false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasOrganizingPartners() {
+		return $this->hasRecordPropertyInteger('organizing_partners');
+	}
+
+	/**
+	 * Gets the number of organizing partners associated with this event.
+	 *
+	 * @return	integer		the number of organizing partners associated with
+	 * 						this event, will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfOrganizingPartners() {
+		return $this->getRecordPropertyInteger('organizing_partners');
+	}
+
+	/**
 	 * Gets the URL to the detailed view of this seminar.
 	 *
 	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is

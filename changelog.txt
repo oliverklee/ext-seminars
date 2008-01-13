@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1169] Feature: Add a field "organizing partner" to the event's record
 - [#1518] Change: Moved field "language" from topic to date records
 - [#1515] Fix: Selector Widget shows event type twice in the drop-down
 - [#463] Change: The seminar->getPaymentMethods* functions use too many DB queries

@@ -158,6 +158,30 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Inserts an organizer record into the database and creates a relation to
+	 * it from the fixture as a organizing partner.
+	 *
+	 * @param	array		data of the organizer to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will always be > 0
+	 */
+	private function addOrganizingPartnerRelation(array $organizerData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, $organizerData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfOrganizingPartners(
+			$this->fixture->getNumberOfOrganizingPartners() + 1
+		);
+
+		return $uid;
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -313,6 +337,47 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testAddOrganizingPartnerRelationReturnsUid() {
+		$this->assertTrue(
+			$this->addOrganizingPartnerRelation(array()) > 0
+		);
+	}
+
+	public function testAddOrganizingPartnerRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addOrganizingPartnerRelation(array()),
+			$this->addOrganizingPartnerRelation(array())
+		);
+	}
+
+	public function testAddOrganizingPartnerRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ORGANIZING_PARTNERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+
+		);
+
+		$this->addOrganizingPartnerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ORGANIZING_PARTNERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addOrganizingPartnerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ORGANIZING_PARTNERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
 
 	//////////////////////////////////////////////
 	// Tests regarding the language of an event:
@@ -1254,6 +1319,49 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			99999,
 			$seminar->getEventTypeUid()
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests regarding the organizing partners.
+	///////////////////////////////////////////////////////////
+
+	public function testHasOrganizingPartnersReturnsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasOrganizingPartners()
+		);
+	}
+
+	public function testCanHaveOneOrganizingPartner() {
+		$this->addOrganizingPartnerRelation(array());
+
+		$this->assertTrue(
+			$this->fixture->hasOrganizingPartners()
+		);
+	}
+
+	public function testGetNumberOfOrganizingPartnersWithNoOrganizingPartnerReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfOrganizingPartners()
+		);
+	}
+
+	public function testGetNumberOfOrganizingPartnersWithSingleOrganizingPartnerReturnsOne() {
+		$this->addOrganizingPartnerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfOrganizingPartners()
+		);
+	}
+
+	public function testGetNumberOfOrganizingPartnersWithMultipleOrganizingPartnersReturnsTwo() {
+		$this->addOrganizingPartnerRelation(array());
+		$this->addOrganizingPartnerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfOrganizingPartners()
 		);
 	}
 }

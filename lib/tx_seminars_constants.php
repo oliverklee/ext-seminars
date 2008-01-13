@@ -65,6 +65,7 @@ define('SEMINARS_TABLE_ATTENDANCES_FOODS_MM', 'tx_seminars_attendances_foods_mm'
 define('SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM', 'tx_seminars_timeslots_speakers_mm');
 define('SEMINARS_TABLE_TARGET_GROUPS_MM', 'tx_seminars_seminars_target_groups_mm');
 define('SEMINARS_TABLE_CATEGORIES_MM', 'tx_seminars_seminars_categories_mm');
+define('SEMINARS_TABLE_ORGANIZING_PARTNERS_MM', 'tx_seminars_seminars_organizing_partners_mm');
 
 define('SEMINARS_RECORD_TYPE_COMPLETE', 0);
 define('SEMINARS_RECORD_TYPE_TOPIC', 1);

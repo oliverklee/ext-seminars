@@ -130,6 +130,20 @@ CREATE TABLE tx_seminars_seminars_categories_mm (
 
 
 #
+# Table structure for table 'tx_seminars_seminars_organizing_partners_mm'
+#
+CREATE TABLE tx_seminars_seminars_organizing_partners_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+
+#
 # Table structure for table 'tx_seminars_seminars'
 #
 CREATE TABLE tx_seminars_seminars (
@@ -179,6 +193,7 @@ CREATE TABLE tx_seminars_seminars (
 	additional_information text,
 	payment_methods tinytext,
 	organizers tinytext,
+	organizing_partners int(11) unsigned DEFAULT '0' NOT NULL,
 	allows_multiple_registrations tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_max int(11) unsigned DEFAULT '0' NOT NULL,

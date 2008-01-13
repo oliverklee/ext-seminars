@@ -49,6 +49,7 @@
 			<label index="tx_seminars_seminars.leaders">Leaders:</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Organizer</label>
 			<label index="tx_seminars_seminars.organizers">Organizers:</label>
+			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
 			<label index="tx_seminars_seminars.begin_date">Begin time and date:</label>
 			<label index="tx_seminars_seminars.end_date">End time and date:</label>
@@ -203,6 +204,7 @@
 			<label index="tx_seminars_seminars.leaders">Kursleitung:</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Veranstalter</label>
 			<label index="tx_seminars_seminars.organizers">Veranstalter:</label>
+			<label index="tx_seminars_seminars.organizing_partners">Kooperationspartner:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Ort/Zeit</label>
 			<label index="tx_seminars_seminars.begin_date">Anfangszeit und -datum:</label>
 			<label index="tx_seminars_seminars.end_date">Endzeit und -datum:</label>
@@ -1048,6 +1050,7 @@
 			<label index="tx_seminars_seminars.leaders" type="integer">16925722</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers" type="integer">231556830</label>
 			<label index="tx_seminars_seminars.organizers" type="integer">121159748</label>
+			<label index="tx_seminars_seminars.organizing_partners" type="integer">45053453</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime" type="integer">27057202</label>
 			<label index="tx_seminars_seminars.begin_date" type="integer">188111362</label>
 			<label index="tx_seminars_seminars.end_date" type="integer">45211304</label>
@@ -1894,6 +1897,7 @@
 			<label index="tx_seminars_seminars.event_type">Event type:</label>
 			<label index="tx_seminars_seminars.language">Language:</label>
 			<label index="tx_seminars_seminars.organizers">Organizers:</label>
+			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
 			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person:</label>

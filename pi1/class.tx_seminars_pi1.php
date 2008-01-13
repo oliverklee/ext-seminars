@@ -1290,6 +1290,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->seminar->getOrganizers($this)
 			);
 
+			if ($this->seminar->hasOrganizingPartners()) {
+				$this->setMarkerContent(
+					'organizing_partners',
+					$this->seminar->getOrganizingPartners($this)
+				);
+			} else {
+				$this->readSubpartsToHide('organizing_partners', 'field_wrapper');
+			}
+
 			if ($this->seminar->needsRegistration() && !$this->seminar->isCanceled()) {
 				$this->setMarkerContent(
 					'vacancies',
