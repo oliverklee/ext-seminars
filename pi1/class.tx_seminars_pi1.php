@@ -610,8 +610,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 	/**
 	 * Gathers all the allowed entries for the option boxes of the selector
-	 * widget. This includes the languages, places and countries of the events
-	 * that are selected and in the seminar bag for the current list view.
+	 * widget. This includes the languages, places, countries and event types of
+	 * the events that are selected and in the seminar bag for the current list
+	 * view.
 	 *
 	 * IMPORTANT: The lists for each option box contain only the values that
 	 * are coming from the selected events! So there's not a huge list of languages
@@ -2886,6 +2887,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		foreach ($availableOptions as $currentValue => $currentLabel) {
 			$this->setMarkerContent('option_label', $currentLabel);
 			$this->setMarkerContent('option_value', $currentValue);
+
+			// Preselects the option if it was selected by the user.
+			if (isset($this->piVars[$optionBoxName])
+				&& ($currentValue != 'none')
+				&& (in_array($currentValue, $this->piVars[$optionBoxName]))
+			) {
+				$isSelected = ' selected="1"';
+			} else {
+				$isSelected = '';
+			}
+			$this->setMarkerContent('option_selected', $isSelected);
+
 			$optionsList .= $this->substituteMarkerArrayCached('OPTIONS_ENTRY');
 		}
 		$this->setMarkerContent('options', $optionsList);

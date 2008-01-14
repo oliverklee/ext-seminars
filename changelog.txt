@@ -35,7 +35,7 @@
 - [#1314] Fix: tx_seminars_organizers.email shouldn't be an exclude field
 - [#1311] Change: Sort the time slots relations in the event record form by the begin date of the time slots
 - [#946] Change: Require TYPO3 4.1.2
-- [#1208, #1209, #1210, #1217, #1276, #1326, #1344, #1376] Feature: Added new Selector Widget to the list view
+- [#1208, #1209, #1210, #1211, #1217, #1276, #1326, #1344, #1376] Feature: Added new Selector Widget to the list view
 - [#1205] Feature: Added Italian translation by Mauro Lorenzutti
 - [#1028] Feature: When a user unregisters, inform the user, organizers and new attendee via e-mail
 - [#1225] Fix: Missing empty line in confirmation mail
