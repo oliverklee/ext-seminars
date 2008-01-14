@@ -61,7 +61,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
 		);
 		$this->orderBy = ($globalConfiguration['useManualSorting'])
-			? 'sorting' : 'begin_date';
+			? 'sorting' : 'begin_date DESC';
 	}
 }
 
