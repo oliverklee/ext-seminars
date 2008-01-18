@@ -3024,8 +3024,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'registration_queue=1'
 		);
 		$this->statisticsHaveBeenCalculated = true;
-
-		return;
 	}
 
 	/**

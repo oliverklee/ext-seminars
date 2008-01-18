@@ -212,8 +212,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->retrieveUserData();
 			$this->createTitle();
 		}
-
-		return;
 	}
 
 	/**
@@ -246,8 +244,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['title'] = $this->getUserName()
 			.' / '.$this->seminar->getTitle()
 			.', '.$this->seminar->getDate('-');
-
-		return;
 	}
 
  	/**
@@ -270,8 +266,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		} else {
 			$this->userData = null;
 		}
-
-		return;
 	}
 
 	/**
@@ -839,8 +833,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			'quoted-printable',
 			$this->getConfValueString('charsetForEMails')
 		);
-
-		return;
 	}
 
 	/**
@@ -932,8 +924,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$this->getConfValueString('charsetForEMails')
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -1009,7 +999,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				);
 			}
 		}
-		return;
 	}
 
 	/**
@@ -1029,8 +1018,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 			$this->isTemplateInitialized = true;
 		}
-
-		return;
 	}
 
 	/**

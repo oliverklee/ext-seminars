@@ -96,8 +96,6 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 		$this->configGetter =& t3lib_div::makeInstance('tx_seminars_configgetter');
 		$this->configGetter->init();
-
-		return;
 	}
 
 	/**
@@ -409,8 +407,6 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			.$this->configGetter->getConfValueString('filenameForRegistrationsCsv'),
 			true
 		);
-
-		return;
 	}
 
 	/**
@@ -425,8 +421,6 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			.$this->configGetter->getConfValueString('filenameForEventsCsv'),
 			true
 		);
-
-		return;
 	}
 
 	/**
@@ -439,8 +433,6 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		// we provide a CSV header line.
 		header('Content-type: text/csv; header=present; charset='
 			.$this->configGetter->getConfValueString('charsetForCsv'), true);
-
-		return;
 	}
 }
 

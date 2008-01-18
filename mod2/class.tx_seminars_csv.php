@@ -50,8 +50,6 @@ class tx_seminars_csv extends t3lib_SCbase {
 	function printContent() {
 		$csvExporter =& t3lib_div::makeInstance('tx_seminars_pi2');
 		echo $csvExporter->main(null, null);
-
-		return;
 	}
 }
 

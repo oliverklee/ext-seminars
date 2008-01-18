@@ -1494,8 +1494,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		} else {
 			$this->readSubpartsToHide('price_board_special', $wrapper);
 		}
-
-		return;
 	}
 
  	/**
@@ -2304,8 +2302,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Let warnings from the registration bag bubble up to us.
 		$this->setErrorMessage($registrationBag->checkConfiguration(true));
-
-		return;
 	}
 
 	/**
@@ -2359,8 +2355,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				'registration_wrapper'
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -2747,7 +2741,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->hookObjects[] = t3lib_div::getUserObj($classReference);
 			}
 		}
-		return;
 	}
 
 	/**

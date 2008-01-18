@@ -234,8 +234,6 @@ class tx_seminars extends tx_dhdb {
 				}
 			}
 		}
-
-		return;
 	}
 
 	/**
@@ -284,8 +282,6 @@ class tx_seminars extends tx_dhdb {
 				$formData[$key] = $value;
 			}
 		}
-
-		return;
 	}
 
 	/**
@@ -319,8 +315,6 @@ class tx_seminars extends tx_dhdb {
 				);
 			}
 		}
-
-		return;
 	}
 }
 

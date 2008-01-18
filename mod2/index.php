@@ -89,8 +89,6 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		parent::init();
 
 		$this->id = intval($this->id);
-
-		return;
 	}
 
 	/**

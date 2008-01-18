@@ -92,8 +92,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		);
 
 		$this->processTemplate($templateRawCode);
-
-		return;
 	}
 
 	/**
@@ -125,8 +123,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 				$currentSubpartName
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -215,8 +211,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function setMarkerContent($markerName, $content, $prefix = '') {
 		$this->markers[$this->createMarkerName($markerName, $prefix)] = $content;
-
-		return;
 	}
 
 	/**
@@ -247,8 +241,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 				$prefix
 			)] = '';
 		}
-
-		return;
 	}
 
 	/**
@@ -291,8 +283,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 			}
 
 		}
-
-		return;
 	}
 
 	/**
@@ -410,8 +400,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 				$this->pi_getLL(strtolower($currentLabel))
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -433,8 +421,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 				)
 			);
 		}
-
-		return;
 	}
 
 	/**

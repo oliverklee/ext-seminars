@@ -98,8 +98,6 @@ class tx_seminars_oe_configcheck {
 	 */
 	function setFlavor($flavor) {
 		$this->flavor = $flavor;
-
-		return;
 	}
 
 	/**
@@ -179,8 +177,6 @@ class tx_seminars_oe_configcheck {
 				.$checkFunctionName.' created yet.'
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -203,8 +199,6 @@ class tx_seminars_oe_configcheck {
 		if (!empty($message) && empty($this->errorText)) {
 			$this->errorText = $message;
 		}
-
-		return;
 	}
 
 	/**
@@ -229,8 +223,6 @@ class tx_seminars_oe_configcheck {
 		}
 		$message .= '.';
 		$this->setErrorMessage($message);
-
-		return;
 	}
 
 	/**
@@ -313,8 +305,6 @@ class tx_seminars_oe_configcheck {
 					.'template.'
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -360,8 +350,6 @@ class tx_seminars_oe_configcheck {
 				$this->setErrorMessage($message);
 			}
 		}
-
-		return;
 	}
 
 	/**
@@ -423,10 +411,8 @@ class tx_seminars_oe_configcheck {
 					.$this->getTSSetupPath().$setupVariable
 					.'</strong> to a valid CSS class or an empty string.';
 				$this->setErrorMessage($message);
-			};
+			}
 		}
-
-		return;
 	}
 
 
@@ -449,8 +435,6 @@ class tx_seminars_oe_configcheck {
 			$canUseFlexforms,
 			$explanation
 		);
-
-		return;
 	}
 
 	/**
@@ -477,8 +461,6 @@ class tx_seminars_oe_configcheck {
 				$message
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -507,7 +489,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			$allowedValues
 		);
-		return;
 	}
 
 	/**
@@ -533,8 +514,6 @@ class tx_seminars_oe_configcheck {
 				$allowedValues
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -567,8 +546,6 @@ class tx_seminars_oe_configcheck {
 				$message
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -589,8 +566,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			array('0', '1')
 		);
-
-		return;
 	}
 
 	/**
@@ -619,8 +594,6 @@ class tx_seminars_oe_configcheck {
 				$message
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -706,8 +679,6 @@ class tx_seminars_oe_configcheck {
 				$message
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -730,8 +701,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-
-		return;
 	}
 
 	/**
@@ -760,8 +729,6 @@ class tx_seminars_oe_configcheck {
 				$message
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -779,7 +746,6 @@ class tx_seminars_oe_configcheck {
 	function checkIfMultiInSetNotEmpty($fieldName, $canUseFlexforms, $sheet, $explanation, $allowedValues) {
 		$this->checkForNonEmptyString($fieldName, $canUseFlexforms, $sheet, $explanation);
 		$this->checkIfMultiInSetOrEmpty($fieldName, $canUseFlexforms, $sheet, $explanation, $allowedValues);
-		return;
 	}
 
 	/**
@@ -821,8 +787,6 @@ class tx_seminars_oe_configcheck {
 				}
 			}
 		}
-
-		return;
 	}
 
 	/**
@@ -845,7 +809,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			$this->getDbColumnNames($tableName)
 		);
-		return;
 	}
 
 	/**
@@ -868,7 +831,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			$this->getDbColumnNames($tableName)
 		);
-		return;
 	}
 
 	/**
@@ -891,7 +853,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			$this->getDbColumnNames($tableName)
 		);
-		return;
 	}
 
 	/**
@@ -914,7 +875,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			$this->getDbColumnNames($tableName)
 		);
-		return;
 	}
 
 	/**
@@ -934,8 +894,6 @@ class tx_seminars_oe_configcheck {
 				.'at all.',
 			array('formal', 'informal')
 		);
-
-		return;
 	}
 
 	/**
@@ -999,9 +957,7 @@ class tx_seminars_oe_configcheck {
 				$canUseFlexforms,
 				$message
 			);
-		};
-
-		return;
+		}
 	}
 
 	/**
@@ -1030,8 +986,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			$regExp
 		);
-
-		return;
 	}
 
 	/**
@@ -1053,8 +1007,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			'/^([0-9]+(,( *)[0-9]+)*)?$/'
 		);
-
-		return;
 	}
 
 	/**
@@ -1081,8 +1033,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-
-		return;
 	}
 
 	/**
@@ -1109,7 +1059,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-		return;
 	}
 
 	/**
@@ -1136,7 +1085,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-		return;
 	}
 
 	/**
@@ -1163,7 +1111,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-		return;
 	}
 
 	/**
@@ -1195,7 +1142,6 @@ class tx_seminars_oe_configcheck {
 			$message,
 			'<199'
 		);
-		return;
 	}
 
 	/**
@@ -1222,7 +1168,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-		return;
 	}
 
 	/**
@@ -1249,7 +1194,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-		return;
 	}
 
 	/**
@@ -1276,7 +1220,6 @@ class tx_seminars_oe_configcheck {
 			$sheet,
 			$explanation
 		);
-		return;
 	}
 
 	/**
@@ -1310,7 +1253,6 @@ class tx_seminars_oe_configcheck {
 			$message,
 			'=254'
 		);
-		return;
 	}
 
 	/**
@@ -1367,8 +1309,6 @@ class tx_seminars_oe_configcheck {
 				}
 			}
 		}
-
-		return;
 	}
 
 	/**
@@ -1389,7 +1329,6 @@ class tx_seminars_oe_configcheck {
 				);
 			}
 		}
-		return;
 	}
 
 	/**
@@ -1444,8 +1383,6 @@ class tx_seminars_oe_configcheck {
 					.'will not work correctly.'
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -1475,8 +1412,6 @@ class tx_seminars_oe_configcheck {
 			$explanation,
 			$allowedValues
 		);
-
-		return;
 	}
 
 	/**
@@ -1499,8 +1434,6 @@ class tx_seminars_oe_configcheck {
 			'',
 			$explanation
 		);
-
-		return;
 	}
 }
 

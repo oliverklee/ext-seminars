@@ -130,8 +130,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 		// initialize the creation/edition form
 		$this->_initForms();
-
-		return;
 	}
 
 	/**
@@ -142,7 +140,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function _doEvents() {
-		return;
 	}
 
 	/**
@@ -177,8 +174,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			t3lib_extmgm::extPath($this->extKey).'pi1/'.$xmlFile,
 			$this->iEdition
 		);
-
-		return;
 	}
 
 	/**
@@ -236,8 +231,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function setPage($parameters) {
 		$this->currentPageNumber = $parameters['next_page'];
-
-		return;
 	}
 
 	/**
@@ -274,8 +267,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				$this->plugin
 			);
 		}
-
-		return;
 	}
 
 	/**
@@ -1364,8 +1355,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 
 			$GLOBALS['TSFE']->fe_user->storeSessionData();
 		}
-
-		return;
 	}
 
 	/**
@@ -1439,8 +1428,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$this->staticInfo =& t3lib_div::makeInstance('tx_staticinfotables_pi1');
 			$this->staticInfo->init();
 		}
-
-		return;
 	}
 
 	/**
@@ -1530,8 +1517,6 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			implode(',', $formFieldsToHide),
 			'registration_wrapper'
 		);
-
-		return;
 	}
 
 	/**

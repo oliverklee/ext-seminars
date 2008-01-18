@@ -83,8 +83,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 
 		// initialize the creation/edition form
 		$this->_initForms();
-
-		return;
 	}
 
 	/**
@@ -95,7 +93,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function _doEvents() {
-		return;
 	}
 
 	/**
@@ -111,8 +108,6 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 			t3lib_extmgm::extPath($this->extKey).'pi1/event_editor.xml',
 			$this->iEdition
 		);
-
-		return;
 	}
 
 	/**

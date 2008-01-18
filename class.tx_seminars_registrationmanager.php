@@ -449,8 +449,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
 			$this->registration->sendAdditionalNotification($plugin);
 		}
-
-		return;
 	}
 
 	/**
