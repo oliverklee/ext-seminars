@@ -37,25 +37,57 @@ require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php
 class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
+	private $backupTsfe;
 
 	/** UID of the minimal fixture's data in the DB */
 	private $fixtureUid = 0;
 
 	public function setUp() {
+		// TODO: Remove this as soon as it is possible to build a front-end
+		// environment on demand with phpunit.
+		// In tx_phpunitt3_module1::simulateFrontendEnviroment() creates
+		// an object in $GLOBALS['TSFE'] which is not properly filled with
+		// information, so we need save it temporarily to $this->TSFE and unset
+		// the global variable.
+		// @see		https://bugs.oliverklee.com/show_bug.cgi?id=1557
+		$this->backupTsfe = $GLOBALS['TSFE'];
+		unset($GLOBALS['TSFE']);
+
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$systemFolderUid = $this->testingFramework->createSystemFolder();
+		$this->testingFramework->createTemplate(
+			$systemFolderUid,
+			array(
+				'tstamp' => time(),
+				'sorting' => 256,
+				'crdate' => time(),
+				'cruser_id' => 1,
+				'title' => 'TEST',
+				'root' => 1,
+				'clear' => 3,
+				'include_static_file' => 'EXT:seminars/static/'
+			)
+		);
 		$this->fixtureUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_TEST,
 			array(
+				'pid' => $systemFolderUid,
 				'title' => 'Test'
 			)
 		);
 		$this->fixture = new tx_seminars_test($this->fixtureUid);
 	}
-
+	
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture);
 		unset($this->testingFramework);
+
+		// TODO: Remove this as soon as it is possible to build a front-end
+		// environment on demand with phpunit.
+		// Restore $GLOBALS['TSFE'] from $this->TSFE after the tests ran.
+		// @see		https://bugs.oliverklee.com/show_bug.cgi?id=1557
+		$GLOBALS['TSFE'] = $this->backupTsfe;
 	}
 
 
@@ -152,6 +184,12 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			$title,
 			$this->fixture->getTitle()
+		);
+	}
+
+	public function testTypoScriptConfigurationIsLoaded() {
+		$this->assertTrue(
+			$this->fixture->getConfValueBoolean('isStaticTemplateLoaded')
 		);
 	}
 }

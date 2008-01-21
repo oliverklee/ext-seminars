@@ -58,8 +58,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function tx_seminars_objectfromdb($uid, $dbResult = null) {
-		$this->init();
 		$this->retrieveRecordAndGetData($uid, $dbResult);
+		$this->init();
 	}
 
 	/**
