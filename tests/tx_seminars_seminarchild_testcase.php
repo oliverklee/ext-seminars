@@ -1296,6 +1296,58 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testGetSinglePaymentMethodPlainWithInvalidPaymentMethodUidReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getSinglePaymentMethodPlain(0)
+		);
+	}
+
+	public function testGetSinglePaymentMethodPlainWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
+		$title = 'Test payment method';
+		$uid = $this->addPaymentMethodRelation(array('title' => $title));
+
+		$this->assertContains(
+			$title,
+			$this->fixture->getSinglePaymentMethodPlain($uid)
+		);
+	}
+
+	public function testGetSinglePaymentMethodPlainWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
+		$uid = $this->addPaymentMethodRelation(array());
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getSinglePaymentMethodPlain($uid + 1)
+		);
+	}
+
+	public function testGetSinglePaymentMethodShortWithInvalidPaymentMethodUidReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getSinglePaymentMethodShort(0)
+		);
+	}
+
+	public function testGetSinglePaymentMethodShortWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
+		$title = 'Test payment method';
+		$uid = $this->addPaymentMethodRelation(array('title' => $title));
+
+		$this->assertContains(
+			$title,
+			$this->fixture->getSinglePaymentMethodShort($uid)
+		);
+	}
+
+	public function testGetSinglePaymentMethodShortWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
+		$uid = $this->addPaymentMethodRelation(array());
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getSinglePaymentMethodShort($uid + 1)
+		);
+	}
+
 
 	public function testGetEventTypeUidReturnsUidFromTopicRecord() {
 		// This test comes from bug #1515.

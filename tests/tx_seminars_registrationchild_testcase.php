@@ -29,20 +29,34 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'tests/fixtures/class.tx_seminars_registrationchild.php');
+require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_registrationchild.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
 
 class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
+	private $testingFramework;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_registrationchild(
-			array()
+		$this->testingFramework
+			= new tx_oelib_testingFramework('tx_seminars');
+
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array()
 		);
+
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $seminarUid)
+		);
+
+		$this->fixture = new tx_seminars_registrationchild($registrationUid);
 	}
 
 	protected function tearDown() {
+		$this->testingFramework->cleanUp();
 		unset($this->fixture);
+		unset($this->testingFramework);
 	}
 
 	public function testIsOk() {
@@ -50,6 +64,52 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->isOk()
 		);
 	}
+
+
+	///////////////////////
+	// Utility functions.
+	///////////////////////
+
+	/**
+	 * Inserts a payment method record into the database and creates a relation
+	 * to it from the fixture.
+	 *
+	 * @param	array		data of the payment method to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will always be > 0
+	 */
+	private function setPaymentMethodRelation(array $paymentMethodData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, $paymentMethodData
+		);
+
+		$this->fixture->setPaymentMethod($uid);
+
+		return $uid;
+	}
+
+
+	/////////////////////////////////////
+	// Tests for the utility functions.
+	/////////////////////////////////////
+
+	public function testSetPaymentMethodRelationReturnsUid() {
+		$this->assertTrue(
+			$this->setPaymentMethodRelation(array()) > 0
+		);
+	}
+
+	public function testSetPaymentMethodRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->setPaymentMethodRelation(array()),
+			$this->setPaymentMethodRelation(array())
+		);
+	}
+
+
+	////////////////////////////////////////////
+	// Tests regarding the registration queue.
+	////////////////////////////////////////////
 
 	public function testIsOnRegistrationQueue() {
 		$this->assertFalse(
@@ -84,6 +144,21 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'waiting list',
 			$this->fixture->getStatus()
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests regarding the registration data.
+	///////////////////////////////////////////
+
+	public function testGetRegistrationDataWithKeyMethodOfPaymentReturnsMethodOfPayment() {
+		$title = 'Test payment method';
+		$this->setPaymentMethodRelation(array('title' => $title));
+
+		$this->assertContains(
+			$title,
+			$this->fixture->getRegistrationData('method_of_payment')
 		);
 	}
 }

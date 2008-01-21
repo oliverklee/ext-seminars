@@ -33,6 +33,8 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
+require_once(PATH_typo3.'sysext/cms/tslib/class.tslib_content.php');
+
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 
@@ -44,14 +46,19 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * The constructor.
 	 *
-	 * @param	array	TS setup configuration array, may be empty
+	 * @param	integer		UID of the registration record, must be > 0
 	 */
-	public function __construct(array $configuration) {
-		parent::init($configuration);
-		$this->recordData = array(
-			'registration_queue' => 0
+	public function __construct($registrationUid) {
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'*',
+			SEMINARS_TABLE_ATTENDANCES,
+			'uid='.$registrationUid
 		);
-		$this->tableName = SEMINARS_TABLE_ATTENDANCES;
+
+		$contentObject = t3lib_div::makeInstance('tslib_cObj');
+		$contentObject->start('');
+
+		parent::tx_seminars_registration($contentObject, $dbResult);
 	}
 
 	/**
@@ -64,6 +71,22 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 		$this->setRecordPropertyInteger(
 			'registration_queue',
 			intval($isOnRegistrationQueueValue)
+		);
+	}
+
+	/**
+	 * Sets the payment method of this registration.
+	 *
+	 * @param	integer		the UID of the payment method to set
+	 */
+	public function setPaymentMethod($uid) {
+		if ($uid <= 0) {
+			throw new Exception('Invalid payment method UID.');
+		}
+
+		$this->setRecordPropertyInteger(
+			'method_of_payment',
+			$uid
 		);
 	}
 }

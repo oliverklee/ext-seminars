@@ -1567,27 +1567,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getPaymentMethods(&$plugin) {
+		if (!$this->hasPaymentMethods()) {
+			return '';
+		}
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title',
+			SEMINARS_TABLE_PAYMENT_METHODS,
+			'uid IN ('.$this->getPaymentMethodsUids().')'
+				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+		);
+
+		if (!$dbResult) {
+			return '';
+		}
+
 		$result = '';
 
-		$paymentMethodsUids = explode(
-			',',
-			$this->getTopicString('payment_methods')
-		);
-		foreach ($paymentMethodsUids as $currentPaymentMethod) {
-			$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title',
-				SEMINARS_TABLE_PAYMENT_METHODS,
-				'uid='.intval($currentPaymentMethod)
-					.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
-			);
-
-			// We expect just one result.
-			if ($dbResultPaymentMethod
-				&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)
-			) {
-				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
-				$result .= '  <li>'.$row['title'].'</li>'.LF;
-			}
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$result .= '  <li>'.$row['title'].'</li>'.LF;
 		}
 
 		$result = '<ul>'.LF.$result.'</ul>'.LF;
@@ -1606,15 +1604,26 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getPaymentMethodsPlain() {
-		$result = '';
+		if (!$this->hasPaymentMethods()) {
+			return '';
+		}
 
-		$paymentMethodsUids = explode(
-			',',
-			$this->getTopicString('payment_methods')
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title, description',
+			SEMINARS_TABLE_PAYMENT_METHODS,
+			'uid IN ('.$this->getPaymentMethodsUids().')'
+				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
-		foreach ($paymentMethodsUids as $currentPaymentMethod) {
-			$result .= $this->getSinglePaymentMethodPlain($currentPaymentMethod);
+		if (!$dbResult) {
+			return '';
+		}
+
+		$result = '';
+
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$result .= $row['title'].': ';
+			$result .= $row['description'].LF.LF;
 		}
 
 		return $result;
@@ -1631,25 +1640,28 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getPaymentMethodsPlainShort() {
-		$result = '';
-
-		if ($this->hasPaymentMethods()) {
-			$paymentMethodsUids = explode(
-				',',
-				$this->getTopicString('payment_methods')
-			);
-			$paymentMethods = array();
-
-			foreach ($paymentMethodsUids as $currentPaymentMethod) {
-				$paymentMethods[] = $this->getSinglePaymentMethodShort(
-					$currentPaymentMethod
-				);
-			}
-
-			$result = implode(CRLF, $paymentMethods);
+		if (!$this->hasPaymentMethods()) {
+			return '';
 		}
 
-		return $result;
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title',
+			SEMINARS_TABLE_PAYMENT_METHODS,
+			'uid IN ('.$this->getPaymentMethodsUids().')'
+				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+		);
+
+		if (!$dbResult) {
+			return '';
+		}
+
+		$paymentMethods = array();
+
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$paymentMethods[] = $row['title'];
+		}
+
+		return implode(CRLF, $paymentMethods);
 	}
 
 	/**
@@ -1666,22 +1678,28 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getSinglePaymentMethodPlain($paymentMethodUid) {
-		$result = '';
+		if ($paymentMethodUid <= 0) {
+			return '';
+		}
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
-			SEMINARS_TABLE_PAYMENT_METHODS,
+ 			SEMINARS_TABLE_PAYMENT_METHODS,
 			'uid='.$paymentMethodUid
-				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
-		);
+ 				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+ 		);
+
+		if (!$dbResultPaymentMethod) {
+			return '';
+ 		}
 
 		// We expect just one result.
-		if ($dbResultPaymentMethod
-			&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)) {
-			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
-			$result = $row['title'].': ';
-			$result .= $row['description'].LF.LF;
+		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
+			return '';
 		}
+
+		$result = $row['title'].': ';
+		$result .= $row['description'].LF.LF;
 
 		return $result;
 	}
@@ -1700,7 +1718,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getSinglePaymentMethodShort($paymentMethodUid) {
-		$result = '';
+		if ($paymentMethodUid <= 0) {
+			return '';
+		}
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
@@ -1709,15 +1729,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
+		if (!$dbResultPaymentMethod) {
+			return '';
+ 		}
+
 		// We expect just one result.
-		if ($dbResultPaymentMethod
-			&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultPaymentMethod)) {
-			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
-			$result = $row['title'];
+		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
+			return '';
 		}
 
-		return $result;
-	}
+		return $row['title'];
+ 	}
 
 	/**
 	 * Gets the UIDs of our allowed payment methods as a comma-separated list,
