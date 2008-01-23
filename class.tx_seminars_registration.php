@@ -297,6 +297,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$this->getRecordPropertyInteger($trimmedKey)
 				);
 				break;
+			case 'uid':
+				$result = $this->getUid();
+				break;
 			case 'price':
 				$result = $this->getPrice();
 				break;
@@ -341,7 +344,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				break;
 		}
 
-		return $result;
+		return (string) $result;
 	}
 
 	/**
@@ -403,7 +406,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			}
 		}
 
-		return $result;
+		return (string) $result;
 	}
 
 	/**
@@ -698,6 +701,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->setMarkerContent('event_type', $this->seminar->getEventType());
 		$this->setMarkerContent('title', $this->seminar->getTitle());
 		$this->setMarkerContent('uid', $this->seminar->getUid());
+
+		$this->setMarkerContent('registration_uid', $this->getUid());
 
 		if ($this->hasRecordPropertyInteger('seats')) {
 			$this->setMarkerContent(
@@ -1083,7 +1088,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
-			$currentLabel = $this->pi_getLL('label_'.$currentKey);
+			if ($currentKey == 'uid') {
+				// The UID label is a special case as we also have a UID label
+				// for events.
+				$currentLabel = $this->pi_getLL('label_registration_uid');
+			} else {
+				$currentLabel = $this->pi_getLL('label_'.$currentKey);
+			}
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
 			$maxLength = max($maxLength, strlen($currentLabel));
 		}

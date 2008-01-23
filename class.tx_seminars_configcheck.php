@@ -881,6 +881,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'hello',
 				'title',
 				'uid',
+				'ticket_id',
 				'price',
 				'seats',
 				'total_price',
@@ -1000,6 +1001,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'to organizers. A mistyped field name will cause the field '
 				.'to not get included.',
 			array(
+				'uid',
 				'interests',
 				'expectations',
 				'background_knowledge',

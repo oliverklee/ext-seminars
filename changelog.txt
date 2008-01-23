@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1466] Feature: Include the registration UID in the notification and thank-you e-mails and in the CSV export
 - [#1563] Change: The default sorting for bags should be by UID
 - [#1562] Feature: Display the UID as "Ticket ID" when editing a registration in the list view
 - [#1567] Fix: HTML template in the registration process

@@ -148,9 +148,30 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////
-	// Tests regarding the registration data.
-	///////////////////////////////////////////
+	///////////////////////////////////////////////////
+	// Tests regarding getting the registration data.
+	///////////////////////////////////////////////////
+
+	public function testGetRegistrationDataIsEmptyForEmptyKey() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getRegistrationData('')
+		);
+	}
+
+	public function testGetRegistrationDataCanGetUid() {
+		$this->assertEquals(
+			$this->fixture->getUid(),
+			$this->fixture->getRegistrationData('uid')
+		);
+	}
+
+	public function testDumpAttendanceValueCanContainUid() {
+		$this->assertContains(
+			(string) $this->fixture->getUid(),
+			$this->fixture->dumpAttendanceValues('uid')
+		);
+	}
 
 	public function testGetRegistrationDataWithKeyMethodOfPaymentReturnsMethodOfPayment() {
 		$title = 'Test payment method';
@@ -159,6 +180,18 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			$title,
 			$this->fixture->getRegistrationData('method_of_payment')
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests regarding getting the user data.
+	///////////////////////////////////////////
+
+	public function testGetUserDataIsEmptyForEmptyKey() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getUserData('')
 		);
 	}
 }

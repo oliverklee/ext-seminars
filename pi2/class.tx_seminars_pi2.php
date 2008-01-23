@@ -56,7 +56,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/**
 	 * Displays the seminar manager HTML.
 	 *
-	 * @param	string		default content string, ignore
+	 * @param	string		default content string, will be ignored
 	 * @param	array		TypoScript configuration for the plugin
 	 *
 	 * @return	string		HTML for the plugin
@@ -66,14 +66,12 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	function main($content, $conf) {
 		$this->init($conf);
 
-		$result = '';
-
 		switch ($this->piVars['table']) {
 			case SEMINARS_TABLE_SEMINARS:
 				$result = $this->createListOfEvents();
 				break;
 			case SEMINARS_TABLE_ATTENDANCES:
-				$result = $this->createListOfRegistrations();
+				$result = $this->createAndOutputListOfRegistrations();
 				break;
 			default:
 				header('Status: 404 Not Found');
@@ -100,7 +98,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 	/**
 	 * Creates a CSV list of registrations for the event given in
-	 * $this->piVars['seminar'].
+	 * $this->piVars['seminar'], including a heading line.
 	 *
 	 * If the seminar does not exist, an error message is returned, and an error
 	 * 404 is set.
@@ -108,13 +106,12 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
-	 * @return	string		CSV list of registrations for the given seminar or an error message in case of an error
+	 * @return	string		CSV list of registrations for the given seminar or
+	 * 						an error message in case of an error
 	 *
 	 * @access	protected
 	 */
-	function createListOfRegistrations() {
-		$result = '';
-
+	function createAndOutputListOfRegistrations() {
 		$eventUid = intval($this->piVars['seminar']);
 
 		if (tx_seminars_objectfromdb::recordExists(
@@ -123,60 +120,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		) {
 			if ($this->canAccessListOfRegistrations()) {
 				$this->setContentTypeForRegistrationLists();
-
-				// Create the heading first.
-				$result .= '"'.str_replace(
-					',',
-					'","',
-					$this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
-						.','
-						.$this->configGetter->getConfValueString(
-							'fieldsFromAttendanceForCsv'
-						)
-						.'"'.CRLF
-				);
-
-				$additionalWhere = '';
-
-				if (!$this->configGetter->getConfValueBoolean(
-						'showAttendancesOnRegistrationQueueInCSV')
-				) {
-					$additionalWhere = ' AND registration_queue=0';
-				}
-
-				// Now let's have a registration bag to iterate over all
-				// registrations of this event.
-				$registrationBagClassname = t3lib_div::makeInstanceClassName(
-					'tx_seminars_registrationbag'
-				);
-				$registrationBag =& new $registrationBagClassname(
-					'seminar='.$eventUid.$additionalWhere
-				);
-
-				while ($currentRegistration =& $registrationBag->getCurrent()) {
-					$userData = $this->retrieveData(
-						$currentRegistration,
-						'getUserData',
-						$this->configGetter->getConfValueString(
-							'fieldsFromFeUserForCsv'
-						)
-					);
-					$registrationData = $this->retrieveData(
-						$currentRegistration,
-						'getRegistrationData',
-						$this->configGetter->getConfValueString(
-							'fieldsFromAttendanceForCsv'
-						)
-					);
-					// Combine the arrays with the user and registration data
-					// and create a list of comma-separated values from them.
-					$result .= implode(
-						',',
-						array_merge($userData, $registrationData)
-					).CRLF;
-
-					$registrationBag->getNext();
-				}
+				$result = $this->createListOfRegistrations($eventUid);
 			} else {
 				// Access is denied.
 				header('Status: 403 Forbidden');
@@ -189,6 +133,94 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Creates a CSV list of registrations for the event with the UID given in
+	 * $eventUid, including a heading line.
+	 *
+	 * This function does not do any access checks.
+	 *
+	 * @param	integer		UID of the event for which the registration list
+	 * 						should be created, must be > 0
+	 *
+	 * @return	string		CSV list of registrations for the given seminar or
+	 * 						an empty string if there is not event with the
+	 * 						provided UID
+	 *
+	 * @access	public
+	 */
+	function createListOfRegistrations($eventUid) {
+		if (!tx_seminars_objectfromdb::recordExists(
+			$eventUid,
+			SEMINARS_TABLE_SEMINARS)
+		) {
+			return '';
+		}
+
+		$result = $this->createRegistrationsHeading();
+
+		$additionalWhere = '';
+		if (!$this->configGetter->getConfValueBoolean(
+				'showAttendancesOnRegistrationQueueInCSV')
+		) {
+			$additionalWhere = ' AND registration_queue=0';
+		}
+
+		$registrationBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registrationbag'
+		);
+		$registrationBag =& new $registrationBagClassname(
+			'seminar='.$eventUid.$additionalWhere
+		);
+
+		while ($currentRegistration =& $registrationBag->getCurrent()) {
+			$userData = $this->retrieveData(
+				$currentRegistration,
+				'getUserData',
+				$this->configGetter->getConfValueString(
+					'fieldsFromFeUserForCsv'
+				)
+			);
+			$registrationData = $this->retrieveData(
+				$currentRegistration,
+				'getRegistrationData',
+				$this->configGetter->getConfValueString(
+					'fieldsFromAttendanceForCsv'
+				)
+			);
+			// Combines the arrays with the user and registration data
+			// and creates a list of comma-separated values from them.
+			$result .= implode(
+				',',
+				array_merge($userData, $registrationData)
+			).CRLF;
+
+			$registrationBag->getNext();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the heading line for the list of registrations (including a CRLF
+	 * at the end).
+	 *
+	 * @return	string		the heading line for the list of registrations, will
+	 * 						not be empty
+	 *
+	 * @access	private
+	 */
+	function createRegistrationsHeading() {
+		$headerLineWithoutWrapping
+			= $this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
+				.','
+				.$this->configGetter->getConfValueString(
+					'fieldsFromAttendanceForCsv'
+				);
+		return '"'
+			.str_replace(',', '","', $headerLineWithoutWrapping)
+			.'"'.CRLF;
 	}
 
 	/**
@@ -433,6 +465,20 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		// we provide a CSV header line.
 		header('Content-type: text/csv; header=present; charset='
 			.$this->configGetter->getConfValueString('charsetForCsv'), true);
+	}
+
+	/**
+	 * Returns our config getter (which might be null if we aren't initialized
+	 * properly yet).
+	 *
+	 * This function is intended for testing purposes only.
+	 *
+	 * @return	object		our config getter, might be null
+	 *
+	 * @access	public
+	 */
+	function getConfigGetter() {
+		return $this->configGetter;
 	}
 }
 

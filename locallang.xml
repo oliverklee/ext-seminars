@@ -12,6 +12,7 @@
 			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -215,6 +216,7 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="pi1_title">Seminar-Manager</label>
 			<label index="label_title">Titel</label>
 			<label index="label_uid">Nummer</label>
+			<label index="label_registration_uid">Ticket-ID</label>
 			<label index="label_event_type">Veranstaltungsart</label>
 			<label index="label_accreditation_number">Akkreditierungsnummer</label>
 			<label index="label_credit_points">Leistungspunkte</label>
@@ -828,6 +830,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 		<languageKey index="de" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -1292,6 +1295,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 		<languageKey index="de" type="array">
 			<label index="pi1_title">Seminar Manager</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>

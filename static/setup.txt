@@ -34,7 +34,7 @@ plugin.tx_seminars {
 	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile
 
 	# comma-separated list of field names from attendances that should be mentioned in the notification e-mail to the organizers  (in the "attendancedata" section)
-	showAttendanceFieldsInNotificationMail = price,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
+	showAttendanceFieldsInNotificationMail = uid,price,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
 
 	# Whether to send the additional notification e-mails to the organizers or not. Additional notification mails are sent if for example an event gets full.
 	sendAdditionalNotificationEmails = 1
@@ -137,7 +137,7 @@ plugin.tx_seminars {
 	fieldsFromFeUserForCsv = name,company,address,zip,city,country,telephone,email
 
 	# comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
-	fieldsFromAttendanceForCsv = price,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
+	fieldsFromAttendanceForCsv = uid,price,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
 
 	# wether to show attendances on the registration queue in the CSV export or not
 	showAttendancesOnRegistrationQueueInCSV = 0
