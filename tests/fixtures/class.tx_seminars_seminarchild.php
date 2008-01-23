@@ -43,7 +43,8 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * The constructor.
 	 *
-	 * @param	integer		the UID of the event to retrieve from the DB
+	 * @param	integer		the UID of the event to retrieve from the DB, must
+	 * 						be > 0
 	 * @param	array		TS setup configuration array, may be empty
 	 */
 	public function __construct($uid, array $configuration) {
