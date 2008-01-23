@@ -238,7 +238,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$result = '';
 
-		// Set the uid of a single event that is requestet (either by the
+		// Sets the UID of a single event that is requested (either by the
 		// configuration in the flexform or by a parameter in the URL).
 		if ($this->hasConfValueInteger('showSingleEvent', 's_template_special')) {
 			$this->showUid = $this->getConfValueInteger(
