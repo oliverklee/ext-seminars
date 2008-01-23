@@ -39,10 +39,6 @@ require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 
 final class tx_seminars_registrationchild extends tx_seminars_registration {
-	public $prefixId = 'tx_seminars_registrationchild';
-	public $scriptRelPath
-		= 'tests/fixtures/class.tx_seminars_registrationchild.php';
-
 	/**
 	 * The constructor.
 	 *
@@ -51,9 +47,12 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	public function __construct($registrationUid) {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
-			SEMINARS_TABLE_ATTENDANCES,
+			$this->tableName,
 			'uid='.$registrationUid
 		);
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
 
 		$contentObject = t3lib_div::makeInstance('tslib_cObj');
 		$contentObject->start('');

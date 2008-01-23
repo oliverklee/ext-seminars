@@ -40,6 +40,8 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 
 	/** the UID of the first test record in the DB */
 	private $uidOfFirstRecord = 0;
+	/** the UID of the second test record in the DB */
+	private $uidOfSecondRecord = 0;
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
@@ -49,7 +51,7 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'test 1')
 		);
-		$this->testingFramework->createRecord(
+		$this->uidOfSecondRecord = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_TEST,
 			array('title' => 'test 2')
 		);
@@ -96,7 +98,7 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 		$bag = new tx_seminars_testbag(
 			'uid IN('
 			.$this->uidOfFirstRecord.','
-			.($this->uidOfFirstRecord + 1).')'
+			.$this->uidOfSecondRecord.')'
 		);
 
 		$this->assertEquals(
@@ -122,6 +124,30 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 
 		$this->assertNull(
 			$bag->getNext()
+		);
+	}
+
+	public function testBagSortsByUidByDefault() {
+		$bag = new tx_seminars_testbag(
+			'uid IN('
+			.$this->uidOfFirstRecord.','
+			.$this->uidOfSecondRecord.')'
+		);
+
+		$this->assertNotNull(
+			$bag->getCurrent()
+		);
+		$this->assertEquals(
+			$this->uidOfFirstRecord,
+			$bag->getCurrent()->getUid()
+		);
+
+		$this->assertNotNull(
+			$bag->getNext()
+		);
+		$this->assertEquals(
+			$this->uidOfSecondRecord,
+			$bag->getCurrent()->getUid()
 		);
 	}
 }

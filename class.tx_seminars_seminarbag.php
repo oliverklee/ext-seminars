@@ -63,7 +63,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		$queryParameters = '1=1',
 		$additionalTableNames = '',
 		$groupBy = '',
-		$orderBy = '',
+		$orderBy = 'uid',
 		$limit = '',
 		$showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false

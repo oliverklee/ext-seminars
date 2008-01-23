@@ -56,7 +56,10 @@ class tx_seminars_placebag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_placebag($queryParameters = '1=1', $additionalTableNames = '', $groupBy = '', $orderBy = '', $limit = '') {
+	function tx_seminars_placebag(
+		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
+		$orderBy = 'uid', $limit = ''
+	) {
 		parent::tx_seminars_bag(
 			SEMINARS_TABLE_SITES,
 			$queryParameters,

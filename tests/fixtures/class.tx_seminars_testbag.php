@@ -63,7 +63,7 @@ class tx_seminars_testbag extends tx_seminars_bag {
 	 */
 	function tx_seminars_testbag(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-		$orderBy = '', $limit = '',	$showHiddenRecords = -1,
+		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
 	) {
 		parent::tx_seminars_bag(

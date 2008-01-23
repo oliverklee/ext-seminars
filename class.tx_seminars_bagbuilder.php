@@ -46,7 +46,7 @@ class tx_seminars_bagbuilder {
 	var $whereClauseParts = array();
 
 	/** the sorting field */
-	var $orderBy = '';
+	var $orderBy = 'uid';
 
 	/** the field by which the DB query result should be grouped */
 	var $groupBy = '';

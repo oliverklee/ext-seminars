@@ -60,7 +60,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 */
 	function tx_seminars_registrationbag(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-		$orderBy = '', $limit = '', $showHiddenRecords = -1
+		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1
 	) {
 		$this->cObj =& t3lib_div::makeInstance('tslib_cObj');
 

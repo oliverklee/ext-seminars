@@ -101,13 +101,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * @access	public
 	 */
 	function tx_seminars_bag(
-		$dbTableName,
-		$queryParameters = '1=1',
-		$additionalTableNames = '',
-		$groupBy = '',
-		$orderBy = '',
-		$limit = '',
-		$showHiddenRecords = -1,
+		$dbTableName, $queryParameters = '1=1', $additionalTableNames = '',
+		$groupBy = '', $orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
 	) {
 		$this->dbTableName = $dbTableName;

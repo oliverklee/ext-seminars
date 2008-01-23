@@ -58,7 +58,7 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 	 */
 	function tx_seminars_speakerbag(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-		$orderBy = '', $limit = ''
+		$orderBy = 'uid', $limit = ''
 	) {
 		parent::tx_seminars_bag(
 			SEMINARS_TABLE_SPEAKERS,
