@@ -94,6 +94,7 @@
 			<label index="tx_seminars_speakers.fax">Fax number:</label>
 			<label index="tx_seminars_speakers.email">E-mail address:</label>
 			<label index="tx_seminars_attendances">Attendances</label>
+			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
 			<label index="tx_seminars_attendances.user">Front-end User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
@@ -249,6 +250,7 @@
 			<label index="tx_seminars_speakers.fax">Faxnummer:</label>
 			<label index="tx_seminars_speakers.email">E-Mail-Adresse:</label>
 			<label index="tx_seminars_attendances">Anmeldungen</label>
+			<label index="tx_seminars_attendances.uid">Ticket-ID:</label>
 			<label index="tx_seminars_attendances.title">Titel:</label>
 			<label index="tx_seminars_attendances.user">Frontend-User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
@@ -1095,6 +1097,7 @@
 			<label index="tx_seminars_speakers.fax" type="integer">212052995</label>
 			<label index="tx_seminars_speakers.email" type="integer">126760538</label>
 			<label index="tx_seminars_attendances" type="integer">201645653</label>
+			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
 			<label index="tx_seminars_attendances.title" type="integer">85903807</label>
 			<label index="tx_seminars_attendances.user" type="integer">189069825</label>
 			<label index="tx_seminars_attendances.seminar" type="integer">169385390</label>
@@ -1927,6 +1930,7 @@
 			<label index="tx_seminars_speakers.fax">Fax number:</label>
 			<label index="tx_seminars_speakers.email">E-mail address:</label>
 			<label index="tx_seminars_attendances">Attendances</label>
+			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
 			<label index="tx_seminars_attendances.user">Front-end User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
