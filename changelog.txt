@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1567] Fix: HTML template in the registration process
 - [#1513] Fix: Automatic setting of the timeslot titles doesn't work anymore
 - [#1541] Change: Remove the return; for functions that do not return anything
 - [#1519] Change: Change the ordering of seminars in the list view, patch by Stefan Galinski
