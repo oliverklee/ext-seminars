@@ -63,6 +63,26 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->orderBy = ($globalConfiguration['useManualSorting'])
 			? 'sorting' : 'begin_date DESC';
 	}
+
+	/**
+	 * Limits the bag to events from the category with the UID provided as the
+	 * parameter $categoryUid.
+	 *
+	 * @param	integer		UID of the category which the bag should limited to,
+	 * 						must be > 0
+	 */
+	function limitToCategory($categoryUid) {
+		if ($categoryUid <= 0) {
+			return;
+		}
+
+		$this->whereClauseParts['category'] = 'EXISTS (SELECT * FROM '
+			.SEMINARS_TABLE_CATEGORIES_MM.' WHERE '
+			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local='
+			.SEMINARS_TABLE_SEMINARS.'.uid AND '
+			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='.$categoryUid
+			.')';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

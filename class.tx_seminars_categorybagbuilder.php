@@ -54,7 +54,7 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	 *
 	 * @access	public
 	 */
-	function limitToEventUid($eventUid) {
+	function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {
 			return;
 		}

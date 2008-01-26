@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1575] Feature: Allow to limit the seminar bag builder to a category
 - [#1566] Feature: Allow to specify an event UID for categorybags
 - [#1565] Change: The categorybagbuilder should create a bag that is sorted by title
 - [#1556] Change: Add a new content wizard icon

@@ -94,7 +94,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 	// Test for limiting the bag to categories of certain events.
 	///////////////////////////////////////////////////////////////
 
-	public function testSkippingLimitToEventUidResultsInAllCategories() {
+	public function testSkippingLimitToEventResultsInAllCategories() {
 		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
 
 		$eventUid = $this->testingFramework->createRecord(
@@ -126,7 +126,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
-		$this->fixture->limitToEventUid(0);
+		$this->fixture->limitToEvent(0);
 
 		$this->assertEquals(
 			2,
@@ -147,7 +147,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
-		$this->fixture->limitToEventUid(-2);
+		$this->fixture->limitToEvent(-2);
 
 		$this->assertEquals(
 			2,
@@ -155,7 +155,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testLimitToEventUidCanResultInOneCategory() {
+	public function testLimitToEventCanResultInOneCategory() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -166,7 +166,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
-		$this->fixture->limitToEventUid($eventUid);
+		$this->fixture->limitToEvent($eventUid);
 
 		$this->assertEquals(
 			1,
@@ -174,7 +174,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testLimitToEventUidCanResultInTwoCategories() {
+	public function testLimitToEventCanResultInTwoCategories() {
 		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
 
 		$eventUid = $this->testingFramework->createRecord(
@@ -195,7 +195,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
 		);
 
-		$this->fixture->limitToEventUid($eventUid);
+		$this->fixture->limitToEvent($eventUid);
 
 		$this->assertEquals(
 			2,
@@ -203,7 +203,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testLimitToEventUidWillExcludeUnassignedCategories() {
+	public function testLimitToEventWillExcludeUnassignedCategories() {
 		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
 
 		$eventUid = $this->testingFramework->createRecord(
@@ -216,7 +216,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
-		$this->fixture->limitToEventUid($eventUid);
+		$this->fixture->limitToEvent($eventUid);
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -229,7 +229,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testLimitToEventUidWillExcludeCategoriesOfOtherEvents() {
+	public function testLimitToEventWillExcludeCategoriesOfOtherEvents() {
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -250,7 +250,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid2, $categoryUid2
 		);
 
-		$this->fixture->limitToEventUid($eventUid1);
+		$this->fixture->limitToEvent($eventUid1);
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -263,7 +263,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testLimitToEventUidResultsInAnEmptyBagIfThereAreNoMatches() {
+	public function testLimitToEventResultsInAnEmptyBagIfThereAreNoMatches() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES
 		);
@@ -282,12 +282,11 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 
-		$this->fixture->limitToEventUid($eventUid2);
-		$bag = $this->fixture->build();
+		$this->fixture->limitToEvent($eventUid2);
 
 		$this->assertEquals(
 			0,
-			$bag->getObjectCountWithoutLimit()
+			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
 }
