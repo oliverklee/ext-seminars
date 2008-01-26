@@ -83,6 +83,22 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='.$categoryUid
 			.')';
 	}
+
+	/**
+	 * Sets whether canceled events should be ignored or found for this bag.
+	 *
+	 * @param	boolean		whether to ignore (true) or find (false) canceled
+	 * 						events
+	 *
+	 * @access	public
+	 */
+	function ignoreCanceledEvents($ignoreCanceledEvents) {
+		if ($ignoreCanceledEvents) {
+			$this->whereClauseParts['hideCanceledEvents'] = 'cancelled=0';
+		} else {
+			unset($this->whereClauseParts['hideCanceledEvents']);
+		}
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

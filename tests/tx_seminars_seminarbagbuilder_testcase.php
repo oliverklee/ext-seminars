@@ -313,6 +313,81 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+
+	/////////////////////////////////////
+	// Test concerning canceled events.
+	/////////////////////////////////////
+
+	public function testBuilderFindsCanceledEventsByDefault() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => 1)
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderIgnoresCanceledEventsWithHideCanceledEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => 1)
+		);
+
+		$this->fixture->ignoreCanceledEvents(true);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderFindsCanceledEventsWithHideCanceledEventsDisabled() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => 1)
+		);
+
+		$this->fixture->ignoreCanceledEvents(false);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderFindsCanceledEventsWithHideCanceledEventsEnabledThenDisabled() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => 1)
+		);
+
+		$this->fixture->ignoreCanceledEvents(true);
+		$this->fixture->ignoreCanceledEvents(false);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderIgnoresCanceledEventsWithHideCanceledDisabledThenEnabled() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => 1)
+		);
+
+		$this->fixture->ignoreCanceledEvents(false);
+		$this->fixture->ignoreCanceledEvents(true);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
 }
 
 ?>
