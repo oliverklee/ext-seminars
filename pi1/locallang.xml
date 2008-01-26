@@ -48,7 +48,7 @@
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
-			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
@@ -1666,7 +1666,7 @@
 			<label index="seminars.pi_flexform.showRegistrationFields" type="integer">128589369</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
-			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">201114697</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">106305223</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
 			<label index="seminars.pi_flexform.sheet_registration" type="integer">16354175</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
@@ -1784,7 +1784,6 @@
 			<label index="label_your_user_data_formal" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
-			<label index="label_target_groups" type="integer">206184555</label>
 			<label index="label_timeslot_date" type="integer">71780721</label>
 			<label index="label_timeslot_time" type="integer">175559919</label>
 			<label index="label_timeslot_entry_date" type="integer">17175357</label>
@@ -2667,7 +2666,7 @@
 			<label index="seminars.pi_flexform.hideSelectorWidget">Hide the selector widget in list view:</label>
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
-			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
@@ -2794,7 +2793,6 @@
 			<label index="label_your_user_data_formal">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
-			<label index="label_target_groups">Target Groups</label>
 			<label index="label_timeslot_date">Date</label>
 			<label index="label_timeslot_time">Time</label>
 			<label index="label_timeslot_entry_date">Entry date</label>
