@@ -35,6 +35,8 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_templatehelper.php');
+
 class tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
 	var $bagClassName = '';
@@ -102,15 +104,27 @@ class tx_seminars_bagbuilder {
 	 * @param	string		comma-separated list of PIDs of the system folders
 	 * 						with the records; must not be empty; need not be
 	 * 						safeguarded against SQL injection
+	 * @param	integer		recursion depth, must be >= 0
 	 *
 	 * @access	public
 	 */
-	function setSourcePages($sourcePagePids) {
+	function setSourcePages($sourcePagePids, $recursionDepth = 0) {
+		static $templateHelper = null;
+
 		if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
 			return;
 		}
 
-		$this->whereClauseParts['pages'] = 'pid IN('.$sourcePagePids.')';
+		if (!$templateHelper) {
+			$templateHelper
+				= t3lib_div::makeInstance('tx_oelib_templatehelper');
+		}
+
+		$recursivePidList = $templateHelper->createRecursivePageList(
+			$sourcePagePids, $recursionDepth
+		);
+
+		$this->whereClauseParts['pages'] = 'pid IN ('.$recursivePidList.')';
 	}
 
 	/**

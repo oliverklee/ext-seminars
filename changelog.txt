@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1576] Feature: Allow to set page recursion for bag builders
 - [#1584] Fix: Missing colon in the flexforms in the default language
 - [#1574] Feature: Bag builders should provide their WHERE clauses to the public world
 - [#1575] Feature: Allow to limit the seminar bag builder to a category

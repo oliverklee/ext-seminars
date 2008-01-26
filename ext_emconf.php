@@ -40,6 +40,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'typo3' => '4.1.2-0.0.0',
 			'cms' => '',
 			'css_styled_content' => '',
+			'oelib' => '0.3.99-',
 			'ameos_formidable' => '0.7.0-0.7.0',
 			'static_info_tables' => '2.0.2-',
 		),
@@ -50,7 +51,6 @@ $EM_CONF[$_EXTKEY] = array(
 			'newloginbox' => '',
 			'sr_feuser_register' => '',
 			'onetimeaccount' => '',
-			'oelib' => '0.3.99-',
 		),
 	),
 	'suggests' => array(
@@ -58,7 +58,6 @@ $EM_CONF[$_EXTKEY] = array(
 		'newloginbox' => '',
 		'sr_feuser_register' => '',
 		'onetimeaccount' => '',
-		'oelib' => '0.3.99-',
 	),
 );
 

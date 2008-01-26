@@ -75,6 +75,11 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	///////////////////////////////////
+	// Tests concerning source pages.
+	///////////////////////////////////
+
 	public function testBuilderInitiallyHasNoSourcePages() {
 		$this->assertFalse(
 			$this->fixture->hasSourcePages()
@@ -165,6 +170,120 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+	public function testBuilderIgnoresRecordsOnSubpageWithoutRecursion() {
+		$subPagePid = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $subPagePid)
+		);
+
+		$this->fixture->setSourcePages($this->dummySysFolderPid);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderSelectsRecordsOnSubpageWithRecursion() {
+		$subPagePid = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $subPagePid)
+		);
+
+		$this->fixture->setSourcePages($this->dummySysFolderPid, 1);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderSelectsRecordsOnTwoSubpagesWithRecursion() {
+		$subPagePid1 = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $subPagePid1)
+		);
+
+		$subPagePid2 = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $subPagePid2)
+		);
+
+		$this->fixture->setSourcePages($this->dummySysFolderPid, 1);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderSelectsRecordsOnSubpageFromTwoParentsWithRecursion() {
+		$subPagePid1 = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $subPagePid1)
+		);
+
+		$parentPid2 = $this->testingFramework->createSystemFolder();
+		$subPagePid2 = $this->testingFramework->createSystemFolder($parentPid2);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $subPagePid2)
+		);
+
+		$this->fixture->setSourcePages(
+			$this->dummySysFolderPid.','.$parentPid2,
+			1
+		);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderIgnoresRecordsOnSubpageWithTooShallowRecursion() {
+		$subPagePid = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+		$subSubPagePid = $this->testingFramework->createSystemFolder(
+			$subPagePid
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $subSubPagePid)
+		);
+
+		$this->fixture->setSourcePages($this->dummySysFolderPid, 1);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	////////////////////////////////////////////////////////
+	// Tests concerning hidden/deleted/timed etc. records.
+	////////////////////////////////////////////////////////
 
 	public function testBuilderIgnoresHiddenRecordsByDefault() {
 		$this->testingFramework->createRecord(
@@ -257,7 +376,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		// We're using assertContains here because the PID in the WHERE clause
 		// may be prefixed with the table name.
 		$this->assertContains(
-			'pid IN('.$this->dummySysFolderPid.')',
+			'pid IN ('.$this->dummySysFolderPid.')',
 			$this->fixture->getWhereClause()
 		);
 	}
