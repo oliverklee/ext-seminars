@@ -40,8 +40,8 @@ class tx_seminars_bagbuilder {
 	var $bagClassName = '';
 
 	/**
-	 * associative array with the WHERE clause parts (they will be concatenated
-	 * with " AND " later)
+	 * associative array with the WHERE clause parts (will be concatenated with
+	 * " AND " later)
 	 */
 	var $whereClauseParts = array();
 
@@ -71,17 +71,11 @@ class tx_seminars_bagbuilder {
 	 * @access	public
 	 */
 	function build() {
-		if (!empty($this->whereClauseParts)) {
-			$whereClause = implode(' AND ', $this->whereClauseParts);
-		} else {
-			$whereClause = '1=1';
-		}
-
 		$bagClassname = t3lib_div::makeInstanceClassName(
 			$this->bagClassName
 		);
 		return new $bagClassname(
-			$whereClause,
+			$this->getWhereClause(),
 			$this->additionalTableNames,
 			$this->groupBy,
 			$this->orderBy,
@@ -127,7 +121,7 @@ class tx_seminars_bagbuilder {
 	 *
 	 * @access	public
 	 */
-	public function hasSourcePages() {
+	function hasSourcePages() {
 		return isset($this->whereClauseParts['pages']);
 	}
 
@@ -139,6 +133,27 @@ class tx_seminars_bagbuilder {
 	 */
 	function setTestMode() {
 		$this->whereClauseParts['tests'] = 'is_dummy_record = 1';
+	}
+
+	/**
+	 * Returns the WHERE clause for the bag to create.
+	 *
+	 * The WHERE clause will be complete except for the enableFields additions.
+	 *
+	 * If the bag does not have any limitations imposed upon, the return value
+	 * will be a tautology.
+	 *
+	 * @return	string		complete WHERE clause for the bag to create, will
+	 * 						not be empty
+	 *
+	 * @access	public
+	 */
+	function getWhereClause() {
+		if (empty($this->whereClauseParts)) {
+			return '1=1';
+		}
+
+		return implode(' AND ', $this->whereClauseParts);
 	}
 }
 

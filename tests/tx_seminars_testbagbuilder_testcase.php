@@ -243,6 +243,25 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+	public function testWhereClauseInitiallyIsNotEmpty() {
+		$this->assertNotEquals(
+			'',
+			$this->fixture->getWhereClause()
+		);
+	}
+
+	public function testWhereClauseCanSelectPids() {
+		$this->fixture->setSourcePages($this->dummySysFolderPid);
+
+		// We're using assertContains here because the PID in the WHERE clause
+		// may be prefixed with the table name.
+		$this->assertContains(
+			'pid IN('.$this->dummySysFolderPid.')',
+			$this->fixture->getWhereClause()
+		);
+	}
+
 }
 
 ?>
