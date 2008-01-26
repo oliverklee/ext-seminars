@@ -88,6 +88,208 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			$categoryBag->getNext()->getTitle()
 		);
 	}
+
+
+	///////////////////////////////////////////////////////////////
+	// Test for limiting the bag to categories of certain events.
+	///////////////////////////////////////////////////////////////
+
+	public function testSkippingLimitToEventUidResultsInAllCategories() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToZeroEventUidResultsInAllCategories() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->fixture->limitToEventUid(0);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToNegativeEventUidResultsInAllCategories() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->fixture->limitToEventUid(-2);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventUidCanResultInOneCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->fixture->limitToEventUid($eventUid);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventUidCanResultInTwoCategories() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid1
+		);
+
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
+		);
+
+		$this->fixture->limitToEventUid($eventUid);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventUidWillExcludeUnassignedCategories() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->fixture->limitToEventUid($eventUid);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->getObjectCountWithoutLimit()
+		);
+		$this->assertEquals(
+			$categoryUid,
+			$bag->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToEventUidWillExcludeCategoriesOfOtherEvents() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid1, $categoryUid1
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid2, $categoryUid2
+		);
+
+		$this->fixture->limitToEventUid($eventUid1);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->getObjectCountWithoutLimit()
+		);
+		$this->assertEquals(
+			$categoryUid1,
+			$bag->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToEventUidResultsInAnEmptyBagIfThereAreNoMatches() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid1, $categoryUid
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->fixture->limitToEventUid($eventUid2);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->getObjectCountWithoutLimit()
+		);
+	}
 }
 
 ?>

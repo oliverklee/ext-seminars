@@ -40,6 +40,32 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 
 	/** the sorting field */
 	var $orderBy = 'title';
+
+	/**
+	 * Limits the bag to the categories of the event provided by the parameter
+	 * $eventUid.
+	 *
+	 * Example: The event with the provided UID references categories 9 and 12.
+	 * So the bag will be limited to categories 9 and 12 (plus any additional
+	 * limits).
+	 *
+	 * @param	integer		UID of the event to which the category selection
+	 * 						should be limited, must be > 0
+	 *
+	 * @access	public
+	 */
+	function limitToEventUid($eventUid) {
+		if ($eventUid <= 0) {
+			return;
+		}
+
+		$this->whereClauseParts['event'] = 'EXISTS ('
+			.'SELECT * FROM '.SEMINARS_TABLE_CATEGORIES_MM
+			.' WHERE '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local='.$eventUid
+			.' AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='
+			.SEMINARS_TABLE_CATEGORIES.'.uid'
+			.')';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_categorybagbuilder.php']) {
