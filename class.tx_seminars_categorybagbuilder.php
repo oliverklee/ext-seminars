@@ -37,6 +37,9 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.ph
 class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
 	var $bagClassName = 'tx_seminars_categorybag';
+
+	/** the sorting field */
+	var $orderBy = 'title';
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_categorybagbuilder.php']) {

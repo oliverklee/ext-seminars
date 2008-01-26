@@ -62,6 +62,32 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			is_subclass_of($this->fixture->build(), 'tx_seminars_bag')
 		);
 	}
+
+	public function testBuiltBagIsSortedAscendingByTitle() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'Title 2')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'Title 1')
+		);
+
+		$categoryBag = $this->fixture->build();
+		$this->assertEquals(
+			2,
+			$categoryBag->getObjectCountWithoutLimit()
+		);
+
+		$this->assertEquals(
+			'Title 1',
+			$categoryBag->getCurrent()->getTitle()
+		);
+		$this->assertEquals(
+			'Title 2',
+			$categoryBag->getNext()->getTitle()
+		);
+	}
 }
 
 ?>
