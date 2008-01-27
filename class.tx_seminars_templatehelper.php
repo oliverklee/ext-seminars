@@ -214,6 +214,30 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Checks whether a subpart is visible.
+	 *
+	 * Note: If the subpart to check does not exist, this function will return
+	 * false.
+	 *
+	 * @param	string		name of the subpart to check (without the ###), must
+	 * 						not be empty
+	 *
+	 * @return	boolean		true if the subpart is visible, false otherwise
+	 *
+	 * @access	pulic
+	 */
+	function isSubpartVisible($subpartName) {
+		if ($subpartName == '') {
+			return false;
+		}
+
+		$subpartNameWithHashes = $this->createMarkerName($subpartName);
+
+		return (isset($this->templateCache[$subpartName])
+			&& !isset($this->subpartsToHide[$subpartNameWithHashes]));
+	}
+
+	/**
 	 * Takes a comma-separated list of subpart names and writes them to
 	 * $this->subpartsToHide. In the process, the names are changed from 'aname'
 	 * to '###BLA_ANAME###' and used as keys. The corresponding values in the
