@@ -215,17 +215,21 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetAdditionalQueryForLanguageWithOneValidLanguage() {
+	public function testGetAdditionalQueryForLanguageWithOneLanguage() {
+		// We're using "xy" as language code instead of a real one to avoid
+		// problems with real event records / site records.
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.language IN(\'de\')',
-			$this->fixture->getAdditionalQueryForLanguage(array('de'))
+			' AND '.SEMINARS_TABLE_SEMINARS.'.language IN(\'xy\')',
+			$this->fixture->getAdditionalQueryForLanguage(array('xy'))
 		);
 	}
 
-	public function testGetAdditionalQueryForLanguageWithTwoValidLanguages() {
+	public function testGetAdditionalQueryForLanguageWithTwoLanguages() {
+		// We're using "xy" as language code instead of a real one to avoid
+		// problems with real event records / site records.
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.language IN(\'de\',\'en\')',
-			$this->fixture->getAdditionalQueryForLanguage(array('de', 'en'))
+			' AND '.SEMINARS_TABLE_SEMINARS.'.language IN(\'xy\',\'yx\')',
+			$this->fixture->getAdditionalQueryForLanguage(array('xy', 'yx'))
 		);
 	}
 
@@ -253,13 +257,15 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetAdditionalQueryForCountryWithOneValidCountry() {
+	public function testGetAdditionalQueryForCountryWithOneCountry() {
+		// We're using "xy" as country code instead of a real one to avoid
+		// problems with real event records / site records.
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 		$siteUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
-			array('country' => 'ch')
+			array('country' => 'xy')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SITES_MM,
@@ -268,17 +274,19 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
-			$this->fixture->getAdditionalQueryForCountry(array('ch'))
+			$this->fixture->getAdditionalQueryForCountry(array('xy'))
 		);
 	}
 
-	public function testGetAdditionalQueryForCountryWithMultipleValidCountries() {
+	public function testGetAdditionalQueryForCountryWithMultipleCountries() {
+		// We're using "xy" as country code instead of a real one to avoid
+		// problems with real event records / site records.
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 		$siteUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
-			array('country' => 'ch')
+			array('country' => 'xy')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SITES_MM,
@@ -290,7 +298,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 		$siteUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
-			array('country' => 'de')
+			array('country' => 'yx')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SITES_MM,
@@ -299,7 +307,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid1.','.$eventUid2.')',
-			$this->fixture->getAdditionalQueryForCountry(array('ch', 'de'))
+			$this->fixture->getAdditionalQueryForCountry(array('xy', 'yx'))
 		);
 	}
 
@@ -323,7 +331,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 		$placeUid =	$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
-			array('city' => 'Basel')
+			array('city' => 'TESTCity')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SITES_MM,
@@ -334,7 +342,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForCity(
-				array('Basel')
+				array('TESTCity')
 			)
 		);
 	}
@@ -345,7 +353,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 		$placeUid =	$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
-			array('city' => 'Basel')
+			array('city' => 'TESTCity')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SITES_MM,
@@ -356,7 +364,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForCity(
-				array('Basel', 'Zürich')
+				array('TESTCity', 'OtherTestCity')
 			)
 		);
 	}
