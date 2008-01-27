@@ -337,7 +337,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('cancelled' => 1)
 		);
 
-		$this->fixture->ignoreCanceledEvents(true);
+		$this->fixture->ignoreCanceledEvents();
 
 		$this->assertEquals(
 			0,
@@ -351,7 +351,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('cancelled' => 1)
 		);
 
-		$this->fixture->ignoreCanceledEvents(false);
+		$this->fixture->allowCanceledEvents();
 
 		$this->assertEquals(
 			1,
@@ -365,8 +365,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('cancelled' => 1)
 		);
 
-		$this->fixture->ignoreCanceledEvents(true);
-		$this->fixture->ignoreCanceledEvents(false);
+		$this->fixture->ignoreCanceledEvents();
+		$this->fixture->allowCanceledEvents();
 
 		$this->assertEquals(
 			1,
@@ -380,8 +380,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('cancelled' => 1)
 		);
 
-		$this->fixture->ignoreCanceledEvents(false);
-		$this->fixture->ignoreCanceledEvents(true);
+		$this->fixture->allowCanceledEvents();
+		$this->fixture->ignoreCanceledEvents();
 
 		$this->assertEquals(
 			0,

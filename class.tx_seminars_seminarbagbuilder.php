@@ -85,19 +85,21 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	}
 
 	/**
-	 * Sets whether canceled events should be ignored or found for this bag.
-	 *
-	 * @param	boolean		whether to ignore (true) or find (false) canceled
-	 * 						events
+	 * Sets the bag to ignore canceled events.
 	 *
 	 * @access	public
 	 */
-	function ignoreCanceledEvents($ignoreCanceledEvents) {
-		if ($ignoreCanceledEvents) {
-			$this->whereClauseParts['hideCanceledEvents'] = 'cancelled=0';
-		} else {
-			unset($this->whereClauseParts['hideCanceledEvents']);
-		}
+	function ignoreCanceledEvents() {
+		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled=0';
+	}
+
+	/**
+	 * Allows the bag to include canceled events again.
+	 *
+	 * @access	public
+	 */
+	function allowCanceledEvents() {
+		unset($this->whereClauseParts['hideCanceledEvents']);
 	}
 }
 
