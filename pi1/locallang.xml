@@ -82,6 +82,7 @@
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
 			<label index="label_myenteredevents_formal">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
+			<label index="label_category">Category</label>
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
@@ -494,6 +495,7 @@
 			<label index="label_myvipevents_informal">Du bist für die folgenden Veranstaltungen als VIP eingetragen:</label>
 			<label index="label_myenteredevents_formal">Sie haben die folgenden Veranstaltungen eingetragen:</label>
 			<label index="label_myenteredevents_informal">Du hast die folgenden Veranstaltungen eingetragen:</label>
+			<label index="label_category">Kategorie</label>
 			<label index="label_title">Titel</label>
 			<label index="label_subtitle">Untertitel</label>
 			<label index="label_uid">Nummer</label>
@@ -1691,6 +1693,7 @@
 			<label index="label_myvipevents_informal" type="integer">74285293</label>
 			<label index="label_myenteredevents_formal" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
+			<label index="label_category" type="integer">61717939</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
@@ -2700,6 +2703,7 @@
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
 			<label index="label_myenteredevents_formal">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
+			<label index="label_category">Category</label>
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>

@@ -246,6 +246,21 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'organizing_partners', $numberOfOrganizingPartners
 		);
 	}
+
+	/**
+	 * Sets the number of categories for this record.
+	 *
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of places.
+	 *
+	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param	integer		the number of categories that are associated with
+	 * 						this event
+	 */
+	public function setNumberOfCategories($number) {
+		$this->setRecordPropertyInteger('categories', $number);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

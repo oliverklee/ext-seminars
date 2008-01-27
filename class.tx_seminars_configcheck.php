@@ -677,6 +677,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'description',
 				'accreditation_number',
 				'credit_points',
+				'category',
 				'date',
 				'timeslots',
 				'uid',
@@ -723,6 +724,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies which columns to remove from the list view. '
 				.'Incorrect values will cause the colums to still be displayed.',
 			array(
+				'category',
 				'title',
 				'subtitle',
 				'uid',

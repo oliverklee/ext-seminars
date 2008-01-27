@@ -182,14 +182,40 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Inserts a category record into the database and creates a relation to it
+	 * from the fixture.
+	 *
+	 * @param	array		data of the category to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will always be > 0
+	 */
+	private function addCategoryRelation(array $categoryData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES, $categoryData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfCategories(
+			$this->fixture->getNumberOfCategories() + 1
+		);
+
+		return $uid;
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
 	/////////////////////////////////////
 
 	public function testAddPlaceRelationReturnsUid() {
+		$uid = $this->addPlaceRelation(array());
+
 		$this->assertTrue(
-			$this->addPlaceRelation(array()) > 0
+			$uid > 0
 		);
 	}
 
@@ -240,6 +266,68 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			2,
 			$this->testingFramework->countRecords(
 				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
+
+	public function testAddCategoryRelationReturnsUid() {
+		$uid = $this->addCategoryRelation(array());
+
+		$this->assertTrue(
+			$uid > 0
+		);
+	}
+
+	public function testAddCategoryRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addCategoryRelation(array()),
+			$this->addCategoryRelation(array())
+		);
+	}
+
+	public function testAddCategoryRelationIncreasesTheNumberOfCategories() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfCategories()
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfCategories()
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfCategories()
+		);
+	}
+
+	public function testAddCategoryRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_CATEGORIES_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_CATEGORIES_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_CATEGORIES_MM,
+				'uid_local='.$this->fixture->getUid()
 			)
 		);
 	}
@@ -306,8 +394,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testAddPaymentMethodRelationReturnsUid() {
+		$uid = $this->addPaymentMethodRelation(array());
+
 		$this->assertTrue(
-			$this->addPaymentMethodRelation(array()) > 0
+			$uid > 0
 		);
 	}
 
@@ -338,8 +428,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testAddOrganizingPartnerRelationReturnsUid() {
+		$uid = $this->addOrganizingPartnerRelation(array());
+
 		$this->assertTrue(
-			$this->addOrganizingPartnerRelation(array()) > 0
+			$uid > 0
 		);
 	}
 
@@ -379,8 +471,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
 	//////////////////////////////////////////////
-	// Tests regarding the language of an event:
+	// Tests regarding the language of an event.
 	//////////////////////////////////////////////
 
 	public function testGetLanguageFromIsoCodeWithValidLanguage() {
@@ -1414,6 +1507,69 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->fixture->getNumberOfOrganizingPartners()
+		);
+	}
+
+
+	////////////////////////////////////
+	// Tests regarding the categories.
+	////////////////////////////////////
+
+	public function testInitiallyHasNoCategories() {
+		$this->assertFalse(
+			$this->fixture->hasCategories()
+		);
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfCategories()
+		);
+		$this->assertEquals(
+			array(),
+			$this->fixture->getCategories()
+		);
+	}
+
+	public function testCanHaveOneCategory() {
+		$categoryUid = $this->addCategoryRelation(array('title' => 'Test'));
+
+		$this->assertTrue(
+			$this->fixture->hasCategories()
+		);
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfCategories()
+		);
+		$this->assertEquals(
+			array($categoryUid => 'Test'),
+			$this->fixture->getCategories()
+		);
+	}
+
+	public function testCanHaveTwoCategories() {
+		$categoryUid1 = $this->addCategoryRelation(array('title' => 'Test 1'));
+		$categoryUid2 = $this->addCategoryRelation(array('title' => 'Test 2'));
+
+		$this->assertTrue(
+			$this->fixture->hasCategories()
+		);
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfCategories()
+		);
+
+		$categories = $this->fixture->getCategories();
+
+		$this->assertEquals(
+			2,
+			count($categories)
+		);
+		$this->assertEquals(
+			'Test 1',
+			$categories[$categoryUid1]
+		);
+		$this->assertEquals(
+			'Test 2',
+			$categories[$categoryUid2]
 		);
 	}
 }

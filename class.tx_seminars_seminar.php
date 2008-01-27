@@ -35,6 +35,10 @@ require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslotbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_category.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybagbuilder.php');
+
 require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
 
 class tx_seminars_seminar extends tx_seminars_timespan {
@@ -462,9 +466,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Checks whether this seminar has a non-zero number of credit points assigned.
+	 * Checks whether this seminar has a non-zero number of credit
+	 * points assigned.
 	 *
-	 * @return	boolean		true if the seminar has credit points assigned, false otherwise.
+	 * @return	boolean		true if the seminar has credit points assigned,
+	 * 						false otherwise.
 	 *
 	 * @access	public
 	 */
@@ -4388,6 +4394,61 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			);
 
 			$timeslotBag->getNext();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether this seminar has at least one category.
+	 *
+	 * @return	boolean		true if the seminar has at least one category,
+	 * 						false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasCategories() {
+		return $this->hasTopicInteger('categories');
+	}
+
+	/**
+	 * Gets the number of categories associated with this event.
+	 *
+	 * @return	integer		the number of categories associated with this event,
+	 * 						will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfCategories() {
+		return $this->getTopicInteger('categories');
+	}
+
+	/**
+	 * Gets this event's category titles as an associative array (which may be
+	 * empty), using the category UIDs as keys.
+	 *
+	 * @return	array		associative array of the titles of this event's
+	 * 						categories with the category UIDs as associative
+	 * 						keys, will be empty if this event has no categories
+	 * 						assigned
+	 *
+	 * @access	public
+	 */
+	function getCategories() {
+		if (!$this->hasCategories()) {
+			return array();
+		}
+
+		$builder = t3lib_div::makeInstance('tx_seminars_categorybagbuilder');
+		$builder->limitToEvent($this->getTopicUid());
+		$bag = $builder->build();
+
+		$result = array();
+
+		while ($bag->getCurrent()) {
+			$key = $bag->getCurrent()->getUid();
+			$result[$key] = $bag->getCurrent()->getTitle();
+			$bag->getNext();
 		}
 
 		return $result;

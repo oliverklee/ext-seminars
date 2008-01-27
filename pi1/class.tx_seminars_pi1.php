@@ -38,6 +38,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationba
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_placebag.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_registration_editor.php');
@@ -50,19 +51,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
 	/** a config getter that gets us the configuration in plugin.tx_seminars */
-	var $configGetter;
+	var $configGetter = null;
 
 	/** the seminar which we want to list/show or for which the user wants to register */
-	var $seminar;
+	var $seminar = null;
 
 	/** the registration which we want to list/show in the "my events" view */
-	var $registration;
+	var $registration = null;
 
 	/** the previous event's date (used for the list view) */
-	var $previousDate;
+	var $previousDate = '';
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
-	var $registrationManager;
+	var $registrationManager = null;
 
 	/** an instance of static info tables which we need for the list view to convert ISO codes to country names and languages */
 	var $staticInfo = null;
@@ -986,7 +987,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$limit = '';
 		$pointer = intval($this->piVars['pointer']);
-		$resultsAtATime = t3lib_div::intInRange($this->internal['results_at_a_time'], 1, 1000);
+		$resultsAtATime = t3lib_div::intInRange(
+			$this->internal['results_at_a_time'], 1, 1000
+		);
 		$limit = ($pointer * $resultsAtATime).','.$resultsAtATime;
 
 		if ($whatToDisplay == 'my_events') {
@@ -1100,6 +1103,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			} else {
 				$this->readSubpartsToHide('credit_points', 'field_wrapper');
+			}
+
+			if ($this->seminar->hasCategories()) {
+				$this->setMarkerContent(
+					'category',
+					implode(', ', $this->seminar->getCategories())
+				);
+			} else {
+				$this->readSubpartsToHide('category', 'field_wrapper');
 			}
 
 			$this->setMarkerContent('date', $this->seminar->getDate());
@@ -1721,6 +1733,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createListHeader() {
+		$this->setMarkerContent(
+			'header_category', $this->getFieldHeader('category')
+		);
 		$this->setMarkerContent('header_title', $this->getFieldHeader('title'));
 		$this->setMarkerContent(
 			'header_subtitle',
@@ -1862,6 +1877,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
+			$this->setMarkerContent(
+				'category',
+				implode(',', $this->seminar->getCategories())
+			);
 			$this->setMarkerContent(
 				'title_link',
 				$this->seminar->getLinkedFieldValue($this, 'title')
@@ -2899,7 +2918,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'options_'.$optionBoxName,
 			$this->substituteMarkerArrayCached('OPTIONS_BOX')
 		);
-
 	}
 }
 
