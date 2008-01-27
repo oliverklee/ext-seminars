@@ -632,7 +632,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// Creates a separate seminar bag that contains all the events.
 		// We can't use the regular seminar bag that is used for the list
 		// view as it contains only part of the events.
-		$seminarBag = $this->createSeminarBagForSelectorWidget();
+		$seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
 
 		// Walks through all events in the seminar bag to read the needed data
 		// from each event object.
@@ -1015,28 +1015,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->previousDate = '';
 
 		return $registrationOrSeminarBag;
-	}
-
-	/**
-	 * Initializes a seminar bag that contains all events for retrieving the
-	 * allowed values for the option boxes of the selector widget.
-	 *
-	 * This must be a separate seminar bag just for the selector widget to have
-	 * all events (and with this also all languages, places and countries)
-	 * covered.
-	 *
-	 * @return	object		a seminar bag containing all events of this website
-	 *
-	 * @access	protected
-	 */
-	function createSeminarBagForSelectorWidget() {
-		$className = 'tx_seminars_seminarbag';
-		$seminarBagClassname = t3lib_div::makeInstanceClassName(
-			$className
-		);
-		$seminarBag =& new $seminarBagClassname();
-
-		return $seminarBag;
 	}
 
 	/**

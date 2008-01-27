@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1587] Change: Inline pi1::createSeminarBagForSelectorWidget
 - [#1405] Feature: Display the categories in the list view and single view
 - [#1568] Feature: Add a public function isSubpartVisible
 - [#1579] Feature: Allow to set hideCanceled for seminar bag builders
