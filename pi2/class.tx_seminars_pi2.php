@@ -47,11 +47,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/** path to this script relative to the extension dir */
 	var $scriptRelPath = 'pi2/class.tx_seminars_pi2.php';
 
-	/** the seminar which we want to export */
-	var $seminar;
-
 	/** This object provides access to config values in plugin.tx_seminars. */
-	var $configGetter;
+	var $configGetter = null;
 
 	/**
 	 * Displays the seminar manager HTML.
@@ -68,7 +65,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 		switch ($this->piVars['table']) {
 			case SEMINARS_TABLE_SEMINARS:
-				$result = $this->createListOfEvents();
+				$result = $this->createAndOutputListOfEvents();
 				break;
 			case SEMINARS_TABLE_ATTENDANCES:
 				$result = $this->createAndOutputListOfRegistrations();
@@ -85,14 +82,16 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/**
 	 * Initializes this object and its configuration getter.
 	 *
- 	 * @param	array		TypoScript configuration for the plugin
+ 	 * @param	array		TypoScript configuration for the plugin, can be
+ 	 * 						empty
 	 *
 	 * @access	public
 	 */
-	function init($conf = null) {
+	function init($conf = array()) {
 		parent::init($conf);
 
-		$this->configGetter =& t3lib_div::makeInstance('tx_seminars_configgetter');
+		$this->configGetter
+			=& t3lib_div::makeInstance('tx_seminars_configgetter');
 		$this->configGetter->init();
 	}
 
@@ -162,8 +161,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 		$additionalWhere = '';
 		if (!$this->configGetter->getConfValueBoolean(
-				'showAttendancesOnRegistrationQueueInCSV')
-		) {
+				'showAttendancesOnRegistrationQueueInCSV'
+		)) {
 			$additionalWhere = ' AND registration_queue=0';
 		}
 
@@ -233,62 +232,18 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
-	 * @return	string		CSV list of events for the given page or an error message in case of an error
+	 * @return	string		CSV list of events for the given page or an error
+	 						message in case of an error
 	 *
 	 * @access	protected
 	 */
-	function createListOfEvents() {
-		$result = '';
-
+	function createAndOutputListOfEvents() {
 		$pid = intval($this->piVars['pid']);
 
-		if ($pid) {
+		if ($pid > 0) {
 			if ($this->canAccessListOfEvents()) {
 				$this->setContentTypeForEventLists();
-
-				// Create the heading first.
-				$result .= '"'.str_replace(
-					',',
-					'","',
-					$this->configGetter->getConfValueString(
-						'fieldsFromEventsForCsv'
-					).'"'.chr(13).LF
-				);
-
-				// unserialize the configuration array
-				$globalConfiguration = unserialize(
-					$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
-				);
-				$orderBy = ($globalConfiguration['useManualSorting'])
-					? 'sorting' : 'begin_date';
-
-				// Now let's have a seminar bag to iterate over events
-				// on this page.
-				$seminarBagClassname
-					= t3lib_div::makeInstanceClassName('tx_seminars_seminarbag');
-				$seminarBag =& new $seminarBagClassname(
-					'pid='.$pid,
-					'',
-					'',
-					$orderBy
-				);
-
-				while ($currentSeminar =& $seminarBag->getCurrent()) {
-					$seminarData = $this->retrieveData(
-						$currentSeminar,
-						'getEventData',
-						$this->configGetter->getConfValueString(
-							'fieldsFromEventsForCsv'
-						)
-					);
-					// Create a list of comma-separated values of the event data.
-					$result .= implode(
-						',',
-						$seminarData
-					).CRLF;
-
-					$seminarBag->getNext();
-				}
+				$result = $this->retrieveListOfEvents($pid);
 			} else {
 				// Access is denied.
 				header('Status: 403 Forbidden');
@@ -301,6 +256,68 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Retrieves a list of events as CSV, including the header line.
+	 *
+	 * This function does not do any access checks.
+	 *
+	 * @param	integer		PID of the system folder from which the event
+	 * 						records	should be exported, must be > 0
+	 *
+	 * @return	string		CSV export of the event records on that page
+	 *
+	 * @access	public
+	 */
+	function createListOfEvents($pid) {
+		if ($pid <= 0) {
+			return '';
+		}
+
+		$result = $this->createEventsHeading();
+
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder->setBackEndMode();
+		$builder->setSourcePages($pid);
+		$seminarBag = $builder->build();
+
+		while ($currentSeminar =& $seminarBag->getCurrent()) {
+			$seminarData = $this->retrieveData(
+				$currentSeminar,
+				'getEventData',
+				$this->configGetter->getConfValueString(
+					'fieldsFromEventsForCsv'
+				)
+			);
+			// Creates a list of comma-separated values of the event data.
+			$result .= implode(
+				',',
+				$seminarData
+			).CRLF;
+
+			$seminarBag->getNext();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the heading line for a CSV event list.
+	 *
+	 * @return	string		header list, will not be empty if the CSV
+	 * 						export has been configured correctly
+	 *
+	 * @access	private
+	 */
+	function createEventsHeading() {
+		return '"'.str_replace(
+			',',
+			'","',
+			$this->configGetter->getConfValueString(
+				'fieldsFromEventsForCsv'
+			).'"'.CRLF
+		);
 	}
 
 	/**
@@ -321,7 +338,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			$allKeys = explode(',', $keys);
 			foreach ($allKeys as $currentKey) {
 				$rawData = $dataSupplier->$supplierFunction($currentKey);
-				// Escape double quotes and wrap the whole string in double quotes.
+				// Escapes double quotes and wraps the whole string in double
+				// quotes.
 				$result[] = '"'.str_replace('"', '""', $rawData).'"';
 			}
 		}
@@ -436,7 +454,9 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	function setContentTypeForRegistrationLists() {
 		$this->setCsvContentType();
 		header('Content-disposition: attachment; filename='
-			.$this->configGetter->getConfValueString('filenameForRegistrationsCsv'),
+			.$this->configGetter->getConfValueString(
+				'filenameForRegistrationsCsv'
+			),
 			true
 		);
 	}
@@ -461,7 +481,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * @access	private
 	 */
 	function setCsvContentType() {
-		// In addition to the CSV content type and the charset, announce that
+		// In addition to the CSV content type and the charset, announces that
 		// we provide a CSV header line.
 		header('Content-type: text/csv; header=present; charset='
 			.$this->configGetter->getConfValueString('charsetForCsv'), true);

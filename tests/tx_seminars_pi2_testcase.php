@@ -63,9 +63,78 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		unset($this->testingFramework);
 	}
 
+
+	////////////////////////////////////////
+	// Tests for the CSV export of events.
+	////////////////////////////////////////
+
+	public function testCreateListOfEventsIsEmptyForZeroPid() {
+		$this->assertEquals(
+			'',
+			$this->fixture->createListOfEvents(0)
+		);
+	}
+
+	public function testCreateListOfEventsIsEmptyForNegativePid() {
+		$this->assertEquals(
+			'',
+			$this->fixture->createListOfEvents(-2)
+		);
+	}
+
+	public function testCreateListOfEventsHasOnlyHeaderLineForZeroRecords() {
+		$pid = $this->testingFramework->createSystemFolder();
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'uid,title'
+		);
+
+		$this->assertEquals(
+			'"uid","title"'.CRLF,
+			$this->fixture->createListOfEvents($pid)
+		);
+	}
+
+	public function testCreateListOfEventsCanContainOneEventUid() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'uid'
+		);
+
+		$this->assertEquals(
+			'"uid"'.CRLF
+				.'"'.((string) $this->eventUid).'"'.CRLF,
+			$this->fixture->createListOfEvents($this->pid)
+		);
+	}
+
+	public function testCreateListOfEventsCanContainTwoEventUids() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'uid'
+		);
+		$secondEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('pid' => $this->pid)
+		);
+
+		$this->assertEquals(
+			'"uid"'.CRLF
+				.'"'.((string) $this->eventUid).'"'.CRLF
+				.'"'.((string) $secondEventUid).'"'.CRLF,
+			$this->fixture->createListOfEvents($this->pid)
+		);
+	}
+
+
 	///////////////////////////////////////////////
 	// Tests for the CSV export of registrations.
 	///////////////////////////////////////////////
+
+	public function testCreateListOfRegistrationsIsEmptyForNonExistentEvent() {
+		$this->assertEquals(
+			'',
+			$this->fixture->createListOfRegistrations($this->eventUid + 9999)
+		);
+	}
 
 	public function testCreateListOfRegistrationsHasOnlyHeaderLineForZeroRecords() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(

@@ -28,8 +28,10 @@ define(UTF8_EN_DASH, chr(0xE2).chr(0x80).chr(0x93));
 define('TAB', chr(9));
 // a linefeed
 define('LF', chr(10));
+// a carriage return
+define('CR', chr(13));
 // a CR-LF combination (the default Unix line ending)
-define(CRLF, chr(0x0D).chr(0x0A));
+define('CRLF', CR.LF);
 // one day in seconds
 define('ONE_DAY', 86400);
 // one week in seconds
