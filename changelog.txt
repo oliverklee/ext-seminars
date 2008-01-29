@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1588] Fix: SQL warning in the EM about the language and country
 - [#1587] Change: Inline pi1::createSeminarBagForSelectorWidget
 - [#1405] Feature: Display the categories in the list view and single view
 - [#1568] Feature: Add a public function isSubpartVisible
