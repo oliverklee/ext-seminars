@@ -627,11 +627,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * place is set, or the set place(s) don't have any country set, an empty
 	 * array will be returned.
 	 *
-	 * @return	array		the list of ISO codes for the countries of this event, may be empty
+	 * @return	array		the list of ISO codes for the countries of this
+	 * 						event, may be empty
 	 *
 	 * @access	public
 	 */
 	function getPlacesWithCountry() {
+		if (!$this->hasPlace()) {
+			return array();
+		}
+
 		$countries = array();
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -668,27 +673,26 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getCountry() {
-		$result = '';
-		if ($this->hasCountry()) {
-			$countryList = array();
-
-			// Fetch the countries from the corresponding place records, may be
-			// an empty array.
-			$countries = $this->getPlacesWithCountry();
-			// Get the real country names from the ISO codes.
-			foreach ($countries as $currentCountry) {
-				$countryList[] = $this->getCountryNameFromIsoCode(
-					$currentCountry
-				);
-			}
-
-			// Make sure that each country is exactly once in the array and
-			// then return this list.
-			$countryListUnique = array_unique($countryList);
-			$result .= implode(', ', $countryListUnique);
+		if (!$this->hasCountry()) {
+			return '';
 		}
 
-		return $result;
+		$countryList = array();
+
+		// Fetches the countries from the corresponding place records, may be
+		// an empty array.
+		$countries = $this->getPlacesWithCountry();
+		// Get the real country names from the ISO codes.
+		foreach ($countries as $currentCountry) {
+			$countryList[] = $this->getCountryNameFromIsoCode(
+				$currentCountry
+			);
+		}
+
+		// Makes sure that each country is exactly once in the array and then
+		// returns this list.
+		$countryListUnique = array_unique($countryList);
+		return implode(', ', $countryListUnique);
 	}
 
 	/**
@@ -764,15 +768,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If the country with this ISO code could not be found in the database,
 	 * an empty string is returned instead.
 	 *
-	 * @param	string		the ISO 3166-1 alpha-2 code of the country
+	 * @param	string		the ISO 3166-1 alpha-2 code of the country, must
+	 * 						not be empty
 	 *
-	 * @return	string		the short local name of the country or an empty string if the country couldn't be found
+	 * @return	string		the short local name of the country or an empty
+	 * 						string if the country could not be found
 	 *
 	 * @access	public
 	 */
 	function getCountryNameFromIsoCode($isoCode) {
-		// Sanitizes the provided parameter agaings SQL injection as this function
-		// can be used for searching.
+		// Sanitizes the provided parameter against SQL injection as this
+		// function can be used for searching.
 		$isoCode = $GLOBALS['TYPO3_DB']->quoteStr($isoCode, 'static_countries');
 
 		$countryName = '';
@@ -817,10 +823,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					}
 
 					if (!empty($row['address'])) {
-						// replace all occurrences of chr(13) (new line)
+						// replaces all occurrences of chr(13) (new line)
 						// with a comma
 						$result .= CRLF.str_replace(
-							chr(13),
+							CR,
 							',',
 							$row['address']
 						);
@@ -835,7 +841,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					}
 					if (!empty($row['directions'])) {
 						$result .= CRLF.str_replace(
-							chr(13),
+							CR,
 							',',
 							$row['directions']
 						);

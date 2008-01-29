@@ -133,50 +133,52 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * @access	private
 	 */
 	function getAdditionalQueryForCountry($countries) {
-		$result = '';
-
 		// Removes the dummy option from the form data if the user selected it.
 		$countries = $this->removeDummyOptionFromFormData($countries);
 
-		if (!empty($countries)) {
-			// Implodes the array to a comma-separated list and adds quotes
-			// around each entry to make it work with the database. This is needed
-			// because the values are of type string.
-			$countryIsoCodes = implode(
-				',',
-				$GLOBALS['TYPO3_DB']->fullQuoteArray(
-					$countries,
-					SEMINARS_TABLE_SITES
-				)
-			);
+		if (empty($countries)) {
+			return '';
+		}
 
-			// Checks whether there are places that have one of the selected
-			// countries set and if there are events that have those places
-			// set (looked up in the m:n table).
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				SEMINARS_TABLE_SEMINARS.'.uid',
-				SEMINARS_TABLE_SEMINARS
-					.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM.' ON '
-					.SEMINARS_TABLE_SEMINARS.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_local'
-					.' LEFT JOIN '.SEMINARS_TABLE_SITES.' ON '
-					.SEMINARS_TABLE_SITES_MM.'.uid_foreign='.SEMINARS_TABLE_SITES.'.uid',
-				SEMINARS_TABLE_SITES.'.country IN('.$countryIsoCodes.')',
-				'',
-				SEMINARS_TABLE_SEMINARS.'.uid'
-			);
+		$result = '';
 
-			// Adds the additional part of the query only if there was at least
-			// one matching entry found in the m:n table.
-			if ($dbResult) {
-				$seminarUids = array();
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					$seminarUids[] = $row['uid'];
-				}
-				if (!empty($seminarUids)) {
-					$seminarUidsWithThisCountry = implode(',', $seminarUids);
-					$result = ' AND '.SEMINARS_TABLE_SEMINARS
-						.'.uid IN('.$seminarUidsWithThisCountry.')';
-				}
+		// Implodes the array to a comma-separated list and adds quotes around
+		// each entry to make it work with the database. This is needed because
+		// the values are of type string.
+		$countryIsoCodes = implode(
+			',',
+			$GLOBALS['TYPO3_DB']->fullQuoteArray(
+				$countries,
+				SEMINARS_TABLE_SITES
+			)
+		);
+
+		// Checks whether there are places that have one of the selected
+		// countries set and if there are events that have those places set
+		// (looked up in the m:n table).
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			SEMINARS_TABLE_SEMINARS.'.uid',
+			SEMINARS_TABLE_SEMINARS
+				.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM.' ON '
+				.SEMINARS_TABLE_SEMINARS.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_local'
+				.' LEFT JOIN '.SEMINARS_TABLE_SITES.' ON '
+				.SEMINARS_TABLE_SITES_MM.'.uid_foreign='.SEMINARS_TABLE_SITES.'.uid',
+			SEMINARS_TABLE_SITES.'.country IN('.$countryIsoCodes.')',
+			'',
+			SEMINARS_TABLE_SEMINARS.'.uid'
+		);
+
+		// Adds the additional part of the query only if there was at least one
+		// matching entry found in the m:n table.
+		if ($dbResult) {
+			$seminarUids = array();
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$seminarUids[] = $row['uid'];
+			}
+			if (!empty($seminarUids)) {
+				$seminarUidsWithThisCountry = implode(',', $seminarUids);
+				$result = ' AND '.SEMINARS_TABLE_SEMINARS
+					.'.uid IN('.$seminarUidsWithThisCountry.')';
 			}
 		}
 
@@ -241,27 +243,28 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * @access	private
 	 */
 	function getAdditionalQueryForLanguage($languages) {
+		// Removes the dummy option from the form data if the user selected it.
+		$realLanguages
+			= $this->removeDummyOptionFromFormData($languages);
+
+		if (empty($realLanguages)) {
+			return '';
+		}
+
 		$result = '';
 
-		// Removes the dummy option from the form data if the user selected it.
-		$languages = $this->removeDummyOptionFromFormData(
-			$languages
+		// Implodes the array to a comma-separated list and adds quotes around
+		// each entry to make it work with the database. This is needed
+		// because the values are of type string.
+		$languageUids = implode(
+			',',
+			$GLOBALS['TYPO3_DB']->fullQuoteArray(
+				$realLanguages,
+				SEMINARS_TABLE_SEMINARS
+			)
 		);
-
-		if (!empty($languages)) {
-			// Implodes the array to a comma-separated list and adds quotes
-			// around each entry to make it work with the database. This is needed
-			// because the values are of type string.
-			$languageUids = implode(
-				',',
-				$GLOBALS['TYPO3_DB']->fullQuoteArray(
-					$languages,
-					SEMINARS_TABLE_SEMINARS
-				)
-			);
-			$result = ' AND '.SEMINARS_TABLE_SEMINARS.'.language IN('
-				.$languageUids.')';
-		}
+		$result = ' AND '.SEMINARS_TABLE_SEMINARS.'.language IN('
+			.$languageUids.')';
 
 		return $result;
 	}
@@ -287,9 +290,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		$sanitizedPlaceUids = array();
 
 		// Removes the dummy option from the form data if the user selected it.
-		$placeUids = $this->removeDummyOptionFromFormData(
-			$placeUids
-		);
+		$placeUids = $this->removeDummyOptionFromFormData($placeUids);
 
 		foreach ($placeUids as $currentPlaceUid) {
 			if (intval($currentPlaceUid) > 0) {
