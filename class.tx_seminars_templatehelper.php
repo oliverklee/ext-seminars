@@ -218,9 +218,55 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * 						case-insensitive, will get uppercased)
 	 *
 	 * @access	protected
+	 *
+	 * @deprecated	2007-12-09	Use setMarker instead.
 	 */
 	function setMarkerContent($markerName, $content, $prefix = '') {
-		$this->markers[$this->createMarkerName($markerName, $prefix)] = $content;
+		$this->setMarker($markerName, $content, $prefix);
+	}
+
+	/**
+	 * Sets a marker's content.
+	 *
+	 * Example: If the prefix is "field" and the marker name is "one", the
+	 * marker "###FIELD_ONE###" will be written.
+	 *
+	 * If the prefix is empty and the marker name is "one", the marker
+	 * "###ONE###" will be written.
+	 *
+	 * @param	string		the marker's name without the ### signs,
+	 * 						case-insensitive, will get uppercased, must not be
+	 * 						empty
+	 * @param	string		the marker's content, may be empty
+	 * @param	string		prefix to the marker name (may be empty,
+	 * 						case-insensitive, will get uppercased)
+	 *
+	 * @access	protected
+	 */
+	function setMarker($markerName, $content, $prefix = '') {
+		$unifiedMarkerName = $this->createMarkerName($markerName, $prefix);
+		$this->markers[$unifiedMarkerName] = $content;
+	}
+
+	/**
+	 * Gets a marker's content.
+	 *
+	 * @param	string		the marker's name without the ### signs,
+	 * 						case-insensitive, will get uppercased, must not be
+	 * 						empty
+	 *
+	 * @return	string		the marker's content or an empty string if the
+	 * 						marker has not been set before
+	 *
+	 * @access	protected
+	 */
+	function getMarker($markerName) {
+		$unifiedMarkerName = $this->createMarkerName($markerName);
+		if (!isset($this->markers[$unifiedMarkerName])) {
+			return '';
+		}
+
+		return $this->markers[$unifiedMarkerName];
 	}
 
 	/**
