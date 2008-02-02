@@ -46,17 +46,22 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/** the complete HTML template */
 	var $templateCode = '';
 
-	/** all HTML template subparts, using the marker name without ### as keys
-	    (e.g. 'MY_MARKER') */
+	/**
+	 * Associative array of all HTML template subparts, using the marker names
+	 * without ### as keys, for example 'MY_MARKER'.
+	 */
 	var $templateCache = array();
 
-	/** list of subpart names that shouldn't be displayed in the detailed view;
-	    set a subpart key like '###FIELD_DATE###' and the value to '' to remove
-	    that subpart */
+	/**
+	 * List of subpart names that shouldn't be displayed. Set a subpart key like
+	 * "###FIELD_DATE###" and the value to '' to remove that subpart.
+	 */
 	var $subpartsToHide = array();
 
-	/** list of populated markers and their contents (with the keys being the
-	    marker names) */
+	/**
+	 * Associative array of populated markers and their contents (with the keys
+	 * being the marker names including the wrapping hash signs ###).
+	 */
 	var $markers = array();
 
 	/** list of the names of all markers (and subparts) of a template */
@@ -74,10 +79,11 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 
 	/**
 	 * Retrieves the plugin template file set in $this->conf['templateFile'] (or
-	 * via flexforms) and writes it to $this->templateCode. The subparts will
-	 * be written to $this->templateCache.
+	 * also via flexforms if TYPO3 mode is FE) and writes it to
+	 * $this->templateCode. The subparts will be written to $this->templateCache.
 	 *
-	 * @param	boolean		whether the settings in the Flexform should be ignored, defaults to false, may be empty
+	 * @param	boolean		whether the settings in the Flexform should be
+	 * 						ignored
 	 *
 	 * @access	protected
 	 */
@@ -105,8 +111,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * Example: The subpart ###MY_SUBPART### will be stored with the array key
 	 * 'MY_SUBPART'.
 	 *
-	 * Please note that each subpart may only occur once in the template.
-	 *
 	 * @param	string		the content of the HTML template
 	 *
 	 * @access	protected
@@ -129,7 +133,8 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * Finds all subparts within the current HTML template.
 	 * The subparts must be within HTML comments.
 	 *
-	 * @return	array		a list of the subpart names (uppercase, without ###, e.g. 'MY_SUBPART')
+	 * @return	array		a list of the subpart names (uppercase, without ###,
+	 *						for example 'MY_SUBPART')
 	 *
 	 * @access	protected
 	 */
@@ -154,7 +159,8 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * Example: If the markers ###FOO### and ###BAR### are found, the string
 	 * "#FOO#BAR#" would be returned.
 	 *
-	 * @return	string		a list of markes as one long string, separated, prefixed and postfixed by '#'
+	 * @return	string		a list of markes as one long string, separated,
+	 *						prefixed and postfixed by '#'
 	 *
 	 * @access	private
 	 */
@@ -169,18 +175,19 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 
 	/**
 	 * Gets a list of markers with a given prefix.
-	 * Example: If the prefix is "WRAPPER" (or "wrapper", case is not relevant), the following array
-	 * might be returned: ("WRAPPER_FOO", "WRAPPER_BAR")
+	 * Example: If the prefix is "WRAPPER" (or "wrapper", case is not relevant),
+	 * the following array might be returned: ("WRAPPER_FOO", "WRAPPER_BAR")
 	 *
 	 * If there are no matches, an empty array is returned.
 	 *
-	 * The functions <code>findMarkers</code> must be called before this function may be called.
+	 * The function <code>findMarkers</code> must be called before this function
+	 * may be called.
 	 *
 	 * @param	string	case-insensitive prefix for the marker names to look for
 	 *
-	 * @return	array	Array of matching marker names
+	 * @return	array	array of matching marker names, might be empty
 	 *
-	 * @access	public
+	 * @access	private
 	 */
 	function getPrefixedMarkers($prefix) {
 		$matches = array();
@@ -197,15 +204,18 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/**
 	 * Sets a marker's content.
 	 *
-	 * Example: If the prefix is "field" and the marker name is "one", the marker
-	 * "###FIELD_ONE###" will be written.
+	 * Example: If the prefix is "field" and the marker name is "one", the
+	 * marker "###FIELD_ONE###" will be written.
 	 *
 	 * If the prefix is empty and the marker name is "one", the marker
 	 * "###ONE###" will be written.
 	 *
-	 * @param	string		the marker's name without the ### signs, case-insensitive, will get uppercased, must not be empty
+	 * @param	string		the marker's name without the ### signs,
+	 * 						case-insensitive, will get uppercased, must not be
+	 * 						empty
 	 * @param	string		the marker's content, may be empty
-	 * @param	string		prefix to the marker name (may be empty, case-insensitive, will get uppercased)
+	 * @param	string		prefix to the marker name (may be empty,
+	 * 						case-insensitive, will get uppercased)
 	 *
 	 * @access	protected
 	 */
@@ -238,16 +248,15 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Takes a comma-separated list of subpart names and writes them to
-	 * $this->subpartsToHide. In the process, the names are changed from 'aname'
-	 * to '###BLA_ANAME###' and used as keys. The corresponding values in the
-	 * array are empty strings.
+	 * Takes a comma-separated list of subpart names and sets them to hidden. In
+	 * the process, the names are changed from 'aname' to '###BLA_ANAME###' and
+	 * used as keys.
 	 *
-	 * Example: If the prefix is "field" and the list is "one,two", the array
-	 * keys "###FIELD_ONE###" and "###FIELD_TWO###" will be written.
+	 * Example: If the prefix is "field" and the list is "one,two", the subparts
+	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be hidden.
 	 *
-	 * If the prefix is empty and the list is "one,two", the array keys
-	 * "###ONE###" and "###TWO###" will be written.
+	 * If the prefix is empty and the list is "one,two", the subparts
+	 * "###ONE###" and "###TWO###" will be hidden.
 	 *
 	 * @param	string		comma-separated list of at least 1 subpart name to
 	 * 						hide (case-insensitive, will get uppercased)
@@ -268,22 +277,24 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Takes a comma-separated list of subpart names and removes them from
-	 * $this->subpartsToHide. All subpartNames that are provided with the second
-	 * parameter will not be unhidden! This is to avoid unhiding subparts that
-	 * are hidden by configuration.
+	 * Takes a comma-separated list of subpart names and unhides them if they
+	 * have been hidden beforehand.
 	 *
-	 * In the process, the names are changed from 'aname' to '###BLA_ANAME###'
-	 * and used as keys. The corresponding values in the array are empty strings.
+	 * Note: All subpartNames that are provided with the second parameter will
+	 * not be unhidden. This is to avoid unhiding subparts that are hidden by
+	 * the configuration.
 	 *
-	 * Example: If the prefix is "field" and the list is "one,two", the array
-	 * keys "###FIELD_ONE###" and "###FIELD_TWO###" will be unhidden.
+	 * In the process, the names are changed from 'aname' to '###BLA_ANAME###'.
 	 *
-	 * If the prefix is empty and the list is "one,two", the array keys
+	 * Example: If the prefix is "field" and the list is "one,two", the subparts
+	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be unhidden.
+	 *
+	 * If the prefix is empty and the list is "one,two", the subparts
 	 * "###ONE###" and "###TWO###" will be unhidden.
 	 *
 	 * @param	string		comma-separated list of at least 1 subpart name to
-	 * 						unhide (case-insensitive, will get uppercased)
+	 * 						unhide (case-insensitive, will get uppercased),
+	 * 						must not be empty
 	 * @param	string		comma-separated list of of subpart names that
 	 * 						shouldn't get unhidden
 	 * @param	string		prefix to the subpart names (may be empty,
@@ -291,7 +302,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * @access	protected
 	 */
-	function readSubpartsToUnhide($subparts, $permanentlyHiddenSubparts = '', $prefix = '') {
+	function readSubpartsToUnhide(
+		$subparts, $permanentlyHiddenSubparts = '', $prefix = ''
+	) {
 		$subpartNames = explode(',', $subparts);
 		$hiddenSubpartNames = explode(',', $permanentlyHiddenSubparts);
 
@@ -305,13 +318,12 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 				);
 				unset($this->subpartsToHide[$currentMarkerName]);
 			}
-
 		}
 	}
 
 	/**
 	 * Creates an uppercase marker (or subpart) name from a given name and an
-	 * optional prefix.
+	 * optional prefix, wrapping the result in three hash signs (###).
 	 *
 	 * Example: If the prefix is "field" and the marker name is "one", the
 	 * result will be "###FIELD_ONE###".
@@ -322,7 +334,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @access	private
 	 */
 	function createMarkerName($markerName, $prefix = '') {
-		// if a prefix is provided, uppercase it and separate it with an underscore
 		if ($prefix) {
 			$prefix = strtoupper($prefix).'_';
 		}
@@ -343,10 +354,14 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * This function either works on the subpart with the name $key or the
 	 * complete HTML template if $key is an empty string.
 	 *
-	 * @param	string		key of the subpart from $this->templateCache, e.g. 'LIST_ITEM' (without the ###), or an empty string to use the complete HTML template
-	 * @param	integer		recursion level when substituting subparts within subparts, use 0 to disable recursion
+	 * @param	string		key of an existing subpart, for example 'LIST_ITEM'
+	 * 						(without the ###), or an empty string to use the
+	 * 						complete HTML template
+	 * @param	integer		recursion level when substituting subparts within
+	 *						subparts, use 0 to disable recursion
 	 *
-	 * @return	string		content stream with the markers replaced
+	 * @return	string		the subpart content or an empty string if the
+	 * 						subpart is hidden or the subpart name is missing
 	 *
 	 * @access	protected
 	 */
@@ -430,7 +445,8 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * Sets the all CSS classes from TS for the template in $this->markers.
 	 * The list of needed CSS classes will be extracted from the template file.
 	 *
-	 * Classes are set only if they are set via TS, else the marker will be an empty string.
+	 * Classes are set only if they are set via TS, else the marker will be an
+	 * empty string.
 	 *
 	 * @access	protected
 	 */
@@ -450,15 +466,15 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/**
 	 * Creates an CSS class attribute. The parameter is the class name.
 	 *
-	 * Example: If the parameter is 'foo', our extension is named 'bar' and we
-	 * are in p1, then the return value is 'class="tx-bar-pi1-foo"'.
+	 * Example: If the parameter is 'foo', our extension is named 'bar' and we are in p1,
+	 * then the return value is 'class="tx-bar-pi1-foo"'.
 	 *
-	 * If the parameter is an emty string, the return value is an empty string
-	 * as well (not an attribute with an empty value).
+	 * If the parameter is an emty string, the return value is an empty string as well
+	 * (not an attribute with an empty value).
 	 *
-	 * @param	string	a CSS class name (may be empty)
+	 * @param	string		a CSS class name (may be empty)
 	 *
-	 * @return	string	a CSS class attribute (may be empty)
+	 * @return	string		a CSS class attribute (may be empty)
 	 *
 	 * @access	protected
 	 */
@@ -474,16 +490,18 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @param	string		the key from the LOCAL_LANG array for which to
 	 * 						return the value
 	 * @param	string		alternative string to return if no value is found
-	 * 						set for the key, neither for the local language nor
-	 * 						the default.
+	 * 						for the key, neither for the local language nor the
+	 * 						default.
 	 * @param	boolean		If true, the output label is passed through
 	 * 						htmlspecialchars().
 	 *
-	 * @return	string		the value from LOCAL_LANG
+	 * @return	string		the value from LOCAL_LANG, might be empty
 	 *
 	 * @access	protected
 	 */
-	function pi_getLL($key, $alternativeString = '', $useHtmlSpecialChars = false) {
+	function pi_getLL(
+		$key, $alternativeString = '', $useHtmlSpecialChars = false
+	) {
 		global $LANG;
 		$result = '';
 
