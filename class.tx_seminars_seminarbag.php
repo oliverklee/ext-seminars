@@ -205,6 +205,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	function getAdditionalQueryForEventType($eventTypeUids) {
 		$result = '';
 		$sanitizedEventTypeUids = array();
+		$eventUids = array();
 
 		// Removes the dummy option from the form data if the user selected it.
 		$eventTypeUids = $this->removeDummyOptionFromFormData(
@@ -218,8 +219,29 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		}
 
 		if (!empty($sanitizedEventTypeUids)) {
-			$result = ' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN('
-				. implode(',', $sanitizedEventTypeUids).')';
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'dates.uid',
+				SEMINARS_TABLE_SEMINARS.' AS dates'
+					.' LEFT JOIN '.SEMINARS_TABLE_SEMINARS.' AS topics'
+					.' ON dates.topic=topics.uid',
+				'(dates.object_type='.SEMINARS_RECORD_TYPE_DATE
+					.' AND topics.event_type in ('.implode(',', $sanitizedEventTypeUids).')'
+					.') OR ('
+					.' dates.object_type='.SEMINARS_RECORD_TYPE_COMPLETE
+					.' AND dates.event_type IN('.implode(',', $sanitizedEventTypeUids).'))',
+				'',
+				'dates.uid'
+			);
+			if ($dbResult) {
+				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+					$eventUids[] = $row['uid'];
+				}
+			}
+
+			if (!empty($eventUids)) {
+				$result = ' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('
+					.implode(',', $eventUids).')';
+			}
 		}
 
 		return $result;

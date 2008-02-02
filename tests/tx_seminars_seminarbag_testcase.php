@@ -41,12 +41,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('title' => 'test event')
-		);
-
-		$this->fixture = new tx_seminars_seminarbag('uid='.$uid);
+		$this->fixture = new tx_seminars_seminarbag();
 	}
 
 	protected function tearDown() {
@@ -61,6 +56,14 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBagCanHaveAtLeastOneElement() {
+		// This test needs a special fixture.
+		unset($this->fixture);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'test event')
+		);
+		$this->fixture = new tx_seminars_seminarbag('uid='.$uid);
+
 		$this->assertGreaterThan(
 			0, $this->fixture->getObjectCountWithoutLimit()
 		);
@@ -167,16 +170,43 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAdditionalQueryForEventTypeWithOneValidEventType() {
+		$eventTypeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_EVENT_TYPES);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $eventTypeUid
+			)
+		);
+		
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(3)',
-			$this->fixture->getAdditionalQueryForEventType(array(3))
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
+			$this->fixture->getAdditionalQueryForEventType(array($eventTypeUid))
 		);
 	}
 
 	public function testGetAdditionalQueryForEventTypeWithTwoValidEventTypes() {
+		$eventTypeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_EVENT_TYPES);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $eventTypeUid
+			)
+		);
+
+		$eventTypeUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_EVENT_TYPES);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $eventTypeUid2
+			)
+		);
+
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(1,42)',
-			$this->fixture->getAdditionalQueryForEventType(array(1, 42))
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.','.$eventUid2.')',
+			$this->fixture->getAdditionalQueryForEventType(array($eventTypeUid, $eventTypeUid2))
 		);
 	}
 
@@ -185,8 +215,15 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		// empty string. But as we intval() the input values, and zero is an
 		// allowed value for the event type, the returned string will not be
 		// empty as the evil data has an integer value of zero.
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => 0
+			)
+		);
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(0)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForEventType(
 				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;')
 			)
@@ -197,11 +234,47 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		// This covers a special case: If no event type is set, the value of the
 		// field in the database is set to zero by default. So zero is an
 		// allowed value for the event type.
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => 0
+			)
+		);
 		$this->assertEquals(
-			' AND '.SEMINARS_TABLE_SEMINARS.'.event_type IN(0)',
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForEventType(array(0))
 		);
 	}
+
+	public function testGetAdditionalQueryForEventTypeReturnsDateUid() {
+		// This covers the case of date records. We should get the UID of the
+		// date record(s), the tested method must fetch the data from the topic
+		// record through a JOIN in the database query.
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$eventTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'event_type' => $eventTypeUid
+			)
+		);
+		$eventDateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $eventTopicUid
+			)
+		);
+
+		$this->assertEquals(
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventDateUid.')',
+			$this->fixture->getAdditionalQueryForEventType(array($eventTypeUid))
+		);
+	}
+
 
 
 	/////////////////////////////////////////////
