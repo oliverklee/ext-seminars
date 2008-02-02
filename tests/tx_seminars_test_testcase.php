@@ -77,7 +77,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture = new tx_seminars_test($this->fixtureUid);
 	}
-	
+
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture);
@@ -154,6 +154,28 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testHasUidIsTrueForObjectsWithAUid() {
+		$this->assertNotEquals(
+			0,
+			$this->fixtureUid
+		);
+		$this->assertTrue(
+			$this->fixture->hasUid()
+		);
+	}
+
+	public function testHasUidIsFalseForObjectsWithoutUid() {
+		$virginFixture = new tx_seminars_test(0);
+
+		$this->assertEquals(
+			0,
+			$virginFixture->getUid()
+		);
+		$this->assertFalse(
+			$virginFixture->hasUid()
+		);
+	}
+
 	public function testGetTitle() {
 		$this->assertEquals(
 			'Test',
@@ -190,6 +212,73 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	public function testTypoScriptConfigurationIsLoaded() {
 		$this->assertTrue(
 			$this->fixture->getConfValueBoolean('isStaticTemplateLoaded')
+		);
+	}
+
+
+	///////////////////////////////////
+	// Tests for commiting to the DB.
+	///////////////////////////////////
+
+	public function testCommitToDbCanInsertNewRecord() {
+		$title = 'Test record (with a unique title)';
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TEST,
+				'title ="'.$title.'"',
+				'Please make sure that no test record with the title "'
+					.$title.'" exists in the DB.'
+			)
+		);
+
+		$virginFixture = new tx_seminars_test(0);
+		$virginFixture->setTitle($title);
+		$virginFixture->enableTestMode();
+		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST);
+
+		$this->assertTrue(
+			$virginFixture->isOk(),
+			'The virgin fixture has not been completely initialized yet.'
+		);
+
+		$this->assertTrue(
+			$virginFixture->commitToDb()
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TEST,
+				'title="'.$title.'"'
+			)
+		);
+	}
+
+	public function testCommitToDbCanUpdateExistingRecord() {
+		$title = 'Test record (with a unique title)';
+		$this->fixture->setTitle($title);
+
+		$this->assertTrue(
+			$this->fixture->commitToDb()
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TEST,
+				'title="'.$title.'"'
+			)
+		);
+	}
+
+	public function testCommitToDbWillNotWriteIncompleteRecords() {
+		$virginFixture = new tx_seminars_test(0);
+		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST);
+
+		$this->assertFalse(
+			$virginFixture->isOk()
+		);
+		$this->assertFalse(
+			$virginFixture->commitToDb()
 		);
 	}
 }

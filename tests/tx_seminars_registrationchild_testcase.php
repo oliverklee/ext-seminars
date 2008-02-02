@@ -37,17 +37,20 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
 
+	/** the UID of a seminar to which the fixture relates */
+	private $seminarUid;
+
 	protected function setUp() {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
-		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array()
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
 		);
 
 		$registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $seminarUid)
+			array('seminar' => $this->seminarUid)
 		);
 
 		$this->fixture = new tx_seminars_registrationchild($registrationUid);
@@ -99,7 +102,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSetPaymentMethodRelationCreatesNewUids() {
+	public function testSetPaymentMethodRelationCreatesNewUid() {
 		$this->assertNotEquals(
 			$this->setPaymentMethodRelation(array()),
 			$this->setPaymentMethodRelation(array())
@@ -192,6 +195,157 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$this->fixture->getUserData('')
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////
+	// Tests regarding commiting registrations to the database.
+	/////////////////////////////////////////////////////////////
+
+	public function testCommitToDbCanCreateNewRecord() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$registration = new tx_seminars_registrationchild(0);
+		$registration->setRegistrationData($seminar, 0, array());
+		$registration->enableTestMode();
+		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+
+		$this->assertTrue(
+			$registration->isOk()
+		);
+		$this->assertTrue(
+			$registration->commitToDb()
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ATTENDANCES,
+				'uid='.$registration->getUid()
+			),
+			'The registration record cannot be found in the DB.'
+		);
+	}
+
+	public function testCommitToDbCanCreateLodgingsRelation() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$lodgingsUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_LODGINGS
+		);
+
+		$registration = new tx_seminars_registrationchild(0);
+		$registration->setRegistrationData(
+			$seminar, 0, array('lodgings' => array($lodgingsUid))
+		);
+		$registration->enableTestMode();
+		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+		$this->testingFramework->markTableAsDirty(
+			SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM
+		);
+
+		$this->assertTrue(
+			$registration->isOk()
+		);
+		$this->assertTrue(
+			$registration->commitToDb()
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ATTENDANCES,
+				'uid='.$registration->getUid()
+			),
+			'The registration record cannot be found in the DB.'
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM,
+				'uid_local='.$registration->getUid()
+					.' AND uid_foreign='.$lodgingsUid
+			),
+			'The relation record cannot be found in the DB.'
+		);
+	}
+
+	public function testCommitToDbCanCreateFoodsRelation() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$foodsUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_FOODS
+		);
+
+		$registration = new tx_seminars_registrationchild(0);
+		$registration->setRegistrationData(
+			$seminar, 0, array('foods' => array($foodsUid))
+		);
+		$registration->enableTestMode();
+		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+		$this->testingFramework->markTableAsDirty(
+			SEMINARS_TABLE_ATTENDANCES_FOODS_MM
+		);
+
+		$this->assertTrue(
+			$registration->isOk()
+		);
+		$this->assertTrue(
+			$registration->commitToDb()
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ATTENDANCES,
+				'uid='.$registration->getUid()
+			),
+			'The registration record cannot be found in the DB.'
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ATTENDANCES_FOODS_MM,
+				'uid_local='.$registration->getUid()
+					.' AND uid_foreign='.$foodsUid
+			),
+			'The relation record cannot be found in the DB.'
+		);
+	}
+
+	public function testCommitToDbCanCreateCheckboxesRelation() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$checkboxesUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CHECKBOXES
+		);
+
+		$registration = new tx_seminars_registrationchild(0);
+		$registration->setRegistrationData(
+			$seminar, 0, array('checkboxes' => array($checkboxesUid))
+		);
+		$registration->enableTestMode();
+		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+		$this->testingFramework->markTableAsDirty(
+			SEMINARS_TABLE_ATTENDANCES_CHECKBOXES_MM
+		);
+
+		$this->assertTrue(
+			$registration->isOk()
+		);
+		$this->assertTrue(
+			$registration->commitToDb()
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ATTENDANCES,
+				'uid='.$registration->getUid()
+			),
+			'The registration record cannot be found in the DB.'
+		);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_ATTENDANCES_CHECKBOXES_MM,
+				'uid_local='.$registration->getUid()
+					.' AND uid_foreign='.$checkboxesUid
+			),
+			'The relation record cannot be found in the DB.'
 		);
 	}
 }

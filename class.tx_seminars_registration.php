@@ -1318,16 +1318,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return	boolean		true if everything went OK, false otherwise
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function commitToDb() {
 		$result = parent::commitToDb();
 
 		if ($result) {
 			$this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
-			if ($this->recordData['uid']) {
+			if ($this->hasUid()) {
 				$this->createMmRecords(
-					SEMINARS_TABLE_ATTENDANCES_LODGINGS_MMM,
+					SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM,
 					$this->lodgings
 				);
 				$this->createMmRecords(

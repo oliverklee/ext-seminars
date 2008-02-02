@@ -302,30 +302,32 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if everything went OK, false otherwise
 	 *
-	 * @access	protected
+	 * @access	public
 	 */
 	function commitToDb() {
-		$result = false;
+		if (!$this->isOk()) {
+			return false;
+		}
 
-		if ($this->isOk()) {
-			// We save the current time so that tstamp and crdate will be the same.
-			$now = time();
-			$this->setRecordPropertyInteger('tstamp', $now);
-			if (!$this->isInDb) {
-				$this->setRecordPropertyInteger('crdate', $now);
-			}
+		// Saves the current time so that tstamp and crdate will be the same.
+		$now = time();
+		$this->setRecordPropertyInteger('tstamp', $now);
 
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_INSERTquery(
+		if (!$this->isInDb || !$this->hasUid()) {
+			$this->setRecordPropertyInteger('crdate', $now);
+			$this->isInDb = (boolean) $GLOBALS['TYPO3_DB']->exec_INSERTquery(
 				$this->tableName,
 				$this->recordData
 			);
-			if ($dbResult) {
-				$this->isInDb = true;
-				$result = true;
-			}
+		} else {
+			$this->isInDb = (boolean) $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+				$this->tableName,
+				'uid='.$this->getUid(),
+				$this->recordData
+			);
 		}
 
-		return $result;
+		return $this->isInDb;
 	}
 
 	/**
@@ -337,33 +339,37 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	string		the name of the m:m table, having the fields
 	 * 						uid_local, uid_foreign and sorting, must not be empty
 	 * @param	array		array of uids of records from the foreign table to
-	 * 						which we should create references
+	 * 						which we should create references, may be empty
 	 *
 	 * @return	integer		the number of created m:m records
 	 *
 	 * @access	protected
 	 */
 	function createMmRecords($mmTable, $references) {
+		if (empty($references)) {
+			return 0;
+		}
+
 		$numberOfCreatedMmRecords = 0;
+		$isDummyRecord = $this->getRecordPropertyBoolean('is_dummy_record');
 
-		if (!empty($references)) {
-			$sorting = 256;
+		$sorting = 1;
 
-			foreach ($references as $currentRelation) {
-				// We might get unsafe data here, so better be safe.
-				$foreignUid = intval($currentRelation);
-				if ($foreignUid) {
-					$GLOBALS['TYPO3_DB']->exec_INSERTquery(
-						$mmTable,
-						array(
-							'uid_local' => $this->getUid(),
-							'uid_foreign' => $foreignUid,
-							'sorting' => $sorting
-						)
-					);
-					$sorting += 256;
-					$numberOfCreatedMmRecords++;
-				}
+		foreach ($references as $currentRelationUid) {
+			// We might get unsafe data here, so better be safe.
+			$foreignUid = intval($currentRelationUid);
+			if ($foreignUid > 0) {
+				$dataToInsert = array(
+					'uid_local' => $this->getUid(),
+					'uid_foreign' => $foreignUid,
+					'sorting' => $sorting,
+					'is_dummy_record' => $isDummyRecord
+				);
+				$GLOBALS['TYPO3_DB']->exec_INSERTquery(
+					$mmTable, $dataToInsert
+				);
+				$sorting++;
+				$numberOfCreatedMmRecords++;
 			}
 		}
 
@@ -486,6 +492,17 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Checks whether this object has a UID.
+	 *
+	 * @return	boolean		true if this object has a UID, false otherwise
+	 *
+	 * @access	public
+	 */
+	function hasUid() {
+		return $this->hasRecordPropertyInteger('uid');
+	}
+
+	/**
 	 * Gets our title.
 	 *
 	 * @return	string		our title (or '' if there is an error)
@@ -590,6 +607,15 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 				$updateArray
 			);
 		}
+	}
+
+	/**
+	 * Marks this object as a dummy record (when it is written to the DB).
+	 *
+	 * @access	public
+	 */
+	function enableTestMode() {
+		$this->setRecordPropertyBoolean('is_dummy_record', true);
 	}
 }
 
