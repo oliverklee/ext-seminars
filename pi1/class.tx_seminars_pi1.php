@@ -672,7 +672,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// Assures that each language is just once in the resulting array.
 		$this->allLanguages = array_unique($this->allLanguages);
 
-		// Fetches the name of the location and adds it to the final array.
+		// Fetches the name of the location, the city and the country and adds
+		// it to the final array.
+		if (empty($allPlaceUids)) {
+			$allPlaceUids = array(0);
+		}
 		$placeBag = $this->createPlaceBag($allPlaceUids);
 		while ($currentPlace =& $placeBag->getCurrent()) {
 			if (!isset($this->allPlaces[$currentPlace->getUid()])) {
