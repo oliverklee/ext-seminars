@@ -159,8 +159,8 @@
 			<label index="label_name">Name:</label>
 			<label index="label_address">Street:</label>
 			<label index="label_zip">ZIP:</label>
-			<label index="label_city">City:</label>
-			<label index="label_country">Country:</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
 			<label index="label_telephone">Phone number:</label>
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
@@ -572,8 +572,8 @@
 			<label index="label_name">Name:</label>
 			<label index="label_address">Straße:</label>
 			<label index="label_zip">PLZ:</label>
-			<label index="label_city">Ort:</label>
-			<label index="label_country">Land:</label>
+			<label index="label_city">Stadt</label>
+			<label index="label_country">Land</label>
 			<label index="label_telephone">Telefon:</label>
 			<label index="label_email">E-Mail:</label>
 			<label index="label_lodgings">Art der Unterbringung:</label>
@@ -1770,8 +1770,8 @@
 			<label index="label_name" type="integer">81871034</label>
 			<label index="label_address" type="integer">252788963</label>
 			<label index="label_zip" type="integer">234550549</label>
-			<label index="label_city" type="integer">201307921</label>
-			<label index="label_country" type="integer">258260574</label>
+			<label index="label_city" type="integer">92079470</label>
+			<label index="label_country" type="integer">93787849</label>
 			<label index="label_telephone" type="integer">130029308</label>
 			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">100712032</label>
@@ -2780,8 +2780,8 @@
 			<label index="label_name">Name:</label>
 			<label index="label_address">Street:</label>
 			<label index="label_zip">ZIP:</label>
-			<label index="label_city">City:</label>
-			<label index="label_country">Country:</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
 			<label index="label_telephone">Phone number:</label>
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
