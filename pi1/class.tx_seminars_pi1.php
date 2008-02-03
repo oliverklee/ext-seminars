@@ -594,12 +594,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result .= $this->pi_list_browseresults();
 			}
 
-			// Show the search box (if not deactivated in the configuration).
-			if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
-				// The search box is shown even if the list is empty.
-				$result .= $this->pi_list_searchBox();
-			}
-
 			// Let warnings from the seminar and the seminar bag bubble up to us.
 			$this->setErrorMessage(
 				$seminarOrRegistrationBag->checkConfiguration(true)
@@ -2811,10 +2805,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createSelectorWidget() {
-		$this->setMarkerContent(
-			'searchbox_name',
-			$this->prefixId.'[sword]'
-		);
+		// Shows or hides the text search field.
+		if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
+			// Sets the previous search string into the text search box.
+			$this->setMarker(
+				'searchbox_value',
+				htmlspecialchars($this->piVars['sword'])
+			);
+		} else {
+			$this->readSubpartsToHide('wrapper_searchbox');
+		}
 
 		// Defines the list of option boxes that should be shown in the form.
 		$allOptionBoxes = array(

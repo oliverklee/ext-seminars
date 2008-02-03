@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1348] Feature: Make hideSearchForm working with the Selector Widget
 - [#1599] Feature: Add a function getMarker()
 - [#1596] Fix: Confirmation mail: Lodging options not shown
 - [#1592] Change: Skip some queries when we know that the result will be empty beforehand

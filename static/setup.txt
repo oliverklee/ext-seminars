@@ -252,12 +252,12 @@ plugin.tx_seminars_pi1 {
 	hideFields = credit_points,eventsnextday
 
 	# whether the selector widget should be hidden in list view
-	hideSelectorWidget = 1
+	hideSelectorWidget = 0
 
 	# whether the option boxes in the selector widget contain an empty entry like "not selected"
 	showEmptyEntryInOptionLists = 0
 
-	# whether the search form should be hidden in list view
+	# whether the search form should be hidden in list view (hides the text-search field within the selector widget)
 	hideSearchForm = 0
 
 	# whether the page browser should be hidden in list view
