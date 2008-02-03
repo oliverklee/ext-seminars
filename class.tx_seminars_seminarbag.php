@@ -202,7 +202,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	private
 	 */
-	function getAdditionalQueryForEventType($eventTypeUids) {
+	function getAdditionalQueryForEventType($eventTypeUids, $dummyRecordsOnly = false) {
 		$result = '';
 		$sanitizedEventTypeUids = array();
 		$eventUids = array();
@@ -219,6 +219,10 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		}
 
 		if (!empty($sanitizedEventTypeUids)) {
+			$additionalQueryParameterForDummyRecords = ($dummyRecordsOnly)
+				? ' AND dates.is_dummy_record=1'
+				: '';
+
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'dates.uid',
 				SEMINARS_TABLE_SEMINARS.' AS dates'
@@ -228,7 +232,8 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 					.' AND topics.event_type in ('.implode(',', $sanitizedEventTypeUids).')'
 					.') OR ('
 					.' dates.object_type='.SEMINARS_RECORD_TYPE_COMPLETE
-					.' AND dates.event_type IN('.implode(',', $sanitizedEventTypeUids).'))',
+					.' AND dates.event_type IN('.implode(',', $sanitizedEventTypeUids).'))'
+					.$additionalQueryParameterForDummyRecords,
 				'',
 				'dates.uid'
 			);

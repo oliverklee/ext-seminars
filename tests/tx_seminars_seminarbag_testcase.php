@@ -225,7 +225,8 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForEventType(
-				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;')
+				array('; DELETE FROM '.SEMINARS_TABLE_SEMINARS.' WHERE 1=1;'),
+				true
 			)
 		);
 	}
@@ -241,9 +242,10 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 				'event_type' => 0
 			)
 		);
+
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
-			$this->fixture->getAdditionalQueryForEventType(array(0))
+			$this->fixture->getAdditionalQueryForEventType(array(0), true)
 		);
 	}
 
