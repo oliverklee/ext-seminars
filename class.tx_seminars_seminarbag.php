@@ -197,6 +197,8 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * @param	array		array of UIDs for the event type, from POST data,
 	 * 						may be empty
 	 *
+	 * @param	boolean		whether only dummy records should be taken into account
+	 *
 	 * @return	string		the additional query parameter starting with ' AND',
 	 * 						can be appended to existing query string, may be empty
 	 *
