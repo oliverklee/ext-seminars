@@ -230,11 +230,11 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 				SEMINARS_TABLE_SEMINARS.' AS dates'
 					.' LEFT JOIN '.SEMINARS_TABLE_SEMINARS.' AS topics'
 					.' ON dates.topic=topics.uid',
-				'(dates.object_type='.SEMINARS_RECORD_TYPE_DATE
+				'((dates.object_type='.SEMINARS_RECORD_TYPE_DATE
 					.' AND topics.event_type in ('.implode(',', $sanitizedEventTypeUids).')'
 					.') OR ('
 					.' dates.object_type='.SEMINARS_RECORD_TYPE_COMPLETE
-					.' AND dates.event_type IN('.implode(',', $sanitizedEventTypeUids).'))'
+					.' AND dates.event_type IN('.implode(',', $sanitizedEventTypeUids).')))'
 					.$additionalQueryParameterForDummyRecords,
 				'',
 				'dates.uid'

@@ -277,6 +277,62 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testGetAdditionalQueryForEventTypeReturnsOnlyDummyRecords() {
+		// This test covers a special case in which real records were found
+		// even if the "dummyRecordsOnly" flag was set. For this we have to
+		// change a dummy record into a real record and back to a dummy record
+		// manually - the testing Framework prevents us from doing this via
+		// createRecord() or changeRecord().
+		// See https://bugs.oliverklee.com/show_bug.cgi?id=1578
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'event_type' => 0
+			)
+		);
+
+		// Changes the dummy record into a real record.
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+			SEMINARS_TABLE_SEMINARS,
+			'uid='.$topicUid.' AND is_dummy_record=1',
+			array('is_dummy_record' => 0)
+		);
+		if (!$dbResult) {
+			$this->fail('There was an error with the database query.');
+		}
+
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid
+			)
+		);
+
+		// Stores the result of the method that is being tested.
+		$additionalQuery = $this->fixture->getAdditionalQueryForEventType(
+			array(0),
+			true
+		);
+
+		// Restores our dummy topic record so that it is found by the cleanUp
+		// function.
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+			SEMINARS_TABLE_SEMINARS,
+			'uid='.$topicUid,
+			array('is_dummy_record' => 1)
+		);
+		if (!$dbResult) {
+			$this->fail('There was an error with the database query.');
+		}
+
+		$this->assertEquals(
+			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$dateUid.')',
+			$additionalQuery
+		);
+	}
+
 
 
 	/////////////////////////////////////////////
