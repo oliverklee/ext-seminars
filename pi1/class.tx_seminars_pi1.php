@@ -695,6 +695,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 		unset($placeBag);
 
+		// Brings the options into alphabetical order.
+		asort($this->allLanguages);
+		asort($this->allPlaces);
+		asort($this->allCities);
+		asort($this->allCountries);
+		asort($this->allEventTypes);
+
 		// Adds an empty option to each list of options if this is needed.
 		$this->addEmptyOptionIfNeeded($this->allLanguages);
 		$this->addEmptyOptionIfNeeded($this->allPlaces);
