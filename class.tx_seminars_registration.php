@@ -445,7 +445,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			}
 		}
 
-		// And now: Everthing separated by a comma and a space!
+		// And now: Everything separated by a comma and a space!
 		return implode(', ', $singleValues);
 	}
 
