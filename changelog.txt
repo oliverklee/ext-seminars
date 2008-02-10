@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1623] Feature: Add a field "skills" to the speaker record
 - [#1619] Fix: Time-slots are not sorted in front-end
 - [#1348] Feature: Make hideSearchForm working with the Selector Widget
 - [#1599] Feature: Add a function getMarker()

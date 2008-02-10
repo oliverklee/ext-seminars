@@ -757,7 +757,7 @@ $TCA['tx_seminars_seminars'] = array(
 $TCA['tx_seminars_speakers'] = array(
 	'ctrl' => $TCA['tx_seminars_speakers']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,organization,homepage,description,notes,address,phone_work,phone_home,phone_mobile,fax,email'
+		'showRecordFieldList' => 'title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email'
 	),
 	'columns' => array(
 		'title' => array(
@@ -806,6 +806,20 @@ $TCA['tx_seminars_speakers'] = array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5'
+			)
+		),
+		'skills' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.skills',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_skills',
+				'foreign_table' => 'tx_seminars_skills',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 999,
+				'MM' => 'tx_seminars_speakers_skills_mm'
 			)
 		),
 		'picture' => array(
@@ -888,7 +902,7 @@ $TCA['tx_seminars_speakers'] = array(
 		)
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], notes, address, phone_work, phone_home, phone_mobile, fax, email')
+		'0' => array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')
@@ -1745,6 +1759,30 @@ $TCA['tx_seminars_categories'] = array(
 		'title' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_categories.title',
+			'config' => array(
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'required,trim'
+			)
+		)
+	),
+	'types' => array(
+		'0' => array('showitem' => 'title;;;;2-2-2')
+	),
+	'palettes' => array(
+		'1' => array('showitem' => '')
+	)
+);
+
+$TCA['tx_seminars_skills'] = array(
+	'ctrl' => $TCA['tx_seminars_skills']['ctrl'],
+	'interface' => array(
+		'showRecordFieldList' => 'title'
+	),
+	'columns' => array(
+		'title' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_skills.title',
 			'config' => array(
 				'type' => 'input',
 				'size' => '30',

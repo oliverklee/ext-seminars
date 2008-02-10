@@ -30,7 +30,7 @@
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speaker.php');
+require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_speakerchild.php');
 
 require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
 
@@ -50,7 +50,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 				'email' => 'foo@test.com'
 			)
 		);
-		$this->fixture = new tx_seminars_speaker($fixtureUid);
+		$this->fixture = new tx_seminars_speakerchild($fixtureUid);
 
 		$maximalFixtureUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SPEAKERS,
@@ -68,13 +68,109 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 				'email' => 'maximal-foo@test.com'
 			)
 		);
-		$this->maximalFixture = new tx_seminars_speaker($maximalFixtureUid);
+		$this->maximalFixture = new tx_seminars_speakerchild($maximalFixtureUid);
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture);
 		unset($this->testingFramework);
+	}
+
+
+	///////////////////////
+	// Utility functions.
+	///////////////////////
+
+	/**
+	 * Inserts a skill record into the database and creates a relation to it
+	 * from the fixture.
+	 *
+	 * @param	array		data of the skill to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will always be > 0
+	 */
+	private function addSkillRelation(array $skillData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SKILLS, $skillData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_SKILLS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfSkills(
+			$this->fixture->getNumberOfSkills() + 1
+		);
+
+		return $uid;
+	}
+
+
+
+
+	/////////////////////////////////////
+	// Tests for the utility functions.
+	/////////////////////////////////////
+
+	public function testAddSkillRelationReturnsUid() {
+		$this->assertTrue(
+			$this->addSkillRelation(array()) > 0
+		);
+	}
+
+	public function testAddSkillRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addSkillRelation(array()),
+			$this->addSkillRelation(array())
+		);
+	}
+
+	public function testAddSkillRelationIncreasesTheNumberOfSkills() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfSkills()
+		);
+
+		$this->addSkillRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfSkills()
+		);
+
+		$this->addSkillRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfSkills()
+		);
+	}
+
+	public function testAddSkillRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SPEAKERS_SKILLS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addSkillRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SPEAKERS_SKILLS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addSkillRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SPEAKERS_SKILLS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
 	}
 
 
@@ -137,6 +233,72 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	}
 
 	*/
+
+	public function testHasSkillsInitiallyIsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasSkills()
+		);
+	}
+
+	public function testCanHaveOneSkill() {
+		$this->addSkillRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasSkills()
+		);
+	}
+
+	public function testGetSkillsShortWithNoSkillReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getSkillsShort()
+		);
+	}
+
+	public function testGetSkillsShortWithSingleSkillReturnsASingleSkill() {
+		$title = 'Test title';
+		$this->addSkillRelation(array('title' => $title));
+
+		$this->assertContains(
+			$title,
+			$this->fixture->getSkillsShort()
+		);
+	}
+
+	public function testGetSkillsShortWithMultipleSkillsReturnsMultipleSkills() {
+		$firstTitle = 'Skill 1';
+		$secondTitle = 'Skill 2';
+		$this->addSkillRelation(array('title' => $firstTitle));
+		$this->addSkillRelation(array('title' => $secondTitle));
+
+		$this->assertEquals(
+			$firstTitle.', '.$secondTitle,
+			$this->fixture->getSkillsShort()
+		);
+	}
+
+	public function testGetNumberOfSkillsWithNoSkillReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfSkills()
+		);
+	}
+
+	public function testGetNumberOfSkillsWithSingleSkillReturnsOne() {
+		$this->addSkillRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfSkills()
+		);
+	}
+
+	public function testGetNumberOfSkillsWithTwoSkillsReturnsTwo() {
+		$this->addSkillRelation(array());
+		$this->addSkillRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfSkills()
+		);
+	}
 
 	public function testGetNotes() {
 		$this->assertEquals(

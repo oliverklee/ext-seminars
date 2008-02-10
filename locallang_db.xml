@@ -85,6 +85,7 @@
 			<label index="tx_seminars_speakers.organization">Organization:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
+			<label index="tx_seminars_speakers.skills">Skills:</label>
 			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
@@ -161,7 +162,9 @@
 			<label index="tx_seminars_target_groups">Target Groups</label>
 			<label index="tx_seminars_target_groups.title">Title:</label>
 			<label index="tx_seminars_categories">Categories</label>
-			<label index="tx_seminars_categories.title">Title</label>
+			<label index="tx_seminars_categories.title">Title:</label>
+			<label index="tx_seminars_skills">Skills</label>
+			<label index="tx_seminars_skills.title">Title:</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -241,6 +244,7 @@
 			<label index="tx_seminars_speakers.organization">Organisation:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Beschreibung:</label>
+			<label index="tx_seminars_speakers.skills">Fähigkeiten:</label>
 			<label index="tx_seminars_speakers.picture">Foto:</label>
 			<label index="tx_seminars_speakers.notes">Interne Notizen:</label>
 			<label index="tx_seminars_speakers.address">Adresse:</label>
@@ -317,7 +321,9 @@
 			<label index="tx_seminars_target_groups">Zielgruppen</label>
 			<label index="tx_seminars_target_groups.title">Titel:</label>
 			<label index="tx_seminars_categories">Kategorien</label>
-			<label index="tx_seminars_categories.title">Titel</label>
+			<label index="tx_seminars_categories.title">Titel:</label>
+			<label index="tx_seminars_skills">Fähigkeiten</label>
+			<label index="tx_seminars_skills.title">Titel:</label>
 			<label index="tt_content.list_type_pi1">Seminar-Manager</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1088,6 +1094,7 @@
 			<label index="tx_seminars_speakers.organization" type="integer">119551324</label>
 			<label index="tx_seminars_speakers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_speakers.description" type="integer">218120871</label>
+			<label index="tx_seminars_speakers.skills" type="integer">89069054</label>
 			<label index="tx_seminars_speakers.picture" type="integer">131759065</label>
 			<label index="tx_seminars_speakers.notes" type="integer">121419833</label>
 			<label index="tx_seminars_speakers.address" type="integer">46079327</label>
@@ -1164,7 +1171,9 @@
 			<label index="tx_seminars_target_groups" type="integer">206184555</label>
 			<label index="tx_seminars_target_groups.title" type="integer">85903807</label>
 			<label index="tx_seminars_categories" type="integer">183613834</label>
-			<label index="tx_seminars_categories.title" type="integer">192455458</label>
+			<label index="tx_seminars_categories.title" type="integer">85903807</label>
+			<label index="tx_seminars_skills" type="integer">178756701</label>
+			<label index="tx_seminars_skills.title" type="integer">85903807</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1921,6 +1930,7 @@
 			<label index="tx_seminars_speakers.organization">Organization:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
+			<label index="tx_seminars_speakers.skills">Skills:</label>
 			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
@@ -2012,7 +2022,9 @@
 			<label index="tx_seminars_target_groups">Target Groups</label>
 			<label index="tx_seminars_target_groups.title">Title:</label>
 			<label index="tx_seminars_categories">Categories</label>
-			<label index="tx_seminars_categories.title">Title</label>
+			<label index="tx_seminars_categories.title">Title:</label>
+			<label index="tx_seminars_skills">Skills</label>
+			<label index="tx_seminars_skills.title">Title:</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
 		<languageKey index="dk" type="array">

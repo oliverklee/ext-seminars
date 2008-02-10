@@ -76,6 +76,64 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks whether we have any skills set.
+	 *
+	 * @return	boolean		true if we have any skills related to this speaker,
+	 * 						false otherwise.
+	 *
+	 * @access	public
+	 */
+	function hasSkills() {
+		return $this->hasRecordPropertyInteger('skills');
+	}
+
+	/**
+	 * Gets our skills as a plain text list (just the skill names).
+	 *
+	 * @return	string		our skills list (or an empty string if there are no
+	 * 						skills for this speaker or there is an error)
+	 *
+	 * @access	public
+	 */
+	function getSkillsShort() {
+		if (!$this->hasSkills()) {
+			return '';
+		}
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title',
+			SEMINARS_TABLE_SKILLS.', '.SEMINARS_TABLE_SPEAKERS_SKILLS_MM,
+			'uid_local='.$this->getUid().' AND uid=uid_foreign'
+				.$this->enableFields(SEMINARS_TABLE_SKILLS),
+			'',
+			'sorting ASC'
+		);
+
+		if (!$dbResult) {
+			return '';
+		}
+
+		$result = array();
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$result[] = $row['title'];
+		}
+
+		return implode(', ', $result);
+	}
+
+	/**
+	 * Gets the number of skills associated with this speaker.
+	 *
+	 * @return	integer		the number of skills associated with this speaker,
+	 * 						will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfSkills() {
+		return $this->getRecordPropertyInteger('skills');
+	}
+
+	/**
 	 * Gets our internal notes.
 	 *
 	 * @return	string		our internal notes (or '' if there is an error)

@@ -113,7 +113,10 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 					.'<span style="color: #ffffff; font-weight: bold;">'
 					.$LANG->getLL('speakerlist.title').'</span>'.LF,
 				TAB.TAB.TAB.TAB.TAB
-					.'&nbsp;'.LF
+					.'&nbsp;'.LF,
+				TAB.TAB.TAB.TAB.TAB
+					.'<span style="color: #ffffff; font-weight: bold;">'
+					.$LANG->getLL('speakerlist.skills').'</span>'.LF
 			)
 		);
 
@@ -147,7 +150,9 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 					)
 					.$this->getDeleteIcon(
 						$this->speaker->getUid()
-					).LF
+					).LF,
+				TAB.TAB.TAB.TAB.TAB
+					.$this->speaker->getSkillsShort().LF
 			);
 			$speakerBag->getNext();
 		}

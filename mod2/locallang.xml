@@ -24,6 +24,7 @@
 			<label index="eventlist.enough_attendees">Enough</label>
 			<label index="eventlist.is_full">Full</label>
 			<label index="speakerlist.title">Name</label>
+			<label index="speakerlist.skills">Skills</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
 			<label index="registrationlist.seminar.title">Event</label>
@@ -69,6 +70,7 @@
 			<label index="eventlist.enough_attendees">Genug</label>
 			<label index="eventlist.is_full">Voll</label>
 			<label index="speakerlist.title">Name</label>
+			<label index="speakerlist.skills">Fähigkeiten</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
 			<label index="registrationlist.seminar.title">Veranstaltung</label>
@@ -184,6 +186,7 @@
 			<label index="eventlist.enough_attendees" type="integer">30455057</label>
 			<label index="eventlist.is_full" type="integer">196953872</label>
 			<label index="speakerlist.title" type="integer">77521672</label>
+			<label index="speakerlist.skills" type="integer">178756701</label>
 			<label index="organizerlist.title" type="integer">77521672</label>
 			<label index="registrationlist.feuser.name" type="integer">77521672</label>
 			<label index="registrationlist.seminar.title" type="integer">172937159</label>
@@ -299,6 +302,7 @@
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
 			<label index="speakerlist.title">Name</label>
+			<label index="speakerlist.skills">Skills</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
 			<label index="registrationlist.seminar.title">Event</label>
