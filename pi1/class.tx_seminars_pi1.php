@@ -1883,7 +1883,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
 			$this->setMarkerContent('language', $this->seminar->getLanguageName());
 
-			$currentDate = $this->seminar->getLinkedFieldValue($this, 'date');
+			if ($this->whatToDisplay == 'topic_list') {
+				$currentDate = $this->seminar->getLinkedFieldValue($this, 'date');
+			} else {
+				$currentDate = $this->seminar->getDate();
+			}
 			if (($currentDate === $this->previousDate)
 				&& $this->getConfValueBoolean(
 					'omitDateIfSameAsPrevious',
