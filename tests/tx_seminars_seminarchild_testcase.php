@@ -1572,6 +1572,40 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$categories[$categoryUid2]
 		);
 	}
+
+
+	////////////////////////////////////
+	// Tests regarding the time-slots.
+	////////////////////////////////////
+
+	public function testGetTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {
+		$firstTimeSlotUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'seminar' => $this->fixture->getUid(),
+				'begin_date' => 200,
+				'room' => 'Room1'
+			)
+		);
+		$secondTimeSlotUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'seminar' => $this->fixture->getUid(),
+				'begin_date' => 100,
+				'room' => 'Room2'
+			)
+		);
+
+		$timeSlotsWithMarkers = $this->fixture->getTimeslotsAsArrayWithMarkers();
+		$this->assertEquals(
+			$timeSlotsWithMarkers[0]['###TIMESLOT_ROOM###'],
+			'Room2'
+		);
+		$this->assertEquals(
+			$timeSlotsWithMarkers[1]['###TIMESLOT_ROOM###'],
+			'Room1'
+		);
+	}
 }
 
 ?>

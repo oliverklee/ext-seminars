@@ -4379,13 +4379,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$timeslotBagClassname = t3lib_div::makeInstanceClassname(
-			'tx_seminars_timeslotbag',
-			'',
-			'',
-			$this->tableTimeslots.'.begin_date ASC'
+			'tx_seminars_timeslotbag'
 		);
 		$timeslotBag =& new $timeslotBagClassname(
-			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
+			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid(),
+			'',
+			'',
+			SEMINARS_TABLE_TIME_SLOTS.'.begin_date ASC'
 		);
 
 		while ($timeslot =& $timeslotBag->getCurrent()) {
