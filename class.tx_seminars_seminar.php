@@ -557,7 +557,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 					$name = $row['title'];
 					if (!empty($row['homepage'])) {
-						$name = $plugin->cObj->getTypoLink($name, $row['homepage']);
+						$name = $plugin->cObj->getTypoLink(
+							$name,
+							$row['homepage'],
+							array(),
+							$plugin->getConfValueString('externalLinkTarget')
+						);
 					}
 					$plugin->setMarkerContent('place_item_title', $name);
 
@@ -948,7 +953,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					if (!empty($row['homepage'])) {
 						$name = $plugin->cObj->getTypoLink(
 							$name,
-							$row['homepage']
+							$row['homepage'],
+							array(),
+							$plugin->getConfValueString('externalLinkTarget')
 						);
 					}
 					$plugin->setMarkerContent('speaker_item_title', $name);
@@ -2351,7 +2358,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					}
 					$result .= $plugin->cObj->getTypoLink(
 						$currentOrganizerData['title'],
-						$currentOrganizerData['homepage']
+						$currentOrganizerData['homepage'],
+						array(),
+						$plugin->getConfValueString('externalLinkTarget')
 					);
 				}
 			}
@@ -2575,7 +2584,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 			$organizingPartners[] = $plugin->cObj->getTypoLink(
 				$row['title'],
-				$row['homepage']
+				$row['homepage'],
+				array(),
+				$plugin->getConfValueString('externalLinkTarget')
 			);
 		}
 

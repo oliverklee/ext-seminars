@@ -269,6 +269,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsVipListPidOptional();
 		$this->checkDetailPid();
 		$this->checkDefaultEventVipsFeGroupID();
+		$this->checkExternalLinkTarget();
 	}
 
 	/**
@@ -2103,6 +2104,17 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'not set correctly, the sending of notifications probably will '
 				.'not work as expected.'
 		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value externalLinkTarget.
+	 * But currently does nothing as we don't think there's something to check
+	 * for.
+	 *
+	 * @access	private
+	 */
+	function checkExternalLinkTarget() {
+		// Does nothing.
 	}
 }
 
