@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1593] Feature: Allow sorting the pi1 list view by category title
 - [#1620] Feature: Allow to specify a link target for external links
 - [#1621] Change: Link the date only in the "other dates for this topic" list
 - [#1623] Feature: Add a field "skills" to the speaker record

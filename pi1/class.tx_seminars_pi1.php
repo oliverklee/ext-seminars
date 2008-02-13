@@ -88,6 +88,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * values for member variable don't allow for compound expression.
 	 */
 	var $orderByList = array(
+		// The MIN gives us the first category if there are more than one.
+		// The clause before the OR gets the events made up of topics (type=1)
+		// and concrete dates (type=2).
+		// After the OR we get the straight events.
+		'category' => '(SELECT MIN(tx_seminars_categories.title)
+			FROM tx_seminars_seminars_categories_mm, tx_seminars_categories,
+					tx_seminars_seminars s1, tx_seminars_seminars s2
+			WHERE (	(	s1.uid=s2.topic
+						AND s1.object_type!=2
+						AND s2.object_type=2
+						AND s2.uid=tx_seminars_seminars.uid
+				) OR (	s1.uid=s2.uid
+						AND s1.object_type=0
+						AND s2.object_type=0
+						AND s1.uid=tx_seminars_seminars.uid
+					  )
+				)
+				AND tx_seminars_seminars_categories_mm.uid_foreign=tx_seminars_categories.uid
+				AND tx_seminars_seminars_categories_mm.uid_local=s1.uid)',
 		// Sort by title.
 		// Complete event records get the title directly.
 		// Date records get it from their topic record.
@@ -908,9 +927,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			2
 		);
 
-		$this->internal['orderByList'] = 'title,uid,event_type,accreditation_number'
-			.',credit_points,begin_date,price_regular,price_special,organizers,'
-			.'target_groups';
+		$this->internal['orderByList'] = 'category,title,uid,event_type,'
+			.'accreditation_number,credit_points,begin_date,price_regular,'
+			.'price_special,organizers,target_groups';
 
 		$pidList = $this->pi_getPidList(
 			$this->getConfValueString('pidList'),
