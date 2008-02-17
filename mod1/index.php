@@ -283,7 +283,9 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
 	 *						spaces are not necessary for this parameter)
  	 *
- 	 * @return	string		a comma separated list of names and e-mail addresses or a localized messages if there are no registration records
+ 	 * @return	string		a comma-separated list of names and e-mail addresses
+ 	 *						or a localized messages if there are no registration
+ 	 *						records
  	 *
 	 * @access	private
 	 */
