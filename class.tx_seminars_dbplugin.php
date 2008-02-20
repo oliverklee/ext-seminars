@@ -61,14 +61,6 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $configurationCheck;
 
 	/**
-	 * Dummy constructor: Does nothing.
-	 *
-	 * The base classe's constructor is called in $this->init().
-	 */
-	function tx_seminars_dbplugin() {
-	}
-
-	/**
 	 * Initializes the FE plugin stuff, read the configuration
 	 * and set the table names while we're at it.
 	 *

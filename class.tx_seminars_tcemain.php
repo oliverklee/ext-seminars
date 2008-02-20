@@ -47,18 +47,16 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_tcemainprocdm() {
+	function __construct() {
 		parent::init();
 	}
 
 	/**
 	 * Handles data after everything had been written to the database.
 	 *
-	 * @param	object		the calling TCEmain object as reference
-	 *
 	 * @access	public
 	 */
-	function processDatamap_afterAllOperations(&$parentObj) {
+	function processDatamap_afterAllOperations() {
 		$this->processTimeSlots();
 		$this->processEvents();
 	}
@@ -76,14 +74,14 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 *
 	 * @param	string		the status of this record (new/update)
 	 * @param	string		the affected table name
-	 * @param	integer		the uid of the affected record (may be zero)
+	 * @param	integer		the UID of the affected record (may be 0)
 	 * @param	array		an array of all fields that got changed (as reference)
-	 * @param	object		reference to tcemain calling object (as reference)
+	 * @param	object		reference to tcemain calling object
 	 *
 	 * @access	public
 	 */
 	function processDatamap_afterDatabaseOperations(
-		$status, $table, $uid, &$fieldArray, &$pObj
+		$status, $table, $uid, array &$fieldArray, t3lib_TCEmain $pObj
 	) {
 		// Translates new UIDs.
 		if ($status == 'new') {
@@ -141,7 +139,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 *
 	 * @access	protected
 	 */
-	function processSingleTimeSlot($uid, $fieldArray) {
+	function processSingleTimeSlot($uid, array $fieldArray) {
 		// Initializes a timeslot object to have all
 		// functions available.
 		$timeslotClassname = t3lib_div::makeInstanceClassName(
@@ -166,7 +164,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 	 *
 	 * @access	protected
 	 */
-	function processSingleEvent($uid, $fieldArray) {
+	function processSingleEvent($uid, array $fieldArray) {
 		// Initializes a seminar object to have all functions
 		// available.
 		$seminarClassname = t3lib_div::makeInstanceClassName(
@@ -175,8 +173,8 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 		$seminar =& new $seminarClassname($uid, null, true);
 
 		if ($seminar->isOk()) {
-			// Gets an associative array of fields that need
-			// to be updated in the database.
+			// Gets an associative array of fields that need to be updated in
+			// the database.
 			$seminar->saveToDatabase(
 				$seminar->getUpdateArray($fieldArray)
 			);

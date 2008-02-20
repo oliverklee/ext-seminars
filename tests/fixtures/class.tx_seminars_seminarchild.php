@@ -48,7 +48,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * @param	array		TS setup configuration array, may be empty
 	 */
 	public function __construct($uid, array $configuration) {
-		parent::tx_seminars_seminar($uid);
+		parent::__construct($uid);
 
 		$this->conf = $configuration;
 	}

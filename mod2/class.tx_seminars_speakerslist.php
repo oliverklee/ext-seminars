@@ -35,19 +35,11 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speakerbag.php
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speaker.php');
 
 class tx_seminars_speakerslist extends tx_seminars_backendlist {
-	/** the speaker which we want to list/show */
-	var $speaker;
+	/** the table we're working on */
+	protected $tableName = SEMINARS_TABLE_SPEAKERS;
 
-	/**
-	 * The constructor. Calls the constructor of the parent class and sets
-	 * $this->tableName.
-	 *
-	 * @param	object		the current back-end page object
-	 */
-	function tx_seminars_speakerslist(&$page) {
-		parent::tx_seminars_backendlist($page);
-		$this->tableName = SEMINARS_TABLE_SPEAKERS;
-	}
+	/** the speaker which we want to list/show */
+	private $speaker = null;
 
 	/**
 	 * Generates and prints out a speakers list.

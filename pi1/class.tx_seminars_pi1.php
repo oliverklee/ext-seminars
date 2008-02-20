@@ -241,7 +241,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function main($content, $conf) {
+	function main($content, array $conf) {
 		$this->init($conf);
 		$this->pi_initPIflexForm();
 
@@ -740,11 +740,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * option will always be the first one in the array and thus shown first in
 	 * the drop-down.
 	 *
-	 * @param	array		array of options, as reference
+	 * @param	array		array of options, may be empty
 	 *
 	 * @access	private
 	 */
-	function addEmptyOptionIfNeeded(&$options) {
+	function addEmptyOptionIfNeeded(array &$options) {
 		if ($this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
 			$completeOptionList = array(
 				'none' => $this->pi_getLL('label_selector_pleaseChoose')
@@ -767,7 +767,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @access	protected
 	 */
-	function createPlaceBag($placeUids) {
+	function createPlaceBag(array $placeUids) {
 		$placeUidsAsCommaSeparatedList = implode(',', $placeUids);
 		$queryWhere = 'uid IN('.$placeUidsAsCommaSeparatedList.')';
 		$className = 'tx_seminars_placebag';
@@ -787,13 +787,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * This function should only be called when there are actually any list
 	 * items.
 	 *
-	 * @param	object		initialized seminar or registration bag (must not be null)
+	 * @param	object		initialized seminar or registration bag
 	 *
 	 * @return	string		HTML for the table (will not be empty)
 	 *
 	 * @access	protected
 	 */
-	function createListTable(&$seminarOrRegistrationBag) {
+	function createListTable(tx_seminars_bag $seminarOrRegistrationBag) {
 		$result = $this->createListHeader();
 		$rowCounter = 0;
 
@@ -1658,7 +1658,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * $this->registrationManager must have been initialized before this
 	 * method may be called.
 	 *
-	 * @param	int			a seminar UID
+	 * @param	integer		an event UID
 	 *
 	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
 	 *
@@ -2024,13 +2024,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Gets the CSS classes (space-separated) for the Vacancies TD.
 	 *
-	 * @param	object		the current Seminar object
+	 * @param	object		the current seminar object
 	 *
 	 * @return	string		class attribute filled with a list a space-separated CSS classes, plus a leading space
 	 *
 	 * @access	protected
 	 */
-	function getVacanciesClasses(&$seminar) {
+	function getVacanciesClasses(tx_seminars_seminar $seminar) {
 		$result = $this->pi_getClassName('vacancies');
 
 		if ($seminar->needsRegistration()) {

@@ -59,16 +59,12 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminarbag(
-		$queryParameters = '1=1',
-		$additionalTableNames = '',
-		$groupBy = '',
-		$orderBy = 'uid',
-		$limit = '',
-		$showHiddenRecords = -1,
+	function __construct(
+		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
+		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
 	) {
-		parent::tx_seminars_bag(
+		parent::__construct(
 			SEMINARS_TABLE_SEMINARS,
 			$queryParameters,
 			$additionalTableNames,
@@ -104,7 +100,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function removeDummyOptionFromFormData($formData) {
+	function removeDummyOptionFromFormData(array $formData) {
 		$cleanedFormData = array();
 
 		foreach ($formData as $value) {
@@ -132,7 +128,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	private
 	 */
-	function getAdditionalQueryForCountry($countries) {
+	function getAdditionalQueryForCountry(array $countries) {
 		// Removes the dummy option from the form data if the user selected it.
 		$countries = $this->removeDummyOptionFromFormData($countries);
 
@@ -196,15 +192,17 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @param	array		array of UIDs for the event type, from POST data,
 	 * 						may be empty
-	 *
-	 * @param	boolean		whether only dummy records should be taken into account
+	 * @param	boolean		whether only dummy records should be taken into
+	 * account
 	 *
 	 * @return	string		the additional query parameter starting with ' AND',
 	 * 						can be appended to existing query string, may be empty
 	 *
 	 * @access	private
 	 */
-	function getAdditionalQueryForEventType($eventTypeUids, $dummyRecordsOnly = false) {
+	function getAdditionalQueryForEventType(
+		array $eventTypeUids, $dummyRecordsOnly = false
+	) {
 		$result = '';
 		$sanitizedEventTypeUids = array();
 		$eventUids = array();
@@ -271,7 +269,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	private
 	 */
-	function getAdditionalQueryForLanguage($languages) {
+	function getAdditionalQueryForLanguage(array $languages) {
 		// Removes the dummy option from the form data if the user selected it.
 		$realLanguages
 			= $this->removeDummyOptionFromFormData($languages);
@@ -314,7 +312,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	private
 	 */
-	function getAdditionalQueryForPlace($placeUids) {
+	function getAdditionalQueryForPlace(array $placeUids) {
 		$result = '';
 		$sanitizedPlaceUids = array();
 
@@ -370,7 +368,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *
 	 * @access	private
 	 */
-	function getAdditionalQueryForCity($cities) {
+	function getAdditionalQueryForCity(array $cities) {
 		// Removes the dummy option from the form data if the user selected it.
 		$cities = $this->removeDummyOptionFromFormData($cities);
 

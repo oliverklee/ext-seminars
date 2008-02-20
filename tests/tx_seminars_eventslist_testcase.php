@@ -52,7 +52,6 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_eventslist($this->page);
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
 
@@ -64,6 +63,8 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->page->doc = t3lib_div::makeInstance('bigDoc');
 		$this->page->doc->backPath = $BACK_PATH;
 		$this->page->doc->docType = 'xhtml_strict';
+
+		$this->fixture = new tx_seminars_eventslist($this->page);
 	}
 
 	public function tearDown() {

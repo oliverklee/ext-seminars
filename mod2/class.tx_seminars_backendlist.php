@@ -33,10 +33,10 @@ require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 
 class tx_seminars_backendlist {
 	/** the table we're working on */
-	var $tableName;
+	protected $tableName = '';
 
 	/** Holds a reference to the back-end page object. */
-	var $page;
+	protected $page = null;
 
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
@@ -45,16 +45,15 @@ class tx_seminars_backendlist {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_backendlist(&$page) {
-		$this->page =& $page;
+	function __construct(t3lib_SCbase $page) {
+		$this->page = $page;
 	}
 
 	/**
 	 * Generates an edit record icon which is linked to the edit view of
 	 * a record.
 	 *
-	 * @param	string		the name of the table where the record is in
-	 * @param	integer		the uid of the record
+	 * @param	integer		the UID of the record, must be > 0
 	 *
 	 * @return	string		the HTML source code to return
 	 *
@@ -93,8 +92,7 @@ class tx_seminars_backendlist {
 	 * Generates a linked delete record icon whith a JavaScript confirmation
 	 * window.
 	 *
-	 * @param	string		the name of the table where the record is in
-	 * @param	integer		the uid of the record
+	 * @param	integer		the UID of the record, must be > 0
 	 *
 	 * @return	string		the HTML source code to return
 	 *
@@ -150,7 +148,8 @@ class tx_seminars_backendlist {
 	 *
 	 * @param	string		the name of the table where the record should be
 	 * 						saved to
-	 * @param	integer		the page id where the record should be stored
+	 * @param	integer		the page ID where the record should be stored,
+	 * 						must be > 0
 	 *
 	 * @return	string		the HTML source code to return
 	 *
@@ -199,8 +198,8 @@ class tx_seminars_backendlist {
 	/**
 	 * Returns the url for the "create new record" link and the "edit record" link.
 	 *
-	 * @param	string		the parameters for tce
-	 * @param	string		the back-path to the /typo3 directory
+	 * @param	string		the parameters for TCE
+	 * @param	string		the back path to the /typo3 directory
 	 *
 	 * @return	string		the url to return
 	 *

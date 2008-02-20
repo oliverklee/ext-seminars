@@ -58,13 +58,13 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_registrationbag(
+	function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1
 	) {
 		$this->cObj =& t3lib_div::makeInstance('tslib_cObj');
 
-		parent::tx_seminars_bag(
+		parent::__construct(
 			SEMINARS_TABLE_ATTENDANCES,
 			$queryParameters,
 			$additionalTableNames,

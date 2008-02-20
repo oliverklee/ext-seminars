@@ -57,7 +57,7 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 		$contentObject = t3lib_div::makeInstance('tslib_cObj');
 		$contentObject->start('');
 
-		parent::tx_seminars_registration($contentObject, $dbResult);
+		parent::__construct($contentObject, $dbResult);
 	}
 
 	/**

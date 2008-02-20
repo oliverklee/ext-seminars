@@ -38,16 +38,6 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php')
 
 final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
-	 * The constructor.
-	 *
-	 * @param	integer		the UID of the event to retrieve from the DB, must
-	 * 						be > 0
-	 */
-	public function __construct($uid) {
-		parent::tx_seminars_timeslot($uid);
-	}
-
-	/**
 	 * Sets the place field of the time slot.
 	 *
 	 * @param	integer		the UID of the place (has to be > 0)

@@ -61,12 +61,12 @@ class tx_seminars_testbag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_testbag(
+	function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
 	) {
-		parent::tx_seminars_bag(
+		parent::__construct(
 			SEMINARS_TABLE_TEST,
 			$queryParameters,
 			$additionalTableNames,

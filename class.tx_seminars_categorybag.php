@@ -56,11 +56,11 @@ class tx_seminars_categorybag extends tx_seminars_bag {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_categorybag(
+	function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = ''
 	) {
-		parent::tx_seminars_bag(
+		parent::__construct(
 			SEMINARS_TABLE_CATEGORIES,
 			$queryParameters,
 			$additionalTableNames,

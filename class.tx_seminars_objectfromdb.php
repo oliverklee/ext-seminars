@@ -57,7 +57,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_objectfromdb($uid, $dbResult = null) {
+	function __construct($uid, $dbResult = null) {
 		$this->retrieveRecordAndGetData($uid, $dbResult);
 		$this->init();
 	}
@@ -82,10 +82,11 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 			$dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
 		}
 
-		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult(
-				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
-			);
+		if ($dbResult) {
+			$data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			if ($data) {
+				$this->getDataFromDbResult($data);
+			}
 		}
 	}
 
@@ -107,7 +108,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @access	protected
 	 */
-	function getDataFromDbResult($dbResultRow) {
+	function getDataFromDbResult(array $dbResultRow) {
 		if (!empty($this->tableName) && !empty($dbResultRow)) {
 			$this->recordData = $dbResultRow;
 			$this->isInDb = true;
@@ -345,7 +346,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @access	protected
 	 */
-	function createMmRecords($mmTable, $references) {
+	function createMmRecords($mmTable, array $references) {
 		if (empty($references)) {
 			return 0;
 		}
@@ -599,7 +600,7 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function saveToDatabase($updateArray) {
+	function saveToDatabase(array $updateArray) {
 		if (count($updateArray)) {
 			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 				$this->tableName,

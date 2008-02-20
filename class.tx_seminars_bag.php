@@ -100,7 +100,7 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_bag(
+	function __construct(
 		$dbTableName, $queryParameters = '1=1', $additionalTableNames = '',
 		$groupBy = '', $orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false

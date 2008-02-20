@@ -68,16 +68,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	var $markerNames = '';
 
 	/**
-	 * Dummy constructor: Does nothing.
-	 *
-	 * Call $this->init() instead.
-	 *
-	 * @access	public
-	 */
-	function tx_seminars_templatehelper() {
-	}
-
-	/**
 	 * Retrieves the plugin template file set in $this->conf['templateFile'] (or
 	 * also via flexforms if TYPO3 mode is FE) and writes it to
 	 * $this->templateCode. The subparts will be written to $this->templateCache.

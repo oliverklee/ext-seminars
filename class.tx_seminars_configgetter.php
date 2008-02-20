@@ -45,7 +45,7 @@ class tx_seminars_configgetter extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_configgetter() {
+	function __construct() {
 		$this->init();
 	}
 }

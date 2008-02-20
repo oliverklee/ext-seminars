@@ -60,7 +60,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function main($content, $conf) {
+	function main($content, array $conf) {
 		$this->init($conf);
 
 		switch ($this->piVars['table']) {
@@ -87,7 +87,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function init($conf = array()) {
+	function init(array $conf = array()) {
 		parent::init($conf);
 
 		$this->configGetter

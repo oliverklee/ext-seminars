@@ -171,13 +171,12 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Returns an associative array, containing fieldname/value pairs that need
 	 * to be updated in the database. Update means "set the title" so far.
 	 *
-	 * @return	string		associative array containing data to update the
-	 * 						database entry of the timeslot, might be empty but
-	 * 						will not be null
+	 * @return	array		associative array containing data to update the
+	 * 						database entry of the timeslot, might be empty
 	 *
 	 * @access	public
 	 */
-	function getUpdateArray(&$fieldArray) {
+	function getUpdateArray() {
 		$updateArray = array();
 
 		$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] ?

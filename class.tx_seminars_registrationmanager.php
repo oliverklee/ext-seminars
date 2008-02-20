@@ -52,7 +52,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_registrationmanager() {
+	function __construct() {
 		$this->init();
 	}
 
@@ -68,13 +68,14 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * This function even works if no user is logged in.
 	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register (must not be null)
+	 * @param	object		a seminar for which we'll check if it is possible to
+	 * 						register
 	 *
 	 * @return	boolean		true if everything is okay for the link, false otherwise
 	 *
 	 * @access	public
 	 */
-	function canRegisterIfLoggedIn(&$seminar) {
+	function canRegisterIfLoggedIn(tx_seminars_seminar $seminar) {
 		$result = true;
 
 		if ($this->isLoggedIn() && !$this->couldThisUserRegister($seminar)) {
@@ -103,13 +104,14 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * This function even works if no user is logged in.
 	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register (must not be null)
+	 * @param	object		a seminar for which we'll check if it is possible to
+	 * 						register
 	 *
 	 * @return	string		error message or empty string
 	 *
 	 * @access	public
 	 */
-	function canRegisterIfLoggedInMessage(&$seminar) {
+	function canRegisterIfLoggedInMessage(tx_seminars_seminar $seminar) {
 		$result = '';
 
 		if ($this->isLoggedIn() && $this->isUserBlocked($seminar)) {
@@ -134,13 +136,14 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * So this function only checks whether the user is logged in and isn't
 	 * blocked for the event's duration yet.
 	 *
-	 * @param	object		a seminar for which we'll check if it is possible to register (must not be null)
+	 * @param	object		a seminar for which we'll check if it is possible to
+	 * 						register
 	 *
 	 * @return	boolean		true if the user could register for the given event, false otherwise
 	 *
 	 * @access	protected
 	 */
-	function couldThisUserRegister(&$seminar) {
+	function couldThisUserRegister(tx_seminars_seminar $seminar) {
 		// A user can register either if the event allows multiple registrations
 		// or the user isn't registered yet and isn't blocked either.
 		return $seminar->allowsMultipleRegistrations()
@@ -158,18 +161,18 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * makes sense (ie. the seminar still has vacancies, the user hasn't
 	 * registered for this seminar etc.).
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page)
-	 * 						which we can call pi_linkTP() on (must not be null)
-	 *
+	 * @param	object		a tslib_pibase object for a live page
 	 * @param	object		a seminar for which we'll check if it is possible
-	 * 						to register (may be null), if this is null, the
+	 * 						to register (may be null), if this is not set, the
 	 * 						seminar UID parameter will be disregarded
 	 *
 	 * @return	string		HTML code with the link
 	 *
 	 * @access	public
 	 */
-	function getLinkToRegistrationOrLoginPage(&$plugin, &$seminar) {
+	function getLinkToRegistrationOrLoginPage(
+		tslib_pibase $plugin, tx_seminars_seminar $seminar = null
+	) {
 		$label = '';
 
 		if (!$seminar->hasVacancies()
@@ -208,17 +211,19 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * Creates an HTML link to the unregistration page (if a user is logged in).
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page)
-	 * 						which we can call pi_linkTP() on (must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 *
 	 * @param	object		a registration from which we'll get the UID for our
-	 * 						GET parameters (must not be null)
+	 * 						GET parameters
 	 *
 	 * @return	string		HTML code with the link
 	 *
 	 * @access	public
 	 */
-	function getLinkToUnregistrationPage(&$plugin, &$registration) {
+	function getLinkToUnregistrationPage(
+		tslib_pibase $plugin,
+		tx_seminars_registration $registration
+	) {
 		return $plugin->cObj->getTypoLink(
 			$plugin->pi_getLL('label_onlineUnregistration'),
 			$plugin->getConfValueInteger('registerPID'),
@@ -289,7 +294,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function isUserRegistered(&$seminar) {
+	function isUserRegistered(tx_seminars_seminar $seminar) {
 		return $seminar->isUserRegistered($this->getFeUserUid());
 	}
 
@@ -304,7 +309,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function isUserRegisteredMessage(&$seminar) {
+	function isUserRegisteredMessage(tx_seminars_seminar $seminar) {
 		return $seminar->isUserRegisteredMessage($this->getFeUserUid());
 	}
 
@@ -320,7 +325,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	protected
 	 */
-	function isUserBlocked(&$seminar) {
+	function isUserBlocked(tx_seminars_seminar $seminar) {
 		return $seminar->isUserBlocked($this->getFeUserUid());
 	}
 
@@ -338,7 +343,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function canCreateRegistration(&$seminar, $registrationData) {
+	function canCreateRegistration(
+		tx_seminars_seminar $seminar, array $registrationData
+	) {
 		return $this->canRegisterSeats($seminar, $registrationData['seats']);
 	}
 
@@ -359,7 +366,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function canCreateRegistrationMessage(&$seminar, $registrationData) {
+	function canCreateRegistrationMessage(
+		tx_seminars_seminar $seminar, array $registrationData
+	) {
 		return ($this->canRegisterSeats($seminar, $registrationData['seats'])) ?
 			'' :
 			sprintf($this->pi_getLL('message_invalidNumberOfSeats'),
@@ -377,7 +386,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	private
 	 */
-	function canRegisterSeats(&$seminar, $numberOfSeats) {
+	function canRegisterSeats(tx_seminars_seminar $seminar, $numberOfSeats) {
 		$numberOfSeats = trim($numberOfSeats);
 
 		// If no number of seats is given, ie. the user has not entered anything
@@ -410,7 +419,10 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 *
 	 * @access	public
 	 */
-	function createRegistration(&$seminar, $registrationData, &$plugin) {
+	function createRegistration(
+		tx_seminars_seminar $seminar, array $registrationData,
+		tslib_pibase $plugin
+	) {
 		// Add the total price to the array that contains all neccessary
 		// informations before creating the registration object.
 		if (isset($registrationData['seats']) && ($registrationData['seats'] > 0)) {
@@ -455,12 +467,12 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Removes the given registration (if it exists and if it belongs to the
 	 * currently logged in FE user).
 	 *
-	 * @param	integer		the registration that should be removed
+	 * @param	integer		the UID of the registration that should be removed
 	 * @param	object		live plugin object (must not be null)
 	 *
 	 * @access	public
 	 */
-	function removeRegistration($registrationUid, &$plugin) {
+	function removeRegistration($registrationUid, tslib_pibase $plugin) {
 		if (tx_seminars_objectfromdb::recordExists(
 				$registrationUid,
 				SEMINARS_TABLE_ATTENDANCES
@@ -510,11 +522,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Fills vacancies created through a unregistration with attendees from the
 	 * registration queue.
 	 *
-	 * @param	object		live plugin object (must not be null)
+	 * @param	object		live plugin object
 	 *
 	 * @access	public
 	 */
-	function fillVacancies(&$plugin) {
+	function fillVacancies(tslib_pibase $plugin) {
 		$seminar = $this->registration->getSeminarObject();
 		$seminar->calculateStatistics();
 

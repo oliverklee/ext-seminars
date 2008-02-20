@@ -35,22 +35,14 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationba
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 
 class tx_seminars_registrationslist extends tx_seminars_backendlist {
+	/** the table we're working on */
+	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
+
 	/** the registration which we want to list/show */
-	var $registration;
+	private $registration = null;
 
 	/** the registration bag containing the registrations we want to list/show */
-	var $registrationBag = null;
-
-	/**
-	 * The constructor. Calls the constructor of the parent class and sets
-	 * $this->tableName.
-	 *
-	 * @param	object		the current back-end page object
-	 */
-	function tx_seminars_registrationslist(&$page) {
-		parent::tx_seminars_backendlist($page);
-		$this->tableName = SEMINARS_TABLE_ATTENDANCES;
-	}
+	private $registrationBag = null;
 
 	/**
 	 * Generates and prints out a registrations list.

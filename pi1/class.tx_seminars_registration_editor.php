@@ -98,11 +98,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * that the logged-in user is allowed to register for the corresponding
 	 * event (or edit a registration).
 	 *
-	 * @param	object		the pi1 object where this registration editor will be inserted (must not be null)
+	 * @param	object		the pi1 object where this registration editor will
+	 * 						be inserted
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_registration_editor(&$plugin) {
+	function __construct(tx_seminars_pi1 $plugin) {
 		$this->plugin =& $plugin;
 		$this->cObj =& $plugin->cObj;
 		$this->registrationManager =& $plugin->registrationManager;
@@ -229,7 +230,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function setPage($parameters) {
+	function setPage(array $parameters) {
 		$this->currentPageNumber = $parameters['next_page'];
 	}
 
@@ -254,7 +255,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function processRegistration($parameters) {
+	function processRegistration(array $parameters) {
 		$this->saveDataToSession($parameters);
 
 		if ($this->registrationManager->canCreateRegistration(
@@ -373,7 +374,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function hasRegistrationFormField($parameters) {
+	function hasRegistrationFormField(array $parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
 	}
 
@@ -516,7 +517,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function hasBankDataFormField($parameters) {
+	function hasBankDataFormField(array $parameters) {
 		return $this->hasRegistrationFormField($parameters)
 			&& $this->seminar->hasAnyPrice();
 	}
@@ -536,7 +537,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function getThankYouAfterRegistrationUrl($parameters) {
+	function getThankYouAfterRegistrationUrl(array $parameters) {
 		$sendParameters = false;
 		$pageId = $this->plugin->getConfValueInteger(
 			'thankYouAfterRegistrationPID',
@@ -639,7 +640,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function populateListPaymentMethods($items) {
+	function populateListPaymentMethods(array $items) {
 		$result = array();
 
 		if ($this->seminar->hasPaymentMethods()) {
@@ -779,18 +780,21 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				$currentFormData = $this->getSelectedPaymentMethod();
 				break;
 			case 'lodgings':
+				$this->ensureArray($currentFormData);
 				$currentFormData = $this->getCaptionsForSelectedOptions(
 					$this->seminar->getLodgings(),
 					$currentFormData
 				);
 				break;
 			case 'foods':
+				$this->ensureArray($currentFormData);
 				$currentFormData = $this->getCaptionsForSelectedOptions(
 					$this->seminar->getFoods(),
 					$currentFormData
 				);
 				break;
 			case 'checkboxes':
+				$this->ensureArray($currentFormData);
 				$currentFormData = $this->getCaptionsForSelectedOptions(
 					$this->seminar->getCheckboxes(),
 					$currentFormData
@@ -799,6 +803,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			default:
 				break;
 		}
+
+		if (!is_string($currentFormData)) {
+			$currentFormData = (string) $currentFormData;
+		}
+
 		if ($currentFormData != '') {
 			$this->plugin->setMarkerContent(
 				'registration_data_heading',
@@ -819,6 +828,19 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Ensures that the parameter is an array. If it is no array yet, it will
+	 * be changed to an empty array.
+	 *
+	 * @param	mixed		variable that should be ensured to be an array
+	 * 						(passed by reference)
+	 */
+	private function ensureArray(&$data) {
+		if (!is_array($data)) {
+			$data = array();
+		}
 	}
 
 	/**
@@ -938,7 +960,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		the captions of the selected options, separated by CR
 	 */
-	function getCaptionsForSelectedOptions($availableOptions, $selectedOptions) {
+	function getCaptionsForSelectedOptions(
+		array $availableOptions, array $selectedOptions
+	) {
 		$result = '';
 
 		if (!empty($selectedOptions)) {
@@ -1009,7 +1033,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function hasAttendeesNames($attendeesNames, &$form) {
+	function hasAttendeesNames($attendeesNames, tx_ameosformidable $form) {
 		$dataHandler = $form->oDataHandler;
 		$seats = (intval($dataHandler->_getThisFormData('seats')) > 0) ?
 			intval($dataHandler->_getThisFormData('seats')) : 1;
@@ -1034,7 +1058,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @access	public
 	 */
-	function hasBankData($bankData, &$form) {
+	function hasBankData($bankData, tx_ameosformidable $form) {
 		$result = true;
 
 		if (empty($bankData)) {
@@ -1061,14 +1085,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * The caller needs to take care of htmlspecialcharing the data.
 	 *
-	 * @param	array		array that contains any pre-filled data (unused)
+	 * @param	mixed		(unused)
 	 * @param	array		contents of the "params" XML child of the userobj node (needs to contain an element with the key "key")
 	 *
 	 * @return	string		the contents of the element
 	 *
 	 * @access	public
 	 */
-	function getFeUserData($unused, $params) {
+	function getFeUserData($unused, array $params) {
 		$result = $this->retrieveDataFromSession(null, $params);
 
 		if (empty($result)) {
@@ -1321,11 +1345,11 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * - telephone
 	 * - email
 	 *
-	 * @param	array		the form data (may be empty or null)
+	 * @param	array		the form data (may be empty)
 	 *
 	 * @access	private
 	 */
-	function saveDataToSession($parameters) {
+	function saveDataToSession(array $parameters) {
 		if (!empty($parameters)) {
 			$parametersToSave = array(
 				'method_of_payment',
@@ -1377,14 +1401,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Retrieves the data for a given key from the FE user session. Returns an
 	 * empty string if no data for that key is stored.
 	 *
-	 * @param	array		array that contains any pre-filled data (unused)
+	 * @param	mixed		(unused)
 	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
 	 *
 	 * @return	string		the data stored in the FE user session under the given key (might be empty)
 	 *
 	 * @access	public
 	 */
-	function retrieveDataFromSession($unused, $parameters) {
+	function retrieveDataFromSession($unused, array $parameters) {
 		$key = $parameters['key'];
 
 		return $GLOBALS['TSFE']->fe_user->getKey(

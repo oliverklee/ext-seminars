@@ -37,19 +37,11 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuil
 require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
 class tx_seminars_eventslist extends tx_seminars_backendlist{
-	/** the seminar which we want to list/show */
-	var $seminar;
+	/** the table we're working on */
+	protected $tableName = SEMINARS_TABLE_SEMINARS;
 
-	/**
-	 * The constructor. Calls the constructor of the parent class and sets
-	 * $this->tableName.
-	 *
-	 * @param	object		the current back-end page object
-	 */
-	function tx_seminars_eventslist(&$page) {
-		parent::tx_seminars_backendlist($page);
-		$this->tableName = SEMINARS_TABLE_SEMINARS;
-	}
+	/** the seminar which we want to list/show */
+	private $seminar = null;
 
 	/**
 	 * Generates and prints out an event list.
@@ -382,9 +374,9 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 	 * Generates a linked hide or unhide icon depending on the record's hidden
 	 * status.
 	 *
-	 * @param	string		the name of the table where the record is in
-	 * @param	integer		the UID of the record
-	 * @param	boolean		indicates if the record is hidden (true) or is visible (false)
+	 * @param	integer		the UID of the record, must be > 0
+	 * @param	boolean		indicates if the record is hidden (true) or is
+	 *						visible (false)
 	 *
 	 * @return	string		the HTML source code of the linked hide or unhide icon
 	 *
@@ -441,15 +433,14 @@ class tx_seminars_eventslist extends tx_seminars_backendlist{
 	 * 						Except the second record's "previous" entry will be the
 	 * 						PID of the current page so the record will be moved to
 	 * 						the top of the current page when the up button is clicked.
-	 * @param	string		the name of the table where the sorting takes place
-	 * @param	integer		the UID of the current record
+	 * @param	integer		the UID of the current record, must be > 0
 	 *
 	 * @return	string		the HTML source code of the linked up and/or down
 	 * 						icons (or an empty string if manual sorting is deactivated)
 	 *
 	 * @access	protected
 	 */
-	function getUpDownIcons($useManualSorting, &$sortList, $uid) {
+	function getUpDownIcons($useManualSorting, array &$sortList, $uid) {
 		$result = '';
 
 		if ($useManualSorting) {

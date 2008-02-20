@@ -292,7 +292,7 @@ class tx_seminars extends tx_dhdb {
 	 * Before this function may be called, _extractMmRelationsFromFormData()
 	 * must have been called.
 	 *
-	 * @param	integer		the uid of the current record, must be > 0
+	 * @param	integer		the UID of the current record, must be > 0
 	 *
 	 * @access	private
 	 */

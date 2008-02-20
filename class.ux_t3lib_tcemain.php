@@ -25,8 +25,6 @@
  * Class 'ux_t3lib_TCEmain' for the TYPO3 4.1 core.
  *
  * It will be obsolete as soon as we are requiring at TYPO3 4.2.
- * (https://bugs.oliverklee.com/show_bug.cgi?id=961)
- *
  * This class doesn't fit the tx_seminars coding guide lines as the majority of
  * the code is just copied from t3lib_TCEmain.
  *
@@ -37,6 +35,8 @@
  * @subpackage	tx_seminars
  * @author		Niels Pardon <mail@niels-pardon.de>
  * @author		Oliver Hader <oh@inpublica.de>
+ *
+ * @see		https://bugs.oliverklee.com/show_bug.cgi?id=961
  */
 class ux_t3lib_TCEmain extends t3lib_TCEmain {
 	/**
@@ -362,9 +362,7 @@ class ux_t3lib_TCEmain extends t3lib_TCEmain {
 	}
 }
 
-
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.ux_t3lib_tcemain.php'])	{
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.ux_t3lib_tcemain.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.ux_t3lib_tcemain.php']);
 }
 ?>

@@ -90,10 +90,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_seminar(
+	function __construct(
 		$uid, $dbResult = null, $allowHiddenRecords = false
 	) {
-		parent::tx_seminars_objectfromdb($uid, $dbResult, $allowHiddenRecords);
+		parent::__construct($uid, $dbResult, $allowHiddenRecords);
 
 		// For date records: Create a reference to the topic record.
 		if ($this->isEventDate()) {
@@ -188,7 +188,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getUpdateArray(&$fieldArray) {
+	function getUpdateArray(array &$fieldArray) {
 		$updateArray = array();
 		$fieldNamesToCheck = array(
 			'deadline_registration',
@@ -224,9 +224,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is
 	 * not set or 0, the link will point to the list view page.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live
-	 * 						page) which we can call pi_list_linkSingle() on
-	 * 						(must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 * @param	string		the name of the field to retrieve and wrap, may not
 	 * 						be empty
 	 *
@@ -234,7 +232,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getLinkedFieldValue(&$plugin, $fieldName) {
+	function getLinkedFieldValue(tslib_pibase $plugin, $fieldName) {
 		$linkedText = '';
 
 		// Certain fields can be retrieved 1:1 from the database, some need
@@ -310,7 +308,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getDescription(&$plugin) {
+	function getDescription(tslib_pibase $plugin) {
 		return $plugin->pi_RTEcssText($this->getDescriptionRaw());
 	}
 
@@ -386,7 +384,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getAdditionalInformation(&$plugin) {
+	function getAdditionalInformation(tslib_pibase $plugin) {
 		return $plugin->pi_RTEcssText($this->getAdditionalInformationRaw());
 	}
 
@@ -542,7 +540,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getPlaceWithDetails(&$plugin) {
+	function getPlaceWithDetails(tslib_pibase $plugin) {
 		$result = '';
 
 		if ($this->hasPlace()) {
@@ -910,7 +908,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getSpeakersWithDescription(&$plugin, $speakerRelation = 'speakers') {
+	function getSpeakersWithDescription(
+		tslib_pibase $plugin, $speakerRelation = 'speakers'
+	) {
 		$result = '';
 		$hasSpeakers = false;
 		$mmTable = '';
@@ -1585,7 +1585,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getPaymentMethods(&$plugin) {
+	function getPaymentMethods(tslib_pibase $plugin) {
 		if (!$this->hasPaymentMethods()) {
 			return '';
 		}
@@ -2332,14 +2332,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if
 	 * they have any).
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live
-	 * 						page, must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 *
 	 * @return	string		the hyperlinked names of our organizers
 	 *
 	 * @access	public
 	 */
-	function getOrganizers(&$plugin) {
+	function getOrganizers(tslib_pibase $plugin) {
 		$result = '';
 
 		if ($this->hasOrganizers()) {
@@ -2552,15 +2551,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns an empty string if this event has no organizing partners or
 	 * something went wrong with the database query.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live
-	 * 						page, must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 *
 	 * @return	string		the hyperlinked names of our organizing partners, or
 	 * 						an empty string
 	 *
 	 * @access	public
 	 */
-	function getOrganizingPartners(&$plugin) {
+	function getOrganizingPartners(tslib_pibase $plugin) {
 		if (!$this->hasOrganizingPartners()) {
 			return '';
 		}
@@ -2623,7 +2621,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is
 	 * not set or 0, the link will use the current page's PID.
 	 *
-	 * @param	object		a plugin object (for a live page, must not be null)
+	 * @param	object		a plugin object for a live page
 	 * @param	boolean		true to create a full URL including the host instead
 	 * 						of just a URI without the host
 	 *
@@ -2631,7 +2629,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @access	public
 	 */
-	function getDetailedViewUrl(&$plugin, $createFullUrl = true) {
+	function getDetailedViewUrl(tslib_pibase $plugin, $createFullUrl = true) {
 		$path = $plugin->cObj->getTypoLink_URL(
 			$plugin->getConfValueInteger('detailPID'),
 			array('tx_seminars_pi1[showUid]' => $this->getUid())
@@ -2751,7 +2749,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
 	 *
-	 * @param	integer		UID of the FE user to check
+	 * @param	integer		UID of the FE user to check, must be > 0
 	 *
 	 * @return	boolean		true if the user already is registered, false otherwise.
 	 *
@@ -2778,7 +2776,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
 	 *
-	 * @param	integer		UID of the FE user to check
+	 * @param	integer		UID of the FE user to check, must be > 0
 	 *
 	 * @return	string		empty string if everything is OK, else a localized
 	 * 						error message.
@@ -2795,7 +2793,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * but also checks whether this user is entered as a VIP for this event,
 	 * ie. he/she is allowed to view the list of registrations for this event.
 	 *
-	 * @param	integer		UID of the FE user to check
+	 * @param	integer		UID of the FE user to check, must be > 0
 	 * @param	integer		UID of the default event VIP front-end user group
 	 *
 	 * @return	boolean		true if the user is a VIP for this seminar,
@@ -3196,10 +3194,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets the uid of the topic record if we are a date record.
-	 * Otherwise the uid of this record is returned.
+	 * Gets the UID of the topic record if we are a date record. Otherwise, the
+	 * UID of this record is returned.
 	 *
-	 * @return	integer		either the uid of this record or its topic record,
+	 * @return	integer		either the UID of this record or its topic record,
 	 * 						depending on whether we are a date record
 	 *
 	 * @access	public
@@ -3964,7 +3962,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * For this, only events that forbid multiple registrations are checked.
 	 *
-	 * @param	integer		UID of the FE user to check
+	 * @param	integer		UID of the FE user to check, must be > 0
 	 *
 	 * @return	boolean		true if user is blocked by another registration,
 	 * 						false otherwise

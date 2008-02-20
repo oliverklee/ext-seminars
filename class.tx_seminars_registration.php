@@ -78,21 +78,22 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * The constructor.
 	 *
-	 * @param	object		content object (must not be null)
+	 * @param	object		content object
 	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object. If this parameter is not provided or null, setRegistrationData() needs to be called directly after construction or this object will not be usable.
 	 *
 	 * @access	public
 	 */
-	function tx_seminars_registration(&$cObj, $dbResult = null) {
+	function __construct(tslib_cObj $cObj, $dbResult = null) {
 		static $cachedSeminars = array();
 
 		$this->cObj =& $cObj;
 		$this->init();
 
-	 	if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$this->getDataFromDbResult(
-				$GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)
-			);
+	 	if ($dbResult) {
+			$data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			if ($data) {
+				$this->getDataFromDbResult($data);
+			}
 
 			if ($this->isOk()) {
 				$seminarUid = $this->recordData['seminar'];
@@ -107,7 +108,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$cachedSeminars[$seminarUid] =& $this->seminar;
 				}
 
-				// Store the user data in $this->userData.
+				// Stores the user data in $this->userData.
 				$this->retrieveUserData();
 			}
 	 	}
@@ -125,8 +126,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function setRegistrationData(&$seminar, $userUid, $registrationData) {
-		$this->seminar =& $seminar;
+	function setRegistrationData(
+		tx_seminars_seminar $seminar, $userUid, array $registrationData
+	) {
+		$this->seminar = $seminar;
 
 		$this->recordData = array();
 
@@ -417,13 +420,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Empty values will be removed from the output.
 	 *
 	 * @param	string		comma-separated list of keys to retrieve
-	 * @param	object		a tx_seminars_templatehelper object (for a live page, must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 *
 	 * @return	string		the values retrieved from $this->userData, may be empty
 	 *
 	 * @access	public
 	 */
-	function getUserDataAsHtml($keys, &$plugin) {
+	function getUserDataAsHtml($keys, tslib_pibase $plugin) {
 		$singleKeys = explode(',', $keys);
 		$singleValues = array();
 
@@ -546,7 +549,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Gets the method of payment.
 	 *
-	 * @return	integer		the uid of the method of payment (may be 0 if none
+	 * @return	integer		the UID of the method of payment (may be 0 if none
 	 * 						is given)
 	 *
 	 * @access	public
@@ -670,8 +673,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Sends an e-mail to the attendee with a message concerning his/her
 	 * registration or unregistration.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live
-	 * 						page, must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 * @param	string		prefix for the locallang key of the localized hello
 	 * 						and subject string, allowed values are:
 	 * 						- confirmation
@@ -683,7 +685,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function notifyAttendee(&$plugin, $helloSubjectPrefix = 'confirmation') {
+	function notifyAttendee(
+		tslib_pibase $plugin, $helloSubjectPrefix = 'confirmation'
+	) {
 		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
 			return;
 		}
@@ -844,8 +848,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Sends an e-mail to all organizers with a message about a registration or
 	 * unregistration.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live page,
-	 * 						must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 * @param	string		prefix for the locallang key of the localized hello
 	 * 						and subject string, allowed values are:
 	 * 						- notification
@@ -857,7 +860,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function notifyOrganizers(&$plugin, $helloSubjectPrefix = 'notification') {
+	function notifyOrganizers(
+		tslib_pibase $plugin, $helloSubjectPrefix = 'notification'
+	) {
 		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
 			return;
 		}
@@ -941,12 +946,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * If both things happen at the same time (minimum and maximum count of
 	 * attendees are the same), only the "event is full" message will be sent.
 	 *
-	 * @param	object		a tx_seminars_templatehelper object (for a live
-	 * 						page, must not be null)
+	 * @param	object		a tslib_pibase object for a live page
 	 *
 	 * @access	public
 	 */
-	function sendAdditionalNotification(&$plugin) {
+	function sendAdditionalNotification(tslib_pibase $plugin) {
 		$whichEmailToSend = '';
 		$whichEmailSubject = '';
 
