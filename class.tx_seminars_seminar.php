@@ -552,9 +552,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 					$result .= $plugin->substituteMarkerArrayCached('PLACE_LIST_ITEM');
 				}
+
+				$plugin->setMarkerContent('place_list_content', $result);
+				$result = $plugin->substituteMarkerArrayCached('PLACE_LIST_COMPLETE');
 			}
 		} else {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+			$plugin->setMarkerContent(
+				'message_will_be_announced',
+				$this->pi_getLL('message_willBeAnnounced')
+			);
+			$result = $plugin->substituteMarkerArrayCached('PLACE_LIST_EMPTY');
 		}
 
 		return $result;

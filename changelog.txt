@@ -1,4 +1,5 @@
 0.5.4 (currently working on)
+- [#1655] Fix: Wrong <dl> in HTML output
 - [#1584] Fix: Missing colon in the flexforms in the default language
 - [#1567] Fix: HTML template in the registration process
 - [#1294] Fix: Installing seminars without FORMidable will break BE login
