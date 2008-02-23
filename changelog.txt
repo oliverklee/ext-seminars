@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1655] Fix: Wrong <dl> in HTML output
 - [#1663] Change: Removed suggestion for newloginbox
 - [#1104] Change: Use type hinting for function parameters
 - [#999] Change: Require PHP 5.1
