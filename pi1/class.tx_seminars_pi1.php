@@ -100,7 +100,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						AND s2.object_type=2
 						AND s2.uid=tx_seminars_seminars.uid
 				) OR (	s1.uid=s2.uid
-						AND s1.object_type=0
 						AND s2.object_type=0
 						AND s1.uid=tx_seminars_seminars.uid
 					  )
@@ -222,6 +221,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'title'
 		),
 		'target_groups' => array(
+			'title'
+		),
+		'categories' => array(
 			'title'
 		)
 	);
@@ -2555,6 +2557,30 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 							.'AND '.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign='
 								.SEMINARS_TABLE_TARGET_GROUPS.'.uid'
 						.')';
+					}
+
+					// For categories, we have real m:n relations, too.
+					foreach ($this->searchFieldList['target_groups'] as $field) {
+						$whereParts[] = 'EXISTS '
+							.'(SELECT * FROM '.SEMINARS_TABLE_SEMINARS.' s1, '
+								.SEMINARS_TABLE_CATEGORIES_MM.', '
+								.SEMINARS_TABLE_CATEGORIES.'
+							WHERE (('.SEMINARS_TABLE_SEMINARS.'.object_type='
+										.SEMINARS_RECORD_TYPE_DATE.'
+									AND s1.object_type!='
+										.SEMINARS_RECORD_TYPE_DATE.'
+									AND '.SEMINARS_TABLE_SEMINARS.'.topic=s1.uid
+									) OR ('
+									.SEMINARS_TABLE_SEMINARS.'.object_type='
+										.SEMINARS_RECORD_TYPE_COMPLETE.'
+									AND '.SEMINARS_TABLE_SEMINARS.'.uid=s1.uid
+								  ))
+							AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local=
+									s1.uid
+							AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='
+									.SEMINARS_TABLE_CATEGORIES.'.uid
+							AND '.SEMINARS_TABLE_CATEGORIES.'.title like
+									\'%'.$currentPreparedKeyword.'%\')';
 					}
 
 					if (count($whereParts) > 0)	{
