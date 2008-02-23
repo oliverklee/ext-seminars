@@ -145,119 +145,132 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Provides data items for the list of available categories.
+	 *
+	 * @param	array		any pre-filled data (may be empty)
+	 *
+	 * @return	array		$items with additional items from the categories
+	 * 						table as an array with the keys "caption" (for the
+	 * 						title) and "value" (for the UID)
+	 */
+	public function populateListCategories(array $items) {
+		return $this->populateList($items, SEMINARS_TABLE_CATEGORIES);
+	}
+
+	/**
 	 * Provides data items for the list of available event types.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the event_types table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the event_types
+	 * 						table as an array with the keys "caption" (for the
+	 * 						title) and "value" (for the UID)
 	 */
-	function populateListEventTypes($items) {
+	public function populateListEventTypes(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_EVENT_TYPES);
 	}
 
- 	/**
+	/**
 	 * Provides data items for the list of available lodgings.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the lodgings table
+	 * 						as an array with the keys "caption" (for the title)
+	 *						and "value" (for the UID)
 	 */
-	function populateListLodgings($items) {
+	public function populateListLodgings(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_LODGINGS);
 	}
 
 	/**
 	 * Provides data items for the list of available foods.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the foods table
+	 * 						as an array with the keys "caption" (for the title)
+	 *						and "value" (for the UID)
 	 */
-	function populateListFoods($items) {
+	public function populateListFoods(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_FOODS);
 	}
 
 	/**
 	 * Provides data items for the list of available payment methods.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from payment_methods table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from payment methods
+	 * 						table as an array with the keys "caption" (for the
+	 *						title) and "value" (for the UID)
 	 */
-	function populateListPaymentMethods($items) {
+	public function populateListPaymentMethods(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_PAYMENT_METHODS);
 	}
 
 	/**
 	 * Provides data items for the list of available organizers.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the organizers table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the organizers
+	 * 						table as an array with the keys "caption" (for the
+	 *						title) and "value" (for the UID)
 	 */
-	function populateListOrganizers($items) {
+	public function populateListOrganizers(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_ORGANIZERS);
 	}
 
 	/**
 	 * Provides data items for the list of available places.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the places table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the places table
+	 * 						as an array with the keys "caption" (for the title)
+	 *						and "value" (for the UID)
 	 */
-	function populateListPlaces($items) {
+	public function populateListPlaces(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_SITES);
 	}
 
 	/**
 	 * Provides data items for the list of available speakers.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the speakers table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the speakers table
+	 * 						as an array with the keys "caption" (for the title)
+	 *						and "value" (for the UID)
 	 */
-	function populateListSpeakers($items) {
+	public function populateListSpeakers(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_SPEAKERS);
 	}
 
 	/**
 	 * Provides data items for the list of available checkboxes.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the checkboxes
+	 * 						table as an array with the keys "caption" (for the
+	 *						title) and "value" (for the UID)
 	 */
-	function populateListCheckboxes($items) {
+	public function populateListCheckboxes(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_CHECKBOXES);
 	}
 
 	/**
 	 * Provides data items for the list of available target groups.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null)
+	 * @param	array		any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the target groups table as an array with the keys "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access	public
+	 * @return	array		$items with additional items from the target groups
+	 * 						table as an array with the keys "caption" (for the
+	 *						title) and "value" (for the UID)
 	 */
-	function populateListTargetGroups($items) {
+	public function populateListTargetGroups(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_TARGET_GROUPS);
 	}
 

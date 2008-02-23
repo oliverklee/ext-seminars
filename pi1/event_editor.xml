@@ -15,6 +15,7 @@
 			<keyname>uid</keyname>
 			<labelname>title</labelname>
 			<mmrelations>
+				<relation field="categories" mmtable="tx_seminars_seminars_categories_mm" />
 				<relation field="place" mmtable="tx_seminars_seminars_place_mm" />
 				<relation field="lodgings" mmtable="tx_seminars_seminars_lodgings_mm" />
 				<relation field="foods" mmtable="tx_seminars_seminars_foods_mm" />
@@ -71,6 +72,16 @@
 		<renderlet:TEXT name="subtitle">
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.subtitle</label>
 		</renderlet:TEXT>
+
+		<renderlet:CHECKBOX name="categories">
+			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.categories</label>
+			<data>
+				<userobj>
+					<extension>this</extension>
+					<method>populateListCategories</method>
+				</userobj>
+			</data>
+		</renderlet:CHECKBOX>
 
 		<renderlet:TEXTAREA name="teaser">
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.teaser</label>
