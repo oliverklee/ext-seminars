@@ -48,14 +48,12 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 		'suggests' => array(
 			'date2cal' => '',
-			'newloginbox' => '',
 			'sr_feuser_register' => '',
 			'onetimeaccount' => '',
 		),
 	),
 	'suggests' => array(
 		'date2cal' => '',
-		'newloginbox' => '',
 		'sr_feuser_register' => '',
 		'onetimeaccount' => '',
 	),
