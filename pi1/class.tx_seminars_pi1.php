@@ -253,7 +253,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->getHookObjects();
 		$this->createHelperObjects();
 
-		// Let warnings from the registration manager bubble up to us.
+		// Lets warnings from the registration manager bubble up to us.
 		$this->setErrorMessage(
 			$this->registrationManager->checkConfiguration(true)
 		);
@@ -610,12 +610,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
 			}
 
-			// Show the page browser (if not deactivated in the configuration).
+			// Shows the page browser (if not deactivated in the configuration),
+			// disabling htmlspecialchars (the last parameter).
 			if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
 				$result .= $this->pi_list_browseresults();
 			}
 
-			// Let warnings from the seminar and the seminar bag bubble up to us.
+			// Lets warnings from the seminar and the seminar bag bubble up to us.
 			$this->setErrorMessage(
 				$seminarOrRegistrationBag->checkConfiguration(true)
 			);
@@ -1066,7 +1067,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		);
 
 		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
-			// Let warnings from the seminar bubble up to us.
+			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			// This sets the title of the page for use in indexed search results:
@@ -1148,6 +1149,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
+			// XXX: When the adaption to oelib has taken place, the direct access
+			// to $this->templateCache should be removed and the methods provided
+			// by oelib should be used.
 			if ($this->seminar->hasTimeslots()) {
 				$this->readSubpartsToHide('date', 'field_wrapper');
 				$this->readSubpartsToHide('time', 'field_wrapper');
@@ -1282,7 +1286,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
-			// XXX: When the adaption to oelib has took place the direct access
+			// XXX: When the adaption to oelib has taken place, the direct access
 			// to $this->templateCache should be removed and the methods provided
 			// by oelib should be used.
 			if ($this->seminar->hasTargetGroups()) {
@@ -1361,7 +1365,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->readSubpartsToHide('list_registrations', 'field_wrapper');
 			}
 
-			// Hide unneeded sections for topic records.
+			// Hides unneeded sections for topic records.
 			if ($this->seminar->getRecordPropertyInteger('object_type')
 				== SEMINARS_RECORD_TYPE_TOPIC
 			) {
@@ -1373,7 +1377,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
-			// modify single view hook
+			// Modifies the single view hook.
 			foreach ($this->hookObjects as $hookObject) {
 				if (method_exists($hookObject, 'modifySingleView')) {
 					$hookObject->modifySingleView($this);
@@ -1381,7 +1385,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
-			// We cache the additional query parameters and the other dates list
+
+			// Caches the additional query parameters and the other dates list
 			// because the list view will overwrite $this->seminar.
 			$nextDayQueryParameters = $this->seminar->getAdditionalQueryForNextDay();
 			$otherDatesPart = $this->createOtherDatesList();
@@ -1543,7 +1548,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$result = $this->substituteMarkerArrayCached('EVENTSNEXTDAY_VIEW');
 		}
 
-		// Let warnings from the seminar and the seminar bag bubble up to us.
+		// Lets warnings from the seminar and the seminar bag bubble up to us.
 		$this->setErrorMessage($seminarBag->checkConfiguration(true));
 
 		// Let's also check the list view configuration..
@@ -1601,7 +1606,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->readSubpartsToUnhide($temporaryHiddenColumns, $hiddenColumns);
 		}
 
-		// Let warnings from the seminar and the seminar bag bubble up to us.
+		// Lets warnings from the seminar and the seminar bag bubble up to us.
 		$this->setErrorMessage($seminarBag->checkConfiguration(true));
 
 		// Let's also check the list view configuration..
@@ -2071,7 +2076,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->toggleEventFieldsOnRegistrationPage();
 
 		if ($this->createSeminar($this->piVars['seminar'])) {
-			// Let warnings from the seminar bubble up to us.
+			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
@@ -2230,7 +2235,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// seminar title and date.
 			$this->setMarkerContent('title', $this->seminar->getTitleAndDate());
 
-			// Let warnings from the seminar bubble up to us.
+			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			if ($this->seminar->canViewRegistrationsList(
@@ -2327,7 +2332,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			);
 		}
 
-		// Let warnings from the registration bag bubble up to us.
+		// Lets warnings from the registration bag bubble up to us.
 		$this->setErrorMessage($registrationBag->checkConfiguration(true));
 	}
 
@@ -2702,7 +2707,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
 				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 				if ($this->createSeminar($row['uid'])) {
-					// Let warnings from the seminar bubble up to us.
+					// Lets warnings from the seminar bubble up to us.
 					$this->setErrorMessage(
 						$this->seminar->checkConfiguration(true)
 					);
