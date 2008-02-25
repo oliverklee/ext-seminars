@@ -96,10 +96,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 *
 	 * @param	array		data of the place to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be 0 if an error
-	 * 						has occurred
+	 * @return	integer		the UID of the created record, will be > 0
 	 */
-	private function addPlaceRelation(array $placeData) {
+	private function addPlaceRelation(array $placeData = array()) {
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES, $placeData
 		);
@@ -121,10 +120,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 *
 	 * @param	array		data of the target group to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be 0 if an error
-	 * 						has occurred
+	 * @return	integer		the UID of the created record, will be > 0
 	 */
-	private function addTargetGroupRelation(array $targetGroupData) {
+	private function addTargetGroupRelation(array $targetGroupData = array()) {
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_TARGET_GROUPS, $targetGroupData
 		);
@@ -146,9 +144,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 *
 	 * @param	array		data of the payment method to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will always be > 0
+	 * @return	integer		the UID of the created record, will be > 0
 	 */
-	private function addPaymentMethodRelation(array $paymentMethodData) {
+	private function addPaymentMethodRelation(
+		array $paymentMethodData = array()
+	) {
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_PAYMENT_METHODS, $paymentMethodData
 		);
@@ -164,9 +164,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 *
 	 * @param	array		data of the organizer to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will always be > 0
+	 * @return	integer		the UID of the created record, will be > 0
 	 */
-	private function addOrganizingPartnerRelation(array $organizerData) {
+	private function addOrganizingPartnerRelation(
+		array $organizerData = array()
+	) {
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ORGANIZERS, $organizerData
 		);
@@ -188,9 +190,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 *
 	 * @param	array		data of the category to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will always be > 0
+	 * @return	integer		the UID of the created record, will be > 0
 	 */
-	private function addCategoryRelation(array $categoryData) {
+	private function addCategoryRelation(array $categoryData = array()) {
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES, $categoryData
 		);
