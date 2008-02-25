@@ -68,15 +68,20 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 	 * 'greeting_informal' exists, that string is used.
 	 * If it doesn't exist, we'll try to use the string with the key 'greeting'.
 	 *
-	 * @param	string		the key from the LOCAL_LANG array for which to return the value
+	 * Note: Although this function is deprecated, it must not be removed
+	 * because some pi_base functions rely on its existence.
+	 *
+	 * @param	string		the key from the LOCAL_LANG array for which to
+	 *						return the value
 	 * @param	string		(unused, for legacy purposes)
-	 * @param	boolean		whether the output label should be passed through htmlspecialchars()
+	 * @param	boolean		whether the output label should be passed through
+	 *				 		htmlspecialchars()
 	 *
 	 * @return	string		the value from LOCAL_LANG
 	 *
 	 * @deprecated	2007-08-22	Use translate instead.
 	 */
-	function pi_getLL($key, $unused = '', $useHtmlSpecialChars = false) {
+	public function pi_getLL($key, $unused = '', $useHtmlSpecialChars = false) {
 		return $this->translate($key, $useHtmlSpecialChars);
 	}
 
@@ -91,14 +96,14 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 	 * 'greeting_informal' exists, that string is used.
 	 * If it doesn't exist, we'll try to use the string with the key 'greeting'.
 	 *
-	 * @param	string		the key from the LOCAL_LANG array for which to return the value
-	 * @param	boolean		whether the output label should be passed through htmlspecialchars()
+	 * @param	string		the key from the LOCAL_LANG array for which to
+	 *						return the value
+	 * @param	boolean		whether the output label should be passed through
+	 *						htmlspecialchars()
 	 *
 	 * @return	string		the value from LOCAL_LANG
-	 *
-	 * @access	public
 	 */
-	function translate($key, $useHtmlSpecialChars = false) {
+	public function translate($key, $useHtmlSpecialChars = false) {
 		$hasFoundATranslation = false;
 
 		$availableLanguages = $this->getAvailableLanguages();
