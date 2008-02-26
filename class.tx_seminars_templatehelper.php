@@ -54,7 +54,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 
 	/**
 	 * List of subpart names that shouldn't be displayed. Set a subpart key like
-	 * "###FIELD_DATE###" and the value to '' to remove that subpart.
+	 * "FIELD_DATE" (the value does not matter) to remove that subpart.
 	 */
 	var $subpartsToHide = array();
 
@@ -67,6 +67,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/** list of the names of all markers (and subparts) of a template */
 	var $markerNames = '';
 
+	/** the back-end locallang object */
+	var $LANG;
+
 	/**
 	 * Retrieves the plugin template file set in $this->conf['templateFile'] (or
 	 * also via flexforms if TYPO3 mode is FE) and writes it to
@@ -78,14 +81,32 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @access	protected
 	 */
 	function getTemplateCode($ignoreFlexform = false) {
-		$templateRawCode = $this->cObj->fileResource(
-			$this->getConfValueString(
-				'templateFile',
-				's_template_special',
-				true,
-				$ignoreFlexform
-			)
+		// Trying to fetch the template code via $this->cObj in BE mode leads to
+		// a non-catchable error in the tslib_content class because the cObj
+		// configuration array is not initialized properly.
+		// As flexforms can be used in FE mode only, $ignoreFlexform is set true
+		// if we are in the BE mode. By this, $this->cObj->fileResource can be
+		// sheltered from being called.
+		if (TYPO3_MODE == 'BE') {
+			$ignoreFlexform = true;
+		}
+
+		$templateFileName = $this->getConfValueString(
+			'templateFile',
+			's_template_special',
+			true,
+			$ignoreFlexform
 		);
+
+		if (!$ignoreFlexform) {
+			$templateRawCode = $this->cObj->fileResource($templateFileName);
+		} else {
+			// If there is no need to care about flexforms, the template file is
+			// fetched directly from the local configuration array.
+			$templateRawCode = file_get_contents(
+				t3lib_div::getFileAbsFileName($templateFileName)
+			);
+		}
 
 		$this->processTemplate($templateRawCode);
 	}
@@ -111,11 +132,17 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 
 		$subpartNames = $this->findSubparts();
 
-		foreach ($subpartNames as $currentSubpartName) {
-			$this->templateCache[$currentSubpartName] = $this->cObj->getSubpart(
+		foreach ($subpartNames as $subpartName) {
+			$matches = array();
+			preg_match(
+				'/<!-- *###'.$subpartName.'### *-->(.*)'
+					.'<!-- *###'.$subpartName.'### *-->/msSuU',
 				$templateRawCode,
-				$currentSubpartName
+				$matches
 			);
+			if (isset($matches[1])) {
+				$this->templateCache[$subpartName] = $matches[1];
+			}
 		}
 	}
 
@@ -131,7 +158,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	function findSubparts() {
 		$matches = array();
 		preg_match_all(
-			'/<!-- *(###)([^#]+)(###)/',
+			'/<!-- *(###)([A-Z]([A-Z0-9_]*[A-Z0-9])?)(###)/',
 			$this->templateCode,
 			$matches
 		);
@@ -156,7 +183,9 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function findMarkers() {
 		$matches = array();
-		preg_match_all('/(###)([^#]+)(###)/', $this->templateCode, $matches);
+		preg_match_all(
+			'/(###)(([A-Z0-9_]*[A-Z0-9])?)(###)/', $this->templateCode, $matches
+		);
 
 		$markerNames = array_unique($matches[2]);
 
@@ -235,7 +264,10 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function setMarker($markerName, $content, $prefix = '') {
 		$unifiedMarkerName = $this->createMarkerName($markerName, $prefix);
-		$this->markers[$unifiedMarkerName] = $content;
+
+		if ($this->isMarkerNameValidWithHashes($unifiedMarkerName)) {
+			$this->markers[$unifiedMarkerName] = $content;
+		}
 	}
 
 	/**
@@ -277,10 +309,33 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 			return false;
 		}
 
-		$subpartNameWithHashes = $this->createMarkerName($subpartName);
-
 		return (isset($this->templateCache[$subpartName])
-			&& !isset($this->subpartsToHide[$subpartNameWithHashes]));
+			&& !isset($this->subpartsToHide[$subpartName]));
+	}
+
+	/**
+	 * Takes a comma-separated list of subpart names and writes them to
+	 * $this->subpartsToHide. In the process, the names are changed from 'aname'
+	 * to '###BLA_ANAME###' and used as keys. The corresponding values in the
+	 * array are empty strings.
+	 *
+	 * Example: If the prefix is "field" and the list is "one,two", the array keys
+	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be written.
+	 *
+	 * If the prefix is empty and the list is "one,two", the array keys
+	 * "###ONE###" and "###TWO###" will be written.
+	 *
+	 * @param	string		comma-separated list of at least 1 subpart name to
+	 *						hide (case-insensitive, will get uppercased)
+	 * @param	string		prefix to the subpart names (may be empty,
+	 *						case-insensitive, will get uppercased)
+	 *
+	 * @access	protected
+	 *
+	 * @deprecated	2007-08-22	Use hideSubparts instead.
+	 */
+	function readSubpartsToHide($subparts, $prefix = '') {
+		$this->hideSubparts($subparts, $prefix);
 	}
 
 	/**
@@ -301,15 +356,50 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * @access	protected
 	 */
-	function readSubpartsToHide($subparts, $prefix = '') {
+	function hideSubparts($subparts, $prefix = '') {
 		$subpartNames = explode(',', $subparts);
 
 		foreach ($subpartNames as $currentSubpartName) {
-			$this->subpartsToHide[$this->createMarkerName(
+			$fullSubpartName = $this->createMarkerNameWithoutHashes(
 				$currentSubpartName,
 				$prefix
-			)] = '';
+			);
+
+			$this->subpartsToHide[$fullSubpartName] = true;
 		}
+	}
+
+	/**
+	 * Takes a comma-separated list of subpart names and unhides them if they
+	 * have been hidden beforehand.
+	 *
+	 * Note: All subpartNames that are provided with the second parameter will
+	 * not be unhidden. This is to avoid unhiding subparts that are hidden by
+	 * the configuration.
+	 *
+	 * In the process, the names are changed from 'aname' to '###BLA_ANAME###'.
+	 *
+	 * Example: If the prefix is "field" and the list is "one,two", the subparts
+	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be unhidden.
+	 *
+	 * If the prefix is empty and the list is "one,two", the subparts
+	 * "###ONE###" and "###TWO###" will be unhidden.
+	 *
+	 * @param	string		comma-separated list of at least 1 subpart name to
+	 * 						unhide (case-insensitive, will get uppercased)
+	 * @param	string		comma-separated list of subpart names that
+	 * 						shouldn't get unhidden
+	 * @param	string		prefix to the subpart names (may be empty,
+	 * 						case-insensitive, will get uppercased)
+	 *
+	 * @access	protected
+	 *
+	 * @deprecated	2007-08-22	Use unhideSubparts instead.
+	 */
+	function readSubpartsToUnhide(
+		$subparts, $permanentlyHiddenSubparts = '', $prefix = ''
+	) {
+		$this->unhideSubparts($subparts, $permanentlyHiddenSubparts, $prefix);
 	}
 
 	/**
@@ -331,26 +421,29 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @param	string		comma-separated list of at least 1 subpart name to
 	 * 						unhide (case-insensitive, will get uppercased),
 	 * 						must not be empty
-	 * @param	string		comma-separated list of of subpart names that
+	 * @param	string		comma-separated list of subpart names that
 	 * 						shouldn't get unhidden
 	 * @param	string		prefix to the subpart names (may be empty,
 	 * 						case-insensitive, will get uppercased)
 	 *
 	 * @access	protected
 	 */
-	function readSubpartsToUnhide(
+	function unhideSubparts(
 		$subparts, $permanentlyHiddenSubparts = '', $prefix = ''
 	) {
 		$subpartNames = explode(',', $subparts);
-		$hiddenSubpartNames = explode(',', $permanentlyHiddenSubparts);
+		if ($permanentlyHiddenSubparts != '') {
+			$hiddenSubpartNames = explode(',', $permanentlyHiddenSubparts);
+		} else {
+			$hiddenSubpartNames = array();
+		}
 
 		foreach ($subpartNames as $currentSubpartName) {
 			// Only unhide the current subpart if it is not on the list of
 			// permanently hidden subparts (e.g. by configuration).
-			if (!array_key_exists($currentSubpartName, $hiddenSubpartNames)) {
-				$currentMarkerName = $this->createMarkerName(
-					$currentSubpartName,
-					$prefix
+			if (!in_array($currentSubpartName, $hiddenSubpartNames)) {
+				$currentMarkerName = $this->createMarkerNameWithoutHashes(
+					$currentSubpartName, $prefix
 				);
 				unset($this->subpartsToHide[$currentMarkerName]);
 			}
@@ -370,22 +463,36 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @access	private
 	 */
 	function createMarkerName($markerName, $prefix = '') {
-		if ($prefix) {
-			$prefix = strtoupper($prefix).'_';
-		}
-
-		return '###'.$prefix.strtoupper(trim($markerName)).'###';
+		return '###'
+			.$this->createMarkerNameWithoutHashes($markerName, $prefix).'###';
 	}
 
 	/**
-	 * Multi substitution function with caching. Wrapper function for
-	 * cObj->substituteMarkerArrayCached(), using $this->markers and
-	 * $this->subparts as defaults.
+	 * Creates an uppercase marker (or subpart) name from a given name and an
+	 * optional prefix, but without wrapping it in hash signs.
 	 *
-	 * During the process, the following happens:
-	 * 1. $this->subpartsTohide will be removed
-	 * 2. for the other subparts, the subpart marker comments will be removed
-	 * 3. markes are replaced with their corresponding contents.
+	 * Example: If the prefix is "field" and the marker name is "one", the
+	 * result will be "FIELD_ONE".
+	 *
+	 * If the prefix is empty and the marker name is "one", the result will be
+	 * "ONE".
+	 *
+	 * @access	private
+	 */
+	function createMarkerNameWithoutHashes($markerName, $prefix = '') {
+		// If a prefix is provided, uppercases it and separates it with an
+		// underscore.
+		if (!empty($prefix)) {
+			$prefix .= '_';
+		}
+
+		return strtoupper($prefix.trim($markerName));
+	}
+
+	/**
+	 * Retrieves a named subpart, recursively filling in its inner subparts
+	 * and markers. Inner subparts that are marked to be hidden will be
+	 * substituted with empty strings.
 	 *
 	 * This function either works on the subpart with the name $key or the
 	 * complete HTML template if $key is an empty string.
@@ -393,15 +500,36 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * @param	string		key of an existing subpart, for example 'LIST_ITEM'
 	 * 						(without the ###), or an empty string to use the
 	 * 						complete HTML template
-	 * @param	integer		recursion level when substituting subparts within
-	 *						subparts, use 0 to disable recursion
+	 *
+	 * @return	string		the subpart content or an empty string if the
+	 * 						subpart is hidden or the subpart name is missing
+	 *
+	 * @access	protected
+	 *
+	 * @deprecated	2007-08-22	Use getSubpart instead.
+	 */
+	function substituteMarkerArrayCached($key = '') {
+		return $this->getSubpart($key);
+	}
+
+	/**
+	 * Retrieves a named subpart, recursively filling in its inner subparts
+	 * and markers. Inner subparts that are marked to be hidden will be
+	 * substituted with empty strings.
+	 *
+	 * This function either works on the subpart with the name $key or the
+	 * complete HTML template if $key is an empty string.
+	 *
+	 * @param	string		key of an existing subpart, for example 'LIST_ITEM'
+	 * 						(without the ###), or an empty string to use the
+	 * 						complete HTML template
 	 *
 	 * @return	string		the subpart content or an empty string if the
 	 * 						subpart is hidden or the subpart name is missing
 	 *
 	 * @access	protected
 	 */
-	function substituteMarkerArrayCached($key = '', $recursionLevel = 0) {
+	function getSubpart($key = '') {
 		if (($key != '') && !isset($this->templateCache[$key])) {
 			$this->setErrorMessage('The subpart <strong>'.$key.'</strong> is '
 				.'missing in the HTML template file <strong>'
@@ -414,45 +542,49 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 				.'please file a bug report in the '
 				.'<a href="https://bugs.oliverklee.com/">bug tracker</a>.'
 			);
+
+			return '';
+		}
+
+		if (($key != '') && !$this->isSubpartVisible($key)) {
+			return '';
 		}
 
 		$templateCode = ($key != '')
 			? $this->templateCache[$key] : $this->templateCode;
 
-		// remove subparts (lines) that will be hidden
-		$noHiddenSubparts = $this->cObj->substituteMarkerArrayCached(
-			$templateCode,
-			array(),
-			$this->subpartsToHide
+		// recursively replaces subparts with their contents
+		$noSubpartMarkers = preg_replace_callback(
+			'/<!-- *###([^#]*)### *-->(.*)'
+				.'<!-- *###\1### *-->/msSuU',
+			array(
+				$this,
+				'getSubpartForCallback'
+			),
+			$templateCode
 		);
 
-		if ($recursionLevel) {
-			$subparts = array();
-			foreach ($this->templateCache as $key => $content) {
-				$subparts[$key] = $this->substituteMarkerArrayCached(
-					$key,
-					$recursionLevel - 1
-				);
-			}
-		} else {
-			$subparts =& $this->templateCache;
-		}
-
-		// remove subpart markers by replacing the subparts with just their content
-		$noSubpartMarkers = $noHiddenSubparts;
-		foreach ($subparts as $subpartName => $subpartContent) {
-			$noSubpartMarkers = $this->cObj->substituteSubpart(
-				$noSubpartMarkers,
-				'###'.$subpartName.'###',
-				$subpartContent
-			);
-		}
-
-		// replace markers with their content
-		return $this->cObj->substituteMarkerArrayCached(
-			$noSubpartMarkers,
-			$this->markers
+		// replaces markers with their contents
+		return str_replace(
+			array_keys($this->markers), $this->markers, $noSubpartMarkers
 		);
+	}
+
+	/**
+	 * Retrieves a subpart.
+	 *
+	 * @param	array		numeric array with matches from
+	 * 						preg_replace_callback; the element #1 needs to
+	 * 						contain the name of the subpart to retrieve (in
+	 * 						uppercase without the surrounding ###)
+	 *
+	 * @return	string		the contents of the corresponding subpart or an
+	 * 						empty string in case the subpart does not exist
+	 *
+	 * @access	private
+	 */
+	function getSubpartForCallback(array $matches) {
+		return $this->getSubpart($matches[1]);
 	}
 
 	/**
@@ -470,9 +602,8 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		$labels = $this->getPrefixedMarkers('label');
 
 		foreach ($labels as $currentLabel) {
-			$this->setMarkerContent(
-				$currentLabel,
-				$this->pi_getLL(strtolower($currentLabel))
+			$this->setMarker(
+				$currentLabel, $this->translate(strtolower($currentLabel))
 			);
 		}
 	}
@@ -486,11 +617,11 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * @access	protected
 	 */
-	function setCSS() {
+	function setCss() {
 		$cssEntries = $this->getPrefixedMarkers('class');
 
 		foreach ($cssEntries as $currentCssEntry) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				$currentCssEntry,
 				$this->createClassAttribute(
 					$this->getConfValueString(strtolower($currentCssEntry))
@@ -525,9 +656,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * @param	string		the key from the LOCAL_LANG array for which to
 	 * 						return the value
-	 * @param	string		alternative string to return if no value is found
-	 * 						for the key, neither for the local language nor the
-	 * 						default.
 	 * @param	boolean		If true, the output label is passed through
 	 * 						htmlspecialchars().
 	 *
@@ -535,26 +663,90 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * @access	protected
 	 */
-	function pi_getLL(
-		$key, $alternativeString = '', $useHtmlSpecialChars = false
+	function translate(
+		$key, $useHtmlSpecialChars = false
 	) {
-		global $LANG;
 		$result = '';
 
-		if (TYPO3_MODE == 'BE') {
-			$result = $LANG->getLL($key, $useHtmlSpecialChars);
-		} elseif (TYPO3_MODE == 'FE') {
-			$result = parent::pi_getLL(
+		if (is_object($this->LANG)) {
+			$result = $this->LANG->getLL($key, $useHtmlSpecialChars);
+		} elseif (is_array($this->LOCAL_LANG)) {
+			$result = parent::translate(
 				$key,
-				$alternativeString,
 				$useHtmlSpecialChars
 			);
 		} else {
-			$result = $alternativeString;
+			$result = $key;
 		}
 
 		return $result;
 	}
+
+	/**
+	 * Checks whether a marker name (or subpart name) is valid (including the
+	 * leading and trailing hashes ###).
+	 *
+	 * A valid marker name must be a non-empty string, consisting of uppercase
+	 * and lowercase letters ranging A to Z, digits and underscores. It must
+	 * start with a lowercase or uppercase letter ranging from A to Z. It must
+	 * not end with an underscore. In addition, it must be prefixed and suffixed
+	 * with ###.
+	 *
+	 * @param	string		marker name to check (with the hashes), may be
+	 * 						empty
+	 *
+	 * @return	boolean		true if the marker name is valid, false otherwise
+	 *
+	 * @access	private
+	 */
+	function isMarkerNameValidWithHashes($markerName) {
+		return (boolean) preg_match(
+			'/^###[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])?###$/', $markerName
+		);
+	}
+
+	/**
+	 * Checks whether a marker name (or subpart name) is valid (excluding the
+	 * leading and trailing hashes ###).
+	 *
+	 * A valid marker name must be a non-empty string, consisting of uppercase
+	 * and lowercase letters ranging A to Z, digits and underscores. It must
+	 * start with a lowercase or uppercase letter ranging from A to Z. It must
+	 * not end with an underscore.
+	 *
+	 * @param	string		marker name to check (without the hashes), may be
+	 * 						empty
+	 *
+	 * @return	boolean		true if the marker name is valid, false otherwise
+	 *
+	 * @access	private
+	 */
+	function isMarkerNameValidWithoutHashes($markerName) {
+		return $this->isMarkerNameValidWithHashes('###'.$markerName.'###');
+	}
+
+	/**
+	 * Initializes '$GLOBALS['TSFE']->sys_page', '$GLOBALS['TT']' and
+	 * '$this->cObj' as these objects are needed but only initialized
+	 * automatically if TYPO3_MODE is 'FE'.
+	 * This will allow the FE templating functions to be used even without the
+	 * FE.
+	 */
+	 public function fakeFrontend() {
+	 	if (!is_object($GLOBALS['TT'])) {
+	 		$GLOBALS['TT'] = t3lib_div::makeInstance('t3lib_timeTrack');
+	 	}
+
+	 	if (!is_object($GLOBALS['TSFE']->sys_page)) {
+	 		$GLOBALS['TSFE']->sys_page
+	 			= t3lib_div::makeInstance('t3lib_pageSelect');
+	 	}
+
+		if (!is_object($this->cObj)) {
+			$this->cObj = t3lib_div::makeInstance('tslib_cObj');
+			$this->cObj->start('');
+		}
+	 }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_templatehelper.php']) {

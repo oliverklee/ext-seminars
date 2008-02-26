@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1094] Change: Add a function "setSubpart" and remove the direct accesses to $this->templateCache
 - [#1467] Feature: Allow setting categories in the FE editing, patch by John Boyd-Rainey
 - [#1598] Feature: The pi1 search should also search in the category names, patch by John Boyd-Rainey
 - [#1655] Fix: Wrong <dl> in HTML output

@@ -29,15 +29,59 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
+require_once(PATH_tslib.'class.tslib_content.php');
+require_once(PATH_tslib.'class.tslib_feuserauth.php');
+require_once(PATH_t3lib.'class.t3lib_timetrack.php');
+
 require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_pi1.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
 
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
+
 class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private $fixture;
+	private $testingFramework;
+
+	/** the UID of a seminar to which the fixture relates */
+	private $seminarUid;
+
+	/** PID of a dummy system folder */
+	private $systemFolderPid = 0;
+
+	/** the number of target groups for the current event record */
+	private $numberOfTargetGroups = 0;
 
 	public function setUp() {
+		// Bolster up the fake front end.
+		$GLOBALS['TSFE']->tmpl = t3lib_div::makeInstance('t3lib_tsparser_ext');
+		$GLOBALS['TSFE']->tmpl->flattenSetup(array(), '', false);
+		$GLOBALS['TSFE']->tmpl->init();
+		$GLOBALS['TSFE']->tmpl->getCurrentPageData();
+
+		$this->testingFramework
+			= new tx_oelib_testingFramework('tx_seminars');
+
+		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Test event'
+			)
+		);
+
 		$this->fixture = new tx_seminars_pi1();
-		$this->fixture->init(array());
+		$this->fixture->fakeFrontend();
+
+		$this->fixture->init(
+			array(
+				'isStaticTemplateLoaded' => 1,
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'what_to_display' => 'seminar_list',
+				'eventType' => 'Workshop',
+				'pidList' => $this->systemFolderPid
+			)
+		);
 		$this->fixture->createHelperObjects();
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'eventType', 'Workshop'
@@ -45,9 +89,136 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
+		$this->testingFramework->cleanUp();
 		unset($this->fixture);
+		unset($this->testingFramework);
 	}
 
+
+	///////////////////////
+	// Utility functions.
+	///////////////////////
+
+	/**
+	 * Initializes '$GLOBALS['TSFE']->sys_page', '$GLOBALS['TT']' and
+	 * '$this->cObj' as these objects are needed but only initialized
+	 * automatically if TYPO3_MODE is 'FE'.
+	 * This will allow the FE templating functions to be used even without the
+	 * FE.
+	 */
+	 private function fakeFrontend() {
+	 	if (!is_object($GLOBALS['TT'])) {
+	 		$GLOBALS['TT'] = t3lib_div::makeInstance('t3lib_timeTrack');
+	 	}
+
+	 	if (!is_object($GLOBALS['TSFE']->sys_page)) {
+	 		$GLOBALS['TSFE']->sys_page
+	 			= t3lib_div::makeInstance('t3lib_pageSelect');
+	 	}
+
+		if (!is_object($this->fixture->cObj)) {
+			$this->fixture->cObj = t3lib_div::makeInstance('tslib_cObj');
+			$this->fixture->cObj->start('');
+		}
+	 }
+
+	/**
+	 * Inserts a target group record into the database and creates a relation to
+	 * it from the event with the UID store in $this->seminarUid.
+	 *
+	 * @param	array		data of the target group to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be > 0
+	 */
+	private function addTargetGroupRelation(array $targetGroupData = array()) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS, $targetGroupData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TARGET_GROUPS_MM,
+			$this->seminarUid, $uid
+		);
+
+		$this->numberOfTargetGroups++;
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('target_groups' => $this->numberOfTargetGroups)
+		);
+
+		return $uid;
+	}
+
+
+	/////////////////////////////////////
+	// Tests for the utility functions.
+	/////////////////////////////////////
+
+	public function testAddTargetGroupRelationReturnsUid() {
+		$this->assertTrue(
+			$this->addTargetGroupRelation(array()) > 0
+		);
+	}
+
+	public function testAddTargetGroupRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addTargetGroupRelation(array()),
+			$this->addTargetGroupRelation(array())
+		);
+	}
+
+	public function testAddTargetGroupRelationIncreasesTheNumberOfTargetGroups() {
+		$this->assertEquals(
+			0,
+			$this->numberOfTargetGroups
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			1,
+			$this->numberOfTargetGroups
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			2,
+			$this->numberOfTargetGroups
+		);
+	}
+
+	public function testAddTargetGroupRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TARGET_GROUPS_MM,
+				'uid_local='.$this->seminarUid
+			)
+
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TARGET_GROUPS_MM,
+				'uid_local='.$this->seminarUid
+			)
+		);
+
+		$this->addTargetGroupRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TARGET_GROUPS_MM,
+				'uid_local='.$this->seminarUid
+			)
+		);
+	}
+
+
+	////////////////////////////////////////////
+	// Test concerning the base functionality.
+	////////////////////////////////////////////
 
 	public function testPi1MustBeInitialized() {
 		$this->assertNotNull(
@@ -64,6 +235,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->fixture->getConfigGetter()->getConfValueString('eventType')
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Test concerning the search function.
+	/////////////////////////////////////////
 
 	public function testSearchWhereCreatesAnEmptyStringForEmptySearchWords() {
 		$this->assertEquals(
@@ -137,11 +313,192 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->addEmptyOptionIfNeeded($allOptions);
 		$this->assertEquals(
 			array(
-				'none' => '',
+				'none' => $this->fixture->translate('label_selector_pleaseChoose'),
 				'DE' => 'Deutsch',
 				'FR' => 'French'
 			),
 			$allOptions
+		);
+	}
+
+
+	//////////////////////////////////////
+	// Tests concerning the single view.
+	//////////////////////////////////////
+
+	public function testSingleViewContainsEventTitle() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+
+	////////////////////////////////////////////////////
+	// Tests concerning time slots in the single view.
+	////////////////////////////////////////////////////
+
+	public function testTimeSlotsSubpartIsHiddenInSingleViewWithoutTimeSlots() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
+		);
+	}
+
+	public function testTimeSlotsSubpartIsVisibleInSingleViewWithOneTimeSlot() {
+		$timeSlotUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS, array('seminar' => $this->seminarUid)
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('timeslots' => (string) $timeSlotUid)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
+		);
+	}
+
+	public function testSingleViewCanContainOneTimeSlotRoom() {
+		$timeSlotUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'seminar' => $this->seminarUid,
+				'room' => 'room 1'
+			)
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('timeslots' => (string) $timeSlotUid)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'room 1',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testTimeSlotsSubpartIsVisibleInSingleViewWithTwoTimeSlots() {
+		$timeSlotUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS, array('seminar' => $this->seminarUid)
+		);
+		$timeSlotUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS, array('seminar' => $this->seminarUid)
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('timeslots' => $timeSlotUid1.','.$timeSlotUid2)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
+		);
+	}
+
+	public function testSingleViewCanContainTwoTimeSlotRooms() {
+		$timeSlotUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'seminar' => $this->seminarUid,
+				'room' => 'room 1'
+			)
+		);
+		$timeSlotUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'seminar' => $this->seminarUid,
+				'room' => 'room 2'
+			)
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('timeslots' => $timeSlotUid1.','.$timeSlotUid2)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'room 1',
+			$this->fixture->main('', array())
+		);
+		$this->assertContains(
+			'room 2',
+			$this->fixture->main('', array())
+		);
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning target groups in the single view.
+	///////////////////////////////////////////////////////
+
+	public function testTargetGroupsSubpartIsHiddenInSingleViewWithoutTargetGroups() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
+		);
+	}
+
+	public function testTargetGroupsSubpartIsVisibleInSingleViewWithOneTargetGroup() {
+		$this->addTargetGroupRelation();
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
+		);
+	}
+
+	public function testSingleViewCanContainOneTargetGroupTitle() {
+		$this->addTargetGroupRelation(
+			array('title' => 'group 1')
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'group 1',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testTargetGroupsSubpartIsVisibleInSingleViewWithTwoTargetGroups() {
+		$this->addTargetGroupRelation(
+			array('title' => 'group 1')
+		);
+		$this->addTargetGroupRelation(
+			array('title' => 'group 2')
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
+		);
+	}
+
+	public function testSingleViewCanContainTwoTargetGroupTitles() {
+		$this->addTargetGroupRelation(
+			array('title' => 'group 1')
+		);
+		$this->addTargetGroupRelation(
+			array('title' => 'group 2')
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'group 1',
+			$this->fixture->main('', array())
+		);
+		$this->assertContains(
+			'group 2',
+			$this->fixture->main('', array())
 		);
 	}
 }

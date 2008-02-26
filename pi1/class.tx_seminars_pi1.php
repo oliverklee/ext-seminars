@@ -938,7 +938,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->getConfValueString('pidList'),
 			$this->getConfValueInteger('recursive')
 		);
-		$queryWhere = SEMINARS_TABLE_SEMINARS.'.pid IN ('.$pidList.')';
+		$queryWhere = ($pidList != '')
+			? SEMINARS_TABLE_SEMINARS.'.pid IN ('.$pidList.')' : '1=1';
 
 		// Time-frames and hiding canceled events doesn't make sense for the
 		// topic list.
@@ -1059,10 +1060,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->showUid
 		);
 
-		$this->readSubpartsToHide(
-			$this->getConfValueString(
-				'hideFields',
-				's_template_special'),
+		$this->hideSubparts(
+			$this->getConfValueString('hideFields',	's_template_special'),
 			'FIELD_WRAPPER'
 		);
 
@@ -1153,8 +1152,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// to $this->templateCache should be removed and the methods provided
 			// by oelib should be used.
 			if ($this->seminar->hasTimeslots()) {
-				$this->readSubpartsToHide('date', 'field_wrapper');
-				$this->readSubpartsToHide('time', 'field_wrapper');
+				$this->hideSubparts('date,time', 'field_wrapper');
 
 				$timeslotsSubpart = $this->templateCache['SINGLE_TIMESLOT'];
 				$this->templateCache['SINGLE_TIMESLOT'] = '';
