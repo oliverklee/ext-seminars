@@ -814,7 +814,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				$this->plugin->pi_getLL('label_'.$key)
 			);
 			$fieldContent = str_replace(
-				chr(13),
+				CR,
 				'<br />',
 				htmlspecialchars($currentFormData)
 			);
@@ -972,7 +972,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				if (isset($availableOptions[$currentSelection])) {
 					$captions[]	= $availableOptions[$currentSelection]['caption'];
 				}
-				$result = implode(chr(13), $captions);
+				$result = implode(CR, $captions);
 			}
 		}
 
@@ -1003,7 +1003,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 						$this->pi_getLL('label_gender.I.'.intval($currentFormData));
 				}
 				$processedFormData = str_replace(
-					chr(13),
+					CR,
 					'<br />',
 					htmlspecialchars($currentFormData)
 				);

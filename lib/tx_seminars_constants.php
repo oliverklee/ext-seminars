@@ -22,20 +22,7 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-// the UTF-8 representation of an en dash
-define('UTF8_EN_DASH', chr(0xE2).chr(0x80).chr(0x93));
-// a tabulator
-define('TAB', chr(9));
-// a linefeed
-define('LF', chr(10));
-// a carriage return
-define('CR', chr(13));
-// a CR-LF combination (the default Unix line ending)
-define('CRLF', CR.LF);
-// one day in seconds
-define('ONE_DAY', 86400);
-// one week in seconds
-define('ONE_WEEK', 604800);
+require_once(t3lib_extMgm::extPath('oelib').'tx_oelib_commonConstants.php');
 
 define('SEMINARS_TABLE_SEMINARS', 'tx_seminars_seminars');
 define('SEMINARS_TABLE_SPEAKERS', 'tx_seminars_speakers');

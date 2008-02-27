@@ -566,10 +566,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 					$description = '';
 					if (!empty($row['address'])) {
-						// replace all occurrences of chr(13) (new line) with
+						// replace all occurrences of carriage returns with
 						// a comma
 						$description .= str_replace(
-							chr(13),
+							CR,
 							',',
 							$row['address']
 						);
@@ -833,7 +833,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					}
 
 					if (!empty($row['address'])) {
-						// replaces all occurrences of chr(13) (new line)
+						// replaces all occurrences of carriage returns
 						// with a comma
 						$result .= CRLF.str_replace(
 							CR,
