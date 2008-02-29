@@ -289,6 +289,32 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Sets a subpart's content.
+	 *
+	 * Example: If the prefix is "field" and the subpart name is "one", the
+	 * subpart "###FIELD_ONE###" will be written.
+	 *
+	 * If the prefix is empty and the subpart name is "one", the subpart
+	 * "###ONE###" will be written.
+	 *
+	 * @param	string		the subpart's name without the ### signs,
+	 * 						case-insensitive, will get uppercased, must not be
+	 * 						empty
+	 * @param	string		the subpart's content, may be empty
+	 * @param	string		prefix to the subpart name (may be empty,
+	 * 						case-insensitive, will get uppercased)
+	 */
+	protected function setSubpart($subpartName, $content, $prefix = '') {
+		$subpartName = $this->createMarkerNameWithoutHashes(
+			$subpartName, $prefix
+		);
+
+		if ($this->isMarkerNameValidWithoutHashes($subpartName)) {
+			$this->templateCache[$subpartName] = $content;
+		}
+	}
+
+	/**
 	 * Checks whether a subpart is visible.
 	 *
 	 * Note: If the subpart to check does not exist, this function will return

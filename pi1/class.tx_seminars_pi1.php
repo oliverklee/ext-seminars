@@ -1284,24 +1284,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
-			// XXX: When the adaption to oelib has taken place, the direct access
-			// to $this->templateCache should be removed and the methods provided
-			// by oelib should be used.
 			if ($this->seminar->hasTargetGroups()) {
-				$targetGroupSubpart = $this->templateCache['SINGLE_TARGET_GROUP'];
-				$this->templateCache['SINGLE_TARGET_GROUP'] = '';
-
+				$targetGroupsOutput = '';
 				$targetGroups = $this->seminar->getTargetGroupsAsArray();
 				foreach ($targetGroups as $targetGroup) {
-						$this->templateCache['SINGLE_TARGET_GROUP'] .=
-							$this->cObj->substituteMarker(
-								$targetGroupSubpart,
-								'###TARGET_GROUP###',
-								$targetGroup
-							);
+					$this->setMarker('target_group', $targetGroup);
+					$targetGroupsOutput
+						.= $this->getSubpart('SINGLE_TARGET_GROUP');
 				}
+				$this->setSubpart('SINGLE_TARGET_GROUP', $targetGroupsOutput);
 			} else {
-				$this->readSubpartsToHide('target_groups', 'field_wrapper');
+				$this->hideSubparts('target_groups', 'field_wrapper');
 			}
 
 			$this->setMarkerContent(

@@ -2125,32 +2125,32 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Returns an array of our seminar's target groups (or an empty array if
-	 * there aren't any).
+	 * Returns an array of our events's target group titles (or an empty array
+	 * if there aren't any).
 	 *
-	 * @return	array		the target groups of this seminar (or an empty array)
-	 *
-	 * @access	public
+	 * @return	array		the target groups of this event (or an empty array)
 	 */
-	function getTargetGroupsAsArray() {
+	public function getTargetGroupsAsArray() {
+		if (!$this->hasTargetGroups()) {
+			return array();
+		}
+
 		$result = array();
 
-		if ($this->hasTargetGroups()) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				SEMINARS_TABLE_TARGET_GROUPS.'.*',
-				SEMINARS_TABLE_TARGET_GROUPS.', '.SEMINARS_TABLE_TARGET_GROUPS_MM,
-				SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
-					.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
-					.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS),
-				'',
-				SEMINARS_TABLE_TARGET_GROUPS_MM.'.sorting'
-			);
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			SEMINARS_TABLE_TARGET_GROUPS.'.title',
+			SEMINARS_TABLE_TARGET_GROUPS.', '.SEMINARS_TABLE_TARGET_GROUPS_MM,
+			SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
+				.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
+				.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
+				.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS),
+			'',
+			SEMINARS_TABLE_TARGET_GROUPS_MM.'.sorting'
+		);
 
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					$result[] = $row['title'];
-				}
+		if ($dbResult) {
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+				$result[] = $row['title'];
 			}
 		}
 
