@@ -36,7 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
-class tx_seminars_eventslist extends tx_seminars_backendlist{
+class tx_seminars_eventslist extends tx_seminars_backendlist {
 	/** the table we're working on */
 	protected $tableName = SEMINARS_TABLE_SEMINARS;
 
