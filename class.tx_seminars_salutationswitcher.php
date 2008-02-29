@@ -42,40 +42,35 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 	  * we always have a valid fallback language even if it hasn't been
 	  * explicitely set.
 	  */
-	var $altLLkey = 'default';
+	public $altLLkey = 'default';
 
 	/**
 	 * A list of language keys for which the localizations have been loaded
 	 * (or null if the list has not been compiled yet).
 	 */
-	var $availableLanguages = null;
+	private $availableLanguages = null;
 
 	/**
 	 * An ordered list of language label suffixes that should be tried to get
 	 * localizations in the preferred order of formality (or null if the list
 	 * has not been compiled yet).
 	 */
-	var $suffixesToTry = null;
+	private $suffixesToTry = null;
 
 	/**
-	 * Returns the localized label of the LOCAL_LANG key, $key
-	 * In $this->conf['salutation'], a suffix to the key may be set (which may
-	 * be either 'formal' or 'informal'). If a corresponding key exists, the
-	 * formal/informal localized string is used instead.
-	 * If the key doesn't exist, we just use the normal string.
+	 * Retrieves the localized string for the local language key $key.
 	 *
-	 * Example: key = 'greeting', suffix = 'informal'. If the key
-	 * 'greeting_informal' exists, that string is used.
-	 * If it doesn't exist, we'll try to use the string with the key 'greeting'.
+	 * This function checks whether the FE or BE localization functions are
+	 * available and then uses the appropriate method.
 	 *
 	 * Note: Although this function is deprecated, it must not be removed
 	 * because some pi_base functions rely on its existence.
 	 *
-	 * @param	string		the key from the LOCAL_LANG array for which to
-	 *						return the value
+	 * @param	string		the local language key for which to
+	 * 						return the value, must not be empty
 	 * @param	string		(unused, for legacy purposes)
-	 * @param	boolean		whether the output label should be passed through
-	 *				 		htmlspecialchars()
+	 * @param	boolean		whether the output should be passed through
+	 * 						htmlspecialchars()
 	 *
 	 * @return	string		the value from LOCAL_LANG
 	 *
@@ -86,24 +81,85 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 	}
 
 	/**
-	 * Returns the localized label of the LOCAL_LANG key, $key
+	 * Retrieves the localized string for the local language key $key.
+	 *
+	 * This function checks whether the FE or BE localization functions are
+	 * available and then uses the appropriate method.
+	 *
 	 * In $this->conf['salutation'], a suffix to the key may be set (which may
 	 * be either 'formal' or 'informal'). If a corresponding key exists, the
 	 * formal/informal localized string is used instead.
-	 * If the formal/informal key doesn't exist, we just use the normal string.
+	 * If the formal/informal key doesn't exist, this function just uses the
+	 * regular string.
 	 *
 	 * Example: key = 'greeting', suffix = 'informal'. If the key
 	 * 'greeting_informal' exists, that string is used.
-	 * If it doesn't exist, we'll try to use the string with the key 'greeting'.
+	 * If it doesn't exist, this functions tries to use the string with the key
+	 * 'greeting'.
 	 *
-	 * @param	string		the key from the LOCAL_LANG array for which to
-	 *						return the value
-	 * @param	boolean		whether the output label should be passed through
-	 *						htmlspecialchars()
+	 * @param	string		the local language key for which to
+	 * 						return the value, must not be empty
+	 * @param	boolean		whether the output should be passed through
+	 * 						htmlspecialchars()
 	 *
-	 * @return	string		the value from LOCAL_LANG
+	 * @return	string		the requested local language key, might be empty
 	 */
-	public function translate($key, $useHtmlSpecialChars = false) {
+	public function translate(
+		$key, $useHtmlSpecialChars = false
+	) {
+		if ($key == '') {
+			throw new Exception('$key must not be empty.');
+		}
+
+		if (is_object($GLOBALS['TSFE']) && is_array($this->LOCAL_LANG)) {
+			$result = $this->translateInFrontEnd($key);
+		} elseif (is_object($GLOBALS['LANG'])) {
+			$result = $this->translateInBackEnd($key);
+		} else {
+			$result = $key;
+		}
+
+		if ($useHtmlSpecialChars) {
+			$result = htmlspecialchars($result);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Retrieves the localized string for the local language key $key, using the
+	 * BE localization methods.
+	 *
+	 * @param	string		the local language key for which to
+	 * 						return the value, must not be empty
+	 *
+	 * @return	string		the requested local language key, might be empty
+	 */
+	private function translateInBackEnd($key) {
+		return $GLOBALS['LANG']->getLL($key);
+	}
+
+	/**
+	 * Retrieves the localized string for the local language key $key, using the
+	 * FE localization methods.
+	 *
+	 * In $this->conf['salutation'], a suffix to the key may be set (which may
+	 * be either 'formal' or 'informal'). If a corresponding key exists, the
+	 * formal/informal localized string is used instead.
+	 * If the formal/informal key doesn't exist, this function just uses the
+	 * regular string.
+	 *
+	 * Example: key = 'greeting', suffix = 'informal'. If the key
+	 * 'greeting_informal' exists, that string is used.
+	 * If it doesn't exist, this functions tries to use the string with the key
+	 * 'greeting'.
+	 *
+	 * @param	string		the local language key for which to
+	 * 						return the value, must not be empty
+	 *
+	 * @return	string		the requested local language key, might be empty
+	 */
+	private function translateInFrontEnd($key) {
 		$hasFoundATranslation = false;
 
 		$availableLanguages = $this->getAvailableLanguages();
@@ -125,10 +181,6 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 			$result = $key;
 		}
 
-		if ($useHtmlSpecialChars) {
-			$result = htmlspecialchars($result);
-		}
-
 		return $result;
 	}
 
@@ -136,10 +188,8 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 	 * Compiles a list of language keys for which localizations have been loaded.
 	 *
 	 * @return	array		a list of language keys (may be empty)
-	 *
-	 * @access	private
 	 */
-	function getAvailableLanguages() {
+	private function getAvailableLanguages() {
 		if ($this->availableLanguages === null) {
 			$this->availableLanguages = array();
 
@@ -174,10 +224,8 @@ class tx_seminars_salutationswitcher extends tslib_pibase {
 	 * get localizations in the preferred order of formality.
 	 *
 	 * @return	array		ordered list of suffixes from "", "_formal" and "_informal", will not be empty
-	 *
-	 * @access	private
 	 */
-	function getSuffixesToTry() {
+	private function getSuffixesToTry() {
 		if ($this->suffixesToTry === null) {
 			$this->suffixesToTry = array();
 

@@ -67,9 +67,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	/** list of the names of all markers (and subparts) of a template */
 	var $markerNames = '';
 
-	/** the back-end locallang object */
-	var $LANG;
-
 	/**
 	 * Retrieves the plugin template file set in $this->conf['templateFile'] (or
 	 * also via flexforms if TYPO3 mode is FE) and writes it to
@@ -647,39 +644,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 */
 	function createClassAttribute($className) {
 		return !empty($className) ? $this->pi_classParam($className) : '';
-	}
-
-	/**
-	 * Returns the localized label of the LOCAL_LANG key $key.
-	 * This method checks if we are in the FE or in the BE and then uses the
-	 * appropriate method.
-	 *
-	 * @param	string		the key from the LOCAL_LANG array for which to
-	 * 						return the value
-	 * @param	boolean		If true, the output label is passed through
-	 * 						htmlspecialchars().
-	 *
-	 * @return	string		the value from LOCAL_LANG, might be empty
-	 *
-	 * @access	protected
-	 */
-	function translate(
-		$key, $useHtmlSpecialChars = false
-	) {
-		$result = '';
-
-		if (is_object($this->LANG)) {
-			$result = $this->LANG->getLL($key, $useHtmlSpecialChars);
-		} elseif (is_array($this->LOCAL_LANG)) {
-			$result = parent::translate(
-				$key,
-				$useHtmlSpecialChars
-			);
-		} else {
-			$result = $key;
-		}
-
-		return $result;
 	}
 
 	/**

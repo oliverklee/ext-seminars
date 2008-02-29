@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1714] Fix: pi_getLL copied from oelib breaks BE localization of seminars in mod2
 - [#1627] Feature: Use the file with common constants from oelib
 - [#1094] Change: Add a function "setSubpart" and remove the direct accesses to $this->templateCache
 - [#1467] Feature: Allow setting categories in the FE editing, patch by John Boyd-Rainey
