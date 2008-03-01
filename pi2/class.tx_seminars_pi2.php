@@ -51,17 +51,16 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	var $configGetter = null;
 
 	/**
-	 * Displays the seminar manager HTML.
+	 * Creates a CSV export.
 	 *
-	 * @param	string		default content string, will be ignored
-	 * @param	array		TypoScript configuration for the plugin
+	 * @param	string		(unused)
+	 * @param	array		TypoScript configuration for the plugin, may be
+	 * 						empty
 	 *
-	 * @return	string		HTML for the plugin
-	 *
-	 * @access	public
+	 * @return	string		HTML for the plugin, might be empty
 	 */
-	function main($content, array $conf) {
-		$this->init($conf);
+	public function main($unused, array $configuration) {
+		$this->init($configuration);
 
 		switch ($this->piVars['table']) {
 			case SEMINARS_TABLE_SEMINARS:
@@ -82,16 +81,13 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/**
 	 * Initializes this object and its configuration getter.
 	 *
- 	 * @param	array		TypoScript configuration for the plugin, can be
+ 	 * @param	array		TypoScript configuration for the plugin, may be
  	 * 						empty
-	 *
-	 * @access	public
 	 */
-	function init(array $conf = array()) {
-		parent::init($conf);
+	public function init(array $configuration = array()) {
+		parent::init($configuration);
 
-		$this->configGetter
-			=& t3lib_div::makeInstance('tx_seminars_configgetter');
+		$this->configGetter = t3lib_div::makeInstance('tx_seminars_configgetter');
 		$this->configGetter->init();
 	}
 
@@ -107,10 +103,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		CSV list of registrations for the given seminar or
 	 * 						an error message in case of an error
-	 *
-	 * @access	protected
 	 */
-	function createAndOutputListOfRegistrations() {
+	public function createAndOutputListOfRegistrations() {
 		$eventUid = intval($this->piVars['seminar']);
 
 		if (tx_seminars_objectfromdb::recordExists(
@@ -146,10 +140,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * @return	string		CSV list of registrations for the given seminar or
 	 * 						an empty string if there is not event with the
 	 * 						provided UID
-	 *
-	 * @access	public
 	 */
-	function createListOfRegistrations($eventUid) {
+	public function createListOfRegistrations($eventUid) {
 		if (!tx_seminars_objectfromdb::recordExists(
 			$eventUid,
 			SEMINARS_TABLE_SEMINARS)
@@ -207,10 +199,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		the heading line for the list of registrations, will
 	 * 						not be empty
-	 *
-	 * @access	private
 	 */
-	function createRegistrationsHeading() {
+	private function createRegistrationsHeading() {
 		$headerLineWithoutWrapping
 			= $this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
 				.','
@@ -233,17 +223,15 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * set.
 	 *
 	 * @return	string		CSV list of events for the given page or an error
-	 						message in case of an error
-	 *
-	 * @access	protected
+	 *						message in case of an error
 	 */
-	function createAndOutputListOfEvents() {
+	public function createAndOutputListOfEvents() {
 		$pid = intval($this->piVars['pid']);
 
 		if ($pid > 0) {
 			if ($this->canAccessListOfEvents()) {
 				$this->setContentTypeForEventLists();
-				$result = $this->retrieveListOfEvents($pid);
+				$result = $this->createListOfEvents($pid);
 			} else {
 				// Access is denied.
 				header('Status: 403 Forbidden');
@@ -267,10 +255,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * 						records	should be exported, must be > 0
 	 *
 	 * @return	string		CSV export of the event records on that page
-	 *
-	 * @access	public
 	 */
-	function createListOfEvents($pid) {
+	public function createListOfEvents($pid) {
 		if ($pid <= 0) {
 			return '';
 		}
@@ -307,10 +293,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		header list, will not be empty if the CSV
 	 * 						export has been configured correctly
-	 *
-	 * @access	private
 	 */
-	function createEventsHeading() {
+	private function createEventsHeading() {
 		return '"'.str_replace(
 			',',
 			'","',
@@ -326,12 +310,15 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * the contents having all quotes escaped.
 	 *
 	 * @param	object		object that will deliver the data
-	 * @param	string		name of a function of the given object that expects a key as a parameter and returns the value for that key as a string
+	 * @param	string		name of a function of the given object that expects
+	 *						a key as a parameter and returns the value for that
+	 *						key as a string
 	 * @param	string		comma-separated list of keys to retrieve
 	 *
-	 * @return	array		the data for the keys provided in $keys (may be empty)
+	 * @return	array		the data for the keys provided in $keys
+	 *						(may be empty)
 	 */
-	function retrieveData(&$dataSupplier, $supplierFunction, $keys) {
+	private function retrieveData(&$dataSupplier, $supplierFunction, $keys) {
 		$result = array();
 
 		if (!empty($keys) && method_exists($dataSupplier, $supplierFunction)) {
@@ -361,10 +348,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * @param	integer		UID of the event record for which access should be checked; leave empty to use the event set via piVars
 	 *
 	 * @return	boolean		true if the list of registrations may be exported as CSV
-	 *
-	 * @access	protected
 	 */
-	function canAccessListOfRegistrations($eventUid = 0) {
+	public function canAccessListOfRegistrations($eventUid = 0) {
 		global $BE_USER;
 
 		$result = $this->configGetter->getConfValueBoolean('allowAccessToCsv');
@@ -415,11 +400,10 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * links), the corresponding access checks need to be added to this
 	 * function.
 	 *
-	 * @return	boolean		true if the list of registrations may be exported as CSV
-	 *
-	 * @access	protected
+	 * @return	boolean		true if the list of registrations may be exported as
+	 * 						CSV
 	 */
-	function canAccessListOfEvents() {
+	public function canAccessListOfEvents() {
 		global $BE_USER;
 
 		$result = $this->configGetter->getConfValueBoolean('allowAccessToCsv');
@@ -448,10 +432,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/**
 	 * Sets the HTTP header: the content type and filename (content disposition)
 	 * for registration lists.
-	 *
-	 * @access	protected
 	 */
-	function setContentTypeForRegistrationLists() {
+	private function setContentTypeForRegistrationLists() {
 		$this->setCsvContentType();
 		header('Content-disposition: attachment; filename='
 			.$this->configGetter->getConfValueString(
@@ -464,10 +446,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/**
 	 * Sets the HTTP header: the content type and filename (content disposition)
 	 * for event lists.
-	 *
-	 * @access	protected
 	 */
-	function setContentTypeForEventLists() {
+	private function setContentTypeForEventLists() {
 		$this->setCsvContentType();
 		header('Content-disposition: attachment; filename='
 			.$this->configGetter->getConfValueString('filenameForEventsCsv'),
@@ -477,10 +457,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 	/**
 	 * Sets the HTTP header: the content type for CSV.
-	 *
-	 * @access	private
 	 */
-	function setCsvContentType() {
+	private function setCsvContentType() {
 		// In addition to the CSV content type and the charset, announces that
 		// we provide a CSV header line.
 		header('Content-type: text/csv; header=present; charset='
@@ -494,10 +472,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * This function is intended for testing purposes only.
 	 *
 	 * @return	object		our config getter, might be null
-	 *
-	 * @access	public
 	 */
-	function getConfigGetter() {
+	public function getConfigGetter() {
 		return $this->configGetter;
 	}
 }

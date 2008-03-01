@@ -33,6 +33,7 @@ unset($MCONF);
 require_once('conf.php');
 require_once($BACK_PATH.'init.php');
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
+
 require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
 $LANG->includeLLFile('EXT:seminars/pi2/locallang.xml');
@@ -45,11 +46,9 @@ class tx_seminars_csv extends t3lib_SCbase {
 	 * Creates the CSV export content and outputs it directly on the page (in
 	 * this case, for download).
 	 *
-	 * @access public
 	 */
-	function printContent() {
-		$csvExporter =& t3lib_div::makeInstance('tx_seminars_pi2');
-		echo $csvExporter->main(null, null);
+	public function printContent() {
+		echo t3lib_div::makeInstance('tx_seminars_pi2')->main(null, array());
 	}
 }
 

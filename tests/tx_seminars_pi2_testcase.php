@@ -107,6 +107,26 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testMainCanExportOneEventUid() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'uid'
+		);
+
+		$this->fixture->piVars['table'] = SEMINARS_TABLE_SEMINARS;
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		// This will create a "Cannot modify header information - headers
+		// already sent by" warning because the called function sets a HTTP
+		// header. This is no error.
+		// The warning will go away once bug 1649 is fixed.
+		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
+		$this->assertEquals(
+			'"uid"'.CRLF
+				.'"'.((string) $this->eventUid).'"'.CRLF,
+			$this->fixture->main(null, array())
+		);
+	}
+
 	public function testCreateListOfEventsCanContainTwoEventUids() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
@@ -121,6 +141,30 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				.'"'.((string) $this->eventUid).'"'.CRLF
 				.'"'.((string) $secondEventUid).'"'.CRLF,
 			$this->fixture->createListOfEvents($this->pid)
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsCanContainTwoEventUids() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'uid'
+		);
+		$secondEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('pid' => $this->pid)
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		// This will create a "Cannot modify header information - headers
+		// already sent by" warning because the called function sets a HTTP
+		// header. This is no error.
+		// The warning will go away once bug 1649 is fixed.
+		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
+		$this->assertEquals(
+			'"uid"'.CRLF
+				.'"'.((string) $this->eventUid).'"'.CRLF
+				.'"'.((string) $secondEventUid).'"'.CRLF,
+			$this->fixture->createAndOutputListOfEvents()
 		);
 	}
 
@@ -169,6 +213,33 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testMainCanExportOneRegistrationUid() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $this->eventUid)
+		);
+
+		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		// This will create a "Cannot modify header information - headers
+		// already sent by" warning because the called function sets a HTTP
+		// header. This is no error.
+		// The warning will go away once bug 1649 is fixed.
+		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
+		$this->assertEquals(
+			'"","uid"'.CRLF
+				.'"'.((string) $registrationUid).'"'.CRLF,
+			$this->fixture->main(null, array())
+		);
+	}
+
 	public function testCreateListOfRegistrationsCanContainTwoRegistrationUids() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
@@ -190,6 +261,37 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				.'"'.((string) $firstRegistrationUid).'"'.CRLF
 				.'"'.((string) $secondRegistrationUid).'"'.CRLF,
 			$this->fixture->createListOfRegistrations($this->eventUid)
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsCanContainTwoRegistrationUids() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+		$firstRegistrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $this->eventUid)
+		);
+		$secondRegistrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $this->eventUid)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		// This will create a "Cannot modify header information - headers
+		// already sent by" warning because the called function sets a HTTP
+		// header. This is no error.
+		// The warning will go away once bug 1649 is fixed.
+		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
+		$this->assertEquals(
+			'"","uid"'.CRLF
+				.'"'.((string) $firstRegistrationUid).'"'.CRLF
+				.'"'.((string) $secondRegistrationUid).'"'.CRLF,
+			$this->fixture->createAndOutputListOfRegistrations()
 		);
 	}
 }
