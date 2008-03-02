@@ -428,7 +428,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
-					array('', 0)
+					array('', '')
 				),
 				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
 				'itemsProcFunc_config' => array(
