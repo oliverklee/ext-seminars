@@ -2681,7 +2681,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// define the additional where clause for the database query
 		$additionalWhere = 'tx_seminars_seminars.cancelled=0'
 			.$this->enableFields(SEMINARS_TABLE_SEMINARS)
-			.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!='.$this->recordTypeTopic
+			.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!='.SEMINARS_RECORD_TYPE_TOPIC
 			.' AND '.SEMINARS_TABLE_SEMINARS.'.begin_date>'.$now;
 
 		// query the database
