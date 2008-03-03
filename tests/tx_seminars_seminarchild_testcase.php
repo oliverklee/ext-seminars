@@ -1600,11 +1600,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$timeSlotsWithMarkers = $this->fixture->getTimeslotsAsArrayWithMarkers();
 		$this->assertEquals(
-			$timeSlotsWithMarkers[0]['###TIMESLOT_ROOM###'],
+			$timeSlotsWithMarkers[0]['room'],
 			'Room2'
 		);
 		$this->assertEquals(
-			$timeSlotsWithMarkers[1]['###TIMESLOT_ROOM###'],
+			$timeSlotsWithMarkers[1]['room'],
 			'Room1'
 		);
 	}

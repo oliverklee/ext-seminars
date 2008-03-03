@@ -4376,46 +4376,40 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return	array		an array of time slots or an empty array if there
 	 * 						are no time slots
 	 * 						the array contains the following elements:
-	 * 						- ###TIMESLOT_DATE### as key and the timeslot's
-	 * 						  begin date as value
-	 * 						- ###TIMESLOT_TIME### as key and the timeslot's time
+	 * 						- 'date' as key and the time slot's begin date as
+	 * 						  value
+	 * 						- 'time' as key and the time slot's time as value
+	 * 						- 'entry_date' as key and the time slot's entry date
 	 * 						  as value
-	 * 						- ###TIMESLOT_ENTRY_DATE### as key and the
-	 * 						  timeslot's entry date as value
-	 * 						- ###TIMESLOT_ROOM### as key and the timeslot's room
-	 * 						  as value
-	 * 						- ###TIMESLOT_PLACE### as key and the timeslot's
-	 * 						  place as value
-	 * 						- ###TIMESLOT_SPEAKERS### as key and the timeslot's
-	 * 						  speakers as value
-	 *
-	 * @access	public
+	 * 						- 'room' as key and the time slot's room as value
+	 * 						- 'place' as key and the time slot's place as value
+	 * 						- 'speakers' as key and the time slot's speakers as
+	 * 						  value
 	 */
-	function getTimeslotsAsArrayWithMarkers() {
+	public function getTimeSlotsAsArrayWithMarkers() {
 		$result = array();
 
-		$timeslotBagClassname = t3lib_div::makeInstanceClassname(
+		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(
 			'tx_seminars_timeslotbag'
 		);
-		$timeslotBag =& new $timeslotBagClassname(
+		$timeSlotBag = new $timeSlotBagClassname(
 			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid(),
 			'',
 			'',
 			SEMINARS_TABLE_TIME_SLOTS.'.begin_date ASC'
 		);
 
-		while ($timeslot =& $timeslotBag->getCurrent()) {
+		while ($timeSlot = $timeSlotBag->getCurrent()) {
 			$result[] = array(
-				'###TIMESLOT_DATE###' => $timeslot->getDate(),
-				'###TIMESLOT_TIME###' => $timeslot->getTime(),
-				'###TIMESLOT_ENTRY_DATE###' => $timeslot->getEntryDate(),
-				'###TIMESLOT_ROOM###' => $timeslot->getRoom(),
-				'###TIMESLOT_PLACE###' => $timeslot->getPlaceShort(),
-				'###TIMESLOT_SPEAKERS###' =>
-					$timeslot->getSpeakersShortCommaSeparated()
+				'date' => $timeSlot->getDate(),
+				'time' => $timeSlot->getTime(),
+				'entry_date' => $timeSlot->getEntryDate(),
+				'room' => $timeSlot->getRoom(),
+				'place' => $timeSlot->getPlaceShort(),
+				'speakers' => $timeSlot->getSpeakersShortCommaSeparated()
 			);
 
-			$timeslotBag->getNext();
+			$timeSlotBag->getNext();
 		}
 
 		return $result;

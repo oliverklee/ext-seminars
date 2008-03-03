@@ -1148,25 +1148,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
-			// XXX: When the adaption to oelib has taken place, the direct access
-			// to $this->templateCache should be removed and the methods provided
-			// by oelib should be used.
 			if ($this->seminar->hasTimeslots()) {
 				$this->hideSubparts('date,time', 'field_wrapper');
+				$timeSlotsOutput = '';
 
-				$timeslotsSubpart = $this->templateCache['SINGLE_TIMESLOT'];
-				$this->templateCache['SINGLE_TIMESLOT'] = '';
-
-				$timeslots = $this->seminar->getTimeslotsAsArrayWithMarkers();
-				foreach ($timeslots as $timeslot) {
-					$this->templateCache['SINGLE_TIMESLOT'] .=
-						$this->cObj->substituteMarkerArrayCached(
-							$timeslotsSubpart,
-							$timeslot
-						);
+				$timeSlots = $this->seminar->getTimeSlotsAsArrayWithMarkers();
+				foreach ($timeSlots as $timeSlot) {
+					foreach ($timeSlot as $key => $value) {
+						$this->setMarker($key, $value, 'timeslot');
+					}
+					$timeSlotsOutput .= $this->getSubpart('SINGLE_TIMESLOT');
 				}
+				$this->setSubpart('SINGLE_TIMESLOT', $timeSlotsOutput);
 			} else {
-				$this->readSubpartsToHide('timeslots', 'field_wrapper');
+				$this->hideSubparts('timeslots', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasSpeakers()) {
