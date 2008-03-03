@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1662] Change: Test the bag builder with an empty string for the source pages (with 0 and > 0 for recursion)
 - [#1626] Fix: MySQL error in countdown view
 - [#1656] Fix: Label "language" is not removed from single view if no language is defined
 - [#1666] Fix: CSV export of events is broken
