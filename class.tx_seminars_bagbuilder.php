@@ -39,7 +39,7 @@ require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_templatehelper.php')
 
 class tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
-	var $bagClassName = '';
+	protected $bagClassName = '';
 
 	/**
 	 * associative array with the WHERE clause parts (will be concatenated with

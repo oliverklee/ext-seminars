@@ -116,9 +116,9 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////////
-	// Test for limiting the bag to events in certain categories.
-	///////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain categories.
+	////////////////////////////////////////////////////////////////
 
 	public function testSkippingLimitToCategoryResultsInAllEvents() {
 		$this->testingFramework->createRecord(
@@ -451,9 +451,9 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////
-	// Test concerning canceled events.
-	/////////////////////////////////////
+	//////////////////////////////////////
+	// Tests concerning canceled events.
+	//////////////////////////////////////
 
 	public function testBuilderFindsCanceledEventsByDefault() {
 		$this->testingFramework->createRecord(
@@ -521,6 +521,840 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * validity checks
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFrameFailsWithEmptyKey() {
+		try {
+			$this->fixture->setTimeFrame('');
+		} catch (Exception $expected) {
+			return;
+		}
+
+		// Fails the test if the expected exception was not raised above.
+		$this->fail('The expected exception was not caught!');
+	}
+
+	public function testSetTimeFrameFailsWithInvalidKey() {
+		try {
+			$this->fixture->setTimeFrame('foo');
+		} catch (Exception $expected) {
+			return;
+		}
+
+		// Fails the test if the expected exception was not raised above.
+		$this->fail('The expected exception was not caught!');
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * past events
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFramePastFindsPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => time() - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('past');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastFindsOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('past');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastIgnoresCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_DAY,
+				'end_date' => time() + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('past');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastIgnoresUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK
+			)
+		);
+
+		$this->fixture->setTimeFrame('past');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastIgnoresUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('past');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastIgnoresEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('past');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * past and current events
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFramePastAndCurrentFindsPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => time() - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('pastAndCurrent');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastAndCurrentFindsOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('pastAndCurrent');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastAndCurrentFindsCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_DAY,
+				'end_date' => time() + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('pastAndCurrent');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastAndCurrentIgnoresUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK
+			)
+		);
+
+		$this->fixture->setTimeFrame('pastAndCurrent');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastAndCurrentIgnoresUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('pastAndCurrent');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFramePastAndCurrentIgnoresEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('pastAndCurrent');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * current events
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFrameCurrentIgnoresPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => time() - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('current');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentIgnoresOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('current');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentFindsCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_DAY,
+				'end_date' => time() + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('current');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentIgnoresUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK
+			)
+		);
+
+		$this->fixture->setTimeFrame('current');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentIgnoresUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('current');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentIgnoresEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('current');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * current and upcoming events
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFrameCurrentAndUpcomingIgnoresPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => time() - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('currentAndUpcoming');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentAndUpcomingIgnoresOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('currentAndUpcoming');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentAndUpcomingFindsCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_DAY,
+				'end_date' => time() + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('currentAndUpcoming');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentAndUpcomingFindsUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK
+			)
+		);
+
+		$this->fixture->setTimeFrame('currentAndUpcoming');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentAndUpcomingFindsUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('currentAndUpcoming');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameCurrentAndUpcomingFindsEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('currentAndUpcoming');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * upcoming events
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFrameUpcomingIgnoresPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => time() - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcoming');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameUpcomingIgnoresOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcoming');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameUpcomingIgnoresCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_DAY,
+				'end_date' => time() + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcoming');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameUpcomingFindsUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcoming');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameUpcomingFindsUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcoming');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameUpcomingFindsEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcoming');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * events for which the registration deadline is not over yet
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFrameDeadlineNotOverIgnoresPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => time() - ONE_DAY,
+				'deadline_registration' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameDeadlineNotOverIgnoresOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => 0,
+				'deadline_registration' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameDeadlineNotOverIgnoresCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_DAY,
+				'end_date' => time() + ONE_DAY,
+				'deadline_registration' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameDeadlineNotOverFindsUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK,
+				'deadline_registration' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameDeadlineNotOverFindsUpcomingEventsWithUpcomingDeadline() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + 2 * ONE_DAY,
+				'end_date' => time() + ONE_WEEK,
+				'deadline_registration' => time() + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameDeadlineNotOverIgnoresUpcomingEventsWithPassedDeadline() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK,
+				'deadline_registration' => time() - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameDeadlineNotOverFindsUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => 0,
+				'deadline_registration' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameDeadlineNotOverFindsEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0,
+				'deadline_registration' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('deadlineNotOver');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
+	// * all events
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFrameAllFindsPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => time() - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('all');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameAllFindsOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_WEEK,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('all');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameAllFindsCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() - ONE_DAY,
+				'end_date' => time() + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('all');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameAllFindsUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => time() + ONE_WEEK
+			)
+		);
+
+		$this->fixture->setTimeFrame('all');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameAllFindsUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => time() + ONE_DAY,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('all');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testSetTimeFrameAllFindsEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('all');
+
+		$this->assertEquals(
+			1,
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}

@@ -340,8 +340,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function getAdditionalQueryParameters() {
 		$result = '';
-		$now = $GLOBALS['SIM_EXEC_TIME'];
-		/** Prefix the column name with the table name so that the query also
+		/** Prefixes the column name with the table name so that the query also
 		 * works with multiple tables. */
 		$tablePrefix = SEMINARS_TABLE_SEMINARS.'.';
 
@@ -392,84 +391,26 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// Unsets the temporary seminar bag we used above.
 		unset($temporarySeminarBag);
 
-		// Work out from which time-frame we'll display the event list.
-		// We also need to deal with the case that an event has no end date set
-		// (ie. it is open-ended).
-		switch ($this->getConfValueString(
-			'timeframeInList',
-			's_template_special')
-		) {
-			case 'past':
-				// As past events, show the following:
-				// 1. Generally, only events that have a begin date set, AND:
-				// 2. If the event has an end date, does it lie in the past?, OR
-				// 3. If the event has *no* end date, does the *begin* date lie
-				//    in the past?
-				$result .= ' AND '.$tablePrefix.'begin_date!=0 AND (('
-					.$tablePrefix.'end_date!=0 AND '.$tablePrefix
-					.'end_date<='.$now.') OR ('.$tablePrefix.'end_date=0 AND '
-					.$tablePrefix.'begin_date<='.$now.'))';
-				break;
-			case 'pastAndCurrent':
-				// As past and current events, show the following:
-				// 1. Generally, only events that have a begin date set, AND
-				// 2. the begin date lies in the past.
-				// (So events without a begin date won't be listed here.)
-				$result .= ' AND '.$tablePrefix.'begin_date!=0 AND '
-					.$tablePrefix.'begin_date<='.$now;
-				break;
-			case 'current':
-				// As current events, show the following:
-				// 1. Events that have both a begin and end date, AND
-				// 2. The begin date lies in the past, AND
-				// 3. The end date lies in the future.
-				$result .= ' AND '.$tablePrefix.'begin_date!=0 AND '
-					.$tablePrefix.'begin_date<='.$now.' AND '.$tablePrefix
-					.'end_date!=0 AND '.$tablePrefix.'end_date>'.$now;
-				break;
-			case 'currentAndUpcoming':
-				// As current and upcoming events, show the following:
-				// 1. Events with an existing end date in the future, OR
-				// 2. Events without an end date, but with an existing begin date
-				//    in the future (open-ended events that have not started yet),
-				//    OR
-				// 3. Events that have no (begin) date set yet.
-				$result .= ' AND (('.$tablePrefix.'end_date!=0 AND '
-					.$tablePrefix.'end_date>'.$now.') OR ('.$tablePrefix
-					.'end_date=0 AND '.$tablePrefix.'begin_date>'.$now
-					.') OR (begin_date=0))';
-				break;
-			case 'upcoming':
-				// As upcoming events, show the following:
-				// 1. Events with an existing begin date in the future
-				//    (events that have not started yet), OR
-				// 3. Events that have no (begin) date set yet.
-				$result .= ' AND ('.$tablePrefix.'begin_date>'.$now.' OR '
-					.$tablePrefix.'begin_date=0)';
-				break;
-			case 'deadlineNotOver':
-				// As events for which the registration deadline is not over yet,
-				// show the following:
-				// 1. Events that have a deadline set that lies in the future, OR
-				// 2. Events that have *no* deadline set, but
-				//    with an existing begin date in the future
-				//    (events that have not started yet), OR
-				// 3. Events that have no (begin) date set yet.
-				$result .= ' AND (('.$tablePrefix.'deadline_registration!=0 AND '
-					.$tablePrefix.'deadline_registration>'.$now.') OR ('
-					.$tablePrefix.'deadline_registration=0 AND ('.$tablePrefix
-					.'begin_date>'.$now.' OR '.$tablePrefix.'begin_date=0)))';
-				break;
-			case 'all':
-			default:
-				// To show all events, we don't need any additional parameters.
-				break;
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		try {
+			$builder->setTimeFrame(
+				$this->getConfValueString(
+					'timeframeInList',
+					's_template_special'
+				)
+			);
+		} catch (Exception $exception) {
+			// Ignores the exception because the user will be warned of the
+			// problem by the configuration check.
 		}
 
-		// Check if canceled events should be hidden.
-		if ($this->getConfValueBoolean('hideCanceledEvents', 's_template_special')) {
-			$result .= ' AND '.$tablePrefix.'cancelled=0';
+		if (
+			$this->getConfValueBoolean('hideCanceledEvents', 's_template_special')
+		) {
+			$builder->ignoreCanceledEvents();
 		}
+
+		$result .= ' AND '.$builder->getWhereClause();
 
 		return $result;
 	}
