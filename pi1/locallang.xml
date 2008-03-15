@@ -22,6 +22,7 @@
 			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
 			<label index="seminars.pi_flexform.countdown">Countdown to the next event</label>
+			<label index="seminars.pi_flexform.category_list">Category List</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.detailPID">Page that contains the detailed view:</label>
@@ -49,6 +50,7 @@
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
+			<label index="seminars.pi_flexform.sortListViewByCategory">Sort the list view by category:</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
@@ -192,6 +194,9 @@
 			<label index="label_selector_searchbox">Search term</label>
 			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
+			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -435,6 +440,7 @@
 			<label index="seminars.pi_flexform.event_editor">Veranstaltungs-Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Veranstaltungen, die ich eingegeben habe</label>
 			<label index="seminars.pi_flexform.countdown">Countdown zur nächsten Veranstaltung</label>
+			<label index="seminars.pi_flexform.category_list">Kategorienliste</label>
 			<label index="seminars.pi_flexform.baseURL">Basis-URL dieser Typo3-Site, z.B. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Seite mit der Seminarliste:</label>
 			<label index="seminars.pi_flexform.detailPID">Seite mit der Detailansicht:</label>
@@ -462,6 +468,7 @@
 			<label index="seminars.pi_flexform.hideSearchForm">Suchformular in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Page-Browser in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Abgesagte Veranstaltungen in der Listenansicht nicht anzeigen:</label>
+			<label index="seminars.pi_flexform.sortListViewByCategory">Listenansicht nach Kategorien sortieren:</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Standard VIPs Benutzergruppe:</label>
 			<label index="seminars.pi_flexform.hideColumns">Versteckte Felder in Listenansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">&quot;Preis&quot; als Überschrift für den Standardpreis in der Listenansicht benutzen:</label>
@@ -605,6 +612,9 @@
 			<label index="label_selector_searchbox">Suchbegriff</label>
 			<label index="label_searching_hints_formal">Sie können die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setzen Sie den Filter bitte zurück.</label>
 			<label index="label_searching_hints_informal">Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setze den Filter bitte zurück.</label>
+			<label index="label_we_offer_events_in_categories_formal">Zurzeit können wir Ihnen Veranstaltungen aus den folgenden Kategorien anbieten:</label>
+			<label index="label_we_offer_events_in_categories_informal">Zurzeit können wir dir Veranstaltungen aus den folgenden Kategorien anbieten:</label>
+			<label index="label_no_categories">Momentan bieten wir keine in Kategorien eingeordneten Veranstaltungen an.</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
@@ -1633,6 +1643,7 @@
 			<label index="seminars.pi_flexform.event_editor" type="integer">243089187</label>
 			<label index="seminars.pi_flexform.my_entered_events" type="integer">100155450</label>
 			<label index="seminars.pi_flexform.countdown" type="integer">104673252</label>
+			<label index="seminars.pi_flexform.category_list" type="integer">68970858</label>
 			<label index="seminars.pi_flexform.baseURL" type="integer">34786539</label>
 			<label index="seminars.pi_flexform.listPID" type="integer">227592545</label>
 			<label index="seminars.pi_flexform.detailPID" type="integer">252951912</label>
@@ -1669,6 +1680,7 @@
 			<label index="seminars.pi_flexform.showSpeakerDetails" type="integer">55116366</label>
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">106305223</label>
+			<label index="seminars.pi_flexform.sortListViewByCategory" type="integer">19273259</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
 			<label index="seminars.pi_flexform.sheet_registration" type="integer">16354175</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
@@ -1803,6 +1815,9 @@
 			<label index="label_selector_searchbox" type="integer">151546043</label>
 			<label index="label_searching_hints_formal" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
+			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
+			<label index="label_no_categories" type="integer">133830972</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
@@ -2643,6 +2658,7 @@
 			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
 			<label index="seminars.pi_flexform.countdown">Countdown to the next event</label>
+			<label index="seminars.pi_flexform.category_list">Category List</label>
 			<label index="seminars.pi_flexform.baseURL">Base URL of this Typo3 site, e.g. http://www.mytypo3site.net/:</label>
 			<label index="seminars.pi_flexform.listPID">Page that contains the seminar list:</label>
 			<label index="seminars.pi_flexform.detailPID">Page that contains the detailed view:</label>
@@ -2670,6 +2686,7 @@
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
+			<label index="seminars.pi_flexform.sortListViewByCategory">Sort the list view by category:</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
@@ -2815,6 +2832,9 @@
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
+			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
+			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
