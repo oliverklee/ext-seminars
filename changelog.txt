@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1406] Feature: Add a switch to always sort the list view by category
 - [#1616] Change: Add a conflict with DBAL and mention this in the manual
 - [#1407] Feature: Allow filtering the list view by categories
 - [#1581] Feature: Allow to set time-frames for seminar bag builders

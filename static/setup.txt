@@ -266,6 +266,10 @@ plugin.tx_seminars_pi1 {
 	# whether canceled events should be hidden or not
 	hideCanceledEvents = 0
 
+	# whether the list view should always be sorted by category (before applying
+	# the normal sorting)
+	sortListViewByCategory = 0
+
 	# whether to use the label "Price" as column header for the standard price (instead of "Standard price")
 	generalPriceInList = 0
 

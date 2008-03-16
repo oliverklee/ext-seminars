@@ -411,6 +411,14 @@
 							</config>
 						</TCEforms>
 					</hideCanceledEvents>
+					<sortListViewByCategory>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sortListViewByCategory</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</sortListViewByCategory>
 					<generalPriceInList>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.generalPriceInList</label>

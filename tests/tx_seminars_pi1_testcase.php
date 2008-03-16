@@ -637,6 +637,285 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	///////////////////////////////////////////////////
+	// Tests concerning the sorting in the list view.
+	///////////////////////////////////////////////////
+
+	public function testListViewCanBeSortedByTitleAscending() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event B'
+			)
+		);
+
+		$this->fixture->piVars['sort'] = 'title:0';
+		$output = $this->fixture->main('', array());
+
+		$this->assertTrue(
+			strpos($output, 'Event A') < strpos($output, 'Event B')
+		);
+	}
+
+	public function testListViewCanBeSortedByTitleDescending() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event B'
+			)
+		);
+
+		$this->fixture->piVars['sort'] = 'title:1';
+		$output = $this->fixture->main('', array());
+
+		$this->assertTrue(
+			strpos($output, 'Event B') < strpos($output, 'Event A')
+		);
+	}
+
+	public function testListViewCanBeSortedByTitleAscendingWithinOneCategory() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid1, $categoryUid
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event B'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid2, $categoryUid
+		);
+
+		$this->fixture->setConfigurationValue('sortListViewByCategory', 1);
+		$this->fixture->piVars['sort'] = 'title:0';
+		$output = $this->fixture->main('', array());
+
+		$this->assertTrue(
+			strpos($output, 'Event A') < strpos($output, 'Event B')
+		);
+	}
+
+	public function testListViewCanBeSortedByTitleDescendingWithinOneCategory() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid1, $categoryUid
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event B'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid2, $categoryUid
+		);
+
+		$this->fixture->setConfigurationValue('sortListViewByCategory', 1);
+		$this->fixture->piVars['sort'] = 'title:1';
+		$output = $this->fixture->main('', array());
+
+		$this->assertTrue(
+			strpos($output, 'Event B') < strpos($output, 'Event A')
+		);
+	}
+
+	public function testListViewCategorySortingComesBeforeSortingByTitle() {
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'Category Y')
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid1, $categoryUid1
+		);
+
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'Category X')
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event B'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid2, $categoryUid2
+		);
+
+		$this->fixture->setConfigurationValue('sortListViewByCategory', 1);
+		$this->fixture->piVars['sort'] = 'title:0';
+		$output = $this->fixture->main('', array());
+
+		$this->assertTrue(
+			strpos($output, 'Event B') < strpos($output, 'Event A')
+		);
+	}
+
+	public function testListViewCategorySortingHidesRepeatedCategoryNames() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'Category X')
+		);
+
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid1, $categoryUid
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event B'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid2, $categoryUid
+		);
+
+		$this->fixture->setConfigurationValue('sortListViewByCategory', 1);
+		$this->fixture->piVars['sort'] = 'title:0';
+
+		$this->assertEquals(
+			1,
+			substr_count(
+				$this->fixture->main('', array()),
+				'Category X'
+			)
+		);
+	}
+
+	public function testListViewCategorySortingListsDifferentCategoryNames() {
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'Category Y')
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid1, $categoryUid1
+		);
+
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'Category X')
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				// the number of categories
+				'categories' => 1,
+				'title' => 'Event B'
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid2, $categoryUid2
+		);
+
+		$this->fixture->setConfigurationValue('sortListViewByCategory', 1);
+		$this->fixture->piVars['sort'] = 'title:0';
+		$output = $this->fixture->main('', array());
+
+		$this->assertContains(
+			'Category X',
+			$output
+		);
+		$this->assertContains(
+			'Category Y',
+			$output
+		);
+	}
 }
 
 ?>

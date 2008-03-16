@@ -59,8 +59,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** the registration which we want to list/show in the "my events" view */
 	var $registration = null;
 
+	/** the previous event's category (used for the list view) */
+	private $previousCategory = '';
+
 	/** the previous event's date (used for the list view) */
-	var $previousDate = '';
+	private $previousDate = '';
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	var $registrationManager = null;
@@ -87,7 +90,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * We cannot use the database table name constants here because default
 	 * values for member variable don't allow for compound expression.
 	 */
-	var $orderByList = array(
+	public $orderByList = array(
 		// The MIN gives us the first category if there are more than one.
 		// The clause before the OR gets the events made up of topics (type=1)
 		// and concrete dates (type=2).
@@ -955,10 +958,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$queryWhere .= $additionalQueryParameters;
 
-		$orderBy = '';
+		if ($this->getConfValueBoolean(
+			'sortListViewByCategory', 's_template_special'
+		)) {
+			$orderBy = $this->orderByList['category'].', ';
+		} else {
+			$orderBy = '';
+		}
 		if (isset($this->internal['orderBy'])
 			&& isset($this->orderByList[$this->internal['orderBy']])) {
-			$orderBy = $this->orderByList[$this->internal['orderBy']]
+			$orderBy .= $this->orderByList[$this->internal['orderBy']]
 				.($this->internal['descFlag'] ? ' DESC' : '');
 		}
 
@@ -990,6 +999,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			= $registrationOrSeminarBag->getObjectCountWithoutLimit();
 
 		$this->previousDate = '';
+		$this->previousCategory = '';
 
 		return $registrationOrSeminarBag;
 	}
@@ -1821,10 +1831,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
+			$listOfCategories = implode(', ', $this->seminar->getCategories());
+			if (($listOfCategories === $this->previousCategory)
+				&& $this->getConfValueBoolean(
+					'sortListViewByCategory',
+					's_template_special')
+			) {
+				$listOfCategories = '';
+			} else {
+				$this->previousCategory = $listOfCategories;
+			}
 			$this->setMarkerContent(
 				'category',
-				implode(',', $this->seminar->getCategories())
+				$listOfCategories
 			);
+
 			$this->setMarkerContent(
 				'title_link',
 				$this->seminar->getLinkedFieldValue($this, 'title')
