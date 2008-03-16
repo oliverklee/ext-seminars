@@ -104,6 +104,7 @@
 			<label index="label_price_general">Price</label>
 			<label index="label_select_price">Price:</label>
 			<label index="label_price">Price</label>
+			<label index="label_price_range">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_board_regular">Regular price including full board</label>
@@ -522,6 +523,7 @@
 			<label index="label_price_general">Preis</label>
 			<label index="label_select_price">Preis:</label>
 			<label index="label_price">Preis</label>
+			<label index="label_price_range">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
 			<label index="label_price_earlybird_regular">Frühbucherpreis</label>
 			<label index="label_price_board_regular">Standardpreis inklusive Vollpension</label>
@@ -1725,6 +1727,7 @@
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_select_price" type="integer">254546606</label>
 			<label index="label_price" type="integer">56627526</label>
+			<label index="label_price_range" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_earlybird_regular" type="integer">236870027</label>
 			<label index="label_price_board_regular" type="integer">122636477</label>
@@ -2740,6 +2743,7 @@
 			<label index="label_price_general">Price</label>
 			<label index="label_select_price">Price:</label>
 			<label index="label_price">Price</label>
+			<label index="label_price_range">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_board_regular">Regular price including full board</label>
