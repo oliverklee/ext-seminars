@@ -45,6 +45,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'static_info_tables' => '2.0.2-',
 		),
 		'conflicts' => array(
+			'dbal' => '',
 		),
 		'suggests' => array(
 			'date2cal' => '',
