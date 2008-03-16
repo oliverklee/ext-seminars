@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1407] Feature: Allow filtering the list view by categories
 - [#1581] Feature: Allow to set time-frames for seminar bag builders
 - [#1730] Change: Make the teaser field an RTE field
 - [#1662] Change: Test the bag builder with an empty string for the source pages (with 0 and > 0 for recursion)

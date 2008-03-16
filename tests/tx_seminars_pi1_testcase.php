@@ -501,6 +501,142 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->fixture->main('', array())
 		);
 	}
+
+
+	//////////////////////////////////////////////////////////
+	// Tests concerning the list view, filtered by category.
+	//////////////////////////////////////////////////////////
+
+	public function testListViewContainsEventsWithoutCategoryByDefault() {
+		$this->assertContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewContainsEventsWithCategoryByDefault() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithCategoryIgnoresEventsWithoutCategory() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->fixture->piVars['category'] = $categoryUid;
+
+		$this->assertNotContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithCategoryContainsEventsWithSelectedCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid
+		);
+		$this->fixture->piVars['category'] = $categoryUid;
+
+		$this->assertContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithCategoryIgnoresEventsWithNotSelectedCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid1
+		);
+
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->fixture->piVars['category'] = $categoryUid2;
+
+		$this->assertNotContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithCategoryContainsEventsWithSelectedAndOtherCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 2
+			)
+		);
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid1
+		);
+
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid2
+		);
+		$this->fixture->piVars['category'] = $categoryUid2;
+
+		$this->assertContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
 }
 
 ?>

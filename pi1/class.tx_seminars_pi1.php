@@ -410,6 +410,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$builder->ignoreCanceledEvents();
 		}
 
+		if (isset($this->piVars['category'])) {
+			$builder->limitToCategory(intval($this->piVars['category']));
+		}
+
 		$result .= ' AND '.$builder->getWhereClause();
 
 		return $result;
@@ -764,10 +768,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * creates a seminar bag or a registration bag (for the "my events" view),
 	 * but does not create any actual HTML output.
 	 *
-	 * @param	string		a string selecting the flavor of list view: either an empty string (for the default list view), the value from "what_to_display" or "other_dates"
-	 * @param	string		additional query parameters that will be appended to the WHERE clause
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
+	 * @param	string		additional query parameters that will be appended
+	 * 						to the WHERE clause
 	 *
-	 * @return	object		a seminar bag or a registration bag containing the seminars or registrations for the list view
+	 * @return	object		a seminar bag or a registration bag containing the
+	 * 						seminars or registrations for the list view
 	 *
 	 * @access	protected
 	 */
