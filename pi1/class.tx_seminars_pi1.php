@@ -1831,7 +1831,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
-			$listOfCategories = implode(', ', $this->seminar->getCategories());
+			$allCategories = $this->seminar->getCategories();
+			if ($this->whatToDisplay == 'seminar_list') {
+				$allCategoryLinks = array();
+				foreach ($allCategories as $uid => $title) {
+					$allCategoryLinks[]
+						= $this->createLinkToListViewLimitedByCategory(
+							$uid, $title
+						);
+				}
+				$listOfCategories = implode(', ', $allCategoryLinks);
+			} else {
+				$listOfCategories = implode(', ', $allCategories);
+			}
 			if (($listOfCategories === $this->previousCategory)
 				&& $this->getConfValueBoolean(
 					'sortListViewByCategory',
@@ -2916,6 +2928,32 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$this->setMarkerContent(
 			'options_'.$optionBoxName,
 			$this->substituteMarkerArrayCached('OPTIONS_BOX')
+		);
+	}
+
+	/**
+	 * Creates a hyperlink with the title $title to the current list view,
+	 * limited to the category provided by the parameter $categoryUid.
+	 *
+	 * @param	integer		UID of the category to which the list view should
+	 * 						be limited, must be > 0
+	 * @param	string		title of the link, must not be empty
+	 *
+	 * @return	string		link to the list view limited to the given
+	 * 						category or an empty string if there is an error
+	 */
+	private function createLinkToListViewLimitedByCategory($categoryUid, $title) {
+		if ($categoryUid <= 0) {
+			throw new Exception('$categoryUid must be > 0.');
+		}
+		if ($title == '') {
+			throw new Exception('$title must not be empty.');
+		}
+
+		return $this->cObj->getTypoLink(
+			$title,
+			$this->getConfValueInteger('listPID'),
+			array('tx_seminars_pi1[category]' => $categoryUid)
 		);
 	}
 }

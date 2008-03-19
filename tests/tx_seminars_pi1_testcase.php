@@ -525,7 +525,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_CATEGORIES_MM,
@@ -540,7 +541,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithCategoryIgnoresEventsWithoutCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
 		);
 		$this->fixture->piVars['category'] = $categoryUid;
 
@@ -561,7 +563,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_CATEGORIES_MM,
@@ -586,7 +589,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_CATEGORIES_MM,
@@ -594,7 +598,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'another category')
 		);
 		$this->fixture->piVars['category'] = $categoryUid2;
 
@@ -615,7 +620,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_CATEGORIES_MM,
@@ -623,7 +629,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'another category')
 		);
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_CATEGORIES_MM,
@@ -692,7 +699,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanBeSortedByTitleAscendingWithinOneCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
 		);
 
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -734,7 +742,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanBeSortedByTitleDescendingWithinOneCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
 		);
 
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -914,6 +923,68 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'Category Y',
 			$output
+		);
+	}
+
+
+	//////////////////////////////////////////////////////////
+	// Tests concerning the category links in the list view.
+	//////////////////////////////////////////////////////////
+
+	public function testCategoryIsLinkedToTheFilteredListView() {
+		$frontEndPageUid = $this->testingFramework->createFrontEndPage();
+		$this->fixture->setConfigurationValue('listPID', $frontEndPageUid);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'tx_seminars_pi1[category]='.$categoryUid,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testCategoryIsNotLinkedFromSpecializedListView() {
+		$frontEndPageUid = $this->testingFramework->createFrontEndPage();
+		$this->fixture->setConfigurationValue('listPID', $frontEndPageUid);
+		$this->fixture->setConfigurationValue('what_to_display', 'events_next_day');
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid
+		);
+
+		$this->assertNotContains(
+			'tx_seminars_pi1[category]='.$categoryUid,
+			$this->fixture->main('', array())
 		);
 	}
 }

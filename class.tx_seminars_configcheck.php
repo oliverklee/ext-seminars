@@ -390,6 +390,12 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * This check isn't actually used. It is merely needed for the unit tests.
+	 */
+	protected function check_tx_seminars_pi1_events_next_day() {
+	}
+
+	/**
 	 * Checks the configuration related to thank-you e-mails.
 	 *
 	 * @access	private
