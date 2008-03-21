@@ -261,6 +261,32 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setNumberOfCategories($number) {
 		$this->setRecordPropertyInteger('categories', $number);
 	}
+
+	/**
+	 * Adds an organizer to this event.
+	 *
+	 * @param	integer		the UID of the organizer to add, must not be 0
+	 */
+	public function addOrganizer($uid) {
+		if ($uid == 0) {
+			throw new Exception('UID must not be 0.');
+		}
+
+		$organizers = t3lib_div::trimExplode(
+			',',
+			$this->getOrganizersUids(),
+			1
+		);
+
+		if (!in_array($uid, $organizers)) {
+			$organizers[] = $uid;
+		}
+
+		$this->setRecordPropertyString(
+			'organizers',
+			implode(',', $organizers)
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

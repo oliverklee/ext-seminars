@@ -208,6 +208,24 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Inserts a organizer record into the database and creates a relation to it
+	 * from the fixture.
+	 *
+	 * @param	array		data of the organizer to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be > 0
+	 */
+	private function addOrganizerRelation(array $organizerData = array()) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, $organizerData
+		);
+
+		$this->fixture->addOrganizer($uid);
+
+		return $uid;
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -470,6 +488,40 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				SEMINARS_TABLE_ORGANIZING_PARTNERS_MM,
 				'uid_local='.$this->fixture->getUid()
 			)
+		);
+	}
+
+	public function testAddOrganizerRelationReturnsUid() {
+		$uid = $this->addOrganizerRelation(array());
+
+		$this->assertTrue(
+			$uid > 0
+		);
+	}
+
+	public function testAddOrganizerRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addOrganizerRelation(array()),
+			$this->addOrganizerRelation(array())
+		);
+	}
+
+	public function testAddOrganizerRelationIncreasesTheNumberOfOrganizers() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfOrganizers()
+		);
+
+		$this->addOrganizerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfOrganizers()
+		);
+
+		$this->addOrganizerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfOrganizers()
 		);
 	}
 
@@ -1606,6 +1658,235 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			$timeSlotsWithMarkers[1]['room'],
 			'Room1'
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests regarding the organizers.
+	///////////////////////////////////////////////////////////
+
+	public function testHasOrganizersReturnsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasOrganizers()
+		);
+	}
+
+	public function testCanHaveOneOrganizer() {
+		$this->addOrganizerRelation(array());
+
+		$this->assertTrue(
+			$this->fixture->hasOrganizers()
+		);
+	}
+
+	public function testGetNumberOfOrganizersWithNoOrganizerReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfOrganizers()
+		);
+	}
+
+	public function testGetNumberOfOrganizersWithSingleOrganizerReturnsOne() {
+		$this->addOrganizerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfOrganizers()
+		);
+	}
+
+	public function testGetNumberOfOrganizersWithMultipleOrganizersReturnsTwo() {
+		$this->addOrganizerRelation(array());
+		$this->addOrganizerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfOrganizers()
+		);
+	}
+
+	public function testGetOrganizersRawWithNoOrganizersReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getOrganizersRaw()
+		);
+	}
+
+	public function testGetOrganizersRawWithSingleOrganizerWithoutHomepageReturnsSingleOrganizer() {
+		$organizer = array(
+			'title' => 'test organizer 1',
+			'homepage' => ''
+		);
+		$this->addOrganizerRelation($organizer);
+		$this->assertEquals(
+			$organizer['title'],
+			$this->fixture->getOrganizersRaw()
+		);
+	}
+
+	public function testGetOrganizersRawWithSingleOrganizerWithHomepageReturnsSingleOrganizerWithHomepage() {
+		$organizer = array(
+			'title' => 'test organizer 1',
+			'homepage' => 'test homepage 1'
+		);
+		$this->addOrganizerRelation($organizer);
+		$this->assertEquals(
+			$organizer['title'].', '.$organizer['homepage'],
+			$this->fixture->getOrganizersRaw()
+		);
+	}
+
+	public function testGetOrganizersRawWithMultipleOrganizersWithoutHomepageReturnsTwoOrganizers() {
+		$firstOrganizer = array(
+			'title' => 'test organizer 1',
+			'homepage' => ''
+		);
+		$secondOrganizer = array(
+			'title' => 'test organizer 2',
+			'homepage' => ''
+		);
+		$this->addOrganizerRelation($firstOrganizer);
+		$this->addOrganizerRelation($secondOrganizer);
+		$this->assertEquals(
+			$firstOrganizer['title'].CRLF.$secondOrganizer['title'],
+			$this->fixture->getOrganizersRaw()
+		);
+	}
+
+	public function testGetOrganizersRawWithMultipleOrganizersWithHomepageReturnsTwoOrganizersWithHomepage() {
+		$firstOrganizer = array(
+			'title' => 'test organizer 1',
+			'homepage' => 'test homepage 1'
+		);
+		$secondOrganizer = array(
+			'title' => 'test organizer 2',
+			'homepage' => 'test homepage 2'
+		);
+		$this->addOrganizerRelation($firstOrganizer);
+		$this->addOrganizerRelation($secondOrganizer);
+		$this->assertEquals(
+			$firstOrganizer['title'].', '.$firstOrganizer['homepage'].CRLF
+			.$secondOrganizer['title'].', '.$secondOrganizer['homepage'],
+			$this->fixture->getOrganizersRaw()
+		);
+	}
+
+	public function testGetOrganizersNameAndEmailWithNoOrganizersReturnsEmptyString() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getOrganizersNameAndEmail()
+		);
+	}
+
+	public function testGetOrganizersNameAndEmailWithSingleOrganizerReturnsSingleOrganizer() {
+		$organizer = array(
+			'title' => 'test organizer',
+			'email' => 'test@organizer.org'
+		);
+		$this->addOrganizerRelation($organizer);
+		$this->assertEquals(
+			array('"'.$organizer['title'].'" <'.$organizer['email'].'>'),
+			$this->fixture->getOrganizersNameAndEmail()
+		);
+	}
+
+	public function testGetOrganizersNameAndEmailWithMultipleOrganizersReturnsTwoOrganizers() {
+		$firstOrganizer = array(
+			'title' => 'test organizer 1',
+			'email' => 'test1@organizer.org'
+		);
+		$secondOrganizer = array(
+			'title' => 'test organizer 2',
+			'email' => 'test2@organizer.org'
+		);
+		$this->addOrganizerRelation($firstOrganizer);
+		$this->addOrganizerRelation($secondOrganizer);
+		$this->assertEquals(
+			array(
+				'"'.$firstOrganizer['title'].'" <'.$firstOrganizer['email'].'>',
+				'"'.$secondOrganizer['title'].'" <'.$secondOrganizer['email'].'>'
+			),
+			$this->fixture->getOrganizersNameAndEmail()
+		);
+	}
+
+	public function testGetOrganizersEmailWithNoOrganizersReturnsEmptyString() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getOrganizersEmail()
+		);
+	}
+
+	public function testGetOrganizersEmailWithSingleOrganizerReturnsSingleOrganizer() {
+		$organizer = array('email' => 'test@organizer.org');
+		$this->addOrganizerRelation($organizer);
+		$this->assertEquals(
+			array($organizer['email']),
+			$this->fixture->getOrganizersEmail()
+		);
+	}
+
+	public function testGetOrganizersEmailWithMultipleOrganizersReturnsTwoOrganizers() {
+		$firstOrganizer = array('email' => 'test1@organizer.org');
+		$secondOrganizer = array('email' => 'test2@organizer.org');
+		$this->addOrganizerRelation($firstOrganizer);
+		$this->addOrganizerRelation($secondOrganizer);
+		$this->assertEquals(
+			array($firstOrganizer['email'], $secondOrganizer['email']),
+			$this->fixture->getOrganizersEmail()
+		);
+	}
+
+	public function testGetOrganizersFootersWithNoOrganizersReturnsEmptyString() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getOrganizersFooter()
+		);
+	}
+
+	public function testGetOrganizersFootersWithSingleOrganizerReturnsSingleOrganizer() {
+		$organizer = array('email_footer' => 'test email footer');
+		$this->addOrganizerRelation($organizer);
+		$this->assertEquals(
+			array($organizer['email_footer']),
+			$this->fixture->getOrganizersFooter()
+		);
+	}
+
+	public function testGetOrganizersFootersWithMultipleOrganizersReturnsTwoOrganizers() {
+		$firstOrganizer = array('email_footer' => 'test email footer');
+		$secondOrganizer = array('email_footer' => 'test email footer');
+		$this->addOrganizerRelation($firstOrganizer);
+		$this->addOrganizerRelation($secondOrganizer);
+		$this->assertEquals(
+			array(
+				$firstOrganizer['email_footer'],
+				$secondOrganizer['email_footer']
+			),
+			$this->fixture->getOrganizersFooter()
+		);
+	}
+
+	public function testGetAttendancesPidWithNoOrganizerReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getAttendancesPid()
+		);
+	}
+
+	public function testGetAttendancesPidWithSingleOrganizerReturnsPid() {
+		$this->addOrganizerRelation(array('attendances_pid' => 99));
+		$this->assertEquals(
+			99,
+			$this->fixture->getAttendancesPid()
+		);
+	}
+
+	public function testGetAttendancesPidWithMultipleOrganizerReturnsFirstPid() {
+		$this->addOrganizerRelation(array('attendances_pid' => 99));
+		$this->addOrganizerRelation(array('attendances_pid' => 66));
+		$this->assertEquals(
+			99,
+			$this->fixture->getAttendancesPid()
 		);
 	}
 }

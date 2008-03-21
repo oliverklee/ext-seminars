@@ -38,6 +38,8 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslotbag.ph
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_category.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -2336,43 +2338,52 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Creates an organizerbag object and returns it.
+	 * Throws an exception if there are no organizers related to this event.
+	 *
+	 * @return	tx_seminars_organizerbag	an organizerbag object
+	 */
+	private function getOrganizerBag() {
+		if (!$this->hasOrganizers()) {
+			throw new Exception('There are no organizers related to this event.');
+		}
+
+		$organizerBagClassName = t3lib_div::makeInstanceClassName(
+			'tx_seminars_organizerbag'
+		);
+
+		return new $organizerBagClassName(
+			'uid IN ('.$this->getRecordPropertyString('organizers').')'
+		);
+	}
+
+	/**
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if
 	 * they have any).
 	 *
-	 * @param	object		a tslib_pibase object for a live page
+	 * @param	tslib_pibase	a tslib_pibase object for a live page
 	 *
-	 * @return	string		the hyperlinked names of our organizers
-	 *
-	 * @access	public
+	 * @return	string			the hyperlinked names of our organizers
 	 */
-	function getOrganizers(tslib_pibase $plugin) {
-		$result = '';
-
-		if ($this->hasOrganizers()) {
-			$organizerUids = explode(
-				',',
-				$this->getRecordPropertyString('organizers')
-			);
-			foreach ($organizerUids as $currentOrganizerUid) {
-				$currentOrganizerData =& $this->retrieveOrganizer(
-					$currentOrganizerUid
-				);
-
-				if ($currentOrganizerData) {
-					if (!empty($result)) {
-						$result .= ', ';
-					}
-					$result .= $plugin->cObj->getTypoLink(
-						$currentOrganizerData['title'],
-						$currentOrganizerData['homepage'],
-						array(),
-						$plugin->getConfValueString('externalLinkTarget')
-					);
-				}
-			}
+	public function getOrganizers(tslib_pibase $plugin) {
+		if (!$this->hasOrganizers()) {
+			return '';
 		}
 
-		return $result;
+		$result = array();
+		$organizerBag =& $this->getOrganizerBag();
+
+		while ($organizer =& $organizerBag->getCurrent()) {
+			$result[] = $plugin->cObj->getTypoLink(
+				$organizer->getTitle(),
+				$organizer->getHomepage(),
+				array(),
+				$plugin->getConfValueString('externalLinkTarget')
+			);
+			$organizerBag->getNext();
+		}
+
+		return implode(', ', $result);
 	}
 
 	/**
@@ -2380,35 +2391,22 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	string		names and homepages of our organizers or an
 	 * 						empty string if there are no organizers
-	 *
-	 * @access	private
 	 */
-	function getOrganizersRaw() {
-		$result = '';
-
-		if ($this->hasOrganizers()) {
-			$organizerUids = explode(
-				',',
-				$this->getRecordPropertyString('organizers')
-			);
-			foreach ($organizerUids as $currentOrganizerUid) {
-				$currentOrganizerData =& $this->retrieveOrganizer(
-					$currentOrganizerUid
-				);
-
-				if ($currentOrganizerData) {
-					if (!empty($result)) {
-						$result .= CRLF;
-					}
-					$result .= $currentOrganizerData['title'];
-					if (!empty($currentOrganizerData['homepage'])) {
-						$result .= ', '.$currentOrganizerData['homepage'];
-					}
-				}
-			}
+	public function getOrganizersRaw() {
+		if (!$this->hasOrganizers()) {
+			return '';
 		}
 
-		return $result;
+		$result = array();
+		$organizerBag =& $this->getOrganizerBag();
+
+		while ($organizer =& $organizerBag->getCurrent()) {
+			$result[] = $organizer->getTitle()
+				.($organizer->hasHomepage() ? ', '.$organizer->getHomepage() : '');
+			$organizerBag->getNext();
+		}
+
+		return implode(CRLF, $result);
 	}
 
 	/**
@@ -2418,27 +2416,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * The name is not encoded yet.
 	 *
 	 * @return	array		the organizers' names and e-mail addresses
-	 *
-	 * @access	public
 	 */
-	function getOrganizersNameAndEmail() {
+	public function getOrganizersNameAndEmail() {
+		if (!$this->hasOrganizers()) {
+			return array();
+		}
+
 		$result = array();
+		$organizerBag =& $this->getOrganizerBag();
 
-		if ($this->hasOrganizers()) {
-			$organizerUids = explode(
-				',',
-				$this->getRecordPropertyString('organizers')
-			);
-			foreach ($organizerUids as $currentOrganizerUid) {
-				$currentOrganizerData =& $this->retrieveOrganizer(
-					$currentOrganizerUid
-				);
-
-				if ($currentOrganizerData) {
-					$result[] = '"'.$currentOrganizerData['title']
-						.'" <'.$currentOrganizerData['email'].'>';
-				}
-			}
+		while ($organizer =& $organizerBag->getCurrent()) {
+			$result[] = '"'.$organizer->getTitle().'" <'.$organizer->getEmail().'>';
+			$organizerBag->getNext();
 		}
 
 		return $result;
@@ -2449,26 +2438,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * "john.doe@example.com".
 	 *
 	 * @return	array		the organizers' e-mail addresses
-	 *
-	 * @access	public
 	 */
-	function getOrganizersEmail() {
+	public function getOrganizersEmail() {
+		if (!$this->hasOrganizers()) {
+			return array();
+		}
+
 		$result = array();
+		$organizerBag =& $this->getOrganizerBag();
 
-		if ($this->hasOrganizers()) {
-			$organizerUids = explode(
-				',',
-				$this->getRecordPropertyString('organizers')
-			);
-			foreach ($organizerUids as $currentOrganizerUid) {
-				$currentOrganizerData =& $this->retrieveOrganizer(
-					$currentOrganizerUid
-				);
-
-				if ($currentOrganizerData) {
-					$result[] = $currentOrganizerData['email'];
-				}
-			}
+		while ($organizer =& $organizerBag->getCurrent()) {
+			$result[] = $organizer->getEmail();
+			$organizerBag->getNext();
 		}
 
 		return $result;
@@ -2478,64 +2459,32 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our organizers' e-mail footers.
 	 *
 	 * @return	array		the organizers' e-mail footers.
-	 *
-	 * @access	public
 	 */
-	function getOrganizersFooter() {
+	public function getOrganizersFooter() {
+		if (!$this->hasOrganizers()) {
+			return array();
+		}
+
 		$result = array();
+		$organizerBag =& $this->getOrganizerBag();
 
-		if ($this->hasOrganizers()) {
-			$organizerUids = explode(
-				',',
-				$this->getRecordPropertyString('organizers')
-			);
-			foreach ($organizerUids as $currentOrganizerUid) {
-				$currentOrganizerData =& $this->retrieveOrganizer(
-					$currentOrganizerUid
-				);
-
-				if ($currentOrganizerData) {
-					$result[] = $currentOrganizerData['email_footer'];
-				}
-			}
+		while ($organizer =& $organizerBag->getCurrent()) {
+			$result[] = $organizer->getEmailFooter();
+			$organizerBag->getNext();
 		}
 
 		return $result;
 	}
 
 	/**
-	 * Retrieves an organizer from the DB and caches it in this->organizersCache.
-	 * If that organizer already is in the cache, it is taken from there instead.
+	 * Gets the UIDs of our organizers as a comma-separated list.
+	 * Returns an empty string if this event doesn't have any organizers.
 	 *
-	 * In case of error, $this->organizersCache will stay untouched.
-	 *
-	 * @param	integer		UID of the organizer to retrieve
-	 *
-	 * @return	array		a reference to the organizer data (will be null if
-	 * 						an error has occured)
-	 *
-	 * @access	private
+	 * @return	string		our organizers as plain text (or '' if there are no
+	 * 						organizers set)
 	 */
-	 function &retrieveOrganizer($organizerUid) {
-	 	$result = false;
-
-	 	if (isset($this->organizersCache[$organizerUid])) {
-	 		$result = $this->organizersCache[$organizerUid];
-	 	} else {
-		 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				SEMINARS_TABLE_ORGANIZERS,
-				'uid='.intval($organizerUid)
-					.$this->enableFields(SEMINARS_TABLE_ORGANIZERS)
-			);
-
-			if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-				$result = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				$this->organizersCache[$organizerUid] =& $result;
-			}
-		}
-
-		return $result;
+	public function getOrganizersUIDs() {
+		return $this->getRecordPropertyString('organizers');
 	}
 
 	/**
@@ -2558,45 +2507,59 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns an empty string if this event has no organizing partners or
 	 * something went wrong with the database query.
 	 *
-	 * @param	object		a tslib_pibase object for a live page
+	 * @param	tslib_pibase	a tslib_pibase object for a live page
 	 *
-	 * @return	string		the hyperlinked names of our organizing partners, or
-	 * 						an empty string
-	 *
-	 * @access	public
+	 * @return	string			the hyperlinked names of our organizing partners,
+	 * 							or an empty string
 	 */
-	function getOrganizingPartners(tslib_pibase $plugin) {
+	public function getOrganizingPartners(tslib_pibase $plugin) {
 		if (!$this->hasOrganizingPartners()) {
 			return '';
 		}
+		$result = array();
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			SEMINARS_TABLE_ORGANIZERS.'.title, '
-				.SEMINARS_TABLE_ORGANIZERS.'.homepage',
-			SEMINARS_TABLE_ORGANIZERS.', '
-				.SEMINARS_TABLE_ORGANIZING_PARTNERS_MM,
+		$organizerBagClassName = t3lib_div::makeInstanceClassName(
+			'tx_seminars_organizerbag'
+		);
+		$organizerBag = new $organizerBagClassName(
 			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM.'.uid_local='
 				.$this->getUid().' AND '
 				.SEMINARS_TABLE_ORGANIZING_PARTNERS_MM.'.uid_foreign='
-				.SEMINARS_TABLE_ORGANIZERS.'.uid'
+				.SEMINARS_TABLE_ORGANIZERS.'.uid',
+			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM
 		);
 
-		if (!$dbResult) {
-			return '';
-		}
-
-		$organizingPartners = array();
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$organizingPartners[] = $plugin->cObj->getTypoLink(
-				$row['title'],
-				$row['homepage'],
+		while ($organizer =& $organizerBag->getCurrent()) {
+			$result[] = $plugin->cObj->getTypoLink(
+				$organizer->getTitle(),
+				$organizer->getHomepage(),
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
 			);
+			$organizerBag->getNext();
 		}
 
-		return implode(', ', $organizingPartners);
+		return implode(', ', $result);
 	}
+
+	/**
+	 * Gets the number of organizers.
+	 *
+	 * @return	integer		the number of organizers, might 0
+	 */
+	public function getNumberOfOrganizers() {
+		if (!$this->hasOrganizers()) {
+			return 0;
+		}
+
+		$organizers = explode(
+			',',
+			$this->getOrganizersUids()
+		);
+
+		return count($organizers);
+	}
+
 
 	/**
 	 * Checks whether we have any organizing partners set.
@@ -3578,18 +3541,21 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @access	public
 	 */
 	function getAttendancesPid() {
-		$result = 0;
-
-		if ($this->hasOrganizers()) {
-			$organizerUids = explode(
-				',',
-				$this->getRecordPropertyString('organizers')
-			);
-			$firstOrganizerData =& $this->retrieveOrganizer($organizerUids[0]);
-			$result = $firstOrganizerData['attendances_pid'];
+		if (!$this->hasOrganizers()) {
+			return 0;
 		}
 
-		return $result;
+		$organizerUids = explode(
+			',',
+			$this->getRecordPropertyString('organizers')
+		);
+
+		$organizerClassName = t3lib_div::makeInstanceClassName(
+			'tx_seminars_organizer'
+		);
+		$firstOrganizer = new $organizerClassName($organizerUids[0]);
+
+		return $firstOrganizer->getAttendancesPid();
 	}
 
 	/**

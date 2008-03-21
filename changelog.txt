@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#537] Change: Use the organizerbag for iterating over organizers
 - [#1569] Feature: Link the categories in the list view to the list view page, filtered by the category
 - [#1406] Feature: Add a switch to always sort the list view by category
 - [#1616] Change: Add a conflict with DBAL and mention this in the manual

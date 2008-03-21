@@ -42,21 +42,27 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	 * Gets our homepage.
 	 *
 	 * @return	string		our homepage (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getHomepage() {
+	public function getHomepage() {
 		return $this->getRecordPropertyString('homepage');
+	}
+
+	/**
+	 * Returns true if this organizer has a homepage set, false otherwise.
+	 *
+	 * @return	boolean		true if this organizer has a homepage set, false
+	 * 						otherwise
+	 */
+	public function hasHomepage() {
+		return $this->hasRecordPropertyString('homepage');
 	}
 
 	/**
 	 * Gets our e-mail address.
 	 *
 	 * @return	string		our e-mail address (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getEmail() {
+	public function getEmail() {
 		return $this->getRecordPropertyString('email');
 	}
 
@@ -64,11 +70,19 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	 * Gets our e-mail footer.
 	 *
 	 * @return	string		our e-mail footer (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getEmailFooter() {
+	public function getEmailFooter() {
 		return $this->getRecordPropertyString('email_footer');
+	}
+
+	/**
+	 * Gets our attendances PID, will be 0 if there is no attendances PID set.
+	 *
+	 * @return	integer		our attendances PID or 0 if there is no attendances
+	 * 						PID set
+	 */
+	public function getAttendancesPid() {
+		return $this->getRecordPropertyInteger('attendances_pid');
 	}
 }
 

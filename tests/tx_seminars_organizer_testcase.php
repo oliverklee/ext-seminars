@@ -58,7 +58,8 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 				'title' => 'Test organizer',
 				'homepage' => 'http://www.test.com/',
 				'email' => 'maximal-foo@test.com',
-				'email_footer' => 'line 1'.LF.'line 2'
+				'email_footer' => 'line 1'.LF.'line 2',
+				'attendances_pid' => 99
 			)
 		);
 		$this->maximalFixture = new tx_seminars_organizer($maximalFixtureUid);
@@ -85,6 +86,18 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////////////
 	// Tests for getting the organizer attributes.
 	////////////////////////////////////////////////
+
+	public function testHasHomepageWithEmptyHomepageReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasHomepage()
+		);
+	}
+
+	public function testHasHomepageWithHomepageReturnsTrue() {
+		$this->assertTrue(
+			$this->maximalFixture->hasHomepage()
+		);
+	}
 
 	public function testGetHomepage() {
 		$this->assertEquals(
@@ -116,6 +129,20 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'line 1'.LF.'line 2',
 			$this->maximalFixture->getEmailFooter()
+		);
+	}
+
+	public function testGetAttendancesPidWithNoAttendancesPidReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getAttendancesPid()
+		);
+	}
+
+	public function testGetAttendancesPidWithAttendancesPidReturnsAttendancesPid() {
+		$this->assertEquals(
+			99,
+			$this->maximalFixture->getAttendancesPid()
 		);
 	}
 }
