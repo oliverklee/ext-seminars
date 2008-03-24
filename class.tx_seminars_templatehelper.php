@@ -34,11 +34,6 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-// If we are in the back end, we have to include typo3/template.php once.
-if (TYPO3_MODE == 'BE') {
-    require_once(PATH_typo3.'template.php');
-}
-
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
 define('LF', chr(10));
