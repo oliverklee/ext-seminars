@@ -42,37 +42,69 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our organization.
 	 *
 	 * @return	string		our organization (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getOrganization() {
+	public function getOrganization() {
 		return $this->getRecordPropertyString('organization');
+	}
+
+	/**
+	 * Returns true if this speaker has an organization, false otherwise.
+	 *
+	 * @return	boolean		true if this speaker has an organization, false
+	 * 						otherwise
+	 */
+	public function hasOrganization() {
+		return $this->hasRecordPropertyString('organization');
 	}
 
 	/**
 	 * Gets our homepage.
 	 *
 	 * @return	string		our homepage (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getHomepage() {
+	public function getHomepage() {
 		return $this->getRecordPropertyString('homepage');
+	}
+
+	/**
+	 * Returns true if this speaker has a homepage, false otherwise.
+	 *
+	 * @return	boolean		true if this speaker has a homepage, false otherwise
+	 */
+	public function hasHomepage() {
+		return $this->hasRecordPropertyString('homepage');
 	}
 
 	/**
 	 * Gets our description.
 	 *
-	 * @param	object		the live pibase object
+	 * @param	tslib_pibase	the live pibase object
 	 *
-	 * @return	string		our description (or '' if there is an error)
-	 *
-	 * @access	public
+	 * @return	string			our description (or '' if there is an error)
 	 */
-	function getDescription(&$plugin) {
+	public function getDescription(tslib_pibase &$plugin) {
 		return $plugin->pi_RTEcssText(
 			$this->getRecordPropertyString('description')
 		);
+	}
+
+	/**
+	 * Gets our description without RTE processing.
+	 *
+	 * @return	string		our description (or '' if there is an error)
+	 */
+	public function getDescriptionRaw() {
+		return $this->getRecordPropertyString('description');
+	}
+
+	/**
+	 * Returns true if this speaker has a description, false otherwise.
+	 *
+	 * @return	boolean		true if this speaker has a description, false
+	 * 						otherwise
+	 */
+	public function hasDescription() {
+		return $this->hasRecordPropertyString('description');
 	}
 
 	/**
@@ -80,10 +112,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 *
 	 * @return	boolean		true if we have any skills related to this speaker,
 	 * 						false otherwise.
-	 *
-	 * @access	public
 	 */
-	function hasSkills() {
+	public function hasSkills() {
 		return $this->hasRecordPropertyInteger('skills');
 	}
 
@@ -92,10 +122,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 *
 	 * @return	string		our skills list (or an empty string if there are no
 	 * 						skills for this speaker or there is an error)
-	 *
-	 * @access	public
 	 */
-	function getSkillsShort() {
+	public function getSkillsShort() {
 		if (!$this->hasSkills()) {
 			return '';
 		}
@@ -126,10 +154,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 *
 	 * @return	integer		the number of skills associated with this speaker,
 	 * 						will be >= 0
-	 *
-	 * @access	public
 	 */
-	function getNumberOfSkills() {
+	public function getNumberOfSkills() {
 		return $this->getRecordPropertyInteger('skills');
 	}
 
@@ -137,10 +163,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our internal notes.
 	 *
 	 * @return	string		our internal notes (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getNotes() {
+	public function getNotes() {
 		return $this->getRecordPropertyString('notes');
 	}
 
@@ -148,10 +172,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our address.
 	 *
 	 * @return	string		our address (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getAddress() {
+	public function getAddress() {
 		return $this->getRecordPropertyString('address');
 	}
 
@@ -159,10 +181,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our work phone number.
 	 *
 	 * @return	string		our work phone number (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getPhoneWork() {
+	public function getPhoneWork() {
 		return $this->getRecordPropertyString('phone_work');
 	}
 
@@ -170,10 +190,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our home phone number.
 	 *
 	 * @return	string		our home phone number (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getPhoneHome() {
+	public function getPhoneHome() {
 		return $this->getRecordPropertyString('phone_home');
 	}
 
@@ -181,10 +199,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our mobile phone number.
 	 *
 	 * @return	string		our mobile phone number (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getPhoneMobile() {
+	public function getPhoneMobile() {
 		return $this->getRecordPropertyString('phone_mobile');
 	}
 
@@ -192,10 +208,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our fax number.
 	 *
 	 * @return	string		our fax number (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getFax() {
+	public function getFax() {
 		return $this->getRecordPropertyString('fax');
 	}
 
@@ -203,10 +217,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 * Gets our e-mail address.
 	 *
 	 * @return	string		our e-mail address (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getEmail() {
+	public function getEmail() {
 		return $this->getRecordPropertyString('email');
 	}
 }

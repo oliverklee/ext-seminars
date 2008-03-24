@@ -200,6 +200,18 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testHasOrganizationWithNoOrganizationReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasOrganization()
+		);
+	}
+
+	public function testHasOrganizationWithOrganizationReturnsTrue() {
+		$this->assertTrue(
+			$this->maximalFixture->hasOrganization()
+		);
+	}
+
 	public function testGetHomepage() {
 		$this->assertEquals(
 			'',
@@ -211,6 +223,18 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testHasHomepageWithNoHomepageReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasHomepage()
+		);
+	}
+
+	public function testHasHomepageWithHomepageReturnsTrue() {
+		$this->assertTrue(
+			$this->maximalFixture->hasHomepage()
+		);
+	}
+
 	/*
 	 * TODO: For this test to work properly, we need a more-or-less working
 	 * front-end environment so that the RTE transformation functions work.
@@ -218,7 +242,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1425
 	 *
 
-	public function testDescription() {
+	public function testGetDescription() {
 		$plugin = new tx_seminars_pi1();
 		$plugin->init(array());
 
@@ -233,6 +257,18 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	}
 
 	*/
+
+	public function testHasDescriptionWithNoDescriptionReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	public function testHasDescriptionWithDescriptionReturnsTrue() {
+		$this->assertTrue(
+			$this->maximalFixture->hasDescription()
+		);
+	}
 
 	public function testHasSkillsInitiallyIsFalse() {
 		$this->assertFalse(

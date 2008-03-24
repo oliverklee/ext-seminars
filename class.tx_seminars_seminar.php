@@ -903,6 +903,44 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Creates and returns a speakerbag object.
+	 *
+	 * @param	string		the relation in which the speakers stand to this
+	 * 						event: "speakers" (default), "partners", "tutors" or
+	 * 						"leaders"
+	 *
+	 * @return	tx_seminars_speakerbag		a speakerbag object
+	 */
+	private function getSpeakerBag($speakerRelation = 'speakers') {
+		switch ($speakerRelation) {
+			case 'partners':
+				$mmTable = SEMINARS_TABLE_PARTNERS_MM;
+				break;
+			case 'tutors':
+				$mmTable = SEMINARS_TABLE_TUTORS_MM;
+				break;
+			case 'leaders':
+				$mmTable = SEMINARS_TABLE_LEADERS_MM;
+				break;
+			case 'speakers':
+				// The fallthrough is intended.
+			default:
+				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
+				break;
+		}
+
+		$speakerBagClassName = t3lib_div::makeInstanceClassName(
+			'tx_seminars_speakerbag'
+		);
+
+		return new $speakerBagClassName(
+			$mmTable.'.uid_local='.$this->getUid().' AND '
+				.SEMINARS_TABLE_SPEAKERS.'.uid='.$mmTable.'.uid_foreign',
+			$mmTable
+		);
+	}
+
+	/**
 	 * Gets our speaker (or speakers), complete as RTE'ed HTML with details and
 	 * links.
 	 * Returns an empty paragraph if this seminar doesn't have any speakers.
@@ -910,81 +948,51 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
-	 * @param	object		the live pibase object
-	 * @param	string		the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
+	 * @param	tslib_pibase	the live pibase object
+	 * @param	string			the relation in which the speakers stand to this
+	 * 							event: "speakers" (default), "partners", "tutors"
+	 * 							or "leaders"
 	 *
 	 * @return	string		our speakers (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getSpeakersWithDescription(
+	public function getSpeakersWithDescription(
 		tslib_pibase $plugin, $speakerRelation = 'speakers'
 	) {
-		$result = '';
-		$hasSpeakers = false;
-		$mmTable = '';
-
-		switch ($speakerRelation) {
-			case 'partners':
-				$hasSpeakers = $this->hasPartners();
-				$mmTable = SEMINARS_TABLE_PARTNERS_MM;
-				break;
-			case 'tutors':
-				$hasSpeakers = $this->hasTutors();
-				$mmTable = SEMINARS_TABLE_TUTORS_MM;
-				break;
-			case 'leaders':
-				$hasSpeakers = $this->hasLeaders();
-				$mmTable = SEMINARS_TABLE_LEADERS_MM;
-				break;
-			case 'speakers':
-				// The fallthrough is intended.
-			default:
-				$hasSpeakers = $this->hasSpeakers();
-				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
-				break;
+		if (!$this->hasSpeakersOfType($speakerRelation)){
+			return '';
 		}
 
-		if ($hasSpeakers) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, organization, homepage, description',
-				SEMINARS_TABLE_SPEAKERS.', '.$mmTable,
-				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_SPEAKERS)
+		$result = '';
+		$speakerBag =& $this->getSpeakerBag($speakerRelation);
+
+		while ($speaker =& $speakerBag->getCurrent()) {
+			$name = $speaker->getTitle();
+			if ($speaker->hasOrganization()) {
+				$name .= ', '.$speaker->getOrganization();
+			}
+			if ($speaker->hasHomepage()) {
+				$name = $plugin->cObj->getTypoLink(
+					$name,
+					$speaker->getHomepage(),
+					array(),
+					$plugin->getConfValueString('externalLinkTarget')
+				);
+			}
+			$plugin->setMarkerContent('speaker_item_title', $name);
+
+			$description = '';
+			if ($speaker->hasDescription()) {
+				$description = $speaker->getDescription($plugin);
+			}
+			$plugin->setMarkerContent(
+				'speaker_item_description',
+				$description
 			);
 
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					$name = $row['title'];
-					if (!empty($row['organization'])) {
-						$name .= ', '.$row['organization'];
-					}
-					if (!empty($row['homepage'])) {
-						$name = $plugin->cObj->getTypoLink(
-							$name,
-							$row['homepage'],
-							array(),
-							$plugin->getConfValueString('externalLinkTarget')
-						);
-					}
-					$plugin->setMarkerContent('speaker_item_title', $name);
-
-					$description = '';
-					if (!empty($row['description'])) {
-						$description = $plugin->pi_RTEcssText(
-							$row['description']
-						);
-					}
-					$plugin->setMarkerContent(
-						'speaker_item_description',
-						$description
-					);
-
-					$result .= $plugin->substituteMarkerArrayCached(
-						'SPEAKER_LIST_ITEM'
-					);
-				}
-			}
+			$result .= $plugin->substituteMarkerArrayCached(
+				'SPEAKER_LIST_ITEM'
+			);
+			$speakerBag->getNext();
 		}
 
 		return $result;
@@ -1003,59 +1011,29 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						or "leaders"
 	 *
 	 * @return	string		our speakers (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers') {
-		$result = '';
-		$hasSpeakers = false;
-		$mmTable = '';
-
-		switch ($speakerRelation) {
-			case 'partners':
-				$hasSpeakers = $this->hasPartners();
-				$mmTable = SEMINARS_TABLE_PARTNERS_MM;
-				break;
-			case 'tutors':
-				$hasSpeakers = $this->hasTutors();
-				$mmTable = SEMINARS_TABLE_TUTORS_MM;
-				break;
-			case 'leaders':
-				$hasSpeakers = $this->hasLeaders();
-				$mmTable = SEMINARS_TABLE_LEADERS_MM;
-				break;
-			case 'speakers':
-				// The fallthrough is intended.
-			default:
-				$hasSpeakers = $this->hasSpeakers();
-				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
-				break;
+	public function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers') {
+		if (!$this->hasSpeakersOfType($speakerRelation)) {
+			return '';
 		}
 
-		if ($hasSpeakers) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, organization, homepage, description',
-				SEMINARS_TABLE_SPEAKERS.', '.$mmTable,
-				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_SPEAKERS)
-			);
+		$result = '';
+		$speakerBag =& $this->getSpeakerBag($speakerRelation);
 
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					$result .= $row['title'];
-					if (!empty($row['organization'])) {
-						$result .= ', '.$row['organization'];
-					}
-					if (!empty($row['homepage'])) {
-						$result .= ', '.$row['homepage'];
-					}
-					$result .= CRLF;
-
-					if (!empty($row['description'])) {
-						$result .= $row['description'].CRLF;
-					}
-				}
+		while ($speaker =& $speakerBag->getCurrent()) {
+			$result .= $speaker->getTitle();
+			if ($speaker->hasOrganization()) {
+				$result .= ', '.$speaker->getOrganization();
 			}
+			if ($speaker->hasHomepage()) {
+				$result .= ', '.$speaker->getHomepage();
+			}
+			$result .= CRLF;
+
+			if ($speaker->hasDescription()) {
+				$result .= $speaker->getDescriptionRaw().CRLF;
+			}
+			$speakerBag->getNext();
 		}
 
 		return $result;
@@ -1073,55 +1051,102 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						or "leaders"
 	 *
 	 * @return	string		our speakers list (or '' if there is an error)
+	 */
+	public function getSpeakersShort($speakerRelation = 'speakers') {
+		if (!$this->hasSpeakersOfType($speakerRelation)) {
+			return '';
+		}
+
+		$result = array();
+		$speakerBag =& $this->getSpeakerBag($speakerRelation);
+
+		while ($speaker =& $speakerBag->getCurrent()) {
+			$result[] = $speaker->getTitle();
+			$speakerBag->getNext();
+		}
+
+		return implode(', ', $result);
+	}
+
+	/**
+	 * Gets the number of speakers associated with this event.
+	 *
+	 * @return	integer		the number of speakers associated with this event,
+	 * 						will be >= 0
 	 *
 	 * @access	public
 	 */
-	function getSpeakersShort($speakerRelation = 'speakers') {
-		$result = '';
+	function getNumberOfSpeakers() {
+		return $this->getRecordPropertyInteger('speakers');
+	}
+
+	/**
+	 * Gets the number of partners associated with this event.
+	 *
+	 * @return	integer		the number of partners associated with this event,
+	 * 						will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfPartners() {
+		return $this->getRecordPropertyInteger('partners');
+	}
+
+	/**
+	 * Gets the number of tutors associated with this event.
+	 *
+	 * @return	integer		the number of tutors associated with this event,
+	 * 						will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfTutors() {
+		return $this->getRecordPropertyInteger('tutors');
+	}
+
+	/**
+	 * Gets the number of leaders associated with this event.
+	 *
+	 * @return	integer		the number of leaders associated with this event,
+	 * 						will be >= 0
+	 *
+	 * @access	public
+	 */
+	function getNumberOfLeaders() {
+		return $this->getRecordPropertyInteger('leaders');
+	}
+
+	/**
+	 * Checks whether we have speaker relations of the specified type set.
+	 *
+	 * @param	string		the relation in which the speakers stand to this
+	 * 						event: "speakers" (default), "partners", "tutors"
+	 * 						or "leaders"
+	 *
+	 * @return	boolean		true if we have any speakers of the specified type
+	 * 						related to this event, false otherwise.
+	 */
+	public function hasSpeakersOfType($speakerRelation = 'speakers') {
 		$hasSpeakers = false;
-		$mmTable = '';
 
 		switch ($speakerRelation) {
 			case 'partners':
 				$hasSpeakers = $this->hasPartners();
-				$mmTable = SEMINARS_TABLE_PARTNERS_MM;
 				break;
 			case 'tutors':
 				$hasSpeakers = $this->hasTutors();
-				$mmTable = SEMINARS_TABLE_TUTORS_MM;
 				break;
 			case 'leaders':
 				$hasSpeakers = $this->hasLeaders();
-				$mmTable = SEMINARS_TABLE_LEADERS_MM;
 				break;
 			case 'speakers':
 				// The fallthrough is intended.
 			default:
 				$hasSpeakers = $this->hasSpeakers();
-				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
 				break;
 		}
 
-		if ($hasSpeakers) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title',
-				SEMINARS_TABLE_SPEAKERS.', '.$mmTable,
-				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_SPEAKERS)
-			);
-
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					if (!empty($result)) {
-						$result .= ', ';
-					}
-
-					$result .= $row['title'];
-				}
-			}
-		}
-
-		return $result;
+		return $hasSpeakers;
 	}
 
 	/**
@@ -1129,10 +1154,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if we have any speakers related to this event,
 	 * 						false otherwise.
-	 *
-	 * @access	public
 	 */
-	function hasSpeakers() {
+	public function hasSpeakers() {
 		return $this->hasRecordPropertyInteger('speakers');
 	}
 
@@ -1141,10 +1164,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if we have any partners related to this event,
 	 * 						false otherwise.
-	 *
-	 * @access	public
 	 */
-	function hasPartners() {
+	public function hasPartners() {
 		return $this->hasRecordPropertyInteger('partners');
 	}
 
@@ -1153,10 +1174,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if we have any tutors related to this event,
 	 * 						false otherwise.
-	 *
-	 * @access	public
 	 */
-	function hasTutors() {
+	public function hasTutors() {
 		return $this->hasRecordPropertyInteger('tutors');
 	}
 
@@ -1165,10 +1184,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if we have any leaders related to this event,
 	 * 						false otherwise.
-	 *
-	 * @access	public
 	 */
-	function hasLeaders() {
+	public function hasLeaders() {
 		return $this->hasRecordPropertyInteger('leaders');
 	}
 

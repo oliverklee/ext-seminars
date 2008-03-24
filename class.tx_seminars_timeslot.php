@@ -40,6 +40,23 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	var $tableName = SEMINARS_TABLE_TIME_SLOTS;
 
 	/**
+	 * Creates and returns a speakerbag object.
+	 *
+	 * @return	tx_seminars_speakerbag		a speakerbag object
+	 */
+	private function getSpeakerBag() {
+		$speakerBagClassName = t3lib_div::makeInstanceClassName(
+			'tx_seminars_speakerbag'
+		);
+
+		return new $speakerBagClassName(
+			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM.'.uid_local='.$this->getUid()
+				.' AND uid=uid_foreign',
+			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM
+		);
+	}
+
+	/**
 	 * Gets the speaker UIDs.
 	 *
 	 * @return	array		the speaker UIDs
@@ -74,15 +91,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 */
 	function getSpeakersShortCommaSeparated() {
 		$result = array();
-
-		$speakerBagClassname = t3lib_div::makeInstanceClassname(
-			'tx_seminars_speakerbag'
-		);
-		$speakerBag =& new $speakerBagClassname(
-			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM.'.uid_local='.$this->getUid()
-				.' AND uid=uid_foreign',
-			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM
-		);
+		$speakerBag =& $this->getSpeakerBag();
 
 		while ($speaker =& $speakerBag->getCurrent()) {
 			$result[] = $speaker->getTitle();

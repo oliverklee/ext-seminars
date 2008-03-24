@@ -251,7 +251,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * Sets the number of categories for this record.
 	 *
 	 * TODO: This function needs to be removed once the testing framework
-	 * can update the counter for the number of places.
+	 * can update the counter for the number of categories.
 	 *
 	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
@@ -286,6 +286,66 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'organizers',
 			implode(',', $organizers)
 		);
+	}
+
+	/**
+	 * Sets the number of speakers for this record.
+	 *
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of speakers.
+	 *
+	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param	integer		the number of speakers that are associated with
+	 * 						this event
+	 */
+	public function setNumberOfSpeakers($number) {
+		$this->setRecordPropertyInteger('speakers', $number);
+	}
+
+	/**
+	 * Sets the number of partners for this record.
+	 *
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of partners.
+	 *
+	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param	integer		the number of partners that are associated with
+	 * 						this event
+	 */
+	public function setNumberOfPartners($number) {
+		$this->setRecordPropertyInteger('partners', $number);
+	}
+
+	/**
+	 * Sets the number of tutors for this record.
+	 *
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of tutors.
+	 *
+	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param	integer		the number of tutors that are associated with
+	 * 						this event
+	 */
+	public function setNumberOfTutors($number) {
+		$this->setRecordPropertyInteger('tutors', $number);
+	}
+
+	/**
+	 * Sets the number of leaders for this record.
+	 *
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of leaders.
+	 *
+	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param	integer		the number of leaders that are associated with
+	 * 						this event
+	 */
+	public function setNumberOfLeaders($number) {
+		$this->setRecordPropertyInteger('leaders', $number);
 	}
 }
 

@@ -226,6 +226,102 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Inserts a speaker record into the database and creates a relation to it
+	 * from the fixture.
+	 *
+	 * @param	array		data of the speaker to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be > 0
+	 */
+	private function addSpeakerRelation($speakerData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS, $speakerData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfSpeakers(
+			$this->fixture->getNumberOfSpeakers() + 1
+		);
+
+		return $uid;
+	}
+
+	/**
+	 * Inserts a speaker record into the database and creates a relation to it
+	 * from the fixture as partner.
+	 *
+	 * @param	array		data of the speaker to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be > 0
+	 */
+	private function addPartnerRelation($speakerData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS, $speakerData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfPartners(
+			$this->fixture->getNumberOfPartners() + 1
+		);
+
+		return $uid;
+	}
+
+	/**
+	 * Inserts a speaker record into the database and creates a relation to it
+	 * from the fixture as tutor.
+	 *
+	 * @param	array		data of the speaker to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be > 0
+	 */
+	private function addTutorRelation($speakerData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS, $speakerData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfTutors(
+			$this->fixture->getNumberOfTutors() + 1
+		);
+
+		return $uid;
+	}
+
+	/**
+	 * Inserts a speaker record into the database and creates a relation to it
+	 * from the fixture as leader.
+	 *
+	 * @param	array		data of the speaker to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be > 0
+	 */
+	private function addLeaderRelation($speakerData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS, $speakerData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfLeaders(
+			$this->fixture->getNumberOfLeaders() + 1
+		);
+
+		return $uid;
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -522,6 +618,182 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->fixture->getNumberOfOrganizers()
+		);
+	}
+
+	public function testAddSpeakerRelationReturnsUid() {
+		$uid = $this->addSpeakerRelation(array());
+
+		$this->assertTrue(
+			$uid > 0
+		);
+	}
+
+	public function testAddSpeakerRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addSpeakerRelation(array()),
+			$this->addSpeakerRelation(array())
+		);
+	}
+
+	public function testAddSpeakerRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SPEAKERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+
+		);
+
+		$this->addSpeakerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SPEAKERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addSpeakerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SPEAKERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
+
+	public function testAddPartnerRelationReturnsUid() {
+		$uid = $this->addPartnerRelation(array());
+
+		$this->assertTrue(
+			$uid > 0
+		);
+	}
+
+	public function testAddPartnerRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addPartnerRelation(array()),
+			$this->addPartnerRelation(array())
+		);
+	}
+
+	public function testAddPartnerRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_PARTNERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+
+		);
+
+		$this->addPartnerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_PARTNERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addPartnerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_PARTNERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
+
+	public function testAddTutorRelationReturnsUid() {
+		$uid = $this->addTutorRelation(array());
+
+		$this->assertTrue(
+			$uid > 0
+		);
+	}
+
+	public function testAddTutorRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addTutorRelation(array()),
+			$this->addTutorRelation(array())
+		);
+	}
+
+	public function testAddTutorRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TUTORS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+
+		);
+
+		$this->addTutorRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TUTORS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addTutorRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TUTORS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
+
+	public function testAddLeaderRelationReturnsUid() {
+		$uid = $this->addLeaderRelation(array());
+
+		$this->assertTrue(
+			$uid > 0
+		);
+	}
+
+	public function testAddLeaderRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addLeaderRelation(array()),
+			$this->addLeaderRelation(array())
+		);
+	}
+
+	public function testAddLeaderRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_LEADERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+
+		);
+
+		$this->addLeaderRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_LEADERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
+		);
+
+		$this->addLeaderRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_LEADERS_MM,
+				'uid_local='.$this->fixture->getUid()
+			)
 		);
 	}
 
@@ -1887,6 +2159,937 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			99,
 			$this->fixture->getAttendancesPid()
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests regarding the speakers.
+	///////////////////////////////////////////////////////////
+
+	public function testGetNumberOfSpeakersWithNoSpeakerReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfSpeakers()
+		);
+	}
+
+	public function testGetNumberOfSpeakersWithSingleSpeakerReturnsOne() {
+		$this->addSpeakerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfSpeakers()
+		);
+	}
+
+	public function testGetNumberOfSpeakersWithMultipleSpeakersReturnsTwo() {
+		$this->addSpeakerRelation(array());
+		$this->addSpeakerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfSpeakers()
+		);
+	}
+
+	public function testGetNumberOfPartnersWithNoPartnerReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfPartners()
+		);
+	}
+
+	public function testGetNumberOfPartnersWithSinglePartnerReturnsOne() {
+		$this->addPartnerRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfPartners()
+		);
+	}
+
+	public function testGetNumberOfPartnersWithMultiplePartnersReturnsTwo() {
+		$this->addPartnerRelation(array());
+		$this->addPartnerRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfPartners()
+		);
+	}
+
+	public function testGetNumberOfTutorsWithNoTutorReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfTutors()
+		);
+	}
+
+	public function testGetNumberOfTutorsWithSingleTutorReturnsOne() {
+		$this->addTutorRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfTutors()
+		);
+	}
+
+	public function testGetNumberOfTutorsWithMultipleTutorsReturnsTwo() {
+		$this->addTutorRelation(array());
+		$this->addTutorRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfTutors()
+		);
+	}
+
+	public function testGetNumberOfLeadersWithNoLeaderReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfLeaders()
+		);
+	}
+
+	public function testGetNumberOfLeadersWithSingleLeaderReturnsOne() {
+		$this->addLeaderRelation(array());
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfLeaders()
+		);
+	}
+
+	public function testGetNumberOfLeadersWithMultipleLeadersReturnsTwo() {
+		$this->addLeaderRelation(array());
+		$this->addLeaderRelation(array());
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfLeaders()
+		);
+	}
+
+	public function testHasSpeakersOfTypeIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasSpeakersOfType('speakers')
+		);
+		$this->assertFalse(
+			$this->fixture->hasSpeakersOfType('partners')
+		);
+		$this->assertFalse(
+			$this->fixture->hasSpeakersOfType('tutors')
+		);
+		$this->assertFalse(
+			$this->fixture->hasSpeakersOfType('leaders')
+		);
+	}
+
+	public function testHasSpeakersOfTypeWithSingleSpeakerOfTypeReturnsTrue() {
+		$this->addSpeakerRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasSpeakersOfType('speakers')
+		);
+
+		$this->addPartnerRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasSpeakersOfType('partners')
+		);
+
+		$this->addTutorRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasSpeakersOfType('tutors')
+		);
+
+		$this->addLeaderRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasSpeakersOfType('leaders')
+		);
+	}
+
+	public function testHasSpeakersIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasSpeakers()
+		);
+	}
+
+	public function testCanHaveOneSpeaker() {
+		$this->addSpeakerRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasSpeakers()
+		);
+	}
+
+	public function testHasPartnersIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasPartners()
+		);
+	}
+
+	public function testCanHaveOnePartner() {
+		$this->addPartnerRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasPartners()
+		);
+	}
+
+	public function testHasTutorsIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasTutors()
+		);
+	}
+
+	public function testCanHaveOneTutor() {
+		$this->addTutorRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasTutors()
+		);
+	}
+
+	public function testHasLeadersIsInitiallyFalse() {
+		$this->assertFalse(
+			$this->fixture->hasLeaders()
+		);
+	}
+
+	public function testCanHaveOneLeader() {
+		$this->addLeaderRelation(array());
+		$this->assertTrue(
+			$this->fixture->hasLeaders()
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithNoSpeakersReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerReturnsSingleSpeaker() {
+		$speaker = array('title' => 'test speaker');
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerWithOrganizationReturnsSingleSpeakerWithOrganization() {
+		$speaker = array(
+			'title' => 'test speaker',
+			'organization' => 'test organization'
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerWithHomepageReturnsSingleSpeakerWithHomepage() {
+		$speaker = array(
+			'title' => 'test speaker',
+			'homepage' => 'test homepage'
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerWithOrganizationAndHomepageReturnsSingleSpeakerWithOrganizationAndHomepage() {
+		$speaker = array(
+			'title' => 'test speaker',
+			'organization' => 'test organization',
+			'homepage' => 'test homepage'
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerWithDescriptionReturnsSingleSpeakerWithDescription() {
+		$speaker = array(
+			'title' => 'test speaker',
+			'description' => 'test description'
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerWithOrganizationAndDescriptionReturnsSingleSpeakerWithOrganizationAndDescription() {
+		$speaker = array(
+			'title' => 'test speaker',
+			'organization' => 'test organization',
+			'description' => 'test description'
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerWithHomepageAndDescriptionReturnsSingleSpeakerWithHomepageAndDescription() {
+		$speaker = array(
+			'title' => 'test speaker',
+			'homepage' => 'test homepage',
+			'description' =>  'test description'
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['homepage'].CRLF
+				.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithSingleSpeakerWithOrganizationAndHomepageAndDescriptionReturnsSingleSpeakerWithOrganizationAndHomepageAndDescription() {
+		$speaker = array(
+			'title' => 'test speaker',
+			'organization' => 'test organization',
+			'homepage' => 'test homepage',
+			'description' => 'test description'
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'].', '.$speaker['organization']
+				.', '.$speaker['homepage'].CRLF.$speaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersReturnsTwoSpeakers() {
+		$firstSpeaker = array('title' => 'test speaker 1');
+		$secondSpeaker = array('title' => 'test speaker 2');
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$secondSpeaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$secondSpeaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$secondSpeaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$secondSpeaker['title'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersWithOrganizationReturnsTwoSpeakersWithOrganization() {
+		$firstSpeaker = array(
+			'title' => 'test speaker 1',
+			'organization' => 'test organization 1'
+		);
+		$secondSpeaker = array(
+			'title' => 'test speaker 2',
+			'organization' => 'test organization 2'
+		);
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersWithHomepageReturnsTwoSpeakersWithHomepage() {
+		$firstSpeaker = array(
+			'title' => 'test speaker 1',
+			'homepage' => 'test homepage 1'
+		);
+		$secondSpeaker = array(
+			'title' => 'test speaker 2',
+			'homepage' => 'test homepage 2'
+		);
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersWithOrganizationAndHomepageReturnsTwoSpeakersWithOrganizationAndHomepage() {
+		$firstSpeaker = array(
+			'title' => 'test speaker 1',
+			'organization' => 'test organization 1',
+			'homepage' => 'test homepage 1'
+		);
+		$secondSpeaker = array(
+			'title' => 'test speaker 2',
+			'organization' => 'test organization 2',
+			'homepage' => 'test homepage 2'
+		);
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersWithDescriptionReturnsTwoSpeakersWithDescription() {
+		$firstSpeaker = array(
+			'title' => 'test speaker 1',
+			'description' => 'test description 1'
+		);
+		$secondSpeaker = array(
+			'title' => 'test speaker 2',
+			'description' => 'test description 2'
+		);
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersWithOrganizationAndDescriptionReturnsTwoSpeakersWithOrganizationAndDescription() {
+		$firstSpeaker = array(
+			'title' => 'test speaker 1',
+			'organization' => 'test organization 1',
+			'description' => 'test description 1'
+		);
+		$secondSpeaker = array(
+			'title' => 'test speaker 2',
+			'organization' => 'test organization 2',
+			'description' => 'test description 2'
+		);
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersWithHomepageAndDescriptionReturnsTwoSpeakersWithHomepageAndDescription() {
+		$firstSpeaker = array(
+			'title' => 'test speaker 1',
+			'homepage' => 'test homepage 1',
+			'description' =>  'test description 1'
+		);
+		$secondSpeaker = array(
+			'title' => 'test speaker 2',
+			'homepage' => 'test homepage 2',
+			'description' =>  'test description 2'
+		);
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['homepage'].CRLF
+				.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['homepage'].CRLF
+				.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawWithMultipleSpeakersWithOrganizationAndHomepageAndDescriptionReturnsTwoSpeakersWithOrganizationAndHomepageAndDescription() {
+		$firstSpeaker = array(
+			'title' => 'test speaker 1',
+			'organization' => 'test organization 1',
+			'homepage' => 'test homepage 1',
+			'description' => 'test description 1'
+		);
+		$secondSpeaker = array(
+			'title' => 'test speaker 2',
+			'organization' => 'test organization 2',
+			'homepage' => 'test homepage 2',
+			'description' => 'test description 2'
+		);
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$firstSpeaker['organization']
+				.', '.$firstSpeaker['homepage'].CRLF.$firstSpeaker['description'].CRLF
+				.$secondSpeaker['title'].', '.$secondSpeaker['organization']
+				.', '.$secondSpeaker['homepage'].CRLF.$secondSpeaker['description'].CRLF,
+			$this->fixture->getSpeakersWithDescriptionRaw('leaders')
+		);
+	}
+
+	public function testGetSpeakersShortWithNoSpeakersReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersShort('speakers')
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersShort('partners')
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersShort('tutors')
+		);
+		$this->assertEquals(
+			'',
+			$this->fixture->getSpeakersShort('leaders')
+		);
+	}
+
+	public function testGetSpeakersShortWithSingleSpeakersReturnsSingleSpeaker() {
+		$speaker = array('title' => 'test speaker');
+
+		$this->addSpeakerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'],
+			$this->fixture->getSpeakersShort('speakers')
+		);
+
+		$this->addPartnerRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'],
+			$this->fixture->getSpeakersShort('partners')
+		);
+
+		$this->addTutorRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'],
+			$this->fixture->getSpeakersShort('tutors')
+		);
+
+		$this->addLeaderRelation($speaker);
+		$this->assertEquals(
+			$speaker['title'],
+			$this->fixture->getSpeakersShort('leaders')
+		);
+	}
+
+	public function testGetSpeakersShortWithMultipleSpeakersReturnsTwoSpeakers() {
+		$firstSpeaker = array('title' => 'test speaker 1');
+		$secondSpeaker = array('title' => 'test speaker 2');
+
+		$this->addSpeakerRelation($firstSpeaker);
+		$this->addSpeakerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$secondSpeaker['title'],
+			$this->fixture->getSpeakersShort('speakers')
+		);
+
+		$this->addPartnerRelation($firstSpeaker);
+		$this->addPartnerRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$secondSpeaker['title'],
+			$this->fixture->getSpeakersShort('partners')
+		);
+
+		$this->addTutorRelation($firstSpeaker);
+		$this->addTutorRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$secondSpeaker['title'],
+			$this->fixture->getSpeakersShort('tutors')
+		);
+
+		$this->addLeaderRelation($firstSpeaker);
+		$this->addLeaderRelation($secondSpeaker);
+		$this->assertEquals(
+			$firstSpeaker['title'].', '.$secondSpeaker['title'],
+			$this->fixture->getSpeakersShort('leaders')
 		);
 	}
 }
