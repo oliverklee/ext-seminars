@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1739] Fix: template.php imported twice
 - [#536] Change: Use the speakerbag for iterating over speakers
 - [#537] Change: Use the organizerbag for iterating over organizers
 - [#1569] Feature: Link the categories in the list view to the list view page, filtered by the category
