@@ -38,13 +38,11 @@ class tx_seminars_organizerbag_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
 
-	/** the UID of the first organizer record in the DB */
-	private $uidOfFirstOrganizer = 0;
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->uidOfFirstCategory = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ORGANIZERS,
 			array('title' => 'test organizer 1')
 		);
