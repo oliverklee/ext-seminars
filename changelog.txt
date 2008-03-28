@@ -1,4 +1,6 @@
 0.5.4 (currently working on)
+- [#1443] Fix: omitDateIfSameAsPrevious does not work
+- [#1621] Change: Link the date only in the "other dates for this topic" list
 - [#1739] Fix: template.php imported twice
 - [#1655] Fix: Wrong <dl> in HTML output
 - [#1584] Fix: Missing colon in the flexforms in the default language

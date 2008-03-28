@@ -432,7 +432,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						$this->pi_getLL('message_pleaseLogIn'),
 						$GLOBALS['TSFE']->id
 					);
-					$isOkay = false;					
+					$isOkay = false;
 				}
 				break;
 			case 'my_entered_events':
@@ -1247,14 +1247,24 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('teaser', $this->seminar->getTeaser());
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
 
-			$currentDate = $this->seminar->getLinkedFieldValue($this, 'date');
+			$currentDate = $this->seminar->getDate();
 			if (($currentDate === $this->previousDate)
-				&& $this->getConfValueBoolean('omitDateIfSameAsPrevious', 's_template_special')) {
-				$currentDate = '';
+				&& $this->getConfValueBoolean(
+					'omitDateIfSameAsPrevious',
+					's_template_special')
+			) {
+				$dateToShow = '';
 			} else {
+				if ($this->whatToDisplay == 'topic_list') {
+					$dateToShow = $this->seminar->getLinkedFieldValue(
+						$this, 'date'
+					);
+				} else {
+					$dateToShow = $currentDate;
+				}
 				$this->previousDate = $currentDate;
 			}
-			$this->setMarkerContent('date', $currentDate);
+			$this->setMarkerContent('date', $dateToShow);
 
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlaceShort());
