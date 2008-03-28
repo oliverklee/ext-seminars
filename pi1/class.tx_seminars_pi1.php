@@ -1877,21 +1877,24 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
 			$this->setMarkerContent('language', $this->seminar->getLanguageName());
 
-			if ($this->whatToDisplay == 'topic_list') {
-				$currentDate = $this->seminar->getLinkedFieldValue($this, 'date');
-			} else {
-				$currentDate = $this->seminar->getDate();
-			}
+			$currentDate = $this->seminar->getDate();
 			if (($currentDate === $this->previousDate)
 				&& $this->getConfValueBoolean(
 					'omitDateIfSameAsPrevious',
 					's_template_special')
 			) {
-				$currentDate = '';
+				$dateToShow = '';
 			} else {
+				if ($this->whatToDisplay == 'topic_list') {
+					$dateToShow = $this->seminar->getLinkedFieldValue(
+						$this, 'date'
+					);
+				} else {
+					$dateToShow = $currentDate;
+				}
 				$this->previousDate = $currentDate;
 			}
-			$this->setMarkerContent('date', $currentDate);
+			$this->setMarkerContent('date', $dateToShow);
 
 			$this->setMarkerContent('time', $this->seminar->getTime());
 			$this->setMarkerContent('place', $this->seminar->getPlaceShort());

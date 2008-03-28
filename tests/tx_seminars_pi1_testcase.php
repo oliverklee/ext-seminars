@@ -52,7 +52,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private $numberOfTargetGroups = 0;
 
 	public function setUp() {
-		// Bolster up the fake front end.
+		// Bolsters up the fake front end.
 		$GLOBALS['TSFE']->tmpl = t3lib_div::makeInstance('t3lib_tsparser_ext');
 		$GLOBALS['TSFE']->tmpl->flattenSetup(array(), '', false);
 		$GLOBALS['TSFE']->tmpl->init();
@@ -85,6 +85,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->createHelperObjects();
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'eventType', 'Workshop'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'dateFormatYMD', '%d.%m.%Y'
 		);
 	}
 
@@ -985,6 +988,139 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			'tx_seminars_pi1[category]='.$categoryUid,
 			$this->fixture->main('', array())
+		);
+	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning omitDateIfSameAsPrevious.
+	///////////////////////////////////////////////
+
+	public function testOmitDateIfSameAsPreviousOnDifferentDatesWithActiveConfig() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event title',
+				'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
+				'end_date' => mktime(18, 0, 0, 1, 1, 2020)
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event title',
+				'begin_date' => mktime(10, 0, 0, 1, 1, 2021),
+				'end_date' => mktime(18, 0, 0, 1, 1, 2021)
+			)
+		);
+
+		$this->fixture->piVars['sort'] = 'date:0';
+		$this->fixture->setConfigurationValue(
+			'omitDateIfSameAsPrevious', 1
+		);
+
+		$output = $this->fixture->main('', array());
+		$this->assertContains(
+			'2020',
+			$output
+		);
+		$this->assertContains(
+			'2021',
+			$output
+		);
+	}
+
+	public function testOmitDateIfSameAsPreviousOnDifferentDatesWithInactiveConfig() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event title',
+				'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
+				'end_date' => mktime(18, 0, 0, 1, 1, 2020)
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event title',
+				'begin_date' => mktime(10, 0, 0, 1, 1, 2021),
+				'end_date' => mktime(18, 0, 0, 1, 1, 2021)
+			)
+		);
+
+		$this->fixture->piVars['sort'] = 'date:0';
+		$this->fixture->setConfigurationValue(
+			'omitDateIfSameAsPrevious', 0
+		);
+
+		$output = $this->fixture->main('', array());
+		$this->assertContains(
+			'2020',
+			$output
+		);
+		$this->assertContains(
+			'2021',
+			$output
+		);
+	}
+
+	public function testOmitDateIfSameAsPreviousOnSameDatesWithActiveConfig() {
+		$eventData = array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event title',
+				'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
+				'end_date' => mktime(18, 0, 0, 1, 1, 2020)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, $eventData
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, $eventData
+		);
+
+		$this->fixture->piVars['sort'] = 'date:0';
+		$this->fixture->setConfigurationValue(
+			'omitDateIfSameAsPrevious', 1
+		);
+
+		$this->assertEquals(
+			1,
+			substr_count(
+				$this->fixture->main('', array()),
+				'2020'
+			)
+		);
+	}
+
+	public function testOmitDateIfSameAsPreviousOnSameDatesWithInactiveConfig() {
+		$eventData = array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event title',
+				'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
+				'end_date' => mktime(18, 0, 0, 1, 1, 2020)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, $eventData
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, $eventData
+		);
+
+		$this->fixture->piVars['sort'] = 'date:0';
+		$this->fixture->setConfigurationValue(
+			'omitDateIfSameAsPrevious', 0
+		);
+
+		$this->assertEquals(
+			2,
+			substr_count(
+				$this->fixture->main('', array()),
+				'2020'
+			)
 		);
 	}
 }
