@@ -1,4 +1,5 @@
 0.5.4 (currently working on)
+- [#1737] Fix: In mod2, topics and dates have the "single event" icon
 - [#1443] Fix: omitDateIfSameAsPrevious does not work
 - [#1621] Change: Link the date only in the "other dates for this topic" list
 - [#1739] Fix: template.php imported twice
