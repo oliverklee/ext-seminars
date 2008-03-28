@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Class 'tx_seminars_objectfromdb' for the 'seminars' extension.
  *
@@ -546,18 +547,14 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * Gets an HTML image tag with the URL of the icon file of the record as
 	 * configured in TCA.
 	 *
-	 * @return	integer		our HTML image tag with the URL of the icon file of
+	 * @return	string		our HTML image tag with the URL of the icon file of
 	 * 						the record or a "not found" icon if there's no icon
 	 * 						for this record
-	 *
-	 * @access	public
 	 */
-	function getRecordIcon() {
-		global $BACK_PATH;
-
+	public function getRecordIcon() {
 		$result = '';
 		$imageURL = '';
-		$enableFields = array();
+		$iconProperties = array();
 
 		t3lib_div::loadTCA($this->tableName);
 		$tableConfiguration =& $GLOBALS['TCA'][$this->tableName]['ctrl'];
@@ -569,23 +566,29 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 		// Checks if there are enable columns configured in TCA and sends them
 		// as parameter to t3lib_iconworks::getIcon().
 		if ($this->getRecordPropertyBoolean($hiddenColumn)) {
-			$enableFields[$hiddenColumn] = $this->getRecordPropertyInteger(
+			$iconProperties[$hiddenColumn] = $this->getRecordPropertyInteger(
 				$hiddenColumn
 			);
 		}
 		if ($this->hasRecordPropertyInteger($startTimeColumn)) {
-			$enableFields[$startTimeColumn] = $this->getRecordPropertyInteger(
+			$iconProperties[$startTimeColumn] = $this->getRecordPropertyInteger(
 				$startTimeColumn
 			);
 		}
 		if ($this->hasRecordPropertyInteger($endTimeColumn)) {
-			$enableFields[$endTimeColumn] = $this->getRecordPropertyInteger(
+			$iconProperties[$endTimeColumn] = $this->getRecordPropertyInteger(
 				$endTimeColumn
 			);
 		}
+		if (isset($tableConfiguration['typeicon_column'])) {
+			$typeIconColumn = $tableConfiguration['typeicon_column'];
+			$iconProperties[$typeIconColumn] = $this->getRecordPropertyInteger(
+				$typeIconColumn
+			);
+		}
 
-		$imageURL = $BACK_PATH.t3lib_iconworks::getIcon(
-			$this->tableName, $enableFields
+		$imageURL = $GLOBALS['BACK_PATH'].t3lib_iconworks::getIcon(
+			$this->tableName, $iconProperties
 		);
 
 		return '<img src="'.$imageURL.'" title="id='.$this->getUid()

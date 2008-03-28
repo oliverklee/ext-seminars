@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Testcase for the events list class in the 'seminars' extension.
  *
@@ -43,12 +44,10 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	/** PID of a dummy system folder */
 	private $dummySysFolderPid = 0;
 
-	/** a BE page object */
+	/** a dummy BE page object */
 	private $page;
 
 	public function setUp() {
-		global $BACK_PATH;
-
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -61,7 +60,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->page->pageInfo['uid'] = $this->dummySysFolderPid;
 
 		$this->page->doc = t3lib_div::makeInstance('bigDoc');
-		$this->page->doc->backPath = $BACK_PATH;
+		$this->page->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->page->doc->docType = 'xhtml_strict';
 
 		$this->fixture = new tx_seminars_eventslist($this->page);
@@ -69,9 +68,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->page);
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->page, $this->fixture, $this->testingFramework);
 	}
 
 
@@ -180,6 +177,212 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'event_1',
+			$this->fixture->show()
+		);
+	}
+
+
+	/////////////////////////
+	// Tests for the icons.
+	/////////////////////////
+
+	public function testUsesCorrectIconForSingleEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForTopic() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_DATE
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForHiddenSingleEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'hidden' => 1
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete__h.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForHiddenTopic() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'hidden' => 1
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic__h.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForHiddenDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'hidden' => 1
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date__h.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForVisibleTimedSingleEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'starttime' => mktime() - 1000
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForVisibleTimedTopic() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'starttime' => mktime() - 1000
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForVisibleTimedDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'starttime' => mktime() - 1000
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForExpiredSingleEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'endtime' => mktime() - 1000
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete__t.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForExpiredTimedTopic() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'endtime' => mktime() - 1000
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic__t.',
+			$this->fixture->show()
+		);
+	}
+
+	public function testUsesCorrectIconForExpiredTimedDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'endtime' => mktime() - 1000
+			)
+		);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date__t.',
 			$this->fixture->show()
 		);
 	}

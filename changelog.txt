@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1737] Fix: In mod2, topics and dates have the "single event" icon
 - [#1443] Fix: omitDateIfSameAsPrevious does not work
 - [#1739] Fix: template.php imported twice
 - [#536] Change: Use the speakerbag for iterating over speakers
