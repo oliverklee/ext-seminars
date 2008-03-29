@@ -83,6 +83,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** all cities that may be shown in the option box of the selector widget */
 	var $allCities = array();
 
+	/** all event types */
+	var $allEventTypes = array();
+
 	/**
 	 * List of field names (as keys) by which we can sort plus the
 	 * corresponding SQL sort criteria (as value).
