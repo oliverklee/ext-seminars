@@ -1288,9 +1288,11 @@
 			<label index="seminars.pi_flexform.event_editor">Editeur de l'événement</label>
 			<label index="seminars.pi_flexform.my_entered_events">Evénements que j'ai saisis</label>
 			<label index="seminars.pi_flexform.countdown">Compte à rebours jusqu'au prochain événement</label>
+			<label index="seminars.pi_flexform.category_list">Liste des catégories</label>
 			<label index="seminars.pi_flexform.baseURL">URL de base de ce site TYPO3, par exemple http://www.monsitetypo3.com/:</label>
 			<label index="seminars.pi_flexform.listPID">Page qui contient la liste des séminaires:</label>
 			<label index="seminars.pi_flexform.detailPID">Page qui contient la vue de détail:</label>
+			<label index="seminars.pi_flexform.myEventsPID">Page qui contient la liste de &quot;mes événements&quot;:</label>
 			<label index="seminars.pi_flexform.registerPID">Page qui contient le formulaire d'inscription</label>
 			<label index="seminars.pi_flexform.loginPID">Page qui contient le formulaire de login:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Page qui contient la liste des inscriptions (participants):</label>
@@ -1310,9 +1312,11 @@
 			<label index="seminars.pi_flexform.timeframeInList7">événements avec un délai d'inscription dans le futur</label>
 			<label index="seminars.pi_flexform.hideFields">Champs à cacher dans la vue de détail (liste séparée par des virgules):</label>
 			<label index="seminars.pi_flexform.hideSelectorWidget">Cacher le widget de sélection dans la vue de liste:</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Ajouter une option vide au widget de sélection:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Cacher le formulaire de recherche dans la vue de liste:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Cacher le sélecteur de pages dans le vue de liste:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Cacher les événements annulés dans la vue de liste:</label>
+			<label index="seminars.pi_flexform.sortListViewByCategory">Trier la vue de liste pas catégorie:</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Groupe front end par défaut pour les VIP:</label>
 			<label index="seminars.pi_flexform.hideColumns">Cacher les noms des champs dans la vue de liste (liste séparée par des virgules):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Utiliser &quot;Prix&quot; comme titre de colonne pour le prix standard dans la vue de liste:</label>
@@ -1324,6 +1328,7 @@
 			<label index="seminars.pi_flexform.showSiteDetails">Afficher les détails du lieu</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Quels champs FEuser faut-il afficher dans la liste d'inscrits pour un événement</label>
 			<label index="seminars.pi_flexform.sheet_registration">Inscription</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Nombre de clics pour l'enregistrement</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page à afficher après inscription</label>
 			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Envoyer les paramètres à la page affichée après inscription</label>
 			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page à afficher après annulation d'inscription</label>
@@ -1345,6 +1350,7 @@
 			<label index="label_myvipevents_informal">Tu es VIP aux événements suivants:</label>
 			<label index="label_myenteredevents_formal">Vous avez saisi les événements suivants:</label>
 			<label index="label_myenteredevents_informal">Tu as saisi les événements suivants:</label>
+			<label index="label_category">Catégorie</label>
 			<label index="label_title">Titre</label>
 			<label index="label_subtitle">Sous-titre</label>
 			<label index="label_uid">Numéro</label>
@@ -1355,6 +1361,7 @@
 			<label index="label_place">Lieu</label>
 			<label index="label_room">Salle</label>
 			<label index="label_additional_times_places">Lieux et horaires</label>
+			<label index="label_timeslots">Tranches horaires</label>
 			<label index="label_speakers">Conférenciers</label>
 			<label index="label_partners">Partenaires</label>
 			<label index="label_tutors">Enseignants</label>
@@ -1363,6 +1370,7 @@
 			<label index="label_price_general">Prix</label>
 			<label index="label_select_price">Prix:</label>
 			<label index="label_price">Prix</label>
+			<label index="label_price_range">Prix</label>
 			<label index="label_price_regular">Prix normal</label>
 			<label index="label_price_earlybird_regular">Prix en précommande</label>
 			<label index="label_price_board_regular">Prix normal avec pension complète</label>
@@ -1375,11 +1383,13 @@
 			<label index="label_event_type">Type d'événement</label>
 			<label index="label_target_groups">Groupes cibles</label>
 			<label index="label_organizers">Organisateurs</label>
+			<label index="label_organizing_partners">Partenaires de l'organisation</label>
 			<label index="label_vacancies">Places libres</label>
 			<label index="label_deadline_registration">Délai d'inscription</label>
+			<label index="label_status_registration">Statut</label>
 			<label index="label_registration">Inscription</label>
 			<label index="label_onlineRegistration">Inscrivez-vous maintenant</label>
-			<label index="label_onlineRegistrationOnQueue">Inscrivez-vou sur la liste d'attente&lt;br /&gt;(%d inscriptions sur la liste d'attente)</label>
+			<label index="label_onlineRegistrationOnQueue">Inscrivez-vous sur la liste d'attente&lt;br /&gt;(%d inscriptions sur la liste d'attente)</label>
 			<label index="label_onlineUnregistration">Annuler votre inscription</label>
 			<label index="label_list_registrations">Liste des inscriptions</label>
 			<label index="label_listRegistrationsLink">Voir la liste des inscriptions</label>
@@ -1435,14 +1445,25 @@
 			<label index="label_your_user_data_formal">Votre adresse:</label>
 			<label index="label_your_user_data_informal">Ton adresse:</label>
 			<label index="label_method_of_payment">Méthode de paiment choisie:</label>
+			<label index="label_timeslot_date">Date</label>
+			<label index="label_timeslot_time">Heure</label>
+			<label index="label_timeslot_entry_date">Date d'enregistrement</label>
+			<label index="label_timeslot_room">Salle</label>
+			<label index="label_timeslot_place">Lieu</label>
+			<label index="label_timeslot_speakers">Conférenciers</label>
 			<label index="label_unregistration_message_formal">Voulez-vous vraiment annuler votre inscription pour cet événement?</label>
 			<label index="label_unregistration_message_informal">Veux-tu vraiment annuler ton inscription pour cet événement?</label>
+			<label index="label_cancel">Annuler</label>
 			<label index="label_unregister">Annuler l'inscription</label>
 			<label index="label_selector_submit">Filtrer</label>
+			<label index="label_selector_pleaseChoose">veuillez choisir...</label>
 			<label index="label_selector_reset">Réinitialiser</label>
 			<label index="label_selector_searchbox">Critère de recherche</label>
 			<label index="label_searching_hints_formal">Vous pouvez limiter la liste des événements en choisissant un ou plusieurs critères de filtre. Pour voir la liste complète, réinitialisez les filtres.</label>
 			<label index="label_searching_hints_informal">Tu peux limiter la liste des événements en choisissant un ou plusieurs critères de filtre. Pour voir la liste complète, réinitialise les filtres.</label>
+			<label index="label_we_offer_events_in_categories_formal">Pour l'instant, nous vous proposons des événements dans les catégories suivantes:</label>
+			<label index="label_we_offer_events_in_categories_informal">Pour l'instant, nous te proposons des événements dans les catégories suivantes:</label>
+			<label index="label_no_categories">Pour l'instant, nous ne proposons aucun événement catégorisé.</label>
 			<label index="message_wrongSeminarNumber_formal">Il n'y a aucun événement correspondant à ce numéro. Si vous voyez ce message d'erreur en cliquant sur un lien de cette page, merci de prévenir le responsable du site.</label>
 			<label index="message_wrongSeminarNumber_informal">Il n'y a aucun événement correspondant à ce numéro. Si tu vois ce message d'erreur en cliquant sur un lien de cette page, merci de prévenir le responsable du site.</label>
 			<label index="message_noResults">Désolé, aucun événement n'a pu être trouvé.</label>
@@ -2559,7 +2580,7 @@
 			<label index="seminars.pi_flexform.hideSelectorWidget" type="integer">98049188</label>
 			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
 			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
-			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">201114697</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">106305223</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID" type="integer">91800914</label>
 			<label index="seminars.pi_flexform.hideColumns" type="integer">70702598</label>
 			<label index="seminars.pi_flexform.generalPriceInList" type="integer">150285299</label>
@@ -2665,8 +2686,8 @@
 			<label index="label_name" type="integer">81871034</label>
 			<label index="label_address" type="integer">252788963</label>
 			<label index="label_zip" type="integer">234550549</label>
-			<label index="label_city" type="integer">201307921</label>
-			<label index="label_country" type="integer">258260574</label>
+			<label index="label_city" type="integer">92079470</label>
+			<label index="label_country" type="integer">93787849</label>
 			<label index="label_telephone" type="integer">130029308</label>
 			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">100712032</label>
@@ -2730,6 +2751,27 @@
 			<label index="countdown_minutes_plural" type="integer">104922380</label>
 			<label index="countdown_minutes_singular" type="integer">10999131</label>
 			<label index="countdown_seconds_plural" type="integer">126085346</label>
+			<label index="seminars.pi_flexform.category_list" type="integer">68970858</label>
+			<label index="seminars.pi_flexform.myEventsPID" type="integer">58335550</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists" type="integer">27709563</label>
+			<label index="seminars.pi_flexform.sortListViewByCategory" type="integer">19273259</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
+			<label index="label_category" type="integer">61717939</label>
+			<label index="label_timeslots" type="integer">147000660</label>
+			<label index="label_price_range" type="integer">56627526</label>
+			<label index="label_organizing_partners" type="integer">1285796</label>
+			<label index="label_status_registration" type="integer">247806604</label>
+			<label index="label_timeslot_date" type="integer">71780721</label>
+			<label index="label_timeslot_time" type="integer">175559919</label>
+			<label index="label_timeslot_entry_date" type="integer">17175357</label>
+			<label index="label_timeslot_room" type="integer">214150095</label>
+			<label index="label_timeslot_place" type="integer">129617664</label>
+			<label index="label_timeslot_speakers" type="integer">258305227</label>
+			<label index="label_cancel" type="integer">245659783</label>
+			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
+			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
+			<label index="label_no_categories" type="integer">133830972</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -3806,7 +3848,7 @@
 			<label index="seminars.pi_flexform.hideSelectorWidget">Hide the selector widget in list view:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
-			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view</label>
+			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
@@ -3912,8 +3954,8 @@
 			<label index="label_name">Name:</label>
 			<label index="label_address">Street:</label>
 			<label index="label_zip">ZIP:</label>
-			<label index="label_city">City:</label>
-			<label index="label_country">Country:</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
 			<label index="label_telephone">Phone number:</label>
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
@@ -3977,6 +4019,27 @@
 			<label index="countdown_minutes_plural">minutes</label>
 			<label index="countdown_minutes_singular">minute</label>
 			<label index="countdown_seconds_plural">seconds</label>
+			<label index="seminars.pi_flexform.category_list">Category List</label>
+			<label index="seminars.pi_flexform.myEventsPID">Page that contains the &quot;my events&quot; list:</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
+			<label index="seminars.pi_flexform.sortListViewByCategory">Sort the list view by category:</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
+			<label index="label_category">Category</label>
+			<label index="label_timeslots">Time slots</label>
+			<label index="label_price_range">Price</label>
+			<label index="label_organizing_partners">Organizing partners</label>
+			<label index="label_status_registration">Status</label>
+			<label index="label_timeslot_date">Date</label>
+			<label index="label_timeslot_time">Time</label>
+			<label index="label_timeslot_entry_date">Entry date</label>
+			<label index="label_timeslot_room">Room</label>
+			<label index="label_timeslot_place">Place</label>
+			<label index="label_timeslot_speakers">Speakers</label>
+			<label index="label_cancel">Cancel</label>
+			<label index="label_selector_pleaseChoose">please choose...</label>
+			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
+			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

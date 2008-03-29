@@ -688,6 +688,7 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="pi1_title">Gestionnaire de séminaires</label>
 			<label index="label_title">Titre</label>
 			<label index="label_uid">Identifiant</label>
+			<label index="label_registration_uid">Identifiant de l'enregistrement</label>
 			<label index="label_event_type">Type d'événement</label>
 			<label index="label_accreditation_number">Numéro d'accréditation</label>
 			<label index="label_credit_points">Points de crédit</label>
@@ -744,6 +745,8 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="label_status.I.2">En recherche d'emploi</label>
 			<label index="label_status.I.3">Salarié</label>
 			<label index="label_status.I.4">Retraité</label>
+			<label index="label_regular">normal</label>
+			<label index="label_waiting_list">liste d'attente</label>
 			<label index="label_yes">Oui</label>
 			<label index="label_no">Non</label>
 			<label index="label_tx_seminars_phone_mobile">Numéro de téléphone portable</label>
@@ -1391,6 +1394,9 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_notificationOnRegistrationForQueueHello" type="integer">252080490</label>
 			<label index="email_notificationOnQueueUpdateSubject" type="integer">50452167</label>
 			<label index="email_notificationOnQueueUpdateHello" type="integer">167179722</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
+			<label index="label_regular" type="integer">183729416</label>
+			<label index="label_waiting_list" type="integer">128272059</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -2072,6 +2078,9 @@ someone just has registered for the waiting list of an event:</label>
 			<label index="email_notificationOnQueueUpdateHello">Hello,
 
 someone's registration just has become a regular registration of an event:</label>
+			<label index="label_registration_uid">Ticket ID</label>
+			<label index="label_regular">regular</label>
+			<label index="label_waiting_list">waiting list</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

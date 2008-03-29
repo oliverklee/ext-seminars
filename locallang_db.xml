@@ -905,6 +905,8 @@
 			<label index="fe_users.tx_seminars_planned_degree">Degré prévu:</label>
 			<label index="fe_users.tx_seminars_semester">Semestre:</label>
 			<label index="fe_users.tx_seminars_subject">Sujet d'étude:</label>
+			<label index="tx_seminars_test">Enregistrements de test</label>
+			<label index="tx_seminars_test.title">Titre:</label>
 			<label index="tx_seminars_seminars">Séminaires</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">Général</label>
 			<label index="tx_seminars_seminars.uid">Numéro de l'événement</label>
@@ -914,6 +916,7 @@
 			<label index="tx_seminars_seminars.object_type.I.2">Evénement sur plusieurs dates</label>
 			<label index="tx_seminars_seminars.title">Titre:</label>
 			<label index="tx_seminars_seminars.subtitle">Sous-titre:</label>
+			<label index="tx_seminars_seminars.categories">Catégories:</label>
 			<label index="tx_seminars_seminars.teaser">Chapeau:</label>
 			<label index="tx_seminars_seminars.description">Description:</label>
 			<label index="tx_seminars_seminars.topic">Sujet:</label>
@@ -925,6 +928,7 @@
 			<label index="tx_seminars_seminars.checkboxes">Options d'inscription avec case à cocher:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Afficher la case à cocher concernant les conditions de voyage dans le formulaire d'inscription:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Autoriser plusieurs inscriptions par personne:</label>
+			<label index="tx_seminars_seminars.skip_collision_check">Ne pas faire le contrôle de conflit pour cet événement:</label>
 			<label index="tx_seminars_seminars.cancelled">A été annulé:</label>
 			<label index="tx_seminars_seminars.owner_feuser">Utilisateur front-end ayant créé cet événement:</label>
 			<label index="tx_seminars_seminars.vips">Utilisateurs front-end autorisés à voir la liste des inscriptions:</label>
@@ -936,6 +940,7 @@
 			<label index="tx_seminars_seminars.leaders">Meneurs:</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Organisateur:</label>
 			<label index="tx_seminars_seminars.organizers">Organisateurs</label>
+			<label index="tx_seminars_seminars.organizing_partners">Partenaires de l'organisation:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Lieu et date</label>
 			<label index="tx_seminars_seminars.begin_date">Date et heure de début:</label>
 			<label index="tx_seminars_seminars.end_date">Date et heure de fin:</label>
@@ -971,6 +976,7 @@
 			<label index="tx_seminars_speakers.organization">Organisation:</label>
 			<label index="tx_seminars_speakers.homepage">Site internet:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
+			<label index="tx_seminars_speakers.skills">Compétences:</label>
 			<label index="tx_seminars_speakers.picture">Photo:</label>
 			<label index="tx_seminars_speakers.notes">Notes internes:</label>
 			<label index="tx_seminars_speakers.address">Adresse:</label>
@@ -980,6 +986,7 @@
 			<label index="tx_seminars_speakers.fax">Numéro de fax:</label>
 			<label index="tx_seminars_speakers.email">Adresse mail:</label>
 			<label index="tx_seminars_attendances">Participations</label>
+			<label index="tx_seminars_attendances.uid">Identifiant de l'enregistrement:</label>
 			<label index="tx_seminars_attendances.title">Titre:</label>
 			<label index="tx_seminars_attendances.user">Utilisateur front end:</label>
 			<label index="tx_seminars_attendances.seminar">Séminaire:</label>
@@ -1013,6 +1020,7 @@
 			<label index="tx_seminars_sites">Lieux de séminaire</label>
 			<label index="tx_seminars_sites.title">Nom:</label>
 			<label index="tx_seminars_sites.address">Adresse:</label>
+			<label index="tx_seminars_sites.city">Ville:</label>
 			<label index="tx_seminars_sites.country">Pays:</label>
 			<label index="tx_seminars_sites.homepage">Site internet:</label>
 			<label index="tx_seminars_sites.directions">Instructions pour s'y rendre:</label>
@@ -1044,6 +1052,10 @@
 			<label index="tx_seminars_timeslots.room">Salle</label>
 			<label index="tx_seminars_target_groups">Groupes cibles</label>
 			<label index="tx_seminars_target_groups.title">Titre:</label>
+			<label index="tx_seminars_categories">Catégories</label>
+			<label index="tx_seminars_categories.title">Titre:</label>
+			<label index="tx_seminars_skills">Compétences</label>
+			<label index="tx_seminars_skills.title">Titre:</label>
 			<label index="tt_content.list_type_pi1">Gestionnaire de séminaires</label>
 		</languageKey>
 	</data>
@@ -1925,6 +1937,18 @@
 			<label index="tx_seminars_target_groups" type="integer">206184555</label>
 			<label index="tx_seminars_target_groups.title" type="integer">85903807</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
+			<label index="tx_seminars_test" type="integer">56221404</label>
+			<label index="tx_seminars_test.title" type="integer">85903807</label>
+			<label index="tx_seminars_seminars.categories" type="integer">147031926</label>
+			<label index="tx_seminars_seminars.skip_collision_check" type="integer">139479602</label>
+			<label index="tx_seminars_seminars.organizing_partners" type="integer">45053453</label>
+			<label index="tx_seminars_speakers.skills" type="integer">89069054</label>
+			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
+			<label index="tx_seminars_sites.city" type="integer">201307921</label>
+			<label index="tx_seminars_categories" type="integer">183613834</label>
+			<label index="tx_seminars_categories.title" type="integer">85903807</label>
+			<label index="tx_seminars_skills" type="integer">178756701</label>
+			<label index="tx_seminars_skills.title" type="integer">85903807</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -2806,6 +2830,18 @@
 			<label index="tx_seminars_target_groups">Target Groups</label>
 			<label index="tx_seminars_target_groups.title">Title:</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
+			<label index="tx_seminars_test">Test records</label>
+			<label index="tx_seminars_test.title">Title:</label>
+			<label index="tx_seminars_seminars.categories">Categories:</label>
+			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
+			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
+			<label index="tx_seminars_speakers.skills">Skills:</label>
+			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
+			<label index="tx_seminars_sites.city">City:</label>
+			<label index="tx_seminars_categories">Categories</label>
+			<label index="tx_seminars_categories.title">Title:</label>
+			<label index="tx_seminars_skills">Skills</label>
+			<label index="tx_seminars_skills.title">Title:</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

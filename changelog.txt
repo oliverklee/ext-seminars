@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1769] Updated French translation, thanks to Francois Suter
 - [#1768] Updated Danish translation, thanks to Lars Dyhr
 - [#1767] Fix: Catchable fatal error without events in list view
 - [#1737] Fix: In mod2, topics and dates have the "single event" icon

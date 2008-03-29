@@ -143,6 +143,7 @@
 			<label index="eventlist.enough_attendees">Assez</label>
 			<label index="eventlist.is_full">Complet</label>
 			<label index="speakerlist.title">Nom</label>
+			<label index="speakerlist.skills">Compétences</label>
 			<label index="organizerlist.title">Nom</label>
 			<label index="registrationlist.feuser.name">Nom</label>
 			<label index="registrationlist.seminar.title">Evénement</label>
@@ -270,6 +271,7 @@
 			<label index="registrationlist.label_regularRegistrations" type="integer">52997146</label>
 			<label index="registrationlist.label_queueRegistrations" type="integer">122173419</label>
 			<label index="referencesWarning" type="integer">94848684</label>
+			<label index="speakerlist.skills" type="integer">178756701</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -390,6 +392,7 @@
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
 			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
+			<label index="speakerlist.skills">Skills</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>
