@@ -556,6 +556,7 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="pi1_title">Gestore seminari</label>
 			<label index="label_title">Titolo</label>
 			<label index="label_uid">Numero</label>
+			<label index="label_registration_uid">ID ticket</label>
 			<label index="label_event_type">Tipo evento</label>
 			<label index="label_accreditation_number">Numero di accreditamento</label>
 			<label index="label_credit_points">Credit points</label>
@@ -612,6 +613,8 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="label_status.I.2">Disoccupato</label>
 			<label index="label_status.I.3">Impiegato</label>
 			<label index="label_status.I.4">Pensionato</label>
+			<label index="label_regular">Regolare</label>
+			<label index="label_waiting_list">In lista d'attesa</label>
 			<label index="label_yes">si</label>
 			<label index="label_no">no</label>
 			<label index="label_tx_seminars_phone_mobile">Cellulare</label>
@@ -1286,6 +1289,9 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_price_earlybird_regular" type="integer">236870027</label>
 			<label index="label_price_special_early" type="integer">255242535</label>
 			<label index="label_price_earlybird_special" type="integer">255242535</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
+			<label index="label_regular" type="integer">183729416</label>
+			<label index="label_waiting_list" type="integer">128272059</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
@@ -1946,6 +1952,9 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_price_earlybird_regular">Early-bird price</label>
 			<label index="label_price_special_early">Early-bird special price</label>
 			<label index="label_price_earlybird_special">Early-bird special price</label>
+			<label index="label_registration_uid">Ticket ID</label>
+			<label index="label_regular">regular</label>
+			<label index="label_waiting_list">waiting list</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="pi1_title">Seminar Manager</label>
