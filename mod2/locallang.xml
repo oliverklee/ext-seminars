@@ -43,15 +43,19 @@
 			<label index="eventlist.date">Dato</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Nuvær.</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">På venteliste</label>
 			<label index="eventlist.attendees_min">Min.</label>
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Tilstrækkelig</label>
 			<label index="eventlist.is_full">Optaget</label>
 			<label index="speakerlist.title">Navn</label>
+			<label index="speakerlist.skills">Færdigheder</label>
 			<label index="organizerlist.title">Navn</label>
 			<label index="registrationlist.feuser.name">Navn</label>
 			<label index="registrationlist.seminar.title">Arrangement</label>
 			<label index="registrationlist.seminar.date">Arrangement dato</label>
+			<label index="registrationlist.label_regularRegistrations">Almindelige tilmeldinger</label>
+			<label index="registrationlist.label_queueRegistrations">Tilmeldinger på venteliste</label>
 			<label index="referencesWarning">(Der er %s reference(r) til denne record!)</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -169,6 +173,10 @@
 			<label index="registrationlist.seminar.title" type="integer">172937159</label>
 			<label index="registrationlist.seminar.date" type="integer">56229706</label>
 			<label index="referencesWarning" type="integer">94848684</label>
+			<label index="eventlist.attendeesOnRegistrationQueue" type="integer">117662364</label>
+			<label index="speakerlist.skills" type="integer">178756701</label>
+			<label index="registrationlist.label_regularRegistrations" type="integer">52997146</label>
+			<label index="registrationlist.label_queueRegistrations" type="integer">122173419</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -285,6 +293,10 @@
 			<label index="registrationlist.seminar.title">Event</label>
 			<label index="registrationlist.seminar.date">Event date</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">On queue</label>
+			<label index="speakerlist.skills">Skills</label>
+			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
+			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="title">Events</label>

@@ -466,6 +466,8 @@
 			<label index="fe_users.tx_seminars_planned_degree">Planlagt grad:</label>
 			<label index="fe_users.tx_seminars_semester">Semester:</label>
 			<label index="fe_users.tx_seminars_subject">Studieretning</label>
+			<label index="tx_seminars_test">Test data</label>
+			<label index="tx_seminars_test.title">Titel:</label>
 			<label index="tx_seminars_seminars">Arrangementer</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">Generel</label>
 			<label index="tx_seminars_seminars.uid">Arrangement nr.:</label>
@@ -475,16 +477,19 @@
 			<label index="tx_seminars_seminars.object_type.I.2">Arrangementssdato (Samme som ovenfor. Her vælger du blot et Arrangementsemne og indtaster så info om tid, m.m.).</label>
 			<label index="tx_seminars_seminars.title">Titel:</label>
 			<label index="tx_seminars_seminars.subtitle">Undertitel:</label>
+			<label index="tx_seminars_seminars.categories">Kategorier:</label>
 			<label index="tx_seminars_seminars.teaser">Teaser tekst:</label>
 			<label index="tx_seminars_seminars.description">Beskrivelse:</label>
 			<label index="tx_seminars_seminars.topic">Emne:</label>
 			<label index="tx_seminars_seminars.event_type">Arrangementtype:</label>
+			<label index="tx_seminars_seminars.language">Sprog:</label>
 			<label index="tx_seminars_seminars.accreditation_number">Tilmeldings nr.:</label>
 			<label index="tx_seminars_seminars.credit_points">Kredit points:</label>
 			<label index="tx_seminars_seminars.additional_information">Yderligere information:</label>
 			<label index="tx_seminars_seminars.checkboxes">Registreringsmuligheder med afkrydsningsboks:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Vis afkrydsningsfelt for rejsebetingelser i registreringsformularen:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Tillad flere indregistreringer fra samme person:</label>
+			<label index="tx_seminars_seminars.skip_collision_check">Undlad kollisionscheck for dette arrangement</label>
 			<label index="tx_seminars_seminars.cancelled">Er blevet aflyst:</label>
 			<label index="tx_seminars_seminars.owner_feuser">Bruger som har oprettet denne begivenhed:</label>
 			<label index="tx_seminars_seminars.vips">Front end brugere der har tilladelse til at se listen over tilmeldte:</label>
@@ -496,11 +501,14 @@
 			<label index="tx_seminars_seminars.leaders">Ledere:</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Arrangør</label>
 			<label index="tx_seminars_seminars.organizers">Arrangører:</label>
+			<label index="tx_seminars_seminars.organizing_partners">Samarbejdspartnere:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Sted/Tid</label>
 			<label index="tx_seminars_seminars.begin_date">Start tid og dato:</label>
 			<label index="tx_seminars_seminars.end_date">Slut tid og dato:</label>
+			<label index="tx_seminars_seminars.timeslots">Tidsblokke</label>
 			<label index="tx_seminars_seminars.deadline_registration">Tilmeldingsfrist:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Tilmeldingsfrist (for tidlig tilmeldingsoption):</label>
+			<label index="tx_seminars_seminars.deadline_unregistration">Afmeldings-deadline:</label>
 			<label index="tx_seminars_seminars.place">Sted:</label>
 			<label index="tx_seminars_seminars.room">Rum:</label>
 			<label index="tx_seminars_seminars.additional_times_places">Tid og sted:</label>
@@ -510,6 +518,8 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Deltagere</label>
 			<label index="tx_seminars_seminars.attendees_min">Min. deltagerantal:</label>
 			<label index="tx_seminars_seminars.attendees_max">Max. deltagerantal:</label>
+			<label index="tx_seminars_seminars.queue_size">Størrelse på tilmeldingskøen:</label>
+			<label index="tx_seminars_seminars.target_groups">Målgruppe:</label>
 			<label index="tx_seminars_seminars.attendees">Antal tilmeldte (på nuværende tidspunkt):</label>
 			<label index="tx_seminars_seminars.vacancies">Antal ledige pladser (på nuværende tidpunkt):</label>
 			<label index="tx_seminars_seminars.enough_attendees">Har nok tilmeldte:</label>
@@ -527,6 +537,7 @@
 			<label index="tx_seminars_speakers.organization">Organisation:</label>
 			<label index="tx_seminars_speakers.homepage">Hjemmeside:</label>
 			<label index="tx_seminars_speakers.description">Beskrivelse:</label>
+			<label index="tx_seminars_speakers.skills">Færdigheder:</label>
 			<label index="tx_seminars_speakers.picture">Billede:</label>
 			<label index="tx_seminars_speakers.notes">Interne noter:</label>
 			<label index="tx_seminars_speakers.address">Adresse:</label>
@@ -536,9 +547,11 @@
 			<label index="tx_seminars_speakers.fax">Fax nr.:</label>
 			<label index="tx_seminars_speakers.email">E-mail adresse:</label>
 			<label index="tx_seminars_attendances">Deltagere:</label>
+			<label index="tx_seminars_attendances.uid">RegistreringsID</label>
 			<label index="tx_seminars_attendances.title">Titel:</label>
 			<label index="tx_seminars_attendances.user">Frontend Bruger:</label>
 			<label index="tx_seminars_attendances.seminar">Arrangement:</label>
+			<label index="tx_seminars_attendances.registration_queue">Er i tilmeldingskøen:</label>
 			<label index="tx_seminars_attendances.price">Pris:</label>
 			<label index="tx_seminars_attendances.total_price">Total pris for denne deltagelse:</label>
 			<label index="tx_seminars_attendances.paid">Har betalt:</label>
@@ -568,6 +581,8 @@
 			<label index="tx_seminars_sites">Arrangementslokationer</label>
 			<label index="tx_seminars_sites.title">Navn:</label>
 			<label index="tx_seminars_sites.address">Adresse:</label>
+			<label index="tx_seminars_sites.city">By:</label>
+			<label index="tx_seminars_sites.country">Land:</label>
 			<label index="tx_seminars_sites.homepage">Hjemmeside:</label>
 			<label index="tx_seminars_sites.directions">Kørevejledning:</label>
 			<label index="tx_seminars_sites.notes">Interne noter:</label>
@@ -588,6 +603,20 @@
 			<label index="tx_seminars_lodgings.title">Titel:</label>
 			<label index="tx_seminars_foods">Kostmuligheder</label>
 			<label index="tx_seminars_foods.title">Titel:</label>
+			<label index="tx_seminars_timeslots">Tidsblokke</label>
+			<label index="tx_seminars_timeslots.title">Titel</label>
+			<label index="tx_seminars_timeslots.begin_date">Startdato</label>
+			<label index="tx_seminars_timeslots.end_date">Slutdato</label>
+			<label index="tx_seminars_timeslots.entry_date">Oprettelsesdato</label>
+			<label index="tx_seminars_timeslots.speakers">Talere</label>
+			<label index="tx_seminars_timeslots.place">Sted</label>
+			<label index="tx_seminars_timeslots.room">Lokale</label>
+			<label index="tx_seminars_target_groups">Målgrupper</label>
+			<label index="tx_seminars_target_groups.title">Titel:</label>
+			<label index="tx_seminars_categories">Kategorier</label>
+			<label index="tx_seminars_categories.title">Titel:</label>
+			<label index="tx_seminars_skills">Færdigheder</label>
+			<label index="tx_seminars_skills.title">Titel:</label>
 			<label index="tt_content.list_type_pi1">Arrangementsmanager</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
@@ -1440,6 +1469,35 @@
 			<label index="tx_seminars_foods" type="integer">202329490</label>
 			<label index="tx_seminars_foods.title" type="integer">85903807</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
+			<label index="tx_seminars_test" type="integer">56221404</label>
+			<label index="tx_seminars_test.title" type="integer">85903807</label>
+			<label index="tx_seminars_seminars.categories" type="integer">147031926</label>
+			<label index="tx_seminars_seminars.language" type="integer">8937228</label>
+			<label index="tx_seminars_seminars.skip_collision_check" type="integer">139479602</label>
+			<label index="tx_seminars_seminars.organizing_partners" type="integer">45053453</label>
+			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
+			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
+			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
+			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
+			<label index="tx_seminars_speakers.skills" type="integer">89069054</label>
+			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
+			<label index="tx_seminars_attendances.registration_queue" type="integer">263240266</label>
+			<label index="tx_seminars_sites.city" type="integer">201307921</label>
+			<label index="tx_seminars_sites.country" type="integer">258260574</label>
+			<label index="tx_seminars_timeslots" type="integer">147000660</label>
+			<label index="tx_seminars_timeslots.title" type="integer">192455458</label>
+			<label index="tx_seminars_timeslots.begin_date" type="integer">230060070</label>
+			<label index="tx_seminars_timeslots.end_date" type="integer">192800740</label>
+			<label index="tx_seminars_timeslots.entry_date" type="integer">17175357</label>
+			<label index="tx_seminars_timeslots.speakers" type="integer">258305227</label>
+			<label index="tx_seminars_timeslots.place" type="integer">129617664</label>
+			<label index="tx_seminars_timeslots.room" type="integer">214150095</label>
+			<label index="tx_seminars_target_groups" type="integer">206184555</label>
+			<label index="tx_seminars_target_groups.title" type="integer">85903807</label>
+			<label index="tx_seminars_categories" type="integer">183613834</label>
+			<label index="tx_seminars_categories.title" type="integer">85903807</label>
+			<label index="tx_seminars_skills" type="integer">178756701</label>
+			<label index="tx_seminars_skills.title" type="integer">85903807</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2161,6 +2219,35 @@
 			<label index="tx_seminars_foods">Food options</label>
 			<label index="tx_seminars_foods.title">Title:</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
+			<label index="tx_seminars_test">Test records</label>
+			<label index="tx_seminars_test.title">Title:</label>
+			<label index="tx_seminars_seminars.categories">Categories:</label>
+			<label index="tx_seminars_seminars.language">Language:</label>
+			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
+			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
+			<label index="tx_seminars_seminars.timeslots">Time slots</label>
+			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
+			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
+			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
+			<label index="tx_seminars_speakers.skills">Skills:</label>
+			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
+			<label index="tx_seminars_attendances.registration_queue">Is on the registration queue:</label>
+			<label index="tx_seminars_sites.city">City:</label>
+			<label index="tx_seminars_sites.country">Country:</label>
+			<label index="tx_seminars_timeslots">Time slots</label>
+			<label index="tx_seminars_timeslots.title">Title</label>
+			<label index="tx_seminars_timeslots.begin_date">Begin date</label>
+			<label index="tx_seminars_timeslots.end_date">End date</label>
+			<label index="tx_seminars_timeslots.entry_date">Entry date</label>
+			<label index="tx_seminars_timeslots.speakers">Speakers</label>
+			<label index="tx_seminars_timeslots.place">Place</label>
+			<label index="tx_seminars_timeslots.room">Room</label>
+			<label index="tx_seminars_target_groups">Target Groups</label>
+			<label index="tx_seminars_target_groups.title">Title:</label>
+			<label index="tx_seminars_categories">Categories</label>
+			<label index="tx_seminars_categories.title">Title:</label>
+			<label index="tx_seminars_skills">Skills</label>
+			<label index="tx_seminars_skills.title">Title:</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

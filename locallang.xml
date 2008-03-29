@@ -145,7 +145,10 @@ someone's registration just has become a regular registration of an event:</labe
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="pi1_title">Arrangementsmanager</label>
+			<label index="label_title">Titel</label>
 			<label index="label_uid">Nr</label>
+			<label index="label_registration_uid">Registreringsnummer</label>
+			<label index="label_event_type">Arrangementstype</label>
 			<label index="label_accreditation_number">Tilmeldings nr.</label>
 			<label index="label_credit_points">Kredit points</label>
 			<label index="label_date">Dato</label>
@@ -159,17 +162,38 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_lodgings">Vælg overnatningstype</label>
 			<label index="label_foods">Vælg mad</label>
 			<label index="label_kids">Antal børn</label>
+			<label index="label_price">Pris</label>
 			<label index="label_price_general">Pris</label>
 			<label index="label_price_regular">Pris</label>
+			<label index="label_price_regular_early">Tidlig booking pris</label>
 			<label index="label_price_earlybird_regular">Tidlig booking pris</label>
 			<label index="label_price_board_regular">Pris inkl. helpension</label>
 			<label index="label_price_special">Speciel pris</label>
+			<label index="label_price_special_early">Tidlig booking speciel pris</label>
 			<label index="label_price_earlybird_special">Tidlige booking speciel pris</label>
 			<label index="label_price_board_special">Special pris inkl. helpension</label>
+			<label index="label_method_of_payment">Betalingsmetode</label>
+			<label index="label_gender">Køn</label>
+			<label index="label_username">Brugernavn</label>
+			<label index="label_name">Navn</label>
+			<label index="label_address">Adresse</label>
+			<label index="label_zip">Postnr.</label>
+			<label index="label_city">By</label>
+			<label index="label_country">Land</label>
+			<label index="label_attendees">Deltagere</label>
+			<label index="label_vacancies">Ledige pladser</label>
+			<label index="label_enough_attendees">Tilstrækkeligt tilmeldte</label>
+			<label index="label_is_full">Fuldt booket</label>
 			<label index="label_paymentmethod">Vælg betalingsmetode</label>
 			<label index="label_billing_address">Faktureringsadresse</label>
 			<label index="label_telephone">Telefon</label>
+			<label index="label_fax">Fax</label>
 			<label index="label_email">Email</label>
+			<label index="label_interests">Specielle interesser</label>
+			<label index="label_expectations">Forventninger</label>
+			<label index="label_background_knowledge">Baggrundsviden</label>
+			<label index="label_known_from">Kendt fra</label>
+			<label index="label_notes">Noter</label>
 			<label index="label_url">Mere information</label>
 			<label index="label_seminardata">Arrangements info</label>
 			<label index="label_feuserdata">Konto data</label>
@@ -180,8 +204,11 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_status.I.2">Jobsøgende</label>
 			<label index="label_status.I.3">Arbejdende</label>
 			<label index="label_status.I.4">Pensioneret</label>
+			<label index="label_regular">Almindelig</label>
+			<label index="label_waiting_list">Venteliste</label>
 			<label index="label_yes">Ja</label>
 			<label index="label_no">Nej</label>
+			<label index="label_tx_seminars_phone_mobile">Mobilnr.</label>
 			<label index="message_notLoggedIn_formal">Venligst log in f&amp;#248;rst.</label>
 			<label index="message_notLoggedIn_informal">Venligst log in f&amp;#248;rst.</label>
 			<label index="message_alreadyRegistered_formal">De er allerede tilmeldt dette arrangement.</label>
@@ -205,12 +232,45 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="email_confirmationSubject">Tilmeldings bekr&amp;#230;ftelse</label>
 			<label index="email_confirmationHello_formal">Hej %s, tak for din tilmelding til dette arrangement:</label>
 			<label index="email_confirmationHello_informal">Hej %s, tak for din tilmelding til dette arrangement:</label>
+			<label index="email_confirmationOnUnregistrationSubject">Afmeldingsbekræftelse</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">Kære %s,
+
+De har nu afmeldt dem dette arrangement:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">Kære %s,
+
+Du har nu afmeldt dem dette arrangement:</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject">Tilmeldingsbekræftelse til ventelisten</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">Kære %s,
+
+De er nu blevet tilføjet ventelisten til dette arrangement:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">Kære %s,
+
+Du er nu blevet tilføjet ventelisten til dette arrangement:</label>
+			<label index="email_confirmationOnQueueUpdateSubject">Tilmeldingen blev en almindelig tilmeldingsbekræftelse</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Kære %s,
+
+Deres tilmelding er netop blevet en almindelig tilmelding til dette arrangement:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">Kære %s,
+
+Din tilmelding er netop blevet en almindelig tilmelding til dette arrangement:</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Dit arrangement har nu nok tilmeldinger til at blive afholdt.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Arrangementet har nok tilmeldinger: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Dit arrangement er fuldtegnet, der er ingen ledige pladser tilbage.</label>
 			<label index="email_additionalNotificationIsFullSubject">Arrangementet er fuldtegnet: %d - %s</label>
 			<label index="email_notificationSubject">Tilmeldings information</label>
 			<label index="email_notificationHello">Hej, der er lige kommet en tilmelding til arrangementet:</label>
+			<label index="email_notificationOnUnregistrationSubject">Afmeldings besked</label>
+			<label index="email_notificationOnUnregistrationHello">Hej,
+
+En person har lige afmeldt sig arrangementet:</label>
+			<label index="email_notificationOnRegistrationForQueueSubject">Tilmelding til venteliste meddelelser</label>
+			<label index="email_notificationOnRegistrationForQueueHello">Hej,
+
+En person har lige tilmeldt sig ventelisten for arrangementet:</label>
+			<label index="email_notificationOnQueueUpdateSubject">Tilmeldingen blev til en almindelig tilmeldings meddelelse</label>
+			<label index="email_notificationOnQueueUpdateHello">Hej,
+
+En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="pi1_title">Seminar-Manager</label>
@@ -826,6 +886,48 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_email" type="integer">146136420</label>
 			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
+			<label index="label_title" type="integer">192455458</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
+			<label index="label_event_type" type="integer">99114704</label>
+			<label index="label_price" type="integer">56627526</label>
+			<label index="label_price_regular_early" type="integer">236870027</label>
+			<label index="label_price_special_early" type="integer">255242535</label>
+			<label index="label_method_of_payment" type="integer">138981420</label>
+			<label index="label_gender" type="integer">1698865</label>
+			<label index="label_username" type="integer">159898854</label>
+			<label index="label_name" type="integer">77521672</label>
+			<label index="label_address" type="integer">232242979</label>
+			<label index="label_zip" type="integer">164100864</label>
+			<label index="label_city" type="integer">92079470</label>
+			<label index="label_country" type="integer">93787849</label>
+			<label index="label_attendees" type="integer">12580046</label>
+			<label index="label_vacancies" type="integer">99017107</label>
+			<label index="label_enough_attendees" type="integer">124413256</label>
+			<label index="label_is_full" type="integer">13790082</label>
+			<label index="label_fax" type="integer">159451810</label>
+			<label index="label_interests" type="integer">163357902</label>
+			<label index="label_expectations" type="integer">114809365</label>
+			<label index="label_background_knowledge" type="integer">123294752</label>
+			<label index="label_known_from" type="integer">129140510</label>
+			<label index="label_notes" type="integer">256667525</label>
+			<label index="label_regular" type="integer">183729416</label>
+			<label index="label_waiting_list" type="integer">128272059</label>
+			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
+			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
+			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">197103273</label>
+			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">197103273</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject" type="integer">245357554</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">49182706</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">49182706</label>
+			<label index="email_confirmationOnQueueUpdateSubject" type="integer">141930955</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">262513865</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">262513865</label>
+			<label index="email_notificationOnUnregistrationSubject" type="integer">22055172</label>
+			<label index="email_notificationOnUnregistrationHello" type="integer">199821822</label>
+			<label index="email_notificationOnRegistrationForQueueSubject" type="integer">262800061</label>
+			<label index="email_notificationOnRegistrationForQueueHello" type="integer">252080490</label>
+			<label index="email_notificationOnQueueUpdateSubject" type="integer">50452167</label>
+			<label index="email_notificationOnQueueUpdateHello" type="integer">167179722</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
@@ -1501,6 +1603,66 @@ someone just has registered for an event:</label>
 			<label index="label_email">E-mail address</label>
 			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
+			<label index="label_title">Title</label>
+			<label index="label_registration_uid">Ticket ID</label>
+			<label index="label_event_type">Event type</label>
+			<label index="label_price">Price</label>
+			<label index="label_price_regular_early">Early-bird price</label>
+			<label index="label_price_special_early">Early-bird special price</label>
+			<label index="label_method_of_payment">Method of payment</label>
+			<label index="label_gender">Gender</label>
+			<label index="label_username">User name</label>
+			<label index="label_name">Name</label>
+			<label index="label_address">Address</label>
+			<label index="label_zip">ZIP code</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
+			<label index="label_attendees">Attendees</label>
+			<label index="label_vacancies">Vacancies</label>
+			<label index="label_enough_attendees">Enough attendees</label>
+			<label index="label_is_full">Is full</label>
+			<label index="label_fax">Fax</label>
+			<label index="label_interests">Special interests</label>
+			<label index="label_expectations">Expectations</label>
+			<label index="label_background_knowledge">Background knowledge</label>
+			<label index="label_known_from">Known from</label>
+			<label index="label_notes">Notes</label>
+			<label index="label_regular">regular</label>
+			<label index="label_waiting_list">waiting list</label>
+			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
+			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
+
+you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">Hello %s,
+
+you just have unregistered from this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">Hello %s,
+
+thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">Hello %s,
+
+thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Hello %s,
+
+your registration just has become a regular registration of this event:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">Hello %s,
+
+your registration just has become a regular registration of this event:</label>
+			<label index="email_notificationOnUnregistrationSubject">Unregistration notification</label>
+			<label index="email_notificationOnUnregistrationHello">Hello,
+
+someone just has unregistered from an event:</label>
+			<label index="email_notificationOnRegistrationForQueueSubject">Registration for waiting list notification</label>
+			<label index="email_notificationOnRegistrationForQueueHello">Hello,
+
+someone just has registered for the waiting list of an event:</label>
+			<label index="email_notificationOnQueueUpdateSubject">Registration became a regular registration notification</label>
+			<label index="email_notificationOnQueueUpdateHello">Hello,
+
+someone's registration just has become a regular registration of an event:</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="pi1_title">Seminar Manager</label>
