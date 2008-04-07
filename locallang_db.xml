@@ -626,19 +626,22 @@
 			<label index="fe_users.tx_seminars_planned_degree">Планируемая степень:</label>
 			<label index="fe_users.tx_seminars_semester">Семестр:</label>
 			<label index="fe_users.tx_seminars_subject">Тема обучения:</label>
+			<label index="tx_seminars_test.title">Название:</label>
 			<label index="tx_seminars_seminars">Семинары</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">Общее</label>
-			<label index="tx_seminars_seminars.uid">Номер события:</label>
+			<label index="tx_seminars_seminars.uid">Номер мероприятия:</label>
 			<label index="tx_seminars_seminars.object_type">Тип:</label>
-			<label index="tx_seminars_seminars.object_type.I.0">Отдельное событие</label>
-			<label index="tx_seminars_seminars.object_type.I.1">Тема повторябщегося события</label>
-			<label index="tx_seminars_seminars.object_type.I.2">Дата повторябщегося события</label>
+			<label index="tx_seminars_seminars.object_type.I.0">Отдельное мероприятие</label>
+			<label index="tx_seminars_seminars.object_type.I.1">Тема повторябщегося мероприятия</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Дата повторябщегося мероприятия</label>
 			<label index="tx_seminars_seminars.title">Название:</label>
 			<label index="tx_seminars_seminars.subtitle">Подзаголовок:</label>
+			<label index="tx_seminars_seminars.categories">Категория</label>
 			<label index="tx_seminars_seminars.teaser">Краткое описание:</label>
 			<label index="tx_seminars_seminars.description">Описание:</label>
 			<label index="tx_seminars_seminars.topic">Тема:</label>
-			<label index="tx_seminars_seminars.event_type">Тип события:</label>
+			<label index="tx_seminars_seminars.event_type">Тип мероприятия:</label>
+			<label index="tx_seminars_seminars.language">Язык</label>
 			<label index="tx_seminars_seminars.accreditation_number">Номер аккредитации:</label>
 			<label index="tx_seminars_seminars.credit_points">Кредитные очки:</label>
 			<label index="tx_seminars_seminars.additional_information">Дополнительная информация:</label>
@@ -646,7 +649,7 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Отображать транспортные условия в форме регистрации</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Позволять множественные регистрации от одного человека:</label>
 			<label index="tx_seminars_seminars.cancelled">Отменено:</label>
-			<label index="tx_seminars_seminars.owner_feuser">FE-пользователь, создавший это событие:</label>
+			<label index="tx_seminars_seminars.owner_feuser">FE-пользователь, создавший это мероприятие:</label>
 			<label index="tx_seminars_seminars.vips">Список FE-пользователей, которым разрешено просматривать список зарегистрировавшихся:</label>
 			<label index="tx_seminars_seminars.notes">Внутренние заметки:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Докладчики</label>
@@ -661,6 +664,7 @@
 			<label index="tx_seminars_seminars.end_date">Дата и время окончания:</label>
 			<label index="tx_seminars_seminars.deadline_registration">Срок окончания регистрации:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Срок окончания ранней регистрации:</label>
+			<label index="tx_seminars_seminars.deadline_unregistration">Срок окончания снятия с регистрации:</label>
 			<label index="tx_seminars_seminars.place">Место:</label>
 			<label index="tx_seminars_seminars.room">Комната:</label>
 			<label index="tx_seminars_seminars.additional_times_places">Время и место:</label>
@@ -670,6 +674,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Посетители</label>
 			<label index="tx_seminars_seminars.attendees_min">Минимальное количество посетителей:</label>
 			<label index="tx_seminars_seminars.attendees_max">Максимальное количество посетителей:</label>
+			<label index="tx_seminars_seminars.target_groups">Группа потенциальных потребителей:</label>
 			<label index="tx_seminars_seminars.attendees">Текущее количество посетителей:</label>
 			<label index="tx_seminars_seminars.vacancies">Текущее количество свободных мест:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Достаточно регистраций:</label>
@@ -687,6 +692,7 @@
 			<label index="tx_seminars_speakers.organization">Органищация:</label>
 			<label index="tx_seminars_speakers.homepage">Сайт:</label>
 			<label index="tx_seminars_speakers.description">Описание:</label>
+			<label index="tx_seminars_speakers.skills">Способности</label>
 			<label index="tx_seminars_speakers.picture">Картинка:</label>
 			<label index="tx_seminars_speakers.notes">Внутренние заметки:</label>
 			<label index="tx_seminars_speakers.address">Адрес:</label>
@@ -696,6 +702,7 @@
 			<label index="tx_seminars_speakers.fax">Факс:</label>
 			<label index="tx_seminars_speakers.email">E-mail:</label>
 			<label index="tx_seminars_attendances">Посетители</label>
+			<label index="tx_seminars_attendances.uid">Номер билета:</label>
 			<label index="tx_seminars_attendances.title">Заголовок:</label>
 			<label index="tx_seminars_attendances.user">Пользователь сайта:</label>
 			<label index="tx_seminars_attendances.seminar">Семинар:</label>
@@ -714,7 +721,7 @@
 			<label index="tx_seminars_attendances.been_there">Посетил:</label>
 			<label index="tx_seminars_attendances.checkboxes">Выбранные опции:</label>
 			<label index="tx_seminars_attendances.interests">Специальные интересы:</label>
-			<label index="tx_seminars_attendances.expectations">Ожидания от события:</label>
+			<label index="tx_seminars_attendances.expectations">Ожидания отмероприятия:</label>
 			<label index="tx_seminars_attendances.background_knowledge">Базовые знания:</label>
 			<label index="tx_seminars_attendances.lodgings">Выбранные опции размещения:</label>
 			<label index="tx_seminars_attendances.accommodation">Ваши пожелания к размещению (отдельная комната, двойная комната, без размещения)?</label>
@@ -728,6 +735,8 @@
 			<label index="tx_seminars_sites">Места семинара</label>
 			<label index="tx_seminars_sites.title">Имя:</label>
 			<label index="tx_seminars_sites.address">Адрес:</label>
+			<label index="tx_seminars_sites.city">Город</label>
+			<label index="tx_seminars_sites.country">Страна</label>
 			<label index="tx_seminars_sites.homepage">Домашняя страница:</label>
 			<label index="tx_seminars_sites.directions">Указания:</label>
 			<label index="tx_seminars_sites.notes">Внутренние заметки:</label>
@@ -748,6 +757,18 @@
 			<label index="tx_seminars_lodgings.title">Название:</label>
 			<label index="tx_seminars_foods">Опции питания</label>
 			<label index="tx_seminars_foods.title">Название:</label>
+			<label index="tx_seminars_timeslots.title">Название:</label>
+			<label index="tx_seminars_timeslots.begin_date">Дата и время начала:</label>
+			<label index="tx_seminars_timeslots.end_date">Дата и время окончания:</label>
+			<label index="tx_seminars_timeslots.speakers">Референты</label>
+			<label index="tx_seminars_timeslots.place">Место</label>
+			<label index="tx_seminars_timeslots.room">Комнота</label>
+			<label index="tx_seminars_target_groups">Группы потенциальных потребителей:</label>
+			<label index="tx_seminars_target_groups.title">Название:</label>
+			<label index="tx_seminars_categories">Категория:</label>
+			<label index="tx_seminars_categories.title">Название:</label>
+			<label index="tx_seminars_skills">Способности</label>
+			<label index="tx_seminars_skills.title">Название:</label>
 			<label index="tt_content.list_type_pi1">Управление семинарами</label>
 		</languageKey>
 		<languageKey index="it" type="array">
@@ -1653,6 +1674,27 @@
 			<label index="tx_seminars_foods" type="integer">202329490</label>
 			<label index="tx_seminars_foods.title" type="integer">85903807</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
+			<label index="tx_seminars_test.title" type="integer">85903807</label>
+			<label index="tx_seminars_seminars.categories" type="integer">147031926</label>
+			<label index="tx_seminars_seminars.language" type="integer">8937228</label>
+			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
+			<label index="tx_seminars_speakers.skills" type="integer">89069054</label>
+			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
+			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
+			<label index="tx_seminars_sites.city" type="integer">201307921</label>
+			<label index="tx_seminars_sites.country" type="integer">258260574</label>
+			<label index="tx_seminars_timeslots.title" type="integer">192455458</label>
+			<label index="tx_seminars_timeslots.place" type="integer">129617664</label>
+			<label index="tx_seminars_timeslots.room" type="integer">214150095</label>
+			<label index="tx_seminars_categories.title" type="integer">85903807</label>
+			<label index="tx_seminars_skills.title" type="integer">85903807</label>
+			<label index="tx_seminars_target_groups" type="integer">206184555</label>
+			<label index="tx_seminars_target_groups.title" type="integer">85903807</label>
+			<label index="tx_seminars_categories" type="integer">183613834</label>
+			<label index="tx_seminars_skills" type="integer">178756701</label>
+			<label index="tx_seminars_timeslots.begin_date" type="integer">230060070</label>
+			<label index="tx_seminars_timeslots.end_date" type="integer">192800740</label>
+			<label index="tx_seminars_timeslots.speakers" type="integer">258305227</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2427,6 +2469,27 @@
 			<label index="tx_seminars_foods">Food options</label>
 			<label index="tx_seminars_foods.title">Title:</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
+			<label index="tx_seminars_test.title">Title:</label>
+			<label index="tx_seminars_seminars.categories">Categories:</label>
+			<label index="tx_seminars_seminars.language">Language:</label>
+			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
+			<label index="tx_seminars_speakers.skills">Skills:</label>
+			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
+			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
+			<label index="tx_seminars_sites.city">City:</label>
+			<label index="tx_seminars_sites.country">Country:</label>
+			<label index="tx_seminars_timeslots.title">Title</label>
+			<label index="tx_seminars_timeslots.place">Place</label>
+			<label index="tx_seminars_timeslots.room">Room</label>
+			<label index="tx_seminars_categories.title">Title:</label>
+			<label index="tx_seminars_skills.title">Title:</label>
+			<label index="tx_seminars_target_groups">Target Groups</label>
+			<label index="tx_seminars_target_groups.title">Title:</label>
+			<label index="tx_seminars_categories">Categories</label>
+			<label index="tx_seminars_skills">Skills</label>
+			<label index="tx_seminars_timeslots.begin_date">Begin date</label>
+			<label index="tx_seminars_timeslots.end_date">End date</label>
+			<label index="tx_seminars_timeslots.speakers">Speakers</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

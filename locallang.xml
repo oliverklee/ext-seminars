@@ -484,28 +484,53 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="pi1_title">Управление семинарами</label>
+			<label index="label_title">Название</label>
 			<label index="label_uid">Номер</label>
+			<label index="label_registration_uid">Номер билета</label>
+			<label index="label_event_type">Вид мероприятия</label>
 			<label index="label_accreditation_number">Номер аккредитации</label>
 			<label index="label_credit_points">Кредитные очки</label>
 			<label index="label_date">Дата</label>
 			<label index="label_time">Время</label>
 			<label index="label_place">Место</label>
 			<label index="label_room">Комната</label>
+			<label index="label_additional_times_places">Время и места</label>
 			<label index="label_seats">Мест</label>
 			<label index="label_total_price">Общая цена</label>
 			<label index="label_attendees_names">Дополнительные посетители</label>
 			<label index="label_lodgings">Выбранные опции размещения</label>
 			<label index="label_foods">Выбранные опции питания</label>
 			<label index="label_kids">Количество детей</label>
+			<label index="label_price">Цена</label>
 			<label index="label_price_general">Цена</label>
 			<label index="label_price_regular">Обычная цена</label>
+			<label index="label_price_regular_early">Цена при заказе заранее</label>
 			<label index="label_price_earlybird_regular">Цена при заказе заранее</label>
 			<label index="label_price_board_regular">Обычная цена при полном пансионе</label>
 			<label index="label_price_special">Специальная цена</label>
+			<label index="label_price_special_early">Специальная цена при раннем заказе</label>
 			<label index="label_price_earlybird_special">Специальная цена при раннем заказе</label>
 			<label index="label_price_board_special">Специальная цена при полном пансионе</label>
-			<label index="label_paymentmethod">Способ оплаты</label>
+			<label index="label_method_of_payment">Способ оплаты</label>
+			<label index="label_gender">Пол</label>
+			<label index="label_username">Имя пользователя</label>
+			<label index="label_name">Имя</label>
+			<label index="label_address">Адрес</label>
+			<label index="label_zip">Индекс</label>
+			<label index="label_city">Город</label>
+			<label index="label_country">Страна</label>
+			<label index="label_attendees">Участник</label>
+			<label index="label_vacancies">Свободные места</label>
+			<label index="label_enough_attendees">Достаточно участников</label>
+			<label index="label_paymentmethod">Выбраннй способ оплаты</label>
 			<label index="label_billing_address">Адрес для выставления счета</label>
+			<label index="label_telephone">Телефон</label>
+			<label index="label_fax">Факс</label>
+			<label index="label_interests">Интересы</label>
+			<label index="label_expectations">Ожидания</label>
+			<label index="label_background_knowledge">Подготовка</label>
+			<label index="label_known_from">Узнал от</label>
+			<label index="label_notes">Заметки</label>
 			<label index="label_url">Дополнительная информация</label>
 			<label index="label_seminardata">Дата семинара</label>
 			<label index="label_feuserdata">Данные аккаунта</label>
@@ -516,18 +541,21 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="label_status.I.2">Безработный</label>
 			<label index="label_status.I.3">Работающий</label>
 			<label index="label_status.I.4">На пенсии</label>
+			<label index="label_regular">Регулярный</label>
+			<label index="label_waiting_list">список очередников</label>
 			<label index="label_yes">да</label>
 			<label index="label_no">нет</label>
+			<label index="label_tx_seminars_phone_mobile">Номер мобильного телефона</label>
 			<label index="message_notLoggedIn_formal">Пожалуйста, войдите в систему.</label>
 			<label index="message_notLoggedIn_informal">Пожалуйста, войдите в систему.</label>
-			<label index="message_alreadyRegistered_formal">Вы уже зарегистрированы на это событие.</label>
-			<label index="message_alreadyRegistered_informal">Вы уже зарегистрированы на это событие.</label>
-			<label index="message_wrongSeminarNumber_formal">Не существует события с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
-			<label index="message_wrongSeminarNumber_informal">Не существует события с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
-			<label index="message_noRegistrationNecessary">На это событие не требуется регистрация</label>
-			<label index="message_seminarCancelled">К сожалению, событие было отменено</label>
-			<label index="message_noDate">Для этого события не указана дата.</label>
-			<label index="message_seminarRegistrationIsClosed">Срок регистрации на это событие истёк.</label>
+			<label index="message_alreadyRegistered_formal">Вы уже зарегистрированы на это мероприятие</label>
+			<label index="message_alreadyRegistered_informal">Вы уже зарегистрированы на это мероприятие.</label>
+			<label index="message_wrongSeminarNumber_formal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
+			<label index="message_wrongSeminarNumber_informal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
+			<label index="message_noRegistrationNecessary">На это мероприятие не требуется регистрация</label>
+			<label index="message_seminarCancelled">К сожалению, мероприятие было отменено</label>
+			<label index="message_noDate">Для этого мероприятия не указана дата.</label>
+			<label index="message_seminarRegistrationIsClosed">Срок регистрации на это мероприятие истёк.</label>
 			<label index="message_noVacancies">Извините, свободных мест не осталось</label>
 			<label index="message_invalidNumberOfSeats_formal">Извините, вы не можете зарезервировать такое количество мест. Зарезервируйте максимум %s мест.</label>
 			<label index="message_invalidNumberOfSeats_informal">Извините, вы не можете зарезервировать такое количество мест. Зарезервируйте максимум %s мест.</label>
@@ -539,18 +567,26 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="email_confirmationSubject">Подтверждение регистрации</label>
 			<label index="email_confirmationHello_formal">Здравствуйте %s,
 
-спасибо за регистрацию на событие:</label>
+спасибо за регистрацию на мероприятие:</label>
 			<label index="email_confirmationHello_informal">Здравствуйте %s,
 
-спасибо за регистрацию на событие:</label>
-			<label index="email_additionalNotificationEnoughRegistrations">На ваше событие зарегистрировалось достаточное количество участников для его проведения.</label>
+спасибо за регистрацию на мероприятие:</label>
+			<label index="email_confirmationOnUnregistrationSubject">Подтверждение отказа</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">Здравствуйте %s,
+
+вы отказались от участия на мероприятие:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">Здравствуйте %s,
+
+ты отказался от участия на мероприятие:</label>
+			<label index="email_additionalNotificationEnoughRegistrations">На ваше мероприятие зарегистрировалось достаточное количество участников для его проведения.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Достаточно регистраций на событие: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Максимальное количество регистраций на событие. Свободных мест нет.</label>
-			<label index="email_additionalNotificationIsFullSubject">Событие заполнено: %d - %s</label>
+			<label index="email_additionalNotificationIsFullSubject">Мероприятие заполнено: %d - %s</label>
 			<label index="email_notificationSubject">Сообщение о регистрации</label>
 			<label index="email_notificationHello">Здравствуйте,
 
 кто-то только что зарегистрировался:</label>
+			<label index="email_notificationOnUnregistrationSubject">Сообщение об отказе</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title">Gestore seminari</label>
@@ -1181,6 +1217,38 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
+			<label index="label_title" type="integer">192455458</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
+			<label index="label_event_type" type="integer">99114704</label>
+			<label index="label_additional_times_places" type="integer">178250458</label>
+			<label index="label_price" type="integer">56627526</label>
+			<label index="label_gender" type="integer">1698865</label>
+			<label index="label_username" type="integer">159898854</label>
+			<label index="label_name" type="integer">77521672</label>
+			<label index="label_address" type="integer">232242979</label>
+			<label index="label_zip" type="integer">164100864</label>
+			<label index="label_city" type="integer">92079470</label>
+			<label index="label_country" type="integer">93787849</label>
+			<label index="label_attendees" type="integer">12580046</label>
+			<label index="label_vacancies" type="integer">99017107</label>
+			<label index="label_enough_attendees" type="integer">124413256</label>
+			<label index="label_telephone" type="integer">197928267</label>
+			<label index="label_fax" type="integer">159451810</label>
+			<label index="label_interests" type="integer">163357902</label>
+			<label index="label_expectations" type="integer">114809365</label>
+			<label index="label_background_knowledge" type="integer">123294752</label>
+			<label index="label_notes" type="integer">256667525</label>
+			<label index="label_regular" type="integer">183729416</label>
+			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
+			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
+			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">197103273</label>
+			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">197103273</label>
+			<label index="label_price_regular_early" type="integer">236870027</label>
+			<label index="label_price_special_early" type="integer">255242535</label>
+			<label index="label_known_from" type="integer">129140510</label>
+			<label index="label_waiting_list" type="integer">128272059</label>
+			<label index="email_notificationOnUnregistrationSubject" type="integer">22055172</label>
+			<label index="label_method_of_payment" type="integer">138981420</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
@@ -1745,6 +1813,42 @@ thank you for registering for this event:</label>
 			<label index="email_notificationHello">Hello,
 
 someone just has registered for an event:</label>
+			<label index="label_title">Title</label>
+			<label index="label_registration_uid">Ticket ID</label>
+			<label index="label_event_type">Event type</label>
+			<label index="label_additional_times_places">Times and places</label>
+			<label index="label_price">Price</label>
+			<label index="label_gender">Gender</label>
+			<label index="label_username">User name</label>
+			<label index="label_name">Name</label>
+			<label index="label_address">Address</label>
+			<label index="label_zip">ZIP code</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
+			<label index="label_attendees">Attendees</label>
+			<label index="label_vacancies">Vacancies</label>
+			<label index="label_enough_attendees">Enough attendees</label>
+			<label index="label_telephone">Phone</label>
+			<label index="label_fax">Fax</label>
+			<label index="label_interests">Special interests</label>
+			<label index="label_expectations">Expectations</label>
+			<label index="label_background_knowledge">Background knowledge</label>
+			<label index="label_notes">Notes</label>
+			<label index="label_regular">regular</label>
+			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
+			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
+
+you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">Hello %s,
+
+you just have unregistered from this event:</label>
+			<label index="label_price_regular_early">Early-bird price</label>
+			<label index="label_price_special_early">Early-bird special price</label>
+			<label index="label_known_from">Known from</label>
+			<label index="label_waiting_list">waiting list</label>
+			<label index="email_notificationOnUnregistrationSubject">Unregistration notification</label>
+			<label index="label_method_of_payment">Method of payment</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title">Seminar Manager</label>
