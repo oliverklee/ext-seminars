@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1758] Fix: HTML validation errors in the list view option boxes
 - [#811] Feature: Add, edit, list functionality like the be_groups field in the be_user dialog, patch by Stefan Galinski
 - [#1774] Updated Russion translation, thanks to Irina Kuznecova
 - [#1770] Updated Italian translation, thanks to Mauro Lorenzutti

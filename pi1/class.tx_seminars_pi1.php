@@ -2890,6 +2890,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->prefixId.'['.$optionBoxName.'][]'
 		);
 
+		$this->setMarkerContent(
+			'optionbox_id',
+			$this->prefixId.'-'.$optionBoxName
+		);
+
 		// Fetches the possible entries for the current option box and renders
 		// them as HTML <option> entries for the <select> field.
 		$optionsList = '';
