@@ -626,7 +626,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
 
 			// Reads the event type from the event record.
-			$eventTypeUid = $currentEvent->getEventTypeUid();
+			$eventTypeUid = $currentEvent->getEventTypeUidForSelectorWidget();
 			$eventTypeName = $currentEvent->getEventType();
 			if (!isset($this->allEventTypes[$eventTypeUid])) {
 				$this->allEventTypes[$eventTypeUid] = $eventTypeName;

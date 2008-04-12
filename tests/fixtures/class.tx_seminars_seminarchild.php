@@ -102,15 +102,6 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Sets the event's type.
-	 *
-	 * @param	integer		event's type
-	 */
-	public function setEventType($type) {
-		$this->setRecordPropertyInteger('object_type', $type);
-	}
-
-	/**
 	 * Sets the configuration for showTimeOfUnregistrationDeadline.
 	 *
 	 * @param	integer		value for showTimeOfUnregistrationDeadline (0 or 1)

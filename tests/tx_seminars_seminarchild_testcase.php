@@ -322,6 +322,24 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Inserts an event type record into the database and creates a relation to
+	 * it from the fixture.
+	 *
+	 * @param	array		data of the event type to add, may be empty
+	 *
+	 * @return	integer		the UID of the created record, will be > 0
+	 */
+	private function addEventTypeRelation($eventTypeData) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, $eventTypeData
+		);
+
+		$this->fixture->setEventType($uid);
+
+		return $uid;
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -794,6 +812,21 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				SEMINARS_TABLE_LEADERS_MM,
 				'uid_local='.$this->fixture->getUid()
 			)
+		);
+	}
+
+	public function testAddEventTypeRelationReturnsUid() {
+		$uid = $this->addEventTypeRelation(array());
+
+		$this->assertTrue(
+			$uid > 0
+		);
+	}
+
+	public function testAddEventTypeRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addLeaderRelation(array()),
+			$this->addLeaderRelation(array())
 		);
 	}
 
@@ -1768,6 +1801,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////////
+	// Tests regarding the event type.
+	////////////////////////////////////
+
 	public function testGetEventTypeUidReturnsUidFromTopicRecord() {
 		// This test comes from bug #1515.
 		$topicRecordUid = $this->testingFramework->createRecord(
@@ -1790,6 +1827,37 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			99999,
 			$seminar->getEventTypeUid()
+		);
+	}
+
+	public function testGetEventTypeUidInitiallyReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getEventTypeUid()
+		);
+	}
+
+	public function testGetEventTypeUidWithEventTypeReturnsEventTypeUid() {
+		$eventTypeUid = $this->addEventTypeRelation(array());
+		$this->assertEquals(
+			$eventTypeUid,
+			$this->fixture->getEventTypeUid()
+		);
+	}
+
+	public function testGetEventTypeUidForSelectorWidgetInitiallyReturnsMinusOne() {
+		$this->assertEquals(
+			-1,
+			$this->fixture->getEventTypeUidForSelectorWidget()
+		);
+	}
+
+	public function testGetEventTypeUidForSelectorWidgetWithEventTypeReturnsEventTypeUid() {
+		$eventTypeUid = $this->addEventTypeRelation(array());
+
+		$this->assertEquals(
+			$eventTypeUid,
+			$this->fixture->getEventTypeUidForSelectorWidget()
 		);
 	}
 

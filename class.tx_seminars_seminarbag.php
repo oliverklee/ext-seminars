@@ -215,6 +215,8 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		foreach ($eventTypeUids as $currentEventTypeUid) {
 			if (intval($currentEventTypeUid) >= 0) {
 				$sanitizedEventTypeUids[] = intval($currentEventTypeUid);
+			} elseif (intval($currentEventTypeUid) == -1) {
+				$sanitizedEventTypeUids[] = 0;
 			}
 		}
 
