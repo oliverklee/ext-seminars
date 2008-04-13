@@ -11,6 +11,22 @@ CREATE TABLE fe_users (
 
 
 #
+# Table structure for table 'tx_partner_main'
+#
+CREATE TABLE tx_partner_main (
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL
+);
+
+
+#
+# Table structure for table 'tx_partner_contact_info'
+#
+CREATE TABLE tx_partner_contact_info (
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL
+);
+
+
+#
 # Table structure for table 'tx_seminars_test'
 #
 CREATE TABLE tx_seminars_test (
