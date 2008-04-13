@@ -36,7 +36,26 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.p
 
 class tx_seminars_test extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_TEST;
+	protected $tableName = SEMINARS_TABLE_TEST;
+
+	/**
+	 * Sets the test field of this record to a boolean value.
+	 *
+	 * @param	boolean		the boolean value to set
+	 */
+	public function setBooleanTest($test) {
+		$this->setRecordPropertyBoolean('test', $test);
+	}
+
+	/**
+	 * Returns true if the test field of this record is set, false otherwise.
+	 *
+	 * @return	boolean		true if the test field of this record is set, false
+	 * 						otherwise
+	 */
+	public function getBooleanTest() {
+		return $this->getRecordPropertyBoolean('test');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_test.php']) {

@@ -54,7 +54,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'deadline_unregistration' => $this->unregistrationDeadline,
-				'language' => 'de',
 				'attendees_min' => 5,
 				'attendees_max' => 10,
 				'object_type' => 0,
@@ -75,8 +74,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 	public function testIsOk() {
@@ -863,25 +861,22 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasLanguageWithDefaultLanguage() {
+	public function testHasLanguageWithLanguageReturnsTrue() {
+		$this->fixture->setLanguage('de');
 		$this->assertTrue(
 			$this->fixture->hasLanguage()
 		);
 	}
 
-	public function testHasLanguageWithNoLanguage() {
-		// unsets the language field
-		$this->fixture->setEventData(
-			array(
-				'language' => ''
-			)
-		);
+	public function testHasLanguageWithNoLanguageReturnsFalse() {
+		$this->fixture->setLanguage('');
 		$this->assertFalse(
 			$this->fixture->hasLanguage()
 		);
 	}
 
 	public function testGetLanguageNameWithDefaultLanguageOnSingleEvent() {
+		$this->fixture->setLanguage('de');
 		$this->assertEquals(
 			'Deutsch',
 			$this->fixture->getLanguageName()
@@ -889,11 +884,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetLanguageNameWithValidLanguageOnSingleEvent() {
-		$this->fixture->setEventData(
-			array(
-				'language' => 'en'
-			)
-		);
+		$this->fixture->setLanguage('en');
 		$this->assertEquals(
 			'English',
 			$this->fixture->getLanguageName()
@@ -901,24 +892,15 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetLanguageNameWithInvalidLanguageOnSingleEvent() {
-		$this->fixture->setEventData(
-			array(
-				'language' => 'xy'
-			)
-		);
+		$this->fixture->setLanguage('xy');
 		$this->assertEquals(
 			'',
 			$this->fixture->getLanguageName()
 		);
 	}
 
-
 	public function testGetLanguageNameWithNoLanguageOnSingleEvent() {
-		$this->fixture->setEventData(
-			array(
-				'language' => ''
-			)
-		);
+		$this->fixture->setLanguage('');
 		$this->assertEquals(
 			'',
 			$this->fixture->getLanguageName()

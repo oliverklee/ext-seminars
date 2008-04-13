@@ -605,7 +605,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// from each event object.
 		while ($currentEvent =& $seminarBag->getCurrent()) {
 			// Reads the language from the event record.
-			$languageIsoCode = $currentEvent->getRecordPropertyString('language');
+			$languageIsoCode = $currentEvent->getLanguage();
 			if ((!empty($languageIsoCode))
 				&& !isset($this->allLanguages[$languageIsoCode])) {
 				$languageName = $this->staticInfo->getStaticInfoName(
@@ -1314,7 +1314,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			// Hides unneeded sections for topic records.
-			if ($this->seminar->getRecordPropertyInteger('object_type')
+			if ($this->seminar->getRecordType()
 				== SEMINARS_RECORD_TYPE_TOPIC
 			) {
 				$this->readSubpartsToHide(
@@ -2687,9 +2687,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					);
 
 					// calculate the time left until the event starts
-					$eventStartTime = $this->seminar->getRecordPropertyInteger(
-						'begin_date'
-					);
+					$eventStartTime = $this->seminar->getBeginDateAsTimestamp();
 					$timeLeft = $eventStartTime - $now;
 
 					$message = $this->createCountdownMessage($timeLeft);

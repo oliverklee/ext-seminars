@@ -188,14 +188,14 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	// Tests for setting attributes.
 	//////////////////////////////////
 
-	public function testSetAndGetRecordPropertyBoolean() {
+	public function testSetAndGetRecordBooleanTest() {
 		$this->assertFalse(
-			$this->fixture->getRecordPropertyBoolean('test')
+			$this->fixture->getBooleanTest()
 		);
 
-		$this->fixture->setRecordPropertyBoolean('test', true);
+		$this->fixture->setBooleanTest(true);
 		$this->assertTrue(
-			$this->fixture->getRecordPropertyBoolean('test')
+			$this->fixture->getBooleanTest()
 		);
 	}
 

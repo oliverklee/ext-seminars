@@ -1221,6 +1221,27 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns the language ISO code for this event. In the case that no
+	 * language is selected, an empty string will be returned.
+	 *
+	 * @return	string		the ISO code of the language of this event or an
+	 * 						empty string if no language is set
+	 */
+	public function getLanguage() {
+		return $this->getRecordPropertyString('language');
+	}
+
+	/**
+	 * Sets the language ISO code for this event.
+	 *
+	 * @param	string		the ISO code of the language for this event to set,
+	 * 						may be empty
+	 */
+	public function setLanguage($language) {
+		$this->setRecordPropertyString('language', $language);
+	}
+
+	/**
 	 * Gets our regular price as a string containing amount and currency. If
 	 * no regular price has been set, either "free" or "to be announced" will
 	 * be returned, depending on the TS variable showToBeAnnouncedForEmptyPrice.
