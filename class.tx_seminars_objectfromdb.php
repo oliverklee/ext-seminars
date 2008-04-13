@@ -41,11 +41,11 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper
 
 class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = '';
+	protected $tableName = '';
 	/** associative array with the values from/for the DB */
-	var $recordData = array();
+	protected $recordData = array();
 	/** whether this record already is stored in the DB */
-	var $isInDb = false;
+	protected $isInDb = false;
 
 	/**
 	 * The constructor. Creates a test instance from a DB record.
@@ -55,10 +55,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
 	 * 						If this parameter is provided, $uid will be
 	 * 						ignored.
-	 *
-	 * @access	public
 	 */
-	function __construct($uid, $dbResult = null) {
+	public function __construct($uid, $dbResult = null) {
 		$this->retrieveRecordAndGetData($uid, $dbResult);
 		$this->init();
 	}
@@ -73,10 +71,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * 						If this parameter is provided, $uid will be ignored.
 	 * @param	boolean		whether it is possible to create an object from a
 	 * 						hidden record
-	 *
-	 * @access	protected
 	 */
-	function retrieveRecordAndGetData(
+	protected function retrieveRecordAndGetData(
 		$uid, $dbResult = null, $allowHiddenRecords = false
 	) {
 		if (!$dbResult) {
@@ -106,10 +102,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * $dbResultRow['name'] => $this->recordData['name']
 	 *
 	 * @param	array		associative array of a DB query result
-	 *
-	 * @access	protected
 	 */
-	function getDataFromDbResult(array $dbResultRow) {
+	protected function getDataFromDbResult(array $dbResultRow) {
 		if (!empty($this->tableName) && !empty($dbResultRow)) {
 			$this->recordData = $dbResultRow;
 			$this->isInDb = true;
@@ -121,10 +115,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * has a non-empty table name set and thus is basically usable.
 	 *
 	 * @return	boolean		true if the object has been initialized, false otherwise.
-	 *
-	 * @access	public
 	 */
-	function isOk() {
+	public function isOk() {
 		return (!empty($this->recordData) && !empty($this->tableName));
 	}
 
@@ -135,10 +127,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	string		key of the element to return
 	 *
 	 * @return	string		the corresponding element from the record data array
-	 *
-	 * @access	protected
 	 */
-	function getRecordPropertyString($key) {
+	protected function getRecordPropertyString($key) {
 		$result = $this->hasKey($key)
 			? trim($this->recordData[$key]) : '';
 
@@ -152,10 +142,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	string		key of the element to return
 	 *
 	 * @return	string		the corresponding element from the record data array
-	 *
-	 * @access	protected
 	 */
-	function getRecordPropertyDecimal($key) {
+	protected function getRecordPropertyDecimal($key) {
 		$result = $this->hasKey($key)
 			? trim($this->recordData[$key]) : '0.00';
 
@@ -169,10 +157,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	string		key of the element to check
 	 *
 	 * @return	boolean		true if the corresponding string exists and is non-empty
-	 *
-	 * @access	protected
 	 */
-	function hasRecordPropertyString($key) {
+	protected function hasRecordPropertyString($key) {
 		return ($this->getRecordPropertyString($key) != '');
 	}
 
@@ -183,10 +169,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	string		key of the element to check
 	 *
 	 * @return	boolean		true if the corresponding value exists and is non-zero
-	 *
-	 * @access	protected
 	 */
-	function hasRecordPropertyInteger($key) {
+	protected function hasRecordPropertyInteger($key) {
 		return (boolean) $this->getRecordPropertyInteger($key);
 	}
 
@@ -198,10 +182,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if the corresponding field exists and its value
 	 * 						is not "0.00".
-	 *
-	 * @access	protected
 	 */
-	function hasRecordPropertyDecimal($key) {
+	protected function hasRecordPropertyDecimal($key) {
 		return ($this->getRecordPropertyDecimal($key) != '0.00');
 	}
 
@@ -212,10 +194,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	string		key of the element to return
 	 *
 	 * @return	integer		the corresponding element from the record data array
-	 *
-	 * @access	protected
 	 */
-	function getRecordPropertyInteger($key) {
+	protected function getRecordPropertyInteger($key) {
 		$result = $this->hasKey($key)
 			? intval($this->recordData[$key]) : 0;
 
@@ -227,10 +207,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @param	string		key of the element to set (must be non-empty)
 	 * @param	integer		the value that will be written into the element
-	 *
-	 * @access	protected
 	 */
-	function setRecordPropertyInteger($key, $value) {
+	protected function setRecordPropertyInteger($key, $value) {
 		if (!empty($key)) {
 			$this->recordData[$key] = intval($value);
 		}
@@ -241,10 +219,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @param	string		key of the element to set (must be non-empty)
 	 * @param	string		the value that will be written into the element
-	 *
-	 * @access	protected
 	 */
-	function setRecordPropertyString($key, $value) {
+	protected function setRecordPropertyString($key, $value) {
 		if (!empty($key)) {
 			$this->recordData[$key] = trim((string) $value);
 		}
@@ -255,10 +231,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @param	string		key of the element to set (must be non-empty)
 	 * @param	boolean		the value that will be written into the element
-	 *
-	 * @access	protected
 	 */
-	function setRecordPropertyBoolean($key, $value) {
+	protected function setRecordPropertyBoolean($key, $value) {
 		if (!empty($key)) {
 			$this->recordData[$key] = (boolean) $value;
 		}
@@ -271,10 +245,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	string		key of the element to return
 	 *
 	 * @return	boolean		the corresponding element from the record data array
-	 *
-	 * @access	protected
 	 */
-	function getRecordPropertyBoolean($key) {
+	protected function getRecordPropertyBoolean($key) {
 		$result = $this->hasKey($key)
 			? ((boolean) $this->recordData[$key]) : false;
 
@@ -289,10 +261,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if $this->recordData has been initialized
 	 * 						and the array key exists, false otherwise
-	 *
-	 * @access	private
 	 */
-	function hasKey($key) {
+	private function hasKey($key) {
 		return ($this->isOk() && !empty($key) && isset($this->recordData[$key]));
 	}
 
@@ -303,10 +273,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * (otherwise the record will be created in the root page).
 	 *
 	 * @return	boolean		true if everything went OK, false otherwise
-	 *
-	 * @access	public
 	 */
-	function commitToDb() {
+	public function commitToDb() {
 		if (!$this->isOk()) {
 			return false;
 		}
@@ -344,10 +312,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * 						which we should create references, may be empty
 	 *
 	 * @return	integer		the number of created m:m records
-	 *
-	 * @access	protected
 	 */
-	function createMmRecords($mmTable, array $references) {
+	protected function createMmRecords($mmTable, array $references) {
 		if (empty($references)) {
 			return 0;
 		}
@@ -390,10 +356,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	boolean		whether hidden records should be accepted
 	 *
 	 * @return	boolean		true if a visible record with that UID exists; false otherwise.
-	 *
-	 * @access	protected
 	 */
-	function recordExists($uid, $tableName, $allowHiddenRecords = false) {
+	public function recordExists($uid, $tableName, $allowHiddenRecords = false) {
 		$result = is_numeric($uid) && ($uid);
 		$enableFields = tx_seminars_objectfromdb::retrieveEnableFields(
 			$tableName,
@@ -434,10 +398,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	boolean		whether hidden records are allowed
 	 *
 	 * @return	string		the additional query parameters that need to be added to a SQL query
-	 *
-	 * @access	public
 	 */
-	function retrieveEnableFields($tableName, $allowHiddenRecords = false) {
+	public function retrieveEnableFields($tableName, $allowHiddenRecords = false) {
 		// The second parameter for the enableFields() function controls
 		// whether hidden records should be ignored.
 		return $this->enableFields(
@@ -456,10 +418,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @param	boolean		whether to allow hidden records
 	 *
 	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
-	 *
-	 * @access	protected
 	 */
-	function retrieveRecord($uid, $allowHiddenRecords = false) {
+	protected function retrieveRecord($uid, $allowHiddenRecords = false) {
 		$enableFields = $this->retrieveEnableFields(
 			$this->tableName,
 			$allowHiddenRecords
@@ -486,10 +446,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * Gets our UID.
 	 *
 	 * @return	integer		our UID (or 0 if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getUid() {
+	public function getUid() {
 		return $this->getRecordPropertyInteger('uid');
 	}
 
@@ -497,10 +455,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * Checks whether this object has a UID.
 	 *
 	 * @return	boolean		true if this object has a UID, false otherwise
-	 *
-	 * @access	public
 	 */
-	function hasUid() {
+	public function hasUid() {
 		return $this->hasRecordPropertyInteger('uid');
 	}
 
@@ -508,10 +464,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * Gets our title.
 	 *
 	 * @return	string		our title (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getTitle() {
+	public function getTitle() {
 		return $this->getRecordPropertyString('title');
 	}
 
@@ -519,10 +473,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * Sets the title element of the record data array.
 	 *
 	 * @param	string		the value that will be written into the title element
-	 *
-	 * @access	public
 	 */
-	function setTitle($title) {
+	public function setTitle($title) {
 		$this->setRecordPropertyString('title', $title);
 	}
 
@@ -530,10 +482,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * Gets our PID.
 	 *
 	 * @return	integer		our PID (or 0 if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getCurrentBePageId() {
+	public function getCurrentBePageId() {
 		$result = parent::getCurrentBePageId();
 
 		if (!$result) {
@@ -600,10 +550,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @param	array	an associative array with the keys being the field names
 	 * 					and the value being the field values
-	 *
-	 * @access	public
 	 */
-	function saveToDatabase(array $updateArray) {
+	public function saveToDatabase(array $updateArray) {
 		if (count($updateArray)) {
 			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 				$this->tableName,
@@ -615,10 +563,8 @@ class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 
 	/**
 	 * Marks this object as a dummy record (when it is written to the DB).
-	 *
-	 * @access	public
 	 */
-	function enableTestMode() {
+	public function enableTestMode() {
 		$this->setRecordPropertyBoolean('is_dummy_record', true);
 	}
 }
