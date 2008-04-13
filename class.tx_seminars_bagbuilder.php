@@ -45,34 +45,32 @@ class tx_seminars_bagbuilder {
 	 * associative array with the WHERE clause parts (will be concatenated with
 	 * " AND " later)
 	 */
-	var $whereClauseParts = array();
+	protected $whereClauseParts = array();
 
 	/** the sorting field */
-	var $orderBy = 'uid';
+	protected $orderBy = 'uid';
 
 	/** the field by which the DB query result should be grouped */
-	var $groupBy = '';
+	protected $groupBy = '';
 
 	/** the number of records to retrieve; leave empty to set no limit */
-	var $limit = '';
+	protected $limit = '';
 
 	/** comma-separated list of additional table names for the query */
-	var $additionalTableNames = '';
+	protected $additionalTableNames = '';
 
 	/** whether the timing of records should be ignored */
-	var $ignoreTimingOfRecords = false;
+	protected $ignoreTimingOfRecords = false;
 
 	/** whether hidden records should be shown, too */
-	var $showHiddenRecords = false;
+	protected $showHiddenRecords = false;
 
 	/**
 	 * Creates and returns the customized bag.
 	 *
 	 * @return	tx_seminars_bag	customized, newly-created bag
-	 *
-	 * @access	public
 	 */
-	function build() {
+	public function build() {
 		$bagClassname = t3lib_div::makeInstanceClassName(
 			$this->bagClassName
 		);
@@ -90,10 +88,8 @@ class tx_seminars_bagbuilder {
 	/**
 	 * Configures the bag to work like a BE list: It will use the default
 	 * sorting in the BE, and hidden records will be shown.
-	 *
-	 * @access	public
 	 */
-	function setBackEndMode() {
+	public function setBackEndMode() {
 		$this->showHiddenRecords = true;
 		$this->ignoreTimingOfRecords = true;
 	}
@@ -105,10 +101,8 @@ class tx_seminars_bagbuilder {
 	 * 						with the records; must not be empty; need not be
 	 * 						safeguarded against SQL injection
 	 * @param	integer		recursion depth, must be >= 0
-	 *
-	 * @access	public
 	 */
-	function setSourcePages($sourcePagePids, $recursionDepth = 0) {
+	public function setSourcePages($sourcePagePids, $recursionDepth = 0) {
 		static $templateHelper = null;
 
 		if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
@@ -132,20 +126,16 @@ class tx_seminars_bagbuilder {
 	 *
 	 * @return	boolean		true if source pages have already been set, false
 	 * 						otherwise
-	 *
-	 * @access	public
 	 */
-	function hasSourcePages() {
+	public function hasSourcePages() {
 		return isset($this->whereClauseParts['pages']);
 	}
 
 	/**
 	 * Sets the created bag to only take records into account that have been
 	 * created with the oelib testing framework.
-	 *
-	 * @access	public
 	 */
-	function setTestMode() {
+	public function setTestMode() {
 		$this->whereClauseParts['tests'] = 'is_dummy_record = 1';
 	}
 
@@ -159,10 +149,8 @@ class tx_seminars_bagbuilder {
 	 *
 	 * @return	string		complete WHERE clause for the bag to create, will
 	 * 						not be empty
-	 *
-	 * @access	public
 	 */
-	function getWhereClause() {
+	public function getWhereClause() {
 		if (empty($this->whereClauseParts)) {
 			return '1=1';
 		}
