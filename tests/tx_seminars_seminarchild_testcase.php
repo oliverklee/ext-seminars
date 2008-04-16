@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Testcase for the seminar class in the 'seminars' extensions.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
@@ -3143,5 +3145,4 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 }
-
 ?>

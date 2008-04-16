@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Class 'registrations list' for the 'seminars' extension.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
@@ -210,5 +212,4 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_registrationslist.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_registrationslist.php']);
 }
-
 ?>

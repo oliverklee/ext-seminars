@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Class 'tx_seminars_testbagbuilder' for the 'seminars' extension.
  *
@@ -28,6 +29,7 @@
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
@@ -42,5 +44,4 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_testbagbuilder.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_testbagbuilder.php']);
 }
-
 ?>

@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Module 'Seminars' for the 'seminars' extension.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
@@ -346,5 +348,4 @@ foreach ($SOBE->include_once as $INC_FILE) {
 
 $SOBE->main();
 $SOBE->printContent();
-
 ?>

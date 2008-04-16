@@ -30,6 +30,7 @@
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
@@ -101,5 +102,4 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_timespanchild.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_timespanchild.php']);
 }
-
 ?>

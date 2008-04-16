@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Class 'tx_seminars' for the 'seminars' extension.
  * This naming scheme needs to be followed due to the naming conventions
@@ -321,5 +322,4 @@ class tx_seminars extends tx_dhdb {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/api/class.tx_seminars.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/api/class.tx_seminars.php']);
 }
-
 ?>

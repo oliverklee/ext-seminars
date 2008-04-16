@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Class that adds the wizard icon.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1_wizicon {
@@ -73,5 +75,4 @@ class tx_seminars_pi1_wizicon {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_wizicon.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_wizicon.php']);
 }
-
 ?>

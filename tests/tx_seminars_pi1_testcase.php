@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Testcase for the pi1 class in the 'seminars' extension.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
@@ -1124,5 +1126,4 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 }
-
 ?>

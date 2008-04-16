@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Class 'ux_t3lib_TCEmain' for the TYPO3 4.1 core.
  *
@@ -33,6 +34,7 @@
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Niels Pardon <mail@niels-pardon.de>
  * @author		Oliver Hader <oh@inpublica.de>
  *

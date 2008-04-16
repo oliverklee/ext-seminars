@@ -32,6 +32,7 @@
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
@@ -628,5 +629,4 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_dbplugin.php']) {
 	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_dbplugin.php']);
 }
-
 ?>

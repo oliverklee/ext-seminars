@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * BE CSV export module for the 'seminars' extension.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
@@ -60,5 +62,4 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminar
 $SOBE = t3lib_div::makeInstance('tx_seminars_csv');
 $SOBE->init();
 $SOBE->printContent();
-
 ?>

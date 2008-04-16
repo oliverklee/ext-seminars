@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Testcase for the place class in the 'seminars' extensions.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Mario Rimann <typo3-coding@rimann.org>
  */
 
@@ -90,5 +92,4 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 		);
 	}
 }
-
 ?>

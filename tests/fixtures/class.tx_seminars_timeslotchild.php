@@ -30,6 +30,7 @@
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
@@ -60,5 +61,4 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_timeslotchild.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_timeslotchild.php']);
 }
-
 ?>

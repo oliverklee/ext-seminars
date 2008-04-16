@@ -21,11 +21,13 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Testcase for the seminarbag class in the 'seminars' extensions.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Mario Rimann <typo3-coding@rimann.org>
  */
 
@@ -178,7 +180,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 				'event_type' => $eventTypeUid
 			)
 		);
-		
+
 		$this->assertEquals(
 			' AND '.SEMINARS_TABLE_SEMINARS.'.uid IN('.$eventUid.')',
 			$this->fixture->getAdditionalQueryForEventType(array($eventTypeUid))
@@ -559,5 +561,4 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 }
-
 ?>

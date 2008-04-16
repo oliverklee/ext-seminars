@@ -30,6 +30,7 @@
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Mario Rimann <typo3-coding@rimann.org>
  */
@@ -93,5 +94,4 @@ final class tx_seminars_dbpluginchild extends tx_seminars_dbplugin {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_dbpluginchild.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_dpbluginchild.php']);
 }
-
 ?>

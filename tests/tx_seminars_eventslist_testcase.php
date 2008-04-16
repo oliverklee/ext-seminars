@@ -27,6 +27,7 @@
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
+ *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
@@ -387,5 +388,4 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		);
 	}
 }
-
 ?>

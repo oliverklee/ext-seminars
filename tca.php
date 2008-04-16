@@ -1879,5 +1879,4 @@ $TCA['tx_seminars_skills'] = array(
 		'1' => array('showitem' => '')
 	)
 );
-
 ?>

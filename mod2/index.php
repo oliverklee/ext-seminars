@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Module 'Events' for the 'seminars' extension.
  *
@@ -292,5 +293,4 @@ foreach ($SOBE->include_once as $INC_FILE) {
 }
 
 $SOBE->main();
-
 ?>
