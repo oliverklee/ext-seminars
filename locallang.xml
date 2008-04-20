@@ -481,6 +481,66 @@ Bedankt voor je aanmelding voor dit evenement:</label>
 			<label index="email_notificationHello">Hallo,
 
 iemand heeft zich zojuist voor een evenement geregistreerd:</label>
+			<label index="label_title">Titel</label>
+			<label index="label_registration_uid">Kaart Nummer</label>
+			<label index="label_event_type">Evenement type</label>
+			<label index="label_price">Prijs</label>
+			<label index="label_price_regular_early">Vroegboeking prijs</label>
+			<label index="label_price_special_early">Vroegboek speciale prijs</label>
+			<label index="label_method_of_payment">Betaalwijze</label>
+			<label index="label_gender">Geslacht</label>
+			<label index="label_username">Gebruikernaam</label>
+			<label index="label_name">Naam</label>
+			<label index="label_address">Adres</label>
+			<label index="label_zip">Postcode</label>
+			<label index="label_city">Woonplaats</label>
+			<label index="label_country">Land</label>
+			<label index="label_attendees">Deelnemers</label>
+			<label index="label_vacancies">Vrije plaatsten</label>
+			<label index="label_enough_attendees">Voldoende deelnemers</label>
+			<label index="label_is_full">Is volgeboekt</label>
+			<label index="label_fax">Fax</label>
+			<label index="label_interests">Speciale interesses</label>
+			<label index="label_expectations">Verwachtingen</label>
+			<label index="label_background_knowledge">Achtergrond kennis</label>
+			<label index="label_known_from">Bekend van</label>
+			<label index="label_notes">Notities</label>
+			<label index="label_regular">standaar</label>
+			<label index="label_waiting_list">wachtlijst</label>
+			<label index="label_tx_seminars_phone_mobile">Mobiel nummer</label>
+			<label index="email_confirmationOnUnregistrationSubject">Bevestiging van annuleren registratie</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">Hallo %s,
+
+je registratie voor dit evenement is zojuist geannuleerd:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">Hallo %s,
+
+je registratie voor dit evenement is zojuist geannuleerd:</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject">Bevestiging van registratie op de wachtlijst</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">Hallo %s,
+
+bedankt voor jouw aanmelding op de wachtlijst voor dit evenement:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">Hallo %s,
+
+bedankt voor jouw aanmelding op de wachtlijst voor dit evenement:</label>
+			<label index="email_confirmationOnQueueUpdateSubject">De registratie is een bevestiging van een standaard registratie geworden</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Hallo %s,
+
+je registratie is een standaard registratie voor de evenement geworden:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">Hallo %s,
+
+je registratie is een standaard registratie voor de evenement geworden:</label>
+			<label index="email_notificationOnUnregistrationSubject">melding van annulering registratie</label>
+			<label index="email_notificationOnUnregistrationHello">Hallo,
+
+iemand heeft zojuist een registratie geannuleerd van een evenement:</label>
+			<label index="email_notificationOnRegistrationForQueueSubject">melding van registratie op de wachtlijst</label>
+			<label index="email_notificationOnRegistrationForQueueHello">Hallo,
+
+iemand heeft zich zojuist geregistreerd op de wachtlijst van een evenement:</label>
+			<label index="email_notificationOnQueueUpdateSubject">De registratie is een melding van een standaar registratie geworden.</label>
+			<label index="email_notificationOnQueueUpdateHello">Hallo,
+
+een registratie is zojuist een standaard registratie geworden voor een evenement:</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="pi1_title">Управление семинарами</label>
@@ -1153,6 +1213,48 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject" type="integer">106627365</label>
 			<label index="email_additionalNotificationIsFull" type="integer">125053794</label>
 			<label index="email_additionalNotificationIsFullSubject" type="integer">73270895</label>
+			<label index="label_title" type="integer">192455458</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
+			<label index="label_event_type" type="integer">99114704</label>
+			<label index="label_price" type="integer">56627526</label>
+			<label index="label_price_regular_early" type="integer">236870027</label>
+			<label index="label_price_special_early" type="integer">255242535</label>
+			<label index="label_method_of_payment" type="integer">138981420</label>
+			<label index="label_gender" type="integer">1698865</label>
+			<label index="label_username" type="integer">159898854</label>
+			<label index="label_name" type="integer">77521672</label>
+			<label index="label_address" type="integer">232242979</label>
+			<label index="label_zip" type="integer">164100864</label>
+			<label index="label_city" type="integer">92079470</label>
+			<label index="label_country" type="integer">93787849</label>
+			<label index="label_attendees" type="integer">12580046</label>
+			<label index="label_vacancies" type="integer">99017107</label>
+			<label index="label_enough_attendees" type="integer">124413256</label>
+			<label index="label_is_full" type="integer">13790082</label>
+			<label index="label_fax" type="integer">159451810</label>
+			<label index="label_interests" type="integer">163357902</label>
+			<label index="label_expectations" type="integer">114809365</label>
+			<label index="label_background_knowledge" type="integer">123294752</label>
+			<label index="label_known_from" type="integer">129140510</label>
+			<label index="label_notes" type="integer">256667525</label>
+			<label index="label_regular" type="integer">183729416</label>
+			<label index="label_waiting_list" type="integer">128272059</label>
+			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
+			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
+			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">197103273</label>
+			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">197103273</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject" type="integer">245357554</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">49182706</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">49182706</label>
+			<label index="email_confirmationOnQueueUpdateSubject" type="integer">141930955</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">262513865</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">262513865</label>
+			<label index="email_notificationOnUnregistrationSubject" type="integer">22055172</label>
+			<label index="email_notificationOnUnregistrationHello" type="integer">199821822</label>
+			<label index="email_notificationOnRegistrationForQueueSubject" type="integer">262800061</label>
+			<label index="email_notificationOnRegistrationForQueueHello" type="integer">252080490</label>
+			<label index="email_notificationOnQueueUpdateSubject" type="integer">50452167</label>
+			<label index="email_notificationOnQueueUpdateHello" type="integer">167179722</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
@@ -1924,6 +2026,66 @@ thank you for registering for this event:</label>
 			<label index="email_notificationHello">Hello,
 
 someone just has registered for an event:</label>
+			<label index="label_title">Title</label>
+			<label index="label_registration_uid">Ticket ID</label>
+			<label index="label_event_type">Event type</label>
+			<label index="label_price">Price</label>
+			<label index="label_price_regular_early">Early-bird price</label>
+			<label index="label_price_special_early">Early-bird special price</label>
+			<label index="label_method_of_payment">Method of payment</label>
+			<label index="label_gender">Gender</label>
+			<label index="label_username">User name</label>
+			<label index="label_name">Name</label>
+			<label index="label_address">Address</label>
+			<label index="label_zip">ZIP code</label>
+			<label index="label_city">City</label>
+			<label index="label_country">Country</label>
+			<label index="label_attendees">Attendees</label>
+			<label index="label_vacancies">Vacancies</label>
+			<label index="label_enough_attendees">Enough attendees</label>
+			<label index="label_is_full">Is full</label>
+			<label index="label_fax">Fax</label>
+			<label index="label_interests">Special interests</label>
+			<label index="label_expectations">Expectations</label>
+			<label index="label_background_knowledge">Background knowledge</label>
+			<label index="label_known_from">Known from</label>
+			<label index="label_notes">Notes</label>
+			<label index="label_regular">regular</label>
+			<label index="label_waiting_list">waiting list</label>
+			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
+			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
+
+you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">Hello %s,
+
+you just have unregistered from this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">Hello %s,
+
+thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">Hello %s,
+
+thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Hello %s,
+
+your registration just has become a regular registration of this event:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">Hello %s,
+
+your registration just has become a regular registration of this event:</label>
+			<label index="email_notificationOnUnregistrationSubject">Unregistration notification</label>
+			<label index="email_notificationOnUnregistrationHello">Hello,
+
+someone just has unregistered from an event:</label>
+			<label index="email_notificationOnRegistrationForQueueSubject">Registration for waiting list notification</label>
+			<label index="email_notificationOnRegistrationForQueueHello">Hello,
+
+someone just has registered for the waiting list of an event:</label>
+			<label index="email_notificationOnQueueUpdateSubject">Registration became a regular registration notification</label>
+			<label index="email_notificationOnQueueUpdateHello">Hello,
+
+someone's registration just has become a regular registration of an event:</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title">Seminar Manager</label>

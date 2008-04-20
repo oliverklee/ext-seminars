@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1771] Updated Dutch translation, thanks to Kees van der Hall
 - [#1818] Change: Comment and whitespace consistency cleanup
 - [#1790] Fix: Option boxes for event types: Type "Workshop" loses the selection after submitting
 - [#1758] Fix: HTML validation errors in the list view option boxes
