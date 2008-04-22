@@ -202,7 +202,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * @return	string		the heading line for the list of registrations, will
 	 * 						not be empty
 	 */
-	private function createRegistrationsHeading() {
+	protected function createRegistrationsHeading() {
 		$headerLineWithoutWrapping
 			= $this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
 				.','
@@ -320,7 +320,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * @return	array		the data for the keys provided in $keys
 	 *						(may be empty)
 	 */
-	private function retrieveData(&$dataSupplier, $supplierFunction, $keys) {
+	protected function retrieveData(&$dataSupplier, $supplierFunction, $keys) {
 		$result = array();
 
 		if (!empty($keys) && method_exists($dataSupplier, $supplierFunction)) {

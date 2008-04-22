@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1833] Fix: private -> protected in pi2 (XCLASSING issue), patch by Stefan Galinski
 - [#1771] Updated Dutch translation, thanks to Kees van der Hall
 - [#1818] Change: Comment and whitespace consistency cleanup
 - [#1790] Fix: Option boxes for event types: Type "Workshop" loses the selection after submitting
