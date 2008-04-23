@@ -194,6 +194,9 @@ plugin.tx_seminars_pi1 {
 	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_error = error
 
+	# the PID of a fixed event that should be shown in a detailed view
+	showSingleEvent =
+
 	# the time-frame from which events should be displayed in the list view
 	timeframeInList = currentAndUpcoming
 

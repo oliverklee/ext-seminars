@@ -240,6 +240,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 
 		$this->checkRegistrationFlag();
 
+		$this->checkShowSingleEvent();
 		$this->checkHideFields();
 		$this->checkGeneralPriceInSingle();
 		$this->checkShowSpeakerDetails();
@@ -270,6 +271,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRecursive();
 		$this->checkListView(array_keys($this->objectToCheck->orderByList));
 
+		// This is checked for the list view as well because an invalid value
+		// might cause the list view to be displayed instead of the single view.
+		$this->checkShowSingleEvent();
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
 		$this->checkHideSearchForm();
@@ -1923,6 +1927,23 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		);
 
 		return;
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * showSingleEvent.
+	 *
+	 * @access	private
+	 */
+	function checkShowSingleEvent() {
+		$this->checkIfPositiveIntegerOrEmpty(
+			'showSingleEvent',
+			true,
+			's_template_special',
+			'This value specifies which fixed single event should be shown. If '
+				.'this value is not set correctly, an error message will be '
+				.'shown instead.'
+		);
 	}
 }
 
