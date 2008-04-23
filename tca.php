@@ -134,7 +134,7 @@ $TCA['tx_seminars_test'] = array(
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,cancelled,owner_feuser,vips,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,owner_feuser,vips,notes'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -754,11 +754,19 @@ $TCA['tx_seminars_seminars'] = array(
 				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_target_groups')
 			)
 		),
+		'skip_collision_check' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.skip_collision_check',
+			'config' => array(
+				'type' => 'check',
+				'default' => 0
+			)
+		),
 		'cancelled' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancelled',
 			'config' => array(
-				'type' => 'check',
+				'type' => 'check'
 			)
 		),
 		'owner_feuser' => array(
@@ -803,7 +811,7 @@ $TCA['tx_seminars_seminars'] = array(
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, attendees_min, attendees_max, queue_size, target_groups, '
+				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, attendees_min, attendees_max, queue_size, target_groups, skip_collision_check, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
@@ -819,7 +827,7 @@ $TCA['tx_seminars_seminars'] = array(
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, attendees_min, attendees_max, queue_size, '
+				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, attendees_min, attendees_max, queue_size, skip_collision_check, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods'
 		)
 	),

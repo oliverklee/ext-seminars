@@ -4011,7 +4011,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// If this event doesn't have a date yet, the time cannot be blocked
 		// either.
 		if (($feUserUid > 0) && !$this->allowsMultipleRegistrations()
-			&& $this->hasDate()) {
+			&& $this->hasDate()  && !$this->skipCollisionCheck()) {
 
 			$additionalTables = SEMINARS_TABLE_ATTENDANCES;
 			$queryWhere = $this->getQueryForCollidingEvents();
@@ -4035,6 +4035,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return $result;
 	}
 
+ 	/**
+	 * Checkes whether the collision check should be skipped for this event.
+	 *
+	 * @return	boolean		true if the collision check should be skipped for
+	 * 						this event, false otherwise
+	 */
+	private function skipCollisionCheck() {
+		return $this->getRecordPropertyBoolean('skip_collision_check');
+	}
+
 	/**
 	 * Creates a WHERE clause that selects events that collide with this event's
 	 * times.
@@ -4046,15 +4056,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	string		WHERE clause (without the "WHERE" keyword), will not
 	 * 						be empty
-	 *
-	 * @access	protected
 	 */
-	function getQueryForCollidingEvents() {
+	private function getQueryForCollidingEvents() {
 		$beginDate = $this->getBeginDateAsTimestamp();
 		$endDate = $this->getEndDateAsTimestampEvenIfOpenEnded();
 
 		$result = SEMINARS_TABLE_SEMINARS.'.uid!='.$this->getUid()
 			.' AND allows_multiple_registrations=0'
+			.' AND skip_collision_check=0'
 			.' AND ('
 				.'('
 					// Check for events that have a begin date in our

@@ -962,8 +962,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'Italiano',
 			$seminar->getLanguageName()
 		);
-
-
 	}
 
 
@@ -1953,7 +1951,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 
 	////////////////////////////////////
-	// Tests regarding the time-slots.
+	// Tests regarding the time slots.
 	////////////////////////////////////
 
 	public function testGetTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {
@@ -2215,9 +2213,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
+	//////////////////////////////////
 	// Tests regarding the speakers.
-	///////////////////////////////////////////////////////////
+	//////////////////////////////////
 
 	public function testGetNumberOfSpeakersWithNoSpeakerReturnsZero() {
 		$this->assertEquals(
@@ -3142,6 +3140,109 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
 			$this->fixture->getSpeakersShort('leaders')
+		);
+	}
+
+
+	/////////////////////////////////////////
+	// Test concerning the collision check.
+	/////////////////////////////////////////
+
+	public function testEventsWithTheExactSameDateCollide() {
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			$this->testingFramework->createFrontEndUserGroup()
+		);
+
+		$begin = mktime();
+		$end = $begin + 1000;
+
+		$this->fixture->setBeginDate($begin);
+		$this->fixture->setEndDate($end);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $begin,
+				'end_date' => $end
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $eventUid,
+				'user' => $frontEndUserUid
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->isUserBlocked($frontEndUserUid)
+		);
+	}
+
+	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForThisEvent() {
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			$this->testingFramework->createFrontEndUserGroup()
+		);
+
+		$begin = mktime();
+		$end = $begin + 1000;
+
+		$this->fixture->setBeginDate($begin);
+		$this->fixture->setEndDate($end);
+		$this->fixture->setSkipCollisionCheck(true);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $begin,
+				'end_date' => $end
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $eventUid,
+				'user' => $frontEndUserUid
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->isUserBlocked($frontEndUserUid)
+		);
+	}
+
+	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForAnotherEvent() {
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			$this->testingFramework->createFrontEndUserGroup()
+		);
+
+		$begin = mktime();
+		$end = $begin + 1000;
+
+		$this->fixture->setBeginDate($begin);
+		$this->fixture->setEndDate($end);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $begin,
+				'end_date' => $end,
+				'skip_collision_check' => 1
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $eventUid,
+				'user' => $frontEndUserUid
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->isUserBlocked($frontEndUserUid)
 		);
 	}
 }
