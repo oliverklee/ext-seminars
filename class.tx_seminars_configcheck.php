@@ -222,6 +222,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 
 		$this->checkRegistrationFlag();
 
+		$this->checkShowSingleEvent();
 		$this->checkHideFields();
 		$this->checkGeneralPriceInSingle();
 		$this->checkShowSpeakerDetails();
@@ -249,6 +250,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRecursive();
 		$this->checkListView(array_keys($this->objectToCheck->orderByList));
 
+		// This is checked for the list view as well because an invalid value
+		// might cause the list view to be displayed instead of the single view.
+		$this->checkShowSingleEvent();
 		$this->checkHideColumns();
 		$this->checkTimeframeInList();
 		$this->checkHideSelectorWidget();
@@ -1744,7 +1748,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendParametersToPageToShowAfterUnregistrationUrl',
 			true,
 			's_registration',
-			'This value specifies wether the sending of parameters to the page '
+			'This value specifies whether the sending of parameters to the page '
 				.'which is shown after an unregistration should be enabled or '
 				.'not. If this value is incorrect the sending of parameters '
 				.'will not be enabled or disabled correctly.'
@@ -1777,7 +1781,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendNotification',
 			false,
 			'',
-			'This value specifies wether a notification e-mail should be send '
+			'This value specifies whether a notification e-mail should be sent '
 				.'to the organizer after a user has registered. If this value '
 				.'is not set correctly, the sending of notifications probably '
 				.'will not work as expected.'
@@ -1793,7 +1797,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendNotificationOnUnregistration',
 			false,
 			'',
-			'This value specifies wether a notification e-mail should be send '
+			'This value specifies whether a notification e-mail should be sent '
 				.'to the organizer after a user has unregistered. If this value '
 				.'is not set correctly, the sending of notifications probably '
 				.'will not work as expected.'
@@ -1809,7 +1813,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendNotificationOnRegistrationForQueue',
 			false,
 			'',
-			'This value specifies wether a notification e-mail should be send '
+			'This value specifies whether a notification e-mail should be sent '
 				.'to the organizer after someone registered for the queue. If '
 				.'this value is not set correctly, the sending of notifications '
 				.'probably will not work as expected.'
@@ -1825,7 +1829,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendNotificationOnQueueUpdate',
 			false,
 			'',
-			'This value specifies wether a notification e-mail should be send '
+			'This value specifies whether a notification e-mail should be sent '
 				.'to the organizer after the queue has been updated. If '
 				.'this value is not set correctly, the sending of notifications '
 				.'probably will not work as expected.'
@@ -1840,7 +1844,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendConfirmation',
 			false,
 			'',
-			'This value specifies wether a confirmation e-mail should be send '
+			'This value specifies whether a confirmation e-mail should be sent '
 				.'to the user after the user has registered. If this value is '
 				.'not set correctly, the sending of notifications probably will '
 				.'not work as expected.'
@@ -1856,7 +1860,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendConfirmationOnUnregistration',
 			false,
 			'',
-			'This value specifies wether a confirmation e-mail should be send '
+			'This value specifies whether a confirmation e-mail should be sent '
 				.'to the user after the user has unregistered. If this value is '
 				.'not set correctly, the sending of notifications probably will '
 				.'not work as expected.'
@@ -1872,7 +1876,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendConfirmationOnRegistrationForQueue',
 			false,
 			'',
-			'This value specifies wether a confirmation e-mail should be send '
+			'This value specifies whether a confirmation e-mail should be sent '
 				.'to the user after the user has registered for the queue. If '
 				.'this value is not set correctly, the sending of notifications '
 				.'probably will not work as expected.'
@@ -1888,7 +1892,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'sendConfirmationOnQueueUpdate',
 			false,
 			'',
-			'This value specifies wether a confirmation e-mail should be send '
+			'This value specifies whether a confirmation e-mail should be sent '
 				.'to the user after the queue has been updated. If this value is '
 				.'not set correctly, the sending of notifications probably will '
 				.'not work as expected.'
@@ -1902,6 +1906,21 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	private function checkExternalLinkTarget() {
 		// Does nothing.
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * showSingleEvent.
+	 */
+	private function checkShowSingleEvent() {
+		$this->checkIfPositiveIntegerOrEmpty(
+			'showSingleEvent',
+			true,
+			's_template_special',
+			'This value specifies which fixed single event should be shown. If '
+				.'this value is not set correctly, an error message will be '
+				.'shown instead.'
+		);
 	}
 }
 
