@@ -1,4 +1,5 @@
 0.5.4 (currently working on)
+- [#1686] Fix: Removed wrongly encoded stuff from Danish translation in locallang file
 - [#1226] Fix: showSingleEvent is missing from setup.txt
 - [#1737] Fix: In mod2, topics and dates have the "single event" icon
 - [#1443] Fix: omitDateIfSameAsPrevious does not work

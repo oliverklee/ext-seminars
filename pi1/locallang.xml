@@ -350,7 +350,7 @@
 			<label index="label_your_user_data_informal">Dine adresse informationer:</label>
 			<label index="label_method_of_payment">Valgte betalingsmetode:</label>
 			<label index="message_wrongSeminarNumber_formal">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
-			<label index="message_wrongSeminarNumber_informal">Der findes ikke noget arrangement med dette nummer. Hvis du f&amp;#229;r denne fejl n&amp;#229;r du bruger et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
+			<label index="message_wrongSeminarNumber_informal">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_noResults">Beklager, ingen arrangementer fundet</label>
 			<label index="message_notLoggedIn_formal">Beklager, du skal være logget ind.</label>
 			<label index="message_notLoggedIn_informal">Beklager, du skal være logget ind.</label>
