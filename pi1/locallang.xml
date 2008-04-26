@@ -430,7 +430,7 @@
 			<label index="label_we_offer_events_in_categories_informal">I øjeblikket tilbyder vi arrangementer indenfor følgende kategorier:</label>
 			<label index="label_no_categories">I øjeblikket tilbyder vi ingen kategoriserede arrangementer.</label>
 			<label index="message_wrongSeminarNumber_formal">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
-			<label index="message_wrongSeminarNumber_informal">Der findes ikke noget arrangement med dette nummer. Hvis du f&amp;#229;r denne fejl n&amp;#229;r du bruger et link p&amp;#229; denne side informer da venligst webmaster. Tak!</label>
+			<label index="message_wrongSeminarNumber_informal">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_noResults">Beklager, ingen arrangementer fundet</label>
 			<label index="message_notLoggedIn_formal">Beklager, du skal være logget ind.</label>
 			<label index="message_notLoggedIn_informal">Beklager, du skal være logget ind.</label>
