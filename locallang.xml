@@ -553,9 +553,9 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_date">Дата</label>
 			<label index="label_time">Время</label>
 			<label index="label_place">Место</label>
-			<label index="label_room">Комната</label>
+			<label index="label_room">Зал</label>
 			<label index="label_additional_times_places">Время и места</label>
-			<label index="label_seats">Мест</label>
+			<label index="label_seats">Места</label>
 			<label index="label_total_price">Общая цена</label>
 			<label index="label_attendees_names">Дополнительные посетители</label>
 			<label index="label_lodgings">Выбранные опции размещения</label>
@@ -582,10 +582,12 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_attendees">Участник</label>
 			<label index="label_vacancies">Свободные места</label>
 			<label index="label_enough_attendees">Достаточно участников</label>
+			<label index="label_is_full">Забронированные места</label>
 			<label index="label_paymentmethod">Выбраннй способ оплаты</label>
 			<label index="label_billing_address">Адрес для выставления счета</label>
 			<label index="label_telephone">Телефон</label>
 			<label index="label_fax">Факс</label>
+			<label index="label_email">E-mail</label>
 			<label index="label_interests">Интересы</label>
 			<label index="label_expectations">Ожидания</label>
 			<label index="label_background_knowledge">Подготовка</label>
@@ -598,9 +600,9 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
 			<label index="label_status.I.1">Студент</label>
-			<label index="label_status.I.2">Безработный</label>
+			<label index="label_status.I.2">Ученик</label>
 			<label index="label_status.I.3">Работающий</label>
-			<label index="label_status.I.4">На пенсии</label>
+			<label index="label_status.I.4">Частный предпринематель</label>
 			<label index="label_regular">Регулярный</label>
 			<label index="label_waiting_list">список очередников</label>
 			<label index="label_yes">да</label>
@@ -609,10 +611,12 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="message_notLoggedIn_formal">Пожалуйста, войдите в систему.</label>
 			<label index="message_notLoggedIn_informal">Пожалуйста, войдите в систему.</label>
 			<label index="message_alreadyRegistered_formal">Вы уже зарегистрированы на это мероприятие</label>
-			<label index="message_alreadyRegistered_informal">Вы уже зарегистрированы на это мероприятие.</label>
-			<label index="message_wrongSeminarNumber_formal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
-			<label index="message_wrongSeminarNumber_informal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
-			<label index="message_noRegistrationNecessary">На это мероприятие не требуется регистрация</label>
+			<label index="message_alreadyRegistered_informal">Ты уже зарегистрированы на это мероприятие.</label>
+			<label index="message_userIsBlocked_formal">Вы уже зарегистрированы на одно мероприятие,которое совподает с этим мероприятием</label>
+			<label index="message_userIsBlocked_informal">Ты уже зарегистрирован на одно мероприятие,которое совподает с этим мероприятием</label>
+			<label index="message_wrongSeminarNumber_formal">Мероприятия с таким номером не существует . Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
+			<label index="message_wrongSeminarNumber_informal">Мероприятия с таким номером не существует. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
+			<label index="message_noRegistrationNecessary">Регистрация на это мероприятие не требуется</label>
 			<label index="message_seminarCancelled">К сожалению, мероприятие было отменено</label>
 			<label index="message_noDate">Для этого мероприятия не указана дата.</label>
 			<label index="message_seminarRegistrationIsClosed">Срок регистрации на это мероприятие истёк.</label>
@@ -638,15 +642,40 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="email_confirmationOnUnregistrationHello_informal">Здравствуйте %s,
 
 ты отказался от участия на мероприятие:</label>
-			<label index="email_additionalNotificationEnoughRegistrations">На ваше мероприятие зарегистрировалось достаточное количество участников для его проведения.</label>
-			<label index="email_additionalNotificationEnoughRegistrationsSubject">Достаточно регистраций на событие: %d - %s</label>
-			<label index="email_additionalNotificationIsFull">Максимальное количество регистраций на событие. Свободных мест нет.</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject">Подтверждение регистрации в списке ожидания</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">Здравствуйте %s,
+
+благодарим  за регистрацию на в списке ожидания для участия на мероприятие</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">Здравствуй %s,
+
+благодарим  за регистрацию на в списке ожидания для участия на мероприятие:</label>
+			<label index="email_confirmationOnQueueUpdateSubject">Подтверждение: регистрация получила статус регулярной регистрации</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Здравствуйте %s,
+
+Ваша регистрация получила статус регулярной регистрации</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">Здравствуй %s,
+
+твоя регистрация получила статус регулярной регистрации</label>
+			<label index="email_additionalNotificationEnoughRegistrations">На следующие мероприятие зарегистрировалось достаточное количество участников для его проведения.</label>
+			<label index="email_additionalNotificationEnoughRegistrationsSubject">На мероприятие: %d - %s регистраций достаточно</label>
+			<label index="email_additionalNotificationIsFull">Максимальное количество регистраций на мероприятие. Свободных мест нет.</label>
 			<label index="email_additionalNotificationIsFullSubject">Мероприятие заполнено: %d - %s</label>
 			<label index="email_notificationSubject">Сообщение о регистрации</label>
 			<label index="email_notificationHello">Здравствуйте,
 
 кто-то только что зарегистрировался:</label>
 			<label index="email_notificationOnUnregistrationSubject">Сообщение об отказе</label>
+			<label index="email_notificationOnUnregistrationHello">Здравствуйте,
+
+кто-то только что отказался от участия в мероприятии</label>
+			<label index="email_notificationOnRegistrationForQueueSubject">Подтверждение о регистраций в списке ожидания</label>
+			<label index="email_notificationOnRegistrationForQueueHello">Здравствуйте,
+
+кто-то только что зарегистрировался в списке ожидания на участия в мероприятии</label>
+			<label index="email_notificationOnQueueUpdateSubject">регистрация получила статус регулярной регистрации</label>
+			<label index="email_notificationOnQueueUpdateHello">Здравствуйте,
+
+только что зарегистрировавшийся получила статус регулярной регистрации на участия в мероприятии:</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title">Gestore seminari</label>
@@ -1351,6 +1380,21 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_waiting_list" type="integer">128272059</label>
 			<label index="email_notificationOnUnregistrationSubject" type="integer">22055172</label>
 			<label index="label_method_of_payment" type="integer">138981420</label>
+			<label index="label_is_full" type="integer">13790082</label>
+			<label index="label_email" type="integer">146136420</label>
+			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject" type="integer">245357554</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">49182706</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">49182706</label>
+			<label index="email_confirmationOnQueueUpdateSubject" type="integer">141930955</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">262513865</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">262513865</label>
+			<label index="email_notificationOnUnregistrationHello" type="integer">199821822</label>
+			<label index="email_notificationOnRegistrationForQueueSubject" type="integer">262800061</label>
+			<label index="email_notificationOnRegistrationForQueueHello" type="integer">252080490</label>
+			<label index="email_notificationOnQueueUpdateSubject" type="integer">50452167</label>
+			<label index="email_notificationOnQueueUpdateHello" type="integer">167179722</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
@@ -1951,6 +1995,35 @@ you just have unregistered from this event:</label>
 			<label index="label_waiting_list">waiting list</label>
 			<label index="email_notificationOnUnregistrationSubject">Unregistration notification</label>
 			<label index="label_method_of_payment">Method of payment</label>
+			<label index="label_is_full">Is full</label>
+			<label index="label_email">E-mail address</label>
+			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
+			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">Hello %s,
+
+thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">Hello %s,
+
+thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Hello %s,
+
+your registration just has become a regular registration of this event:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">Hello %s,
+
+your registration just has become a regular registration of this event:</label>
+			<label index="email_notificationOnUnregistrationHello">Hello,
+
+someone just has unregistered from an event:</label>
+			<label index="email_notificationOnRegistrationForQueueSubject">Registration for waiting list notification</label>
+			<label index="email_notificationOnRegistrationForQueueHello">Hello,
+
+someone just has registered for the waiting list of an event:</label>
+			<label index="email_notificationOnQueueUpdateSubject">Registration became a regular registration notification</label>
+			<label index="email_notificationOnQueueUpdateHello">Hello,
+
+someone's registration just has become a regular registration of an event:</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title">Seminar Manager</label>

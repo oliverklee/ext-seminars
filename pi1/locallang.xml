@@ -969,8 +969,10 @@
 			<label index="seminars.pi_flexform.timeframeInList6">предстоящие</label>
 			<label index="seminars.pi_flexform.timeframeInList7">мероприятия с дедлайном в будущем</label>
 			<label index="seminars.pi_flexform.hideFields">Скрыть поля в детализированном виде (разделение запятой):</label>
+			<label index="seminars.pi_flexform.hideSelectorWidget">Скрыть функцию Widget в списке:</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Показать пустые опции функции Widget:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Скрыть форму поиска в списке:</label>
-			<label index="seminars.pi_flexform.hidePageBrowser">Скрыть броузер страниц в списке:</label>
+			<label index="seminars.pi_flexform.hidePageBrowser">Скрыть браузер страниц в списке:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Скрыть отмененные события в списке:</label>
 			<label index="seminars.pi_flexform.sortListViewByCategory">Сортировать список по категориям</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Группа пользователей VIP:</label>
@@ -984,7 +986,11 @@
 			<label index="seminars.pi_flexform.showSiteDetails">Показывать информацию о месте</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Какие поля пользователей сайта показывать в списке регистраций</label>
 			<label index="seminars.pi_flexform.sheet_registration">Регистрация</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Количество шагов до регистрации</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Страница, показываемая после регистрации</label>
+			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Параметр показываемый после регистрации</label>
+			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Страница, показываемая после регистрации</label>
+			<label index="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl">Параметр показываемый после регистрации</label>
 			<label index="seminars.pi_flexform.sheet_fe_editing">Front-end редактирование</label>
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">Группа пользователей сайта, которой разрешено редактировать и создавать события</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Страница, которая предназначена для редактирования событий</label>
@@ -1013,6 +1019,7 @@
 			<label index="label_place">Место</label>
 			<label index="label_room">Комната</label>
 			<label index="label_additional_times_places">Время и место</label>
+			<label index="label_timeslots">окно</label>
 			<label index="label_speakers">Докладчики</label>
 			<label index="label_partners">Партнеры</label>
 			<label index="label_tutors">Преподаватели</label>
@@ -1034,11 +1041,13 @@
 			<label index="label_event_type">Тип события</label>
 			<label index="label_target_groups">Группы потенциальных потребителей</label>
 			<label index="label_organizers">Организаторы</label>
+			<label index="label_organizing_partners">партнеры организатора</label>
 			<label index="label_vacancies">Свободные места</label>
 			<label index="label_deadline_registration">Окончание регистрации</label>
 			<label index="label_status_registration">Статус</label>
 			<label index="label_registration">Регистрация</label>
 			<label index="label_onlineRegistration">Зарегистрироваться</label>
+			<label index="label_onlineRegistrationOnQueue">Зарегистрироваться в списоке ожидания (%d регистрация в списоке ожидания)</label>
 			<label index="label_onlineUnregistration">Зарегистрироваться</label>
 			<label index="label_list_registrations">Список регистраций</label>
 			<label index="label_listRegistrationsLink">Посмотреть список регистраций</label>
@@ -1048,7 +1057,7 @@
 			<label index="label_edit">Редактировать</label>
 			<label index="label_back">Назад к списку</label>
 			<label index="label_save">Сохранить</label>
-			<label index="label_step_counter">Анкета: шаг % из %</label>
+			<label index="label_step_counter">Анкета: шаг %d из %d</label>
 			<label index="label_register_additional_information">Следующая информация</label>
 			<label index="label_checkboxes">Следующая информация:</label>
 			<label index="label_interests">Особые интересы:</label>
@@ -1102,6 +1111,16 @@
 			<label index="label_timeslot_speakers">Референт</label>
 			<label index="label_unregistration_message_formal">Вы действително хотите отказаться от мероприятия?</label>
 			<label index="label_unregistration_message_informal">Ты действително хочешь отказаться от мероприятия?</label>
+			<label index="label_cancel">прервать</label>
+			<label index="label_unregister">отменить</label>
+			<label index="label_selector_submit">применить фильтер</label>
+			<label index="label_selector_pleaseChoose">выберите, пожайлуста ...</label>
+			<label index="label_selector_searchbox">поисковое слово</label>
+			<label index="label_searching_hints_formal">Вы можете профильтровать список с данными мероприятиями.Чтобы можно было снова просмотреть полный список.</label>
+			<label index="label_searching_hints_informal">Ты можешь профильтровать список с данными мероприятиями.Чтобы можно было снова просмотреть полный список.</label>
+			<label index="label_we_offer_events_in_categories_formal">Мы можем вам предложить следующие котегории мероприятий:</label>
+			<label index="label_we_offer_events_in_categories_informal">Мы можем тебе предложить следующие котегории мероприятий:</label>
+			<label index="label_no_categories">В даннаый момент мы можем предложить мероприятия в расположеных котегорииях</label>
 			<label index="message_wrongSeminarNumber_formal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_wrongSeminarNumber_informal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_noResults">Не найдено ни одного мероприятия.</label>
@@ -1114,6 +1133,7 @@
 			<label index="message_emptyTitle">Введите название мероприятия.</label>
 			<label index="message_emptyOrganizer">Выберите как минимум одного организатора.</label>
 			<label index="message_noAttendeesNumber">Введите числа для минимального и максимального количества участников.</label>
+			<label index="message_noQueueNumber">Введите число для указа размера списка ожидания</label>
 			<label index="message_noPriceNumber">Введите числа для цены (без обозначения валюты, используя точку как десятичный разделитель).</label>
 			<label index="message_noAccessToEventEditor_formal">Извините, у вас нет доступа к редактированию событий.</label>
 			<label index="message_noAccessToEventEditor_informal">Извините, у вас нет доступа к редактированию событий.</label>
@@ -2508,6 +2528,26 @@
 			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
+			<label index="seminars.pi_flexform.hideSelectorWidget" type="integer">98049188</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists" type="integer">27709563</label>
+			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" type="integer">159378554</label>
+			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID" type="integer">50906970</label>
+			<label index="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" type="integer">234489648</label>
+			<label index="label_timeslots" type="integer">147000660</label>
+			<label index="label_organizing_partners" type="integer">1285796</label>
+			<label index="label_onlineRegistrationOnQueue" type="integer">240607496</label>
+			<label index="label_cancel" type="integer">245659783</label>
+			<label index="label_unregister" type="integer">164931826</label>
+			<label index="label_selector_submit" type="integer">131190777</label>
+			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
+			<label index="label_selector_searchbox" type="integer">151546043</label>
+			<label index="label_searching_hints_formal" type="integer">130447560</label>
+			<label index="label_searching_hints_informal" type="integer">130447560</label>
+			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
+			<label index="label_no_categories" type="integer">133830972</label>
+			<label index="message_noQueueNumber" type="integer">546023</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3644,6 +3684,26 @@
 			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
+			<label index="seminars.pi_flexform.hideSelectorWidget">Hide the selector widget in list view:</label>
+			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
+			<label index="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl">Send parameters to page which is displayed after registration</label>
+			<label index="seminars.pi_flexform.pageToShowAfterUnregistrationPID">Page that will be displayed after a user has unregistered for an event</label>
+			<label index="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl">Send parameters to page which is displayed after unregistration</label>
+			<label index="label_timeslots">Time slots</label>
+			<label index="label_organizing_partners">Organizing partners</label>
+			<label index="label_onlineRegistrationOnQueue">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</label>
+			<label index="label_cancel">Cancel</label>
+			<label index="label_unregister">Unregister</label>
+			<label index="label_selector_submit">Apply filter</label>
+			<label index="label_selector_pleaseChoose">please choose...</label>
+			<label index="label_selector_searchbox">Search term</label>
+			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
+			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
+			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
+			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

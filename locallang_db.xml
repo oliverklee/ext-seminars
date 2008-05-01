@@ -655,6 +655,7 @@
 			<label index="fe_users.tx_seminars_planned_degree">Планируемая степень:</label>
 			<label index="fe_users.tx_seminars_semester">Семестр:</label>
 			<label index="fe_users.tx_seminars_subject">Тема обучения:</label>
+			<label index="tx_seminars_test">Тест блок</label>
 			<label index="tx_seminars_test.title">Название:</label>
 			<label index="tx_seminars_seminars">Семинары</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">Общее</label>
@@ -688,9 +689,11 @@
 			<label index="tx_seminars_seminars.leaders">Лидеры:</label>
 			<label index="tx_seminars_seminars.divLabelOrganizers">Организатор</label>
 			<label index="tx_seminars_seminars.organizers">Организаторы:</label>
+			<label index="tx_seminars_seminars.organizing_partners">Партнеры организатора</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Место/время</label>
 			<label index="tx_seminars_seminars.begin_date">Дата и время начала:</label>
 			<label index="tx_seminars_seminars.end_date">Дата и время окончания:</label>
+			<label index="tx_seminars_seminars.timeslots">окно</label>
 			<label index="tx_seminars_seminars.deadline_registration">Срок окончания регистрации:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Срок окончания ранней регистрации:</label>
 			<label index="tx_seminars_seminars.deadline_unregistration">Срок окончания снятия с регистрации:</label>
@@ -703,6 +706,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Посетители</label>
 			<label index="tx_seminars_seminars.attendees_min">Минимальное количество посетителей:</label>
 			<label index="tx_seminars_seminars.attendees_max">Максимальное количество посетителей:</label>
+			<label index="tx_seminars_seminars.queue_size">Размер списка ожидания</label>
 			<label index="tx_seminars_seminars.target_groups">Группа потенциальных потребителей:</label>
 			<label index="tx_seminars_seminars.attendees">Текущее количество посетителей:</label>
 			<label index="tx_seminars_seminars.vacancies">Текущее количество свободных мест:</label>
@@ -735,6 +739,7 @@
 			<label index="tx_seminars_attendances.title">Заголовок:</label>
 			<label index="tx_seminars_attendances.user">Пользователь сайта:</label>
 			<label index="tx_seminars_attendances.seminar">Семинар:</label>
+			<label index="tx_seminars_attendances.registration_queue">В списке ожидания</label>
 			<label index="tx_seminars_attendances.price">Сумма к оплате:</label>
 			<label index="tx_seminars_attendances.total_price">Полная стоимость посещения:</label>
 			<label index="tx_seminars_attendances.paid">Оплачено:</label>
@@ -773,7 +778,7 @@
 			<label index="tx_seminars_organizers.title">Имя:</label>
 			<label index="tx_seminars_organizers.homepage">Сайт:</label>
 			<label index="tx_seminars_organizers.email">E-mail:</label>
-			<label index="tx_seminars_organizers.email_footer">Текст подтверждающего E-mail:</label>
+			<label index="tx_seminars_organizers.email_footer">Текст подтверждающий E-mail:</label>
 			<label index="tx_seminars_organizers.attendances_pid">SysFolder для хранения регистрационных записей:</label>
 			<label index="tx_seminars_payment_methods">Способы оплаты</label>
 			<label index="tx_seminars_payment_methods.title">Название:</label>
@@ -786,6 +791,7 @@
 			<label index="tx_seminars_lodgings.title">Название:</label>
 			<label index="tx_seminars_foods">Опции питания</label>
 			<label index="tx_seminars_foods.title">Название:</label>
+			<label index="tx_seminars_timeslots">окно</label>
 			<label index="tx_seminars_timeslots.title">Название:</label>
 			<label index="tx_seminars_timeslots.begin_date">Дата и время начала:</label>
 			<label index="tx_seminars_timeslots.end_date">Дата и время окончания:</label>
@@ -794,11 +800,11 @@
 			<label index="tx_seminars_timeslots.room">Комнота</label>
 			<label index="tx_seminars_target_groups">Группы потенциальных потребителей:</label>
 			<label index="tx_seminars_target_groups.title">Название:</label>
-			<label index="tx_seminars_categories">Категория:</label>
+			<label index="tx_seminars_categories">Категории:</label>
 			<label index="tx_seminars_categories.title">Название:</label>
 			<label index="tx_seminars_skills">Способности</label>
 			<label index="tx_seminars_skills.title">Название:</label>
-			<label index="tt_content.list_type_pi1">Управление семинарами</label>
+			<label index="tt_content.list_type_pi1">Управляющий семинарами</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminari</label>
@@ -1753,6 +1759,12 @@
 			<label index="tx_seminars_timeslots.begin_date" type="integer">230060070</label>
 			<label index="tx_seminars_timeslots.end_date" type="integer">192800740</label>
 			<label index="tx_seminars_timeslots.speakers" type="integer">258305227</label>
+			<label index="tx_seminars_test" type="integer">56221404</label>
+			<label index="tx_seminars_seminars.organizing_partners" type="integer">45053453</label>
+			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
+			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
+			<label index="tx_seminars_attendances.registration_queue" type="integer">263240266</label>
+			<label index="tx_seminars_timeslots" type="integer">147000660</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2548,6 +2560,12 @@
 			<label index="tx_seminars_timeslots.begin_date">Begin date</label>
 			<label index="tx_seminars_timeslots.end_date">End date</label>
 			<label index="tx_seminars_timeslots.speakers">Speakers</label>
+			<label index="tx_seminars_test">Test records</label>
+			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
+			<label index="tx_seminars_seminars.timeslots">Time slots</label>
+			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
+			<label index="tx_seminars_attendances.registration_queue">Is on the registration queue:</label>
+			<label index="tx_seminars_timeslots">Time slots</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
