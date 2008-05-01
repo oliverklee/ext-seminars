@@ -14,7 +14,6 @@
 			<label index="subModuleTitle_events">Events</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
-			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
@@ -39,7 +38,6 @@
 			<label index="subModuleTitle_events">Arrangementer</label>
 			<label index="subModuleTitle_speakers">Foredragsholdere</label>
 			<label index="subModuleTitle_organizers">Arrangører</label>
-			<label index="notYetImplementedSubModule">Dette sub-modul er ikke implementeret endnu.</label>
 			<label index="eventlist.date">Dato</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Nuvær.</label>
@@ -64,7 +62,6 @@
 			<label index="subModuleTitle_events">Veranstaltungen</label>
 			<label index="subModuleTitle_speakers">ReferentInnen</label>
 			<label index="subModuleTitle_organizers">Veranstalter</label>
-			<label index="notYetImplementedSubModule">Dieses Submodul ist noch nicht implementiert.</label>
 			<label index="eventlist.date">Datum</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Akt.</label>
@@ -89,7 +86,6 @@
 			<label index="subModuleTitle_events">Evenementen</label>
 			<label index="subModuleTitle_speakers">Sprekers</label>
 			<label index="subModuleTitle_organizers">Organisatoren</label>
-			<label index="notYetImplementedSubModule">Deze sub module is nog niet geimplementeerd</label>
 			<label index="eventlist.date">Datum</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Cur.</label>
@@ -114,7 +110,6 @@
 			<label index="subModuleTitle_events">Eventi</label>
 			<label index="subModuleTitle_speakers">Oratori</label>
 			<label index="subModuleTitle_organizers">Organizzatori</label>
-			<label index="notYetImplementedSubModule">Questo modulo non è stato ancora sviluppato.</label>
 			<label index="eventlist.date">Data</label>
 			<label index="eventlist.title">Titolo</label>
 			<label index="eventlist.attendees">Part.</label>
@@ -139,7 +134,6 @@
 			<label index="subModuleTitle_events">Evénements</label>
 			<label index="subModuleTitle_speakers">Conférencies</label>
 			<label index="subModuleTitle_organizers">Organisateurs</label>
-			<label index="notYetImplementedSubModule">Ce sous-module n'est pas encore prêt.</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Titre</label>
 			<label index="eventlist.attendees">Courants</label>
@@ -164,7 +158,6 @@
 			<label index="title" type="integer">142581619</label>
 			<label index="subModuleTitle_registrations" type="integer">170423130</label>
 			<label index="subModuleTitle_events" type="integer">142581619</label>
-			<label index="notYetImplementedSubModule" type="integer">127965110</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
 			<label index="eventlist.date" type="integer">71780721</label>
@@ -191,7 +184,6 @@
 			<label index="subModuleTitle_events" type="integer">142581619</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
-			<label index="notYetImplementedSubModule" type="integer">127965110</label>
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
@@ -216,7 +208,6 @@
 			<label index="subModuleTitle_events" type="integer">142581619</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
-			<label index="notYetImplementedSubModule" type="integer">127965110</label>
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
@@ -241,7 +232,6 @@
 			<label index="subModuleTitle_events" type="integer">142581619</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
-			<label index="notYetImplementedSubModule" type="integer">127965110</label>
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
@@ -266,7 +256,6 @@
 			<label index="subModuleTitle_events" type="integer">142581619</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
-			<label index="notYetImplementedSubModule" type="integer">127965110</label>
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
@@ -291,7 +280,6 @@
 			<label index="title">Events</label>
 			<label index="subModuleTitle_registrations">Registrations</label>
 			<label index="subModuleTitle_events">Events</label>
-			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
 			<label index="eventlist.date">Date</label>
@@ -316,7 +304,6 @@
 			<label index="title">Events</label>
 			<label index="subModuleTitle_registrations">Registrations</label>
 			<label index="subModuleTitle_events">Events</label>
-			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
@@ -343,7 +330,6 @@
 			<label index="subModuleTitle_events">Events</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
-			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
@@ -368,7 +354,6 @@
 			<label index="subModuleTitle_events">Events</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
-			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
@@ -393,7 +378,6 @@
 			<label index="subModuleTitle_events">Events</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
-			<label index="notYetImplementedSubModule">This sub module is not implemented yet.</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
