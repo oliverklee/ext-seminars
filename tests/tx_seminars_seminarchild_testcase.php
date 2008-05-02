@@ -3245,5 +3245,157 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->isUserBlocked($frontEndUserUid)
 		);
 	}
+
+
+	/////////////////////////
+	// Tests for the icons.
+	/////////////////////////
+
+	public function testUsesCorrectIconForSingleEvent() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForTopic() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForDate() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForHiddenSingleEvent() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setHidden(true);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete__h.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForHiddenTopic() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
+		$this->fixture->setHidden(true);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic__h.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForHiddenDate() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setHidden(true);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date__h.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForVisibleTimedSingleEvent() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordStartTime(mktime() - 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForVisibleTimedTopic() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
+		$this->fixture->setRecordStartTime(mktime() - 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForVisibleTimedDate() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordStartTime(mktime() - 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForExpiredSingleEvent() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordEndTime(mktime() - 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete__t.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForExpiredTimedTopic() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
+		$this->fixture->setRecordEndTime(mktime() - 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic__t.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForExpiredTimedDate() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordEndTime(mktime() - 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date__t.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForStillInvisibleTimedSingleEvent() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordStartTime(mktime() + 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_complete__t.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForStillInvisibleTimedTopic() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
+		$this->fixture->setRecordStartTime(mktime() + 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_topic__t.',
+			$this->fixture->getRecordIcon()
+		);
+	}
+
+	public function testUsesCorrectIconForStillInvisibleTimedDate() {
+		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordStartTime(mktime() + 1000);
+
+		$this->assertContains(
+			'icon_tx_seminars_seminars_date__t.',
+			$this->fixture->getRecordIcon()
+		);
+	}
 }
 ?>

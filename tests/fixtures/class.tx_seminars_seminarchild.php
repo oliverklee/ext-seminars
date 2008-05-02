@@ -349,6 +349,48 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setSkipCollisionCheck($skipIt) {
 		$this->setRecordPropertyBoolean('skip_collision_check', $skipIt);
 	}
+
+	/**
+	 * Sets the record type for this event record.
+	 *
+	 * @param	integer		the record type for this event record, must be
+	 * 						either SEMINARS_RECORD_TYPE_COMPLETE,
+	 * 						SEMINARS_RECORD_TYPE_TOPIC or
+	 * 						SEMINARS_RECORD_TYPE_DATE
+	 */
+	public function setRecordType($recordType) {
+		$this->setRecordPropertyInteger('object_type', $recordType);
+	}
+
+	/**
+	 * Sets the "hidden" flag of this record (concerning the visibility in
+	 * TYPO3).
+	 *
+	 * @param	boolean		whether this record should be marked as hidden
+	 */
+	public function setHidden($hidden) {
+		$this->setRecordPropertyBoolean('hidden', $hidden);
+	}
+
+	/**
+	 * Sets this record's start timestamp (concerning the visibility in TYPO3).
+	 *
+	 * @param	integer		this record's start time as a UNIX timestamp,
+	 * 						set to 0 to set no start time
+	 */
+	public function setRecordStartTime($timeStamp) {
+		$this->setRecordPropertyInteger('starttime', $timeStamp);
+	}
+
+	/**
+	 * Sets this record's end timestamp (concerning the visibility in TYPO3).
+	 *
+	 * @param	integer		this record's end time as a UNIX timestamp,
+	 * 						set to 0 to set no start time
+	 */
+	public function setRecordEndTime($timeStamp) {
+		$this->setRecordPropertyInteger('endtime', $timeStamp);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {
