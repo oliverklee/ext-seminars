@@ -54,29 +54,23 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/** string with the name of the SQL table this class corresponds to */
 	var $tableName = SEMINARS_TABLE_SEMINARS;
 
-	/**
-	 * Organizers data as an array of arrays with their UID as key. Lazily
-	 * initialized.
-	 */
-	var $organizersCache = array();
-
 	/** The number of all attendances. */
-	var $numberOfAttendances = 0;
+	protected $numberOfAttendances = 0;
 
 	/** The number of paid attendances. */
-	var $numberOfAttendancesPaid = 0;
+	protected $numberOfAttendancesPaid = 0;
 
 	/** The number of attendances on the registration queue. */
-	var $numberOfAttendancesOnQueue = 0;
+	protected $numberOfAttendancesOnQueue = 0;
 
 	/** Flag which shows if the statistics have been already calculated. */
-	var $statisticsHaveBeenCalculated = false;
+	protected $statisticsHaveBeenCalculated = false;
 
 	/**
 	 * The related topic record as a reference to the object.
 	 * This will be null if we are not a date record.
 	 */
-	var $topic;
+	private $topic;
 
 	/**
 	 * The constructor. Creates a seminar instance from a DB record.
@@ -91,10 +85,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						If this parameter is provided, $uid will be ignored.
 	 * @param	boolean		whether it is possible to create a seminar object from
 	 * 						a hidden record
-	 *
-	 * @access	public
 	 */
-	function __construct(
+	public function __construct(
 		$uid, $dbResult = null, $allowHiddenRecords = false
 	) {
 		parent::__construct($uid, $dbResult, $allowHiddenRecords);
@@ -1990,11 +1982,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets the minimum number of attendances required for this event
 	 * (ie. how many registrations are needed so this event can take place).
 	 *
-	 * @return	integer		the minimum number of attendances
-	 *
-	 * @access	public
+	 * @return	integer		the minimum number of attendances, will be >= 0
 	 */
-	function getAttendancesMin() {
+	public function getAttendancesMin() {
 		return $this->getRecordPropertyInteger('attendees_min');
 	}
 
@@ -2002,11 +1992,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets the maximum number of attendances for this event
 	 * (the total number of seats for this event).
 	 *
-	 * @return	integer		the maximum number of attendances
-	 *
-	 * @access	public
+	 * @return	integer		the maximum number of attendances, will be >= 0
 	 */
-	function getAttendancesMax(){
+	public function getAttendancesMax() {
 		return $this->getRecordPropertyInteger('attendees_max');
 	}
 
@@ -2014,11 +2002,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets the number of attendances for this seminar
 	 * (currently the paid attendances as well as the unpaid ones).
 	 *
-	 * @return	integer		the number of attendances
-	 *
-	 * @access	public
+	 * @return	integer		the number of attendances, will be >= 0
 	 */
-	function getAttendances() {
+	public function getAttendances() {
 		if (!$this->statisticsHaveBeenCalculated) {
 			$this->calculateStatistics();
 		}
@@ -2032,21 +2018,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if there is at least one registration for this
 	 * 						event, false otherwise
-	 *
-	 * @access	public
 	 */
-	function hasAttendances() {
+	public function hasAttendances() {
 		return (boolean) $this->getAttendances();
 	}
 
 	/**
 	 * Gets the number of paid attendances for this seminar.
 	 *
-	 * @return	integer		the number of paid attendances
-	 *
-	 * @access	public
+	 * @return	integer		the number of paid attendances, will be >= 0
 	 */
-	function getAttendancesPaid() {
+	public function getAttendancesPaid() {
 		if (!$this->statisticsHaveBeenCalculated) {
 			$this->calculateStatistics();
 		}
@@ -2057,11 +2039,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets the number of attendances that are not paid yet
 	 *
-	 * @return	integer		the number of attendances that are not paid yet
-	 *
-	 * @access	public
+	 * @return	integer		the number of attendances that are not paid yet,
+	 * 						will be >= 0
 	 */
-	function getAttendancesNotPaid() {
+	public function getAttendancesNotPaid() {
 		return ($this->getAttendances() - $this->getAttendancesPaid());
 	}
 
@@ -2070,10 +2051,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	integer		the number of vacancies (will be 0 if the seminar
 	 * 						is overbooked)
-	 *
-	 * @access	public
 	 */
-	function getVacancies() {
+	public function getVacancies() {
 		return max(0, $this->getAttendancesMax() - $this->getAttendances());
 	}
 
@@ -2085,11 +2064,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If this seminar does not require a registration or if it is canceled,
 	 * an empty string is returned.
 	 *
-	 * @return	string		string showing the number of vacancies (may be empty)
-	 *
-	 * @access	public
+	 * @return	string		string showing the number of vacancies, may be empty
 	 */
-	function getVacanciesString() {
+	public function getVacanciesString() {
 		$result = '';
 
 		if ($this->needsRegistration() && !$this->isCanceled()) {
@@ -2107,10 +2084,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Checks whether this seminar still has vacancies (is not full yet).
 	 *
 	 * @return	boolean		true if the seminar has vacancies, false if it is full.
-	 *
-	 * @access	public
 	 */
-	function hasVacancies() {
+	public function hasVacancies() {
 		return !($this->isFull());
 	}
 
@@ -2118,11 +2093,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Checks whether this seminar already is full .
 	 *
 	 * @return	boolean		true if the seminar is full, false if it still has
-	 * 						vacancies.
-	 *
-	 * @access	public
+	 * 						vacancies
 	 */
-	function isFull() {
+	public function isFull() {
 		return ($this->getAttendances() >= $this->getAttendancesMax());
 	}
 
@@ -2130,11 +2103,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Checks whether this seminar has enough attendances to take place.
 	 *
 	 * @return	boolean		true if the seminar has enough attendances,
-	 * 						false otherwise.
-	 *
-	 * @access	public
+	 * 						false otherwise
 	 */
-	function hasEnoughAttendances() {
+	public function hasEnoughAttendances() {
 		return ($this->getAttendances() >= $this->getAttendancesMin());
 	}
 
@@ -2782,11 +2753,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @param	integer		UID of the FE user to check, must be > 0
 	 *
-	 * @return	boolean		true if the user already is registered, false otherwise.
-	 *
-	 * @access	public
+	 * @return	boolean		true if the user already is registered, false
+	 * 						otherwise
 	 */
-	function isUserRegistered($feUserUid) {
+	public function isUserRegistered($feUserUid) {
 		$result = false;
 
 	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -2810,11 +2780,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @param	integer		UID of the FE user to check, must be > 0
 	 *
 	 * @return	string		empty string if everything is OK, else a localized
-	 * 						error message.
-	 *
-	 * @access	public
+	 * 						error message
 	 */
-	function isUserRegisteredMessage($feUserUid) {
+	public function isUserRegisteredMessage($feUserUid) {
 		return ($this->isUserRegistered($feUserUid))
 			? $this->pi_getLL('message_alreadyRegistered') : '';
 	}
@@ -2880,11 +2848,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if a FE user is logged in and the user may view
 	 * 						the registrations list or may see a link to that
-	 * 						page, false otherwise.
-	 *
-	 * @access	public
+	 * 						page, false otherwise
 	 */
-	function canViewRegistrationsList($whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupID = 0) {
+	public function canViewRegistrationsList(
+		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
+		$defaultEventVipsFeGroupID = 0
+	) {
 		$result = false;
 
 		if ($this->needsRegistration() && $this->isLoggedIn()) {
@@ -2970,11 +2939,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *     the registration deadline is not over yet,
 	 *     and there are still vacancies.
 	 *
-	 * @return	boolean		true if registration is possible, false otherwise.
-	 *
-	 * @access	public
+	 * @return	boolean		true if registration is possible, false otherwise
 	 */
-	function canSomebodyRegister() {
+	public function canSomebodyRegister() {
 		return $this->needsRegistration() &&
 			!$this->isCanceled() &&
 			$this->hasDate() &&
@@ -2993,11 +2960,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * and returns a localized error message if registration is not possible.
 	 *
 	 * @return	string		empty string if everything is OK, else a localized
-	 * 						error message.
-	 *
-	 * @access	public
+	 * 						error message
 	 */
-	function canSomebodyRegisterMessage() {
+	public function canSomebodyRegisterMessage() {
 		$message = '';
 
 		if (!$this->needsRegistration()) {
@@ -3062,10 +3027,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * registration).
 	 *
 	 * @return	boolean		true if registration is necessary, false otherwise
-	 *
-	 * @access	public
 	 */
-	function needsRegistration() {
+	public function needsRegistration() {
 		return (!$this->isEventTopic() && ($this->getAttendancesMax() > 0));
 	}
 
@@ -3075,19 +3038,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if multiple registrations are allowed,
 	 * 						false otherwise
-	 *
-	 * @access	public
 	 */
-	function allowsMultipleRegistrations() {
+	public function allowsMultipleRegistrations() {
 		return $this->getTopicBoolean('allows_multiple_registrations');
 	}
 
 	/**
 	 * (Re-)calculates the number of participants for this seminar.
-	 *
-	 * @access	public
 	 */
-	function calculateStatistics() {
+	public function calculateStatistics() {
 		$this->numberOfAttendances = $this->countAttendances(
 			'registration_queue=0'
 		);
@@ -3117,11 +3076,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
 	 *						spaces are not necessary for this parameter)
 	 *
-	 * @return	integer		the number of attendances
-	 *
-	 * @access	protected
+	 * @return	integer		the number of attendances, will be >= 0
 	 */
-	function countAttendances($queryParameters = '1=1') {
+	private function countAttendances($queryParameters = '1=1') {
 		$result = 0;
 
 		$dbResultSingleSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -4115,13 +4072,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Returns true if the seminar is hidden otherwise false.
+	 * Returns true if the seminar is hidden, otherwise false.
 	 *
-	 * @return	boolean		true if the seminar is hidden otherwise false
-	 *
-	 * @access	public
+	 * @return	boolean		true if the seminar is hidden, false otherwise
 	 */
-	function isHidden() {
+	public function isHidden() {
 		return $this->getRecordPropertyBoolean('hidden');
 	}
 
@@ -4133,10 +4088,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * and this method returns false.
 	 *
 	 * @return	boolean		true if unregistration is possible, false otherwise
-	 *
-	 * @access	public
 	 */
-	function isUnregistrationPossible() {
+	public function isUnregistrationPossible() {
 		$result = false;
 
 		if ($this->needsRegistration()) {
@@ -4163,11 +4116,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns true if there are vacancies on the waiting list, otherwise false.
 	 *
 	 * @return	boolean		true if there are vancancies on the waiting list,
-	 * 						otherwise false
-	 *
-	 * @access	public
+	 * 						false otherwise
 	 */
-	function hasVacanciesOnRegistrationQueue() {
+	public function hasVacanciesOnRegistrationQueue() {
 		return ($this->getVacanciesOnRegistrationQueue() > 0);
 	}
 
@@ -4175,10 +4126,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets the size of the registration queue of this event.
 	 *
 	 * @return	integer		size of the registration queue of this event
-	 *
-	 * @access	public
 	 */
-	function getRegistrationQueueSize() {
+	public function getRegistrationQueueSize() {
 		return $this->getRecordPropertyInteger('queue_size');
 	}
 
@@ -4187,11 +4136,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * otherwise false.
 	 *
 	 * @return	boolean		true if the current event has a registration queue
-	 * 						size, otherwise false
-	 *
-	 * @access	public
+	 * 						size, false otherwise
 	 */
-	function hasRegistrationQueueSize() {
+	public function hasRegistrationQueueSize() {
 		return $this->hasRecordPropertyInteger('queue_size');
 	}
 
@@ -4202,10 +4149,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return	integer		the number of vacancies including the vacancies on
 	 * 						the registration queue (will be 0 if the seminar is
 	 * 						overbooked)
-	 *
-	 * @access	public
 	 */
-	function getVacanciesOnRegistrationQueue() {
+	public function getVacanciesOnRegistrationQueue() {
 		return max(
 			0,
 			($this->getAttendancesMax() + $this->getRegistrationQueueSize())
@@ -4217,15 +4162,23 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets the number of attendances on the registration queue.
 	 *
 	 * @return	integer		number of attendances on the registration queue
-	 *
-	 * @access	public
 	 */
-	function getAttendancesOnRegistrationQueue() {
+	public function getAttendancesOnRegistrationQueue() {
 		if (!$this->statisticsHaveBeenCalculated) {
 			$this->calculateStatistics();
 		}
 
 		return $this->numberOfAttendancesOnQueue;
+	}
+
+ 	/**
+	 * Checks whether there is at least one registration on the waiting list.
+	 *
+	 * @return	boolean		true if there is at least one registration on the
+	 * 						waiting list, false otherwise
+	 */
+	public function hasAttendancesOnRegistrationQueue() {
+		return ($this->getAttendancesOnRegistrationQueue() > 0);
 	}
 
 	/**
