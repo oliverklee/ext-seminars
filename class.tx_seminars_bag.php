@@ -28,8 +28,6 @@
  * This aggregate class holds a bunch of objects that are created from
  * the result of an SQL query and allows to iterate over them.
  *
- * This is an abstract class; don't instantiate it.
- *
  * When inheriting from this class, make sure to implement the function
  * createItemFromDbResult.
  *
@@ -41,41 +39,44 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
 
-class tx_seminars_bag extends tx_seminars_dbplugin {
+abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	/** the name of the main DB table from which we get the records for this bag */
-	var $dbTableName = '';
+	protected $dbTableName = '';
 	/** the comma-separated names of other DB tables which we need for JOINs */
-	var $additionalTableNames = '';
+	protected $additionalTableNames = '';
 
 	/** the ORDER BY clause (without the actual string "ORDER BY") */
-	var $orderBy = '';
+	private $orderBy = '';
 	/** the GROUP BY clause (without the actual string "GROUP BY") */
-	var $groupBy = '';
+	private $groupBy = '';
 	/** the LIMIT clause (without the actual string "LIMIT") */
-	var $limit = '';
+	private $limit = '';
 
 	/** how many objects this bag actually holds with the LIMIT */
-	var $objectCountWithLimit = 0;
+	private $objectCountWithLimit = 0;
 	/** how many objects this bag would hold without the LIMIT */
-	var $objectCountWithoutLimit = 0;
+	private $objectCountWithoutLimit = 0;
 
 	/** an SQL query result (not converted to an associative array yet) */
-	var $dbResult = false;
+	protected $dbResult = false;
 
 	/** the current object (may be null) */
-	var $currentItem = null;
+	protected $currentItem = null;
 
 	/**
 	 * string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
 	 * (the AND and the enclosing spaces are not necessary for this parameter)
 	 */
-	var $queryParameters = '';
+	private $queryParameters = '';
 
 	/**
 	 * string that will be prepended to the WHERE clause, making sure that only
 	 * enabled and non-deleted records will be processed
 	 */
-	var $enabledFieldsQuery = '';
+	private $enabledFieldsQuery = '';
+
+	/** whether the iterator points at the first element */
+	private $isAtFirstElement = false;
 
 	/**
 	 * The constructor. Sets the iterator to the first result of a query
@@ -99,10 +100,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * 						fields in records are ignored.
 	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
 	 * 						records is ignored.
-	 *
-	 * @access	public
 	 */
-	function __construct(
+	public function __construct(
 		$dbTableName, $queryParameters = '1=1', $additionalTableNames = '',
 		$groupBy = '', $orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
@@ -132,10 +131,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * 						fields in records are ignored.
 	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
 	 * 						records is ignored.
-	 *
-	 * @access	private
 	 */
-	function createEnabledFieldsQuery(
+	private function createEnabledFieldsQuery(
 		$showHiddenRecords = -1, $ignoreTimingOfRecords = false
 	) {
 		$ignoreColumns = array();
@@ -175,10 +172,8 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * prefixed with the table name.
 	 *
 	 * @return	boolean		true if everything went okay, false otherwise
-	 *
-	 * @access	public
 	 */
-	function resetToFirst() {
+	public function resetToFirst() {
 		$result = false;
 
 		// free old results if there are any
@@ -216,50 +211,47 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 			$this->objectCountWithoutLimit = 0;
 		}
 
+		$this->isAtFirstElement = true;
+
 		return $result;
 	}
 
 	/**
 	 * Advances to the next record and returns a reference to that object.
 	 *
-	 * @return	object		a reference to the now current object
-	 *						(may be null if there is no next object)
-	 *
-	 * @access	public
+	 * @return	tx_seminars_objectfromdb	a reference to the now current
+	 * 										object, will be null if there is no
+	 * 										next object
 	 */
-	function &getNext() {
+	public function getNext() {
 		if ($this->dbResult) {
 			$this->createItemFromDbResult();
 		} else {
 			$this->currentItem = null;
 		}
 
+		$this->isAtFirstElement = false;
+
 		return $this->getCurrent();
 	}
 
 	/**
-	 * Creates the current item in $this->currentItem, using $this->dbResult as a source.
-	 * If the current item cannot be created, $this->currentItem will be nulled out.
+	 * Creates the current item in $this->currentItem, using $this->dbResult as
+	 * a source. If the current item cannot be created, $this->currentItem will
+	 * be nulled out.
 	 *
 	 * $this->dbResult is ensured to be non-null when this function is called.
-	 *
-	 * @access	protected
 	 */
-	function createItemFromDbResult() {
-		trigger_error('The function tx_seminars_bag::createItemFromDbResult() '
-			.'needs to be implemented in a derived class.'
-		);
-	}
+	abstract protected function createItemFromDbResult();
 
 	/**
 	 * Returns the current object (which may be null).
 	 *
-	 * @return	object		a reference to the current object (will be null if
-	 * 						there is no current object)
-	 *
-	 * @access	public
+	 * @return	tx_seminars_objectfromdb	a reference to the current object,
+	 * 										will be null if	there is no current
+	 * 										object
 	 */
-	function &getCurrent() {
+	public function getCurrent() {
 		return $this->currentItem;
 	}
 
@@ -268,17 +260,15 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * from the DB), nulls out $this->currentItem.
 	 *
 	 * If the function isOk() returns true, nothing is changed.
-	 *
-	 * @access	protected
 	 */
-	function checkCurrentItem() {
-		// Only test $this->currentItem if it is not null.
+	protected function checkCurrentItem() {
+		// Only tests $this->currentItem if it is not null.
 		if ($this->currentItem && (!$this->currentItem->isOk())) {
 			$this->currentItem = null;
 		}
 
 		if ($this->currentItem) {
-			// Let warnings from the single records bubble up to us.
+			// Lets warnings from the single records bubble up to us.
 			$this->setErrorMessage($this->currentItem->checkConfiguration(true));
 		}
 	}
@@ -287,11 +277,9 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * Retrieves the number of objects this bag would hold if
 	 * the LIMIT part of the query would not have been used.
 	 *
-	 * @return	integer		the total number of objects in this bag (may be zero)
-	 *
-	 * @access	public
+	 * @return	integer		the total number of objects in this bag, may be zero
 	 */
-	function getObjectCountWithoutLimit() {
+	public function getObjectCountWithoutLimit() {
 		return $this->objectCountWithoutLimit;
 	}
 
@@ -299,12 +287,36 @@ class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * Retrieves the total number of objects in this bag
 	 * (with having applied the LIMIT part of the query).
 	 *
-	 * @return	integer		the total number of objects in this bag (may be zero)
-	 *
-	 * @access	public
+	 * @return	integer		the total number of objects in this bag, may be zero
 	 */
-	function getObjectCountWithLimit() {
+	public function getObjectCountWithLimit() {
 		return $this->objectCountLimit;
+	}
+
+	/**
+	 * Gets a comma-separated, sorted list of UIDs of the records in this bag.
+	 *
+	 * This function will leave the iterator pointing to after the last element.
+	 *
+	 * @return	string		comma-separated, sorted list of UIDs of the records
+	 * 						in this bag, will be an empty string if this bag is
+	 * 						empty
+	 */
+	public function getUids() {
+		if (!$this->isAtFirstElement) {
+			$this->resetToFirst();
+		}
+
+		$uids = array();
+
+		while ($this->getCurrent()) {
+			$uids[] = $this->getCurrent()->getUid();
+			$this->getNext();
+		}
+
+		sort($uids, SORT_NUMERIC);
+
+		return implode(',', $uids);
 	}
 }
 

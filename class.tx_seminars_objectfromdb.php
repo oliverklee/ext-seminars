@@ -30,8 +30,6 @@
  *
  * It will hold the corresponding data and can commit that data to the DB.
  *
- * This is an abstract class; don't instantiate it.
- *
  * @package		TYPO3
  * @subpackage	tx_seminars
  *
@@ -40,7 +38,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 
-class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
+abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	/** string with the name of the SQL table this class corresponds to */
 	protected $tableName = '';
 	/** associative array with the values from/for the DB */

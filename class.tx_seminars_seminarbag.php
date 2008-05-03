@@ -58,10 +58,8 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * 						fields in records are ignored.
 	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
 	 * 						records is ignored.
-	 *
-	 * @access	public
 	 */
-	function __construct(
+	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
@@ -83,11 +81,10 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be non-null when this function is called.
-	 *
-	 * @access	protected
+	 * $this->dbResult must be ensured to be non-null when this function is
+	 * called.
 	 */
-	function createItemFromDbResult() {
+	protected function createItemFromDbResult() {
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
 		$this->currentItem =& new $seminarClassname(0, $this->dbResult);
 		$this->checkCurrentItem();
@@ -99,10 +96,8 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * @param	array		the POST data submitted from the form, may be empty
 	 *
 	 * @return	array		the POST data without the dummy option
-	 *
-	 * @access	public
 	 */
-	function removeDummyOptionFromFormData(array $formData) {
+	public function removeDummyOptionFromFormData(array $formData) {
 		$cleanedFormData = array();
 
 		foreach ($formData as $value) {
