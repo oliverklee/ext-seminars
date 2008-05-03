@@ -1,4 +1,4 @@
-0.5.4 (currently working on)
+0.5.4 (released 2008-05-03)
 - [#1874] Fix: Crash on the "my events page" after unregistering from an event
 - [#1873] Fix: Crash when clicking on a CSV icon in mod2
 - [#1852] Fix: Field "minimum attendances" missing from the "attendees" tab in the BE editor of date records
