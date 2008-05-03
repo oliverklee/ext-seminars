@@ -1,4 +1,5 @@
 0.5.4 (currently working on)
+- [#1873] Fix: Crash when clicking on a CSV icon in mod2
 - [#1852] Fix: Field "minimum attendances" missing from the "attendees" tab in the BE editor of date records
 - [#1686] Fix: Removed wrongly encoded stuff from Danish translation in locallang file
 - [#1226] Fix: showSingleEvent is missing from setup.txt

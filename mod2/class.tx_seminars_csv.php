@@ -35,8 +35,6 @@ require_once($BACK_PATH.'init.php');
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
-$LANG->includeLLFile('EXT:seminars/pi2/locallang.xml');
-
 // This checks permissions and exits if the users has no access to this page.
 $BE_USER->modAccess($MCONF, 1);
 
