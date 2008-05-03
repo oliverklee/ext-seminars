@@ -256,6 +256,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				if ($this->showUid) {
 					// Intentionally overwrite the previously set flavor.
 					$this->setFlavor('single_view');
+					$this->whatToDisplay = 'seminar_list';
 					$result = $this->createSingleView();
 				} else {
 					$result = $this->createListView();
