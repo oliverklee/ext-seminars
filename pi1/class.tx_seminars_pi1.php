@@ -110,7 +110,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				) OR (	s1.uid=s2.uid
 						AND s2.object_type=0
 						AND s1.uid=tx_seminars_seminars.uid
-					  )
+						)
 				)
 				AND tx_seminars_seminars_categories_mm.uid_foreign=tx_seminars_categories.uid
 				AND tx_seminars_seminars_categories_mm.uid_local=s1.uid)',
@@ -317,6 +317,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				if ($this->showUid) {
 					// Intentionally overwrite the previously set flavor.
 					$this->setFlavor('single_view');
+					$this->whatToDisplay = 'seminar_list';
 					$result = $this->createSingleView();
 				} else {
 					$result = $this->createListView();
@@ -2555,7 +2556,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 									.SEMINARS_TABLE_SEMINARS.'.object_type='
 										.SEMINARS_RECORD_TYPE_COMPLETE.'
 									AND '.SEMINARS_TABLE_SEMINARS.'.uid=s1.uid
-								  ))
+									))
 							AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local=
 									s1.uid
 							AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='
