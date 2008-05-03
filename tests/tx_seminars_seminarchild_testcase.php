@@ -1273,6 +1273,39 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testHasAttendancesOnRegistrationQueueIsFalseForNoRegistrations() {
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setRegistrationQueueSize(0);
+		$this->fixture->setNumberOfAttendances(0);
+		$this->fixture->setNumberOfAttendancesOnQueue(0);
+
+		$this->assertFalse(
+			$this->fixture->hasAttendancesOnRegistrationQueue()
+		);
+	}
+
+	public function testHasAttendancesOnRegistrationQueueIsFalseForRegularRegistrationsOnly() {
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setRegistrationQueueSize(0);
+		$this->fixture->setNumberOfAttendances(1);
+		$this->fixture->setNumberOfAttendancesOnQueue(0);
+
+		$this->assertFalse(
+			$this->fixture->hasAttendancesOnRegistrationQueue()
+		);
+	}
+
+	public function testHasAttendancesOnRegistrationQueueIsTrueForQueueRegistrations() {
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setRegistrationQueueSize(1);
+		$this->fixture->setNumberOfAttendances(1);
+		$this->fixture->setNumberOfAttendancesOnQueue(1);
+
+		$this->assertTrue(
+			$this->fixture->hasAttendancesOnRegistrationQueue()
+		);
+	}
+
 
 	///////////////////////////////////////////////////////////
 	// Tests regarding the country field of the place records.
