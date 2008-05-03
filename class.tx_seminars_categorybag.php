@@ -55,10 +55,8 @@ class tx_seminars_categorybag extends tx_seminars_bag {
 	 * 						safeguarded against SQL injection
 	 * @param	string		LIMIT clause (may be empty), must already be
 	 * 						safeguarded against SQL injection
-	 *
-	 * @access	public
 	 */
-	function __construct(
+	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = ''
 	) {
@@ -77,11 +75,10 @@ class tx_seminars_categorybag extends tx_seminars_bag {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be non-null when this function is called.
-	 *
-	 * @access	protected
+	 * $this->dbResult must be ensured to be non-null when this function is
+	 * called.
 	 */
-	function createItemFromDbResult() {
+	protected function createItemFromDbResult() {
 		$categoryClassname = t3lib_div::makeInstanceClassName('tx_seminars_category');
 		$this->currentItem =& new $categoryClassname(0, $this->dbResult);
 		$this->checkCurrentItem();

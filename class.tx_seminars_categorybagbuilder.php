@@ -38,33 +38,36 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.ph
 
 class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
-	var $bagClassName = 'tx_seminars_categorybag';
+	protected $bagClassName = 'tx_seminars_categorybag';
 
 	/** the sorting field */
-	var $orderBy = 'title';
+	protected $orderBy = 'title';
 
 	/**
-	 * Limits the bag to the categories of the event provided by the parameter
-	 * $eventUid.
+	 * Limits the bag to the categories of the events provided by the parameter
+	 * $eventUids.
 	 *
-	 * Example: The event with the provided UID references categories 9 and 12.
+	 * Example: The events with the provided UIDs reference categories 9 and 12.
 	 * So the bag will be limited to categories 9 and 12 (plus any additional
 	 * limits).
 	 *
-	 * @param	integer		UID of the event to which the category selection
-	 * 						should be limited, must be > 0
-	 *
-	 * @access	public
+	 * @param	string		comma-separated list of UID of the events to which
+	 * 						the category selection should be limited, all UIDs
+	 * 						must be > 0
 	 */
-	function limitToEvent($eventUid) {
-		if ($eventUid <= 0) {
-			return;
+	public function limitToEvents($eventUids) {
+		if (!preg_match('/^(\d+,)*\d+$/', $eventUids)
+			|| preg_match('/(^|,)0+(,|$)/', $eventUids)
+		) {
+			throw new Exception(
+				'$eventUids must be a comma-separated list of positive integers.'
+			);
 		}
 
 		$this->whereClauseParts['event'] = 'EXISTS ('
 			.'SELECT * FROM '.SEMINARS_TABLE_CATEGORIES_MM
-			.' WHERE '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local='.$eventUid
-			.' AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='
+			.' WHERE '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local IN('.$eventUids
+			.') AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='
 			.SEMINARS_TABLE_CATEGORIES.'.uid'
 			.')';
 	}

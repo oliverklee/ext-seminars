@@ -77,6 +77,13 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testEmptyBagHasNoUids() {
+		$bag = new tx_seminars_testbag('1=2');
+		$this->assertEquals(
+			'', $bag->getUids()
+		);
+	}
+
 	public function testBagCanHaveOneElement() {
 		$bag = new tx_seminars_testbag('uid='.$this->uidOfFirstRecord);
 
@@ -93,6 +100,14 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 
 		$this->assertNull(
 			$bag->getNext()
+		);
+	}
+
+	public function testBagCanHaveOneUid() {
+		$bag = new tx_seminars_testbag('uid='.$this->uidOfFirstRecord);
+
+		$this->assertEquals(
+			(string) $this->uidOfFirstRecord, $bag->getUids()
 		);
 	}
 
@@ -126,6 +141,19 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 
 		$this->assertNull(
 			$bag->getNext()
+		);
+	}
+
+	public function testBagCanHaveTwoUids() {
+		$bag = new tx_seminars_testbag(
+			'uid IN('
+			.$this->uidOfFirstRecord.','
+			.$this->uidOfSecondRecord.')'
+		);
+
+		$this->assertEquals(
+			$this->uidOfFirstRecord.','.$this->uidOfSecondRecord,
+			$bag->getUids()
 		);
 	}
 

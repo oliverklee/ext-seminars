@@ -38,7 +38,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.p
 
 class tx_seminars_category extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_CATEGORIES;
+	protected $tableName = SEMINARS_TABLE_CATEGORIES;
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_category.php']) {

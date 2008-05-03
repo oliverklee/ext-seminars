@@ -27,8 +27,6 @@
  *
  * This builder class creates customized bag objects.
  *
- * This is an abstract class; don't instantiate it directly.
- *
  * @package		TYPO3
  * @subpackage	tx_seminars
  *
@@ -39,7 +37,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
 
 require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_templatehelper.php');
 
-class tx_seminars_bagbuilder {
+abstract class tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
 	protected $bagClassName = '';
 

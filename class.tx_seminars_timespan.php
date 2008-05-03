@@ -25,9 +25,8 @@
 /**
  * Class 'tx_seminars_timespan' for the 'seminars' extension.
  *
- * This class offers timespan-related methods for the timeslot and seminar classes.
- *
- * This is an abstract class; don't instantiate it.
+ * This class offers timespan-related methods for the timeslot and seminar
+ * classes.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
@@ -38,7 +37,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
 
-class tx_seminars_timespan extends tx_seminars_objectfromdb {
+abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/** same as class name */
 	var $prefixId = 'tx_seminars_timespan';
 	/**  path to this script relative to the extension dir */
@@ -49,10 +48,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 *
 	 * @return	string		the begin date (or the localized string "will be
 	 * 						announced" if no begin date is set)
-	 *
-	 * @access	public
 	 */
-	function getBeginDate() {
+	public function getBeginDate() {
 		if (!$this->hasBeginDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
@@ -69,10 +66,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * Checks whether there's a begin date set.
 	 *
 	 * @return	boolean		true if we have a begin date, false otherwise
-	 *
-	 * @access	public
 	 */
-	function hasBeginDate() {
+	public function hasBeginDate() {
 		return ($this->getBeginDateAsTimestamp() > 0);
 	}
 
@@ -81,10 +76,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 *
 	 * @return	string		the end date (or the localized string "will be
 	 * 						announced" if no end date is set)
-	 *
-	 * @access	public
 	 */
-	function getEndDate() {
+	public function getEndDate() {
 		if (!$this->hasEndDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
@@ -100,11 +93,9 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether there's an end date set.
 	 *
-	 * @return	boolean		true if we have an end date, false otherwise.
-	 *
-	 * @access	public
+	 * @return	boolean		true if we have an end date, false otherwise
 	 */
-	function hasEndDate() {
+	public function hasEndDate() {
 		return ($this->getEndDateAsTimestamp() > 0);
 	}
 
@@ -115,13 +106,12 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * Returns just one day if the timespan takes place on only one day.
 	 * Returns a date range if the timespan takes several days.
 	 *
-	 * @param	string		the character or HTML entity used to separate start date and end date
+	 * @param	string		the character or HTML entity used to separate start
+	 * 						date and end date
 	 *
 	 * @return	string		the seminar date
-	 *
-	 * @access	public
 	 */
-	function getDate($dash = '&#8211;') {
+	public function getDate($dash = '&#8211;') {
 		if (!$this->hasDate()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
@@ -144,7 +134,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 				if (!$this->getConfValueBoolean('abbreviateDateRanges')) {
 					$result = $beginDateDay;
 				} else {
-					// Are the years different? Then include the complete begin date.
+					// Are the years different? Then includes the complete begin
+					// date.
 					if (strftime(
 							$this->getConfValueString('dateFormatY'),
 							$beginDate
@@ -187,10 +178,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * this function still will return false.
 	 *
 	 * @return	boolean		true if we have a begin date, false otherwise.
-	 *
-	 * @access	public
 	 */
-	function hasDate() {
+	public function hasDate() {
 		return $this->hasRecordPropertyInteger('begin_date');
 	}
 
@@ -204,10 +193,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * 						time and end time
 	 *
 	 * @return	string		the time
-	 *
-	 * @access	public
 	 */
-	function getTime($dash = '&#8211;') {
+	public function getTime($dash = '&#8211;') {
 		if (!$this->hasTime()) {
 			$result = $this->pi_getLL('message_willBeAnnounced');
 		} else {
@@ -237,10 +224,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * If there's no date/time set, the result will be false.
 	 *
 	 * @return	boolean		true if we have a begin time, false otherwise
-	 *
-	 * @access	public
 	 */
-	function hasTime() {
+	public function hasTime() {
 		$beginTime = strftime('%H:%M', $this->getBeginDateAsTimestamp());
 
 		return ($this->hasDate() && ($beginTime !== '00:00'));
@@ -251,10 +236,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * If there's no end date/time set, the result will be false.
 	 *
 	 * @return	boolean		true if we have an end time, false otherwise
-	 *
-	 * @access	public
 	 */
-	function hasEndTime() {
+	public function hasEndTime() {
 		$endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
 
 		return ($this->hasEndDate() && ($endTime !== '00:00'));
@@ -318,10 +301,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * Gets the seminar room (not the site).
 	 *
 	 * @return	string		the seminar room (may be empty)
-	 *
-	 * @access	public
 	 */
-	function getRoom() {
+	public function getRoom() {
 		return $this->getRecordPropertyString('room');
 	}
 
@@ -329,10 +310,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * Checks whether we have a room set.
 	 *
 	 * @return	boolean		true if we have a non-empty room, false otherwise.
-	 *
-	 * @access	public
 	 */
-	function hasRoom() {
+	public function hasRoom() {
 		return $this->hasRecordPropertyString('room');
 	}
 
@@ -342,11 +321,10 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 * A time span is considered to be open-ended if it does not have an end
 	 * date.
 	 *
-	 * @return	boolean		true if this time span is open-ended, false otherwise
-	 *
-	 * @access	public
+	 * @return	boolean		true if this time span is open-ended, false
+	 * 						otherwise
 	 */
-	function isOpenEnded() {
+	public function isOpenEnded() {
 		return !$this->hasEndDate();
 	}
 
@@ -355,10 +333,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 *
 	 * @return	boolean		true if we have a non-empty places list, false
 	 * 						otherwise
-	 *
-	 * @access	public
 	 */
-	function hasPlace() {
+	public function hasPlace() {
 		return $this->hasRecordPropertyInteger('place');
 	}
 
@@ -367,10 +343,8 @@ class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 *
 	 * @return	integer		the number of places associated with this record,
 	 * 						will be >= 0
-	 *
-	 * @access	public
 	 */
-	function getNumberOfPlaces() {
+	public function getNumberOfPlaces() {
 		return $this->getRecordPropertyInteger('place');
 	}
 }
