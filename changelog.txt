@@ -1,4 +1,5 @@
 0.6.0 (currently working on)
+- [#1873] Fix: Crash when clicking on a CSV icon in mod2
 - [#1854] Change: Remove notYetImplementedSubModule from mod2/locallang.xml
 - [#1686] Fix: Removed wrongly encoded stuff from Danish translation in locallang file
 - [#1165] Feature: Add a checkbox "Skip registration collision check" to event records

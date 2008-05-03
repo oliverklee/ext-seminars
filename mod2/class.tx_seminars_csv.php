@@ -38,8 +38,6 @@ require_once(PATH_t3lib.'class.t3lib_scbase.php');
 
 require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
-$LANG->includeLLFile('EXT:seminars/pi2/locallang.xml');
-
 // This checks permissions and exits if the users has no access to this page.
 $BE_USER->modAccess($MCONF, 1);
 
@@ -47,7 +45,6 @@ class tx_seminars_csv extends t3lib_SCbase {
 	/**
 	 * Creates the CSV export content and outputs it directly on the page (in
 	 * this case, for download).
-	 *
 	 */
 	public function printContent() {
 		echo t3lib_div::makeInstance('tx_seminars_pi2')->main(null, array());
