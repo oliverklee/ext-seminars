@@ -81,9 +81,13 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'what_to_display' => 'seminar_list',
 				'eventType' => 'Workshop',
-				'pidList' => $this->systemFolderPid
+				'pidList' => $this->systemFolderPid,
+				'pages' => $this->systemFolderPid,
+				'recursive' => 1
 			)
 		);
+		$this->fixture->getTemplateCode();
+		$this->fixture->setLabels();
 		$this->fixture->createHelperObjects();
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'eventType', 'Workshop'
@@ -1123,6 +1127,308 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				$this->fixture->main('', array()),
 				'2020'
 			)
+		);
+	}
+
+
+	/////////////////////////////////
+	// Tests for the category list.
+	/////////////////////////////////
+
+	public function testCategoryListCanBeEmpty() {
+		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
+		$this->fixture->setConfigurationValue('pages', $otherSystemFolderUid);
+
+		$output = $this->fixture->createCategoryList();
+
+		$this->assertNotContains(
+			'<table',
+			$output
+		);
+		$this->assertContains(
+			$this->fixture->translate('label_no_categories'),
+			$output
+		);
+	}
+
+	public function testCategoryListCanContainOneCategoryTitle() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'one category',
+			$this->fixture->createCategoryList()
+		);
+	}
+
+	public function testCategoryListCanContainTwoCategoryTitles() {
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'first category')
+		);
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'second category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 2
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
+		);
+
+		$output = $this->fixture->createCategoryList();
+		$this->assertContains(
+			'first category',
+			$output
+		);
+		$this->assertContains(
+			'second category',
+			$output
+		);
+	}
+
+	public function testCategoryListIsSortedAlphabetically() {
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'category B')
+		);
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'category A')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 2
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
+		);
+
+		$output = $this->fixture->createCategoryList();
+		$this->assertTrue(
+			strpos($output, 'category A') < strpos($output, 'category B')
+		);
+	}
+
+	public function testCategoryListUsesRecursion() {
+		$systemSubFolderUid = $this->testingFramework->createSystemFolder(
+			$this->systemFolderPid
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $systemSubFolderUid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'one category',
+			$this->fixture->createCategoryList()
+		);
+	}
+
+	public function testCategoryListIgnoresOtherSysFolders() {
+		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $otherSystemFolderUid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertNotContains(
+			'one category',
+			$this->fixture->createCategoryList()
+		);
+	}
+
+	public function testCategoryListCanReadFromAllSystemFolders() {
+		$this->fixture->setConfigurationValue('pages', '');
+
+		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $otherSystemFolderUid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'one category',
+			$this->fixture->createCategoryList()
+		);
+	}
+
+	public function testCategoryListIgnoresCanceledEvents() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 1,
+				'cancelled' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertNotContains(
+			'one category',
+			$this->fixture->createCategoryList()
+		);
+	}
+
+	public function testCategoryUsesEventsFromSelectedTimeFrames() {
+		$this->fixture->setConfigurationValue(
+			'timeframeInList', 'currentAndUpcoming'
+		);
+
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'end_date' => mktime() + 2000,
+				'categories' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'one category',
+			$this->fixture->createCategoryList()
+		);
+	}
+
+	public function testCategoryIgnoresEventsFromDeselectedTimeFrames() {
+		$this->fixture->setConfigurationValue(
+			'timeframeInList', 'currentAndUpcoming'
+		);
+
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my title',
+				'begin_date' => mktime() - 2000,
+				'end_date' => mktime() - 1000,
+				'categories' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertNotContains(
+			'one category',
+			$this->fixture->createCategoryList()
+		);
+	}
+
+	public function testCategoryListContainsLinksToListPageLimitedToCategory() {
+		$this->fixture->setConfigurationValue(
+			'listPID', $this->testingFramework->createFrontEndPage()
+		);
+
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my title',
+				'begin_date' => mktime() + 1000,
+				'categories' => 1
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'tx_seminars_pi1[category]='.$categoryUid,
+			$this->fixture->createCategoryList()
 		);
 	}
 }

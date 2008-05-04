@@ -260,6 +260,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkHideSearchForm();
 		$this->checkHidePageBrowser();
 		$this->checkHideCanceledEvents();
+		$this->checkSortListViewByCategory();
 		$this->checkGeneralPriceInList();
 		$this->checkOmitDateIfSameAsPrevious();
 		$this->checkListPid();
@@ -341,10 +342,22 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks the configuration for: tx_seminars_pi1/category_list.
+	 */
+	protected function check_tx_seminars_pi1_category_list() {
+		$this->checkCommonFrontEndSettings();
+
+		$this->checkPagesForCategoryList();
+		$this->checkRecursive();
+		$this->checkTimeframeInList();
+
+		$this->checkListPid();
+	}
+
+	/**
 	 * This check isn't actually used. It is merely needed for the unit tests.
 	 */
-	protected function check_tx_seminars_pi1_events_next_day() {
-	}
+	protected function check_tx_seminars_pi1_events_next_day() {}
 
 	/**
 	 * Checks the configuration related to thank-you e-mails.
@@ -508,7 +521,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'list_vip_registrations',
 				'edit_event',
 				'my_entered_events',
-				'countdown'
+				'countdown',
+				'category_list'
 			)
 		);
 	}
@@ -779,6 +793,23 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'from the list view. If this value is incorrect, canceled '
 				.'events might get displayed when this is not intended (or '
 				.'vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value sortListViewByCategory.
+	 *
+	 * @access	private
+	 */
+	function checkSortListViewByCategory() {
+		$this->checkIfBoolean(
+			'sortListViewByCategory',
+			true,
+			's_template_special',
+			'This value specifies whether the list view should be sorted by '
+				.'category before applying the normal sorting. If this value '
+				.'is incorrect, the list view might get sorted by category '
+				.'when this is not intended (or vice versa).'
 		);
 	}
 
@@ -1265,6 +1296,22 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			.'event records for the list view. If this value is not set '
 			.'correctly, some events might not get displayed in the list '
 			.'view.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value pages for the category
+	 * list.
+	 */
+	private function checkPagesForCategoryList() {
+		$this->checkIfSysFoldersOrEmpty(
+			'pages',
+			true,
+			'sDEF',
+			'This value specifies the system folders that contain the '
+			.'event records for which the categories should be listed. If this '
+			.'value is not set correctly, the wrong (or no) categories could '
+			.'get displayed.'
 		);
 	}
 

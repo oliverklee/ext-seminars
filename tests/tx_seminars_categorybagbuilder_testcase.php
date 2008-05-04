@@ -115,6 +115,27 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testToLimitEmptyEventUidsResultsInAllCategories() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->fixture->limitToEvents('');
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
 	public function testLimitToZeroEventUidFails() {
 		try {
 			$this->fixture->limitToEvents('0');

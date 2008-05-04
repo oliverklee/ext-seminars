@@ -52,10 +52,14 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	 * limits).
 	 *
 	 * @param	string		comma-separated list of UID of the events to which
-	 * 						the category selection should be limited, all UIDs
-	 * 						must be > 0
+	 * 						the category selection should be limited, may be
+	 * 						empty, all UIDs	must be > 0
 	 */
 	public function limitToEvents($eventUids) {
+		if ($eventUids == '') {
+			return;
+		}
+
 		if (!preg_match('/^(\d+,)*\d+$/', $eventUids)
 			|| preg_match('/(^|,)0+(,|$)/', $eventUids)
 		) {
