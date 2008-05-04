@@ -175,6 +175,9 @@ plugin.tx_seminars_pi1 {
 	# CSS class around the selector widget (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_selectorwidget = selectorwidget
 
+	# CSS class around the table with the events list view (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
+	class_categorylist = categorylist
+
 	# CSS class for the TR with the header row for the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_headerrow =
 
@@ -241,6 +244,9 @@ plugin.tx_seminars_pi1 {
 
 	# CSS classes for the registration page (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_error = error
+
+	# CSS class around the table with the category list view (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
+	class_categorylist = categorylist
 
 	# the PID of a fixed event that should be shown in a detailed view
 	showSingleEvent =
