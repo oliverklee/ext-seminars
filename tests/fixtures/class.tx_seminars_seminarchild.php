@@ -391,6 +391,19 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setRecordEndTime($timeStamp) {
 		$this->setRecordPropertyInteger('endtime', $timeStamp);
 	}
+
+ 	/**
+	 * Sets the TypoScript configuration for the parameter
+	 * allowUnregistrationWithEmptyWaitingList.
+	 *
+	 * @param	boolean		whether unregistration is possible even when the
+	 * 						waiting list is empty
+	 */
+	public function setAllowUnregistrationWithEmptyWaitingList($isAllowed) {
+		$this->setConfigurationValue(
+			'allowUnregistrationWithEmptyWaitingList', intval($isAllowed)
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

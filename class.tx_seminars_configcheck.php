@@ -64,7 +64,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkDecimalSplitChar();
 		$this->checkShowToBeAnnouncedForEmptyPrice();
 		$this->checkEventType();
-		$this->checkUnregistrationDeadlineDaysBeforeBeginDate();
 	}
 
 	/**
@@ -80,8 +79,11 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkThankYouMail();
 		$this->checkGeneralPriceInMail();
 		$this->checkNotificationMail();
+
 		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
 			$this->checkAttendancesPid();
+			$this->checkUnregistrationDeadlineDaysBeforeBeginDate();
+			$this->checkAllowUnregistrationWithEmptyWaitingList();
 		}
 	}
 
@@ -1943,6 +1945,24 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'to the user after the queue has been updated. If this value is '
 				.'not set correctly, the sending of notifications probably will '
 				.'not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * allowUnregistrationWithEmptyWaitingList.
+	 *
+	 * @access	private
+	 */
+	function checkAllowUnregistrationWithEmptyWaitingList() {
+		$this->checkIfBoolean(
+			'allowUnregistrationWithEmptyWaitingList',
+			false,
+			'',
+			'This value specifies whether unregistration is possible even when '
+				.'there are no registrations on the waiting list yet. '
+				.'If this value is incorrect, unregistration might be possible '
+				.'even when this is not desired (or vice versa).'
 		);
 	}
 

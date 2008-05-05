@@ -4107,6 +4107,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			) {
 				$result = true;
 			}
+
+			if (!$this->getConfValueBoolean(
+				'allowUnregistrationWithEmptyWaitingList'
+			)) {
+				// We also need to check whether we have a waiting list and
+				// whether there is at least one person on it.
+				$result = $result && $this->hasRegistrationQueueSize()
+					&& $this->hasAttendancesOnRegistrationQueue();
+			}
 		}
 
 		return $result;

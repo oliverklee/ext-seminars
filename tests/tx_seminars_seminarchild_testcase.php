@@ -29,6 +29,7 @@
  * @subpackage	tx_seminars
  *
  * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
@@ -79,16 +80,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		unset($this->fixture, $this->testingFramework);
 	}
 
-	public function testIsOk() {
-		$this->assertTrue(
-			$this->fixture->isOk()
-		);
-	}
 
-
-	///////////////////////
-	// Utility functions.
-	///////////////////////
+	//////////////////////
+	// Utility functions
+	//////////////////////
 
 	/**
 	 * Inserts a place record into the database and creates a relation to it
@@ -341,9 +336,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////
-	// Tests for the utility functions.
-	/////////////////////////////////////
+	////////////////////////////////////
+	// Tests for the utility functions
+	////////////////////////////////////
 
 	public function testAddPlaceRelationReturnsUid() {
 		$uid = $this->addPlaceRelation(array());
@@ -831,9 +826,41 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////////////
-	// Tests regarding the language of an event.
-	//////////////////////////////////////////////
+	///////////////////////////////////////
+	// Tests for some basic functionality
+	///////////////////////////////////////
+
+	public function testIsOk() {
+		$this->assertTrue(
+			$this->fixture->isOk()
+		);
+	}
+
+	public function testGetEventData() {
+		$this->fixture->setUnregistrationDeadline(1893488400);
+		$this->fixture->setShowTimeOfUnregistrationDeadline(0);
+		$this->assertEquals(
+			'01.01.2030',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+
+		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
+		$this->assertEquals(
+			'01.01.2030 10:00',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->assertEquals(
+			'',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+	}
+
+
+	/////////////////////////////////////////////
+	// Tests regarding the language of an event
+	/////////////////////////////////////////////
 
 	public function testGetLanguageFromIsoCodeWithValidLanguage() {
 		$this->assertEquals(
@@ -965,9 +992,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////////
-	// Tests regarding the date fields of an event:
-	/////////////////////////////////////////////////
+	////////////////////////////////////////////////
+	// Tests regarding the date fields of an event
+	////////////////////////////////////////////////
 
 	public function testGetBeginDateAsTimestampIsInitiallyZero() {
 		$this->assertEquals(
@@ -1025,86 +1052,97 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetUnregistrationDeadlineAsTimestamp() {
+
+	//////////////////////////////////////
+	// Tests regarding the registration.
+	//////////////////////////////////////
+
+	public function testNeedsRegistrationIsTrueWithNonZeroMaxAttendances() {
+		$this->fixture->setAttendancesMax(10);
+
+		$this->assertTrue(
+			$this->fixture->needsRegistration()
+		);
+	}
+
+	public function testNeedsRegistrationIsFalseWithZeroMaxAttendances() {
+		$this->fixture->setAttendancesMax(0);
+
+		$this->assertFalse(
+			$this->fixture->needsRegistration()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////
+	// Tests regarding the unregistration and the queue
+	/////////////////////////////////////////////////////
+
+	public function testGetUnregistrationDeadlineAsTimestampForNonZero() {
 		$this->fixture->setUnregistrationDeadline($this->unregistrationDeadline);
+
 		$this->assertEquals(
 			$this->unregistrationDeadline,
 			$this->fixture->getUnregistrationDeadlineAsTimestamp()
 		);
+	}
 
+	public function testGetUnregistrationDeadlineAsTimestampForZero() {
 		$this->fixture->setUnregistrationDeadline(0);
+
 		$this->assertEquals(
 			0,
 			$this->fixture->getUnregistrationDeadlineAsTimestamp()
 		);
 	}
 
-	public function testNeedsRegistration() {
-		$this->fixture->setAttendancesMax(10);
-		$this->assertTrue(
-			$this->fixture->needsRegistration()
-		);
+	public function testGetUnregistrationDeadlineWithoutTimeForNonZero() {
+		$this->fixture->setUnregistrationDeadline(1893488400);
 
-		$this->fixture->setAttendancesMax(0);
-		$this->assertFalse(
-			$this->fixture->needsRegistration()
+		$this->assertEquals(
+			'01.01.2030',
+			$this->fixture->getUnregistrationDeadline()
 		);
 	}
 
-	public function testHasUnregistrationDeadline() {
+	public function testGetNonUnregistrationDeadlineWithTimeForZero() {
+		$this->fixture->setUnregistrationDeadline(1893488400);
+		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
+
+		$this->assertEquals(
+			'01.01.2030 10:00',
+			$this->fixture->getUnregistrationDeadline()
+		);
+	}
+
+	public function testGetUnregistrationDeadlineIsEmptyForZero() {
+		$this->fixture->setUnregistrationDeadline(0);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getUnregistrationDeadline()
+		);
+	}
+
+	public function testHasUnregistrationDeadlineIsTrueForNonZeroDeadline() {
 		$this->fixture->setUnregistrationDeadline($this->unregistrationDeadline);
+
 		$this->assertTrue(
 			$this->fixture->hasUnregistrationDeadline()
 		);
+	}
 
+	public function testHasUnregistrationDeadlineIsFalseForZeroDeadline() {
 		$this->fixture->setUnregistrationDeadline(0);
+
 		$this->assertFalse(
 			$this->fixture->hasUnregistrationDeadline()
 		);
 	}
 
-	public function testGetUnregistrationDeadline() {
-		$this->fixture->setUnregistrationDeadline(1893488400);
-		$this->assertEquals(
-			'01.01.2030',
-			$this->fixture->getUnregistrationDeadline()
-		);
+	public function testIsUnregistrationPossibleIsFalseWithNoDeadlineSet() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
 
-		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
-		$this->assertEquals(
-			'01.01.2030 10:00',
-			$this->fixture->getUnregistrationDeadline()
-		);
-
-		$this->fixture->setUnregistrationDeadline(0);
-		$this->assertEquals(
-			'',
-			$this->fixture->getUnregistrationDeadline()
-		);
-	}
-
-	public function testGetEventData() {
-		$this->fixture->setUnregistrationDeadline(1893488400);
-		$this->fixture->setShowTimeOfUnregistrationDeadline(0);
-		$this->assertEquals(
-			'01.01.2030',
-			$this->fixture->getEventData('deadline_unregistration')
-		);
-
-		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
-		$this->assertEquals(
-			'01.01.2030 10:00',
-			$this->fixture->getEventData('deadline_unregistration')
-		);
-
-		$this->fixture->setUnregistrationDeadline(0);
-		$this->assertEquals(
-			'',
-			$this->fixture->getEventData('deadline_unregistration')
-		);
-	}
-
-	public function testIsUnregistrationPossibleWithNoDeadlineSet() {
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
@@ -1115,7 +1153,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleWithGlobalDeadlineSet() {
+	public function testIsUnregistrationPossibleIsTrueWithGlobalDeadlineSet() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
+
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
@@ -1134,7 +1174,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleWithEventDeadlineSet() {
+	public function testIsUnregistrationPossibleIsTrueWithEventDeadlineSet() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
+
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 		$this->fixture->setUnregistrationDeadline(
 			($this->currentTimestamp + (6*ONE_DAY))
@@ -1157,7 +1199,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleWithBothDeadlinesSet() {
+	public function testIsUnregistrationPossibleIsTrueWithBothDeadlinesSet() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
+
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
 			($this->currentTimestamp + (6*ONE_DAY))
@@ -1180,26 +1224,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleWithNoRegistrationNeeded() {
-		$this->fixture->setAttendancesMax(10);
-		$this->fixture->setGlobalUnregistrationDeadline(1);
-		$this->fixture->setUnregistrationDeadline(
-			($this->currentTimestamp + (6*ONE_DAY))
-		);
-		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+	public function testIsUnregistrationPossibleIsFalseWithPassedEventUnregistrationDeadlineSet() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
 
-		$this->assertTrue(
-			$this->fixture->isUnregistrationPossible()
-		);
-
-
-		$this->fixture->setAttendancesMax(0);
-		$this->assertFalse(
-			$this->fixture->isUnregistrationPossible()
-		);
-	}
-
-	public function testIsUnregistrationPossibleWithPassedEventUnregistrationDeadlineSet() {
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setBeginDate($this->currentTimestamp + (2*ONE_DAY));
 		$this->fixture->setUnregistrationDeadline(
@@ -1212,46 +1239,98 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetRegistrationQueueSize() {
+	public function testIsUnregistrationPossibleIsTrueWithNonZeroAttendancesMax() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
+
+		$this->fixture->setAttendancesMax(10);
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+
+		$this->assertTrue(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleIsFalseWithZeroAttendancesMax() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
+
+		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testGetRegistrationQueueSizeForNonZero() {
 		$this->fixture->setRegistrationQueueSize(10);
+
 		$this->assertEquals(
 			10,
 			$this->fixture->getRegistrationQueueSize()
 		);
 	}
 
-	public function testHasRegistrationQueueSize() {
+	public function testGetRegistrationQueueSizeForZero() {
+		$this->fixture->setRegistrationQueueSize(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getRegistrationQueueSize()
+		);
+	}
+
+	public function testHasRegistrationQueueSizeIsTrueForNonZero() {
 		$this->fixture->setRegistrationQueueSize(5);
+
 		$this->assertTrue(
 			$this->fixture->hasRegistrationQueueSize()
 		);
+	}
 
+	public function testHasZeroRegistrationQueueSizeIsFalseForZero() {
 		$this->fixture->setRegistrationQueueSize(0);
+
 		$this->assertFalse(
 			$this->fixture->hasRegistrationQueueSize()
 		);
 	}
 
-	public function testHasVacanciesOnUnregistrationQueue() {
+	public function testHasVacanciesOnRegistrationQueueIsTrueForNonEmptyQueue() {
 		$this->fixture->setNumberOfAttendances(
 			$this->fixture->getAttendancesMax()
 		);
 		$this->fixture->setRegistrationQueueSize(5);
+
 		$this->assertTrue(
 			$this->fixture->hasVacanciesOnRegistrationQueue()
 		);
+	}
 
+	public function testHasVacanciesOnRegistrationQueueIsFalseForEmptyQueue() {
+		$this->fixture->setNumberOfAttendances(
+			$this->fixture->getAttendancesMax()
+		);
 		$this->fixture->setRegistrationQueueSize(0);
+
 		$this->assertFalse(
 			$this->fixture->hasVacanciesOnRegistrationQueue()
 		);
 	}
 
-	public function testGetVacanciesOnRegistrationQueue() {
+	public function testGetVacanciesOnRegistrationQueueForNonEmptyRegistrationQueue() {
 		$this->fixture->setNumberOfAttendances(
 			$this->fixture->getAttendancesMax()
 		);
 		$this->fixture->setRegistrationQueueSize(5);
+
 		$this->assertEquals(
 			5,
 			$this->fixture->getVacanciesOnRegistrationQueue()
@@ -1265,7 +1344,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetAttendancesOnRegistrationQueue() {
+	public function testGetAttendancesOnRegistrationQueueForNonEmptyRegistrationQueue() {
 		$this->fixture->setNumberOfAttendancesOnQueue(4);
 		$this->assertEquals(
 			4,
@@ -1306,9 +1385,62 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testIsUnregistrationPossibleIsTrueWithNonEmptyQueueByDefault() {
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setRegistrationQueueSize(1);
+		$this->fixture->setNumberOfAttendances(1);
+		$this->fixture->setNumberOfAttendancesOnQueue(1);
+
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+
+		$this->assertTrue(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleIsFalseWithEmptyQueueByDefault() {
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setRegistrationQueueSize(1);
+		$this->fixture->setNumberOfAttendances(1);
+		$this->fixture->setNumberOfAttendancesOnQueue(0);
+
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+
+		$this->assertFalse(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
+	public function testIsUnregistrationPossibleIsTrueWithEmptyQueueIfAllowedByConfiguration() {
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
+
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setRegistrationQueueSize(1);
+		$this->fixture->setNumberOfAttendances(1);
+		$this->fixture->setNumberOfAttendancesOnQueue(0);
+
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+		$this->fixture->setUnregistrationDeadline(
+			($this->currentTimestamp + (6*ONE_DAY))
+		);
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+
+		$this->assertTrue(
+			$this->fixture->isUnregistrationPossible()
+		);
+	}
+
 
 	///////////////////////////////////////////////////////////
-	// Tests regarding the country field of the place records.
+	// Tests regarding the country field of the place records
 	///////////////////////////////////////////////////////////
 
 	public function testGetPlacesWithCountry() {
@@ -1574,9 +1706,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
-	// Tests regarding the target groups.
-	///////////////////////////////////////////////////////////
+	//////////////////////////////////////
+	// Tests regarding the target groups
+	//////////////////////////////////////
 
 	public function testHasTargetGroupsIsInitiallyFalse() {
 		$this->assertFalse(
@@ -1653,9 +1785,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
-	// Tests regarding the payment methods.
-	///////////////////////////////////////////////////////////
+	////////////////////////////////////////
+	// Tests regarding the payment methods
+	////////////////////////////////////////
 
 	public function testHasPaymentMethodsReturnsInitiallyFalse() {
 		$this->assertFalse(
@@ -1816,9 +1948,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////
-	// Tests regarding the event type.
-	////////////////////////////////////
+	///////////////////////////////////
+	// Tests regarding the event type
+	///////////////////////////////////
 
 	public function testGetEventTypeUidReturnsUidFromTopicRecord() {
 		// This test comes from bug #1515.
@@ -1877,9 +2009,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
-	// Tests regarding the organizing partners.
-	///////////////////////////////////////////////////////////
+	////////////////////////////////////////////
+	// Tests regarding the organizing partners
+	////////////////////////////////////////////
 
 	public function testHasOrganizingPartnersReturnsInitiallyFalse() {
 		$this->assertFalse(
@@ -1920,9 +2052,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////
-	// Tests regarding the categories.
-	////////////////////////////////////
+	///////////////////////////////////
+	// Tests regarding the categories
+	///////////////////////////////////
 
 	public function testInitiallyHasNoCategories() {
 		$this->assertFalse(
@@ -1983,9 +2115,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////
-	// Tests regarding the time slots.
-	////////////////////////////////////
+	///////////////////////////////////
+	// Tests regarding the time slotd
+	///////////////////////////////////
 
 	public function testGetTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {
 		$firstTimeSlotUid = $this->testingFramework->createRecord(
@@ -2017,9 +2149,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
-	// Tests regarding the organizers.
-	///////////////////////////////////////////////////////////
+	///////////////////////////////////
+	// Tests regarding the organizers
+	///////////////////////////////////
 
 	public function testHasOrganizersReturnsInitiallyFalse() {
 		$this->assertFalse(
@@ -2246,9 +2378,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////
-	// Tests regarding the speakers.
-	//////////////////////////////////
+	/////////////////////////////////
+	// Tests regarding the speakers
+	/////////////////////////////////
 
 	public function testGetNumberOfSpeakersWithNoSpeakerReturnsZero() {
 		$this->assertEquals(
@@ -3177,9 +3309,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////
-	// Test concerning the collision check.
-	/////////////////////////////////////////
+	////////////////////////////////////////
+	// Test concerning the collision check
+	////////////////////////////////////////
 
 	public function testEventsWithTheExactSameDateCollide() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
@@ -3280,9 +3412,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////
-	// Tests for the icons.
-	/////////////////////////
+	////////////////////////
+	// Tests for the icons
+	////////////////////////
 
 	public function testUsesCorrectIconForSingleEvent() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
