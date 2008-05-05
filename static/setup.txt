@@ -102,6 +102,10 @@ plugin.tx_seminars {
 	# Number of days before the start of an event until unregistration is possible. (If you want to disable this feature, just leave this value empty.)
 	unregistrationDeadlineDaysBeforeBeginDate =
 
+	# Whether unregistration is possible even when there are no registrations
+	# on the waiting list yet.
+	allowUnregistrationWithEmptyWaitingList = 0
+
 	# If there are at least this many vancancies, "enough" is displayed instead of the exact number.
 	showVacanciesThreshold = 10
 
