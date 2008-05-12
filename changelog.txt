@@ -1,4 +1,4 @@
-0.6.0 (currently working on)
+0.6.0 (released 2008-05-12)
 - [#1339] Feature: Add a switch that controls when unregistration is possible
 - [#1408] Feature: Create a list of categories
 - [#1874] Fix: Crash on the "my events page" after unregistering from an event
