@@ -490,15 +490,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		switch ($this->whatToDisplay) {
 			case 'my_events':
 				if ($this->isLoggedIn()) {
-					$result .= $this->substituteMarkerArrayCached('MESSAGE_MY_EVENTS');
+					$result .= $this->getSubpart('MESSAGE_MY_EVENTS');
 				} else {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'error_text',
-						$this->pi_getLL('message_notLoggedIn')
+						$this->translate('message_notLoggedIn')
 					);
-					$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
+					$result .= $this->getSubpart('ERROR_VIEW');
 					$result .= $this->getLoginLink(
-						$this->pi_getLL('message_pleaseLogIn'),
+						$this->translate('message_pleaseLogIn'),
 						$GLOBALS['TSFE']->id
 					);
 					$isOkay = false;
@@ -506,17 +506,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 			case 'my_vip_events':
 				if ($this->isLoggedIn()) {
-					$result .= $this->substituteMarkerArrayCached(
+					$result .= $this->getSubpart(
 						'MESSAGE_MY_VIP_EVENTS'
 					);
 				} else {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'error_text',
-						$this->pi_getLL('message_notLoggedIn')
+						$this->translate('message_notLoggedIn')
 					);
-					$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
+					$result .= $this->getSubpart('ERROR_VIEW');
 					$result .= $this->getLoginLink(
-						$this->pi_getLL('message_pleaseLogIn'),
+						$this->translate('message_pleaseLogIn'),
 						$GLOBALS['TSFE']->id
 					);
 					$isOkay = false;
@@ -525,7 +525,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'my_entered_events':
 				$result .= $this->createEventEditor(true);
 				if (empty($result)) {
-					$result .= $this->substituteMarkerArrayCached(
+					$result .= $this->getSubpart(
 						'MESSAGE_MY_ENTERED_EVENTS'
 					);
 				} else {
@@ -560,11 +560,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			if ($this->internal['res_count']) {
 				$result .= $this->createListTable($seminarOrRegistrationBag);
 			} else {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'error_text',
-					$this->pi_getLL('message_noResults')
+					$this->translate('message_noResults')
 				);
-				$result .= $this->substituteMarkerArrayCached('ERROR_VIEW');
+				$result .= $this->getSubpart('ERROR_VIEW');
 			}
 
 			// Shows the page browser (if not deactivated in the configuration),
@@ -707,7 +707,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function addEmptyOptionIfNeeded(array &$options) {
 		if ($this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
 			$completeOptionList = array(
-				'none' => $this->pi_getLL('label_selector_pleaseChoose')
+				'none' => $this->translate('label_selector_pleaseChoose')
 			);
 			foreach ($options as $key => $value) {
 				$completeOptionList[$key] = $value;
@@ -797,13 +797,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
 		}
 
-		$this->readSubpartsToHide(
+		$this->hideSubparts(
 			$this->getConfValueString(
 				'hideColumns',
 				's_template_special'),
 				'LISTHEADER_WRAPPER'
 			);
-		$this->readSubpartsToHide(
+		$this->hideSubparts(
 			$this->getConfValueString(
 			'hideColumns',
 			's_template_special'),
@@ -812,17 +812,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Hide the registration column if online registration is disabled.
 		if (!$this->getConfValueBoolean('enableRegistration')) {
-			$this->readSubpartsToHide('registration', 'LISTHEADER_WRAPPER');
-			$this->readSubpartsToHide('registration', 'LISTITEM_WRAPPER');
+			$this->hideSubparts('registration', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('registration', 'LISTITEM_WRAPPER');
 		}
 
 		// Hides the number of seats, the total price and the registration
 		// status columns when we're not on the "my events" list.
 		if ($whatToDisplay != 'my_events') {
-			$this->readSubpartsToHide(
+			$this->hideSubparts(
 				'total_price,seats,status_registration', 'LISTHEADER_WRAPPER'
 			);
-			$this->readSubpartsToHide(
+			$this->hideSubparts(
 				'total_price,seats,status_registration', 'LISTITEM_WRAPPER'
 			);
 		}
@@ -842,15 +842,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				&& !$this->hasConfValueInteger('registrationsListPID'))
 			|| (($whatToDisplay == 'my_vip_events')
 				&& !$this->hasConfValueInteger('registrationsVipListPID'))) {
-			$this->readSubpartsToHide('list_registrations', 'LISTHEADER_WRAPPER');
-			$this->readSubpartsToHide('list_registrations', 'LISTITEM_WRAPPER');
+			$this->hideSubparts('list_registrations', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('list_registrations', 'LISTITEM_WRAPPER');
 		}
 
 		// Hide the edit column if the list to display is not the
 		// "events which I have entered" list.
 		if ($whatToDisplay != 'my_entered_events') {
-			$this->readSubpartsToHide('edit', 'LISTHEADER_WRAPPER');
-			$this->readSubpartsToHide('edit', 'LISTITEM_WRAPPER');
+			$this->hideSubparts('edit', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('edit', 'LISTITEM_WRAPPER');
 		}
 
 		if (!isset($this->piVars['pointer'])) {
@@ -914,12 +914,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'topic_list':
 				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.object_type='
 					.SEMINARS_RECORD_TYPE_TOPIC;
-				$this->readSubpartsToHide(
+				$this->hideSubparts(
 					'uid,accreditation_number,speakers,date,time,place,'
 						.'organizers,vacancies,registration',
 					'LISTHEADER_WRAPPER'
 				);
-				$this->readSubpartsToHide(
+				$this->hideSubparts(
 					'uid,accreditation_number,speakers,date,time,place,'
 						.'organizers,vacancies,registration',
 					'LISTITEM_WRAPPER'
@@ -1040,77 +1040,77 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// This sets the title of the page for use in indexed search results:
 			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
 
-			$this->setMarkerContent('event_type', $this->seminar->getEventType());
-			$this->setMarkerContent('title', $this->seminar->getTitle());
-			$this->setMarkerContent('uid', $this->seminar->getUid());
+			$this->setMarker('event_type', $this->seminar->getEventType());
+			$this->setMarker('title', $this->seminar->getTitle());
+			$this->setMarker('uid', $this->seminar->getUid());
 
 			if ($this->seminar->hasSubtitle()) {
-				$this->setMarkerContent('subtitle', $this->seminar->getSubtitle());
+				$this->setMarker('subtitle', $this->seminar->getSubtitle());
 			} else {
-				$this->readSubpartsToHide('subtitle', 'field_wrapper');
+				$this->hideSubparts('subtitle', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasDescription()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'description',
 					$this->seminar->getDescription($this)
 				);
 			} else {
-				$this->readSubpartsToHide('description', 'field_wrapper');
+				$this->hideSubparts('description', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasAccreditationNumber()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'accreditation_number',
 					$this->seminar->getAccreditationNumber()
 				);
 			} else {
-				$this->readSubpartsToHide('accreditation_number', 'field_wrapper');
+				$this->hideSubparts('accreditation_number', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasCreditPoints()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'credit_points',
 					$this->seminar->getCreditPoints()
 				);
 			} else {
-				$this->readSubpartsToHide('credit_points', 'field_wrapper');
+				$this->hideSubparts('credit_points', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasCategories()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'category',
 					implode(', ', $this->seminar->getCategories())
 				);
 			} else {
-				$this->readSubpartsToHide('category', 'field_wrapper');
+				$this->hideSubparts('category', 'field_wrapper');
 			}
 
-			$this->setMarkerContent('date', $this->seminar->getDate());
-			$this->setMarkerContent('time', $this->seminar->getTime());
+			$this->setMarker('date', $this->seminar->getDate());
+			$this->setMarker('time', $this->seminar->getTime());
 
 			if ($this->getConfValueBoolean('showSiteDetails', 's_template_special')) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'place',
 					$this->seminar->getPlaceWithDetails($this)
 				);
 			} else {
-				$this->setMarkerContent('place', $this->seminar->getPlaceShort());
+				$this->setMarker('place', $this->seminar->getPlaceShort());
 			}
 
 			if ($this->seminar->hasRoom()) {
-				$this->setMarkerContent('room', $this->seminar->getRoom());
+				$this->setMarker('room', $this->seminar->getRoom());
 			} else {
-				$this->readSubpartsToHide('room', 'field_wrapper');
+				$this->hideSubparts('room', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasAdditionalTimesAndPlaces()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'additional_times_places',
 					$this->seminar->getAdditionalTimesAndPlaces()
 				);
 			} else {
-				$this->readSubpartsToHide(
+				$this->hideSubparts(
 					'additional_times_places',
 					'field_wrapper'
 				);
@@ -1137,25 +1137,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					'showSpeakerDetails',
 					's_template_special')
 				) {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'speakers',
 						$this->seminar->getSpeakersWithDescription($this)
 					);
 				} else {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'speakers',
 						$this->seminar->getSpeakersShort()
 					);
 				}
 			} else {
-				$this->readSubpartsToHide('speakers', 'field_wrapper');
+				$this->hideSubparts('speakers', 'field_wrapper');
 			}
 			if ($this->seminar->hasPartners()) {
 				if ($this->getConfValueBoolean(
 					'showSpeakerDetails',
 					's_template_special')
 				) {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'partners',
 						$this->seminar->getSpeakersWithDescription(
 							$this,
@@ -1163,20 +1163,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						)
 					);
 				} else {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'partners',
 						$this->seminar->getSpeakersShort('partners')
 					);
 				}
 			} else {
-				$this->readSubpartsToHide('partners', 'field_wrapper');
+				$this->hideSubparts('partners', 'field_wrapper');
 			}
 			if ($this->seminar->hasTutors()) {
 				if ($this->getConfValueBoolean(
 					'showSpeakerDetails',
 					's_template_special')
 				) {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'tutors',
 						$this->seminar->getSpeakersWithDescription(
 							$this,
@@ -1184,20 +1184,20 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						)
 					);
 				} else {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'tutors',
 						$this->seminar->getSpeakersShort('tutors')
 					);
 				}
 			} else {
-				$this->readSubpartsToHide('tutors', 'field_wrapper');
+				$this->hideSubparts('tutors', 'field_wrapper');
 			}
 			if ($this->seminar->hasLeaders()) {
 				if ($this->getConfValueBoolean(
 					'showSpeakerDetails',
 					's_template_special')
 				) {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'leaders',
 						$this->seminar->getSpeakersWithDescription(
 							$this,
@@ -1205,43 +1205,43 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						)
 					);
 				} else {
-					$this->setMarkerContent(
+					$this->setMarker(
 						'leaders',
 						$this->seminar->getSpeakersShort('leaders')
 					);
 				}
 			} else {
-				$this->readSubpartsToHide('leaders', 'field_wrapper');
+				$this->hideSubparts('leaders', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasLanguage()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'language',
 					$this->seminar->getLanguageName()
 				);
 			} else {
-				$this->readSubpartsToHide('language', 'field_wrapper');
+				$this->hideSubparts('language', 'field_wrapper');
 			}
 
 			// set markers for prices
 			$this->setPriceMarkers('field_wrapper');
 
 			if ($this->seminar->hasPaymentMethods()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'paymentmethods',
 					$this->seminar->getPaymentMethods($this)
 				);
 			} else {
-				$this->readSubpartsToHide('paymentmethods', 'field_wrapper');
+				$this->hideSubparts('paymentmethods', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasAdditionalInformation()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'additional_information',
 					$this->seminar->getAdditionalInformation($this)
 				);
 			} else {
-				$this->readSubpartsToHide(
+				$this->hideSubparts(
 					'additional_information',
 					'field_wrapper'
 				);
@@ -1260,40 +1260,40 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->hideSubparts('target_groups', 'field_wrapper');
 			}
 
-			$this->setMarkerContent(
+			$this->setMarker(
 				'organizers',
 				$this->seminar->getOrganizers($this)
 			);
 
 			if ($this->seminar->hasOrganizingPartners()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'organizing_partners',
 					$this->seminar->getOrganizingPartners($this)
 				);
 			} else {
-				$this->readSubpartsToHide('organizing_partners', 'field_wrapper');
+				$this->hideSubparts('organizing_partners', 'field_wrapper');
 			}
 
 			if ($this->seminar->needsRegistration() && !$this->seminar->isCanceled()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'vacancies',
 					$this->seminar->getVacanciesString()
 				);
 			} else {
-				$this->readSubpartsToHide('vacancies', 'field_wrapper');
+				$this->hideSubparts('vacancies', 'field_wrapper');
 			}
 
 			if ($this->seminar->hasRegistrationDeadline()) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'deadline_registration',
 					$this->seminar->getRegistrationDeadline()
 				);
 			} else {
-				$this->readSubpartsToHide('deadline_registration', 'field_wrapper');
+				$this->hideSubparts('deadline_registration', 'field_wrapper');
 			}
 
 			if ($this->getConfValueBoolean('enableRegistration')) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'registration',
 					$this->registrationManager->canRegisterIfLoggedIn(
 						$this->seminar)
@@ -1305,25 +1305,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					)
 				);
 			} else {
-				$this->readSubpartsToHide('registration', 'field_wrapper');
+				$this->hideSubparts('registration', 'field_wrapper');
 			}
 
 			if ($this->seminar->canViewRegistrationsList($this->whatToDisplay,
 				$this->getConfValueInteger('registrationsListPID'),
 				$this->getConfValueInteger('registrationsVipListPID'))) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'list_registrations',
 					$this->getRegistrationsListLink()
 				);
 			} else {
-				$this->readSubpartsToHide('list_registrations', 'field_wrapper');
+				$this->hideSubparts('list_registrations', 'field_wrapper');
 			}
 
 			// Hides unneeded sections for topic records.
 			if ($this->seminar->getRecordType()
 				== SEMINARS_RECORD_TYPE_TOPIC
 			) {
-				$this->readSubpartsToHide(
+				$this->hideSubparts(
 					'accreditation_number,date,time,place,room,speakers,'
 						.'organizers,vacancies,deadline_registration,'
 						.'registration,list_registrations,eventsnextday',
@@ -1338,7 +1338,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				}
 			}
 
-			$result = $this->substituteMarkerArrayCached('SINGLE_VIEW');
+			$result = $this->getSubpart('SINGLE_VIEW');
 
 			// Caches the additional query parameters and the other dates list
 			// because the list view will overwrite $this->seminar.
@@ -1349,24 +1349,24 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 			$result .= $otherDatesPart;
 		} else {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'error_text',
-				$this->pi_getLL('message_wrongSeminarNumber')
+				$this->translate('message_wrongSeminarNumber')
 			);
-			$result = $this->substituteMarkerArrayCached('ERROR_VIEW');
+			$result = $this->getSubpart('ERROR_VIEW');
 			header('Status: 404 Not Found');
 		}
 
-		$this->setMarkerContent(
+		$this->setMarker(
 			'backlink',
 			$this->pi_linkTP(
-				$this->pi_getLL('label_back', 'Back'),
+				$this->translate('label_back', 'Back'),
 				array(),
 				true,
 				$this->getConfValueInteger('listPID')
 			)
 		);
-		$result .= $this->substituteMarkerArrayCached('BACK_VIEW');
+		$result .= $this->getSubpart('BACK_VIEW');
 
 		return $result;
 	}
@@ -1383,23 +1383,23 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($this->seminar->hasEarlyBirdPrice()
 			&& !$this->seminar->isEarlyBirdDeadlineOver()
 		) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'price_earlybird_regular',
 				$this->seminar->getEarlyBirdPriceRegular()
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'message_earlybird_price_regular',
 				sprintf(
-					$this->pi_getLL('message_earlybird_price'),
+					$this->translate('message_earlybird_price'),
 					$this->seminar->getEarlyBirdDeadline()
 				)
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'price_regular',
 				$this->seminar->getPriceRegular()
 			);
 		} else {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'price_regular',
 				$this->seminar->getPriceRegular()
 			);
@@ -1407,12 +1407,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				'generalPriceInSingle',
 				's_template_special')
 			) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'label_price_regular',
-					$this->pi_getLL('label_price_general')
+					$this->translate('label_price_general')
 				);
 			}
-			$this->readSubpartsToHide('price_earlybird_regular', $wrapper);
+			$this->hideSubparts('price_earlybird_regular', $wrapper);
 		}
 
 		// set the special price (with or without early bird rebate)
@@ -1420,54 +1420,54 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			if ($this->seminar->hasEarlyBirdPrice()
 				&& !$this->seminar->isEarlyBirdDeadlineOver()
 			) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'price_earlybird_special',
 					$this->seminar->getEarlyBirdPriceSpecial()
 				);
-				$this->setMarkerContent(
+				$this->setMarker(
 					'message_earlybird_price_special',
 					sprintf(
-						$this->pi_getLL('message_earlybird_price'),
+						$this->translate('message_earlybird_price'),
 						$this->seminar->getEarlyBirdDeadline()
 					)
 				);
-				$this->setMarkerContent(
+				$this->setMarker(
 					'price_special',
 					$this->seminar->getPriceSpecial()
 				);
 			} else {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'price_special',
 					$this->seminar->getPriceSpecial()
 				);
-				$this->readSubpartsToHide(
+				$this->hideSubparts(
 					'price_earlybird_special',
 					$wrapper
 				);
 			}
 		} else {
-			$this->readSubpartsToHide('price_special', $wrapper);
-			$this->readSubpartsToHide('price_earlybird_special', $wrapper);
+			$this->hideSubparts('price_special', $wrapper);
+			$this->hideSubparts('price_earlybird_special', $wrapper);
 		}
 
 		// set the regular price (including full board)
 		if ($this->seminar->hasPriceRegularBoard()) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'price_board_regular',
 				$this->seminar->getPriceRegularBoard()
 			);
 		} else {
-			$this->readSubpartsToHide('price_board_regular', $wrapper);
+			$this->hideSubparts('price_board_regular', $wrapper);
 		}
 
 		// set the special price (including full board)
 		if ($this->seminar->hasPriceSpecialBoard()) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'price_board_special',
 				$this->seminar->getPriceSpecialBoard()
 			);
 		} else {
-			$this->readSubpartsToHide('price_board_special', $wrapper);
+			$this->hideSubparts('price_board_special', $wrapper);
 		}
 	}
 
@@ -1497,9 +1497,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($this->internal['res_count']) {
 			$tableEventsNextDay = $this->createListTable($seminarBag);
 
-			$this->setMarkerContent('table_eventsnextday', $tableEventsNextDay);
+			$this->setMarker('table_eventsnextday', $tableEventsNextDay);
 
-			$result = $this->substituteMarkerArrayCached('EVENTSNEXTDAY_VIEW');
+			$result = $this->getSubpart('EVENTSNEXTDAY_VIEW');
 		}
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
@@ -1534,9 +1534,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			if (($this->seminar->getRecordType() == SEMINARS_RECORD_TYPE_COMPLETE)
 				|| ($this->seminar->getRecordType() == SEMINARS_RECORD_TYPE_TOPIC)
 			) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'label_list_otherdates',
-					$this->pi_getLL('label_list_dates')
+					$this->translate('label_list_dates')
 				);
 			}
 
@@ -1548,16 +1548,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$tableOtherDates = $this->createListTable($seminarBag);
 
-			$this->setMarkerContent('table_otherdates', $tableOtherDates);
+			$this->setMarker('table_otherdates', $tableOtherDates);
 
-			$result = $this->substituteMarkerArrayCached('OTHERDATES_VIEW');
+			$result = $this->getSubpart('OTHERDATES_VIEW');
 
 			// Un-hide the previously hidden columns.
 			$hiddenColumns = $this->getConfValueString(
 				'hideColumns',
 				's_template_special'
 			);
-			$this->readSubpartsToUnhide($temporaryHiddenColumns, $hiddenColumns);
+			$this->unhideSubparts($temporaryHiddenColumns, $hiddenColumns);
 		}
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
@@ -1602,7 +1602,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if ($targetPageId) {
 			$result = $this->cObj->getTypoLink(
-				$this->pi_getLL('label_listRegistrationsLink'),
+				$this->translate('label_listRegistrationsLink'),
 				$targetPageId,
 				array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
 			);
@@ -1696,86 +1696,86 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createListHeader() {
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_category', $this->getFieldHeader('category')
 		);
-		$this->setMarkerContent('header_title', $this->getFieldHeader('title'));
-		$this->setMarkerContent(
+		$this->setMarker('header_title', $this->getFieldHeader('title'));
+		$this->setMarker(
 			'header_subtitle',
 			$this->getFieldHeader('subtitle')
 		);
-		$this->setMarkerContent('header_uid', $this->getFieldHeader('uid'));
-		$this->setMarkerContent(
+		$this->setMarker('header_uid', $this->getFieldHeader('uid'));
+		$this->setMarker(
 			'header_event_type',
 			$this->getFieldHeader('event_type')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_accreditation_number',
 			$this->getFieldHeader('accreditation_number')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_credit_points',
 			$this->getFieldHeader('credit_points')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_speakers',
 			$this->getFieldHeader('speakers')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_language',
 			$this->getFieldHeader('language')
 		);
-		$this->setMarkerContent('header_date', $this->getFieldHeader('date'));
-		$this->setMarkerContent('header_time', $this->getFieldHeader('time'));
-		$this->setMarkerContent('header_place', $this->getFieldHeader('place'));
-		$this->setMarkerContent(
+		$this->setMarker('header_date', $this->getFieldHeader('date'));
+		$this->setMarker('header_time', $this->getFieldHeader('time'));
+		$this->setMarker('header_place', $this->getFieldHeader('place'));
+		$this->setMarker(
 			'header_country',
 			$this->getFieldHeader('country')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_city',
 			$this->getFieldHeader('city')
 		);
-		$this->setMarkerContent('header_seats', $this->getFieldHeader('seats'));
-		$this->setMarkerContent(
+		$this->setMarker('header_seats', $this->getFieldHeader('seats'));
+		$this->setMarker(
 			'header_price_regular',
 			$this->getFieldHeader('price_regular')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_price_special',
 			$this->getFieldHeader('price_special')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_total_price',
 			$this->getFieldHeader('total_price')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_organizers',
 			$this->getFieldHeader('organizers')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_target_groups',
 			$this->getFieldHeader('target_groups')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_vacancies',
 			$this->getFieldHeader('vacancies')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_status_registration',
 			$this->getFieldHeader('status_registration')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_registration',
 			$this->getFieldHeader('registration')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'header_list_registrations',
 			$this->getFieldHeader('list_registrations')
 		);
-		$this->setMarkerContent('header_edit', $this->getFieldHeader('edit'));
+		$this->setMarker('header_edit', $this->getFieldHeader('edit'));
 
-		return $this->substituteMarkerArrayCached('LIST_HEADER');
+		return $this->getSubpart('LIST_HEADER');
 	}
 
 	/**
@@ -1786,7 +1786,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createListFooter() {
-		return $this->substituteMarkerArrayCached('LIST_FOOTER');
+		return $this->getSubpart('LIST_FOOTER');
 	}
 
 	/**
@@ -1820,7 +1820,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				' class="'.implode(' ', $cssClasses).'"' :
 				'';
 
-			$this->setMarkerContent('class_itemrow', $completeClass);
+			$this->setMarker('class_itemrow', $completeClass);
 
 			// Retrieves the data for the columns "number of seats", "total
 			// price" and "status", but only if we are on the "my_events" list.
@@ -1829,7 +1829,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					'seats' => $this->registration->getSeats(),
 					'total_price' => $this->registration->getTotalPrice()
 				);
-				$this->setMarkerContent(
+				$this->setMarker(
 					'status_registration',
 					$this->registration->getStatus()
 				);
@@ -1862,29 +1862,29 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			} else {
 				$this->previousCategory = $listOfCategories;
 			}
-			$this->setMarkerContent(
+			$this->setMarker(
 				'category',
 				$listOfCategories
 			);
 
-			$this->setMarkerContent(
+			$this->setMarker(
 				'title_link',
 				$this->seminar->getLinkedFieldValue($this, 'title')
 			);
-			$this->setMarkerContent('subtitle', $this->seminar->getSubtitle());
-			$this->setMarkerContent('uid', $this->seminar->getUid($this));
-			$this->setMarkerContent('event_type', $this->seminar->getEventType());
-			$this->setMarkerContent(
+			$this->setMarker('subtitle', $this->seminar->getSubtitle());
+			$this->setMarker('uid', $this->seminar->getUid($this));
+			$this->setMarker('event_type', $this->seminar->getEventType());
+			$this->setMarker(
 				'accreditation_number',
 				$this->seminar->getAccreditationNumber()
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'credit_points',
 				$this->seminar->getCreditPoints()
 			);
-			$this->setMarkerContent('teaser', $this->seminar->getTeaser());
-			$this->setMarkerContent('speakers', $this->seminar->getSpeakersShort());
-			$this->setMarkerContent('language', $this->seminar->getLanguageName());
+			$this->setMarker('teaser', $this->seminar->getTeaser());
+			$this->setMarker('speakers', $this->seminar->getSpeakersShort());
+			$this->setMarker('language', $this->seminar->getLanguageName());
 
 			$currentDate = $this->seminar->getDate();
 			if (($currentDate === $this->previousDate)
@@ -1903,41 +1903,41 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				}
 				$this->previousDate = $currentDate;
 			}
-			$this->setMarkerContent('date', $dateToShow);
+			$this->setMarker('date', $dateToShow);
 
-			$this->setMarkerContent('time', $this->seminar->getTime());
-			$this->setMarkerContent('place', $this->seminar->getPlaceShort());
-			$this->setMarkerContent(
+			$this->setMarker('time', $this->seminar->getTime());
+			$this->setMarker('place', $this->seminar->getPlaceShort());
+			$this->setMarker(
 				'country',
 				$this->seminar->getCountry()
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'city',
 				$this->seminar->getCities()
 			);
-			$this->setMarkerContent('seats', $attendanceData['seats']);
-			$this->setMarkerContent(
+			$this->setMarker('seats', $attendanceData['seats']);
+			$this->setMarker(
 				'price_regular',
 				$this->seminar->getCurrentPriceRegular()
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'price_special',
 				$this->seminar->getCurrentPriceSpecial()
 			);
-			$this->setMarkerContent('total_price', $attendanceData['total_price']);
-			$this->setMarkerContent(
+			$this->setMarker('total_price', $attendanceData['total_price']);
+			$this->setMarker(
 				'organizers',
 				$this->seminar->getOrganizers($this)
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'target_groups',
 				$this->seminar->getTargetGroupNames()
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'vacancies',
 				$this->seminar->getVacanciesString()
 			);
-			$this->setMarkerContent(
+			$this->setMarker(
 				'class_listvacancies',
 				$this->getVacanciesClasses($this->seminar)
 			);
@@ -1957,14 +1957,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$this->registration
 				);
 			}
-			$this->setMarkerContent('registration', $registrationLink);
-			$this->setMarkerContent(
+			$this->setMarker('registration', $registrationLink);
+			$this->setMarker(
 				'list_registrations',
 				$this->getRegistrationsListLink()
 			);
-			$this->setMarkerContent('edit', $this->getEditLink());
+			$this->setMarker('edit', $this->getEditLink());
 
-			$result = $this->substituteMarkerArrayCached('LIST_ITEM');
+			$result = $this->getSubpart('LIST_ITEM');
 		}
 
 		return $result;
@@ -1983,7 +1983,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function getFieldHeader($fieldName) {
 		$result = '';
 
-		$label = $result = $this->pi_getLL(
+		$label = $result = $this->translate(
 			'label_'.$fieldName,
 			'['.$fieldName.']'
 		);
@@ -1992,7 +1992,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				'generalPriceInList',
 				's_template_special')
 		) {
-			$label = $result = $this->pi_getLL('label_price_general');
+			$label = $result = $this->translate('label_price_general');
 		}
 
 		// Can we sort by that field?
@@ -2069,7 +2069,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$isOkay = true;
 				} else {
 					$errorMessage = $this->getLoginLink(
-						$this->pi_getLL('message_notLoggedIn'),
+						$this->translate('message_notLoggedIn'),
 						$GLOBALS['TSFE']->id,
 						$this->seminar->getUid()
 					);
@@ -2082,7 +2082,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				if ($this->seminar->isUnregistrationPossible()) {
 					$isOkay = true;
 				} else {
-					$errorMessage = $this->pi_getLL(
+					$errorMessage = $this->translate(
 						'message_unregistrationNotPossible'
 					);
 				}
@@ -2090,7 +2090,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		} else {
 			switch ($this->piVars['action']) {
 				case 'unregister':
-					$errorMessage = $this->pi_getLL(
+					$errorMessage = $this->translate(
 						'message_notRegisteredForThisEvent'
 					);
 					break;
@@ -2135,42 +2135,42 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function createRegistrationHeading($errorMessage) {
-		$this->setMarkerContent(
+		$this->setMarker(
 			'registration',
-			$this->pi_getLL('label_registration')
+			$this->translate('label_registration')
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'event_type',
 			($this->seminar) ? $this->seminar->getEventType() : ''
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'title',
 			($this->seminar) ? $this->seminar->getTitleAndDate() : ''
 		);
-		$this->setMarkerContent(
+		$this->setMarker(
 			'uid',
 			($this->seminar) ? $this->seminar->getUid() : ''
 		);
 
 		if ($this->seminar && $this->seminar->hasAccreditationNumber()) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'accreditation_number',
 				($this->seminar) ? $this->seminar->getAccreditationNumber() : ''
 			);
 		} else {
-			$this->readSubpartsToHide(
+			$this->hideSubparts(
 				'accreditation_number',
 				'registration_wrapper'
 			);
 		}
 
 		if (empty($errorMessage)) {
-			$this->readSubpartsToHide('error', 'wrapper');
+			$this->hideSubparts('error', 'wrapper');
 		} else {
-			$this->setMarkerContent('error_text', $errorMessage);
+			$this->setMarker('error_text', $errorMessage);
 		}
 
-		return $this->substituteMarkerArrayCached('REGISTRATION_HEAD');
+		return $this->getSubpart('REGISTRATION_HEAD');
 	}
 
 	/**
@@ -2184,8 +2184,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		// set the markers for the prices
 		$this->setPriceMarkers('registration_wrapper');
 
-		$this->setMarkerContent('vacancies', $this->seminar->getVacancies());
-		$output = $this->substituteMarkerArrayCached('REGISTRATION_DETAILS');
+		$this->setMarker('vacancies', $this->seminar->getVacancies());
+		$output = $this->getSubpart('REGISTRATION_DETAILS');
 
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registration_editor'
@@ -2193,7 +2193,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registrationEditor =& new $registrationEditorClassname($this);
 
 		$output .= $registrationEditor->_render();
-		$output .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
+		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		return $output;
 	}
@@ -2213,7 +2213,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($this->createSeminar($this->piVars['seminar'])) {
 			// Okay, at least the seminar UID is valid so we can show the
 			// seminar title and date.
-			$this->setMarkerContent('title', $this->seminar->getTitleAndDate());
+			$this->setMarker('title', $this->seminar->getTitleAndDate());
 
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
@@ -2238,27 +2238,27 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$errorMessage = $this->registrationManager->existsSeminarMessage(
 				$this->piVars['seminar']
 			);
-			$this->setMarkerContent('title', '');
+			$this->setMarker('title', '');
 			header('Status: 404 Not Found');
 		}
 
 		if ($isOkay) {
-			$this->readSubpartsToHide('error', 'wrapper');
+			$this->hideSubparts('error', 'wrapper');
 			$this->createRegistrationsList();
 		} else {
-			$this->setMarkerContent('error_text', $errorMessage);
-			$this->readSubpartsToHide('registrations_list_message', 'wrapper');
-			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
+			$this->setMarker('error_text', $errorMessage);
+			$this->hideSubparts('registrations_list_message', 'wrapper');
+			$this->hideSubparts('registrations_list_body', 'wrapper');
 		}
 
-		$this->setMarkerContent('backlink',
+		$this->setMarker('backlink',
 			$this->cObj->getTypoLink(
-				$this->pi_getLL('label_back'),
+				$this->translate('label_back'),
 				$this->getConfValueInteger('listPID')
 			)
 		);
 
-		$result = $this->substituteMarkerArrayCached('REGISTRATIONS_LIST_VIEW');
+		$result = $this->getSubpart('REGISTRATIONS_LIST_VIEW');
 
 		return $result;
 	}
@@ -2288,7 +2288,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($registrationBag->getCurrent()) {
 			$result = '';
 			while ($currentRegistration =& $registrationBag->getCurrent()) {
-				$this->setMarkerContent('registrations_list_inneritem',
+				$this->setMarker('registrations_list_inneritem',
 					$currentRegistration->getUserDataAsHtml(
 						$this->getConfValueString(
 							'showFeUserFieldsInRegistrationsList',
@@ -2297,18 +2297,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						$this
 					)
 				);
-				$result .= $this->substituteMarkerArrayCached(
+				$result .= $this->getSubpart(
 					'REGISTRATIONS_LIST_ITEM'
 				);
 				$registrationBag->getNext();
 			}
-			$this->readSubpartsToHide('registrations_list_message', 'wrapper');
-			$this->setMarkerContent('registrations_list_body', $result);
+			$this->hideSubparts('registrations_list_message', 'wrapper');
+			$this->setMarker('registrations_list_body', $result);
 		} else {
-			$this->readSubpartsToHide('registrations_list_body', 'wrapper');
-			$this->setMarkerContent(
+			$this->hideSubparts('registrations_list_body', 'wrapper');
+			$this->setMarker(
 				'message_no_registrations',
-				$this->pi_getLL('message_noRegistrations')
+				$this->translate('message_noRegistrations')
 			);
 		}
 
@@ -2362,7 +2362,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		if (!empty($fieldsToRemove)) {
-			$this->readSubpartsToHide(
+			$this->hideSubparts(
 				implode(',', $fieldsToRemove),
 				'registration_wrapper'
 			);
@@ -2384,7 +2384,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registrationEditor =& new $registrationEditorClassname($this);
 
 		$result = $registrationEditor->_render();
-		$result .= $this->substituteMarkerArrayCached('REGISTRATION_BOTTOM');
+		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		return $result;
 	}
@@ -2644,7 +2644,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if ($this->seminar->isOwnerFeUser()) {
 			$result = $this->cObj->getTypoLink(
-				$this->pi_getLL('label_edit'),
+				$this->translate('label_edit'),
 				$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
 				array(
 					'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
@@ -2700,12 +2700,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				}
 			} else {
 				// no event found - show a message
-				$message = $this->pi_getLL('message_countdown_noEventFound');
+				$message = $this->translate('message_countdown_noEventFound');
 			}
 		}
 
-		$this->setMarkerContent('count_down_message', $message);
-		$result = $this->substituteMarkerArrayCached('COUNTDOWN');
+		$this->setMarker('count_down_message', $message);
+		$result = $this->getSubpart('COUNTDOWN');
 
 		return $result;
 	}
@@ -2730,33 +2730,33 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// more than 23 hours left, show the time in days
 			$countdownValue = round($seconds / ONE_DAY);
 			if ($countdownValue > 1) {
-				$countdownText = $this->pi_getLL('countdown_days_plural');
+				$countdownText = $this->translate('countdown_days_plural');
 			} else {
-				$countdownText = $this->pi_getLL('countdown_days_singular');
+				$countdownText = $this->translate('countdown_days_singular');
 			}
 		} elseif ($seconds > 3540) {
 			// more than 59 minutes left, show the time in hours
 			$countdownValue = round($seconds / 3600);
 			if ($countdownValue > 1) {
-				$countdownText = $this->pi_getLL('countdown_hours_plural');
+				$countdownText = $this->translate('countdown_hours_plural');
 			} else {
-				$countdownText = $this->pi_getLL('countdown_hours_singular');				}
+				$countdownText = $this->translate('countdown_hours_singular');				}
 		} elseif ($seconds > 59) {
 			// more than 59 seconds left, show the time in minutes
 			$countdownValue = round($seconds / 60);
 			if ($countdownValue > 1) {
-				$countdownText = $this->pi_getLL('countdown_minutes_plural');
+				$countdownText = $this->translate('countdown_minutes_plural');
 			} else {
-				$countdownText = $this->pi_getLL('countdown_minutes_singular');
+				$countdownText = $this->translate('countdown_minutes_singular');
 			}
 		} else {
 			// less than 60 seconds left, show the time in seconds
 			$countdownValue = $seconds;
-			$countdownText = $this->pi_getLL('countdown_seconds_plural');
+			$countdownText = $this->translate('countdown_seconds_plural');
 		}
 
 		return sprintf(
-			$this->pi_getLL('message_countdown'),
+			$this->translate('message_countdown'),
 			$countdownValue,
 			$countdownText
 		);
@@ -2845,7 +2845,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				htmlspecialchars($this->piVars['sword'])
 			);
 		} else {
-			$this->readSubpartsToHide('wrapper_searchbox');
+			$this->hideSubparts('wrapper_searchbox');
 		}
 
 		// Defines the list of option boxes that should be shown in the form.
@@ -2862,7 +2862,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->createOptionBox($currentOptionBox);
 		}
 
-		return $this->substituteMarkerArrayCached('SELECTOR_WIDGET');
+		return $this->getSubpart('SELECTOR_WIDGET');
 	}
 
 	/**
@@ -2880,21 +2880,21 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	function createOptionBox($optionBoxName) {
 		// Sets the header that is shown in the label of this selector box.
-		$this->setMarkerContent(
+		$this->setMarker(
 			'options_header',
-			$this->pi_getLL('label_' . $optionBoxName)
+			$this->translate('label_' . $optionBoxName)
 		);
 
 		// Sets the name of this option box in the HTML source. This is needed
 		// to separate the different option boxes for further form processing.
 		// The additional pair of brackets is needed as we need to submit multiple
 		// values per field.
-		$this->setMarkerContent(
+		$this->setMarker(
 			'optionbox_name',
 			$this->prefixId.'['.$optionBoxName.'][]'
 		);
 
-		$this->setMarkerContent(
+		$this->setMarker(
 			'optionbox_id',
 			$this->prefixId.'-'.$optionBoxName
 		);
@@ -2923,8 +2923,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 		}
 		foreach ($availableOptions as $currentValue => $currentLabel) {
-			$this->setMarkerContent('option_label', $currentLabel);
-			$this->setMarkerContent('option_value', $currentValue);
+			$this->setMarker('option_label', $currentLabel);
+			$this->setMarker('option_value', $currentValue);
 
 			// Preselects the option if it was selected by the user.
 			if (isset($this->piVars[$optionBoxName])
@@ -2935,14 +2935,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			} else {
 				$isSelected = '';
 			}
-			$this->setMarkerContent('option_selected', $isSelected);
+			$this->setMarker('option_selected', $isSelected);
 
-			$optionsList .= $this->substituteMarkerArrayCached('OPTIONS_ENTRY');
+			$optionsList .= $this->getSubpart('OPTIONS_ENTRY');
 		}
-		$this->setMarkerContent('options', $optionsList);
-		$this->setMarkerContent(
+		$this->setMarker('options', $optionsList);
+		$this->setMarker(
 			'options_'.$optionBoxName,
-			$this->substituteMarkerArrayCached('OPTIONS_BOX')
+			$this->getSubpart('OPTIONS_BOX')
 		);
 	}
 

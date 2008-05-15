@@ -231,30 +231,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * 						case-insensitive, will get uppercased)
 	 *
 	 * @access	protected
-	 *
-	 * @deprecated	2007-12-09	Use setMarker instead.
-	 */
-	function setMarkerContent($markerName, $content, $prefix = '') {
-		$this->setMarker($markerName, $content, $prefix);
-	}
-
-	/**
-	 * Sets a marker's content.
-	 *
-	 * Example: If the prefix is "field" and the marker name is "one", the
-	 * marker "###FIELD_ONE###" will be written.
-	 *
-	 * If the prefix is empty and the marker name is "one", the marker
-	 * "###ONE###" will be written.
-	 *
-	 * @param	string		the marker's name without the ### signs,
-	 * 						case-insensitive, will get uppercased, must not be
-	 * 						empty
-	 * @param	string		the marker's content, may be empty
-	 * @param	string		prefix to the marker name (may be empty,
-	 * 						case-insensitive, will get uppercased)
-	 *
-	 * @access	protected
 	 */
 	function setMarker($markerName, $content, $prefix = '') {
 		$unifiedMarkerName = $this->createMarkerName($markerName, $prefix);
@@ -334,31 +310,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	}
 
 	/**
-	 * Takes a comma-separated list of subpart names and writes them to
-	 * $this->subpartsToHide. In the process, the names are changed from 'aname'
-	 * to '###BLA_ANAME###' and used as keys. The corresponding values in the
-	 * array are empty strings.
-	 *
-	 * Example: If the prefix is "field" and the list is "one,two", the array keys
-	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be written.
-	 *
-	 * If the prefix is empty and the list is "one,two", the array keys
-	 * "###ONE###" and "###TWO###" will be written.
-	 *
-	 * @param	string		comma-separated list of at least 1 subpart name to
-	 *						hide (case-insensitive, will get uppercased)
-	 * @param	string		prefix to the subpart names (may be empty,
-	 *						case-insensitive, will get uppercased)
-	 *
-	 * @access	protected
-	 *
-	 * @deprecated	2007-08-22	Use hideSubparts instead.
-	 */
-	function readSubpartsToHide($subparts, $prefix = '') {
-		$this->hideSubparts($subparts, $prefix);
-	}
-
-	/**
 	 * Takes a comma-separated list of subpart names and sets them to hidden. In
 	 * the process, the names are changed from 'aname' to '###BLA_ANAME###' and
 	 * used as keys.
@@ -387,39 +338,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 
 			$this->subpartsToHide[$fullSubpartName] = true;
 		}
-	}
-
-	/**
-	 * Takes a comma-separated list of subpart names and unhides them if they
-	 * have been hidden beforehand.
-	 *
-	 * Note: All subpartNames that are provided with the second parameter will
-	 * not be unhidden. This is to avoid unhiding subparts that are hidden by
-	 * the configuration.
-	 *
-	 * In the process, the names are changed from 'aname' to '###BLA_ANAME###'.
-	 *
-	 * Example: If the prefix is "field" and the list is "one,two", the subparts
-	 * "###FIELD_ONE###" and "###FIELD_TWO###" will be unhidden.
-	 *
-	 * If the prefix is empty and the list is "one,two", the subparts
-	 * "###ONE###" and "###TWO###" will be unhidden.
-	 *
-	 * @param	string		comma-separated list of at least 1 subpart name to
-	 * 						unhide (case-insensitive, will get uppercased)
-	 * @param	string		comma-separated list of subpart names that
-	 * 						shouldn't get unhidden
-	 * @param	string		prefix to the subpart names (may be empty,
-	 * 						case-insensitive, will get uppercased)
-	 *
-	 * @access	protected
-	 *
-	 * @deprecated	2007-08-22	Use unhideSubparts instead.
-	 */
-	function readSubpartsToUnhide(
-		$subparts, $permanentlyHiddenSubparts = '', $prefix = ''
-	) {
-		$this->unhideSubparts($subparts, $permanentlyHiddenSubparts, $prefix);
 	}
 
 	/**
@@ -507,29 +425,6 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		}
 
 		return strtoupper($prefix.trim($markerName));
-	}
-
-	/**
-	 * Retrieves a named subpart, recursively filling in its inner subparts
-	 * and markers. Inner subparts that are marked to be hidden will be
-	 * substituted with empty strings.
-	 *
-	 * This function either works on the subpart with the name $key or the
-	 * complete HTML template if $key is an empty string.
-	 *
-	 * @param	string		key of an existing subpart, for example 'LIST_ITEM'
-	 * 						(without the ###), or an empty string to use the
-	 * 						complete HTML template
-	 *
-	 * @return	string		the subpart content or an empty string if the
-	 * 						subpart is hidden or the subpart name is missing
-	 *
-	 * @access	protected
-	 *
-	 * @deprecated	2007-08-22	Use getSubpart instead.
-	 */
-	function substituteMarkerArrayCached($key = '') {
-		return $this->getSubpart($key);
 	}
 
 	/**
