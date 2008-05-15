@@ -535,25 +535,19 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////////////////////////////
 
 	public function testSetTimeFrameFailsWithEmptyKey() {
-		try {
-			$this->fixture->setTimeFrame('');
-		} catch (Exception $expected) {
-			return;
-		}
-
-		// Fails the test if the expected exception was not raised above.
-		$this->fail('The expected exception was not caught!');
+		$this->setExpectedException(
+			'Exception',
+			'The time-frame key  is not valid.'
+		);
+		$this->fixture->setTimeFrame('');
 	}
 
 	public function testSetTimeFrameFailsWithInvalidKey() {
-		try {
-			$this->fixture->setTimeFrame('foo');
-		} catch (Exception $expected) {
-			return;
-		}
-
-		// Fails the test if the expected exception was not raised above.
-		$this->fail('The expected exception was not caught!');
+		$this->setExpectedException(
+			'Exception',
+			'The time-frame key foo is not valid.'
+		);
+		$this->fixture->setTimeFrame('foo');
 	}
 
 
