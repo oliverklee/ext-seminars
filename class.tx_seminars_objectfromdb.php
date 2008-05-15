@@ -127,7 +127,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		the corresponding element from the record data array
 	 */
-	protected function getRecordPropertyString($key) {
+	public function getRecordPropertyString($key) {
 		$result = $this->hasKey($key)
 			? trim($this->recordData[$key]) : '';
 
@@ -142,7 +142,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		the corresponding element from the record data array
 	 */
-	protected function getRecordPropertyDecimal($key) {
+	public function getRecordPropertyDecimal($key) {
 		$result = $this->hasKey($key)
 			? trim($this->recordData[$key]) : '0.00';
 
@@ -157,7 +157,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if the corresponding string exists and is non-empty
 	 */
-	protected function hasRecordPropertyString($key) {
+	public function hasRecordPropertyString($key) {
 		return ($this->getRecordPropertyString($key) != '');
 	}
 
@@ -169,7 +169,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if the corresponding value exists and is non-zero
 	 */
-	protected function hasRecordPropertyInteger($key) {
+	public function hasRecordPropertyInteger($key) {
 		return (boolean) $this->getRecordPropertyInteger($key);
 	}
 
@@ -182,7 +182,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @return	boolean		true if the corresponding field exists and its value
 	 * 						is not "0.00".
 	 */
-	protected function hasRecordPropertyDecimal($key) {
+	public function hasRecordPropertyDecimal($key) {
 		return ($this->getRecordPropertyDecimal($key) != '0.00');
 	}
 
@@ -194,7 +194,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	integer		the corresponding element from the record data array
 	 */
-	protected function getRecordPropertyInteger($key) {
+	public function getRecordPropertyInteger($key) {
 		$result = $this->hasKey($key)
 			? intval($this->recordData[$key]) : 0;
 
@@ -245,7 +245,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		the corresponding element from the record data array
 	 */
-	protected function getRecordPropertyBoolean($key) {
+	public function getRecordPropertyBoolean($key) {
 		$result = $this->hasKey($key)
 			? ((boolean) $this->recordData[$key]) : false;
 

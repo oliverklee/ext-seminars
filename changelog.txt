@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1895] Change: getRecordProperty* should be public, not protected
 - [#1903] Change: Use $this->setExpectedException() instead of try-catch-block in Unit tests
 
 0.6.0 (released 2008-05-12)
