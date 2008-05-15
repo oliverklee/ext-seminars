@@ -315,8 +315,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				// The fallthrough is intended.
 			case 'been_there':
 				$result = ($this->getRecordPropertyBoolean($trimmedKey))
-					? $this->pi_getLL('label_yes')
-					: $this->pi_getLL('label_no');
+					? $this->translate('label_yes')
+					: $this->translate('label_no');
 				break;
 			case 'datepaid':
 				$result = strftime(
@@ -377,17 +377,17 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				// deal with special cases
 				switch ($trimmedKey) {
 					case 'gender':
-						$result = $this->pi_getLL('label_gender.I.'.$rawData);
+						$result = $this->translate('label_gender.I.'.$rawData);
 						break;
 					case 'status':
 						if ($rawData) {
-							$result = $this->pi_getLL('label_status.I.'.$rawData);
+							$result = $this->translate('label_status.I.'.$rawData);
 						}
 						break;
 					case 'wheelchair':
 						$result = ($rawData)
-							? $this->pi_getLL('label_yes')
-							: $this->pi_getLL('label_no');
+							? $this->translate('label_yes')
+							: $this->translate('label_no');
 						break;
 					case 'crdate':
 						// The fallthrough is intended.
@@ -695,140 +695,140 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		$this->initializeTemplate();
-		$this->readSubpartsToHide(
+		$this->hideSubparts(
 			$this->getConfValueString('hideFieldsInThankYouMail'),
 			'field_wrapper'
 		);
 
-		$this->setMarkerContent('hello', sprintf(
-			$this->pi_getLL('email_'.$helloSubjectPrefix.'Hello'),
+		$this->setMarker('hello', sprintf(
+			$this->translate('email_'.$helloSubjectPrefix.'Hello'),
 			$this->getUserName())
 		);
-		$this->setMarkerContent('event_type', $this->seminar->getEventType());
-		$this->setMarkerContent('title', $this->seminar->getTitle());
-		$this->setMarkerContent('uid', $this->seminar->getUid());
+		$this->setMarker('event_type', $this->seminar->getEventType());
+		$this->setMarker('title', $this->seminar->getTitle());
+		$this->setMarker('uid', $this->seminar->getUid());
 
-		$this->setMarkerContent('registration_uid', $this->getUid());
+		$this->setMarker('registration_uid', $this->getUid());
 
 		if ($this->hasRecordPropertyInteger('seats')) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'seats',
 				$this->getRecordPropertyInteger('seats')
 			);
 		} else {
-			$this->readSubpartsToHide('seats', 'field_wrapper');
+			$this->hideSubparts('seats', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyString('attendees_names')) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'attendees_names',
 				$this->getRecordPropertyString('attendees_names')
 			);
 		} else {
-			$this->readSubpartsToHide('attendees_names', 'field_wrapper');
+			$this->hideSubparts('attendees_names', 'field_wrapper');
 		}
 
 		if ($this->hasLodgings()) {
-			$this->setMarkerContent('lodgings', $this->getLodgings());
+			$this->setMarker('lodgings', $this->getLodgings());
 		} else {
-			$this->readSubpartsToHide('lodgings', 'field_wrapper');
+			$this->hideSubparts('lodgings', 'field_wrapper');
 		}
 
 		if ($this->hasFoods()) {
-			$this->setMarkerContent('foods', $this->getFoods());
+			$this->setMarker('foods', $this->getFoods());
 		} else {
-			$this->readSubpartsToHide('foods', 'field_wrapper');
+			$this->hideSubparts('foods', 'field_wrapper');
 		}
 
 		if ($this->hasCheckboxes()) {
-			$this->setMarkerContent('checkboxes', $this->getCheckboxes());
+			$this->setMarker('checkboxes', $this->getCheckboxes());
 		} else {
-			$this->readSubpartsToHide('checkboxes', 'field_wrapper');
+			$this->hideSubparts('checkboxes', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyInteger('kids')) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'kids',
 				$this->getRecordPropertyInteger('kids')
 			);
 		} else {
-			$this->readSubpartsToHide('kids', 'field_wrapper');
+			$this->hideSubparts('kids', 'field_wrapper');
 		}
 
 		if ($this->seminar->hasAccreditationNumber()) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'accreditation_number',
 				$this->seminar->getAccreditationNumber()
 			);
 		} else {
-			$this->readSubpartsToHide('accreditation_number', 'field_wrapper');
+			$this->hideSubparts('accreditation_number', 'field_wrapper');
 		}
 
 		if ($this->seminar->hasCreditPoints()) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'credit_points',
 				$this->seminar->getCreditPoints()
 			);
 		} else {
-			$this->readSubpartsToHide('credit_points', 'field_wrapper');
+			$this->hideSubparts('credit_points', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('date', $this->seminar->getDate('-'));
-		$this->setMarkerContent('time', $this->seminar->getTime('-'));
-		$this->setMarkerContent('place', $this->seminar->getPlaceShort());
+		$this->setMarker('date', $this->seminar->getDate('-'));
+		$this->setMarker('time', $this->seminar->getTime('-'));
+		$this->setMarker('place', $this->seminar->getPlaceShort());
 
 		if ($this->seminar->hasRoom()) {
-			$this->setMarkerContent('room', $this->seminar->getRoom());
+			$this->setMarker('room', $this->seminar->getRoom());
 		} else {
-			$this->readSubpartsToHide('room', 'field_wrapper');
+			$this->hideSubparts('room', 'field_wrapper');
 		}
 
 		if ($this->seminar->hasAdditionalTimesAndPlaces()) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'additional_times_places',
 				$this->seminar->getAdditionalTimesAndPlacesRaw()
 			);
 		} else {
-			$this->readSubpartsToHide('additional_times_places', 'field_wrapper');
+			$this->hideSubparts('additional_times_places', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyString('price')) {
-			$this->setMarkerContent('price', $this->getPrice());
+			$this->setMarker('price', $this->getPrice());
 		} else {
-			$this->readSubpartsToHide('price', 'field_wrapper');
+			$this->hideSubparts('price', 'field_wrapper');
 		}
 
 		if ($this->hasRecordPropertyDecimal('total_price')) {
-			$this->setMarkerContent('total_price', $this->getTotalPrice(' '));
+			$this->setMarker('total_price', $this->getTotalPrice(' '));
 		} else {
-			$this->readSubpartsToHide('total_price', 'field_wrapper');
+			$this->hideSubparts('total_price', 'field_wrapper');
 		}
 
 		// We don't need to check $this->seminar->hasPaymentMethods() here as
 		// method_of_payment can only be set (using the registration form) if
 		// the event has at least one payment method.
 		if ($this->hasRecordPropertyInteger('method_of_payment')) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'paymentmethod',
 				$this->seminar->getSinglePaymentMethodPlain(
 					$this->getRecordPropertyInteger('method_of_payment')
 				)
 			);
 		} else {
-			$this->readSubpartsToHide('paymentmethod', 'field_wrapper');
+			$this->hideSubparts('paymentmethod', 'field_wrapper');
 		}
 
-		$this->setMarkerContent('billing_address', $this->getBillingAddress());
+		$this->setMarker('billing_address', $this->getBillingAddress());
 
-		$this->setMarkerContent(
+		$this->setMarker(
 			'url',
 			$this->seminar->getDetailedViewUrl($plugin)
 		);
 
 		$footers = $this->seminar->getOrganizersFooter();
-		$this->setMarkerContent('footer', $footers[0]);
+		$this->setMarker('footer', $footers[0]);
 
-		$content = $this->substituteMarkerArrayCached('MAIL_THANKYOU');
+		$content = $this->getSubpart('MAIL_THANKYOU');
 		$froms = $this->seminar->getOrganizersNameAndEmail();
 
 		// We use just the user's e-mail address as e-mail recipient
@@ -836,7 +836,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// "John Doe <john.doe@example.com>".
 		t3lib_div::plainMailEncoded(
 			$this->getUserEmail(),
-			$this->pi_getLL('email_'.$helloSubjectPrefix.'Subject').': '
+			$this->translate('email_'.$helloSubjectPrefix.'Subject').': '
 				.$this->seminar->getTitleAndDate('-'),
 			$content,
 			// We just use the first organizer as sender
@@ -870,19 +870,19 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		$this->initializeTemplate();
-		$this->readSubpartsToHide(
+		$this->hideSubparts(
 			$this->getConfValueString('hideGeneralFieldsInNotificationMail'),
 			'field_wrapper'
 		);
 
-		$this->setMarkerContent(
+		$this->setMarker(
 			'hello',
-			$this->pi_getLL('email_'.$helloSubjectPrefix.'Hello')
+			$this->translate('email_'.$helloSubjectPrefix.'Hello')
 		);
-		$this->setMarkerContent('summary', $this->getTitle());
+		$this->setMarker('summary', $this->getTitle());
 
 		if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'seminardata',
 				$this->seminar->dumpSeminarValues(
 					$this->getConfValueString(
@@ -891,22 +891,22 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				)
 			);
 		} else {
-			$this->readSubpartsToHide('seminardata', 'field_wrapper');
+			$this->hideSubparts('seminardata', 'field_wrapper');
 		}
 
 		if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'feuserdata',
 				$this->dumpUserValues(
 					$this->getConfValueString('showFeUserFieldsInNotificationMail')
 				)
 			);
 		} else {
-			$this->readSubpartsToHide('feuserdata', 'field_wrapper');
+			$this->hideSubparts('feuserdata', 'field_wrapper');
 		}
 
 		if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
-			$this->setMarkerContent(
+			$this->setMarker(
 				'attendancedata',
 				$this->dumpAttendanceValues(
 					$this->getConfValueString(
@@ -915,10 +915,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				)
 			);
 		} else {
-			$this->readSubpartsToHide('attendancedata', 'field_wrapper');
+			$this->hideSubparts('attendancedata', 'field_wrapper');
 		}
 
-		$content = $this->substituteMarkerArrayCached('MAIL_NOTIFICATION');
+		$content = $this->getSubpart('MAIL_NOTIFICATION');
 
 		// We use just the organizer's e-mail address as e-mail recipient
 		// as some SMTP servers cannot handle the format
@@ -927,7 +927,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		foreach ($organizers as $currentOrganizerEmail) {
 			t3lib_div::plainMailEncoded(
 				$currentOrganizerEmail,
-				$this->pi_getLL('email_'.$helloSubjectPrefix.'Subject').': '
+				$this->translate('email_'.$helloSubjectPrefix.'Subject').': '
 					.$this->getTitle(),
 				$content,
 				// We use the attendee's e-mail as sender.
@@ -970,25 +970,25 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		// Only send an e-mail if there's a reason for it.
 		if (!empty($whichEmailToSend)) {
-			$this->setMarkerContent('message', $this->pi_getLL($whichEmailToSend));
+			$this->setMarker('message', $this->translate($whichEmailToSend));
 
 			$showSeminarFields = $this->getConfValueString(
 				'showSeminarFieldsInNotificationMail'
 			);
 			if (!empty($showSeminarFields)) {
-				$this->setMarkerContent(
+				$this->setMarker(
 					'seminardata',
 					$this->seminar->dumpSeminarValues($showSeminarFields)
 				);
 			} else {
-				$this->readSubpartsToHide('seminardata', 'field_wrapper');
+				$this->hideSubparts('seminardata', 'field_wrapper');
 			}
 
-			$content = $this->substituteMarkerArrayCached(
+			$content = $this->getSubpart(
 				'MAIL_ADDITIONALNOTIFICATION'
 			);
 			$subject = sprintf(
-				$this->pi_getLL($whichEmailSubject),
+				$this->translate($whichEmailSubject),
 				$this->seminar->getUid(),
 				$this->seminar->getTitleAndDate('-')
 			);
@@ -1050,7 +1050,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
-			$currentLabel = $this->pi_getLL('label_'.$currentKey);
+			$currentLabel = $this->translate('label_'.$currentKey);
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
 			$maxLength = max($maxLength, strlen($currentLabel));
 		}
@@ -1097,9 +1097,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			if ($currentKey == 'uid') {
 				// The UID label is a special case as we also have a UID label
 				// for events.
-				$currentLabel = $this->pi_getLL('label_registration_uid');
+				$currentLabel = $this->translate('label_registration_uid');
 			} else {
-				$currentLabel = $this->pi_getLL('label_'.$currentKey);
+				$currentLabel = $this->translate('label_'.$currentKey);
 			}
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
 			$maxLength = max($maxLength, strlen($currentLabel));
@@ -1154,7 +1154,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			if ($this->hasRecordPropertyString($key)) {
 				// Add labels before the phone number and the e-mail address.
 				if (($key == 'telephone') || ($key == 'email')) {
-					$result .= $this->pi_getLL('label_'.$key).': ';
+					$result .= $this->translate('label_'.$key).': ';
 				}
 				$result .= $this->getRegistrationData($key);
 				if ($useLf) {
@@ -1177,7 +1177,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @access	public
 	 */
 	function getGender() {
-		return $this->pi_getLL('label_gender.I.'
+		return $this->translate('label_gender.I.'
 			.$this->getRecordPropertyInteger('gender'));
 	}
 

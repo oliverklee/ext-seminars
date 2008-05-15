@@ -558,7 +558,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 							$plugin->getConfValueString('externalLinkTarget')
 						);
 					}
-					$plugin->setMarkerContent('place_item_title', $name);
+					$plugin->setMarker('place_item_title', $name);
 
 					$description = '';
 					if (!empty($row['address'])) {
@@ -583,25 +583,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 							$row['directions']
 						);
 					}
-					$plugin->setMarkerContent(
+					$plugin->setMarker(
 						'place_item_description',
 						$description
 					);
 
-					$result .= $plugin->substituteMarkerArrayCached(
+					$result .= $plugin->getSubpart(
 						'PLACE_LIST_ITEM'
 					);
 				}
 
-				$plugin->setMarkerContent('place_list_content', $result);
-				$result = $plugin->substituteMarkerArrayCached('PLACE_LIST_COMPLETE');
+				$plugin->setMarker('place_list_content', $result);
+				$result = $plugin->getSubpart('PLACE_LIST_COMPLETE');
 			}
 		} else {
-			$plugin->setMarkerContent(
+			$plugin->setMarker(
 				'message_will_be_announced',
-				$this->pi_getLL('message_willBeAnnounced')
+				$this->translate('message_willBeAnnounced')
 			);
-			$result = $plugin->substituteMarkerArrayCached('PLACE_LIST_EMPTY');
+			$result = $plugin->getSubpart('PLACE_LIST_EMPTY');
 		}
 
 		return $result;
@@ -855,7 +855,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				}
 			}
 		} else {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+			$result = $this->translate('message_willBeAnnounced');
 		}
 
 		return $result;
@@ -890,7 +890,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				}
 			}
 		} else {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+			$result = $this->translate('message_willBeAnnounced');
 		}
 
 		return $result;
@@ -972,18 +972,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$plugin->getConfValueString('externalLinkTarget')
 				);
 			}
-			$plugin->setMarkerContent('speaker_item_title', $name);
+			$plugin->setMarker('speaker_item_title', $name);
 
 			$description = '';
 			if ($speaker->hasDescription()) {
 				$description = $speaker->getDescription($plugin);
 			}
-			$plugin->setMarkerContent(
+			$plugin->setMarker(
 				'speaker_item_description',
 				$description
 			);
 
-			$result .= $plugin->substituteMarkerArrayCached(
+			$result .= $plugin->getSubpart(
 				'SPEAKER_LIST_ITEM'
 			);
 			$speakerBag->getNext();
@@ -1255,8 +1255,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		} else {
 			$result =
 				($this->getConfValueBoolean('showToBeAnnouncedForEmptyPrice'))
-				? $this->pi_getLL('message_willBeAnnounced')
-				: $this->pi_getLL('message_forFree');
+				? $this->translate('message_willBeAnnounced')
+				: $this->translate('message_forFree');
 		}
 
 		return $result;
@@ -2073,7 +2073,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$result =
 				($this->getVacancies() >= $this->getConfValueInteger(
 					'showVacanciesThreshold'))
-					? $this->pi_getLL('message_enough')
+					? $this->translate('message_enough')
 					: $this->getVacancies();
 		}
 
@@ -2671,7 +2671,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
-			$currentLabel = $this->pi_getLL('label_'.$currentKey);
+			$currentLabel = $this->translate('label_'.$currentKey);
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
 			$maxLength = max($maxLength, strlen($currentLabel));
 		}
@@ -2719,13 +2719,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					break;
 				case 'enough_attendees':
 					$value = ($this->hasEnoughAttendances())
-						? $this->pi_getLL('label_yes')
-						: $this->pi_getLL('label_no');
+						? $this->translate('label_yes')
+						: $this->translate('label_no');
 					break;
 				case 'is_full':
 					$value = ($this->isFull())
-						? $this->pi_getLL('label_yes')
-						: $this->pi_getLL('label_no');
+						? $this->translate('label_yes')
+						: $this->translate('label_no');
 					break;
 				default:
 					$value = $this->getRecordPropertyString($currentKey);
@@ -2784,7 +2784,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function isUserRegisteredMessage($feUserUid) {
 		return ($this->isUserRegistered($feUserUid))
-			? $this->pi_getLL('message_alreadyRegistered') : '';
+			? $this->translate('message_alreadyRegistered') : '';
 	}
 
 	/**
@@ -2920,11 +2920,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		if (!$this->needsRegistration()) {
-			$result = $this->pi_getLL('message_noRegistrationNecessary');
+			$result = $this->translate('message_noRegistrationNecessary');
 		} elseif (!$this->isLoggedIn()) {
-			$result = $this->pi_getLL('message_notLoggedIn');
+			$result = $this->translate('message_notLoggedIn');
 		} elseif (!$this->canViewRegistrationsList($whichPlugin)) {
-			$result = $this->pi_getLL('message_accessDenied');
+			$result = $this->translate('message_accessDenied');
 		}
 
 		return $result;
@@ -2966,16 +2966,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$message = '';
 
 		if (!$this->needsRegistration()) {
-			$message = $this->pi_getLL('message_noRegistrationNecessary');
+			$message = $this->translate('message_noRegistrationNecessary');
 		} elseif ($this->isCanceled()) {
-			$message = $this->pi_getLL('message_seminarCancelled');
+			$message = $this->translate('message_seminarCancelled');
 		} elseif (!$this->hasDate()) {
-			$message = $this->pi_getLL('message_noDate');
+			$message = $this->translate('message_noDate');
 		} elseif ($this->isRegistrationDeadlineOver()) {
-			$message = $this->pi_getLL('message_seminarRegistrationIsClosed');
+			$message = $this->translate('message_seminarRegistrationIsClosed');
 		} elseif ($this->isFull()
 			&& !$this->hasVacanciesOnRegistrationQueue()) {
-			$message = $this->pi_getLL('message_noVacancies');
+			$message = $this->translate('message_noVacancies');
 		}
 
 		return $message;
@@ -3782,18 +3782,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 			case 'enough_attendees':
 				$result = ($this->hasEnoughAttendances())
-					? $this->pi_getLL('label_yes')
-					: $this->pi_getLL('label_no');
+					? $this->translate('label_yes')
+					: $this->translate('label_no');
 				break;
 			case 'is_full':
 				$result = ($this->isFull())
-					? $this->pi_getLL('label_yes')
-					: $this->pi_getLL('label_no');
+					? $this->translate('label_yes')
+					: $this->translate('label_no');
 				break;
 			case 'cancelled':
 				$result = ($this->isCanceled())
-					? $this->pi_getLL('label_yes')
-					: $this->pi_getLL('label_no');
+					? $this->translate('label_yes')
+					: $this->translate('label_no');
 				break;
 			default:
 				$result = '';
@@ -3848,14 +3848,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$result['regular_early'] = array(
 				'value' => 'regular_early',
 				'amount' => $this->getEarlyBirdPriceRegularAmount(),
-				'caption' => $this->pi_getLL('label_price_earlybird_regular')
+				'caption' => $this->translate('label_price_earlybird_regular')
 					.': '.$this->getEarlyBirdPriceRegular(' ')
 			);
 		} else {
 			$result['regular'] = array(
 				'value' => 'regular',
 				'amount' => $this->getPriceRegularAmount(),
-				'caption' => $this->pi_getLL('label_price_regular')
+				'caption' => $this->translate('label_price_regular')
 					.': '.$this->getPriceRegular(' ')
 			);
 		}
@@ -3863,7 +3863,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$result['regular_board'] = array(
 				'value' => 'regular_board',
 				'amount' => $this->getPriceRegularBoardAmount(),
-				'caption' => $this->pi_getLL('label_price_board_regular')
+				'caption' => $this->translate('label_price_board_regular')
 					.': '.$this->getPriceRegularBoard(' ')
 			);
 		}
@@ -3873,14 +3873,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$result['special_early'] = array(
 					'value' => 'special_early',
 					'amount' => $this->getEarlyBirdPriceSpecialAmount(),
-					'caption' => $this->pi_getLL('label_price_earlybird_special')
+					'caption' => $this->translate('label_price_earlybird_special')
 						.': '.$this->getEarlyBirdPriceSpecial(' ')
 				);
 			} else {
 				$result['special'] = array(
 					'value' => 'special',
 					'amount' => $this->getPriceSpecialAmount(),
-					'caption' => $this->pi_getLL('label_price_special')
+					'caption' => $this->translate('label_price_special')
 						.': '.$this->getPriceSpecial(' ')
 				);
 			}
@@ -3889,7 +3889,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$result['special_board'] = array(
 				'value' => 'special_board',
 					'amount' => $this->getPriceSpecialBoardAmount(),
-				'caption' => $this->pi_getLL('label_price_board_special')
+				'caption' => $this->translate('label_price_board_special')
 					.': '.$this->getPriceSpecialBoard(' ')
 			);
 		}

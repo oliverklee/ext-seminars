@@ -143,7 +143,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		$this->plugin->processTemplate($rawForm);
 		$this->plugin->setLabels();
 
-		return $this->plugin->substituteMarkerArrayCached();
+		return $this->plugin->getSubpart();
 	}
 
 	/**
@@ -379,11 +379,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		$result = '';
 
 		if (!$this->hasAccess()) {
-			$this->plugin->setMarkerContent(
+			$this->plugin->setMarker(
 				'error_text',
-				$this->plugin->pi_getLL('message_noAccessToEventEditor')
+				$this->plugin->translate('message_noAccessToEventEditor')
 			);
-			$result = $this->plugin->substituteMarkerArrayCached('ERROR_VIEW');
+			$result = $this->plugin->getSubpart('ERROR_VIEW');
 		}
 
 		return $result;

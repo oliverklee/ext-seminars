@@ -114,7 +114,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 */
 	function getPlaceShort() {
 		if (!$this->hasPlace()) {
-			return $this->pi_getLL('message_willBeAnnounced');
+			return $this->translate('message_willBeAnnounced');
 		}
 
 		$result = '';
@@ -155,7 +155,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 */
 	function getEntryDate() {
 		if (!$this->hasEntryDate()) {
-			return $this->pi_getLL('message_willBeAnnounced');
+			return $this->translate('message_willBeAnnounced');
 		}
 
 		$entryDate = $this->getRecordPropertyInteger('entry_date');

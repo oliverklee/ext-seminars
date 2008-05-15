@@ -118,11 +118,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 
 		if ($this->isLoggedIn() && $this->isUserBlocked($seminar)) {
 			// The current user is already blocked for this event.
-			$result = $this->pi_getLL('message_userIsBlocked');
+			$result = $this->translate('message_userIsBlocked');
 		} elseif ($this->isLoggedIn() && !$this->couldThisUserRegister($seminar)) {
 			// The current user can not register for this event (no multiple
 			// registrations are possible and the user is already registered).
-			$result = $this->pi_getLL('message_alreadyRegistered');
+			$result = $this->translate('message_alreadyRegistered');
 		} elseif (!$seminar->canSomebodyRegister()) {
 			// it is not possible to register for this seminar at all (it is
 			// canceled, full, etc.)
@@ -181,11 +181,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			&& $seminar->hasVacanciesOnRegistrationQueue()
 		) {
 			$label = sprintf(
-				$plugin->pi_getLL('label_onlineRegistrationOnQueue'),
+				$plugin->translate('label_onlineRegistrationOnQueue'),
 				$seminar->getAttendancesOnRegistrationQueue()
 			);
 		} else {
-			$label = $plugin->pi_getLL('label_onlineRegistration');
+			$label = $plugin->translate('label_onlineRegistration');
 		}
 
 		if ($this->isLoggedIn()) {
@@ -227,7 +227,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		tx_seminars_registration $registration
 	) {
 		return $plugin->cObj->getTypoLink(
-			$plugin->pi_getLL('label_onlineUnregistration'),
+			$plugin->translate('label_onlineUnregistration'),
 			$plugin->getConfValueInteger('registerPID'),
 			array(
 				'tx_seminars_pi1[registration]' => $registration->getUid(),
@@ -278,7 +278,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 				SEMINARS_TABLE_SEMINARS
 			)
 		) {
-			$message = $this->pi_getLL('message_wrongSeminarNumber');
+			$message = $this->translate('message_wrongSeminarNumber');
 			header('Status: 404 Not Found');
 		}
 
@@ -373,7 +373,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	) {
 		return ($this->canRegisterSeats($seminar, $registrationData['seats'])) ?
 			'' :
-			sprintf($this->pi_getLL('message_invalidNumberOfSeats'),
+			sprintf($this->translate('message_invalidNumberOfSeats'),
 				$seminar->getVacancies());
 	}
 

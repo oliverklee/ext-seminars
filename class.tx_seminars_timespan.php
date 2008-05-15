@@ -51,7 +51,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 */
 	public function getBeginDate() {
 		if (!$this->hasBeginDate()) {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+			$result = $this->translate('message_willBeAnnounced');
 		} else {
 			$result = strftime(
 				$this->getConfValueString('dateFormatYMD'),
@@ -79,7 +79,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 */
 	public function getEndDate() {
 		if (!$this->hasEndDate()) {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+			$result = $this->translate('message_willBeAnnounced');
 		} else {
 			$result = strftime(
 				$this->getConfValueString('dateFormatYMD'),
@@ -113,7 +113,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 */
 	public function getDate($dash = '&#8211;') {
 		if (!$this->hasDate()) {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+			$result = $this->translate('message_willBeAnnounced');
 		} else {
 			$beginDate = $this->getBeginDateAsTimestamp();
 			$endDate = $this->getEndDateAsTimestamp();
@@ -196,7 +196,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 */
 	public function getTime($dash = '&#8211;') {
 		if (!$this->hasTime()) {
-			$result = $this->pi_getLL('message_willBeAnnounced');
+			$result = $this->translate('message_willBeAnnounced');
 		} else {
 			$beginTime = strftime(
 				$this->getConfValueString('timeFormat'),

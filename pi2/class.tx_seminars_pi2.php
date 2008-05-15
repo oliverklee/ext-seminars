@@ -73,7 +73,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				break;
 			default:
 				header('Status: 404 Not Found');
-				$result = $this->pi_getLL('message_404');
+				$result = $this->translate('message_404');
 				break;
 		}
 
@@ -119,12 +119,12 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			} else {
 				// Access is denied.
 				header('Status: 403 Forbidden');
-				$result = $this->pi_getLL('message_403');
+				$result = $this->translate('message_403');
 			}
 		} else {
 			// Wrong or missing UID.
 			header('Status: 404 Not Found');
-			$result = $this->pi_getLL('message_404_registrations');
+			$result = $this->translate('message_404_registrations');
 		}
 
 		return $result;
@@ -237,12 +237,12 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			} else {
 				// Access is denied.
 				header('Status: 403 Forbidden');
-				$result = $this->pi_getLL('message_403');
+				$result = $this->translate('message_403');
 			}
 		} else {
 			// Missing PID.
 			header('Status: 404 Not Found');
-			$result = $this->pi_getLL('message_404');
+			$result = $this->translate('message_404');
 		}
 
 		return $result;

@@ -221,7 +221,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		$this->setLabels();
 		$this->hideUnusedFormFields();
 
-		return $this->substituteMarkerArrayCached('', 2);
+		return $this->getSubpart('', 2);
 	}
 
 	/**
@@ -701,15 +701,15 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$value = htmlspecialchars($userData[$currentKey]);
 			// Only show a label if we have any data following it.
 			if ($hasLabel && !empty($value)) {
-				$value = $this->plugin->pi_getLL('label_'.$currentKey)
+				$value = $this->plugin->translate('label_'.$currentKey)
 					.' '.$value;
 			}
-			$this->plugin->setMarkerContent(
+			$this->plugin->setMarker(
 				'user_'.$currentKey,
 				$value
 			);
 		}
-		return $this->plugin->substituteMarkerArrayCached(
+		return $this->plugin->getSubpart(
 			'REGISTRATION_CONFIRMATION_FEUSER'
 		);
 	}
@@ -811,20 +811,20 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		if ($currentFormData != '') {
-			$this->plugin->setMarkerContent(
+			$this->plugin->setMarker(
 				'registration_data_heading',
-				$this->plugin->pi_getLL('label_'.$key)
+				$this->plugin->translate('label_'.$key)
 			);
 			$fieldContent = str_replace(
 				CR,
 				'<br />',
 				htmlspecialchars($currentFormData)
 			);
-			$this->plugin->setMarkerContent(
+			$this->plugin->setMarker(
 				'registration_data_body',
 				$fieldContent
 			);
-			$result = $this->plugin->substituteMarkerArrayCached(
+			$result = $this->plugin->getSubpart(
 				'REGISTRATION_CONFIRMATION_DATA'
 			);
 		}
@@ -1002,7 +1002,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				// into a readable string.
 				if ($currentKey == 'gender') {
 					$currentFormData =
-						$this->pi_getLL('label_gender.I.'.intval($currentFormData));
+						$this->translate('label_gender.I.'.intval($currentFormData));
 				}
 				$processedFormData = str_replace(
 					CR,
@@ -1011,7 +1011,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				);
 				if ($hasLabel) {
 					$processedFormData
-						= $this->plugin->pi_getLL('label_'.$currentKey)
+						= $this->plugin->translate('label_'.$currentKey)
 							.' '.$processedFormData;
 				}
 
@@ -1019,9 +1019,9 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			}
 		}
 
-		$this->plugin->setMarkerContent('registration_billing_address', $result);
+		$this->plugin->setMarker('registration_billing_address', $result);
 
-		return $this->plugin->substituteMarkerArrayCached('REGISTRATION_CONFIRMATION_BILLING');
+		return $this->plugin->getSubpart('REGISTRATION_CONFIRMATION_BILLING');
 	}
 
 	/**
@@ -1539,7 +1539,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			}
 		}
 
-		$this->readSubpartsToHide(
+		$this->hideSubparts(
 			implode(',', $formFieldsToHide),
 			'registration_wrapper'
 		);
@@ -1573,7 +1573,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		}
 
 		return sprintf(
-			$this->plugin->pi_getLL('label_step_counter'),
+			$this->plugin->translate('label_step_counter'),
 			$currentPageNumberForDisplay, $lastPageNumberForDisplay
 		);
 	}
