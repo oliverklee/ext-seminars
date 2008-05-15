@@ -137,53 +137,43 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToZeroEventUidFails() {
-		try {
-			$this->fixture->limitToEvents('0');
-		} catch (Exception $e) {
-			return;
-		}
-
-		$this->fail('The expected exception has not been thrown.');
+		$this->setExpectedException(
+			'Exception',
+			'$eventUids must be a comma-separated list of positive integers.'
+		);
+		$this->fixture->limitToEvents('0');
 	}
 
 	public function testLimitToNegativeEventUidFails() {
-		try {
-			$this->fixture->limitToEvents('-2');
-		} catch (Exception $e) {
-			return;
-		}
-
-		$this->fail('The expected exception has not been thrown.');
+		$this->setExpectedException(
+			'Exception',
+			'$eventUids must be a comma-separated list of positive integers.'
+		);
+		$this->fixture->limitToEvents('-2');
 	}
 
 	public function testLimitToInvalidEventUidAtTheStartFails() {
-		try {
-			$this->fixture->limitToEvents('0,1');
-		} catch (Exception $e) {
-			return;
-		}
-
-		$this->fail('The expected exception has not been thrown.');
+		$this->setExpectedException(
+			'Exception',
+			'$eventUids must be a comma-separated list of positive integers.'
+		);
+		$this->fixture->limitToEvents('0,1');
 	}
 
 	public function testLimitToInvalidEventUidAtTheEndFails() {
-		try {
-			$this->fixture->limitToEvents('1,0');
-		} catch (Exception $e) {
-			return;
-		}
-
-		$this->fail('The expected exception has not been thrown.');
+		$this->setExpectedException(
+			'Exception',
+			'$eventUids must be a comma-separated list of positive integers.'
+		);
+		$this->fixture->limitToEvents('1,0');
 	}
 
 	public function testLimitToInvalidEventUidInTheMiddleFails() {
-		try {
-			$this->fixture->limitToEvents('1,0,2');
-		} catch (Exception $e) {
-			return;
-		}
-
-		$this->fail('The expected exception has not been thrown.');
+		$this->setExpectedException(
+			'Exception',
+			'$eventUids must be a comma-separated list of positive integers.'
+		);
+		$this->fixture->limitToEvents('1,0,2');
 	}
 
 	public function testLimitToEventsCanResultInOneCategory() {

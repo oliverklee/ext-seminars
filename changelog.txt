@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1903] Change: Use $this->setExpectedException() instead of try-catch-block in Unit tests
 
 0.6.0 (released 2008-05-12)
 - [#1339] Feature: Add a switch that controls when unregistration is possible
