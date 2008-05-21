@@ -130,7 +130,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 			$matches = array();
 			preg_match(
 				'/<!-- *###'.$subpartName.'### *-->(.*)'
-					.'<!-- *###'.$subpartName.'### *-->/msSuU',
+					.'<!-- *###'.$subpartName.'### *-->/msSU',
 				$templateRawCode,
 				$matches
 			);
@@ -576,7 +576,7 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 		// recursively replaces subparts with their contents
 		$noSubpartMarkers = preg_replace_callback(
 			'/<!-- *###([^#]*)### *-->(.*)'
-				.'<!-- *###\1### *-->/msSuU',
+				.'<!-- *###\1### *-->/msSU',
 			array(
 				$this,
 				'getSubpartForCallback'
