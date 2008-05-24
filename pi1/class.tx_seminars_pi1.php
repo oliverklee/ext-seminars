@@ -1544,7 +1544,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$temporaryHiddenColumns = 'listheader_wrapper_title,'
 				.'listitem_wrapper_title,listheader_wrapper_list_registrations,'
 				.'listitem_wrapper_list_registrations';
-			$this->readSubPartsToHide($temporaryHiddenColumns);
+			$this->hideSubparts($temporaryHiddenColumns);
 
 			$tableOtherDates = $this->createListTable($seminarBag);
 
