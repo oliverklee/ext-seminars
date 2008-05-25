@@ -858,6 +858,82 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////////////////////////
+	// Tests regarding the ability to register for an event
+	/////////////////////////////////////////////////////////
+
+	public function testCanSomebodyRegisterIsTrueForEventWithFutureDate() {
+		$this->fixture->setBeginDate(time() + 3600);
+		$this->assertTrue(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function testCanSomebodyRegisterIsTrueForEventWithFutureDateAndRegistrationWithoutDateActivated() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->fixture->setBeginDate(time() + 3600);
+		$this->assertTrue(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function testCanSomebodyRegisterIsFalseForPastEvent() {
+		$this->fixture->setBeginDate(time() - 7200);
+		$this->fixture->setEndDate(time() - 3600);
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function testCanSomebodyRegisterIsFalseForPastEventWithRegistrationWithoutDateActivated() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->fixture->setBeginDate(time() - 7200);
+		$this->fixture->setEndDate(time() - 3600);
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function testCanSomebodyRegisterIsFalseForCurrentlyRunningEvent() {
+		$this->fixture->setBeginDate(time() - 3600);
+		$this->fixture->setEndDate(time() + 3600);
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function testCanSomebodyRegisterIsFalseForCurrentlyRunningEventWithRegistrationWithoutDateActivated() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->fixture->setBeginDate(time() - 3600);
+		$this->fixture->setEndDate(time() + 3600);
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+
+	public function testCanSomebodyRegisterIsFalseForEventWithoutDate() {
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function testCanSomebodyRegisterIsTrueForEventWithoutDateAndRegistrationWithoutDateActivated() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->assertTrue(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+
 	/////////////////////////////////////////////
 	// Tests regarding the language of an event
 	/////////////////////////////////////////////

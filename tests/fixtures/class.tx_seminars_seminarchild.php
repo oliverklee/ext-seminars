@@ -74,6 +74,16 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
+	 * Sets the configuration value "allowRegistrationForEventsWithoutDate".
+	 *
+	 * @param	integer		whether this option is enabled or not, value must be
+	 * 						either 0 or 1
+	 */
+	public function setAllowRegistrationForEventsWithoutDate($value) {
+		$this->setConfigurationValue('allowRegistrationForEventsWithoutDate', $value);
+	}
+
+	/**
 	 * Sets the event's begin date.
 	 *
 	 * @param	integer		begin date as UNIX timestamp (has to be >= 0, 0 will

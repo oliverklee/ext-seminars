@@ -2934,7 +2934,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Checks whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
 	 *     has not been canceled,
-	 *     has a date set,
+	 *     has a date set (or registration for events without a date is allowed),
 	 *     has not begun yet,
 	 *     the registration deadline is not over yet,
 	 *     and there are still vacancies.
@@ -2944,8 +2944,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function canSomebodyRegister() {
 		return $this->needsRegistration() &&
 			!$this->isCanceled() &&
-			$this->hasDate() &&
-			!$this->isRegistrationDeadlineOver() &&
+			(
+				($this->getConfValueBoolean('allowRegistrationForEventsWithoutDate', 's_registration')
+					&& !$this->hasDate()
+				) ||
+				($this->hasDate() && !$this->isRegistrationDeadlineOver())
+			) &&
 			$this->hasVacanciesOnRegistrationQueue();
 	}
 
@@ -2953,7 +2957,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Checks whether it is possible at all to register for this seminar,
 	 * ie. it needs registration at all,
 	 *     has not been canceled,
-	 *     has a date set,
+	 *     has either a date set (registration for events without a date is allowed),
 	 *     has not begun yet,
 	 *     the registration deadline is not over yet
 	 *     and there are still vacancies,
@@ -2969,7 +2973,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$message = $this->translate('message_noRegistrationNecessary');
 		} elseif ($this->isCanceled()) {
 			$message = $this->translate('message_seminarCancelled');
-		} elseif (!$this->hasDate()) {
+		} elseif (!$this->hasDate() &&
+			!$this->getConfValueBoolean('allowRegistrationForEventsWithoutDate', 's_registration')
+		) {
 			$message = $this->translate('message_noDate');
 		} elseif ($this->isRegistrationDeadlineOver()) {
 			$message = $this->translate('message_seminarRegistrationIsClosed');
@@ -3023,8 +3029,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Checks whether for this event, registration is necessary at all (events
-	 * with a maximum number of attendees are considered to not require
-	 * registration).
+	 * with a maximum number of attendees are considered to require registration).
 	 *
 	 * @return	boolean		true if registration is necessary, false otherwise
 	 */
