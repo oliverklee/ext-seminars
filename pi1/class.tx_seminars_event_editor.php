@@ -31,6 +31,7 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
@@ -295,24 +296,16 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * successfully created.
 	 *
 	 * @return	string		complete URL of the FE page with a message
-	 *
-	 * @access	public
 	 */
-	function getEventSuccessfullySavedUrl() {
-		// We need to manually combine the base URL and the path to the page to
-		// redirect to. Without the baseURL as part of the returned URL, the
-		// combination of formidable and realURL will lead us into troubles with
-		// not existing URLs (and thus showing errors to the user).
+	public function getEventSuccessfullySavedUrl() {
 		$pageId = $this->plugin->getConfValueInteger(
 			'eventSuccessfullySavedPID',
 			's_fe_editing'
 		);
-		$baseUrl = $this->getConfValueString('baseURL');
-		$redirectPath = $this->plugin->pi_getPageLink(
-			$pageId
-		);
 
-		return $baseUrl.$redirectPath;
+		return t3lib_div::locationHeaderUrl(
+			$this->plugin->cObj->typoLink_URL(array('parameter' => $pageId))
+		);
 	}
 
 	/**

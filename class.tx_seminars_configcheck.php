@@ -196,7 +196,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			$this->setErrorMessage($message);
 		}
 
-		$this->checkBaseUrl();
 		$this->checkRegistrationEditorTemplateFile();
 
 		$this->checkNumberOfClicksForRegistration();
@@ -417,44 +416,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
-	 * Checks the setting of the configuration value baseUrl.
-	 *
-	 * @see		http://www.ietf.org/rfc/rfc2396.txt
-	 */
-	private function checkBaseUrl() {
-		// The regular expression used for the host name mostly conforms with
-		// http://www.ietf.org/rfc/rfc2396.txt.
-		$this->checkRegExpNotEmpty(
-			'baseURL',
-			true,
-			's_template_special',
-			'This value specifies the base URL that will be used to create '
-				.'links in e-mails. The base URL must include the protocol '
-				.'(http:// or https://) and the trailing slash. '
-				.'If this value is incorrect, invalid URLs will be created '
-				.'in e-mails to the participants.',
-			// the protocol
-			'/^http(s?):\/\/'
-				.'('
-					// either a domain name ...
-					.'(([a-z\d]|[a-z\d][a-z\d\-]*[a-z\d])\.)*'
-						// ... with a top level domain (or a host at the local
-						// network) at the end
-						.'([a-z][a-z\d\-]*[a-z\d])'
-					// or an IPv4 address
-					.'|\d+\.\d+\.\d+\.\d+'
-				.')'
-				// a port (optional)
-				.'(:\d+)?'
-				.'\/'
-				// any number of path segments (including none)
-				.'([a-zA-Z\d_\-\.]+\/)'
-				.'*$/'
-		);
-	}
-
-	/**
-	 * Checks the setting of the configuration value baseUrl.
+	 * Checks the setting of the configuration value enableRegistration.
 	 */
 	private function checkRegistrationFlag() {
 		$this->checkIfBoolean(

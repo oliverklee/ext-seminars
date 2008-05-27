@@ -31,6 +31,7 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
@@ -601,36 +602,39 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		complete URL of the FE page with a message (or null
 	 * 						if the confirmation page has not been submitted yet)
-	 *
-	 * @access	protected
 	 */
-	function createUrlForRedirection($pageId, $sendParameters = true) {
+	protected function createUrlForRedirection($pageId, $sendParameters = true) {
 		// On freshly updated sites, the configuration value might not be set
 		// yet. To avoid breaking the site, we use the event list in this case.
 		if (!$pageId) {
 			$pageId = $this->plugin->getConfValueInteger('listPID', 'sDEF');
 		}
 
-		// We need to manually combine the base URL and the path to the page to
-		// redirect to. Without the baseURL as part of the returned URL, the
-		// combination of formidable and realURL will lead us into troubles with
-		// not existing URLs (and thus showing errors to the user).
-		$baseUrl = $this->getConfValueString('baseURL');
-		$parameters = array();
+		$linkConfiguration = array('parameter' => $pageId);
 
 		if ($sendParameters) {
-			$parameters = array(
-				'tx_seminars_pi1[showUid]' => $this->seminar->getUid()
-			);
+			$linkConfiguration['additionalParams']
+				= t3lib_div::implodeArrayForUrl(
+					'tx_seminars_pi1',
+					array('showUid' => $this->seminar->getUid()),
+					'',
+					false,
+					true
+				);
 		}
 
-		$redirectPath = $this->plugin->pi_getPageLink(
-			$pageId,
-			'',
-			$parameters
+		// XXX We need to do this workaround of manually encoding brackets in
+		// the URL due to a bug in the TYPO3 core:
+		// http://bugs.typo3.org/view.php?id=3808
+		$result = preg_replace(
+			array('/\[/', '/\]/'),
+			array('%5B', '%5D'),
+			$this->cObj->typoLink_URL($linkConfiguration)
 		);
 
-		return $baseUrl.$redirectPath;
+		return t3lib_div::locationHeaderUrl(
+			$result
+		);
 	}
 
 	/**

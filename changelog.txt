@@ -1,4 +1,5 @@
 0.6.1 (currently working on)
+- [#1914] Change: Build all redirection links and links in e-mails using cObj->typoLink_URL
 - [#1908] Fix: Registration for event not possible if umlauts in fe-user "Name" field
 - [#1099] Change: Use the new function names from the templatehelper
 - [#1895] Change: getRecordProperty* should be public, not protected
