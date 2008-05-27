@@ -29,22 +29,23 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_placebag.php');
-require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_event_editor.php');
-require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_registration_editor.php');
-require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_configgetter.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationmanager.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
+require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** same as class name */
@@ -446,25 +447,46 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		the wrapped label
 	 */
-	function getLoginLink($label, $pageId, $eventId = 0) {
+	public function getLoginLink($label, $pageId, $eventId = 0) {
+		$linkConfiguration = array('parameter' => $pageId);
+
 		$redirectUrlParams = array();
 		if ($eventId) {
-			$redirectUrlParams = array(
-				'tx_seminars_pi1[seminar]' => $eventId,
-				'tx_seminars_pi1[action]' => 'register'
-			);
+			$linkConfiguration['additionalParams']
+				= t3lib_div::implodeArrayForUrl(
+					'tx_seminars_pi1',
+					array(
+						'seminar' => $eventId,
+						'action' => 'register',
+					),
+					'',
+					false,
+					true
+				);
 		}
+
 		$redirectUrl = t3lib_div::locationHeaderUrl(
-			$this->cObj->getTypoLink_URL(
-				$pageId,
-				$redirectUrlParams
-			)
+			$this->cObj->typoLink_URL($linkConfiguration)
 		);
 
-		return $this->cObj->getTypoLink(
+		// XXX We need to do this workaround of manually encoding brackets in
+		// the URL due to a bug in the TYPO3 core:
+		// http://bugs.typo3.org/view.php?id=3808
+		$redirectUrl = preg_replace(
+			array('/\[/', '/\]/'),
+			array('%5B', '%5D'),
+			$redirectUrl
+		);
+
+		return $this->cObj->typoLink(
 			$label,
-			$this->getConfValueInteger('loginPID'),
-			array('redirect_url' => $redirectUrl)
+			array(
+				'parameter' => $this->getConfValueInteger('loginPID'),
+				'additionalParams' => t3lib_div::implodeArrayForUrl(
+					'',
+					array('redirect_url' => $redirectUrl)
+				)
+			)
 		);
 	}
 
@@ -1643,6 +1665,15 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets our seminar object.
+	 *
+	 * @return	tx_seminars_seminar		our seminar object
+	 */
+	public function getSeminar() {
+		return $this->seminar;
 	}
 
 	/**

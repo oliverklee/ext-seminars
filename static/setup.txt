@@ -323,9 +323,6 @@ plugin.tx_seminars_pi1 {
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.
 
-	# Base URL of your TYPO3 site (including the protocol and the trailing slash), e.g. http://www.mytypo3site.net/
-	baseURL =
-
 	# PID of the sysfolder that contains all the event records (e.g. the starting point)
 	pages =
 

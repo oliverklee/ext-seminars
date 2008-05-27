@@ -4,7 +4,7 @@
 	</meta>
 	<sheets>
 		<sDEF>
-	  		<ROOT>
+			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_general</sheetTitle>
 				</TCEforms>
@@ -66,16 +66,6 @@
 							</config>
 						</TCEforms>
 					</what_to_display>
-					<baseURL>
-						<TCEforms>
-							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.baseURL</label>
-							<config>
-								<type>input</type>
-								<size>32</size>
-							</config>
-						</TCEforms>
-					</baseURL>
 					<listPID>
 						<TCEforms>
 							<exclude>1</exclude>
@@ -206,8 +196,8 @@
 							</config>
 						</TCEforms>
 					</salutation>
-		  			<pages>
-				  		<TCEforms>
+					<pages>
+						<TCEforms>
 							<exclude>1</exclude>
 							<label>LLL:EXT:lang/locallang_general.xml:LGL.startingpoint</label>
 							<config>
@@ -219,10 +209,10 @@
 								<minitems>0</minitems>
 								<show_thumbs>1</show_thumbs>
 							</config>
-				  		</TCEforms>
+						</TCEforms>
 					</pages>
 					<recursive>
-				  		<TCEforms>
+						<TCEforms>
 							<label>LLL:EXT:lang/locallang_general.xml:LGL.recursive</label>
 							<config>
 								<type>select</type>
@@ -266,8 +256,8 @@
 				<TCEforms>
 					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_template_and_special</sheetTitle>
 				</TCEforms>
-		    	<type>array</type>
-		    	<el>
+				<type>array</type>
+				<el>
 					<templateFile>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.templateFile</label>
@@ -527,7 +517,7 @@
 				<TCEforms>
 					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_registration</sheetTitle>
 				</TCEforms>
-		    	<type>array</type>
+				<type>array</type>
 				<el>
 					<numberOfClicksForRegistration>
 						<TCEforms>
@@ -623,8 +613,8 @@
 				<TCEforms>
 					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_fe_editing</sheetTitle>
 				</TCEforms>
-		    	<type>array</type>
-		    	<el>
+				<type>array</type>
+				<el>
 					<eventEditorFeGroupID>
 						<TCEforms>
 							<exclude>1</exclude>

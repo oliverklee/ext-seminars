@@ -32,10 +32,15 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_seminarchild.php');
+require_once(PATH_tslib . 'class.tslib_content.php');
+require_once(PATH_tslib . 'class.tslib_feuserauth.php');
+require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
 
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_seminarchild.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
 class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -45,13 +50,34 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $unregistrationDeadline;
 	private $currentTimestamp;
 
-	protected function setUp() {
+	/** the UID of a dummy front end page */
+	private $frontEndPageUid;
+
+	/** the instance of tx_seminars_pi1*/
+	private $pi1;
+
+	public function setUp() {
+		// Bolsters up the fake front end.
+		$GLOBALS['TSFE']->tmpl = t3lib_div::makeInstance('t3lib_tsparser_ext');
+		$GLOBALS['TSFE']->tmpl->flattenSetup(array(), '', false);
+		$GLOBALS['TSFE']->tmpl->init();
+		$GLOBALS['TSFE']->tmpl->getCurrentPageData();
+
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
 		$this->currentTimestamp = time();
 		$this->beginDate = ($this->currentTimestamp + ONE_WEEK);
 		$this->unregistrationDeadline = ($this->currentTimestamp + ONE_WEEK);
+		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
+		$this->pi1 = new tx_seminars_pi1();
+		$this->pi1->fakeFrontEnd();
+		$this->pi1->init(
+			array(
+				'isStaticTemplateLoaded' => 1,
+				'detailPID' => $this->frontEndPageUid,
+			)
+		);
 
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -75,9 +101,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture, $this->testingFramework);
+		unset($this->fixture, $this->testingFramework, $this->pi1);
 	}
 
 
@@ -3636,6 +3662,37 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'icon_tx_seminars_seminars_date__t.',
 			$this->fixture->getRecordIcon()
+		);
+	}
+
+
+	//////////////////////////////////
+	// Tests for the detail view URL
+	//////////////////////////////////
+
+	public function testGetDetailedViewUrlCanReturnAbsoluteUrlStartingWithHttp() {
+		$this->assertRegExp(
+			'/^http:\/\/./',
+			$this->fixture->getDetailedViewUrl($this->plugin, true)
+		);
+	}
+
+	public function testGetDetailedViewUrlReturnsUrlWithEncodedBrackets() {
+		$this->assertContains(
+			'%5BshowUid%5D',
+			$this->fixture->getDetailedViewUrl($this->plugin)
+		);
+
+		$this->assertNotContains(
+			'[showUid]',
+			$this->fixture->getDetailedViewUrl($this->plugin)
+		);
+	}
+
+	public function testGetDetailedViewUrlCanReturnRelativeUrlNotStartingWithHttp() {
+		$this->assertNotContains(
+			'http://',
+			$this->fixture->getDetailedViewUrl($this->plugin, false)
 		);
 	}
 }

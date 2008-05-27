@@ -31,6 +31,7 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
@@ -2628,25 +2629,32 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						of just a URI without the host
 	 *
 	 * @return	string		URL of the seminar details page
-	 *
-	 * @access	public
 	 */
-	function getDetailedViewUrl(tslib_pibase $plugin, $createFullUrl = true) {
-		$path = $plugin->cObj->getTypoLink_URL(
-			$plugin->getConfValueInteger('detailPID'),
-			array('tx_seminars_pi1[showUid]' => $this->getUid())
+	public function getDetailedViewUrl(tslib_pibase $plugin, $createFullUrl = true) {
+		$result = $plugin->cObj->typoLink_URL(
+			array(
+				'parameter' => $plugin->getConfValueInteger('detailPID'),
+				'additionalParams' => t3lib_div::implodeArrayForUrl(
+					'tx_seminars_pi1',
+					array('showUid' => $this->getUid()),
+					'',
+					false,
+					true
+				),
+			)
 		);
+
 		// XXX We need to do this workaround of manually encoding brackets in
 		// the URL due to a bug in the TYPO3 core:
 		// http://bugs.typo3.org/view.php?id=3808
 		$result = preg_replace(
 			array('/\[/', '/\]/'),
 			array('%5B', '%5D'),
-			$path
+			$result
 		);
 
 		if ($createFullUrl) {
-			$result = $plugin->getConfValueString('baseURL').$result;
+			$result = t3lib_div::locationHeaderUrl($result);
 		}
 
 		return $result;
