@@ -3673,26 +3673,26 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testGetDetailedViewUrlCanReturnAbsoluteUrlStartingWithHttp() {
 		$this->assertRegExp(
 			'/^http:\/\/./',
-			$this->fixture->getDetailedViewUrl($this->plugin, true)
+			$this->fixture->getDetailedViewUrl($this->pi1, true)
 		);
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlWithEncodedBrackets() {
 		$this->assertContains(
 			'%5BshowUid%5D',
-			$this->fixture->getDetailedViewUrl($this->plugin)
+			$this->fixture->getDetailedViewUrl($this->pi1)
 		);
 
 		$this->assertNotContains(
 			'[showUid]',
-			$this->fixture->getDetailedViewUrl($this->plugin)
+			$this->fixture->getDetailedViewUrl($this->pi1)
 		);
 	}
 
 	public function testGetDetailedViewUrlCanReturnRelativeUrlNotStartingWithHttp() {
 		$this->assertNotContains(
 			'http://',
-			$this->fixture->getDetailedViewUrl($this->plugin, false)
+			$this->fixture->getDetailedViewUrl($this->pi1, false)
 		);
 	}
 }
