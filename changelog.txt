@@ -1,3 +1,5 @@
+0.6.2 (currently working on)
+
 0.6.1 (released 2008-05-30)
 - [#1914] Change: Build all redirection links and links in e-mails using cObj->typoLink_URL
 - [#1908] Fix: Registration for event not possible if umlauts in fe-user "Name" field
