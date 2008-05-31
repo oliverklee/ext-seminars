@@ -206,6 +206,7 @@ CREATE TABLE tx_seminars_seminars (
 	price_special decimal(7,2) DEFAULT '0.00' NOT NULL,
 	price_special_early decimal(7,2) DEFAULT '0.00' NOT NULL,
 	price_special_board decimal(7,2) DEFAULT '0.00' NOT NULL,
+	prices int(11) unsigned DEFAULT '0' NOT NULL,
 	additional_information text,
 	payment_methods tinytext,
 	organizers tinytext,
@@ -305,6 +306,9 @@ CREATE TABLE tx_seminars_attendances (
 	price text,
 	seats int(11) unsigned DEFAULT '0' NOT NULL,
 	total_price decimal(7,2) DEFAULT '0.00' NOT NULL,
+	currency int(11) unsigned DEFAULT '0' NOT NULL,
+	tax int(11) unsigned DEFAULT '0' NOT NULL,
+	including_tax tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	attendees_names text,
 	paid tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	datepaid int(11) unsigned DEFAULT '0' NOT NULL,
@@ -648,6 +652,32 @@ CREATE TABLE tx_seminars_skills (
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
+
+#
+# Table structure for table 'tx_seminars_prices'
+#
+CREATE TABLE tx_seminars_prices (
+	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+	pid int(11) unsigned DEFAULT '0' NOT NULL,
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	starttime int(11) unsigned DEFAULT '0' NOT NULL,
+	endtime int(11) unsigned DEFAULT '0' NOT NULL,
+	fe_group int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	seminar int(11) unsigned DEFAULT '0' NOT NULL,
+	title tinytext,
+	value decimal(7,2) DEFAULT '0.00' NOT NULL,
+	currency int(11) unsigned DEFAULT '0' NOT NULL,
+	tax int(11) unsigned DEFAULT '0' NOT NULL,
+	including_tax tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)

@@ -134,7 +134,7 @@ $TCA['tx_seminars_test'] = array(
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,owner_feuser,vips,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,prices,price_regular,price_special,payment_methods,organizers,organizing_partners,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,owner_feuser,vips,notes'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -511,6 +511,16 @@ $TCA['tx_seminars_seminars'] = array(
 				'maxitems' => 1
 			)
 		),
+		'prices' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.prices',
+			'config' => array(
+				'type' => 'inline',
+				'foreign_table' => 'tx_seminars_prices',
+				'foreign_field' => 'seminar',
+				'maxitems' => 999
+			)
+		),
 		'price_regular' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular',
@@ -813,13 +823,13 @@ $TCA['tx_seminars_seminars'] = array(
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, attendees_min, attendees_max, queue_size, target_groups, skip_collision_check, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
+				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
 			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, categories, teaser;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
 				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
+				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
 		),
 		// Multiple event date
 		'2' => array('showitem' =>
@@ -998,7 +1008,7 @@ $TCA['tx_seminars_speakers'] = array(
 $TCA['tx_seminars_attendances'] = array(
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,total_price,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
+		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,total_price,currency,tax,including_tax,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -1094,6 +1104,53 @@ $TCA['tx_seminars_attendances'] = array(
 				),
 				'default' => 0
 			)
+		),
+		'currency' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.currency',
+			'config' => array(
+				'type' => 'select',
+				'internal_type' => 'db',
+				'allowed' => 'static_currencies',
+				'foreign_table' => 'static_currencies',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'items' => array(
+					'' => ''
+				)
+			)
+		),
+		'tax' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.tax',
+			'config' => array(
+				'type' => 'select',
+				'internal_type' => 'db',
+				'allowed' => 'static_taxes',
+				'foreign_table' => 'static_taxes',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'items' => array(
+					'' => ''
+				)
+			)
+		),
+		'including_tax' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.including_tax',
+			'config' => array(
+			'type' => 'select',
+				'default' => '0',
+				'items' => array(
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.including_tax.including', '0'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.including_tax.excluding', '1'),
+				),
+				'size' => 1,
+				'minitems' => 1,
+				'maxitems' => 1,
+			),
 		),
 		'attendees_names' => array(
 			'exclude' => 1,
@@ -1394,7 +1451,7 @@ $TCA['tx_seminars_attendances'] = array(
 		)
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, uid, user;;;;1-1-1, seminar, registration_queue, price, seats, total_price, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes')
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, uid, user;;;;1-1-1, seminar, registration_queue, price, seats, total_price, currency, tax, including_tax, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -1887,4 +1944,140 @@ $TCA['tx_seminars_skills'] = array(
 		'1' => array('showitem' => '')
 	)
 );
+
+$TCA['tx_seminars_prices'] = array(
+	'ctrl' => $TCA['tx_seminars_prices']['ctrl'],
+	'interface' => array(
+		'showRecordFieldList' => 'title,value,currency,tax,including_tax,starttime,endtime,fe_group',
+	),
+	'columns' => array(
+		'seminar' => array(
+			'config' => array(
+				'type' => 'input',
+				'size' => '30',
+			),
+		),
+		'title' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.title',
+			'config' => array(
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'required,trim',
+			),
+		),
+		'value' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.value',
+			'config' => array(
+				'type' => 'input',
+				'size' => '8',
+				'max' => '8',
+				'eval' => 'double2',
+				'checkbox' => '0.00',
+				'range' => array(
+					'upper' => '99999.99',
+					'lower' => '0',
+				),
+				'default' => 0,
+			),
+		),
+		'currency' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.currency',
+			'config' => array(
+				'type' => 'select',
+				'internal_type' => 'db',
+				'allowed' => 'static_currencies',
+				'foreign_table' => 'static_currencies',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'items' => array(
+					'' => '',
+				),
+			),
+		),
+		'tax' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.tax',
+			'config' => array(
+				'type' => 'select',
+				'internal_type' => 'db',
+				'allowed' => 'static_taxes',
+				'foreign_table' => 'static_taxes',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'items' => array(
+					'' => '',
+				),
+			),
+		),
+		'including_tax' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.including_tax',
+			'config' => array(
+			'type' => 'select',
+				'default' => '0',
+				'items' => array(
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.including_tax.including', '0'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.including_tax.excluding', '1'),
+				),
+				'size' => 1,
+				'minitems' => 1,
+				'maxitems' => 1,
+			),
+		),
+		'starttime' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
+			'config' => array(
+				'type' => 'input',
+				'size' => '8',
+				'max' => '20',
+				'eval' => 'date',
+				'default' => '0',
+				'checkbox' => '0',
+			),
+		),
+		'endtime' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
+			'config' => array(
+				'type' => 'input',
+				'size' => '8',
+				'max' => '20',
+				'eval' => 'date',
+				'checkbox' => '0',
+				'default' => '0',
+				'range' => array(
+					'upper' => mktime(0,0,0,12,31,2020),
+					'lower' => mktime(0,0,0,date('m')-1,date('d'),date('Y')),
+				),
+			),
+		),
+		'fe_group' => array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.fe_group',
+			'config' => array (
+				'type' => 'select',
+				'items' => array (
+					array('', 0),
+					array('LLL:EXT:lang/locallang_general.xml:LGL.hide_at_login', -1),
+					array('LLL:EXT:lang/locallang_general.xml:LGL.any_login', -2),
+					array('LLL:EXT:lang/locallang_general.xml:LGL.usergroups', '--div--'),
+				),
+				'foreign_table' => 'fe_groups',
+			),
+		),
+	),
+	'types' => array(
+		'0' => array('showitem' => 'title;;;;2-2-2,value,currency,tax,including_tax,starttime,endtime,fe_group'),
+	),
+	'palettes' => array(
+		'1' => array('showitem' => 'starttime, endtime, fe_group'),
+	)
+);
+
 ?>

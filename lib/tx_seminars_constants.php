@@ -41,6 +41,7 @@ define('SEMINARS_TABLE_SKILLS', 'tx_seminars_skills');
 define('SEMINARS_TABLE_TEST', 'tx_seminars_test');
 define('SEMINARS_TABLE_PARTNER_MAIN', 'tx_partner_main');
 define('SEMINARS_TABLE_PARTNER_CONTACT_INFO', 'tx_partner_contact_info');
+define('SEMINARS_TABLE_PRICES', 'tx_seminars_prices');
 
 define('SEMINARS_TABLE_VIPS_MM', 'tx_seminars_seminars_feusers_mm');
 define('SEMINARS_TABLE_SPEAKERS_MM', 'tx_seminars_seminars_speakers_mm');
@@ -72,4 +73,10 @@ define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_MOBILE', 1);
 define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_FAX', 2);
 define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_EMAIL', 3);
 define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_URL', 4);
+
+define('SEMINARS_PRICE_CURRENCY_LEFT', 0);
+define('SEMINARS_PRICE_CURRENCY_RIGHT', 1);
+
+define('SEMINARS_PRICE_INCLUDING_TAX', 0);
+define('SEMINARS_PRICE_EXCLUDING_TAX', 1);
 ?>

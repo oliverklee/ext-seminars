@@ -74,6 +74,7 @@
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>
 			<label index="tx_seminars_seminars.is_full">Is full:</label>
 			<label index="tx_seminars_seminars.divLabelPayment">Payment</label>
+			<label index="tx_seminars_seminars.prices">Prices:</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird):</label>
 			<label index="tx_seminars_seminars.price_regular_board">Regular price including full board:</label>
@@ -103,6 +104,11 @@
 			<label index="tx_seminars_attendances.registration_queue">Is on the registration queue:</label>
 			<label index="tx_seminars_attendances.price">Price to pay:</label>
 			<label index="tx_seminars_attendances.total_price">Total price for this attendance:</label>
+			<label index="tx_seminars_attendances.currency">Currency of total price:</label>
+			<label index="tx_seminars_attendances.tax">Tax of total price:</label>
+			<label index="tx_seminars_attendances.including_tax">Including/excluding Tax:</label>
+			<label index="tx_seminars_attendances.including_tax.including">including</label>
+			<label index="tx_seminars_attendances.including_tax.excluding">excluding</label>
 			<label index="tx_seminars_attendances.paid">Has paid:</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment:</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment:</label>
@@ -166,6 +172,14 @@
 			<label index="tx_seminars_categories.title">Title:</label>
 			<label index="tx_seminars_skills">Skills</label>
 			<label index="tx_seminars_skills.title">Title:</label>
+			<label index="tx_seminars_prices">Prices</label>
+			<label index="tx_seminars_prices.title">Title:</label>
+			<label index="tx_seminars_prices.value">Value:</label>
+			<label index="tx_seminars_prices.currency">Currency:</label>
+			<label index="tx_seminars_prices.tax">Tax:</label>
+			<label index="tx_seminars_prices.including_tax">Including/excluding Tax:</label>
+			<label index="tx_seminars_prices.including_tax.including">including</label>
+			<label index="tx_seminars_prices.including_tax.excluding">excluding</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -234,6 +248,7 @@
 			<label index="tx_seminars_seminars.enough_attendees">Hat genug Anmeldungen:</label>
 			<label index="tx_seminars_seminars.is_full">Ist voll:</label>
 			<label index="tx_seminars_seminars.divLabelPayment">Bezahlung</label>
+			<label index="tx_seminars_seminars.prices">Preise:</label>
 			<label index="tx_seminars_seminars.price_regular">Standardpreis:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Standardpreis für Frühbucher:</label>
 			<label index="tx_seminars_seminars.price_regular_board">Standardpreis inklusive Vollpension:</label>
@@ -263,6 +278,11 @@
 			<label index="tx_seminars_attendances.registration_queue">Ist auf der Warteliste:</label>
 			<label index="tx_seminars_attendances.price">zu bezahlender Preis:</label>
 			<label index="tx_seminars_attendances.total_price">Gesamtpreis dieser Buchung:</label>
+			<label index="tx_seminars_attendances.currency">Währung des Gesamtpreises:</label>
+			<label index="tx_seminars_attendances.tax">Steuern des Gesamtpreises:</label>
+			<label index="tx_seminars_attendances.including_tax">Inklusive/exklusive Steuern:</label>
+			<label index="tx_seminars_attendances.including_tax.including">inklusive</label>
+			<label index="tx_seminars_attendances.including_tax.excluding">exklusive</label>
 			<label index="tx_seminars_attendances.paid">Hat bezahlt:</label>
 			<label index="tx_seminars_attendances.datepaid">Datum der Bezahlung:</label>
 			<label index="tx_seminars_attendances.method_of_payment">Zahlungsart:</label>
@@ -326,6 +346,14 @@
 			<label index="tx_seminars_categories.title">Titel:</label>
 			<label index="tx_seminars_skills">Fähigkeiten</label>
 			<label index="tx_seminars_skills.title">Titel:</label>
+			<label index="tx_seminars_prices">Preise</label>
+			<label index="tx_seminars_prices.title">Titel:</label>
+			<label index="tx_seminars_prices.value">Wert:</label>
+			<label index="tx_seminars_prices.currency">Währung:</label>
+			<label index="tx_seminars_prices.tax">Steuer:</label>
+			<label index="tx_seminars_prices.including_tax">Inklusive/exklusive Steuern:</label>
+			<label index="tx_seminars_prices.including_tax.including">inklusive</label>
+			<label index="tx_seminars_prices.including_tax.excluding">exklusive</label>
 			<label index="tt_content.list_type_pi1">Seminar-Manager</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1194,6 +1222,7 @@
 			<label index="tx_seminars_seminars.enough_attendees" type="integer">219975728</label>
 			<label index="tx_seminars_seminars.is_full" type="integer">74563993</label>
 			<label index="tx_seminars_seminars.divLabelPayment" type="integer">205863499</label>
+			<label index="tx_seminars_seminars.prices" type="integer">18679445</label>
 			<label index="tx_seminars_seminars.price_regular" type="integer">240409527</label>
 			<label index="tx_seminars_seminars.price_regular_early" type="integer">216978206</label>
 			<label index="tx_seminars_seminars.price_regular_board" type="integer">76600225</label>
@@ -1223,6 +1252,11 @@
 			<label index="tx_seminars_attendances.registration_queue" type="integer">263240266</label>
 			<label index="tx_seminars_attendances.price" type="integer">253734840</label>
 			<label index="tx_seminars_attendances.total_price" type="integer">83487492</label>
+			<label index="tx_seminars_attendances.currency" type="integer">138834788</label>
+			<label index="tx_seminars_attendances.tax" type="integer">258035818</label>
+			<label index="tx_seminars_attendances.including_tax" type="integer">222008293</label>
+			<label index="tx_seminars_attendances.including_tax.including" type="integer">129466687</label>
+			<label index="tx_seminars_attendances.including_tax.excluding" type="integer">195388725</label>
 			<label index="tx_seminars_attendances.paid" type="integer">108843138</label>
 			<label index="tx_seminars_attendances.datepaid" type="integer">96697020</label>
 			<label index="tx_seminars_attendances.method_of_payment" type="integer">57877766</label>
@@ -1286,6 +1320,14 @@
 			<label index="tx_seminars_categories.title" type="integer">85903807</label>
 			<label index="tx_seminars_skills" type="integer">178756701</label>
 			<label index="tx_seminars_skills.title" type="integer">85903807</label>
+			<label index="tx_seminars_prices" type="integer">236379502</label>
+			<label index="tx_seminars_prices.title" type="integer">85903807</label>
+			<label index="tx_seminars_prices.value" type="integer">181254146</label>
+			<label index="tx_seminars_prices.currency" type="integer">124949959</label>
+			<label index="tx_seminars_prices.tax" type="integer">99791745</label>
+			<label index="tx_seminars_prices.including_tax" type="integer">222008293</label>
+			<label index="tx_seminars_prices.including_tax.including" type="integer">129466687</label>
+			<label index="tx_seminars_prices.including_tax.excluding" type="integer">195388725</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -2120,6 +2162,7 @@
 			<label index="tx_seminars_seminars.partners">Partners:</label>
 			<label index="tx_seminars_seminars.tutors">Tutors:</label>
 			<label index="tx_seminars_seminars.leaders">Leaders:</label>
+			<label index="tx_seminars_seminars.prices">Prices:</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird):</label>
 			<label index="tx_seminars_seminars.price_regular_board">Regular price including full board:</label>
@@ -2168,6 +2211,11 @@
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
 			<label index="tx_seminars_attendances.registration_queue">Is on the registration queue:</label>
 			<label index="tx_seminars_attendances.total_price">Total price for this attendance:</label>
+			<label index="tx_seminars_attendances.currency">Currency of total price:</label>
+			<label index="tx_seminars_attendances.tax">Tax of total price:</label>
+			<label index="tx_seminars_attendances.including_tax">Including/excluding Tax:</label>
+			<label index="tx_seminars_attendances.including_tax.including">including</label>
+			<label index="tx_seminars_attendances.including_tax.excluding">excluding</label>
 			<label index="tx_seminars_attendances.paid">Has paid:</label>
 			<label index="tx_seminars_attendances.datepaid">Date of payment:</label>
 			<label index="tx_seminars_attendances.method_of_payment">Method of payment:</label>
@@ -2247,6 +2295,14 @@
 			<label index="tx_seminars_categories.title">Title:</label>
 			<label index="tx_seminars_skills">Skills</label>
 			<label index="tx_seminars_skills.title">Title:</label>
+			<label index="tx_seminars_prices">Prices</label>
+			<label index="tx_seminars_prices.title">Title:</label>
+			<label index="tx_seminars_prices.value">Value:</label>
+			<label index="tx_seminars_prices.currency">Currency:</label>
+			<label index="tx_seminars_prices.tax">Tax:</label>
+			<label index="tx_seminars_prices.including_tax">Including/excluding Tax:</label>
+			<label index="tx_seminars_prices.including_tax.including">including</label>
+			<label index="tx_seminars_prices.including_tax.excluding">excluding</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
