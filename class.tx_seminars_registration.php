@@ -78,17 +78,22 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	var $checkboxes = array();
 
 	/**
+	 * An array of cached seminar objects with the seminar UIDs as keys and the
+	 * objects as values.
+	 */
+	private static $cachedSeminars = array();
+
+	/**
 	 * The constructor.
 	 *
 	 * @param	object		content object
-	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object. If this parameter is not provided or null, setRegistrationData() needs to be called directly after construction or this object will not be usable.
-	 *
-	 * @access	public
+	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
+	 * 						If this parameter is not provided or null,
+	 * 						setRegistrationData() needs to be called directly
+	 * 						after construction or this object will not be usable.
 	 */
-	function __construct(tslib_cObj $cObj, $dbResult = null) {
-		static $cachedSeminars = array();
-
-		$this->cObj =& $cObj;
+	public function __construct(tslib_cObj $cObj, $dbResult = null) {
+		$this->cObj = $cObj;
 		$this->init();
 
 	 	if ($dbResult) {
@@ -99,21 +104,28 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 			if ($this->isOk()) {
 				$seminarUid = $this->recordData['seminar'];
-				if (isset($cachedSeminars[$seminarUid])) {
-					$this->seminar =& $cachedSeminars[$seminarUid];
+				if (isset(self::$cachedSeminars[$seminarUid])) {
+					$this->seminar = self::$cachedSeminars[$seminarUid];
 				} else {
 					/** Name of the seminar class in case someone subclasses it. */
 					$seminarClassname = t3lib_div::makeInstanceClassName(
 						'tx_seminars_seminar'
 					);
-					$this->seminar =& new $seminarClassname($seminarUid);
-					$cachedSeminars[$seminarUid] =& $this->seminar;
+					$this->seminar = new $seminarClassname($seminarUid);
+					self::$cachedSeminars[$seminarUid] = $this->seminar;
 				}
 
 				// Stores the user data in $this->userData.
 				$this->retrieveUserData();
 			}
 	 	}
+	}
+
+	/**
+	 * Purges our cached seminars array.
+	 */
+	public static function purgeCachedSeminars() {
+		self::$cachedSeminars = array();
 	}
 
 	/**

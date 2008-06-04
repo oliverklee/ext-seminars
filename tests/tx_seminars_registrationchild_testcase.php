@@ -55,6 +55,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			array('seminar' => $this->seminarUid)
 		);
 
+		tx_seminars_registrationchild::purgeCachedSeminars();
 		$this->fixture = new tx_seminars_registrationchild($registrationUid);
 	}
 
@@ -348,6 +349,39 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 					.' AND uid_foreign='.$checkboxesUid
 			),
 			'The relation record cannot be found in the DB.'
+		);
+	}
+
+
+	/////////////////////////////////////////
+	// Tests regarding the cached seminars.
+	/////////////////////////////////////////
+
+	public function testPurgeCachedSeminarsResultsInDifferentDataForSameSeminarUid() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'test title 1')
+		);
+
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $seminarUid)
+		);
+
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$seminarUid,
+			array('title' => 'test title 2')
+		);
+
+		tx_seminars_registrationchild::purgeCachedSeminars();
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertEquals(
+			'test title 2',
+			$fixture->seminar->getTitle()
 		);
 	}
 }
