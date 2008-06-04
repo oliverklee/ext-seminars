@@ -452,12 +452,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 				'confirmationOnRegistrationForQueue'
 			);
 			$this->registration->notifyOrganizers(
-				$plugin,
 				'notificationOnRegistrationForQueue'
 			);
 		} else {
 			$this->registration->notifyAttendee($plugin, 'confirmation');
-			$this->registration->notifyOrganizers($plugin, 'notification');
+			$this->registration->notifyOrganizers('notification');
 		}
 
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
@@ -510,7 +509,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 						'confirmationOnUnregistration'
 					);
 					$this->registration->notifyOrganizers(
-						$plugin,
 						'notificationOnUnregistration'
 					);
 
@@ -564,10 +562,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 						$plugin,
 						'confirmationOnQueueUpdate'
 					);
-					$registration->notifyOrganizers(
-						$plugin,
-						'notificationOnQueueUpdate'
-					);
+					$registration->notifyOrganizers('notificationOnQueueUpdate');
 
 					if (
 						$this->getConfValueBoolean(

@@ -850,7 +850,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Sends an e-mail to all organizers with a message about a registration or
 	 * unregistration.
 	 *
-	 * @param	object		a tslib_pibase object for a live page
 	 * @param	string		prefix for the locallang key of the localized hello
 	 * 						and subject string, allowed values are:
 	 * 						- notification
@@ -862,9 +861,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function notifyOrganizers(
-		tslib_pibase $plugin, $helloSubjectPrefix = 'notification'
-	) {
+	function notifyOrganizers($helloSubjectPrefix = 'notification') {
 		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
 			return;
 		}
