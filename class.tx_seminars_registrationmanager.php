@@ -31,6 +31,7 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
@@ -39,6 +40,8 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.p
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_headerProxyFactory.php');
 
 class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/** Same as class name */
@@ -279,7 +282,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			)
 		) {
 			$message = $this->translate('message_wrongSeminarNumber');
-			header('Status: 404 Not Found');
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				'Status: 404 Not Found'
+			);
 		}
 
 		return $message;

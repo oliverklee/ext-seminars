@@ -45,7 +45,10 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbu
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
+
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_headerProxyFactory.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** same as class name */
@@ -1376,7 +1379,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->translate('message_wrongSeminarNumber')
 			);
 			$result = $this->getSubpart('ERROR_VIEW');
-			header('Status: 404 Not Found');
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				'Status: 404 Not Found'
+			);
 		}
 
 		$this->setMarker(
@@ -2263,7 +2268,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$errorMessage = $this->seminar->canViewRegistrationsListMessage(
 					$this->whatToDisplay
 				);
-				header('Status: 403 Forbidden');
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+					'Status: 403 Forbidden'
+				);
 			}
 		} else {
 			$errorMessage = $this->registrationManager->existsSeminarMessage(
@@ -2654,7 +2661,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 		} else {
 			$result = $eventEditor->hasAccessMessage();
-			header('Status: 403 Forbidden');
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				'Status: 403 Forbidden'
+			);
 		}
 
 		return $result;

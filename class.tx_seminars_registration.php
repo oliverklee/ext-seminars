@@ -32,10 +32,13 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
 require_once(PATH_t3lib.'class.t3lib_refindex.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_mailerFactory.php');
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
@@ -870,10 +873,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * 						- notificationOnQueueUpdate
 	 * 						In the following the parameter is prefixed with
 	 * 						"email_" and postfixed with "Hello" or "Subject".
-	 *
-	 * @access	public
 	 */
-	function notifyOrganizers($helloSubjectPrefix = 'notification') {
+	public function notifyOrganizers($helloSubjectPrefix = 'notification') {
 		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
 			return;
 		}
@@ -934,7 +935,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// "John Doe <john.doe@example.com>".
 		$organizers = $this->seminar->getOrganizersEmail();
 		foreach ($organizers as $currentOrganizerEmail) {
-			t3lib_div::plainMailEncoded(
+			tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
 				$currentOrganizerEmail,
 				$this->translate('email_'.$helloSubjectPrefix.'Subject').': '
 					.$this->getTitle(),
@@ -1391,6 +1392,34 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$languageKey = 'label_'
 			.($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
 		return $this->translate($languageKey);
+	}
+
+	/**
+	 * Gets our referrer.
+	 *
+	 * @return	string		our referrer, may be empty
+	 */
+	public function getReferrer() {
+		return $this->getRecordPropertyString('referrer');
+	}
+
+	/**
+	 * Sets our referrer.
+	 *
+	 * @param	string		our referrer to set, may be empty
+	 */
+	public function setReferrer($referrer) {
+		$this->setRecordPropertyString('referrer', $referrer);
+	}
+
+	/**
+	 * Returns whether this registration has a referrer set.
+	 *
+	 * @return	boolean		true if this registraiton has a referrer set, false
+	 * 						otherwise
+	 */
+	public function hasReferrer() {
+		return $this->hasRecordPropertyString('referrer');
 	}
 }
 

@@ -900,9 +900,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'showAttendanceFieldsInNotificationMail',
 			false,
 			'',
-			'These values specify the registration fields to show in e-mails '
-				.'to organizers. A mistyped field name will cause the field '
-				.'to not get included.',
+			'These values specify the registration fields to show in e-mails ' .
+				'to organizers. A mistyped field name will cause the field ' .
+				'to not get included.',
 			array(
 				'uid',
 				'interests',
@@ -928,7 +928,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'city',
 				'country',
 				'telephone',
-				'email'
+				'email',
+				'referrer',
 			)
 		);
 	}

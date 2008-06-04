@@ -43,11 +43,22 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	private $seminarUid;
 
 	protected function setUp() {
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS,
+			array(
+				'title' => 'test organizer',
+				'email' => 'mail@example.com',
+			)
+		);
+
 		$this->seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			SEMINARS_TABLE_SEMINARS,
+			array('organizers' => $organizerUid)
 		);
 
 		$registrationUid = $this->testingFramework->createRecord(
@@ -57,12 +68,13 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		$this->fixture = new tx_seminars_registrationchild($registrationUid);
+		$this->fixture->setConfigurationValue('templateFile', 'EXT:seminars/seminars.tmpl');
 	}
 
 	protected function tearDown() {
+		tx_oelib_mailerFactory::getInstance()->discardInstance();
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 	public function testIsOk() {
@@ -186,6 +198,14 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			$title,
 			$this->fixture->getRegistrationData('method_of_payment')
+		);
+	}
+
+	public function testGetRegistrationDataWithKeyReferrerReturnsReferrer() {
+		$this->fixture->setReferrer('test referrer');
+		$this->assertEquals(
+			'test referrer',
+			$this->fixture->getRegistrationData('referrer')
 		);
 	}
 
@@ -382,6 +402,56 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'test title 2',
 			$fixture->seminar->getTitle()
+		);
+	}
+
+
+	//////////////////////////////////
+	// Tests regarding the referrer.
+	//////////////////////////////////
+
+	public function testGetReferrerInitiallyReturnsAnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getReferrer()
+		);
+	}
+
+	public function testGetReferrerWithSetReferrerReturnsReferrer() {
+		$this->fixture->setReferrer('test referrer');
+		$this->assertEquals(
+			'test referrer',
+			$this->fixture->getReferrer()
+		);
+	}
+
+	public function testHasReferrerInitiallyReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasReferrer()
+		);
+	}
+
+	public function testHasReferrerWithSetReferrerReturnsTrue() {
+		$this->fixture->setReferrer('test referrer');
+		$this->assertTrue(
+			$this->fixture->hasReferrer()
+		);
+	}
+
+
+	///////////////////////////////////////////////////
+	// Tests regarding the notification of attendees.
+	///////////////////////////////////////////////////
+
+	public function testNotifyOrganizersWithSetReferrerContainsReferrer() {
+		$this->fixture->setReferrer('test referrer');
+		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue('showAttendanceFieldsInNotificationMail', 'referrer');
+
+		$this->fixture->notifyOrganizers();
+		$this->assertContains(
+			'Referrer: test referrer',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
 	}
 }

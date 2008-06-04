@@ -29,9 +29,12 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_headerProxyFactory.php');
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
@@ -72,7 +75,9 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				$result = $this->createAndOutputListOfRegistrations();
 				break;
 			default:
-				header('Status: 404 Not Found');
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+					'Status: 404 Not Found'
+				);
 				$result = $this->translate('message_404');
 				break;
 		}
@@ -83,8 +88,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	/**
 	 * Initializes this object and its configuration getter.
 	 *
- 	 * @param	array		TypoScript configuration for the plugin, may be
- 	 * 						empty
+	 * @param	array		TypoScript configuration for the plugin, may be
+	 * 						empty
 	 */
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
@@ -118,12 +123,16 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				$result = $this->createListOfRegistrations($eventUid);
 			} else {
 				// Access is denied.
-				header('Status: 403 Forbidden');
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+					'Status: 403 Forbidden'
+				);
 				$result = $this->translate('message_403');
 			}
 		} else {
 			// Wrong or missing UID.
-			header('Status: 404 Not Found');
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				'Status: 404 Not Found'
+			);
 			$result = $this->translate('message_404_registrations');
 		}
 
@@ -236,12 +245,16 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				$result = $this->createListOfEvents($pid);
 			} else {
 				// Access is denied.
-				header('Status: 403 Forbidden');
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+					'Status: 403 Forbidden'
+				);
 				$result = $this->translate('message_403');
 			}
 		} else {
 			// Missing PID.
-			header('Status: 404 Not Found');
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				'Status: 404 Not Found'
+			);
 			$result = $this->translate('message_404');
 		}
 
@@ -437,10 +450,11 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 */
 	private function setContentTypeForRegistrationLists() {
 		$this->setCsvContentType();
-		header('Content-disposition: attachment; filename='
-			.$this->configGetter->getConfValueString(
-				'filenameForRegistrationsCsv'
-			),
+		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+			'Content-disposition: attachment; filename=' .
+				$this->configGetter->getConfValueString(
+					'filenameForRegistrationsCsv'
+				),
 			true
 		);
 	}
@@ -451,8 +465,9 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 */
 	private function setContentTypeForEventLists() {
 		$this->setCsvContentType();
-		header('Content-disposition: attachment; filename='
-			.$this->configGetter->getConfValueString('filenameForEventsCsv'),
+		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+			'Content-disposition: attachment; filename=' .
+				$this->configGetter->getConfValueString('filenameForEventsCsv'),
 			true
 		);
 	}
@@ -463,8 +478,11 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	private function setCsvContentType() {
 		// In addition to the CSV content type and the charset, announces that
 		// we provide a CSV header line.
-		header('Content-type: text/csv; header=present; charset='
-			.$this->configGetter->getConfValueString('charsetForCsv'), true);
+		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+			'Content-type: text/csv; header=present; charset=' .
+				$this->configGetter->getConfValueString('charsetForCsv'),
+			true
+		);
 	}
 
 	/**

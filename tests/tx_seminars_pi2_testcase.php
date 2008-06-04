@@ -29,12 +29,14 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
 
 require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_headerProxyFactory.php');
 
 class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -46,6 +48,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	private $eventUid;
 
 	public function setUp() {
+		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -60,9 +63,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
+		tx_oelib_headerProxyFactory::getInstance()->discardInstance();
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 
@@ -117,11 +120,6 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_SEMINARS;
 		$this->fixture->piVars['pid'] = $this->pid;
 
-		// This will create a "Cannot modify header information - headers
-		// already sent by" warning because the called function sets a HTTP
-		// header. This is no error.
-		// The warning will go away once bug 1649 is fixed.
-		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
 		$this->assertEquals(
 			'"uid"'.CRLF
 				.'"'.((string) $this->eventUid).'"'.CRLF,
@@ -157,11 +155,6 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['pid'] = $this->pid;
 
-		// This will create a "Cannot modify header information - headers
-		// already sent by" warning because the called function sets a HTTP
-		// header. This is no error.
-		// The warning will go away once bug 1649 is fixed.
-		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
 		$this->assertEquals(
 			'"uid"'.CRLF
 				.'"'.((string) $this->eventUid).'"'.CRLF
@@ -230,11 +223,6 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
 		$this->fixture->piVars['seminar'] = $this->eventUid;
 
-		// This will create a "Cannot modify header information - headers
-		// already sent by" warning because the called function sets a HTTP
-		// header. This is no error.
-		// The warning will go away once bug 1649 is fixed.
-		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
 		$this->assertEquals(
 			'"","uid"'.CRLF
 				.'"'.((string) $registrationUid).'"'.CRLF,
@@ -284,16 +272,36 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['seminar'] = $this->eventUid;
 
-		// This will create a "Cannot modify header information - headers
-		// already sent by" warning because the called function sets a HTTP
-		// header. This is no error.
-		// The warning will go away once bug 1649 is fixed.
-		// @see https://bugs.oliverklee.com/show_bug.cgi?id=1649
 		$this->assertEquals(
 			'"","uid"'.CRLF
 				.'"'.((string) $firstRegistrationUid).'"'.CRLF
 				.'"'.((string) $secondRegistrationUid).'"'.CRLF,
 			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testMainCanExportOneReferrer() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'referrer'
+		);
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'referrer' => 'test referrer',
+			)
+		);
+
+		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertEquals(
+			'"","referrer"'.CRLF
+				.'"test referrer"'.CRLF,
+			$this->fixture->main(null, array())
 		);
 	}
 }
