@@ -1008,7 +1008,7 @@ $TCA['tx_seminars_speakers'] = array(
 $TCA['tx_seminars_attendances'] = array(
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,total_price,currency,tax,including_tax,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes'
+		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,total_price,currency,tax,including_tax,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes,referrer'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -1448,10 +1448,20 @@ $TCA['tx_seminars_attendances'] = array(
 				'cols' => '30',
 				'rows' => '5'
 			)
-		)
+		),
+		'referrer' => array(
+			'exlude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.referrer',
+			'config' => array(
+				'type' => 'input',
+				'size' => '20',
+				'max' => '255',
+				'eval' => 'trim',
+			),
+		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, uid, user;;;;1-1-1, seminar, registration_queue, price, seats, total_price, currency, tax, including_tax, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes')
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, uid, user;;;;1-1-1, seminar, registration_queue, price, seats, total_price, currency, tax, including_tax, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes, referrer')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

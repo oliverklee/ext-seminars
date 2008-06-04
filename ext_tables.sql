@@ -337,6 +337,7 @@ CREATE TABLE tx_seminars_attendances (
 	notes text,
 	kids int(11) unsigned DEFAULT '0' NOT NULL,
 	checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
+	referrer varchar(255) DEFAULT '' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
