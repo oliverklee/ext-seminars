@@ -15,10 +15,10 @@
 			<label index="seminars.pi_flexform.seminar_list">Event List</label>
 			<label index="seminars.pi_flexform.topic_list">Topic List</label>
 			<label index="seminars.pi_flexform.my_events">My Events</label>
-			<label index="seminars.pi_flexform.my_vip_events">My VIP Events</label>
+			<label index="seminars.pi_flexform.my_vip_events">My Editable Events</label>
 			<label index="seminars.pi_flexform.seminar_registration">Event Registration</label>
 			<label index="seminars.pi_flexform.list_registrations">List of Registrations (for attendees)</label>
-			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
+			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for editors)</label>
 			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
 			<label index="seminars.pi_flexform.countdown">Countdown to the next event</label>
@@ -30,7 +30,7 @@
 			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
 			<label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations (for attendees):</label>
-			<label index="seminars.pi_flexform.registrationsVipListPID">Page that contains the list of registrations (for VIPs):</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID">Page that contains the list of registrations (for editors):</label>
 			<label index="seminars.pi_flexform.salutation">Salutation mode on the page:</label>
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
@@ -51,7 +51,7 @@
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
 			<label index="seminars.pi_flexform.sortListViewByCategory">Sort the list view by category:</label>
-			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Editors default FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>
@@ -80,8 +80,8 @@
 			<label index="pi_list_searchBox_search">Search</label>
 			<label index="label_myevents_formal">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
-			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents_formal">You are an editor for the following events:</label>
+			<label index="label_myvipevents_informal">You are an editor for the following events:</label>
 			<label index="label_myenteredevents_formal">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_category">Category</label>
@@ -478,10 +478,10 @@
 			<label index="seminars.pi_flexform.seminar_list">Veranstaltungsliste</label>
 			<label index="seminars.pi_flexform.topic_list">Themenliste</label>
 			<label index="seminars.pi_flexform.my_events">Meine Veranstaltungen</label>
-			<label index="seminars.pi_flexform.my_vip_events">Meine VIP-Veranstaltungen</label>
+			<label index="seminars.pi_flexform.my_vip_events">Meine editierbaren Veranstaltungen</label>
 			<label index="seminars.pi_flexform.seminar_registration">Veranstaltungsanmeldung</label>
 			<label index="seminars.pi_flexform.list_registrations">Liste der Anmeldungen (für TeilnehmerInnen)</label>
-			<label index="seminars.pi_flexform.list_vip_registrations">Liste der Anmeldungen (für VIPs)</label>
+			<label index="seminars.pi_flexform.list_vip_registrations">Liste der Anmeldungen (für Bearbeiter)</label>
 			<label index="seminars.pi_flexform.event_editor">Veranstaltungs-Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Veranstaltungen, die ich eingegeben habe</label>
 			<label index="seminars.pi_flexform.countdown">Countdown zur nächsten Veranstaltung</label>
@@ -493,7 +493,7 @@
 			<label index="seminars.pi_flexform.registerPID">Seite mit der Seminaranmeldung:</label>
 			<label index="seminars.pi_flexform.loginPID">Seite mit dem Login-Formular:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Seite mit der Liste der Anmeldungen (für TeilnehmerInnen):</label>
-			<label index="seminars.pi_flexform.registrationsVipListPID">Seite mit der Liste der Anmeldungen (für VIPs):</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID">Seite mit der Liste der Anmeldungen (für Bearbeiter):</label>
 			<label index="seminars.pi_flexform.salutation">Anredeform auf der Seite:</label>
 			<label index="seminars.pi_flexform.formal">formell</label>
 			<label index="seminars.pi_flexform.informal">informell</label>
@@ -514,7 +514,7 @@
 			<label index="seminars.pi_flexform.hidePageBrowser">Page-Browser in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Abgesagte Veranstaltungen in der Listenansicht nicht anzeigen:</label>
 			<label index="seminars.pi_flexform.sortListViewByCategory">Listenansicht nach Kategorien sortieren:</label>
-			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Standard VIPs Benutzergruppe:</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Bearbeiter Standard Benutzergruppe:</label>
 			<label index="seminars.pi_flexform.hideColumns">Versteckte Felder in Listenansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">&quot;Preis&quot; als Überschrift für den Standardpreis in der Listenansicht benutzen:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">&quot;Preis&quot; als Überschrift für den Standardpreis in der Einzelansicht und bei der Anmeldung benutzen:</label>
@@ -543,8 +543,8 @@
 			<label index="pi_list_searchBox_search">Suchen</label>
 			<label index="label_myevents_formal">Sie sind für die folgenden Veranstaltungen angemeldet:</label>
 			<label index="label_myevents_informal">Du bist für die folgenden Veranstaltungen angemeldet:</label>
-			<label index="label_myvipevents_formal">Sie sind für die folgenden Veranstaltungen als VIP eingetragen:</label>
-			<label index="label_myvipevents_informal">Du bist für die folgenden Veranstaltungen als VIP eingetragen:</label>
+			<label index="label_myvipevents_formal">Sie sind für die folgenden Veranstaltungen als Bearbeiter eingetragen:</label>
+			<label index="label_myvipevents_informal">Du bist für die folgenden Veranstaltungen als Bearbeiter eingetragen:</label>
 			<label index="label_myenteredevents_formal">Sie haben die folgenden Veranstaltungen eingetragen:</label>
 			<label index="label_myenteredevents_informal">Du hast die folgenden Veranstaltungen eingetragen:</label>
 			<label index="label_category">Kategorie</label>
@@ -1866,10 +1866,10 @@
 			<label index="seminars.pi_flexform.seminar_list" type="integer">98496595</label>
 			<label index="seminars.pi_flexform.topic_list" type="integer">105969965</label>
 			<label index="seminars.pi_flexform.my_events" type="integer">25497076</label>
-			<label index="seminars.pi_flexform.my_vip_events" type="integer">60045914</label>
+			<label index="seminars.pi_flexform.my_vip_events" type="integer">182142581</label>
 			<label index="seminars.pi_flexform.seminar_registration" type="integer">146873320</label>
 			<label index="seminars.pi_flexform.list_registrations" type="integer">258526278</label>
-			<label index="seminars.pi_flexform.list_vip_registrations" type="integer">4335826</label>
+			<label index="seminars.pi_flexform.list_vip_registrations" type="integer">59131280</label>
 			<label index="seminars.pi_flexform.event_editor" type="integer">243089187</label>
 			<label index="seminars.pi_flexform.my_entered_events" type="integer">100155450</label>
 			<label index="seminars.pi_flexform.countdown" type="integer">104673252</label>
@@ -1881,7 +1881,7 @@
 			<label index="seminars.pi_flexform.registerPID" type="integer">266659950</label>
 			<label index="seminars.pi_flexform.loginPID" type="integer">140600031</label>
 			<label index="seminars.pi_flexform.registrationsListPID" type="integer">169223862</label>
-			<label index="seminars.pi_flexform.registrationsVipListPID" type="integer">64223433</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID" type="integer">207874936</label>
 			<label index="seminars.pi_flexform.salutation" type="integer">166511775</label>
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
@@ -1900,7 +1900,7 @@
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists" type="integer">27709563</label>
 			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
 			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
-			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID" type="integer">91800914</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID" type="integer">12789279</label>
 			<label index="seminars.pi_flexform.hideColumns" type="integer">70702598</label>
 			<label index="seminars.pi_flexform.generalPriceInList" type="integer">150285299</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle" type="integer">30481588</label>
@@ -1931,8 +1931,8 @@
 			<label index="pi_list_searchBox_search" type="integer">20138052</label>
 			<label index="label_myevents_formal" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
-			<label index="label_myvipevents_formal" type="integer">74285293</label>
-			<label index="label_myvipevents_informal" type="integer">74285293</label>
+			<label index="label_myvipevents_formal" type="integer">40545818</label>
+			<label index="label_myvipevents_informal" type="integer">40545818</label>
 			<label index="label_myenteredevents_formal" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_category" type="integer">61717939</label>
@@ -3023,10 +3023,10 @@
 			<label index="seminars.pi_flexform.seminar_list">Event List</label>
 			<label index="seminars.pi_flexform.topic_list">Topic List</label>
 			<label index="seminars.pi_flexform.my_events">My Events</label>
-			<label index="seminars.pi_flexform.my_vip_events">My VIP Events</label>
+			<label index="seminars.pi_flexform.my_vip_events">My Editable Events</label>
 			<label index="seminars.pi_flexform.seminar_registration">Event Registration</label>
 			<label index="seminars.pi_flexform.list_registrations">List of Registrations (for attendees)</label>
-			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for VIPs)</label>
+			<label index="seminars.pi_flexform.list_vip_registrations">List of Registrations (for editors)</label>
 			<label index="seminars.pi_flexform.event_editor">Event Editor</label>
 			<label index="seminars.pi_flexform.my_entered_events">Events which I have entered</label>
 			<label index="seminars.pi_flexform.countdown">Countdown to the next event</label>
@@ -3038,7 +3038,7 @@
 			<label index="seminars.pi_flexform.registerPID">Page that contains the event registration form:</label>
 			<label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations (for attendees):</label>
-			<label index="seminars.pi_flexform.registrationsVipListPID">Page that contains the list of registrations (for VIPs):</label>
+			<label index="seminars.pi_flexform.registrationsVipListPID">Page that contains the list of registrations (for editors):</label>
 			<label index="seminars.pi_flexform.salutation">Salutation mode on the page:</label>
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
@@ -3059,7 +3059,7 @@
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
 			<label index="seminars.pi_flexform.sortListViewByCategory">Sort the list view by category:</label>
-			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Default VIPs FE user group:</label>
+			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID">Editors default FE user group:</label>
 			<label index="seminars.pi_flexform.hideColumns">Hide column names in list view (comma-separated):</label>
 			<label index="seminars.pi_flexform.generalPriceInList">Use &quot;Price&quot; as column title for the standard price in the list view:</label>
 			<label index="seminars.pi_flexform.generalPriceInSingle">Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</label>
@@ -3088,8 +3088,8 @@
 			<label index="pi_list_searchBox_search">Search</label>
 			<label index="label_myevents_formal">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
-			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents_formal">You are an editor for the following events:</label>
+			<label index="label_myvipevents_informal">You are an editor for the following events:</label>
 			<label index="label_myenteredevents_formal">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_category">Category</label>
