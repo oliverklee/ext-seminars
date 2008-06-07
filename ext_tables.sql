@@ -223,6 +223,7 @@ CREATE TABLE tx_seminars_seminars (
 	checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
 	uses_terms_2 tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	notes text,
+	attached_files text,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)

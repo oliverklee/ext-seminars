@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1944] Feature: Add a file upload to the TCEforms of events in the backend
 - [#1948] Change: Change the term "VIP"
 - [#1940] Feature: Allow using the referrer in the registration CSV export and the e-mail to the organizers
 - [#1939] Feature: Add a one-line text input field "referer" to the registration records

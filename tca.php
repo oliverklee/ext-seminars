@@ -134,7 +134,7 @@ $TCA['tx_seminars_test'] = array(
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,prices,price_regular,price_special,payment_methods,organizers,organizing_partners,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,owner_feuser,vips,notes'
+		'showRecordFieldList' => 'hidden,starttime,endtime,title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,place,room,speakers,prices,price_regular,price_special,payment_methods,organizers,organizing_partners,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,owner_feuser,vips,notes,attached_files'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -810,39 +810,54 @@ $TCA['tx_seminars_seminars'] = array(
 			'config' => array(
 				'type' => 'text',
 				'cols' => '30',
-				'rows' => '5'
-			)
-		)
+				'rows' => '5',
+			),
+		),
+		'attached_files' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attached_files',
+			'config' => Array (
+				'type' => 'group',
+				'internal_type' => 'file',
+				'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+				'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
+				'uploadfolder' => 'uploads/tx_seminars/',
+				'size' => '5',
+				'maxitems' => '200',
+				'minitems' => '0',
+				'autoSizeMax' => 40,
+			),
+		),
 	),
 	'types' => array(
 		// Single event
 		'0' => array('showitem' => '' .
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, categories, teaser;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, owner_feuser, vips, notes, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, attendees_min, attendees_max, queue_size, target_groups, skip_collision_check, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, categories, teaser;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, owner_feuser, vips, notes, attached_files, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, attendees_min, attendees_max, queue_size, target_groups, skip_collision_check, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods',
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, categories, teaser;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods'
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, subtitle;;;;3-3-3, categories, teaser;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods',
 		),
 		// Multiple event date
 		'2' => array('showitem' =>
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, language, accreditation_number, cancelled, vips, notes, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, attendees_min, attendees_max, queue_size, skip_collision_check, '
-				.'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods'
-		)
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, hidden;;1;;1-1-1, title;;;;2-2-2, topic, language, accreditation_number, cancelled, vips, notes, attached_files, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, attendees_min, attendees_max, queue_size, skip_collision_check, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods',
+		),
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'starttime, endtime')
+		'1' => array('showitem' => 'starttime, endtime'),
 	)
 );
 
