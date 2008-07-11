@@ -52,7 +52,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->pid = $this->testingFramework->createSystemFolder();
 		$this->eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->pid)
+			array(
+				'pid' => $this->pid,
+				'sorting' => 1,
+				'begin_date' => mktime(),
+			)
 		);
 
 		$this->fixture = new tx_seminars_pi2();
@@ -135,7 +139,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$secondEventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->pid)
+			array(
+				'pid' => $this->pid,
+				'sorting' => 2,
+				'begin_date' => mktime() - 3600,
+			)
 		);
 
 		$this->assertEquals(
@@ -152,7 +160,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$secondEventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
-			array('pid' => $this->pid)
+			array(
+				'pid' => $this->pid,
+				'sorting' => 2,
+				'begin_date' => mktime() - 3600,
+			)
 		);
 
 		$this->fixture->piVars['pid'] = $this->pid;
