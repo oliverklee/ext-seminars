@@ -31,14 +31,14 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(PATH_tslib.'class.tslib_content.php');
-require_once(PATH_tslib.'class.tslib_feuserauth.php');
-require_once(PATH_t3lib.'class.t3lib_timetrack.php');
+require_once(PATH_tslib . 'class.tslib_content.php');
+require_once(PATH_tslib . 'class.tslib_feuserauth.php');
+require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
 
-require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_pi1.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationmanager.php');
 
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
 class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -1429,6 +1429,164 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'tx_seminars_pi1[category]='.$categoryUid,
 			$this->fixture->createCategoryList()
+		);
+	}
+
+
+	//////////////////////////////////////////////////////////
+	// Tests concerning limiting the list view to categories
+	//////////////////////////////////////////////////////////
+
+	public function testListViewLimitedToCategoriesIgnoresEventsWithoutCategory() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->fixture->setConfigurationValue(
+			'limitListViewToCategories', $categoryUid
+		);
+
+		$this->assertNotContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewLimitedToCategoriesContainsEventsWithMultipleSelectedCategories() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid1, $categoryUid1
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with another category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid2, $categoryUid2
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToCategories', $categoryUid1 . ',' . $categoryUid2
+		);
+
+		$result = $this->fixture->main('', array());
+		$this->assertContains(
+			'Event with category',
+			$result
+		);
+		$this->assertContains(
+			'Event with another category',
+			$result
+		);
+	}
+
+	public function testListViewLimitedToCategoriesIgnoresEventsWithNotSelectedCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid1
+		);
+
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'another category')
+		);
+		$this->fixture->setConfigurationValue(
+			'limitListViewToCategories', $categoryUid2
+		);
+
+		$this->assertNotContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewForSingleCategoryOverridesLimitToCategories() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid1, $categoryUid1
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with another category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid2, $categoryUid2
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToCategories', $categoryUid1
+		);
+		$this->fixture->piVars['category'] = $categoryUid2;
+
+		$result = $this->fixture->main('', array());
+		$this->assertNotContains(
+			'Event with category',
+			$result
+		);
+		$this->assertContains(
+			'Event with another category',
+			$result
 		);
 	}
 }

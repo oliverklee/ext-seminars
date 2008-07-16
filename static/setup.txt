@@ -282,6 +282,10 @@ plugin.tx_seminars_pi1 {
 	# whether canceled events should be hidden or not
 	hideCanceledEvents = 0
 
+	# comma-separated list of UIDs to filter the list view for, leave empty to
+	# have no such filter
+	limitListViewToCategories =
+
 	# whether the list view should always be sorted by category (before applying
 	# the normal sorting)
 	sortListViewByCategory = 0

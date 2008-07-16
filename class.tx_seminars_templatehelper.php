@@ -629,6 +629,34 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 			$this->cObj->start('');
 		}
 	 }
+
+	/**
+	 * Sets a configuration value.
+	 *
+	 * This function is intended to be used for testing purposes only.
+	 *
+	 * @param	string		key of the configuration property to set, must not
+	 * 						be empty
+	 * @param	mixed		value of the configuration property, may be empty or
+	 * 						zero
+	 */
+	public function setConfigurationValue($key, $value) {
+		if ($key == '') {
+			throw new Exception('$key must not be empty');
+		}
+
+		$this->ensureConfigurationArray();
+		$this->conf[$key] = $value;
+	}
+
+	/**
+	 * Ensures that $this->conf is set and that it is an array.
+	 */
+	private function ensureConfigurationArray() {
+		if (!is_array($this->conf)) {
+			$this->conf = array();
+		}
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_templatehelper.php']) {

@@ -48,7 +48,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registra
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_headerProxyFactory.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
 
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** same as class name */
@@ -426,11 +426,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$builder->ignoreCanceledEvents();
 		}
 
-		if (isset($this->piVars['category'])) {
-			$builder->limitToCategory(intval($this->piVars['category']));
+		if (isset($this->piVars['category'])
+			&& (intval($this->piVars['category']) > 0)
+		) {
+			$builder->limitToCategories(intval($this->piVars['category']));
+		} else {
+			$builder->limitToCategories(
+				$this->getConfValueString(
+					'limitListViewToCategories', 's_listView'
+				)
+			);
 		}
 
-		$result .= ' AND '.$builder->getWhereClause();
+		$result .= ' AND ' . $builder->getWhereClause();
 
 		return $result;
 	}

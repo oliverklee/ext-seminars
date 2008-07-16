@@ -36,8 +36,8 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_oe_configcheck.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_oe_configcheck.php');
 
 class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	/**
@@ -272,6 +272,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
 		$this->checkDefaultEventVipsFeGroupID();
+		$this->checkLimitListViewToCategories();
 	}
 
  	/**
@@ -1950,6 +1951,21 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies which fixed single event should be shown. If '
 				.'this value is not set correctly, an error message will be '
 				.'shown instead.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * limitListViewToCategories.
+	 */
+	private function checkLimitListViewToCategories() {
+		$this->checkIfPidListOrEmpty(
+			'limitListViewToCategories',
+			true,
+			's_listView',
+			'This value specifies the categories by which the list view ' .
+				'should be filtered. If this value is not set correctly, some ' .
+				'events might unintentionally get hidden or shown.'
 		);
 	}
 }

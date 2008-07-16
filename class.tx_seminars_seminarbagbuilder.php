@@ -33,9 +33,9 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
 
 class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
@@ -74,30 +74,33 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events from the category with the UID provided as the
 	 * parameter $categoryUid.
 	 *
-	 * @param	integer		UID of the category which the bag should limited to,
-	 * 						must be > 0
+	 * @param	string		comma-separated list of UIDs of the categories which
+	 * 						the bag should be limited to, set to an empty string
+	 * 						for no limitation
 	 */
-	public function limitToCategory($categoryUid) {
-		if ($categoryUid <= 0) {
+	public function limitToCategories($categoryUids) {
+		if ($categoryUids == '') {
 			return;
 		}
 
 		$this->whereClauseParts['category']
-			= '(object_type='.SEMINARS_RECORD_TYPE_COMPLETE.' AND '
-			.'EXISTS (SELECT * FROM '
-			.SEMINARS_TABLE_CATEGORIES_MM.' WHERE '
-			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local='
-			.SEMINARS_TABLE_SEMINARS.'.uid AND '
-			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='.$categoryUid
-			.'))'
-			.' OR '
-			.'(object_type='.SEMINARS_RECORD_TYPE_DATE.' AND '
-			.'EXISTS (SELECT * FROM '
-			.SEMINARS_TABLE_CATEGORIES_MM.' WHERE '
-			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local='
-			.SEMINARS_TABLE_SEMINARS.'.topic AND '
-			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='.$categoryUid
-			.'))';
+			= '(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
+			'EXISTS (SELECT * FROM ' .
+			SEMINARS_TABLE_CATEGORIES_MM . ' WHERE ' .
+			SEMINARS_TABLE_CATEGORIES_MM . '.uid_local=' .
+			SEMINARS_TABLE_SEMINARS . '.uid AND ' .
+			SEMINARS_TABLE_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
+			')' .
+			'))' .
+			' OR ' .
+			'(object_type=' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			'EXISTS (SELECT * FROM ' .
+			SEMINARS_TABLE_CATEGORIES_MM . ' WHERE ' .
+			SEMINARS_TABLE_CATEGORIES_MM . '.uid_local=' .
+			SEMINARS_TABLE_SEMINARS . '.topic AND ' .
+			SEMINARS_TABLE_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
+			')' .
+			'))';
 	}
 
 	/**

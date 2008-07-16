@@ -251,6 +251,28 @@
 				</el>
 			</ROOT>
 		</sDEF>
+		<s_listView>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_list_view</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<limitListViewToCategories>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToCategories</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_seminars_categories</foreign_table>
+								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<maxitems>100</maxitems>
+								<renderMode>checkbox</renderMode>
+							</config>
+						</TCEforms>
+					</limitListViewToCategories>
+				</el>
+			</ROOT>
+		</s_listView>
 		<s_template_special>
 			<ROOT>
 				<TCEforms>
