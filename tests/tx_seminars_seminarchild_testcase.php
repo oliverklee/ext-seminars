@@ -70,6 +70,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->beginDate = ($this->currentTimestamp + ONE_WEEK);
 		$this->unregistrationDeadline = ($this->currentTimestamp + ONE_WEEK);
 		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
+
 		$this->pi1 = new tx_seminars_pi1();
 		$this->pi1->fakeFrontEnd();
 		$this->pi1->init(
@@ -82,6 +83,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
+				'title' => 'a test event',
 				'deadline_unregistration' => $this->unregistrationDeadline,
 				'attendees_min' => 5,
 				'attendees_max' => 10,
@@ -3666,9 +3668,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////
-	// Tests for the detail view URL
-	//////////////////////////////////
+	////////////////////////////////////
+	// Tests for the detailed view URL
+	////////////////////////////////////
 
 	public function testGetDetailedViewUrlCanReturnAbsoluteUrlStartingWithHttp() {
 		$this->assertRegExp(
