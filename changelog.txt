@@ -1,4 +1,5 @@
 0.6.2 (currently working on)
+- [#1977] Change: add some unit tests
 - [#1894] Change: Only reset the auto_increment value if it is much higher than the highest UID
 
 0.6.1 (released 2008-05-30)
