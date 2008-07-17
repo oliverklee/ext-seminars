@@ -71,8 +71,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	}
 
 	/**
-	 * Limits the bag to events from the category with the UID provided as the
-	 * parameter $categoryUid.
+	 * Limits the bag to events from any of the categories with the UIDs
+	 * provided as the parameter $categoryUids.
 	 *
 	 * @param	string		comma-separated list of UIDs of the categories which
 	 * 						the bag should be limited to, set to an empty string
@@ -83,7 +83,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			return;
 		}
 
-		$this->whereClauseParts['category']
+		$this->whereClauseParts['categories']
 			= '(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
 			'EXISTS (SELECT * FROM ' .
 			SEMINARS_TABLE_CATEGORIES_MM . ' WHERE ' .
@@ -99,6 +99,31 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			SEMINARS_TABLE_CATEGORIES_MM . '.uid_local=' .
 			SEMINARS_TABLE_SEMINARS . '.topic AND ' .
 			SEMINARS_TABLE_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
+			')' .
+			'))';
+	}
+
+	/**
+	 * Limits the bag to events at any of the places with the UIDs provided as
+	 * the parameter $placeUids.
+	 *
+	 * @param	string		comma-separated list of UIDs of the placed which
+	 * 						the bag should be limited to, set to an empty string
+	 * 						for no limitation
+	 */
+	public function limitToPlaces($placeUids) {
+		if ($placeUids == '') {
+			return;
+		}
+
+		$this->whereClauseParts['places']
+			= '(object_type IN(' . SEMINARS_RECORD_TYPE_COMPLETE . ',' .
+			SEMINARS_RECORD_TYPE_DATE . ') AND ' .
+			'EXISTS (SELECT * FROM ' .
+			SEMINARS_TABLE_SITES_MM . ' WHERE ' .
+			SEMINARS_TABLE_SITES_MM . '.uid_local=' .
+			SEMINARS_TABLE_SEMINARS . '.uid AND ' .
+			SEMINARS_TABLE_SITES_MM . '.uid_foreign IN(' . $placeUids .
 			')' .
 			'))';
 	}
