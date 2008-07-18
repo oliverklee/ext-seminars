@@ -222,14 +222,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * not set or 0, the link will point to the list view page.
 	 *
 	 * @param	object		a tslib_pibase object for a live page
-	 * @param	string		the name of the field to retrieve and wrap, may not
+	 * @param	string		the name of the field to retrieve and wrap, must not
 	 * 						be empty
 	 *
 	 * @return	string		HTML code for the link to the event details page
-	 *
-	 * @access	public
 	 */
-	function getLinkedFieldValue(tslib_pibase $plugin, $fieldName) {
+	public function getLinkedFieldValue(tslib_pibase $plugin, $fieldName) {
 		$linkedText = '';
 
 		// Certain fields can be retrieved 1:1 from the database, some need
@@ -243,9 +241,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		return $plugin->cObj->getTypoLink(
+		return $plugin->cObj->typoLink(
 			$linkedText,
-			$this->getDetailedViewUrl($plugin, false)
+			$this->getDetailedViewLinkConfiguration($plugin)
 		);
 	}
 
@@ -2624,24 +2622,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is
 	 * not set or 0, the link will use the current page's PID.
 	 *
-	 * @param	object		a plugin object for a live page
+	 * @param	tslib_pibase	a plugin object for a live page
 	 * @param	boolean		true to create a full URL including the host instead
 	 * 						of just a URI without the host
 	 *
 	 * @return	string		URL of the seminar details page
 	 */
-	public function getDetailedViewUrl(tslib_pibase $plugin, $createFullUrl = true) {
+	public function getDetailedViewUrl(
+		tslib_pibase $plugin, $createFullUrl = true
+	) {
 		$result = $plugin->cObj->typoLink_URL(
-			array(
-				'parameter' => $plugin->getConfValueInteger('detailPID'),
-				'additionalParams' => t3lib_div::implodeArrayForUrl(
-					'tx_seminars_pi1',
-					array('showUid' => $this->getUid()),
-					'',
-					false,
-					true
-				),
-			)
+			$this->getDetailedViewLinkConfiguration($plugin)
 		);
 
 		// XXX We need to do this workaround of manually encoding brackets in
@@ -2658,6 +2649,28 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Gets the TYPO3 link configuration for this event's detail page. This will
+	 * be the general details page.
+	 *
+	 * @param	tslib_pibase	a plugin object for a live page
+	 *
+	 * @return	array		configuration for cObj->typoLink/typoLink_URL,
+	 * 						will not be empty
+	 */
+	public function getDetailedViewLinkConfiguration(tslib_pibase $plugin) {
+		return array(
+			'parameter' => $plugin->getConfValueInteger('detailPID'),
+			'additionalParams' => t3lib_div::implodeArrayForUrl(
+				'tx_seminars_pi1',
+				array('showUid' => $this->getUid()),
+				'',
+				false,
+				true
+			)
+		);
 	}
 
 	/**

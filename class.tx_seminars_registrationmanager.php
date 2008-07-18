@@ -144,7 +144,8 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * @param	object		a seminar for which we'll check if it is possible to
 	 * 						register
 	 *
-	 * @return	boolean		true if the user could register for the given event, false otherwise
+	 * @return	boolean		true if the user could register for the given event,
+	 * 						false otherwise
 	 *
 	 * @access	protected
 	 */
@@ -166,20 +167,34 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * makes sense (ie. the seminar still has vacancies, the user hasn't
 	 * registered for this seminar etc.).
 	 *
-	 * @param	object		a tslib_pibase object for a live page
-	 * @param	object		a seminar for which we'll check if it is possible
-	 * 						to register (may be null), if this is not set, the
-	 * 						seminar UID parameter will be disregarded
+	 * @param	tx_seminars_salutationswitcher		an object for a live page
+	 * @param	tx_seminars_seminar		a seminar for which we'll check if it is
+	 * 									possible to register
 	 *
 	 * @return	string		HTML code with the link
-	 *
-	 * @access	public
 	 */
-	function getLinkToRegistrationOrLoginPage(
-		tslib_pibase $plugin, tx_seminars_seminar $seminar = null
+	public function getLinkToRegistrationOrLoginPage(
+		tx_seminars_salutationswitcher $plugin, tx_seminars_seminar $seminar
 	) {
-		$label = '';
+		$label = $this->getRegistrationLabel($plugin, $seminar);
 
+		return $this->getLinkToStandardRegistrationOrLoginPage(
+				$plugin, $seminar, $label
+		);
+	}
+
+	/**
+	 * Creates the label for the registration link.
+	 *
+	 * @param	tx_seminars_salutationswitcher		an object for a live page
+	 * @param	tx_seminars_seminar		a seminar to which the registration
+	 * 									should relate
+	 *
+	 * @return	string		label for the registration link, will not be empty
+	 */
+	private function getRegistrationLabel(
+		tx_seminars_salutationswitcher $plugin, tx_seminars_seminar $seminar
+	) {
 		if (!$seminar->hasVacancies()
 			&& $seminar->hasVacanciesOnRegistrationQueue()
 		) {
@@ -191,8 +206,29 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$label = $plugin->translate('label_onlineRegistration');
 		}
 
+		return $label;
+	}
+
+	/**
+	 * Creates an HTML link to either the registration page (if a user is
+	 * logged in) or the login page (if no user is logged in).
+	 *
+	 * This function only creates the link to the standard registration or login
+	 * page.
+	 *
+	 * @param	tx_seminars_salutationswitcher		an object for a live page
+	 * @param	tx_seminars_seminar		a seminar for which we'll check if it is
+	 * 									possible to register
+	 * @param	string		label for the link, will not be empty
+	 *
+	 * @return	string		HTML code with the link
+	 */
+	private function getLinkToStandardRegistrationOrLoginPage(
+		tx_seminars_salutationswitcher $plugin, tx_seminars_seminar $seminar,
+		$label
+	) {
 		if ($this->isLoggedIn()) {
-			// provide the registration link
+			// provides the registration link
 			$result = $plugin->cObj->getTypoLink(
 				$label,
 				$plugin->getConfValueInteger('registerPID'),
@@ -202,7 +238,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 				)
 			);
 		} else {
-			// provide the login link
+			// provides the login link
 			$result = $plugin->getLoginLink(
 				$label,
 				$plugin->getConfValueInteger('registerPID'),

@@ -3668,6 +3668,24 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////
+	// Tests for getDetailedViewLinkConfiguration
+	///////////////////////////////////////////////
+
+	public function testGetDetailedViewLinkConfigurationReturnsGeneralDetailsAndSeminarParameterPageByDefault() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+
+		$this->assertEquals(
+			array(
+				'parameter' => (string) $this->frontEndPageUid,
+				'additionalParams' => '&tx_seminars_pi1%5BshowUid%5D=' .
+					$this->fixture->getUid(),
+			),
+			$this->fixture->getDetailedViewLinkConfiguration($this->pi1)
+		);
+	}
+
+
 	////////////////////////////////////
 	// Tests for the detailed view URL
 	////////////////////////////////////
@@ -3695,6 +3713,25 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			'http://',
 			$this->fixture->getDetailedViewUrl($this->pi1, false)
+		);
+	}
+
+
+	//////////////////////////////////
+	// Tests for getLinkedFieldValue
+	//////////////////////////////////
+
+	public function testGetLinkedFieldValueForTitleCreatesLinkTag() {
+		$this->assertContains(
+			'<a ',
+			$this->fixture->getLinkedFieldValue($this->pi1, 'title')
+		);
+	}
+
+	public function testGetLinkedFieldValueForTitleCreatesRelativeLink() {
+		$this->assertNotContains(
+			'http',
+			$this->fixture->getLinkedFieldValue($this->pi1, 'title')
 		);
 	}
 }
