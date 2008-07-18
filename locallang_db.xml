@@ -34,6 +34,7 @@
 			<label index="tx_seminars_seminars.language">Language:</label>
 			<label index="tx_seminars_seminars.accreditation_number">Accreditation number:</label>
 			<label index="tx_seminars_seminars.credit_points">Credit points:</label>
+			<label index="tx_seminars_seminars.details_page">Page with the details view:</label>
 			<label index="tx_seminars_seminars.additional_information">Additional information:</label>
 			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form:</label>
@@ -210,6 +211,7 @@
 			<label index="tx_seminars_seminars.language">Sprache:</label>
 			<label index="tx_seminars_seminars.accreditation_number">Akkreditierungsnummer:</label>
 			<label index="tx_seminars_seminars.credit_points">Leistungspunkte:</label>
+			<label index="tx_seminars_seminars.details_page">Seite mit der Einzelansicht:</label>
 			<label index="tx_seminars_seminars.additional_information">Zusätzliche Informationen:</label>
 			<label index="tx_seminars_seminars.checkboxes">Anmeldeoptionen mit Checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Reisebedingungen-Checkbox im Anmeldeformular anzeigen:</label>
@@ -1335,6 +1337,7 @@
 			<label index="tx_seminars_prices.including_tax.excluding" type="integer">195388725</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 			<label index="tx_seminars_seminars.attached_files" type="integer">62695314</label>
+			<label index="tx_seminars_seminars.details_page" type="integer">196341936</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2312,6 +2315,7 @@
 			<label index="tx_seminars_prices.including_tax.excluding">excluding</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 			<label index="tx_seminars_seminars.attached_files">Attached files:</label>
+			<label index="tx_seminars_seminars.details_page">Page with the details view:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
