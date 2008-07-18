@@ -513,6 +513,91 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 
 	//////////////////////////////////////////////////////////
+	// Tests concerning the basic functions of the list view
+	//////////////////////////////////////////////////////////
+
+	public function testListViewShowsSingleEvents() {
+		$this->assertContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewContainsEventDatesUsingTopicTitle() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'Test topic'
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date'
+			)
+		);
+
+		$result = $this->fixture->main('', array());
+		$this->assertContains(
+			'Test topic',
+			$result
+		);
+		$this->assertNotContains(
+			'Test date',
+			$result
+		);
+	}
+
+	public function testListViewHidesHiddenSingleEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'title' => 'Test single event',
+				'hidden' => 1
+			)
+		);
+
+		$this->assertNotContains(
+			'Test single event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewHidesHiddenEventDates() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'Test topic'
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date',
+				'hidden' => 1
+			)
+		);
+
+		$this->assertNotContains(
+			'Test topic',
+			$this->fixture->main('', array())
+		);
+	}
+
+
+	//////////////////////////////////////////////////////////
 	// Tests concerning the list view, filtered by category.
 	//////////////////////////////////////////////////////////
 
