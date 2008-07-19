@@ -2653,7 +2653,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Gets the TYPO3 link configuration for this event's detail page. This will
-	 * be the general details page.
+	 * be either the general details page or the separate details page for this
+	 * event.
 	 *
 	 * @param	tslib_pibase	a plugin object for a live page
 	 *
@@ -2661,16 +2662,31 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						will not be empty
 	 */
 	public function getDetailedViewLinkConfiguration(tslib_pibase $plugin) {
-		return array(
-			'parameter' => $plugin->getConfValueInteger('detailPID'),
-			'additionalParams' => t3lib_div::implodeArrayForUrl(
-				'tx_seminars_pi1',
-				array('showUid' => $this->getUid()),
-				'',
-				false,
-				true
+		return ($this->hasSeparateDetailsPage())
+			? array(
+				'parameter' => $this->getRecordPropertyString('details_page')
 			)
-		);
+			: array(
+				'parameter' => $plugin->getConfValueInteger('detailPID'),
+				'additionalParams' => t3lib_div::implodeArrayForUrl(
+					'tx_seminars_pi1',
+					array('showUid' => $this->getUid()),
+					'',
+					false,
+					true
+				)
+			);
+	}
+
+	/**
+	 * Checks whether this event has a separate details page set (which may be
+	 * an internal or external URL).
+	 *
+	 * @return	boolean		true if this event has a separate details page,
+	 * 						false otherwirse
+	 */
+	public function hasSeparateDetailsPage() {
+		return $this->hasRecordPropertyString('details_page');
 	}
 
 	/**

@@ -3668,6 +3668,52 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////
+	// Tests for hasSeparateDetailsPage
+	/////////////////////////////////////
+
+	public function testHasSeparateDetailsPageIsFalseByDefault() {
+		$this->assertFalse(
+			$this->fixture->hasSeparateDetailsPage()
+		);
+	}
+
+	public function testHasSeparateDetailsPageReturnsTrueForInternalSeparateDetailsPage() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $detailsPageUid
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertTrue(
+			$event->hasSeparateDetailsPage()
+		);
+	}
+
+	public function testHasSeparateDetailsPageReturnsTrueForExternalSeparateDetailsPage() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => 'www.test.com'
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertTrue(
+			$event->hasSeparateDetailsPage()
+		);
+	}
+
+
 	///////////////////////////////////////////////
 	// Tests for getDetailedViewLinkConfiguration
 	///////////////////////////////////////////////
@@ -3682,6 +3728,47 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					$this->fixture->getUid(),
 			),
 			$this->fixture->getDetailedViewLinkConfiguration($this->pi1)
+		);
+	}
+
+	public function testGetDetailedViewLinkConfigurationReturnsInternalDetailsPageIfSetWithoutSeminarParameter() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $detailsPageUid
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertEquals(
+			array(
+				'parameter' => (string) $detailsPageUid
+			),
+			$event->getDetailedViewLinkConfiguration($this->pi1)
+		);
+	}
+
+	public function testGetDetailedViewLinkConfigurationReturnsExternalDetailsPageIfSetWithoutSeminarParameter() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => 'www.test.com'
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertEquals(
+			array(
+				'parameter' => 'www.test.com'
+			),
+			$event->getDetailedViewLinkConfiguration($this->pi1)
 		);
 	}
 
@@ -3716,6 +3803,80 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testGetDetailedViewUrlWithSeparateDetailsPageOmitsShowUidParameter() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $detailsPageUid
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertNotContains(
+			'showUid',
+			$event->getDetailedViewUrl($this->pi1, false)
+		);
+	}
+
+	public function testGetDetailedViewUrlReturnsUrlOfSeparateInternalDetailsPageIfSet() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $detailsPageUid
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertContains(
+			'?id=' . $detailsPageUid,
+			$event->getDetailedViewUrl($this->pi1, false)
+		);
+	}
+
+	public function testGetDetailedViewUrlReturnsUrlOfSeparateExternalDetailsPageIfSet() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => 'www.test.com'
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertEquals(
+			'http://www.test.com',
+			$event->getDetailedViewUrl($this->pi1, false)
+		);
+	}
+
+	public function testGetDetailedViewUrlReturnsUrlOfSeparateExternalDetailsPageIfSetWithTarget() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => 'www.test.com foo'
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertEquals(
+			'http://www.test.com',
+			$event->getDetailedViewUrl($this->pi1, false)
+		);
+	}
+
 
 	//////////////////////////////////
 	// Tests for getLinkedFieldValue
@@ -3732,6 +3893,92 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			'http',
 			$this->fixture->getLinkedFieldValue($this->pi1, 'title')
+		);
+	}
+
+	public function testGetLinkedFieldValueForTitleLinksToSeparateInternalDetailsPageIfSet() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $detailsPageUid
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertContains(
+			'?id=' . $detailsPageUid,
+			$event->getLinkedFieldValue($this->pi1, 'title')
+		);
+	}
+
+	public function testGetLinkedFieldValueForTitleLinksToSeparateExternalDetailsPageIfSet() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => 'www.test.com'
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$this->assertContains(
+			'http://www.test.com',
+			$event->getLinkedFieldValue($this->pi1, 'title')
+		);
+	}
+
+	public function testGetLinkedFieldValueForTitleLinksToSeparateInternalDetailsPageWithTargetIfSet() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $detailsPageUid . ' foo'
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$result = $event->getLinkedFieldValue($this->pi1, 'title');
+
+		$this->assertContains(
+			'?id=' . $detailsPageUid,
+			$result
+		);
+		$this->assertContains(
+			'target="foo"',
+			$result
+		);
+	}
+
+	public function testGetLinkedFieldValueForTitleLinksToSeparateExternalDetailsPageWithTargetIfSet() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => 'www.test.com foo'
+			)
+		);
+		$event = new tx_seminars_seminarchild(
+			$eventUid, array()
+		);
+
+		$result = $event->getLinkedFieldValue($this->pi1, 'title');
+
+		$this->assertContains(
+			'http://www.test.com',
+			$result
+		);
+		$this->assertContains(
+			'target="foo"',
+			$result
 		);
 	}
 }

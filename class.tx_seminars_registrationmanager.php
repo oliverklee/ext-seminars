@@ -163,6 +163,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Creates an HTML link to either the registration page (if a user is
 	 * logged in) or the login page (if no user is logged in).
 	 *
+	 * If $seminar has a separate details page, the link to that details page
+	 * will be returned instead.
+	 *
 	 * Before you can call this function, you should make sure that the link
 	 * makes sense (ie. the seminar still has vacancies, the user hasn't
 	 * registered for this seminar etc.).
@@ -178,9 +181,18 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	) {
 		$label = $this->getRegistrationLabel($plugin, $seminar);
 
-		return $this->getLinkToStandardRegistrationOrLoginPage(
+		if ($seminar->hasSeparateDetailsPage()) {
+			$result = $plugin->cObj->typolink(
+				$label,
+			 	$seminar->getDetailedViewLinkConfiguration($plugin)
+			);
+		} else {
+			$result = $this->getLinkToStandardRegistrationOrLoginPage(
 				$plugin, $seminar, $label
-		);
+			);
+		}
+
+		return $result;
 	}
 
 	/**
@@ -214,7 +226,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * logged in) or the login page (if no user is logged in).
 	 *
 	 * This function only creates the link to the standard registration or login
-	 * page.
+	 * page; it should not be used if the seminar has a separate details page.
 	 *
 	 * @param	tx_seminars_salutationswitcher		an object for a live page
 	 * @param	tx_seminars_seminar		a seminar for which we'll check if it is
