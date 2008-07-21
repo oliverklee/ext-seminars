@@ -38,7 +38,17 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
 
 class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
-	var $bagClassName = 'tx_seminars_testbag';
+	protected $bagClassName = 'tx_seminars_testbag';
+
+	/**
+	 * Limits the bag to records with a particular title.
+	 *
+	 * @param	string		title which the bag elements must match, may be
+	 * 						empty, must already be SQL-safe
+	 */
+	public function limitToTitle($title) {
+		$this->whereClauseParts['title'] = 'title = "' . $title . '"';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_testbagbuilder.php']) {

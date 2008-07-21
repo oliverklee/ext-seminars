@@ -570,6 +570,23 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testListViewHidesDeletedSingleEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'title' => 'Test single event',
+				'deleted' => 1
+			)
+		);
+
+		$this->assertNotContains(
+			'Test single event',
+			$this->fixture->main('', array())
+		);
+	}
+
 	public function testListViewHidesHiddenEventDates() {
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -633,7 +650,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testListViewWithCategoryIgnoresEventsWithoutCategory() {
+	public function testListViewWithCategoryExcludesEventsWithoutCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
 			array('title' => 'a category')
@@ -672,7 +689,61 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testListViewWithCategoryIgnoresEventsWithNotSelectedCategory() {
+	public function testListViewWithCategoryExcludesHiddenEventWithSelectedCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				'hidden' => 1,
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid
+		);
+		$this->fixture->piVars['category'] = $categoryUid;
+
+		$this->assertNotContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithCategoryExcludesDeletedEventWithSelectedCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				'deleted' => 1,
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'a category')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid, $categoryUid
+		);
+		$this->fixture->piVars['category'] = $categoryUid;
+
+		$this->assertNotContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithCategoryExcludesEventsWithNotSelectedCategory() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -1680,7 +1751,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning limiting the list view to places
 	//////////////////////////////////////////////////////
 
-	public function testListViewLimitedToPlacesIgnoresEventsWithoutPlace() {
+	public function testListViewLimitedToPlacesExcludesEventsWithoutPlace() {
 		$placeUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('title' => 'a place')
@@ -1747,7 +1818,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testListViewLimitedToPlacesIgnoresEventsWithNotSelectedPlace() {
+	public function testListViewLimitedToPlacesExcludesEventsWithNotSelectedPlace() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -1777,6 +1848,68 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			'Event with place',
 			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewLimitedToPlacesExcludesHiddenEventWithSelectedPlace() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with place',
+				'hidden' => 1,
+				// the number of places
+				'place' => 1
+			)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'a place')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid, $placeUid
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToPlaces', $placeUid
+		);
+
+		$result = $this->fixture->main('', array());
+		$this->assertNotContains(
+			'Event with place',
+			$result
+		);
+	}
+
+	public function testListViewLimitedToPlacesExcludesDeletedEventWithSelectedPlace() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with place',
+				'deleted' => 1,
+				// the number of places
+				'place' => 1
+			)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'a place')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid, $placeUid
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToPlaces', $placeUid
+		);
+
+		$result = $this->fixture->main('', array());
+		$this->assertNotContains(
+			'Event with place',
+			$result
 		);
 	}
 }
