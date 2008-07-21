@@ -36,6 +36,7 @@
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.sheet_list_view">List view</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
+			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
@@ -501,6 +502,7 @@
 			<label index="seminars.pi_flexform.informal">informell</label>
 			<label index="seminars.pi_flexform.sheet_list_view">Listenansicht</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">Listenansicht auf Veranstaltungen aus diesen Kategorien einschränken:</label>
+			<label index="seminars.pi_flexform.limitListViewToPlaces">Listenansicht auf Veranstaltungen an diesen Orten einschränken:</label>
 			<label index="seminars.pi_flexform.templateFile">Dateiname des HTML-Templates:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Welche Veranstaltung soll als Detailansicht angezeigt werden?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Nur Veranstaltungen aus diesem Zeitabschnitt zeigen:</label>
@@ -2096,6 +2098,7 @@
 			<label index="countdown_seconds_plural" type="integer">126085346</label>
 			<label index="seminars.pi_flexform.sheet_list_view" type="integer">252903448</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories" type="integer">144505574</label>
+			<label index="seminars.pi_flexform.limitListViewToPlaces" type="integer">116361790</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3255,6 +3258,7 @@
 			<label index="countdown_seconds_plural">seconds</label>
 			<label index="seminars.pi_flexform.sheet_list_view">List view</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
+			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

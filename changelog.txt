@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1995] Add configuration to pre-set the sites to show in the list view
 - [#1977] Feature: Add a field "page for the detail view" to single event/event date records
 - [#2018] Change: add some unit tests
 - [#1822] Feature: Add configuration to pre-set the categories to show in the list view

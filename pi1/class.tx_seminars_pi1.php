@@ -438,6 +438,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			);
 		}
 
+		$builder->limitToPlaces(
+			$this->getConfValueString(
+				'limitListViewToPlaces', 's_listView'
+			)
+		);
+
 		$result .= ' AND ' . $builder->getWhereClause();
 
 		return $result;

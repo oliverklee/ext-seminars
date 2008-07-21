@@ -1674,5 +1674,110 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$result
 		);
 	}
+
+
+	//////////////////////////////////////////////////////
+	// Tests concerning limiting the list view to places
+	//////////////////////////////////////////////////////
+
+	public function testListViewLimitedToPlacesIgnoresEventsWithoutPlace() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'a place')
+		);
+		$this->fixture->setConfigurationValue(
+			'limitListViewToPlaces', $placeUid
+		);
+
+		$this->assertNotContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewLimitedToPlacesContainsEventsWithMultipleSelectedPlaces() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with place',
+				// the number of places
+				'place' => 1
+			)
+		);
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'a place')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1, $placeUid1
+		);
+
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with another place',
+				// the number of places
+				'place' => 1
+			)
+		);
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'a place')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid2, $placeUid2
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToPlaces', $placeUid1 . ',' . $placeUid2
+		);
+
+		$result = $this->fixture->main('', array());
+		$this->assertContains(
+			'Event with place',
+			$result
+		);
+		$this->assertContains(
+			'Event with another place',
+			$result
+		);
+	}
+
+	public function testListViewLimitedToPlacesIgnoresEventsWithNotSelectedPlace() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with place',
+				// the number of places
+				'place' => 1
+			)
+		);
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'a place')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid, $placeUid1
+		);
+
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'another place')
+		);
+		$this->fixture->setConfigurationValue(
+			'limitListViewToPlaces', $placeUid2
+		);
+
+		$this->assertNotContains(
+			'Event with place',
+			$this->fixture->main('', array())
+		);
+	}
 }
 ?>

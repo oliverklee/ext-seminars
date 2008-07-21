@@ -273,6 +273,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsVipListPidOptional();
 		$this->checkDefaultEventVipsFeGroupID();
 		$this->checkLimitListViewToCategories();
+		$this->checkLimitListViewToPlaces();
 	}
 
  	/**
@@ -1964,8 +1965,23 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			true,
 			's_listView',
 			'This value specifies the categories by which the list view ' .
-				'should be filtered. If this value is not set correctly, some ' .
-				'events might unintentionally get hidden or shown.'
+				'should be filtered. If this value is not set correctly, ' .
+				'some events might unintentionally get hidden or shown.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * limitListViewToPlaces.
+	 */
+	private function checkLimitListViewToPlaces() {
+		$this->checkIfPidListOrEmpty(
+			'limitListViewToPlaces',
+			true,
+			's_listView',
+			'This value specifies the places for which the list view ' .
+				'should be filtered. If this value is not set correctly, ' .
+				'some events might unintentionally get hidden or shown.'
 		);
 	}
 }
