@@ -83,7 +83,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$this->whereClauseParts['category']
-			= '(object_type='.SEMINARS_RECORD_TYPE_COMPLETE.' AND '
+			= '(' .
+			'(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND '
 			.'EXISTS (SELECT * FROM '
 			.SEMINARS_TABLE_CATEGORIES_MM.' WHERE '
 			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local='
@@ -97,7 +98,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local='
 			.SEMINARS_TABLE_SEMINARS.'.topic AND '
 			.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='.$categoryUid
-			.'))';
+			.'))' .
+			')';
 	}
 
 	/**

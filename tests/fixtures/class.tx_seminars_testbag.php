@@ -59,10 +59,8 @@ class tx_seminars_testbag extends tx_seminars_bag {
 	 * 						fields in records are ignored.
 	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
 	 * 						records is ignored.
-	 *
-	 * @access	public
 	 */
-	function __construct(
+	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
 		$ignoreTimingOfRecords = false
@@ -86,10 +84,8 @@ class tx_seminars_testbag extends tx_seminars_bag {
 	 *
 	 * $this->dbResult must be ensured to be non-null when this function is
 	 * called.
-	 *
-	 * @access	protected
 	 */
-	function createItemFromDbResult() {
+	protected function createItemFromDbResult() {
 		$testClassname = t3lib_div::makeInstanceClassName('tx_seminars_test');
 		$this->currentItem =& new $testClassname(0, $this->dbResult);
 		$this->checkCurrentItem();

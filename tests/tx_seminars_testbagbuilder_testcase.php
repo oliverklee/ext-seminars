@@ -442,5 +442,109 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->getWhereClause()
 		);
 	}
+
+
+	/////////////////////////////////
+	// Test concerning limitToTitle
+	/////////////////////////////////
+
+	public function testLimitToTitleFindsRecordWithThatTitle() {
+		$this->fixture->limitToTitle('foo');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('title' => 'foo')
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToTitleIgnoresRecordWithOtherTitle() {
+		$this->fixture->limitToTitle('foo');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('title' => 'bar')
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	///////////////////////////////////////////////////
+	// Test concerning the combination of limitations
+	///////////////////////////////////////////////////
+
+	public function testLimitToTitleAndPagesFindsRecordThatMatchesBoth() {
+		$this->fixture->setSourcePages($this->dummySysFolderPid);
+		$this->fixture->limitToTitle('foo');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('title' => 'foo', 'pid' => $this->dummySysFolderPid)
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyTheTitle() {
+		$this->fixture->setSourcePages($this->dummySysFolderPid);
+		$this->fixture->limitToTitle('foo');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('title' => 'foo')
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyThePage() {
+		$this->fixture->setSourcePages($this->dummySysFolderPid);
+		$this->fixture->limitToTitle('foo');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('title' => 'bar', 'pid' => $this->dummySysFolderPid)
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToTitleStillExcludesHiddenRecords() {
+		$this->fixture->limitToTitle('foo');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('title' => 'foo', 'hidden' => 1)
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToTitleStillExcludesDeletedRecords() {
+		$this->fixture->limitToTitle('foo');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('title' => 'foo', 'deleted' => 1)
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
 }
 ?>
