@@ -31,10 +31,10 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_testbagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbagbuilder.php');
 
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
 class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -442,6 +442,5 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->getWhereClause()
 		);
 	}
-
 }
 ?>

@@ -34,9 +34,9 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_test.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_test.php');
 
 class tx_seminars_testbag extends tx_seminars_bag {
 	/**
@@ -59,7 +59,6 @@ class tx_seminars_testbag extends tx_seminars_bag {
 	 * 						fields in records are ignored.
 	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
 	 * 						records is ignored.
-	 *
 	 *
 	 * @access	public
 	 */
@@ -85,7 +84,8 @@ class tx_seminars_testbag extends tx_seminars_bag {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be non-null when this function is called.
+	 * $this->dbResult must be ensured to be non-null when this function is
+	 * called.
 	 *
 	 * @access	protected
 	 */

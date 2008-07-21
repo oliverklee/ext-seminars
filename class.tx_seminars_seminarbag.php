@@ -34,9 +34,9 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 
 class tx_seminars_seminarbag extends tx_seminars_bag {
 	/**
