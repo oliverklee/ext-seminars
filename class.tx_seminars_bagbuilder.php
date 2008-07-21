@@ -33,9 +33,9 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
 
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_templatehelper.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 abstract class tx_seminars_bagbuilder {
 	/** class name of the bag class that will be built */
@@ -118,7 +118,7 @@ abstract class tx_seminars_bagbuilder {
 			$sourcePagePids, $recursionDepth
 		);
 
-		$this->whereClauseParts['pages'] = 'pid IN ('.$recursivePidList.')';
+		$this->whereClauseParts['pages'] = 'pid IN (' . $recursivePidList . ')';
 	}
 
 	/**

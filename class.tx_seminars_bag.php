@@ -37,7 +37,7 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php');
 
 abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	/** the name of the main DB table from which we get the records for this bag */
@@ -108,8 +108,8 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	) {
 		$this->dbTableName = $dbTableName;
 		$this->queryParameters = trim($queryParameters);
-		$this->additionalTableNames =
-			(!empty($additionalTableNames)) ? ', '.$additionalTableNames : '';
+		$this->additionalTableNames = (!empty($additionalTableNames))
+			? ', ' . $additionalTableNames : '';
 		$this->createEnabledFieldsQuery(
 			$showHiddenRecords, $ignoreTimingOfRecords
 		);
@@ -184,9 +184,9 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 		}
 
 		$this->dbResult =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$this->dbTableName.'.*',
-			$this->dbTableName.$this->additionalTableNames,
-			$this->queryParameters.$this->enabledFieldsQuery,
+			$this->dbTableName . '.*',
+			$this->dbTableName . $this->additionalTableNames,
+			$this->queryParameters . $this->enabledFieldsQuery,
 			$this->groupBy,
 			$this->orderBy,
 			$this->limit
@@ -197,9 +197,9 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 				$this->dbResult
 			);
 			$dbResultWithoutLimit = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'DISTINCT '.$this->dbTableName.'.*',
-				$this->dbTableName.$this->additionalTableNames,
-				$this->queryParameters.$this->enabledFieldsQuery
+				'DISTINCT ' . $this->dbTableName . '.*',
+				$this->dbTableName . $this->additionalTableNames,
+				$this->queryParameters . $this->enabledFieldsQuery
 			);
 			$this->objectCountWithoutLimit = $GLOBALS['TYPO3_DB']->sql_num_rows(
 				$dbResultWithoutLimit
