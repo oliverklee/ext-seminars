@@ -862,10 +862,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @access	public
 	 */
-	function notifyOrganizers(
+	public function notifyOrganizers(
 		tslib_pibase $plugin, $helloSubjectPrefix = 'notification'
 	) {
-		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
+		if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
 			return;
 		}
 
@@ -877,7 +877,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->setMarker(
 			'hello',
-			$this->translate('email_'.$helloSubjectPrefix.'Hello')
+			$this->translate('email_' . $helloSubjectPrefix . 'Hello')
 		);
 		$this->setMarker('summary', $this->getTitle());
 
@@ -927,11 +927,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		foreach ($organizers as $currentOrganizerEmail) {
 			t3lib_div::plainMailEncoded(
 				$currentOrganizerEmail,
-				$this->translate('email_'.$helloSubjectPrefix.'Subject').': '
-					.$this->getTitle(),
+				$this->translate('email_' . $helloSubjectPrefix . 'Subject') .
+					': ' . $this->getTitle(),
 				$content,
 				// We use the attendee's e-mail as sender.
-				'From: '.$this->getUserNameAndEmail(),
+				'From: ' . $this->getUserNameAndEmail(),
 				'quoted-printable',
 				$this->getConfValueString('charsetForEMails')
 			);
