@@ -1,4 +1,5 @@
 0.6.2 (currently working on)
+- [#2001] Fix: City of event site doesn't appear in the event single view although it's entered in the BE
 - [#2011] Fix: hideFieldsInNotificationMail doesn't work
 - [#2018] Fix: Hidden single events still are visible in the list view limited to a category
 - [#1977] Change: add some unit tests

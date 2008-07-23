@@ -109,10 +109,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * place set.
 	 *
 	 * @return	string		our place (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getPlaceShort() {
+	public function getPlaceShort() {
 		if (!$this->hasPlace()) {
 			return $this->translate('message_willBeAnnounced');
 		}
@@ -122,13 +120,15 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
 			SEMINARS_TABLE_SITES,
-			'uid='.$this->getPlace().$this->enableFields(SEMINARS_TABLE_SITES)
+			'uid=' . $this->getPlace() .
+				$this->enableFields(SEMINARS_TABLE_SITES)
 		);
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
 
-		if ($dbResult) {
-			if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$result = $row['title'];
-			}
+		if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$result = $row['title'];
 		}
 
 		return $result;
