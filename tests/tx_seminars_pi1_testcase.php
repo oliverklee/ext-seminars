@@ -344,6 +344,30 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////
+	// Tests concerning places in the single view
+	///////////////////////////////////////////////
+
+	public function testSingleViewContainsTitleOfEventPlace() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('place' => 1)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('title' => 'a place')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
+		);
+
+		$this->fixture->piVars['showUid'] = $eventUid;
+
+		$this->assertContains(
+			'a place',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	////////////////////////////////////////////////////
 	// Tests concerning time slots in the single view.
 	////////////////////////////////////////////////////

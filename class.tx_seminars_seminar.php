@@ -526,84 +526,75 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets our place (or places), complete as RTE'ed HTML with address and links.
-	 * Returns a localized string "will be announced" if the seminar has no places set.
+	 * Gets our place (or places), complete as RTE'ed HTML with address and
+	 * links. Returns a localized string "will be announced" if the seminar has
+	 * no places set.
 	 *
-	 * @param	object		the live pibase object
+	 * @param	tx_seminars_templatehelper		the current FE plugin
 	 *
 	 * @return	string		our places description (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getPlaceWithDetails(tslib_pibase $plugin) {
-		$result = '';
-
-		if ($this->hasPlace()) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, address, country, homepage, directions',
-				SEMINARS_TABLE_SITES.', '.SEMINARS_TABLE_SITES_MM,
-				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_SITES)
-			);
-
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					$name = $row['title'];
-					if (!empty($row['homepage'])) {
-						$name = $plugin->cObj->getTypoLink(
-							$name,
-							$row['homepage'],
-							array(),
-							$plugin->getConfValueString('externalLinkTarget')
-						);
-					}
-					$plugin->setMarker('place_item_title', $name);
-
-					$description = '';
-					if (!empty($row['address'])) {
-						// replace all occurrences of carriage returns with
-						// a comma
-						$description .= str_replace(
-							CR,
-							',',
-							$row['address']
-						);
-					}
-					if (!empty($row['country'])) {
-						$countryName = $this->getCountryNameFromIsoCode(
-							$row['country']
-						);
-						if (!empty($countryName)) {
-							$description .= ', '.$countryName;
-						}
-					}
-					if (!empty($row['directions'])) {
-						$description .= $plugin->pi_RTEcssText(
-							$row['directions']
-						);
-					}
-					$plugin->setMarker(
-						'place_item_description',
-						$description
-					);
-
-					$result .= $plugin->getSubpart(
-						'PLACE_LIST_ITEM'
-					);
-				}
-
-				$plugin->setMarker('place_list_content', $result);
-				$result = $plugin->getSubpart('PLACE_LIST_COMPLETE');
-			}
-		} else {
+	public function getPlaceWithDetails(tx_seminars_templatehelper $plugin) {
+		if (!$this->hasPlace()) {
 			$plugin->setMarker(
 				'message_will_be_announced',
 				$this->translate('message_willBeAnnounced')
 			);
-			$result = $plugin->getSubpart('PLACE_LIST_EMPTY');
+			return $plugin->getSubpart('PLACE_LIST_EMPTY');
 		}
 
-		return $result;
+		$result = '';
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title, address, city, country, homepage, directions',
+			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
+			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
+				$this->enableFields(SEMINARS_TABLE_SITES)
+		);
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
+
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$name = $row['title'];
+			if ($row['homepage'] != '') {
+				$name = $plugin->cObj->getTypoLink(
+					$name,
+					$row['homepage'],
+					array(),
+					$plugin->getConfValueString('externalLinkTarget')
+				);
+			}
+			$plugin->setMarker('place_item_title', $name);
+
+			$descriptionParts = array();
+			if ($row['address'] != '') {
+				$descriptionParts[] = str_replace(CR, ',', $row['address']);
+			}
+			if ($row['city'] != '') {
+				$descriptionParts[] = $row['city'];
+			}
+			if ($row['country'] != '') {
+				$countryName = $this->getCountryNameFromIsoCode(
+					$row['country']
+				);
+				if ($countryName != '') {
+					$descriptionParts[] = $countryName;
+				}
+			}
+
+			$description = implode(', ', $descriptionParts);
+			if ($row['directions'] != '') {
+				$description .= $plugin->pi_RTEcssText($row['directions']);
+			}
+			$plugin->setMarker('place_item_description', $description);
+
+			$result .= $plugin->getSubpart('PLACE_LIST_ITEM');
+		}
+
+		$plugin->setMarker('place_list_content', $result);
+
+		return $plugin->getSubpart('PLACE_LIST_COMPLETE');
 	}
 
 	/**
@@ -618,10 +609,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		whether at least one place with country are set
 	 * 						for the current event
-	 *
-	 * @access	public
 	 */
-	function hasCountry() {
+	public function hasCountry() {
 		return $this->hasPlace()
 			&& (boolean) count($this->getPlacesWithCountry());
 	}
@@ -634,10 +623,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	array		the list of ISO codes for the countries of this
 	 * 						event, may be empty
-	 *
-	 * @access	public
 	 */
-	function getPlacesWithCountry() {
+	public function getPlacesWithCountry() {
 		if (!$this->hasPlace()) {
 			return array();
 		}
@@ -655,13 +642,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				.$this->enableFields(SEMINARS_TABLE_SITES),
 			'country'
 		);
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
 
-		// Checks whether we have found any country at all. If something
-		// was found, adds it to the array that will be returned.
-		if ($dbResult) {
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$countries[] = $row['country'];
-			}
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$countries[] = $row['country'];
 		}
 
 		return $countries;
@@ -673,11 +659,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If no places are set, or no countries are selected in the set places,
 	 * an empty string will be returned.
 	 *
-	 * @return	string	comma-separated list of countries for this event, may be empty
-	 *
-	 * @access	public
+	 * @return	string		comma-separated list of countries for this event,
+	 * 						may be empty
 	 */
-	function getCountry() {
+	public function getCountry() {
 		if (!$this->hasCountry()) {
 			return '';
 		}
@@ -706,11 +691,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If no places are set, or no cities are selected in the set places, an
 	 * empty string will be returned.
 	 *
-	 * @return	string		comma-separated list of cities for this event, may be empty
-	 *
-	 * @access	public
+	 * @return	string		comma-separated list of cities for this event, may
+	 * 						be empty
 	 */
-	function getCities() {
+	public function getCities() {
 		if (!$this->hasCities()) {
 			return '';
 		}
@@ -729,12 +713,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns a boolean true if at least one of the set places has a
 	 * city set, returns false otherwise.
 	 *
-	 * @return	boolean		whether at least one place with city are set for the current event
-	 *
-	 * @access	public
+	 * @return	boolean		whether at least one place with city are set for the
+	 * 						current event
 	 */
-	function hasCities() {
-		return $this->hasPlace() && (boolean) count($this->getCitiesFromPlaces());
+	public function hasCities() {
+		return $this->hasPlace() && (count($this->getCitiesFromPlaces() > 0));
 	}
 
 	/**
@@ -744,25 +727,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * array will be returned.
 	 *
 	 * @return	array		the list of city names for this event, may be empty
-	 *
-	 * @access	public
 	 */
-	function getCitiesFromPlaces() {
+	public function getCitiesFromPlaces() {
 		$cities = array();
 
 		// Fetches the city name from the corresponding place record(s).
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'city',
-			SEMINARS_TABLE_SITES.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM
-				.' ON '.SEMINARS_TABLE_SITES.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_foreign',
-			'uid_local='.$this->getUid(),
+			SEMINARS_TABLE_SITES . ' LEFT JOIN ' . SEMINARS_TABLE_SITES_MM .
+				' ON ' . SEMINARS_TABLE_SITES . '.uid=' .
+				SEMINARS_TABLE_SITES_MM . '.uid_foreign',
+			'uid_local=' . $this->getUid(),
 			'uid_foreign'
 		);
 
-		if ($dbResult) {
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$cities[] = $row['city'];
-			}
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$cities[] = $row['city'];
 		}
 
 		return $cities;
@@ -778,10 +761,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	string		the short local name of the country or an empty
 	 * 						string if the country could not be found
-	 *
-	 * @access	public
 	 */
-	function getCountryNameFromIsoCode($isoCode) {
+	public function getCountryNameFromIsoCode($isoCode) {
 		// Sanitizes the provided parameter against SQL injection as this
 		// function can be used for searching.
 		$isoCode = $GLOBALS['TYPO3_DB']->quoteStr($isoCode, 'static_countries');
@@ -790,9 +771,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'cn_short_local',
 			'static_countries',
-			'cn_iso_2="'.$isoCode.'"'
+			'cn_iso_2="' . $isoCode . '"'
 		);
-		if ($dbResult && $GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
+
+		if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 			$countryName = $row['cn_short_local'];
 		}
@@ -803,58 +788,57 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets our place (or places) with address and links as HTML, not RTE'ed yet,
 	 * separated by CRLF.
-	 * Returns a localized string "will be announced" if the seminar has no places set.
+	 *
+	 * Returns a localized string "will be announced" if the seminar has no
+	 * places set.
 	 *
 	 * @return	string		our places description (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getPlaceWithDetailsRaw() {
+	public function getPlaceWithDetailsRaw() {
+		if (!$this->hasPlace()) {
+			return $this->translate('message_willBeAnnounced');
+		}
+
 		$result = '';
 
-		if ($this->hasPlace()) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title, address, country, homepage, directions',
-				SEMINARS_TABLE_SITES.', '.SEMINARS_TABLE_SITES_MM,
-				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_SITES)
-			);
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title, address, city, country, homepage, directions',
+			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
+			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
+				$this->enableFields(SEMINARS_TABLE_SITES)
+		);
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
 
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					$result .= $row['title'];
-					if (!empty($row['homepage'])) {
-						$result .= CRLF.$row['homepage'];
-					}
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			$result .= $row['title'];
+			if ($row['homepage'] != '') {
+				$result .= CRLF . $row['homepage'];
+			}
 
-					if (!empty($row['address'])) {
-						// replaces all occurrences of carriage returns
-						// with a comma
-						$result .= CRLF.str_replace(
-							CR,
-							',',
-							$row['address']
-						);
-					}
-					if (!empty($row['country'])) {
-						$countryName = $this->getCountryNameFromIsoCode(
-							$row['country']
-						);
-						if (!empty($countryName)) {
-							$description .= ', '.$countryName;
-						}
-					}
-					if (!empty($row['directions'])) {
-						$result .= CRLF.str_replace(
-							CR,
-							',',
-							$row['directions']
-						);
-					}
+			$descriptionParts = array();
+			if ($row['address'] != '') {
+				$descriptionParts[] = str_replace(CR, ',', $row['address']);
+			}
+			if ($row['city'] != '') {
+				$descriptionParts[] = $row['city'];
+			}
+			if ($row['country'] != '') {
+				$countryName = $this->getCountryNameFromIsoCode(
+					$row['country']
+				);
+				if ($countryName != '') {
+					$descriptionParts[] = $countryName;
 				}
 			}
-		} else {
-			$result = $this->translate('message_willBeAnnounced');
+
+			$result .= implode(', ', $descriptionParts);
+			if ($row['directions'] != '') {
+				$result .= CRLF . str_replace(CR, ',', $row['directions']);
+			}
+
+			$result .= CRLF;
 		}
 
 		return $result;
@@ -865,31 +849,29 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns a localized string "will be announced" if the seminar has no places set.
 	 *
 	 * @return	string		our places list (or '' if there is an error)
-	 *
-	 * @access	public
 	 */
-	function getPlaceShort() {
+	public function getPlaceShort() {
+		if (!$this->hasPlace()) {
+			return $this->translate('message_willBeAnnounced');
+		}
+
 		$result = '';
 
-		if ($this->hasPlace()) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title',
-				SEMINARS_TABLE_SITES.', '.SEMINARS_TABLE_SITES_MM,
-				'uid_local='.$this->getUid().' AND uid=uid_foreign'
-					.$this->enableFields(SEMINARS_TABLE_SITES)
-			);
-
-			if ($dbResult) {
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-					if (!empty($result)) {
-						$result .= ', ';
-					}
-
-					$result .= $row['title'];
-				}
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title',
+			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
+			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
+				$this->enableFields(SEMINARS_TABLE_SITES)
+		);
+		if (!$dbResult) {
+			throw new Exception('There was an error with the database query.');
+		}
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+			if ($result != '') {
+				$result .= ', ';
 			}
-		} else {
-			$result = $this->translate('message_willBeAnnounced');
+
+			$result .= $row['title'];
 		}
 
 		return $result;

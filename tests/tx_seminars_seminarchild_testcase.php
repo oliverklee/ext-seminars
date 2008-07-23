@@ -76,9 +76,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->pi1->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'detailPID' => $this->frontEndPageUid,
 			)
 		);
+		$this->pi1->getTemplateCode();
 
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -88,7 +90,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'attendees_min' => 5,
 				'attendees_max' => 10,
 				'object_type' => 0,
-				'queue_size' => 0
+				'queue_size' => 0,
 			)
 		);
 
@@ -98,7 +100,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'dateFormatYMD' => '%d.%m.%Y',
 				'timeFormat' => '%H:%M',
 				'showTimeOfUnregistrationDeadline' => 0,
-				'unregistrationDeadlineDaysBeforeBeginDate' => 0
+				'unregistrationDeadlineDaysBeforeBeginDate' => 0,
 			)
 		);
 	}
@@ -3979,6 +3981,134 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'target="foo"',
 			$result
+		);
+	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning getPlaceWithDetails
+	/////////////////////////////////////////
+
+	public function testGetPlaceWithDetailsReturnsWillBeAnnouncedForNoPlace() {
+		$this->assertContains(
+			$this->fixture->translate('message_willBeAnnounced'),
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	public function testGetPlaceWithDetailsContainsTitleOfOnePlace() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+
+		$this->assertContains(
+			'a place',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	public function testGetPlaceWithDetailsContainsTitleOfAllRelatedPlaces() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+		$this->addPlaceRelation(array('title' => 'another place'));
+
+		$this->assertContains(
+			'a place',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+		$this->assertContains(
+			'another place',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	public function testGetPlaceWithDetailsContainsAddressOfOnePlace() {
+		$this->addPlaceRelation(
+			array('title' => 'a place', 'address' => 'a street')
+		);
+
+		$this->assertContains(
+			'a street',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	public function testGetPlaceWithDetailsContainsCityOfOnePlace() {
+		$this->addPlaceRelation(array('title' => 'a place', 'city' => 'Emden'));
+
+		$this->assertContains(
+			'Emden',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	public function testGetPlaceWithDetailsContainsCountryOfOnePlace() {
+		$this->addPlaceRelation(array('title' => 'a place', 'country' => 'de'));
+
+		$this->assertContains(
+			'Deutschland',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning getPlaceWithDetailsRaw
+	////////////////////////////////////////////
+
+	public function testGetPlaceWithDetailsRawReturnsWillBeAnnouncedForNoPlace() {
+		$this->assertContains(
+			$this->fixture->translate('message_willBeAnnounced'),
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawContainsTitleOfOnePlace() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+
+		$this->assertContains(
+			'a place',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawContainsTitleOfAllRelatedPlaces() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+		$this->addPlaceRelation(array('title' => 'another place'));
+
+		$this->assertContains(
+			'a place',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+		$this->assertContains(
+			'another place',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawContainsAddressOfOnePlace() {
+		$this->addPlaceRelation(
+			array('title' => 'a place', 'address' => 'a street')
+		);
+
+		$this->assertContains(
+			'a street',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawContainsCityOfOnePlace() {
+		$this->addPlaceRelation(array('title' => 'a place', 'city' => 'Emden'));
+
+		$this->assertContains(
+			'Emden',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawContainsCountryOfOnePlace() {
+		$this->addPlaceRelation(array('title' => 'a place', 'country' => 'de'));
+
+		$this->assertContains(
+			'Deutschland',
+			$this->fixture->getPlaceWithDetailsRaw()
 		);
 	}
 }
