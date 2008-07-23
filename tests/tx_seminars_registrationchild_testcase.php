@@ -44,6 +44,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 	protected function setUp() {
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		tx_seminars_registrationchild::purgeCachedSeminars();
 
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
@@ -66,9 +67,10 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			array('seminar' => $this->seminarUid)
 		);
 
-		tx_seminars_registrationchild::purgeCachedSeminars();
 		$this->fixture = new tx_seminars_registrationchild($registrationUid);
-		$this->fixture->setConfigurationValue('templateFile', 'EXT:seminars/seminars.tmpl');
+		$this->fixture->setConfigurationValue(
+			'templateFile', 'EXT:seminars/seminars.tmpl'
+		);
 	}
 
 	protected function tearDown() {
@@ -440,17 +442,48 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 
 	///////////////////////////////////////////////////
-	// Tests regarding the notification of attendees.
+	// Tests regarding the notification of organizers
 	///////////////////////////////////////////////////
 
 	public function testNotifyOrganizersWithSetReferrerContainsReferrer() {
 		$this->fixture->setReferrer('test referrer');
 		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue('showAttendanceFieldsInNotificationMail', 'referrer');
+		$this->fixture->setConfigurationValue(
+			'showAttendanceFieldsInNotificationMail', 'referrer'
+		);
+
+		$this->fixture->notifyOrganizers();
+
+		$this->assertContains(
+			'Referrer: test referrer',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function testNotifyOrganizersIncludesHelloIfNotHidden() {
+		$this->fixture->setReferrer('test referrer');
+		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue(
+			'hideFieldsInNotificationMail', ''
+		);
 
 		$this->fixture->notifyOrganizers();
 		$this->assertContains(
-			'Referrer: test referrer',
+			'Hello',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function testNotifyOrganizersCanHideHelloByConfiguration() {
+		$this->fixture->setReferrer('test referrer');
+		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue(
+			'hideFieldsInNotificationMail', 'hello'
+		);
+
+		$this->fixture->notifyOrganizers();
+		$this->assertNotContains(
+			'Hello',
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
 	}

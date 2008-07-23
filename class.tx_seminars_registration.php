@@ -881,7 +881,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->initializeTemplate();
 		$this->hideSubparts(
-			$this->getConfValueString('hideGeneralFieldsInNotificationMail'),
+			$this->getConfValueString('hideFieldsInNotificationMail'),
 			'field_wrapper'
 		);
 
