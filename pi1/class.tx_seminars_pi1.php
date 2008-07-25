@@ -2024,9 +2024,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Gets the heading for a field type, automatically wrapped in a hyperlink
 	 * that sorts by that column if sorting by that column is available.
 	 *
-	 * @param	string		key of the field type for which the heading should be retrieved.
+	 * @param	string		key of the field type for which the heading should
+	 * 						be retrieved, must not be empty
 	 *
-	 * @return	string		the heading label (may be completely wrapped in a hyperlink for sorting)
+	 * @return	string		the heading label, may be completely wrapped in a
+	 * 						hyperlink for sorting
 	 *
 	 * @access	protected
 	 */
@@ -2034,8 +2036,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = '';
 
 		$label = $result = $this->translate(
-			'label_'.$fieldName,
-			'['.$fieldName.']'
+			'label_' . $fieldName,
+			'[' . $fieldName . ']'
 		);
 		if (($fieldName == 'price_regular')
 			&& $this->getConfValueBoolean(
@@ -2049,7 +2051,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if (isset($this->orderByList[$fieldName])) {
 			$result = $this->pi_linkTP_keepPIvars(
 				$label,
-				array('sort' => $fieldName.':'.($this->internal['descFlag'] ? 0 : 1))
+				array(
+					'sort' => $fieldName . ':' .
+						($this->internal['descFlag'] ? 0 : 1)
+				)
 			);
 		} else {
 			$result = $label;
