@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1902] Fix: "Reset filter" doesn't work
 - [#2032] Fix: Hide the "referrer" field from the registration UI until it actually is used
 - [#2003] Fix: Empty lines in the FE user data on the second registration page
 - [#2001] Fix: City of event site doesn't appear in the event single view although it's entered in the BE
