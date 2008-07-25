@@ -347,6 +347,16 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	public function getNumberOfPlaces() {
 		return $this->getRecordPropertyInteger('place');
 	}
+
+	/**
+	 * Gets our place(s) as plain text (just the places name).
+	 * Returns a localized string "will be announced" if the time slot has no
+	 * place set.
+	 *
+	 * @return	string		our places or an empty string if the timespan has
+	 * 						no places
+	 */
+	public abstract function getPlaceShort();
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_timespan.php']) {

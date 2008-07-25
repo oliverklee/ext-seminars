@@ -104,18 +104,17 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets our place as plain text (just the place name).
+	 * Gets our place as plain text (just the name).
 	 * Returns a localized string "will be announced" if the time slot has no
 	 * place set.
 	 *
-	 * @return	string		our place (or '' if there is an error)
+	 * @return	string		our places or a localized string "will be announced"
+	 * 						if this timeslot has no place assigned
 	 */
 	public function getPlaceShort() {
 		if (!$this->hasPlace()) {
 			return $this->translate('message_willBeAnnounced');
 		}
-
-		$result = '';
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
@@ -127,11 +126,15 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 			throw new Exception('There was an error with the database query.');
 		}
 
-		if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$result = $row['title'];
+		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		if (!$dbResultRow) {
+			throw new Exception(
+				'The related place with the UID ' . $this->getPlace() .
+					' could not be found in the DB.'
+			);
 		}
 
-		return $result;
+		return $dbResultRow['title'];
 	}
 
 	/**

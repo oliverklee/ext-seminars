@@ -97,6 +97,18 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	public function setNumberOfPlaces($places) {
 		$this->setRecordPropertyInteger('place', $places);
 	}
+
+	/**
+	 * Returns always an empty string.
+	 *
+	 * This function is just a dummy because the implementations of this
+	 * abstract function can differ widely.
+	 *
+	 * @return	string		always an empty string
+	 */
+	public function getPlaceShort() {
+		return '';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_timespanchild.php']) {
