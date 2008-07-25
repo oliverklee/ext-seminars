@@ -88,33 +88,86 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testInitiallyHasNoPlace() {
+	public function testHasPlaceInitiallyReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasPlace()
 		);
 	}
 
-	public function testSetAndGetPlace() {
-		$siteUid = $this->testingFramework->createRecord(
+	public function testGetPlaceReturnsUidOfPlaceSetViaSetPlace() {
+		$placeUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES
 		);
-		$this->fixture->setPlace($siteUid);
+		$this->fixture->setPlace($placeUid);
 
 		$this->assertEquals(
-			$siteUid,
+			$placeUid,
 			$this->fixture->getPlace()
 		);
 	}
 
-	public function testHasPlace() {
-		$siteUid = $this->testingFramework->createRecord(
+	public function testHasPlaceReturnsTrueIfPlaceIsSet() {
+		$placeUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES
 		);
-		$this->fixture->setPlace($siteUid);
+		$this->fixture->setPlace($placeUid);
 
 		$this->assertTrue(
 			$this->fixture->hasPlace()
 		);
+	}
+
+
+	////////////////////////////
+	// Tests for getPlaceShort
+	////////////////////////////
+
+	public function testGetPlaceShortReturnsWillBeAnnouncedForNoPlaces() {
+		$this->assertEquals(
+			$this->fixture->translate('message_willBeAnnounced'),
+			$this->fixture->getPlaceShort()
+		);
+	}
+
+	public function testGetPlaceShortReturnsPlaceNameForOnePlace() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'a place')
+		);
+		$this->fixture->setPlace($placeUid);
+
+		$this->assertEquals(
+			'a place',
+			$this->fixture->getPlaceShort()
+		);
+	}
+
+	public function testGetPlaceShortThrowsExceptionForInexistentPlaceUid() {
+		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$this->setExpectedException(
+			'Exception', 'The related place with the UID ' . $placeUid .
+				' could not be found in the DB.'
+		);
+
+		$this->fixture->setPlace($placeUid);
+		$this->testingFramework->deleteRecord(SEMINARS_TABLE_SITES, $placeUid);
+
+		$this->fixture->getPlaceShort();
+	}
+
+	public function testGetPlaceShortThrowsExceptionForDeletedPlace() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('deleted' => 1)
+		);
+		$this->setExpectedException(
+			'Exception', 'The related place with the UID ' . $placeUid .
+				' could not be found in the DB.'
+		);
+
+		$this->fixture->setPlace($placeUid);
+
+		$this->fixture->getPlaceShort();
 	}
 
 

@@ -3688,6 +3688,24 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testGetPlaceWithDetailsContainsHomepageLinkOfOnePlace() {
+		$this->addPlaceRelation(array('homepage' => 'www.test.com'));
+
+		$this->assertContains(
+			' href="http://www.test.com',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	public function testGetPlaceWithDetailsContainsDirectionsOfOnePlace() {
+		$this->addPlaceRelation(array('directions' => 'Turn right.'));
+
+		$this->assertContains(
+			'Turn right.',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
 
 	////////////////////////////////////////////
 	// Tests concerning getPlaceWithDetailsRaw
@@ -3749,6 +3767,63 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'Deutschland',
 			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawContainsHomepageUrlOfOnePlace() {
+		$this->addPlaceRelation(array('homepage' => 'www.test.com'));
+
+		$this->assertContains(
+			'www.test.com',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawContainsDirectionsOfOnePlace() {
+		$this->addPlaceRelation(array('directions' => 'Turn right.'));
+
+		$this->assertContains(
+			'Turn right.',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+
+	////////////////////////////
+	// Tests for getPlaceShort
+	////////////////////////////
+
+	public function testGetPlaceShortReturnsWillBeAnnouncedForNoPlaces() {
+		$this->assertEquals(
+			$this->fixture->translate('message_willBeAnnounced'),
+			$this->fixture->getPlaceShort()
+		);
+	}
+
+	public function testGetPlaceShortReturnsPlaceNameForOnePlace() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+
+		$this->assertEquals(
+			'a place',
+			$this->fixture->getPlaceShort()
+		);
+	}
+
+	public function testGetPlaceShortReturnsPlaceNamesWithCommaForTwoPlaces() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+		$this->addPlaceRelation(array('title' => 'another place'));
+
+		$this->assertContains(
+			'a place',
+			$this->fixture->getPlaceShort()
+		);
+		$this->assertContains(
+			', ',
+			$this->fixture->getPlaceShort()
+		);
+		$this->assertContains(
+			'another place',
+			$this->fixture->getPlaceShort()
 		);
 	}
 }

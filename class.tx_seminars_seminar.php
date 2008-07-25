@@ -547,22 +547,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = '';
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'title, address, city, country, homepage, directions',
-			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
-			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
-				$this->enableFields(SEMINARS_TABLE_SITES)
-		);
-		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
-		}
-
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$name = $row['title'];
-			if ($row['homepage'] != '') {
+		foreach ($this->getPlacesAsArray() as $place) {
+			$name = $place['title'];
+			if ($place['homepage'] != '') {
 				$name = $plugin->cObj->getTypoLink(
 					$name,
-					$row['homepage'],
+					$place['homepage'],
 					array(),
 					$plugin->getConfValueString('externalLinkTarget')
 				);
@@ -570,15 +560,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$plugin->setMarker('place_item_title', $name);
 
 			$descriptionParts = array();
-			if ($row['address'] != '') {
-				$descriptionParts[] = str_replace(CR, ',', $row['address']);
+			if ($place['address'] != '') {
+				$descriptionParts[] = str_replace(CR, ',', $place['address']);
 			}
-			if ($row['city'] != '') {
-				$descriptionParts[] = $row['city'];
+			if ($place['city'] != '') {
+				$descriptionParts[] = $place['city'];
 			}
-			if ($row['country'] != '') {
+			if ($place['country'] != '') {
 				$countryName = $this->getCountryNameFromIsoCode(
-					$row['country']
+					$place['country']
 				);
 				if ($countryName != '') {
 					$descriptionParts[] = $countryName;
@@ -586,8 +576,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			}
 
 			$description = implode(', ', $descriptionParts);
-			if ($row['directions'] != '') {
-				$description .= $plugin->pi_RTEcssText($row['directions']);
+			if ($place['directions'] != '') {
+				$description .= $plugin->pi_RTEcssText($place['directions']);
 			}
 			$plugin->setMarker('place_item_description', $description);
 
@@ -803,6 +793,50 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = '';
 
+		foreach ($this->getPlacesAsArray() as $place) {
+			$result .= $place['title'];
+			if ($place['homepage'] != '') {
+				$result .= CRLF . $place['homepage'];
+			}
+
+			$descriptionParts = array();
+			if ($place['address'] != '') {
+				$descriptionParts[] = str_replace(CR, ',', $place['address']);
+			}
+			if ($place['city'] != '') {
+				$descriptionParts[] = $place['city'];
+			}
+			if ($place['country'] != '') {
+				$countryName = $this->getCountryNameFromIsoCode(
+					$place['country']
+				);
+				if ($countryName != '') {
+					$descriptionParts[] = $countryName;
+				}
+			}
+
+			$result .= implode(', ', $descriptionParts);
+			if ($place['directions'] != '') {
+				$result .= CRLF . str_replace(CR, ',', $place['directions']);
+			}
+
+			$result .= CRLF;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets all places that are related to this event as an array.
+	 *
+	 * The array will be two-dimensional: The first dimensional is just numeric.
+	 * The second dimension is associative with the following keys:
+	 * title, address, city, country, homepage, directions
+	 *
+	 * @return	array		all places as a two-dimensional array, will be empty
+	 * 						if there are no places assigned
+	 */
+	private function getPlacesAsArray() {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, address, city, country, homepage, directions',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
@@ -813,42 +847,19 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			throw new Exception('There was an error with the database query.');
 		}
 
+		$result = array();
+
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$result .= $row['title'];
-			if ($row['homepage'] != '') {
-				$result .= CRLF . $row['homepage'];
-			}
-
-			$descriptionParts = array();
-			if ($row['address'] != '') {
-				$descriptionParts[] = str_replace(CR, ',', $row['address']);
-			}
-			if ($row['city'] != '') {
-				$descriptionParts[] = $row['city'];
-			}
-			if ($row['country'] != '') {
-				$countryName = $this->getCountryNameFromIsoCode(
-					$row['country']
-				);
-				if ($countryName != '') {
-					$descriptionParts[] = $countryName;
-				}
-			}
-
-			$result .= implode(', ', $descriptionParts);
-			if ($row['directions'] != '') {
-				$result .= CRLF . str_replace(CR, ',', $row['directions']);
-			}
-
-			$result .= CRLF;
+			$result[] = $row;
 		}
 
 		return $result;
 	}
 
 	/**
-	 * Gets our place (or places) as a plain test list (just the place names).
-	 * Returns a localized string "will be announced" if the seminar has no places set.
+	 * Gets our place (or places) as a plain text list (just the names).
+	 * Returns a localized string "will be announced" if the seminar has no
+	 * places set.
 	 *
 	 * @return	string		our places list (or '' if there is an error)
 	 */
