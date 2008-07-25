@@ -686,10 +686,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * them.
 	 *
 	 * @return	string		the currently logged-in FE user's data
-	 *
-	 * @access	public
 	 */
-	function getAllFeUserData() {
+	public function getAllFeUserData() {
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 
 		foreach (array(
@@ -705,28 +703,30 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$value = htmlspecialchars($userData[$currentKey]);
 			// Only show a label if we have any data following it.
 			if ($hasLabel && !empty($value)) {
-				$value = $this->plugin->translate('label_'.$currentKey)
-					.' '.$value;
+				$value = $this->plugin->translate('label_' . $currentKey) .
+					' ' . $value;
 			}
 			$this->plugin->setMarker(
-				'user_'.$currentKey,
+				'user_' . $currentKey,
 				$value
 			);
 		}
-		return $this->plugin->getSubpart(
-			'REGISTRATION_CONFIRMATION_FEUSER'
-		);
+
+		$rawOutput
+			= $this->plugin->getSubpart('REGISTRATION_CONFIRMATION_FEUSER');
+
+		// drops empty lines
+		return preg_replace('/[\n\r]\s*<br \/>/', '', $rawOutput);
 	}
 
 	/**
 	 * Gets the already entered registration data nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @return	string		the entered registration data, nicely formatted as HTML
-	 *
-	 * @access	public
+	 * @return	string		the entered registration data, nicely formatted as
+	 * 						HTML
 	 */
-	function getRegistrationData() {
+	public function getRegistrationData() {
 		$result = '';
 
 		foreach (array(
