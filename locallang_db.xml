@@ -41,8 +41,6 @@
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
-			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to edit this event:</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_seminars.attached_files">Attached files:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
@@ -84,6 +82,9 @@
 			<label index="tx_seminars_seminars.price_special_early">Special price (early bird):</label>
 			<label index="tx_seminars_seminars.price_special_board">Special price including full board:</label>
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment:</label>
+			<label index="tx_seminars_seminars.divLabelAccess">Access</label>
+			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
+			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to edit this event:</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.organization">Organization:</label>
@@ -218,8 +219,6 @@
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Lässt mehrfache Anmeldungen derselben Person zu:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Den Kollisionscheck für diese Veranstaltung ausschalten:</label>
 			<label index="tx_seminars_seminars.cancelled">Wurde abgesagt:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Frontend-User, der diese Veranstaltung eingetragen hat:</label>
-			<label index="tx_seminars_seminars.vips">Frontend-User, die diese Veranstaltung bearbeiten dürfen:</label>
 			<label index="tx_seminars_seminars.notes">Interne Notizen:</label>
 			<label index="tx_seminars_seminars.attached_files">Angehängte Dateien:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Referenten</label>
@@ -261,6 +260,9 @@
 			<label index="tx_seminars_seminars.price_special_early">Spezialpreis für Frühbucher:</label>
 			<label index="tx_seminars_seminars.price_special_board">Spezialpreis inklusive Vollpension:</label>
 			<label index="tx_seminars_seminars.payment_methods">Erlaubte Zahlungsarten:</label>
+			<label index="tx_seminars_seminars.divLabelAccess">Zugriff</label>
+			<label index="tx_seminars_seminars.owner_feuser">Frontend-User, der diese Veranstaltung eingetragen hat:</label>
+			<label index="tx_seminars_seminars.vips">Frontend-User, die diese Veranstaltung bearbeiten dürfen:</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.organization">Organisation:</label>
@@ -1338,6 +1340,7 @@
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 			<label index="tx_seminars_seminars.attached_files" type="integer">62695314</label>
 			<label index="tx_seminars_seminars.details_page" type="integer">196341936</label>
+			<label index="tx_seminars_seminars.divLabelAccess" type="integer">200750040</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2316,6 +2319,7 @@
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 			<label index="tx_seminars_seminars.attached_files">Attached files:</label>
 			<label index="tx_seminars_seminars.details_page">Page with the details view:</label>
+			<label index="tx_seminars_seminars.divLabelAccess">Access</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
