@@ -121,12 +121,31 @@
 		</p>
 		<!-- ###WRAPPER_SEARCHBOX### -->
 		<p>
-			###LABEL_SELECTOR_SEARCHBOX###: <input type="text" name="tx_seminars_pi1[sword]" value="###SEARCHBOX_VALUE###" />
+			###LABEL_SELECTOR_SEARCHBOX###: <input type="text" id="tx_seminars_pi1_sword" name="tx_seminars_pi1[sword]" value="###SEARCHBOX_VALUE###" />
 		</p>
 		<!-- ###WRAPPER_SEARCHBOX### -->
 		<p>
 			<input type="submit" value="###LABEL_SELECTOR_SUBMIT###" />
-			<input type="reset" value="###LABEL_SELECTOR_RESET###" />
+			<input type="submit" value="###LABEL_SELECTOR_RESET###"	onclick="
+				if (document.getElementById('tx_seminars_pi1_sword')) {
+					document.getElementById('tx_seminars_pi1_sword').value = '';
+				}
+				var suffixes = new Array(
+					'event_type', 'language', 'country', 'city', 'place'
+				);
+				for (var i = 0; i < suffixes.length; i++) {
+					var suffix = suffixes[i];
+					var element = document.getElementById(
+						'tx_seminars_pi1-' + suffix
+					);
+					if (element) {
+					    for (var j = 0; j < element.options.length; j++) {
+							element.options[j].selected = false;
+						}
+					}
+				}
+				return true;"
+			/>
         </p>
 	</form>
 </div>
