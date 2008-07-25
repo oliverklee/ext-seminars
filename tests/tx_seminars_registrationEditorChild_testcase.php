@@ -77,8 +77,11 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 				'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
 				'thankYouAfterRegistrationPID' => $this->frontEndPageUid,
 				'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 			)
 		);
+		$this->pi1->getTemplateCode();
+		$this->pi1->setLabels();
 
 		$this->fixture = new tx_seminars_registrationEditorChild($this->pi1);
 	}
@@ -133,6 +136,39 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			'[showUid]',
 			$this->fixture->getThankYouAfterRegistrationUrl(array())
+		);
+	}
+
+
+	/////////////////////////////////////
+	// Test concerning getAllFeUserData
+	/////////////////////////////////////
+
+	public function testGetAllFeUserContainsNonEmptyNameOfFrontEndUser() {
+		$this->testingFramework->loginFrontEndUser(
+			$this->testingFramework->createFrontEndUser(
+				$this->testingFramework->createFrontEndUserGroup(),
+				array('name' => 'John Doe')
+			)
+		);
+
+		$this->assertContains(
+			'John Doe',
+			$this->fixture->getAllFeUserData()
+		);
+	}
+
+	public function testGetAllFeUserDoesNotContainEmptyLinesForMissingCompanyName() {
+		$this->testingFramework->loginFrontEndUser(
+			$this->testingFramework->createFrontEndUser(
+				$this->testingFramework->createFrontEndUserGroup(),
+				array('name' => 'John Doe')
+			)
+		);
+
+		$this->assertNotRegExp(
+			'/<br \/>\s*<br \/>/',
+			$this->fixture->getAllFeUserData()
 		);
 	}
 }
