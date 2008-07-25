@@ -6,7 +6,7 @@
 - [#2001] Fix: City of event site doesn't appear in the event single view although it's entered in the BE
 - [#2011] Fix: hideFieldsInNotificationMail doesn't work
 - [#2018] Fix: Hidden single events still are visible in the list view limited to a category
-- [#1995] Add configuration to pre-set the sites to show in the list view
+- [#1995] Feature: Add configuration to pre-set the sites to show in the list view
 - [#1977] Feature: Add a field "page for the detail view" to single event/event date records
 - [#1822] Feature: Add configuration to pre-set the categories to show in the list view
 - [#1894] Change: Only reset the auto_increment value if it is much higher than the highest UID
