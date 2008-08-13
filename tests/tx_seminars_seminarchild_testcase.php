@@ -4186,5 +4186,95 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getPlaceShort()
 		);
 	}
+
+
+	/////////////////////////////
+	// Tests for attached files
+	/////////////////////////////
+
+	public function testHasAttachedFilesInitiallyReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasAttachedFiles()
+		);
+	}
+
+	public function testHasAttachedFilesWithOneAttachedFileReturnsTrue() {
+		$this->fixture->setAttachedFiles('test.file');
+
+		$this->assertTrue(
+			$this->fixture->hasAttachedFiles()
+		);
+	}
+
+	public function testHasAttachedFilesWithTwoAttachedFilesReturnsTrue() {
+		$this->fixture->setAttachedFiles('test.file,test_02.file');
+
+		$this->assertTrue(
+			$this->fixture->hasAttachedFiles()
+		);
+	}
+
+	public function testGetAttachedFilesInitiallyReturnsAnEmptyArray() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getAttachedFiles($this->pi1)
+		);
+	}
+
+	public function testGetAttachedFilesWithOneSetAttachedFileReturnsAttachedFileAsArrayWithCorrectFileSize() {
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName = substr(
+			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+		$this->fixture->setAttachedFiles($dummyFileName);
+
+		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
+
+		$this->assertContains(
+			'uploads/tx_seminars/' . $dummyFileName,
+			$attachedFiles[0]['name']
+		);
+
+		$this->assertEquals(
+			t3lib_div::formatSize(filesize($dummyFile)),
+			$attachedFiles[0]['size']
+		);
+	}
+
+	public function testGetAttachedFilesWithTwoSetAttachedFilesReturnsAttachedFilesAsArrayWithCorrectFileSize() {
+		$dummyFile1 = $this->testingFramework->createDummyFile();
+		$dummyFileName1 = substr(
+			$dummyFile1, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+		$dummyFile2 = $this->testingFramework->createDummyFile();
+		$dummyFileName2 = substr(
+			$dummyFile2, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+		$this->fixture->setAttachedFiles($dummyFileName1 . ',' . $dummyFileName2);
+
+		t3lib_div::writeFile($dummyFile2, 'Test');
+
+		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
+
+		$this->assertContains(
+			'uploads/tx_seminars/' . $dummyFileName1,
+			$attachedFiles[0]['name']
+		);
+
+		$this->assertEquals(
+			t3lib_div::formatSize(filesize($dummyFile1)),
+			$attachedFiles[0]['size']
+		);
+
+		$this->assertContains(
+			'uploads/tx_seminars/' . $dummyFileName2,
+			$attachedFiles[1]['name']
+		);
+
+		$this->assertEquals(
+			t3lib_div::formatSize(filesize($dummyFile2)),
+			$attachedFiles[1]['size']
+		);
+	}
 }
 ?>

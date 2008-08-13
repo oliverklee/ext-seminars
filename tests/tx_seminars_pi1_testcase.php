@@ -29,6 +29,7 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(PATH_tslib . 'class.tslib_content.php');
@@ -68,7 +69,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => $this->systemFolderPid,
-				'title' => 'Test event'
+				'title' => 'Test event',
 			)
 		);
 
@@ -99,8 +100,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 
@@ -340,6 +340,129 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'Test event',
 			$this->fixture->main('', array())
+		);
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning attached files in the single view
+	///////////////////////////////////////////////////////
+
+	public function testSingleViewWithOneAttachedFileContainsFileNameOfFile() {
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName = substr(
+			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			$dummyFileName,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithOneAttachedFileContainsFileNameOfFileLinkedToFile() {
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName = substr(
+			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertRegExp(
+			'/.*<a href="http:\/\/[\w\d_\-\/]*' . $dummyFileName . '" >' . $dummyFileName . '<\/a>.*/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithTwoAttachedFilesContainsBothFileNames() {
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName = substr(
+			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+
+		$dummyFile2 = $this->testingFramework->createDummyFile();
+		$dummyFileName2 = substr(
+			$dummyFile2, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			$dummyFileName,
+			$this->fixture->main('', array())
+		);
+		$this->assertContains(
+			$dummyFileName2,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithTwoAttachedFilesContainsTwoAttachedFilesWithSortingSetInBackEnd() {
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName = substr(
+			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+
+		$dummyFile2 = $this->testingFramework->createDummyFile();
+		$dummyFileName2 = substr(
+			$dummyFile2, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertRegExp(
+			'/.*(' . preg_quote($dummyFileName) . ').*\s*' .
+				'.*(' . preg_quote($dummyFileName2) . ').*/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFiles() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function testAttachedFilesSubpartIsVisibleInSingleViewWithOneAttachedFile() {
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName = substr(
+			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
+		);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
 		);
 	}
 

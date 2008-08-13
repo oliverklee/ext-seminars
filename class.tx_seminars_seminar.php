@@ -4502,6 +4502,74 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $result;
 	}
+
+	/**
+	 * Returns whether this event has at least one attached file.
+	 *
+	 * @return	boolean		true if this event has at least one attached file,
+	 * 						false otherwise
+	 */
+	public function hasAttachedFiles() {
+		return $this->hasRecordPropertyString('attached_files');
+	}
+
+	/**
+	 * Gets our attached files as an array of arrays with the elements "name"
+	 * and "size" of the attached file.
+	 *
+	 * The displayed file name is relative to the tx_seminars upload directory
+	 * and is linked to the actual file's URL.
+	 *
+	 * The file size will have, depending on the file size, one of the following
+	 * units appended: K for Kilobytes, M for Megabytes and G for Gigabytes.
+	 *
+	 * The returned array will be sorted like the files are sorted in the back-
+	 * end form.
+	 *
+	 * @param	tslib_pibase	a tslib_pibase object for a live page
+	 *
+	 * @return	array			an array of arrays with the elements "name" and
+	 * 							"size" of the attached file, will be empty if
+	 * 							there are no attached files
+	 */
+	public function getAttachedFiles(tslib_pibase $plugin) {
+		if (!$this->hasAttachedFiles()) {
+			return array();
+		}
+
+		$result = array();
+		$uploadFolderPath = PATH_site . 'uploads/tx_seminars/';
+		$uploadFolderUrl = t3lib_div::getIndpEnv('TYPO3_SITE_URL') .
+			'uploads/tx_seminars/';
+
+		$attachedFiles = explode(
+			',', $this->getRecordPropertyString('attached_files')
+		);
+
+		foreach ($attachedFiles as $attachedFile) {
+			$result[] = array(
+				'name' => $plugin->cObj->typoLink(
+					$attachedFile,
+					array('parameter' => $uploadFolderUrl . $attachedFile)
+				),
+				'size' => t3lib_div::formatSize(
+					filesize($uploadFolderPath . $attachedFile)
+				),
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Sets our attached files.
+	 *
+	 * @param	string		a comma-separated list of the names of attached files
+	 * 						which have to exist in "uploads/tx_seminars/"
+	 */
+	public function setAttachedFiles($attachedFiles) {
+		$this->setRecordPropertyString('attached_files', $attachedFiles);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

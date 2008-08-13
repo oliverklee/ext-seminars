@@ -1358,6 +1358,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->hideSubparts('list_registrations', 'field_wrapper');
 			}
 
+			$this->setAttachedFilesMarkers();
+
 			// Hides unneeded sections for topic records.
 			if ($this->seminar->getRecordType()
 				== SEMINARS_RECORD_TYPE_TOPIC
@@ -1510,6 +1512,32 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		} else {
 			$this->hideSubparts('price_board_special', $wrapper);
 		}
+	}
+
+	/**
+	 * Fills in the matching markers for the attached files or hides the subpart
+	 * if there are no attached files.
+	 */
+	private function setAttachedFilesMarkers() {
+		if (!$this->seminar->hasAttachedFiles()) {
+			$this->hideSubparts('attached_files', 'field_wrapper');
+			return;
+		}
+
+		$attachedFilesOutput = '';
+
+		foreach ($this->seminar->getAttachedFiles($this) as $attachedFile) {
+			$this->setMarker('attached_file_name', $attachedFile['name']);
+			$this->setMarker('attached_file_size', $attachedFile['size']);
+
+			$attachedFilesOutput .= $this->getSubpart(
+				'ATTACHED_FILES_LIST_ITEM'
+			);
+		}
+
+		$this->setSubpart(
+			'ATTACHED_FILES_LIST_ITEM', $attachedFilesOutput
+		);
 	}
 
  	/**

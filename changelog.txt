@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1952] Feature: List the attached files in the detail view of an event
 - [#1700] Feature: Add a tab "Access" for the BE event editor
 - [#1902] Fix: "Reset filter" doesn't work
 - [#2032] Fix: Hide the "referrer" field from the registration UI until it actually is used
