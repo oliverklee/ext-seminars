@@ -22,6 +22,10 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_registrationchild.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the registration class in the 'seminars' extensions.
  *
@@ -30,21 +34,17 @@
  *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_registrationchild.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
+	/** @var	tx_seminars_registrationchild */
 	private $fixture;
+	/** @var	tx_oelib_testingFramework */
 	private $testingFramework;
 
-	/** the UID of a seminar to which the fixture relates */
+	/** @var	integer		the UID of a seminar to which the fixture relates */
 	private $seminarUid;
 
-	protected function setUp() {
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+	public function setUp() {
+		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
 
 		$this->seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -52,16 +52,20 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->seminarUid)
+			array(
+				'seminar' => $this->seminarUid,
+				'interests' => 'nothing',
+				'expectations' => '',
+			)
 		);
 
 		$this->fixture = new tx_seminars_registrationchild($registrationUid);
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+
+		unset($this->fixture, $this->testingFramework);
 	}
 
 	public function testIsOk() {
@@ -171,13 +175,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testDumpAttendanceValueCanContainUid() {
-		$this->assertContains(
-			(string) $this->fixture->getUid(),
-			$this->fixture->dumpAttendanceValues('uid')
-		);
-	}
-
 	public function testGetRegistrationDataWithKeyMethodOfPaymentReturnsMethodOfPayment() {
 		$title = 'Test payment method';
 		$this->setPaymentMethodRelation(array('title' => $title));
@@ -188,15 +185,52 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testDumpAttendanceValuesCanContainUid() {
+		$this->assertContains(
+			(string) $this->fixture->getUid(),
+			$this->fixture->dumpAttendanceValues('uid')
+		);
+	}
 
-	///////////////////////////////////////////
-	// Tests regarding getting the user data.
-	///////////////////////////////////////////
+	public function testDumpAttendanceValuesContainsInterestsIfRequested() {
+		$this->assertContains(
+			'nothing',
+			$this->fixture->dumpAttendanceValues('interests')
+		);
+	}
 
-	public function testGetUserDataIsEmptyForEmptyKey() {
-		$this->assertEquals(
-			'',
-			$this->fixture->getUserData('')
+	public function testDumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceAfterCommaInKeyList() {
+		$this->assertContains(
+			'nothing',
+			$this->fixture->dumpAttendanceValues('email, interests')
+		);
+	}
+
+	public function testDumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceBeforeCommaInKeyList() {
+		$this->assertContains(
+			'nothing',
+			$this->fixture->dumpAttendanceValues('interests ,email')
+		);
+	}
+
+	public function testDumpAttendanceValuesContainsLabelForInterestsIfRequested() {
+		$this->assertContains(
+			$this->fixture->translate('label_interests'),
+			$this->fixture->dumpAttendanceValues('interests')
+		);
+	}
+
+	public function testDumpAttendanceValuesContainsLabelEvenForSpaceAfterCommaInKeyList() {
+		$this->assertContains(
+			$this->fixture->translate('label_interests'),
+			$this->fixture->dumpAttendanceValues('interests, expectations')
+		);
+	}
+
+	public function testDumpAttendanceValuesContainsLabelEvenForSpaceBeforeCommaInKeyList() {
+		$this->assertContains(
+			$this->fixture->translate('label_interests'),
+			$this->fixture->dumpAttendanceValues('interests ,expectations')
 		);
 	}
 
@@ -348,6 +382,165 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 					.' AND uid_foreign='.$checkboxesUid
 			),
 			'The relation record cannot be found in the DB.'
+		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests for setting and getting the user data
+	////////////////////////////////////////////////
+
+	public function testInstantiationWithoutLoggedInUserDoesNotThrowException() {
+		$this->testingFramework->logoutFrontEndUser();
+
+		new tx_seminars_registrationchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_ATTENDANCES,
+				array('seminar' => $this->seminarUid)
+			)
+		);
+	}
+
+	public function testSetUserDataThrowsExceptionForEmptyUserData() {
+		$this->setExpectedException(
+			'Exception', '$userData must not be empty.'
+		);
+
+		$this->fixture->setUserData(array());
+	}
+
+	public function testGetUserDataIsEmptyForEmptyKey() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getUserData('')
+		);
+	}
+
+	public function testGetUserDataReturnsEmptyStringForInexistentKeyName() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getUserData('foo')
+		);
+	}
+
+	public function testGetUserDataCanReturnNameSetViaSetUserData() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertEquals(
+			'John Doe',
+			$this->fixture->getUserData('name')
+		);
+	}
+
+	public function testGetUserDataCanReturnWwwSetViaSetUserData() {
+		$this->fixture->setUserData(array('www' => 'www.foo.com'));
+
+		$this->assertEquals(
+			'www.foo.com',
+			$this->fixture->getUserData('www')
+		);
+	}
+
+	public function testGetUserDataCanReturnNumericPidAsString() {
+		$pid = $this->testingFramework->createSystemFolder();
+		$this->fixture->setUserData(array('pid' => $pid));
+
+		$this->assertTrue(
+			is_string($this->fixture->getUserData('pid'))
+		);
+		$this->assertEquals(
+			(string) $pid,
+			$this->fixture->getUserData('pid')
+		);
+	}
+
+	public function testDumpUserValuesContainsUserNameIfRequested() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertContains(
+			'John Doe',
+			$this->fixture->dumpUserValues('name')
+		);
+	}
+
+	public function testDumpUserValuesContainsUserNameIfRequestedEvenForSpaceAfterCommaInKeyList() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertContains(
+			'John Doe',
+			$this->fixture->dumpUserValues('email, name')
+		);
+	}
+
+	public function testDumpUserValuesContainsUserNameIfRequestedEvenForSpaceBeforeCommaInKeyList() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertContains(
+			'John Doe',
+			$this->fixture->dumpUserValues('name ,email')
+		);
+	}
+
+	public function testDumpUserValuesContainsLabelForUserNameIfRequested() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertContains(
+			$this->fixture->translate('label_name'),
+			$this->fixture->dumpUserValues('name')
+		);
+	}
+
+	public function testDumpUserValuesContainsLabelEvenForSpaceAfterCommaInKeyList() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertContains(
+			$this->fixture->translate('label_name'),
+			$this->fixture->dumpUserValues('email, name')
+		);
+	}
+
+	public function testDumpUserValuesContainsLabelEvenForSpaceBeforeCommaInKeyList() {
+		$this->fixture->setUserData(array('name' => 'John Doe'));
+
+		$this->assertContains(
+			$this->fixture->translate('label_name'),
+			$this->fixture->dumpUserValues('name ,email')
+		);
+	}
+
+	public function testDumpUserValuesContainsPidIfRequested() {
+		$pid = $this->testingFramework->createSystemFolder();
+		$this->fixture->setUserData(array('pid' => $pid));
+
+		$this->assertTrue(
+			is_string($this->fixture->getUserData('pid'))
+		);
+
+		$this->assertContains(
+			(string) $pid,
+			$this->fixture->dumpUserValues('pid')
+		);
+	}
+
+	public function testDumpUserValuesContainsFieldNameAsLabelForPid() {
+		$pid = $this->testingFramework->createSystemFolder();
+		$this->fixture->setUserData(array('pid' => $pid));
+
+		$this->assertContains(
+			'Pid',
+			$this->fixture->dumpUserValues('pid')
+		);
+	}
+
+	public function testDumpUserValuesDoesNotContainRawLabelNameAsLabelForPid() {
+		$pid = $this->testingFramework->createSystemFolder();
+		$this->fixture->setUserData(array('pid' => $pid));
+
+		$this->assertNotContains(
+			'label_pid',
+			$this->fixture->dumpUserValues('pid')
 		);
 	}
 }
