@@ -4549,7 +4549,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		foreach ($attachedFiles as $attachedFile) {
 			$result[] = array(
 				'name' => $plugin->cObj->typoLink(
-					$attachedFile,
+					basename($attachedFile),
 					array('parameter' => $uploadFolderUrl . $attachedFile)
 				),
 				'size' => t3lib_div::formatSize(

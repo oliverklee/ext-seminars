@@ -4223,9 +4223,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetAttachedFilesWithOneSetAttachedFileReturnsAttachedFileAsArrayWithCorrectFileSize() {
 		$dummyFile = $this->testingFramework->createDummyFile();
-		$dummyFileName = substr(
-			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 		$this->fixture->setAttachedFiles($dummyFileName);
 
 		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
@@ -4243,13 +4242,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetAttachedFilesWithTwoSetAttachedFilesReturnsAttachedFilesAsArrayWithCorrectFileSize() {
 		$dummyFile1 = $this->testingFramework->createDummyFile();
-		$dummyFileName1 = substr(
-			$dummyFile1, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName1 =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile1);
 		$dummyFile2 = $this->testingFramework->createDummyFile();
-		$dummyFileName2 = substr(
-			$dummyFile2, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName2 =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 		$this->fixture->setAttachedFiles($dummyFileName1 . ',' . $dummyFileName2);
 
 		t3lib_div::writeFile($dummyFile2, 'Test');

@@ -350,9 +350,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewWithOneAttachedFileContainsFileNameOfFile() {
 		$dummyFile = $this->testingFramework->createDummyFile();
-		$dummyFileName = substr(
-			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -369,9 +368,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewWithOneAttachedFileContainsFileNameOfFileLinkedToFile() {
 		$dummyFile = $this->testingFramework->createDummyFile();
-		$dummyFileName = substr(
-			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -381,21 +379,45 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/.*<a href="http:\/\/[\w\d_\-\/]*' . $dummyFileName . '" >' . $dummyFileName . '<\/a>.*/',
+			'/<a href="http:\/\/[\w\d_\-\/]*' . $dummyFileName . '" >' .
+				$dummyFileName . '<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderContainsFileNameOfFileLinkedToFile() {
+		$dummyFolder = $this->testingFramework->createDummyFolder('test_folder');
+		$dummyFile = $this->testingFramework->createDummyFile(
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFolder) .
+				'/test.txt'
+		);
+
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertRegExp(
+			'/<a href="http:\/\/[\w\d_\-\/]*' .
+				str_replace('/', '\/', $dummyFileName) . '" >' .
+				basename($dummyFile) . '<\/a>/',
 			$this->fixture->main('', array())
 		);
 	}
 
 	public function testSingleViewWithTwoAttachedFilesContainsBothFileNames() {
 		$dummyFile = $this->testingFramework->createDummyFile();
-		$dummyFileName = substr(
-			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$dummyFile2 = $this->testingFramework->createDummyFile();
-		$dummyFileName2 = substr(
-			$dummyFile2, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName2 =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -416,14 +438,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewWithTwoAttachedFilesContainsTwoAttachedFilesWithSortingSetInBackEnd() {
 		$dummyFile = $this->testingFramework->createDummyFile();
-		$dummyFileName = substr(
-			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$dummyFile2 = $this->testingFramework->createDummyFile();
-		$dummyFileName2 = substr(
-			$dummyFile2, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName2 =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -449,9 +469,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testAttachedFilesSubpartIsVisibleInSingleViewWithOneAttachedFile() {
 		$dummyFile = $this->testingFramework->createDummyFile();
-		$dummyFileName = substr(
-			$dummyFile, strlen(PATH_site . 'uploads/tx_seminars/')
-		);
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
