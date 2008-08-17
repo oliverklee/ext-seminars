@@ -22,6 +22,15 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
+
 /**
  * Class 'tx_seminars_registrationmanager' for the 'seminars' extension.
  *
@@ -33,31 +42,19 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_headerProxyFactory.php');
-
 class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
-	/** Same as class name */
-	var $prefixId = 'tx_seminars_registrationmanager';
-	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_registrationmanager.php';
+	/** same as class name */
+	public $prefixId = 'tx_seminars_registrationmanager';
+	/**  path to this script relative to the extension dir */
+	public $scriptRelPath = 'class.tx_seminars_registrationmanager.php';
 
 	/** the data of the current registration (tx_seminars_registration) */
-	var $registration = null;
+	private $registration = null;
 
 	/**
 	 * The constructor.
-	 *
-	 * @access	public
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->init();
 	}
 
@@ -513,7 +510,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		}
 
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
-			$this->registration->sendAdditionalNotification($plugin);
+			$this->registration->sendAdditionalNotification();
 		}
 	}
 
@@ -622,7 +619,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 							'sendAdditionalNotificationEmails'
 						)
 					) {
-						$registration->sendAdditionalNotification($plugin);
+						$registration->sendAdditionalNotification();
 					}
 				}
 				$registrationBag->getNext();

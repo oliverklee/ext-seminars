@@ -22,6 +22,14 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_t3lib . 'class.t3lib_befunc.php');
+require_once(PATH_t3lib . 'class.t3lib_refindex.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_mailerFactory.php');
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+
 /**
  * Class 'tx_seminars_registration' for the 'seminars' extension.
  *
@@ -34,51 +42,42 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(PATH_t3lib.'class.t3lib_befunc.php');
-require_once(PATH_t3lib.'class.t3lib_refindex.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_mailerFactory.php');
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-
 class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_ATTENDANCES;
+	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
 
 	/** Same as class name */
-	var $prefixId = 'tx_seminars_registration';
+	public $prefixId = 'tx_seminars_registration';
 	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_registration.php';
+	public $scriptRelPath = 'class.tx_seminars_registration.php';
 
 	/** our seminar (object) */
-	var $seminar = null;
+	private $seminar = null;
 
 	/** whether we have already initialized the templates (which is done lazily) */
-	var $isTemplateInitialized = false;
+	private $isTemplateInitialized = false;
 
 	/**
 	 * This variable stores the data of the user as an array and makes it
 	 * available without further database queries. It will get filled with data
 	 * in the constructor.
 	 */
-	var $userData;
+	private $userData;
 
 	/**
 	 * An array of UIDs of lodging options associated with this record.
 	 */
-	var $lodgings = array();
+	private $lodgings = array();
 
 	/**
 	 * An array of UIDs of food options associated with this record.
 	 */
-	var $foods = array();
+	private $foods = array();
 
 	/**
 	 * An array of UIDs of option checkboxes associated with this record.
 	 */
-	var $checkboxes = array();
+	private $checkboxes = array();
 
 	/**
 	 * An array of cached seminar objects with the seminar UIDs as keys and the
@@ -99,29 +98,31 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->cObj = $cObj;
 		$this->init();
 
-	 	if ($dbResult) {
-			$data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			if ($data) {
-				$this->getDataFromDbResult($data);
-			}
-
-			if ($this->isOk()) {
-				$seminarUid = $this->recordData['seminar'];
-				if (isset(self::$cachedSeminars[$seminarUid])) {
-					$this->seminar = self::$cachedSeminars[$seminarUid];
-				} else {
-					/** Name of the seminar class in case someone subclasses it. */
-					$seminarClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_seminar'
-					);
-					$this->seminar = new $seminarClassname($seminarUid);
-					self::$cachedSeminars[$seminarUid] = $this->seminar;
-				}
-
-				// Stores the user data in $this->userData.
-				$this->retrieveUserData();
-			}
+	 	if (!$dbResult) {
+	 		return;
 	 	}
+
+	 	$data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		if ($data) {
+			$this->getDataFromDbResult($data);
+		}
+
+		if ($this->isOk()) {
+			$seminarUid = $this->recordData['seminar'];
+			if (isset(self::$cachedSeminars[$seminarUid])) {
+				$this->seminar = self::$cachedSeminars[$seminarUid];
+			} else {
+				/** Name of the seminar class in case someone subclasses it. */
+				$seminarClassname = t3lib_div::makeInstanceClassName(
+					'tx_seminars_seminar'
+				);
+				$this->seminar = new $seminarClassname($seminarUid);
+				self::$cachedSeminars[$seminarUid] = $this->seminar;
+			}
+
+			// Stores the user data in $this->userData.
+			$this->retrieveUserData();
+		}
 	}
 
 	/**
@@ -137,13 +138,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * This function must be called directly after construction or this object
 	 * will not be usable.
 	 *
-	 * @param	object		the seminar object (that's the seminar we would like to register for), must not be null
-	 * @param	integer		the UID of the feuser who wants to sign up
-	 * @param	array		associative array with the registration data the user has just entered
-	 *
-	 * @access	public
+	 * @param	tx_seminars_seminar		the seminar object (that's the seminar
+	 * 									we would like to register for)
+	 * @param	integer					the UID of the FE user who wants to sign
+	 * 									up
+	 * @param	array					associative array with the registration
+	 * 									data the user has just entered, may be
+	 * 									empty
 	 */
-	function setRegistrationData(
+	public function setRegistrationData(
 		tx_seminars_seminar $seminar, $userUid, array $registrationData
 	) {
 		$this->seminar = $seminar;
@@ -228,7 +231,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			: $this->getConfValueInteger('attendancesPID');
 
 		if ($this->isOk()) {
-			// Store the user data in $this->userData.
+			// Stores the user data in $this->userData.
 			$this->retrieveUserData();
 			$this->createTitle();
 		}
@@ -272,20 +275,41 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * $this->userData.
 	 *
 	 * $this->userData will be null if retrieving the user data fails.
-	 *
-	 * @access	private
 	 */
-	function retrieveUserData() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				'fe_users',
-				'uid='.$this->getUser());
-
-		if ($dbResult) {
-			$this->userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-		} else {
+	private function retrieveUserData() {
+		$uid = $this->getUser();
+		if ($uid == 0) {
 			$this->userData = null;
+			return;
 		}
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'*', 'fe_users', 'uid=' . $uid
+		);
+		if (!$dbResult) {
+			throw new Exception(DATABASE_QUERY_ERROR);
+		}
+		$userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		if (!$userData) {
+			throw new Exception(
+				'The FE user with the UID ' . $uid . ' could not be retrieved.'
+			);
+		}
+
+		$this->setUserData($userData);
+	}
+
+	/**
+	 * Sets the data of the FE user of this registration.
+	 *
+	 * @param	array	data of the front-end user, must not be empty
+	 */
+	public function setUserData(array $userData) {
+		if (empty($userData)) {
+			throw new Exception('$userData must not be empty.');
+		}
+
+		$this->userData = $userData;
 	}
 
 	/**
@@ -300,10 +324,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @param	string		the key of the data to retrieve (the key doesn't need to be trimmed)
 	 *
 	 * @return	string		the trimmed value retrieved from $this->recordData, may be empty
-	 *
-	 * @access	public
 	 */
-	function getRegistrationData($key) {
+	public function getRegistrationData($key) {
 		$result = '';
 		$trimmedKey = trim($key);
 
@@ -375,13 +397,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * of birth or the status), this function will already return the clear text
 	 * version.
 	 *
-	 * @param	string		the key of the data to retrieve (the key doesn't need to be trimmed)
+	 * @param	string		the key of the data to retrieve, may contain leading
+	 * 						or trailing spaces, must not be empty
 	 *
-	 * @return	string		the trimmed value retrieved from $this->userData, may be empty
-	 *
-	 * @access	public
+	 * @return	string		the trimmed value retrieved from $this->userData,
+	 * 						may be empty
 	 */
-	function getUserData($key) {
+	public function getUserData($key) {
 		$result = '';
 		$trimmedKey = trim($key);
 
@@ -957,12 +979,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * - an event is fully booked
 	 * If both things happen at the same time (minimum and maximum count of
 	 * attendees are the same), only the "event is full" message will be sent.
-	 *
-	 * @param	object		a tslib_pibase object for a live page
-	 *
-	 * @access	public
 	 */
-	function sendAdditionalNotification(tslib_pibase $plugin) {
+	public function sendAdditionalNotification() {
 		$whichEmailToSend = '';
 		$whichEmailSubject = '';
 
@@ -970,11 +988,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			if ($this->seminar->isFull()) {
 				$whichEmailToSend = 'email_additionalNotificationIsFull';
 				$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
-			// The second check ensures that only one set of e-mails is sent to the
-			// organizers.
-			} elseif ($this->seminar->getAttendancesMin() == $this->seminar->getAttendances()) {
-				$whichEmailToSend = 'email_additionalNotificationEnoughRegistrations';
-				$whichEmailSubject = 'email_additionalNotificationEnoughRegistrationsSubject';
+			// The second check ensures that only one set of e-mails is sent to
+			// the organizers.
+			} elseif ($this->seminar->getAttendancesMin()
+				== $this->seminar->getAttendances()
+			) {
+				$whichEmailToSend
+					= 'email_additionalNotificationEnoughRegistrations';
+				$whichEmailSubject
+					= 'email_additionalNotificationEnoughRegistrationsSubject';
 			}
 		}
 
@@ -1050,17 +1072,21 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @param	string		comma-separated list of key names
 	 *
 	 * @return	string		formatted output (may be empty)
-	 *
-	 * @access	public
 	 */
-	function dumpUserValues($keysList) {
+	public function dumpUserValues($keysList) {
 		$keys = explode(',', $keysList);
 		$keysWithLabels = array();
 
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
-			$currentLabel = $this->translate('label_'.$currentKey);
+			$labelKey = 'label_' . $currentKeyTrimmed;
+
+			$currentLabel = $this->translate($labelKey);
+			if (($currentLabel == '') || ($currentLabel == $labelKey)) {
+				$currentLabel = ucfirst($currentKeyTrimmed);
+			}
+
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
 			$maxLength = max($maxLength, strlen($currentLabel));
 		}
@@ -1068,16 +1094,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$result = '';
 		foreach ($keysWithLabels as $currentKey => $currentLabel) {
 			$value = $this->getUserData($currentKey);
-			// Check whether there is a value to display. If not, we don't use
+			// Checks whether there is a value to display. If not, we don't use
 			// the padding and break the line directly after the label.
 			if ($value != '') {
 				$result .= str_pad(
-					$currentLabel.': ',
+					$currentLabel . ': ',
 					$maxLength + 2,
 					' '
 				).$value.LF;
 			} else {
-				$result .= $currentLabel.':'.LF;
+				$result .= $currentLabel . ':' . LF;
 			}
 		}
 
@@ -1104,12 +1130,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
-			if ($currentKey == 'uid') {
+			if ($currentKeyTrimmed == 'uid') {
 				// The UID label is a special case as we also have a UID label
 				// for events.
 				$currentLabel = $this->translate('label_registration_uid');
 			} else {
-				$currentLabel = $this->translate('label_'.$currentKey);
+				$currentLabel = $this->translate('label_' . $currentKeyTrimmed);
 			}
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
 			$maxLength = max($maxLength, strlen($currentLabel));
@@ -1123,12 +1149,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			// the padding and break the line directly after the label.
 			if ($value != '') {
 				$result .= str_pad(
-					$currentLabel.': ',
+					$currentLabel . ': ',
 					$maxLength + 2,
 					' '
-				).$value.LF;
+				) . $value . LF;
 			} else {
-				$result .= $currentLabel.':'.LF;
+				$result .= $currentLabel . ':' . LF;
 			}
 		}
 

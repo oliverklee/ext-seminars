@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_typo3 . 'sysext/cms/tslib/class.tslib_content.php');
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
+
 /**
  * Class 'tx_seminars_registrationchild' for the 'seminars' extension.
  *
@@ -33,12 +38,6 @@
  *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(PATH_typo3.'sysext/cms/tslib/class.tslib_content.php');
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
-
 final class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * The constructor.
@@ -52,7 +51,7 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 			'uid='.$registrationUid
 		);
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 
 		$contentObject = t3lib_div::makeInstance('tslib_cObj');
