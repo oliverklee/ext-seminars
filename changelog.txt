@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2092] Change: Update the test record icon in seminars and oelib
 - [#2067] Change: All fields from the FE user table should be usable in the notification e-mail
 - [#1952] Feature: List the attached files in the detail view of an event
 - [#1700] Feature: Add a tab "Access" for the BE event editor
