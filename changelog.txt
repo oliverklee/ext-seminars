@@ -1,4 +1,5 @@
 0.6.2 (currently working on)
+- [#2092] Change: Update the test record icon in seminars and oelib
 - [#2067] Change: All fields from the FE user table should be usable in the notification e-mail
 - [#1902] Fix: "Reset filter" doesn't work
 - [#2003] Fix: Empty lines in the FE user data on the second registration page
