@@ -158,6 +158,23 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		return $uid;
 	}
 
+	/**
+	 * Creates a FE user, registers him/her to the seminar with the UID in
+	 * $this->seminarUid and logs him/her in.
+	 */
+	private function createLogInAndRegisterFeUser() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->seminarUid,
+				'user' => $feUserUid,
+			)
+		);
+		$this->testingFramework->loginFrontEndUser($feUserUid);
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -348,7 +365,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning attached files in the single view
 	///////////////////////////////////////////////////////
 
-	public function testSingleViewWithOneAttachedFileContainsFileNameOfFile() {
+	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFile() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -366,7 +385,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewWithOneAttachedFileContainsFileNameOfFileLinkedToFile() {
+	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -385,7 +406,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderContainsFileNameOfFileLinkedToFile() {
+	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
 		$dummyFolder = $this->testingFramework->createDummyFolder('test_folder');
 		$dummyFile = $this->testingFramework->createDummyFile(
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFolder) .
@@ -410,7 +433,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewWithTwoAttachedFilesContainsBothFileNames() {
+	public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsBothFileNames() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -436,7 +461,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewWithTwoAttachedFilesContainsTwoAttachedFilesWithSortingSetInBackEnd() {
+	public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsTwoAttachedFilesWithSortingSetInBackEnd() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -459,7 +486,136 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFiles() {
+	public function testSingleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFile() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			$dummyFileName,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertRegExp(
+			'/<a href="http:\/\/[\w\d_\-\/]*' . $dummyFileName . '" >' .
+				$dummyFileName . '<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
+		$dummyFolder = $this->testingFramework->createDummyFolder('test_folder');
+		$dummyFile = $this->testingFramework->createDummyFile(
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFolder) .
+				'/test.txt'
+		);
+
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertRegExp(
+			'/<a href="http:\/\/[\w\d_\-\/]*' .
+				str_replace('/', '\/', $dummyFileName) . '" >' .
+				basename($dummyFile) . '<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsBothFileNames() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$dummyFile2 = $this->testingFramework->createDummyFile();
+		$dummyFileName2 =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			$dummyFileName,
+			$this->fixture->main('', array())
+		);
+		$this->assertContains(
+			$dummyFileName2,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsTwoAttachedFilesWithSortingSetInBackEnd() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$dummyFile2 = $this->testingFramework->createDummyFile();
+		$dummyFileName2 =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertRegExp(
+			'/.*(' . preg_quote($dummyFileName) . ').*\s*' .
+				'.*(' . preg_quote($dummyFileName2) . ').*/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithLoggedInAndRegisteredFeUser() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertFalse(
@@ -467,7 +623,52 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAttachedFilesSubpartIsVisibleInSingleViewWithOneAttachedFile() {
+	public function testAttachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndLoggedInAndUnregisteredFeUser() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->loginFrontEndUser($feUserUid);
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function testAttachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndNoLoggedInFeUser() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndLoggedInAndRegisteredFeUser() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -481,6 +682,36 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndDisabledLimitFileDownloadToAttendees() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithDisabledLimitFileDownloadToAttendees() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
 			$this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
 		);
 	}

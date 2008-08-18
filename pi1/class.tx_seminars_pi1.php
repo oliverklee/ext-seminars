@@ -1519,7 +1519,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * if there are no attached files.
 	 */
 	private function setAttachedFilesMarkers() {
-		if (!$this->seminar->hasAttachedFiles()) {
+		$mayDisplayAttachedFiles = true;
+
+		if ($this->getConfValueBoolean(
+				'limitFileDownloadToAttendees', 's_singleView'
+		)) {
+			$mayDisplayAttachedFiles =
+				$this->isLoggedIn() &&
+				$this->seminar->isUserRegistered($this->getFeUserUid());
+		}
+
+		if (!$this->seminar->hasAttachedFiles() || !$mayDisplayAttachedFiles) {
 			$this->hideSubparts('attached_files', 'field_wrapper');
 			return;
 		}

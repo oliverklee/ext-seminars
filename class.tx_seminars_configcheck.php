@@ -34,6 +34,7 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
@@ -1108,6 +1109,22 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'the locations in the single view. '
 				.'If this value is incorrect, the detailed information might '
 				.'be shown although this is not intended (or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value limitFileDownloadToAttendees.
+	 */
+	private function checkLimitFileDownloadToAttendees() {
+		$this->checkIfBoolean(
+			'limitFileDownloadToAttendees',
+			true,
+			's_singleView',
+			'This value specifies whether the list of attached files in the ' .
+				'detailed view is only shown to logged in and registered ' .
+				'attendees. If this value is incorrect, the attached files ' .
+				'may be shown to the public although they should be visible ' .
+				'only to the attendees (or vice versa).'
 		);
 	}
 

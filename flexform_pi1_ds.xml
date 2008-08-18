@@ -285,6 +285,24 @@
 				</el>
 			</ROOT>
 		</s_listView>
+		<s_singleView>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_single_view</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<limitFileDownloadToAttendees>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitFileDownloadToAttendees</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</limitFileDownloadToAttendees>
+				</el>
+			</ROOT>
+		</s_singleView>
 		<s_template_special>
 			<ROOT>
 				<TCEforms>

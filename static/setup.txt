@@ -321,6 +321,9 @@ plugin.tx_seminars_pi1 {
 	# whether detailed information for the locations is shown in the single view
 	showSiteDetails = 1
 
+	# whether file downloads are limited to attendees only in the single view
+	limitFileDownloadToAttendees = 1
+
 	# comma-separated list of FEuser fields to show in the list of registrations for an event
 	showFeUserFieldsInRegistrationsList = name
 
