@@ -54,21 +54,14 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	private $pi1;
 
 	public function setUp() {
-		// Bolsters up the fake front end.
-		$GLOBALS['TSFE']->tmpl = t3lib_div::makeInstance('t3lib_tsparser_ext');
-		$GLOBALS['TSFE']->tmpl->flattenSetup(array(), '', false);
-		$GLOBALS['TSFE']->tmpl->init();
-		$GLOBALS['TSFE']->tmpl->getCurrentPageData();
-
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->frontEndPageUid = $this->testingFramework->createFakeFrontEnd();
 
 		$seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 
-		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
 		$this->pi1 = new tx_seminars_pi1();
-		$this->pi1->fakeFrontEnd();
 		$this->pi1->createSeminar($seminarUid);
 		$this->pi1->init(
 			array(

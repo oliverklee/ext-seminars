@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
+
 /**
  * Class 'tx_seminars_objectfromdb' for the 'seminars' extension.
  *
@@ -35,9 +37,6 @@
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
-
 abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	/** string with the name of the SQL table this class corresponds to */
 	protected $tableName = '';

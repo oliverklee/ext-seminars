@@ -49,6 +49,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		tx_seminars_registrationchild::purgeCachedSeminars();
 
 		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
 
 		$organizerUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ORGANIZERS,

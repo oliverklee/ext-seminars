@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+
 /**
  * Class 'tx_seminars_timespan' for the 'seminars' extension.
  *
@@ -34,14 +36,11 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-
 abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	/** same as class name */
-	var $prefixId = 'tx_seminars_timespan';
+	public $prefixId = 'tx_seminars_timespan';
 	/**  path to this script relative to the extension dir */
-	var $scriptRelPath = 'class.tx_seminars_timespan.php';
+	public $scriptRelPath = 'class.tx_seminars_timespan.php';
 
 	/**
 	 * Gets the begin date.

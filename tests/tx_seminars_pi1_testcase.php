@@ -22,16 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Testcase for the pi1 class in the 'seminars' extension.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
- */
-
 require_once(PATH_tslib . 'class.tslib_content.php');
 require_once(PATH_tslib . 'class.tslib_feuserauth.php');
 require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
@@ -41,8 +31,19 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
+/**
+ * Testcase for the pi1 class in the 'seminars' extension.
+ *
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ *
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
+ */
 class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
+	/** @var	tx_seminars_pi1 */
 	private $fixture;
+	/** @var	tx_oelib_testingFramework */
 	private $testingFramework;
 
 	/** the UID of a seminar to which the fixture relates */
@@ -55,14 +56,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private $numberOfTargetGroups = 0;
 
 	public function setUp() {
-		// Bolsters up the fake front end.
-		$GLOBALS['TSFE']->tmpl = t3lib_div::makeInstance('t3lib_tsparser_ext');
-		$GLOBALS['TSFE']->tmpl->flattenSetup(array(), '', false);
-		$GLOBALS['TSFE']->tmpl->init();
-		$GLOBALS['TSFE']->tmpl->getCurrentPageData();
-
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 		$this->seminarUid = $this->testingFramework->createRecord(
@@ -74,8 +69,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture = new tx_seminars_pi1();
-		$this->fixture->fakeFrontend();
-
 		$this->fixture->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
@@ -100,6 +93,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
+
 		unset($this->fixture, $this->testingFramework);
 	}
 
@@ -107,29 +101,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	///////////////////////
 	// Utility functions.
 	///////////////////////
-
-	/**
-	 * Initializes '$GLOBALS['TSFE']->sys_page', '$GLOBALS['TT']' and
-	 * '$this->cObj' as these objects are needed but only initialized
-	 * automatically if TYPO3_MODE is 'FE'.
-	 * This will allow the FE templating functions to be used even without the
-	 * FE.
-	 */
-	 private function fakeFrontend() {
-	 	if (!is_object($GLOBALS['TT'])) {
-	 		$GLOBALS['TT'] = t3lib_div::makeInstance('t3lib_timeTrack');
-	 	}
-
-	 	if (!is_object($GLOBALS['TSFE']->sys_page)) {
-	 		$GLOBALS['TSFE']->sys_page
-	 			= t3lib_div::makeInstance('t3lib_pageSelect');
-	 	}
-
-		if (!is_object($this->fixture->cObj)) {
-			$this->fixture->cObj = t3lib_div::makeInstance('tslib_cObj');
-			$this->fixture->cObj->start('');
-		}
-	 }
 
 	/**
 	 * Inserts a target group record into the database and creates a relation to

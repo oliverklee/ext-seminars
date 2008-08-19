@@ -22,6 +22,19 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_configcheck.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_salutationswitcher.php');
+
+require_once(PATH_t3lib . 'class.t3lib_tstemplate.php');
+require_once(PATH_t3lib . 'class.t3lib_page.php');
+require_once(PATH_tslib . 'class.tslib_content.php');
+
+// In the back end, include the extension's locallang.xml.
+if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
+    $LANG->includeLLFile('EXT:seminars/locallang.xml');
+}
+
 /**
  * Class 'tx_seminars_dbplugin' for the 'seminars' extension.
  *
@@ -35,19 +48,6 @@
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(PATH_t3lib.'class.t3lib_tstemplate.php');
-require_once(PATH_t3lib.'class.t3lib_page.php');
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configcheck.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_salutationswitcher.php');
-
-// If we are in the back end, we include the extension's locallang.xml.
-if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
-    $LANG->includeLLFile('EXT:seminars/locallang.xml');
-}
-
 class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	/** The extension key. */
 	var $extKey = 'seminars';
@@ -122,6 +122,12 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 					// On the front end, we can use the provided template setup.
 					$this->conf =& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_'.$this->extKey.'.'];
 				}
+			}
+
+			if (!($this->cObj instanceof tslib_cObj)
+				&& ($GLOBALS['TSFE']->cObj instanceof tslib_cObj)
+			) {
+				$this->cObj = $GLOBALS['TSFE']->cObj;
 			}
 
 			$this->pi_setPiVarDefaults();
