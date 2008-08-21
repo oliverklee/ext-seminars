@@ -55,7 +55,8 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
-		$this->frontEndPageUid = $this->testingFramework->createFakeFrontEnd();
+		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
+		$this->testingFramework->createFakeFrontEnd($this->frontEndPageUid);
 
 		$this->pi1 = new tx_seminars_pi1();
 		$this->pi1->init(

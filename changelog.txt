@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2093] Change: Allow creating fake front ends without adding a record to the pages table
 - [#1916] Change: Use the createFakeFrontEnd function from the testing framework in the Seminar Manager
 - [#1953] Feature: The file list should only be displayed for attendees
 - [#2092] Change: Update the test record icon in seminars and oelib
