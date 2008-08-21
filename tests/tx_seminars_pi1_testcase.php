@@ -74,7 +74,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'what_to_display' => 'seminar_list',
-				'eventType' => 'Workshop',
 				'pidList' => $this->systemFolderPid,
 				'pages' => $this->systemFolderPid,
 				'recursive' => 1
@@ -83,9 +82,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->getTemplateCode();
 		$this->fixture->setLabels();
 		$this->fixture->createHelperObjects();
-		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'eventType', 'Workshop'
-		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'dateFormatYMD', '%d.%m.%Y'
 		);
@@ -226,13 +222,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testEventTypeInConfigurationIsSet() {
-		$this->assertEquals(
-			'Workshop',
-			$this->fixture->getConfigGetter()->getConfValueString('eventType')
-		);
-	}
-
 
 	/////////////////////////////////////////
 	// Test concerning the search function.
@@ -256,30 +245,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testSearchWhereCreatesAndOnlyAtTheStartForOneSearchWord() {
 		$this->assertTrue(
 			strpos($this->fixture->searchWhere('foo'), ' AND ') === 0
-		);
-	}
-
-	public function testSearchWhereForDefaultEventTypeContainsEventType0() {
-		$this->assertContains(
-			'.event_type=0', $this->fixture->searchWhere('Workshop')
-		);
-	}
-
-	public function testSearchWhereForPartOfDefaultEventTypeContainsEventType0() {
-		$this->assertContains(
-			'.event_type=0', $this->fixture->searchWhere('Work')
-		);
-		$this->assertContains(
-			'.event_type=0', $this->fixture->searchWhere('ork')
-		);
-		$this->assertContains(
-			'.event_type=0', $this->fixture->searchWhere('hop')
-		);
-	}
-
-	public function testSearchWhereForDifferenteFromEventTypeNotContainsEventType0() {
-		$this->assertNotContains(
-			'.event_type=0', $this->fixture->searchWhere('Seminar')
 		);
 	}
 
@@ -869,12 +834,46 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$result = $this->fixture->main('', array());
+
 		$this->assertContains(
 			'group 1',
-			$this->fixture->main('', array())
+			$result
 		);
 		$this->assertContains(
 			'group 2',
+			$result
+		);
+	}
+
+
+	//////////////////////////////////////////////////////
+	// Test concerning the event type in the single view
+	//////////////////////////////////////////////////////
+
+	public function testSingleViewContainsEventTypeTitleAndColonIfEventHasEventType() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'event_type' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+				)
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'foo type:',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewNotContainsColonBeforeEventTitleIfEventHasNoEventType() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotRegExp(
+			'/: *Test event/',
 			$this->fixture->main('', array())
 		);
 	}

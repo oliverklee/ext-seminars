@@ -22,16 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Plugin 'Seminar Manager' for the 'seminars' extension.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
- */
-
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
@@ -50,20 +40,29 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
 
+/**
+ * Plugin 'Seminar Manager' for the 'seminars' extension.
+ *
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ *
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
+ */
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/** same as class name */
-	var $prefixId = 'tx_seminars_pi1';
+	public $prefixId = 'tx_seminars_pi1';
 	/** path to this script relative to the extension dir */
-	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
+	public $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
 	/** a config getter that gets us the configuration in plugin.tx_seminars */
-	var $configGetter = null;
+	private $configGetter = null;
 
 	/** the seminar which we want to list/show or for which the user wants to register */
-	var $seminar = null;
+	private $seminar = null;
 
 	/** the registration which we want to list/show in the "my events" view */
-	var $registration = null;
+	private $registration = null;
 
 	/** the previous event's category (used for the list view) */
 	private $previousCategory = '';
@@ -72,25 +71,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	private $previousDate = '';
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
-	var $registrationManager = null;
+	private $registrationManager = null;
 
 	/** an instance of static info tables which we need for the list view to convert ISO codes to country names and languages */
-	var $staticInfo = null;
+	private $staticInfo = null;
 
 	/** all languages that may be shown in the option box of the selector widget  */
-	var $allLanguages = array();
+	private $allLanguages = array();
 
 	/** all countries that may be shown in the option box of the selector widget  */
-	var $allCountries = array();
+	private $allCountries = array();
 
 	/** all places that may be shown in the option box of the selector widget  */
-	var $allPlaces = array();
+	private $allPlaces = array();
 
 	/** all cities that may be shown in the option box of the selector widget */
-	var $allCities = array();
+	private $allCities = array();
 
 	/** all event types */
-	var $allEventTypes = array();
+	private $allEventTypes = array();
 
 	/**
 	 * List of field names (as keys) by which we can sort plus the
@@ -248,14 +247,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Displays the seminar manager HTML.
 	 *
-	 * @param	string		default content string, ignore
+	 * @param	string		(unused)
 	 * @param	array		TypoScript configuration for the plugin
 	 *
 	 * @return	string		HTML for the plugin
-	 *
-	 * @access	public
 	 */
-	function main($content, array $conf) {
+	public function main($unused, array $conf) {
 		$this->init($conf);
 		$this->pi_initPIflexForm();
 
@@ -672,9 +669,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Reads the event type from the event record.
 			$eventTypeUid = $currentEvent->getEventTypeUidForSelectorWidget();
-			$eventTypeName = $currentEvent->getEventType();
-			if (!isset($this->allEventTypes[$eventTypeUid])) {
-				$this->allEventTypes[$eventTypeUid] = $eventTypeName;
+			if ($eventTypeUid != 0) {
+				$eventTypeName = $currentEvent->getEventType();
+				if (!isset($this->allEventTypes[$eventTypeUid])) {
+					$this->allEventTypes[$eventTypeUid] = $eventTypeName;
+				}
 			}
 
 			$seminarBag->getNext();
@@ -1079,7 +1078,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// This sets the title of the page for use in indexed search results:
 			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
 
-			$this->setMarker('event_type', $this->seminar->getEventType());
+			if ($this->seminar->hasEventType()) {
+				$this->setMarker('event_type', $this->seminar->getEventType());
+			} else {
+				$this->hideSubparts('event_type', 'field_wrapper');
+			}
 			$this->setMarker('title', $this->seminar->getTitle());
 			$this->setMarker('uid', $this->seminar->getUid());
 
@@ -2570,23 +2573,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 						.')';
 					}
 
-					// Will the default event type match a search?
-					// NB: We ask the registration manager for its configuration
-					// as we need the configuration from plugin.tx_seminars
-					// (which the registration manager uses),
-					// not from plugin.tx_seminars_pi1 (which we use).
-					$eventTypeMatcher = '';
-					if (stristr(
-						$this->configGetter->getConfValueString('eventType'),
-						$currentPreparedKeyword
-					) !== false) {
-						$eventTypeMatcher = ' OR ('.SEMINARS_TABLE_SEMINARS.'.event_type=0 '
-											.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!=2)'
-											.' OR (s1.event_type=0 AND s1.uid=s2.topic '
-											.' AND s2.object_type=2 AND s2.uid='
-											.SEMINARS_TABLE_SEMINARS.'.uid)';
-					}
-
 					// For event types, we have a single foreign key.
 					foreach ($this->searchFieldList['event_types'] as $field) {
 						$whereParts[] = 'EXISTS ('
@@ -2599,7 +2585,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 							.' AND ((s1.uid=s2.topic AND s2.object_type=2) '
 								.'OR (s1.uid=s2.uid AND s1.object_type!=2))'
 							.' AND s2.uid='.SEMINARS_TABLE_SEMINARS.'.uid)'
-							.$eventTypeMatcher
 						.')';
 					}
 

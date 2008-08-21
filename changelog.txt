@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2074] Change: Drop the default event type (workshop)
 - [#964] Change: Remove the additional event information from the registration page
 - [#2078] Fix: Require static_taxes
 - [#2093] Change: Allow creating fake front ends without adding a record to the pages table

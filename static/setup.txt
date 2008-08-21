@@ -87,9 +87,6 @@ plugin.tx_seminars {
 	# ISO3 code of the currency to be used (not checked for validity yet)
 	currency = EUR
 
-	# The default event type. This value will be used for events that have no type assigned to them. This value is not checked as any string (even an empty string) is allowed.
-	eventType = Workshop
-
 	# whether to also show the time of the registration deadline
 	showTimeOfRegistrationDeadline = 0
 

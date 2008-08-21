@@ -22,6 +22,18 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_timespan.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_timeslotbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_category.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_categorybag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_categorybagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizer.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizerbag.php');
+
+require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
+
 /**
  * Class 'tx_seminars_seminar' for the 'seminars' extension.
  *
@@ -33,27 +45,14 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslotbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_category.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
-
-require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
-
 class tx_seminars_seminar extends tx_seminars_timespan {
 	/** Same as class name */
-	var $prefixId = 'tx_seminars_seminar';
+	public $prefixId = 'tx_seminars_seminar';
 	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_seminar.php';
+	public $scriptRelPath = 'class.tx_seminars_seminar.php';
 
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_SEMINARS;
+	protected $tableName = SEMINARS_TABLE_SEMINARS;
 
 	/** The number of all attendances. */
 	protected $numberOfAttendances = 0;
@@ -1884,11 +1883,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether this seminar has an event type set.
 	 *
-	 * @return	boolean		true if the seminar has an event type set, false if not
-	 *
-	 * @access	public
+	 * @return	boolean		true if the seminar has an event type set, otherwise
+	 * 						false
 	 */
-	function hasEventType() {
+	public function hasEventType() {
 		return $this->hasTopicInteger('event_type');
 	}
 
@@ -1896,10 +1894,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns the UID of the event type that was selected for this event. If no
 	 * event type has been set, 0 will be returned.
 	 *
-	 * @return	integer		UID of the event type for this event or 0 if no event
-	 * 						type is set
+	 * @return	integer		UID of the event type for this event or 0 if no
+	 * 						event type is set
 	 */
-	function getEventTypeUid() {
+	public function getEventTypeUid() {
 		return $this->getTopicInteger('event_type');
 	}
 
@@ -1911,54 +1909,42 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return	integer		UID of the event type for this event or -1 if no
 	 * 						event type is set
 	 */
-	function getEventTypeUidForSelectorWidget() {
+	public function getEventTypeUidForSelectorWidget() {
 		return $this->hasEventType() ? $this->getEventTypeUid() : -1;
 	}
 
 	/**
 	 * Returns the event type as a string (e.g. "Workshop" or "Lecture").
-	 * If the seminar has a event type selected, that one is returned. Otherwise
-	 * the global event type from the TS setup is returned.
+	 * If the seminar has a event type selected, that one is returned.
+	 * Otherwise, an empty string will be returned.
 	 *
-	 * @return	string		the type of this event
-	 *
-	 * @access	public
+	 * @return	string		the type of this event, will be empty if this event
+	 * 						foes not have a type
 	 */
-	function getEventType() {
-		$result = '';
-
-		// Check whether this event has an event type set.
-		if ($this->hasEventType()) {
-			$eventTypeUid = $this->getTopicInteger('event_type');
-
-			// Get the title of this event type.
-			$dbResultEventType = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'title',
-				SEMINARS_TABLE_EVENT_TYPES,
-				'uid='.$eventTypeUid
-					.$this->enableFields(SEMINARS_TABLE_EVENT_TYPES),
-				'',
-				'',
-				'1'
-			);
-
-			if ($dbResultEventType
-				&& $GLOBALS['TYPO3_DB']->sql_num_rows($dbResultEventType)
-			) {
-				$eventTypeRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc(
-					$dbResultEventType
-				);
-				$result = $eventTypeRow['title'];
-			}
+	public function getEventType() {
+		if (!$this->hasEventType()) {
+			return '';
 		}
 
-		// Check whether an event type could be set, otherwise use the default
-		// name from TS setup.
-		if (empty($result)) {
-			$result = $this->getConfValueString('eventType');
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'title',
+			SEMINARS_TABLE_EVENT_TYPES,
+			'uid = ' . $this->getTopicInteger('event_type') .
+				$this->enableFields(SEMINARS_TABLE_EVENT_TYPES),
+			'',
+			'',
+			'1'
+		);
+
+		if (!$dbResult) {
+			throw new Exception(DATABASE_QUERY_ERROR);
+		}
+		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		if (!$dbResultRow) {
+			throw new Exception(DATABASE_RESULT_ERROR);
 		}
 
-		return $result;
+		return $dbResultRow['title'];
 	}
 
 	/**
@@ -1967,6 +1953,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @param	integer		the UID of the event type to set, must be >= 0
 	 */
 	public function setEventType($eventType) {
+		if ($eventType < 0) {
+			throw new Exception('$eventType must be >= 0.');
+		}
+
 		$this->setRecordPropertyInteger('event_type', $eventType);
 	}
 

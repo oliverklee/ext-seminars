@@ -22,6 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_oe_configcheck.php');
+
 /**
  * Class 'tx_seminars_confcheck' for the 'seminars' extension.
  *
@@ -36,10 +39,6 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_oe_configcheck.php');
-
 class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	/**
 	 * Checks the configuration for: tx_seminars_registrationmanager/.
@@ -64,7 +63,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkDecimalDigits();
 		$this->checkDecimalSplitChar();
 		$this->checkShowToBeAnnouncedForEmptyPrice();
-		$this->checkEventType();
 	}
 
 	/**
@@ -583,6 +581,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies which section to remove from the details view. '
 				.'Incorrect values will cause the sections to still be displayed.',
 			array(
+				'event_type',
 				'title',
 				'subtitle',
 				'description',
@@ -1386,21 +1385,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the page to which the user will be '
 				.'redirected after saving an event record in the front end. If '
 				.'this value is not set correctly, the redirect will not work.'
-		);
-	}
-
-	/**
-	 * Checks the setting of the configuration value eventType.
-	 */
-	private function checkEventType() {
-		$this->checkForNonEmptyString(
-			'eventType',
-			false,
-			'',
-			'This value specifies the default event type. In the default TS '
-				.'setup that comes with the extension, it is "Workshop". '
-				.'If this value is not set correctly, the page might look '
-				.'ugly.'
 		);
 	}
 
