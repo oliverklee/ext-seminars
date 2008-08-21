@@ -1394,14 +1394,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Fills in the matching markers for the prices and hides the unused subparts.
-	 *
-	 * @param	string		the subpart wrapper prefix
-	 *
-	 * @access	protected
-	 */
-	function setPriceMarkers($wrapper) {
-		// set the regular price (with or without early bird rebate)
+	 * Fills in the matching markers for the prices and hides the unused
+	 * subparts.
+ 	 *
+	 * @param	string		the subpart wrapper prefix, may be empty
+ 	 */
+	protected function setPriceMarkers($wrapper) {
+		// sets the regular price (with or without early bird rebate)
 		if ($this->seminar->hasEarlyBirdPrice()
 			&& !$this->seminar->isEarlyBirdDeadlineOver()
 		) {
@@ -2226,7 +2225,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registration_editor'
 		);
-		$registrationEditor =& new $registrationEditorClassname($this);
+		$registrationEditor = new $registrationEditorClassname($this);
 
 		$output .= $registrationEditor->_render();
 		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
