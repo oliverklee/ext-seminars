@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#964] Change: Remove the additional event information from the registration page
 - [#2078] Fix: Require static_taxes
 - [#2093] Change: Allow creating fake front ends without adding a record to the pages table
 - [#1916] Change: Use the createFakeFrontEnd function from the testing framework in the Seminar Manager
