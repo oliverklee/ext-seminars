@@ -129,21 +129,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		// Currently, only new registrations can be entered.
 		$this->iEdition = false;
 
-		// execute record level events thrown by formidable, such as DELETE
-		$this->_doEvents();
-
 		// initialize the creation/edition form
 		$this->_initForms();
-	}
-
-	/**
-	 * Processes events in the form like adding or editing a registration.
-	 *
-	 * Currently, this function currently is a no-op.
-	 *
-	 * @access	protected
-	 */
-	function _doEvents() {
 	}
 
 	/**
