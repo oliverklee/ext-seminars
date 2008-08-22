@@ -4024,7 +4024,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						this event, false otherwise
 	 */
 	private function skipCollisionCheck() {
-		return $this->getRecordPropertyBoolean('skip_collision_check');
+		return $this->getConfValueBoolean('skipRegistrationCollisionCheck') ||
+			$this->getRecordPropertyBoolean('skip_collision_check');
 	}
 
 	/**

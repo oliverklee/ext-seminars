@@ -3539,6 +3539,42 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testCollidingEventsDoNotCollideIfCollisionSkipIsEnabledForAllEvents() {
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			$this->testingFramework->createFrontEndUserGroup()
+		);
+
+		$begin = mktime();
+		$end = $begin + 1000;
+
+		$this->fixture->setBeginDate($begin);
+		$this->fixture->setEndDate($end);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $begin,
+				'end_date' => $end,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $eventUid,
+				'user' => $frontEndUserUid,
+			)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'skipRegistrationCollisionCheck', true
+		);
+
+		$this->assertFalse(
+			$this->fixture->isUserBlocked($frontEndUserUid)
+		);
+	}
+
 	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForThisEvent() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
 			$this->testingFramework->createFrontEndUserGroup()

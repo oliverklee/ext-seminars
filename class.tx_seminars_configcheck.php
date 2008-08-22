@@ -63,6 +63,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkDecimalDigits();
 		$this->checkDecimalSplitChar();
 		$this->checkShowToBeAnnouncedForEmptyPrice();
+		$this->checkSkipRegistrationCollisionCheck();
 	}
 
 	/**
@@ -1983,6 +1984,21 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the places for which the list view ' .
 				'should be filtered. If this value is not set correctly, ' .
 				'some events might unintentionally get hidden or shown.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value skipRegistrationCollisionCheck.
+	 */
+	private function checkSkipRegistrationCollisionCheck() {
+		$this->checkIfBoolean(
+			'skipRegistrationCollisionCheck',
+			false,
+			'',
+			'This value specifies whether the registration collision check ' .
+				'should be disabled for all events. If this value is incorrect, ' .
+				'the registration collision check might be enabled although it ' .
+				'should be disabled (or vice versa).'
 		);
 	}
 }

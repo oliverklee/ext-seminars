@@ -8,6 +8,9 @@ plugin.tx_seminars {
 	# Set this to 0 if you don't use the registration feature for this site and would like to disable the configuration check for this.
 	enableRegistration = 1
 
+	# whether the registration collision check should be skipped for all events
+	skipRegistrationCollisionCheck = 0
+
 	# location of the template file
 	templateFile = EXT:seminars/seminars.tmpl
 
