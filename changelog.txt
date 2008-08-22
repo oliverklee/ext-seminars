@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2099] Feature: Provide the file type as CSS class in the list of downloadable file in the detail view
 - [#1943] Feature: Add a global TS Setup switch "skip collision check"
 - [#2074] Change: Drop the default event type (workshop)
 - [#964] Change: Remove the additional event information from the registration page

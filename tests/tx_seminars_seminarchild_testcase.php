@@ -4397,5 +4397,75 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$attachedFiles[1]['size']
 		);
 	}
+
+	public function testGetAttachedFilesWithAttachedFileWithFileEndingReturnsFileType() {
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->fixture->setAttachedFiles($dummyFileName);
+
+		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
+
+		$this->assertEquals(
+			'txt',
+			$attachedFiles[0]['type']
+		);
+	}
+
+	public function testGetAttachedFilesWithAttachedFileWithoutFileEndingReturnsFileTypeNone() {
+		$dummyFile = $this->testingFramework->createDummyFile('test');
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->fixture->setAttachedFiles($dummyFileName);
+
+		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
+
+		$this->assertEquals(
+			'none',
+			$attachedFiles[0]['type']
+		);
+	}
+
+	public function testGetAttachedFilesWithAttachedFileWithDotInFileNameReturnsCorrectFileType() {
+		$dummyFile = $this->testingFramework->createDummyFile('test.test.txt');
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->fixture->setAttachedFiles($dummyFileName);
+
+		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
+
+		$this->assertEquals(
+			'txt',
+			$attachedFiles[0]['type']
+		);
+	}
+
+	public function testGetAttachedFilesWithAttachedFileWithFileNameStartingWithADotReturnsFileType() {
+		$dummyFile = $this->testingFramework->createDummyFile('.txt');
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->fixture->setAttachedFiles($dummyFileName);
+
+		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
+
+		$this->assertEquals(
+			'txt',
+			$attachedFiles[0]['type']
+		);
+	}
+
+	public function testGetAttachedFilesWithAttachedFileWithFileNameEndingWithADotReturnsFileTypeNone() {
+		$dummyFile = $this->testingFramework->createDummyFile('test.');
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->fixture->setAttachedFiles($dummyFileName);
+
+		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
+
+		$this->assertEquals(
+			'none',
+			$attachedFiles[0]['type']
+		);
+	}
 }
 ?>

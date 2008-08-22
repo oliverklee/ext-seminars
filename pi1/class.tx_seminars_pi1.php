@@ -1541,6 +1541,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		foreach ($this->seminar->getAttachedFiles($this) as $attachedFile) {
 			$this->setMarker('attached_file_name', $attachedFile['name']);
 			$this->setMarker('attached_file_size', $attachedFile['size']);
+			$this->setMarker('attached_file_type', $attachedFile['type']);
 
 			$attachedFilesOutput .= $this->getSubpart(
 				'ATTACHED_FILES_LIST_ITEM'

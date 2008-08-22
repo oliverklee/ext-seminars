@@ -548,6 +548,32 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsCSSClassWithFileType() {
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$matches = array();
+		preg_match('/\.(\w+)$/', $dummyFileName, $matches);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertRegExp(
+			'/class="filetype-' . $matches[1] . '">' .
+				'<a href="http:\/\/[\w\d_\-\/]*' .
+				str_replace('/', '\/', $dummyFileName) . '" >' .
+				basename($dummyFile) . '<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
 	public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithLoggedInAndRegisteredFeUser() {
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();

@@ -4538,11 +4538,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		);
 
 		foreach ($attachedFiles as $attachedFile) {
+			$matches = array();
+			preg_match('/\.(\w+)$/', basename($attachedFile), $matches);
+
 			$result[] = array(
 				'name' => $plugin->cObj->typoLink(
 					basename($attachedFile),
 					array('parameter' => $uploadFolderUrl . $attachedFile)
 				),
+				'type' => (isset($matches[1]) ? $matches[1] : 'none'),
 				'size' => t3lib_div::formatSize(
 					filesize($uploadFolderPath . $attachedFile)
 				),
