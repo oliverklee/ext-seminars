@@ -1,4 +1,5 @@
 0.6.2 (currently working on)
+- [#803] Change: Remove the _doEvents() method from the registration editor and the event editor
 - [#964] Change: some code cleanup
 - [#2092] Change: Update the test record icon in seminars and oelib
 - [#2067] Change: All fields from the FE user table should be usable in the notification e-mail
