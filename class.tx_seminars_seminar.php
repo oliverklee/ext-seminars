@@ -1906,18 +1906,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Returns the UID of the event type for the selector widget that was
-	 * selected for this event. If no event type has been set, -1 will be
-	 * returned.
-	 *
-	 * @return	integer		UID of the event type for this event or -1 if no
-	 * 						event type is set
-	 */
-	public function getEventTypeUidForSelectorWidget() {
-		return $this->hasEventType() ? $this->getEventTypeUid() : -1;
-	}
-
-	/**
 	 * Returns the event type as a string (e.g. "Workshop" or "Lecture").
 	 * If the seminar has a event type selected, that one is returned.
 	 * Otherwise, an empty string will be returned.

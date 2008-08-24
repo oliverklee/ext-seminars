@@ -2109,22 +2109,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventTypeUidForSelectorWidgetInitiallyReturnsMinusOne() {
-		$this->assertEquals(
-			-1,
-			$this->fixture->getEventTypeUidForSelectorWidget()
-		);
-	}
-
-	public function testGetEventTypeUidForSelectorWidgetWithEventTypeReturnsEventTypeUid() {
-		$eventTypeUid = $this->addEventTypeRelation(array());
-
-		$this->assertEquals(
-			$eventTypeUid,
-			$this->fixture->getEventTypeUidForSelectorWidget()
-		);
-	}
-
 
 	////////////////////////////////////////////
 	// Tests regarding the organizing partners

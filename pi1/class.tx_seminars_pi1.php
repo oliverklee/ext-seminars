@@ -211,12 +211,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	);
 
 	/**
-	 * This is a list of field names in which we can search, grouped by record type.
+	 * @var	array		This is a list of field names in which we can search,
+	 * 					grouped by record type.
+	 *
 	 * 'seminars' is the list of fields that are always stored in the seminar record.
 	 * 'seminars_topic' is the list of fields that might be stored in the topic
 	 *  record in if we are a date record (that refers to a topic record).
 	 */
-	var $searchFieldList = array(
+	private $searchFieldList = array(
 		'seminars' => array(
 			'accreditation_number'
 		),
@@ -266,9 +268,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	);
 
 	/**
-	 * An array of hook objects for this class.
+	 * @var	array		hook objects for this class
 	 */
-	var $hookObjects = array();
+	private $hookObjects = array();
 
 	/**
 	 * Displays the seminar manager HTML.
@@ -390,9 +392,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$seminarBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_seminarbag'
 		);
-		$temporarySeminarBag =& new $seminarBagClassname(
-			'uid=0'
-		);
+		$temporarySeminarBag = new $seminarBagClassname('uid=0');
 
 		// Adds the query parameter that result from the user selection in the
 		// selector widget (including the search form).
@@ -476,7 +476,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	public function getLoginLink($label, $pageId, $eventId = 0) {
 		$linkConfiguration = array('parameter' => $pageId);
 
-		$redirectUrlParams = array();
 		if ($eventId) {
 			$linkConfiguration['additionalParams']
 				= t3lib_div::implodeArrayForUrl(
@@ -517,6 +516,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Creates an instance of tx_staticinfotables_pi1 if that has not happened
+	 * yet.
+	 */
+	private function instantiateStaticInfo() {
+		if ($this->staticInfo instanceof tx_staticinfotables_pi1) {
+			return;
+		}
+
+		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+		$this->staticInfo->init();
+	}
+
+	/**
 	 * Creates the HTML for the event list view.
 	 * This function is used for the normal event list as well as the
 	 * "my events" and the "my VIP events" list.
@@ -529,11 +541,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = '';
 		$isOkay = true;
 
-		// Instantiates the static info tables API.
-		if (!$this->staticInfo) {
-			$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
-			$this->staticInfo->init();
-		}
+		$this->instantiateStaticInfo();
 
 		switch ($this->whatToDisplay) {
 			case 'my_events':
@@ -644,11 +652,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * The data will be written to global variables as arrays that contain
 	 * the value (value of the form field) and the label (text shown in the option
 	 * box) for each entry.
-	 *
-	 * @access	protected
 	 */
-	function createAllowedValuesForSelectorWidget() {
+	public function createAllowedValuesForSelectorWidget() {
 		$allPlaceUids = array();
+
+		$this->instantiateStaticInfo();
 
 		// Creates a separate seminar bag that contains all the events.
 		// We can't use the regular seminar bag that is used for the list
@@ -657,7 +665,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Walks through all events in the seminar bag to read the needed data
 		// from each event object.
-		while ($currentEvent =& $seminarBag->getCurrent()) {
+		while ($currentEvent = $seminarBag->getCurrent()) {
 			// Reads the language from the event record.
 			$languageIsoCode = $currentEvent->getLanguage();
 			if ((!empty($languageIsoCode))
@@ -680,7 +688,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
 
 			// Reads the event type from the event record.
-			$eventTypeUid = $currentEvent->getEventTypeUidForSelectorWidget();
+			$eventTypeUid = $currentEvent->getEventTypeUid();
 			$eventTypeName = $currentEvent->getEventType();
 			if (!isset($this->allEventTypes[$eventTypeUid])) {
 				$this->allEventTypes[$eventTypeUid] = $eventTypeName;
@@ -699,7 +707,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$allPlaceUids = array(0);
 		}
 		$placeBag = $this->createPlaceBag($allPlaceUids);
-		while ($currentPlace =& $placeBag->getCurrent()) {
+		while ($currentPlace = $placeBag->getCurrent()) {
 			if (!isset($this->allPlaces[$currentPlace->getUid()])) {
 				$this->allPlaces[$currentPlace->getUid()] = $currentPlace->getTitle();
 			}
@@ -782,9 +790,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$placeBagClassname = t3lib_div::makeInstanceClassName(
 			$className
 		);
-		$placeBag =& new $placeBagClassname(
-			$queryWhere
-		);
+		$placeBag = new $placeBagClassname($queryWhere);
 
 		return $placeBag;
 	}
@@ -805,7 +811,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = $this->createListHeader();
 		$rowCounter = 0;
 
-		while ($currentItem =& $seminarOrRegistrationBag->getCurrent()) {
+		while ($currentItem = $seminarOrRegistrationBag->getCurrent()) {
 			if ($this->whatToDisplay == 'my_events') {
 				$this->registration =& $currentItem;
 				$this->seminar =& $this->registration->getSeminarObject();
@@ -1044,7 +1050,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registrationOrSeminarBagClassname = t3lib_div::makeInstanceClassName(
 			$className
 		);
-		$registrationOrSeminarBag =& new $registrationOrSeminarBagClassname(
+		$registrationOrSeminarBag = new $registrationOrSeminarBagClassname(
 			$queryWhere,
 			$additionalTables,
 			'',
@@ -2127,7 +2133,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$errorMessage = '';
 		$registrationForm = '';
-		$registationThankyou = '';
 		$isOkay = false;
 
 		$this->toggleEventFieldsOnRegistrationPage();
@@ -2354,7 +2359,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registrationBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registrationbag'
 		);
-		$registrationBag =& new $registrationBagClassname(
+		$registrationBag = new $registrationBagClassname(
 			SEMINARS_TABLE_ATTENDANCES.'.seminar='.$this->seminar->getUid()
 				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.registration_queue=0',
 			'',
@@ -2364,7 +2369,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		if ($registrationBag->getCurrent()) {
 			$result = '';
-			while ($currentRegistration =& $registrationBag->getCurrent()) {
+			while ($currentRegistration = $registrationBag->getCurrent()) {
 				$this->setMarker('registrations_list_inneritem',
 					$currentRegistration->getUserDataAsHtml(
 						$this->getConfValueString(
@@ -2458,7 +2463,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registration_editor'
 		);
-		$registrationEditor =& new $registrationEditorClassname($this);
+		$registrationEditor = new $registrationEditorClassname($this);
 
 		$result = $registrationEditor->_render();
 		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
@@ -2692,7 +2697,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$eventEditorClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_event_editor'
 		);
-		$eventEditor =& new $eventEditorClassname($this);
+		$eventEditor = new $eventEditorClassname($this);
 
 		if ($eventEditor->hasAccess()) {
 			if (!$accessTestOnly) {
@@ -2910,10 +2915,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * values for e.g. the field "language".
 	 *
 	 * @return	string		the HTML source for the selector widget
-	 *
-	 * @access	protected
 	 */
-	function createSelectorWidget() {
+	public function createSelectorWidget() {
 		// Shows or hides the text search field.
 		if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
 			// Sets the previous search string into the text search box.
