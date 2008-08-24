@@ -171,7 +171,7 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		$registrationBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registrationbag'
 		);
-		$this->registrationBag =& new $registrationBagClassname(
+		$this->registrationBag = new $registrationBagClassname(
 			$queryWhere,
 			$additionalTables,
 			'',
@@ -179,7 +179,7 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 			$limit
 		);
 
-		while ($this->registration =& $this->registrationBag->getCurrent()) {
+		while ($this->registration = $this->registrationBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB
@@ -187,9 +187,9 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 				TAB.TAB.TAB.TAB.TAB
 					.$this->registration->getUserName().LF,
 				TAB.TAB.TAB.TAB.TAB
-					.$this->registration->seminar->getTitle().LF,
+					.$this->registration->getSeminarObject()->getTitle().LF,
 				TAB.TAB.TAB.TAB.TAB
-					.$this->registration->seminar->getDate().LF,
+					.$this->registration->getSeminarObject()->getDate().LF,
 				TAB.TAB.TAB.TAB.TAB
 					.$this->getEditIcon(
 						$this->registration->getUid()

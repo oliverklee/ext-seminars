@@ -46,28 +46,30 @@ require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinf
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_seminar extends tx_seminars_timespan {
-	/** Same as class name */
+	/**	@var	string		same as class name */
 	public $prefixId = 'tx_seminars_seminar';
-	/**  Path to this script relative to the extension dir. */
+	/**  @var	string		path to this script relative to the extension dir */
 	public $scriptRelPath = 'class.tx_seminars_seminar.php';
 
-	/** string with the name of the SQL table this class corresponds to */
+	/** @var	string		the name of the SQL table this class corresponds to */
 	protected $tableName = SEMINARS_TABLE_SEMINARS;
 
-	/** The number of all attendances. */
+	/** @var	integer		the number of all attendances */
 	protected $numberOfAttendances = 0;
 
-	/** The number of paid attendances. */
+	/** @var	integer		the number of paid attendances */
 	protected $numberOfAttendancesPaid = 0;
 
-	/** The number of attendances on the registration queue. */
+	/** @var	integer		the number of attendances on the registration queue */
 	protected $numberOfAttendancesOnQueue = 0;
 
-	/** Flag which shows if the statistics have been already calculated. */
+	/** @var	boolean		if the statistics have been already	calculated */
 	protected $statisticsHaveBeenCalculated = false;
 
 	/**
-	 * The related topic record as a reference to the object.
+	 * @var	tx_seminars_seminar		The related topic record as a reference
+	 * 								to the object.
+	 *
 	 * This will be null if we are not a date record.
 	 */
 	private $topic;

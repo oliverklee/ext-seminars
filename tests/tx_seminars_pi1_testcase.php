@@ -222,6 +222,35 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testGetSeminarReturnsSeminarIfSet() {
+		$this->fixture->createSeminar($this->seminarUid);
+
+		$this->assertTrue(
+			$this->fixture->getSeminar() instanceof tx_seminars_seminar
+		);
+	}
+
+	public function testGetRegistrationReturnsRegistrationIfSet() {
+		$this->fixture->createRegistration(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_ATTENDANCES,
+				array('seminar' => $this->seminarUid)
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->getRegistration()
+				instanceof tx_seminars_registration
+		);
+	}
+
+	public function testGetRegistrationManagerReturnsRegistrationManagerIfSet() {
+		$this->assertTrue(
+			$this->fixture->getRegistrationManager()
+				instanceof tx_seminars_registrationmanager
+		);
+	}
+
 
 	/////////////////////////////////////////
 	// Test concerning the search function.

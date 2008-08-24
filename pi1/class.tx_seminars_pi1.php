@@ -50,50 +50,79 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
-	/** same as class name */
+	/** @var	string		same as class name */
 	public $prefixId = 'tx_seminars_pi1';
-	/** path to this script relative to the extension dir */
+	/** @var	string		path to this script relative to the extension dir */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
-	/** a config getter that gets us the configuration in plugin.tx_seminars */
+	/**
+	 * @var	tx_seminars_configgetter		a config getter that gets us the
+	 * 										configuration in plugin.tx_seminars
+	 */
 	private $configGetter = null;
 
-	/** the seminar which we want to list/show or for which the user wants to register */
+	/**
+	 * @var	tx_seminars_seminar		the seminar which we want to list/show or
+	 * 								for which the user wants to register
+	 */
 	private $seminar = null;
 
-	/** the registration which we want to list/show in the "my events" view */
+	/**
+	 * @var	tx_seminars_registration		the registration which we want to
+	 * 										list/show in the "my events" view
+	 */
 	private $registration = null;
 
-	/** the previous event's category (used for the list view) */
+	/** @var	string		the previous event's category (used for the list view) */
 	private $previousCategory = '';
 
-	/** the previous event's date (used for the list view) */
+	/** @var	string		the previous event's date (used for the list view) */
 	private $previousDate = '';
 
-	/** an instance of registration manager which we want to have around only once (for performance reasons) */
+	/**
+	 * @var	tx_seminars_registrationmanager		an instance of registration
+	 * 											manager which we want to have
+	 * 											around only once (for
+	 * 											performance reasons)
+	 */
 	private $registrationManager = null;
 
-	/** an instance of static info tables which we need for the list view to convert ISO codes to country names and languages */
+	/**
+	 * @var	tx_staticinfotables_pi1		needed for the list view to convert ISO
+	 * 									codes to country names and languages
+	 */
 	private $staticInfo = null;
 
-	/** all languages that may be shown in the option box of the selector widget  */
+	/**
+	 * @var	array		all languages that may be shown in the option box of the
+	 * 					selector widget
+	 */
 	private $allLanguages = array();
 
-	/** all countries that may be shown in the option box of the selector widget  */
+	/**
+	 * @var	array		all countries that may be shown in the option box of the
+	 * 					selector widget
+	 */
 	private $allCountries = array();
 
-	/** all places that may be shown in the option box of the selector widget  */
+	/**
+	 * @var	array		all places that may be shown in the option box of the
+	 * 					selector widget
+	 */
 	private $allPlaces = array();
 
-	/** all cities that may be shown in the option box of the selector widget */
+	/**
+	 * @var	array		all cities that may be shown in the option box of the
+	 * 					selector widget
+	 */
 	private $allCities = array();
 
-	/** all event types */
+	/** @var	array		all event types */
 	private $allEventTypes = array();
 
 	/**
-	 * List of field names (as keys) by which we can sort plus the
-	 * corresponding SQL sort criteria (as value).
+	 * @var	array		List of field names (as keys) by which we can sort plus
+	 * 					the corresponding SQL sort criteria (as value).
 	 *
 	 * We cannot use the database table name constants here because default
 	 * values for member variable don't allow for compound expression.
@@ -1704,10 +1733,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @param	integer		an event UID
 	 *
 	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
-	 *
-	 * @access	protected
 	 */
-	function createSeminar($seminarUid) {
+	public function createSeminar($seminarUid) {
 		$result = false;
 
 		if (tx_seminars_objectfromdb::recordExists(
@@ -1718,7 +1745,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$seminarClassname = t3lib_div::makeInstanceClassName(
 				'tx_seminars_seminar'
 			);
-			$this->seminar =& new $seminarClassname($seminarUid);
+			$this->seminar = new $seminarClassname($seminarUid);
 			$result = true;
 		} else {
 			$this->seminar = null;
@@ -1737,6 +1764,24 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Returns the current registration.
+	 *
+	 * @return	tx_seminars_registration	the current registration
+	 */
+	public function getRegistration() {
+		return $this->registration;
+	}
+
+	/**
+	 * Returns the shared registration manager.
+	 *
+	 * @return	tx_seminars_registrationmanager	the shared registration manager
+	 */
+	public function getRegistrationManager() {
+		return $this->registrationManager;
+	}
+
+	/**
 	 * Creates a registration in $this->registration from the database record with
 	 * the UID specified in the parameter $registrationUid.
 	 * If the registration cannot be created, $this->registration will be null, and
@@ -1749,10 +1794,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	boolean		true if the registration UID is valid and the object
 	 * 						has been created, false otherwise
-	 *
-	 * @access	protected
 	 */
-	function createRegistration($registrationUid) {
+	public function createRegistration($registrationUid) {
 		$result = false;
 
 		if (tx_seminars_objectfromdb::recordExists(
@@ -1766,7 +1809,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			);
 			/** Name of the registration class in case someone subclasses it. */
 			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-			$this->registration =& new $registrationClassname($this->cObj, $dbResult);
+			$this->registration = new $registrationClassname(
+				$this->cObj, $dbResult
+			);
 			$result = $this->registration->isOk();
 			if (!$result) {
 				$this->registration = null;
