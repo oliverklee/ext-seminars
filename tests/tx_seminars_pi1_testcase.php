@@ -312,6 +312,36 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testEventTypeSelectorWidgetContainsTitleOfAssignedEventType() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'event_type' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+				),
+			)
+		);
+
+		$this->fixture->createAllowedValuesForSelectorWidget();
+
+		$this->assertContains(
+			'foo type',
+			$this->fixture->createSelectorWidget()
+		);
+	}
+
+	public function testEventTypeSelectorWidgetNotContainsEmptyEntryIfEventWithoutTypeExists() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+
+		$this->fixture->createAllowedValuesForSelectorWidget();
+
+		$this->assertNotRegExp(
+			'/id="tx_seminars_pi1-event_type"[^>]*>\s*' .
+				'<option value="-1"><\/option>/s',
+			$this->fixture->createSelectorWidget()
+		);
+	}
+
 
 	//////////////////////////////////////
 	// Tests concerning the single view.
