@@ -22,16 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Plugin 'Seminar Manager' for the 'seminars' extension.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
- */
-
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
@@ -47,51 +37,89 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_ed
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
+/**
+ * Plugin 'Seminar Manager' for the 'seminars' extension.
+ *
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ *
+ * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
+ */
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
-	/** same as class name */
-	var $prefixId = 'tx_seminars_pi1';
-	/** path to this script relative to the extension dir */
-	var $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
-
-	/** a config getter that gets us the configuration in plugin.tx_seminars */
-	var $configGetter = null;
-
-	/** the seminar which we want to list/show or for which the user wants to register */
-	var $seminar = null;
-
-	/** the registration which we want to list/show in the "my events" view */
-	var $registration = null;
-
-	/** the previous event's category (used for the list view) */
-	private $previousCategory = '';
-
-	/** the previous event's date (used for the list view) */
-	private $previousDate = '';
-
-	/** an instance of registration manager which we want to have around only once (for performance reasons) */
-	var $registrationManager = null;
-
-	/** an instance of static info tables which we need for the list view to convert ISO codes to country names and languages */
-	var $staticInfo = null;
-
-	/** all languages that may be shown in the option box of the selector widget  */
-	var $allLanguages = array();
-
-	/** all countries that may be shown in the option box of the selector widget  */
-	var $allCountries = array();
-
-	/** all places that may be shown in the option box of the selector widget  */
-	var $allPlaces = array();
-
-	/** all cities that may be shown in the option box of the selector widget */
-	var $allCities = array();
-
-	/** all event types */
-	var $allEventTypes = array();
+	/** @var	string		same as class name */
+	public $prefixId = 'tx_seminars_pi1';
+	/** @var	string		path to this script relative to the extension dir */
+	public $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
 	/**
-	 * List of field names (as keys) by which we can sort plus the
-	 * corresponding SQL sort criteria (as value).
+	 * @var	tx_seminars_configgetter		a config getter that gets us the
+	 * 										configuration in plugin.tx_seminars
+	 */
+	private $configGetter = null;
+
+	/**
+	 * @var	tx_seminars_seminar		the seminar which we want to list/show or
+	 * 								for which the user wants to register
+	 */
+	private $seminar = null;
+
+	/**
+	 * @var	tx_seminars_registration		the registration which we want to
+	 * 										list/show in the "my events" view
+	 */
+	private $registration = null;
+
+	/** @var	string		the previous event's category (used for the list view) */
+	private $previousCategory = '';
+
+	/** @var	string		the previous event's date (used for the list view) */
+	private $previousDate = '';
+
+	/**
+	 * @var	tx_seminars_registrationmanager		an instance of registration
+	 * 											manager which we want to have
+	 * 											around only once (for
+	 * 											performance reasons)
+	 */
+	private $registrationManager = null;
+
+	/**
+	 * @var	tx_staticinfotables_pi1		needed for the list view to convert ISO
+	 * 									codes to country names and languages
+	 */
+	private $staticInfo = null;
+
+	/**
+	 * @var	array		all languages that may be shown in the option box of the
+	 * 					selector widget
+	 */
+	private $allLanguages = array();
+
+	/**
+	 * @var	array		all countries that may be shown in the option box of the
+	 * 					selector widget
+	 */
+	private $allCountries = array();
+
+	/**
+	 * @var	array		all places that may be shown in the option box of the
+	 * 					selector widget
+	 */
+	private $allPlaces = array();
+
+	/**
+	 * @var	array		all cities that may be shown in the option box of the
+	 * 					selector widget
+	 */
+	private $allCities = array();
+
+	/** @var	array		all event types */
+	private $allEventTypes = array();
+
+	/**
+	 * @var	array		List of field names (as keys) by which we can sort plus
+	 * 					the corresponding SQL sort criteria (as value).
 	 *
 	 * We cannot use the database table name constants here because default
 	 * values for member variable don't allow for compound expression.
@@ -245,14 +273,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Displays the seminar manager HTML.
 	 *
-	 * @param	string		default content string, ignore
+	 * @param	string		(unused)
 	 * @param	array		TypoScript configuration for the plugin
 	 *
 	 * @return	string		HTML for the plugin
-	 *
-	 * @access	public
 	 */
-	function main($content, array $conf) {
+	public function main($unused, array $conf) {
 		$this->init($conf);
 		$this->pi_initPIflexForm();
 
@@ -1643,10 +1669,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @param	integer		an event UID
 	 *
 	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
-	 *
-	 * @access	protected
 	 */
-	function createSeminar($seminarUid) {
+	public function createSeminar($seminarUid) {
 		$result = false;
 
 		if (tx_seminars_objectfromdb::recordExists(
@@ -1657,7 +1681,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$seminarClassname = t3lib_div::makeInstanceClassName(
 				'tx_seminars_seminar'
 			);
-			$this->seminar =& new $seminarClassname($seminarUid);
+			$this->seminar = new $seminarClassname($seminarUid);
 			$result = true;
 		} else {
 			$this->seminar = null;
@@ -1673,6 +1697,24 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	public function getSeminar() {
 		return $this->seminar;
+	}
+
+	/**
+	 * Returns the current registration.
+	 *
+	 * @return	tx_seminars_registration	the current registration
+	 */
+	public function getRegistration() {
+		return $this->registration;
+	}
+
+	/**
+	 * Returns the shared registration manager.
+	 *
+	 * @return	tx_seminars_registrationmanager	the shared registration manager
+	 */
+	public function getRegistrationManager() {
+		return $this->registrationManager;
 	}
 
 	/**

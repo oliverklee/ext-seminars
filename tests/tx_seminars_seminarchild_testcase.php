@@ -22,6 +22,16 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_tslib . 'class.tslib_content.php');
+require_once(PATH_tslib . 'class.tslib_feuserauth.php');
+require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_seminarchild.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the seminar class in the 'seminars' extensions.
  *
@@ -31,17 +41,6 @@
  * @author		Niels Pardon <mail@niels-pardon.de>
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(PATH_tslib . 'class.tslib_content.php');
-require_once(PATH_tslib . 'class.tslib_feuserauth.php');
-require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
-require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_seminarchild.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
@@ -1982,6 +1981,94 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests regarding the event type
 	///////////////////////////////////
 
+	public function testSetEventTypeThrowsExceptionForNegativeArgument() {
+		$this->setExpectedException(
+			'Exception', '$eventType must be >= 0.'
+		);
+
+		$this->fixture->setEventType(-1);
+	}
+
+	public function testSetEventTypeIsAllowedWithZero() {
+		$this->fixture->setEventType(0);
+	}
+
+	public function testSetEventTypeIsAllowedWithPositiveInteger() {
+		$this->fixture->setEventType(1);
+	}
+
+	public function testHasEventTypeInitiallyReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasEventType()
+		);
+	}
+
+	public function testHasEventTypeReturnsTrueIfSingleEventHasNonZeroEventType() {
+		$this->fixture->setEventType(
+			$this->testingFramework->createRecord(SEMINARS_TABLE_EVENT_TYPES)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasEventType()
+		);
+	}
+
+	public function testGetEventTypeReturnsTitleOfRelatedEventTypeForSingleEvent() {
+		$this->fixture->setEventType(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+			)
+		);
+
+		$this->assertEquals(
+			'foo type',
+			$this->fixture->getEventType()
+		);
+	}
+
+	public function testGetEventTypeForDateRecordReturnsTitleOfEventTypeFromTopicRecord() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'event_type' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+				),
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicRecordUid,
+			)
+		);
+		$seminar = new tx_seminars_seminar($dateRecordUid);
+
+		$this->assertEquals(
+			'foo type',
+			$seminar->getEventType()
+		);
+	}
+
+	public function testGetEventTypeForTopicRecordReturnsTitleOfRelatedEventType() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'event_type' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+				),
+			)
+		);
+		$seminar = new tx_seminars_seminar($topicRecordUid);
+
+		$this->assertEquals(
+			'foo type',
+			$seminar->getEventType()
+		);
+	}
+
 	public function testGetEventTypeUidReturnsUidFromTopicRecord() {
 		// This test comes from bug #1515.
 		$topicRecordUid = $this->testingFramework->createRecord(
@@ -2150,7 +2237,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////
 
 	public function testGetTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {
-		$firstTimeSlotUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_TIME_SLOTS,
 			array(
 				'seminar' => $this->fixture->getUid(),
@@ -2158,7 +2245,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'room' => 'Room1'
 			)
 		);
-		$secondTimeSlotUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_TIME_SLOTS,
 			array(
 				'seminar' => $this->fixture->getUid(),

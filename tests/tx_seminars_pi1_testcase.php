@@ -22,6 +22,15 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_tslib . 'class.tslib_content.php');
+require_once(PATH_tslib . 'class.tslib_feuserauth.php');
+require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
+
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationmanager.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the pi1 class in the 'seminars' extension.
  *
@@ -30,16 +39,6 @@
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(PATH_tslib.'class.tslib_content.php');
-require_once(PATH_tslib.'class.tslib_feuserauth.php');
-require_once(PATH_t3lib.'class.t3lib_timetrack.php');
-
-require_once(t3lib_extMgm::extPath('seminars').'pi1/class.tx_seminars_pi1.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationmanager.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
@@ -235,6 +234,35 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertTrue(
 			$this->fixture->isInitialized()
+		);
+	}
+
+	public function testGetSeminarReturnsSeminarIfSet() {
+		$this->fixture->createSeminar($this->seminarUid);
+
+		$this->assertTrue(
+			$this->fixture->getSeminar() instanceof tx_seminars_seminar
+		);
+	}
+
+	public function testGetRegistrationReturnsRegistrationIfSet() {
+		$this->fixture->createRegistration(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_ATTENDANCES,
+				array('seminar' => $this->seminarUid)
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->getRegistration()
+				instanceof tx_seminars_registration
+		);
+	}
+
+	public function testGetRegistrationManagerReturnsRegistrationManagerIfSet() {
+		$this->assertTrue(
+			$this->fixture->getRegistrationManager()
+				instanceof tx_seminars_registrationmanager
 		);
 	}
 
@@ -525,12 +553,37 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
-		$this->assertContains(
-			'group 1',
-			$this->fixture->main('', array())
+		$result = $this->fixture->main('', array());
+
+ 		$this->assertContains(
+ 			'group 1',
+			$result
+ 		);
+ 		$this->assertContains(
+ 			'group 2',
+			$result
 		);
+	}
+
+
+	//////////////////////////////////////////////////////
+	// Test concerning the event type in the single view
+	//////////////////////////////////////////////////////
+
+	public function testSingleViewContainsEventTypeTitleAndColonIfEventHasEventType() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'event_type' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+				)
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertContains(
-			'group 2',
+			'foo type:',
 			$this->fixture->main('', array())
 		);
 	}

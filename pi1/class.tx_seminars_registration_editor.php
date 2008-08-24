@@ -101,16 +101,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * that the logged-in user is allowed to register for the corresponding
 	 * event (or edit a registration).
 	 *
-	 * @param	object		the pi1 object where this registration editor will
-	 * 						be inserted
-	 *
-	 * @access	public
+	 * @param	tx_seminars_pi1		the pi1 object where this registration
+	 * 								editor will be inserted
 	 */
-	function __construct(tx_seminars_pi1 $plugin) {
-		$this->plugin =& $plugin;
-		$this->cObj =& $plugin->cObj;
-		$this->registrationManager =& $plugin->registrationManager;
-		$this->seminar =& $plugin->seminar;
+	public function __construct(tx_seminars_pi1 $plugin) {
+		$this->plugin = $plugin;
+		$this->cObj = $plugin->cObj;
+		$this->registrationManager = $plugin->getRegistrationManager();
+		$this->seminar = $plugin->getSeminar();
 
 		$this->init($this->plugin->conf);
 
@@ -1576,7 +1574,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function processUnregistration() {
 		$this->registrationManager->removeRegistration(
-			$this->plugin->registration->getUid(),
+			$this->plugin->getRegistration()->getUid(),
 			$this->plugin
 		);
 	}
