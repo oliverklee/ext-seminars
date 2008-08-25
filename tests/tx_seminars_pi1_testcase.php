@@ -1315,8 +1315,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
-				'event_type' => $eventTypeUid
-			),
+				'event_type' => $eventTypeUid,
+			)
 		);
 		$this->fixture->piVars['event_type'] = array($eventTypeUid);
 
@@ -1336,8 +1336,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type 1',
-				'event_type' => $eventTypeUid1
-			),
+				'event_type' => $eventTypeUid1,
+			)
 		);
 		$eventTypeUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_EVENT_TYPES,
@@ -1348,8 +1348,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type 2',
-				'event_type' => $eventTypeUid2
-			),
+				'event_type' => $eventTypeUid2,
+			)
 		);
 		$this->fixture->piVars['event_type'] = array(
 			$eventTypeUid1, $eventTypeUid2
@@ -1378,8 +1378,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
 				'hidden' => 1,
-				'event_type' => $eventTypeUid
-			),
+				'event_type' => $eventTypeUid,
+			)
 		);
 		$this->fixture->piVars['event_type'] = array($eventTypeUid);
 
@@ -1400,8 +1400,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
 				'deleted' => 1,
-				'event_type' => $eventTypeUid
-			),
+				'event_type' => $eventTypeUid,
+			)
 		);
 		$this->fixture->piVars['event_type'] = array($eventTypeUid);
 
@@ -1421,8 +1421,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
-				'event_type' => $eventTypeUid1
-			),
+				'event_type' => $eventTypeUid1,
+			)
 		);
 
 		$eventTypeUid2 = $this->testingFramework->createRecord(
