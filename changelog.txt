@@ -1,4 +1,5 @@
 0.6.2 (currently working on)
+- [#2113] Fix: The limits in the bag builders could not be unset
 - [#2105] Change: Remove the empty option from the top of the event type selector widget
 - [#2074] Change: Add some tests and some code cleanup
 - [#803] Change: Remove the _doEvents() method from the registration editor and the event editor

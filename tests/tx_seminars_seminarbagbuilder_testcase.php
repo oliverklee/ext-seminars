@@ -170,6 +170,32 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testLimitToZeroCategoryAfterLimitToNonZeroCategoryResultsInAllEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->fixture->limitToCategory($categoryUid);
+		$this->fixture->limitToCategory(0);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
 	public function testLimitToNegativeCategoryUidResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -396,7 +422,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,

@@ -134,9 +134,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePages() {
-		$this->fixture->setSourcePages(
-			''
-		);
+		$this->fixture->setSourcePages('');
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_TEST,
 			array('pid' => $this->dummySysFolderPid)
@@ -146,6 +144,26 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testBuilderSelectsRecordsFromAllPagesWithEmptyAfterNonEmptySourcePages() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $this->dummySysFolderPid)
+		);
+		// Puts this record on a non-existing page. This is intentional.
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TEST,
+			array('pid' => $this->dummySysFolderPid + 1)
+		);
+
+		$this->fixture->setSourcePages($this->dummySysFolderPid);
+		$this->fixture->setSourcePages('');
 
 		$this->assertEquals(
 			2,

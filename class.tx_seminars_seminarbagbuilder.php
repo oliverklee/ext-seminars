@@ -79,6 +79,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToCategory($categoryUid) {
 		if ($categoryUid <= 0) {
+			unset($this->whereClauseParts['category']);
 			return;
 		}
 
