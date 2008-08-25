@@ -2217,6 +2217,139 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////////////////
+	// Tests concerning limiting the list view to event types
+	///////////////////////////////////////////////////////////
+
+	public function testListViewLimitedToEventTypesIgnoresEventsWithoutEventType() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'an event type')
+		);
+		$this->fixture->setConfigurationValue(
+			'limitListViewToEventTypes', $eventTypeUid
+		);
+
+		$this->assertNotContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewLimitedToEventTypesContainsEventsWithMultipleSelectedEventTypes() {
+		$eventTypeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'an event type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'event_type' => $eventTypeUid1,
+			)
+		);
+
+		$eventTypeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'an event type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with another type',
+				'event_type' => $eventTypeUid2,
+			)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToEventTypes', $eventTypeUid1 . ',' . $eventTypeUid2
+		);
+
+		$result = $this->fixture->main('', array());
+		$this->assertContains(
+			'Event with type',
+			$result
+		);
+		$this->assertContains(
+			'Event with another type',
+			$result
+		);
+	}
+
+	public function testListViewLimitedToEventTypesIgnoresEventsWithNotSelectedEventType() {
+		$eventTypeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'an event type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'event_type' => $eventTypeUid1,
+			)
+		);
+
+		$eventTypeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'another eventType')
+		);
+		$this->fixture->setConfigurationValue(
+			'limitListViewToEventTypes', $eventTypeUid2
+		);
+
+		$this->assertNotContains(
+			'Event with type',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewForSingleEventTypeOverridesLimitToEventTypes() {
+		$eventTypeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'an event type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'event_type' => $eventTypeUid1,
+			)
+		);
+
+		$eventTypeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'an event type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with another type',
+				'event_type' => $eventTypeUid2,
+			)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToEventTypes', $eventTypeUid1
+		);
+		$this->fixture->piVars['event_type'] = array($eventTypeUid2);
+
+		$result = $this->fixture->main('', array());
+		$this->assertNotContains(
+			'Event with type',
+			$result
+		);
+		$this->assertContains(
+			'Event with another type',
+			$result
+		);
+	}
+
+
 	//////////////////////////////////////////////////////////
 	// Tests concerning limiting the list view to categories
 	//////////////////////////////////////////////////////////

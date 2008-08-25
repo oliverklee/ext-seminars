@@ -447,6 +447,22 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$builder->ignoreCanceledEvents();
 		}
 
+		if (isset($this->piVars['event_type'])
+			&& (is_array($this->piVars['event_type']))
+		) {
+			$sanitizedEventTypeUids = array();
+			foreach($this->piVars['event_type'] as $uid) {
+				$sanitizedEventTypeUids[] = intval($uid);
+			}
+			$builder->limitToEventTypes(implode(',', $sanitizedEventTypeUids));
+		} else {
+			$builder->limitToEventTypes(
+				$this->getConfValueString(
+					'limitListViewToEventTypes', 's_listView'
+				)
+			);
+		}
+
 		if (isset($this->piVars['category'])
 			&& (intval($this->piVars['category']) > 0)
 		) {
@@ -457,16 +473,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					'limitListViewToCategories', 's_listView'
 				)
 			);
-		}
-
-		if (isset($this->piVars['event_type'])
-			&& (is_array($this->piVars['event_type']))
-		) {
-			$sanitizedEventTypeUids = array();
-			foreach($this->piVars['event_type'] as $uid) {
-				$sanitizedEventTypeUids[] = intval($uid);
-			}
-			$builder->limitToEventTypes(implode(',', $sanitizedEventTypeUids));
 		}
 
 		$builder->limitToPlaces(

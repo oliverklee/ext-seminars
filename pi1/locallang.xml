@@ -35,6 +35,7 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.sheet_list_view">List view</label>
+			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
@@ -504,6 +505,7 @@
 			<label index="seminars.pi_flexform.formal">formell</label>
 			<label index="seminars.pi_flexform.informal">informell</label>
 			<label index="seminars.pi_flexform.sheet_list_view">Listenansicht</label>
+			<label index="seminars.pi_flexform.limitListViewToEventTypes">Listenansicht auf Veranstaltungen dieser Arten einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">Listenansicht auf Veranstaltungen aus diesen Kategorien einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">Listenansicht auf Veranstaltungen an diesen Orten einschränken:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Einzelansicht</label>
@@ -1898,6 +1900,7 @@
 			<label index="seminars.pi_flexform.formal" type="integer">211667739</label>
 			<label index="seminars.pi_flexform.informal" type="integer">63642221</label>
 			<label index="seminars.pi_flexform.sheet_list_view" type="integer">252903448</label>
+			<label index="seminars.pi_flexform.limitListViewToEventTypes" type="integer">263724247</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories" type="integer">144505574</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces" type="integer">116361790</label>
 			<label index="seminars.pi_flexform.sheet_single_view" type="integer">260903848</label>
@@ -3061,6 +3064,7 @@
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
 			<label index="seminars.pi_flexform.sheet_list_view">List view</label>
+			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>

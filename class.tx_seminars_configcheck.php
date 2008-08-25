@@ -272,6 +272,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
 		$this->checkDefaultEventVipsFeGroupID();
+		$this->checkLimitListViewToEventTypes();
 		$this->checkLimitListViewToCategories();
 		$this->checkLimitListViewToPlaces();
 	}
@@ -1954,6 +1955,21 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies which fixed single event should be shown. If '
 				.'this value is not set correctly, an error message will be '
 				.'shown instead.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * limitListViewToEventTypes.
+	 */
+	private function checkLimitListViewToEventTypes() {
+		$this->checkIfPidListOrEmpty(
+			'limitListViewToEventTypes',
+			true,
+			's_listView',
+			'This value specifies the event types by which the list view ' .
+				'should be filtered. If this value is not set correctly, ' .
+				'some events might unintentionally get hidden or shown.'
 		);
 	}
 

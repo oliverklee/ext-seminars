@@ -258,6 +258,18 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
+					<limitListViewToEventTypes>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToEventTypes</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_seminars_event_types</foreign_table>
+								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<maxitems>100</maxitems>
+								<renderMode>checkbox</renderMode>
+							</config>
+						</TCEforms>
+					</limitListViewToEventTypes>
 					<limitListViewToCategories>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToCategories</label>
