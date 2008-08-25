@@ -80,6 +80,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToCategories($categoryUids) {
 		if ($categoryUids == '') {
+			unset($this->whereClauseParts['categories']);
 			return;
 		}
 
@@ -115,6 +116,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToPlaces($placeUids) {
 		if ($placeUids == '') {
+			unset($this->whereClauseParts['places']);
 			return;
 		}
 
@@ -250,6 +252,35 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		if ($where != '') {
 			$this->whereClauseParts['timeFrame'] = '('.$where.')';
 		}
+	}
+
+	/**
+	 * Limits the bag to events from any of the event types with the UIDs
+	 * provided as the parameter $eventTypeUids.
+	 *
+	 * @param	string		comma-separated list of UIDs of the event types
+	 * 						which the bag should be limited to, set to an empty
+	 * 						string for no limitation
+	 */
+	public function limitToEventTypes($eventTypeUids) {
+		if ($eventTypeUids == '') {
+			unset($this->whereClauseParts['eventTypes']);
+			return;
+		}
+
+		$this->whereClauseParts['eventTypes']
+			= '(' .
+			'(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
+			'event_type IN(' . $eventTypeUids . '))' .
+			' OR ' .
+			'(object_type=' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			'EXISTS (SELECT * FROM ' .
+			SEMINARS_TABLE_SEMINARS . ' AS topic WHERE ' .
+			'topic.uid=' .
+			SEMINARS_TABLE_SEMINARS . '.topic AND ' .
+			'topic.event_type IN(' . $eventTypeUids . ')' .
+			'))' .
+			')';
 	}
 }
 

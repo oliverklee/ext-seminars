@@ -106,6 +106,7 @@ abstract class tx_seminars_bagbuilder {
 		static $templateHelper = null;
 
 		if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
+			unset($this->whereClauseParts['pages']);
 			return;
 		}
 

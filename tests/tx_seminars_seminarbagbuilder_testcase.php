@@ -170,6 +170,32 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testLimitToEmptyCategoryAfterLimitToNotEmptyCategoriesUidResultsInAllEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->fixture->limitToCategories($categoryUid);
+		$this->fixture->limitToCategories('');
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
 	public function testLimitToCategoriesCanResultInOneEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -371,7 +397,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -499,6 +525,30 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
 		);
 
+		$this->fixture->limitToPlaces('');
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEmptyPlaceAfterLimitToNotEmptyPlacesUidResultsInAllEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
+		);
+
+		$this->fixture->limitToPlaces($placeUid);
 		$this->fixture->limitToPlaces('');
 
 		$this->assertEquals(
@@ -1593,6 +1643,369 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events of certain event types
+	////////////////////////////////////////////////////////////////
+
+	public function testSkippingLimitToEventTypesResultsInAllEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEmptyTypeUidResultsInAllEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes('');
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEmptyTypeUidAfterLimitToNotEmptyTypesResultsInAllEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid);
+		$this->fixture->limitToEventTypes('');
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventTypesCanResultInOneEvent() {
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventTypesCanResultInTwoEvents() {
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventTypesWillExcludeUnassignedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->getObjectCountWithoutLimit()
+		);
+		$this->assertEquals(
+			$eventUid,
+			$bag->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToEventTypesWillExcludeEventsOfOtherTypes() {
+		$typeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid1,
+			)
+		);
+
+		$typeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid2,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid1);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->getObjectCountWithoutLimit()
+		);
+		$this->assertEquals(
+			$eventUid1,
+			$bag->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToEventTypesResultsInAnEmptyBagIfThereAreNoMatches() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$typeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid1,
+			)
+		);
+
+		$typeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+
+		$this->fixture->limitToEventTypes($typeUid2);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventTypesIgnoresTopicRecords() {
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'event_type' => $typeUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventTypesFindsDateRecordForTopic() {
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'event_type' => $typeUid,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid);
+
+		$bag = $this->fixture->build();
+		$this->assertEquals(
+			1,
+			$bag->getObjectCountWithoutLimit()
+		);
+		$this->assertEquals(
+			$dateUid,
+			$bag->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToEventTypesFindsDateRecordForSingle() {
+		$typeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventTypesIgnoresTopicOfDateRecord() {
+		$typeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid1,
+			)
+		);
+
+		$typeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'event_type' => $typeUid2,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid2);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventTypesCanFindEventsFromMultipleTypes() {
+		$typeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid1,
+			)
+		);
+
+		$typeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'event_type' => $typeUid2,
+			)
+		);
+
+		$this->fixture->limitToEventTypes($typeUid1 . ','  . $typeUid2);
+
+		$this->assertEquals(
+			2,
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
