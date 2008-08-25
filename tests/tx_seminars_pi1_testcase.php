@@ -1262,6 +1262,182 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////////////////
+	// Tests concerning the list view, filtered by event type
+	///////////////////////////////////////////////////////////
+
+	public function testListViewContainsEventsWithoutEventTypeByDefault() {
+		$this->assertContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewContainsEventsWithEventTypeByDefault() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'event_type' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_EVENT_TYPES,
+					array('title' => 'foo type')
+				),
+			)
+		);
+
+		$this->assertContains(
+			'Event with type',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithEventTypeExcludesEventsWithoutEventType() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo type')
+		);
+		$this->fixture->piVars['event_type'] = array($eventTypeUid);
+
+		$this->assertNotContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithEventTypeCanContainOneEventWithSelectedEventType() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'event_type' => $eventTypeUid
+			),
+		);
+		$this->fixture->piVars['event_type'] = array($eventTypeUid);
+
+		$this->assertContains(
+			'Event with type',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithEventTypeCanContainTwoEventsWithTwoDifferentSelectedEventTypes() {
+		$eventTypeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type 1',
+				'event_type' => $eventTypeUid1
+			),
+		);
+		$eventTypeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type 2',
+				'event_type' => $eventTypeUid2
+			),
+		);
+		$this->fixture->piVars['event_type'] = array(
+			$eventTypeUid1, $eventTypeUid2
+		);
+
+		$result = $this->fixture->main('', array());
+
+		$this->assertContains(
+			'Event with type 1',
+			$result
+		);
+		$this->assertContains(
+			'Event with type 2',
+			$result
+		);
+	}
+
+	public function testListViewWithEventTypeExcludesHiddenEventWithSelectedEventType() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'hidden' => 1,
+				'event_type' => $eventTypeUid
+			),
+		);
+		$this->fixture->piVars['event_type'] = array($eventTypeUid);
+
+		$this->assertNotContains(
+			'Event with type',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithEventTypeExcludesDeletedEventWithSelectedEventType() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'deleted' => 1,
+				'event_type' => $eventTypeUid
+			),
+		);
+		$this->fixture->piVars['event_type'] = array($eventTypeUid);
+
+		$this->assertNotContains(
+			'Event with type',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewWithEventTypeExcludesEventsWithNotSelectedEventType() {
+		$eventTypeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with type',
+				'event_type' => $eventTypeUid1
+			),
+		);
+
+		$eventTypeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'another eventType')
+		);
+		$this->fixture->piVars['event_type'] = array($eventTypeUid2);
+
+		$this->assertNotContains(
+			'Event with type',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	///////////////////////////////////////////////////
 	// Tests concerning the sorting in the list view.
 	///////////////////////////////////////////////////

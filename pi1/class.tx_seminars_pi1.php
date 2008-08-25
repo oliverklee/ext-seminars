@@ -399,11 +399,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Adds the query parameter that result from the user selection in the
 		// selector widget (including the search form).
-		if (is_array($this->piVars['event_type'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForEventType(
-				$this->piVars['event_type']
-			);
-		}
 		if (is_array($this->piVars['language'])) {
 			$result .= $temporarySeminarBag->getAdditionalQueryForLanguage(
 				$this->piVars['language']
@@ -462,6 +457,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					'limitListViewToCategories', 's_listView'
 				)
 			);
+		}
+
+		if (isset($this->piVars['event_type'])
+			&& (is_array($this->piVars['event_type']))
+		) {
+			$sanitizedEventTypeUids = array();
+			foreach($this->piVars['event_type'] as $uid) {
+				$sanitizedEventTypeUids[] = intval($uid);
+			}
+			$builder->limitToEventTypes(implode(',', $sanitizedEventTypeUids));
 		}
 
 		$builder->limitToPlaces(
