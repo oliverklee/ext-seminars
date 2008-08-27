@@ -355,7 +355,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$this->whatToDisplay = 'seminar_list';
 					$result = $this->createSingleView();
 				} else {
-					$result = $this->createListView();
+					$result = $this->createListView($this->whatToDisplay);
 				}
 				break;
 		}
@@ -561,17 +561,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * This function is used for the normal event list as well as the
 	 * "my events" and the "my VIP events" list.
 	 *
-	 * @return	string		HTML code with the event list
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
 	 *
-	 * @access	protected
+	 * @return	string		HTML code with the event list
 	 */
-	function createListView() {
+	protected function createListView($whatToDisplay) {
 		$result = '';
 		$isOkay = true;
 
 		$this->instantiateStaticInfo();
 
-		switch ($this->whatToDisplay) {
+		switch ($whatToDisplay) {
 			case 'my_events':
 				if ($this->isLoggedIn()) {
 					$result .= $this->getSubpart('MESSAGE_MY_EVENTS');
@@ -625,7 +627,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// Hides it if it's deactivated in the configuration or we are on a
 			// special list view like "my_vip_events".
 			if ((!$this->getConfValueBoolean('hideSelectorWidget', 's_template_special'))
-				&& ($this->whatToDisplay == 'seminar_list')
+				&& ($whatToDisplay == 'seminar_list')
 			) {
 				// Prepares the arrays that contain the possible entries for the
 				// option boxes in the selector widget.
@@ -639,10 +641,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Creates the seminar or registration bag for the list view (with
 			// all the filtering applied).
-			$seminarOrRegistrationBag =& $this->initListView($this->whatToDisplay);
+			$seminarOrRegistrationBag =& $this->initListView($whatToDisplay);
 
 			if ($this->internal['res_count']) {
-				$result .= $this->createListTable($seminarOrRegistrationBag);
+				$result .= $this->createListTable($seminarOrRegistrationBag, $whatToDisplay);
 			} else {
 				$this->setMarker(
 					'error_text',
@@ -832,24 +834,25 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * items.
 	 *
 	 * @param	object		initialized seminar or registration bag
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
 	 *
 	 * @return	string		HTML for the table (will not be empty)
-	 *
-	 * @access	protected
 	 */
-	function createListTable(tx_seminars_bag $seminarOrRegistrationBag) {
+	protected function createListTable(tx_seminars_bag $seminarOrRegistrationBag, $whatToDisplay) {
 		$result = $this->createListHeader();
 		$rowCounter = 0;
 
 		while ($currentItem = $seminarOrRegistrationBag->getCurrent()) {
-			if ($this->whatToDisplay == 'my_events') {
+			if ($whatToDisplay == 'my_events') {
 				$this->registration =& $currentItem;
 				$this->seminar =& $this->registration->getSeminarObject();
 			} else {
 				$this->seminar =& $currentItem;
 			}
 
-			$result .= $this->createListRow($rowCounter);
+			$result .= $this->createListRow($rowCounter, $whatToDisplay);
 			$rowCounter++;
 			$seminarOrRegistrationBag->getNext();
 		}
@@ -872,10 +875,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	object		a seminar bag or a registration bag containing the
 	 * 						seminars or registrations for the list view
-	 *
-	 * @access	protected
 	 */
-	function &initListView($whatToDisplay = '', $additionalQueryParameters = '') {
+	protected function &initListView($whatToDisplay = '', $additionalQueryParameters = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
 			$this->conf['pidList'] = $this->getConfValueString('pages');
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
@@ -1623,7 +1624,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		);
 
 		if ($this->internal['res_count']) {
-			$tableEventsNextDay = $this->createListTable($seminarBag);
+			$tableEventsNextDay = $this->createListTable(
+				$seminarBag, 'events_next_day'
+			);
 
 			$this->setMarker('table_eventsnextday', $tableEventsNextDay);
 
@@ -1674,7 +1677,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				.'listitem_wrapper_list_registrations';
 			$this->hideSubparts($temporaryHiddenColumns);
 
-			$tableOtherDates = $this->createListTable($seminarBag);
+			$tableOtherDates = $this->createListTable($seminarBag, 'other_dates');
 
 			$this->setMarker('table_otherdates', $tableOtherDates);
 
@@ -1845,10 +1848,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML output, the table header
-	 *
-	 * @access	protected
 	 */
-	function createListHeader() {
+	protected function createListHeader() {
 		$this->setMarker(
 			'header_category', $this->getFieldHeader('category')
 		);
@@ -1935,10 +1936,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Returns the list view footer: end of table body, end of table.
 	 *
 	 * @return	string		HTML output, the table footer
-	 *
-	 * @access	protected
 	 */
-	function createListFooter() {
+	protected function createListFooter() {
 		return $this->getSubpart('LIST_FOOTER');
 	}
 
@@ -1947,13 +1946,16 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 * If $this->seminar is invalid, an empty string is returned.
 	 *
-	 * @param	integer		Row counter. Starts at 0 (zero). Used for alternating class values in the output rows.
+	 * @param	integer		Row counter. Starts at 0 (zero). Used for alternating
+	 * 						class values in the output rows.
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
 	 *
-	 * @return	string		HTML output, a table row with a class attribute set (alternative based on odd/even rows)
-	 *
-	 * @access	protected
+	 * @return	string		HTML output, a table row with a class attribute set
+	 * 						(alternative based on odd/even rows)
 	 */
-	function createListRow($rowCounter = 0) {
+	protected function createListRow($rowCounter = 0, $whatToDisplay) {
 		$result = '';
 
 		if ($this->seminar->isOk()) {
@@ -1977,7 +1979,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Retrieves the data for the columns "number of seats", "total
 			// price" and "status", but only if we are on the "my_events" list.
-			if ($this->whatToDisplay == 'my_events') {
+			if ($whatToDisplay == 'my_events') {
 				$attendanceData = array(
 					'seats' => $this->registration->getSeats(),
 					'total_price' => $this->registration->getTotalPrice()
@@ -1994,7 +1996,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			}
 
 			$allCategories = $this->seminar->getCategories();
-			if ($this->whatToDisplay == 'seminar_list') {
+			if ($whatToDisplay == 'seminar_list') {
 				$allCategoryLinks = array();
 				foreach ($allCategories as $uid => $title) {
 					$allCategoryLinks[]
@@ -2047,7 +2049,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			) {
 				$dateToShow = '';
 			} else {
-				if ($this->whatToDisplay == 'topic_list') {
+				if ($whatToDisplay == 'other_dates') {
 					$dateToShow = $this->seminar->getLinkedFieldValue(
 						$this, 'date'
 					);
@@ -2097,12 +2099,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$registrationLink = '';
 			if ($this->registrationManager->canRegisterIfLoggedIn($this->seminar)
-				&& ($this->whatToDisplay != 'my_events')) {
+				&& ($whatToDisplay != 'my_events')) {
 				$registrationLink = $this->registrationManager->getLinkToRegistrationOrLoginPage(
 					$this,
 					$this->seminar
 				);
-			} elseif ($this->whatToDisplay == 'my_events'
+			} elseif ($whatToDisplay == 'my_events'
 				&& $this->seminar->isUnregistrationPossible()
 			) {
 				$registrationLink = $this->registrationManager->getLinkToUnregistrationPage(

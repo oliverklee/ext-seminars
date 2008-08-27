@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2076] Fix: Date not linked in the "other dates for this topic" list
 - [#1073] Feature: Add flexforms checkboxes to filter which event types should be displayed in the list view
 - [#2113] Change: Move the filter for the event type to the seminar bag builder
 - [#2105] Change: Remove the empty option from the top of the event type selector widget
