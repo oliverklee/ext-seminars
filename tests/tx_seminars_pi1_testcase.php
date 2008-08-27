@@ -401,6 +401,50 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testOtherDatesListInSingleViewContainsOtherDateWithDateLinkedToSingleViewOfOtherDate() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'Test topic',
+			)
+		);
+		$dateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date',
+				'begin_date' => time() + ONE_WEEK,
+				'end_date' => time() + ONE_WEEK + ONE_DAY,
+			)
+		);
+		$dateUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date 2',
+				'begin_date' => time() + ONE_WEEK + 2*ONE_DAY,
+				'end_date' => time() + ONE_WEEK + 3*ONE_DAY,
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $dateUid1;
+		$result = $this->fixture->main('', array());
+		$this->assertContains(
+			'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
+			$result
+		);
+	}
+
 
 	///////////////////////////////////////////////
 	// Tests concerning places in the single view
