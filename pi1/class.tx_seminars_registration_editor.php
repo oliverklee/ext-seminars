@@ -22,6 +22,13 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_formidableapi);
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
+
+require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
+
 /**
  * Class 'tx_seminars_registration_editor' for the 'seminars' extension.
  *
@@ -33,13 +40,6 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
-
-require_once(t3lib_extMgm::extPath('ameos_formidable') . 'api/class.tx_ameosformidable.php');
-require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-
 class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_registration_editor';
@@ -137,7 +137,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function _initForms() {
-		$this->oForm =& t3lib_div::makeInstance('tx_ameosformidable');
+		$this->oForm = t3lib_div::makeInstance('tx_ameosformidable');
 
 		switch ($this->plugin->piVars['action']) {
 			case 'unregister':
@@ -145,15 +145,22 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				break;
 			case 'register':
 				// The fall-through is intended.
-				switch ($this->currentPageNumber) {
-					case 1:
-						$xmlFile = 'registration_editor_step2.xml';
-						break;
-					case 0:
-						// The fall-through is intended.
-					default;
-						$xmlFile = 'registration_editor_step1.xml';
-						break;
+			default:
+				// The current page number will be 1 if a 3-click registration
+				// is configured and the first page was submitted successfully.
+				// It will be 2 for a 3-click registration and the second page
+				// submitted successfully. It will also be 2 for a 2-click
+				// registration and the first page submitted successfully.
+				// Note that to display the second page, this function is called
+				// two times in a row if the current page number is higher than
+				// zero. It is only the second page, that can process the
+				// registration.
+				if (($this->currentPageNumber == 1)
+					|| ($this->currentPageNumber == 2)
+				) {
+					$xmlFile = 'registration_editor_step2.xml';
+				} else {
+					$xmlFile = 'registration_editor_step1.xml';
 				}
 				break;
 		}
@@ -192,12 +199,15 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function _render() {
-		$rawForm = $this->oForm->_render();
+		$rawForm = $this->oForm->render();
 		// For the confirmation page, we need to reload the whole thing. Yet,
 		// the previous rendering still is necessary for processing the data.
 		if ($this->currentPageNumber > 0) {
+			// A mayday would be returned without unsetting the form ID.
+			unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
+				['context']['forms']['tx_seminars_pi1_registration_editor']);
 			$this->_initForms();
-			$rawForm = $this->oForm->_render();
+			$rawForm = $this->oForm->render();
 		}
 
 		// Remove empty label tags that have been created due to a bug in
@@ -259,18 +269,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks whether there are at least $numberOfSeats available.
+	 * Checks whether there are at least the number of seats provided in
+	 * $formData['value'] available.
 	 *
-	 * @param	string		string representation of a number of seats to check for
+	 * @param	array		associative array with the element "value" in which
+	 * 						the number of seats to check for is stored
 	 *
-	 * @return	boolean		true if there are at least $numberOfSeats seats available, false otherwise
-	 *
-	 * @access	public
+	 * @return	boolean		true if there are at least $formData['value'] seats
+	 * 						available, false otherwise
 	 */
-	function canRegisterSeats($numberOfSeats) {
-		$intNumberOfSeats = intval($numberOfSeats);
+	public function canRegisterSeats(array $formData) {
 		return $this->registrationManager->canRegisterSeats(
-			$this->seminar, $intNumberOfSeats
+			$this->seminar, intval($formData['value'])
 		);
 	}
 
@@ -278,21 +288,24 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Checks whether a checkbox is checked OR the "finish registration" button
 	 * hasn't just been clicked.
 	 *
-	 * @param	integer		the current value of the checkbox (0 or 1)
+	 * @param	array		associative array with the element "value" in which
+	 * 						the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return	boolean		true if the checkbox is checked or we are not on the confirmation page, false otherwise
-	 *
-	 * @access	public
+	 * @return	boolean		true if the checkbox is checked or we are not on the
+	 * 						confirmation page, false otherwise
 	 */
-	function isTermsChecked($checkboxValue) {
-		return ((boolean) $checkboxValue) || ($this->currentPageNumber != 2);
+	public function isTermsChecked(array $formData) {
+		return ((boolean) $formData['value'])
+			|| ($this->currentPageNumber != 2);
 	}
 
 	/**
 	 * Checks whether the "travelling terms" checkbox (ie. the second "terms"
 	 * checkbox) is enabled in the event record *and* via TS setup.
 	 *
-	 * @return	boolean		true if the "travelling terms" checkbox is enabled in the event record *and* via TS setup, false otherwise
+	 * @return	boolean		true if the "travelling terms" checkbox is enabled
+	 * 						in the event record *and* via TS setup, false
+	 * 						otherwise
 	 *
 	 * @access	public
 	 */
@@ -307,14 +320,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * function always returns true. It also always returns true if the
 	 * "finish registration" button hasn't just been clicked.
 	 *
-	 * @param	integer		the current value of the checkbox (0 or 1)
+	 * @param	array		associative array with the element "value" in which
+	 * 						the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return	boolean		true if the checkbox is checked or disabled in the configuration or if the "finish registration" button hasn't just been clicked, false if it is not checked AND enabled in the configuration
-	 *
-	 * @access	public
+	 * @return	boolean		true if the checkbox is checked or disabled in the
+	 * 						configuration or if the "finish registration" button
+	 * 						hasn't just been clicked, false if it is not checked
+	 * 						AND enabled in the configuration
 	 */
-	function isTerms2CheckedAndEnabled($checkboxValue) {
-		return ((boolean) $checkboxValue) || !$this->isTerms2Enabled()
+	public function isTerms2CheckedAndEnabled(array $formData) {
+		return ((boolean) $formData['value']) || !$this->isTerms2Enabled()
 			|| ($this->currentPageNumber != 2);
 	}
 
@@ -325,14 +340,17 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * necessary nor possible to select any payment method) OR this event has
 	 * no price at all.
 	 *
-	 * @param	mixed		the currently selected value (a positive integer) or null if no radiobutton is selected
+	 * @param	array		associative array with the element "value" in which
+	 * 						the currently selected value (a positive integer or
+	 * 						null if no radiobutton is selected) is stored
 	 *
-	 * @return	boolean		true if a method of payment is selected OR no method could have been selected at all OR this event has no price, false if none is selected, but should have been selected
-	 *
-	 * @access	public
+	 * @return	boolean		true if a method of payment is selected OR no method
+	 * 						could have been selected at all OR this event has no
+	 * 						price, false if none is selected, but should have
+	 * 						been selected
 	 */
-	function isMethodOfPaymentSelected($radiogroupValue) {
-		return $this->isRadiobuttonSelected($radiogroupValue)
+	public function isMethodOfPaymentSelected(array $formData) {
+		return $this->isRadiobuttonSelected($formData['value'])
 			|| !$this->seminar->hasPaymentMethods()
 			|| !$this->seminar->hasAnyPrice()
 			|| !$this->showMethodsOfPayment();
@@ -341,13 +359,13 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Checks whether a radiobutton in a radiobutton group is selected.
 	 *
-	 * @param	mixed		the currently selected value (a positive integer) or null if no button is selected
+	 * @param	mixed		the currently selected value (a positive integer) or
+	 * 						null if no button is selected
 	 *
-	 * @return	boolean		true if a radiobutton is selected, false if none is selected
-	 *
-	 * @access	public
+	 * @return	boolean		true if a radiobutton is selected, false if none is
+	 * 						selected
 	 */
-	function isRadiobuttonSelected($radiogroupValue) {
+	private function isRadiobuttonSelected($radiogroupValue) {
 		return (boolean) $radiogroupValue;
 	}
 
@@ -356,9 +374,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * This is specified via TS setup (or flexforms) using the
 	 * "showRegistrationFields" variable.
 	 *
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	array		the contents of the "params" child of the userobj
+	 * 						node as key/value pairs (used for retrieving the
+	 * 						current form field name)
 	 *
-	 * @return	boolean		true if the current form field should be displayed, false otherwise
+	 * @return	boolean		true if the current form field should be displayed,
+	 * 						false otherwise
 	 *
 	 * @access	public
 	 */
@@ -381,7 +402,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 *
 	 * @param	string		the key of the field to test, must not be empty
 	 *
-	 * @return	boolean		true if the current form field should be displayed, false otherwise
+	 * @return	boolean		true if the current form field should be displayed,
+	 * 						false otherwise
 	 *
 	 * @access	public
 	 */
@@ -499,9 +521,13 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * and returns only true if the event has a price (ie. is not completely for
 	 * free) and the current form field should be displayed.
 	 *
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	array		the contents of the "params" child of the userobj
+	 * 						node as key/value pairs (used for retrieving the
+	 * 						current form field name)
 	 *
-	 * @return	boolean		true if the current form field should be displayed AND the current event is not completely for free, false otherwise
+	 * @return	boolean		true if the current form field should be displayed
+	 * 						AND the current event is not completely for free,
+	 * 						false otherwise
 	 *
 	 * @access	public
 	 */
@@ -519,9 +545,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * checkLogOutOneTimeAccountsAfterRegistration is enabled in the TS setup,
 	 * the FE user will be automatically logged out.
 	 *
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	array		the contents of the "params" child of the userobj
+	 * 						node as key/value pairs (used for retrieving the
+	 * 						current form field name)
 	 *
-	 * @return	string		complete URL of the FE page with a message (or null if the confirmation page has not been submitted yet)
+	 * @return	string		complete URL of the FE page with a message (or null
+	 * 						if the confirmation page has not been submitted yet)
 	 *
 	 * @access	public
 	 */
@@ -625,9 +654,12 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	/**
 	 * Provides data items for the list of available places.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be empty, but not null, unused)
+	 * @param	array		array that contains any pre-filled data (may be
+	 * 						empty, but not null, unused)
 	 *
-	 * @return	array		items from the payment methods table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return	array		items from the payment methods table as an array
+	 * 						with the keys "caption" (for the title) and "value"
+	 * 						(for the uid)
 	 *
 	 * @access	public
 	 */
@@ -651,7 +683,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * ie. whether they are enable in the setup and the current event actually
 	 * has any payment methods assigned and has at least one price.
 	 *
-	 * @return	boolean		true if the payment methods should be displayed, false otherwise
+	 * @return	boolean		true if the payment methods should be displayed,
+	 * 						false otherwise
 	 *
 	 * @access	public
 	 */
@@ -1017,19 +1050,21 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * Checks whether the list of attendees' names is non-empty or less than two
 	 * seats are requested or the field "attendees names" is not displayed.
 	 *
-	 * @param	string		the current value of the field with the attendees' names
-	 * @param	object		the current FORMidable object
+	 * @param	array		associative array with the element "value" in which
+	 * 						the current value of the field with the attendees'
+	 * 						names is provided
+	 * @param	tx_ameosformidable		the current FORMidable object
 	 *
-	 * @return	boolean		true if the field is non-empty or less than two seats are reserved or this field is not displayed at all, false otherwise
-	 *
-	 * @access	public
+	 * @return	boolean		true if the field is non-empty or less than two
+	 * 						seats are reserved or this field is not displayed
+	 * 						at all, false otherwise
 	 */
-	function hasAttendeesNames($attendeesNames, tx_ameosformidable $form) {
+	public function hasAttendeesNames(array $formData, tx_ameosformidable $form) {
 		$dataHandler = $form->oDataHandler;
 		$seats = (intval($dataHandler->_getThisFormData('seats')) > 0) ?
 			intval($dataHandler->_getThisFormData('seats')) : 1;
 
-		return (!empty($attendeesNames) || ($seats < 2)
+		return (!empty($formData['value']) || ($seats < 2)
 			|| !$this->hasRegistrationFormField(
 				array('elementname' => 'attendees_names')
 			)
@@ -1042,17 +1077,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * (or none is defined as "bank transfer"), the check is always positive and
 	 * returns true.
 	 *
-	 * @param	string		the value of the current field
-	 * @param	object		the current FORMidable object
+	 * @param	array		associative array with the element "value" in which
+	 * 						the value of the current field is provided
+	 * @param	tx_ameosformidable		the current FORMidable object
 	 *
 	 * @return	boolean		true if the field is non-empty or "bank transfer" is not selected
-	 *
-	 * @access	public
 	 */
-	function hasBankData($bankData, tx_ameosformidable $form) {
+	public function hasBankData(array $formData, tx_ameosformidable $form) {
 		$result = true;
 
-		if (empty($bankData)) {
+		if (empty($formData['value'])) {
 			$bankTransferUid = $this->plugin->getConfValueInteger('bankTransferUID');
 
 			$dataHandler = $form->oDataHandler;
@@ -1190,14 +1224,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * least one lodging option for this event and the lodging options should
 	 * be displayed).
 	 *
-	 * @param	string		the value of the current field
+	 * @param	array		the value of the current field in an associative
+	 * 						array witch the element "value"
 	 *
-	 * @return	boolean		true if at least one item is selected or no lodging options can be selected
-	 *
-	 * @access	public
+	 * @return	boolean		true if at least one item is selected or no lodging
+	 * 						options can be selected
 	 */
-	function isLodgingSelected($selection) {
-		return !empty($selection) || !$this->hasLodgings();
+	public function isLodgingSelected(array $formData) {
+		return !empty($formData['value']) || !$this->hasLodgings();
 	}
 
 	/**
@@ -1252,14 +1286,14 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * least one food option for this event and the food options should
 	 * be displayed).
 	 *
-	 * @param	string		the value of the current field
+	 * @param	array		associative array with the element "value" in which
+	 * 						the value of the current field is provided
 	 *
-	 * @return	boolean		true if at least one item is selected or no food options can be selected
-	 *
-	 * @access	public
+	 * @return	boolean		true if at least one item is selected or no food
+	 * 						options can be selected
 	 */
-	function isFoodSelected($selection) {
-		return !empty($selection) || !$this->hasFoods();
+	public function isFoodSelected(array $formData) {
+		return !empty($formData['value']) || !$this->hasFoods();
 	}
 
 	/**
@@ -1278,14 +1312,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * field is not visible in the registration form (in which case it is not
 	 * possible to select a price).
 	 *
-	 * @param	mixed		the currently selected value (a positive integer) or null if no radiobutton is selected
+	 * @param	array		associative array with the element "value" in which
+	 * 						the currently selected value (a positive integer) or
+	 * 						null if no radiobutton is selected is provided
 	 *
-	 * @return	boolean		true if a valid price is selected or the price field is hidden, false if none is selected, but could have been selected
-	 *
-	 * @access	public
+	 * @return	boolean		true if a valid price is selected or the price field
+	 * 						is hidden, false if none is selected, but could have
+	 * 						been selected
 	 */
-	function isValidPriceSelected($radiogroupValue) {
-		return $this->seminar->isPriceAvailable($radiogroupValue)
+	public function isValidPriceSelected(array $formData) {
+		return $this->seminar->isPriceAvailable($formData['value'])
 			|| !$this->hasRegistrationFormField(
 				array('elementname' => 'price')
 			);

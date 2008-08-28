@@ -22,6 +22,12 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_formidableapi);
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
+
 /**
  * Class 'tx_seminars_event_editor' for the 'seminars' extension.
  *
@@ -33,13 +39,6 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
-
-require_once(t3lib_extMgm::extPath('ameos_formidable') . 'api/class.tx_ameosformidable.php');
-
 class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_event_editor';
@@ -93,6 +92,12 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	function _initForms() {
 		$this->oForm =& t3lib_div::makeInstance('tx_ameosformidable');
 
+		// declares the additional datahandler for mm realtions
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
+			['declaredobjects']['datahandlers']['DBMM'] = array(
+				'key' => 'dh_dbmm', 'base' => true
+			);
+
 		$this->oForm->init(
 			$this,
 			t3lib_extmgm::extPath($this->extKey).'pi1/event_editor.xml',
@@ -127,7 +132,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @access	public
 	 */
 	function _render() {
-		$rawForm = $this->oForm->_render();
+		$rawForm = $this->oForm->render();
 		$this->plugin->processTemplate($rawForm);
 		$this->plugin->setLabels();
 

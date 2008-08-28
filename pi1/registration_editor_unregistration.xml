@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<formidable version="0.7.0">
+<formidable version="1.0.0"
+	xmlns:datahandler="http://www.ameos.com/formidable/1.0.0/datahandler"
+	xmlns:datasource="http://www.ameos.com/formidable/1.0.0/datasource"
+	xmlns:renderer="http://www.ameos.com/formidable/1.0.0/renderer"
+	xmlns:renderlet="http://www.ameos.com/formidable/1.0.0/renderlet"
+	xmlns:validator="http://www.ameos.com/formidable/1.0.0/validator"
+	xmlns:actionlet="http://www.ameos.com/formidable/1.0.0/actionlet">
 	<meta>
 		<name>Seminar Manager unregistration form</name>
 		<description>This form allows FE users to unregister for events.</description>

@@ -3,19 +3,6 @@ if (!defined ('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-if (t3lib_extMgm::isLoaded('ameos_formidable')) {
-	$formidableClassFile = t3lib_extMgm::extPath('ameos_formidable')
-		.'api/class.tx_ameosformidable.php';
-
-	if (is_file($formidableClassFile)) {
-		require_once($formidableClassFile);
-		// adds a FORMidable data handler that also can create M:M relations
-		tx_ameosformidable::declareDataHandler($_EXTKEY, 'DBMM', false);
-	}
-
-	unset($formidableClassFile);
-}
-
 t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_seminars=1
 ');
