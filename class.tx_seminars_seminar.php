@@ -503,22 +503,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * it is used, the DB query will select records of the same topic that
 	 * are not identical (ie. not with the same UID) with the current event.
 	 *
-	 * @return	string		part of a WHERE clause that can be appended to the current WHERE clause
-	 *
-	 * @access	public
+	 * @return	string		part of a WHERE clause that can be appended to the
+	 * 						current WHERE clause
 	 */
-	function getAdditionalQueryForOtherDates() {
+	public function getAdditionalQueryForOtherDates() {
 		$result = ' AND (';
 
 		if ($this->getRecordPropertyInteger('object_type') == SEMINARS_RECORD_TYPE_DATE) {
-			$result .= '(topic='.$this->getRecordPropertyInteger('topic').' AND '
-				.'uid!='.$this->getUid().')'
-				.' OR '
-				.'(uid='.$this->getRecordPropertyInteger('topic')
-				.' AND object_type='.SEMINARS_RECORD_TYPE_COMPLETE.')';
+			$result .= '(topic=' . $this->getRecordPropertyInteger('topic') .
+				' AND ' .
+				'uid!=' . $this->getUid() .
+				' AND ' .
+				'object_type=' . SEMINARS_RECORD_TYPE_DATE .
+				')' .
+				' OR ' .
+				'(uid=' . $this->getRecordPropertyInteger('topic') .
+				' AND object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ')';
 		} else {
-			$result .= 'topic='.$this->getUid()
-				.' AND object_type!='.SEMINARS_RECORD_TYPE_COMPLETE;
+			$result .= 'topic=' . $this->getUid() .
+				' AND object_type=' . SEMINARS_RECORD_TYPE_DATE;
 		}
 
 		$result .= ')';

@@ -399,6 +399,55 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testOtherDatesListInSingleViewDoesContainsSingleEventRecordWithTopicSet() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue(
+			'hideFields',
+			'eventsnextday'
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'Test topic',
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date',
+				'begin_date' => time() + ONE_WEEK,
+				'end_date' => time() + ONE_WEEK + ONE_DAY,
+			)
+		);
+		$singleEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'topic' => $topicUid,
+				'title' => 'Test single 2',
+				'begin_date' => time() + ONE_WEEK + 2*ONE_DAY,
+				'end_date' => time() + ONE_WEEK + 3*ONE_DAY,
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $dateUid;
+		$result = $this->fixture->main('', array());
+
+		$this->assertNotContains(
+			'tx_seminars_pi1%5BshowUid%5D=' . $singleEventUid,
+			$result
+		);
+	}
+
 
 	///////////////////////////////////////////////////////
 	// Tests concerning attached files in the single view
