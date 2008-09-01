@@ -1,4 +1,5 @@
 0.6.2 (currently working on)
+- [#2145] Change: Use an array and a foreach loop in createListHeader()
 - [#2020] Fix: The "other dates for this topic" list shows also single events
 - [#2076] Fix: Date not linked in the "other dates for this topic" list
 - [#2113] Fix: The limits in the bag builders could not be unset

@@ -1769,90 +1769,44 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns the list view header: Start of table, header row, start of table body.
+	 * Returns the list view header: Start of table, header row, start of table
+	 * body.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML output, the table header
 	 */
 	protected function createListHeader() {
-		$this->setMarker(
-			'header_category', $this->getFieldHeader('category')
+		$availableColumns = array(
+			'category',
+			'title',
+			'subtitle',
+			'uid',
+			'event_type',
+			'accreditation_number',
+			'credit_points',
+			'speakers',
+			'language',
+			'date',
+			'time',
+			'place',
+			'country',
+			'city',
+			'seats',
+			'price_regular',
+			'price_special',
+			'total_price',
+			'organizers',
+			'target_groups',
+			'vacancies',
+			'status_registration',
+			'registration',
+			'list_registrations',
+			'edit',
 		);
-		$this->setMarker('header_title', $this->getFieldHeader('title'));
-		$this->setMarker(
-			'header_subtitle',
-			$this->getFieldHeader('subtitle')
-		);
-		$this->setMarker('header_uid', $this->getFieldHeader('uid'));
-		$this->setMarker(
-			'header_event_type',
-			$this->getFieldHeader('event_type')
-		);
-		$this->setMarker(
-			'header_accreditation_number',
-			$this->getFieldHeader('accreditation_number')
-		);
-		$this->setMarker(
-			'header_credit_points',
-			$this->getFieldHeader('credit_points')
-		);
-		$this->setMarker(
-			'header_speakers',
-			$this->getFieldHeader('speakers')
-		);
-		$this->setMarker(
-			'header_language',
-			$this->getFieldHeader('language')
-		);
-		$this->setMarker('header_date', $this->getFieldHeader('date'));
-		$this->setMarker('header_time', $this->getFieldHeader('time'));
-		$this->setMarker('header_place', $this->getFieldHeader('place'));
-		$this->setMarker(
-			'header_country',
-			$this->getFieldHeader('country')
-		);
-		$this->setMarker(
-			'header_city',
-			$this->getFieldHeader('city')
-		);
-		$this->setMarker('header_seats', $this->getFieldHeader('seats'));
-		$this->setMarker(
-			'header_price_regular',
-			$this->getFieldHeader('price_regular')
-		);
-		$this->setMarker(
-			'header_price_special',
-			$this->getFieldHeader('price_special')
-		);
-		$this->setMarker(
-			'header_total_price',
-			$this->getFieldHeader('total_price')
-		);
-		$this->setMarker(
-			'header_organizers',
-			$this->getFieldHeader('organizers')
-		);
-		$this->setMarker(
-			'header_target_groups',
-			$this->getFieldHeader('target_groups')
-		);
-		$this->setMarker(
-			'header_vacancies',
-			$this->getFieldHeader('vacancies')
-		);
-		$this->setMarker(
-			'header_status_registration',
-			$this->getFieldHeader('status_registration')
-		);
-		$this->setMarker(
-			'header_registration',
-			$this->getFieldHeader('registration')
-		);
-		$this->setMarker(
-			'header_list_registrations',
-			$this->getFieldHeader('list_registrations')
-		);
-		$this->setMarker('header_edit', $this->getFieldHeader('edit'));
+
+		foreach ($availableColumns as $column) {
+			$this->setMarker('header_' . $column, $this->getFieldHeader($column));
+		}
 
 		return $this->getSubpart('LIST_HEADER');
 	}
