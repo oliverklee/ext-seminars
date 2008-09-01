@@ -495,10 +495,8 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 *
 	 * @return	string		the contents of the corresponding subpart or an
 	 * 						empty string in case the subpart does not exist
-	 *
-	 * @access	private
 	 */
-	function getSubpartForCallback(array $matches) {
+	protected function getSubpartForCallback(array $matches) {
 		return $this->getSubpart($matches[1]);
 	}
 
