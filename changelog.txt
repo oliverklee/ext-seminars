@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1036] Change: Use terms.htmlid instead of the verbatim HTML ID in the HTML template
 - [#2151] Fix: tx_seminars_templatehelper::getSubpartForCallback has to be protected in PHP 5.3
 - [#2145] Change: Use an array and a foreach loop in createListHeader()
 - [#2020] Fix: The "other dates for this topic" list shows also single events

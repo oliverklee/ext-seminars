@@ -78,6 +78,7 @@
 		</renderlet:LABEL>
 
 		<renderlet:CHECKSINGLE name="terms">
+			<label>###LABEL_TERMS###</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
@@ -99,6 +100,7 @@
 		</renderlet:CHECKSINGLE>
 
 		<renderlet:CHECKSINGLE name="terms_2">
+			<label>###LABEL_TERMS_2###</label>
 			<process>
 				<userobj>
 					<extension>this</extension>
