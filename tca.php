@@ -776,10 +776,13 @@ $TCA['tx_seminars_seminars'] = array(
 		'attached_files' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attached_files',
-			'config' => Array (
+			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'file',
-				'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+				'allowed' => 'jpg,jpeg,png,bmp,gif,tiff,tif,' . 'txt,pdf,ps,' .
+					'svg,' . 'doc,docx,sxw,odt,' . 'xls,xlsx,sxc,ods,' .
+					'ppt,pptx,sxi,odp,' . 'html,htm,css,js,xml,xsd,' .
+					'zip,rar,gz,tgz,tar,bz2,tbz,tbz2',
 				'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
 				'uploadfolder' => 'uploads/tx_seminars/',
 				'size' => '5',

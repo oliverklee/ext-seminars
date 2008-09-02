@@ -40,24 +40,27 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelp
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_event_editor extends tx_seminars_templatehelper {
-	/** Same as class name */
-	var $prefixId = 'tx_seminars_event_editor';
+	/** @var	string		class name */
+	public $prefixId = 'tx_seminars_event_editor';
 
-	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'pi1/class.tx_seminars_event_editor.php';
+	/** @var	string		path to this script relative to the extension dir */
+	public $scriptRelPath = 'pi1/class.tx_seminars_event_editor.php';
 
-	/** the pi1 object where this event editor will be inserted */
-	var $plugin;
+	/**
+	 * @var	tx_seminars_pi1		the pi1 object where this event editor will be
+	 * 							inserted
+	 */
+	protected $plugin;
 
-	/** Formidable object that creates the edit form. */
-	var $oForm = null;
+	/** @var	tx_ameosformidable		form creator */
+	private $oForm = null;
 
-	/** the UID of the event to edit (or false (not 0!) if we are creating an event) */
-	var $iEdition = false;
+	/**
+	 * @var	mixed		UID of the event to edit or false (not 0!) to create
+	 * 					a new event
+	 */
+	private $iEdition = false;
 
-	// Currently, we can only edit event (seminar) records.
-	/** the table to edit (without the extension prefix) */
-	var $sEntity = 'seminars';
 
 	/**
 	 * The constructor.
@@ -66,12 +69,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * must be called to ensure that the logged-in user is allowed to edit a
 	 * given seminar.
 	 *
-	 * @param	object		the pi1 object where this event editor will be inserted (must not be null)
-	 *
-	 * @access	public
+	 * @param	tx_seminars_pi1		the pi1 object where this event editor will
+	 * 								be inserted
 	 */
-	function tx_seminars_event_editor(&$plugin) {
-		$this->plugin =& $plugin;
+	public function tx_seminars_event_editor(tx_seminars_pi1 $plugin) {
+		$this->plugin = $plugin;
 		$this->init($this->plugin->conf);
 
 		// Edit an existing record or create a new one?
@@ -86,13 +88,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 
 	/**
 	 * Initializes the create/edit form.
-	 *
-	 * @access	protected
 	 */
-	function _initForms() {
-		$this->oForm =& t3lib_div::makeInstance('tx_ameosformidable');
+	protected function _initForms() {
+		$this->oForm = t3lib_div::makeInstance('tx_ameosformidable');
 
-		// declares the additional datahandler for mm realtions
+		// Declares the additional datahandler for m:n relations.
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
 			['declaredobjects']['datahandlers']['DBMM'] = array(
 				'key' => 'dh_dbmm', 'base' => true
@@ -110,16 +110,14 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * The returned path will always be an absolute path in the file system;
 	 * EXT: references will automatically get resolved.
 	 *
-	 * @return	string		the path to the HTML template as an absolute path in the file system, will not be empty in a correct configuration, will never be null
-	 *
-	 * @access	public
+	 * @return	string		the path to the HTML template as an absolute path in
+	 * 						the file system, will not be empty in a correct
+	 * 						configuration, will never be null
 	 */
-	function getTemplatePath() {
+	public function getTemplatePath() {
 		return t3lib_div::getFileAbsFileName(
 			$this->plugin->getConfValueString(
-				'templateFile',
-				's_template_special',
-				true
+				'templateFile', 's_template_special', true
 			)
 		);
 	}
@@ -128,10 +126,8 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Creates the HTML output.
 	 *
 	 * @return 	string		HTML of the create/edit form
-	 *
-	 * @access	public
 	 */
-	function _render() {
+	public function _render() {
 		$rawForm = $this->oForm->render();
 		$this->plugin->processTemplate($rawForm);
 		$this->plugin->setLabels();
@@ -272,11 +268,10 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	/**
 	 * Gets the PID of the page where FE-created events will be stored.
 	 *
-	 * @return	integer		the PID of the page where FE-created events will be stored
-	 *
-	 * @access	public
+	 * @return	integer		the PID of the page where FE-created events will be
+	 * 						stored
 	 */
-	function getPidForNewEvents() {
+	public function getPidForNewEvents() {
 		return $this->plugin->getConfValueInteger(
 			'createEventsPID',
 			's_fe_editing'
@@ -308,11 +303,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * If the "seminar" piVar is set, it also is checked whether that event
 	 * record exists and the logged-in FE user is the owner.
 	 *
-	 * @return	boolean		true if a user is logged in and allowed to enter and edit events (especially the event given in the piVar "seminar"), false otherwise
-	 *
-	 * @access	public
+	 * @return	boolean		true if a user is logged in and allowed to enter and
+	 * 						edit events (especially the event given in the piVar
+	 * 						"seminar"), false otherwise
 	 */
-	function hasAccess() {
+	public function hasAccess() {
 		$isOkay = $this->isLoggedIn()
 			&& isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
 				$this->plugin->getConfValueInteger(
@@ -356,11 +351,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * If the FE user does not have the necessary permissions, a localized error
 	 * message will be returned.
 	 *
-	 * @return	string		an empty string if a user is logged in and allowed to enter and edit events, a localized error message otherwise
-	 *
-	 * @access	public
+	 * @return	string		an empty string if a user is logged in and allowed
+	 * 						to enter and edit events, a localized error message
+	 * 						otherwise
 	 */
-	function hasAccessMessage() {
+	public function hasAccessMessage() {
 		$result = '';
 
 		if (!$this->hasAccess()) {
@@ -380,23 +375,24 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 *
 	 * @param	array		all entered form data with the field names as keys
 	 *
-	 * @return	array		the entered form data with all commas in all price fields changed to dots
-	 *
-	 * @access	public
+	 * @return	array		the entered form data with all commas in all price
+	 * 						fields changed to dots
 	 */
-	function unifyDecimalSeparators(&$formData) {
+	public function unifyDecimalSeparators(array $formData) {
+		$modifiedFormData = $formData;
 		$priceFields = array(
 			'price_regular', 'price_regular_early', 'price_regular_board',
-			'price_special', 'price_special_early', 'price_special_board'
+			'price_special', 'price_special_early', 'price_special_board',
 		);
 
 		foreach ($priceFields as $key) {
-			if (isset($formData[$key])) {
-				$formData[$key] = str_replace(',', '.', $formData[$key]);
+			if (isset($modifiedFormData[$key])) {
+				$modifiedFormData[$key]
+					= str_replace(',', '.', $modifiedFormData[$key]);
 			}
 		}
 
-		return $formData;
+		return $modifiedFormData;
 	}
 }
 
