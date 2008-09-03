@@ -35,7 +35,7 @@
 				<beforeinsertion>
 					<userobj>
 						<extension>this</extension>
-						<method>unifyDecimalSeparators</method>
+						<method>modifyDataToInsert</method>
 					</userobj>
 				</beforeinsertion>
 			</process>
@@ -418,6 +418,30 @@
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.notes</label>
 		</renderlet:TEXTAREA>
 
+		<renderlet:UPLOAD name="attached_files">
+			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attached_files</label>
+			<data>
+				<targetdir>uploads/tx_seminars/</targetdir>
+				<multiple>1</multiple>
+			</data>
+			<validators>
+				<validator:STANDARD>
+					<userobj>
+						<extension>this</extension>
+						<method>checkFile</method>
+						<message>
+							<userobj>
+								<extension>this</extension>
+								<method>getFileUploadErrorMessage</method>
+							</userobj>
+						</message>
+					</userobj>
+				</validator:STANDARD>
+			</validators>
+		</renderlet:UPLOAD>
+		<renderlet:CHECKSINGLE name="proceed_file_upload">
+			<label>LLL:EXT:seminars/pi1/locallang.xml:label_proceed_file_upload</label>
+		</renderlet:CHECKSINGLE>
 		<renderlet:SUBMIT name="btnsubmit">
 			<label>###LABEL_SAVE###</label>
 		</renderlet:SUBMIT>

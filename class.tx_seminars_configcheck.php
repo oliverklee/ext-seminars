@@ -334,6 +334,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkEventEditorFeGroupID();
 		$this->checkCreateEventsPID();
 		$this->checkEventSuccessfullySavedPID();
+		$this->checkAllowedExtensionsForUpload();
 	}
 
 	/**
@@ -1387,6 +1388,20 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 			'This value specifies the page to which the user will be '
 				.'redirected after saving an event record in the front end. If '
 				.'this value is not set correctly, the redirect will not work.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value allowedExtensionsForUpload.
+	 */
+	private function checkAllowedExtensionsForUpload() {
+		$this->checkForNonEmptyString(
+			'allowedExtensionsForUpload',
+			true,
+			's_fe_editing',
+			'This value specifies the list of allowed extensions of files to ' .
+				'upload in the FE editor. If this value is empty, files ' .
+				'cannot be uploaded.'
 		);
 	}
 

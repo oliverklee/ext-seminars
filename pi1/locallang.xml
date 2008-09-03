@@ -78,6 +78,7 @@
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
 			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
+			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -206,6 +207,11 @@
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
+			<label index="label_proceed_file_upload">Upload more files directly after save</label>
+			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
+			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
+			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
+			<label index="message_invalid_type_informal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
@@ -548,6 +554,7 @@
 			<label index="seminars.pi_flexform.eventEditorPID">Seite mit dem Plugin zum Bearbeiten von Veranstaltungen</label>
 			<label index="seminars.pi_flexform.createEventsPID">SysFolder, in dem die Veranstaltungsdatensätze gespeichert werden</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Seite, auf die nach dem Speichern einer Veranstaltung im Front-end umgeleitet wird</label>
+			<label index="seminars.pi_flexform.allowedExtensionsForUpload">Liste erlaubter Dateiendungen für Front-end-Bearbeitung</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorherige</label>
 			<label index="pi_list_browseresults_page">Seite</label>
 			<label index="pi_list_browseresults_next">Nächste &gt;</label>
@@ -676,6 +683,11 @@
 			<label index="label_we_offer_events_in_categories_formal">Zurzeit können wir Ihnen Veranstaltungen aus den folgenden Kategorien anbieten:</label>
 			<label index="label_we_offer_events_in_categories_informal">Zurzeit können wir dir Veranstaltungen aus den folgenden Kategorien anbieten:</label>
 			<label index="label_no_categories">Momentan bieten wir keine in Kategorien eingeordneten Veranstaltungen an.</label>
+			<label index="label_proceed_file_upload">Nach dem Speichern weitere Dateien hochladen</label>
+			<label index="message_file_too_large_formal">Die anzuhängende Datei ist zu groß. Bitte wählen Sie eine kleinere. Die maximal erlaubte Größe ist</label>
+			<label index="message_file_too_large_informal">Die anzuhängende Datei ist zu groß. Bitte wähle eine kleinere. Die maximal erlaubte Größe ist</label>
+			<label index="message_invalid_type_formal">Die hochzuladende Datei hat ein ungültiges Format. Bitte wählen Sie eine andere. Erlaubte Dateiformate sind</label>
+			<label index="message_invalid_type_informal">Die hochzuladende Datei hat ein ungültiges Format. Bitte wähle eine andere. Erlaubte Dateiformate sind</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
@@ -1943,6 +1955,7 @@
 			<label index="seminars.pi_flexform.eventEditorPID" type="integer">236783633</label>
 			<label index="seminars.pi_flexform.createEventsPID" type="integer">130277073</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID" type="integer">107570988</label>
+			<label index="seminars.pi_flexform.allowedExtensionsForUpload" type="integer">98984260</label>
 			<label index="pi_list_browseresults_prev" type="integer">20121992</label>
 			<label index="pi_list_browseresults_page" type="integer">26464201</label>
 			<label index="pi_list_browseresults_next" type="integer">232350798</label>
@@ -2071,6 +2084,11 @@
 			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
+			<label index="label_proceed_file_upload" type="integer">17415703</label>
+			<label index="message_file_too_large_formal" type="integer">27037616</label>
+			<label index="message_file_too_large_informal" type="integer">27037616</label>
+			<label index="message_invalid_type_formal" type="integer">60436029</label>
+			<label index="message_invalid_type_informal" type="integer">60436029</label>
 			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
@@ -3107,6 +3125,7 @@
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
 			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
+			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -3237,6 +3256,11 @@
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
+			<label index="label_proceed_file_upload">Upload more files directly after save</label>
+			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
+			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
+			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
+			<label index="message_invalid_type_informal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>

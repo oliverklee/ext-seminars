@@ -392,6 +392,8 @@ plugin.tx_seminars_pi1 {
 	# PID of the page that will be shown when an event has been successfully entered on the FE
 	eventSuccessfullySavedPID =
 
+	# comma-separated list of file extensions which are allowed to be uploaded
+	allowedExtensionsForUpload = jpg,jpeg,png,bmp,gif,tiff,tif,txt,pdf,ps,svg,doc,docx,sxw,odt,xls,xlsx,sxc,ods,ppt,pptx,sxi,odp,html,htm,css,js,xml,xsd,zip,rar,gz,tgz,tar,bz2,tbz,tbz2
 	# UID of the payment method that corresponds to "bank transfer"
 	bankTransferUID =
 
