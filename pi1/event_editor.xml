@@ -439,12 +439,20 @@
 				</validator:STANDARD>
 			</validators>
 		</renderlet:UPLOAD>
-		<renderlet:CHECKSINGLE name="proceed_file_upload">
-			<label>LLL:EXT:seminars/pi1/locallang.xml:label_proceed_file_upload</label>
-		</renderlet:CHECKSINGLE>
-		<renderlet:SUBMIT name="btnsubmit">
+		<renderlet:HIDDEN name="delete_attached_files">
+			<data defaultvalue="" />
+		</renderlet:HIDDEN>
+
+		<renderlet:SUBMIT name="submit_and_stay">
 			<label>###LABEL_SAVE###</label>
+			<onclick>
+				document.getElementById("tx_seminars_pi1_seminars_proceed_file_upload").value = 1
+			</onclick>
 		</renderlet:SUBMIT>
+		<renderlet:SUBMIT name="btnsubmit">
+			<label>###LABEL_SAVE_AND_CLOSE###</label>
+		</renderlet:SUBMIT>
+		<renderlet:HIDDEN name="proceed_file_upload" />
 
 		<renderlet:PASSTHRU name="owner_feuser">
 			<data>

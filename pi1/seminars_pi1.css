@@ -8,6 +8,25 @@
 	width: 30em;
 	height: 15em;
 }
+.tx-seminars-pi1-event-editor .attached-files span {
+	clear: both;
+}
+.tx-seminars-pi1-event-editor ul.attached-files {
+	list-style: none;
+	padding: 12px 0 0 0;
+}
+.tx-seminars-pi1-event-editor .attached-files li {
+	line-height: 1.8em;
+	position: relative;
+}
+.tx-seminars-pi1-event-editor .attached-files input {
+	position: absolute;
+	right: 0;
+}
+.tx-seminars-pi1-event-editor .deleted {
+	text-decoration: line-through;
+	color: grey;
+}
 
 .tx-seminars-pi1-error {
 	color: #f00;

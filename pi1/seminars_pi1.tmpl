@@ -522,22 +522,32 @@
 		</tr>
 		<tr>
 			<td>
-				{attached_files}
-				<!-- ###ATTACHED_FILES### -->
-				<ul class="attached-files">
-					<!--###SINGLE_ATTACHED_FILE### -->
-					<li>###FILE_NAME###</li>
-					<!--###SINGLE_ATTACHED_FILE### -->
-				</ul>
-				<!-- ###ATTACHED_FILES### -->
+				<fieldset>
+					{attached_files}
+					<!-- ###ATTACHED_FILES### -->
+					<ul class="attached-files">
+						<!--###SINGLE_ATTACHED_FILE### -->
+						<li id="###SINGLE_ATTACHED_FILE_ID###">
+							<span>###FILE_NAME###</span>
+							<input type="button" name="###LABEL_DELETE###" value="###LABEL_DELETE###"
+								onclick="markAttachmentAsDeleted('###SINGLE_ATTACHED_FILE_ID###', '###LABEL_REALLY_DELETE###\n###FILE_NAME###');" />
+						</li>
+						<!--###SINGLE_ATTACHED_FILE### -->
+					</ul>
+					{delete_attached_files}
+					<!-- ###ATTACHED_FILES### -->
+				</fieldset>
 			</td>
-			<!-- ###PROCEED_FILE_UPLOAD### -->
-			<td>{proceed_file_upload}</td>
-			<!-- ###PROCEED_FILE_UPLOAD### -->
 		</tr>
 
 		<tr>
-	    	<td>{btnsubmit}</td>
+			<td>
+				<!-- ###SUBMIT_AND_STAY### -->
+				{submit_and_stay}
+				<!-- ###SUBMIT_AND_STAY### -->
+				{btnsubmit}
+				{proceed_file_upload}
+			</td>
 	    </tr>
 	</tbody>
 </table>

@@ -141,6 +141,7 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
+			<label index="label_save_and_close">Save and close</label>
 			<label index="label_step_counter">Registration form: step %d of %d</label>
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_checkboxes">Additional information:</label>
@@ -207,7 +208,9 @@
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
-			<label index="label_proceed_file_upload">Upload more files directly after save</label>
+			<label index="label_delete">Mark to delete</label>
+			<label index="label_really_delete_formal">Do you really want to mark this attachment for deletion?</label>
+			<label index="label_really_delete_informal">Do you really want to mark this attachment for deletion?</label>
 			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
@@ -617,6 +620,7 @@
 			<label index="label_edit">Bearbeiten</label>
 			<label index="label_back">Zur Übersicht</label>
 			<label index="label_save">Speichern</label>
+			<label index="label_save_and_close">Speichern und schließen</label>
 			<label index="label_step_counter">Anmeldeformular: Schritt %d von %d</label>
 			<label index="label_register_additional_information">Weitere Informationen</label>
 			<label index="label_checkboxes">Weitere Informationen:</label>
@@ -683,7 +687,9 @@
 			<label index="label_we_offer_events_in_categories_formal">Zurzeit können wir Ihnen Veranstaltungen aus den folgenden Kategorien anbieten:</label>
 			<label index="label_we_offer_events_in_categories_informal">Zurzeit können wir dir Veranstaltungen aus den folgenden Kategorien anbieten:</label>
 			<label index="label_no_categories">Momentan bieten wir keine in Kategorien eingeordneten Veranstaltungen an.</label>
-			<label index="label_proceed_file_upload">Nach dem Speichern weitere Dateien hochladen</label>
+			<label index="label_delete">Zum Löschen markieren</label>
+			<label index="label_really_delete_formal">Möchten Sie diese Datei wirklich zum Löschen markieren?</label>
+			<label index="label_really_delete_informal">Möchtest du diese Datei wirklich zum Löschen markieren?</label>
 			<label index="message_file_too_large_formal">Die anzuhängende Datei ist zu groß. Bitte wählen Sie eine kleinere. Die maximal erlaubte Größe ist</label>
 			<label index="message_file_too_large_informal">Die anzuhängende Datei ist zu groß. Bitte wähle eine kleinere. Die maximal erlaubte Größe ist</label>
 			<label index="message_invalid_type_formal">Die hochzuladende Datei hat ein ungültiges Format. Bitte wählen Sie eine andere. Erlaubte Dateiformate sind</label>
@@ -2018,6 +2024,7 @@
 			<label index="label_edit" type="integer">131916066</label>
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_save" type="integer">211601612</label>
+			<label index="label_save_and_close" type="integer">125326617</label>
 			<label index="label_step_counter" type="integer">37932096</label>
 			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_checkboxes" type="integer">15950088</label>
@@ -2084,7 +2091,9 @@
 			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
-			<label index="label_proceed_file_upload" type="integer">17415703</label>
+			<label index="label_delete" type="integer">46242689</label>
+			<label index="label_really_delete_formal" type="integer">195679946</label>
+			<label index="label_really_delete_informal" type="integer">195679946</label>
 			<label index="message_file_too_large_formal" type="integer">27037616</label>
 			<label index="message_file_too_large_informal" type="integer">27037616</label>
 			<label index="message_invalid_type_formal" type="integer">60436029</label>
@@ -3188,6 +3197,7 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
+			<label index="label_save_and_close">Save and close</label>
 			<label index="label_step_counter">Registration form: step %d of %d</label>
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_checkboxes">Additional information:</label>
@@ -3256,7 +3266,9 @@
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
-			<label index="label_proceed_file_upload">Upload more files directly after save</label>
+			<label index="label_delete">Mark to delete</label>
+			<label index="label_really_delete_formal">Do you really want to mark this attachment for deletion?</label>
+			<label index="label_really_delete_informal">Do you really want to mark this attachment for deletion?</label>
 			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>

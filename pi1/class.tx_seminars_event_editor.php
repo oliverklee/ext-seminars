@@ -105,6 +105,8 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 				'key' => 'dh_dbmm', 'base' => true
 			);
 
+		$this->includeJavaScriptToDeleteAttachments();
+
 		$this->oForm->init(
 			$this,
 			t3lib_extmgm::extPath($this->extKey).'pi1/event_editor.xml',
@@ -116,6 +118,16 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		if ($attachments != '') {
 			$this->attachedFiles = explode(',', $attachments);
 		}
+	}
+
+ 	/**
+	 * Includes the JavaScript to mark attachments as deleted in the FE editor.
+	 */
+	private function includeJavaScriptToDeleteAttachments() {
+		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId]
+			= '<script src="' . t3lib_extMgm::extRelPath($this->extKey) .
+				'pi1/tx_seminars_pi1.js" type="text/javascript">' .
+				'</script>';
 	}
 
 	/**
@@ -144,10 +156,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		$rawForm = $this->oForm->render();
 		$this->plugin->processTemplate($rawForm);
 		$this->plugin->setLabels();
-		// The redirect which becomes activated through this field can only work
-		// with the record's UID, but new records do not have a UID before save.
+		// The redirect to the FE editor with the current record loaded can
+		// only work with the record's UID, but new records do not have a UID
+		// before they are saved.
 		if (!$this->iEdition) {
-			$this->plugin->hideSubparts('proceed_file_upload');
+			$this->plugin->hideSubparts('submit_and_stay');
 		}
 
 		return $this->getHtmlWithAttachedFilesList();
@@ -171,16 +184,19 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 		$originalAttachmentList = $this->oForm->oDataHandler->oForm
 			->aORenderlets['attached_files']->mForcedValue;
 
-		if ($originalAttachmentList != '') {
-			if (!empty($this->attachedFiles)) {
-				$attachmentList = '';
-				foreach ($this->attachedFiles as $fileName) {
-					$this->plugin->setMarker('file_name', $fileName);
-					$attachmentList
-						.= $this->plugin->getSubpart('SINGLE_ATTACHED_FILE');
-				}
-				$this->plugin->setSubpart('single_attached_file', $attachmentList);
+		if (($originalAttachmentList != '') && !empty($this->attachedFiles)) {
+			$attachmentList = '';
+			$fileNumber = 1;
+			foreach ($this->attachedFiles as $fileName) {
+				$this->plugin->setMarker('file_name', $fileName);
+				$this->plugin->setMarker(
+					'single_attached_file_id', 'attached_file_' . $fileNumber
+				);
+				$fileNumber++;
+				$attachmentList
+					.= $this->plugin->getSubpart('SINGLE_ATTACHED_FILE');
 			}
+			$this->plugin->setSubpart('single_attached_file', $attachmentList);
 		} else {
 			$this->plugin->hideSubparts('attached_files');
 		}
@@ -341,11 +357,11 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	/**
 	 * Gets the URL of the page that should be displayed when an event has been
 	 * successfully created.
-	 * An URL of the FE editor's page is returned if "proceed_file_upload" is
-	 * checked.
+	 * An URL of the FE editor's page is returned if "submit_and_stay" was
+	 * clicked.
 	 *
 	 * @return	string		complete URL of the FE page with a message or, if
-	 * 						"proceed_file_upload" was checked, of the current
+	 * 						"submit_and_stay" was clicked, of the current
 	 * 						page
 	 */
 	public function getEventSuccessfullySavedUrl() {
@@ -473,8 +489,8 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Sets the form value for "attached_files" to the locally stored
-	 * value for this field.
+	 * Processes the deletion of attached files and sets the form value for
+	 * "attached_files" to the locally stored value for this field.
 	 *
 	 * This is done because when FORMidable processes the upload renderlet,
 	 * the first character of the string might get lost. In addition, with
@@ -484,17 +500,31 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * @param	array 		form data, will be modified, must not be empty
 	 */
 	private function processAttachments(array &$formData) {
+		if ($formData['delete_attached_files'] != '') {
+			$filesToDelete = explode(',', $formData['delete_attached_files']);
+
+			foreach ($filesToDelete as $fileName) {
+				// saves other files in the upload folder from being deleted
+				if (in_array($fileName, $this->attachedFiles)) {
+					$this->purgeUploadedFile($fileName);
+				}
+			}
+		}
+
 		$formData['attached_files'] = implode(',', $this->attachedFiles);
 	}
 
 	/**
-	 * Removes the form data element "proceed_file_upload"
-	 * as it is no field in the seminars table.
+	 * Removes the form data elements "proceed_file_upload" and
+	 * "delete_attached_files" as they are no fields in the seminars table.
 	 *
 	 * @param	array 		form data, will be modified, must not be empty
 	 */
 	private function purgeNonSeminarsFields(array &$formData) {
-		unset($formData['proceed_file_upload']);
+		unset(
+			$formData['proceed_file_upload'],
+			$formData['delete_attached_files']
+		);
 	}
 
 	/**
