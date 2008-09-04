@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2146] Change: Move the setting/hiding of fields from pi1::createSingleView to separate functions
 - [#1946] Feature: Allow deleting attached files in the FE event editor
 - [#1945] Feature: Add a file upload to the FE event editor
 - [#1036] Change: Use terms.htmlid instead of the verbatim HTML ID in the HTML template

@@ -1103,10 +1103,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Fields listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
 	 * @return	string		HTML for the plugin
-	 *
-	 * @access	protected
 	 */
-	function createSingleView() {
+	private function createSingleView() {
 		$this->internal['currentTable'] = SEMINARS_TABLE_SEMINARS;
 		$this->internal['currentRow'] = $this->pi_getRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -1125,302 +1123,54 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			// This sets the title of the page for use in indexed search results:
 			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
 
-			if ($this->seminar->hasEventType()) {
-				$this->setMarker('event_type', $this->seminar->getEventType());
-			} else {
-				$this->hideSubparts('event_type', 'field_wrapper');
-			}
+			$this->setEventTypeMarker();
+
 			$this->setMarker('title', $this->seminar->getTitle());
 			$this->setMarker('uid', $this->seminar->getUid());
 
-			if ($this->seminar->hasSubtitle()) {
-				$this->setMarker('subtitle', $this->seminar->getSubtitle());
-			} else {
-				$this->hideSubparts('subtitle', 'field_wrapper');
-			}
+			$this->setSubtitleMarker();
+			$this->setDescriptionMarker();
 
-			if ($this->seminar->hasDescription()) {
-				$this->setMarker(
-					'description',
-					$this->seminar->getDescription($this)
-				);
-			} else {
-				$this->hideSubparts('description', 'field_wrapper');
-			}
+			$this->setAccreditationNumberMarker();
+			$this->setCreditPointsMarker();
 
-			if ($this->seminar->hasAccreditationNumber()) {
-				$this->setMarker(
-					'accreditation_number',
-					$this->seminar->getAccreditationNumber()
-				);
-			} else {
-				$this->hideSubparts('accreditation_number', 'field_wrapper');
-			}
-
-			if ($this->seminar->hasCreditPoints()) {
-				$this->setMarker(
-					'credit_points',
-					$this->seminar->getCreditPoints()
-				);
-			} else {
-				$this->hideSubparts('credit_points', 'field_wrapper');
-			}
-
-			if ($this->seminar->hasCategories()) {
-				$this->setMarker(
-					'category',
-					implode(', ', $this->seminar->getCategories())
-				);
-			} else {
-				$this->hideSubparts('category', 'field_wrapper');
-			}
+			$this->setCategoriesMarker();
 
 			$this->setMarker('date', $this->seminar->getDate());
 			$this->setMarker('time', $this->seminar->getTime());
 
-			if ($this->getConfValueBoolean('showSiteDetails', 's_template_special')) {
-				$this->setMarker(
-					'place',
-					$this->seminar->getPlaceWithDetails($this)
-				);
-			} else {
-				$this->setMarker('place', $this->seminar->getPlaceShort());
-			}
+			$this->setPlaceMarker();
+			$this->setRoomMarker();
+			$this->setAdditionalTimesAndPlacesMarker();;
 
-			if ($this->seminar->hasRoom()) {
-				$this->setMarker('room', $this->seminar->getRoom());
-			} else {
-				$this->hideSubparts('room', 'field_wrapper');
-			}
+			$this->setTimeSlotsMarkers();
 
-			if ($this->seminar->hasAdditionalTimesAndPlaces()) {
-				$this->setMarker(
-					'additional_times_places',
-					$this->seminar->getAdditionalTimesAndPlaces()
-				);
-			} else {
-				$this->hideSubparts(
-					'additional_times_places',
-					'field_wrapper'
-				);
-			}
+			$this->setSpeakersMarker();
+			$this->setPartnersMarker();
+			$this->setTutorsMarker();
+			$this->setLeadersMarker();
 
-			if ($this->seminar->hasTimeslots()) {
-				$this->hideSubparts('date,time', 'field_wrapper');
-				$timeSlotsOutput = '';
+			$this->setLanguageMarker();
 
-				$timeSlots = $this->seminar->getTimeSlotsAsArrayWithMarkers();
-				foreach ($timeSlots as $timeSlot) {
-					foreach ($timeSlot as $key => $value) {
-						$this->setMarker($key, $value, 'timeslot');
-					}
-					$timeSlotsOutput .= $this->getSubpart('SINGLE_TIMESLOT');
-				}
-				$this->setSubpart('SINGLE_TIMESLOT', $timeSlotsOutput);
-			} else {
-				$this->hideSubparts('timeslots', 'field_wrapper');
-			}
+			$this->setPriceMarkers();
+			$this->setPaymentMethodsMarker();
 
-			if ($this->seminar->hasSpeakers()) {
-				if ($this->getConfValueBoolean(
-					'showSpeakerDetails',
-					's_template_special')
-				) {
-					$this->setMarker(
-						'speakers',
-						$this->seminar->getSpeakersWithDescription($this)
-					);
-				} else {
-					$this->setMarker(
-						'speakers',
-						$this->seminar->getSpeakersShort()
-					);
-				}
-			} else {
-				$this->hideSubparts('speakers', 'field_wrapper');
-			}
-			if ($this->seminar->hasPartners()) {
-				if ($this->getConfValueBoolean(
-					'showSpeakerDetails',
-					's_template_special')
-				) {
-					$this->setMarker(
-						'partners',
-						$this->seminar->getSpeakersWithDescription(
-							$this,
-							'partners'
-						)
-					);
-				} else {
-					$this->setMarker(
-						'partners',
-						$this->seminar->getSpeakersShort('partners')
-					);
-				}
-			} else {
-				$this->hideSubparts('partners', 'field_wrapper');
-			}
-			if ($this->seminar->hasTutors()) {
-				if ($this->getConfValueBoolean(
-					'showSpeakerDetails',
-					's_template_special')
-				) {
-					$this->setMarker(
-						'tutors',
-						$this->seminar->getSpeakersWithDescription(
-							$this,
-							'tutors'
-						)
-					);
-				} else {
-					$this->setMarker(
-						'tutors',
-						$this->seminar->getSpeakersShort('tutors')
-					);
-				}
-			} else {
-				$this->hideSubparts('tutors', 'field_wrapper');
-			}
-			if ($this->seminar->hasLeaders()) {
-				if ($this->getConfValueBoolean(
-					'showSpeakerDetails',
-					's_template_special')
-				) {
-					$this->setMarker(
-						'leaders',
-						$this->seminar->getSpeakersWithDescription(
-							$this,
-							'leaders'
-						)
-					);
-				} else {
-					$this->setMarker(
-						'leaders',
-						$this->seminar->getSpeakersShort('leaders')
-					);
-				}
-			} else {
-				$this->hideSubparts('leaders', 'field_wrapper');
-			}
+			$this->setAdditionalInformationMarker();
 
-			if ($this->seminar->hasLanguage()) {
-				$this->setMarker(
-					'language',
-					$this->seminar->getLanguageName()
-				);
-			} else {
-				$this->hideSubparts('language', 'field_wrapper');
-			}
+			$this->setTargetGroupsMarkers();
 
-			// set markers for prices
-			$this->setPriceMarkers('field_wrapper');
+			$this->setMarker('organizers', $this->seminar->getOrganizers($this));
+			$this->setOrganizingPartnersMarker();
 
-			if ($this->seminar->hasPaymentMethods()) {
-				$this->setMarker(
-					'paymentmethods',
-					$this->seminar->getPaymentMethods($this)
-				);
-			} else {
-				$this->hideSubparts('paymentmethods', 'field_wrapper');
-			}
+			$this->setVacanciesMarker();
 
-			if ($this->seminar->hasAdditionalInformation()) {
-				$this->setMarker(
-					'additional_information',
-					$this->seminar->getAdditionalInformation($this)
-				);
-			} else {
-				$this->hideSubparts(
-					'additional_information',
-					'field_wrapper'
-				);
-			}
-
-			if ($this->seminar->hasTargetGroups()) {
-				$targetGroupsOutput = '';
-				$targetGroups = $this->seminar->getTargetGroupsAsArray();
-				foreach ($targetGroups as $targetGroup) {
-					$this->setMarker('target_group', $targetGroup);
-					$targetGroupsOutput
-						.= $this->getSubpart('SINGLE_TARGET_GROUP');
-				}
-				$this->setSubpart('SINGLE_TARGET_GROUP', $targetGroupsOutput);
-			} else {
-				$this->hideSubparts('target_groups', 'field_wrapper');
-			}
-
-			$this->setMarker(
-				'organizers',
-				$this->seminar->getOrganizers($this)
-			);
-
-			if ($this->seminar->hasOrganizingPartners()) {
-				$this->setMarker(
-					'organizing_partners',
-					$this->seminar->getOrganizingPartners($this)
-				);
-			} else {
-				$this->hideSubparts('organizing_partners', 'field_wrapper');
-			}
-
-			if ($this->seminar->needsRegistration() && !$this->seminar->isCanceled()) {
-				$this->setMarker(
-					'vacancies',
-					$this->seminar->getVacanciesString()
-				);
-			} else {
-				$this->hideSubparts('vacancies', 'field_wrapper');
-			}
-
-			if ($this->seminar->hasRegistrationDeadline()) {
-				$this->setMarker(
-					'deadline_registration',
-					$this->seminar->getRegistrationDeadline()
-				);
-			} else {
-				$this->hideSubparts('deadline_registration', 'field_wrapper');
-			}
-
-			if ($this->getConfValueBoolean('enableRegistration')) {
-				$this->setMarker(
-					'registration',
-					$this->registrationManager->canRegisterIfLoggedIn(
-						$this->seminar)
-					? $this->registrationManager->getLinkToRegistrationOrLoginPage(
-						$this,
-						$this->seminar)
-					: $this->registrationManager->canRegisterIfLoggedInMessage(
-						$this->seminar
-					)
-				);
-			} else {
-				$this->hideSubparts('registration', 'field_wrapper');
-			}
-
-			if ($this->seminar->canViewRegistrationsList($this->whatToDisplay,
-				$this->getConfValueInteger('registrationsListPID'),
-				$this->getConfValueInteger('registrationsVipListPID'))) {
-				$this->setMarker(
-					'list_registrations',
-					$this->getRegistrationsListLink()
-				);
-			} else {
-				$this->hideSubparts('list_registrations', 'field_wrapper');
-			}
+			$this->setRegistrationDeadlineMarker();
+			$this->setRegistrationMarker();
+			$this->setListOfRegistrationMarker();
 
 			$this->setAttachedFilesMarkers();
 
-			// Hides unneeded sections for topic records.
-			if ($this->seminar->getRecordType()
-				== SEMINARS_RECORD_TYPE_TOPIC
-			) {
-				$this->hideSubparts(
-					'accreditation_number,date,time,place,room,speakers,'
-						.'organizers,vacancies,deadline_registration,'
-						.'registration,list_registrations,eventsnextday',
-					'field_wrapper'
-				);
-			}
+			$this->hideUnneededSubpartsForTopicRecords();
 
 			// Modifies the single view hook.
 			foreach ($this->hookObjects as $hookObject) {
@@ -1465,12 +1215,252 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Fills in the matching markers for the prices and hides the unused
-	 * subparts.
-	 *
-	 * @param	string		the subpart wrapper prefix, may be empty
+	 * Fills in the matching marker for the event type or hides the subpart
+	 * if there is no event type.
 	 */
-	protected function setPriceMarkers($wrapper) {
+	private function setEventTypeMarker() {
+		if (!$this->seminar->hasEventType()) {
+			$this->hideSubparts('event_type', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('event_type', $this->seminar->getEventType());
+	}
+
+	/**
+	 * Fills in the matching marker for the subtitle or hides the subpart
+	 * if there is no subtitle.
+	 */
+	private function setSubtitleMarker() {
+		if (!$this->seminar->hasSubtitle()) {
+			$this->hideSubparts('subtitle', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('subtitle', $this->seminar->getSubtitle());
+	}
+
+	/**
+	 * Fills in the matching marker for the desription or hides the subpart
+	 * if there is no description.
+	 */
+	private function setDescriptionMarker() {
+		if (!$this->seminar->hasDescription()) {
+			$this->hideSubparts('description', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('description', $this->seminar->getDescription($this));
+	}
+
+	/**
+	 * Fills in the matching marker for the accreditation number or hides the
+	 * subpart if there is no accreditation number.
+	 */
+	private function setAccreditationNumberMarker() {
+		if (!$this->seminar->hasAccreditationNumber()) {
+			$this->hideSubparts('accreditation_number', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'accreditation_number', $this->seminar->getAccreditationNumber()
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the credit points or hides the subpart
+	 * if there are no credit points.
+	 */
+	private function setCreditPointsMarker() {
+		if (!$this->seminar->hasCreditPoints()) {
+			$this->hideSubparts('credit_points', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('credit_points', $this->seminar->getCreditPoints());
+	}
+
+	/**
+	 * Fills in the matching marker for the categories or hides the subpart
+	 * if there are no categories.
+	 */
+	private function setCategoriesMarker() {
+		if (!$this->seminar->hasCategories()) {
+			$this->hideSubparts('category', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'category', implode(', ', $this->seminar->getCategories())
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the place.
+	 */
+	private function setPlaceMarker() {
+
+		$this->setMarker(
+			'place',
+			$this->getConfValueBoolean('showSiteDetails', 's_template_special')
+				? $this->seminar->getPlaceWithDetails($this)
+				: $this->seminar->getPlaceShort()
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the room or hides the subpart if there
+	 * is no room.
+	 */
+	private function setRoomMarker() {
+		if (!$this->seminar->hasRoom()) {
+			$this->hideSubparts('room', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('room', $this->seminar->getRoom());
+	}
+
+	/**
+	 * Fills in the matching marker for the additional times and places or hides
+	 * the subpart if there are no additional times and places.
+	 */
+	private function setAdditionalTimesAndPlacesMarker() {
+		if (!$this->seminar->hasAdditionalTimesAndPlaces()) {
+			$this->hideSubparts('additional_times_places', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'additional_times_places',
+			$this->seminar->getAdditionalTimesAndPlaces()
+		);
+	}
+
+	/**
+	 * Fills in the matching markers for the time slots or hides the subpart
+	 * if there are no time slots.
+	 */
+	private function setTimeSlotsMarkers() {
+		if (!$this->seminar->hasTimeslots()) {
+			$this->hideSubparts('timeslots', 'field_wrapper');
+			return;
+		}
+
+		$this->hideSubparts('date,time', 'field_wrapper');
+		$timeSlotsOutput = '';
+
+		$timeSlots = $this->seminar->getTimeSlotsAsArrayWithMarkers();
+		foreach ($timeSlots as $timeSlot) {
+			foreach ($timeSlot as $key => $value) {
+				$this->setMarker($key, $value, 'timeslot');
+			}
+			$timeSlotsOutput .= $this->getSubpart('SINGLE_TIMESLOT');
+		}
+
+		$this->setSubpart('SINGLE_TIMESLOT', $timeSlotsOutput);
+	}
+
+	/**
+	 * Fills in the matching markers for the speakers or hides the subpart if
+	 * there are no speakers.
+	 */
+	private function setSpeakersMarker() {
+		if (!$this->seminar->hasSpeakers()) {
+			$this->hideSubparts('speakers', 'field_wrapper');
+			return;
+		}
+
+		$this->setSpeakersMarkerWithoutCheck('speakers');
+	}
+
+	/**
+	 * Fills in the matching markers for the partners or hides the subpart if
+	 * there are no partners.
+	 */
+	private function setPartnersMarker() {
+		if (!$this->seminar->hasPartners()) {
+			$this->hideSubparts('partners', 'field_wrapper');
+			return;
+		}
+
+		$this->setSpeakersMarkerWithoutCheck('partners');
+	}
+
+	/**
+	 * Fills in the matching markers for the tutors or hides the subpart if
+	 * there are no tutors.
+	 */
+	private function setTutorsMarker() {
+		if (!$this->seminar->hasTutors()) {
+			$this->hideSubparts('tutors', 'field_wrapper');
+			return;
+		}
+
+		$this->setSpeakersMarkerWithoutCheck('tutors');
+	}
+
+	/**
+	 * Fills in the matching markers for the leaders or hides the subpart if
+	 * there are no leaders.
+	 */
+	private function setLeadersMarker() {
+		if (!$this->seminar->hasLeaders()) {
+			$this->hideSubparts('leaders', 'field_wrapper');
+			return;
+		}
+
+		$this->setSpeakersMarkerWithoutCheck('leaders');
+	}
+
+	/**
+	 * Sets the speaker markers for the type given in $speakerType without
+	 * checking whether the current event has any speakers of the given type.
+	 *
+	 * @throws	Exception	if the given speaker type is not allowed
+	 *
+	 * @param	string		the speaker type to set the markers for, must not be
+	 * 						empty, must be one of the following: "speakers",
+	 * 						"partners", "tutors" or "leaders"
+	 */
+	private function setSpeakersMarkerWithoutCheck($speakerType) {
+		if (!in_array(
+				$speakerType,
+				array('speakers', 'partners', 'tutors', 'leaders')
+		)) {
+			throw new Exception(
+				'The speaker type given in the parameter $speakerType is not ' .
+					'an allowed type.'
+			);
+		}
+
+		$this->setMarker(
+			$speakerType,
+			$this->getConfValueBoolean('showSpeakerDetails', 's_template_special')
+				? $this->seminar->getSpeakersWithDescription($this, $speakerType)
+				: $this->seminar->getSpeakersShort($speakerType)
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the language or hides the unused
+	 * subpart.
+	 */
+	private function setLanguageMarker() {
+		if (!$this->seminar->hasLanguage()) {
+			$this->hideSubparts('language', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('language', $this->seminar->getLanguageName());
+	}
+
+	/**
+	 * Fills in the matching markers for the prices or hides the unused
+	 * subparts.
+	 */
+	private function setPriceMarkers() {
 		// set the regular price (with or without early bird rebate)
 		if ($this->seminar->hasEarlyBirdPrice()
 			&& !$this->seminar->isEarlyBirdDeadlineOver()
@@ -1504,7 +1494,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 					$this->translate('label_price_general')
 				);
 			}
-			$this->hideSubparts('price_earlybird_regular', $wrapper);
+			$this->hideSubparts('price_earlybird_regular', 'field_wrapper');
 		}
 
 		// set the special price (with or without early bird rebate)
@@ -1534,12 +1524,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 				$this->hideSubparts(
 					'price_earlybird_special',
-					$wrapper
+					'field_wrapper'
 				);
 			}
 		} else {
-			$this->hideSubparts('price_special', $wrapper);
-			$this->hideSubparts('price_earlybird_special', $wrapper);
+			$this->hideSubparts('price_special', 'field_wrapper');
+			$this->hideSubparts('price_earlybird_special', 'field_wrapper');
 		}
 
 		// set the regular price (including full board)
@@ -1549,7 +1539,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->seminar->getPriceRegularBoard()
 			);
 		} else {
-			$this->hideSubparts('price_board_regular', $wrapper);
+			$this->hideSubparts('price_board_regular', 'field_wrapper');
 		}
 
 		// set the special price (including full board)
@@ -1559,8 +1549,38 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->seminar->getPriceSpecialBoard()
 			);
 		} else {
-			$this->hideSubparts('price_board_special', $wrapper);
+			$this->hideSubparts('price_board_special', 'field_wrapper');
 		}
+	}
+
+	/**
+	 * Fills in the matching marker for the payment methods or hides the subpart
+	 * if there are no payment methods.
+	 */
+	private function setPaymentMethodsMarker() {
+		if (!$this->seminar->hasPaymentMethods()) {
+			$this->hideSubparts('paymentmethods', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'paymentmethods', $this->seminar->getPaymentMethods($this)
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the additional information or hides the
+	 * subpart if there is no additional information.
+	 */
+	private function setAdditionalInformationMarker() {
+		if (!$this->seminar->hasAdditionalInformation()) {
+			$this->hideSubparts('additional_information', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'additional_information', $this->seminar->getAdditionalInformation($this)
+		);
 	}
 
 	/**
@@ -1597,6 +1617,126 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$this->setSubpart(
 			'ATTACHED_FILES_LIST_ITEM', $attachedFilesOutput
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the target groups or hides the subpart
+	 * if there are no target groups.
+	 */
+	private function setTargetGroupsMarkers() {
+		if (!$this->seminar->hasTargetGroups()) {
+			$this->hideSubparts('target_groups', 'field_wrapper');
+			return;
+		}
+
+		$targetGroupsOutput = '';
+
+		$targetGroups = $this->seminar->getTargetGroupsAsArray();
+		foreach ($targetGroups as $targetGroup) {
+			$this->setMarker('target_group', $targetGroup);
+			$targetGroupsOutput .= $this->getSubpart('SINGLE_TARGET_GROUP');
+		}
+
+		$this->setSubpart('SINGLE_TARGET_GROUP', $targetGroupsOutput);
+	}
+
+	/**
+	 * Fills in the matching marker for the organizing partners or hides the
+	 * subpart if there are no organizing partners.
+	 */
+	private function setOrganizingPartnersMarker() {
+		if (!$this->seminar->hasOrganizingPartners()) {
+			$this->hideSubparts('organizing_partners', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'organizing_partners', $this->seminar->getOrganizingPartners($this)
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the vacancies or hides the subpart if
+	 * the seminar does not need a registration or was canceled.
+	 */
+	private function setVacanciesMarker() {
+		if (!$this->seminar->needsRegistration() || $this->seminar->isCanceled()) {
+			$this->hideSubparts('vacancies', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('vacancies', $this->seminar->getVacanciesString());
+	}
+
+	/**
+	 * Fills in the matching marker for the registration deadline or hides the
+	 * subpart if there is no registration deadline.
+	 */
+	private function setRegistrationDeadlineMarker() {
+		if (!$this->seminar->hasRegistrationDeadline()) {
+			$this->hideSubparts('deadline_registration', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'deadline_registration', $this->seminar->getRegistrationDeadline()
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the link to the registration form or
+	 * hides the subpart if the registration is disabled.
+	 */
+	private function setRegistrationMarker() {
+		if (!$this->getConfValueBoolean('enableRegistration')) {
+			$this->hideSubparts('registration', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker(
+			'registration',
+			$this->registrationManager->canRegisterIfLoggedIn($this->seminar)
+			? $this->registrationManager->getLinkToRegistrationOrLoginPage(
+				$this, $this->seminar)
+			: $this->registrationManager->canRegisterIfLoggedInMessage(
+				$this->seminar)
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the link to the list of registrations
+	 * or hides the subpart if the currently logged in FE user is not allowed
+	 * to view the list of registrations.
+	 */
+	private function setListOfRegistrationMarker() {
+		$canViewListOfRegistrations = $this->seminar->canViewRegistrationsList(
+			$this->whatToDisplay,
+			$this->getConfValueInteger('registrationsListPID'),
+			$this->getConfValueInteger('registrationsVipListPID')
+		);
+
+		if (!$canViewListOfRegistrations) {
+			$this->hideSubparts('list_registrations', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('list_registrations', $this->getRegistrationsListLink());
+	}
+
+	/**
+	 * Hides unneeded subparts for topic records.
+	 */
+	private function hideUnneededSubpartsForTopicRecords() {
+		if ($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC) {
+			return;
+		}
+
+		$this->hideSubparts(
+			'accreditation_number,date,time,place,room,speakers,organizers,' .
+				'vacancies,deadline_registration,registration,' .
+				'list_registrations,eventsnextday',
+			'field_wrapper'
 		);
 	}
 
