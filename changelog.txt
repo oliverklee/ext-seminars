@@ -1,4 +1,4 @@
-0.6.2 (currently working on)
+0.6.2 (released 2008-09-04)
 - [#2156] Add a Dutch manual, thanks to Nico Nico Deblauwe
 - [#1945] Change: Some code clean-up
 - [#2151] Fix: tx_seminars_templatehelper::getSubpartForCallback has to be protected in PHP 5.3
