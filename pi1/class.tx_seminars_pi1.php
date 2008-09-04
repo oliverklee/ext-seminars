@@ -370,120 +370,245 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		return $this->pi_wrapInBaseClass($result);
 	}
 
+
+	///////////////////////
+	// General functions.
+	///////////////////////
+
 	/**
-	 * Returns the additional query parameters needed to build the list view.
-	 * This function checks
-	 * - the time-frame to display
-	 * - whether to show canceled events
-	 * The result always starts with " AND" so that it can be directly appended
-	 * to a WHERE clause.
+	 * Checks that we are properly initialized and that we have a config getter
+	 * and a registration manager.
 	 *
-	 * @return	string		the additional query parameters
-	 *
-	 * @access	protected
+	 * @return	boolean		true if we are properly initialized, false otherwise
 	 */
-	function getAdditionalQueryParameters() {
-		$result = '';
-		/** Prefixes the column name with the table name so that the query also
-		 * works with multiple tables. */
-		$tablePrefix = SEMINARS_TABLE_SEMINARS.'.';
+	public function isInitialized() {
+		return ($this->isInitialized
+			&& is_object($this->configGetter)
+			&& is_object($this->registrationManager));
+	}
 
-		// Only show full event records(0) and event dates(2), but no event
-		// topics(1).
-		$result .= ' AND '.$tablePrefix.'object_type!=1';
-
-		$seminarBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminarbag'
-		);
-		$temporarySeminarBag = new $seminarBagClassname('uid=0');
-
-		// Adds the query parameter that result from the user selection in the
-		// selector widget (including the search form).
-		if (is_array($this->piVars['language'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForLanguage(
-				$this->piVars['language']
-			);
-		}
-		if (is_array($this->piVars['place'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForPlace(
-				$this->piVars['place']
-			);
-		}
-		if (is_array($this->piVars['city'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForCity(
-				$this->piVars['city']
-			);
-		}
-		if (is_array($this->piVars['country'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForCountry(
-				$this->piVars['country']
-			);
-		}
-		if (isset($this->piVars['sword'])
-			&& !empty($this->piVars['sword'])
-		) {
-			$result .= $this->searchWhere($this->piVars['sword']);
+	/**
+	 * Creates an instance of tx_staticinfotables_pi1 if that has not happened
+	 * yet.
+	 */
+	private function instantiateStaticInfo() {
+		if ($this->staticInfo instanceof tx_staticinfotables_pi1) {
+			return;
 		}
 
-		// Unsets the temporary seminar bag we used above.
-		unset($temporarySeminarBag);
+		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+		$this->staticInfo->init();
+	}
 
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
-		try {
-			$builder->setTimeFrame(
-				$this->getConfValueString(
-					'timeframeInList',
-					's_template_special'
-				)
-			);
-		} catch (Exception $exception) {
-			// Ignores the exception because the user will be warned of the
-			// problem by the configuration check.
-		}
-
-		if (
-			$this->getConfValueBoolean('hideCanceledEvents', 's_template_special')
-		) {
-			$builder->ignoreCanceledEvents();
-		}
-
-		if (isset($this->piVars['event_type'])
-			&& (is_array($this->piVars['event_type']))
-		) {
-			$sanitizedEventTypeUids = array();
-			foreach($this->piVars['event_type'] as $uid) {
-				$sanitizedEventTypeUids[] = intval($uid);
+	/**
+	 * Gets all hook objects for this class.
+	 */
+	private function getHookObjects() {
+		$extensionConfiguration =& $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+		$hooks =& $extensionConfiguration['seminars/pi1/class.tx_seminars_pi1.php']['hooks'];
+		if (is_array($hooks)) {
+			foreach ($hooks as $classReference) {
+				$this->hookObjects[] = t3lib_div::getUserObj($classReference);
 			}
-			$builder->limitToEventTypes(implode(',', $sanitizedEventTypeUids));
-		} else {
-			$builder->limitToEventTypes(
-				$this->getConfValueString(
-					'limitListViewToEventTypes', 's_listView'
-				)
-			);
 		}
+	}
 
-		if (isset($this->piVars['category'])
-			&& (intval($this->piVars['category']) > 0)
+	/**
+	 * Creates a seminar in $this->seminar.
+	 * If the seminar cannot be created, $this->seminar will be null, and
+	 * this function will return false.
+	 *
+	 * $this->registrationManager must have been initialized before this
+	 * method may be called.
+	 *
+	 * @param	integer		an event UID
+	 *
+	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
+	 */
+	public function createSeminar($seminarUid) {
+		$result = false;
+
+		if (tx_seminars_objectfromdb::recordExists(
+			$seminarUid,
+			SEMINARS_TABLE_SEMINARS)
 		) {
-			$builder->limitToCategories(intval($this->piVars['category']));
-		} else {
-			$builder->limitToCategories(
-				$this->getConfValueString(
-					'limitListViewToCategories', 's_listView'
-				)
+			/** Name of the seminar class in case someone subclasses it. */
+			$seminarClassname = t3lib_div::makeInstanceClassName(
+				'tx_seminars_seminar'
 			);
+			$this->seminar = new $seminarClassname($seminarUid);
+			$result = true;
+		} else {
+			$this->seminar = null;
 		}
-
-		$builder->limitToPlaces(
-			$this->getConfValueString(
-				'limitListViewToPlaces', 's_listView'
-			)
-		);
-
-		$result .= ' AND ' . $builder->getWhereClause();
 
 		return $result;
+	}
+
+	/**
+	 * Creates a registration in $this->registration from the database record with
+	 * the UID specified in the parameter $registrationUid.
+	 * If the registration cannot be created, $this->registration will be null, and
+	 * this function will return false.
+	 *
+	 * $this->registrationManager must have been initialized before this
+	 * method may be called.
+	 *
+	 * @param	integer		a registration UID
+	 *
+	 * @return	boolean		true if the registration UID is valid and the object
+	 * 						has been created, false otherwise
+	 */
+	public function createRegistration($registrationUid) {
+		$result = false;
+
+		if (tx_seminars_objectfromdb::recordExists(
+			$registrationUid, SEMINARS_TABLE_ATTENDANCES)
+		) {
+			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+				'*',
+				SEMINARS_TABLE_ATTENDANCES,
+				SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid
+					.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
+			);
+			/** Name of the registration class in case someone subclasses it. */
+			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
+			$this->registration = new $registrationClassname(
+				$this->cObj, $dbResult
+			);
+			$result = $this->registration->isOk();
+			if (!$result) {
+				$this->registration = null;
+			}
+		} else {
+			$this->registration = null;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the config getter and the registration manager.
+	 */
+	public function createHelperObjects() {
+		/** Name of the configGetter class in case someone subclasses it. */
+		$configGetterClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_configgetter'
+		);
+		$this->configGetter = new $configGetterClassname();
+
+		/** Name of the registrationManager class in case someone subclasses it. */
+		$registrationManagerClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registrationmanager'
+		);
+		$this->registrationManager = new $registrationManagerClassname();
+	}
+
+	/**
+	 * Gets our seminar object.
+	 *
+	 * @return	tx_seminars_seminar		our seminar object
+	 */
+	public function getSeminar() {
+		return $this->seminar;
+	}
+
+	/**
+	 * Returns the current registration.
+	 *
+	 * @return	tx_seminars_registration	the current registration
+	 */
+	public function getRegistration() {
+		return $this->registration;
+	}
+
+	/**
+	 * Returns the shared registration manager.
+	 *
+	 * @return	tx_seminars_registrationmanager	the shared registration manager
+	 */
+	public function getRegistrationManager() {
+		return $this->registrationManager;
+	}
+
+	/**
+	 * Returns our config getter (which might be null if we aren't initialized
+	 * properly yet).
+	 *
+	 * This function is intended for testing purposes only.
+	 *
+	 * @return	object		our config getter, might be null
+	 */
+	public function getConfigGetter() {
+		return $this->configGetter;
+	}
+
+	/**
+	 * Creates the link to the list of registrations for the current seminar.
+	 * Returns an empty string if this link is not allowed.
+	 * For standard lists, a link is created if either the user is a VIP
+	 * or is registered for that seminar (with the link to the VIP list taking precedence).
+	 *
+	 * @return	string		HTML for the link (may be an empty string)
+	 */
+	protected function getRegistrationsListLink() {
+		$result = '';
+		$targetPageId = 0;
+
+		if ($this->seminar->canViewRegistrationsList(
+				$this->whatToDisplay,
+				0,
+				$this->getConfValueInteger('registrationsVipListPID'),
+				$this->getConfValueInteger(
+					'defaultEventVipsFeGroupID',
+					's_template_special')
+				)
+			) {
+			// So a link to the VIP list is possible.
+			$targetPageId = $this->getConfValueInteger('registrationsVipListPID');
+		// No link to the VIP list ... so maybe to the list for the participants.
+		} elseif ($this->seminar->canViewRegistrationsList($this->whatToDisplay,
+			$this->getConfValueInteger('registrationsListPID'))) {
+			$targetPageId = $this->getConfValueInteger('registrationsListPID');
+		}
+
+		if ($targetPageId) {
+			$result = $this->cObj->getTypoLink(
+				$this->translate('label_listRegistrationsLink'),
+				$targetPageId,
+				array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates a hyperlink with the title $title to the current list view,
+	 * limited to the category provided by the parameter $categoryUid.
+	 *
+	 * @param	integer		UID of the category to which the list view should
+	 * 						be limited, must be > 0
+	 * @param	string		title of the link, must not be empty
+	 *
+	 * @return	string		link to the list view limited to the given
+	 * 						category or an empty string if there is an error
+	 */
+	private function createLinkToListViewLimitedByCategory(
+		$categoryUid, $title
+	) {
+		if ($categoryUid <= 0) {
+			throw new Exception('$categoryUid must be > 0.');
+		}
+		if ($title == '') {
+			throw new Exception('$title must not be empty.');
+		}
+
+		return $this->cObj->getTypoLink(
+			$title,
+			$this->getConfValueInteger('listPID'),
+			array('tx_seminars_pi1[category]' => $categoryUid)
+		);
 	}
 
 	/**
@@ -543,560 +668,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		);
 	}
 
-	/**
-	 * Creates an instance of tx_staticinfotables_pi1 if that has not happened
-	 * yet.
-	 */
-	private function instantiateStaticInfo() {
-		if ($this->staticInfo instanceof tx_staticinfotables_pi1) {
-			return;
-		}
 
-		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
-		$this->staticInfo->init();
-	}
-
-	/**
-	 * Creates the HTML for the event list view.
-	 * This function is used for the normal event list as well as the
-	 * "my events" and the "my VIP events" list.
-	 *
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
-	 *
-	 * @return	string		HTML code with the event list
-	 */
-	protected function createListView($whatToDisplay) {
-		$result = '';
-		$isOkay = true;
-
-		$this->instantiateStaticInfo();
-
-		switch ($whatToDisplay) {
-			case 'my_events':
-				if ($this->isLoggedIn()) {
-					$result .= $this->getSubpart('MESSAGE_MY_EVENTS');
-				} else {
-					$this->setMarker(
-						'error_text',
-						$this->translate('message_notLoggedIn')
-					);
-					$result .= $this->getSubpart('ERROR_VIEW');
-					$result .= $this->getLoginLink(
-						$this->translate('message_pleaseLogIn'),
-						$GLOBALS['TSFE']->id
-					);
-					$isOkay = false;
-				}
-				break;
-			case 'my_vip_events':
-				if ($this->isLoggedIn()) {
-					$result .= $this->getSubpart(
-						'MESSAGE_MY_VIP_EVENTS'
-					);
-				} else {
-					$this->setMarker(
-						'error_text',
-						$this->translate('message_notLoggedIn')
-					);
-					$result .= $this->getSubpart('ERROR_VIEW');
-					$result .= $this->getLoginLink(
-						$this->translate('message_pleaseLogIn'),
-						$GLOBALS['TSFE']->id
-					);
-					$isOkay = false;
-				}
-				break;
-			case 'my_entered_events':
-				$result .= $this->createEventEditor(true);
-				if (empty($result)) {
-					$result .= $this->getSubpart(
-						'MESSAGE_MY_ENTERED_EVENTS'
-					);
-				} else {
-					$isOkay = false;
-				}
-				break;
-			default:
-				break;
-		}
-
-		if ($isOkay) {
-			// Shows the selector widget on top of the list view.
-			// Hides it if it's deactivated in the configuration or we are on a
-			// special list view like "my_vip_events".
-			if ((!$this->getConfValueBoolean('hideSelectorWidget', 's_template_special'))
-				&& ($whatToDisplay == 'seminar_list')
-			) {
-				// Prepares the arrays that contain the possible entries for the
-				// option boxes in the selector widget.
-				$this->createAllowedValuesForSelectorWidget();
-
-				$result .= $this->createSelectorWidget();
-
-				// Unsets the seminar bag for performance reasons.
-				unset($this->seminarBagForSelectorWidget);
-			}
-
-			// Creates the seminar or registration bag for the list view (with
-			// all the filtering applied).
-			$seminarOrRegistrationBag =& $this->initListView($whatToDisplay);
-
-			if ($this->internal['res_count']) {
-				$result .= $this->createListTable($seminarOrRegistrationBag, $whatToDisplay);
-			} else {
-				$this->setMarker(
-					'error_text',
-					$this->translate('message_noResults')
-				);
-				$result .= $this->getSubpart('ERROR_VIEW');
-			}
-
-			// Shows the page browser (if not deactivated in the configuration),
-			// disabling htmlspecialchars (the last parameter).
-			if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
-				$result .= $this->pi_list_browseresults();
-			}
-
-			// Lets warnings from the seminar and the seminar bag bubble up to us.
-			$this->setErrorMessage(
-				$seminarOrRegistrationBag->checkConfiguration(true)
-			);
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Gathers all the allowed entries for the option boxes of the selector
-	 * widget. This includes the languages, places, countries and event types of
-	 * the events that are selected and in the seminar bag for the current list
-	 * view.
-	 *
-	 * IMPORTANT: The lists for each option box contain only the values that
-	 * are coming from the selected events! So there's not a huge list of languages
-	 * of which 99% are not selected for any event (and thus would result in
-	 * no found events).
-	 *
-	 * The data will be written to global variables as arrays that contain
-	 * the value (value of the form field) and the label (text shown in the option
-	 * box) for each entry.
-	 */
-	public function createAllowedValuesForSelectorWidget() {
-		$allPlaceUids = array();
-
-		$this->instantiateStaticInfo();
-
-		// Creates a separate seminar bag that contains all the events.
-		// We can't use the regular seminar bag that is used for the list
-		// view as it contains only part of the events.
-		$seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
-
-		// Walks through all events in the seminar bag to read the needed data
-		// from each event object.
-		while ($currentEvent = $seminarBag->getCurrent()) {
-			// Reads the language from the event record.
-			$languageIsoCode = $currentEvent->getLanguage();
-			if ((!empty($languageIsoCode))
-				&& !isset($this->allLanguages[$languageIsoCode])) {
-				$languageName = $this->staticInfo->getStaticInfoName(
-					'LANGUAGES',
-					$languageIsoCode,
-					'',
-					'',
-					0
-				);
-				$this->allLanguages[$languageIsoCode] = $languageName;
-			}
-
-			// Reads the place(s) from the event record. The country will be
-			// read from the place record later.
-			$placeUids = $currentEvent->getRelatedMmRecordUids(
-				SEMINARS_TABLE_SITES_MM
-			);
-			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
-
-			// Reads the event type from the event record.
-			$eventTypeUid = $currentEvent->getEventTypeUid();
-			if ($eventTypeUid != 0) {
-				$eventTypeName = $currentEvent->getEventType();
-				if (!isset($this->allEventTypes[$eventTypeUid])) {
-					$this->allEventTypes[$eventTypeUid] = $eventTypeName;
-				}
-			}
-
-			$seminarBag->getNext();
-		}
-		unset($seminarBag);
-
-		// Assures that each language is just once in the resulting array.
-		$this->allLanguages = array_unique($this->allLanguages);
-
-		// Fetches the name of the location, the city and the country and adds
-		// it to the final array.
-		if (empty($allPlaceUids)) {
-			$allPlaceUids = array(0);
-		}
-		$placeBag = $this->createPlaceBag($allPlaceUids);
-		while ($currentPlace = $placeBag->getCurrent()) {
-			if (!isset($this->allPlaces[$currentPlace->getUid()])) {
-				$this->allPlaces[$currentPlace->getUid()] = $currentPlace->getTitle();
-			}
-			$countryIsoCode = $currentPlace->getCountryIsoCode();
-			if (!isset($this->allCountries[$countryIsoCode])) {
-				$this->allCountries[$countryIsoCode] = $this->staticInfo->getStaticInfoName(
-					'COUNTRIES',
-					$countryIsoCode
-				);
-			}
-
-			$cityName = $currentPlace->getCity();
-			if (!isset($this->allCities[$cityName])) {
-				$this->allCities[$cityName] = $cityName;
-			}
-
-			$placeBag->getNext();
-		}
-		unset($placeBag);
-
-		// Brings the options into alphabetical order.
-		asort($this->allLanguages);
-		asort($this->allPlaces);
-		asort($this->allCities);
-		asort($this->allCountries);
-		asort($this->allEventTypes);
-
-		// Adds an empty option to each list of options if this is needed.
-		$this->addEmptyOptionIfNeeded($this->allLanguages);
-		$this->addEmptyOptionIfNeeded($this->allPlaces);
-		$this->addEmptyOptionIfNeeded($this->allCities);
-		$this->addEmptyOptionIfNeeded($this->allCountries);
-		$this->addEmptyOptionIfNeeded($this->allEventTypes);
-	}
-
-	/**
-	 * Adds a dummy option to the array of allowed values. This is needed if the
-	 * user wants to show the option box as drop-down selector instead of
-	 * a multi-line select.
-	 *
-	 * With the default configuration, this method is a no-op as
-	 * "showEmptyEntryInOptionLists" is disabled.
-	 *
-	 * If this option is activated in the TS configuration, the dummy option will
-	 * be prepended to the existing arrays. So we can be sure that the dummy
-	 * option will always be the first one in the array and thus shown first in
-	 * the drop-down.
-	 *
-	 * @param	array		array of options, may be empty
-	 *
-	 * @access	private
-	 */
-	function addEmptyOptionIfNeeded(array &$options) {
-		if ($this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
-			$completeOptionList = array(
-				'none' => $this->translate('label_selector_pleaseChoose')
-			);
-			foreach ($options as $key => $value) {
-				$completeOptionList[$key] = $value;
-			}
-
-			$options = $completeOptionList;
-		}
-	}
-
-	/**
-	 * Returns a place bag object that contains all seminar places that are in
-	 * the list of given UIDs.
-	 *
-	 * @param	array		all the UIDs to include in the bag, must not be empty
-	 *
-	 * @return	object		place bag object
-	 *
-	 * @access	protected
-	 */
-	function createPlaceBag(array $placeUids) {
-		$placeUidsAsCommaSeparatedList = implode(',', $placeUids);
-		$queryWhere = 'uid IN('.$placeUidsAsCommaSeparatedList.')';
-		$className = 'tx_seminars_placebag';
-		$placeBagClassname = t3lib_div::makeInstanceClassName(
-			$className
-		);
-		$placeBag = new $placeBagClassname($queryWhere);
-
-		return $placeBag;
-	}
-
-	/**
-	 * Creates just the table for the list view (without any result browser or
-	 * search form).
-	 * This function should only be called when there are actually any list
-	 * items.
-	 *
-	 * @param	object		initialized seminar or registration bag
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
-	 *
-	 * @return	string		HTML for the table (will not be empty)
-	 */
-	protected function createListTable(tx_seminars_bag $seminarOrRegistrationBag, $whatToDisplay) {
-		$result = $this->createListHeader();
-		$rowCounter = 0;
-
-		while ($currentItem = $seminarOrRegistrationBag->getCurrent()) {
-			if ($whatToDisplay == 'my_events') {
-				$this->registration =& $currentItem;
-				$this->seminar =& $this->registration->getSeminarObject();
-			} else {
-				$this->seminar =& $currentItem;
-			}
-
-			$result .= $this->createListRow($rowCounter, $whatToDisplay);
-			$rowCounter++;
-			$seminarOrRegistrationBag->getNext();
-		}
-
-		$result .= $this->createListFooter();
-
-		return $result;
-	}
-
-	/**
-	 * Initializes the list view (normal list, my events or my VIP events) and
-	 * creates a seminar bag or a registration bag (for the "my events" view),
-	 * but does not create any actual HTML output.
-	 *
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
-	 * @param	string		additional query parameters that will be appended
-	 * 						to the WHERE clause
-	 *
-	 * @return	object		a seminar bag or a registration bag containing the
-	 * 						seminars or registrations for the list view
-	 */
-	protected function &initListView($whatToDisplay = '', $additionalQueryParameters = '') {
-		if (strstr($this->cObj->currentRecord, 'tt_content')) {
-			$this->conf['pidList'] = $this->getConfValueString('pages');
-			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
-		}
-
-		$this->hideSubparts(
-			$this->getConfValueString(
-				'hideColumns',
-				's_template_special'),
-				'LISTHEADER_WRAPPER'
-			);
-		$this->hideSubparts(
-			$this->getConfValueString(
-			'hideColumns',
-			's_template_special'),
-			'LISTITEM_WRAPPER'
-		);
-
-		// Hide the registration column if online registration is disabled.
-		if (!$this->getConfValueBoolean('enableRegistration')) {
-			$this->hideSubparts('registration', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('registration', 'LISTITEM_WRAPPER');
-		}
-
-		// Hides the number of seats, the total price and the registration
-		// status columns when we're not on the "my events" list.
-		if ($whatToDisplay != 'my_events') {
-			$this->hideSubparts(
-				'total_price,seats,status_registration', 'LISTHEADER_WRAPPER'
-			);
-			$this->hideSubparts(
-				'total_price,seats,status_registration', 'LISTITEM_WRAPPER'
-			);
-		}
-
-		// Hide the column with the link to the list of registrations if
-		// online registration is disabled, no user is logged in or there is
-		// no page specified to link to.
-		// Also hide it for the "other dates" and "events next day" lists.
-		if (!$this->getConfValueBoolean('enableRegistration')
-			|| !$this->isLoggedIn()
-			|| (($whatToDisplay == 'seminar_list')
-				&& !$this->hasConfValueInteger('registrationsListPID')
-				&& !$this->hasConfValueInteger('registrationsVipListPID'))
-			|| ($whatToDisplay == 'other_dates')
-			|| ($whatToDisplay == 'events_next_day')
-			|| (($whatToDisplay == 'my_events')
-				&& !$this->hasConfValueInteger('registrationsListPID'))
-			|| (($whatToDisplay == 'my_vip_events')
-				&& !$this->hasConfValueInteger('registrationsVipListPID'))) {
-			$this->hideSubparts('list_registrations', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('list_registrations', 'LISTITEM_WRAPPER');
-		}
-
-		// Hide the edit column if the list to display is not the
-		// "events which I have entered" list.
-		if ($whatToDisplay != 'my_entered_events') {
-			$this->hideSubparts('edit', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('edit', 'LISTITEM_WRAPPER');
-		}
-
-		if (!isset($this->piVars['pointer'])) {
-			$this->piVars['pointer'] = 0;
-		}
-
-		// Read the list view settings from the TS setup and write them to the
-		// list view configuration.
-		$lConf = (isset($this->conf['listView.']))
-			? $this->conf['listView.'] : array();
-		if (!empty($lConf)) {
-			foreach($lConf as $key => $value) {
-				$this->internal[$key] = $value;
-			}
-		}
-
-		// Overwrite the default sort order with values given by the browser.
-		// This happens if the user changes the sort order manually.
-		if (!empty($this->piVars['sort'])) {
-			list(
-				$this->internal['orderBy'],
-				$this->internal['descFlag']) = explode(':', $this->piVars['sort']
-			);
-		}
-
-		// Number of results to show in a listing.
-		$this->internal['results_at_a_time'] = t3lib_div::intInRange(
-			$lConf['results_at_a_time'],
-			0,
-			1000,
-			20
-		);
-		// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
-		$this->internal['maxPages'] = t3lib_div::intInRange(
-			$lConf['maxPages'],
-			0,
-			1000,
-			2
-		);
-
-		$this->internal['orderByList'] = 'category,title,uid,event_type,'
-			.'accreditation_number,credit_points,begin_date,price_regular,'
-			.'price_special,organizers,target_groups';
-
-		$pidList = $this->pi_getPidList(
-			$this->getConfValueString('pidList'),
-			$this->getConfValueInteger('recursive')
-		);
-		$queryWhere = ($pidList != '')
-			? SEMINARS_TABLE_SEMINARS.'.pid IN ('.$pidList.')' : '1=1';
-
-		// Time-frames and hiding canceled events doesn't make sense for the
-		// topic list.
-		if ($whatToDisplay != 'topic_list') {
-			$queryWhere .= $this->getAdditionalQueryParameters();
-		}
-
-		$additionalTables = '';
-
-		switch ($whatToDisplay) {
-			case 'topic_list':
-				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.object_type='
-					.SEMINARS_RECORD_TYPE_TOPIC;
-				$this->hideSubparts(
-					'uid,accreditation_number,speakers,date,time,place,'
-						.'organizers,vacancies,registration',
-					'LISTHEADER_WRAPPER'
-				);
-				$this->hideSubparts(
-					'uid,accreditation_number,speakers,date,time,place,'
-						.'organizers,vacancies,registration',
-					'LISTITEM_WRAPPER'
-				);
-				break;
-			case 'my_events':
-				$additionalTables = SEMINARS_TABLE_SEMINARS;
-				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
-					.SEMINARS_TABLE_ATTENDANCES.'.seminar AND '
-					.SEMINARS_TABLE_ATTENDANCES.'.user='
-					.$this->registrationManager->getFeUserUid();
-				break;
-			case 'my_vip_events':
-				$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
-						$this->getConfValueInteger(
-							'defaultEventVipsFeGroupID',
-							's_template_special'
-						)
-					]
-				);
-				if (!$isDefaultVip) {
-					// The current user is not listed as a default VIP for all
-					// events. Change the query to show only events where the
-					// current user is manually added as a VIP.
-					$additionalTables = SEMINARS_TABLE_VIPS_MM;
-					$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
-						.SEMINARS_TABLE_VIPS_MM.'.uid_local AND '.SEMINARS_TABLE_VIPS_MM
-						.'.uid_foreign='.$this->registrationManager->getFeUserUid();
-				}
-				break;
-			case 'my_entered_events':
-				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.owner_feuser='
-					.$this->getFeUserUid();
-				break;
-			case 'events_next_day':
-				// Here, we rely on the $additonalQueryParameters parameter
-				// because $this->seminar is gone already.
-				break;
-			case 'other_dates':
-				$queryWhere .= $this->seminar->getAdditionalQueryForOtherDates();
-				break;
-			default:
-				break;
-		}
-
-		$queryWhere .= $additionalQueryParameters;
-
-		if ($this->getConfValueBoolean(
-			'sortListViewByCategory', 's_template_special'
-		)) {
-			$orderBy = $this->orderByList['category'].', ';
-		} else {
-			$orderBy = '';
-		}
-		if (isset($this->internal['orderBy'])
-			&& isset($this->orderByList[$this->internal['orderBy']])) {
-			$orderBy .= $this->orderByList[$this->internal['orderBy']]
-				.($this->internal['descFlag'] ? ' DESC' : '');
-		}
-
-		$limit = '';
-		$pointer = intval($this->piVars['pointer']);
-		$resultsAtATime = t3lib_div::intInRange(
-			$this->internal['results_at_a_time'], 1, 1000
-		);
-		$limit = ($pointer * $resultsAtATime).','.$resultsAtATime;
-
-		if ($whatToDisplay == 'my_events') {
-			$className = 'tx_seminars_registrationbag';
-		} else {
-			$className = 'tx_seminars_seminarbag';
-		}
-
-		$registrationOrSeminarBagClassname = t3lib_div::makeInstanceClassName(
-			$className
-		);
-		$registrationOrSeminarBag = new $registrationOrSeminarBagClassname(
-			$queryWhere,
-			$additionalTables,
-			'',
-			$orderBy,
-			$limit
-		);
-
-		$this->internal['res_count']
-			= $registrationOrSeminarBag->getObjectCountWithoutLimit();
-
-		$this->previousDate = '';
-		$this->previousCategory = '';
-
-		return $registrationOrSeminarBag;
-	}
+	///////////////////////////
+	// Single view functions.
+	///////////////////////////
 
 	/**
 	 * Displays detailed data for a seminar.
@@ -1840,145 +1415,390 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		return $result;
 	}
 
+
+	/////////////////////////
+	// List view functions.
+	/////////////////////////
+
 	/**
-	 * Creates the link to the list of registrations for the current seminar.
-	 * Returns an empty string if this link is not allowed.
-	 * For standard lists, a link is created if either the user is a VIP
-	 * or is registered for that seminar (with the link to the VIP list taking precedence).
+	 * Creates the HTML for the event list view.
+	 * This function is used for the normal event list as well as the
+	 * "my events" and the "my VIP events" list.
 	 *
-	 * @return	string		HTML for the link (may be an empty string)
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
 	 *
-	 * @access	protected
+	 * @return	string		HTML code with the event list
 	 */
-	function getRegistrationsListLink() {
+	protected function createListView($whatToDisplay) {
 		$result = '';
-		$targetPageId = 0;
+		$isOkay = true;
 
-		if ($this->seminar->canViewRegistrationsList(
-				$this->whatToDisplay,
-				0,
-				$this->getConfValueInteger('registrationsVipListPID'),
-				$this->getConfValueInteger(
-					'defaultEventVipsFeGroupID',
-					's_template_special')
-				)
+		$this->instantiateStaticInfo();
+
+		switch ($whatToDisplay) {
+			case 'my_events':
+				if ($this->isLoggedIn()) {
+					$result .= $this->getSubpart('MESSAGE_MY_EVENTS');
+				} else {
+					$this->setMarker(
+						'error_text',
+						$this->translate('message_notLoggedIn')
+					);
+					$result .= $this->getSubpart('ERROR_VIEW');
+					$result .= $this->getLoginLink(
+						$this->translate('message_pleaseLogIn'),
+						$GLOBALS['TSFE']->id
+					);
+					$isOkay = false;
+				}
+				break;
+			case 'my_vip_events':
+				if ($this->isLoggedIn()) {
+					$result .= $this->getSubpart(
+						'MESSAGE_MY_VIP_EVENTS'
+					);
+				} else {
+					$this->setMarker(
+						'error_text',
+						$this->translate('message_notLoggedIn')
+					);
+					$result .= $this->getSubpart('ERROR_VIEW');
+					$result .= $this->getLoginLink(
+						$this->translate('message_pleaseLogIn'),
+						$GLOBALS['TSFE']->id
+					);
+					$isOkay = false;
+				}
+				break;
+			case 'my_entered_events':
+				$result .= $this->createEventEditor(true);
+				if (empty($result)) {
+					$result .= $this->getSubpart(
+						'MESSAGE_MY_ENTERED_EVENTS'
+					);
+				} else {
+					$isOkay = false;
+				}
+				break;
+			default:
+				break;
+		}
+
+		if ($isOkay) {
+			// Shows the selector widget on top of the list view.
+			// Hides it if it's deactivated in the configuration or we are on a
+			// special list view like "my_vip_events".
+			if ((!$this->getConfValueBoolean('hideSelectorWidget', 's_template_special'))
+				&& ($whatToDisplay == 'seminar_list')
 			) {
-			// So a link to the VIP list is possible.
-			$targetPageId = $this->getConfValueInteger('registrationsVipListPID');
-		// No link to the VIP list ... so maybe to the list for the participants.
-		} elseif ($this->seminar->canViewRegistrationsList($this->whatToDisplay,
-			$this->getConfValueInteger('registrationsListPID'))) {
-			$targetPageId = $this->getConfValueInteger('registrationsListPID');
-		}
+				// Prepares the arrays that contain the possible entries for the
+				// option boxes in the selector widget.
+				$this->createAllowedValuesForSelectorWidget();
 
-		if ($targetPageId) {
-			$result = $this->cObj->getTypoLink(
-				$this->translate('label_listRegistrationsLink'),
-				$targetPageId,
-				array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
-			);
-		}
+				$result .= $this->createSelectorWidget();
 
-		return $result;
-	}
-
-	/**
-	 * Creates a seminar in $this->seminar.
-	 * If the seminar cannot be created, $this->seminar will be null, and
-	 * this function will return false.
-	 *
-	 * $this->registrationManager must have been initialized before this
-	 * method may be called.
-	 *
-	 * @param	integer		an event UID
-	 *
-	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
-	 */
-	public function createSeminar($seminarUid) {
-		$result = false;
-
-		if (tx_seminars_objectfromdb::recordExists(
-			$seminarUid,
-			SEMINARS_TABLE_SEMINARS)
-		) {
-			/** Name of the seminar class in case someone subclasses it. */
-			$seminarClassname = t3lib_div::makeInstanceClassName(
-				'tx_seminars_seminar'
-			);
-			$this->seminar = new $seminarClassname($seminarUid);
-			$result = true;
-		} else {
-			$this->seminar = null;
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Gets our seminar object.
-	 *
-	 * @return	tx_seminars_seminar		our seminar object
-	 */
-	public function getSeminar() {
-		return $this->seminar;
-	}
-
-	/**
-	 * Returns the current registration.
-	 *
-	 * @return	tx_seminars_registration	the current registration
-	 */
-	public function getRegistration() {
-		return $this->registration;
-	}
-
-	/**
-	 * Returns the shared registration manager.
-	 *
-	 * @return	tx_seminars_registrationmanager	the shared registration manager
-	 */
-	public function getRegistrationManager() {
-		return $this->registrationManager;
-	}
-
-	/**
-	 * Creates a registration in $this->registration from the database record with
-	 * the UID specified in the parameter $registrationUid.
-	 * If the registration cannot be created, $this->registration will be null, and
-	 * this function will return false.
-	 *
-	 * $this->registrationManager must have been initialized before this
-	 * method may be called.
-	 *
-	 * @param	integer		a registration UID
-	 *
-	 * @return	boolean		true if the registration UID is valid and the object
-	 * 						has been created, false otherwise
-	 */
-	public function createRegistration($registrationUid) {
-		$result = false;
-
-		if (tx_seminars_objectfromdb::recordExists(
-			$registrationUid, SEMINARS_TABLE_ATTENDANCES)
-		) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				SEMINARS_TABLE_ATTENDANCES,
-				SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid
-					.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
-			);
-			/** Name of the registration class in case someone subclasses it. */
-			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-			$this->registration = new $registrationClassname(
-				$this->cObj, $dbResult
-			);
-			$result = $this->registration->isOk();
-			if (!$result) {
-				$this->registration = null;
+				// Unsets the seminar bag for performance reasons.
+				unset($this->seminarBagForSelectorWidget);
 			}
-		} else {
-			$this->registration = null;
+
+			// Creates the seminar or registration bag for the list view (with
+			// all the filtering applied).
+			$seminarOrRegistrationBag =& $this->initListView($whatToDisplay);
+
+			if ($this->internal['res_count']) {
+				$result .= $this->createListTable($seminarOrRegistrationBag, $whatToDisplay);
+			} else {
+				$this->setMarker(
+					'error_text',
+					$this->translate('message_noResults')
+				);
+				$result .= $this->getSubpart('ERROR_VIEW');
+			}
+
+			// Shows the page browser (if not deactivated in the configuration),
+			// disabling htmlspecialchars (the last parameter).
+			if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
+				$result .= $this->pi_list_browseresults();
+			}
+
+			// Lets warnings from the seminar and the seminar bag bubble up to us.
+			$this->setErrorMessage(
+				$seminarOrRegistrationBag->checkConfiguration(true)
+			);
 		}
+
+		return $result;
+	}
+
+	/**
+	 * Initializes the list view (normal list, my events or my VIP events) and
+	 * creates a seminar bag or a registration bag (for the "my events" view),
+	 * but does not create any actual HTML output.
+	 *
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
+	 * @param	string		additional query parameters that will be appended
+	 * 						to the WHERE clause
+	 *
+	 * @return	object		a seminar bag or a registration bag containing the
+	 * 						seminars or registrations for the list view
+	 */
+	protected function &initListView($whatToDisplay = '', $additionalQueryParameters = '') {
+		if (strstr($this->cObj->currentRecord, 'tt_content')) {
+			$this->conf['pidList'] = $this->getConfValueString('pages');
+			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
+		}
+
+		$this->hideSubparts(
+			$this->getConfValueString(
+				'hideColumns',
+				's_template_special'),
+				'LISTHEADER_WRAPPER'
+			);
+		$this->hideSubparts(
+			$this->getConfValueString(
+			'hideColumns',
+			's_template_special'),
+			'LISTITEM_WRAPPER'
+		);
+
+		// Hide the registration column if online registration is disabled.
+		if (!$this->getConfValueBoolean('enableRegistration')) {
+			$this->hideSubparts('registration', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('registration', 'LISTITEM_WRAPPER');
+		}
+
+		// Hides the number of seats, the total price and the registration
+		// status columns when we're not on the "my events" list.
+		if ($whatToDisplay != 'my_events') {
+			$this->hideSubparts(
+				'total_price,seats,status_registration', 'LISTHEADER_WRAPPER'
+			);
+			$this->hideSubparts(
+				'total_price,seats,status_registration', 'LISTITEM_WRAPPER'
+			);
+		}
+
+		// Hide the column with the link to the list of registrations if
+		// online registration is disabled, no user is logged in or there is
+		// no page specified to link to.
+		// Also hide it for the "other dates" and "events next day" lists.
+		if (!$this->getConfValueBoolean('enableRegistration')
+			|| !$this->isLoggedIn()
+			|| (($whatToDisplay == 'seminar_list')
+				&& !$this->hasConfValueInteger('registrationsListPID')
+				&& !$this->hasConfValueInteger('registrationsVipListPID'))
+			|| ($whatToDisplay == 'other_dates')
+			|| ($whatToDisplay == 'events_next_day')
+			|| (($whatToDisplay == 'my_events')
+				&& !$this->hasConfValueInteger('registrationsListPID'))
+			|| (($whatToDisplay == 'my_vip_events')
+				&& !$this->hasConfValueInteger('registrationsVipListPID'))) {
+			$this->hideSubparts('list_registrations', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('list_registrations', 'LISTITEM_WRAPPER');
+		}
+
+		// Hide the edit column if the list to display is not the
+		// "events which I have entered" list.
+		if ($whatToDisplay != 'my_entered_events') {
+			$this->hideSubparts('edit', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('edit', 'LISTITEM_WRAPPER');
+		}
+
+		if (!isset($this->piVars['pointer'])) {
+			$this->piVars['pointer'] = 0;
+		}
+
+		// Read the list view settings from the TS setup and write them to the
+		// list view configuration.
+		$lConf = (isset($this->conf['listView.']))
+			? $this->conf['listView.'] : array();
+		if (!empty($lConf)) {
+			foreach($lConf as $key => $value) {
+				$this->internal[$key] = $value;
+			}
+		}
+
+		// Overwrite the default sort order with values given by the browser.
+		// This happens if the user changes the sort order manually.
+		if (!empty($this->piVars['sort'])) {
+			list(
+				$this->internal['orderBy'],
+				$this->internal['descFlag']) = explode(':', $this->piVars['sort']
+			);
+		}
+
+		// Number of results to show in a listing.
+		$this->internal['results_at_a_time'] = t3lib_div::intInRange(
+			$lConf['results_at_a_time'],
+			0,
+			1000,
+			20
+		);
+		// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
+		$this->internal['maxPages'] = t3lib_div::intInRange(
+			$lConf['maxPages'],
+			0,
+			1000,
+			2
+		);
+
+		$this->internal['orderByList'] = 'category,title,uid,event_type,'
+			.'accreditation_number,credit_points,begin_date,price_regular,'
+			.'price_special,organizers,target_groups';
+
+		$pidList = $this->pi_getPidList(
+			$this->getConfValueString('pidList'),
+			$this->getConfValueInteger('recursive')
+		);
+		$queryWhere = ($pidList != '')
+			? SEMINARS_TABLE_SEMINARS.'.pid IN ('.$pidList.')' : '1=1';
+
+		// Time-frames and hiding canceled events doesn't make sense for the
+		// topic list.
+		if ($whatToDisplay != 'topic_list') {
+			$queryWhere .= $this->getAdditionalQueryParameters();
+		}
+
+		$additionalTables = '';
+
+		switch ($whatToDisplay) {
+			case 'topic_list':
+				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.object_type='
+					.SEMINARS_RECORD_TYPE_TOPIC;
+				$this->hideSubparts(
+					'uid,accreditation_number,speakers,date,time,place,'
+						.'organizers,vacancies,registration',
+					'LISTHEADER_WRAPPER'
+				);
+				$this->hideSubparts(
+					'uid,accreditation_number,speakers,date,time,place,'
+						.'organizers,vacancies,registration',
+					'LISTITEM_WRAPPER'
+				);
+				break;
+			case 'my_events':
+				$additionalTables = SEMINARS_TABLE_SEMINARS;
+				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
+					.SEMINARS_TABLE_ATTENDANCES.'.seminar AND '
+					.SEMINARS_TABLE_ATTENDANCES.'.user='
+					.$this->registrationManager->getFeUserUid();
+				break;
+			case 'my_vip_events':
+				$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
+						$this->getConfValueInteger(
+							'defaultEventVipsFeGroupID',
+							's_template_special'
+						)
+					]
+				);
+				if (!$isDefaultVip) {
+					// The current user is not listed as a default VIP for all
+					// events. Change the query to show only events where the
+					// current user is manually added as a VIP.
+					$additionalTables = SEMINARS_TABLE_VIPS_MM;
+					$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
+						.SEMINARS_TABLE_VIPS_MM.'.uid_local AND '.SEMINARS_TABLE_VIPS_MM
+						.'.uid_foreign='.$this->registrationManager->getFeUserUid();
+				}
+				break;
+			case 'my_entered_events':
+				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.owner_feuser='
+					.$this->getFeUserUid();
+				break;
+			case 'events_next_day':
+				// Here, we rely on the $additonalQueryParameters parameter
+				// because $this->seminar is gone already.
+				break;
+			case 'other_dates':
+				$queryWhere .= $this->seminar->getAdditionalQueryForOtherDates();
+				break;
+			default:
+				break;
+		}
+
+		$queryWhere .= $additionalQueryParameters;
+
+		if ($this->getConfValueBoolean(
+			'sortListViewByCategory', 's_template_special'
+		)) {
+			$orderBy = $this->orderByList['category'].', ';
+		} else {
+			$orderBy = '';
+		}
+		if (isset($this->internal['orderBy'])
+			&& isset($this->orderByList[$this->internal['orderBy']])) {
+			$orderBy .= $this->orderByList[$this->internal['orderBy']]
+				.($this->internal['descFlag'] ? ' DESC' : '');
+		}
+
+		$limit = '';
+		$pointer = intval($this->piVars['pointer']);
+		$resultsAtATime = t3lib_div::intInRange(
+			$this->internal['results_at_a_time'], 1, 1000
+		);
+		$limit = ($pointer * $resultsAtATime).','.$resultsAtATime;
+
+		if ($whatToDisplay == 'my_events') {
+			$className = 'tx_seminars_registrationbag';
+		} else {
+			$className = 'tx_seminars_seminarbag';
+		}
+
+		$registrationOrSeminarBagClassname = t3lib_div::makeInstanceClassName(
+			$className
+		);
+		$registrationOrSeminarBag = new $registrationOrSeminarBagClassname(
+			$queryWhere,
+			$additionalTables,
+			'',
+			$orderBy,
+			$limit
+		);
+
+		$this->internal['res_count']
+			= $registrationOrSeminarBag->getObjectCountWithoutLimit();
+
+		$this->previousDate = '';
+		$this->previousCategory = '';
+
+		return $registrationOrSeminarBag;
+	}
+
+	/**
+	 * Creates just the table for the list view (without any result browser or
+	 * search form).
+	 * This function should only be called when there are actually any list
+	 * items.
+	 *
+	 * @param	object		initialized seminar or registration bag
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
+	 *
+	 * @return	string		HTML for the table (will not be empty)
+	 */
+	protected function createListTable(tx_seminars_bag $seminarOrRegistrationBag, $whatToDisplay) {
+		$result = $this->createListHeader();
+		$rowCounter = 0;
+
+		while ($currentItem = $seminarOrRegistrationBag->getCurrent()) {
+			if ($whatToDisplay == 'my_events') {
+				$this->registration =& $currentItem;
+				$this->seminar =& $this->registration->getSeminarObject();
+			} else {
+				$this->seminar =& $currentItem;
+			}
+
+			$result .= $this->createListRow($rowCounter, $whatToDisplay);
+			$rowCounter++;
+			$seminarOrRegistrationBag->getNext();
+		}
+
+		$result .= $this->createListFooter();
 
 		return $result;
 	}
@@ -2228,10 +2048,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		the heading label, may be completely wrapped in a
 	 * 						hyperlink for sorting
-	 *
-	 * @access	protected
 	 */
-	function getFieldHeader($fieldName) {
+	protected function getFieldHeader($fieldName) {
 		$result = '';
 
 		$label = $result = $this->translate(
@@ -2263,15 +2081,283 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Returns a place bag object that contains all seminar places that are in
+	 * the list of given UIDs.
+	 *
+	 * @param	array		all the UIDs to include in the bag, must not be empty
+	 *
+	 * @return	object		place bag object
+	 */
+	protected function createPlaceBag(array $placeUids) {
+		$placeUidsAsCommaSeparatedList = implode(',', $placeUids);
+		$queryWhere = 'uid IN('.$placeUidsAsCommaSeparatedList.')';
+		$className = 'tx_seminars_placebag';
+		$placeBagClassname = t3lib_div::makeInstanceClassName(
+			$className
+		);
+		$placeBag = new $placeBagClassname($queryWhere);
+
+		return $placeBag;
+	}
+
+	/**
+	 * Gathers all the allowed entries for the option boxes of the selector
+	 * widget. This includes the languages, places, countries and event types of
+	 * the events that are selected and in the seminar bag for the current list
+	 * view.
+	 *
+	 * IMPORTANT: The lists for each option box contain only the values that
+	 * are coming from the selected events! So there's not a huge list of languages
+	 * of which 99% are not selected for any event (and thus would result in
+	 * no found events).
+	 *
+	 * The data will be written to global variables as arrays that contain
+	 * the value (value of the form field) and the label (text shown in the option
+	 * box) for each entry.
+	 */
+	public function createAllowedValuesForSelectorWidget() {
+		$allPlaceUids = array();
+
+		$this->instantiateStaticInfo();
+
+		// Creates a separate seminar bag that contains all the events.
+		// We can't use the regular seminar bag that is used for the list
+		// view as it contains only part of the events.
+		$seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
+
+		// Walks through all events in the seminar bag to read the needed data
+		// from each event object.
+		while ($currentEvent = $seminarBag->getCurrent()) {
+			// Reads the language from the event record.
+			$languageIsoCode = $currentEvent->getLanguage();
+			if ((!empty($languageIsoCode))
+				&& !isset($this->allLanguages[$languageIsoCode])) {
+				$languageName = $this->staticInfo->getStaticInfoName(
+					'LANGUAGES',
+					$languageIsoCode,
+					'',
+					'',
+					0
+				);
+				$this->allLanguages[$languageIsoCode] = $languageName;
+			}
+
+			// Reads the place(s) from the event record. The country will be
+			// read from the place record later.
+			$placeUids = $currentEvent->getRelatedMmRecordUids(
+				SEMINARS_TABLE_SITES_MM
+			);
+			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
+
+			// Reads the event type from the event record.
+			$eventTypeUid = $currentEvent->getEventTypeUid();
+			if ($eventTypeUid != 0) {
+				$eventTypeName = $currentEvent->getEventType();
+				if (!isset($this->allEventTypes[$eventTypeUid])) {
+					$this->allEventTypes[$eventTypeUid] = $eventTypeName;
+				}
+			}
+
+			$seminarBag->getNext();
+		}
+		unset($seminarBag);
+
+		// Assures that each language is just once in the resulting array.
+		$this->allLanguages = array_unique($this->allLanguages);
+
+		// Fetches the name of the location, the city and the country and adds
+		// it to the final array.
+		if (empty($allPlaceUids)) {
+			$allPlaceUids = array(0);
+		}
+		$placeBag = $this->createPlaceBag($allPlaceUids);
+		while ($currentPlace = $placeBag->getCurrent()) {
+			if (!isset($this->allPlaces[$currentPlace->getUid()])) {
+				$this->allPlaces[$currentPlace->getUid()] = $currentPlace->getTitle();
+			}
+			$countryIsoCode = $currentPlace->getCountryIsoCode();
+			if (!isset($this->allCountries[$countryIsoCode])) {
+				$this->allCountries[$countryIsoCode] = $this->staticInfo->getStaticInfoName(
+					'COUNTRIES',
+					$countryIsoCode
+				);
+			}
+
+			$cityName = $currentPlace->getCity();
+			if (!isset($this->allCities[$cityName])) {
+				$this->allCities[$cityName] = $cityName;
+			}
+
+			$placeBag->getNext();
+		}
+		unset($placeBag);
+
+		// Brings the options into alphabetical order.
+		asort($this->allLanguages);
+		asort($this->allPlaces);
+		asort($this->allCities);
+		asort($this->allCountries);
+		asort($this->allEventTypes);
+
+		// Adds an empty option to each list of options if this is needed.
+		$this->addEmptyOptionIfNeeded($this->allLanguages);
+		$this->addEmptyOptionIfNeeded($this->allPlaces);
+		$this->addEmptyOptionIfNeeded($this->allCities);
+		$this->addEmptyOptionIfNeeded($this->allCountries);
+		$this->addEmptyOptionIfNeeded($this->allEventTypes);
+	}
+
+	/**
+	 * Adds a dummy option to the array of allowed values. This is needed if the
+	 * user wants to show the option box as drop-down selector instead of
+	 * a multi-line select.
+	 *
+	 * With the default configuration, this method is a no-op as
+	 * "showEmptyEntryInOptionLists" is disabled.
+	 *
+	 * If this option is activated in the TS configuration, the dummy option will
+	 * be prepended to the existing arrays. So we can be sure that the dummy
+	 * option will always be the first one in the array and thus shown first in
+	 * the drop-down.
+	 *
+	 * @param	array		array of options, may be empty
+	 */
+	public function addEmptyOptionIfNeeded(array &$options) {
+		if ($this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
+			$completeOptionList = array(
+				'none' => $this->translate('label_selector_pleaseChoose')
+			);
+			foreach ($options as $key => $value) {
+				$completeOptionList[$key] = $value;
+			}
+
+			$options = $completeOptionList;
+		}
+	}
+
+	/**
+	 * Returns the additional query parameters needed to build the list view.
+	 * This function checks
+	 * - the time-frame to display
+	 * - whether to show canceled events
+	 * The result always starts with " AND" so that it can be directly appended
+	 * to a WHERE clause.
+	 *
+	 * @return	string		the additional query parameters
+	 */
+	protected function getAdditionalQueryParameters() {
+		$result = '';
+		/** Prefixes the column name with the table name so that the query also
+		 * works with multiple tables. */
+		$tablePrefix = SEMINARS_TABLE_SEMINARS.'.';
+
+		// Only show full event records(0) and event dates(2), but no event
+		// topics(1).
+		$result .= ' AND '.$tablePrefix.'object_type!=1';
+
+		$seminarBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_seminarbag'
+		);
+		$temporarySeminarBag = new $seminarBagClassname('uid=0');
+
+		// Adds the query parameter that result from the user selection in the
+		// selector widget (including the search form).
+		if (is_array($this->piVars['language'])) {
+			$result .= $temporarySeminarBag->getAdditionalQueryForLanguage(
+				$this->piVars['language']
+			);
+		}
+		if (is_array($this->piVars['place'])) {
+			$result .= $temporarySeminarBag->getAdditionalQueryForPlace(
+				$this->piVars['place']
+			);
+		}
+		if (is_array($this->piVars['city'])) {
+			$result .= $temporarySeminarBag->getAdditionalQueryForCity(
+				$this->piVars['city']
+			);
+		}
+		if (is_array($this->piVars['country'])) {
+			$result .= $temporarySeminarBag->getAdditionalQueryForCountry(
+				$this->piVars['country']
+			);
+		}
+		if (isset($this->piVars['sword'])
+			&& !empty($this->piVars['sword'])
+		) {
+			$result .= $this->searchWhere($this->piVars['sword']);
+		}
+
+		// Unsets the temporary seminar bag we used above.
+		unset($temporarySeminarBag);
+
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		try {
+			$builder->setTimeFrame(
+				$this->getConfValueString(
+					'timeframeInList',
+					's_template_special'
+				)
+			);
+		} catch (Exception $exception) {
+			// Ignores the exception because the user will be warned of the
+			// problem by the configuration check.
+		}
+
+		if (
+			$this->getConfValueBoolean('hideCanceledEvents', 's_template_special')
+		) {
+			$builder->ignoreCanceledEvents();
+		}
+
+		if (isset($this->piVars['event_type'])
+			&& (is_array($this->piVars['event_type']))
+		) {
+			$sanitizedEventTypeUids = array();
+			foreach($this->piVars['event_type'] as $uid) {
+				$sanitizedEventTypeUids[] = intval($uid);
+			}
+			$builder->limitToEventTypes(implode(',', $sanitizedEventTypeUids));
+		} else {
+			$builder->limitToEventTypes(
+				$this->getConfValueString(
+					'limitListViewToEventTypes', 's_listView'
+				)
+			);
+		}
+
+		if (isset($this->piVars['category'])
+			&& (intval($this->piVars['category']) > 0)
+		) {
+			$builder->limitToCategories(intval($this->piVars['category']));
+		} else {
+			$builder->limitToCategories(
+				$this->getConfValueString(
+					'limitListViewToCategories', 's_listView'
+				)
+			);
+		}
+
+		$builder->limitToPlaces(
+			$this->getConfValueString(
+				'limitListViewToPlaces', 's_listView'
+			)
+		);
+
+		$result .= ' AND ' . $builder->getWhereClause();
+
+		return $result;
+	}
+
+	/**
 	 * Gets the CSS classes (space-separated) for the Vacancies TD.
 	 *
 	 * @param	object		the current seminar object
 	 *
-	 * @return	string		class attribute filled with a list a space-separated CSS classes, plus a leading space
-	 *
-	 * @access	protected
+	 * @return	string		class attribute filled with a list a space-separated
+	 * 						CSS classes, plus a leading space
 	 */
-	function getVacanciesClasses(tx_seminars_seminar $seminar) {
+	protected function getVacanciesClasses(tx_seminars_seminar $seminar) {
 		$result = $this->pi_getClassName('vacancies');
 
 		if ($seminar->needsRegistration()) {
@@ -2293,348 +2379,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Creates the HTML for the registration page.
-	 *
-	 * @return	string		HTML code for the registration page
-	 *
-	 * @acces	protected
-	 */
-	function createRegistrationPage() {
-		$this->feuser = $GLOBALS['TSFE']->fe_user;
-
-		$errorMessage = '';
-		$registrationForm = '';
-		$isOkay = false;
-
-		$this->toggleEventFieldsOnRegistrationPage();
-
-		if ($this->createSeminar($this->piVars['seminar'])) {
-			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage($this->seminar->checkConfiguration(true));
-
-			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
-				$errorMessage
-					= $this->registrationManager->canRegisterIfLoggedInMessage(
-						$this->seminar
-					);
-			} else {
-				if ($this->isLoggedIn()) {
-					$isOkay = true;
-				} else {
-					$errorMessage = $this->getLoginLink(
-						$this->translate('message_notLoggedIn'),
-						$GLOBALS['TSFE']->id,
-						$this->seminar->getUid()
-					);
-				}
-			}
-		} elseif ($this->createRegistration(
-			intval($this->piVars['registration'])
-		)) {
-			if ($this->createSeminar($this->registration->getSeminar())) {
-				if ($this->seminar->isUnregistrationPossible()) {
-					$isOkay = true;
-				} else {
-					$errorMessage = $this->translate(
-						'message_unregistrationNotPossible'
-					);
-				}
-			}
-		} else {
-			switch ($this->piVars['action']) {
-				case 'unregister':
-					$errorMessage = $this->translate(
-						'message_notRegisteredForThisEvent'
-					);
-					break;
-				case 'register':
-					// The fall-through is intended.
-				default:
-					$errorMessage = $this->registrationManager->existsSeminarMessage(
-						$this->piVars['seminar']
-					);
-					break;
-			}
-		}
-
-		if ($isOkay) {
-			switch ($this->piVars['action']) {
-				case 'unregister':
-					$registrationForm = $this->createUnregistrationForm();
-					break;
-				case 'register':
-					// The fall-through is intended.
-				default:
-					$registrationForm = $this->createRegistrationForm();
-					break;
-			}
-		}
-
-		$result = $this->createRegistrationHeading($errorMessage);
-		$result .= $registrationForm;
-
-		return $result;
-	}
-
-	/**
-	 * Creates the registration page title and (if applicable) any error
-	 * messages. Data from the event will only be displayed if $this->seminar
-	 * is non-null.
-	 *
-	 * @param	string	error message to be displayed (may be empty if there is no error)
-	 *
-	 * @return	string	HTML code including the title and error message
-	 *
-	 * @access	protected
-	 */
-	function createRegistrationHeading($errorMessage) {
-		$this->setMarker(
-			'registration',
-			$this->translate('label_registration')
-		);
-		$this->setMarker(
-			'title',
-			($this->seminar) ? $this->seminar->getTitleAndDate() : ''
-		);
-		$this->setMarker(
-			'uid',
-			($this->seminar) ? $this->seminar->getUid() : ''
-		);
-
-		if ($this->seminar && $this->seminar->hasAccreditationNumber()) {
-			$this->setMarker(
-				'accreditation_number',
-				($this->seminar) ? $this->seminar->getAccreditationNumber() : ''
-			);
-		} else {
-			$this->hideSubparts(
-				'accreditation_number',
-				'registration_wrapper'
-			);
-		}
-
-		if (empty($errorMessage)) {
-			$this->hideSubparts('error', 'wrapper');
-		} else {
-			$this->setMarker('error_text', $errorMessage);
-		}
-
-		return $this->getSubpart('REGISTRATION_HEAD');
-	}
-
-	/**
-	 * Creates the registration form.
-	 *
-	 * @return	string		HTML code for the form
-	 *
-	 * @access	protected
-	 */
-	function createRegistrationForm() {
-		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registration_editor'
-		);
-		$registrationEditor = new $registrationEditorClassname($this);
-
-		$output = $registrationEditor->_render();
-		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
-
-		return $output;
-	}
-
-	/**
-	 * Creates a list of registered participants for an event.
-	 * If there are no registrations yet, a localized message is displayed instead.
-	 *
-	 * @return	string		HTML code for the list
-	 *
-	 * @access	protected
-	 */
-	function createRegistrationsListPage() {
-		$errorMessage = '';
-		$isOkay = false;
-
-		if ($this->createSeminar($this->piVars['seminar'])) {
-			// Okay, at least the seminar UID is valid so we can show the
-			// seminar title and date.
-			$this->setMarker('title', $this->seminar->getTitleAndDate());
-
-			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage($this->seminar->checkConfiguration(true));
-
-			if ($this->seminar->canViewRegistrationsList(
-					$this->whatToDisplay,
-					0,
-					0,
-					$this->getConfValueInteger(
-						'defaultEventVipsFeGroupID',
-						's_template_special')
-					)
-				) {
-				$isOkay = true;
-			} else {
-				$errorMessage = $this->seminar->canViewRegistrationsListMessage(
-					$this->whatToDisplay
-				);
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-					'Status: 403 Forbidden'
-				);
-			}
-		} else {
-			$errorMessage = $this->registrationManager->existsSeminarMessage(
-				$this->piVars['seminar']
-			);
-			$this->setMarker('title', '');
-			header('Status: 404 Not Found');
-		}
-
-		if ($isOkay) {
-			$this->hideSubparts('error', 'wrapper');
-			$this->createRegistrationsList();
-		} else {
-			$this->setMarker('error_text', $errorMessage);
-			$this->hideSubparts('registrations_list_message', 'wrapper');
-			$this->hideSubparts('registrations_list_body', 'wrapper');
-		}
-
-		$this->setMarker('backlink',
-			$this->cObj->getTypoLink(
-				$this->translate('label_back'),
-				$this->getConfValueInteger('listPID')
-			)
-		);
-
-		$result = $this->getSubpart('REGISTRATIONS_LIST_VIEW');
-
-		return $result;
-	}
-
-	/**
-	 * Creates the registration list (sorted by creation date) and fills in the
-	 * corresponding subparts.
-	 * If there are no registrations, a localized message is filled in instead.
-	 *
-	 * Before this function can be called, it must be ensured that $this->seminar
-	 * is a valid seminar object.
-	 *
-	 * @access	protected
-	 */
-	function createRegistrationsList() {
-		$registrationBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registrationbag'
-		);
-		$registrationBag = new $registrationBagClassname(
-			SEMINARS_TABLE_ATTENDANCES.'.seminar='.$this->seminar->getUid()
-				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.registration_queue=0',
-			'',
-			'',
-			'crdate'
-		);
-
-		if ($registrationBag->getCurrent()) {
-			$result = '';
-			while ($currentRegistration = $registrationBag->getCurrent()) {
-				$this->setMarker('registrations_list_inneritem',
-					$currentRegistration->getUserDataAsHtml(
-						$this->getConfValueString(
-							'showFeUserFieldsInRegistrationsList',
-							's_template_special'
-						),
-						$this
-					)
-				);
-				$result .= $this->getSubpart(
-					'REGISTRATIONS_LIST_ITEM'
-				);
-				$registrationBag->getNext();
-			}
-			$this->hideSubparts('registrations_list_message', 'wrapper');
-			$this->setMarker('registrations_list_body', $result);
-		} else {
-			$this->hideSubparts('registrations_list_body', 'wrapper');
-			$this->setMarker(
-				'message_no_registrations',
-				$this->translate('message_noRegistrations')
-			);
-		}
-
-		// Lets warnings from the registration bag bubble up to us.
-		$this->setErrorMessage($registrationBag->checkConfiguration(true));
-	}
-
-	/**
-	 * Enables/disables the display of data from event records on the
-	 * registration page depending on the config variable
-	 * "eventFieldsOnRegistrationPage".
-	 *
-	 * @access	protected
-	 */
-	function toggleEventFieldsOnRegistrationPage() {
-		$fieldsToShow = array();
-		if ($this->hasConfValueString(
-				'eventFieldsOnRegistrationPage',
-				's_template_special'
-			)
-		) {
-			$fieldsToShow = explode(
-				',',
-				$this->getConfValueString(
-					'eventFieldsOnRegistrationPage',
-					's_template_special'
-				)
-			);
-		}
-
-		// First, we have a list of all fields that are removal candidates.
-		$fieldsToRemove = array(
-			'uid',
-			'title',
-			'accreditation_number',
-			'price_regular',
-			'price_special',
-			'vacancies',
-			'message'
-		);
-
-		// Now iterate over the fields to show and delete them from the list
-		// of items to remove.
-		foreach ($fieldsToShow as $currentField) {
-			$key = array_search(trim($currentField), $fieldsToRemove);
-			// $key will be false if the item has not been found.
-			// Zero, on the other hand, is a valid key.
-			if ($key !== false) {
-				unset($fieldsToRemove[$key]);
-			}
-		}
-
-		if (!empty($fieldsToRemove)) {
-			$this->hideSubparts(
-				implode(',', $fieldsToRemove),
-				'registration_wrapper'
-			);
-		}
-	}
-
-	/**
-	 * Creates the unregistration form.
-	 * $this->registration has to be created before this method is called.
-	 *
-	 * @return	string		HTML code for the form
-	 *
-	 * @access	protected
-	 */
-	function createUnregistrationForm() {
-		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registration_editor'
-		);
-		$registrationEditor = new $registrationEditorClassname($this);
-
-		$result = $registrationEditor->_render();
-		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
-
-		return $result;
-	}
-
-	/**
 	 * Generates a search WHERE clause based on the input search words
 	 * (AND operation - all search words must be found in record.)
 	 * The result will be in conjunctive normal form.
@@ -2653,10 +2397,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 *
 	 * @return	string		the WHERE clause (including the AND at the beginning),
 	 * 						will be an empty string if $searchWords is empty
-	 *
-	 * @access	protected
 	 */
-	function searchWhere($searchWords)	{
+	public function searchWhere($searchWords)	{
 		$result = '';
 
 		$mmTables = array(
@@ -2812,10 +2554,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @param	string		name of the SQL table in which the search word will be used
 	 *
 	 * @return	string		the trimmed and SQL-escaped $searchword
-	 *
-	 * @access	public
 	 */
-	function escapeAndTrimSearchWord($searchword, $tableName) {
+	public function escapeAndTrimSearchWord($searchword, $tableName) {
 		return $GLOBALS['TYPO3_DB']->escapeStrForLike(
 			$GLOBALS['TYPO3_DB']->quoteStr(
 				trim($searchword),
@@ -2826,49 +2566,14 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Checks whether logged-in FE user has access to the event editor and then
-	 * either creates the event editor HTML (or an empty string if
-	 * $accessTestOnly is true) or a localized error message.
-	 *
-	 * @param	boolean		whether only the access to the event editor should be checked
-	 *
-	 * @return	string		HTML code for the event editor (or an error message if the FE user doesn't have access to the editor)
-	 *
-	 * @access	protected
-	 */
-	function createEventEditor($accessTestOnly = false) {
-		$result = '';
-
-		$eventEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_event_editor'
-		);
-		$eventEditor = new $eventEditorClassname($this);
-
-		if ($eventEditor->hasAccess()) {
-			if (!$accessTestOnly) {
-				$result = $eventEditor->_render();
-			}
-		} else {
-			$result = $eventEditor->hasAccessMessage();
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-				'Status: 403 Forbidden'
-			);
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Creates the link to the event editor for the current event.
 	 * Returns an empty string if editing this event is not allowed.
 	 *
 	 * A link is created if the logged-in FE user is the owner of the event.
 	 *
 	 * @return	string		HTML for the link (may be an empty string)
-	 *
-	 * @access	protected
 	 */
-	function getEditLink() {
+	protected function getEditLink() {
 		$result = '';
 
 		if ($this->seminar->isOwnerFeUser()) {
@@ -2883,174 +2588,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Creates a countdown to the next upcoming event.
-	 *
-	 * @return	string		HTML code of the countdown or a message if no upcoming event found
-	 *
-	 * @access	protected
-	 */
-	function createCountdown() {
-		$message = '';
-		$now = time();
-
-		// define the additional where clause for the database query
-		$additionalWhere = 'tx_seminars_seminars.cancelled=0'
-			.$this->enableFields(SEMINARS_TABLE_SEMINARS)
-			.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!='.SEMINARS_RECORD_TYPE_TOPIC
-			.' AND '.SEMINARS_TABLE_SEMINARS.'.begin_date>'.$now;
-
-		// query the database
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'uid',
-			SEMINARS_TABLE_SEMINARS,
-			$additionalWhere,
-			'',
-			'begin_date ASC',
-			'1'
-		);
-
-		if ($dbResult) {
-			if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				if ($this->createSeminar($row['uid'])) {
-					// Lets warnings from the seminar bubble up to us.
-					$this->setErrorMessage(
-						$this->seminar->checkConfiguration(true)
-					);
-
-					// calculate the time left until the event starts
-					$eventStartTime = $this->seminar->getBeginDateAsTimestamp();
-					$timeLeft = $eventStartTime - $now;
-
-					$message = $this->createCountdownMessage($timeLeft);
-				}
-			} else {
-				// no event found - show a message
-				$message = $this->translate('message_countdown_noEventFound');
-			}
-		}
-
-		$this->setMarker('count_down_message', $message);
-		$result = $this->getSubpart('COUNTDOWN');
-
-		return $result;
-	}
-
-	/**
-	 * Returns a localized string representing an amount of seconds in words.
-	 * For example:
-	 * 150000 seconds -> "1 day"
-	 * 200000 seconds -> "2 days"
-	 * 50000 seconds -> "13 hours"
-	 * The function uses localized strings and also looks for proper usage of
-	 * singular/plural.
-	 *
-	 * @param	integer		the amount of seconds to rewrite into words
-	 *
-	 * @return	string		a localized string representing the time left until the event starts
-	 *
-	 * @access	protected
-	 */
-	function createCountdownMessage($seconds) {
-		if ($seconds > 82800) {
-			// more than 23 hours left, show the time in days
-			$countdownValue = round($seconds / ONE_DAY);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_days_plural');
-			} else {
-				$countdownText = $this->translate('countdown_days_singular');
-			}
-		} elseif ($seconds > 3540) {
-			// more than 59 minutes left, show the time in hours
-			$countdownValue = round($seconds / 3600);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_hours_plural');
-			} else {
-				$countdownText = $this->translate('countdown_hours_singular');				}
-		} elseif ($seconds > 59) {
-			// more than 59 seconds left, show the time in minutes
-			$countdownValue = round($seconds / 60);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_minutes_plural');
-			} else {
-				$countdownText = $this->translate('countdown_minutes_singular');
-			}
-		} else {
-			// less than 60 seconds left, show the time in seconds
-			$countdownValue = $seconds;
-			$countdownText = $this->translate('countdown_seconds_plural');
-		}
-
-		return sprintf(
-			$this->translate('message_countdown'),
-			$countdownValue,
-			$countdownText
-		);
-	}
-
-	/**
-	 * Gets all hook objects for this class.
-	 *
-	 * @access	private
-	 */
-	function getHookObjects() {
-		$extensionConfiguration =& $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
-		$hooks =& $extensionConfiguration['seminars/pi1/class.tx_seminars_pi1.php']['hooks'];
-		if (is_array($hooks)) {
-			foreach ($hooks as $classReference) {
-				$this->hookObjects[] = t3lib_div::getUserObj($classReference);
-			}
-		}
-	}
-
-	/**
-	 * Creates the config getter and the registration manager.
-	 *
-	 * @access	public
-	 */
-	function createHelperObjects() {
-		/** Name of the configGetter class in case someone subclasses it. */
-		$configGetterClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_configgetter'
-		);
-		$this->configGetter = new $configGetterClassname();
-
-		/** Name of the registrationManager class in case someone subclasses it. */
-		$registrationManagerClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registrationmanager'
-		);
-		$this->registrationManager = new $registrationManagerClassname();
-	}
-
-	/**
-	 * Checks that we are properly initialized and that we have a config getter
-	 * and a registration manager.
-	 *
-	 * @return	boolean		true if we are properly initialized, false otherwise
-	 *
-	 * @access	public
-	 */
-	function isInitialized() {
-		return ($this->isInitialized
-			&& is_object($this->configGetter)
-			&& is_object($this->registrationManager));
-	}
-
-	/**
-	 * Returns our config getter (which might be null if we aren't initialized
-	 * properly yet).
-	 *
-	 * This function is intended for testing purposes only.
-	 *
-	 * @return	object		our config getter, might be null
-	 *
-	 * @access	public
-	 */
-	function getConfigGetter() {
-		return $this->configGetter;
 	}
 
 	/**
@@ -3102,10 +2639,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @param	string		the name of the option box to generate, must not contain
 	 * 						spaces and there must be a localized label "label_xyz"
 	 * 						with this name, may not be empty
-	 *
-	 * @access	protected
 	 */
-	function createOptionBox($optionBoxName) {
+	protected function createOptionBox($optionBoxName) {
 		// Sets the header that is shown in the label of this selector box.
 		$this->setMarker(
 			'options_header',
@@ -3173,6 +2708,498 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		);
 	}
 
+
+	/////////////////////////////////
+	// Registration view functions.
+	/////////////////////////////////
+
+	/**
+	 * Creates the HTML for the registration page.
+	 *
+	 * @return	string		HTML code for the registration page
+	 */
+	protected function createRegistrationPage() {
+		$this->feuser = $GLOBALS['TSFE']->fe_user;
+
+		$errorMessage = '';
+		$registrationForm = '';
+		$isOkay = false;
+
+		$this->toggleEventFieldsOnRegistrationPage();
+
+		if ($this->createSeminar($this->piVars['seminar'])) {
+			// Lets warnings from the seminar bubble up to us.
+			$this->setErrorMessage($this->seminar->checkConfiguration(true));
+
+			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
+				$errorMessage
+					= $this->registrationManager->canRegisterIfLoggedInMessage(
+						$this->seminar
+					);
+			} else {
+				if ($this->isLoggedIn()) {
+					$isOkay = true;
+				} else {
+					$errorMessage = $this->getLoginLink(
+						$this->translate('message_notLoggedIn'),
+						$GLOBALS['TSFE']->id,
+						$this->seminar->getUid()
+					);
+				}
+			}
+		} elseif ($this->createRegistration(
+			intval($this->piVars['registration'])
+		)) {
+			if ($this->createSeminar($this->registration->getSeminar())) {
+				if ($this->seminar->isUnregistrationPossible()) {
+					$isOkay = true;
+				} else {
+					$errorMessage = $this->translate(
+						'message_unregistrationNotPossible'
+					);
+				}
+			}
+		} else {
+			switch ($this->piVars['action']) {
+				case 'unregister':
+					$errorMessage = $this->translate(
+						'message_notRegisteredForThisEvent'
+					);
+					break;
+				case 'register':
+					// The fall-through is intended.
+				default:
+					$errorMessage = $this->registrationManager->existsSeminarMessage(
+						$this->piVars['seminar']
+					);
+					break;
+			}
+		}
+
+		if ($isOkay) {
+			switch ($this->piVars['action']) {
+				case 'unregister':
+					$registrationForm = $this->createUnregistrationForm();
+					break;
+				case 'register':
+					// The fall-through is intended.
+				default:
+					$registrationForm = $this->createRegistrationForm();
+					break;
+			}
+		}
+
+		$result = $this->createRegistrationHeading($errorMessage);
+		$result .= $registrationForm;
+
+		return $result;
+	}
+
+	/**
+	 * Creates the registration page title and (if applicable) any error
+	 * messages. Data from the event will only be displayed if $this->seminar
+	 * is non-null.
+	 *
+	 * @param	string	error message to be displayed (may be empty if there is no error)
+	 *
+	 * @return	string	HTML code including the title and error message
+	 */
+	protected function createRegistrationHeading($errorMessage) {
+		$this->setMarker(
+			'registration',
+			$this->translate('label_registration')
+		);
+		$this->setMarker(
+			'title',
+			($this->seminar) ? $this->seminar->getTitleAndDate() : ''
+		);
+		$this->setMarker(
+			'uid',
+			($this->seminar) ? $this->seminar->getUid() : ''
+		);
+
+		if ($this->seminar && $this->seminar->hasAccreditationNumber()) {
+			$this->setMarker(
+				'accreditation_number',
+				($this->seminar) ? $this->seminar->getAccreditationNumber() : ''
+			);
+		} else {
+			$this->hideSubparts(
+				'accreditation_number',
+				'registration_wrapper'
+			);
+		}
+
+		if (empty($errorMessage)) {
+			$this->hideSubparts('error', 'wrapper');
+		} else {
+			$this->setMarker('error_text', $errorMessage);
+		}
+
+		return $this->getSubpart('REGISTRATION_HEAD');
+	}
+
+	/**
+	 * Creates the registration form.
+	 *
+	 * @return	string		HTML code for the form
+	 */
+	protected function createRegistrationForm() {
+		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registration_editor'
+		);
+		$registrationEditor = new $registrationEditorClassname($this);
+
+		$output = $registrationEditor->_render();
+		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
+
+		return $output;
+	}
+
+	/**
+	 * Enables/disables the display of data from event records on the
+	 * registration page depending on the config variable
+	 * "eventFieldsOnRegistrationPage".
+	 */
+	protected function toggleEventFieldsOnRegistrationPage() {
+		$fieldsToShow = array();
+		if ($this->hasConfValueString(
+				'eventFieldsOnRegistrationPage',
+				's_template_special'
+			)
+		) {
+			$fieldsToShow = explode(
+				',',
+				$this->getConfValueString(
+					'eventFieldsOnRegistrationPage',
+					's_template_special'
+				)
+			);
+		}
+
+		// First, we have a list of all fields that are removal candidates.
+		$fieldsToRemove = array(
+			'uid',
+			'title',
+			'accreditation_number',
+			'price_regular',
+			'price_special',
+			'vacancies',
+			'message'
+		);
+
+		// Now iterate over the fields to show and delete them from the list
+		// of items to remove.
+		foreach ($fieldsToShow as $currentField) {
+			$key = array_search(trim($currentField), $fieldsToRemove);
+			// $key will be false if the item has not been found.
+			// Zero, on the other hand, is a valid key.
+			if ($key !== false) {
+				unset($fieldsToRemove[$key]);
+			}
+		}
+
+		if (!empty($fieldsToRemove)) {
+			$this->hideSubparts(
+				implode(',', $fieldsToRemove),
+				'registration_wrapper'
+			);
+		}
+	}
+
+
+	///////////////////////////////////////
+	// Registrations list view functions.
+	///////////////////////////////////////
+
+	/**
+	 * Creates a list of registered participants for an event.
+	 * If there are no registrations yet, a localized message is displayed instead.
+	 *
+	 * @return	string		HTML code for the list
+	 */
+	protected function createRegistrationsListPage() {
+		$errorMessage = '';
+		$isOkay = false;
+
+		if ($this->createSeminar($this->piVars['seminar'])) {
+			// Okay, at least the seminar UID is valid so we can show the
+			// seminar title and date.
+			$this->setMarker('title', $this->seminar->getTitleAndDate());
+
+			// Lets warnings from the seminar bubble up to us.
+			$this->setErrorMessage($this->seminar->checkConfiguration(true));
+
+			if ($this->seminar->canViewRegistrationsList(
+					$this->whatToDisplay,
+					0,
+					0,
+					$this->getConfValueInteger(
+						'defaultEventVipsFeGroupID',
+						's_template_special')
+					)
+				) {
+				$isOkay = true;
+			} else {
+				$errorMessage = $this->seminar->canViewRegistrationsListMessage(
+					$this->whatToDisplay
+				);
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+					'Status: 403 Forbidden'
+				);
+			}
+		} else {
+			$errorMessage = $this->registrationManager->existsSeminarMessage(
+				$this->piVars['seminar']
+			);
+			$this->setMarker('title', '');
+			header('Status: 404 Not Found');
+		}
+
+		if ($isOkay) {
+			$this->hideSubparts('error', 'wrapper');
+			$this->createRegistrationsList();
+		} else {
+			$this->setMarker('error_text', $errorMessage);
+			$this->hideSubparts('registrations_list_message', 'wrapper');
+			$this->hideSubparts('registrations_list_body', 'wrapper');
+		}
+
+		$this->setMarker('backlink',
+			$this->cObj->getTypoLink(
+				$this->translate('label_back'),
+				$this->getConfValueInteger('listPID')
+			)
+		);
+
+		$result = $this->getSubpart('REGISTRATIONS_LIST_VIEW');
+
+		return $result;
+	}
+
+	/**
+	 * Creates the registration list (sorted by creation date) and fills in the
+	 * corresponding subparts.
+	 * If there are no registrations, a localized message is filled in instead.
+	 *
+	 * Before this function can be called, it must be ensured that $this->seminar
+	 * is a valid seminar object.
+	 */
+	protected function createRegistrationsList() {
+		$registrationBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registrationbag'
+		);
+		$registrationBag = new $registrationBagClassname(
+			SEMINARS_TABLE_ATTENDANCES.'.seminar='.$this->seminar->getUid()
+				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.registration_queue=0',
+			'',
+			'',
+			'crdate'
+		);
+
+		if ($registrationBag->getCurrent()) {
+			$result = '';
+			while ($currentRegistration = $registrationBag->getCurrent()) {
+				$this->setMarker('registrations_list_inneritem',
+					$currentRegistration->getUserDataAsHtml(
+						$this->getConfValueString(
+							'showFeUserFieldsInRegistrationsList',
+							's_template_special'
+						),
+						$this
+					)
+				);
+				$result .= $this->getSubpart(
+					'REGISTRATIONS_LIST_ITEM'
+				);
+				$registrationBag->getNext();
+			}
+			$this->hideSubparts('registrations_list_message', 'wrapper');
+			$this->setMarker('registrations_list_body', $result);
+		} else {
+			$this->hideSubparts('registrations_list_body', 'wrapper');
+			$this->setMarker(
+				'message_no_registrations',
+				$this->translate('message_noRegistrations')
+			);
+		}
+
+		// Lets warnings from the registration bag bubble up to us.
+		$this->setErrorMessage($registrationBag->checkConfiguration(true));
+	}
+
+
+	///////////////////////////////////
+	// Unregistration view functions.
+	///////////////////////////////////
+
+	/**
+	 * Creates the unregistration form.
+	 * $this->registration has to be created before this method is called.
+	 *
+	 * @return	string		HTML code for the form
+	 */
+	protected function createUnregistrationForm() {
+		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registration_editor'
+		);
+		$registrationEditor = new $registrationEditorClassname($this);
+
+		$result = $registrationEditor->_render();
+		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
+
+		return $result;
+	}
+
+
+	/////////////////////////////////
+	// Event editor view functions.
+	/////////////////////////////////
+
+	/**
+	 * Checks whether logged-in FE user has access to the event editor and then
+	 * either creates the event editor HTML (or an empty string if
+	 * $accessTestOnly is true) or a localized error message.
+	 *
+	 * @param	boolean		whether only the access to the event editor should be checked
+	 *
+	 * @return	string		HTML code for the event editor (or an error message if the FE user doesn't have access to the editor)
+	 */
+	protected function createEventEditor($accessTestOnly = false) {
+		$result = '';
+
+		$eventEditorClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_event_editor'
+		);
+		$eventEditor = new $eventEditorClassname($this);
+
+		if ($eventEditor->hasAccess()) {
+			if (!$accessTestOnly) {
+				$result = $eventEditor->_render();
+			}
+		} else {
+			$result = $eventEditor->hasAccessMessage();
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				'Status: 403 Forbidden'
+			);
+		}
+
+		return $result;
+	}
+
+
+	//////////////////////////////
+	// Countdown view functions.
+	//////////////////////////////
+
+	/**
+	 * Creates a countdown to the next upcoming event.
+	 *
+	 * @return	string		HTML code of the countdown or a message if no upcoming event found
+	 */
+	protected function createCountdown() {
+		$message = '';
+		$now = time();
+
+		// define the additional where clause for the database query
+		$additionalWhere = 'tx_seminars_seminars.cancelled=0'
+			.$this->enableFields(SEMINARS_TABLE_SEMINARS)
+			.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!='.SEMINARS_RECORD_TYPE_TOPIC
+			.' AND '.SEMINARS_TABLE_SEMINARS.'.begin_date>'.$now;
+
+		// query the database
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'uid',
+			SEMINARS_TABLE_SEMINARS,
+			$additionalWhere,
+			'',
+			'begin_date ASC',
+			'1'
+		);
+
+		if ($dbResult) {
+			if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
+				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+				if ($this->createSeminar($row['uid'])) {
+					// Lets warnings from the seminar bubble up to us.
+					$this->setErrorMessage(
+						$this->seminar->checkConfiguration(true)
+					);
+
+					// calculate the time left until the event starts
+					$eventStartTime = $this->seminar->getBeginDateAsTimestamp();
+					$timeLeft = $eventStartTime - $now;
+
+					$message = $this->createCountdownMessage($timeLeft);
+				}
+			} else {
+				// no event found - show a message
+				$message = $this->translate('message_countdown_noEventFound');
+			}
+		}
+
+		$this->setMarker('count_down_message', $message);
+		$result = $this->getSubpart('COUNTDOWN');
+
+		return $result;
+	}
+
+	/**
+	 * Returns a localized string representing an amount of seconds in words.
+	 * For example:
+	 * 150000 seconds -> "1 day"
+	 * 200000 seconds -> "2 days"
+	 * 50000 seconds -> "13 hours"
+	 * The function uses localized strings and also looks for proper usage of
+	 * singular/plural.
+	 *
+	 * @param	integer		the amount of seconds to rewrite into words
+	 *
+	 * @return	string		a localized string representing the time left until the event starts
+	 */
+	protected function createCountdownMessage($seconds) {
+		if ($seconds > 82800) {
+			// more than 23 hours left, show the time in days
+			$countdownValue = round($seconds / ONE_DAY);
+			if ($countdownValue > 1) {
+				$countdownText = $this->translate('countdown_days_plural');
+			} else {
+				$countdownText = $this->translate('countdown_days_singular');
+			}
+		} elseif ($seconds > 3540) {
+			// more than 59 minutes left, show the time in hours
+			$countdownValue = round($seconds / 3600);
+			if ($countdownValue > 1) {
+				$countdownText = $this->translate('countdown_hours_plural');
+			} else {
+				$countdownText = $this->translate('countdown_hours_singular');
+			}
+		} elseif ($seconds > 59) {
+			// more than 59 seconds left, show the time in minutes
+			$countdownValue = round($seconds / 60);
+			if ($countdownValue > 1) {
+				$countdownText = $this->translate('countdown_minutes_plural');
+			} else {
+				$countdownText = $this->translate('countdown_minutes_singular');
+			}
+		} else {
+			// less than 60 seconds left, show the time in seconds
+			$countdownValue = $seconds;
+			$countdownText = $this->translate('countdown_seconds_plural');
+		}
+
+		return sprintf(
+			$this->translate('message_countdown'),
+			$countdownValue,
+			$countdownText
+		);
+	}
+
+
+	/////////////////////////////
+	// Category list functions.
+	/////////////////////////////
+
 	/**
 	 * Creates a HTML list of categories.
 	 *
@@ -3237,34 +3264,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Creates a hyperlink with the title $title to the current list view,
-	 * limited to the category provided by the parameter $categoryUid.
-	 *
-	 * @param	integer		UID of the category to which the list view should
-	 * 						be limited, must be > 0
-	 * @param	string		title of the link, must not be empty
-	 *
-	 * @return	string		link to the list view limited to the given
-	 * 						category or an empty string if there is an error
-	 */
-	private function createLinkToListViewLimitedByCategory(
-		$categoryUid, $title
-	) {
-		if ($categoryUid <= 0) {
-			throw new Exception('$categoryUid must be > 0.');
-		}
-		if ($title == '') {
-			throw new Exception('$title must not be empty.');
-		}
-
-		return $this->cObj->getTypoLink(
-			$title,
-			$this->getConfValueInteger('listPID'),
-			array('tx_seminars_pi1[category]' => $categoryUid)
-		);
 	}
 }
 
