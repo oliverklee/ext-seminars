@@ -86,7 +86,7 @@ class tx_seminars_timeslotbag extends tx_seminars_bag {
 		$timeslotClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_timeslot'
 		);
-		$this->currentItem =& new $timeslotClassname(0, $this->dbResult);
+		$this->currentItem = new $timeslotClassname(0, $this->dbResult);
 		$this->checkCurrentItem();
 	}
 }

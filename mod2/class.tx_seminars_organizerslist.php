@@ -120,7 +120,7 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 		$organizerBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_organizerbag'
 		);
-		$organizerBag =& new $organizerBagClassname(
+		$organizerBag = new $organizerBagClassname(
 			$queryWhere,
 			$additionalTables,
 			'',
@@ -128,7 +128,7 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 			$limit
 		);
 
-		while ($this->organizer =& $organizerBag->getCurrent()) {
+		while ($this->organizer = $organizerBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB

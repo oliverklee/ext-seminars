@@ -85,7 +85,7 @@ class tx_seminars_organizerbag extends tx_seminars_bag {
 		$organizerClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_organizer'
 		);
-		$this->currentItem =& new $organizerClassname(0, $this->dbResult);
+		$this->currentItem = new $organizerClassname(0, $this->dbResult);
 		$this->checkCurrentItem();
 	}
 }

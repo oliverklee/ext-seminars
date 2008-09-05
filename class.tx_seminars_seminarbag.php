@@ -86,7 +86,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 */
 	protected function createItemFromDbResult() {
 		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$this->currentItem =& new $seminarClassname(0, $this->dbResult);
+		$this->currentItem = new $seminarClassname(0, $this->dbResult);
 		$this->checkCurrentItem();
 	}
 

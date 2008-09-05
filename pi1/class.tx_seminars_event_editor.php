@@ -430,7 +430,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 				$seminarClassname = t3lib_div::makeInstanceClassName(
 					'tx_seminars_seminar'
 				);
-				$seminar =& new $seminarClassname($seminarUid);
+				$seminar = new $seminarClassname($seminarUid);
 				$isOkay = $seminar->isOwnerFeUser();
 				unset($seminar);
 			} else {

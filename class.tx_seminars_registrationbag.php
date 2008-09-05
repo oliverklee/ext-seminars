@@ -64,7 +64,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1
 	) {
-		$this->cObj =& t3lib_div::makeInstance('tslib_cObj');
+		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
 
 		parent::__construct(
 			SEMINARS_TABLE_ATTENDANCES,
@@ -90,7 +90,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 		$registrationClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registration'
 		);
-		$this->currentItem =& new $registrationClassname(
+		$this->currentItem = new $registrationClassname(
 			$this->cObj,
 			$this->dbResult
 		);

@@ -893,7 +893,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @access	protected
 	 */
 	function getKeyOfSelectedPrice() {
-		$dataHandler =& $this->oForm->oDataHandler;
+		$dataHandler = $this->oForm->oDataHandler;
 
 		$availablePrices = $this->seminar->getAvailablePrices();
 		$selectedPrice = $dataHandler->_getThisFormData('price');
@@ -918,7 +918,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function getTotalPriceWithUnit() {
 		$result = '';
 
-		$dataHandler =& $this->oForm->oDataHandler;
+		$dataHandler = $this->oForm->oDataHandler;
 		$seats = intval($dataHandler->_getThisFormData('seats'));
 
 		// Only show the total price if the seats selector is displayed
@@ -958,7 +958,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	function getSelectedPaymentMethod() {
 		$result = '';
 
-		$dataHandler =& $this->oForm->oDataHandler;
+		$dataHandler = $this->oForm->oDataHandler;
 
 		$availablePaymentMethods = $this->populateListPaymentMethods(
 			array()
@@ -1476,7 +1476,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 */
 	function initStaticInfo() {
 		if (!$this->staticInfo) {
-			$this->staticInfo =& t3lib_div::makeInstance('tx_staticinfotables_pi1');
+			$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
 			$this->staticInfo->init();
 		}
 	}

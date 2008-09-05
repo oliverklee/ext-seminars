@@ -172,11 +172,11 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		$registrationBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registrationbag'
 		);
-		$registrationBag =& new $registrationBagClassname(
+		$registrationBag = new $registrationBagClassname(
 			'seminar='.$eventUid.$additionalWhere
 		);
 
-		while ($currentRegistration =& $registrationBag->getCurrent()) {
+		while ($currentRegistration = $registrationBag->getCurrent()) {
 			$userData = $this->retrieveData(
 				$currentRegistration,
 				'getUserData',
@@ -283,7 +283,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		$builder->setSourcePages($pid);
 		$seminarBag = $builder->build();
 
-		while ($currentSeminar =& $seminarBag->getCurrent()) {
+		while ($currentSeminar = $seminarBag->getCurrent()) {
 			$seminarData = $this->retrieveData(
 				$currentSeminar,
 				'getEventData',
@@ -333,7 +333,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 * @return	array		the data for the keys provided in $keys
 	 *						(may be empty)
 	 */
-	protected function retrieveData(&$dataSupplier, $supplierFunction, $keys) {
+	protected function retrieveData($dataSupplier, $supplierFunction, $keys) {
 		$result = array();
 
 		if (!empty($keys) && method_exists($dataSupplier, $supplierFunction)) {

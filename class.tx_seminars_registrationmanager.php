@@ -486,7 +486,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		$registrationClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registration'
 		);
-		$this->registration =& new $registrationClassname($plugin->cObj);
+		$this->registration = new $registrationClassname($plugin->cObj);
 		$this->registration->setRegistrationData(
 			$seminar,
 			$this->getFeUserUid(),
@@ -536,10 +536,10 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			);
 
 			if ($dbResult) {
-				$registrationClassname =& t3lib_div::makeInstanceClassname(
+				$registrationClassname = t3lib_div::makeInstanceClassname(
 					'tx_seminars_registration'
 				);
-				$this->registration =& new $registrationClassname(
+				$this->registration = new $registrationClassname(
 					$plugin->cObj,
 					$dbResult
 				);
@@ -583,10 +583,10 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		if ($seminar->hasVacancies()) {
 			$vacancies = $seminar->getVacancies();
 
-			$registrationBagClassname =& t3lib_div::makeInstanceClassname(
+			$registrationBagClassname = t3lib_div::makeInstanceClassname(
 				'tx_seminars_registrationbag'
 			);
-			$registrationBag =& new $registrationBagClassname(
+			$registrationBag = new $registrationBagClassname(
 				'seminar='.$seminar->getUid()
 					.' AND seats<='.$seminar->getVacancies()
 					.' AND registration_queue=1',
@@ -595,7 +595,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 				'crdate ASC'
 			);
 
-			while ($registration =& $registrationBag->getCurrent()
+			while ($registration = $registrationBag->getCurrent()
 				&& ($vacancies > 0)
 			) {
 				if ($registration->getSeats() <= $vacancies) {
