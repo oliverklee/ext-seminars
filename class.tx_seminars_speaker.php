@@ -84,7 +84,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 *
 	 * @return	string			our description (or '' if there is an error)
 	 */
-	public function getDescription(tslib_pibase &$plugin) {
+	public function getDescription(tslib_pibase $plugin) {
 		return $plugin->pi_RTEcssText(
 			$this->getRecordPropertyString('description')
 		);

@@ -103,14 +103,14 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->isOk()) {
 			$seminarUid = $this->recordData['seminar'];
 			if (isset($cachedSeminars[$seminarUid])) {
-				$this->seminar =& $cachedSeminars[$seminarUid];
+				$this->seminar = $cachedSeminars[$seminarUid];
 			} else {
 				/** Name of the seminar class in case someone subclasses it. */
 				$seminarClassname = t3lib_div::makeInstanceClassName(
 					'tx_seminars_seminar'
 				);
 				$this->seminar = new $seminarClassname($seminarUid);
-				$cachedSeminars[$seminarUid] =& $this->seminar;
+				$cachedSeminars[$seminarUid] = $this->seminar;
 			}
 
 			// Stores the user data in $this->userData.

@@ -136,7 +136,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 				$configurationCheckClassname = t3lib_div::makeInstanceClassName(
 					'tx_seminars_configcheck'
 				);
-				$this->configurationCheck =& new $configurationCheckClassname($this);
+				$this->configurationCheck = new $configurationCheckClassname($this);
 			} else {
 				$this->configurationCheck = null;
 			}
@@ -611,7 +611,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 
 		if (!$pageCache[0]) {
 			if ($GLOBALS['TSFE'] && $GLOBALS['TSFE']->sys_page) {
-				$pageCache[0] =& $GLOBALS['TSFE']->sys_page;
+				$pageCache[0] = $GLOBALS['TSFE']->sys_page;
 			} else {
 				$pageCache[0] = t3lib_div::makeInstance('t3lib_pageSelect');
 			}

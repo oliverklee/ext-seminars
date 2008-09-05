@@ -254,7 +254,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$builder->setSourcePages(intval($this->id));
 		$seminarBag = $builder->build();
 
-		while ($currentSeminar =& $seminarBag->getCurrent()) {
+		while ($currentSeminar = $seminarBag->getCurrent()) {
 			$result .= '<h4>'.$currentSeminar->getTitleAndDate().'</h4>';
 			$seminarQuery = SEMINARS_TABLE_ATTENDANCES.'.seminar='
 				.$currentSeminar->getUid();
@@ -302,7 +302,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$registrationBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registrationbag'
 		);
-		$registrationBag =& new $registrationBagClassname(
+		$registrationBag = new $registrationBagClassname(
 			$queryParameters,
 				'',
 				'',
@@ -310,7 +310,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 			);
 
 		if ($registrationBag->getCurrent()) {
-			while ($currentRegistration =& $registrationBag->getCurrent()) {
+			while ($currentRegistration = $registrationBag->getCurrent()) {
 				$currentEmail = htmlspecialchars(
 					$currentRegistration->getUserNameAndEmail()
 				);

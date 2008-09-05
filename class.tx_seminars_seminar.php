@@ -95,7 +95,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		// For date records: Create a reference to the topic record.
 		if ($this->isEventDate()) {
-			$this->topic =& $this->retrieveTopic();
+			$this->topic = $this->retrieveTopic();
 			// To avoid infinite loops, null out $this->topic if it is a date
 			// record, too. Date records that fail the check isTopicOkay()
 			// are used as a complete event record.
@@ -955,9 +955,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = '';
-		$speakerBag =& $this->getSpeakerBag($speakerRelation);
+		$speakerBag = $this->getSpeakerBag($speakerRelation);
 
-		while ($speaker =& $speakerBag->getCurrent()) {
+		while ($speaker = $speakerBag->getCurrent()) {
 			$name = $speaker->getTitle();
 			if ($speaker->hasOrganization()) {
 				$name .= ', '.$speaker->getOrganization();
@@ -1010,9 +1010,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = '';
-		$speakerBag =& $this->getSpeakerBag($speakerRelation);
+		$speakerBag = $this->getSpeakerBag($speakerRelation);
 
-		while ($speaker =& $speakerBag->getCurrent()) {
+		while ($speaker = $speakerBag->getCurrent()) {
 			$result .= $speaker->getTitle();
 			if ($speaker->hasOrganization()) {
 				$result .= ', '.$speaker->getOrganization();
@@ -1050,9 +1050,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$speakerBag =& $this->getSpeakerBag($speakerRelation);
+		$speakerBag = $this->getSpeakerBag($speakerRelation);
 
-		while ($speaker =& $speakerBag->getCurrent()) {
+		while ($speaker = $speakerBag->getCurrent()) {
 			$result[] = $speaker->getTitle();
 			$speakerBag->getNext();
 		}
@@ -2380,9 +2380,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag =& $this->getOrganizerBag();
+		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer =& $organizerBag->getCurrent()) {
+		while ($organizer = $organizerBag->getCurrent()) {
 			$result[] = $plugin->cObj->getTypoLink(
 				$organizer->getTitle(),
 				$organizer->getHomepage(),
@@ -2407,9 +2407,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag =& $this->getOrganizerBag();
+		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer =& $organizerBag->getCurrent()) {
+		while ($organizer = $organizerBag->getCurrent()) {
 			$result[] = $organizer->getTitle()
 				.($organizer->hasHomepage() ? ', '.$organizer->getHomepage() : '');
 			$organizerBag->getNext();
@@ -2432,9 +2432,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag =& $this->getOrganizerBag();
+		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer =& $organizerBag->getCurrent()) {
+		while ($organizer = $organizerBag->getCurrent()) {
 			$result[] = '"'.$organizer->getTitle().'" <'.$organizer->getEmail().'>';
 			$organizerBag->getNext();
 		}
@@ -2454,9 +2454,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag =& $this->getOrganizerBag();
+		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer =& $organizerBag->getCurrent()) {
+		while ($organizer = $organizerBag->getCurrent()) {
 			$result[] = $organizer->getEmail();
 			$organizerBag->getNext();
 		}
@@ -2475,9 +2475,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag =& $this->getOrganizerBag();
+		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer =& $organizerBag->getCurrent()) {
+		while ($organizer = $organizerBag->getCurrent()) {
 			$result[] = $organizer->getEmailFooter();
 			$organizerBag->getNext();
 		}
@@ -2538,7 +2538,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM
 		);
 
-		while ($organizer =& $organizerBag->getCurrent()) {
+		while ($organizer = $organizerBag->getCurrent()) {
 			$result[] = $plugin->cObj->getTypoLink(
 				$organizer->getTitle(),
 				$organizer->getHomepage(),
@@ -3107,10 +3107,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	object		a reference to the topic object (will be null if
 	 * 						an error has occured)
-	 *
-	 * @access	private
 	 */
-	function &retrieveTopic() {
+	private function retrieveTopic() {
 		$result = null;
 
 		// Check whether this event has an topic set.
@@ -3123,7 +3121,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$seminarClassname = t3lib_div::makeInstanceClassName(
 					'tx_seminars_seminar'
 				);
-				$result =& new $seminarClassname(
+				$result = new $seminarClassname(
 					$this->getRecordPropertyInteger('topic')
 				);
 			}
@@ -3964,7 +3962,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$seminarBagClassname = t3lib_div::makeInstanceClassName(
 				'tx_seminars_seminarbag'
 			);
-			$seminarBag =& new $seminarBagClassname(
+			$seminarBag = new $seminarBagClassname(
 				$queryWhere,
 				$additionalTables
 			);
@@ -4323,7 +4321,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(
 			'tx_seminars_timeslotbag'
 		);
-		$timeSlotBag =& new $timeSlotBagClassname(
+		$timeSlotBag = new $timeSlotBagClassname(
 			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
 				.' AND '.SEMINARS_TABLE_TIME_SLOTS.'.place>0',
 			'',
@@ -4340,7 +4338,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// Creates an array with all place UIDs which should be related to this
 		// event.
 		$placesOfTimeSlots = array();
-		while ($timeSlot =& $timeSlotBag->getCurrent()) {
+		while ($timeSlot = $timeSlotBag->getCurrent()) {
 			if ($timeSlot->hasPlace()) {
 				$placesOfTimeSlots[] = $timeSlot->getPlace();
 			}

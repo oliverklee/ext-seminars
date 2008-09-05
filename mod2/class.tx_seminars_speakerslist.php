@@ -123,7 +123,7 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 		$speakerBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_speakerbag'
 		);
-		$speakerBag =& new $speakerBagClassname(
+		$speakerBag = new $speakerBagClassname(
 			$queryWhere,
 			$additionalTables,
 			'',
@@ -131,7 +131,7 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 			$limit
 		);
 
-		while ($this->speaker =& $speakerBag->getCurrent()) {
+		while ($this->speaker = $speakerBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB

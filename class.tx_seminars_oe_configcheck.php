@@ -74,10 +74,10 @@ class tx_seminars_oe_configcheck {
 	 *
 	 * @param	object		the object that shall be checked for configuration problems, must be of a subclass of tx_seminars_dbplugin
 	 */
-	function tx_seminars_oe_configcheck(&$objectToCheck) {
+	function tx_seminars_oe_configcheck($objectToCheck) {
 		if ($objectToCheck
 			&& is_subclass_of($objectToCheck, 'tx_seminars_dbplugin')) {
-			$this->objectToCheck =& $objectToCheck;
+			$this->objectToCheck = $objectToCheck;
 			$this->className = get_class($this->objectToCheck);
 
 			$this->errorText = '';

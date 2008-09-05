@@ -221,7 +221,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 				0
 			);
 
-			while ($this->seminar =& $seminarBag->getCurrent()) {
+			while ($this->seminar = $seminarBag->getCurrent()) {
 				$uid = $this->seminar->getUid();
 
 				// We can only set the "previous" and "next" elements in the
@@ -261,7 +261,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 			$seminarBag->resetToFirst();
 		}
 
-		while ($this->seminar =& $seminarBag->getCurrent()) {
+		while ($this->seminar = $seminarBag->getCurrent()) {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB
@@ -344,7 +344,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 
 		static $accessChecker = null;
 		if (!$accessChecker) {
-			$accessChecker =& t3lib_div::makeInstance('tx_seminars_pi2');
+			$accessChecker = t3lib_div::makeInstance('tx_seminars_pi2');
 			$accessChecker->init();
 		}
 

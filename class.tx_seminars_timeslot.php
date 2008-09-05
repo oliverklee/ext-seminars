@@ -93,9 +93,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 */
 	function getSpeakersShortCommaSeparated() {
 		$result = array();
-		$speakerBag =& $this->getSpeakerBag();
+		$speakerBag = $this->getSpeakerBag();
 
-		while ($speaker =& $speakerBag->getCurrent()) {
+		while ($speaker = $speakerBag->getCurrent()) {
 			$result[] = $speaker->getTitle();
 			$speakerBag->getNext();
 		}

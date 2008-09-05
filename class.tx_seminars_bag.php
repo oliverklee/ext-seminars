@@ -183,7 +183,7 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 			// overwritten immediately anyway.
 		}
 
-		$this->dbResult =& $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$this->dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			$this->dbTableName . '.*',
 			$this->dbTableName . $this->additionalTableNames,
 			$this->queryParameters . $this->enabledFieldsQuery,

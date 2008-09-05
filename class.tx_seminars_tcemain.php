@@ -146,7 +146,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 		$timeslotClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_timeslot'
 		);
-		$timeslot =& new $timeslotClassname($uid, null);
+		$timeslot = new $timeslotClassname($uid, null);
 
 		if ($timeslot->isOk()) {
 			// Gets an associative array of fields that need
@@ -171,7 +171,7 @@ class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
 		$seminarClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_seminar'
 		);
-		$seminar =& new $seminarClassname($uid, null, true);
+		$seminar = new $seminarClassname($uid, null, true);
 
 		if ($seminar->isOk()) {
 			// Gets an associative array of fields that need to be updated in

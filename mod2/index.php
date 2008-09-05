@@ -252,7 +252,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		$configGetterClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_configgetter'
 		);
-		$configGetter =& new $configGetterClassname();
+		$configGetter = new $configGetterClassname();
 		$configGetter->init();
 
 		$result = $configGetter->getConfValueBoolean('isStaticTemplateLoaded');

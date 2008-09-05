@@ -613,7 +613,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Creates the seminar or registration bag for the list view (with
 			// all the filtering applied).
-			$seminarOrRegistrationBag =& $this->initListView($whatToDisplay);
+			$seminarOrRegistrationBag = $this->initListView($whatToDisplay);
 
 			if ($this->internal['res_count']) {
 				$result .= $this->createListTable($seminarOrRegistrationBag, $whatToDisplay);
@@ -816,10 +816,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		while ($currentItem = $seminarOrRegistrationBag->getCurrent()) {
 			if ($whatToDisplay == 'my_events') {
-				$this->registration =& $currentItem;
-				$this->seminar =& $this->registration->getSeminarObject();
+				$this->registration = $currentItem;
+				$this->seminar = $this->registration->getSeminarObject();
 			} else {
-				$this->seminar =& $currentItem;
+				$this->seminar = $currentItem;
 			}
 
 			$result .= $this->createListRow($rowCounter, $whatToDisplay);
@@ -846,7 +846,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @return	object		a seminar bag or a registration bag containing the
 	 * 						seminars or registrations for the list view
 	 */
-	protected function &initListView($whatToDisplay = '', $additionalQueryParameters = '') {
+	protected function initListView($whatToDisplay = '', $additionalQueryParameters = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
 			$this->conf['pidList'] = $this->getConfValueString('pages');
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
@@ -1543,7 +1543,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createEventsOnNextDayList($additionalQueryParameters) {
 		$result = '';
 
-		$seminarBag =& $this->initListView(
+		$seminarBag = $this->initListView(
 			'events_next_day',
 			$additionalQueryParameters
 		);
@@ -1582,7 +1582,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	function createOtherDatesList() {
 		$result = '';
 
-		$seminarBag =& $this->initListView('other_dates');
+		$seminarBag = $this->initListView('other_dates');
 
 		if ($this->internal['res_count']) {
 			// If we are on a topic record, overwrite the label with an
@@ -1756,7 +1756,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			);
 			/** Name of the registration class in case someone subclasses it. */
 			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-			$this->registration =& new $registrationClassname($this->cObj, $dbResult);
+			$this->registration = new $registrationClassname($this->cObj, $dbResult);
 			$result = $this->registration->isOk();
 			if (!$result) {
 				$this->registration = null;
