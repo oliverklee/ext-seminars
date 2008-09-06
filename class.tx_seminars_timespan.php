@@ -37,9 +37,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
-	/** same as class name */
+	/** @var	string		same as class name */
 	public $prefixId = 'tx_seminars_timespan';
-	/**  path to this script relative to the extension dir */
+	/** @var	string		path to this script relative to the extension dir */
 	public $scriptRelPath = 'class.tx_seminars_timespan.php';
 
 	/**
