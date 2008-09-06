@@ -2,7 +2,7 @@
 - [#1137] Change: Change =& new to = new and remove the & from before function names
 
 0.6.2 (released 2008-09-04)
-- [#2156] Add a Dutch manual, thanks to Nico Nico Deblauwe
+- [#2156] Add a Dutch manual, thanks to Nico Deblauwe
 - [#1945] Change: Some code clean-up
 - [#2151] Fix: tx_seminars_templatehelper::getSubpartForCallback has to be protected in PHP 5.3
 - [#2145] Change: Use an array and a foreach loop in createListHeader()
