@@ -22,15 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Testcase for the eventEditorChild class in the 'seminars' extensions.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- *
- * @author		Niels Pardon <mail@niels-pardon.de>
- */
-
 require_once(PATH_tslib . 'class.tslib_content.php');
 require_once(PATH_tslib . 'class.tslib_feuserauth.php');
 require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
@@ -41,6 +32,14 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php'
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
+/**
+ * Testcase for the eventEditorChild class in the 'seminars' extensions.
+ *
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ *
+ * @author		Niels Pardon <mail@niels-pardon.de>
+ */
 class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	private $fixture;
 
