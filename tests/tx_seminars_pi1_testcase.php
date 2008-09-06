@@ -406,6 +406,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()
 		);
+		$this->fixture->setConfigurationValue(
+			'hideFields',
+			'eventsnextday'
+		);
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -445,7 +449,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testOtherDatesListInSingleViewDoesContainsSingleEventRecordWithTopicSet() {
+	public function testOtherDatesListInSingleViewDoesNotContainSingleEventRecordWithTopicSet() {
 		$this->fixture->setConfigurationValue(
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()

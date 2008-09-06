@@ -227,10 +227,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 						be empty
 	 *
 	 * @return	string		HTML code for the link to the event details page
-	 *
-	 * @access	public
 	 */
-	function getLinkedFieldValue(tslib_pibase $plugin, $fieldName) {
+	public function getLinkedFieldValue(tslib_pibase $plugin, $fieldName) {
 		$linkedText = '';
 
 		// Certain fields can be retrieved 1:1 from the database, some need
@@ -244,9 +242,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		return $plugin->cObj->getTypoLink(
+		return $plugin->cObj->typoLink(
 			$linkedText,
-			$this->getDetailedViewUrl($plugin, false)
+			array(
+				'parameter' => $plugin->getConfValueInteger('detailPID'),
+				'additionalParams' => t3lib_div::implodeArrayForUrl(
+					'tx_seminars_pi1',
+					array('showUid' => $this->getUid()),
+					'',
+					false,
+					true
+				),
+			)
 		);
 	}
 
