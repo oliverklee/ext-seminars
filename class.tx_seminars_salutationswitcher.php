@@ -22,23 +22,22 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+// In the back end, PATH_tslib isn't defined yet.
+if (!defined('PATH_tslib')) {
+	define('PATH_tslib', t3lib_extMgm::extPath('cms') . 'tslib/');
+}
+require_once(PATH_tslib . 'class.tslib_pibase.php');
+
 /**
  * Class 'tx_seminars_salutationswitcher' for the 'seminars' extension
- * (taken from the 'salutationswitcher' extension).
+ * (taken from the 'oelib' extension).
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-// In case we're on the back end, PATH_tslib isn't defined yet.
-if (!defined('PATH_tslib')) {
-	define('PATH_tslib', t3lib_extMgm::extPath('cms').'tslib/');
-}
-require_once(PATH_tslib.'class.tslib_pibase.php');
-
-class tx_seminars_salutationswitcher extends tslib_pibase {
+abstract class tx_seminars_salutationswitcher extends tslib_pibase {
 	/**
 	  * Pointer to alternative fall-back language to use. This is non-empty so
 	  * we always have a valid fallback language even if it hasn't been

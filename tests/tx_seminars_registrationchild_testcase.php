@@ -45,6 +45,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 	public function setUp() {
 		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
 
 		$this->seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS

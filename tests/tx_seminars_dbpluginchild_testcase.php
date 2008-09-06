@@ -31,18 +31,24 @@
  * @author		Mario Rimann <typo3-coding@rimann.org>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'tests/fixtures/class.tx_seminars_dbpluginchild.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_dbpluginchild.php');
 
 class tx_seminars_dbpluginchild_testcase extends tx_phpunit_testcase {
+	/** @var	tx_seminars_dbpluginchild */
 	private $fixture;
+	/** @var	tx_oelib_testingFramework */
+	private $testingFramework;
 
-	protected function setUp() {
+	public function setUp() {
+		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
 		$this->fixture = new tx_seminars_dbpluginchild(array());
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
+	public function tearDown() {
+		$this->testingFramework->cleanUp();
+
+		unset($this->fixture, $this->testingFramework);
 	}
 
 

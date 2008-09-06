@@ -22,15 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Testcase for the registrationEditorChild class in the 'seminars' extensions.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- *
- * @author		Niels Pardon <mail@niels-pardon.de>
- */
-
 require_once(PATH_tslib . 'class.tslib_content.php');
 require_once(PATH_tslib . 'class.tslib_feuserauth.php');
 require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
@@ -41,6 +32,14 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php'
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
+/**
+ * Testcase for the registrationEditorChild class in the 'seminars' extensions.
+ *
+ * @package		TYPO3
+ * @subpackage	tx_seminars
+ *
+ * @author		Niels Pardon <mail@niels-pardon.de>
+ */
 class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	private $fixture;
 
@@ -54,21 +53,15 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	private $pi1;
 
 	public function setUp() {
-		// Bolsters up the fake front end.
-		$GLOBALS['TSFE']->tmpl = t3lib_div::makeInstance('t3lib_tsparser_ext');
-		$GLOBALS['TSFE']->tmpl->flattenSetup(array(), '', false);
-		$GLOBALS['TSFE']->tmpl->init();
-		$GLOBALS['TSFE']->tmpl->getCurrentPageData();
-
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+ 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
+		$this->testingFramework->createFakeFrontEnd($this->frontEndPageUid);
 
 		$seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 
-		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
 		$this->pi1 = new tx_seminars_pi1();
-		$this->pi1->fakeFrontEnd();
 		$this->pi1->createSeminar($seminarUid);
 		$this->pi1->init(
 			array(

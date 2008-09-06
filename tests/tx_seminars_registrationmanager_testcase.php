@@ -57,13 +57,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	private $pi1 = null;
 
 	protected function setUp() {
-		$GLOBALS['TSFE']->tmpl = t3lib_div::makeInstance('t3lib_tsparser_ext');
-		$GLOBALS['TSFE']->tmpl->flattenSetup(array(), '', false);
-		$GLOBALS['TSFE']->tmpl->init();
-		$GLOBALS['TSFE']->tmpl->getCurrentPageData();
-
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
 
 		$this->seminar = new tx_seminars_seminar(
 			$this->testingFramework->createRecord(
@@ -82,6 +78,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
+
 		unset(
 			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework
 		);
@@ -104,7 +101,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			= $this->testingFramework->createFrontEndPage();
 
 		$this->pi1 = new tx_seminars_pi1();
-		$this->pi1->fakeFrontend();
 
 		$this->pi1->init(
 			array(

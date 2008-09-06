@@ -316,6 +316,10 @@ class tx_seminars_oe_configcheck {
 	 * @access	protected
 	 */
 	function checkTemplateFile($canUseFlexforms = false) {
+		if (TYPO3_MODE == 'BE') {
+			return;
+		}
+
 		$this->checkForNonEmptyString(
 			'templateFile',
 			$canUseFlexforms,
