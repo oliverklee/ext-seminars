@@ -293,6 +293,12 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsVipListPid();
 		$this->checkDefaultEventVipsFeGroupID();
 		$this->checkMayManagersEditTheirEvents();
+
+		if ($this->objectToCheck->getConfValueBoolean(
+			'mayManagersEditTheirEvents', 's_listView'
+		)) {
+			$this->checkEventEditorPID();
+		}
 	}
 
 	/**
