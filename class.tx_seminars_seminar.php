@@ -2788,10 +2788,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if the user is a VIP for this seminar,
 	 * 						false otherwise.
-	 *
-	 * @access	public
 	 */
-	function isUserVip($feUserUid, $defaultEventVipsFeGroupID) {
+	public function isUserVip($feUserUid, $defaultEventVipsFeGroupID) {
 		$result = false;
 		$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
 				$defaultEventVipsFeGroupID
