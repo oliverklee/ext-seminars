@@ -28,6 +28,7 @@ require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationmanager.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
@@ -142,6 +143,26 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->loginFrontEndUser($feUserUid);
 	}
 
+	/**
+	 * Creates a FE user, adds him/her as a VIP to the seminar with the UID in
+	 * $this->seminarUid and logs him/her in.
+	 */
+	private function createLogInAndAddFeUserAsVip() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_VIPS_MM,
+			$this->seminarUid,
+			$feUserUid
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('vips' => 1)
+		);
+		$this->testingFramework->loginFrontEndUser($feUserUid);
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -204,6 +225,35 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->countRecords(
 				SEMINARS_TABLE_TARGET_GROUPS_MM,
 				'uid_local='.$this->seminarUid
+			)
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsVipCreatesFeUser() {
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords('fe_users')
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsVipLogsInFeUser() {
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertTrue(
+			$this->fixture->isLoggedIn()
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsVipAddsUserAsVip() {
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SEMINARS,
+				'uid=' . $this->seminarUid . ' AND vips=1'
 			)
 		);
 	}
@@ -2764,6 +2814,33 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			'Event with place',
 			$result
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////////////////
+	// Tests concerning mayManagersEditTheirEvents in the "my vip events" list view
+	/////////////////////////////////////////////////////////////////////////////
+
+	public function testEditSubpartWithMayManagersEditTheirEventsSetToFalseIsHiddenInMyVipEventsListView() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 0);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
+		);
+	}
+
+	public function testEditSubpartWithMayManagersEditTheirEventsSetToTrueIsVisibleInMyVipEventsListView() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 1);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
 		);
 	}
 }

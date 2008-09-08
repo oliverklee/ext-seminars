@@ -1601,12 +1601,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->hideSubparts('list_registrations', 'LISTITEM_WRAPPER');
 		}
 
-		// Hide the edit column if the list to display is not the
-		// "events which I have entered" list.
-		if ($whatToDisplay != 'my_entered_events') {
-			$this->hideSubparts('edit', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('edit', 'LISTITEM_WRAPPER');
-		}
+		$this->hideEditColumnIfNecessary($whatToDisplay);
 
 		if (!isset($this->piVars['pointer'])) {
 			$this->piVars['pointer'] = 0;
@@ -2706,6 +2701,30 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'options_'.$optionBoxName,
 			$this->getSubpart('OPTIONS_BOX')
 		);
+	}
+
+	/**
+	 * Hides the edit column if necessary.
+	 *
+	 * It is necessary if the list to display is not the "events which I have
+	 * entered" list and is not the "my vip events" list and VIPs are not
+	 * allowed to edit their events.
+	 *
+	 * @param	string		a string selecting the flavor of list view: either
+	 * 						an empty string (for the default list view), the
+	 * 						value from "what_to_display" or "other_dates"
+	 */
+	private function hideEditColumnIfNecessary($whatToDisplay) {
+		$mayManagersEditTheirEvents = $this->getConfValueBoolean(
+			'mayManagersEditTheirEvents', 's_listView'
+		);
+
+		if ($whatToDisplay != 'my_entered_events'
+			&& !($whatToDisplay == 'my_vip_events' && $mayManagersEditTheirEvents)
+		) {
+			$this->hideSubparts('edit', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('edit', 'LISTITEM_WRAPPER');
+		}
 	}
 
 

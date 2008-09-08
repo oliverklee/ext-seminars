@@ -372,10 +372,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	 * Checks whether a front-end user is logged in.
 	 *
 	 * @return	boolean		true if a user is logged in, false otherwise
-	 *
-	 * @access	public
 	 */
-	function isLoggedIn() {
+	public function isLoggedIn() {
 		return (
 			(boolean) $GLOBALS['TSFE'])
 			&& ((boolean) $GLOBALS['TSFE']->loginUser

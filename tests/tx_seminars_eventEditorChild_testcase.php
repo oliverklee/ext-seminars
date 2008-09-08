@@ -52,6 +52,11 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	/** the instance of tx_seminars_pi1*/
 	private $pi1;
 
+	/**
+	 * @var	integer		the UID of a seminar to which the fixture relates
+	 */
+	private $seminarUid;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
@@ -74,6 +79,198 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////
+	// Utility functions.
+	///////////////////////
+
+	/**
+	 * Creates a FE user, adds him/her as a VIP to the seminar with the UID in
+	 * $this->seminarUid and logs him/her in.
+	 */
+	private function createLogInAndAddFeUserAsVip() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_VIPS_MM,
+			$this->seminarUid,
+			$feUserUid
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('vips' => 1)
+		);
+		$this->testingFramework->loginFrontEndUser($feUserUid);
+	}
+
+	/**
+	 * Creates a FE user, adds his/her FE user group as a default VIP group via
+	 * TS setup and logs him/her in.
+	 */
+	private function createLogInAndAddFeUserAsDefaultVip() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$this->pi1->setConfigurationValue(
+			'defaultEventVipsFeGroupID', $feUserGroupUid
+		);
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->loginFrontEndUser($feUserUid);
+	}
+
+	/**
+	 * Creates a FE user, adds him/her as a owner to the seminar with the UID in
+	 * $this->seminarUid and logs him/her in.
+	 */
+	private function createLogInAndAddFeUserAsOwner() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $feUserUid)
+		);
+		$this->testingFramework->loginFrontEndUser($feUserUid);
+	}
+
+	/**
+	 * Creates a FE user and logs him/her in.
+	 */
+	private function createAndLogInFeUser() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->loginFrontEndUser($feUserUid);
+	}
+
+
+	/////////////////////////////////////
+	// Tests for the utility functions.
+	/////////////////////////////////////
+
+	public function testCreateLogInAndAddFeUserAsVipCreatesFeUser() {
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords('fe_users')
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsVipLogsInFeUser() {
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertTrue(
+			$this->fixture->isLoggedIn()
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsVipAddsUserAsVip() {
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SEMINARS,
+				'uid=' . $this->seminarUid . ' AND vips=1'
+			)
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsOwnerCreatesFeUser() {
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->createLogInAndAddFeUserAsOwner();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords('fe_users')
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsOwnerLogsInFeUser() {
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->createLogInAndAddFeUserAsOwner();
+
+		$this->assertTrue(
+			$this->fixture->isLoggedIn()
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsOwnerAddsUserAsOwner() {
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->createLogInAndAddFeUserAsOwner();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_SEMINARS,
+				'uid=' . $this->seminarUid . ' AND owner_feuser>0'
+			)
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsDefaultVipCreatesFeUser() {
+		$this->createLogInAndAddFeUserAsDefaultVip();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords('fe_users')
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsDefaultVipLogsInFeUser() {
+		$this->createLogInAndAddFeUserAsDefaultVip();
+
+		$this->assertTrue(
+			$this->fixture->isLoggedIn()
+		);
+	}
+
+	public function testCreateLogInAndAddFeUserAsDefaultVipAddsFeUserAsDefaultVip() {
+		$this->createLogInAndAddFeUserAsDefaultVip();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				'fe_users',
+				'uid=' . $this->fixture->getFeUserUid() .
+					' AND usergroup=' . $this->pi1->getConfValueInteger(
+						'defaultEventVipsFeGroupID'
+					)
+			)
+		);
+	}
+
+	public function testCreateAndLogInFeUserCreatesFeUser() {
+		$this->createAndLogInFeUser();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords('fe_users')
+		);
+	}
+
+	public function testCreateAndLoginFeUserLogsInFeUser() {
+		$this->createAndLogInFeUser();
+
+		$this->assertTrue(
+			$this->fixture->isLoggedIn()
+		);
+	}
+
+
 	///////////////////////////////////////////////////////
 	// Tests for getting the event-successfully-saved URL
 	///////////////////////////////////////////////////////
@@ -82,6 +279,150 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 		$this->assertRegExp(
 			'/^http:\/\/./',
 			$this->fixture->getEventSuccessfullySavedUrl()
+		);
+	}
+
+
+	/////////////////////////////////
+	// Tests concerning hasAccess()
+	/////////////////////////////////
+
+	public function testHasAccessInitiallyReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithActionUnequalToEditReturnsFalse() {
+		$this->pi1->piVars['action'] = 'invalid';
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('deleted' => 1)
+		);
+		$this->pi1->piVars['seminar'] = $seminarUid;
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithoutSeminarInPiVarsReturnsFalse() {
+		$this->pi1->piVars['action'] = 'EDIT';
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('deleted' => 1)
+		);
+		$this->pi1->piVars['seminar'] = $seminarUid;
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithInExistentSeminarInPiVarsReturnsFalse() {
+		$this->pi1->piVars['action'] = 'EDIT';
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('deleted' => 1)
+		);
+		$this->pi1->piVars['seminar'] = $seminarUid;
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithNoLoggedInFeUserReturnsFalse() {
+		$this->pi1->piVars['action'] = 'EDIT';
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->pi1->piVars['seminar'] = $seminarUid;
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithLoggedInFeUserWhoIsNeitherVipNorOwnerReturnsFalse() {
+		$this->pi1->piVars['action'] = 'EDIT';
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->pi1->piVars['seminar'] = $this->seminarUid;
+		$this->createAndLogInFeUser();
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithLoggedInFeUserAsOwnerReturnsTrue() {
+		$this->pi1->piVars['action'] = 'EDIT';
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->pi1->piVars['seminar'] = $this->seminarUid;
+		$this->createLogInAndAddFeUserAsOwner();
+
+		$this->assertTrue(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsFalse() {
+		$this->pi1->setConfigurationValue('mayManagersEditTheirEvents' , 0);
+		$this->pi1->piVars['action'] = 'EDIT';
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->pi1->piVars['seminar'] = $this->seminarUid;
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsTrue() {
+		$this->pi1->setConfigurationValue('mayManagersEditTheirEvents' , 1);
+		$this->pi1->piVars['action'] = 'EDIT';
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->pi1->piVars['seminar'] = $this->seminarUid;
+		$this->createLogInAndAddFeUserAsVip();
+
+		$this->assertTrue(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsFalse() {
+		$this->pi1->setConfigurationValue('mayManagersEditTheirEvents' , 0);
+		$this->pi1->piVars['action'] = 'EDIT';
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->pi1->piVars['seminar'] = $this->seminarUid;
+		$this->createLogInAndAddFeUserAsDefaultVip();;
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsTrue() {
+		$this->pi1->setConfigurationValue('mayManagersEditTheirEvents' , 1);
+		$this->pi1->piVars['action'] = 'EDIT';
+		$this->seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->pi1->piVars['seminar'] = $this->seminarUid;
+		$this->createLogInAndAddFeUserAsDefaultVip();;
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
 		);
 	}
 }

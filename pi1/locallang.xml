@@ -38,6 +38,7 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
+			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees?</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
@@ -517,6 +518,7 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">Listenansicht auf Veranstaltungen dieser Arten einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">Listenansicht auf Veranstaltungen aus diesen Kategorien einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">Listenansicht auf Veranstaltungen an diesen Orten einschränken:</label>
+			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Verwalter können ihre Veranstaltungen bearbeiten:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Einzelansicht</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Zeige angehängte Dateien in der Einzelansicht nur für Teilnehmer?</label>
 			<label index="seminars.pi_flexform.templateFile">Dateiname des HTML-Templates:</label>
@@ -1921,6 +1923,7 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes" type="integer">263724247</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories" type="integer">144505574</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces" type="integer">116361790</label>
+			<label index="seminars.pi_flexform.mayManagersEditTheirEvents" type="integer">218360309</label>
 			<label index="seminars.pi_flexform.sheet_single_view" type="integer">260903848</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees" type="integer">143973546</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
@@ -3094,6 +3097,7 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
+			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees?</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>

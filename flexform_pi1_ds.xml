@@ -294,6 +294,14 @@
 							</config>
 						</TCEforms>
 					</limitListViewToPlaces>
+					<mayManagersEditTheirEvents>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.mayManagersEditTheirEvents</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</mayManagersEditTheirEvents>
 				</el>
 			</ROOT>
 		</s_listView>

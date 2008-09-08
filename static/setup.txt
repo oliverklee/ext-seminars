@@ -307,6 +307,9 @@ plugin.tx_seminars_pi1 {
 	# whether to omit the date in the list view if it is the same as the previous item's
 	omitDateIfSameAsPrevious = 0
 
+	# whether managers may edit their events
+	mayManagersEditTheirEvents = 0
+
 	# list of comma-separated names of event fields that should be displayed on the registration page (the order doesn't matter)
 	eventFieldsOnRegistrationPage = title,price_regular,price_special,vacancies
 

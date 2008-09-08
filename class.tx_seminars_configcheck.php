@@ -292,6 +292,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->check_tx_seminars_pi1_seminar_list();
 		$this->checkRegistrationsVipListPid();
 		$this->checkDefaultEventVipsFeGroupID();
+		$this->checkMayManagersEditTheirEvents();
 	}
 
 	/**
@@ -1009,6 +1010,20 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'list view if it is the same as the previous item\'s. '
 				.'If this value is incorrect, the date might be omited '
 				.'although this is not intended (or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value mayManagersEditTheirEvents.
+	 */
+	private function checkMayManagersEditTheirEvents() {
+		$this->checkIfBoolean(
+			'mayManagersEditTheirEvents',
+			true,
+			's_listView',
+			'This value specifies whether VIPs may edit their events. If this ' .
+				'value is incorrect, VIPs may be allowed to edit their events ' .
+				' although they should not be allowed to (or vice versa).'
 		);
 	}
 

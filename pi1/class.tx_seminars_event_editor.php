@@ -406,40 +406,38 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * 						"seminar"), false otherwise
 	 */
 	public function hasAccess() {
-		$isOkay = $this->isLoggedIn()
-			&& isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
-				$this->plugin->getConfValueInteger(
-					'eventEditorFeGroupID',
-					's_fe_editing'
-				)
-			]
-		);
-		$seminarUid = (isset($this->plugin->piVars['seminar'])
-			&& (array_key_exists('action', $this->plugin->piVars)
-			&& $this->plugin->piVars['action'] == 'EDIT'))
-			? intval($this->plugin->piVars['seminar']) : 0;
-
-		// Only do the DB query if we are okay so far and an event UID has
-		// been provided for editing.
-		if ($isOkay && $seminarUid) {
-			if (tx_seminars_objectfromdb::recordExists(
-				$seminarUid,
-				SEMINARS_TABLE_SEMINARS)
-			) {
-				/** Name of the seminar class in case someone subclasses it. */
-				$seminarClassname = t3lib_div::makeInstanceClassName(
-					'tx_seminars_seminar'
-				);
-				$seminar = new $seminarClassname($seminarUid);
-				$isOkay = $seminar->isOwnerFeUser();
-				unset($seminar);
-			} else {
-				// Deny access if the seminar UID is incorrect.
-				$isOkay = false;
-			}
+		if (!isset($this->plugin->piVars['action'])
+			|| $this->plugin->piVars['action'] != 'EDIT'
+		) {
+			return false;
 		}
 
-		return $isOkay;
+		if (!$this->isLoggedIn()) {
+			return false;
+		}
+
+		if (!isset($this->plugin->piVars['seminar'])
+			|| !tx_seminars_objectfromdb::recordExists(
+				$this->plugin->piVars['seminar'], SEMINARS_TABLE_SEMINARS
+		)) {
+			return false;
+		}
+
+		$seminarClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_seminar'
+		);
+		$seminar = new $seminarClassname($this->plugin->piVars['seminar']);
+		$mayManagersEditTheirEvents = $this->plugin->getConfValueBoolean(
+			'mayManagersEditTheirEvents', 's_listView'
+		);
+		$isUserVip = $seminar->isUserVip(
+			$this->getFeUserUid(),
+			$this->plugin->getConfValueInteger('defaultEventVipsFeGroupID')
+		);
+		$isUserOwner = $seminar->isOwnerFeUser();
+		unset($seminar);
+
+		return $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
 	}
 
 	/**
