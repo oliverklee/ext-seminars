@@ -365,7 +365,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * 						page
 	 */
 	public function getEventSuccessfullySavedUrl() {
-		$additionalParameters = array();
+		$additionalParameters = '';
 
 		// For testing, the check for whether $this->oForm is defined is
 		// necessary, because the FORMidable object is not initialized for
