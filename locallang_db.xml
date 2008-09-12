@@ -84,7 +84,7 @@
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment:</label>
 			<label index="tx_seminars_seminars.divLabelAccess">Access</label>
 			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
-			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to edit this event:</label>
+			<label index="tx_seminars_seminars.vips">Managers of this event:</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.organization">Organization:</label>
@@ -262,7 +262,7 @@
 			<label index="tx_seminars_seminars.payment_methods">Erlaubte Zahlungsarten:</label>
 			<label index="tx_seminars_seminars.divLabelAccess">Zugriff</label>
 			<label index="tx_seminars_seminars.owner_feuser">Frontend-User, der diese Veranstaltung eingetragen hat:</label>
-			<label index="tx_seminars_seminars.vips">Frontend-User, die diese Veranstaltung bearbeiten dürfen:</label>
+			<label index="tx_seminars_seminars.vips">Verwalter dieser Veranstaltung:</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.organization">Organisation:</label>
@@ -1197,7 +1197,7 @@
 			<label index="tx_seminars_seminars.skip_collision_check" type="integer">139479602</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">128284088</label>
 			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
-			<label index="tx_seminars_seminars.vips" type="integer">93683406</label>
+			<label index="tx_seminars_seminars.vips" type="integer">180644740</label>
 			<label index="tx_seminars_seminars.notes" type="integer">121419833</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
 			<label index="tx_seminars_seminars.speakers" type="integer">101678388</label>
@@ -2200,7 +2200,7 @@
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>
 			<label index="tx_seminars_seminars.is_full">Is full:</label>
 			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
-			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to edit this event:</label>
+			<label index="tx_seminars_seminars.vips">Managers of this event:</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
