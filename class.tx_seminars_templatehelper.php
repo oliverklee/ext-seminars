@@ -324,13 +324,31 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * 						hide (case-insensitive, will get uppercased)
 	 * @param	string		prefix to the subpart names (may be empty,
 	 * 						case-insensitive, will get uppercased)
-	 *
-	 * @access	protected
 	 */
-	function hideSubparts($subparts, $prefix = '') {
+	public function hideSubparts($subparts, $prefix = '') {
 		$subpartNames = explode(',', $subparts);
 
-		foreach ($subpartNames as $currentSubpartName) {
+		$this->hideSubpartsArray($subpartNames, $prefix);
+	}
+
+	/**
+	 * Takes an array of subpart names and sets them to hidden. In the process,
+	 * the names are changed from 'aname' to '###BLA_ANAME###' and used as keys.
+	 *
+	 * Example: If the prefix is "field" and the array has two elements "one"
+	 * and "two", the subparts "###FIELD_ONE###" and "###FIELD_TWO###" will be
+	 * hidden.
+	 *
+	 * If the prefix is empty and the array has two elements "one" and "two",
+	 * the subparts "###ONE###" and "###TWO###" will be hidden.
+	 *
+	 * @param	array		array of at least 1 subpart name to hide
+	 * 						(may be empty, case-insensitive, will get uppercased)
+	 * @param	string		prefix to the subpart names (may be empty,
+	 * 						case-insensitive, will get uppercased)
+	 */
+	public function hideSubpartsArray(array $subparts, $prefix = '') {
+		foreach ($subparts as $currentSubpartName) {
 			$fullSubpartName = $this->createMarkerNameWithoutHashes(
 				$currentSubpartName,
 				$prefix
@@ -363,10 +381,8 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 	 * 						shouldn't get unhidden
 	 * @param	string		prefix to the subpart names (may be empty,
 	 * 						case-insensitive, will get uppercased)
-	 *
-	 * @access	protected
 	 */
-	function unhideSubparts(
+	public function unhideSubparts(
 		$subparts, $permanentlyHiddenSubparts = '', $prefix = ''
 	) {
 		$subpartNames = explode(',', $subparts);
@@ -376,10 +392,39 @@ class tx_seminars_templatehelper extends tx_seminars_dbplugin {
 			$hiddenSubpartNames = array();
 		}
 
-		foreach ($subpartNames as $currentSubpartName) {
+		$this->unhideSubpartsArray($subpartNames, $hiddenSubpartNames, $prefix);
+	}
+
+	/**
+	 * Takes an array of subpart names and unhides them if they have been hidden
+	 * beforehand.
+	 *
+	 * Note: All subpartNames that are provided with the second parameter will
+	 * not be unhidden. This is to avoid unhiding subparts that are hidden by
+	 * the configuration.
+	 *
+	 * In the process, the names are changed from 'aname' to '###BLA_ANAME###'.
+	 *
+	 * Example: If the prefix is "field" and the array has two elements "one"
+	 * and "two", the subparts "###FIELD_ONE###" and "###FIELD_TWO###" will be
+	 * unhidden.
+	 *
+	 * If the prefix is empty and the array has two elements "one" and "two",
+	 * the subparts "###ONE###" and "###TWO###" will be unhidden.
+	 *
+	 * @param	array		array of at least 1 subpart name to unhide
+	 * 						(may be empty, case-insensitive, will get uppercased)
+	 * @param	array		array of subpart names that shouldn't get unhidden
+	 * @param	string		prefix to the subpart names (may be empty,
+	 * 						case-insensitive, will get uppercased)
+	 */
+	public function unhideSubpartsArray(
+		array $subparts, array $permanentlyHiddenSubparts = array(), $prefix = ''
+	) {
+		foreach ($subparts as $currentSubpartName) {
 			// Only unhide the current subpart if it is not on the list of
 			// permanently hidden subparts (e.g. by configuration).
-			if (!in_array($currentSubpartName, $hiddenSubpartNames)) {
+			if (!in_array($currentSubpartName, $permanentlyHiddenSubparts)) {
 				$currentMarkerName = $this->createMarkerNameWithoutHashes(
 					$currentSubpartName, $prefix
 				);
