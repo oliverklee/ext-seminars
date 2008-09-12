@@ -38,7 +38,7 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
-			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Allow the CSV export of registrations in the "my managed events" view:</label>
+			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Allow the CSV export of registrations in the &quot;my managed events&quot; view:</label>
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Event managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees?</label>
