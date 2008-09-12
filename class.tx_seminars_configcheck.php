@@ -293,6 +293,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkRegistrationsVipListPid();
 		$this->checkDefaultEventVipsFeGroupID();
 		$this->checkMayManagersEditTheirEvents();
+		$this->checkAllowCsvExportOfRegistrationsInMyVipEventsView();
 
 		if ($this->objectToCheck->getConfValueBoolean(
 			'mayManagersEditTheirEvents', 's_listView'
@@ -1016,6 +1017,23 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'list view if it is the same as the previous item\'s. '
 				.'If this value is incorrect, the date might be omited '
 				.'although this is not intended (or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * allowCsvExportOfRegistrationsInMyVipEventsView.
+	 */
+	private function checkAllowCsvExportOfRegistrationsInMyVipEventsView() {
+		$this->checkIfBoolean(
+			'allowCsvExportOfRegistrationsInMyVipEventsView',
+			true,
+			's_listView',
+			'This value specifies whether managers are allowed to access the ' .
+				'CSV export of registrations from the "my editable events" view. ' .
+				'If this value is incorrect, managers may be allowed to access ' .
+				'the CSV export of registrations from the "my editable events ' .
+				'view" although they should not be allowed to (or vice versa).'
 		);
 	}
 

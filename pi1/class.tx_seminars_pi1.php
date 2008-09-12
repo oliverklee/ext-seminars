@@ -35,6 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbu
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -50,9 +51,13 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1 extends tx_seminars_templatehelper {
-	/** @var	string		same as class name */
+	/**
+	 * @var	string		same as class name
+	 */
 	public $prefixId = 'tx_seminars_pi1';
-	/** @var	string		path to this script relative to the extension dir */
+	/**
+	 * @var	string		path to this script relative to the extension dir
+	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 
 	/**
@@ -332,6 +337,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				break;
 			case 'category_list':
 				$result = $this->createCategoryList();
+				break;
+			case 'csv_export_registrations':
+				$result = $this->createCsvExportOfRegistrations();
 				break;
 			case 'topic_list':
 				// The fallthrough is intended
@@ -1582,6 +1590,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			);
 		}
 
+		$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+			= $this->getConfValueBoolean(
+				'allowCsvExportOfRegistrationsInMyVipEventsView'
+			);
+
+		if ($whatToDisplay != 'my_vip_events'
+			|| !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+		) {
+			$this->hideSubparts('registrations', 'LISTHEADER_WRAPPER');
+			$this->hideSubparts('registrations', 'LISTITEM_WRAPPER');
+		}
+
 		// Hide the column with the link to the list of registrations if
 		// online registration is disabled, no user is logged in or there is
 		// no page specified to link to.
@@ -1832,6 +1852,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'registration',
 			'list_registrations',
 			'edit',
+			'registrations',
 		);
 
 		foreach ($availableColumns as $column) {
@@ -2027,6 +2048,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->getRegistrationsListLink()
 			);
 			$this->setMarker('edit', $this->getEditLink());
+
+			$this->setMarker('registrations', $this->getCsvExportLink());
 
 			$result = $this->getSubpart('LIST_ITEM');
 		}
@@ -2725,6 +2748,30 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->hideSubparts('edit', 'LISTHEADER_WRAPPER');
 			$this->hideSubparts('edit', 'LISTITEM_WRAPPER');
 		}
+	}
+
+	/**
+	 * Gets the link to the CSV export.
+	 *
+	 * @return	string		the link to the CSV export
+	 */
+	private function getCsvExportLink() {
+		return $this->cObj->typoLink(
+			$this->translate('label_registrationsAsCsv'),
+			array(
+				'parameter' => $GLOBALS['TSFE']->id,
+				'additionalParams' => t3lib_div::implodeArrayForUrl(
+					'',
+					array(
+						'type' => tx_seminars_pi2::getTypeNum(),
+						'tx_seminars_pi2' => array(
+							'table' => SEMINARS_TABLE_ATTENDANCES,
+							'seminar' => $this->seminar->getUid(),
+						),
+					)
+				),
+			)
+		);
 	}
 
 

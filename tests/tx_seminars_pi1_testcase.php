@@ -2818,9 +2818,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	// Tests concerning mayManagersEditTheirEvents in the "my vip events" list view
-	/////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 
 	public function testEditSubpartWithMayManagersEditTheirEventsSetToFalseIsHiddenInMyVipEventsListView() {
 		$this->createLogInAndAddFeUserAsVip();
@@ -2841,6 +2841,37 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->main('', array());
 		$this->assertTrue(
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Tests concerning allowCsvExportOfRegistrationsInMyVipEventsView in the "my vip events" list view
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public function testRegistrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToFalseIsHiddenInMyVipEventsListView() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue(
+			'allowCsvExportOfRegistrationsInMyVipEventsView', 0
+		);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
+		);
+	}
+
+	public function testRegistrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToTrueIsVisibleInMyVipEventsListView() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue(
+			'allowCsvExportOfRegistrationsInMyVipEventsView', 1
+		);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->fixture->main('', array());
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
 		);
 	}
 }

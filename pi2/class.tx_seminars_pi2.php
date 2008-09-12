@@ -47,13 +47,20 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
 
 class tx_seminars_pi2 extends tx_seminars_templatehelper {
-	/** same as class name */
-	var $prefixId = 'tx_seminars_pi2';
-	/** path to this script relative to the extension dir */
-	var $scriptRelPath = 'pi2/class.tx_seminars_pi2.php';
+	/**
+	 * @var	string		same as class name
+	 */
+	public $prefixId = 'tx_seminars_pi2';
+	/**
+	 * @var	string		path to this script relative to the extension dir
+	 */
+	public $scriptRelPath = 'pi2/class.tx_seminars_pi2.php';
 
-	/** This object provides access to config values in plugin.tx_seminars. */
-	var $configGetter = null;
+	/**
+	 * @var	tx_seminars_configgetter	This object provides access to config
+	 * 									values in plugin.tx_seminars.
+	 */
+	private $configGetter = null;
 
 	/**
 	 * Creates a CSV export.
@@ -372,6 +379,10 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		// Only bother to check other permissions if we don't already have
 		// global access.
 		if (!$result) {
+			if (!$eventUid) {
+				$eventUid = intval($this->piVars['seminar']);
+			}
+
 			if (TYPO3_MODE == 'BE') {
 				// Check read access to the registrations table.
 				$result = $BE_USER->check(
@@ -380,9 +391,6 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				);
 				// Check read access to all pages with registrations from the
 				// selected event.
-				if (!$eventUid) {
-					$eventUid = intval($this->piVars['seminar']);
-				}
 				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'DISTINCT pid',
 					SEMINARS_TABLE_ATTENDANCES,
@@ -398,6 +406,23 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 						);
 					}
 				}
+			} elseif (TYPO3_MODE == 'FE') {
+				$seminarClassName = t3lib_div::makeInstanceClassName(
+					'tx_seminars_seminar'
+				);
+				$seminar = new $seminarClassName($eventUid);
+
+				$pi1TypoScriptSetup
+					=& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_seminars_pi1.'];
+
+				$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+					= (boolean) $pi1TypoScriptSetup['allowCsvExportOfRegistrationsInMyVipEventsView'];
+
+				$result = $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+					&& $seminar->isUserVip(
+						$this->getFeUserUid(),
+						$pi1TypoScriptSetup['defaultEventVipsFeGroupID']
+					);
 			}
 		}
 
@@ -495,6 +520,17 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;
+	}
+
+	/**
+	 * Returns the typeNum from the TypoScript setup in tx_seminars_pi2.typeNum.
+	 *
+	 * @return	integer		the typeNum in tx_seminars_pi2.typeNum
+	 */
+	public static function getTypeNum() {
+		return intval(
+			$GLOBALS['TSFE']->tmpl->setup['tx_seminars_pi2.']['typeNum']
+		);
 	}
 }
 

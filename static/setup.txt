@@ -215,6 +215,7 @@ plugin.tx_seminars_pi1 {
 	class_headerregistration = registration
 	class_headerlist_registrations = list-registrations
 	class_headeredit =
+	class_headerregistrations =
 
 	# CSS class for the TR for an item row in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_itemrow =
@@ -245,6 +246,7 @@ plugin.tx_seminars_pi1 {
 	class_listregistration =
 	class_listlist_registrations =
 	class_listedit =
+	class_listregistrations =
 
 	# CSS class for the colored square indicating the number of vacancies (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
 	class_square = square
@@ -306,6 +308,9 @@ plugin.tx_seminars_pi1 {
 
 	# whether to omit the date in the list view if it is the same as the previous item's
 	omitDateIfSameAsPrevious = 0
+
+	# whether to allow the CSV export in the "my editable events" view
+	allowCsvExportOfRegistrationsInMyVipEventsView = 0
 
 	# whether managers may edit their events
 	mayManagersEditTheirEvents = 0

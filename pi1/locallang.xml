@@ -38,7 +38,8 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
-			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Managers may edit their events:</label>
+			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Allow the CSV export of registrations in the "my managed events" view:</label>
+			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Event managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees?</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
@@ -131,6 +132,8 @@
 			<label index="label_status_registration">Status</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_attached_files">Attached files</label>
+			<label index="label_registrations">Registrations</label>
+			<label index="label_registrationsAsCsv">registrations (as CSV)</label>
 			<label index="label_onlineRegistration">Register now</label>
 			<label index="label_onlineRegistrationOnQueue">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</label>
 			<label index="label_onlineUnregistration">Unregister now</label>
@@ -518,6 +521,7 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">Listenansicht auf Veranstaltungen dieser Arten einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">Listenansicht auf Veranstaltungen aus diesen Kategorien einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">Listenansicht auf Veranstaltungen an diesen Orten einschränken:</label>
+			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Erlaube den CSV-Export von Anmeldungen in der &quot;meine verwalteten Veranstaltungen&quot;-Ansicht:</label>
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Verwalter können ihre Veranstaltungen bearbeiten:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Einzelansicht</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Zeige angehängte Dateien in der Einzelansicht nur für Teilnehmer?</label>
@@ -611,6 +615,8 @@
 			<label index="label_status_registration">Status</label>
 			<label index="label_registration">Anmeldung</label>
 			<label index="label_attached_files">Angehängte Dateien</label>
+			<label index="label_registrations">Anmeldungen</label>
+			<label index="label_registrationsAsCsv">Anmeldungen (als CSV)</label>
 			<label index="label_onlineRegistration">Jetzt anmelden</label>
 			<label index="label_onlineRegistrationOnQueue">Für die Warteliste anmelden&lt;br /&gt;(%d Anmeldungen auf der Warteliste)</label>
 			<label index="label_onlineUnregistration">Jetzt abmelden</label>
@@ -1923,7 +1929,8 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes" type="integer">263724247</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories" type="integer">144505574</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces" type="integer">116361790</label>
-			<label index="seminars.pi_flexform.mayManagersEditTheirEvents" type="integer">218360309</label>
+			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView" type="integer">173313992</label>
+			<label index="seminars.pi_flexform.mayManagersEditTheirEvents" type="integer">175224355</label>
 			<label index="seminars.pi_flexform.sheet_single_view" type="integer">260903848</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees" type="integer">143973546</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
@@ -2016,6 +2023,8 @@
 			<label index="label_status_registration" type="integer">247806604</label>
 			<label index="label_registration" type="integer">16354175</label>
 			<label index="label_attached_files" type="integer">167450577</label>
+			<label index="label_registrations" type="integer">170423130</label>
+			<label index="label_registrationsAsCsv" type="integer">81222971</label>
 			<label index="label_onlineRegistration" type="integer">201391585</label>
 			<label index="label_onlineRegistrationOnQueue" type="integer">240607496</label>
 			<label index="label_onlineUnregistration" type="integer">213082454</label>
@@ -3097,7 +3106,8 @@
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
 			<label index="seminars.pi_flexform.limitListViewToPlaces">List events only at these places:</label>
-			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Managers may edit their events:</label>
+			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Allow the CSV export of registrations in the &quot;my managed events&quot; view:</label>
+			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Event managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
 			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees?</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
@@ -3190,6 +3200,8 @@
 			<label index="label_status_registration">Status</label>
 			<label index="label_registration">Registration</label>
 			<label index="label_attached_files">Attached files</label>
+			<label index="label_registrations">Registrations</label>
+			<label index="label_registrationsAsCsv">registrations (as CSV)</label>
 			<label index="label_onlineRegistration">Register now</label>
 			<label index="label_onlineRegistrationOnQueue">Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</label>
 			<label index="label_onlineUnregistration">Unregister now</label>
