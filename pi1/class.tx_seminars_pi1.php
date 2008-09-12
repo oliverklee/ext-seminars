@@ -1394,11 +1394,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
-			// Hide unneeded columns from the list.
-			$temporaryHiddenColumns = 'listheader_wrapper_title,'
-				.'listitem_wrapper_title,listheader_wrapper_list_registrations,'
-				.'listitem_wrapper_list_registrations';
-			$this->hideSubparts($temporaryHiddenColumns);
+			// Hides unneeded columns from the list.
+			$temporaryHiddenColumns = array('title', 'list_registrations');
+			$this->hideColumns($temporaryHiddenColumns);
 
 			$tableOtherDates = $this->createListTable($seminarBag, 'other_dates');
 
@@ -1406,12 +1404,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$result = $this->getSubpart('OTHERDATES_VIEW');
 
-			// Un-hide the previously hidden columns.
-			$hiddenColumns = $this->getConfValueString(
-				'hideColumns',
-				's_template_special'
-			);
-			$this->unhideSubparts($temporaryHiddenColumns, $hiddenColumns);
+			// Un-hides the previously hidden columns.
+			$this->unhideColumns($temporaryHiddenColumns);
 		}
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
@@ -1560,33 +1554,24 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
 		}
 
-		$this->hideSubparts(
-			$this->getConfValueString(
-				'hideColumns',
-				's_template_special'),
-				'LISTHEADER_WRAPPER'
-			);
-		$this->hideSubparts(
-			$this->getConfValueString(
-			'hideColumns',
-			's_template_special'),
-			'LISTITEM_WRAPPER'
+		$this->hideColumns(
+			t3lib_div::trimExplode(
+				',',
+				$this->getConfValueString('hideColumns', 's_template_special'),
+				true
+			)
 		);
 
 		// Hide the registration column if online registration is disabled.
 		if (!$this->getConfValueBoolean('enableRegistration')) {
-			$this->hideSubparts('registration', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('registration', 'LISTITEM_WRAPPER');
+			$this->hideColumns(array('registration'));
 		}
 
 		// Hides the number of seats, the total price and the registration
 		// status columns when we're not on the "my events" list.
 		if ($whatToDisplay != 'my_events') {
-			$this->hideSubparts(
-				'total_price,seats,status_registration', 'LISTHEADER_WRAPPER'
-			);
-			$this->hideSubparts(
-				'total_price,seats,status_registration', 'LISTITEM_WRAPPER'
+			$this->hideColumns(
+				array('total_price', 'seats', 'status_registration')
 			);
 		}
 
@@ -1598,8 +1583,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($whatToDisplay != 'my_vip_events'
 			|| !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
 		) {
-			$this->hideSubparts('registrations', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('registrations', 'LISTITEM_WRAPPER');
+			$this->hideColumns(array('registrations'));
 		}
 
 		// Hide the column with the link to the list of registrations if
@@ -1616,9 +1600,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			|| (($whatToDisplay == 'my_events')
 				&& !$this->hasConfValueInteger('registrationsListPID'))
 			|| (($whatToDisplay == 'my_vip_events')
-				&& !$this->hasConfValueInteger('registrationsVipListPID'))) {
-			$this->hideSubparts('list_registrations', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('list_registrations', 'LISTITEM_WRAPPER');
+				&& !$this->hasConfValueInteger('registrationsVipListPID'))
+		) {
+			$this->hideColumns(array('list_registrations'));
 		}
 
 		$this->hideEditColumnIfNecessary($whatToDisplay);
@@ -1684,15 +1668,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			case 'topic_list':
 				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.object_type='
 					.SEMINARS_RECORD_TYPE_TOPIC;
-				$this->hideSubparts(
-					'uid,accreditation_number,speakers,date,time,place,'
-						.'organizers,vacancies,registration',
-					'LISTHEADER_WRAPPER'
-				);
-				$this->hideSubparts(
-					'uid,accreditation_number,speakers,date,time,place,'
-						.'organizers,vacancies,registration',
-					'LISTITEM_WRAPPER'
+				$this->hideColumns(
+					array(
+						'uid',
+						'accreditation_number',
+						'speakers',
+						'date',
+						'time',
+						'place',
+						'organizers',
+						'vacancies',
+						'registration',
+					)
 				);
 				break;
 			case 'my_events':
@@ -2727,6 +2714,36 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
+	 * Hides the columns specified in the first parameter $columnsToHide.
+	 *
+	 * @param	array		the columns to hide, may be empty
+	 */
+	private function hideColumns(array $columnsToHide) {
+		$this->hideSubpartsArray($columnsToHide, 'LISTHEADER_WRAPPER');
+		$this->hideSubpartsArray($columnsToHide, 'LISTITEM_WRAPPER');
+	}
+
+	/**
+	 * Un-hides the columns specified in the first parameter $columnsToHide.
+	 *
+	 * @param	array		the columns to un-hide, may be empty
+	 */
+	private function unhideColumns(array $columnsToUnhide) {
+		$permanentlyHiddenColumns = t3lib_div::trimExplode(
+			',',
+			$this->getConfValueString('hideColumns', 's_template_special'),
+			true
+		);
+
+		$this->unhideSubpartsArray(
+			$columnsToUnhide, $permanentlyHiddenColumns, 'LISTHEADER_WRAPPER'
+		);
+		$this->unhideSubpartsArray(
+			$columnsToUnhide, $permanentlyHiddenColumns, 'LISTITEM_WRAPPER'
+		);
+	}
+
+	/**
 	 * Hides the edit column if necessary.
 	 *
 	 * It is necessary if the list to display is not the "events which I have
@@ -2745,8 +2762,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if ($whatToDisplay != 'my_entered_events'
 			&& !($whatToDisplay == 'my_vip_events' && $mayManagersEditTheirEvents)
 		) {
-			$this->hideSubparts('edit', 'LISTHEADER_WRAPPER');
-			$this->hideSubparts('edit', 'LISTITEM_WRAPPER');
+			$this->hideColumns(array('edit'));
 		}
 	}
 

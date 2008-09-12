@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2160] Change: Add methods for hiding and un-hiding columns in tx_seminars_pi1
 - [#2178] Feature: Add methods hideSubpartsArray and unhideSubpartsArray to tx_seminars_templatehelper
 - [#1951] Feature: Allow the CSV export of registration data in the "my VIP events" list
 - [#1949] Feature: Allow VIP users to FE-edit their events
