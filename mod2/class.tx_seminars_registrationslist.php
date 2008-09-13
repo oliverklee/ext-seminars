@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_backendlist.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
+
 /**
  * Class 'registrations list' for the 'seminars' extension.
  *
@@ -30,52 +35,52 @@
  *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_backendlist.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
-
 class tx_seminars_registrationslist extends tx_seminars_backendlist {
-	/** the table we're working on */
+	/**
+	 * @var	string		the table we're working on
+	 */
 	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
 
-	/** the registration which we want to list/show */
+	/**
+	 * @var	tx_seminars_registration	the registration which we want to
+	 * 									list/show
+	 */
 	private $registration = null;
 
-	/** the registration bag containing the registrations we want to list/show */
+	/**
+	 * @var tx_seminars_seminar		the registration bag containing the
+	 * 								registrations we want to list/show
+	 */
 	private $registrationBag = null;
 
 	/**
 	 * Generates and prints out a registrations list.
 	 *
 	 * @return	string		the HTML source code to display
-	 *
-	 * @access	public
 	 */
-	function show() {
+	public function show() {
 		global $LANG;
 
-		// Initialize the variable for the HTML source code.
+		// Initializes the variable for the HTML source code.
 		$content = '';
 
 		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
 
-		// Generate the table with the regular attendances.
+		// Generates the table with the regular attendances.
 		$registrationTable .= $this->getRegistrationTable(false);
-		$content .= TAB.TAB.'<div style="clear: both;"></div>'.LF;
-		$content .= TAB.TAB.'<h3>'
-			.$LANG->getLL('registrationlist.label_regularRegistrations')
-			.' ('.$this->registrationBag->getObjectCountWithoutLimit().')'
-			.'</h3>'.LF;
+		$content .= TAB . TAB . '<div style="clear: both;"></div>' . LF;
+		$content .= TAB . TAB . '<h3>' .
+			$LANG->getLL('registrationlist.label_regularRegistrations') .
+			' (' . $this->registrationBag->getObjectCountWithoutLimit() . ')' .
+			'</h3>' . LF;
 		$content .= $registrationTable;
 
-		// Generate the table with the attendances on the registration queue.
+		// Generates the table with the attendances on the registration queue.
 		$registrationQueueTable = $this->getRegistrationTable(true);
-		$content .= TAB.TAB.'<h3>'
-			.$LANG->getLL('registrationlist.label_queueRegistrations')
-			.' ('.$this->registrationBag->getObjectCountWithoutLimit().')'
-			.'</h3>'.LF;
+		$content .= TAB . TAB . '<h3>' .
+			$LANG->getLL('registrationlist.label_queueRegistrations') .
+			' (' . $this->registrationBag->getObjectCountWithoutLimit() . ')' .
+			'</h3>' . LF;
 		$content .= $registrationQueueTable;
 
 		$content .= $this->registrationBag->checkConfiguration();
@@ -92,78 +97,76 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 	 * 						the regular attendances should be generated.
 	 *
 	 * @return	string		the registration table, nicely formatted as HTML
-	 *
-	 * @access	public
 	 */
-	function getRegistrationTable($showRegistrationQueue) {
+	private function getRegistrationTable($showRegistrationQueue) {
 		global $LANG;
 
 		$content = '';
 
-		// Set the table layout of the registration list.
+		// Sets the table layout of the registration list.
 		$tableLayout = array(
 			'table' => array(
-				TAB.TAB
-					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'
-					.LF,
-				TAB.TAB
-					.'</table>'.LF
+				TAB . TAB .
+					'<table cellpadding="0" cellspacing="0" class="typo3-dblist">' .
+					LF,
+				TAB . TAB .
+					'</table>' . LF,
 			),
 			array(
 				'tr' => array(
-					TAB.TAB.TAB
-						.'<thead>'.LF
-						.TAB.TAB.TAB.TAB
-						.'<tr>'.LF,
-					TAB.TAB.TAB.TAB
-						.'</tr>'.LF
-						.TAB.TAB.TAB
-						.'</thead>'.LF
+					TAB . TAB . TAB .
+						'<thead>' . LF .
+						TAB . TAB . TAB . TAB .
+						'<tr>' . LF,
+					TAB . TAB . TAB . TAB .
+						'</tr>' . LF .
+						TAB . TAB . TAB .
+						'</thead>' . LF,
 				),
 				'defCol' => array(
-					TAB.TAB.TAB.TAB.TAB
-						.'<td class="c-headLineTable">'.LF,
-					TAB.TAB.TAB.TAB.TAB
-						.'</td>'.LF
-				)
+					TAB . TAB . TAB . TAB . TAB .
+						'<td class="c-headLineTable">' . LF,
+					TAB . TAB . TAB . TAB . TAB .
+						'</td>' . LF,
+				),
 			),
 			'defRow' => array(
 				'tr' => array(
-					TAB.TAB.TAB
-						.'<tr>'.LF,
-					TAB.TAB.TAB
-						.'</tr>'.LF
+					TAB . TAB . TAB .
+						'<tr>' . LF,
+					TAB . TAB . TAB .
+						'</tr>' . LF,
 				),
 				'defCol' => array(
-					TAB.TAB.TAB.TAB
-						.'<td>'.LF,
-					TAB.TAB.TAB.TAB
-						.'</td>'.LF
-				)
-			)
+					TAB . TAB . TAB . TAB .
+						'<td>' . LF,
+					TAB . TAB . TAB . TAB .
+						'</td>' . LF,
+				),
+			),
 		);
 
-		// Fill the first row of the table array with the header.
+		// Fills the first row of the table array with the header.
 		$table = array(
 			array(
 				'',
-				TAB.TAB.TAB.TAB.TAB.TAB
-					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('registrationlist.feuser.name').'</span>'.LF,
-				TAB.TAB.TAB.TAB.TAB.TAB
-					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('registrationlist.seminar.title').'</span>'.LF,
-				TAB.TAB.TAB.TAB.TAB.TAB
-					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('registrationlist.seminar.date').'</span>'.LF,
-				TAB.TAB.TAB.TAB.TAB.TAB
-					.'&nbsp;'.LF
-			)
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
+					$LANG->getLL('registrationlist.feuser.name') . '</span>' . LF,
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
+					$LANG->getLL('registrationlist.seminar.title') . '</span>' . LF,
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
+					$LANG->getLL('registrationlist.seminar.date') . '</span>' . LF,
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'&nbsp;' . LF,
+			),
 		);
 
-		// Initialize variables for the database query.
-		$queryWhere = 'pid='.$this->page->pageInfo['uid']
-			.' AND registration_queue='.($showRegistrationQueue ? 1 : 0);
+		// Initializes variables for the database query.
+		$queryWhere = 'pid=' . $this->page->pageInfo['uid'] .
+			' AND registration_queue=' . ($showRegistrationQueue ? 1 : 0);
 		$additionalTables = '';
 		$orderBy = 'crdate DESC';
 		$limit = '';
@@ -180,28 +183,28 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		);
 
 		while ($this->registration = $this->registrationBag->getCurrent()) {
-			// Add the result row to the table array.
+			// Adds the result row to the table array.
 			$table[] = array(
-				TAB.TAB.TAB.TAB.TAB
-					.$this->registration->getRecordIcon().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->registration->getUserName().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->registration->getSeminarObject()->getTitle().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->registration->getSeminarObject()->getDate().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->getEditIcon(
+				TAB . TAB . TAB . TAB . TAB .
+					$this->registration->getRecordIcon() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->registration->getUserName() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->registration->getSeminarObject()->getTitle() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->registration->getSeminarObject()->getDate() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->getEditIcon(
 						$this->registration->getUid()
-					)
-					.$this->getDeleteIcon(
+					) .
+					$this->getDeleteIcon(
 						$this->registration->getUid()
-					).LF
+					) . LF,
 			);
 			$this->registrationBag->getNext();
 		}
 
-		// Output the table array using the tableLayout array with the template
+		// Outputs the table array using the tableLayout array with the template
 		// class.
 		$content .= $this->page->doc->table($table, $tableLayout);
 
