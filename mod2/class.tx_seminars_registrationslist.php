@@ -24,8 +24,9 @@
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_backendlist.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationBagBuilder.php');
 
 /**
  * Class 'registrations list' for the 'seminars' extension.
@@ -42,16 +43,9 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
 
 	/**
-	 * @var	tx_seminars_registration	the registration which we want to
-	 * 									list/show
+	 * @var	string		warnings from the registration bag configcheck
 	 */
-	private $registration = null;
-
-	/**
-	 * @var tx_seminars_seminar		the registration bag containing the
-	 * 								registrations we want to list/show
-	 */
-	private $registrationBag = null;
+	private $configCheckWarnings = '';
 
 	/**
 	 * Generates and prints out a registrations list.
@@ -67,23 +61,13 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
 
 		// Generates the table with the regular attendances.
-		$registrationTable .= $this->getRegistrationTable(false);
 		$content .= TAB . TAB . '<div style="clear: both;"></div>' . LF;
-		$content .= TAB . TAB . '<h3>' .
-			$LANG->getLL('registrationlist.label_regularRegistrations') .
-			' (' . $this->registrationBag->getObjectCountWithoutLimit() . ')' .
-			'</h3>' . LF;
-		$content .= $registrationTable;
+		$content .= $this->getRegistrationTable(false);
 
 		// Generates the table with the attendances on the registration queue.
-		$registrationQueueTable = $this->getRegistrationTable(true);
-		$content .= TAB . TAB . '<h3>' .
-			$LANG->getLL('registrationlist.label_queueRegistrations') .
-			' (' . $this->registrationBag->getObjectCountWithoutLimit() . ')' .
-			'</h3>' . LF;
-		$content .= $registrationQueueTable;
+		$content .= $this->getRegistrationTable(true);
 
-		$content .= $this->registrationBag->checkConfiguration();
+		$content .= $this->configCheckWarnings;
 
 		return $content;
 	}
@@ -167,48 +151,56 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 			),
 		);
 
-		// Initializes variables for the database query.
-		$queryWhere = 'pid=' . $this->page->pageInfo['uid'] .
-			' AND registration_queue=' . ($showRegistrationQueue ? 1 : 0);
-		$additionalTables = '';
-		$orderBy = 'crdate DESC';
-		$limit = '';
-
-		$registrationBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registrationbag'
+		$registrationBagBuilder = t3lib_div::makeInstance(
+			'tx_seminars_registrationBagBuilder'
 		);
-		$this->registrationBag = new $registrationBagClassname(
-			$queryWhere,
-			$additionalTables,
-			'',
-			$orderBy,
-			$limit
-		);
+		$registrationBagBuilder->setSourcePages($this->page->pageInfo['uid']);
+		if ($showRegistrationQueue) {
+			$registrationBagBuilder->limitToOnQueue();
+		} else {
+			$registrationBagBuilder->limitToRegular();
+		}
 
-		while ($this->registration = $this->registrationBag->getCurrent()) {
+		$registrationBag = $registrationBagBuilder->build();
+
+		$labelHeading = ($showRegistrationQueue)
+			? $LANG->getLL('registrationlist.label_queueRegistrations')
+			: $LANG->getLL('registrationlist.label_regularRegistrations');
+
+		$content .= TAB . TAB . '<h3>' .
+			$labelHeading .
+			' (' . $registrationBag->getObjectCountWithoutLimit() . ')' .
+			'</h3>' . LF;
+
+		while ($registration = $registrationBag->getCurrent()) {
 			// Adds the result row to the table array.
 			$table[] = array(
 				TAB . TAB . TAB . TAB . TAB .
-					$this->registration->getRecordIcon() . LF,
+					$registration->getRecordIcon() . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->registration->getUserName() . LF,
+					$registration->getUserName() . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					htmlspecialchars(
-						$this->registration->getSeminarObject()->getAccreditationNumber()
+						$registration->getSeminarObject()->getAccreditationNumber()
 					) . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->registration->getSeminarObject()->getTitle() . LF,
+					$registration->getSeminarObject()->getTitle() . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->registration->getSeminarObject()->getDate() . LF,
+					$registration->getSeminarObject()->getDate() . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					$this->getEditIcon(
-						$this->registration->getUid()
+						$registration->getUid()
 					) .
 					$this->getDeleteIcon(
-						$this->registration->getUid()
+						$registration->getUid()
 					) . LF,
 			);
-			$this->registrationBag->getNext();
+			$registrationBag->getNext();
+		}
+
+		if ($this->configCheckWarnings == '') {
+			$this->configCheckWarnings =
+				$registrationBag->checkConfiguration();
 		}
 
 		// Outputs the table array using the tableLayout array with the template
