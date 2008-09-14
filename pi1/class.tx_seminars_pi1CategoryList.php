@@ -55,8 +55,8 @@ class tx_seminars_pi1CategoryList extends tx_seminars_templatehelper {
 	 * @param	array		TypoScript configuration for the plugin
 	 * @param	tslib_cObj	the parent cObj content, needed for the flexforms
 	 */
-	public function __construct($conf, tslib_cObj &$cObj) {
-		$this->cObj =& $cObj;
+	public function __construct($conf, tslib_cObj $cObj) {
+		$this->cObj = $cObj;
 		$this->init($conf);
 		$this->pi_initPIflexForm();
 
