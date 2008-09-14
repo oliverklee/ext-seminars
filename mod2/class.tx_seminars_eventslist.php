@@ -107,6 +107,12 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 				),
 				array(
 					TAB . TAB . TAB . TAB .
+						'<td>' . LF,
+					TAB . TAB . TAB . TAB .
+						'</td>' . LF,
+				),
+				array(
+					TAB . TAB . TAB . TAB .
 						'<td class="datecol">' . LF,
 					TAB . TAB . TAB . TAB .
 						'</td>' . LF,
@@ -160,6 +166,9 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 		$table = array(
 			array(
 				'',
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
+					$LANG->getLL('eventlist.accreditation_number') . '</span>' . LF,
 				TAB . TAB . TAB . TAB . TAB . TAB .
 					'<span style="color: #ffffff; font-weight: bold;">' .
 					$LANG->getLL('eventlist.title') . '</span>' . LF,
@@ -267,6 +276,9 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 			$table[] = array(
 				TAB . TAB . TAB . TAB . TAB .
 					$this->seminar->getRecordIcon() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					htmlspecialchars($this->seminar->getAccreditationNumber()) .
+					LF,
 				TAB . TAB . TAB . TAB . TAB .
 					t3lib_div::fixed_lgd_cs(
 						$this->seminar->getRealTitle(),

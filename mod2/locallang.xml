@@ -14,6 +14,7 @@
 			<label index="subModuleTitle_events">Events</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
+			<label index="eventlist.accreditation_number">Accreditation number</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
@@ -26,6 +27,7 @@
 			<label index="speakerlist.skills">Skills</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.seminar.accreditation_number">Accreditation number</label>
 			<label index="registrationlist.seminar.title">Event</label>
 			<label index="registrationlist.seminar.date">Event date</label>
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
@@ -62,6 +64,7 @@
 			<label index="subModuleTitle_events">Veranstaltungen</label>
 			<label index="subModuleTitle_speakers">ReferentInnen</label>
 			<label index="subModuleTitle_organizers">Veranstalter</label>
+			<label index="eventlist.accreditation_number">Akkreditierungsnummer</label>
 			<label index="eventlist.date">Datum</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Akt.</label>
@@ -74,6 +77,7 @@
 			<label index="speakerlist.skills">Fähigkeiten</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.seminar.accreditation_number">Akkreditierungsnummer</label>
 			<label index="registrationlist.seminar.title">Veranstaltung</label>
 			<label index="registrationlist.seminar.date">Veranstaltungsdatum</label>
 			<label index="registrationlist.label_regularRegistrations">Reguläre Anmeldungen</label>
@@ -184,6 +188,7 @@
 			<label index="subModuleTitle_events" type="integer">142581619</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
+			<label index="eventlist.accreditation_number" type="integer">251981191</label>
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
@@ -196,6 +201,7 @@
 			<label index="speakerlist.skills" type="integer">178756701</label>
 			<label index="organizerlist.title" type="integer">77521672</label>
 			<label index="registrationlist.feuser.name" type="integer">77521672</label>
+			<label index="registrationlist.seminar.accreditation_number" type="integer">251981191</label>
 			<label index="registrationlist.seminar.title" type="integer">172937159</label>
 			<label index="registrationlist.seminar.date" type="integer">56229706</label>
 			<label index="registrationlist.label_regularRegistrations" type="integer">52997146</label>
@@ -304,6 +310,7 @@
 			<label index="title">Events</label>
 			<label index="subModuleTitle_registrations">Registrations</label>
 			<label index="subModuleTitle_events">Events</label>
+			<label index="eventlist.accreditation_number">Accreditation number</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
@@ -318,6 +325,7 @@
 			<label index="speakerlist.skills">Skills</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.seminar.accreditation_number">Accreditation number</label>
 			<label index="registrationlist.seminar.title">Event</label>
 			<label index="registrationlist.seminar.date">Event date</label>
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>

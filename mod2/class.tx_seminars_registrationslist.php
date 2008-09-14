@@ -155,6 +155,9 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 					$LANG->getLL('registrationlist.feuser.name') . '</span>' . LF,
 				TAB . TAB . TAB . TAB . TAB . TAB .
 					'<span style="color: #ffffff; font-weight: bold;">' .
+					$LANG->getLL('registrationlist.seminar.accreditation_number') . '</span>' . LF,
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
 					$LANG->getLL('registrationlist.seminar.title') . '</span>' . LF,
 				TAB . TAB . TAB . TAB . TAB . TAB .
 					'<span style="color: #ffffff; font-weight: bold;">' .
@@ -189,6 +192,10 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 					$this->registration->getRecordIcon() . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					$this->registration->getUserName() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					htmlspecialchars(
+						$this->registration->getSeminarObject()->getAccreditationNumber()
+					) . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					$this->registration->getSeminarObject()->getTitle() . LF,
 				TAB . TAB . TAB . TAB . TAB .

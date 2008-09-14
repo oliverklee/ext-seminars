@@ -22,6 +22,13 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_t3lib . 'class.t3lib_scbase.php');
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_eventslist.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the events list class in the 'seminars' extension.
  *
@@ -29,23 +36,26 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(PATH_t3lib.'class.t3lib_scbase.php');
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_eventslist.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var	tx_seminars_eventslist
+	 */
 	private $fixture;
+	/**
+	 * @var	tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
-	/** PID of a dummy system folder */
+	/**
+	 * @var	integer		PID of a dummy system folder
+	 */
 	private $dummySysFolderPid = 0;
 
-	/** a dummy BE page object */
+	/**
+	 * @var	t3lib_SCbase	a dummy BE page object
+	 */
 	private $page;
 
 	public function setUp() {
@@ -178,6 +188,38 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'event_1',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowForOneEventContainsAccreditationNumber() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'accreditation_number' => 'accreditation number 123',
+			)
+		);
+
+		$this->assertContains(
+			'accreditation number 123',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowForOneEventContainsHtmlSpecialCharedAccreditationNumber() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'accreditation_number' => '&"<>',
+			)
+		);
+
+		$this->assertContains(
+			'&amp;&quot;&lt;&gt;',
 			$this->fixture->show()
 		);
 	}
