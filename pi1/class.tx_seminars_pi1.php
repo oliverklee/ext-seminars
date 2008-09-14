@@ -35,6 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbu
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1CategoryList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
@@ -336,7 +337,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result = $this->createCountdown();
 				break;
 			case 'category_list':
-				$result = $this->createCategoryList();
+				$categoryListClassName = t3lib_div::makeInstanceClassName(
+					'tx_seminars_pi1CategoryList'
+				);
+				$categoryList = new $categoryListClassName(
+					$this->conf, $this->cObj
+				);
+				$result = $categoryList->createCategoryList();
 				break;
 			case 'csv_export_registrations':
 				$result = $this->createCsvExportOfRegistrations();
@@ -589,34 +596,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Creates a hyperlink with the title $title to the current list view,
-	 * limited to the category provided by the parameter $categoryUid.
-	 *
-	 * @param	integer		UID of the category to which the list view should
-	 * 						be limited, must be > 0
-	 * @param	string		title of the link, must not be empty
-	 *
-	 * @return	string		link to the list view limited to the given
-	 * 						category or an empty string if there is an error
-	 */
-	private function createLinkToListViewLimitedByCategory(
-		$categoryUid, $title
-	) {
-		if ($categoryUid <= 0) {
-			throw new Exception('$categoryUid must be > 0.');
-		}
-		if ($title == '') {
-			throw new Exception('$title must not be empty.');
-		}
-
-		return $this->cObj->getTypoLink(
-			$title,
-			$this->getConfValueInteger('listPID'),
-			array('tx_seminars_pi1[category]' => $categoryUid)
-		);
 	}
 
 	/**
@@ -1912,12 +1891,17 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
+			$categoryListClassName = t3lib_div::makeInstanceClassName(
+				'tx_seminars_pi1CategoryList'
+			);
+			$categoryList = new $categoryListClassName($this->conf, $this->cObj);
+
 			$allCategories = $this->seminar->getCategories();
 			if ($whatToDisplay == 'seminar_list') {
 				$allCategoryLinks = array();
 				foreach ($allCategories as $uid => $title) {
 					$allCategoryLinks[]
-						= $this->createLinkToListViewLimitedByCategory(
+						= $categoryList->createLinkToListViewLimitedByCategory(
 							$uid, $title
 						);
 				}
@@ -3275,77 +3259,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$countdownValue,
 			$countdownText
 		);
-	}
-
-
-	/////////////////////////////
-	// Category list functions.
-	/////////////////////////////
-
-	/**
-	 * Creates a HTML list of categories.
-	 *
-	 * This list is limited to categories for which there are events in the
-	 * selected time-frame and in the selected sysfolders. Categories for which
-	 * all events are canceled will always be ignored.
-	 *
-	 *
-	 * @return	string		HTML code of the category list or a formatted
-	 * 						message if there are no categories to display
-	 */
-	public function createCategoryList() {
-		$seminarBagBuilder
-			= t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
-		$seminarBagBuilder->setSourcePages(
-			$this->getConfValueString('pages'),
-			$this->getConfValueInteger('recursive')
-		);
-		$seminarBagBuilder->ignoreCanceledEvents();
-		try {
-			$seminarBagBuilder->setTimeFrame(
-				$this->getConfValueString(
-					'timeframeInList',
-					's_template_special'
-				)
-			);
-		} catch (Exception $exception) {
-			// Ignores the exception because the user will be warned of the
-			// problem by the configuration check.
-		}
-
-		$eventUids = $seminarBagBuilder->build()->getUids();
-
-		$builder = t3lib_div::makeInstance('tx_seminars_categorybagbuilder');
-		$builder->limitToEvents($eventUids);
-		$bag = $builder->build();
-
-		// Only lists categories for which there are events.
-		if (($eventUids != '') && ($bag->getObjectCountWithoutLimit() > 0)) {
-			$allCategories = '';
-			$rowCounter = 0;
-
-			while ($bag->getCurrent()) {
-				$link = $this->createLinkToListViewLimitedByCategory(
-					$bag->getCurrent()->getUid(),
-					$bag->getCurrent()->getTitle()
-				);
-				$this->setMarker('category_title', $link);
-
-				$cssClass = ($rowCounter % 2) ? ' class="listrow-odd"' : '';
-				$this->setMarker('class_category_item', $cssClass);
-
-				$allCategories .= $this->getSubpart('SINGLE_CATEGORY_ITEM');
-				$bag->getNext();
-				$rowCounter ++;
-			}
-
-			$this->setMarker('all_category_items', $allCategories);
-			$result = $this->getSubpart('VIEW_CATEGORIES');
-		} else {
-			$result = $this->getSubpart('VIEW_NO_CATEGORIES');
-		}
-
-		return $result;
 	}
 }
 
