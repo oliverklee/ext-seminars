@@ -683,5 +683,32 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->dumpUserValues('pid')
 		);
 	}
+
+
+	///////////////////////
+	// Tests for isPaid()
+	///////////////////////
+
+	public function testIsPaidInitiallyReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->isPaid()
+		);
+	}
+
+	public function testIsPaidForPaidRegistrationReturnsTrue() {
+		$this->fixture->setIsPaid(true);
+
+		$this->assertTrue(
+			$this->fixture->isPaid()
+		);
+	}
+
+	public function testIsPaidForUnpaidRegistrationReturnsFalse() {
+		$this->fixture->setIsPaid(false);
+
+		$this->assertFalse(
+			$this->fixture->isPaid()
+		);
+	}
 }
 ?>

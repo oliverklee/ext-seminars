@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1583] Feature: Add a registration bag builder
 - [#2165] Feature: Show the accreditation number in the mod2 events list and registrations list
 - [#2181] Change: Move the category list to its own class (a view)
 - [#2160] Change: Add methods for hiding and un-hiding columns in tx_seminars_pi1

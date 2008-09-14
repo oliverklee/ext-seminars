@@ -563,13 +563,18 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets whether this attendance has already been paid for.
 	 *
 	 * @return	boolean		whether this attendance has already been paid for
-	 *
-	 * @access	public
 	 */
-	function getIsPaid() {
-		trigger_error('Member function tx_seminars_registration->getIsPaid not '
-			.'implemented yet.'
-		);
+	public function isPaid() {
+		return $this->getRecordPropertyBoolean('paid');
+	}
+
+	/**
+	 * Sets whether this registration has already been paid for.
+	 *
+	 * @param	boolean		whether this attendance has already been paid for
+	 */
+	public function setIsPaid($isPaid) {
+		$this->setRecordPropertyBoolean('paid', $isPaid);
 	}
 
 	/**
@@ -1399,10 +1404,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return	boolean		true if this registration is on the registration
 	 * 						queue, false otherwise
-	 *
-	 * @access	public
 	 */
-	function isOnRegistrationQueue() {
+	public function isOnRegistrationQueue() {
 		return $this->getRecordPropertyBoolean('registration_queue');
 	}
 
