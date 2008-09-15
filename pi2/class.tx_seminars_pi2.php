@@ -42,6 +42,7 @@ require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.p
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationBagBuilder.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
@@ -169,19 +170,19 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 		$result = $this->createRegistrationsHeading();
 
-		$additionalWhere = '';
+		$registrationBagBuilder = t3lib_div::makeInstance(
+			'tx_seminars_registrationBagBuilder'
+		);
+
 		if (!$this->configGetter->getConfValueBoolean(
 				'showAttendancesOnRegistrationQueueInCSV'
 		)) {
-			$additionalWhere = ' AND registration_queue=0';
+			$registrationBagBuilder->limitToRegular();
 		}
 
-		$registrationBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registrationbag'
-		);
-		$registrationBag = new $registrationBagClassname(
-			'seminar='.$eventUid.$additionalWhere
-		);
+		$registrationBagBuilder->limitToEvent($eventUid);
+
+		$registrationBag = $registrationBagBuilder->build();
 
 		while ($currentRegistration = $registrationBag->getCurrent()) {
 			$userData = $this->retrieveData(

@@ -251,17 +251,17 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$firstRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid)
+			array('seminar' => $this->eventUid, 'crdate' => time())
 		);
 		$secondRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid)
+			array('seminar' => $this->eventUid, 'crdate' => (time() + 1))
 		);
 
 		$this->assertEquals(
-			'"","uid"'.CRLF
-				.'"'.((string) $firstRegistrationUid).'"'.CRLF
-				.'"'.((string) $secondRegistrationUid).'"'.CRLF,
+			'"","uid"' . CRLF .
+				'"' . ((string) $firstRegistrationUid) . '"' . CRLF .
+				'"' . ((string) $secondRegistrationUid) . '"' . CRLF,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -275,19 +275,19 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$firstRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid)
+			array('seminar' => $this->eventUid, 'crdate' => time())
 		);
 		$secondRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid)
+			array('seminar' => $this->eventUid, 'crdate' => (time() + 1))
 		);
 
 		$this->fixture->piVars['seminar'] = $this->eventUid;
 
 		$this->assertEquals(
-			'"","uid"'.CRLF
-				.'"'.((string) $firstRegistrationUid).'"'.CRLF
-				.'"'.((string) $secondRegistrationUid).'"'.CRLF,
+			'"","uid"' . CRLF .
+				'"' . ((string) $firstRegistrationUid) . '"' . CRLF .
+				'"' . ((string) $secondRegistrationUid) . '"' . CRLF,
 			$this->fixture->createAndOutputListOfRegistrations()
 		);
 	}
