@@ -282,6 +282,105 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			'))' .
 			')';
 	}
+
+	/**
+	 * Limits the bag to events in the cities given in the first parameter
+	 * $cities.
+	 *
+	 * @param	array		array of city names, set to an empty array for no
+	 * 						limitation, may not be SQL-safe
+	 */
+	public function limitToCities(array $cities = array()) {
+		if (empty($cities)) {
+			unset($this->whereClauseParts['cities']);
+			return;
+		}
+
+		$cityNames = implode(
+			',',
+			$GLOBALS['TYPO3_DB']->fullQuoteArray(
+				$cities,
+				SEMINARS_TABLE_SITES
+			)
+		);
+
+		$this->whereClauseParts['cities'] = SEMINARS_TABLE_SEMINARS . '.uid IN(' .
+			'SELECT ' . SEMINARS_TABLE_SEMINARS . '.uid' .
+			' FROM ' . SEMINARS_TABLE_SEMINARS .
+			' LEFT JOIN ' . SEMINARS_TABLE_SITES_MM . ' ON ' .
+				SEMINARS_TABLE_SEMINARS . '.uid=' .
+				SEMINARS_TABLE_SITES_MM . '.uid_local' .
+			' LEFT JOIN ' . SEMINARS_TABLE_SITES . ' ON ' .
+				SEMINARS_TABLE_SITES_MM . '.uid_foreign=' .
+				SEMINARS_TABLE_SITES . '.uid' .
+			' WHERE ' . SEMINARS_TABLE_SITES .
+				'.city IN(' . $cityNames . ')' .
+		')';
+	}
+
+	/**
+	 * Limits the bag to events in the countries given in the first parameter
+	 * $countries.
+	 *
+	 * @param	array		array of ISO 3166-2 (alpha2) country codes,
+	 * 						invalid country codes are allowed,
+	 * 						set to an empty string for no limitation,
+	 * 						may not be SQL-safe
+	 */
+	public function limitToCountries(array $countries = array()) {
+		if (empty($countries)) {
+			unset($this->whereClauseParts['countries']);
+			return;
+		}
+
+		$countryCodes = implode(
+			',',
+			$GLOBALS['TYPO3_DB']->fullQuoteArray(
+				$countries,
+				SEMINARS_TABLE_SITES
+			)
+		);
+
+		$this->whereClauseParts['countries'] = SEMINARS_TABLE_SEMINARS . '.uid IN(' .
+			'SELECT ' . SEMINARS_TABLE_SEMINARS . '.uid' .
+			' FROM ' . SEMINARS_TABLE_SEMINARS .
+			' LEFT JOIN ' . SEMINARS_TABLE_SITES_MM . ' ON ' .
+				SEMINARS_TABLE_SEMINARS . '.uid=' .
+				SEMINARS_TABLE_SITES_MM . '.uid_local' .
+			' LEFT JOIN ' . SEMINARS_TABLE_SITES . ' ON ' .
+				SEMINARS_TABLE_SITES_MM . '.uid_foreign=' .
+				SEMINARS_TABLE_SITES . '.uid' .
+			' WHERE ' . SEMINARS_TABLE_SITES .
+				'.country IN(' . $countryCodes . ')' .
+		')';
+	}
+
+	/**
+	 * Limits the bag to events in the languages given in the first parameter
+	 * $languages.
+	 *
+	 * @param	string		array of ISO 639-1 (alpha2) language codes,
+	 * 						invalid language codes are allowed,
+	 * 						set to an empty string for no limitation,
+	 * 						may not be SQL-safe
+	 */
+	public function limitToLanguages(array $languages = array()) {
+		if (empty($languages)) {
+			unset($this->whereClauseParts['languages']);
+			return;
+		}
+
+		$languageCodes = implode(
+			',',
+			$GLOBALS['TYPO3_DB']->fullQuoteArray(
+				$languages,
+				SEMINARS_TABLE_SITES
+			)
+		);
+
+		$this->whereClauseParts['languages'] = SEMINARS_TABLE_SEMINARS .
+			'.language IN (' . $languageCodes . ')';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

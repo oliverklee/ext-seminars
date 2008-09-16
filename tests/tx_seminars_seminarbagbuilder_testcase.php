@@ -2009,5 +2009,499 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+
+	//////////////////////////////
+	// Tests for limitToCities()
+	//////////////////////////////
+
+	public function testLimitToCitiesFindsEventsInOneCity() {
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 1')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCities(array('test city 1'));
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToCitiesIgnoresEventsInOtherCity() {
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 2')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCities(array('test city 1'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCitiesWithTwoCitiesFindsEventsEachInOneOfBothCities() {
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 1')
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 2')
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid2,
+			$siteUid2
+		);
+		$this->fixture->limitToCities(array('test city 1', 'test city 2'));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCitiesWithEmptyCitiesArrayFindsEventsWithCities() {
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 1')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCities(array('test city 2'));
+		$this->fixture->limitToCities();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCitiesIgnoresEventsWithDifferentCity() {
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 1')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCities(array('test city 2'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCitiesIgnoresEventWithPlaceWithoutCity() {
+		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCities(array('test city 1'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCitiesWithTwoCitiesFindsOneEventInBothCities() {
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 1')
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 2')
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid2
+		);
+		$this->fixture->limitToCities(array('test city 1', 'test city 2'));
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCitiesWithOneCityFindsEventInTwoCities() {
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 1')
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 2')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 2)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid2
+		);
+		$this->fixture->limitToCities(array('test city 1'));
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCitiesWithTwoCitiesOneDifferentFindsEventInOneOfTheCities() {
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 1')
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'test city 3')
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 2)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid2
+		);
+		$this->fixture->limitToCities(array('test city 2', 'test city 3'));
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////
+	// Tests for limitToCountries()
+	/////////////////////////////////
+
+	public function testLimitToCountriesFindsEventsInOneCountry() {
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'DE')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCountries(array('DE'));
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToCountriesIgnoresEventsInOtherCountry() {
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'DE')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCountries(array('US'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCountriesFindsEventsInTwoCountries() {
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'US')
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'DE')
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid2,
+			$siteUid2
+		);
+		$this->fixture->limitToCountries(array('US', 'DE'));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCountriesWithEmptyCountriesArrayFindsAllEvents() {
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'US')
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid1
+		);
+		$this->fixture->limitToCountries(array('DE'));
+		$this->fixture->limitToCountries();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCountriesIgnoresEventsWithDifferentCountry() {
+		$siteUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'DE')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCountries(array('US'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCountriesIgnoresEventsWithPlaceWithoutCountry() {
+		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
+		);
+		$this->fixture->limitToCountries(array('DE'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToCountriesWithOneCountryFindsEventInTwoCountries() {
+		$siteUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'US')
+		);
+		$siteUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('country' => 'DE')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid2
+		);
+		$this->fixture->limitToCountries(array('US'));
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////////
+	// Tests for limitToLanguages()
+	/////////////////////////////////
+
+	public function testLimitToLanguagesFindsEventsInOneLanguage() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('language' => 'DE')
+		);
+		$this->fixture->limitToLanguages(array('DE'));
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToLanguagesFindsEventsInTwoLanguages() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('language' => 'EN')
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('language' => 'DE')
+		);
+		$this->fixture->limitToLanguages(array('EN', 'DE'));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToLanguagesWithEmptyLanguagesArrayFindsAllEvents() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('language' => 'EN')
+		);
+		$this->fixture->limitToLanguages(array('DE'));
+		$this->fixture->limitToLanguages();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToLanguagesIgnoresEventsWithDifferentLanguage() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('language' => 'DE')
+		);
+		$this->fixture->limitToLanguages(array('EN'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToLanguagesIgnoresEventsWithoutLanguage() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->fixture->limitToLanguages(array('EN'));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
 }
 ?>

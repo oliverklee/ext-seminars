@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1580] Change: Move the seminarbag::getAdditionalQuery* functions to the seminarbagbuilder
 - [#2158] Feature: Allow to add additional tables in the bag builder via a method
 - [#1583] Feature: Add a registration bag builder
 - [#2165] Feature: Show the accreditation number in the mod2 events list and registrations list
