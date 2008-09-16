@@ -214,6 +214,15 @@ abstract class tx_seminars_bagbuilder {
 
 		unset($this->additionalTableNames[$additionalTableName]);
 	}
+
+	/**
+	 * Sets the order by statement for the seminar bag.
+	 *
+	 * @param	string		the order by statement to set, may be empty
+	 */
+	public function setOrderBy($orderBy) {
+		$this->orderBy = $orderBy;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_bagbuilder.php']) {

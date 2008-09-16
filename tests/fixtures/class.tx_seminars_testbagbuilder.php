@@ -60,6 +60,15 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	public function getAdditionalTableNames() {
 		return $this->additionalTableNames;
 	}
+
+	/**
+	 * Returns the order by statement.
+	 *
+	 * @return	string		the order by statement, may be empty
+	 */
+	public function getOrderBy() {
+		return $this->orderBy;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_testbagbuilder.php']) {

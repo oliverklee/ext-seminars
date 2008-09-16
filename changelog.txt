@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2196] Feature: Allow to set the orderBy via a method in tx_seminars_bagbuilder
 - [#1580] Change: Move the seminarbag::getAdditionalQuery* functions to the seminarbagbuilder
 - [#2158] Feature: Allow to add additional tables in the bag builder via a method
 - [#1583] Feature: Add a registration bag builder

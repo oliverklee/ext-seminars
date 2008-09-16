@@ -77,6 +77,26 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testBuilderBuildsBagSortedAscendingByUid() {
+		$eventUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+		$eventUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+
+		$testBag = $this->fixture->build();
+		$this->assertEquals(
+			2,
+			$testBag->getObjectCountWithoutLimit()
+		);
+
+		$this->assertEquals(
+			$eventUid1,
+			$testBag->getCurrent()->getUid()
+		);
+		$this->assertEquals(
+			$eventUid2,
+			$testBag->getNext()->getUid()
+		);
+	}
+
 
 	///////////////////////////////////
 	// Tests concerning source pages.
@@ -621,6 +641,50 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 				SEMINARS_TABLE_SEMINARS,
 				$this->fixture->getAdditionalTableNames()
 			)
+		);
+	}
+
+
+	//////////////////////////////////
+	// Tests concerning setOrderBy()
+	//////////////////////////////////
+
+	public function testSetOrderByWithOrderBySetsOrderBy() {
+		$this->fixture->setOrderBy('field ASC');
+
+		$this->assertEquals(
+			'field ASC',
+			$this->fixture->getOrderBy()
+		);
+	}
+
+	public function testSetOrderByWithEmptyStringRemovesOrderBy() {
+		$this->fixture->setOrderBy('');
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getOrderBy()
+		);
+	}
+
+	public function testSetOrderByWithOrderByActuallySortsTheBag() {
+		$this->fixture->setOrderBy('uid DESC');
+		$eventUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+		$eventUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+
+		$testBag = $this->fixture->build();
+		$this->assertEquals(
+			2,
+			$testBag->getObjectCountWithoutLimit()
+		);
+
+		$this->assertEquals(
+			$eventUid2,
+			$testBag->getCurrent()->getUid()
+		);
+		$this->assertEquals(
+			$eventUid1,
+			$testBag->getNext()->getUid()
 		);
 	}
 }
