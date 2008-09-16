@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbagbuilder.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the seminar bag builder class in the 'seminars' extension.
  *
@@ -29,13 +34,8 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbagbuilder.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
@@ -562,6 +562,65 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	//////////////////////////////////////////////
+	// Tests concerning addAdditionalTableName()
+	//////////////////////////////////////////////
+
+	public function testAddAdditionalTableNameWithEmptyTableNameThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $additionalTableName must not be empty.'
+		);
+
+		$this->fixture->addAdditionalTableName('');
+	}
+
+	public function testAddAdditionalTableNameWithTableNameAddsAdditionalTableName() {
+		$this->fixture->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+
+		$this->assertTrue(
+			in_array(
+				SEMINARS_TABLE_SEMINARS,
+				$this->fixture->getAdditionalTableNames()
+			)
+		);
+	}
+
+
+	/////////////////////////////////////////////////
+	// Tests concerning removeAdditionalTableName()
+	/////////////////////////////////////////////////
+
+	public function testRemoveAdditionalTableNameWithEmptyTableNameThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $additionalTableName must not be empty.'
+		);
+
+		$this->fixture->removeAdditionalTableName('');
+	}
+
+	public function testRemoveAdditionalTableNameWithNotSetTableNameThrowsException() {
+		$this->setExpectedException(
+			'Exception',
+			'The given additional table name does not exist in the list ' .
+				'of additional table names.'
+		);
+
+		$this->fixture->removeAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+	}
+
+	public function testRemoveAdditionalTableNameWithSetTableNameRemovesAdditionalTableName() {
+		$this->fixture->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+		$this->fixture->removeAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+
+		$this->assertFalse(
+			in_array(
+				SEMINARS_TABLE_SEMINARS,
+				$this->fixture->getAdditionalTableNames()
+			)
 		);
 	}
 }

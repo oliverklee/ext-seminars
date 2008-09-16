@@ -22,6 +22,10 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
+
 /**
  * Class 'tx_seminars_bagbuilder' for the 'seminars' extension.
  *
@@ -31,38 +35,49 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
-
 abstract class tx_seminars_bagbuilder {
-	/** class name of the bag class that will be built */
+	/**
+	 * @var	string		class name of the bag class that will be built
+	 */
 	protected $bagClassName = '';
 
 	/**
-	 * associative array with the WHERE clause parts (will be concatenated with
-	 * " AND " later)
+	 * @var	array		associative array with the WHERE clause parts (will be
+	 * 					concatenated with " AND " later)
 	 */
 	protected $whereClauseParts = array();
 
-	/** the sorting field */
+	/**
+	 * @var	string		the sorting field
+	*/
 	protected $orderBy = 'uid';
 
-	/** the field by which the DB query result should be grouped */
+	/**
+	 * @var	integer		the field by which the DB query result should be grouped
+	 */
 	protected $groupBy = '';
 
-	/** the number of records to retrieve; leave empty to set no limit */
+	/**
+	 * @var	string		the number of records to retrieve; leave empty to set
+	 * 					no limit
+	 */
 	protected $limit = '';
 
-	/** comma-separated list of additional table names for the query */
-	protected $additionalTableNames = '';
+	/**
+	 * @var	array		array of additional table names for the query
+	 */
+	protected $additionalTableNames = array();
 
-	/** whether the timing of records should be ignored */
+	/**
+	 * @var	boolean		whether the timing of records should be ignored
+	 */
 	protected $ignoreTimingOfRecords = false;
 
-	/** whether hidden records should be shown, too */
+	/**
+	 * @var	boolean		whether hidden records should be shown, too
+	 */
 	protected $showHiddenRecords = false;
 
 	/**
@@ -76,7 +91,7 @@ abstract class tx_seminars_bagbuilder {
 		);
 		return new $bagClassname(
 			$this->getWhereClause(),
-			$this->additionalTableNames,
+			implode(',', $this->additionalTableNames),
 			$this->groupBy,
 			$this->orderBy,
 			$this->limit,
@@ -157,6 +172,47 @@ abstract class tx_seminars_bagbuilder {
 		}
 
 		return implode(' AND ', $this->whereClauseParts);
+	}
+
+	/**
+	 * Adds the table name given in the parameter $additionalTableName to
+	 * $this->additionalTableNames.
+	 *
+	 * @param	string		the table name to add to the additional table names
+	 * 						array, must not be empty
+	 */
+	public function addAdditionalTableName($additionalTableName) {
+		if ($additionalTableName == '') {
+			throw new Exception(
+				'The parameter $additionalTableName must not be empty.'
+			);
+		}
+
+		$this->additionalTableNames[$additionalTableName] = $additionalTableName;
+	}
+
+	/**
+	 * Removes the table name given in the parameter $additionalTableName from
+	 * $this->additionalTableNames.
+	 *
+	 * @param	string		the table name to remove from the additional table
+	 * 						names array, must not be empty
+	 */
+	public function removeAdditionalTableName($additionalTableName) {
+		if ($additionalTableName == '') {
+			throw new Exception(
+				'The parameter $additionalTableName must not be empty.'
+			);
+		}
+
+		if (!isset($this->additionalTableNames[$additionalTableName])) {
+			throw new Exception(
+				'The given additional table name does not exist in the list ' .
+					'of additional table names.'
+			);
+		}
+
+		unset($this->additionalTableNames[$additionalTableName]);
 	}
 }
 

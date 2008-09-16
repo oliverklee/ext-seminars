@@ -22,6 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbag.php');
+
 /**
  * Class 'tx_seminars_testbagbuilder' for the 'seminars' extension.
  *
@@ -31,13 +34,12 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbag.php');
-
 class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
-	/** class name of the bag class that will be built */
+	/**
+	 * @var	string		class name of the bag class that will be built
+	 */
 	protected $bagClassName = 'tx_seminars_testbag';
 
 	/**
@@ -48,6 +50,15 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToTitle($title) {
 		$this->whereClauseParts['title'] = 'title = "' . $title . '"';
+	}
+
+	/**
+	 * Returns the additional table names.
+	 *
+	 * @return	array		the additional table names, may be empty
+	 */
+	public function getAdditionalTableNames() {
+		return $this->additionalTableNames;
 	}
 }
 
