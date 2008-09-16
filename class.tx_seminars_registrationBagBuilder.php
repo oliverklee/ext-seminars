@@ -106,6 +106,28 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	public function removeQueueLimitation() {
 		unset($this->whereClauseParts['queue']);
 	}
+
+	/**
+	 * Limits the bag to contain only registrations with seats equal or less
+	 * than the seats given in the parameter $seats.
+	 *
+	 * @param	integer		the number of seats to filter for,
+	 * 						set to 0 to remove the limitation,
+	 * 						must be >= 0
+	 */
+	public function limitToSeatsAtMost($seats = 0) {
+		if ($seats < 0) {
+			throw new Exception('The parameter $seats must be >= 0.');
+		}
+
+		if ($seats == 0) {
+			unset($this->whereClauseParts['seats']);
+			return;
+		}
+
+		$this->whereClauseParts['seats'] = SEMINARS_TABLE_ATTENDANCES .
+			'.seats<=' . $seats;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationBagBuilder.php']) {

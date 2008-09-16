@@ -572,28 +572,25 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * Fills vacancies created through a unregistration with attendees from the
 	 * registration queue.
 	 *
-	 * @param	object		live plugin object
-	 *
-	 * @access	public
+	 * @param	tslib_pibase		live plugin object
 	 */
-	function fillVacancies(tslib_pibase $plugin) {
+	public function fillVacancies(tslib_pibase $plugin) {
 		$seminar = $this->registration->getSeminarObject();
 		$seminar->calculateStatistics();
 
 		if ($seminar->hasVacancies()) {
 			$vacancies = $seminar->getVacancies();
 
-			$registrationBagClassname = t3lib_div::makeInstanceClassname(
-				'tx_seminars_registrationbag'
+			$registrationBagBuilder = t3lib_div::makeInstance(
+				'tx_seminars_registrationBagBuilder'
 			);
-			$registrationBag = new $registrationBagClassname(
-				'seminar='.$seminar->getUid()
-					.' AND seats<='.$seminar->getVacancies()
-					.' AND registration_queue=1',
-				'',
-				'',
-				'crdate ASC'
+			$registrationBagBuilder->limitToEvent($seminar->getUid());
+			$registrationBagBuilder->limitToOnQueue();
+			$registrationBagBuilder->limitToSeatsEqualOrLessThanVacancies(
+				$seminar->getVacancies()
 			);
+
+			$registrationBag = $registrationBagBuilder->build();
 
 			while ($registration = $registrationBag->getCurrent()
 				&& ($vacancies > 0)

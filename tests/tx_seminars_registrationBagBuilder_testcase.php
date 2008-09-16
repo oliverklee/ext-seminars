@@ -371,5 +371,75 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			$registrationBag->getCurrent()->isOnRegistrationQueue()
 		);
 	}
+
+
+	///////////////////////////////////
+	// Tests for limitToSeatsAtMost()
+	///////////////////////////////////
+
+	public function testLimitToSeatsAtMostWithNegativeVacanciesThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $seats must be >= 0.'
+		);
+
+		$this->fixture->limitToSeatsAtMost(-1);
+	}
+
+	public function testLimitToSeatsAtMostFindsRegistrationWithEqualSeats() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seats' => 2)
+		);
+		$this->fixture->limitToSeatsAtMost(2);
+		$registrationBag = $this->fixture->build();
+
+		$this->assertEquals(
+			2,
+			$registrationBag->getCurrent()->getSeats()
+		);
+	}
+
+	public function testLimitToSeatsAtMostFindsRegistrationWithLessSeats() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seats' => 1)
+		);
+		$this->fixture->limitToSeatsAtMost(2);
+		$registrationBag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$registrationBag->getCurrent()->getSeats()
+		);
+	}
+
+	public function testLimitToSeatsAtMostIgnoresRegistrationWithMoreSeats() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seats' => 2)
+		);
+		$this->fixture->limitToSeatsAtMost(1);
+		$registrationBag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$registrationBag->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToSeatsAtMostWithZeroSeatsFindsAllRegistrations() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seats' => 2)
+		);
+		$this->fixture->limitToSeatsAtMost(1);
+		$this->fixture->limitToSeatsAtMost(0);
+		$registrationBag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$registrationBag->getObjectCountWithoutLimit()
+		);
+	}
 }
 ?>
