@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2198] Feature: Add a method limitToTopicRecords() to tx_seminars_seminarbagbuilder
 - [#2196] Feature: Allow to set the orderBy via a method in tx_seminars_bagbuilder
 - [#1580] Change: Move the seminarbag::getAdditionalQuery* functions to the seminarbagbuilder
 - [#2158] Feature: Allow to add additional tables in the bag builder via a method

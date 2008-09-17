@@ -2503,5 +2503,82 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+
+	////////////////////////////////////
+	// Tests for limitToTopicRecords()
+	////////////////////////////////////
+
+	public function testLimitToTopicRecordsFindsTopicEventRecords() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->fixture->limitToTopicRecords();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToTopicRecordsIgnoresSingleEventRecords() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+		$this->fixture->limitToTopicRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToTopicRecordsIgnoresEventDateRecords() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_DATE)
+		);
+		$this->fixture->limitToTopicRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests for removeLimitToTopicRecords()
+	//////////////////////////////////////////
+
+	public function testRemoveLimitToTopicRecordsFindsSingleEventRecords() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+		$this->fixture->limitToTopicRecords();
+		$this->fixture->removeLimitToTopicRecords();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testRemoveLimitToTopicRecordsFindsEventDateRecords() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_DATE)
+		);
+		$this->fixture->limitToTopicRecords();
+		$this->fixture->removeLimitToTopicRecords();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
 }
 ?>

@@ -381,6 +381,21 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['languages'] = SEMINARS_TABLE_SEMINARS .
 			'.language IN (' . $languageCodes . ')';
 	}
+
+	/**
+	 * Limits the bag to topic event records.
+	 */
+	public function limitToTopicRecords() {
+		$this->whereClauseParts['topic'] = SEMINARS_TABLE_SEMINARS .
+			'.object_type=' . SEMINARS_RECORD_TYPE_TOPIC;
+	}
+
+	/**
+	 * Removes the limitation for topic event records.
+	 */
+	public function removeLimitToTopicRecords() {
+		unset($this->whereClauseParts['topic']);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {
