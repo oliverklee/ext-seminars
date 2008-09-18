@@ -418,6 +418,23 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['owner'] = SEMINARS_TABLE_SEMINARS .
 			'.owner_feuser=' . $feUserUid;
 	}
+
+	/**
+	 * Limits the bag to date and single records.
+	 */
+	public function limitToDateAndSingleRecords() {
+		$this->whereClauseParts['date_single'] = '(' . SEMINARS_TABLE_SEMINARS .
+			'.object_type=' . SEMINARS_RECORD_TYPE_DATE . ' OR ' .
+			SEMINARS_TABLE_SEMINARS . '.object_type=' .
+			SEMINARS_RECORD_TYPE_COMPLETE .')';
+	}
+
+	/**
+	 * Removes the limitation for date and single records.
+	 */
+	public function removeLimitToDateAndSingleRecords() {
+		unset($this->whereClauseParts['date_single']);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {
