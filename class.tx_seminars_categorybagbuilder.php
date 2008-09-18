@@ -22,6 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.php');
+
 /**
  * Class 'tx_seminars_categorybagbuilder' for the 'seminars' extension.
  *
@@ -31,16 +34,22 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.php');
-
 class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
-	/** class name of the bag class that will be built */
+	/**
+	 * @var	string		class name of the bag class that will be built
+	 */
 	protected $bagClassName = 'tx_seminars_categorybag';
 
-	/** the sorting field */
+	/**
+	 * @var	string		the table name of the bag to build
+	 */
+	protected $tableName = SEMINARS_TABLE_CATEGORIES;
+
+	/**
+	 * @var string		the sorting field
+	 */
 	protected $orderBy = 'title';
 
 	/**

@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2205] Fix: tx_seminars_bagbuilder::setTestMode() does not work with additional tables
 - [#2200] Feature: Add a method limitToDateAndSingleRecords() to tx_seminars_seminarbagbuilder
 - [#2201] Feature: Add a method limitToOwner() to tx_seminars_seminarbagbuilder
 - [#2204] Feature: Add a method setLimit() to tx_seminars_bagbuilder

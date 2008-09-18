@@ -22,6 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
+
 /**
  * Class 'tx_seminars_seminarbagbuilder' for the 'seminars' extension.
  *
@@ -31,17 +34,22 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
-
 class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
-	/** class name of the bag class that will be built */
+	/**
+	 * @var	string		class name of the bag class that will be built
+	 */
 	protected $bagClassName = 'tx_seminars_seminarbag';
 
-	/** list of the valid keys for time-frames */
+	/**
+	 * @var	string		the table name of the bag to build
+	 */
+	protected $tableName = SEMINARS_TABLE_SEMINARS;
+
+	/**
+	 * @var	array		list of the valid keys for time-frames
+	 */
 	private static $validTimeFrames = array(
 		'past', 'pastAndCurrent', 'current', 'currentAndUpcoming', 'upcoming',
 		'deadlineNotOver', 'all'

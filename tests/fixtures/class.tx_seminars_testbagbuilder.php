@@ -43,6 +43,11 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	protected $bagClassName = 'tx_seminars_testbag';
 
 	/**
+	 * @var	string		the table name of the bag to build
+	 */
+	protected $tableName = SEMINARS_TABLE_TEST;
+
+	/**
 	 * Limits the bag to records with a particular title.
 	 *
 	 * @param	string		title which the bag elements must match, may be
@@ -77,6 +82,15 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function getLimit() {
 		return $this->limit;
+	}
+
+	/**
+	 * Sets $this->tableName with the value in the parameter $tableName.
+	 *
+	 * @param	string		the table name to set, may be empty for testing
+	 */
+	public function setTableName($tableName) {
+		$this->tableName = $tableName;
 	}
 }
 

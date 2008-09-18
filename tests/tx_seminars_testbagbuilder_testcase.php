@@ -24,6 +24,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_brokenTestingBagBuilder.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
@@ -65,6 +66,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	// Tests for the basic builder functions.
 	///////////////////////////////////////////
 
+	public function testBuilderThrowsExceptionForEmptyTableName() {
+		$this->setExpectedException(
+			'Exception', 'The attribute $this->tableName must not be empty.'
+		);
+
+		$brokenTestBagBuilder = new tx_seminars_brokenTestingBagBuilder();
+	}
+
 	public function testBuilderBuildsAnObject() {
 		$this->assertTrue(
 			is_object($this->fixture->build())
@@ -95,6 +104,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid2,
 			$testBag->getNext()->getUid()
 		);
+	}
+
+	public function testBuilderWithAdditionalTableNameDoesNotProduceSqlError() {
+		$this->fixture->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+
+		$this->fixture->build();
 	}
 
 
@@ -719,6 +734,18 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->fixture->build()->getObjectCountWithLimit()
+		);
+	}
+
+
+	///////////////////////////////////
+	// Tests concerning setTestMode()
+	///////////////////////////////////
+
+	public function testSetTestModeAddsTheTableNameBeforeIsDummy() {
+		$this->assertContains(
+			SEMINARS_TABLE_TEST . '.is_dummy_record = 1',
+			$this->fixture->getWhereClause()
 		);
 	}
 }

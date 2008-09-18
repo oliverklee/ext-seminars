@@ -42,6 +42,11 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	protected $bagClassName = 'tx_seminars_registrationbag';
 
 	/**
+	 * @var	string		the table name of the bag to build
+	 */
+	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
+
+	/**
 	 * @var	string		the sorting field
 	 */
 	protected $orderBy = 'crdate';

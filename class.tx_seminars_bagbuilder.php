@@ -44,6 +44,11 @@ abstract class tx_seminars_bagbuilder {
 	protected $bagClassName = '';
 
 	/**
+	 * @var	string		the table name of the bag to build
+	 */
+	protected $tableName = '';
+
+	/**
 	 * @var	array		associative array with the WHERE clause parts (will be
 	 * 					concatenated with " AND " later)
 	 */
@@ -79,6 +84,17 @@ abstract class tx_seminars_bagbuilder {
 	 * @var	boolean		whether hidden records should be shown, too
 	 */
 	protected $showHiddenRecords = false;
+
+	/**
+	 * The constructor. Checks that $this->tableName is not empty.
+	 */
+	public function __construct() {
+		if ($this->tableName == '') {
+			throw new Exception(
+				'The attribute $this->tableName must not be empty.'
+			);
+		}
+	}
 
 	/**
 	 * Creates and returns the customized bag.
@@ -152,7 +168,8 @@ abstract class tx_seminars_bagbuilder {
 	 * created with the oelib testing framework.
 	 */
 	public function setTestMode() {
-		$this->whereClauseParts['tests'] = 'is_dummy_record = 1';
+		$this->whereClauseParts['tests'] = $this->tableName .
+			'.is_dummy_record = 1';
 	}
 
 	/**
