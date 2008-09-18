@@ -216,12 +216,26 @@ abstract class tx_seminars_bagbuilder {
 	}
 
 	/**
-	 * Sets the order by statement for the seminar bag.
+	 * Sets the ORDER BY statement for the bag to build.
 	 *
-	 * @param	string		the order by statement to set, may be empty
+	 * @param	string		the ORDER BY statement to set, may be empty
 	 */
 	public function setOrderBy($orderBy) {
 		$this->orderBy = $orderBy;
+	}
+
+	/**
+	 * Sets the LIMIT statement of the bag to build.
+	 *
+	 * Examples for the parameter:
+	 * - "0, 10" to limit the bag to 10 records, starting from the first record
+	 * - "10, 10" to limit the bag to 10 records, starting from the 11th record
+	 * - "10" to limit the bag to the first 10 records
+	 *
+	 * @param	string		the LIMIT statement to set, may be empty
+	 */
+	public function setLimit($limit) {
+		$this->limit = $limit;
 	}
 }
 

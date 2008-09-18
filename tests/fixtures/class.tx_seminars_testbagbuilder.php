@@ -69,6 +69,15 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	public function getOrderBy() {
 		return $this->orderBy;
 	}
+
+	/**
+	 * Returns the limit statement.
+	 *
+	 * @return	string		the limit statement, may be empty
+	 */
+	public function getLimit() {
+		return $this->limit;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_testbagbuilder.php']) {

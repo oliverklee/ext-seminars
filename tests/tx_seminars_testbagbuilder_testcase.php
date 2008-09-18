@@ -687,5 +687,39 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$testBag->getNext()->getUid()
 		);
 	}
+
+
+	////////////////////////////////
+	// Tests concerning setLimit()
+	////////////////////////////////
+
+	public function testSetLimitWithNonEmptyLimitSetsLimit() {
+		$this->fixture->setLimit('0, 30');
+
+		$this->assertEquals(
+			'0, 30',
+			$this->fixture->getLimit()
+		);
+	}
+
+	public function testSetLimitWithEmptyStringRemovesLimit() {
+		$this->fixture->setLimit('');
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getLimit()
+		);
+	}
+
+	public function testSetLimitWithLimitActuallyLimitsTheBag() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+		$this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+		$this->fixture->setLimit('0, 1');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithLimit()
+		);
+	}
 }
 ?>
