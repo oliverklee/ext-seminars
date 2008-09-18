@@ -1,4 +1,5 @@
 0.6.3 (currently working on)
+- [#2204] Fix: tx_seminars_bag::getObjectCountWithLimit() returns null
 - [#1916, #2093] Change: Use the createFakeFrontEnd function from the testing framework in the Seminar Manager
 - [#1137] Change: Change =& new to = new and remove the & from before function names
 

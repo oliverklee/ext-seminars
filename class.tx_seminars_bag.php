@@ -290,7 +290,7 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * @return	integer		the total number of objects in this bag, may be zero
 	 */
 	public function getObjectCountWithLimit() {
-		return $this->objectCountLimit;
+		return $this->objectCountWithLimit;
 	}
 
 	/**
