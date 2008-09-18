@@ -2580,5 +2580,93 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+
+	/////////////////////////////
+	// Tests for limitToOwner()
+	/////////////////////////////
+
+	public function testLimitToOwnerWithNegativeFeUserUidThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $feUserUid must be >= 0.'
+		);
+
+		$this->fixture->limitToOwner(-1);
+	}
+
+	public function testLimitToOwnerWithPositiveFeUserUidFindsEventsWithOwner() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('owner_feuser' => $feUserUid)
+		);
+		$this->fixture->limitToOwner($feUserUid);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithoutOwner() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->fixture->limitToOwner($feUserUid);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithDifferentOwner() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('owner_feuser' => ($feUserUid + 1))
+		);
+		$this->fixture->limitToOwner($feUserUid);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithoutOwner() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->fixture->limitToOwner($feUserUid);
+		$this->fixture->limitToOwner(0);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithOwner() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('owner_feuser' => $feUserUid)
+		);
+		$this->fixture->limitToOwner($feUserUid);
+		$this->fixture->limitToOwner(0);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
 }
 ?>

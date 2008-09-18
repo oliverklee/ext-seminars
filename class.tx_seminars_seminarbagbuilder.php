@@ -396,6 +396,28 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	public function removeLimitToTopicRecords() {
 		unset($this->whereClauseParts['topic']);
 	}
+
+	/**
+	 * Limits the bag to events where the FE user given in the parameter
+	 * $feUserUid is the owner.
+	 *
+	 * @param	integer		the FE user UID of the owner to limit for,
+	 * 						set to 0 to remove the limitation,
+	 * 						must be >= 0
+	 */
+	public function limitToOwner($feUserUid) {
+		if ($feUserUid < 0) {
+			throw new Exception('The parameter $feUserUid must be >= 0.');
+		}
+
+		if ($feUserUid == 0) {
+			unset($this->whereClauseParts['owner']);
+			return;
+		}
+
+		$this->whereClauseParts['owner'] = SEMINARS_TABLE_SEMINARS .
+			'.owner_feuser=' . $feUserUid;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

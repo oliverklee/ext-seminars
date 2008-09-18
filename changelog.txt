@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2201] Feature: Add a method limitToOwner() to tx_seminars_seminarbagbuilder
 - [#2204] Feature: Add a method setLimit() to tx_seminars_bagbuilder
 - [#2198] Feature: Add a method limitToTopicRecords() to tx_seminars_seminarbagbuilder
 - [#2196] Feature: Allow to set the orderBy via a method in tx_seminars_bagbuilder
