@@ -443,6 +443,31 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	public function removeLimitToDateAndSingleRecords() {
 		unset($this->whereClauseParts['date_single']);
 	}
+
+	/**
+	 * Limits the bag to events with the FE user UID given in the parameter
+	 * $feUserUid as event manager.
+	 *
+	 * @param	integer		the FE user UID of the event manager to limit for,
+	 * 						set to 0 to remove the limitation,
+	 * 						must be >= 0
+	 */
+	public function limitToEventManager($feUserUid) {
+		if ($feUserUid < 0) {
+			throw new Exception('The parameter $feUserUid must be >= 0.');
+		}
+
+		if ($feUserUid == 0) {
+			$this->removeAdditionalTableName(SEMINARS_TABLE_VIPS_MM);
+			unset($this->whereClauseParts['vip']);
+			return;
+		}
+
+		$this->addAdditionalTableName(SEMINARS_TABLE_VIPS_MM);
+		$this->whereClauseParts['vip'] = SEMINARS_TABLE_SEMINARS . '.uid=' .
+			SEMINARS_TABLE_VIPS_MM . '.uid_local AND ' .
+			SEMINARS_TABLE_VIPS_MM . '.uid_foreign=' . $feUserUid;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

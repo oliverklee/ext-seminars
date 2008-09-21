@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the seminar bag builder class in the 'seminars' extension.
  *
@@ -29,13 +34,8 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
@@ -2720,6 +2720,71 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToDateAndSingleRecords();
 		$this->fixture->removeLimitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	////////////////////////////////////
+	// Tests for limitToEventManager()
+	////////////////////////////////////
+
+	public function testLimitToEventManagerWithNegativeFeUserUidThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $feUserUid must be >= 0.'
+		);
+
+		$this->fixture->limitToEventManager(-1);
+	}
+
+	public function testLimitToEventManagerWithPositiveFeUserUidFindsEventsWithEventManager() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('vips' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_VIPS_MM,
+			$eventUid,
+			$feUserUid
+		);
+
+		$this->fixture->limitToEventManager($feUserUid);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventManagerWithPositiveFeUserUidIgnoresEventsWithoutEventManager() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->fixture->limitToEventManager($feUserUid);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventManagerWithZeroFeUserUidFindsEventsWithoutEventManager() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->fixture->limitToEventManager($feUserUid);
+		$this->fixture->limitToEventManager(0);
 
 		$this->assertEquals(
 			1,
