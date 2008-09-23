@@ -367,6 +367,13 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkListPid();
 	}
 
+ 	/**
+	 * Checks the configuration for: tx_seminars_pi1/favorites_list
+	 */
+	protected function check_tx_seminars_pi1_favorites_list() {
+		$this->check_tx_seminars_pi1_seminar_list();
+	}
+
 	/**
 	 * This check isn't actually used. It is merely needed for the unit tests.
 	 */
@@ -498,7 +505,8 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				'edit_event',
 				'my_entered_events',
 				'countdown',
-				'category_list'
+				'category_list',
+				'favorites_list',
 			)
 		);
 	}

@@ -362,6 +362,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				// because createListView() will differentiate later.
 			case 'seminar_list':
 				// The fallthrough is intended.
+			case 'favorites_list':
+				$this->setFlavor('favorites_list');
+				$this->whatToDisplay = 'favorites_list';
+				$result = $this->createListView($this->whatToDisplay);
+				break;
 			default:
 				// Show the single view if a 'showUid' variable is set.
 				if ($this->showUid) {
@@ -1462,6 +1467,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				} else {
 					$isOkay = false;
 				}
+				break;
+			case 'favorites_list':
+				$result = 'Hello World. When I grow up I will be the list of ' .
+							'favorites';
 				break;
 			default:
 				break;
