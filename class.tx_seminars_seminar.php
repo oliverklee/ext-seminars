@@ -4275,10 +4275,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	integer		our begin date and time as a UNIX timestamp or 0 if
 	 * 						we don't have a begin date
-	 *
-	 * @access	public
 	 */
-	function getBeginDateAsTimestamp() {
+	public function getBeginDateAsTimestamp() {
 		if (!$this->hasTimeslots()) {
 			return parent::getBeginDateAsTimestamp();
 		}
@@ -4306,10 +4304,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	integer		our end date and time as a UNIX timestamp or 0 if we
 	 * 						don't have an end date
-	 *
-	 * @access	public
 	 */
-	function getEndDateAsTimestamp() {
+	public function getEndDateAsTimestamp() {
 		if (!$this->hasTimeslots()) {
 			return parent::getEndDateAsTimestamp();
 		}

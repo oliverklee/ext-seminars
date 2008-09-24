@@ -2791,5 +2791,91 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+
+	/////////////////////////////////////
+	// Tests for limitToEventsNextDay()
+	/////////////////////////////////////
+
+	public function testLimitToEventsNextDayFindsEventsNextDay() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => ONE_DAY, 'end_date' => (ONE_DAY + 60 * 60))
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => (2 * ONE_DAY),
+				'end_date' => (60 * 60 + 2 * ONE_DAY),
+				)
+		);
+		$this->fixture->limitToEventsNextDay(
+			new tx_seminars_seminar($eventUid1)
+		);
+
+		$this->assertEquals(
+			$eventUid2,
+			$this->fixture->build()->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToEventsNextDayIgnoresEarlierEvents() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => ONE_DAY, 'end_date' => (ONE_DAY + 60 * 60))
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => (60 * 60),
+				)
+		);
+		$this->fixture->limitToEventsNextDay(
+			new tx_seminars_seminar($eventUid1)
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventsNextDayIgnoresEventsLaterThanOneDay() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => ONE_DAY, 'end_date' => (ONE_DAY + 60 * 60))
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => (3 * ONE_DAY),
+				'end_date' => (60 * 60 + 3 * ONE_DAY),
+				)
+		);
+		$this->fixture->limitToEventsNextDay(
+			new tx_seminars_seminar($eventUid1)
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToEventsNextDayWithEventWithEmptyEndDateThrowsException() {
+		$this->setExpectedException(
+			'Exception',
+			'The event object given in the first parameter $event must ' .
+				'have an end date set.'
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->fixture->limitToEventsNextDay(
+			new tx_seminars_seminar($eventUid1)
+		);
+	}
 }
 ?>

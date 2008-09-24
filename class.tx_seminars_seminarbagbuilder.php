@@ -468,6 +468,36 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			SEMINARS_TABLE_VIPS_MM . '.uid_local AND ' .
 			SEMINARS_TABLE_VIPS_MM . '.uid_foreign=' . $feUserUid;
 	}
+
+	/**
+	 * Limits the bag to events on the day after the end date of the event given
+	 * event in the first parameter $event.
+	 *
+	 * @param	tx_seminars_seminar		the event object with the end date to
+	 * 									limit for, must have an end date
+	 */
+	public function limitToEventsNextDay(tx_seminars_seminar $event) {
+		if (!$event->hasEndDate()) {
+			throw new Exception(
+				'The event object given in the first parameter $event must ' .
+					'have an end date set.'
+			);
+		}
+
+		$endDate = $event->getEndDateAsTimestamp();
+		$midnightBeforeEndDate = $endDate - ($endDate % ONE_DAY);
+		$secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * ONE_DAY;
+
+		$this->whereClauseParts['next_day'] = 'begin_date>=' . $endDate .
+			' AND begin_date<' . $secondMidnightAfterEndDate;
+	}
+
+	/**
+	 * Removes the limitation to events on the next day.
+	 */
+	public function removeLimitToEventsNextDay() {
+		unset($this->whereClauseParts['next_day']);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {
