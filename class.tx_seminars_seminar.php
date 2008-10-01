@@ -1887,10 +1887,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * 2 = multiple event date record
 	 *
 	 * @return	integer		the record type
-	 *
-	 * @access	public
 	 */
-	function getRecordType() {
+	public function getRecordType() {
 		return $this->getRecordPropertyInteger('object_type');
 	}
 
@@ -3138,22 +3136,20 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Checks whether we are a date record.
 	 *
 	 * @return	boolean		true if we are a date record, false otherwise.
-	 *
-	 * @access	public
 	 */
-	function isEventDate() {
-		return ($this->getRecordPropertyInteger('object_type') == 2);
+	public function isEventDate() {
+		return ($this->getRecordPropertyInteger('object_type') ==
+			SEMINARS_RECORD_TYPE_DATE);
 	}
 
 	/**
 	 * Checks whether we are a topic record.
 	 *
 	 * @return	boolean		true if we are a topic record, false otherwise.
-	 *
-	 * @access	public
 	 */
-	function isEventTopic() {
-		return ($this->getRecordPropertyInteger('object_type') == 1);
+	public function isEventTopic() {
+		return ($this->getRecordPropertyInteger('object_type')
+			== SEMINARS_RECORD_TYPE_TOPIC);
 	}
 
 	/**
@@ -3161,10 +3157,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	boolean		true if we are a date record and have a topic,
 	 * 						false otherwise.
-	 *
-	 * @access	public
 	 */
-	function isTopicOkay() {
+	private function isTopicOkay() {
 		return ($this->isEventDate() && $this->topic && $this->topic->isOk());
 	}
 
@@ -3174,10 +3168,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return	integer		either the UID of this record or its topic record,
 	 * 						depending on whether we are a date record
-	 *
-	 * @access	public
 	 */
-	function getTopicUid() {
+	public function getTopicUid() {
 		if ($this->isTopicOkay()) {
 			return $this->topic->getUid();
 		} else {
