@@ -498,6 +498,35 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	public function removeLimitToEventsNextDay() {
 		unset($this->whereClauseParts['next_day']);
 	}
+
+	/**
+	 * Limits the bag to date event records of the same topic as the event
+	 * given in the first parameter $event.
+	 *
+	 * @param	tx_seminars_seminar		the date or topic object to find other
+	 * 									dates of the same topic for
+	 */
+	public function limitToOtherDatesForTopic(tx_seminars_seminar $event) {
+		if (!$event->isEventDate() && !$event->isEventTopic()) {
+			throw new Exception(
+				'The first parameter $event must be either a date or a topic ' .
+					'record.'
+			);
+		}
+
+		$this->whereClauseParts['other_dates'] = '(' .
+			SEMINARS_TABLE_SEMINARS . '.topic=' . $event->getTopicUid() .
+			' AND ' . 'object_type=' . SEMINARS_RECORD_TYPE_DATE .
+			' AND ' . 'uid!=' . $event->getUid() .
+		')';
+	}
+
+	/**
+	 * Removes the limitation for other dates of this topic.
+	 */
+	public function removeLimitToOtherDatesForTopic() {
+		unset($this->whereClauseParts['other_dates']);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

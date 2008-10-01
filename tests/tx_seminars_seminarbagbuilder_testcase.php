@@ -23,6 +23,7 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
@@ -2875,6 +2876,203 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToEventsNextDay(
 			new tx_seminars_seminar($eventUid1)
+		);
+	}
+
+
+	//////////////////////////////////////////////
+	// Tests for limitToOtherDatesForThisTopic()
+	//////////////////////////////////////////////
+
+	public function testLimitToOtherDatesForTopicFindsOtherDateForTopic() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$dateUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$date = new tx_seminars_seminar($dateUid1);
+		$this->fixture->limitToOtherDatesForTopic($date);
+
+		$this->assertEquals(
+			$dateUid2,
+			$this->fixture->build()->getCurrent()->getUid()
+		);
+	}
+
+	public function testLimitToOtherDatesForTopicWithTopicRecordFindsAllDatesForTopic() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$dateUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$topic = new tx_seminars_seminar($topicUid);
+		$this->fixture->limitToOtherDatesForTopic($topic);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToOtherDatesForTopicWithSingleEventRecordThrowsException() {
+		$this->setExpectedException(
+			'Exception',
+			'The first parameter $event must be either a date or a topic record.'
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+		$event = new tx_seminars_seminar($eventUid);
+		$this->fixture->limitToOtherDatesForTopic($event);
+	}
+
+	public function testLimitToOtherDatesForTopicIgnoresDateForOtherTopic() {
+		$topicUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$topicUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid1,
+			)
+		);
+		$dateUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid2,
+			)
+		);
+		$date = new tx_seminars_seminar($dateUid1);
+		$this->fixture->limitToOtherDatesForTopic($date);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToOtherDatesForTopicIgnoresSingleEventRecordWithTopic() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'topic' => $topicUid,
+			)
+		);
+		$date = new tx_seminars_seminar($dateUid);
+		$this->fixture->limitToOtherDatesForTopic($date);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testRemoveLimitToOtherDatesForTopicRemovesLimitAndFindsAllDateAndTopicRecords() {
+		$topicUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$topicUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid1,
+			)
+		);
+		$dateUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid2,
+			)
+		);
+		$date = new tx_seminars_seminar($dateUid1);
+		$this->fixture->limitToOtherDatesForTopic($date);
+		$this->fixture->removeLimitToOtherDatesForTopic();
+
+		$this->assertEquals(
+			4,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testRemoveLimitToOtherDatesForTopicFindsSingleEventRecords() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'topic' => $topicUid,
+			)
+		);
+		$date = new tx_seminars_seminar($dateUid);
+		$this->fixture->limitToOtherDatesForTopic($date);
+		$this->fixture->removeLimitToOtherDatesForTopic();
+
+		$this->assertEquals(
+			3,
+			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
 }

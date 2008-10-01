@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2203] Change: Move tx_seminars_seminar::getAdditionalQueryForOtherDates() to tx_seminars_seminarbagbuilder
 - [#2202] Change: Move tx_seminars_seminar::getAdditionalQueryForNextDay() to tx_seminars_seminarbagbuilder
 - [#2114] Feature: Add a new flavor "favorites list"
 - [#2199] Feature: Add a method limitToVip() to tx_seminars_seminarbagbuilder
