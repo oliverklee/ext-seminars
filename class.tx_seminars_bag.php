@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php');
+
 /**
  * Class 'tx_seminars_bag' for the 'seminars' extension.
  *
@@ -35,11 +37,9 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php');
-
-abstract class tx_seminars_bag extends tx_seminars_dbplugin {
+abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator {
 	/** the name of the main DB table from which we get the records for this bag */
 	protected $dbTableName = '';
 	/** the comma-separated names of other DB tables which we need for JOINs */
@@ -179,11 +179,22 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * prefixed with the table name.
 	 *
 	 * @return	boolean		true if everything went okay, false otherwise
+	 *
+	 * @deprecated	0.7.0 - 2008-10-01
 	 */
 	public function resetToFirst() {
-		$result = false;
+		$this->rewind();
+		return $this->isAtFirstElement;
+	}
 
-		// free old results if there are any
+	/**
+	 * Sets the iterator to the first object, using additional
+	 * query parameters from $this->queryParameters for the DB query.
+	 * The query works so that the column names are *not*
+	 * prefixed with the table name.
+	 */
+	public function rewind() {
+		// frees old results if there are any
 		if ($this->dbResult) {
 			$GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
 			// We don't need to null out $this->dbResult as it will be
@@ -212,15 +223,27 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 				$dbResultWithoutLimit
 			);
 
-			$result = (boolean) $this->getNext();
+			$this->createItemFromDbResult();
 		} else {
 			$this->objectCountWithLimit = 0;
 			$this->objectCountWithoutLimit = 0;
+			$this->currentItem = null;
 		}
 
 		$this->isAtFirstElement = true;
+	}
 
-		return $result;
+	/**
+	 * Advances to the next record and returns a reference to that object.
+	 *
+	 * @return	tx_seminars_objectfromdb	a reference to the now current
+	 * 										object, will be null if there is no
+	 * 										next object
+	 *
+	 * @deprecated	0.7.0 - 2008-10-01
+	 */
+	public function getNext() {
+		return $this->next();
 	}
 
 	/**
@@ -230,14 +253,15 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * 										object, will be null if there is no
 	 * 										next object
 	 */
-	public function getNext() {
-		if ($this->dbResult) {
-			$this->createItemFromDbResult();
-		} else {
+	public function next() {
+		$this->isAtFirstElement = false;
+
+		if (!$this->dbResult) {
 			$this->currentItem = null;
+			return null;
 		}
 
-		$this->isAtFirstElement = false;
+		$this->createItemFromDbResult();
 
 		return $this->getCurrent();
 	}
@@ -257,8 +281,21 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * @return	tx_seminars_objectfromdb	a reference to the current object,
 	 * 										will be null if	there is no current
 	 * 										object
+	 *
+	 * @deprecated	0.7.0 - 2008-10-01
 	 */
 	public function getCurrent() {
+		return $this->current();
+	}
+
+	/**
+	 * Returns the current object (which may be null).
+	 *
+	 * @return	tx_seminars_objectfromdb	a reference to the current object,
+	 * 										will be null if	there is no current
+	 * 										object
+	 */
+	public function current() {
 		return $this->currentItem;
 	}
 
@@ -267,17 +304,44 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	 * from the DB), nulls out $this->currentItem.
 	 *
 	 * If the function isOk() returns true, nothing is changed.
+	 *
+	 * @deprecated	0.7.0 - 2008-10-01
 	 */
 	protected function checkCurrentItem() {
-		// Only tests $this->currentItem if it is not null.
-		if ($this->currentItem && (!$this->currentItem->isOk())) {
+		$this->valid();
+	}
+
+	/**
+	 * Checks isOk() and, in case of failure (e.g. there is no more data
+	 * from the DB), nulls out $this->currentItem.
+	 *
+	 * If the function isOk() returns true, nothing is changed.
+	 *
+	 * @return	boolean		true if the current item is valid, false otherwise
+	 */
+	public function valid() {
+		if (!$this->currentItem || !$this->currentItem->isOk()) {
 			$this->currentItem = null;
+			return false;
 		}
 
-		if ($this->currentItem) {
-			// Lets warnings from the single records bubble up to us.
-			$this->setErrorMessage($this->currentItem->checkConfiguration(true));
+		// Lets warnings from the single records bubble up to us.
+		$this->setErrorMessage($this->currentItem->checkConfiguration(true));
+
+		return true;
+	}
+
+	/**
+	 * Returns the UID of the current item.
+	 *
+	 * @return	integer		the UID of the current item, will be > 0
+	 */
+	public function key() {
+		if (!$this->valid()) {
+			throw new Exception('The current item is not valid.');
 		}
+
+		return $this->current()->getUid();
 	}
 
 	/**
