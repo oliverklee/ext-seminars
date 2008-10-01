@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbag.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the testbag class in the 'seminars' extensions.
  *
@@ -29,25 +34,31 @@
  * @subpackage	tx_seminars
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_testbag.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var	tx_seminars_testbag
+	 */
 	private $fixture;
+
+	/**
+	 * @var	tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
-	/** the UID of the first test record in the DB */
+	/**
+	 * @var	integer		the UID of the first test record in the DB
+	 */
 	private $uidOfFirstRecord = 0;
-	/** the UID of the second test record in the DB */
+
+	/**
+	 * @var	integer		the UID of the second test record in the DB
+	 */
 	private $uidOfSecondRecord = 0;
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
-		$this->fixture = new tx_seminars_testbag();
 
 		$this->uidOfFirstRecord = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_TEST,
@@ -57,12 +68,13 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'test 2')
 		);
+
+		$this->fixture = new tx_seminars_testbag('is_dummy_record=1');
 	}
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 
@@ -90,17 +102,6 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1, $bag->getObjectCountWithoutLimit()
 		);
-
-		$this->assertNotNull(
-			$bag->getCurrent()
-		);
-		$this->assertTrue(
-			$bag->getCurrent()->isOk()
-		);
-
-		$this->assertNull(
-			$bag->getNext()
-		);
 	}
 
 	public function testBagCanHaveOneUid() {
@@ -112,72 +113,27 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testBagCanHaveTwoElements() {
-		$bag = new tx_seminars_testbag(
-			'uid IN('
-			.$this->uidOfFirstRecord.','
-			.$this->uidOfSecondRecord.')'
-		);
-
 		$this->assertEquals(
-			2, $bag->getObjectCountWithoutLimit()
-		);
-
-		$this->assertNotNull(
-			$bag->getCurrent()
-		);
-		$this->assertTrue(
-			$bag->getCurrent()->isOk()
-		);
-
-		$this->assertNotNull(
-			$bag->getNext()
-		);
-		$this->assertNotNull(
-			$bag->getCurrent()
-		);
-		$this->assertTrue(
-			$bag->getCurrent()->isOk()
-		);
-
-		$this->assertNull(
-			$bag->getNext()
+			2, $this->fixture->getObjectCountWithoutLimit()
 		);
 	}
 
 	public function testBagCanHaveTwoUids() {
-		$bag = new tx_seminars_testbag(
-			'uid IN('
-			.$this->uidOfFirstRecord.','
-			.$this->uidOfSecondRecord.')'
-		);
-
 		$this->assertEquals(
 			$this->uidOfFirstRecord.','.$this->uidOfSecondRecord,
-			$bag->getUids()
+			$this->fixture->getUids()
 		);
 	}
 
 	public function testBagSortsByUidByDefault() {
-		$bag = new tx_seminars_testbag(
-			'uid IN('
-			.$this->uidOfFirstRecord.','
-			.$this->uidOfSecondRecord.')'
-		);
-
-		$this->assertNotNull(
-			$bag->getCurrent()
-		);
 		$this->assertEquals(
 			$this->uidOfFirstRecord,
-			$bag->getCurrent()->getUid()
+			$this->fixture->getCurrent()->getUid()
 		);
 
-		$this->assertNotNull(
-			$bag->getNext()
-		);
 		$this->assertEquals(
 			$this->uidOfSecondRecord,
-			$bag->getCurrent()->getUid()
+			$this->fixture->getNext()->getUid()
 		);
 	}
 }

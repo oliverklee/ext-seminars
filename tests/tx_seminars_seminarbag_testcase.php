@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the seminarbag class in the 'seminars' extensions.
  *
@@ -29,27 +34,33 @@
  * @subpackage	tx_seminars
  *
  * @author		Mario Rimann <typo3-coding@rimann.org>
+ * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var	tx_seminars_seminarbag
+	 */
 	private $fixture;
+
+	/**
+	 * @var	tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_seminarbag();
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'test event')
+		);
+
+		$this->fixture = new tx_seminars_seminarbag('is_dummy_record=1');
 	}
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 
@@ -58,23 +69,9 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBagCanHaveAtLeastOneElement() {
-		// This test needs a special fixture.
-		unset($this->fixture);
-		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('title' => 'test event')
-		);
-		$this->fixture = new tx_seminars_seminarbag('uid='.$uid);
-
-		$this->assertGreaterThan(
-			0, $this->fixture->getObjectCountWithoutLimit()
-		);
-
-		$this->assertNotNull(
-			$this->fixture->getCurrent()
-		);
-		$this->assertTrue(
-			$this->fixture->getCurrent()->isOk()
+		$this->assertEquals(
+			1,
+			$this->fixture->getObjectCountWithoutLimit()
 		);
 	}
 

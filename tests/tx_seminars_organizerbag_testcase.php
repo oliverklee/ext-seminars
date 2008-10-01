@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
+
+require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the organizerbag class in the 'seminars' extensions.
  *
@@ -30,36 +35,29 @@
  *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_organizerbag_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var	tx_seminars_organizerbag
+	 */
 	private $fixture;
+
+	/**
+	 * @var	tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
-			array('title' => 'test organizer 1')
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
-			array('title' => 'test organizer 2')
-		);
+		$this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS);
 
-		$this->fixture = new tx_seminars_organizerbag();
+		$this->fixture = new tx_seminars_organizerbag('is_dummy_record=1');
 	}
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 
@@ -68,15 +66,9 @@ class tx_seminars_organizerbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBagCanHaveAtLeastOneElement() {
-		$this->assertGreaterThan(
-			0, $this->fixture->getObjectCountWithoutLimit()
-		);
-
-		$this->assertNotNull(
-			$this->fixture->getCurrent()
-		);
-		$this->assertTrue(
-			$this->fixture->getCurrent()->isOk()
+		$this->assertEquals(
+			1,
+			$this->fixture->getObjectCountWithoutLimit()
 		);
 	}
 }
