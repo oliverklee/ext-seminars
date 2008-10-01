@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1901] Feature: Use more SQL indices
 - [#2229] Feature: Add 'is_dummy_record=1' to the constructor call of the bags in their testcases
 - [#2203] Change: Move tx_seminars_seminar::getAdditionalQueryForOtherDates() to tx_seminars_seminarbagbuilder
 - [#2202] Change: Move tx_seminars_seminar::getAdditionalQueryForNextDay() to tx_seminars_seminarbagbuilder
