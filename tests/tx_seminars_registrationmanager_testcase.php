@@ -79,6 +79,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
+		if ($this->pi1) {
+			$this->pi1->__destruct();
+		}
+		$this->seminar->__destruct();
+		$this->fixture->__destruct();
 		unset(
 			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework
 		);

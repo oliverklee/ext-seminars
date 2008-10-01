@@ -89,6 +89,13 @@ class tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset($this->objectToCheck);
+	}
+
+	/**
 	 * Sets the "flavor" of the object to check. The flavor is used to
 	 * differentiate between different kinds of objects of the same class,
 	 * e.g. the list view and the single view (which both are pi1 objects).

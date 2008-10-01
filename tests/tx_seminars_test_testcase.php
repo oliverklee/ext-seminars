@@ -82,8 +82,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+
+		$this->fixture->__destruct();
+		unset($this->fixture, $this->testingFramework);
 
 		// TODO: Remove this as soon as it is possible to build a front-end
 		// environment on demand with phpunit.

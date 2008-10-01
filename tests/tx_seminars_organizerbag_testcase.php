@@ -57,6 +57,8 @@ class tx_seminars_organizerbag_testcase extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
+
+		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework);
 	}
 

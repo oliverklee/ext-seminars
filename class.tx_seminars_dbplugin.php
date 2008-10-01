@@ -62,6 +62,18 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 	var $configurationCheck;
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		if ($this->configurationCheck) {
+			$this->configurationCheck->__destruct();
+		}
+
+		parent::__destruct();
+		unset($this->configurationCheck);
+	}
+
+	/**
 	 * Initializes the FE plugin stuff, read the configuration
 	 * and set the table names while we're at it.
 	 *

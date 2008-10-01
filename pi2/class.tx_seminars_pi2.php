@@ -64,6 +64,18 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	private $configGetter = null;
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		if ($this->configGetter) {
+			$this->configGetter->__destruct();
+		}
+
+		parent::__destruct();
+		unset($this->configGetter);
+	}
+
+	/**
 	 * Creates a CSV export.
 	 *
 	 * @param	string		(unused)

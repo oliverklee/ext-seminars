@@ -126,6 +126,14 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset($this->seminar);
+		parent::__destruct();
+	}
+
+	/**
 	 * Purges our cached seminars array.
 	 */
 	public static function purgeCachedSeminars() {

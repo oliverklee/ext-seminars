@@ -31,8 +31,7 @@
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
 
-require_once(t3lib_extMgm::extPath('seminars')
-	.'tests/fixtures/class.tx_seminars_timespanchild.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_timespanchild.php');
 
 class tx_seminars_timespanchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -42,6 +41,7 @@ class tx_seminars_timespanchild_testcase extends tx_phpunit_testcase {
 	}
 
 	protected function tearDown() {
+		$this->fixture->__destruct();
 		unset($this->fixture);
 	}
 

@@ -100,6 +100,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
+
+		$this->pi1->__destruct();
+		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework, $this->pi1);
 	}
 

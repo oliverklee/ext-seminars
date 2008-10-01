@@ -123,6 +123,13 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset($this->dbResult, $this->currentItem);
+	}
+
+	/**
 	 * For the main DB table and the additional tables, writes the corresponding
 	 * concatenated output from $this->enableFields into
 	 * $this->enabledFieldsQuery.

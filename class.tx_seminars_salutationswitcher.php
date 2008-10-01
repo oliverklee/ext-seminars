@@ -59,6 +59,16 @@ abstract class tx_seminars_salutationswitcher extends tslib_pibase {
 	private $suffixesToTry = null;
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset(
+			$this->availableLanguages, $this->suffixesToTry, $this->conf,
+			$this->pi_EPtemp_cObj, $this->cObj
+		);
+	}
+
+	/**
 	 * Retrieves the localized string for the local language key $key.
 	 *
 	 * This function checks whether the FE or BE localization functions are

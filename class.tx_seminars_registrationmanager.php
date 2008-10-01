@@ -59,6 +59,18 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	}
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		if ($this->registration) {
+			$this->registration->__destruct();
+		}
+
+		unset($this->registration);
+		parent::__destruct();
+	}
+
+	/**
 	 * Checks whether is possible to register for a given seminar at all:
 	 * if a possibly logged-in user hasn't registered yet for this seminar,
 	 * if the seminar isn't canceled, full etc.

@@ -108,6 +108,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset($this->topic);
+		parent::__destruct();
+	}
+
+	/**
 	 * Checks certain fields to contain pausible values. Example: The registration
 	 * deadline must not be later than the event's starting time.
 	 *

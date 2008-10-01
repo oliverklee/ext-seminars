@@ -81,6 +81,9 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
+
+		$this->pi1->__destruct();
+		$this->fixture->__destruct();
 		unset($this->testingFramework, $this->fixture, $this->pi1);
 	}
 

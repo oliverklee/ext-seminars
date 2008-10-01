@@ -282,6 +282,30 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	private $hookObjects = array();
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		if ($this->configGetter) {
+			$this->configGetter->__destruct();
+		}
+		if ($this->seminar) {
+			$this->seminar->__destruct();
+		}
+		if ($this->registration) {
+			$this->registration->__destruct();
+		}
+		if ($this->registrationManager) {
+			$this->registrationManager->__destruct();
+		}
+
+		parent::__destruct();
+		unset(
+			$this->configGetter, $this->seminar, $this->registration,
+			$this->registrationManagerm, $this->hookObjects, $this->staticInfo
+		);
+	}
+
+	/**
 	 * Displays the seminar manager HTML.
 	 *
 	 * @param	string		(unused)
