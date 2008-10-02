@@ -88,27 +88,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_seminarbag/.
-	 */
-	protected function check_tx_seminars_seminarbag() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
-	 * Checks the configuration for: tx_seminars_registrationbag/.
-	 */
-	protected function check_tx_seminars_registrationbag() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
-	 * Checks the configuration for: tx_seminars_speakerbag/.
-	 */
-	protected function check_tx_seminars_speakerbag() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
 	 * Checks the configuration for: tx_seminars_speaker/.
 	 */
 	protected function check_tx_seminars_speaker() {
@@ -116,23 +95,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_organizerbag/.
-	 */
-	protected function check_tx_seminars_organizerbag() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
 	 * Checks the configuration for: tx_seminars_organizer/.
 	 */
 	protected function check_tx_seminars_organizer() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
-	 * Checks the configuration for: tx_seminars_placebag/.
-	 */
-	protected function check_tx_seminars_placebag() {
 		$this->checkStaticIncluded();
 	}
 
@@ -158,23 +123,9 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_testbag/.
-	 */
-	protected function check_tx_seminars_testbag() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
 	 * Checks the configuration for: tx_seminars_category/.
 	 */
 	protected function check_tx_seminars_category() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
-	 * Checks the configuration for: tx_seminars_categorybag/.
-	 */
-	protected function check_tx_seminars_categorybag() {
 		$this->checkStaticIncluded();
 	}
 

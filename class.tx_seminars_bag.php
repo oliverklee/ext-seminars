@@ -24,8 +24,6 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php');
-
 /**
  * Class 'tx_seminars_bag' for the 'seminars' extension.
  *
@@ -41,7 +39,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator {
+abstract class tx_seminars_bag implements Iterator {
 	/** the name of the main DB table from which we get the records for this bag */
 	protected $dbTableName = '';
 	/** the comma-separated names of other DB tables which we need for JOINs */
@@ -117,7 +115,6 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 		$this->groupBy = $groupBy;
 		$this->limit = $limit;
 
-		$this->init();
 		$this->rewind();
 	}
 
@@ -264,9 +261,6 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 			return false;
 		}
 
-		// Lets warnings from the single records bubble up to us.
-		$this->setErrorMessage($this->currentItem->checkConfiguration(true));
-
 		return true;
 	}
 
@@ -322,6 +316,21 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 		sort($uids, SORT_NUMERIC);
 
 		return implode(',', $uids);
+	}
+
+	/**
+	 * Checks whether the current item is okay and returns its error messages
+	 * from the configuration check.
+	 *
+	 * @return	string		error messages from the configuration check,
+	 * 						may be empty
+	 */
+	public function checkConfiguration() {
+		if ($this->current() && $this->current()->isOk()) {
+			return $this->current()->checkConfiguration(true);
+		}
+
+		return '';
 	}
 }
 
