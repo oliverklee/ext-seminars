@@ -56,10 +56,41 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	);
 
 	/**
+	 * @var	array		This is a list of field names in which we can search,
+	 * 					grouped by record type.
+	 *
+	 * 'seminars' is the list of fields that are always stored in the seminar
+	 * record.
+	 * 'seminars_topic' is the list of fields that might be stored in the topic
+	 * record if we are searching a date record (that refers to a topic record).
+	 */
+	private static $searchFieldList = array(
+		'seminars' => array('accreditation_number'),
+		'seminars_topic' => array('title', 'subtitle', 'teaser', 'description'),
+		'speakers' => array('title', 'organization', 'description'),
+		'partners' => array('title', 'organization', 'description'),
+		'tutors' => array('title', 'organization', 'description'),
+		'leaders' => array('title', 'organization', 'description'),
+		'places' => array('title', 'address', 'city'),
+		'event_types' => array('title'),
+		'organizers' => array('title'),
+		'target_groups' => array('title'),
+		'categories' => array('title'),
+	);
+
+	/**
+	 * @var	string		the character list to trim the search words for
+	 */
+	const TRIM_CHARACTER_LIST = " ,\t\n\r\0\x0b";
+
+	/**
+	 * @var	integer		the minimum search word length
+	 */
+	const MINIMUM_SEARCH_WORD_LENGTH = 2;
+
+	/**
 	 * Configures the seminar bag to work like a BE list: It will use the
 	 * default sorting in the BE, and hidden records will be shown.
-	 *
-	 * @access	public
 	 */
 	public function setBackEndMode() {
 		$this->useBackEndSorting();
@@ -526,6 +557,425 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function removeLimitToOtherDatesForTopic() {
 		unset($this->whereClauseParts['other_dates']);
+	}
+
+	/**
+	 * Limits the bag based on the input search words.
+	 *
+	 * Example: The $searchWords is "content management, system" (from an input
+	 * form) and the search field list is "bodytext,header" then the output
+	 * will be ' AND (bodytext LIKE "%content%" OR header LIKE "%content%")
+	 * AND (bodytext LIKE "%management%" OR header LIKE "%management%")
+	 * AND (bodytext LIKE "%system%" OR header LIKE "%system%")'.
+	 *
+	 * @param	string		the search words, separated by spaces or commas,
+	 * 						may be empty, need not be SQL-safe
+	 */
+	public function limitToFullTextSearch($searchWords) {
+		$searchWords = trim($searchWords, self::TRIM_CHARACTER_LIST);
+
+		if ($searchWords == '') {
+			unset($this->whereClauseParts['search']);
+			return;
+		}
+
+		$keywords = split('[ ,]', $searchWords);
+
+		$allWhereParts = array();
+
+		foreach ($keywords as $keyword) {
+			$safeKeyword = $this->prepareSearchWord($keyword);
+
+			// Only search for words with a certain length.
+			// Skips the current iteration of the loop for empty search words.
+			if (strlen($safeKeyword) < self::MINIMUM_SEARCH_WORD_LENGTH) {
+				continue;
+			}
+
+			$safeKeyword = '\'%' . $safeKeyword . '%\'';
+
+			$wherePartsForCurrentSearchword = array_merge(
+				$this->getSearchWherePartIndependentFromEventRecordType(
+					$safeKeyword
+				),
+				$this->getSearchWherePartForEventTopics(
+					$safeKeyword
+				),
+				$this->getSearchWherePartForSpeakers(
+					$safeKeyword
+				),
+				$this->getSearchWherePartForPlaces(
+					$safeKeyword
+				),
+				$this->getSearchWherePartForEventTypes(
+					$safeKeyword
+				),
+				$this->getSearchWherePartForOrganizers(
+					$safeKeyword
+				),
+				$this->getSearchWherePartForTargetGroups(
+					$safeKeyword
+				),
+				$this->getSearchWherePartForCategories(
+					$safeKeyword
+				)
+			);
+
+			$allWhereParts[] = '(' .
+				implode(' OR ', $wherePartsForCurrentSearchword) . ')';
+		}
+
+		if (!empty($allWhereParts)) {
+			$this->whereClauseParts['search'] = implode(' AND ', $allWhereParts);
+		} else {
+			unset($this->whereClauseParts['search']);
+		}
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in categories
+	 * based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 *
+	 * @return	array		the WHERE clause parts for the search in categories
+	 */
+	private function getSearchWherePartForCategories($searchWord) {
+		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
+			$searchWord,
+			'categories',
+			SEMINARS_TABLE_CATEGORIES,
+			SEMINARS_TABLE_CATEGORIES_MM
+		);
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in target
+	 * groups based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 *
+	 * @return	array		the WHERE clause parts for the search in target
+	 * 						groups
+	 */
+	private function getSearchWherePartForTargetGroups($searchWord) {
+		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
+			$searchWord,
+			'target_groups',
+			SEMINARS_TABLE_TARGET_GROUPS,
+			SEMINARS_TABLE_TARGET_GROUPS_MM
+		);
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in organizers
+	 * based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 *
+	 * @return	array		the WHERE clause parts for the search in organizers
+	 */
+	private function getSearchWherePartForOrganizers($searchWord) {
+		$result = array();
+
+		foreach (self::$searchFieldList['organizers'] as $field) {
+			$result[] = 'EXISTS (' .
+				'SELECT * FROM ' . SEMINARS_TABLE_ORGANIZERS .
+				' WHERE ' . SEMINARS_TABLE_ORGANIZERS . '.' . $field .
+						' LIKE ' . $searchWord .
+					' AND FIND_IN_SET(' . SEMINARS_TABLE_ORGANIZERS . '.uid,' .
+						SEMINARS_TABLE_SEMINARS . '.organizers)' .
+			')';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in event
+	 * types based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 *
+	 * @return	array		the WHERE clause parts for the search in event types
+	 */
+	private function getSearchWherePartForEventTypes($searchWord) {
+		$result = array();
+
+		foreach (self::$searchFieldList['event_types'] as $field) {
+			$result[] = 'EXISTS (' .
+				'SELECT * FROM ' . SEMINARS_TABLE_EVENT_TYPES . ', ' .
+					SEMINARS_TABLE_SEMINARS . ' s1, ' .
+					SEMINARS_TABLE_SEMINARS . ' s2' .
+				' WHERE (' . SEMINARS_TABLE_EVENT_TYPES . '.' . $field .
+					' LIKE ' . $searchWord .
+				' AND ' . SEMINARS_TABLE_EVENT_TYPES . '.uid=s1.event_type' .
+				' AND ((s1.uid=s2.topic AND s2.object_type=' .
+						SEMINARS_RECORD_TYPE_DATE . ') ' .
+					'OR (s1.uid=s2.uid AND s1.object_type!=' .
+						SEMINARS_RECORD_TYPE_DATE . '))' .
+				' AND s2.uid=' . SEMINARS_TABLE_SEMINARS . '.uid)' .
+			')';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in places
+	 * based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty
+	 *
+	 * @return	array		the WHERE clause parts for the search in places
+	 */
+	private function getSearchWherePartForPlaces($searchWord) {
+		return $this->getSearchWherePartForMmRelation(
+			$searchWord,
+			'places',
+			SEMINARS_TABLE_SITES,
+			SEMINARS_TABLE_SITES_MM
+		);
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in event
+	 * topics based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty
+	 *
+	 * @return	array		the WHERE clause parts for the search in event topics
+	 */
+	private function getSearchWherePartForEventTopics($searchWord) {
+		$result = array();
+
+		foreach (self::$searchFieldList['seminars_topic'] as $field) {
+			$result[] = 'EXISTS (' .
+				'SELECT * FROM ' . SEMINARS_TABLE_SEMINARS . ' s1,' .
+						SEMINARS_TABLE_SEMINARS . ' s2' .
+					' WHERE (s1.' . $field . ' LIKE ' . $searchWord .
+						' AND ((s1.uid=s2.topic AND s2.object_type=' .
+							SEMINARS_RECORD_TYPE_DATE . ') ' .
+							' OR (s1.uid=s2.uid AND s1.object_type!=' .
+							SEMINARS_RECORD_TYPE_DATE . ')))' .
+					' AND s2.uid=' . SEMINARS_TABLE_SEMINARS . '.uid' .
+			')';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search independent
+	 * from the event record type based on the search word given in the first
+	 * parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 *
+	 * @return	array		the WHERE clause parts for the search independent
+	 * 						from the event record type
+	 */
+	private function getSearchWherePartIndependentFromEventRecordType(
+		$searchWord
+	) {
+		$result = array();
+
+		foreach (self::$searchFieldList['seminars'] as $field) {
+			$result[] = SEMINARS_TABLE_SEMINARS . '.' . $field .
+				' LIKE ' . $searchWord;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in speakers
+	 * based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 *
+	 * @return	array		the WHERE clause parts for the search in speakers
+	 */
+	private function getSearchWherePartForSpeakers($searchWord) {
+		$mmTables = array(
+			'speakers' => SEMINARS_TABLE_SPEAKERS_MM,
+			'partners' => SEMINARS_TABLE_PARTNERS_MM,
+			'tutors' => SEMINARS_TABLE_TUTORS_MM,
+			'leaders' => SEMINARS_TABLE_LEADERS_MM,
+		);
+
+		$result = array();
+
+		foreach ($mmTables as $key => $currentMmTable) {
+			$result = array_merge(
+				$result,
+				$this->getSearchWherePartForMmRelation(
+					$searchWord,
+					$key,
+					SEMINARS_TABLE_SPEAKERS,
+					$currentMmTable
+				)
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates and returns the WHERE clause part for the search in an m:n
+	 * relation between a date or single event record.
+	 *
+	 * Searches for $searchWord in $field in $foreignTable using the m:n table
+	 * $mmTable.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 * @param	string		the key of the search field list, must not be empty,
+	 * 						must be an valid key of $this->searchFieldList
+	 * @param	string		the foreign table to search in, must not be empty
+	 * @param	string		the m:n relation table, must not be empty
+	 *
+	 * @return	array		the WHERE clause parts for the search in categories
+	 */
+	private function getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
+		$searchWord, $searchFieldKey, $foreignTable, $mmTable
+	) {
+		$this->checkParametersForMmSearchFunctions(
+			$searchWord, $searchFieldKey, $foreignTable, $mmTable
+		);
+
+		$result = array();
+
+		foreach (self::$searchFieldList[$searchFieldKey] as $field) {
+			$result[] = 'EXISTS ' .
+				'(SELECT * FROM ' .
+					SEMINARS_TABLE_SEMINARS . ' s1, ' .
+					$mmTable . ', ' .
+					$foreignTable .
+				' WHERE ((' . SEMINARS_TABLE_SEMINARS . '.object_type=' .
+						SEMINARS_RECORD_TYPE_DATE .
+						' AND s1.object_type!=' . SEMINARS_RECORD_TYPE_DATE .
+						' AND ' . SEMINARS_TABLE_SEMINARS . '.topic=s1.uid)' .
+					' OR (' . SEMINARS_TABLE_SEMINARS . '.object_type=' .
+						SEMINARS_RECORD_TYPE_COMPLETE .
+						' AND ' . SEMINARS_TABLE_SEMINARS . '.uid=s1.uid))' .
+					' AND ' . $mmTable . '.uid_local=s1.uid' .
+					' AND ' . $mmTable . '.uid_foreign=' .
+						$foreignTable . '.uid' .
+					' AND ' . $foreignTable . '.' . $field .
+						' LIKE ' . $searchWord .
+			')';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Generates and returns the WHERE clause part for the search in an m:n
+	 * relation between a date or single event record.
+	 *
+	 * Searches for $searchWord in $field in $foreignTable using the m:n table
+	 * $mmTable.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						must be SQL-safe and quoted for LIKE
+	 * @param	string		the key of the search field list, must not be empty,
+	 * 						must be an valid key of $this->searchFieldList
+	 * @param	string		the foreign table to search in, must not be empty
+	 * @param	string		the m:n relation table, must not be empty
+	 *
+	 * @return	array		the WHERE clause parts for the search in categories
+	 */
+	private function getSearchWherePartForMmRelation(
+		$searchWord, $searchFieldKey, $foreignTable, $mmTable
+	) {
+		$this->checkParametersForMmSearchFunctions(
+			$searchWord, $searchFieldKey, $foreignTable, $mmTable
+		);
+
+		$result = array();
+
+		foreach (self::$searchFieldList[$searchFieldKey] as $field) {
+			$result[] = 'EXISTS (' .
+				'SELECT * FROM ' . $foreignTable . ', ' . $mmTable .
+					' WHERE ' . $foreignTable . '.' . $field .
+							' LIKE ' . $searchWord .
+						' AND ' . $mmTable . '.uid_local=' .
+							SEMINARS_TABLE_SEMINARS . '.uid' .
+						' AND ' . $mmTable . '.uid_foreign=' .
+							$foreignTable . '.uid' .
+			')';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * SQL-escapes and trims a potential search word.
+	 *
+	 * @param	string		single search word (may be prefixed or postfixed
+	 * 						with spaces), may be empty
+	 *
+	 * @return	string		the trimmed and SQL-escaped $searchword
+	 */
+	private function prepareSearchWord($searchWord) {
+		return $GLOBALS['TYPO3_DB']->escapeStrForLike(
+			$GLOBALS['TYPO3_DB']->quoteStr(
+				trim($searchWord, self::TRIM_CHARACTER_LIST),
+				SEMINARS_TABLE_SEMINARS
+			),
+			SEMINARS_TABLE_SEMINARS
+		);
+	}
+
+	/**
+	 * Checks the parameters for the m:n search functions and throws exceptions
+	 * if at least one of the parameters is empty.
+	 *
+	 * @param	string		the current search word, must not be empty,
+	 * 						may be quoted for LIKE
+	 * @param	string		the key of the search field list, must not be empty,
+	 * 						must be an valid key of self::$searchFieldList
+	 * @param	string		the foreign table to search in, must not be empty
+	 * @param	string		the m:n relation table, must not be empty
+	 */
+	private function checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable) {
+		if (trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') == '') {
+			throw new Exception(
+				'The first parameter $searchWord must no be empty.'
+			);
+		}
+
+		if ($searchFieldKey == '') {
+			throw new Exception(
+				'The second parameter $searchFieldKey must not be empty.'
+			);
+		}
+
+		if (!array_key_exists($searchFieldKey, self::$searchFieldList)) {
+			throw new Exception(
+				'The second parameter $searchFieldKey must be a valid key of ' .
+					'self::$searchFieldList.'
+			);
+		}
+
+		if ($foreignTable == '') {
+			throw new Exception(
+				'The third parameter $foreignTable must not be empty.'
+			);
+		}
+
+		if ($mmTable == '') {
+			throw new Exception(
+				'The fourth parameter $mmTable must not be empty.'
+			);
+		}
 	}
 }
 

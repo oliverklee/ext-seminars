@@ -3075,5 +3075,2362 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->getObjectCountWithoutLimit()
 		);
 	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limitToFullTextSearch() for single event records
+	/////////////////////////////////////////////////////////////////
+
+	public function testLimitToFullTextSearchWithTwoCommasAsSearchWordFindsAllEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch(',,');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByTwoSpacesFindsEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo  bar');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchWithTwoCommasSeparatedByTwoSpacesFindsAllEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch(',  ,');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchWithTooShortSearchWordFindsAllEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch('o');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInAccreditationNumber() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'accreditation_number' => 'foo bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInAccreditationNumber() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'accreditation_number' => 'bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTitle() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTitle() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInSubtitle() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('subtitle' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSubtitle() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('subtitle' => 'bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTeaser() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('teaser' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTeaser() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('teaser' => 'bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInDescription() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('description' => 'foo bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInDescription() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('description' => 'bar event')
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceTitle() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'foo bar place')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceTitle() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'bar place')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceAddress() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'foo bar address')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceAddress() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'bar address')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceCity() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'foo bar city')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceCity() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'bar city')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInEventTypeTitle() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo bar event type')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'event_type' => $eventTypeUid,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInEventTypeTitle() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'bar event type')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'event_type' => $eventTypeUid,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInOrganizerTitle() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS,
+			array('title' => 'foo bar organizer')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'organizers' => $organizerUid,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInOrganizerTitle() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS,
+			array('title' => 'bar organizer')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'organizers' => $organizerUid,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTargetGroupTitle() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('title' => 'foo bar target group')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'target_groups' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TARGET_GROUPS_MM,
+			$eventUid,
+			$targetGroupUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTargetGroupTitle() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('title' => 'bar target group')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'target_groups' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TARGET_GROUPS_MM,
+			$eventUid,
+			$targetGroupUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInCategoryTitle() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'foo bar category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'categories' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid,
+			$categoryUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInCategoryTitle() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'bar category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'categories' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$eventUid,
+			$categoryUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedBySpaceFindsTwoEventsWithSearchWordsInTitle() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'foo event bar')
+		);
+		$this->fixture->limitToFullTextSearch('foo bar');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByCommaFindsTwoEventsWithSearchWordsInTitle() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'foo event bar')
+		);
+		$this->fixture->limitToFullTextSearch('foo,bar');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+
+	////////////////////////////////////////////////////////////////
+	// Tests for limitToFullTextSearch() for topic event records
+	////////////////////////////////////////////////////////////////
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicTitle() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'foo bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			$dateUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTitle() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicSubtitle() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'subtitle' => 'foo bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			$dateUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicSubtitle() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'subtitle' => 'bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicTeaser() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'teaser' => 'foo bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			$dateUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTeaser() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'teaser' => 'bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicDescription() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'description' => 'foo bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			$dateUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicDescription() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'description' => 'bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicCategoryTitle() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'foo bar category')
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'categories' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$topicUid,
+			$categoryUid
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			$dateUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicCategoryTitle() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'bar category')
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'categories' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$topicUid,
+			$categoryUid
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicTargetGroupTitle() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('title' => 'foo bar target group')
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'target_groups' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TARGET_GROUPS_MM,
+			$topicUid,
+			$targetGroupUid
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			$dateUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTargetGroupTitle() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('title' => 'bar target group')
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'target_groups' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TARGET_GROUPS_MM,
+			$topicUid,
+			$targetGroupUid
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicEventTypeTitle() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'foo bar event type')
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'event_type' => $eventTypeUid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			$dateUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicEventTypeTitle() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES,
+			array('title' => 'bar event type')
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'event_type' => $eventTypeUid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'topic' => $topicUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToDateAndSingleRecords();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////////
+	// Tests for limitToFullTextSearch() for event date records
+	///////////////////////////////////////////////////////////////
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInAccreditationNumber() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'accreditation_number' => 'foo bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInAccreditationNumber() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'accreditation_number' => 'bar event',
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInOrganizerTitle() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS,
+			array('title' => 'foo bar organizer')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'organizers' => $organizerUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInOrganizerTitle() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS,
+			array('title' => 'bar organizer')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'organizers' => $organizerUid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'speakers' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'partners' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_PARTNERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'tutors' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_TUTORS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderTitle() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('title' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderOrganization() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('organization' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'foo bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderDescription() {
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array('description' => 'bar speaker')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'leaders' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_LEADERS_MM,
+			$eventUid,
+			$speakerUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceTitle() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'foo bar place')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceTitle() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'bar place')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceAddress() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'foo bar address')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceAddress() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'bar address')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceCity() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'foo bar city')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceCity() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('city' => 'bar city')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'place' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$placeUid
+		);
+		$this->fixture->limitToFullTextSearch('foo');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->build()->getObjectCountWithoutLimit()
+		);
+	}
 }
 ?>
