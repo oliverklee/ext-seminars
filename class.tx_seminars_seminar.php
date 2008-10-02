@@ -778,12 +778,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'cn_iso_2="' . $isoCode . '"'
 		);
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
+		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 
-		if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$countryName = $row['cn_short_local'];
+		if ($dbResultRow) {
+			$countryName = $dbResultRow['cn_short_local'];
 		}
 
 		return $countryName;

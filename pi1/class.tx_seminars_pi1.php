@@ -3219,47 +3219,40 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Creates a countdown to the next upcoming event.
 	 *
-	 * @return	string		HTML code of the countdown or a message if no upcoming event found
+	 * @return	string		HTML code of the countdown or a message if no
+	 * 						upcoming event is found
 	 */
 	protected function createCountdown() {
-		$message = '';
-		$now = time();
+		$now = $GLOBALS['SIM_ACCESS_TIME'];
 
-		// define the additional where clause for the database query
 		$additionalWhere = 'tx_seminars_seminars.cancelled=0' .
-			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
-			.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!='.SEMINARS_RECORD_TYPE_TOPIC
-			.' AND '.SEMINARS_TABLE_SEMINARS.'.begin_date>'.$now;
+			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS) .
+			' AND ' . SEMINARS_TABLE_SEMINARS . '.object_type!=' .
+			SEMINARS_RECORD_TYPE_TOPIC . ' AND ' . SEMINARS_TABLE_SEMINARS .
+			'.begin_date>' . $now;
 
-		// query the database
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'uid',
-			SEMINARS_TABLE_SEMINARS,
-			$additionalWhere,
-			'',
-			'begin_date ASC',
-			'1'
+			'uid', SEMINARS_TABLE_SEMINARS, $additionalWhere,
+			'', 'begin_date ASC', '1'
 		);
+		if (!$dbResult) {
+			throw new Exception(DATABASE_QUERY_ERROR);
+		}
+		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 
-		if ($dbResult) {
-			if ($GLOBALS['TYPO3_DB']->sql_num_rows($dbResult)) {
-				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				if ($this->createSeminar($row['uid'])) {
-					// Lets warnings from the seminar bubble up to us.
-					$this->setErrorMessage(
-						$this->seminar->checkConfiguration(true)
-					);
+		if ($dbResultRow && $this->createSeminar($dbResultRow['uid'])) {
+			// Lets warnings from the seminar bubble up to us.
+			$this->setErrorMessage(
+				$this->seminar->checkConfiguration(true)
+			);
 
-					// calculate the time left until the event starts
-					$eventStartTime = $this->seminar->getBeginDateAsTimestamp();
-					$timeLeft = $eventStartTime - $now;
+			// Calculates the time left until the event starts.
+			$eventStartTime = $this->seminar->getBeginDateAsTimestamp();
+			$timeLeft = $eventStartTime - $now;
 
-					$message = $this->createCountdownMessage($timeLeft);
-				}
-			} else {
-				// no event found - show a message
-				$message = $this->translate('message_countdown_noEventFound');
-			}
+			$message = $this->createCountdownMessage($timeLeft);
+		} else {
+			$message = $this->translate('message_countdown_noEventFound');
 		}
 
 		$this->setMarker('count_down_message', $message);

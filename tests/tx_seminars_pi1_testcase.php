@@ -2573,5 +2573,25 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
 		);
 	}
+
+
+	////////////////////////////
+	// Tests for the countdown
+	////////////////////////////
+
+	public function testCountdownForUpcomingEventContainsCountdownMessage() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000)
+		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'countdown');
+
+		$this->assertContains(
+			'left until the next event starts',
+			$this->fixture->main('', array())
+		);
+	}
 }
 ?>
