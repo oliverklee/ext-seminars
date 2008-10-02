@@ -32,7 +32,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_categorybagb
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizer.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizerbag.php');
 
-require_once(t3lib_extMgm::extPath('static_info_tables').'pi1/class.tx_staticinfotables_pi1.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+
+require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 /**
  * Class 'tx_seminars_seminar' for the 'seminars' extension.
@@ -639,9 +641,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				.' ON '.SEMINARS_TABLE_SITES.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_foreign'
 				.' LEFT JOIN '.SEMINARS_TABLE_SEMINARS
 				.' ON '.SEMINARS_TABLE_SITES_MM.'.uid_local='.SEMINARS_TABLE_SEMINARS.'.uid',
-			SEMINARS_TABLE_SEMINARS.'.uid='.$this->getUid()
-				.' AND '.SEMINARS_TABLE_SITES.'.country!=""'
-				.$this->enableFields(SEMINARS_TABLE_SITES),
+			SEMINARS_TABLE_SEMINARS . '.uid=' . $this->getUid() .
+				' AND ' . SEMINARS_TABLE_SITES . '.country!=""' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES),
 			'country'
 		);
 		if (!$dbResult) {
@@ -851,7 +853,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title, address, city, country, homepage, directions',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
 			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
-				$this->enableFields(SEMINARS_TABLE_SITES)
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
 		if (!$dbResult) {
 			throw new Exception('There was an error with the database query.');
@@ -884,7 +886,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
 			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
-				$this->enableFields(SEMINARS_TABLE_SITES)
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
 		if (!$dbResult) {
 			throw new Exception('There was an error with the database query.');
@@ -1632,8 +1634,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
 			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid IN ('.$this->getPaymentMethodsUids().')'
-				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'uid IN (' . $this->getPaymentMethodsUids() . ')' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
 		if (!$dbResult) {
@@ -1669,8 +1671,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
 			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid IN ('.$this->getPaymentMethodsUids().')'
-				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'uid IN (' . $this->getPaymentMethodsUids() . ')' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
 		if (!$dbResult) {
@@ -1705,8 +1707,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
 			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid IN ('.$this->getPaymentMethodsUids().')'
-				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'uid IN (' . $this->getPaymentMethodsUids() . ')' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
 		if (!$dbResult) {
@@ -1743,8 +1745,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
  			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid='.$paymentMethodUid
- 				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'uid=' . $paymentMethodUid .
+ 				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
  		);
 
 		if (!$dbResultPaymentMethod) {
@@ -1783,8 +1785,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
 			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid='.$paymentMethodUid
-				.$this->enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'uid=' . $paymentMethodUid .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
 		if (!$dbResultPaymentMethod) {
@@ -1923,7 +1925,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title',
 			SEMINARS_TABLE_EVENT_TYPES,
 			'uid = ' . $this->getTopicInteger('event_type') .
-				$this->enableFields(SEMINARS_TABLE_EVENT_TYPES),
+				tx_oelib_db::enableFields(SEMINARS_TABLE_EVENT_TYPES),
 			'',
 			'',
 			'1'
@@ -2116,10 +2118,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			SEMINARS_TABLE_TARGET_GROUPS.'.title',
 			SEMINARS_TABLE_TARGET_GROUPS.', '.SEMINARS_TABLE_TARGET_GROUPS_MM,
-			SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
-				.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
-				.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
-				.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS),
+			SEMINARS_TABLE_TARGET_GROUPS_MM . '.uid_local=' .
+				$this->getTopicUid() . ' AND ' . SEMINARS_TABLE_TARGET_GROUPS .
+				'.uid=' . SEMINARS_TABLE_TARGET_GROUPS_MM . '.uid_foreign' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_TARGET_GROUPS),
 			'',
 			SEMINARS_TABLE_TARGET_GROUPS_MM.'.sorting'
 		);
@@ -2149,10 +2151,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			SEMINARS_TABLE_TARGET_GROUPS.'.title',
 			SEMINARS_TABLE_TARGET_GROUPS.', '.SEMINARS_TABLE_TARGET_GROUPS_MM,
-			SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_local='.$this->getTopicUid()
-				.' AND '.SEMINARS_TABLE_TARGET_GROUPS.'.uid='
-				.SEMINARS_TABLE_TARGET_GROUPS_MM.'.uid_foreign'
-				.$this->enableFields(SEMINARS_TABLE_TARGET_GROUPS),
+			SEMINARS_TABLE_TARGET_GROUPS_MM . '.uid_local=' .
+				$this->getTopicUid() . ' AND ' .
+				SEMINARS_TABLE_TARGET_GROUPS . '.uid=' .
+				SEMINARS_TABLE_TARGET_GROUPS_MM . '.uid_foreign' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_TARGET_GROUPS),
 			'',
 			SEMINARS_TABLE_TARGET_GROUPS_MM.'.sorting'
 		);
@@ -2764,8 +2767,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			SEMINARS_TABLE_ATTENDANCES,
-			'seminar='.$this->getUid().' AND user='.$feUserUid
-				.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
+			'seminar=' . $this->getUid() . ' AND user=' . $feUserUid .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 		);
 
 		if ($dbResult) {
@@ -3089,10 +3092,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResultSingleSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS number',
 			SEMINARS_TABLE_ATTENDANCES,
-			$queryParameters
-				.' AND seminar='.$this->getUid()
-				.' AND seats=0'
-				.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
+			$queryParameters .
+				' AND seminar=' . $this->getUid() .
+				' AND seats=0' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 		);
 
 		if ($dbResultSingleSeats) {
@@ -3105,10 +3108,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResultMultiSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'SUM(seats) AS number',
 			SEMINARS_TABLE_ATTENDANCES,
-			$queryParameters
-				.' AND seminar='.$this->getUid()
-				.' AND seats!=0'
-				.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
+			$queryParameters .
+				' AND seminar=' . $this->getUid() .
+				' AND seats!=0' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 		);
 
 		if ($dbResultMultiSeats) {
@@ -3499,8 +3502,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$foreignTable.', '.$mmTable,
 			// uid_local and uid_foreign are from the m:m table;
 			// uid and sorting are from the foreign table.
-			'uid_local='.$uid.' AND uid_foreign=uid'
-				.$this->enableFields($foreignTable),
+			'uid_local=' . $uid . ' AND uid_foreign=uid' .
+				tx_oelib_db::enableFields($foreignTable),
 			'',
 			'sorting'
 		);
@@ -4269,8 +4272,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'MIN('.SEMINARS_TABLE_TIME_SLOTS.'.begin_date) AS begin_date',
 			SEMINARS_TABLE_TIME_SLOTS,
-			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
-				.$this->enableFields(SEMINARS_TABLE_TIME_SLOTS)
+			SEMINARS_TABLE_TIME_SLOTS . '.seminar=' . $this->getUid() .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_TIME_SLOTS)
 		);
 
 		if ($dbResult) {
@@ -4298,8 +4301,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			SEMINARS_TABLE_TIME_SLOTS.'.end_date AS end_date',
 			SEMINARS_TABLE_TIME_SLOTS,
-			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
-				.$this->enableFields(SEMINARS_TABLE_TIME_SLOTS),
+			SEMINARS_TABLE_TIME_SLOTS . '.seminar=' . $this->getUid() .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_TIME_SLOTS),
 			'',
 			SEMINARS_TABLE_TIME_SLOTS.'.begin_date DESC',
 			'0,1'

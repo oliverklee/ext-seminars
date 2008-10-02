@@ -30,6 +30,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
 /**
  * Class 'tx_seminars_registrationmanager' for the 'seminars' extension.
@@ -543,8 +544,8 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				SEMINARS_TABLE_ATTENDANCES,
-				SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid
-					.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
+				SEMINARS_TABLE_ATTENDANCES . '.uid=' . $registrationUid .
+					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 			);
 
 			if ($dbResult) {

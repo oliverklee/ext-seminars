@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
 
 /**
@@ -357,17 +359,14 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 */
 	public function recordExists($uid, $tableName, $allowHiddenRecords = false) {
 		$result = is_numeric($uid) && ($uid);
-		$enableFields = tx_seminars_objectfromdb::retrieveEnableFields(
-			$tableName,
-			$allowHiddenRecords
-		);
 
 		if ($result && !empty($tableName)) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'COUNT(*) AS num',
 				$tableName,
-				'uid='.intval($uid)
-					.$enableFields
+				'uid=' . intval($uid) .	tx_oelib_db::enableFields(
+					$tableName, $allowHiddenRecords
+				)
 			);
 
 			if ($dbResult) {
@@ -385,29 +384,6 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Returns additional parameters for an SQL query. They depend on the
-	 * table name and whether hidden records should be selected, too.
-	 *
-	 * The returned string will always start with " AND" so that it can
-	 * simply beeing attached to an existing SQL Query.
-	 *
-	 * This function can be called statically.
-	 *
-	 * @param	string		the name of the database table
-	 * @param	boolean		whether hidden records are allowed
-	 *
-	 * @return	string		the additional query parameters that need to be added to a SQL query
-	 */
-	public function retrieveEnableFields($tableName, $allowHiddenRecords = false) {
-		// The second parameter for the enableFields() function controls
-		// whether hidden records should be ignored.
-		return $this->enableFields(
-			$tableName,
-			intval($allowHiddenRecords)
-		);
-	}
-
-	/**
 	 * Retrieves a record from the database.
 	 *
 	 * The record is retrieved from $this->tableName. Therefore $this->tableName
@@ -419,17 +395,13 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
 	 */
 	protected function retrieveRecord($uid, $allowHiddenRecords = false) {
-		$enableFields = $this->retrieveEnableFields(
-			$this->tableName,
-			$allowHiddenRecords
-		);
-
 		if ($this->recordExists($uid, $this->tableName, $allowHiddenRecords)) {
 		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				$this->tableName,
-				'uid='.intval($uid)
-					.$enableFields,
+				'uid=' . intval($uid) .	tx_oelib_db::enableFields(
+					$this->tableName, $allowHiddenRecords
+				),
 				'',
 				'',
 				'1'

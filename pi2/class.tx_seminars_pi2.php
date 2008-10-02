@@ -35,6 +35,7 @@
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
 
 require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_headerProxyFactory.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
 require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
@@ -400,8 +401,8 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'DISTINCT pid',
 					SEMINARS_TABLE_ATTENDANCES,
-					'seminar='.$eventUid
-						.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
+					'seminar=' . $eventUid .
+						tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 				);
 				if ($dbResult) {
 					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {

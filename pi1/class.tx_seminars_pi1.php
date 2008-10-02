@@ -41,6 +41,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php'
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
 /**
  * Plugin 'Seminar Manager' for the 'seminars' extension.
@@ -522,8 +523,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				SEMINARS_TABLE_ATTENDANCES,
-				SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid
-					.$this->enableFields(SEMINARS_TABLE_ATTENDANCES)
+				SEMINARS_TABLE_ATTENDANCES.' . uid=' . $registrationUid .
+					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 			);
 			/** Name of the registration class in case someone subclasses it. */
 			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
@@ -3225,8 +3226,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$now = time();
 
 		// define the additional where clause for the database query
-		$additionalWhere = 'tx_seminars_seminars.cancelled=0'
-			.$this->enableFields(SEMINARS_TABLE_SEMINARS)
+		$additionalWhere = 'tx_seminars_seminars.cancelled=0' .
+			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
 			.' AND '.SEMINARS_TABLE_SEMINARS.'.object_type!='.SEMINARS_RECORD_TYPE_TOPIC
 			.' AND '.SEMINARS_TABLE_SEMINARS.'.begin_date>'.$now;
 

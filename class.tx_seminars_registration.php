@@ -26,6 +26,7 @@ require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 require_once(PATH_t3lib . 'class.t3lib_refindex.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_mailerFactory.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
@@ -1343,8 +1344,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, sorting',
 			$foreignTable.', '.$mmTable,
-			'uid_local='.$this->getUid().' AND uid_foreign=uid'
-				.$this->enableFields($foreignTable),
+			'uid_local=' . $this->getUid() . ' AND uid_foreign=uid' .
+				tx_oelib_db::enableFields($foreignTable),
 			'',
 			'sorting'
 		);

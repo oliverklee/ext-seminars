@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+
 /**
  * Class 'tx_seminars_oe_confcheck' for the 'seminars' extension.
  * Note: This class will soon move to the 'oelib' extension. When this is done,
@@ -50,9 +52,6 @@
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(PATH_t3lib.'class.t3lib_page.php');
-
 class tx_seminars_oe_configcheck {
 	/** the object whose configuration should be checked */
 	var $objectToCheck;
@@ -1285,13 +1284,11 @@ class tx_seminars_oe_configcheck {
 		if ($this->objectToCheck->hasConfValueString($fieldName, $sheet)) {
 			$pids = $this->objectToCheck->getConfValueString($fieldName, $sheet);
 
-			$pageSelect = t3lib_div::makeInstance('t3lib_pageSelect');
-
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'uid',
 				'pages',
-				'uid IN ('.$pids.') AND NOT (doktype'.$typeCondition.')'
-					.$pageSelect->enableFields('pages')
+				'uid IN (' . $pids . ') AND NOT (doktype' . $typeCondition .
+					')' . tx_oelib_db::enableFields('pages')
 			);
 
 			if ($dbResult) {

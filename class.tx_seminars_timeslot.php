@@ -22,6 +22,12 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_timespan.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_speakerbag.php');
+
 /**
  * Class 'tx_seminars_timeslot' for the 'seminars' extension.
  *
@@ -32,11 +38,6 @@
  *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timespan.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speakerbag.php');
-
 class tx_seminars_timeslot extends tx_seminars_timespan {
 	/** string with the name of the SQL table this class corresponds to */
 	var $tableName = SEMINARS_TABLE_TIME_SLOTS;
@@ -120,7 +121,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 			'title',
 			SEMINARS_TABLE_SITES,
 			'uid=' . $this->getPlace() .
-				$this->enableFields(SEMINARS_TABLE_SITES)
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
 		if (!$dbResult) {
 			throw new Exception('There was an error with the database query.');

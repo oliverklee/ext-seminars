@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+
 /**
  * Class 'tx_seminars_speaker' for the 'seminars' extension.
  *
@@ -32,10 +37,6 @@
  *
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-
 class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
 	var $tableName = SEMINARS_TABLE_SPEAKERS;
@@ -133,8 +134,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
 			SEMINARS_TABLE_SKILLS.', '.SEMINARS_TABLE_SPEAKERS_SKILLS_MM,
-			'uid_local='.$this->getUid().' AND uid=uid_foreign'
-				.$this->enableFields(SEMINARS_TABLE_SKILLS),
+			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SKILLS),
 			'',
 			'sorting ASC'
 		);

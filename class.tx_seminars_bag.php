@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php');
 
 /**
@@ -128,7 +130,7 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 
 	/**
 	 * For the main DB table and the additional tables, writes the corresponding
-	 * concatenated output from $this->enableFields into
+	 * concatenated output from tx_oelib_db::enableFields into
 	 * $this->enabledFieldsQuery.
 	 *
 	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
@@ -159,12 +161,9 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 			// Is there a TCA entry for that table?
 			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
 			if (is_array($ctrl)) {
-				$this->enabledFieldsQuery
-					.= $this->enableFields(
-						$trimmedTableName,
-						$showHiddenRecords,
-						$ignoreColumns
-					);
+				$this->enabledFieldsQuery .= tx_oelib_db::enableFields(
+						$trimmedTableName, $showHiddenRecords, $ignoreColumns
+				);
 			}
 		}
 	}
