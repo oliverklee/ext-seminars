@@ -172,7 +172,7 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 			' (' . $registrationBag->getObjectCountWithoutLimit() . ')' .
 			'</h3>' . LF;
 
-		while ($registration = $registrationBag->getCurrent()) {
+		foreach ($registrationBag as $registration) {
 			// Adds the result row to the table array.
 			$table[] = array(
 				TAB . TAB . TAB . TAB . TAB .
@@ -195,7 +195,6 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 						$registration->getUid()
 					) . LF,
 			);
-			$registrationBag->getNext();
 		}
 
 		if ($this->configCheckWarnings == '') {

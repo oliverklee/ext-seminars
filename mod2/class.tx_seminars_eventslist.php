@@ -231,7 +231,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 				0
 			);
 
-			while ($this->seminar = $seminarBag->getCurrent()) {
+			foreach ($seminarBag as $this->seminar) {
 				$uid = $this->seminar->getUid();
 
 				// Sets the "previous" and "next" elements in the $sortList
@@ -266,12 +266,10 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 				$previousUids[0] = $uid;
 
 				// Gets the next record and go to the start of the loop.
-				$seminarBag->getNext();
 			}
-			$seminarBag->resetToFirst();
 		}
 
-		while ($this->seminar = $seminarBag->getCurrent()) {
+		foreach ($seminarBag as $this->seminar) {
 			// Adds the result row to the table array.
 			$table[] = array(
 				TAB . TAB . TAB . TAB . TAB .
@@ -321,7 +319,6 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 					(!$this->seminar->isFull()
 					? $LANG->getLL('no') : $LANG->getLL('yes')) . LF,
 			);
-			$seminarBag->getNext();
 		}
 
 		$content .= $this->getNewIcon($this->page->pageInfo['uid']);

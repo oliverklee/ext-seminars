@@ -602,11 +602,11 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 				$seminar->getVacancies()
 			);
 
-			$registrationBag = $registrationBagBuilder->build();
+			foreach ($registrationBagBuilder->build() as $registration) {
+				if ($vacancies <= 0) {
+					break;
+				}
 
-			while ($registration = $registrationBag->getCurrent()
-				&& ($vacancies > 0)
-			) {
 				if ($registration->getSeats() <= $vacancies) {
 					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
 						SEMINARS_TABLE_ATTENDANCES,
@@ -631,7 +631,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 						$registration->sendAdditionalNotification();
 					}
 				}
-				$registrationBag->getNext();
 			}
 		}
 	}

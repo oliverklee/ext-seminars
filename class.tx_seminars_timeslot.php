@@ -95,9 +95,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 		$result = array();
 		$speakerBag = $this->getSpeakerBag();
 
-		while ($speaker = $speakerBag->getCurrent()) {
+		foreach ($speakerBag as $speaker) {
 			$result[] = $speaker->getTitle();
-			$speakerBag->getNext();
 		}
 
 		return implode(', ', $result);

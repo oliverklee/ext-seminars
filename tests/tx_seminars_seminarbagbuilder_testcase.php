@@ -272,7 +272,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$eventUid,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -308,7 +308,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$eventUid1,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -389,7 +389,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$dateUid,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -627,7 +627,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$eventUid,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -663,7 +663,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$eventUid1,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -1800,7 +1800,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$eventUid,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -1836,7 +1836,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$eventUid1,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -1917,7 +1917,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$dateUid,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -2034,7 +2034,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->getCurrent()->getUid()
+			$this->fixture->build()->current()->getUid()
 		);
 	}
 
@@ -2275,7 +2275,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->getCurrent()->getUid()
+			$this->fixture->build()->current()->getUid()
 		);
 	}
 
@@ -2445,7 +2445,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->getCurrent()->getUid()
+			$this->fixture->build()->current()->getUid()
 		);
 	}
 
@@ -2816,7 +2816,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$eventUid2,
-			$this->fixture->build()->getCurrent()->getUid()
+			$this->fixture->build()->current()->getUid()
 		);
 	}
 
@@ -2908,7 +2908,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$dateUid2,
-			$this->fixture->build()->getCurrent()->getUid()
+			$this->fixture->build()->current()->getUid()
 		);
 	}
 

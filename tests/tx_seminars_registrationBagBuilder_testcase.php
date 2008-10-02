@@ -92,11 +92,11 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'Title 1',
-			$registrationBag->getCurrent()->getTitle()
+			$registrationBag->current()->getTitle()
 		);
 		$this->assertEquals(
 			'Title 2',
-			$registrationBag->getNext()->getTitle()
+			$registrationBag->next()->getTitle()
 		);
 	}
 
@@ -154,7 +154,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'Attendance 1',
-			$registrationBag->getCurrent()->getTitle()
+			$registrationBag->current()->getTitle()
 		);
 	}
 
@@ -192,7 +192,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertTrue(
-			$registrationBag->getCurrent()->isPaid()
+			$registrationBag->current()->isPaid()
 		);
 	}
 
@@ -224,7 +224,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertFalse(
-			$registrationBag->getCurrent()->isPaid()
+			$registrationBag->current()->isPaid()
 		);
 	}
 
@@ -257,7 +257,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertFalse(
-			$registrationBag->getCurrent()->isPaid()
+			$registrationBag->current()->isPaid()
 		);
 	}
 
@@ -271,7 +271,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertTrue(
-			$registrationBag->getCurrent()->isPaid()
+			$registrationBag->current()->isPaid()
 		);
 	}
 
@@ -289,7 +289,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertTrue(
-			$registrationBag->getCurrent()->isOnRegistrationQueue()
+			$registrationBag->current()->isOnRegistrationQueue()
 		);
 	}
 
@@ -321,7 +321,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertFalse(
-			$registrationBag->getCurrent()->isOnRegistrationQueue()
+			$registrationBag->current()->isOnRegistrationQueue()
 		);
 	}
 
@@ -354,7 +354,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertFalse(
-			$registrationBag->getCurrent()->isOnRegistrationQueue()
+			$registrationBag->current()->isOnRegistrationQueue()
 		);
 	}
 
@@ -368,7 +368,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 
 		$this->assertTrue(
-			$registrationBag->getCurrent()->isOnRegistrationQueue()
+			$registrationBag->current()->isOnRegistrationQueue()
 		);
 	}
 
@@ -395,7 +395,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			$registrationBag->getCurrent()->getSeats()
+			$registrationBag->current()->getSeats()
 		);
 	}
 
@@ -409,7 +409,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
-			$registrationBag->getCurrent()->getSeats()
+			$registrationBag->current()->getSeats()
 		);
 	}
 

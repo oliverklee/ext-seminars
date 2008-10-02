@@ -961,12 +961,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = '';
-		$speakerBag = $this->getSpeakerBag($speakerRelation);
 
-		while ($speaker = $speakerBag->getCurrent()) {
+		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$name = $speaker->getTitle();
 			if ($speaker->hasOrganization()) {
-				$name .= ', '.$speaker->getOrganization();
+				$name .= ', ' . $speaker->getOrganization();
 			}
 			if ($speaker->hasHomepage()) {
 				$name = $plugin->cObj->getTypoLink(
@@ -990,7 +989,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$result .= $plugin->getSubpart(
 				'SPEAKER_LIST_ITEM'
 			);
-			$speakerBag->getNext();
 		}
 
 		return $result;
@@ -1016,9 +1014,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = '';
-		$speakerBag = $this->getSpeakerBag($speakerRelation);
 
-		while ($speaker = $speakerBag->getCurrent()) {
+		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$result .= $speaker->getTitle();
 			if ($speaker->hasOrganization()) {
 				$result .= ', '.$speaker->getOrganization();
@@ -1031,7 +1028,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			if ($speaker->hasDescription()) {
 				$result .= $speaker->getDescriptionRaw().CRLF;
 			}
-			$speakerBag->getNext();
 		}
 
 		return $result;
@@ -1056,11 +1052,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$speakerBag = $this->getSpeakerBag($speakerRelation);
 
-		while ($speaker = $speakerBag->getCurrent()) {
+		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$result[] = $speaker->getTitle();
-			$speakerBag->getNext();
 		}
 
 		return implode(', ', $result);
@@ -2384,16 +2378,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer = $organizerBag->getCurrent()) {
+		foreach ($this->getOrganizerBag() as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
 				$organizer->getTitle(),
 				$organizer->getHomepage(),
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
 			);
-			$organizerBag->getNext();
 		}
 
 		return implode(', ', $result);
@@ -2411,12 +2403,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer = $organizerBag->getCurrent()) {
+		foreach ($this->getOrganizerBag() as $organizer) {
 			$result[] = $organizer->getTitle()
 				.($organizer->hasHomepage() ? ', '.$organizer->getHomepage() : '');
-			$organizerBag->getNext();
 		}
 
 		return implode(CRLF, $result);
@@ -2436,11 +2426,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer = $organizerBag->getCurrent()) {
+		foreach ($this->getOrganizerBag() as $organizer) {
 			$result[] = '"'.$organizer->getTitle().'" <'.$organizer->getEmail().'>';
-			$organizerBag->getNext();
 		}
 
 		return $result;
@@ -2458,11 +2446,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer = $organizerBag->getCurrent()) {
+		foreach ($this->getOrganizerBag() as $organizer) {
 			$result[] = $organizer->getEmail();
-			$organizerBag->getNext();
 		}
 
 		return $result;
@@ -2479,11 +2465,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$result = array();
-		$organizerBag = $this->getOrganizerBag();
 
-		while ($organizer = $organizerBag->getCurrent()) {
+		foreach ($this->getOrganizerBag() as $organizer) {
 			$result[] = $organizer->getEmailFooter();
-			$organizerBag->getNext();
 		}
 
 		return $result;
@@ -2542,14 +2526,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM
 		);
 
-		while ($organizer = $organizerBag->getCurrent()) {
+		foreach ($organizerBag as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
 				$organizer->getTitle(),
 				$organizer->getHomepage(),
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
 			);
-			$organizerBag->getNext();
 		}
 
 		return implode(', ', $result);
@@ -4367,11 +4350,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// Creates an array with all place UIDs which should be related to this
 		// event.
 		$placesOfTimeSlots = array();
-		while ($timeSlot = $timeSlotBag->getCurrent()) {
+		foreach ($timeSlotBag as $timeSlot) {
 			if ($timeSlot->hasPlace()) {
 				$placesOfTimeSlots[] = $timeSlot->getPlace();
 			}
-			$timeSlotBag->getNext();
 		}
 
 		return $this->createMmRecords(
@@ -4408,7 +4390,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			SEMINARS_TABLE_TIME_SLOTS.'.begin_date ASC'
 		);
 
-		while ($timeSlot = $timeSlotBag->getCurrent()) {
+		foreach ($timeSlotBag as $timeSlot) {
 			$result[] = array(
 				'date' => $timeSlot->getDate(),
 				'time' => $timeSlot->getTime(),
@@ -4417,8 +4399,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'place' => $timeSlot->getPlaceShort(),
 				'speakers' => $timeSlot->getSpeakersShortCommaSeparated()
 			);
-
-			$timeSlotBag->getNext();
 		}
 
 		return $result;
@@ -4470,10 +4450,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = array();
 
-		while ($bag->getCurrent()) {
-			$key = $bag->getCurrent()->getUid();
-			$result[$key] = $bag->getCurrent()->getTitle();
-			$bag->getNext();
+		foreach ($bag as $key => $category) {
+			$result[$key] = $category->getTitle();
 		}
 
 		return $result;

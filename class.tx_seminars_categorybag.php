@@ -81,7 +81,7 @@ class tx_seminars_categorybag extends tx_seminars_bag {
 	protected function createItemFromDbResult() {
 		$categoryClassname = t3lib_div::makeInstanceClassName('tx_seminars_category');
 		$this->currentItem = new $categoryClassname(0, $this->dbResult);
-		$this->checkCurrentItem();
+		$this->valid();
 	}
 }
 

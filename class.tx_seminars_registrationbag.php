@@ -94,7 +94,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 			$this->cObj,
 			$this->dbResult
 		);
-		$this->checkCurrentItem();
+		$this->valid();
 	}
 }
 

@@ -98,11 +98,11 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$eventUid1,
-			$testBag->getCurrent()->getUid()
+			$testBag->current()->getUid()
 		);
 		$this->assertEquals(
 			$eventUid2,
-			$testBag->getNext()->getUid()
+			$testBag->next()->getUid()
 		);
 	}
 
@@ -695,11 +695,11 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$eventUid2,
-			$testBag->getCurrent()->getUid()
+			$testBag->current()->getUid()
 		);
 		$this->assertEquals(
 			$eventUid1,
-			$testBag->getNext()->getUid()
+			$testBag->next()->getUid()
 		);
 	}
 

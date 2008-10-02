@@ -131,7 +131,7 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 			$limit
 		);
 
-		while ($this->speaker = $speakerBag->getCurrent()) {
+		foreach ($speakerBag as $this->speaker) {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB
@@ -148,7 +148,6 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 				TAB.TAB.TAB.TAB.TAB
 					.$this->speaker->getSkillsShort().LF
 			);
-			$speakerBag->getNext();
 		}
 
 		$content .= $this->getNewIcon($this->page->pageInfo['uid']);

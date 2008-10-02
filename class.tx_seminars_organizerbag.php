@@ -86,7 +86,7 @@ class tx_seminars_organizerbag extends tx_seminars_bag {
 			'tx_seminars_organizer'
 		);
 		$this->currentItem = new $organizerClassname(0, $this->dbResult);
-		$this->checkCurrentItem();
+		$this->valid();
 	}
 }
 

@@ -84,7 +84,7 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 	function createItemFromDbResult() {
 		$speakerClassname = t3lib_div::makeInstanceClassName('tx_seminars_speaker');
 		$this->currentItem = new $speakerClassname(0, $this->dbResult);
-		$this->checkCurrentItem();
+		$this->valid();
 	}
 }
 

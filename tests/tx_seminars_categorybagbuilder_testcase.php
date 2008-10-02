@@ -83,11 +83,11 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'Title 1',
-			$categoryBag->getCurrent()->getTitle()
+			$categoryBag->current()->getTitle()
 		);
 		$this->assertEquals(
 			'Title 2',
-			$categoryBag->getNext()->getTitle()
+			$categoryBag->next()->getTitle()
 		);
 	}
 
@@ -277,7 +277,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$categoryUid,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -311,7 +311,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			$categoryUid1,
-			$bag->getCurrent()->getUid()
+			$bag->current()->getUid()
 		);
 	}
 

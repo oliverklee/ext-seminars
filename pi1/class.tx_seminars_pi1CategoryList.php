@@ -111,10 +111,10 @@ class tx_seminars_pi1CategoryList extends tx_seminars_templatehelper {
 			$allCategories = '';
 			$rowCounter = 0;
 
-			while ($categoryBag->getCurrent()) {
+			foreach ($categoryBag as $category) {
 				$link = $this->createLinkToListViewLimitedByCategory(
-					$categoryBag->getCurrent()->getUid(),
-					$categoryBag->getCurrent()->getTitle()
+					$category->getUid(),
+					$category->getTitle()
 				);
 				$this->setMarker('category_title', $link);
 
@@ -122,7 +122,6 @@ class tx_seminars_pi1CategoryList extends tx_seminars_templatehelper {
 				$this->setMarker('class_category_item', $cssClass);
 
 				$allCategories .= $this->getSubpart('SINGLE_CATEGORY_ITEM');
-				$categoryBag->getNext();
 				$rowCounter ++;
 			}
 

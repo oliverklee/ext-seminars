@@ -1798,7 +1798,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$result = $this->createListHeader();
 		$rowCounter = 0;
 
-		while ($currentItem = $seminarOrRegistrationBag->getCurrent()) {
+		foreach ($seminarOrRegistrationBag as $currentItem) {
 			if ($whatToDisplay == 'my_events') {
 				$this->registration = $currentItem;
 				$this->seminar = $this->registration->getSeminarObject();
@@ -1808,7 +1808,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			$result .= $this->createListRow($rowCounter, $whatToDisplay);
 			$rowCounter++;
-			$seminarOrRegistrationBag->getNext();
 		}
 
 		$result .= $this->createListFooter();
@@ -2148,9 +2147,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Walks through all events in the seminar bag to read the needed data
 		// from each event object.
-		while ($currentEvent = $seminarBag->getCurrent()) {
+		foreach ($seminarBag as $event) {
 			// Reads the language from the event record.
-			$languageIsoCode = $currentEvent->getLanguage();
+			$languageIsoCode = $event->getLanguage();
 			if ((!empty($languageIsoCode))
 				&& !isset($this->allLanguages[$languageIsoCode])) {
 				$languageName = $this->staticInfo->getStaticInfoName(
@@ -2165,21 +2164,19 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 			// Reads the place(s) from the event record. The country will be
 			// read from the place record later.
-			$placeUids = $currentEvent->getRelatedMmRecordUids(
+			$placeUids = $event->getRelatedMmRecordUids(
 				SEMINARS_TABLE_SITES_MM
 			);
 			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
 
 			// Reads the event type from the event record.
-			$eventTypeUid = $currentEvent->getEventTypeUid();
+			$eventTypeUid = $event->getEventTypeUid();
 			if ($eventTypeUid != 0) {
-				$eventTypeName = $currentEvent->getEventType();
+				$eventTypeName = $event->getEventType();
 				if (!isset($this->allEventTypes[$eventTypeUid])) {
 					$this->allEventTypes[$eventTypeUid] = $eventTypeName;
 				}
 			}
-
-			$seminarBag->getNext();
 		}
 		unset($seminarBag);
 
@@ -2191,12 +2188,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		if (empty($allPlaceUids)) {
 			$allPlaceUids = array(0);
 		}
-		$placeBag = $this->createPlaceBag($allPlaceUids);
-		while ($currentPlace = $placeBag->getCurrent()) {
-			if (!isset($this->allPlaces[$currentPlace->getUid()])) {
-				$this->allPlaces[$currentPlace->getUid()] = $currentPlace->getTitle();
+
+		foreach ($this->createPlaceBag($allPlaceUids) as $uid => $place) {
+			if (!isset($this->allPlaces[$uid])) {
+				$this->allPlaces[$uid] = $place->getTitle();
 			}
-			$countryIsoCode = $currentPlace->getCountryIsoCode();
+			$countryIsoCode = $place->getCountryIsoCode();
 			if (!isset($this->allCountries[$countryIsoCode])) {
 				$this->allCountries[$countryIsoCode] = $this->staticInfo->getStaticInfoName(
 					'COUNTRIES',
@@ -2204,12 +2201,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				);
 			}
 
-			$cityName = $currentPlace->getCity();
+			$cityName = $place->getCity();
 			if (!isset($this->allCities[$cityName])) {
 				$this->allCities[$cityName] = $cityName;
 			}
-
-			$placeBag->getNext();
 		}
 		unset($placeBag);
 
@@ -3095,11 +3090,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			'crdate'
 		);
 
-		if ($registrationBag->getCurrent()) {
+		if ($registrationBag->current()) {
 			$result = '';
-			while ($currentRegistration = $registrationBag->getCurrent()) {
+			foreach ($registrationBag as $registration) {
 				$this->setMarker('registrations_list_inneritem',
-					$currentRegistration->getUserDataAsHtml(
+					$registration->getUserDataAsHtml(
 						$this->getConfValueString(
 							'showFeUserFieldsInRegistrationsList',
 							's_template_special'
@@ -3110,7 +3105,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result .= $this->getSubpart(
 					'REGISTRATIONS_LIST_ITEM'
 				);
-				$registrationBag->getNext();
 			}
 			$this->hideSubparts('registrations_list_message', 'wrapper');
 			$this->setMarker('registrations_list_body', $result);

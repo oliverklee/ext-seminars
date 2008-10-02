@@ -57,7 +57,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * @return	[type]		...
 	 */
-	function init() {
+	public function init() {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 
 		parent::init();
@@ -70,7 +70,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 *
 	 * @return	[type]		...
 	 */
-	function menuConfig() {
+	public function menuConfig() {
 		global $LANG, $BE_USER;
 
 		$functionMenu = array();
@@ -92,7 +92,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 *
 	 * @return	[type]		...
 	 */
-	function main() {
+	public function main() {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 
 		$this->tableUsers = 'fe_users';
@@ -214,7 +214,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 *
 	 * @return	[type]		...
 	 */
-	function moduleContent() {
+	private function moduleContent() {
 		global $LANG;
 
 		switch ((string)$this->MOD_SETTINGS['function']) {
@@ -234,13 +234,11 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	}
 
 	/**
-	 * Returns a list of the emailadresses of the registered attendees.
+	 * Returns a list of the e-mail addresses of the registered attendees.
 	 *
- 	 * @return	string		HTML Output (content of the Module).
- 	 *
-	 * @access	private
+	 * @return	string		HTML output (content of the module).
 	 */
-	function listSeminarDetails() {
+	private function listSeminarDetails() {
 		// initialize the localization functionality
 		global $LANG;
 
@@ -254,23 +252,21 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$builder->setSourcePages(intval($this->id));
 		$seminarBag = $builder->build();
 
-		while ($currentSeminar = $seminarBag->getCurrent()) {
-			$result .= '<h4>'.$currentSeminar->getTitleAndDate().'</h4>';
-			$seminarQuery = SEMINARS_TABLE_ATTENDANCES.'.seminar='
-				.$currentSeminar->getUid();
+		foreach ($seminarBag as $seminar) {
+			$result .= '<h4>' . $seminar->getTitleAndDate() . '</h4>';
+			$seminarQuery = SEMINARS_TABLE_ATTENDANCES . '.seminar=' .
+				$seminar->getUid();
 
-			$result .= $LANG->getLL('label_all').'<br />'
-				.$this->generateEmailList($seminarQuery).'<hr />';
-			$result .= $LANG->getLL('label_paid').'<br />'
-				.$this->generateEmailList(
-					$seminarQuery.' AND (paid=1 OR datepaid!="")'
-				).'<hr />';
-			$result .= $LANG->getLL('label_unpaid').'<br />'
-				.$this->generateEmailList(
-					$seminarQuery.' AND (paid=0 AND datepaid=0)'
-				).'<hr />';
-
-			$seminarBag->getNext();
+			$result .= $LANG->getLL('label_all') . '<br />' .
+				$this->generateEmailList($seminarQuery) . '<hr />';
+			$result .= $LANG->getLL('label_paid') . '<br />' .
+				$this->generateEmailList(
+					$seminarQuery . ' AND (paid=1 OR datepaid!="")'
+				) . '<hr />';
+			$result .= $LANG->getLL('label_unpaid') . '<br />' .
+				$this->generateEmailList(
+					$seminarQuery . ' AND (paid=0 AND datepaid=0)'
+				) . '<hr />';
 		}
 
 		$result .= $seminarBag->checkConfiguration();
@@ -284,14 +280,12 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	 * @param	string		string that will be prepended to the WHERE clause
 	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
 	 *						spaces are not necessary for this parameter)
- 	 *
- 	 * @return	string		a comma-separated list of names and e-mail addresses
- 	 *						or a localized messages if there are no registration
- 	 *						records
- 	 *
-	 * @access	private
+	 *
+	 * @return	string		a comma-separated list of names and e-mail addresses
+	 *						or a localized messages if there are no registration
+	 *						records
 	 */
-	 function generateEmailList($queryParameters) {
+	private function generateEmailList($queryParameters) {
 		// initialize the localization functionality
 		global $LANG;
 
@@ -309,17 +303,16 @@ class tx_seminars_module1 extends t3lib_SCbase {
 				'crdate'
 			);
 
-		if ($registrationBag->getCurrent()) {
-			while ($currentRegistration = $registrationBag->getCurrent()) {
+		if ($registrationBag->current()) {
+			foreach ($registrationBag as $registration) {
 				$currentEmail = htmlspecialchars(
-					$currentRegistration->getUserNameAndEmail()
+					$registration->getUserNameAndEmail()
 				);
 				if (empty($emailList)) {
 					$emailList = $currentEmail;
-				}	else	{
+				} else {
 					$emailList .= $dividerInEmailList . ' ' . $currentEmail;
 				}
-				$registrationBag->getNext();
 			}
 			$result .= $emailList;
 		} else {

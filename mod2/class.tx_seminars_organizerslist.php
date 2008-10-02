@@ -128,7 +128,7 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 			$limit
 		);
 
-		while ($this->organizer = $organizerBag->getCurrent()) {
+		foreach ($organizerBag as $this->organizer) {
 			// Add the result row to the table array.
 			$table[] = array(
 				TAB.TAB.TAB.TAB.TAB
@@ -143,7 +143,6 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 						$this->organizer->getUid()
 					).LF
 			);
-			$organizerBag->getNext();
 		}
 
 		$content .= $this->getNewIcon($this->page->pageInfo['uid']);

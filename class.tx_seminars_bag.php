@@ -75,9 +75,6 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 	 */
 	private $enabledFieldsQuery = '';
 
-	/** whether the iterator points at the first element */
-	private $isAtFirstElement = false;
-
 	/**
 	 * The constructor. Sets the iterator to the first result of a query
 	 *
@@ -119,7 +116,7 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 		$this->limit = $limit;
 
 		$this->init();
-		$this->resetToFirst();
+		$this->rewind();
 	}
 
 	/**
@@ -177,21 +174,6 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 	 * query parameters from $this->queryParameters for the DB query.
 	 * The query works so that the column names are *not*
 	 * prefixed with the table name.
-	 *
-	 * @return	boolean		true if everything went okay, false otherwise
-	 *
-	 * @deprecated	0.7.0 - 2008-10-01
-	 */
-	public function resetToFirst() {
-		$this->rewind();
-		return $this->isAtFirstElement;
-	}
-
-	/**
-	 * Sets the iterator to the first object, using additional
-	 * query parameters from $this->queryParameters for the DB query.
-	 * The query works so that the column names are *not*
-	 * prefixed with the table name.
 	 */
 	public function rewind() {
 		// frees old results if there are any
@@ -229,21 +211,6 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 			$this->objectCountWithoutLimit = 0;
 			$this->currentItem = null;
 		}
-
-		$this->isAtFirstElement = true;
-	}
-
-	/**
-	 * Advances to the next record and returns a reference to that object.
-	 *
-	 * @return	tx_seminars_objectfromdb	a reference to the now current
-	 * 										object, will be null if there is no
-	 * 										next object
-	 *
-	 * @deprecated	0.7.0 - 2008-10-01
-	 */
-	public function getNext() {
-		return $this->next();
 	}
 
 	/**
@@ -254,8 +221,6 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 	 * 										next object
 	 */
 	public function next() {
-		$this->isAtFirstElement = false;
-
 		if (!$this->dbResult) {
 			$this->currentItem = null;
 			return null;
@@ -263,7 +228,7 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 
 		$this->createItemFromDbResult();
 
-		return $this->getCurrent();
+		return $this->current();
 	}
 
 	/**
@@ -281,34 +246,9 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 	 * @return	tx_seminars_objectfromdb	a reference to the current object,
 	 * 										will be null if	there is no current
 	 * 										object
-	 *
-	 * @deprecated	0.7.0 - 2008-10-01
-	 */
-	public function getCurrent() {
-		return $this->current();
-	}
-
-	/**
-	 * Returns the current object (which may be null).
-	 *
-	 * @return	tx_seminars_objectfromdb	a reference to the current object,
-	 * 										will be null if	there is no current
-	 * 										object
 	 */
 	public function current() {
 		return $this->currentItem;
-	}
-
-	/**
-	 * Checks isOk() and, in case of failure (e.g. there is no more data
-	 * from the DB), nulls out $this->currentItem.
-	 *
-	 * If the function isOk() returns true, nothing is changed.
-	 *
-	 * @deprecated	0.7.0 - 2008-10-01
-	 */
-	protected function checkCurrentItem() {
-		$this->valid();
 	}
 
 	/**
@@ -374,15 +314,10 @@ abstract class tx_seminars_bag extends tx_seminars_dbplugin implements Iterator 
 	 * 						empty
 	 */
 	public function getUids() {
-		if (!$this->isAtFirstElement) {
-			$this->resetToFirst();
-		}
-
 		$uids = array();
 
-		while ($this->getCurrent()) {
-			$uids[] = $this->getCurrent()->getUid();
-			$this->getNext();
+		foreach ($this as $currentItem) {
+			$uids[] = $currentItem->getUid();
 		}
 
 		sort($uids, SORT_NUMERIC);

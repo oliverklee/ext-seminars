@@ -194,18 +194,16 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 
 		$registrationBagBuilder->limitToEvent($eventUid);
 
-		$registrationBag = $registrationBagBuilder->build();
-
-		while ($currentRegistration = $registrationBag->getCurrent()) {
+		foreach ($registrationBagBuilder->build() as $registration) {
 			$userData = $this->retrieveData(
-				$currentRegistration,
+				$registration,
 				'getUserData',
 				$this->configGetter->getConfValueString(
 					'fieldsFromFeUserForCsv'
 				)
 			);
 			$registrationData = $this->retrieveData(
-				$currentRegistration,
+				$registration,
 				'getRegistrationData',
 				$this->configGetter->getConfValueString(
 					'fieldsFromAttendanceForCsv'
@@ -216,9 +214,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			$result .= implode(
 				',',
 				array_merge($userData, $registrationData)
-			).CRLF;
-
-			$registrationBag->getNext();
+			) . CRLF;
 		}
 
 		return $result;
@@ -301,11 +297,10 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
 		$builder->setBackEndMode();
 		$builder->setSourcePages($pid);
-		$seminarBag = $builder->build();
 
-		while ($currentSeminar = $seminarBag->getCurrent()) {
+		foreach ($builder->build() as $seminar) {
 			$seminarData = $this->retrieveData(
-				$currentSeminar,
+				$seminar,
 				'getEventData',
 				$this->configGetter->getConfValueString(
 					'fieldsFromEventsForCsv'
@@ -315,9 +310,7 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 			$result .= implode(
 				',',
 				$seminarData
-			).CRLF;
-
-			$seminarBag->getNext();
+			) . CRLF;
 		}
 
 		return $result;

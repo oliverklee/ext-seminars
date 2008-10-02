@@ -130,12 +130,12 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	public function testBagSortsByUidByDefault() {
 		$this->assertEquals(
 			$this->uidOfFirstRecord,
-			$this->fixture->getCurrent()->getUid()
+			$this->fixture->current()->getUid()
 		);
 
 		$this->assertEquals(
 			$this->uidOfSecondRecord,
-			$this->fixture->getNext()->getUid()
+			$this->fixture->next()->getUid()
 		);
 	}
 }
