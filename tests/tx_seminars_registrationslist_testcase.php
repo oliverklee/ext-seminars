@@ -76,7 +76,12 @@ class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->page, $this->fixture, $this->testingFramework);
+
+		$this->fixture->__destruct();
+		unset(
+			$this->page->doc, $this->page, $this->fixture,
+			$this->testingFramework
+		);
 	}
 
 

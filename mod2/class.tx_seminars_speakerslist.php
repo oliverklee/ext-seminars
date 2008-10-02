@@ -44,6 +44,18 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 	private $speaker = null;
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		if ($this->speaker) {
+			$this->speaker->__destruct();
+		}
+
+		unset($this->speaker);
+		parent::__destruct();
+	}
+
+	/**
 	 * Generates and prints out a speakers list.
 	 *
 	 * @return	string		the HTML source code to display

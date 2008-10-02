@@ -301,7 +301,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		parent::__destruct();
 		unset(
 			$this->configGetter, $this->seminar, $this->registration,
-			$this->registrationManagerm, $this->hookObjects, $this->staticInfo
+			$this->registrationManager, $this->hookObjects, $this->staticInfo,
+			$this->feuser
 		);
 	}
 
@@ -471,6 +472,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	public function createSeminar($seminarUid) {
 		$result = false;
 
+		if ($this->seminar) {
+			$this->seminar->__destruct();
+			unset($this->seminar);
+		}
+
 		if (tx_seminars_objectfromdb::recordExists(
 			$seminarUid,
 			SEMINARS_TABLE_SEMINARS)
@@ -489,10 +495,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	}
 
 	/**
-	 * Creates a registration in $this->registration from the database record with
-	 * the UID specified in the parameter $registrationUid.
-	 * If the registration cannot be created, $this->registration will be null, and
-	 * this function will return false.
+	 * Creates a registration in $this->registration from the database record
+	 * with the UID specified in the parameter $registrationUid.
+	 * If the registration cannot be created, $this->registration will be null,
+	 * and this function will return false.
 	 *
 	 * $this->registrationManager must have been initialized before this
 	 * method may be called.
@@ -504,6 +510,11 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 */
 	public function createRegistration($registrationUid) {
 		$result = false;
+
+		if ($this->registration) {
+			$this->registration->__destruct();
+			unset($this->registration);
+		}
 
 		if (tx_seminars_objectfromdb::recordExists(
 			$registrationUid, SEMINARS_TABLE_ATTENDANCES)
@@ -519,6 +530,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->registration = new $registrationClassname(
 				$this->cObj, $dbResult
 			);
+			if ($dbResult) {
+				$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
+			}
 			$result = $this->registration->isOk();
 			if (!$result) {
 				$this->registration = null;
@@ -890,7 +904,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * Fills in the matching marker for the place.
 	 */
 	private function setPlaceMarker() {
-
 		$this->setMarker(
 			'place',
 			$this->getConfValueBoolean('showSiteDetails', 's_template_special')
@@ -1365,6 +1378,8 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
 		$this->setErrorMessage($seminarBag->checkConfiguration(true));
+		$seminarBag->__destruct();
+		unset($seminarBag);
 
 		// Let's also check the list view configuration..
 		$this->checkConfiguration(true, 'seminar_list');
@@ -1417,6 +1432,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
 		$this->setErrorMessage($seminarBag->checkConfiguration(true));
+
+		$seminarBag->__destruct();
+		unset($seminarBag);
 
 		// Let's also check the list view configuration..
 		$this->checkConfiguration(true, 'seminar_list');
@@ -1511,9 +1529,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->createAllowedValuesForSelectorWidget();
 
 				$result .= $this->createSelectorWidget();
-
-				// Unsets the seminar bag for performance reasons.
-				unset($this->seminarBagForSelectorWidget);
 			}
 
 			// Creates the seminar or registration bag for the list view (with
@@ -1540,6 +1555,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->setErrorMessage(
 				$seminarOrRegistrationBag->checkConfiguration(true)
 			);
+
+			$seminarOrRegistrationBag->__destruct();
+			unset($seminarOrRegistrationBag);
 		}
 
 		return $result;
@@ -2178,6 +2196,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				}
 			}
 		}
+		$seminarBag->__destruct();
 		unset($seminarBag);
 
 		// Assures that each language is just once in the resulting array.
@@ -2206,7 +2225,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$this->allCities[$cityName] = $cityName;
 			}
 		}
-		unset($placeBag);
 
 		// Brings the options into alphabetical order.
 		asort($this->allLanguages);
@@ -2305,6 +2323,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		// Unsets the temporary seminar bag we used above.
+		$temporarySeminarBag->__destruct();
 		unset($temporarySeminarBag);
 
 		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
@@ -2946,6 +2965,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		$output = $registrationEditor->_render();
 		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
 
+		$registrationEditor->__destruct();
+		unset($registrationEditor);
+
 		return $output;
 	}
 
@@ -3118,6 +3140,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		// Lets warnings from the registration bag bubble up to us.
 		$this->setErrorMessage($registrationBag->checkConfiguration(true));
+
+		$registrationBag->__destruct();
+		unset($registrationBag);
 	}
 
 
@@ -3139,6 +3164,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$result = $registrationEditor->_render();
 		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
+
+		$registrationEditor->__destruct();
+		unset($registrationEditor);
 
 		return $result;
 	}
@@ -3175,6 +3203,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				'Status: 403 Forbidden'
 			);
 		}
+
+		$eventEditor->__destruct();
+		unset($eventEditor);
 
 		return $result;
 	}

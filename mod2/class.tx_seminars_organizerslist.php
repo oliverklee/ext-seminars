@@ -44,6 +44,19 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 	private $organizer = null;
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		if ($this->organizer) {
+			$this->organizer->__destruct();
+		}
+
+		unset($this->organizer);
+		parent::__destruct();
+	}
+
+
+	/**
 	 * Generates and prints out a organizers list.
 	 *
 	 * @return	string		the HTML source code to display

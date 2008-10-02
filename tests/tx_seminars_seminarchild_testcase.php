@@ -103,7 +103,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->pi1->__destruct();
 		$this->fixture->__destruct();
-		unset($this->fixture, $this->testingFramework, $this->pi1);
+		unset($this->fixture, $this->pi1, $this->testingFramework);
 	}
 
 

@@ -50,8 +50,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
-		unset($this->testingFramework);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 

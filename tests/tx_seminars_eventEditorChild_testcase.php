@@ -77,6 +77,7 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();
+		$this->pi1->__destruct();
 		unset($this->testingFramework, $this->fixture, $this->pi1);
 	}
 

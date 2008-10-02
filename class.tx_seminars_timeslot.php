@@ -78,6 +78,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 			while ($speaker = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 				$result[] = $speaker['uid_foreign'];
 			}
+			$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 		}
 
 		return $result;
@@ -126,6 +127,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 		}
 
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 		if (!$dbResultRow) {
 			throw new Exception(
 				'The related place with the UID ' . $this->getPlace() .

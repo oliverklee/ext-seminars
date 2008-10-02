@@ -373,6 +373,7 @@ abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
 			if ($dbResult) {
 				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 				$result = ($dbResultAssoc['num'] == 1);
+				$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 			} else {
 				$result = false;
 			}

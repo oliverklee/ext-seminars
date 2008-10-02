@@ -131,6 +131,9 @@ class tx_seminars_pi1CategoryList extends tx_seminars_templatehelper {
 			$result = $this->getSubpart('VIEW_NO_CATEGORIES');
 		}
 
+		$categoryBag->__destruct();
+		unset($categoryBag);
+
 		return $result;
 	}
 

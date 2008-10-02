@@ -84,7 +84,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 
 		$this->pi1->__destruct();
 		$this->fixture->__destruct();
-		unset($this->testingFramework, $this->fixture, $this->pi1);
+		unset($this->pi1, $this->fixture, $this->pi1, $this->testingFramework);
 	}
 
 

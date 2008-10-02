@@ -49,6 +49,18 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 	private $seminar = null;
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		if ($this->seminar) {
+			$this->seminar->__destruct();
+		}
+
+		unset($this->seminar);
+		parent::__destruct();
+	}
+
+	/**
 	 * Generates and prints out an event list.
 	 *
 	 * @return	string		the HTML source code of the event list

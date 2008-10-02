@@ -47,7 +47,10 @@ class tx_seminars_csv extends t3lib_SCbase {
 	 * this case, for download).
 	 */
 	public function printContent() {
-		echo t3lib_div::makeInstance('tx_seminars_pi2')->main(null, array());
+		$pi2 = t3lib_div::makeInstance('tx_seminars_pi2');
+		echo $pi2->main(null, array());
+		$pi2->__destruct();
+		unset($pi2);
 	}
 }
 

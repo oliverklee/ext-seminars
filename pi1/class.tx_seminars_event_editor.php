@@ -70,6 +70,14 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	private $attachedFiles = array();
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		parent::__destruct();
+		unset($this->plugin, $this->oForm);
+	}
+
+	/**
 	 * The constructor.
 	 *
 	 * After the constructor has been called, hasAccess() (or hasAccessMessage())
@@ -435,6 +443,7 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 			$this->plugin->getConfValueInteger('defaultEventVipsFeGroupID')
 		);
 		$isUserOwner = $seminar->isOwnerFeUser();
+		$seminar->__destruct();
 		unset($seminar);
 
 		return $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);

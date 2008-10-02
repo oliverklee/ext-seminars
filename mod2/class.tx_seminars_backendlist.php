@@ -52,6 +52,13 @@ class tx_seminars_backendlist {
 	}
 
 	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset($this->page);
+	}
+
+	/**
 	 * Generates an edit record icon which is linked to the edit view of
 	 * a record.
 	 *
@@ -208,9 +215,10 @@ class tx_seminars_backendlist {
 	 * @access	protected
 	 */
 	function editNewUrl($params, $backPath = '') {
-		$returnUrl = 'returnUrl='.rawurlencode(t3lib_div::getIndpEnv('REQUEST_URI'));
+		$returnUrl = 'returnUrl=' .
+			rawurlencode(t3lib_div::getIndpEnv('REQUEST_URI'));
 
-		return $backPath.'alt_doc.php?'.$returnUrl.$params;
+		return $backPath . 'alt_doc.php?' . $returnUrl . $params;
 	}
 
 	/**

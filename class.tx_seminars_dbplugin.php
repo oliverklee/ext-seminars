@@ -70,7 +70,7 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 		}
 
 		parent::__destruct();
-		unset($this->configurationCheck);
+		unset($this->configurationCheck, $this->feuser);
 	}
 
 	/**
