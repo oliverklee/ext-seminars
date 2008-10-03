@@ -22,15 +22,13 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_tslib . 'class.tslib_content.php');
-require_once(PATH_tslib . 'class.tslib_feuserauth.php');
-require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
-
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_registrationEditorChild.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_session.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_fakeSession.php');
 
 /**
  * Testcase for the registrationEditorChild class in the 'seminars' extensions.
@@ -41,6 +39,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var	tx_seminars_registrationEditorChild
+	 */
 	private $fixture;
 
 	/** our instance of the testing framework */
@@ -52,10 +53,20 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	/** the instance of tx_seminars_pi1*/
 	private $pi1;
 
+	/**
+	 * @var	tx_oelib_fakeSession		a fake session
+	 */
+	private $session;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
 		$this->testingFramework->createFakeFrontEnd($this->frontEndPageUid);
+
+		$this->session = new tx_oelib_fakeSession();
+		tx_oelib_session::setInstance(
+			tx_oelib_session::TYPE_USER, $this->session
+		);
 
 		$seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -71,6 +82,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 				'thankYouAfterRegistrationPID' => $this->frontEndPageUid,
 				'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'logOutOneTimeAccountsAfterRegistration' => 1,
 			)
 		);
 		$this->pi1->getTemplateCode();
@@ -84,7 +96,10 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 
 		$this->pi1->__destruct();
 		$this->fixture->__destruct();
-		unset($this->pi1, $this->fixture, $this->pi1, $this->testingFramework);
+		unset(
+			$this->pi1, $this->fixture, $this->pi1, $this->session,
+			$this->testingFramework
+		);
 	}
 
 
@@ -119,19 +134,46 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	public function testGetThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp() {
 		$this->assertRegExp(
 			'/^http:\/\/./',
-			$this->fixture->getThankYouAfterRegistrationUrl(array())
+			$this->fixture->getThankYouAfterRegistrationUrl()
 		);
 	}
 
 	public function testGetThankYouAfterRegistrationUrlReturnsUrlWithEncodedBrackets() {
 		$this->assertContains(
 			'%5BshowUid%5D',
-			$this->fixture->getThankYouAfterRegistrationUrl(array())
+			$this->fixture->getThankYouAfterRegistrationUrl()
 		);
 
 		$this->assertNotContains(
 			'[showUid]',
-			$this->fixture->getThankYouAfterRegistrationUrl(array())
+			$this->fixture->getThankYouAfterRegistrationUrl()
+		);
+	}
+
+	public function testGetThankYouAfterRegistrationUrlLeavesUserLoggedInByDefault() {
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			$this->testingFramework->createFrontEndUserGroup()
+		);
+		$this->testingFramework->loginFrontEndUser($frontEndUserUid);
+
+		$this->fixture->getThankYouAfterRegistrationUrl();
+
+		$this->assertTrue(
+			$this->testingFramework->isLoggedIn()
+		);
+	}
+
+	public function testGetThankYouAfterRegistrationUrlWithOneTimeAccountMarkerInUserSessionLogsOutUser() {
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			$this->testingFramework->createFrontEndUserGroup()
+		);
+		$this->testingFramework->loginFrontEndUser($frontEndUserUid);
+		$this->session->setAsBoolean('onetimeaccount', true);
+
+		$this->fixture->getThankYouAfterRegistrationUrl();
+
+		$this->assertFalse(
+			$this->testingFramework->isLoggedIn()
 		);
 	}
 
@@ -165,6 +207,70 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 		$this->assertNotRegExp(
 			'/<br \/>\s*<br \/>/',
 			$this->fixture->getAllFeUserData()
+		);
+	}
+
+
+	///////////////////////////////////////
+	// Tests concerning saveDataToSession
+	///////////////////////////////////////
+
+	public function testSaveDataToSessionCanWriteEmptyZipToUserSession() {
+		$this->fixture->saveDataToSession(array('zip' => ''));
+
+		$this->assertEquals(
+			'',
+			$this->session->getAsString(
+				'tx_seminars_registration_editor_zip'
+			)
+		);
+	}
+
+	public function testSaveDataToSessionCanWriteNonEmptyZipToUserSession() {
+		$this->fixture->saveDataToSession(array('zip' => '12345'));
+
+		$this->assertEquals(
+			'12345',
+			$this->session->getAsString(
+				'tx_seminars_registration_editor_zip'
+			)
+		);
+	}
+
+	public function testSaveDataToSessionCanOverwriteNonEmptyZipWithEmptyZipInUserSession() {
+		$this->session->setAsString(
+			'tx_seminars_registration_editor_zip', '12345'
+		);
+		$this->fixture->saveDataToSession(array('zip' => ''));
+
+		$this->assertEquals(
+			'',
+			$this->session->getAsString(
+				'tx_seminars_registration_editor_zip'
+			)
+		);
+	}
+
+
+	/////////////////////////////////////////////
+	// Tests concerning retrieveDataFromSession
+	/////////////////////////////////////////////
+
+	public function testRetrieveDataFromSessionWithUnusedKeyReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->retrieveDataFromSession('', array('key' => 'foo'))
+		);
+	}
+
+	public function testRetrieveDataFromSessionWithKeySetInUserSessionReturnsDataForThatKey() {
+		$this->session->setAsString(
+			'tx_seminars_registration_editor_zip', '12345'
+		);
+
+		$this->assertEquals(
+			'12345',
+			$this->fixture->retrieveDataFromSession('', array('key' => 'zip'))
 		);
 	}
 }

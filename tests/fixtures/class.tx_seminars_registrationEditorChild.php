@@ -50,6 +50,28 @@ final class tx_seminars_registrationEditorChild extends tx_seminars_registration
 
 		$this->init($this->plugin->conf);
 	}
+
+	/**
+	 * Saves the following data to the FE user session:
+	 * - payment method
+	 * - account number
+	 * - bank code
+	 * - bank name
+	 * - account_owner
+	 * - gender
+	 * - name
+	 * - address
+	 * - zip
+	 * - city
+	 * - country
+	 * - telephone
+	 * - email
+	 *
+	 * @param	array		the form data (may be empty)
+	 */
+	public function saveDataToSession(array $parameters) {
+		parent::saveDataToSession($parameters);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_registrationEditorChild.php']) {

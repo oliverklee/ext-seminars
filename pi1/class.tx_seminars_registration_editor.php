@@ -24,6 +24,8 @@
 
 require_once(PATH_formidableapi);
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_session.php');
+
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
 
@@ -138,7 +140,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		parent::__destruct();
 		unset(
 			$this->plugin, $this->oForm, $this->registrationManager,
-			$this->seminar
+			$this->seminar, $this->staticInfo
 		);
 	}
 
@@ -556,16 +558,10 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * checkLogOutOneTimeAccountsAfterRegistration is enabled in the TS setup,
 	 * the FE user will be automatically logged out.
 	 *
-	 * @param	array		the contents of the "params" child of the userobj
-	 * 						node as key/value pairs (used for retrieving the
-	 * 						current form field name)
-	 *
 	 * @return	string		complete URL of the FE page with a message (or null
 	 * 						if the confirmation page has not been submitted yet)
-	 *
-	 * @access	public
 	 */
-	function getThankYouAfterRegistrationUrl(array $parameters) {
+	public function getThankYouAfterRegistrationUrl() {
 		$sendParameters = false;
 		$pageId = $this->plugin->getConfValueInteger(
 			'thankYouAfterRegistrationPID',
@@ -573,16 +569,17 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 		);
 
 		if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-				&& $GLOBALS['TSFE']->fe_user->getKey('user', 'onetimeaccount')) {
+				&& tx_oelib_session::getInstance(tx_oelib_session::TYPE_USER)
+					->getAsBoolean('onetimeaccount')
+		) {
 			$GLOBALS['TSFE']->fe_user->logoff();
+			$GLOBALS['TSFE']->loginUser = 0;
 		}
 
-		if (
-			$this->plugin->getConfValueBoolean(
-				'sendParametersToThankYouAfterRegistrationPageUrl',
-				's_registration'
-			)
-		) {
+		if ($this->plugin->getConfValueBoolean(
+			'sendParametersToThankYouAfterRegistrationPageUrl',
+			's_registration'
+		)) {
 			$sendParameters = true;
 		}
 
@@ -625,8 +622,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * @param	boolean		true if GET parameters should be added to the URL,
 	 * 						otherwise false
 	 *
-	 * @return	string		complete URL of the FE page with a message (or null
-	 * 						if the confirmation page has not been submitted yet)
+	 * @return	string		complete URL of the FE page with a message
 	 */
 	protected function createUrlForRedirection($pageId, $sendParameters = true) {
 		// On freshly updated sites, the configuration value might not be set
@@ -657,9 +653,7 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 			$this->cObj->typoLink_URL($linkConfiguration)
 		);
 
-		return t3lib_div::locationHeaderUrl(
-			$result
-		);
+		return t3lib_div::locationHeaderUrl($result);
 	}
 
 	/**
@@ -1384,10 +1378,8 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * - email
 	 *
 	 * @param	array		the form data (may be empty)
-	 *
-	 * @access	private
 	 */
-	function saveDataToSession(array $parameters) {
+	protected function saveDataToSession(array $parameters) {
 		if (!empty($parameters)) {
 			$parametersToSave = array(
 				'method_of_payment',
@@ -1402,20 +1394,18 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 				'city',
 				'country',
 				'telephone',
-				'email'
+				'email',
 			);
 
 			foreach ($parametersToSave as $currentKey) {
 				if (isset($parameters[$currentKey])) {
-					$GLOBALS['TSFE']->fe_user->setKey(
-						'user',
-						$this->prefixId.'_'.$currentKey,
-						$parameters[$currentKey]
-					);
+					tx_oelib_session::getInstance(tx_oelib_session::TYPE_USER)
+						->setAsString(
+							$this->prefixId . '_' . $currentKey,
+							$parameters[$currentKey]
+						);
 				}
 			}
-
-			$GLOBALS['TSFE']->fe_user->storeSessionData();
 		}
 	}
 
@@ -1440,19 +1430,16 @@ class tx_seminars_registration_editor extends tx_seminars_templatehelper {
 	 * empty string if no data for that key is stored.
 	 *
 	 * @param	mixed		(unused)
-	 * @param	array		the contents of the "params" child of the userobj node as key/value pairs (used for retrieving the current form field name)
+	 * @param	array		the contents of the "params" child of the userobj
+	 * 						node as key/value pairs (used for retrieving the
+	 * 						current form field name)
 	 *
-	 * @return	string		the data stored in the FE user session under the given key (might be empty)
-	 *
-	 * @access	public
+	 * @return	string		the data stored in the FE user session under the
+	 * 						given key, might be empty
 	 */
-	function retrieveDataFromSession($unused, array $parameters) {
-		$key = $parameters['key'];
-
-		return $GLOBALS['TSFE']->fe_user->getKey(
-			'user',
-			$this->prefixId.'_'.$key
-		);
+	public function retrieveDataFromSession($unused, array $parameters) {
+		return tx_oelib_session::getInstance(tx_oelib_session::TYPE_USER)
+			->getAsString($this->prefixId . '_' . $parameters['key']);
 	}
 
 	/**
