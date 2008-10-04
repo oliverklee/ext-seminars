@@ -84,25 +84,10 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	// Tests for the basic bag functionality.
 	///////////////////////////////////////////
 
-	public function testBagHasNoElementsWithUnsaturableParameters() {
-		$bag = new tx_seminars_testbag('1=2');
-		$this->assertEquals(
-			0, $bag->getObjectCountWithoutLimit()
-		);
-	}
-
 	public function testEmptyBagHasNoUids() {
 		$bag = new tx_seminars_testbag('1=2');
 		$this->assertEquals(
 			'', $bag->getUids()
-		);
-	}
-
-	public function testBagCanHaveOneElement() {
-		$bag = new tx_seminars_testbag('uid='.$this->uidOfFirstRecord);
-
-		$this->assertEquals(
-			1, $bag->getObjectCountWithoutLimit()
 		);
 	}
 
@@ -111,12 +96,6 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			(string) $this->uidOfFirstRecord, $bag->getUids()
-		);
-	}
-
-	public function testBagCanHaveTwoElements() {
-		$this->assertEquals(
-			2, $this->fixture->getObjectCountWithoutLimit()
 		);
 	}
 
@@ -136,6 +115,72 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			$this->uidOfSecondRecord,
 			$this->fixture->next()->getUid()
+		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning getObjectCountWithoutLimit
+	////////////////////////////////////////////////
+
+	public function testGetObjectCountWithoutLimitForEmptyBagReturnsZero() {
+		$bag = new tx_seminars_testbag('1=2');
+
+		$this->assertEquals(
+			0,
+			$bag->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testGetObjectCountWithoutLimitForBagWithOneElementReturnsOne() {
+		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+
+		$this->assertEquals(
+			1,
+			$bag->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testGetObjectCountWithoutLimitForBagWithTwoElementsReturnsTwo() {
+		$this->assertEquals(
+			2,
+			$this->fixture->getObjectCountWithoutLimit()
+		);
+	}
+
+	public function testGetObjectCountWithoutLimitForBagWithTwoElementsAndLimitOfOneReturnsTwo() {
+		$bag = new tx_seminars_testbag('is_dummy_record=1', '', '', '', 1);
+
+		$this->assertEquals(
+			2,
+			$bag->getObjectCountWithoutLimit()
+		);
+	}
+
+
+	/////////////////////////////
+	// Tests concerning isEmpty
+	/////////////////////////////
+
+	public function testIsEmptyForEmptyBagReturnsTrue() {
+		$bag = new tx_seminars_testbag('1=2');
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+	}
+
+	public function testIsEmptyForBagWithOneElementReturnsFalse() {
+		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+
+		$this->assertFalse(
+			$bag->isEmpty()
+		);
+	}
+
+	public function testIsEmptyForBagWithTwoElementsReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->isEmpty()
 		);
 	}
 }

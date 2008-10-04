@@ -732,7 +732,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->getObjectCountWithLimit()
+			count($this->fixture->build()->getUids())
 		);
 	}
 

@@ -22,6 +22,7 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'tx_oelib_commonConstants.php');
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
 /**
@@ -52,10 +53,20 @@ abstract class tx_seminars_bag implements Iterator {
 	/** the LIMIT clause (without the actual string "LIMIT") */
 	private $limit = '';
 
-	/** how many objects this bag actually holds with the LIMIT */
-	private $objectCountWithLimit = 0;
-	/** how many objects this bag would hold without the LIMIT */
+	/**
+	 * @var	boolean		whether $this->objectCountWithoutLimit has been
+	 * 					calculated
+	 */
+	private $hasCount = false;
+	/**
+	 * @var	integer		how many objects this bag would hold without the LIMIT
+	 */
 	private $objectCountWithoutLimit = 0;
+
+	/**
+	 * @var	boolean		whether this bag is at the first element
+	 */
+	private $isRewound = false;
 
 	/** an SQL query result (not converted to an associative array yet) */
 	protected $dbResult = false;
@@ -122,6 +133,10 @@ abstract class tx_seminars_bag implements Iterator {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
+		if ($this->dbResult) {
+			$GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
+		}
+
 		unset($this->dbResult, $this->currentItem);
 	}
 
@@ -172,6 +187,10 @@ abstract class tx_seminars_bag implements Iterator {
 	 * prefixed with the table name.
 	 */
 	public function rewind() {
+		if ($this->isRewound) {
+			return;
+		}
+
 		// frees old results if there are any
 		if ($this->dbResult) {
 			$GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
@@ -187,26 +206,13 @@ abstract class tx_seminars_bag implements Iterator {
 			$this->orderBy,
 			$this->limit
 		);
-
-		if ($this->dbResult) {
-			$this->objectCountWithLimit = $GLOBALS['TYPO3_DB']->sql_num_rows(
-				$this->dbResult
-			);
-			$dbResultWithoutLimit = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'DISTINCT ' . $this->dbTableName . '.*',
-				$this->dbTableName . $this->additionalTableNames,
-				$this->queryParameters . $this->enabledFieldsQuery
-			);
-			$this->objectCountWithoutLimit = $GLOBALS['TYPO3_DB']->sql_num_rows(
-				$dbResultWithoutLimit
-			);
-
-			$this->createItemFromDbResult();
-		} else {
-			$this->objectCountWithLimit = 0;
-			$this->objectCountWithoutLimit = 0;
-			$this->currentItem = null;
+		if (!$this->dbResult) {
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
+
+		$this->createItemFromDbResult();
+
+		$this->isRewound = true;
 	}
 
 	/**
@@ -281,20 +287,54 @@ abstract class tx_seminars_bag implements Iterator {
 	 * Retrieves the number of objects this bag would hold if
 	 * the LIMIT part of the query would not have been used.
 	 *
+	 * Note: This function might rewind().
+	 *
 	 * @return	integer		the total number of objects in this bag, may be zero
 	 */
 	public function getObjectCountWithoutLimit() {
+		if ($this->hasCount) {
+			return $this->objectCountWithoutLimit;
+		}
+		if ($this->isEmpty()) {
+			return 0;
+		}
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'COUNT(*) AS number ',
+			$this->dbTableName . $this->additionalTableNames,
+			$this->queryParameters . $this->enabledFieldsQuery
+		);
+		if (!$dbResult) {
+			throw new Exception(DATABASE_QUERY_ERROR);
+		}
+		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
+		$this->objectCountWithoutLimit = $dbResultRow['number'];
+		$this->hasCount = true;
+
 		return $this->objectCountWithoutLimit;
 	}
 
 	/**
-	 * Retrieves the total number of objects in this bag
-	 * (with having applied the LIMIT part of the query).
+	 * Checks whether this bag is empty.
 	 *
-	 * @return	integer		the total number of objects in this bag, may be zero
+	 * Note: This function might rewind().
+	 *
+	 * @return	boolean		true if this bag is empty, false otherwise
 	 */
-	public function getObjectCountWithLimit() {
-		return $this->objectCountWithLimit;
+	public function isEmpty() {
+		if ($this->hasCount) {
+			return ($this->objectCountWithoutLimit == 0);
+		}
+
+		$this->rewind();
+		$isEmpty = !is_object($this->current());
+		if ($isEmpty) {
+			$this->objectCountWithoutLimit = 0;
+			$this->hasCount = true;
+		}
+
+		return $isEmpty;
 	}
 
 	/**
