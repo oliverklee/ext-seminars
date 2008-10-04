@@ -105,9 +105,7 @@ class tx_seminars_pi1CategoryList extends tx_seminars_templatehelper {
 		$categoryBag = $categoryBagBuilder->build();
 
 		// Only lists categories for which there are events.
-		if (($eventUids != '')
-			&& ($categoryBag->getObjectCountWithoutLimit() > 0)
-		) {
+		if (($eventUids != '') && !$categoryBag->isEmpty()) {
 			$allCategories = '';
 			$rowCounter = 0;
 

@@ -72,9 +72,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('hidden' => 1)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -86,9 +85,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setBackEndMode();
 
-		$this->assertEquals(
-			1,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertFalse(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -98,9 +96,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('endtime' => mktime() - 1000)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -112,9 +109,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setBackEndMode();
 
-		$this->assertEquals(
-			1,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertFalse(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -335,9 +331,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToCategories($categoryUid2);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -355,9 +350,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToCategories($categoryUid);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -448,9 +442,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToCategories($categoryUid2);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -690,9 +683,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToPlaces($placeUid2);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -708,9 +700,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToPlaces($placeUid);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -770,9 +761,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->ignoreCanceledEvents();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -814,9 +804,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->allowCanceledEvents();
 		$this->fixture->ignoreCanceledEvents();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -895,9 +884,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('past');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -912,9 +900,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('past');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -929,9 +916,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('past');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -946,9 +932,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('past');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1021,9 +1006,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1038,9 +1022,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1055,9 +1038,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1079,9 +1061,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('current');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1096,9 +1077,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('current');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1130,9 +1110,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('current');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1147,9 +1126,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('current');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1164,9 +1142,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('current');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1188,9 +1165,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1205,9 +1181,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1297,9 +1272,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('upcoming');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1314,9 +1288,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('upcoming');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1331,9 +1304,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('upcoming');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1407,9 +1379,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1425,9 +1396,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1443,9 +1413,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1497,9 +1466,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1863,9 +1831,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToEventTypes($typeUid2);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1883,9 +1850,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToEventTypes($typeUid);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -1974,9 +1940,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToEventTypes($typeUid2);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2054,9 +2019,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCities(array('test city 1'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2134,9 +2098,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCities(array('test city 2'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2153,9 +2116,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCities(array('test city 1'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2295,9 +2257,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCountries(array('US'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2375,9 +2336,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCountries(array('US'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2394,9 +2354,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCountries(array('DE'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2487,9 +2446,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToLanguages(array('EN'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2499,9 +2457,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToLanguages(array('EN'));
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2530,9 +2487,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToTopicRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2543,9 +2499,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToTopicRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2618,9 +2573,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToOwner($feUserUid);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2633,9 +2587,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToOwner($feUserUid);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2708,9 +2661,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2771,9 +2723,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToEventManager($feUserUid);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2836,9 +2787,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			new tx_seminars_seminar($eventUid1)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2858,9 +2808,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			new tx_seminars_seminar($eventUid1)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -2980,9 +2929,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$date = new tx_seminars_seminar($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3008,9 +2956,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$date = new tx_seminars_seminar($dateUid);
 		$this->fixture->limitToOtherDatesForTopic($date);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3155,9 +3102,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3181,9 +3127,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3207,9 +3152,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3233,9 +3177,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3259,9 +3202,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3309,9 +3251,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3359,9 +3300,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3409,9 +3349,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3459,9 +3398,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3509,9 +3447,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3559,9 +3496,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3609,9 +3545,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3659,9 +3594,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3709,9 +3643,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3759,9 +3692,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3809,9 +3741,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3859,9 +3790,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3909,9 +3839,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -3959,9 +3888,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4009,9 +3937,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4049,9 +3976,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4089,9 +4015,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4139,9 +4064,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4189,9 +4113,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4268,9 +4191,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4316,9 +4238,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4364,9 +4285,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4412,9 +4332,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4478,9 +4397,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4544,9 +4462,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4600,9 +4517,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4637,9 +4553,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4677,9 +4592,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4727,9 +4641,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4777,9 +4690,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4827,9 +4739,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4877,9 +4788,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4927,9 +4837,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -4977,9 +4886,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5027,9 +4935,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5077,9 +4984,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5127,9 +5033,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5177,9 +5082,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5227,9 +5131,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5277,9 +5180,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5327,9 +5229,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5377,9 +5278,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -5427,9 +5327,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 }

@@ -173,9 +173,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToEvent($eventUid1);
 		$registrationBag = $this->fixture->build();
 
-		$this->assertEquals(
-			0,
-			$registrationBag->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$registrationBag->isEmpty()
 		);
 	}
 
@@ -205,9 +204,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToPaid();
 		$registrationBag = $this->fixture->build();
 
-		$this->assertEquals(
-			0,
-			$registrationBag->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$registrationBag->isEmpty()
 		);
 	}
 
@@ -237,9 +235,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToUnpaid();
 		$registrationBag = $this->fixture->build();
 
-		$this->assertEquals(
-			0,
-			$registrationBag->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$registrationBag->isEmpty()
 		);
 	}
 
@@ -302,9 +299,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToOnQueue();
 		$registrationBag = $this->fixture->build();
 
-		$this->assertEquals(
-			0,
-			$registrationBag->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$registrationBag->isEmpty()
 		);
 	}
 
@@ -334,9 +330,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToRegular();
 		$registrationBag = $this->fixture->build();
 
-		$this->assertEquals(
-			0,
-			$registrationBag->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$registrationBag->isEmpty()
 		);
 	}
 
@@ -422,9 +417,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToSeatsAtMost(1);
 		$registrationBag = $this->fixture->build();
 
-		$this->assertEquals(
-			0,
-			$registrationBag->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$registrationBag->isEmpty()
 		);
 	}
 
@@ -437,9 +431,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToSeatsAtMost(0);
 		$registrationBag = $this->fixture->build();
 
-		$this->assertEquals(
-			1,
-			$registrationBag->getObjectCountWithoutLimit()
+		$this->assertFalse(
+			$registrationBag->isEmpty()
 		);
 	}
 }

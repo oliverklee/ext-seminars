@@ -335,7 +335,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 
 		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
 
-		if ($seminarBag->getObjectCountWithoutLimit()) {
+		if (!$seminarBag->isEmpty()) {
 			$content .= $this->getCsvIcon();
 		}
 

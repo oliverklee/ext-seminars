@@ -71,9 +71,8 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBagCanHaveAtLeastOneElement() {
-		$this->assertEquals(
-			1,
-			$this->fixture->getObjectCountWithoutLimit()
+		$this->assertFalse(
+			$this->fixture->isEmpty()
 		);
 	}
 

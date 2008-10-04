@@ -3986,7 +3986,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			);
 
 			// One blocking event is enough.
-			$result = ($seminarBag->getObjectCountWithoutLimit() > 0);
+			$result = !$seminarBag->isEmpty();
 		}
 
 		return $result;

@@ -297,9 +297,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -388,9 +387,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid, 1);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -405,9 +403,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('hidden' => 1)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -431,9 +428,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('endtime' => mktime() - 1000)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -457,9 +453,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('deleted' => 1)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -471,9 +466,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setBackEndMode();
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -520,9 +514,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'bar')
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -553,9 +546,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo')
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -567,9 +559,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'bar', 'pid' => $this->dummySysFolderPid)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -580,9 +571,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo', 'hidden' => 1)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 
@@ -593,9 +583,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo', 'deleted' => 1)
 		);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 

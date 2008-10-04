@@ -270,9 +270,8 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents($eventUid);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
-			1,
-			$bag->getObjectCountWithoutLimit()
+		$this->assertFalse(
+			$bag->isEmpty()
 		);
 		$this->assertEquals(
 			$categoryUid,
@@ -335,9 +334,8 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToEvents($eventUid2);
 
-		$this->assertEquals(
-			0,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
 		);
 	}
 }

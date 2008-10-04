@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2241] Change: Use bag->isEmpty() instead of bag->getObjectCountWithoutLimit() > 0 where possible
 - [#1160] Change: In tx_seminars_bag load the object count without limit lazily
 - [#1778] Feature: Provide an abstraction for session handling
 - [#2232] Feature: Make tx_seminars_bag independent from tx_seminars_dbplugin
