@@ -24,7 +24,7 @@
 
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
 /**
  * Class 'tx_seminars_bagbuilder' for the 'seminars' extension.
@@ -134,19 +134,12 @@ abstract class tx_seminars_bagbuilder {
 	 * @param	integer		recursion depth, must be >= 0
 	 */
 	public function setSourcePages($sourcePagePids, $recursionDepth = 0) {
-		static $templateHelper = null;
-
 		if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
 			unset($this->whereClauseParts['pages']);
 			return;
 		}
 
-		if (!$templateHelper) {
-			$templateHelper
-				= t3lib_div::makeInstance('tx_oelib_templatehelper');
-		}
-
-		$recursivePidList = $templateHelper->createRecursivePageList(
+		$recursivePidList = tx_oelib_db::createRecursivePageList(
 			$sourcePagePids, $recursionDepth
 		);
 
