@@ -91,17 +91,17 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 
 
 	////////////////////////////////
-	// Tests for createCountdown()
+	// Tests for render()
 	////////////////////////////////
 
-	public function testCreateCountdownInitiallyReturnsNoEventsFoundMessage() {
+	public function testRenderInitiallyReturnsNoEventsFoundMessage() {
 		$this->assertContains(
 			'There are no upcoming events. Please come back later.',
-			$this->fixture->createCountdown()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCountdownForPastEventReturnsNoEventsFoundMessage() {
+	public function testRenderForPastEventReturnsNoEventsFoundMessage() {
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
 			$this->seminarUid,
@@ -113,11 +113,11 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'There are no upcoming events. Please come back later.',
-			$this->fixture->createCountdown()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCountdownForUpcomingEventReturnsCountdownMessage() {
+	public function testRenderForUpcomingEventReturnsCountdownMessage() {
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
 			$this->seminarUid,
@@ -129,7 +129,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'left until the next event starts',
-			$this->fixture->createCountdown()
+			$this->fixture->render()
 		);
 	}
 }
