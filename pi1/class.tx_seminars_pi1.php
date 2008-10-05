@@ -36,6 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1CategoryList.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCountdown.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
@@ -344,7 +345,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		}
 
 		$this->whatToDisplay = $this->getConfValueString('what_to_display');
-		$this->setFlavor($this->whatToDisplay);
+
+		if ($this->whatToDisplay != 'countdown') {
+			$this->setFlavor($this->whatToDisplay);
+		}
 
 		switch ($this->whatToDisplay) {
 			case 'edit_event':
@@ -360,7 +364,13 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				$result = $this->createRegistrationsListPage();
 				break;
 			case 'countdown':
-				$result = $this->createCountdown();
+				$countdownClassName = t3lib_div::makeInstanceClassName(
+					'tx_seminars_frontEndCountdown'
+				);
+				$countdown = new $countdownClassName($this->conf, $this->cObj);
+				$result = $countdown->render();
+				$countdown->__destruct();
+				unset($countdown);
 				break;
 			case 'category_list':
 				$categoryListClassName = t3lib_div::makeInstanceClassName(
@@ -3209,107 +3219,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 		unset($eventEditor);
 
 		return $result;
-	}
-
-
-	//////////////////////////////
-	// Countdown view functions.
-	//////////////////////////////
-
-	/**
-	 * Creates a countdown to the next upcoming event.
-	 *
-	 * @return	string		HTML code of the countdown or a message if no
-	 * 						upcoming event is found
-	 */
-	protected function createCountdown() {
-		$now = $GLOBALS['SIM_ACCESS_TIME'];
-
-		$additionalWhere = 'tx_seminars_seminars.cancelled=0' .
-			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS) .
-			' AND ' . SEMINARS_TABLE_SEMINARS . '.object_type!=' .
-			SEMINARS_RECORD_TYPE_TOPIC . ' AND ' . SEMINARS_TABLE_SEMINARS .
-			'.begin_date>' . $now;
-
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'uid', SEMINARS_TABLE_SEMINARS, $additionalWhere,
-			'', 'begin_date ASC', '1'
-		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-
-		if ($dbResultRow && $this->createSeminar($dbResultRow['uid'])) {
-			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage(
-				$this->seminar->checkConfiguration(true)
-			);
-
-			// Calculates the time left until the event starts.
-			$eventStartTime = $this->seminar->getBeginDateAsTimestamp();
-			$timeLeft = $eventStartTime - $now;
-
-			$message = $this->createCountdownMessage($timeLeft);
-		} else {
-			$message = $this->translate('message_countdown_noEventFound');
-		}
-
-		$this->setMarker('count_down_message', $message);
-		$result = $this->getSubpart('COUNTDOWN');
-
-		return $result;
-	}
-
-	/**
-	 * Returns a localized string representing an amount of seconds in words.
-	 * For example:
-	 * 150000 seconds -> "1 day"
-	 * 200000 seconds -> "2 days"
-	 * 50000 seconds -> "13 hours"
-	 * The function uses localized strings and also looks for proper usage of
-	 * singular/plural.
-	 *
-	 * @param	integer		the amount of seconds to rewrite into words
-	 *
-	 * @return	string		a localized string representing the time left until the event starts
-	 */
-	protected function createCountdownMessage($seconds) {
-		if ($seconds > 82800) {
-			// more than 23 hours left, show the time in days
-			$countdownValue = round($seconds / ONE_DAY);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_days_plural');
-			} else {
-				$countdownText = $this->translate('countdown_days_singular');
-			}
-		} elseif ($seconds > 3540) {
-			// more than 59 minutes left, show the time in hours
-			$countdownValue = round($seconds / 3600);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_hours_plural');
-			} else {
-				$countdownText = $this->translate('countdown_hours_singular');
-			}
-		} elseif ($seconds > 59) {
-			// more than 59 seconds left, show the time in minutes
-			$countdownValue = round($seconds / 60);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_minutes_plural');
-			} else {
-				$countdownText = $this->translate('countdown_minutes_singular');
-			}
-		} else {
-			// less than 60 seconds left, show the time in seconds
-			$countdownValue = $seconds;
-			$countdownText = $this->translate('countdown_seconds_plural');
-		}
-
-		return sprintf(
-			$this->translate('message_countdown'),
-			$countdownValue,
-			$countdownText
-		);
 	}
 }
 
