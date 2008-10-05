@@ -227,5 +227,97 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUid() {
+		$this->fixture->setConfigurationValue(
+			'showFeUserFieldsInRegistrationsList', 'uid'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->assertContains(
+			'<th scope="col">Number</th>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUid() {
+		$this->fixture->setConfigurationValue(
+			'showFeUserFieldsInRegistrationsList', 'uid'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->assertContains(
+			'<td>' . $this->feUserUid . '</td>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserName() {
+		$this->fixture->setConfigurationValue(
+			'showFeUserFieldsInRegistrationsList', 'name'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->assertContains(
+			'<th scope="col">Name:</th>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserName() {
+		$this->fixture->setConfigurationValue(
+			'showFeUserFieldsInRegistrationsList', 'name'
+		);
+		$frontEndUserUid = $this->createLogInAndRegisterFrontEndUser();
+		$this->testingFramework->changeRecord(
+			'fe_users',
+			$this->feUserUid,
+			array('name' => 'John Doe')
+		);
+
+		$this->assertContains(
+			'<td>John Doe</td>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUidAndName() {
+		$this->fixture->setConfigurationValue(
+			'showFeUserFieldsInRegistrationsList', 'uid,name'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+		$result = $this->fixture->render();
+
+		$this->assertContains(
+			'<th scope="col">Number</th>',
+			$result
+		);
+		$this->assertContains(
+			'<th scope="col">Name:</th>',
+			$result
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUidAndName() {
+		$this->fixture->setConfigurationValue(
+			'showFeUserFieldsInRegistrationsList', 'uid,name'
+		);
+		$frontEndUserUid = $this->createLogInAndRegisterFrontEndUser();
+		$this->testingFramework->changeRecord(
+			'fe_users',
+			$this->feUserUid,
+			array('name' => 'John Doe')
+		);
+		$result = $this->fixture->render();
+
+		$this->assertContains(
+			'<td>' . $this->feUserUid . '</td>',
+			$result
+		);
+		$this->assertContains(
+			'<td>John Doe</td>',
+			$result
+		);
+	}
 }
 ?>

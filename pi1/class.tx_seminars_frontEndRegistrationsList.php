@@ -166,7 +166,7 @@ class tx_seminars_frontEndRegistrationsList extends tx_seminars_templatehelper {
 		} else {
 			$this->setMarker('error_text', $errorMessage);
 			$this->hideSubparts('registrations_list_message', 'wrapper');
-			$this->hideSubparts('registrations_list_body', 'wrapper');
+			$this->hideSubparts('registrations_list_table', 'wrapper');
 		}
 
 		$this->setMarker('backlink',
@@ -205,25 +205,53 @@ class tx_seminars_frontEndRegistrationsList extends tx_seminars_templatehelper {
 		);
 
 		if (!$registrationBag->isEmpty()) {
-			$result = '';
-			foreach ($registrationBag as $registration) {
-				$this->setMarker('registrations_list_inneritem',
-					$registration->getUserDataAsHtml(
-						$this->getConfValueString(
-							'showFeUserFieldsInRegistrationsList',
-							's_template_special'
-						),
-						$this
-					)
+			$tableHeader = '';
+			$tableBody = '';
+
+			$frontEndUserFields = t3lib_div::trimExplode(
+				',',
+				$this->getConfValueString(
+					'showFeUserFieldsInRegistrationsList',
+					's_template_special'
+				)
+			);
+
+			foreach ($frontEndUserFields as $field) {
+				$this->setMarker(
+					'registrations_list_header',
+					$this->translate('label_' . $field)
 				);
-				$result .= $this->getSubpart(
-					'REGISTRATIONS_LIST_ITEM'
+				$tableHeader .= $this->getSubpart(
+					'WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_ITEM'
 				);
 			}
+
+			$this->setSubpart(
+				'registrations_list_table_head_item', $tableHeader, 'wrapper'
+			);
+
+			foreach ($registrationBag as $registration) {
+				$tableBodyRow = '';
+
+				foreach ($frontEndUserFields as $field) {
+					$this->setMarker(
+						'registrations_list_item',
+						$registration->getUserData($field)
+					);
+					$tableBodyRow .= $this->getSubpart(
+						'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM'
+					);
+				}
+
+				$tableBody .= $tableBodyRow;
+			}
+
+			$this->setSubpart(
+				'registrations_list_table_body_item', $tableBody, 'wrapper'
+			);
 			$this->hideSubparts('registrations_list_message', 'wrapper');
-			$this->setMarker('registrations_list_body', $result);
 		} else {
-			$this->hideSubparts('registrations_list_body', 'wrapper');
+			$this->hideSubparts('registrations_list_table', 'wrapper');
 			$this->setMarker(
 				'message_no_registrations',
 				$this->translate('message_noRegistrations')
