@@ -584,12 +584,23 @@
 							</config>
 						</TCEforms>
 					</showSiteDetails>
+				</el>
+			</ROOT>
+		</s_template_special>
+		<s_registrationsListView>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_registrationsListView</sheetTitle>
+				</TCEforms>
+				<el>
 					<showFeUserFieldsInRegistrationsList>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showFeUserFieldsInRegistrationsList</label>
 							<config>
-								<type>input</type>
-								<size>45</size>
+								<type>select</type>
+								<renderMode>checkbox</renderMode>
+								<maxitems>100</maxitems>
+								<itemsProcFunc>tx_seminars_flexForms->getShowFeUserFieldsInRegistrationsList</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</showFeUserFieldsInRegistrationsList>
@@ -597,14 +608,16 @@
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showRegistrationFieldsInRegistrationList</label>
 							<config>
-								<type>input</type>
-								<size>45</size>
+								<type>select</type>
+								<renderMode>checkbox</renderMode>
+								<maxitems>100</maxitems>
+								<itemsProcFunc>tx_seminars_flexForms->getShowRegistrationFieldsInRegistrationList</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</showRegistrationFieldsInRegistrationList>
 				</el>
 			</ROOT>
-		</s_template_special>
+		</s_registrationsListView>
 		<s_registration>
 			<ROOT>
 				<TCEforms>

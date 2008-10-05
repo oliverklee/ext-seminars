@@ -68,7 +68,9 @@
 			<label index="seminars.pi_flexform.showRegistrationFields">Show text input fields for online registration (comma-separated):</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails">Show speaker details</label>
 			<label index="seminars.pi_flexform.showSiteDetails">Show site details</label>
+			<label index="seminars.pi_flexform.sheet_registrationsListView">Registrations list view</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
+			<label index="seminars.pi_flexform.showRegistrationFieldsInRegistrationList">Which registration fields to show in the list of registrations for an event:</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>
@@ -554,7 +556,9 @@
 			<label index="seminars.pi_flexform.showRegistrationFields">Angezeigte Text-Input-Felder bei Online-Anmeldung (komma-separiert):</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails">Referentendetails anzeigen</label>
 			<label index="seminars.pi_flexform.showSiteDetails">Ortsdetails anzeigen</label>
+			<label index="seminars.pi_flexform.sheet_registrationsListView">Anmeldungslistenansicht</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Zeige diese FEuser-Felder in der Liste der Anmeldungen</label>
+			<label index="seminars.pi_flexform.showRegistrationFieldsInRegistrationList">Zeige diese Anmeldungs-Felder in der Liste der Anmeldungen:</label>
 			<label index="seminars.pi_flexform.sheet_registration">Veranstaltungsanmeldung</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Anzahl an Klicks bis zur Anmeldung</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Seite, die nach erfolgreicher Anmeldung für eine Veranstaltung angezeigt wird</label>
@@ -1969,7 +1973,9 @@
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents" type="integer">106305223</label>
 			<label index="seminars.pi_flexform.sortListViewByCategory" type="integer">19273259</label>
+			<label index="seminars.pi_flexform.sheet_registrationsListView" type="integer">231671604</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
+			<label index="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" type="integer">13037456</label>
 			<label index="seminars.pi_flexform.sheet_registration" type="integer">16354175</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID" type="integer">144873436</label>
@@ -3152,7 +3158,9 @@
 			<label index="seminars.pi_flexform.showRegistrationFields">Show text input fields for online registration (comma-separated):</label>
 			<label index="seminars.pi_flexform.showSpeakerDetails">Show speaker details</label>
 			<label index="seminars.pi_flexform.showSiteDetails">Show site details</label>
+			<label index="seminars.pi_flexform.sheet_registrationsListView">Registrations list view</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList">Which FEuser fields to show in the list of registrations for an event</label>
+			<label index="seminars.pi_flexform.showRegistrationFieldsInRegistrationList">Which registration fields to show in the list of registrations for an event:</label>
 			<label index="seminars.pi_flexform.sheet_registration">Registration</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
 			<label index="seminars.pi_flexform.thankYouAfterRegistrationPID">Page that will be displayed after a user has registered for an event</label>

@@ -3,6 +3,8 @@ if (!defined ('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
+include_once(t3lib_extMgm::extPath($_EXTKEY) . 'class.tx_seminars_flexForms.php');
+
 // Retrieve the path to the extension's directory.
 $extRelPath = t3lib_extMgm::extRelPath($_EXTKEY);
 $extPath = t3lib_extMgm::extPath($_EXTKEY);
