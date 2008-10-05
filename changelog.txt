@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1472] Change: Use the oelib configcheck and drop our own copy
 - [#1476] Change: Drop seminars_templatehelper
 - [#2250] Fix: Use bag::count instead of countWithoutLimit
 - [#2248] Fix: Fix the order of __destruct and unset calls

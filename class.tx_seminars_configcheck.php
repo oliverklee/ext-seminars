@@ -22,8 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_configcheck.php');
+
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_oe_configcheck.php');
 
 /**
  * Class 'tx_seminars_confcheck' for the 'seminars' extension.
@@ -39,7 +40,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_oe_configche
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
+class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the configuration for: tx_seminars_registrationmanager/.
 	 */
