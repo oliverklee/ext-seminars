@@ -49,9 +49,9 @@ class tx_seminars_speakerslist extends tx_seminars_backendlist {
 	public function __destruct() {
 		if ($this->speaker) {
 			$this->speaker->__destruct();
+			unset($this->speaker);
 		}
 
-		unset($this->speaker);
 		parent::__destruct();
 	}
 

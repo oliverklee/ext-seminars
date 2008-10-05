@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2248] Fix: Fix the order of __destruct and unset calls
 - [#1950] Feature: Also show data from the registration records in the FE registration lists
 - [#2213] Feature: Move the registrations list to its own class (a view)
 - [#2182] Change: Move the countdown to its own class (a view)

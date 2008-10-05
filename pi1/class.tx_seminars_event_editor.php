@@ -73,8 +73,8 @@ class tx_seminars_event_editor extends tx_seminars_templatehelper {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		parent::__destruct();
 		unset($this->plugin, $this->oForm);
+		parent::__destruct();
 	}
 
 	/**

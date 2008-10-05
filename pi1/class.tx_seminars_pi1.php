@@ -301,12 +301,12 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$this->registrationManager->__destruct();
 		}
 
-		parent::__destruct();
 		unset(
 			$this->configGetter, $this->seminar, $this->registration,
 			$this->registrationManager, $this->hookObjects, $this->staticInfo,
 			$this->feuser
 		);
+		parent::__destruct();
 	}
 
 	/**

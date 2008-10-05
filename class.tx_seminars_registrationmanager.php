@@ -65,9 +65,9 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	public function __destruct() {
 		if ($this->registration) {
 			$this->registration->__destruct();
+			unset($this->registration);
 		}
 
-		unset($this->registration);
 		parent::__destruct();
 	}
 

@@ -71,8 +71,8 @@ class tx_seminars_dbplugin extends tx_seminars_salutationswitcher {
 			$this->configurationCheck->__destruct();
 		}
 
-		parent::__destruct();
 		unset($this->configurationCheck, $this->feuser);
+		parent::__destruct();
 	}
 
 	/**

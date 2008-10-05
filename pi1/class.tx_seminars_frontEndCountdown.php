@@ -83,9 +83,9 @@ class tx_seminars_frontEndCountdown extends tx_seminars_templatehelper {
 	public function __destruct() {
 		if ($this->seminar) {
 			$this->seminar->__destruct();
+			unset($this->seminar);
 		}
 
-		unset($this->seminar);
 		parent::__destruct();
 
 	}

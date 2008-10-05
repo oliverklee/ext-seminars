@@ -70,10 +70,10 @@ class tx_seminars_pi2 extends tx_seminars_templatehelper {
 	public function __destruct() {
 		if ($this->configGetter) {
 			$this->configGetter->__destruct();
+			unset($this->configGetter);
 		}
 
 		parent::__destruct();
-		unset($this->configGetter);
 	}
 
 	/**
