@@ -23,7 +23,6 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_dbplugin.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
@@ -31,6 +30,10 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
+
+// This file doesn't include the locallang file in the BE because objectfromdb
+// already does that.
 
 /**
  * Class 'tx_seminars_registrationmanager' for the 'seminars' extension.
@@ -43,11 +46,16 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
+class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/** same as class name */
 	public $prefixId = 'tx_seminars_registrationmanager';
 	/**  path to this script relative to the extension dir */
 	public $scriptRelPath = 'class.tx_seminars_registrationmanager.php';
+
+	/**
+	 * @var	string		the extension key
+	 */
+	public $extKey = 'seminars';
 
 	/** the data of the current registration (tx_seminars_registration) */
 	private $registration = null;
@@ -180,14 +188,14 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * makes sense (ie. the seminar still has vacancies, the user hasn't
 	 * registered for this seminar etc.).
 	 *
-	 * @param	tx_seminars_salutationswitcher		an object for a live page
+	 * @param	tx_oelib_templatehelper		an object for a live page
 	 * @param	tx_seminars_seminar		a seminar for which we'll check if it is
 	 * 									possible to register
 	 *
 	 * @return	string		HTML code with the link
 	 */
 	public function getLinkToRegistrationOrLoginPage(
-		tx_seminars_salutationswitcher $plugin, tx_seminars_seminar $seminar
+		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar
 	) {
 		$label = $this->getRegistrationLabel($plugin, $seminar);
 
@@ -208,14 +216,14 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	/**
 	 * Creates the label for the registration link.
 	 *
-	 * @param	tx_seminars_salutationswitcher		an object for a live page
+	 * @param	tx_oelib_templatehelper		an object for a live page
 	 * @param	tx_seminars_seminar		a seminar to which the registration
 	 * 									should relate
 	 *
 	 * @return	string		label for the registration link, will not be empty
 	 */
 	private function getRegistrationLabel(
-		tx_seminars_salutationswitcher $plugin, tx_seminars_seminar $seminar
+		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar
 	) {
 		if (!$seminar->hasVacancies()
 			&& $seminar->hasVacanciesOnRegistrationQueue()
@@ -238,7 +246,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * This function only creates the link to the standard registration or login
 	 * page; it should not be used if the seminar has a separate details page.
 	 *
-	 * @param	tx_seminars_salutationswitcher		an object for a live page
+	 * @param	tx_oelib_templatehelper		an object for a live page
 	 * @param	tx_seminars_seminar		a seminar for which we'll check if it is
 	 * 									possible to register
 	 * @param	string		label for the link, will not be empty
@@ -246,7 +254,7 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 	 * @return	string		HTML code with the link
 	 */
 	private function getLinkToStandardRegistrationOrLoginPage(
-		tx_seminars_salutationswitcher $plugin, tx_seminars_seminar $seminar,
+		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar,
 		$label
 	) {
 		if ($this->isLoggedIn()) {

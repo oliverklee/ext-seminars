@@ -544,11 +544,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * links. Returns a localized string "will be announced" if the seminar has
 	 * no places set.
 	 *
-	 * @param	tx_seminars_templatehelper		the current FE plugin
+	 * @param	tx_oelib_templatehelper		the current FE plugin
 	 *
 	 * @return	string		our places description (or '' if there is an error)
 	 */
-	public function getPlaceWithDetails(tx_seminars_templatehelper $plugin) {
+	public function getPlaceWithDetails(tx_oelib_templatehelper $plugin) {
 		if (!$this->hasPlace()) {
 			$plugin->setMarker(
 				'message_will_be_announced',

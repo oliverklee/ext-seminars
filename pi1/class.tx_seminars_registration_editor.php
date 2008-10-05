@@ -25,9 +25,9 @@
 require_once(PATH_formidableapi);
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_session.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -42,12 +42,17 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registration_editor extends tx_seminars_templatehelper {
+class tx_seminars_registration_editor extends tx_oelib_templatehelper {
 	/** Same as class name */
 	var $prefixId = 'tx_seminars_registration_editor';
 
 	/**  Path to this script relative to the extension dir. */
 	var $scriptRelPath = 'pi1/class.tx_seminars_registration_editor.php';
+
+	/**
+	 * @var	string		the extension key
+	 */
+	public $extKey = 'seminars';
 
 	/** the pi1 object where this event editor will be inserted */
 	var $plugin;

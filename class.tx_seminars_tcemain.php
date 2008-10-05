@@ -22,6 +22,12 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_timeslot.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
+
 /**
  * Class 'tx_seminars_tcemainprocdm' for the 'seminars' extension.
  *
@@ -34,14 +40,13 @@
  * @author		Mario Rimann <typo3-coding@rimann.org>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_dbplugin.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
-
-class tx_seminars_tcemainprocdm extends tx_seminars_dbplugin {
+class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	var $tceMainFieldArrays = array();
+
+	/**
+	 * @var	string		the extension key
+	 */
+	public $extKey = 'seminars';
 
 	/**
 	 * The constructor.

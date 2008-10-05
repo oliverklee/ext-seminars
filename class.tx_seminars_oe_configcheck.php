@@ -26,9 +26,6 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
 /**
  * Class 'tx_seminars_oe_confcheck' for the 'seminars' extension.
- * Note: This class will soon move to the 'oelib' extension. When this is done,
- * the check for the parent class (dbplugin) needs to be abjusted to the new
- * inheritance structure.
  *
  * This class checks the extension configuration (TS setup) and some data for
  * basic sanity. This works for FE plug-ins, BE modules and free-floating data
@@ -71,18 +68,20 @@ class tx_seminars_oe_configcheck {
 	/**
 	 * The constructor.
 	 *
-	 * @param	object		the object that shall be checked for configuration problems, must be of a subclass of tx_seminars_dbplugin
+	 * @param	object		the object that shall be checked for configuration
+	 * 						problems, must be of a subclass of
+	 * 						tx_oelib_templatehelper
 	 */
 	function tx_seminars_oe_configcheck($objectToCheck) {
 		if ($objectToCheck
-			&& is_subclass_of($objectToCheck, 'tx_seminars_dbplugin')) {
+			&& is_subclass_of($objectToCheck, 'tx_oelib_templatehelper')) {
 			$this->objectToCheck = $objectToCheck;
 			$this->className = get_class($this->objectToCheck);
 
 			$this->errorText = '';
 		} else {
 			trigger_error('tx_seminars_oe_configcheck: $objectToCheck must be '
-				.'a subclass of tx_seminars_dbplugin, but actually is a '
+				.'a subclass of tx_oelib_templatehelper, but actually is a '
 				.get_class($objectToCheck).'.<br />');
 		}
 	}

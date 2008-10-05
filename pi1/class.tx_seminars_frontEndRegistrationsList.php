@@ -23,12 +23,12 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 /**
  * Class 'frontEndRegistrationsList' for the 'seminars' extension.
@@ -41,7 +41,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_frontEndRegistrationsList extends tx_seminars_templatehelper {
+class tx_seminars_frontEndRegistrationsList extends tx_oelib_templatehelper {
 	/**
 	 * @var string same as plugin class name
 	 */
@@ -51,6 +51,11 @@ class tx_seminars_frontEndRegistrationsList extends tx_seminars_templatehelper {
 	 * @var string path to this script relative to the extension dir
 	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndRegistrationsList.php';
+
+	/**
+	 * @var	string		the extension key
+	 */
+	public $extKey = 'seminars';
 
 	/**
 	 * @var tx_seminars_seminar the seminar of which we want to list the

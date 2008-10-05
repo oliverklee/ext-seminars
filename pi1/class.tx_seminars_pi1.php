@@ -24,7 +24,6 @@
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_configgetter.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
@@ -44,6 +43,7 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 /**
  * Plugin 'Seminar Manager' for the 'seminars' extension.
@@ -54,7 +54,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1 extends tx_seminars_templatehelper {
+class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * @var	string		same as class name
 	 */
@@ -63,6 +63,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	 * @var	string		path to this script relative to the extension dir
 	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
+	/**
+	 * @var	string		the extension key
+	 */
+	public $extKey = 'seminars';
 
 	/**
 	 * @var	tx_seminars_configgetter		a config getter that gets us the

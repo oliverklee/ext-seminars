@@ -24,7 +24,12 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelper.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
+
+// In the back end, include the extension's locallang.xml.
+if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
+    $LANG->includeLLFile('EXT:seminars/locallang.xml');
+}
 
 /**
  * Class 'tx_seminars_objectfromdb' for the 'seminars' extension.
@@ -39,7 +44,12 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_templatehelp
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class tx_seminars_objectfromdb extends tx_seminars_templatehelper {
+abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
+	/**
+	 * @var	string		the extension key
+	 */
+	public $extKey = 'seminars';
+
 	/** string with the name of the SQL table this class corresponds to */
 	protected $tableName = '';
 	/** associative array with the values from/for the DB */
