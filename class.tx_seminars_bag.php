@@ -54,14 +54,13 @@ abstract class tx_seminars_bag implements Iterator {
 	private $limit = '';
 
 	/**
-	 * @var	boolean		whether $this->objectCountWithoutLimit has been
-	 * 					calculated
+	 * @var boolean whether $this->count has been calculated
 	 */
 	private $hasCount = false;
 	/**
-	 * @var	integer		how many objects this bag would hold without the LIMIT
+	 * @var integer how many objects this bag contains
 	 */
-	private $objectCountWithoutLimit = 0;
+	private $count = 0;
 
 	/**
 	 * @var	boolean		whether this bag is at the first element
@@ -284,35 +283,24 @@ abstract class tx_seminars_bag implements Iterator {
 	}
 
 	/**
-	 * Retrieves the number of objects this bag would hold if
-	 * the LIMIT part of the query would not have been used.
+	 * Retrieves the number of objects this bag contains.
 	 *
 	 * Note: This function might rewind().
 	 *
 	 * @return	integer		the total number of objects in this bag, may be zero
 	 */
-	public function getObjectCountWithoutLimit() {
+	public function count() {
 		if ($this->hasCount) {
-			return $this->objectCountWithoutLimit;
+			return $this->count;
 		}
 		if ($this->isEmpty()) {
 			return 0;
 		}
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'COUNT(*) AS number ',
-			$this->dbTableName . $this->additionalTableNames,
-			$this->queryParameters . $this->enabledFieldsQuery
-		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
-		$this->objectCountWithoutLimit = $dbResultRow['number'];
+		$this->count = $GLOBALS['TYPO3_DB']->sql_num_rows($this->dbResult);
 		$this->hasCount = true;
 
-		return $this->objectCountWithoutLimit;
+		return $this->count;
 	}
 
 	/**
@@ -324,13 +312,13 @@ abstract class tx_seminars_bag implements Iterator {
 	 */
 	public function isEmpty() {
 		if ($this->hasCount) {
-			return ($this->objectCountWithoutLimit == 0);
+			return ($this->count == 0);
 		}
 
 		$this->rewind();
 		$isEmpty = !is_object($this->current());
 		if ($isEmpty) {
-			$this->objectCountWithoutLimit = 0;
+			$this->count = 0;
 			$this->hasCount = true;
 		}
 

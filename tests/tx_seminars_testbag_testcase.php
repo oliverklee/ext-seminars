@@ -119,41 +119,51 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////
-	// Tests concerning getObjectCountWithoutLimit
-	////////////////////////////////////////////////
+	///////////////////////////
+	// Tests concerning count
+	///////////////////////////
 
-	public function testGetObjectCountWithoutLimitForEmptyBagReturnsZero() {
+	public function testCountForEmptyBagReturnsZero() {
 		$bag = new tx_seminars_testbag('1=2');
 
 		$this->assertEquals(
 			0,
-			$bag->getObjectCountWithoutLimit()
+			$bag->count()
 		);
 	}
 
-	public function testGetObjectCountWithoutLimitForBagWithOneElementReturnsOne() {
+	public function testCountForBagWithOneElementReturnsOne() {
 		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
 
 		$this->assertEquals(
 			1,
-			$bag->getObjectCountWithoutLimit()
+			$bag->count()
 		);
 	}
 
-	public function testGetObjectCountWithoutLimitForBagWithTwoElementsReturnsTwo() {
+	public function testCountForBagWithTwoElementsReturnsTwo() {
 		$this->assertEquals(
 			2,
-			$this->fixture->getObjectCountWithoutLimit()
+			$this->fixture->count()
 		);
 	}
 
-	public function testGetObjectCountWithoutLimitForBagWithTwoElementsAndLimitOfOneReturnsTwo() {
+	public function testCountAfterCallingNextForBagWithTwoElementsReturnsTwo() {
+		$this->fixture->rewind();
+		$this->fixture->next();
+
+		$this->assertEquals(
+			2,
+			$this->fixture->count()
+		);
+	}
+
+	public function testCountForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne() {
 		$bag = new tx_seminars_testbag('is_dummy_record=1', '', '', '', 1);
 
 		$this->assertEquals(
-			2,
-			$bag->getObjectCountWithoutLimit()
+			1,
+			$bag->count()
 		);
 	}
 

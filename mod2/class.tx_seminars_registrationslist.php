@@ -169,7 +169,7 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 
 		$content .= TAB . TAB . '<h3>' .
 			$labelHeading .
-			' (' . $registrationBag->getObjectCountWithoutLimit() . ')' .
+			' (' . $registrationBag->count() . ')' .
 			'</h3>' . LF;
 
 		foreach ($registrationBag as $registration) {

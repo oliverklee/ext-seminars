@@ -1816,8 +1816,7 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			$limit
 		);
 
-		$this->internal['res_count']
-			= $registrationOrSeminarBag->getObjectCountWithoutLimit();
+		$this->internal['res_count'] = $registrationOrSeminarBag->count();
 
 		$this->previousDate = '';
 		$this->previousCategory = '';

@@ -69,7 +69,7 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 	public function testBagCanHaveAtLeastOneElement() {
 		$this->assertEquals(
 			1,
-			$this->fixture->getObjectCountWithoutLimit()
+			$this->fixture->count()
 		);
 	}
 }

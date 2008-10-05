@@ -88,7 +88,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$registrationBag = $this->fixture->build();
 		$this->assertEquals(
 			2,
-			$registrationBag->getObjectCountWithoutLimit()
+			$registrationBag->count()
 		);
 
 		$this->assertEquals(
@@ -117,7 +117,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			$registrationBag->getObjectCountWithoutLimit()
+			$registrationBag->count()
 		);
 	}
 

@@ -77,7 +77,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$categoryBag = $this->fixture->build();
 		$this->assertEquals(
 			2,
-			$categoryBag->getObjectCountWithoutLimit()
+			$categoryBag->count()
 		);
 
 		$this->assertEquals(
@@ -110,7 +110,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+			$this->fixture->build()->count()
 		);
 	}
 
@@ -131,7 +131,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+			$this->fixture->build()->count()
 		);
 	}
 
@@ -190,7 +190,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+			$this->fixture->build()->count()
 		);
 	}
 
@@ -219,7 +219,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+			$this->fixture->build()->count()
 		);
 	}
 
@@ -250,7 +250,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->getObjectCountWithoutLimit()
+			$this->fixture->build()->count()
 		);
 	}
 
@@ -305,7 +305,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
-			$bag->getObjectCountWithoutLimit()
+			$bag->count()
 		);
 		$this->assertEquals(
 			$categoryUid1,
