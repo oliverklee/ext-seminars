@@ -226,6 +226,27 @@ class tx_seminars_frontEndRegistrationsList extends tx_seminars_templatehelper {
 				);
 			}
 
+			$registrationsFields = t3lib_div::trimExplode(
+				',',
+				$this->getConfValueString(
+					'showRegistrationFieldsInRegistrationList',
+					's_template_special'
+				)
+			);
+
+			foreach ($registrationsFields as $field) {
+				if ($field == 'uid') {
+					$field = 'registration_' . $field;
+				}
+				$this->setMarker(
+					'registrations_list_header',
+					$this->translate('label_' . $field)
+				);
+				$tableHeader .= $this->getSubpart(
+					'WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_ITEM'
+				);
+			}
+
 			$this->setSubpart(
 				'registrations_list_table_head_item', $tableHeader, 'wrapper'
 			);
@@ -237,6 +258,16 @@ class tx_seminars_frontEndRegistrationsList extends tx_seminars_templatehelper {
 					$this->setMarker(
 						'registrations_list_item',
 						$registration->getUserData($field)
+					);
+					$tableBodyRow .= $this->getSubpart(
+						'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM'
+					);
+				}
+
+				foreach ($registrationsFields as $field) {
+					$this->setMarker(
+						'registrations_list_item',
+						$registration->getRegistrationData($field)
 					);
 					$tableBodyRow .= $this->getSubpart(
 						'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM'

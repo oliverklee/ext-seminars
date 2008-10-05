@@ -593,6 +593,15 @@
 							</config>
 						</TCEforms>
 					</showFeUserFieldsInRegistrationsList>
+					<showRegistrationFieldsInRegistrationList>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showRegistrationFieldsInRegistrationList</label>
+							<config>
+								<type>input</type>
+								<size>45</size>
+							</config>
+						</TCEforms>
+					</showRegistrationFieldsInRegistrationList>
 				</el>
 			</ROOT>
 		</s_template_special>

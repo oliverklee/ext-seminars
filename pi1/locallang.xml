@@ -98,6 +98,7 @@
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>
@@ -341,6 +342,7 @@
 			<label index="label_title">Titel</label>
 			<label index="label_subtitle">Undertitel</label>
 			<label index="label_uid">Nr.</label>
+			<label index="label_registration_uid">Registreringsnummer</label>
 			<label index="label_accreditation_number">Tilmeldings nr.</label>
 			<label index="label_credit_points">Kredit points</label>
 			<label index="label_date">Dato</label>
@@ -582,6 +584,7 @@
 			<label index="label_title">Titel</label>
 			<label index="label_subtitle">Untertitel</label>
 			<label index="label_uid">Nummer</label>
+			<label index="label_registration_uid">Ticket-ID</label>
 			<label index="label_accreditation_number">Akkreditierungsnummer</label>
 			<label index="label_credit_points">Leistungspunkte</label>
 			<label index="label_date">Datum</label>
@@ -825,6 +828,7 @@
 			<label index="label_title">Titel</label>
 			<label index="label_subtitle">Sub titel</label>
 			<label index="label_uid">Nummer</label>
+			<label index="label_registration_uid">Kaart Nummer</label>
 			<label index="label_accreditation_number">Accrediteringsnummer</label>
 			<label index="label_credit_points">Kredietpunten</label>
 			<label index="label_date">Datum</label>
@@ -1056,6 +1060,7 @@
 			<label index="label_title">Заголовок</label>
 			<label index="label_subtitle">Подзаголовок</label>
 			<label index="label_uid">Номер</label>
+			<label index="label_registration_uid">Номер билета</label>
 			<label index="label_accreditation_number">Номер аккредитации</label>
 			<label index="label_credit_points">Кредитные очки</label>
 			<label index="label_date">Дата</label>
@@ -1286,6 +1291,7 @@
 			<label index="label_title">Titolo</label>
 			<label index="label_subtitle">Sottotitolo</label>
 			<label index="label_uid">Numero</label>
+			<label index="label_registration_uid">ID ticket</label>
 			<label index="label_accreditation_number">Numero di accredito</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Data</label>
@@ -1517,6 +1523,7 @@
 			<label index="label_title">Titre</label>
 			<label index="label_subtitle">Sous-titre</label>
 			<label index="label_uid">Numéro</label>
+			<label index="label_registration_uid">Identifiant de l'enregistrement</label>
 			<label index="label_accreditation_number">Numéro d'accréditation</label>
 			<label index="label_credit_points">Points de crédit</label>
 			<label index="label_date">Date</label>
@@ -1721,6 +1728,7 @@
 			<label index="label_myvipevents_informal" type="integer">74285293</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -1990,6 +1998,7 @@
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -2251,6 +2260,7 @@
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
@@ -2455,6 +2465,7 @@
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -2687,6 +2698,7 @@
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -2920,6 +2932,7 @@
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
+			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -3168,6 +3181,7 @@
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>
@@ -3382,6 +3396,7 @@
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>
@@ -3633,6 +3648,7 @@
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>
@@ -3890,6 +3906,7 @@
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
@@ -4096,6 +4113,7 @@
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>
@@ -4329,6 +4347,7 @@
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
+			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
 			<label index="label_date">Date</label>

@@ -56,6 +56,11 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 */
 	private $feUserUid = 0;
 
+	/**
+	 * @var integer the UID of a registration for testing purposes
+	 */
+	private $registrationUid = 0;
+
 	public function setUp() {
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 
@@ -103,7 +108,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 */
 	private function createLogInAndRegisterFrontEndUser() {
 		$this->feUserUid = $this->testingFramework->createAndLogInFrontEndUser();
-		$this->testingFramework->createRecord(
+		$this->registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->seminarUid,
@@ -317,6 +322,96 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		$this->assertContains(
 			'<td>John Doe</td>',
 			$result
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUid() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'uid'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->assertContains(
+			'<th scope="col">Ticket ID</th>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUid() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'uid'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->assertContains(
+			'<td>' . $this->registrationUid . '</td>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationSeats() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'seats'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->assertContains(
+			'<th scope="col">Seats</th>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationSeats() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'seats'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			$this->registrationUid,
+			array('seats' => 42)
+		);
+
+		$this->assertContains(
+			'<td>42</td>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUidAndSeats() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'uid,seats'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->assertContains(
+			'<th scope="col">Ticket ID</th>',
+			$this->fixture->render()
+		);
+		$this->assertContains(
+			'<th scope="col">Seats</th>',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUidAndSeats() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'uid,seats'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			$this->registrationUid,
+			array('seats' => 42)
+		);
+
+		$this->assertContains(
+			'<td>' . $this->registrationUid . '</td>',
+			$this->fixture->render()
+		);
+		$this->assertContains(
+			'<td>42</td>',
+			$this->fixture->render()
 		);
 	}
 }

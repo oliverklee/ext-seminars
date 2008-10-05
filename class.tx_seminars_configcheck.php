@@ -136,6 +136,7 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkShowFeUserFieldsInRegistrationsList();
+		$this->checkShowRegistrationFieldsInRegistrationsList();
 		$this->checkListPid();
 	}
 
@@ -1133,6 +1134,22 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 				.'registrations for an event. A mistyped field name will '
 				.'cause the contents of the field to not get displayed.',
 			'fe_users'
+		);
+	}
+
+ 	/**
+	 * Checks the setting of the configuration value
+	 * showRegistrationFieldsInRegistrationList.
+	 */
+	private function checkShowRegistrationFieldsInRegistrationsList() {
+		$this->checkIfMultiInTableOrEmpty(
+			'showRegistrationFieldsInRegistrationList',
+			true,
+			's_template_special',
+			'These values specify the registration fields to show in the list ' .
+				'of registrations for an event. A mistyped field name will ' .
+				'cause the contents of the field to not get displayed.',
+			SEMINARS_TABLE_ATTENDANCES
 		);
 	}
 
