@@ -36,6 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1CategoryList.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndRegistrationsList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCountdown.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
@@ -346,7 +347,10 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 
 		$this->whatToDisplay = $this->getConfValueString('what_to_display');
 
-		if ($this->whatToDisplay != 'countdown') {
+		if (!in_array(
+				$this->whatToDisplay,
+				array('list_registrations', 'list_vip_registrations', 'countdown')
+		)) {
 			$this->setFlavor($this->whatToDisplay);
 		}
 
@@ -361,7 +365,18 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				// The fallthrough is intended
 				// because createRegistrationsListPage() will differentiate later.
 			case 'list_registrations':
-				$result = $this->createRegistrationsListPage();
+				$registrationsListClassName = t3lib_div::makeInstanceClassName(
+					'tx_seminars_frontEndRegistrationsList'
+				);
+				$registrationsList = new $registrationsListClassName(
+					$this->conf,
+					$this->whatToDisplay,
+					intval($this->piVars['seminar']),
+					$this->cObj
+				);
+				$result = $registrationsList->render();
+				$registrationsList->__destruct();
+				unset($registrationsList);
 				break;
 			case 'countdown':
 				$countdownClassName = t3lib_div::makeInstanceClassName(
@@ -3031,129 +3046,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 				'registration_wrapper'
 			);
 		}
-	}
-
-
-	///////////////////////////////////////
-	// Registrations list view functions.
-	///////////////////////////////////////
-
-	/**
-	 * Creates a list of registered participants for an event.
-	 * If there are no registrations yet, a localized message is displayed instead.
-	 *
-	 * @return	string		HTML code for the list
-	 */
-	protected function createRegistrationsListPage() {
-		$errorMessage = '';
-		$isOkay = false;
-
-		if ($this->createSeminar($this->piVars['seminar'])) {
-			// Okay, at least the seminar UID is valid so we can show the
-			// seminar title and date.
-			$this->setMarker('title', $this->seminar->getTitleAndDate());
-
-			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage($this->seminar->checkConfiguration(true));
-
-			if ($this->seminar->canViewRegistrationsList(
-					$this->whatToDisplay,
-					0,
-					0,
-					$this->getConfValueInteger(
-						'defaultEventVipsFeGroupID',
-						's_template_special')
-					)
-				) {
-				$isOkay = true;
-			} else {
-				$errorMessage = $this->seminar->canViewRegistrationsListMessage(
-					$this->whatToDisplay
-				);
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-					'Status: 403 Forbidden'
-				);
-			}
-		} else {
-			$errorMessage = $this->registrationManager->existsSeminarMessage(
-				$this->piVars['seminar']
-			);
-			$this->setMarker('title', '');
-			header('Status: 404 Not Found');
-		}
-
-		if ($isOkay) {
-			$this->hideSubparts('error', 'wrapper');
-			$this->createRegistrationsList();
-		} else {
-			$this->setMarker('error_text', $errorMessage);
-			$this->hideSubparts('registrations_list_message', 'wrapper');
-			$this->hideSubparts('registrations_list_body', 'wrapper');
-		}
-
-		$this->setMarker('backlink',
-			$this->cObj->getTypoLink(
-				$this->translate('label_back'),
-				$this->getConfValueInteger('listPID')
-			)
-		);
-
-		$result = $this->getSubpart('REGISTRATIONS_LIST_VIEW');
-
-		return $result;
-	}
-
-	/**
-	 * Creates the registration list (sorted by creation date) and fills in the
-	 * corresponding subparts.
-	 * If there are no registrations, a localized message is filled in instead.
-	 *
-	 * Before this function can be called, it must be ensured that $this->seminar
-	 * is a valid seminar object.
-	 */
-	protected function createRegistrationsList() {
-		$registrationBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registrationbag'
-		);
-		$registrationBag = new $registrationBagClassname(
-			SEMINARS_TABLE_ATTENDANCES.'.seminar='.$this->seminar->getUid()
-				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.registration_queue=0',
-			'',
-			'',
-			'crdate'
-		);
-
-		if ($registrationBag->current()) {
-			$result = '';
-			foreach ($registrationBag as $registration) {
-				$this->setMarker('registrations_list_inneritem',
-					$registration->getUserDataAsHtml(
-						$this->getConfValueString(
-							'showFeUserFieldsInRegistrationsList',
-							's_template_special'
-						),
-						$this
-					)
-				);
-				$result .= $this->getSubpart(
-					'REGISTRATIONS_LIST_ITEM'
-				);
-			}
-			$this->hideSubparts('registrations_list_message', 'wrapper');
-			$this->setMarker('registrations_list_body', $result);
-		} else {
-			$this->hideSubparts('registrations_list_body', 'wrapper');
-			$this->setMarker(
-				'message_no_registrations',
-				$this->translate('message_noRegistrations')
-			);
-		}
-
-		// Lets warnings from the registration bag bubble up to us.
-		$this->setErrorMessage($registrationBag->checkConfiguration(true));
-
-		$registrationBag->__destruct();
-		unset($registrationBag);
 	}
 
 

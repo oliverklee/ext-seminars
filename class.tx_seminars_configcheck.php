@@ -130,6 +130,16 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	}
 
 	/**
+	 * Checks the configuration for: tx_seminars_frontEndRegistrationsList/.
+	 */
+	protected function check_tx_seminars_frontEndRegistrationsList() {
+		$this->checkCommonFrontEndSettings();
+
+		$this->checkShowFeUserFieldsInRegistrationsList();
+		$this->checkListPid();
+	}
+
+	/**
 	 * Checks the configuration for: tx_seminars_pi1/seminar_registration.
 	 */
 	protected function check_tx_seminars_pi1_seminar_registration() {
@@ -265,23 +275,6 @@ class tx_seminars_configcheck extends tx_seminars_oe_configcheck {
 	 */
 	protected function check_tx_seminars_pi1_my_events() {
 		$this->check_tx_seminars_pi1_seminar_list();
-	}
-
-	/**
-	 * Checks the configuration for: tx_seminars_pi1/list_registrations.
-	 */
-	protected function check_tx_seminars_pi1_list_registrations() {
-		$this->checkCommonFrontEndSettings();
-
-		$this->checkShowFeUserFieldsInRegistrationsList();
-		$this->checkListPid();
-	}
-
-	/**
-	 * Checks the configuration for: tx_seminars_pi1/list_vip_registrations.
-	 */
-	protected function check_tx_seminars_pi1_list_vip_registrations() {
-		$this->check_tx_seminars_pi1_list_registrations();
 	}
 
 	/**
