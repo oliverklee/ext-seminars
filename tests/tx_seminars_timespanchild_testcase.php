@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_timespanchild.php');
+
 /**
  * Testcase for the time span class in the 'seminars' extension.
  *
@@ -30,9 +32,6 @@
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_timespanchild.php');
-
 class tx_seminars_timespanchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
 
