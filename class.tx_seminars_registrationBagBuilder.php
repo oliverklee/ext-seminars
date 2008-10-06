@@ -133,6 +133,27 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['seats'] = SEMINARS_TABLE_ATTENDANCES .
 			'.seats<=' . $seats;
 	}
+
+	/**
+	 * Limits the bag to registrations to the front-end user with the UID
+	 * $feUserUid.
+	 *
+	 * @param integer the front-end user UID to limit the bag for, must be >= 0,
+	 *                set to 0 to remove the limitation
+	 */
+	public function limitToAttendee($frontEndUserUid) {
+		if ($frontEndUserUid < 0) {
+			throw new Exception('The parameter $frontEndUserUid must be >= 0.');
+		}
+
+		if ($frontEndUserUid == 0) {
+			unset($this->whereClauseParts['attendee']);
+			return;
+		}
+
+		$this->whereClauseParts['attendee'] = SEMINARS_TABLE_ATTENDANCES .
+			'.user=' . $frontEndUserUid;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationBagBuilder.php']) {

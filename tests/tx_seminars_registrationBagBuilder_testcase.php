@@ -435,5 +435,70 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			$registrationBag->isEmpty()
 		);
 	}
+
+
+	////////////////////////////////
+	// Tests for limitToAttendee()
+	////////////////////////////////
+
+	public function testLimitToAttendeeWithNegativeFeUserUidThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $frontEndUserUid must be >= 0.'
+		);
+
+		$this->fixture->limitToAttendee(-1);
+	}
+
+	public function testLimitToAttendeeWithPositiveFeUserUidFindsRegistrationsWithAttendee() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser(
+			$feUserGroupUid
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $eventUid, 'user' => $feUserUid)
+		);
+
+		$this->fixture->limitToAttendee($feUserUid);
+
+		$this->assertEquals(
+			$registrationUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToAttendeeWithPositiveFeUserUidIgnoresRegistrationsWithoutAttendee() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+
+		$this->fixture->limitToAttendee($feUserUid);
+
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
+		);
+	}
+
+	public function testLimitToAttendeeWithZeroFeUserUidFindsRegistrationsWithOtherAttendee() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid2 = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$eventUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $eventUid, 'user' => $feUserUid2)
+		);
+
+		$this->fixture->limitToAttendee($feUserUid);
+		$this->fixture->limitToAttendee(0);
+
+		$this->assertEquals(
+			$registrationUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
 }
 ?>
