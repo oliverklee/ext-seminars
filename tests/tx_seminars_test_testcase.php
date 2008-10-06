@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_test.php');
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
+
 /**
  * Testcase for the test class in the 'seminars' extensions.
  *
@@ -30,31 +35,22 @@
  *
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'tests/fixtures/class.tx_seminars_test.php');
-
-require_once(t3lib_extMgm::extPath('oelib').'class.tx_oelib_testingFramework.php');
-
 class tx_seminars_test_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_test
+	 */
 	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
-	private $backupTsfe;
 
-	/** UID of the minimal fixture's data in the DB */
+	/**
+	 * @var integer UID of the minimal fixture's data in the DB
+	 */
 	private $fixtureUid = 0;
 
 	public function setUp() {
-		// TODO: Remove this as soon as it is possible to build a front-end
-		// environment on demand with phpunit.
-		// In tx_phpunitt3_module1::simulateFrontendEnviroment() creates
-		// an object in $GLOBALS['TSFE'] which is not properly filled with
-		// information, so we need save it temporarily to $this->TSFE and unset
-		// the global variable.
-		// @see		https://bugs.oliverklee.com/show_bug.cgi?id=1557
-		$this->backupTsfe = $GLOBALS['TSFE'];
-		unset($GLOBALS['TSFE']);
-
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$systemFolderUid = $this->testingFramework->createSystemFolder();
 		$this->testingFramework->createTemplate(
@@ -67,14 +63,14 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 				'title' => 'TEST',
 				'root' => 1,
 				'clear' => 3,
-				'include_static_file' => 'EXT:seminars/static/'
+				'include_static_file' => 'EXT:seminars/static/',
 			)
 		);
 		$this->fixtureUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_TEST,
 			array(
 				'pid' => $systemFolderUid,
-				'title' => 'Test'
+				'title' => 'Test',
 			)
 		);
 		$this->fixture = new tx_seminars_test($this->fixtureUid);
@@ -85,12 +81,6 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework);
-
-		// TODO: Remove this as soon as it is possible to build a front-end
-		// environment on demand with phpunit.
-		// Restore $GLOBALS['TSFE'] from $this->TSFE after the tests ran.
-		// @see		https://bugs.oliverklee.com/show_bug.cgi?id=1557
-		$GLOBALS['TSFE'] = $this->backupTsfe;
 	}
 
 
