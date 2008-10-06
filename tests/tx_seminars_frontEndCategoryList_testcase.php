@@ -22,12 +22,12 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1CategoryList.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCategoryList.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
 /**
- * Testcase for the 'pi1CategoryList' class in the 'seminars' extension.
+ * Testcase for the 'frontEndCategoryList' class in the 'seminars' extension.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
@@ -35,11 +35,12 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
+class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var	tx_seminars_pi1
+	 * @var	tx_seminars_frontEndCategoryList
 	 */
 	private $fixture;
+
 	/**
 	 * @var	tx_oelib_testingFramework
 	 */
@@ -68,7 +69,7 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_pi1CategoryList(
+		$this->fixture = new tx_seminars_frontEndCategoryList(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
@@ -92,11 +93,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 	// Tests for createCategoryList()
 	///////////////////////////////////
 
-	public function testCreateCategoryListCreatesEmptyCategoryList() {
+	public function testRenderCreatesEmptyCategoryList() {
 		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
 		$this->fixture->setConfigurationValue('pages', $otherSystemFolderUid);
 
-		$output = $this->fixture->createCategoryList();
+		$output = $this->fixture->render();
 
 		$this->assertNotContains(
 			'<table',
@@ -108,7 +109,7 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateCategoryListCreatesCategoryListContainingOneCategoryTitle() {
+	public function testRenderCreatesCategoryListContainingOneCategoryTitle() {
 		$categoryUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
 			array('title' => 'one category')
@@ -128,11 +129,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'one category',
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCategoryListCreatesCategoryListContainingTwoCategoryTitles() {
+	public function testRenderCreatesCategoryListContainingTwoCategoryTitles() {
 		$categoryUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
 			array('title' => 'first category')
@@ -157,7 +158,7 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
 		);
 
-		$output = $this->fixture->createCategoryList();
+		$output = $this->fixture->render();
 		$this->assertContains(
 			'first category',
 			$output
@@ -168,7 +169,7 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateCategoryListCreatesCategoryListWhichIsSortedAlphabetically() {
+	public function testRenderCreatesCategoryListWhichIsSortedAlphabetically() {
 		$categoryUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
 			array('title' => 'category B')
@@ -193,13 +194,13 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
 		);
 
-		$output = $this->fixture->createCategoryList();
+		$output = $this->fixture->render();
 		$this->assertTrue(
 			strpos($output, 'category A') < strpos($output, 'category B')
 		);
 	}
 
-	public function testCreateCategoryListCreatesCategoryListByUsingRecursion() {
+	public function testRenderCreatesCategoryListByUsingRecursion() {
 		$systemSubFolderUid = $this->testingFramework->createSystemFolder(
 			$this->systemFolderPid
 		);
@@ -222,11 +223,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'one category',
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCategoryListIgnoresOtherSysFolders() {
+	public function testRenderIgnoresOtherSysFolders() {
 		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
 		$categoryUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
@@ -247,11 +248,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'one category',
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCategoryListCanReadFromAllSystemFolders() {
+	public function testRenderCanReadFromAllSystemFolders() {
 		$this->fixture->setConfigurationValue('pages', '');
 
 		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
@@ -274,11 +275,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'one category',
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCategoryListIgnoresCanceledEvents() {
+	public function testRenderIgnoresCanceledEvents() {
 		$categoryUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
 			array('title' => 'one category')
@@ -299,11 +300,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'one category',
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCategoryListCreatesCategoryListOfEventsFromSelectedTimeFrames() {
+	public function testRenderCreatesCategoryListOfEventsFromSelectedTimeFrames() {
 		$this->fixture->setConfigurationValue(
 			'timeframeInList', 'currentAndUpcoming'
 		);
@@ -328,11 +329,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'one category',
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCategoryListIgnoresEventsFromDeselectedTimeFrames() {
+	public function testRenderIgnoresEventsFromDeselectedTimeFrames() {
 		$this->fixture->setConfigurationValue(
 			'timeframeInList', 'currentAndUpcoming'
 		);
@@ -357,11 +358,11 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'one category',
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 
-	public function testCreateCategoryListCreatesCategoryListContainingLinksToListPageLimitedToCategory() {
+	public function testRenderCreatesCategoryListContainingLinksToListPageLimitedToCategory() {
 		$this->fixture->setConfigurationValue(
 			'listPID', $this->testingFramework->createFrontEndPage()
 		);
@@ -385,7 +386,7 @@ class tx_seminars_pi1CategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'tx_seminars_pi1[category]='.$categoryUid,
-			$this->fixture->createCategoryList()
+			$this->fixture->render()
 		);
 	}
 }

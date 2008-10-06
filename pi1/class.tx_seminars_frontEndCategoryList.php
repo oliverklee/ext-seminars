@@ -29,7 +29,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_categorybagb
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 /**
- * Class 'pi1CategoryList' for the 'seminars' extension.
+ * Class 'frontEndCategoryList' for the 'seminars' extension.
  *
  * @package		TYPO3
  * @subpackage	tx_seminars
@@ -37,7 +37,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1CategoryList extends tx_oelib_templatehelper {
+class tx_seminars_frontEndCategoryList extends tx_oelib_templatehelper {
 	/**
 	 * @var	string		same as class name
 	 */
@@ -46,7 +46,7 @@ class tx_seminars_pi1CategoryList extends tx_oelib_templatehelper {
 	/**
 	 * @var	string		path to this script relative to the extension dir
 	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1CategoryList.php';
+	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndCategoryList.php';
 
 	/**
 	 * @var	string		the extension key
@@ -81,7 +81,7 @@ class tx_seminars_pi1CategoryList extends tx_oelib_templatehelper {
 	 * @return	string		HTML code of the category list or a formatted
 	 * 						message if there are no categories to display
 	 */
-	public function createCategoryList() {
+	public function render() {
 		$seminarBagBuilder = t3lib_div::makeInstance(
 			'tx_seminars_seminarbagbuilder'
 		);
@@ -138,6 +138,9 @@ class tx_seminars_pi1CategoryList extends tx_oelib_templatehelper {
 		$categoryBag->__destruct();
 		unset($categoryBag);
 
+		$this->checkConfiguration();
+		$result .= $this->getWrappedConfigCheckMessage();
+
 		return $result;
 	}
 
@@ -170,7 +173,7 @@ class tx_seminars_pi1CategoryList extends tx_oelib_templatehelper {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1CategoryList.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1CategoryList.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndCategoryList.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndCategoryList.php']);
 }
 ?>

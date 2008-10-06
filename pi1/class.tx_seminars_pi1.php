@@ -34,7 +34,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbu
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1CategoryList.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCategoryList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndRegistrationsList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCountdown.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
@@ -353,7 +353,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		if (!in_array(
 				$this->whatToDisplay,
-				array('list_registrations', 'list_vip_registrations', 'countdown')
+				array(
+					'list_registrations', 'list_vip_registrations',
+					'countdown', 'category_list',
+				)
 		)) {
 			$this->setFlavor($this->whatToDisplay);
 		}
@@ -393,12 +396,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 			case 'category_list':
 				$categoryListClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_pi1CategoryList'
+					'tx_seminars_frontEndCategoryList'
 				);
 				$categoryList = new $categoryListClassName(
 					$this->conf, $this->cObj
 				);
-				$result = $categoryList->createCategoryList();
+				$result = $categoryList->render();
+				$categoryList->__destruct();
+				unset($categoryList);
 				break;
 			case 'csv_export_registrations':
 				$result = $this->createCsvExportOfRegistrations();
@@ -1970,7 +1975,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			}
 
 			$categoryListClassName = t3lib_div::makeInstanceClassName(
-				'tx_seminars_pi1CategoryList'
+				'tx_seminars_frontEndCategoryList'
 			);
 			$categoryList = new $categoryListClassName($this->conf, $this->cObj);
 
