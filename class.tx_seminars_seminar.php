@@ -4325,12 +4325,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * This function is a no-op for events without time slots.
 	 *
 	 * @return	integer		the number of place relations of the event
-	 *
-	 * @access	public
 	 */
-	function updatePlaceRelationsFromTimeSlots() {
+	public function updatePlaceRelationsFromTimeSlots() {
 		if (!$this->hasTimeslots()) {
-			return;
+			return 0;
 		}
 
 		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(

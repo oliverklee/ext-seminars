@@ -2409,11 +2409,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToLanguagesFindsEventsInTwoLanguages() {
-		$eventUid1 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('language' => 'EN')
 		);
-		$eventUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('language' => 'DE')
 		);
@@ -2426,7 +2426,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToLanguagesWithEmptyLanguagesArrayFindsAllEvents() {
-		$eventUid1 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('language' => 'EN')
 		);
@@ -2440,7 +2440,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToLanguagesIgnoresEventsWithDifferentLanguage() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('language' => 'DE')
 		);
@@ -2452,7 +2452,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToLanguagesIgnoresEventsWithoutLanguage() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->fixture->limitToLanguages(array('EN'));
@@ -2717,7 +2717,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToEventManagerWithPositiveFeUserUidIgnoresEventsWithoutEventManager() {
 		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 
@@ -2731,7 +2731,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToEventManagerWithZeroFeUserUidFindsEventsWithoutEventManager() {
 		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 
@@ -2772,11 +2772,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToEventsNextDayIgnoresEarlierEvents() {
-		$eventUid1 = $this->testingFramework->createRecord(
+		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('begin_date' => ONE_DAY, 'end_date' => (ONE_DAY + 60 * 60))
 		);
-		$eventUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'begin_date' => 0,
@@ -2784,7 +2784,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				)
 		);
 		$this->fixture->limitToEventsNextDay(
-			new tx_seminars_seminar($eventUid1)
+			new tx_seminars_seminar($eventUid)
 		);
 
 		$this->assertTrue(
@@ -2793,11 +2793,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToEventsNextDayIgnoresEventsLaterThanOneDay() {
-		$eventUid1 = $this->testingFramework->createRecord(
+		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('begin_date' => ONE_DAY, 'end_date' => (ONE_DAY + 60 * 60))
 		);
-		$eventUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'begin_date' => (3 * ONE_DAY),
@@ -2805,7 +2805,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				)
 		);
 		$this->fixture->limitToEventsNextDay(
-			new tx_seminars_seminar($eventUid1)
+			new tx_seminars_seminar($eventUid)
 		);
 
 		$this->assertTrue(
@@ -2824,7 +2824,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->fixture->limitToEventsNextDay(
-			new tx_seminars_seminar($eventUid1)
+			new tx_seminars_seminar($eventUid)
 		);
 	}
 
@@ -2866,14 +2866,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
-		$dateUid1 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
-		$dateUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -2919,7 +2919,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'topic' => $topicUid1,
 			)
 		);
-		$dateUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -2946,7 +2946,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'topic' => $topicUid,
 			)
 		);
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
@@ -2977,7 +2977,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'topic' => $topicUid1,
 			)
 		);
-		$dateUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -3006,7 +3006,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'topic' => $topicUid,
 			)
 		);
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
@@ -3093,7 +3093,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInAccreditationNumber() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'accreditation_number' => 'bar event',
@@ -3121,7 +3121,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTitle() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('title' => 'bar event')
 		);
@@ -3146,7 +3146,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSubtitle() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('subtitle' => 'bar event')
 		);
@@ -3171,7 +3171,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTeaser() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('teaser' => 'bar event')
 		);
@@ -3196,7 +3196,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInDescription() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('description' => 'bar event')
 		);
@@ -3967,7 +3967,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_EVENT_TYPES,
 			array('title' => 'bar event type')
 		);
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'event_type' => $eventTypeUid,
@@ -4006,7 +4006,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS,
 			array('title' => 'bar organizer')
 		);
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'organizers' => $organizerUid,
@@ -4181,7 +4181,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'topic' => $topicUid,
@@ -4228,7 +4228,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'topic' => $topicUid,
@@ -4275,7 +4275,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'topic' => $topicUid,
@@ -4322,7 +4322,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'topic' => $topicUid,
@@ -4387,7 +4387,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$topicUid,
 			$categoryUid
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'topic' => $topicUid,
@@ -4452,7 +4452,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$topicUid,
 			$targetGroupUid
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'topic' => $topicUid,
@@ -4507,7 +4507,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
-		$dateUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'topic' => $topicUid,
@@ -4544,7 +4544,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInAccreditationNumber() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'accreditation_number' => 'bar event',
@@ -4583,7 +4583,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS,
 			array('title' => 'bar organizer')
 		);
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'organizers' => $organizerUid,

@@ -273,7 +273,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'name'
 		);
-		$frontEndUserUid = $this->createLogInAndRegisterFrontEndUser();
+		$this->createLogInAndRegisterFrontEndUser();
 		$this->testingFramework->changeRecord(
 			'fe_users',
 			$this->feUserUid,
@@ -307,7 +307,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'uid,name'
 		);
-		$frontEndUserUid = $this->createLogInAndRegisterFrontEndUser();
+		$this->createLogInAndRegisterFrontEndUser();
 		$this->testingFramework->changeRecord(
 			'fe_users',
 			$this->feUserUid,

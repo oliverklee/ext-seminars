@@ -70,7 +70,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			'Exception', 'The attribute $this->tableName must not be empty.'
 		);
 
-		$brokenTestBagBuilder = new tx_seminars_brokenTestingBagBuilder();
+		new tx_seminars_brokenTestingBagBuilder();
 	}
 
 	public function testBuilderBuildsAnObject() {

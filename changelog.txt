@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2276] Fix: Remove some code warnings
 - [#2255] Change: Move hiding columns to separate methods in tx_seminars_pi1
 - [#2247] Feature: Add a method limitToAttendee() to tx_seminars_registrationBagBuilder
 - [#2230] Change: Remove the TSFE manipulation from test_testcase

@@ -53,8 +53,6 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 	 * @return	string		the HTML source code to display
 	 */
 	public function show() {
-		global $LANG;
-
 		// Initializes the variable for the HTML source code.
 		$content = '';
 

@@ -70,8 +70,6 @@ class tx_seminars_flexForms {
 	 *               selectable database columns
 	 */
 	public function getShowFeUserFieldsInRegistrationsList(array $configuration) {
-		$optionList = array();
-
 		foreach ($this->getColumnsOfTable('fe_users') as $column) {
 			$label = $this->language->getLL('label_' . $column);
 
@@ -96,8 +94,6 @@ class tx_seminars_flexForms {
 	 *               selectable database columns
 	 */
 	public function getShowRegistrationFieldsInRegistrationList(array $configuration) {
-		$optionList = array();
-
 		foreach ($this->getColumnsOfTable(SEMINARS_TABLE_ATTENDANCES) as $column) {
 			$label = $this->language->getLL(
 				'label_' . ($column == 'uid' ? 'registration_' : '') .$column

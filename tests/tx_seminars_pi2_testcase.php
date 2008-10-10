@@ -300,7 +300,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'referrer'
 		);
-		$registrationUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,

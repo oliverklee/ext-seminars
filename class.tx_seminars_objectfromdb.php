@@ -483,7 +483,6 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * 						for this record
 	 */
 	public function getRecordIcon() {
-		$result = '';
 		$imageURL = '';
 		$iconProperties = array();
 
