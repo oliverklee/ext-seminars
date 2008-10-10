@@ -1553,18 +1553,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		if ($isOkay) {
-			// Shows the selector widget on top of the list view.
-			// Hides it if it's deactivated in the configuration or we are on a
-			// special list view like "my_vip_events".
-			if ((!$this->getConfValueBoolean('hideSelectorWidget', 's_template_special'))
-				&& ($whatToDisplay == 'seminar_list')
-			) {
-				// Prepares the arrays that contain the possible entries for the
-				// option boxes in the selector widget.
-				$this->createAllowedValuesForSelectorWidget();
-
-				$result .= $this->createSelectorWidget();
-			}
+			$result .= $this->getSelectorWidgetIfNecessary($whatToDisplay);
 
 			// Creates the seminar or registration bag for the list view (with
 			// all the filtering applied).
@@ -1618,57 +1607,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
 		}
 
-		$this->hideColumns(
-			t3lib_div::trimExplode(
-				',',
-				$this->getConfValueString('hideColumns', 's_template_special'),
-				true
-			)
-		);
-
-		// Hide the registration column if online registration is disabled.
-		if (!$this->getConfValueBoolean('enableRegistration')) {
-			$this->hideColumns(array('registration'));
-		}
-
-		// Hides the number of seats, the total price and the registration
-		// status columns when we're not on the "my events" list.
-		if ($whatToDisplay != 'my_events') {
-			$this->hideColumns(
-				array('total_price', 'seats', 'status_registration')
-			);
-		}
-
-		$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-			= $this->getConfValueBoolean(
-				'allowCsvExportOfRegistrationsInMyVipEventsView'
-			);
-
-		if ($whatToDisplay != 'my_vip_events'
-			|| !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-		) {
-			$this->hideColumns(array('registrations'));
-		}
-
-		// Hide the column with the link to the list of registrations if
-		// online registration is disabled, no user is logged in or there is
-		// no page specified to link to.
-		// Also hide it for the "other dates" and "events next day" lists.
-		if (!$this->getConfValueBoolean('enableRegistration')
-			|| !$this->isLoggedIn()
-			|| (($whatToDisplay == 'seminar_list')
-				&& !$this->hasConfValueInteger('registrationsListPID')
-				&& !$this->hasConfValueInteger('registrationsVipListPID'))
-			|| ($whatToDisplay == 'other_dates')
-			|| ($whatToDisplay == 'events_next_day')
-			|| (($whatToDisplay == 'my_events')
-				&& !$this->hasConfValueInteger('registrationsListPID'))
-			|| (($whatToDisplay == 'my_vip_events')
-				&& !$this->hasConfValueInteger('registrationsVipListPID'))
-		) {
-			$this->hideColumns(array('list_registrations'));
-		}
-
+		$this->hideColumnsForAllViewsFromTypoScriptSetup();
+		$this->hideRegisterColumnIfNecessary();
+		$this->hideColumnsForAllViewsExceptMyEvents($whatToDisplay);
+		$this->hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay);
+		$this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
 		$this->hideEditColumnIfNecessary($whatToDisplay);
 
 		if (!isset($this->piVars['pointer'])) {
@@ -1732,19 +1675,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			case 'topic_list':
 				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.object_type='
 					.SEMINARS_RECORD_TYPE_TOPIC;
-				$this->hideColumns(
-					array(
-						'uid',
-						'accreditation_number',
-						'speakers',
-						'date',
-						'time',
-						'place',
-						'organizers',
-						'vacancies',
-						'registration',
-					)
-				);
+				$this->hideColumnsForTheTopicListView();
 				break;
 			case 'my_events':
 				$additionalTables = SEMINARS_TABLE_SEMINARS;
@@ -2170,6 +2101,33 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$placeBag = new $placeBagClassname($queryWhere);
 
 		return $placeBag;
+	}
+
+	/**
+	 * Returns the selector widget for the "seminars_list" view if it is not
+	 * hidden through the TypoScript setup configuration option
+	 * "hideSelectorWidget".
+	 *
+	 * @param string a string selecting the flavor of list view: either an empty
+	 *               string (for the default list view), the value from
+	 *               "what_to_display" or "other_dates"
+	 *
+	 * @return string the HTML code of the selector widget, may be empty
+	 */
+	private function getSelectorWidgetIfNecessary($whatToDisplay) {
+		if ($whatToDisplay != 'seminars_list') {
+			return '';
+		}
+
+		if ($this->getConfValueBoolean(
+			'hideSelectorWidget', 's_template_special'
+		)) {
+			return '';
+		}
+
+		$this->createAllowedValuesForSelectorWidget();
+
+		return $this->createSelectorWidget();
 	}
 
 	/**
@@ -2828,6 +2786,113 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		) {
 			$this->hideColumns(array('edit'));
 		}
+	}
+
+	/**
+	 * Hides the column with the link to the list of registrations if online
+	 * registration is disabled, no user is logged in or there is no page
+	 * specified to link to.
+	 * Also hides it for the "other_dates" and "events_next_day" lists.
+	 *
+	 * @param string a string selecting the flavor of list view: either an empty
+	 *               string (for the default list view), the value from
+	 *               "what_to_display" or "other_dates"
+	 */
+	private function hideListRegistrationsColumnIfNecessary($whatToDisplay) {
+		if (!$this->getConfValueBoolean('enableRegistration')
+			|| !$this->isLoggedIn()
+			|| (($whatToDisplay == 'seminar_list')
+				&& !$this->hasConfValueInteger('registrationsListPID')
+				&& !$this->hasConfValueInteger('registrationsVipListPID'))
+			|| ($whatToDisplay == 'other_dates')
+			|| ($whatToDisplay == 'events_next_day')
+			|| (($whatToDisplay == 'my_events')
+				&& !$this->hasConfValueInteger('registrationsListPID'))
+			|| (($whatToDisplay == 'my_vip_events')
+				&& !$this->hasConfValueInteger('registrationsVipListPID'))
+		) {
+			$this->hideColumns(array('list_registrations'));
+		}
+	}
+
+	/**
+	 * Hides the registration column if online registration is disabled.
+	 */
+	private function hideRegisterColumnIfNecessary() {
+		if (!$this->getConfValueBoolean('enableRegistration')) {
+			$this->hideColumns(array('registration'));
+		}
+	}
+
+	/**
+	 * Hides the registrations column if we are not on the "my_vip_events" view
+	 * or the CSV export of registrations is not allowed on the "my_vip_events"
+	 * view.
+	 *
+	 * @param string a string selecting the flavor of list view: either an empty
+	 *               string (for the default list view), the value from
+	 *               "what_to_display" or "other_dates"
+	 */
+	private function hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay) {
+		$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+			= $this->getConfValueBoolean(
+				'allowCsvExportOfRegistrationsInMyVipEventsView'
+			);
+
+		if (($whatToDisplay != 'my_vip_events')
+			|| !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+		) {
+			$this->hideColumns(array('registrations'));
+		}
+	}
+
+	/**
+	 * Hides columns which are not needed for the "topic_list" view.
+	 */
+	private function hideColumnsForTheTopicListView() {
+		$this->hideColumns(
+			array(
+				'uid',
+				'accreditation_number',
+				'speakers',
+				'date',
+				'time',
+				'place',
+				'organizers',
+				'vacancies',
+				'registration',
+			)
+		);
+	}
+
+	/**
+	 * Hides the number of seats, the total price and the registration status
+	 * columns when we're not on the "my_events" list view.
+	 *
+	 * @param string a string selecting the flavor of list view: either an empty
+	 *               string (for the default list view), the value from
+	 *               "what_to_display" or "other_dates"
+	 */
+	private function hideColumnsForAllViewsExceptMyEvents($whatToDisplay) {
+		if ($whatToDisplay != 'my_events') {
+			$this->hideColumns(
+				array('total_price', 'seats', 'status_registration')
+			);
+		}
+	}
+
+	/**
+	 * Hides the columns which are listed in the TypoScript setup variable
+	 * "hideColumns".
+	 */
+	private function hideColumnsForAllViewsFromTypoScriptSetup() {
+		$this->hideColumns(
+			t3lib_div::trimExplode(
+				',',
+				$this->getConfValueString('hideColumns', 's_template_special'),
+				true
+			)
+		);
 	}
 
 	/**
