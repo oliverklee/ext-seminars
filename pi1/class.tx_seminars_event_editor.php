@@ -28,6 +28,7 @@ require_once(PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndEditor.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
@@ -42,7 +43,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php
  * @author		Oliver Klee <typo3-coding@oliverklee.de>
  * @author		Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_event_editor extends tx_oelib_templatehelper {
+class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/** @var	string		class name */
 	public $prefixId = 'tx_seminars_event_editor';
 

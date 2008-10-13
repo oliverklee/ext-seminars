@@ -69,7 +69,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 		);
 
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			SEMINARS_TABLE_SEMINARS, array('payment_methods' => '1')
 		);
 
 		$this->pi1 = new tx_seminars_pi1();
@@ -272,6 +272,15 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 			'12345',
 			$this->fixture->retrieveDataFromSession('', array('key' => 'zip'))
 		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning populateListPaymentMethods
+	////////////////////////////////////////////////
+
+	public function testPopulateListPaymentMethodsDoesNotCrash() {
+		$this->fixture->populateListPaymentMethods(array());
 	}
 }
 ?>
