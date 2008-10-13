@@ -84,5 +84,14 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getEventSuccessfullySavedUrl()
 		);
 	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning populateListCategories
+	////////////////////////////////////////////
+
+	public function testPopulateListCategoriesDoesNotCrash() {
+		$this->fixture->populateListCategories(array());
+	}
 }
 ?>

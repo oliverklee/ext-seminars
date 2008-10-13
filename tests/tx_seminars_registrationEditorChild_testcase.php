@@ -58,7 +58,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd($this->frontEndPageUid);
 
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			SEMINARS_TABLE_SEMINARS, array('payment_methods' => '1')
 		);
 
 		$this->pi1 = new tx_seminars_pi1();
@@ -163,6 +163,15 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 			'/<br \/>\s*<br \/>/',
 			$this->fixture->getAllFeUserData()
 		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning populateListPaymentMethods
+	////////////////////////////////////////////////
+
+	public function testPopulateListPaymentMethodsDoesNotCrash() {
+		$this->fixture->populateListPaymentMethods(array());
 	}
 }
 ?>
