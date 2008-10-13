@@ -2052,19 +2052,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return	string		the heading label, may be completely wrapped in a
 	 * 						hyperlink for sorting
 	 */
-	protected function getFieldHeader($fieldName) {
-		$result = '';
-
-		$label = $result = $this->translate(
-			'label_' . $fieldName,
-			'[' . $fieldName . ']'
-		);
+	public function getFieldHeader($fieldName) {
+		$label = $this->translate('label_' . $fieldName);
 		if (($fieldName == 'price_regular')
 			&& $this->getConfValueBoolean(
 				'generalPriceInList',
 				's_template_special')
 		) {
-			$label = $result = $this->translate('label_price_general');
+			$label = $this->translate('label_price_general');
 		}
 
 		// Can we sort by that field?

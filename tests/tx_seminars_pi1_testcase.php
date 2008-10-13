@@ -2569,5 +2569,31 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
 		);
 	}
+
+
+	////////////////////////////////////
+	// Tests concerning getFieldHeader
+	////////////////////////////////////
+
+	public function testGetFieldHeaderContainsLabelOfKey() {
+		$this->assertContains(
+			$this->fixture->translate('label_date'),
+			$this->fixture->getFieldHeader('date')
+		);
+	}
+
+	public function testGetFieldHeaderForSortableFieldContainsLink() {
+		$this->assertContains(
+			'<a',
+			$this->fixture->getFieldHeader('date')
+		);
+	}
+
+	public function testGetFieldHeaderForNonSortableFieldNotContainsLink() {
+		$this->assertNotContains(
+			'<a',
+			$this->fixture->getFieldHeader('register')
+		);
+	}
 }
 ?>
