@@ -1756,7 +1756,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$limit
 		);
 
-		$this->internal['res_count'] = $registrationOrSeminarBag->count();
+		$this->internal['res_count'] =
+			$registrationOrSeminarBag->countWithoutLimit();
 
 		$this->previousDate = '';
 		$this->previousCategory = '';

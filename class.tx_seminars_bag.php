@@ -62,6 +62,14 @@ abstract class tx_seminars_bag implements Iterator {
 	 * @var integer how many objects this bag contains
 	 */
 	private $count = 0;
+	/**
+	 * @var boolean whether $this->$countWithoutLimit has been calculated
+	 */
+	private $hasCountWithoutLimit = false;
+	/**
+	 * @var integer how many objects this bag would hold without the LIMIT
+	 */
+	private $countWithoutLimit = 0;
 
 	/**
 	 * @var	boolean		whether this bag is at the first element
@@ -302,6 +310,35 @@ abstract class tx_seminars_bag implements Iterator {
 		$this->hasCount = true;
 
 		return $this->count;
+	}
+
+	/**
+	 * Retrieves the number of objects this bag would hold if the LIMIT part of
+	 * the query would not have been used.
+	 *
+	 * @return integer the total number of objects in this bag without any
+	 *                 limit, may be zero
+	 */
+	public function countWithoutLimit() {
+		if ($this->hasCountWithoutLimit) {
+			return $this->countWithoutLimit;
+		}
+
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'COUNT(*) AS number ',
+			$this->dbTableName . $this->additionalTableNames,
+			$this->queryParameters . $this->enabledFieldsQuery
+		);
+		if (!$dbResult) {
+			throw new Exception(DATABASE_QUERY_ERROR);
+		}
+		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
+
+		$this->countWithoutLimit = $dbResultRow['number'];
+		$this->hasCountWithoutLimit = true;
+
+		return $this->countWithoutLimit;
 	}
 
 	/**

@@ -73,7 +73,13 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'what_to_display' => 'seminar_list',
 				'pidList' => $this->systemFolderPid,
 				'pages' => $this->systemFolderPid,
-				'recursive' => 1
+				'recursive' => 1,
+				'listView.' => array(
+					'orderBy' => 'data',
+					'descFlag' => 0,
+					'results_at_a_time' => 5,
+					'maxPages' => 5,
+				),
 			)
 		);
 		$this->fixture->getTemplateCode();
@@ -1202,6 +1208,66 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			'Test topic',
 			$this->fixture->main('', array())
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////
+	// Tests concerning the result counter in the list view
+	/////////////////////////////////////////////////////////
+
+	public function testResultCounterIsZeroForNoResults() {
+		$this->fixture->setConfigurationValue(
+			'pidList', $this->testingFramework->createSystemFolder()
+		);
+		$this->fixture->main('', array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->internal['res_count']
+		);
+	}
+
+	public function testResultCounterIsOneForOneResult() {
+		$this->fixture->main('', array());
+
+		$this->assertEquals(
+			1,
+			$this->fixture->internal['res_count']
+		);
+	}
+
+	public function testResultCounterIsTwoForTwoResultsOnOnePage() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Another event',
+			)
+		);
+		$this->fixture->main('', array());
+
+		$this->assertEquals(
+			2,
+			$this->fixture->internal['res_count']
+		);
+	}
+
+	public function testResultCounterIsSixForSixResultsOnTwoPages() {
+		for ($i = 0; $i < 5; $i++) {
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'pid' => $this->systemFolderPid,
+					'title' => 'Another event',
+				)
+			);
+		}
+		$this->fixture->main('', array());
+
+		$this->assertEquals(
+			6,
+			$this->fixture->internal['res_count']
 		);
 	}
 

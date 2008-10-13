@@ -168,6 +168,55 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////
+	// Tests concerning countWithoutLimit
+	///////////////////////////////////////
+
+	public function testCountWithoutLimitForEmptyBagReturnsZero() {
+		$bag = new tx_seminars_testbag('1=2');
+
+		$this->assertEquals(
+			0,
+			$bag->countWithoutLimit()
+		);
+	}
+
+	public function testCountWithoutLimitForBagWithOneElementReturnsOne() {
+		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+
+		$this->assertEquals(
+			1,
+			$bag->countWithoutLimit()
+		);
+	}
+
+	public function testCountWithoutLimitForBagWithTwoElementsReturnsTwo() {
+		$this->assertEquals(
+			2,
+			$this->fixture->countWithoutLimit()
+		);
+	}
+
+	public function testCountWithoutLimitAfterCallingNextForBagWithTwoElementsReturnsTwo() {
+		$this->fixture->rewind();
+		$this->fixture->next();
+
+		$this->assertEquals(
+			2,
+			$this->fixture->countWithoutLimit()
+		);
+	}
+
+	public function testCountWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo() {
+		$bag = new tx_seminars_testbag('is_dummy_record=1', '', '', '', 1);
+
+		$this->assertEquals(
+			2,
+			$bag->countWithoutLimit()
+		);
+	}
+
+
 	/////////////////////////////
 	// Tests concerning isEmpty
 	/////////////////////////////

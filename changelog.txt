@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2257] Fix: Pagination in FE lists is broken
 - [#2271] Fix: Crash in the "events by me" list
 - [#1897] Fix: Double assignment in a code line
 - [#2276] Fix: Remove some code warnings
