@@ -500,5 +500,68 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->current()->getUid()
 		);
 	}
+
+
+	//////////////////////////////////////
+	// Tests for setOrderByEventColumn()
+	//////////////////////////////////////
+
+	public function testSetOrderByEventColumnCanSortAscendingByEventTitle() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 1')
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 2')
+		);
+		$registrationUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid1)
+		);
+		$registrationUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid2)
+		);
+
+		$this->fixture->setOrderByEventColumn(
+			SEMINARS_TABLE_SEMINARS . '.title ASC'
+		);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			$bag->current()->getUid(),
+			$registrationUid1
+		);
+		$this->assertEquals(
+			$bag->next()->getUid(),
+			$registrationUid2
+		);
+	}
+
+	public function testSetOrderByEventColumnCanSortDescendingByEventTitle() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 1')
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 2')
+		);
+		$registrationUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid1)
+		);
+		$registrationUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid2)
+		);
+
+		$this->fixture->setOrderByEventColumn(
+			SEMINARS_TABLE_SEMINARS . '.title DESC'
+		);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			$bag->current()->getUid(),
+			$registrationUid2
+		);
+		$this->assertEquals(
+			$bag->next()->getUid(),
+			$registrationUid1
+		);
+	}
 }
 ?>

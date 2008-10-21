@@ -154,6 +154,19 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['attendee'] = SEMINARS_TABLE_ATTENDANCES .
 			'.user=' . $frontEndUserUid;
 	}
+
+	/**
+	 * Sets the ORDER BY by statement for the bag to build and joins the
+	 * registration results with the corresponding events.
+	 *
+	 * @param string the ORDER BY statement to set, may be empty
+	 */
+	public function setOrderByEventColumn($orderBy) {
+		$this->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+		$this->whereClauseParts['orderByEvent'] = SEMINARS_TABLE_ATTENDANCES .
+			'.seminar=' . SEMINARS_TABLE_SEMINARS . '.uid';
+		$this->setOrderBy($orderBy);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationBagBuilder.php']) {
