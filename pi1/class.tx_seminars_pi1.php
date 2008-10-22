@@ -2044,6 +2044,26 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
+	 * Returns a seminarBagBuilder object with the source pages set for the list
+	 * view.
+	 *
+	 * @return tx_seminars_seminarbagbuilder the seminarBagBuilder object for
+	 *                                       the list view
+	 */
+	private function createSeminarBagBuilder() {
+		$seminarBagBuilder = t3lib_div::makeInstance(
+			'tx_seminars_seminarbagbuilder'
+		);
+
+		$seminarBagBuilder->setSourcePages(
+			$this->getConfValueString('pidList'),
+			$this->getConfValueInteger('recursive')
+		);
+
+		return $seminarBagBuilder;
+	}
+
+	/**
 	 * Gets the heading for a field type, automatically wrapped in a hyperlink
 	 * that sorts by that column if sorting by that column is available.
 	 *

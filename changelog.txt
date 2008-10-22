@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2289] Feature: Add a method createSeminarBagBuilder() to tx_seminars_pi1
 - [#2287] Feature: Add a method setOrderByEventColumn() to tx_seminars_registrationbagbuilder
 - [#2257] Fix: Pagination in FE lists is broken
 - [#2271] Fix: Crash in the "events by me" list
