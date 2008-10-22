@@ -143,7 +143,8 @@ abstract class tx_seminars_bagbuilder {
 			$sourcePagePids, $recursionDepth
 		);
 
-		$this->whereClauseParts['pages'] = 'pid IN (' . $recursivePidList . ')';
+		$this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' .
+			$recursivePidList . ')';
 	}
 
 	/**
