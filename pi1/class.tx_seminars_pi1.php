@@ -2064,6 +2064,25 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
+	 * Returns a registrationBagBuilder object limited for registrations of the
+	 * currently logged in front-end user as attendee for the "my events" list
+	 * view.
+	 *
+	 * @return tx_seminars_registrationBagBuilder the registrationBagBuilder
+	 *                                            object for the "my events"
+	 *                                            list view
+	 */
+	private function createRegistrationBagBuilder() {
+		$registrationBagBuilder = t3lib_div::makeInstance(
+			'tx_seminars_registrationBagBuilder'
+		);
+
+		$registrationBagBuilder->limitToAttendee($this->getFeUserUid());
+
+		return $registrationBagBuilder;
+	}
+
+	/**
 	 * Gets the heading for a field type, automatically wrapped in a hyperlink
 	 * that sorts by that column if sorting by that column is available.
 	 *
