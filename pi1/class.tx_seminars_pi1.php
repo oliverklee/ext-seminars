@@ -1628,15 +1628,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			}
 		}
 
-		// Overwrite the default sort order with values given by the browser.
-		// This happens if the user changes the sort order manually.
-		if (!empty($this->piVars['sort'])) {
-			list(
-				$this->internal['orderBy'],
-				$this->internal['descFlag']) = explode(':', $this->piVars['sort']
-			);
-		}
-
 		// Number of results to show in a listing.
 		$this->internal['results_at_a_time'] = t3lib_div::intInRange(
 			$lConf['results_at_a_time'],
@@ -1651,10 +1642,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			1000,
 			2
 		);
-
-		$this->internal['orderByList'] = 'category,title,uid,event_type,'
-			.'accreditation_number,credit_points,begin_date,price_regular,'
-			.'price_special,organizers,target_groups';
 
 		$pidList = $this->pi_getPidList(
 			$this->getConfValueString('pidList'),
@@ -1719,19 +1706,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$queryWhere .= $additionalQueryParameters;
 
-		if ($this->getConfValueBoolean(
-			'sortListViewByCategory', 's_template_special'
-		)) {
-			$orderBy = $this->orderByList['category'].', ';
-		} else {
-			$orderBy = '';
-		}
-		if (isset($this->internal['orderBy'])
-			&& isset($this->orderByList[$this->internal['orderBy']])) {
-			$orderBy .= $this->orderByList[$this->internal['orderBy']]
-				.($this->internal['descFlag'] ? ' DESC' : '');
-		}
-
 		$limit = '';
 		$pointer = intval($this->piVars['pointer']);
 		$resultsAtATime = t3lib_div::intInRange(
@@ -1752,7 +1726,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$queryWhere,
 			$additionalTables,
 			'',
-			$orderBy,
+			$this->getOrderByForListView(),
 			$limit
 		);
 
@@ -2059,6 +2033,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->getConfValueString('pidList'),
 			$this->getConfValueInteger('recursive')
 		);
+		$seminarBagBuilder->setOrderBy($this->getOrderByForListView());
 
 		return $seminarBagBuilder;
 	}
@@ -2078,8 +2053,46 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 
 		$registrationBagBuilder->limitToAttendee($this->getFeUserUid());
+		$registrationBagBuilder->setOrderByEventColumn(
+			$this->getOrderByForListView()
+		);
 
 		return $registrationBagBuilder;
+	}
+
+	/**
+	 * Returns the ORDER BY statement for the list view.
+	 *
+	 * @return string the ORDER BY statement for the list view, may be empty
+	 */
+	private function getOrderByForListView() {
+		$orderBy = '';
+
+		if ($this->getConfValueBoolean(
+			'sortListViewByCategory', 's_template_special'
+		)) {
+			$orderBy = $this->orderByList['category'] . ', ';
+		}
+
+		// Overwrites the default sort order with values given by the browser.
+		// This happens if the user changes the sort order manually.
+		if (!empty($this->piVars['sort'])) {
+			list($this->internal['orderBy'], $this->internal['descFlag']) =
+				explode(':', $this->piVars['sort']);
+		}
+
+		$this->internal['orderByList'] = 'category,title,uid,event_type,' .
+			'accreditation_number,credit_points,begin_date,price_regular,' .
+			'price_special,organizers,target_groups';
+
+		if (isset($this->internal['orderBy'])
+			&& isset($this->orderByList[$this->internal['orderBy']])
+		) {
+			$orderBy .= $this->orderByList[$this->internal['orderBy']] .
+				($this->internal['descFlag'] ? ' DESC' : '');
+		}
+
+		return $orderBy;
 	}
 
 	/**
