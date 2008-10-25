@@ -297,29 +297,31 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events from any of the event types with the UIDs
 	 * provided as the parameter $eventTypeUids.
 	 *
-	 * @param	string		comma-separated list of UIDs of the event types
-	 * 						which the bag should be limited to, set to an empty
-	 * 						string for no limitation
+	 * @param array event type UIDs, set to an empty array for no limitation,
+	 *              need not be SQL-safe
 	 */
-	public function limitToEventTypes($eventTypeUids) {
-		if ($eventTypeUids == '') {
+	public function limitToEventTypes(array $eventTypeUids = array()) {
+		if (empty($eventTypes)) {
 			unset($this->whereClauseParts['eventTypes']);
 			return;
 		}
 
-		$this->whereClauseParts['eventTypes']
-			= '(' .
+		$safeEventTypeUids = implode(
+			',', $GLOBALS['TYPO3_DB']->cleanIntArray($eventTypeUids)
+		);
+
+		$this->whereClauseParts['eventTypes'] = '(' .
 			'(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
-			'event_type IN(' . $eventTypeUids . '))' .
+			'event_type IN(' . $safeEventTypeUids . '))' .
 			' OR ' .
 			'(object_type=' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
 			'EXISTS (SELECT * FROM ' .
 			SEMINARS_TABLE_SEMINARS . ' AS topic WHERE ' .
 			'topic.uid=' .
 			SEMINARS_TABLE_SEMINARS . '.topic AND ' .
-			'topic.event_type IN(' . $eventTypeUids . ')' .
+			'topic.event_type IN(' . $safeEventTypeUids . ')' .
 			'))' .
-			')';
+		')';
 	}
 
 	/**

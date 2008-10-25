@@ -365,6 +365,42 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testRemoveDummyOptionFromFormData() {
+		$this->assertEquals(
+			array('CH', 'DE'),
+			$this->fixture->removeDummyOptionFromFormData(
+				array('none', 'CH', 'DE')
+			)
+		);
+	}
+
+	public function testRemoveDummyOptionFromFormDataWithDummyNotFirstElement() {
+		$this->assertEquals(
+			array('CH', 'DE'),
+			$this->fixture->removeDummyOptionFromFormData(
+				array('CH', 'none', 'DE')
+			)
+		);
+	}
+
+	public function testRemoveDummyOptionFromFormDataWithEmptyFormData() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->removeDummyOptionFromFormData(
+				array()
+			)
+		);
+	}
+
+	public function testRemoveDummyOptionFromFormDataWithValueZero() {
+		$this->assertEquals(
+			array(0),
+			$this->fixture->removeDummyOptionFromFormData(
+				array(0)
+			)
+		);
+	}
+
 	public function testEventTypeSelectorWidgetContainsTitleOfAssignedEventType() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,

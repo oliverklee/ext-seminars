@@ -2310,6 +2310,25 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
+	 * Removes the dummy option from the submitted form data.
+	 *
+	 * @param array the POST data submitted from the form, may be empty
+	 *
+	 * @return array the POST data without the dummy option
+	 */
+	public function removeDummyOptionFromFormData(array $formData) {
+		$cleanedFormData = array();
+
+		foreach ($formData as $value) {
+			if (($value != 'none') || ($value === 0)) {
+				$cleanedFormData[] = $value;
+			}
+		}
+
+		return $cleanedFormData;
+	}
+
+	/**
 	 * Returns the additional query parameters needed to build the list view.
 	 * This function checks
 	 * - the time-frame to display
@@ -2388,15 +2407,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		if (isset($this->piVars['event_type'])
 			&& (is_array($this->piVars['event_type']))
 		) {
-			$sanitizedEventTypeUids = array();
-			foreach($this->piVars['event_type'] as $uid) {
-				$sanitizedEventTypeUids[] = intval($uid);
-			}
-			$builder->limitToEventTypes(implode(',', $sanitizedEventTypeUids));
-		} else {
 			$builder->limitToEventTypes(
-				$this->getConfValueString(
-					'limitListViewToEventTypes', 's_listView'
+				$this->removeDummyOptionFromFormData($this->piVars['event_type'])
+			);
+		} else {
+			// TODO: This needs to be changed as soon as we are using the new
+			// TypoScript configuration class from tx_oelib which offers a
+			// getAsIntegerArray() method.
+			$builder->limitToEventTypes(
+				t3lib_div::trimExplode(
+					',',
+					$this->getConfValueString(
+						'limitListViewToEventTypes', 's_listView'
+					),
+					true
 				)
 			);
 		}

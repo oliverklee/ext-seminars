@@ -1661,7 +1661,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes('');
+		$this->fixture->limitToEventTypes();
 
 		$this->assertEquals(
 			2,
@@ -1686,8 +1686,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid);
-		$this->fixture->limitToEventTypes('');
+		$this->fixture->limitToEventTypes(array($typeUid));
+		$this->fixture->limitToEventTypes();
 
 		$this->assertEquals(
 			2,
@@ -1707,7 +1707,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid);
+		$this->fixture->limitToEventTypes(array($typeUid));
 
 		$this->assertEquals(
 			1,
@@ -1734,7 +1734,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid);
+		$this->fixture->limitToEventTypes(array($typeUid));
 
 		$this->assertEquals(
 			2,
@@ -1759,7 +1759,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid);
+		$this->fixture->limitToEventTypes(array($typeUid));
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -1795,7 +1795,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid1);
+		$this->fixture->limitToEventTypes(array($typeUid1));
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -1829,7 +1829,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_EVENT_TYPES
 		);
 
-		$this->fixture->limitToEventTypes($typeUid2);
+		$this->fixture->limitToEventTypes(array($typeUid2));
 
 		$this->assertTrue(
 			$this->fixture->build()->isEmpty()
@@ -1848,7 +1848,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid);
+		$this->fixture->limitToEventTypes(array($typeUid));
 
 		$this->assertTrue(
 			$this->fixture->build()->isEmpty()
@@ -1874,7 +1874,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid);
+		$this->fixture->limitToEventTypes(array($typeUid));
 
 		$bag = $this->fixture->build();
 		$this->assertEquals(
@@ -1906,7 +1906,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid);
+		$this->fixture->limitToEventTypes(array($typeUid));
 
 		$this->assertEquals(
 			2,
@@ -1938,7 +1938,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid2);
+		$this->fixture->limitToEventTypes(array($typeUid2));
 
 		$this->assertTrue(
 			$this->fixture->build()->isEmpty()
@@ -1968,7 +1968,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->limitToEventTypes($typeUid1 . ','  . $typeUid2);
+		$this->fixture->limitToEventTypes(array($typeUid1, $typeUid2));
 
 		$this->assertEquals(
 			2,
