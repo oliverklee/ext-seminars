@@ -149,26 +149,25 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events at any of the places with the UIDs provided as
 	 * the parameter $placeUids.
 	 *
-	 * @param	string		comma-separated list of UIDs of the placed which
-	 * 						the bag should be limited to, set to an empty string
-	 * 						for no limitation
+	 * @param array place UIDs, set to an empty array for no limitation, need not
+	 *              be SQL-safe
 	 */
-	public function limitToPlaces($placeUids) {
-		if ($placeUids == '') {
+	public function limitToPlaces(array $placeUids = array()) {
+		if (empty($placeUids)) {
 			unset($this->whereClauseParts['places']);
 			return;
 		}
 
-		$this->whereClauseParts['places']
-			= '(object_type IN(' . SEMINARS_RECORD_TYPE_COMPLETE . ',' .
-			SEMINARS_RECORD_TYPE_DATE . ') AND ' .
-			'EXISTS (SELECT * FROM ' .
+		$safePlaceUids = implode(
+			',', $GLOBALS['TYPO3_DB']->cleanIntArray($placeUids)
+		);
+
+		$this->whereClauseParts['places'] = 'EXISTS (SELECT * FROM ' .
 			SEMINARS_TABLE_SITES_MM . ' WHERE ' .
 			SEMINARS_TABLE_SITES_MM . '.uid_local=' .
 			SEMINARS_TABLE_SEMINARS . '.uid AND ' .
-			SEMINARS_TABLE_SITES_MM . '.uid_foreign IN(' . $placeUids .
-			')' .
-			'))';
+			SEMINARS_TABLE_SITES_MM . '.uid_foreign IN(' . $safePlaceUids . ')' .
+		')';
 	}
 
 	/**
@@ -301,7 +300,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 *              need not be SQL-safe
 	 */
 	public function limitToEventTypes(array $eventTypeUids = array()) {
-		if (empty($eventTypes)) {
+		if (empty($eventTypeUids)) {
 			unset($this->whereClauseParts['eventTypes']);
 			return;
 		}
@@ -363,10 +362,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events in the countries given in the first parameter
 	 * $countries.
 	 *
-	 * @param	array		array of ISO 3166-2 (alpha2) country codes,
-	 * 						invalid country codes are allowed,
-	 * 						set to an empty string for no limitation,
-	 * 						may not be SQL-safe
+	 * @param array ISO 3166-2 (alpha2) country codes, invalid country codes are
+	 *              allowed, set to an empty array for no limitation, may not be
+	 *              SQL-safe
 	 */
 	public function limitToCountries(array $countries = array()) {
 		if (empty($countries)) {
@@ -400,10 +398,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events in the languages given in the first parameter
 	 * $languages.
 	 *
-	 * @param	string		array of ISO 639-1 (alpha2) language codes,
-	 * 						invalid language codes are allowed,
-	 * 						set to an empty string for no limitation,
-	 * 						may not be SQL-safe
+	 * @param array ISO 639-1 (alpha2) language codes, invalid language codes
+	 *              are allowed, set to an empty array for no limitation, may
+	 *              not be SQL-safe
 	 */
 	public function limitToLanguages(array $languages = array()) {
 		if (empty($languages)) {

@@ -483,255 +483,109 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	// Tests for limiting the bag to events in certain places
 	///////////////////////////////////////////////////////////
 
-	public function testSkippingLimitToPlacesResultsInAllEvents() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-
+	public function testLimitToPlacesFindsEventsInOnePlace() {
+		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->assertEquals(
-			2,
-			$this->fixture->build()->count()
-		);
-	}
-
-	public function testLimitToEmptyPlaceUidResultsInAllEvents() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->fixture->limitToPlaces('');
-
-		$this->assertEquals(
-			2,
-			$this->fixture->build()->count()
-		);
-	}
-
-	public function testLimitToEmptyPlaceAfterLimitToNotEmptyPlacesUidResultsInAllEvents() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->fixture->limitToPlaces($placeUid);
-		$this->fixture->limitToPlaces('');
-
-		$this->assertEquals(
-			2,
-			$this->fixture->build()->count()
-		);
-	}
-
-	public function testLimitToPlacesCanResultInOneEvent() {
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->fixture->limitToPlaces($placeUid);
-
-		$this->assertEquals(
-			1,
-			$this->fixture->build()->count()
-		);
-	}
-
-	public function testLimitToPlacesCanResultInTwoEvents() {
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-
-		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid1, $placeUid
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid,
+			$siteUid
 		);
+		$this->fixture->limitToPlaces(array($siteUid));
 
-		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid2, $placeUid
-		);
-
-		$this->fixture->limitToPlaces($placeUid);
-
-		$this->assertEquals(
-			2,
-			$this->fixture->build()->count()
-		);
-	}
-
-	public function testLimitToPlacesWillExcludeEventsWithoutPlace() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->fixture->limitToPlaces($placeUid);
-		$bag = $this->fixture->build();
-
-		$this->assertEquals(
-			1,
-			$bag->count()
-		);
 		$this->assertEquals(
 			$eventUid,
-			$bag->current()->getUid()
+			$this->fixture->build()->current()->getUid()
 		);
 	}
 
-	public function testLimitToPlacesWillExcludeEventsOfOtherPlaces() {
-		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid1, $placeUid1
-		);
-
-		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid2, $placeUid2
-		);
-
-		$this->fixture->limitToPlaces($placeUid1);
-		$bag = $this->fixture->build();
-
-		$this->assertEquals(
-			1,
-			$bag->count()
-		);
-		$this->assertEquals(
-			$eventUid1,
-			$bag->current()->getUid()
-		);
-	}
-
-	public function testLimitToPlacesResultsInAnEmptyBagIfThereAreNoMatches() {
+	public function testLimitToPlacesIgnoresEventsWithoutPlace() {
+		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			SEMINARS_TABLE_SEMINARS
 		);
-
-		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid1, $placeUid1
-		);
-
-		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
-		);
-
-		$this->fixture->limitToPlaces($placeUid2);
+		$this->fixture->limitToPlaces(array($siteUid));
 
 		$this->assertTrue(
 			$this->fixture->build()->isEmpty()
 		);
 	}
 
-	public function testLimitToPlacesIgnoresTopicRecords() {
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
-		);
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->fixture->limitToPlaces($placeUid);
-
-		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
-		);
-	}
-
-	public function testLimitToPlacesCanFindEventsFromMultiplePlaces() {
-		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
-		);
+	public function testLimitToPlacesFindsEventsInTwoPlaces() {
+		$siteUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid1, $placeUid1
-		);
-
-		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
+			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid2, $placeUid2
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid1,
+			$siteUid1
 		);
-
-		$this->fixture->limitToPlaces($placeUid1 . ','  . $placeUid2);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM,
+			$eventUid2,
+			$siteUid2
+		);
+		$this->fixture->limitToPlaces(array($siteUid1, $siteUid2));
 
 		$this->assertEquals(
 			2,
+			$this->fixture->build()->count()
+		);
+	}
+
+	public function testLimitToPlacesWithEmptyPlacesArrayFindsAllEvents() {
+		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->fixture->limitToPlaces(array($siteUid));
+		$this->fixture->limitToPlaces();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->count()
+		);
+	}
+
+	public function testLimitToPlacesIgnoresEventsWithDifferentPlace() {
+		$siteUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM, $eventUid, $siteUid1
+		);
+		$this->fixture->limitToPlaces(array($siteUid2));
+
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
+		);
+	}
+
+	public function testLimitToPlacesWithOnePlaceFindsEventInTwoPlaces() {
+		$siteUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('place' => 1)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM, $eventUid, $siteUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SITES_MM, $eventUid, $siteUid2
+		);
+		$this->fixture->limitToPlaces(array($siteUid1));
+
+		$this->assertEquals(
+			1,
 			$this->fixture->build()->count()
 		);
 	}

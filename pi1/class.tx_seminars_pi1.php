@@ -2437,9 +2437,16 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			);
 		}
 
+		// TODO: This needs to be changed as soon as we are using the new
+		// TypoScript configuration class from tx_oelib which offers a
+		// getAsIntegerArray() method.
 		$builder->limitToPlaces(
-			$this->getConfValueString(
-				'limitListViewToPlaces', 's_listView'
+			t3lib_div::trimExplode(
+				',',
+				$this->getConfValueString(
+					'limitListViewToPlaces', 's_listView'
+				),
+				true
 			)
 		);
 
