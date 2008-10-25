@@ -2041,6 +2041,20 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'should be disabled (or vice versa).'
 		);
 	}
+
+	/**
+	 * Checks the setting of the configuration value checkFavoritesPID.
+	 */
+	private function checkFavoritesPid() {
+		$this->checkIfSingleFePageOrEmpty(
+			'favoritesPID',
+			true,
+			'sDEF',
+			'This value specifies the page that contains the favorites list. ' .
+				'If this value is not set correctly, the link to the favorites ' .
+				'list will not work.'
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_configcheck.php']) {

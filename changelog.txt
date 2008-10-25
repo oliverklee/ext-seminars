@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2116] Feature: Add a setting "favorites PID" in the setup and flexforms
 - [#2297] Change: Add a method getOrderByForListView() to tx_seminars_pi1
 - [#2290] Feature: Add a method createRegistrationBagBuilder() to tx_seminars_pi1
 - [#2291] Change: tx_seminars_bagbuilder->setSourcePages() should set the source pages for the main bag table
