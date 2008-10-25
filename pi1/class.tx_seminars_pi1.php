@@ -2339,58 +2339,61 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return	string		the additional query parameters
 	 */
 	protected function getAdditionalQueryParameters() {
-		$result = '';
-		/** Prefixes the column name with the table name so that the query also
-		 * works with multiple tables. */
-		$tablePrefix = SEMINARS_TABLE_SEMINARS.'.';
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
 
-		// Only show full event records(0) and event dates(2), but no event
-		// topics(1).
-		$result .= ' AND '.$tablePrefix.'object_type!=1';
-
-		$seminarBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminarbag'
-		);
-		$temporarySeminarBag = new $seminarBagClassname('uid=0');
+		$builder->limitToDateAndSingleRecords();
 
 		// Adds the query parameter that result from the user selection in the
 		// selector widget (including the search form).
 		if (is_array($this->piVars['language'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForLanguage(
-				$this->piVars['language']
+			$builder->limitToLanguages(
+				$this->removeDummyOptionFromFormData($this->piVars['language'])
 			);
 		}
+
+		// TODO: This needs to be changed when bug 2304 gets fixed.
+		// @see https://bugs.oliverklee.com/show_bug.cgi?id=2304
 		if (is_array($this->piVars['place'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForPlace(
-				$this->piVars['place']
+			$builder->limitToPlaces(
+				$this->removeDummyOptionFromFormData(
+					$this->piVars['place']
+				)
+			);
+		} else {
+			// TODO: This needs to be changed as soon as we are using the new
+			// TypoScript configuration class from tx_oelib which offers a
+			// getAsIntegerArray() method.
+			$builder->limitToPlaces(
+				t3lib_div::trimExplode(
+					',',
+					$this->getConfValueString(
+						'limitListViewToPlaces', 's_listView'
+					),
+					true
+				)
 			);
 		}
+
 		if (is_array($this->piVars['city'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForCity(
-				$this->piVars['city']
+			$builder->limitToCities(
+				$this->removeDummyOptionFromFormData($this->piVars['city'])
 			);
 		}
 		if (is_array($this->piVars['country'])) {
-			$result .= $temporarySeminarBag->getAdditionalQueryForCountry(
-				$this->piVars['country']
+			$builder->limitToCountries(
+				$this->removeDummyOptionFromFormData($this->piVars['country'])
 			);
 		}
 		if (isset($this->piVars['sword'])
 			&& !empty($this->piVars['sword'])
 		) {
-			$result .= $this->searchWhere($this->piVars['sword']);
+			$builder->limitToFullTextSearch($this->piVars['sword']);
 		}
 
-		// Unsets the temporary seminar bag we used above.
-		$temporarySeminarBag->__destruct();
-		unset($temporarySeminarBag);
-
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
 		try {
 			$builder->setTimeFrame(
 				$this->getConfValueString(
-					'timeframeInList',
-					's_template_special'
+					'timeframeInList', 's_template_special'
 				)
 			);
 		} catch (Exception $exception) {
@@ -2436,19 +2439,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				)
 			);
 		}
-
-		// TODO: This needs to be changed as soon as we are using the new
-		// TypoScript configuration class from tx_oelib which offers a
-		// getAsIntegerArray() method.
-		$builder->limitToPlaces(
-			t3lib_div::trimExplode(
-				',',
-				$this->getConfValueString(
-					'limitListViewToPlaces', 's_listView'
-				),
-				true
-			)
-		);
 
 		$result .= ' AND ' . $builder->getWhereClause();
 
