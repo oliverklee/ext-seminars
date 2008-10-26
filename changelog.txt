@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2305] Feature: Create a frontEndView class for the seminar manager
 - [#2208] Change: Use the seminar and registration bag builder in pi1
 - [#2303] Change: Use the seminarbagbuilder in tx_seminars_pi1->getAdditionalQueryParameters()
 - [#2300] Change: Change the parameter of tx_seminars_seminarbagbuilder::limitToPlaces() to an array
