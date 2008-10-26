@@ -482,63 +482,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return $this->hasTopicInteger('credit_points');
 	}
 
- 	/**
-	 * Creates part of a WHERE clause to select events that start later the same
-	 * day the current event ends or the day after.
-	 * The return value of this function always starts with " AND" (except for
-	 * when this event has no end date).
-	 *
-	 * @return	string		part of a WHERE clause that can be appended to the current WHERE clause (or an empty string if this event has no end date)
-	 *
-	 * @access	public
-	 */
-	function getAdditionalQueryForNextDay() {
-		$result = '';
-
-		if ($this->hasEndDate()) {
-			$endDate = $this->getEndDateAsTimestamp();
-			$midnightBeforeEndDate = $endDate - ($endDate % ONE_DAY);
-			$secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * ONE_DAY;
-
-			$result = ' AND begin_date>='.$endDate.
-				' AND begin_date<'.$secondMidnightAfterEndDate;
-		}
-
-		return $result;
-	}
-
- 	/**
-	 * Creates part of a WHERE clause to select other dates for the current
-	 * topic. The return value of this function always starts with " AND". When
-	 * it is used, the DB query will select records of the same topic that
-	 * are not identical (ie. not with the same UID) with the current event.
-	 *
-	 * @return	string		part of a WHERE clause that can be appended to the
-	 * 						current WHERE clause
-	 */
-	public function getAdditionalQueryForOtherDates() {
-		$result = ' AND (';
-
-		if ($this->getRecordPropertyInteger('object_type') == SEMINARS_RECORD_TYPE_DATE) {
-			$result .= '(topic=' . $this->getRecordPropertyInteger('topic') .
-				' AND ' .
-				'uid!=' . $this->getUid() .
-				' AND ' .
-				'object_type=' . SEMINARS_RECORD_TYPE_DATE .
-				')' .
-				' OR ' .
-				'(uid=' . $this->getRecordPropertyInteger('topic') .
-				' AND object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ')';
-		} else {
-			$result .= 'topic=' . $this->getUid() .
-				' AND object_type=' . SEMINARS_RECORD_TYPE_DATE;
-		}
-
-		$result .= ')';
-
-		return $result;
-	}
-
 	/**
 	 * Gets our place (or places), complete as RTE'ed HTML with address and
 	 * links. Returns a localized string "will be announced" if the seminar has

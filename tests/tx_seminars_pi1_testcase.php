@@ -306,29 +306,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 
 	/////////////////////////////////////////
-	// Test concerning the search function.
+	// Test concerning the selector widget.
 	/////////////////////////////////////////
-
-	public function testSearchWhereCreatesAnEmptyStringForEmptySearchWords() {
-		$this->assertEquals(
-			'', $this->fixture->searchWhere('')
-		);
-	}
-
-	public function testSearchWhereCreatesSomethingForNonEmptySearchWords() {
-		$this->assertNotEquals(
-			'', $this->fixture->searchWhere('foo')
-		);
-		$this->assertContains(
-			'foo', $this->fixture->searchWhere('foo')
-		);
-	}
-
-	public function testSearchWhereCreatesAndOnlyAtTheStartForOneSearchWord() {
-		$this->assertTrue(
-			strpos($this->fixture->searchWhere('foo'), ' AND ') === 0
-		);
-	}
 
 	public function testAddEmptyOptionIfNeededDisabled() {
 		$allLanguages = array(
