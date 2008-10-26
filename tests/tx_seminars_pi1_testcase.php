@@ -2004,6 +2004,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
+				'end_date' => ONE_WEEK,
 				// the number of categories
 				'categories' => 1
 			)
@@ -2016,6 +2017,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES_MM,
 			$eventUid, $categoryUid
 		);
+		$this->fixture->createSeminar($eventUid);
 
 		$this->assertNotContains(
 			'tx_seminars_pi1[category]='.$categoryUid,

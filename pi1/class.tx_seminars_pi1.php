@@ -820,14 +820,22 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$result = $this->getSubpart('SINGLE_VIEW');
 
-			// Caches the additional query parameters and the other dates list
-			// because the list view will overwrite $this->seminar.
-			$nextDayQueryParameters = $this->seminar->getAdditionalQueryForNextDay();
-			$otherDatesPart = $this->createOtherDatesList();
-			if (!empty($nextDayQueryParameters)) {
-				$result .= $this->createEventsOnNextDayList($nextDayQueryParameters);
+			// Caches $this->seminar because the list view will overwrite
+			// $this->seminar.
+			// TODO: This needs to be removed as soon as the list view is moved
+			// to it's own class.
+			// @see https://bugs.oliverklee.com/show_bug.cgi?id=290
+			$seminar = clone $this->seminar;
+			if ($this->seminar->hasEndDate()) {
+				$result .= $this->createEventsOnNextDayList();
 			}
-			$result .= $otherDatesPart;
+			$this->seminar->__destruct();
+			unset($this->seminar);
+			$this->seminar = $seminar;
+			unset($seminar);
+			if ($this->seminar->isEventTopic() || $this->seminar->isEventDate()) {
+				$result .= $this->createOtherDatesList();
+			}
 		} else {
 			$this->setMarker(
 				'error_text',
@@ -1384,22 +1392,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * In case the current record is a topic record, this function will return
 	 * an empty string.
 	 *
-	 * Note: This function does *not* rely on $this->seminar, but overwrites
+	 * Note: This function relies on $this->seminar, but also overwrites
 	 * $this->seminar.
 	 *
-	 * @param	string		query parameters that will be appended to the WHERE clause, selecting the correct records
-	 *
 	 * @return	string		HTML for the events list (may be an empty string)
-	 *
-	 * @access	protected
 	 */
-	function createEventsOnNextDayList($additionalQueryParameters) {
+	private function createEventsOnNextDayList() {
 		$result = '';
 
-		$seminarBag = $this->initListView(
-			'events_next_day',
-			$additionalQueryParameters
-		);
+		$seminarBag = $this->initListView('events_next_day');
 
 		if ($this->internal['res_count']) {
 			$tableEventsNextDay = $this->createListTable(
@@ -1431,10 +1432,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * $this->seminar.
 	 *
 	 * @return	string		HTML for the events list (may be an empty string)
-	 *
-	 * @access	protected
 	 */
-	function createOtherDatesList() {
+	private function createOtherDatesList() {
 		$result = '';
 
 		$seminarBag = $this->initListView('other_dates');
@@ -1595,13 +1594,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @param	string		a string selecting the flavor of list view: either
 	 * 						an empty string (for the default list view), the
 	 * 						value from "what_to_display" or "other_dates"
-	 * @param	string		additional query parameters that will be appended
-	 * 						to the WHERE clause
 	 *
 	 * @return	object		a seminar bag or a registration bag containing the
 	 * 						seminars or registrations for the list view
 	 */
-	protected function initListView($whatToDisplay = '', $additionalQueryParameters = '') {
+	protected function initListView($whatToDisplay = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
 			$this->conf['pidList'] = $this->getConfValueString('pages');
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
@@ -1643,33 +1640,25 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			2
 		);
 
-		$pidList = $this->pi_getPidList(
-			$this->getConfValueString('pidList'),
-			$this->getConfValueInteger('recursive')
-		);
-		$queryWhere = ($pidList != '')
-			? SEMINARS_TABLE_SEMINARS.'.pid IN ('.$pidList.')' : '1=1';
+		if ($whatToDisplay == 'my_events') {
+			$builder = $this->createRegistrationBagBuilder();
+		} else {
+			$builder = $this->createSeminarBagBuilder();
+		}
 
 		// Time-frames and hiding canceled events doesn't make sense for the
 		// topic list.
-		if ($whatToDisplay != 'topic_list') {
-			$queryWhere .= $this->getAdditionalQueryParameters();
+		if (($whatToDisplay != 'topic_list') && ($whatToDisplay != 'my_events')) {
+			$this->limitForAdditionalParameters($builder);
 		}
-
-		$additionalTables = '';
 
 		switch ($whatToDisplay) {
 			case 'topic_list':
-				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.object_type='
-					.SEMINARS_RECORD_TYPE_TOPIC;
+				$builder->limitToTopicRecords();
 				$this->hideColumnsForTheTopicListView();
 				break;
 			case 'my_events':
-				$additionalTables = SEMINARS_TABLE_SEMINARS;
-				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
-					.SEMINARS_TABLE_ATTENDANCES.'.seminar AND '
-					.SEMINARS_TABLE_ATTENDANCES.'.user='
-					.$this->registrationManager->getFeUserUid();
+				$builder->limitToAttendee($this->getFeUserUid());
 				break;
 			case 'my_vip_events':
 				$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
@@ -1683,60 +1672,37 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					// The current user is not listed as a default VIP for all
 					// events. Change the query to show only events where the
 					// current user is manually added as a VIP.
-					$additionalTables = SEMINARS_TABLE_VIPS_MM;
-					$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
-						.SEMINARS_TABLE_VIPS_MM.'.uid_local AND '.SEMINARS_TABLE_VIPS_MM
-						.'.uid_foreign='.$this->registrationManager->getFeUserUid();
+					$builder->limitToEventManager($this->getFeUserUid());
 				}
 				break;
 			case 'my_entered_events':
-				$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.owner_feuser='
-					.$this->getFeUserUid();
+				$builder->limitToOwner($this->getFeUserUid());
 				break;
 			case 'events_next_day':
-				// Here, we rely on the $additonalQueryParameters parameter
-				// because $this->seminar is gone already.
+				$builder->limitToEventsNextDay($this->seminar);
 				break;
 			case 'other_dates':
-				$queryWhere .= $this->seminar->getAdditionalQueryForOtherDates();
+				$builder->limitToOtherDatesForTopic($this->seminar);
 				break;
 			default:
 				break;
 		}
 
-		$queryWhere .= $additionalQueryParameters;
-
-		$limit = '';
 		$pointer = intval($this->piVars['pointer']);
 		$resultsAtATime = t3lib_div::intInRange(
 			$this->internal['results_at_a_time'], 1, 1000
 		);
-		$limit = ($pointer * $resultsAtATime).','.$resultsAtATime;
 
-		if ($whatToDisplay == 'my_events') {
-			$className = 'tx_seminars_registrationbag';
-		} else {
-			$className = 'tx_seminars_seminarbag';
-		}
+		$builder->setLimit(($pointer * $resultsAtATime) . ',' . $resultsAtATime);
 
-		$registrationOrSeminarBagClassname = t3lib_div::makeInstanceClassName(
-			$className
-		);
-		$registrationOrSeminarBag = new $registrationOrSeminarBagClassname(
-			$queryWhere,
-			$additionalTables,
-			'',
-			$this->getOrderByForListView(),
-			$limit
-		);
+		$seminarOrRegistrationBag = $builder->build();
 
-		$this->internal['res_count'] =
-			$registrationOrSeminarBag->countWithoutLimit();
+		$this->internal['res_count'] = $seminarOrRegistrationBag->countWithoutLimit();
 
 		$this->previousDate = '';
 		$this->previousCategory = '';
 
-		return $registrationOrSeminarBag;
+		return $seminarOrRegistrationBag;
 	}
 
 	/**
@@ -2329,18 +2295,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Returns the additional query parameters needed to build the list view.
-	 * This function checks
-	 * - the time-frame to display
-	 * - whether to show canceled events
-	 * The result always starts with " AND" so that it can be directly appended
-	 * to a WHERE clause.
+	 * Limits the given seminarbagbuilder for additional parameters needed to
+	 * build the list view.
 	 *
-	 * @return	string		the additional query parameters
+	 * @param tx_seminars_seminarbagbuilder the seminarbagbuilder to limit for
+	 *                                      additional parameters
 	 */
-	protected function getAdditionalQueryParameters() {
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
-
+	protected function limitForAdditionalParameters(tx_seminars_seminarbagbuilder $builder) {
 		$builder->limitToDateAndSingleRecords();
 
 		// Adds the query parameter that result from the user selection in the
@@ -2439,10 +2400,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				)
 			);
 		}
-
-		$result .= ' AND ' . $builder->getWhereClause();
-
-		return $result;
 	}
 
 	/**
