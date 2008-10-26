@@ -22,9 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
-
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndView.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 
 /**
@@ -38,21 +37,11 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_frontEndCountdown extends tx_oelib_templatehelper {
-	/**
-	 * @var string same as plugin class name
-	 */
-	public $prefixId = 'tx_seminars_pi1';
-
+class tx_seminars_frontEndCountdown extends tx_seminars_frontEndView {
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndCountdown.php';
-
-	/**
-	 * @var	string		the extension key
-	 */
-	public $extKey = 'seminars';
 
 	/**
 	 * @var tx_seminars_seminar the seminar for which we want to show the
@@ -64,24 +53,6 @@ class tx_seminars_frontEndCountdown extends tx_oelib_templatehelper {
 	 * @var boolean true if the current object is in test mode, false otherwise
 	 */
 	private $testMode = false;
-
-	/**
-	 * The constructor. Initializes the TypoScript configuration, initializes
-	 * the flex forms, gets the template HTML code, sets the localized labels
-	 * and set the CSS classes from TypoScript.
-	 *
-	 * @param array TypoScript configuration for the plugin
-	 * @param tslib_cObj the parent cObj, needed for the flexforms
-	 */
-	public function __construct($configuration, tslib_cObj $cObj) {
-		$this->cObj = $cObj;
-		$this->init($configuration);
-		$this->pi_initPIflexForm();
-
-		$this->getTemplateCode();
-		$this->setLabels();
-		$this->setCSS();
-	}
 
 	/**
 	 * The destructor.

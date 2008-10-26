@@ -23,53 +23,24 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndView.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_categorybagbuilder.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 /**
  * Class 'frontEndCategoryList' for the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_frontEndCategoryList extends tx_oelib_templatehelper {
+class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 	/**
-	 * @var	string		same as class name
-	 */
-	public $prefixId = 'tx_seminars_pi1';
-
-	/**
-	 * @var	string		path to this script relative to the extension dir
+	 * @var string path to this script relative to the extension dir
 	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndCategoryList.php';
-
-	/**
-	 * @var	string		the extension key
-	 */
-	public $extKey = 'seminars';
-
-	/**
-	 * The constructor. Initializes the TypoScript configuration, initializes
-	 * the flex forms, gets the template HTML code, sets the localized labels
-	 * and set the CSS classes from TypoScript.
-	 *
-	 * @param	array		TypoScript configuration for the plugin
-	 * @param	tslib_cObj	the parent cObj content, needed for the flexforms
-	 */
-	public function __construct($conf, tslib_cObj $cObj) {
-		$this->cObj = $cObj;
-		$this->init($conf);
-		$this->pi_initPIflexForm();
-
-		$this->getTemplateCode();
-		$this->setLabels();
-		$this->setCSS();
-	}
 
 	/**
 	 * Creates a HTML list of categories.
@@ -78,8 +49,8 @@ class tx_seminars_frontEndCategoryList extends tx_oelib_templatehelper {
 	 * selected time-frame and in the selected sysfolders. Categories for which
 	 * all events are canceled will always be ignored.
 	 *
-	 * @return	string		HTML code of the category list or a formatted
-	 * 						message if there are no categories to display
+	 * @return string HTML code of the category list or a formatted message if
+	 *                there are no categories to display
 	 */
 	public function render() {
 		$seminarBagBuilder = t3lib_div::makeInstance(
@@ -148,12 +119,12 @@ class tx_seminars_frontEndCategoryList extends tx_oelib_templatehelper {
 	 * Creates a hyperlink with the title $title to the current list view,
 	 * limited to the category provided by the parameter $categoryUid.
 	 *
-	 * @param	integer		UID of the category to which the list view should
-	 * 						be limited, must be > 0
-	 * @param	string		title of the link, must not be empty
+	 * @param integer UID of the category to which the list view should be
+	 *                limited, must be > 0
+	 * @param string title of the link, must not be empty
 	 *
-	 * @return	string		link to the list view limited to the given
-	 * 						category or an empty string if there is an error
+	 * @return string link to the list view limited to the given category or an
+	 *                empty string if there is an error
 	 */
 	public function createLinkToListViewLimitedByCategory(
 		$categoryUid, $title
