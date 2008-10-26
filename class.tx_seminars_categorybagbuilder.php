@@ -22,33 +22,33 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_categorybag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_categorybag.php');
 
 /**
  * Class 'tx_seminars_categorybagbuilder' for the 'seminars' extension.
  *
  * This builder class creates customized categorybag objects.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	/**
-	 * @var	string		class name of the bag class that will be built
+	 * @var string class name of the bag class that will be built
 	 */
 	protected $bagClassName = 'tx_seminars_categorybag';
 
 	/**
-	 * @var	string		the table name of the bag to build
+	 * @var string the table name of the bag to build
 	 */
 	protected $tableName = SEMINARS_TABLE_CATEGORIES;
 
 	/**
-	 * @var string		the sorting field
+	 * @var string the sorting field
 	 */
 	protected $orderBy = 'title';
 
@@ -60,9 +60,9 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	 * So the bag will be limited to categories 9 and 12 (plus any additional
 	 * limits).
 	 *
-	 * @param	string		comma-separated list of UID of the events to which
-	 * 						the category selection should be limited, may be
-	 * 						empty, all UIDs	must be > 0
+	 * @param string comma-separated list of UID of the events to which
+	 *               the category selection should be limited, may be
+	 *               empty, all UIDs must be > 0
 	 */
 	public function limitToEvents($eventUids) {
 		if ($eventUids == '') {

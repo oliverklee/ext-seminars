@@ -22,25 +22,24 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * BE CSV export module for the 'seminars' extension.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- */
-
 unset($MCONF);
 require_once('conf.php');
-require_once($BACK_PATH.'init.php');
-require_once(PATH_t3lib.'class.t3lib_scbase.php');
+require_once($BACK_PATH . 'init.php');
+require_once(PATH_t3lib . 'class.t3lib_scbase.php');
 
-require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 // This checks permissions and exits if the users has no access to this page.
 $BE_USER->modAccess($MCONF, 1);
 
+/**
+ * BE CSV export module for the 'seminars' extension.
+ *
+ * @package TYPO3
+ * @subpackage tx_seminars
+ *
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ */
 class tx_seminars_csv extends t3lib_SCbase {
 	/**
 	 * Creates the CSV export content and outputs it directly on the page (in

@@ -30,25 +30,25 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.p
  *
  * This builder class creates customized seminarbag objects.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	/**
-	 * @var	string		class name of the bag class that will be built
+	 * @var string class name of the bag class that will be built
 	 */
 	protected $bagClassName = 'tx_seminars_seminarbag';
 
 	/**
-	 * @var	string		the table name of the bag to build
+	 * @var string the table name of the bag to build
 	 */
 	protected $tableName = SEMINARS_TABLE_SEMINARS;
 
 	/**
-	 * @var	array		list of the valid keys for time-frames
+	 * @var array list of the valid keys for time-frames
 	 */
 	private static $validTimeFrames = array(
 		'past', 'pastAndCurrent', 'current', 'currentAndUpcoming', 'upcoming',
@@ -56,8 +56,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	);
 
 	/**
-	 * @var	array		This is a list of field names in which we can search,
-	 * 					grouped by record type.
+	 * @var array a list of field names in which we can search, grouped by
+	 *            record type
 	 *
 	 * 'seminars' is the list of fields that are always stored in the seminar
 	 * record.
@@ -79,12 +79,12 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	);
 
 	/**
-	 * @var	string		the character list to trim the search words for
+	 * @var string the character list to trim the search words for
 	 */
 	const TRIM_CHARACTER_LIST = " ,\t\n\r\0\x0b";
 
 	/**
-	 * @var	integer		the minimum search word length
+	 * @var integer the minimum search word length
 	 */
 	const MINIMUM_SEARCH_WORD_LENGTH = 2;
 
@@ -113,9 +113,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events from any of the categories with the UIDs
 	 * provided as the parameter $categoryUids.
 	 *
-	 * @param	string		comma-separated list of UIDs of the categories which
-	 * 						the bag should be limited to, set to an empty string
-	 * 						for no limitation
+	 * @param string comma-separated list of UIDs of the categories which
+	 *               the bag should be limited to, set to an empty string
+	 *               for no limitation
 	 */
 	public function limitToCategories($categoryUids) {
 		if ($categoryUids == '') {
@@ -187,10 +187,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * Sets the time-frame for the events that will be found by this bag.
 	 *
-	 * @param	string		key for the selected time-frame, must not be empty,
-	 * 						must be one of the following:
-	 *						past, pastAndCurrent, current, currentAndUpcoming,
-	 *						upcoming, deadlineNotOver, all
+	 * @param string key for the selected time-frame, must not be empty,
+	 *               must be one of the following:
+	 *               past, pastAndCurrent, current, currentAndUpcoming,
+	 *               upcoming, deadlineNotOver, all
 	 */
 	public function setTimeFrame($timeFrameKey) {
 		if (!in_array($timeFrameKey, self::$validTimeFrames)) {
@@ -212,7 +212,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				// 3. If the event has *no* end date, does the *begin* date lie
 				//    in the past?
 				$where = SEMINARS_TABLE_SEMINARS.'.begin_date != 0 '
-					.'AND (	('.SEMINARS_TABLE_SEMINARS.'.end_date != 0 '
+					.'AND ( ('.SEMINARS_TABLE_SEMINARS.'.end_date != 0 '
 							.'AND '.SEMINARS_TABLE_SEMINARS.'.end_date <= '.$now
 						.') OR ('
 							.SEMINARS_TABLE_SEMINARS.'.end_date = 0 '
@@ -327,8 +327,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events in the cities given in the first parameter
 	 * $cities.
 	 *
-	 * @param	array		array of city names, set to an empty array for no
-	 * 						limitation, may not be SQL-safe
+	 * @param array array of city names, set to an empty array for no
+	 *              limitation, may not be SQL-safe
 	 */
 	public function limitToCities(array $cities = array()) {
 		if (empty($cities)) {
@@ -439,9 +439,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events where the FE user given in the parameter
 	 * $feUserUid is the owner.
 	 *
-	 * @param	integer		the FE user UID of the owner to limit for,
-	 * 						set to 0 to remove the limitation,
-	 * 						must be >= 0
+	 * @param integer the FE user UID of the owner to limit for, set to 0 to
+	 *                remove the limitation, must be >= 0
 	 */
 	public function limitToOwner($feUserUid) {
 		if ($feUserUid < 0) {
@@ -478,9 +477,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events with the FE user UID given in the parameter
 	 * $feUserUid as event manager.
 	 *
-	 * @param	integer		the FE user UID of the event manager to limit for,
-	 * 						set to 0 to remove the limitation,
-	 * 						must be >= 0
+	 * @param integer the FE user UID of the event manager to limit for, set to
+	 *                0 to remove the limitation, must be >= 0
 	 */
 	public function limitToEventManager($feUserUid) {
 		if ($feUserUid < 0) {
@@ -503,8 +501,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events on the day after the end date of the event given
 	 * event in the first parameter $event.
 	 *
-	 * @param	tx_seminars_seminar		the event object with the end date to
-	 * 									limit for, must have an end date
+	 * @param tx_seminars_seminar the event object with the end date to
+	 *                            limit for, must have an end date
 	 */
 	public function limitToEventsNextDay(tx_seminars_seminar $event) {
 		if (!$event->hasEndDate()) {
@@ -533,8 +531,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to date event records of the same topic as the event
 	 * given in the first parameter $event.
 	 *
-	 * @param	tx_seminars_seminar		the date or topic object to find other
-	 * 									dates of the same topic for
+	 * @param tx_seminars_seminar the date or topic object to find other
+	 *                            dates of the same topic for
 	 */
 	public function limitToOtherDatesForTopic(tx_seminars_seminar $event) {
 		if (!$event->isEventDate() && !$event->isEventTopic()) {
@@ -567,8 +565,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * AND (bodytext LIKE "%management%" OR header LIKE "%management%")
 	 * AND (bodytext LIKE "%system%" OR header LIKE "%system%")'.
 	 *
-	 * @param	string		the search words, separated by spaces or commas,
-	 * 						may be empty, need not be SQL-safe
+	 * @param string the search words, separated by spaces or commas,
+	 *               may be empty, need not be SQL-safe
 	 */
 	public function limitToFullTextSearch($searchWords) {
 		$searchWords = trim($searchWords, self::TRIM_CHARACTER_LIST);
@@ -635,10 +633,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Generates and returns the WHERE clause parts for the search in categories
 	 * based on the search word given in the first parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
 	 *
-	 * @return	array		the WHERE clause parts for the search in categories
+	 * @return array the WHERE clause parts for the search in categories
 	 */
 	private function getSearchWherePartForCategories($searchWord) {
 		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
@@ -653,11 +651,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Generates and returns the WHERE clause parts for the search in target
 	 * groups based on the search word given in the first parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
 	 *
-	 * @return	array		the WHERE clause parts for the search in target
-	 * 						groups
+	 * @return array the WHERE clause parts for the search in target groups
 	 */
 	private function getSearchWherePartForTargetGroups($searchWord) {
 		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
@@ -672,10 +669,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Generates and returns the WHERE clause parts for the search in organizers
 	 * based on the search word given in the first parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
 	 *
-	 * @return	array		the WHERE clause parts for the search in organizers
+	 * @return array the WHERE clause parts for the search in organizers
 	 */
 	private function getSearchWherePartForOrganizers($searchWord) {
 		$result = array();
@@ -697,10 +694,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Generates and returns the WHERE clause parts for the search in event
 	 * types based on the search word given in the first parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
 	 *
-	 * @return	array		the WHERE clause parts for the search in event types
+	 * @return array the WHERE clause parts for the search in event types
 	 */
 	private function getSearchWherePartForEventTypes($searchWord) {
 		$result = array();
@@ -728,9 +725,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Generates and returns the WHERE clause parts for the search in places
 	 * based on the search word given in the first parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty
+	 * @param string the current search word, must not be empty
 	 *
-	 * @return	array		the WHERE clause parts for the search in places
+	 * @return array the WHERE clause parts for the search in places
 	 */
 	private function getSearchWherePartForPlaces($searchWord) {
 		return $this->getSearchWherePartForMmRelation(
@@ -745,9 +742,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Generates and returns the WHERE clause parts for the search in event
 	 * topics based on the search word given in the first parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty
+	 * @param string the current search word, must not be empty
 	 *
-	 * @return	array		the WHERE clause parts for the search in event topics
+	 * @return array the WHERE clause parts for the search in event topics
 	 */
 	private function getSearchWherePartForEventTopics($searchWord) {
 		$result = array();
@@ -773,11 +770,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * from the event record type based on the search word given in the first
 	 * parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
 	 *
-	 * @return	array		the WHERE clause parts for the search independent
-	 * 						from the event record type
+	 * @return array the WHERE clause parts for the search independent
+	 *               from the event record type
 	 */
 	private function getSearchWherePartIndependentFromEventRecordType(
 		$searchWord
@@ -796,10 +793,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Generates and returns the WHERE clause parts for the search in speakers
 	 * based on the search word given in the first parameter $searchWord.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
 	 *
-	 * @return	array		the WHERE clause parts for the search in speakers
+	 * @return array the WHERE clause parts for the search in speakers
 	 */
 	private function getSearchWherePartForSpeakers($searchWord) {
 		$mmTables = array(
@@ -833,14 +830,14 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Searches for $searchWord in $field in $foreignTable using the m:n table
 	 * $mmTable.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
-	 * @param	string		the key of the search field list, must not be empty,
-	 * 						must be an valid key of $this->searchFieldList
-	 * @param	string		the foreign table to search in, must not be empty
-	 * @param	string		the m:n relation table, must not be empty
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
+	 * @param string the key of the search field list, must not be empty,
+	 *               must be an valid key of $this->searchFieldList
+	 * @param string the foreign table to search in, must not be empty
+	 * @param string the m:n relation table, must not be empty
 	 *
-	 * @return	array		the WHERE clause parts for the search in categories
+	 * @return array the WHERE clause parts for the search in categories
 	 */
 	private function getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
 		$searchWord, $searchFieldKey, $foreignTable, $mmTable
@@ -882,14 +879,14 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Searches for $searchWord in $field in $foreignTable using the m:n table
 	 * $mmTable.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						must be SQL-safe and quoted for LIKE
-	 * @param	string		the key of the search field list, must not be empty,
-	 * 						must be an valid key of $this->searchFieldList
-	 * @param	string		the foreign table to search in, must not be empty
-	 * @param	string		the m:n relation table, must not be empty
+	 * @param string the current search word, must not be empty,
+	 *               must be SQL-safe and quoted for LIKE
+	 * @param string the key of the search field list, must not be empty,
+	 *               must be an valid key of $this->searchFieldList
+	 * @param string the foreign table to search in, must not be empty
+	 * @param string the m:n relation table, must not be empty
 	 *
-	 * @return	array		the WHERE clause parts for the search in categories
+	 * @return array the WHERE clause parts for the search in categories
 	 */
 	private function getSearchWherePartForMmRelation(
 		$searchWord, $searchFieldKey, $foreignTable, $mmTable
@@ -918,10 +915,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * SQL-escapes and trims a potential search word.
 	 *
-	 * @param	string		single search word (may be prefixed or postfixed
-	 * 						with spaces), may be empty
+	 * @param string single search word (may be prefixed or postfixed
+	 *               with spaces), may be empty
 	 *
-	 * @return	string		the trimmed and SQL-escaped $searchword
+	 * @return string the trimmed and SQL-escaped $searchword
 	 */
 	private function prepareSearchWord($searchWord) {
 		return $GLOBALS['TYPO3_DB']->escapeStrForLike(
@@ -937,12 +934,12 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Checks the parameters for the m:n search functions and throws exceptions
 	 * if at least one of the parameters is empty.
 	 *
-	 * @param	string		the current search word, must not be empty,
-	 * 						may be quoted for LIKE
-	 * @param	string		the key of the search field list, must not be empty,
-	 * 						must be an valid key of self::$searchFieldList
-	 * @param	string		the foreign table to search in, must not be empty
-	 * @param	string		the m:n relation table, must not be empty
+	 * @param string the current search word, must not be empty,
+	 *               may be quoted for LIKE
+	 * @param string the key of the search field list, must not be empty,
+	 *               must be an valid key of self::$searchFieldList
+	 * @param string the foreign table to search in, must not be empty
+	 * @param string the m:n relation table, must not be empty
 	 */
 	private function checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable) {
 		if (trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') == '') {

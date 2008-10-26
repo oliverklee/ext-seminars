@@ -51,7 +51,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 	private $seminarUid;
 
 	public function setUp() {
-		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->seminarUid = $this->testingFramework->createRecord(

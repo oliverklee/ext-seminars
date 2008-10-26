@@ -31,10 +31,10 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the eventEditorChild class in the 'seminars' extensions.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -49,7 +49,7 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	private $pi1;
 
 	/**
-	 * @var	integer		the UID of a seminar to which the fixture relates
+	 * @var integer the UID of a seminar to which the fixture relates
 	 */
 	private $seminarUid;
 

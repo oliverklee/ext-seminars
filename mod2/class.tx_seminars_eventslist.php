@@ -32,19 +32,19 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php'
 /**
  * Class 'events list' for the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_eventslist extends tx_seminars_backendlist {
 	/**
-	 * @var	string		the table we're working on
+	 * @var string the table we're working on
 	 */
 	protected $tableName = SEMINARS_TABLE_SEMINARS;
 
 	/**
-	 * @var	tx_seminars_seminar		the seminar which we want to list/show
+	 * @var tx_seminars_seminar the seminar which we want to list/show
 	 */
 	private $seminar = null;
 
@@ -63,7 +63,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 	/**
 	 * Generates and prints out an event list.
 	 *
-	 * @return	string		the HTML source code of the event list
+	 * @return string the HTML source code of the event list
 	 */
 	public function show() {
 		global $LANG, $BE_USER;
@@ -357,7 +357,8 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 	 *
 	 * $this->seminar must be initialized when this function is called.
 	 *
-	 * @return	string		the HTML for the linked image (followed by a non-breaking space) or an empty string
+	 * @return string the HTML for the linked image (followed by a non-breaking
+	 *                space) or an empty string
 	 */
 	public function getRegistrationsCsvIcon() {
 		global $BACK_PATH, $LANG;
@@ -396,11 +397,11 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 	 * Generates a linked hide or unhide icon depending on the record's hidden
 	 * status.
 	 *
-	 * @param	integer		the UID of the record, must be > 0
-	 * @param	boolean		indicates if the record is hidden (true) or is
-	 *						visible (false)
+	 * @param integer the UID of the record, must be > 0
+	 * @param boolean indicates whether the record is hidden (true) or is
+	 *                visible (false)
 	 *
-	 * @return	string		the HTML source code of the linked hide or unhide icon
+	 * @return string the HTML source code of the linked hide or unhide icon
 	 */
 	protected function getHideUnhideIcon($uid, $hidden) {
 		global $BACK_PATH, $LANG, $BE_USER;
@@ -443,20 +444,20 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 	/**
 	 * Generates linked up and/or down icons depending on the manual sorting.
 	 *
-	 * @param	boolean		if true the linked up and/or down icons get generated
-	 * 						else they won't get generated
-	 * @param	array		An array which contains elements that have the record's
-	 * 						UIDs as keys and an array with the two elements "previous"
-	 * 						and "next" as values. The two elements' values are the
-	 * 						negative UIDs of the records they should be moved after
-	 * 						when the up (previous) or down (next) button is clicked.
-	 * 						Except the second record's "previous" entry will be the
-	 * 						PID of the current page so the record will be moved to
-	 * 						the top of the current page when the up button is clicked.
-	 * @param	integer		the UID of the current record, must be > 0
+	 * @param boolean if true the linked up and/or down icons get generated
+	 *                else they won't get generated
+	 * @param array An array which contains elements that have the record's
+	 *              UIDs as keys and an array with the two elements "previous"
+	 *              and "next" as values. The two elements' values are the
+	 *              negative UIDs of the records they should be moved after
+	 *              when the up (previous) or down (next) button is clicked.
+	 *              Except the second record's "previous" entry will be the
+	 *              PID of the current page so the record will be moved to
+	 *              the top of the current page when the up button is clicked.
+	 * @param integer the UID of the current record, must be > 0
 	 *
-	 * @return	string		the HTML source code of the linked up and/or down
-	 * 						icons (or an empty string if manual sorting is deactivated)
+	 * @return string the HTML source code of the linked up and/or down icons
+	 *                (or an empty string if manual sorting is deactivated)
 	 */
 	protected function getUpDownIcons($useManualSorting, array &$sortList, $uid) {
 		$result = '';
@@ -482,14 +483,14 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 	/**
 	 * Generates a single linked up or down icon depending on the type parameter.
 	 *
-	 * @param	string		the type of the icon ("up" or "down")
-	 * @param	string		the command for TCEmain
-	 * @param	integer		the negative UID of the record where the current record
-	 * 						will be moved after if the button was clicked or the
-	 * 						positive PID if the current icon is the second in the
-	 * 						list and we should generate an up button
+	 * @param string the type of the icon ("up" or "down")
+	 * @param string the command for TCEmain
+	 * @param integer the negative UID of the record where the current record
+	 *                will be moved after if the button was clicked or the
+	 *                positive PID if the current icon is the second in the
+	 *                list and we should generate an up button
 	 *
-	 * @return	string		the HTML source code of a single linked up or down icon
+	 * @return string the HTML source code of a single linked up or down icon
 	 */
 	protected function getSingleUpOrDownIcon($type, $params, $moveToUid) {
 		global $LANG, $BACK_PATH;

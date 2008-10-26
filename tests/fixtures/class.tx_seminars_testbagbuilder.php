@@ -30,28 +30,28 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
  *
  * This builder class creates customized testbag objects.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	/**
-	 * @var	string		class name of the bag class that will be built
+	 * @var string class name of the bag class that will be built
 	 */
 	protected $bagClassName = 'tx_seminars_testbag';
 
 	/**
-	 * @var	string		the table name of the bag to build
+	 * @var string the table name of the bag to build
 	 */
 	protected $tableName = SEMINARS_TABLE_TEST;
 
 	/**
 	 * Limits the bag to records with a particular title.
 	 *
-	 * @param	string		title which the bag elements must match, may be
-	 * 						empty, must already be SQL-safe
+	 * @param string title which the bag elements must match, may be
+	 * empty, must already be SQL-safe
 	 */
 	public function limitToTitle($title) {
 		$this->whereClauseParts['title'] = 'title = "' . $title . '"';
@@ -60,7 +60,7 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * Returns the additional table names.
 	 *
-	 * @return	array		the additional table names, may be empty
+	 * @return array the additional table names, may be empty
 	 */
 	public function getAdditionalTableNames() {
 		return $this->additionalTableNames;
@@ -69,7 +69,7 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * Returns the order by statement.
 	 *
-	 * @return	string		the order by statement, may be empty
+	 * @return string the order by statement, may be empty
 	 */
 	public function getOrderBy() {
 		return $this->orderBy;
@@ -78,7 +78,7 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * Returns the limit statement.
 	 *
-	 * @return	string		the limit statement, may be empty
+	 * @return string the limit statement, may be empty
 	 */
 	public function getLimit() {
 		return $this->limit;
@@ -87,7 +87,7 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * Sets $this->tableName with the value in the parameter $tableName.
 	 *
-	 * @param	string		the table name to set, may be empty for testing
+	 * @param string the table name to set, may be empty for testing
 	 */
 	public function setTableName($tableName) {
 		$this->tableName = $tableName;

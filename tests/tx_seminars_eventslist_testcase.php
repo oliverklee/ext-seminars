@@ -32,29 +32,29 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the events list class in the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var	tx_seminars_eventslist
+	 * @var tx_seminars_eventslist
 	 */
 	private $fixture;
 	/**
-	 * @var	tx_oelib_testingFramework
+	 * @var tx_oelib_testingFramework
 	 */
 	private $testingFramework;
 
 	/**
-	 * @var	integer		PID of a dummy system folder
+	 * @var integer PID of a dummy system folder
 	 */
 	private $dummySysFolderPid = 0;
 
 	/**
-	 * @var	t3lib_SCbase	a dummy BE page object
+	 * @var t3lib_SCbase a dummy BE page object
 	 */
 	private $page;
 

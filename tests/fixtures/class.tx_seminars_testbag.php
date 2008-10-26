@@ -22,43 +22,42 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_test.php');
+
 /**
  * Class 'tx_seminars_testbag' for the 'seminars' extension.
  *
  * This aggregate class holds a bunch of test objects and allows to iterate over
  * them.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_test.php');
-
 class tx_seminars_testbag extends tx_seminars_bag {
 	/**
 	 * The constructor. Creates a bag that contains test records and allows to
 	 * iterate over them.
 	 *
-	 * @param	string		string that will be prepended to the WHERE
-	 * 						clause using AND, e.g. 'pid=42' (the AND and the
-	 * 						enclosing spaces are not necessary for this
-	 * 						parameter)
-	 * @param	string		comma-separated names of additional DB tables used
-	 * 						for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
-	 * 						fields in records are ignored.
-	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
-	 * 						records is ignored.
+	 * @param string string that will be prepended to the WHERE
+	 * clause using AND, e.g. 'pid=42' (the AND and the
+	 * enclosing spaces are not necessary for this
+	 * parameter)
+	 * @param string comma-separated names of additional DB tables used
+	 * for JOINs, may be empty
+	 * @param string GROUP BY clause (may be empty), must already be
+	 * safeguarded against SQL injection
+	 * @param string ORDER BY clause (may be empty), must already be
+	 * safeguarded against SQL injection
+	 * @param string LIMIT clause (may be empty), must already be
+	 * safeguarded against SQL injection
+	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
+	 * fields in records are ignored.
+	 * @param boolean If $ignoreTimingOfRecords is true the timing of
+	 * records is ignored.
 	 */
 	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',

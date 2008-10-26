@@ -33,10 +33,10 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_speakerbag.p
  *
  * This class represents a time slot.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_timeslot extends tx_seminars_timespan {
 	/** string with the name of the SQL table this class corresponds to */
@@ -45,7 +45,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Creates and returns a speakerbag object.
 	 *
-	 * @return	tx_seminars_speakerbag		a speakerbag object
+	 * @return tx_seminars_speakerbag a speakerbag object
 	 */
 	private function getSpeakerBag() {
 		$speakerBagClassName = t3lib_div::makeInstanceClassName(
@@ -62,9 +62,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Gets the speaker UIDs.
 	 *
-	 * @return	array		the speaker UIDs
+	 * @return array the speaker UIDs
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getSpeakersUids() {
 		$result = array();
@@ -88,10 +88,10 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Gets the speakers of the time slot as a plain text comma-separated list.
 	 *
-	 * @return	string	the comma-separated plain text list of speakers (or ''
-	 * 					if there was an error)
+	 * @return string the comma-separated plain text list of speakers (or ''
+	 *                if there was an error)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getSpeakersShortCommaSeparated() {
 		$result = array();
@@ -109,8 +109,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Returns a localized string "will be announced" if the time slot has no
 	 * place set.
 	 *
-	 * @return	string		our places or a localized string "will be announced"
-	 * 						if this timeslot has no place assigned
+	 * @return string our places or a localized string "will be announced"
+	 *                if this timeslot has no place assigned
 	 */
 	public function getPlaceShort() {
 		if (!$this->hasPlace()) {
@@ -142,9 +142,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Gets the place.
 	 *
-	 * @return	integer		the place UID
+	 * @return integer the place UID
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getPlace() {
 		return $this->getRecordPropertyInteger('place');
@@ -153,10 +153,10 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Gets the entry date as a formatted date.
 	 *
-	 * @return	string		the entry date (or the localized string "will be
-	 * 						announced" if no entry date is set)
+	 * @return string the entry date (or the localized string "will be
+	 *                announced" if no entry date is set)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getEntryDate() {
 		if (!$this->hasEntryDate()) {
@@ -175,9 +175,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Checks whether the timeslot has a entry date set.
 	 *
-	 * @return	boolean		true if we have a entry date, false otherwise
+	 * @return boolean true if we have a entry date, false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function hasEntryDate() {
 		return $this->hasRecordPropertyInteger('entry_date');
@@ -187,10 +187,10 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Returns an associative array, containing fieldname/value pairs that need
 	 * to be updated in the database. Update means "set the title" so far.
 	 *
-	 * @return	array		associative array containing data to update the
-	 * 						database entry of the timeslot, might be empty
+	 * @return array associative array containing data to update the
+	 *               database entry of the timeslot, might be empty
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getUpdateArray() {
 		$updateArray = array();

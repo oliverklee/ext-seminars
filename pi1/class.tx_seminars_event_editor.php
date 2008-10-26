@@ -37,43 +37,43 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php
  *
  * This class is a controller which allows to create and edit events on the FE.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
-	/** @var	string		class name */
+	/** @var string class name */
 	public $prefixId = 'tx_seminars_event_editor';
 
-	/** @var	string		path to this script relative to the extension dir */
+	/** @var string path to this script relative to the extension dir */
 	public $scriptRelPath = 'pi1/class.tx_seminars_event_editor.php';
 
 	/**
-	 * @var	string		the extension key
+	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
 
 	/**
-	 * @var	tx_seminars_pi1		the pi1 object where this event editor will be
-	 * 							inserted
+	 * @var tx_seminars_pi1 the pi1 object where this event editor will be
+	 *                      inserted
 	 */
 	protected $plugin;
 
-	/** @var	tx_ameosformidable		form creator */
+	/** @var tx_ameosformidable form creator */
 	private $oForm = null;
 
 	/**
-	 * @var	mixed		UID of the event to edit or false (not 0!) to create
-	 * 					a new event
+	 * @var mixed UID of the event to edit or false (not 0!) to create
+	 *            a new event
 	 */
 	private $iEdition = false;
 
-	/** @var	string		stores a validation error message if there was one */
+	/** @var string stores a validation error message if there was one */
 	private $validationError = '';
 
-	/** @var	array		currently attached files */
+	/** @var array currently attached files */
 	private $attachedFiles = array();
 
 	/**
@@ -91,8 +91,8 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * must be called to ensure that the logged-in user is allowed to edit a
 	 * given seminar.
 	 *
-	 * @param	tx_seminars_pi1		the pi1 object where this event editor will
-	 * 								be inserted
+	 * @param tx_seminars_pi1 the pi1 object where this event editor will
+	 *                        be inserted
 	 */
 	public function tx_seminars_event_editor(tx_seminars_pi1 $plugin) {
 		$this->plugin = $plugin;
@@ -150,9 +150,9 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * The returned path will always be an absolute path in the file system;
 	 * EXT: references will automatically get resolved.
 	 *
-	 * @return	string		the path to the HTML template as an absolute path in
-	 * 						the file system, will not be empty in a correct
-	 * 						configuration, will never be null
+	 * @return string the path to the HTML template as an absolute path in
+	 *                the file system, will not be empty in a correct
+	 *                configuration, will never be null
 	 */
 	public function getTemplatePath() {
 		return t3lib_div::getFileAbsFileName(
@@ -165,7 +165,7 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Creates the HTML output.
 	 *
-	 * @return 	string		HTML of the create/edit form
+	 * @return string HTML of the create/edit form
 	 */
 	public function _render() {
 		$rawForm = $this->oForm->render();
@@ -192,8 +192,8 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * This function requires the template to be already processed by
 	 * $this->plugin.
 	 *
-	 * @return	string		HTML for the FE editor with the formatted attachment
-	 * 						list if there are attached files, will not be empty
+	 * @return string HTML for the FE editor with the formatted attachment
+	 *                list if there are attached files, will not be empty
 	 */
 	private function getHtmlWithAttachedFilesList() {
 		$originalAttachmentList = $this->oForm->oDataHandler->oForm
@@ -229,11 +229,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available categories.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the categories
-	 * 						table as an array with the keys "caption" (for the
-	 * 						title) and "value" (for the UID)
+	 * @return array $items with additional items from the categories
+	 *               table as an array with the keys "caption" (for the
+	 *               title) and "value" (for the UID)
 	 */
 	public function populateListCategories(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_CATEGORIES);
@@ -242,11 +242,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available event types.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the event_types
-	 * 						table as an array with the keys "caption" (for the
-	 * 						title) and "value" (for the UID)
+	 * @return array $items with additional items from the event_types
+	 *               table as an array with the keys "caption" (for the
+	 *               title) and "value" (for the UID)
 	 */
 	public function populateListEventTypes(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_EVENT_TYPES);
@@ -255,11 +255,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available lodgings.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the lodgings table
-	 * 						as an array with the keys "caption" (for the title)
-	 *						and "value" (for the UID)
+	 * @return array $items with additional items from the lodgings table
+	 *               as an array with the keys "caption" (for the title)
+	 *               and "value" (for the UID)
 	 */
 	public function populateListLodgings(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_LODGINGS);
@@ -268,11 +268,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available foods.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the foods table
-	 * 						as an array with the keys "caption" (for the title)
-	 *						and "value" (for the UID)
+	 * @return array $items with additional items from the foods table
+	 *               as an array with the keys "caption" (for the title)
+	 *               and "value" (for the UID)
 	 */
 	public function populateListFoods(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_FOODS);
@@ -281,11 +281,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available payment methods.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from payment methods
-	 * 						table as an array with the keys "caption" (for the
-	 *						title) and "value" (for the UID)
+	 * @return array $items with additional items from payment methods
+	 *               table as an array with the keys "caption" (for the
+	 *               title) and "value" (for the UID)
 	 */
 	public function populateListPaymentMethods(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_PAYMENT_METHODS);
@@ -294,11 +294,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available organizers.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the organizers
-	 * 						table as an array with the keys "caption" (for the
-	 *						title) and "value" (for the UID)
+	 * @return array $items with additional items from the organizers
+	 *               table as an array with the keys "caption" (for the
+	 *               title) and "value" (for the UID)
 	 */
 	public function populateListOrganizers(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_ORGANIZERS);
@@ -307,11 +307,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available places.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the places table
-	 * 						as an array with the keys "caption" (for the title)
-	 *						and "value" (for the UID)
+	 * @return array $items with additional items from the places table
+	 *               as an array with the keys "caption" (for the title)
+	 *               and "value" (for the UID)
 	 */
 	public function populateListPlaces(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_SITES);
@@ -320,11 +320,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available speakers.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the speakers table
-	 * 						as an array with the keys "caption" (for the title)
-	 *						and "value" (for the UID)
+	 * @return array $items with additional items from the speakers table
+	 *               as an array with the keys "caption" (for the title)
+	 *               and "value" (for the UID)
 	 */
 	public function populateListSpeakers(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_SPEAKERS);
@@ -333,11 +333,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available checkboxes.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the checkboxes
-	 * 						table as an array with the keys "caption" (for the
-	 *						title) and "value" (for the UID)
+	 * @return array $items with additional items from the checkboxes
+	 *               table as an array with the keys "caption" (for the
+	 *               title) and "value" (for the UID)
 	 */
 	public function populateListCheckboxes(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_CHECKBOXES);
@@ -346,11 +346,11 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available target groups.
 	 *
-	 * @param	array		any pre-filled data (may be empty)
+	 * @param array any pre-filled data (may be empty)
 	 *
-	 * @return	array		$items with additional items from the target groups
-	 * 						table as an array with the keys "caption" (for the
-	 *						title) and "value" (for the UID)
+	 * @return array $items with additional items from the target groups
+	 *               table as an array with the keys "caption" (for the
+	 *               title) and "value" (for the UID)
 	 */
 	public function populateListTargetGroups(array $items) {
 		return $this->populateList($items, SEMINARS_TABLE_TARGET_GROUPS);
@@ -359,8 +359,8 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Gets the PID of the page where FE-created events will be stored.
 	 *
-	 * @return	integer		the PID of the page where FE-created events will be
-	 * 						stored
+	 * @return integer the PID of the page where FE-created events will be
+	 *                 stored
 	 */
 	public function getPidForNewEvents() {
 		return $this->plugin->getConfValueInteger(
@@ -375,9 +375,8 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * An URL of the FE editor's page is returned if "submit_and_stay" was
 	 * clicked.
 	 *
-	 * @return	string		complete URL of the FE page with a message or, if
-	 * 						"submit_and_stay" was clicked, of the current
-	 * 						page
+	 * @return string complete URL of the FE page with a message or, if
+	 *                "submit_and_stay" was clicked, of the current page
 	 */
 	public function getEventSuccessfullySavedUrl() {
 		$additionalParameters = '';
@@ -416,9 +415,9 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * If the "seminar" piVar is set, it also is checked whether that event
 	 * record exists and the logged-in FE user is the owner.
 	 *
-	 * @return	boolean		true if a user is logged in and allowed to enter and
-	 * 						edit events (especially the event given in the piVar
-	 * 						"seminar"), false otherwise
+	 * @return boolean true if a user is logged in and allowed to enter and
+	 *                 edit events (especially the event given in the piVar
+	 *                 "seminar"), false otherwise
 	 */
 	public function hasAccess() {
 		if (!isset($this->plugin->piVars['action'])
@@ -463,9 +462,9 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * If the FE user does not have the necessary permissions, a localized error
 	 * message will be returned.
 	 *
-	 * @return	string		an empty string if a user is logged in and allowed
-	 * 						to enter and edit events, a localized error message
-	 * 						otherwise
+	 * @return string an empty string if a user is logged in and allowed
+	 *                to enter and edit events, a localized error message
+	 *                otherwise
 	 */
 	public function hasAccessMessage() {
 		$result = '';
@@ -485,8 +484,8 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * Changes all potential decimal separators (commas and dots) in price
 	 * fields to dots.
 	 *
-	 * @param	array		all entered form data with the field names as keys,
-	 * 						will be modified, must not be empty
+	 * @param array all entered form data with the field names as keys,
+	 *              will be modified, must not be empty
 	 */
 	private function unifyDecimalSeparators(array &$formData) {
 		$priceFields = array(
@@ -511,7 +510,7 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * FORMidable, it is possible to store the name of an invalid file in the
 	 * list of attachments.
 	 *
-	 * @param	array 		form data, will be modified, must not be empty
+	 * @param array form data, will be modified, must not be empty
 	 */
 	private function processAttachments(array &$formData) {
 		if ($formData['delete_attached_files'] != '') {
@@ -532,7 +531,7 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * Removes the form data elements "proceed_file_upload" and
 	 * "delete_attached_files" as they are no fields in the seminars table.
 	 *
-	 * @param	array 		form data, will be modified, must not be empty
+	 * @param array form data, will be modified, must not be empty
 	 */
 	private function purgeNonSeminarsFields(array &$formData) {
 		unset(
@@ -545,12 +544,12 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * Unifies decimal separators, processes the deletion of attachments and
 	 * purges non-seminars-fields.
 	 *
-	 * @see	unifyDecimalSeparators(), processAttachments(),
-	 * 		purgeNonSeminarsFields()
+	 * @see unifyDecimalSeparators(), processAttachments(),
+	 *      purgeNonSeminarsFields()
 	 *
-	 * @param	array 		form data, must not be empty
+	 * @param array form data, must not be empty
 	 *
-	 * @return	array		modified form data, will not be empty
+	 * @return array modified form data, will not be empty
 	 */
 	public function modifyDataToInsert(array $formData) {
 		$modifiedFormData = $formData;
@@ -571,10 +570,9 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * This check is done here because the FORMidable validators do not allow
 	 * multiple error messages.
 	 *
-	 * @param	array		form data to check, must not be empty
+	 * @param array form data to check, must not be empty
 	 *
-	 * @return	boolean		true if the provided file is valid, false
-	 *						otherwise
+	 * @return boolean true if the provided file is valid, false otherwise
 	 */
 	public function checkFile(array $valueToCheck) {
 		$this->validationError = '';
@@ -605,8 +603,7 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Checks whether an uploaded file is of a valid type.
 	 *
-	 * @param	string		file name, must match an uploaded file, must not be
-	 * 						empty
+	 * @param string file name, must match an uploaded file, must not be empty
 	 */
 	private function checkFileType($fileName) {
 		$allowedExtensions = $this->plugin->getConfValueString(
@@ -626,8 +623,7 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Checks whether an uploaded file is not too large.
 	 *
-	 * @param	string		file name, must match an uploaded file, must not be
-	 * 						empty
+	 * @param string file name, must match an uploaded file, must not be empty
 	 */
 	private function checkFileSize($fileName) {
 		$maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
@@ -645,11 +641,10 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * Deletes a file in the seminars upload directory and removes it from the
 	 * list of currently attached files.
 	 *
-	 * @param	string		file name, must match an uploaded file, must not be
-	 * 						empty
+	 * @param string file name, must match an uploaded file, must not be empty
 	 *
-	 * @return	string		comma-separated list with the still attached files,
-	 * 						will be empty if the last attachment was removed
+	 * @return string comma-separated list with the still attached files,
+	 *                will be empty if the last attachment was removed
 	 */
 	private function purgeUploadedFile($fileName) {
 		@unlink(PATH_site . 'uploads/tx_seminars/' . $fileName);
@@ -662,8 +657,8 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Returns an error message if the provided file was invalid.
 	 *
-	 * @return	string		localized validation error message, will be empty if
-	 * 						$this->validationError was empty
+	 * @return string localized validation error message, will be empty if
+	 *                $this->validationError was empty
 	 */
 	public function getFileUploadErrorMessage() {
 		return $this->validationError;

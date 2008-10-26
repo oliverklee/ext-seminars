@@ -22,20 +22,19 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_backendlist.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizerbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizer.php');
+
 /**
  * Class 'organizers list' for the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_backendlist.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizerbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_organizer.php');
-
 class tx_seminars_organizerslist extends tx_seminars_backendlist {
 	/** the table we're working on */
 	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
@@ -59,9 +58,9 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 	/**
 	 * Generates and prints out a organizers list.
 	 *
-	 * @return	string		the HTML source code to display
+	 * @return string the HTML source code to display
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function show() {
 		global $LANG;

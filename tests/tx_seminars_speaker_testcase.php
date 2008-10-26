@@ -30,10 +30,10 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the speaker class in the 'seminars' extensions.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -88,9 +88,9 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	 * Inserts a skill record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param	array		data of the skill to add, may be empty
+	 * @param array data of the skill to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will always be > 0
+	 * @return integer the UID of the created record, will always be > 0
 	 */
 	private function addSkillRelation(array $skillData) {
 		$uid = $this->testingFramework->createRecord(
@@ -241,7 +241,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	 * TODO: For this test to work properly, we need a more-or-less working
 	 * front-end environment so that the RTE transformation functions work.
 	 *
-	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1425
+	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1425
 	 *
 
 	public function testGetDescription() {

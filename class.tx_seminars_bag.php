@@ -35,11 +35,11 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * When inheriting from this class, make sure to implement the function
  * createItemFromDbResult.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 abstract class tx_seminars_bag implements Iterator {
 	/** the name of the main DB table from which we get the records for this bag */
@@ -72,7 +72,7 @@ abstract class tx_seminars_bag implements Iterator {
 	private $countWithoutLimit = 0;
 
 	/**
-	 * @var	boolean		whether this bag is at the first element
+	 * @var boolean whether this bag is at the first element
 	 */
 	private $isRewound = false;
 
@@ -97,25 +97,25 @@ abstract class tx_seminars_bag implements Iterator {
 	/**
 	 * The constructor. Sets the iterator to the first result of a query
 	 *
-	 * @param	string		the name of the main DB table to query (comma-
-	 * 						separated), may not be empty
-	 * @param	string		string that will be prepended to the WHERE clause
-	 * 						using AND, e.g. 'pid=42' (the AND and the enclosing
-	 * 						spaces are not necessary for this parameter)
-	 *						the table name must be used as a prefix if more than
-	 * 						one table is queried
-	 * @param	string		comma-separated names of additional DB tables used
-	 * 						for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
-	 * 						fields in records are ignored.
-	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
-	 * 						records is ignored.
+	 * @param string the name of the main DB table to query (comma-
+	 *               separated), may not be empty
+	 * @param string string that will be prepended to the WHERE clause
+	 *               using AND, e.g. 'pid=42' (the AND and the enclosing
+	 *               spaces are not necessary for this parameter)
+	 *               the table name must be used as a prefix if more than
+	 *               one table is queried
+	 * @param string comma-separated names of additional DB tables used
+	 *               for JOINs, may be empty
+	 * @param string GROUP BY clause (may be empty), must already be
+	 *               safeguarded against SQL injection
+	 * @param string ORDER BY clause (may be empty), must already be
+	 *               safeguarded against SQL injection
+	 * @param string LIMIT clause (may be empty), must already be
+	 *               safeguarded against SQL injection
+	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
+	 *               fields in records are ignored.
+	 * @param boolean If $ignoreTimingOfRecords is true the timing of
+	 *               records is ignored.
 	 */
 	public function __construct(
 		$dbTableName, $queryParameters = '1=1', $additionalTableNames = '',
@@ -153,10 +153,10 @@ abstract class tx_seminars_bag implements Iterator {
 	 * concatenated output from tx_oelib_db::enableFields into
 	 * $this->enabledFieldsQuery.
 	 *
-	 * @param	integer		If $showHiddenRecords is set (0/1), any hidden-
-	 * 						fields in records are ignored.
-	 * @param	boolean		If $ignoreTimingOfRecords is true the timing of
-	 * 						records is ignored.
+	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
+	 *                fields in records are ignored.
+	 * @param boolean If $ignoreTimingOfRecords is true the timing of
+	 *                records is ignored.
 	 */
 	private function createEnabledFieldsQuery(
 		$showHiddenRecords = -1, $ignoreTimingOfRecords = false
@@ -226,9 +226,8 @@ abstract class tx_seminars_bag implements Iterator {
 	/**
 	 * Advances to the next record and returns a reference to that object.
 	 *
-	 * @return	tx_seminars_objectfromdb	a reference to the now current
-	 * 										object, will be null if there is no
-	 * 										next object
+	 * @return tx_seminars_objectfromdb the now current object, will be null if
+	 *                                  there is no next object
 	 */
 	public function next() {
 		if (!$this->dbResult) {
@@ -253,9 +252,9 @@ abstract class tx_seminars_bag implements Iterator {
 	/**
 	 * Returns the current object (which may be null).
 	 *
-	 * @return	tx_seminars_objectfromdb	a reference to the current object,
-	 * 										will be null if	there is no current
-	 * 										object
+	 * @return tx_seminars_objectfromdb a reference to the current object,
+	 * will be null if there is no current
+	 * object
 	 */
 	public function current() {
 		return $this->currentItem;
@@ -267,7 +266,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 *
 	 * If the function isOk() returns true, nothing is changed.
 	 *
-	 * @return	boolean		true if the current item is valid, false otherwise
+	 * @return boolean true if the current item is valid, false otherwise
 	 */
 	public function valid() {
 		if (!$this->currentItem || !$this->currentItem->isOk()) {
@@ -281,7 +280,7 @@ abstract class tx_seminars_bag implements Iterator {
 	/**
 	 * Returns the UID of the current item.
 	 *
-	 * @return	integer		the UID of the current item, will be > 0
+	 * @return integer the UID of the current item, will be > 0
 	 */
 	public function key() {
 		if (!$this->valid()) {
@@ -296,7 +295,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 *
 	 * Note: This function might rewind().
 	 *
-	 * @return	integer		the total number of objects in this bag, may be zero
+	 * @return integer the total number of objects in this bag, may be zero
 	 */
 	public function count() {
 		if ($this->hasCount) {
@@ -346,7 +345,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 *
 	 * Note: This function might rewind().
 	 *
-	 * @return	boolean		true if this bag is empty, false otherwise
+	 * @return boolean true if this bag is empty, false otherwise
 	 */
 	public function isEmpty() {
 		if ($this->hasCount) {
@@ -368,9 +367,8 @@ abstract class tx_seminars_bag implements Iterator {
 	 *
 	 * This function will leave the iterator pointing to after the last element.
 	 *
-	 * @return	string		comma-separated, sorted list of UIDs of the records
-	 * 						in this bag, will be an empty string if this bag is
-	 * 						empty
+	 * @return string comma-separated, sorted list of UIDs of the records in
+	 *                this bag, will be an empty string if this bag is empty
 	 */
 	public function getUids() {
 		$uids = array();
@@ -388,8 +386,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 * Checks whether the current item is okay and returns its error messages
 	 * from the configuration check.
 	 *
-	 * @return	string		error messages from the configuration check,
-	 * 						may be empty
+	 * @return string error messages from the configuration check, may be empty
 	 */
 	public function checkConfiguration() {
 		if ($this->current() && $this->current()->isOk()) {

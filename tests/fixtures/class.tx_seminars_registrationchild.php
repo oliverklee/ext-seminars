@@ -33,16 +33,16 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration
  * This is mere a class used for unit tests of the 'seminars' extension. Don't
  * use it for any other purpose.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 final class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * The constructor.
 	 *
-	 * @param	integer		UID of the registration record, must be > 0
+	 * @param integer UID of the registration record, must be > 0
 	 */
 	public function __construct($registrationUid) {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -63,8 +63,8 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the "registration_queue" field of the registration record.
 	 *
-	 * @param	boolean		true if the registration should be on the waiting
-	 * 						list, false otherwise
+	 * @param boolean true if the registration should be on the waiting
+	 * list, false otherwise
 	 */
 	public function setIsOnRegistrationQueue($isOnRegistrationQueueValue) {
 		$this->setRecordPropertyInteger(
@@ -76,7 +76,7 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the payment method of this registration.
 	 *
-	 * @param	integer		the UID of the payment method to set
+	 * @param integer the UID of the payment method to set
 	 */
 	public function setPaymentMethod($uid) {
 		if ($uid <= 0) {

@@ -30,18 +30,18 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the registration bag builder class in the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var	tx_seminars_pi1
+	 * @var tx_seminars_pi1
 	 */
 	private $fixture;
 	/**
-	 * @var	tx_oelib_testingFramework
+	 * @var tx_oelib_testingFramework
 	 */
 	private $testingFramework;
 

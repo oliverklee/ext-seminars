@@ -25,20 +25,20 @@
 /**
  * Class that adds the wizard icon.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1_wizicon {
 	/**
 	 * Processes the wizard items array.
 	 *
-	 * @param	array		the wizard items, may be empty
+	 * @param array the wizard items, may be empty
 	 *
-	 * @return	array		modified array with wizard items
+	 * @return array modified array with wizard items
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function proc(array $wizardItems) {
 		global $LANG;
@@ -60,9 +60,9 @@ class tx_seminars_pi1_wizicon {
 	 * Reads the [extDir]/locallang.xml and returns the labels found in that
 	 * file as an array.
 	 *
-	 * @return	array		the found language labels
+	 * @return array the found language labels
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function includeLocalLang() {
 		return t3lib_div::readLLXMLfile(

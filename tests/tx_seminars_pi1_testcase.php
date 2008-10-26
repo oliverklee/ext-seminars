@@ -31,16 +31,16 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the pi1 class in the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
-	/** @var	tx_seminars_pi1 */
+	/** @var tx_seminars_pi1 */
 	private $fixture;
-	/** @var	tx_oelib_testingFramework */
+	/** @var tx_oelib_testingFramework */
 	private $testingFramework;
 
 	/** the UID of a seminar to which the fixture relates */
@@ -53,7 +53,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private $numberOfTargetGroups = 0;
 
 	public function setUp() {
-		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
@@ -106,9 +106,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 * Inserts a target group record into the database and creates a relation to
 	 * it from the event with the UID store in $this->seminarUid.
 	 *
-	 * @param	array		data of the target group to add, may be empty
+	 * @param array data of the target group to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addTargetGroupRelation(array $targetGroupData = array()) {
 		$uid = $this->testingFramework->createRecord(

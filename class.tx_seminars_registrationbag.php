@@ -22,43 +22,42 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_tslib . 'class.tslib_content.php');
+
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
+
 /**
  * Class 'tx_seminars_registrationbag' for the 'seminars' extension.
  *
  * This aggregate class holds a bunch of registration objects and allows
  * to iterate over them.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(PATH_tslib.'class.tslib_content.php');
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
-
 class tx_seminars_registrationbag extends tx_seminars_bag {
 	/**
 	 * The constructor. Creates a registration bag that contains registration
 	 * records and allows to iterate over them.
 	 *
-	 * @param	string		string that will be prepended to the WHERE
-	 * 						clause using AND, e.g. 'pid=42' (the AND and the
-	 * 						enclosing spaces are not necessary for this
-	 * 						parameter)
-	 * @param	string		comma-separated names of additional DB tables used
-	 * 						for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
+	 * @param string string that will be prepended to the WHERE
+	 *               clause using AND, e.g. 'pid=42' (the AND and the
+	 *               enclosing spaces are not necessary for this
+	 *               parameter)
+	 * @param string comma-separated names of additional DB tables used
+	 *               for JOINs, may be empty
+	 * @param string GROUP BY clause (may be empty), must already be
+	 *               safeguarded against SQL injection
+	 * @param string ORDER BY clause (may be empty), must already be
+	 *               safeguarded against SQL injection
+	 * @param string LIMIT clause (may be empty), must already be
+	 *               safeguarded against SQL injection
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
@@ -84,7 +83,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 *
 	 * $this->dbResult is ensured to be non-null when this function is called.
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function createItemFromDbResult() {
 		$registrationClassname = t3lib_div::makeInstanceClassName(

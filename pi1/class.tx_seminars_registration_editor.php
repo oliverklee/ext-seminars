@@ -37,11 +37,11 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  *
  * This class is a controller which allows to create registrations on the FE.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/** Same as class name */
@@ -51,7 +51,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	var $scriptRelPath = 'pi1/class.tx_seminars_registration_editor.php';
 
 	/**
-	 * @var	string		the extension key
+	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
 
@@ -109,8 +109,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * that the logged-in user is allowed to register for the corresponding
 	 * event (or edit a registration).
 	 *
-	 * @param	tx_seminars_pi1		the pi1 object where this registration
-	 * 								editor will be inserted
+	 * @param tx_seminars_pi1 the pi1 object where this registration
+	 *                        editor will be inserted
 	 */
 	public function __construct(tx_seminars_pi1 $plugin) {
 		$this->plugin = $plugin;
@@ -153,7 +153,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Initializes the create/edit form.
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function _initForms() {
 		$this->oForm = t3lib_div::makeInstance('tx_ameosformidable');
@@ -196,9 +196,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * The returned path will always be an absolute path in the file system;
 	 * EXT: references will automatically get resolved.
 	 *
-	 * @return	string		the path to the HTML template as an absolute path in the file system, will not be empty in a correct configuration, will never be null
+	 * @return string the path to the HTML template as an absolute path in the
+	 *                file system, will not be empty in a correct configuration,
+	 *                will never be null
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getTemplatePath() {
 		return t3lib_div::getFileAbsFileName(
@@ -213,9 +215,9 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Creates the HTML output.
 	 *
-	 * @return 	string		HTML of the create/edit form
+	 * @return string HTML of the create/edit form
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function _render() {
 		$rawForm = $this->oForm->render();
@@ -243,9 +245,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Selects the confirmation page (the second step of the registration form)
 	 * for display. This affects $this->_render().
 	 *
-	 * @param	array		the entered form data with the field names as array keys (including the submit button)
+	 * @param array the entered form data with the field names as array keys
+	 *              (including the submit button)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function setPage(array $parameters) {
 		$this->currentPageNumber = $parameters['next_page'];
@@ -255,9 +258,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether we are on the last page of the registration form and we
 	 * can proceed to saving the registration.
 	 *
-	 * @return	boolean		true if we can proceed to saving the registration, false otherwise
+	 * @return boolean true if we can proceed to saving the registration, false
+	 *                 otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function isLastPage() {
 		return ($this->currentPageNumber == 2);
@@ -268,9 +272,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * In addition, the entered payment data is stored in the FE user session.
 	 *
-	 * @param	array		the entered form data with the field names as array keys (including the submit button ...)
+	 * @param array the entered form data with the field names as array keys
+	 *              (including the submit button ...)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function processRegistration(array $parameters) {
 		$this->saveDataToSession($parameters);
@@ -291,11 +296,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether there are at least the number of seats provided in
 	 * $formData['value'] available.
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the number of seats to check for is stored
+	 * @param array associative array with the element "value" in which
+	 *              the number of seats to check for is stored
 	 *
-	 * @return	boolean		true if there are at least $formData['value'] seats
-	 * 						available, false otherwise
+	 * @return boolean true if there are at least $formData['value'] seats
+	 *                 available, false otherwise
 	 */
 	public function canRegisterSeats(array $formData) {
 		return $this->registrationManager->canRegisterSeats(
@@ -307,11 +312,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether a checkbox is checked OR the "finish registration" button
 	 * hasn't just been clicked.
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the current value of the checkbox (0 or 1) is stored
+	 * @param array associative array with the element "value" in which
+	 *              the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return	boolean		true if the checkbox is checked or we are not on the
-	 * 						confirmation page, false otherwise
+	 * @return boolean true if the checkbox is checked or we are not on the
+	 *                 confirmation page, false otherwise
 	 */
 	public function isTermsChecked(array $formData) {
 		return ((boolean) $formData['value'])
@@ -322,11 +327,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether the "travelling terms" checkbox (ie. the second "terms"
 	 * checkbox) is enabled in the event record *and* via TS setup.
 	 *
-	 * @return	boolean		true if the "travelling terms" checkbox is enabled
-	 * 						in the event record *and* via TS setup, false
-	 * 						otherwise
+	 * @return boolean true if the "travelling terms" checkbox is enabled in the
+	 *                 event record *and* via TS setup, false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function isTerms2Enabled() {
 		return $this->hasRegistrationFormField(array('elementname' => 'terms_2'))
@@ -339,13 +343,13 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * function always returns true. It also always returns true if the
 	 * "finish registration" button hasn't just been clicked.
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the current value of the checkbox (0 or 1) is stored
+	 * @param array associative array with the element "value" in which
+	 *              the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return	boolean		true if the checkbox is checked or disabled in the
-	 * 						configuration or if the "finish registration" button
-	 * 						hasn't just been clicked, false if it is not checked
-	 * 						AND enabled in the configuration
+	 * @return boolean true if the checkbox is checked or disabled in the
+	 *                 configuration or if the "finish registration" button
+	 *                 hasn't just been clicked, false if it is not checked
+	 *                 AND enabled in the configuration
 	 */
 	public function isTerms2CheckedAndEnabled(array $formData) {
 		return ((boolean) $formData['value']) || !$this->isTerms2Enabled()
@@ -359,14 +363,14 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * necessary nor possible to select any payment method) OR this event has
 	 * no price at all.
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the currently selected value (a positive integer or
-	 * 						null if no radiobutton is selected) is stored
+	 * @param array associative array with the element "value" in which
+	 *              the currently selected value (a positive integer or
+	 *              null if no radiobutton is selected) is stored
 	 *
-	 * @return	boolean		true if a method of payment is selected OR no method
-	 * 						could have been selected at all OR this event has no
-	 * 						price, false if none is selected, but should have
-	 * 						been selected
+	 * @return boolean true if a method of payment is selected OR no method
+	 *                 could have been selected at all OR this event has no
+	 *                 price, false if none is selected, but should have
+	 *                 been selected
 	 */
 	public function isMethodOfPaymentSelected(array $formData) {
 		return $this->isRadiobuttonSelected($formData['value'])
@@ -378,11 +382,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Checks whether a radiobutton in a radiobutton group is selected.
 	 *
-	 * @param	mixed		the currently selected value (a positive integer) or
-	 * 						null if no button is selected
+	 * @param mixed the currently selected value (a positive integer) or
+	 *                  null if no button is selected
 	 *
-	 * @return	boolean		true if a radiobutton is selected, false if none is
-	 * 						selected
+	 * @return boolean true if a radiobutton is selected, false if none is
+	 *                 selected
 	 */
 	private function isRadiobuttonSelected($radiogroupValue) {
 		return (boolean) $radiogroupValue;
@@ -393,14 +397,14 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * This is specified via TS setup (or flexforms) using the
 	 * "showRegistrationFields" variable.
 	 *
-	 * @param	array		the contents of the "params" child of the userobj
-	 * 						node as key/value pairs (used for retrieving the
-	 * 						current form field name)
+	 * @param array the contents of the "params" child of the userobj
+	 *              node as key/value pairs (used for retrieving the
+	 *              current form field name)
 	 *
-	 * @return	boolean		true if the current form field should be displayed,
-	 * 						false otherwise
+	 * @return boolean true if the current form field should be displayed,
+	 *                 false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function hasRegistrationFormField(array $parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
@@ -419,12 +423,12 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * After some refactoring, this function will replace the function
 	 * hasRegistrationFormField.
 	 *
-	 * @param	string		the key of the field to test, must not be empty
+	 * @param string the key of the field to test, must not be empty
 	 *
-	 * @return	boolean		true if the current form field should be displayed,
-	 * 						false otherwise
+	 * @return boolean true if the current form field should be displayed,
+	 *                 false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function isFormFieldEnabled($key) {
 		// Some containers cannot be enabled or disabled via TS setup, but
@@ -540,15 +544,15 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * and returns only true if the event has a price (ie. is not completely for
 	 * free) and the current form field should be displayed.
 	 *
-	 * @param	array		the contents of the "params" child of the userobj
-	 * 						node as key/value pairs (used for retrieving the
-	 * 						current form field name)
+	 * @param array the contents of the "params" child of the userobj
+	 *              node as key/value pairs (used for retrieving the
+	 *              current form field name)
 	 *
-	 * @return	boolean		true if the current form field should be displayed
-	 * 						AND the current event is not completely for free,
-	 * 						false otherwise
+	 * @return boolean true if the current form field should be displayed
+	 *                 AND the current event is not completely for free,
+	 *                 false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function hasBankDataFormField(array $parameters) {
 		return $this->hasRegistrationFormField($parameters)
@@ -564,8 +568,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * checkLogOutOneTimeAccountsAfterRegistration is enabled in the TS setup,
 	 * the FE user will be automatically logged out.
 	 *
-	 * @return	string		complete URL of the FE page with a message (or null
-	 * 						if the confirmation page has not been submitted yet)
+	 * @return string complete URL of the FE page with a message (or null
+	 *                if the confirmation page has not been submitted yet)
 	 */
 	public function getThankYouAfterRegistrationUrl() {
 		$sendParameters = false;
@@ -596,10 +600,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Gets the URL of the page that should be displayed after a user has
 	 * unregistered from an event.
 	 *
-	 * @return	string		complete URL of the FE page with a message (or null
-	 * 						if the confirmation page has not been submitted yet)
+	 * @return string complete URL of the FE page with a message (or null
+	 *                if the confirmation page has not been submitted yet)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getPageToShowAfterUnregistrationUrl() {
 		$sendParameters = false;
@@ -624,11 +628,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Creates a URL for redirection. This is a utility function for
 	 * getThankYouAfterRegistrationUrl() and getPageToShowAfterUnregistration().
 	 *
-	 * @param	string		the page UID
-	 * @param	boolean		true if GET parameters should be added to the URL,
-	 * 						otherwise false
+	 * @param string the page UID
+	 * @param boolean true if GET parameters should be added to the URL,
+	 *                otherwise false
 	 *
-	 * @return	string		complete URL of the FE page with a message
+	 * @return string complete URL of the FE page with a message
 	 */
 	protected function createUrlForRedirection($pageId, $sendParameters = true) {
 		// On freshly updated sites, the configuration value might not be set
@@ -665,14 +669,14 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of available places.
 	 *
-	 * @param	array		array that contains any pre-filled data (may be
-	 * 						empty, but not null, unused)
+	 * @param array array that contains any pre-filled data (may be
+	 *              empty, but not null, unused)
 	 *
-	 * @return	array		items from the payment methods table as an array
-	 * 						with the keys "caption" (for the title) and "value"
-	 * 						(for the uid)
+	 * @return array items from the payment methods table as an array
+	 *               with the keys "caption" (for the title) and "value"
+	 *               (for the uid)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function populateListPaymentMethods(array $items) {
 		$result = array();
@@ -694,10 +698,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * ie. whether they are enable in the setup and the current event actually
 	 * has any payment methods assigned and has at least one price.
 	 *
-	 * @return	boolean		true if the payment methods should be displayed,
-	 * 						false otherwise
+	 * @return boolean true if the payment methods should be displayed,
+	 *                 false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function showMethodsOfPayment() {
 		return $this->seminar->hasPaymentMethods()
@@ -714,7 +718,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * The telephone number and the e-mail address will have labels in front of
 	 * them.
 	 *
-	 * @return	string		the currently logged-in FE user's data
+	 * @return string the currently logged-in FE user's data
 	 */
 	public function getAllFeUserData() {
 		$userData = $GLOBALS['TSFE']->fe_user->user;
@@ -752,8 +756,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Gets the already entered registration data nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @return	string		the entered registration data, nicely formatted as
-	 * 						HTML
+	 * @return string the entered registration data, nicely formatted as HTML
 	 */
 	public function getRegistrationData() {
 		$result = '';
@@ -790,11 +793,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * If the entered data is empty, an empty string will be returned (so the
 	 * heading will only be included for non-empty data).
 	 *
-	 * @param	string		key of the field for which the data should be displayed
+	 * @param string key of the field for which the data should be displayed
 	 *
-	 * @return	string		the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data is empty)
+	 * @return string the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data is empty)
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function getFormDataItemForConfirmation($key) {
 		$result = '';
@@ -869,8 +872,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Ensures that the parameter is an array. If it is no array yet, it will
 	 * be changed to an empty array.
 	 *
-	 * @param	mixed		variable that should be ensured to be an array
-	 * 						(passed by reference)
+	 * @param mixed variable that should be ensured to be an array
+	 *              (passed by reference)
 	 */
 	private function ensureArray(&$data) {
 		if (!is_array($data)) {
@@ -884,9 +887,9 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * If no price has been selected, the first available price will be used.
 	 *
-	 * @return	string		the selected price with caption and unit
+	 * @return string the selected price with caption and unit
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function getSelectedPrice() {
 		$availablePrices = $this->seminar->getAvailablePrices();
@@ -899,9 +902,9 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * If no price has been selected, the first available price will be used.
 	 *
-	 * @return	string		the key of the selected price, will always be a valid key
+	 * @return string the key of the selected price, will always be a valid key
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function getKeyOfSelectedPrice() {
 		$dataHandler = $this->oForm->oDataHandler;
@@ -922,9 +925,9 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * the total price. The total price will be returned with the currency
 	 * unit appended.
 	 *
-	 * @return	string		the total price calculated from the form data including the currency unit, eg. "240.00 EUR"
+	 * @return string the total price calculated from the form data including the currency unit, eg. "240.00 EUR"
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function getTotalPriceWithUnit() {
 		$result = '';
@@ -962,9 +965,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Gets the caption of the selected payment method. If no valid payment
 	 * method has been selected, this function returns an empty string.
 	 *
-	 * @return	string		the caption of the selected payment method or an empty string if no valid payment method has been selected
+	 * @return string the caption of the selected payment method or an empty
+	 *                string if no valid payment method has been selected
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function getSelectedPaymentMethod() {
 		$result = '';
@@ -990,10 +994,15 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Takes the selected options for a list of options and displays it
 	 * nicely using their captions, separated by a carriage return (ASCII 13).
 	 *
-	 * @param	array		all available options for this form element as a nested array, the outer array having the UIDs of the options as keys, the inner array having the keys "caption" (for the visible captions) and "value" (the UID again), may be empty, must not be null
-	 * @param	array		the selected options with the array values being the UIDs of the corresponding options, may be empty or even null
+	 * @param array all available options for this form element as a nested
+	 *              array, the outer array having the UIDs of the options as
+	 *              keys, the inner array having the keys "caption" (for the
+	 *              visible captions) and "value" (the UID again), may be empty,
+	 *              must not be null
+	 * @param array the selected options with the array values being the UIDs of
+	 *              the corresponding options, may be empty or even null
 	 *
-	 * @return	string		the captions of the selected options, separated by CR
+	 * @return string the captions of the selected options, separated by CR
 	 */
 	function getCaptionsForSelectedOptions(
 		array $availableOptions, array $selectedOptions
@@ -1005,7 +1014,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 
 			foreach ($selectedOptions as $currentSelection) {
 				if (isset($availableOptions[$currentSelection])) {
-					$captions[]	= $availableOptions[$currentSelection]['caption'];
+					$captions[] = $availableOptions[$currentSelection]['caption'];
 				}
 				$result = implode(CR, $captions);
 			}
@@ -1018,9 +1027,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Gets the already entered billing address nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @return	string		the already entered registration data, nicely formatted as HTML
+	 * @return string the already entered registration data, nicely formatted as
+	 *                HTML
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getBillingAddress() {
 		$result = '';
@@ -1061,14 +1071,14 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether the list of attendees' names is non-empty or less than two
 	 * seats are requested or the field "attendees names" is not displayed.
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the current value of the field with the attendees'
-	 * 						names is provided
-	 * @param	tx_ameosformidable		the current FORMidable object
+	 * @param array associative array with the element "value" in which
+	 *              the current value of the field with the attendees'
+	 *              names is provided
+	 * @param tx_ameosformidable the current FORMidable object
 	 *
-	 * @return	boolean		true if the field is non-empty or less than two
-	 * 						seats are reserved or this field is not displayed
-	 * 						at all, false otherwise
+	 * @return boolean true if the field is non-empty or less than two
+	 *                 seats are reserved or this field is not displayed
+	 *                 at all, false otherwise
 	 */
 	public function hasAttendeesNames(array $formData, tx_ameosformidable $form) {
 		$dataHandler = $form->oDataHandler;
@@ -1088,11 +1098,12 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * (or none is defined as "bank transfer"), the check is always positive and
 	 * returns true.
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the value of the current field is provided
-	 * @param	tx_ameosformidable		the current FORMidable object
+	 * @param array associative array with the element "value" in which
+	 *              the value of the current field is provided
+	 * @param tx_ameosformidable the current FORMidable object
 	 *
-	 * @return	boolean		true if the field is non-empty or "bank transfer" is not selected
+	 * @return boolean true if the field is non-empty or "bank transfer" is not
+	 *                 selected
 	 */
 	public function hasBankData(array $formData, tx_ameosformidable $form) {
 		$result = true;
@@ -1121,12 +1132,13 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * The caller needs to take care of htmlspecialcharing the data.
 	 *
-	 * @param	mixed		(unused)
-	 * @param	array		contents of the "params" XML child of the userobj node (needs to contain an element with the key "key")
+	 * @param mixed (unused)
+	 * @param array contents of the "params" XML child of the userobj node
+	 *              (needs to contain an element with the key "key")
 	 *
-	 * @return	string		the contents of the element
+	 * @return string the contents of the element
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getFeUserData($unused, array $params) {
 		$result = $this->retrieveDataFromSession(null, $params);
@@ -1155,9 +1167,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides a localized list of country names from static_tables.
 	 *
-	 * @return	array		a list of localized country names from static_tables as an array with the keys "caption" (for the title) and "value" (in this case, the same as the caption)
+	 * @return array a list of localized country names from static_tables as an
+	 *               array with the keys "caption" (for the title) and "value"
+	 *               (in this case, the same as the caption)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function populateListCountries() {
 		$this->initStaticInfo();
@@ -1184,9 +1198,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of option checkboxes for this event.
 	 *
-	 * @return	array		items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return array items from the checkboxes table as an array with the keys
+	 *               "caption" (for the title) and "value" (for the uid)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function populateCheckboxes() {
 		$result = array();
@@ -1202,9 +1217,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether our current event has any option checkboxes AND the
 	 * checkboxes should be displayed at all.
 	 *
-	 * @return	boolean		true if we have a non-empty list of checkboxes AND this list should be displayed, false otherwise
+	 * @return boolean true if we have a non-empty list of checkboxes AND this
+	 *                 list should be displayed, false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function hasCheckboxes() {
 		return $this->seminar->hasCheckboxes()
@@ -1216,9 +1232,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of lodging options for this event.
 	 *
-	 * @return	array		items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return array items from the lodgings table as an array with the keys
+	 *               "caption" (for the title) and "value" (for the uid)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function populateLodgings() {
 		$result = array();
@@ -1235,11 +1252,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * least one lodging option for this event and the lodging options should
 	 * be displayed).
 	 *
-	 * @param	array		the value of the current field in an associative
-	 * 						array witch the element "value"
+	 * @param array the value of the current field in an associative
+	 *              array witch the element "value"
 	 *
-	 * @return	boolean		true if at least one item is selected or no lodging
-	 * 						options can be selected
+	 * @return boolean true if at least one item is selected or no lodging
+	 *                 options can be selected
 	 */
 	public function isLodgingSelected(array $formData) {
 		return !empty($formData['value']) || !$this->hasLodgings();
@@ -1249,9 +1266,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether our current event has any lodging options and the
 	 * lodging options should be displayed at all.
 	 *
-	 * @return	boolean		true if we have a non-empty list of lodging options and this list should be displayed, false otherwise
+	 * @return boolean true if we have a non-empty list of lodging options and
+	 *                 this list should be displayed, false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function hasLodgings() {
 		return $this->seminar->hasLodgings()
@@ -1263,9 +1281,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the list of food options for this event.
 	 *
-	 * @return	array		items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return array items from the foods table as an array with the keys
+	 *               "caption" (for the title) and "value" (for the uid)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function populateFoods() {
 		$result = array();
@@ -1281,9 +1300,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Checks whether our current event has any food options and the food
 	 * options should be displayed at all.
 	 *
-	 * @return	boolean		true if we have a non-empty list of food options and this list should be displayed, false otherwise
+	 * @return boolean true if we have a non-empty list of food options and this
+	 *                 list should be displayed, false otherwise
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function hasFoods() {
 		return $this->seminar->hasFoods()
@@ -1297,11 +1317,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * least one food option for this event and the food options should
 	 * be displayed).
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the value of the current field is provided
+	 * @param array associative array with the element "value" in which
+	 *              the value of the current field is provided
 	 *
-	 * @return	boolean		true if at least one item is selected or no food
-	 * 						options can be selected
+	 * @return boolean true if at least one item is selected or no food
+	 *                 options can be selected
 	 */
 	public function isFoodSelected(array $formData) {
 		return !empty($formData['value']) || !$this->hasFoods();
@@ -1310,9 +1330,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Provides data items for the prices for this event.
 	 *
-	 * @return	array		available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return array available prices as an array with the keys "caption" (for
+	 *               the title) and "value" (for the uid)
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function populatePrices() {
 		return $this->seminar->getAvailablePrices();
@@ -1323,13 +1344,13 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * field is not visible in the registration form (in which case it is not
 	 * possible to select a price).
 	 *
-	 * @param	array		associative array with the element "value" in which
-	 * 						the currently selected value (a positive integer) or
-	 * 						null if no radiobutton is selected is provided
+	 * @param array associative array with the element "value" in which
+	 *              the currently selected value (a positive integer) or
+	 *              null if no radiobutton is selected is provided
 	 *
-	 * @return	boolean		true if a valid price is selected or the price field
-	 * 						is hidden, false if none is selected, but could have
-	 * 						been selected
+	 * @return boolean true if a valid price is selected or the price field
+	 *                 is hidden, false if none is selected, but could have
+	 *                 been selected
 	 */
 	public function isValidPriceSelected(array $formData) {
 		return $this->seminar->isPriceAvailable($formData['value'])
@@ -1347,9 +1368,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * b) if only one payment method is available, that payment method
 	 * c) 0 in all other cases
 	 *
-	 * @return	integer		the UID of the preselected payment method or 0 if should will be preselected
+	 * @return integer the UID of the preselected payment method or 0 if should
+	 *                 will be preselected
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getPreselectedPaymentMethod() {
 		$result = 0;
@@ -1383,7 +1405,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * - telephone
 	 * - email
 	 *
-	 * @param	array		the form data (may be empty)
+	 * @param array the form data (may be empty)
 	 */
 	protected function saveDataToSession(array $parameters) {
 		if (!empty($parameters)) {
@@ -1418,9 +1440,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Retrieves the saved payment method from the FE user session.
 	 *
-	 * @return	integer		the UID of the payment method that has been saved in the FE user session or 0 if there is none
+	 * @return integer the UID of the payment method that has been saved in the
+	 *                 FE user session or 0 if there is none
 	 *
-	 * @access	private
+	 * @access private
 	 */
 	function retrieveSavedMethodOfPayment() {
 		return intval(
@@ -1435,13 +1458,13 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Retrieves the data for a given key from the FE user session. Returns an
 	 * empty string if no data for that key is stored.
 	 *
-	 * @param	mixed		(unused)
-	 * @param	array		the contents of the "params" child of the userobj
-	 * 						node as key/value pairs (used for retrieving the
-	 * 						current form field name)
+	 * @param mixed (unused)
+	 * @param array the contents of the "params" child of the userobj
+	 *              node as key/value pairs (used for retrieving the
+	 *              current form field name)
 	 *
-	 * @return	string		the data stored in the FE user session under the
-	 * 						given key, might be empty
+	 * @return string the data stored in the FE user session under the
+	 *                given key, might be empty
 	 */
 	public function retrieveDataFromSession($unused, array $parameters) {
 		return tx_oelib_session::getInstance(tx_oelib_session::TYPE_USER)
@@ -1453,9 +1476,9 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * account owner from a previous registration in the same FE user session,
 	 * or the FE user's name.
 	 *
-	 * @return	string		a name to prefill the account owner
+	 * @return string a name to prefill the account owner
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function prefillAccountOwner() {
 		$result = $this->retrieveDataFromSession(
@@ -1476,11 +1499,12 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/**
 	 * Creates and initializes $this->staticInfo (if that hasn't been done yet).
 	 *
-	 * @access	private
+	 * @access private
 	 */
 	function initStaticInfo() {
 		if (!$this->staticInfo) {
-			$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+			$this->staticInfo
+				= t3lib_div::makeInstance('tx_staticinfotables_pi1');
 			$this->staticInfo->init();
 		}
 	}
@@ -1490,7 +1514,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * nothing to select (e.g. if there are no payment methods) from the
 	 * templating process.
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function hideUnusedFormFields() {
 		static $availableFormFields = array(
@@ -1578,9 +1602,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Provides a string "Registration form: step x of y" for the current page.
 	 * The number of the first and last page can be configured via TS setup.
 	 *
-	 * @return	string		a localized string displaying the number of the current and the last page
+	 * @return string a localized string displaying the number of the current
+	 *                and the last page
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getStepCounter() {
 		$currentPageNumberForDisplay = $this->plugin->getConfValueInteger(

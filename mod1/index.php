@@ -22,40 +22,39 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Module 'Seminars' for the 'seminars' extension.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- */
-
 unset($MCONF);
 $MCONF = array();
 require_once('conf.php');
-require_once($BACK_PATH.'init.php');
-require_once($BACK_PATH.'template.php');
+require_once($BACK_PATH . 'init.php');
+require_once($BACK_PATH . 'template.php');
 $LANG->includeLLFile('EXT:seminars/mod1/locallang.xml');
 
-require_once(PATH_t3lib.'class.t3lib_scbase.php');
-require_once(PATH_t3lib.'class.t3lib_page.php');
+require_once(PATH_t3lib . 'class.t3lib_scbase.php');
+require_once(PATH_t3lib . 'class.t3lib_page.php');
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registration.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_registrationbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_seminarbagbuilder.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
 
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
 
+/**
+ * Module 'Seminars' for the 'seminars' extension.
+ *
+ * @package TYPO3
+ * @subpackage tx_seminars
+ *
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ */
 class tx_seminars_module1 extends t3lib_SCbase {
 	var $pageinfo;
 
 	/**
-	 * @return	[type]		...
+	 * @return [type] ...
 	 */
 	public function init() {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
@@ -68,7 +67,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * Adds items to the ->MOD_MENU array. Used for the function menu selector.
 	 *
-	 * @return	[type]		...
+	 * @return [type] ...
 	 */
 	public function menuConfig() {
 		global $LANG, $BE_USER;
@@ -90,7 +89,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * Main function of the module. Writes the content to $this->content
 	 *
-	 * @return	[type]		...
+	 * @return [type] ...
 	 */
 	public function main() {
 		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
@@ -202,7 +201,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * Prints out the module HTML.
 	 *
-	 * @return	[type]		...
+	 * @return [type] ...
 	 */
 	function printContent() {
 		$this->content .= $this->doc->endPage();
@@ -212,7 +211,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * Generates the module content.
 	 *
-	 * @return	[type]		...
+	 * @return [type] ...
 	 */
 	private function moduleContent() {
 		global $LANG;
@@ -236,7 +235,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * Returns a list of the e-mail addresses of the registered attendees.
 	 *
-	 * @return	string		HTML output (content of the module).
+	 * @return string HTML output (content of the module).
 	 */
 	private function listSeminarDetails() {
 		// initialize the localization functionality
@@ -277,13 +276,13 @@ class tx_seminars_module1 extends t3lib_SCbase {
 	/**
 	 * Returns a comma separated list of names and e-mail addresses.
 	 *
-	 * @param	string		string that will be prepended to the WHERE clause
-	 *						using AND, e.g. 'pid=42' (the AND and the enclosing
-	 *						spaces are not necessary for this parameter)
+	 * @param string string that will be prepended to the WHERE clause
+	 *               using AND, e.g. 'pid=42' (the AND and the enclosing
+	 *               spaces are not necessary for this parameter)
 	 *
-	 * @return	string		a comma-separated list of names and e-mail addresses
-	 *						or a localized messages if there are no registration
-	 *						records
+	 * @return string a comma-separated list of names and e-mail addresses
+	 *                or a localized messages if there are no registration
+	 *                records
 	 */
 	private function generateEmailList($queryParameters) {
 		// initialize the localization functionality

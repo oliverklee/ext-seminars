@@ -22,20 +22,19 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_speaker.php');
+
 /**
  * Class 'tx_seminars_speakerchild' for the 'seminars' extension.
  *
  * This is mere a class used for unit tests of the 'seminars' extension. Don't
  * use it for any other purpose.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_speaker.php');
-
 final class tx_seminars_speakerchild extends tx_seminars_speaker {
 	/**
 	 * Sets the number of skills for this record.
@@ -43,10 +42,10 @@ final class tx_seminars_speakerchild extends tx_seminars_speaker {
 	 * TODO: This function needs to be removed once the testing framework
 	 * can update the counter for the number of skills.
 	 *
-	 * @see		https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param	integer		the number of skills that are associated with
-	 * 						this event
+	 * @param integer the number of skills that are associated with
+	 * this event
 	 */
 	public function setNumberOfSkills($number) {
 		$this->setRecordPropertyInteger('skills', $number);

@@ -22,20 +22,19 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+
 /**
  * Class 'tx_seminars_organizer' for the 'seminars' extension.
  *
  * This class represents an organizer.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-
 class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
 	var $tableName = SEMINARS_TABLE_ORGANIZERS;
@@ -43,7 +42,7 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our homepage.
 	 *
-	 * @return	string		our homepage (or '' if there is an error)
+	 * @return string our homepage (or '' if there is an error)
 	 */
 	public function getHomepage() {
 		return $this->getRecordPropertyString('homepage');
@@ -52,8 +51,8 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	/**
 	 * Returns true if this organizer has a homepage set, false otherwise.
 	 *
-	 * @return	boolean		true if this organizer has a homepage set, false
-	 * 						otherwise
+	 * @return boolean true if this organizer has a homepage set, false
+	 *                 otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasRecordPropertyString('homepage');
@@ -62,7 +61,7 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our e-mail address.
 	 *
-	 * @return	string		our e-mail address (or '' if there is an error)
+	 * @return string our e-mail address (or '' if there is an error)
 	 */
 	public function getEmail() {
 		return $this->getRecordPropertyString('email');
@@ -71,7 +70,7 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our e-mail footer.
 	 *
-	 * @return	string		our e-mail footer (or '' if there is an error)
+	 * @return string our e-mail footer (or '' if there is an error)
 	 */
 	public function getEmailFooter() {
 		return $this->getRecordPropertyString('email_footer');
@@ -80,8 +79,8 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our attendances PID, will be 0 if there is no attendances PID set.
 	 *
-	 * @return	integer		our attendances PID or 0 if there is no attendances
-	 * 						PID set
+	 * @return integer our attendances PID or 0 if there is no attendances
+	 *                 PID set
 	 */
 	public function getAttendancesPid() {
 		return $this->getRecordPropertyInteger('attendances_pid');

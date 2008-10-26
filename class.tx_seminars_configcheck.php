@@ -34,11 +34,11 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * The correct functioning of this class does not rely on any HTML templates or
  * language files so it works even under the worst of circumstances.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
@@ -730,7 +730,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value sortListViewByCategory.
 	 *
-	 * @access	private
+	 * @access private
 	 */
 	function checkSortListViewByCategory() {
 		$this->checkIfBoolean(
@@ -1944,7 +1944,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	 * Checks the setting of the configuration value
 	 * allowUnregistrationWithEmptyWaitingList.
 	 *
-	 * @access	private
+	 * @access private
 	 */
 	function checkAllowUnregistrationWithEmptyWaitingList() {
 		$this->checkIfBoolean(

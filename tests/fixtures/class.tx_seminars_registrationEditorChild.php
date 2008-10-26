@@ -31,17 +31,17 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registra
  * This is mere a class used for unit tests of the 'seminars' extension. Don't
  * use it for any other purpose.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 final class tx_seminars_registrationEditorChild extends tx_seminars_registration_editor {
 	/**
 	 * The constructor.
 	 *
-	 * @param	tx_seminars_pi1		the pi1 object where this registration
-	 * 								editor will be inserted
+	 * @param tx_seminars_pi1 the pi1 object where this registration
+	 * editor will be inserted
 	 */
 	public function __construct(tx_seminars_pi1 $plugin) {
 		$this->plugin = $plugin;
@@ -67,7 +67,7 @@ final class tx_seminars_registrationEditorChild extends tx_seminars_registration
 	 * - telephone
 	 * - email
 	 *
-	 * @param	array		the form data (may be empty)
+	 * @param array the form data (may be empty)
 	 */
 	public function saveDataToSession(array $parameters) {
 		parent::saveDataToSession($parameters);

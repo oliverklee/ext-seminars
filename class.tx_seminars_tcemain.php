@@ -34,24 +34,24 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php
  * This class holds functions used to validate submitted forms in the back end.
  * These functions are called from t3lib/class.t3lib_tcemain.php via hooks.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Mario Rimann <typo3-coding@rimann.org>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Mario Rimann <typo3-coding@rimann.org>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	var $tceMainFieldArrays = array();
 
 	/**
-	 * @var	string		the extension key
+	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
 
 	/**
 	 * The constructor.
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function __construct() {
 		parent::init();
@@ -60,7 +60,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	/**
 	 * Handles data after everything had been written to the database.
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function processDatamap_afterAllOperations() {
 		$this->processTimeSlots();
@@ -78,13 +78,13 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 * translate it to the real uid of the inserted record using the
 	 * $pObj->substNEWwithIDs array.
 	 *
-	 * @param	string		the status of this record (new/update)
-	 * @param	string		the affected table name
-	 * @param	integer		the UID of the affected record (may be 0)
-	 * @param	array		an array of all fields that got changed (as reference)
-	 * @param	object		reference to tcemain calling object
+	 * @param string the status of this record (new/update)
+	 * @param string the affected table name
+	 * @param integer the UID of the affected record (may be 0)
+	 * @param array an array of all fields that got changed (as reference)
+	 * @param object reference to tcemain calling object
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function processDatamap_afterDatabaseOperations(
 		$status, $table, $uid, array &$fieldArray, t3lib_TCEmain $pObj
@@ -104,7 +104,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	/**
 	 * Processes all time slots.
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function processTimeSlots() {
 		$table = SEMINARS_TABLE_TIME_SLOTS;
@@ -122,7 +122,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	/**
 	 * Processes all events.
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function processEvents() {
 		$table = SEMINARS_TABLE_SEMINARS;
@@ -140,10 +140,10 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	/**
 	 * Processes a single time slot.
 	 *
-	 * @param	integer		the UID of the affected record (may be 0)
-	 * @param	array		an array of all fields that got changed
+	 * @param integer the UID of the affected record (may be 0)
+	 * @param array an array of all fields that got changed
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function processSingleTimeSlot($uid, array $fieldArray) {
 		// Initializes a timeslot object to have all
@@ -165,10 +165,10 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	/**
 	 * Processes a single event.
 	 *
-	 * @param	integer		the UID of the affected record (may be 0)
-	 * @param	array		an array of all fields that got changed
+	 * @param integer the UID of the affected record (may be 0)
+	 * @param array an array of all fields that got changed
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function processSingleEvent($uid, array $fieldArray) {
 		// Initializes a seminar object to have all functions

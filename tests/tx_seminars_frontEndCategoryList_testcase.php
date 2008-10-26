@@ -29,35 +29,35 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the 'frontEndCategoryList' class in the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var	tx_seminars_frontEndCategoryList
+	 * @var tx_seminars_frontEndCategoryList
 	 */
 	private $fixture;
 
 	/**
-	 * @var	tx_oelib_testingFramework
+	 * @var tx_oelib_testingFramework
 	 */
 	private $testingFramework;
 
 	/**
-	 * @var	integer		the UID of a seminar to which the fixture relates
+	 * @var integer the UID of a seminar to which the fixture relates
 	 */
 	private $seminarUid;
 
 	/**
-	 * @var	integer		PID of a dummy system folder
+	 * @var integer PID of a dummy system folder
 	 */
 	private $systemFolderPid = 0;
 
 	public function setUp() {
-		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();

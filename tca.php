@@ -6,12 +6,12 @@ if (!defined ('TYPO3_MODE')) {
 if (!function_exists('tx_seminars_tableReplace')) {
 	/**
 	 * Replaces the tables markers for the add and list wizard with the given
-	 * table name. It's mainly used to simplify the maintaining of the wizard code
-	 * (equals in more than 90%) and to get some flexibility.
+	 * table name. It's mainly used to simplify the maintaining of the wizard
+	 * code (equals in more than 90%) and to get some flexibility.
 	 *
-	 * @param	array		wizards array with the table markers
-	 * @param	string		name of the real database table (e.g. tx_seminars_seminars)
-	 * @return	array		wizards array with replaced table markers
+	 * @param array wizards array with the table markers
+	 * @param string name of the real database table (e.g. tx_seminars_seminars)
+	 * @return array wizards array with replaced table markers
 	 */
 	function tx_seminars_tableReplace(array $array, $table) {
 		$array['add']['params']['table'] =

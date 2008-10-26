@@ -39,14 +39,14 @@ if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
  *
  * It will hold the corresponding data and can commit that data to the DB.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
-	 * @var	string		the extension key
+	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
 
@@ -60,11 +60,11 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * The constructor. Creates a test instance from a DB record.
 	 *
-	 * @param	integer		The UID of the record to retrieve from the DB. This
-	 * 						parameter will be ignored if $dbResult is provided.
-	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
-	 * 						If this parameter is provided, $uid will be
-	 * 						ignored.
+	 * @param integer The UID of the record to retrieve from the DB. This
+	 *                parameter will be ignored if $dbResult is provided.
+	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
+	 *                If this parameter is provided, $uid will be
+	 *                ignored.
 	 */
 	public function __construct($uid, $dbResult = null) {
 		$this->retrieveRecordAndGetData($uid, $dbResult);
@@ -75,12 +75,12 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Retrieves this record's data from the DB (if it has not been retrieved
 	 * yet) and gets the record data from the DB result.
 	 *
-	 * @param	integer		The UID of the record to retrieve from the DB. This
-	 * 						parameter will be ignored if $dbResult is provided.
-	 * @param	pointer		MySQL result pointer (of SELECT query)/DBAL object.
-	 * 						If this parameter is provided, $uid will be ignored.
-	 * @param	boolean		whether it is possible to create an object from a
-	 * 						hidden record
+	 * @param integer The UID of the record to retrieve from the DB. This
+	 *                parameter will be ignored if $dbResult is provided.
+	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
+	 *                If this parameter is provided, $uid will be ignored.
+	 * @param boolean whether it is possible to create an object from a
+	 *                hidden record
 	 */
 	protected function retrieveRecordAndGetData(
 		$uid, $dbResult = null, $allowHiddenRecords = false
@@ -111,7 +111,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Example:
 	 * $dbResultRow['name'] => $this->recordData['name']
 	 *
-	 * @param	array		associative array of a DB query result
+	 * @param array associative array of a DB query result
 	 */
 	protected function getDataFromDbResult(array $dbResultRow) {
 		if (!empty($this->tableName) && !empty($dbResultRow)) {
@@ -124,7 +124,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Checks whether this object has been properly initialized,
 	 * has a non-empty table name set and thus is basically usable.
 	 *
-	 * @return	boolean		true if the object has been initialized, false otherwise.
+	 * @return boolean true if the object has been initialized, false otherwise
 	 */
 	public function isOk() {
 		return (!empty($this->recordData) && !empty($this->tableName));
@@ -132,11 +132,12 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 
 	/**
 	 * Gets a trimmed string element of the record data array.
-	 * If the array has not been initialized properly, an empty string is returned instead.
+	 * If the array has not been initialized properly, an empty string is
+	 * returned instead.
 	 *
-	 * @param	string		key of the element to return
+	 * @param string key of the element to return
 	 *
-	 * @return	string		the corresponding element from the record data array
+	 * @return string the corresponding element from the record data array
 	 */
 	public function getRecordPropertyString($key) {
 		$result = $this->hasKey($key)
@@ -147,11 +148,12 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 
 	/**
 	 * Gets a decimal element of the record data array.
-	 * If the array has not been initialized properly, '0.00' is returned instead.
+	 * If the array has not been initialized properly, '0.00' is returned
+	 * instead.
 	 *
-	 * @param	string		key of the element to return
+	 * @param string key of the element to return
 	 *
-	 * @return	string		the corresponding element from the record data array
+	 * @return string the corresponding element from the record data array
 	 */
 	public function getRecordPropertyDecimal($key) {
 		$result = $this->hasKey($key)
@@ -164,9 +166,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Checks a string element of the record data array for existence and
 	 * non-emptiness.
 	 *
-	 * @param	string		key of the element to check
+	 * @param string key of the element to check
 	 *
-	 * @return	boolean		true if the corresponding string exists and is non-empty
+	 * @return boolean true if the corresponding string exists and is non-empty
 	 */
 	public function hasRecordPropertyString($key) {
 		return ($this->getRecordPropertyString($key) != '');
@@ -176,9 +178,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Checks an integer element of the record data array for existence and
 	 * non-zeroness.
 	 *
-	 * @param	string		key of the element to check
+	 * @param string key of the element to check
 	 *
-	 * @return	boolean		true if the corresponding value exists and is non-zero
+	 * @return boolean true if the corresponding value exists and is non-zero
 	 */
 	public function hasRecordPropertyInteger($key) {
 		return (boolean) $this->getRecordPropertyInteger($key);
@@ -188,10 +190,10 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Checks a decimal element of the record data array for existence and
 	 * value != 0.00.
 	 *
-	 * @param	string		key of the element to check
+	 * @param string key of the element to check
 	 *
-	 * @return	boolean		true if the corresponding field exists and its value
-	 * 						is not "0.00".
+	 * @return boolean true if the corresponding field exists and its value
+	 *                 is not "0.00".
 	 */
 	public function hasRecordPropertyDecimal($key) {
 		return ($this->getRecordPropertyDecimal($key) != '0.00');
@@ -201,9 +203,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Gets an (intval'ed) integer element of the record data array.
 	 * If the array has not been initialized properly, 0 is returned instead.
 	 *
-	 * @param	string		key of the element to return
+	 * @param string key of the element to return
 	 *
-	 * @return	integer		the corresponding element from the record data array
+	 * @return integer the corresponding element from the record data array
 	 */
 	public function getRecordPropertyInteger($key) {
 		$result = $this->hasKey($key)
@@ -215,8 +217,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Sets an integer element of the record data array (and intvals it).
 	 *
-	 * @param	string		key of the element to set (must be non-empty)
-	 * @param	integer		the value that will be written into the element
+	 * @param string key of the element to set (must be non-empty)
+	 * @param integer the value that will be written into the element
 	 */
 	protected function setRecordPropertyInteger($key, $value) {
 		if (!empty($key)) {
@@ -227,8 +229,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Sets a string element of the record data array (and trims it).
 	 *
-	 * @param	string		key of the element to set (must be non-empty)
-	 * @param	string		the value that will be written into the element
+	 * @param string key of the element to set (must be non-empty)
+	 * @param string the value that will be written into the element
 	 */
 	protected function setRecordPropertyString($key, $value) {
 		if (!empty($key)) {
@@ -239,8 +241,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Sets a boolean element of the record data array.
 	 *
-	 * @param	string		key of the element to set (must be non-empty)
-	 * @param	boolean		the value that will be written into the element
+	 * @param string key of the element to set (must be non-empty)
+	 * @param boolean the value that will be written into the element
 	 */
 	protected function setRecordPropertyBoolean($key, $value) {
 		if (!empty($key)) {
@@ -252,9 +254,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Gets an element of the record data array, converted to a boolean.
 	 * If the array has not been initialized properly, false is returned.
 	 *
-	 * @param	string		key of the element to return
+	 * @param string key of the element to return
 	 *
-	 * @return	boolean		the corresponding element from the record data array
+	 * @return boolean the corresponding element from the record data array
 	 */
 	public function getRecordPropertyBoolean($key) {
 		$result = $this->hasKey($key)
@@ -267,10 +269,10 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Checks whether $this->recordData is initialized at all and
 	 * whether a given key exists.
 	 *
-	 * @param	string		the array key to search for
+	 * @param string the array key to search for
 	 *
-	 * @return	boolean		true if $this->recordData has been initialized
-	 * 						and the array key exists, false otherwise
+	 * @return boolean true if $this->recordData has been initialized
+	 *                 and the array key exists, false otherwise
 	 */
 	private function hasKey($key) {
 		return ($this->isOk() && !empty($key) && isset($this->recordData[$key]));
@@ -282,7 +284,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * The UID of the parent page must be set in $this->recordData['pid'].
 	 * (otherwise the record will be created in the root page).
 	 *
-	 * @return	boolean		true if everything went OK, false otherwise
+	 * @return boolean true if everything went OK, false otherwise
 	 */
 	public function commitToDb() {
 		if (!$this->isOk()) {
@@ -311,17 +313,17 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Adds m:m records that are referenced by this record.
+	 * Adds m:n records that are referenced by this record.
 	 *
 	 * Before this function may be called, $this->recordData['uid'] must be set
 	 * correctly.
 	 *
-	 * @param	string		the name of the m:m table, having the fields
-	 * 						uid_local, uid_foreign and sorting, must not be empty
-	 * @param	array		array of uids of records from the foreign table to
-	 * 						which we should create references, may be empty
+	 * @param string the name of the m:n table, having the fields
+	 *               uid_local, uid_foreign and sorting, must not be empty
+	 * @param array array of uids of records from the foreign table to
+	 *              which we should create references, may be empty
 	 *
-	 * @return	integer		the number of created m:m records
+	 * @return integer the number of created m:n records
 	 */
 	protected function createMmRecords($mmTable, array $references) {
 		if (empty($references)) {
@@ -361,11 +363,14 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *
 	 * This method may be called statically.
 	 *
-	 * @param	string		string with a UID (need not necessarily be escaped, will be intval'ed)
-	 * @param	string		string with the tablename where the UID should be searched for
-	 * @param	boolean		whether hidden records should be accepted
+	 * @param string string with a UID (need not necessarily be escaped, will be
+	 *               intvaled)
+	 * @param string string with the tablename where the UID should be searched
+	 *               for
+	 * @param boolean whether hidden records should be accepted
 	 *
-	 * @return	boolean		true if a visible record with that UID exists; false otherwise.
+	 * @return boolean true if a visible record with that UID exists, false
+	 *                 otherwise
 	 */
 	public function recordExists($uid, $tableName, $allowHiddenRecords = false) {
 		$result = is_numeric($uid) && ($uid);
@@ -374,7 +379,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'COUNT(*) AS num',
 				$tableName,
-				'uid=' . intval($uid) .	tx_oelib_db::enableFields(
+				'uid=' . intval($uid) . tx_oelib_db::enableFields(
 					$tableName, $allowHiddenRecords
 				)
 			);
@@ -399,17 +404,18 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * The record is retrieved from $this->tableName. Therefore $this->tableName
 	 * has to be set before calling this method.
 	 *
-	 * @param	integer		The UID of the record to retrieve from the DB.
-	 * @param	boolean		whether to allow hidden records
+	 * @param integer The UID of the record to retrieve from the DB.
+	 * @param boolean whether to allow hidden records
 	 *
-	 * @return	pointer		MySQL result pointer (of SELECT query)/DBAL object, null if the UID is invalid
+	 * @return pointer MySQL result pointer (of SELECT query)/DBAL object, null
+	 *                 if the UID is invalid
 	 */
 	protected function retrieveRecord($uid, $allowHiddenRecords = false) {
 		if ($this->recordExists($uid, $this->tableName, $allowHiddenRecords)) {
 		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				$this->tableName,
-				'uid=' . intval($uid) .	tx_oelib_db::enableFields(
+				'uid=' . intval($uid) . tx_oelib_db::enableFields(
 					$this->tableName, $allowHiddenRecords
 				),
 				'',
@@ -426,7 +432,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Gets our UID.
 	 *
-	 * @return	integer		our UID (or 0 if there is an error)
+	 * @return integer our UID (or 0 if there is an error)
 	 */
 	public function getUid() {
 		return $this->getRecordPropertyInteger('uid');
@@ -435,7 +441,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Checks whether this object has a UID.
 	 *
-	 * @return	boolean		true if this object has a UID, false otherwise
+	 * @return boolean true if this object has a UID, false otherwise
 	 */
 	public function hasUid() {
 		return $this->hasRecordPropertyInteger('uid');
@@ -444,7 +450,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Gets our title.
 	 *
-	 * @return	string		our title (or '' if there is an error)
+	 * @return string our title (or '' if there is an error)
 	 */
 	public function getTitle() {
 		return $this->getRecordPropertyString('title');
@@ -453,7 +459,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Sets the title element of the record data array.
 	 *
-	 * @param	string		the value that will be written into the title element
+	 * @param string the value that will be written into the title element
 	 */
 	public function setTitle($title) {
 		$this->setRecordPropertyString('title', $title);
@@ -462,7 +468,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Gets our PID.
 	 *
-	 * @return	integer		our PID (or 0 if there is an error)
+	 * @return integer our PID (or 0 if there is an error)
 	 */
 	public function getCurrentBePageId() {
 		$result = parent::getCurrentBePageId();
@@ -478,9 +484,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Gets an HTML image tag with the URL of the icon file of the record as
 	 * configured in TCA.
 	 *
-	 * @return	string		our HTML image tag with the URL of the icon file of
-	 * 						the record or a "not found" icon if there's no icon
-	 * 						for this record
+	 * @return string our HTML image tag with the URL of the icon file of
+	 *                the record or a "not found" icon if there's no icon
+	 *                for this record
 	 */
 	public function getRecordIcon() {
 		$imageURL = '';
@@ -528,8 +534,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Commits the changes of an record to the database.
 	 *
-	 * @param	array	an associative array with the keys being the field names
-	 * 					and the value being the field values
+	 * @param array an associative array with the keys being the field names
+	 *              and the value being the field values
 	 */
 	public function saveToDatabase(array $updateArray) {
 		if (count($updateArray)) {

@@ -49,94 +49,93 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php
 /**
  * Plugin 'Seminar Manager' for the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
-	 * @var	string		same as class name
+	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_pi1';
 	/**
-	 * @var	string		path to this script relative to the extension dir
+	 * @var string path to this script relative to the extension dir
 	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
 	/**
-	 * @var	string		the extension key
+	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
 
 	/**
-	 * @var	tx_seminars_configgetter		a config getter that gets us the
-	 * 										configuration in plugin.tx_seminars
+	 * @var tx_seminars_configgetter a config getter that gets us the
+	 *                               configuration in plugin.tx_seminars
 	 */
 	private $configGetter = null;
 
 	/**
-	 * @var	tx_seminars_seminar		the seminar which we want to list/show or
-	 * 								for which the user wants to register
+	 * @var tx_seminars_seminar the seminar which we want to list/show or
+	 *                          for which the user wants to register
 	 */
 	private $seminar = null;
 
 	/**
-	 * @var	tx_seminars_registration		the registration which we want to
-	 * 										list/show in the "my events" view
+	 * @var tx_seminars_registration the registration which we want to
+	 *                               list/show in the "my events" view
 	 */
 	private $registration = null;
 
-	/** @var	string		the previous event's category (used for the list view) */
+	/** @var string the previous event's category (used for the list view) */
 	private $previousCategory = '';
 
-	/** @var	string		the previous event's date (used for the list view) */
+	/** @var string the previous event's date (used for the list view) */
 	private $previousDate = '';
 
 	/**
-	 * @var	tx_seminars_registrationmanager		an instance of registration
-	 * 											manager which we want to have
-	 * 											around only once (for
-	 * 											performance reasons)
+	 * @var tx_seminars_registrationmanager an instance of registration manager
+	 *                                      which we want to have around only
+	 *                                      once (for performance reasons)
 	 */
 	private $registrationManager = null;
 
 	/**
-	 * @var	tx_staticinfotables_pi1		needed for the list view to convert ISO
-	 * 									codes to country names and languages
+	 * @var tx_staticinfotables_pi1 needed for the list view to convert ISO
+	 *                              codes to country names and languages
 	 */
 	private $staticInfo = null;
 
 	/**
-	 * @var	array		all languages that may be shown in the option box of the
-	 * 					selector widget
+	 * @var array all languages that may be shown in the option box of the
+	 *            selector widget
 	 */
 	private $allLanguages = array();
 
 	/**
-	 * @var	array		all countries that may be shown in the option box of the
-	 * 					selector widget
+	 * @var array all countries that may be shown in the option box of the
+	 *            selector widget
 	 */
 	private $allCountries = array();
 
 	/**
-	 * @var	array		all places that may be shown in the option box of the
-	 * 					selector widget
+	 * @var array all places that may be shown in the option box of the
+	 *            selector widget
 	 */
 	private $allPlaces = array();
 
 	/**
-	 * @var	array		all cities that may be shown in the option box of the
-	 * 					selector widget
+	 * @var array all cities that may be shown in the option box of the
+	 *            selector widget
 	 */
 	private $allCities = array();
 
-	/** @var	array		all event types */
+	/** @var array all event types */
 	private $allEventTypes = array();
 
 	/**
-	 * @var	array		List of field names (as keys) by which we can sort plus
-	 * 					the corresponding SQL sort criteria (as value).
+	 * @var array List of field names (as keys) by which we can sort plus
+	 *            the corresponding SQL sort criteria (as value).
 	 *
 	 * We cannot use the database table name constants here because default
 	 * values for member variable don't allow for compound expression.
@@ -149,11 +148,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		'category' => '(SELECT MIN(tx_seminars_categories.title)
 			FROM tx_seminars_seminars_categories_mm, tx_seminars_categories,
 					tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE (	(	s1.uid=s2.topic
+			WHERE ( ( s1.uid=s2.topic
 						AND s1.object_type!=2
 						AND s2.object_type=2
 						AND s2.uid=tx_seminars_seminars.uid
-				) OR (	s1.uid=s2.uid
+				) OR ( s1.uid=s2.uid
 						AND s2.object_type=0
 						AND s1.uid=tx_seminars_seminars.uid
 						)
@@ -228,12 +227,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	);
 
 	/**
-	 * @var	array		This is a list of field names in which we can search,
-	 * 					grouped by record type.
+	 * @var array This is a list of field names in which we can search,
+	 *            grouped by record type.
 	 *
-	 * 'seminars' is the list of fields that are always stored in the seminar record.
-	 * 'seminars_topic' is the list of fields that might be stored in the topic
-	 *  record in if we are a date record (that refers to a topic record).
+	 * 'seminars' is the list of fields that are always stored in the seminar
+	 * record. 'seminars_topic' is the list of fields that might be stored in
+	 * the topic record in if we are a date record (that refers to a topic
+	 * record).
 	 */
 	private $searchFieldList = array(
 		'seminars' => array(
@@ -285,7 +285,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	);
 
 	/**
-	 * @var	array		hook objects for this class
+	 * @var array hook objects for this class
 	 */
 	private $hookObjects = array();
 
@@ -317,10 +317,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Displays the seminar manager HTML.
 	 *
-	 * @param	string		(unused)
-	 * @param	array		TypoScript configuration for the plugin
+	 * @param string (unused)
+	 * @param array TypoScript configuration for the plugin
 	 *
-	 * @return	string		HTML for the plugin
+	 * @return string HTML for the plugin
 	 */
 	public function main($unused, array $conf) {
 		$this->init($conf);
@@ -459,7 +459,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Checks that we are properly initialized and that we have a config getter
 	 * and a registration manager.
 	 *
-	 * @return	boolean		true if we are properly initialized, false otherwise
+	 * @return boolean true if we are properly initialized, false otherwise
 	 */
 	public function isInitialized() {
 		return ($this->isInitialized
@@ -501,9 +501,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * $this->registrationManager must have been initialized before this
 	 * method may be called.
 	 *
-	 * @param	integer		an event UID
+	 * @param integer an event UID
 	 *
-	 * @return	boolean		true if the seminar UID is valid and the object has been created, false otherwise
+	 * @return boolean true if the seminar UID is valid and the object has been
+	 *                 created, false otherwise
 	 */
 	public function createSeminar($seminarUid) {
 		$result = false;
@@ -539,10 +540,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * $this->registrationManager must have been initialized before this
 	 * method may be called.
 	 *
-	 * @param	integer		a registration UID
+	 * @param integer a registration UID
 	 *
-	 * @return	boolean		true if the registration UID is valid and the object
-	 * 						has been created, false otherwise
+	 * @return boolean true if the registration UID is valid and the object
+	 *                 has been created, false otherwise
 	 */
 	public function createRegistration($registrationUid) {
 		$result = false;
@@ -600,7 +601,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Gets our seminar object.
 	 *
-	 * @return	tx_seminars_seminar		our seminar object
+	 * @return tx_seminars_seminar our seminar object
 	 */
 	public function getSeminar() {
 		return $this->seminar;
@@ -609,7 +610,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Returns the current registration.
 	 *
-	 * @return	tx_seminars_registration	the current registration
+	 * @return tx_seminars_registration the current registration
 	 */
 	public function getRegistration() {
 		return $this->registration;
@@ -618,7 +619,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Returns the shared registration manager.
 	 *
-	 * @return	tx_seminars_registrationmanager	the shared registration manager
+	 * @return tx_seminars_registrationmanager the shared registration manager
 	 */
 	public function getRegistrationManager() {
 		return $this->registrationManager;
@@ -630,7 +631,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *
 	 * This function is intended for testing purposes only.
 	 *
-	 * @return	object		our config getter, might be null
+	 * @return object our config getter, might be null
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;
@@ -639,10 +640,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Creates the link to the list of registrations for the current seminar.
 	 * Returns an empty string if this link is not allowed.
-	 * For standard lists, a link is created if either the user is a VIP
-	 * or is registered for that seminar (with the link to the VIP list taking precedence).
+	 * For standard lists, a link is created if either the user is a VIP or is
+	 * registered for that seminar (with the link to the VIP list taking
+	 * precedence).
 	 *
-	 * @return	string		HTML for the link (may be an empty string)
+	 * @return string HTML for the link (may be an empty string)
 	 */
 	protected function getRegistrationsListLink() {
 		$result = '';
@@ -677,19 +679,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Returns a label wrapped in <a> tags. The link points to the login page and
-	 * contains a redirect parameter that points back to a certain page (must be
-	 * provided as a parameter to this function). The user will be redirected to
-	 * this page after a successful login.
+	 * Returns a label wrapped in <a> tags. The link points to the login page
+	 * and contains a redirect parameter that points back to a certain page
+	 * (must be provided as a parameter to this function). The user will be
+	 * redirected to this page after a successful login.
 	 *
 	 * If an event uid is provided, the return parameter will contain a showUid
 	 * parameter with this UID.
 	 *
-	 * @param	string		the label to wrap into a link
-	 * @param	integer		the PID of the page to redirect to after login (may not be empty)
-	 * @param	integer		the UID of the event (may be empty)
+	 * @param string the label to wrap into a link
+	 * @param integer the PID of the page to redirect to after login (must not
+	 *                be empty)
+	 * @param integer the UID of the event (may be empty)
 	 *
-	 * @return	string		the wrapped label
+	 * @return string the wrapped label
 	 */
 	public function getLoginLink($label, $pageId, $eventId = 0) {
 		$linkConfiguration = array('parameter' => $pageId);
@@ -742,7 +745,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Displays detailed data for a seminar.
 	 * Fields listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
-	 * @return	string		HTML for the plugin
+	 * @return string HTML for the plugin
 	 */
 	private function createSingleView() {
 		$this->internal['currentTable'] = SEMINARS_TABLE_SEMINARS;
@@ -752,7 +755,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 
 		$this->hideSubparts(
-			$this->getConfValueString('hideFields',	's_template_special'),
+			$this->getConfValueString('hideFields', 's_template_special'),
 			'FIELD_WRAPPER'
 		);
 
@@ -1065,11 +1068,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Sets the speaker markers for the type given in $speakerType without
 	 * checking whether the current event has any speakers of the given type.
 	 *
-	 * @throws	Exception	if the given speaker type is not allowed
+	 * @throws Exception if the given speaker type is not allowed
 	 *
-	 * @param	string		the speaker type to set the markers for, must not be
-	 * 						empty, must be one of the following: "speakers",
-	 * 						"partners", "tutors" or "leaders"
+	 * @param string the speaker type to set the markers for, must not be
+	 *               empty, must be one of the following: "speakers",
+	 *               "partners", "tutors" or "leaders"
 	 */
 	private function setSpeakersMarkerWithoutCheck($speakerType) {
 		if (!in_array(
@@ -1396,7 +1399,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Note: This function relies on $this->seminar, but also overwrites
 	 * $this->seminar.
 	 *
-	 * @return	string		HTML for the events list (may be an empty string)
+	 * @return string HTML for the events list (may be an empty string)
 	 */
 	private function createEventsOnNextDayList() {
 		$result = '';
@@ -1432,7 +1435,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Note: This function relies on $this->seminar, but also overwrites
 	 * $this->seminar.
 	 *
-	 * @return	string		HTML for the events list (may be an empty string)
+	 * @return string HTML for the events list (may be an empty string)
 	 */
 	private function createOtherDatesList() {
 		$result = '';
@@ -1487,11 +1490,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * This function is used for the normal event list as well as the
 	 * "my events" and the "my VIP events" list.
 	 *
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
+	 * @param string a string selecting the flavor of list view: either
+	 *               an empty string (for the default list view), the
+	 *               value from "what_to_display" or "other_dates"
 	 *
-	 * @return	string		HTML code with the event list
+	 * @return string HTML code with the event list
 	 */
 	protected function createListView($whatToDisplay) {
 		$result = '';
@@ -1592,12 +1595,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * creates a seminar bag or a registration bag (for the "my events" view),
 	 * but does not create any actual HTML output.
 	 *
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
+	 * @param string a string selecting the flavor of list view: either
+	 *               an empty string (for the default list view), the
+	 *               value from "what_to_display" or "other_dates"
 	 *
-	 * @return	object		a seminar bag or a registration bag containing the
-	 * 						seminars or registrations for the list view
+	 * @return object a seminar bag or a registration bag containing the
+	 *                seminars or registrations for the list view
 	 */
 	protected function initListView($whatToDisplay = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
@@ -1712,14 +1715,16 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * This function should only be called when there are actually any list
 	 * items.
 	 *
-	 * @param	object		initialized seminar or registration bag
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
+	 * @param object initialized seminar or registration bag
+	 * @param string a string selecting the flavor of list view: either
+	 *               an empty string (for the default list view), the
+	 *               value from "what_to_display" or "other_dates"
 	 *
-	 * @return	string		HTML for the table (will not be empty)
+	 * @return string HTML for the table (will not be empty)
 	 */
-	protected function createListTable(tx_seminars_bag $seminarOrRegistrationBag, $whatToDisplay) {
+	protected function createListTable(
+		tx_seminars_bag $seminarOrRegistrationBag, $whatToDisplay
+	) {
 		$result = $this->createListHeader();
 		$rowCounter = 0;
 
@@ -1745,7 +1750,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * body.
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 *
-	 * @return	string		HTML output, the table header
+	 * @return string HTML output, the table header
 	 */
 	protected function createListHeader() {
 		$availableColumns = array(
@@ -1787,7 +1792,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Returns the list view footer: end of table body, end of table.
 	 *
-	 * @return	string		HTML output, the table footer
+	 * @return string HTML output, the table footer
 	 */
 	protected function createListFooter() {
 		return $this->getSubpart('LIST_FOOTER');
@@ -1798,14 +1803,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 * If $this->seminar is invalid, an empty string is returned.
 	 *
-	 * @param	integer		Row counter. Starts at 0 (zero). Used for alternating
-	 * 						class values in the output rows.
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
+	 * @param integer Row counter. Starts at 0 (zero). Used for alternating
+	 *                class values in the output rows.
+	 * @param string a string selecting the flavor of list view: either
+	 *               an empty string (for the default list view), the
+	 *               value from "what_to_display" or "other_dates"
 	 *
-	 * @return	string		HTML output, a table row with a class attribute set
-	 * 						(alternative based on odd/even rows)
+	 * @return string HTML output, a table row with a class attribute set
+	 *                (alternative based on odd/even rows)
 	 */
 	protected function createListRow($rowCounter = 0, $whatToDisplay) {
 		$result = '';
@@ -2066,11 +2071,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Gets the heading for a field type, automatically wrapped in a hyperlink
 	 * that sorts by that column if sorting by that column is available.
 	 *
-	 * @param	string		key of the field type for which the heading should
-	 * 						be retrieved, must not be empty
+	 * @param string key of the field type for which the heading should
+	 *               be retrieved, must not be empty
 	 *
-	 * @return	string		the heading label, may be completely wrapped in a
-	 * 						hyperlink for sorting
+	 * @return string the heading label, may be completely wrapped in a
+	 *                hyperlink for sorting
 	 */
 	public function getFieldHeader($fieldName) {
 		$label = $this->translate('label_' . $fieldName);
@@ -2102,9 +2107,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Returns a place bag object that contains all seminar places that are in
 	 * the list of given UIDs.
 	 *
-	 * @param	array		all the UIDs to include in the bag, must not be empty
+	 * @param array all the UIDs to include in the bag, must not be empty
 	 *
-	 * @return	object		place bag object
+	 * @return object place bag object
 	 */
 	protected function createPlaceBag(array $placeUids) {
 		$placeUidsAsCommaSeparatedList = implode(',', $placeUids);
@@ -2152,12 +2157,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * view.
 	 *
 	 * IMPORTANT: The lists for each option box contain only the values that
-	 * are coming from the selected events! So there's not a huge list of languages
-	 * of which 99% are not selected for any event (and thus would result in
-	 * no found events).
+	 * are coming from the selected events! So there's not a huge list of
+	 * languages of which 99% are not selected for any event (and thus would
+	 * result in no found events).
 	 *
-	 * The data will be written to global variables as arrays that contain
-	 * the value (value of the form field) and the label (text shown in the option
+	 * The data will be written to global variables as arrays that contain the
+	 * value (value of the form field) and the label (text shown in the option
 	 * box) for each entry.
 	 */
 	public function createAllowedValuesForSelectorWidget() {
@@ -2256,12 +2261,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * With the default configuration, this method is a no-op as
 	 * "showEmptyEntryInOptionLists" is disabled.
 	 *
-	 * If this option is activated in the TS configuration, the dummy option will
-	 * be prepended to the existing arrays. So we can be sure that the dummy
-	 * option will always be the first one in the array and thus shown first in
-	 * the drop-down.
+	 * If this option is activated in the TS configuration, the dummy option
+	 * will be prepended to the existing arrays. So we can be sure that the
+	 * dummy option will always be the first one in the array and thus shown
+	 * first in the drop-down.
 	 *
-	 * @param	array		array of options, may be empty
+	 * @param array array of options, may be empty
 	 */
 	public function addEmptyOptionIfNeeded(array &$options) {
 		if ($this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
@@ -2406,10 +2411,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Gets the CSS classes (space-separated) for the Vacancies TD.
 	 *
-	 * @param	object		the current seminar object
+	 * @param object the current seminar object
 	 *
-	 * @return	string		class attribute filled with a list a space-separated
-	 * 						CSS classes, plus a leading space
+	 * @return string class attribute filled with a list a space-separated
+	 *                CSS classes, plus a leading space
 	 */
 	protected function getVacanciesClasses(tx_seminars_seminar $seminar) {
 		$result = $this->pi_getClassName('vacancies');
@@ -2438,7 +2443,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *
 	 * A link is created if the logged-in FE user is the owner of the event.
 	 *
-	 * @return	string		HTML for the link (may be an empty string)
+	 * @return string HTML for the link (may be an empty string)
 	 */
 	protected function getEditLink() {
 		$result = '';
@@ -2465,7 +2470,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * a text search. And there are multiple option boxes that contain the allowed
 	 * values for e.g. the field "language".
 	 *
-	 * @return	string		the HTML source for the selector widget
+	 * @return string the HTML source for the selector widget
 	 */
 	public function createSelectorWidget() {
 		// Shows or hides the text search field.
@@ -2503,9 +2508,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * a list of options for a certain sort of records. The option box for the
 	 * field "language" could contain the entries "English" and "German".
 	 *
-	 * @param	string		the name of the option box to generate, must not contain
-	 * 						spaces and there must be a localized label "label_xyz"
-	 * 						with this name, may not be empty
+	 * @param string the name of the option box to generate, must not contain
+	 *               spaces and there must be a localized label "label_xyz"
+	 *               with this name, may not be empty
 	 */
 	protected function createOptionBox($optionBoxName) {
 		// Sets the header that is shown in the label of this selector box.
@@ -2578,7 +2583,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Hides the columns specified in the first parameter $columnsToHide.
 	 *
-	 * @param	array		the columns to hide, may be empty
+	 * @param array the columns to hide, may be empty
 	 */
 	private function hideColumns(array $columnsToHide) {
 		$this->hideSubpartsArray($columnsToHide, 'LISTHEADER_WRAPPER');
@@ -2588,7 +2593,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Un-hides the columns specified in the first parameter $columnsToHide.
 	 *
-	 * @param	array		the columns to un-hide, may be empty
+	 * @param array the columns to un-hide, may be empty
 	 */
 	private function unhideColumns(array $columnsToUnhide) {
 		$permanentlyHiddenColumns = t3lib_div::trimExplode(
@@ -2612,9 +2617,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * entered" list and is not the "my vip events" list and VIPs are not
 	 * allowed to edit their events.
 	 *
-	 * @param	string		a string selecting the flavor of list view: either
-	 * 						an empty string (for the default list view), the
-	 * 						value from "what_to_display" or "other_dates"
+	 * @param string a string selecting the flavor of list view: either
+	 *               an empty string (for the default list view), the
+	 *               value from "what_to_display" or "other_dates"
 	 */
 	private function hideEditColumnIfNecessary($whatToDisplay) {
 		$mayManagersEditTheirEvents = $this->getConfValueBoolean(
@@ -2738,7 +2743,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Gets the link to the CSV export.
 	 *
-	 * @return	string		the link to the CSV export
+	 * @return string the link to the CSV export
 	 */
 	private function getCsvExportLink() {
 		return $this->cObj->typoLink(
@@ -2767,7 +2772,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Creates the HTML for the registration page.
 	 *
-	 * @return	string		HTML code for the registration page
+	 * @return string HTML code for the registration page
 	 */
 	protected function createRegistrationPage() {
 		$this->feuser = $GLOBALS['TSFE']->fe_user;
@@ -2851,9 +2856,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * messages. Data from the event will only be displayed if $this->seminar
 	 * is non-null.
 	 *
-	 * @param	string	error message to be displayed (may be empty if there is no error)
+	 * @param string error message to be displayed (may be empty if there is no
+	 *               error)
 	 *
-	 * @return	string	HTML code including the title and error message
+	 * @return string HTML code including the title and error message
 	 */
 	protected function createRegistrationHeading($errorMessage) {
 		$this->setMarker(
@@ -2893,7 +2899,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Creates the registration form.
 	 *
-	 * @return	string		HTML code for the form
+	 * @return string HTML code for the form
 	 */
 	protected function createRegistrationForm() {
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
@@ -2970,7 +2976,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Creates the unregistration form.
 	 * $this->registration has to be created before this method is called.
 	 *
-	 * @return	string		HTML code for the form
+	 * @return string HTML code for the form
 	 */
 	protected function createUnregistrationForm() {
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
@@ -2997,9 +3003,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * either creates the event editor HTML (or an empty string if
 	 * $accessTestOnly is true) or a localized error message.
 	 *
-	 * @param	boolean		whether only the access to the event editor should be checked
+	 * @param boolean whether only the access to the event editor should be
+	 *                checked
 	 *
-	 * @return	string		HTML code for the event editor (or an error message if the FE user doesn't have access to the editor)
+	 * @return string HTML code for the event editor (or an error message if the
+	 *                FE user doesn't have access to the editor)
 	 */
 	protected function createEventEditor($accessTestOnly = false) {
 		$result = '';

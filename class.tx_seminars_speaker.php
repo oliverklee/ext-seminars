@@ -32,10 +32,10 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
  *
  * This class represents a speaker.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
@@ -44,7 +44,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our organization.
 	 *
-	 * @return	string		our organization (or '' if there is an error)
+	 * @return string our organization (or '' if there is an error)
 	 */
 	public function getOrganization() {
 		return $this->getRecordPropertyString('organization');
@@ -53,8 +53,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Returns true if this speaker has an organization, false otherwise.
 	 *
-	 * @return	boolean		true if this speaker has an organization, false
-	 * 						otherwise
+	 * @return boolean true if this speaker has an organization, false otherwise
 	 */
 	public function hasOrganization() {
 		return $this->hasRecordPropertyString('organization');
@@ -63,7 +62,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our homepage.
 	 *
-	 * @return	string		our homepage (or '' if there is an error)
+	 * @return string our homepage (or '' if there is an error)
 	 */
 	public function getHomepage() {
 		return $this->getRecordPropertyString('homepage');
@@ -72,7 +71,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Returns true if this speaker has a homepage, false otherwise.
 	 *
-	 * @return	boolean		true if this speaker has a homepage, false otherwise
+	 * @return boolean true if this speaker has a homepage, false otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasRecordPropertyString('homepage');
@@ -81,9 +80,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our description.
 	 *
-	 * @param	tslib_pibase	the live pibase object
+	 * @param tslib_pibase the live pibase object
 	 *
-	 * @return	string			our description (or '' if there is an error)
+	 * @return string our description (or '' if there is an error)
 	 */
 	public function getDescription(tslib_pibase $plugin) {
 		return $plugin->pi_RTEcssText(
@@ -94,7 +93,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our description without RTE processing.
 	 *
-	 * @return	string		our description (or '' if there is an error)
+	 * @return string our description (or '' if there is an error)
 	 */
 	public function getDescriptionRaw() {
 		return $this->getRecordPropertyString('description');
@@ -103,8 +102,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Returns true if this speaker has a description, false otherwise.
 	 *
-	 * @return	boolean		true if this speaker has a description, false
-	 * 						otherwise
+	 * @return boolean true if this speaker has a description, false otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasRecordPropertyString('description');
@@ -113,8 +111,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether we have any skills set.
 	 *
-	 * @return	boolean		true if we have any skills related to this speaker,
-	 * 						false otherwise.
+	 * @return boolean true if we have any skills related to this speaker,
+	 *                 false otherwise
 	 */
 	public function hasSkills() {
 		return $this->hasRecordPropertyInteger('skills');
@@ -123,8 +121,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our skills as a plain text list (just the skill names).
 	 *
-	 * @return	string		our skills list (or an empty string if there are no
-	 * 						skills for this speaker or there is an error)
+	 * @return string our skills list (or an empty string if there are no
+	 *                skills for this speaker or there is an error)
 	 */
 	public function getSkillsShort() {
 		if (!$this->hasSkills()) {
@@ -155,8 +153,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets the number of skills associated with this speaker.
 	 *
-	 * @return	integer		the number of skills associated with this speaker,
-	 * 						will be >= 0
+	 * @return integer the number of skills associated with this speaker,
+	 *                 will be >= 0
 	 */
 	public function getNumberOfSkills() {
 		return $this->getRecordPropertyInteger('skills');
@@ -165,7 +163,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our internal notes.
 	 *
-	 * @return	string		our internal notes (or '' if there is an error)
+	 * @return string our internal notes (or '' if there is an error)
 	 */
 	public function getNotes() {
 		return $this->getRecordPropertyString('notes');
@@ -174,7 +172,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our address.
 	 *
-	 * @return	string		our address (or '' if there is an error)
+	 * @return string our address (or '' if there is an error)
 	 */
 	public function getAddress() {
 		return $this->getRecordPropertyString('address');
@@ -183,7 +181,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our work phone number.
 	 *
-	 * @return	string		our work phone number (or '' if there is an error)
+	 * @return string our work phone number (or '' if there is an error)
 	 */
 	public function getPhoneWork() {
 		return $this->getRecordPropertyString('phone_work');
@@ -192,7 +190,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our home phone number.
 	 *
-	 * @return	string		our home phone number (or '' if there is an error)
+	 * @return string our home phone number (or '' if there is an error)
 	 */
 	public function getPhoneHome() {
 		return $this->getRecordPropertyString('phone_home');
@@ -201,7 +199,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our mobile phone number.
 	 *
-	 * @return	string		our mobile phone number (or '' if there is an error)
+	 * @return string our mobile phone number (or '' if there is an error)
 	 */
 	public function getPhoneMobile() {
 		return $this->getRecordPropertyString('phone_mobile');
@@ -210,7 +208,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our fax number.
 	 *
-	 * @return	string		our fax number (or '' if there is an error)
+	 * @return string our fax number (or '' if there is an error)
 	 */
 	public function getFax() {
 		return $this->getRecordPropertyString('fax');
@@ -219,7 +217,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Gets our e-mail address.
 	 *
-	 * @return	string		our e-mail address (or '' if there is an error)
+	 * @return string our e-mail address (or '' if there is an error)
 	 */
 	public function getEmail() {
 		return $this->getRecordPropertyString('email');

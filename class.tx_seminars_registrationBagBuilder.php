@@ -30,24 +30,24 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration
  *
  * This builder class creates customized registrationbag objects.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	/**
-	 * @var	string		class name of the bag class that will be built
+	 * @var string class name of the bag class that will be built
 	 */
 	protected $bagClassName = 'tx_seminars_registrationbag';
 
 	/**
-	 * @var	string		the table name of the bag to build
+	 * @var string the table name of the bag to build
 	 */
 	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
 
 	/**
-	 * @var	string		the sorting field
+	 * @var string the sorting field
 	 */
 	protected $orderBy = 'crdate';
 
@@ -55,8 +55,8 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to the registrations of the events provided by the
 	 * parameter $eventUids.
 	 *
-	 * @param	integer		the UID of the event to which the registration
-	 * 						selection should be limited, must be > 0
+	 * @param integer the UID of the event to which the registration
+	 *                selection should be limited, must be > 0
 	 */
 	public function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {
@@ -116,9 +116,8 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to contain only registrations with seats equal or less
 	 * than the seats given in the parameter $seats.
 	 *
-	 * @param	integer		the number of seats to filter for,
-	 * 						set to 0 to remove the limitation,
-	 * 						must be >= 0
+	 * @param integer the number of seats to filter for, set to 0 to remove the
+	 *                limitation, must be >= 0
 	 */
 	public function limitToSeatsAtMost($seats = 0) {
 		if ($seats < 0) {

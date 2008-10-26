@@ -41,30 +41,30 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbu
 /**
  * Plugin 'CSV export' for the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
-	 * @var	string		same as class name
+	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_pi2';
 	/**
-	 * @var	string		path to this script relative to the extension dir
+	 * @var string path to this script relative to the extension dir
 	 */
 	public $scriptRelPath = 'pi2/class.tx_seminars_pi2.php';
 
 	/**
-	 * @var	string		the extension key
+	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
 
 	/**
-	 * @var	tx_seminars_configgetter	This object provides access to config
-	 * 									values in plugin.tx_seminars.
+	 * @var tx_seminars_configgetter This object provides access to config
+	 * values in plugin.tx_seminars.
 	 */
 	private $configGetter = null;
 
@@ -83,11 +83,11 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Creates a CSV export.
 	 *
-	 * @param	string		(unused)
-	 * @param	array		TypoScript configuration for the plugin, may be
-	 * 						empty
+	 * @param string (unused)
+	 * @param array TypoScript configuration for the plugin, may be
+	 * empty
 	 *
-	 * @return	string		HTML for the plugin, might be empty
+	 * @return string HTML for the plugin, might be empty
 	 */
 	public function main($unused, array $configuration) {
 		$this->init($configuration);
@@ -113,8 +113,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Initializes this object and its configuration getter.
 	 *
-	 * @param	array		TypoScript configuration for the plugin, may be
-	 * 						empty
+	 * @param array TypoScript configuration for the plugin, may be
+	 * empty
 	 */
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
@@ -133,8 +133,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
-	 * @return	string		CSV list of registrations for the given seminar or
-	 * 						an error message in case of an error
+	 * @return string CSV list of registrations for the given seminar or
+	 * an error message in case of an error
 	 */
 	public function createAndOutputListOfRegistrations() {
 		$eventUid = intval($this->piVars['seminar']);
@@ -170,12 +170,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * This function does not do any access checks.
 	 *
-	 * @param	integer		UID of the event for which the registration list
-	 * 						should be created, must be > 0
+	 * @param integer UID of the event for which the registration list
+	 * should be created, must be > 0
 	 *
-	 * @return	string		CSV list of registrations for the given seminar or
-	 * 						an empty string if there is not event with the
-	 * 						provided UID
+	 * @return string CSV list of registrations for the given seminar or
+	 * an empty string if there is not event with the
+	 * provided UID
 	 */
 	public function createListOfRegistrations($eventUid) {
 		if (!tx_seminars_objectfromdb::recordExists(
@@ -229,8 +229,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * Creates the heading line for the list of registrations (including a CRLF
 	 * at the end).
 	 *
-	 * @return	string		the heading line for the list of registrations, will
-	 * 						not be empty
+	 * @return string the heading line for the list of registrations, will
+	 * not be empty
 	 */
 	protected function createRegistrationsHeading() {
 		$headerLineWithoutWrapping
@@ -254,8 +254,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
-	 * @return	string		CSV list of events for the given page or an error
-	 *						message in case of an error
+	 * @return string CSV list of events for the given page or an error
+	 * message in case of an error
 	 */
 	public function createAndOutputListOfEvents() {
 		$pid = intval($this->piVars['pid']);
@@ -287,10 +287,10 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * This function does not do any access checks.
 	 *
-	 * @param	integer		PID of the system folder from which the event
-	 * 						records	should be exported, must be > 0
+	 * @param integer PID of the system folder from which the event
+	 * records should be exported, must be > 0
 	 *
-	 * @return	string		CSV export of the event records on that page
+	 * @return string CSV export of the event records on that page
 	 */
 	public function createListOfEvents($pid) {
 		if ($pid <= 0) {
@@ -324,8 +324,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Creates the heading line for a CSV event list.
 	 *
-	 * @return	string		header list, will not be empty if the CSV
-	 * 						export has been configured correctly
+	 * @return string header list, will not be empty if the CSV
+	 * export has been configured correctly
 	 */
 	private function createEventsHeading() {
 		return '"'.str_replace(
@@ -342,14 +342,14 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * values. The individual values are already wrapped in double quotes, with
 	 * the contents having all quotes escaped.
 	 *
-	 * @param	object		object that will deliver the data
-	 * @param	string		name of a function of the given object that expects
-	 *						a key as a parameter and returns the value for that
-	 *						key as a string
-	 * @param	string		comma-separated list of keys to retrieve
+	 * @param object object that will deliver the data
+	 * @param string name of a function of the given object that expects
+	 * a key as a parameter and returns the value for that
+	 * key as a string
+	 * @param string comma-separated list of keys to retrieve
 	 *
-	 * @return	array		the data for the keys provided in $keys
-	 *						(may be empty)
+	 * @return array the data for the keys provided in $keys
+	 * (may be empty)
 	 */
 	protected function retrieveData($dataSupplier, $supplierFunction, $keys) {
 		$result = array();
@@ -378,9 +378,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * links), the corresponding access checks need to be added to this
 	 * function.
 	 *
-	 * @param	integer		UID of the event record for which access should be checked; leave empty to use the event set via piVars
+	 * @param integer UID of the event record for which access should be checked; leave empty to use the event set via piVars
 	 *
-	 * @return	boolean		true if the list of registrations may be exported as CSV
+	 * @return boolean true if the list of registrations may be exported as CSV
 	 */
 	public function canAccessListOfRegistrations($eventUid = 0) {
 		global $BE_USER;
@@ -451,8 +451,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * links), the corresponding access checks need to be added to this
 	 * function.
 	 *
-	 * @return	boolean		true if the list of registrations may be exported as
-	 * 						CSV
+	 * @return boolean true if the list of registrations may be exported as
+	 * CSV
 	 */
 	public function canAccessListOfEvents() {
 		global $BE_USER;
@@ -527,7 +527,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * This function is intended for testing purposes only.
 	 *
-	 * @return	object		our config getter, might be null
+	 * @return object our config getter, might be null
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;
@@ -536,7 +536,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Returns the typeNum from the TypoScript setup in tx_seminars_pi2.typeNum.
 	 *
-	 * @return	integer		the typeNum in tx_seminars_pi2.typeNum
+	 * @return integer the typeNum in tx_seminars_pi2.typeNum
 	 */
 	public static function getTypeNum() {
 		return intval(

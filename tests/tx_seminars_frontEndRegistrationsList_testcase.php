@@ -64,7 +64,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	public function setUp() {
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 
-		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->seminarUid = $this->testingFramework->createRecord(

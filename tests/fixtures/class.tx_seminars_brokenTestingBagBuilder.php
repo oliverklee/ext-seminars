@@ -30,14 +30,14 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
  *
  * This builder class creates customized testbag objects.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_brokenTestingBagBuilder extends tx_seminars_bagbuilder {
 	/**
-	 * @var	string		class name of the bag class that will be built
+	 * @var string class name of the bag class that will be built
 	 */
 	protected $bagClassName = 'tx_seminars_testbag';
 }

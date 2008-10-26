@@ -22,20 +22,19 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+
 /**
  * Class 'tx_seminars_place' for the 'seminars' extension.
  *
  * This class represents a place.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-
 class tx_seminars_place extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
 	var $tableName = SEMINARS_TABLE_SITES;
@@ -47,10 +46,10 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	 * field. But records that existed before, an empty string will be returned
 	 * as they don't have the city set yet.
 	 *
-	 * @return	string		the name of the city, will be empty if the place
-	 * 						record has no city set
+	 * @return string the name of the city, will be empty if the place
+	 *                record has no city set
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getCity() {
 		return $this->getRecordPropertyString('city');
@@ -64,10 +63,10 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	 * country is selected and saved through the backend from a prefilled list,
 	 * those values should be valid.
 	 *
-	 * @return	string		the ISO 3166-1 alpha-2 code of the country or an
-	 * 						empty string if this place has no country set
+	 * @return string the ISO 3166-1 alpha-2 code of the country or an
+	 *                empty string if this place has no country set
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getCountryIsoCode() {
 		return $this->getRecordPropertyString('country');

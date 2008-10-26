@@ -30,10 +30,10 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the place class in the 'seminars' extensions.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Mario Rimann <typo3-coding@rimann.org>
+ * @author Mario Rimann <typo3-coding@rimann.org>
  */
 class tx_seminars_place_testcase extends tx_phpunit_testcase {
 	private $fixture;

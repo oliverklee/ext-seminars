@@ -31,11 +31,11 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the seminar class in the 'seminars' extensions.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $fixture;
@@ -111,9 +111,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a place record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param	array		data of the place to add, may be empty
+	 * @param array data of the place to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addPlaceRelation(array $placeData = array()) {
 		$uid = $this->testingFramework->createRecord(
@@ -135,9 +135,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a target group record into the database and creates a relation to
 	 * it from the fixture.
 	 *
-	 * @param	array		data of the target group to add, may be empty
+	 * @param array data of the target group to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addTargetGroupRelation(array $targetGroupData = array()) {
 		$uid = $this->testingFramework->createRecord(
@@ -159,9 +159,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a payment method record into the database and creates a relation
 	 * to it from the fixture.
 	 *
-	 * @param	array		data of the payment method to add, may be empty
+	 * @param array data of the payment method to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addPaymentMethodRelation(
 		array $paymentMethodData = array()
@@ -179,9 +179,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts an organizer record into the database and creates a relation to
 	 * it from the fixture as a organizing partner.
 	 *
-	 * @param	array		data of the organizer to add, may be empty
+	 * @param array data of the organizer to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addOrganizingPartnerRelation(
 		array $organizerData = array()
@@ -205,9 +205,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a category record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param	array		data of the category to add, may be empty
+	 * @param array data of the category to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addCategoryRelation(array $categoryData = array()) {
 		$uid = $this->testingFramework->createRecord(
@@ -229,9 +229,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a organizer record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param	array		data of the organizer to add, may be empty
+	 * @param array data of the organizer to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addOrganizerRelation(array $organizerData = array()) {
 		$uid = $this->testingFramework->createRecord(
@@ -247,9 +247,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param	array		data of the speaker to add, may be empty
+	 * @param array data of the speaker to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addSpeakerRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
@@ -271,9 +271,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture as partner.
 	 *
-	 * @param	array		data of the speaker to add, may be empty
+	 * @param array data of the speaker to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addPartnerRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
@@ -295,9 +295,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture as tutor.
 	 *
-	 * @param	array		data of the speaker to add, may be empty
+	 * @param array data of the speaker to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addTutorRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
@@ -319,9 +319,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture as leader.
 	 *
-	 * @param	array		data of the speaker to add, may be empty
+	 * @param array data of the speaker to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addLeaderRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
@@ -343,9 +343,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * Inserts an event type record into the database and creates a relation to
 	 * it from the fixture.
 	 *
-	 * @param	array		data of the event type to add, may be empty
+	 * @param array data of the event type to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will be > 0
+	 * @return integer the UID of the created record, will be > 0
 	 */
 	private function addEventTypeRelation($eventTypeData) {
 		$uid = $this->testingFramework->createRecord(

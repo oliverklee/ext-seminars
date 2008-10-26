@@ -22,32 +22,23 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Module 'Events' for the 'seminars' extension.
- *
- * @package		TYPO3
- * @subpackage	tx_seminars
- * @author		Mario Rimann <typo3-coding@rimann.org>
- * @author		Niels Pardon <mail@niels-pardon.de>
- */
-
 unset($MCONF);
 $MCONF = array();
 
 require_once('conf.php');
-require_once($BACK_PATH.'init.php');
-require_once($BACK_PATH.'template.php');
-require_once(PATH_t3lib.'class.t3lib_scbase.php');
-require_once(PATH_t3lib.'class.t3lib_page.php');
-require_once(PATH_t3lib.'class.t3lib_befunc.php');
+require_once($BACK_PATH . 'init.php');
+require_once($BACK_PATH . 'template.php');
+require_once(PATH_t3lib . 'class.t3lib_scbase.php');
+require_once(PATH_t3lib . 'class.t3lib_page.php');
+require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_configgetter.php');
-require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_eventslist.php');
-require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_registrationslist.php');
-require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_speakerslist.php');
-require_once(t3lib_extMgm::extPath('seminars').'mod2/class.tx_seminars_organizerslist.php');
-require_once(t3lib_extMgm::extPath('seminars').'pi2/class.tx_seminars_pi2.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_configgetter.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_eventslist.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_registrationslist.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_speakerslist.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_organizerslist.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 $LANG->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
@@ -57,6 +48,14 @@ $LANG->includeLLFile('EXT:seminars/pi2/locallang.xml');
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);
 
+/**
+ * Module 'Events' for the 'seminars' extension.
+ *
+ * @package TYPO3
+ * @subpackage tx_seminars
+ * @author Mario Rimann <typo3-coding@rimann.org>
+ * @author Niels Pardon <mail@niels-pardon.de>
+ */
 class tx_seminars_module2 extends t3lib_SCbase {
 	/** Holds information about the current page. */
 	var $pageInfo;
@@ -71,7 +70,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 * Initializes some variables and also starts the initialization of the
 	 * parent class.
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function init() {
 		/*
@@ -98,7 +97,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 *
 	 * No return value; output is directly written to the page.
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function main() {
 		global $LANG, $BACK_PATH, $BE_USER;
@@ -132,7 +131,7 @@ class tx_seminars_module2 extends t3lib_SCbase {
 			// JavaScript function called within getDeleteIcon()
 			$this->doc->JScode = '
 				<script type="text/javascript">
-					function jumpToUrl(URL)	{
+					function jumpToUrl(URL) {
 						document.location = URL;
 					}
 				</script>
@@ -244,9 +243,11 @@ class tx_seminars_module2 extends t3lib_SCbase {
 	 * current page or there is at least one event, attendance, organizer or
 	 * speaker record (and be it even hidden or deleted) on the current page.
 	 *
-	 * @return	boolean		true if the static template has been included or there is at least one event, attendance, organizer or speaker record on the current page, false otherwise
+	 * @return boolean true if the static template has been included or there is
+	 *                 at least one event, attendance, organizer or speaker
+	 *                 record on the current page, false otherwise
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function hasStaticTemplateOrRecords() {
 		$configGetterClassname = t3lib_div::makeInstanceClassName(

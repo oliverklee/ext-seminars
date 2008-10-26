@@ -30,30 +30,30 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the testbag class in the 'seminars' extensions.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var	tx_seminars_testbag
+	 * @var tx_seminars_testbag
 	 */
 	private $fixture;
 
 	/**
-	 * @var	tx_oelib_testingFramework
+	 * @var tx_oelib_testingFramework
 	 */
 	private $testingFramework;
 
 	/**
-	 * @var	integer		the UID of the first test record in the DB
+	 * @var integer the UID of the first test record in the DB
 	 */
 	private $uidOfFirstRecord = 0;
 
 	/**
-	 * @var	integer		the UID of the second test record in the DB
+	 * @var integer the UID of the second test record in the DB
 	 */
 	private $uidOfSecondRecord = 0;
 

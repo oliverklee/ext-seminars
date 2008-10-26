@@ -22,17 +22,16 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+
 /**
  * Class 'back-end list' for the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-
 class tx_seminars_backendlist {
 	/** the table we're working on */
 	protected $tableName = '';
@@ -43,9 +42,9 @@ class tx_seminars_backendlist {
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
 	 *
-	 * @param	object		the current back-end page object
+	 * @param t3lib_SCbase the current back-end page object
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function __construct(t3lib_SCbase $page) {
 		$this->page = $page;
@@ -62,11 +61,11 @@ class tx_seminars_backendlist {
 	 * Generates an edit record icon which is linked to the edit view of
 	 * a record.
 	 *
-	 * @param	integer		the UID of the record, must be > 0
+	 * @param integer the UID of the record, must be > 0
 	 *
-	 * @return	string		the HTML source code to return
+	 * @return string the HTML source code to return
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getEditIcon($uid) {
 		global $BACK_PATH, $LANG, $BE_USER;
@@ -101,11 +100,11 @@ class tx_seminars_backendlist {
 	 * Generates a linked delete record icon whith a JavaScript confirmation
 	 * window.
 	 *
-	 * @param	integer		the UID of the record, must be > 0
+	 * @param integer the UID of the record, must be > 0
 	 *
-	 * @return	string		the HTML source code to return
+	 * @return string the HTML source code to return
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getDeleteIcon($uid) {
 		global $BACK_PATH, $LANG, $BE_USER;
@@ -155,14 +154,12 @@ class tx_seminars_backendlist {
 	/**
 	 * Returns a "create new record" image tag that is linked to the new record view.
 	 *
-	 * @param	string		the name of the table where the record should be
-	 * 						saved to
-	 * @param	integer		the page ID where the record should be stored,
-	 * 						must be > 0
+	 * @param string the name of the table where the record should be saved to
+	 * @param integer the page ID where the record should be stored, must be > 0
 	 *
-	 * @return	string		the HTML source code to return
+	 * @return string the HTML source code to return
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function getNewIcon($pid) {
 		global $BACK_PATH, $LANG, $BE_USER;
@@ -207,12 +204,12 @@ class tx_seminars_backendlist {
 	/**
 	 * Returns the url for the "create new record" link and the "edit record" link.
 	 *
-	 * @param	string		the parameters for TCE
-	 * @param	string		the back path to the /typo3 directory
+	 * @param string the parameters for TCE
+	 * @param string the back path to the /typo3 directory
 	 *
-	 * @return	string		the url to return
+	 * @return string the URL to return
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function editNewUrl($params, $backPath = '') {
 		$returnUrl = 'returnUrl=' .
@@ -227,11 +224,12 @@ class tx_seminars_backendlist {
 	 *
 	 * This icon is intended to be used next to the "create new record" icon.
 	 *
-	 * @param	string		the name of the table from which the records should be exported, eg. "tx_seminars_seminars"
+	 * @param string the name of the table from which the records should be
+	 *               exported, eg. "tx_seminars_seminars"
 	 *
-	 * @return	string		the HTML source code of the linked CSV icon
+	 * @return string the HTML source code of the linked CSV icon
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function getCsvIcon() {
 		global $BACK_PATH, $LANG;

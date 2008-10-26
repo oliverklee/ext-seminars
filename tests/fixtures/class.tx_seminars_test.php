@@ -22,20 +22,19 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
+
 /**
  * Class 'tx_seminars_test' for the 'seminars' extension.
  *
  * This class represents a test object from the database.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_objectfromdb.php');
-
 class tx_seminars_test extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
 	protected $tableName = SEMINARS_TABLE_TEST;
@@ -43,7 +42,7 @@ class tx_seminars_test extends tx_seminars_objectfromdb {
 	/**
 	 * Sets the test field of this record to a boolean value.
 	 *
-	 * @param	boolean		the boolean value to set
+	 * @param boolean the boolean value to set
 	 */
 	public function setBooleanTest($test) {
 		$this->setRecordPropertyBoolean('test', $test);
@@ -52,8 +51,8 @@ class tx_seminars_test extends tx_seminars_objectfromdb {
 	/**
 	 * Returns true if the test field of this record is set, false otherwise.
 	 *
-	 * @return	boolean		true if the test field of this record is set, false
-	 * 						otherwise
+	 * @return boolean true if the test field of this record is set, false
+	 * otherwise
 	 */
 	public function getBooleanTest() {
 		return $this->getRecordPropertyBoolean('test');

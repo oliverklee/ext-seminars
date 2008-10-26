@@ -29,26 +29,26 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
 /**
  * Testcase for the registration class in the 'seminars' extensions.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
-	/** @var	tx_seminars_registrationchild */
+	/** @var tx_seminars_registrationchild */
 	private $fixture;
-	/** @var	tx_oelib_testingFramework */
+	/** @var tx_oelib_testingFramework */
 	private $testingFramework;
 
-	/** @var	integer		the UID of a seminar to which the fixture relates */
+	/** @var integer the UID of a seminar to which the fixture relates */
 	private $seminarUid;
 
 	public function setUp() {
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		tx_seminars_registrationchild::purgeCachedSeminars();
 
-		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		$organizerUid = $this->testingFramework->createRecord(
@@ -102,9 +102,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 * Inserts a payment method record into the database and creates a relation
 	 * to it from the fixture.
 	 *
-	 * @param	array		data of the payment method to add, may be empty
+	 * @param array data of the payment method to add, may be empty
 	 *
-	 * @return	integer		the UID of the created record, will always be > 0
+	 * @return integer the UID of the created record, will always be > 0
 	 */
 	private function setPaymentMethodRelation(array $paymentMethodData) {
 		$uid = $this->testingFramework->createRecord(

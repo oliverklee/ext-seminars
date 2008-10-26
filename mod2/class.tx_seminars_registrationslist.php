@@ -31,26 +31,26 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration
 /**
  * Class 'registrations list' for the 'seminars' extension.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_registrationslist extends tx_seminars_backendlist {
 	/**
-	 * @var	string		the table we're working on
+	 * @var string the table we're working on
 	 */
 	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
 
 	/**
-	 * @var	string		warnings from the registration bag configcheck
+	 * @var string warnings from the registration bag configcheck
 	 */
 	private $configCheckWarnings = '';
 
 	/**
 	 * Generates and prints out a registrations list.
 	 *
-	 * @return	string		the HTML source code to display
+	 * @return string the HTML source code to display
 	 */
 	public function show() {
 		// Initializes the variable for the HTML source code.
@@ -74,11 +74,11 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 	 * Gets the registration table for regular attendances and attendances on
 	 * the registration queue.
 	 *
-	 * @param	boolean		True if the registration table for the registration
-	 * 						queue should be generated and false if the table for
-	 * 						the regular attendances should be generated.
+	 * @param boolean True if the registration table for the registration
+	 *                queue should be generated and false if the table for
+	 *                the regular attendances should be generated.
 	 *
-	 * @return	string		the registration table, nicely formatted as HTML
+	 * @return string the registration table, nicely formatted as HTML
 	 */
 	private function getRegistrationTable($showRegistrationQueue) {
 		global $LANG;

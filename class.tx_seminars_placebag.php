@@ -22,41 +22,40 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_place.php');
+
 /**
  * Class 'tx_seminars_placebag' for the 'seminars' extension.
  *
  * This aggregate class holds a bunch of place objects and allows
  * to iterate over them.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_place.php');
-
 class tx_seminars_placebag extends tx_seminars_bag {
 	/**
 	 * The constructor. Creates a place bag that contains place
 	 * records and allows to iterate over them.
 	 *
-	 * @param	string		string that will be prepended to the WHERE
-	 * 						clause using AND, e.g. 'pid=42' (the AND and the
-	 * 						enclosing spaces are not necessary for this
-	 * 						parameter)
-	 * @param	string		comma-separated names of additional DB tables used
-	 * 						for JOINs, may be empty
-	 * @param	string		GROUP BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		ORDER BY clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
-	 * @param	string		LIMIT clause (may be empty), must already be
-	 * 						safeguarded against SQL injection
+	 * @param string string that will be prepended to the WHERE
+	 *               clause using AND, e.g. 'pid=42' (the AND and the
+	 *               enclosing spaces are not necessary for this
+	 *               parameter)
+	 * @param string comma-separated names of additional DB tables used
+	 *               for JOINs, may be empty
+	 * @param string GROUP BY clause (may be empty), must already be
+	 *               safeguarded against SQL injection
+	 * @param string ORDER BY clause (may be empty), must already be
+	 *               safeguarded against SQL injection
+	 * @param string LIMIT clause (may be empty), must already be
+	 *               safeguarded against SQL injection
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
@@ -77,9 +76,10 @@ class tx_seminars_placebag extends tx_seminars_bag {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be non-null when this function is called.
+	 * $this->dbResult must be ensured to be non-null when this function is
+	 * called.
 	 *
-	 * @access	protected
+	 * @access protected
 	 */
 	function createItemFromDbResult() {
 		$placeClassname = t3lib_div::makeInstanceClassName('tx_seminars_place');

@@ -30,10 +30,10 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php
  * This class provides a way to access config values from plugin.tx_seminars to
  * classes within pi1.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_configgetter extends tx_oelib_templatehelper {
 	/** Same as class name */
@@ -42,14 +42,14 @@ class tx_seminars_configgetter extends tx_oelib_templatehelper {
 	var $scriptRelPath = 'class.tx_seminars_configgetter.php';
 
 	/**
-	 * @var	string		the extension key
+	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
 
 	/**
 	 * The constructor.
 	 *
-	 * @access	public
+	 * @access public
 	 */
 	function __construct() {
 		$this->init();

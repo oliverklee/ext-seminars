@@ -33,14 +33,14 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_fakeSession.php');
 /**
  * Testcase for the registrationEditorChild class in the 'seminars' extensions.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var	tx_seminars_registrationEditorChild
+	 * @var tx_seminars_registrationEditorChild
 	 */
 	private $fixture;
 
@@ -54,7 +54,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	private $pi1;
 
 	/**
-	 * @var	tx_oelib_fakeSession		a fake session
+	 * @var tx_oelib_fakeSession a fake session
 	 */
 	private $session;
 

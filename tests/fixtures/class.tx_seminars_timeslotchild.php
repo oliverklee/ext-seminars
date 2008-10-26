@@ -22,26 +22,25 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_timeslot.php');
+
 /**
  * Class 'tx_seminars_timeslotchild' for the 'seminars' extension.
  *
  * This is mere a class used for unit tests of the 'seminars' extension. Don't
  * use it for any other purpose.
  *
- * @package		TYPO3
- * @subpackage	tx_seminars
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Niels Pardon <mail@niels-pardon.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
-
-require_once(t3lib_extMgm::extPath('seminars').'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars').'class.tx_seminars_timeslot.php');
-
 final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the place field of the time slot.
 	 *
-	 * @param	integer		the UID of the place (has to be > 0)
+	 * @param integer the UID of the place (has to be > 0)
 	 */
 	public function setPlace($place) {
 		$this->setRecordPropertyInteger('place', $place);
@@ -50,8 +49,8 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the entry date.
 	 *
-	 * @param	integer		the entry date as a UNIX timestamp (has to be >= 0,
-	 * 						0 will unset the entry date)
+	 * @param integer the entry date as a UNIX timestamp (has to be >= 0,
+	 * 0 will unset the entry date)
 	 */
 	 public function setEntryDate($entryDate) {
 	 	$this->setRecordPropertyInteger('entry_date', $entryDate);
