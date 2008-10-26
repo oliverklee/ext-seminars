@@ -27,6 +27,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationBagBuilder.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
 
@@ -182,16 +183,12 @@ class tx_seminars_frontEndRegistrationsList extends tx_seminars_frontEndView {
 	 * is a valid seminar object.
 	 */
 	private function createRegistrationsList() {
-		$registrationBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registrationbag'
-		);
-		$registrationBag = new $registrationBagClassname(
-			SEMINARS_TABLE_ATTENDANCES . '.seminar=' . $this->seminar->getUid() .
-				' AND ' . SEMINARS_TABLE_ATTENDANCES . '.registration_queue=0',
-			'',
-			'',
-			'crdate'
-		);
+		$builder = t3lib_div::makeInstance('tx_seminars_registrationBagBuilder');
+		$builder->limitToEvent($this->seminar->getUid());
+		$builder->limitToRegular();
+		$builder->setOrderBy('crdate');
+
+		$registrationBag = $builder->build();
 
 		if (!$registrationBag->isEmpty()) {
 			$tableHeader = '';
@@ -282,7 +279,7 @@ class tx_seminars_frontEndRegistrationsList extends tx_seminars_frontEndView {
 		$this->setErrorMessage($registrationBag->checkConfiguration(true));
 
 		$registrationBag->__destruct();
-		unset($registrationBag);
+		unset($registrationBag, $builder);
 	}
 }
 
