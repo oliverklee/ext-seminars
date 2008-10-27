@@ -39,34 +39,28 @@
 	visibility: hidden;
 }
 
-.tx-seminars-pi1-listrow table,
-.tx-seminars-pi1-categorylist table {
+.tx-seminars-pi1-listrow table {
 	background-color: #fff;
 	color: #000;
 }
 
 .tx-seminars-pi1-listrow th,
-.tx-seminars-pi1-listrow td,
-.tx-seminars-pi1-categorylist th,
-.tx-seminars-pi1-categorylist td {
+.tx-seminars-pi1-listrow td {
 	margin: 0;
 	border-spacing: 0;
 	vertical-align: top;
 }
 
-.tx-seminars-pi1-listrow td,
-.tx-seminars-pi1-categorylist td {
+.tx-seminars-pi1-listrow td {
 	padding: .2em .5em;
 }
 
-.tx-seminars-pi1-listrow th,
-.tx-seminars-pi1-categorylist th {
+.tx-seminars-pi1-listrow th {
 	font-weight: bold;
 	text-align: center;
 }
 
-.tx-seminars-pi1-listrow th a
-.tx-seminars-pi1-categorylist th a {
+.tx-seminars-pi1-listrow th a {
 	display: block;
 	padding: .2em .5em;
 }
@@ -100,21 +94,17 @@ th.tx-seminars-pi1-title {
 }
 
 .tx-seminars-pi1-listrow .listrow-odd,
-.tx-seminars-pi1-listrow th,
-.tx-seminars-pi1-categorylist .listrow-odd,
-.tx-seminars-pi1-categorylist th {
+.tx-seminars-pi1-listrow th {
 	background-color: #f0f0f0;
 	color: inherit;
 }
 
-.tx-seminars-pi1-listrow tr,
-.tx-seminars-pi1-categorylist tr {
+.tx-seminars-pi1-listrow tr {
 	background-color: #fff;
 	color: inherit;
 }
 
-.tx-seminars-pi1-listrow tr:hover,
-.tx-seminars-pi1-categorylist tr:hover {
+.tx-seminars-pi1-listrow tr:hover {
 	background-color: #e0e0e0;
 	color: inherit;
 }

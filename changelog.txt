@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2028] Change: Convert the category list from a table to a list
 - [#2120] Change: Use tabs for indentation only at the beginning of lines
 - [#2306] Change: Use the registrationBagBuilder in tx_seminars_frontEndRegistrationsList
 - [#2305] Feature: Create a frontEndView class for the seminar manager

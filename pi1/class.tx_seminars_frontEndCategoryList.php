@@ -84,7 +84,6 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 		// Only lists categories for which there are events.
 		if (($eventUids != '') && !$categoryBag->isEmpty()) {
 			$allCategories = '';
-			$rowCounter = 0;
 
 			foreach ($categoryBag as $category) {
 				$link = $this->createLinkToListViewLimitedByCategory(
@@ -93,11 +92,7 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 				);
 				$this->setMarker('category_title', $link);
 
-				$cssClass = ($rowCounter % 2) ? ' class="listrow-odd"' : '';
-				$this->setMarker('class_category_item', $cssClass);
-
 				$allCategories .= $this->getSubpart('SINGLE_CATEGORY_ITEM');
-				$rowCounter ++;
 			}
 
 			$this->setMarker('all_category_items', $allCategories);
