@@ -77,14 +77,6 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	private $attachedFiles = array();
 
 	/**
-	 * Frees as much memory that has been used by this object as possible.
-	 */
-	public function __destruct() {
-		unset($this->plugin, $this->oForm);
-		parent::__destruct();
-	}
-
-	/**
 	 * The constructor.
 	 *
 	 * After the constructor has been called, hasAccess() (or hasAccessMessage())
@@ -94,7 +86,7 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * @param tx_seminars_pi1 the pi1 object where this event editor will
 	 *                        be inserted
 	 */
-	public function tx_seminars_event_editor(tx_seminars_pi1 $plugin) {
+	public function __construct(tx_seminars_pi1 $plugin) {
 		$this->plugin = $plugin;
 		$this->init($this->plugin->conf);
 
@@ -106,6 +98,14 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 
 		// initialize the creation/edition form
 		$this->_initForms();
+	}
+
+	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset($this->plugin, $this->oForm);
+		parent::__destruct();
 	}
 
 	/**

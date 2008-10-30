@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1103] Change: Use real constructors instead of the old-style constructors
 - [#2309] Change: Move the selector widget to its own class (a view)
 - [#2028] Change: Convert the category list from a table to a list
 - [#2120] Change: Use tabs for indentation only at the beginning of lines
