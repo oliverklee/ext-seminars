@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2318] Change: Make some fields in the time slots excludefields
 - [#2263] Feature: Provide the seminar UID in the link to the login page
 - [#1103] Change: Use real constructors instead of the old-style constructors
 - [#2309] Change: Move the selector widget to its own class (a view)
