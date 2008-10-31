@@ -1758,7 +1758,7 @@ $TCA['tx_seminars_timeslots'] = array(
 			),
 		),
 		'entry_date' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_timeslots.entry_date',
 			'config' => array(
 				'type' => 'input',
@@ -1770,7 +1770,7 @@ $TCA['tx_seminars_timeslots'] = array(
 			),
 		),
 		'speakers' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_timeslots.speakers',
 			'config' => array(
 				'type' => $selectType,
@@ -1785,7 +1785,7 @@ $TCA['tx_seminars_timeslots'] = array(
 			),
 		),
 		'place' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_timeslots.place',
 			'config' => array(
 				'type' => $selectType,
@@ -1799,7 +1799,7 @@ $TCA['tx_seminars_timeslots'] = array(
 			),
 		),
 		'room' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_timeslots.room',
 			'config' => array(
 				'type' => 'text',
