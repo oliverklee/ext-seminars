@@ -1835,6 +1835,34 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////////////////////////////////////////
+	// Tests concerning the links to the single view in the list view.
+	////////////////////////////////////////////////////////////////////
+
+	public function testTeaserGetsLinkedToSingleView() {
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with teaser',
+				'teaser' => 'Test Teaser',
+			)
+		);
+
+		$this->assertRegExp(
+			'/' . rawurlencode('tx_seminars_pi1[showUid]') . '=' .
+				$eventUid . '" >Test Teaser<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	//////////////////////////////////////////////////////////
 	// Tests concerning the category links in the list view.
 	//////////////////////////////////////////////////////////

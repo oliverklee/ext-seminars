@@ -1793,7 +1793,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				'credit_points',
 				$this->seminar->getCreditPoints()
 			);
-			$this->setMarker('teaser', $this->seminar->getTeaser());
+			$this->setMarker(
+				'teaser', $this->seminar->getLinkedFieldValue($this, 'teaser')
+			);
 			$this->setMarker('speakers', $this->seminar->getSpeakersShort());
 			$this->setMarker('language', $this->seminar->getLanguageName());
 
