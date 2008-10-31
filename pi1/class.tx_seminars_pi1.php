@@ -623,7 +623,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				'parameter' => $this->getConfValueInteger('loginPID'),
 				'additionalParams' => t3lib_div::implodeArrayForUrl(
 					'',
-					array('redirect_url' => $redirectUrl)
+					array(
+						rawurlencode('tx_seminars_pi1[uid]') => $eventId,
+						'redirect_url' => $redirectUrl,
+					)
 				)
 			)
 		);

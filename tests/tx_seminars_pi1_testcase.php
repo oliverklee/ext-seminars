@@ -2623,5 +2623,34 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->fixture->getFieldHeader('register')
 		);
 	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning the getLoginLink function.
+	////////////////////////////////////////////////
+
+	public function testGetLoginLinkWithLoggedOutUserAddsUidPiVarToUrl() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'foo',
+			)
+		);
+		$this->testingFramework->logoutFrontEndUser();
+
+		$this->fixture->setConfigurationValue(
+			'loginPID', $this->testingFramework->createFrontEndPage()
+		);
+
+		$this->assertContains(
+			rawurlencode('tx_seminars_pi1[uid]'). '=' . $eventUid,
+			$this->fixture->getLoginLink(
+				'foo',
+				$this->testingFramework->createFrontEndPage(),
+				$eventUid
+			)
+		);
+	}
 }
 ?>
