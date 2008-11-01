@@ -54,10 +54,8 @@ class tx_seminars_placebag extends tx_seminars_bag {
 	 *               safeguarded against SQL injection
 	 * @param string LIMIT clause (may be empty), must already be
 	 *               safeguarded against SQL injection
-	 *
-	 * @access public
 	 */
-	function __construct(
+	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = ''
 	) {
@@ -81,7 +79,7 @@ class tx_seminars_placebag extends tx_seminars_bag {
 	 *
 	 * @access protected
 	 */
-	function createItemFromDbResult() {
+	protected function createItemFromDbResult() {
 		$placeClassname = t3lib_div::makeInstanceClassName('tx_seminars_place');
 		$this->currentItem = new $placeClassname(0, $this->dbResult);
 		$this->valid();

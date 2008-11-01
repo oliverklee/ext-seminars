@@ -56,10 +56,8 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 *               safeguarded against SQL injection
 	 * @param string LIMIT clause (may be empty), must already be
 	 *               safeguarded against SQL injection
-	 *
-	 * @access public
 	 */
-	function __construct(
+	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1
 	) {
@@ -82,10 +80,8 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 * will be nulled out.
 	 *
 	 * $this->dbResult is ensured to be non-null when this function is called.
-	 *
-	 * @access protected
 	 */
-	function createItemFromDbResult() {
+	protected function createItemFromDbResult() {
 		$registrationClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registration'
 		);

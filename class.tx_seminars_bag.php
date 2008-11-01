@@ -42,30 +42,48 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 abstract class tx_seminars_bag implements Iterator {
-	/** the name of the main DB table from which we get the records for this bag */
+	/**
+	 * @var string the name of the main DB table from which we get the records
+	 *             for this bag
+	 */
 	protected $dbTableName = '';
-	/** the comma-separated names of other DB tables which we need for JOINs */
+
+	/**
+	 * @var string the comma-separated names of other DB tables which we need
+	 *             for JOINs
+	 */
 	protected $additionalTableNames = '';
 
-	/** the ORDER BY clause (without the actual string "ORDER BY") */
+	/**
+	 * @var string the ORDER BY clause (without the actual string "ORDER BY")
+	 */
 	private $orderBy = '';
-	/** the GROUP BY clause (without the actual string "GROUP BY") */
+
+	/**
+	 * @var string the GROUP BY clause (without the actual string "GROUP BY")
+	 */
 	private $groupBy = '';
-	/** the LIMIT clause (without the actual string "LIMIT") */
+
+	/**
+	 * @var string the LIMIT clause (without the actual string "LIMIT")
+	 */
 	private $limit = '';
 
 	/**
 	 * @var boolean whether $this->count has been calculated
 	 */
 	private $hasCount = false;
+
 	/**
 	 * @var integer how many objects this bag contains
 	 */
 	private $count = 0;
+
 	/**
 	 * @var boolean whether $this->$countWithoutLimit has been calculated
 	 */
 	private $hasCountWithoutLimit = false;
+
 	/**
 	 * @var integer how many objects this bag would hold without the LIMIT
 	 */
@@ -76,21 +94,27 @@ abstract class tx_seminars_bag implements Iterator {
 	 */
 	private $isRewound = false;
 
-	/** an SQL query result (not converted to an associative array yet) */
+	/**
+	 * @var boolean an SQL query result (not converted to an associative array
+	 *              yet)
+	 */
 	protected $dbResult = false;
 
-	/** the current object (may be null) */
+	/**
+	 * @var tx_seminars_objectfromdb the current object (may be null)
+	 */
 	protected $currentItem = null;
 
 	/**
-	 * string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
-	 * (the AND and the enclosing spaces are not necessary for this parameter)
+	 * @var string will be prepended to the WHERE clause using AND, e.g. 'pid=42'
+	 *             (the AND and the enclosing spaces are not necessary for this
+	 *             parameter)
 	 */
 	private $queryParameters = '';
 
 	/**
-	 * string that will be prepended to the WHERE clause, making sure that only
-	 * enabled and non-deleted records will be processed
+	 * @var string will be prepended to the WHERE clause, making sure that only
+	 *             enabled and non-deleted records will be processed
 	 */
 	private $enabledFieldsQuery = '';
 
