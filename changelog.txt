@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2329] Fix: Add a configcheck method check_tx_seminars_pi1 to remove the PHP notice from registrations- and categorylist
 - [#2328] Fix: Selector widget does not get displayed
 - [#2320] Feature: Link the teaser to the single view
 - [#2318] Change: Make some fields in the time slots excludefields

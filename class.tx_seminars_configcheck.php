@@ -142,6 +142,12 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
 	/**
+	 * Does nothing.
+	 */
+	protected function check_tx_seminars_pi1() {
+	}
+
+	/**
 	 * Checks the configuration for: tx_seminars_pi1/seminar_registration.
 	 */
 	protected function check_tx_seminars_pi1_seminar_registration() {
