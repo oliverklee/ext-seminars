@@ -2009,7 +2009,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return string the HTML code of the selector widget, may be empty
 	 */
 	private function getSelectorWidgetIfNecessary($whatToDisplay) {
-		if ($whatToDisplay != 'seminars_list') {
+		if ($whatToDisplay != 'seminar_list') {
 			return '';
 		}
 
