@@ -3891,5 +3891,38 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getPlaceShort()
 		);
 	}
+
+
+	///////////////////////////////////
+	// Tests concerning isOwnerFeUser
+	///////////////////////////////////
+
+	public function testIsOwnerFeUserForNoOwnerReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->isOwnerFeUser()
+		);
+	}
+
+	public function testIsOwnerFeUserForLoggedInUserOtherThanOwnerReturnsFalse() {
+		$this->testingFramework->createFakeFrontEnd();
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setOwnerUid($userUid + 1);
+
+		$this->assertFalse(
+			$this->fixture->isOwnerFeUser()
+		);
+	}
+
+	public function testIsOwnerFeUserForLoggedInUserOtherThanOwnerReturnsTrue() {
+		$this->testingFramework->createFakeFrontEnd();
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setOwnerUid($userUid);
+
+		$this->assertTrue(
+			$this->fixture->isOwnerFeUser()
+		);
+	}
 }
 ?>

@@ -1,4 +1,5 @@
 0.6.3 (currently working on)
+- [#2261] Change: add unit tests for isOwnerFeUser
 - [#2318] Change: Make some fields in the time slots excludefields
 - [#1897] Fix: Double assignment in a code line
 - [#1901] Feature: Use more SQL indices
