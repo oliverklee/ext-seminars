@@ -38,38 +38,40 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.p
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_seminarchild
+	 */
 	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
+	/**
+	 * @var integer
+	 */
 	private $beginDate;
+	/**
+	 * @var integer
+	 */
 	private $unregistrationDeadline;
+	/**
+	 * @var integer
+	 */
 	private $currentTimestamp;
 
-	/** the UID of a dummy front end page */
-	private $frontEndPageUid;
-
-	/** the instance of tx_seminars_pi1*/
+	/**
+	 * @var tx_seminars_pi1
+	 */
 	private $pi1;
 
 	public function setUp() {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
-		$this->testingFramework->createFakeFrontEnd();
 
 		$this->currentTimestamp = time();
 		$this->beginDate = ($this->currentTimestamp + ONE_WEEK);
 		$this->unregistrationDeadline = ($this->currentTimestamp + ONE_WEEK);
-		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
-
-		$this->pi1 = new tx_seminars_pi1();
-		$this->pi1->init(
-			array(
-				'isStaticTemplateLoaded' => 1,
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
-				'detailPID' => $this->frontEndPageUid,
-			)
-		);
-		$this->pi1->getTemplateCode();
 
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -97,7 +99,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->pi1->__destruct();
+		if ($this->pi1) {
+			$this->pi1->__destruct();
+		}
 		$this->fixture->__destruct();
 		unset($this->fixture, $this->pi1, $this->testingFramework);
 	}
@@ -106,6 +110,25 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	//////////////////////
 	// Utility functions
 	//////////////////////
+
+	/**
+	 * Creates a fake front end and a pi1 instance in $this->pi1.
+	 *
+	 * @param integer UID of the detail view page
+	 */
+	private function createPi1($detailPageUid = 0) {
+		$this->testingFramework->createFakeFrontEnd();
+
+		$this->pi1 = new tx_seminars_pi1();
+		$this->pi1->init(
+			array(
+				'isStaticTemplateLoaded' => 1,
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'detailPID' => $detailPageUid,
+			)
+		);
+		$this->pi1->getTemplateCode();
+	}
 
 	/**
 	 * Inserts a place record into the database and creates a relation to it
@@ -361,6 +384,26 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////
 	// Tests for the utility functions
 	////////////////////////////////////
+
+	public function testCreatePi1CreatesFakeFrontEnd() {
+		$GLOBALS['TSFE'] = null;
+
+		$this->createPi1();
+
+		$this->assertNotNull(
+			$GLOBALS['TSFE']
+		);
+	}
+
+	public function testCreatePi1CreatesPi1Instance() {
+		$this->pi1 = null;
+
+		$this->createPi1();
+
+		$this->assertTrue(
+			$this->pi1 instanceof tx_seminars_pi1
+		);
+	}
 
 	public function testAddPlaceRelationReturnsUid() {
 		$uid = $this->addPlaceRelation(array());
@@ -3828,11 +3871,12 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////////
 
 	public function testGetDetailedViewLinkConfigurationReturnsGeneralDetailsAndSeminarParameterPageByDefault() {
-		$this->testingFramework->createFrontEndPage();
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$this->createPi1($detailsPageUid);
 
 		$this->assertEquals(
 			array(
-				'parameter' => (string) $this->frontEndPageUid,
+				'parameter' => $detailsPageUid,
 				'additionalParams' => '&tx_seminars_pi1%5BshowUid%5D=' .
 					$this->fixture->getUid(),
 			),
@@ -3842,6 +3886,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetDetailedViewLinkConfigurationReturnsInternalDetailsPageIfSetWithoutSeminarParameter() {
 		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$this->createPi1($detailsPageUid);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -3862,6 +3907,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetDetailedViewLinkConfigurationReturnsExternalDetailsPageIfSetWithoutSeminarParameter() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$this->createPi1($detailsPageUid);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -3887,6 +3934,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////
 
 	public function testGetDetailedViewUrlCanReturnAbsoluteUrlStartingWithHttp() {
+		$this->createPi1();
+
 		$this->assertRegExp(
 			'/^http:\/\/./',
 			$this->fixture->getDetailedViewUrl($this->pi1, true)
@@ -3894,6 +3943,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlWithEncodedBrackets() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$this->createPi1($detailsPageUid);
+
 		$this->assertContains(
 			'%5BshowUid%5D',
 			$this->fixture->getDetailedViewUrl($this->pi1)
@@ -3906,6 +3958,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetDetailedViewUrlCanReturnRelativeUrlNotStartingWithHttp() {
+		$this->createPi1();
+
 		$this->assertNotContains(
 			'http://',
 			$this->fixture->getDetailedViewUrl($this->pi1, false)
@@ -3913,6 +3967,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetDetailedViewUrlWithSeparateDetailsPageOmitsShowUidParameter() {
+		$this->createPi1();
 		$detailsPageUid = $this->testingFramework->createFrontEndPage();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -3932,6 +3987,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlOfSeparateInternalDetailsPageIfSet() {
+		$this->createPi1();
 		$detailsPageUid = $this->testingFramework->createFrontEndPage();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -3951,6 +4007,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlOfSeparateExternalDetailsPageIfSet() {
+		$this->createPi1();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -3969,6 +4026,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlOfSeparateExternalDetailsPageIfSetWithTarget() {
+		$this->createPi1();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -3992,6 +4050,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	//////////////////////////////////
 
 	public function testGetLinkedFieldValueForTitleCreatesLinkTag() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$this->createPi1($detailsPageUid);
+
 		$this->assertContains(
 			'<a ',
 			$this->fixture->getLinkedFieldValue($this->pi1, 'title')
@@ -3999,6 +4060,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetLinkedFieldValueForTitleCreatesRelativeLink() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$this->createPi1($detailsPageUid);
+
 		$this->assertNotContains(
 			'http',
 			$this->fixture->getLinkedFieldValue($this->pi1, 'title')
@@ -4006,6 +4070,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetLinkedFieldValueForTitleLinksToSeparateInternalDetailsPageIfSet() {
+		$this->createPi1();
 		$detailsPageUid = $this->testingFramework->createFrontEndPage();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4025,6 +4090,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetLinkedFieldValueForTitleLinksToSeparateExternalDetailsPageIfSet() {
+		$this->createPi1();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -4043,6 +4109,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetLinkedFieldValueForTitleLinksToSeparateInternalDetailsPageWithTargetIfSet() {
+		$this->createPi1();
 		$detailsPageUid = $this->testingFramework->createFrontEndPage();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4068,6 +4135,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetLinkedFieldValueForTitleLinksToSeparateExternalDetailsPageWithTargetIfSet() {
+		$this->createPi1();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -4097,6 +4165,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////
 
 	public function testGetPlaceWithDetailsReturnsWillBeAnnouncedForNoPlace() {
+		$this->createPi1();
 		$this->assertContains(
 			$this->fixture->translate('message_willBeAnnounced'),
 			$this->fixture->getPlaceWithDetails($this->pi1)
@@ -4104,6 +4173,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceWithDetailsContainsTitleOfOnePlace() {
+		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place'));
 
 		$this->assertContains(
@@ -4113,6 +4183,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceWithDetailsContainsTitleOfAllRelatedPlaces() {
+		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place'));
 		$this->addPlaceRelation(array('title' => 'another place'));
 
@@ -4127,6 +4198,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceWithDetailsContainsAddressOfOnePlace() {
+		$this->createPi1();
 		$this->addPlaceRelation(
 			array('title' => 'a place', 'address' => 'a street')
 		);
@@ -4138,6 +4210,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceWithDetailsContainsCityOfOnePlace() {
+		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place', 'city' => 'Emden'));
 
 		$this->assertContains(
@@ -4147,6 +4220,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceWithDetailsContainsCountryOfOnePlace() {
+		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place', 'country' => 'de'));
 
 		$this->assertContains(
@@ -4156,6 +4230,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceWithDetailsContainsHomepageLinkOfOnePlace() {
+		$this->createPi1();
 		$this->addPlaceRelation(array('homepage' => 'www.test.com'));
 
 		$this->assertContains(
@@ -4165,6 +4240,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceWithDetailsContainsDirectionsOfOnePlace() {
+		$this->createPi1();
 		$this->addPlaceRelation(array('directions' => 'Turn right.'));
 
 		$this->assertContains(
@@ -4179,6 +4255,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////////
 
 	public function testGetPlaceWithDetailsRawReturnsWillBeAnnouncedForNoPlace() {
+		$this->testingFramework->createFakeFrontEnd();
+
 		$this->assertContains(
 			$this->fixture->translate('message_willBeAnnounced'),
 			$this->fixture->getPlaceWithDetailsRaw()
@@ -4322,6 +4400,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesInitiallyReturnsAnEmptyArray() {
+		$this->createPi1();
+
 		$this->assertEquals(
 			array(),
 			$this->fixture->getAttachedFiles($this->pi1)
@@ -4329,6 +4409,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesWithOneSetAttachedFileReturnsAttachedFileAsArrayWithCorrectFileSize() {
+		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -4348,6 +4429,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesWithTwoSetAttachedFilesReturnsAttachedFilesAsArrayWithCorrectFileSize() {
+		$this->createPi1();
 		$dummyFile1 = $this->testingFramework->createDummyFile();
 		$dummyFileName1 =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile1);
@@ -4382,6 +4464,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesWithAttachedFileWithFileEndingReturnsFileType() {
+		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -4396,6 +4479,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesWithAttachedFileWithoutFileEndingReturnsFileTypeNone() {
+		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('test');
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -4410,6 +4494,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesWithAttachedFileWithDotInFileNameReturnsCorrectFileType() {
+		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('test.test.txt');
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -4424,6 +4509,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesWithAttachedFileWithFileNameStartingWithADotReturnsFileType() {
+		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('.txt');
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -4438,6 +4524,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAttachedFilesWithAttachedFileWithFileNameEndingWithADotReturnsFileTypeNone() {
+		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('test.');
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -4448,6 +4535,39 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'none',
 			$attachedFiles[0]['type']
+		);
+	}
+
+
+	///////////////////////////////////
+	// Tests concerning isOwnerFeUser
+	///////////////////////////////////
+
+	public function testIsOwnerFeUserForNoOwnerReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->isOwnerFeUser()
+		);
+	}
+
+	public function testIsOwnerFeUserForLoggedInUserOtherThanOwnerReturnsFalse() {
+		$this->testingFramework->createFakeFrontEnd();
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setOwnerUid($userUid + 1);
+
+		$this->assertFalse(
+			$this->fixture->isOwnerFeUser()
+		);
+	}
+
+	public function testIsOwnerFeUserForLoggedInUserOtherThanOwnerReturnsTrue() {
+		$this->testingFramework->createFakeFrontEnd();
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setOwnerUid($userUid);
+
+		$this->assertTrue(
+			$this->fixture->isOwnerFeUser()
 		);
 	}
 }

@@ -3534,10 +3534,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return boolean true if a FE user is logged in and the user is
 	 *                 the owner of this event, false otherwise
-	 *
-	 * @access public
 	 */
-	function isOwnerFeUser() {
+	public function isOwnerFeUser() {
 		return $this->hasRecordPropertyInteger('owner_feuser')
 			&& ($this->getRecordPropertyInteger('owner_feuser')
 				== $this->getFeUserUid());

@@ -413,6 +413,15 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'allowUnregistrationWithEmptyWaitingList', intval($isAllowed)
 		);
 	}
+
+	/**
+	 * Sets the UID of the owner FE user.
+	 *
+	 * @param integer the UID of the owner FE user, must be >= 0
+	 */
+	public function setOwnerUid($ownerUid) {
+		$this->setRecordPropertyInteger('owner_feuser', $ownerUid);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {
