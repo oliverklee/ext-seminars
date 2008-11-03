@@ -85,6 +85,7 @@
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
 			<label index="seminars.pi_flexform.favorites_list">Favorites list</label>
+			<label index="seminars.pi_flexform.event_headline">Event headline</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -574,6 +575,7 @@
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Seite, auf die nach dem Speichern einer Veranstaltung im Front-end umgeleitet wird</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">Liste erlaubter Dateiendungen für Front-end-Bearbeitung</label>
 			<label index="seminars.pi_flexform.favorites_list">Merkzettel</label>
+			<label index="seminars.pi_flexform.event_headline">Veranstaltungsüberschrift</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorherige</label>
 			<label index="pi_list_browseresults_page">Seite</label>
 			<label index="pi_list_browseresults_next">Nächste &gt;</label>
@@ -2171,6 +2173,7 @@
 			<label index="countdown_seconds_plural" type="integer">126085346</label>
 			<label index="seminars.pi_flexform.favorites_list" type="integer">201026682</label>
 			<label index="seminars.pi_flexform.favoritesPID" type="integer">66351292</label>
+			<label index="seminars.pi_flexform.event_headline" type="integer">246201769</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3357,6 +3360,7 @@
 			<label index="countdown_seconds_plural">seconds</label>
 			<label index="seminars.pi_flexform.favorites_list">Favorites list</label>
 			<label index="seminars.pi_flexform.favoritesPID">Page that contains the favorites list:</label>
+			<label index="seminars.pi_flexform.event_headline">Event headline</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

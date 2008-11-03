@@ -64,6 +64,10 @@
 										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.favorites_list</numIndex>
 										<numIndex index="1">favorites_list</numIndex>
 									</numIndex>
+									<numIndex index="12" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.event_headline</numIndex>
+										<numIndex index="1">event_headline</numIndex>
+									</numIndex>
 								</items>
 								<size>1</size>
 								<maxitems>1</maxitems>

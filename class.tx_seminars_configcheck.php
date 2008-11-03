@@ -332,6 +332,19 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	protected function check_tx_seminars_pi1_events_next_day() {}
 
 	/**
+	 * Checks if the common frontend settings are set.
+	 */
+	protected function check_tx_seminars_frontEndEventHeadline() {
+		$this->checkCommonFrontEndSettings();
+	}
+
+	/**
+	 * This check isn't actually used. It is merely needed for the unit tests.
+	 */
+	protected function check_tx_seminars_pi1_event_headline() {
+	}
+
+	/**
 	 * Checks the configuration related to thank-you e-mails.
 	 */
 	private function checkThankYouMail() {
@@ -459,6 +472,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'countdown',
 				'category_list',
 				'favorites_list',
+				'event_headline',
 			)
 		);
 	}

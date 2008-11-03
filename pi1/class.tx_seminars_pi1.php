@@ -38,6 +38,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndRegistrationsList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCountdown.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndSelectorWidget.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndEventHeadline.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
@@ -314,6 +315,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 			case 'csv_export_registrations':
 				$result = $this->createCsvExportOfRegistrations();
+				break;
+			case 'event_headline':
+				$eventHeadlineClassName = t3lib_div::makeInstanceClassName(
+					'tx_seminars_frontEndEventHeadline'
+				);
+				$eventHeadline = new $eventHeadlineClassName(
+					$this->conf, $this->cObj
+				);
+				$result = $eventHeadline->render();
+				$this->setErrorMessage(
+					$eventHeadline->checkConfiguration(true)
+				);
+				$eventHeadline->__destruct();
+				unset($eventHeadline);
 				break;
 			case 'topic_list':
 				// The fallthrough is intended
