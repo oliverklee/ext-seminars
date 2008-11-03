@@ -148,4 +148,4 @@ class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
 		);
 	}
 }
-?>\ No newline at end of file
+?>
