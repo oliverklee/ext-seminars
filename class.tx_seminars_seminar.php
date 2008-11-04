@@ -33,6 +33,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizer.ph
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizerbag.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_mapperRegistry.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -3527,6 +3528,38 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	function hasAttendancesPid() {
 		return (boolean) $this->getAttendancesPid();
+	}
+
+	/**
+	 * Gets this event's owner (the FE user who has created this event).
+	 *
+	 * @return tx_oelib_frontEndUser the owner, will be null if the event has
+	 *                               no owner
+	 */
+	public function getOwner() {
+		if (!$this->hasRecordPropertyInteger('owner_feuser')) {
+			return null;
+		}
+
+		try {
+			$owner = tx_oelib_mapperRegistry::get('tx_oelib_frontEndUserMapper')
+				->find($this->getRecordPropertyInteger('owner_feuser'));
+		} catch (tx_oelib_notFoundException $exception) {
+			$owner = null;
+		}
+
+		return $owner;
+	}
+
+	/**
+	 * Checks whether this event has an existing owner (the FE user who has
+	 * created this event)
+	 *
+	 * @return boolean true if this event has an existing owner, false otherwise
+	 */
+	public function hasOwner() {
+		return ($this->hasRecordPropertyInteger('owner_feuser')
+			&& ($this->getOwner() != null));
 	}
 
 	/**
