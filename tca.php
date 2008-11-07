@@ -1740,7 +1740,7 @@ $TCA['tx_seminars_timeslots'] = array(
 				'type' => 'input',
 				'size' => '12',
 				'max' => '20',
-				'eval' => 'datetime',
+				'eval' => 'datetime, required',
 				'checkbox' => '0',
 				'default' => '0',
 			)
