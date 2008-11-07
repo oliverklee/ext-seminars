@@ -674,6 +674,7 @@ CREATE TABLE tx_seminars_categories (
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
+	icon tinytext,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

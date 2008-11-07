@@ -174,6 +174,7 @@
 			<label index="tx_seminars_target_groups.title">Title:</label>
 			<label index="tx_seminars_categories">Categories</label>
 			<label index="tx_seminars_categories.title">Title:</label>
+			<label index="tx_seminars_categories.icon">Icon:</label>
 			<label index="tx_seminars_skills">Skills</label>
 			<label index="tx_seminars_skills.title">Title:</label>
 			<label index="tx_seminars_prices">Prices</label>
@@ -352,6 +353,7 @@
 			<label index="tx_seminars_target_groups.title">Titel:</label>
 			<label index="tx_seminars_categories">Kategorien</label>
 			<label index="tx_seminars_categories.title">Titel:</label>
+			<label index="tx_seminars_categories.icon">Icon:</label>
 			<label index="tx_seminars_skills">Fähigkeiten</label>
 			<label index="tx_seminars_skills.title">Titel:</label>
 			<label index="tx_seminars_prices">Preise</label>
@@ -1341,6 +1343,7 @@
 			<label index="tx_seminars_seminars.attached_files" type="integer">62695314</label>
 			<label index="tx_seminars_seminars.details_page" type="integer">196341936</label>
 			<label index="tx_seminars_seminars.divLabelAccess" type="integer">200750040</label>
+			<label index="tx_seminars_categories.icon" type="integer">57819822</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2320,6 +2323,7 @@
 			<label index="tx_seminars_seminars.attached_files">Attached files:</label>
 			<label index="tx_seminars_seminars.details_page">Page with the details view:</label>
 			<label index="tx_seminars_seminars.divLabelAccess">Access</label>
+			<label index="tx_seminars_categories.icon">Icon:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

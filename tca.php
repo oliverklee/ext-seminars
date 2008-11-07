@@ -1952,7 +1952,7 @@ $TCA['tx_seminars_target_groups'] = array(
 $TCA['tx_seminars_categories'] = array(
 	'ctrl' => $TCA['tx_seminars_categories']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title, icon',
 	),
 	'columns' => array(
 		'title' => array(
@@ -1964,9 +1964,24 @@ $TCA['tx_seminars_categories'] = array(
 				'eval' => 'required,trim',
 			),
 		),
+		'icon' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_categories.icon',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'file',
+				'allowed' => 'gif,png,jpeg,jpg',
+				'max_size' => 256,
+				'uploadfolder' => 'uploads/tx_seminars',
+				'show_thumbs' => 1,
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+			),
+		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title, icon;;;;2-2-2'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
