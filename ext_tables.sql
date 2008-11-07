@@ -236,6 +236,7 @@ CREATE TABLE tx_seminars_seminars (
 	uses_terms_2 tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	notes text,
 	attached_files text,
+	image tinytext,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
