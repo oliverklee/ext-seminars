@@ -100,6 +100,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	private $registrationManager = null;
 
 	/**
+	 * @var tx_seminars_frontEndCategoryList
+	 */
+	private $categoryList = null;
+
+	/**
 	 * @var array List of field names (as keys) by which we can sort plus
 	 *            the corresponding SQL sort criteria (as value).
 	 *
@@ -1460,6 +1465,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$result = 'Hello World. When I grow up I will be the list of ' .
 							'favorites';
 				break;
+			case 'seminar_list':
+				$this->createCategoryList();
+				break;
 			default:
 				break;
 		}
@@ -1761,17 +1769,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				);
 			}
 
-			$categoryListClassName = t3lib_div::makeInstanceClassName(
-				'tx_seminars_frontEndCategoryList'
-			);
-			$categoryList = new $categoryListClassName($this->conf, $this->cObj);
-
 			$allCategories = $this->seminar->getCategories();
 			if ($whatToDisplay == 'seminar_list') {
 				$allCategoryLinks = array();
 				foreach ($allCategories as $uid => $title) {
 					$allCategoryLinks[]
-						= $categoryList->createLinkToListViewLimitedByCategory(
+						= $this->categoryList->createLinkToListViewLimitedByCategory(
 							$uid, $title
 						);
 				}
@@ -2392,6 +2395,18 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					)
 				),
 			)
+		);
+	}
+
+	/**
+	 * Creates a tx_seminars_frontEndCategoryList object in $this->categoryList.
+	 */
+	private function createCategoryList() {
+		$categoryListClassName = t3lib_div::makeInstanceClassName(
+			'tx_seminars_frontEndCategoryList'
+		);
+		$this->categoryList = new $categoryListClassName(
+			$this->conf, $this->cObj
 		);
 	}
 

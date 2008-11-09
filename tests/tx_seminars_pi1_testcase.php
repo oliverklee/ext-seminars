@@ -2573,14 +2573,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testEditSubpartWithMayManagersEditTheirEventsSetToFalseIsHiddenInMyVipEventsListView() {
 		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 0);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-		$this->fixture->main(
-			'',
-			array(
-				'mayManagersEditTheirEvents' => 0,
-				'what_to_display' => 'my_vip_events',
-			)
-		);
+		$this->fixture->main('', array());
 		$this->assertFalse(
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
 		);
