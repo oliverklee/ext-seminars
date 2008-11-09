@@ -49,7 +49,8 @@ class tx_seminars_testingFrontEndView_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		$this->fixture = new tx_seminars_testingFrontEndView(
-			array(), $GLOBALS['TSFE']->cObj
+			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			$GLOBALS['TSFE']->cObj
 		);
 	}
 

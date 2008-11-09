@@ -361,14 +361,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testOtherDatesListInSingleViewDoesContainsSingleEventRecordWithTopicSet() {
+	public function testOtherDatesListInSingleViewDoesNotContainSingleEventRecordWithTopicSet() {
 		$this->fixture->setConfigurationValue(
-			'detailPID',
-			$this->testingFramework->createFrontEndPage()
+			'detailPID', $this->testingFramework->createFrontEndPage()
 		);
 		$this->fixture->setConfigurationValue(
-			'hideFields',
-			'eventsnextday'
+			'hideFields', 'eventsnextday'
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2575,10 +2573,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testEditSubpartWithMayManagersEditTheirEventsSetToFalseIsHiddenInMyVipEventsListView() {
 		$this->createLogInAndAddFeUserAsVip();
-		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 0);
-		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-		$this->fixture->main('', array());
+		$this->fixture->main(
+			'',
+			array(
+				'mayManagersEditTheirEvents' => 0,
+				'what_to_display' => 'my_vip_events',
+			)
+		);
 		$this->assertFalse(
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
 		);
@@ -2602,12 +2604,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testRegistrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToFalseIsHiddenInMyVipEventsListView() {
 		$this->createLogInAndAddFeUserAsVip();
-		$this->fixture->setConfigurationValue(
-			'allowCsvExportOfRegistrationsInMyVipEventsView', 0
-		);
-		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-		$this->fixture->main('', array());
+		$this->fixture->main(
+			'',
+			array(
+				'allowCsvExportOfRegistrationsInMyVipEventsView' => 0,
+				'what_to_display' => 'my_vip_events',
+			)
+		);
 		$this->assertFalse(
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
 		);

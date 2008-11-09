@@ -150,20 +150,25 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			'The value "foo" of the first parameter $whatToDisplay is not valid.'
 		);
 
-		new tx_seminars_frontEndRegistrationsList(array(), 'foo', 0, $GLOBALS['TSFE']->cObj);
+		new tx_seminars_frontEndRegistrationsList(
+			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			'foo', 0, $GLOBALS['TSFE']->cObj
+			);
 
 	}
 
 	public function testCreateFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException() {
 		$fixture = new tx_seminars_frontEndRegistrationsList(
-			array(), 'list_registrations', 0, $GLOBALS['TSFE']->cObj
+			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			'list_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->__destruct();
 	}
 
 	public function testCreateFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException() {
 		$fixture = new tx_seminars_frontEndRegistrationsList(
-			array(), 'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
+			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->__destruct();
 	}
@@ -174,16 +179,17 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	///////////////////////
 
 	public function testRenderContainsEventTitle() {
-		$result = $this->fixture->render();
-
 		$this->assertContains(
 			'Test event',
-			$result
+			$this->fixture->render()
 		);
 	}
 
 	public function testRenderWithNegativeSeminarUidReturnsHeader404() {
-		$fixture = new tx_seminars_frontEndRegistrationsList(array(), 'list_registrations', -1, $GLOBALS['TSFE']->cObj);
+		$fixture = new tx_seminars_frontEndRegistrationsList(
+			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			'list_registrations', -1, $GLOBALS['TSFE']->cObj
+		);
 		$fixture->render();
 		$fixture->__destruct();
 
@@ -194,7 +200,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	}
 
 	public function testRenderWithZeroSeminarUidReturnsHeader404() {
-		$fixture = new tx_seminars_frontEndRegistrationsList(array(), 'list_registrations', 0, $GLOBALS['TSFE']->cObj);
+		$fixture = new tx_seminars_frontEndRegistrationsList(
+			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			'list_registrations', 0, $GLOBALS['TSFE']->cObj
+		);
 		$fixture->render();
 		$fixture->__destruct();
 
