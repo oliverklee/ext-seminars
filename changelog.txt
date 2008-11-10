@@ -1,4 +1,5 @@
 0.6.3 (currently working on)
+- [#2333] Change: add unit tests for getVacanciesString
 - [#2330] Change: Make the begin date in time slots required
 - [#2261] Change: add unit tests for isOwnerFeUser
 - [#2318] Change: Make some fields in the time slots excludefields
