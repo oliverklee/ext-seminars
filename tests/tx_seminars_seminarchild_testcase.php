@@ -4699,13 +4699,13 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetVacanciesStringForNoVancanciesReturnsZero() {
+	public function testGetVacanciesStringForNoVancanciesReturnsFullyBookedString() {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
 		$this->fixture->setAttendancesMax(5);
 		$this->fixture->setNumberOfAttendances(5);
 
 		$this->assertEquals(
-			'0',
+			$this->fixture->translate('message_fullyBooked'),
 			$this->fixture->getVacanciesString()
 		);
 	}

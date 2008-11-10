@@ -93,6 +93,7 @@
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
+			<label index="message_fullyBooked">fully booked</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
@@ -358,6 +359,7 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="message_willBeAnnounced">wird noch bekannt gegeben</label>
 			<label index="message_forFree">kostenlos</label>
 			<label index="message_enough">genug</label>
+			<label index="message_fullyBooked">ausgebucht</label>
 			<label index="message_accessDenied_formal">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
 			<label index="message_accessDenied_informal">Zu diesem Teil der Site hast du leider keine Zugangsberechtigung.</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
@@ -1175,6 +1177,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_known_from" type="integer">129140510</label>
 			<label index="label_notes" type="integer">256667525</label>
 			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
+			<label index="message_fullyBooked" type="integer">65406827</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
@@ -1685,6 +1688,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
+			<label index="message_fullyBooked">fully booked</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
