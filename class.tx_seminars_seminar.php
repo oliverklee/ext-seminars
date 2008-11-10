@@ -915,17 +915,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
-			$name = $speaker->getTitle();
+			$name = $speaker->getLinkedTitle($plugin);
 			if ($speaker->hasOrganization()) {
 				$name .= ', ' . $speaker->getOrganization();
-			}
-			if ($speaker->hasHomepage()) {
-				$name = $plugin->cObj->getTypoLink(
-					$name,
-					$speaker->getHomepage(),
-					array(),
-					$plugin->getConfValueString('externalLinkTarget')
-				);
 			}
 			$plugin->setMarker('speaker_item_title', $name);
 
@@ -985,18 +977,24 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets our speaker (or speakers) as a plain text list (just their names).
+	 * Gets our speaker (or speakers) as a list (just their names),
+	 * linked to their homepage, if the speaker (or speakers) has one.
 	 * Returns an empty string if this seminar doesn't have any speakers.
 	 *
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
+	 * @param tx_oelib_templatehelper the live pibase object
 	 * @param string the relation in which the speakers stand to this event:
 	 *               "speakers" (default), "partners", "tutors" or "leaders"
 	 *
-	 * @return string our speakers list (or '' if there is an error)
+	 * @return string our speakers list, will be empty if an error occurred
+	 *                during processing
 	 */
-	public function getSpeakersShort($speakerRelation = 'speakers') {
+	public function getSpeakersShort(
+		tx_oelib_templatehelper $plugin,
+		$speakerRelation = 'speakers'
+	) {
 		if (!$this->hasSpeakersOfType($speakerRelation)) {
 			return '';
 		}
@@ -1004,7 +1002,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
-			$result[] = $speaker->getTitle();
+			$result[] = $speaker->getLinkedTitle($plugin);
 		}
 
 		return implode(', ', $result);
@@ -2650,7 +2648,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$value = $this->getEarlyBirdPriceSpecial(' ');
 					break;
 				case 'speakers':
-					$value = $this->getSpeakersShort();
+					$value = $this->getSpeakersShort($this);
 					break;
 				case 'time':
 					$value = $this->getTime('-');

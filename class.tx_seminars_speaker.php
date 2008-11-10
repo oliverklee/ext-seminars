@@ -222,6 +222,31 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	public function getEmail() {
 		return $this->getRecordPropertyString('email');
 	}
+
+	/**
+	 * Creates a link to this speaker's homepage, with the title as link text.
+	 *
+	 * @param tx_oelib_templatehelper templatehelper object with current
+	 *                                configuration values
+	 *
+	 * @return string this speaker's title wrapped in an link tag, or if the
+	 *                speaker has no homepage just the speaker name, will not
+	 *                be empty
+	 */
+	public function getLinkedTitle(tx_oelib_templatehelper $plugin) {
+		if ($this->hasHomepage()) {
+			$result = $plugin->cObj->getTypoLink(
+				$this->getTitle(),
+				$this->getHomepage(),
+				array(),
+				$plugin->getConfValueString('externalLinkTarget')
+			);
+		} else {
+			$result = $this->getTitle();
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_speaker.php']) {

@@ -408,6 +408,38 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testSingleViewDisplaysAndLinksSpeakersNameButNotCompany() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue('showSpeakerDetails', true);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$speakerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SPEAKERS,
+			array (
+				'title' => 'foo',
+				'organization' => 'bar',
+				'homepage' => 'www.foo.com',
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SPEAKERS_MM,
+			$this->seminarUid, $speakerUid
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('speakers' => '1')
+		);
+
+		$this->assertRegExp(
+			'/<a href="http:\/\/www.foo.com".*>foo<\/a>, bar/',
+			$this->fixture->main('', array())
+		);
+	}
+
 
 	///////////////////////////////////////////////////////
 	// Tests concerning attached files in the single view

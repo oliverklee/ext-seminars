@@ -1005,7 +1005,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$speakerType,
 			$this->getConfValueBoolean('showSpeakerDetails', 's_template_special')
 				? $this->seminar->getSpeakersWithDescription($this, $speakerType)
-				: $this->seminar->getSpeakersShort($speakerType)
+				: $this->seminar->getSpeakersShort($this, $speakerType)
 		);
 	}
 
@@ -1814,7 +1814,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker(
 				'teaser', $this->seminar->getLinkedFieldValue($this, 'teaser')
 			);
-			$this->setMarker('speakers', $this->seminar->getSpeakersShort());
+			$this->setMarker(
+				'speakers', $this->seminar->getSpeakersShort($this)
+			);
 			$this->setMarker('language', $this->seminar->getLanguageName());
 
 			$currentDate = $this->seminar->getDate();

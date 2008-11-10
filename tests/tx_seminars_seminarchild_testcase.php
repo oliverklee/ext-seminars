@@ -3450,49 +3450,52 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetSpeakersShortWithNoSpeakersReturnsAnEmptyString() {
+		$this->createPi1();
+
 		$this->assertEquals(
 			'',
-			$this->fixture->getSpeakersShort('speakers')
+			$this->fixture->getSpeakersShort($this->pi1, 'speakers')
 		);
 		$this->assertEquals(
 			'',
-			$this->fixture->getSpeakersShort('partners')
+			$this->fixture->getSpeakersShort($this->pi1, 'partners')
 		);
 		$this->assertEquals(
 			'',
-			$this->fixture->getSpeakersShort('tutors')
+			$this->fixture->getSpeakersShort($this->pi1, 'tutors')
 		);
 		$this->assertEquals(
 			'',
-			$this->fixture->getSpeakersShort('leaders')
+			$this->fixture->getSpeakersShort($this->pi1, 'leaders')
 		);
 	}
 
 	public function testGetSpeakersShortWithSingleSpeakersReturnsSingleSpeaker() {
+		$this->createPi1();
 		$speaker = array('title' => 'test speaker');
 
 		$this->addSpeakerRelation($speaker);
 		$this->assertEquals(
 			$speaker['title'],
-			$this->fixture->getSpeakersShort('speakers')
+			$this->fixture->getSpeakersShort($this->pi1, 'speakers')
 		);
 
 		$this->addPartnerRelation($speaker);
 		$this->assertEquals(
 			$speaker['title'],
-			$this->fixture->getSpeakersShort('partners')
+			$this->fixture->getSpeakersShort($this->pi1, 'partners')
 		);
 
 		$this->addTutorRelation($speaker);
 		$this->assertEquals(
 			$speaker['title'],
-			$this->fixture->getSpeakersShort('tutors')
+			$this->fixture->getSpeakersShort($this->pi1, 'tutors')
 		);
 
 		$this->addLeaderRelation($speaker);
 		$this->assertEquals(
 			$speaker['title'],
-			$this->fixture->getSpeakersShort('leaders')
+			$this->fixture->getSpeakersShort($this->pi1, 'leaders')
 		);
 	}
 
@@ -3502,30 +3505,66 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->addSpeakerRelation($firstSpeaker);
 		$this->addSpeakerRelation($secondSpeaker);
+		$this->createPi1();
 		$this->assertEquals(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
-			$this->fixture->getSpeakersShort('speakers')
+			$this->fixture->getSpeakersShort($this->pi1, 'speakers')
 		);
 
 		$this->addPartnerRelation($firstSpeaker);
 		$this->addPartnerRelation($secondSpeaker);
 		$this->assertEquals(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
-			$this->fixture->getSpeakersShort('partners')
+			$this->fixture->getSpeakersShort($this->pi1, 'partners')
 		);
 
 		$this->addTutorRelation($firstSpeaker);
 		$this->addTutorRelation($secondSpeaker);
 		$this->assertEquals(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
-			$this->fixture->getSpeakersShort('tutors')
+			$this->fixture->getSpeakersShort($this->pi1, 'tutors')
 		);
 
 		$this->addLeaderRelation($firstSpeaker);
 		$this->addLeaderRelation($secondSpeaker);
 		$this->assertEquals(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
-			$this->fixture->getSpeakersShort('leaders')
+			$this->fixture->getSpeakersShort($this->pi1, 'leaders')
+		);
+	}
+
+	public function testGetSpeakersShortReturnsSpeakerLinkedToSpeakerHomepage() {
+		$speakerWithLink = array(
+			'title' => 'test speaker',
+			'homepage' => 'http://www.foo.com',
+		);
+		$this->addSpeakerRelation($speakerWithLink);
+		$this->createPi1();
+
+		$this->assertRegExp(
+			'/href="http:\/\/www.foo.com".*>test speaker/',
+			$this->fixture->getSpeakersShort($this->pi1, 'speakers')
+		);
+	}
+
+	public function testGetSpeakersForSpeakerWithoutHomepageReturnsSpeakerNameWithoutLinkTag() {
+		$speaker = array(
+			'title' => 'test speaker',
+		);
+
+		$this->addSpeakerRelation($speaker);
+		$this->createPi1();
+
+		$shortSpeakerOutput
+			= $this->fixture->getSpeakersShort($this->pi1, 'speakers');
+
+		$this->assertContains(
+			'test speaker',
+			$shortSpeakerOutput
+		);
+		$this->assertNotContains(
+			'<a',
+			$shortSpeakerOutput
 		);
 	}
 
