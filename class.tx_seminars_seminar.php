@@ -180,13 +180,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * This function is used in order to check values entered in the TCE forms
 	 * in the TYPO3 back end. It is called through a hook in the TCE class.
 	 *
-	 * @param	array		associative array containing the values entered in the TCE form (as a reference, may not be null)
+	 * @param array associative array containing the values entered in the TCE
+	 *              form (as a reference, may not be null)
 	 *
-	 * @return	array		associative array containing data to update the database entry of this event, may be empty but not null
-	 *
-	 * @access	public
+	 * @return array associative array containing data to update the database
+	 *               entry of this event, may be empty
 	 */
-	function getUpdateArray(array &$fieldArray) {
+	public function getUpdateArray(array &$fieldArray) {
 		$updateArray = array();
 		$fieldNamesToCheck = array(
 			'deadline_registration',
@@ -4304,25 +4304,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * all places of the event's time slots in the database.
 	 * This function is a no-op for events without time slots.
 	 *
-	 * @return	integer		the number of place relations of the event
-	 *
-	 * @access	public
+	 * @return integer the number of place relations of the event, will be >= 0
 	 */
-	function updatePlaceRelationsFromTimeSlots() {
+	public function updatePlaceRelationsFromTimeSlots() {
 		if (!$this->hasTimeslots()) {
-			return;
+			return 0;
 		}
-
-		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(
-			'tx_seminars_timeslotbag'
-		);
-		$timeSlotBag = new $timeSlotBagClassname(
-			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid()
-				.' AND '.SEMINARS_TABLE_TIME_SLOTS.'.place>0',
-			'',
-			SEMINARS_TABLE_TIME_SLOTS.'.place',
-			SEMINARS_TABLE_TIME_SLOTS.'.begin_date ASC'
-		);
+		$timeSlotBag = $this->createTimeSlotBag();
+		if ($timeSlotBag->getObjectCountWithoutLimit() == 0) {
+			return $this->getNumberOfPlaces();
+		}
 
 		// Removes all place relations of the current event.
 		$GLOBALS['TYPO3_DB']->exec_DELETEquery(
@@ -4342,6 +4333,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $this->createMmRecords(
 			SEMINARS_TABLE_SITES_MM, $placesOfTimeSlots
+		);
+	}
+
+	/**
+	 * Creates a time slot bag for the time slots associated with this event.
+	 *
+	 * @return tx_seminars_timeslotbag bag with this event's time slots, may be
+	 *                                 empty
+	 */
+	private function createTimeSlotBag() {
+		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(
+			'tx_seminars_timeslotbag'
+		);
+		return new $timeSlotBagClassname(
+			SEMINARS_TABLE_TIME_SLOTS . '.seminar = ' . $this->getUid() .
+				' AND ' . SEMINARS_TABLE_TIME_SLOTS . '.place > 0',
+			'',
+			SEMINARS_TABLE_TIME_SLOTS . '.place',
+			SEMINARS_TABLE_TIME_SLOTS . '.begin_date ASC'
 		);
 	}
 

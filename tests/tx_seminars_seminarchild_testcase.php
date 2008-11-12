@@ -3973,5 +3973,152 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getVacanciesString()
 		);
 	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning updatePlaceRelationsFromTimeSlots
+	///////////////////////////////////////////////////////
+
+	public function testUpdatePlaceRelationsForSeminarWithoutPlacesRelatesPlaceFromTimeslotToSeminar() {
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'my house')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'place' => $placeUid,
+				'seminar' => $this->fixture->getUid(),
+			)
+		);
+		$this->fixture->setNumberOfTimeSlots(1);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->updatePlaceRelationsFromTimeSlots()
+		);
+	}
+
+	public function testUpdatePlaceRelationsForTwoTimeslotsWithPlacesReturnsTwo() {
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'my house')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'place' => $placeUid1,
+				'seminar' => $this->fixture->getUid(),
+			)
+		);
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'your house')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'place' => $placeUid2,
+				'seminar' => $this->fixture->getUid(),
+			)
+		);
+		$this->fixture->setNumberOfTimeSlots(2);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->updatePlaceRelationsFromTimeSlots()
+		);
+	}
+
+	public function testUpdatePlaceRelationsForSeminarWithoutPlacesCanRelateTwoPlacesFromTimeslotsToSeminar() {
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'my house')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'place' => $placeUid1,
+				'seminar' => $this->fixture->getUid(),
+			)
+		);
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'your house')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'place' => $placeUid2,
+				'seminar' => $this->fixture->getUid(),
+			)
+		);
+		$this->fixture->setNumberOfTimeSlots(2);
+		$this->fixture->setNumberOfPlaces(2);
+		$this->fixture->updatePlaceRelationsFromTimeSlots();
+
+		$this->assertContains(
+			'my house',
+			$this->fixture->getPlaceShort()
+		);
+		$this->assertContains(
+			'your house',
+			$this->fixture->getPlaceShort()
+		);
+	}
+
+	public function testUpdatePlaceRelationsOverwritesSeminarPlaceWithNonEmptyPlaceFromTimeslot() {
+		$this->addPlaceRelation(array('title' => 'your house'));
+
+		$placeUidInTimeSlot = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'my house')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array(
+				'place' => $placeUidInTimeSlot,
+				'seminar' => $this->fixture->getUid(),
+			)
+		);
+		$this->fixture->setNumberOfTimeSlots(1);
+
+		$this->fixture->updatePlaceRelationsFromTimeSlots();
+
+		$this->assertEquals(
+			'my house',
+			$this->fixture->getPlaceShort()
+		);
+	}
+
+	public function testUpdatePlaceRelationsForSeminarWithOnePlaceAndTimeSlotWithNoPlaceReturnsOne() {
+		$this->addPlaceRelation(array('title' => 'your house'));
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array('seminar' => $this->fixture->getUid())
+		);
+		$this->fixture->setNumberOfTimeSlots(1);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->updatePlaceRelationsFromTimeSlots()
+		);
+	}
+
+	public function testUpdatePlaceRelationsForTimeSlotsWithNoPlaceNotOverwritesSeminarPlace() {
+		$this->addPlaceRelation(array('title' => 'your house'));
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_TIME_SLOTS,
+			array('seminar' => $this->fixture->getUid())
+		);
+		$this->fixture->setNumberOfTimeSlots(1);
+
+		$this->assertEquals(
+			'your house',
+			$this->fixture->getPlaceShort()
+		);
+	}
 }
 ?>
