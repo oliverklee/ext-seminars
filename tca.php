@@ -1919,6 +1919,9 @@ $TCA['tx_seminars_timeslots'] = array(
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
+				'items' => array(
+					'' => '',
+				),
 				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_sites'),
 			),
 		),

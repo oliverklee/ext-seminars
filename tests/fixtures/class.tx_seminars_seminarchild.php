@@ -165,17 +165,6 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Returns always false so we are sure that we are testing
-	 * tx_seminars_timespan::getBeginDateAsTimestamp() as we currently can't
-	 * test tx_seminars_seminar::getBeginDateAsTimestamp().
-	 *
-	 * @return boolean always false
-	 */
-	public function hasTimeslots() {
-		return false;
-	}
-
-	/**
 	 * Sets the number of places for this record.
 	 *
 	 * TODO: This function needs to be removed once the testing framework
@@ -421,6 +410,15 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 */
 	public function setOwnerUid($ownerUid) {
 		$this->setRecordPropertyInteger('owner_feuser', $ownerUid);
+	}
+
+	/**
+	 * Sets the number of time slots.
+	 *
+	 * @param integer the number of time slots for this event, must be >= 0
+	 */
+	public function setNumberOfTimeSlots($numberOfTimeSlots) {
+		$this->setRecordPropertyInteger('timeslots', $numberOfTimeSlots);
 	}
 }
 

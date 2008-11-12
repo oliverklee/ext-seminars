@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2319] Fix: Update the seminar's speaker and place fields less brutally
 - [#2331] Feature: In the list view, link the speaker names to their home page (if they have any)
 - [#2333] In the list view and single view, display a localized text next to the 0 vacancies for fully booked events
 - [#2344] Feature: Allow to attach an image to seminar records
