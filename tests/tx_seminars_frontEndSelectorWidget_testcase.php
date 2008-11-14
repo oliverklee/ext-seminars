@@ -353,14 +353,5 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
-
-	public function testRemoveDummyOptionFromFormDataWithArrayWithElementZeroReturnsArrayWithElementZero() {
-		$this->assertEquals(
-			array(0),
-			tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
-				array(0)
-			)
-		);
-	}
 }
 ?>

@@ -251,7 +251,7 @@ class tx_seminars_frontEndSelectorWidget extends tx_seminars_frontEndView {
 		$cleanedFormData = array();
 
 		foreach ($formData as $value) {
-			if (($value != 'none') || ($value === 0)) {
+			if ($value != 'none') {
 				$cleanedFormData[] = $value;
 			}
 		}
