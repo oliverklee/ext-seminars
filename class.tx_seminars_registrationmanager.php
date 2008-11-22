@@ -178,6 +178,44 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	}
 
 	/**
+	 * Creates an HTML link to the registration or login page or returns a
+	 * localized string "fully booked" if the seminar is fully booked and in the
+	 * registration timespan.
+	 *
+	 * @param tx_oelib_templatehelper the pi1 object with configuration data
+	 * @param tx_seminars_seminar the seminar to create the registration link
+	 *                            for
+	 *
+	 * @return string the HTML tag, or the localized fully booked string,
+	 *                may be empty
+	 */
+	public function getRegistrationLink(
+		tx_oelib_templatehelper $plugin, tx_seminars_seminar $event
+	) {
+		if (!$event->needsRegistration()) {
+			return '';
+		}
+
+		$registrationDeadline = $event->getRecordPropertyInteger(
+			'deadline_registration'
+		);
+
+		if ($this->canRegisterIfLoggedIn($event)) {
+			$result = $this->getLinkToRegistrationOrLoginPage(
+				$plugin, $event
+			);
+		} elseif (!$event->isRegistrationDeadlineOver()
+			&& !$event->hasVacanciesOnRegistrationQueue()
+		) {
+			$result = $this->translate('message_fullyBooked');
+		} else {
+			$result = '';
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Creates an HTML link to either the registration page (if a user is
 	 * logged in) or the login page (if no user is logged in).
 	 *

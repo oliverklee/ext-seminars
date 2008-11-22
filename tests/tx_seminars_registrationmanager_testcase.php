@@ -25,6 +25,7 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationmanager.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_seminarchild.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
@@ -55,6 +56,12 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	/** an instance of the Seminar Manager pi1 class */
 	private $pi1 = null;
 
+	/** @var tx_seminars_seminarchild a fully booked seminar */
+	private $fullyBookedSeminar = null;
+
+	/** @var tx_seminars_seminarchild a seminar */
+	private $cachedSeminar = null;
+
 	protected function setUp() {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
@@ -83,6 +90,15 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 		$this->seminar->__destruct();
 		$this->fixture->__destruct();
+
+		if ($this->fullyBookedSeminar) {
+			$this->fullyBookedSeminar->__destruct();
+			unset($this->fullyBookedSeminar);
+		}
+		if ($this->cachedSeminar) {
+			$this->cachedSeminar->__destruct();
+			unset($this->cachedSeminar);
+		}
 		unset(
 			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework
 		);
@@ -124,6 +140,28 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createFrontEndUserGroup()
 		);
 		$this->testingFramework->loginFrontEndUser($this->frontEndUserUid);
+	}
+
+	/**
+	 * Creates a seminar which is booked out.
+	 */
+	private function createBookedOutSeminar() {
+		$this->fullyBookedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'title' => 'test event',
+					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+					'attendees_max' => 10,
+					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				)
+			),
+			array()
+		);
+		$this->fullyBookedSeminar->setNumberOfAttendances(10);
+		$this->fullyBookedSeminar->setRegistrationQueueSize(5);
+		$this->fullyBookedSeminar->setNumberOfAttendancesOnQueue(5);
 	}
 
 
@@ -173,6 +211,22 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->createAndLogInFrontEndUser();
 		$this->assertTrue(
 			$this->testingFramework->isLoggedIn()
+		);
+	}
+
+	public function testCreateBookedOutSeminarSetsSeminarInstance() {
+		$this->createBookedOutSeminar();
+
+		$this->assertTrue(
+			$this->fullyBookedSeminar instanceof tx_seminars_seminar
+		);
+	}
+
+	public function testCreatedBookedOutSeminarHasUidGreaterZero() {
+		$this->createBookedOutSeminar();
+
+		$this->assertTrue(
+			$this->fullyBookedSeminar->getUid() > 0
 		);
 	}
 
@@ -265,5 +319,119 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	///////////////////////////////////////////////
+	// Tests for the getRegistrationLink function
+	///////////////////////////////////////////////
+
+	public function testGetRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkToRegistrationPage() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+
+		$this->assertContains(
+			'?id=' . $this->registrationPageUid,
+			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+		);
+	}
+
+	public function testGetRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkWithSeminarUid() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+
+		$this->assertContains(
+			'[seminar]=' . $this->seminar->getUid(),
+			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+		);
+	}
+
+	public function testGetRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink() {
+		$this->createFrontEndPages();
+		$this->testingFramework->logoutFrontEndUser();
+
+		$this->assertContains(
+			'?id=' . $this->loginPageUid,
+			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+		);
+	}
+
+	public function testGetRegistrationLinkForLoggedInUserAndFullyBookedSeminarReturnsFullyBookedString() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+
+		$this->createBookedOutSeminar();
+
+		$this->assertEquals(
+			$this->fixture->translate('message_fullyBooked'),
+			$this->fixture->getRegistrationLink(
+				$this->pi1, $this->fullyBookedSeminar
+			)
+		);
+	}
+
+	public function testGetRegistrationLinkForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedString() {
+		$this->createFrontEndPages();
+		$this->testingFramework->logoutFrontEndUser();
+
+		$this->createBookedOutSeminar();
+
+		$this->assertEquals(
+			$this->fixture->translate('message_fullyBooked'),
+			$this->fixture->getRegistrationLink(
+				$this->pi1, $this->fullyBookedSeminar
+			)
+		);
+	}
+
+	public function testGetRegistrationLinkForBeginDateBeforeCurrentDateReturnsEmptyString() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+
+		$this->cachedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'title' => 'test event',
+					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
+					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+					'attendees_max' => 10
+				)
+			),
+			array()
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getRegistrationLink(
+				$this->pi1, $this->cachedSeminar
+			)
+		);
+
+	}
+
+	public function testGetRegistrationLinkForAlreadyEndedRegistrationDeadlineReturnsEmptyString() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+
+		$this->cachedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'title' => 'test event',
+					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+					'attendees_max' => 10,
+					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
+				)
+			),
+			array()
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getRegistrationLink(
+				$this->pi1, $this->cachedSeminar
+			)
+		);
+	}
 }
 ?>

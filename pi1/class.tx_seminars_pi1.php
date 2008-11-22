@@ -1871,12 +1871,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			);
 
 			$registrationLink = '';
-			if ($this->registrationManager->canRegisterIfLoggedIn($this->seminar)
-				&& ($whatToDisplay != 'my_events')) {
-				$registrationLink = $this->registrationManager->getLinkToRegistrationOrLoginPage(
-					$this,
-					$this->seminar
-				);
+			if ($whatToDisplay != 'my_events') {
+				$registrationLink
+					= $this->registrationManager->getRegistrationLink(
+						$this, $this->seminar
+					);
 			} elseif ($whatToDisplay == 'my_events'
 				&& $this->seminar->isUnregistrationPossible()
 			) {
