@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2345] Feature: Display category icon in list view
 - [#2312] Cleanup: Removed unneded condition in the selector widget code
 - [#2319] Fix: Update the seminar's speaker and place fields less brutally
 - [#2331] Feature: In the list view, link the speaker names to their home page (if they have any)

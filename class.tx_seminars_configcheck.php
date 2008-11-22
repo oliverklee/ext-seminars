@@ -244,6 +244,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkLimitListViewToEventTypes();
 		$this->checkLimitListViewToCategories();
 		$this->checkLimitListViewToPlaces();
+		$this->checkCategoryIconDisplay();
 	}
 
  	/**
@@ -2073,6 +2074,25 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'This value specifies the page that contains the favorites list. ' .
 				'If this value is not set correctly, the link to the favorites ' .
 				'list will not work.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value categoriesInListView.
+	 */
+	private function checkCategoryIconDisplay() {
+		$this->checkIfSingleInSetNotEmpty(
+			'categoriesInListView',
+			true,
+			's_listView',
+			'This setting determines whether the seminar category is shown, as ' .
+				'icon and text, as text only or as icon only. If this value is ' .
+				'not set correctly, the category will only be shown as text.',
+			array(
+				'both',
+				'text',
+				'icon',
+			)
 		);
 	}
 }

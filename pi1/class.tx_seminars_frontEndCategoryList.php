@@ -137,6 +137,81 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 			array('tx_seminars_pi1[category]' => $categoryUid)
 		);
 	}
+
+	/**
+	 * Creates the list of categories for the event list view.
+	 *
+	 * Depending on the configuration value, categoriesInListView returns
+	 * either only the titles as comma-separated list, only the icons with the
+	 * title as title attribute or both.
+	 *
+	 * @param array the categories in an associative array, with the UID as key
+	 *              and "title", and "icon" as second level keys
+	 * @param boolean wether the categories should be linked to the
+	 *                category list page
+	 *
+	 * @return string the HTML output, will be empty if $categoriesToDisplay
+	 *                is empty
+	 */
+	public function createCategoryList(
+		array $categoriesToDisplay
+	) {
+		if (empty($categoriesToDisplay)) {
+			return '';
+		}
+
+		$categories
+			= $this->getConfValueString('categoriesInListView', 's_listView');
+		$allCategoryLinks = array();
+
+		foreach ($categoriesToDisplay as $uid => $value) {
+			switch ($categories) {
+				case 'both':
+					if ($value['icon'] != '') {
+						$linkValue = $this->createCategoryIcon($value) . ' ';
+					}
+					$linkValue .= $value['title'];
+					break;
+				case 'icon':
+					$linkValue = $this->createCategoryIcon($value);
+					if ($linkValue == '') {
+						$linkValue = $value['title'];
+					}
+					break;
+				default:
+					$linkValue = $value['title'];
+					break;
+			}
+			$allCategoryLinks[]
+				= $this->createLinkToListViewLimitedByCategory($uid, $linkValue);
+		}
+
+		return implode(', ', $allCategoryLinks);
+	}
+
+	/**
+	 * Creates the category icon with the icon title as alt text.
+	 *
+	 * @param array the filename and title of the icon in an associative array
+	 *              with "icon" as key for the filename and "title" as key for
+	 *              the icon title, the values for "title" and "icon" may be
+	 *              empty
+	 *
+	 * @return string the icon tag with the given icon, will be empty if no
+	 *                icon was given
+	 */
+	private function createCategoryIcon(array $iconData) {
+		if ($iconData['icon'] == '') {
+			return '';
+		}
+
+		return $this->cObj->IMAGE(
+			array(
+				'file' => SEMINARS_UPLOAD_PATH . $iconData['icon'],
+				'titleText' => $iconData['title']
+			)
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndCategoryList.php']) {

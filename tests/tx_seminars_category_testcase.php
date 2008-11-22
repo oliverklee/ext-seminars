@@ -114,5 +114,31 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 			$this->fixture->getTitle()
 		);
 	}
+
+	public function testGetIconReturnsIcon() {
+		$this->fixture = new tx_seminars_category(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_CATEGORIES,
+				array(
+					'title' => 'Test category',
+					'icon' => 'foo.gif',
+				)
+			)
+		);
+
+		$this->assertEquals(
+			'foo.gif',
+			$this->fixture->getIcon()
+		);
+	}
+
+	public function testGetIconReturnsEmptyStringIfCategoryHasNoIcon() {
+		$this->fixture = new tx_seminars_category($this->fixtureUid);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getIcon()
+		);
+	}
 }
 ?>

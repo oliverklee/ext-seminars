@@ -2335,9 +2335,25 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testGetCategoriesCanReturnIconOfCategory() {
+		$categoryUid = $this->addCategoryRelation(
+			array(
+				'title' => 'Test 1',
+				'icon' => 'foo.gif',
+			)
+		);
+
+		$categories = $this->fixture->getCategories(true);
+
+		$this->assertEquals(
+			'foo.gif',
+			$categories[$categoryUid]['icon']
+		);
+	}
+
 
 	///////////////////////////////////
-	// Tests regarding the time slotd
+	// Tests regarding the time slots
 	///////////////////////////////////
 
 	public function testGetTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {

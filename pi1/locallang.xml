@@ -86,6 +86,11 @@
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
 			<label index="seminars.pi_flexform.favorites_list">Favorites list</label>
 			<label index="seminars.pi_flexform.event_headline">Event headline</label>
+			<label index="seminars.pi_flexform.categoriesInListView">Display of the categories:</label>
+			<label index="seminars.pi_flexform.iconAndText">Icons and text</label>
+			<label index="seminars.pi_flexform.iconOnly">Icons only</label>
+			<label index="seminars.pi_flexform.textOnly">Text only</label>
+			<label index="seminars.pi_flexform.fromTsSetup">(from TS setup)</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -576,6 +581,11 @@
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">Liste erlaubter Dateiendungen für Front-end-Bearbeitung</label>
 			<label index="seminars.pi_flexform.favorites_list">Merkzettel</label>
 			<label index="seminars.pi_flexform.event_headline">Veranstaltungsüberschrift</label>
+			<label index="seminars.pi_flexform.categoriesInListView">Anzeige der Kategorien:</label>
+			<label index="seminars.pi_flexform.iconAndText">Icons und Titel</label>
+			<label index="seminars.pi_flexform.iconOnly">Nur Icons</label>
+			<label index="seminars.pi_flexform.textOnly">Nur Titel</label>
+			<label index="seminars.pi_flexform.fromTsSetup">(aus dem TS-Setup)</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorherige</label>
 			<label index="pi_list_browseresults_page">Seite</label>
 			<label index="pi_list_browseresults_next">Nächste &gt;</label>
@@ -2174,6 +2184,11 @@
 			<label index="seminars.pi_flexform.favorites_list" type="integer">201026682</label>
 			<label index="seminars.pi_flexform.favoritesPID" type="integer">66351292</label>
 			<label index="seminars.pi_flexform.event_headline" type="integer">246201769</label>
+			<label index="seminars.pi_flexform.categoriesInListView" type="integer">111073480</label>
+			<label index="seminars.pi_flexform.iconAndText" type="integer">263764997</label>
+			<label index="seminars.pi_flexform.iconOnly" type="integer">200345498</label>
+			<label index="seminars.pi_flexform.textOnly" type="integer">235000551</label>
+			<label index="seminars.pi_flexform.fromTsSetup" type="integer">136988657</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3361,6 +3376,11 @@
 			<label index="seminars.pi_flexform.favorites_list">Favorites list</label>
 			<label index="seminars.pi_flexform.favoritesPID">Page that contains the favorites list:</label>
 			<label index="seminars.pi_flexform.event_headline">Event headline</label>
+			<label index="seminars.pi_flexform.categoriesInListView">Display of the categories:</label>
+			<label index="seminars.pi_flexform.iconAndText">Icons and text</label>
+			<label index="seminars.pi_flexform.iconOnly">Icons only</label>
+			<label index="seminars.pi_flexform.textOnly">Text only</label>
+			<label index="seminars.pi_flexform.fromTsSetup">(from TS setup)</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

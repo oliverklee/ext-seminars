@@ -79,4 +79,7 @@ define('SEMINARS_PRICE_CURRENCY_RIGHT', 1);
 
 define('SEMINARS_PRICE_INCLUDING_TAX', 0);
 define('SEMINARS_PRICE_EXCLUDING_TAX', 1);
+
+define('SEMINARS_UPLOAD_PATH', 'uploads/tx_seminars/');
+
 ?>

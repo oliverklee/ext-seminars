@@ -333,6 +333,35 @@
 							</config>
 						</TCEforms>
 					</mayManagersEditTheirEvents>
+					<categoriesInListView>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.categoriesInListView</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.fromTsSetup</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.iconAndText</numIndex>
+										<numIndex index="1">both</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.iconOnly</numIndex>
+										<numIndex index="1">icon</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.textOnly</numIndex>
+										<numIndex index="1">text</numIndex>
+									</numIndex>
+								</items>
+								<size>1</size>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</categoriesInListView>
 				</el>
 			</ROOT>
 		</s_listView>

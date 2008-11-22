@@ -1769,16 +1769,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				);
 			}
 
-			$allCategories = $this->seminar->getCategories();
+			$allCategories = $this->seminar->getCategories(true);
 			if ($whatToDisplay == 'seminar_list') {
-				$allCategoryLinks = array();
-				foreach ($allCategories as $uid => $title) {
-					$allCategoryLinks[]
-						= $this->categoryList->createLinkToListViewLimitedByCategory(
-							$uid, $title
-						);
-				}
-				$listOfCategories = implode(', ', $allCategoryLinks);
+				$listOfCategories = $this->categoryList->createCategoryList(
+					$allCategories
+				);
 			} else {
 				$listOfCategories = implode(', ', $allCategories);
 			}
