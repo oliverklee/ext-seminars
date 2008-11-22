@@ -4138,6 +4138,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			0,
 			($this->getAttendancesMax() + $this->getRegistrationQueueSize())
 				- $this->getAttendances()
+				- $this->getAttendancesOnRegistrationQueue()
 		);
 	}
 

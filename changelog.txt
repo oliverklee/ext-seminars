@@ -1,5 +1,6 @@
 0.7.0 (currently working on)
 - [#2352] Change: Show text "booked out" instead of empty string in registration column
+- [#2354] Fix: getVacanciesOnRegistrationQueue returns wrong value for registrationQueue greater than zero
 - [#2345] Feature: Display category icon in list view
 - [#2312] Cleanup: Removed unneded condition in the selector widget code
 - [#2319] Fix: Update the seminar's speaker and place fields less brutally
