@@ -221,6 +221,7 @@ plugin.tx_seminars_pi1 {
 	class_itemrow =
 
 	# CSS classes for the TD of the various columns in the events list (will be automatically prefixed with "tx-seminars-pi1-"), leave empty to set no CSS class
+	class_listimage =
 	class_listcategory =
 	class_listtitle = title
 	class_listsubtitle =
@@ -264,7 +265,7 @@ plugin.tx_seminars_pi1 {
 	timeframeInList = currentAndUpcoming
 
 	# comma-separated list of column names that shouldn't be displayed in the list view, e.g. organizers,price_special
-	hideColumns = category,subtitle,event_type,accreditation_number,credit_points,teaser,time,place,city,country,price_special,speakers,language,target_groups
+	hideColumns = image,category,subtitle,event_type,accreditation_number,credit_points,teaser,time,place,city,country,price_special,speakers,language,target_groups
 
 	# comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
 	hideFields = credit_points,eventsnextday
@@ -295,6 +296,12 @@ plugin.tx_seminars_pi1 {
 	# comma-separated list of place UIDs to filter the list view for, leave
 	# empty to have no such filter
 	limitListViewToPlaces =
+
+	# the maximum height of the image of a seminar in the list view
+	seminarImageListViewHeight = 43
+
+	# the maximum width of the image of a seminar in the list view
+	seminarImageListViewWidth = 70
 
 	# whether the list view should always be sorted by category (before applying
 	# the normal sorting)

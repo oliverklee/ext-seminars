@@ -1671,6 +1671,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 */
 	protected function createListHeader() {
 		$availableColumns = array(
+			'image',
 			'category',
 			'title',
 			'subtitle',
@@ -1768,6 +1769,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					'total_price' => ''
 				);
 			}
+
+			if ($this->seminar->hasImage()) {
+				$image = $this->createRestrictedImage(
+					SEMINARS_UPLOAD_PATH . $this->seminar->getImage(),
+					$this->seminar->getTitle(),
+					$this->getConfValueInteger('seminarImageListViewWidth'),
+					$this->getConfValueInteger('seminarImageListViewHeight'),
+					0,
+					$this->seminar->getTitle()
+				);
+			} else {
+				$image = '';
+			}
+			$this->setMarker('image', $image);
 
 			$allCategories = $this->seminar->getCategories(true);
 			if ($whatToDisplay == 'seminar_list') {

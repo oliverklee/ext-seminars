@@ -4929,5 +4929,45 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getVacanciesOnRegistrationQueue()
 		);
 	}
+
+
+	////////////////////////////////////
+	// Tests for the getImage function
+	////////////////////////////////////
+
+	public function testGetImageForNonEmptyImageReturnsImageFileName() {
+		$this->fixture->setImage('foo.gif');
+
+		$this->assertEquals(
+			'foo.gif',
+			$this->fixture->getImage()
+		);
+	}
+
+	public function testGetImageForEmptyImageReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getImage()
+		);
+	}
+
+
+	////////////////////////////////////
+	// Tests for the hasImage function
+	////////////////////////////////////
+
+	public function testHasImageForNonEmptyImageReturnsTrue() {
+		$this->fixture->setImage('foo.gif');
+
+		$this->assertTrue(
+			$this->fixture->hasImage()
+		);
+	}
+
+	public function testHasImageForEmptyImageReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasImage()
+		);
+	}
 }
 ?>

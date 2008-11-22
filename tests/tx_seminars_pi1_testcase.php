@@ -1150,6 +1150,67 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testListViewDisplaysSeminarImage() {
+		$this->testingFramework->createDummyFile('test_foo.gif');
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('image' => 'test_foo.gif')
+		);
+		$listViewWithImage = $this->fixture->main('', array());
+		$this->testingFramework->deleteDummyFile('test_foo.gif');
+
+		$this->assertContains(
+			'<img src="',
+			$listViewWithImage
+		);
+	}
+
+	public function testListViewForSeminarWithoutImageDoesNotDisplayImage() {
+		$this->assertNotContains(
+			'<img src="',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewForSeminarWithoutImageRemovesImageMarker() {
+		$this->assertNotContains(
+			'###IMAGE###',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewUsesTopicImage() {
+		$this->testingFramework->createDummyFile('test_foo.gif');
+
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'Test topic',
+				'image' => 'test_foo.gif',
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date'
+			)
+		);
+
+		$listViewWithImage = $this->fixture->main('', array());
+		$this->testingFramework->deleteDummyFile('test_foo.gif');
+
+		$this->assertRegExp(
+			'/<img src=".*title="Test topic"/',
+			$listViewWithImage
+		);
+	}
+
 
 	/////////////////////////////////////////////////////////
 	// Tests concerning the result counter in the list view

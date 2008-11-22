@@ -245,6 +245,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkLimitListViewToCategories();
 		$this->checkLimitListViewToPlaces();
 		$this->checkCategoryIconDisplay();
+		$this->checkSeminarImageSizes();
 	}
 
  	/**
@@ -618,6 +619,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'This value specifies which columns to remove from the list view. '
 				.'Incorrect values will cause the colums to still be displayed.',
 			array(
+				'image',
 				'category',
 				'title',
 				'subtitle',
@@ -2093,6 +2095,41 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'text',
 				'icon',
 			)
+		);
+	}
+
+	/**
+	 * Checks the settings for the image width, and height in the list view.
+	 */
+	private function checkSeminarImageSizes() {
+		$this->checkListViewImageWidth();
+		$this->checkListViewImageHeight();
+	}
+
+	/**
+	 * Checks the settings for seminarImageListViewWidth.
+	 */
+	private function checkListViewImageWidth() {
+		$this->checkIfPositiveInteger(
+			'seminarImageListViewWidth',
+			false,
+			'',
+			'This value specifies the width of the image of a seminar. If this ' .
+				'value is not set, the image will be shown in full size.'
+		);
+
+	}
+
+	/**
+	 * Checks the settings for seminarImageListViewHeight.
+	 */
+	private function checkListViewImageHeight() {
+		$this->checkIfPositiveInteger(
+			'seminarImageListViewHeight',
+			false,
+			'',
+			'This value specifies the height of the image of a seminar. If ' .
+				'this value is not set, the image will be shown in full size.'
 		);
 	}
 }

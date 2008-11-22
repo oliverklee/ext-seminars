@@ -4525,6 +4525,27 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function setAttachedFiles($attachedFiles) {
 		$this->setRecordPropertyString('attached_files', $attachedFiles);
 	}
+
+	/**
+	 * Gets the file name of our image.
+	 *
+	 * @return string the file name of our image (relative to the extension's
+	 *                upload path) or '' if this event has no image
+	 */
+	public function getImage() {
+		return $this->getTopicString('image');
+	}
+
+	/**
+	 * Checks whether we have an image.
+	 *
+	 * @return boolean true if we have an non-empty image, false otherwise.
+	 *
+	 * @access public
+	 */
+	function hasImage() {
+		return $this->hasTopicString('image');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {
