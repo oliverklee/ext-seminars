@@ -1348,18 +1348,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetVacanciesOnRegistrationQueueForNonEmptyRegistrationQueue() {
-		$this->fixture->setNumberOfAttendances(
-			$this->fixture->getAttendancesMax()
-		);
-		$this->fixture->setRegistrationQueueSize(5);
-
-		$this->assertEquals(
-			5,
-			$this->fixture->getVacanciesOnRegistrationQueue()
-		);
-	}
-
 	public function testGetAttendancesOnRegistrationQueueIsInitiallyZero() {
 		$this->assertEquals(
 			0,
@@ -4118,6 +4106,53 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'your house',
 			$this->fixture->getPlaceShort()
+		);
+	}
+
+
+	//////////////////////////////////////////////
+	// Tests for getVacanciesOnRegistrationQueue
+	//////////////////////////////////////////////
+
+	public function testGetVacanciesOnRegistrationQueueForVacanciesAndNoRegistrationQueueReturnsNumberOfVacancies() {
+		$this->fixture->setNumberOfAttendances(0);
+		$this->fixture->setRegistrationQueueSize(0);
+
+		$this->assertEquals(
+			10,
+			$this->fixture->getVacanciesOnRegistrationQueue()
+		);
+	}
+
+	public function testGetVacanciesOnRegistrationQueueForVacanciesAndVacanciesOnRegistrationQueueReturnsAccumulatedNumberOfVacancies() {
+		$this->fixture->setNumberOfAttendances(0);
+		$this->fixture->setRegistrationQueueSize(5);
+
+		$this->assertEquals(
+			15,
+			$this->fixture->getVacanciesOnRegistrationQueue()
+		);
+	}
+
+	public function testGetVacanciesOnRegistrationQueueForVacanciesOnlyOnRegistrationQueueReturnsNumberOfRegistrationQueueVacancies() {
+		$this->fixture->setRegistrationQueueSize(5);
+		$this->fixture->setNumberOfAttendancesOnQueue(0);
+		$this->fixture->setNumberOfAttendances(10);
+
+		$this->assertEquals(
+			5,
+			$this->fixture->getVacanciesOnRegistrationQueue()
+		);
+	}
+
+	public function testGetVacanciesOnRegistrationQueueForNoVacanciesAndNoVacanciesOnRegistrationQueueReturnsZero() {
+		$this->fixture->setNumberOfAttendances(10);
+		$this->fixture->setRegistrationQueueSize(5);
+		$this->fixture->setNumberOfAttendancesOnQueue(5);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getVacanciesOnRegistrationQueue()
 		);
 	}
 }
