@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2362] Feature: Display image uploaded with seminar in single view
 - [#2346] Feature: Display the category icons in the detail view
 - [#2361] Feature: Display images uploaded for seminar in list view
 - [#2352] Change: Show text "booked out" instead of empty string in registration column

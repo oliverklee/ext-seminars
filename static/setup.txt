@@ -423,6 +423,12 @@ plugin.tx_seminars_pi1 {
 
 	# The target for external links in seminars.
 	externalLinkTarget =
+
+	# the maximum width of the image of a seminar in the single view
+	seminarImageSingleViewWidth = 260
+
+	# the maximum height of the image of a seminar in the single view
+	seminarImageSingleViewHeight = 160
 }
 
 

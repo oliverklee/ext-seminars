@@ -684,6 +684,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$this->setEventTypeMarker();
 
+			$this->setMarker(
+				'STYLE_SINGLEVIEWTITLE',
+				$this->seminar->createImageForSingleView(
+					$this->getConfValueInteger('seminarImageSingleViewWidth'),
+					$this->getConfValueInteger('seminarImageSingleViewHeight')
+				)
+			);
+
 			$this->setMarker('title', $this->seminar->getTitle());
 			$this->setMarker('uid', $this->seminar->getUid());
 

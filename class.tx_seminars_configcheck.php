@@ -206,6 +206,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkDetailPid();
 		$this->checkDefaultEventVipsFeGroupID();
 		$this->checkExternalLinkTarget();
+		$this->checkSingleViewImageSizes();
 	}
 
 	/**
@@ -568,6 +569,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'This value specifies which section to remove from the details view. '
 				.'Incorrect values will cause the sections to still be displayed.',
 			array(
+				'image',
 				'event_type',
 				'title',
 				'subtitle',
@@ -2131,6 +2133,41 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'This value specifies the height of the image of a seminar. If ' .
 				'this value is not set, the image will be shown in full size.'
 		);
+	}
+
+	/**
+	 * Checks the settings for the image width, and height in the single view.
+	 */
+	private function checkSingleViewImageSizes() {
+		$this->checkSingleViewImageWidth();
+		$this->checkSingleViewImageHeight();
+	}
+
+	/**
+	 * Checks the settings for seminarImageSingleViewWidth.
+	 */
+	private function checkSingleViewImageWidth() {
+		$this->checkIfPositiveInteger(
+			'seminarImageSingleViewWidth',
+			false,
+			'',
+			'This value specifies the width of the image of a seminar. If this ' .
+				'value is not set, the image will be shown in full size.'
+		);
+	}
+
+	/**
+	 * Checks the settings for seminarImageSingleViewHeight.
+	 */
+	private function checkSingleViewImageHeight() {
+		$this->checkIfPositiveInteger(
+			'seminarImageSingleViewHeight',
+			false,
+			'',
+			'This value specifies the height of the image of a seminar. If ' .
+				'this value is not set, the image will be shown in full size.'
+		);
+
 	}
 }
 

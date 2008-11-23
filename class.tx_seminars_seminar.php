@@ -4537,6 +4537,37 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	function hasImage() {
 		return $this->hasTopicString('image');
 	}
+
+	/**
+	 * Creates the style for the title of the seminar.
+	 *
+	 * @param integer maximum width of the image, must be > 0
+	 * @param integer maximum height of the image, must be > 0
+	 *
+	 * @return string the complete style attribute for the seminar title
+	 *                containing the seminar image starting with a space, will
+	 *                be empty if seminar has no image
+	 */
+	public function createImageForSingleView($maxImageWidth, $maxImageHeight) {
+		if (!$this->hasImage()) {
+			return '';
+		}
+
+		$imageWithTag = $this->createRestrictedImage(
+			SEMINARS_UPLOAD_PATH . $this->getImage(),
+			'',
+			$maxImageWidth,
+			$maxImageHeight
+		);
+
+		preg_match_all('/[\w\d\.\/]{3,}/', $imageWithTag, $imageFile);
+
+		return ' style="' .
+			'background-image: url(\'' . $imageFile[0][2] . '\'); ' .
+			'background-repeat: no-repeat; ' .
+			'padding-left: ' . $imageFile[0][4] . 'px; '.
+			'height: ' . $imageFile[0][6] . 'px;"';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

@@ -531,6 +531,86 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testSingleViewForSeminarWithoutImageDoesNotDisplayImage() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue(
+			'seminarImageSingleViewWidth', 260
+		);
+		$this->fixture->setConfigurationValue(
+			'seminarImageSingleViewHeight', 160
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			'style="background-image:',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewDisplaysSeminarImage() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue(
+			'seminarImageSingleViewWidth', 260
+		);
+		$this->fixture->setConfigurationValue(
+			'seminarImageSingleViewHeight', 160
+		);
+
+		$this->testingFramework->createDummyFile('test_foo.gif');
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('image' => 'test_foo.gif')
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$seminarWithImage = $this->fixture->main('', array());
+
+		$this->testingFramework->deleteDummyFile('test_foo.gif');
+
+		$this->assertContains(
+			'style="background-image:',
+			$seminarWithImage
+		);
+	}
+
+	public function testSingleViewForHideFieldsContainingImageHidesSeminarImage() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue('hideFields', 'image');
+		$this->fixture->setConfigurationValue(
+			'seminarImageSingleViewWidth', 260
+		);
+		$this->fixture->setConfigurationValue(
+			'seminarImageSingleViewHeight', 160
+		);
+
+		$this->testingFramework->createDummyFile('test_foo.gif');
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('image' => 'test_foo.gif')
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$seminarWithImage = $this->fixture->main('', array());
+
+		$this->testingFramework->deleteDummyFile('test_foo.gif');
+
+		$this->assertNotContains(
+			'style="background-image:',
+			$seminarWithImage
+		);
+	}
+
 
 	///////////////////////////////////////////////////////
 	// Tests concerning attached files in the single view
