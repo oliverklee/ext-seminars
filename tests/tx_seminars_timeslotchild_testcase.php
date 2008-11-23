@@ -187,5 +187,33 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasEntryDate()
 		);
 	}
+
+	public function testGetEntryDateWithBeginDateOnSameDayAsEntryDateReturnsTime() {
+		// chosen randomly 2001-01-01 13:01
+		$time = 978354060;
+		$this->fixture->setEntryDate($time);
+		$this->fixture->setBeginDate($time);
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
+		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+
+		$this->assertEquals(
+			strftime('%H:%M', $time),
+			$this->fixture->getEntryDate()
+		);
+	}
+
+	public function testGetEntryDateWithBeginDateOnDifferentDayAsEntryDateReturnsTimeAndDate() {
+		// chosen randomly 2001-01-01 13:01
+		$time = 978354060;
+		$this->fixture->setEntryDate($time);
+		$this->fixture->setBeginDate($time + 86400);
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
+		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+
+		$this->assertEquals(
+			strftime('%d - %m - %Y %H:%M', $time),
+			$this->fixture->getEntryDate()
+		);
+	}
 }
 ?>

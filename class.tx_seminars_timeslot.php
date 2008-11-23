@@ -151,25 +151,30 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets the entry date as a formatted date.
+	 * Gets the entry date and time as a formatted date. If the begin date of
+	 * this timeslot is on the same day as the entry date, only the time will be
+	 * returned.
 	 *
-	 * @return string the entry date (or the localized string "will be
+	 * @return string the entry date and time (or the localized string "will be
 	 *                announced" if no entry date is set)
-	 *
-	 * @access public
 	 */
-	function getEntryDate() {
+	public function getEntryDate() {
 		if (!$this->hasEntryDate()) {
 			return $this->translate('message_willBeAnnounced');
 		}
 
+		$beginDate = $this->getBeginDateAsTimestamp();
 		$entryDate = $this->getRecordPropertyInteger('entry_date');
-		$result = strftime(
-			$this->getConfValueString('dateFormatYMD'),
-			$entryDate
-		);
 
-		return $result;
+		if (strftime('%d-%m-%Y', $entryDate) != strftime('%d-%m-%Y', $beginDate)
+		) {
+			$dateFormat = $this->getConfValueString('dateFormatYMD') . ' ';
+		} else {
+			$dateFormat = '';
+		}
+		$dateFormat .= $this->getConfValueString('timeFormat');
+
+		return strftime($dateFormat, $entryDate);
 	}
 
 	/**
