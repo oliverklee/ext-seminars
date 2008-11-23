@@ -56,6 +56,16 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	 public function setEntryDate($entryDate) {
 	 	$this->setRecordPropertyInteger('entry_date', $entryDate);
 	 }
+
+	/**
+	 * Sets the begin date and time.
+	 *
+	 * @param integer the begin date as a UNIX timestamp (has to be >= 0, 0 will
+	 *                unset the begin date)
+	 */
+	 public function setBeginDate($beginDate) {
+	 	$this->setRecordPropertyInteger('begin_date', $beginDate);
+	 }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_timeslotchild.php']) {
