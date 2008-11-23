@@ -858,9 +858,17 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$this->setMarker(
-			'category', implode(', ', $this->seminar->getCategories())
-		);
+		$categoryMarker = '';
+		$allCategories = $this->seminar->getCategories();
+
+		foreach ($allCategories as $category) {
+			$this->setMarker('category_title', $category['title']);
+			$this->setMarker(
+				'category_icon', $this->createCategoryIcon($category)
+			);
+			$categoryMarker .= $this->getSubpart('SINGLE_CATEGORY');
+		}
+		$this->setSubpart('SINGLE_CATEGORY', $categoryMarker);
 	}
 
 	/**
@@ -1784,7 +1792,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			}
 			$this->setMarker('image', $image);
 
-			$allCategories = $this->seminar->getCategories(true);
+			$allCategories = $this->seminar->getCategories();
 			if ($whatToDisplay == 'seminar_list') {
 				$listOfCategories = $this->categoryList->createCategoryList(
 					$allCategories
@@ -2689,6 +2697,30 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		unset($eventEditor);
 
 		return $result;
+	}
+
+	/**
+	 * Creates the category icon IMG tag with the icon title as title attribute.
+	 *
+	 * @param array the filename and title of the icon in an associative array
+	 *              with "icon" as key for the filename and "title" as key for
+	 *              the icon title, the values for "title" and "icon" may be
+	 *              empty
+	 *
+	 * @return string the icon IMG tag with the given icon, will be empty if the
+	 *                category has no icon
+	 */
+	private function createCategoryIcon(array $iconData) {
+		if ($iconData['icon'] == '') {
+			return '';
+		}
+
+		return $this->cObj->IMAGE(
+			array(
+				'file' => SEMINARS_UPLOAD_PATH . $iconData['icon'],
+				'titleText' => $iconData['title'],
+			)
+		);
 	}
 }
 

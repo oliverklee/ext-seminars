@@ -2279,7 +2279,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOneCategory() {
+	public function testGetCategoriesCanReturnOneCategory() {
 		$categoryUid = $this->addCategoryRelation(array('title' => 'Test'));
 
 		$this->assertTrue(
@@ -2290,7 +2290,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getNumberOfCategories()
 		);
 		$this->assertEquals(
-			array($categoryUid => 'Test'),
+			array($categoryUid => array('title' => 'Test', 'icon' => '')),
 			$this->fixture->getCategories()
 		);
 	}
@@ -2315,15 +2315,15 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 		$this->assertEquals(
 			'Test 1',
-			$categories[$categoryUid1]
+			$categories[$categoryUid1]['title']
 		);
 		$this->assertEquals(
 			'Test 2',
-			$categories[$categoryUid2]
+			$categories[$categoryUid2]['title']
 		);
 	}
 
-	public function testGetCategoriesCanReturnIconOfCategory() {
+	public function testGetCategoriesReturnsIconOfCategory() {
 		$categoryUid = $this->addCategoryRelation(
 			array(
 				'title' => 'Test 1',
@@ -2331,7 +2331,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$categories = $this->fixture->getCategories(true);
+		$categories = $this->fixture->getCategories();
 
 		$this->assertEquals(
 			'foo.gif',

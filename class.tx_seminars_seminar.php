@@ -4414,21 +4414,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets this event's category titles and icons (if set) as an associative
+	 * Gets this event's category titles and icons as an associative
 	 * array (which may be empty), using the category UIDs as keys.
 	 *
-	 * @param boolean whether the icons of the categories should be returned as
-	 *                well
-	 *
-	 * @return array When $returnIcons is true, a 2 level associative array with
-	 *               the UID as first level key and "title" and "icon" as second
-	 *               level keys. "Title" will contain the category title and
-	 *               "icon" will contain the category icon. When $returnIcons is
-	 *               false, only the titles with the UIDs as keys will be
-	 *               returned. Will return an empty array in both cases if the
-	 *               event has no categories.
+	 * @return array 2 level associative array with the UID as first level key
+	 *               and "title" and "icon" as second level keys. "Title" will
+	 *               contain the category title and "icon" will contain the
+	 *               category icon. Will be an empty array in if the event has
+	 *               no categories.
 	 */
-	public function getCategories($returnIcons = false) {
+	public function getCategories() {
 		if (!$this->hasCategories()) {
 			return array();
 		}
@@ -4440,15 +4435,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		foreach ($bag as $key => $category) {
-			if ($returnIcons) {
-				$result[$key] =
-					array(
-						'title' => $category->getTitle(),
-						'icon'  => $category->getIcon(),
-					);
-			} else {
-				$result[$key] = $category->getTitle();
-			}
+			$result[$key] =
+				array(
+					'title' => $category->getTitle(),
+					'icon'  => $category->getIcon(),
+				);
 		}
 
 		return $result;

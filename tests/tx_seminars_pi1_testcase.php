@@ -52,6 +52,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/** the number of target groups for the current event record */
 	private $numberOfTargetGroups = 0;
 
+	/** @var integer the number of categories for the current event record */
+	private $numberOfCategories = 0;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
@@ -166,6 +169,33 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->loginFrontEndUser($feUserUid);
 	}
 
+	/**
+	 * Inserts a category record into the database and creates a relation to
+	 * it from the event with the UID stored in $this->seminarUid.
+	 *
+	 * @param array data of the category to add, may be empty
+	 *
+	 * @return integer the UID of the created record, will be > 0
+	 */
+	private function addCategoryRelation(array $categoryData = array()) {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES, $categoryData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_CATEGORIES_MM,
+			$this->seminarUid, $uid
+		);
+
+		$this->numberOfCategories++;
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('categories' => $this->numberOfCategories)
+		);
+
+		return $uid;
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -257,6 +287,67 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->countRecords(
 				SEMINARS_TABLE_SEMINARS,
 				'uid=' . $this->seminarUid . ' AND vips=1'
+			)
+		);
+	}
+
+	public function testAddCategoryRelationReturnsPositiveUid() {
+		$this->assertTrue(
+			$this->addCategoryRelation(array()) > 0
+		);
+	}
+
+	public function testAddCategoryRelationCreatesNewUids() {
+		$this->assertNotEquals(
+			$this->addCategoryRelation(array()),
+			$this->addCategoryRelation(array())
+		);
+	}
+
+	public function testAddCategoryRelationIncreasesTheNumberOfCategories() {
+		$this->assertEquals(
+			0,
+			$this->numberOfCategories
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			1,
+			$this->numberOfCategories
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			2,
+			$this->numberOfCategories
+		);
+	}
+
+	public function testAddCategoryRelationCreatesRelations() {
+		$this->assertEquals(
+			0,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_CATEGORIES_MM,
+				'uid_local='.$this->seminarUid
+			)
+
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_CATEGORIES_MM,
+				'uid_local='.$this->seminarUid
+			)
+		);
+
+		$this->addCategoryRelation(array());
+		$this->assertEquals(
+			2,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_CATEGORIES_MM,
+				'uid_local='.$this->seminarUid
 			)
 		);
 	}
@@ -1044,6 +1135,112 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotRegExp(
 			'/: *Test event/',
+			$this->fixture->main('', array())
+		);
+	}
+
+
+	//////////////////////////////////////////////////////
+	// Test concerning the categories in the single view
+	//////////////////////////////////////////////////////
+
+	public function testSingleViewCanContainOneCategory() {
+		$this->addCategoryRelation(
+			array('title' => 'category 1')
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'category 1',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewCanContainTwoCategories() {
+		$this->addCategoryRelation(
+			array('title' => 'category 1')
+		);
+		$this->addCategoryRelation(
+			array('title' => 'category 2')
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$result = $this->fixture->main('', array());
+
+		$this->assertContains(
+			'category 1',
+			$result
+		);
+		$this->assertContains(
+			'category 2',
+			$result
+		);
+	}
+
+	public function testSingleViewShowsCategoryIcon() {
+		$this->testingFramework->createDummyFile('foo_test.gif');
+		$this->addCategoryRelation(
+			array(
+				'title' => 'category 1',
+				'icon' => 'foo_test.gif',
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$singleCategoryWithIcon = $this->fixture->main('', array());
+
+		$this->testingFramework->deleteDummyFile('foo_test.gif');
+
+		$this->assertContains(
+			'category 1 <img src="',
+			$singleCategoryWithIcon
+		);
+	}
+
+	public function testSingleViewShowsMultipleCategoriesWithIcons() {
+		$this->testingFramework->createDummyFile('foo_test.gif');
+		$this->testingFramework->createDummyFile('foo_test2.gif');
+		$this->addCategoryRelation(
+			array(
+				'title' => 'category 1',
+				'icon' => 'foo_test.gif',
+			)
+		);
+		$this->addCategoryRelation(
+			array(
+				'title' => 'category 2',
+				'icon' => 'foo_test2.gif',
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$multipleCategoriesWithIcons = $this->fixture->main('', array());
+
+		$this->testingFramework->deleteDummyFile('foo_test.gif');
+
+		$this->assertContains(
+			'category 1 <img src="',
+			$multipleCategoriesWithIcons
+		);
+
+		$this->assertContains(
+			'category 2 <img src="',
+			$multipleCategoriesWithIcons
+		);
+
+	}
+
+	public function testSingleViewForCategoryWithoutIconDoesNotShowCategoryIcon() {
+		$this->addCategoryRelation(
+			array('title' => 'category 1')
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			'category 1 <img src="',
 			$this->fixture->main('', array())
 		);
 	}
