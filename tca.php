@@ -854,7 +854,7 @@ $TCA['tx_seminars_seminars'] = array(
 		),
 		'image' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminar.image',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.image',
 			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'file',
