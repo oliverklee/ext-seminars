@@ -165,10 +165,12 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 		$allCategoryLinks = array();
 
 		foreach ($categoriesToDisplay as $uid => $value) {
+			$linkValue = '';
 			switch ($categories) {
 				case 'both':
 					if ($value['icon'] != '') {
-						$linkValue = $this->createCategoryIcon($value) . ' ';
+						$linkValue = $this->createCategoryIcon($value) .
+							'&nbsp;';
 					}
 					$linkValue .= $value['title'];
 					break;

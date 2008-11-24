@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2345] Feature: Display category icon in list view, fix
 - [#1724] Fix: Entry date for time slots displays a date
 - [#2362] Feature: Display image uploaded with seminar in single view
 - [#2346] Feature: Display the category icons in the detail view
