@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2373] Feature: Add a context-sensitive help text for the attached files in the BE seminars editor
 - [#2345] Feature: Display category icon in list view, fix
 - [#1724] Fix: Entry date for time slots displays a date
 - [#2362] Feature: Display image uploaded with seminar in single view
