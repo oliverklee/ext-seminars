@@ -919,6 +919,22 @@ $TCA['tx_seminars_speakers'] = array(
 				'eval' => 'required,trim',
 			),
 		),
+		'gender' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender',
+			'config' => array(
+			'type' => 'radio',
+				'default' => '0',
+				'items' => array(
+					array('', '0'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_male', '1'),
+					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_female', '2'),
+				),
+				'size' => 1,
+				'minitems' => 1,
+				'maxitems' => 1,
+			),
+		),
 		'organization' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.organization',
@@ -1053,7 +1069,7 @@ $TCA['tx_seminars_speakers'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email'),
+		'0' => array('showitem' => 'title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

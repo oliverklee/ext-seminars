@@ -285,6 +285,7 @@ CREATE TABLE tx_seminars_speakers (
 	phone_mobile tinytext,
 	fax tinytext,
 	email tinytext,
+	gender tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
