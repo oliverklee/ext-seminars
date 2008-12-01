@@ -163,6 +163,7 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 		$categories
 			= $this->getConfValueString('categoriesInListView', 's_listView');
 		$allCategoryLinks = array();
+		$categorySeparator = ($categories != 'icon') ? ', ' : ' ';
 
 		foreach ($categoriesToDisplay as $uid => $value) {
 			$linkValue = '';
@@ -178,6 +179,7 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 					$linkValue = $this->createCategoryIcon($value);
 					if ($linkValue == '') {
 						$linkValue = $value['title'];
+						$categorySeparator = ', ';
 					}
 					break;
 				default:
@@ -188,7 +190,7 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 				= $this->createLinkToListViewLimitedByCategory($uid, $linkValue);
 		}
 
-		return implode(', ', $allCategoryLinks);
+		return implode($categorySeparator, $allCategoryLinks);
 	}
 
 	/**
@@ -207,11 +209,15 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 			return '';
 		}
 
-		return $this->cObj->IMAGE(
+		$imageWithoutClass = $this->cObj->IMAGE(
 			array(
 				'file' => SEMINARS_UPLOAD_PATH . $iconData['icon'],
-				'titleText' => $iconData['title']
+				'titleText' => $iconData['title'],
 			)
+		);
+
+		return str_replace(
+			'<img ', '<img class="category_image" ', $imageWithoutClass
 		);
 	}
 }

@@ -65,6 +65,10 @@
 	padding: .2em .5em;
 }
 
+.tx-seminars-pi1-listrow img.category_image {
+	margin: 0 2px;
+}
+
 th.tx-seminars-pi1-registration,
 th.tx-seminars-pi1-list-registrations {
 	padding: .2em .5em;

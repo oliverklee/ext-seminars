@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2376] Change: Fine-tune the display of the categories in the event list view
 - [#2366] Feature: Add a field "gender" to the speaker records
 - [#2387] Change: Require FORMidable 1.1.0
 - [#2373] Feature: Add a context-sensitive help text for the attached files in the BE seminars editor

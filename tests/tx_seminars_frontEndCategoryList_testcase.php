@@ -401,7 +401,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'text');
 		$singleCategory =
 			array(
-				'99' => array(
+				99 => array(
 					'title' => 'test',
 					'icon' => '',
 				)
@@ -417,19 +417,16 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'text');
 		$singleCategory =
 			array(
-				'99' => array(
+				99 => array(
 					'title' => 'test',
 					'icon' => 'foo.gif',
 				)
 		);
-
 		$this->testingFramework->createDummyFile('foo.gif');
-		$categoryTitle = $this->fixture->createCategoryList($singleCategory);
-		$this->testingFramework->deleteDummyFile('foo.gif');
 
 		$this->assertNotContains(
 			'foo.gif',
-			$categoryTitle
+			$this->fixture->createCategoryList($singleCategory)
 		);
 	}
 
@@ -437,7 +434,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'foo');
 		$singleCategory =
 			array(
-				'99' => array(
+				99 => array(
 					'title' => 'test',
 					'icon' => '',
 				)
@@ -453,19 +450,16 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'icon');
 		$singleCategory =
 			array(
-				'99' => array(
+				99 => array(
 					'title' => 'test',
 					'icon' => 'foo.gif',
 				)
 		);
-
 		$this->testingFramework->createDummyFile('foo.gif');
-		$categoryIcon = $this->fixture->createCategoryList($singleCategory);
-		$this->testingFramework->deleteDummyFile('foo.gif');
 
 		$this->assertRegExp(
 			'/<img.*title="test"*.\/>/',
-			$categoryIcon
+			$this->fixture->createCategoryList($singleCategory)
 		);
 	}
 
@@ -473,19 +467,18 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'icon');
 		$singleCategory =
 			array(
-				'99' => array(
+				99 => array(
 					'title' => 'test',
 					'icon' => 'foo.gif',
 				)
 		);
 
 		$this->testingFramework->createDummyFile('foo.gif');
-		$categoryIcon = $this->fixture->createCategoryList($singleCategory);
-		$this->testingFramework->deleteDummyFile('foo.gif');
+
 
 		$this->assertNotRegExp(
 			'/<img.*\/>.*test/',
-			$categoryIcon
+			$this->fixture->createCategoryList($singleCategory)
 		);
 	}
 
@@ -493,11 +486,11 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'icon');
 		$multipleCategories =
 			array(
-				'99' => array(
+				99 => array(
 					'title' => 'test',
 					'icon' => 'foo.gif',
 				),
-				'100' => array(
+				100 => array(
 					'title' => 'new_test',
 					'icon' => 'foo2.gif',
 				)
@@ -505,13 +498,10 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->testingFramework->createDummyFile('foo.gif');
 		$this->testingFramework->createDummyFile('foo2.gif');
-		$categoryIcons = $this->fixture->createCategoryList($multipleCategories);
-		$this->testingFramework->deleteDummyFile('foo.gif');
-		$this->testingFramework->deleteDummyFile('foo2.gif');
 
 		$this->assertRegExp(
 			'/<img.*title="test"*.\/>.*<img.*title="new_test"*.\/>/',
-			$categoryIcons
+			$this->fixture->createCategoryList($multipleCategories)
 		);
 	}
 
@@ -519,11 +509,11 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'text');
 		$multipleCategories =
 			array(
-				'99' => array(
+				99 => array(
 					'title' => 'foo',
 					'icon' => 'foo.gif',
 				),
-				'100' => array(
+				100 => array(
 					'title' => 'bar',
 					'icon' => 'foo2.gif',
 				)
@@ -531,6 +521,90 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->assertRegExp(
 			'/foo.*bar/',
+			$this->fixture->createCategoryList($multipleCategories)
+		);
+	}
+
+	public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotUseCommasAsSeparators() {
+		$this->fixture->setConfigurationValue('categoriesInListView', 'icon');
+		$this->testingFramework->createDummyFile('foo.gif');
+		$this->testingFramework->createDummyFile('foo2.gif');
+		$multipleCategories =
+			array(
+				99 => array(
+					'title' => 'foo',
+					'icon' => 'foo.gif',
+				),
+				100 => array(
+					'title' => 'bar',
+					'icon' => 'foo2.gif',
+				)
+		);
+
+		$this->assertNotContains(
+			',',
+			$this->fixture->createCategoryList($multipleCategories)
+		);
+	}
+
+	public function testCreateCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators() {
+		$this->fixture->setConfigurationValue('categoriesInListView', 'icon');
+		$multipleCategories =
+			array(
+				99 => array(
+					'title' => 'foo',
+					'icon' => '',
+				),
+				100 => array(
+					'title' => 'bar',
+					'icon' => 'foo2.gif',
+				)
+		);
+
+		$this->assertRegExp(
+			'/foo.*,.*bar/',
+			$this->fixture->createCategoryList($multipleCategories)
+		);
+	}
+
+	public function testCreateCategoryListWithConfigurationValueSetToTextUsesCommasAsSeparators() {
+		$this->fixture->setConfigurationValue('categoriesInListView', 'text');
+		$multipleCategories =
+			array(
+				99 => array(
+					'title' => 'foo',
+					'icon' => 'foo.gif',
+				),
+				100 => array(
+					'title' => 'bar',
+					'icon' => 'foo2.gif',
+				)
+		);
+
+		$this->assertRegExp(
+			'/foo.*,.*bar/',
+			$this->fixture->createCategoryList($multipleCategories)
+		);
+	}
+
+	public function testCreateCategoryListWithConfigurationValueSetToBothUsesCommasAsSeparators() {
+		$this->fixture->setConfigurationValue('categoriesInListView', 'both');
+		$this->testingFramework->createDummyFile('foo.gif');
+		$this->testingFramework->createDummyFile('foo2.gif');
+		$multipleCategories =
+			array(
+				99 => array(
+					'title' => 'foo',
+					'icon' => 'foo.gif',
+				),
+				100 => array(
+					'title' => 'bar',
+					'icon' => 'foo2.gif',
+				)
+		);
+
+		$this->assertRegExp(
+			'/foo.*,.*bar/',
 			$this->fixture->createCategoryList($multipleCategories)
 		);
 	}
