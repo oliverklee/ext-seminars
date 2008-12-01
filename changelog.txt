@@ -1,4 +1,5 @@
 0.6.3 (currently working on)
+- [#2327] Fix: FE Editor will not allow me to edit oder enter events
 - [#1724] Fix: Entry date for time slots displays a date
 - [#2354] Fix: getVacanciesOnRegistrationQueue returns wrong value for registrationQueue greater than zero
 - [#2319] Fix: Update the seminar's speaker and place fields less brutally
