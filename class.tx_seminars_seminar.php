@@ -597,7 +597,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'country'
 		);
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
@@ -696,7 +696,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		);
 
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 			$cities[] = $row['city'];
@@ -806,7 +806,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 
 		$result = array();
@@ -839,7 +839,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 			if ($result != '') {

@@ -124,7 +124,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);

@@ -88,7 +88,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 			'uid = '.$this->fixtureUid
 		);
 		if (!$dbResult) {
-			throw new Exception('There was an error with the database query.');
+			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 
 		$this->fixture = new tx_seminars_category(0, $dbResult);
