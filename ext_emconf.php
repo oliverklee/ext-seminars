@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'plugin',
 	'shy' => 0,
 	'dependencies' => 'cms,css_styled_content,oelib,ameos_formidable,partner,static_info_tables,static_info_tables_taxes',
-	'conflicts' => 'dbal',
+	'conflicts' => 'dbal,date2cal',
 	'priority' => '',
 	'loadOrder' => '',
 	'module' => 'mod1,mod2',
@@ -48,15 +48,14 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 		'conflicts' => array(
 			'dbal' => '',
+			'date2cal' => '',
 		),
 		'suggests' => array(
-			'date2cal' => '',
 			'onetimeaccount' => '',
 			'sr_feuser_register' => '',
 		),
 	),
 	'suggests' => array(
-		'date2cal' => '',
 		'onetimeaccount' => '',
 		'sr_feuser_register' => '',
 	),

@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2378] Change: Add a conflict with date2cal
 - [#2367] Feature: In the event FE single view, use a gender-dependent heading
 - [#1772] Feature: Add constants for frequently used error messages
 - [#2376] Change: Fine-tune the display of the categories in the event list view
