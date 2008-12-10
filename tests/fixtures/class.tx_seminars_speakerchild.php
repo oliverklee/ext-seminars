@@ -50,6 +50,18 @@ final class tx_seminars_speakerchild extends tx_seminars_speaker {
 	public function setNumberOfSkills($number) {
 		$this->setRecordPropertyInteger('skills', $number);
 	}
+
+	/**
+	 * Sets the gender of this speaker.
+	 *
+	 * @param integer the gender of the speaker, must be one of
+	 *                tx_seminars_speaker::GENDER_FEMALE,
+	 *                tx_seminars_speaker::GENDER_MALE
+	 *                or tx_seminars_speaker::GENDER_UNKNOWN
+	 */
+	public function setGender($gender) {
+		$this->setRecordPropertyInteger('gender', $gender);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_speakerchild.php']) {

@@ -38,6 +38,15 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_speaker extends tx_seminars_objectfromdb {
+	/** @var integer the gender type for speakers without gender */
+	const GENDER_UNKNOWN = 0;
+
+	/** @var integer the gender type male for a speaker */
+	const GENDER_MALE = 1;
+
+	/** @var integer the gender type female for a speaker */
+	const GENDER_FEMALE = 2;
+
 	/** string with the name of the SQL table this class corresponds to */
 	var $tableName = SEMINARS_TABLE_SPEAKERS;
 
@@ -246,6 +255,18 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns the gender of this speaker.
+	 *
+	 * @return integer the gender of the speaker, will be either
+	 *                 GENDER_MALE,
+	 *                 GENDER_FEMALE or
+	 *                 GENDER_UNKNOWN if the speaker has no gender
+	 */
+	public function getGender() {
+		return $this->getRecordPropertyInteger('gender');
 	}
 }
 

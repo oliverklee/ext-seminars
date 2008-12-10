@@ -414,5 +414,26 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 			$this->maximalFixture->getEmail()
 		);
 	}
+
+
+	////////////////////////
+	// Tests for getGender
+	////////////////////////
+
+	public function testGetGenderForNoGenderSetReturnsUnknownGenderValue() {
+		$this->assertEquals(
+			tx_seminars_speaker::GENDER_UNKNOWN,
+			$this->fixture->getGender()
+		);
+	}
+
+	public function testGetGenderForKnownGenderReturnsGender() {
+		$this->fixture->setGender(tx_seminars_speaker::GENDER_MALE);
+
+		$this->assertEquals(
+			tx_seminars_speaker::GENDER_MALE,
+			$this->fixture->getGender()
+		);
+	}
 }
 ?>

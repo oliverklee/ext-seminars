@@ -1127,6 +1127,65 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns the language key suffix for the speaker headings.
+	 *
+	 * @param string the type to determine the gender and number of, must be
+	 *               'speakers', 'tutors', 'leaders' or 'partners'
+	 *
+	 * @return string header marker for speaker heading will be
+	 *                'type_number_gender'. Number will be 'single' or
+	 *                'multiple' and gender will be 'male', 'female' or 'mixed'.
+	 *                The only exception is multiple speakers and mixed genders,
+	 *                then the result will be the input value.
+	 *                Will be empty if no speaker of the given type exists for
+	 *                this seminar.
+	 */
+	public function getLanguageKeySuffixForType($speakerType) {
+		if (!$this->hasSpeakersOfType($speakerType)) {
+			return '';
+		}
+
+		$result = $speakerType;
+		$hasMaleSpeakers = false;
+		$hasFemaleSpeakers = false;
+		$hasMultipleSpeakers = false;
+
+		$speakers = $this->getSpeakerBag($speakerType);
+		if ($speakers->count() > 1) {
+			$hasMultipleSpeakers = true;
+			$result .= '_multiple';
+		} else {
+			$result .= '_single';
+		}
+
+		foreach ($speakers as $speaker) {
+			switch ($speaker->getGender()) {
+				case tx_seminars_speaker::GENDER_MALE:
+					$hasMaleSpeakers = true;
+					break;
+				case tx_seminars_speaker::GENDER_FEMALE:
+					$hasFemaleSpeakers = true;
+					break;
+				default:
+					$hasMaleSpeakers = true;
+					$hasFemaleSpeakers = true;
+			}
+		}
+
+		if ($hasMaleSpeakers && !$hasFemaleSpeakers) {
+			$result .= '_male';
+		} elseif (!$hasMaleSpeakers && $hasFemaleSpeakers) {
+			$result .= '_female';
+		} elseif ($hasMultipleSpeakers) {
+			$result =  $speakerType;
+		} else {
+			$result .= '_unknown';
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Checks whether we have a language set.
 	 *
 	 * @return boolean true if we have a language set for this event,

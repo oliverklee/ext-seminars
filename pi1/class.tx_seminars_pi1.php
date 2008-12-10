@@ -712,9 +712,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$this->setTimeSlotsMarkers();
 
+			$this->setGenderSpecificHeading('speakers');
 			$this->setSpeakersMarker();
+			$this->setGenderSpecificHeading('partners');
 			$this->setPartnersMarker();
+			$this->setGenderSpecificHeading('tutors');
 			$this->setTutorsMarker();
+			$this->setGenderSpecificHeading('leaders');
 			$this->setLeadersMarker();
 
 			$this->setLanguageMarker();
@@ -2727,6 +2731,34 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			array(
 				'file' => SEMINARS_UPLOAD_PATH . $iconData['icon'],
 				'titleText' => $iconData['title'],
+			)
+		);
+	}
+
+	/**
+	 * Sets a gender specific heading for speakers, tutors, leaders or partners,
+	 * depending on the speakers, tutors, leaders or partners belonging to the
+	 * current seminar.
+	 *
+	 * @param string type of gender specific heading, must be 'speaker', 'tutors',
+	 *               'leaders' or 'partners'
+	 */
+	private function setGenderSpecificHeading($speakerType) {
+		if (!in_array(
+				$speakerType,
+				array('speakers', 'partners', 'tutors', 'leaders')
+		)) {
+			throw new Exception(
+				'The given speaker type "' .  $speakerType . '" is not ' .
+					'an allowed type. Allowed types are "speakers", ' .
+					'"partners", "tutors" or "leaders"'
+			);
+		}
+
+		$this->setMarker(
+			'label_' . $speakerType,
+			$this->translate(
+				'label_' . $this->seminar->getLanguageKeySuffixForType($speakerType)
 			)
 		);
 	}

@@ -116,9 +116,29 @@
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_timeslots">Time slots</label>
+			<label index="label_speakers_single_male">Speaker</label>
+			<label index="label_speakers_single_female">Speaker</label>
+			<label index="label_speakers_single_unknown">Speaker</label>
+			<label index="label_speakers_multiple_male">Speakers</label>
+			<label index="label_speakers_multiple_female">Speakers</label>
 			<label index="label_speakers">Speakers</label>
+			<label index="label_partners_single_male">Partner</label>
+			<label index="label_partners_single_female">Partner</label>
+			<label index="label_partners_single_unknown">Partner</label>
+			<label index="label_partners_multiple_male">Partners</label>
+			<label index="label_partners_multiple_female">Partners</label>
 			<label index="label_partners">Partners</label>
+			<label index="label_tutors_single_male">Tutor</label>
+			<label index="label_tutors_single_female">Tutor</label>
+			<label index="label_tutors_single_unknown">Tutor</label>
+			<label index="label_tutors_multiple_male">Tutors</label>
+			<label index="label_tutors_multiple_female">Tutors</label>
 			<label index="label_tutors">Tutors</label>
+			<label index="label_leaders_single_male">Leader</label>
+			<label index="label_leaders_single_female">Leader</label>
+			<label index="label_leaders_single_unknown">Leader</label>
+			<label index="label_leaders_multiple_male">Leaders</label>
+			<label index="label_leaders_multiple_female">Leaders</label>
 			<label index="label_leaders">Leaders</label>
 			<label index="label_language">Language</label>
 			<label index="label_price_general">Price</label>
@@ -611,10 +631,30 @@
 			<label index="label_room">Raum</label>
 			<label index="label_additional_times_places">Zeiten und Orte</label>
 			<label index="label_timeslots">Zeitblöcke</label>
+			<label index="label_speakers_single_male">Referent</label>
+			<label index="label_speakers_single_female">Referentin</label>
+			<label index="label_speakers_single_unknown">ReferentIn</label>
+			<label index="label_speakers_multiple_male">Referenten</label>
+			<label index="label_speakers_multiple_female">Referentinnen</label>
 			<label index="label_speakers">ReferentInnen</label>
+			<label index="label_partners_single_male">Partner</label>
+			<label index="label_partners_single_female">Partnerin</label>
+			<label index="label_partners_single_unknown">PartnerIn</label>
+			<label index="label_partners_multiple_male">Partner</label>
+			<label index="label_partners_multiple_female">PartnerInnen</label>
 			<label index="label_partners">Partner</label>
+			<label index="label_tutors_single_male">Kursbegleitung</label>
+			<label index="label_tutors_single_female">Kursbegleitung</label>
+			<label index="label_tutors_single_unknown">Kursbegleitung</label>
+			<label index="label_tutors_multiple_male">Kursbegleitung</label>
+			<label index="label_tutors_multiple_female">Kursbegleitung</label>
 			<label index="label_tutors">Kursbegleitung</label>
-			<label index="label_leaders">Kursleitung</label>
+			<label index="label_leaders_single_male">Kursleiter</label>
+			<label index="label_leaders_single_female">Kursleiterin</label>
+			<label index="label_leaders_single_unknown">KursleiterIn</label>
+			<label index="label_leaders_multiple_male">Kursleiter</label>
+			<label index="label_leaders_multiple_female">Kursleiterinnen</label>
+			<label index="label_leaders">KursleiterInnen</label>
 			<label index="label_language">Sprache</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_select_price">Preis:</label>
@@ -2189,6 +2229,26 @@
 			<label index="seminars.pi_flexform.iconOnly" type="integer">200345498</label>
 			<label index="seminars.pi_flexform.textOnly" type="integer">235000551</label>
 			<label index="seminars.pi_flexform.fromTsSetup" type="integer">136988657</label>
+			<label index="label_speakers_single_male" type="integer">36488799</label>
+			<label index="label_speakers_single_female" type="integer">36488799</label>
+			<label index="label_speakers_single_unknown" type="integer">36488799</label>
+			<label index="label_speakers_multiple_male" type="integer">258305227</label>
+			<label index="label_speakers_multiple_female" type="integer">258305227</label>
+			<label index="label_partners_single_male" type="integer">116408751</label>
+			<label index="label_partners_single_female" type="integer">116408751</label>
+			<label index="label_partners_single_unknown" type="integer">116408751</label>
+			<label index="label_partners_multiple_male" type="integer">265740084</label>
+			<label index="label_partners_multiple_female" type="integer">265740084</label>
+			<label index="label_tutors_single_male" type="integer">49051653</label>
+			<label index="label_tutors_single_female" type="integer">49051653</label>
+			<label index="label_tutors_single_unknown" type="integer">49051653</label>
+			<label index="label_tutors_multiple_male" type="integer">102766940</label>
+			<label index="label_tutors_multiple_female" type="integer">102766940</label>
+			<label index="label_leaders_single_male" type="integer">85297701</label>
+			<label index="label_leaders_single_female" type="integer">85297701</label>
+			<label index="label_leaders_single_unknown" type="integer">85297701</label>
+			<label index="label_leaders_multiple_male" type="integer">45784650</label>
+			<label index="label_leaders_multiple_female" type="integer">45784650</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3381,6 +3441,26 @@
 			<label index="seminars.pi_flexform.iconOnly">Icons only</label>
 			<label index="seminars.pi_flexform.textOnly">Text only</label>
 			<label index="seminars.pi_flexform.fromTsSetup">(from TS setup)</label>
+			<label index="label_speakers_single_male">Speaker</label>
+			<label index="label_speakers_single_female">Speaker</label>
+			<label index="label_speakers_single_unknown">Speaker</label>
+			<label index="label_speakers_multiple_male">Speakers</label>
+			<label index="label_speakers_multiple_female">Speakers</label>
+			<label index="label_partners_single_male">Partner</label>
+			<label index="label_partners_single_female">Partner</label>
+			<label index="label_partners_single_unknown">Partner</label>
+			<label index="label_partners_multiple_male">Partners</label>
+			<label index="label_partners_multiple_female">Partners</label>
+			<label index="label_tutors_single_male">Tutor</label>
+			<label index="label_tutors_single_female">Tutor</label>
+			<label index="label_tutors_single_unknown">Tutor</label>
+			<label index="label_tutors_multiple_male">Tutors</label>
+			<label index="label_tutors_multiple_female">Tutors</label>
+			<label index="label_leaders_single_male">Leader</label>
+			<label index="label_leaders_single_female">Leader</label>
+			<label index="label_leaders_single_unknown">Leader</label>
+			<label index="label_leaders_multiple_male">Leaders</label>
+			<label index="label_leaders_multiple_female">Leaders</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

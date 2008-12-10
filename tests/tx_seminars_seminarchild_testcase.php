@@ -4969,5 +4969,138 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasImage()
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests for getLanguageKeySuffixForType
+	//////////////////////////////////////////
+
+	public function testGetLanguageKeySuffixForTypeReturnsSpeakerType() {
+		$this->addLeaderRelation(array());
+
+		$this->assertContains(
+			'leaders_',
+			$this->fixture->getLanguageKeySuffixForType('leaders')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForMaleSpeakerReturnsMaleMarkerPart() {
+		$this->addLeaderRelation(
+			array('gender' => tx_seminars_speaker::GENDER_MALE)
+		);
+
+		$this->assertContains(
+			'_male',
+			$this->fixture->getLanguageKeySuffixForType('leaders')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForFemaleSpeakerReturnsFemaleMarkerPart() {
+		$this->addLeaderRelation(
+			array('gender' => tx_seminars_speaker::GENDER_FEMALE)
+		);
+
+		$this->assertContains(
+			'_female',
+			$this->fixture->getLanguageKeySuffixForType('leaders')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForSingleSpeakerWithoutGenderReturnsUnknownMarkerPart() {
+		$this->addLeaderRelation(
+			array('gender' => tx_seminars_speaker::GENDER_UNKNOWN)
+		);
+
+		$this->assertContains(
+			'_unknown',
+			$this->fixture->getLanguageKeySuffixForType('leaders')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForSingleSpeakerReturnsSingleMarkerPart() {
+		$this->addSpeakerRelation(array());
+
+		$this->assertContains(
+			'_single_',
+			$this->fixture->getLanguageKeySuffixForType('speakers')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForMultipleSpeakersWithoutGenderReturnsSpeakerType() {
+		$this->addSpeakerRelation(array());
+		$this->addSpeakerRelation(array());
+
+		$this->assertContains(
+			'speakers',
+			$this->fixture->getLanguageKeySuffixForType('speakers')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForMultipleMaleSpeakerReturnsMultipleAndMaleMarkerPart() {
+		$this->addSpeakerRelation(
+			array('gender' => tx_seminars_speaker::GENDER_MALE)
+		);
+		$this->addSpeakerRelation(
+			array('gender' => tx_seminars_speaker::GENDER_MALE)
+		);
+
+		$this->assertContains(
+			'_multiple_male',
+			$this->fixture->getLanguageKeySuffixForType('speakers')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForMultipleFemaleSpeakerReturnsMultipleAndFemaleMarkerPart() {
+		$this->addSpeakerRelation(
+			array('gender' => tx_seminars_speaker::GENDER_FEMALE)
+		);
+		$this->addSpeakerRelation(
+			array('gender' => tx_seminars_speaker::GENDER_FEMALE)
+		);
+
+		$this->assertContains(
+			'_multiple_female',
+			$this->fixture->getLanguageKeySuffixForType('speakers')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForMultipleSpeakersWithMixedGendersReturnsSpeakerType() {
+		$this->addSpeakerRelation(
+			array('gender' => tx_seminars_speaker::GENDER_MALE)
+		);
+		$this->addSpeakerRelation(
+			array('gender' => tx_seminars_speaker::GENDER_FEMALE)
+		);
+
+		$this->assertContains(
+			'speakers',
+			$this->fixture->getLanguageKeySuffixForType('speakers')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForOneSpeakerWithoutGenderAndOneWithGenderReturnsSpeakerType() {
+		$this->addLeaderRelation(
+			array('gender' => tx_seminars_speaker::GENDER_UNKNOWN)
+		);
+		$this->addLeaderRelation(
+			array('gender' => tx_seminars_speaker::GENDER_MALE)
+		);
+
+		$this->assertContains(
+			'leaders',
+			$this->fixture->getLanguageKeySuffixForType('leaders')
+		);
+	}
+
+	public function testGetLanguageKeySuffixForTypeForSingleMaleTutorReturnsCorrespondingMarkerPart() {
+		$this->addTutorRelation(
+			array('gender' => tx_seminars_speaker::GENDER_MALE)
+		);
+
+		$this->assertEquals(
+			'tutors_single_male',
+			$this->fixture->getLanguageKeySuffixForType('tutors')
+		);
+	}
 }
 ?>
