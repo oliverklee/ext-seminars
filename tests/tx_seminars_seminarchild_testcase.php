@@ -230,17 +230,20 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 * from the fixture.
 	 *
 	 * @param array data of the category to add, may be empty
+	 * @param integer the sorting index of the category to add, must be >= 0
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
-	private function addCategoryRelation(array $categoryData = array()) {
+	private function addCategoryRelation(
+		array $categoryData = array(), $sorting = 0
+	) {
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES, $categoryData
 		);
 
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_CATEGORIES_MM,
-			$this->fixture->getUid(), $uid
+			$this->fixture->getUid(), $uid, $sorting
 		);
 		$this->fixture->setNumberOfCategories(
 			$this->fixture->getNumberOfCategories() + 1
@@ -523,6 +526,17 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->countRecords(
 				SEMINARS_TABLE_CATEGORIES_MM,
 				'uid_local='.$this->fixture->getUid()
+			)
+		);
+	}
+
+	public function testAddCategoryRelationCanSetSortingInRelationTable() {
+		$this->addCategoryRelation(array(), 42);
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_CATEGORIES_MM,
+				'uid_local=' . $this->fixture->getUid() . ' AND sorting=42'
 			)
 		);
 	}
@@ -2336,6 +2350,23 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'foo.gif',
 			$categories[$categoryUid]['icon']
+		);
+	}
+
+	public function testGetCategoriesReturnsCategoriesOrderedBySorting() {
+		$categoryUid1 = $this->addCategoryRelation(array('title' => 'Test 1'), 2);
+		$categoryUid2 = $this->addCategoryRelation(array('title' => 'Test 2'), 1);
+
+		$this->assertTrue(
+			$this->fixture->hasCategories()
+		);
+
+		$this->assertEquals(
+			array(
+				$categoryUid2 => array('title' => 'Test 2', 'icon' => ''),
+				$categoryUid1 => array('title' => 'Test 1', 'icon' => ''),
+			),
+			$this->fixture->getCategories()
 		);
 	}
 

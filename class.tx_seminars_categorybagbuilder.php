@@ -53,6 +53,12 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	protected $orderBy = 'title';
 
 	/**
+	 * @var string the UIDs of the current events as commma-separated list,
+	 *             will be set by limitToEvents
+	 */
+	protected $eventUids = '';
+
+	/**
 	 * Limits the bag to the categories of the events provided by the parameter
 	 * $eventUids.
 	 *
@@ -83,6 +89,34 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 			.') AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='
 			.SEMINARS_TABLE_CATEGORIES.'.uid'
 			.')';
+
+		$this->eventUids = $eventUids;
+	}
+
+	/**
+	 * Sets the values of additionalTables, whereClauseParts and orderBy for the
+	 * category bag.
+	 * These changes are made so that the categories are sorted by the relation
+	 * sorting set in the back end.
+	 *
+	 * Before this function can be called, limitToEvents has to be called.
+	 */
+	public function sortByRelationOrder() {
+		if ($this->eventUids == '') {
+			throw new Exception(
+				'The event UIDs were empty. This means limitToEvents has not ' .
+				'been called. LimitToEvents has to be called before calling ' .
+				'this function.'
+			);
+		}
+
+		$this->addAdditionalTableName(SEMINARS_TABLE_CATEGORIES_MM);
+		$this->whereClauseParts['category']
+			= SEMINARS_TABLE_CATEGORIES . '.uid=' .
+			SEMINARS_TABLE_CATEGORIES_MM . '.uid_foreign AND '.
+			SEMINARS_TABLE_CATEGORIES_MM . '.uid_local IN (' .
+			$this->eventUids . ')';
+		$this->orderBy = SEMINARS_TABLE_CATEGORIES_MM . '.sorting ASC';
 	}
 }
 

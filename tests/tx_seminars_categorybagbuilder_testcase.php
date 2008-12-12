@@ -337,5 +337,21 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->isEmpty()
 		);
 	}
+
+
+	//////////////////////////////////
+	// Tests for sortByRelationOrder
+	//////////////////////////////////
+
+	public function testSortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore() {
+		$this->setExpectedException(
+			'Exception',
+			'The event UIDs were empty. This means limitToEvents has not ' .
+				'been called. LimitToEvents has to be called before calling ' .
+				'this function.'
+		);
+
+		$this->fixture->sortByRelationOrder();
+	}
 }
 ?>

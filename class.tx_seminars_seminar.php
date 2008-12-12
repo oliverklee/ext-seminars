@@ -4489,6 +4489,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$builder = t3lib_div::makeInstance('tx_seminars_categorybagbuilder');
 		$builder->limitToEvents($this->getTopicUid());
+		$builder->sortByRelationOrder();
 		$bag = $builder->build();
 
 		$result = array();
