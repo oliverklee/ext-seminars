@@ -420,39 +420,51 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 *                 "seminar"), false otherwise
 	 */
 	public function hasAccess() {
-		if (!isset($this->plugin->piVars['action'])
-			|| $this->plugin->piVars['action'] != 'EDIT'
-		) {
-			return false;
-		}
-
 		if (!$this->isLoggedIn()) {
 			return false;
 		}
 
-		if (!isset($this->plugin->piVars['seminar'])
-			|| !tx_seminars_objectfromdb::recordExists(
-				$this->plugin->piVars['seminar'], SEMINARS_TABLE_SEMINARS
-		)) {
+		$seminarUid = isset($this->plugin->piVars['seminar'])
+			? $this->plugin->piVars['seminar'] : 0;
+
+		if ($seminarUid > 0
+			&& !tx_seminars_objectfromdb::recordExists(
+				$seminarUid, SEMINARS_TABLE_SEMINARS
+			)
+		) {
 			return false;
 		}
 
-		$seminarClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminar'
-		);
-		$seminar = new $seminarClassname($this->plugin->piVars['seminar']);
-		$mayManagersEditTheirEvents = $this->plugin->getConfValueBoolean(
-			'mayManagersEditTheirEvents', 's_listView'
-		);
-		$isUserVip = $seminar->isUserVip(
-			$this->getFeUserUid(),
-			$this->plugin->getConfValueInteger('defaultEventVipsFeGroupID')
-		);
-		$isUserOwner = $seminar->isOwnerFeUser();
-		$seminar->__destruct();
-		unset($seminar);
+		if ($seminarUid > 0  && isset($this->plugin->piVars['action'])
+			&& $this->plugin->piVars['action'] == 'EDIT'
+		) {
+			$seminarClassname = t3lib_div::makeInstanceClassName(
+				'tx_seminars_seminar'
+			);
+			$seminar = new $seminarClassname($seminarUid);
+			$mayManagersEditTheirEvents
+				= $this->plugin->getConfValueBoolean(
+					'mayManagersEditTheirEvents', 's_listView'
+				);
+			$isUserVip = $seminar->isUserVip(
+				$this->getFeUserUid(),
+				$this->plugin->getConfValueInteger('defaultEventVipsFeGroupID')
+			);
+			$isUserOwner = $seminar->isOwnerFeUser();
+			$seminar->__destruct();
+			unset($seminar);
+			$result = $isUserOwner
+				|| ($mayManagersEditTheirEvents && $isUserVip);
+		} else {
+			$eventEditorGroupUid = $this->plugin->getConfValueInteger(
+			 'eventEditorFeGroupID', 's_fe_editing'
+			);
+			$result = isset(
+				$GLOBALS['TSFE']->fe_user->groupData['uid'][$eventEditorGroupUid]
+			);
+		}
 
-		return $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
+		return $result;
 	}
 
 	/**

@@ -420,6 +420,90 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 		$this->pi1->piVars['seminar'] = $this->seminarUid;
 		$this->createLogInAndAddFeUserAsDefaultVip();;
 
+		$this->assertTrue(
+			$this->fixture->hasAccess()
+		);
+	}
+
+
+	public function testHasAccessForLoggedOutUserReturnsFalse() {
+		$this->testingFramework->logoutFrontEndUser();
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessForLoggedInUserInUnauthorizedUsergroupReturnsFalse() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			$this->testingFramework->createFrontEndUsergroup()
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessForLoggedInUserInAuthorizedUsergroupAndNoUidSetReturnsTrue() {
+		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+			array('title' => 'test')
+		);
+		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
+
+		$this->pi1->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+
+		$this->assertTrue(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessForLoggedInUserInAuthorizedUsergroupButNotAuthorOfGivenEventReturnsFalse() {
+		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+			array('title' => 'test')
+		);
+		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
+
+		$this->pi1->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+		$this->pi1->piVars['seminar'] = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array()
+		);
+		$this->pi1->piVars['action'] = 'EDIT';
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessForLoggedInUserInAuthorizedUsergroupAndAuthorOfGivenEventReturnsTrue() {
+		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+			array('title' => 'test')
+		);
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser($groupUid);
+
+		$this->pi1->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+		$this->pi1->piVars['seminar'] = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('owner_feuser' => $userUid)
+		);
+		$this->pi1->piVars['action'] = 'EDIT';
+
+		$this->assertTrue(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	public function testHasAccessForLoggedInUserAndInvalidSeminarIdReturnsFalse() {
+		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+			array('title' => 'test')
+		);
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser($groupUid);
+
+		$this->pi1->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+		$this->pi1->piVars['seminar']
+			= $this->testingFramework->getAutoIncrement(
+				SEMINARS_TABLE_SEMINARS
+			);
+		$this->pi1->piVars['action'] = 'EDIT';
+
 		$this->assertFalse(
 			$this->fixture->hasAccess()
 		);
