@@ -31,7 +31,6 @@
 			<label index="seminars.pi_flexform.loginPID">Page that contains the login form:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Page that contains the list of registrations (for attendees):</label>
 			<label index="seminars.pi_flexform.registrationsVipListPID">Page that contains the list of registrations (for event managers):</label>
-			<label index="seminars.pi_flexform.favoritesPID">Page that contains the favorites list:</label>
 			<label index="seminars.pi_flexform.salutation">Salutation mode on the page:</label>
 			<label index="seminars.pi_flexform.formal">formal</label>
 			<label index="seminars.pi_flexform.informal">informal</label>
@@ -84,7 +83,6 @@
 			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
-			<label index="seminars.pi_flexform.favorites_list">Favorites list</label>
 			<label index="seminars.pi_flexform.event_headline">Event headline</label>
 			<label index="seminars.pi_flexform.categoriesInListView">Display of the categories:</label>
 			<label index="seminars.pi_flexform.iconAndText">Icons and text</label>
@@ -546,7 +544,6 @@
 			<label index="seminars.pi_flexform.loginPID">Seite mit dem Login-Formular:</label>
 			<label index="seminars.pi_flexform.registrationsListPID">Seite mit der Liste der Anmeldungen (für TeilnehmerInnen):</label>
 			<label index="seminars.pi_flexform.registrationsVipListPID">Seite mit der Liste der Anmeldungen (für Verwalter):</label>
-			<label index="seminars.pi_flexform.favoritesPID">Seite mit dem Merkzettel:</label>
 			<label index="seminars.pi_flexform.salutation">Anredeform auf der Seite:</label>
 			<label index="seminars.pi_flexform.formal">formell</label>
 			<label index="seminars.pi_flexform.informal">informell</label>
@@ -599,7 +596,6 @@
 			<label index="seminars.pi_flexform.createEventsPID">SysFolder, in dem die Veranstaltungsdatensätze gespeichert werden</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Seite, auf die nach dem Speichern einer Veranstaltung im Front-end umgeleitet wird</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">Liste erlaubter Dateiendungen für Front-end-Bearbeitung</label>
-			<label index="seminars.pi_flexform.favorites_list">Merkzettel</label>
 			<label index="seminars.pi_flexform.event_headline">Veranstaltungsüberschrift</label>
 			<label index="seminars.pi_flexform.categoriesInListView">Anzeige der Kategorien:</label>
 			<label index="seminars.pi_flexform.iconAndText">Icons und Titel</label>
@@ -2221,8 +2217,6 @@
 			<label index="countdown_minutes_plural" type="integer">104922380</label>
 			<label index="countdown_minutes_singular" type="integer">10999131</label>
 			<label index="countdown_seconds_plural" type="integer">126085346</label>
-			<label index="seminars.pi_flexform.favorites_list" type="integer">201026682</label>
-			<label index="seminars.pi_flexform.favoritesPID" type="integer">66351292</label>
 			<label index="seminars.pi_flexform.event_headline" type="integer">246201769</label>
 			<label index="seminars.pi_flexform.categoriesInListView" type="integer">111073480</label>
 			<label index="seminars.pi_flexform.iconAndText" type="integer">263764997</label>
@@ -3433,8 +3427,6 @@
 			<label index="countdown_minutes_plural">minutes</label>
 			<label index="countdown_minutes_singular">minute</label>
 			<label index="countdown_seconds_plural">seconds</label>
-			<label index="seminars.pi_flexform.favorites_list">Favorites list</label>
-			<label index="seminars.pi_flexform.favoritesPID">Page that contains the favorites list:</label>
 			<label index="seminars.pi_flexform.event_headline">Event headline</label>
 			<label index="seminars.pi_flexform.categoriesInListView">Display of the categories:</label>
 			<label index="seminars.pi_flexform.iconAndText">Icons and text</label>

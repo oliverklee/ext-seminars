@@ -474,7 +474,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'my_entered_events',
 				'countdown',
 				'category_list',
-				'favorites_list',
 				'event_headline',
 			)
 		);
@@ -2064,20 +2063,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'should be disabled for all events. If this value is incorrect, ' .
 				'the registration collision check might be enabled although it ' .
 				'should be disabled (or vice versa).'
-		);
-	}
-
-	/**
-	 * Checks the setting of the configuration value checkFavoritesPID.
-	 */
-	private function checkFavoritesPid() {
-		$this->checkIfSingleFePageOrEmpty(
-			'favoritesPID',
-			true,
-			'sDEF',
-			'This value specifies the page that contains the favorites list. ' .
-				'If this value is not set correctly, the link to the favorites ' .
-				'list will not work.'
 		);
 	}
 
