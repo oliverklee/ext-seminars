@@ -2405,8 +2405,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToOwnerWithPositiveFeUserUidFindsEventsWithOwner() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('owner_feuser' => $feUserUid)
@@ -2420,8 +2419,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithoutOwner() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -2433,8 +2431,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithDifferentOwner() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('owner_feuser' => ($feUserUid + 1))
@@ -2447,8 +2444,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithoutOwner() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -2462,8 +2458,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithOwner() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('owner_feuser' => $feUserUid)
@@ -2548,8 +2543,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToEventManagerWithPositiveFeUserUidFindsEventsWithEventManager() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('vips' => 1)
@@ -2569,8 +2563,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToEventManagerWithPositiveFeUserUidIgnoresEventsWithoutEventManager() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -2583,8 +2576,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToEventManagerWithZeroFeUserUidFindsEventsWithoutEventManager() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);

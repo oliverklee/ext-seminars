@@ -3609,9 +3609,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////
 
 	public function testEventsWithTheExactSameDateCollide() {
-		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup()
-		);
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = mktime();
 		$end = $begin + 1000;
@@ -3641,9 +3639,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCollidingEventsDoNotCollideIfCollisionSkipIsEnabledForAllEvents() {
-		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup()
-		);
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = mktime();
 		$end = $begin + 1000;
@@ -3677,9 +3673,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForThisEvent() {
-		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup()
-		);
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = mktime();
 		$end = $begin + 1000;
@@ -3710,9 +3704,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForAnotherEvent() {
-		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup()
-		);
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = mktime();
 		$end = $begin + 1000;

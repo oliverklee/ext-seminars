@@ -198,14 +198,11 @@ class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 
 	public function testPopulateListWithFrontEndUserTableUsesNameFieldAsCaptiobn() {
 		$uid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup(),
-			array('name' => 'foo')
+			'', array('name' => 'foo')
 		);
 
 		$this->assertEquals(
-			array(
-				$uid => array('caption' => 'foo', 'value' => $uid),
-			),
+			array($uid => array('caption' => 'foo', 'value' => $uid)),
 			$this->fixture->populateList(array(), 'fe_users', 'uid = ' . $uid)
 		);
 	}

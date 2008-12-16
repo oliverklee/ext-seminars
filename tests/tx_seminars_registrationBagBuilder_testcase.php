@@ -450,10 +450,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToAttendeeWithPositiveFeUserUidFindsRegistrationsWithAttendee() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser(
-			$feUserGroupUid
-		);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -471,8 +468,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToAttendeeWithPositiveFeUserUidIgnoresRegistrationsWithoutAttendee() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
 
 		$this->fixture->limitToAttendee($feUserUid);

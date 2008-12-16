@@ -151,10 +151,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetThankYouAfterRegistrationUrlLeavesUserLoggedInByDefault() {
-		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup()
-		);
-		$this->testingFramework->loginFrontEndUser($frontEndUserUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->fixture->getThankYouAfterRegistrationUrl();
 
@@ -164,10 +161,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetThankYouAfterRegistrationUrlWithOneTimeAccountMarkerInUserSessionLogsOutUser() {
-		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup()
-		);
-		$this->testingFramework->loginFrontEndUser($frontEndUserUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->session->setAsBoolean('onetimeaccount', true);
 
 		$this->fixture->getThankYouAfterRegistrationUrl();
@@ -185,8 +179,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	public function testGetAllFeUserContainsNonEmptyNameOfFrontEndUser() {
 		$this->testingFramework->loginFrontEndUser(
 			$this->testingFramework->createFrontEndUser(
-				$this->testingFramework->createFrontEndUserGroup(),
-				array('name' => 'John Doe')
+				'', array('name' => 'John Doe')
 			)
 		);
 
@@ -199,8 +192,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	public function testGetAllFeUserDoesNotContainEmptyLinesForMissingCompanyName() {
 		$this->testingFramework->loginFrontEndUser(
 			$this->testingFramework->createFrontEndUser(
-				$this->testingFramework->createFrontEndUserGroup(),
-				array('name' => 'John Doe')
+				'', array('name' => 'John Doe')
 			)
 		);
 

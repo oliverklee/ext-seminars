@@ -137,8 +137,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 * $this->seminarUid and logs him/her in.
 	 */
 	private function createLogInAndRegisterFeUser() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -146,7 +145,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'user' => $feUserUid,
 			)
 		);
-		$this->testingFramework->loginFrontEndUser($feUserUid);
 	}
 
 	/**
@@ -154,8 +152,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 * $this->seminarUid and logs him/her in.
 	 */
 	private function createLogInAndAddFeUserAsVip() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_VIPS_MM,
 			$this->seminarUid,
@@ -166,7 +163,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->seminarUid,
 			array('vips' => 1)
 		);
-		$this->testingFramework->loginFrontEndUser($feUserUid);
 	}
 
 	/**
@@ -902,9 +898,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testAttachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndLoggedInAndUnregisteredFeUser() {
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
-		$this->testingFramework->loginFrontEndUser($feUserUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =

@@ -136,10 +136,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * in.
 	 */
 	private function createAndLogInFrontEndUser() {
-		$this->frontEndUserUid = $this->testingFramework->createFrontEndUser(
-			$this->testingFramework->createFrontEndUserGroup()
-		);
-		$this->testingFramework->loginFrontEndUser($this->frontEndUserUid);
+		$this->frontEndUserUid
+			= $this->testingFramework->createAndLoginFrontEndUser();
 	}
 
 	/**

@@ -87,8 +87,7 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	 * $this->seminarUid and logs him/her in.
 	 */
 	private function createLogInAndAddFeUserAsVip() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_VIPS_MM,
 			$this->seminarUid,
@@ -99,7 +98,6 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 			$this->seminarUid,
 			array('vips' => 1)
 		);
-		$this->testingFramework->loginFrontEndUser($feUserUid);
 	}
 
 	/**
@@ -120,23 +118,12 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	 * $this->seminarUid and logs him/her in.
 	 */
 	private function createLogInAndAddFeUserAsOwner() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS,
 			$this->seminarUid,
 			array('owner_feuser' => $feUserUid)
 		);
-		$this->testingFramework->loginFrontEndUser($feUserUid);
-	}
-
-	/**
-	 * Creates a FE user and logs him/her in.
-	 */
-	private function createAndLogInFeUser() {
-		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
-		$this->testingFramework->loginFrontEndUser($feUserUid);
 	}
 
 
@@ -252,23 +239,6 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndLogInFeUserCreatesFeUser() {
-		$this->createAndLogInFeUser();
-
-		$this->assertEquals(
-			1,
-			$this->testingFramework->countRecords('fe_users')
-		);
-	}
-
-	public function testCreateAndLoginFeUserLogsInFeUser() {
-		$this->createAndLogInFeUser();
-
-		$this->assertTrue(
-			$this->fixture->isLoggedIn()
-		);
-	}
-
 
 	///////////////////////////////////////////////////////
 	// Tests for getting the event-successfully-saved URL
@@ -349,7 +319,7 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->pi1->piVars['seminar'] = $this->seminarUid;
-		$this->createAndLogInFeUser();
+		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertFalse(
 			$this->fixture->hasAccess()
@@ -435,9 +405,7 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testHasAccessForLoggedInUserInUnauthorizedUsergroupReturnsFalse() {
-		$this->testingFramework->createAndLoginFrontEndUser(
-			$this->testingFramework->createFrontEndUsergroup()
-		);
+		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertFalse(
 			$this->fixture->hasAccess()
@@ -495,7 +463,7 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 		$groupUid = $this->testingFramework->createFrontEndUsergroup(
 			array('title' => 'test')
 		);
-		$userUid = $this->testingFramework->createAndLoginFrontEndUser($groupUid);
+		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
 		$this->pi1->setConfigurationValue('eventEditorFeGroupID', $groupUid);
 		$this->pi1->piVars['seminar']
