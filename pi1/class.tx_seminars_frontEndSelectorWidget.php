@@ -183,10 +183,10 @@ class tx_seminars_frontEndSelectorWidget extends tx_seminars_frontEndView {
 			}
 			$countryIsoCode = $place->getCountryIsoCode();
 			if (!isset($this->allCountries[$countryIsoCode])) {
-				$this->allCountries[$countryIsoCode] =
-					$this->staticInfo->getStaticInfoName(
-					'COUNTRIES', $countryIsoCode
-				);
+				$this->allCountries[$countryIsoCode]
+					= $this->staticInfo->getStaticInfoName(
+						'COUNTRIES', $countryIsoCode
+					);
 			}
 
 			$cityName = $place->getCity();

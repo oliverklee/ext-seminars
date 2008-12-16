@@ -27,6 +27,8 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
 
+require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
+
 /**
  * Testcase for the 'frontEndSelectorWidget' class in the 'seminars' extension.
  *
@@ -46,6 +48,12 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	 */
 	private $testingFramework;
 
+	/**
+	 * @var tx_staticinfotables_pi1 needed to convert ISO codes to country and
+	 *                              language names
+	 */
+	protected $staticInfo;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
@@ -60,10 +68,41 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
+		if ($this->staticInfo) {
+			unset($this->staticInfo);
+		}
+
 		$this->testingFramework->cleanUp();
 		$this->fixture->__destruct();
 
 		unset($this->fixture, $this->testingFramework);
+	}
+
+
+	//////////////////////
+	// Utility functions
+	//////////////////////
+
+	/**
+	 * Creates and initializes an instance of tx_staticinfotables_pi1 in
+	 * $this->staticInfo.
+	 */
+	private function instantiateStaticInfo() {
+		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+		$this->staticInfo->init();
+	}
+
+
+	////////////////////////////////////
+	// Tests for the utility functions
+	////////////////////////////////////
+
+	public function testInstantiateStaticInfoCreateStaticInfoInstance() {
+		$this->instantiateStaticInfo();
+
+		$this->assertTrue(
+			$this->staticInfo instanceof tx_staticinfotables_pi1
+		);
 	}
 
 
@@ -253,9 +292,13 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderCanContainLanguageOption() {
+	public function testRenderContainsLanguageOption() {
+		$this->instantiateStaticInfo();
+
 		$languageIsoCode = 'DE';
-		$languageName = 'Deutsch';
+		$languageName = $this->staticInfo->getStaticInfoName(
+			'LANGUAGES', $languageIsoCode, '', '', 0
+		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
 		);
@@ -267,9 +310,13 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderCanContainCountryOption() {
+	public function testRenderContainsCountryOption() {
+		$this->instantiateStaticInfo();
+
 		$countryIsoCode = 'DE';
-		$countryName = 'Deutschland';
+		$countryName = $this->staticInfo->getStaticInfoName(
+			'COUNTRIES', $countryIsoCode
+		);
 		$placeUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode)
 		);

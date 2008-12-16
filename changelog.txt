@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2326] Fix: Test failures: testRenderCanContainLanguageOption and testRenderCanContainCountryOption
 - [#2327] Fix: FE Editor will not allow me to edit oder enter events
 - [#2409] Change: Hide the flavor "favorites" from the "what_to_display" drop-down in the Seminars flexforms
 - [#2377] Change: Sort the categories in the event list and detail view by the sorting chosen in the BE
