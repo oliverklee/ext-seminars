@@ -4648,7 +4648,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setOwnerUid($ownerUid);
 
 		$this->assertTrue(
-			$this->fixture->getOwner() instanceof tx_oelib_frontEndUser
+			$this->fixture->getOwner() instanceof tx_oelib_Model_FrontEndUser
 		);
 	}
 

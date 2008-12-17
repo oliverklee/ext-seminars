@@ -3595,8 +3595,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets this event's owner (the FE user who has created this event).
 	 *
-	 * @return tx_oelib_frontEndUser the owner, will be null if the event has
-	 *                               no owner
+	 * @return tx_oelib_Model_FrontEndUser the owner, will be null if the event
+	 *                                     has no owner
 	 */
 	public function getOwner() {
 		if (!$this->hasRecordPropertyInteger('owner_feuser')) {
@@ -3604,8 +3604,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		try {
-			$owner = tx_oelib_mapperRegistry::get('tx_oelib_frontEndUserMapper')
-				->find($this->getRecordPropertyInteger('owner_feuser'));
+			$owner = tx_oelib_mapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
+					->find($this->getRecordPropertyInteger('owner_feuser'));
 		} catch (tx_oelib_notFoundException $exception) {
 			$owner = null;
 		}
