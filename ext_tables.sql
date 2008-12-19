@@ -237,6 +237,8 @@ CREATE TABLE tx_seminars_seminars (
 	notes text,
 	attached_files text,
 	image tinytext,
+	requirements int(11) unsigned DEFAULT '0' NOT NULL,
+	dependencies int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -728,4 +730,21 @@ CREATE TABLE tx_seminars_prices (
 	KEY parent (pid),
 	KEY dummy (is_dummy_record),
 	KEY seminar (seminar)
+);
+
+
+#
+# Table structure for table 'tx_seminars_seminars_requirements_mm'
+#
+CREATE TABLE tx_seminars_seminars_requirements_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign),
+	KEY dummy (is_dummy_record)
 );

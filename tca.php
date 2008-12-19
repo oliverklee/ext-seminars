@@ -200,6 +200,38 @@ $TCA['tx_seminars_seminars'] = array(
 				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_categories'),
 			),
 		),
+		'requirements' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.requirements',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_seminars',
+				'foreign_table' => 'tx_seminars_seminars',
+				'foreign_table_where' => 'AND tx_seminars_seminars.uid!=###THIS_UID###' .
+					' AND object_type=1',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 999,
+				'MM' => 'tx_seminars_seminars_requirements_mm',
+			),
+		),
+		'dependencies' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.dependencies',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'foreign_table' => 'tx_seminars_seminars',
+				'foreign_table_where' => 'AND tx_seminars_seminars.uid!=###THIS_UID###' .
+					' AND object_type=1',
+				'size' => 10,
+				'minitems' => 0,
+				'maxitems' => 999,
+				'MM' => 'tx_seminars_seminars_requirements_mm',
+				'MM_opposite_field' => 'requirements',
+			),
+		),
 		'teaser' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.teaser',
@@ -882,7 +914,7 @@ $TCA['tx_seminars_seminars'] = array(
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, ' .
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, requirements, dependencies, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAccess, hidden;;1;;1-1-1, ',

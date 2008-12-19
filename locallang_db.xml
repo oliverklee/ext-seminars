@@ -86,6 +86,8 @@
 			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.vips">Managers of this event:</label>
 			<label index="tx_seminars_seminars.image">Image:</label>
+			<label index="tx_seminars_seminars.requirements">Requirements:</label>
+			<label index="tx_seminars_seminars.dependencies">Requirement for:</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.gender">Gender:</label>
@@ -269,6 +271,8 @@
 			<label index="tx_seminars_seminars.owner_feuser">Frontend-User, der diese Veranstaltung eingetragen hat:</label>
 			<label index="tx_seminars_seminars.vips">Verwalter dieser Veranstaltung:</label>
 			<label index="tx_seminars_seminars.image">Bild:</label>
+			<label index="tx_seminars_seminars.requirements">Voraussetzungen:</label>
+			<label index="tx_seminars_seminars.dependencies">Voraussetzungen für:</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.gender">Geschlecht:</label>
@@ -1356,6 +1360,8 @@
 			<label index="tx_seminars_speakers.gender" type="integer">212491130</label>
 			<label index="tx_seminars_speakers.gender_male" type="integer">8189176</label>
 			<label index="tx_seminars_speakers.gender_female" type="integer">41138606</label>
+			<label index="tx_seminars_seminars.requirements" type="integer">62069823</label>
+			<label index="tx_seminars_seminars.dependencies" type="integer">258671677</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2340,6 +2346,8 @@
 			<label index="tx_seminars_speakers.gender">Gender:</label>
 			<label index="tx_seminars_speakers.gender_male">male</label>
 			<label index="tx_seminars_speakers.gender_female">female</label>
+			<label index="tx_seminars_seminars.requirements">Requirements:</label>
+			<label index="tx_seminars_seminars.dependencies">Requirement for:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
