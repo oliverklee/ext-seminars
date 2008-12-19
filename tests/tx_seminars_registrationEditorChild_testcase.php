@@ -27,8 +27,8 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_testingFramework.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_session.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_fakeSession.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Session.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_FakeSession.php');
 
 /**
  * Testcase for the registrationEditorChild class in the 'seminars' extensions.
@@ -54,7 +54,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	private $pi1;
 
 	/**
-	 * @var tx_oelib_fakeSession a fake session
+	 * @var tx_oelib_FakeSession a fake session
 	 */
 	private $session;
 
@@ -63,9 +63,9 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
 		$this->testingFramework->createFakeFrontEnd($this->frontEndPageUid);
 
-		$this->session = new tx_oelib_fakeSession();
-		tx_oelib_session::setInstance(
-			tx_oelib_session::TYPE_USER, $this->session
+		$this->session = new tx_oelib_FakeSession();
+		tx_oelib_Session::setInstance(
+			tx_oelib_Session::TYPE_USER, $this->session
 		);
 
 		$seminarUid = $this->testingFramework->createRecord(

@@ -24,7 +24,7 @@
 
 require_once(PATH_formidableapi);
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_session.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Session.php');
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
@@ -579,7 +579,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 		);
 
 		if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-				&& tx_oelib_session::getInstance(tx_oelib_session::TYPE_USER)
+				&& tx_oelib_Session::getInstance(tx_oelib_Session::TYPE_USER)
 					->getAsBoolean('onetimeaccount')
 		) {
 			$GLOBALS['TSFE']->fe_user->logoff();
@@ -1427,7 +1427,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 
 			foreach ($parametersToSave as $currentKey) {
 				if (isset($parameters[$currentKey])) {
-					tx_oelib_session::getInstance(tx_oelib_session::TYPE_USER)
+					tx_oelib_Session::getInstance(tx_oelib_Session::TYPE_USER)
 						->setAsString(
 							$this->prefixId . '_' . $currentKey,
 							$parameters[$currentKey]
@@ -1467,7 +1467,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *                given key, might be empty
 	 */
 	public function retrieveDataFromSession($unused, array $parameters) {
-		return tx_oelib_session::getInstance(tx_oelib_session::TYPE_USER)
+		return tx_oelib_Session::getInstance(tx_oelib_Session::TYPE_USER)
 			->getAsString($this->prefixId . '_' . $parameters['key']);
 	}
 

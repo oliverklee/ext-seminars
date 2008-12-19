@@ -97,7 +97,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		tx_oelib_mapperRegistry::purgeInstance();
+		tx_oelib_MapperRegistry::purgeInstance();
 		$this->testingFramework->cleanUp();
 
 		if ($this->pi1) {

@@ -33,7 +33,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizer.ph
 require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_organizerbag.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_mapperRegistry.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_MapperRegistry.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -3604,7 +3604,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		try {
-			$owner = tx_oelib_mapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
+			$owner = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
 					->find($this->getRecordPropertyInteger('owner_feuser'));
 		} catch (tx_oelib_notFoundException $exception) {
 			$owner = null;
