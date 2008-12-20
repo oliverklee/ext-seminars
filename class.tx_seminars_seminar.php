@@ -3595,7 +3595,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		try {
 			$owner = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
 					->find($this->getRecordPropertyInteger('owner_feuser'));
-		} catch (tx_oelib_notFoundException $exception) {
+		} catch (tx_oelib_Exception_NotFound $exception) {
 			$owner = null;
 		}
 
