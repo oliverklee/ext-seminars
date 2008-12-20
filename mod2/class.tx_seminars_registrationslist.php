@@ -24,9 +24,6 @@
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_backendlist.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationBagBuilder.php');
 
 /**
  * Class 'registrations list' for the 'seminars' extension.

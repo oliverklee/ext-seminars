@@ -22,16 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_configgetter.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationBagBuilder.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationmanager.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_event_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCategoryList.php');
@@ -40,10 +33,6 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndSelectorWidget.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndEventHeadline.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 /**
  * Plugin 'Seminar Manager' for the 'seminars' extension.

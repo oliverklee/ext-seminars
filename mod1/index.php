@@ -32,12 +32,9 @@ $LANG->includeLLFile('EXT:seminars/mod1/locallang.xml');
 require_once(PATH_t3lib . 'class.t3lib_scbase.php');
 require_once(PATH_t3lib . 'class.t3lib_page.php');
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
 
 // This checks permissions and exits if the users has no permission for entry.
 $BE_USER->modAccess($MCONF, 1);

@@ -22,21 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_t3lib.'class.t3lib_befunc.php');
+require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_headerProxyFactory.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_configgetter.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registrationBagBuilder.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminar.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbagbuilder.php');
 
 /**
  * Plugin 'CSV export' for the 'seminars' extension.

@@ -24,8 +24,6 @@
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndView.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_seminarbag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_placebag.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 

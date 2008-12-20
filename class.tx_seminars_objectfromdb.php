@@ -22,10 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
-
 // In the back end, include the extension's locallang.xml.
 if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
     $LANG->includeLLFile('EXT:seminars/locallang.xml');

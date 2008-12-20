@@ -25,11 +25,7 @@
 require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 require_once(PATH_t3lib . 'class.t3lib_refindex.php');
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_mailerFactory.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
-
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
 
 /**
  * Class 'tx_seminars_registration' for the 'seminars' extension.

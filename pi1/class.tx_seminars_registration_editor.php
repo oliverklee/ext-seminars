@@ -24,9 +24,6 @@
 
 require_once(PATH_formidableapi);
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Session.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
-
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndEditor.php');
 

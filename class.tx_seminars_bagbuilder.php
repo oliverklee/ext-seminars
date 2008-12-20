@@ -22,10 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_db.php');
-
 /**
  * Class 'tx_seminars_bagbuilder' for the 'seminars' extension.
  *

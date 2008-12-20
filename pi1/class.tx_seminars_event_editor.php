@@ -27,10 +27,7 @@ require_once(PATH_formidableapi);
 require_once(PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndEditor.php');
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_templatehelper.php');
 
 /**
  * Class 'tx_seminars_event_editor' for the 'seminars' extension.

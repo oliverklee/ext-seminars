@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2322] Feature: Create an autoloader for models and other classes
 - [#2417] Feature: CreateFrontEndUser should automatically create a group if needed
 - [#2326] Fix: Test failures: testRenderCanContainLanguageOption and testRenderCanContainCountryOption
 - [#2327] Fix: FE Editor will not allow me to edit oder enter events

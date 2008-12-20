@@ -22,9 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bagbuilder.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_categorybag.php');
-
 /**
  * Class 'tx_seminars_categorybagbuilder' for the 'seminars' extension.
  *
