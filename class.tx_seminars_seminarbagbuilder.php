@@ -970,6 +970,39 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			);
 		}
 	}
+
+	/**
+	 * Limits the search results to topics which are required for the
+	 * given topic.
+	 *
+	 * @param integer the UID of the topic event for which the requirements
+	 *                should be found, must be > 0
+	 */
+	public function limitToRequiredEventTopics($eventUid) {
+		$this->whereClauseParts['requiredEventTopics'] =
+			SEMINARS_TABLE_REQUIREMENTS_MM . '.uid_local=' . $eventUid .
+			' AND ' . SEMINARS_TABLE_REQUIREMENTS_MM . '.uid_foreign=' .
+			SEMINARS_TABLE_SEMINARS . '.uid';
+		$this->addAdditionalTableName(SEMINARS_TABLE_REQUIREMENTS_MM);
+		$this->setOrderBy(SEMINARS_TABLE_REQUIREMENTS_MM . '.sorting');
+	}
+
+	/**
+	 * Limits the search result to topics which depend on the given topic.
+	 *
+	 * @param integer the UID of the topic event which the searched events
+	 *                depend on, must be > 0
+	 */
+	public function limitToDependingEventTopics($eventUid) {
+		$this->whereClauseParts['dependingEventTopics'] =
+			SEMINARS_TABLE_REQUIREMENTS_MM . '.uid_foreign=' . $eventUid .
+			' AND '. SEMINARS_TABLE_REQUIREMENTS_MM . '.uid_local=' .
+			SEMINARS_TABLE_SEMINARS . '.uid';
+		$this->addAdditionalTableName(SEMINARS_TABLE_REQUIREMENTS_MM);
+		$this->setOrderBy(
+			SEMINARS_TABLE_REQUIREMENTS_MM . '.sorting_foreign ASC'
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

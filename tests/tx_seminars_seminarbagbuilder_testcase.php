@@ -5175,5 +5175,197 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->isEmpty()
 		);
 	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning limitToRequiredEvents
+	///////////////////////////////////////////
+
+	public function testLimitToRequiredEventsCanFindOneRequiredEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('requirements' => 1)
+		);
+		$requiredEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$eventUid,
+			$requiredEventUid
+		);
+		$this->fixture->limitToRequiredEventTopics($eventUid);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->count()
+		);
+	}
+
+	public function testLimitToRequiredEventsCanFindTwoRequiredEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('requirements' => 1)
+		);
+		$requiredEventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$requiredEventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$eventUid,
+			$requiredEventUid1
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$eventUid,
+			$requiredEventUid2
+		);
+
+		$this->fixture->limitToRequiredEventTopics($eventUid);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->count()
+		);
+	}
+
+	public function testLimitToRequiredEventsFindsOnlyRequiredEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('requirements' => 1)
+		);
+		$requiredEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$dependingEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$eventUid,
+			$requiredEventUid
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$dependingEventUid,
+			$eventUid
+		);
+
+		$this->fixture->limitToRequiredEventTopics($eventUid);
+
+		$foundEvents = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$foundEvents->count()
+		);
+
+		$this->assertNotEquals(
+			$dependingUid,
+			$foundEvents->current()->getUid()
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning limitToDependingEvents
+	///////////////////////////////////////////
+
+	public function testLimitToDependingEventsCanFindOneDependingEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('requirements' => 1)
+		);
+		$dependingEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$dependingEventUid,
+			$eventUid
+		);
+		$this->fixture->limitToDependingEventTopics($eventUid);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->count()
+		);
+	}
+
+	public function testLimitToDependingEventsCanFindTwoDependingEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('requirements' => 1)
+		);
+		$dependingEventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$dependingEventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$dependingEventUid1,
+			$eventUid
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$dependingEventUid2,
+			$eventUid
+		);
+
+		$this->fixture->limitToDependingEventTopics($eventUid);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->build()->count()
+		);
+	}
+
+	public function testLimitToDependingEventsFindsOnlyDependingEvents() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('requirements' => 1)
+		);
+		$dependingEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$requiredEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$dependingEventUid,
+			$eventUid
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_REQUIREMENTS_MM,
+			$eventUid,
+			$requiredEventUid
+		);
+
+		$this->fixture->limitToDependingEventTopics($eventUid);
+		$foundEvents = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$foundEvents->count()
+		);
+
+		$this->assertNotEquals(
+			$requiredEventUid,
+			$foundEvents->current()->getUid()
+		);
+
+	}
 }
 ?>
