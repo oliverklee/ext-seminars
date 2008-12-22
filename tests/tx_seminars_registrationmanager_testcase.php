@@ -61,7 +61,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			= new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->seminar = new tx_seminars_seminar(
+		$this->seminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
 				SEMINARS_TABLE_SEMINARS,
 				array(
@@ -70,7 +70,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'end_date' => mktime() + 2000,
 					'attendees_max' => 10,
 				)
-			)
+			),
+			array()
 		);
 
 		$this->fixture = new tx_seminars_registrationmanager();
@@ -121,6 +122,29 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 		$this->testingFramework->loginFrontEndUser($this->frontEndUserUid);
 	}
+
+	/**
+	 * Creates a seminar which is booked out.
+	 */
+	private function createBookedOutSeminar() {
+		$this->fullyBookedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'title' => 'test event',
+					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+					'attendees_max' => 10,
+					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				)
+			),
+			array()
+		);
+		$this->fullyBookedSeminar->setNumberOfAttendances(10);
+		$this->fullyBookedSeminar->setRegistrationQueueSize(5);
+		$this->fullyBookedSeminar->setNumberOfAttendancesOnQueue(5);
+	}
+
 
 
 	////////////////////////////////////
@@ -261,5 +285,104 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	///////////////////////////////////////////
+	// Tests concerning canRegisterIfLoggedIn
+	///////////////////////////////////////////
+
+	public function testCanRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function testCanRegisterIfLoggedInForLoggedInUserAndRegistrationOpenReturnsTrue() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function testCanRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserReturnsFalse() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
+				'seminar' => $this->seminar->getUid(),
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function testCanRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowedReturnsTrue() {
+		$this->seminar->setAllowsMultipleRegistrations(true);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
+				'seminar' => $this->seminar->getUid(),
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function testCanRegisterIfLoggedInForLoggedInButBlockedUserReturnsFalse() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
+				'seminar' => $this->seminar->getUid(),
+			)
+		);
+
+		$this->cachedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+					'attendees_max' => 10,
+					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				)
+			),
+			array()
+		);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterIfLoggedIn($this->cachedSeminar)
+		);
+	}
+
+	public function testCanRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarReturnsFalse() {
+		$this->createBookedOutSeminar();
+
+		$this->assertFalse(
+			$this->fixture->canRegisterIfLoggedIn($this->fullyBookedSeminar)
+		);
+	}
+
+	public function testCanRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse() {
+		$this->seminar->setCanceled(true);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function testCanRegisterIfLoggedInForLoggedOutUserAndSeminarWithoutRegistrationReturnsFalse() {
+		$this->seminar->setAttendancesMax(0);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
 }
 ?>

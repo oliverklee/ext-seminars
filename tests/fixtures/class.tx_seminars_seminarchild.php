@@ -411,6 +411,27 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setNumberOfTimeSlots($numberOfTimeSlots) {
 		$this->setRecordPropertyInteger('timeslots', $numberOfTimeSlots);
 	}
+
+	/**
+	 * Sets whether multiple registrations are allowed.
+	 *
+	 * @param boolean whether multiple registrations should be allowed
+	 */
+	public function setAllowsMultipleRegistrations($allowMultipleRegistrations) {
+		$this->setRecordPropertyBoolean(
+			'allows_multiple_registrations',
+			$allowMultipleRegistrations
+		);
+	}
+
+	/**
+	 * Sets whether this event is canceled.
+	 *
+	 * @param boolean whether the event has been canceled
+	 */
+	public function setCanceled($isCanceled) {
+		$this->setRecordPropertyBoolean('cancelled', $isCanceled);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {
