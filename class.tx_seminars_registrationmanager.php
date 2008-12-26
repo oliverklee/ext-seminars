@@ -432,14 +432,6 @@ class tx_seminars_registrationmanager extends tx_seminars_dbplugin {
 		tx_seminars_seminar $seminar, array $registrationData,
 		tslib_pibase $plugin
 	) {
-		// Add the total price to the array that contains all neccessary
-		// informations before creating the registration object.
-		if (isset($registrationData['seats']) && ($registrationData['seats'] > 0)) {
-			$seats = $registrationData['seats'];
-		} else {
-			$seats = 1;
-		}
-
 		$registrationClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_registration'
 		);
