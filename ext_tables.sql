@@ -1,16 +1,4 @@
 #
-# Table structure for table 'fe_users'
-#
-CREATE TABLE fe_users (
-	tx_seminars_phone_mobile tinytext,
-	tx_seminars_matriculation_number int(11) unsigned DEFAULT '0' NOT NULL,
-	tx_seminars_planned_degree tinytext,
-	tx_seminars_semester tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	tx_seminars_subject tinytext
-);
-
-
-#
 # Table structure for table 'tx_partner_main'
 #
 CREATE TABLE tx_partner_main (

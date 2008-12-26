@@ -34,7 +34,7 @@ plugin.tx_seminars {
 	showSeminarFieldsInNotificationMail = title,uid,event_type,date,place,price_regular,price_regular_early,price_special,price_special_early,attendees,vacancies,enough_attendees,is_full
 
 	# comma-separated list of field names from fe_users that should be mentioned in the notification e-mail to the organizers  (in the "feuserdata" section)
-	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone,tx_seminars_phone_mobile
+	showFeUserFieldsInNotificationMail = username,name,email,address,zip,city,telephone
 
 	# comma-separated list of field names from attendances that should be mentioned in the notification e-mail to the organizers  (in the "attendancedata" section)
 	showAttendanceFieldsInNotificationMail = uid,price,seats,total_price,method_of_payment,gender,name,address,zip,city,country,telephone,email,interests,expectations,background_knowledge,known_from,notes
@@ -467,24 +467,6 @@ tx_seminars_pi2 {
 
 		# pro forma salutation mode for the FE; has no effect whatsoever
 		salutation = formal
-	}
-}
-
-
-plugin.tx_srfeuserregister_pi1 {
-	create.evalValues {
-		tx_seminars_phone_mobile = atMost[25]
-		tx_seminars_matriculation_number = atMost[10]
-		tx_seminars_planned_degree = atMost[25]
-		tx_seminars_semester = atMost[3]
-		tx_seminars_subject = atMost[50]
-	}
-	edit.evalValues {
-		tx_seminars_phone_mobile = atMost[25]
-		tx_seminars_matriculation_number = atMost[10]
-		tx_seminars_planned_degree = atMost[25]
-		tx_seminars_semester = atMost[3]
-		tx_seminars_subject = atMost[50]
 	}
 }
 

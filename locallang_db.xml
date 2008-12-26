@@ -10,11 +10,6 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Study subject:</label>
 			<label index="tx_seminars_test">Test records</label>
 			<label index="tx_seminars_test.title">Title:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
@@ -195,11 +190,6 @@
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminare</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Handynummer:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matrikelnummer:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Angestrebter Abschluss:</label>
-			<label index="fe_users.tx_seminars_semester">Semesterzahl:</label>
-			<label index="fe_users.tx_seminars_subject">Studienfach:</label>
 			<label index="tx_seminars_test">Test-Datensätze</label>
 			<label index="tx_seminars_test.title">Titel:</label>
 			<label index="tx_seminars_seminars">Seminare</label>
@@ -380,11 +370,6 @@
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobiel nummer</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Toelatings nummer</label>
-			<label index="fe_users.tx_seminars_planned_degree">Geplande graad</label>
-			<label index="fe_users.tx_seminars_semester">Semester</label>
-			<label index="fe_users.tx_seminars_subject">Studie onderwerp</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">Algemeen</label>
 			<label index="tx_seminars_seminars.uid">Evenement nummer</label>
@@ -540,11 +525,6 @@
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Arrangementer</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobilnr.:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matrikulations nr.:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planlagt grad:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Studieretning</label>
 			<label index="tx_seminars_test">Test data</label>
 			<label index="tx_seminars_test.title">Titel:</label>
 			<label index="tx_seminars_seminars">Arrangementer</label>
@@ -700,11 +680,6 @@
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Семинары</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Мобильный телефон:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Планируемая степень:</label>
-			<label index="fe_users.tx_seminars_semester">Семестр:</label>
-			<label index="fe_users.tx_seminars_subject">Тема обучения:</label>
 			<label index="tx_seminars_test">Тест блок</label>
 			<label index="tx_seminars_test.title">Название:</label>
 			<label index="tx_seminars_seminars">Семинары</label>
@@ -858,11 +833,6 @@
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminari</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Cellulare:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Numero matricola:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Livello previsto:</label>
-			<label index="fe_users.tx_seminars_semester">Semestre:</label>
-			<label index="fe_users.tx_seminars_subject">Materia di studio:</label>
 			<label index="tx_seminars_test">Record di test</label>
 			<label index="tx_seminars_test.title">Titolo:</label>
 			<label index="tx_seminars_seminars">Seminari</label>
@@ -1018,11 +988,6 @@
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Séminaires</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Numéro de téléphone portable:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Numéro d'immatriculation:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Degré prévu:</label>
-			<label index="fe_users.tx_seminars_semester">Semestre:</label>
-			<label index="fe_users.tx_seminars_subject">Sujet d'étude:</label>
 			<label index="tx_seminars_test">Enregistrements de test</label>
 			<label index="tx_seminars_test.title">Titre:</label>
 			<label index="tx_seminars_seminars">Séminaires</label>
@@ -1180,11 +1145,6 @@
 	<orig_hash type="array">
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
-			<label index="fe_users.tx_seminars_phone_mobile" type="integer">267920551</label>
-			<label index="fe_users.tx_seminars_matriculation_number" type="integer">72173130</label>
-			<label index="fe_users.tx_seminars_planned_degree" type="integer">19946302</label>
-			<label index="fe_users.tx_seminars_semester" type="integer">157856746</label>
-			<label index="fe_users.tx_seminars_subject" type="integer">159112742</label>
 			<label index="tx_seminars_test" type="integer">56221404</label>
 			<label index="tx_seminars_test.title" type="integer">85903807</label>
 			<label index="tx_seminars_seminars" type="integer">146176001</label>
@@ -1365,11 +1325,6 @@
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
-			<label index="fe_users.tx_seminars_phone_mobile" type="integer">267920551</label>
-			<label index="fe_users.tx_seminars_matriculation_number" type="integer">72173130</label>
-			<label index="fe_users.tx_seminars_planned_degree" type="integer">19946302</label>
-			<label index="fe_users.tx_seminars_semester" type="integer">157856746</label>
-			<label index="fe_users.tx_seminars_subject" type="integer">159112742</label>
 			<label index="tx_seminars_seminars" type="integer">146176001</label>
 			<label index="tx_seminars_seminars.title" type="integer">85903807</label>
 			<label index="tx_seminars_seminars.subtitle" type="integer">252742192</label>
@@ -1525,11 +1480,6 @@
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
-			<label index="fe_users.tx_seminars_phone_mobile" type="integer">267920551</label>
-			<label index="fe_users.tx_seminars_matriculation_number" type="integer">72173130</label>
-			<label index="fe_users.tx_seminars_planned_degree" type="integer">19946302</label>
-			<label index="fe_users.tx_seminars_semester" type="integer">157856746</label>
-			<label index="fe_users.tx_seminars_subject" type="integer">159112742</label>
 			<label index="tx_seminars_seminars" type="integer">146176001</label>
 			<label index="tx_seminars_seminars.uid" type="integer">205487650</label>
 			<label index="tx_seminars_seminars.title" type="integer">85903807</label>
@@ -1685,11 +1635,6 @@
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
-			<label index="fe_users.tx_seminars_phone_mobile" type="integer">267920551</label>
-			<label index="fe_users.tx_seminars_matriculation_number" type="integer">72173130</label>
-			<label index="fe_users.tx_seminars_planned_degree" type="integer">19946302</label>
-			<label index="fe_users.tx_seminars_semester" type="integer">157856746</label>
-			<label index="fe_users.tx_seminars_subject" type="integer">159112742</label>
 			<label index="tx_seminars_seminars" type="integer">146176001</label>
 			<label index="tx_seminars_seminars.divLabelGeneral" type="integer">14366585</label>
 			<label index="tx_seminars_seminars.uid" type="integer">205487650</label>
@@ -1843,11 +1788,6 @@
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
-			<label index="fe_users.tx_seminars_phone_mobile" type="integer">267920551</label>
-			<label index="fe_users.tx_seminars_matriculation_number" type="integer">72173130</label>
-			<label index="fe_users.tx_seminars_planned_degree" type="integer">19946302</label>
-			<label index="fe_users.tx_seminars_semester" type="integer">157856746</label>
-			<label index="fe_users.tx_seminars_subject" type="integer">159112742</label>
 			<label index="tx_seminars_seminars" type="integer">146176001</label>
 			<label index="tx_seminars_seminars.divLabelGeneral" type="integer">14366585</label>
 			<label index="tx_seminars_seminars.uid" type="integer">205487650</label>
@@ -2003,11 +1943,6 @@
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
-			<label index="fe_users.tx_seminars_phone_mobile" type="integer">267920551</label>
-			<label index="fe_users.tx_seminars_matriculation_number" type="integer">72173130</label>
-			<label index="fe_users.tx_seminars_planned_degree" type="integer">19946302</label>
-			<label index="fe_users.tx_seminars_semester" type="integer">157856746</label>
-			<label index="fe_users.tx_seminars_subject" type="integer">159112742</label>
 			<label index="tx_seminars_seminars" type="integer">146176001</label>
 			<label index="tx_seminars_seminars.divLabelGeneral" type="integer">14366585</label>
 			<label index="tx_seminars_seminars.uid" type="integer">205487650</label>
@@ -2165,11 +2100,6 @@
 	<orig_text type="array">
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Study subject:</label>
 			<label index="tx_seminars_test">Test records</label>
 			<label index="tx_seminars_test.title">Title:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
@@ -2351,11 +2281,6 @@
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Study subject:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.uid">Event number:</label>
 			<label index="tx_seminars_seminars.title">Title:</label>
@@ -2511,11 +2436,6 @@
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Study subject:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">General</label>
 			<label index="tx_seminars_seminars.uid">Event number:</label>
@@ -2669,11 +2589,6 @@
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Study subject:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">General</label>
 			<label index="tx_seminars_seminars.uid">Event number:</label>
@@ -2829,11 +2744,6 @@
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Study subject:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">General</label>
 			<label index="tx_seminars_seminars.uid">Event number:</label>
@@ -2989,11 +2899,6 @@
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
-			<label index="fe_users.tx_seminars_phone_mobile">Mobile phone number:</label>
-			<label index="fe_users.tx_seminars_matriculation_number">Matriculation number:</label>
-			<label index="fe_users.tx_seminars_planned_degree">Planned degree:</label>
-			<label index="fe_users.tx_seminars_semester">Semester:</label>
-			<label index="fe_users.tx_seminars_subject">Study subject:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
 			<label index="tx_seminars_seminars.divLabelGeneral">General</label>
 			<label index="tx_seminars_seminars.uid">Event number:</label>

@@ -74,7 +74,6 @@
 			<label index="label_waiting_list">waiting list</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
-			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 			<label index="message_notLoggedIn_formal">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
@@ -210,7 +209,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_waiting_list">Venteliste</label>
 			<label index="label_yes">Ja</label>
 			<label index="label_no">Nej</label>
-			<label index="label_tx_seminars_phone_mobile">Mobilnr.</label>
 			<label index="message_notLoggedIn_formal">Venligst log in først.</label>
 			<label index="message_notLoggedIn_informal">Venligst log in først.</label>
 			<label index="message_alreadyRegistered_formal">De er allerede tilmeldt dette arrangement.</label>
@@ -340,7 +338,6 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="label_waiting_list">Warteliste</label>
 			<label index="label_yes">ja</label>
 			<label index="label_no">nein</label>
-			<label index="label_tx_seminars_phone_mobile">Mobiltelefonnummer</label>
 			<label index="message_notLoggedIn_formal">Bitte loggen Sie sich zuerst ein.</label>
 			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein.</label>
 			<label index="message_alreadyRegistered_formal">Sie sind für diese Veranstaltung bereits angemeldet.</label>
@@ -511,7 +508,6 @@ iemand heeft zich zojuist voor een evenement geregistreerd:</label>
 			<label index="label_notes">Notities</label>
 			<label index="label_regular">standaar</label>
 			<label index="label_waiting_list">wachtlijst</label>
-			<label index="label_tx_seminars_phone_mobile">Mobiel nummer</label>
 			<label index="email_confirmationOnUnregistrationSubject">Bevestiging van annuleren registratie</label>
 			<label index="email_confirmationOnUnregistrationHello_formal">Hallo %s,
 
@@ -611,7 +607,6 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_waiting_list">список очередников</label>
 			<label index="label_yes">да</label>
 			<label index="label_no">нет</label>
-			<label index="label_tx_seminars_phone_mobile">Номер мобильного телефона</label>
 			<label index="message_notLoggedIn_formal">Пожалуйста, войдите в систему.</label>
 			<label index="message_notLoggedIn_informal">Пожалуйста, войдите в систему.</label>
 			<label index="message_alreadyRegistered_formal">Вы уже зарегистрированы на это мероприятие</label>
@@ -746,7 +741,6 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_waiting_list">In lista d'attesa</label>
 			<label index="label_yes">si</label>
 			<label index="label_no">no</label>
-			<label index="label_tx_seminars_phone_mobile">Cellulare</label>
 			<label index="message_notLoggedIn_formal">E' pregato di fare il login.</label>
 			<label index="message_notLoggedIn_informal">Sei pregato di fare il login.</label>
 			<label index="message_alreadyRegistered_formal">Lei è già registrato per questo evento.</label>
@@ -881,7 +875,6 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="label_waiting_list">liste d'attente</label>
 			<label index="label_yes">Oui</label>
 			<label index="label_no">Non</label>
-			<label index="label_tx_seminars_phone_mobile">Numéro de téléphone portable</label>
 			<label index="message_notLoggedIn_formal">Veuillez vous identifier d'abord.</label>
 			<label index="message_notLoggedIn_informal">Merci de t'identifier d'abord.</label>
 			<label index="message_alreadyRegistered_formal">Vous êtes déjà enregistré à cet événement.</label>
@@ -1047,7 +1040,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_notes" type="integer">256667525</label>
 			<label index="label_regular" type="integer">183729416</label>
 			<label index="label_waiting_list" type="integer">128272059</label>
-			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
 			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">197103273</label>
 			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">197103273</label>
@@ -1176,7 +1168,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_background_knowledge" type="integer">123294752</label>
 			<label index="label_known_from" type="integer">129140510</label>
 			<label index="label_notes" type="integer">256667525</label>
-			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 			<label index="message_fullyBooked" type="integer">65406827</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1274,7 +1265,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_notes" type="integer">256667525</label>
 			<label index="label_regular" type="integer">183729416</label>
 			<label index="label_waiting_list" type="integer">128272059</label>
-			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
 			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">197103273</label>
 			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">197103273</label>
@@ -1376,7 +1366,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_background_knowledge" type="integer">123294752</label>
 			<label index="label_notes" type="integer">256667525</label>
 			<label index="label_regular" type="integer">183729416</label>
-			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
 			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">197103273</label>
 			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">197103273</label>
@@ -1460,7 +1449,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_status.I.4" type="integer">219192007</label>
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
-			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
 			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
@@ -1575,7 +1563,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_status.I.4" type="integer">219192007</label>
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
-			<label index="label_tx_seminars_phone_mobile" type="integer">108060785</label>
 			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
 			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
@@ -1761,7 +1748,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_background_knowledge">Background knowledge</label>
 			<label index="label_known_from">Known from</label>
 			<label index="label_notes">Notes</label>
-			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="pi1_title">Seminar Manager</label>
@@ -1863,7 +1849,6 @@ someone just has registered for an event:</label>
 			<label index="label_notes">Notes</label>
 			<label index="label_regular">regular</label>
 			<label index="label_waiting_list">waiting list</label>
-			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
 			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
 
@@ -1989,7 +1974,6 @@ someone just has registered for an event:</label>
 			<label index="label_background_knowledge">Background knowledge</label>
 			<label index="label_notes">Notes</label>
 			<label index="label_regular">regular</label>
-			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
 			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
 
@@ -2133,7 +2117,6 @@ someone just has registered for an event:</label>
 			<label index="label_notes">Notes</label>
 			<label index="label_regular">regular</label>
 			<label index="label_waiting_list">waiting list</label>
-			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
 			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
 
@@ -2226,7 +2209,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_status.I.4">Retired</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
-			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 			<label index="message_notLoggedIn_formal">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
@@ -2365,7 +2347,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_status.I.4">Retired</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
-			<label index="label_tx_seminars_phone_mobile">Mobile phone number</label>
 			<label index="message_notLoggedIn_formal">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
