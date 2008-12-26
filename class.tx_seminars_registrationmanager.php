@@ -188,10 +188,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return '';
 		}
 
-		$registrationDeadline = $event->getRecordPropertyInteger(
-			'deadline_registration'
-		);
-
 		if ($this->canRegisterIfLoggedIn($event)) {
 			$result = $this->getLinkToRegistrationOrLoginPage(
 				$plugin, $event
