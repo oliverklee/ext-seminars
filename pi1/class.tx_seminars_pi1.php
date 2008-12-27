@@ -1987,10 +1987,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				explode(':', $this->piVars['sort']);
 		}
 
-		$this->internal['orderByList'] = 'category,title,uid,event_type,' .
-			'accreditation_number,credit_points,begin_date,price_regular,' .
-			'price_special,organizers,target_groups';
-
 		if (isset($this->internal['orderBy'])
 			&& isset($this->orderByList[$this->internal['orderBy']])
 		) {
