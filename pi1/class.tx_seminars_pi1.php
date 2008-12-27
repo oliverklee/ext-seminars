@@ -946,10 +946,6 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 			2
 		);
 
-		$this->internal['orderByList'] = 'category,title,uid,event_type,'
-			.'accreditation_number,credit_points,begin_date,price_regular,'
-			.'price_special,organizers,target_groups';
-
 		$pidList = $this->pi_getPidList(
 			$this->getConfValueString('pidList'),
 			$this->getConfValueInteger('recursive')
@@ -1429,9 +1425,9 @@ class tx_seminars_pi1 extends tx_seminars_templatehelper {
 	/**
 	 * Fills in the matching markers for the prices and hides the unused
 	 * subparts.
- 	 *
+		*
 	 * @param	string		the subpart wrapper prefix, may be empty
- 	 */
+		*/
 	protected function setPriceMarkers($wrapper) {
 		// sets the regular price (with or without early bird rebate)
 		if ($this->seminar->hasEarlyBirdPrice()
