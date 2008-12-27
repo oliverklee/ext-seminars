@@ -48,7 +48,7 @@ $BE_USER->modAccess($MCONF, 1);
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_module1 extends t3lib_SCbase {
-	var $pageinfo;
+	private $pageinfo;
 
 	/**
 	 * @return [type] ...
@@ -197,18 +197,14 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 	/**
 	 * Prints out the module HTML.
-	 *
-	 * @return [type] ...
 	 */
-	function printContent() {
+	public function printContent() {
 		$this->content .= $this->doc->endPage();
 		echo $this->content;
 	}
 
 	/**
 	 * Generates the module content.
-	 *
-	 * @return [type] ...
 	 */
 	private function moduleContent() {
 		global $LANG;
