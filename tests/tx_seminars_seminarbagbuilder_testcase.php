@@ -5191,7 +5191,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$eventUid,
 			$requiredEventUid
 		);
@@ -5216,12 +5216,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$eventUid,
 			$requiredEventUid1
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$eventUid,
 			$requiredEventUid2
 		);
@@ -5247,12 +5247,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$eventUid,
 			$requiredEventUid
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependingEventUid,
 			$eventUid
 		);
@@ -5287,7 +5287,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependingEventUid,
 			$eventUid
 		);
@@ -5312,12 +5312,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependingEventUid1,
 			$eventUid
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependingEventUid2,
 			$eventUid
 		);
@@ -5343,12 +5343,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependingEventUid,
 			$eventUid
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_REQUIREMENTS_MM,
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$eventUid,
 			$requiredEventUid
 		);
