@@ -855,7 +855,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$mmTable = SEMINARS_TABLE_SEMINARS_PARTNERS_MM;
 				break;
 			case 'tutors':
-				$mmTable = SEMINARS_TABLE_TUTORS_MM;
+				$mmTable = SEMINARS_TABLE_SEMINARS_TUTORS_MM;
 				break;
 			case 'leaders':
 				$mmTable = SEMINARS_TABLE_LEADERS_MM;
