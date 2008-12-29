@@ -858,7 +858,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$mmTable = SEMINARS_TABLE_SEMINARS_TUTORS_MM;
 				break;
 			case 'leaders':
-				$mmTable = SEMINARS_TABLE_LEADERS_MM;
+				$mmTable = SEMINARS_TABLE_SEMINARS_LEADERS_MM;
 				break;
 			case 'speakers':
 				// The fallthrough is intended.
