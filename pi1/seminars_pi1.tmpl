@@ -1,22 +1,22 @@
 <!-- ###MESSAGE_MY_EVENTS### --><p>
-  ###LABEL_MYEVENTS###
+	###LABEL_MYEVENTS###
 </p>
 <!-- ###MESSAGE_MY_EVENTS### -->
 
 <!-- ###MESSAGE_MY_VIP_EVENTS### --><p>
-  ###LABEL_MYVIPEVENTS###
+	###LABEL_MYVIPEVENTS###
 </p>
 <!-- ###MESSAGE_MY_VIP_EVENTS### -->
 
 <!-- ###MESSAGE_MY_ENTERED_EVENTS### --><p>
-  ###LABEL_MYENTEREDEVENTS###
+	###LABEL_MYENTEREDEVENTS###
 </p>
 <!-- ###MESSAGE_MY_ENTERED_EVENTS### -->
 
 <!-- ###LIST_HEADER### --><div###CLASS_EVENTLIST###>
-  <table>
-    <thead>
-      <tr###CLASS_HEADERROW###>
+	<table>
+		<thead>
+			<tr###CLASS_HEADERROW###>
 <!-- ###LISTHEADER_WRAPPER_CATEGORY### -->      <th scope="col"###CLASS_HEADERCATEGORY###>###HEADER_CATEGORY###</th>
 <!-- ###LISTHEADER_WRAPPER_CATEGORY### -->
 <!-- ###LISTHEADER_WRAPPER_TITLE### -->      <th scope="col"###CLASS_HEADERTITLE###>###HEADER_TITLE###</th>
@@ -49,12 +49,12 @@
 <!-- ###LISTHEADER_WRAPPER_REGISTRATION### --><!-- ###LISTHEADER_WRAPPER_LIST_REGISTRATIONS### -->      <th scope="col"###CLASS_HEADERLIST_REGISTRATIONS###>###HEADER_LIST_REGISTRATIONS###</th>
 <!-- ###LISTHEADER_WRAPPER_LIST_REGISTRATIONS### --><!-- ###LISTHEADER_WRAPPER_EDIT### -->      <th scope="col"###CLASS_HEADEREDIT###>###HEADER_EDIT###</th>
 <!-- ###LISTHEADER_WRAPPER_EDIT### -->    </tr>
-    </thead>
-    <tbody>
+		</thead>
+		<tbody>
 <!-- ###LIST_HEADER### -->
 
 <!-- ###LIST_FOOTER### -->    </tbody>
-  </table>
+	</table>
 </div>
 <!-- ###LIST_FOOTER### -->
 
@@ -139,14 +139,15 @@
 						'tx_seminars_pi1-' + suffix
 					);
 					if (element) {
-					    for (var j = 0; j < element.options.length; j++) {
+						for (var j = 0; j < element.options.length; j++) {
 							element.options[j].selected = false;
 						}
 					}
 				}
 				return true;"
 			/>
-        </p>
+		</p>
+		<input type="hidden" name="tx_seminars_pi1[pointer]" value="0" />
 	</form>
 </div>
 <!-- ###SELECTOR_WIDGET### -->
@@ -530,8 +531,8 @@
 		</tr>
 
 		<tr>
-	    	<td>{btnsubmit}</td>
-	    </tr>
+			<td>{btnsubmit}</td>
+		</tr>
 	</tbody>
 </table>
 <!-- ###seminars_FORM### -->
@@ -565,30 +566,30 @@
 
 <!-- ###VIEW_CATEGORIES### -->
 <div###CLASS_CATEGORYLIST###>
-  <p>###LABEL_WE_OFFER_EVENTS_IN_CATEGORIES###</p>
-  <table summary="">
-    <thead>
-      <tr>
-    	  <th scope="col">###LABEL_CATEGORY###</th>
-      </tr>
-    </thead>
-    <tbody>
+	<p>###LABEL_WE_OFFER_EVENTS_IN_CATEGORIES###</p>
+	<table summary="">
+		<thead>
+			<tr>
+				<th scope="col">###LABEL_CATEGORY###</th>
+			</tr>
+		</thead>
+		<tbody>
 ###ALL_CATEGORY_ITEMS###
-    </tbody>
-  </table>
+		</tbody>
+	</table>
 </div>
 <!-- ###VIEW_CATEGORIES### -->
 
 <!-- ###SINGLE_CATEGORY_ITEM### -->
-      <tr>
-        <td###CLASS_CATEGORY_ITEM###>
-          ###CATEGORY_TITLE###
-        </td>
-      </tr>
+			<tr>
+				<td###CLASS_CATEGORY_ITEM###>
+					###CATEGORY_TITLE###
+				</td>
+			</tr>
 <!-- ###SINGLE_CATEGORY_ITEM### -->
 
 <!-- ###VIEW_NO_CATEGORIES### -->
 <div###CLASS_CATEGORYLIST###>
-  <p>###LABEL_NO_CATEGORIES###</p>
+	<p>###LABEL_NO_CATEGORIES###</p>
 </div>
 <!-- ###VIEW_NO_CATEGORIES### -->
