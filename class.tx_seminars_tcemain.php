@@ -39,7 +39,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
-	var $tceMainFieldArrays = array();
+	private $tceMainFieldArrays = array();
 
 	/**
 	 * @var string the extension key
@@ -48,19 +48,15 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 
 	/**
 	 * The constructor.
-	 *
-	 * @access public
 	 */
-	function __construct() {
+	public function __construct() {
 		parent::init();
 	}
 
 	/**
 	 * Handles data after everything had been written to the database.
-	 *
-	 * @access public
 	 */
-	function processDatamap_afterAllOperations() {
+	public function processDatamap_afterAllOperations() {
 		$this->processTimeSlots();
 		$this->processEvents();
 	}
@@ -80,11 +76,9 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 * @param string the affected table name
 	 * @param integer the UID of the affected record (may be 0)
 	 * @param array an array of all fields that got changed (as reference)
-	 * @param object reference to tcemain calling object
-	 *
-	 * @access public
+	 * @param t3lib_TCEmain reference to calling object
 	 */
-	function processDatamap_afterDatabaseOperations(
+	public function processDatamap_afterDatabaseOperations(
 		$status, $table, $uid, array &$fieldArray, t3lib_TCEmain $pObj
 	) {
 		// Translates new UIDs.
@@ -101,10 +95,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 
 	/**
 	 * Processes all time slots.
-	 *
-	 * @access protected
 	 */
-	function processTimeSlots() {
+	private function processTimeSlots() {
 		$table = SEMINARS_TABLE_TIME_SLOTS;
 
 		if (
@@ -119,10 +111,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 
 	/**
 	 * Processes all events.
-	 *
-	 * @access protected
 	 */
-	function processEvents() {
+	private function processEvents() {
 		$table = SEMINARS_TABLE_SEMINARS;
 
 		if (
@@ -140,10 +130,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 *
 	 * @param integer the UID of the affected record (may be 0)
 	 * @param array an array of all fields that got changed
-	 *
-	 * @access protected
 	 */
-	function processSingleTimeSlot($uid, array $fieldArray) {
+	private function processSingleTimeSlot($uid, array $fieldArray) {
 		// Initializes a timeslot object to have all
 		// functions available.
 		$timeslotClassname = t3lib_div::makeInstanceClassName(
@@ -165,10 +153,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 *
 	 * @param integer the UID of the affected record (may be 0)
 	 * @param array an array of all fields that got changed
-	 *
-	 * @access protected
 	 */
-	function processSingleEvent($uid, array $fieldArray) {
+	private function processSingleEvent($uid, array $fieldArray) {
 		// Initializes a seminar object to have all functions
 		// available.
 		$seminarClassname = t3lib_div::makeInstanceClassName(

@@ -46,10 +46,8 @@ class ux_t3lib_TCEmain extends t3lib_TCEmain {
 	/**
 	 * Processing the data-array
 	 * Call this function to process the data-array set by start()
-	 *
-	 * @return void
 	 */
-	function process_datamap() {
+	public function process_datamap() {
 		global $TCA, $TYPO3_CONF_VARS;
 
 			// Editing frozen:
