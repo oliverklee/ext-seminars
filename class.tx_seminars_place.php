@@ -36,7 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_place extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_SITES;
+	protected $tableName = SEMINARS_TABLE_SITES;
 
 	/**
 	 * Returns the name of the city of this place record.
@@ -47,10 +47,8 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the name of the city, will be empty if the place
 	 *                record has no city set
-	 *
-	 * @access public
 	 */
-	function getCity() {
+	public function getCity() {
 		return $this->getRecordPropertyString('city');
 	}
 
@@ -64,10 +62,8 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the ISO 3166-1 alpha-2 code of the country or an
 	 *                empty string if this place has no country set
-	 *
-	 * @access public
 	 */
-	function getCountryIsoCode() {
+	public function getCountryIsoCode() {
 		return $this->getRecordPropertyString('country');
 	}
 }

@@ -36,7 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_timeslot extends tx_seminars_timespan {
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_TIME_SLOTS;
+	protected $tableName = SEMINARS_TABLE_TIME_SLOTS;
 
 	/**
 	 * Creates and returns a speakerbag object.
@@ -59,10 +59,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Gets the speaker UIDs.
 	 *
 	 * @return array the speaker UIDs
-	 *
-	 * @access public
 	 */
-	function getSpeakersUids() {
+	public function getSpeakersUids() {
 		$result = array();
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -86,10 +84,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 *
 	 * @return string the comma-separated plain text list of speakers (or ''
 	 *                if there was an error)
-	 *
-	 * @access public
 	 */
-	function getSpeakersShortCommaSeparated() {
+	public function getSpeakersShortCommaSeparated() {
 		$result = array();
 		$speakerBag = $this->getSpeakerBag();
 
@@ -139,10 +135,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Gets the place.
 	 *
 	 * @return integer the place UID
-	 *
-	 * @access public
 	 */
-	function getPlace() {
+	public function getPlace() {
 		return $this->getRecordPropertyInteger('place');
 	}
 
@@ -177,10 +171,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Checks whether the timeslot has a entry date set.
 	 *
 	 * @return boolean true if we have a entry date, false otherwise
-	 *
-	 * @access public
 	 */
-	function hasEntryDate() {
+	public function hasEntryDate() {
 		return $this->hasRecordPropertyInteger('entry_date');
 	}
 
@@ -190,10 +182,8 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 *
 	 * @return array associative array containing data to update the
 	 *               database entry of the timeslot, might be empty
-	 *
-	 * @access public
 	 */
-	function getUpdateArray() {
+	public function getUpdateArray() {
 		$updateArray = array();
 
 		$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] ?

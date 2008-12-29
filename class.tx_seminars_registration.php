@@ -245,10 +245,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * If no value is saved in the record, 1 will be returned.
 	 *
 	 * @return integer the number of seats
-	 *
-	 * @access public
 	 */
-	function getSeats() {
+	public function getSeats() {
 		if ($this->hasRecordPropertyInteger('seats')) {
 			$seats = $this->getRecordPropertyInteger('seats');
 		} else {
@@ -263,10 +261,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * The title is constructed like this:
 	 *   Name of Attendee / Title of Seminar seminardate
-	 *
-	 * @access private
 	 */
-	function createTitle() {
+	private function createTitle() {
 		$this->recordData['title'] = $this->getUserName()
 			.' / '.$this->seminar->getTitle()
 			.', '.$this->seminar->getDate('-');
@@ -467,10 +463,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @param object a tslib_pibase object for a live page
 	 *
 	 * @return string the values retrieved from $this->userData, may be empty
-	 *
-	 * @access public
 	 */
-	function getUserDataAsHtml($keys, tslib_pibase $plugin) {
+	public function getUserDataAsHtml($keys, tslib_pibase $plugin) {
 		$singleKeys = explode(',', $keys);
 		$singleValues = array();
 
@@ -500,10 +494,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the attendee's uid.
 	 *
 	 * @return integer the attendee's feuser uid
-	 *
-	 * @access public
 	 */
-	function getUser() {
+	public function getUser() {
 		return $this->getRecordPropertyInteger('user');
 	}
 
@@ -511,10 +503,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the attendee's (real) name
 	 *
 	 * @return string the attendee's name
-	 *
-	 * @access private
 	 */
-	function getUserName() {
+	public function getUserName() {
 		return $this->getUserData('name');
 	}
 
@@ -523,10 +513,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * "john.doe@example.com".
 	 *
 	 * @return string the attendee's e-mail address
-	 *
-	 * @access private
 	 */
-	function getUserEmail() {
+	private function getUserEmail() {
 		return $this->getUserData('email');
 	}
 
@@ -535,10 +523,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * '"John Doe" <john.doe@example.com>'.
 	 *
 	 * @return string the attendee's name and e-mail address
-	 *
-	 * @access private
 	 */
-	function getUserNameAndEmail() {
+	public function getUserNameAndEmail() {
 		return '"'.$this->getUserData('name').'" <'.$this->getUserData('email').'>';
 	}
 
@@ -546,10 +532,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the seminar's uid.
 	 *
 	 * @return integer the seminar's uid
-	 *
-	 * @access public
 	 */
-	function getSeminar() {
+	public function getSeminar() {
 		return $this->getRecordPropertyInteger('seminar');
 	}
 
@@ -557,10 +541,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the seminar to which this registration belongs.
 	 *
 	 * @return object the seminar to which this registration belongs
-	 *
-	 * @access public
 	 */
-	function getSeminarObject() {
+	public function getSeminarObject() {
 		return $this->seminar;
 	}
 
@@ -586,10 +568,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the date at which the user has paid for this attendance.
 	 *
 	 * @return integer the date at which the user has paid for this attendance
-	 *
-	 * @access public
 	 */
-	function getDatePaid() {
+	public function getDatePaid() {
 		trigger_error('Member function tx_seminars_registration->getDatePaid '
 			.'not implemented yet.'
 		);
@@ -600,10 +580,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return integer the UID of the method of payment (may be 0 if none
 	 *                 is given)
-	 *
-	 * @access public
 	 */
-	function getMethodOfPayment() {
+	public function getMethodOfPayment() {
 		trigger_error('Member function '
 			.'tx_seminars_registration->getMethodOfPayment not implemented yet.'
 		);
@@ -613,10 +591,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets whether the attendee has been at the seminar.
 	 *
 	 * @return boolean whether the attendee has attended the seminar
-	 *
-	 * @access public
 	 */
-	function getHasBeenThere() {
+	public function getHasBeenThere() {
 		trigger_error('Member function tx_seminars_registration->getHasBeenThere '
 			.'not implemented yet.'
 		);
@@ -627,10 +603,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string a description of the attendee's special interests
 	 *                (may be empty)
-	 *
-	 * @access public
 	 */
-	function getInterests() {
+	public function getInterests() {
 		return $this->getRecordPropertyString('interests');
 	}
 
@@ -639,10 +613,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string a description of the attendee's expectations for the
 	 *                event (may be empty)
-	 *
-	 * @access public
 	 */
-	function getExpectations() {
+	public function getExpectations() {
 		return $this->getRecordPropertyString('expectations');
 	}
 
@@ -651,10 +623,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string a description of the attendee's background knowledge
 	 *                (may be empty)
-	 *
-	 * @access public
 	 */
-	function getKnowledge() {
+	public function getKnowledge() {
 		return $this->getRecordPropertyString('background_knowledge');
 	}
 
@@ -663,10 +633,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string a description of where the attendee has heard about
 	 *                this event (may be empty)
-	 *
-	 * @access public
 	 */
-	function getKnownFrom() {
+	public function getKnownFrom() {
 		return $this->getRecordPropertyString('known_from');
 	}
 
@@ -675,10 +643,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * online registration.
 	 *
 	 * @return string additional notes on registration (may be empty)
-	 *
-	 * @access public
 	 */
-	function getNotes() {
+	public function getNotes() {
 		return $this->getRecordPropertyString('notes');
 	}
 
@@ -688,10 +654,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the saved price category name and its single price
 	 *                or an empty string if no price had been saved
-	 *
-	 * @access public
 	 */
-	function getPrice() {
+	public function getPrice() {
 		return $this->getRecordPropertyString('price');
 	}
 
@@ -703,10 +667,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the total price and the currency or an empty string
 	 *                if no total price could be calculated
-	 *
-	 * @access public
 	 */
-	function getTotalPrice($space = '&nbsp;') {
+	public function getTotalPrice($space = '&nbsp;') {
 		$result = '';
 		$totalPrice = $this->getRecordPropertyDecimal('total_price');
 		$currency = $this->getConfValueString('currency');
@@ -721,7 +683,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Sends an e-mail to the attendee with a message concerning his/her
 	 * registration or unregistration.
 	 *
-	 * @param object a tslib_pibase object for a live page
+	 * @param tslib_pibase a live page
 	 * @param string prefix for the locallang key of the localized hello
 	 *               and subject string, allowed values are:
 	 *               - confirmation
@@ -730,10 +692,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *               - confirmationOnQueueUpdate
 	 *               In the following the parameter is prefixed with
 	 *               "email_" and postfixed with "Hello" or "Subject".
-	 *
-	 * @access public
 	 */
-	function notifyAttendee(
+	public function notifyAttendee(
 		tslib_pibase $plugin, $helloSubjectPrefix = 'confirmation'
 	) {
 		if (!$this->getConfValueBoolean('send'.ucfirst($helloSubjectPrefix))) {
@@ -1061,10 +1021,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * This function will read the template file as it is set in the TypoScript
 	 * setup. If there is a template file set in the flexform of pi1, this will
 	 * be ignored!
-	 *
-	 * @access private
 	 */
-	function initializeTemplate() {
+	private function initializeTemplate() {
 		if (!$this->isTemplateInitialized) {
 			$this->getTemplateCode(true);
 			$this->setLabels();
@@ -1130,10 +1088,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @param string comma-separated list of key names
 	 *
 	 * @return string formatted output (may be empty)
-	 *
-	 * @access public
 	 */
-	function dumpAttendanceValues($keysList) {
+	public function dumpAttendanceValues($keysList) {
 		$keys = explode(',', $keysList);
 		$keysWithLabels = array();
 
@@ -1175,10 +1131,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the billing address, formatted as plain text.
 	 *
 	 * @return string the billing address
-	 *
-	 * @access protected
 	 */
-	function getBillingAddress() {
+	private function getBillingAddress() {
 		/**
 		 * the keys of the corresponding fields and whether to add a LF after
 		 * the entry (instead of just a space)
@@ -1220,10 +1174,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the localized gender as entered for the billing address
 	 *                (Mr. or Mrs.)
-	 *
-	 * @access public
 	 */
-	function getGender() {
+	public function getGender() {
 		return $this->translate('label_gender.I.'
 			.$this->getRecordPropertyInteger('gender'));
 	}
@@ -1232,10 +1184,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Checks whether there are any lodging options referenced by this record.
 	 *
 	 * @return boolean true if at least one lodging option is referenced by this record, false otherwise
-	 *
-	 * @access public
 	 */
-	function hasLodgings() {
+	public function hasLodgings() {
 		return $this->hasRecordPropertyInteger('lodgings');
 	}
 
@@ -1245,10 +1195,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the titles of the selected loding options separated by
 	 *                CRLF or an empty string if no lodging option is selected
-	 *
-	 * @access public
 	 */
-	function getLodgings() {
+	public function getLodgings() {
 		$result = '';
 
 		if ($this->hasLodgings()) {
@@ -1266,10 +1214,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return boolean true if at least one food option is referenced by this
 	 *                 record, false otherwise
-	 *
-	 * @access public
 	 */
-	function hasFoods() {
+	public function hasFoods() {
 		return $this->hasRecordPropertyInteger('foods');
 	}
 
@@ -1279,10 +1225,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the titles of the selected loding options separated by
 	 *                CRLF or an empty string if no food option is selected
-	 *
-	 * @access public
 	 */
-	function getFoods() {
+	public function getFoods() {
 		$result = '';
 
 		if ($this->hasFoods()) {
@@ -1300,10 +1244,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return boolean true if at least one option checkbox is referenced by
 	 *                 this record, false otherwise
-	 *
-	 * @access public
 	 */
-	function hasCheckboxes() {
+	public function hasCheckboxes() {
 		return $this->hasRecordPropertyInteger('checkboxes');
 	}
 
@@ -1313,10 +1255,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the titles of the selected option checkboxes separated by
 	 *                CRLF or an empty string if no option checkbox is selected
-	 *
-	 * @access public
 	 */
-	function getCheckboxes() {
+	public function getCheckboxes() {
 		$result = '';
 
 		if ($this->hasCheckboxes()) {
@@ -1340,10 +1280,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string the titles of the referenced records separated by CRLF,
 	 *                might be empty if no records are referenced
-	 *
-	 * @access private
 	 */
-	function getMmRecords($foreignTable, $mmTable) {
+	private function getMmRecords($foreignTable, $mmTable) {
 		$result = '';
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -1378,10 +1316,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * (otherwise the record will be created in the root page).
 	 *
 	 * @return boolean true if everything went OK, false otherwise
-	 *
-	 * @access public
 	 */
-	function commitToDb() {
+	public function commitToDb() {
 		$result = parent::commitToDb();
 
 		if ($result) {
@@ -1428,10 +1364,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @return string a localized version of either "waiting list" or
 	 *                "regular", will not be empty
-	 *
-	 * @access public
 	 */
-	function getStatus() {
+	public function getStatus() {
 		$languageKey = 'label_'
 			.($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
 		return $this->translate($languageKey);

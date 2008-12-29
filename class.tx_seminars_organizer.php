@@ -36,7 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_ORGANIZERS;
+	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
 
 	/**
 	 * Gets our homepage.

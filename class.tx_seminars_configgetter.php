@@ -35,9 +35,9 @@
  */
 class tx_seminars_configgetter extends tx_oelib_templatehelper {
 	/** Same as class name */
-	var $prefixId = 'tx_seminars_configgetter';
+	public $prefixId = 'tx_seminars_configgetter';
 	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'class.tx_seminars_configgetter.php';
+	public $scriptRelPath = 'class.tx_seminars_configgetter.php';
 
 	/**
 	 * @var string the extension key
@@ -46,10 +46,8 @@ class tx_seminars_configgetter extends tx_oelib_templatehelper {
 
 	/**
 	 * The constructor.
-	 *
-	 * @access public
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->init();
 	}
 }

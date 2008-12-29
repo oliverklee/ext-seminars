@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#768] Change: Use real visibility keywords (public/protected/private)
 - [#2215] Fix: Problems with Page Browser
 - [#2479] Fix: $this->internal['orderByList'] is set but never read in tx_seminars_pi1
 - [#2475] Fix: Unused variable $registrationDeadline in registrationManager::getRegistrationLink

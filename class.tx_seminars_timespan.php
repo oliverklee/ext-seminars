@@ -245,10 +245,8 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 *
 	 * @return integer our begin date and time as a UNIX timestamp or 0 if
 	 *                 we don't have a begin date
-	 *
-	 * @access protected
 	 */
-	function getBeginDateAsTimestamp() {
+	public function getBeginDateAsTimestamp() {
 		return $this->getRecordPropertyInteger('begin_date');
 	}
 
@@ -257,10 +255,8 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 *
 	 * @return integer our end date and time as a UNIX timestamp or 0 if
 	 *                 we don't have an end date
-	 *
-	 * @access protected
 	 */
-	function getEndDateAsTimestamp() {
+	public function getEndDateAsTimestamp() {
 		return $this->getRecordPropertyInteger('end_date');
 	}
 
@@ -271,10 +267,8 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	 *
 	 * @return integer our end date and time as a UNIX timestamp, 0 if
 	 *                 we don't have a begin date
-	 *
-	 * @access protected
 	 */
-	function getEndDateAsTimestampEvenIfOpenEnded() {
+	public function getEndDateAsTimestampEvenIfOpenEnded() {
 		$result = 0;
 
 		if ($this->hasBeginDate()) {

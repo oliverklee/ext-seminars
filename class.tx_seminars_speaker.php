@@ -45,7 +45,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	const GENDER_FEMALE = 2;
 
 	/** string with the name of the SQL table this class corresponds to */
-	var $tableName = SEMINARS_TABLE_SPEAKERS;
+	protected $tableName = SEMINARS_TABLE_SPEAKERS;
 
 	/**
 	 * Gets our organization.
