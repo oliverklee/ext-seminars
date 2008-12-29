@@ -2521,11 +2521,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_organizerbag'
 		);
 		$organizerBag = new $organizerBagClassName(
-			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM.'.uid_local='
-				.$this->getUid().' AND '
-				.SEMINARS_TABLE_ORGANIZING_PARTNERS_MM.'.uid_foreign='
-				.SEMINARS_TABLE_ORGANIZERS.'.uid',
-			SEMINARS_TABLE_ORGANIZING_PARTNERS_MM
+			SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM . '.uid_local=' .
+				$this->getUid() . ' AND ' .
+				SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM . '.uid_foreign=' .
+				SEMINARS_TABLE_ORGANIZERS . '.uid',
+			SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM
 		);
 
 		foreach ($organizerBag as $organizer) {
