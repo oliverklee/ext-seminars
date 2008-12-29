@@ -751,10 +751,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value sortListViewByCategory.
-	 *
-	 * @access private
 	 */
-	function checkSortListViewByCategory() {
+	private function checkSortListViewByCategory() {
 		$this->checkIfBoolean(
 			'sortListViewByCategory',
 			true,
@@ -1965,10 +1963,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * allowUnregistrationWithEmptyWaitingList.
-	 *
-	 * @access private
 	 */
-	function checkAllowUnregistrationWithEmptyWaitingList() {
+	private function checkAllowUnregistrationWithEmptyWaitingList() {
 		$this->checkIfBoolean(
 			'allowUnregistrationWithEmptyWaitingList',
 			false,
