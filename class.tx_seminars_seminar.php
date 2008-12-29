@@ -863,7 +863,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			case 'speakers':
 				// The fallthrough is intended.
 			default:
-				$mmTable = SEMINARS_TABLE_SPEAKERS_MM;
+				$mmTable = SEMINARS_TABLE_SEMINARS_SPEAKERS_MM;
 				break;
 		}
 

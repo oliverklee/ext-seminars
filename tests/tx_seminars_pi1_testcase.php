@@ -510,7 +510,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SPEAKERS_MM,
+			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
 			$this->seminarUid, $speakerUid
 		);
 		$this->testingFramework->changeRecord(
