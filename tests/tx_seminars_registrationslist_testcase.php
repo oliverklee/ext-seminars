@@ -25,7 +25,6 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_registrationslist.php');
 
 /**
  * Testcase for the registrations list class in the 'seminars' extension.
@@ -37,7 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_registr
  */
 class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_registrationslist
+	 * @var tx_seminars_mod2_registrationslist
 	 */
 	private $fixture;
 	/**
@@ -68,7 +67,7 @@ class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->backEndModule->doc->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_registrationslist($this->backEndModule);
+		$this->fixture = new tx_seminars_mod2_registrationslist($this->backEndModule);
 	}
 
 	public function tearDown() {
