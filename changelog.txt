@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2393] Feature: Add a field "requirements" to topics
 - [#1634] Change: Rename some table constants of m:n tables for consistency
 - [#393] Change: Use getListViewConfValue* in pi1
 - [#768] Change: Use real visibility keywords (public/protected/private)

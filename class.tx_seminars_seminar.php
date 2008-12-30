@@ -4641,6 +4641,34 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function hasDependencies() {
 		return $this->hasTopicInteger('dependencies');
 	}
+
+	/**
+	 * Returns the required events for the current event topic, ie. topics that
+	 * are prerequisites for this event.
+	 *
+	 * @return tx_seminars_seminarbag the required events, will be empty if this
+	 *                                event has no required events
+	 */
+	public function getRequirements() {
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder->limitToRequiredEventTopics($this->getTopicUid());
+
+		return $builder->build();
+	}
+
+	/**
+	 * Returns the depending events for the current event topic, ie. topics for
+	 * which this event is a prerequisite.
+	 *
+	 * @return tx_seminars_seminarbag the depending events, will be empty if
+	 *                                this event has no depending events
+	 */
+	public function getDependencies() {
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder->limitToDependingEventTopics($this->getTopicUid());
+
+		return $builder->build();
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {
