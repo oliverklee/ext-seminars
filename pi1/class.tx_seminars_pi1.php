@@ -718,13 +718,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker('organizers', $this->seminar->getOrganizers($this));
 			$this->setOrganizingPartnersMarker();
 
+			$this->setOwnerDataMarker();
+
+			$this->setAttachedFilesMarkers();
+
 			$this->setVacanciesMarker();
 
 			$this->setRegistrationDeadlineMarker();
 			$this->setRegistrationMarker();
 			$this->setListOfRegistrationMarker();
-
-			$this->setAttachedFilesMarkers();
 
 			$this->hideUnneededSubpartsForTopicRecords();
 
@@ -1268,6 +1270,49 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$this->setMarker(
 			'organizing_partners', $this->seminar->getOrganizingPartners($this)
+		);
+	}
+
+	/**
+	 * Fills in the matching marker for the owner data or hides the subpart if
+	 * the event has no owner or the owner data should not be displayed.
+	 */
+	private function setOwnerDataMarker() {
+		if (
+			!$this->getConfValueBoolean(
+				'showOwnerDataInSingleView', 's_singleView'
+			) || !$this->seminar->hasOwner()
+		) {
+			$this->hideSubparts('owner_data', 'field_wrapper');
+			return;
+		}
+
+		$owner = $this->seminar->getOwner();
+		$ownerData = array();
+		// getName always returns a non-empty string for valid records.
+		$ownerData[] = htmlspecialchars($owner->getName());
+		if ($owner->hasPhoneNumber()) {
+			$ownerData[] = htmlspecialchars($owner->getPhoneNumber());
+		}
+		if ($owner->hasEMailAddress()) {
+			$ownerData[] = htmlspecialchars($owner->getEMailAddress());
+		}
+		$this->setSubpart(
+			'OWNER_DATA',
+			implode($this->getSubpart('OWNER_DATA_SEPARATOR'), $ownerData)
+		);
+
+		if ($owner->hasImage()) {
+			$imageTag = $this->createRestrictedImage(
+				'uploads/tx_srfeuserregister/' . $owner->getImage(), '',
+				$this->getConfValueInteger('ownerPictureMaxWidth'), 0, 0, '',
+				$this->prefixId . '_owner_image'
+			);
+		} else {
+			$imageTag = '';
+		}
+		$this->setMarker(
+			'owner_image', $imageTag
 		);
 	}
 

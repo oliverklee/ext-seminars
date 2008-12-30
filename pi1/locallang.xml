@@ -41,7 +41,8 @@
 			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Allow the CSV export of registrations in the &quot;my managed events&quot; view:</label>
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Event managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees?</label>
+			<label index="seminars.pi_flexform.showOwnerDataInSingleView">Show the owner data on the single view page:</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees:</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
@@ -246,6 +247,7 @@
 			<label index="label_delete">Mark to delete</label>
 			<label index="label_really_delete_formal">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_really_delete_informal">Do you really want to mark this attachment for deletion?</label>
+			<label index="label_owner">Event manager</label>
 			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
@@ -556,7 +558,8 @@
 			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Erlaube den CSV-Export von Anmeldungen in der &quot;meine verwalteten Veranstaltungen&quot;-Ansicht:</label>
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Verwalter können ihre Veranstaltungen bearbeiten:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Einzelansicht</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Zeige angehängte Dateien in der Einzelansicht nur für Teilnehmer?</label>
+			<label index="seminars.pi_flexform.showOwnerDataInSingleView">Daten des Veranstaltungsbesitzers in der Einzelansicht anzeigen:</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Zeige angehängte Dateien in der Einzelansicht nur für Teilnehmer:</label>
 			<label index="seminars.pi_flexform.templateFile">Dateiname des HTML-Templates:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Welche Veranstaltung soll als Detailansicht angezeigt werden?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Nur Veranstaltungen aus diesem Zeitabschnitt zeigen:</label>
@@ -761,6 +764,7 @@
 			<label index="label_delete">Zum Löschen markieren</label>
 			<label index="label_really_delete_formal">Möchten Sie diese Datei wirklich zum Löschen markieren?</label>
 			<label index="label_really_delete_informal">Möchtest du diese Datei wirklich zum Löschen markieren?</label>
+			<label index="label_owner">Verwalter dieser Veranstaltung</label>
 			<label index="message_file_too_large_formal">Die anzuhängende Datei ist zu groß. Bitte wählen Sie eine kleinere. Die maximal erlaubte Größe ist</label>
 			<label index="message_file_too_large_informal">Die anzuhängende Datei ist zu groß. Bitte wähle eine kleinere. Die maximal erlaubte Größe ist</label>
 			<label index="message_invalid_type_formal">Die hochzuladende Datei hat ein ungültiges Format. Bitte wählen Sie eine andere. Erlaubte Dateiformate sind</label>
@@ -2000,7 +2004,8 @@
 			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView" type="integer">173313992</label>
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents" type="integer">175224355</label>
 			<label index="seminars.pi_flexform.sheet_single_view" type="integer">260903848</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees" type="integer">143973546</label>
+			<label index="seminars.pi_flexform.showOwnerDataInSingleView" type="integer">115487597</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees" type="integer">5650261</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
 			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
@@ -2177,6 +2182,7 @@
 			<label index="label_delete" type="integer">46242689</label>
 			<label index="label_really_delete_formal" type="integer">195679946</label>
 			<label index="label_really_delete_informal" type="integer">195679946</label>
+			<label index="label_owner" type="integer">193881237</label>
 			<label index="message_file_too_large_formal" type="integer">27037616</label>
 			<label index="message_file_too_large_informal" type="integer">27037616</label>
 			<label index="message_invalid_type_formal" type="integer">60436029</label>
@@ -3212,7 +3218,8 @@
 			<label index="seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView">Allow the CSV export of registrations in the &quot;my managed events&quot; view:</label>
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Event managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees?</label>
+			<label index="seminars.pi_flexform.showOwnerDataInSingleView">Show the owner data on the single view page:</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees:</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
@@ -3391,6 +3398,7 @@
 			<label index="label_delete">Mark to delete</label>
 			<label index="label_really_delete_formal">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_really_delete_informal">Do you really want to mark this attachment for deletion?</label>
+			<label index="label_owner">Event manager</label>
 			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>

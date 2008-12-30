@@ -179,6 +179,11 @@ table.tx-seminars-pi1-timeslots td {
 	padding: 5px;
 }
 
+#tx_seminars_pi1_owner_image {
+	float: right;
+	border: 1px solid #000;
+}
+
 #tx-seminars-pi1-registration-form fieldset {
 	margin: 0 0 1em;
 }

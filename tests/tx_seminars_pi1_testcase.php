@@ -3406,5 +3406,198 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->fixture->main('', array())
 		);
 	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning the owner data in the single view
+	///////////////////////////////////////////////////////
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerDataHeading() {
+		$ownerUid = $this->testingFramework->createFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 1
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			$this->fixture->translate('label_owner'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledNotContainsEmptyLines() {
+		$ownerUid = $this->testingFramework->createFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 1
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotRegexp(
+			'/(<p>|<br \/>)\s*<br \/>\s*(<br \/>|<\/p>)/m',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithoutOwnerAndOwnerDataEnabledNotContainsOwnerDataHeading() {
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 1
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_owner'),
+			$this->fixture->main('', array())
+		);
+
+	}
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerDataHeading() {
+		$ownerUid = $this->testingFramework->createFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 0
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_owner'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerName() {
+		$ownerUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'John Doe')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 1
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'John Doe',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerHtmlSpecialCharsOwnerName() {
+		$ownerUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'Tom & Jerry')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 1
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'Tom &amp; Jerry',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerName() {
+		$ownerUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'Jon Doe')
+		);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 0
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			'Jon Doe',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerPhone() {
+		$ownerUid = $this->testingFramework->createFrontEndUser(
+			'', array('telephone' => '0123 4567')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 1
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'0123 4567',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerEMailAddress() {
+		$ownerUid = $this->testingFramework->createFrontEndUser(
+			'', array('email' => 'foo@bar.com')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('owner_feuser' => $ownerUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'showOwnerDataInSingleView', 1
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'foo@bar.com',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainImageTagForOwnerPicture() {
+		$this->markTestIncomplete(
+			'Currently, FE image functions cannot be unit-tested yet.'
+		);
+	}
+
+	public function testSingleViewForSeminarWithOwnerWithoutImageAndOwnerDataEnabledNotContainsImageTag() {
+		$this->markTestIncomplete(
+			'Currently, FE image functions cannot be unit-tested yet.'
+		);
+	}
 }
 ?>

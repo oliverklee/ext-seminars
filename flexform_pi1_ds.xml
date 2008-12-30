@@ -353,6 +353,14 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
+					<showOwnerDataInSingleView>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showOwnerDataInSingleView</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</showOwnerDataInSingleView>
 					<limitFileDownloadToAttendees>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitFileDownloadToAttendees</label>

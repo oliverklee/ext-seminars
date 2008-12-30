@@ -319,6 +319,12 @@ plugin.tx_seminars_pi1 {
 	# whether to omit the date in the list view if it is the same as the previous item's
 	omitDateIfSameAsPrevious = 0
 
+	# whether to show the owner data in the single view
+	showOwnerDataInSingleView = 0
+
+	# the maximum width of the owner picture in the single view
+	ownerPictureMaxWidth = 250
+
 	# whether to allow the CSV export in the "my editable events" view
 	allowCsvExportOfRegistrationsInMyVipEventsView = 0
 
@@ -415,6 +421,7 @@ plugin.tx_seminars_pi1 {
 
 	# comma-separated list of file extensions which are allowed to be uploaded
 	allowedExtensionsForUpload = jpg,jpeg,png,bmp,gif,tiff,tif,txt,pdf,ps,svg,doc,docx,sxw,odt,xls,xlsx,sxc,ods,ppt,pptx,sxi,odp,html,htm,css,js,xml,xsd,zip,rar,gz,tgz,tar,bz2,tbz,tbz2
+
 	# UID of the payment method that corresponds to "bank transfer"
 	bankTransferUID =
 

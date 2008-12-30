@@ -205,6 +205,12 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkDefaultEventVipsFeGroupID();
 		$this->checkExternalLinkTarget();
 		$this->checkSingleViewImageSizes();
+		$this->checkShowOwnerDataInSingleView();
+		if ($this->objectToCheck->getConfValueBoolean(
+			'showOwnerDataInSingleView', 's_singleView'
+		)) {
+			$this->checkOwnerPictureMaxWidth();
+		}
 	}
 
 	/**
@@ -2149,6 +2155,36 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'this value is not set, the image will be shown in full size.'
 		);
 
+	}
+
+	/**
+	 * Checks the setting of the configuration value showOwnerDataInSingleView.
+	 */
+	private function checkShowOwnerDataInSingleView() {
+		$this->checkIfBoolean(
+			'showOwnerDataInSingleView',
+			true,
+			's_singleView',
+			'This value specifies whether the owner data will be displayed  ' .
+				'on the single view page. If this value is incorrect, ' .
+				'the the data might be displayed although it should not be ' .
+				'(which is a privacy issue) or vice versa.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value ownerPictureMaxWidth.
+	 */
+	private function checkOwnerPictureMaxWidth() {
+		$this->checkIfPositiveInteger(
+			'ownerPictureMaxWidth',
+			false,
+			'',
+			'This value specifies the maximum width for the owner picture ' .
+				'on the single view page. If this value is not set ' .
+				'correctly, the image might be too large or not get ' .
+				'displayed at all.'
+		);
 	}
 }
 
