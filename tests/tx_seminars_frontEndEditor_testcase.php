@@ -24,10 +24,8 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndEditor.php');
-
 /**
- * Testcase for the tx_seminars_frontEndEditor class in the 'seminars' extension.
+ * Testcase for the tx_seminars_pi1_frontEndEditor class in the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -36,7 +34,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
  */
 class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_frontEndEditor
+	 * @var tx_seminars_pi1_frontEndEditor
 	 */
 	private $fixture;
 	/**
@@ -47,7 +45,7 @@ class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_frontEndEditor();
+		$this->fixture = new tx_seminars_pi1_frontEndEditor();
 	}
 
 	public function tearDown() {

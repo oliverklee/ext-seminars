@@ -27,7 +27,6 @@ require_once(PATH_formidableapi);
 require_once(PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndEditor.php');
 
 /**
  * Class 'tx_seminars_pi1_eventEditor' for the 'seminars' extension.
@@ -40,7 +39,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_eventEditor extends tx_seminars_frontEndEditor {
+class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	/** @var string class name */
 	public $prefixId = 'tx_seminars_event_editor';
 

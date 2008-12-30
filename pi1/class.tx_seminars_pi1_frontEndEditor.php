@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'tx_seminars_frontEndEditor' for the 'seminars' extension.
+ * Class 'tx_seminars_pi1_frontEndEditor' for the 'seminars' extension.
  *
  * This class is the base class for any kind of front-end editor, for example
  * the event editor or the registration editor.
@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_frontEndEditor extends tx_oelib_templatehelper {
+class tx_seminars_pi1_frontEndEditor extends tx_oelib_templatehelper {
 	/**
 	 * Provides data items from the DB.
 	 *
@@ -83,7 +83,7 @@ class tx_seminars_frontEndEditor extends tx_oelib_templatehelper {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndEditor.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndEditor.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEditor.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEditor.php']);
 }
 ?>
