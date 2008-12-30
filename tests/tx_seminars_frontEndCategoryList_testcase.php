@@ -124,7 +124,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertContains(
@@ -152,10 +152,10 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid1
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid1
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid2
 		);
 
 		$output = $this->fixture->render();
@@ -188,10 +188,10 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid1
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid1
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid2
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid2
 		);
 
 		$output = $this->fixture->render();
@@ -218,7 +218,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertContains(
@@ -243,7 +243,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertNotContains(
@@ -270,7 +270,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertContains(
@@ -295,7 +295,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertNotContains(
@@ -324,7 +324,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertContains(
@@ -353,7 +353,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertNotContains(
@@ -381,7 +381,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_CATEGORIES_MM, $eventUid, $categoryUid
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
 
 		$this->assertContains(

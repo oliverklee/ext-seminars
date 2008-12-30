@@ -124,19 +124,19 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			= '(' .
 			'(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
 			'EXISTS (SELECT * FROM ' .
-			SEMINARS_TABLE_CATEGORIES_MM . ' WHERE ' .
-			SEMINARS_TABLE_CATEGORIES_MM . '.uid_local=' .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . ' WHERE ' .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_local=' .
 			SEMINARS_TABLE_SEMINARS . '.uid AND ' .
-			SEMINARS_TABLE_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
 			')' .
 			'))' .
 			' OR ' .
 			'(object_type=' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
 			'EXISTS (SELECT * FROM ' .
-			SEMINARS_TABLE_CATEGORIES_MM . ' WHERE ' .
-			SEMINARS_TABLE_CATEGORIES_MM . '.uid_local=' .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . ' WHERE ' .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_local=' .
 			SEMINARS_TABLE_SEMINARS . '.topic AND ' .
-			SEMINARS_TABLE_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
 			')' .
 			'))' .
 			')';
@@ -640,7 +640,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$searchWord,
 			'categories',
 			SEMINARS_TABLE_CATEGORIES,
-			SEMINARS_TABLE_CATEGORIES_MM
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM
 		);
 	}
 

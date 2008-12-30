@@ -80,12 +80,11 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 			);
 		}
 
-		$this->whereClauseParts['event'] = 'EXISTS ('
-			.'SELECT * FROM '.SEMINARS_TABLE_CATEGORIES_MM
-			.' WHERE '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_local IN('.$eventUids
-			.') AND '.SEMINARS_TABLE_CATEGORIES_MM.'.uid_foreign='
-			.SEMINARS_TABLE_CATEGORIES.'.uid'
-			.')';
+		$this->whereClauseParts['event'] = 'EXISTS (' .
+			'SELECT * FROM ' . SEMINARS_TABLE_SEMINARS_CATEGORIES_MM .
+			' WHERE ' . SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_local IN(' .
+			$eventUids . ') AND ' . SEMINARS_TABLE_SEMINARS_CATEGORIES_MM .
+			'.uid_foreign=' . SEMINARS_TABLE_CATEGORIES . '.uid' . ')';
 
 		$this->eventUids = $eventUids;
 	}
@@ -107,13 +106,12 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 			);
 		}
 
-		$this->addAdditionalTableName(SEMINARS_TABLE_CATEGORIES_MM);
-		$this->whereClauseParts['category']
-			= SEMINARS_TABLE_CATEGORIES . '.uid=' .
-			SEMINARS_TABLE_CATEGORIES_MM . '.uid_foreign AND '.
-			SEMINARS_TABLE_CATEGORIES_MM . '.uid_local IN (' .
+		$this->addAdditionalTableName(SEMINARS_TABLE_SEMINARS_CATEGORIES_MM);
+		$this->whereClauseParts['category'] = SEMINARS_TABLE_CATEGORIES . '.uid=' .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_foreign AND ' .
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_local IN (' .
 			$this->eventUids . ')';
-		$this->orderBy = SEMINARS_TABLE_CATEGORIES_MM . '.sorting ASC';
+		$this->orderBy = SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.sorting ASC';
 	}
 }
 
