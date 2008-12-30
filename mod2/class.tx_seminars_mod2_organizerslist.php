@@ -23,7 +23,6 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_backendlist.php');
 
 /**
  * Class 'organizers list' for the 'seminars' extension.
@@ -33,7 +32,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_backend
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_mod2_organizerslist extends tx_seminars_backendlist {
+class tx_seminars_mod2_organizerslist extends tx_seminars_mod2_backendlist {
 	/** the table we're working on */
 	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
 
