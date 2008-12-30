@@ -3042,5 +3042,113 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+
+	//////////////////////////////////////////////////////
+	// Tests concerning the pagination of the list view.
+	//////////////////////////////////////////////////////
+
+	public function testListViewCanContainOneItemOnTheFirstPage() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+
+		$this->assertContains(
+			'Event A',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewCanContainTwoItemsOnTheFirstPage() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event B'
+			)
+		);
+
+		$output = $this->fixture->main('', array());
+		$this->assertContains(
+			'Event A',
+			$output
+		);
+		$this->assertContains(
+			'Event B',
+			$output
+		);
+	}
+
+	public function testFirstPageOfListViewNotContainsItemForTheSecondPage() {
+		$this->fixture->setConfigurationValue(
+			'listView.', array(
+				'orderBy' => 'title',
+				'descFlag' => 0,
+				'results_at_a_time' => 1,
+				'maxPages' => 5,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event B'
+			)
+		);
+
+		$this->assertNotContains(
+			'Event B',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSecondPageOfListViewContainsItemForTheSecondPage() {
+		$this->fixture->setConfigurationValue(
+			'listView.', array(
+				'orderBy' => 'title',
+				'descFlag' => 0,
+				'results_at_a_time' => 1,
+				'maxPages' => 5,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event B'
+			)
+		);
+
+		$this->fixture->piVars['pointer'] = 1;
+		$this->assertContains(
+			'Event B',
+			$this->fixture->main('', array())
+		);
+	}
 }
 ?>

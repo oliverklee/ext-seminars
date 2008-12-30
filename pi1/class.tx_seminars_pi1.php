@@ -1545,26 +1545,19 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->piVars['pointer'] = 0;
 		}
 
-		// Read the list view settings from the TS setup and write them to the
-		// list view configuration.
-		$lConf = (isset($this->conf['listView.']))
-			? $this->conf['listView.'] : array();
-		if (!empty($lConf)) {
-			foreach($lConf as $key => $value) {
-				$this->internal[$key] = $value;
-			}
-		}
+		$this->internal['descFlag'] = $this->getListViewConfValueBoolean('descFlag');
+		$this->internal['orderBy'] = $this->getListViewConfValueString('orderBy');
 
 		// Number of results to show in a listing.
 		$this->internal['results_at_a_time'] = t3lib_div::intInRange(
-			$lConf['results_at_a_time'],
+			$this->getListViewConfValueInteger('results_at_a_time'),
 			0,
 			1000,
 			20
 		);
 		// The maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
 		$this->internal['maxPages'] = t3lib_div::intInRange(
-			$lConf['maxPages'],
+			$this->getListViewConfValueInteger('maxPages'),
 			0,
 			1000,
 			2
