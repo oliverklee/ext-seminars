@@ -25,7 +25,6 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndRegistrationsList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndSelectorWidget.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
@@ -270,7 +269,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				// because createRegistrationsListPage() will differentiate later.
 			case 'list_registrations':
 				$registrationsListClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_frontEndRegistrationsList'
+					'tx_seminars_pi1_frontEndRegistrationsList'
 				);
 				$registrationsList = new $registrationsListClassName(
 					$this->conf,
