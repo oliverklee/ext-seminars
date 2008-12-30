@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#1634] Change: Rename some table constants of m:n tables for consistency
 - [#393] Change: Use getListViewConfValue* in pi1
 - [#768] Change: Use real visibility keywords (public/protected/private)
 - [#2215] Fix: Problems with Page Browser

@@ -2547,7 +2547,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('vips' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_VIPS_MM,
+			SEMINARS_TABLE_SEMINARS_MANAGERS_MM,
 			$eventUid,
 			$feUserUid
 		);

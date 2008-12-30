@@ -2815,7 +2815,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		} else {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'COUNT(*) AS num',
-				SEMINARS_TABLE_VIPS_MM,
+				SEMINARS_TABLE_SEMINARS_MANAGERS_MM,
 				'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid
 			);
 

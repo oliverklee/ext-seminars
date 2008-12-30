@@ -152,7 +152,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private function createLogInAndAddFeUserAsVip() {
 		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_VIPS_MM,
+			SEMINARS_TABLE_SEMINARS_MANAGERS_MM,
 			$this->seminarUid,
 			$feUserUid
 		);
