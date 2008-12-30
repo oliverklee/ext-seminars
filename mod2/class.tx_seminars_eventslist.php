@@ -210,7 +210,8 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 
 		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
 		$builder->setBackEndMode();
-		$builder->setSourcePages($this->page->pageInfo['uid']);
+		$pageData = $this->page->getPageData();
+		$builder->setSourcePages($pageData['uid']);
 		$seminarBag = $builder->build();
 
 		$sortList = array();
@@ -224,8 +225,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 			&& $BE_USER->check('tables_modify', SEMINARS_TABLE_SEMINARS)
 			&& $BE_USER->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
-					'pages',
-					$this->page->pageInfo['uid']
+					'pages', $pageData['uid']
 				),
 				16
 			);
@@ -269,7 +269,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 				// That means if no predecessor of the previous record exists
 				// than move the current record to top of the current page.
 				$previousUids[1] = isset($sortList[$uid]['previous'])
-					? -$previousUids[0] : $this->page->pageInfo['uid'];
+					? -$previousUids[0] : $pageData['uid'];
 
 				// Sets previous record to the current record's UID.
 				$previousUids[0] = $uid;
@@ -330,7 +330,7 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 			);
 		}
 
-		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
+		$content .= $this->getNewIcon($pageData['uid']);
 
 		if (!$seminarBag->isEmpty()) {
 			$content .= $this->getCsvIcon();
@@ -372,9 +372,10 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 
 		if ($this->seminar->hasAttendances()
 			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
+			$pageData = $this->page->getPageData();
 			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
 			$result = '<a href="class.tx_seminars_csv.php?id=' .
-				$this->page->pageInfo['uid'] .
+				$pageData['uid'] .
 				'&amp;tx_seminars_pi2[table]=' . SEMINARS_TABLE_ATTENDANCES .
 				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">' .
 				'<img' .
@@ -404,11 +405,11 @@ class tx_seminars_eventslist extends tx_seminars_backendlist {
 		global $BACK_PATH, $LANG, $BE_USER;
 		$result = '';
 
+		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
 			&& $BE_USER->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
-					'pages',
-					$this->page->pageInfo['uid']
+					'pages', $pageData['uid']
 				),
 				16
 			)

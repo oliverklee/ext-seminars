@@ -122,7 +122,8 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 		);
 
 		// Initialize variables for the database query.
-		$queryWhere = 'pid='.$this->page->pageInfo['uid'];
+		$pageData = $this->page->getPageData();
+		$queryWhere = 'pid=' . $pageData['uid'];
 		$additionalTables = '';
 		$orderBy = '';
 		$limit = '';
@@ -155,7 +156,7 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 			);
 		}
 
-		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
+		$content .= $this->getNewIcon($pageData['uid']);
 
 		// Output the table array using the tableLayout array with the template
 		// class.

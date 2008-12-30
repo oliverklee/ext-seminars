@@ -36,13 +36,15 @@ class tx_seminars_backendlist {
 	/** the table we're working on */
 	protected $tableName = '';
 
-	/** Holds a reference to the back-end page object. */
+	/**
+	 * @var tx_seminars_mod2_BackEndModule the back-end module
+	 */
 	protected $page = null;
 
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
 	 *
-	 * @param t3lib_SCbase the current back-end page object
+	 * @param tx_seminars_mod2_BackEndModule the current back-end module
 	 *
 	 * @access public
 	 */
@@ -72,11 +74,11 @@ class tx_seminars_backendlist {
 
 		$result = '';
 
+		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
 			&& $BE_USER->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
-					'pages',
-					$this->page->pageInfo['uid']
+					'pages', $pageData['uid']
 				),
 			16)
 		) {
@@ -111,11 +113,11 @@ class tx_seminars_backendlist {
 
 		$result = '';
 
+		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
 			&& $BE_USER->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
-					'pages',
-					$this->page->pageInfo['uid']
+					'pages', $pageData['uid']
 				),
 				16
 			)
@@ -166,14 +168,14 @@ class tx_seminars_backendlist {
 
 		$result = '';
 
+		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
 			&& $BE_USER->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
-					'pages',
-					$this->page->pageInfo['uid']
+					'pages', $pageData['uid']
 				),
 				16)
-			&& $this->page->pageInfo['doktype'] == 254) {
+			&& $pageData['doktype'] == 254) {
 			$params = '&edit['.$this->tableName.']['.$pid.']=new';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langNew = $LANG->getLL('newRecordGeneral');
@@ -234,29 +236,30 @@ class tx_seminars_backendlist {
 	function getCsvIcon() {
 		global $BACK_PATH, $LANG;
 
+		$pageData = $this->page->getPageData();
 		$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
-		$result = TAB.TAB
-			.'<div id="typo3-csvLink">'.LF
-			.TAB.TAB.TAB
-			.'<a href="class.tx_seminars_csv.php?id='.$this->page->pageInfo['uid']
-			.'&amp;tx_seminars_pi2[table]='.$this->tableName
-			.'&amp;tx_seminars_pi2[pid]='.$this->page->pageInfo['uid'].'">'.LF
-			.TAB.TAB.TAB.TAB
-			.'<img'
-			.t3lib_iconWorks::skinImg(
+		$result = TAB . TAB .
+			'<div id="typo3-csvLink">' . LF .
+			TAB . TAB . TAB .
+			'<a href="class.tx_seminars_csv.php?id=' . $pageData['uid'] .
+			'&amp;tx_seminars_pi2[table]=' . $this->tableName .
+			'&amp;tx_seminars_pi2[pid]=' . $pageData['uid'] . '">' . LF .
+			TAB . TAB . TAB . TAB .
+			'<img' .
+			t3lib_iconWorks::skinImg(
 				$BACK_PATH,
 				'gfx/csv.gif',
 				'width="27" height="14"'
-			)
+			) .
 			// We use an empty alt attribute as we already have a textual
 			// representation directly next to the icon.
-			.' title="'.$langCsv.'" alt="" />'.LF
-			.TAB.TAB.TAB.TAB
-			.$langCsv.LF
-			.TAB.TAB.TAB
-			.'</a>'.LF
-			.TAB.TAB
-			.'</div>'.LF;
+			' title="' . $langCsv . '" alt="" />' . LF .
+			TAB . TAB . TAB . TAB .
+			$langCsv . LF .
+			TAB . TAB . TAB .
+			'</a>' . LF .
+			TAB . TAB .
+			'</div>' . LF;
 
 		return $result;
 	}

@@ -25,7 +25,6 @@
 unset($MCONF);
 require_once('conf.php');
 require_once($BACK_PATH . 'init.php');
-require_once(PATH_t3lib . 'class.t3lib_scbase.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
@@ -40,7 +39,7 @@ $BE_USER->modAccess($MCONF, 1);
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_csv extends t3lib_SCbase {
+class tx_seminars_csv extends tx_seminars_mod2_BackEndModule {
 	/**
 	 * Creates the CSV export content and outputs it directly on the page (in
 	 * this case, for download).

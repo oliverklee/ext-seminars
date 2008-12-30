@@ -53,7 +53,8 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		// Initializes the variable for the HTML source code.
 		$content = '';
 
-		$content .= $this->getNewIcon($this->page->pageInfo['uid']);
+		$pageData = $this->page->getPageData();
+		$content .= $this->getNewIcon($pageData['uid']);
 
 		// Generates the table with the regular attendances.
 		$content .= TAB . TAB . '<div style="clear: both;"></div>' . LF;
@@ -149,7 +150,8 @@ class tx_seminars_registrationslist extends tx_seminars_backendlist {
 		$registrationBagBuilder = t3lib_div::makeInstance(
 			'tx_seminars_registrationBagBuilder'
 		);
-		$registrationBagBuilder->setSourcePages($this->page->pageInfo['uid']);
+		$pageData = $this->page->getPageData();
+		$registrationBagBuilder->setSourcePages($pageData['uid']);
 		if ($showRegistrationQueue) {
 			$registrationBagBuilder->limitToOnQueue();
 		} else {

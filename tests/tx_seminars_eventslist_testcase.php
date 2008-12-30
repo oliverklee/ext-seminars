@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_t3lib . 'class.t3lib_scbase.php');
-
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
@@ -54,9 +52,9 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	private $dummySysFolderPid = 0;
 
 	/**
-	 * @var t3lib_SCbase a dummy BE page object
+	 * @var tx_seminars_mod2_BackEndModule a dummy BE module
 	 */
-	private $page;
+	private $backEndModule;
 
 	public function setUp() {
 		$this->testingFramework
@@ -65,25 +63,24 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
 
-		$this->page = new t3lib_SCbase();
-		$this->page->id = $this->dummySysFolderPid;
-		$this->page->pageInfo = array();
-		$this->page->pageInfo['uid'] = $this->dummySysFolderPid;
+		$this->backEndModule = new tx_seminars_mod2_BackEndModule();
+		$this->backEndModule->id = $this->dummySysFolderPid;
+		$this->backEndModule->setPageData(array('uid' => $this->dummySysFolderPid));
 
-		$this->page->doc = t3lib_div::makeInstance('bigDoc');
-		$this->page->doc->backPath = $GLOBALS['BACK_PATH'];
-		$this->page->doc->docType = 'xhtml_strict';
+		$this->backEndModule->doc = t3lib_div::makeInstance('bigDoc');
+		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
+		$this->backEndModule->doc->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_eventslist($this->page);
+		$this->fixture = new tx_seminars_eventslist($this->backEndModule);
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();
+		$this->backEndModule->__destruct();
 		unset(
-			$this->page->doc, $this->page, $this->fixture,
-			$this->testingFramework
+			$this->backEndModule, $this->fixture, $this->testingFramework
 		);
 	}
 

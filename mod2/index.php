@@ -28,7 +28,6 @@ $MCONF = array();
 require_once('conf.php');
 require_once($BACK_PATH . 'init.php');
 require_once($BACK_PATH . 'template.php');
-require_once(PATH_t3lib . 'class.t3lib_scbase.php');
 require_once(PATH_t3lib . 'class.t3lib_page.php');
 require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 
@@ -57,10 +56,7 @@ $BE_USER->modAccess($MCONF, 1);
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_module2 extends t3lib_SCbase {
-	/** Holds information about the current page. */
-	var $pageInfo;
-
+class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 	/** an array of available sub modules */
 	var $availableSubModules;
 
@@ -104,25 +100,20 @@ class tx_seminars_module2 extends t3lib_SCbase {
 		global $LANG, $BACK_PATH, $BE_USER;
 
 		$this->content = '';
+		$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 
-		/**
-		 * This variable will hold the information about the page. It will only
-		 * be filled with values if the user has access to the page.
-		 */
-		$this->pageInfo = t3lib_BEfunc::readPageAccess(
-			$this->id,
-			$this->perms_clause
-		);
 		// Access check:
 		// The page will only be displayed if there is a valid page, if this
 		// page may be viewed by the current BE user and if the static template
 		// has been included or there actually are any records that will be
 		// listed by this module on the current page.
-		$hasAccess = is_array($this->pageInfo);
+		$hasAccess = is_array($pageAccess);
 
 		if ($this->id && ($hasAccess || $BE_USER->user['admin'])
-			&& $this->hasStaticTemplateOrRecords()) {
-			// start the document
+			&& $this->hasStaticTemplateOrRecords()
+		) {
+			$this->setPageData($pageAccess);
+			// starts the document
 			$this->doc = t3lib_div::makeInstance('bigDoc');
 			$this->doc->backPath = $BACK_PATH;
 			$this->doc->form = '<form action="" method="post">';
