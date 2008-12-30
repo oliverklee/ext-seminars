@@ -36,11 +36,11 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_frontEndEventHeadline extends tx_seminars_frontEndView {
+class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_frontEndView {
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndEventHeadline.php';
+	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndEventHeadline.php';
 
 	/**
 	 * Creates the event headline, consisting of the event title and date.
@@ -76,7 +76,7 @@ class tx_seminars_frontEndEventHeadline extends tx_seminars_frontEndView {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndEventHeadline.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndEventHeadline.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEventHeadline.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEventHeadline.php']);
 }
 ?>
