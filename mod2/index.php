@@ -35,7 +35,6 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_registrationslist.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_speakerslist.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_organizerslist.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
@@ -183,7 +182,7 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 					break;
 				case 3:
 					$speakersListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_speakerslist'
+						'tx_seminars_mod2_speakerslist'
 					);
 					$speakersList = new $speakersListClassname($this);
 					$this->content .= $speakersList->show();
