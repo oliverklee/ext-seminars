@@ -1,5 +1,5 @@
 0.7.0 (currently working on)
-- [#2415] In the single view, add a part "Required for"
+- [#2415] Feature: In the single view, add a part "Required for"
 - [#2428] Feature: Add a function for checking whether a user fulfillls all requirements for a registration
 - [#2414] Feature: In the single view, add a part "Requirements"
 - [#2393] Feature: Add a field "requirements" to topics
