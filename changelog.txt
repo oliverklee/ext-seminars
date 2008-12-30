@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2491] Feature: Add a class tx_seminars_mod2_BackEndModule
 - [#2415] Feature: In the single view, add a part "Required for"
 - [#2428] Feature: Add a function for checking whether a user fulfillls all requirements for a registration
 - [#2414] Feature: In the single view, add a part "Requirements"
