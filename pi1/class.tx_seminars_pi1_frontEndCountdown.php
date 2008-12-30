@@ -36,11 +36,11 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_frontEndCountdown extends tx_seminars_frontEndView {
+class tx_seminars_pi1_frontEndCountdown extends tx_seminars_frontEndView {
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndCountdown.php';
+	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndCountdown.php';
 
 	/**
 	 * @var tx_seminars_seminar the seminar for which we want to show the
@@ -192,7 +192,7 @@ class tx_seminars_frontEndCountdown extends tx_seminars_frontEndView {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndCountdown.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndCountdown.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndCountdown.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndCountdown.php']);
 }
 ?>

@@ -248,9 +248,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
  	/**
-	 * Checks the configuration for: tx_seminars_frontEndCountdown.
+	 * Checks the configuration for: tx_seminars_pi1_frontEndCountdown.
 	 */
-	protected function check_tx_seminars_frontEndCountdown() {
+	protected function check_tx_seminars_pi1_frontEndCountdown() {
 		$this->checkCommonFrontEndSettings();
 		$this->checkPages();
 	}

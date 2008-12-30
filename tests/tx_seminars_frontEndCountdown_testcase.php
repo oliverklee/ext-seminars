@@ -24,8 +24,6 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCountdown.php');
-
 /**
  * Testcase for the 'frontEndCountdown' class in the 'seminars' extension.
  *
@@ -37,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
  */
 class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_frontEndCountdown
+	 * @var tx_seminars_pi1_frontEndCountdown
 	 */
 	private $fixture;
 	/**
@@ -61,7 +59,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_frontEndCountdown(
+		$this->fixture = new tx_seminars_pi1_frontEndCountdown(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
@@ -85,7 +83,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 
 	public function testFixtureIsAFrontEndCountdownObject() {
 		$this->assertTrue(
-			$this->fixture instanceof tx_seminars_frontEndCountdown
+			$this->fixture instanceof tx_seminars_pi1_frontEndCountdown
 		);
 	}
 
