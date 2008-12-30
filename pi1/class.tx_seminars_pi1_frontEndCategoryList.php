@@ -34,11 +34,11 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
+class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_frontEndView {
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndCategoryList.php';
+	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndCategoryList.php';
 
 	/**
 	 * Creates a HTML list of categories.
@@ -220,7 +220,7 @@ class tx_seminars_frontEndCategoryList extends tx_seminars_frontEndView {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndCategoryList.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndCategoryList.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndCategoryList.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndCategoryList.php']);
 }
 ?>

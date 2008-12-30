@@ -25,7 +25,6 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCategoryList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndRegistrationsList.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndCountdown.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndSelectorWidget.php');
@@ -87,7 +86,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	private $registrationManager = null;
 
 	/**
-	 * @var tx_seminars_frontEndCategoryList
+	 * @var tx_seminars_pi1_frontEndCategoryList
 	 */
 	private $categoryList = null;
 
@@ -296,7 +295,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 			case 'category_list':
 				$categoryListClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_frontEndCategoryList'
+					'tx_seminars_pi1_frontEndCategoryList'
 				);
 				$categoryList = new $categoryListClassName(
 					$this->conf, $this->cObj
@@ -2453,11 +2452,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Creates a tx_seminars_frontEndCategoryList object in $this->categoryList.
+	 * Creates a tx_seminars_pi1_frontEndCategoryList object in $this->categoryList.
 	 */
 	private function createCategoryList() {
 		$categoryListClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_frontEndCategoryList'
+			'tx_seminars_pi1_frontEndCategoryList'
 		);
 		$this->categoryList = new $categoryListClassName(
 			$this->conf, $this->cObj
