@@ -23,7 +23,6 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registration_editor.php');
 
 /**
  * Class 'tx_seminars_registrationEditorChild' for the 'seminars' extension.
@@ -36,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_registra
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class tx_seminars_registrationEditorChild extends tx_seminars_registration_editor {
+final class tx_seminars_registrationEditorChild extends tx_seminars_pi1_registrationEditor {
 	/**
 	 * The constructor.
 	 *
