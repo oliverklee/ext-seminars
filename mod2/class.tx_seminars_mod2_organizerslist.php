@@ -33,7 +33,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'mod2/class.tx_seminars_backend
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_organizerslist extends tx_seminars_backendlist {
+class tx_seminars_mod2_organizerslist extends tx_seminars_backendlist {
 	/** the table we're working on */
 	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
 
@@ -166,7 +166,7 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_organizerslist.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_organizerslist.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_organizerslist.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_organizerslist.php']);
 }
 ?>
