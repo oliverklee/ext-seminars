@@ -5519,5 +5519,42 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->fixture->build()->isEmpty()
 		);
 	}
+
+	public function testLimitToTopicsWithoutRegistrationByUserAndLimitToRequiredEventTopicsCanReturnOneEntry() {
+		$requiredTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $requiredTopicUid,
+			)
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'requirements' => 1,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$eventUid,
+			$requiredTopicUid
+		);
+
+		$this->fixture->limitToRequiredEventTopics($eventUid);
+		$this->fixture->limitToTopicsWithoutRegistrationByUser(
+			$this->testingFramework->createFrontEndUser()
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->count()
+		);
+	}
 }
 ?>

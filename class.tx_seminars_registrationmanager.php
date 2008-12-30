@@ -88,20 +88,16 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @return boolean true if everything is okay for the link, false otherwise
 	 */
-	public function canRegisterIfLoggedIn(tx_seminars_seminar $seminar) {
-		$result = true;
-
-		if ($this->isLoggedIn() && !$this->couldThisUserRegister($seminar)) {
-			// The current user can not register for this event (no multiple
-			// registrations are possible and the user is already registered).
-			$result = false;
-		} else {
-			// it is not possible to register for this seminar at all
-			// (it is canceled, full, etc.)
-			$result = $seminar->canSomebodyRegister();
+	public function canRegisterIfLoggedIn(tx_seminars_seminar $event) {
+		if (!$event->canSomebodyRegister()) {
+			return false;
+		}
+		if (!$this->isLoggedIn()) {
+			return true;
 		}
 
-		return $result;
+		return ($this->couldThisUserRegister($event)
+			&& $this->userFulfillsRequirements($event));
 	}
 
 	/**
@@ -116,6 +112,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * and an empty string otherwise.
 	 *
 	 * This function even works if no user is logged in.
+	 *
+	 * Note: This function does not check whether a logged-in front-end user
+	 * fulfills all requirements for an event.
 	 *
 	 * @param object a seminar for which we'll check if it is possible to
 	 *               register
@@ -146,6 +145,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * for the current event, not checking the event's vacancies yet.
 	 * So this function only checks whether the user is logged in and isn't
 	 * blocked for the event's duration yet.
+	 *
+	 * Note: This function does not check whether a logged-in front-end user
+	 * fulfills all requirements for an event.
 	 *
 	 * @param object a seminar for which we'll check if it is possible to
 	 *               register
@@ -651,6 +653,29 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Checks if the logged-in user fulfills all requirements for registration
+	 * for the event $event.
+	 *
+	 * A front-end user needs to be logged in when this function is called.
+	 *
+	 * @param tx_seminars_seminar the event to check
+	 *
+	 * @return boolean true if the user fulfills all requirements, false
+	 *                 otherwise
+	 */
+	public function userFulfillsRequirements(tx_seminars_seminar $event) {
+		if (!$event->hasRequirements()) {
+			return true;
+		}
+
+		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder->limitToRequiredEventTopics($event->getTopicUid());
+		$builder->limitToTopicsWithoutRegistrationByUser($this->getFeUserUid());
+
+		return $builder->build()->isEmpty();
 	}
 }
 
