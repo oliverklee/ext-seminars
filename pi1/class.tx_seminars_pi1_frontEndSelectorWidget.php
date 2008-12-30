@@ -37,11 +37,11 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_frontEndSelectorWidget extends tx_seminars_frontEndView {
+class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_frontEndView {
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_frontEndSelectorWidget.php';
+	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndSelectorWidget.php';
 
 	/**
 	 * @var array all languages that may be shown in the option box of the
@@ -403,7 +403,7 @@ class tx_seminars_frontEndSelectorWidget extends tx_seminars_frontEndView {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndSelectorWidget.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndSelectorWidget.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndSelectorWidget.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndSelectorWidget.php']);
 }
 ?>

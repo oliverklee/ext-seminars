@@ -25,7 +25,6 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndSelectorWidget.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 /**
@@ -2082,7 +2081,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$selectorWidgetClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_frontEndSelectorWidget'
+			'tx_seminars_pi1_frontEndSelectorWidget'
 		);
 		$selectorWidget = new $selectorWidgetClassName($this->conf, $this->cObj);
 
@@ -2108,7 +2107,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		// selector widget (including the search form).
 		if (is_array($this->piVars['language'])) {
 			$builder->limitToLanguages(
-				tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+				tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['language']
 				)
 			);
@@ -2118,7 +2117,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		// @see https://bugs.oliverklee.com/show_bug.cgi?id=2304
 		if (is_array($this->piVars['place'])) {
 			$builder->limitToPlaces(
-				tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+				tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['place']
 				)
 			);
@@ -2139,14 +2138,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		if (is_array($this->piVars['city'])) {
 			$builder->limitToCities(
-				tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+				tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['city']
 				)
 			);
 		}
 		if (is_array($this->piVars['country'])) {
 			$builder->limitToCountries(
-				tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+				tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['country']
 				)
 			);
@@ -2178,7 +2177,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			&& (is_array($this->piVars['event_type']))
 		) {
 			$builder->limitToEventTypes(
-				tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+				tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['event_type']
 				)
 			);

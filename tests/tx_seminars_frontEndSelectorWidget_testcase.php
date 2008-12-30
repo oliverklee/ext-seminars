@@ -25,7 +25,6 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndSelectorWidget.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -39,7 +38,7 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  */
 class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_frontEndSelectorWidget
+	 * @var tx_seminars_pi1_frontEndSelectorWidget
 	 */
 	private $fixture;
 
@@ -58,7 +57,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->fixture = new tx_seminars_frontEndSelectorWidget(
+		$this->fixture = new tx_seminars_pi1_frontEndSelectorWidget(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
@@ -112,7 +111,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 	public function testFixtureIsAFrontEndSelectorWidgetObject() {
 		$this->assertTrue(
-			$this->fixture instanceof tx_seminars_frontEndSelectorWidget
+			$this->fixture instanceof tx_seminars_pi1_frontEndSelectorWidget
 		);
 	}
 
@@ -377,7 +376,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	public function testRemoveDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray() {
 		$this->assertEquals(
 			array('CH', 'DE'),
-			tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 				array('none', 'CH', 'DE')
 			)
 		);
@@ -386,7 +385,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	public function testRemoveDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray() {
 		$this->assertEquals(
 			array('CH', 'DE'),
-			tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 				array('CH', 'none', 'DE')
 			)
 		);
@@ -395,7 +394,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	public function testRemoveDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray() {
 		$this->assertEquals(
 			array(),
-			tx_seminars_frontEndSelectorWidget::removeDummyOptionFromFormData(
+			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 				array()
 			)
 		);
