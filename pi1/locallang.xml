@@ -155,6 +155,7 @@
 			<label index="label_event_type">Event type</label>
 			<label index="label_target_groups">Target Groups</label>
 			<label index="label_requirements">Requirements</label>
+			<label index="label_dependencies">Required for</label>
 			<label index="label_organizers">Organizers</label>
 			<label index="label_organizing_partners">Organizing partners</label>
 			<label index="label_vacancies">Vacancies</label>
@@ -669,6 +670,7 @@
 			<label index="label_event_type">Veranstaltungsart</label>
 			<label index="label_target_groups">Zielgruppen</label>
 			<label index="label_requirements">Voraussetzungen</label>
+			<label index="label_dependencies">Voraussetzung für</label>
 			<label index="label_organizers">Veranstalter</label>
 			<label index="label_organizing_partners">Kooperationspartner</label>
 			<label index="label_vacancies">Freie Plätze</label>
@@ -2246,6 +2248,7 @@
 			<label index="label_leaders_multiple_male" type="integer">45784650</label>
 			<label index="label_leaders_multiple_female" type="integer">45784650</label>
 			<label index="label_requirements" type="integer">94563323</label>
+			<label index="label_dependencies" type="integer">257076868</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3457,6 +3460,7 @@
 			<label index="label_leaders_multiple_male">Leaders</label>
 			<label index="label_leaders_multiple_female">Leaders</label>
 			<label index="label_requirements">Requirements</label>
+			<label index="label_dependencies">Required for</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

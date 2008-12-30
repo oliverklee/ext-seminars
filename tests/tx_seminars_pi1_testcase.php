@@ -1302,6 +1302,140 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////////////
+	// Tests concerning dependencies in the single view.
+	///////////////////////////////////////////////////////
+
+	public function testSingleViewForSeminarWithoutDependenciesHidesDependenciesSubpart() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES')
+		);
+	}
+
+	public function testSingleViewForSeminarWithOneDependencyDisplaysDependenciesSubpart() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 1,
+			)
+		);
+		$dependingEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependingEventUid, $this->seminarUid
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES')
+		);
+	}
+
+	public function testSingleViewForSeminarWithOneDependenciesShowsTitleOfDependency() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 1,
+			)
+		);
+		$dependingEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'depdending_foo',
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependingEventUid, $this->seminarUid
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'depdending_foo',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOneDependencyLinksDependencyToItsSingleView() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 1,
+			)
+		);
+		$dependingEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'depdending_foo',
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependingEventUid, $this->seminarUid
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertRegExp(
+			'/<a href=.*' . $dependingEventUid . '.*>depdending_foo<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithTwoDependenciesShowsTitleOfBothDependencies() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 2,
+			)
+		);
+		$dependingEventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'depdending_foo',
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependingEventUid1, $this->seminarUid
+		);
+		$dependingEventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'depdending_bar',
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependingEventUid2, $this->seminarUid
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertRegExp(
+			'/depdending_bar.*depdending_foo/s',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	//////////////////////////////////////////////////////
 	// Test concerning the event type in the single view
 	//////////////////////////////////////////////////////
