@@ -998,7 +998,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SITES, array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
+			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
 		);
 
 		$this->fixture->piVars['showUid'] = $eventUid;
@@ -2745,7 +2745,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SEMINARS_SITES_MM,
 			$eventUid1, $placeUid1
 		);
 
@@ -2763,7 +2763,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SEMINARS_SITES_MM,
 			$eventUid2, $placeUid2
 		);
 
@@ -2797,7 +2797,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SEMINARS_SITES_MM,
 			$eventUid, $placeUid1
 		);
 
@@ -2831,7 +2831,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SEMINARS_SITES_MM,
 			$eventUid, $placeUid
 		);
 
@@ -2862,7 +2862,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SEMINARS_SITES_MM,
 			$eventUid, $placeUid
 		);
 
@@ -2893,7 +2893,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SITES, array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid1, $placeUid1
+			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid1, $placeUid1
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
@@ -2909,7 +2909,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SITES, array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid2, $placeUid2
+			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid2, $placeUid2
 		);
 
 		$this->fixture->setConfigurationValue(

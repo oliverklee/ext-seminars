@@ -150,7 +150,7 @@ class tx_seminars_frontEndSelectorWidget extends tx_seminars_frontEndView {
 			// Reads the place(s) from the event record. The country will be
 			// read from the place record later.
 			$placeUids = $event->getRelatedMmRecordUids(
-				SEMINARS_TABLE_SITES_MM
+				SEMINARS_TABLE_SEMINARS_SITES_MM
 			);
 			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
 

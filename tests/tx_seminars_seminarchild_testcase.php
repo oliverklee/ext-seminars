@@ -145,7 +145,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SEMINARS_SITES_MM,
 			$this->fixture->getUid(), $uid
 		);
 		$this->fixture->setNumberOfPlaces(
@@ -447,7 +447,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+				SEMINARS_TABLE_SEMINARS_SITES_MM,
+				'uid_local=' . $this->fixture->getUid()
 			)
 		);
 
@@ -455,7 +456,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+				SEMINARS_TABLE_SEMINARS_SITES_MM,
+				'uid_local=' . $this->fixture->getUid()
 			)
 		);
 
@@ -463,7 +465,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SITES_MM, 'uid_local='.$this->fixture->getUid()
+				SEMINARS_TABLE_SEMINARS_SITES_MM,
+				'uid_local=' . $this->fixture->getUid()
 			)
 		);
 	}
@@ -1810,7 +1813,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testGetRelatedMmRecordUidsWithNoPlace() {
 		$this->assertEquals(
 			array(),
-			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SITES_MM)
+			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SEMINARS_SITES_MM)
 		);
 	}
 
@@ -1823,7 +1826,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			array($uid),
-			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SITES_MM)
+			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SEMINARS_SITES_MM)
 		);
 	}
 
@@ -1840,7 +1843,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$result = $this->fixture->getRelatedMmRecordUids(
-			SEMINARS_TABLE_SITES_MM
+			SEMINARS_TABLE_SEMINARS_SITES_MM
 		);
 		sort($result);
 		$this->assertEquals(

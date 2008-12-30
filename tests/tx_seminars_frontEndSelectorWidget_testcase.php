@@ -324,7 +324,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
+			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
 		);
 
 		$this->assertContains(
@@ -343,7 +343,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
+			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
 		);
 
 		$this->assertContains(
@@ -361,7 +361,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SITES_MM, $eventUid, $placeUid
+			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
 		);
 
 		$this->assertContains(

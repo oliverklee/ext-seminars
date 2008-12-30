@@ -576,10 +576,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'country',
-			SEMINARS_TABLE_SITES.' LEFT JOIN '.SEMINARS_TABLE_SITES_MM
-				.' ON '.SEMINARS_TABLE_SITES.'.uid='.SEMINARS_TABLE_SITES_MM.'.uid_foreign'
-				.' LEFT JOIN '.SEMINARS_TABLE_SEMINARS
-				.' ON '.SEMINARS_TABLE_SITES_MM.'.uid_local='.SEMINARS_TABLE_SEMINARS.'.uid',
+			SEMINARS_TABLE_SITES . ' LEFT JOIN ' .
+				SEMINARS_TABLE_SEMINARS_SITES_MM . ' ON ' . SEMINARS_TABLE_SITES .
+				'.uid=' . SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign' .
+				' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS . ' ON ' .
+				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local=' .
+				SEMINARS_TABLE_SEMINARS . '.uid',
 			SEMINARS_TABLE_SEMINARS . '.uid=' . $this->getUid() .
 				' AND ' . SEMINARS_TABLE_SITES . '.country!=""' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES),
@@ -677,9 +679,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// Fetches the city name from the corresponding place record(s).
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'city',
-			SEMINARS_TABLE_SITES . ' LEFT JOIN ' . SEMINARS_TABLE_SITES_MM .
+			SEMINARS_TABLE_SITES . ' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS_SITES_MM .
 				' ON ' . SEMINARS_TABLE_SITES . '.uid=' .
-				SEMINARS_TABLE_SITES_MM . '.uid_foreign',
+				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign',
 			'uid_local=' . $this->getUid(),
 			'uid_foreign'
 		);
@@ -790,7 +792,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	private function getPlacesAsArray() {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, address, city, country, homepage, directions',
-			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
 			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
@@ -823,7 +825,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SITES_MM,
+			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
 			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
@@ -4359,8 +4361,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		// Removes all place relations of the current event.
 		$GLOBALS['TYPO3_DB']->exec_DELETEquery(
-			SEMINARS_TABLE_SITES_MM,
-			SEMINARS_TABLE_SITES_MM.'.uid_local='.$this->getUid()
+			SEMINARS_TABLE_SEMINARS_SITES_MM,
+			SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local=' . $this->getUid()
 		);
 
 		// Creates an array with all place UIDs which should be related to this
@@ -4373,7 +4375,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $this->createMmRecords(
-			SEMINARS_TABLE_SITES_MM, $placesOfTimeSlots
+			SEMINARS_TABLE_SEMINARS_SITES_MM, $placesOfTimeSlots
 		);
 	}
 
