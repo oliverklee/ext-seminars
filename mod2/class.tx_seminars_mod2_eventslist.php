@@ -374,7 +374,7 @@ class tx_seminars_mod2_eventslist extends tx_seminars_backendlist {
 			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
 			$pageData = $this->page->getPageData();
 			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
-			$result = '<a href="class.tx_seminars_csv.php?id=' .
+			$result = '<a href="class.tx_seminars_mod2_csv.php?id=' .
 				$pageData['uid'] .
 				'&amp;tx_seminars_pi2[table]=' . SEMINARS_TABLE_ATTENDANCES .
 				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">' .

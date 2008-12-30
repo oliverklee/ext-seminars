@@ -229,7 +229,7 @@ class tx_seminars_backendlist {
 		$result = TAB . TAB .
 			'<div id="typo3-csvLink">' . LF .
 			TAB . TAB . TAB .
-			'<a href="class.tx_seminars_csv.php?id=' . $pageData['uid'] .
+			'<a href="class.tx_seminars_mod2_csv.php?id=' . $pageData['uid'] .
 			'&amp;tx_seminars_pi2[table]=' . $this->tableName .
 			'&amp;tx_seminars_pi2[pid]=' . $pageData['uid'] . '">' . LF .
 			TAB . TAB . TAB . TAB .

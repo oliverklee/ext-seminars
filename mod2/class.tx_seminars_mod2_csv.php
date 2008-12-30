@@ -39,7 +39,7 @@ $BE_USER->modAccess($MCONF, 1);
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_csv extends tx_seminars_mod2_BackEndModule {
+class tx_seminars_mod2_csv extends tx_seminars_mod2_BackEndModule {
 	/**
 	 * Creates the CSV export content and outputs it directly on the page (in
 	 * this case, for download).
@@ -52,12 +52,12 @@ class tx_seminars_csv extends tx_seminars_mod2_BackEndModule {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_csv.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_csv.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_csv.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_csv.php']);
 }
 
 // Make instance:
-$SOBE = t3lib_div::makeInstance('tx_seminars_csv');
+$SOBE = t3lib_div::makeInstance('tx_seminars_mod2_csv');
 $SOBE->init();
 $SOBE->printContent();
 ?>
