@@ -2598,7 +2598,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 */
 	protected function createRegistrationForm() {
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registration_editor'
+			'tx_seminars_pi1_registrationEditor'
 		);
 		$registrationEditor = new $registrationEditorClassname($this);
 
