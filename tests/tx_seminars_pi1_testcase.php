@@ -1180,6 +1180,128 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////////////
+	// Tests concerning requirements in the single view.
+	///////////////////////////////////////////////////////
+
+	public function testSingleViewForSeminarWithoutRequirementsHidesRequirementsSubpart() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
+		);
+	}
+
+	public function testSingleViewForSeminarWithOneRequirementDisplaysRequirementsSubpart() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredEvent = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			$requiredEvent, 'requirements'
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
+		);
+	}
+
+	public function testSingleViewForSeminarWithOneRequirementShowsTitleOfRequirement() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredEvent = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'required_foo',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			$requiredEvent, 'requirements'
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'required_foo',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithOneRequirementLinksRequirementToItsSingleView() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredEvent = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'required_foo',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			$requiredEvent, 'requirements'
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertRegExp(
+			'/<a href=.*' . $requiredEvent . '.*>required_foo<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForSeminarWithTwoRequirementsShowsTitleOfBothRequirements() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredEvent1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'required_foo',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			$requiredEvent1, 'requirements'
+		);
+		$requiredEvent2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'required_bar',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			$requiredEvent2, 'requirements'
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertRegExp(
+			'/required_foo.*required_bar/s',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	//////////////////////////////////////////////////////
 	// Test concerning the event type in the single view
 	//////////////////////////////////////////////////////

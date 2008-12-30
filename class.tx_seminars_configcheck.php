@@ -602,7 +602,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'otherdates',
 				'eventsnextday',
 				'registration',
-				'back'
+				'back',
+				'requirements',
 			)
 		);
 	}

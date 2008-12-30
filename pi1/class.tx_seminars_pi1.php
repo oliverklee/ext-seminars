@@ -719,6 +719,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$this->setTargetGroupsMarkers();
 
+			$this->setRequirementsMarker();
+
 			$this->setMarker('organizers', $this->seminar->getOrganizers($this));
 			$this->setOrganizingPartnersMarker();
 
@@ -1214,6 +1216,28 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$this->setSubpart('SINGLE_TARGET_GROUP', $targetGroupsOutput);
+	}
+
+	/**
+	 * Fills the matching marker for the requirements or hides the subpart
+	 * if there are no requirements for the current event.
+	 */
+	private function setRequirementsMarker() {
+		if (!$this->seminar->hasRequirements()) {
+			$this->hideSubparts('requirements', 'field_wrapper');
+			return;
+		}
+
+		$output = '';
+		foreach ($this->seminar->getRequirements() as $requirement) {
+			$this->setMarker(
+				'requirement_title',
+				$requirement->getLinkedFieldValue($this, 'title')
+			);
+			$output .= $this->getSubpart('SINGLE_REQUIREMENT');
+		}
+
+		$this->setSubpart('SINGLE_REQUIREMENT', $output);
 	}
 
 	/**
