@@ -5128,5 +5128,302 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getLanguageKeySuffixForType('tutors')
 		);
 	}
+
+
+	/////////////////////////////////////
+	// Tests concerning hasRequirements
+	/////////////////////////////////////
+
+	public function testHasRequirementsForTopicWithoutRequirementsReturnsFalse() {
+		$topic = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+					'requirements' => 0,
+				)
+			),
+			array()
+		);
+
+		$result = $topic->hasRequirements();
+		$topic->__destruct();
+
+		$this->assertFalse(
+			$result
+		);
+	}
+
+	public function testHasRequirementsForDateOfTopicWithoutRequirementsReturnsFalse() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'requirements' => 0,
+			)
+		);
+		$date = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'topic' => $topicUid,
+				)
+			),
+			array()
+		);
+
+		$result = $date->hasRequirements();
+		$date->__destruct();
+
+		$this->assertFalse(
+			$result
+		);
+	}
+
+	public function testHasRequirementsForTopicWithOneRequirementReturnsTrue() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid, 'requirements'
+		);
+		$topic = new tx_seminars_seminarchild($topicUid, array());
+
+		$result = $topic->hasRequirements();
+		$topic->__destruct();
+
+		$this->assertTrue(
+			$result
+		);
+	}
+
+	public function testHasRequirementsForDateOfTopicWithOneRequirementReturnsTrue() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid, 'requirements'
+		);
+		$date = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'topic' => $topicUid,
+				)
+			),
+			array()
+		);
+
+		$result = $date->hasRequirements();
+		$date->__destruct();
+
+		$this->assertTrue(
+			$result
+		);
+	}
+
+	public function testHasRequirementsForTopicWithTwoRequirementsReturnsTrue() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredTopicUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid1, 'requirements'
+		);
+		$requiredTopicUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid2, 'requirements'
+		);
+		$topic = new tx_seminars_seminarchild($topicUid, array());
+
+		$result = $topic->hasRequirements();
+		$topic->__destruct();
+
+		$this->assertTrue(
+			$result
+		);
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning hasDependencies
+	/////////////////////////////////////
+
+	public function testHasDependenciesForTopicWithoutDependenciesReturnsFalse() {
+		$topic = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+					'dependencies' => 0,
+				)
+			),
+			array()
+		);
+
+		$result = $topic->hasDependencies();
+		$topic->__destruct();
+
+		$this->assertFalse(
+			$result
+		);
+	}
+
+	public function testHasDependenciesForDateOfTopicWithoutDependenciesReturnsFalse() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 0,
+			)
+		);
+		$date = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'topic' => $topicUid,
+				)
+			),
+			array()
+		);
+
+		$result = $date->hasDependencies();
+		$date->__destruct();
+
+		$this->assertFalse(
+			$result
+		);
+	}
+
+	public function testHasDependenciesForTopicWithOneDependencyReturnsTrue() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 1,
+			)
+		);
+		$dependentTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'requirements' => 1,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependentTopicUid, $topicUid
+		);
+		$topic = new tx_seminars_seminarchild($topicUid, array());
+
+		$result = $topic->hasDependencies();
+		$topic->__destruct();
+
+		$this->assertTrue(
+			$result
+		);
+	}
+
+	public function testHasDependenciesForDateOfTopicWithOneDependencyReturnsTrue() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 1,
+			)
+		);
+		$dependentTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'requirements' => 1,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependentTopicUid, $topicUid
+		);
+		$date = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'topic' => $topicUid,
+				)
+			),
+			array()
+		);
+
+		$result = $date->hasDependencies();
+		$date->__destruct();
+
+		$this->assertTrue(
+			$result
+		);
+	}
+
+	public function testHasDependenciesForTopicWithTwoDependenciesReturnsTrue() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'dependencies' => 2,
+			)
+		);
+		$dependentTopicUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'requirements' => 1,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependentTopicUid1, $topicUid
+		);
+		$dependentTopicUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'requirements' => 1,
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			$dependentTopicUid2, $topicUid
+		);
+		$topic = new tx_seminars_seminarchild($topicUid, array());
+
+		$result = $topic->hasDependencies();
+		$topic->__destruct();
+
+		$this->assertTrue(
+			$result
+		);
+	}
 }
 ?>

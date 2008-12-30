@@ -4619,6 +4619,28 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'padding-left: ' . $imageFile[0][4] . 'px; '.
 			'height: ' . $imageFile[0][6] . 'px;"';
 	}
+
+	/**
+	 * Checks whether this event has any requiring events, ie. topics that are
+	 * prerequisite for this event
+	 *
+	 * @return boolean true if this event has any requiring events, false
+	 *                 otherwise
+	 */
+	public function hasRequirements() {
+		return $this->hasTopicInteger('requirements');
+	}
+
+	/**
+	 * Checks whether this event has any depending events, ie. topics for which
+	 * this event is prerequisite.
+	 *
+	 * @return boolean true if this event has any depending events, false
+	 *                 otherwise
+	 */
+	public function hasDependencies() {
+		return $this->hasTopicInteger('dependencies');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {
