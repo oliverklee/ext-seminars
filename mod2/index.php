@@ -58,18 +58,16 @@ $BE_USER->modAccess($MCONF, 1);
  */
 class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 	/** an array of available sub modules */
-	var $availableSubModules;
+	private $availableSubModules;
 
 	/** the currently selected sub module */
-	var $subModule;
+	private $subModule;
 
 	/**
 	 * Initializes some variables and also starts the initialization of the
 	 * parent class.
-	 *
-	 * @access public
 	 */
-	function init() {
+	public function init() {
 		/*
 		 * This is a workaround for the wrong generated links. The workaround
 		 * is needed to get the right values from the GET Parameter. This
@@ -93,10 +91,8 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 	 * Main function of the module. Writes the content to $this->content.
 	 *
 	 * No return value; output is directly written to the page.
-	 *
-	 * @access public
 	 */
-	function main() {
+	public function main() {
 		global $LANG, $BACK_PATH, $BE_USER;
 
 		$this->content = '';
@@ -238,10 +234,8 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 	 * @return boolean true if the static template has been included or there is
 	 *                 at least one event, attendance, organizer or speaker
 	 *                 record on the current page, false otherwise
-	 *
-	 * @access protected
 	 */
-	function hasStaticTemplateOrRecords() {
+	private function hasStaticTemplateOrRecords() {
 		$configGetterClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_configgetter'
 		);
@@ -249,6 +243,7 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 		$configGetter->init();
 
 		$result = $configGetter->getConfValueBoolean('isStaticTemplateLoaded');
+		$configGetter->__destruct();
 
 		// Only bother to check the existence of records on this page if there
 		// is *no* static template.

@@ -45,11 +45,9 @@ class tx_seminars_backendlist {
 	 * The constructor. Sets the table name and the back-end page object.
 	 *
 	 * @param tx_seminars_mod2_BackEndModule the current back-end module
-	 *
-	 * @access public
 	 */
-	function __construct(t3lib_SCbase $page) {
-		$this->page = $page;
+	public function __construct(tx_seminars_mod2_BackEndModule $module) {
+		$this->page = $module;
 	}
 
 	/**
@@ -66,10 +64,8 @@ class tx_seminars_backendlist {
 	 * @param integer the UID of the record, must be > 0
 	 *
 	 * @return string the HTML source code to return
-	 *
-	 * @access public
 	 */
-	function getEditIcon($uid) {
+	public function getEditIcon($uid) {
 		global $BACK_PATH, $LANG, $BE_USER;
 
 		$result = '';
@@ -105,10 +101,8 @@ class tx_seminars_backendlist {
 	 * @param integer the UID of the record, must be > 0
 	 *
 	 * @return string the HTML source code to return
-	 *
-	 * @access public
 	 */
-	function getDeleteIcon($uid) {
+	public function getDeleteIcon($uid) {
 		global $BACK_PATH, $LANG, $BE_USER;
 
 		$result = '';
@@ -160,10 +154,8 @@ class tx_seminars_backendlist {
 	 * @param integer the page ID where the record should be stored, must be > 0
 	 *
 	 * @return string the HTML source code to return
-	 *
-	 * @access public
 	 */
-	function getNewIcon($pid) {
+	public function getNewIcon($pid) {
 		global $BACK_PATH, $LANG, $BE_USER;
 
 		$result = '';
@@ -210,10 +202,8 @@ class tx_seminars_backendlist {
 	 * @param string the back path to the /typo3 directory
 	 *
 	 * @return string the URL to return
-	 *
-	 * @access protected
 	 */
-	function editNewUrl($params, $backPath = '') {
+	protected function editNewUrl($params, $backPath = '') {
 		$returnUrl = 'returnUrl=' .
 			rawurlencode(t3lib_div::getIndpEnv('REQUEST_URI'));
 
@@ -230,10 +220,8 @@ class tx_seminars_backendlist {
 	 *               exported, eg. "tx_seminars_seminars"
 	 *
 	 * @return string the HTML source code of the linked CSV icon
-	 *
-	 * @access protected
 	 */
-	function getCsvIcon() {
+	protected function getCsvIcon() {
 		global $BACK_PATH, $LANG;
 
 		$pageData = $this->page->getPageData();

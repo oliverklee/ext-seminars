@@ -57,10 +57,8 @@ class tx_seminars_organizerslist extends tx_seminars_backendlist {
 	 * Generates and prints out a organizers list.
 	 *
 	 * @return string the HTML source code to display
-	 *
-	 * @access public
 	 */
-	function show() {
+	public function show() {
 		global $LANG;
 
 		// Initialize the variable for the HTML source code.
