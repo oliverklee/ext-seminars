@@ -658,7 +658,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$searchWord,
 			'target_groups',
 			SEMINARS_TABLE_TARGET_GROUPS,
-			SEMINARS_TABLE_TARGET_GROUPS_MM
+			SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM
 		);
 	}
 
