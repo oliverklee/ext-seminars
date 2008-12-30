@@ -56,7 +56,7 @@ class tx_seminars_event_editor extends tx_seminars_frontEndEditor {
 	 * @var tx_seminars_pi1 the pi1 object where this event editor will be
 	 *                      inserted
 	 */
-	protected $plugin;
+	protected $plugin = null;
 
 	/** @var tx_ameosformidable form creator */
 	private $oForm = null;

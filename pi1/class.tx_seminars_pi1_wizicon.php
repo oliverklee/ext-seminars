@@ -37,20 +37,18 @@ class tx_seminars_pi1_wizicon {
 	 * @param array the wizard items, may be empty
 	 *
 	 * @return array modified array with wizard items
-	 *
-	 * @access public
 	 */
-	function proc(array $wizardItems) {
+	public function proc(array $wizardItems) {
 		global $LANG;
 
 		$LL = $this->includeLocalLang();
 
 		$wizardItems['plugins_tx_seminars_pi1'] = array(
-			'icon' => t3lib_extMgm::extRelPath('seminars').'pi1/ce_wiz.gif',
+			'icon' => t3lib_extMgm::extRelPath('seminars') . 'pi1/ce_wiz.gif',
 			'title' => $LANG->getLLL('pi1_title', $LL),
 			'description' => '',
-			'params' => '&defVals[tt_content][CType]=list'
-				.'&defVals[tt_content][list_type]=seminars_pi1'
+			'params' => '&defVals[tt_content][CType]=list' .
+				'&defVals[tt_content][list_type]=seminars_pi1'
 		);
 
 		return $wizardItems;
@@ -61,12 +59,10 @@ class tx_seminars_pi1_wizicon {
 	 * file as an array.
 	 *
 	 * @return array the found language labels
-	 *
-	 * @access public
 	 */
-	function includeLocalLang() {
+	public function includeLocalLang() {
 		return t3lib_div::readLLXMLfile(
-			t3lib_extMgm::extPath('seminars').'locallang.xml',
+			t3lib_extMgm::extPath('seminars') . 'locallang.xml',
 			$GLOBALS['LANG']->lang
 		);
 	}

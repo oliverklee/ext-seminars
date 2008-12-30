@@ -42,10 +42,10 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  */
 class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	/** Same as class name */
-	var $prefixId = 'tx_seminars_registration_editor';
+	public $prefixId = 'tx_seminars_registration_editor';
 
 	/**  Path to this script relative to the extension dir. */
-	var $scriptRelPath = 'pi1/class.tx_seminars_registration_editor.php';
+	public $scriptRelPath = 'pi1/class.tx_seminars_registration_editor.php';
 
 	/**
 	 * @var string the extension key
@@ -53,39 +53,39 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	public $extKey = 'seminars';
 
 	/** the pi1 object where this event editor will be inserted */
-	var $plugin;
+	protected $plugin = null;
 
 	/** Formidable object that creates the edit form. */
-	var $oForm = null;
+	public $oForm = null;
 
 	/**
 	 * the UID of the registration to edit (or false (not 0!) if we are creating
 	 * an event)
 	 */
-	var $iEdition = false;
+	private $iEdition = false;
 
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
-	var $registrationManager;
+	private $registrationManager = null;
 
 	/** the seminar for which the user wants to register */
-	var $seminar;
+	protected $seminar = null;
 
 	/** the names of the form fields to show (with the keys being the same as
 	 *  the values for performance reasons */
-	var $formFieldsToShow = array();
+	private $formFieldsToShow = array();
 
 	/**
 	 * the number of the current page of the form (starting with 0 for the first
 	 * page)
 	 */
-	var $currentPageNumber = 0;
+	public $currentPageNumber = 0;
 
 	/**
 	 * fields that are part of the billing address, with the value controlling
 	 * if the field will be displayed with a label on the second page of the
 	 * registration form
 	 */
-	var $fieldsInBillingAddress = array(
+	private $fieldsInBillingAddress = array(
 		'gender' => false,
 		'name' => false,
 		'address' => false,
@@ -97,7 +97,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	);
 
 	/** an instance of tx_staticinfotables_pi1 */
-	var $staticInfo = null;
+	private $staticInfo = null;
 
 	/**
 	 * The constructor.
@@ -149,10 +149,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 
 	/**
 	 * Initializes the create/edit form.
-	 *
-	 * @access protected
 	 */
-	function _initForms() {
+	private function _initForms() {
 		$this->oForm = t3lib_div::makeInstance('tx_ameosformidable');
 
 		switch ($this->plugin->piVars['action']) {
@@ -196,10 +194,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * @return string the path to the HTML template as an absolute path in the
 	 *                file system, will not be empty in a correct configuration,
 	 *                will never be null
-	 *
-	 * @access public
 	 */
-	function getTemplatePath() {
+	public function getTemplatePath() {
 		return t3lib_div::getFileAbsFileName(
 			$this->plugin->getConfValueString(
 				'registrationEditorTemplateFile',
@@ -213,10 +209,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Creates the HTML output.
 	 *
 	 * @return string HTML of the create/edit form
-	 *
-	 * @access public
 	 */
-	function _render() {
+	public function _render() {
 		$rawForm = $this->oForm->render();
 		// For the confirmation page, we need to reload the whole thing. Yet,
 		// the previous rendering still is necessary for processing the data.
@@ -244,10 +238,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @param array the entered form data with the field names as array keys
 	 *              (including the submit button)
-	 *
-	 * @access public
 	 */
-	function setPage(array $parameters) {
+	public function setPage(array $parameters) {
 		$this->currentPageNumber = $parameters['next_page'];
 	}
 
@@ -257,10 +249,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if we can proceed to saving the registration, false
 	 *                 otherwise
-	 *
-	 * @access public
 	 */
-	function isLastPage() {
+	public function isLastPage() {
 		return ($this->currentPageNumber == 2);
 	}
 
@@ -271,10 +261,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @param array the entered form data with the field names as array keys
 	 *              (including the submit button ...)
-	 *
-	 * @access public
 	 */
-	function processRegistration(array $parameters) {
+	public function processRegistration(array $parameters) {
 		$this->saveDataToSession($parameters);
 
 		if ($this->registrationManager->canCreateRegistration(
@@ -326,10 +314,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if the "travelling terms" checkbox is enabled in the
 	 *                 event record *and* via TS setup, false otherwise
-	 *
-	 * @access public
 	 */
-	function isTerms2Enabled() {
+	public function isTerms2Enabled() {
 		return $this->hasRegistrationFormField(array('elementname' => 'terms_2'))
 			&& $this->seminar->hasTerms2();
 	}
@@ -400,10 +386,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if the current form field should be displayed,
 	 *                 false otherwise
-	 *
-	 * @access public
 	 */
-	function hasRegistrationFormField(array $parameters) {
+	public function hasRegistrationFormField(array $parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
 	}
 
@@ -424,10 +408,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if the current form field should be displayed,
 	 *                 false otherwise
-	 *
-	 * @access public
 	 */
-	function isFormFieldEnabled($key) {
+	public function isFormFieldEnabled($key) {
 		// Some containers cannot be enabled or disabled via TS setup, but
 		// are containers and depend on their content being displayed.
 		switch ($key) {
@@ -548,10 +530,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * @return boolean true if the current form field should be displayed
 	 *                 AND the current event is not completely for free,
 	 *                 false otherwise
-	 *
-	 * @access public
 	 */
-	function hasBankDataFormField(array $parameters) {
+	public function hasBankDataFormField(array $parameters) {
 		return $this->hasRegistrationFormField($parameters)
 			&& $this->seminar->hasAnyPrice();
 	}
@@ -599,10 +579,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return string complete URL of the FE page with a message (or null
 	 *                if the confirmation page has not been submitted yet)
-	 *
-	 * @access public
 	 */
-	function getPageToShowAfterUnregistrationUrl() {
+	public function getPageToShowAfterUnregistrationUrl() {
 		$sendParameters = false;
 		$pageId = $this->plugin->getConfValueInteger(
 			'pageToShowAfterUnregistrationPID',
@@ -631,7 +609,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return string complete URL of the FE page with a message
 	 */
-	protected function createUrlForRedirection($pageId, $sendParameters = true) {
+	private function createUrlForRedirection($pageId, $sendParameters = true) {
 		// On freshly updated sites, the configuration value might not be set
 		// yet. To avoid breaking the site, we use the event list in this case.
 		if (!$pageId) {
@@ -672,10 +650,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * @return array items from the payment methods table as an array
 	 *               with the keys "caption" (for the title) and "value"
 	 *               (for the uid)
-	 *
-	 * @access public
 	 */
-	function populateListPaymentMethods(array $items) {
+	public function populateListPaymentMethods(array $items) {
 		$result = array();
 
 		if ($this->seminar->hasPaymentMethods()) {
@@ -697,10 +673,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if the payment methods should be displayed,
 	 *                 false otherwise
-	 *
-	 * @access public
 	 */
-	function showMethodsOfPayment() {
+	public function showMethodsOfPayment() {
 		return $this->seminar->hasPaymentMethods()
 			&& $this->seminar->hasAnyPrice()
 			&& $this->hasRegistrationFormField(
@@ -792,11 +766,11 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @param string key of the field for which the data should be displayed
 	 *
-	 * @return string the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data is empty)
-	 *
-	 * @access protected
+	 * @return string the data from the corresponding form field formatted in
+	 *                HTML with a heading (or an empty string if the form data
+	 *                is empty)
 	 */
-	function getFormDataItemForConfirmation($key) {
+	private function getFormDataItemForConfirmation($key) {
 		$result = '';
 
 		// The "total_price" field doesn't exist as an actual renderlet and
@@ -885,10 +859,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * If no price has been selected, the first available price will be used.
 	 *
 	 * @return string the selected price with caption and unit
-	 *
-	 * @access protected
 	 */
-	function getSelectedPrice() {
+	private function getSelectedPrice() {
 		$availablePrices = $this->seminar->getAvailablePrices();
 
 		return $availablePrices[$this->getKeyOfSelectedPrice()]['caption'];
@@ -900,10 +872,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * If no price has been selected, the first available price will be used.
 	 *
 	 * @return string the key of the selected price, will always be a valid key
-	 *
-	 * @access protected
 	 */
-	function getKeyOfSelectedPrice() {
+	private function getKeyOfSelectedPrice() {
 		$dataHandler = $this->oForm->oDataHandler;
 
 		$availablePrices = $this->seminar->getAvailablePrices();
@@ -922,11 +892,10 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * the total price. The total price will be returned with the currency
 	 * unit appended.
 	 *
-	 * @return string the total price calculated from the form data including the currency unit, eg. "240.00 EUR"
-	 *
-	 * @access protected
+	 * @return string the total price calculated from the form data including
+	 *                the currency unit, eg. "240.00 EUR"
 	 */
-	function getTotalPriceWithUnit() {
+	private function getTotalPriceWithUnit() {
 		$result = '';
 
 		$dataHandler = $this->oForm->oDataHandler;
@@ -964,10 +933,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return string the caption of the selected payment method or an empty
 	 *                string if no valid payment method has been selected
-	 *
-	 * @access protected
 	 */
-	function getSelectedPaymentMethod() {
+	private function getSelectedPaymentMethod() {
 		$result = '';
 
 		$dataHandler = $this->oForm->oDataHandler;
@@ -1001,7 +968,7 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return string the captions of the selected options, separated by CR
 	 */
-	function getCaptionsForSelectedOptions(
+	private function getCaptionsForSelectedOptions(
 		array $availableOptions, array $selectedOptions
 	) {
 		$result = '';
@@ -1026,10 +993,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return string the already entered registration data, nicely formatted as
 	 *                HTML
-	 *
-	 * @access public
 	 */
-	function getBillingAddress() {
+	public function getBillingAddress() {
 		$result = '';
 
 		foreach ($this->fieldsInBillingAddress as $currentKey => $hasLabel) {
@@ -1134,10 +1099,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *              (needs to contain an element with the key "key")
 	 *
 	 * @return string the contents of the element
-	 *
-	 * @access public
 	 */
-	function getFeUserData($unused, array $params) {
+	public function getFeUserData($unused, array $params) {
 		$result = $this->retrieveDataFromSession(null, $params);
 
 		if (empty($result)) {
@@ -1167,10 +1130,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * @return array a list of localized country names from static_tables as an
 	 *               array with the keys "caption" (for the title) and "value"
 	 *               (in this case, the same as the caption)
-	 *
-	 * @access public
 	 */
-	function populateListCountries() {
+	public function populateListCountries() {
 		$this->initStaticInfo();
 		$allCountries = $this->staticInfo->initCountries();
 
@@ -1197,10 +1158,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return array items from the checkboxes table as an array with the keys
 	 *               "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access public
 	 */
-	function populateCheckboxes() {
+	public function populateCheckboxes() {
 		$result = array();
 
 		if ($this->seminar->hasCheckboxes()) {
@@ -1216,10 +1175,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if we have a non-empty list of checkboxes AND this
 	 *                 list should be displayed, false otherwise
-	 *
-	 * @access public
 	 */
-	function hasCheckboxes() {
+	public function hasCheckboxes() {
 		return $this->seminar->hasCheckboxes()
 			&& $this->hasRegistrationFormField(
 				array('elementname' => 'checkboxes')
@@ -1231,10 +1188,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return array items from the lodgings table as an array with the keys
 	 *               "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access public
 	 */
-	function populateLodgings() {
+	public function populateLodgings() {
 		$result = array();
 
 		if ($this->seminar->hasLodgings()) {
@@ -1265,10 +1220,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if we have a non-empty list of lodging options and
 	 *                 this list should be displayed, false otherwise
-	 *
-	 * @access public
 	 */
-	function hasLodgings() {
+	public function hasLodgings() {
 		return $this->seminar->hasLodgings()
 			&& $this->hasRegistrationFormField(
 				array('elementname' => 'lodgings')
@@ -1280,10 +1233,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return array items from the foods table as an array with the keys
 	 *               "caption" (for the title) and "value" (for the uid)
-	 *
-	 * @access public
 	 */
-	function populateFoods() {
+	public function populateFoods() {
 		$result = array();
 
 		if ($this->seminar->hasFoods()) {
@@ -1299,10 +1250,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return boolean true if we have a non-empty list of food options and this
 	 *                 list should be displayed, false otherwise
-	 *
-	 * @access public
 	 */
-	function hasFoods() {
+	public function hasFoods() {
 		return $this->seminar->hasFoods()
 			&& $this->hasRegistrationFormField(
 				array('elementname' => 'foods')
@@ -1329,10 +1278,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return array available prices as an array with the keys "caption" (for
 	 *               the title) and "value" (for the uid)
-	 *
-	 * @access public
 	 */
-	function populatePrices() {
+	public function populatePrices() {
 		return $this->seminar->getAvailablePrices();
 	}
 
@@ -1367,10 +1314,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return integer the UID of the preselected payment method or 0 if should
 	 *                 will be preselected
-	 *
-	 * @access public
 	 */
-	function getPreselectedPaymentMethod() {
+	public function getPreselectedPaymentMethod() {
 		$result = 0;
 
 		$availablePaymentMethods = $this->populateListPaymentMethods(array());
@@ -1439,10 +1384,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return integer the UID of the payment method that has been saved in the
 	 *                 FE user session or 0 if there is none
-	 *
-	 * @access private
 	 */
-	function retrieveSavedMethodOfPayment() {
+	private function retrieveSavedMethodOfPayment() {
 		return intval(
 			$this->retrieveDataFromSession(
 				null,
@@ -1474,10 +1417,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * or the FE user's name.
 	 *
 	 * @return string a name to prefill the account owner
-	 *
-	 * @access public
 	 */
-	function prefillAccountOwner() {
+	public function prefillAccountOwner() {
 		$result = $this->retrieveDataFromSession(
 			null,
 			array('key' => 'account_owner')
@@ -1495,10 +1436,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 
 	/**
 	 * Creates and initializes $this->staticInfo (if that hasn't been done yet).
-	 *
-	 * @access private
 	 */
-	function initStaticInfo() {
+	private function initStaticInfo() {
 		if (!$this->staticInfo) {
 			$this->staticInfo
 				= t3lib_div::makeInstance('tx_staticinfotables_pi1');
@@ -1510,10 +1449,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 * Hides form fields that are either disabled via TS setup or that have
 	 * nothing to select (e.g. if there are no payment methods) from the
 	 * templating process.
-	 *
-	 * @access protected
 	 */
-	function hideUnusedFormFields() {
+	private function hideUnusedFormFields() {
 		static $availableFormFields = array(
 			'step_counter',
 			'payment',
@@ -1601,10 +1538,8 @@ class tx_seminars_registration_editor extends tx_seminars_frontEndEditor {
 	 *
 	 * @return string a localized string displaying the number of the current
 	 *                and the last page
-	 *
-	 * @access public
 	 */
-	function getStepCounter() {
+	public function getStepCounter() {
 		$currentPageNumberForDisplay = $this->plugin->getConfValueInteger(
 			'numberOfFirstRegistrationPage'
 		) + $this->currentPageNumber;
