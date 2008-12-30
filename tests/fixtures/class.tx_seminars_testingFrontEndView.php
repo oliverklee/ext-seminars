@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEndView.php');
-
 /**
  * Class 'testingFrontEndView' for the 'seminars' extension.
  *
@@ -34,7 +32,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_frontEnd
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_testingFrontEndView extends tx_seminars_frontEndView {
+class tx_seminars_testingFrontEndView extends tx_seminars_pi1_frontEndView {
 	/**
 	 * Renders the view and returns its content.
 	 *

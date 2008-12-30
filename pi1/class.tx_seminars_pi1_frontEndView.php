@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class tx_seminars_frontEndView extends tx_oelib_templatehelper {
+abstract class tx_seminars_pi1_frontEndView extends tx_oelib_templatehelper {
 	/**
 	 * @var string same as plugin name
 	 */
@@ -76,7 +76,7 @@ abstract class tx_seminars_frontEndView extends tx_oelib_templatehelper {
 	abstract public function render();
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndView.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_frontEndView.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndView.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndView.php']);
 }
 ?>
