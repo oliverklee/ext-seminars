@@ -5265,9 +5265,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			1,
 			$foundEvents->count()
 		);
-
 		$this->assertNotEquals(
-			$dependingUid,
+			$dependingEventUid,
 			$foundEvents->current()->getUid()
 		);
 	}
@@ -5365,7 +5364,160 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$requiredEventUid,
 			$foundEvents->current()->getUid()
 		);
+	}
 
+
+	////////////////////////////////////////////////////////////
+	// Tests concerning limitToTopicsWithoutRegistrationByUser
+	////////////////////////////////////////////////////////////
+
+	public function testLimitToTopicsWithoutRegistrationByUserFindsTopicWithoutDate() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser(
+			$this->testingFramework->createFrontEndUser()
+		);
+
+		$this->assertEquals(
+			$topicUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToTopicsWithoutRegistrationByUserFindsTopicWithDate() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser(
+			$this->testingFramework->createFrontEndUser()
+		);
+
+		$this->assertEquals(
+			$topicUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToTopicsWithoutRegistrationByUserNotFindsDate() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser(
+			$this->testingFramework->createFrontEndUser()
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->count()
+		);
+	}
+
+	public function testLimitToTopicsWithoutRegistrationByUserFindsTopicWithDateWithRegistrationByOtherUser() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $dateUid,
+				'user' => $this->testingFramework->createFrontEndUser()
+			)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser(
+			$this->testingFramework->createFrontEndUser()
+		);
+
+		$this->assertEquals(
+			$topicUid,
+			$this->fixture->build()->current()->getUid()
+		);
+	}
+
+	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUser() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$userUid = $this->testingFramework->createFrontEndUser();
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $dateUid, 'user' => $userUid)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
+		);
+	}
+
+	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserAndOtherUser() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$userUid = $this->testingFramework->createFrontEndUser();
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $dateUid, 'user' => $userUid)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $dateUid,
+				'user' => $this->testingFramework->createFrontEndUser()
+			)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
+		);
 	}
 }
 ?>

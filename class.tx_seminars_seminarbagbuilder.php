@@ -1003,6 +1003,25 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM . '.sorting_foreign ASC'
 		);
 	}
+
+	/**
+	 * Limits the search result to topics for which there is no registration by
+	 * the front-end user with the UID $uid.
+	 *
+	 * @param integer the UID of the front-end user whose registered events
+	 *                should be removed from the bag, must be > 0
+	 */
+	public function limitToTopicsWithoutRegistrationByUser($uid) {
+		$this->limitToTopicRecords();
+		$this->whereClauseParts['topicsWithoutUserRegistration'] =
+			'NOT EXISTS (' .
+				'SELECT * FROM ' . SEMINARS_TABLE_ATTENDANCES . ', ' .
+					SEMINARS_TABLE_SEMINARS . ' dates ' .
+				'WHERE ' . SEMINARS_TABLE_ATTENDANCES . '.user=' . $uid .
+				' AND ' . SEMINARS_TABLE_ATTENDANCES . '.seminar=dates.uid' .
+				' AND dates.topic=' . SEMINARS_TABLE_SEMINARS . '.uid' .
+			')';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {
