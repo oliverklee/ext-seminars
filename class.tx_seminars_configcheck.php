@@ -180,6 +180,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkBankTransferUid();
 		$this->checkLogOutOneTimeAccountsAfterRegistration();
 		$this->checkMyEventsPid();
+		$this->checkDetailPid();
 	}
 
 	/**

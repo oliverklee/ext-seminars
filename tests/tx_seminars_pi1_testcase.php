@@ -3539,5 +3539,172 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'Currently, FE image functions cannot be unit-tested yet.'
 		);
 	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning the registration form
+	///////////////////////////////////////////
+
+	public function testRegistrationFormForEventWithOneNotFullfilledRequirementIsHidden() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
+
+		$requiredTopic = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$topic = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$date = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+				'attendees_max' => 10,
+				'topic' => $topic,
+			)
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topic, $requiredTopic, 'requirements'
+		);
+		$this->fixture->piVars['seminar'] = $date;
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_your_user_data_formal'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListOfRequirementsForEventWithOneNotFulfilledRequirementListIsShown() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
+
+		$requiredTopic = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$topic = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$date = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+				'attendees_max' => 10,
+				'topic' => $topic,
+			)
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topic, $requiredTopic, 'requirements'
+		);
+		$this->fixture->piVars['seminar'] = $date;
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
+		);
+	}
+
+	public function testListOfRequirementsForEventWithOneNotFulfilledRequirementLinksTitleOfRequirement() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+
+		$topic = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$date = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+				'attendees_max' => 10,
+				'topic' => $topic,
+			)
+		);
+
+		$requiredTopic = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'required_foo',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topic, $requiredTopic, 'requirements'
+		);
+		$this->fixture->piVars['seminar'] = $date;
+
+		$this->assertRegExp(
+			'/<a href=.*' . $requiredTopic . '.*>required_foo<\/a>/',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListOfRequirementsForEventWithTwoNotFulfilledRequirementsShownsTitlesOfBothRequirements() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
+
+		$topic = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$date = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+				'attendees_max' => 10,
+				'topic' => $topic,
+			)
+		);
+
+		$requiredTopic1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'required_foo',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topic, $requiredTopic1, 'requirements'
+		);
+		$requiredTopic2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'required_bar',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topic, $requiredTopic2, 'requirements'
+		);
+
+		$this->fixture->piVars['seminar'] = $date;
+
+		$this->assertRegExp(
+			'/required_foo.*required_bar/s',
+			$this->fixture->main('', array())
+		);
+	}
 }
 ?>

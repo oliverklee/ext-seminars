@@ -2598,7 +2598,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				case 'register':
 					// The fall-through is intended.
 				default:
-					$registrationForm = $this->createRegistrationForm();
+					if ($this->registrationManager
+						->userFulfillsRequirements($this->seminar)
+					) {
+						$registrationForm = $this->createRegistrationForm();
+					} else {
+						$errorMessage = $this->translate(
+							'message_requirementsNotFulfilled'
+						);
+						$requirementsList = $this->createRequirementsList();
+						$requirementsList->setEvent($this->seminar);
+						$requirementsList->limitToMissingRegistrations();
+						$registrationForm = $requirementsList->render();
+						$requirementsList->__destruct();
+					}
 					break;
 			}
 		}
