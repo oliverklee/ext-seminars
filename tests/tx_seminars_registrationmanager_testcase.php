@@ -642,8 +642,100 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUserFulfillsRequirementsForEventWithTwoFulfilledRequirementsReturnsTrue() {
-		$userUid = $this->testingFramework->createAndLogInFrontEndUser();
+
+	//////////////////////////////////////////////
+	// Tests concerning getMissingRequiredTopics
+	//////////////////////////////////////////////
+
+	public function testGetMissingRequiredTopicsReturnsSeminarBag() {
+		$this->assertTrue(
+			$this->fixture->getMissingRequiredTopics($this->seminar)
+				instanceof tx_seminars_seminarbag
+		);
+	}
+
+	public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsOneItem() {
+		$this->testingFramework->createAndLogInFrontEndUser();
+		$requiredTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $requiredTopicUid,
+			)
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid, 'requirements'
+		);
+
+		$this->cachedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'topic' => $topicUid,
+				)
+			),
+			array()
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
+				->count()
+		);
+	}
+
+	public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic() {
+		$this->testingFramework->createAndLogInFrontEndUser();
+		$requiredTopicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $requiredTopicUid,
+			)
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid, 'requirements'
+		);
+
+		$this->cachedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'topic' => $topicUid,
+				)
+			),
+			array()
+		);
+
+		$this->assertEquals(
+			$requiredTopicUid,
+			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
+				->current()->getUid()
+		);
+	}
+
+	public function testGetMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems() {
+		$this->testingFramework->createAndLogInFrontEndUser();
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
@@ -663,10 +755,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS,
 			$topicUid, $requiredTopicUid1, 'requirements'
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $requiredDateUid1, 'user' => $userUid)
 		);
 
 		$requiredTopicUid2 = $this->testingFramework->createRecord(
@@ -684,10 +772,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			$topicUid, $requiredTopicUid2, 'requirements'
 		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $requiredDateUid2, 'user' => $userUid)
-		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
@@ -700,12 +784,14 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array()
 		);
 
-		$this->assertTrue(
-			$this->fixture->userFulfillsRequirements($this->cachedSeminar)
+		$this->assertEquals(
+			2,
+			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
+				->count()
 		);
 	}
 
-	public function testUserFulfillsRequirementsForEventWithOneFulfilledAndOneUnfulfilledRequirementReturnsFalse() {
+	public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilledTopic() {
 		$userUid = $this->testingFramework->createAndLogInFrontEndUser();
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -752,8 +838,64 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array()
 		);
 
-		$this->assertFalse(
-			$this->fixture->userFulfillsRequirements($this->cachedSeminar)
+		$this->assertEquals(
+			$requiredTopicUid2,
+			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
+				->current()->getUid()
+		);
+	}
+
+	public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledDoesNotReturnFulfilledTopic() {
+		$userUid = $this->testingFramework->createAndLogInFrontEndUser();
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+
+		$requiredTopicUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$requiredDateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $requiredTopicUid1,
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid1, 'requirements'
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $requiredDateUid1, 'user' => $userUid)
+		);
+
+		$requiredTopicUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$topicUid, $requiredTopicUid2, 'requirements'
+		);
+
+		$this->cachedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'topic' => $topicUid,
+				)
+			),
+			array()
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
+				->count()
 		);
 	}
 }

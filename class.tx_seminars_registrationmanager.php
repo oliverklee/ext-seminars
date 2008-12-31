@@ -670,11 +670,25 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return true;
 		}
 
+		return $this->getMissingRequiredTopics($event)->isEmpty();
+	}
+
+	/**
+	 * Returns the event topics the user still needs to register for in order
+	 * to be able to register for $event.
+	 *
+	 *
+	 * @param tx_seminars_seminar the event to check
+	 *
+	 * @return tx_seminars_seminarbag the event topics which still need the
+	 *                                users registration, may be empty
+	 */
+	public function getMissingRequiredTopics(tx_seminars_seminar $event) {
 		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
 		$builder->limitToRequiredEventTopics($event->getTopicUid());
 		$builder->limitToTopicsWithoutRegistrationByUser($this->getFeUserUid());
 
-		return $builder->build()->isEmpty();
+		return $builder->build();
 	}
 }
 
