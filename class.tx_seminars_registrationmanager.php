@@ -96,8 +96,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return true;
 		}
 
-		return ($this->couldThisUserRegister($event)
-			&& $this->userFulfillsRequirements($event));
+		return $this->couldThisUserRegister($event);
 	}
 
 	/**

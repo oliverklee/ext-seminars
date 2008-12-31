@@ -531,49 +531,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedInUserAndUnfulfilledRequirementReturnsFalse() {
-		$this->testingFramework->createAndLoginFrontEndUser();
-
-		$requiredTopicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
-				'topic' => $requiredTopicUid,
-			)
-		);
-		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
-		);
-		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
-			$topicUid, $requiredTopicUid, 'requirements'
-		);
-
-		$this->cachedSeminar = new tx_seminars_seminarchild(
-			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
-				array(
-					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-					'attendees_max' => 10,
-					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-					'topic' => $topicUid,
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
-				)
-			),
-			array()
-		);
-
-		$this->assertFalse(
-			$this->fixture->canRegisterIfLoggedIn($this->cachedSeminar)
-		);
-	}
-
 
 	/////////////////////////////////////////////
 	// Test concerning userFulfillsRequirements
