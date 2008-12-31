@@ -182,8 +182,8 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 	public function testtLimitToMissingRegistrationsWithNoLoggedInFeUserThrowsException() {
 		$this->setExpectedException(
 			'Exception',
-			'No fe-user is currently logged in. Please call ' .
-				'this function only when a fe-user is logged in.'
+			'No FE user is currently logged in. Please call ' .
+				'this function only when a FE user is logged in.'
 		);
 
 		$this->fixture->limitToMissingRegistrations();
