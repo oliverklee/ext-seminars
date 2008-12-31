@@ -1224,16 +1224,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$output = '';
-		foreach ($this->seminar->getRequirements() as $requirement) {
-			$this->setMarker(
-				'requirement_title',
-				$requirement->getLinkedFieldValue($this, 'title')
-			);
-			$output .= $this->getSubpart('SINGLE_REQUIREMENT');
-		}
+		$requirementsLists = $this->createRequirementsList();
+		$requirementsLists->setEvent($this->seminar);
 
-		$this->setSubpart('SINGLE_REQUIREMENT', $output);
+		$this->setSubpart(
+			'FIELD_WRAPPER_REQUIREMENTS',
+			$requirementsLists->render()
+		);
+
+		$requirementsLists->__destruct();
 	}
 
 	/**
@@ -2042,6 +2041,25 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 
 		return $registrationBagBuilder;
+	}
+
+	/**
+	 * Returns a pi1_frontEndRequirementsList object.
+	 *
+	 * @return tx_seminars_pi1_frontEndRequirementsList the object to build the
+	 *                                                  requirements list with
+	 */
+	private function createRequirementsList() {
+		$requirementsListClass = t3lib_div::makeInstanceClassName(
+			'tx_seminars_pi1_frontEndRequirementsList'
+		);
+
+		$requirementsList = new $requirementsListClass(
+			$this->conf,
+			$GLOBALS['TSFE']->cObj
+		);
+
+		return $requirementsList;
 	}
 
 	/**
