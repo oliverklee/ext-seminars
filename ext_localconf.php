@@ -47,6 +47,9 @@ t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_foods=1
 ');
 t3lib_extMgm::addUserTSConfig('
+	options.saveDocNew.tx_seminars_target_groups=1
+');
+t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_categories=1
 ');
 t3lib_extMgm::addUserTSConfig('
