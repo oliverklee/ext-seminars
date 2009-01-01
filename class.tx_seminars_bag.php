@@ -258,6 +258,7 @@ abstract class tx_seminars_bag implements Iterator {
 		}
 
 		$this->createItemFromDbResult();
+		$this->isRewound = false;
 
 		return $this->current();
 	}

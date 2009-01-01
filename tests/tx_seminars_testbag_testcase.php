@@ -229,8 +229,26 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testIsEmptyForEmptyBagAfterIteratingReturnsTrue() {
+		$bag = new tx_seminars_testbag('1=2');
+		foreach ($bag as $item);
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+	}
+
 	public function testIsEmptyForBagWithOneElementReturnsFalse() {
 		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+
+		$this->assertFalse(
+			$bag->isEmpty()
+		);
+	}
+
+	public function testIsEmptyForBagWithOneElementAfterIteratingReturnsFalse() {
+		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+		foreach ($bag as $item);
 
 		$this->assertFalse(
 			$bag->isEmpty()
