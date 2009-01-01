@@ -419,5 +419,29 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			$this->fixture->render()
 		);
 	}
+
+	public function testRenderWithEmptyShowFeUserFieldsInRegistrationsListDoesNotContainUnresolvedLabel() {
+		$this->createLogInAndRegisterFrontEndUser();
+		$this->fixture->setConfigurationValue(
+			'showFeUserFieldsInRegistrationsList', ''
+		);
+
+		$this->assertNotContains(
+			'label_',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderWithEmptyShowRegistrationFieldsInRegistrationListDoesNotContainUnresolvedLabel() {
+		$this->createLogInAndRegisterFrontEndUser();
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', ''
+		);
+
+		$this->assertNotContains(
+			'label_',
+			$this->fixture->render()
+		);
+	}
 }
 ?>

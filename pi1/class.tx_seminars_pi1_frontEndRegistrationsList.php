@@ -194,7 +194,8 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 				$this->getConfValueString(
 					'showFeUserFieldsInRegistrationsList',
 					's_template_special'
-				)
+				),
+				true
 			);
 
 			foreach ($frontEndUserFields as $field) {
@@ -212,7 +213,8 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 				$this->getConfValueString(
 					'showRegistrationFieldsInRegistrationList',
 					's_template_special'
-				)
+				),
+				true
 			);
 
 			foreach ($registrationsFields as $field) {

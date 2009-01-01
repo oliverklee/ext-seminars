@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2490] Fix: Broken label "label_" in the FE registrations list
 - [#2502] Change: Update copyrights to 2009
 - [#2477] Fix: Icon for CSV export of event data missing from mod2
 - [#2429] Feature: On the registration page, list the requirements for a registration if they are not fulfilled
