@@ -2312,13 +2312,24 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	protected function getEditLink() {
 		$result = '';
 
-		if ($this->seminar->isOwnerFeUser()) {
+		$mayManagersEditTheirEvents = $this->getConfValueBoolean(
+			'mayManagersEditTheirEvents', 's_listView'
+		);
+
+		$isUserManager = $this->seminar->isUserVip(
+			$this->getFeUserUid(),
+			$this->getConfValueInteger('defaultEventVipsFeGroupID')
+		);
+
+		if ($this->seminar->isOwnerFeUser()
+			|| ($mayManagersEditTheirEvents && $isUserManager)
+		) {
 			$result = $this->cObj->getTypoLink(
 				$this->translate('label_edit'),
 				$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
 				array(
 					'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
-					'tx_seminars_pi1[action]' => 'EDIT'
+					'tx_seminars_pi1[action]' => 'EDIT',
 				)
 			);
 		}
