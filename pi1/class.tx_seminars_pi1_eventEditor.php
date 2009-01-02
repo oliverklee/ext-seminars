@@ -137,8 +137,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private function includeJavaScriptToDeleteAttachments() {
 		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId]
 			= '<script src="' . t3lib_extMgm::extRelPath($this->extKey) .
-				'pi1/tx_seminars_pi1.js" type="text/javascript">' .
-				'</script>';
+				'pi1/tx_seminars_pi1.js" type="text/javascript"></script>';
 	}
 
 	/**
@@ -164,17 +163,17 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @return string HTML of the create/edit form
 	 */
 	public function _render() {
-		$rawForm = $this->oForm->render();
-		$this->plugin->processTemplate($rawForm);
-		$this->plugin->setLabels();
+		$template = t3lib_div::makeInstance('tx_oelib_Template');
+		$template->processTemplate($this->oForm->render());
+
 		// The redirect to the FE editor with the current record loaded can
 		// only work with the record's UID, but new records do not have a UID
 		// before they are saved.
 		if (!$this->iEdition) {
-			$this->plugin->hideSubparts('submit_and_stay');
+			$template->hideSubparts('submit_and_stay');
 		}
 
-		return $this->getHtmlWithAttachedFilesList();
+		return $this->getHtmlWithAttachedFilesList($template);
 	}
 
 	/**
@@ -185,13 +184,20 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * our own formatted list to ensure correctly displayed attachments, even if
 	 * there was a validation error.
 	 *
-	 * This function requires the template to be already processed by
-	 * $this->plugin.
+	 * @param tx_oelib_Template holds the raw HTML output, must be already
+	 *                          processed by FORMidable
 	 *
 	 * @return string HTML for the FE editor with the formatted attachment
 	 *                list if there are attached files, will not be empty
 	 */
-	private function getHtmlWithAttachedFilesList() {
+	private function getHtmlWithAttachedFilesList(tx_oelib_Template $template) {
+		foreach (array(
+			'label_delete', 'label_really_delete', 'label_save',
+			'label_save_and_close',
+		) as $label) {
+			$template->setMarker($label, $this->plugin->translate($label));
+		}
+
 		$originalAttachmentList = $this->oForm->oDataHandler->oForm
 			->aORenderlets['attached_files']->mForcedValue;
 
@@ -199,20 +205,19 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$attachmentList = '';
 			$fileNumber = 1;
 			foreach ($this->attachedFiles as $fileName) {
-				$this->plugin->setMarker('file_name', $fileName);
-				$this->plugin->setMarker(
+				$template->setMarker('file_name', $fileName);
+				$template->setMarker(
 					'single_attached_file_id', 'attached_file_' . $fileNumber
 				);
 				$fileNumber++;
-				$attachmentList
-					.= $this->plugin->getSubpart('SINGLE_ATTACHED_FILE');
+				$attachmentList .= $template->getSubpart('SINGLE_ATTACHED_FILE');
 			}
-			$this->plugin->setSubpart('single_attached_file', $attachmentList);
+			$template->setSubpart('single_attached_file', $attachmentList);
 		} else {
-			$this->plugin->hideSubparts('attached_files');
+			$template->hideSubparts('attached_files');
 		}
 
-		$result = $this->plugin->getSubpart();
+		$result = $template->getSubpart();
 
 		// Removes FORMidable's original attachment list from the result.
 		if ($originalAttachmentList != '') {
