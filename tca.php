@@ -329,6 +329,10 @@ $TCA['tx_seminars_seminars'] = array(
 				'foreign_field' => 'seminar',
 				'foreign_default_sortby' => 'tx_seminars_timeslots.begin_date',
 				'maxitems' => 999,
+				'appearance' => array(
+					'newRecordLinkPosition' => 'bottom',
+					'expandSingle' => 1,
+				),
 			),
 		),
 		'deadline_registration' => array(
