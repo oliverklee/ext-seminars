@@ -1,3 +1,5 @@
+0.8.0 (currently working on)
+
 0.7.0 (branched 2009-01-02)
 - [#2520] Fix: Times are deleted when saving an event in the FE editor
 - [#2519] Fix: Thank-you e-mail has a surplus colon for events without an event type
