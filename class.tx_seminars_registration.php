@@ -727,7 +727,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->translate('email_'.$helloSubjectPrefix.'Hello'),
 			$this->getUserName())
 		);
-		$this->setMarker('event_type', $this->seminar->getEventType());
+		if ($this->seminar->hasEventType()) {
+			$this->setMarker('event_type', $this->seminar->getEventType());
+		} else {
+			$this->hideSubparts('event_type', 'field_wrapper');
+		}
 		$this->setMarker('title', $this->seminar->getTitle());
 		$this->setMarker('uid', $this->seminar->getUid());
 
