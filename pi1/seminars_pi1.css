@@ -67,6 +67,7 @@
 
 .tx-seminars-pi1-listrow img.category_image {
 	margin: 0 2px;
+	border: none;
 }
 
 th.tx-seminars-pi1-registration,
