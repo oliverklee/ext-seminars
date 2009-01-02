@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2019] Change: Change the labels "Multiple event topic|date" in locallang_db.xml
 - [#2350] Change: Move the "create new" button from the top to the bottom of the timeslots IRRE field
 - [#2425] Change: Rename "Save and close" button in the FE editor to "Save and back"
 - [#2487] Fix: Button "submit and stay" is no button
