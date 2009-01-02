@@ -3408,25 +3408,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return null;
 		}
 
-		try {
-			$owner = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
-					->find($this->getRecordPropertyInteger('owner_feuser'));
-		} catch (tx_oelib_Exception_NotFound $exception) {
-			$owner = null;
-		}
-
-		return $owner;
+		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
+			->find($this->getRecordPropertyInteger('owner_feuser'));
 	}
 
 	/**
 	 * Checks whether this event has an existing owner (the FE user who has
-	 * created this event)
+	 * created this event).
 	 *
 	 * @return boolean true if this event has an existing owner, false otherwise
 	 */
 	public function hasOwner() {
-		return ($this->hasRecordPropertyInteger('owner_feuser')
-			&& ($this->getOwner() != null));
+		return $this->hasRecordPropertyInteger('owner_feuser');
 	}
 
 	/**

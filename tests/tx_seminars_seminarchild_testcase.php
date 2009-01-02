@@ -4672,16 +4672,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOwnerForInexistentOwnerReturnsNull() {
-		$this->fixture->setOwnerUid(
-			$this->testingFramework->getAutoIncrement('fe_users')
-		);
-
-		$this->assertNull(
-			$this->fixture->getOwner()
-		);
-	}
-
 
 	//////////////////////////////
 	// Tests concerning hasOwner
@@ -4698,16 +4688,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testHasOwnerForNoOwnerReturnsFalse() {
-		$this->assertFalse(
-			$this->fixture->hasOwner()
-		);
-	}
-
-	public function testHasOwnerForInexistentOwnerReturnsFalse() {
-		$this->fixture->setOwnerUid(
-			$this->testingFramework->getAutoIncrement('fe_users')
-		);
-
 		$this->assertFalse(
 			$this->fixture->hasOwner()
 		);
