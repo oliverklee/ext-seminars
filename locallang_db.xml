@@ -22,8 +22,8 @@
 			<label index="tx_seminars_seminars.uid">Event number:</label>
 			<label index="tx_seminars_seminars.object_type">Type:</label>
 			<label index="tx_seminars_seminars.object_type.I.0">Single event</label>
-			<label index="tx_seminars_seminars.object_type.I.1">Multiple event topic</label>
-			<label index="tx_seminars_seminars.object_type.I.2">Multiple event date</label>
+			<label index="tx_seminars_seminars.object_type.I.1">Topic for multiple events</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Date</label>
 			<label index="tx_seminars_seminars.title">Title:</label>
 			<label index="tx_seminars_seminars.subtitle">Subtitle:</label>
 			<label index="tx_seminars_seminars.categories">Categories:</label>
@@ -182,8 +182,8 @@
 			<label index="tx_seminars_seminars.uid">Veranstaltungsnummer:</label>
 			<label index="tx_seminars_seminars.object_type">Typ:</label>
 			<label index="tx_seminars_seminars.object_type.I.0">Einzel-Veranstaltung</label>
-			<label index="tx_seminars_seminars.object_type.I.1">Veranstaltungsreihe: Thema</label>
-			<label index="tx_seminars_seminars.object_type.I.2">Veranstaltungsreihe: Termin</label>
+			<label index="tx_seminars_seminars.object_type.I.1">Thema für mehrere Veranstaltungen</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Termin</label>
 			<label index="tx_seminars_seminars.title">Titel:</label>
 			<label index="tx_seminars_seminars.subtitle">Untertitel:</label>
 			<label index="tx_seminars_seminars.categories">Kategorien:</label>
@@ -1142,8 +1142,8 @@
 			<label index="tx_seminars_seminars.uid" type="integer">205487650</label>
 			<label index="tx_seminars_seminars.object_type" type="integer">241539922</label>
 			<label index="tx_seminars_seminars.object_type.I.0" type="integer">152387705</label>
-			<label index="tx_seminars_seminars.object_type.I.1" type="integer">250876687</label>
-			<label index="tx_seminars_seminars.object_type.I.2" type="integer">32855575</label>
+			<label index="tx_seminars_seminars.object_type.I.1" type="integer">182467049</label>
+			<label index="tx_seminars_seminars.object_type.I.2" type="integer">71780721</label>
 			<label index="tx_seminars_seminars.title" type="integer">85903807</label>
 			<label index="tx_seminars_seminars.subtitle" type="integer">252742192</label>
 			<label index="tx_seminars_seminars.categories" type="integer">147031926</label>
@@ -2220,8 +2220,8 @@
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
 			<label index="tx_seminars_seminars.object_type">Type:</label>
 			<label index="tx_seminars_seminars.object_type.I.0">Single event</label>
-			<label index="tx_seminars_seminars.object_type.I.1">Multiple event topic</label>
-			<label index="tx_seminars_seminars.object_type.I.2">Multiple event date</label>
+			<label index="tx_seminars_seminars.object_type.I.1">Topic for multiple events</label>
+			<label index="tx_seminars_seminars.object_type.I.2">Date</label>
 			<label index="tx_seminars_seminars.topic">Topic:</label>
 			<label index="tx_seminars_attendances.price">Price to pay:</label>
 			<label index="tx_seminars_seminars.additional_information">Additional information:</label>
