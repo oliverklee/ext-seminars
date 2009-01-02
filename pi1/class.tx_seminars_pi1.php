@@ -1558,9 +1558,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$result = 'Hello World. When I grow up I will be the list of ' .
 							'favorites';
 				break;
-			case 'seminar_list':
-				$this->createCategoryList();
-				break;
 			default:
 				break;
 		}
@@ -1870,14 +1867,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			}
 			$this->setMarker('image', $image);
 
-			$allCategories = $this->seminar->getCategories();
-			if ($whatToDisplay == 'seminar_list') {
-				$listOfCategories = $this->categoryList->createCategoryList(
-					$allCategories
-				);
-			} else {
-				$listOfCategories = implode(', ', $allCategories);
-			}
+			$categoryListClassName = t3lib_div::makeInstanceClassName(
+				'tx_seminars_pi1_frontEndCategoryList'
+			);
+			$categoryList = new $categoryListClassName($this->conf, $this->cObj);
+			$listOfCategories = $categoryList->createCategoryList(
+				$this->seminar->getCategories()
+			);
+			$categoryList->__destruct();
+
 			if (($listOfCategories === $this->previousCategory)
 				&& $this->getConfValueBoolean(
 					'sortListViewByCategory',
@@ -2518,18 +2516,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					)
 				),
 			)
-		);
-	}
-
-	/**
-	 * Creates a tx_seminars_pi1_frontEndCategoryList object in $this->categoryList.
-	 */
-	private function createCategoryList() {
-		$categoryListClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_pi1_frontEndCategoryList'
-		);
-		$this->categoryList = new $categoryListClassName(
-			$this->conf, $this->cObj
 		);
 	}
 

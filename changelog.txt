@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2508] Fix: Category column just shows "Array" on list view other than "seminars_list"
 - [#2456] Feature: Add lazy loading for models
 - [#2019] Change: Change the labels "Multiple event topic|date" in locallang_db.xml
 - [#2350] Change: Move the "create new" button from the top to the bottom of the timeslots IRRE field

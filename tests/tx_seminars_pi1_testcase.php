@@ -3199,6 +3199,30 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////////////////////////////////
+	// Tests concerning the category list in the my vip events view
+	/////////////////////////////////////////////////////////////////
+
+	public function testMyVipEventsViewShowsCategoryTitleOfEvent() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'category_foo')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid, $categoryUid, 'categories'
+		);
+
+		$this->assertContains(
+			'category_foo',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	////////////////////////////////////
 	// Tests concerning getFieldHeader
 	////////////////////////////////////
