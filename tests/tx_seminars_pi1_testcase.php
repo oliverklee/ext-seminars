@@ -670,29 +670,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////////////////////
-	// Test concerning the event type in the single view
-	//////////////////////////////////////////////////////
-
-	public function testSingleViewContainsEventTypeTitleAndColonIfEventHasEventType() {
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array(
-				'event_type' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
-				)
-			)
-		);
-
-		$this->fixture->piVars['showUid'] = $this->seminarUid;
-
-		$this->assertContains(
-			'foo type:',
-			$this->fixture->main('', array())
-		);
-	}
-
-
 	//////////////////////////////////////////////////////////
 	// Tests concerning the basic functions of the list view
 	//////////////////////////////////////////////////////////
