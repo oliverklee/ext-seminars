@@ -264,25 +264,6 @@ $TCA['tx_seminars_skills'] = array(
 	)
 );
 
-$TCA['tx_seminars_prices'] = array(
-	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices',
-		'label' => 'title',
-		'tstamp' => 'tstamp',
-		'crdate' => 'crdate',
-		'cruser_id' => 'cruser_id',
-		'default_sortby' => 'ORDER BY title',
-		'delete' => 'deleted',
-		'enablecolumns' => array(
-			'starttime' => 'starttime',
-			'endtime' => 'endtime',
-			'fe_group' => 'fe_group'
-		),
-		'dynamicConfigFile' => $extPath.'tca.php',
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_prices.gif'
-	)
-);
-
 t3lib_extMgm::addToInsertRecords('tx_seminars_seminars');
 t3lib_extMgm::addToInsertRecords('tx_seminars_speakers');
 
