@@ -193,7 +193,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private function getHtmlWithAttachedFilesList(tx_oelib_Template $template) {
 		foreach (array(
 			'label_delete', 'label_really_delete', 'label_save',
-			'label_save_and_close',
+			'label_save_and_back',
 		) as $label) {
 			$template->setMarker($label, $this->plugin->translate($label));
 		}
