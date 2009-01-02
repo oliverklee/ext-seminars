@@ -125,7 +125,7 @@
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.begin_date</label>
 			<data>
 				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
-					converttotimestamp="true" />
+					converttotimestamp="true" allowmanualedition="true"/>
 			</data>
 		</renderlet:DATE>
 
@@ -133,7 +133,7 @@
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.end_date</label>
 			<data>
 				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
-					converttotimestamp="true" />
+					converttotimestamp="true" allowmanualedition="true"/>
 			</data>
 		</renderlet:DATE>
 
@@ -141,7 +141,7 @@
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.deadline_registration</label>
 			<data>
 				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
-					converttotimestamp="true" />
+					converttotimestamp="true" allowmanualedition="true"/>
 			</data>
 		</renderlet:DATE>
 
@@ -149,7 +149,7 @@
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.deadline_early_bird</label>
 			<data>
 				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
-					converttotimestamp="true" />
+					converttotimestamp="true" allowmanualedition="true"/>
 			</data>
 		</renderlet:DATE>
 
@@ -157,7 +157,7 @@
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.deadline_unregistration</label>
 			<data>
 				<datetime format="%H:%M %d-%m-%Y" displaytime="true"
-					converttotimestamp="true" />
+					converttotimestamp="true" allowmanualedition="true"/>
 			</data>
 		</renderlet:DATE>
 
