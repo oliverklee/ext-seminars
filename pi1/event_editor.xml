@@ -450,7 +450,7 @@
 			</onclick>
 		</renderlet:SUBMIT>
 		<renderlet:SUBMIT name="btnsubmit">
-			<label>###LABEL_SAVE_AND_CLOSE###</label>
+			<label>###LABEL_SAVE_AND_BACK###</label>
 		</renderlet:SUBMIT>
 		<renderlet:HIDDEN name="proceed_file_upload" />
 

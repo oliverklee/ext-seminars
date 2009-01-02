@@ -177,7 +177,7 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
-			<label index="label_save_and_close">Save and close</label>
+			<label index="label_save_and_back">Save and back</label>
 			<label index="label_step_counter">Registration form: step %d of %d</label>
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_checkboxes">Additional information:</label>
@@ -698,7 +698,7 @@
 			<label index="label_edit">Bearbeiten</label>
 			<label index="label_back">Zur Übersicht</label>
 			<label index="label_save">Speichern</label>
-			<label index="label_save_and_close">Speichern und schließen</label>
+			<label index="label_save_and_back">Speichern und zurück</label>
 			<label index="label_step_counter">Anmeldeformular: Schritt %d von %d</label>
 			<label index="label_register_additional_information">Weitere Informationen</label>
 			<label index="label_checkboxes">Weitere Informationen:</label>
@@ -2120,7 +2120,7 @@
 			<label index="label_edit" type="integer">131916066</label>
 			<label index="label_back" type="integer">168615651</label>
 			<label index="label_save" type="integer">211601612</label>
-			<label index="label_save_and_close" type="integer">125326617</label>
+			<label index="label_save_and_back" type="integer">150520674</label>
 			<label index="label_step_counter" type="integer">37932096</label>
 			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_checkboxes" type="integer">15950088</label>
@@ -3338,7 +3338,7 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
-			<label index="label_save_and_close">Save and close</label>
+			<label index="label_save_and_back">Save and back</label>
 			<label index="label_step_counter">Registration form: step %d of %d</label>
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_checkboxes">Additional information:</label>

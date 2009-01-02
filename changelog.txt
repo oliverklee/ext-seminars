@@ -1,4 +1,5 @@
 0.7.0 (currently working on)
+- [#2425] Change: Rename "Save and close" button in the FE editor to "Save and back"
 - [#2487] Fix: Button "submit and stay" is no button
 - [#1653] Change: Add a "save + new" button for target groups in the BE
 - [#2489] Fix: "Edit event" link missing in the "my managed events" list
