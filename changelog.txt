@@ -1,4 +1,5 @@
 0.6.3 (currently working on)
+- [#2499] Fix: Lone ":" in title for events without event type on the single view and registration page
 - [#1653] Change: Add a "save + new" button for target groups in the BE
 - [#2502] Change: Update copyrights to 2009
 - [#2215] Fix: Problems with Page Browser
