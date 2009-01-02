@@ -1,4 +1,4 @@
-0.6.3 (currently working on)
+0.6.3 (released 2009-01-02)
 - [#2519] Fix: Thank-you e-mail has a surplus colon for events without an event type
 - [#2019] Change: Change the labels "Multiple event topic|date" in locallang_db.xml
 - [#2350] Change: Move the "create new" button from the top to the bottom of the timeslots IRRE field
