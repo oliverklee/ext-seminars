@@ -1,4 +1,4 @@
-0.7.0 (branched 2009-01-02)
+0.7.0 (released 2009-01-04)
 - [#2294] Change: Hide the partner integration and the new prices in the 0.7.x branch before the release
 - [#2520] Fix: Times are deleted when saving an event in the FE editor
 - [#2519] Fix: Thank-you e-mail has a surplus colon for events without an event type
