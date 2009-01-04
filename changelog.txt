@@ -1,3 +1,6 @@
+0.7.1 (currently working on)
+- [#2485] Cleanup: The seminarchild constructor should have a default value for the configuration
+
 0.7.0 (released 2009-01-04)
 - [#2294] Change: Hide the partner integration and the new prices in the 0.7.x branch before the release
 - [#2520] Fix: Times are deleted when saving an event in the FE editor
@@ -52,7 +55,7 @@
 - [#2312] Cleanup: Removed unneded condition in the selector widget code
 - [#2319] Fix: Update the seminar's speaker and place fields less brutally
 - [#2331] Feature: In the list view, link the speaker names to their home page (if they have any)
-- [#2333] In the list view and single view, display a localized text next to the 0 vacancies for fully booked events
+- [#2333] Feature: In the list view and single view, display a localized text next to the 0 vacancies for fully booked events
 - [#2344] Feature: Allow to attach an image to seminar records
 - [#2332] Feature: Allow to attach an icon to category records
 - [#2330] Change: Make the begin date in time slots required
