@@ -61,7 +61,13 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
-			array('organizers' => $organizerUid)
+			array('organizers' => 1)
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			$this->seminarUid,
+			$organizerUid
 		);
 
 		$registrationUid = $this->testingFramework->createRecord(

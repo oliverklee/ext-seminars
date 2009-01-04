@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2535] Change: Change the event-organizer relations to real m:n relations
 
 0.7.0 (branched 2009-01-02)
 - [#2520] Fix: Times are deleted when saving an event in the FE editor

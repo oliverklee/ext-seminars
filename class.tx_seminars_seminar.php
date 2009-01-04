@@ -2226,7 +2226,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		);
 
 		return new $organizerBagClassName(
-			'uid IN ('.$this->getRecordPropertyString('organizers').')'
+			'EXISTS (SELECT * FROM ' . SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM .
+				' WHERE ' . SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM . '.uid_local=' .
+				$this->getUid() . ' AND ' . SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM .
+				'.uid_foreign=' . SEMINARS_TABLE_ORGANIZERS . '.uid)'
 		);
 	}
 
@@ -2340,17 +2343,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets the UIDs of our organizers as a comma-separated list.
-	 * Returns an empty string if this event doesn't have any organizers.
-	 *
-	 * @return string our organizers as plain text (or '' if there are no
-	 *                organizers set)
-	 */
-	public function getOrganizersUIDs() {
-		return $this->getRecordPropertyString('organizers');
-	}
-
-	/**
 	 * Checks whether we have any organizers set, but does not check the
 	 * validity of that entry.
 	 *
@@ -2359,6 +2351,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function hasOrganizers() {
 		return $this->hasRecordPropertyString('organizers');
+	}
+
+	/**
+	 * Gets the number of organizers.
+	 *
+	 * @return integer the number of organizers, might be 0
+	 */
+	public function getNumberOfOrganizers() {
+		return $this->getRecordPropertyInteger('organizers');
 	}
 
 	/**
@@ -2401,25 +2402,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return implode(', ', $result);
 	}
-
-	/**
-	 * Gets the number of organizers.
-	 *
-	 * @return integer the number of organizers, might 0
-	 */
-	public function getNumberOfOrganizers() {
-		if (!$this->hasOrganizers()) {
-			return 0;
-		}
-
-		$organizers = explode(
-			',',
-			$this->getOrganizersUids()
-		);
-
-		return count($organizers);
-	}
-
 
 	/**
 	 * Checks whether we have any organizing partners set.
@@ -3372,15 +3354,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return 0;
 		}
 
-		$organizerUids = explode(
-			',',
-			$this->getRecordPropertyString('organizers')
-		);
-
-		$organizerClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_organizer'
-		);
-		$firstOrganizer = new $organizerClassName($organizerUids[0]);
+		$firstOrganizer = $this->getOrganizerBag()->current();
 
 		return $firstOrganizer->getAttendancesPid();
 	}

@@ -59,6 +59,7 @@ define('SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM', 'tx_seminars_timeslots_speakers_
 define('SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM', 'tx_seminars_seminars_target_groups_mm');
 define('SEMINARS_TABLE_SEMINARS_CATEGORIES_MM', 'tx_seminars_seminars_categories_mm');
 define('SEMINARS_TABLE_SPEAKERS_SKILLS_MM', 'tx_seminars_speakers_skills_mm');
+define('SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM', 'tx_seminars_seminars_organizers_mm');
 define('SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM', 'tx_seminars_seminars_organizing_partners_mm');
 define('SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM', 'tx_seminars_seminars_requirements_mm');
 

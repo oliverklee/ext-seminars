@@ -3833,9 +3833,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'organizers' => $organizerUid,
+				'organizers' => 1,
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
 			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			$eventUid,
+			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
@@ -3850,12 +3855,17 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS,
 			array('title' => 'bar organizer')
 		);
-		$this->testingFramework->createRecord(
+		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'organizers' => $organizerUid,
+				'organizers' => 1,
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
 			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			$eventUid,
+			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
@@ -4410,9 +4420,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'organizers' => $organizerUid,
+				'organizers' => 1,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			$eventUid,
+			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 
@@ -4427,12 +4442,17 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS,
 			array('title' => 'bar organizer')
 		);
-		$this->testingFramework->createRecord(
+		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'organizers' => $organizerUid,
+				'organizers' => 1,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			$eventUid,
+			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 

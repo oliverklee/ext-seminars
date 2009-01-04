@@ -253,29 +253,17 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Adds an organizer to this event.
+	 * Sets the number of organizers for this record.
 	 *
-	 * @param integer the UID of the organizer to add, must not be 0
+	 * TODO: This function needs to be removed once the testing framework
+	 * can update the counter for the number of organizers.
+	 *
+	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
+	 *
+	 * @param integer the number of organizers that are associated with this event
 	 */
-	public function addOrganizer($uid) {
-		if ($uid == 0) {
-			throw new Exception('UID must not be 0.');
-		}
-
-		$organizers = t3lib_div::trimExplode(
-			',',
-			$this->getOrganizersUids(),
-			1
-		);
-
-		if (!in_array($uid, $organizers)) {
-			$organizers[] = $uid;
-		}
-
-		$this->setRecordPropertyString(
-			'organizers',
-			implode(',', $organizers)
-		);
+	public function setNumberOfOrganizers($number) {
+		$this->setRecordPropertyInteger('organizers', $number);
 	}
 
 	/**

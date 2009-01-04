@@ -265,7 +265,13 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS, $organizerData
 		);
 
-		$this->fixture->addOrganizer($uid);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			$this->fixture->getUid(), $uid
+		);
+		$this->fixture->setNumberOfOrganizers(
+			$this->fixture->getNumberOfOrganizers() + 1
+		);
 
 		return $uid;
 	}

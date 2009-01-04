@@ -672,19 +672,12 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * @return array the WHERE clause parts for the search in organizers
 	 */
 	private function getSearchWherePartForOrganizers($searchWord) {
-		$result = array();
-
-		foreach (self::$searchFieldList['organizers'] as $field) {
-			$result[] = 'EXISTS (' .
-				'SELECT * FROM ' . SEMINARS_TABLE_ORGANIZERS .
-				' WHERE ' . SEMINARS_TABLE_ORGANIZERS . '.' . $field .
-						' LIKE ' . $searchWord .
-					' AND FIND_IN_SET(' . SEMINARS_TABLE_ORGANIZERS . '.uid,' .
-						SEMINARS_TABLE_SEMINARS . '.organizers)' .
-			')';
-		}
-
-		return $result;
+		return $this->getSearchWherePartForMmRelation(
+			$searchWord,
+			'organizers',
+			SEMINARS_TABLE_ORGANIZERS,
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM
+		);
 	}
 
 	/**

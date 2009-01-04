@@ -30,6 +30,7 @@
 				<relation field="tutors" mmtable="tx_seminars_seminars_speakers_mm_tutors" />
 				<relation field="leaders" mmtable="tx_seminars_seminars_speakers_mm_leaders" />
 				<relation field="target_groups" mmtable="tx_seminars_seminars_target_groups_mm" />
+				<relation field="organizers" mmtable="tx_seminars_seminars_organizers_mm" />
 			</mmrelations>
 			<process>
 				<beforeinsertion>

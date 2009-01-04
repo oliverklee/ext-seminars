@@ -156,7 +156,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
 			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type!=2))
 				AND s2.uid=tx_seminars_seminars.uid)',
-		'organizers' => 'tx_seminars_seminars.organizers',
+		'organizers' => '(SELECT MIN(tx_seminars_organizers.title)
+			FROM tx_seminars_seminars_organizers_mm, tx_seminars_organizers
+			WHERE tx_seminars_seminars_organizers_mm.uid_local=tx_seminars_seminars.uid
+				AND tx_seminars_seminars_organizers_mm.uid_foreign=tx_seminars_organizers.uid)',
 		'vacancies' => 'tx_seminars_seminars.attendees_max
 				-(
 					(SELECT COUNT(*)

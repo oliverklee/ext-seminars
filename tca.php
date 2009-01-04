@@ -696,6 +696,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => 5,
 				'minitems' => 1,
 				'maxitems' => 999,
+				'MM' => 'tx_seminars_seminars_organizers_mm',
 				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_organizers'),
 			),
 		),
