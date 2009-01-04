@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('oelib').'tx_oelib_commonConstants.php');
-
 define('SEMINARS_TABLE_SEMINARS', 'tx_seminars_seminars');
 define('SEMINARS_TABLE_SPEAKERS', 'tx_seminars_speakers');
 define('SEMINARS_TABLE_SITES', 'tx_seminars_sites');

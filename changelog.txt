@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2494] Change: The autoloader should include the constants
 - [#2538] Feature: Add an organizer bag builder
 - [#2535] Change: Change the event-organizer relations to real m:n relations
 
