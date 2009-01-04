@@ -118,23 +118,12 @@ class tx_seminars_mod2_organizerslist extends tx_seminars_mod2_backendlist {
 			)
 		);
 
-		// Initialize variables for the database query.
-		$pageData = $this->page->getPageData();
-		$queryWhere = 'pid=' . $pageData['uid'];
-		$additionalTables = '';
-		$orderBy = '';
-		$limit = '';
+		$builder = t3lib_div::makeInstance('tx_seminars_OrganizerBagBuilder');
 
-		$organizerBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_organizerbag'
-		);
-		$organizerBag = new $organizerBagClassname(
-			$queryWhere,
-			$additionalTables,
-			'',
-			$orderBy,
-			$limit
-		);
+		$pageData = $this->page->getPageData();
+		$builder->setSourcePages($pageData['uid']);
+
+		$organizerBag = $builder->build();
 
 		foreach ($organizerBag as $this->organizer) {
 			// Add the result row to the table array.

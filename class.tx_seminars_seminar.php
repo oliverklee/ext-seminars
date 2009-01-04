@@ -2221,16 +2221,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			throw new Exception('There are no organizers related to this event.');
 		}
 
-		$organizerBagClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_organizerbag'
-		);
+		$builder = t3lib_div::makeInstance('tx_seminars_OrganizerBagBuilder');
+		$builder->limitToEvent($this->getUid());
 
-		return new $organizerBagClassName(
-			'EXISTS (SELECT * FROM ' . SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM .
-				' WHERE ' . SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM . '.uid_local=' .
-				$this->getUid() . ' AND ' . SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM .
-				'.uid_foreign=' . SEMINARS_TABLE_ORGANIZERS . '.uid)'
-		);
+		return $builder->build();
 	}
 
 	/**
