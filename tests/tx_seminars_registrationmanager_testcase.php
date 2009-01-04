@@ -74,8 +74,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'end_date' => mktime() + 2000,
 					'attendees_max' => 10,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->fixture = new tx_seminars_registrationmanager();
@@ -153,8 +152,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'attendees_max' => 10,
 					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				)
-			),
-			array()
+			)
 		);
 		$this->fullyBookedSeminar->setNumberOfAttendances(10);
 		$this->fullyBookedSeminar->setRegistrationQueueSize(5);
@@ -392,8 +390,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 					'attendees_max' => 10
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertEquals(
@@ -419,8 +416,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'attendees_max' => 10,
 					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertEquals(
@@ -498,8 +494,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'attendees_max' => 10,
 					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertFalse(
@@ -550,8 +545,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertTrue(
@@ -595,8 +589,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertTrue(
@@ -633,8 +626,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertFalse(
@@ -683,8 +675,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertEquals(
@@ -723,8 +714,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertEquals(
@@ -745,7 +735,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
-		$requiredDateUid1 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -761,7 +751,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
-		$requiredDateUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -780,8 +770,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertEquals(
@@ -834,8 +823,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertEquals(
@@ -888,8 +876,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$this->assertEquals(

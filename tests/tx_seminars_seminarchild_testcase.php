@@ -3915,13 +3915,13 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => $detailsPageUid
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertTrue(
 			$event->hasSeparateDetailsPage()
 		);
+
+		$event->__destruct();
 	}
 
 	public function testHasSeparateDetailsPageReturnsTrueForExternalSeparateDetailsPage() {
@@ -3932,13 +3932,13 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => 'www.test.com'
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertTrue(
 			$event->hasSeparateDetailsPage()
 		);
+
+		$event->__destruct();
 	}
 
 
@@ -3970,9 +3970,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => $detailsPageUid
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertEquals(
 			array(
@@ -3980,6 +3978,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			),
 			$event->getDetailedViewLinkConfiguration($this->pi1)
 		);
+
+		$event->__destruct();
 	}
 
 	public function testGetDetailedViewLinkConfigurationReturnsExternalDetailsPageIfSetWithoutSeminarParameter() {
@@ -3992,9 +3992,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => 'www.test.com'
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertEquals(
 			array(
@@ -4002,6 +4000,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			),
 			$event->getDetailedViewLinkConfiguration($this->pi1)
 		);
+
+		$event->__destruct();
 	}
 
 
@@ -4052,14 +4052,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => $detailsPageUid
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertNotContains(
 			'showUid',
 			$event->getDetailedViewUrl($this->pi1, false)
 		);
+
+		$event->__destruct();
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlOfSeparateInternalDetailsPageIfSet() {
@@ -4072,14 +4072,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => $detailsPageUid
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertContains(
 			'?id=' . $detailsPageUid,
 			$event->getDetailedViewUrl($this->pi1, false)
 		);
+
+		$event->__destruct();
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlOfSeparateExternalDetailsPageIfSet() {
@@ -4091,14 +4091,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => 'www.test.com'
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertEquals(
 			'http://www.test.com',
 			$event->getDetailedViewUrl($this->pi1, false)
 		);
+
+		$event->__destruct();
 	}
 
 	public function testGetDetailedViewUrlReturnsUrlOfSeparateExternalDetailsPageIfSetWithTarget() {
@@ -4110,14 +4110,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => 'www.test.com foo'
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertEquals(
 			'http://www.test.com',
 			$event->getDetailedViewUrl($this->pi1, false)
 		);
+
+		$event->__destruct();
 	}
 
 
@@ -4155,14 +4155,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => $detailsPageUid
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertContains(
 			'?id=' . $detailsPageUid,
 			$event->getLinkedFieldValue($this->pi1, 'title')
 		);
+
+		$event->__destruct();
 	}
 
 	public function testGetLinkedFieldValueForTitleLinksToSeparateExternalDetailsPageIfSet() {
@@ -4174,14 +4174,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => 'www.test.com'
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$this->assertContains(
 			'http://www.test.com',
 			$event->getLinkedFieldValue($this->pi1, 'title')
 		);
+
+		$event->__destruct();
 	}
 
 	public function testGetLinkedFieldValueForTitleLinksToSeparateInternalDetailsPageWithTargetIfSet() {
@@ -4194,11 +4194,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => $detailsPageUid . ' foo'
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$result = $event->getLinkedFieldValue($this->pi1, 'title');
+		$event->__destruct();
 
 		$this->assertContains(
 			'?id=' . $detailsPageUid,
@@ -4219,11 +4218,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'details_page' => 'www.test.com foo'
 			)
 		);
-		$event = new tx_seminars_seminarchild(
-			$eventUid, array()
-		);
+		$event = new tx_seminars_seminarchild($eventUid);
 
 		$result = $event->getLinkedFieldValue($this->pi1, 'title');
+		$event->__destruct();
 
 		$this->assertContains(
 			'http://www.test.com',
@@ -5128,16 +5126,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 					'requirements' => 0,
 				)
-			),
-			array()
+			)
 		);
-
-		$result = $topic->hasRequirements();
-		$topic->__destruct();
 
 		$this->assertFalse(
-			$result
+			$topic->hasRequirements()
 		);
+
+		$topic->__destruct();
 	}
 
 	public function testHasRequirementsForDateOfTopicWithoutRequirementsReturnsFalse() {
@@ -5155,16 +5151,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
-
-		$result = $date->hasRequirements();
-		$date->__destruct();
 
 		$this->assertFalse(
-			$result
+			$date->hasRequirements()
 		);
+
+		$date->__destruct();
 	}
 
 	public function testHasRequirementsForTopicWithOneRequirementReturnsTrue() {
@@ -5180,14 +5174,13 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			$topicUid, $requiredTopicUid, 'requirements'
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
-
-		$result = $topic->hasRequirements();
-		$topic->__destruct();
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$this->assertTrue(
-			$result
+			$topic->hasRequirements()
 		);
+
+		$topic->__destruct();
 	}
 
 	public function testHasRequirementsForDateOfTopicWithOneRequirementReturnsTrue() {
@@ -5210,16 +5203,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
-
-		$result = $date->hasRequirements();
-		$date->__destruct();
 
 		$this->assertTrue(
-			$result
+			$date->hasRequirements()
 		);
+
+		$date->__destruct();
 	}
 
 	public function testHasRequirementsForTopicWithTwoRequirementsReturnsTrue() {
@@ -5243,14 +5234,13 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			$topicUid, $requiredTopicUid2, 'requirements'
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
-
-		$result = $topic->hasRequirements();
-		$topic->__destruct();
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$this->assertTrue(
-			$result
+			$topic->hasRequirements()
 		);
+
+		$topic->__destruct();
 	}
 
 
@@ -5266,16 +5256,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 					'dependencies' => 0,
 				)
-			),
-			array()
+			)
 		);
-
-		$result = $topic->hasDependencies();
-		$topic->__destruct();
 
 		$this->assertFalse(
-			$result
+			$topic->hasDependencies()
 		);
+
+		$topic->__destruct();
 	}
 
 	public function testHasDependenciesForDateOfTopicWithoutDependenciesReturnsFalse() {
@@ -5293,16 +5281,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
-
-		$result = $date->hasDependencies();
-		$date->__destruct();
 
 		$this->assertFalse(
-			$result
+			$date->hasDependencies()
 		);
+
+		$date->__destruct();
 	}
 
 	public function testHasDependenciesForTopicWithOneDependencyReturnsTrue() {
@@ -5324,14 +5310,13 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependentTopicUid, $topicUid
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
-
-		$result = $topic->hasDependencies();
-		$topic->__destruct();
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$this->assertTrue(
-			$result
+			$topic->hasDependencies()
 		);
+
+		$topic->__destruct();
 	}
 
 	public function testHasDependenciesForDateOfTopicWithOneDependencyReturnsTrue() {
@@ -5360,16 +5345,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
-
-		$result = $date->hasDependencies();
-		$date->__destruct();
 
 		$this->assertTrue(
-			$result
+			$date->hasDependencies()
 		);
+
+		$date->__destruct();
 	}
 
 	public function testHasDependenciesForTopicWithTwoDependenciesReturnsTrue() {
@@ -5402,7 +5385,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependentTopicUid2, $topicUid
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$result = $topic->hasDependencies();
 		$topic->__destruct();
@@ -5442,7 +5425,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			$topicUid, $requiredTopicUid, 'requirements'
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$result = $topic->getRequirements();
 		$topic->__destruct();
@@ -5477,8 +5460,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$result = $date->getRequirements();
@@ -5515,15 +5497,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			$topicUid, $requiredTopicUid2, 'requirements'
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
-
-		$result = $topic->getRequirements();
-		$topic->__destruct();
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$this->assertEquals(
 			2,
-			$result->count()
+			$topic->getRequirements()->count()
 		);
+
+		$topic->__destruct();
 	}
 
 
@@ -5562,7 +5543,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependentTopicUid, $topicUid
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$result = $topic->getDependencies();
 		$topic->__destruct();
@@ -5603,8 +5584,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			),
-			array()
+			)
 		);
 
 		$result = $date->getDependencies();
@@ -5650,15 +5630,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
 			$dependentTopicUid2, $topicUid
 		);
-		$topic = new tx_seminars_seminarchild($topicUid, array());
-
-		$result = $topic->getDependencies();
-		$topic->__destruct();
+		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$this->assertEquals(
 			2,
-			$result->count()
+			$topic->getDependencies()->count()
 		);
+
+		$topic->__destruct();
 	}
 }
 ?>
