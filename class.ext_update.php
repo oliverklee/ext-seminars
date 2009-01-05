@@ -22,7 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+if (t3lib_extMgm::isLoaded('seminars')) {
+	require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+}
 
 /**
  * Class 'ext_update' for the 'seminars' extension.
@@ -50,6 +52,10 @@ class ext_update {
 	 * @return boolean true if the update module may be accessed, false otherwise
 	 */
 	public function access() {
+		if (!t3lib_extMgm::isLoaded('seminars')) {
+			return false;
+		}
+
 		return $this->needsToUpdateEventOrganizerRelations()
 			&& $this->hasEventsWithOrganizers();
 	}
@@ -106,7 +112,7 @@ class ext_update {
 			$result .= '</li>';
 		}
 
-		$GLOBALS['TYPO3_DB']->sql_free_results($dbResult);
+		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 
 		$result .= '</ul>';
 
@@ -130,7 +136,7 @@ class ext_update {
 
 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 
-		$GLOBALS['TYPO3_DB']->sql_free_results($dbResult);
+		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 
 		return ($row['count'] == 0);
 	}
@@ -154,7 +160,7 @@ class ext_update {
 
 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 
-		$GLOBALS['TYPO3_DB']->sql_free_results($dbResult);
+		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 
 		return ($row['count'] > 0);
 	}

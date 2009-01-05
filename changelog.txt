@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2550] Fix: Extension menu crashes
 - [#2485] Cleanup: The seminarchild constructor should have a default value for the configuration
 - [#2494] Change: The autoloader should include the constants
 - [#2538] Feature: Add an organizer bag builder
