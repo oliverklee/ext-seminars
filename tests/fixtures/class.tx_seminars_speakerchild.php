@@ -62,6 +62,16 @@ final class tx_seminars_speakerchild extends tx_seminars_speaker {
 	public function setGender($gender) {
 		$this->setRecordPropertyInteger('gender', $gender);
 	}
+
+	/**
+	 * Sets the gender cancelation period of this speaker
+	 *
+	 * @param integer the cancelation period of this speaker in days,
+	 *                must be > 0
+	 */
+	public function setCancelationPeriod($cancelationPeriod) {
+		$this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_speakerchild.php']) {

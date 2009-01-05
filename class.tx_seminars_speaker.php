@@ -265,6 +265,25 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	public function getGender() {
 		return $this->getRecordPropertyInteger('gender');
 	}
+
+	/**
+	 * Returns true if this speaker has a cancelation period.
+	 *
+	 * @return boolean true if the speaker has a cancelation period, false
+	 *                 otherwise
+	 */
+	public function hasCancelationPeriod() {
+		return $this->hasRecordPropertyInteger('cancelation_period');
+	}
+
+	/**
+	 * Returns the cancelation period of this speaker in days.
+	 *
+	 * @return integer the cancelation period in days, will be >= 0
+	 */
+	public function getCancelationPeriodInDays() {
+		return $this->getRecordPropertyInteger('cancelation_period');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_speaker.php']) {

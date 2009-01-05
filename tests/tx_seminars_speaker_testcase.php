@@ -435,5 +435,54 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 			$this->fixture->getGender()
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning hasCancelationPeriod
+	//////////////////////////////////////////
+
+	public function testHasCancelationPeriodForSpeakerWithoutCancelationPeriodReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasCancelationPeriod()
+		);
+	}
+
+	public function testHasCancelationPeriodForSpeakerWithCancelationPeriodReturnsTrue() {
+		$this->fixture->setCancelationPeriod(42);
+
+		$this->assertTrue(
+			$this->fixture->hasCancelationPeriod()
+		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning getCancelationPeriodInDays
+	////////////////////////////////////////////////
+
+	public function testGetCancelationPeriodInDaysForSpeakerWithoutCancelationPeriodReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getCancelationPeriodInDays()
+		);
+	}
+
+	public function testGetCancelationPeriodInDaysForSpeakerWithCancelationPeriodOfOneDayReturnsOne() {
+		$this->fixture->setCancelationPeriod(1);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getCancelationPeriodInDays()
+		);
+	}
+
+	public function testGetCancelationPeriodInDaysForSpeakerWithCancelationPeriodOfTwoDaysReturnsTwo() {
+		$this->fixture->setCancelationPeriod(2);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getCancelationPeriodInDays()
+		);
+	}
 }
 ?>
