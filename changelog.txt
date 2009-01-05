@@ -1,4 +1,5 @@
 0.7.1 (currently working on)
+- [#2500] Fix: The class pi1_frontEndRequirementsList does not load detailPID from flexforms
 - [#2485] Cleanup: The seminarchild constructor should have a default value for the configuration
 
 0.7.0 (released 2009-01-04)

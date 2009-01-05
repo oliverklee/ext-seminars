@@ -2054,7 +2054,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$requirementsList = new $requirementsListClass(
 			$this->conf,
-			$GLOBALS['TSFE']->cObj
+			$this->cObj
 		);
 
 		return $requirementsList;
