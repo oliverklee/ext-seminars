@@ -35,8 +35,10 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
-			<label index="tx_seminars_seminars.confirmed">Has been confirmed:</label>
-			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
+			<label index="tx_seminars_seminars.cancelled">Event status:</label>
+			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
+			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>
+			<label index="tx_seminars_seminars.cancelled_confirmed">confirmed</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_seminars.attached_files">Attached files:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
@@ -219,8 +221,10 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Reisebedingungen-Checkbox im Anmeldeformular anzeigen:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Lässt mehrfache Anmeldungen derselben Person zu:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Den Kollisionscheck für diese Veranstaltung ausschalten:</label>
-			<label index="tx_seminars_seminars.confirmed">Wurde fest zugesagt:</label>
-			<label index="tx_seminars_seminars.cancelled">Wurde abgesagt:</label>
+			<label index="tx_seminars_seminars.cancelled">Event Status:</label>
+			<label index="tx_seminars_seminars.cancelled_planned">geplant</label>
+			<label index="tx_seminars_seminars.cancelled_canceled">abgesagt</label>
+			<label index="tx_seminars_seminars.cancelled_confirmed">bestätigt</label>
 			<label index="tx_seminars_seminars.notes">Interne Notizen:</label>
 			<label index="tx_seminars_seminars.attached_files">Angehängte Dateien:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Referenten</label>
@@ -1177,8 +1181,10 @@
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">261565721</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">12398803</label>
 			<label index="tx_seminars_seminars.skip_collision_check" type="integer">139479602</label>
-			<label index="tx_seminars_seminars.confirmed" type="integer">41765812</label>
-			<label index="tx_seminars_seminars.cancelled" type="integer">128284088</label>
+			<label index="tx_seminars_seminars.cancelled" type="integer">222596095</label>
+			<label index="tx_seminars_seminars.cancelled_planned" type="integer">59756617</label>
+			<label index="tx_seminars_seminars.cancelled_canceled" type="integer">224147873</label>
+			<label index="tx_seminars_seminars.cancelled_confirmed" type="integer">249197084</label>
 			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
 			<label index="tx_seminars_seminars.vips" type="integer">180644740</label>
 			<label index="tx_seminars_seminars.notes" type="integer">121419833</label>
@@ -2157,8 +2163,10 @@
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
-			<label index="tx_seminars_seminars.confirmed">Has been confirmed:</label>
-			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
+			<label index="tx_seminars_seminars.cancelled">Event status:</label>
+			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
+			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>
+			<label index="tx_seminars_seminars.cancelled_confirmed">confirmed</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>

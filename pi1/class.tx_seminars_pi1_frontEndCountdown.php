@@ -86,7 +86,8 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 	public function render() {
 		$now = $GLOBALS['SIM_ACCESS_TIME'];
 
-		$additionalWhere = 'tx_seminars_seminars.cancelled=0' .
+		$additionalWhere = 'tx_seminars_seminars.cancelled!=' .
+			tx_seminars_seminar::STATUS_CANCELED .
 			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS) .
 			' AND ' . SEMINARS_TABLE_SEMINARS . '.object_type!=' .
 			SEMINARS_RECORD_TYPE_TOPIC . ' AND ' . SEMINARS_TABLE_SEMINARS .

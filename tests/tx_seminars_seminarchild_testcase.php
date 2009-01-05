@@ -5645,17 +5645,84 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests concerning isConfirmed
 	/////////////////////////////////
 
-	public function testIsConfirmedForConfirmedNotSetReturnsFalse() {
+	public function testIsConfirmedForStatusPlannedReturnsFalse() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_PLANNED);
+
 		$this->assertFalse(
 			$this->fixture->isConfirmed()
 		);
 	}
 
-	public function testIsConfirmedForConfirmedSetReturnsTrue() {
-		$this->fixture->setConfirmed(true);
+	public function testIsConfirmedForStatusConfirmedReturnsTrue() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CONFIRMED);
 
 		$this->assertTrue(
 			$this->fixture->isConfirmed()
+		);
+	}
+
+	public function testIsConfirmedForStatusCanceledReturnsFalse() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$this->assertFalse(
+			$this->fixture->isConfirmed()
+		);
+	}
+
+
+	////////////////////////////////
+	// Tests concerning isCanceled
+	////////////////////////////////
+
+	public function testIsCanceledForPlannedEventReturnsFalse() {
+	$this->fixture->setStatus(tx_seminars_seminar::STATUS_PLANNED);
+
+	$this->assertFalse(
+			$this->fixture->isCanceled()
+		);
+	}
+
+	public function testIsCanceledForCanceledEventReturnsTrue() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$this->assertTrue(
+			$this->fixture->isCanceled()
+		);
+	}
+
+	public function testIsCanceledForConfirmedEventReturnsFalse() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+
+		$this->assertFalse(
+			$this->fixture->isCanceled()
+		);
+	}
+
+	/////////////////////////////////
+	// Tests concerning isPlanned
+	/////////////////////////////////
+
+	public function testIsPlannedForStatusPlannedReturnsTrue() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_PLANNED);
+
+		$this->assertTrue(
+			$this->fixture->isPlanned()
+		);
+	}
+
+	public function testiIsPlannedForStatusConfirmedReturnsFalse() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+
+		$this->assertFalse(
+			$this->fixture->isPlanned()
+		);
+	}
+
+	public function testIsPlannedForStatusCanceledReturnsFalse() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$this->assertFalse(
+			$this->fixture->isPlanned()
 		);
 	}
 }

@@ -618,6 +618,20 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testBuilderFindsConfirmedEventsWithHideCanceledEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+		);
+
+		$this->fixture->ignoreCanceledEvents();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->count()
+		);
+	}
+
 	public function testBuilderFindsCanceledEventsWithHideCanceledEventsDisabled() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,

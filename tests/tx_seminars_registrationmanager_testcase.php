@@ -511,7 +511,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCanRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse() {
-		$this->seminar->setCanceled(true);
+		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
 		$this->assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)

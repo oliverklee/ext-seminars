@@ -171,7 +171,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Sets the bag to ignore canceled events.
 	 */
 	public function ignoreCanceledEvents() {
-		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled=0';
+		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled!=' .
+			tx_seminars_seminar::STATUS_CANCELED;
 	}
 
 	/**

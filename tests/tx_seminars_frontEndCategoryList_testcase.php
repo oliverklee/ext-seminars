@@ -302,6 +302,31 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testRenderFindsConfirmedEvents() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES,
+			array('title' => 'one category')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'my_title',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'categories' => 1,
+				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED
+			)
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
+		);
+
+		$this->assertContains(
+			'one category',
+			$this->fixture->render()
+		);
+	}
+
 	public function testRenderCreatesCategoryListOfEventsFromSelectedTimeFrames() {
 		$this->fixture->setConfigurationValue(
 			'timeframeInList', 'currentAndUpcoming'

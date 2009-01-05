@@ -441,21 +441,12 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Sets whether this event is canceled.
+	 * Sets whether this event is planned, canceled or confirmed.
 	 *
-	 * @param boolean whether the event has been canceled
+	 * @param integer STATUS_PLANNED, STATUS_CONFIRMED or STATUS_CANCELED
 	 */
-	public function setCanceled($isCanceled) {
-		$this->setRecordPropertyBoolean('cancelled', $isCanceled);
-	}
-
-	/**
-	 * Sets whether this event is confirmed.
-	 *
-	 * @param boolean whether the event has been confirmed
-	 */
-	public function setConfirmed($isConfirmed) {
-		$this->setRecordPropertyBoolean('confirmed', $isConfirmed);
+	public function setStatus($status) {
+		$this->setRecordPropertyInteger('cancelled', $status);
 	}
 }
 

@@ -407,13 +407,25 @@
 			</data>
 		</renderlet:CHECKBOX>
 
-		<renderlet:CHECKSINGLE name="confirmed">
-			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.confirmed</label>
-		</renderlet:CHECKSINGLE>
-
-		<renderlet:CHECKSINGLE name="cancelled">
+		<renderlet:LISTBOX name="cancelled">
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancelled</label>
-		</renderlet:CHECKSINGLE>
+			<data>
+				<items>
+					<item>
+						<caption>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancelled_planned</caption>
+						<value>0</value>
+					</item>
+					<item>
+						<caption>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancelled_canceled</caption>
+						<value>1</value>
+					</item>
+					<item>
+						<caption>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancelled_confirmed</caption>
+						<value>2</value>
+					</item>
+				</items>
+			</data>
+		</renderlet:LISTBOX>
 
 		<renderlet:CHECKSINGLE name="uses_terms_2">
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.uses_terms_2</label>

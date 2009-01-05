@@ -234,7 +234,6 @@ CREATE TABLE tx_seminars_seminars (
 	queue_size int(11) unsigned DEFAULT '0' NOT NULL,
 	target_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	skip_collision_check tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	confirmed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	owner_feuser int(11) unsigned DEFAULT '0' NOT NULL,
 	vips int(11) unsigned DEFAULT '0' NOT NULL,

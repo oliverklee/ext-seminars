@@ -67,6 +67,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	private $topic = null;
 
 	/**
+	 * @var integer the different statuses of an event.
+	 */
+	const STATUS_PLANNED = 0,
+		STATUS_CANCELED = 1,
+		STATUS_CONFIRMED = 2;
+
+
+	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
 	 * By default, the process of creating a seminar object from a hidden record
@@ -2824,7 +2832,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean true if the event has been canceled, false otherwise
 	 */
 	public function isCanceled() {
-		return $this->getRecordPropertyBoolean('cancelled');
+		return ($this->getStatus() == self::STATUS_CANCELED);
 	}
 
  	/**
@@ -4421,7 +4429,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean true if the event has been confirmed, false otherwise
 	 */
 	public function isConfirmed() {
-		return $this->getRecordPropertyBoolean('confirmed');
+		return ($this->getStatus() == self::STATUS_CONFIRMED);
+	}
+
+	/**
+	 * Checks whether this event has been planned.
+	 *
+	 * @return boolean true if the event has been planned, false otherwise
+	 */
+	public function isPlanned() {
+		return ($this->getStatus() == self::STATUS_PLANNED);
+	}
+
+	/**
+	 * Gets the staus of this event.
+	 *
+	 * @return integer the status of this event, will be >= 0
+	 */
+	private function getStatus() {
+		return $this->getRecordPropertyInteger('cancelled');
 	}
 }
 
