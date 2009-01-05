@@ -47,6 +47,8 @@
 			<label index="tx_seminars_seminars.divLabelOrganizers">Organizer</label>
 			<label index="tx_seminars_seminars.organizers">Organizers:</label>
 			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
+			<label index="tx_seminars_seminars.confirmation_information_sent">Organizers have been notified concerning the event confirmation:</label>
+			<label index="tx_seminars_seminars.cancellation_information_sent">Organizers have been notified concerning the cancelation period:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
 			<label index="tx_seminars_seminars.begin_date">Begin time and date:</label>
 			<label index="tx_seminars_seminars.end_date">End time and date:</label>
@@ -228,6 +230,8 @@
 			<label index="tx_seminars_seminars.divLabelOrganizers">Veranstalter</label>
 			<label index="tx_seminars_seminars.organizers">Veranstalter:</label>
 			<label index="tx_seminars_seminars.organizing_partners">Kooperationspartner:</label>
+			<label index="tx_seminars_seminars.confirmation_information_sent">Veranstalter wurde wegen Zusage benachrichtigt:</label>
+			<label index="tx_seminars_seminars.cancellation_information_sent">Veranstalter wurde wegen Absagefrist benachrichtigt:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Ort/Zeit</label>
 			<label index="tx_seminars_seminars.begin_date">Anfangszeit und -datum:</label>
 			<label index="tx_seminars_seminars.end_date">Endzeit und -datum:</label>
@@ -1325,6 +1329,8 @@
 			<label index="tx_seminars_speakers.gender_female" type="integer">41138606</label>
 			<label index="tx_seminars_seminars.requirements" type="integer">62069823</label>
 			<label index="tx_seminars_seminars.dependencies" type="integer">258671677</label>
+			<label index="tx_seminars_seminars.confirmation_information_sent" type="integer">90334478</label>
+			<label index="tx_seminars_seminars.cancellation_information_sent" type="integer">29610328</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2282,6 +2288,8 @@
 			<label index="tx_seminars_speakers.gender_female">female</label>
 			<label index="tx_seminars_seminars.requirements">Requirements:</label>
 			<label index="tx_seminars_seminars.dependencies">Requirement for:</label>
+			<label index="tx_seminars_seminars.confirmation_information_sent">Organizers have been notified concerning the event confirmation:</label>
+			<label index="tx_seminars_seminars.cancellation_information_sent">Organizers have been notified concerning the cancelation period:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

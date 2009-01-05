@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2527] Feature: Add checkboxes "organizers has been notified concerning the (cancelation period|event confirmation)"
 - [#2524] Feature: Add a checkbox "confirmed" to single events and dates
 - [#2550] Fix: Extension menu crashes
 - [#2485] Cleanup: The seminarchild constructor should have a default value for the configuration
