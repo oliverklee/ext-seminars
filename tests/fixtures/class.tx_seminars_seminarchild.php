@@ -448,6 +448,15 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setCanceled($isCanceled) {
 		$this->setRecordPropertyBoolean('cancelled', $isCanceled);
 	}
+
+	/**
+	 * Sets whether this event is confirmed.
+	 *
+	 * @param boolean whether the event has been confirmed
+	 */
+	public function setConfirmed($isConfirmed) {
+		$this->setRecordPropertyBoolean('confirmed', $isConfirmed);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

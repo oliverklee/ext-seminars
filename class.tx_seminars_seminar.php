@@ -4414,6 +4414,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $builder->build();
 	}
+
+	/**
+	 * Checks whether this event has been confirmed.
+	 *
+	 * @return boolean true if the event has been confirmed, false otherwise
+	 */
+	public function isConfirmed() {
+		return $this->getRecordPropertyBoolean('confirmed');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

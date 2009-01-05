@@ -5639,5 +5639,24 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$topic->__destruct();
 	}
+
+
+	/////////////////////////////////
+	// Tests concerning isConfirmed
+	/////////////////////////////////
+
+	public function testIsConfirmedForConfirmedNotSetReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->isConfirmed()
+		);
+	}
+
+	public function testIsConfirmedForConfirmedSetReturnsTrue() {
+		$this->fixture->setConfirmed(true);
+
+		$this->assertTrue(
+			$this->fixture->isConfirmed()
+		);
+	}
 }
 ?>

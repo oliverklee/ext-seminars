@@ -407,6 +407,10 @@
 			</data>
 		</renderlet:CHECKBOX>
 
+		<renderlet:CHECKSINGLE name="confirmed">
+			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.confirmed</label>
+		</renderlet:CHECKSINGLE>
+
 		<renderlet:CHECKSINGLE name="cancelled">
 			<label>LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancelled</label>
 		</renderlet:CHECKSINGLE>
