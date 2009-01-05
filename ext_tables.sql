@@ -294,6 +294,7 @@ CREATE TABLE tx_seminars_speakers (
 	fax tinytext,
 	email tinytext,
 	gender tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	cancelation_period int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

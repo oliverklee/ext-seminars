@@ -965,7 +965,7 @@ $TCA['tx_seminars_seminars'] = array(
 $TCA['tx_seminars_speakers'] = array(
 	'ctrl' => $TCA['tx_seminars_speakers']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email'
+		'showRecordFieldList' => 'title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email,cancelation_period'
 	),
 	'columns' => array(
 		'title' => array(
@@ -1125,9 +1125,24 @@ $TCA['tx_seminars_speakers'] = array(
 				'eval' => 'trim,nospace',
 			),
 		),
+		'cancelation_period' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.cancelation_period',
+			'config' => array(
+				'type' => 'input',
+				'size' => '3',
+				'max' => '3',
+				'eval' => 'num',
+				'checkbox' => '0',
+				'range' => array(
+					'upper' => '999',
+					'lower' => '0',
+				),
+			),
+		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email'),
+		'0' => array('showitem' => 'title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

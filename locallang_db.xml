@@ -103,6 +103,7 @@
 			<label index="tx_seminars_speakers.phone_mobile">Phone number (mobile):</label>
 			<label index="tx_seminars_speakers.fax">Fax number:</label>
 			<label index="tx_seminars_speakers.email">E-mail address:</label>
+			<label index="tx_seminars_speakers.cancelation_period">Cancelation period (in days):</label>
 			<label index="tx_seminars_attendances">Attendances</label>
 			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
@@ -286,6 +287,7 @@
 			<label index="tx_seminars_speakers.phone_mobile">Handynummer:</label>
 			<label index="tx_seminars_speakers.fax">Faxnummer:</label>
 			<label index="tx_seminars_speakers.email">E-Mail-Adresse:</label>
+			<label index="tx_seminars_speakers.cancelation_period">Absagefrist (in Tagen):</label>
 			<label index="tx_seminars_attendances">Anmeldungen</label>
 			<label index="tx_seminars_attendances.uid">Ticket-ID:</label>
 			<label index="tx_seminars_attendances.title">Titel:</label>
@@ -1331,6 +1333,7 @@
 			<label index="tx_seminars_seminars.dependencies" type="integer">258671677</label>
 			<label index="tx_seminars_seminars.confirmation_information_sent" type="integer">90334478</label>
 			<label index="tx_seminars_seminars.cancellation_information_sent" type="integer">29610328</label>
+			<label index="tx_seminars_speakers.cancelation_period" type="integer">13168456</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2290,6 +2293,7 @@
 			<label index="tx_seminars_seminars.dependencies">Requirement for:</label>
 			<label index="tx_seminars_seminars.confirmation_information_sent">Organizers have been notified concerning the event confirmation:</label>
 			<label index="tx_seminars_seminars.cancellation_information_sent">Organizers have been notified concerning the cancelation period:</label>
+			<label index="tx_seminars_speakers.cancelation_period">Cancelation period (in days):</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
