@@ -844,7 +844,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// We use just the user's e-mail address as e-mail recipient
 		// as some SMTP servers cannot handle the format
 		// "John Doe <john.doe@example.com>".
-		t3lib_div::plainMailEncoded(
+		tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
 			$this->getUserEmail(),
 			$this->translate('email_'.$helloSubjectPrefix.'Subject').': '
 				.$this->seminar->getTitleAndDate('-'),
@@ -1004,7 +1004,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$organizers = $this->seminar->getOrganizersEmail();
 			$froms = $this->seminar->getOrganizersNameAndEmail();
 			foreach ($organizers as $currentOrganizerEmail) {
-				t3lib_div::plainMailEncoded(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
 					$currentOrganizerEmail,
 					$subject,
 					$content,
