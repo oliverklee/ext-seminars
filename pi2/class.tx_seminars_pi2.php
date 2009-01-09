@@ -22,6 +22,11 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_typo3 . 'template.php');
+if (is_object($LANG)) {
+	$LANG->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+}
+
 require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
