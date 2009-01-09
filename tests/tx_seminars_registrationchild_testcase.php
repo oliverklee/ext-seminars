@@ -44,6 +44,11 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	/** @var integer the UID of a seminar to which the fixture relates */
 	private $seminarUid;
 
+	/**
+	 * @var integer the UID of the registration the fixture relates to
+	 */
+	private $registrationUid;
+
 	public function setUp() {
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		tx_seminars_registrationchild::purgeCachedSeminars();
@@ -70,7 +75,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 
-		$registrationUid = $this->testingFramework->createRecord(
+		$this->registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->seminarUid,
@@ -79,7 +84,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_registrationchild($registrationUid);
+		$this->fixture = new tx_seminars_registrationchild($this->registrationUid);
 		$this->fixture->setConfigurationValue(
 			'templateFile', 'EXT:seminars/seminars.tmpl'
 		);
@@ -715,6 +720,105 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->isPaid()
+		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning sendAdditionalNotification
+	////////////////////////////////////////////////
+
+	public function testSendAdditionalNotificationCanSendEmailToOneOrganizer() {
+		$this->fixture->sendAdditionalNotification();
+
+		$this->assertContains(
+			'mail@example.com',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastRecipient()
+		);
+	}
+
+	public function testSendAdditionalNotificationCanSendEmailsToTwoOrganizers() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS,
+			array(
+				'title' => 'test organizer 2',
+				'email' => 'mail2@example.com',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			$organizerUid, 'organizers'
+		);
+
+		$this->fixture->sendAdditionalNotification();
+
+		$this->assertEquals(
+			2,
+			count(
+				tx_oelib_mailerFactory::getInstance()
+					->getMailer()->getAllEmail()
+			)
+		);
+	}
+
+	public function testSendAdditionalNotificationForEventWithEnoughAttendancesSendsEnoughAttendancesMail() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('attendees_min' => 1, 'attendees_max' => 42)
+		);
+
+		tx_seminars_registrationchild::purgeCachedSeminars();
+		$fixture = new tx_seminars_registrationchild($this->registrationUid);
+
+		$fixture->sendAdditionalNotification();
+		$fixture->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate(
+					'email_additionalNotificationEnoughRegistrationsSubject'
+				),
+				$this->seminarUid,
+				''
+			),
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastSubject()
+		);
+	}
+
+	public function testSendAdditionalNotificationForBookedOutEventSendsBookedOutMail() {
+		$this->fixture->sendAdditionalNotification();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate(
+					'email_additionalNotificationIsFullSubject'
+				),
+				$this->seminarUid,
+				''
+			),
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastSubject()
+		);
+	}
+
+	public function testSendAdditionalNotificationforEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('attendees_min' => 5, 'attendees_max' => 5)
+		);
+
+		tx_seminars_registrationchild::purgeCachedSeminars();
+		$fixture = new tx_seminars_registrationchild($this->registrationUid);
+
+		$fixture->sendAdditionalNotification();
+		$fixture->__destruct();
+
+		$this->assertEquals(
+			0,
+			count(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getAllEmail())
 		);
 	}
 }
