@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#1965] Fix: No gender in the CSV export of registrations
 - [#1597] Change: Use the oelib mailer class for sending e-mails
 - [#2526] Feature: Add a function for getting the earliest deadline for all speakers for an event
 - [#2500] Fix: The class pi1_frontEndRequirementsList does not load detailPID from flexforms

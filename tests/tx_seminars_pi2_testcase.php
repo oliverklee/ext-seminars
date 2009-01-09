@@ -292,6 +292,33 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testCreateAndOutputListOfRegistrationsCanContainNameOfUser() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', 'name'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', ''
+		);
+		$feUserUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'foo_user')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $feUserUid,
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'foo_user',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
 	public function testMainCanExportOneReferrer() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
