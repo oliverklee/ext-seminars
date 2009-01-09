@@ -41,6 +41,11 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	public $scriptRelPath = 'class.tx_seminars_timespan.php';
 
 	/**
+	 * @var integer the number of seconds per day
+	 */
+	const SECONDS_PER_DAY = 86400;
+
+	/**
 	 * Gets the begin date.
 	 *
 	 * @return string the begin date (or the localized string "will be

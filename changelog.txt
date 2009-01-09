@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2526] Feature: Add a function for getting the earliest deadline for all speakers for an event
 - [#2500] Fix: The class pi1_frontEndRequirementsList does not load detailPID from flexforms
 - [#2552] Change: Modify cancelled field
 - [#2525] Feature: Add a field "cancelation period (in days)" to the speakers

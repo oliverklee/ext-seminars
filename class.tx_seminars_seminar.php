@@ -73,7 +73,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		STATUS_CANCELED = 1,
 		STATUS_CONFIRMED = 2;
 
-
 	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
@@ -4448,6 +4447,42 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	private function getStatus() {
 		return $this->getRecordPropertyInteger('cancelled');
+	}
+
+	/**
+	 * Returns the cancelation deadline of this event, depending on the
+	 * cancelation deadlines of the speakers.
+	 *
+	 * Before this function is called assure that this event has a begin date.
+	 *
+	 * @return integer the cancelation deadline of this event as timestamp,
+	 *                 will be >= 0
+	 */
+	public function getCancelationDeadline() {
+		if (!$this->hasBeginDate()) {
+			throw new Exception('The event has no begin date. Please call ' .
+				'this function only if the event has a begin date.'
+			);
+		}
+		if (!$this->hasSpeakers()) {
+			return $this->getBeginDateAsTimestamp();
+		}
+
+		$beginDate = $this->getBeginDateAsTimestamp();
+		$deadline = $beginDate;
+		$speakers = $this->getSpeakerBag();
+
+		foreach ($speakers as $speaker) {
+			$speakerDeadline = $beginDate -
+				($speaker->getCancelationPeriodInDays()
+					* tx_seminars_timespan::SECONDS_PER_DAY
+				);
+			$deadline = min($speakerDeadline, $deadline);
+		}
+
+		$speakers->__destruct();
+
+		return $deadline;
 	}
 }
 

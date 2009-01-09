@@ -5725,5 +5725,74 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->isPlanned()
 		);
 	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning getCancelationDeadline
+	////////////////////////////////////////////
+
+	public function testGetCancelationDeadlineForEventWithoutSpeakerReturnsBeginDateOfEvent() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+
+		$this->assertEquals(
+			$this->fixture->getBeginDateAsTimestamp(),
+			$this->fixture->getCancelationDeadline()
+		);
+	}
+
+	public function testGetCancelationDeadlineForEventWithSpeakerWithoutCancelationPeriodReturnsBeginDateOfEvent() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+		$this->addSpeakerRelation(array('cancelation_period' => 0));
+
+		$this->assertEquals(
+			$this->fixture->getBeginDateAsTimestamp(),
+			$this->fixture->getCancelationDeadline()
+		);
+	}
+
+	public function testGetCancelationDeadlineForEventWithTwoSpeakersWithoutCancelationPeriodReturnsBeginDateOfEvent() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+		$this->addSpeakerRelation(array('cancelation_period' => 0));
+		$this->addSpeakerRelation(array('cancelation_period' => 0));
+
+		$this->assertEquals(
+			$this->fixture->getBeginDateAsTimestamp(),
+			$this->fixture->getCancelationDeadline()
+		);
+	}
+
+	public function testGetCancelationDeadlineForEventWithOneSpeakersWithCancelationPeriodReturnsBeginDateMinusCancelationPeriod() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+		$this->addSpeakerRelation(array('cancelation_period' => 1));
+
+		$this->assertEquals(
+			$GLOBALS['SIM_EXEC_TIME'] - tx_seminars_timespan::SECONDS_PER_DAY,
+			$this->fixture->getCancelationDeadline()
+		);
+	}
+
+	public function testGetCancelationDeadlineForEventWithTwoSpeakersWithCancelationPeriodsReturnsBeginDateMinusBiggestCancelationPeriod() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+		$this->addSpeakerRelation(array('cancelation_period' => 21));
+		$this->addSpeakerRelation(array('cancelation_period' => 42));
+
+		$this->assertEquals(
+			$GLOBALS['SIM_EXEC_TIME']
+				- (42 * tx_seminars_timespan::SECONDS_PER_DAY),
+			$this->fixture->getCancelationDeadline()
+		);
+	}
+
+	public function testGetCancelationDeadlineForEventWithoutBeginDateThrowsException() {
+		$this->fixture->setBeginDate(0);
+
+		$this->setExpectedException(
+			'Exception',
+			'The event has no begin date. Please call ' .
+				'this function only if the event has a begin date.'
+		);
+
+		$this->fixture->getCancelationDeadline();
+	}
 }
 ?>
