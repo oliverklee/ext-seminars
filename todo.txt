@@ -60,7 +60,6 @@ Version 0.8.0 - "Make it nice for developers": code clean-up, qa and documentati
 - in the registration class, use $this->tableName instead of $this->tableAttendances
 - in the seminar class, use $this->tableName instead of $this->tableSeminars
 - investigate whether we should use t3lib_flexformtools
-- investigate whether to use t3lib_div::plainMailEncoded()
 - add "@author" / "@package TYPO3" and "@subpackage tx_seminars" to all PHP classes (this is required by the TYPO3 coding guidelines)
 - check that all occurances of TYPO3 in comments and strings use the correct case "TYPO3"
 - investigate whether we actually need both of the following:
@@ -152,7 +151,6 @@ Version 0.11.0 - "Make it nice for the BE users": back-end usability and polish
 - in the back end, remove many checkboxes next to text fields
 - for all homepage fields, add http:// and / after editing if it has been left out
 - function to add the http:// and the trailing slash to URLs if they are missing (for e-mails to participants and links online)
-- make notification e-mails to organizers prettier, e.g. using localized labels
 - investigate whether organizers, speakers and seminar sites can be created directly from within the seminar record
 - provide tooltips where it makes sense, e.g. in the "create new record" list
 - conduct BE usability tests
@@ -196,7 +194,6 @@ Version 0.12.0 - "Make it nice for the visitors": front-end usability and polish
 - automatically return to the registration page after login
 - add a localized "h" after the time
 - conduct FE usability tests
-- online registration: only show the message "an e-mail has been sent" if sending the e-mail has been successful
 - use singular for message_invalidNumberOfSeats if there is only 1 vacancy
 - Check if we can/should use TemplaVoila [from dev-meeting 05/12]
 - in the list view, add little arrows to the list head indicating the sort field and sort order
