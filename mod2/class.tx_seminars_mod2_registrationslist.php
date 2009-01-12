@@ -174,6 +174,18 @@ class tx_seminars_mod2_registrationslist extends tx_seminars_mod2_backendlist {
 			} catch (tx_oelib_Exception_NotFound $e) {
 				$userName = $LANG->getLL('registrationlist.deleted');
 			}
+			$event = $registration->getSeminarObject();
+			if ($event->isOk()) {
+				$eventTitle = htmlspecialchars($event->getTitle());
+				$eventDate = $event->getDate();
+				$accreditationNumber = htmlspecialchars(
+					$event->getAccreditationNumber()
+				);
+			} else {
+				$eventTitle = $LANG->getLL('registrationlist.deleted');
+				$eventDate = '';
+				$accreditationNumber = '';
+			}
 			// Adds the result row to the table array.
 			$table[] = array(
 				TAB . TAB . TAB . TAB . TAB .
@@ -181,13 +193,11 @@ class tx_seminars_mod2_registrationslist extends tx_seminars_mod2_backendlist {
 				TAB . TAB . TAB . TAB . TAB .
 					$userName . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					htmlspecialchars(
-						$registration->getSeminarObject()->getAccreditationNumber()
-					) . LF,
+					$accreditationNumber . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$registration->getSeminarObject()->getTitle() . LF,
+					$eventTitle . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$registration->getSeminarObject()->getDate() . LF,
+					$eventDate . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					$this->getEditIcon(
 						$registration->getUid()
