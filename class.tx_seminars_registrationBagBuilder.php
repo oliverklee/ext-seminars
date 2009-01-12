@@ -163,6 +163,17 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 			'.seminar=' . SEMINARS_TABLE_SEMINARS . '.uid';
 		$this->setOrderBy($orderBy);
 	}
+
+	/**
+	 * Limits the bag to registrations to which a non-deleted FE user record
+	 * exists.
+	 */
+	public function limitToExistingUsers() {
+		$this->whereClauseParts['existingUsers'] = 'EXISTS (
+			SELECT * FROM fe_users WHERE ' .
+			' fe_users.uid='. SEMINARS_TABLE_ATTENDANCES . '.user' .
+			tx_oelib_db::enableFields('fe_users') . ')';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationBagBuilder.php']) {
