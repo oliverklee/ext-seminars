@@ -885,5 +885,35 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				->count()
 		);
 	}
+
+
+	////////////////////////////////////////
+	// Tests concerning removeRegistration
+	////////////////////////////////////////
+
+	public function testRemoveRegistrationHidesRegistrationOfUser() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+		$seminarUid = $this->seminar->getUid();
+		$this->createFrontEndPages();
+
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $userUid,
+				'seminar' => $seminarUid,
+				'hidden' => 0,
+			)
+		);
+
+		$this->fixture->removeRegistration($registrationUid, $this->pi1);
+
+		$this->assertTrue(
+			$this->testingFramework->existsRecord(
+				SEMINARS_TABLE_ATTENDANCES,
+				'user=' . $userUid . ' AND seminar=' . $seminarUid .
+					' AND hidden=1'
+			)
+		);
+	}
 }
 ?>

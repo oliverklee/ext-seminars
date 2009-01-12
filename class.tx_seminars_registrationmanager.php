@@ -605,7 +605,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tslib_pibase live plugin object
 	 */
-	public function fillVacancies(tslib_pibase $plugin) {
+	private function fillVacancies(tslib_pibase $plugin) {
 		$seminar = $this->registration->getSeminarObject();
 		$seminar->calculateStatistics();
 
@@ -617,7 +617,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			);
 			$registrationBagBuilder->limitToEvent($seminar->getUid());
 			$registrationBagBuilder->limitToOnQueue();
-			$registrationBagBuilder->limitToSeatsEqualOrLessThanVacancies(
+			$registrationBagBuilder->limitToSeatsAtMost(
 				$seminar->getVacancies()
 			);
 
