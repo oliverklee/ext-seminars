@@ -88,6 +88,16 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 			$uid
 		);
 	}
+
+	/**
+	 * Sets the data of the FE user of this registration.
+	 *
+	 * @param array data of the front-end user, may be empty
+	 */
+	public function setUserData(array $userData) {
+		parent::setUserData($userData);
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_registrationchild.php']) {

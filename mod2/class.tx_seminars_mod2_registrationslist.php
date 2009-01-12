@@ -169,12 +169,17 @@ class tx_seminars_mod2_registrationslist extends tx_seminars_mod2_backendlist {
 			'</h3>' . LF;
 
 		foreach ($registrationBag as $registration) {
+			try {
+				$userName = $registration->getUserName();
+			} catch (tx_oelib_Exception_NotFound $e) {
+				$userName = $LANG->getLL('registrationlist.deleted');
+			}
 			// Adds the result row to the table array.
 			$table[] = array(
 				TAB . TAB . TAB . TAB . TAB .
 					$registration->getRecordIcon() . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$registration->getUserName() . LF,
+					$userName . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					htmlspecialchars(
 						$registration->getSeminarObject()->getAccreditationNumber()

@@ -132,5 +132,70 @@ class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 			$this->fixture->show()
 		);
 	}
+
+	public function testShowShowsUserName() {
+		$userUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'foo_user')
+		);
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('pid' => $this->dummySysFolderPid)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $seminarUid,
+				'user' => $userUid,
+			)
+		);
+
+		$this->assertContains(
+			'foo_user',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowWithRegistrationForDeletedUserDoesNotShowUserName() {
+		$userUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'foo_user', 'deleted' => 1)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $seminarUid,
+				'user' => $userUid,
+			)
+		);
+
+		$this->assertNotContains(
+			'foo_user',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowWithRegistrationForInexistentUserDoesNotShowUserName() {
+		$userUid = $this->testingFramework->getAutoIncrement('fe_users');
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('pid' => $this->dummySysFolderPid)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $seminarUid,
+				'user' => $userUid,
+			)
+		);
+
+		$this->assertNotContains(
+			'foo_user',
+			$this->fixture->show()
+		);
+	}
 }
 ?>

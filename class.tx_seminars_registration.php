@@ -55,6 +55,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	private $isTemplateInitialized = false;
 
 	/**
+	 * @var boolean whether the user data has already been retrieved
+	 */
+	private $userDataHasBeenRetrieved = false;
+
+	/**
 	 * This variable stores the data of the user as an array and makes it
 	 * available without further database queries. It will get filled with data
 	 * in the constructor.
@@ -116,9 +121,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$this->seminar = new $seminarClassname($seminarUid);
 				self::$cachedSeminars[$seminarUid] = $this->seminar;
 			}
-
-			// Stores the user data in $this->userData.
-			$this->retrieveUserData();
 		}
 	}
 
@@ -283,14 +285,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*', 'fe_users', 'uid=' . $uid
+			'*',
+			'fe_users',
+			'uid=' . $uid . tx_oelib_db::enableFields('fe_users')
 		);
 		if (!$dbResult) {
 			throw new Exception(DATABASE_QUERY_ERROR);
 		}
 		$userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if (!$userData) {
-			throw new Exception(
+			throw new tx_oelib_Exception_NotFound(
 				'The FE user with the UID ' . $uid . ' could not be retrieved.'
 			);
 		}
@@ -303,12 +307,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @param array data of the front-end user, must not be empty
 	 */
-	public function setUserData(array $userData) {
+	protected function setUserData(array $userData) {
 		if (empty($userData)) {
 			throw new Exception('$userData must not be empty.');
 		}
 
 		$this->userData = $userData;
+		$this->userDataHasBeenRetrieved = true;
 	}
 
 	/**
@@ -405,6 +410,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *                may be empty
 	 */
 	public function getUserData($key) {
+		if (!$this->userDataHasBeenRetrieved) {
+			$this->retrieveUserData();
+		}
 		$result = '';
 		$trimmedKey = trim($key);
 

@@ -30,6 +30,7 @@
 			<label index="speakerlist.skills">Skills</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.deleted">(deleted)</label>
 			<label index="registrationlist.seminar.accreditation_number">Accreditation number</label>
 			<label index="registrationlist.seminar.title">Event</label>
 			<label index="registrationlist.seminar.date">Event date</label>
@@ -83,6 +84,7 @@
 			<label index="speakerlist.skills">Fähigkeiten</label>
 			<label index="organizerlist.title">Name</label>
 			<label index="registrationlist.feuser.name">Name</label>
+			<label index="registrationlist.deleted">(gelöscht)</label>
 			<label index="registrationlist.seminar.accreditation_number">Akkreditierungsnummer</label>
 			<label index="registrationlist.seminar.title">Veranstaltung</label>
 			<label index="registrationlist.seminar.date">Veranstaltungsdatum</label>
@@ -216,6 +218,7 @@
 			<label index="eventlist_status" type="integer">247806604</label>
 			<label index="eventlist_status_canceled" type="integer">224147873</label>
 			<label index="eventlist_status_confirmed" type="integer">249197084</label>
+			<label index="registrationlist.deleted" type="integer">244968423</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -343,6 +346,7 @@
 			<label index="eventlist_status">Status</label>
 			<label index="eventlist_status_canceled">canceled</label>
 			<label index="eventlist_status_confirmed">confirmed</label>
+			<label index="registrationlist.deleted">(deleted)</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>
