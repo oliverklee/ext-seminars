@@ -558,5 +558,39 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			$registrationUid1
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning limitToExistingUsers
+	//////////////////////////////////////////
+
+	public function testLimitToExistingUsersFindsRegistrationWithExistingUser() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('user' => $this->testingFramework->createFrontEndUser())
+		);
+		$this->fixture->limitToExistingUsers();
+
+		$this->assertFalse(
+			$this->fixture->build()->isEmpty()
+		);
+	}
+
+	public function testLimitToExistingUsersDoesNotFindRegistrationWithDeletedUser() {
+		$feUserUid = $this->testingFramework->createFrontEndUser();
+
+		$this->testingFramework->changeRecord(
+			'fe_users', $feUserUid, array('deleted' => 1)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('user' => $feUserUid)
+		);
+		$this->fixture->limitToExistingUsers();
+
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
+		);
+	}
 }
 ?>

@@ -443,5 +443,22 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			$this->fixture->render()
 		);
 	}
+
+	public function testRenderWithDeletedUserForRegistrationHidesUsersRegistration() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'uid'
+		);
+
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$this->testingFramework->changeRecord(
+			'fe_users', $this->feUserUid, array('deleted' => 1)
+		);
+
+		$this->assertNotContains(
+			(string) $this->registrationUid,
+			$this->fixture->render()
+		);
+	}
 }
 ?>

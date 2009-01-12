@@ -181,6 +181,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 		$builder = t3lib_div::makeInstance('tx_seminars_registrationBagBuilder');
 		$builder->limitToEvent($this->seminar->getUid());
 		$builder->limitToRegular();
+		$builder->limitToExistingUsers();
 		$builder->setOrderBy('crdate');
 
 		$registrationBag = $builder->build();
