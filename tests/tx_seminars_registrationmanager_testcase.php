@@ -677,12 +677,16 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				)
 			)
 		);
+		$missingTopics = $this->fixture->getMissingRequiredTopics(
+			$this->cachedSeminar
+		);
 
 		$this->assertEquals(
 			1,
-			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
-				->count()
+			$missingTopics->count()
 		);
+
+		$missingTopics->__destruct();
 	}
 
 	public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic() {
@@ -716,12 +720,16 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				)
 			)
 		);
+		$missingTopics = $this->fixture->getMissingRequiredTopics(
+			$this->cachedSeminar
+		);
 
 		$this->assertEquals(
 			$requiredTopicUid,
-			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
-				->current()->getUid()
+			$missingTopics->current()->getUid()
 		);
+
+		$missingTopics->__destruct();
 	}
 
 	public function testGetMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems() {
@@ -772,12 +780,16 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				)
 			)
 		);
+		$missingTopics = $this->fixture->getMissingRequiredTopics(
+			$this->cachedSeminar
+		);
 
 		$this->assertEquals(
 			2,
-			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
-				->count()
+			$missingTopics->count()
 		);
+
+		$missingTopics->__destruct();
 	}
 
 	public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilledTopic() {
@@ -825,12 +837,16 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				)
 			)
 		);
+		$missingTopics = $this->fixture->getMissingRequiredTopics(
+			$this->cachedSeminar
+		);
 
 		$this->assertEquals(
 			$requiredTopicUid2,
-			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
-				->current()->getUid()
+			$missingTopics->current()->getUid()
 		);
+
+		$missingTopics->__destruct();
 	}
 
 	public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledDoesNotReturnFulfilledTopic() {
@@ -878,12 +894,16 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				)
 			)
 		);
+		$missingTopics = $this->fixture->getMissingRequiredTopics(
+			$this->cachedSeminar
+		);
 
 		$this->assertEquals(
 			1,
-			$this->fixture->getMissingRequiredTopics($this->cachedSeminar)
-				->count()
+			$missingTopics->count()
 		);
+
+		$missingTopics->__destruct();
 	}
 
 

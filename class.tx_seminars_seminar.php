@@ -2249,7 +2249,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = array();
 
-		foreach ($this->getOrganizerBag() as $organizer) {
+		$organizers = $this->getOrganizerBag();
+		foreach ($organizers as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
 				$organizer->getTitle(),
 				$organizer->getHomepage(),
@@ -2257,6 +2258,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$plugin->getConfValueString('externalLinkTarget')
 			);
 		}
+		$organizer->__destruct();
 
 		return implode(', ', $result);
 	}
@@ -2274,10 +2276,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = array();
 
-		foreach ($this->getOrganizerBag() as $organizer) {
+		$organizers = $this->getOrganizerBag();
+		foreach ($organizers as $organizer) {
 			$result[] = $organizer->getTitle()
 				.($organizer->hasHomepage() ? ', '.$organizer->getHomepage() : '');
 		}
+		$organizers->__destruct();
 
 		return implode(CRLF, $result);
 	}
@@ -2297,9 +2301,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = array();
 
-		foreach ($this->getOrganizerBag() as $organizer) {
+		$organizers = $this->getOrganizerBag();
+		foreach ($organizers as $organizer) {
 			$result[] = '"'.$organizer->getTitle().'" <'.$organizer->getEmail().'>';
 		}
+		$organizers->__destruct();
 
 		return $result;
 	}
@@ -2317,9 +2323,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = array();
 
-		foreach ($this->getOrganizerBag() as $organizer) {
+		$organizers = $this->getOrganizerBag();
+		foreach ($organizers as $organizer) {
 			$result[] = $organizer->getEmail();
 		}
+		$organizers->__destruct();
 
 		return $result;
 	}
@@ -2336,9 +2344,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = array();
 
-		foreach ($this->getOrganizerBag() as $organizer) {
+		$organizers = $this->getOrganizerBag();
+		foreach ($organizers as $organizer) {
 			$result[] = $organizer->getEmailFooter();
 		}
+		$organizers->__destruct();
 
 		return $result;
 	}
@@ -3355,7 +3365,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return 0;
 		}
 
-		$firstOrganizer = $this->getOrganizerBag()->current();
+		$organizers = $this->getOrganizerBag();
+		$firstOrganizer = $organizers->current();
+		$organizers->__destruct();
 
 		return $firstOrganizer->getAttendancesPid();
 	}
@@ -4238,7 +4250,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$bag = $builder->build();
 
 		$result = array();
-
 		foreach ($bag as $key => $category) {
 			$result[$key] =
 				array(
@@ -4246,6 +4257,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					'icon'  => $category->getIcon(),
 				);
 		}
+		$bag->__destruct();
 
 		return $result;
 	}

@@ -70,7 +70,9 @@ class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_pi1_frontEndView 
 			// problem by the configuration check.
 		}
 
-		$eventUids = $seminarBagBuilder->build()->getUids();
+		$bag = $seminarBagBuilder->build();
+		$eventUids = $bag->getUids();
+		$bag->__destruct();
 
 		$categoryBagBuilder = t3lib_div::makeInstance(
 			'tx_seminars_categorybagbuilder'

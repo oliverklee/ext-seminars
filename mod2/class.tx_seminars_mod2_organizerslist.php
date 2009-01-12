@@ -141,6 +141,7 @@ class tx_seminars_mod2_organizerslist extends tx_seminars_mod2_backendlist {
 					).LF
 			);
 		}
+		$organizerBag->__destruct();
 
 		$content .= $this->getNewIcon($pageData['uid']);
 

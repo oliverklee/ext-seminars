@@ -102,10 +102,14 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvent($eventUid);
+		$bag = $this->fixture->build();
+
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->countWithoutLimit()
+			$bag->countWithoutLimit()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventFindsTwoOrganizersOfEvent() {
@@ -131,10 +135,14 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvent($eventUid);
+		$bag = $this->fixture->build();
+
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->countWithoutLimit()
+			$bag->countWithoutLimit()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventIgnoresOrganizerOfOtherEvent() {
@@ -155,9 +163,13 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvent($eventUid2);
+		$bag = $this->fixture->build();
+
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 }
 ?>

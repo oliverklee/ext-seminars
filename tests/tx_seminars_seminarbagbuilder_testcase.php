@@ -69,10 +69,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('hidden' => 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderFindsHiddenEventsInBackEndMode() {
@@ -82,10 +85,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setBackEndMode();
+		$bag = $this->fixture->build();
+
 
 		$this->assertFalse(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresTimedEventsByDefault() {
@@ -93,10 +100,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('endtime' => mktime() - 1000)
 		);
+		$bag = $this->fixture->build();
+
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderFindsTimedEventsInBackEndMode() {
@@ -106,10 +117,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setBackEndMode();
+		$bag = $this->fixture->build();
+
 
 		$this->assertFalse(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 

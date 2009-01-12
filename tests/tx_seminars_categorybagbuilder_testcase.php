@@ -86,6 +86,8 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			'Title 2',
 			$categoryBag->next()->getTitle()
 		);
+
+		$categoryBag->__destruct();
 	}
 
 
@@ -105,11 +107,14 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testToLimitEmptyEventUidsResultsInAllCategories() {
@@ -126,11 +131,14 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvents('');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToZeroEventUidFails() {
@@ -185,11 +193,14 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvents($eventUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsCanResultInTwoCategoriesForOneEvent() {
@@ -214,11 +225,14 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvents($eventUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsCanResultInTwoCategoriesForTwoEvents() {
@@ -245,11 +259,14 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvents($eventUid1.','.$eventUid2);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsWillExcludeUnassignedCategories() {
@@ -275,6 +292,8 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			$categoryUid,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsWillExcludeCategoriesOfOtherEvents() {
@@ -309,6 +328,8 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			$categoryUid1,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsResultsInAnEmptyBagIfThereAreNoMatches() {
@@ -331,10 +352,13 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEvents($eventUid2);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 

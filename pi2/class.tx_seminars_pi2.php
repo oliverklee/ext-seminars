@@ -193,8 +193,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		}
 
 		$registrationBagBuilder->limitToEvent($eventUid);
+		$bag = $registrationBagBuilder->build();
 
-		foreach ($registrationBagBuilder->build() as $registration) {
+		foreach ($bag as $registration) {
 			$userData = $this->retrieveData(
 				$registration,
 				'getUserData',
@@ -216,6 +217,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				array_merge($userData, $registrationData)
 			) . CRLF;
 		}
+		$bag->__destruct();
 
 		return $result;
 	}

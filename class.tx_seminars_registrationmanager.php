@@ -621,7 +621,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				$seminar->getVacancies()
 			);
 
-			foreach ($registrationBagBuilder->build() as $registration) {
+			$bag = $registrationBagBuilder->build();
+			foreach ($bag as $registration) {
 				if ($vacancies <= 0) {
 					break;
 				}
@@ -651,6 +652,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 					}
 				}
 			}
+			$bag->__destruct();
 		}
 	}
 
@@ -669,8 +671,11 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if (!$event->hasRequirements()) {
 			return true;
 		}
+		$missingTopics = $this->getMissingRequiredTopics($event);
+		$result = $missingTopics->isEmpty();
+		$missingTopics->__destruct();
 
-		return $this->getMissingRequiredTopics($event)->isEmpty();
+		return $result;
 	}
 
 	/**

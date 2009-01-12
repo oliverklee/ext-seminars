@@ -339,6 +339,7 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 		if (!$seminarBag->isEmpty()) {
 			$content .= $this->getCsvIcon();
 		}
+		$seminarBag->__destruct();
 
 		// Outputs the table array using the tableLayout array with the template
 		// class.

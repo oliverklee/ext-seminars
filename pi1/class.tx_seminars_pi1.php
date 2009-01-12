@@ -1249,13 +1249,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$output = '';
-		foreach ($this->seminar->getDependencies() as $dependency) {
+		$dependencies = $this->seminar->getDependencies();
+		foreach ($dependencies as $dependency) {
 			$this->setMarker(
 				'dependency_title',
 				$dependency->getLinkedFieldValue($this, 'title')
 			);
 			$output .= $this->getSubpart('SINGLE_DEPENDENCY');
 		}
+		$dependencies->__destruct();
 
 		$this->setSubpart('SINGLE_DEPENDENCY', $output);
 	}

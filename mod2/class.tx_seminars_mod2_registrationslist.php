@@ -197,6 +197,7 @@ class tx_seminars_mod2_registrationslist extends tx_seminars_mod2_backendlist {
 			$this->configCheckWarnings =
 				$registrationBag->checkConfiguration();
 		}
+		$registrationBag->__destruct();
 
 		// Outputs the table array using the tableLayout array with the template
 		// class.
