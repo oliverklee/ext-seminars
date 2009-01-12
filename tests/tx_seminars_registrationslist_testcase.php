@@ -197,5 +197,75 @@ class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 			$this->fixture->show()
 		);
 	}
+
+	public function testShowForOneEventContainsEventTitle() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $seminarUid,
+			)
+		);
+
+		$this->assertContains(
+			'event_1',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowForOneDeletedEventDoesNotContainEventTitle() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+				'deleted' => 1,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $seminarUid,
+			)
+		);
+
+		$this->assertNotContains(
+			'event_1',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowForOneInexistentEventShowsUserName() {
+		$userUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'user_foo')
+		);
+		$seminarUid = $this->testingFramework->getAutoIncrement(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $seminarUid,
+				'user' => $userUid,
+			)
+		);
+
+		$this->assertContains(
+			'user_foo',
+			$this->fixture->show()
+		);
+	}
 }
 ?>
