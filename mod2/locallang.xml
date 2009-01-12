@@ -23,6 +23,9 @@
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Enough</label>
 			<label index="eventlist.is_full">Full</label>
+			<label index="eventlist_status">Status</label>
+			<label index="eventlist_status_canceled">canceled</label>
+			<label index="eventlist_status_confirmed">confirmed</label>
 			<label index="speakerlist.title">Name</label>
 			<label index="speakerlist.skills">Skills</label>
 			<label index="organizerlist.title">Name</label>
@@ -73,6 +76,9 @@
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Genug</label>
 			<label index="eventlist.is_full">Voll</label>
+			<label index="eventlist_status">Status</label>
+			<label index="eventlist_status_canceled">abgesagt</label>
+			<label index="eventlist_status_confirmed">bestätigt</label>
 			<label index="speakerlist.title">Name</label>
 			<label index="speakerlist.skills">Fähigkeiten</label>
 			<label index="organizerlist.title">Name</label>
@@ -207,6 +213,9 @@
 			<label index="registrationlist.label_regularRegistrations" type="integer">52997146</label>
 			<label index="registrationlist.label_queueRegistrations" type="integer">122173419</label>
 			<label index="referencesWarning" type="integer">94848684</label>
+			<label index="eventlist_status" type="integer">247806604</label>
+			<label index="eventlist_status_canceled" type="integer">224147873</label>
+			<label index="eventlist_status_confirmed" type="integer">249197084</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -331,6 +340,9 @@
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
 			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
+			<label index="eventlist_status">Status</label>
+			<label index="eventlist_status_canceled">canceled</label>
+			<label index="eventlist_status_confirmed">confirmed</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>

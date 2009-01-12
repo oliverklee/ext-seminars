@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2529] Feature: Add column "status" to the BE events list
 - [#1965] Fix: No gender in the CSV export of registrations
 - [#1597] Change: Use the oelib mailer class for sending e-mails
 - [#2526] Feature: Add a function for getting the earliest deadline for all speakers for an event

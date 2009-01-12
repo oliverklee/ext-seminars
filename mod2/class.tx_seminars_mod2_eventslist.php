@@ -204,6 +204,9 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 				TAB . TAB . TAB . TAB . TAB . TAB .
 					'<span style="color: #ffffff; font-weight: bold;">' .
 					$LANG->getLL('eventlist.is_full') . '</span>' . LF,
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
+					$GLOBALS['LANG']->getLL('eventlist_status') . '</span>' . LF,
 			),
 		);
 
@@ -326,6 +329,8 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 				TAB . TAB . TAB . TAB . TAB .
 					(!$this->seminar->isFull()
 					? $LANG->getLL('no') : $LANG->getLL('yes')) . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->getStatusIcon() . LF,
 			);
 		}
 
@@ -344,6 +349,29 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 		$content .= $seminarBag->checkConfiguration(false, 'csv');
 
 		return $content;
+	}
+
+	/**
+	 * Returns an HTML image tag for an icon that represents the status "canceled"
+	 * or "confirmed". If the event's status is "planned", an empty string will be
+	 * returned.
+	 *
+	 * @return string HTML image tag, may be empty
+	 */
+	private function getStatusIcon() {
+		if (!$this->seminar->isCanceled() && !$this->seminar->isConfirmed()) {
+			return '';
+		}
+
+		if ($this->seminar->isConfirmed()) {
+			$icon = 'icon_confirmed.png';
+			$label = $GLOBALS['LANG']->getLL('eventlist_status_confirmed');
+		} elseif ($this->seminar->isCanceled()) {
+			$icon = 'icon_canceled.png';
+			$label = $GLOBALS['LANG']->getLL('eventlist_status_canceled');
+		}
+
+		return '<img src="' . $icon . '" title="' . $label . '" alt="' . $label . '" />';
 	}
 
 	/**

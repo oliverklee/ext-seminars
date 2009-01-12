@@ -225,6 +225,56 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testShowContainsCanceledStatusIconForCanceledEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
+			)
+		);
+
+		$this->assertContains(
+			'icon_canceled.png',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowContainsConfirmedStatusIconForConfirmedEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+			)
+		);
+
+		$this->assertContains(
+			'icon_confirmed.png',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowDoesNotContainCanceledORConfirmedStatusIconForPlannedEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
+			)
+		);
+
+		$this->assertNotContains(
+			'icon_canceled.png',
+			$this->fixture->show()
+		);
+
+		$this->assertNotContains(
+			'icon_confirmed.png',
+			$this->fixture->show()
+		);
+	}
+
 
 	/////////////////////////
 	// Tests for the icons.
