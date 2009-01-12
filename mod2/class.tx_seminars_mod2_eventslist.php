@@ -366,11 +366,12 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 
 		if ($this->seminar->isConfirmed()) {
 			$icon = 'icon_confirmed.png';
-			$label = $GLOBALS['LANG']->getLL('eventlist_status_confirmed');
+			$labelKey = 'eventlist_status_confirmed';
 		} elseif ($this->seminar->isCanceled()) {
 			$icon = 'icon_canceled.png';
-			$label = $GLOBALS['LANG']->getLL('eventlist_status_canceled');
+			$labelKey = 'eventlist_status_canceled';
 		}
+		$label = $GLOBALS['LANG']->getLL($labelKey);
 
 		return '<img src="' . $icon . '" title="' . $label . '" alt="' . $label . '" />';
 	}
