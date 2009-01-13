@@ -62,12 +62,6 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	// Tests for the basic builder functions.
 	///////////////////////////////////////////
 
-	public function testBuilderBuildsABagChildObject() {
-		$this->assertTrue(
-			$this->fixture->build() instanceof tx_seminars_bag
-		);
-	}
-
 	public function testBagBuilderBuildsARegistrationBag() {
 		$this->assertTrue(
 			$this->fixture->build() instanceof tx_seminars_registrationbag
@@ -98,6 +92,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			'Title 2',
 			$registrationBag->next()->getTitle()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testBuildWithoutLimitReturnsBagWithAllRegistrations() {
@@ -118,6 +114,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			2,
 			$registrationBag->count()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -156,6 +154,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			'Attendance 1',
 			$registrationBag->current()->getTitle()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToEventWithValidEventUidIgnoresRegistrationOfOtherEvent() {
@@ -175,6 +175,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->isEmpty()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -193,6 +195,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->current()->isPaid()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToPaidIgnoresUnpaidRegistration() {
@@ -206,6 +210,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->isEmpty()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -224,6 +230,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$registrationBag->current()->isPaid()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToUnpaidIgnoresPaidRegistration() {
@@ -237,6 +245,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->isEmpty()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -256,6 +266,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$registrationBag->current()->isPaid()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testRemovePaymentLimitationRemovesUnpaidLimit() {
@@ -270,6 +282,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->current()->isPaid()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -288,6 +302,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->current()->isOnRegistrationQueue()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToOnQueueIgnoresRegularRegistration() {
@@ -301,6 +317,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->isEmpty()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -319,6 +337,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$registrationBag->current()->isOnRegistrationQueue()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToRegularIgnoresRegistrationOnQueue() {
@@ -332,6 +352,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->isEmpty()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -351,6 +373,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$registrationBag->current()->isOnRegistrationQueue()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testRemoveQueueLimitationRemovesRegularLimit() {
@@ -365,6 +389,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->current()->isOnRegistrationQueue()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -392,6 +418,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			2,
 			$registrationBag->current()->getSeats()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToSeatsAtMostFindsRegistrationWithLessSeats() {
@@ -406,6 +434,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			1,
 			$registrationBag->current()->getSeats()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToSeatsAtMostIgnoresRegistrationWithMoreSeats() {
@@ -419,6 +449,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$registrationBag->isEmpty()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 	public function testLimitToSeatsAtMostWithZeroSeatsFindsAllRegistrations() {
@@ -433,6 +465,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$registrationBag->isEmpty()
 		);
+
+		$registrationBag->__destruct();
 	}
 
 
@@ -459,11 +493,14 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToAttendee($feUserUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$registrationUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToAttendeeWithPositiveFeUserUidIgnoresRegistrationsWithoutAttendee() {
@@ -471,10 +508,13 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
 
 		$this->fixture->limitToAttendee($feUserUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToAttendeeWithZeroFeUserUidFindsRegistrationsWithOtherAttendee() {
@@ -489,11 +529,14 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToAttendee($feUserUid);
 		$this->fixture->limitToAttendee(0);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$registrationUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -528,6 +571,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			$bag->next()->getUid(),
 			$registrationUid2
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetOrderByEventColumnCanSortDescendingByEventTitle() {
@@ -557,6 +602,8 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			$bag->next()->getUid(),
 			$registrationUid1
 		);
+
+		$bag->__destruct();
 	}
 
 

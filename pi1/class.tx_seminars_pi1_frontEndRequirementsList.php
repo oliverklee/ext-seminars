@@ -98,13 +98,15 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndV
 
 		$output = '';
 
-		foreach ($this->getRequirements() as $requirement) {
+		$requirements = $this->getRequirements();
+		foreach ($requirements as $requirement) {
 			$this->setMarker(
 				'requirement_title',
 				$requirement->getLinkedFieldValue($this, 'title')
 			);
 			$output .= $this->getSubpart('SINGLE_REQUIREMENT');
 		}
+		$requirements->__destruct();
 		$this->setSubpart('SINGLE_REQUIREMENT', $output);
 
 		return $this->getSubpart('FIELD_WRAPPER_REQUIREMENTS');

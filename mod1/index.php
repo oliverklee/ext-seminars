@@ -262,6 +262,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		}
 
 		$result .= $seminarBag->checkConfiguration();
+		$seminarBag->__destruct();
 
 		return $result;
 	}

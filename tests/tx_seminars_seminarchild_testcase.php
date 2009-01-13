@@ -5432,6 +5432,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$requiredTopicUid,
 			$result->current()->getUid()
 		);
+
+		$result->__destruct();
 	}
 
 	public function testGetRequirementsForDateOfTopicWithOneRequirementReturnsBagWithOneTopic() {
@@ -5468,6 +5470,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$requiredTopicUid,
 			$result->current()->getUid()
 		);
+
+		$result->__destruct();
 	}
 
 	public function testGetRequirementsForTwoRequirementsReturnsBagWithTwoItems() {
@@ -5492,13 +5496,15 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$topicUid, $requiredTopicUid2, 'requirements'
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);
+		$requirements = $topic->getRequirements();
+		$topic->__destruct();
 
 		$this->assertEquals(
 			2,
-			$topic->getRequirements()->count()
+			$requirements->count()
 		);
 
-		$topic->__destruct();
+		$requirements->__destruct();
 	}
 
 
@@ -5550,6 +5556,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$dependentTopicUid,
 			$result->current()->getUid()
 		);
+
+		$result->__destruct();
 	}
 
 	public function testGetDependenciesForDateOfTopicWithOneDependencyReturnsBagWithOneTopic() {
@@ -5592,6 +5600,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$dependentTopicUid,
 			$result->current()->getUid()
 		);
+
+		$result->__destruct();
 	}
 
 	public function testGetDependenciesForTwoDependenciesReturnsBagWithTwoItems() {
@@ -5625,13 +5635,15 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$dependentTopicUid2, $topicUid
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);
+		$dependencies = $topic->getDependencies();
+		$topic->__destruct();
 
 		$this->assertEquals(
 			2,
-			$topic->getDependencies()->count()
+			$dependencies->count()
 		);
 
-		$topic->__destruct();
+		$dependencies->__destruct();
 	}
 }
 ?>
