@@ -210,7 +210,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid)
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
 		);
 
 		$this->assertEquals(
@@ -229,7 +232,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid)
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
 		);
 
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
@@ -249,13 +255,22 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
+		;
 		$firstRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid, 'crdate' => time())
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
 		);
 		$secondRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid, 'crdate' => (time() + 1))
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => (time() + 1),
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
 		);
 
 		$this->assertEquals(
@@ -275,11 +290,19 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$firstRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid, 'crdate' => time())
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
 		);
 		$secondRegistrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('seminar' => $this->eventUid, 'crdate' => (time() + 1))
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => (time() + 1),
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
 		);
 
 		$this->fixture->piVars['seminar'] = $this->eventUid;
@@ -299,7 +322,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', ''
 		);
-		$feUserUid = $this->testingFramework->createFrontEndUser(
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
 			'', array('name' => 'foo_user')
 		);
 		$this->testingFramework->createRecord(
@@ -307,7 +330,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => time(),
-				'user' => $feUserUid,
+				'user' => $frontEndUserUid,
 			)
 		);
 
@@ -331,6 +354,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			array(
 				'seminar' => $this->eventUid,
 				'referrer' => 'test referrer',
+				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
 
@@ -341,6 +365,58 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'"","referrer"'.CRLF
 				.'"test referrer"'.CRLF,
 			$this->fixture->main(null, array())
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithDeletedUser() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			'', array('deleted' => 1)
+		);
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $frontEndUserUid,
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertNotContains(
+			(string) $registrationUid,
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithInexistentUser() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->getAutoIncrement('fe_users'),
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertNotContains(
+			(string) $registrationUid,
+			$this->fixture->createAndOutputListOfRegistrations()
 		);
 	}
 }
