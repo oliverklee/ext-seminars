@@ -56,6 +56,9 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	private $backEndModule;
 
 	public function setUp() {
+		// Loads the locallang file for properly working localization in the tests.
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/mod2/locallang.xml');
+
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -293,6 +296,17 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'icon_tx_seminars_seminars_',
 			$this->fixture->show()
+		);
+	}
+
+	////////////////////////////////
+	// Tests for the localization.
+	////////////////////////////////
+
+	public function testLocalizationReturnsLocalizedStringForExistingKey() {
+		$this->assertEquals(
+			'Events',
+			$GLOBALS['LANG']->getLL('title')
 		);
 	}
 }
