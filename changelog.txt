@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#1611] Change: Add guard clauses to objectfromdb::createMmRecords
 - [#2563] Fix: Deal with deleted FE users and seminars gracefully
 - [#2541] Fix: Save memory by destructing the bags after usage in the tests and the production code
 - [#2576] Fix: Function limitToSeatsEqualOrLessThanVacancies() is missing in registrationBagBuilder

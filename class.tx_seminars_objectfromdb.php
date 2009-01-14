@@ -322,6 +322,15 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * @return integer the number of created m:n records
 	 */
 	protected function createMmRecords($mmTable, array $references) {
+		if ($mmTable == '') {
+			throw new Exception('$mmTable must not be empty.');
+		}
+		if (!$this->hasUid()) {
+			throw new Exception(
+				'createMmRecords may only be called on objects that have a UID.'
+			);
+		}
+
 		if (empty($references)) {
 			return 0;
 		}
