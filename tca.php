@@ -134,7 +134,7 @@ $TCA['tx_seminars_test'] = array(
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,details_page,place,room,speakers,prices,price_regular,price_special,payment_methods,organizers,organizing_partners,confirmation_information_sent,cancellation_information_sent,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
+		'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,prices,price_regular,price_special,payment_methods,organizers,organizing_partners,confirmation_information_sent,cancellation_information_sent,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -363,6 +363,18 @@ $TCA['tx_seminars_seminars'] = array(
 				'size' => '12',
 				'max' => '20',
 				'eval' => 'datetime',
+				'checkbox' => '0',
+				'default' => '0',
+			),
+		),
+		'expiry' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.expiry',
+			'config' => array(
+				'type' => 'input',
+				'size' => '10',
+				'max' => '10',
+				'eval' => 'date',
 				'checkbox' => '0',
 				'default' => '0',
 			),
@@ -948,7 +960,7 @@ $TCA['tx_seminars_seminars'] = array(
 		// Multiple event date
 		'2' => array('showitem' =>
 			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, topic, language, accreditation_number, details_page, cancelled, notes, attached_files, ' .
-				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, additional_times_places, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, deadline_registration, deadline_early_bird, deadline_unregistration, expiry, place, room, additional_times_places, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, confirmation_information_sent, cancellation_information_sent, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, attendees_min, attendees_max, queue_size, skip_collision_check, ' .
