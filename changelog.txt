@@ -1,4 +1,5 @@
 0.7.1 (currently working on)
+- [#2458] Fix: Expect false for a failed $dbResult, not null
 - [#1611] Change: Add guard clauses to objectfromdb::createMmRecords
 - [#2541] Fix: Save memory by destructing the bags after usage in the tests and the production code
 - [#2576] Fix: Function limitToSeatsEqualOrLessThanVacancies() is missing in registrationBagBuilder

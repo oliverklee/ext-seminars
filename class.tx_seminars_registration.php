@@ -92,11 +92,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @param object content object
 	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
-	 *                If this parameter is not provided or null,
+	 *                If this parameter is not provided or false,
 	 *                setRegistrationData() needs to be called directly
 	 *                after construction or this object will not be usable.
 	 */
-	public function __construct(tslib_cObj $cObj, $dbResult = null) {
+	public function __construct(tslib_cObj $cObj, $dbResult = false) {
 		$this->cObj = $cObj;
 		$this->init();
 
