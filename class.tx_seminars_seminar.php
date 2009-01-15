@@ -4496,6 +4496,32 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return $deadline;
 	}
+
+	/**
+	 * Checks whether this event has a license expiry.
+	 *
+	 * @return boolean true if this event has a license expiry, false otherwise
+	 */
+	public function hasExpiry() {
+		return $this->hasRecordPropertyInteger('expiry');
+	}
+
+	/**
+	 * Gets this event's license expiry date as a formatted date.
+	 *
+	 * @return string this event's license expiry date as a formatted date,
+	 *                will be empty if this event has no license expiry
+	 */
+	public function getExpiry() {
+		if (!$this->hasExpiry()) {
+			return '';
+		}
+
+		return strftime(
+			$this->getConfValueString('dateFormatYMD'),
+			$this->getRecordPropertyInteger('expiry')
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

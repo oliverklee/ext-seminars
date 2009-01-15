@@ -5806,5 +5806,40 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->getCancelationDeadline();
 	}
+
+
+	////////////////////////////////////////
+	// Tests concerning the license expiry
+	///////////////////////////////////////
+
+	public function testHasExpiryForNoExpiryReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasExpiry()
+		);
+	}
+
+	public function testHasExpiryForNonZeroExpiryReturnsTrue() {
+		$this->fixture->setExpiry(42);
+
+		$this->assertTrue(
+			$this->fixture->hasExpiry()
+		);
+	}
+
+	public function testGetExpiryForNoExpiryReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getExpiry()
+		);
+	}
+
+	public function testGetExpiryForNonZeroExpiryReturnsFormattedDate() {
+		$this->fixture->setExpiry(mktime(0, 0, 0, 12, 31, 2000));
+
+		$this->assertEquals(
+			'31.12.2000',
+			$this->fixture->getExpiry()
+		);
+	}
 }
 ?>

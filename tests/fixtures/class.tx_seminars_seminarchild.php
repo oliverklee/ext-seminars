@@ -448,6 +448,15 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setStatus($status) {
 		$this->setRecordPropertyInteger('cancelled', $status);
 	}
+
+	/**
+	 * Sets this event's license expiry.
+	 *
+	 * @param integer the license expiry as a timestamp, may be 0
+	 */
+	public function setExpiry($expiry) {
+		$this->setRecordPropertyInteger('expiry', $expiry);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {
