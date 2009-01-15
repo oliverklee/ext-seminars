@@ -268,7 +268,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 * a source. If the current item cannot be created, $this->currentItem will
 	 * be nulled out.
 	 *
-	 * $this->dbResult is ensured to be non-null when this function is called.
+	 * $this->dbResult is ensured to be not false when this function is called.
 	 */
 	abstract protected function createItemFromDbResult();
 

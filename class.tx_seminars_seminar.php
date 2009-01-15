@@ -88,7 +88,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                a hidden record
 	 */
 	public function __construct(
-		$uid, $dbResult = null, $allowHiddenRecords = false
+		$uid, $dbResult = false, $allowHiddenRecords = false
 	) {
 		parent::__construct($uid, $dbResult, $allowHiddenRecords);
 
@@ -2910,7 +2910,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Queries the DB for the number of visible attendances for this event
 	 * and returns the result of the DB query with the number stored in 'num'
-	 * (the result will be null if the query fails).
+	 * (the result will be zero if the query fails).
 	 *
 	 * This function takes multi-seat registrations into account as well.
 	 *

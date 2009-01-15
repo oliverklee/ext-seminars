@@ -79,7 +79,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *                hidden record
 	 */
 	protected function retrieveRecordAndGetData(
-		$uid, $dbResult = null, $allowHiddenRecords = false
+		$uid, $dbResult = false, $allowHiddenRecords = false
 	) {
 		if (!$dbResult) {
 			$dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
@@ -412,7 +412,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * @param integer The UID of the record to retrieve from the DB.
 	 * @param boolean whether to allow hidden records
 	 *
-	 * @return pointer MySQL result pointer (of SELECT query)/DBAL object, null
+	 * @return pointer MySQL result pointer (of SELECT query)/DBAL object, false
 	 *                 if the UID is invalid
 	 */
 	protected function retrieveRecord($uid, $allowHiddenRecords = false) {
@@ -428,7 +428,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				'1'
 			);
 	 	} else {
-	 		$result = null;
+	 		$result = false;
 	 	}
 
 		return $result;

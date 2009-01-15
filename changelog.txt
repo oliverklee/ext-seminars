@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2458] Fix: Expect false for a failed $dbResult, not null
 - [#2581] Fix: Fixed localization in the eventslist testcase
 - [#2589] Feature: Add a field "license expiry" to date records
 - [#1611] Change: Add guard clauses to objectfromdb::createMmRecords
