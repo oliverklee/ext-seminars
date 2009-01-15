@@ -5512,7 +5512,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUser() {
+	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithoutExpiry() {
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
@@ -5522,6 +5522,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
+				'expiry' => 0
 			)
 		);
 		$userUid = $this->testingFramework->createFrontEndUser();
@@ -5534,6 +5535,59 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->build()->isEmpty()
+		);
+	}
+
+	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithFutureExpiry() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'expiry' => $GLOBALS['SIM_EXEC_TIME'] + 1000
+			)
+		);
+		$userUid = $this->testingFramework->createFrontEndUser();
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $dateUid, 'user' => $userUid)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+
+		$this->assertTrue(
+			$this->fixture->build()->isEmpty()
+		);
+	}
+
+	public function testLimitToWithoutRegistrationByUserFindsTopicWithDateRegistrationByTheUserWithPastExpiry() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'expiry' => $GLOBALS['SIM_EXEC_TIME'] - 1000
+			)
+		);
+		$userUid = $this->testingFramework->createFrontEndUser();
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $dateUid, 'user' => $userUid)
+		);
+
+		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->build()->count()
 		);
 	}
 

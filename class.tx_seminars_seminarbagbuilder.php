@@ -1002,6 +1002,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the search result to topics for which there is no registration by
 	 * the front-end user with the UID $uid.
 	 *
+	 * Registrations for dates that have a non-zero expiry date in the past will
+	 * be counted as not existing.
+	 *
 	 * @param integer the UID of the front-end user whose registered events
 	 *                should be removed from the bag, must be > 0
 	 */
@@ -1011,9 +1014,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			'NOT EXISTS (' .
 				'SELECT * FROM ' . SEMINARS_TABLE_ATTENDANCES . ', ' .
 					SEMINARS_TABLE_SEMINARS . ' dates ' .
-				'WHERE ' . SEMINARS_TABLE_ATTENDANCES . '.user=' . $uid .
-				' AND ' . SEMINARS_TABLE_ATTENDANCES . '.seminar=dates.uid' .
-				' AND dates.topic=' . SEMINARS_TABLE_SEMINARS . '.uid' .
+				'WHERE ' . SEMINARS_TABLE_ATTENDANCES . '.user = ' . $uid .
+				' AND ' . SEMINARS_TABLE_ATTENDANCES . '.seminar = dates.uid' .
+				' AND dates.topic = ' . SEMINARS_TABLE_SEMINARS . '.uid' .
+				' AND (dates.expiry = 0 OR dates.expiry > ' .
+					$GLOBALS['SIM_EXEC_TIME'] . ')' .
 			')';
 	}
 }

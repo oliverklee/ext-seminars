@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2591] Fix: Change seminarbagbuilder::limitToTopicsWithoutRegistrationByUser to take the expiry date into account
 - [#2590] Feature: Add a getter for the license expiry
 - [#2458] Fix: Expect false for a failed $dbResult, not null
 - [#2581] Fix: Fixed localization in the eventslist testcase
