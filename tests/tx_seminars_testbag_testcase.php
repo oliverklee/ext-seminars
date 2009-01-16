@@ -85,18 +85,23 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testEmptyBagHasNoUids() {
-		$bag = new tx_seminars_testbag('1=2');
+		$bag = new tx_seminars_testbag('1 = 2');
+
 		$this->assertEquals(
 			'', $bag->getUids()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBagCanHaveOneUid() {
-		$bag = new tx_seminars_testbag('uid='.$this->uidOfFirstRecord);
+		$bag = new tx_seminars_testbag('uid = ' . $this->uidOfFirstRecord);
 
 		$this->assertEquals(
 			(string) $this->uidOfFirstRecord, $bag->getUids()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBagCanHaveTwoUids() {
@@ -124,12 +129,14 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////
 
 	public function testCountForEmptyBagReturnsZero() {
-		$bag = new tx_seminars_testbag('1=2');
+		$bag = new tx_seminars_testbag('1 = 2');
 
 		$this->assertEquals(
 			0,
 			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testCountForBagWithOneElementReturnsOne() {
@@ -139,6 +146,8 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testCountForBagWithTwoElementsReturnsTwo() {
@@ -159,12 +168,14 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCountForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne() {
-		$bag = new tx_seminars_testbag('is_dummy_record=1', '', '', '', 1);
+		$bag = new tx_seminars_testbag('is_dummy_record = 1', '', '', '', 1);
 
 		$this->assertEquals(
 			1,
 			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -173,21 +184,25 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////
 
 	public function testCountWithoutLimitForEmptyBagReturnsZero() {
-		$bag = new tx_seminars_testbag('1=2');
+		$bag = new tx_seminars_testbag('1 = 2');
 
 		$this->assertEquals(
 			0,
 			$bag->countWithoutLimit()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testCountWithoutLimitForBagWithOneElementReturnsOne() {
-		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+		$bag = new tx_seminars_testbag('uid = ' . $this->uidOfFirstRecord);
 
 		$this->assertEquals(
 			1,
 			$bag->countWithoutLimit()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testCountWithoutLimitForBagWithTwoElementsReturnsTwo() {
@@ -208,12 +223,14 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCountWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo() {
-		$bag = new tx_seminars_testbag('is_dummy_record=1', '', '', '', 1);
+		$bag = new tx_seminars_testbag('is_dummy_record = 1', '', '', '', 1);
 
 		$this->assertEquals(
 			2,
 			$bag->countWithoutLimit()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -227,32 +244,40 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testIsEmptyForEmptyBagAfterIteratingReturnsTrue() {
-		$bag = new tx_seminars_testbag('1=2');
+		$bag = new tx_seminars_testbag('1 = 2');
 		foreach ($bag as $item);
 
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testIsEmptyForBagWithOneElementReturnsFalse() {
-		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+		$bag = new tx_seminars_testbag('uid = ' . $this->uidOfFirstRecord);
 
 		$this->assertFalse(
 			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testIsEmptyForBagWithOneElementAfterIteratingReturnsFalse() {
-		$bag = new tx_seminars_testbag('uid=' . $this->uidOfFirstRecord);
+		$bag = new tx_seminars_testbag('uid = ' . $this->uidOfFirstRecord);
 		foreach ($bag as $item);
 
 		$this->assertFalse(
 			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testIsEmptyForBagWithTwoElementsReturnsFalse() {
