@@ -55,7 +55,17 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	 */
 	private $backEndModule;
 
+	/**
+	 * @var string the original language of the back-end module
+	 */
+	private $originalLanguage;
+
 	public function setUp() {
+		// Set's the localization to the default language so that all tests can
+		// run, even if the BE user has it's interface set to another language.
+		$this->originalLanguage = $GLOBALS['LANG']->lang;
+		$GLOBALS['LANG']->lang = 'default';
+
 		// Loads the locallang file for properly working localization in the tests.
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/mod2/locallang.xml');
 
@@ -77,6 +87,11 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
+		// Resets the language of the interface to the value it had before
+		// we set it to "default" for testing.
+		$GLOBALS['LANG']->lang = $this->originalLanguage;
+		unset($this->originalLanguage);
+
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();
