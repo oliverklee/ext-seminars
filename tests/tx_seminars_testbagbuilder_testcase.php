@@ -74,15 +74,23 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testBuilderBuildsAnObject() {
+		$bag = $this->fixture->build();
+
 		$this->assertTrue(
-			is_object($this->fixture->build())
+			is_object($bag)
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderBuildsABagChildObject() {
+		$bag = $this->fixture->build();
+
 		$this->assertTrue(
-			is_subclass_of($this->fixture->build(), 'tx_seminars_bag')
+			is_subclass_of($bag, 'tx_seminars_bag')
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderBuildsBagSortedAscendingByUid() {
@@ -103,12 +111,15 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid2,
 			$testBag->next()->getUid()
 		);
+
+		$testBag->__destruct();
 	}
 
 	public function testBuilderWithAdditionalTableNameDoesNotProduceSqlError() {
 		$this->fixture->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
 
-		$this->fixture->build();
+		$bag = $this->fixture->build();
+		$bag->__destruct();
 	}
 
 
@@ -160,11 +171,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePages() {
@@ -178,11 +192,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptyAfterNonEmptySourcePages() {
@@ -198,11 +215,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid);
 		$this->fixture->setSourcePages('');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndZeroRecursion() {
@@ -218,11 +238,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndNonZeroRecursion() {
@@ -238,11 +261,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromOnePage() {
@@ -257,11 +283,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromTwoPages() {
@@ -278,11 +307,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->setSourcePages(
 			$this->dummySysFolderPid.','.($this->dummySysFolderPid + 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresRecordsOnSubpageWithoutRecursion() {
@@ -296,10 +328,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsOnSubpageWithRecursion() {
@@ -313,11 +348,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid, 1);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsOnTwoSubpagesWithRecursion() {
@@ -338,11 +376,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid, 1);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsOnSubpageFromTwoParentsWithRecursion() {
@@ -362,14 +403,17 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setSourcePages(
-			$this->dummySysFolderPid.','.$parentPid2,
+			$this->dummySysFolderPid . ',' . $parentPid2,
 			1
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresRecordsOnSubpageWithTooShallowRecursion() {
@@ -386,10 +430,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setSourcePages($this->dummySysFolderPid, 1);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -402,10 +449,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('hidden' => 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderFindsHiddenRecordsInBackEndMode() {
@@ -415,11 +465,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setBackEndMode();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresTimedRecordsByDefault() {
@@ -427,10 +480,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('endtime' => mktime() - 1000)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderFindsTimedRecordsInBackEndMode() {
@@ -440,11 +496,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setBackEndMode();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresDeletedRecordsByDefault() {
@@ -452,10 +511,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('deleted' => 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresDeletedRecordsInBackEndMode() {
@@ -465,10 +527,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setBackEndMode();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testWhereClauseInitiallyIsNotEmpty() {
@@ -500,11 +565,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'foo')
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTitleIgnoresRecordWithOtherTitle() {
@@ -513,10 +581,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'bar')
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -531,11 +602,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'foo', 'pid' => $this->dummySysFolderPid)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyTheTitle() {
@@ -545,10 +619,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'foo')
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyThePage() {
@@ -558,10 +635,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'bar', 'pid' => $this->dummySysFolderPid)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTitleStillExcludesHiddenRecords() {
@@ -570,10 +650,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'foo', 'hidden' => 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTitleStillExcludesDeletedRecords() {
@@ -582,10 +665,13 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST,
 			array('title' => 'foo', 'deleted' => 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -689,6 +775,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid1,
 			$testBag->next()->getUid()
 		);
+
+		$testBag->__destruct();
 	}
 
 
@@ -718,11 +806,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
 		$this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
 		$this->fixture->setLimit('0, 1');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
