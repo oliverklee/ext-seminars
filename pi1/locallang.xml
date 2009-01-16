@@ -115,6 +115,7 @@
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_timeslots">Time slots</label>
+			<label index="label_expiry">License expiry</label>
 			<label index="label_speakers_single_male">Speaker</label>
 			<label index="label_speakers_single_female">Speaker</label>
 			<label index="label_speakers_single_unknown">Speaker</label>
@@ -636,6 +637,7 @@
 			<label index="label_room">Raum</label>
 			<label index="label_additional_times_places">Zeiten und Orte</label>
 			<label index="label_timeslots">Zeitblöcke</label>
+			<label index="label_expiry">Lizenzablauf</label>
 			<label index="label_speakers_single_male">Referent</label>
 			<label index="label_speakers_single_female">Referentin</label>
 			<label index="label_speakers_single_unknown">ReferentIn</label>
@@ -2080,6 +2082,7 @@
 			<label index="label_room" type="integer">214150095</label>
 			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_timeslots" type="integer">147000660</label>
+			<label index="label_expiry" type="integer">123022099</label>
 			<label index="label_speakers" type="integer">258305227</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
@@ -3298,6 +3301,7 @@
 			<label index="label_room">Room</label>
 			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_timeslots">Time slots</label>
+			<label index="label_expiry">License expiry</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_language">Language</label>
 			<label index="label_partners">Partners</label>

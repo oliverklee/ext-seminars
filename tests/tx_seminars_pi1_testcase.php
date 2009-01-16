@@ -1676,6 +1676,13 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testListViewNotContainsExpiryLabel() {
+		$this->assertNotContains(
+			$this->fixture->translate('label_expiry'),
+			$this->fixture->main('', array())
+		);
+	}
+
 
 	/////////////////////////////////////////////////////////
 	// Tests concerning the result counter in the list view
@@ -3121,6 +3128,45 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'Event with another place',
 			$result
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning the "my events" view
+	//////////////////////////////////////////
+
+	public function testMyEventsContainsTitleOfEventWithRegistrationForLoggedInUser() {
+		$this->createLogInAndRegisterFeUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$this->assertContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testMyEventsNotContainsTitleOfEventWithoutRegistrationForLoggedInUser() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$this->assertNotContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testMyEventsContainsExpiryOfEventWithExpiryAndRegistrationForLoggedInUser() {
+		$this->createLogInAndRegisterFeUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('expiry' => mktime(0, 0, 0, 1, 1, 2008))
+		);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$this->assertContains(
+			'01.01.2008',
+			$this->fixture->main('', array())
 		);
 	}
 

@@ -1950,6 +1950,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker('date', $dateToShow);
 
 			$this->setMarker('time', $this->seminar->getTime());
+			$this->setMarker('expiry', $this->seminar->getExpiry());
+
 			$this->setMarker('place', $this->seminar->getPlaceShort());
 			$this->setMarker(
 				'country',
@@ -2493,7 +2495,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	private function hideColumnsForAllViewsExceptMyEvents($whatToDisplay) {
 		if ($whatToDisplay != 'my_events') {
 			$this->hideColumns(
-				array('total_price', 'seats', 'status_registration')
+				array('expiry', 'seats', 'total_price', 'status_registration')
 			);
 		}
 	}

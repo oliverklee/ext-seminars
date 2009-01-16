@@ -640,6 +640,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'language',
 				'date',
 				'time',
+				'expiry',
 				'place',
 				'city',
 				'seats',
