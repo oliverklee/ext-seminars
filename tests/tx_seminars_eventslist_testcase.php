@@ -55,6 +55,11 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	 */
 	private $backEndModule;
 
+	/**
+	* @var string the original language of the back-end module
+	*/
+	private $originalLanguage;
+
 	public function setUp() {
 		// Set's the localization to the default language so that all tests can
 		// run, even if the BE user has it's interface set to another language.
