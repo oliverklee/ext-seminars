@@ -457,6 +457,77 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setExpiry($expiry) {
 		$this->setRecordPropertyInteger('expiry', $expiry);
 	}
+
+	/**
+	 * Gets our place (or places) with address and links as HTML, not RTE'ed yet,
+	 * separated by LF.
+	 *
+	 * Returns a localized string "will be announced" if the seminar has no
+	 * places set.
+	 *
+	 * @return string our places description (or '' if there is an error)
+	 */
+	public function getPlaceWithDetailsRaw() {
+		return parent::getPlaceWithDetailsRaw();
+	}
+
+	/**
+	 * Sets the number of lodgings for this record.
+	 *
+	 * @param integer the number of lodgings that are associated with this event,
+	 *                must be >= 0
+	 */
+	public function setNumberOfLodgings($lodgings) {
+		$this->setRecordPropertyInteger('lodgings', $lodgings);
+	}
+
+	/**
+	 * Gets our speaker (or speakers), as HTML with details and URLs, but not
+	 * RTE'ed yet.
+	 * Returns an empty string if this event doesn't have any speakers.
+	 *
+	 * As speakers can be related to this event as speakers, partners, tutors or
+	 * leaders, the type relation can be specified. The default is "speakers".
+	 *
+	 * @param string the relation in which the speakers stand to this event:
+	 *               "speakers" (default), "partners", "tutors" or "leaders"
+	 *
+	 * @return string our speakers (or '' if there is an error)
+	 */
+	public function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers') {
+		return parent::getSpeakersWithDescriptionRaw($speakerRelation);
+	}
+
+	/**
+	 * Gets our allowed payment methods, just as plain text separated by LF,
+	 * without the detailed description.
+	 * Returns an empty string if this seminar doesn't have any payment methods.
+	 *
+	 * @return string our payment methods as plain text (or '' if there
+	 *                is an error)
+	 */
+	public function getPaymentMethodsPlainShort() {
+		return parent::getPaymentMethodsPlainShort();
+	}
+
+	/**
+	 * Gets our organizer's names (and URLs), separated by LF.
+	 *
+	 * @return string names and homepages of our organizers or an
+	 *                empty string if there are no organizers
+	 */
+	public function getOrganizersRaw() {
+		return parent::getOrganizersRaw();
+	}
+
+	/**
+	 * Sets the description of the event.
+	 *
+	 * @param string the description for this event, may be empty
+	 */
+	public function setDescription($description) {
+		$this->setRecordPropertyString('description', $description);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {

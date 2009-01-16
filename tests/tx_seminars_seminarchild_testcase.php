@@ -925,27 +925,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventData() {
-		$this->fixture->setUnregistrationDeadline(1893488400);
-		$this->fixture->setShowTimeOfUnregistrationDeadline(0);
-		$this->assertEquals(
-			'01.01.2030',
-			$this->fixture->getEventData('deadline_unregistration')
-		);
-
-		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
-		$this->assertEquals(
-			'01.01.2030 10:00',
-			$this->fixture->getEventData('deadline_unregistration')
-		);
-
-		$this->fixture->setUnregistrationDeadline(0);
-		$this->assertEquals(
-			'',
-			$this->fixture->getEventData('deadline_unregistration')
-		);
-	}
-
 
 	/////////////////////////////////////////////////////////
 	// Tests regarding the ability to register for an event
@@ -2015,6 +1994,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	/////////////////////////////////////////////////
+	// Tests concerning getPaymentMethodsPlainShort
+	/////////////////////////////////////////////////
+
 	public function testGetPaymentMethodsPlainShortWithNoPaymentMethodReturnsAnEmptyString() {
 		$this->assertEquals(
 			'',
@@ -2033,20 +2017,43 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPaymentMethodsPlainShortWithMultiplePaymentMethodsReturnsMultiplePaymentMethods() {
-		$firstTitle = 'Payment Method 1';
-		$secondTitle = 'Payment Method 2';
-		$this->addPaymentMethodRelation(array('title' => $firstTitle));
-		$this->addPaymentMethodRelation(array('title' => $secondTitle));
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
 
 		$this->assertContains(
-			$firstTitle,
+			'Payment Method 1',
 			$this->fixture->getPaymentMethodsPlainShort()
 		);
 		$this->assertContains(
-			$secondTitle,
+			'Payment Method 2',
 			$this->fixture->getPaymentMethodsPlainShort()
 		);
 	}
+
+	public function testGetPaymentMethodsPlainShortSeparatesMultiplePaymentMethodsWithLineFeeds() {
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
+
+		$this->assertContains(
+			'Payment Method 1' . LF . 'Payment Method 2',
+			$this->fixture->getPaymentMethodsPlainShort()
+		);
+	}
+
+	public function testGetPaymentMethodsPlainShortDoesNotSeparateMultiplePaymentMethodsWithCarriageReturnsAndLineFeeds() {
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
+
+		$this->assertNotContains(
+			'Payment Method 1' . CRLF . 'Payment Method 2',
+			$this->fixture->getPaymentMethodsPlainShort()
+		);
+	}
+
+
+	/////////////////////////////////////////////////
+	// Tests concerning getSinglePaymentMethodPlain
+	/////////////////////////////////////////////////
 
 	public function testGetSinglePaymentMethodPlainWithInvalidPaymentMethodUidReturnsAnEmptyString() {
 		$this->assertEquals(
@@ -2456,6 +2463,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	//////////////////////////////////////
+	// Tests concerning getOrganizersRaw
+	//////////////////////////////////////
+
 	public function testGetOrganizersRawWithNoOrganizersReturnsEmptyString() {
 		$this->assertEquals(
 			'',
@@ -2487,40 +2499,72 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersRawWithMultipleOrganizersWithoutHomepageReturnsTwoOrganizers() {
-		$firstOrganizer = array(
-			'title' => 'test organizer 1',
-			'homepage' => ''
+	public function testGetOrganizersRawForTwoOrganizersWithoutHomepageReturnsTwoOrganizers() {
+		$this->addOrganizerRelation(
+			array('title' => 'test organizer 1','homepage' => '')
 		);
-		$secondOrganizer = array(
-			'title' => 'test organizer 2',
-			'homepage' => ''
+		$this->addOrganizerRelation(
+			array('title' => 'test organizer 2','homepage' => '')
 		);
-		$this->addOrganizerRelation($firstOrganizer);
-		$this->addOrganizerRelation($secondOrganizer);
-		$this->assertEquals(
-			$firstOrganizer['title'].CRLF.$secondOrganizer['title'],
+
+		$this->assertContains(
+			'test organizer 1',
+			$this->fixture->getOrganizersRaw()
+		);
+		$this->assertContains(
+			'test organizer 2',
 			$this->fixture->getOrganizersRaw()
 		);
 	}
 
-	public function testGetOrganizersRawWithMultipleOrganizersWithHomepageReturnsTwoOrganizersWithHomepage() {
-		$firstOrganizer = array(
-			'title' => 'test organizer 1',
-			'homepage' => 'test homepage 1'
+	public function testGetOrganizersRawForTwoOrganizersWithHomepageReturnsTwoOrganizersWithHomepage() {
+		$this->addOrganizerRelation(
+			array(
+				'title' => 'test organizer 1',
+				'homepage' => 'test homepage 1',
+			)
 		);
-		$secondOrganizer = array(
-			'title' => 'test organizer 2',
-			'homepage' => 'test homepage 2'
+		$this->addOrganizerRelation(
+			array(
+				'title' => 'test organizer 2',
+				'homepage' => 'test homepage 2'
+			)
 		);
-		$this->addOrganizerRelation($firstOrganizer);
-		$this->addOrganizerRelation($secondOrganizer);
-		$this->assertEquals(
-			$firstOrganizer['title'].', '.$firstOrganizer['homepage'].CRLF
-			.$secondOrganizer['title'].', '.$secondOrganizer['homepage'],
+
+		$this->assertContains(
+			'test homepage 1',
+			$this->fixture->getOrganizersRaw()
+		);
+		$this->assertContains(
+			'test homepage 2',
 			$this->fixture->getOrganizersRaw()
 		);
 	}
+
+	public function testGetOrganizersRawSeparatesMultipleOrganizersWithLineFeeds() {
+		$this->addOrganizerRelation(array('title' => 'test organizer 1'));
+		$this->addOrganizerRelation(array('title' => 'test organizer 2'));
+
+		$this->assertContains(
+			'test organizer 1' . LF . 'test organizer 2',
+			$this->fixture->getOrganizersRaw()
+		);
+	}
+
+	public function testGetOrganizersRawDoesNotSeparateMultipleOrganizersWithCarriageReturnsAndLineFeeds() {
+		$this->addOrganizerRelation(array('title' => 'test organizer 1'));
+		$this->addOrganizerRelation(array('title' => 'test organizer 2'));
+
+		$this->assertNotContains(
+			'test organizer 1' . CRLF . 'test organizer 2',
+			$this->fixture->getOrganizersRaw()
+		);
+	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning getOrganizersNameAndEmail
+	///////////////////////////////////////////////
 
 	public function testGetOrganizersNameAndEmailWithNoOrganizersReturnsEmptyString() {
 		$this->assertEquals(
@@ -2987,6 +3031,54 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'test tutor',
 			$this->fixture->getSpeakersWithDescriptionRaw('tutors')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawSeparatesMultipleSpeakersWithLineFeeds() {
+		$this->addSpeakerRelation(array('title' => 'foo'));
+		$this->addSpeakerRelation(array('title' => 'bar'));
+
+		$this->assertContains(
+			'foo' . LF . 'bar',
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawDoesNotSeparateMultipleSpeakersWithCarriageReturnsAndLineFeeds() {
+		$this->addSpeakerRelation(array('title' => 'foo'));
+		$this->addSpeakerRelation(array('title' => 'bar'));
+
+		$this->assertNotContains(
+			'foo' . CRLF . 'bar',
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawDoesNotSeparateSpeakersDescriptionAndTitleWithCarriageReturnsAndLineFeeds() {
+		$this->addSpeakerRelation(
+			array(
+				'title' => 'foo',
+				'description' => 'bar'
+			)
+		);
+
+		$this->assertNotRegExp(
+			'/foo'. CRLF . 'bar/',
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
+		);
+	}
+
+	public function testGetSpeakersWithDescriptionRawSeparatesSpeakersDescriptionAndTitleWithLineFeeds() {
+		$this->addSpeakerRelation(
+			array(
+				'title' => 'foo',
+				'description' => 'bar'
+			)
+		);
+
+		$this->assertRegExp(
+			'/foo'. LF . 'bar/',
+			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
 		);
 	}
 
@@ -3905,6 +3997,26 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Turn right.',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawSeparatesMultiplePlacesWithLineFeeds() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+		$this->addPlaceRelation(array('title' => 'another place'));
+
+		$this->assertContains(
+			'another place' . LF . 'a place',
+			$this->fixture->getPlaceWithDetailsRaw()
+		);
+	}
+
+	public function testGetPlaceWithDetailsRawDoesNotSeparateMultiplePlacesWithCarriageReturnsAndLineFeeds() {
+		$this->addPlaceRelation(array('title' => 'a place'));
+		$this->addPlaceRelation(array('title' => 'another place'));
+
+		$this->assertNotContains(
+			'another place' . CRLF . 'a place',
 			$this->fixture->getPlaceWithDetailsRaw()
 		);
 	}
@@ -5341,6 +5453,132 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'31.12.2000',
 			$this->fixture->getExpiry()
+		);
+	}
+
+
+	////////////////////////////////////
+	// Tests concerning setDescription
+	////////////////////////////////////
+
+	// TODO: Add an rte_css function to the fake front end to be able to run
+	// the function pi_RTEcssText
+
+
+	//////////////////////////////////
+	// Tests concerning getEventData
+	//////////////////////////////////
+
+	public function testGetEventDataReturnsFormattedUnregistrationDeadline() {
+		$this->fixture->setUnregistrationDeadline(1893488400);
+		$this->fixture->setShowTimeOfUnregistrationDeadline(0);
+		$this->assertEquals(
+			'01.01.2030',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+	}
+
+	public function testGetEventDataForShowTimeOfUnregistrationDeadlineTrueReturnsFormattedUnregistrationDeadlineWithTime() {
+		$this->fixture->setUnregistrationDeadline(1893488400);
+		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
+
+		$this->assertEquals(
+			'01.01.2030 10:00',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+	}
+
+	public function testGetEventDataForUnregistrationDeadlineZeroReturnsEmptyString () {
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->assertEquals(
+			'',
+			$this->fixture->getEventData('deadline_unregistration')
+		);
+	}
+
+	public function testGetEventDataForEventWithMultipleLodgingsSeparatesLodgingsWithLineFeeds() {
+		$lodgingUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			$this->fixture->getUid(), $lodgingUid1
+		);
+
+		$lodgingUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_LODGINGS, array('title' => 'bar')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			$this->fixture->getUid(), $lodgingUid2
+		);
+
+		$this->fixture->setNumberOfLodgings(2);
+
+		$this->assertContains(
+			'foo' . LF . 'bar',
+			$this->fixture->getEventData('lodgings')
+		);
+	}
+
+	public function testGetEventDataForEventWithMultipleLodgingsDoesNotSeparateLodgingsWithCarriageReturnsAndLineFeeds() {
+		$lodgingUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			$this->fixture->getUid(), $lodgingUid1
+		);
+
+		$lodgingUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_LODGINGS, array('title' => 'bar')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			$this->fixture->getUid(), $lodgingUid2
+		);
+
+		$this->fixture->setNumberOfLodgings(2);
+
+		$this->assertNotContains(
+			'foo' . CRLF . 'bar',
+			$this->fixture->getEventData('lodgings')
+		);
+	}
+
+	public function testGetEventDataDataWithCarriageReturnAndLinefeedGetsConvertedToLineFeedOnly() {
+		$this->fixture->setDescription('foo'. CRLF . 'bar');
+
+		$this->assertContains(
+			'foo' . LF . 'bar',
+			$this->fixture->getEventData('description')
+		);
+	}
+
+	public function testGetEventDataDataWithTwoAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
+		$this->fixture->setDescription('foo'. LF . LF . 'bar');
+
+		$this->assertContains(
+			'foo' . LF . 'bar',
+			$this->fixture->getEventData('description')
+		);
+	}
+
+	public function testGetEventDataDataWithThreeAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
+		$this->fixture->setDescription('foo'. LF . LF .  LF . 'bar');
+
+		$this->assertContains(
+			'foo' . LF . 'bar',
+			$this->fixture->getEventData('description')
+		);
+	}
+
+	public function testGetEventDataDataWithFourAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
+		$this->fixture->setDescription('foo'. LF . LF .  LF . LF . 'bar');
+
+		$this->assertContains(
+			'foo' . LF . 'bar',
+			$this->fixture->getEventData('description')
 		);
 	}
 }
