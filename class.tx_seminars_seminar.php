@@ -168,7 +168,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		return $result;
+		$carriageReturnRemoved = (strpos($result, CR) === false)
+			? $result
+			: str_replace(CR, LF, $result);
+
+		return preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved);
 	}
 
 	/**
@@ -694,14 +698,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Gets our place (or places) with address and links as HTML, not RTE'ed yet,
-	 * separated by CRLF.
+	 * separated by LF.
 	 *
 	 * Returns a localized string "will be announced" if the seminar has no
 	 * places set.
 	 *
 	 * @return string our places description (or '' if there is an error)
 	 */
-	public function getPlaceWithDetailsRaw() {
+	protected function getPlaceWithDetailsRaw() {
 		if (!$this->hasPlace()) {
 			return $this->translate('message_willBeAnnounced');
 		}
@@ -711,7 +715,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		foreach ($this->getPlacesAsArray() as $place) {
 			$result .= $place['title'];
 			if ($place['homepage'] != '') {
-				$result .= CRLF . $place['homepage'];
+				$result .= LF . $place['homepage'];
 			}
 
 			$descriptionParts = array();
@@ -732,10 +736,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 			$result .= implode(', ', $descriptionParts);
 			if ($place['directions'] != '') {
-				$result .= CRLF . str_replace(CR, ',', $place['directions']);
+				$result .= LF . str_replace(CR, ', ', $place['directions']);
 			}
 
-			$result .= CRLF;
+			$result .= LF;
 		}
 
 		return $result;
@@ -902,7 +906,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return string our speakers (or '' if there is an error)
 	 */
-	public function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers') {
+	protected function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers') {
 		if (!$this->hasSpeakersOfType($speakerRelation)) {
 			return '';
 		}
@@ -912,15 +916,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$result .= $speaker->getTitle();
 			if ($speaker->hasOrganization()) {
-				$result .= ', '.$speaker->getOrganization();
+				$result .= ', ' . $speaker->getOrganization();
 			}
 			if ($speaker->hasHomepage()) {
-				$result .= ', '.$speaker->getHomepage();
+				$result .= ', ' . $speaker->getHomepage();
 			}
-			$result .= CRLF;
+			$result .= LF;
 
 			if ($speaker->hasDescription()) {
-				$result .= $speaker->getDescriptionRaw().CRLF;
+				$result .= $speaker->getDescriptionRaw() . LF;
 			}
 		}
 
@@ -1582,14 +1586,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets our allowed payment methods, just as plain text separated by CRLF,
+	 * Gets our allowed payment methods, just as plain text separated by LF,
 	 * without the detailed description.
 	 * Returns an empty string if this seminar doesn't have any payment methods.
 	 *
 	 * @return string our payment methods as plain text (or '' if there
 	 *                is an error)
 	 */
-	public function getPaymentMethodsPlainShort() {
+	protected function getPaymentMethodsPlainShort() {
 		if (!$this->hasPaymentMethods()) {
 			return '';
 		}
@@ -1611,7 +1615,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$paymentMethods[] = $row['title'];
 		}
 
-		return implode(CRLF, $paymentMethods);
+		return implode(LF, $paymentMethods);
 	}
 
 	/**
@@ -2260,12 +2264,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets our organizer's names (and URLs), separated by CRLF.
+	 * Gets our organizer's names (and URLs), separated by LF.
 	 *
 	 * @return string names and homepages of our organizers or an
 	 *                empty string if there are no organizers
 	 */
-	public function getOrganizersRaw() {
+	protected function getOrganizersRaw() {
 		if (!$this->hasOrganizers()) {
 			return '';
 		}
@@ -2279,7 +2283,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 		$organizers->__destruct();
 
-		return implode(CRLF, $result);
+		return implode(LF, $result);
 	}
 
 	/**
@@ -3344,13 +3348,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Converts an array m:m records (each having a "value" and a "caption"
-	 * element) to a CRLF-separated string.
+	 * element) to a LF-separated string.
 	 *
 	 * @param array m:n elements, each having a "value" and "caption"
 	 *              element, may be empty
 	 *
 	 * @return string the captions of the array contents separated by
-	 *                CRLF, will be empty if the array is empty
+	 *                LF, will be empty if the array is empty
 	 */
 	private function mmRecordsToText($records) {
 		$result = '';
@@ -3358,7 +3362,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if (!empty($records)) {
 			foreach ($records as $currentRecord) {
 				if (!empty($result)) {
-					$result .= CRLF;
+					$result .= LF;
 				}
 				$result .= $currentRecord['caption'];
 			}
