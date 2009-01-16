@@ -139,6 +139,12 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 				),
 				array(
 					TAB . TAB . TAB . TAB .
+						'<td class="queue">' . LF,
+					TAB . TAB . TAB . TAB .
+						'</td>' . LF,
+				),
+				array(
+					TAB . TAB . TAB . TAB .
 						'<td class="attendees_min">' . LF,
 					TAB . TAB . TAB . TAB .
 						'</td>' . LF,
@@ -161,6 +167,19 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 					TAB . TAB . TAB . TAB .
 						'</td>' . LF,
 				),
+				array(
+					TAB . TAB . TAB . TAB .
+						'<td class="status">' . LF,
+					TAB . TAB . TAB . TAB .
+						'</td>' . LF,
+				),
+				array(
+					TAB . TAB . TAB . TAB .
+						'<td class="confirm_button">' . LF,
+					TAB . TAB . TAB . TAB .
+						'</td>' . LF,
+				),
+
 				'defCol' => array(
 					TAB . TAB . TAB . TAB .
 						'<td>' . LF,
@@ -207,6 +226,9 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 				TAB . TAB . TAB . TAB . TAB . TAB .
 					'<span style="color: #ffffff; font-weight: bold;">' .
 					$GLOBALS['LANG']->getLL('eventlist_status') . '</span>' . LF,
+				TAB . TAB . TAB . TAB . TAB . TAB .
+					'&nbsp;' . LF,
+
 			),
 		);
 
@@ -331,6 +353,8 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 					? $LANG->getLL('no') : $LANG->getLL('yes')) . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					$this->getStatusIcon() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->getConfirmButton() . LF,
 			);
 		}
 
@@ -463,6 +487,34 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 				) .
 				' title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
 				'</a>';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns a button for confirming an event. The button will only be
+	 * returned if
+	 * - the current record is either a date or single event record
+	 * - the event is not confirmed yet
+	 * - the event has not started yet
+	 * In all other cases, an empty string is returned.
+	 *
+	 * @return string HTML for the button, may be empty
+	 */
+	private function getConfirmButton() {
+		$result = '';
+
+		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
+			&& !$this->seminar->isConfirmed()
+			&& !$this->seminar->hasStarted()
+		) {
+			$result = '<form action="index.php">' .
+				'<p><input type="submit" value="' .
+				$GLOBALS['LANG']->getLL('eventlist_button_confirm') . '" />' .
+				'<input type="hidden" name="eventUid" value="' .
+				$this->seminar->getUid() . '" />' .
+				'<input type="hidden" name="action" value="confirm" /></p></form>';
 		}
 
 		return $result;

@@ -64,3 +64,12 @@ table {
 #typo3-csvLink a {
 	vertical-align: middle;
 }
+
+td.status {
+	text-align: center;
+}
+
+td.confirm_button input {
+	background: #fff url("icon_confirmed.png") no-repeat 2px 1px;
+	padding: 2px 2px 2px 17px;
+}

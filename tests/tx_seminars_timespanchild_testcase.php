@@ -274,6 +274,35 @@ class tx_seminars_timespanchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////////////////////////
+	// Tests for for the begin date.
+	///////////////////////////////////////////////////////////////////
+
+	public function testHasStartedReturnsTrueForStartedEvent() {
+		$this->fixture->setBeginDateAndTime(42);
+
+		$this->assertTrue(
+			$this->fixture->hasStarted()
+		);
+	}
+
+	public function testHasStartedReturnsFalseForUpcomingEvent() {
+		$this->fixture->setBeginDateAndTime($GLOBALS['SIM_EXEC_TIME'] + 42);
+
+		$this->assertFalse(
+			$this->fixture->hasStarted()
+		);
+	}
+
+	public function testHasStartedReturnsFalseForEventWithoutBeginDate() {
+		$this->fixture->setBeginDateAndTime(0);
+
+		$this->assertFalse(
+			$this->fixture->hasStarted()
+		);
+	}
+
+
 	/////////////////////////////////
 	// Tests concerning the places.
 	/////////////////////////////////

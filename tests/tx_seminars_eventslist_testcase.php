@@ -55,11 +55,6 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	 */
 	private $backEndModule;
 
-	/**
-	 * @var string the original language of the back-end module
-	 */
-	private $originalLanguage;
-
 	public function setUp() {
 		// Set's the localization to the default language so that all tests can
 		// run, even if the BE user has it's interface set to another language.
@@ -253,7 +248,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'icon_canceled.png',
+			'<img src="icon_canceled.png" title="canceled" alt="canceled" />',
 			$this->fixture->show()
 		);
 	}
@@ -268,7 +263,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'icon_confirmed.png',
+			'<img src="icon_confirmed.png" title="confirmed" alt="confirmed" />',
 			$this->fixture->show()
 		);
 	}
@@ -283,12 +278,107 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'icon_canceled.png',
+			'<img src="icon_canceled.png" title="canceled" alt="canceled" />',
 			$this->fixture->show()
 		);
 
 		$this->assertNotContains(
-			'icon_confirmed.png',
+			'<img src="icon_confirmed.png" title="confirmed" alt="confirmed" />',
+			$this->fixture->show()
+		);
+	}
+
+
+
+	public function testShowDoesNotContainConfirmButtonForEventThatIsAlreadyConfirmed() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Confirm" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowDoesNotContainConfirmButtonForPlannedEventThatHasAlreadyBegun() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 42,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Confirm" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowContainsConfirmButtonForPlannedEventThatHasNotStartedYet() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertContains(
+			'<input type="submit" value="Confirm" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowContainsConfirmButtonForCanceledEventThatHasNotStartedYet() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertContains(
+			'<input type="submit" value="Confirm" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowDoesNotContainConfirmButtonForTopicRecords() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Confirm" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowContainsConfirmButtonWithVariableEventUidInHiddenField() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertContains(
+			'<input type="hidden" name="eventUid" value="' . $uid . '" />',
 			$this->fixture->show()
 		);
 	}

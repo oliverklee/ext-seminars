@@ -102,6 +102,19 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Checks whether there's a begin date set, and whether this has already
+	 * passed.
+	 *
+	 * @return boolean true if the time-span has a begin date set that lies in
+	 *                 the future (time-span has not started yet), false otherwise
+	 */
+	public function hasStarted() {
+		return ($this->hasBeginDate()
+				&& ($GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp())
+		);
+	}
+
+	/**
 	 * Gets the date.
 	 * Returns a localized string "will be announced" if there's no date set.
 	 *
