@@ -204,10 +204,10 @@ plugin.tx_seminars_pi1 {
 	class_headerplace =
 	class_headercity =
 	class_headercountry =
-	class_headerseats =
+	class_headerseats = seats
 	class_headerprice_regular =
 	class_headerprice_special =
-	class_headertotal_price =
+	class_headertotal_price = total-price
 	class_headerorganizers =
 	class_headertarget_groups =
 	class_headervacancies =

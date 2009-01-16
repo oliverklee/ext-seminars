@@ -70,6 +70,8 @@
 	border: none;
 }
 
+th.tx-seminars-pi1-seats,
+th.tx-seminars-pi1-total-price,
 th.tx-seminars-pi1-registration,
 th.tx-seminars-pi1-list-registrations {
 	padding: .2em .5em;

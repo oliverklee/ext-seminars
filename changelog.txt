@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2617] Fix: Some headings in the "my events" list are moved up
 - [#2616] Fix: Invalid HTML in the list view
 - [#2532] Feature: Add a button for confirming a seminar to the BE events list
 - [#2548] Fix: The owner image on the single view page should use the path that is configured in the sr_feuser_register EM settings
