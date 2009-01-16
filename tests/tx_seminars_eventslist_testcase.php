@@ -383,6 +383,101 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
+			'<input type="submit" value="Confirm" />' .
+			'<input type="hidden" name="eventUid" value="' . $uid . '" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowDoesNotContainCancelButtonForAlreadyCanceledEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Cancel" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowDoesNotContainCancelButtonPlannedEventThatHasAlreadyBegun() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 42,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Cancel" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowContainsCancelButtonForPlannedEventThatHasNotStartedYet() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertContains(
+			'<input type="submit" value="Cancel" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowContainsCancelButtonForConfirmedEventThatHasNotStartedYet() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+			)
+		);
+
+		$this->assertContains(
+			'<input type="submit" value="Cancel" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowDoesNotContainCancelButtonForTopicRecords() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Cancel" />',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowContainsCancelButtonWithVariableEventUidInHiddenField() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertContains(
+			'<input type="submit" value="Cancel" />' .
 			'<input type="hidden" name="eventUid" value="' . $uid . '" />',
 			$this->fixture->show()
 		);

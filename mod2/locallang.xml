@@ -27,6 +27,7 @@
 			<label index="eventlist_status_canceled">canceled</label>
 			<label index="eventlist_status_confirmed">confirmed</label>
 			<label index="eventlist_button_confirm">Confirm</label>
+			<label index="eventlist_button_cancel">Cancel</label>
 			<label index="speakerlist.title">Name</label>
 			<label index="speakerlist.skills">Skills</label>
 			<label index="organizerlist.title">Name</label>
@@ -82,6 +83,7 @@
 			<label index="eventlist_status_canceled">abgesagt</label>
 			<label index="eventlist_status_confirmed">bestätigt</label>
 			<label index="eventlist_button_confirm">Bestätigen</label>
+			<label index="eventlist_button_cancel">Absagen</label>
 			<label index="speakerlist.title">Name</label>
 			<label index="speakerlist.skills">Fähigkeiten</label>
 			<label index="organizerlist.title">Name</label>
@@ -222,6 +224,7 @@
 			<label index="eventlist_status_confirmed" type="integer">249197084</label>
 			<label index="eventlist_button_confirm" type="integer">118332393</label>
 			<label index="registrationlist.deleted" type="integer">244968423</label>
+			<label index="eventlist_button_cancel" type="integer">245659783</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -351,6 +354,7 @@
 			<label index="eventlist_status_confirmed">confirmed</label>
 			<label index="eventlist_button_confirm">Confirm</label>
 			<label index="registrationlist.deleted">(deleted)</label>
+			<label index="eventlist_button_cancel">Cancel</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>

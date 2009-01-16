@@ -71,5 +71,10 @@ td.status {
 
 td.confirm_button input {
 	background: #fff url("icon_confirmed.png") no-repeat 2px 1px;
-	padding: 2px 2px 2px 17px;
+	padding: 2px 2px 1px 17px;
+}
+
+td.cancel_button input {
+	background: #fff url("icon_canceled.png") no-repeat 2px 1px;
+	padding: 2px 2px 1px 17px;
 }
