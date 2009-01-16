@@ -193,6 +193,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		}
 
 		$registrationBagBuilder->limitToEvent($eventUid);
+		$registrationBagBuilder->limitToExistingUsers();
 		$bag = $registrationBagBuilder->build();
 
 		foreach ($bag as $registration) {
