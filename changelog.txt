@@ -1,4 +1,5 @@
 0.7.1 (currently working on)
+- [#2616] Fix: Invalid HTML in the list view
 - [#2548] Fix: The owner image on the single view page should use the path that is configured in the sr_feuser_register EM settings
 - [#2563] Fix: Deal with deleted FE users and seminars gracefully
 - [#2458] Fix: Expect false for a failed $dbResult, not null
