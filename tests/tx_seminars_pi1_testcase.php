@@ -3125,6 +3125,31 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	//////////////////////////////////////////
+	// Tests concerning the "my events" view
+	//////////////////////////////////////////
+
+	public function testMyEventsContainsTitleOfEventWithRegistrationForLoggedInUser() {
+		$this->createLogInAndRegisterFeUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$this->assertContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testMyEventsNotContainsTitleOfEventWithoutRegistrationForLoggedInUser() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$this->assertNotContains(
+			'Test event',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	/////////////////////////////////////////////////////////////////////////////////
 	// Tests concerning mayManagersEditTheirEvents in the "my vip events" list view
 	/////////////////////////////////////////////////////////////////////////////////
