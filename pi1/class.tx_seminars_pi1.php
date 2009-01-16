@@ -1304,8 +1304,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 
 		if ($owner->hasImage()) {
+			$configuredUploadFolder = tx_oelib_configurationProxy::getInstance(
+					'sr_feuser_register'
+				)->getConfigurationValueString('uploadFolder');
+
+			$uploadFolder = ($configuredUploadFolder == '')
+				? 'uploads/tx_srfeuserregister'
+				: $configuredUploadFolder;
+
+			if (substr($uploadFolder, -1) != '/') {
+				$uploadFolder .= '/';
+			}
+
 			$imageTag = $this->createRestrictedImage(
-				'uploads/tx_srfeuserregister/' . $owner->getImage(), '',
+				$uploadFolder . $owner->getImage(), '',
 				$this->getConfValueInteger('ownerPictureMaxWidth'), 0, 0, '',
 				$this->prefixId . '_owner_image'
 			);
