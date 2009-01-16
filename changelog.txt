@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2548] Fix: The owner image on the single view page should use the path that is configured in the sr_feuser_register EM settings
 - [#2591] Change: Change seminarbagbuilder::limitToTopicsWithoutRegistrationByUser to take the expiry date into account
 - [#2590] Feature: Add a getter for the license expiry
 - [#2458] Fix: Expect false for a failed $dbResult, not null
