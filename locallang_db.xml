@@ -35,7 +35,7 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
-			<label index="tx_seminars_seminars.cancelled">Event status:</label>
+			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed">confirmed</label>
@@ -222,7 +222,7 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Reisebedingungen-Checkbox im Anmeldeformular anzeigen:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Lässt mehrfache Anmeldungen derselben Person zu:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Den Kollisionscheck für diese Veranstaltung ausschalten:</label>
-			<label index="tx_seminars_seminars.cancelled">Event Status:</label>
+			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">geplant</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">abgesagt</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed">bestätigt</label>
@@ -1183,7 +1183,7 @@
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">261565721</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">12398803</label>
 			<label index="tx_seminars_seminars.skip_collision_check" type="integer">139479602</label>
-			<label index="tx_seminars_seminars.cancelled" type="integer">222596095</label>
+			<label index="tx_seminars_seminars.cancelled" type="integer">38413271</label>
 			<label index="tx_seminars_seminars.cancelled_planned" type="integer">59756617</label>
 			<label index="tx_seminars_seminars.cancelled_canceled" type="integer">224147873</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed" type="integer">249197084</label>
@@ -2167,7 +2167,7 @@
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
-			<label index="tx_seminars_seminars.cancelled">Event status:</label>
+			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed">confirmed</label>
