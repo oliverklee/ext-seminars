@@ -2543,7 +2543,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$currentKeyTrimmed = strtolower(trim($currentKey));
 			$currentLabel = $this->translate('label_'.$currentKey);
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
-			$maxLength = max($maxLength, strlen($currentLabel));
+			$maxLength = max($maxLength, mb_strlen($currentLabel));
 		}
 		$result = '';
 		foreach ($keysWithLabels as $currentKey => $currentLabel) {

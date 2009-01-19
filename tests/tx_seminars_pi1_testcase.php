@@ -2332,7 +2332,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
-			substr_count(
+			mb_substr_count(
 				$this->fixture->main('', array()),
 				'Category X'
 			)
@@ -2580,7 +2580,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			1,
-			substr_count(
+			mb_substr_count(
 				$this->fixture->main('', array()),
 				'2020'
 			)
@@ -2608,7 +2608,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			substr_count(
+			mb_substr_count(
 				$this->fixture->main('', array()),
 				'2020'
 			)

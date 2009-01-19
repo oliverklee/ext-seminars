@@ -1,4 +1,5 @@
 0.7.1 (currently working on)
+- [#2596] Fix: Use mb_strlen instead of strlen
 - [#2503] Change: Add some unit tests
 - [#2593] Change: Add some unit tests for the "my events" list
 - [#2617] Fix: Some headings in the "my events" list are moved up
