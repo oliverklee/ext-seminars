@@ -48,7 +48,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**  Path to this script relative to the extension dir. */
 	public $scriptRelPath = 'class.tx_seminars_registration.php';
 
-	/** our seminar (object) */
+	/**
+	 * @var tx_seminars_seminar the event to which this registration relates
+	 */
 	private $seminar = null;
 
 	/** whether we have already initialized the templates (which is done lazily) */
@@ -108,20 +110,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($data) {
 			$this->getDataFromDbResult($data);
 		}
-
-		if ($this->isOk()) {
-			$seminarUid = $this->recordData['seminar'];
-			if (isset(self::$cachedSeminars[$seminarUid])) {
-				$this->seminar = self::$cachedSeminars[$seminarUid];
-			} else {
-				/** Name of the seminar class in case someone subclasses it. */
-				$seminarClassname = t3lib_div::makeInstanceClassName(
-					'tx_seminars_seminar'
-				);
-				$this->seminar = new $seminarClassname($seminarUid);
-				self::$cachedSeminars[$seminarUid] = $this->seminar;
-			}
-		}
 	}
 
 	/**
@@ -134,6 +122,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 	/**
 	 * Purges our cached seminars array.
+	 *
+	 * This function is intended for testing purposes only.
 	 */
 	public static function purgeCachedSeminars() {
 		self::$cachedSeminars = array();
@@ -265,9 +255,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *   Name of Attendee / Title of Seminar seminardate
 	 */
 	private function createTitle() {
-		$this->recordData['title'] = $this->getUserName()
-			.' / '.$this->seminar->getTitle()
-			.', '.$this->seminar->getDate('-');
+		$this->recordData['title'] = $this->getUserName() .
+			' / ' . $this->getSeminarObject()->getTitle() .
+			', ' . $this->getSeminarObject()->getDate('-');
 	}
 
  	/**
@@ -368,7 +358,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				);
 				break;
 			case 'method_of_payment':
-				$result = $this->seminar->getSinglePaymentMethodShort(
+				$result = $this->getSeminarObject()->getSinglePaymentMethodShort(
 					$this->getRecordPropertyInteger($trimmedKey)
 				);
 				break;
@@ -551,6 +541,19 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return object the seminar to which this registration belongs
 	 */
 	public function getSeminarObject() {
+		if (!$this->seminar && $this->isOk()) {
+			$seminarUid = $this->recordData['seminar'];
+			if (isset(self::$cachedSeminars[$seminarUid])) {
+				$this->seminar = self::$cachedSeminars[$seminarUid];
+			} else {
+				$seminarClassname = t3lib_div::makeInstanceClassName(
+					'tx_seminars_seminar'
+				);
+				$this->seminar = new $seminarClassname($seminarUid);
+				self::$cachedSeminars[$seminarUid] = $this->seminar;
+			}
+		}
+
 		return $this->seminar;
 	}
 
@@ -681,7 +684,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$totalPrice = $this->getRecordPropertyDecimal('total_price');
 		$currency = $this->getConfValueString('currency');
 		if ($totalPrice != '0.00') {
-			$result = $this->seminar->formatPrice($totalPrice).$space.$currency;
+			$result = $this->getSeminarObject()->formatPrice($totalPrice) .
+				$space . $currency;
 		}
 
 		return $result;
@@ -708,6 +712,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			return;
 		}
 
+		$event = $this->getSeminarObject();
+
 		$this->initializeTemplate();
 		$this->hideSubparts(
 			$this->getConfValueString('hideFieldsInThankYouMail'),
@@ -715,16 +721,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		);
 
 		$this->setMarker('hello', sprintf(
-			$this->translate('email_'.$helloSubjectPrefix.'Hello'),
+			$this->translate('email_' . $helloSubjectPrefix . 'Hello'),
 			$this->getUserName())
 		);
-		if ($this->seminar->hasEventType()) {
-			$this->setMarker('event_type', $this->seminar->getEventType());
+		if ($event->hasEventType()) {
+			$this->setMarker('event_type', $event->getEventType());
 		} else {
 			$this->hideSubparts('event_type', 'field_wrapper');
 		}
-		$this->setMarker('title', $this->seminar->getTitle());
-		$this->setMarker('uid', $this->seminar->getUid());
+		$this->setMarker('title', $event->getTitle());
+		$this->setMarker('uid', $event->getUid());
 
 		$this->setMarker('registration_uid', $this->getUid());
 
@@ -773,38 +779,38 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->hideSubparts('kids', 'field_wrapper');
 		}
 
-		if ($this->seminar->hasAccreditationNumber()) {
+		if ($event->hasAccreditationNumber()) {
 			$this->setMarker(
 				'accreditation_number',
-				$this->seminar->getAccreditationNumber()
+				$event->getAccreditationNumber()
 			);
 		} else {
 			$this->hideSubparts('accreditation_number', 'field_wrapper');
 		}
 
-		if ($this->seminar->hasCreditPoints()) {
+		if ($event->hasCreditPoints()) {
 			$this->setMarker(
 				'credit_points',
-				$this->seminar->getCreditPoints()
+				$event->getCreditPoints()
 			);
 		} else {
 			$this->hideSubparts('credit_points', 'field_wrapper');
 		}
 
-		$this->setMarker('date', $this->seminar->getDate('-'));
-		$this->setMarker('time', $this->seminar->getTime('-'));
-		$this->setMarker('place', $this->seminar->getPlaceShort());
+		$this->setMarker('date', $event->getDate('-'));
+		$this->setMarker('time', $event->getTime('-'));
+		$this->setMarker('place', $event->getPlaceShort());
 
-		if ($this->seminar->hasRoom()) {
-			$this->setMarker('room', $this->seminar->getRoom());
+		if ($event->hasRoom()) {
+			$this->setMarker('room', $event->getRoom());
 		} else {
 			$this->hideSubparts('room', 'field_wrapper');
 		}
 
-		if ($this->seminar->hasAdditionalTimesAndPlaces()) {
+		if ($event->hasAdditionalTimesAndPlaces()) {
 			$this->setMarker(
 				'additional_times_places',
-				$this->seminar->getAdditionalTimesAndPlacesRaw()
+				$event->getAdditionalTimesAndPlacesRaw()
 			);
 		} else {
 			$this->hideSubparts('additional_times_places', 'field_wrapper');
@@ -828,7 +834,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->hasRecordPropertyInteger('method_of_payment')) {
 			$this->setMarker(
 				'paymentmethod',
-				$this->seminar->getSinglePaymentMethodPlain(
+				$event->getSinglePaymentMethodPlain(
 					$this->getRecordPropertyInteger('method_of_payment')
 				)
 			);
@@ -840,22 +846,22 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->setMarker(
 			'url',
-			$this->seminar->getDetailedViewUrl($plugin)
+			$event->getDetailedViewUrl($plugin)
 		);
 
-		$footers = $this->seminar->getOrganizersFooter();
+		$footers = $event->getOrganizersFooter();
 		$this->setMarker('footer', $footers[0]);
 
 		$content = $this->getSubpart('MAIL_THANKYOU');
-		$froms = $this->seminar->getOrganizersNameAndEmail();
+		$froms = $event->getOrganizersNameAndEmail();
 
 		// We use just the user's e-mail address as e-mail recipient
 		// as some SMTP servers cannot handle the format
 		// "John Doe <john.doe@example.com>".
 		tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
 			$this->getUserEmail(),
-			$this->translate('email_'.$helloSubjectPrefix.'Subject').': '
-				.$this->seminar->getTitleAndDate('-'),
+			$this->translate('email_' . $helloSubjectPrefix.'Subject') . ': ' .
+				$event->getTitleAndDate('-'),
 			$content,
 			// We just use the first organizer as sender
 			'From: '.$froms[0],
@@ -897,7 +903,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
 			$this->setMarker(
 				'seminardata',
-				$this->seminar->dumpSeminarValues(
+				$this->getSeminarObject()->dumpSeminarValues(
 					$this->getConfValueString(
 						'showSeminarFieldsInNotificationMail'
 					)
@@ -936,7 +942,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// We use just the organizer's e-mail address as e-mail recipient
 		// as some SMTP servers cannot handle the format
 		// "John Doe <john.doe@example.com>".
-		$organizers = $this->seminar->getOrganizersEmail();
+		$organizers = $this->getSeminarObject()->getOrganizersEmail();
 		foreach ($organizers as $currentOrganizerEmail) {
 			tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
 				$currentOrganizerEmail,
@@ -965,14 +971,16 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$whichEmailToSend = '';
 		$whichEmailSubject = '';
 
+		$event = $this->getSeminarObject();
+
 		if (!$this->isOnRegistrationQueue()) {
-			if ($this->seminar->isFull()) {
+			if ($event->isFull()) {
 				$whichEmailToSend = 'email_additionalNotificationIsFull';
 				$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
 			// The second check ensures that only one set of e-mails is sent to
 			// the organizers.
-			} elseif ($this->seminar->getAttendancesMin()
-				== $this->seminar->getAttendances()
+			} elseif ($event->getAttendancesMin()
+				== $event->getAttendances()
 			) {
 				$whichEmailToSend
 					= 'email_additionalNotificationEnoughRegistrations';
@@ -990,8 +998,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			);
 			if (!empty($showSeminarFields)) {
 				$this->setMarker(
-					'seminardata',
-					$this->seminar->dumpSeminarValues($showSeminarFields)
+					'seminardata', $event->dumpSeminarValues(
+						$showSeminarFields
+					)
 				);
 			} else {
 				$this->hideSubparts('seminardata', 'field_wrapper');
@@ -1002,15 +1011,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			);
 			$subject = sprintf(
 				$this->translate($whichEmailSubject),
-				$this->seminar->getUid(),
-				$this->seminar->getTitleAndDate('-')
+				$event->getUid(),
+				$event->getTitleAndDate('-')
 			);
 
 			// We use just the organizer's e-mail address as e-mail recipient
 			// as some SMTP servers cannot handle the format
 			// "John Doe <john.doe@example.com>".
-			$organizers = $this->seminar->getOrganizersEmail();
-			$froms = $this->seminar->getOrganizersNameAndEmail();
+			$organizers = $event->getOrganizersEmail();
+			$froms = $event->getOrganizersNameAndEmail();
 			foreach ($organizers as $currentOrganizerEmail) {
 				tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
 					$currentOrganizerEmail,

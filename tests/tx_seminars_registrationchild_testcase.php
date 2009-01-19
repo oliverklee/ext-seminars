@@ -432,6 +432,42 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	//////////////////////////////////////
+	// Tests concerning getSeminarObject
+	//////////////////////////////////////
+
+	public function testGetSeminarObjectReturnsSeminarInstance() {
+		$this->assertTrue(
+			$this->fixture->getSeminarObject() instanceof tx_seminars_seminar
+		);
+	}
+
+	public function testGetSeminarObjectForRegistrationWithoutSeminarReturnsSeminarInstance() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_ATTENDANCES, $this->registrationUid,
+			array(
+				'seminar' => 0,
+				'user' => 0,
+			)
+		);
+
+		$fixture = new tx_seminars_registrationchild($this->registrationUid);
+
+		$this->assertTrue(
+			$this->fixture->getSeminarObject() instanceof tx_seminars_seminar
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function testGetSeminarObjectReturnsSeminarWithUidFromRelation() {
+		$this->assertEquals(
+			$this->seminarUid,
+			$this->fixture->getSeminarObject()->getUid()
+		);
+	}
+
+
 	/////////////////////////////////////////
 	// Tests regarding the cached seminars.
 	/////////////////////////////////////////
