@@ -56,7 +56,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->pid,
 				'sorting' => 1,
-				'begin_date' => mktime(),
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
 			)
 		);
 
@@ -99,7 +99,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertEquals(
-			'"uid","title"'.CRLF,
+			'uid;title' . CRLF,
 			$this->fixture->createListOfEvents($pid)
 		);
 	}
@@ -109,9 +109,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'uid'
 		);
 
-		$this->assertEquals(
-			'"uid"'.CRLF
-				.'"'.((string) $this->eventUid).'"'.CRLF,
+		$this->assertContains(
+			(string) $this->eventUid,
 			$this->fixture->createListOfEvents($this->pid)
 		);
 	}
@@ -124,9 +123,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_SEMINARS;
 		$this->fixture->piVars['pid'] = $this->pid;
 
-		$this->assertEquals(
-			'"uid"'.CRLF
-				.'"'.((string) $this->eventUid).'"'.CRLF,
+		$this->assertContains(
+			(string) $this->eventUid,
 			$this->fixture->main(null, array())
 		);
 	}
@@ -140,15 +138,18 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->pid,
 				'sorting' => 2,
-				'begin_date' => mktime() - 3600,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
 			)
 		);
+		$eventList = $this->fixture->createListOfEvents($this->pid);
 
-		$this->assertEquals(
-			'"uid"'.CRLF
-				.'"'.((string) $this->eventUid).'"'.CRLF
-				.'"'.((string) $secondEventUid).'"'.CRLF,
-			$this->fixture->createListOfEvents($this->pid)
+		$this->assertContains(
+			(string) $this->eventUid,
+			$eventList
+		);
+		$this->assertContains(
+			(string) $secondEventUid,
+			$eventList
 		);
 	}
 
@@ -161,16 +162,200 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->pid,
 				'sorting' => 2,
-				'begin_date' => mktime() - 3600,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
+			)
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+		$output = $this->fixture->createAndOutputListOfEvents();
+
+		$this->assertContains(
+			(string) $this->eventUid,
+			$output
+		);
+		$this->assertContains(
+			(string) $secondEventUid,
+			$output
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsSeparatesLinesWithCarriageReturnsAndLineFeeds() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'uid'
+		);
+		$secondEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->pid,
+				'sorting' => 2,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
 			)
 		);
 
 		$this->fixture->piVars['pid'] = $this->pid;
 
 		$this->assertEquals(
-			'"uid"'.CRLF
-				.'"'.((string) $this->eventUid).'"'.CRLF
-				.'"'.((string) $secondEventUid).'"'.CRLF,
+			'uid' . CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsHasResultEndingWithCariageReturnAndLineFeed() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'uid'
+		);
+		$secondEventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->pid,
+				'sorting' => 2,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
+			)
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertRegExp(
+			'/\r\n$/',
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsDoesNotWrapRegularValuesWithDoubleQuotes() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			array('title' => 'bar')
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'title'
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertNotContains(
+			'"bar"',
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsEscapesDoubleQuotes() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			array('description' => 'foo " bar')
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'description'
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'foo "" bar',
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+
+	public function testCreateAndOutputListOfEventsDoesWrapValuesWithLineFeedsInDoubleQuotes() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			array('title' => 'foo' . LF . 'bar')
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'title'
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'"foo' . LF . 'bar"',
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsDoesWrapValuesWithDoubleQuotesInDoubleQuotes() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			array('title' => 'foo " bar')
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'title'
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'"foo "" bar"',
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsDoesWrapValuesWithSemicolonsInDoubleQuotes() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			array('title' => 'foo ; bar')
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'title'
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'"foo ; bar"',
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsSeparatesValuesWithSemicolons() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			array('description' => 'foo', 'title' => 'bar')
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'description,title'
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'foo;bar',
+			$this->fixture->createAndOutputListOfEvents()
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsDoesNotWrapHeadlineFieldsInDoubleQuotes() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'description,title'
+		);
+		$this->fixture->piVars['pid'] = $this->pid;
+		$eventList = $this->fixture->createAndOutputListOfEvents();
+
+		$this->assertContains(
+			'description',
+			$eventList
+		);
+		$this->assertNotContains(
+			'"description"',
+			$eventList
+		);
+	}
+
+	public function testCreateAndOutputListOfEventsSeparatesHeadlineFieldsWithSemicolons() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'description,title'
+		);
+
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'description;title',
 			$this->fixture->createAndOutputListOfEvents()
 		);
 	}
@@ -196,7 +381,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertEquals(
-			'"name","uid"'.CRLF,
+			'name;uid' . CRLF,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -216,9 +401,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
-			'"","uid"'.CRLF
-				.'"'.((string) $registrationUid).'"'.CRLF,
+		$this->assertContains(
+			(string) $registrationUid,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -241,9 +425,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
 		$this->fixture->piVars['seminar'] = $this->eventUid;
 
-		$this->assertEquals(
-			'"","uid"'.CRLF
-				.'"'.((string) $registrationUid).'"'.CRLF,
+		$this->assertContains(
+			(string) $registrationUid,
 			$this->fixture->main(null, array())
 		);
 	}
@@ -272,14 +455,23 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
+		$registrationsList
+			= $this->fixture->createListOfRegistrations($this->eventUid);
 
-		$this->assertEquals(
-			'"","uid"' . CRLF .
-				'"' . ((string) $firstRegistrationUid) . '"' . CRLF .
-				'"' . ((string) $secondRegistrationUid) . '"' . CRLF,
-			$this->fixture->createListOfRegistrations($this->eventUid)
+		$this->assertContains(
+			(string) $firstRegistrationUid,
+			$registrationsList
+		);
+		$this->assertContains(
+			(string) $secondRegistrationUid,
+			$registrationsList
 		);
 	}
+
+
+	////////////////////////////////////////////////////////
+	// Tests concerning createAndOutputListOfRegistrations
+	////////////////////////////////////////////////////////
 
 	public function testCreateAndOutputListOfRegistrationsCanContainTwoRegistrationUids() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
@@ -306,12 +498,15 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['seminar'] = $this->eventUid;
-
-		$this->assertEquals(
-			'"","uid"' . CRLF .
-				'"' . ((string) $firstRegistrationUid) . '"' . CRLF .
-				'"' . ((string) $secondRegistrationUid) . '"' . CRLF,
-			$this->fixture->createAndOutputListOfRegistrations()
+		$registrationsList
+			= $this->fixture->createAndOutputListOfRegistrations();
+		$this->assertContains(
+			(string) $firstRegistrationUid,
+			$registrationsList
+		);
+		$this->assertContains(
+			(string) $secondRegistrationUid,
+			$registrationsList
 		);
 	}
 
@@ -361,9 +556,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
 		$this->fixture->piVars['seminar'] = $this->eventUid;
 
-		$this->assertEquals(
-			'"","referrer"'.CRLF
-				.'"test referrer"'.CRLF,
+		$this->assertContains(
+			'test referrer',
 			$this->fixture->main(null, array())
 		);
 	}
@@ -416,6 +610,303 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			(string) $registrationUid,
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsSeparatesLinesWithCarriageReturnAndLineFeed() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+
+		$firstRegistrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => 1,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$secondRegistrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => 2,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertEquals(
+			'uid' . CRLF . $firstRegistrationUid . CRLF .
+				 $secondRegistrationUid . CRLF,
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsHasResultThatEndsWithCarriageReturnAndLineFeed() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertRegExp(
+			'/\r\n$/',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsEscapesDoubleQuotes() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid,address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo " bar',
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'foo "" bar',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsDoesNotEscapeRegularValues() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo " bar',
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertNotContains(
+			'"foo bar"',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsWrapsValuesWithSemicolonsInDoubleQuotes() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo ; bar',
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'"foo ; bar"',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsWrapsValuesWithLineFeedsInDoubleQuotes() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo' . LF . 'bar',
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'"foo' . LF . 'bar"',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsWrapsValuesWithDoubleQuotesInDoubleQuotes() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo " bar',
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'"foo "" bar"',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsSeparatesTwoValuesWithSemicolons() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address,title'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'crdate' => time(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo',
+				'title' => 'test',
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'foo;test',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsDoesNotWrapHeadlineFieldsInDoubleQuotes() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+		$registrationsList
+			= $this->fixture->createAndOutputListOfRegistrations();
+
+		$this->assertContains(
+			'address',
+			$registrationsList
+		);
+		$this->assertNotContains(
+			'"address"',
+			$registrationsList
+		);
+	}
+
+	public function testCreateAndOutputListOfRegistrationsSeparatesHeadlineFieldsWithSemicolons() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address,title'
+		);
+
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'address;title',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', 'name'
+		);
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertNotContains(
+			'name;',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertNotContains(
+			';address',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenConfigurationFields() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', 'name'
+		);
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			'name;address',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateListOfRegistrationsForBothConfigurationFieldsEmptyReturnsEmptyLine() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertEquals(
+			CRLF,
 			$this->fixture->createAndOutputListOfRegistrations()
 		);
 	}

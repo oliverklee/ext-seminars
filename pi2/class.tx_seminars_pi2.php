@@ -212,9 +212,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				)
 			);
 			// Combines the arrays with the user and registration data
-			// and creates a list of comma-separated values from them.
+			// and creates a list of semicolon-separated values from them.
 			$result .= implode(
-				',',
+				';',
 				array_merge($userData, $registrationData)
 			) . CRLF;
 		}
@@ -228,18 +228,23 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * at the end).
 	 *
 	 * @return string the heading line for the list of registrations, will
-	 * not be empty
+	 *                not be empty
 	 */
 	protected function createRegistrationsHeading() {
-		$headerLineWithoutWrapping
-			= $this->configGetter->getConfValueString('fieldsFromFeUserForCsv')
-				.','
-				.$this->configGetter->getConfValueString(
-					'fieldsFromAttendanceForCsv'
-				);
-		return '"'
-			.str_replace(',', '","', $headerLineWithoutWrapping)
-			.'"'.CRLF;
+		$fieldsFromFeUser = t3lib_div::trimExplode(
+			',',
+			$this->configGetter->getConfValueString('fieldsFromFeUserForCsv'),
+			true
+		);
+		$fieldsFromAttendances = t3lib_div::trimExplode(
+			',',
+			$this->configGetter->getConfValueString('fieldsFromAttendanceForCsv'),
+			true
+		);
+
+		$result = array_merge($fieldsFromFeUser, $fieldsFromAttendances);
+
+		return implode(';', $result) . CRLF;
 	}
 
 	/**
@@ -311,7 +316,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			);
 			// Creates a list of comma-separated values of the event data.
 			$result .= implode(
-				',',
+				';',
 				$seminarData
 			) . CRLF;
 		}
@@ -322,16 +327,16 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Creates the heading line for a CSV event list.
 	 *
-	 * @return string header list, will not be empty if the CSV
-	 * export has been configured correctly
+	 * @return string header list, will not be empty if the CSV export has been
+	 *                configured correctly
 	 */
 	private function createEventsHeading() {
-		return '"'.str_replace(
+		return str_replace(
 			',',
-			'","',
+			';',
 			$this->configGetter->getConfValueString(
 				'fieldsFromEventsForCsv'
-			).'"'.CRLF
+			) . CRLF
 		);
 	}
 
@@ -358,7 +363,15 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$rawData = $dataSupplier->$supplierFunction($currentKey);
 				// Escapes double quotes and wraps the whole string in double
 				// quotes.
-				$result[] = '"'.str_replace('"', '""', $rawData).'"';
+				if (strpos($rawData, '"') !== false) {
+					$result[] = '"'.str_replace('"', '""', $rawData).'"';
+				} elseif ((strpos($rawData, ';') !== false) ||
+					(strpos($rawData, LF) !== false)
+				){
+					$result[] = '"' . $rawData . '"';
+				} else {
+					$result[] = $rawData;
+				}
 			}
 		}
 

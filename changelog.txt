@@ -1,4 +1,5 @@
 0.7.1 (currently working on)
+- [#1716] Fix: Make the CSV export work with multiline cells in Excel and OpenOffice.org
 - [#2579] Fix: The user fields for export should be chosen from fe_user not tx_seminars_attendances
 - [#2596] Fix: Use mb_strlen instead of strlen
 - [#2503] Change: Add some unit tests
