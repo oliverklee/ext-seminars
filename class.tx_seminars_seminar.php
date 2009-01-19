@@ -1724,7 +1724,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = 0;
 
 		if ($this->hasPaymentMethods()) {
-			$availablePaymentMethods = explode(
+			$availablePaymentMethods = t3lib_div::trimExplode(
 				',',
 				$this->getPaymentMethodsUids()
 			);
@@ -2518,14 +2518,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpSeminarValues($keysList) {
-		$keys = explode(',', $keysList);
+		$keys = t3lib_div::trimExplode(',', $keysList, true);
 		$keysWithLabels = array();
 
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
-			$currentKeyTrimmed = strtolower(trim($currentKey));
+			$loweredKey = strtolower($currentKey);
 			$currentLabel = $this->translate('label_'.$currentKey);
-			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
+			$keysWithLabels[$loweredKey] = $currentLabel;
 			$maxLength = max($maxLength, mb_strlen($currentLabel));
 		}
 		$result = '';
@@ -4305,8 +4305,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$uploadFolderUrl = t3lib_div::getIndpEnv('TYPO3_SITE_URL') .
 			'uploads/tx_seminars/';
 
-		$attachedFiles = explode(
-			',', $this->getRecordPropertyString('attached_files')
+		$attachedFiles = t3lib_div::trimExplode(
+			',', $this->getRecordPropertyString('attached_files'), true
 		);
 
 		foreach ($attachedFiles as $attachedFile) {

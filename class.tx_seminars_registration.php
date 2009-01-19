@@ -179,7 +179,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// method is provided.
 		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00)
 			&& ($seminar->getNumberOfPaymentMethods() == 1)) {
-				$availablePaymentMethods = explode(
+				$availablePaymentMethods = t3lib_div::trimExplode(
 					',',
 					$seminar->getPaymentMethodsUids()
 				);
@@ -463,13 +463,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return string the values retrieved from $this->userData, may be empty
 	 */
 	public function getUserDataAsHtml($keys, tslib_pibase $plugin) {
-		$singleKeys = explode(',', $keys);
+		$singleKeys = t3lib_div::trimExplode(',', $keys, true);
 		$singleValues = array();
 
 		foreach ($singleKeys as $currentKey) {
 			$rawValue = $this->getUserData($currentKey);
 			if (!empty($rawValue)) {
-				switch (trim($currentKey)) {
+				switch ($currentKey) {
 					case 'email':
 						$singleValues[$currentKey]
 							= $plugin->cObj->mailto_makelinks(
@@ -1063,20 +1063,20 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpUserValues($keysList) {
-		$keys = explode(',', $keysList);
+		$keys = t3lib_div::trimExplode(',', $keysList, true);
 		$keysWithLabels = array();
 
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
-			$currentKeyTrimmed = strtolower(trim($currentKey));
-			$labelKey = 'label_' . $currentKeyTrimmed;
+			$loweredKey = strtolower($currentKey);
+			$labelKey = 'label_' . $loweredKey;
 
 			$currentLabel = $this->translate($labelKey);
 			if (($currentLabel == '') || ($currentLabel == $labelKey)) {
-				$currentLabel = ucfirst($currentKeyTrimmed);
+				$currentLabel = ucfirst($loweredKey);
 			}
 
-			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
+			$keysWithLabels[$loweredKey] = $currentLabel;
 			$maxLength = max($maxLength, mb_strlen($currentLabel));
 		}
 
@@ -1111,20 +1111,20 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpAttendanceValues($keysList) {
-		$keys = explode(',', $keysList);
+		$keys = t3lib_div::trimExplode(',', $keysList, true);
 		$keysWithLabels = array();
 
 		$maxLength = 0;
 		foreach ($keys as $currentKey) {
-			$currentKeyTrimmed = strtolower(trim($currentKey));
-			if ($currentKeyTrimmed == 'uid') {
+			$loweredKey = strtolower($currentKey);
+			if ($loweredKey == 'uid') {
 				// The UID label is a special case as we also have a UID label
 				// for events.
 				$currentLabel = $this->translate('label_registration_uid');
 			} else {
-				$currentLabel = $this->translate('label_' . $currentKeyTrimmed);
+				$currentLabel = $this->translate('label_' . $loweredKey);
 			}
-			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
+			$keysWithLabels[$loweredKey] = $currentLabel;
 			$maxLength = max($maxLength, mb_strlen($currentLabel));
 		}
 

@@ -116,16 +116,13 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 
 		$this->init($this->plugin->conf);
 
-		$formFieldsToShow = explode(',',
+		$formFieldsToShow = t3lib_div::trimExplode(',',
 			$this->getConfValueString(
 				'showRegistrationFields', 's_template_special'
-			)
+			), true
 		);
 		foreach ($formFieldsToShow as $currentFormField) {
-			$trimmedFormField = trim($currentFormField);
-			if (!empty($trimmedFormField)) {
-				$this->formFieldsToShow[$trimmedFormField] = $trimmedFormField;
-			}
+			$this->formFieldsToShow[$currentFormField] = $currentFormField;
 		}
 
 		// Currently, only new registrations can be entered.

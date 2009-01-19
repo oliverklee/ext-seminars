@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#788] Fix: Use t3lib_div::trimExplode instead of explode
 - [#2592] Feature: Show the license expiry in the date single view
 - [#1716] Fix: Make the CSV export work with multiline cells in Excel and OpenOffice.org
 - [#2579] Fix: The user fields for export should be chosen from fe_user not tx_seminars_attendances

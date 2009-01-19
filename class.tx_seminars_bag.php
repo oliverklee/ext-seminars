@@ -192,19 +192,18 @@ abstract class tx_seminars_bag implements Iterator {
 			);
 		}
 
-		$allTableNames = explode(
+		$allTableNames = t3lib_div::trimExplode(
 			',',
 			$this->dbTableName.$this->additionalTableNames
 		);
 		$this->enabledFieldsQuery = '';
 
 		foreach ($allTableNames as $currentTableName) {
-			$trimmedTableName = trim($currentTableName);
 			// Is there a TCA entry for that table?
-			$ctrl = $GLOBALS['TCA'][$trimmedTableName]['ctrl'];
+			$ctrl = $GLOBALS['TCA'][$currentTableName]['ctrl'];
 			if (is_array($ctrl)) {
 				$this->enabledFieldsQuery .= tx_oelib_db::enableFields(
-						$trimmedTableName, $showHiddenRecords, $ignoreColumns
+						$currentTableName, $showHiddenRecords, $ignoreColumns
 				);
 			}
 		}

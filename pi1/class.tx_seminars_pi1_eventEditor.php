@@ -127,7 +127,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		// data afterwards, as the FORMidable renderlet is not usable for this.
 		$attachments = $this->oForm->oDataHandler->__aStoredData['attached_files'];
 		if ($attachments != '') {
-			$this->attachedFiles = explode(',', $attachments);
+			$this->attachedFiles = t3lib_div::trimExplode(',', $attachments);
 		}
 	}
 
@@ -526,18 +526,20 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @param array form data, will be modified, must not be empty
 	 */
 	private function processAttachments(array &$formData) {
-		if ($formData['delete_attached_files'] != '') {
-			$filesToDelete = explode(',', $formData['delete_attached_files']);
+		$filesToDelete = t3lib_div::trimExplode(
+			',', $formData['delete_attached_files'], true
+		);
 
-			foreach ($filesToDelete as $fileName) {
-				// saves other files in the upload folder from being deleted
-				if (in_array($fileName, $this->attachedFiles)) {
-					$this->purgeUploadedFile($fileName);
-				}
+		foreach ($filesToDelete as $fileName) {
+			// saves other files in the upload folder from being deleted
+			if (in_array($fileName, $this->attachedFiles)) {
+				$this->purgeUploadedFile($fileName);
 			}
 		}
 
-		$formData['attached_files'] = implode(',', $this->attachedFiles);
+		$formData['attached_files'] = t3lib_div::trimExplode(
+			',', $this->attachedFiles
+		);
 	}
 
 	/**
@@ -596,7 +598,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			return true;
 		}
 
-		$fileToCheck = array_pop(explode(',', $valueToCheck['value']));
+		$fileToCheck = array_pop(
+			t3lib_div::trimExplode(',', $valueToCheck['value'], true)
+		);
 
 		$this->checkFileSize($fileToCheck);
 		$this->checkFileType($fileToCheck);
