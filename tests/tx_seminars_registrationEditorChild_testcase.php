@@ -272,5 +272,63 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	public function testPopulateListPaymentMethodsDoesNotCrash() {
 		$this->fixture->populateListPaymentMethods(array());
 	}
+
+
+	////////////////////////////////////
+	// Tests concerning getStepCounter
+	////////////////////////////////////
+
+	public function testGetStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage() {
+		$this->pi1->setConfigurationValue(
+			'numberOfFirstRegistrationPage',
+			1
+		);
+		$this->pi1->setConfigurationValue(
+			'numberOfLastRegistrationPage',
+			2
+		);
+
+		$this->fixture->setPage(array('next_page' => 0));
+
+		$this->assertContains(
+			'1',
+			$this->fixture->getStepCounter()
+		);
+	}
+
+	public function testGetStepCounterReturnsNumberOfLastRegistrationPage() {
+		$this->pi1->setConfigurationValue(
+			'numberOfFirstRegistrationPage',
+			1
+		);
+		$this->pi1->setConfigurationValue(
+			'numberOfLastRegistrationPage',
+			2
+		);
+		$this->fixture->setPage(array('next_page' => 0));
+
+		$this->assertContains(
+			'2',
+			$this->fixture->getStepCounter()
+		);
+	}
+
+	public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage() {
+		$this->pi1->setConfigurationValue(
+			'numberOfFirstRegistrationPage',
+			1
+		);
+		$this->pi1->setConfigurationValue(
+			'numberOfLastRegistrationPage',
+			2
+		);
+
+		$this->fixture->setPage(array('next_page' => 5));
+
+		$this->assertEquals(
+			sprintf($this->fixture->translate('label_step_counter'), 2, 2),
+			$this->fixture->getStepCounter()
+		);
+	}
 }
 ?>
