@@ -1077,7 +1077,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			}
 
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
-			$maxLength = max($maxLength, strlen($currentLabel));
+			$maxLength = max($maxLength, mb_strlen($currentLabel));
 		}
 
 		$result = '';
@@ -1125,7 +1125,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$currentLabel = $this->translate('label_' . $currentKeyTrimmed);
 			}
 			$keysWithLabels[$currentKeyTrimmed] = $currentLabel;
-			$maxLength = max($maxLength, strlen($currentLabel));
+			$maxLength = max($maxLength, mb_strlen($currentLabel));
 		}
 
 		$result = '';
