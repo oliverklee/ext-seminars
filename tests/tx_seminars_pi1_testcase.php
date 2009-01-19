@@ -1290,7 +1290,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_foo',
+				'title' => 'depending_foo',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1300,7 +1300,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
-			'depdending_foo',
+			'depending_foo',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1321,7 +1321,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_foo',
+				'title' => 'depending_foo',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1331,7 +1331,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertRegExp(
-			'/<a href=.*' . $dependingEventUid . '.*>depdending_foo<\/a>/',
+			'/<a href=.*' . $dependingEventUid . '.*>depending_foo<\/a>/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1348,7 +1348,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_foo',
+				'title' => 'depending_foo',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1359,7 +1359,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_bar',
+				'title' => 'depending_bar',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1370,7 +1370,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertRegExp(
-			'/depdending_bar.*depdending_foo/s',
+			'/depending_bar.*depending_foo/s',
 			$this->fixture->main('', array())
 		);
 	}

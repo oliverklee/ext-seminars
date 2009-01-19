@@ -3354,7 +3354,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForDate() {
+	public function testUsesCorrectIconForDateRecord() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
 
 		$this->assertContains(
