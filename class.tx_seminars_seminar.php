@@ -4134,9 +4134,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		// Removes all place relations of the current event.
-		$GLOBALS['TYPO3_DB']->exec_DELETEquery(
+		tx_oelib_db::delete(
 			SEMINARS_TABLE_SEMINARS_SITES_MM,
-			SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local=' . $this->getUid()
+			SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local = ' . $this->getUid()
 		);
 
 		// Creates an array with all place UIDs which should be related to this
