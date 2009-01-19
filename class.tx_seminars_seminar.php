@@ -168,11 +168,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		$carriageReturnRemoved = (strpos($result, CR) === false)
-			? $result
-			: str_replace(CR, LF, $result);
-
-		return preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved);
+		return $result;
 	}
 
 	/**
@@ -3636,7 +3632,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		return $result;
+		$carriageReturnRemoved = (strpos($result, CR) === false)
+			? $result
+			: str_replace(CR, LF, $result);
+
+		return preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved);
 	}
 
 	/**
