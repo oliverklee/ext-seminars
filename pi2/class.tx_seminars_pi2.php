@@ -357,8 +357,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	protected function retrieveData($dataSupplier, $supplierFunction, $keys) {
 		$result = array();
 
-		if (!empty($keys) && method_exists($dataSupplier, $supplierFunction)) {
-			$allKeys = explode(',', $keys);
+		if (($keys != '') && method_exists($dataSupplier, $supplierFunction)) {
+			$allKeys = t3lib_div::trimExplode(',', $keys);
 			foreach ($allKeys as $currentKey) {
 				$rawData = $dataSupplier->$supplierFunction($currentKey);
 				// Escapes double quotes and wraps the whole string in double

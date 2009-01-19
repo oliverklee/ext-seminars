@@ -2710,12 +2710,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				's_template_special'
 			)
 		) {
-			$fieldsToShow = explode(
+			$fieldsToShow = t3lib_div::trimExplode(
 				',',
 				$this->getConfValueString(
 					'eventFieldsOnRegistrationPage',
 					's_template_special'
-				)
+				), true
 			);
 		}
 
@@ -2733,7 +2733,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		// Now iterate over the fields to show and delete them from the list
 		// of items to remove.
 		foreach ($fieldsToShow as $currentField) {
-			$key = array_search(trim($currentField), $fieldsToRemove);
+			$key = array_search($currentField, $fieldsToRemove);
 			// $key will be false if the item has not been found.
 			// Zero, on the other hand, is a valid key.
 			if ($key !== false) {
