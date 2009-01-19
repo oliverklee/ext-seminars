@@ -588,6 +588,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'place',
 				'room',
 				'additional_times_places',
+				'expiry',
 				'speakers',
 				'language',
 				'partners',

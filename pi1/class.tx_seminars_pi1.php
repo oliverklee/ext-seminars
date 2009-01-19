@@ -690,12 +690,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$this->setMarker('date', $this->seminar->getDate());
 			$this->setMarker('time', $this->seminar->getTime());
-
 			$this->setPlaceMarker();
 			$this->setRoomMarker();
 			$this->setAdditionalTimesAndPlacesMarker();;
 
 			$this->setTimeSlotsMarkers();
+
+			$this->setExpiryMarker();
 
 			$this->setGenderSpecificHeading('speakers');
 			$this->setSpeakersMarker();
@@ -936,6 +937,19 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$this->setSubpart('SINGLE_TIMESLOT', $timeSlotsOutput);
+	}
+
+	/**
+	 * Fills in the matching marker for the expiry or hides the subpart if there
+	 * is no expiry.
+	 */
+	private function setExpiryMarker() {
+		if (!$this->seminar->hasExpiry()) {
+			$this->hideSubparts('expiry', 'field_wrapper');
+			return;
+		}
+
+		$this->setMarker('expiry', $this->seminar->getExpiry());
 	}
 
 	/**

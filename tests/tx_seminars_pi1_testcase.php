@@ -1290,7 +1290,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_foo',
+				'title' => 'depending_foo',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1300,7 +1300,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
-			'depdending_foo',
+			'depending_foo',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1321,7 +1321,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_foo',
+				'title' => 'depending_foo',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1331,7 +1331,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertRegExp(
-			'/<a href=.*' . $dependingEventUid . '.*>depdending_foo<\/a>/',
+			'/<a href=.*' . $dependingEventUid . '.*>depending_foo<\/a>/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1348,7 +1348,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_foo',
+				'title' => 'depending_foo',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1359,7 +1359,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'depdending_bar',
+				'title' => 'depending_bar',
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -1370,7 +1370,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertRegExp(
-			'/depdending_bar.*depdending_foo/s',
+			'/depending_bar.*depending_foo/s',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1509,6 +1509,47 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'category 1 <img src="',
+			$this->fixture->main('', array())
+		);
+	}
+
+
+	///////////////////////////////////////////////////
+	// Tests concerning the expiry in the single view
+	///////////////////////////////////////////////////
+
+	public function testSingleViewForDateRecordWithExpiryContainsExpiryDate() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $this->seminarUid,
+				'expiry' => mktime(0, 0, 0, 1, 1, 2008),
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $uid;
+
+		$this->assertContains(
+			'01.01.2008',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testSingleViewForDateRecordWithoutExpiryNotContainsExpiryLabel() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $this->seminarUid,
+				'expiry' => 0,
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $uid;
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_expiry'),
 			$this->fixture->main('', array())
 		);
 	}
