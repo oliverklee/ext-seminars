@@ -64,6 +64,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 
 		$this->seminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
@@ -930,8 +931,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
 				SEMINARS_TABLE_ATTENDANCES,
-				'user=' . $userUid . ' AND seminar=' . $seminarUid .
-					' AND hidden=1'
+				'user = ' . $userUid . ' AND seminar = ' . $seminarUid .
+					' AND hidden = 1'
 			)
 		);
 	}

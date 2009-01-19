@@ -263,6 +263,18 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testSaveToDatabaseCanUpdateExistingRecord() {
+		$this->fixture->saveToDatabase(array('title' => 'new title'));
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				SEMINARS_TABLE_TEST,
+				'title = "new title"'
+			)
+		);
+	}
+
 	public function testCommitToDbWillNotWriteIncompleteRecords() {
 		$virginFixture = new tx_seminars_test(0);
 		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST);

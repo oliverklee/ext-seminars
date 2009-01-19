@@ -576,9 +576,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				);
 
 				if ($this->registration->getUser() == $this->getFeUserUid()) {
-					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+					tx_oelib_db::update(
 						SEMINARS_TABLE_ATTENDANCES,
-						SEMINARS_TABLE_ATTENDANCES.'.uid='.$registrationUid,
+						SEMINARS_TABLE_ATTENDANCES .
+							'.uid = ' . $registrationUid,
 						array(
 							'hidden' => 1,
 							'tstamp' => time()
@@ -628,9 +629,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				}
 
 				if ($registration->getSeats() <= $vacancies) {
-					$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+					tx_oelib_db::update(
 						SEMINARS_TABLE_ATTENDANCES,
-						'uid='.$registration->getUid(),
+						'uid = ' . $registration->getUid(),
 						array(
 							'registration_queue' => 0
 						)

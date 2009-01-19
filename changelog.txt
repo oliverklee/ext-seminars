@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2503] Feature: Add DB result and DB query exceptions and wrappers for executing queries
 - [#2582] Change: Load the seminar object (and its data) lazily in the registration class
 - [#2534] Feature: Add a button for canceling an event to the BE events list
 - [#2593] Feature: Show the license expiry in the "my events" list

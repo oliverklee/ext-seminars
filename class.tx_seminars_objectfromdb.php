@@ -298,14 +298,33 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				$this->recordData
 			);
 		} else {
-			$this->isInDb = (boolean) $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+			tx_oelib_db::update(
 				$this->tableName,
-				'uid='.$this->getUid(),
+				'uid = ' . $this->getUid(),
 				$this->recordData
 			);
+			$this->isInDb = true;
 		}
 
 		return $this->isInDb;
+	}
+
+	/**
+	 * Commits the changes of an record to the database.
+	 *
+	 * @param array an associative array with the keys being the field names
+	 *              and the value being the field values, may be empty
+	 */
+	public function saveToDatabase(array $updateArray) {
+		if (empty($updateArray)) {
+			return;
+		}
+
+		tx_oelib_db::update(
+			$this->tableName,
+			'uid = ' . $this->getUid(),
+			$updateArray
+		);
 	}
 
 	/**
@@ -534,22 +553,6 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 
 		return '<img src="'.$imageURL.'" title="id='.$this->getUid()
 			.'" alt="'.$this->getUid().'" />';
-	}
-
-	/**
-	 * Commits the changes of an record to the database.
-	 *
-	 * @param array an associative array with the keys being the field names
-	 *              and the value being the field values
-	 */
-	public function saveToDatabase(array $updateArray) {
-		if (count($updateArray)) {
-			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-				$this->tableName,
-				'uid='.$this->getUid(),
-				$updateArray
-			);
-		}
 	}
 
 	/**
