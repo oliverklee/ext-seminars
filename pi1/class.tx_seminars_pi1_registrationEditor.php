@@ -1536,12 +1536,16 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                and the last page
 	 */
 	public function getStepCounter() {
-		$currentPageNumberForDisplay = $this->plugin->getConfValueInteger(
-			'numberOfFirstRegistrationPage'
-		) + $this->currentPageNumber;
 		$lastPageNumberForDisplay = $this->plugin->getConfValueInteger(
 			'numberOfLastRegistrationPage'
 		);
+
+		$currentPageNumber = $this->plugin->getConfValueInteger(
+			'numberOfFirstRegistrationPage'
+		) + $this->currentPageNumber;
+
+		$currentPageNumberForDisplay
+			= min($lastPageNumberForDisplay, $currentPageNumber);
 
 		// Decreases $lastPageNumberForDisplay by one if we only have 2 clicks
 		// to registration.
