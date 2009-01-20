@@ -1,4 +1,4 @@
-0.7.1 (currently working on)
+0.7.1 (released 2009-01-20)
 - [#2154] Fix: Step counter shows "step 3 of 2" after failed submit attempt on page 2
 - [#788] Fix: Use t3lib_div::trimExplode instead of explode
 - [#2592] Fix: Fix a few typos in the unit tests
