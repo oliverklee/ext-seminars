@@ -546,12 +546,14 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 			&& !$this->seminar->isConfirmed()
 			&& !$this->seminar->hasStarted()
 		) {
-			$result = '<form action="index.php">' .
-				'<p><input type="submit" value="' .
+			$pageData = $this->page->getPageData();
+			$result = '<form action="index.php?id=' . $pageData['uid'] .
+				'&amp;subModule=1" method="post"><p><input type="submit" value="' .
 				$GLOBALS['LANG']->getLL('eventlist_button_confirm') . '" />' .
 				'<input type="hidden" name="eventUid" value="' .
 				$this->seminar->getUid() . '" />' .
-				'<input type="hidden" name="action" value="confirm" /></p></form>';
+				'<input type="hidden" name="action" value="confirmEvent" />' .
+				'</p></form>';
 		}
 
 		return $result;

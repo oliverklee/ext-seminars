@@ -193,11 +193,16 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 					$this->content .= $organizersList->show();
 					break;
 				case 1:
-					$eventsListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_mod2_eventslist'
-					);
-					$eventsList = new $eventsListClassname($this);
-					$this->content .= $eventsList->show();
+					if ($this->isConfirmEventFormRequested()) {
+						$this->content .= $this->getConfirmEventMailForm();
+					} else {
+						$eventsListClassname = t3lib_div::makeInstanceClassName(
+							'tx_seminars_mod2_eventslist'
+						);
+						$eventsList = new $eventsListClassname($this);
+						$this->content .= $eventsList->show();
+						$eventsList->__destruct();
+					}
 				default:
 					$this->content .= '';
 					break;
@@ -220,6 +225,40 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 
 		// Output the whole content.
 		echo $this->content;
+	}
+
+	/**
+	 * Checks whether the user requested the form for confirming an event and
+	 * whether all pre-conditions for showing the form are met.
+	 *
+	 * @return boolean true if the form was requested and pre-conditions are met, false otherwise
+	 */
+	private function isConfirmEventFormRequested() {
+		if (!intval(t3lib_div::_POST('eventUid')) > 0) {
+			return false;
+		}
+
+		return t3lib_div::_POST('action') == 'confirmEvent';
+	}
+
+	/**
+	 * Returns the form to confirm an event.
+	 *
+	 * @return string the HTML source for the form
+	 */
+	private function getConfirmEventMailForm() {
+		$formClassName = t3lib_div::makeInstanceClassName(
+			'tx_seminars_mod2_ConfirmEventMailForm'
+		);
+		$form = new $formClassName(
+			intval(t3lib_div::GPvar('eventUid'))
+		);
+		$form->setPostData(t3lib_div::_POST());
+
+		$result = $form->render();
+		$form->__destruct();
+
+		return $result;
 	}
 
 	/**

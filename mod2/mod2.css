@@ -78,3 +78,48 @@ td.cancel_button input {
 	background: #fff url("icon_canceled.png") no-repeat 2px 1px;
 	padding: 2px 2px 1px 17px;
 }
+
+#EventMailForm label {
+	display: block;
+	width: 80px;
+	float: left;
+}
+
+#EventMailForm input,
+#EventMailForm select {
+	width: 350px;
+	margin-bottom: 5px;
+}
+
+#EventMailForm textarea {
+	width: 350px;
+	height: 300px;
+	margin-bottom: 5px;
+}
+
+#EventMailForm .confirmButton {
+	width: 160px;
+	margin-left: 30px;
+	background: #fff url("icon_confirmed.png") no-repeat 2px 1px;
+	padding: 2px 2px 1px 17px;
+}
+
+#EventMailForm .cancelButton {
+	width: 160px;
+	margin-left: 80px;
+	background: #fff url("icon_canceled.png") no-repeat 2px 1px;
+	padding: 2px 2px 1px 17px;
+	float: left;
+}
+
+#EventMailForm .error,
+#EventMailForm .error {
+	border: 1px solid red;
+}
+
+#EventMailForm .EventMailForm_error {
+	color: red;
+	font-weight: bold;
+	margin-left: 5px;
+	position: absolute;
+}
