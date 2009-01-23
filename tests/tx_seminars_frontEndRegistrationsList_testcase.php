@@ -460,5 +460,28 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			$this->fixture->render()
 		);
 	}
+
+	public function testRenderSeparatesMultipleRegistrationsWithTableRows() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'uid'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+
+		$feUserUid = $this->testingFramework->createAndLogInFrontEndUser();
+		$secondRegistration = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->seminarUid,
+				'user' => $feUserUid,
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'] + 500,
+			)
+		);
+
+		$this->assertRegExp(
+			'/' . $this->registrationUid . '<\/td>.*<\/tr>' .
+				'.*<tr>.*<td>' . $secondRegistration . '/s',
+			$this->fixture->render()
+		);
+	}
 }
 ?>
