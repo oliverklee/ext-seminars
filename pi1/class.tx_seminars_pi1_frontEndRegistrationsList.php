@@ -236,14 +236,14 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 			);
 
 			foreach ($registrationBag as $registration) {
-				$tableBodyRow = '';
+				$tableColumns = '';
 
 				foreach ($frontEndUserFields as $field) {
 					$this->setMarker(
 						'registrations_list_item',
 						$registration->getUserData($field)
 					);
-					$tableBodyRow .= $this->getSubpart(
+					$tableColumns .= $this->getSubpart(
 						'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM'
 					);
 				}
@@ -253,16 +253,21 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 						'registrations_list_item',
 						$registration->getRegistrationData($field)
 					);
-					$tableBodyRow .= $this->getSubpart(
+					$tableColumns .= $this->getSubpart(
 						'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM'
 					);
 				}
-
-				$tableBody .= $tableBodyRow;
+				$this->setMarker(
+					'registrations_list_row',
+					$tableColumns
+				);
+				$tableRows .= $this->getSubpart(
+					'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY'
+				);
 			}
 
 			$this->setSubpart(
-				'registrations_list_table_body_item', $tableBody, 'wrapper'
+				'registrations_list_table_body', $tableRows, 'wrapper'
 			);
 			$this->hideSubparts('registrations_list_message', 'wrapper');
 		} else {
