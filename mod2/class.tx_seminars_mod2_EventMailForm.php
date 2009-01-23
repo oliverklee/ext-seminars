@@ -286,6 +286,27 @@ abstract class tx_seminars_mod2_EventMailForm {
 	}
 
 	/**
+	 * Returns either a default value or the value that was sent via POST data
+	 * for a given field.
+	 *
+	 * For the subject field, we fill in the event's title and date after the
+	 * default subject for confirming an event.
+	 *
+	 * @param string the field name, must not be empty
+	 *
+	 * @return string either the data from POST array or a default value for this field
+	 */
+	protected function fillFormElement($fieldName) {
+		if ($this->isSubmitted()) {
+			$result = $this->getPostData($fieldName);
+		} else {
+			$result = $this->getInitialValue($fieldName);
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Sets the POST data.
 	 *
 	 * @param array associative array with the POST data, may be empty
@@ -335,18 +356,14 @@ abstract class tx_seminars_mod2_EventMailForm {
 	abstract protected function createSubmitButton();
 
 	/**
-	 * Returns either a default value or the value that was sent via POST data
-	 * for a given field.
-	 *
-	 * For the subject field, we fill in the event's title and date after the
-	 * default subject for confirming an event.
+	 * Returns the initial value for a certain field.
 	 *
 	 * @param string the field name, must not be empty
 	 *
-	 * @return string either the data from POST array or a default value for this
-	 *                field, not htmlspecialchars'ed yet
+	 * @return string the initial value of the field, will be empty if no
+	 *                initial value is defined
 	 */
-	abstract protected function fillFormElement($fieldName);
+	abstract protected function getInitialValue($fieldName);
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_EventMailForm.php']) {

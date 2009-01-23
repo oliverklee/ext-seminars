@@ -47,28 +47,20 @@ class tx_seminars_tests_fixtures_TestingEventMailForm extends tx_seminars_mod2_E
 	}
 
 	/**
-	 * Returns either a default value or the value that was sent via POST data
-	 * for a given field.
-	 *
-	 * For the subject field, we fill in the event's title and date after the
-	 * default subject for confirming an event.
+	 * Returns the initial value for a certain field.
 	 *
 	 * @param string the field name, must not be empty
 	 *
-	 * @return string either the data from POST array or a default value for this
-	 *                field, not htmlspecialchars'ed yet
+	 * @return string the initial value of the field, will be empty if no
+	 *                initial value is defined
 	 */
-	protected function fillFormElement($fieldName) {
-		if ($this->isSubmitted()) {
-			$result = $this->getPostData($fieldName);
-		} else {
-			$result = $GLOBALS['LANG']->getLL(
-				'eventMailForm_prefillFieldForConfirmation_' . $fieldName
-			);
-			if ($fieldName == 'subject') {
-				$this->getEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
-				$result .= ' ' . $this->getEvent()->getTitleAndDate('-');
-			}
+	protected function getInitialValue($fieldName) {
+		$result = $GLOBALS['LANG']->getLL(
+			'eventMailForm_prefillFieldForConfirmation_' . $fieldName
+		);
+		if ($fieldName == 'subject') {
+			$this->getEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+			$result .= ' ' . $this->getEvent()->getTitleAndDate();
 		}
 
 		return $result;
