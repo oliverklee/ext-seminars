@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2624] Fix: Crash in the EM
 - [#2637] Fix: Tables rows in FE registration list not are on the same line
 - [#2533] Feature: Add form for confirming an event to the BE module
 - [#2620] Fix: seminar::getOrganizers destructs the organizers at the wrong place

@@ -22,6 +22,9 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+if (t3lib_extMgm::isLoaded('oelib')) {
+	require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+}
 if (t3lib_extMgm::isLoaded('seminars')) {
 	require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 }
@@ -56,8 +59,14 @@ class ext_update {
 			return false;
 		}
 
-		return $this->needsToUpdateEventOrganizerRelations()
-			&& $this->hasEventsWithOrganizers();
+		try {
+			$result = $this->needsToUpdateEventOrganizerRelations()
+				&& $this->hasEventsWithOrganizers();
+		} catch (tx_oelib_Exception_Database $exception) {
+			$result = false;
+		}
+
+		return $result;
 	}
 
 	/**
@@ -69,15 +78,15 @@ class ext_update {
 	private function updateEventOrganizerRelations() {
 		$result = '<h2>Updating event-organizer-relations:</h2>';
 		$result .= '<ul>';
+
 		// Gets all events which have an organizer set.
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid, title, organizers',
 			SEMINARS_TABLE_SEMINARS,
 			SEMINARS_TABLE_SEMINARS . '.organizers<>0'
 		);
-
 		if (!$dbResult) {
-			throw new Exception(DATABASE_RESULT_ERROR);
+			throw new tx_oelib_Exception_Database();
 		}
 
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
@@ -129,9 +138,8 @@ class ext_update {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS count', SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM, '1=1'
 		);
-
 		if (!$dbResult) {
-			throw new Exception(DATABASE_RESULT_ERROR);
+			throw new tx_oelib_Exception_Database();
 		}
 
 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
@@ -153,9 +161,8 @@ class ext_update {
 			SEMINARS_TABLE_SEMINARS,
 			SEMINARS_TABLE_SEMINARS . '.organizers<>0'
 		);
-
 		if (!$dbResult) {
-			throw new Exception(DATABASE_RESULT_ERROR);
+			throw new tx_oelib_Exception_Database();
 		}
 
 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
