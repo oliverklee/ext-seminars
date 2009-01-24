@@ -617,10 +617,13 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			array('user' => $this->testingFramework->createFrontEndUser())
 		);
 		$this->fixture->limitToExistingUsers();
+		$bag = $this->fixture->build();
 
 		$this->assertFalse(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToExistingUsersDoesNotFindRegistrationWithDeletedUser() {
@@ -634,10 +637,13 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			array('user' => $feUserUid)
 		);
 		$this->fixture->limitToExistingUsers();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 }
 ?>

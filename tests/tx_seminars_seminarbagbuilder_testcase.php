@@ -59,9 +59,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBuilderBuildsABagChildObject() {
+		$bag = $this->fixture->build();
+
 		$this->assertTrue(
-			is_subclass_of($this->fixture->build(), 'tx_seminars_bag')
+			is_subclass_of($bag, 'tx_seminars_bag')
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresHiddenEventsByDefault() {
@@ -148,11 +152,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEmptyCategoryUidResultsInAllEvents() {
@@ -173,11 +180,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories('');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEmptyCategoryAfterLimitToNotEmptyCategoriesUidResultsInAllEvents() {
@@ -199,11 +209,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToCategories($categoryUid);
 		$this->fixture->limitToCategories('');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesCanResultInOneEvent() {
@@ -219,11 +232,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesCanResultInTwoEvents() {
@@ -248,11 +264,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesWillExcludeUnassignedEvents() {
@@ -283,6 +302,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesWillExcludeEventsOfOtherCategories() {
@@ -319,6 +340,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid1,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesResultsInAnEmptyBagIfThereAreNoMatches() {
@@ -343,10 +366,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid2);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesIgnoresTopicRecords() {
@@ -362,10 +388,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesFindsDateRecordForTopic() {
@@ -388,8 +417,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid);
-
 		$bag = $this->fixture->build();
+
 		$this->assertEquals(
 			1,
 			$bag->count()
@@ -398,6 +427,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesFindsDateRecordForSingle() {
@@ -420,11 +451,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesIgnoresTopicOfDateRecord() {
@@ -454,10 +488,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid2);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCategoriesCanFindEventsFromMultipleCategories() {
@@ -484,11 +521,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToCategories($categoryUid1 . ','  . $categoryUid2);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -507,11 +547,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToPlaces(array($siteUid));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesIgnoresEventsWithoutPlace() {
@@ -520,10 +563,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->fixture->limitToPlaces(array($siteUid));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesFindsEventsInTwoPlaces() {
@@ -546,11 +592,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid2
 		);
 		$this->fixture->limitToPlaces(array($siteUid1, $siteUid2));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesWithEmptyPlacesArrayFindsAllEvents() {
@@ -560,11 +609,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToPlaces(array($siteUid));
 		$this->fixture->limitToPlaces();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesIgnoresEventsWithDifferentPlace() {
@@ -577,10 +629,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $siteUid1
 		);
 		$this->fixture->limitToPlaces(array($siteUid2));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesWithOnePlaceFindsEventInTwoPlaces() {
@@ -596,11 +651,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $siteUid2
 		);
 		$this->fixture->limitToPlaces(array($siteUid1));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -613,11 +671,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array('cancelled' => 1)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresCanceledEventsWithHideCanceledEvents() {
@@ -627,10 +688,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->ignoreCanceledEvents();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderFindsConfirmedEventsWithHideCanceledEvents() {
@@ -640,11 +704,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->ignoreCanceledEvents();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderFindsCanceledEventsWithHideCanceledEventsDisabled() {
@@ -654,11 +721,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->allowCanceledEvents();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderFindsCanceledEventsWithHideCanceledEventsEnabledThenDisabled() {
@@ -669,11 +739,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->ignoreCanceledEvents();
 		$this->fixture->allowCanceledEvents();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresCanceledEventsWithHideCanceledDisabledThenEnabled() {
@@ -684,10 +757,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->allowCanceledEvents();
 		$this->fixture->ignoreCanceledEvents();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -730,11 +806,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('past');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastFindsOpenEndedPastEvents() {
@@ -747,11 +826,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('past');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresCurrentEvents() {
@@ -764,10 +846,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('past');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresUpcomingEvents() {
@@ -780,10 +865,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('past');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresUpcomingOpenEndedEvents() {
@@ -796,10 +884,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('past');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresEventsWithoutDate() {
@@ -812,10 +903,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('past');
+		$bag = $this->fixture->build();
+
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -835,11 +930,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentFindsOpenEndedPastEvents() {
@@ -852,11 +950,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentFindsCurrentEvents() {
@@ -869,11 +970,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentIgnoresUpcomingEvents() {
@@ -886,10 +990,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentIgnoresUpcomingOpenEndedEvents() {
@@ -902,10 +1009,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentIgnoresEventsWithoutDate() {
@@ -918,10 +1028,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('pastAndCurrent');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -941,10 +1054,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('current');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresOpenEndedPastEvents() {
@@ -957,10 +1073,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('current');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentFindsCurrentEvents() {
@@ -973,11 +1092,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('current');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresUpcomingEvents() {
@@ -990,10 +1112,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('current');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresUpcomingOpenEndedEvents() {
@@ -1006,10 +1131,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('current');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresEventsWithoutDate() {
@@ -1022,10 +1150,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('current');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -1045,10 +1176,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingIgnoresOpenEndedPastEvents() {
@@ -1061,10 +1195,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsCurrentEvents() {
@@ -1077,11 +1214,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsUpcomingEvents() {
@@ -1094,11 +1234,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsUpcomingOpenEndedEvents() {
@@ -1111,11 +1254,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsEventsWithoutDate() {
@@ -1128,11 +1274,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('currentAndUpcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -1152,10 +1301,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('upcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingIgnoresOpenEndedPastEvents() {
@@ -1168,10 +1320,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('upcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingIgnoresCurrentEvents() {
@@ -1184,10 +1339,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('upcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingFindsUpcomingEvents() {
@@ -1200,11 +1358,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('upcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingFindsUpcomingOpenEndedEvents() {
@@ -1217,11 +1378,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('upcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingFindsEventsWithoutDate() {
@@ -1234,11 +1398,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('upcoming');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -1259,10 +1426,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverIgnoresOpenEndedPastEvents() {
@@ -1276,10 +1446,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverIgnoresCurrentEvents() {
@@ -1293,10 +1466,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsUpcomingEvents() {
@@ -1310,11 +1486,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsUpcomingEventsWithUpcomingDeadline() {
@@ -1328,11 +1507,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverIgnoresUpcomingEventsWithPassedDeadline() {
@@ -1346,10 +1528,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsUpcomingOpenEndedEvents() {
@@ -1363,11 +1548,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsEventsWithoutDate() {
@@ -1381,11 +1569,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('deadlineNotOver');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -1405,11 +1596,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('all');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsOpenEndedPastEvents() {
@@ -1422,11 +1616,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('all');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsCurrentEvents() {
@@ -1439,11 +1636,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('all');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsUpcomingEvents() {
@@ -1456,11 +1656,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('all');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsUpcomingOpenEndedEvents() {
@@ -1473,11 +1676,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('all');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsEventsWithoutDate() {
@@ -1490,11 +1696,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setTimeFrame('all');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -1518,11 +1727,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'event_type' => $typeUid,
 			)
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEmptyTypeUidResultsInAllEvents() {
@@ -1543,11 +1755,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEmptyTypeUidAfterLimitToNotEmptyTypesResultsInAllEvents() {
@@ -1569,11 +1784,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToEventTypes(array($typeUid));
 		$this->fixture->limitToEventTypes();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesCanResultInOneEvent() {
@@ -1589,11 +1807,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesCanResultInTwoEvents() {
@@ -1616,11 +1837,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesWillExcludeUnassignedEvents() {
@@ -1651,6 +1875,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesWillExcludeEventsOfOtherTypes() {
@@ -1687,6 +1913,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid1,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesResultsInAnEmptyBagIfThereAreNoMatches() {
@@ -1711,10 +1939,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid2));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesIgnoresTopicRecords() {
@@ -1730,10 +1961,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesFindsDateRecordForTopic() {
@@ -1756,8 +1990,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid));
-
 		$bag = $this->fixture->build();
+
 		$this->assertEquals(
 			1,
 			$bag->count()
@@ -1766,6 +2000,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesFindsDateRecordForSingle() {
@@ -1788,11 +2024,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesIgnoresTopicOfDateRecord() {
@@ -1820,10 +2059,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid2));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesCanFindEventsFromMultipleTypes() {
@@ -1850,11 +2092,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid1, $typeUid2));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -1877,11 +2122,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCities(array('test city 1'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesIgnoresEventsInOtherCity() {
@@ -1899,10 +2147,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCities(array('test city 1'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithTwoCitiesFindsEventsEachInOneOfBothCities() {
@@ -1933,11 +2184,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid2
 		);
 		$this->fixture->limitToCities(array('test city 1', 'test city 2'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithEmptyCitiesArrayFindsEventsWithCities() {
@@ -1956,11 +2210,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCities(array('test city 2'));
 		$this->fixture->limitToCities();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesIgnoresEventsWithDifferentCity() {
@@ -1978,10 +2235,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCities(array('test city 2'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesIgnoresEventWithPlaceWithoutCity() {
@@ -1996,10 +2256,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCities(array('test city 1'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithTwoCitiesFindsOneEventInBothCities() {
@@ -2026,11 +2289,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid2
 		);
 		$this->fixture->limitToCities(array('test city 1', 'test city 2'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithOneCityFindsEventInTwoCities() {
@@ -2057,11 +2323,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid2
 		);
 		$this->fixture->limitToCities(array('test city 1'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithTwoCitiesOneDifferentFindsEventInOneOfTheCities() {
@@ -2088,11 +2357,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid2
 		);
 		$this->fixture->limitToCities(array('test city 2', 'test city 3'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2115,11 +2387,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCountries(array('DE'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesIgnoresEventsInOtherCountry() {
@@ -2137,10 +2412,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCountries(array('US'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesFindsEventsInTwoCountries() {
@@ -2171,11 +2449,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid2
 		);
 		$this->fixture->limitToCountries(array('US', 'DE'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesWithEmptyCountriesArrayFindsAllEvents() {
@@ -2194,11 +2475,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToCountries(array('DE'));
 		$this->fixture->limitToCountries();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesIgnoresEventsWithDifferentCountry() {
@@ -2216,10 +2500,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCountries(array('US'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesIgnoresEventsWithPlaceWithoutCountry() {
@@ -2234,10 +2521,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid
 		);
 		$this->fixture->limitToCountries(array('DE'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesWithOneCountryFindsEventInTwoCountries() {
@@ -2264,11 +2554,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$siteUid2
 		);
 		$this->fixture->limitToCountries(array('US'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2282,11 +2575,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('language' => 'DE')
 		);
 		$this->fixture->limitToLanguages(array('DE'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesFindsEventsInTwoLanguages() {
@@ -2299,11 +2595,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('language' => 'DE')
 		);
 		$this->fixture->limitToLanguages(array('EN', 'DE'));
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesWithEmptyLanguagesArrayFindsAllEvents() {
@@ -2313,11 +2612,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToLanguages(array('DE'));
 		$this->fixture->limitToLanguages();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesIgnoresEventsWithDifferentLanguage() {
@@ -2326,10 +2628,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('language' => 'DE')
 		);
 		$this->fixture->limitToLanguages(array('EN'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesIgnoresEventsWithoutLanguage() {
@@ -2337,10 +2642,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->fixture->limitToLanguages(array('EN'));
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2354,11 +2662,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->fixture->limitToTopicRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTopicRecordsIgnoresSingleEventRecords() {
@@ -2367,10 +2678,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
 		);
 		$this->fixture->limitToTopicRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTopicRecordsIgnoresEventDateRecords() {
@@ -2379,10 +2693,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_DATE)
 		);
 		$this->fixture->limitToTopicRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2397,11 +2714,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToTopicRecords();
 		$this->fixture->removeLimitToTopicRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToTopicRecordsFindsEventDateRecords() {
@@ -2411,11 +2731,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToTopicRecords();
 		$this->fixture->removeLimitToTopicRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2438,11 +2761,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('owner_feuser' => $feUserUid)
 		);
 		$this->fixture->limitToOwner($feUserUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithoutOwner() {
@@ -2451,10 +2777,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->fixture->limitToOwner($feUserUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithDifferentOwner() {
@@ -2464,10 +2793,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('owner_feuser' => ($feUserUid + 1))
 		);
 		$this->fixture->limitToOwner($feUserUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithoutOwner() {
@@ -2477,11 +2809,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToOwner($feUserUid);
 		$this->fixture->limitToOwner(0);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithOwner() {
@@ -2492,11 +2827,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToOwner($feUserUid);
 		$this->fixture->limitToOwner(0);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2510,11 +2848,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_DATE)
 		);
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToDateAndSingleRecordsFindsSingleRecords() {
@@ -2523,11 +2864,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
 		);
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToDateAndSingleRecordsIgnoresTopicRecords() {
@@ -2536,10 +2880,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToDateAndSingleRecordsFindsTopicRecords() {
@@ -2549,11 +2896,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToDateAndSingleRecords();
 		$this->fixture->removeLimitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2582,11 +2932,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventManager($feUserUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventManagerWithPositiveFeUserUidIgnoresEventsWithoutEventManager() {
@@ -2596,10 +2949,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToEventManager($feUserUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventManagerWithZeroFeUserUidFindsEventsWithoutEventManager() {
@@ -2610,11 +2966,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->limitToEventManager($feUserUid);
 		$this->fixture->limitToEventManager(0);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2634,14 +2993,17 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'end_date' => (60 * 60 + 2 * ONE_DAY),
 				)
 		);
-		$this->fixture->limitToEventsNextDay(
-			new tx_seminars_seminar($eventUid1)
-		);
+		$event = new tx_seminars_seminar($eventUid1);
+		$this->fixture->limitToEventsNextDay($event);
+		$bag = $this->fixture->build();
+		$event->__destruct();
 
 		$this->assertEquals(
 			$eventUid2,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsNextDayIgnoresEarlierEvents() {
@@ -2656,13 +3018,16 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'end_date' => (60 * 60),
 				)
 		);
-		$this->fixture->limitToEventsNextDay(
-			new tx_seminars_seminar($eventUid)
-		);
+		$event = new tx_seminars_seminar($eventUid);
+		$this->fixture->limitToEventsNextDay($event);
+		$bag = $this->fixture->build();
+		$event->__destruct();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsNextDayIgnoresEventsLaterThanOneDay() {
@@ -2677,13 +3042,16 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 				'end_date' => (60 * 60 + 3 * ONE_DAY),
 				)
 		);
-		$this->fixture->limitToEventsNextDay(
-			new tx_seminars_seminar($eventUid)
-		);
+		$event = new tx_seminars_seminar($eventUid);
+		$this->fixture->limitToEventsNextDay($event);
+		$bag = $this->fixture->build();
+		$event->__destruct();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToEventsNextDayWithEventWithEmptyEndDateThrowsException() {
@@ -2727,11 +3095,15 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$date = new tx_seminars_seminar($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
+		$bag = $this->fixture->build();
+		$date->__destruct();
 
 		$this->assertEquals(
 			$dateUid2,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToOtherDatesForTopicWithTopicRecordFindsAllDatesForTopic() {
@@ -2755,11 +3127,15 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$topic = new tx_seminars_seminar($topicUid);
 		$this->fixture->limitToOtherDatesForTopic($topic);
+		$bag = $this->fixture->build();
+		$topic->__destruct();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToOtherDatesForTopicWithSingleEventRecordThrowsException() {
@@ -2801,10 +3177,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$date = new tx_seminars_seminar($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
+		$bag = $this->fixture->build();
+		$date->__destruct();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToOtherDatesForTopicIgnoresSingleEventRecordWithTopic() {
@@ -2828,10 +3208,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$date = new tx_seminars_seminar($dateUid);
 		$this->fixture->limitToOtherDatesForTopic($date);
+		$bag = $this->fixture->build();
+		$date->__destruct();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToOtherDatesForTopicRemovesLimitAndFindsAllDateAndTopicRecords() {
@@ -2860,11 +3244,15 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$date = new tx_seminars_seminar($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$this->fixture->removeLimitToOtherDatesForTopic();
+		$bag = $this->fixture->build();
+		$date->__destruct();
 
 		$this->assertEquals(
 			4,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToOtherDatesForTopicFindsSingleEventRecords() {
@@ -2889,11 +3277,15 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$date = new tx_seminars_seminar($dateUid);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$this->fixture->removeLimitToOtherDatesForTopic();
+		$bag = $this->fixture->build();
+		$date->__destruct();
 
 		$this->assertEquals(
 			3,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -2906,11 +3298,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch(',,');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByTwoSpacesFindsEvents() {
@@ -2918,11 +3313,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo  bar');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoCommasSeparatedByTwoSpacesFindsAllEvents() {
@@ -2930,11 +3328,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch(',  ,');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTooShortSearchWordFindsAllEvents() {
@@ -2942,11 +3343,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('title' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch('o');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInAccreditationNumber() {
@@ -2958,11 +3362,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInAccreditationNumber() {
@@ -2974,10 +3381,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTitle() {
@@ -2986,11 +3396,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTitle() {
@@ -2999,10 +3412,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSubtitle() {
@@ -3011,11 +3427,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('subtitle' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSubtitle() {
@@ -3024,10 +3443,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('subtitle' => 'bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTeaser() {
@@ -3036,11 +3458,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('teaser' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTeaser() {
@@ -3049,10 +3474,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('teaser' => 'bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInDescription() {
@@ -3061,11 +3489,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('description' => 'foo bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInDescription() {
@@ -3074,10 +3505,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('description' => 'bar event')
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerTitle() {
@@ -3098,11 +3532,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerTitle() {
@@ -3123,10 +3560,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerOrganization() {
@@ -3147,11 +3587,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerOrganization() {
@@ -3172,10 +3615,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerDescription() {
@@ -3196,11 +3642,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerDescription() {
@@ -3221,10 +3670,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerTitle() {
@@ -3245,11 +3697,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerTitle() {
@@ -3270,10 +3725,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerOrganization() {
@@ -3294,11 +3752,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerOrganization() {
@@ -3319,10 +3780,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerDescription() {
@@ -3343,11 +3807,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerDescription() {
@@ -3368,10 +3835,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorTitle() {
@@ -3392,11 +3862,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorTitle() {
@@ -3417,10 +3890,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorOrganization() {
@@ -3441,11 +3917,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorOrganization() {
@@ -3466,10 +3945,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorDescription() {
@@ -3490,11 +3972,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorDescription() {
@@ -3515,10 +4000,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderTitle() {
@@ -3539,11 +4027,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderTitle() {
@@ -3564,10 +4055,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderOrganization() {
@@ -3588,11 +4082,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderOrganization() {
@@ -3613,10 +4110,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderDescription() {
@@ -3637,11 +4137,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderDescription() {
@@ -3662,10 +4165,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceTitle() {
@@ -3686,11 +4192,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceTitle() {
@@ -3711,10 +4220,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceAddress() {
@@ -3735,11 +4247,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceAddress() {
@@ -3760,10 +4275,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceCity() {
@@ -3784,11 +4302,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceCity() {
@@ -3809,10 +4330,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInEventTypeTitle() {
@@ -3828,11 +4352,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInEventTypeTitle() {
@@ -3848,10 +4375,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInOrganizerTitle() {
@@ -3872,11 +4402,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInOrganizerTitle() {
@@ -3897,10 +4430,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTargetGroupTitle() {
@@ -3921,11 +4457,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$targetGroupUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTargetGroupTitle() {
@@ -3946,10 +4485,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$targetGroupUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInCategoryTitle() {
@@ -3970,11 +4512,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$categoryUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInCategoryTitle() {
@@ -3995,10 +4540,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$categoryUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedBySpaceFindsTwoEventsWithSearchWordsInTitle() {
@@ -4007,11 +4555,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo event bar')
 		);
 		$this->fixture->limitToFullTextSearch('foo bar');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByCommaFindsTwoEventsWithSearchWordsInTitle() {
@@ -4020,11 +4571,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo event bar')
 		);
 		$this->fixture->limitToFullTextSearch('foo,bar');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -4049,11 +4603,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$dateUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTitle() {
@@ -4073,10 +4630,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicSubtitle() {
@@ -4096,11 +4656,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$dateUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicSubtitle() {
@@ -4120,10 +4683,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicTeaser() {
@@ -4143,11 +4709,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$dateUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTeaser() {
@@ -4167,10 +4736,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicDescription() {
@@ -4190,11 +4762,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$dateUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicDescription() {
@@ -4214,10 +4789,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicCategoryTitle() {
@@ -4246,11 +4824,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$dateUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicCategoryTitle() {
@@ -4279,10 +4860,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicTargetGroupTitle() {
@@ -4311,11 +4895,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$dateUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTargetGroupTitle() {
@@ -4344,10 +4931,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicEventTypeTitle() {
@@ -4371,11 +4961,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$dateUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicEventTypeTitle() {
@@ -4399,10 +4992,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->limitToFullTextSearch('foo');
 		$this->fixture->limitToDateAndSingleRecords();
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -4419,11 +5015,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInAccreditationNumber() {
@@ -4435,10 +5034,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInOrganizerTitle() {
@@ -4459,11 +5061,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInOrganizerTitle() {
@@ -4484,10 +5089,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerTitle() {
@@ -4508,11 +5116,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerTitle() {
@@ -4533,10 +5144,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerOrganization() {
@@ -4557,11 +5171,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerOrganization() {
@@ -4582,10 +5199,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerDescription() {
@@ -4606,11 +5226,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerDescription() {
@@ -4631,10 +5254,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerTitle() {
@@ -4655,11 +5281,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerTitle() {
@@ -4680,10 +5309,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerOrganization() {
@@ -4704,11 +5336,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerOrganization() {
@@ -4729,10 +5364,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerDescription() {
@@ -4753,11 +5391,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerDescription() {
@@ -4778,10 +5419,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorTitle() {
@@ -4802,11 +5446,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorTitle() {
@@ -4827,10 +5474,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorOrganization() {
@@ -4851,11 +5501,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorOrganization() {
@@ -4876,10 +5529,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorDescription() {
@@ -4900,11 +5556,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorDescription() {
@@ -4925,10 +5584,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderTitle() {
@@ -4949,11 +5611,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderTitle() {
@@ -4974,10 +5639,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderOrganization() {
@@ -4998,11 +5666,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderOrganization() {
@@ -5023,10 +5694,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderDescription() {
@@ -5047,11 +5721,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderDescription() {
@@ -5072,10 +5749,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$speakerUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceTitle() {
@@ -5096,11 +5776,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceTitle() {
@@ -5121,10 +5804,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceAddress() {
@@ -5145,11 +5831,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceAddress() {
@@ -5170,10 +5859,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceCity() {
@@ -5194,11 +5886,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$eventUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceCity() {
@@ -5219,10 +5914,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$placeUid
 		);
 		$this->fixture->limitToFullTextSearch('foo');
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -5245,11 +5943,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$requiredEventUid
 		);
 		$this->fixture->limitToRequiredEventTopics($eventUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToRequiredEventsCanFindTwoRequiredEvents() {
@@ -5276,11 +5977,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToRequiredEventTopics($eventUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToRequiredEventsFindsOnlyRequiredEvents() {
@@ -5307,17 +6011,18 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToRequiredEventTopics($eventUid);
-
-		$foundEvents = $this->fixture->build();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$foundEvents->count()
+			$bag->count()
 		);
 		$this->assertNotEquals(
 			$dependingEventUid,
-			$foundEvents->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -5340,11 +6045,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			$eventUid
 		);
 		$this->fixture->limitToDependingEventTopics($eventUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToDependingEventsCanFindTwoDependingEvents() {
@@ -5371,11 +6079,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToDependingEventTopics($eventUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			2,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToDependingEventsFindsOnlyDependingEvents() {
@@ -5402,17 +6113,18 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToDependingEventTopics($eventUid);
-		$foundEvents = $this->fixture->build();
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$foundEvents->count()
+			$bag->count()
 		);
-
 		$this->assertNotEquals(
 			$requiredEventUid,
-			$foundEvents->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 
@@ -5429,11 +6141,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToTopicsWithoutRegistrationByUser(
 			$this->testingFramework->createFrontEndUser()
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$topicUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserFindsTopicWithDate() {
@@ -5452,11 +6167,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToTopicsWithoutRegistrationByUser(
 			$this->testingFramework->createFrontEndUser()
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$topicUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserNotFindsDate() {
@@ -5475,11 +6193,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToTopicsWithoutRegistrationByUser(
 			$this->testingFramework->createFrontEndUser()
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserFindsTopicWithDateWithRegistrationByOtherUser() {
@@ -5505,11 +6226,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToTopicsWithoutRegistrationByUser(
 			$this->testingFramework->createFrontEndUser()
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			$topicUid,
-			$this->fixture->build()->current()->getUid()
+			$bag->current()->getUid()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithoutExpiry() {
@@ -5532,10 +6256,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithFutureExpiry() {
@@ -5558,10 +6285,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserFindsTopicWithDateRegistrationByTheUserWithPastExpiry() {
@@ -5584,11 +6314,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserAndOtherUser() {
@@ -5617,10 +6350,13 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
+		$bag = $this->fixture->build();
 
 		$this->assertTrue(
-			$this->fixture->build()->isEmpty()
+			$bag->isEmpty()
 		);
+
+		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserAndLimitToRequiredEventTopicsCanReturnOneEntry() {
@@ -5653,11 +6389,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToTopicsWithoutRegistrationByUser(
 			$this->testingFramework->createFrontEndUser()
 		);
+		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			1,
-			$this->fixture->build()->count()
+			$bag->count()
 		);
+
+		$bag->__destruct();
 	}
 }
 ?>
