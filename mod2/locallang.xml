@@ -42,14 +42,14 @@
 			<label index="eventMailForm_sender">Sender:</label>
 			<label index="eventMailForm_message">Message:</label>
 			<label index="eventMailForm_cancelButton">Cancel</label>
-			<label index="eventMailForm_confirmButton">Confirm and send</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_subject">Event confirmed:</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_messageBody">Dear %s,
-
-the event to which you are registered is confirmed now.</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Please enter a subject.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Please enter a message body.</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
+			<label index="confirmMailForm_sendButton">Confirm and send</label>
+			<label index="confirmMailForm_prefillField_subject">Event confirmed:</label>
+			<label index="confirmMailForm_prefillField_messageBody">Dear %s,
+
+the event to which you are registered is confirmed now.</label>
 			<label index="cancelMailForm_sendButton">Send cancellation</label>
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
 			<label index="cancelMailForm_prefillField_messageBody">Dear %s,
@@ -114,14 +114,14 @@ the event you're registered for has been canceled.</label>
 			<label index="eventMailForm_sender">Absender:</label>
 			<label index="eventMailForm_message">Mitteilung:</label>
 			<label index="eventMailForm_cancelButton">Abbrechen</label>
-			<label index="eventMailForm_confirmButton">Bestätigen und senden</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_subject">Veranstaltung zugesagt:</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_messageBody">Sehr geehrte/r %s,
-
-die Veranstaltung zu welcher Sie angemeldet sind, wurde nun zugesagt.</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Bitte geben Sie einen Betreff ein.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Bitte geben Sie eine Mitteilung ein.</label>
 			<label index="referencesWarning">(Es gibt %s Verbindung(en) zu diesem Datensatz!)</label>
+			<label index="confirmMailForm_sendButton">Bestätigen und senden</label>
+			<label index="confirmMailForm_prefillField_subject">Veranstaltung zugesagt:</label>
+			<label index="confirmMailForm_prefillField_messageBody">Sehr geehrte/r %s,
+
+die Veranstaltung zu welcher Sie angemeldet sind, wurde nun zugesagt.</label>
 			<label index="cancelMailForm_sendButton">Absage senden</label>
 			<label index="cancelMailForm_prefillField_subject">Veranstaltung abgesagt:</label>
 			<label index="cancelMailForm_prefillField_messageBody">Sehr geehrte/r %s,
@@ -261,9 +261,9 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="eventMailForm_sender" type="integer">208064565</label>
 			<label index="eventMailForm_message" type="integer">155215423</label>
 			<label index="eventMailForm_cancelButton" type="integer">245659783</label>
-			<label index="eventMailForm_confirmButton" type="integer">78298817</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_subject" type="integer">47880380</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_messageBody" type="integer">79844644</label>
+			<label index="confirmMailForm_sendButton" type="integer">78298817</label>
+			<label index="confirmMailForm_prefillField_subject" type="integer">47880380</label>
+			<label index="confirmMailForm_prefillField_messageBody" type="integer">79844644</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty" type="integer">9192935</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty" type="integer">54495100</label>
 			<label index="cancelMailForm_sendButton" type="integer">125778442</label>
@@ -403,9 +403,9 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="eventMailForm_sender">Sender:</label>
 			<label index="eventMailForm_message">Message:</label>
 			<label index="eventMailForm_cancelButton">Cancel</label>
-			<label index="eventMailForm_confirmButton">Confirm and send</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_subject">Event confirmed:</label>
-			<label index="eventMailForm_prefillFieldForConfirmation_messageBody">Dear %s,
+			<label index="confirmMailForm_sendButton">Confirm and send</label>
+			<label index="confirmMailForm_prefillField_subject">Event confirmed:</label>
+			<label index="confirmMailForm_prefillField_messageBody">Dear %s,
 
 the event to which you are registered is confirmed now.</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Please enter a subject.</label>

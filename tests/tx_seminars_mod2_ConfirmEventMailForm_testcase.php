@@ -133,7 +133,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 
 	public function testRenderContainsPrefilledBodyField() {
 		$this->assertContains(
-			$GLOBALS['LANG']->getLL('eventMailForm_prefillFieldForConfirmation_messageBody'),
+			$GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody'),
 			$this->fixture->render()
 		);
 	}
@@ -141,7 +141,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 	public function testRenderContainsSubmitButton() {
 		$this->assertContains(
 			'<input type="submit" value="' .
-				$GLOBALS['LANG']->getLL('eventMailForm_confirmButton') .
+				$GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
 				'" class="confirmButton" />',
 			$this->fixture->render()
 		);

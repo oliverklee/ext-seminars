@@ -46,7 +46,7 @@ class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailFo
 	 */
 	protected function createSubmitButton() {
 		return '<p><input type="submit" value="' .
-			$GLOBALS['LANG']->getLL('eventMailForm_confirmButton') .
+			$GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
 			'" class="confirmButton" /></p>';
 	}
 
@@ -60,7 +60,7 @@ class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailFo
 	 */
 	protected function getInitialValue($fieldName) {
 		$result = $GLOBALS['LANG']->getLL(
-			'eventMailForm_prefillFieldForConfirmation_' . $fieldName
+			'confirmMailForm_prefillField_' . $fieldName
 		);
 		if ($fieldName == 'subject') {
 			$result .= ' ' . $this->getEvent()->getTitleAndDate();
