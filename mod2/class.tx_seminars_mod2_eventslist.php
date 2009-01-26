@@ -514,16 +514,17 @@ class tx_seminars_mod2_eventslist extends tx_seminars_mod2_backendlist {
 	private function getCancelButton() {
 		$result = '';
 
+		$pageData = $this->page->getPageData();
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
 			&& !$this->seminar->isCanceled()
 			&& !$this->seminar->hasStarted()
 		) {
-			$result = '<form action="index.php">' .
-				'<p><input type="submit" value="' .
+			$result = '<form action="index.php?id=' . $pageData['uid'] .
+				'&amp;subModule=1" method="post"><p><input type="submit" value="' .
 				$GLOBALS['LANG']->getLL('eventlist_button_cancel') . '" />' .
 				'<input type="hidden" name="eventUid" value="' .
 				$this->seminar->getUid() . '" />' .
-				'<input type="hidden" name="action" value="cancel" /></p></form>';
+				'<input type="hidden" name="action" value="cancelEvent" /></p></form>';
 		}
 
 		return $result;

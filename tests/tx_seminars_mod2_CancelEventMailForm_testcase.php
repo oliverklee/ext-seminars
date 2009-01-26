@@ -27,16 +27,16 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Testcase for the 'ConfirmEventMailForm' class in the 'seminars' extension.
+ * Testcase for the 'CancelEventMailForm' class in the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase {
+class tx_seminars_mod2_CancelEventMailForm_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_mod2_ConfirmEventMailForm
+	 * @var tx_seminars_mod2_CancelEventMailForm
 	 */
 	private $fixture;
 	/**
@@ -45,24 +45,24 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 	private $testingFramework;
 
 	/**
-	 * @var string the original language of the BE user
-	 */
-	private $originalLanguage;
-
-	/**
 	 * @var integer PID of a dummy system folder
 	 */
 	private $dummySysFolderPid;
 
 	/**
-	 * @var integer PID of a dummy organizer record
+	 * @var integer UID of a dummy event record
+	 */
+	private $eventUid;
+
+	/**
+	 * @var integer UID of a dummy organizer record
 	 */
 	private $organizerUid;
 
 	/**
-	 * @var integer UID of a dummy event record
+	 * @var string the original language of the BE user
 	 */
-	private $eventUid;
+	private $originalLanguage;
 
 	public function setUp() {
 		// Set's the localization to the default language so that all tests can
@@ -105,7 +105,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_mod2_ConfirmEventMailForm($this->eventUid);
+		$this->fixture = new tx_seminars_mod2_CancelEventMailForm($this->eventUid);
 	}
 
 	public function tearDown() {
@@ -120,9 +120,10 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 	}
 
 
-	///////////////////////////////////////////////
+
+	/////////////////////////////////////////////
 	// Tests regarding the rendering of the form.
-	///////////////////////////////////////////////
+	/////////////////////////////////////////////
 
 	public function testRenderContainsEventTitleInSubjectFieldForNewForm() {
 		$this->assertContains(
@@ -133,7 +134,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 
 	public function testRenderContainsPrefilledBodyField() {
 		$this->assertContains(
-			$GLOBALS['LANG']->getLL('eventMailForm_prefillFieldForConfirmation_messageBody'),
+			$GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody'),
 			$this->fixture->render()
 		);
 	}
@@ -141,8 +142,8 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 	public function testRenderContainsSubmitButton() {
 		$this->assertContains(
 			'<input type="submit" value="' .
-				$GLOBALS['LANG']->getLL('eventMailForm_confirmButton') .
-				'" class="confirmButton" />',
+			$GLOBALS['LANG']->getLL('cancelMailForm_sendButton') .
+			'" class="confirmButton" />',
 			$this->fixture->render()
 		);
 	}
@@ -150,7 +151,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 	public function testRenderDoesNotPrefillSubjectFieldIfEmptyStringWasSentViaPost() {
 		$this->fixture->setPostData(
 			array(
-				'action' => 'confirmEvent',
+				'action' => 'cancelEvent',
 				'isSubmitted' => 'true',
 				'subject' => '',
 			)
@@ -162,9 +163,9 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderContainsTheConfirmEventActionForThisForm() {
+	public function testRenderContainsTheCancelEventActionForThisForm() {
 		$this->assertContains(
-			'<input type="hidden" name="action" value="confirmEvent" />',
+			'<input type="hidden" name="action" value="cancelEvent" />',
 			$this->fixture->render()
 		);
 	}
