@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2602] Add a TS setup configuration for whether the registration CSV for an event should be attached to e-mails to the organizers
 - [#2629] Cleanup: Remove XCLASS stuff from all classes in tests/ and tests/fixtures/
 - [#2597] Feature: Add form for canceling an event to the BE module
 - [#2624] Fix: Crash in the EM
