@@ -41,8 +41,4 @@ class tx_seminars_brokenTestingBagBuilder extends tx_seminars_bagbuilder {
 	 */
 	protected $bagClassName = 'tx_seminars_testbag';
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_brokenTestingBagBuilder.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_brokenTestingBagBuilder.php']);
-}
 ?>

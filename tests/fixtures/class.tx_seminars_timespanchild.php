@@ -109,8 +109,4 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 		return '';
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_timespanchild.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_timespanchild.php']);
-}
 ?>

@@ -73,8 +73,4 @@ final class tx_seminars_speakerchild extends tx_seminars_speaker {
 		$this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_speakerchild.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_speakerchild.php']);
-}
 ?>

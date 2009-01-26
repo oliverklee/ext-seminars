@@ -529,8 +529,4 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 		$this->setRecordPropertyString('description', $description);
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_seminarchild.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/tests/fixtures/class.tx_seminars_seminarchild.php']);
-}
 ?>
