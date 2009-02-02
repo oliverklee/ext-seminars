@@ -175,10 +175,8 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////
 
 	public function testGetAllFeUserContainsNonEmptyNameOfFrontEndUser() {
-		$this->testingFramework->loginFrontEndUser(
-			$this->testingFramework->createFrontEndUser(
-				'', array('name' => 'John Doe')
-			)
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'', array('name' => 'John Doe')
 		);
 
 		$this->assertContains(
@@ -188,10 +186,8 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetAllFeUserDoesNotContainEmptyLinesForMissingCompanyName() {
-		$this->testingFramework->loginFrontEndUser(
-			$this->testingFramework->createFrontEndUser(
-				'', array('name' => 'John Doe')
-			)
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'', array('name' => 'John Doe')
 		);
 
 		$this->assertNotRegExp(

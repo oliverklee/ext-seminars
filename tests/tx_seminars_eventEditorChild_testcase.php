@@ -109,8 +109,7 @@ class tx_seminars_eventEditorChild_testcase extends tx_phpunit_testcase {
 		$this->pi1->setConfigurationValue(
 			'defaultEventVipsFeGroupID', $feUserGroupUid
 		);
-		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
-		$this->testingFramework->loginFrontEndUser($feUserUid);
+		$this->testingFramework->createAndLoginFrontEndUser($feUserGroupUid);
 	}
 
 	/**
