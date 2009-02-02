@@ -127,7 +127,7 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 		// Finds out the record with the highest UID in the table.
 		// TODO: See bug 2311 which will bring us a shiny getMaximumUid() method.
 		// https://bugs.oliverklee.com/show_bug.cgi?id=2311
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SelectQuery(
+		$dbRow = tx_oelib_db::selectSingle(
 			'uid',
 			SEMINARS_TABLE_SEMINARS,
 			'1=1',
@@ -135,7 +135,6 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 			'uid DESC',
 			1
 		);
-		$dbRow = $this->testingFramework->getAssociativeDatabaseResult($dbResult);
 
 		new tx_seminars_tests_fixtures_TestingEventMailForm(
 			$dbRow['uid'] + 1
