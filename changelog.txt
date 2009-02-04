@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2657] Change: testingFramework::cleanUp should clean up the mapper registry and everything
 - [#2627] Feature: Add a parameter $recordData to createAndLoginFrontEndUser
 - [#2602] Add a TS setup configuration for whether the registration CSV for an event should be attached to e-mails to the organizers
 - [#2629] Cleanup: Remove XCLASS stuff from all classes in tests/ and tests/fixtures/

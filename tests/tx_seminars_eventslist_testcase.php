@@ -90,7 +90,6 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		// Resets the language of the interface to the value it had before
 		// we set it to "default" for testing.
 		$GLOBALS['LANG']->lang = $this->originalLanguage;
-		unset($this->originalLanguage);
 
 		$this->testingFramework->cleanUp();
 

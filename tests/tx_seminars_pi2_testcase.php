@@ -65,7 +65,6 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		tx_oelib_headerProxyFactory::getInstance()->discardInstance();
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();

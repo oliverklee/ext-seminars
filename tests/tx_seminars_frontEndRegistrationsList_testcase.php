@@ -84,7 +84,6 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	}
 
 	public function tearDown() {
-		tx_oelib_headerProxyFactory::discardInstance();
 		$this->testingFramework->cleanUp();
 		$this->fixture->__destruct();
 

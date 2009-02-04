@@ -99,7 +99,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		tx_oelib_mailerFactory::getInstance()->discardInstance();
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();
