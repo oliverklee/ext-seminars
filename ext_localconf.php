@@ -68,4 +68,10 @@ if ((float) $GLOBALS['TYPO3_CONF_VARS']['SYS']['compat_version'] == 4.1) {
 	$TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['t3lib/class.t3lib_tcemain.php'] =
 		t3lib_extMgm::extPath($_EXTKEY).'class.ux_t3lib_tcemain.php';
 }
+
+// registers the seminars command line interface
+$TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
+	'EXT:seminars/cli/class.tx_seminars_cli_DefaultController.php',
+	'_CLI_seminars',
+);
 ?>
