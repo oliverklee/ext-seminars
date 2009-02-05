@@ -124,20 +124,8 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 	public function testRenderThrowsExceptionForInvalidEventUid() {
 		$this->setExpectedException('Exception', 'There is no event with this UID.');
 
-		// Finds out the record with the highest UID in the table.
-		// TODO: See bug 2311 which will bring us a shiny getMaximumUid() method.
-		// https://bugs.oliverklee.com/show_bug.cgi?id=2311
-		$dbRow = tx_oelib_db::selectSingle(
-			'uid',
-			SEMINARS_TABLE_SEMINARS,
-			'1=1',
-			'',
-			'uid DESC',
-			1
-		);
-
 		new tx_seminars_tests_fixtures_TestingEventMailForm(
-			$dbRow['uid'] + 1
+			$this->testingFramework->getAutoIncrement(SEMINARS_TABLE_SEMINARS)
 		);
 	}
 
