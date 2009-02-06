@@ -2425,6 +2425,23 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_HasOrganizers_ForStringInOrganziersField_ReturnsTrue() {
+		$singleEvent = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'organizers' => 'foo'
+			)
+		);
+		$fixture = new tx_seminars_seminarchild($singleEvent);
+		$hasOrganizers = $fixture->hasOrganizers();
+		$fixture->__destruct();
+
+		$this->assertTrue(
+			$hasOrganizers
+		);
+	}
+
 	public function testCanHaveOneOrganizer() {
 		$this->addOrganizerRelation(array());
 
@@ -2454,6 +2471,62 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->fixture->getNumberOfOrganizers()
+		);
+	}
+
+
+	///////////////////////////////////
+	// Tests concerning getOrganizers
+	///////////////////////////////////
+
+	public function testGetOrganizersForEventWithNoOrganizersReturnsEmptyString() {
+		$this->createPi1();
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getOrganizers($this->pi1)
+		);
+	}
+
+	public function testGetOrganizersForEventOneOrganizersReturnsOrganizerName() {
+		$this->createPi1();
+		$this->addOrganizerRelation(array('title' => 'foo'));
+
+		$this->assertContains(
+			'foo',
+			$this->fixture->getOrganizers($this->pi1)
+		);
+	}
+
+	public function testGetOrganizersForEventOneOrganizersReturnsOrganizerLinkedToOrganizersHomepage() {
+		$this->createPi1();
+		$this->addOrganizerRelation(
+			array(
+				'title' => 'foo',
+				'homepage' => 'www.bar.com',
+			)
+		);
+
+		$this->assertContains(
+			'<a href="http://www.bar.com',
+			$this->fixture->getOrganizers($this->pi1)
+		);
+	}
+
+	public function testGetOrganizersForEventWithTwoOrganizersReturnsTwoOrganizers() {
+		$this->createPi1();
+		$this->addOrganizerRelation(array('title' => 'foo'));
+		$this->addOrganizerRelation(array('title' => 'bar'));
+
+		$organizers = $this->fixture->getOrganizers($this->pi1);
+
+		$this->assertContains(
+			'foo',
+			$organizers
+		);
+		$this->assertContains(
+			'bar',
+			$organizers
 		);
 	}
 

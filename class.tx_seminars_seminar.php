@@ -2253,8 +2253,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
 			);
+			$organizer->__destruct();
 		}
-		$organizer->__destruct();
 
 		return implode(', ', $result);
 	}
