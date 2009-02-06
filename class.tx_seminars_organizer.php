@@ -34,9 +34,18 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_organizer extends tx_seminars_objectfromdb {
+class tx_seminars_organizer extends tx_seminars_objectfromdb implements tx_oelib_Interface_MailRole {
 	/** string with the name of the SQL table this class corresponds to */
 	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
+
+	/**
+	 * Gets the organizer's real name.
+	 *
+	 * @return string the organizer's real name, will not be empty for valid records
+	 */
+	public function getName() {
+		return $this->getTitle();
+	}
 
 	/**
 	 * Gets our homepage.
@@ -58,11 +67,12 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our e-mail address.
+	 * Gets the organizer's e-mail address.
 	 *
-	 * @return string our e-mail address (or '' if there is an error)
+	 * @return string the organizer's e-mail address, will only be empty if
+	 *                there is an error
 	 */
-	public function getEmail() {
+	public function getEMailAddress() {
 		return $this->getRecordPropertyString('email');
 	}
 

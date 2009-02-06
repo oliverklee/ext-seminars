@@ -2223,7 +2223,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return tx_seminars_organizerbag an organizerbag object
 	 */
-	private function getOrganizerBag() {
+	public function getOrganizerBag() {
 		if (!$this->hasOrganizers()) {
 			throw new Exception('There are no organizers related to this event.');
 		}
@@ -2252,7 +2252,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$organizers = $this->getOrganizerBag();
 		foreach ($organizers as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
-				$organizer->getTitle(),
+				$organizer->getName(),
 				$organizer->getHomepage(),
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
@@ -2278,7 +2278,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$organizers = $this->getOrganizerBag();
 		foreach ($organizers as $organizer) {
-			$result[] = $organizer->getTitle()
+			$result[] = $organizer->getName()
 				.($organizer->hasHomepage() ? ', '.$organizer->getHomepage() : '');
 		}
 		$organizers->__destruct();
@@ -2303,7 +2303,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$organizers = $this->getOrganizerBag();
 		foreach ($organizers as $organizer) {
-			$result[] = '"'.$organizer->getTitle().'" <'.$organizer->getEmail().'>';
+			$result[] = '"' . $organizer->getName() . '"' .
+				' <' . $organizer->getEMailAddress() . '>';
 		}
 		$organizers->__destruct();
 
@@ -2325,7 +2326,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$organizers = $this->getOrganizerBag();
 		foreach ($organizers as $organizer) {
-			$result[] = $organizer->getEmail();
+			$result[] = $organizer->getEMailAddress();
 		}
 		$organizers->__destruct();
 
@@ -2404,7 +2405,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		foreach ($organizerBag as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
-				$organizer->getTitle(),
+				$organizer->getName(),
 				$organizer->getHomepage(),
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')

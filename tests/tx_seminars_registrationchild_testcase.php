@@ -85,6 +85,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
+				'title' => 'test title',
 				'seminar' => $this->seminarUid,
 				'interests' => 'nothing',
 				'expectations' => '',
@@ -942,6 +943,60 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			'From: "test organizer" <mail@example.com>',
 			tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastHeaders()
+		);
+	}
+
+
+	///////////////////////////////////////////////
+	// Tests regarding hasExistingFrontEndUser().
+	///////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasExistingFrontEndUserWithExistingFrontEndUserReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->hasExistingFrontEndUser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasExistingFrontEndUserWithInexistentFrontEndUserReturnsFalse() {
+		$this->testingFramework->changeRecord(
+			'fe_users',
+			$this->fixture->getUser(),
+			array('deleted' => 1)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasExistingFrontEndUser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasExistingFrontEndUserWithZeroFrontEndUserUIDReturnsFalse() {
+		$this->fixture->setFrontEndUserUID(0);
+
+		$this->assertFalse(
+			$this->fixture->hasExistingFrontEndUser()
+		);
+	}
+
+
+	///////////////////////////////////////
+	// Tests regarding getFrontEndUser().
+	///////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getFrontEndUserWithExistingFrontEndUserReturnsFrontEndUser() {
+		$this->assertTrue(
+			$this->fixture->getFrontEndUser() instanceof tx_oelib_Model_FrontEndUser
 		);
 	}
 }

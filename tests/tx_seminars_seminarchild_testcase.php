@@ -2759,6 +2759,33 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////
+	// Tests regarding getOrganizerBag().
+	///////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getOrganizerBagWithoutOrganizersThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'There are no organizers related to this event.'
+		);
+
+		$this->fixture->getOrganizerBag();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getOrganizerBagWithOrganizerReturnsOrganizerBag() {
+		$this->addOrganizerRelation();
+
+		$this->assertTrue(
+			$this->fixture->getOrganizerBag() instanceof tx_seminars_organizerbag
+		);
+	}
+
+
 	/////////////////////////////////
 	// Tests regarding the speakers
 	/////////////////////////////////

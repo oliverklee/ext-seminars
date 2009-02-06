@@ -88,6 +88,16 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 	// Tests for getting the organizer attributes.
 	////////////////////////////////////////////////
 
+	/**
+	 * @test
+	 */
+	public function getNameWithNameReturnsName() {
+		$this->assertEquals(
+			'Test organizer',
+			$this->fixture->getName()
+		);
+	}
+
 	public function testHasHomepageWithEmptyHomepageReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasHomepage()
@@ -111,17 +121,6 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEmail() {
-		$this->assertEquals(
-			'foo@test.com',
-			$this->fixture->getEmail()
-		);
-		$this->assertEquals(
-			'maximal-foo@test.com',
-			$this->maximalFixture->getEmail()
-		);
-	}
-
 	public function testGetEmailFooter() {
 		$this->assertEquals(
 			'',
@@ -130,6 +129,16 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'line 1'.LF.'line 2',
 			$this->maximalFixture->getEmailFooter()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEMailAddressWithEMailAddressReturnsEMailAddress() {
+		$this->assertEquals(
+			'foo@test.com',
+			$this->fixture->getEMailAddress()
 		);
 	}
 

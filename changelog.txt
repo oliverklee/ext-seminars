@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2495] Change: Add a function for sending an e-mail to an organizer and use it from registration::notifyOrganizers
 - [#2667] Fix: Test testRenderThrowsExceptionForInvalidEventUid fails
 - [#2600] Feature: Add a CLI module
 - [#2657] Change: testingFramework::cleanUp should clean up the mapper registry and everything

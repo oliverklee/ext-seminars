@@ -489,7 +489,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the attendee's uid.
+	 * Gets the attendee's UID.
 	 *
 	 * @return integer the attendee's feuser uid
 	 */
@@ -527,9 +527,46 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the seminar's uid.
+	 * Returns the front-end user of the registration.
 	 *
-	 * @return integer the seminar's uid
+	 * @return tx_oelib_Model_FrontEndUser the front-end user of the registration
+	 */
+	public function getFrontEndUser() {
+		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')->find(
+			$this->getUser()
+		);
+	}
+
+	/**
+	 * Returns whether the registration has an existing front-end user.
+	 *
+	 * @return boolean true if the registration has an existing front-end user,
+	 *                 false otherwise
+	 */
+	public function hasExistingFrontEndUser() {
+		if ($this->getUser() <= 0) {
+			return false;
+		}
+
+		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')->
+			existsModel(
+				$this->getUser()
+			);
+	}
+
+	/**
+	 * Sets the front-end user UID of the registration.
+	 *
+	 * @param integer the front-end user UID of the attendee, must be > 0
+	 */
+	public function setFrontEndUserUID($frontEndUserUID) {
+		$this->setRecordPropertyInteger('user', $frontEndUserUID);
+	}
+
+	/**
+	 * Gets the seminar's UID.
+	 *
+	 * @return integer the seminar's UID
 	 */
 	public function getSeminar() {
 		return $this->getRecordPropertyInteger('seminar');
@@ -888,6 +925,26 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			return;
 		}
 
+		if (!$this->getSeminarObject()->hasOrganizers()) {
+			return;
+		}
+
+		if (!$this->hasExistingFrontEndUser()) {
+			return;
+		}
+
+		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMailNotification->setSender($this->getFrontEndUser());
+
+		foreach ($this->getSeminarObject()->getOrganizerBag() as $organizer) {
+			$eMailNotification->addRecipient($organizer);
+		}
+
+		$eMailNotification->setSubject(
+			$this->translate('email_' . $helloSubjectPrefix . 'Subject') .
+				': ' . $this->getTitle()
+		);
+
 		$this->initializeTemplate();
 		$this->hideSubparts(
 			$this->getConfValueString('hideFieldsInNotificationMail'),
@@ -937,24 +994,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->hideSubparts('attendancedata', 'field_wrapper');
 		}
 
-		$content = $this->getSubpart('MAIL_NOTIFICATION');
+		$eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
 
-		// We use just the organizer's e-mail address as e-mail recipient
-		// as some SMTP servers cannot handle the format
-		// "John Doe <john.doe@example.com>".
-		$organizers = $this->getSeminarObject()->getOrganizersEmail();
-		foreach ($organizers as $currentOrganizerEmail) {
-			tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
-				$currentOrganizerEmail,
-				$this->translate('email_' . $helloSubjectPrefix.'Subject') .
-					': ' . $this->getTitle(),
-				$content,
-				// We use the attendee's e-mail as sender.
-				'From: ' . $this->getUserNameAndEmail(),
-				'quoted-printable',
-				$this->getConfValueString('charsetForEMails')
-			);
-		}
+		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
+			$eMailNotification
+		);
+
+		$eMailNotification->__destruct();
 	}
 
 	/**
