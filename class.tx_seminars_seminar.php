@@ -4373,6 +4373,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return '';
 		}
 
+		$imageFile = array();
 		$imageWithTag = $this->createRestrictedImage(
 			SEMINARS_UPLOAD_PATH . $this->getImage(),
 			'',
