@@ -749,7 +749,23 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			return;
 		}
 
+		if (!$this->getSeminarObject()->hasOrganizers()) {
+			return;
+		}
+
+		if (!$this->hasExistingFrontEndUser()) {
+			return;
+		}
+
 		$event = $this->getSeminarObject();
+
+		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMailNotification->addRecipient($this->getFrontEndUser());
+		$eMailNotification->setSender($event->getOrganizerBag()->current());
+		$eMailNotification->setSubject(
+			$this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' .
+				$event->getTitleAndDate('-')
+		);
 
 		$this->initializeTemplate();
 		$this->hideSubparts(
@@ -889,22 +905,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$footers = $event->getOrganizersFooter();
 		$this->setMarker('footer', $footers[0]);
 
-		$content = $this->getSubpart('MAIL_THANKYOU');
-		$froms = $event->getOrganizersNameAndEmail();
+		$eMailNotification->setMessage($this->getSubpart('MAIL_THANKYOU'));
 
-		// We use just the user's e-mail address as e-mail recipient
-		// as some SMTP servers cannot handle the format
-		// "John Doe <john.doe@example.com>".
-		tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
-			$this->getUserEmail(),
-			$this->translate('email_' . $helloSubjectPrefix.'Subject') . ': ' .
-				$event->getTitleAndDate('-'),
-			$content,
-			// We just use the first organizer as sender
-			'From: '.$froms[0],
-			'quoted-printable',
-			$this->getConfValueString('charsetForEMails')
+		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
+			$eMailNotification
 		);
+
+		$eMailNotification->__destruct();
 	}
 
 	/**
