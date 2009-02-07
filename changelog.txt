@@ -1,4 +1,4 @@
-0.7.2 (currently working on)
+0.7.2 (released 2009-02-07)
 - [#2620] Fix: seminar::getOrganizers destructs the organizers at the wrong place
 - [#2541] Fix: Save memory by destructing the bags after usage in the tests and the production code
 - [#2637] Fix: Tables rows in FE registration list not are on the same line
