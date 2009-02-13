@@ -806,6 +806,34 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testSendAdditionalNotificationUsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS,
+			array(
+				'title' => 'test organizer 2',
+				'email' => 'mail2@example.com',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			$organizerUid, 'organizers'
+		);
+
+		$this->fixture->sendAdditionalNotification();
+
+		$sentEmails = tx_oelib_mailerFactory::getInstance()
+			->getMailer()->getAllEmail();
+
+		$this->assertContains(
+			'mail@example.com',
+			$sentEmails[0]['headers']
+		);
+		$this->assertContains(
+			'mail@example.com',
+			$sentEmails[1]['headers']
+		);
+	}
+
 	public function testSendAdditionalNotificationForEventWithEnoughAttendancesSendsEnoughAttendancesMail() {
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
@@ -814,6 +842,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		$fixture = new tx_seminars_registrationchild($this->registrationUid);
+		$fixture->setConfigurationValue(
+			'templateFile', 'EXT:seminars/seminars.tmpl'
+		);
 
 		$fixture->sendAdditionalNotification();
 		$fixture->__destruct();
@@ -826,12 +857,11 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 				$this->seminarUid,
 				''
 			),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastSubject()
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
 		);
 	}
 
-	public function testSendAdditionalNotificationForBookedOutEventSendsBookedOutMail() {
+	public function testSendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutSubject() {
 		$this->fixture->sendAdditionalNotification();
 
 		$this->assertContains(
@@ -842,8 +872,16 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 				$this->seminarUid,
 				''
 			),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastSubject()
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+		);
+	}
+
+	public function testSendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutMessage() {
+		$this->fixture->sendAdditionalNotification();
+
+		$this->assertContains(
+			$this->fixture->translate('email_additionalNotificationIsFull'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
 	}
 
@@ -855,6 +893,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		$fixture = new tx_seminars_registrationchild($this->registrationUid);
+		$fixture->setConfigurationValue(
+			'templateFile', 'EXT:seminars/seminars.tmpl'
+		);
 
 		$fixture->sendAdditionalNotification();
 		$fixture->__destruct();

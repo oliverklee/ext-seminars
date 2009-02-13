@@ -1021,70 +1021,84 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * attendees are the same), only the "event is full" message will be sent.
 	 */
 	public function sendAdditionalNotification() {
-		$whichEmailToSend = '';
-		$whichEmailSubject = '';
+		if ($this->isOnRegistrationQueue()) {
+			return;
+		}
+
+		$emailReason = $this->getReasonForNotification();
+		if ($emailReason == '') {
+			return;
+		}
 
 		$event = $this->getSeminarObject();
+		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
 
-		if (!$this->isOnRegistrationQueue()) {
-			if ($event->isFull()) {
-				$whichEmailToSend = 'email_additionalNotificationIsFull';
-				$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
-			// The second check ensures that only one set of e-mails is sent to
-			// the organizers.
-			} elseif ($event->getAttendancesMin()
-				== $event->getAttendances()
-			) {
-				$whichEmailToSend
-					= 'email_additionalNotificationEnoughRegistrations';
-				$whichEmailSubject
-					= 'email_additionalNotificationEnoughRegistrationsSubject';
-			}
+		$eMail->setSender($event->getOrganizerBag()->current());
+		$eMail->setMessage($this->getMessageForNotification($emailReason));
+		$eMail->setSubject(sprintf(
+			$this->translate(
+				'email_additionalNotification' . $emailReason . 'Subject'
+			),
+			$event->getUid(),
+			$event->getTitleAndDate('-')
+		));
+
+		foreach ($event->getOrganizerBag() as $organizer) {
+			$eMail->addRecipient($organizer);
 		}
 
-		// Only send an e-mail if there's a reason for it.
-		if (!empty($whichEmailToSend)) {
-			$this->setMarker('message', $this->translate($whichEmailToSend));
+		tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
 
-			$showSeminarFields = $this->getConfValueString(
-				'showSeminarFieldsInNotificationMail'
-			);
-			if (!empty($showSeminarFields)) {
-				$this->setMarker(
-					'seminardata', $event->dumpSeminarValues(
-						$showSeminarFields
-					)
-				);
-			} else {
-				$this->hideSubparts('seminardata', 'field_wrapper');
-			}
+		$eMail->__destruct();
+	}
 
-			$content = $this->getSubpart(
-				'MAIL_ADDITIONALNOTIFICATION'
-			);
-			$subject = sprintf(
-				$this->translate($whichEmailSubject),
-				$event->getUid(),
-				$event->getTitleAndDate('-')
-			);
+	/**
+	 * Returns the topic for the additional notification e-mail.
+	 *
+	 * @return string "EnoughRegistrations" if the event has enough attendances,
+	 *                "IsFull" if the event is fully booked, otherwise an empty
+	 *                string
+	 */
+	private function getReasonForNotification() {
+		$result = '';
 
-			// We use just the organizer's e-mail address as e-mail recipient
-			// as some SMTP servers cannot handle the format
-			// "John Doe <john.doe@example.com>".
-			$organizers = $event->getOrganizersEmail();
-			$froms = $event->getOrganizersNameAndEmail();
-			foreach ($organizers as $currentOrganizerEmail) {
-				tx_oelib_mailerFactory::getInstance()->getMailer()->sendEmail(
-					$currentOrganizerEmail,
-					$subject,
-					$content,
-					// We use the first organizer's e-mail as sender.
-					'From: '.$froms[0],
-					'quoted-printable',
-					$this->getConfValueString('charsetForEMails')
-				);
-			}
+		$event = $this->getSeminarObject();
+		if ($event->isFull()) {
+			$result = 'IsFull';
+		// Using "==" instead of ">=" ensures that only one set of e-mails is
+		// sent to the organizers.
+		} elseif ($event->getAttendances() == $event->getAttendancesMin()) {
+			$result = 'EnoughRegistrations';
 		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns the message for an e-mail according to the reason
+	 * $reasonForNotification provided.
+	 *
+	 * @param string reason for the notification, must be either "IsFull" or
+	 *               "EnoughRegistrations", must not be empty
+	 */
+	private function getMessageForNotification($reasonForNotification) {
+		$localllangKey = 'email_additionalNotification' . $reasonForNotification;
+		$this->initializeTemplate();
+
+		$this->setMarker('message', $this->translate($localllangKey));
+		$showSeminarFields = $this->getConfValueString(
+			'showSeminarFieldsInNotificationMail'
+		);
+		if ($showSeminarFields != '') {
+			$this->setMarker(
+				'seminardata',
+				$this->getSeminarObject()->dumpSeminarValues($showSeminarFields)
+			);
+		} else {
+			$this->hideSubparts('seminardata', 'field_wrapper');
+		}
+
+		return $this->getSubpart('MAIL_ADDITIONALNOTIFICATION');
 	}
 
 	/**
@@ -1440,8 +1454,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *                "regular", will not be empty
 	 */
 	public function getStatus() {
-		$languageKey = 'label_'
-			.($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
+		$languageKey = 'label_' .
+			($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
 		return $this->translate($languageKey);
 	}
 
