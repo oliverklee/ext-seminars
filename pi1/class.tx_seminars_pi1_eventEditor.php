@@ -537,9 +537,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			}
 		}
 
-		$formData['attached_files'] = t3lib_div::trimExplode(
-			',', $this->attachedFiles
-		);
+		$formData['attached_files'] = implode(',', $this->attachedFiles);
 	}
 
 	/**
