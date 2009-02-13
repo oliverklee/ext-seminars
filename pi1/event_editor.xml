@@ -470,34 +470,5 @@
 			<label>###LABEL_SAVE_AND_BACK###</label>
 		</renderlet:SUBMIT>
 		<renderlet:HIDDEN name="proceed_file_upload" />
-
-		<renderlet:PASSTHRU name="owner_feuser">
-			<data>
-				<value>CURRENT_USERID</value>
-			</data>
-		</renderlet:PASSTHRU>
-
-		<renderlet:PASSTHRU name="crdate">
-			<data>
-				<value>CURRENT_TIMESTAMP</value>
-			</data>
-		</renderlet:PASSTHRU>
-
-		<renderlet:PASSTHRU name="tstamp">
-			<data>
-				<value>CURRENT_TIMESTAMP</value>
-			</data>
-		</renderlet:PASSTHRU>
-
-		<renderlet:PASSTHRU name="pid">
-			<data>
-				<value>
-					<userobj>
-						<extension>this</extension>
-						<method>getPidForNewEvents</method>
-					</userobj>
-				</value>
-			</data>
-		</renderlet:PASSTHRU>
 	</elements>
 </formidable>
