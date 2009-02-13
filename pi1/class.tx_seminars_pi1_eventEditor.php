@@ -40,10 +40,14 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
-	/** @var string class name */
+	/**
+	 * @var string class name
+	 */
 	public $prefixId = 'tx_seminars_event_editor';
 
-	/** @var string path to this script relative to the extension dir */
+	/**
+	 * @var string path to this script relative to the extension directory
+	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_eventEditor.php';
 
 	/**
@@ -57,7 +61,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	protected $plugin = null;
 
-	/** @var tx_ameosformidable form creator */
+	/**
+	 * @var tx_ameosformidable form creator
+	 */
 	private $oForm = null;
 
 	/**
@@ -66,10 +72,14 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	private $iEdition = false;
 
-	/** @var string stores a validation error message if there was one */
+	/**
+	 * @var string stores a validation error message if there was one
+	 */
 	private $validationError = '';
 
-	/** @var array currently attached files */
+	/**
+	 * @var array currently attached files
+	 */
 	private $attachedFiles = array();
 
 	/**
@@ -358,19 +368,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	}
 
 	/**
-	 * Gets the PID of the page where FE-created events will be stored.
-	 *
-	 * @return integer the PID of the page where FE-created events will be
-	 *                 stored
-	 */
-	public function getPidForNewEvents() {
-		return $this->plugin->getConfValueInteger(
-			'createEventsPID',
-			's_fe_editing'
-		);
-	}
-
-	/**
 	 * Gets the URL of the page that should be displayed when an event has been
 	 * successfully created.
 	 * An URL of the FE editor's page is returned if "submit_and_stay" was
@@ -554,11 +551,34 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	}
 
 	/**
+	 * Adds some values to the form data before insertion into the database.
+	 * Added values for new objects are: 'crdate', 'tstamp', 'pid' and
+	 * 'owner_feuser'.
+	 * For objects to update, just the 'tstamp' will be refreshed.
+	 *
+	 * @param array form data, will be modified, must not be empty
+	 */
+	private function addAdministrativeData(array &$formData) {
+		$formData['tstamp'] = mktime();
+
+		// Updating the timestamp is sufficent for existing records.
+		if ($this->iEdition) {
+			return;
+		}
+
+		$formData['crdate'] = mktime();
+		$formData['owner_feuser'] = $this->getFeUserUid();
+		$formData['pid'] = $this->plugin->getConfValueInteger(
+			'createEventsPID', 's_fe_editing'
+		);
+	}
+
+	/**
 	 * Unifies decimal separators, processes the deletion of attachments and
 	 * purges non-seminars-fields.
 	 *
 	 * @see unifyDecimalSeparators(), processAttachments(),
-	 *      purgeNonSeminarsFields()
+	 *      purgeNonSeminarsFields(), addAdministrativeData()
 	 *
 	 * @param array form data, must not be empty
 	 *
@@ -570,6 +590,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$this->processAttachments($modifiedFormData);
 		$this->purgeNonSeminarsFields($modifiedFormData);
 		$this->unifyDecimalSeparators($modifiedFormData);
+		$this->addAdministrativeData($modifiedFormData);
 
 		return $modifiedFormData;
 	}

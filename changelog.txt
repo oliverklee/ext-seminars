@@ -1,4 +1,5 @@
 0.7.3 (currently working on)
+- [#737] Fix: When FE-editing an existing event, don't change the crdate
 - [#2705] Fix: Crash when saving an event in the FE
 
 0.7.2 (released 2009-02-07)
