@@ -12,3 +12,6 @@ selectTopicsFromAllPages = 1
 
 # cat=basic/enable; type=boolean; label=Manual sorting of events.
 useManualSorting = 0
+
+# cat=basic/enable; type=options[send only plain text e-mail=0,always send HTML e-mail=1,use the setting from FE user record=2]; label=Format of e-mails for attendees
+eMailFormatForAttendees = 0
