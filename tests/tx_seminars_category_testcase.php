@@ -81,14 +81,11 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromDbResult() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$dbResult = tx_oelib_db::select(
 			'*',
 			SEMINARS_TABLE_CATEGORIES,
 			'uid = '.$this->fixtureUid
 		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
 
 		$this->fixture = new tx_seminars_category(0, $dbResult);
 

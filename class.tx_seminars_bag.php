@@ -227,7 +227,7 @@ abstract class tx_seminars_bag implements Iterator {
 			// overwritten immediately anyway.
 		}
 
-		$this->dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$this->dbResult = tx_oelib_db::select(
 			$this->dbTableName . '.*',
 			$this->dbTableName . $this->additionalTableNames,
 			$this->queryParameters . $this->enabledFieldsQuery,
@@ -235,9 +235,6 @@ abstract class tx_seminars_bag implements Iterator {
 			$this->orderBy,
 			$this->limit
 		);
-		if (!$this->dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
 
 		$this->createItemFromDbResult();
 
@@ -345,16 +342,11 @@ abstract class tx_seminars_bag implements Iterator {
 			return $this->countWithoutLimit;
 		}
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$dbResultRow = tx_oelib_db::selectSingle(
 			'COUNT(*) AS number ',
 			$this->dbTableName . $this->additionalTableNames,
 			$this->queryParameters . $this->enabledFieldsQuery
 		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 
 		$this->countWithoutLimit = $dbResultRow['number'];
 		$this->hasCountWithoutLimit = true;

@@ -545,25 +545,22 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$countries = array();
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$countryData = tx_oelib_db::selectMultiple(
 			'country',
 			SEMINARS_TABLE_SITES . ' LEFT JOIN ' .
 				SEMINARS_TABLE_SEMINARS_SITES_MM . ' ON ' . SEMINARS_TABLE_SITES .
-				'.uid=' . SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign' .
+				'.uid = ' . SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign' .
 				' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS . ' ON ' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local=' .
+				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local = ' .
 				SEMINARS_TABLE_SEMINARS . '.uid',
-			SEMINARS_TABLE_SEMINARS . '.uid=' . $this->getUid() .
-				' AND ' . SEMINARS_TABLE_SITES . '.country!=""' .
+			SEMINARS_TABLE_SEMINARS . '.uid = ' . $this->getUid() .
+				' AND ' . SEMINARS_TABLE_SITES . '.country != ""' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES),
 			'country'
 		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
 
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$countries[] = $row['country'];
+		foreach ($countryData as $country) {
+			$countries[] = $country['country'];
 		}
 
 		return $countries;
@@ -648,20 +645,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$cities = array();
 
 		// Fetches the city name from the corresponding place record(s).
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$cityData = tx_oelib_db::selectMultiple(
 			'city',
 			SEMINARS_TABLE_SITES . ' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS_SITES_MM .
-				' ON ' . SEMINARS_TABLE_SITES . '.uid=' .
+				' ON ' . SEMINARS_TABLE_SITES . '.uid = ' .
 				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign',
-			'uid_local=' . $this->getUid(),
+			'uid_local = ' . $this->getUid(),
 			'uid_foreign'
 		);
 
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$cities[] = $row['city'];
+		foreach ($cityData as $city) {
+			$cities[] = $city['city'];
 		}
 
 		return $cities;
@@ -683,19 +677,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// function can be used for searching.
 		$isoCode = $GLOBALS['TYPO3_DB']->quoteStr($isoCode, 'static_countries');
 
-		$countryName = '';
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'cn_short_local',
-			'static_countries',
-			'cn_iso_2="' . $isoCode . '"'
-		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-
-		if ($dbResultRow) {
+		try {
+			$dbResultRow = tx_oelib_db::selectSingle(
+				'cn_short_local',
+				'static_countries',
+				'cn_iso_2 = "' . $isoCode . '"'
+			);
 			$countryName = $dbResultRow['cn_short_local'];
+		} catch (tx_oelib_Exception_EmptyQueryResult $exception) {
+			$countryName = '';
 		}
 
 		return $countryName;
@@ -761,23 +751,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *               if there are no places assigned
 	 */
 	private function getPlacesAsArray() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		return tx_oelib_db::selectMultiple(
 			'title, address, city, country, homepage, directions',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
-			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
+			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-
-		$result = array();
-
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$result[] = $row;
-		}
-
-		return $result;
 	}
 
 	/**
@@ -792,26 +771,19 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return $this->translate('message_willBeAnnounced');
 		}
 
-		$result = '';
+		$result = array();
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$places = tx_oelib_db::selectMultiple(
 			'title',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
-			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
+			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			if ($result != '') {
-				$result .= ', ';
-			}
-
-			$result .= $row['title'];
+		foreach ($places as $place) {
+			$result[] = $place['title'];
 		}
 
-		return $result;
+		return implode(', ', $result);
 	}
 
 	/**

@@ -80,28 +80,27 @@ class ext_update {
 		$result .= '<ul>';
 
 		// Gets all events which have an organizer set.
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$eventsWithOrganizers = tx_oelib_db::selectMultiple(
 			'uid, title, organizers',
 			SEMINARS_TABLE_SEMINARS,
-			SEMINARS_TABLE_SEMINARS . '.organizers<>0'
+			SEMINARS_TABLE_SEMINARS . '.organizers <> 0'
 		);
-		if (!$dbResult) {
-			throw new tx_oelib_Exception_Database();
-		}
 
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$result .= '<li>Event #' . $row['uid'];
+		foreach ($eventsWithOrganizers as $event) {
+			$result .= '<li>Event #' . $event['uid'];
 
 			// Adds a relation entry for each organizer UID.
 			$result .= '<ul>';
 			$sorting = 0;
-			$organizerUids = t3lib_div::trimExplode(',', $row['organizers'], true);
+			$organizerUids = t3lib_div::trimExplode(
+				',', $event['organizers'], true
+			);
 			foreach ($organizerUids as $organizerUid) {
 				$result .= '<li>Organizer #' . $organizerUid . '</li>';
 				tx_oelib_db::insert(
 					SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
 					array(
-						'uid_local' => $row['uid'],
+						'uid_local' => $event['uid'],
 						'uid_foreign' => intval($organizerUid),
 						'sorting' => $sorting,
 					)
@@ -114,14 +113,12 @@ class ext_update {
 			// UIDs.
 			tx_oelib_db::update(
 				SEMINARS_TABLE_SEMINARS,
-				SEMINARS_TABLE_SEMINARS . '.uid=' . $row['uid'],
+				SEMINARS_TABLE_SEMINARS . '.uid = ' . $event['uid'],
 				array('organizers' => count($organizerUids))
 			);
 
 			$result .= '</li>';
 		}
-
-		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 
 		$result .= '</ul>';
 
@@ -135,16 +132,9 @@ class ext_update {
 	 *                 false otherwise
 	 */
 	private function needsToUpdateEventOrganizerRelations() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$row = tx_oelib_db::selectSingle(
 			'COUNT(*) AS count', SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM, '1=1'
 		);
-		if (!$dbResult) {
-			throw new tx_oelib_Exception_Database();
-		}
-
-		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-
-		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 
 		return ($row['count'] == 0);
 	}
@@ -156,18 +146,11 @@ class ext_update {
 	 *                 false otherwise
 	 */
 	private function hasEventsWithOrganizers() {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$row = tx_oelib_db::selectSingle(
 			'COUNT(*) AS count',
 			SEMINARS_TABLE_SEMINARS,
 			SEMINARS_TABLE_SEMINARS . '.organizers<>0'
 		);
-		if (!$dbResult) {
-			throw new tx_oelib_Exception_Database();
-		}
-
-		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-
-		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 
 		return ($row['count'] > 0);
 	}

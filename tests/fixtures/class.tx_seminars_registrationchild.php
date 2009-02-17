@@ -45,14 +45,11 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	 * @param integer UID of the registration record, must be > 0
 	 */
 	public function __construct($registrationUid) {
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$dbResult = tx_oelib_db::select(
 			'*',
 			$this->tableName,
-			'uid='.$registrationUid
+			'uid = ' . $registrationUid
 		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
 
 		$contentObject = t3lib_div::makeInstance('tslib_cObj');
 		$contentObject->start('');
