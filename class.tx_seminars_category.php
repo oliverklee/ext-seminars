@@ -35,7 +35,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_category extends tx_seminars_objectfromdb {
-	/** string with the name of the SQL table this class corresponds to */
+	/**
+	 * @var string the name of the SQL table this class corresponds to
+	 */
 	protected $tableName = SEMINARS_TABLE_CATEGORIES;
 
 	/**

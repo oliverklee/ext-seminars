@@ -58,6 +58,7 @@ define('SEMINARS_TABLE_SEMINARS_CATEGORIES_MM', 'tx_seminars_seminars_categories
 define('SEMINARS_TABLE_SPEAKERS_SKILLS_MM', 'tx_seminars_speakers_skills_mm');
 define('SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM', 'tx_seminars_seminars_organizing_partners_mm');
 define('SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM', 'tx_seminars_seminars_requirements_mm');
+define('SEMINARS_TABLE_TEST_TEST_MM', 'tx_seminars_test_test_mm');
 
 define('SEMINARS_RECORD_TYPE_COMPLETE', 0);
 define('SEMINARS_RECORD_TYPE_TOPIC', 1);

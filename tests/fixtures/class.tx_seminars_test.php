@@ -36,7 +36,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_objectfromdb
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_test extends tx_seminars_objectfromdb {
-	/** string with the name of the SQL table this class corresponds to */
+	/**
+	 * @var string the name of the SQL table this class corresponds to
+	 */
 	protected $tableName = SEMINARS_TABLE_TEST;
 
 	/**
@@ -52,10 +54,27 @@ class tx_seminars_test extends tx_seminars_objectfromdb {
 	 * Returns true if the test field of this record is set, false otherwise.
 	 *
 	 * @return boolean true if the test field of this record is set, false
-	 * otherwise
+	 *                 otherwise
 	 */
 	public function getBooleanTest() {
 		return $this->getRecordPropertyBoolean('test');
+	}
+
+	/**
+	 * Adds m:n records that are referenced by this record.
+	 *
+	 * Before this function may be called, $this->recordData['uid'] must be set
+	 * correctly.
+	 *
+	 * @param string the name of the m:n table, having the fields
+	 *               uid_local, uid_foreign and sorting, must not be empty
+	 * @param array array of uids of records from the foreign table to
+	 *              which we should create references, may be empty
+	 *
+	 * @return integer the number of created m:n records
+	 */
+	public function createMmRecords($mmTable, array $references) {
+		return parent::createMmRecords($mmTable, $references);
 	}
 }
 

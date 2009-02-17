@@ -46,7 +46,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 */
 	public $extKey = 'seminars';
 
-	/** string with the name of the SQL table this class corresponds to */
+	/**
+	 * @var string the name of the SQL table this class corresponds to
+	 */
 	protected $tableName = '';
 	/** associative array with the values from/for the DB */
 	protected $recordData = array();
@@ -330,7 +332,6 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				'createMmRecords may only be called on objects that have a UID.'
 			);
 		}
-
 		if (empty($references)) {
 			return 0;
 		}
