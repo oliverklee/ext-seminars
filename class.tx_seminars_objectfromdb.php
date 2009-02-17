@@ -46,7 +46,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 */
 	public $extKey = 'seminars';
 
-	/** string with the name of the SQL table this class corresponds to */
+	/**
+	 * @var string the name of the SQL table this class corresponds to
+	 */
 	protected $tableName = '';
 	/** associative array with the values from/for the DB */
 	protected $recordData = array();
@@ -293,9 +295,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 
 		if (!$this->isInDb || !$this->hasUid()) {
 			$this->setRecordPropertyInteger('crdate', $now);
-			$this->isInDb = (boolean) $GLOBALS['TYPO3_DB']->exec_INSERTquery(
-				$this->tableName,
-				$this->recordData
+			tx_oelib_db::insert(
+				$this->tableName, $this->recordData
 			);
 		} else {
 			tx_oelib_db::update(
@@ -303,10 +304,10 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				'uid = ' . $this->getUid(),
 				$this->recordData
 			);
-			$this->isInDb = true;
 		}
 
-		return $this->isInDb;
+		$this->isInDb = true;
+		return true;
 	}
 
 	/**
@@ -349,7 +350,6 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				'createMmRecords may only be called on objects that have a UID.'
 			);
 		}
-
 		if (empty($references)) {
 			return 0;
 		}
@@ -369,7 +369,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 					'sorting' => $sorting,
 					'is_dummy_record' => $isDummyRecord
 				);
-				$GLOBALS['TYPO3_DB']->exec_INSERTquery(
+				tx_oelib_db::insert(
 					$mmTable, $dataToInsert
 				);
 				$sorting++;

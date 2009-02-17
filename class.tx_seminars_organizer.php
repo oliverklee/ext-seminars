@@ -35,7 +35,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_organizer extends tx_seminars_objectfromdb implements tx_oelib_Interface_MailRole {
-	/** string with the name of the SQL table this class corresponds to */
+	/**
+	 * @var string the name of the SQL table this class corresponds to
+	 */
 	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
 
 	/**

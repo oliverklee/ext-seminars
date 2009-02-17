@@ -98,7 +98,7 @@ class ext_update {
 			$organizerUids = t3lib_div::trimExplode(',', $row['organizers'], true);
 			foreach ($organizerUids as $organizerUid) {
 				$result .= '<li>Organizer #' . $organizerUid . '</li>';
-				$GLOBALS['TYPO3_DB']->exec_INSERTquery(
+				tx_oelib_db::insert(
 					SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
 					array(
 						'uid_local' => $row['uid'],
@@ -112,7 +112,7 @@ class ext_update {
 
 			// Updates the event's organizers field with the number of organizer
 			// UIDs.
-			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+			tx_oelib_db::update(
 				SEMINARS_TABLE_SEMINARS,
 				SEMINARS_TABLE_SEMINARS . '.uid=' . $row['uid'],
 				array('organizers' => count($organizerUids))

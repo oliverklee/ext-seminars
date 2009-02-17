@@ -39,6 +39,21 @@ CREATE TABLE tx_seminars_test (
 
 
 #
+# Table structure for table 'tx_seminars_test_mm'
+#
+CREATE TABLE tx_seminars_test_test_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign),
+	KEY dummy (is_dummy_record)
+);
+
+
+#
 # Table structure for table 'tx_seminars_seminars_place_mm'
 #
 CREATE TABLE tx_seminars_seminars_place_mm (

@@ -43,7 +43,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**  @var string path to this script relative to the extension dir */
 	public $scriptRelPath = 'class.tx_seminars_seminar.php';
 
-	/** @var string the name of the SQL table this class corresponds to */
+	/**
+	 * @var string the name of the SQL table this class corresponds to
+	 */
 	protected $tableName = SEMINARS_TABLE_SEMINARS;
 
 	/** @var integer the number of all attendances */
