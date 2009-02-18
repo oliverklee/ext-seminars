@@ -3241,13 +3241,13 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testManagedEventsViewWithMayManagersEditTheirEventsSetToTrueContainsEditLink() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 1);
-		$this->fixture->setConfigurationValue(
+		$editorPid = $this->fixture->setConfigurationValue(
 			'eventEditorPID', $this->testingFramework->createFrontEndPage()
 		);
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
 		$this->assertContains(
-			'tx_seminars_pi1[action]=EDIT',
+			'?id=' . $editorPid,
 			$this->fixture->main('', array())
 		);
 	}

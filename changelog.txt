@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2706] Change: Make the FE editor testable
 - [#2594] Feature: Use HTML for the thank-you and unregistration e-mails to the attendees
 - [#2695] Change: Use the new mail class in registration::sendAdditionalNotification
 - [#737] Fix: When FE-editing an existing event, don't change the crdate

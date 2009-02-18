@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_formidableapi);
-
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
@@ -46,28 +44,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	/**  Path to this script relative to the extension dir. */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_registrationEditor.php';
 
-	/**
-	 * @var string the extension key
-	 */
-	public $extKey = 'seminars';
-
-	/** the pi1 object where this event editor will be inserted */
-	protected $plugin = null;
-
-	/** Formidable object that creates the edit form. */
-	public $oForm = null;
-
-	/**
-	 * the UID of the registration to edit (or false (not 0!) if we are creating
-	 * an event)
-	 */
-	private $iEdition = false;
-
 	/** an instance of registration manager which we want to have around only once (for performance reasons) */
 	private $registrationManager = null;
-
-	/** the seminar for which the user wants to register */
-	protected $seminar = null;
 
 	/** the names of the form fields to show (with the keys being the same as
 	 *  the values for performance reasons */
@@ -95,8 +73,15 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		'email' => true
 	);
 
-	/** an instance of tx_staticinfotables_pi1 */
+	/**
+	 * @var tx_staticinfotables_pi1
+	 */
 	private $staticInfo = null;
+
+	/**
+	 * @var tx_seminars_seminar seminar object
+	 */
+	private $seminar = null;
 
 	/**
 	 * The constructor.
@@ -105,16 +90,19 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * that the logged-in user is allowed to register for the corresponding
 	 * event (or edit a registration).
 	 *
-	 * @param tx_seminars_pi1 the pi1 object where this registration
-	 *                        editor will be inserted
+	 * Please note that it is necessary to call setAction() and setSeminar()
+	 * directly after instantiation.
+	 *
+	 * @param array TypoScript configuration for the plugin
+	 * @param tslib_cObj the parent cObj content, needed for the flexforms
 	 */
-	public function __construct(tx_seminars_pi1 $plugin) {
-		$this->plugin = $plugin;
-		$this->cObj = $plugin->cObj;
-		$this->registrationManager = $plugin->getRegistrationManager();
-		$this->seminar = $plugin->getSeminar();
+	public function __construct(array $configuration, tslib_cObj $cObj) {
+		parent::__construct($configuration, $cObj);
 
-		$this->init($this->plugin->conf);
+		$registrationManagerClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_registrationmanager'
+		);
+		$this->registrationManager = new $registrationManagerClassname();
 
 		$formFieldsToShow = t3lib_div::trimExplode(',',
 			$this->getConfValueString(
@@ -124,32 +112,68 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		foreach ($formFieldsToShow as $currentFormField) {
 			$this->formFieldsToShow[$currentFormField] = $currentFormField;
 		}
-
-		// Currently, only new registrations can be entered.
-		$this->iEdition = false;
-
-		// initialize the creation/edition form
-		$this->_initForms();
 	}
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		unset(
-			$this->plugin, $this->oForm, $this->registrationManager,
-			$this->seminar, $this->staticInfo
-		);
+		unset($this->registrationManager, $this->staticInfo, $this->seminar);
 		parent::__destruct();
 	}
 
 	/**
-	 * Initializes the create/edit form.
+	 * Sets the action.
+	 *
+	 * @param string action for which to create the form, must be either
+	 *               "register" or "unregister", must not be empty
 	 */
-	private function _initForms() {
-		$this->oForm = t3lib_div::makeInstance('tx_ameosformidable');
+	public function setAction($action) {
+		$this->setXmlPath($action);
+	}
 
-		switch ($this->plugin->piVars['action']) {
+	/**
+	 * Sets the seminar for which to create the form.
+	 */
+	public function setSeminar(tx_seminars_seminar $seminar) {
+		$this->seminar = $seminar;
+	}
+
+	/**
+	 * Returns the configured seminar object.
+	 */
+	private function getSeminar() {
+		if (!is_object($this->seminar)) {
+			throw new Exception(
+				'Please set a proper seminar object via $this->setSeminar().'
+			);
+		}
+
+		return $this->seminar;
+	}
+
+	/**
+	 * Sets the registration for which to create the unregistration form.
+	 */
+	public function setRegistration(tx_seminars_registration $registration) {
+		$this->registration = $registration;
+	}
+
+	/**
+	 * Returns the current registration object.
+	 */
+	private function getRegistration() {
+		return $this->registration;
+	}
+
+	/**
+	 * Sets the path to the XML file to use.
+	 *
+	 * @param string action to perform, may be either "register" or "unregister",
+	 *               must not be empty
+	 */
+	public function setXmlPath($action = 'register') {
+		switch ($action) {
 			case 'unregister':
 				$xmlFile = 'registration_editor_unregistration.xml';
 				break;
@@ -175,11 +199,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				break;
 		}
 
-		$this->oForm->init(
-			$this,
-			t3lib_extmgm::extPath($this->extKey).'pi1/'.$xmlFile,
-			$this->iEdition
-		);
+		parent::setXmlPath('pi1/' . $xmlFile);
 	}
 
 	/**
@@ -193,10 +213,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function getTemplatePath() {
 		return t3lib_div::getFileAbsFileName(
-			$this->plugin->getConfValueString(
-				'registrationEditorTemplateFile',
-				's_registration',
-				true
+			$this->getConfValueString(
+				'registrationEditorTemplateFile', 's_registration', true
 			)
 		);
 	}
@@ -206,16 +224,17 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *
 	 * @return string HTML of the create/edit form
 	 */
-	public function _render() {
-		$rawForm = $this->oForm->render();
+	public function render() {
+		$rawForm = parent::render();
 		// For the confirmation page, we need to reload the whole thing. Yet,
 		// the previous rendering still is necessary for processing the data.
 		if ($this->currentPageNumber > 0) {
 			// A mayday would be returned without unsetting the form ID.
 			unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
 				['context']['forms']['tx_seminars_pi1_registration_editor']);
-			$this->_initForms();
-			$rawForm = $this->oForm->render();
+			$this->setXmlPath();
+			// This will produce a new form to which no data can be provided.
+			$rawForm = $this->makeFormCreator()->render();
 		}
 
 		// Remove empty label tags that have been created due to a bug in
@@ -230,7 +249,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 
 	/**
 	 * Selects the confirmation page (the second step of the registration form)
-	 * for display. This affects $this->_render().
+	 * for display. This affects $this->render().
 	 *
 	 * @param array the entered form data with the field names as array keys
 	 *              (including the submit button)
@@ -262,13 +281,10 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$this->saveDataToSession($parameters);
 
 		if ($this->registrationManager->canCreateRegistration(
-				$this->seminar,
-				$parameters)
-		) {
+			$this->getSeminar(), $parameters
+		)) {
 			$this->registrationManager->createRegistration(
-				$this->seminar,
-				$parameters,
-				$this->plugin
+				$this->getSeminar(), $parameters, $this
 			);
 		}
 	}
@@ -285,7 +301,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function canRegisterSeats(array $formData) {
 		return $this->registrationManager->canRegisterSeats(
-			$this->seminar, intval($formData['value'])
+			$this->getSeminar(), intval($formData['value'])
 		);
 	}
 
@@ -313,7 +329,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function isTerms2Enabled() {
 		return $this->hasRegistrationFormField(array('elementname' => 'terms_2'))
-			&& $this->seminar->hasTerms2();
+			&& $this->getSeminar()->hasTerms2();
 	}
 
 	/**
@@ -353,8 +369,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function isMethodOfPaymentSelected(array $formData) {
 		return $this->isRadiobuttonSelected($formData['value'])
-			|| !$this->seminar->hasPaymentMethods()
-			|| !$this->seminar->hasAnyPrice()
+			|| !$this->getSeminar()->hasPaymentMethods()
+			|| !$this->getSeminar()->hasAnyPrice()
 			|| !$this->showMethodsOfPayment();
 	}
 
@@ -489,7 +505,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			case 'bank_name':
 				// The fallthrough is intended.
 			case 'account_owner':
-				$result &= $this->seminar->hasAnyPrice();
+				$result &= $this->getSeminar()->hasAnyPrice();
 				break;
 			case 'lodgings':
 				$result &= $this->hasLodgings();
@@ -529,7 +545,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function hasBankDataFormField(array $parameters) {
 		return $this->hasRegistrationFormField($parameters)
-			&& $this->seminar->hasAnyPrice();
+			&& $this->getSeminar()->hasAnyPrice();
 	}
 
 	/**
@@ -546,9 +562,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function getThankYouAfterRegistrationUrl() {
 		$sendParameters = false;
-		$pageId = $this->plugin->getConfValueInteger(
-			'thankYouAfterRegistrationPID',
-			's_registration'
+		$pageId = $this->getConfValueInteger(
+			'thankYouAfterRegistrationPID', 's_registration'
 		);
 
 		if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
@@ -559,7 +574,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			$GLOBALS['TSFE']->loginUser = 0;
 		}
 
-		if ($this->plugin->getConfValueBoolean(
+		if ($this->getConfValueBoolean(
 			'sendParametersToThankYouAfterRegistrationPageUrl',
 			's_registration'
 		)) {
@@ -578,13 +593,12 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function getPageToShowAfterUnregistrationUrl() {
 		$sendParameters = false;
-		$pageId = $this->plugin->getConfValueInteger(
-			'pageToShowAfterUnregistrationPID',
-			's_registration'
+		$pageId = $this->getConfValueInteger(
+			'pageToShowAfterUnregistrationPID', 's_registration'
 		);
 
 		if (
-			$this->plugin->getConfValueBoolean(
+			$this->getConfValueBoolean(
 				'sendParametersToPageToShowAfterUnregistrationUrl',
 				's_registration'
 			)
@@ -609,7 +623,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		// On freshly updated sites, the configuration value might not be set
 		// yet. To avoid breaking the site, we use the event list in this case.
 		if (!$pageId) {
-			$pageId = $this->plugin->getConfValueInteger('listPID', 'sDEF');
+			$pageId = $this->getConfValueInteger('listPID', 'sDEF');
 		}
 
 		$linkConfiguration = array('parameter' => $pageId);
@@ -618,7 +632,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			$linkConfiguration['additionalParams']
 				= t3lib_div::implodeArrayForUrl(
 					'tx_seminars_pi1',
-					array('showUid' => $this->seminar->getUid()),
+					array('showUid' => $this->getSeminar()->getUid()),
 					'',
 					false,
 					true
@@ -650,11 +664,11 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function populateListPaymentMethods(array $items) {
 		$result = array();
 
-		if ($this->seminar->hasPaymentMethods()) {
+		if ($this->getSeminar()->hasPaymentMethods()) {
 			$result = $this->populateList(
 				$items,
 				SEMINARS_TABLE_PAYMENT_METHODS,
-				'uid IN ('.$this->seminar->getPaymentMethodsUids().')',
+				'uid IN (' . $this->getSeminar()->getPaymentMethodsUids() . ')',
 				true
 			);
 		}
@@ -671,8 +685,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                 false otherwise
 	 */
 	public function showMethodsOfPayment() {
-		return $this->seminar->hasPaymentMethods()
-			&& $this->seminar->hasAnyPrice()
+		return $this->getSeminar()->hasPaymentMethods()
+			&& $this->getSeminar()->hasAnyPrice()
 			&& $this->hasRegistrationFormField(
 				array('elementname' => 'method_of_payment')
 			);
@@ -703,17 +717,13 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			$value = htmlspecialchars($userData[$currentKey]);
 			// Only show a label if we have any data following it.
 			if ($hasLabel && !empty($value)) {
-				$value = $this->plugin->translate('label_' . $currentKey) .
+				$value = $this->translate('label_' . $currentKey) .
 					' ' . $value;
 			}
-			$this->plugin->setMarker(
-				'user_' . $currentKey,
-				$value
-			);
+			$this->setMarker('user_' . $currentKey, $value);
 		}
 
-		$rawOutput
-			= $this->plugin->getSubpart('REGISTRATION_CONFIRMATION_FEUSER');
+		$rawOutput = $this->getSubpart('REGISTRATION_CONFIRMATION_FEUSER');
 
 		// drops empty lines
 		return preg_replace('/[\n\r]\s*<br \/>/', '', $rawOutput);
@@ -772,7 +782,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		// The "total_price" field doesn't exist as an actual renderlet and
 		// so cannot be read.
 		$currentFormData = ($key != 'total_price')
-			? $this->oForm->oDataHandler->_getThisFormData($key) : '';
+			? $this->getFormValue($key) : '';
 
 		switch ($key) {
 			case 'price':
@@ -787,21 +797,21 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			case 'lodgings':
 				$this->ensureArray($currentFormData);
 				$currentFormData = $this->getCaptionsForSelectedOptions(
-					$this->seminar->getLodgings(),
+					$this->getSeminar()->getLodgings(),
 					$currentFormData
 				);
 				break;
 			case 'foods':
 				$this->ensureArray($currentFormData);
 				$currentFormData = $this->getCaptionsForSelectedOptions(
-					$this->seminar->getFoods(),
+					$this->getSeminar()->getFoods(),
 					$currentFormData
 				);
 				break;
 			case 'checkboxes':
 				$this->ensureArray($currentFormData);
 				$currentFormData = $this->getCaptionsForSelectedOptions(
-					$this->seminar->getCheckboxes(),
+					$this->getSeminar()->getCheckboxes(),
 					$currentFormData
 				);
 				break;
@@ -814,22 +824,14 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		}
 
 		if ($currentFormData != '') {
-			$this->plugin->setMarker(
-				'registration_data_heading',
-				$this->plugin->translate('label_'.$key)
+			$this->setMarker(
+				'registration_data_heading', $this->translate('label_' . $key)
 			);
 			$fieldContent = str_replace(
-				CR,
-				'<br />',
-				htmlspecialchars($currentFormData)
+				CR, '<br />', htmlspecialchars($currentFormData)
 			);
-			$this->plugin->setMarker(
-				'registration_data_body',
-				$fieldContent
-			);
-			$result = $this->plugin->getSubpart(
-				'REGISTRATION_CONFIRMATION_DATA'
-			);
+			$this->setMarker('registration_data_body', $fieldContent);
+			$result = $this->getSubpart('REGISTRATION_CONFIRMATION_DATA');
 		}
 
 		return $result;
@@ -857,7 +859,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @return string the selected price with caption and unit
 	 */
 	private function getSelectedPrice() {
-		$availablePrices = $this->seminar->getAvailablePrices();
+		$availablePrices = $this->getSeminar()->getAvailablePrices();
 
 		return $availablePrices[$this->getKeyOfSelectedPrice()]['caption'];
 	}
@@ -870,13 +872,11 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @return string the key of the selected price, will always be a valid key
 	 */
 	private function getKeyOfSelectedPrice() {
-		$dataHandler = $this->oForm->oDataHandler;
-
-		$availablePrices = $this->seminar->getAvailablePrices();
-		$selectedPrice = $dataHandler->_getThisFormData('price');
+		$availablePrices = $this->getSeminar()->getAvailablePrices();
+		$selectedPrice = $this->getFormValue('price');
 
 		// If no (available) price is selected, use the first price by default.
-		if (!$this->seminar->isPriceAvailable($selectedPrice)) {
+		if (!$this->getSeminar()->isPriceAvailable($selectedPrice)) {
 			$selectedPrice = key($availablePrices);
 		}
 
@@ -894,8 +894,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	private function getTotalPriceWithUnit() {
 		$result = '';
 
-		$dataHandler = $this->oForm->oDataHandler;
-		$seats = intval($dataHandler->_getThisFormData('seats'));
+		$seats = intval($this->getFormValue('seats'));
 
 		// Only show the total price if the seats selector is displayed
 		// (otherwise the total price will be same as the price anyway).
@@ -906,17 +905,17 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			// calculated again when creating the registration object.
 			// It will not be added if no total price can be calculated (e.g.
 			// total price = 0.00)
-			$availablePrices = $this->seminar->getAvailablePrices();
+			$availablePrices = $this->getSeminar()->getAvailablePrices();
 			$selectedPrice = $this->getKeyOfSelectedPrice();
 
 			if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
-				$totalPrice = $this->seminar->formatPrice(
+				$totalPrice = $this->getSeminar()->formatPrice(
 					$seats * $availablePrices[$selectedPrice]['amount']
 				);
 				$currency = $this->registrationManager->getConfValueString(
 					'currency'
 				);
-				$result = $totalPrice.' '.$currency;
+				$result = $totalPrice . ' ' . $currency;
 			}
 		}
 
@@ -933,17 +932,13 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	private function getSelectedPaymentMethod() {
 		$result = '';
 
-		$dataHandler = $this->oForm->oDataHandler;
-
-		$availablePaymentMethods = $this->populateListPaymentMethods(
-			array()
-		);
+		$availablePaymentMethods = $this->populateListPaymentMethods(array());
 
 		if (isset($availablePaymentMethods[
-			$dataHandler->_getThisFormData('method_of_payment')
+			$this->getFormValue('method_of_payment')
 		])) {
 			$result = $availablePaymentMethods
-				[$dataHandler->_getThisFormData('method_of_payment')]['caption'];
+				[$this->getFormValue('method_of_payment')]['caption'];
 		}
 
 		// We use strip_tags to remove any trailing <br /> tags.
@@ -994,35 +989,32 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$result = '';
 
 		foreach ($this->fieldsInBillingAddress as $currentKey => $hasLabel) {
-			$currentFormData = $this->oForm->oDataHandler->_getThisFormData(
-				$currentKey
-			);
+			$currentFormData = $this->getFormValue($currentKey);
 			if ($currentFormData != '') {
 				// If the gender field is hidden, it would have an empty value,
 				// so we wouldn't be here. So let's convert the "gender" index
 				// into a readable string.
 				if ($currentKey == 'gender') {
-					$currentFormData =
-						$this->translate('label_gender.I.'.intval($currentFormData));
+					$currentFormData = $this->translate(
+						'label_gender.I.' . intval($currentFormData)
+					);
 				}
 				$processedFormData = str_replace(
-					CR,
-					'<br />',
-					htmlspecialchars($currentFormData)
+					CR, '<br />', htmlspecialchars($currentFormData)
 				);
 				if ($hasLabel) {
 					$processedFormData
-						= $this->plugin->translate('label_'.$currentKey)
-							.' '.$processedFormData;
+						= $this->translate('label_' . $currentKey) .
+							' ' . $processedFormData;
 				}
 
 				$result .= $processedFormData.'<br />';
 			}
 		}
 
-		$this->plugin->setMarker('registration_billing_address', $result);
+		$this->setMarker('registration_billing_address', $result);
 
-		return $this->plugin->getSubpart('REGISTRATION_CONFIRMATION_BILLING');
+		return $this->getSubpart('REGISTRATION_CONFIRMATION_BILLING');
 	}
 
 	/**
@@ -1032,16 +1024,14 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @param array associative array with the element "value" in which
 	 *              the current value of the field with the attendees'
 	 *              names is provided
-	 * @param tx_ameosformidable the current FORMidable object
 	 *
 	 * @return boolean true if the field is non-empty or less than two
 	 *                 seats are reserved or this field is not displayed
 	 *                 at all, false otherwise
 	 */
-	public function hasAttendeesNames(array $formData, tx_ameosformidable $form) {
-		$dataHandler = $form->oDataHandler;
-		$seats = (intval($dataHandler->_getThisFormData('seats')) > 0) ?
-			intval($dataHandler->_getThisFormData('seats')) : 1;
+	public function hasAttendeesNames(array $formData) {
+		$seats = (intval($this->getFormValue('seats')) > 0) ?
+			intval($this->getFormValue('seats')) : 1;
 
 		return (!empty($formData['value']) || ($seats < 2)
 			|| !$this->hasRegistrationFormField(
@@ -1058,20 +1048,17 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *
 	 * @param array associative array with the element "value" in which
 	 *              the value of the current field is provided
-	 * @param tx_ameosformidable the current FORMidable object
 	 *
 	 * @return boolean true if the field is non-empty or "bank transfer" is not
 	 *                 selected
 	 */
-	public function hasBankData(array $formData, tx_ameosformidable $form) {
+	public function hasBankData(array $formData) {
 		$result = true;
 
 		if (empty($formData['value'])) {
-			$bankTransferUid = $this->plugin->getConfValueInteger('bankTransferUID');
+			$bankTransferUid = $this->getConfValueInteger('bankTransferUID');
 
-			$dataHandler = $form->oDataHandler;
-			$paymentMethod
-				= intval($dataHandler->_getThisFormData('method_of_payment'));
+			$paymentMethod = intval($this->getFormValue('method_of_payment'));
 
 			if ($bankTransferUid && ($paymentMethod == $bankTransferUid)) {
 				$result = false;
@@ -1158,8 +1145,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function populateCheckboxes() {
 		$result = array();
 
-		if ($this->seminar->hasCheckboxes()) {
-			$result = $this->seminar->getCheckboxes();
+		if ($this->getSeminar()->hasCheckboxes()) {
+			$result = $this->getSeminar()->getCheckboxes();
 		}
 
 		return $result;
@@ -1173,7 +1160,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                 list should be displayed, false otherwise
 	 */
 	public function hasCheckboxes() {
-		return $this->seminar->hasCheckboxes()
+		return $this->getSeminar()->hasCheckboxes()
 			&& $this->hasRegistrationFormField(
 				array('elementname' => 'checkboxes')
 			);
@@ -1188,8 +1175,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function populateLodgings() {
 		$result = array();
 
-		if ($this->seminar->hasLodgings()) {
-			$result = $this->seminar->getLodgings();
+		if ($this->getSeminar()->hasLodgings()) {
+			$result = $this->getSeminar()->getLodgings();
 		}
 
 		return $result;
@@ -1218,7 +1205,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                 this list should be displayed, false otherwise
 	 */
 	public function hasLodgings() {
-		return $this->seminar->hasLodgings()
+		return $this->getSeminar()->hasLodgings()
 			&& $this->hasRegistrationFormField(
 				array('elementname' => 'lodgings')
 			);
@@ -1233,8 +1220,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function populateFoods() {
 		$result = array();
 
-		if ($this->seminar->hasFoods()) {
-			$result = $this->seminar->getFoods();
+		if ($this->getSeminar()->hasFoods()) {
+			$result = $this->getSeminar()->getFoods();
 		}
 
 		return $result;
@@ -1248,10 +1235,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                 list should be displayed, false otherwise
 	 */
 	public function hasFoods() {
-		return $this->seminar->hasFoods()
-			&& $this->hasRegistrationFormField(
-				array('elementname' => 'foods')
-			);
+		return $this->getSeminar()->hasFoods()
+			&& $this->hasRegistrationFormField(array('elementname' => 'foods'));
 	}
 
 	/**
@@ -1276,7 +1261,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *               the title) and "value" (for the uid)
 	 */
 	public function populatePrices() {
-		return $this->seminar->getAvailablePrices();
+		return $this->getSeminar()->getAvailablePrices();
 	}
 
 	/**
@@ -1293,7 +1278,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                 been selected
 	 */
 	public function isValidPriceSelected(array $formData) {
-		return $this->seminar->isPriceAvailable($formData['value'])
+		return $this->getSeminar()->isPriceAvailable($formData['value'])
 			|| !$this->hasRegistrationFormField(
 				array('elementname' => 'price')
 			);
@@ -1345,7 +1330,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *
 	 * @param array the form data (may be empty)
 	 */
-	protected function saveDataToSession(array $parameters) {
+	private function saveDataToSession(array $parameters) {
 		if (!empty($parameters)) {
 			$parametersToSave = array(
 				'method_of_payment',
@@ -1500,9 +1485,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			}
 		}
 
-		$numberOfClicks = $this->plugin->getConfValueInteger(
-			'numberOfClicksForRegistration',
-			's_registration'
+		$numberOfClicks = $this->getConfValueInteger(
+			'numberOfClicksForRegistration', 's_registration'
 		);
 
 		// If we first visit the registration form, the value of
@@ -1536,11 +1520,11 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                and the last page
 	 */
 	public function getStepCounter() {
-		$lastPageNumberForDisplay = $this->plugin->getConfValueInteger(
+		$lastPageNumberForDisplay = $this->getConfValueInteger(
 			'numberOfLastRegistrationPage'
 		);
 
-		$currentPageNumber = $this->plugin->getConfValueInteger(
+		$currentPageNumber = $this->getConfValueInteger(
 			'numberOfFirstRegistrationPage'
 		) + $this->currentPageNumber;
 
@@ -1549,7 +1533,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 
 		// Decreases $lastPageNumberForDisplay by one if we only have 2 clicks
 		// to registration.
-		$numberOfClicks = $this->plugin->getConfValueInteger(
+		$numberOfClicks = $this->getConfValueInteger(
 			'numberOfClicksForRegistration',
 			's_registration'
 		);
@@ -1559,7 +1543,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		}
 
 		return sprintf(
-			$this->plugin->translate('label_step_counter'),
+			$this->translate('label_step_counter'),
 			$currentPageNumberForDisplay, $lastPageNumberForDisplay
 		);
 	}
@@ -1569,8 +1553,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function processUnregistration() {
 		$this->registrationManager->removeRegistration(
-			$this->plugin->getRegistration()->getUid(),
-			$this->plugin
+			$this->getRegistration()->getUid(), $this
 		);
 	}
 }

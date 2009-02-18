@@ -2358,10 +2358,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$result = $this->cObj->getTypoLink(
 				$this->translate('label_edit'),
 				$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
-				array(
-					'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
-					'tx_seminars_pi1[action]' => 'EDIT',
-				)
+				array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
 			);
 		}
 
@@ -2621,28 +2618,21 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		if ($isOkay) {
-			switch ($this->piVars['action']) {
-				case 'unregister':
-					$registrationForm = $this->createUnregistrationForm();
-					break;
-				case 'register':
-					// The fall-through is intended.
-				default:
-					if ($this->registrationManager
-						->userFulfillsRequirements($this->seminar)
-					) {
-						$registrationForm = $this->createRegistrationForm();
-					} else {
-						$errorMessage = $this->translate(
-							'message_requirementsNotFulfilled'
-						);
-						$requirementsList = $this->createRequirementsList();
-						$requirementsList->setEvent($this->seminar);
-						$requirementsList->limitToMissingRegistrations();
-						$registrationForm = $requirementsList->render();
-						$requirementsList->__destruct();
-					}
-					break;
+			if (($this->piVars['action'] == 'unregister')
+				|| $this->registrationManager->userFulfillsRequirements(
+					$this->seminar
+				)
+			) {
+				$registrationForm = $this->createRegistrationForm();
+			} else {
+				$errorMessage = $this->translate(
+					'message_requirementsNotFulfilled'
+				);
+				$requirementsList = $this->createRequirementsList();
+				$requirementsList->setEvent($this->seminar);
+				$requirementsList->limitToMissingRegistrations();
+				$registrationForm = $requirementsList->render();
+				$requirementsList->__destruct();
 			}
 		}
 
@@ -2700,15 +2690,26 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Creates the registration form.
 	 *
+	 * Note that $this->seminar must be set before calling this function and if
+	 * "unregister" is the action to perform, $this->registration must also be
+	 * set.
+	 *
 	 * @return string HTML code for the form
 	 */
 	protected function createRegistrationForm() {
 		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_pi1_registrationEditor'
 		);
-		$registrationEditor = new $registrationEditorClassname($this);
+		$registrationEditor = new $registrationEditorClassname(
+			$this->conf, $this->cObj
+		);
+		$registrationEditor->setSeminar($this->seminar);
+		$registrationEditor->setAction($this->piVars['action']);
+		if ($this->piVars['action'] == 'unregister') {
+			$registrationEditor->setRegistration($this->registration);
+		}
 
-		$output = $registrationEditor->_render();
+		$output = $registrationEditor->render();
 		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		$registrationEditor->__destruct();
@@ -2769,32 +2770,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 
-	///////////////////////////////////
-	// Unregistration view functions.
-	///////////////////////////////////
-
-	/**
-	 * Creates the unregistration form.
-	 * $this->registration has to be created before this method is called.
-	 *
-	 * @return string HTML code for the form
-	 */
-	protected function createUnregistrationForm() {
-		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_pi1_registrationEditor'
-		);
-		$registrationEditor = new $registrationEditorClassname($this);
-
-		$result = $registrationEditor->_render();
-		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
-
-		$registrationEditor->__destruct();
-		unset($registrationEditor);
-
-		return $result;
-	}
-
-
 	/////////////////////////////////
 	// Event editor view functions.
 	/////////////////////////////////
@@ -2816,14 +2791,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$eventEditorClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_pi1_eventEditor'
 		);
-		$eventEditor = new $eventEditorClassname($this);
+		$eventEditor = new $eventEditorClassname($this->conf, $this->cObj);
+		$eventEditor->setObjectUid(intval($this->piVars['seminar']));
 
-		if ($eventEditor->hasAccess()) {
-			if (!$accessTestOnly) {
-				$result = $eventEditor->_render();
-			}
+		$hasAccessMessage = $eventEditor->hasAccessMessage();
+
+		if (($hasAccessMessage == '') && !$accessTestOnly) {
+			$result = $eventEditor->render();
 		} else {
-			$result = $eventEditor->hasAccessMessage();
+			$result = $hasAccessMessage;
 			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 				'Status: 403 Forbidden'
 			);

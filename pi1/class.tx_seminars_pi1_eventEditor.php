@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_formidableapi);
-
 require_once(PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
@@ -41,36 +39,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	/**
-	 * @var string class name
-	 */
-	public $prefixId = 'tx_seminars_event_editor';
-
-	/**
 	 * @var string path to this script relative to the extension directory
 	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_eventEditor.php';
-
-	/**
-	 * @var string the extension key
-	 */
-	public $extKey = 'seminars';
-
-	/**
-	 * @var tx_seminars_pi1 the pi1 object where this event editor will be
-	 *                      inserted
-	 */
-	protected $plugin = null;
-
-	/**
-	 * @var tx_ameosformidable form creator
-	 */
-	private $oForm = null;
-
-	/**
-	 * @var mixed UID of the event to edit or false (not 0!) to create
-	 *            a new event
-	 */
-	private $iEdition = false;
 
 	/**
 	 * @var string stores a validation error message if there was one
@@ -85,60 +56,47 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	/**
 	 * The constructor.
 	 *
-	 * After the constructor has been called, hasAccess() (or hasAccessMessage())
-	 * must be called to ensure that the logged-in user is allowed to edit a
-	 * given seminar.
+	 * After the constructor has been called, hasAccessMessage() must be called
+	 * to ensure that the logged-in user is allowed to edit a given seminar.
 	 *
-	 * @param tx_seminars_pi1 the pi1 object where this event editor will
-	 *                        be inserted
+	 * @param array TypoScript configuration for the plugin
+	 * @param tslib_cObj the parent cObj content, needed for the flexforms
 	 */
-	public function __construct(tx_seminars_pi1 $plugin) {
-		$this->plugin = $plugin;
-		$this->init($this->plugin->conf);
+	public function __construct(array $configuration, tslib_cObj $cObj) {
+		parent::__construct($configuration, $cObj);
+		$this->setXmlPath('pi1/event_editor.xml');
 
-		// Edit an existing record or create a new one?
-		$this->iEdition = (array_key_exists('action', $this->plugin->piVars)
-			&& $this->plugin->piVars['action'] == 'EDIT')
-			&& (intval($this->plugin->piVars['seminar']) > 0)
-			? intval($this->plugin->piVars['seminar']) : false;
-
-		// initialize the creation/edition form
-		$this->_initForms();
+		$this->declareDataHandler();
+		$this->includeJavaScriptToDeleteAttachments();
 	}
 
 	/**
-	 * Frees as much memory that has been used by this object as possible.
+	 * Stores the currently attached files.
+	 *
+	 * Attached files are stored in a member variable and added to the form data
+	 * afterwards, as the FORMidable renderlet is not usable for this.
 	 */
-	public function __destruct() {
-		unset($this->plugin, $this->oForm);
-		parent::__destruct();
+	private function storeAttachedFiles() {
+		if (!$this->isTestMode()) {
+			$this->attachedFiles = t3lib_div::trimExplode(
+				',',
+				$this->getFormCreator()->oDataHandler
+					->__aStoredData['attached_files'],
+				true
+			);
+		} else {
+			$this->attachedFiles = array();
+		}
 	}
 
 	/**
-	 * Initializes the create/edit form.
+	 * Declares the additional data handler for m:n relations.
 	 */
-	protected function _initForms() {
-		$this->oForm = t3lib_div::makeInstance('tx_ameosformidable');
-
-		// Declares the additional datahandler for m:n relations.
+	private function declareDataHandler() {
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
 			['declaredobjects']['datahandlers']['DBMM'] = array(
 				'key' => 'dh_dbmm', 'base' => true
 			);
-
-		$this->includeJavaScriptToDeleteAttachments();
-
-		$this->oForm->init(
-			$this,
-			t3lib_extmgm::extPath($this->extKey).'pi1/event_editor.xml',
-			$this->iEdition
-		);
-		// Attached files are stored in a member variable and added to the form
-		// data afterwards, as the FORMidable renderlet is not usable for this.
-		$attachments = $this->oForm->oDataHandler->__aStoredData['attached_files'];
-		if ($attachments != '') {
-			$this->attachedFiles = t3lib_div::trimExplode(',', $attachments);
-		}
 	}
 
  	/**
@@ -160,11 +118,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *                configuration, will never be null
 	 */
 	public function getTemplatePath() {
-		return t3lib_div::getFileAbsFileName(
-			$this->plugin->getConfValueString(
-				'templateFile', 's_template_special', true
-			)
-		);
+		return t3lib_div::getFileAbsFileName($this->getConfValueString(
+			'templateFile', 's_template_special', true
+		));
 	}
 
 	/**
@@ -172,14 +128,16 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *
 	 * @return string HTML of the create/edit form
 	 */
-	public function _render() {
+	public function render() {
+		$this->storeAttachedFiles();
+
 		$template = t3lib_div::makeInstance('tx_oelib_Template');
-		$template->processTemplate($this->oForm->render());
+		$template->processTemplate(parent::render());
 
 		// The redirect to the FE editor with the current record loaded can
 		// only work with the record's UID, but new records do not have a UID
 		// before they are saved.
-		if (!$this->iEdition) {
+		if ($this->getObjectUid() == 0) {
 			$template->hideSubparts('submit_and_stay');
 		}
 
@@ -205,10 +163,10 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			'label_delete', 'label_really_delete', 'label_save',
 			'label_save_and_back',
 		) as $label) {
-			$template->setMarker($label, $this->plugin->translate($label));
+			$template->setMarker($label, $this->translate($label));
 		}
 
-		$originalAttachmentList = $this->oForm->oDataHandler->oForm
+		$originalAttachmentList = $this->getFormCreator()->oDataHandler->oForm
 			->aORenderlets['attached_files']->mForcedValue;
 
 		if (($originalAttachmentList != '') && !empty($this->attachedFiles)) {
@@ -379,26 +337,20 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	public function getEventSuccessfullySavedUrl() {
 		$additionalParameters = '';
 
-		// For testing, the check for whether $this->oForm is defined is
-		// necessary, because the FORMidable object is not initialized for
-		// testing.
-		if ($this->oForm
-			&& $this->oForm->oDataHandler->getThisFormData('proceed_file_upload')
-		) {
-			$piVars = $this->plugin->piVars;
-			unset($piVars['DATA']);
+		if ($this->getFormValue('proceed_file_upload')) {
 			$additionalParameters = t3lib_div::implodeArrayForUrl(
-				$this->plugin->prefixId, $piVars
+				$this->prefixId,
+				array('seminar' => $this->getObjectUid())
 			);
 			$pageId =  $GLOBALS['TSFE']->id;
 		} else {
-			$pageId =  $this->plugin->getConfValueInteger(
+			$pageId =  $this->getConfValueInteger(
 				'eventSuccessfullySavedPID', 's_fe_editing'
 			);
 		}
 
 		return t3lib_div::locationHeaderUrl(
-			$this->plugin->cObj->typoLink_URL(array(
+			$this->cObj->typoLink_URL(array(
 				'parameter' => $pageId,
 				'additionalParams' => $additionalParameters,
 			))
@@ -410,59 +362,53 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * FE group that is allowed to enter and edit event records in the FE.
 	 * This group can be set using plugin.tx_seminars.eventEditorFeGroupID.
 	 *
-	 * If the "seminar" piVar is set, it also is checked whether that event
-	 * record exists and the logged-in FE user is the owner.
+	 * It also is checked whether that event record exists and the logged-in
+	 * FE user is the owner or is editing a new record.
 	 *
-	 * @return boolean true if a user is logged in and allowed to enter and
-	 *                 edit events (especially the event given in the piVar
-	 *                 "seminar"), false otherwise
+	 * @return string locallang key of an error message, will be an empty
+	 *                string if access was granted
 	 */
-	public function hasAccess() {
+	private function checkAccess() {
 		if (!$this->isLoggedIn()) {
-			return false;
+			return 'message_notLoggedIn';
 		}
 
-		$seminarUid = isset($this->plugin->piVars['seminar'])
-			? $this->plugin->piVars['seminar'] : 0;
-
-		if ($seminarUid > 0
+		if (($this->getObjectUid() > 0)
 			&& !tx_seminars_objectfromdb::recordExists(
-				$seminarUid, SEMINARS_TABLE_SEMINARS
+				$this->getObjectUid(), SEMINARS_TABLE_SEMINARS
 			)
 		) {
-			return false;
+			return 'message_wrongSeminarNumber';
 		}
 
-		if ($seminarUid > 0  && isset($this->plugin->piVars['action'])
-			&& $this->plugin->piVars['action'] == 'EDIT'
-		) {
+		if ($this->getObjectUid() > 0) {
 			$seminarClassname = t3lib_div::makeInstanceClassName(
 				'tx_seminars_seminar'
 			);
-			$seminar = new $seminarClassname($seminarUid);
-			$mayManagersEditTheirEvents
-				= $this->plugin->getConfValueBoolean(
-					'mayManagersEditTheirEvents', 's_listView'
-				);
+			$seminar = new $seminarClassname($this->getObjectUid());
 			$isUserVip = $seminar->isUserVip(
 				$this->getFeUserUid(),
-				$this->plugin->getConfValueInteger('defaultEventVipsFeGroupID')
+				$this->getConfValueInteger('defaultEventVipsFeGroupID')
 			);
 			$isUserOwner = $seminar->isOwnerFeUser();
 			$seminar->__destruct();
 			unset($seminar);
-			$result = $isUserOwner
+			$mayManagersEditTheirEvents = $this->getConfValueBoolean(
+				'mayManagersEditTheirEvents', 's_listView'
+			);
+
+			$hasAccess = $isUserOwner
 				|| ($mayManagersEditTheirEvents && $isUserVip);
 		} else {
-			$eventEditorGroupUid = $this->plugin->getConfValueInteger(
-			 'eventEditorFeGroupID', 's_fe_editing'
+			$eventEditorGroupUid = $this->getConfValueInteger(
+				'eventEditorFeGroupID', 's_fe_editing'
 			);
-			$result = isset(
+			$hasAccess = isset(
 				$GLOBALS['TSFE']->fe_user->groupData['uid'][$eventEditorGroupUid]
 			);
 		}
 
-		return $result;
+		return ($hasAccess ? '' : 'message_noAccessToEventEditor');
 	}
 
 	/**
@@ -478,13 +424,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function hasAccessMessage() {
 		$result = '';
+		$errorMessage = $this->checkAccess();
 
-		if (!$this->hasAccess()) {
-			$this->plugin->setMarker(
-				'error_text',
-				$this->plugin->translate('message_noAccessToEventEditor')
-			);
-			$result = $this->plugin->getSubpart('ERROR_VIEW');
+		if ($errorMessage != '') {
+			$this->setMarker('error_text', $this->translate($errorMessage));
+			$result = $this->getSubpart('ERROR_VIEW');
 		}
 
 		return $result;
@@ -568,7 +512,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$formData['crdate'] = mktime();
 		$formData['owner_feuser'] = $this->getFeUserUid();
-		$formData['pid'] = $this->plugin->getConfValueInteger(
+		$formData['pid'] = $this->getConfValueInteger(
 			'createEventsPID', 's_fe_editing'
 		);
 	}
@@ -626,7 +570,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		// If there is a validation error, the upload has to be done again.
 		if (($this->validationError == '')
-			&& $this->oForm->oDataHandler->_allIsValid()
+			&& ($this->isTestMode
+				|| $this->getFormCreator()->oDataHandler->_allIsValid()
+			)
 		) {
 			array_push($this->attachedFiles, $fileToCheck);
 		} else {
@@ -642,7 +588,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @param string file name, must match an uploaded file, must not be empty
 	 */
 	private function checkFileType($fileName) {
-		$allowedExtensions = $this->plugin->getConfValueString(
+		$allowedExtensions = $this->getConfValueString(
 			'allowedExtensionsForUpload', 's_fe_editing'
 		);
 
@@ -651,7 +597,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$fileName
 		)) {
 			$this->validationError
-				= $this->plugin->translate('message_invalid_type') .
+				= $this->translate('message_invalid_type') .
 					' ' . str_replace(',', ', ', $allowedExtensions) . '.';
 		}
 	}
@@ -668,7 +614,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		if ($fileInformation['size'] > ($maximumFileSize * 1024)) {
 			$this->validationError
-				= $this->plugin->translate('message_file_too_large') .
+				= $this->translate('message_file_too_large') .
 					' ' . $maximumFileSize . 'kB.';
 		}
 	}

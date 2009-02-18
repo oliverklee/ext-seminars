@@ -44,8 +44,12 @@ class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
 
-		$this->fixture = new tx_seminars_pi1_frontEndEditor();
+		$this->fixture = new tx_seminars_pi1_frontEndEditor(
+			array(), $GLOBALS['TSFE']->cObj
+		);
+		$this->fixture->setTestMode();
 	}
 
 	public function tearDown() {
@@ -53,6 +57,27 @@ class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework);
+	}
+
+
+	//////////////////////////////
+	// Testing the testmode flag
+	//////////////////////////////
+
+	public function testIsTestModeReturnsTrueForTestModeEnabled() {
+		$this->assertTrue(
+			$this->fixture->isTestMode()
+		);
+	}
+
+	public function testIsTestModeReturnsFalseForTestModeDisabled() {
+		$fixture = new tx_seminars_pi1_frontEndEditor(array(), $GLOBALS['TSFE']->cObj);
+
+		$this->assertFalse(
+			$fixture->isTestMode()
+		);
+
+		$fixture->__destruct();
 	}
 
 
@@ -215,6 +240,51 @@ class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 				$uid => array('caption' => 'foo', 'value' => $uid),
 			),
 			$this->fixture->populateList(array(), 'tx_seminars_test')
+		);
+	}
+
+
+	/////////////////////////////////////////////////
+	// Tests for setting and getting the object UID
+	/////////////////////////////////////////////////
+
+	public function testGetObjectUidReturnsTheSetObjectUidForZero() {
+		$this->fixture->setObjectUid(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getObjectUid()
+		);
+	}
+
+	public function testGetObjectUidReturnsTheSetObjectUidForExistingObjectUid() {
+		$uid = $this->testingFramework->createRecord('tx_seminars_test');
+		$this->fixture->setObjectUid($uid);
+
+		$this->assertEquals(
+			$uid,
+			$this->fixture->getObjectUid()
+		);
+	}
+
+
+	////////////////////////////////////////////////////////////////
+	// Tests for getting form values and setting faked form values
+	////////////////////////////////////////////////////////////////
+
+	public function testGetFormValueReturnsEmptyStringForRequestedFormValueNotSet() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getFormValue('title')
+		);
+	}
+
+	public function testGetFormValueReturnsValueSetViaSetFakedFormValue() {
+		$this->fixture->setFakedFormValue('title', 'foo');
+
+		$this->assertEquals(
+			'foo',
+			$this->fixture->getFormValue('title')
 		);
 	}
 }

@@ -25,31 +25,25 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_registrationEditorChild.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
 
 /**
- * Testcase for the registrationEditorChild class in the 'seminars' extensions.
+ * Testcase for the registrationEditor class in the 'seminars' extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
+class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_registrationEditorChild
+	 * @var tx_seminars_pi1_registrationEditor
 	 */
 	private $fixture;
 
-	/** our instance of the testing framework */
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
-
-	/** the UID of a dummy front end page */
-	private $frontEndPageUid;
-
-	/** the instance of tx_seminars_pi1*/
-	private $pi1;
 
 	/**
 	 * @var tx_oelib_FakeSession a fake session
@@ -58,46 +52,39 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
-		$this->frontEndPageUid = $this->testingFramework->createFrontEndPage();
-		$this->testingFramework->createFakeFrontEnd($this->frontEndPageUid);
+		$frontEndPageUid = $this->testingFramework->createFrontEndPage();
+		$this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 
 		$this->session = new tx_oelib_FakeSession();
 		tx_oelib_Session::setInstance(
 			tx_oelib_Session::TYPE_USER, $this->session
 		);
 
-		$seminarUid = $this->testingFramework->createRecord(
+		$seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('payment_methods' => '1')
-		);
+		));
 
-		$this->pi1 = new tx_seminars_pi1();
-		$this->pi1->createSeminar($seminarUid);
-		$this->pi1->init(
+		$this->fixture = new tx_seminars_pi1_registrationEditor(
 			array(
-				'isStaticTemplateLoaded' => 1,
-				'pageToShowAfterUnregistrationPID' => $this->frontEndPageUid,
+				'pageToShowAfterUnregistrationPID' => $frontEndPageUid,
 				'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
-				'thankYouAfterRegistrationPID' => $this->frontEndPageUid,
+				'thankYouAfterRegistrationPID' => $frontEndPageUid,
 				'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'logOutOneTimeAccountsAfterRegistration' => 1,
-			)
+			),
+			$GLOBALS['TSFE']->cObj
 		);
-		$this->pi1->getTemplateCode();
-		$this->pi1->setLabels();
-
-		$this->fixture = new tx_seminars_registrationEditorChild($this->pi1);
+		$this->fixture->setAction('register');
+		$this->fixture->setSeminar($seminar);
+		$this->fixture->setTestMode();
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->pi1->__destruct();
 		$this->fixture->__destruct();
-		unset(
-			$this->pi1, $this->fixture, $this->pi1, $this->session,
-			$this->testingFramework
-		);
+		unset($this->fixture, $this->session, $this->testingFramework);
 	}
 
 
@@ -202,7 +189,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////
 
 	public function testSaveDataToSessionCanWriteEmptyZipToUserSession() {
-		$this->fixture->saveDataToSession(array('zip' => ''));
+		$this->fixture->processRegistration(array('zip' => ''));
 
 		$this->assertEquals(
 			'',
@@ -213,7 +200,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSaveDataToSessionCanWriteNonEmptyZipToUserSession() {
-		$this->fixture->saveDataToSession(array('zip' => '12345'));
+		$this->fixture->processRegistration(array('zip' => '12345'));
 
 		$this->assertEquals(
 			'12345',
@@ -227,7 +214,7 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 		$this->session->setAsString(
 			'tx_seminars_registration_editor_zip', '12345'
 		);
-		$this->fixture->saveDataToSession(array('zip' => ''));
+		$this->fixture->processRegistration(array('zip' => ''));
 
 		$this->assertEquals(
 			'',
@@ -275,11 +262,11 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////
 
 	public function testGetStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage() {
-		$this->pi1->setConfigurationValue(
+		$this->fixture->setConfigurationValue(
 			'numberOfFirstRegistrationPage',
 			1
 		);
-		$this->pi1->setConfigurationValue(
+		$this->fixture->setConfigurationValue(
 			'numberOfLastRegistrationPage',
 			2
 		);
@@ -293,11 +280,11 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetStepCounterReturnsNumberOfLastRegistrationPage() {
-		$this->pi1->setConfigurationValue(
+		$this->fixture->setConfigurationValue(
 			'numberOfFirstRegistrationPage',
 			1
 		);
-		$this->pi1->setConfigurationValue(
+		$this->fixture->setConfigurationValue(
 			'numberOfLastRegistrationPage',
 			2
 		);
@@ -310,11 +297,11 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage() {
-		$this->pi1->setConfigurationValue(
+		$this->fixture->setConfigurationValue(
 			'numberOfFirstRegistrationPage',
 			1
 		);
-		$this->pi1->setConfigurationValue(
+		$this->fixture->setConfigurationValue(
 			'numberOfLastRegistrationPage',
 			2
 		);

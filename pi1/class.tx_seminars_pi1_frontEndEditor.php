@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(PATH_formidableapi);
+
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
@@ -35,7 +37,146 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndEditor extends tx_oelib_templatehelper {
+class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
+	/**
+	 * @var tx_ameosformidable object that creates the form
+	 */
+	private $formCreator = null;
+
+	/**
+	 * @var integer UID of the currently edited object, zero if the object is
+	 *              going to be a new database record
+	 */
+	private $objectUid = 0;
+
+	/**
+	 * @var string the path to the FORMidable XML file
+	 */
+	private $xmlPath;
+
+	/**
+	 * @var boolean whether the class ist used in test mode
+	 */
+	private $isTestMode = false;
+
+	/**
+	 * @var array this is used to fake form values for testing
+	 */
+	private $fakedFormValues = array();
+
+	/**
+	 * Frees as much memory that has been used by this object as possible.
+	 */
+	public function __destruct() {
+		unset($this->formCreator);
+		parent::__destruct();
+	}
+
+	/**
+	 * Sets the current UID.
+	 *
+	 * @param integer UID of the currently edited object. For creating a new
+	 *                database record, $uid must be zero. $uid must not be < 0.
+	 */
+	public function setObjectUid($uid) {
+		$this->objectUid = $uid;
+	}
+
+	/**
+	 * Gets the current object UID.
+	 *
+	 * @return integer UID of the currently edited object, zero if a new object
+	 *                 is being created
+	 */
+	public function getObjectUid() {
+		return $this->objectUid;
+	}
+
+	/**
+	 * Sets the path to the FORMidable XML file to use.
+	 *
+	 * @param string path of the XML for the form, relative to this extension,
+	 *               must not begin with a slash and must not be empty
+	 */
+	public function setXmlPath($path) {
+		$this->xmlPath = $path;
+	}
+
+	/**
+	 * Returns the FORMidable instance.
+	 *
+	 * @return tx_ameosformidable FORMidable instance or null if the test mode
+	 *                            is set
+	 */
+	public function getFormCreator() {
+		if (!$this->formCreator) {
+			$this->formCreator = $this->makeFormCreator();
+		}
+
+		return $this->formCreator;
+	}
+
+	/**
+	 * Enables the test mode. If this mode is activated, the FORMidable object
+	 * will not be used at all, instead the faked form values will be taken.
+	 */
+	public function setTestMode() {
+		$this->isTestMode = true;
+	}
+
+	/**
+	 * Checks whether the test mode is set.
+	 *
+	 * @return boolean true if the test mode is set, false otherwise
+	 */
+	public function isTestMode() {
+		return $this->isTestMode;
+	}
+
+	/**
+	 * Returns the FE editor in HTML.
+	 *
+	 * Note that render() requires the FORMidable object to be initializable.
+	 * This means that the test mode must not be set when calling render().
+	 *
+	 * @return string HTML for the FE editor or an error view if the
+	 *                requested object is not editable for the current user
+	 */
+	public function render() {
+		return $this->getFormCreator()->render();
+	}
+
+	/**
+	 * Creates a FORMidable instance for the current UID and XML path. The UID
+	 * must be of an existing seminar object.
+	 *
+	 * This function does nothing if this instance is running in test mode.
+	 *
+	 * @return tx_ameosformidable FORMidable instance or null if the test mode
+	 *                            is set
+	 */
+	protected function makeFormCreator() {
+		if ($this->isTestMode()) {
+			return null;
+		}
+
+		if ($this->xmlPath == '') {
+			throw new Exception(
+				'Please define the path to the XML file to use via ' .
+				'$this->setXmlPath().'
+			);
+		}
+
+		$formCreator = t3lib_div::makeInstance('tx_ameosformidable');
+		$formCreator->init(
+			$this,
+			t3lib_extMgm::extPath($this->extKey) . $this->xmlPath,
+			($this->getObjectUid() > 0) ? $this->getObjectUid() : false
+		);
+
+		return $formCreator;
+	}
+
 	/**
 	 * Provides data items from the DB.
 	 *
@@ -80,6 +221,38 @@ class tx_seminars_pi1_frontEndEditor extends tx_oelib_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns a form value from the FORMidable object.
+	 *
+	 * Note: In test mode, this function will return faked values.
+	 *
+	 * @param string column name of the SEMINARS_TABLE_SEMINARS table as key,
+	 *               must not be empty
+	 *
+	 * @return string form value or an empty string if the value does not exist
+	 */
+	public function getFormValue($key) {
+		$dataSource = ($this->isTestMode)
+			? $this->fakedFormValues
+			: $this->getFormCreator()->oDataHandler->__aFormData;
+
+		return isset($dataSource[$key]) ? $dataSource[$key] : '';
+	}
+
+	/**
+	 * Fakes a form data value that is usually provided by the FORMidable
+	 * object.
+	 *
+	 * This function is for testing purposes.
+	 *
+	 * @param string column name of the SEMINARS_TABLE_SEMINARS table as key,
+	 *               must not be empty
+	 * @param mixed faked value
+	 */
+	public function setFakedFormValue($key, $value) {
+		$this->fakedFormValues[$key] = $value;
 	}
 }
 

@@ -79,7 +79,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
 	 * By default, the process of creating a seminar object from a hidden record
-	 * fails. If we need the seminar object although it's hidden, theparameter
+	 * fails. If we need the seminar object although it's hidden, the parameter
 	 * $allowHiddenRecords should be set to true.
 	 *
 	 * @param integer The UID of the seminar to retrieve from the DB.

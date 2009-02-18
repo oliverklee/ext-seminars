@@ -676,7 +676,7 @@
 			<onclick runat="server" submit="full">
 				<userobj>
 					<php><![CDATA[
-						if ($this->_oParent->oForm->oDataHandler->_allIsValid()) {
+						if ($this->_oParent->getFormCreator()->oDataHandler->_allIsValid()) {
 							$this->_oParent->currentPageNumber = 2;
 						}
 					]]></php>
