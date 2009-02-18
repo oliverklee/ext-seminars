@@ -101,7 +101,7 @@ abstract class tx_seminars_mod2_EventMailForm {
 		}
 
 		return '<fieldset id="EventMailForm"><form action="index.php?id=' .
-			$pageData['uid'] .
+			tx_oelib_PageFinder::getInstance()->getPageUid() .
 			'&amp;subModule=1" method="post">' .
 			$this->createSenderFormElement() .
 			$this->createSubjectFormElement() .

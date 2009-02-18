@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2714] Fix: Undefined variable in return value of tx_seminars_mod2_EventMailForm::render()
 - [#2706] Change: Make the FE editor testable
 - [#2594] Feature: Use HTML for the thank-you and unregistration e-mails to the attendees
 - [#2695] Change: Use the new mail class in registration::sendAdditionalNotification

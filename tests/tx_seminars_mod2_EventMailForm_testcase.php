@@ -134,6 +134,15 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 	// Tests regarding the rendering of the form
 	//////////////////////////////////////////////
 
+	public function testFormActionContainsCurrentPage() {
+		tx_oelib_PageFinder::getInstance()->setPageUid(42);
+
+		$this->assertContains(
+			'?id=42',
+			$this->fixture->render()
+		);
+	}
+
 	public function testRenderContainsOrganizerNameAsSenderForEventWithOneOrganizer() {
 		$this->assertContains(
 			'<input type="hidden" id="sender" name="sender" value="' .
