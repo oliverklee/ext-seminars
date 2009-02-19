@@ -39,6 +39,11 @@ class tx_seminars_mod2_CancelEventMailForm extends tx_seminars_mod2_EventMailFor
 	protected $action = 'cancelEvent';
 
 	/**
+	 * @var integer the status to set when submitting the form
+	 */
+	protected $statusToSet = tx_seminars_seminar::STATUS_CANCELED;
+
+	/**
 	 * Returns the HTML for the submit button.
 	 *
 	 * @return string HTML for the submit button

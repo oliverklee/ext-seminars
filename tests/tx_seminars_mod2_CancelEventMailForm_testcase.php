@@ -73,6 +73,9 @@ class tx_seminars_mod2_CancelEventMailForm_testcase extends tx_phpunit_testcase 
 		// Loads the locallang file for properly working localization in the tests.
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/mod2/locallang.xml');
 
+		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -179,6 +182,31 @@ class tx_seminars_mod2_CancelEventMailForm_testcase extends tx_phpunit_testcase 
 		$this->assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
+		);
+	}
+
+
+	////////////////////////////
+	// Tests for setEventState
+	////////////////////////////
+
+	public function testSetEventStateSetsStatusToCanceled() {
+		$this->fixture->setPostData(
+			array(
+				'action' => 'cancelEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertTrue(
+			$this->testingFramework->existsRecord(
+				SEMINARS_TABLE_SEMINARS,
+				'uid = ' . $this->eventUid . ' AND cancelled = ' .
+					tx_seminars_seminar::STATUS_CANCELED
+			)
 		);
 	}
 }

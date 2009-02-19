@@ -59,6 +59,11 @@ abstract class tx_seminars_mod2_EventMailForm {
 	protected $action;
 
 	/**
+	 * @var integer the status to set when submitting the form
+	 */
+	protected $statusToSet = tx_seminars_seminar::STATUS_PLANNED;
+
+	/**
 	 * The constructor of this class. Instantiates an event object.
 	 *
 	 * @throws Exception if event could not be instantiated
@@ -88,16 +93,18 @@ abstract class tx_seminars_mod2_EventMailForm {
 	 * Returns the HTML needed to show the form. If the current user has not
 	 * the necessary permissions, an empty string is returned.
 	 *
-	 * @return string HTML for the whole form, will be empty if user hat not
-	 *                enough permissions
+	 * @return string HTML for the whole form, will be empty if the user has
+	 *                insufficient permissions
 	 */
 	public function render() {
 		if (!$this->checkAccess()) {
 			return '';
 		}
 
-		if ($this->isSubmitted()) {
-			$this->validateFormData();
+		if ($this->isSubmitted() && $this->validateFormData()) {
+			$this->setEventStatus();
+			$this->sendEmailToAttendees();
+			$this->redirectToListView();
 		}
 
 		return '<fieldset id="EventMailForm"><form action="index.php?id=' .
@@ -130,8 +137,10 @@ abstract class tx_seminars_mod2_EventMailForm {
 	 * The following fields are tested for being non-empty:
 	 * - subject
 	 * - messageBody
+	 *
+	 * @return boolean true if the form data is valid, false otherwise
 	 */
-	public function validateFormData() {
+	private function validateFormData() {
 		if ($this->getPostData('subject') == '') {
 			$this->markAsIncomplete();
 			$this->errorMessages['subject'] = $GLOBALS['LANG']->getLL(
@@ -145,6 +154,8 @@ abstract class tx_seminars_mod2_EventMailForm {
 				'eventMailForm_error_messageBodyMustNotBeEmpty'
 			);
 		}
+
+		return $this->isComplete;
 	}
 
 	/**
@@ -152,7 +163,7 @@ abstract class tx_seminars_mod2_EventMailForm {
 	 * with valid data). This will hinder the later process to really send the
 	 * mail and do any further processing with the event.
 	 *
-	 * This method is for testing only.
+	 * This method is public for testing only.
 	 */
 	public function markAsIncomplete() {
 		$this->isComplete = false;
@@ -178,25 +189,33 @@ abstract class tx_seminars_mod2_EventMailForm {
 	protected function createSenderFormElement() {
 		$result = '<p><label for="sender">' .
 			$GLOBALS['LANG']->getLL('eventMailForm_sender') . '</label>';
-		$organizers = $this->event->getOrganizersNameAndEmail();
 
-		if (count($organizers) > 1) {
+		$organizers = $this->event->getOrganizerBag();
+		$multipleOrganizers = $organizers->count() > 1;
+
+		if ($multipleOrganizers) {
 			$result .= '<select id="sender" name="sender">';
-			foreach ($organizers as $currentOrganizer) {
-				$currentOrganizer = htmlspecialchars($currentOrganizer);
-				$result .= '<option value="' . $currentOrganizer . '">' .
-					$currentOrganizer . '</option>';
-			}
-			$result .= '</select>';
+			$openingOptionTag = '<option value="';
+			$bracketClose = '">';
+			$closingOptionTag = '</option>';
 		} else {
-			$currentOrganizer = htmlspecialchars($organizers[0]);
-			$result .= '<input type="hidden" id="sender" name="sender" value="' .
-				$currentOrganizer . '" />';
-			$result .= $currentOrganizer;
+			$result .= '<input type="hidden" id="sender" name="sender" value="';
+			$openingOptionTag = '';
+			$bracketClose = '" />';
+			$closingOptionTag = '';
 		}
-		$result .= '</p>';
 
-		return $result;
+		foreach ($organizers as $currentOrganizer) {
+			$result .=  $openingOptionTag . $currentOrganizer->getUid() .
+				$bracketClose . htmlspecialchars(
+					'"' . $currentOrganizer->getName() . '"' .
+					' <' . $currentOrganizer->getEMailAddress() . '>'
+				) . $closingOptionTag;
+		}
+
+		$organizers->__destruct();
+
+		return $result . ($multipleOrganizers ? '</select>' : '') . '</p>';
 	}
 
 	/**
@@ -294,7 +313,8 @@ abstract class tx_seminars_mod2_EventMailForm {
 	 *
 	 * @param string the field name, must not be empty
 	 *
-	 * @return string either the data from POST array or a default value for this field
+	 * @return string either the data from POST array or a default value for
+	 *                this field
 	 */
 	protected function fillFormElement($fieldName) {
 		if ($this->isSubmitted()) {
@@ -346,6 +366,57 @@ abstract class tx_seminars_mod2_EventMailForm {
 		}
 
 		return isset($this->postData[$key]);
+	}
+
+	/**
+	 * Sends an e-mail to the attendees to inform about the changed event state.
+	 */
+	private function sendEmailToAttendees() {
+		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+
+		$className = t3lib_div::makeInstanceClassName('tx_seminars_organizer');
+		$organizer = new $className(intval($this->getPostData('sender')));
+		$eMail->setSender($organizer);
+		$eMail->setSubject($this->getPostData('subject'));
+
+		$registrationBagBuilder
+			= t3lib_div::makeInstance('tx_seminars_registrationBagBuilder');
+		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
+		$registrations = $registrationBagBuilder->build();
+
+		foreach ($registrations as $registration) {
+			$eMail->addRecipient($registration->getFrontEndUser());
+			$eMail->setMessage(
+				sprintf($this->getPostData('messageBody'),
+				$registration->getFrontEndUser()->getName())
+			);
+
+			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
+		}
+
+		$eMail->__destruct();
+		$organizer->__destruct();
+		$registrations->__destruct();
+	}
+
+	/**
+	 * Marks an event according to the status to set and commits the change to
+	 * the database.
+	 */
+	private function setEventStatus() {
+		$this->getEvent()->setStatus($this->statusToSet);
+		$this->getEvent()->commitToDb();
+	}
+
+	/**
+	 * Redirects to the list view.
+	 */
+	private function redirectToListView() {
+		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+			'Location: ' . t3lib_div::locationHeaderUrl(
+				'/typo3conf/ext/seminars/mod2/index.php?id=' .
+				tx_oelib_PageFinder::getInstance()->getPageUid()
+		));
 	}
 
 	/**

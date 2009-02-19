@@ -4442,6 +4442,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Sets whether this event is planned, canceled or confirmed.
+	 *
+	 * @param integer STATUS_PLANNED, STATUS_CONFIRMED or STATUS_CANCELED
+	 */
+	public function setStatus($status) {
+		$this->setRecordPropertyInteger('cancelled', $status);
+	}
+
+	/**
 	 * Returns the cancelation deadline of this event, depending on the
 	 * cancelation deadlines of the speakers.
 	 *

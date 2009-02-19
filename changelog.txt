@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2598, #2599] Feature: After confirming/canceling an event, send the e-mail, mark the event as confirmed/canceled and redirect back into the list view
 - [#2714] Fix: Undefined variable in return value of tx_seminars_mod2_EventMailForm::render()
 - [#2706] Change: Make the FE editor testable
 - [#2594] Feature: Use HTML for the thank-you and unregistration e-mails to the attendees

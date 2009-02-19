@@ -33,11 +33,15 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Mario Rimann <mario@screenteam.com>
  */
 class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailForm  {
-
 	/**
 	 * @var string the action of this form
 	 */
 	protected $action = 'confirmEvent';
+
+	/**
+	 * @var integer the status to set when submitting the form
+	 */
+	protected $statusToSet = tx_seminars_seminar::STATUS_CONFIRMED;
 
 	/**
 	 * Returns the HTML for the submit button.

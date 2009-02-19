@@ -73,6 +73,9 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 		// Loads the locallang file for properly working localization in the tests.
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/mod2/locallang.xml');
 
+		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -146,7 +149,8 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 	public function testRenderContainsOrganizerNameAsSenderForEventWithOneOrganizer() {
 		$this->assertContains(
 			'<input type="hidden" id="sender" name="sender" value="' .
-				htmlspecialchars('"Dummy Organizer" <foo@example.org>') . '" />',
+				$this->organizerUid . '" />' .
+				htmlspecialchars('"Dummy Organizer" <foo@example.org>'),
 			$this->fixture->render()
 		);
 	}
@@ -180,11 +184,11 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 			$formOutput
 		);
 		$this->assertContains(
-			'<option value="' . htmlspecialchars('"Dummy Organizer" <foo@example.org>') . '">',
+			'<option value="' . $this->organizerUid . '">' . htmlspecialchars('"Dummy Organizer" <foo@example.org>'),
 			$formOutput
 		);
 		$this->assertContains(
-			'<option value="' . htmlspecialchars('"Second Organizer" <bar@example.org>') . '">',
+			'<option value="' . $secondOrganizerUid . '">' . htmlspecialchars('"Second Organizer" <bar@example.org>'),
 			$formOutput
 		);
 	}
@@ -292,6 +296,128 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
+		);
+	}
+
+
+	///////////////////////////////////////
+	// Tests for sendEmailToRegistrations
+	///////////////////////////////////////
+
+	public function testSendEmailToRegistrationsSendsEmailWithSubjectOnSubmitOfValidForm() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@valid-email.org'))
+			)
+		);
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertEquals(
+			'foo',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+		);
+	}
+
+	public function testSendEmailToRegistrationsInsertsUserNameIntoMailText() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array(
+						'email' => 'foo@valid-email.org', 'name' => 'test user'
+					)
+				)
+			)
+		);
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar %s',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertEquals(
+			'foo bar test user',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function testSendEmailToRegistrationsUsesSelectedOrganizerAsSender() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@valid-email.org')
+				)
+			)
+		);
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+				'sender' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_ORGANIZERS,
+					array(
+						'title' => 'Second Organizer',
+						'email' => 'bar@example.org',
+					)
+				)
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertContains(
+			'bar@example.org',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+		);
+	}
+
+
+	/////////////////////////////////
+	// Tests for redirectToListView
+	/////////////////////////////////
+
+	public function testRedirectToListViewSendsTheRedirectHeader() {
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertEquals(
+			'Location: ' . t3lib_div::locationHeaderUrl(
+				'/typo3conf/ext/seminars/mod2/index.php?id=' .
+				tx_oelib_PageFinder::getInstance()->getPageUid()
+			),
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
 }
