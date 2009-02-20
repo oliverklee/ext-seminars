@@ -731,14 +731,16 @@ $TCA['tx_seminars_seminars'] = array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.confirmation_information_sent',
 			'config' => array(
-				'type' => 'check'
+				'type' => 'check',
+				'readOnly' => 1,
 			),
 		),
 		'cancellation_information_sent' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancellation_information_sent',
 			'config' => array(
-				'type' => 'check'
+				'type' => 'check',
+				'readOnly' => 1,
 			),
 		),
 		'allows_multiple_registrations' => array(
