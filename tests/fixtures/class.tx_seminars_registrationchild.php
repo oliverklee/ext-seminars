@@ -97,6 +97,36 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	public function setUserData(array $userData) {
 		parent::setUserData($userData);
 	}
+
+	/**
+	 * Returns the content of the member variable foods.
+	 *
+	 * @return array the content of the member variable foods, will be empty if
+	 *               foods is empty
+	 */
+	public function getFoodsData() {
+		return $this->foods;
+	}
+
+	/**
+	 * Returns the content of the member variable lodgings.
+	 *
+	 * @return array the content of the member variable lodgings, will be empty
+	 *               if lodgings is empty
+	 */
+	public function getLodgingsData() {
+		return $this->lodgings;
+	}
+
+	/**
+	 * Returns the content of the member variable checkboxes.
+	 *
+	 * @return array the content of the member variable checkboxes, will be
+	 *               empty if checkboxes is empty
+	 */
+	public function getCheckboxesData() {
+		return $this->checkboxes;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminarst/tests/fixtures/class.tx_seminars_registrationchild.php']) {

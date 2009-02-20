@@ -71,17 +71,17 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * An array of UIDs of lodging options associated with this record.
 	 */
-	private $lodgings = array();
+	protected $lodgings = array();
 
 	/**
 	 * An array of UIDs of food options associated with this record.
 	 */
-	private $foods = array();
+	protected $foods = array();
 
 	/**
 	 * An array of UIDs of option checkboxes associated with this record.
 	 */
-	private $checkboxes = array();
+	protected $checkboxes = array();
 
 	/**
 	 * An array of cached seminar objects with the seminar UIDs as keys and the
@@ -213,15 +213,18 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['telephone'] = $registrationData['telephone'];
 		$this->recordData['email'] = $registrationData['email'];
 
-		$this->lodgings = isset($registrationData['lodgings'])
+		$this->lodgings = (isset($registrationData['lodgings'])
+			&& is_array($registrationData['lodgings']))
 			? $registrationData['lodgings'] : array();
 		$this->recordData['lodgings'] = count($this->lodgings);
 
-		$this->foods = isset($registrationData['foods'])
+		$this->foods = (isset($registrationData['foods'])
+			&& is_array($registrationData['foods']))
 			? $registrationData['foods'] : array();
 		$this->recordData['foods'] = count($this->foods);
 
-		$this->checkboxes = isset($registrationData['checkboxes'])
+		$this->checkboxes = (isset($registrationData['checkboxes'])
+			&& is_array($registrationData['checkboxes']))
 			? $registrationData['checkboxes'] : array();
 		$this->recordData['checkboxes'] = count($this->checkboxes);
 
