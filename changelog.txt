@@ -1,5 +1,6 @@
 0.8.0 (currently working on)
-- [#2722] Make confirmation_information_sent and cancellation_information_sent readonly when editing seminars in the BE
+- [#2720] Change: Improve the buttons for the confirm/cancel form
+- [#2722] Change: Make confirmation_information_sent and cancellation_information_sent readonly when editing seminars in the BE
 - [#2601] Feature: Add a CLI command line parameter for selecting the page that contains the TS setup that will be used by the CLI module
 - [#2598, #2599] Feature: After confirming/canceling an event, send the e-mail, mark the event as confirmed/canceled and redirect back into the list view
 - [#2714] Fix: Undefined variable in return value of tx_seminars_mod2_EventMailForm::render()

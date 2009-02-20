@@ -81,7 +81,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
-		tx_oelib_pageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
+		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ORGANIZERS,
@@ -146,7 +146,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 		$this->assertContains(
 			'<input type="submit" value="' .
 				$GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
-				'" class="confirmButton" />',
+				'" class="submitButton confirmEvent" />',
 			$this->fixture->render()
 		);
 	}

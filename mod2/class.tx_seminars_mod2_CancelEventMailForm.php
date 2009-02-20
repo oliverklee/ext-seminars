@@ -44,14 +44,12 @@ class tx_seminars_mod2_CancelEventMailForm extends tx_seminars_mod2_EventMailFor
 	protected $statusToSet = tx_seminars_seminar::STATUS_CANCELED;
 
 	/**
-	 * Returns the HTML for the submit button.
+	 * Returns the label for the submit button.
 	 *
-	 * @return string HTML for the submit button
+	 * @return string label for the submit button, will not be empty
 	 */
-	protected function createSubmitButton() {
-		return '<p><input type="submit" value="' .
-			$GLOBALS['LANG']->getLL('cancelMailForm_sendButton') .
-			'" class="confirmButton" /></p>';
+	protected function getSubmitButtonLabel() {
+		return $GLOBALS['LANG']->getLL('cancelMailForm_sendButton');
 	}
 
 	/**

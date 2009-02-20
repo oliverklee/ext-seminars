@@ -97,18 +97,24 @@ td.cancel_button input {
 	margin-bottom: 5px;
 }
 
-#EventMailForm .confirmButton {
-	width: 160px;
+#EventMailForm .submitButton {
+	width: 180px;
 	margin-left: 30px;
-	background: #fff url("icon_confirmed.png") no-repeat 2px 1px;
 	padding: 2px 2px 1px 17px;
 }
 
-#EventMailForm .cancelButton {
-	width: 160px;
-	margin-left: 80px;
+#EventMailForm .confirmEvent {
+	background: #fff url("icon_confirmed.png") no-repeat 2px 1px;
+}
+
+#EventMailForm .cancelEvent {
 	background: #fff url("icon_canceled.png") no-repeat 2px 1px;
-	padding: 2px 2px 1px 17px;
+}
+
+#EventMailForm .backButton {
+	width: 140px;
+	margin-left: 80px;
+	padding: 2px 2px 1px;
 	float: left;
 }
 

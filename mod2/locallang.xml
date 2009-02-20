@@ -41,7 +41,7 @@
 			<label index="eventMailForm_subject">Subject:</label>
 			<label index="eventMailForm_sender">Sender:</label>
 			<label index="eventMailForm_message">Message:</label>
-			<label index="eventMailForm_cancelButton">Cancel</label>
+			<label index="eventMailForm_backButton">Back</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Please enter a subject.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Please enter a message body.</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
@@ -113,7 +113,7 @@ the event you're registered for has been canceled.</label>
 			<label index="eventMailForm_subject">Betreff:</label>
 			<label index="eventMailForm_sender">Absender:</label>
 			<label index="eventMailForm_message">Mitteilung:</label>
-			<label index="eventMailForm_cancelButton">Abbrechen</label>
+			<label index="eventMailForm_backButton">Zurück</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Bitte geben Sie einen Betreff ein.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Bitte geben Sie eine Mitteilung ein.</label>
 			<label index="referencesWarning">(Es gibt %s Verbindung(en) zu diesem Datensatz!)</label>
@@ -260,7 +260,7 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="eventMailForm_subject" type="integer">75107304</label>
 			<label index="eventMailForm_sender" type="integer">208064565</label>
 			<label index="eventMailForm_message" type="integer">155215423</label>
-			<label index="eventMailForm_cancelButton" type="integer">245659783</label>
+			<label index="eventMailForm_backButton" type="integer">5603241</label>
 			<label index="confirmMailForm_sendButton" type="integer">78298817</label>
 			<label index="confirmMailForm_prefillField_subject" type="integer">47880380</label>
 			<label index="confirmMailForm_prefillField_messageBody" type="integer">79844644</label>
@@ -402,7 +402,7 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="eventMailForm_subject">Subject:</label>
 			<label index="eventMailForm_sender">Sender:</label>
 			<label index="eventMailForm_message">Message:</label>
-			<label index="eventMailForm_cancelButton">Cancel</label>
+			<label index="eventMailForm_backButton">Back</label>
 			<label index="confirmMailForm_sendButton">Confirm and send</label>
 			<label index="confirmMailForm_prefillField_subject">Event confirmed:</label>
 			<label index="confirmMailForm_prefillField_messageBody">Dear %s,

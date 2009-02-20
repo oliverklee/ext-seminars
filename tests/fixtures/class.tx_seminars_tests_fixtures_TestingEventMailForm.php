@@ -36,14 +36,12 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_tests_fixtures_TestingEventMailForm extends tx_seminars_mod2_EventMailForm {
 	/**
-	 * Returns the HTML for the submit button.
+	 * Returns the label for the submit button.
 	 *
-	 * @return string HTML for the submit button, will not be empty
+	 * @return string label for the submit button, will not be empty
 	 */
-	protected function createSubmitButton() {
-		return '<p><input type="submit" value="' .
-			$GLOBALS['LANG']->getLL('eventMailForm_confirmButton') .
-			'" class="confirmButton" /></p>';
+	protected function getSubmitButtonLabel() {
+		return $GLOBALS['LANG']->getLL('eventMailForm_confirmButton');
 	}
 
 	/**

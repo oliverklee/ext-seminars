@@ -44,14 +44,12 @@ class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailFo
 	protected $statusToSet = tx_seminars_seminar::STATUS_CONFIRMED;
 
 	/**
-	 * Returns the HTML for the submit button.
+	 * Returns the label for the submit button.
 	 *
-	 * @return string HTML for the submit button, will not be empty
+	 * @return string label for the submit button, will not be empty
 	 */
-	protected function createSubmitButton() {
-		return '<p><input type="submit" value="' .
-			$GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
-			'" class="confirmButton" /></p>';
+	protected function getSubmitButtonLabel() {
+		return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
 	}
 
 	/**

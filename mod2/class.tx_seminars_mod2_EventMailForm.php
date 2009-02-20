@@ -113,7 +113,7 @@ abstract class tx_seminars_mod2_EventMailForm {
 			$this->createSenderFormElement() .
 			$this->createSubjectFormElement() .
 			$this->createMessageBodyFormElement() .
-			$this->createCancelButton() .
+			$this->createBackButton() .
 			$this->createSubmitButton() .
 			'<p><input type="hidden" name="action" value="' . $this->action .
 			'" /><input type="hidden" name="eventUid" value="' .
@@ -259,14 +259,14 @@ abstract class tx_seminars_mod2_EventMailForm {
 	}
 
 	/**
-	 * Returns the HTML for the cancel button.
+	 * Returns the HTML for the back button.
 	 *
-	 * @return string HTML for the cancel button, will not be empty
+	 * @return string HTML for the back button, will not be empty
 	 */
-	protected function createCancelButton() {
+	protected function createBackButton() {
 		return '<p><input type="button" value="' .
-			$GLOBALS['LANG']->getLL('eventMailForm_cancelButton') .
-			'" class="cancelButton" onclick="window.location=window.location" />' .
+			$GLOBALS['LANG']->getLL('eventMailForm_backButton') .
+			'" class="backButton" onclick="window.location=window.location" />' .
 			'</p>';
 	}
 
@@ -424,7 +424,18 @@ abstract class tx_seminars_mod2_EventMailForm {
 	 *
 	 * @return string HTML for the submit button, will not be empty
 	 */
-	abstract protected function createSubmitButton();
+	protected function createSubmitButton() {
+		return '<p><input type="submit" value="' .
+			$this->getSubmitButtonLabel() .
+			'" class="submitButton '. $this->action . '" /></p>';
+	}
+
+	/**
+	 * Returns the label for the submit button.
+	 *
+	 * @return string label for the submit button, will not be empty
+	 */
+	abstract protected function getSubmitButtonLabel();
 
 	/**
 	 * Returns the initial value for a certain field.

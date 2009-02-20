@@ -81,7 +81,7 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
-		tx_oelib_pageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
+		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ORGANIZERS,
@@ -213,8 +213,9 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 	public function testRenderFormContainsCancelButton() {
 		$this->assertContains(
 			'<input type="button" value="' .
-				$GLOBALS['LANG']->getLL('eventMailForm_cancelButton') .
-				'" class="cancelButton" onclick="window.location=window.location" />',
+				$GLOBALS['LANG']->getLL('eventMailForm_backButton') .
+				'" class="backButton"' .
+				' onclick="window.location=window.location" />',
 			$this->fixture->render()
 		);
 	}
