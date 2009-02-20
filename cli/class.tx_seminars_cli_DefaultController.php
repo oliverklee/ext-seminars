@@ -33,23 +33,25 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  *
  * This class represents the seminars command line interface.
  *
+ * Any functionality is supposed to be implemented in tx_seminars_cli_Main
+ * because it is testable in contrast to this script which must not be called
+ * in any other than the TYPO3_cliMode.
+ *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_cli_DefaultController {
-	/**
-	 * Starts the CLI module default controller.
-	 */
-	public function start() {
-		echo 'This is the CLI default controller of the "seminars" extension.';
-	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/cli/class.tx_seminars_cli_DefaultController.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/realty/cli/class.tx_seminars_cli_DefaultController.php']);
 }
 
-t3lib_div::makeInstance('tx_seminars_cli_DefaultController')->start();
+try {
+	t3lib_div::makeInstance('tx_seminars_cli_Main')->start();
+} catch (Exception $exception) {
+	echo $exception->getMessage();
+}
 ?>
