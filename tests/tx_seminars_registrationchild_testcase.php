@@ -1040,5 +1040,130 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getFrontEndUser() instanceof tx_oelib_Model_FrontEndUser
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning setRegistrationData
+	/////////////////////////////////////////
+
+	public function test_SetRegistrationData_WithNoFoodOptions_InitializesFoodOptionsAsArray() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid, array()
+		);
+
+		$this->assertTrue(
+			is_array($this->fixture->getFoodsData())
+		);
+	}
+
+	public function test_SetRegistrationData_FoodOptions_StoresFoodOptionsInFoodsVariable() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$foods = array('foo' => 'foo', 'bar' => 'bar');
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(),
+			$userUid,
+			array('foods' => $foods)
+		);
+
+		$this->assertEquals(
+			$foods,
+			$this->fixture->getFoodsData()
+		);
+	}
+
+	public function test_SetRegistrationData_WithEmptyFoodOptions_InitializesFoodOptionsAsArray() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid, array('foods' => '')
+		);
+
+		$this->assertTrue(
+			is_array($this->fixture->getFoodsData())
+		);
+	}
+
+	public function test_SetRegistrationData_WithNoLodgingOptions_InitializesLodgingOptionsAsArray() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid, array()
+		);
+
+		$this->assertTrue(
+			is_array($this->fixture->getLodgingsData())
+		);
+	}
+
+	public function test_SetRegistrationData_WithLodgingOptions_StoresLodgingOptionsInLodgingVariable() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$lodgings = array('foo' => 'foo', 'bar' => 'bar');
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(),
+			$userUid,
+			array('lodgings' => $lodgings)
+		);
+
+		$this->assertEquals(
+			$lodgings,
+			$this->fixture->getLodgingsData()
+		);
+	}
+
+	public function test_SetRegistrationData_WithEmptyLodgingOptions_InitializesLodgingOptionsAsArray() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid, array('lodgings' => '')
+		);
+
+		$this->assertTrue(
+			is_array($this->fixture->getLodgingsData())
+		);
+	}
+
+	public function test_SetRegistrationData_WithNoCheckboxOptions_InitializesCheckboxOptionsAsArray() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid, array()
+		);
+
+		$this->assertTrue(
+			is_array($this->fixture->getCheckboxesData())
+		);
+	}
+
+	public function test_SetRegistrationData_WithCheckboxOptions_StoresCheckboxOptionsInCheckboxVariable() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$checkboxes = array('foo' => 'foo', 'bar' => 'bar');
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(),
+			$userUid,
+			array('checkboxes' => $checkboxes)
+		);
+
+		$this->assertEquals(
+			$checkboxes,
+			$this->fixture->getCheckboxesData()
+		);
+	}
+
+	public function test_SetRegistrationData_WithEmptyCheckboxOptions_InitializesCheckboxOptionsAsArray() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid, array('checkboxes' => '')
+		);
+
+		$this->assertTrue(
+			is_array($this->fixture->getCheckboxesData())
+		);
+	}
 }
 ?>
