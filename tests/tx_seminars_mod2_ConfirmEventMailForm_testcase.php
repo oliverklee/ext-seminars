@@ -81,6 +81,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
+		tx_oelib_pageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ORGANIZERS,
