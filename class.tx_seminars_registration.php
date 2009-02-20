@@ -92,6 +92,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	private static $cachedSeminars = array();
 
 	/**
+	 * @var integer the different options for the format of attendee e-mails
+	 */
+	const SEND_TEXT_MAIL = 0,
+		SEND_HTML_MAIL = 1,
+		SEND_USER_MAIL = 2;
+
+	/**
 	 * The constructor.
 	 *
 	 * @param object content object
@@ -773,144 +780,21 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		);
 
 		$this->initializeTemplate();
-		$this->hideSubparts(
-			$this->getConfValueString('hideFieldsInThankYouMail'),
-			'field_wrapper'
+
+		$mailFormat = tx_oelib_configurationProxy::getInstance('seminars')
+			->getConfigurationValueInteger('eMailFormatForAttendees');
+		if (($mailFormat == self::SEND_HTML_MAIL)
+			|| (($mailFormat == self::SEND_USER_MAIL)
+				&& $this->getFrontEndUser()->wantsHtmlEMail())
+		) {
+			$eMailNotification->setHTMLMessage(
+				$this->buildEmailContent($plugin, $helloSubjectPrefix, true)
+			);
+		}
+
+		$eMailNotification->setMessage(
+			$this->buildEmailContent($plugin, $helloSubjectPrefix)
 		);
-
-		$this->setMarker('hello', sprintf(
-			$this->translate('email_' . $helloSubjectPrefix . 'Hello'),
-			$this->getUserName())
-		);
-		if ($event->hasEventType()) {
-			$this->setMarker('event_type', $event->getEventType());
-		} else {
-			$this->hideSubparts('event_type', 'field_wrapper');
-		}
-		$this->setMarker('title', $event->getTitle());
-		$this->setMarker('uid', $event->getUid());
-
-		$this->setMarker('registration_uid', $this->getUid());
-
-		if ($this->hasRecordPropertyInteger('seats')) {
-			$this->setMarker(
-				'seats',
-				$this->getRecordPropertyInteger('seats')
-			);
-		} else {
-			$this->hideSubparts('seats', 'field_wrapper');
-		}
-
-		if ($this->hasRecordPropertyString('attendees_names')) {
-			$this->setMarker(
-				'attendees_names',
-				$this->getRecordPropertyString('attendees_names')
-			);
-		} else {
-			$this->hideSubparts('attendees_names', 'field_wrapper');
-		}
-
-		if ($this->hasLodgings()) {
-			$this->setMarker('lodgings', $this->getLodgings());
-		} else {
-			$this->hideSubparts('lodgings', 'field_wrapper');
-		}
-
-		if ($this->hasFoods()) {
-			$this->setMarker('foods', $this->getFoods());
-		} else {
-			$this->hideSubparts('foods', 'field_wrapper');
-		}
-
-		if ($this->hasCheckboxes()) {
-			$this->setMarker('checkboxes', $this->getCheckboxes());
-		} else {
-			$this->hideSubparts('checkboxes', 'field_wrapper');
-		}
-
-		if ($this->hasRecordPropertyInteger('kids')) {
-			$this->setMarker(
-				'kids',
-				$this->getRecordPropertyInteger('kids')
-			);
-		} else {
-			$this->hideSubparts('kids', 'field_wrapper');
-		}
-
-		if ($event->hasAccreditationNumber()) {
-			$this->setMarker(
-				'accreditation_number',
-				$event->getAccreditationNumber()
-			);
-		} else {
-			$this->hideSubparts('accreditation_number', 'field_wrapper');
-		}
-
-		if ($event->hasCreditPoints()) {
-			$this->setMarker(
-				'credit_points',
-				$event->getCreditPoints()
-			);
-		} else {
-			$this->hideSubparts('credit_points', 'field_wrapper');
-		}
-
-		$this->setMarker('date', $event->getDate('-'));
-		$this->setMarker('time', $event->getTime('-'));
-		$this->setMarker('place', $event->getPlaceShort());
-
-		if ($event->hasRoom()) {
-			$this->setMarker('room', $event->getRoom());
-		} else {
-			$this->hideSubparts('room', 'field_wrapper');
-		}
-
-		if ($event->hasAdditionalTimesAndPlaces()) {
-			$this->setMarker(
-				'additional_times_places',
-				$event->getAdditionalTimesAndPlacesRaw()
-			);
-		} else {
-			$this->hideSubparts('additional_times_places', 'field_wrapper');
-		}
-
-		if ($this->hasRecordPropertyString('price')) {
-			$this->setMarker('price', $this->getPrice());
-		} else {
-			$this->hideSubparts('price', 'field_wrapper');
-		}
-
-		if ($this->hasRecordPropertyDecimal('total_price')) {
-			$this->setMarker('total_price', $this->getTotalPrice(' '));
-		} else {
-			$this->hideSubparts('total_price', 'field_wrapper');
-		}
-
-		// We don't need to check $this->seminar->hasPaymentMethods() here as
-		// method_of_payment can only be set (using the registration form) if
-		// the event has at least one payment method.
-		if ($this->hasRecordPropertyInteger('method_of_payment')) {
-			$this->setMarker(
-				'paymentmethod',
-				$event->getSinglePaymentMethodPlain(
-					$this->getRecordPropertyInteger('method_of_payment')
-				)
-			);
-		} else {
-			$this->hideSubparts('paymentmethod', 'field_wrapper');
-		}
-
-		$this->setMarker('billing_address', $this->getBillingAddress());
-
-		$this->setMarker(
-			'url',
-			$event->getDetailedViewUrl($plugin)
-		);
-
-		$footers = $event->getOrganizersFooter();
-		$this->setMarker('footer', $footers[0]);
-
-		$eMailNotification->setMessage($this->getSubpart('MAIL_THANKYOU'));
 
 		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
 			$eMailNotification
@@ -1490,6 +1374,180 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	public function hasReferrer() {
 		return $this->hasRecordPropertyString('referrer');
+	}
+
+	/**
+	 * Builds the e-mail body for an e-mail to the attendee.
+	 *
+	 * @param tslib_pibase a live plugin
+	 * @param string prefix for the locallang key of the localized hello
+	 *               and subject string, allowed values are:
+	 *               - confirmation
+	 *               - confirmationOnUnregistration
+	 *               - confirmationOnRegistrationForQueue
+	 *               - confirmationOnQueueUpdate
+	 *               In the following the parameter is prefixed with
+	 *               "email_" and postfixed with "Hello" or "Subject".
+	 * @param boolean whether to create a HTML body for the e-mail or just the
+	 *                plain text version
+	 *
+	 * @return string the e-mail body for the attendee e-mail, will not be empty
+	 */
+	private function buildEmailContent(
+		tslib_pibase $plugin, $helloSubjectPrefix , $useHtml = false
+	) {
+		$wrapperPrefix = (($useHtml) ? 'html_' : '') . 'field_wrapper';
+
+		$this->hideSubparts(
+			$this->getConfValueString('hideFieldsInThankYouMail'),
+			$wrapperPrefix
+		);
+
+		$hello = sprintf(
+			$this->translate('email_' . $helloSubjectPrefix . 'Hello'),
+			$this->getUserName()
+		);
+		$this->setMarker('hello', (($useHtml) ? nl2br($hello) : $hello));
+		$event = $this->getSeminarObject();
+		if ($event->hasEventType()) {
+			$this->setMarker('event_type', $event->getEventType());
+		} else {
+			$this->hideSubparts('event_type', $wrapperPrefix);
+		}
+		$this->setMarker('title', $event->getTitle());
+		$this->setMarker('uid', $event->getUid());
+
+		$this->setMarker('registration_uid', $this->getUid());
+
+		if ($this->hasRecordPropertyInteger('seats')) {
+			$this->setMarker(
+				'seats',
+				$this->getRecordPropertyInteger('seats')
+			);
+		} else {
+			$this->hideSubparts('seats', $wrapperPrefix);
+		}
+
+		if ($this->hasRecordPropertyString('attendees_names')) {
+			$this->setMarker(
+				'attendees_names',
+				$this->getRecordPropertyString('attendees_names')
+			);
+		} else {
+			$this->hideSubparts('attendees_names', $wrapperPrefix);
+		}
+
+		if ($this->hasLodgings()) {
+			$this->setMarker('lodgings', $this->getLodgings());
+		} else {
+			$this->hideSubparts('lodgings', $wrapperPrefix);
+		}
+
+		if ($this->hasFoods()) {
+			$this->setMarker('foods', $this->getFoods());
+		} else {
+			$this->hideSubparts('foods', $wrapperPrefix);
+		}
+
+		if ($this->hasCheckboxes()) {
+			$this->setMarker('checkboxes', $this->getCheckboxes());
+		} else {
+			$this->hideSubparts('checkboxes', $wrapperPrefix);
+		}
+
+		if ($this->hasRecordPropertyInteger('kids')) {
+			$this->setMarker(
+				'kids',
+				$this->getRecordPropertyInteger('kids')
+			);
+		} else {
+			$this->hideSubparts('kids', $wrapperPrefix);
+		}
+
+		if ($event->hasAccreditationNumber()) {
+			$this->setMarker(
+				'accreditation_number',
+				$event->getAccreditationNumber()
+			);
+		} else {
+			$this->hideSubparts('accreditation_number', $wrapperPrefix);
+		}
+
+		if ($event->hasCreditPoints()) {
+			$this->setMarker(
+				'credit_points',
+				$event->getCreditPoints()
+			);
+		} else {
+			$this->hideSubparts('credit_points', $wrapperPrefix);
+		}
+
+		$this->setMarker('date',
+			$event->getDate(
+				(($useHtml) ? '&#8212;' : '-')
+			)
+		);
+		$this->setMarker('time',
+			$event->getTime(
+				(($useHtml) ? '&#8212;' : '-')
+			)
+		);
+		$this->setMarker('place', $event->getPlaceShort());
+
+		if ($event->hasRoom()) {
+			$this->setMarker('room', $event->getRoom());
+		} else {
+			$this->hideSubparts('room', $wrapperPrefix);
+		}
+
+		if ($event->hasAdditionalTimesAndPlaces()) {
+			$this->setMarker(
+				'additional_times_places',
+				$event->getAdditionalTimesAndPlacesRaw()
+			);
+		} else {
+			$this->hideSubparts('additional_times_places', $wrapperPrefix);
+		}
+
+		if ($this->hasRecordPropertyString('price')) {
+			$this->setMarker('price', $this->getPrice());
+		} else {
+			$this->hideSubparts('price', $wrapperPrefix);
+		}
+
+		if ($this->hasRecordPropertyDecimal('total_price')) {
+			$this->setMarker('total_price', $this->getTotalPrice(' '));
+		} else {
+			$this->hideSubparts('total_price', $wrapperPrefix);
+		}
+
+		// We don't need to check $this->seminar->hasPaymentMethods() here as
+		// method_of_payment can only be set (using the registration form) if
+		// the event has at least one payment method.
+		if ($this->hasRecordPropertyInteger('method_of_payment')) {
+			$this->setMarker(
+				'paymentmethod',
+				$event->getSinglePaymentMethodPlain(
+					$this->getRecordPropertyInteger('method_of_payment')
+				)
+			);
+		} else {
+			$this->hideSubparts('paymentmethod', $wrapperPrefix);
+		}
+
+		$this->setMarker('billing_address', $this->getBillingAddress());
+
+		$this->setMarker(
+			'url',
+			$event->getDetailedViewUrl($plugin)
+		);
+
+		$footers = $event->getOrganizersFooter();
+		$this->setMarker('footer', $footers[0]);
+
+		return $this->getSubpart(
+			(($useHtml) ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU')
+		);
 	}
 }
 

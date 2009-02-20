@@ -987,6 +987,150 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_NotifyAttendee_ForHtmlMailSet_HasHtmlBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registration::SEND_HTML_MAIL
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertContains(
+			'<html>',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForTextMailSet_DoesNotHaveHtmlBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registration::SEND_TEXT_MAIL
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertNotContains(
+			'<html>',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToHtmlMails_HasHtmlBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registration::SEND_USER_MAIL
+		);
+		$this->fixture->getFrontEndUser()->setData(
+			array(
+				'module_sys_dmail_html' => true,
+				'email' => 'foo@bar.com',
+			)
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertContains(
+			'<html>',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToTextMails_DoesNotHaveHtmlBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registration::SEND_USER_MAIL
+		);
+		$this->fixture->getFrontEndUser()->setData(
+			array(
+				'module_sys_dmail_html' => false,
+				'email' => 'foo@bar.com',
+			)
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertNotContains(
+			'<html>',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForHtmlMails_ContainsNameOfUserInBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registration::SEND_HTML_MAIL
+		);
+		$this->fixture->getFrontEndUser()->setData(
+			array(
+				'email' => 'foo@bar.com',
+			)
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertContains(
+			'foo_user',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForHtmlMails_HasLinkToSeminarInBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registration::SEND_HTML_MAIL
+		);
+		$this->fixture->getFrontEndUser()->setData(
+			array(
+				'email' => 'foo@bar.com',
+			)
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$seminarLink
+			= $this->fixture->getSeminarObject()->getDetailedViewUrl($pi1);
+		$pi1->__destruct();
+
+		$this->assertContains(
+			'<a href=3D"' . $seminarLink,
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
 
 	///////////////////////////////////////////////
 	// Tests regarding hasExistingFrontEndUser().
