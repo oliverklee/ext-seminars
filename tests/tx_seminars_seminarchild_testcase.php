@@ -5452,6 +5452,36 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////////////////////////////
+	// Tests concerning setEventTakesPlaceReminderSentFlag
+	////////////////////////////////////////////////////////
+
+	public function testSetEventTakesPlaceReminderSentFlagSetsFlagToTrue() {
+		$this->fixture->setEventTakesPlaceReminderSentFlag();
+
+		$this->assertTrue(
+			$this->fixture->getRecordPropertyBoolean(
+				'event_takes_place_reminder_sent'
+			)
+		);
+	}
+
+
+	////////////////////////////////////////////////////////////
+	// Tests concerning setCancelationDeadlineReminderSentFlag
+	////////////////////////////////////////////////////////////
+
+	public function testSetCancelationDeadlineReminderSentFlagToTrue() {
+		$this->fixture->setCancelationDeadlineReminderSentFlag();
+
+		$this->assertTrue(
+			$this->fixture->getRecordPropertyBoolean(
+				'cancelation_deadline_reminder_sent'
+			)
+		);
+	}
+
+
 	////////////////////////////////////////////
 	// Tests concerning getCancelationDeadline
 	////////////////////////////////////////////

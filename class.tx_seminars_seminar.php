@@ -4487,6 +4487,24 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Sets the "cancelation_deadline_reminder_sent" flag.
+	 */
+	public function setCancelationDeadlineReminderSentFlag() {
+		$this->setRecordPropertyBoolean(
+			'cancelation_deadline_reminder_sent', true
+		);
+	}
+
+	/**
+	 * Sets the "event_takes_place_reminder_sent" flag.
+	 */
+	public function setEventTakesPlaceReminderSentFlag() {
+		$this->setRecordPropertyBoolean(
+			'event_takes_place_reminder_sent', true
+		);
+	}
+
+	/**
 	 * Checks whether this event has a license expiry.
 	 *
 	 * @return boolean true if this event has a license expiry, false otherwise
