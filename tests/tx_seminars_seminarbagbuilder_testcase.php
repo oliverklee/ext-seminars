@@ -6398,5 +6398,132 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$bag->__destruct();
 	}
+
+
+	//////////////////////////////////////////////////////
+	// Test concerning limitToCancelationReminderNotSent
+	//////////////////////////////////////////////////////
+
+	public function testLimitToCancelationDeadlineReminderNotSentFindsEventWithCancelationReminderSentFlagFalse() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('cancelation_deadline_reminder_sent' => 0)
+		);
+
+		$this->fixture->limitToCancelationDeadlineReminderNotSent();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToCancelationDeadlineReminderNotSentNotFindsEventWithCancelationReminderSentFlagTrue() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('cancelation_deadline_reminder_sent' => 1)
+		);
+
+		$this->fixture->limitToCancelationDeadlineReminderNotSent();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+
+	//////////////////////////////////////////////////////////
+	// Test concerning limitToEventTakesPlaceReminderNotSent
+	//////////////////////////////////////////////////////////
+
+	public function testLimitToEventTakesPlaceReminderNotSentFindsEventWithConfirmationInformationSentFlagFalse() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('event_takes_place_reminder_sent' => 0)
+		);
+
+		$this->fixture->limitToEventTakesPlaceReminderNotSent();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToEventTakesPlaceReminderNotSentNotFindsEventWithConfirmationInformationSentFlagTrue() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('event_takes_place_reminder_sent' => 1)
+		);
+
+		$this->fixture->limitToEventTakesPlaceReminderNotSent();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+
+	//////////////////////////////////////////////////
+	// Tests concerning limitToPeriodBeforeBeginDate
+	//////////////////////////////////////////////////
+
+	public function testLimitToPeriodBeforeBeginDateNotFindsEventWithNoBeginDate() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+
+		$this->fixture->limitToPeriodBeforeBeginDate(1);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToPeriodBeforeBeginDateFindsEventWithFutureBeginDateWithinProvidedPeriod() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY)
+		);
+
+		$this->fixture->limitToPeriodBeforeBeginDate(2);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToPeriodBeforeBeginDateNotFindsEventWithFutureBeginDateOutOfProvidedPeriod() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (2 * ONE_DAY))
+		);
+
+		$this->fixture->limitToPeriodBeforeBeginDate(1);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
 }
 ?>

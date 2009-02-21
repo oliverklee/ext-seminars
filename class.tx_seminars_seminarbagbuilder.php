@@ -628,6 +628,39 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	}
 
 	/**
+	 * Limits the bag to future events for which the cancelation deadline
+	 * reminder has not been sent yet.
+	 */
+	public function limitToCancelationDeadlineReminderNotSent() {
+		$this->whereClauseParts['cancelation_reminder_not_sent']
+			= SEMINARS_TABLE_SEMINARS . '.cancelation_deadline_reminder_sent = 0';
+	}
+
+	/**
+	 * Limits the bag to future events for which the reminder that an event is
+	 * about to take place has not been sent yet.
+	 */
+	public function limitToEventTakesPlaceReminderNotSent() {
+		$this->whereClauseParts['event_takes_place_reminder_not_sent']
+			= SEMINARS_TABLE_SEMINARS . '.event_takes_place_reminder_sent = 0';
+	}
+
+	/**
+	 * Limits the bag to future events with are currently within a certain
+	 * period before the begin date.
+	 *
+	 * @param integer length of period in days, must be > 0
+	 */
+	public function limitToPeriodBeforeBeginDate($periodInDays) {
+		$now = $GLOBALS['SIM_EXEC_TIME'];
+		$beginDate = SEMINARS_TABLE_SEMINARS . '.begin_date';
+
+		$this->whereClauseParts['period_before_begin_date'] =
+			$beginDate . ' > ' . $now . ' AND ' .
+			$beginDate . ' < ' . ($now + ($periodInDays * ONE_DAY));
+	}
+
+	/**
 	 * Generates and returns the WHERE clause parts for the search in categories
 	 * based on the search word given in the first parameter $searchWord.
 	 *

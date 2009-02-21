@@ -49,8 +49,8 @@
 			<label index="tx_seminars_seminars.divLabelOrganizers">Organizer</label>
 			<label index="tx_seminars_seminars.organizers">Organizers:</label>
 			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
-			<label index="tx_seminars_seminars.confirmation_information_sent">Organizers have been notified concerning the event confirmation:</label>
-			<label index="tx_seminars_seminars.cancellation_information_sent">Organizers have been notified concerning the cancelation period:</label>
+			<label index="tx_seminars_seminars.event_takes_place_reminder_sent">Organizers have been reminded about this event being about to take place:</label>
+			<label index="tx_seminars_seminars.cancelation_deadline_reminder_sent">Organizers have been notified that the cancelation deadline has just passed:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
 			<label index="tx_seminars_seminars.begin_date">Begin time and date:</label>
 			<label index="tx_seminars_seminars.end_date">End time and date:</label>
@@ -236,8 +236,8 @@
 			<label index="tx_seminars_seminars.divLabelOrganizers">Veranstalter</label>
 			<label index="tx_seminars_seminars.organizers">Veranstalter:</label>
 			<label index="tx_seminars_seminars.organizing_partners">Kooperationspartner:</label>
-			<label index="tx_seminars_seminars.confirmation_information_sent">Veranstalter wurde wegen Zusage benachrichtigt:</label>
-			<label index="tx_seminars_seminars.cancellation_information_sent">Veranstalter wurde wegen Absagefrist benachrichtigt:</label>
+			<label index="tx_seminars_seminars.event_takes_place_reminder_sent">Veranstalter wurde an den baldigen Veranstaltungsbeginn erinnert:</label>
+			<label index="tx_seminars_seminars.cancelation_deadline_reminder_sent">Veranstalter wurden an die vor kurzem abgelaufene Absagefrist erinnert:</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Ort/Zeit</label>
 			<label index="tx_seminars_seminars.begin_date">Anfangszeit und -datum:</label>
 			<label index="tx_seminars_seminars.end_date">Endzeit und -datum:</label>
@@ -1340,8 +1340,8 @@
 			<label index="tx_seminars_speakers.gender_female" type="integer">41138606</label>
 			<label index="tx_seminars_seminars.requirements" type="integer">62069823</label>
 			<label index="tx_seminars_seminars.dependencies" type="integer">258671677</label>
-			<label index="tx_seminars_seminars.confirmation_information_sent" type="integer">90334478</label>
-			<label index="tx_seminars_seminars.cancellation_information_sent" type="integer">29610328</label>
+			<label index="tx_seminars_seminars.event_takes_place_reminder_sent" type="integer">239651697</label>
+			<label index="tx_seminars_seminars.cancelation_deadline_reminder_sent" type="integer">137187498</label>
 			<label index="tx_seminars_speakers.cancelation_period" type="integer">13168456</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -2303,8 +2303,8 @@
 			<label index="tx_seminars_speakers.gender_female">female</label>
 			<label index="tx_seminars_seminars.requirements">Requirements:</label>
 			<label index="tx_seminars_seminars.dependencies">Requirement for:</label>
-			<label index="tx_seminars_seminars.confirmation_information_sent">Organizers have been notified concerning the event confirmation:</label>
-			<label index="tx_seminars_seminars.cancellation_information_sent">Organizers have been notified concerning the cancelation period:</label>
+			<label index="tx_seminars_seminars.event_takes_place_reminder_sent">Organizers have been reminded about this event being about to take place:</label>
+			<label index="tx_seminars_seminars.cancelation_deadline_reminder_sent">Organizers have been notified that the cancelation deadline has just passed:</label>
 			<label index="tx_seminars_speakers.cancelation_period">Cancelation period (in days):</label>
 		</languageKey>
 		<languageKey index="dk" type="array">

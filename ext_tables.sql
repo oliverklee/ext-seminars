@@ -242,8 +242,8 @@ CREATE TABLE tx_seminars_seminars (
 	payment_methods tinytext,
 	organizers tinytext,
 	organizing_partners int(11) unsigned DEFAULT '0' NOT NULL,
-	confirmation_information_sent int(1) unsigned DEFAULT '0' NOT NULL,
-	cancellation_information_sent int(1) unsigned DEFAULT '0' NOT NULL,
+	event_takes_place_reminder_sent int(1) unsigned DEFAULT '0' NOT NULL,
+	cancelation_deadline_reminder_sent int(1) unsigned DEFAULT '0' NOT NULL,
 	allows_multiple_registrations tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_max int(11) unsigned DEFAULT '0' NOT NULL,
@@ -265,7 +265,9 @@ CREATE TABLE tx_seminars_seminars (
 	KEY parent (pid),
 	KEY dummy (is_dummy_record),
 	KEY object_type (object_type),
-	KEY topic (topic)
+	KEY topic (topic),
+	KEY event_takes_place_reminder_sent (event_takes_place_reminder_sent),
+	KEY cancelation_deadline_reminder_sent (cancelation_deadline_reminder_sent)
 );
 
 
