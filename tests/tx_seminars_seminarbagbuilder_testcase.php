@@ -1412,6 +1412,130 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////////////////////////////
 	// Tests for limiting the bag to events in certain time-frames.
 	//
+	// * upcoming events with begin date
+	/////////////////////////////////////////////////////////////////
+
+	public function testSetTimeFrameUpcomingWithBeginDateIgnoresPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcomingWithBeginDate');
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testSetTimeFrameUpcomingWithBeginDateIgnoresOpenEndedPastEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcomingWithBeginDate');
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testSetTimeFrameUpcomingWithBeginDateIgnoresCurrentEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcomingWithBeginDate');
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testSetTimeFrameUpcomingWithBeginDateFindsUpcomingEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcomingWithBeginDate');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testSetTimeFrameUpcomingWithBeginDateFindsUpcomingOpenEndedEvents() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcomingWithBeginDate');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testSetTimeFrameUpcomingWithBeginDateNotFindsEventsWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0
+			)
+		);
+
+		$this->fixture->setTimeFrame('upcomingWithBeginDate');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
 	// * events for which the registration deadline is not over yet
 	/////////////////////////////////////////////////////////////////
 
@@ -6474,31 +6598,17 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////////////////
-	// Tests concerning limitToPeriodBeforeBeginDate
-	//////////////////////////////////////////////////
+	///////////////////////////////////
+	// Tests concerning limitToStatus
+	///////////////////////////////////
 
-	public function testLimitToPeriodBeforeBeginDateNotFindsEventWithNoBeginDate() {
-		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
-
-		$this->fixture->limitToPeriodBeforeBeginDate(1);
-		$bag = $this->fixture->build();
-
-		$this->assertEquals(
-			0,
-			$bag->count()
-		);
-
-		$bag->__destruct();
-	}
-
-	public function testLimitToPeriodBeforeBeginDateFindsEventWithFutureBeginDateWithinProvidedPeriod() {
+	public function testLimitToStatusFindsEventWithStatusCanceledIfLimitIsStatusCanceled() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
-			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY)
+			array('cancelled' => tx_seminars_seminar::STATUS_CANCELED)
 		);
 
-		$this->fixture->limitToPeriodBeforeBeginDate(2);
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -6509,17 +6619,223 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToPeriodBeforeBeginDateNotFindsEventWithFutureBeginDateOutOfProvidedPeriod() {
+	public function testLimitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusCanceled() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_PLANNED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusCanceled() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToStatusFindsEventWithStatusConfirmedIfLimitIsStatusConfirmed() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusConfirmed() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_PLANNED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusConfirmed() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_CANCELED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToStatusFindsEventWithStatusPlannedIfLimitIsStatusPlanned() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_PLANNED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusPlanned() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testLimitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusPlanned() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('cancelled' => tx_seminars_seminar::STATUS_CANCELED)
+		);
+
+		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+
+	//////////////////////////////////////////////////
+	// Tests concerning limitToDaysBeforeBeginDate
+	//////////////////////////////////////////////////
+
+	public function testlimitToDaysBeforeBeginDateFindsEventWithFutureBeginDateWithinProvidedDays() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY)
+		);
+
+		$this->fixture->limitToDaysBeforeBeginDate(2);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDateWithinProvidedDays() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY)
+		);
+
+		$this->fixture->limitToDaysBeforeBeginDate(3);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testlimitToDaysBeforeBeginDateNotFindsEventWithFutureBeginDateOutOfProvidedDays() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (2 * ONE_DAY))
 		);
 
-		$this->fixture->limitToPeriodBeforeBeginDate(1);
+		$this->fixture->limitToDaysBeforeBeginDate(1);
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
 			0,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'] - (2 * ONE_DAY))
+		);
+
+		$this->fixture->limitToDaysBeforeBeginDate(1);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function testlimitToDaysBeforeBeginDateFindsEventWithNoBeginDate() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+
+		$this->fixture->limitToDaysBeforeBeginDate(1);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
 			$bag->count()
 		);
 

@@ -49,7 +49,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	private static $validTimeFrames = array(
 		'past', 'pastAndCurrent', 'current', 'currentAndUpcoming', 'upcoming',
-		'deadlineNotOver', 'all'
+		'upcomingWithBeginDate', 'deadlineNotOver', 'all',
 	);
 
 	/**
@@ -197,7 +197,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			);
 		}
 
-		$now = time();
+		$now = $GLOBALS['SIM_EXEC_TIME'];
 
 		// Works out from which time-frame we'll find event records.
 		// We also need to deal with the case that an event has no end date set
@@ -257,6 +257,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				// 3. Events that have no (begin) date set yet.
 				$where = SEMINARS_TABLE_SEMINARS.'.begin_date > '.$now
 					.' OR '.SEMINARS_TABLE_SEMINARS.'.begin_date = 0';
+				break;
+			case 'upcomingWithBeginDate':
+				$where = SEMINARS_TABLE_SEMINARS . '.begin_date > ' . $now;
 				break;
 			case 'deadlineNotOver':
 				// As events for which the registration deadline is not over yet,
@@ -646,18 +649,27 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	}
 
 	/**
-	 * Limits the bag to future events with are currently within a certain
-	 * period before the begin date.
+	 * Limits the bag to events in status $status.
 	 *
-	 * @param integer length of period in days, must be > 0
+	 * @param integer tx_seminars_seminar::STATUS_PLANNED, ::STATUS_CONFIRMED or
+	 *                ::STATUS_CANCELED
 	 */
-	public function limitToPeriodBeforeBeginDate($periodInDays) {
-		$now = $GLOBALS['SIM_EXEC_TIME'];
-		$beginDate = SEMINARS_TABLE_SEMINARS . '.begin_date';
+	public function limitToStatus($status) {
+		$this->whereClauseParts['event_status']
+			= SEMINARS_TABLE_SEMINARS . '.cancelled = ' . $status;
+	}
 
-		$this->whereClauseParts['period_before_begin_date'] =
-			$beginDate . ' > ' . $now . ' AND ' .
-			$beginDate . ' < ' . ($now + ($periodInDays * ONE_DAY));
+	/**
+	 * Limits the bag to events which are currently $days days before their
+	 * begin date.
+	 *
+	 * @param integer days before the begin date, must be > 0
+	 */
+	public function limitToDaysBeforeBeginDate($days) {
+		$nowPlusDays = ($GLOBALS['SIM_EXEC_TIME'] + ($days * ONE_DAY));
+
+		$this->whereClauseParts['days_before_begin_date'] =
+			SEMINARS_TABLE_SEMINARS . '.begin_date' . ' < ' . $nowPlusDays;
 	}
 
 	/**
