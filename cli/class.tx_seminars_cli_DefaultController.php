@@ -50,7 +50,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminar
 }
 
 try {
-	t3lib_div::makeInstance('tx_seminars_cli_Main')->start();
+	t3lib_div::makeInstance('tx_seminars_cli_MailNotifier')->start();
 } catch (Exception $exception) {
 	echo $exception->getMessage();
 }

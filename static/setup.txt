@@ -145,8 +145,15 @@ plugin.tx_seminars {
 	# comma-separated list of field names from tx_seminars_attendances that will be used for CSV export
 	fieldsFromAttendanceForCsv = uid,price,total_price,method_of_payment,interests,expectations,background_knowledge,known_from,notes
 
-	# wether to show attendances on the registration queue in the CSV export or not
+	# whether to show attendances on the registration queue in the CSV export or not
 	showAttendancesOnRegistrationQueueInCSV = 0
+
+
+	# whether to send a cancelation deadline reminder to the organizers
+	sendCancelationDeadlineReminder = 0
+
+	# how many days before an events' begin date the organizers should be reminded about this event via e-mail, zero disables the reminder
+	sendEventTakesPlaceReminderDaysBeforeBeginDate = 0
 
 
 	# The following variables don't have any default values provided.

@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2603] Feature: In the CLI module, check whether there are any events that are in the "planned" state
 - [#2723] Fix: Registration crashes with fatal error if no foods are selected in the registration form
 - [#2720] Change: Improve the buttons for the confirm/cancel form
 - [#2722] Change: Make confirmation_information_sent and cancellation_information_sent readonly when editing seminars in the BE
