@@ -976,6 +976,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$whichEmailSubject = 'email_additionalNotificationIsFullSubject';
 			// The second check ensures that only one set of e-mails is sent to
 			// the organizers.
+			// This also ensures that no e-mail is send when minAttendances is 0
+			// since this function is only called when at least one registration
+			// is present.
 			} elseif ($this->seminar->getAttendancesMin()
 				== $this->seminar->getAttendances()
 			) {
