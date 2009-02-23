@@ -1,4 +1,5 @@
 0.7.3 (currently working on)
+- [#2731] Fix: plugin.tx_seminars.allowRegistrationForEventsWithoutDate is called like a switch available in flexforms but it is not in flexforms
 - [#2723] Fix: Registration crashes with fatal error if no foods are selected in the registration form
 - [#2503] Change: Add some unit tests
 - [#737] Fix: When FE-editing an existing event, don't change the crdate
