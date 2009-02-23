@@ -369,7 +369,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *                string if access was granted
 	 */
 	private function checkAccess() {
-		if (!$this->isLoggedIn()) {
+		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return 'message_notLoggedIn';
 		}
 

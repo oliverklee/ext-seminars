@@ -92,7 +92,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if (!$event->canSomebodyRegister()) {
 			return false;
 		}
-		if (!$this->isLoggedIn()) {
+		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return true;
 		}
 
@@ -123,10 +123,14 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	public function canRegisterIfLoggedInMessage(tx_seminars_seminar $seminar) {
 		$result = '';
 
-		if ($this->isLoggedIn() && $this->isUserBlocked($seminar)) {
+		if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+			&& $this->isUserBlocked($seminar)
+		) {
 			// The current user is already blocked for this event.
 			$result = $this->translate('message_userIsBlocked');
-		} elseif ($this->isLoggedIn() && !$this->couldThisUserRegister($seminar)) {
+		} elseif (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+			&& !$this->couldThisUserRegister($seminar)
+		) {
 			// The current user can not register for this event (no multiple
 			// registrations are possible and the user is already registered).
 			$result = $this->translate('message_alreadyRegistered');
@@ -278,7 +282,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar,
 		$label
 	) {
-		if ($this->isLoggedIn()) {
+		if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			// provides the registration link
 			$result = $plugin->cObj->getTypoLink(
 				$label,

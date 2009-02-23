@@ -123,7 +123,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->createLogInAndAddFeUserAsVip();
 
 		$this->assertTrue(
-			$this->fixture->isLoggedIn()
+			$this->testingFramework->isLoggedIn()
 		);
 	}
 
@@ -152,7 +152,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->createLogInAndAddFeUserAsOwner();
 
 		$this->assertTrue(
-			$this->fixture->isLoggedIn()
+			$this->testingFramework->isLoggedIn()
 		);
 	}
 
@@ -181,7 +181,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->createLogInAndAddFeUserAsDefaultVip();
 
 		$this->assertTrue(
-			$this->fixture->isLoggedIn()
+			$this->testingFramework->isLoggedIn()
 		);
 	}
 

@@ -2681,7 +2681,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	) {
 		$result = false;
 
-		if ($this->needsRegistration() && $this->isLoggedIn()) {
+		if ($this->needsRegistration()
+			&& tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+		) {
 			$currentUserUid = $this->getFeUserUid();
 			switch ($whichPlugin) {
 				case 'seminar_list':
@@ -2744,7 +2746,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if (!$this->needsRegistration()) {
 			$result = $this->translate('message_noRegistrationNecessary');
-		} elseif (!$this->isLoggedIn()) {
+		} elseif (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			$result = $this->translate('message_notLoggedIn');
 		} elseif (!$this->canViewRegistrationsList($whichPlugin)) {
 			$result = $this->translate('message_accessDenied');

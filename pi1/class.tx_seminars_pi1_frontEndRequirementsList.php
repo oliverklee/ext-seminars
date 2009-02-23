@@ -71,7 +71,7 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndV
 	 * register to.
 	 */
 	public function limitToMissingRegistrations() {
-		if (!$this->isLoggedIn()) {
+		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			throw new Exception(
 				'No FE user is currently logged in. Please call ' .
 				'this function only when a FE user is logged in.'

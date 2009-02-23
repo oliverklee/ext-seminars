@@ -1184,8 +1184,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				'limitFileDownloadToAttendees', 's_singleView'
 		)) {
 			$mayDisplayAttachedFiles =
-				$this->isLoggedIn() &&
-				$this->seminar->isUserRegistered($this->getFeUserUid());
+				tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+					&& $this->seminar->isUserRegistered($this->getFeUserUid());
 		}
 
 		if (!$this->seminar->hasAttachedFiles() || !$mayDisplayAttachedFiles) {
@@ -1542,7 +1542,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		switch ($whatToDisplay) {
 			case 'my_events':
-				if ($this->isLoggedIn()) {
+				if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 					$result .= $this->getSubpart('MESSAGE_MY_EVENTS');
 				} else {
 					$this->setMarker(
@@ -1558,7 +1558,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				}
 				break;
 			case 'my_vip_events':
-				if ($this->isLoggedIn()) {
+				if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 					$result .= $this->getSubpart(
 						'MESSAGE_MY_VIP_EVENTS'
 					);
@@ -2430,7 +2430,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 */
 	private function hideListRegistrationsColumnIfNecessary($whatToDisplay) {
 		if (!$this->getConfValueBoolean('enableRegistration')
-			|| !$this->isLoggedIn()
+			|| !tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
 			|| (($whatToDisplay == 'seminar_list')
 				&& !$this->hasConfValueInteger('registrationsListPID')
 				&& !$this->hasConfValueInteger('registrationsVipListPID'))
@@ -2578,7 +2578,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 						$this->seminar
 					);
 			} else {
-				if ($this->isLoggedIn()) {
+				if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 					$isOkay = true;
 				} else {
 					$errorMessage = $this->getLoginLink(

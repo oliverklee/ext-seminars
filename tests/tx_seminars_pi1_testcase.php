@@ -269,7 +269,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->createLogInAndAddFeUserAsVip();
 
 		$this->assertTrue(
-			$this->fixture->isLoggedIn()
+			$this->testingFramework->isLoggedIn()
 		);
 	}
 
