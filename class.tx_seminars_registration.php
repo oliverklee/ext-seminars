@@ -787,6 +787,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			|| (($mailFormat == self::SEND_USER_MAIL)
 				&& $this->getFrontEndUser()->wantsHtmlEMail())
 		) {
+			$eMailNotification->setCssFile(
+				$this->getConfValueString('cssFileForAttendeeMail')
+			);
 			$eMailNotification->setHTMLMessage(
 				$this->buildEmailContent($plugin, $helloSubjectPrefix, true)
 			);
@@ -1398,6 +1401,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	) {
 		$wrapperPrefix = (($useHtml) ? 'html_' : '') . 'field_wrapper';
 
+		$this->setMarker('html_mail_charset', (
+			$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				: 'ISO-8859-1'
+			)
+		);
 		$this->hideSubparts(
 			$this->getConfValueString('hideFieldsInThankYouMail'),
 			$wrapperPrefix
@@ -1539,7 +1548,10 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->setMarker(
 			'url',
-			$event->getDetailedViewUrl($plugin)
+			(($useHtml)
+				? htmlspecialchars($event->getDetailedViewUrl($plugin))
+				: $event->getDetailedViewUrl($plugin)
+			)
 		);
 
 		if ($event->isPlanned()) {

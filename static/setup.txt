@@ -20,6 +20,9 @@ plugin.tx_seminars {
 	# comma-separated list of section names that shouldn't be displayed in the thank-you e-mail to the user
 	hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer
 
+	# the CSS file for the HTML e-mail to the attendees
+	cssFileForAttendeeMail = EXT:seminars/thankYouMail.css
+
 	# whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
 	generalPriceInMail = 0
 

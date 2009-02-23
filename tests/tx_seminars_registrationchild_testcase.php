@@ -1001,7 +1001,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$pi1->__destruct();
 
 		$this->assertContains(
-			'<html>',
+			'<html',
 			tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 		);
@@ -1021,7 +1021,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$pi1->__destruct();
 
 		$this->assertNotContains(
-			'<html>',
+			'<html',
 			tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 		);
@@ -1047,7 +1047,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$pi1->__destruct();
 
 		$this->assertContains(
-			'<html>',
+			'<html',
 			tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 		);
@@ -1073,7 +1073,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$pi1->__destruct();
 
 		$this->assertNotContains(
-			'<html>',
+			'<html',
 			tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 		);
@@ -1205,6 +1205,30 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			$this->fixture->translate('label_planned_disclaimer'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForHtmlMails_HasCssStylesFromFile() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registration::SEND_HTML_MAIL
+		);
+		$this->fixture->setConfigurationValue(
+			'cssFileForAttendeeMail','EXT:seminars/thankYouMail.css'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertContains(
+			'style=',
 			tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 		);
