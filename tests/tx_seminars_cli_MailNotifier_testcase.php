@@ -53,6 +53,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$configuration->setData(array(
 			'sendEventTakesPlaceReminderDaysBeforeBeginDate' => 2,
 			'sendCancelationDeadlineReminder' => true,
+			'filenameForRegistrationsCsv' => 'registrations.csv',
 		));
 		tx_oelib_ConfigurationRegistry::getInstance()
 			->set('plugin.tx_seminars', $configuration);

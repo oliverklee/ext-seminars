@@ -242,6 +242,9 @@ class tx_seminars_cli_MailNotifier {
 	 *                             seminar
 	 */
 	private function getCsv($uid) {
+		$configuration = tx_oelib_ConfigurationRegistry
+			::getInstance()->get('plugin.tx_seminars');
+
 		$csvCreator = t3lib_div::makeInstance('tx_seminars_pi2');
 		$csvCreator->init();
 		foreach (array(
@@ -250,17 +253,18 @@ class tx_seminars_cli_MailNotifier {
 			'showAttendancesOnRegistrationQueueInCSV' => getAsBoolean,
 		) as $key => $getterName) {
 			$csvCreator->getConfigGetter()->setConfigurationValue(
-				$key, tx_oelib_ConfigurationRegistry::getInstance()
-					->get('plugin.tx_seminars')->$getterName($key)
+				$key, $configuration->$getterName($key)
 			);
 		}
 		$csvString = $csvCreator->createListOfRegistrations($uid);
 		$csvCreator->__destruct();
 
 		$attachment = t3lib_div::makeInstance('tx_oelib_Attachment');
-		$attachment->setFileName('registrations.csv');
-		$attachment->setContentType('text/csv');
 		$attachment->setContent($csvString);
+		$attachment->setContentType('text/csv');
+		$attachment->setFileName($configuration->getAsString(
+			'filenameForRegistrationsCsv'
+		));
 
 		return $attachment;
 	}
