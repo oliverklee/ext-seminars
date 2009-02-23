@@ -807,7 +807,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'paymentmethod',
 				'billing_address',
 				'url',
-				'footer'
+				'planned_disclaimer',
+				'footer',
 			)
 		);
 	}

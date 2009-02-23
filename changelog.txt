@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2528] Feature: Use separate e-mail bodies in the thank-you e-mail depending on whether an event is confirmed
 - [#2734] Change: Move methods from tx_seminars_speakerchild to tx_seminars_speaker
 - [#2724] Fix: Country list is not localized
 - [#2731] Fix: plugin.tx_seminars.allowRegistrationForEventsWithoutDate is called like a switch available in flexforms but it is not in flexforms

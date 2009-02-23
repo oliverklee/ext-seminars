@@ -18,7 +18,7 @@ plugin.tx_seminars {
 	salutation = formal
 
 	# comma-separated list of section names that shouldn't be displayed in the thank-you e-mail to the user
-	hideFieldsInThankYouMail = credit_points,billing_address,kids
+	hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer
 
 	# whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
 	generalPriceInMail = 0

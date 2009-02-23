@@ -143,6 +143,7 @@ someone just has registered for the waiting list of an event:</label>
 			<label index="email_notificationOnQueueUpdateHello">Hello,
 
 someone's registration just has become a regular registration of an event:</label>
+			<label index="label_planned_disclaimer">For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="pi1_title">Arrangementsmanager</label>
@@ -407,6 +408,7 @@ jemand hat sich gerade für die Warteliste von einer Veranstaltung angemeldet:</
 			<label index="email_notificationOnQueueUpdateHello">Hallo,
 
 die Anmeldung von jemandem wurde gerade zu einer regulären Anmeldung von einer Veranstaltung:</label>
+			<label index="label_planned_disclaimer">Eine Mindestteilnehmer­zahl ist Voraussetzung für die Durchführung dieser Veranstaltung. Wird diese nicht erreicht, findet die Veranstaltung nicht statt. Selbstver­ständlich werden wir Sie rechtzeitig informieren.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title">Seminar manager</label>
@@ -1169,6 +1171,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_known_from" type="integer">129140510</label>
 			<label index="label_notes" type="integer">256667525</label>
 			<label index="message_fullyBooked" type="integer">65406827</label>
+			<label index="label_planned_disclaimer" type="integer">65651058</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
@@ -1748,6 +1751,7 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_background_knowledge">Background knowledge</label>
 			<label index="label_known_from">Known from</label>
 			<label index="label_notes">Notes</label>
+			<label index="label_planned_disclaimer">For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="pi1_title">Seminar Manager</label>

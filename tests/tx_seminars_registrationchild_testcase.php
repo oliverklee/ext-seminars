@@ -1131,6 +1131,85 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_NotifyAttendee_ForConfirmedEvent_DoesNotHavePlannedDisclaimer() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->getSeminarObject()->setStatus(
+			tx_seminars_seminar::STATUS_CONFIRMED
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_planned_disclaimer'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForCancelledEvent_DoesNotHavePlannedDisclaimer() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->getSeminarObject()->setStatus(
+			tx_seminars_seminar::STATUS_CANCELED
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_planned_disclaimer'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlannedEvent_DisplaysPlannedDisclaimer() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->getSeminarObject()->setStatus(
+			tx_seminars_seminar::STATUS_PLANNED
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate('label_planned_disclaimer'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_hiddenDisclaimerFieldAndPlannedEvent_HidesPlannedDisclaimer() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue(
+			'hideFieldsInThankYouMail', 'planned_disclaimer'
+		);
+		$this->fixture->getSeminarObject()->setStatus(
+			tx_seminars_seminar::STATUS_PLANNED
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($pi1);
+		$pi1->__destruct();
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_planned_disclaimer'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
 
 	///////////////////////////////////////////////
 	// Tests regarding hasExistingFrontEndUser().

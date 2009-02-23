@@ -1542,6 +1542,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$event->getDetailedViewUrl($plugin)
 		);
 
+		if ($event->isPlanned()) {
+			$this->unhideSubparts('planned_disclaimer', $wrapperPrefix);
+		} else {
+			$this->hideSubparts('planned_disclaimer', $wrapperPrefix);
+		}
+
 		$footers = $event->getOrganizersFooter();
 		$this->setMarker('footer', $footers[0]);
 
