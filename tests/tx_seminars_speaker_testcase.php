@@ -25,7 +25,6 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_speakerchild.php');
 
 /**
  * Testcase for the speaker class in the 'seminars' extensions.
@@ -34,12 +33,22 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
  * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
-	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
-	/** a maximal filled speaker */
+	/**
+	 * @var tx_seminars_speaker
+	 */
+	private $fixture;
+
+	/**
+	 * @var tx_seminars_speaker a maximal filled speaker
+	 */
 	private $maximalFixture;
 
 	public function setUp() {
@@ -51,7 +60,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 				'email' => 'foo@test.com'
 			)
 		);
-		$this->fixture = new tx_seminars_speakerchild($fixtureUid);
+		$this->fixture = new tx_seminars_speaker($fixtureUid);
 
 		$maximalFixtureUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SPEAKERS,
@@ -69,7 +78,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 				'email' => 'maximal-foo@test.com'
 			)
 		);
-		$this->maximalFixture = new tx_seminars_speakerchild($maximalFixtureUid);
+		$this->maximalFixture = new tx_seminars_speaker($maximalFixtureUid);
 	}
 
 	public function tearDown() {
@@ -97,13 +106,12 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SKILLS, $skillData
 		);
 
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SPEAKERS_SKILLS_MM,
-			$this->fixture->getUid(), $uid
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SPEAKERS,
+			$this->fixture->getUid(), $uid, 'skills'
 		);
-		$this->fixture->setNumberOfSkills(
-			$this->fixture->getNumberOfSkills() + 1
-		);
+
+		$this->fixture = new tx_seminars_speaker($this->fixture->getUid());
 
 		return $uid;
 	}

@@ -269,6 +269,18 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Sets the gender of this speaker.
+	 *
+	 * @param integer the gender of the speaker, must be one of
+	 *                tx_seminars_speaker::GENDER_FEMALE,
+	 *                tx_seminars_speaker::GENDER_MALE
+	 *                or tx_seminars_speaker::GENDER_UNKNOWN
+	 */
+	public function setGender($gender) {
+		$this->setRecordPropertyInteger('gender', $gender);
+	}
+
+	/**
 	 * Returns true if this speaker has a cancelation period.
 	 *
 	 * @return boolean true if the speaker has a cancelation period, false
@@ -285,6 +297,16 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 */
 	public function getCancelationPeriodInDays() {
 		return $this->getRecordPropertyInteger('cancelation_period');
+	}
+
+	/**
+	 * Sets the gender cancelation period of this speaker
+	 *
+	 * @param integer the cancelation period of this speaker in days,
+	 *                must be > 0
+	 */
+	public function setCancelationPeriod($cancelationPeriod) {
+		$this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
 	}
 }
 
