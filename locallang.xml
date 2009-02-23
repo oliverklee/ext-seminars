@@ -143,6 +143,14 @@ someone just has registered for the waiting list of an event:</label>
 			<label index="email_notificationOnQueueUpdateHello">Hello,
 
 someone's registration just has become a regular registration of an event:</label>
+			<label index="email_eventTakesPlaceReminderSubject">&quot;%event&quot; begins in %days days</label>
+			<label index="email_eventTakesPlaceReminder">Hello %organizer,
+
+the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</label>
+			<label index="email_cancelationDeadlineReminderSubject">Cancelation deadline for &quot;%event&quot; has just passed</label>
+			<label index="email_cancelationDeadlineReminder">Hello %organizer,
+
+the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</label>
 			<label index="label_planned_disclaimer">For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
@@ -407,7 +415,15 @@ jemand hat sich gerade für die Warteliste von einer Veranstaltung angemeldet:</
 			<label index="email_notificationOnQueueUpdateSubject">Anmeldung wurde zu regulärer Anmeldung Benachrichtigung</label>
 			<label index="email_notificationOnQueueUpdateHello">Hallo,
 
-die Anmeldung von jemandem wurde gerade zu einer regulären Anmeldung von einer Veranstaltung:</label>
+die Anmeldung von jemandem wurde gerade zu einer regulären Anmeldung zu einer Veranstaltung:</label>
+			<label index="email_eventTakesPlaceReminderSubject">&quot;%event&quot; beginnt in %days Tagen</label>
+			<label index="email_eventTakesPlaceReminder">Hallo %organizer,
+
+die Veranstaltung &quot;%event&quot; (Veranstaltungsnummer: %uid) beginnt in %days Tagen. Zur Zeit gibt es %registrations Anmeldungen für diese Veranstaltung.</label>
+			<label index="email_cancelationDeadlineReminderSubject">Ende der Absagefrist für &quot;%event&quot;</label>
+			<label index="email_cancelationDeadlineReminder">Hallo %organizer,
+
+das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&quot; wurde erreicht (Veranstaltungsnummer: %uid, Beginn: %begin_date). Zur Zeit ist diese Veranstaltung weder bestätigt noch abgesagt und es gibt %registrations Anmeldungen für diese Veranstaltung.</label>
 			<label index="label_planned_disclaimer">Eine Mindestteilnehmer­zahl ist Voraussetzung für die Durchführung dieser Veranstaltung. Wird diese nicht erreicht, findet die Veranstaltung nicht statt. Selbstver­ständlich werden wir Sie rechtzeitig informieren.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1171,6 +1187,10 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_known_from" type="integer">129140510</label>
 			<label index="label_notes" type="integer">256667525</label>
 			<label index="message_fullyBooked" type="integer">65406827</label>
+			<label index="email_eventTakesPlaceReminderSubject" type="integer">83496300</label>
+			<label index="email_eventTakesPlaceReminder" type="integer">57044606</label>
+			<label index="email_cancelationDeadlineReminderSubject" type="integer">74466469</label>
+			<label index="email_cancelationDeadlineReminder" type="integer">187860743</label>
 			<label index="label_planned_disclaimer" type="integer">65651058</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -1751,6 +1771,14 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_background_knowledge">Background knowledge</label>
 			<label index="label_known_from">Known from</label>
 			<label index="label_notes">Notes</label>
+			<label index="email_eventTakesPlaceReminderSubject">&quot;%event&quot; begins in %days days</label>
+			<label index="email_eventTakesPlaceReminder">Hello %organizer,
+
+the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</label>
+			<label index="email_cancelationDeadlineReminderSubject">Cancelation deadline for &quot;%event&quot; has just passed</label>
+			<label index="email_cancelationDeadlineReminder">Hello %organizer,
+
+the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</label>
 			<label index="label_planned_disclaimer">For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
