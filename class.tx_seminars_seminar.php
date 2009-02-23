@@ -2770,7 +2770,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return $this->needsRegistration() &&
 			!$this->isCanceled() &&
 			(
-				($this->getConfValueBoolean('allowRegistrationForEventsWithoutDate', 's_registration')
+				($this->getConfValueBoolean('allowRegistrationForEventsWithoutDate')
 					&& !$this->hasDate()
 				) ||
 				($this->hasDate() && !$this->isRegistrationDeadlineOver())
@@ -2799,7 +2799,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		} elseif ($this->isCanceled()) {
 			$message = $this->translate('message_seminarCancelled');
 		} elseif (!$this->hasDate() &&
-			!$this->getConfValueBoolean('allowRegistrationForEventsWithoutDate', 's_registration')
+			!$this->getConfValueBoolean('allowRegistrationForEventsWithoutDate')
 		) {
 			$message = $this->translate('message_noDate');
 		} elseif ($this->isRegistrationDeadlineOver()) {

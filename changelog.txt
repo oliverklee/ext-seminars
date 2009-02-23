@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2731] Fix: plugin.tx_seminars.allowRegistrationForEventsWithoutDate is called like a switch available in flexforms but it is not in flexforms
 - [#2607] Feature: Attach the CSV file to the CLI-triggered e-mails to the organizers
 - [#2708] Feature: Add a FrontEndLoginManager
 - [#2729] Fix: lowercase the CLI user defined in localconf
