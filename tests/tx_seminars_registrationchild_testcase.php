@@ -861,6 +861,27 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_SendAdditionalNotification_ForEventWithZeroAttendeesMin_DoesNotSendAnyMail() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('attendees_min' => 0, 'attendees_max' => 42)
+		);
+
+		tx_seminars_registrationchild::purgeCachedSeminars();
+		$fixture = new tx_seminars_registrationchild($this->registrationUid);
+		$fixture->setConfigurationValue(
+			'templateFile', 'EXT:seminars/seminars.tmpl'
+		);
+
+		$fixture->sendAdditionalNotification();
+		$fixture->__destruct();
+
+		$this->assertEquals(
+			array(),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		);
+	}
+
 	public function testSendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutSubject() {
 		$this->fixture->sendAdditionalNotification();
 
