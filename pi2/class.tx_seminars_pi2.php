@@ -79,8 +79,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * Creates a CSV export.
 	 *
 	 * @param string (unused)
-	 * @param array TypoScript configuration for the plugin, may be
-	 * empty
+	 * @param array TypoScript configuration for the plugin, may be empty
 	 *
 	 * @return string HTML for the plugin, might be empty
 	 */
@@ -89,10 +88,14 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 		switch ($this->piVars['table']) {
 			case SEMINARS_TABLE_SEMINARS:
-				$result = $this->createAndOutputListOfEvents();
+				$result = $this->createAndOutputListOfEvents(
+					intval($this->piVars['pid'])
+				);
 				break;
 			case SEMINARS_TABLE_ATTENDANCES:
-				$result = $this->createAndOutputListOfRegistrations();
+				$result = $this->createAndOutputListOfRegistrations(
+					intval($this->piVars['seminar'])
+				);
 				break;
 			default:
 				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
@@ -108,8 +111,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Initializes this object and its configuration getter.
 	 *
-	 * @param array TypoScript configuration for the plugin, may be
-	 * empty
+	 * @param array TypoScript configuration for the plugin, may be empty
 	 */
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
@@ -119,8 +121,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Creates a CSV list of registrations for the event given in
-	 * $this->piVars['seminar'], including a heading line.
+	 * Creates a CSV list of registrations for the event given in $eventUid,
+	 * including a heading line.
 	 *
 	 * If the seminar does not exist, an error message is returned, and an error
 	 * 404 is set.
@@ -128,17 +130,18 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
+	 * @param integer UID of the event for which to create the CSV list, must be
+	 *                > 0
+	 *
 	 * @return string CSV list of registrations for the given seminar or
-	 * an error message in case of an error
+	 *                an error message in case of an error
 	 */
-	public function createAndOutputListOfRegistrations() {
-		$eventUid = intval($this->piVars['seminar']);
-
+	public function createAndOutputListOfRegistrations($eventUid) {
 		if (tx_seminars_objectfromdb::recordExists(
 			$eventUid,
 			SEMINARS_TABLE_SEMINARS)
 		) {
-			if ($this->canAccessListOfRegistrations()) {
+			if ($this->canAccessListOfRegistrations($eventUid)) {
 				$this->setContentTypeForRegistrationLists();
 				$result = $this->createListOfRegistrations($eventUid);
 			} else {
@@ -166,17 +169,15 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * This function does not do any access checks.
 	 *
 	 * @param integer UID of the event for which the registration list
-	 * should be created, must be > 0
+	 *                should be created, must be > 0
 	 *
-	 * @return string CSV list of registrations for the given seminar or
-	 * an empty string if there is not event with the
-	 * provided UID
+	 * @return string CSV list of registrations for the given seminar or an
+	 *                empty string if there is not event with the provided UID
 	 */
 	public function createListOfRegistrations($eventUid) {
 		if (!tx_seminars_objectfromdb::recordExists(
-			$eventUid,
-			SEMINARS_TABLE_SEMINARS)
-		) {
+			$eventUid, SEMINARS_TABLE_SEMINARS
+		)) {
 			return '';
 		}
 
@@ -214,8 +215,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			// Combines the arrays with the user and registration data
 			// and creates a list of semicolon-separated values from them.
 			$result .= implode(
-				';',
-				array_merge($userData, $registrationData)
+				';', array_merge($userData, $registrationData)
 			) . CRLF;
 		}
 		$bag->__destruct();
@@ -248,8 +248,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Creates a CSV list of events for the page given in
-	 * $this->piVars['pid'].
+	 * Creates a CSV list of events for the page given in $pid.
 	 *
 	 * If the page does not exist, an error message is returned, and an error
 	 * 404 is set.
@@ -257,14 +256,15 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
+	 * @param integer PID of the page with events for which to create the CSV
+	 *                list, must be > 0
+	 *
 	 * @return string CSV list of events for the given page or an error
-	 * message in case of an error
+	 *                message in case of an error
 	 */
-	public function createAndOutputListOfEvents() {
-		$pid = intval($this->piVars['pid']);
-
+	public function createAndOutputListOfEvents($pid) {
 		if ($pid > 0) {
-			if ($this->canAccessListOfEvents()) {
+			if ($this->canAccessListOfEvents($pid)) {
 				$this->setContentTypeForEventLists();
 				$result = $this->createListOfEvents($pid);
 			} else {
@@ -315,10 +315,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				)
 			);
 			// Creates a list of comma-separated values of the event data.
-			$result .= implode(
-				';',
-				$seminarData
-			) . CRLF;
+			$result .= implode(';', $seminarData) . CRLF;
 		}
 
 		return $result;
@@ -389,63 +386,56 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * links), the corresponding access checks need to be added to this
 	 * function.
 	 *
-	 * @param integer UID of the event record for which access should be checked; leave empty to use the event set via piVars
+	 * @param integer UID of the event record for which access should be
+	 *                checked, must be > 0
 	 *
 	 * @return boolean true if the list of registrations may be exported as CSV
 	 */
-	public function canAccessListOfRegistrations($eventUid = 0) {
-		global $BE_USER;
+	public function canAccessListOfRegistrations($eventUid) {
+		// no need to check any special permissions if global access is granted
+		if ($this->configGetter->getConfValueBoolean('allowAccessToCsv')) {
+			return true;
+		}
 
-		$result = $this->configGetter->getConfValueBoolean('allowAccessToCsv');
+		$result = false;
 
-		// Only bother to check other permissions if we don't already have
-		// global access.
-		if (!$result) {
-			if (!$eventUid) {
-				$eventUid = intval($this->piVars['seminar']);
+		if (TYPO3_MODE == 'BE') {
+			// Checks read access to the registrations table.
+			$result = $GLOBALS['BE_USER']->check(
+				'tables_select',
+				SEMINARS_TABLE_ATTENDANCES
+			);
+			// Checks read access to all pages with registrations from the
+			// selected event.
+			$pidArray = tx_oelib_db::selectMultiple(
+				'DISTINCT pid',
+				SEMINARS_TABLE_ATTENDANCES,
+				'seminar=' . $eventUid .
+					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
+			);
+			foreach ($pidArray as $pid) {
+				// Checks read access for the current page.
+				$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
+					t3lib_BEfunc::getRecord('pages', $pid['pid']), 1
+				);
 			}
+		} elseif (TYPO3_MODE == 'FE') {
+			$seminarClassName = t3lib_div::makeInstanceClassName(
+				'tx_seminars_seminar'
+			);
+			$seminar = new $seminarClassName($eventUid);
 
-			if (TYPO3_MODE == 'BE') {
-				// Check read access to the registrations table.
-				$result = $BE_USER->check(
-					'tables_select',
-					SEMINARS_TABLE_ATTENDANCES
+			$pi1TypoScriptSetup
+				=& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_seminars_pi1.'];
+
+			$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+				= (boolean) $pi1TypoScriptSetup['allowCsvExportOfRegistrationsInMyVipEventsView'];
+
+			$result = $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+				&& $seminar->isUserVip(
+					$this->getFeUserUid(),
+					$pi1TypoScriptSetup['defaultEventVipsFeGroupID']
 				);
-				// Check read access to all pages with registrations from the
-				// selected event.
-				$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-					'DISTINCT pid',
-					SEMINARS_TABLE_ATTENDANCES,
-					'seminar=' . $eventUid .
-						tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
-				);
-				if ($dbResult) {
-					while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-						// Check read access for the current page.
-						$result &= $BE_USER->doesUserHaveAccess(
-							t3lib_BEfunc::getRecord('pages', $row['pid']),
-							1
-						);
-					}
-				}
-			} elseif (TYPO3_MODE == 'FE') {
-				$seminarClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_seminar'
-				);
-				$seminar = new $seminarClassName($eventUid);
-
-				$pi1TypoScriptSetup
-					=& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_seminars_pi1.'];
-
-				$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-					= (boolean) $pi1TypoScriptSetup['allowCsvExportOfRegistrationsInMyVipEventsView'];
-
-				$result = $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-					&& $seminar->isUserVip(
-						$this->getFeUserUid(),
-						$pi1TypoScriptSetup['defaultEventVipsFeGroupID']
-					);
-			}
 		}
 
 		return $result;
@@ -462,30 +452,29 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * links), the corresponding access checks need to be added to this
 	 * function.
 	 *
-	 * @return boolean true if the list of registrations may be exported as
-	 * CSV
+	 * @param integer PID of the page with events for which to check access,
+	 *                must be > 0
+	 *
+	 * @return boolean true if the list of registrations may be exported as CSV
 	 */
-	public function canAccessListOfEvents() {
-		global $BE_USER;
+	public function canAccessListOfEvents($pid) {
+		// no need to check any special permissions if global access is granted
+		if ($this->configGetter->getConfValueBoolean('allowAccessToCsv')) {
+			return true;
+		}
 
-		$result = $this->configGetter->getConfValueBoolean('allowAccessToCsv');
+		$result = false;
 
-		// Only bother to check other permissions if we don't already have
-		// global access.
-		if (!$result) {
-			if (TYPO3_MODE == 'BE') {
-				// Check read access to the events table.
-				$result = $BE_USER->check(
-					'tables_select',
-					SEMINARS_TABLE_SEMINARS
-				);
-				// Check read access to the given page.
-				$pid = intval($this->piVars['pid']);
-				$result &= $BE_USER->doesUserHaveAccess(
-					t3lib_BEfunc::getRecord('pages', $pid),
-					1
-				);
-			}
+		if (TYPO3_MODE == 'BE') {
+			// Checks read access to the events table.
+			$result = $GLOBALS['BE_USER']->check(
+				'tables_select',
+				SEMINARS_TABLE_SEMINARS
+			);
+			// Checks read access to the given page.
+			$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord('pages', $pid), 1
+			);
 		}
 
 		return $result;

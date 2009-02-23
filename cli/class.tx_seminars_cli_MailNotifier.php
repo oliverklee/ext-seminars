@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
+
 /**
  * Class 'tx_seminars_cli_MailNotifier' for the 'seminars' extension.
  *
@@ -124,6 +126,7 @@ class tx_seminars_cli_MailNotifier {
 		$eMail->setSender($organizerBag->current());
 		$eMail->setSubject($subject);
 		$eMail->setMessage($message);
+		$eMail->addAttachment($this->getCsv($event->getUid()));
 		foreach ($organizerBag as $organizer) {
 			$eMail->addRecipient($organizer);
 		}
@@ -227,6 +230,39 @@ class tx_seminars_cli_MailNotifier {
 		$builder->limitToStatus($status);
 
 		return $builder;
+	}
+
+	/**
+	 * Returns the CSV output for the list of registrations for the event with
+	 * the provided UID.
+	 *
+	 * @param integer UID of the event to create the output for, must be > 0
+	 *
+	 * @return tx_oelib_Attachment CSV list of registrations for the given
+	 *                             seminar
+	 */
+	private function getCsv($uid) {
+		$csvCreator = t3lib_div::makeInstance('tx_seminars_pi2');
+		$csvCreator->init();
+		foreach (array(
+			'fieldsFromFeUserForCsv' => getAsString,
+			'fieldsFromAttendanceForCsv' => getAsString,
+			'showAttendancesOnRegistrationQueueInCSV' => getAsBoolean,
+		) as $key => $getterName) {
+			$csvCreator->getConfigGetter()->setConfigurationValue(
+				$key, tx_oelib_ConfigurationRegistry::getInstance()
+					->get('plugin.tx_seminars')->$getterName($key)
+			);
+		}
+		$csvString = $csvCreator->createListOfRegistrations($uid);
+		$csvCreator->__destruct();
+
+		$attachment = t3lib_div::makeInstance('tx_oelib_Attachment');
+		$attachment->setFileName('registrations.csv');
+		$attachment->setContentType('text/csv');
+		$attachment->setContent($csvString);
+
+		return $attachment;
 	}
 }
 

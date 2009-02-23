@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2607] Feature: Attach the CSV file to the CLI-triggered e-mails to the organizers
 - [#2708] Feature: Add a FrontEndLoginManager
 - [#2729] Fix: lowercase the CLI user defined in localconf
 - [#2603] Feature: In the CLI module, check whether there are any events that are in the "planned" state

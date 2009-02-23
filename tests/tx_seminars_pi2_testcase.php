@@ -165,8 +165,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-		$output = $this->fixture->createAndOutputListOfEvents();
+		$output = $this->fixture->createAndOutputListOfEvents($this->pid);
 
 		$this->assertContains(
 			(string) $this->eventUid,
@@ -191,11 +190,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertEquals(
 			'uid' . CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -212,11 +209,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertRegExp(
 			'/\r\n$/',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -230,11 +225,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'title'
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertNotContains(
 			'"bar"',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -248,11 +241,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'description'
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertContains(
 			'foo "" bar',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -267,11 +258,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'title'
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertContains(
 			'"foo' . LF . 'bar"',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -285,11 +274,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'title'
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertContains(
 			'"foo "" bar"',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -303,11 +290,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'title'
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertContains(
 			'"foo ; bar"',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -321,11 +306,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'description,title'
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertContains(
 			'foo;bar',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -333,8 +316,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'description,title'
 		);
-		$this->fixture->piVars['pid'] = $this->pid;
-		$eventList = $this->fixture->createAndOutputListOfEvents();
+		$eventList = $this->fixture->createAndOutputListOfEvents($this->pid);
 
 		$this->assertContains(
 			'description',
@@ -351,11 +333,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'description,title'
 		);
 
-		$this->fixture->piVars['pid'] = $this->pid;
-
 		$this->assertContains(
 			'description;title',
-			$this->fixture->createAndOutputListOfEvents()
+			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
@@ -496,9 +476,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
 		$registrationsList
-			= $this->fixture->createAndOutputListOfRegistrations();
+			= $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
 		$this->assertContains(
 			(string) $firstRegistrationUid,
 			$registrationsList
@@ -528,11 +507,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertContains(
 			'foo_user',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -580,11 +557,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertNotContains(
 			(string) $registrationUid,
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -605,11 +580,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertNotContains(
 			(string) $registrationUid,
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -637,12 +610,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
-		$this->fixture->piVars['seminar'] = $this->eventUid;
 
 		$this->assertEquals(
 			'uid' . CRLF . $firstRegistrationUid . CRLF .
 				 $secondRegistrationUid . CRLF,
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -671,11 +643,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertRegExp(
 			'/\r\n$/',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -694,11 +664,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertContains(
 			'foo "" bar',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -717,11 +685,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertNotContains(
 			'"foo bar"',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -740,11 +706,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertContains(
 			'"foo ; bar"',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -763,11 +727,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertContains(
 			'"foo' . LF . 'bar"',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -786,11 +748,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertContains(
 			'"foo "" bar"',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -810,11 +770,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertContains(
 			'foo;test',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -823,9 +781,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'address'
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
 		$registrationsList
-			= $this->fixture->createAndOutputListOfRegistrations();
+			= $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
 
 		$this->assertContains(
 			'address',
@@ -842,11 +799,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'address,title'
 		);
 
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
 		$this->assertContains(
 			'address;title',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -857,11 +812,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', 'name'
 		);
-		$this->fixture->piVars['seminar'] = $this->eventUid;
 
 		$this->assertNotContains(
 			'name;',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -872,11 +826,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
-		$this->fixture->piVars['seminar'] = $this->eventUid;
 
 		$this->assertNotContains(
 			';address',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -887,11 +840,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', 'name'
 		);
-		$this->fixture->piVars['seminar'] = $this->eventUid;
 
 		$this->assertContains(
 			'name;address',
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 
@@ -902,11 +854,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
-		$this->fixture->piVars['seminar'] = $this->eventUid;
 
 		$this->assertEquals(
 			CRLF,
-			$this->fixture->createAndOutputListOfRegistrations()
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
 }

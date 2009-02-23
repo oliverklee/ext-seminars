@@ -33,9 +33,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  *
  * This class represents the seminars command line interface.
  *
- * Any functionality is supposed to be implemented in tx_seminars_cli_Main
- * because it is testable in contrast to this script which must not be called
- * in any other than the TYPO3_cliMode.
+ * Any functionality is supposed to be provided by foreign classes because this
+ * script is not testable as it must not be called in any other than the
+ * TYPO3_cliMode.
  *
  * @package TYPO3
  * @subpackage tx_seminars
