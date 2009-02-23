@@ -1098,8 +1098,13 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 					$this->initStaticInfo();
 					$result = $this->staticInfo->getStaticInfoName(
 						'COUNTRIES',
-						$static_info_country
+						$static_info_country,
+						'',
+						'',
+						true
 					);
+				} else {
+					$result = $this->getDefaultCountry();
 				}
 			}
 		}
@@ -1116,24 +1121,42 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function populateListCountries() {
 		$this->initStaticInfo();
-		$allCountries = $this->staticInfo->initCountries();
+		$allCountries = $this->staticInfo->initCountries(
+			'ALL', $this->staticInfo->getCurrentLanguage(), true
+		);
 
 		$result = array();
 		// Add an empty item at the top so we won't have Afghanistan (the first
 		// entry) pre-selected for empty values.
 		$result[] = array(
 			'caption' => '&nbsp;',
-			'value' => ''
+			'value' => '',
 		);
 
-		foreach ($allCountries as $currentCountry) {
+		foreach ($allCountries as $currentCountryName) {
 			$result[] = array(
-				'caption' => $currentCountry,
-				'value' => $currentCountry
+				'caption' => $currentCountryName,
+				'value' => $currentCountryName,
 			);
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns the default country as localized string.
+	 *
+	 * @return string the default country's localized name
+	 */
+	private function getDefaultCountry() {
+		$this->initStaticInfo();
+		$defaultCountryCode = tx_oelib_ConfigurationRegistry::
+			get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
+
+		return tx_staticinfotables_div::getTitleFromIsoCode(
+			'static_countries', $defaultCountryCode,
+			$this->staticInfo->getCurrentLanguage(), true
+		);
 	}
 
 	/**
