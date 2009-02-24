@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2752] Feature: Add skill model and mapper
 - [#2726] Feature: Use texts from locallang in the CLI user's language for the CLI-sent e-mail
 - [#2735] Fix: EventMailForm::sendEmailToAttendees sends duplicate e-mails
 - [#2736] Feature: Add a hook for items in the list view, patch by Andre Dittmar
