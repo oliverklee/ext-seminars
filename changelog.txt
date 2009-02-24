@@ -1,6 +1,7 @@
 0.8.0 (currently working on)
+- [#2735] Fix: EventMailForm::sendEmailToAttendees sends duplicate e-mails
 - [#2736] Feature: Add a hook for items in the list view, patch by Andre Dittmar
-- [#2696] Added a test for ensuring that no mails are sent when attendancesMin is 0
+- [#2696] Change: Added a test for ensuring that no mails are sent when attendancesMin is 0
 - [#2595] Feature: Add some (very basic) CSS for the e-mails to the attendees
 - [#2528] Feature: Use separate e-mail bodies in the thank-you e-mail depending on whether an event is confirmed
 - [#2734] Change: Move methods from tx_seminars_speakerchild to tx_seminars_speaker
