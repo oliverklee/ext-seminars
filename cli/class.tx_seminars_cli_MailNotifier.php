@@ -83,9 +83,7 @@ class tx_seminars_cli_MailNotifier {
 	public function sendEventTakesPlaceReminders() {
 		foreach ($this->getEventsToSendEventTakesPlaceReminderFor() as $event) {
 			$this->sendRemindersToOrganizers(
-				$event,
-				'Event-takes-place reminder',
-				'The event is about to take place.'
+				$event, 'email_eventTakesPlaceReminder'
 			);
 			$event->setEventTakesPlaceReminderSentFlag();
 			$event->commitToDb();
@@ -99,9 +97,7 @@ class tx_seminars_cli_MailNotifier {
 	public function sendCancelationDeadlineReminders() {
 		foreach ($this->getEventsToSendCancelationDeadlineReminderFor() as $event) {
 			$this->sendRemindersToOrganizers(
-				$event,
-				'Cancelation deadline reminder',
-				'The cancelation deadline has just passed.'
+				$event, 'email_cancelationDeadlineReminder'
 			);
 			$event->setCancelationDeadlineReminderSentFlag();
 			$event->commitToDb();
@@ -113,28 +109,38 @@ class tx_seminars_cli_MailNotifier {
 	 *
 	 * @param tx_seminars_seminar event for which to send the reminder to its
 	 *                            organizers
-	 * @param string subject for the e-mail to send, must not be empty
-	 * @param string message content for the e-mail to send, must not be empty
+	 * @param string locallang key for the message content and the subject for
+	 *               the e-mail to send, must not be empty
 	 */
 	private function sendRemindersToOrganizers(
-		tx_seminars_seminar $event, $subject, $message
+		tx_seminars_seminar $event, $messageKey
 	) {
-		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
 		$organizerBag = $event->getOrganizerBag();
 
 		// The first organizer is taken as sender.
-		$eMail->setSender($organizerBag->current());
-		$eMail->setSubject($subject);
-		$eMail->setMessage($message);
-		$eMail->addAttachment($this->getCsv($event->getUid()));
+		$sender = $organizerBag->current();
+		$subject = $this->customizeMessage($messageKey . 'Subject', $event);
+		$attachment = ($event->getAttendances() > 0)
+			? $this->getCsv($event->getUid())
+			: null;
+
 		foreach ($organizerBag as $organizer) {
+			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+			$eMail->setSender($sender);
+			$eMail->setSubject($subject);
 			$eMail->addRecipient($organizer);
+			$eMail->setMessage($this->customizeMessage(
+				$messageKey, $event, $organizer->getName()
+			));
+			if ($attachment) {
+				$eMail->addAttachment($attachment);
+			}
+
+			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
+			$eMail->__destruct();
 		}
 
-		tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
-
 		$organizerBag->__destruct();
-		$eMail->__destruct();
 	}
 
 	/**
@@ -267,6 +273,55 @@ class tx_seminars_cli_MailNotifier {
 		));
 
 		return $attachment;
+	}
+
+	/**
+	 * Returns localized e-mail content customized for the provided event and
+	 * the provided organizer.
+	 *
+	 * @param string locallang key for the text in which to replace key words
+	 *               beginning with "%" by the event's data, must not be empty
+	 * @param tx_seminars_seminar event for which to customize the text
+	 * @param string name of the organizer, may be empty if no organizer name
+	 *               needs to be inserted in the text
+	 */
+	private function customizeMessage(
+		$locallangKey, tx_seminars_seminar $event, $organizerName = ''
+	) {
+		$GLOBALS['LANG']->includeLLFile(
+			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
+		);
+
+		$result = $GLOBALS['LANG']->getLL($locallangKey);
+
+		foreach (array(
+			'%begin_date' => $this->getDate($event->getBeginDateAsTimeStamp()),
+			'%days' => $this->getDaysBeforeBeginDate(),
+			'%event' => $event->getTitle(),
+			'%organizer' => $organizerName,
+			'%registrations' => $event->getAttendances(),
+			'%uid' => $event->getUid(),
+		) as $search => $replace) {
+			$result = str_replace($search, $replace, $result);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns a timestamp formatted according to the current configuration.
+	 *
+	 * @param integer timestamp, must not be empty
+	 *
+	 * @return string formatted date according to the TS setup configuration for
+	 *                'dateFormatYMD', will not be empty
+	 */
+	private function getDate($timestamp) {
+		return date(
+			tx_oelib_ConfigurationRegistry::getInstance()
+				->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
+			$timestamp
+		);
 	}
 }
 
