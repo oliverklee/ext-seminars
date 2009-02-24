@@ -2025,6 +2025,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$this->setMarker('registrations', $this->getCsvExportLink());
 
+			// Modifies the list item hook.
+			foreach ($this->hookObjects as $hookObject) {
+				if (method_exists($hookObject, 'modifyListItem')) {
+					$hookObject->modifyListItem($this);
+				}
+			}
+
 			$result = $this->getSubpart('LIST_ITEM');
 		}
 
