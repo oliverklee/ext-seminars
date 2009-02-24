@@ -28,6 +28,8 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
 require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_registrationEditorChild.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
 
+require_once(t3lib_extMgm::extPath('lang') . 'lang.php');
+
 /**
  * Testcase for the registrationEditorChild class in the 'seminars' extensions.
  *
@@ -328,6 +330,85 @@ class tx_seminars_registrationEditorChild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			sprintf($this->fixture->translate('label_step_counter'), 2, 2),
 			$this->fixture->getStepCounter()
+		);
+	}
+
+
+	//////////////////////////////////////////////
+	// Tests concerning populateListCountries().
+	//////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function populateListCountriesWithLanguageSetToDefaultNotContainsEnglishCountryNameForGermany() {
+		$backUpLanguage = $GLOBALS['LANG'];
+		$GLOBALS['LANG'] = t3lib_div::makeInstance('language');
+		$GLOBALS['LANG']->init('default');
+
+		$this->assertNotContains(
+			array('caption' => 'Germany', 'value' => 'Germany'),
+			$this->fixture->populateListCountries()
+		);
+
+		$GLOBALS['LANG'] = $backUpLanguage;
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListCountriesContainsLocalCountryNameForGermany() {
+		$this->assertContains(
+			array('caption' => 'Deutschland', 'value' => 'Deutschland'),
+			$this->fixture->populateListCountries()
+		);
+	}
+
+
+	//////////////////////////////////////
+	// Tests concerning getFeUserData().
+	//////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getFeUserDataWithKeyCountryAndNoCountrySetReturnsDefaultCountrySetViaTypoScriptSetup() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$typoScriptPluginSetup = $GLOBALS['TSFE']->tmpl->
+			setup['plugin.']['tx_staticinfotables_pi1.']['countryCode'] = 'DEU';
+
+		$this->assertEquals(
+			'Deutschland',
+			$this->fixture->getFeUserData(null, array('key' => 'country'))
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFeUserDataWithKeyCountryAndStaticInfoCountrySetReturnsStaticInfoCountry() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'', array('static_info_country' => 'GBR')
+		);
+
+		$this->assertEquals(
+			'United Kingdom',
+			$this->fixture->getFeUserData(null, array('key' => 'country'))
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFeUserDataWithKeyCountryAndCountrySetReturnsCountry() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'', array('country' => 'Taka-Tuka-Land')
+		);
+
+		$this->assertEquals(
+			'Taka-Tuka-Land',
+			$this->fixture->getFeUserData(null, array('key' => 'country'))
 		);
 	}
 }

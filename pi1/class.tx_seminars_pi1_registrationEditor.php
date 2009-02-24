@@ -1111,8 +1111,13 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 					$this->initStaticInfo();
 					$result = $this->staticInfo->getStaticInfoName(
 						'COUNTRIES',
-						$static_info_country
+						$static_info_country,
+						'',
+						'',
+						true
 					);
+				} else {
+					$result = $this->getDefaultCountry();
 				}
 			}
 		}
@@ -1129,20 +1134,22 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	public function populateListCountries() {
 		$this->initStaticInfo();
-		$allCountries = $this->staticInfo->initCountries();
+		$allCountries = $this->staticInfo->initCountries(
+			'ALL', $this->staticInfo->getCurrentLanguage(), true
+		);
 
 		$result = array();
 		// Add an empty item at the top so we won't have Afghanistan (the first
 		// entry) pre-selected for empty values.
 		$result[] = array(
 			'caption' => '&nbsp;',
-			'value' => ''
+			'value' => '',
 		);
 
-		foreach ($allCountries as $currentCountry) {
+		foreach ($allCountries as $currentCountryName) {
 			$result[] = array(
-				'caption' => $currentCountry,
-				'value' => $currentCountry
+				'caption' => $currentCountryName,
+				'value' => $currentCountryName,
 			);
 		}
 
@@ -1150,6 +1157,24 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	}
 
 	/**
+	 * Returns the default country as localized string.
+	 *
+	 * @return string the default country's localized name
+	 */
+	private function getDefaultCountry() {
+		$this->initStaticInfo();
+		$typoScriptPluginSetup = $GLOBALS['TSFE']->tmpl->setup['plugin.'];
+		$staticInfoSetup = $typoScriptPluginSetup['tx_staticinfotables_pi1.'];
+		$defaultCountryCode = $staticInfoSetup['countryCode'];
+
+		return tx_staticinfotables_div::getTitleFromIsoCode(
+			'static_countries', $defaultCountryCode,
+			$this->staticInfo->getCurrentLanguage(), true
+		);
+	}
+
+	/**
+
 	 * Provides data items for the list of option checkboxes for this event.
 	 *
 	 * @return array items from the checkboxes table as an array with the keys
