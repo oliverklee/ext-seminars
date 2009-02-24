@@ -398,6 +398,51 @@ class tx_seminars_mod2_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testSendEmailToRegistrationsForEventWithTwoRegistrationsSendsTwoEmails() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@valid-email.org')
+				)
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@valid-email.org')
+				)
+			)
+		);
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+				'sender' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_ORGANIZERS,
+					array(
+						'title' => 'Second Organizer',
+						'email' => 'bar@example.org',
+					)
+				)
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertEquals(
+			2,
+			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		);
+	}
+
 
 	/////////////////////////////////
 	// Tests for redirectToListView

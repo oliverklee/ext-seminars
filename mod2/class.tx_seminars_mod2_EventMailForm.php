@@ -372,12 +372,8 @@ abstract class tx_seminars_mod2_EventMailForm {
 	 * Sends an e-mail to the attendees to inform about the changed event state.
 	 */
 	private function sendEmailToAttendees() {
-		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
-
 		$className = t3lib_div::makeInstanceClassName('tx_seminars_organizer');
 		$organizer = new $className(intval($this->getPostData('sender')));
-		$eMail->setSender($organizer);
-		$eMail->setSubject($this->getPostData('subject'));
 
 		$registrationBagBuilder
 			= t3lib_div::makeInstance('tx_seminars_registrationBagBuilder');
@@ -385,6 +381,9 @@ abstract class tx_seminars_mod2_EventMailForm {
 		$registrations = $registrationBagBuilder->build();
 
 		foreach ($registrations as $registration) {
+			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+			$eMail->setSender($organizer);
+			$eMail->setSubject($this->getPostData('subject'));
 			$eMail->addRecipient($registration->getFrontEndUser());
 			$eMail->setMessage(
 				sprintf($this->getPostData('messageBody'),
@@ -392,9 +391,9 @@ abstract class tx_seminars_mod2_EventMailForm {
 			);
 
 			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
+			$eMail->__destruct();
 		}
 
-		$eMail->__destruct();
 		$organizer->__destruct();
 		$registrations->__destruct();
 	}
