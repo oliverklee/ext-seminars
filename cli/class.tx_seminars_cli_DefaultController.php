@@ -37,6 +37,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * script is not testable as it must not be called in any other than the
  * TYPO3_cliMode.
  *
+ * To run this script on your command line or via cronjob, use this command:
+ * /[absolute TYPO3 path]/typo3/cli_dispatch.phpsh seminars [configuration page UID]
+ *
  * @package TYPO3
  * @subpackage tx_seminars
  *
@@ -46,7 +49,7 @@ class tx_seminars_cli_DefaultController {
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/cli/class.tx_seminars_cli_DefaultController.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/realty/cli/class.tx_seminars_cli_DefaultController.php']);
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/cli/class.tx_seminars_cli_DefaultController.php']);
 }
 
 try {
