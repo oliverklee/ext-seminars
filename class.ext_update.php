@@ -55,7 +55,14 @@ class ext_update {
 	 * @return boolean true if the update module may be accessed, false otherwise
 	 */
 	public function access() {
-		if (!t3lib_extMgm::isLoaded('seminars')) {
+		if (!t3lib_extMgm::isLoaded('oelib')
+			|| !t3lib_extMgm::isLoaded('seminars')
+		) {
+			return false;
+		}
+		if (!tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM)
+			|| !tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS)
+		) {
 			return false;
 		}
 
