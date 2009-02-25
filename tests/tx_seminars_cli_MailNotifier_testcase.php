@@ -899,7 +899,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$this->fixture->sendCancelationDeadlineReminders();
 
 		$this->assertContains(
-			date(
+			strftime(
 				tx_oelib_ConfigurationRegistry::getInstance()
 					->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
 				$GLOBALS['SIM_EXEC_TIME'] + ONE_DAY

@@ -318,7 +318,7 @@ class tx_seminars_cli_MailNotifier {
 	 *                'dateFormatYMD', will not be empty
 	 */
 	private function getDate($timestamp) {
-		return date(
+		return strftime(
 			tx_oelib_ConfigurationRegistry::getInstance()
 				->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
 			$timestamp
