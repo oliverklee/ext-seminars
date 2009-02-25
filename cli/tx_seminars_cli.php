@@ -22,16 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-if (!defined('TYPO3_cliMode')) {
-	die('You cannot run this script directly!');
-}
-
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-
 /**
- * Class 'tx_seminars_cli_DefaultController' for the 'seminars' extension.
- *
- * This class represents the seminars command line interface.
+ * CLI script for the 'seminars' extension.
  *
  * Any functionality is supposed to be provided by foreign classes because this
  * script is not testable as it must not be called in any other than the
@@ -45,12 +37,11 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_cli_DefaultController {
+if (!defined('TYPO3_cliMode')) {
+	die('You cannot run this script directly!');
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/cli/class.tx_seminars_cli_DefaultController.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/cli/class.tx_seminars_cli_DefaultController.php']);
-}
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 try {
 	t3lib_div::makeInstance('tx_seminars_cli_MailNotifier')->start();
