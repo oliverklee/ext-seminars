@@ -52,9 +52,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		// fakes the CLI definition
 		define('TYPO3_cliKey', 'seminars');
 		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']
-			['cliKeys'][TYPO3_cliKey][1] = '_cli_seminars';
+			['cliKeys'][TYPO3_cliKey][1] = '_cli_seminars_test';
 		$this->testingFramework->createBackEndUser(
-			array('username' => '_cli_seminars')
+			array('username' => '_cli_seminars_test')
 		);
 
 		$configuration = new tx_oelib_Configuration();
