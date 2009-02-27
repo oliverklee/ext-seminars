@@ -64,11 +64,9 @@ class tx_seminars_Mapper_Category_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function findWithUidOfExistingRecordReturnsCategoryInstance() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_CATEGORIES);
-
+	public function findWithUidReturnsCategoryInstance() {
 		$this->assertTrue(
-			$this->fixture->find($uid) instanceof tx_seminars_Model_Category
+			$this->fixture->find(1) instanceof tx_seminars_Model_Category
 		);
 	}
 

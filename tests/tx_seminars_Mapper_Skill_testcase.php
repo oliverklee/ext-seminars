@@ -64,11 +64,9 @@ class tx_seminars_Mapper_Skill_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function findWithUidOfExistingRecordReturnsSkillInstance() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_SKILLS);
-
+	public function findWithUidReturnsSkillInstance() {
 		$this->assertTrue(
-			$this->fixture->find($uid) instanceof tx_seminars_Model_Skill
+			$this->fixture->find(1) instanceof tx_seminars_Model_Skill
 		);
 	}
 

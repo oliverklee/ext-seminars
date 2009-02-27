@@ -25,62 +25,61 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the 'organizer mapper' class in the 'seminars' extension.
+ * Testcase for the 'target group model' class in the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Mapper_Organizer_testcase extends tx_phpunit_testcase {
+class tx_seminars_Model_TargetGroup_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_oelib_testingFramework
-	 */
-	private $testingFramework;
-
-	/**
-	 * @var tx_seminars_Mapper_Organizer
+	 * @var tx_seminars_Model_TargetGroup
 	 */
 	private $fixture;
 
 	public function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
-
-		$this->fixture = new tx_seminars_Mapper_Organizer();
+		$this->fixture = new tx_seminars_Model_TargetGroup();
 	}
 
 	public function tearDown() {
-		$this->testingFramework->cleanUp();
-
 		$this->fixture->__destruct();
-		unset($this->fixture, $this->testingFramework);
+		unset($this->fixture);
 	}
 
-
-	//////////////////////////
-	// Tests concerning find
-	//////////////////////////
 
 	/**
 	 * @test
 	 */
-	public function findWithUidReturnsOrganizerInstance() {
-		$this->assertTrue(
-			$this->fixture->find(1) instanceof tx_seminars_Model_Organizer
+	public function setTitleWithEmptyTitleThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $title must not be empty.'
 		);
+
+		$this->fixture->setTitle('');
 	}
 
 	/**
 	 * @test
 	 */
-	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
-		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => 'Fabulous organizer')
-		);
+	public function setTitleSetsTitle() {
+		$this->fixture->setTitle('Housewives');
 
 		$this->assertEquals(
-			'Fabulous organizer',
-			$this->fixture->find($uid)->getName()
+			'Housewives',
+			$this->fixture->getTitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTitleWithNonEmptyTitleReturnsTitle() {
+		$this->fixture->setData(array('title' => 'Housewives'));
+
+		$this->assertEquals(
+			'Housewives',
+			$this->fixture->getTitle()
 		);
 	}
 }

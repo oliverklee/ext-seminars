@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2777] Feature: Add target group model and mapper
 - [#2776] Feature: Add event type model and mapper
 - [#2686] Fix: Rename and clean up the e-mail template
 - [#2759] Feature: Add place model and mapper

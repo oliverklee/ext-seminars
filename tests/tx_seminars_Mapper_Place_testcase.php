@@ -64,11 +64,9 @@ class tx_seminars_Mapper_Place_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function findWithUidOfExistingRecordReturnsPlaceInstance() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-
+	public function findWithUidReturnsPlaceInstance() {
 		$this->assertTrue(
-			$this->fixture->find($uid) instanceof tx_seminars_Model_Place
+			$this->fixture->find(1) instanceof tx_seminars_Model_Place
 		);
 	}
 

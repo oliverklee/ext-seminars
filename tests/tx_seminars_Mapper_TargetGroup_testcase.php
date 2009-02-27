@@ -25,28 +25,28 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the 'organizer mapper' class in the 'seminars' extension.
+ * Testcase for the 'target group mapper' class in the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Mapper_Organizer_testcase extends tx_phpunit_testcase {
+class tx_seminars_Mapper_TargetGroup_testcase extends tx_phpunit_testcase {
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
 	private $testingFramework;
 
 	/**
-	 * @var tx_seminars_Mapper_Organizer
+	 * @var tx_seminars_Mapper_TargetGroup
 	 */
 	private $fixture;
 
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_Mapper_Organizer();
+		$this->fixture = new tx_seminars_Mapper_TargetGroup();
 	}
 
 	public function tearDown() {
@@ -64,9 +64,9 @@ class tx_seminars_Mapper_Organizer_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function findWithUidReturnsOrganizerInstance() {
+	public function findWithUidReturnsTargetGroupInstance() {
 		$this->assertTrue(
-			$this->fixture->find(1) instanceof tx_seminars_Model_Organizer
+			$this->fixture->find(1) instanceof tx_seminars_Model_TargetGroup
 		);
 	}
 
@@ -75,12 +75,12 @@ class tx_seminars_Mapper_Organizer_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => 'Fabulous organizer')
+			SEMINARS_TABLE_TARGET_GROUPS, array('title' => 'Housewives')
 		);
 
 		$this->assertEquals(
-			'Fabulous organizer',
-			$this->fixture->find($uid)->getName()
+			'Housewives',
+			$this->fixture->find($uid)->getTitle()
 		);
 	}
 }
