@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2781] Feature: Add food model and mapper
 - [#2779] Feature: Add checkbox model and mapper
 - [#2778] Feature: Add payment method model and mapper
 - [#2777] Feature: Add target group model and mapper
