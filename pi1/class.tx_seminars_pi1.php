@@ -2645,6 +2645,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$result = $this->createRegistrationHeading($errorMessage);
 		$result .= $registrationForm;
+		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		return $result;
 	}
@@ -2717,7 +2718,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$output = $registrationEditor->render();
-		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		$registrationEditor->__destruct();
 		unset($registrationEditor);
