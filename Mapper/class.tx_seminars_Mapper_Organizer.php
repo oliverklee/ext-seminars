@@ -36,7 +36,7 @@ class tx_seminars_Mapper_Organizer extends tx_oelib_DataMapper {
 	/**
 	 * @var string the name of the database table for this mapper
 	 */
-	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
+	protected $tableName = 'tx_seminars_organizers';
 
 	/**
 	 * @var string the model class name for this mapper, must not be empty
