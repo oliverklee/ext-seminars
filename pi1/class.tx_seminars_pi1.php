@@ -2629,6 +2629,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$result = $this->createRegistrationHeading($errorMessage);
 		$result .= $registrationForm;
+		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		return $result;
 	}
@@ -2690,7 +2691,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$registrationEditor = new $registrationEditorClassname($this);
 
 		$output = $registrationEditor->_render();
-		$output .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		$registrationEditor->__destruct();
 		unset($registrationEditor);
@@ -2767,7 +2767,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$registrationEditor = new $registrationEditorClassname($this);
 
 		$result = $registrationEditor->_render();
-		$result .= $this->getSubpart('REGISTRATION_BOTTOM');
 
 		$registrationEditor->__destruct();
 		unset($registrationEditor);
