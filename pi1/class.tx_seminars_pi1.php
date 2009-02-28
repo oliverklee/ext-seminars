@@ -2667,8 +2667,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 		$this->setMarker(
 			'title',
-			($this->seminar) ? $this->seminar->getTitleAndDate() : ''
+			($this->seminar) ? $this->seminar->getTitle() : ''
 		);
+
+		if ($this->seminar && $this->seminar->hasDate()) {
+			$this->setMarker('date', $this->seminar->getDate());
+		} else {
+			$this->hideSubparts('date', 'registration_wrapper');
+		}
+
 		$this->setMarker(
 			'uid',
 			($this->seminar) ? $this->seminar->getUid() : ''

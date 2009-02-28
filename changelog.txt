@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2787] Change: Registration heading should have two markers for title and date
 - [#2786] Fix: Subpart REGISTRATION_BOTTOM is not rendered if there's only an error message
 - [#2782] Feature: Add lodging model and mapper
 - [#2781] Feature: Add food model and mapper
