@@ -974,6 +974,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 				->findByCliKey()->getUid(),
 			array('lang' => 'de')
 		);
+		tx_oelib_MapperRegistry::purgeInstance();
 
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
 			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
