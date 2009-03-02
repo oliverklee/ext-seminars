@@ -46,7 +46,7 @@ class tx_seminars_pi1_wizicon {
 		$wizardItems['plugins_tx_seminars_pi1'] = array(
 			'icon' => t3lib_extMgm::extRelPath('seminars') . 'pi1/ce_wiz.gif',
 			'title' => $LANG->getLLL('pi1_title', $LL),
-			'description' => '',
+			'description' => $LANG->getLLL('pi1_description', $LL),
 			'params' => '&defVals[tt_content][CType]=list' .
 				'&defVals[tt_content][list_type]=seminars_pi1'
 		);

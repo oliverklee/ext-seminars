@@ -10,6 +10,7 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="pi1_title">Seminar Manager</label>
+			<label index="pi1_description">Displays seminars in the FE</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_registration_uid">Ticket ID</label>
@@ -155,6 +156,7 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="pi1_title">Arrangementsmanager</label>
+			<label index="pi1_description">Arrangementsmanager</label>
 			<label index="label_title">Titel</label>
 			<label index="label_uid">Nr</label>
 			<label index="label_registration_uid">Registreringsnummer</label>
@@ -283,6 +285,7 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="pi1_title">Seminar-Manager</label>
+			<label index="pi1_description">Darstellung von Seminaren im FE</label>
 			<label index="label_title">Titel</label>
 			<label index="label_uid">Nummer</label>
 			<label index="label_registration_uid">Ticket-ID</label>
@@ -428,6 +431,7 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&q
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title">Seminar manager</label>
+			<label index="pi1_description">Seminar manager</label>
 			<label index="label_uid">Nummer</label>
 			<label index="label_accreditation_number">Accrediteringsnummer</label>
 			<label index="label_credit_points">Kredietpunten</label>
@@ -562,6 +566,7 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="pi1_title">Управление семинарами</label>
+			<label index="pi1_description">Управление семинарами</label>
 			<label index="label_title">Название</label>
 			<label index="label_uid">Номер</label>
 			<label index="label_registration_uid">Номер билета</label>
@@ -696,6 +701,7 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title">Gestore seminari</label>
+			<label index="pi1_description">Gestore seminari</label>
 			<label index="label_title">Titolo</label>
 			<label index="label_uid">Numero</label>
 			<label index="label_registration_uid">ID ticket</label>
@@ -830,6 +836,7 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="pi1_title">Gestionnaire de séminaires</label>
+			<label index="pi1_description">Gestionnaire de séminaires</label>
 			<label index="label_title">Titre</label>
 			<label index="label_uid">Identifiant</label>
 			<label index="label_registration_uid">Identifiant de l'enregistrement</label>
@@ -966,6 +973,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 	<orig_hash type="array">
 		<languageKey index="dk" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
+			<label index="pi1_description" type="integer">260702111</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
@@ -1076,6 +1084,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
+			<label index="pi1_description" type="integer">260702111</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
@@ -1195,6 +1204,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
+			<label index="pi1_description" type="integer">260702111</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
 			<label index="label_date" type="integer">71780721</label>
@@ -1306,6 +1316,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
+			<label index="pi1_description" type="integer">260702111</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_accreditation_number" type="integer">251981191</label>
 			<label index="label_credit_points" type="integer">267941596</label>
@@ -1416,6 +1427,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
+			<label index="pi1_description" type="integer">260702111</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_event_type" type="integer">99114704</label>
@@ -1526,6 +1538,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="pi1_title" type="integer">144163361</label>
+			<label index="pi1_description" type="integer">260702111</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_event_type" type="integer">99114704</label>
@@ -1638,6 +1651,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
 			<label index="pi1_title">Seminar Manager</label>
+			<label index="pi1_description">Displays seminars in the FE</label>
 			<label index="label_uid">Number</label>
 			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_accreditation_number">Accreditation number</label>
@@ -1783,6 +1797,7 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="pi1_title">Seminar Manager</label>
+			<label index="pi1_description">Displays seminars in the FE</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -1917,6 +1932,7 @@ someone's registration just has become a regular registration of an event:</labe
 		</languageKey>
 		<languageKey index="ru" type="array">
 			<label index="pi1_title">Seminar Manager</label>
+			<label index="pi1_description">Displays seminars in the FE</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -2051,6 +2067,7 @@ someone's registration just has become a regular registration of an event:</labe
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title">Seminar Manager</label>
+			<label index="pi1_description">Displays seminars in the FE</label>
 			<label index="label_uid">Number</label>
 			<label index="label_accreditation_number">Accreditation number</label>
 			<label index="label_credit_points">Credit points</label>
@@ -2185,6 +2202,7 @@ someone's registration just has become a regular registration of an event:</labe
 		</languageKey>
 		<languageKey index="it" type="array">
 			<label index="pi1_title">Seminar Manager</label>
+			<label index="pi1_description">Displays seminars in the FE</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_event_type">Event type</label>
@@ -2319,6 +2337,7 @@ someone's registration just has become a regular registration of an event:</labe
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="pi1_title">Seminar Manager</label>
+			<label index="pi1_description">Displays seminars in the FE</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
 			<label index="label_event_type">Event type</label>
