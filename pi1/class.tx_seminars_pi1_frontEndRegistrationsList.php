@@ -120,14 +120,13 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
 			if ($this->seminar->canViewRegistrationsList(
-					$this->whatToDisplay,
-					0,
-					0,
-					$this->getConfValueInteger(
-						'defaultEventVipsFeGroupID',
-						's_template_special')
-					)
-				) {
+				$this->whatToDisplay,
+				0,
+				0,
+				$this->getConfValueInteger(
+					'defaultEventVipsFeGroupID', 's_template_special'
+				)
+			)) {
 				$isOkay = true;
 			} else {
 				$errorMessage = $this->seminar->canViewRegistrationsListMessage(

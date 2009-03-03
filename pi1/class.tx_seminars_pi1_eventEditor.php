@@ -403,9 +403,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$eventEditorGroupUid = $this->getConfValueInteger(
 				'eventEditorFeGroupID', 's_fe_editing'
 			);
-			$hasAccess = isset(
-				$GLOBALS['TSFE']->fe_user->groupData['uid'][$eventEditorGroupUid]
-			);
+			$hasAccess = ($eventEditorGroupUid != 0)
+				&& tx_oelib_FrontEndLoginManager::getInstance()
+					->getLoggedInUser()->hasGroupMembership($eventEditorGroupUid);
 		}
 
 		return ($hasAccess ? '' : 'message_noAccessToEventEditor');

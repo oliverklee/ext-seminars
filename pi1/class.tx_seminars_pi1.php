@@ -549,19 +549,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$targetPageId = 0;
 
 		if ($this->seminar->canViewRegistrationsList(
-				$this->whatToDisplay,
-				0,
-				$this->getConfValueInteger('registrationsVipListPID'),
-				$this->getConfValueInteger(
-					'defaultEventVipsFeGroupID',
-					's_template_special')
-				)
-			) {
+			$this->whatToDisplay,
+			0,
+			$this->getConfValueInteger('registrationsVipListPID'),
+			$this->getConfValueInteger(
+				'defaultEventVipsFeGroupID','s_template_special'
+			)
+		)) {
 			// So a link to the VIP list is possible.
 			$targetPageId = $this->getConfValueInteger('registrationsVipListPID');
 		// No link to the VIP list ... so maybe to the list for the participants.
-		} elseif ($this->seminar->canViewRegistrationsList($this->whatToDisplay,
-			$this->getConfValueInteger('registrationsListPID'))) {
+		} elseif ($this->seminar->canViewRegistrationsList(
+			$this->whatToDisplay,
+			$this->getConfValueInteger('registrationsListPID')
+		)) {
 			$targetPageId = $this->getConfValueInteger('registrationsListPID');
 		}
 
@@ -1696,13 +1697,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$builder->limitToAttendee($this->getFeUserUid());
 				break;
 			case 'my_vip_events':
-				$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
-						$this->getConfValueInteger(
-							'defaultEventVipsFeGroupID',
-							's_template_special'
-						)
-					]
+				$groupForDefaultVips = $this->getConfValueInteger(
+					'defaultEventVipsFeGroupID','s_template_special'
 				);
+				$isDefaultVip = ($groupForDefaultVips != 0)
+					&& tx_oelib_FrontEndLoginManager::getInstance()->
+						getLoggedInUser()->hasGroupMembership($groupForDefaultVips);
+
 				if (!$isDefaultVip) {
 					// The current user is not listed as a default VIP for all
 					// events. Change the query to show only events where the

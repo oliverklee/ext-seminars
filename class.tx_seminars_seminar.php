@@ -2627,10 +2627,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function isUserVip($feUserUid, $defaultEventVipsFeGroupID) {
 		$result = false;
-		$isDefaultVip = isset($GLOBALS['TSFE']->fe_user->groupData['uid'][
-				$defaultEventVipsFeGroupID
-			]
-		);
+		$isDefaultVip = ($defaultEventVipsFeGroupID != 0)
+			&& tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+			&& tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
+				->hasGroupMembership($defaultEventVipsFeGroupID);
 
 		if ($isDefaultVip) {
 			$result = true;
@@ -2638,7 +2638,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'COUNT(*) AS num',
 				SEMINARS_TABLE_SEMINARS_MANAGERS_MM,
-				'uid_local='.$this->getUid().' AND uid_foreign='.$feUserUid
+				'uid_local=' . $this->getUid() . ' AND uid_foreign=' . $feUserUid
 			);
 
 			if ($dbResult) {
