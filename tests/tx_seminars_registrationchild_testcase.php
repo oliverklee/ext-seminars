@@ -95,7 +95,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_registrationchild($this->registrationUid);
 		$this->fixture->setConfigurationValue(
-			'templateFile', 'EXT:seminars/Template/e-mail.html'
+			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 	}
 
@@ -843,7 +843,8 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		$fixture = new tx_seminars_registrationchild($this->registrationUid);
 		$fixture->setConfigurationValue(
-			'templateFile', 'EXT:seminars/Template/e-mail.html'
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 
 		$fixture->sendAdditionalNotification();
@@ -870,7 +871,8 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		$fixture = new tx_seminars_registrationchild($this->registrationUid);
 		$fixture->setConfigurationValue(
-			'templateFile', 'EXT:seminars/Template/e-mail.html'
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 
 		$fixture->sendAdditionalNotification();
@@ -915,7 +917,8 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		$fixture = new tx_seminars_registrationchild($this->registrationUid);
 		$fixture->setConfigurationValue(
-			'templateFile', 'EXT:seminars/Template/e-mail.html'
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 
 		$fixture->sendAdditionalNotification();
@@ -1239,7 +1242,8 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 				tx_seminars_registration::SEND_HTML_MAIL
 		);
 		$this->fixture->setConfigurationValue(
-			'cssFileForAttendeeMail','EXT:seminars/Template/thankYouMail.css'
+			'cssFileForAttendeeMail',
+			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
 		);
 
 		$pi1 = new tx_seminars_pi1();

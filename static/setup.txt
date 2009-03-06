@@ -12,7 +12,7 @@ plugin.tx_seminars {
 	skipRegistrationCollisionCheck = 0
 
 	# location of the template file
-	templateFile = EXT:seminars/Template/e-mail.html
+	templateFile = EXT:seminars/Resources/Private/Templates/Mail/e-mail.html
 
 	# whether to use formal or informal language
 	salutation = formal
@@ -21,7 +21,7 @@ plugin.tx_seminars {
 	hideFieldsInThankYouMail = credit_points,billing_address,kids,planned_disclaimer
 
 	# the CSS file for the HTML e-mail to the attendees
-	cssFileForAttendeeMail = EXT:seminars/Template/thankYouMail.css
+	cssFileForAttendeeMail = EXT:seminars/Resources/Private/CSS/thankYouMail.css
 
 	# whether to use the label "Price" for the standard price (instead of "standard price") in e-mail to the participant
 	generalPriceInMail = 0
