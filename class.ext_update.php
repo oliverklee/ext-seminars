@@ -43,10 +43,23 @@ class ext_update {
 	/**
 	 * Returns the update module content.
 	 *
-	 * @return string the update module content, will not be empty
+	 * @return string the update module content, will be empty if nothing was
+	 *                updated
 	 */
 	public function main() {
-		return $this->updateEventOrganizerRelations();
+		$result = '';
+		try {
+			if ($this->needsToUpdateEventOrganizerRelations()) {
+				$result .= $this->updateEventOrganizerRelations();
+			}
+			if ($this->needsToUpdateNeedsRegistrationField()) {
+				$result .= $this->updateNeedsRegistrationField();
+			}
+		} catch (tx_oelib_Exception_Database $exception) {
+			$result = '';
+		}
+
+		return $result;
 	}
 
 	/**
@@ -65,10 +78,17 @@ class ext_update {
 		) {
 			return false;
 		}
+		if (!tx_oelib_db::tableHasColumn(
+			SEMINARS_TABLE_SEMINARS, 'needs_registration'
+		)) {
+			return false;
+		}
 
 		try {
-			$result = $this->needsToUpdateEventOrganizerRelations()
-				&& $this->hasEventsWithOrganizers();
+			$result = (($this->needsToUpdateEventOrganizerRelations()
+				&& $this->hasEventsWithOrganizers())
+				|| $this->needsToUpdateNeedsRegistrationField()
+			);
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = false;
 		}
@@ -160,6 +180,36 @@ class ext_update {
 		);
 
 		return ($row['count'] > 0);
+	}
+
+	/**
+	 * Checks whether there are events with attendees_max > 0 and
+	 * needs_registration = 0.
+	 *
+	 * @return boolean true if any rows need to be updated, false otherwise
+	 */
+	private function needsToUpdateNeedsRegistrationField() {
+		$row = tx_oelib_db::selectSingle(
+			'COUNT(*) AS number', SEMINARS_TABLE_SEMINARS,
+			'attendees_max > 0 AND needs_registration = 0 '
+		);
+
+		return ($row['number'] > 0);
+	}
+
+	/**
+	 * Updates the needs_registration field of the event records.
+	 *
+	 * @return string information about the status of the update process,
+	 *                will not be empty
+	 */
+	private function updateNeedsRegistrationField() {
+		return '<h2>Updating events needs_registrations field.</h2>' .
+			'<p> Updating ' . tx_oelib_db::update(
+				SEMINARS_TABLE_SEMINARS,
+				'needs_registration = 0 AND attendees_max > 0',
+				array('needs_registration' => 1)
+			) . ' events.</p>';
 	}
 }
 
