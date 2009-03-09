@@ -74,6 +74,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'begin_date' => mktime() + 1000,
 					'end_date' => mktime() + 2000,
 					'attendees_max' => 10,
+					'needs_registration' => 1,
 				)
 			)
 		);
@@ -152,6 +153,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 					'attendees_max' => 10,
 					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+					'needs_registration' => 1,
 				)
 			)
 		);

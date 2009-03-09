@@ -3760,6 +3760,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'attendees_max' => 10,
 				'topic' => $topic,
+				'needs_registration' => 1,
 			)
 		);
 
@@ -3798,6 +3799,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'attendees_max' => 10,
 				'topic' => $topic,
+				'needs_registration' => 1,
 			)
 		);
 

@@ -1894,9 +1894,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Gets the number of vacancies for this seminar. If there are at least as
-	 * many vacancies as configured as "showVacanciesThreshold", a localized
-	 * string "enough" is returned instead. If there are no vacancies, a
-	 * localized string "fully booked" is returned instead of 0.
+	 * many vacancies as configured as "showVacanciesThreshold", or this event
+	 * has unlimitedVacancies, a localized string "enough" is returned instead.
+	 * If there are no vacancies, a localized string "fully booked" is returned
+	 * instead of 0.
 	 *
 	 * If this seminar does not require a registration or if it is canceled,
 	 * an empty string is returned.
@@ -1907,16 +1908,20 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		if ($this->needsRegistration() && !$this->isCanceled()) {
-			$vacancies = $this->getVacancies();
-			$vacanciesTreshold
-				= $this->getConfValueInteger('showVacanciesThreshold');
-
-			if ($vacancies == 0) {
-				$result = $this->translate('message_fullyBooked');
-			} elseif ($vacancies >= $vacanciesTreshold) {
+			if ($this->hasUnlimitedVacancies()) {
 				$result = $this->translate('message_enough');
 			} else {
-				$result = $vacancies;
+				$vacancies = $this->getVacancies();
+				$vacanciesTreshold
+					= $this->getConfValueInteger('showVacanciesThreshold');
+
+				if ($vacancies == 0) {
+					$result = $this->translate('message_fullyBooked');
+				} elseif ($vacancies >= $vacanciesTreshold) {
+					$result = $this->translate('message_enough');
+				} else {
+					$result = $vacancies;
+				}
 			}
 		}
 
@@ -1933,13 +1938,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Checks whether this seminar already is full .
+	 * Checks whether this seminar already is full.
 	 *
 	 * @return boolean true if the seminar is full, false if it still has
-	 *                 vacancies
+	 *                 vacancies or if there are unlimited vacancies
 	 */
 	public function isFull() {
-		return ($this->getAttendances() >= $this->getAttendancesMax());
+		return !$this->hasUnlimitedVacancies()
+			&& (($this->getAttendances() >= $this->getAttendancesMax())
+		);
 	}
 
 	/**
@@ -2847,14 +2854,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Checks whether for this event, registration is necessary at all (events
-	 * with a maximum number of attendees are considered to require
-	 * registration).
+	 * Checks whether registration is necessary for this event.
 	 *
 	 * @return boolean true if registration is necessary, false otherwise
 	 */
 	public function needsRegistration() {
-		return (!$this->isEventTopic() && ($this->getAttendancesMax() > 0));
+		return (!$this->isEventTopic()
+			&& $this->getRecordPropertyBoolean('needs_registration')
+		);
+	}
+
+	/**
+	 * Checks whether this event has unlimited vacancies (needs_registration
+	 * true and max_attendances 0)
+	 *
+	 * @return boolean true if this event has unlimited vacancies, false
+	 *                 otherwise
+	 */
+	public function hasUnlimitedVacancies() {
+		return ($this->needsRegistration() && ($this->getAttendancesMax() == 0));
 	}
 
 	/**

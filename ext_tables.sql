@@ -244,6 +244,7 @@ CREATE TABLE tx_seminars_seminars (
 	organizing_partners int(11) unsigned DEFAULT '0' NOT NULL,
 	event_takes_place_reminder_sent int(1) unsigned DEFAULT '0' NOT NULL,
 	cancelation_deadline_reminder_sent int(1) unsigned DEFAULT '0' NOT NULL,
+	needs_registration tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	allows_multiple_registrations tinyint(3) unsigned DEFAULT '0' NOT NULL,
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_max int(11) unsigned DEFAULT '0' NOT NULL,

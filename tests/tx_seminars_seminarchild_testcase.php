@@ -82,6 +82,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'attendees_max' => 10,
 				'object_type' => 0,
 				'queue_size' => 0,
+				'needs_registration' => 1,
 			)
 		);
 
@@ -1200,19 +1201,125 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests regarding the registration.
 	//////////////////////////////////////
 
-	public function testNeedsRegistrationIsTrueWithNonZeroMaxAttendances() {
-		$this->fixture->setAttendancesMax(10);
+	public function test_NeedsRegistration_forNeedsRegistrationTrue_ReturnsTrue() {
+		$this->fixture->setNeedsRegistration(true);
 
 		$this->assertTrue(
 			$this->fixture->needsRegistration()
 		);
 	}
 
-	public function testNeedsRegistrationIsFalseWithZeroMaxAttendances() {
-		$this->fixture->setAttendancesMax(0);
+	public function test_NeedsRegistration_forNeedsRegistrationFalse_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(false);
 
 		$this->assertFalse(
 			$this->fixture->needsRegistration()
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning hasUnlimitedVacancies
+	///////////////////////////////////////////
+
+	public function test_HasUnlimitedVacancies_ForNeedsRegistrationTrueAndMaxAttendeesZero_ReturnsTrue() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(0);
+
+		$this->assertTrue(
+			$this->fixture->hasUnlimitedVacancies()
+		);
+	}
+
+	public function test_HasUnlimitedVacancies_ForNeedsRegistrationTrueAndMaxAttendeesOne_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(1);
+
+		$this->assertFalse(
+			$this->fixture->hasUnlimitedVacancies()
+		);
+	}
+
+	public function test_HasUnlimitedVacancies_ForNeedsRegistrationFalseAndMaxAttendeesZero_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(false);
+		$this->fixture->setAttendancesMax(0);
+
+		$this->assertFalse(
+			$this->fixture->hasUnlimitedVacancies()
+		);
+	}
+
+	public function test_HasUnlimitedVacancies_ForNeedsRegistrationFalseAndMaxAttendeesOne_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(false);
+		$this->fixture->setAttendancesMax(1);
+
+		$this->assertFalse(
+			$this->fixture->hasUnlimitedVacancies()
+		);
+	}
+
+
+	////////////////////////////
+	// Tests concerning isFull
+	////////////////////////////
+
+	public function test_IsFull_ForUnlimitedVacanciesAndZeroAttendances_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setNumberOfAttendances(0);
+
+		$this->assertFalse(
+			$this->fixture->isFull()
+		);
+	}
+
+	public function test_IsFull_ForUnlimitedVacanciesAndOneAttendance_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setNumberOfAttendances(1);
+
+		$this->assertFalse(
+			$this->fixture->isFull()
+		);
+	}
+
+	public function test_IsFull_ForOneVacancyAndNoAttendances_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setNumberOfAttendances(0);
+
+		$this->assertFalse(
+			$this->fixture->isFull()
+		);
+	}
+
+	public function test_IsFull_ForOneVacancyAndOneAttendance_ReturnsTrue() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(1);
+		$this->fixture->setNumberOfAttendances(1);
+
+		$this->assertTrue(
+			$this->fixture->isFull()
+		);
+	}
+
+	public function test_IsFull_ForTwoVacanciesAndOneAttendance_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(2);
+		$this->fixture->setNumberOfAttendances(1);
+
+		$this->assertFalse(
+			$this->fixture->isFull()
+		);
+	}
+
+	public function test_IsFull_ForTwoVacanciesAndTwoAttendances_ReturnsTrue() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(2);
+		$this->fixture->setNumberOfAttendances(2);
+
+		$this->assertTrue(
+			$this->fixture->isFull()
 		);
 	}
 
@@ -1397,10 +1504,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleIsFalseWithZeroAttendancesMax() {
+	public function test_IsUnregistrationPossible_ForNeedsRegistrationFalse_ReturnsFalse() {
 		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
 
-		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setNeedsRegistration(false);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
 			($this->currentTimestamp + (6*ONE_DAY))
@@ -4452,6 +4559,28 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 42);
 		$this->fixture->setAttendancesMax(42);
 		$this->fixture->setNumberOfAttendances(0);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_enough'),
+			$this->fixture->getVacanciesString()
+		);
+	}
+
+	public function test_GetVacanciesString_ForUnlimitedVacanciesAndZeroAttendances_ReturnsEnoughString() {
+		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNumberOfAttendances(0);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_enough'),
+			$this->fixture->getVacanciesString()
+		);
+	}
+
+	public function test_GetVacanciesString_ForUnlimitedVacanciesAndOneAttendance_ReturnsEnoughString() {
+		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNumberOfAttendances(1);
 
 		$this->assertEquals(
 			$this->fixture->translate('message_enough'),

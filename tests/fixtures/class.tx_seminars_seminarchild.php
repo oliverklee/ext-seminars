@@ -519,5 +519,16 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setDescription($description) {
 		$this->setRecordPropertyString('description', $description);
 	}
+
+	/**
+	 * Sets whether registration is needed.
+	 *
+	 * @param boolean whether registration is needed
+	 */
+	public function setNeedsRegistration($needsRegistration) {
+		$this->setRecordPropertyBoolean(
+			'needs_registration', $needsRegistration
+		);
+	}
 }
 ?>

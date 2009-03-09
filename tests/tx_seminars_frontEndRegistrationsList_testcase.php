@@ -69,6 +69,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
 				'title' => 'Test event',
 				'attendees_max' => 10,
+				'needs_registration' => 1,
 			)
 		);
 

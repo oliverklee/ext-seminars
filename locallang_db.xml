@@ -33,6 +33,7 @@
 			<label index="tx_seminars_seminars.additional_information">Additional information:</label>
 			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form:</label>
+			<label index="tx_seminars_seminars.needs_registration">Needs registration:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>
@@ -220,6 +221,7 @@
 			<label index="tx_seminars_seminars.additional_information">Zusätzliche Informationen:</label>
 			<label index="tx_seminars_seminars.checkboxes">Anmeldeoptionen mit Checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Reisebedingungen-Checkbox im Anmeldeformular anzeigen:</label>
+			<label index="tx_seminars_seminars.needs_registration">Anmeldung nötig:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Lässt mehrfache Anmeldungen derselben Person zu:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Den Kollisionscheck für diese Veranstaltung ausschalten:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>
@@ -1181,6 +1183,7 @@
 			<label index="tx_seminars_seminars.additional_information" type="integer">15950088</label>
 			<label index="tx_seminars_seminars.checkboxes" type="integer">204622860</label>
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">261565721</label>
+			<label index="tx_seminars_seminars.needs_registration" type="integer">186231982</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">12398803</label>
 			<label index="tx_seminars_seminars.skip_collision_check" type="integer">139479602</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">38413271</label>
@@ -2161,6 +2164,7 @@
 			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
 			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form:</label>
+			<label index="tx_seminars_seminars.needs_registration">Needs registration:</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person:</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
