@@ -317,6 +317,34 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserAndSeminarWithoutDate_HasLinkWithPrebookLabel() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+		$this->seminar->setBeginDate(0);
+
+		$this->assertContains(
+			$this->pi1->translate('label_onlinePrebooking'),
+			$this->fixture->getLinkToRegistrationOrLoginPage(
+				$this->pi1, $this->seminar
+			)
+		);
+	}
+
+	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserSeminarWithoutDateAndNoVacancies_ContainsOnlineRegistrationLabel() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+		$this->seminar->setBeginDate(0);
+		$this->seminar->setNumberOfAttendances(5);
+		$this->seminar->setAttendancesMax(5);
+
+		$this->assertContains(
+			$this->pi1->translate('label_onlineRegistration'),
+			$this->fixture->getLinkToRegistrationOrLoginPage(
+				$this->pi1, $this->seminar
+			)
+		);
+	}
+
 
 	///////////////////////////////////////////////
 	// Tests for the getRegistrationLink function

@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2804] Feature: Use a different link text for the registration link if the event has no date
 - [#2698] Feature: Re-add the checkbox "needs registration"
 - [#2474] Change: Use function FrontEndUser::hasGroupMembership
 - [#1571] Feature: Add a description to the content wizard

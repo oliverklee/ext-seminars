@@ -250,15 +250,21 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	private function getRegistrationLabel(
 		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar
 	) {
-		if (!$seminar->hasVacancies()
-			&& $seminar->hasVacanciesOnRegistrationQueue()
-		) {
-			$label = sprintf(
-				$plugin->translate('label_onlineRegistrationOnQueue'),
-				$seminar->getAttendancesOnRegistrationQueue()
-			);
+		if ($seminar->hasVacancies()) {
+			if ($seminar->hasDate()) {
+				$label = $plugin->translate('label_onlineRegistration');
+			} else {
+				$label = $plugin->translate('label_onlinePrebooking');
+			}
 		} else {
-			$label = $plugin->translate('label_onlineRegistration');
+			if ($seminar->hasVacanciesOnRegistrationQueue()) {
+				$label = sprintf(
+					$plugin->translate('label_onlineRegistrationOnQueue'),
+					$seminar->getAttendancesOnRegistrationQueue()
+				);
+			} else {
+				$label = $plugin->translate('label_onlineRegistration');
+			}
 		}
 
 		return $label;
