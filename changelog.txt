@@ -1,5 +1,6 @@
 0.7.4 (currently working on)
--[#2786] Fix: Subpart REGISTRATION_BOTTOM is not rendered if there's only an error message
+- [#2813] Change: <label for=""> does not use the values of the id attributes
+- [#2786] Fix: Subpart REGISTRATION_BOTTOM is not rendered if there's only an error message
 
 0.7.3 (released 2009-02-27)
 - [#2724] Fix: Country list is not localized
