@@ -25,6 +25,7 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'pi1/class.tx_seminars_pi1.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_seminarchild.php');
 
 /**
  * Testcase for the pi1 class in the 'seminars' extension.
@@ -3831,6 +3832,126 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertRegExp(
 			'/required_foo.*required_bar/s',
 			$this->fixture->main('', array())
+		);
+	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning getVacanciesClasses
+	/////////////////////////////////////////
+
+	public function test_GetVacanciesClasses_ForEventWithEnoughVacancies_ReturnsAvailableClass() {
+		$event = new tx_seminars_seminarchild($uid, array());
+		$event->setAttendancesMax(10);
+		$event->setNumberOfAttendances(0);
+		$event->setNeedsRegistration(true);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-available'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventWithOneVacancy_ReturnsVacancyOneClass() {
+		$event = new tx_seminars_seminarchild($uid, array());
+		$event->setAttendancesMax(10);
+		$event->setNumberOfAttendances(9);
+		$event->setNeedsRegistration(true);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-1'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventWithTwoVacancies_ReturnsVacancyTwoClass() {
+		$event = new tx_seminars_seminarchild($uid, array());
+		$event->setAttendancesMax(10);
+		$event->setNumberOfAttendances(8);
+		$event->setNeedsRegistration(true);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-2'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventWithNoVacancies_ReturnsVacancyZeroClass() {
+		$event = new tx_seminars_seminarchild($uid, array());
+		$event->setAttendancesMax(10);
+		$event->setNumberOfAttendances(10);
+		$event->setNeedsRegistration(true);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-0'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForRegistrationDeadlineInPast_ReturnsDeadlineOverClass() {
+		$event = new tx_seminars_seminarchild($uid);
+		$event->setNeedsRegistration(true);
+		$event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('registration-deadline-over'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForBeginDateInPast_ReturnsBeginDateOverClass() {
+		$event = new tx_seminars_seminarchild($uid);
+		$event->setNeedsRegistration(true);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('event-begin-date-over'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventNotNeedingRegistration_ReturnsVacanciesBasicClass() {
+		$event = new tx_seminars_seminarchild($uid);
+		$event->setNeedsRegistration(false);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertEquals(
+			' class="' . $this->fixture->pi_getClassName('vacancies') . '"',
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventWithoutBeginDate_DoesNotReturnBeginDateOverClass() {
+		$event = new tx_seminars_seminarchild($uid);
+		$event->setNeedsRegistration(true);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertNotContains(
+			$this->fixture->pi_getClassName('event-begin-date-over'),
+			$output
 		);
 	}
 }

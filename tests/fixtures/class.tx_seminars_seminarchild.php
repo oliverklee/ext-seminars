@@ -530,5 +530,17 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'needs_registration', $needsRegistration
 		);
 	}
+
+	/**
+	 * Sets the registration deadline.
+	 *
+	 * @param integer the registration deadline as timestamp, set to 0 to unset
+	 *                the registration deadline
+	 */
+	public function setRegistrationDeadline($registrationDeadline) {
+		$this->setRecordPropertyInteger(
+			'deadline_registration', $registrationDeadline
+		);
+	}
 }
 ?>

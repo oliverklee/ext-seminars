@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2799] Change: Don't display the red/yellow/green square for events that have started or lie in the past
 - [#2813] Change: <label for=""> does not use the values of the id attributes
 - [#2804] Feature: Use a different link text for the registration link if the event has no date
 - [#2698] Feature: Re-add the checkbox "needs registration"

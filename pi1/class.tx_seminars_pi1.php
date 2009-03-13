@@ -2319,25 +2319,37 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return string class attribute filled with a list a space-separated
 	 *                CSS classes, plus a leading space
 	 */
-	protected function getVacanciesClasses(tx_seminars_seminar $seminar) {
+	public function getVacanciesClasses(tx_seminars_seminar $seminar) {
 		$result = $this->pi_getClassName('vacancies');
 
-		if ($seminar->needsRegistration()) {
-			if ($seminar->hasVacancies()) {
-				$result .= ' '.$this->pi_getClassName('vacancies-available').' '
-					.$this->pi_getClassName('vacancies-'.$seminar->getVacancies());
-			} else {
-				$result .= ' '.$this->pi_getClassName('vacancies-0');
-			}
-			// We add this class in addition to the number of vacancies so that
-			// user stylesheets still can use the number of vacancies even for
-			// events for which the registration deadline is over.
-			if ($seminar->isRegistrationDeadlineOver()) {
-				$result .= ' '.$this->pi_getClassName('registration-deadline-over');
-			}
+		if (!$seminar->needsRegistration()) {
+			return ' class="' . $result . '"';
+		}
+		if ($seminar->hasDate() && $seminar->hasStarted()) {
+			return ' class="' . $result . ' ' .
+				$this->pi_getClassName('event-begin-date-over') . '"';
 		}
 
-		return ' class="'.$result.'"';
+		if ($seminar->hasVacancies()) {
+			$result .= ' ' .
+				$this->pi_getClassName('vacancies-available') . ' ' .
+				$this->pi_getClassName(
+					'vacancies-' . $seminar->getVacancies()
+				);
+		} else {
+			$result .= ' ' . $this->pi_getClassName('vacancies-0');
+		}
+
+		// We add this class in addition to the number of vacancies so that
+		// user stylesheets still can use the number of vacancies even for
+		// events for which the registration deadline is over.
+		if ($seminar->isRegistrationDeadlineOver()) {
+			$result .= ' ' . $this->pi_getClassName(
+				'registration-deadline-over'
+			);
+		}
+
+		return ' class="' . $result . '"';
 	}
 
 	/**
