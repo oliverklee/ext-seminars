@@ -68,7 +68,8 @@ $TCA['tx_seminars_seminars'] = array(
 		),
 		'dynamicConfigFile' => $extPath.'tca.php',
 		'dividers2tabs' => true,
-		'hideAtCopy' => true
+		'hideAtCopy' => true,
+		'requestUpdate' => 'needs_registration',
 	)
 );
 
