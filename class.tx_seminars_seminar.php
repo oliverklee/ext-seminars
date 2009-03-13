@@ -2781,8 +2781,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					&& !$this->hasDate()
 				) ||
 				($this->hasDate() && !$this->isRegistrationDeadlineOver())
-			) &&
-			$this->hasVacanciesOnRegistrationQueue();
+			) && (
+				$this->hasUnlimitedVacancies()
+					|| $this->hasVacanciesOnRegistrationQueue()
+
+			);
 	}
 
 	/**

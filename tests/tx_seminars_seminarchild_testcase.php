@@ -985,7 +985,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-
 	public function testCanSomebodyRegisterIsFalseForEventWithoutDate() {
 		$this->assertFalse(
 			$this->fixture->canSomebodyRegister()
@@ -998,6 +997,161 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function test_CanSomebodyRegister_ForEventWithUnlimitedVacanvies_IsTrue() {
+		$this->fixture->setBeginDate(time() + 3600);
+		$this->fixture->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function test_CanSomebodyRegister_ForCancelledEvent_ReturnsFalse() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function test_CanSomebodyRegister_ForEventWithoutNeedeRegistration_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(false);
+
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function test_CanSomebodyRegister_ForFullyBookedEvent_ReturnsFalse() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(10);
+		$this->fixture->setNumberOfAttendances(10);
+
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning canSomebodyRegisterMessage
+	////////////////////////////////////////////////
+
+
+	public function test_CanSomebodyRegisterMessage_EventWithFutureDate_ReturnsEmptyString() {
+		$this->fixture->setBeginDate(time() + 3600);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForPastEvent_ReturnsSeminarRegistrationClosedMessage() {
+		$this->fixture->setBeginDate(time() - 7200);
+		$this->fixture->setEndDate(time() - 3600);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_seminarRegistrationIsClosed'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForPastEventWithRegistrationWithoutDateActivated_ReturnsNoDateMessage() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->fixture->setBeginDate(time() - 7200);
+		$this->fixture->setEndDate(time() - 3600);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_noDate'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForCurrentlyRunningEvent_ReturnsSeminarRegistrationClosesMessage() {
+		$this->fixture->setBeginDate(time() - 3600);
+		$this->fixture->setEndDate(time() + 3600);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_seminarRegistrationIsClosed'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForCurrentlyRunningEventWithRegistrationWithoutDateActivated_ReturnsSeminarRegistrationClosesMessage() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->fixture->setBeginDate(time() - 3600);
+		$this->fixture->setEndDate(time() + 3600);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_seminarRegistrationIsClosed'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForEventWithoutDate_ReturnsNoDateMessage() {
+		$this->assertEquals(
+			$this->fixture->translate('message_noDate'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForEventWithoutDateAndRegistrationWithoutDateActivated_ReturnsEmptyString() {
+		// Activates the configuration switch "canRegisterForEventsWithoutDate".
+		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForEventWithUnlimitedVacanvies_ReturnsEmptyString() {
+		$this->fixture->setBeginDate(time() + 3600);
+		$this->fixture->setUnlimitedVacancies();
+
+		$this->assertEquals(
+			$this->fixture->translate('message_seminarRegistrationIsClosed'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForCancelledEvent_ReturnsSeminarCancelledMessage() {
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_seminarCancelled'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForEventWithoutNeedeRegistration_ReturnsNoRegistrationNecessaryMessage() {
+		$this->fixture->setNeedsRegistration(false);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_noRegistrationNecessary'),
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForFullyBookedEvent_ReturnsNoVacanciesMessage() {
+		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setAttendancesMax(10);
+		$this->fixture->setNumberOfAttendances(10);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_noVacancies'),
+			$this->fixture->canSomebodyRegisterMessage()
 		);
 	}
 
@@ -1264,8 +1418,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	////////////////////////////
 
 	public function test_IsFull_ForUnlimitedVacanciesAndZeroAttendances_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(true);
-		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(0);
 
 		$this->assertFalse(
@@ -1274,8 +1427,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_IsFull_ForUnlimitedVacanciesAndOneAttendance_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(true);
-		$this->fixture->setAttendancesMax(0);
+		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(1);
 
 		$this->assertFalse(
@@ -4567,8 +4719,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesString_ForUnlimitedVacanciesAndZeroAttendances_ReturnsEnoughString() {
-		$this->fixture->setAttendancesMax(0);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(0);
 
 		$this->assertEquals(
@@ -4578,8 +4729,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesString_ForUnlimitedVacanciesAndOneAttendance_ReturnsEnoughString() {
-		$this->fixture->setAttendancesMax(0);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(1);
 
 		$this->assertEquals(

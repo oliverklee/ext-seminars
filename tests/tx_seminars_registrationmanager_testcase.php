@@ -458,6 +458,28 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_GetRegistrationLink_ForLoggedInUserAndSeminarWithUnlimitedVacancies_ReturnsLinkWithSeminarUid() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertContains(
+			'[seminar]=' . $this->seminar->getUid(),
+			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+		);
+	}
+
+	public function test_GetRegistrationLink_ForLoggedOutUserAndSeminarWithUnlimitedVacancies_ReturnsLoginLink() {
+		$this->createFrontEndPages();
+		$this->testingFramework->logoutFrontEndUser();
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertContains(
+			'?id=' . $this->loginPageUid,
+			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+		);
+	}
+
 
 	///////////////////////////////////////////
 	// Tests concerning canRegisterIfLoggedIn
@@ -551,8 +573,26 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function testCanRegisterIfLoggedInForLoggedOutUserAndSeminarWithoutRegistrationReturnsFalse() {
 		$this->seminar->setAttendancesMax(0);
+		$this->seminar->setNeedsRegistration(false);
 
 		$this->assertFalse(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedIn_ForLoggedOutUserAndSeminarWithUnlimitedVacancies_ReturnsTrue() {
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedIn_ForLoggedInUserAndSeminarWithUnlimitedVacancies_ReturnsTrue() {
+		$this->seminar->setUnlimitedVacancies();
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}

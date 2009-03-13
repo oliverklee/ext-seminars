@@ -542,5 +542,14 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'deadline_registration', $registrationDeadline
 		);
 	}
+
+	/**
+	 * Sets the seminar to have unlimitedVacancies by setting needs_registration
+	 * to 1 and attendees_max to 0.
+	 */
+	public function setUnlimitedVacancies() {
+		$this->needsRegistration(true);
+		$this->setAttendancesMax(0);
+	}
 }
 ?>
