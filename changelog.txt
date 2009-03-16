@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2753] Feature: Add speaker model and mapper
 - [#2820] Events with unlimited Vacancies have red square
 - [#2819] Fix: Events with no Date get red square
 - [#2822] Fix: Uninitialized variable reads in some pi1 tests
