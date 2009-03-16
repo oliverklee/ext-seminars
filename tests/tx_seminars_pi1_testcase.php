@@ -3950,7 +3950,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_GetVacanciesClasses_ForEventWithoutBeginDateAndAllowRegistrationForEventsWithoutDateFalse_ReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(true);
-		$this->fixture->setConfigurationValue(
+		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 0
 		);
 
@@ -3974,7 +3974,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(true);
 		$event->setNumberOfAttendances(0);
-		$this->fixture->setConfigurationValue(
+		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -3992,7 +3992,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(true);
 		$event->setNumberOfAttendances(9);
-		$this->fixture->setConfigurationValue(
+		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -4010,7 +4010,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(true);
 		$event->setNumberOfAttendances(8);
-		$this->fixture->setConfigurationValue(
+		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -4028,7 +4028,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(true);
 		$event->setNumberOfAttendances(10);
-		$this->fixture->setConfigurationValue(
+		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 

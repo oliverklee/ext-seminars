@@ -2322,7 +2322,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	public function getVacanciesClasses(tx_seminars_seminar $seminar) {
 		if (!$seminar->needsRegistration()
 			|| (!$seminar->hasDate()
-				&& !$this->getConfValueBoolean(
+				&& !$this->configGetter->getConfValueBoolean(
 					'allowRegistrationForEventsWithoutDate'
 				)
 			)
