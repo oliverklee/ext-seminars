@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2805] Feature: For events with an unlimited number of seats, show an empty string in the vacancies column
 - [#2815] Fix: Registration Link is hidden and fully booked string is shown when an event has unlimited vacancies
 - [#2803] Change: Hide registration-related fields in the BE seminar editor if the seminar does not need registration
 - [#2799] Change: Don't display the red/yellow/green square for events that have started or lie in the past

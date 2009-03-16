@@ -4718,22 +4718,22 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesString_ForUnlimitedVacanciesAndZeroAttendances_ReturnsEnoughString() {
+	public function test_GetVacanciesString_ForUnlimitedVacanciesAndZeroAttendances_ReturnsEmptyString() {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(0);
 
 		$this->assertEquals(
-			$this->fixture->translate('message_enough'),
+			'',
 			$this->fixture->getVacanciesString()
 		);
 	}
 
-	public function test_GetVacanciesString_ForUnlimitedVacanciesAndOneAttendance_ReturnsEnoughString() {
+	public function test_GetVacanciesString_ForUnlimitedVacanciesAndOneAttendance_ReturnsEmptyString() {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(1);
 
 		$this->assertEquals(
-			$this->fixture->translate('message_enough'),
+			'',
 			$this->fixture->getVacanciesString()
 		);
 	}

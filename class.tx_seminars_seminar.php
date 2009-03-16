@@ -1894,35 +1894,32 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Gets the number of vacancies for this seminar. If there are at least as
-	 * many vacancies as configured as "showVacanciesThreshold", or this event
-	 * has unlimitedVacancies, a localized string "enough" is returned instead.
-	 * If there are no vacancies, a localized string "fully booked" is returned
-	 * instead of 0.
+	 * many vacancies as configured as "showVacanciesThreshold", a localized
+	 * string "enough" is returned instead. If there are no vacancies, a
+	 * localized string "fully booked" is returned instead of 0.
 	 *
-	 * If this seminar does not require a registration or if it is canceled,
-	 * an empty string is returned.
+	 * If this seminar does not require a registration, is canceled or has
+	 * unlimited vacancies, an empty string is returned.
 	 *
 	 * @return string string showing the number of vacancies, may be empty
 	 */
 	public function getVacanciesString() {
-		$result = '';
+		if ($this->isCanceled() || !$this->needsRegistration()
+			|| $this->hasUnlimitedVacancies()
+		) {
+			return '';
+		}
 
-		if ($this->needsRegistration() && !$this->isCanceled()) {
-			if ($this->hasUnlimitedVacancies()) {
-				$result = $this->translate('message_enough');
-			} else {
-				$vacancies = $this->getVacancies();
-				$vacanciesTreshold
-					= $this->getConfValueInteger('showVacanciesThreshold');
+		$vacancies = $this->getVacancies();
+		$vacanciesTreshold
+			= $this->getConfValueInteger('showVacanciesThreshold');
 
-				if ($vacancies == 0) {
-					$result = $this->translate('message_fullyBooked');
-				} elseif ($vacancies >= $vacanciesTreshold) {
-					$result = $this->translate('message_enough');
-				} else {
-					$result = $vacancies;
-				}
-			}
+		if ($vacancies == 0) {
+			$result = $this->translate('message_fullyBooked');
+		} elseif ($vacancies >= $vacanciesTreshold) {
+			$result = $this->translate('message_enough');
+		} else {
+			$result = $vacancies;
 		}
 
 		return $result;
