@@ -4082,5 +4082,39 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
  			$output
  		);
  	}
+
+ 	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithUnlimitedVacancies_ReturnsAvailableClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+		$event->setUnlimitedVacancies();
+		$event->setNumberOfAttendances(0);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'allowRegistrationForEventsWithoutDate', 1
+		);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-available'),
+			$output
+		);
+	}
+
+ 	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithUnlimitedVacancies_DoesNotReturnDeadlineOverClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+		$event->setUnlimitedVacancies();
+		$event->setNumberOfAttendances(0);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'allowRegistrationForEventsWithoutDate', 1
+		);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertNotContains(
+			$this->fixture->pi_getClassName('registration-deadline-over'),
+			$output
+		);
+	}
 }
 ?>
