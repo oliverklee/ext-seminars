@@ -3932,6 +3932,20 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_GetVacanciesClasses_ForEventWithUnlimitedVacancies_ReturnsVacanciesUnlimitedClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid, array());
+		$event->setUnlimitedVacancies();
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-unlimited'),
+			$output
+		);
+	}
+
 	public function test_GetVacanciesClasses_ForRegistrationDeadlineInPast_ReturnsDeadlineOverClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(true);

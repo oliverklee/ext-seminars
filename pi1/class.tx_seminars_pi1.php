@@ -2337,12 +2337,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$result = $this->pi_getClassName('vacancies');
 
 		if ($seminar->hasVacancies()) {
-			$result .= ' ' . $this->pi_getClassName('vacancies-available');
-			if (!$seminar->hasUnlimitedVacancies()) {
-				$result .= ' ' . $this->pi_getClassName(
-					'vacancies-' . $seminar->getVacancies()
-				);
-			}
+			$result .= ' ' . $this->pi_getClassName('vacancies-available') .
+			 ' ' . (($seminar->hasUnlimitedVacancies())
+				? $this->pi_getClassName('vacancies-unlimited')
+				: $this->pi_getClassName('vacancies-' . $seminar->getVacancies())
+			);
 		} else {
 			$result .= ' ' . $this->pi_getClassName('vacancies-0');
 		}
