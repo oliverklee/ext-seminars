@@ -3845,6 +3845,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(0);
 		$event->setNeedsRegistration(true);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
 		$event->__destruct();
@@ -3860,6 +3861,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(9);
 		$event->setNeedsRegistration(true);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
 		$event->__destruct();
@@ -3875,6 +3877,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(8);
 		$event->setNeedsRegistration(true);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
 		$event->__destruct();
@@ -3890,6 +3893,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
 		$event->setNeedsRegistration(true);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
 		$event->__destruct();
@@ -3932,6 +3936,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_GetVacanciesClasses_ForEventNotNeedingRegistration_ReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(false);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
 		$event->__destruct();
@@ -3942,17 +3947,98 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithoutBeginDate_DoesNotReturnBeginDateOverClass() {
+	public function test_GetVacanciesClasses_ForEventWithoutBeginDateAndAllowRegistrationForEventsWithoutDateFalse_ReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(true);
+		$this->fixture->setConfigurationValue(
+			'allowRegistrationForEventsWithoutDate', 0
+		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
 		$event->__destruct();
 
-		$this->assertNotContains(
-			$this->fixture->pi_getClassName('event-begin-date-over'),
+		$this->assertEquals(
+			' class="' . $this->fixture->pi_getClassName('vacancies') . '"',
 			$output
 		);
 	}
+
+
+	//////////////////////////////////////////////////////////////////////////
+	// Tests concerning getVacanciesClasses for events without date and with
+	// configuration variable 'allowRegistrationForEventsWithoutDate' true.
+	//////////////////////////////////////////////////////////////////////////
+
+	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithEnoughVacancies_ReturnsAvailableClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+		$event->setAttendancesMax(10);
+		$event->setNeedsRegistration(true);
+		$event->setNumberOfAttendances(0);
+		$this->fixture->setConfigurationValue(
+			'allowRegistrationForEventsWithoutDate', 1
+		);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-available'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithOneVacancy_ReturnsVacancyOneClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+		$event->setAttendancesMax(10);
+		$event->setNeedsRegistration(true);
+		$event->setNumberOfAttendances(9);
+		$this->fixture->setConfigurationValue(
+			'allowRegistrationForEventsWithoutDate', 1
+		);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-1'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithTwoVacancies_ReturnsVacancyTwoClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+		$event->setAttendancesMax(10);
+		$event->setNeedsRegistration(true);
+		$event->setNumberOfAttendances(8);
+		$this->fixture->setConfigurationValue(
+			'allowRegistrationForEventsWithoutDate', 1
+		);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-2'),
+			$output
+		);
+	}
+
+	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithNoVacancies_ReturnsVacancyZeroClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+		$event->setAttendancesMax(10);
+		$event->setNeedsRegistration(true);
+		$event->setNumberOfAttendances(10);
+		$this->fixture->setConfigurationValue(
+			'allowRegistrationForEventsWithoutDate', 1
+		);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-0'),
+ 			$output
+ 		);
+ 	}
 }
 ?>

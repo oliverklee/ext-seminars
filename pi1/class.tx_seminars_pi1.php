@@ -2320,15 +2320,21 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *                CSS classes, plus a leading space
 	 */
 	public function getVacanciesClasses(tx_seminars_seminar $seminar) {
-		$result = $this->pi_getClassName('vacancies');
-
-		if (!$seminar->needsRegistration()) {
-			return ' class="' . $result . '"';
+		if (!$seminar->needsRegistration()
+			|| (!$seminar->hasDate()
+				&& !$this->getConfValueBoolean(
+					'allowRegistrationForEventsWithoutDate'
+				)
+			)
+		) {
+			return ' class="' . $this->pi_getClassName('vacancies') . '"';
 		}
 		if ($seminar->hasDate() && $seminar->hasStarted()) {
-			return ' class="' . $result . ' ' .
+			return ' class="' . $this->pi_getClassName('vacancies') . ' ' .
 				$this->pi_getClassName('event-begin-date-over') . '"';
 		}
+
+		$result = $this->pi_getClassName('vacancies');
 
 		if ($seminar->hasVacancies()) {
 			$result .= ' ' .
