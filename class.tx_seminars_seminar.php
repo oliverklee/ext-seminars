@@ -2809,7 +2809,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			!$this->getConfValueBoolean('allowRegistrationForEventsWithoutDate')
 		) {
 			$message = $this->translate('message_noDate');
-		} elseif ($this->isRegistrationDeadlineOver()) {
+		} elseif ($this->hasDate() && $this->isRegistrationDeadlineOver()) {
 			$message = $this->translate('message_seminarRegistrationIsClosed');
 		} elseif ($this->isFull()
 			&& !$this->hasVacanciesOnRegistrationQueue()) {

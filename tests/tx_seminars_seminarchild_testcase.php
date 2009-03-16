@@ -66,6 +66,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $pi1;
 
 	public function setUp() {
+		$GLOBALS['LANG']->includeLLFile(
+			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
+		);
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -1045,7 +1048,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 
 	public function test_CanSomebodyRegisterMessage_EventWithFutureDate_ReturnsEmptyString() {
-		$this->fixture->setBeginDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
 		$this->assertEquals(
 			'',
@@ -1054,8 +1057,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_CanSomebodyRegisterMessage_ForPastEvent_ReturnsSeminarRegistrationClosedMessage() {
-		$this->fixture->setBeginDate(time() - 7200);
-		$this->fixture->setEndDate(time() - 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
 		$this->assertEquals(
 			$this->fixture->translate('message_seminarRegistrationIsClosed'),
@@ -1063,22 +1066,22 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForPastEventWithRegistrationWithoutDateActivated_ReturnsNoDateMessage() {
+	public function test_CanSomebodyRegisterMessage_ForPastEventWithRegistrationWithoutDateActivated_ReturnsRegistrationDeadlineOverMessage() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
-		$this->fixture->setBeginDate(time() - 7200);
-		$this->fixture->setEndDate(time() - 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
 		$this->assertEquals(
-			$this->fixture->translate('message_noDate'),
+			$this->fixture->translate('message_seminarRegistrationIsClosed'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
 	}
 
 	public function test_CanSomebodyRegisterMessage_ForCurrentlyRunningEvent_ReturnsSeminarRegistrationClosesMessage() {
-		$this->fixture->setBeginDate(time() - 3600);
-		$this->fixture->setEndDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
 		$this->assertEquals(
 			$this->fixture->translate('message_seminarRegistrationIsClosed'),
@@ -1090,8 +1093,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
-		$this->fixture->setBeginDate(time() - 3600);
-		$this->fixture->setEndDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
 		$this->assertEquals(
 			$this->fixture->translate('message_seminarRegistrationIsClosed'),
@@ -1109,6 +1112,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function test_CanSomebodyRegisterMessage_ForEventWithoutDateAndRegistrationWithoutDateActivated_ReturnsEmptyString() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
+		$this->fixture->setBeginDate(0);
+		$this->fixture->setRegistrationDeadline(0);
 
 		$this->assertEquals(
 			'',
@@ -1117,11 +1122,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_CanSomebodyRegisterMessage_ForEventWithUnlimitedVacanvies_ReturnsEmptyString() {
-		$this->fixture->setBeginDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setUnlimitedVacancies();
 
 		$this->assertEquals(
-			$this->fixture->translate('message_seminarRegistrationIsClosed'),
+			'',
 			$this->fixture->canSomebodyRegisterMessage()
 		);
 	}
@@ -1145,6 +1150,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_CanSomebodyRegisterMessage_ForFullyBookedEvent_ReturnsNoVacanciesMessage() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setNeedsRegistration(true);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(10);
