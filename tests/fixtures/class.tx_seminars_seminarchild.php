@@ -548,7 +548,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * to 1 and attendees_max to 0.
 	 */
 	public function setUnlimitedVacancies() {
-		$this->needsRegistration(true);
+		$this->setNeedsRegistration(true);
 		$this->setAttendancesMax(0);
 	}
 }
