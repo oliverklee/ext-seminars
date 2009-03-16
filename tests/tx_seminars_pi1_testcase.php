@@ -3841,7 +3841,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////
 
 	public function test_GetVacanciesClasses_ForEventWithEnoughVacancies_ReturnsAvailableClass() {
-		$event = new tx_seminars_seminarchild($uid, array());
+		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(0);
 		$event->setNeedsRegistration(true);
@@ -3856,7 +3856,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesClasses_ForEventWithOneVacancy_ReturnsVacancyOneClass() {
-		$event = new tx_seminars_seminarchild($uid, array());
+		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(9);
 		$event->setNeedsRegistration(true);
@@ -3871,7 +3871,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesClasses_ForEventWithTwoVacancies_ReturnsVacancyTwoClass() {
-		$event = new tx_seminars_seminarchild($uid, array());
+		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(8);
 		$event->setNeedsRegistration(true);
@@ -3886,7 +3886,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesClasses_ForEventWithNoVacancies_ReturnsVacancyZeroClass() {
-		$event = new tx_seminars_seminarchild($uid, array());
+		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
 		$event->setNeedsRegistration(true);
@@ -3901,7 +3901,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesClasses_ForRegistrationDeadlineInPast_ReturnsDeadlineOverClass() {
-		$event = new tx_seminars_seminarchild($uid);
+		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(true);
 		$event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
@@ -3916,7 +3916,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesClasses_ForBeginDateInPast_ReturnsBeginDateOverClass() {
-		$event = new tx_seminars_seminarchild($uid);
+		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(true);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 
@@ -3930,7 +3930,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesClasses_ForEventNotNeedingRegistration_ReturnsVacanciesBasicClass() {
-		$event = new tx_seminars_seminarchild($uid);
+		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(false);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -3943,7 +3943,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_GetVacanciesClasses_ForEventWithoutBeginDate_DoesNotReturnBeginDateOverClass() {
-		$event = new tx_seminars_seminarchild($uid);
+		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(true);
 
 		$output = $this->fixture->getVacanciesClasses($event);
