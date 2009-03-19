@@ -2,7 +2,7 @@
 - [#2827] Fix: mod2: Remove $this->doc->form = '<form action="" method="post">';
 - [#2493] Change: Rename mod2 to BackEnd
 - [#2753] Feature: Add speaker model and mapper
-- [#2820] Events with unlimited Vacancies have red square
+- [#2820] Fix: Events with unlimited Vacancies have red square
 - [#2819] Fix: Events with no Date get red square
 - [#2822] Fix: Uninitialized variable reads in some pi1 tests
 - [#2817] Fix: Unit test failures in tx_seminars_seminarchild_testcase
