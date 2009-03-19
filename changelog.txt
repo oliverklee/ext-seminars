@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2827] Fix: mod2: Remove $this->doc->form = '<form action="" method="post">';
 - [#2493] Change: Rename mod2 to BackEnd
 - [#2753] Feature: Add speaker model and mapper
 - [#2820] Events with unlimited Vacancies have red square

@@ -108,7 +108,6 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 			// starts the document
 			$this->doc = t3lib_div::makeInstance('bigDoc');
 			$this->doc->backPath = $BACK_PATH;
-			$this->doc->form = '<form action="" method="post">';
 			$this->doc->docType = 'xhtml_strict';
 			$this->doc->styleSheetFile2 = '../typo3conf/ext/seminars/BackEnd/BackEnd.css';
 
