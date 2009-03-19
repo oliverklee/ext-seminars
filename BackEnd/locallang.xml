@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
 	<meta type="array">
-		<description>Locallang labels for tx_seminars/mod2</description>
+		<description>Locallang labels for tx_seminars/BackEnd</description>
 		<type>module</type>
-		<fileId>EXT:seminars/mod2/locallang.xml</fileId>
+		<fileId>EXT:seminars/BackEnd/locallang.xml</fileId>
 		<labelContext type="array">
 		</labelContext>
 	</meta>

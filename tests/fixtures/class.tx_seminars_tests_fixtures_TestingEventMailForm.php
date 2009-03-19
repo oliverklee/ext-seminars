@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'tx_seminars_mod2_TestingEventMailForm' for the 'seminars' extension.
+ * Class 'tx_seminars_tests_fixtures_TestingEventMailForm' for the 'seminars' extension.
  *
  * This class represents an implementation of the EventMailForm class.
  *
@@ -34,7 +34,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_tests_fixtures_TestingEventMailForm extends tx_seminars_mod2_EventMailForm {
+class tx_seminars_tests_fixtures_TestingEventMailForm extends tx_seminars_BackEnd_EventMailForm {
 	/**
 	 * Returns the label for the submit button.
 	 *

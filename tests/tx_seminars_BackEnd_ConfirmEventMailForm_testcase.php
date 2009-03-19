@@ -34,9 +34,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_mod2_ConfirmEventMailForm
+	 * @var tx_seminars_BackEnd_ConfirmEventMailForm
 	 */
 	private $fixture;
 	/**
@@ -71,7 +71,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 		$GLOBALS['LANG']->lang = 'default';
 
 		// Loads the locallang file for properly working localization in the tests.
-		$GLOBALS['LANG']->includeLLFile('EXT:seminars/mod2/locallang.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
@@ -109,7 +109,7 @@ class tx_seminars_mod2_ConfirmEventMailForm_testcase extends tx_phpunit_testcase
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_mod2_ConfirmEventMailForm($this->eventUid);
+		$this->fixture = new tx_seminars_BackEnd_ConfirmEventMailForm($this->eventUid);
 	}
 
 	public function tearDown() {

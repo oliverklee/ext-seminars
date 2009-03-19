@@ -25,23 +25,23 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'tx_seminars_mod2_ConfirmEventMailForm' for the 'seminars' extension.
+ * Class 'tx_seminars_BackEnd_CancelEventMailForm' for the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailForm  {
+class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_EventMailForm  {
 	/**
 	 * @var string the action of this form
 	 */
-	protected $action = 'confirmEvent';
+	protected $action = 'cancelEvent';
 
 	/**
 	 * @var integer the status to set when submitting the form
 	 */
-	protected $statusToSet = tx_seminars_seminar::STATUS_CONFIRMED;
+	protected $statusToSet = tx_seminars_seminar::STATUS_CANCELED;
 
 	/**
 	 * Returns the label for the submit button.
@@ -49,7 +49,7 @@ class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailFo
 	 * @return string label for the submit button, will not be empty
 	 */
 	protected function getSubmitButtonLabel() {
-		return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
+		return $GLOBALS['LANG']->getLL('cancelMailForm_sendButton');
 	}
 
 	/**
@@ -62,7 +62,7 @@ class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailFo
 	 */
 	protected function getInitialValue($fieldName) {
 		$result = $GLOBALS['LANG']->getLL(
-			'confirmMailForm_prefillField_' . $fieldName
+			'cancelMailForm_prefillField_' . $fieldName
 		);
 		if ($fieldName == 'subject') {
 			$result .= ' ' . $this->getEvent()->getTitleAndDate();
@@ -72,7 +72,7 @@ class tx_seminars_mod2_ConfirmEventMailForm extends tx_seminars_mod2_EventMailFo
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_ConfirmEventMailForm.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_ConfirmEventMailForm.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_CancelEventMailForm.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_CancelEventMailForm.php']);
 }
 ?>

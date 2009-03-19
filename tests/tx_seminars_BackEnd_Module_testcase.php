@@ -24,21 +24,21 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 /**
- * Testcase for the tx_seminars_mod2_BackEndModule class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_BackEnd_Module class in the 'seminars' extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_mod2_BackEndModule_testcase extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_Module_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_mod2_BackEndModule
+	 * @var tx_seminars_BackEnd_Module
 	 */
 	private $fixture;
 
 	public function setUp() {
-		$this->fixture = new tx_seminars_mod2_BackEndModule();
+		$this->fixture = new tx_seminars_BackEnd_Module();
 	}
 
 	public function tearDown() {

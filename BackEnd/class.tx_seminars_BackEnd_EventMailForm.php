@@ -25,14 +25,14 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'tx_seminars_mod2_EventMailForm' for the 'seminars' extension.
+ * Class 'tx_seminars_BackEnd_EventMailForm' for the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-abstract class tx_seminars_mod2_EventMailForm {
+abstract class tx_seminars_BackEnd_EventMailForm {
 	/**
 	 * @var tx_seminars_seminar the event which we want to list/show
 	 */
@@ -413,7 +413,7 @@ abstract class tx_seminars_mod2_EventMailForm {
 	private function redirectToListView() {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Location: ' . t3lib_div::locationHeaderUrl(
-				'/typo3conf/ext/seminars/mod2/index.php?id=' .
+				'/typo3conf/ext/seminars/BackEnd/index.php?id=' .
 				tx_oelib_PageFinder::getInstance()->getPageUid()
 		));
 	}
@@ -447,7 +447,7 @@ abstract class tx_seminars_mod2_EventMailForm {
 	abstract protected function getInitialValue($fieldName);
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_EventMailForm.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_EventMailForm.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_EventMailForm.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_EventMailForm.php']);
 }
 ?>

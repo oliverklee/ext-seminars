@@ -25,28 +25,28 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'back-end list' for the 'seminars' extension.
+ * Class 'tx_seminars_BackEnd_List' for the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_mod2_backendlist {
+class tx_seminars_BackEnd_List {
 	/** the table we're working on */
 	protected $tableName = '';
 
 	/**
-	 * @var tx_seminars_mod2_BackEndModule the back-end module
+	 * @var tx_seminars_BackEnd_Module the back-end module
 	 */
 	protected $page = null;
 
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
 	 *
-	 * @param tx_seminars_mod2_BackEndModule the current back-end module
+	 * @param tx_seminars_BackEnd_Module the current back-end module
 	 */
-	public function __construct(tx_seminars_mod2_BackEndModule $module) {
+	public function __construct(tx_seminars_BackEnd_Module $module) {
 		$this->page = $module;
 	}
 
@@ -229,7 +229,7 @@ class tx_seminars_mod2_backendlist {
 		$result = TAB . TAB .
 			'<div id="typo3-csvLink">' . LF .
 			TAB . TAB . TAB .
-			'<a href="class.tx_seminars_mod2_csv.php?id=' . $pageData['uid'] .
+			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' . $pageData['uid'] .
 			'&amp;tx_seminars_pi2[table]=' . $this->tableName .
 			'&amp;tx_seminars_pi2[pid]=' . $pageData['uid'] . '">' . LF .
 			TAB . TAB . TAB . TAB .
@@ -253,7 +253,7 @@ class tx_seminars_mod2_backendlist {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_backendlist.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_backendlist.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_List.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_List.php']);
 }
 ?>

@@ -32,7 +32,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_mod2_registrationslist extends tx_seminars_mod2_backendlist {
+class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	/**
 	 * @var string the table we're working on
 	 */
@@ -222,7 +222,7 @@ class tx_seminars_mod2_registrationslist extends tx_seminars_mod2_backendlist {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_registrationslist.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_registrationslist.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_RegistrationsList.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_RegistrationsList.php']);
 }
 ?>

@@ -34,9 +34,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_mod2_registrationslist
+	 * @var tx_seminars_BackEnd_RegistrationsList
 	 */
 	private $fixture;
 	/**
@@ -50,7 +50,7 @@ class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 	private $dummySysFolderPid = 0;
 
 	/**
-	 * @var tx_seminars_mod2_BackEndModule a dummy back-end module
+	 * @var tx_seminars_BackEnd_Module a dummy back-end module
 	 */
 	private $backEndModule;
 
@@ -59,7 +59,7 @@ class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 
 		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
-		$this->backEndModule = new tx_seminars_mod2_BackEndModule();
+		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;
 		$this->backEndModule->setPageData(array('uid' => $this->dummySysFolderPid));
 
@@ -67,7 +67,7 @@ class tx_seminars_registrationslist_testcase extends tx_phpunit_testcase {
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->backEndModule->doc->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_mod2_registrationslist($this->backEndModule);
+		$this->fixture = new tx_seminars_BackEnd_registrationslist($this->backEndModule);
 	}
 
 	public function tearDown() {

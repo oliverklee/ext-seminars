@@ -35,9 +35,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_mod2_eventslist
+	 * @var tx_seminars_BackEnd_EventsList
 	 */
 	private $fixture;
 	/**
@@ -51,7 +51,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 	private $dummySysFolderPid = 0;
 
 	/**
-	 * @var tx_seminars_mod2_BackEndModule a dummy BE module
+	 * @var tx_seminars_BackEnd_Module a dummy BE module
 	 */
 	private $backEndModule;
 
@@ -67,7 +67,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$GLOBALS['LANG']->lang = 'default';
 
 		// Loads the locallang file for properly working localization in the tests.
-		$GLOBALS['LANG']->includeLLFile('EXT:seminars/mod2/locallang.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
@@ -75,7 +75,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
 
-		$this->backEndModule = new tx_seminars_mod2_BackEndModule();
+		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;
 		$this->backEndModule->setPageData(array('uid' => $this->dummySysFolderPid));
 
@@ -83,7 +83,7 @@ class tx_seminars_eventslist_testcase extends tx_phpunit_testcase {
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->backEndModule->doc->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_mod2_eventslist($this->backEndModule);
+		$this->fixture = new tx_seminars_BackEnd_eventslist($this->backEndModule);
 	}
 
 	public function tearDown() {

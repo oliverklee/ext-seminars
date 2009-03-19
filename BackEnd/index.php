@@ -38,7 +38,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php'
 
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 $LANG->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
-$LANG->includeLLFile('EXT:seminars/mod2/locallang.xml');
+$LANG->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 $LANG->includeLLFile('EXT:seminars/pi2/locallang.xml');
 
 // This checks permissions and exits if the users has no permission for entry.
@@ -52,7 +52,7 @@ $BE_USER->modAccess($MCONF, 1);
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
+class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	/** an array of available sub modules */
 	private $availableSubModules;
 
@@ -110,7 +110,7 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 			$this->doc->backPath = $BACK_PATH;
 			$this->doc->form = '<form action="" method="post">';
 			$this->doc->docType = 'xhtml_strict';
-			$this->doc->styleSheetFile2 = '../typo3conf/ext/seminars/mod2/mod2.css';
+			$this->doc->styleSheetFile2 = '../typo3conf/ext/seminars/BackEnd/BackEnd.css';
 
 			// JavaScript function called within getDeleteIcon()
 			$this->doc->JScode = '
@@ -173,21 +173,21 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 			switch ($this->subModule) {
 				case 2:
 					$registrationsListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_mod2_registrationslist'
+						'tx_seminars_BackEnd_RegistrationsList'
 					);
 					$registrationsList = new $registrationsListClassname($this);
 					$this->content .= $registrationsList->show();
 					break;
 				case 3:
 					$speakersListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_mod2_speakerslist'
+						'tx_seminars_BackEnd_SpeakersList'
 					);
 					$speakersList = new $speakersListClassname($this);
 					$this->content .= $speakersList->show();
 					break;
 				case 4:
 					$organizersListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_mod2_organizerslist'
+						'tx_seminars_BackEnd_OrganizersList'
 					);
 					$organizersList = new $organizersListClassname($this);
 					$this->content .= $organizersList->show();
@@ -199,7 +199,7 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 						$this->content .= $this->getCancelEventMailForm();
 					} else {
 						$eventsListClassname = t3lib_div::makeInstanceClassName(
-							'tx_seminars_mod2_eventslist'
+							'tx_seminars_BackEnd_EventsList'
 						);
 						$eventsList = new $eventsListClassname($this);
 						$this->content .= $eventsList->show();
@@ -264,7 +264,7 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 	 */
 	private function getConfirmEventMailForm() {
 		$formClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_mod2_ConfirmEventMailForm'
+			'tx_seminars_BackEnd_ConfirmEventMailForm'
 		);
 		$form = new $formClassName(
 			intval(t3lib_div::GPvar('eventUid'))
@@ -284,7 +284,7 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 	 */
 	private function getCancelEventMailForm() {
 		$formClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_mod2_CancelEventMailForm'
+			'tx_seminars_BackEnd_CancelEventMailForm'
 		);
 		$form = new $formClassName(
 			intval(t3lib_div::GPvar('eventUid'))
@@ -339,8 +339,8 @@ class tx_seminars_module2 extends tx_seminars_mod2_BackEndModule {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/index.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/index.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/index.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/index.php']);
 }
 
 // Make instance:

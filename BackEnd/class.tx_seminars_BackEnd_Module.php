@@ -25,7 +25,7 @@
 require_once(PATH_t3lib . 'class.t3lib_scbase.php');
 
 /**
- * Module 'tx_seminars_mod2_BackEndModule' for the 'seminars' extension.
+ * Module 'tx_seminars_BackEnd_Module' for the 'seminars' extension.
  *
  * This class is the base class for a back-end module.
  *
@@ -34,7 +34,7 @@ require_once(PATH_t3lib . 'class.t3lib_scbase.php');
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_mod2_BackEndModule extends t3lib_SCbase {
+class tx_seminars_BackEnd_Module extends t3lib_SCbase {
 	/**
 	 * @var array data of the current BE page
 	 */
@@ -66,7 +66,7 @@ class tx_seminars_mod2_BackEndModule extends t3lib_SCbase {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_BackEndModule.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/mod2/class.tx_seminars_mod2_BackEndModule.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_Module.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_Module.php']);
 }
 ?>
