@@ -83,7 +83,9 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->backEndModule->doc->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_BackEnd_eventslist($this->backEndModule);
+		$this->fixture = new tx_seminars_BackEnd_EventsList(
+			$this->backEndModule
+		);
 	}
 
 	public function tearDown() {

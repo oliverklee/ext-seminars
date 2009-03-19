@@ -109,7 +109,9 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_BackEnd_CancelEventMailForm($this->eventUid);
+		$this->fixture = new tx_seminars_BackEnd_CancelEventMailForm(
+			$this->eventUid
+		);
 	}
 
 	public function tearDown() {

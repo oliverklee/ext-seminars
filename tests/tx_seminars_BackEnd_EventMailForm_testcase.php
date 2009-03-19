@@ -106,7 +106,9 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_tests_fixtures_TestingEventMailForm($this->eventUid);
+		$this->fixture = new tx_seminars_tests_fixtures_TestingEventMailForm(
+			$this->eventUid
+		);
 	}
 
 	public function tearDown() {
