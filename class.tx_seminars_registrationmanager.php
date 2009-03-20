@@ -448,34 +448,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Checks whether the data the user has just entered is okay for creating
-	 * a registration, e.g. mandatory fields are filled, number fields only
-	 * contain numbers, the number of seats to register is not too high etc.
-	 *
-	 * This function returns an empty string if everything is okay and a
-	 * localized error message otherwise.
-	 *
-	 * Please note that this function doesn't create a registration - it just
-	 * checks.
-	 *
-	 * @param object the seminar object (that's the seminar we would like to
-	 *               register for), must not be null
-	 * @param array associative array with the registration data the user has
-	 *              just entered
-	 *
-	 * @return string an empty string if everything is okay, otherwise a
-	 *                localized error message
-	 */
-	public function canCreateRegistrationMessage(
-		tx_seminars_seminar $seminar, array $registrationData
-	) {
-		return ($this->canRegisterSeats($seminar, $registrationData['seats'])) ?
-			'' :
-			sprintf($this->translate('message_invalidNumberOfSeats'),
-				$seminar->getVacancies());
-	}
-
-	/**
 	 * Checks whether a registration with a given number of seats could be
 	 * created, ie. an actual number is given and there are at least that many
 	 * vacancies.
