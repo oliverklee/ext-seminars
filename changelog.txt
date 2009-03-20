@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2846] Fix: All tests in the testsuites, tx_seminars_pi1_eventEditor_testcase and tx_seminars_pi1_registrationEditor_testcase fail
 - [#2828] Fix: No registration created for event with unlimited number of seats
 - [#2800] Feature: Add time-slot model and mapper
 - [#2789] Change: Move the formidable configuration from XML to TypoScript setup

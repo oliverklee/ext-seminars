@@ -49,7 +49,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->fixture = new tx_seminars_pi1_eventEditor(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'form.' => array('eventEditor.' => array()),
+			),
 			$GLOBALS['TSFE']->cObj
 		);
 		$this->fixture->setTestMode();

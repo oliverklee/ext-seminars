@@ -74,6 +74,13 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 				'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'logOutOneTimeAccountsAfterRegistration' => 1,
+				'form.' => array(
+					'unregistration.' => array(),
+					'registration.'	=> array(
+						'step1.' => array(),
+						'step2.' => array(),
+					)
+				),
 			),
 			$GLOBALS['TSFE']->cObj
 		);
