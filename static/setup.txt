@@ -895,17 +895,10 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				360 = renderlet:TEXT
+				360 = renderlet:CHECKSINGLE
 				360 {
 					name = queue_size
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.queue_size
-					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noQueueNumber
-						}
-					}
 				}
 
 				370 = renderlet:CHECKBOX
