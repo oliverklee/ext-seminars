@@ -38,6 +38,7 @@ if (t3lib_extMgm::isLoaded('seminars')) {
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class ext_update {
 	/**
@@ -52,8 +53,11 @@ class ext_update {
 			if ($this->needsToUpdateEventOrganizerRelations()) {
 				$result .= $this->updateEventOrganizerRelations();
 			}
-			if ($this->needsToUpdateNeedsRegistrationField()) {
+			if ($this->needsToUpdateEventField('needsRegistration')) {
 				$result .= $this->updateNeedsRegistrationField();
+			}
+			if ($this->needsToUpdateEventField('queueSize')) {
+				$result .= $this->updateQueueSizeField();
 			}
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = '';
@@ -87,7 +91,8 @@ class ext_update {
 		try {
 			$result = (($this->needsToUpdateEventOrganizerRelations()
 				&& $this->hasEventsWithOrganizers())
-				|| $this->needsToUpdateNeedsRegistrationField()
+				|| $this->needsToUpdateEventField('needsRegistration')
+				|| $this->needsToUpdateEventField('queueSize')
 			);
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = false;
@@ -183,15 +188,31 @@ class ext_update {
 	}
 
 	/**
-	 * Checks whether there are events with attendees_max > 0 and
-	 * needs_registration = 0.
+	 * Checks whether there are events which need to be updated, in given DB
+	 * field.
+	 *
+	 * @param string the DB field to check for needing an update, must be
+	 *               'queueSize' or 'needsRegistration
 	 *
 	 * @return boolean true if any rows need to be updated, false otherwise
 	 */
-	private function needsToUpdateNeedsRegistrationField() {
+	private function needsToUpdateEventField($fieldToUpdate) {
+		switch ($fieldToUpdate) {
+			case 'needsRegistration':
+				$whereClause = 'attendees_max > 0 AND needs_registration = 0 ';
+				break;
+			case 'queueSize':
+				$whereClause = 'queue_size > 1';
+				break;
+			default:
+				throw new Exception('needsToUpdateEventField was called with ' .
+				'"' . $fieldToUpdate . '" but allowed values are only ' .
+					'\'needsRegistration\' and \'queueSize\'.');
+				break;
+		}
+
 		$row = tx_oelib_db::selectSingle(
-			'COUNT(*) AS number', SEMINARS_TABLE_SEMINARS,
-			'attendees_max > 0 AND needs_registration = 0 '
+			'COUNT(*) AS number', SEMINARS_TABLE_SEMINARS, $whereClause
 		);
 
 		return ($row['number'] > 0);
@@ -209,6 +230,22 @@ class ext_update {
 				SEMINARS_TABLE_SEMINARS,
 				'needs_registration = 0 AND attendees_max > 0',
 				array('needs_registration' => 1)
+			) . ' events.</p>';
+	}
+
+	/**
+	 * Updates the queue_size field of the event records, changing it from
+	 * integer to boolean.
+	 *
+	 * @return string information about the status of the update process,
+	 *                will not be empty
+	 */
+	private function updateQueueSizeField() {
+		return '<h2>Updating events queue_size field.</h2>' .
+			'<p> Updating ' . tx_oelib_db::update(
+				SEMINARS_TABLE_SEMINARS,
+				'queue_size > 1',
+				array('queue_size' => 1)
 			) . ' events.</p>';
 	}
 }
