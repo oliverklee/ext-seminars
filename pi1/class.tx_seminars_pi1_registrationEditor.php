@@ -129,7 +129,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *               "register" or "unregister", must not be empty
 	 */
 	public function setAction($action) {
-		$this->setXmlPath($action);
+		$this->setFormConfiguration($action);
 	}
 
 	/**
@@ -167,15 +167,15 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	}
 
 	/**
-	 * Sets the path to the XML file to use.
+	 * Sets the form configuration to use.
 	 *
 	 * @param string action to perform, may be either "register" or "unregister",
 	 *               must not be empty
 	 */
-	public function setXmlPath($action = 'register') {
+	public function setFormConfiguration($action = 'register') {
 		switch ($action) {
 			case 'unregister':
-				$xmlFile = 'registration_editor_unregistration.xml';
+				$formConfiguration = $this->conf['form.']['unregistration.'];
 				break;
 			case 'register':
 				// The fall-through is intended.
@@ -192,14 +192,14 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				if (($this->currentPageNumber == 1)
 					|| ($this->currentPageNumber == 2)
 				) {
-					$xmlFile = 'registration_editor_step2.xml';
+					$formConfiguration = $this->conf['form.']['registration.']['step2.'];
 				} else {
-					$xmlFile = 'registration_editor_step1.xml';
+					$formConfiguration = $this->conf['form.']['registration.']['step1.'];
 				}
 				break;
 		}
 
-		parent::setXmlPath('pi1/' . $xmlFile);
+		parent::setFormConfiguration($formConfiguration);
 	}
 
 	/**
@@ -232,7 +232,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			// A mayday would be returned without unsetting the form ID.
 			unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
 				['context']['forms']['tx_seminars_pi1_registration_editor']);
-			$this->setXmlPath();
+			$this->setFormConfiguration();
 			// This will produce a new form to which no data can be provided.
 			$rawForm = $this->makeFormCreator()->render();
 		}

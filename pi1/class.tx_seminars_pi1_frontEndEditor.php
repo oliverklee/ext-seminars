@@ -50,9 +50,9 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	private $objectUid = 0;
 
 	/**
-	 * @var string the path to the FORMidable XML file
+	 * @var array the FORMidable form configuration
 	 */
-	private $xmlPath;
+	private $formConfiguration;
 
 	/**
 	 * @var boolean whether the class ist used in test mode
@@ -93,13 +93,12 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	}
 
 	/**
-	 * Sets the path to the FORMidable XML file to use.
+	 * Sets the FORMidable form configuration.
 	 *
-	 * @param string path of the XML for the form, relative to this extension,
-	 *               must not begin with a slash and must not be empty
+	 * @param array the FORMidable form configuration, must not be empty
 	 */
-	public function setXmlPath($path) {
-		$this->xmlPath = $path;
+	public function setFormConfiguration(array $formConfiguration) {
+		$this->formConfiguration = $formConfiguration;
 	}
 
 	/**
@@ -147,8 +146,8 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	}
 
 	/**
-	 * Creates a FORMidable instance for the current UID and XML path. The UID
-	 * must be of an existing seminar object.
+	 * Creates a FORMidable instance for the current UID and form configuration.
+	 * The UID must be of an existing seminar object.
 	 *
 	 * This function does nothing if this instance is running in test mode.
 	 *
@@ -160,17 +159,17 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 			return null;
 		}
 
-		if ($this->xmlPath == '') {
+		if (empty($this->formConfiguration)) {
 			throw new Exception(
-				'Please define the path to the XML file to use via ' .
-				'$this->setXmlPath().'
+				'Please define the FORMidable form configuration to use via ' .
+				'$this->setFormConfiguration().'
 			);
 		}
 
 		$formCreator = t3lib_div::makeInstance('tx_ameosformidable');
-		$formCreator->init(
+		$formCreator->initFromTs(
 			$this,
-			t3lib_extMgm::extPath($this->extKey) . $this->xmlPath,
+			$this->formConfiguration,
 			($this->getObjectUid() > 0) ? $this->getObjectUid() : false
 		);
 

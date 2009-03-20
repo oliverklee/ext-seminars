@@ -64,7 +64,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function __construct(array $configuration, tslib_cObj $cObj) {
 		parent::__construct($configuration, $cObj);
-		$this->setXmlPath('pi1/event_editor.xml');
+		$this->setFormConfiguration($this->conf['form.']['eventEditor.']);
 
 		$this->declareDataHandler();
 		$this->includeJavaScriptToDeleteAttachments();
