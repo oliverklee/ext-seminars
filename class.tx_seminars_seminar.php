@@ -3927,7 +3927,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                 false otherwise
 	 */
 	public function hasVacanciesOnRegistrationQueue() {
-		return ($this->getVacanciesOnRegistrationQueue() > 0);
+		return ($this->hasUnlimitedVacancies()
+			|| ($this->getVacanciesOnRegistrationQueue() > 0)
+		);
 	}
 
 	/**
@@ -3953,6 +3955,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets the number of vacancies including the vacancies on the registration
 	 * queue for this seminar.
+	 *
+	 * You need to call hasUnlimitedVacancies before calling this function since
+	 * it will return zero for events with unlimited vacancies.
 	 *
 	 * @return integer the number of vacancies including the vacancies on
 	 *                 the registration queue (will be 0 if the seminar is

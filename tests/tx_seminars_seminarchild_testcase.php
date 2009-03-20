@@ -1711,6 +1711,11 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	/////////////////////////////////////////////////////
+	// Tests concerning hasVacanciesOnRegistrationQueue
+	/////////////////////////////////////////////////////
+
 	public function testHasVacanciesOnRegistrationQueueIsTrueForNonEmptyQueue() {
 		$this->fixture->setNumberOfAttendances(
 			$this->fixture->getAttendancesMax()
@@ -1732,6 +1737,19 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasVacanciesOnRegistrationQueue()
 		);
 	}
+
+	public function test_HasVacanciesOnRegistrationQueue_ForUnlimitedVacancies_ReturnsTrue() {
+		$this->fixture->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->hasVacanciesOnRegistrationQueue()
+		);
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning getAttendancesOnRegistrationQueue
+	///////////////////////////////////////////////////////
 
 	public function testGetAttendancesOnRegistrationQueueIsInitiallyZero() {
 		$this->assertEquals(

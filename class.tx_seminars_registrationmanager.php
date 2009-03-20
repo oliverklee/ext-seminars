@@ -501,7 +501,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		// Check whether we have a valid number
 		if ($numberOfSeats == strval($numberOfSeatsInt)) {
-			$result = ($seminar->getVacanciesOnRegistrationQueue() >= $numberOfSeatsInt);
+			if ($seminar->hasUnlimitedVacancies()) {
+				$result = true;
+			} else {
+				$result = ($seminar->getVacanciesOnRegistrationQueue()
+					>= $numberOfSeatsInt);
+			}
 		} else {
 			$result = false;
 		}

@@ -1006,5 +1006,143 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+
+	//////////////////////////////////////
+	// Tests concerning canRegisterSeats
+	//////////////////////////////////////
+
+	public function test_CanRegisterSeats_ForFullyBookedEventAndZeroSeatsGiven_ReturnsFalse() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterSeats($this->seminar, 0)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForFullyBookedEventAndOneSeatGiven_ReturnsFalse() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterSeats($this->seminar, 1)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForFullyBookedEventAndEmptyStringGiven_ReturnsFalse() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterSeats($this->seminar, '')
+		);
+	}
+
+	public function test_CanRegisterSeats_ForFullyBookedEventAndInvalidStringGiven_ReturnsFalse() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterSeats($this->seminar, 'foo')
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithOneVacancyAndZeroSeatsGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(1);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 0)
+		);
+	}
+
+
+	public function test_CanRegisterSeats_ForEventWithOneVacancyAndOneSeatGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(1);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 1)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithOneVacancyAndTwoSeatsGiven_ReturnsFalse() {
+		$this->seminar->setAttendancesMax(1);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterSeats($this->seminar, 2)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithOneVacancyAndEmptyStringGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(1);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, '')
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithOneVacancyAndInvalidStringGiven_ReturnsFalse() {
+		$this->seminar->setAttendancesMax(1);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterSeats($this->seminar, 'foo')
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndOneSeatGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(2);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 1)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndTwoSeatsGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(2);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 2)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndThreeSeatsGiven_ReturnsFalse() {
+		$this->seminar->setAttendancesMax(2);
+
+		$this->assertFalse(
+			$this->fixture->canRegisterSeats($this->seminar, 3)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndZeroSeatsGiven_ReturnsTrue() {
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 0)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndOneSeatGiven_ReturnsTrue() {
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 1)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndTwoSeatsGiven_ReturnsTrue() {
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 2)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndFortytwoSeatsGiven_ReturnsTrue() {
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 42)
+		);
+	}
 }
 ?>
