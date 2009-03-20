@@ -69,7 +69,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
-			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
+			<label index="tx_seminars_seminars.queue_size">Registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
@@ -257,7 +257,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Teilnehmer</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen:</label>
-			<label index="tx_seminars_seminars.queue_size">Größe der Warteliste:</label>
+			<label index="tx_seminars_seminars.queue_size">Warteliste:</label>
 			<label index="tx_seminars_seminars.target_groups">Zielgruppen:</label>
 			<label index="tx_seminars_seminars.attendees">Momentane Anzahl Anmeldungen:</label>
 			<label index="tx_seminars_seminars.vacancies">Momentane Anzahl freie Plätze:</label>
@@ -517,7 +517,6 @@
 			<label index="tx_seminars_seminars.organizing_partners">Organisatoren partners:</label>
 			<label index="tx_seminars_seminars.timeslots">Bloktijden</label>
 			<label index="tx_seminars_seminars.deadline_unregistration">Annuleren deadline:</label>
-			<label index="tx_seminars_seminars.queue_size">Grootte van de registratie queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Doelgroepen:</label>
 			<label index="tx_seminars_speakers.skills">Eigenschappen:</label>
 			<label index="tx_seminars_attendances.uid">Kaart nummer:</label>
@@ -593,7 +592,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Deltagere</label>
 			<label index="tx_seminars_seminars.attendees_min">Min. deltagerantal:</label>
 			<label index="tx_seminars_seminars.attendees_max">Max. deltagerantal:</label>
-			<label index="tx_seminars_seminars.queue_size">Størrelse på tilmeldingskøen:</label>
 			<label index="tx_seminars_seminars.target_groups">Målgruppe:</label>
 			<label index="tx_seminars_seminars.attendees">Antal tilmeldte (på nuværende tidspunkt):</label>
 			<label index="tx_seminars_seminars.vacancies">Antal ledige pladser (på nuværende tidpunkt):</label>
@@ -747,7 +745,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Посетители</label>
 			<label index="tx_seminars_seminars.attendees_min">Минимальное количество посетителей:</label>
 			<label index="tx_seminars_seminars.attendees_max">Максимальное количество посетителей:</label>
-			<label index="tx_seminars_seminars.queue_size">Размер списка ожидания</label>
 			<label index="tx_seminars_seminars.target_groups">Группа потенциальных потребителей:</label>
 			<label index="tx_seminars_seminars.attendees">Текущее количество посетителей:</label>
 			<label index="tx_seminars_seminars.vacancies">Текущее количество свободных мест:</label>
@@ -901,7 +898,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Partecipanti</label>
 			<label index="tx_seminars_seminars.attendees_min">Numero minimo partecipanti:</label>
 			<label index="tx_seminars_seminars.attendees_max">Numero massimo partecipanti:</label>
-			<label index="tx_seminars_seminars.queue_size">Dimensioni della coda di registrazione:</label>
 			<label index="tx_seminars_seminars.target_groups">Gruppi destinatari:</label>
 			<label index="tx_seminars_seminars.attendees">Numero attuale di partecipanti:</label>
 			<label index="tx_seminars_seminars.vacancies">Numero attuale di posti liberi:</label>
@@ -1056,7 +1052,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Participants</label>
 			<label index="tx_seminars_seminars.attendees_min">Nombre minimum de participants:</label>
 			<label index="tx_seminars_seminars.attendees_max">Nombre maximum de participants:</label>
-			<label index="tx_seminars_seminars.queue_size">Taille de la queue d'inscription:</label>
 			<label index="tx_seminars_seminars.target_groups">Groupes cibles:</label>
 			<label index="tx_seminars_seminars.attendees">Nombre actuel de participants:</label>
 			<label index="tx_seminars_seminars.vacancies">Nombre actuel de places disponibles:</label>
@@ -1218,7 +1213,7 @@
 			<label index="tx_seminars_seminars.divLabelAttendees" type="integer">12580046</label>
 			<label index="tx_seminars_seminars.attendees_min" type="integer">190118002</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">111778233</label>
-			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
+			<label index="tx_seminars_seminars.queue_size" type="integer">235296303</label>
 			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
 			<label index="tx_seminars_seminars.attendees" type="integer">5740012</label>
 			<label index="tx_seminars_seminars.vacancies" type="integer">7812058</label>
@@ -1480,7 +1475,6 @@
 			<label index="tx_seminars_seminars.organizing_partners" type="integer">45053453</label>
 			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
 			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
-			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
 			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
 			<label index="tx_seminars_speakers.skills" type="integer">89069054</label>
 			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
@@ -1635,7 +1629,6 @@
 			<label index="tx_seminars_seminars.organizing_partners" type="integer">45053453</label>
 			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
 			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
-			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
 			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
 			<label index="tx_seminars_speakers.skills" type="integer">89069054</label>
 			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
@@ -1806,7 +1799,6 @@
 			<label index="tx_seminars_test" type="integer">56221404</label>
 			<label index="tx_seminars_seminars.organizing_partners" type="integer">45053453</label>
 			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
-			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
 			<label index="tx_seminars_attendances.registration_queue" type="integer">263240266</label>
 			<label index="tx_seminars_timeslots" type="integer">147000660</label>
 		</languageKey>
@@ -1859,7 +1851,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees" type="integer">12580046</label>
 			<label index="tx_seminars_seminars.attendees_min" type="integer">190118002</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">111778233</label>
-			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
 			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
 			<label index="tx_seminars_seminars.attendees" type="integer">5740012</label>
 			<label index="tx_seminars_seminars.vacancies" type="integer">7812058</label>
@@ -2014,7 +2005,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees" type="integer">12580046</label>
 			<label index="tx_seminars_seminars.attendees_min" type="integer">190118002</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">111778233</label>
-			<label index="tx_seminars_seminars.queue_size" type="integer">125501321</label>
 			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
 			<label index="tx_seminars_seminars.attendees" type="integer">5740012</label>
 			<label index="tx_seminars_seminars.vacancies" type="integer">7812058</label>
@@ -2169,7 +2159,7 @@
 			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
-			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
+			<label index="tx_seminars_seminars.queue_size">Registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
@@ -2444,7 +2434,6 @@
 			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
 			<label index="tx_seminars_seminars.timeslots">Time slots</label>
 			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
-			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_speakers.skills">Skills:</label>
 			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
@@ -2615,7 +2604,6 @@
 			<label index="tx_seminars_test">Test records</label>
 			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
 			<label index="tx_seminars_seminars.timeslots">Time slots</label>
-			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_attendances.registration_queue">Is on the registration queue:</label>
 			<label index="tx_seminars_timeslots">Time slots</label>
 		</languageKey>
@@ -2752,7 +2740,6 @@
 			<label index="tx_seminars_seminars.organizing_partners">Organizing Partners:</label>
 			<label index="tx_seminars_seminars.timeslots">Time slots</label>
 			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
-			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_speakers.skills">Skills:</label>
 			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
@@ -2823,7 +2810,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
-			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
@@ -2978,7 +2964,6 @@
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
-			<label index="tx_seminars_seminars.queue_size">Size of registration queue:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>

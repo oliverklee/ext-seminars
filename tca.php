@@ -806,15 +806,7 @@ $TCA['tx_seminars_seminars'] = array(
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.queue_size',
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
-				'type' => 'input',
-				'size' => '4',
-				'max' => '4',
-				'eval' => 'int',
-				'checkbox' => '0',
-				'range' => array(
-					'upper' => '9999',
-					'lower' => '0',
-				),
+				'type' => 'check',
 				'default' => 0,
 			),
 		),
