@@ -268,7 +268,6 @@
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
 			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
@@ -502,7 +501,6 @@
 			<label index="message_emptyTitle">Indtast en overskrift for dette arrangement.</label>
 			<label index="message_emptyOrganizer">Vælg mindst én arrangør</label>
 			<label index="message_noAttendeesNumber">Indtast kun antal for min og maks antal deltagere.</label>
-			<label index="message_noQueueNumber">Indtast kun antal for størrelsen på tilmeldingskøen.</label>
 			<label index="message_noPriceNumber">Indtast kun tal som priser, hvor punktum er decimaltalseparator (f.x.: 99.50).</label>
 			<label index="message_noAccessToEventEditor_formal">Beklager, du har ikke rettigheder til at redigere arrangementer.</label>
 			<label index="message_noAccessToEventEditor_informal">Beklager, du har ikke rettigheder til at redigere arrangementer.</label>
@@ -791,7 +789,6 @@
 			<label index="message_emptyTitle">Bitte geben Sie einen Titel für die Veranstaltung ein.</label>
 			<label index="message_emptyOrganizer">Bitte wählen Sie mindestens einen Veranstalter aus.</label>
 			<label index="message_noAttendeesNumber">Bitte geben Sie nur Zahlen für die minimale und maximale Anzahl Anmeldungen ein.</label>
-			<label index="message_noQueueNumber">Bitte geben Sie nur Zahlen für die Größe der Warteliste ein.</label>
 			<label index="message_noPriceNumber">Bitte geben Sie nur Zahlen als Preise an (ohne Währungsangabe).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, Sie haben nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, du hast nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
@@ -1025,7 +1022,6 @@
 			<label index="message_emptyTitle">Vul een titel in voor dit Seminar.</label>
 			<label index="message_emptyOrganizer">Vul tenminste 1 organisator in.</label>
 			<label index="message_noAttendeesNumber">Vul alleen het minimum en maximum aantal deelnemers in.</label>
-			<label index="message_noQueueNumber">Vul alleen de waarde van de grootte van de registratie queue.</label>
 			<label index="message_noPriceNumber">Vul alleen cijfers in en gebruik een punt voor decimalen. (zonder munteenheid)</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, U heeft geen toegang tot de Evenementen Editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, Je hebt geen toegang tot de Evenementen Editor.</label>
@@ -1256,7 +1252,6 @@
 			<label index="message_emptyTitle">Введите название мероприятия.</label>
 			<label index="message_emptyOrganizer">Выберите как минимум одного организатора.</label>
 			<label index="message_noAttendeesNumber">Введите числа для минимального и максимального количества участников.</label>
-			<label index="message_noQueueNumber">Введите число для указа размера списка ожидания</label>
 			<label index="message_noPriceNumber">Введите числа для цены (без обозначения валюты, используя точку как десятичный разделитель).</label>
 			<label index="message_noAccessToEventEditor_formal">Извините, у вас нет доступа к редактированию событий.</label>
 			<label index="message_noAccessToEventEditor_informal">Извините, у вас нет доступа к редактированию событий.</label>
@@ -1488,7 +1483,6 @@
 			<label index="message_emptyTitle">Inserire un titolo per l'evento.</label>
 			<label index="message_emptyOrganizer">Selezionare almeno un organizzatore.</label>
 			<label index="message_noAttendeesNumber">Inserire solo numeri per il minimo e massimo numero di partecipanti.</label>
-			<label index="message_noQueueNumber">Inserire solo numeri per la dimensione della coda di registrazione.</label>
 			<label index="message_noPriceNumber">Inserire solo numeri per il prezzo.</label>
 			<label index="message_noAccessToEventEditor_formal">Spiacente, non ha accesso alla modifica dell'evento.</label>
 			<label index="message_noAccessToEventEditor_informal">Spiacente, non hai accesso alla modifica dell'evento.</label>
@@ -1720,7 +1714,6 @@
 			<label index="message_emptyTitle">Veuillez donner un titre à cet événement.</label>
 			<label index="message_emptyOrganizer">Veuillez choisir au moins un organisateur.</label>
 			<label index="message_noAttendeesNumber">Veuillez ne donner de chiffres que pour le nombre minimal et maximal de participants.</label>
-			<label index="message_noQueueNumber">Veuillez ne donner de chiffre que pour la taille de la liste d'attente.</label>
 			<label index="message_noPriceNumber">Veuillez ne donner que des chiffres pour les prix (sans la monnaie).</label>
 			<label index="message_noAccessToEventEditor_formal">Désolé, vous n'avez pas accès à la modification des événements.</label>
 			<label index="message_noAccessToEventEditor_informal">Désolé, tu n'as pas accès à la modification des événements.</label>
@@ -1978,7 +1971,6 @@
 			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
-			<label index="message_noQueueNumber" type="integer">546023</label>
 			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
@@ -2213,7 +2205,6 @@
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
 			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noQueueNumber" type="integer">546023</label>
 			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
@@ -2501,7 +2492,6 @@
 			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
-			<label index="message_noQueueNumber" type="integer">546023</label>
 			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
@@ -2734,7 +2724,6 @@
 			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
-			<label index="message_noQueueNumber" type="integer">546023</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
 		</languageKey>
 		<languageKey index="it" type="array">
@@ -2924,7 +2913,6 @@
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
 			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noQueueNumber" type="integer">546023</label>
 			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
@@ -3151,7 +3139,6 @@
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
 			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noQueueNumber" type="integer">546023</label>
 			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
@@ -3435,7 +3422,6 @@
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
 			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
@@ -3721,7 +3707,6 @@
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
-			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
 			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
@@ -3954,7 +3939,6 @@
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
-			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -4184,7 +4168,6 @@
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
-			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
 			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
@@ -4376,7 +4359,6 @@
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
 			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
@@ -4603,7 +4585,6 @@
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noQueueNumber">Please enter only numbers for the size of the registration queue.</label>
 			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
