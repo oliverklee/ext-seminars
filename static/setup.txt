@@ -461,43 +461,43 @@ plugin.tx_seminars_pi1 {
 					keyname = uid
 					labelname = title
 					mmrelations {
-						1 {
+						categories {
 							field = categories
 							mmtable = tx_seminars_seminars_categories_mm
 						}
-						2 {
+						place {
 							field = place
 							mmtable = tx_seminars_seminars_place_mm
 						}
-						3 {
+						lodgings {
 							field = lodgings
 							mmtable = tx_seminars_seminars_lodgings_mm
 						}
-						4 {
+						foods {
 							field = foods
 							mmtable = tx_seminars_seminars_foods_mm
 						}
-						5 {
+						speakers {
 							field = speakers
 							mmtable = tx_seminars_seminars_speakers_mm
 						}
-						6 {
+						partners {
 							field = partners
 							mmtable = tx_seminars_seminars_speakers_mm_partners
 						}
-						7 {
+						tutors {
 							field = tutors
 							mmtable = tx_seminars_seminars_speakers_mm_tutors
 						}
-						8 {
+						leaders {
 							field = leaders
 							mmtable = tx_seminars_seminars_speakers_mm_leaders
 						}
-						9 {
+						target_groups {
 							field = target_groups
 							mmtable = tx_seminars_seminars_target_groups_mm
 						}
-						10 {
+						organizers {
 							field = organizers
 							mmtable = tx_seminars_seminars_organizers_mm
 						}
@@ -525,8 +525,8 @@ plugin.tx_seminars_pi1 {
 				}
 			}
 			elements {
-				10 = renderlet:TEXT
-				10 {
+				title = renderlet:TEXT
+				title {
 					name = title
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.title
 					validators {
@@ -535,14 +535,14 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				20 = renderlet:TEXT
-				20 {
+				subtitle = renderlet:TEXT
+				subtitle {
 					name = subtitle
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.subtitle
 				}
 
-				30 = renderlet:CHECKBOX
-				30 {
+				categories = renderlet:CHECKBOX
+				categories {
 					name = categories
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.categories
 					data.userobj {
@@ -551,20 +551,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				40 = renderlet:TEXTAREA
-				40 {
+				teaser = renderlet:TEXTAREA
+				teaser {
 					name = teaser
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.teaser
 				}
 
-				50 = renderlet:TEXTAREA
-				50 {
+				description = renderlet:TEXTAREA
+				description {
 					name = description
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.description
 				}
 
-				60 = renderlet:LISTBOX
-				60 {
+				event_type = renderlet:LISTBOX
+				event_type {
 					name = event_type
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.event_type
 					data {
@@ -579,20 +579,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				70 = renderlet:TEXT
-				70 {
+				accreditation_number = renderlet:TEXT
+				accreditation_number {
 					name = accreditation_number
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.accreditation_number
 				}
 
-				80 = renderlet:TEXT
-				80 {
+				credit_points = renderlet:TEXT
+				credit_points {
 					name = credit_points
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.credit_points
 				}
 
-				90 = renderlet:DATE
-				90 {
+				begin_date = renderlet:DATE
+				begin_date {
 					name = begin_date
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.begin_date
 					data.datetime {
@@ -603,8 +603,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				100 = renderlet:DATE
-				100 {
+				end_date = renderlet:DATE
+				end_date {
 					name = end_date
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.end_date
 					data.datetime {
@@ -615,8 +615,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				110 = renderlet:DATE
-				110 {
+				deadline_registration = renderlet:DATE
+				deadline_registration {
 					name = deadline_registration
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.deadline_registration
 					data.datetime {
@@ -627,8 +627,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				120 = renderlet:DATE
-				120 {
+				deadline_early_bird = renderlet:DATE
+				deadline_early_bird {
 					name = deadline_early_bird
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.deadline_early_bird
 					data.datetime {
@@ -639,8 +639,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				130 = renderlet:DATE
-				130 {
+				deadline_unregistration = renderlet:DATE
+				deadline_unregistration {
 					name = deadline_unregistration
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.deadline_unregistration
 					data.datetime {
@@ -651,8 +651,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				140 = renderlet:CHECKBOX
-				140 {
+				place = renderlet:CHECKBOX
+				place {
 					name = place
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.place
 					data.userobj {
@@ -661,20 +661,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				150 = renderlet:TEXT
-				150 {
+				room = renderlet:TEXT
+				room {
 					name = room
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.room
 				}
 
-				160 = renderlet:TEXTAREA
-				160 {
+				additional_times_places = renderlet:TEXTAREA
+				additional_times_places {
 					name = additional_times_places
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.additional_times_places
 				}
 
-				170 = renderlet:CHECKBOX
-				170 {
+				lodgings = renderlet:CHECKBOX
+				lodgings {
 					name = lodgings
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.lodgings
 					data.userobj {
@@ -683,8 +683,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				180 = renderlet:CHECKBOX
-				180 {
+				foods = renderlet:CHECKBOX
+				foods {
 					name = foods
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.foods
 					data.userobj {
@@ -693,8 +693,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				190 = renderlet:CHECKBOX
-				190 {
+				speakers = renderlet:CHECKBOX
+				speakers {
 					name = speakers
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.speakers
 					data.userobj {
@@ -703,8 +703,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				200 = renderlet:CHECKBOX
-				200 {
+				partners = renderlet:CHECKBOX
+				partners {
 					name = partners
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.partners
 					data.userobj {
@@ -713,8 +713,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				210 = renderlet:CHECKBOX
-				210 {
+				tutors = renderlet:CHECKBOX
+				tutors {
 					name = tutors
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.tutors
 					data.userobj {
@@ -723,8 +723,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				220 = renderlet:CHECKBOX
-				220 {
+				leaders = renderlet:CHECKBOX
+				leaders {
 					name = leaders
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.leaders
 					data.userobj {
@@ -733,8 +733,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				230 = renderlet:TEXT
-				230 {
+				price_regular = renderlet:TEXT
+				price_regular {
 					name = price_regular
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular
 					validators {
@@ -746,8 +746,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				240 = renderlet:TEXT
-				240 {
+				price_regular_early = renderlet:TEXT
+				price_regular_early {
 					name = price_regular_early
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular_early
 					validators {
@@ -759,8 +759,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				250 = renderlet:TEXT
-				250 {
+				price_regular_board = renderlet:TEXT
+				price_regular_board {
 					name = price_regular_board
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular_board
 					validators {
@@ -772,8 +772,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				260 = renderlet:TEXT
-				260 {
+				price_special = renderlet:TEXT
+				price_special {
 					name = price_special
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_special
 					validators {
@@ -785,8 +785,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				270 = renderlet:TEXT
-				270 {
+				price_special_early = renderlet:TEXT
+				price_special_early {
 					name = price_special_early
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_special_early
 					validators {
@@ -798,8 +798,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				280 = renderlet:TEXT
-				280 {
+				price_special_board = renderlet:TEXT
+				price_special_board {
 					name = price_special_board
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_special_board
 					validators {
@@ -811,14 +811,14 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				290 = renderlet:TEXTAREA
-				290 {
+				additional_information = renderlet:TEXTAREA
+				additional_information {
 					name = additional_information
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.additional_information
 				}
 
-				300 = renderlet:CHECKBOX
-				300 {
+				checkboxes = renderlet:CHECKBOX
+				checkboxes {
 					name = checkboxes
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.checkboxes
 					data.userobj {
@@ -827,8 +827,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				310 = renderlet:CHECKBOX
-				310 {
+				payment_methods = renderlet:CHECKBOX
+				payment_methods {
 					name = payment_methods
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.payment_methods
 					data.userobj {
@@ -837,8 +837,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				320 = renderlet:CHECKBOX
-				320 {
+				organizers = renderlet:CHECKBOX
+				organizers {
 					name = organizers
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.organizers
 					data.userobj {
@@ -857,20 +857,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				325 = renderlet:CHECKSINGLE
-				325 {
+				needs_registration = renderlet:CHECKSINGLE
+				needs_registration {
 					name = needs_registration
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.needs_registration
 				}
 
-				330 = renderlet:CHECKSINGLE
-				330 {
+				allows_multiple_registrations = renderlet:CHECKSINGLE
+				allows_multiple_registrations {
 					name = allows_multiple_registrations
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.allows_multiple_registrations
 				}
 
-				340 = renderlet:TEXT
-				340 {
+				attendees_min = renderlet:TEXT
+				attendees_min {
 					name = attendees_min
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attendees_min
 					validators {
@@ -882,8 +882,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				350 = renderlet:TEXT
-				350 {
+				attendees_max = renderlet:TEXT
+				attendees_max {
 					name = attendees_max
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attendees_max
 					validators {
@@ -895,14 +895,14 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				360 = renderlet:CHECKSINGLE
-				360 {
+				queue_size = renderlet:CHECKSINGLE
+				queue_size {
 					name = queue_size
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.queue_size
 				}
 
-				370 = renderlet:CHECKBOX
-				370 {
+				target_groups = renderlet:CHECKBOX
+				target_groups {
 					name = target_groups
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.target_groups
 					data.userobj {
@@ -911,8 +911,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				380 = renderlet:LISTBOX
-				380 {
+				cancelled = renderlet:LISTBOX
+				cancelled {
 					name = cancelled
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.cancelled
 					data.items {
@@ -931,20 +931,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				390 = renderlet:CHECKSINGLE
-				390 {
+				uses_terms_2 = renderlet:CHECKSINGLE
+				uses_terms_2 {
 					name = uses_terms_2
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.uses_terms_2
 				}
 
-				400 = renderlet:TEXTAREA
-				400 {
+				notes = renderlet:TEXTAREA
+				notes {
 					name = notes
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.notes
 				}
 
-				410 = renderlet:UPLOAD
-				410 {
+				attached_files = renderlet:UPLOAD
+				attached_files {
 					name = attached_files
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attached_files
 					data {
@@ -964,14 +964,14 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				420 = renderlet:HIDDEN
-				420 {
+				delete_attached_files = renderlet:HIDDEN
+				delete_attached_files {
 					name = delete_attached_files
 					data.defaultvalue =
 				}
 
-				430 = renderlet:SUBMIT
-				430 {
+				submit_and_stay = renderlet:SUBMIT
+				submit_and_stay {
 					name = submit_and_stay
 					label = ###LABEL_SAVE###
 					onclick (
@@ -979,14 +979,14 @@ plugin.tx_seminars_pi1 {
 					)
 				}
 
-				440 = renderlet:SUBMIT
-				440 {
+				btnsubmit = renderlet:SUBMIT
+				btnsubmit {
 					name = btnsubmit
 					label = ###LABEL_SAVE_AND_BACK###
 				}
 
-				450 = renderlet:HIDDEN
-				450 {
+				proceed_file_upload = renderlet:HIDDEN
+				proceed_file_upload {
 					name = proceed_file_upload
 				}
 			}
@@ -1016,8 +1016,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 				elements {
-					10 = renderlet:LABEL
-					10 {
+					step_counter = renderlet:LABEL
+					step_counter {
 						name = step_counter
 						data.value.userobj {
 							extension = this
@@ -1025,8 +1025,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					20 = renderlet:LABEL
-					20 {
+					feuser_data = renderlet:LABEL
+					feuser_data {
 						name = feuser_data
 						data.value.userobj {
 							extension = this
@@ -1034,8 +1034,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					30 = renderlet:LISTBOX
-					30 {
+					price = renderlet:LISTBOX
+					price {
 						name = price
 						data.userobj {
 							extension = this
@@ -1059,8 +1059,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					40 = renderlet:RADIOBUTTON
-					40 {
+					method_of_payment = renderlet:RADIOBUTTON
+					method_of_payment {
 						name = method_of_payment
 						data {
 							userobj {
@@ -1086,8 +1086,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					50 = renderlet:TEXT
-					50 {
+					account_number = renderlet:TEXT
+					account_number {
 						name = account_number
 						data {
 							defaultvalue.userobj {
@@ -1117,8 +1117,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					60 = renderlet:TEXT
-					60 {
+					bank_code = renderlet:TEXT
+					bank_code {
 						name = bank_code
 						data {
 							defaultvalue.userobj {
@@ -1148,8 +1148,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					70 = renderlet:TEXT
-					70 {
+					bank_name = renderlet:TEXT
+					bank_name {
 						name = bank_name
 						data {
 							defaultvalue.userobj {
@@ -1179,8 +1179,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					80 = renderlet:TEXT
-					80 {
+					account_owner = renderlet:TEXT
+					account_owner {
 						name = account_owner
 						data {
 							defaultvalue.userobj {
@@ -1210,8 +1210,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					90 = renderlet:LISTBOX
-					90 {
+					gender = renderlet:LISTBOX
+					gender {
 						name = gender
 						data {
 							items {
@@ -1243,8 +1243,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					100 = renderlet:TEXT
-					100 {
+					name = renderlet:TEXT
+					name {
 						name = name
 						data.defaultvalue.userobj {
 							extension = this
@@ -1264,8 +1264,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					110 = renderlet:TEXTAREA
-					110 {
+					address = renderlet:TEXTAREA
+					address {
 						name = address
 						data.defaultvalue.userobj {
 							extension = this
@@ -1285,8 +1285,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					120 = renderlet:TEXT
-					120 {
+					zip = renderlet:TEXT
+					zip {
 						name = zip
 						data.defaultvalue.userobj {
 							extension = this
@@ -1306,8 +1306,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					130 = renderlet:TEXT
-					130 {
+					city = renderlet:TEXT
+					city {
 						name = city
 						data.defaultvalue.userobj {
 							extension = this
@@ -1327,8 +1327,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					140 = renderlet:LISTBOX
-					140 {
+					country = renderlet:LISTBOX
+					country {
 						name = country
 						data {
 							userobj {
@@ -1354,8 +1354,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					150 = renderlet:TEXT
-					150 {
+					telephone = renderlet:TEXT
+					telephone {
 						name = telephone
 						data.defaultvalue.userobj {
 							extension = this
@@ -1375,8 +1375,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					160 = renderlet:TEXT
-					160 {
+					email = renderlet:TEXT
+					email {
 						name = email
 						data.defaultvalue.userobj {
 							extension = this
@@ -1396,8 +1396,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					170 = renderlet:LISTBOX
-					170 {
+					seats = renderlet:LISTBOX
+					seats {
 						name = seats
 						data {
 							items {
@@ -1508,8 +1508,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					180 = renderlet:TEXTAREA
-					180 {
+					attendees_names = renderlet:TEXTAREA
+					attendees_names {
 						name = attendees_names
 						validators {
 							10 = validator:STANDARD
@@ -1529,8 +1529,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					190 = renderlet:LISTBOX
-					190 {
+					kids = renderlet:LISTBOX
+					kids {
 						name = kids
 						data.items {
 							1 {
@@ -1571,8 +1571,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					200 = renderlet:CHECKBOX
-					200 {
+					lodgings = renderlet:CHECKBOX
+					lodgings {
 						name = lodgings
 						data.userobj {
 							extension = this
@@ -1592,8 +1592,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					210 = renderlet:TEXTAREA
-					210 {
+					accommodation = renderlet:TEXTAREA
+					accommodation {
 						name = accommodation
 						process.userobj {
 							extension = this
@@ -1605,8 +1605,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					220 = renderlet:CHECKBOX
-					220 {
+					foods = renderlet:CHECKBOX
+					foods {
 						name = foods
 						data.userobj {
 							extension = this
@@ -1630,8 +1630,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					230 = renderlet:TEXTAREA
-					230 {
+					food = renderlet:TEXTAREA
+					food {
 						name = food
 						process.userobj {
 							extension = this
@@ -1643,8 +1643,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					240 = renderlet:CHECKBOX
-					240 {
+					checkboxes = renderlet:CHECKBOX
+					checkboxes {
 						name = checkboxes
 						data.userobj {
 							extension = this
@@ -1656,8 +1656,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					250 = renderlet:TEXTAREA
-					250 {
+					interests = renderlet:TEXTAREA
+					interests {
 						name = interests
 						process.userobj {
 							extension = this
@@ -1669,8 +1669,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					260 = renderlet:TEXTAREA
-					260 {
+					expectations = renderlet:TEXTAREA
+					expectations {
 						name = expectations
 						process.userobj {
 							extension = this
@@ -1682,8 +1682,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					270 = renderlet:TEXTAREA
-					270 {
+					background_knowledge = renderlet:TEXTAREA
+					background_knowledge {
 						name = background_knowledge
 						process.userobj {
 							extension = this
@@ -1695,8 +1695,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					280 = renderlet:TEXTAREA
-					280 {
+					known_from = renderlet:TEXTAREA
+					known_from {
 						name = known_from
 						process.userobj {
 							extension = this
@@ -1708,8 +1708,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					290 = renderlet:TEXTAREA
-					290 {
+					notes = renderlet:TEXTAREA
+					notes {
 						name = notes
 						process.userobj {
 							extension = this
@@ -1721,14 +1721,14 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					300 = renderlet:SUBMIT
-					300 {
+					button_continue = renderlet:SUBMIT
+					button_continue {
 						name = button_continue
 						label = ###LABEL_PROCEED_REGISTRATION###
 					}
 
-					310 = renderlet:SUBMIT
-					310 {
+					button_submit = renderlet:SUBMIT
+					button_submit {
 						name = button_submit
 						label = ###LABEL_SUBMIT_REGISTRATION###
 						onclick {
@@ -1742,8 +1742,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					320 = renderlet:PASSTHRU
-					320 {
+					next_page = renderlet:PASSTHRU
+					next_page {
 						name = next_page
 						data.value = 1
 					}
@@ -1780,8 +1780,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 				elements {
-					10 = renderlet:LABEL
-					10 {
+					step_counter = renderlet:LABEL
+					step_counter {
 						name = step_counter
 						data.value.userobj {
 							extension = this
@@ -1789,8 +1789,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					20 = renderlet:LABEL
-					20 {
+					billing_address = renderlet:LABEL
+					billing_address {
 						name = billing_address
 						data.value.userobj {
 							extension = this
@@ -1798,8 +1798,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					30 = renderlet:LABEL
-					30 {
+					registration_data = renderlet:LABEL
+					registration_data {
 						name = registration_data
 						data.value.userobj {
 							extension = this
@@ -1807,8 +1807,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					40 = renderlet:CHECKSINGLE
-					40 {
+					terms = renderlet:CHECKSINGLE
+					terms {
 						name = terms
 						label = ###LABEL_TERMS###
 						validators {
@@ -1829,8 +1829,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					50 = renderlet:CHECKSINGLE
-					50 {
+					terms_2 = renderlet:CHECKSINGLE
+					terms_2 {
 						name = terms_2
 						validators {
 							10 = validator:STANDARD
@@ -1850,15 +1850,15 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					60 = renderlet:SUBMIT
-					60 {
+					button_back = renderlet:SUBMIT
+					button_back {
 						name = button_back
 						refresh =
 						label = ###LABEL_BACK_REGISTRATION###
 					}
 
-					70 = renderlet:SUBMIT
-					70 {
+					button_submit = renderlet:SUBMIT
+					button_submit {
 						name = button_submit
 						label = ###LABEL_SUBMIT_REGISTRATION###
 						onclick {
@@ -1870,8 +1870,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					80 = renderlet:HIDDEN
-					80 {
+					price = renderlet:HIDDEN
+					price {
 						name = price
 						validators {
 							10 = validator:STANDARD
@@ -1891,8 +1891,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					90 = renderlet:HIDDEN
-					90 {
+					method_of_payment = renderlet:HIDDEN
+					method_of_payment {
 						name = method_of_payment
 						validators {
 							10 = validator:STANDARD
@@ -1908,8 +1908,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					100 = renderlet:HIDDEN
-					100 {
+					account_number = renderlet:HIDDEN
+					account_number {
 						name = account_number
 						validators {
 							10 = validator:STANDARD
@@ -1929,8 +1929,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					110 = renderlet:HIDDEN
-					110 {
+					bank_code = renderlet:HIDDEN
+					bank_code {
 						name = bank_code
 						validators {
 							10 = validator:STANDARD
@@ -1950,8 +1950,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					120 = renderlet:HIDDEN
-					120 {
+					bank_name = renderlet:HIDDEN
+					bank_name {
 						name = bank_name
 						validators {
 							10 = validator:STANDARD
@@ -1971,8 +1971,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					130 = renderlet:HIDDEN
-					130 {
+					account_owner = renderlet:HIDDEN
+					account_owner {
 						name = account_owner
 						validators {
 							10 = validator:STANDARD
@@ -1992,8 +1992,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					140 = renderlet:HIDDEN
-					140 {
+					gender = renderlet:HIDDEN
+					gender {
 						name = gender
 						process.userobj {
 							extension = this
@@ -2005,8 +2005,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					150 = renderlet:HIDDEN
-					150 {
+					name = renderlet:HIDDEN
+					name {
 						name = name
 						process.userobj {
 							extension = this
@@ -2018,8 +2018,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					160 = renderlet:HIDDEN
-					160 {
+					address = renderlet:HIDDEN
+					address {
 						name = address
 						process.userobj {
 							extension = this
@@ -2031,8 +2031,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					170 = renderlet:HIDDEN
-					170 {
+					zip = renderlet:HIDDEN
+					zip {
 						name = zip
 						process.userobj {
 							extension = this
@@ -2044,8 +2044,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					180 = renderlet:HIDDEN
-					180 {
+					city = renderlet:HIDDEN
+					city {
 						name = city
 						process.userobj {
 							extension = this
@@ -2057,8 +2057,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					190 = renderlet:HIDDEN
-					190 {
+					country = renderlet:HIDDEN
+					country {
 						name = country
 						process.userobj {
 							extension = this
@@ -2070,8 +2070,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					200 = renderlet:HIDDEN
-					200 {
+					telephone = renderlet:HIDDEN
+					telephone {
 						name = telephone
 						process.userobj {
 							extension = this
@@ -2083,8 +2083,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					210 = renderlet:HIDDEN
-					210 {
+					email = renderlet:HIDDEN
+					email {
 						name = email
 						process.userobj {
 							extension = this
@@ -2096,8 +2096,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					220 = renderlet:HIDDEN
-					220 {
+					seats = renderlet:HIDDEN
+					seats {
 						name = seats
 						validators {
 							10 = validator:STANDARD
@@ -2122,8 +2122,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					230 = renderlet:HIDDEN
-					230 {
+					attendees_names = renderlet:HIDDEN
+					attendees_names {
 						name = attendees_names
 						validators {
 							10 = validator:STANDARD
@@ -2143,8 +2143,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					240 = renderlet:HIDDEN
-					240 {
+					kids = renderlet:HIDDEN
+					kids {
 						name = kids
 						validators {
 							10 = validator:PREG
@@ -2163,8 +2163,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					250 = renderlet:CHECKBOX
-					250 {
+					lodgings = renderlet:CHECKBOX
+					lodgings {
 						name = lodgings
 						data.userobj {
 							extension = this
@@ -2184,8 +2184,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					260 = renderlet:HIDDEN
-					260 {
+					accommodation = renderlet:HIDDEN
+					accommodation {
 						name = accommodation
 						process.userobj {
 							extension = this
@@ -2197,8 +2197,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					270 = renderlet:CHECKBOX
-					270 {
+					foods = renderlet:CHECKBOX
+					foods {
 						name = foods
 						data.userobj {
 							extension = this
@@ -2218,8 +2218,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					280 = renderlet:HIDDEN
-					280 {
+					food = renderlet:HIDDEN
+					food {
 						name = food
 						process.userobj {
 							extension = this
@@ -2231,8 +2231,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					290 = renderlet:CHECKBOX
-					290 {
+					checkboxes = renderlet:CHECKBOX
+					checkboxes {
 						name = checkboxes
 						data.userobj {
 							extension = this
@@ -2244,8 +2244,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					300 = renderlet:HIDDEN
-					300 {
+					interests = renderlet:HIDDEN
+					interests {
 						name = interests
 						process.userobj {
 							extension = this
@@ -2257,8 +2257,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					310 = renderlet:HIDDEN
-					310 {
+					expectations = renderlet:HIDDEN
+					expectations {
 						name = expectations
 						process.userobj {
 							extension = this
@@ -2270,8 +2270,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					320 = renderlet:HIDDEN
-					320 {
+					background_knowledge = renderlet:HIDDEN
+					background_knowledge {
 						name = background_knowledge
 						process.userobj {
 							extension = this
@@ -2283,8 +2283,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					330 = renderlet:HIDDEN
-					330 {
+					known_from = renderlet:HIDDEN
+					known_from {
 						name = known_from
 						process.userobj {
 							extension = this
@@ -2296,8 +2296,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					340 = renderlet:HIDDEN
-					340 {
+					notes = renderlet:HIDDEN
+					notes {
 						name = notes
 						process.userobj {
 							extension = this
@@ -2309,8 +2309,8 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					350 = renderlet:HIDDEN
-					350 {
+					next_page = renderlet:HIDDEN
+					next_page {
 						name = next_page
 						validators {
 							10 = validator:STANDARD
@@ -2355,8 +2355,8 @@ plugin.tx_seminars_pi1 {
 				}
 			}
 			elements {
-				10 = renderlet:SUBMIT
-				10 {
+				button_cancel = renderlet:SUBMIT
+				button_cancel {
 					name = button_cancel
 					label = ###LABEL_CANCEL###
 					onclick {
@@ -2365,8 +2365,8 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				20 = renderlet:SUBMIT
-				20 {
+				button_unregister = renderlet:SUBMIT
+				button_unregister {
 					name = button_unregister
 					label = ###LABEL_UNREGISTER###
 				}
