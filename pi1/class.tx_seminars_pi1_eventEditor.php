@@ -67,7 +67,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$this->setFormConfiguration($this->conf['form.']['eventEditor.']);
 
 		$this->declareDataHandler();
-		$this->includeJavaScriptToDeleteAttachments();
 	}
 
 	/**
@@ -97,15 +96,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			['declaredobjects']['datahandlers']['DBMM'] = array(
 				'key' => 'dh_dbmm', 'base' => true
 			);
-	}
-
- 	/**
-	 * Includes the JavaScript to mark attachments as deleted in the FE editor.
-	 */
-	private function includeJavaScriptToDeleteAttachments() {
-		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId]
-			= '<script src="' . t3lib_extMgm::extRelPath($this->extKey) .
-				'pi1/tx_seminars_pi1.js" type="text/javascript"></script>';
 	}
 
 	/**

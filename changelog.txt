@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2865] Change: Add the JavaScript file via TypoScript
 - [#840] Change: Rename and move the flexforms file
 - [#2864] Change: Use the field names as TypoScript array keys for the Formidable configuration
 - [#2697] Change: Make the waiting list a checkbox and provide an update function from the old values
