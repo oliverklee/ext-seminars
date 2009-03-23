@@ -1,0 +1,835 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<what_to_display>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.what_to_display</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.seminar_list</numIndex>
+										<numIndex index="1">seminar_list</numIndex>
+									</numIndex>
+									<numIndex index="6" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.topic_list</numIndex>
+										<numIndex index="1">topic_list</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.my_events</numIndex>
+										<numIndex index="1">my_events</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.my_vip_events</numIndex>
+										<numIndex index="1">my_vip_events</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.seminar_registration</numIndex>
+										<numIndex index="1">seminar_registration</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.list_registrations</numIndex>
+										<numIndex index="1">list_registrations</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.list_vip_registrations</numIndex>
+										<numIndex index="1">list_vip_registrations</numIndex>
+									</numIndex>
+									<numIndex index="7" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.event_editor</numIndex>
+										<numIndex index="1">edit_event</numIndex>
+									</numIndex>
+									<numIndex index="8" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.my_entered_events</numIndex>
+										<numIndex index="1">my_entered_events</numIndex>
+									</numIndex>
+									<numIndex index="9" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.countdown</numIndex>
+										<numIndex index="1">countdown</numIndex>
+									</numIndex>
+									<numIndex index="10" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.category_list</numIndex>
+										<numIndex index="1">category_list</numIndex>
+									</numIndex>
+									<numIndex index="11" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.event_headline</numIndex>
+										<numIndex index="1">event_headline</numIndex>
+									</numIndex>
+								</items>
+								<size>1</size>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</what_to_display>
+					<listPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.listPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</listPID>
+					<detailPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.detailPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</detailPID>
+					<myEventsPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.myEventsPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</myEventsPID>
+					<registerPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.registerPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</registerPID>
+					<loginPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.loginPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</loginPID>
+					<registrationsListPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.registrationsListPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</registrationsListPID>
+					<registrationsVipListPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.registrationsVipListPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</registrationsVipListPID>
+					<salutation>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.salutation</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.formal</numIndex>
+										<numIndex index="1">formal</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.informal</numIndex>
+										<numIndex index="1">informal</numIndex>
+									</numIndex>
+								</items>
+								<size>1</size>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</salutation>
+					<pages>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:lang/locallang_general.xml:LGL.startingpoint</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>3</size>
+								<maxitems>22</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</pages>
+					<recursive>
+						<TCEforms>
+							<label>LLL:EXT:lang/locallang_general.xml:LGL.recursive</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:cms/locallang_ttc.xml:recursive.I.1</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:cms/locallang_ttc.xml:recursive.I.2</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:cms/locallang_ttc.xml:recursive.I.3</numIndex>
+										<numIndex index="1">3</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:cms/locallang_ttc.xml:recursive.I.4</numIndex>
+										<numIndex index="1">4</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:cms/locallang_ttc.xml:recursive.I.5</numIndex>
+										<numIndex index="1">250</numIndex>
+									</numIndex>
+								</items>
+								<minitems>0</minitems>
+								<maxitems>1</maxitems>
+								<size>1</size>
+							</config>
+						</TCEforms>
+					</recursive>
+				</el>
+			</ROOT>
+		</sDEF>
+		<s_listView>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_list_view</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<limitListViewToEventTypes>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToEventTypes</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_seminars_event_types</foreign_table>
+								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<maxitems>100</maxitems>
+								<renderMode>checkbox</renderMode>
+							</config>
+						</TCEforms>
+					</limitListViewToEventTypes>
+					<limitListViewToCategories>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToCategories</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_seminars_categories</foreign_table>
+								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<maxitems>100</maxitems>
+								<renderMode>checkbox</renderMode>
+							</config>
+						</TCEforms>
+					</limitListViewToCategories>
+					<limitListViewToPlaces>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToPlaces</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_seminars_sites</foreign_table>
+								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<maxitems>100</maxitems>
+								<renderMode>checkbox</renderMode>
+							</config>
+						</TCEforms>
+					</limitListViewToPlaces>
+					<allowCsvExportOfRegistrationsInMyVipEventsView>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowCsvExportOfRegistrationsInMyVipEventsView</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowCsvExportOfRegistrationsInMyVipEventsView>
+					<mayManagersEditTheirEvents>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.mayManagersEditTheirEvents</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</mayManagersEditTheirEvents>
+					<categoriesInListView>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.categoriesInListView</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.fromTsSetup</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.iconAndText</numIndex>
+										<numIndex index="1">both</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.iconOnly</numIndex>
+										<numIndex index="1">icon</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.textOnly</numIndex>
+										<numIndex index="1">text</numIndex>
+									</numIndex>
+								</items>
+								<size>1</size>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</categoriesInListView>
+				</el>
+			</ROOT>
+		</s_listView>
+		<s_singleView>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_single_view</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<showOwnerDataInSingleView>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showOwnerDataInSingleView</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</showOwnerDataInSingleView>
+					<limitFileDownloadToAttendees>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitFileDownloadToAttendees</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</limitFileDownloadToAttendees>
+				</el>
+			</ROOT>
+		</s_singleView>
+		<s_template_special>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_template_and_special</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<templateFile>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.templateFile</label>
+							<config>
+								<type>group</type>
+								<internal_type>file</internal_type>
+								<allowed>tmpl,html,htm</allowed>
+								<max_size>100</max_size>
+								<uploadfolder>uploads/tx_seminars</uploadfolder>
+								<maxitems>1</maxitems>
+								<size>1</size>
+								<selectedListStyle>Width:180px</selectedListStyle>
+							</config>
+						</TCEforms>
+					</templateFile>
+					<showSingleEvent>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showSingleEvent</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>tx_seminars_seminars</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</showSingleEvent>
+					<timeframeInList>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList1</numIndex>
+										<numIndex index="1">all</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList2</numIndex>
+										<numIndex index="1">past</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList3</numIndex>
+										<numIndex index="1">pastAndCurrent</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList4</numIndex>
+										<numIndex index="1">current</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList5</numIndex>
+										<numIndex index="1">currentAndUpcoming</numIndex>
+									</numIndex>
+									<numIndex index="6" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList6</numIndex>
+										<numIndex index="1">upcoming</numIndex>
+									</numIndex>
+									<numIndex index="7" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList7</numIndex>
+										<numIndex index="1">deadlineNotOver</numIndex>
+									</numIndex>
+								</items>
+								<size>1</size>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</timeframeInList>
+					<defaultEventVipsFeGroupID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.defaultEventVipsFeGroupID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>fe_groups</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</defaultEventVipsFeGroupID>
+					<hideColumns>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideColumns</label>
+							<config>
+								<type>input</type>
+								<size>45</size>
+							</config>
+						</TCEforms>
+					</hideColumns>
+					<hideFields>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideFields</label>
+							<config>
+								<type>input</type>
+								<size>45</size>
+							</config>
+						</TCEforms>
+					</hideFields>
+					<hideSelectorWidget>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideSelectorWidget</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</hideSelectorWidget>
+					<showEmptyEntryInOptionLists>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showEmptyEntryInOptionLists</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</showEmptyEntryInOptionLists>
+					<hideSearchForm>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideSearchForm</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</hideSearchForm>
+					<hidePageBrowser>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hidePageBrowser</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</hidePageBrowser>
+					<hideCanceledEvents>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideCanceledEvents</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</hideCanceledEvents>
+					<sortListViewByCategory>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sortListViewByCategory</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</sortListViewByCategory>
+					<generalPriceInList>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.generalPriceInList</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</generalPriceInList>
+					<generalPriceInSingle>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.generalPriceInSingle</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</generalPriceInSingle>
+					<omitDateIfSameAsPrevious>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.omitDateIfSameAsPrevious</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</omitDateIfSameAsPrevious>
+					<eventFieldsOnRegistrationPage>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventFieldsOnRegistrationPage</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.uid</numIndex>
+										<numIndex index="1">uid</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.title</numIndex>
+										<numIndex index="1">title</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.accreditation_number</numIndex>
+										<numIndex index="1">accreditation_number</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular</numIndex>
+										<numIndex index="1">price_regular</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_special</numIndex>
+										<numIndex index="1">price_special</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.vacancies</numIndex>
+										<numIndex index="1">vacancies</numIndex>
+									</numIndex>
+								</items>
+								<size>5</size>
+								<maxitems>5</maxitems>
+								<minitems>0</minitems>
+								<renderMode>checkbox</renderMode>
+							</config>
+						</TCEforms>
+					</eventFieldsOnRegistrationPage>
+					<showRegistrationFields>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showRegistrationFields</label>
+							<config>
+								<type>input</type>
+								<size>45</size>
+							</config>
+						</TCEforms>
+					</showRegistrationFields>
+					<showSpeakerDetails>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showSpeakerDetails</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</showSpeakerDetails>
+					<showSiteDetails>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showSiteDetails</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</showSiteDetails>
+				</el>
+			</ROOT>
+		</s_template_special>
+		<s_registrationsListView>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_registrationsListView</sheetTitle>
+				</TCEforms>
+				<el>
+					<showFeUserFieldsInRegistrationsList>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showFeUserFieldsInRegistrationsList</label>
+							<config>
+								<type>select</type>
+								<renderMode>checkbox</renderMode>
+								<maxitems>100</maxitems>
+								<itemsProcFunc>tx_seminars_flexForms->getShowFeUserFieldsInRegistrationsList</itemsProcFunc>
+							</config>
+						</TCEforms>
+					</showFeUserFieldsInRegistrationsList>
+					<showRegistrationFieldsInRegistrationList>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showRegistrationFieldsInRegistrationList</label>
+							<config>
+								<type>select</type>
+								<renderMode>checkbox</renderMode>
+								<maxitems>100</maxitems>
+								<itemsProcFunc>tx_seminars_flexForms->getShowRegistrationFieldsInRegistrationList</itemsProcFunc>
+							</config>
+						</TCEforms>
+					</showRegistrationFieldsInRegistrationList>
+				</el>
+			</ROOT>
+		</s_registrationsListView>
+		<s_registration>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_registration</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<numberOfClicksForRegistration>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.numberOfClicksForRegistration</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">2</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">3</numIndex>
+										<numIndex index="1">3</numIndex>
+									</numIndex>
+								</items>
+								<size>1</size>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</numberOfClicksForRegistration>
+					<thankYouAfterRegistrationPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.thankYouAfterRegistrationPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</thankYouAfterRegistrationPID>
+					<sendParametersToThankYouAfterRegistrationPageUrl>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</sendParametersToThankYouAfterRegistrationPageUrl>
+					<pageToShowAfterUnregistrationPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.php:seminars.pi_flexform.pageToShowAfterUnregistrationPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</pageToShowAfterUnregistrationPID>
+					<sendParametersToPageToShowAfterUnregistrationUrl>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</sendParametersToPageToShowAfterUnregistrationUrl>
+					<registrationEditorTemplateFile>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.templateFile</label>
+							<config>
+								<type>group</type>
+								<internal_type>file</internal_type>
+								<allowed>html,htm</allowed>
+								<max_size>100</max_size>
+								<uploadfolder>uploads/tx_seminars</uploadfolder>
+								<maxitems>1</maxitems>
+								<size>1</size>
+								<selectedListStyle>Width:180px</selectedListStyle>
+							</config>
+						</TCEforms>
+					</registrationEditorTemplateFile>
+				</el>
+			</ROOT>
+		</s_registration>
+		<s_fe_editing>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_fe_editing</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<eventEditorFeGroupID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventEditorFeGroupID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>fe_groups</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</eventEditorFeGroupID>
+					<eventEditorPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventEditorPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</eventEditorPID>
+					<createEventsPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.createEventsPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</createEventsPID>
+					<eventSuccessfullySavedPID>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventSuccessfullySavedPID</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</eventSuccessfullySavedPID>
+					<allowedExtensionsForUpload>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowedExtensionsForUpload</label>
+							<config>
+								<type>input</type>
+								<size>100</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</allowedExtensionsForUpload>
+				</el>
+			</ROOT>
+		</s_fe_editing>
+	</sheets>
+</T3DataStructure>
