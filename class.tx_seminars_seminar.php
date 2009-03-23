@@ -2779,9 +2779,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				) ||
 				($this->hasDate() && !$this->isRegistrationDeadlineOver())
 			) && (
-				$this->hasUnlimitedVacancies()
-					|| $this->hasVacanciesOnRegistrationQueue()
-
+				$this->hasRegistrationQueue() || $this->hasUnlimitedVacancies()
+					|| $this->hasVacancies()
 			);
 	}
 
@@ -2811,8 +2810,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$message = $this->translate('message_noDate');
 		} elseif ($this->hasDate() && $this->isRegistrationDeadlineOver()) {
 			$message = $this->translate('message_seminarRegistrationIsClosed');
-		} elseif ($this->isFull()
-			&& !$this->hasVacanciesOnRegistrationQueue()) {
+		} elseif (!$this->hasRegistrationQueue() && $this->isFull()) {
 			$message = $this->translate('message_noVacancies');
 		}
 
@@ -3912,7 +3910,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			)) {
 				// We also need to check whether we have a waiting list and
 				// whether there is at least one person on it.
-				$result = $result && $this->hasRegistrationQueueSize()
+				$result = $result && $this->hasRegistrationQueue()
 					&& $this->hasAttendancesOnRegistrationQueue();
 			}
 		}
@@ -3921,55 +3919,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Returns true if there are vacancies on the waiting list, otherwise false.
+	 * Checks if this event has a registration queue.
 	 *
-	 * @return boolean true if there are vancancies on the waiting list,
-	 *                 false otherwise
+	 * @return boolean true if this event has a registration queue, false
+	 *                 otherwise
 	 */
-	public function hasVacanciesOnRegistrationQueue() {
-		return ($this->hasUnlimitedVacancies()
-			|| ($this->getVacanciesOnRegistrationQueue() > 0)
-		);
-	}
-
-	/**
-	 * Gets the size of the registration queue of this event.
-	 *
-	 * @return integer size of the registration queue of this event
-	 */
-	public function getRegistrationQueueSize() {
-		return $this->getRecordPropertyInteger('queue_size');
-	}
-
-	/**
-	 * Returns true if the current event has a registration queue size,
-	 * otherwise false.
-	 *
-	 * @return boolean true if the current event has a registration queue
-	 *                 size, false otherwise
-	 */
-	public function hasRegistrationQueueSize() {
-		return $this->hasRecordPropertyInteger('queue_size');
-	}
-
-	/**
-	 * Gets the number of vacancies including the vacancies on the registration
-	 * queue for this seminar.
-	 *
-	 * You need to call hasUnlimitedVacancies before calling this function since
-	 * it will return zero for events with unlimited vacancies.
-	 *
-	 * @return integer the number of vacancies including the vacancies on
-	 *                 the registration queue (will be 0 if the seminar is
-	 *                 overbooked)
-	 */
-	public function getVacanciesOnRegistrationQueue() {
-		return max(
-			0,
-			($this->getAttendancesMax() + $this->getRegistrationQueueSize())
-				- $this->getAttendances()
-				- $this->getAttendancesOnRegistrationQueue()
-		);
+	public function hasRegistrationQueue() {
+		return $this->getRecordPropertyBoolean('queue_size');
 	}
 
 	/**

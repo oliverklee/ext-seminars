@@ -192,7 +192,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				$plugin, $event
 			);
 		} elseif (!$event->isRegistrationDeadlineOver()
-			&& !$event->hasVacanciesOnRegistrationQueue()
+			&& !$event->hasRegistrationQueue()
 		) {
 			$result = $this->translate('message_fullyBooked');
 		} else {
@@ -257,7 +257,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				$label = $plugin->translate('label_onlinePrebooking');
 			}
 		} else {
-			if ($seminar->hasVacanciesOnRegistrationQueue()) {
+			if ($seminar->hasRegistrationQueue()) {
 				$label = sprintf(
 					$plugin->translate('label_onlineRegistrationOnQueue'),
 					$seminar->getAttendancesOnRegistrationQueue()
@@ -476,8 +476,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			if ($seminar->hasUnlimitedVacancies()) {
 				$result = true;
 			} else {
-				$result = ($seminar->getVacanciesOnRegistrationQueue()
-					>= $numberOfSeatsInt);
+				$result = ($seminar->hasRegistrationQueue()
+					 || ($seminar->getVacancies() >= $numberOfSeatsInt)
+				);
 			}
 		} else {
 			$result = false;

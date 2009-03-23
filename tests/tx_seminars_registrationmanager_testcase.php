@@ -154,12 +154,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 					'attendees_max' => 10,
 					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 					'needs_registration' => 1,
+					'queue_size' => 0,
 				)
 			)
 		);
 		$this->fullyBookedSeminar->setNumberOfAttendances(10);
-		$this->fullyBookedSeminar->setRegistrationQueueSize(5);
-		$this->fullyBookedSeminar->setNumberOfAttendancesOnQueue(5);
 	}
 
 
@@ -330,7 +329,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserSeminarWithoutDateAndNoVacancies_ContainsOnlineRegistrationLabel() {
+	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserSeminarWithoutDateAndNoVacancies_ContainsRegistrationLabel() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setBeginDate(0);
@@ -339,6 +338,37 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$this->pi1->translate('label_onlineRegistration'),
+			$this->fixture->getLinkToRegistrationOrLoginPage(
+				$this->pi1, $this->seminar
+			)
+		);
+	}
+
+	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserAndFullyBookedSeminarWithQueue_ContainsQueueRegistrationLabel() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+		$this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
+		$this->seminar->setNumberOfAttendances(5);
+		$this->seminar->setAttendancesMax(5);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertContains(
+			sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
+			$this->fixture->getLinkToRegistrationOrLoginPage(
+				$this->pi1, $this->seminar
+			)
+		);
+	}
+
+	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedOutUserAndFullyBookedSeminarWithQueue_ContainsQueueRegistrationLabel() {
+		$this->createFrontEndPages();
+		$this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
+		$this->seminar->setNumberOfAttendances(5);
+		$this->seminar->setAttendancesMax(5);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertContains(
+			sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
 			$this->fixture->getLinkToRegistrationOrLoginPage(
 				$this->pi1, $this->seminar
 			)
@@ -372,7 +402,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function testGetRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink() {
 		$this->createFrontEndPages();
-		$this->testingFramework->logoutFrontEndUser();
 
 		$this->assertContains(
 			'?id=' . $this->loginPageUid,
@@ -396,7 +425,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function testGetRegistrationLinkForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedString() {
 		$this->createFrontEndPages();
-		$this->testingFramework->logoutFrontEndUser();
 
 		$this->createBookedOutSeminar();
 
@@ -471,8 +499,34 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_GetRegistrationLink_ForLoggedOutUserAndSeminarWithUnlimitedVacancies_ReturnsLoginLink() {
 		$this->createFrontEndPages();
-		$this->testingFramework->logoutFrontEndUser();
 		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertContains(
+			'?id=' . $this->loginPageUid,
+			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+		);
+	}
+
+	public function test_GetRegistrationLink_ForLoggedInUserAndFullyBookedSeminarWithQueueEnabled_ReturnsLinkWithSeminarUid() {
+		$this->createFrontEndPages();
+		$this->createAndLogInFrontEndUser();
+		$this->seminar->setNeedsRegistration(true);
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertContains(
+			'[seminar]=' . $this->seminar->getUid(),
+			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+		);
+	}
+
+	public function test_GetRegistrationLink_ForLoggedOutUserAndFullyBookedSeminarWithQueueEnabled_ReturnsLoginLink() {
+		$this->createFrontEndPages();
+		$this->seminar->setNeedsRegistration(true);
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setRegistrationQueue(true);
 
 		$this->assertContains(
 			'?id=' . $this->loginPageUid,
@@ -594,6 +648,177 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedIn_ForLoggedOutUserAndFullyBookedSeminarWithQueue_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(5);
+		$this->seminar->setNumberOfAttendances(5);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedIn_ForLoggedInUserAndFullyBookedSeminarWithQueue_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(5);
+		$this->seminar->setNumberOfAttendances(5);
+		$this->seminar->setRegistrationQueue(true);
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+
+	//////////////////////////////////////////////////
+	// Tests concerning canRegisterIfLoggedInMessage
+	//////////////////////////////////////////////////
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndSeminarRegistrationOpen_ReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedInUserAndRegistrationOpen_ReturnsEmptyString() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedInButAlreadyRegisteredUser_ReturnsAlreadyRegisteredMessage() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
+				'seminar' => $this->seminar->getUid(),
+			)
+		);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_alreadyRegistered'),
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowed_ReturnsEmptyString() {
+		$this->seminar->setAllowsMultipleRegistrations(true);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
+				'seminar' => $this->seminar->getUid(),
+			)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedInButBlockedUser_ReturnsUserIsBlockedMessage() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
+				'seminar' => $this->seminar->getUid(),
+			)
+		);
+
+		$this->cachedSeminar = new tx_seminars_seminarchild(
+			$this->testingFramework->createRecord(
+				SEMINARS_TABLE_SEMINARS,
+				array(
+					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+					'attendees_max' => 10,
+					'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				)
+			)
+		);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_userIsBlocked'),
+			$this->fixture->canRegisterIfLoggedInMessage($this->cachedSeminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndFullyBookedSeminar_ReturnsFullyBookedMessage() {
+		$this->createBookedOutSeminar();
+
+		$this->assertEquals(
+			'message_noVacancies',
+			$this->fixture->canRegisterIfLoggedInMessage($this->fullyBookedSeminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndCanceledSeminar_ReturnsSeminarCancelledMessage() {
+		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$this->assertEquals(
+			'message_seminarCancelled',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndSeminarWithoutRegistration_ReturnsNoRegistrationNeededMessage() {
+		$this->seminar->setAttendancesMax(0);
+		$this->seminar->setNeedsRegistration(false);
+
+		$this->assertEquals(
+			'message_noRegistrationNecessary',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndSeminarWithUnlimitedVacancies_ReturnsEmptyString() {
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedInUserAndSeminarWithUnlimitedVacancies_ReturnsEmptyString() {
+		$this->seminar->setUnlimitedVacancies();
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndFullyBookedSeminarWithQueue_ReturnsEmptyString() {
+		$this->seminar->setAttendancesMax(5);
+		$this->seminar->setNumberOfAttendances(5);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	public function test_CanRegisterIfLoggedInMessage_ForLoggedInUserAndFullyBookedSeminarWithQueue_ReturnsEmptyString() {
+		$this->seminar->setAttendancesMax(5);
+		$this->seminar->setNumberOfAttendances(5);
+		$this->seminar->setRegistrationQueue(true);
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
 	}
 
@@ -1139,6 +1364,55 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndFortytwoSeatsGiven_ReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 42)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndZeroSeatsGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 0)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndOneSeatGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 1)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndTwoSeatsGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, 2)
+		);
+	}
+
+	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndEmptyStringGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertTrue(
+			$this->fixture->canRegisterSeats($this->seminar, '')
+		);
+	}
+
+	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndWithQueueAndFortytwoSeatsGiven_ReturnsTrue() {
+		$this->seminar->setAttendancesMax(2);
+		$this->seminar->setRegistrationQueue(true);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 42)

@@ -145,12 +145,12 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Sets the registration queue size.
+	 * Sets whether the event has a registration queue.
 	 *
-	 * @param integer size of the registration queue
+	 * @param boolean whether the event should have a registration queue
 	 */
-	public function setRegistrationQueueSize($size) {
-		$this->setRecordPropertyInteger('queue_size', $size);
+	public function setRegistrationQueue($hasRegistrationQueue) {
+		$this->setRecordPropertyBoolean('queue_size', $hasRegistrationQueue);
 	}
 
 	/**
