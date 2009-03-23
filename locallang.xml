@@ -21,7 +21,6 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
@@ -167,7 +166,6 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 			<label index="label_time">Tid</label>
 			<label index="label_place">Sted</label>
 			<label index="label_room">Rum</label>
-			<label index="label_additional_times_places">Tider og steder</label>
 			<label index="label_seats">Pladser</label>
 			<label index="label_total_price">Pris i alt</label>
 			<label index="label_attendees_names">Yderligere tilmeldte personer</label>
@@ -296,7 +294,6 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="label_time">Zeit</label>
 			<label index="label_place">Ort</label>
 			<label index="label_room">Raum</label>
-			<label index="label_additional_times_places">Zeiten und Orte</label>
 			<label index="label_seats">Plätze</label>
 			<label index="label_total_price">Gesamtpreis</label>
 			<label index="label_attendees_names">Zusätzlich angemeldete Personen</label>
@@ -439,7 +436,6 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&q
 			<label index="label_time">Tijd</label>
 			<label index="label_place">Plaats</label>
 			<label index="label_room">Kamer</label>
-			<label index="label_additional_times_places">Tijden en plaatsen</label>
 			<label index="label_seats">Stoelen</label>
 			<label index="label_total_price">Totaal prijs</label>
 			<label index="label_attendees_names">Aditionele deelnemers</label>
@@ -577,7 +573,6 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_time">Время</label>
 			<label index="label_place">Место</label>
 			<label index="label_room">Зал</label>
-			<label index="label_additional_times_places">Время и места</label>
 			<label index="label_seats">Места</label>
 			<label index="label_total_price">Общая цена</label>
 			<label index="label_attendees_names">Дополнительные посетители</label>
@@ -712,7 +707,6 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_time">Ora</label>
 			<label index="label_place">Luogo</label>
 			<label index="label_room">Stanza</label>
-			<label index="label_additional_times_places">Date e luoghi</label>
 			<label index="label_seats">Posti</label>
 			<label index="label_total_price">Prezzo totale</label>
 			<label index="label_attendees_names">Partecipanti aggiuntivi</label>
@@ -847,7 +841,6 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="label_time">Heure</label>
 			<label index="label_place">Lieu</label>
 			<label index="label_room">Salle</label>
-			<label index="label_additional_times_places">Horaires et lieux</label>
 			<label index="label_seats">Places</label>
 			<label index="label_total_price">Prix total</label>
 			<label index="label_attendees_names">Participants supplémentaires</label>
@@ -1035,7 +1028,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_no" type="integer">133839734</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_noDate" type="integer">11811061</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_telephone" type="integer">197928267</label>
 			<label index="label_email" type="integer">146136420</label>
 			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
@@ -1093,7 +1085,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_attendees_names" type="integer">168936155</label>
@@ -1238,7 +1229,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
 			<label index="email_confirmationHello_formal" type="integer">88233580</label>
 			<label index="label_uid" type="integer">187623698</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_attendees_names" type="integer">168936155</label>
@@ -1381,7 +1371,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_event_type" type="integer">99114704</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_price" type="integer">56627526</label>
 			<label index="label_gender" type="integer">1698865</label>
 			<label index="label_username" type="integer">159898854</label>
@@ -1437,7 +1426,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_attendees_names" type="integer">168936155</label>
@@ -1548,7 +1536,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
 			<label index="label_attendees_names" type="integer">168936155</label>
@@ -1660,7 +1647,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
@@ -1865,7 +1851,6 @@ someone just has registered for an event:</label>
 			<label index="label_no">no</label>
 			<label index="message_forFree">free</label>
 			<label index="message_noDate">This event has no date yet.</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_telephone">Phone</label>
 			<label index="label_email">E-mail address</label>
 			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
@@ -2003,7 +1988,6 @@ someone just has registered for an event:</label>
 			<label index="label_title">Title</label>
 			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_event_type">Event type</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_price">Price</label>
 			<label index="label_gender">Gender</label>
 			<label index="label_username">User name</label>
@@ -2075,7 +2059,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
@@ -2212,7 +2195,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>
@@ -2347,7 +2329,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
 			<label index="label_attendees_names">Additional attendees</label>

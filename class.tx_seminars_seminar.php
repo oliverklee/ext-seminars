@@ -324,41 +324,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Checks whether this event has additional informations for times and
-	 * places set.
-	 *
-	 * @return boolean true if the field "additional_times_places" is not empty
-	 */
-	public function hasAdditionalTimesAndPlaces() {
-		return $this->hasRecordPropertyString('additional_times_places');
-	}
-
-	/**
-	 * Returns the content of the field "additional_times_places" for this event.
-	 * The line breaks of this non-RTE field are replaced with "<br />" for the
-	 * HTML output.
-	 *
-	 * @return string the field content
-	 */
-	public function getAdditionalTimesAndPlaces() {
-		$additionalTimesAndPlaces
-			= htmlspecialchars($this->getAdditionalTimesAndPlacesRaw());
-		$result = str_replace(CRLF, '<br />', $additionalTimesAndPlaces);
-
-		return $result;
-	}
-
-	/**
-	 * Returns the content of the field "additional_times_places" for this event.
-	 * The line breaks of this non-RTE field are returned unchanged.
-	 *
-	 * @return string the field content
-	 */
-	public function getAdditionalTimesAndPlacesRaw() {
-		return $this->getRecordPropertyString('additional_times_places');
-	}
-
-	/**
 	 * Gets the additional information, complete as RTE'ed HTML.
 	 *
 	 * @param object the live pibase object
@@ -3530,9 +3495,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 			case 'foods':
 				$result = $this->mmRecordsToText($this->getFoods());
-				break;
-			case 'additional_times_places':
-				$result = $this->getAdditionalTimesAndPlacesRaw();
 				break;
 			case 'speakers':
 				// The fallthrough is intended.

@@ -140,7 +140,7 @@ plugin.tx_seminars {
 	filenameForRegistrationsCsv = registrations.csv
 
 	# comma-separated list of field names from tx_seminars_seminars that will be used for CSV export
-	fieldsFromEventsForCsv = uid,title,subtitle,description,event_type,date,time,place,room,additional_times_places,speakers,price_regular,attendees,attendees_max,vacancies,is_full
+	fieldsFromEventsForCsv = uid,title,subtitle,description,event_type,date,time,place,room,speakers,price_regular,attendees,attendees_max,vacancies,is_full
 
 	# comma-separated list of field names from fe_users that will be used for CSV export
 	fieldsFromFeUserForCsv = name,company,address,zip,city,country,telephone,email
@@ -665,12 +665,6 @@ plugin.tx_seminars_pi1 {
 				room {
 					name = room
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.room
-				}
-
-				additional_times_places = renderlet:TEXTAREA
-				additional_times_places {
-					name = additional_times_places
-					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.additional_times_places
 				}
 
 				lodgings = renderlet:CHECKBOX

@@ -62,7 +62,6 @@
 			<label index="tx_seminars_seminars.expiry">License expiry:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
 			<label index="tx_seminars_seminars.foods">Available food options:</label>
@@ -250,7 +249,6 @@
 			<label index="tx_seminars_seminars.expiry">Lizenzablauf:</label>
 			<label index="tx_seminars_seminars.place">Ort:</label>
 			<label index="tx_seminars_seminars.room">Raum:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Zeiten und Orte:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Wohnen/Essen</label>
 			<label index="tx_seminars_seminars.lodgings">Verfügbare Unterbringungsmöglichkeiten:</label>
 			<label index="tx_seminars_seminars.foods">Verfügbare Verpflegungsmöglichkeiten:</label>
@@ -423,7 +421,6 @@
 			<label index="tx_seminars_seminars.deadline_early_bird">Vroegboek sluitingsdatum</label>
 			<label index="tx_seminars_seminars.place">Plaats:</label>
 			<label index="tx_seminars_seminars.room">Kamer:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Tijd en plaatsen:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Accomodatie/Voeding</label>
 			<label index="tx_seminars_seminars.lodgings">Beschikbare accomodatie opties:</label>
 			<label index="tx_seminars_seminars.foods">Beschikbare voeding opties:</label>
@@ -585,7 +582,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration">Afmeldings-deadline:</label>
 			<label index="tx_seminars_seminars.place">Sted:</label>
 			<label index="tx_seminars_seminars.room">Rum:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Tid og sted:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Overnatning/Kost</label>
 			<label index="tx_seminars_seminars.lodgings">Tilgængelige logi-muligheder:</label>
 			<label index="tx_seminars_seminars.foods">Tilgængelige kost-muligheder:</label>
@@ -738,7 +734,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration">Срок окончания снятия с регистрации:</label>
 			<label index="tx_seminars_seminars.place">Место:</label>
 			<label index="tx_seminars_seminars.room">Комната:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Время и место:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Размещение/питание</label>
 			<label index="tx_seminars_seminars.lodgings">Доступные опции размещения:</label>
 			<label index="tx_seminars_seminars.foods">Доступные опции питания:</label>
@@ -891,7 +886,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration">Scadenza cancellazione registrazione:</label>
 			<label index="tx_seminars_seminars.place">Luogo:</label>
 			<label index="tx_seminars_seminars.room">Stanza:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Date e luoghi:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Vitto e alloggio</label>
 			<label index="tx_seminars_seminars.lodgings">Opzioni di alloggio disponibili:</label>
 			<label index="tx_seminars_seminars.foods">Opzioni di vitto disponibili:</label>
@@ -1045,7 +1039,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration">Délai d'annulation d'inscription:</label>
 			<label index="tx_seminars_seminars.place">Lieu:</label>
 			<label index="tx_seminars_seminars.room">Salle:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Lieux et dates:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Hébergement/Nourriture</label>
 			<label index="tx_seminars_seminars.lodgings">Options d'hébergement disponibles:</label>
 			<label index="tx_seminars_seminars.foods">Options de nourriture disponibles:</label>
@@ -1206,7 +1199,6 @@
 			<label index="tx_seminars_seminars.expiry" type="integer">159970035</label>
 			<label index="tx_seminars_seminars.place" type="integer">24143558</label>
 			<label index="tx_seminars_seminars.room" type="integer">121727316</label>
-			<label index="tx_seminars_seminars.additional_times_places" type="integer">61400755</label>
 			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
 			<label index="tx_seminars_seminars.lodgings" type="integer">157779404</label>
 			<label index="tx_seminars_seminars.foods" type="integer">264633539</label>
@@ -1431,7 +1423,6 @@
 			<label index="tx_seminars_seminars.divLabelOrganizers" type="integer">231556830</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime" type="integer">27057202</label>
 			<label index="tx_seminars_seminars.deadline_early_bird" type="integer">256893079</label>
-			<label index="tx_seminars_seminars.additional_times_places" type="integer">61400755</label>
 			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
 			<label index="tx_seminars_seminars.lodgings" type="integer">157779404</label>
 			<label index="tx_seminars_seminars.foods" type="integer">264633539</label>
@@ -1587,7 +1578,6 @@
 			<label index="tx_seminars_seminars.divLabelOrganizers" type="integer">231556830</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime" type="integer">27057202</label>
 			<label index="tx_seminars_seminars.deadline_early_bird" type="integer">256893079</label>
-			<label index="tx_seminars_seminars.additional_times_places" type="integer">61400755</label>
 			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
 			<label index="tx_seminars_seminars.lodgings" type="integer">157779404</label>
 			<label index="tx_seminars_seminars.foods" type="integer">264633539</label>
@@ -1689,7 +1679,6 @@
 			<label index="tx_seminars_seminars.deadline_early_bird" type="integer">256893079</label>
 			<label index="tx_seminars_seminars.place" type="integer">24143558</label>
 			<label index="tx_seminars_seminars.room" type="integer">121727316</label>
-			<label index="tx_seminars_seminars.additional_times_places" type="integer">61400755</label>
 			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
 			<label index="tx_seminars_seminars.lodgings" type="integer">157779404</label>
 			<label index="tx_seminars_seminars.foods" type="integer">264633539</label>
@@ -1844,7 +1833,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
 			<label index="tx_seminars_seminars.place" type="integer">24143558</label>
 			<label index="tx_seminars_seminars.room" type="integer">121727316</label>
-			<label index="tx_seminars_seminars.additional_times_places" type="integer">61400755</label>
 			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
 			<label index="tx_seminars_seminars.lodgings" type="integer">157779404</label>
 			<label index="tx_seminars_seminars.foods" type="integer">264633539</label>
@@ -1998,7 +1986,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
 			<label index="tx_seminars_seminars.place" type="integer">24143558</label>
 			<label index="tx_seminars_seminars.room" type="integer">121727316</label>
-			<label index="tx_seminars_seminars.additional_times_places" type="integer">61400755</label>
 			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
 			<label index="tx_seminars_seminars.lodgings" type="integer">157779404</label>
 			<label index="tx_seminars_seminars.foods" type="integer">264633539</label>
@@ -2132,7 +2119,6 @@
 			<label index="tx_seminars_seminars.expiry">License expiry:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
 			<label index="tx_seminars_seminars.foods">Available food options:</label>
@@ -2393,7 +2379,6 @@
 			<label index="tx_seminars_seminars.divLabelOrganizers">Organizer</label>
 			<label index="tx_seminars_seminars.divLabelPlaceTime">Place/Time</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
 			<label index="tx_seminars_seminars.foods">Available food options:</label>
@@ -2494,7 +2479,6 @@
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
 			<label index="tx_seminars_seminars.foods">Available food options:</label>
@@ -2646,7 +2630,6 @@
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
 			<label index="tx_seminars_seminars.foods">Available food options:</label>
@@ -2803,7 +2786,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
 			<label index="tx_seminars_seminars.foods">Available food options:</label>
@@ -2957,7 +2939,6 @@
 			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
-			<label index="tx_seminars_seminars.additional_times_places">Times and places:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
 			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
 			<label index="tx_seminars_seminars.foods">Available food options:</label>

@@ -225,7 +225,6 @@ CREATE TABLE tx_seminars_seminars (
 	room text,
 	lodgings int(11) unsigned DEFAULT '0' NOT NULL,
 	foods int(11) unsigned DEFAULT '0' NOT NULL,
-	additional_times_places text,
 	speakers int(11) unsigned DEFAULT '0' NOT NULL,
 	partners int(11) unsigned DEFAULT '0' NOT NULL,
 	tutors int(11) unsigned DEFAULT '0' NOT NULL,

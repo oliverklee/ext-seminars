@@ -113,7 +113,6 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_timeslots">Time slots</label>
 			<label index="label_expiry">License expiry</label>
 			<label index="label_speakers_single_male">Speaker</label>
@@ -385,7 +384,6 @@
 			<label index="label_time">Tid</label>
 			<label index="label_place">Sted</label>
 			<label index="label_room">Rum</label>
-			<label index="label_additional_times_places">Tid og sted</label>
 			<label index="label_timeslots">Tidsblokke</label>
 			<label index="label_speakers">Foredragsholdere</label>
 			<label index="label_partners">Partnere</label>
@@ -634,7 +632,6 @@
 			<label index="label_time">Zeit</label>
 			<label index="label_place">Ort</label>
 			<label index="label_room">Raum</label>
-			<label index="label_additional_times_places">Zeiten und Orte</label>
 			<label index="label_timeslots">Zeitblöcke</label>
 			<label index="label_expiry">Lizenzablauf</label>
 			<label index="label_speakers_single_male">Referent</label>
@@ -906,7 +903,6 @@
 			<label index="label_time">Tijd</label>
 			<label index="label_place">Plaats</label>
 			<label index="label_room">Kamer</label>
-			<label index="label_additional_times_places">Tijd en plaats</label>
 			<label index="label_timeslots">Bloktijden</label>
 			<label index="label_speakers">Sprekers</label>
 			<label index="label_partners">Partners</label>
@@ -1137,7 +1133,6 @@
 			<label index="label_time">Время</label>
 			<label index="label_place">Место</label>
 			<label index="label_room">Комната</label>
-			<label index="label_additional_times_places">Время и место</label>
 			<label index="label_timeslots">окно</label>
 			<label index="label_speakers">Докладчики</label>
 			<label index="label_partners">Партнеры</label>
@@ -1367,7 +1362,6 @@
 			<label index="label_time">Ora</label>
 			<label index="label_place">Luogo</label>
 			<label index="label_room">Stanza</label>
-			<label index="label_additional_times_places">Ora e luogo</label>
 			<label index="label_timeslots">Fasce orarie</label>
 			<label index="label_speakers">Oratori</label>
 			<label index="label_partners">Partner</label>
@@ -1598,7 +1592,6 @@
 			<label index="label_time">Heure</label>
 			<label index="label_place">Lieu</label>
 			<label index="label_room">Salle</label>
-			<label index="label_additional_times_places">Lieux et horaires</label>
 			<label index="label_timeslots">Tranches horaires</label>
 			<label index="label_speakers">Conférenciers</label>
 			<label index="label_partners">Partenaires</label>
@@ -1838,7 +1831,6 @@
 			<label index="label_myenteredevents_formal" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_subtitle" type="integer">3536098</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
 			<label index="label_leaders" type="integer">45784650</label>
@@ -2074,7 +2066,6 @@
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_timeslots" type="integer">147000660</label>
 			<label index="label_expiry" type="integer">123022099</label>
 			<label index="label_speakers" type="integer">258305227</label>
@@ -2363,7 +2354,6 @@
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_registration_uid" type="integer">262691347</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
 			<label index="label_leaders" type="integer">45784650</label>
@@ -2573,7 +2563,6 @@
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_speakers" type="integer">258305227</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
@@ -2805,7 +2794,6 @@
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_speakers" type="integer">258305227</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
@@ -3038,7 +3026,6 @@
 			<label index="label_time" type="integer">175559919</label>
 			<label index="label_place" type="integer">129617664</label>
 			<label index="label_room" type="integer">214150095</label>
-			<label index="label_additional_times_places" type="integer">178250458</label>
 			<label index="label_speakers" type="integer">258305227</label>
 			<label index="label_partners" type="integer">265740084</label>
 			<label index="label_tutors" type="integer">102766940</label>
@@ -3289,7 +3276,6 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_timeslots">Time slots</label>
 			<label index="label_expiry">License expiry</label>
 			<label index="label_speakers">Speakers</label>
@@ -3574,7 +3560,6 @@
 			<label index="label_myenteredevents_formal">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_subtitle">Subtitle</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
 			<label index="label_leaders">Leaders</label>
@@ -3788,7 +3773,6 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
@@ -4039,7 +4023,6 @@
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
 			<label index="label_registration_uid">Ticket ID</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
 			<label index="label_leaders">Leaders</label>
@@ -4251,7 +4234,6 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>
@@ -4484,7 +4466,6 @@
 			<label index="label_time">Time</label>
 			<label index="label_place">Place</label>
 			<label index="label_room">Room</label>
-			<label index="label_additional_times_places">Times and places</label>
 			<label index="label_speakers">Speakers</label>
 			<label index="label_partners">Partners</label>
 			<label index="label_tutors">Tutors</label>

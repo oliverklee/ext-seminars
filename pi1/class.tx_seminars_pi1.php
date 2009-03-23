@@ -693,7 +693,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker('time', $this->seminar->getTime());
 			$this->setPlaceMarker();
 			$this->setRoomMarker();
-			$this->setAdditionalTimesAndPlacesMarker();;
 
 			$this->setTimeSlotsMarkers();
 
@@ -898,22 +897,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$this->setMarker('room', $this->seminar->getRoom());
-	}
-
-	/**
-	 * Fills in the matching marker for the additional times and places or hides
-	 * the subpart if there are no additional times and places.
-	 */
-	private function setAdditionalTimesAndPlacesMarker() {
-		if (!$this->seminar->hasAdditionalTimesAndPlaces()) {
-			$this->hideSubparts('additional_times_places', 'field_wrapper');
-			return;
-		}
-
-		$this->setMarker(
-			'additional_times_places',
-			$this->seminar->getAdditionalTimesAndPlaces()
-		);
 	}
 
 	/**
