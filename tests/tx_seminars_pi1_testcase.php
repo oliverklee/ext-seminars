@@ -3174,6 +3174,102 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////////////////////////////////
+	// Tests concerning the registration link in the list view
+	////////////////////////////////////////////////////////////
+
+	public function test_ListView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 1,
+				'queue_size' => 1,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->seminarUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('label_onlineRegistrationOnQueue'), 0
+			),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 1,
+				'queue_size' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->seminarUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+
+
+		$this->assertNotContains(
+			sprintf(
+				$this->fixture->translate('label_onlineRegistrationOnQueue'), 0
+			),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 1,
+				'queue_size' => 0,
+				'begin_date' => '',
+			)
+		);
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_onlinePrebooking'),
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	//////////////////////////////////////////
 	// Tests concerning the "my events" view
 	//////////////////////////////////////////
@@ -3663,6 +3759,103 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testSingleViewForSeminarWithOwnerWithoutImageAndOwnerDataEnabledNotContainsImageTag() {
 		$this->markTestIncomplete(
 			'Currently, FE image functions cannot be unit-tested yet.'
+		);
+	}
+
+	//////////////////////////////////////////////////////////////
+	// Tests concerning the registration link in the single view
+	//////////////////////////////////////////////////////////////
+
+		public function test_SingleView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 1,
+				'queue_size' => 1,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->seminarUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('label_onlineRegistrationOnQueue'), 0
+			),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 1,
+				'queue_size' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->seminarUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			sprintf(
+				$this->fixture->translate('label_onlineRegistrationOnQueue'), 0
+			),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 1,
+				'queue_size' => 0,
+				'begin_date' => '',
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_onlinePrebooking'),
+			$this->fixture->main('', array())
 		);
 	}
 

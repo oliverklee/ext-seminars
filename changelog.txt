@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2833] Fix: Write tests for events with unlimitedVacancies
 - [#2870] Fix: In registration column in list view the text "fully booked" is falsely displayed
 - [#2037] Change: Drop the additional_times_places field
 - [#2865] Change: Add the JavaScript file via TypoScript
