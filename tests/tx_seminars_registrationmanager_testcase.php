@@ -409,27 +409,27 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetRegistrationLinkForLoggedInUserAndFullyBookedSeminarReturnsFullyBookedString() {
+	public function test_GetRegistrationLink_ForLoggedInUserAndFullyBookedSeminar_ReturnsEmptyString() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 
 		$this->createBookedOutSeminar();
 
 		$this->assertEquals(
-			$this->fixture->translate('message_fullyBooked'),
+			'',
 			$this->fixture->getRegistrationLink(
 				$this->pi1, $this->fullyBookedSeminar
 			)
 		);
 	}
 
-	public function testGetRegistrationLinkForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedString() {
+	public function test_GetRegistrationLink_ForLoggedOutUserAndFullyBookedSeminar_ReturnsEmptyString() {
 		$this->createFrontEndPages();
 
 		$this->createBookedOutSeminar();
 
 		$this->assertEquals(
-			$this->fixture->translate('message_fullyBooked'),
+			'',
 			$this->fixture->getRegistrationLink(
 				$this->pi1, $this->fullyBookedSeminar
 			)
