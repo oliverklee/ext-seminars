@@ -2327,6 +2327,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			);
 		} else {
 			$result .= ' ' . $this->pi_getClassName('vacancies-0');
+			if ($seminar->hasRegistrationQueue()) {
+				$result .= ' ' . $this->pi_getClassName('has-registration-queue');
+			}
 		}
 
 		// We add this class in addition to the number of vacancies so that

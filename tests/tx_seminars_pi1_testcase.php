@@ -4198,6 +4198,46 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function getVacanciesClasses_ForEventWithNoVacanciesAndRegistrationQueueReturnsRegistrationQueueClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid, array());
+		$event->setAttendancesMax(10);
+		$event->setNumberOfAttendances(10);
+		$event->setNeedsRegistration(true);
+		$event->setRegistrationQueue(true);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('has-registration-queue'),
+			$output
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getVacanciesClasses_ForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid, array());
+		$event->setAttendancesMax(10);
+		$event->setNumberOfAttendances(10);
+		$event->setNeedsRegistration(true);
+		$event->setRegistrationQueue(false);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertNotContains(
+			$this->fixture->pi_getClassName('has-registration-queue'),
+			$output
+		);
+	}
+
 
 	//////////////////////////////////////////////////////////////////////////
 	// Tests concerning getVacanciesClasses for events without date and with
