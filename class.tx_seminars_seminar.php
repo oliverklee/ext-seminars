@@ -2506,7 +2506,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$value = $this->getEventType();
 					break;
 				case 'vacancies':
-					$value = $this->getVacancies();
+					if ($this->hasUnlimitedVacancies()) {
+						$value = $this->translate('label_unlimited');
+					} else {
+						$value = (string) $this->getVacancies();
+					}
 					break;
 				case 'title':
 					$value = $this->getTitle();

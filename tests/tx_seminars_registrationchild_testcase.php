@@ -581,7 +581,26 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyOrganizers_ForEventWithUnlimitedVacancies_ShowVacanciesLabelWithoutVacancyNumber() {
+	public function test_NotifyOrganizers_ForEventWithOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
+		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue(
+			'showSeminarFieldsInNotificationMail', 'vacancies'
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('needs_registration' => 1, 'attendees_max' => 2)
+		);
+		tx_seminars_registrationchild::purgeCachedSeminars();
+
+		$this->fixture->notifyOrganizers();
+
+		$this->assertRegExp(
+			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function test_NotifyOrganizers_ForEventWithUnlimitedVacancies_ShowsVacanciesLabelWithUnlimtedLabel() {
 		$this->fixture->setConfigurationValue('sendNotification', true);
 		$this->fixture->setConfigurationValue(
 			'showSeminarFieldsInNotificationMail', 'vacancies'
@@ -594,8 +613,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->notifyOrganizers();
 
-		$this->assertRegExp(
-			'/' . $this->fixture->translate('label_vacancies') . ':$/',
+		$this->assertContains(
+			$this->fixture->translate('label_vacancies') . ': ' .
+				$this->fixture->translate('label_unlimited'),
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
 	}
@@ -971,7 +991,30 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_ShowsVacanciesLabelWithoutVacancyNumber() {
+	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'attendees_min' => 1,
+				'attendees_max' => 2,
+				'needs_registration' => 1
+			)
+		);
+		$this->fixture->setConfigurationValue(
+			'showSeminarFieldsInNotificationMail', 'vacancies'
+		);
+
+		tx_seminars_registrationchild::purgeCachedSeminars();
+
+		$this->fixture->sendAdditionalNotification();
+
+		$this->assertRegExp(
+			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_ShowsVacanciesLabelWithUnlimitedLabel() {
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -988,8 +1031,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->sendAdditionalNotification();
 
-		$this->assertRegExp(
-			'/' . $this->fixture->translate('label_vacancies') . ':$/',
+		$this->assertContains(
+			$this->fixture->translate('label_vacancies') . ': ' .
+				$this->fixture->translate('label_unlimited'),
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
 	}

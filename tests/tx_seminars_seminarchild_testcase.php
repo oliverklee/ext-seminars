@@ -5979,5 +5979,82 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getEventData('description')
 		);
 	}
+
+
+	///////////////////////////////////////
+	// Tests concerning dumpSeminarValues
+	///////////////////////////////////////
+
+	public function test_dumpSeminarValues_ForTitleGiven_ReturnsTitle() {
+		$this->assertContains(
+			$this->fixture->getTitle(),
+			$this->fixture->dumpSeminarValues('title')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForTitleGiven_ReturnsLabelForTitle() {
+		$this->assertContains(
+			$this->fixture->translate('label_title'),
+			$this->fixture->dumpSeminarValues('title')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForTitleGiven_ReturnsTitleWithLineFeedAtEndOfLine() {
+		$this->assertRegexp(
+			'/\n$/',
+			$this->fixture->dumpSeminarValues('title')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForTitleAndDescriptionGiven_ReturnsTitleAndDescription() {
+		$this->fixture->setDescription('foo bar');
+
+		$this->assertRegexp(
+			'/.*' . $this->fixture->getTitle() . '.*\n.*' .
+				$this->fixture->getRecordPropertyString('description') .'/',
+			$this->fixture->dumpSeminarValues('title,description')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForEventWithoutDescriptionAndDescriptionGiven_ReturnsDescriptionLabelWithColonsAndLineFeed() {
+		$this->fixture->setDescription('');
+
+		$this->assertEquals(
+			$this->fixture->translate('label_description') . ':' . LF,
+			$this->fixture->dumpSeminarValues('description')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForEventWithNoVacanciesAndVacanciesGiven_ReturnsVacanciesLabelWithNumber() {
+		$this->fixture->setNumberOfAttendances(2);
+		$this->fixture->setAttendancesMax(2);
+		$this->fixture->setNeedsRegistration(true);
+
+		$this->assertEquals(
+			$this->fixture->translate('label_vacancies') . ': 0' . LF ,
+			$this->fixture->dumpSeminarValues('vacancies')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForEventWithOneVacancyAndVacanciesGiven_ReturnsNumberOfVacancies() {
+		$this->fixture->setNumberOfAttendances(1);
+		$this->fixture->setAttendancesMax(2);
+		$this->fixture->setNeedsRegistration(true);
+
+		$this->assertEquals(
+			$this->fixture->translate('label_vacancies') . ': 1' . LF ,
+			$this->fixture->dumpSeminarValues('vacancies')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForEventWithUnlimitedVacanciesAndVacanciesGiven_ReturnsVacanciesUnlimitedString() {
+		$this->fixture->setUnlimitedVacancies();
+
+		$this->assertEquals(
+			$this->fixture->translate('label_vacancies') . ': ' .
+				$this->fixture->translate('label_unlimited') . LF ,
+			$this->fixture->dumpSeminarValues('vacancies')
+		);
+	}
 }
 ?>
