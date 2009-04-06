@@ -735,59 +735,59 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getDetailsPageIdWithoutDetailsPageReturnsZero() {
+	public function getDetailsPageUidWithoutDetailsPageReturnsZero() {
 		$this->fixture->setData(array());
 
 		$this->assertEquals(
 			0,
-			$this->fixture->getDetailsPageId()
+			$this->fixture->getDetailsPageUid()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function getDetailsPageIdWithDetailsPageReturnsDetailsPageId() {
+	public function getDetailsPageUidWithDetailsPageReturnsDetailsPageUid() {
 		$this->fixture->setData(array('details_page' => 42));
 
 		$this->assertEquals(
 			42,
-			$this->fixture->getDetailsPageId()
+			$this->fixture->getDetailsPageUid()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setDetailsPageIdWithNegativeDetailsPageIdThrowsException() {
+	public function setDetailsPageUidWithNegativeDetailsPageUidThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $id must be >= 0.'
+			'Exception', 'The parameter $uid must be >= 0.'
 		);
 
-		$this->fixture->setDetailsPageId(-1);
+		$this->fixture->setDetailsPageUid(-1);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setDetailsPageIdWithZeroDetailsPageIdSetsDetailsPage() {
-		$this->fixture->setDetailsPageId(0);
+	public function setDetailsPageUidWithZeroDetailsPageUidSetsDetailsPage() {
+		$this->fixture->setDetailsPageUid(0);
 
 		$this->assertEquals(
 			0,
-			$this->fixture->getDetailsPageId()
+			$this->fixture->getDetailsPageUid()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setDetailsPageIdWithPositiveDetailsPageIdSetsDetailsPage() {
-		$this->fixture->setDetailsPageId(42);
+	public function setDetailsPageUidWithPositiveDetailsPageUidSetsDetailsPage() {
+		$this->fixture->setDetailsPageUid(42);
 
 		$this->assertEquals(
 			42,
-			$this->fixture->getDetailsPageId()
+			$this->fixture->getDetailsPageUid()
 		);
 	}
 
@@ -806,7 +806,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasDetailsPageWithDetailsPageReturnsTrue() {
-		$this->fixture->setDetailsPageId(42);
+		$this->fixture->setDetailsPageUid(42);
 
 		$this->assertTrue(
 			$this->fixture->hasDetailsPage()
@@ -1892,22 +1892,22 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function useTerms2WithUnsetUseTerms2ReturnsFalse() {
+	public function usesTerms2WithUnsetUseTerms2ReturnsFalse() {
 		$this->fixture->setData(array());
 
 		$this->assertFalse(
-			$this->fixture->useTerms2()
+			$this->fixture->usesTerms2()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function useTerms2WithSetUseTerms2ReturnsTrue() {
+	public function usesTerms2WithSetUseTerms2ReturnsTrue() {
 		$this->fixture->setData(array('use_terms_2' => true));
 
 		$this->assertTrue(
-			$this->fixture->useTerms2()
+			$this->fixture->usesTerms2()
 		);
 	}
 
@@ -1999,6 +1999,18 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			array('file.txt'),
+			$this->fixture->getAttachedFiles()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithTwoAttachedFilesReturnsArrayWithBothAttachedFiles() {
+		$this->fixture->setData(array('attached_files' => 'file.txt,file2.txt'));
+
+		$this->assertEquals(
+			array('file.txt', 'file2.txt'),
 			$this->fixture->getAttachedFiles()
 		);
 	}

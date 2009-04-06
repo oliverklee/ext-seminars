@@ -34,17 +34,17 @@
  */
 class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
-	 * @var integer represents the type for a complete event
+	 * @var integer represents the type for a single event
 	 */
 	const TYPE_COMPLETE = 0;
 
 	/**
-	 * @var integer represents the type for a topic event
+	 * @var integer represents the type for an event topic
 	 */
 	const TYPE_TOPIC = 1;
 
 	/**
-	 * @var integer represents the type for a date event
+	 * @var integer represents the type for an event date
 	 */
 	const TYPE_DATE = 2;
 
@@ -72,6 +72,12 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                                 no topic
 	 */
 	public function getTopic() {
+		if ($this->getAsInteger('object_type') != self::TYPE_DATE) {
+			throw new Exception(
+				'This function may only be called for date records.'
+			);
+		}
+
 		return $this->getAsModel('topic');
 	}
 
@@ -189,7 +195,6 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our accreditation number.
 	 *
 	 * @param string our accreditation number, may be empty
-	 * @return unknown_type
 	 */
 	public function setAccreditationNumber($accreditationNumber) {
 		$this->setAsString('accreditation_number', $accreditationNumber);
@@ -394,7 +399,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return integer our details page UID, will be 0 if this event has no
 	 *                 details page, will be >= 0
 	 */
-	public function getDetailsPageId() {
+	public function getDetailsPageUid() {
 		return $this->getAsInteger('details_page');
 	}
 
@@ -403,9 +408,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * @param integer our details page UID, must be >= 0
 	 */
-	public function setDetailsPageId($uid) {
+	public function setDetailsPageUid($uid) {
 		if ($uid < 0) {
-			throw new Exception('The parameter $id must be >= 0.');
+			throw new Exception('The parameter $uid must be >= 0.');
 		}
 
 		$this->setAsInteger('details_page', $uid);
@@ -965,7 +970,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event makes use of the second terms &
 	 *                 conditions, false otherwise
 	 */
-	public function useTerms2() {
+	public function usesTerms2() {
 		return $this->getAsBoolean('use_terms_2');
 	}
 
