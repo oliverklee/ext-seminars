@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2622] Fix: Error when trying to create price with access using IRRE
 - [#2812] Feature: Add a CSS class for vancancies on registration queue
 - [#2833] Fix: Write tests for events with unlimitedVacancies
 - [#2870] Fix: In registration column in list view the text "fully booked" is falsely displayed
