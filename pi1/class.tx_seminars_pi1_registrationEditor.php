@@ -1575,6 +1575,20 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Processes the registration that should be removed.
 	 */
 	public function processUnregistration() {
+		if (
+			$this->getFormCreator()->aORenderlets['button_cancel']
+				->hasThrown('click')
+		) {
+			$redirectUrl = t3lib_div::locationHeaderUrl(
+				$this->pi_getPageLink(
+					$this->getConfValueInteger('myEventsPID')
+				)
+			);
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				->addHeader('Location:' . $redirectUrl);
+			exit;
+		}
+
 		$this->registrationManager->removeRegistration(
 			$this->getRegistration()->getUid(), $this
 		);

@@ -2353,10 +2353,6 @@ plugin.tx_seminars_pi1 {
 				button_cancel {
 					name = button_cancel
 					label = ###LABEL_CANCEL###
-					onclick {
-						runat = server
-						userobj.php = header('Location:' . $this->_oParent->plugin->pi_getPageLink($this->_oParent->getConfValueInteger('myEventsPID')));
-					}
 				}
 
 				button_unregister = renderlet:SUBMIT
