@@ -5458,5 +5458,30 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getEventData('description')
 		);
 	}
+
+
+	///////////////////////////////////////
+	// Tests concerning dumpSeminarValues
+	///////////////////////////////////////
+
+	public function test_dumpSeminarValues_ForEventWithNoVacanciesAndVacaniesGiven_ReturnsVacanciesLabelWithNumber() {
+		$this->fixture->setNumberOfAttendances(2);
+		$this->fixture->setAttendancesMax(2);
+
+		$this->assertEquals(
+			$this->fixture->translate('label_vacancies') . ': 0' . LF ,
+			$this->fixture->dumpSeminarValues('vacancies')
+		);
+	}
+
+	public function test_dumpSeminarValues_ForEventWithOneVacancyAndVacanciesGiven_ReturnsNumberOfVacancies() {
+		$this->fixture->setNumberOfAttendances(1);
+		$this->fixture->setAttendancesMax(2);
+
+		$this->assertEquals(
+			$this->fixture->translate('label_vacancies') . ': 1' . LF ,
+			$this->fixture->dumpSeminarValues('vacancies')
+		);
+	}
 }
 ?>
