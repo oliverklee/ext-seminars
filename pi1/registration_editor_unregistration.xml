@@ -45,19 +45,6 @@
 
 	<elements>
 		<renderlet:SUBMIT name="button_cancel">
-			<onclick runat="server">
-				<userobj>
-					<php><![CDATA[
-						header(
-							'Location:'.$this->_oParent->plugin->pi_getPageLink(
-									$this->_oParent->getConfValueInteger(
-										'myEventsPID'
-									)
-								)
-						);
-					]]></php>
-				</userobj>
-			</onclick>
 			<label>###LABEL_CANCEL###</label>
 		</renderlet:SUBMIT>
 		<renderlet:SUBMIT name="button_unregister">
