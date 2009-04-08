@@ -1,4 +1,5 @@
 0.7.4 (currently working on)
+- [#2901] Fix: warning 102 when saving seminar-record of type 'date'
 - [#2774] Fix: Cannot cancel an unregistration
 - [#2872] Fix: Return value for zero vacancies must be 0 not empty string in organizer mails
 - [#2813] Change: <label for=""> does not use the values of the id attributes
