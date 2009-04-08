@@ -559,9 +559,9 @@ $TCA['tx_seminars_seminars'] = array(
 				'checkbox' => '0.00',
 				'range' => array(
 					'upper' => '99999.99',
-					'lower' => '0',
+					'lower' => '0.00',
 				),
-				'default' => 0,
+				'default' => '0.00',
 			),
 		),
 		'price_regular_early' => array(
@@ -576,9 +576,9 @@ $TCA['tx_seminars_seminars'] = array(
 				'checkbox' => '0.00',
 				'range' => array(
 					'upper' => '99999.99',
-					'lower' => '0',
+					'lower' => '0.00',
 				),
-				'default' => 0,
+				'default' => '0.00',
 			),
 		),
 		'price_regular_board' => array(
@@ -594,7 +594,7 @@ $TCA['tx_seminars_seminars'] = array(
 					'upper' => '99999.99',
 					'lower' => '0',
 				),
-				'default' => 0,
+				'default' => '0.00',
 			),
 		),
 		'price_special' => array(
@@ -608,9 +608,9 @@ $TCA['tx_seminars_seminars'] = array(
 				'checkbox' => '0.00',
 				'range' => array(
 					'upper' => '99999.99',
-					'lower' => '0',
+					'lower' => '0.00',
 				),
-				'default' => 0,
+				'default' => '0.00',
 			),
 		),
 		'price_special_early' => array(
@@ -625,9 +625,9 @@ $TCA['tx_seminars_seminars'] = array(
 				'checkbox' => '0.00',
 				'range' => array(
 					'upper' => '99999.99',
-					'lower' => '0',
+					'lower' => '0.00',
 				),
-				'default' => 0,
+				'default' => '0.00',
 			),
 		),
 		'price_special_board' => array(
@@ -641,9 +641,9 @@ $TCA['tx_seminars_seminars'] = array(
 				'checkbox' => '0.00',
 				'range' => array(
 					'upper' => '99999.99',
-					'lower' => '0',
+					'lower' => '0.00',
 				),
-				'default' => 0,
+				'default' => '0.00',
 			),
 		),
 		'additional_information' => array(

@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2901] Fix: warning 102 when saving seminar-record of type 'date'
 - [#2796] Feature: Add event model and mapper
 - [#2774] Fix: Cannot cancel an unregistration
 - [#2872] Change: In the notification mails for the organizers set unlimited string for vacancies if event has unlimited vacancies
