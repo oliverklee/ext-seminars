@@ -293,7 +293,7 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'pi_f
 
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:seminars/pi1/flexforms_pi1.xml');
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'static/', 'Seminars');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/Settings', 'Seminars');
 
 t3lib_extMgm::addPlugin(
 	array(
