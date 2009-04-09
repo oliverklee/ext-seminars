@@ -59,6 +59,9 @@ class ext_update {
 			if ($this->needsToUpdateEventField('queueSize')) {
 				$result .= $this->updateQueueSizeField();
 			}
+			if ($this->needsToUpdateTypoScriptTemplates()) {
+				$result .= $this->updateTypoScriptTemplates();
+			}
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = '';
 		}
@@ -93,6 +96,7 @@ class ext_update {
 				&& $this->hasEventsWithOrganizers())
 				|| $this->needsToUpdateEventField('needsRegistration')
 				|| $this->needsToUpdateEventField('queueSize')
+				|| $this->needsToUpdateTypoScriptTemplates()
 			);
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = false;
@@ -247,6 +251,56 @@ class ext_update {
 				'queue_size > 1',
 				array('queue_size' => 1)
 			) . ' events.</p>';
+	}
+
+	/**
+	 * Returns whether there are any TypoScript template records that need to be
+	 * updated.
+	 *
+	 * @return boolean true if there are any TypoScript template records that
+	 *                 need to be updated, false otherwise
+	 */
+	private function needsToUpdateTypoScriptTemplates() {
+		$row = tx_oelib_db::selectSingle(
+			'COUNT(*) as count', 'sys_template',
+			'include_static_file LIKE \'%EXT:seminars/static/%\''
+		);
+
+		return ($row['count'] > 0);
+	}
+
+	/**
+	 * Updates the TypoScript template records.
+	 *
+	 * @return string information about the status of the update process,
+	 *                will not be empty
+	 */
+	private function updateTypoScriptTemplates() {
+		$result = '<h2>Updating TypoScript template records.</h2>';
+		$result .= '<ul>';
+
+		$rows = tx_oelib_db::selectMultiple(
+			'uid, include_static_file', 'sys_template',
+			'include_static_file LIKE \'%EXT:seminars/static/%\''
+		);
+
+		foreach ($rows as $row) {
+			$result .= '<li>Updating TypoScript template #' . $row['uid'] . '</li>';
+			tx_oelib_db::update(
+				'sys_template', 'uid=' . $row['uid'],
+				array(
+					'include_static_file' => str_replace(
+						'EXT:seminars/static/',
+						'EXT:seminars/Configuration/Settings',
+						$row['include_static_file']
+					),
+				)
+			);
+		}
+
+		$result .= '</ul>';
+
+		return $result;
 	}
 }
 
