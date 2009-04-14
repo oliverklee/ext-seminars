@@ -56,6 +56,7 @@
 			<label index="tx_seminars_seminars.begin_date">Begin time and date:</label>
 			<label index="tx_seminars_seminars.end_date">End time and date:</label>
 			<label index="tx_seminars_seminars.timeslots">Time slots</label>
+			<label index="tx_seminars_seminars.begin_date_registration">Begin date for registration:</label>
 			<label index="tx_seminars_seminars.deadline_registration">Registration deadline:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Early bird deadline:</label>
 			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
@@ -243,6 +244,7 @@
 			<label index="tx_seminars_seminars.begin_date">Anfangszeit und -datum:</label>
 			<label index="tx_seminars_seminars.end_date">Endzeit und -datum:</label>
 			<label index="tx_seminars_seminars.timeslots">Zeitblöcke</label>
+			<label index="tx_seminars_seminars.begin_date_registration">Anmeldebegin:</label>
 			<label index="tx_seminars_seminars.deadline_registration">Anmelde-Deadline:</label>
 			<label index="tx_seminars_seminars.deadline_early_bird">Frühbucher-Deadline:</label>
 			<label index="tx_seminars_seminars.deadline_unregistration">Abmelde-Deadline:</label>
@@ -1193,6 +1195,7 @@
 			<label index="tx_seminars_seminars.begin_date" type="integer">188111362</label>
 			<label index="tx_seminars_seminars.end_date" type="integer">45211304</label>
 			<label index="tx_seminars_seminars.timeslots" type="integer">147000660</label>
+			<label index="tx_seminars_seminars.begin_date_registration" type="integer">243838484</label>
 			<label index="tx_seminars_seminars.deadline_registration" type="integer">207972934</label>
 			<label index="tx_seminars_seminars.deadline_early_bird" type="integer">256893079</label>
 			<label index="tx_seminars_seminars.deadline_unregistration" type="integer">197045</label>
@@ -2114,6 +2117,7 @@
 			<label index="tx_seminars_seminars.credit_points">Credit points:</label>
 			<label index="tx_seminars_seminars.begin_date">Begin time and date:</label>
 			<label index="tx_seminars_seminars.end_date">End time and date:</label>
+			<label index="tx_seminars_seminars.begin_date_registration">Begin date for registration:</label>
 			<label index="tx_seminars_seminars.deadline_registration">Registration deadline:</label>
 			<label index="tx_seminars_seminars.deadline_unregistration">Unregistration deadline:</label>
 			<label index="tx_seminars_seminars.expiry">License expiry:</label>
