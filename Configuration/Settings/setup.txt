@@ -615,6 +615,18 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
+				begin_date_registration = renderlet:DATE
+				begin_date_registration {
+					name = begin_date_registration
+					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.begin_date_registration
+					data.datetime {
+						format = %H:%M %d-%m-%Y
+						displaytime = true
+						converttotimestamp = true
+						allowmanualedition = true
+					}
+				}
+
 				deadline_registration = renderlet:DATE
 				deadline_registration {
 					name = deadline_registration

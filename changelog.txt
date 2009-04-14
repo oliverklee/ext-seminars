@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2921] Feature: Add the field registration_begin_date to the FE-Editor
 - [#2920] Feature: Add a field registration_begin_date to the seminars table and the BE
 - [#2910] Change: Move the flexforms XML file to Configuration/FlexForms
 - [#2908] Change: Move the TypoScript configuration from static to Configuration/Settings
