@@ -251,13 +251,35 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return integer the number of seats
 	 */
 	public function getSeats() {
-		if ($this->hasRecordPropertyInteger('seats')) {
+		if ($this->hasSeats()) {
 			$seats = $this->getRecordPropertyInteger('seats');
 		} else {
 			$seats = 1;
 		}
 
 		return $seats;
+	}
+
+	/**
+	 * Sets our number of seats.
+	 *
+	 * @param integer the number of seats, must be >= 0
+	 */
+	public function setSeats($seats) {
+		if ($seats < 0) {
+			throw new Exception('The parameter $seats must be >= 0.');
+		}
+
+		$this->setRecordPropertyInteger('seats', $seats);
+	}
+
+	/**
+	 * Returns whether this registration has seats.
+	 *
+	 * @return boolean true if this registration has seats, false otherwise
+	 */
+	public function hasSeats() {
+		return $this->hasRecordPropertyInteger('seats');
 	}
 
 	/**
@@ -1397,11 +1419,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		$this->setMarker('registration_uid', $this->getUid());
 
-		if ($this->hasRecordPropertyInteger('seats')) {
-			$this->setMarker(
-				'seats',
-				$this->getRecordPropertyInteger('seats')
-			);
+		if ($this->hasSeats()) {
+			$this->setMarker('seats', $this->getSeats());
 		} else {
 			$this->hideSubparts('seats', $wrapperPrefix);
 		}

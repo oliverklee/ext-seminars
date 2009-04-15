@@ -1544,5 +1544,75 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			is_array($this->fixture->getCheckboxesData())
 		);
 	}
+
+
+	///////////////////////////////
+	// Tests regarding the seats.
+	///////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getSeatsWithoutSeatsReturnsOne() {
+		$this->assertEquals(
+			1,
+			$this->fixture->getSeats()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSeatsWithNegativeSeatsThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $seats must be >= 0.'
+		);
+
+		$this->fixture->setSeats(-1);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSeatsWithZeroSeatsSetsSeats() {
+		$this->fixture->setSeats(0);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getSeats()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSeatsWithPositiveSeatsSetsSeats() {
+		$this->fixture->setSeats(42);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getSeats()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSeatsWithoutSeatsReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasSeats()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSeatsWithSeatsReturnsTrue() {
+		$this->fixture->setSeats(42);
+
+		$this->assertTrue(
+			$this->fixture->hasSeats()
+		);
+	}
 }
 ?>
