@@ -625,40 +625,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the date at which the user has paid for this attendance.
-	 *
-	 * @return integer the date at which the user has paid for this attendance
-	 */
-	public function getDatePaid() {
-		trigger_error('Member function tx_seminars_registration->getDatePaid '
-			.'not implemented yet.'
-		);
-	}
-
-	/**
-	 * Gets the method of payment.
-	 *
-	 * @return integer the UID of the method of payment (may be 0 if none
-	 *                 is given)
-	 */
-	public function getMethodOfPayment() {
-		trigger_error('Member function '
-			.'tx_seminars_registration->getMethodOfPayment not implemented yet.'
-		);
-	}
-
-	/**
-	 * Gets whether the attendee has been at the seminar.
-	 *
-	 * @return boolean whether the attendee has attended the seminar
-	 */
-	public function getHasBeenThere() {
-		trigger_error('Member function tx_seminars_registration->getHasBeenThere '
-			.'not implemented yet.'
-		);
-	}
-
-	/**
 	 * Gets the attendee's special interests in the subject.
 	 *
 	 * @return string a description of the attendee's special interests
