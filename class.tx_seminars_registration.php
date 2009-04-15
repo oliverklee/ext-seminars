@@ -1400,6 +1400,38 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Returns our number of kids.
+	 *
+	 * @return integer the number of kids, will be >= 0, will be 0 if this
+	 *                 registration has no kids
+	 */
+	public function getNumberOfKids() {
+		return $this->getRecordPropertyInteger('kids');
+	}
+
+	/**
+	 * Sets the number of kids.
+	 *
+	 * @param integer the number of kids, must be >= 0
+	 */
+	public function setNumberOfKids($numberOfKids) {
+		if ($numberOfKids < 0) {
+			throw new Exception('The parameter $numberOfKids must be >= 0.');
+		}
+
+		$this->setRecordPropertyInteger('kids', $numberOfKids);
+	}
+
+	/**
+	 * Returns whether this registration has kids.
+	 *
+	 * @return boolean true if this registration has kids, false otherwise
+	 */
+	public function hasKids() {
+		return $this->hasRecordPropertyInteger('kids');
+	}
+
+	/**
 	 * Builds the e-mail body for an e-mail to the attendee.
 	 *
 	 * @param tslib_pibase a live plugin
@@ -1478,11 +1510,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->hideSubparts('checkboxes', $wrapperPrefix);
 		}
 
-		if ($this->hasRecordPropertyInteger('kids')) {
-			$this->setMarker(
-				'kids',
-				$this->getRecordPropertyInteger('kids')
-			);
+		if ($this->hasKids()) {
+			$this->setMarker('kids', $this->getNumberOfKids());
 		} else {
 			$this->hideSubparts('kids', $wrapperPrefix);
 		}

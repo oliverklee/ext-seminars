@@ -1661,5 +1661,75 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasAttendeesNames()
 		);
 	}
+
+
+	//////////////////////////////
+	// Tests regarding the kids.
+	//////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfKidsWithoutKidsReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfKids()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setNumberOfKidsWithNegativeNumberOfKidsThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $numberOfKids must be >= 0.'
+		);
+
+		$this->fixture->setNumberOfKids(-1);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setNumberOfKidsWithZeroNumberOfKidsSetsNumberOfKids() {
+		$this->fixture->setNumberOfKids(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfKids()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setNumberOfKidsWithPositiveNumberOfKidsSetsNumberOfKids() {
+		$this->fixture->setNumberOfKids(42);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getNumberOfKids()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasKidsWithoutKidsReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasKids()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasKidsWithKidsReturnsTrue() {
+		$this->fixture->setNumberOfKids(42);
+
+		$this->assertTrue(
+			$this->fixture->hasKids()
+		);
+	}
 }
 ?>
