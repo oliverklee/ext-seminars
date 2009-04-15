@@ -1371,6 +1371,35 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Returns our attendees names.
+	 *
+	 * @return string our attendees names, will be empty if this registration
+	 *                has no attendees names
+	 */
+	public function getAttendeesNames() {
+		return $this->getRecordPropertyString('attendees_names');
+	}
+
+	/**
+	 * Sets our attendees names.
+	 *
+	 * @param string our attendees names, may be empty
+	 */
+	public function setAttendeesNames($attendeesNames) {
+		$this->setRecordPropertyString('attendees_names', $attendeesNames);
+	}
+
+	/**
+	 * Returns whether this registration has attendees names.
+	 *
+	 * @return boolean true if this registration has attendees names, false
+	 *                 otherwise
+	 */
+	public function hasAttendeesNames() {
+		return $this->hasRecordPropertyString('attendees_names');
+	}
+
+	/**
 	 * Builds the e-mail body for an e-mail to the attendee.
 	 *
 	 * @param tslib_pibase a live plugin
@@ -1425,11 +1454,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->hideSubparts('seats', $wrapperPrefix);
 		}
 
-		if ($this->hasRecordPropertyString('attendees_names')) {
-			$this->setMarker(
-				'attendees_names',
-				$this->getRecordPropertyString('attendees_names')
-			);
+		if ($this->hasAttendeesNames()) {
+			$this->setMarker('attendees_names', $this->getAttendeesNames());
 		} else {
 			$this->hideSubparts('attendees_names', $wrapperPrefix);
 		}

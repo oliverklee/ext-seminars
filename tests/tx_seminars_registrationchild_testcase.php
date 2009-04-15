@@ -1614,5 +1614,52 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasSeats()
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Tests regarding the attendees names.
+	/////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getAttendeesNames()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAttendeesNamesWithAttendeesNamesSetsAttendeesNames() {
+		$this->fixture->setAttendeesNames('John Doe');
+
+		$this->assertEquals(
+			'John Doe',
+			$this->fixture->getAttendeesNames()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAttendeesNamesWithoutAttendeesNamesReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasAttendeesNames()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAttendeesNamesWithAttendeesNamesReturnsTrue() {
+		$this->fixture->setAttendeesNames('John Doe');
+
+		$this->assertTrue(
+			$this->fixture->hasAttendeesNames()
+		);
+	}
 }
 ?>
