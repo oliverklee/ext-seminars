@@ -2111,5 +2111,44 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasImage()
 		);
 	}
+
+
+	////////////////////////////////////////////////
+	// Tests regarding the registration begin date
+	////////////////////////////////////////////////
+
+	public function test_hasRegistrationBegin_ForNoRegistrationBegin_ReturnsFalse() {
+		$this->fixture->setData(array('begin_date_registration' => 0));
+
+		$this->assertFalse(
+			$this->fixture->hasRegistrationBegin()
+		);
+	}
+
+	public function test_hasRegistrationBegin_ForEventWithRegistrationBegin_ReturnsTrue() {
+		$this->fixture->setData(array('begin_date_registration' => 42));
+
+		$this->assertTrue(
+			$this->fixture->hasRegistrationBegin()
+		);
+	}
+
+	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithoutRegistrationBegin_ReturnsZero() {
+		$this->fixture->setData(array('begin_date_registration' => 0));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getRegistrationBeginAsUnixTimestamp()
+		);
+	}
+
+	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithRegistrationBegin_ReturnsRegistrationBeginAsUnixTimestamp() {
+		$this->fixture->setData(array('begin_date_registration' => 42));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getRegistrationBeginAsUnixTimestamp()
+		);
+	}
 }
 ?>

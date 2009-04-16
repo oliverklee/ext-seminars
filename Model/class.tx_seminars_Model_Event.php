@@ -1081,6 +1081,28 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	public function getDependencies() {
 		return $this->getAsList('dependencies');
 	}
+
+	/**
+	 * Checks whether this event has a begin date for the registration.
+	 *
+	 * @return boolean true if this event has a begin date for the registration,
+	 *                 false otherwise
+	 */
+	public function hasRegistrationBegin() {
+		return $this->hasInteger('begin_date_registration');
+	}
+
+	/**
+	 * Returns the begin date for the registration of this event as UNIX
+	 * time-stamp.
+	 *
+	 * @return integer the begin date for the registration of this event as UNIX
+	 *                 time-stamp, will be 0 if no begin date for the
+	 *                 registration is set
+	 */
+	public function getRegistrationBeginAsUnixTimestamp() {
+		return $this->getAsInteger('begin_date_registration');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_Event.php']) {

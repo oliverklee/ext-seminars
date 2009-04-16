@@ -6056,5 +6056,68 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->dumpSeminarValues('vacancies')
 		);
 	}
+
+
+	////////////////////////////////////////////////
+	// Tests regarding the registration begin date
+	////////////////////////////////////////////////
+
+	public function test_hasRegistrationBegin_ForNoRegistrationBegin_ReturnsFalse() {
+		$this->fixture->setRegistrationBeginDate(0);
+
+		$this->assertFalse(
+			$this->fixture->hasRegistrationBegin()
+		);
+	}
+
+	public function test_hasRegistrationBegin_ForEventWithRegistrationBegin_ReturnsTrue() {
+		$this->fixture->setRegistrationBeginDate(42);
+
+		$this->assertTrue(
+			$this->fixture->hasRegistrationBegin()
+		);
+	}
+
+	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithoutRegistrationBegin_ReturnsZero() {
+		$this->fixture->setRegistrationBeginDate(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getRegistrationBeginAsUnixTimestamp()
+		);
+	}
+
+	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithRegistrationBegin_ReturnsRegistrationBeginAsUnixTimestamp() {
+		$this->fixture->setRegistrationBeginDate(42);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getRegistrationBeginAsUnixTimestamp()
+		);
+	}
+
+	public function test_getRegistrationBegin_ForEventWithoutRegistrationBegin_ReturnsEmptyString() {
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+
+		$this->fixture->setRegistrationBeginDate(0);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getRegistrationBegin()
+		);
+	}
+
+	public function test_getRegistrationBegin_ForEventWithRegistrationBegin_ReturnsFormattedRegistrationBegin() {
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+
+		$this->fixture->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME']);
+
+		$this->assertEquals(
+			strftime('%d.%m.%Y %H:%M', $GLOBALS['SIM_EXEC_TIME']),
+			$this->fixture->getRegistrationBegin()
+		);
+	}
 }
 ?>

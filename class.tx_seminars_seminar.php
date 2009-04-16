@@ -4476,6 +4476,51 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$this->getRecordPropertyInteger('expiry')
 		);
 	}
+
+	/**
+	 * Checks whether this event has a begin date for the registration.
+	 *
+	 * @return boolean true if this event has a begin date for the registration,
+	 *                 false otherwise
+	 */
+	public function hasRegistrationBegin() {
+		return $this->hasRecordPropertyInteger('begin_date_registration');
+	}
+
+	/**
+	 * Returns the begin date for the registration of this event as UNIX
+	 * time-stamp.
+	 *
+	 * @return integer the begin date for the registration of this event as UNIX
+	 *                 time-stamp, will be 0 if no begin date for the
+	 *                 registration is set
+	 */
+	public function getRegistrationBeginAsUnixTimestamp() {
+		return $this->getRecordPropertyInteger('begin_date_registration');
+	}
+
+	/**
+	 * Returns the begin date for the registration of this event.
+	 * The returned string is formatted using the format configured in
+	 * dateFormatYMD and timeFormat.
+	 *
+	 * This function will return an empty string if this event does not have a
+	 * registration begin date.
+	 *
+	 * @return string the date and time of the registration begin date, will be
+	 *                an empty string if this event registration begin date
+	 */
+	public function getRegistrationBegin() {
+		if (!$this->hasRegistrationBegin()) {
+			return '';
+		}
+
+		return strftime(
+			$this->getConfValueString('dateFormatYMD') . ' '
+				. $this->getConfValueString('timeFormat'),
+			$this->getRecordPropertyInteger('begin_date_registration')
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

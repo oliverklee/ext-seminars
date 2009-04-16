@@ -551,5 +551,17 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 		$this->setNeedsRegistration(true);
 		$this->setAttendancesMax(0);
 	}
+
+	/**
+	 * Sets the registration begin date.
+	 *
+	 * @param integer the registration begin date as time-stamp, set to 0 to
+	 *                unset the registration begin date
+	 */
+	public function setRegistrationBeginDate($registrationBeginDate) {
+		$this->setRecordPropertyInteger(
+			'begin_date_registration', $registrationBeginDate
+		);
+	}
 }
 ?>
