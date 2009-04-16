@@ -1470,6 +1470,39 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Returns our method of payment UID.
+	 *
+	 * @return integer our method of payment UID, will be >= 0, will be 0 if
+	 *                 this registration has no method of payment
+	 */
+	public function getMethodOfPaymentUid() {
+		return $this->getRecordPropertyInteger('method_of_payment');
+	}
+
+	/**
+	 * Sets our method of payment UID.
+	 *
+	 * @param integer our method of payment UID, must be >= 0
+	 */
+	public function setMethodOfPaymentUid($uid) {
+		if ($uid < 0) {
+			throw new Exception('The parameter $uid must be >= 0.');
+		}
+
+		$this->setRecordPropertyInteger('method_of_payment', $uid);
+	}
+
+	/**
+	 * Returns whether this registration has a method of payment.
+	 *
+	 * @return boolean true if this event has a method of payment, false
+	 *                 otherwise
+	 */
+	public function hasMethodOfPayment() {
+		return $this->hasRecordPropertyInteger('method_of_payment');
+	}
+
+	/**
 	 * Builds the e-mail body for an e-mail to the attendee.
 	 *
 	 * @param tslib_pibase a live plugin
@@ -1605,11 +1638,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// We don't need to check $this->seminar->hasPaymentMethods() here as
 		// method_of_payment can only be set (using the registration form) if
 		// the event has at least one payment method.
-		if ($this->hasRecordPropertyInteger('method_of_payment')) {
+		if ($this->hasMethodOfPayment()) {
 			$this->setMarker(
 				'paymentmethod',
 				$event->getSinglePaymentMethodPlain(
-					$this->getRecordPropertyInteger('method_of_payment')
+					$this->getMethodOfPaymentUid()
 				)
 			);
 		} else {

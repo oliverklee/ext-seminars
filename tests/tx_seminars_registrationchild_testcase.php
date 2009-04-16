@@ -1828,5 +1828,75 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasTotalPrice()
 		);
 	}
+
+
+	///////////////////////////////////////////
+	// Tests regarding the method of payment.
+	///////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getMethodOfPaymentUidWithoutMethodOfPaymentReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getMethodOfPaymentUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setMethodOfPaymentUidWithNegativeUidThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $uid must be >= 0.'
+		);
+
+		$this->fixture->setMethodOfPaymentUid(-1);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setMethodOfPaymentUidWithZeroUidSetsMethodOfPaymentUid() {
+		$this->fixture->setMethodOfPaymentUid(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getMethodOfPaymentUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setMethodOfPaymentUidWithPositiveUidSetsMethodOfPaymentUid() {
+		$this->fixture->setMethodOfPaymentUid(42);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getMethodOfPaymentUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasMethodOfPaymentWithoutMethodOfPaymentReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasMethodOfPayment()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasMethodOfPaymentWithMethodOfPaymentReturnsTrue() {
+		$this->fixture->setMethodOfPaymentUid(42);
+
+		$this->assertTrue(
+			$this->fixture->hasMethodOfPayment()
+		);
+	}
 }
 ?>
