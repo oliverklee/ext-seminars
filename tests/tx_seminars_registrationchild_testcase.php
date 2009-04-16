@@ -97,6 +97,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
+		$this->fixture->setConfigurationValue('decimalDigits', 2);
+		$this->fixture->setConfigurationValue('decimalSplitChar', '.');
+		$this->fixture->setConfigurationValue('thousandsSplitChar', '');
 	}
 
 	public function tearDown() {
@@ -1729,6 +1732,100 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->hasKids()
+		);
+	}
+
+
+	///////////////////////////////
+	// Tests regarding the price.
+	///////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getPriceWithoutPriceReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setPriceWithPriceSetsPrice() {
+		$this->fixture->setPrice('Regular price: 42.42');
+
+		$this->assertEquals(
+			'Regular price: 42.42',
+			$this->fixture->getPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasPriceWithoutPriceReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasPriceWithPriceReturnsTrue() {
+		$this->fixture->setPrice('Regular price: 42.42');
+
+		$this->assertTrue(
+			$this->fixture->hasPrice()
+		);
+	}
+
+
+	/////////////////////////////////////
+	// Tests regarding the total price.
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getTotalPriceWithoutTotalPriceReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getTotalPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTotalPriceWithTotalPriceSetsTotalPrice() {
+		$this->fixture->setTotalPrice('42.42');
+
+		$this->assertEquals(
+			'42.42&nbsp;',
+			$this->fixture->getTotalPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTotalPriceWithoutTotalPriceReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasTotalPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTotalPriceWithTotalPriceReturnsTrue() {
+		$this->fixture->setTotalPrice('42.42');
+
+		$this->assertTrue(
+			$this->fixture->hasTotalPrice()
 		);
 	}
 }

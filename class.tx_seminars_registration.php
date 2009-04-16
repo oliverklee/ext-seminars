@@ -708,6 +708,25 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
+	 * Sets our price category name and its single price.
+	 *
+	 * @param string the price category name and its single price, may be empty
+	 */
+	public function setPrice($price) {
+		$this->setRecordPropertyString('price', $price);
+	}
+
+	/**
+	 * Returns whether this registration has a saved price category name and
+	 * its single price.
+	 *
+	 * @return boolean true if this registration has a price, false otherwise
+	 */
+	public function hasPrice() {
+		return $this->hasRecordPropertyString('price');
+	}
+
+	/**
 	 * Gets the saved total price and the currency.
 	 * An empty string will be returned if no total price could be calculated.
 	 *
@@ -726,6 +745,25 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Sets our total price.
+	 *
+	 * @param string the total price, may be empty
+	 */
+	public function setTotalPrice($price) {
+		$this->setRecordPropertyString('total_price', $price);
+	}
+
+	/**
+	 * Returns whether this registration has a total price.
+	 *
+	 * @return boolean true if this registration has a total price, false
+	 *                 otherwise
+	 */
+	public function hasTotalPrice() {
+		return $this->hasRecordPropertyDecimal('total_price');
 	}
 
 	/**
@@ -1552,13 +1590,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->hideSubparts('room', $wrapperPrefix);
 		}
 
-		if ($this->hasRecordPropertyString('price')) {
+		if ($this->hasPrice()) {
 			$this->setMarker('price', $this->getPrice());
 		} else {
 			$this->hideSubparts('price', $wrapperPrefix);
 		}
 
-		if ($this->hasRecordPropertyDecimal('total_price')) {
+		if ($this->hasTotalPrice()) {
 			$this->setMarker('total_price', $this->getTotalPrice(' '));
 		} else {
 			$this->hideSubparts('total_price', $wrapperPrefix);
