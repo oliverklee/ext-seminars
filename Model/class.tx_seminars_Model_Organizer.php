@@ -165,6 +165,25 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	public function hasAttendancesPID() {
 		return $this->hasInteger('attendances_pid');
 	}
+
+	/**
+	 * Checks whether this organizer has a description.
+	 *
+	 * @return boolean true if this organizer has a description, false otherwise
+	 */
+	public function hasDescription() {
+		return $this->hasString('description');
+	}
+
+	/**
+	 * Returns the description of the organizer.
+	 *
+	 * @return string the description of the organizer in raw format, will be
+	 *                empty if organizer has no description
+	 */
+	public function getDescription() {
+		return $this->getAsString('description');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_Organizer.php']) {

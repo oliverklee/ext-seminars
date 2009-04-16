@@ -436,6 +436,7 @@ CREATE TABLE tx_seminars_organizers (
 	email tinytext,
 	email_footer text,
 	attendances_pid int(11) unsigned DEFAULT '0' NOT NULL,
+	description text,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

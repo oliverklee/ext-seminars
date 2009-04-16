@@ -96,6 +96,25 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb implements tx_oelib
 	public function getAttendancesPid() {
 		return $this->getRecordPropertyInteger('attendances_pid');
 	}
+
+	/**
+	 * Checks whether this organizer has a description.
+	 *
+	 * @return boolean true if this organizer has a description, false otherwise
+	 */
+	public function hasDescription() {
+		return $this->hasRecordPropertyString('description');
+	}
+
+	/**
+	 * Returns the description of the organizer.
+	 *
+	 * @return string the description of the organizer in raw format, will be
+	 *                empty if organizer has no description
+	 */
+	public function getDescription() {
+		return $this->getRecordPropertyString('description');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizer.php']) {

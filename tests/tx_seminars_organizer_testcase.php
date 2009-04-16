@@ -59,7 +59,8 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 				'homepage' => 'http://www.test.com/',
 				'email' => 'maximal-foo@test.com',
 				'email_footer' => 'line 1'.LF.'line 2',
-				'attendances_pid' => 99
+				'attendances_pid' => 99,
+				'description' => 'foo',
 			)
 		);
 		$this->maximalFixture = new tx_seminars_organizer($maximalFixtureUid);
@@ -153,6 +154,37 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			99,
 			$this->maximalFixture->getAttendancesPid()
+		);
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning the description
+	/////////////////////////////////////
+
+	public function test_hasDescription_ForOrganizerWithoutDescription_ReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	public function test_hasDescription_ForOrganizerWithDescription_ReturnsTrue() {
+		$this->assertTrue(
+			$this->maximalFixture->hasDescription()
+		);
+	}
+
+	public function test_getDescription_ForOrganizerWithoutDescription_ReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getDescription()
+		);
+	}
+
+	public function test_getDescription_ForOrganizerWithDescription_ReturnsDescription() {
+		$this->assertEquals(
+			'foo',
+			$this->maximalFixture->getDescription()
 		);
 	}
 }

@@ -336,5 +336,44 @@ class tx_seminars_Model_Organizer_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasAttendancesPID()
 		);
 	}
+
+
+	/////////////////////////////////////
+	// Tests concerning the description
+	/////////////////////////////////////
+
+	public function test_hasDescription_ForOrganizerWithoutDescription_ReturnsFalse() {
+		$this->fixture->setData(array('description' => ''));
+
+		$this->assertFalse(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	public function test_hasDescription_ForOrganizerWithDescription_ReturnsTrue() {
+		$this->fixture->setData(array('description' => 'foo'));
+
+		$this->assertTrue(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	public function test_getDescription_ForOrganizerWithoutDescription_ReturnsEmptyString() {
+		$this->fixture->setData(array('description' => ''));
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getDescription()
+		);
+	}
+
+	public function test_getDescription_ForOrganizerWithDescription_ReturnsDescription() {
+		$this->fixture->setData(array('description' => 'foo'));
+
+		$this->assertEquals(
+			'foo',
+			$this->fixture->getDescription()
+		);
+	}
 }
 ?>

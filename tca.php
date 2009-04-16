@@ -1765,6 +1765,15 @@ $TCA['tx_seminars_organizers'] = array(
 				'eval' => 'required,trim',
 			),
 		),
+		'description' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_organizers.description',
+			'config' => array(
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5',
+			),
+		),
 		'homepage' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_organizers.homepage',
@@ -1819,7 +1828,7 @@ $TCA['tx_seminars_organizers'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, homepage;;;;3-3-3, email, email_footer, attendances_pid'),
+		'0' => array('showitem' => 'title;;;;2-2-2, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], homepage;;;;3-3-3, email, email_footer, attendances_pid'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

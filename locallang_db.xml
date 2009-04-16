@@ -156,6 +156,7 @@
 			<label index="tx_seminars_sites.notes">Internal Notes:</label>
 			<label index="tx_seminars_organizers">Organizers</label>
 			<label index="tx_seminars_organizers.title">Name:</label>
+			<label index="tx_seminars_organizers.description">Description:</label>
 			<label index="tx_seminars_organizers.homepage">Homepage:</label>
 			<label index="tx_seminars_organizers.email">E-mail address:</label>
 			<label index="tx_seminars_organizers.email_footer">Footer text for confirmation e-mails:</label>
@@ -344,6 +345,7 @@
 			<label index="tx_seminars_sites.notes">Interne Notizen:</label>
 			<label index="tx_seminars_organizers">Veranstalter</label>
 			<label index="tx_seminars_organizers.title">Name:</label>
+			<label index="tx_seminars_organizers.description">Beschreibung:</label>
 			<label index="tx_seminars_organizers.homepage">Homepage:</label>
 			<label index="tx_seminars_organizers.email">E-Mail-Adresse:</label>
 			<label index="tx_seminars_organizers.email_footer">Text, der an Bestätigungsmails angehängt wird:</label>
@@ -1285,6 +1287,7 @@
 			<label index="tx_seminars_sites.notes" type="integer">121419833</label>
 			<label index="tx_seminars_organizers" type="integer">68798680</label>
 			<label index="tx_seminars_organizers.title" type="integer">81871034</label>
+			<label index="tx_seminars_organizers.description" type="integer">218120871</label>
 			<label index="tx_seminars_organizers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_organizers.email" type="integer">126760538</label>
 			<label index="tx_seminars_organizers.email_footer" type="integer">182634979</label>
@@ -2223,6 +2226,7 @@
 			<label index="tx_seminars_sites.notes">Internal Notes:</label>
 			<label index="tx_seminars_organizers">Organizers</label>
 			<label index="tx_seminars_organizers.title">Name:</label>
+			<label index="tx_seminars_organizers.description">Description:</label>
 			<label index="tx_seminars_organizers.homepage">Homepage:</label>
 			<label index="tx_seminars_organizers.email">E-mail address:</label>
 			<label index="tx_seminars_organizers.email_footer">Footer text for confirmation e-mails:</label>
