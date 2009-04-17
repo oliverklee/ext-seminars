@@ -49,8 +49,31 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 */
 	public $extKey = 'seminars';
 
-	/** the data of the current registration (tx_seminars_registration) */
+	/**
+	 * @var tx_seminars_registration the current registration
+	 */
 	private $registration = null;
+
+	/**
+	 * @var boolean whether we have already initialized the templates
+	 *              (which is done lazily)
+	 */
+	private $isTemplateInitialized = false;
+
+	/**
+	 * @var integer use text format for e-mails to attendees
+	 */
+	const SEND_TEXT_MAIL = 0;
+
+	/**
+	 * @var integer use HTML format for e-mails to attendees
+	 */
+	const SEND_HTML_MAIL = 1;
+
+	/**
+	 * @var integer use user-specific format for e-mails to attendees
+	 */
+	const SEND_USER_MAIL = 2;
 
 	/**
 	 * The constructor.
@@ -509,20 +532,22 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$seminar->calculateStatistics();
 
 		if ($this->registration->isOnRegistrationQueue()) {
-			$this->registration->notifyAttendee(
+			$this->notifyAttendee(
+				$this->registration,
 				$plugin,
 				'confirmationOnRegistrationForQueue'
 			);
-			$this->registration->notifyOrganizers(
+			$this->notifyOrganizers(
+				$this->registration,
 				'notificationOnRegistrationForQueue'
 			);
 		} else {
-			$this->registration->notifyAttendee($plugin, 'confirmation');
-			$this->registration->notifyOrganizers('notification');
+			$this->notifyAttendee($this->registration, $plugin, 'confirmation');
+			$this->notifyOrganizers($this->registration, 'notification');
 		}
 
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
-			$this->registration->sendAdditionalNotification();
+			$this->registration->sendAdditionalNotification($this->registration);
 		}
 	}
 
@@ -565,11 +590,13 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 						)
 					);
 
-					$this->registration->notifyAttendee(
+					$this->notifyAttendee(
+						$this->registration,
 						$plugin,
 						'confirmationOnUnregistration'
 					);
-					$this->registration->notifyOrganizers(
+					$this->notifyOrganizers(
+						$this->registration,
 						'notificationOnUnregistration'
 					);
 
@@ -617,18 +644,21 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 					);
 					$vacancies -= $registration->getSeats();
 
-					$registration->notifyAttendee(
+					$this->notifyAttendee(
+						$registration,
 						$plugin,
 						'confirmationOnQueueUpdate'
 					);
-					$registration->notifyOrganizers('notificationOnQueueUpdate');
+					$this->notifyOrganizers(
+						$registration, 'notificationOnQueueUpdate'
+					);
 
 					if (
 						$this->getConfValueBoolean(
 							'sendAdditionalNotificationEmails'
 						)
 					) {
-						$registration->sendAdditionalNotification();
+						$this->sendAdditionalNotification($registration);
 					}
 				}
 			}
@@ -674,6 +704,478 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$builder->limitToTopicsWithoutRegistrationByUser($this->getFeUserUid());
 
 		return $builder->build();
+	}
+
+	/**
+	 * Sends an e-mail to the attendee with a message concerning his/her
+	 * registration or unregistration.
+	 *
+	 * @param tx_seminars_registration the registration for which the
+	 *                                 notification should be send
+	 * @param tslib_pibase a live page
+	 * @param string prefix for the locallang key of the localized hello
+	 *               and subject string, allowed values are:
+	 *               - confirmation
+	 *               - confirmationOnUnregistration
+	 *               - confirmationOnRegistrationForQueue
+	 *               - confirmationOnQueueUpdate
+	 *               In the following the parameter is prefixed with
+	 *               "email_" and postfixed with "Hello" or "Subject".
+	 */
+	public function notifyAttendee(
+		tx_seminars_registration $registration,
+		tslib_pibase $plugin, $helloSubjectPrefix = 'confirmation'
+	) {
+		if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
+			return;
+		}
+
+		$event = $registration->getSeminarObject();
+		if (!$event->hasOrganizers()) {
+			return;
+		}
+
+		if (!$registration->hasExistingFrontEndUser()) {
+			return;
+		}
+
+		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMailNotification->addRecipient($registration->getFrontEndUser());
+		$eMailNotification->setSender($event->getOrganizerBag()->current());
+		$eMailNotification->setSubject(
+			$this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' .
+				$event->getTitleAndDate('-')
+		);
+
+		$this->initializeTemplate();
+
+		$mailFormat = tx_oelib_configurationProxy::getInstance('seminars')
+			->getConfigurationValueInteger('eMailFormatForAttendees');
+		if (($mailFormat == self::SEND_HTML_MAIL)
+			|| (($mailFormat == self::SEND_USER_MAIL)
+				&& $registration->getFrontEndUser()->wantsHtmlEMail())
+		) {
+			$eMailNotification->setCssFile(
+				$this->getConfValueString('cssFileForAttendeeMail')
+			);
+			$eMailNotification->setHTMLMessage(
+				$this->buildEmailContent(
+					$registration, $plugin, $helloSubjectPrefix, true
+				)
+			);
+		}
+
+		$eMailNotification->setMessage(
+			$this->buildEmailContent($registration, $plugin, $helloSubjectPrefix)
+		);
+
+		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
+			$eMailNotification
+		);
+
+		$eMailNotification->__destruct();
+	}
+
+	/**
+	 * Sends an e-mail to all organizers with a message about a registration or
+	 * unregistration.
+	 *
+	 * @param tx_seminars_registration the registration for which the
+	 *                                 notification should be send
+	 * @param string prefix for the locallang key of the localized hello
+	 *               and subject string, allowed values are:
+	 *               - notification
+	 *               - notificationOnUnregistration
+	 *               - notificationOnRegistrationForQueue
+	 *               - notificationOnQueueUpdate
+	 *               In the following the parameter is prefixed with
+	 *               "email_" and postfixed with "Hello" or "Subject".
+	 */
+	public function notifyOrganizers(
+		tx_seminars_registration $registration,
+		$helloSubjectPrefix = 'notification'
+	) {
+		if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
+			return;
+		}
+
+		$event = $registration->getSeminarObject();
+		if (!$event->hasOrganizers()) {
+			return;
+		}
+
+		if (!$registration->hasExistingFrontEndUser()) {
+			return;
+		}
+
+		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMailNotification->setSender($registration->getFrontEndUser());
+
+		foreach ($event->getOrganizerBag() as $organizer) {
+			$eMailNotification->addRecipient($organizer);
+		}
+
+		$eMailNotification->setSubject(
+			$this->translate('email_' . $helloSubjectPrefix . 'Subject') .
+				': ' . $registration->getTitle()
+		);
+
+		$this->initializeTemplate();
+		$this->hideSubparts(
+			$this->getConfValueString('hideFieldsInNotificationMail'),
+			'field_wrapper'
+		);
+
+		$this->setMarker(
+			'hello',
+			$this->translate('email_' . $helloSubjectPrefix . 'Hello')
+		);
+		$this->setMarker('summary', $registration->getTitle());
+
+		if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
+			$this->setMarker(
+				'seminardata',
+				$event->dumpSeminarValues(
+					$this->getConfValueString(
+						'showSeminarFieldsInNotificationMail'
+					)
+				)
+			);
+		} else {
+			$this->hideSubparts('seminardata', 'field_wrapper');
+		}
+
+		if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
+			$this->setMarker(
+				'feuserdata',
+				$registration->dumpUserValues(
+					$this->getConfValueString('showFeUserFieldsInNotificationMail')
+				)
+			);
+		} else {
+			$this->hideSubparts('feuserdata', 'field_wrapper');
+		}
+
+		if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
+			$this->setMarker(
+				'attendancedata',
+				$registration->dumpAttendanceValues(
+					$this->getConfValueString(
+						'showAttendanceFieldsInNotificationMail'
+					)
+				)
+			);
+		} else {
+			$this->hideSubparts('attendancedata', 'field_wrapper');
+		}
+
+		$eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
+
+		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
+			$eMailNotification
+		);
+
+		$eMailNotification->__destruct();
+	}
+
+	/**
+	 * Checks if additional notifications to the organizers are necessary.
+	 * In that case, the notification e-mails will be sent to all organizers.
+	 *
+	 * Additional notifications mails will be sent out upon the following events:
+	 * - an event now has enough registrations
+	 * - an event is fully booked
+	 * If both things happen at the same time (minimum and maximum count of
+	 * attendees are the same), only the "event is full" message will be sent.
+	 *
+	 * @param tx_seminars_registration the registration for which the
+	 *                                 notification should be send
+	 */
+	public function sendAdditionalNotification(
+		tx_seminars_registration $registration
+	) {
+		if ($registration->isOnRegistrationQueue()) {
+			return;
+		}
+
+		$emailReason = $this->getReasonForNotification($registration);
+		if ($emailReason == '') {
+			return;
+		}
+
+		$event = $registration->getSeminarObject();
+		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+
+		$eMail->setSender($event->getOrganizerBag()->current());
+		$eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
+		$eMail->setSubject(sprintf(
+			$this->translate(
+				'email_additionalNotification' . $emailReason . 'Subject'
+			),
+			$event->getUid(),
+			$event->getTitleAndDate('-')
+		));
+
+		foreach ($event->getOrganizerBag() as $organizer) {
+			$eMail->addRecipient($organizer);
+		}
+
+		tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
+
+		$eMail->__destruct();
+	}
+
+	/**
+	 * Returns the topic for the additional notification e-mail.
+	 *
+	 * @param tx_seminars_registration the registration for which the
+	 *                                 notification should be send
+	 *
+	 * @return string "EnoughRegistrations" if the event has enough attendances,
+	 *                "IsFull" if the event is fully booked, otherwise an empty
+	 *                string
+	 */
+	private function getReasonForNotification(tx_seminars_registration $registration) {
+		$result = '';
+
+		$event = $registration->getSeminarObject();
+		if ($event->isFull()) {
+			$result = 'IsFull';
+		// Using "==" instead of ">=" ensures that only one set of e-mails is
+		// sent to the organizers.
+		// This also ensures that no e-mail is send when minAttendances is 0
+		// since this function is only called when at least one registration
+		// is present.
+		} elseif ($event->getAttendances() == $event->getAttendancesMin()) {
+			$result = 'EnoughRegistrations';
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Returns the message for an e-mail according to the reason
+	 * $reasonForNotification provided.
+	 *
+	 * @param tx_seminars_registration the registration for which the
+	 *                                 notification should be send
+	 * @param string reason for the notification, must be either "IsFull" or
+	 *               "EnoughRegistrations", must not be empty
+	 */
+	private function getMessageForNotification(
+		tx_seminars_registration $registration, $reasonForNotification
+	) {
+		$localllangKey = 'email_additionalNotification' . $reasonForNotification;
+		$this->initializeTemplate();
+
+		$this->setMarker('message', $this->translate($localllangKey));
+		$showSeminarFields = $this->getConfValueString(
+			'showSeminarFieldsInNotificationMail'
+		);
+		if ($showSeminarFields != '') {
+			$this->setMarker(
+				'seminardata',
+				$registration->getSeminarObject()->dumpSeminarValues(
+					$showSeminarFields
+				)
+			);
+		} else {
+			$this->hideSubparts('seminardata', 'field_wrapper');
+		}
+
+		return $this->getSubpart('MAIL_ADDITIONALNOTIFICATION');
+	}
+
+	/**
+	 * Reads and initializes the templates.
+	 * If this has already been called for this instance, this function does
+	 * nothing.
+	 *
+	 * This function will read the template file as it is set in the TypoScript
+	 * setup. If there is a template file set in the flexform of pi1, this will
+	 * be ignored!
+	 */
+	private function initializeTemplate() {
+		if (!$this->isTemplateInitialized) {
+			$this->getTemplateCode(true);
+			$this->setLabels();
+
+			$this->isTemplateInitialized = true;
+		}
+	}
+
+	/**
+	 * Builds the e-mail body for an e-mail to the attendee.
+	 *
+	 * @param tx_seminars_registration the registration for which the
+	 *                                 notification should be send
+	 * @param tslib_pibase a live plugin
+	 * @param string prefix for the locallang key of the localized hello
+	 *               and subject string, allowed values are:
+	 *               - confirmation
+	 *               - confirmationOnUnregistration
+	 *               - confirmationOnRegistrationForQueue
+	 *               - confirmationOnQueueUpdate
+	 *               In the following the parameter is prefixed with
+	 *               "email_" and postfixed with "Hello" or "Subject".
+	 * @param boolean whether to create a HTML body for the e-mail or just the
+	 *                plain text version
+	 *
+	 * @return string the e-mail body for the attendee e-mail, will not be empty
+	 */
+	private function buildEmailContent(
+		tx_seminars_registration $registration,
+		tslib_pibase $plugin, $helloSubjectPrefix , $useHtml = false
+	) {
+		$wrapperPrefix = (($useHtml) ? 'html_' : '') . 'field_wrapper';
+
+		$this->setMarker('html_mail_charset', (
+			$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				: 'ISO-8859-1'
+			)
+		);
+		$this->hideSubparts(
+			$this->getConfValueString('hideFieldsInThankYouMail'),
+			$wrapperPrefix
+		);
+
+		$hello = sprintf(
+			$this->translate('email_' . $helloSubjectPrefix . 'Hello'),
+			$registration->getUserName()
+		);
+		$this->setMarker('hello', (($useHtml) ? nl2br($hello) : $hello));
+		$event = $registration->getSeminarObject();
+		if ($event->hasEventType()) {
+			$this->setMarker('event_type', $event->getEventType());
+		} else {
+			$this->hideSubparts('event_type', $wrapperPrefix);
+		}
+		$this->setMarker('title', $event->getTitle());
+		$this->setMarker('uid', $event->getUid());
+
+		$this->setMarker('registration_uid', $registration->getUid());
+
+		if ($registration->hasSeats()) {
+			$this->setMarker('seats', $registration->getSeats());
+		} else {
+			$this->hideSubparts('seats', $wrapperPrefix);
+		}
+
+		if ($registration->hasAttendeesNames()) {
+			$this->setMarker('attendees_names', $registration->getAttendeesNames());
+		} else {
+			$this->hideSubparts('attendees_names', $wrapperPrefix);
+		}
+
+		if ($registration->hasLodgings()) {
+			$this->setMarker('lodgings', $registration->getLodgings());
+		} else {
+			$this->hideSubparts('lodgings', $wrapperPrefix);
+		}
+
+		if ($registration->hasFoods()) {
+			$this->setMarker('foods', $registration->getFoods());
+		} else {
+			$this->hideSubparts('foods', $wrapperPrefix);
+		}
+
+		if ($registration->hasCheckboxes()) {
+			$this->setMarker('checkboxes', $registration->getCheckboxes());
+		} else {
+			$this->hideSubparts('checkboxes', $wrapperPrefix);
+		}
+
+		if ($registration->hasKids()) {
+			$this->setMarker('kids', $registration->getNumberOfKids());
+		} else {
+			$this->hideSubparts('kids', $wrapperPrefix);
+		}
+
+		if ($event->hasAccreditationNumber()) {
+			$this->setMarker(
+				'accreditation_number',
+				$event->getAccreditationNumber()
+			);
+		} else {
+			$this->hideSubparts('accreditation_number', $wrapperPrefix);
+		}
+
+		if ($event->hasCreditPoints()) {
+			$this->setMarker(
+				'credit_points',
+				$event->getCreditPoints()
+			);
+		} else {
+			$this->hideSubparts('credit_points', $wrapperPrefix);
+		}
+
+		$this->setMarker('date',
+			$event->getDate(
+				(($useHtml) ? '&#8212;' : '-')
+			)
+		);
+		$this->setMarker('time',
+			$event->getTime(
+				(($useHtml) ? '&#8212;' : '-')
+			)
+		);
+		$this->setMarker('place', $event->getPlaceShort());
+
+		if ($event->hasRoom()) {
+			$this->setMarker('room', $event->getRoom());
+		} else {
+			$this->hideSubparts('room', $wrapperPrefix);
+		}
+
+		if ($registration->hasPrice()) {
+			$this->setMarker('price', $registration->getPrice());
+		} else {
+			$this->hideSubparts('price', $wrapperPrefix);
+		}
+
+		if ($registration->hasTotalPrice()) {
+			$this->setMarker('total_price', $registration->getTotalPrice(' '));
+		} else {
+			$this->hideSubparts('total_price', $wrapperPrefix);
+		}
+
+		// We don't need to check $this->seminar->hasPaymentMethods() here as
+		// method_of_payment can only be set (using the registration form) if
+		// the event has at least one payment method.
+		if ($registration->hasMethodOfPayment()) {
+			$this->setMarker(
+				'paymentmethod',
+				$event->getSinglePaymentMethodPlain(
+					$registration->getMethodOfPaymentUid()
+				)
+			);
+		} else {
+			$this->hideSubparts('paymentmethod', $wrapperPrefix);
+		}
+
+		$this->setMarker('billing_address', $registration->getBillingAddress());
+
+		$this->setMarker(
+			'url',
+			(($useHtml)
+				? htmlspecialchars($event->getDetailedViewUrl($plugin))
+				: $event->getDetailedViewUrl($plugin)
+			)
+		);
+
+		if ($event->isPlanned()) {
+			$this->unhideSubparts('planned_disclaimer', $wrapperPrefix);
+		} else {
+			$this->hideSubparts('planned_disclaimer', $wrapperPrefix);
+		}
+
+		$footers = $event->getOrganizersFooter();
+		$this->setMarker('footer', $footers[0]);
+
+		return $this->getSubpart(
+			(($useHtml) ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU')
+		);
 	}
 
 	/**

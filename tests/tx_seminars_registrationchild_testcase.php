@@ -50,7 +50,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	private $registrationUid;
 
 	public function setUp() {
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		tx_seminars_registrationchild::purgeCachedSeminars();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
@@ -537,93 +536,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////
-	// Tests regarding the notification of organizers
-	///////////////////////////////////////////////////
-
-	public function testNotifyOrganizersWithSetReferrerContainsReferrer() {
-		$this->fixture->setReferrer('test referrer');
-		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue(
-			'showAttendanceFieldsInNotificationMail', 'referrer'
-		);
-
-		$this->fixture->notifyOrganizers();
-
-		$this->assertContains(
-			'Referrer: test referrer',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-	public function testNotifyOrganizersIncludesHelloIfNotHidden() {
-		$this->fixture->setReferrer('test referrer');
-		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue(
-			'hideFieldsInNotificationMail', ''
-		);
-
-		$this->fixture->notifyOrganizers();
-		$this->assertContains(
-			'Hello',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-	public function testNotifyOrganizersCanHideHelloByConfiguration() {
-		$this->fixture->setReferrer('test referrer');
-		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue(
-			'hideFieldsInNotificationMail', 'hello'
-		);
-
-		$this->fixture->notifyOrganizers();
-		$this->assertNotContains(
-			'Hello',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-	public function test_NotifyOrganizers_ForEventWithOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
-		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue(
-			'showSeminarFieldsInNotificationMail', 'vacancies'
-		);
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('needs_registration' => 1, 'attendees_max' => 2)
-		);
-		tx_seminars_registrationchild::purgeCachedSeminars();
-
-		$this->fixture->notifyOrganizers();
-
-		$this->assertRegExp(
-			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-	public function test_NotifyOrganizers_ForEventWithUnlimitedVacancies_ShowsVacanciesLabelWithUnlimtedLabel() {
-		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue(
-			'showSeminarFieldsInNotificationMail', 'vacancies'
-		);
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('needs_registration' => 1, 'attendees_max' => 0)
-		);
-		tx_seminars_registrationchild::purgeCachedSeminars();
-
-		$this->fixture->notifyOrganizers();
-
-		$this->assertContains(
-			$this->fixture->translate('label_vacancies') . ': ' .
-				$this->fixture->translate('label_unlimited'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-
 	////////////////////////////////////////////////
 	// Tests for setting and getting the user data
 	////////////////////////////////////////////////
@@ -806,566 +718,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->isPaid()
-		);
-	}
-
-
-	////////////////////////////////////////////////
-	// Tests concerning sendAdditionalNotification
-	////////////////////////////////////////////////
-
-	public function testSendAdditionalNotificationCanSendEmailToOneOrganizer() {
-		$this->fixture->sendAdditionalNotification();
-
-		$this->assertContains(
-			'mail@example.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastRecipient()
-		);
-	}
-
-	public function testSendAdditionalNotificationCanSendEmailsToTwoOrganizers() {
-		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
-			array(
-				'title' => 'test organizer 2',
-				'email' => 'mail2@example.com',
-			)
-		);
-		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			$organizerUid, 'organizers'
-		);
-
-		$this->fixture->sendAdditionalNotification();
-
-		$this->assertEquals(
-			2,
-			count(
-				tx_oelib_mailerFactory::getInstance()
-					->getMailer()->getAllEmail()
-			)
-		);
-	}
-
-	public function testSendAdditionalNotificationUsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers() {
-		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
-			array(
-				'title' => 'test organizer 2',
-				'email' => 'mail2@example.com',
-			)
-		);
-		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			$organizerUid, 'organizers'
-		);
-
-		$this->fixture->sendAdditionalNotification();
-
-		$sentEmails = tx_oelib_mailerFactory::getInstance()
-			->getMailer()->getAllEmail();
-
-		$this->assertContains(
-			'mail@example.com',
-			$sentEmails[0]['headers']
-		);
-		$this->assertContains(
-			'mail@example.com',
-			$sentEmails[1]['headers']
-		);
-	}
-
-	public function testSendAdditionalNotificationForEventWithEnoughAttendancesSendsEnoughAttendancesMail() {
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('attendees_min' => 1, 'attendees_max' => 42)
-		);
-
-		tx_seminars_registrationchild::purgeCachedSeminars();
-		$fixture = new tx_seminars_registrationchild($this->registrationUid);
-		$fixture->setConfigurationValue(
-			'templateFile',
-			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-		);
-
-		$fixture->sendAdditionalNotification();
-		$fixture->__destruct();
-
-		$this->assertContains(
-			sprintf(
-				$this->fixture->translate(
-					'email_additionalNotificationEnoughRegistrationsSubject'
-				),
-				$this->seminarUid,
-				''
-			),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
-		);
-	}
-
-	public function test_SendAdditionalNotification_ForEventWithZeroAttendeesMin_DoesNotSendAnyMail() {
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('attendees_min' => 0, 'attendees_max' => 42)
-		);
-
-		tx_seminars_registrationchild::purgeCachedSeminars();
-		$fixture = new tx_seminars_registrationchild($this->registrationUid);
-		$fixture->setConfigurationValue(
-			'templateFile',
-			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-		);
-
-		$fixture->sendAdditionalNotification();
-		$fixture->__destruct();
-
-		$this->assertEquals(
-			array(),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
-		);
-	}
-
-	public function testSendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutSubject() {
-		$this->fixture->sendAdditionalNotification();
-
-		$this->assertContains(
-			sprintf(
-				$this->fixture->translate(
-					'email_additionalNotificationIsFullSubject'
-				),
-				$this->seminarUid,
-				''
-			),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
-		);
-	}
-
-	public function testSendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutMessage() {
-		$this->fixture->sendAdditionalNotification();
-
-		$this->assertContains(
-			$this->fixture->translate('email_additionalNotificationIsFull'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-	public function testSendAdditionalNotificationforEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail() {
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('attendees_min' => 5, 'attendees_max' => 5)
-		);
-
-		tx_seminars_registrationchild::purgeCachedSeminars();
-		$fixture = new tx_seminars_registrationchild($this->registrationUid);
-		$fixture->setConfigurationValue(
-			'templateFile',
-			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-		);
-
-		$fixture->sendAdditionalNotification();
-		$fixture->__destruct();
-
-		$this->assertEquals(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getAllEmail())
-		);
-	}
-
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_SendsEmail() {
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array(
-				'attendees_min' => 1,
-				'attendees_max' => 0,
-				'needs_registration' => 1
-			)
-		);
-
-		tx_seminars_registrationchild::purgeCachedSeminars();
-
-		$this->fixture->sendAdditionalNotification();
-
-		$this->assertEquals(
-			1,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getAllEmail())
-		);
-	}
-
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array(
-				'attendees_min' => 1,
-				'attendees_max' => 2,
-				'needs_registration' => 1
-			)
-		);
-		$this->fixture->setConfigurationValue(
-			'showSeminarFieldsInNotificationMail', 'vacancies'
-		);
-
-		tx_seminars_registrationchild::purgeCachedSeminars();
-
-		$this->fixture->sendAdditionalNotification();
-
-		$this->assertRegExp(
-			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_ShowsVacanciesLabelWithUnlimitedLabel() {
-		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array(
-				'attendees_min' => 1,
-				'attendees_max' => 0,
-				'needs_registration' => 1
-			)
-		);
-		$this->fixture->setConfigurationValue(
-			'showSeminarFieldsInNotificationMail', 'vacancies'
-		);
-
-		tx_seminars_registrationchild::purgeCachedSeminars();
-
-		$this->fixture->sendAdditionalNotification();
-
-		$this->assertContains(
-			$this->fixture->translate('label_vacancies') . ': ' .
-				$this->fixture->translate('label_unlimited'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
-
-	////////////////////////////////////
-	// Tests concerning notifyAttendee
-	////////////////////////////////////
-
-	public function testNotifyAttendeeSendsMailToAttendeesMailAdress() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertEquals(
-			'foo@bar.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastRecipient()
-		);
-	}
-
-	public function testNotifyAttendeeMailSubjectContainsConfirmationSubject() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			$this->fixture->translate('email_confirmationSubject'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastSubject()
-		);
-	}
-
-	public function testNotifyAttendeeMailBodyContainsEventTitle() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'foo_event',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function testNotifyAttendeeMailSubjectContainsEventTitle() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'foo_event',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastSubject()
-		);
-	}
-
-	public function testNotifyAttendeeSetsOrganizerAsSender() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'From: "test organizer" <mail@example.com>',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastHeaders()
-		);
-	}
-
-	public function test_NotifyAttendee_ForHtmlMailSet_HasHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registration::SEND_HTML_MAIL
-		);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForTextMailSet_DoesNotHaveHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registration::SEND_TEXT_MAIL
-		);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertNotContains(
-			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToHtmlMails_HasHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registration::SEND_USER_MAIL
-		);
-		$this->fixture->getFrontEndUser()->setData(
-			array(
-				'module_sys_dmail_html' => true,
-				'email' => 'foo@bar.com',
-			)
-		);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToTextMails_DoesNotHaveHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registration::SEND_USER_MAIL
-		);
-		$this->fixture->getFrontEndUser()->setData(
-			array(
-				'module_sys_dmail_html' => false,
-				'email' => 'foo@bar.com',
-			)
-		);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertNotContains(
-			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForHtmlMails_ContainsNameOfUserInBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registration::SEND_HTML_MAIL
-		);
-		$this->fixture->getFrontEndUser()->setData(
-			array(
-				'email' => 'foo@bar.com',
-			)
-		);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'foo_user',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForHtmlMails_HasLinkToSeminarInBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registration::SEND_HTML_MAIL
-		);
-		$this->fixture->getFrontEndUser()->setData(
-			array(
-				'email' => 'foo@bar.com',
-			)
-		);
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$seminarLink
-			= $this->fixture->getSeminarObject()->getDetailedViewUrl($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'<a href=3D"' . $seminarLink,
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForConfirmedEvent_DoesNotHavePlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$this->fixture->getSeminarObject()->setStatus(
-			tx_seminars_seminar::STATUS_CONFIRMED
-		);
-
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertNotContains(
-			$this->fixture->translate('label_planned_disclaimer'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForCancelledEvent_DoesNotHavePlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$this->fixture->getSeminarObject()->setStatus(
-			tx_seminars_seminar::STATUS_CANCELED
-		);
-
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertNotContains(
-			$this->fixture->translate('label_planned_disclaimer'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForPlannedEvent_DisplaysPlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$this->fixture->getSeminarObject()->setStatus(
-			tx_seminars_seminar::STATUS_PLANNED
-		);
-
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			$this->fixture->translate('label_planned_disclaimer'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_hiddenDisclaimerFieldAndPlannedEvent_HidesPlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$this->fixture->setConfigurationValue(
-			'hideFieldsInThankYouMail', 'planned_disclaimer'
-		);
-		$this->fixture->getSeminarObject()->setStatus(
-			tx_seminars_seminar::STATUS_PLANNED
-		);
-
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertNotContains(
-			$this->fixture->translate('label_planned_disclaimer'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-		);
-	}
-
-	public function test_NotifyAttendee_ForHtmlMails_HasCssStylesFromFile() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registration::SEND_HTML_MAIL
-		);
-		$this->fixture->setConfigurationValue(
-			'cssFileForAttendeeMail',
-			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
-		);
-
-		$pi1 = new tx_seminars_pi1();
-		$pi1->init();
-
-		$this->fixture->notifyAttendee($pi1);
-		$pi1->__destruct();
-
-		$this->assertContains(
-			'style=',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
 		);
 	}
 
@@ -1897,6 +1249,164 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$this->fixture->hasMethodOfPayment()
 		);
+	}
+
+
+	/////////////////////////////////////////
+	// Tests regarding the billing address.
+	/////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithGenderMaleContainsLabelForGenderMale() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('gender' => '0')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			$fixture->translate('label_gender.I.0'),
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithGenderFemaleContainsLabelForGenderFemale() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('gender' => '1')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			$fixture->translate('label_gender.I.1'),
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithNameContainsName() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('name' => 'John Doe')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			'John Doe',
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithAddressContainsAddress() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('address' => 'Main Street 123')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			'Main Street 123',
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithZipCodeContainsZipCode() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('zip' => '12345')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			'12345',
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithCityContainsCity() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('city' => 'Big City')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			'Big City',
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithCountryContainsCountry() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('country' => 'Takka-Tukka-Land')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			'Takka-Tukka-Land',
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithTelephoneNumberContainsTelephoneNumber() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('telephone' => '01234-56789')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			'01234-56789',
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getBillingAddressWithEMailAddressContainsEMailAddress() {
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array('email' => 'john@doe.com')
+		);
+		$fixture = new tx_seminars_registrationchild($registrationUid);
+
+		$this->assertContains(
+			'john@doe.com',
+			$fixture->getBillingAddress()
+		);
+
+		$fixture->__destruct();
 	}
 }
 ?>
