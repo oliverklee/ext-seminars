@@ -6166,5 +6166,52 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasDescription()
 		);
 	}
+
+
+	////////////////////////////////////////////////
+	// Tests regarding the additional information.
+	////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalInformationWithoutAdditionalInformationReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAdditionalInformationSetsAdditionalInformation() {
+		$this->fixture->setAdditionalInformation('this is good to know');
+
+		$this->assertEquals(
+			'this is good to know',
+			$this->fixture->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAdditionalInformationWithoutAdditionalInformationReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAdditionalInformationWithAdditionalInformationReturnsTrue() {
+		$this->fixture->setAdditionalInformation('this is good to know');
+
+		$this->assertTrue(
+			$this->fixture->hasAdditionalInformation()
+		);
+	}
 }
 ?>

@@ -322,25 +322,24 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets the additional information, complete as RTE'ed HTML.
-	 *
-	 * @param object the live pibase object
+	 * Gets the additional information.
 	 *
 	 * @return string HTML code of the additional information (or '' if there is
 	 *                an error)
 	 */
-	public function getAdditionalInformation(tslib_pibase $plugin) {
-		return $plugin->pi_RTEcssText($this->getAdditionalInformationRaw());
+	public function getAdditionalInformation() {
+		return $this->getTopicString('additional_information');
 	}
 
 	/**
-	 * Gets the additional information as HTML, not RTE'ed yet.
+	 * Sets our additional information.
 	 *
-	 * @return string HTML code of the additional information (or '' if there is
-	 *                an error)
+	 * @param string our additional information, may be empty
 	 */
-	public function getAdditionalInformationRaw() {
-		return $this->getTopicString('additional_information');
+	public function setAdditionalInformation($additionalInformation) {
+		$this->setRecordPropertyString(
+			'additional_information', $additionalInformation
+		);
 	}
 
 	/**
@@ -3527,7 +3526,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$result = $this->getPriceSpecialBoard(' ');
 				break;
 			case 'additional_information':
-				$result = $this->getAdditionalInformationRaw();
+				$result = $this->getAdditionalInformation();
 				break;
 			case 'payment_methods':
 				$result = $this->getPaymentMethodsPlainShort();
