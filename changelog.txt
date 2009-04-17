@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2760] Change: Replace tx_seminars_seminar::getDescription() with tx_seminars_seminar::getDescriptionRaw()
 - [#1740] Fix: Delete the editorcfg entry from ext_localconf.php plus the related files
 - [#2873] Change: Refactor the registration functions in seminar and registrationManager classes
 - [#2924] Feature: Add an RTE-field description to the seminar organizers

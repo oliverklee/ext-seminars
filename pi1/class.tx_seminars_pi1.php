@@ -820,7 +820,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$this->setMarker('description', $this->seminar->getDescription($this));
+		$this->setMarker(
+			'description',
+			$this->pi_RTEcssText($this->seminar->getDescription())
+		);
 	}
 
 	/**

@@ -295,23 +295,21 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets our description, complete as RTE'ed HTML.
-	 *
-	 * @param object the live pibase object
+	 * Gets our description.
 	 *
 	 * @return string our seminar description (or '' if there is an error)
 	 */
-	public function getDescription(tslib_pibase $plugin) {
-		return $plugin->pi_RTEcssText($this->getDescriptionRaw());
+	public function getDescription() {
+		return $this->getTopicString('description');
 	}
 
 	/**
-	 * Gets our description as HTML, not RTE'ed yet.
+	 * Sets the description of the event.
 	 *
-	 * @return string our seminar description (or '' if there is an error)
+	 * @param string the description for this event, may be empty
 	 */
-	private function getDescriptionRaw() {
-		return $this->getTopicString('description');
+	public function setDescription($description) {
+		$this->setRecordPropertyString('description', $description);
 	}
 
 	/**
@@ -3463,7 +3461,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$result = $this->getTeaser();
 				break;
 			case 'description':
-				$result = $this->getDescriptionRaw();
+				$result = $this->getDescription();
 				break;
 			case 'event_type':
 				$result = $this->getEventType();

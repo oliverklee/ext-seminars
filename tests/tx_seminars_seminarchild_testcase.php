@@ -6119,5 +6119,52 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getRegistrationBegin()
 		);
 	}
+
+
+	/////////////////////////////////////
+	// Tests regarding the description.
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getDescriptionWithoutDescriptionReturnEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setDescriptionSetsDescription() {
+		$this->fixture->setDescription('this is a great event.');
+
+		$this->assertEquals(
+			'this is a great event.',
+			$this->fixture->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDescriptionWithoutDescriptionReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDescriptionWithDescriptionReturnsTrue() {
+		$this->fixture->setDescription('this is a great event.');
+
+		$this->assertTrue(
+			$this->fixture->hasDescription()
+		);
+	}
 }
 ?>

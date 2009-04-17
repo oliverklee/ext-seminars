@@ -511,14 +511,6 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 		return parent::getOrganizersRaw();
 	}
 
-	/**
-	 * Sets the description of the event.
-	 *
-	 * @param string the description for this event, may be empty
-	 */
-	public function setDescription($description) {
-		$this->setRecordPropertyString('description', $description);
-	}
 
 	/**
 	 * Sets whether registration is needed.
