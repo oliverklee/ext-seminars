@@ -675,6 +675,23 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		return $builder->build();
 	}
+
+	/**
+	 * Checks whether the given event allows registration, as far as its date
+	 * is concerned.
+	 *
+	 * @param tx_seminars_seminar the event to check the registration for
+	 *
+	 * @return boolean true if the event allows registration by date, false
+	 *                 otherwise
+	 */
+	public function allowsRegistrationByDate(tx_seminars_seminar $event) {
+		return ($event->hasDate())
+			? !$event->isRegistrationDeadlineOver()
+			: $event->getConfValueBoolean(
+				'allowRegistrationForEventsWithoutDate'
+			);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationmanager.php']) {

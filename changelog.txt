@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2873] Change: Refactor the registration functions in seminar and registrationManager classes
 - [#2924] Feature: Add an RTE-field description to the seminar organizers
 - [#2928] Feature: Add a getter for begin_date_registration in the new and old model class.
 - [#2930] Fix: Remove all trigger_error() calls from tx_seminars_registration

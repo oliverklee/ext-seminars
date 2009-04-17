@@ -2740,14 +2740,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean true if registration is possible, false otherwise
 	 */
 	public function canSomebodyRegister() {
-		return $this->needsRegistration() &&
-			!$this->isCanceled() &&
-			(
-				($this->getConfValueBoolean('allowRegistrationForEventsWithoutDate')
-					&& !$this->hasDate()
-				) ||
-				($this->hasDate() && !$this->isRegistrationDeadlineOver())
-			) && (
+		$registrationManager
+			= t3lib_div::makeInstance('tx_seminars_registrationmanager');
+		$allowsRegistrationByDate
+			= $registrationManager->allowsRegistrationByDate($this);
+		$registrationManager->__destruct();
+
+		return $this->needsRegistration() && !$this->isCanceled()
+			&& $allowsRegistrationByDate
+			&& (
 				$this->hasRegistrationQueue() || $this->hasUnlimitedVacancies()
 					|| $this->hasVacancies()
 			);

@@ -1418,5 +1418,46 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->fixture->canRegisterSeats($this->seminar, 42)
 		);
 	}
+
+
+	//////////////////////////////////////////////
+	// Tests concerning allowsRegistrationByDate
+	//////////////////////////////////////////////
+
+	public function test_allowsRegistrationByDate_ForEventWithoutDateAndRegistrationForEventsWithoutDateAllowed_ReturnsTrue() {
+		$this->seminar->setAllowRegistrationForEventsWithoutDate(1);
+		$this->seminar->setBeginDate(0);
+
+		$this->assertTrue(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationByDate_ForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowed_ReturnsFalse() {
+		$this->seminar->setAllowRegistrationForEventsWithoutDate(0);
+		$this->seminar->setBeginDate(0);
+
+		$this->assertFalse(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationByDate_ForBeginDateAndRegistrationDeadlineOver_ReturnsFalse() {
+		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+		$this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 42);
+
+		$this->assertFalse(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationByDate_ForBeginDateAndRegistrationDeadlineInFuture_ReturnsTrue() {
+		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+		$this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] + 42);
+
+		$this->assertTrue(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
 }
 ?>
