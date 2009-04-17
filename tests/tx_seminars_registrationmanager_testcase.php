@@ -1459,5 +1459,48 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning allowsRegistrationBySeats
+	///////////////////////////////////////////////
+
+	public function test_allowsRegistrationBySeats_ForEventWithNoVacanciesAndNoQueue_ReturnsFalse() {
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setRegistrationQueue(false);
+
+		$this->assertFalse(
+			$this->fixture->allowsRegistrationBySeats($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationBySeats_ForEventWithUnlimitedVacancies_ReturnsTrue() {
+		$this->seminar->setUnlimitedVacancies();
+
+		$this->assertTrue(
+			$this->fixture->allowsRegistrationBySeats($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationBySeats_ForEventWithRegistrationQueue_ReturnsTrue() {
+		$this->seminar->setNumberOfAttendances(1);
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setRegistrationQueue(true);
+
+		$this->assertTrue(
+			$this->fixture->allowsRegistrationBySeats($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationBySeats_ForEventWithVacancies_ReturnsTrue() {
+		$this->seminar->setNumberOfAttendances(0);
+		$this->seminar->setAttendancesMax(1);
+		$this->seminar->setRegistrationQueue(false);
+
+		$this->assertTrue(
+			$this->fixture->allowsRegistrationBySeats($this->seminar)
+		);
+	}
 }
 ?>

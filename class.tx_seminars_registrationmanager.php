@@ -692,6 +692,20 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				'allowRegistrationForEventsWithoutDate'
 			);
 	}
+
+	/**
+	 * Checks whether the given event allows registration as far as the
+	 * number of vacancies are concerned.
+	 *
+	 * @param tx_seminars_seminar the event to check the registration for
+	 *
+	 * @return boolean true if the event has enough seats for registration,
+	 *                 false otherwise
+	 */
+	public function allowsRegistrationBySeats(tx_seminars_seminar $event) {
+		return $event->hasRegistrationQueue() || $event->hasUnlimitedVacancies()
+			|| $event->hasVacancies();
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationmanager.php']) {

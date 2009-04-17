@@ -2741,14 +2741,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			= t3lib_div::makeInstance('tx_seminars_registrationmanager');
 		$allowsRegistrationByDate
 			= $registrationManager->allowsRegistrationByDate($this);
+		$allowsRegistrationBySeats
+			= $registrationManager->allowsRegistrationBySeats($this);
 		$registrationManager->__destruct();
 
 		return $this->needsRegistration() && !$this->isCanceled()
-			&& $allowsRegistrationByDate
-			&& (
-				$this->hasRegistrationQueue() || $this->hasUnlimitedVacancies()
-					|| $this->hasVacancies()
-			);
+			&& $allowsRegistrationByDate && $allowsRegistrationBySeats;
 	}
 
 	/**
