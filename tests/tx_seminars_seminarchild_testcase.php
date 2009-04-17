@@ -2289,6 +2289,54 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsWithoutPaymentMethodsReturnsAnEmptyArray() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getPaymentMethods()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsWithOnePaymentMethodReturnsOnePaymentMethod() {
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method'));
+
+		$this->assertEquals(
+			array('Payment Method'),
+			$this->fixture->getPaymentMethods()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsWithTwoPaymentMethodsReturnsTwoPaymentMethods() {
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
+
+		$this->assertEquals(
+			array('Payment Method 1', 'Payment Method 2'),
+			$this->fixture->getPaymentMethods()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsWithTwoPaymentMethodsReturnsTwoPaymentMethodsSorted() {
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
+		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
+
+		$this->assertEquals(
+			array('Payment Method 2', 'Payment Method 1'),
+			$this->fixture->getPaymentMethods()
+		);
+	}
+
 
 	/////////////////////////////////////////////////
 	// Tests concerning getPaymentMethodsPlainShort

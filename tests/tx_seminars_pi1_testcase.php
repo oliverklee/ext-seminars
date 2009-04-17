@@ -1556,6 +1556,89 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////////////////////////////
+	// Tests concerning the payment methods in the single view.
+	/////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithoutPaymentMethodsNotContainsLabelForPaymentMethods() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertNotContains(
+			$this->fixture->translate('label_paymentmethods'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOnePaymentMethodContainsLabelForPaymentMethods() {
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('payment_methods' => $paymentMethodUid)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			$this->fixture->translate('label_paymentmethods'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOnePaymentMethodContainsOnePaymentMethod() {
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('payment_methods' => $paymentMethodUid)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'Payment Method',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithTwoPaymentMethodsContainsTwoPaymentMethods() {
+		$paymentMethodUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method 1')
+		);
+		$paymentMethodUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method 2')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'payment_methods' => $paymentMethodUid1 . ',' .
+					$paymentMethodUid2,
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'Payment Method 1',
+			$this->fixture->main('', array())
+		);
+		$this->assertContains(
+			'Payment Method 2',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	//////////////////////////////////////////////////////////
 	// Tests concerning the basic functions of the list view
 	//////////////////////////////////////////////////////////

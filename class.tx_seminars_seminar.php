@@ -1454,40 +1454,30 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets the titles of allowed payment methods, complete as a RTE'ed HTML
-	 * LI list (with enclosing UL), but without the detailed description.
-	 * Returns an empty paragraph if this seminar doesn't have any payment
-	 * methods.
+	 * Gets the titles of allowed payment methods for this event.
 	 *
-	 * @param object the live pibase object
-	 *
-	 * @return string our payment methods as HTML (or '' if there is an error)
+	 * @return array our payment method titles, will be an empty array if there
+	 *               are no payment methods
 	 */
-	public function getPaymentMethods(tslib_pibase $plugin) {
+	public function getPaymentMethods() {
 		if (!$this->hasPaymentMethods()) {
-			return '';
+			return array();
 		}
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$rows = tx_oelib_db::selectMultiple(
 			'title',
 			SEMINARS_TABLE_PAYMENT_METHODS,
 			'uid IN (' . $this->getPaymentMethodsUids() . ')' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
 		);
 
-		if (!$dbResult) {
-			return '';
+		$result = array();
+
+		foreach ($rows as $row) {
+			$result[] = $row['title'];
 		}
 
-		$result = '';
-
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$result .= '  <li>'.$row['title'].'</li>'.LF;
-		}
-
-		$result = '<ul>'.LF.$result.'</ul>'.LF;
-
-		return $plugin->pi_RTEcssText($result);
+		return $result;
 	}
 
 	/**

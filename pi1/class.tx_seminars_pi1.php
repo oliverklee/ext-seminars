@@ -1140,9 +1140,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$this->setMarker(
-			'paymentmethods', $this->seminar->getPaymentMethods($this)
-		);
+		$paymentMethods = $this->seminar->getPaymentMethods();
+
+		$paymentMethodOutput = '';
+		foreach ($paymentMethods as $paymentMethod) {
+			$this->setMarker('payment_method', htmlspecialchars($paymentMethod));
+			$paymentMethodOutput .= $this->getSubpart('SINGLE_PAYMENT_METHOD');
+		}
+
+		$this->setSubpart('SINGLE_PAYMENT_METHOD', $paymentMethodOutput);
 	}
 
 	/**
