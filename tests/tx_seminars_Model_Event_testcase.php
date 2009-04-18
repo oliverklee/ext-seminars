@@ -48,6 +48,94 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////
+	// Tests regarding isSingleEvent().
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function isSingleEventForSingleRecordReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
+
+		$this->assertTrue(
+			$this->fixture->isSingleEvent()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isSingleEventForTopicRecordReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->isSingleEvent()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isSingleEventForDateRecordReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
+		);
+
+		$this->assertFalse(
+			$this->fixture->isSingleEvent()
+		);
+	}
+
+
+	///////////////////////////////////
+	// Tests regarding isEventDate().
+	///////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function isEventDateForSingleRecordReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
+
+		$this->assertFalse(
+			$this->fixture->isEventDate()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isEventDateForTopicRecordReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->isEventDate()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isEventDateForDateRecordReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
+		);
+
+		$this->assertTrue(
+			$this->fixture->isEventDate()
+		);
+	}
+
+
 	//////////////////////////////////
 	// Tests regarding the subtitle.
 	//////////////////////////////////
@@ -55,8 +143,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSubtitleWithoutSubtitleReturnsAnEmptyString() {
-		$this->fixture->setData(array());
+	public function getSubtitleForSingleEventWithoutSubtitleReturnsAnEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			'',
@@ -67,8 +157,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSubtitleWithSubtitleReturnsSubtitle() {
-		$this->fixture->setData(array('subtitle' => 'sub title'));
+	public function getSubtitleForSingleEventWithSubtitleReturnsSubtitle() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'subtitle' => 'sub title',
+			)
+		);
 
 		$this->assertEquals(
 			'sub title',
@@ -79,7 +174,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSubtitleSetsSubtitle() {
+	public function setSubtitleForSingleEventSetsSubtitle() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSubtitle('sub title');
 
 		$this->assertEquals(
@@ -91,8 +189,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSubtitleWithoutSubtitleReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasSubtitleForSingleEventWithoutSubtitleReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasSubtitle()
@@ -102,8 +202,178 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSubtitleWithSubtitleReturnsTrue() {
+	public function hasSubtitleForSingleEventWithSubtitleReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setSubtitle('sub title');
+
+		$this->assertTrue(
+			$this->fixture->hasSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSubtitleForEventTopicWithoutSubtitleReturnsAnEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSubtitleForEventTopicWithSubtitleReturnsSubtitle() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'subtitle' => 'sub title',
+			)
+		);
+
+		$this->assertEquals(
+			'sub title',
+			$this->fixture->getSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSubtitleForEventTopicSetsSubtitle() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSubtitle('sub title');
+
+		$this->assertEquals(
+			'sub title',
+			$this->fixture->getSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSubtitleForEventTopicWithoutSubtitleReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSubtitleForEventTopicWithSubtitleReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSubtitle('sub title');
+
+		$this->assertTrue(
+			$this->fixture->hasSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSubtitleForEventDateWithoutSubtitleReturnsAnEmptyString() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSubtitleForEventDateWithSubtitleReturnsSubtitle() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('subtitle' => 'sub title'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'sub title',
+			$this->fixture->getSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSubtitleForEventDateSetsSubtitle() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setSubtitle('sub title');
+
+		$this->assertEquals(
+			'sub title',
+			$topic->getSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSubtitleForEventDateWithoutSubtitleReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSubtitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSubtitleForEventDateWithSubtitleReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('subtitle' => 'sub title'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasSubtitle()
@@ -118,8 +388,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getTeaserWithoutTeaserReturnsAnEmptyString() {
-		$this->fixture->setData(array());
+	public function getTeaserForSingleEventWithoutTeaserReturnsAnEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			'',
@@ -130,8 +402,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getTeaserWithTeaserReturnsTeaser() {
-		$this->fixture->setData(array('teaser' => 'wow, this is teasing'));
+	public function getTeaserForSingleEventWithTeaserReturnsTeaser() {
+		$this->fixture->setData(
+			array(
+				'teaser' => 'wow, this is teasing',
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+			)
+		);
 
 		$this->assertEquals(
 			'wow, this is teasing',
@@ -142,7 +419,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setTeaserSetsTeaser() {
+	public function setTeaserForSingleEventSetsTeaser() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setTeaser('wow, this is teasing');
 
 		$this->assertEquals(
@@ -154,8 +434,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasTeaserWithoutTeaserReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasTeaserForSingleEventWithoutTeaserReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasTeaser()
@@ -165,8 +447,182 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasTeaserWithTeaserReturnsTrue() {
+	public function hasTeaserForSingleEventWithTeaserReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'teaser' => 'wow, this is teasing',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTeaserForEventTopicWithoutTeaserReturnsAnEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTeaserForEventTopicWithTeaserReturnsTeaser() {
+		$this->fixture->setData(
+			array(
+				'teaser' => 'wow, this is teasing',
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+			)
+		);
+
+		$this->assertEquals(
+			'wow, this is teasing',
+			$this->fixture->getTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTeaserForEventTopicSetsTeaser() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setTeaser('wow, this is teasing');
+
+		$this->assertEquals(
+			'wow, this is teasing',
+			$this->fixture->getTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTeaserForEventTopicWithoutTeaserReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTeaserForEventTopicWithTeaserReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'teaser' => 'wow, this is teasing',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTeaserForEventDateWithoutTeaserReturnsAnEmptyString() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTeaserForEventDateWithTeaserReturnsTeaser() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('teaser' => 'wow, this is teasing'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'wow, this is teasing',
+			$this->fixture->getTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTeaserForEventDateSetsTeaser() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setTeaser('wow, this is teasing');
+
+		$this->assertEquals(
+			'wow, this is teasing',
+			$topic->getTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTeaserForEventDateWithoutTeaserReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTeaserForEventDateWithTeaserReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('teaser' => 'wow, this is teasing'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasTeaser()
@@ -181,8 +637,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getDescriptionWithoutDescriptionReturnsAnEmptyString() {
-		$this->fixture->setData(array());
+	public function getDescriptionForSingleEventWithoutDescriptionReturnsAnEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			'',
@@ -193,8 +651,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getDescriptionWithDescriptionReturnsDescription() {
-		$this->fixture->setData(array('description' => 'this is a great event.'));
+	public function getDescriptionForSingleEventWithDescriptionReturnsDescription() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'description' => 'this is a great event.',
+			)
+		);
 
 		$this->assertEquals(
 			'this is a great event.',
@@ -205,7 +668,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setDescriptionSetsDescription() {
+	public function setDescriptionForSingleEventSetsDescription() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setDescription('this is a great event.');
 
 		$this->assertEquals(
@@ -217,8 +683,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasDescriptionWithoutDescriptionReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasDescriptionForSingleEventWithoutDescriptionReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasDescription()
@@ -228,8 +696,184 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasDescriptionWithDescriptionReturnsTrue() {
+	public function hasDescriptionForSingleEventWithDescriptionReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'description' => 'this is a great event.',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDescriptionForEventTopicWithoutDescriptionReturnsAnEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDescriptionForEventTopicWithDescriptionReturnsDescription() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'description' => 'this is a great event.',
+			)
+		);
+
+		$this->assertEquals(
+			'this is a great event.',
+			$this->fixture->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setDescriptionForEventTopicSetsDescription() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setDescription('this is a great event.');
+
+		$this->assertEquals(
+			'this is a great event.',
+			$this->fixture->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForEventTopicWithoutDescriptionReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForEventTopicWithDescriptionReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setDescription('this is a great event.');
+
+		$this->assertTrue(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDescriptionForEventDateWithoutDescriptionReturnsAnEmptyString() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDescriptionForEventDateWithDescriptionReturnsDescription() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array('description' => 'this is a great event.')
+			);
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'this is a great event.',
+			$this->fixture->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setDescriptionForEventDateSetsDescription() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setDescription('this is a great event.');
+
+		$this->assertEquals(
+			'this is a great event.',
+			$topic->getDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForEventDateWithoutDescriptionReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasDescription()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForEventDateWithDescriptionReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array('description' => 'this is a great event.')
+			);
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasDescription()
@@ -307,8 +951,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getCreditPointsWithoutCreditPointsReturnsZero() {
-		$this->fixture->setData(array());
+	public function getCreditPointsForSingleEventWithoutCreditPointsReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			0,
@@ -319,8 +965,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getCreditPointsWithPositiveCreditPointsReturnsCreditPoints() {
-		$this->fixture->setData(array('credit_points' => 42));
+	public function getCreditPointsForSingleEventWithPositiveCreditPointsReturnsCreditPoints() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'credit_points' => 42,
+			)
+		);
 
 		$this->assertEquals(
 			42,
@@ -331,10 +982,11 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setCreditPointsWithNegativeCreditPointsThrowsException() {
+	public function setCreditPointsForSingleEventWithNegativeCreditPointsThrowsException() {
 		$this->setExpectedException(
 			'Exception', 'The parameter $creditPoints must be >= 0.'
 		);
+		$this->fixture->setData(array());
 
 		$this->fixture->setCreditPoints(-1);
 	}
@@ -342,7 +994,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setCreditPointsWithZeroCreditPointsSetsCreditPoints() {
+	public function setCreditPointsForSingleEventWithZeroCreditPointsSetsCreditPoints() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setCreditPoints(0);
 
 		$this->assertEquals(
@@ -354,7 +1009,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setCreditPointsWithPositiveCreditPointsSetsCreditPoints() {
+	public function setCreditPointsForSingleEventWithPositiveCreditPointsSetsCreditPoints() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setCreditPoints(42);
 
 		$this->assertEquals(
@@ -366,8 +1024,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasCreditPointsWithoutCreditPointsReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasCreditPointsForSingleEventWithoutCreditPointsReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasCreditPoints()
@@ -377,8 +1037,217 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasCreditPointsWithCreditPointsReturnsTrue() {
+	public function hasCreditPointsForSingleEventWithCreditPointsReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'credit_points' => 42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCreditPointsForEventTopicWithoutCreditPointsReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCreditPointsForEventTopicWithPositiveCreditPointsReturnsCreditPoints() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'credit_points' => 42,
+			)
+		);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreditPointsForEventTopicWithZeroCreditPointsSetsCreditPoints() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setCreditPoints(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreditPointsForEventTopicWithPositiveCreditPointsSetsCreditPoints() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setCreditPoints(42);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasCreditPointsForEventTopicWithoutCreditPointsReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasCreditPointsForEventTopicWithCreditPointsReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'credit_points' => 42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCreditPointsForEventDateWithoutCreditPointsReturnsZero() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCreditPointsForEventDateWithPositiveCreditPointsReturnsCreditPoints() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('credit_points' => 42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreditPointsForEventDateWithZeroCreditPointsSetsCreditPoints() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setCreditPoints(0);
+
+		$this->assertEquals(
+			0,
+			$topic->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreditPointsForEventDateWithPositiveCreditPointsSetsCreditPoints() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setCreditPoints(42);
+
+		$this->assertEquals(
+			42,
+			$topic->getCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasCreditPointsForEventDateWithoutCreditPointsReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasCreditPoints()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasCreditPointsForEventDateWithCreditPointsReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('credit_points' => 42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasCreditPoints()
@@ -735,59 +1604,36 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getDetailsPageUidWithoutDetailsPageReturnsZero() {
+	public function getDetailsPageWithoutDetailsPageReturnsEmptyString() {
 		$this->fixture->setData(array());
 
 		$this->assertEquals(
-			0,
-			$this->fixture->getDetailsPageUid()
+			'',
+			$this->fixture->getDetailsPage()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function getDetailsPageUidWithDetailsPageReturnsDetailsPageUid() {
-		$this->fixture->setData(array('details_page' => 42));
+	public function getDetailsPageWithDetailsPageReturnsDetailsPage() {
+		$this->fixture->setData(array('details_page' => 'http://example.com'));
 
 		$this->assertEquals(
-			42,
-			$this->fixture->getDetailsPageUid()
+			'http://example.com',
+			$this->fixture->getDetailsPage()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setDetailsPageUidWithNegativeDetailsPageUidThrowsException() {
-		$this->setExpectedException(
-			'Exception', 'The parameter $uid must be >= 0.'
-		);
-
-		$this->fixture->setDetailsPageUid(-1);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setDetailsPageUidWithZeroDetailsPageUidSetsDetailsPage() {
-		$this->fixture->setDetailsPageUid(0);
+	public function setDetailsPageSetsDetailsPage() {
+		$this->fixture->setDetailsPage('http://example.com');
 
 		$this->assertEquals(
-			0,
-			$this->fixture->getDetailsPageUid()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setDetailsPageUidWithPositiveDetailsPageUidSetsDetailsPage() {
-		$this->fixture->setDetailsPageUid(42);
-
-		$this->assertEquals(
-			42,
-			$this->fixture->getDetailsPageUid()
+			'http://example.com',
+			$this->fixture->getDetailsPage()
 		);
 	}
 
@@ -806,7 +1652,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasDetailsPageWithDetailsPageReturnsTrue() {
-		$this->fixture->setDetailsPageUid(42);
+		$this->fixture->setDetailsPage('http://example.com');
 
 		$this->assertTrue(
 			$this->fixture->hasDetailsPage()
@@ -888,8 +1734,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getRegularPriceWithoutRegularPriceReturnsZero() {
-		$this->fixture->setData(array('price_regular' => 0.00));
+	public function getRegularPriceForSingleEventWithoutRegularPriceReturnsZero() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_regular' => 0.00,
+			)
+		);
 
 		$this->assertEquals(
 			0.00,
@@ -900,8 +1751,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getRegularPriceWithPositiveRegularPriceReturnsRegularPrice() {
-		$this->fixture->setData(array('price_regular' => 42.42));
+	public function getRegularPriceForSingleEventWithPositiveRegularPriceReturnsRegularPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_regular' => 42.42
+			)
+		);
 
 		$this->assertEquals(
 			42.42,
@@ -912,8 +1768,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularPriceWithNegativeRegularPriceThrowsException() {
-		$this->setExpectedException('Exception', '');
+	public function setRegularPriceForSingleEventWithNegativeRegularPriceThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $price must be >= 0.00.'
+		);
 
 		$this->fixture->setRegularPrice(-1);
 	}
@@ -921,7 +1779,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularPriceWithZeroRegularPriceSetsRegularPrice() {
+	public function setRegularPriceForSingleEventWithZeroRegularPriceSetsRegularPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setRegularPrice(0.00);
 
 		$this->assertEquals(
@@ -933,7 +1794,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularPriceWithPositiveRegularPriceSetsRegularPrice() {
+	public function setRegularPriceForSingleEventWithPositiveRegularPriceSetsRegularPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setRegularPrice(42.42);
 
 		$this->assertEquals(
@@ -945,8 +1809,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasRegularPriceWithoutRegularPriceReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasRegularPriceForSingleEventWithoutRegularPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasRegularPrice()
@@ -956,8 +1822,220 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasRegularPriceWithRegularPriceReturnsTrue() {
-		$this->fixture->setRegularPrice(42);
+	public function hasRegularPriceForSingleEventWithRegularPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_regular' => 42.42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularPriceForEventTopicWithoutRegularPriceReturnsZero() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_regular' => 0.00,
+			)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularPriceForEventTopicWithPositiveRegularPriceReturnsRegularPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_regular' => 42.42
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularPriceForEventTopicWithZeroRegularPriceSetsRegularPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setRegularPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularPriceForEventTopicWithPositiveRegularPriceSetsRegularPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setRegularPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularPriceForEventTopicWithoutRegularPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularPriceForEventTopicWithRegularPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_regular' => 42.42
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularPriceForEventDateWithoutRegularPriceReturnsZero() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_regular' => 0.00));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularPriceForEventDateWithPositiveRegularPriceReturnsRegularPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_regular' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularPriceForEventDateWithZeroRegularPriceSetsRegularPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setRegularPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$topic->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularPriceForEventDateWithPositiveRegularPriceSetsRegularPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setRegularPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$topic->getRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularPriceForEventDateWithoutRegularPriceReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasRegularPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularPriceForEventDateWithRegularPriceReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_regular' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasRegularPrice()
@@ -972,8 +2050,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getRegularEarlyBirdPriceWithoutRegularEarlyBirdPriceReturnsZero() {
-		$this->fixture->setData(array());
+	public function getRegularEarlyBirdPriceForSingleEventWithoutRegularEarlyBirdPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			0.00,
@@ -984,8 +2064,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getRegularEarlyBirdPriceWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice() {
-		$this->fixture->setData(array('price_regular_early' => 42.42));
+	public function getRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_regular_early' => 42.42
+			)
+		);
 
 		$this->assertEquals(
 			42.42,
@@ -996,7 +2081,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularEarlyBirdPriceWithNegativeRegularEarlyBirdPriceThrowsException() {
+	public function setRegularEarlyBirdPriceForSingleEventWithNegativeRegularEarlyBirdPriceThrowsException() {
 		$this->setExpectedException(
 			'Exception', 'The parameter $price must be >= 0.00.'
 		);
@@ -1007,7 +2092,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularEarlyBirdPriceWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+	public function setRegularEarlyBirdPriceForSingleEventWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setRegularEarlyBirdPrice(0.00);
 
 		$this->assertEquals(
@@ -1019,7 +2107,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularEarlyBirdPriceWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+	public function setRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setRegularEarlyBirdPrice(42.42);
 
 		$this->assertEquals(
@@ -1031,8 +2122,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasRegularEarlyBirdPriceWithoutRegularEarlyBirdPriceReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasRegularEarlyBirdPriceForSingleEventWithoutRegularEarlyBirdPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasRegularEarlyBirdPrice()
@@ -1042,8 +2135,228 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasRegularEarlyBirdPriceWithRegularEarlyBirdPriceReturnsTrue() {
+	public function hasRegularEarlyBirdPriceForSingleEventWithRegularEarlyBirdPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_regular_early' => 42.42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_regular_early' => 42.42
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularEarlyBirdPriceForEventTopicWithNegativeRegularEarlyBirdPriceThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The parameter $price must be >= 0.00.'
+		);
+
+		$this->fixture->setRegularEarlyBirdPrice(-1.00);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularEarlyBirdPriceForEventTopicWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setRegularEarlyBirdPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setRegularEarlyBirdPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularEarlyBirdPriceForEventTopicWithRegularEarlyBirdPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_regular_early' => 42.42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularEarlyBirdPriceForEventDateWithoutRegularEarlyBirdPriceReturnsZero() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularEarlyBirdPriceForEventDateWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_regular_early' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularEarlyBirdPriceForEventDateWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setRegularEarlyBirdPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$topic->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularEarlyBirdPriceForEventDateWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setRegularEarlyBirdPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$topic->getRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularEarlyBirdPriceForEventDateWithoutRegularEarlyBirdPriceReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasRegularEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularEarlyBirdPriceForEventDateWithRegularEarlyBirdPriceReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_regular_early' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasRegularEarlyBirdPrice()
@@ -1058,8 +2371,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getRegularBoardPriceWithoutRegularBoardPriceReturnsZero() {
-		$this->fixture->setData(array());
+	public function getRegularBoardPriceForSingleEventWithoutRegularBoardPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			0.00,
@@ -1070,8 +2385,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getRegularBoardPriceWithPositiveRegularBoardPriceReturnsRegularBoardPrice() {
-		$this->fixture->setData(array('price_regular_board' => 42.42));
+	public function getRegularBoardPriceForSingleEventWithPositiveRegularBoardPriceReturnsRegularBoardPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_regular_board' => 42.42,
+			)
+		);
 
 		$this->assertEquals(
 			42.42,
@@ -1082,7 +2402,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularBoardPriceWithNegativeRegularBoardPriceThrowsException() {
+	public function setRegularBoardPriceForSingleEventWithNegativeRegularBoardPriceThrowsException() {
 		$this->setExpectedException(
 			'Exception', 'The parameter $price must be >= 0.00.'
 		);
@@ -1093,7 +2413,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularBoardPriceWithZeroRegularBoardPriceSetsRegularBoardPrice() {
+	public function setRegularBoardPriceForSingleEventWithZeroRegularBoardPriceSetsRegularBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setRegularBoardPrice(0.00);
 
 		$this->assertEquals(
@@ -1105,7 +2428,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegularBoardPriceWithPositiveRegularBoardPriceSetsRegularBoardPrice() {
+	public function setRegularBoardPriceForSingleEventWithPositiveRegularBoardPriceSetsRegularBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setRegularBoardPrice(42.42);
 
 		$this->assertEquals(
@@ -1117,8 +2443,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasRegularBoardPriceWithoutRegularBoardPriceReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasRegularBoardPriceForSingleEventWithoutRegularBoardPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasRegularBoadPrice()
@@ -1128,8 +2456,217 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasRegularBoardPriceWithRegularBoardPriceReturnsTrue() {
+	public function hasRegularBoardPriceForSingleEventWithRegularBoardPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_regular_board' => 42.42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasRegularBoadPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceReturnsRegularBoardPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_regular_board' => 42.42,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularBoardPriceForEventTopicWithZeroRegularBoardPriceSetsRegularBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setRegularBoardPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceSetsRegularBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setRegularBoardPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasRegularBoadPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularBoardPriceForEventTopicWithRegularBoardPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_regular_board' => 42.42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasRegularBoadPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularBoardPriceForEventDateWithoutRegularBoardPriceReturnsZero() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularBoardPriceForEventDateWithPositiveRegularBoardPriceReturnsRegularBoardPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_regular_board' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularBoardPriceForEventDateWithZeroRegularBoardPriceSetsRegularBoardPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setRegularBoardPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$topic->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegularBoardPriceForEventDateWithPositiveRegularBoardPriceSetsRegularBoardPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setRegularBoardPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$topic->getRegularBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularBoardPriceForEventDateWithoutRegularBoardPriceReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasRegularBoadPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasRegularBoardPriceForEventDateWithRegularBoardPriceReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_regular_board' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasRegularBoadPrice()
@@ -1144,8 +2681,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSpecialPriceWithoutSpecialPriceReturnsZero() {
-		$this->fixture->setData(array());
+	public function getSpecialPriceForSingleEventWithoutSpecialPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			0.00,
@@ -1156,8 +2695,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSpecialPriceWithSpecialPriceReturnsSpecialPrice() {
-		$this->fixture->setData(array('price_special' => 42.42));
+	public function getSpecialPriceForSingleEventWithSpecialPriceReturnsSpecialPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_special' => 42.42,
+			)
+		);
 
 		$this->assertEquals(
 			42.42,
@@ -1168,7 +2712,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialPriceWithNegativeSpecialPriceThrowsException() {
+	public function setSpecialPriceForSingleEventWithNegativeSpecialPriceThrowsException() {
 		$this->setExpectedException(
 			'Exception', 'The parameter $price must be >= 0.00.'
 		);
@@ -1179,7 +2723,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialPriceWithZeroSpecialPriceSetsSpecialPrice() {
+	public function setSpecialPriceForSingleEventWithZeroSpecialPriceSetsSpecialPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialPrice(0.00);
 
 		$this->assertEquals(
@@ -1191,7 +2738,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialPriceWithPositiveSpecialPriceSetsSpecialPrice() {
+	public function setSpecialPriceForSingleEventWithPositiveSpecialPriceSetsSpecialPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialPrice(42.42);
 
 		$this->assertEquals(
@@ -1203,8 +2753,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSpecialPriceWithoutSpecialPriceReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasSpecialPriceForSingleEventWithoutSpecialPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasSpecialPrice()
@@ -1214,8 +2766,213 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSpecialPriceWithSpecialPriceReturnsTrue() {
+	public function hasSpecialPriceForSingleEventWithSpecialPriceReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialPrice(42.42);
+
+		$this->assertTrue(
+			$this->fixture->hasSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialPriceForEventTopicWithoutSpecialPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialPriceForEventTopicWithSpecialPriceReturnsSpecialPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_special' => 42.42,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialPriceForEventTopicWithZeroSpecialPriceSetsSpecialPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSpecialPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialPriceForEventTopicWithPositiveSpecialPriceSetsSpecialPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSpecialPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialPriceForEventTopicWithoutSpecialPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialPriceForEventTopicWithSpecialPriceReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSpecialPrice(42.42);
+
+		$this->assertTrue(
+			$this->fixture->hasSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialPriceForEventDateWithoutSpecialPriceReturnsZero() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialPriceForEventDateWithSpecialPriceReturnsSpecialPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_special' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialPriceForEventDateWithZeroSpecialPriceSetsSpecialPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setSpecialPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$topic->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialPriceForEventDateWithPositiveSpecialPriceSetsSpecialPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setSpecialPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$topic->getSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialPriceForEventDateWithoutSpecialPriceReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSpecialPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialPriceForEventDateWithSpecialPriceReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_special' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasSpecialPrice()
@@ -1230,8 +2987,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSpecialEarlyBirdPriceWithoutSpecialEarlyBirdPriceReturnsZero() {
-		$this->fixture->setData(array());
+	public function getSpecialEarlyBirdPriceForSingleEventWithoutSpecialEarlyBirdPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			0.00,
@@ -1242,8 +3001,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSpecialEarlyBirdPriceWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice() {
-		$this->fixture->setData(array('price_special_early' => 42.42));
+	public function getSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_special_early' => 42.42,
+			)
+		);
 
 		$this->assertEquals(
 			42.42,
@@ -1254,7 +3018,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialEarlyBirdPriceWithNegativeSpecialEarlyBirdPriceThrowsException() {
+	public function setSpecialEarlyBirdPriceForSingleEventWithNegativeSpecialEarlyBirdPriceThrowsException() {
 		$this->setExpectedException(
 			'Exception', 'The parameter $price must be >= 0.00.'
 		);
@@ -1265,7 +3029,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialEarlyBirdPriceWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+	public function setSpecialEarlyBirdPriceForSingleEventWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialEarlyBirdPrice(0.00);
 
 		$this->assertEquals(
@@ -1277,7 +3044,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialEarlyBirdPriceWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+	public function setSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialEarlyBirdPrice(42.42);
 
 		$this->assertEquals(
@@ -1289,8 +3059,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSpecialEarlyBirdPriceWithoutSpecialEarlyBirdPriceReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasSpecialEarlyBirdPriceForSingleEventWithoutSpecialEarlyBirdPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasSpecialEarlyBirdPrice()
@@ -1300,8 +3072,217 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSpecialEarlyBirdPriceWithSpecialEarlyBirdPriceReturnsTrue() {
+	public function hasSpecialEarlyBirdPriceForSingleEventWithSpecialEarlyBirdPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_special_early' => 42.42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_special_early' => 42.42,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialEarlyBirdPriceForEventTopicWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSpecialEarlyBirdPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setSpecialEarlyBirdPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialEarlyBirdPriceForEventTopicWithSpecialEarlyBirdPriceReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_special_early' => 42.42,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialEarlyBirdPriceForEventDateWithoutSpecialEarlyBirdPriceReturnsZero() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialEarlyBirdPriceForEventDateWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_special_early' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialEarlyBirdPriceForEventDateWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setSpecialEarlyBirdPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$topic->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialEarlyBirdPriceForEventDateWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setSpecialEarlyBirdPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$topic->getSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialEarlyBirdPriceForEventDateWithoutSpecialEarlyBirdPriceReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSpecialEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialEarlyBirdPriceForEventDateWithSpecialEarlyBirdPriceReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_special_early' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasSpecialEarlyBirdPrice()
@@ -1316,8 +3297,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSpecialBoardPriceWithoutSpecialBoardPriceReturnsZero() {
-		$this->fixture->setData(array());
+	public function getSpecialBoardPriceForSingleEventWithoutSpecialBoardPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			0.00,
@@ -1328,8 +3311,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getSpecialBoardPriceWithSpecialBoardPriceReturnsSpecialBoardPrice() {
-		$this->fixture->setData(array('price_special_board' => 42.42));
+	public function getSpecialBoardPriceForSingleEventWithSpecialBoardPriceReturnsSpecialBoardPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'price_special_board' => 42.42,
+			)
+		);
 
 		$this->assertEquals(
 			42.42,
@@ -1340,7 +3328,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialBoardPriceWithNegativeSpecialBoardPriceThrowsException() {
+	public function setSpecialBoardPriceForSingleEventWithNegativeSpecialBoardPriceThrowsException() {
 		$this->setExpectedException(
 			'Exception', 'The parameter $price must be >= 0.00.'
 		);
@@ -1351,7 +3339,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialBoardPriceWithZeroSpecialBoardPriceSetsSpecialBoardPrice() {
+	public function setSpecialBoardPriceForSingleEventWithZeroSpecialBoardPriceSetsSpecialBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialBoardPrice(0.00);
 
 		$this->assertEquals(
@@ -1363,7 +3354,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setSpecialBoardPriceWithPositiveSpecialBoardPriceSetsSpecialBoardPrice() {
+	public function setSpecialBoardPriceForSingleEventWithPositiveSpecialBoardPriceSetsSpecialBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialBoardPrice(42.42);
 
 		$this->assertEquals(
@@ -1375,8 +3369,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSpecialBoardPriceWithoutSpecialBoardPriceReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasSpecialBoardPriceForSingleEventWithoutSpecialBoardPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasSpecialBoardPrice()
@@ -1386,8 +3382,213 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasSpecialBoardPriceWithSpecialBoardPriceReturnsTrue() {
+	public function hasSpecialBoardPriceForSingleEventWithSpecialBoardPriceReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setSpecialBoardPrice(42.42);
+
+		$this->assertTrue(
+			$this->fixture->hasSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsZero() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsSpecialBoardPrice() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'price_special_board' => 42.42,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialBoardPriceForEventTopicWithZeroSpecialBoardPriceSetsSpecialBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSpecialBoardPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialBoardPriceForEventTopicWithPositiveSpecialBoardPriceSetsSpecialBoardPrice() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSpecialBoardPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsTrue() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+		$this->fixture->setSpecialBoardPrice(42.42);
+
+		$this->assertTrue(
+			$this->fixture->hasSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialBoardPriceForEventDateWithoutSpecialBoardPriceReturnsZero() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			0.00,
+			$this->fixture->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSpecialBoardPriceForEventDateWithSpecialBoardPriceReturnsSpecialBoardPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_special_board' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			42.42,
+			$this->fixture->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialBoardPriceForEventDateWithZeroSpecialBoardPriceSetsSpecialBoardPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setSpecialBoardPrice(0.00);
+
+		$this->assertEquals(
+			0.00,
+			$topic->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSpecialBoardPriceForEventDateWithPositiveSpecialBoardPriceSetsSpecialBoardPrice() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setSpecialBoardPrice(42.42);
+
+		$this->assertEquals(
+			42.42,
+			$topic->getSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialBoardPriceForEventDateWithoutSpecialBoardPriceReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasSpecialBoardPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSpecialBoardPriceForEventDateWithSpecialBoardPriceReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('price_special_board' => 42.42));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasSpecialBoardPrice()
@@ -1402,8 +3603,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAdditionalInformationWithoutAdditionalInformationReturnsEmptyString() {
-		$this->fixture->setData(array());
+	public function getAdditionalInformationForSingleEventWithoutAdditionalInformationReturnsEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			'',
@@ -1414,8 +3617,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAdditionalInformationWithAdditionalInformationReturnsAdditionalInformation() {
-		$this->fixture->setData(array('additional_information' => 'this is good to know'));
+	public function getAdditionalInformationForSingleEventWithAdditionalInformationReturnsAdditionalInformation() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'additional_information' => 'this is good to know',
+			)
+		);
 
 		$this->assertEquals(
 			'this is good to know',
@@ -1426,7 +3634,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setAdditionalInformationSetsAdditionalInformation() {
+	public function setAdditionalInformationForSingleEventSetsAdditionalInformation() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setAdditionalInformation('this is good to know');
 
 		$this->assertEquals(
@@ -1438,8 +3649,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasAdditionalInformationWithoutAdditionalInformationReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasAdditionalInformationForSingleEventWithoutAdditionalInformationReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasAdditionalInformation()
@@ -1449,8 +3662,186 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasAdditionalInformationWithAdditionalInformationReturnsTrue() {
+	public function hasAdditionalInformationForSingleEventWithAdditionalInformationReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'additional_information' => 'this is good to know',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalInformationForEventTopicWithAdditionalInformationReturnsAdditionalInformation() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'additional_information' => 'this is good to know',
+			)
+		);
+
+		$this->assertEquals(
+			'this is good to know',
+			$this->fixture->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAdditionalInformationForEventTopicSetsAdditionalInformation() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setAdditionalInformation('this is good to know');
+
+		$this->assertEquals(
+			'this is good to know',
+			$this->fixture->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAdditionalInformationForEventTopicWithAdditionalInformationReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'additional_information' => 'this is good to know',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalInformationForEventDateWithoutAdditionalInformationReturnsEmptyString() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalInformationForEventDateWithAdditionalInformationReturnsAdditionalInformation() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array('additional_information' => 'this is good to know')
+			);
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'this is good to know',
+			$this->fixture->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAdditionalInformationForEventDateSetsAdditionalInformation() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setAdditionalInformation('this is good to know');
+
+		$this->assertEquals(
+			'this is good to know',
+			$topic->getAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAdditionalInformationForEventDateWithoutAdditionalInformationReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasAdditionalInformation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAdditionalInformationForEventDateWithAdditionalInformationReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array('additional_information' => 'this is good to know')
+			);
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasAdditionalInformation()
@@ -1546,8 +3937,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function allowsMultipleRegistrationWithUnsetAllowsMultipleRegistrationReturnsFalse() {
-		$this->fixture->setData(array());
+	public function allowsMultipleRegistrationForSingleEventWithUnsetAllowsMultipleRegistrationReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->allowsMultipleRegistrations()
@@ -1557,8 +3950,80 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function allowsMultipleRegistrationWithSetAllowsMultipleRegistrationReturnsTrue() {
-		$this->fixture->setData(array('allows_multiple_registrations' => true));
+	public function allowsMultipleRegistrationForSingleEventWithSetAllowsMultipleRegistrationReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'allows_multiple_registrations' => true,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->allowsMultipleRegistrations()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function allowsMultipleRegistrationForEventTopicWithUnsetAllowsMultipleRegistrationReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->allowsMultipleRegistrations()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function allowsMultipleRegistrationForEventTopicWithSetAllowsMultipleRegistrationReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'allows_multiple_registrations' => true,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->allowsMultipleRegistrations()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function allowsMultipleRegistrationForEventDateWithUnsetAllowsMultipleRegistrationReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->allowsMultipleRegistrations()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function allowsMultipleRegistrationForEventDateWithSetAllowsMultipleRegistrationReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array('allows_multiple_registrations' => true)
+			);
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->allowsMultipleRegistrations()
@@ -1680,6 +4145,9 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
 	public function setMaximumAttendeesWithNegativeMaximumAttendeesThrowsException() {
 		$this->setExpectedException(
 			'Exception', 'The parameter $maximumAttendees must be >= 0.'
@@ -1688,6 +4156,9 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		$this->fixture->setMaximumAttendees(-1);
 	}
 
+	/**
+	 * @test
+	 */
 	public function setMaximumAttendeesWithZeroMaximumAttendeesSetsMaximumAttendees() {
 		$this->fixture->setMaximumAttendees(0);
 
@@ -1697,6 +4168,9 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
 	public function setMaximumAttendeesWithPositiveAttendeesSetsMaximumAttendees() {
 		$this->fixture->setMaximumAttendees(42);
 
@@ -1706,6 +4180,9 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
 	public function hasMaximumAttendeesWithoutMaximumAttendeesReturnsFalse() {
 		$this->fixture->setData(array());
 
@@ -1714,6 +4191,9 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
 	public function hasMaximumAttendeesWithMaximumAttendeesReturnsTrue() {
 		$this->fixture->setMaximumAttendees(42);
 
@@ -1885,15 +4365,17 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////
-	// Tests regarding useTerms2().
-	/////////////////////////////////
+	//////////////////////////////////
+	// Tests regarding usesTerms2().
+	//////////////////////////////////
 
 	/**
 	 * @test
 	 */
-	public function usesTerms2WithUnsetUseTerms2ReturnsFalse() {
-		$this->fixture->setData(array());
+	public function usesTerms2ForSingleEventWithUnsetUseTerms2ReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->usesTerms2()
@@ -1903,8 +4385,78 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function usesTerms2WithSetUseTerms2ReturnsTrue() {
-		$this->fixture->setData(array('use_terms_2' => true));
+	public function usesTerms2ForSingleEventWithSetUseTerms2ReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'use_terms_2' => true,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->usesTerms2()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function usesTerms2ForEventTopicWithUnsetUseTerms2ReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->usesTerms2()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function usesTerms2ForEventTopicWithSetUseTerms2ReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'use_terms_2' => true,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->usesTerms2()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function usesTerms2ForEventDateWithUnsetUseTerms2ReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->usesTerms2()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function usesTerms2ForEventDateWithSetUseTerms2ReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('use_terms_2' => true));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->usesTerms2()
@@ -1919,8 +4471,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getNotesWithoutNotesReturnsEmptyString() {
-		$this->fixture->setData(array());
+	public function getNotesForSingleEventWithoutNotesReturnsEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			'',
@@ -1931,8 +4485,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getNotesWithNotesReturnsNotes() {
-		$this->fixture->setData(array('notes' => 'Don\'t forget this.'));
+	public function getNotesForSingleEventWithNotesReturnsNotes() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'notes' => 'Don\'t forget this.',
+			)
+		);
 
 		$this->assertEquals(
 			'Don\'t forget this.',
@@ -1943,7 +4502,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setNotesSetsNotes() {
+	public function setNotesForSingleEventSetsNotes() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setNotes('Don\'t forget this.');
 
 		$this->assertEquals(
@@ -1955,8 +4517,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasNotesWithoutNotesReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasNotesForSingleEventWithoutNotesReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasNotes()
@@ -1966,8 +4530,182 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasNotesWithNotesReturnsTrue() {
+	public function hasNotesForSingleEventWithNotesReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'notes' => 'Don\'t forget this.',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNotesForEventTopicWithoutNotesReturnsEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNotesForEventTopicWithNotesReturnsNotes() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'notes' => 'Don\'t forget this.',
+			)
+		);
+
+		$this->assertEquals(
+			'Don\'t forget this.',
+			$this->fixture->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setNotesForEventTopicSetsNotes() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setNotes('Don\'t forget this.');
+
+		$this->assertEquals(
+			'Don\'t forget this.',
+			$this->fixture->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasNotesForEventTopicWithoutNotesReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasNotesForEventTopicWithNotesReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'notes' => 'Don\'t forget this.',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNotesForEventDateWithoutNotesReturnsEmptyString() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNotesForEventDateWithNotesReturnsNotes() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('notes' => 'Don\'t forget this.'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'Don\'t forget this.',
+			$this->fixture->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setNotesForEventDateSetsNotes() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setNotes('Don\'t forget this.');
+
+		$this->assertEquals(
+			'Don\'t forget this.',
+			$topic->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasNotesForEventDateWithoutNotesReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasNotesForEventDateWithNotesReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('notes' => 'Don\'t forget this.'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasNotes()
@@ -2057,8 +4795,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getImageWithoutImageReturnsEmptyString() {
-		$this->fixture->setData(array());
+	public function getImageForSingleEventWithoutImageReturnsEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertEquals(
 			'',
@@ -2069,8 +4809,13 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getImageWithImageReturnsImage() {
-		$this->fixture->setData(array('image' => 'file.jpg'));
+	public function getImageForSingleEventWithImageReturnsImage() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'image' => 'file.jpg',
+			)
+		);
 
 		$this->assertEquals(
 			'file.jpg',
@@ -2081,7 +4826,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setImageSetsImage() {
+	public function setImageForSingleEventSetsImage() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 		$this->fixture->setImage('file.jpg');
 
 		$this->assertEquals(
@@ -2093,8 +4841,10 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasImageWithoutImageReturnsFalse() {
-		$this->fixture->setData(array());
+	public function hasImageForSingleEventWithoutImageReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
 
 		$this->assertFalse(
 			$this->fixture->hasImage()
@@ -2104,8 +4854,182 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function hasImageWithImageReturnsTrue() {
+	public function hasImageForSingleEventWithImageReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'image' => 'file.jpg',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImageForEventTopicWithoutImageReturnsEmptyString() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImageForEventTopicWithImageReturnsImage() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'image' => 'file.jpg',
+			)
+		);
+
+		$this->assertEquals(
+			'file.jpg',
+			$this->fixture->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImageForEventTopicSetsImage() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
 		$this->fixture->setImage('file.jpg');
+
+		$this->assertEquals(
+			'file.jpg',
+			$this->fixture->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasImageForEventTopicWithoutImageReturnsFalse() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasImageForEventTopicWithImageReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'image' => 'file.jpg',
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImageForEventDateWithoutImageReturnsEmptyString() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImageForEventDateWithImageReturnsImage() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('image' => 'file.jpg'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertEquals(
+			'file.jpg',
+			$this->fixture->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImageForEventDateSetsImage() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+		$this->fixture->setImage('file.jpg');
+
+		$this->assertEquals(
+			'file.jpg',
+			$topic->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasImageForEventDateWithoutImageReturnsFalse() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasImageForEventDateWithImageReturnsTrue() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('image' => 'file.jpg'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
 
 		$this->assertTrue(
 			$this->fixture->hasImage()

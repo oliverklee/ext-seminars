@@ -64,6 +64,24 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	const STATUS_CONFIRMED = 2;
 
 	/**
+	 * Returns whether this event is a single event.
+	 *
+	 * @return boolean true if this event is a single event, false otherwise
+	 */
+	public function isSingleEvent() {
+		return ($this->getAsInteger('object_type') == self::TYPE_COMPLETE);
+	}
+
+	/**
+	 * Returns whether this event is an event date.
+	 *
+	 * @return boolean true if this event is an event date, false otherwise
+	 */
+	public function isEventDate() {
+		return ($this->getAsInteger('object_type') == self::TYPE_DATE);
+	}
+
+	/**
 	 * Returns our topic.
 	 *
 	 * This method may only be called for date records.
@@ -72,7 +90,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                                 no topic
 	 */
 	public function getTopic() {
-		if ($this->getAsInteger('object_type') != self::TYPE_DATE) {
+		if (!$this->isEventDate()) {
 			throw new Exception(
 				'This function may only be called for date records.'
 			);
@@ -87,7 +105,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return string our subtitle, will be empty if this event has no subtitle
 	 */
 	public function getSubtitle() {
-		return $this->getAsString('subtitle');
+		return ($this->isEventDate())
+			? $this->getTopic()->getSubtitle()
+			: $this->getAsString('subtitle');
 	}
 
 	/**
@@ -96,7 +116,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @param string our subtitle to set, may be empty
 	 */
 	public function setSubtitle($subtitle) {
-		$this->setAsString('subtitle', $subtitle);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setSubtitle($subtitle);
+		} else {
+			$this->setAsString('subtitle', $subtitle);
+		}
 	}
 
 	/**
@@ -105,7 +129,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event has a subtitle, false otherwise
 	 */
 	public function hasSubtitle() {
-		return $this->hasString('subtitle');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasSubtitle()
+			: $this->hasString('subtitle');
 	}
 
 	/**
@@ -114,7 +140,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return tx_oelib_List our categories
 	 */
 	public function getCategories() {
-		return $this->getAsList('categories');
+		return ($this->isEventDate())
+			? $this->getTopic()->getCategories()
+			: $this->getAsList('categories');
 	}
 
 	/**
@@ -123,7 +151,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return string our teaser, might be empty
 	 */
 	public function getTeaser() {
-		return $this->getAsString('teaser');
+		return ($this->isEventDate())
+			? $this->getTopic()->getTeaser()
+			: $this->getAsString('teaser');
 	}
 
 	/**
@@ -132,7 +162,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @param string our teaser, may be empty
 	 */
 	public function setTeaser($teaser) {
-		$this->setAsString('teaser', $teaser);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setTeaser($teaser);
+		} else {
+			$this->setAsString('teaser', $teaser);
+		}
 	}
 
 	/**
@@ -141,7 +175,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event has a teaser, false otherwise
 	 */
 	public function hasTeaser() {
-		return $this->hasString('teaser');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasTeaser()
+			: $this->hasString('teaser');
 	}
 
 	/**
@@ -150,7 +186,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return string our description, might be empty
 	 */
 	public function getDescription() {
-		return $this->getAsString('description');
+		return ($this->isEventDate())
+			? $this->getTopic()->getDescription()
+			: $this->getAsString('description');
 	}
 
 	/**
@@ -159,7 +197,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @param string our description, may be empty
 	 */
 	public function setDescription($description) {
-		$this->setAsString('description', $description);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setDescription($description);
+		} else {
+			$this->setAsString('description', $description);
+		}
 	}
 
 	/**
@@ -168,7 +210,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return string true if this event has a description, false otherwise
 	 */
 	public function hasDescription() {
-		return $this->hasString('description');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasDescription()
+			: $this->hasString('description');
 	}
 
 	/**
@@ -178,7 +222,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                                     event has no event type
 	 */
 	public function getEventType() {
-		return $this->getAsModel('event_type');
+		return ($this->isEventDate())
+			? $this->getTopic()->getEventType()
+			: $this->getAsModel('event_type');
 	}
 
 	/**
@@ -217,7 +263,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 points, will be >= 0
 	 */
 	public function getCreditPoints() {
-		return $this->getAsInteger('credit_points');
+		return ($this->isEventDate())
+			? $this->getTopic()->getCreditPoints()
+			: $this->getAsInteger('credit_points');
 	}
 
 	/**
@@ -230,7 +278,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			throw new Exception('The parameter $creditPoints must be >= 0.');
 		}
 
-		$this->setAsInteger('credit_points', $creditPoints);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setCreditPoints($creditPoints);
+		} else {
+			$this->setAsInteger('credit_points', $creditPoints);
+		}
 	}
 
 	/**
@@ -239,7 +291,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event has credit points, false otherwise
 	 */
 	public function hasCreditPoints() {
-		return $this->hasInteger('credit_points');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasCreditPoints()
+			: $this->hasInteger('credit_points');
 	}
 
 	/**
@@ -394,26 +448,22 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
-	 * Returns our details page UID.
+	 * Returns our details page.
 	 *
-	 * @return integer our details page UID, will be 0 if this event has no
-	 *                 details page, will be >= 0
+	 * @return integer our separate details page, will be empty if this event
+	 *                 has no separate details page
 	 */
-	public function getDetailsPageUid() {
-		return $this->getAsInteger('details_page');
+	public function getDetailsPage() {
+		return $this->getAsString('details_page');
 	}
 
 	/**
-	 * Sets our details page UID.
+	 * Sets our separate details page.
 	 *
-	 * @param integer our details page UID, must be >= 0
+	 * @param string our separate details page
 	 */
-	public function setDetailsPageUid($uid) {
-		if ($uid < 0) {
-			throw new Exception('The parameter $uid must be >= 0.');
-		}
-
-		$this->setAsInteger('details_page', $uid);
+	public function setDetailsPage($detailsPage) {
+		$this->setAsString('details_page', $detailsPage);
 	}
 
 	/**
@@ -423,7 +473,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 otherwise
 	 */
 	public function hasDetailsPage() {
-		return $this->hasInteger('details_page');
+		return $this->hasString('details_page');
 	}
 
 	/**
@@ -526,7 +576,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               price, will be >= 0.00
 	 */
 	public function getRegularPrice() {
-		return $this->getAsFloat('price_regular');
+		return ($this->isEventDate())
+			? $this->getTopic()->getRegularPrice()
+			: $this->getAsFloat('price_regular');
 	}
 
 	/**
@@ -539,7 +591,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			throw new Exception('The parameter $price must be >= 0.00.');
 		}
 
-		$this->setAsFloat('price_regular', $price);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setRegularPrice($price);
+		} else {
+			$this->setAsFloat('price_regular', $price);
+		}
 	}
 
 	/**
@@ -548,7 +604,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event has a regular price, false otherwise
 	 */
 	public function hasRegularPrice() {
-		return $this->hasFloat('price_regular');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasRegularPrice()
+			: $this->hasFloat('price_regular');
 	}
 
 	/**
@@ -558,7 +616,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               no regular early bird price, will be >= 0.00
 	 */
 	public function getRegularEarlyBirdPrice() {
-		return $this->getAsFloat('price_regular_early');
+		return ($this->isEventDate())
+			? $this->getTopic()->getRegularEarlyBirdPrice()
+			: $this->getAsFloat('price_regular_early');
 	}
 
 	/**
@@ -571,7 +631,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			throw new Exception('The parameter $price must be >= 0.00.');
 		}
 
-		$this->setAsFloat('price_regular_early', $price);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setRegularEarlyBirdPrice($price);
+		} else {
+			$this->setAsFloat('price_regular_early', $price);
+		}
 	}
 
 	/**
@@ -581,7 +645,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 otherwise
 	 */
 	public function hasRegularEarlyBirdPrice() {
-		return $this->hasFloat('price_regular_early');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasRegularEarlyBirdPrice()
+			: $this->hasFloat('price_regular_early');
 	}
 
 	/**
@@ -591,7 +657,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               regular board price, will be >= 0.00
 	 */
 	public function getRegularBoardPrice() {
-		return $this->getAsFloat('price_regular_board');
+		return ($this->isEventDate())
+			? $this->getTopic()->getRegularBoardPrice()
+			: $this->getAsFloat('price_regular_board');
 	}
 
 	/**
@@ -604,7 +672,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			throw new Exception('The parameter $price must be >= 0.00.');
 		}
 
-		$this->setAsFloat('price_regular_board', $price);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setRegularBoardPrice($price);
+		} else {
+			$this->setAsFloat('price_regular_board', $price);
+		}
 	}
 
 	/**
@@ -614,7 +686,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               otherwise
 	 */
 	public function hasRegularBoadPrice() {
-		return $this->hasFloat('price_regular_board');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasRegularBoadPrice()
+			: $this->hasFloat('price_regular_board');
 	}
 
 	/**
@@ -624,7 +698,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               price, will be >= 0.00
 	 */
 	public function getSpecialPrice() {
-		return $this->getAsFloat('price_special');
+		return ($this->isEventDate())
+			? $this->getTopic()->getSpecialPrice()
+			: $this->getAsFloat('price_special');
 	}
 
 	/**
@@ -637,7 +713,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			throw new Exception('The parameter $price must be >= 0.00.');
 		}
 
-		$this->setAsFloat('price_special', $price);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setSpecialPrice($price);
+		} else {
+			$this->setAsFloat('price_special', $price);
+		}
 	}
 
 	/**
@@ -646,7 +726,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event has a special price, false otherwise
 	 */
 	public function hasSpecialPrice() {
-		return $this->hasFloat('price_special');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasSpecialPrice()
+			: $this->hasFloat('price_special');
 	}
 
 	/**
@@ -656,7 +738,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               no special early bird price, will be >= 0.00
 	 */
 	public function getSpecialEarlyBirdPrice() {
-		return $this->getAsFloat('price_special_early');
+		return ($this->isEventDate())
+			? $this->getTopic()->getSpecialEarlyBirdPrice()
+			: $this->getAsFloat('price_special_early');
 	}
 
 	/**
@@ -669,7 +753,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			throw new Exception('The parameter $price must be >= 0.00.');
 		}
 
-		$this->setAsFloat('price_special_early', $price);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setSpecialEarlyBirdPrice($price);
+		} else {
+			$this->setAsFloat('price_special_early', $price);
+		}
 	}
 
 	/**
@@ -679,7 +767,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 otherwise
 	 */
 	public function hasSpecialEarlyBirdPrice() {
-		return $this->hasFloat('price_special_early');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasSpecialEarlyBirdPrice()
+			: $this->hasFloat('price_special_early');
 	}
 
 	/**
@@ -689,7 +779,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               special board price, will be >= 0.00
 	 */
 	public function getSpecialBoardPrice() {
-		return $this->getAsFloat('price_special_board');
+		return ($this->isEventDate())
+			? $this->getTopic()->getSpecialBoardPrice()
+			: $this->getAsFloat('price_special_board');
 	}
 
 	/**
@@ -702,7 +794,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			throw new Exception('The parameter $price must be >= 0.00.');
 		}
 
-		$this->setAsFloat('price_special_board', $price);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setSpecialBoardPrice($price);
+		} else {
+			$this->setAsFloat('price_special_board', $price);
+		}
 	}
 
 	/**
@@ -712,7 +808,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 otherwise
 	 */
 	public function hasSpecialBoardPrice() {
-		return $this->hasFloat('price_special_board');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasSpecialBoardPrice()
+			: $this->hasFloat('price_special_board');
 	}
 
 	/**
@@ -722,7 +820,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                has no additional information
 	 */
 	public function getAdditionalInformation() {
-		return $this->getAsString('additional_information');
+		return ($this->isEventDate())
+			? $this->getTopic()->getAdditionalInformation()
+			: $this->getAsString('additional_information');
 	}
 
 	/**
@@ -731,7 +831,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @param string our additional information, may be empty
 	 */
 	public function setAdditionalInformation($additionalInformation) {
-		$this->setAsString('additional_information', $additionalInformation);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setAdditionalInformation($additionalInformation);
+		} else {
+			$this->setAsString('additional_information', $additionalInformation);
+		}
 	}
 
 	/**
@@ -741,7 +845,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 otherwise
 	 */
 	public function hasAdditionalInformation() {
-		return $this->hasString('additional_information');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasAdditionalInformation()
+			: $this->hasString('additional_information');
 	}
 
 	/**
@@ -751,7 +857,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       has no payment methods
 	 */
 	public function getPaymentMethods() {
-		return $this->getAsList('payment_methods');
+		return ($this->isEventDate())
+			? $this->getTopic()->getPaymentMethods()
+			: $this->getAsList('payment_methods');
 	}
 
 	/**
@@ -810,7 +918,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 otherwise
 	 */
 	public function allowsMultipleRegistrations() {
-		return $this->getAsBoolean('allows_multiple_registrations');
+		return ($this->isEventDate())
+			? $this->getTopic()->allowsMultipleRegistrations()
+			: $this->getAsBoolean('allows_multiple_registrations');
 	}
 
 	/**
@@ -871,6 +981,16 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Returns whether this event has maximum attendees.
+	 *
+	 * @return boolean true if this event has maximum attendees, false otherwise
+	 *                 (allowing an unlimited number of attendees)
+	 */
+	public function hasMaximumAttendees() {
+		return $this->hasInteger('attendees_max');
+	}
+
+	/**
 	 * Returns whether this event has a registration queue.
 	 *
 	 * @return boolean true if this event has a registration queue, false
@@ -887,7 +1007,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       no target groups
 	 */
 	public function getTargetGroups() {
-		return $this->getAsList('target_groups');
+		return ($this->isEventDate())
+			? $this->getTopic()->getTargetGroups()
+			: $this->getAsList('target_groups');
 	}
 
 	/**
@@ -961,7 +1083,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       checkboxes
 	 */
 	public function getCheckboxes() {
-		return $this->getAsList('checkboxes');
+		return ($this->isEventDate())
+			? $this->getTopic()->getCheckboxes()
+			: $this->getAsList('checkboxes');
 	}
 
 	/**
@@ -971,7 +1095,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                 conditions, false otherwise
 	 */
 	public function usesTerms2() {
-		return $this->getAsBoolean('use_terms_2');
+		return ($this->isEventDate())
+			? $this->getTopic()->usesTerms2()
+			: $this->getAsBoolean('use_terms_2');
 	}
 
 	/**
@@ -980,7 +1106,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return string our notes, will be empty if this event has no notes
 	 */
 	public function getNotes() {
-		return $this->getAsString('notes');
+		return ($this->isEventDate())
+			? $this->getTopic()->getNotes()
+			: $this->getAsString('notes');
 	}
 
 	/**
@@ -989,7 +1117,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @param string our notes, may be empty
 	 */
 	public function setNotes($notes) {
-		$this->setAsString('notes', $notes);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setNotes($notes);
+		} else {
+			$this->setAsString('notes', $notes);
+		}
 	}
 
 	/**
@@ -998,7 +1130,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event has notes, false otherwise
 	 */
 	public function hasNotes() {
-		return $this->hasString('notes');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasNotes()
+			: $this->hasString('notes');
 	}
 
 	/**
@@ -1040,7 +1174,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                directory, will be empty if this event has no image
 	 */
 	public function getImage() {
-		return $this->getAsString('image');
+		return ($this->isEventDate())
+			? $this->getTopic()->getImage()
+			: $this->getAsString('image');
 	}
 
 	/**
@@ -1050,7 +1186,11 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *               upload directory, may be empty
 	 */
 	public function setImage($image) {
-		$this->setAsString('image', $image);
+		if ($this->isEventDate()) {
+			$this->getTopic()->setImage($image);
+		} else {
+			$this->setAsString('image', $image);
+		}
 	}
 
 	/**
@@ -1059,7 +1199,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return boolean true if this event has an image, false otherwise
 	 */
 	public function hasImage() {
-		return $this->hasString('image');
+		return ($this->isEventDate())
+			? $this->getTopic()->hasImage()
+			: $this->hasString('image');
 	}
 
 	/**
@@ -1069,7 +1211,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       no requirements
 	 */
 	public function getRequirements() {
-		return $this->getAsList('requirements');
+		return ($this->isEventDate())
+			? $this->getTopic()->getRequirements()
+			: $this->getAsList('requirements');
 	}
 
 	/**
@@ -1079,7 +1223,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       no dependencies
 	 */
 	public function getDependencies() {
-		return $this->getAsList('dependencies');
+		return ($this->isEventDate())
+			? $this->getTopic()->getDependencies()
+			: $this->getAsList('dependencies');
 	}
 
 	/**
