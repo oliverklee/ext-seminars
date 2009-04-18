@@ -205,29 +205,19 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Adds a payment method to this event.
+	 * Sets the number of payment methods for this record.
 	 *
-	 * @param integer the UID of the payment method to add, must be >= 0
+	 * TODO: This function needs to be removed once the data type of the
+	 * payment methods field was changed to an unsigned integer and we may use
+	 * the function createRelationAndUpdateCounter() of the testing framework.
+	 *
+	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=2948
+	 *
+	 * @param integer the number of payment methods that are associated with
+	 *                this event, must be >= 0
 	 */
-	public function addPaymentMethod($uid) {
-		if ($uid == 0) {
-			return;
-		}
-
-		$paymentMethods = t3lib_div::trimExplode(
-			',',
-			$this->getPaymentMethodsUids(),
-			1
-		);
-
-		if (!in_array($uid, $paymentMethods)) {
-			$paymentMethods[] = $uid;
-		}
-
-		$this->setRecordPropertyString(
-			'payment_methods',
-			implode(',', $paymentMethods)
-		);
+	public function setNumberOfPaymentMethods($paymentMethods) {
+		$this->setRecordPropertyInteger('payment_methods', $paymentMethods);
 	}
 
 	/**

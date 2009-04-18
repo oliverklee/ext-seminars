@@ -194,10 +194,15 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		array $paymentMethodData = array()
 	) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, $paymentMethodData
+			'tx_seminars_payment_methods', $paymentMethodData
 		);
-
-		$this->fixture->addPaymentMethod($uid);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $this->fixture->getUid(),
+			$uid
+		);
+		$this->fixture->setNumberOfPaymentMethods(
+			$this->fixture->getNumberOfPaymentMethods() + 1
+		);
 
 		return $uid;
 	}
@@ -2227,32 +2232,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->hasPaymentMethods()
-		);
-	}
-
-	public function testGetPaymentMethodsUidsWithNoPaymentMethodReturnsAnEmptyString() {
-		$this->assertEquals(
-			'',
-			$this->fixture->getPaymentMethodsUids()
-		);
-	}
-
-	public function testGetPaymentMethodsUidsWithSinglePaymentMethodReturnsASingleUid() {
-		$uid = $this->addPaymentMethodRelation(array());
-
-		$this->assertEquals(
-			$uid,
-			$this->fixture->getPaymentMethodsUids()
-		);
-	}
-
-	public function testGetPaymentMethodsUidsWithMultiplePaymentMethodsReturnsMultipleUidsSeparatedByComma() {
-		$firstUid = $this->addPaymentMethodRelation(array());
-		$secondUid = $this->addPaymentMethodRelation(array());
-
-		$this->assertEquals(
-			$firstUid.','.$secondUid,
-			$this->fixture->getPaymentMethodsUids()
 		);
 	}
 

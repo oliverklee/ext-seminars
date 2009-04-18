@@ -829,8 +829,11 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'payment_methods' => $paymentMethod->getUid(),
+				'payment_methods' => 1,
 			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $uid, $paymentMethod->getUid()
 		);
 
 		$this->assertTrue(
@@ -849,8 +852,11 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'payment_methods' => $paymentMethod->getUid(),
+				'payment_methods' => 1,
 			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $uid, $paymentMethod->getUid()
 		);
 
 		$this->assertEquals(
@@ -880,8 +886,11 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
-				'payment_methods' => $paymentMethod->getUid(),
+				'payment_methods' => 1,
 			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $uid, $paymentMethod->getUid()
 		);
 
 		$this->assertTrue(
@@ -900,8 +909,11 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
-				'payment_methods' => $paymentMethod->getUid(),
+				'payment_methods' => 1,
 			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $uid, $paymentMethod->getUid()
 		);
 
 		$this->assertEquals(
@@ -934,7 +946,7 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 			get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('payment_methods' => $paymentMethod->getUid())
+			array('payment_methods' => 1)
 		);
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -942,6 +954,10 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $topicUid,
+			$paymentMethod->getUid()
 		);
 
 		$this->assertTrue(
@@ -958,7 +974,7 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 			get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('payment_methods' => $paymentMethod->getUid())
+			array('payment_methods' => 1)
 		);
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -966,6 +982,10 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $topicUid,
+			$paymentMethod->getUid()
 		);
 
 		$this->assertEquals(

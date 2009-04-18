@@ -178,11 +178,18 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		// method is provided.
 		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00)
 			&& ($seminar->getNumberOfPaymentMethods() == 1)) {
-				$availablePaymentMethods = t3lib_div::trimExplode(
-					',',
-					$seminar->getPaymentMethodsUids()
+				$rows = tx_oelib_db::selectMultiple(
+					'uid',
+					'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
+					'tx_seminars_payment_methods.uid = ' .
+						'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
+						'AND tx_seminars_seminars_payment_methods_mm.uid_local=' .
+						$seminar->getTopicUid() .
+						tx_oelib_db::enableFields('tx_seminars_payment_methods'),
+					'',
+					'tx_seminars_seminars_payment_methods_mm.sorting'
 				);
-				$methodOfPayment = $availablePaymentMethods[0];
+				$methodOfPayment = $rows[0][$uid];
 		}
 		$this->recordData['method_of_payment'] = $methodOfPayment;
 

@@ -1466,9 +1466,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$rows = tx_oelib_db::selectMultiple(
 			'title',
-			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid IN (' . $this->getPaymentMethodsUids() . ')' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
+			'tx_seminars_payment_methods.uid = ' .
+				'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
+				'AND tx_seminars_seminars_payment_methods_mm.uid_local=' .
+				$this->getTopicUid() .
+				tx_oelib_db::enableFields('tx_seminars_payment_methods'),
+			'',
+			'tx_seminars_seminars_payment_methods_mm.sorting'
 		);
 
 		$result = array();
@@ -1493,20 +1498,21 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return '';
 		}
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$rows = tx_oelib_db::selectMultiple(
 			'title, description',
-			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid IN (' . $this->getPaymentMethodsUids() . ')' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
+			'tx_seminars_payment_methods.uid = ' .
+				'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
+				'AND tx_seminars_seminars_payment_methods_mm.uid_local=' .
+				$this->getTopicUid() .
+				tx_oelib_db::enableFields('tx_seminars_payment_methods'),
+			'',
+			'tx_seminars_seminars_payment_methods_mm.sorting'
 		);
-
-		if (!$dbResult) {
-			return '';
-		}
 
 		$result = '';
 
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+		foreach ($rows as $row) {
 			$result .= $row['title'].': ';
 			$result .= $row['description'].LF.LF;
 		}
@@ -1527,24 +1533,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return '';
 		}
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'title',
-			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid IN (' . $this->getPaymentMethodsUids() . ')' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
-		);
-
-		if (!$dbResult) {
-			return '';
-		}
-
-		$paymentMethods = array();
-
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$paymentMethods[] = $row['title'];
-		}
-
-		return implode(LF, $paymentMethods);
+		return implode(LF, $this->getPaymentMethods());
 	}
 
 	/**
@@ -1621,24 +1610,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
  	}
 
 	/**
-	 * Gets the UIDs of our allowed payment methods as a comma-separated list,
-	 * Returns an empty string if this seminar doesn't have any payment methods.
-	 *
-	 * @return string our payment methods as plain text (or '' if there
-	 *                are no payment methods set)
-	 */
-	public function getPaymentMethodsUids() {
-		return $this->getTopicString('payment_methods');
-	}
-
-	/**
 	 * Checks whether this seminar has any payment methods set.
 	 *
 	 * @return boolean true if the seminar has any payment methods, false
 	 *                 if it is free
 	 */
 	public function hasPaymentMethods() {
-		return $this->hasTopicString('payment_methods');
+		return $this->hasTopicInteger('payment_methods');
 	}
 
 	/**
@@ -1647,18 +1625,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return integer the number of available payment methods, might 0
 	 */
 	public function getNumberOfPaymentMethods() {
-		$result = 0;
-
-		if ($this->hasPaymentMethods()) {
-			$availablePaymentMethods = t3lib_div::trimExplode(
-				',',
-				$this->getPaymentMethodsUids()
-			);
-
-			$result = count($availablePaymentMethods);
-		}
-
-		return $result;
+		return $this->getTopicInteger('payment_methods');
 	}
 
 	/**

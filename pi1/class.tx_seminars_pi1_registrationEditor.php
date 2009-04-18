@@ -662,14 +662,25 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *               (for the uid)
 	 */
 	public function populateListPaymentMethods(array $items) {
-		$result = array();
+		if (!$this->getSeminar()->hasPaymentMethods()) {
+			return array();
+		}
 
-		if ($this->getSeminar()->hasPaymentMethods()) {
-			$result = $this->populateList(
-				$items,
-				SEMINARS_TABLE_PAYMENT_METHODS,
-				'uid IN (' . $this->getSeminar()->getPaymentMethodsUids() . ')',
-				true
+		$rows = tx_oelib_db::selectMultiple(
+			'uid, title',
+			'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
+			'tx_seminars_payment_methods.uid = ' .
+				'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
+				'AND tx_seminars_seminars_payment_methods_mm.uid_local=' .
+				$this->getSeminar()->getTopicUid() .
+				tx_oelib_db::enableFields('tx_seminars_payment_methods')
+		);
+
+		$result = array();
+		foreach ($rows as $row) {
+			$result[] = array(
+				'caption' => $row['title'] . '<br />',
+				'value' => $row['uid'],
 			);
 		}
 

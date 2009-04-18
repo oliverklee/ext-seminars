@@ -1580,7 +1580,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('payment_methods' => $paymentMethodUid)
+			array('payment_methods' => 1)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
+			$paymentMethodUid
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1599,7 +1603,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('payment_methods' => $paymentMethodUid)
+			array('payment_methods' => 1)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
+			$paymentMethodUid
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1622,9 +1630,16 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
-				'payment_methods' => $paymentMethodUid1 . ',' .
-					$paymentMethodUid2,
+				'payment_methods' => 2,
 			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
+			$paymentMethodUid1
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
+			$paymentMethodUid2
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1648,7 +1663,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
-			array('payment_methods' => $paymentMethodUid)
+			array('payment_methods' => 1)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
+			$paymentMethodUid
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
