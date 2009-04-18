@@ -1638,6 +1638,26 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOnePaymentMethodContainsPaymentMethodTitleProcessedByHtmlspecialchars() {
+		$paymentMethodTitle = '<b>Payment & Method</b>';
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => $paymentMethodTitle)
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('payment_methods' => $paymentMethodUid)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			htmlspecialchars($paymentMethodTitle),
+			$this->fixture->main('', array())
+		);
+	}
+
 
 	//////////////////////////////////////////////////////////
 	// Tests concerning the basic functions of the list view
