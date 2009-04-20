@@ -34,7 +34,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
+class tx_seminars_Mapper_EventTopic_testcase extends tx_phpunit_testcase {
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
