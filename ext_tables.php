@@ -7,7 +7,7 @@ include_once(t3lib_extMgm::extPath($_EXTKEY) . 'class.tx_seminars_flexForms.php'
 
 t3lib_extMgm::addLLrefForTCAdescr(
 	'tx_seminars_seminars',
-	'EXT:seminars/locallang_csh_seminars.xml'
+	'EXT:seminars/Resources/Private/Language/locallang_csh_seminars.xml'
 );
 
 // Retrieve the path to the extension's directory.
