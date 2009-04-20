@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2952] Change: Move tca.php to Configuration/TCA/tca.php
 - [#1142] Change: Require PHP 5.2
 - [#2900] Change: Change the event-payment method relations to real m:n relations
 - [#2947] Change: Move the HTML for the payment method list from the event model to the template
