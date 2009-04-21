@@ -54,6 +54,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/** @var integer the number of categories for the current event record */
 	private $numberOfCategories = 0;
 
+	/**
+	 * @var integer the number of organizers for the current event record
+	 */
+	private $numberOfOrganizers = 0;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
@@ -189,6 +194,29 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		return $uid;
+	}
+
+	/**
+	 * Inserts an organizer record into the database and creates a relation to
+	 * to the seminar with the UID stored in $this->seminarUid.
+	 *
+	 * @param array data of the organizer to add, may be empty
+	 */
+	private function addOrganizerRelation(array $organizerData = array()) {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, $organizerData
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			$this->seminarUid, $organizerUid
+		);
+
+		$this->numberOfOrganizers++;
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('organizers' => $this->numberOfOrganizers)
+		);
 	}
 
 
@@ -1001,7 +1029,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRelation(
 			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
 		);
-
 		$this->fixture->piVars['showUid'] = $eventUid;
 
 		$this->assertContains(
@@ -1673,6 +1700,90 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertContains(
 			htmlspecialchars($paymentMethodTitle),
+			$this->fixture->main('', array())
+		);
+	}
+
+
+	/////////////////////////////////////////////////////
+	// Tests concerning the organizers in the list view
+	/////////////////////////////////////////////////////
+
+	public function test_SingleView_ForEventWithOrganzier_ShowsOrganizerTitle() {
+		$this->addOrganizerRelation(array('title' => 'foo organizer'));
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'foo organizer',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithOrganizerWithDescription_ShowsOrganizerDescription() {
+		$this->addOrganizerRelation(
+			array('title' => 'foo', 'description' => 'organizer description')
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'organizer description',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithOrganizerWithHomepage_LinksOrganizerToItsHomepage() {
+		$this->addOrganizerRelation(
+			array('title' => 'foo', 'homepage' => 'http://www.orgabar.com')
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'http://www.orgabar.com',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_DoesNotHaveUnreplacedMarkers() {
+		$this->addOrganizerRelation(array('title' => 'foo organizer'));
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			'###',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithTwoOrganizers_ShowsBothOrganizers() {
+		$this->addOrganizerRelation(array('title' => 'organizer 1'));
+		$this->addOrganizerRelation(array('title' => 'organizer 2'));
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertRegExp(
+			'/organizer 1.*organizer 2/s',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithOrganizerWithHomepage_HtmlSpecialcharsTitleOfOrganizer() {
+		$this->addOrganizerRelation(
+			array('title' => 'foo<bar')
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			htmlspecialchars('foo<bar'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithOrganizerWithoutHomepage_HtmlSpecialcharsTitleOfOrganizer() {
+		$this->addOrganizerRelation(
+			array('title' => 'foo<bar')
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			htmlspecialchars('foo<bar'),
 			$this->fixture->main('', array())
 		);
 	}

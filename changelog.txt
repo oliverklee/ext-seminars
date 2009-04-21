@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2925] Feature: Show the organizers description in the single view, if not empty
 - [#2954] Change: Move locallang_csh_seminars.xml to Resources/Private/Language/locallang_csh_seminars.xml
 - [#1680] Remove the XCLASS for t3lib_tcemain
 - [#2711] Fix: $BE_USER needs to be marked as global in tx_seminars_flexForms::__construct

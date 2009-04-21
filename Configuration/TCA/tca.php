@@ -1755,7 +1755,7 @@ $TCA['tx_seminars_sites'] = array(
 $TCA['tx_seminars_organizers'] = array(
 	'ctrl' => $TCA['tx_seminars_organizers']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,homepage,email,email_footer'
+		'showRecordFieldList' => 'title,description,homepage,email,email_footer'
 	),
 	'columns' => array(
 		'title' => array(

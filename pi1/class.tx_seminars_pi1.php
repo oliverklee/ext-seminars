@@ -719,7 +719,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setRequirementsMarker();
 			$this->setDependenciesMarker();
 
-			$this->setMarker('organizers', $this->seminar->getOrganizers($this));
+			$this->setMarker('organizers', $this->getOrganizersMarkerContent());
 			$this->setOrganizingPartnersMarker();
 
 			$this->setOwnerDataMarker();
@@ -2890,6 +2890,52 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				'label_' . $this->seminar->getLanguageKeySuffixForType($speakerType)
 			)
 		);
+	}
+
+	/**
+	 * Returns the data for the organizers marker.
+	 *
+	 * @return string the organizers subpart with the data of the organizers,
+	 *                will be empty if the event has no organizers
+	 */
+	private function getOrganizersMarkerContent() {
+		if (!$this->seminar->hasOrganizers()) {
+			return '';
+		}
+
+		$result = '';
+		$organizers = $this->seminar->getOrganizerBag();
+
+		foreach ($organizers as $organizer) {
+			if ($organizer->hasHomepage()) {
+				$organizerTitle = $this->cObj->getTypoLink(
+					$organizer->getName(),
+					$organizer->getHomepage(),
+					array(),
+					$this->getConfValueString('externalLinkTarget')
+				);
+			} else {
+				$organizerTitle = htmlspecialchars($organizer->getName());
+			}
+			$this->setMarker('organizer_item_title', $organizerTitle);
+
+			if ($organizer->hasDescription()) {
+				$this->setMarker(
+					'organizer_description_content',
+					$this->pi_RTEcssText($organizer->getDescription())
+				);
+				$description = $this->getSubpart(
+					'ORGANIZER_DESCRIPTION_ITEM'
+				);
+			} else {
+				$description = '';
+			}
+			$this->setMarker('organizer_item_description', $description);
+
+			$result .= $this->getSubpart('ORGANIZER_LIST_ITEM');
+		}
+
+		return $result;
 	}
 }
 
