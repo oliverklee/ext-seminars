@@ -2229,6 +2229,41 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_allowsRegistrationByDateForRegistrationBeginInFuture_ReturnsFalse() {
+		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] + 10);
+
+		$this->assertFalse(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationByDate_ForRegistrationBeginInPast_ReturnsTrue() {
+		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
+
+		$this->assertTrue(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationByDate_ForNoRegistrationBegin_ReturnsTrue() {
+		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
+		$this->seminar->setRegistrationBeginDate(0);
+
+		$this->assertTrue(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
+
+	public function test_allowsRegistrationByDate_ForBeginDateInPastAndRegistrationBeginInPast_ReturnsFalse() {
+		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
+		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 50);
+
+		$this->assertFalse(
+			$this->fixture->allowsRegistrationByDate($this->seminar)
+		);
+	}
 
 	///////////////////////////////////////////////
 	// Tests concerning allowsRegistrationBySeats
@@ -2269,6 +2304,39 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)
+		);
+	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning registrationHasStarted
+	////////////////////////////////////////////
+
+	public function test_registrationHasStarted_ForEventWithoutRegistrationBegin_ReturnsTrue() {
+		$this->seminar->setRegistrationBeginDate(0);
+
+		$this->assertTrue(
+			$this->fixture->registrationHasStarted($this->seminar)
+		);
+	}
+
+	public function test_registrationHasStarted_ForEventWithRegistrationBeginInPast_ReturnsTrue() {
+		$this->seminar->setRegistrationBeginDate(
+			$GLOBALS['SIM_EXEC_TIME'] - 42
+		);
+
+		$this->assertTrue(
+			$this->fixture->registrationHasStarted($this->seminar)
+		);
+	}
+
+	public function test_registrationHasStarted_ForEventWithRegistrationBeginInFuture_ReturnsFalse() {
+		$this->seminar->setRegistrationBeginDate(
+			$GLOBALS['SIM_EXEC_TIME'] + 42
+		);
+
+		$this->assertFalse(
+			$this->fixture->registrationHasStarted($this->seminar)
 		);
 	}
 }

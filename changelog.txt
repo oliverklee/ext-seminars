@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2922] Feature: Hide the registration link in the list view when registration_begin_date is in future
 - [#2488] Fix: Test failure testTypoScriptConfigurationIsLoaded
 - [#2925] Feature: Show the organizers description in the single view, if not empty
 - [#2954] Change: Move locallang_csh_seminars.xml to Resources/Private/Language/locallang_csh_seminars.xml

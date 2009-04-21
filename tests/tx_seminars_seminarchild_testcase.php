@@ -1072,6 +1072,40 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_CanSomebodyRegister_ForEventWithRegistrationBeginInFuture_ReturnsFalse() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+		$this->fixture->setUnlimitedVacancies();
+		$this->fixture->setRegistrationBeginDate(
+			$GLOBALS['SIM_EXEC_TIME'] + 20
+		);
+
+		$this->assertFalse(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function test_CanSomebodyRegister_ForEventWithRegistrationBeginInPast_ReturnsTrue() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+		$this->fixture->setUnlimitedVacancies();
+		$this->fixture->setRegistrationBeginDate(
+			$GLOBALS['SIM_EXEC_TIME'] - 20
+		);
+
+		$this->assertTrue(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
+	public function test_CanSomebodyRegister_ForEventWithoutRegistrationBegin_ReturnsTrue() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+		$this->fixture->setUnlimitedVacancies();
+		$this->fixture->setRegistrationBeginDate(0);
+
+		$this->assertTrue(
+			$this->fixture->canSomebodyRegister()
+		);
+	}
+
 
 	////////////////////////////////////////////////
 	// Tests concerning canSomebodyRegisterMessage
@@ -1198,6 +1232,43 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(10);
 		$this->fixture->setRegistrationQueue(true);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForEventWithRegistrationBeginInFuture_ReturnsEmptyString() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+		$this->fixture->setUnlimitedVacancies();
+		$this->fixture->setRegistrationBeginDate(
+			$GLOBALS['SIM_EXEC_TIME'] + 20
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForEventWithRegistrationBeginInPast_ReturnsEmptyString() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+		$this->fixture->setUnlimitedVacancies();
+		$this->fixture->setRegistrationBeginDate(
+			$GLOBALS['SIM_EXEC_TIME'] - 20
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->canSomebodyRegisterMessage()
+		);
+	}
+
+	public function test_CanSomebodyRegisterMessage_ForEventWithoutRegistrationBegin_ReturnsEmptyString() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
+		$this->fixture->setUnlimitedVacancies();
+		$this->fixture->setRegistrationBeginDate(0);
 
 		$this->assertEquals(
 			'',

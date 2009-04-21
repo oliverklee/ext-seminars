@@ -1188,11 +1188,15 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *                 otherwise
 	 */
 	public function allowsRegistrationByDate(tx_seminars_seminar $event) {
-		return ($event->hasDate())
-			? !$event->isRegistrationDeadlineOver()
-			: $event->getConfValueBoolean(
+		if ($event->hasDate()) {
+			$result = !$event->isRegistrationDeadlineOver();
+		} else {
+			$result = $event->getConfValueBoolean(
 				'allowRegistrationForEventsWithoutDate'
 			);
+		}
+
+		return $result && $this->registrationHasStarted($event);
 	}
 
 	/**
@@ -1207,6 +1211,23 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	public function allowsRegistrationBySeats(tx_seminars_seminar $event) {
 		return $event->hasRegistrationQueue() || $event->hasUnlimitedVacancies()
 			|| $event->hasVacancies();
+	}
+
+	/**
+	 * Checks whether the registration for this event has started.
+	 *
+	 * @param tx_seminars_seminar the event to check the registration for
+	 *
+	 * @return boolean true if registration for this event already has
+	 *                 started, false otherwise
+	 */
+	public function registrationHasStarted(tx_seminars_seminar $event) {
+		if (!$event->hasRegistrationBegin()) {
+			return true;
+		}
+
+		return ($GLOBALS['SIM_EXEC_TIME']
+			>= $event->getRegistrationBeginAsUnixTimestamp());
 	}
 }
 

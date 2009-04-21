@@ -3502,6 +3502,62 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_ListView_ForEventWithRegistrationBeginInFuture_HidesRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'queue_size' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] + 20,
+			)
+		);
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'queue_size' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] - 42,
+			)
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => 0,
+			)
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
 
 	//////////////////////////////////////////
 	// Tests concerning the "my events" view
@@ -3999,7 +4055,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning the registration link in the single view
 	//////////////////////////////////////////////////////////////
 
-		public function test_SingleView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
+	public function test_SingleView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', true);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
@@ -4088,6 +4144,63 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			$this->fixture->translate('label_onlinePrebooking'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithRegistrationBeginInFuture_DoesNotShowRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] + 40,
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertNotContains(
+			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] - 42,
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => 0,
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			$this->fixture->translate('label_onlineRegistration'),
 			$this->fixture->main('', array())
 		);
 	}

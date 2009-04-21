@@ -2721,6 +2721,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function canSomebodyRegisterMessage() {
 		$message = '';
+		$registrationManager
+			= t3lib_div::makeInstance('tx_seminars_registrationmanager');
 
 		if (!$this->needsRegistration()) {
 			$message = $this->translate('message_noRegistrationNecessary');
@@ -2732,9 +2734,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$message = $this->translate('message_noDate');
 		} elseif ($this->hasDate() && $this->isRegistrationDeadlineOver()) {
 			$message = $this->translate('message_seminarRegistrationIsClosed');
-		} elseif (!$this->hasRegistrationQueue() && $this->isFull()) {
+		} elseif (!$registrationManager->allowsRegistrationBySeats($this)) {
 			$message = $this->translate('message_noVacancies');
 		}
+		$registrationManager->__destruct();
 
 		return $message;
 	}
