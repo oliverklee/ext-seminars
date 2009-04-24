@@ -1239,7 +1239,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithRegistrationBeginInFuture_ReturnsEmptyString() {
+	public function test_CanSomebodyRegisterMessage_ForEventWithRegistrationBeginInFuture_ReturnsRegistrationOpensOnMessage() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(
@@ -1247,7 +1247,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertEquals(
-			'',
+			sprintf(
+				$this->fixture->translate('message_registrationOpensOn'),
+				$this->fixture->getRegistrationBegin()
+			),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
 	}

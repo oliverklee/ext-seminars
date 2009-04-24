@@ -1996,21 +1996,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$this->getVacanciesClasses($this->seminar)
 			);
 
-			$registrationLink = '';
-			if ($whatToDisplay != 'my_events') {
-				$registrationLink
-					= $this->registrationManager->getRegistrationLink(
-						$this, $this->seminar
-					);
-			} elseif ($whatToDisplay == 'my_events'
-				&& $this->seminar->isUnregistrationPossible()
-			) {
-				$registrationLink = $this->registrationManager->getLinkToUnregistrationPage(
-					$this,
-					$this->registration
-				);
-			}
-			$this->setMarker('registration', $registrationLink);
+			$this->setRegistrationLinkMarker($whatToDisplay);
+
 			$this->setMarker(
 				'list_registrations',
 				$this->getRegistrationsListLink()
@@ -2936,6 +2923,45 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Sets the marker for the registration link in the list view.
+	 *
+	 * @param string the list type which should be shown, must not be empty
+	 */
+	private function setRegistrationLinkMarker($whatToDisplay) {
+		if ($whatToDisplay == 'my_events') {
+			 $this->setMarker('registration',
+			 	(($this->seminar->isUnregistrationPossible())
+					? $this->registrationManager->getLinkToUnregistrationPage(
+						$this,
+						$this->registration
+					)
+					: ''
+				)
+			);
+
+			return;
+		}
+
+		$registrationLink
+			= $this->registrationManager->getRegistrationLink(
+				$this, $this->seminar
+			);
+
+		if ($registrationLink == ''
+			&& !$this->registrationManager->registrationHasStarted(
+				$this->seminar
+			)
+		) {
+			$registrationLink = sprintf(
+				$this->translate('message_registrationOpensOn'),
+				$this->seminar->getRegistrationBegin()
+			);
+		}
+
+		$this->setMarker('registration', $registrationLink);
 	}
 }
 

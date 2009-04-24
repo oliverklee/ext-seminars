@@ -2736,6 +2736,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$message = $this->translate('message_seminarRegistrationIsClosed');
 		} elseif (!$registrationManager->allowsRegistrationBySeats($this)) {
 			$message = $this->translate('message_noVacancies');
+		} elseif (!$registrationManager->registrationHasStarted($this)) {
+			$message = sprintf(
+				$this->translate('message_registrationOpensOn'),
+				$this->getRegistrationBegin()
+			);
 		}
 		$registrationManager->__destruct();
 
