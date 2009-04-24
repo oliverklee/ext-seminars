@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2963] Fix: Registration crashes with fatal error
 - [#2923] Feature: In the list view, show registration begin date for events with registration_begin_date in future
 - [#2961] Fix: Remove the patch already checked in Bug 2936 from branch.
 - [#2922] Feature: Hide the registration link in the list view when registration_begin_date is in future
