@@ -6841,5 +6841,161 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$bag->__destruct();
 	}
+
+
+	//////////////////////////////////////////////
+	// Tests concerning limitToEarliestBeginDate
+	//////////////////////////////////////////////
+
+	public function test_limitToEarliestBeginDate_ForEventWithoutBeginDate_FindsThisEvent() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$this->fixture->limitToEarliestBeginDate(42);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToEarliestBeginDate_ForEventWithBeginDateEqualToGivenTimestamp_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => 42)
+		);
+		$this->fixture->limitToEarliestBeginDate(42);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToEarliestBeginDate_ForEventWithGreaterBeginDateThanGivenTimestamp_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => 42)
+		);
+		$this->fixture->limitToEarliestBeginDate(21);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToEarliestBeginDate_ForEventWithBeginDateLowerThanGivenTimestamp_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => 42)
+		);
+		$this->fixture->limitToEarliestBeginDate(84);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToEarliestBeginDate_ForZeroGivenAsTimestamp_UnsetsFilter() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => 21)
+		);
+
+		$this->fixture->limitToEarliestBeginDate(42);
+
+		$this->fixture->limitToEarliestBeginDate(0);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning limitToLatestBeginDate
+	////////////////////////////////////////////
+
+	public function test_limitToLatestBeginDate_ForEventWithoutDate_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$this->fixture->limitToLatestBeginDate(42);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToLatestBeginDate_ForEventBeginDateEqualToGivenTimestamp_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => 42)
+		);
+		$this->fixture->limitToLatestBeginDate(42);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToLatestBeginDate_ForEventWithBeginDateAfterGivenTimestamp_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => 42)
+		);
+		$this->fixture->limitToLatestBeginDate(21);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToLatestBeginDate_ForEventBeginDateBeforeGivenTimestamp_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => 42)
+		);
+		$this->fixture->limitToLatestBeginDate(84);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToLatestBeginDate_ForZeroGiven_UnsetsTheFilter() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+
+		$this->fixture->limitToLatestBeginDate(42);
+		$this->fixture->limitToLatestBeginDate(0);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
 }
 ?>

@@ -1066,6 +1066,49 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 					$GLOBALS['SIM_EXEC_TIME'] . ')' .
 			')';
 	}
+
+	/**
+	 * Limits the bag to events which have a begin_date greater than the given
+	 * time-stamp or without a begin_date.
+	 *
+	 * A $earliestBeginDate of 0 will remove the filter.
+	 *
+	 * @param integer the earliest begin date as UNIX time-stamp, 0 will remove
+	 *                the limit
+	 */
+	public function limitToEarliestBeginDate($earliestBeginDate) {
+		if ($earliestBeginDate == 0) {
+			unset($this->whereClauseParts['earliestBeginDate']);
+
+			return;
+		}
+
+		$this->whereClauseParts['earliestBeginDate'] = '(' .
+			SEMINARS_TABLE_SEMINARS . '.begin_date = 0 OR ' .
+			SEMINARS_TABLE_SEMINARS . '.begin_date >= '. $earliestBeginDate .
+			')';
+	}
+
+	/**
+	 * Limits the bag to events which have a begin_date lower than the given
+	 * time-stamp, but greater than zero.
+	 *
+	 * A $latestBeginDate of 0 will remove the filter.
+	 *
+	 * @param integer the latest begin date as UNIX time-stamp, 0 will remove
+	 *                the limit
+	 */
+	public function limitToLatestBeginDate($latestBeginDate) {
+		if ($latestBeginDate == 0) {
+			unset($this->whereClauseParts['latestBeginDate']);
+
+			return;
+		}
+
+		$this->whereClauseParts['latestBeginDate'] =
+			SEMINARS_TABLE_SEMINARS . '.begin_date > 0 AND ' .
+			SEMINARS_TABLE_SEMINARS . '.begin_date <= ' . $latestBeginDate;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {
