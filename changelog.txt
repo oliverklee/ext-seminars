@@ -1,8 +1,8 @@
 0.9.0 (currently working on)
+- [#2923] Feature: In the list view, show registration begin date for events with registration_begin_date in future
 - [#2941] Feature: Add filtering by date range to the seminar bag builder
 
 0.8.0 (branched 2009-04-24)
-- [#2923] Feature: In the list view, show registration begin date for events with registration_begin_date in future
 - [#2922] Feature: Hide the registration link in the list view when registration_begin_date is in future
 - [#2488] Fix: Test failure testTypoScriptConfigurationIsLoaded
 - [#2925] Feature: Show the organizers description in the single view, if not empty
