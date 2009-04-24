@@ -547,7 +547,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
-			$this->registration->sendAdditionalNotification($this->registration);
+			$this->sendAdditionalNotification($this->registration);
 		}
 	}
 
