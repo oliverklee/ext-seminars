@@ -252,6 +252,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkLimitListViewToPlaces();
 		$this->checkCategoryIconDisplay();
 		$this->checkSeminarImageSizes();
+		$this->checkDisplaySearchFormFields();
 	}
 
  	/**
@@ -2167,6 +2168,24 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'on the single view page. If this value is not set ' .
 				'correctly, the image might be too large or not get ' .
 				'displayed at all.'
+		);
+	}
+
+	/**
+	 * Checks the setting for displaySearchFormFields.
+	 */
+	private function checkDisplaySearchFormFields() {
+		$this->checkIfMultiInSetOrEmpty(
+			'displaySearchFormFields',
+			true,
+			's_listView',
+			'This value specifies which search widget fields to display in the ' .
+				'list view. The search widget will not display any fields at ' .
+				'all if this value is empty or contains only invalid keys.',
+			array(
+				'event_type', 'language', 'country' , 'city' , 'place',
+				'full_text_search',
+			)
 		);
 	}
 }
