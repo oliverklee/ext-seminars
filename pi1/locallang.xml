@@ -289,6 +289,7 @@
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 			<label index="message_requirementsNotFulfilled_formal">You are not registered for all required events yet.</label>
 			<label index="message_requirementsNotFulfilled_informal">You are not registered for all required events yet.</label>
+			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="countdown_days_plural">days</label>
 			<label index="countdown_days_singular">day</label>
 			<label index="countdown_hours_plural">hours</label>
@@ -808,6 +809,7 @@
 			<label index="message_unregistrationNotPossible">Die Abmelde-Deadline ist leider schon vorüber.</label>
 			<label index="message_requirementsNotFulfilled_formal">Sie sind noch nicht für alle nötigen Veranstaltungen angemeldet.</label>
 			<label index="message_requirementsNotFulfilled_informal">Du bist noch nicht für alle nötigen Veranstaltungen angemeldet.</label>
+			<label index="message_registrationOpensOn">ab %s</label>
 			<label index="countdown_days_plural">Tage</label>
 			<label index="countdown_days_singular">Tag</label>
 			<label index="countdown_hours_plural">Stunden</label>
@@ -2216,6 +2218,7 @@
 			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
+			<label index="message_registrationOpensOn" type="integer">260849167</label>
 			<label index="countdown_days_plural" type="integer">72343236</label>
 			<label index="countdown_days_singular" type="integer">103331803</label>
 			<label index="countdown_hours_plural" type="integer">121429469</label>
@@ -3426,6 +3429,7 @@
 			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
+			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="countdown_days_plural">days</label>
 			<label index="countdown_days_singular">day</label>
 			<label index="countdown_hours_plural">hours</label>

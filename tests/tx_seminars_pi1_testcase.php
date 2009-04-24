@@ -95,6 +95,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'dateFormatYMD', '%d.%m.%Y'
 		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'timeFormat', '%H:%M'
+		);
 	}
 
 	public function tearDown() {
@@ -3521,6 +3524,29 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_ListView_ForEventWithRegistrationBeginInFuture_ShowsRegistrationOpenOnMessage() {
+		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 20;
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'queue_size' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => $registrationBegin,
+			)
+		);
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('message_registrationOpensOn'),
+				strftime('%d.%m.%Y %H:%M', $registrationBegin)
+			),
+			$this->fixture->main('', array())
+		);
+	}
+
 	public function test_ListView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', true);
 		$this->testingFramework->changeRecord(
@@ -4163,6 +4189,29 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			$this->fixture->translate('label_onlineRegistration'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForEventWithRegistrationBeginInFuture_ShowsRegistrationOpensOnMessage() {
+		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 40;
+		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 0,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'begin_date_registration' => $registrationBegin,
+			)
+		);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('message_registrationOpensOn'),
+				strftime('%d.%m.%Y %H:%M', $registrationBegin)
+			),
 			$this->fixture->main('', array())
 		);
 	}

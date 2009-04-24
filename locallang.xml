@@ -94,6 +94,7 @@
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
 			<label index="message_fullyBooked">fully booked</label>
+			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
@@ -368,6 +369,7 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="message_forFree">kostenlos</label>
 			<label index="message_enough">genug</label>
 			<label index="message_fullyBooked">ausgebucht</label>
+			<label index="message_registrationOpensOn">ab %s</label>
 			<label index="message_accessDenied_formal">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
 			<label index="message_accessDenied_informal">Zu diesem Teil der Site hast du leider keine Zugangsberechtigung.</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
@@ -1138,6 +1140,8 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_enough" type="integer">249306686</label>
+			<label index="message_fullyBooked" type="integer">65406827</label>
+			<label index="message_registrationOpensOn" type="integer">260849167</label>
 			<label index="message_accessDenied_formal" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
@@ -1189,7 +1193,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_background_knowledge" type="integer">123294752</label>
 			<label index="label_known_from" type="integer">129140510</label>
 			<label index="label_notes" type="integer">256667525</label>
-			<label index="message_fullyBooked" type="integer">65406827</label>
 			<label index="email_eventTakesPlaceReminderSubject" type="integer">83496300</label>
 			<label index="email_eventTakesPlaceReminder" type="integer">57044606</label>
 			<label index="email_cancelationDeadlineReminderSubject" type="integer">74466469</label>
@@ -1702,6 +1705,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
 			<label index="message_fullyBooked">fully booked</label>
+			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
