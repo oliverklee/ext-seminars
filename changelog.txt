@@ -25,7 +25,7 @@
 - [#2921] Feature: Add the field registration_begin_date to the FE-Editor
 - [#2920] Feature: Add a field registration_begin_date to the seminars table and the BE
 - [#2910] Change: Move the flexforms XML file to Configuration/FlexForms
-- [#2908] Change: Move the TypoScript configuration from static to Configuration/Settings
+- [#2908] Change: Move the TypoScript configuration from static to Configuration/TypoScript
 - [#2901] Fix: warning 102 when saving seminar-record of type 'date'
 - [#2796] Feature: Add event model and mapper
 - [#2774] Fix: Cannot cancel an unregistration
