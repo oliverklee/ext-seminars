@@ -297,7 +297,7 @@ t3lib_extMgm::addPiFlexFormValue(
 	'FILE:EXT:seminars/Configuration/FlexForms/flexforms_pi1.xml'
 );
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/Settings', 'Seminars');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Seminars');
 
 t3lib_extMgm::addPlugin(
 	array(

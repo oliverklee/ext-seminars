@@ -299,7 +299,7 @@ class ext_update {
 				array(
 					'include_static_file' => str_replace(
 						'EXT:seminars/static/',
-						'EXT:seminars/Configuration/Settings',
+						'EXT:seminars/Configuration/TypoScript',
 						$row['include_static_file']
 					),
 				)
