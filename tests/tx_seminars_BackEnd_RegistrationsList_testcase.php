@@ -75,6 +75,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
+		tx_seminars_registration::purgeCachedSeminars();
 		$this->fixture->__destruct();
 		$this->backEndModule->__destruct();
 		unset(
