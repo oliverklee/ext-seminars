@@ -78,9 +78,29 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	protected $staticInfo = null;
 
 	/**
+	 * @var array the keys of the search fields which should be displayed in the
+	 *            search form
+	 */
+	private $displayedSearchFields = array();
+
+	/**
+	 * @var string the prefix of every subpart of the search widget
+	 */
+	const SUBPART_PREFIX = 'SEARCH_PART_';
+
+	/**
+	 * @var tx_seminars_seminarbag all seminars to show in the list view
+	 */
+	private $seminarBag = null;
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
+		if ($this->seminarBag) {
+			$this->seminarBag->__destruct();
+			unset($this->seminarBag);
+		}
 		unset($this->staticInfo);
 
 		parent::__destruct();
@@ -99,9 +119,27 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			return '';
 		}
 
+		$this->initialize();
+		$this->fillOrHideEventType();
+
 		$this->createAllowedValuesForSelectorWidget();
 
 		return $this->createSelectorWidget();
+	}
+
+	/**
+	 * Initializes some variables needed for further processing.
+	 */
+	private function initialize() {
+		$this->displaySearchFormFields = t3lib_div::trimExplode(
+			',',
+			$this->getConfValueString(
+				'displaySearchFormFields', 's_listView'),
+			true
+		);
+
+		$this->instantiateStaticInfo();
+		$this->seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
 	}
 
 	/**
@@ -121,8 +159,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 */
 	private function createAllowedValuesForSelectorWidget() {
 		$allPlaceUids = array();
-
-		$this->instantiateStaticInfo();
 
 		// Creates a separate seminar bag that contains all the events.
 		// We can't use the regular seminar bag that is used for the list
@@ -279,7 +315,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 		// Defines the list of option boxes that should be shown in the form.
 		$allOptionBoxes = array(
-			'event_type',
 			'language',
 			'country',
 			'city',
@@ -370,6 +405,47 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
+	 * Creates the HTML code for a single option box of the selector widget.
+	 *
+	 * @param string the name of the option box to generate, must be one of the
+	 *               following: 'event_type', 'language', 'country', 'city',
+	 *               'places'
+	 * @param array the options for the option box with the option value as key
+	 *              and the option label as value, may be empty
+	 *
+	 * @return string the HTML content for the select, will not be empty
+	 */
+	private function createSingleOptionBox($name, array $options) {
+		$this->setMarker('options_header', $this->translate('label_' . $name));
+		$this->setMarker(
+			'optionbox_name', $this->prefixId . '[' . $name . '][]'
+		);
+		$this->setMarker('optionbox_id', $this->prefixId . '-' . $name);
+
+		$optionsList = '';
+		foreach ($options as $key => $label) {
+			$this->setMarker('option_label', htmlspecialchars($label));
+			$this->setMarker('option_value', $key);
+
+			// Preselects the option if it was selected by the user.
+			if (isset($this->piVars[$name])
+				&& (in_array($key, $this->piVars[$name]))
+			) {
+				$selected = ' selected="selected"';
+			} else {
+				$selected = '';
+			}
+			$this->setMarker('option_selected', $selected);
+
+			$optionsList .= $this->getSubpart('OPTIONS_ENTRY');
+		}
+
+		$this->setMarker('options', $optionsList);
+
+		return $this->getSubpart('OPTIONS_BOX');
+	}
+
+	/**
 	 * Returns a place bag object that contains all seminar places that are in
 	 * the list of given UIDs.
 	 *
@@ -399,6 +475,60 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
 		$this->staticInfo->init();
+	}
+
+	/**
+	 * Fills or hides the subpart for the event type depending on the settings
+	 * in the flexforms.
+	 */
+	private function fillOrHideEventType() {
+		if (!$this->hasSearchField('event_type')) {
+			$this->hideSubparts(self::SUBPART_PREFIX . 'EVENT_TYPE');
+
+			return;
+		}
+
+		$eventOptionbox = $this->createSingleOptionBox(
+			'event_type', $this->getEventTypeData()
+		);
+
+		$this->setMarker('options_event_type', $eventOptionbox);
+	}
+
+	/**
+	 * Checks whether a given search field key should be displayed.
+	 *
+	 * @param string the search field name to check, must not be empty
+	 *
+	 * @return boolean true if the given field should be displayed as per
+	 *                 configuration, false otherwise
+	 */
+	private function hasSearchField($fieldToCheck) {
+		return in_array($fieldToCheck, $this->displaySearchFormFields);
+	}
+
+	/**
+	 * Gets the data for the eventy type search field options.
+	 *
+	 * @return array the data for the event type search field options, the key
+	 *               will be the UID of the event type and the value will be the
+	 *               title of the event type, will be empty if no data could be
+	 *               found
+	 */
+	private function getEventTypeData() {
+		$result = array();
+
+		foreach ($this->seminarBag as $event) {
+			$eventTypeUid = $event->getEventTypeUid();
+			if ($eventTypeUid != 0) {
+				$eventTypeName = $event->getEventType();
+				if (!isset($result[$eventTypeUid])) {
+					$result[$eventTypeUid] = $eventTypeName;
+				}
+			}
+		}
+
+		return $result;
 	}
 }
 

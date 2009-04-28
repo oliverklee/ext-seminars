@@ -291,7 +291,7 @@ plugin.tx_seminars_pi1 {
 	hideSearchForm = 0
 
 	# comma-separated list of search options which should be shown in the search widget.
-	displaySearchFormFields = event_type,language,country,city,place,full_text_search
+	displaySearchFormFields = language,country,city,place,full_text_search
 
 	# whether the page browser should be hidden in list view
 	hidePageBrowser = 0

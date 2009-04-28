@@ -182,22 +182,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderContainsLabelForEventTypesSelector() {
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-event_type">' .
-				$this->fixture->translate('label_event_type') . '</label>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsSelectorForEventTypes() {
-		$this->assertContains(
-			'<select name="tx_seminars_pi1[event_type][]" ' .
-				'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
-			$this->fixture->render()
-		);
-	}
-
 	public function testRenderContainsLabelForLanguagesSelector() {
 		$this->assertContains(
 			'<label for="tx_seminars_pi1-language">' .
@@ -270,22 +254,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'<option value="none">' .
 				$this->fixture->translate('label_selector_pleaseChoose') .
-				'</option>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderCanContainEventTypeOption() {
-		$eventTypeTitle = 'test event type';
-		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
-		);
-
-		$this->assertContains(
-			'<option value="' . $eventTypeUid . '">' . $eventTypeTitle .
 				'</option>',
 			$this->fixture->render()
 		);
@@ -397,6 +365,145 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
 				array()
 			)
+		);
+	}
+
+	////////////////////////////////////////////////////////////////
+	// Tests concerning the rendering of the event_type option box
+	////////////////////////////////////////////////////////////////
+
+	public function test_Render_ForEventTypeHiddenInConfiguration_HidesEventTypeSubpart() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', '');
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_EVENT_TYPE')
+		);
+	}
+
+	public function test_Render_ForEnabledEventType_ContainsLabelForEventTypeSelector() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$this->assertContains(
+			'<label for="tx_seminars_pi1-event_type">' .
+				$this->fixture->translate('label_event_type') . '</label>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledEventType_CanContainEventTypeOption() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$eventTypeTitle = 'test event type';
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+		);
+
+		$this->assertContains(
+			'<option value="' . $eventTypeUid . '">' . $eventTypeTitle .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledEventType_HtmlSpecialCharsTheEventTypeTitle() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$eventTypeTitle = '< Test >';
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+		);
+
+		$this->assertContains(
+			'<option value="' . $eventTypeUid . '">' .
+				htmlspecialchars($eventTypeTitle) .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledEventType_PreselectsSelectedValue() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$eventTypeTitle = 'test event type';
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+		);
+
+		$this->fixture->piVars['event_type'][] = $eventTypeUid;
+
+		$this->assertContains(
+			$eventTypeUid . '" selected="selected">' . $eventTypeTitle .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledEventType_CanPreselectTwoValues() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$eventTypeTitle = 'foo';
+		$eventTypeTitle2 = 'bar';
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+		);
+
+		$eventTypeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle2)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid2)
+		);
+
+		$this->fixture->piVars['event_type'][] = $eventTypeUid;
+		$this->fixture->piVars['event_type'][] = $eventTypeUid2;
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			$eventTypeUid . '" selected="selected">' . $eventTypeTitle .
+				'</option>',
+			$output
+		);
+		$this->assertContains(
+			$eventTypeUid2 . '" selected="selected">' . $eventTypeTitle2 .
+				'</option>',
+			$output
+		);
+	}
+
+	public function test_Render_ForEnabledEventType_ContainsSelectorForEventTypes() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[event_type][]" ' .
+				'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
+			$this->fixture->render()
 		);
 	}
 }
