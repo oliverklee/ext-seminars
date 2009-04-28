@@ -169,41 +169,15 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		// Walks through all events in the seminar bag to read the needed data
 		// from each event object.
 		foreach ($seminarBag as $event) {
-			// Reads the language from the event record.
-			$languageIsoCode = $event->getLanguage();
-			if ((!empty($languageIsoCode))
-				&& !isset($this->allLanguages[$languageIsoCode])) {
-				$languageName = $this->staticInfo->getStaticInfoName(
-					'LANGUAGES',
-					$languageIsoCode,
-					'',
-					'',
-					0
-				);
-				$this->allLanguages[$languageIsoCode] = $languageName;
-			}
-
 			// Reads the place(s) from the event record. The country will be
 			// read from the place record later.
 			$placeUids = $event->getRelatedMmRecordUids(
 				SEMINARS_TABLE_SEMINARS_SITES_MM
 			);
 			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
-
-			// Reads the event type from the event record.
-			$eventTypeUid = $event->getEventTypeUid();
-			if ($eventTypeUid != 0) {
-				$eventTypeName = $event->getEventType();
-				if (!isset($this->allEventTypes[$eventTypeUid])) {
-					$this->allEventTypes[$eventTypeUid] = $eventTypeName;
-				}
-			}
 		}
 		$seminarBag->__destruct();
 		unset($seminarBag);
-
-		// Assures that each language is just once in the resulting array.
-		$this->allLanguages = array_unique($this->allLanguages);
 
 		// Fetches the name of the location, the city and the country and adds
 		// it to the final array.
@@ -230,18 +204,14 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		// Brings the options into alphabetical order.
-		asort($this->allLanguages);
 		asort($this->allPlaces);
 		asort($this->allCities);
 		asort($this->allCountries);
-		asort($this->allEventTypes);
 
 		// Adds an empty option to each list of options if this is needed.
-		$this->addEmptyOptionIfNeeded($this->allLanguages);
 		$this->addEmptyOptionIfNeeded($this->allPlaces);
 		$this->addEmptyOptionIfNeeded($this->allCities);
 		$this->addEmptyOptionIfNeeded($this->allCountries);
-		$this->addEmptyOptionIfNeeded($this->allEventTypes);
 	}
 
 	/**
