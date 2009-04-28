@@ -63,7 +63,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 				'title' => 'TEST',
 				'root' => 1,
 				'clear' => 3,
-				'include_static_file' => 'EXT:seminars/Configuration/Settings/',
+				'include_static_file' => 'EXT:seminars/Configuration/TypoScript/',
 			)
 		);
 		$this->fixtureUid = $this->testingFramework->createRecord(
