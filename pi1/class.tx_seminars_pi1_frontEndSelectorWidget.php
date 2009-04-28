@@ -120,7 +120,8 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		$this->initialize();
-		$this->fillOrHideEventType();
+		$this->fillOrHideSearchSubpart('event_type');
+		$this->fillOrHideSearchSubpart('language');
 
 		$this->createAllowedValuesForSelectorWidget();
 
@@ -315,7 +316,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 		// Defines the list of option boxes that should be shown in the form.
 		$allOptionBoxes = array(
-			'language',
 			'country',
 			'city',
 			'place'
@@ -478,21 +478,40 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
-	 * Fills or hides the subpart for the event type depending on the settings
-	 * in the flexforms.
+	 * Fills or hides the subpart for the given search field.
+	 *
+	 * @param string the key of the search field, must be one of the following:
+	 *               "event_type", "language", "country", "city", "places"
 	 */
-	private function fillOrHideEventType() {
-		if (!$this->hasSearchField('event_type')) {
-			$this->hideSubparts(self::SUBPART_PREFIX . 'EVENT_TYPE');
+	private function fillOrHideSearchSubpart($searchField) {
+		if (!$this->hasSearchField($searchField)) {
+			$this->hideSubparts(
+				self::SUBPART_PREFIX . strtoupper($searchField)
+			);
 
 			return;
 		}
 
-		$eventOptionbox = $this->createSingleOptionBox(
-			'event_type', $this->getEventTypeData()
-		);
+		$optionData = array();
+		switch ($searchField) {
+			case 'event_type':
+				$optionData = $this->getEventTypeData();
+				break;
+			case 'language':
+				$optionData = $this->getLanguageData();
+				break;
+			default:
+				throw new Exception('The given search field .
+					"' . $searchField . '" was not an allowed value. ' .
+					'Allowed values are: "event_type", "language", "country", ' .
+					'"city" or "places".'
+				);
+				break;
+		}
 
-		$this->setMarker('options_event_type', $eventOptionbox);
+		$optionBox = $this->createSingleOptionBox($searchField, $optionData);
+
+		$this->setMarker('options_' . $searchField, $optionBox);
 	}
 
 	/**
@@ -525,6 +544,36 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 				if (!isset($result[$eventTypeUid])) {
 					$result[$eventTypeUid] = $eventTypeName;
 				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the data for the language search field options.
+	 *
+	 * @return array the data for the language search field options, the key
+	 *               will be the ISO code of the language and the value will be
+	 *               the localized title of the language, will be empty if no
+	 *               data could be found
+	 */
+	private function getLanguageData() {
+		$result = array();
+
+		foreach ($this->seminarBag as $event) {
+			// Reads the language from the event record.
+			$languageIsoCode = $event->getLanguage();
+			if ((!empty($languageIsoCode))
+				&& !isset($result[$languageIsoCode])) {
+				$languageName = $this->staticInfo->getStaticInfoName(
+					'LANGUAGES',
+					$languageIsoCode,
+					'',
+					'',
+					0
+				);
+				$result[$languageIsoCode] = $languageName;
 			}
 		}
 

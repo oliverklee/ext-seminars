@@ -182,22 +182,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderContainsLabelForLanguagesSelector() {
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-language">' .
-				$this->fixture->translate('label_language') . '</label>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsSelectorForLanguages() {
-		$this->assertContains(
-			'<select name="tx_seminars_pi1[language][]" ' .
-				'id="tx_seminars_pi1-language" size="5" multiple="multiple">',
-			$this->fixture->render()
-		);
-	}
-
 	public function testRenderContainsLabelForCountriesSelector() {
 		$this->assertContains(
 			'<label for="tx_seminars_pi1-country">' .
@@ -254,24 +238,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'<option value="none">' .
 				$this->fixture->translate('label_selector_pleaseChoose') .
-				'</option>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsLanguageOption() {
-		$this->instantiateStaticInfo();
-
-		$languageIsoCode = 'DE';
-		$languageName = $this->staticInfo->getStaticInfoName(
-			'LANGUAGES', $languageIsoCode, '', '', 0
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
-		);
-
-		$this->assertContains(
-			'<option value="' . $languageIsoCode . '">' . $languageName .
 				'</option>',
 			$this->fixture->render()
 		);
@@ -367,6 +333,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
 
 	////////////////////////////////////////////////////////////////
 	// Tests concerning the rendering of the event_type option box
@@ -504,6 +471,130 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'<select name="tx_seminars_pi1[event_type][]" ' .
 				'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
 			$this->fixture->render()
+		);
+	}
+
+
+	//////////////////////////////////////////////////////////////
+	// Tests concerning the rendering of the language option box
+	//////////////////////////////////////////////////////////////
+
+	public function test_Render_ForLanguageOptionsHiddenInConfiguration_HidesLanguageSubpart() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', '');
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_LANGUAGE')
+		);
+	}
+
+	public function test_Render_ForEnabledLanguageOptions_ContainsLanguageOption() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'language'
+		);
+
+		$this->instantiateStaticInfo();
+
+		$languageIsoCode = 'DE';
+		$languageName = $this->staticInfo->getStaticInfoName(
+			'LANGUAGES', $languageIsoCode, '', '', 0
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
+		);
+
+		$this->assertContains(
+			'<option value="' . $languageIsoCode . '">' . $languageName .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledLanguageOptions_ContainsLanguagesSelectorLabel() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'language'
+		);
+
+		$this->assertContains(
+			'<label for="tx_seminars_pi1-language">' .
+				$this->fixture->translate('label_language') . '</label>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledLanguageOptions_ContainsSelectorForLanguages() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'language'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[language][]" ' .
+				'id="tx_seminars_pi1-language" size="5" multiple="multiple">',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledLanguageOptions_CanPreselectSelectedLanguage() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'language'
+		);
+
+		$this->instantiateStaticInfo();
+
+		$languageIsoCode = 'DE';
+		$languageName = $this->staticInfo->getStaticInfoName(
+			'LANGUAGES', $languageIsoCode, '', '', 0
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
+		);
+
+		$this->fixture->piVars['language'][] = $languageIsoCode;
+
+		$this->assertContains(
+			$languageIsoCode . '" selected="selected">' . $languageName .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledLanguageOptions_CanPreselectMultipleLanguages() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'language'
+		);
+		$this->instantiateStaticInfo();
+
+		$languageIsoCode = 'DE';
+		$languageName = $this->staticInfo->getStaticInfoName(
+			'LANGUAGES', $languageIsoCode, '', '', 0
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
+		);
+
+		$languageIsoCode2 = 'EN';
+		$languageName2 = $this->staticInfo->getStaticInfoName(
+			'LANGUAGES', $languageIsoCode2, '', '', 0
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode2)
+		);
+
+		$this->fixture->piVars['language'][] = $languageIsoCode;
+		$this->fixture->piVars['language'][] = $languageIsoCode2;
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			$languageIsoCode . '" selected="selected">' . $languageName .
+				'</option>',
+			$output
+		);
+		$this->assertContains(
+			$languageIsoCode2 . '" selected="selected">' . $languageName2 .
+				'</option>',
+			$output
 		);
 	}
 }
