@@ -47,12 +47,28 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	public $extKey = 'seminars';
 
 	/**
+	 * @var string the charset that is used for the output
+	 */
+	protected $renderCharset = 'utf-8';
+
+	/**
+	 * @var t3lib_cs helper for charset conversion
+	 */
+	protected $charsetConversion = null;
+
+	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
 	protected $tableName = '';
-	/** associative array with the values from/for the DB */
+
+	/**
+	 * @var array the values from/for the DB
+	 */
 	protected $recordData = array();
-	/** whether this record already is stored in the DB */
+
+	/**
+	 * @var boolean whether this record already is stored in the DB
+	 */
 	protected $isInDb = false;
 
 	/**
@@ -65,8 +81,17 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *                ignored.
 	 */
 	public function __construct($uid, $dbResult = null) {
+		$this->initializeCharsetConversion();
 		$this->retrieveRecordAndGetData($uid, $dbResult);
 		$this->init();
+	}
+
+	/**
+	 * The destructor.
+	 */
+	public function __destruct() {
+		unset($this->charsetConversion);
+		parent::__destruct();
 	}
 
 	/**
@@ -558,6 +583,24 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 */
 	public function enableTestMode() {
 		$this->setRecordPropertyBoolean('is_dummy_record', true);
+	}
+
+	/**
+	 * Sets the current charset in $this->renderCharset and the charset
+	 * conversion instance in $this->$charsetConversion.
+	 */
+	protected function initializeCharsetConversion() {
+		if (isset($GLOBALS['TSFE'])) {
+			$this->renderCharset = $GLOBALS['TSFE']->renderCharset;
+			$this->charsetConversion = $GLOBALS['TSFE']->csConvObj;
+		} elseif (isset($GLOBALS['LANG'])) {
+			$this->renderCharset = $GLOBALS['LANG']->charset;
+			$this->charsetConversion = $GLOBALS['LANG']->csConvObj;
+		} else {
+			throw new Exception(
+				'There was neither a front end nor a back end detected.'
+			);
+		}
 	}
 }
 

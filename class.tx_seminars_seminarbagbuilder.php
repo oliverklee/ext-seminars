@@ -582,7 +582,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 			// Only search for words with a certain length.
 			// Skips the current iteration of the loop for empty search words.
-			if (mb_strlen($safeKeyword) < self::MINIMUM_SEARCH_WORD_LENGTH) {
+			// We use strlen instead of mb_strlen because having a search word
+			// consisting of just an umlaut is okay, and this avoids problems
+			// on installations without mb_string enabled.
+			if (strlen($safeKeyword) < self::MINIMUM_SEARCH_WORD_LENGTH) {
 				continue;
 			}
 
