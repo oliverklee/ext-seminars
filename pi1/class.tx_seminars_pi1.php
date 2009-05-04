@@ -2087,12 +2087,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return string the ORDER BY statement for the list view, may be empty
 	 */
 	private function getOrderByForListView() {
-		$orderBy = '';
+		$orderBy = array();
 
 		if ($this->getConfValueBoolean(
 			'sortListViewByCategory', 's_template_special'
 		)) {
-			$orderBy = $this->orderByList['category'] . ', ';
+			$orderBy[] = $this->orderByList['category'];
 		}
 
 		// Overwrites the default sort order with values given by the browser.
@@ -2105,11 +2105,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		if (isset($this->internal['orderBy'])
 			&& isset($this->orderByList[$this->internal['orderBy']])
 		) {
-			$orderBy .= $this->orderByList[$this->internal['orderBy']] .
+			$orderBy[] = $this->orderByList[$this->internal['orderBy']] .
 				($this->internal['descFlag'] ? ' DESC' : '');
 		}
 
-		return $orderBy;
+		return implode(', ', $orderBy);
 	}
 
 	/**

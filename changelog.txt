@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2971] Fix: Crash/SQL error in the list view if the static template is not included
 - [#2948] Change: Change the payment methods field in table tx_seminars_seminars to an unsigned integer
 - [#2956] Fix: Two tests failures in seminars_pi1 testcase
 - [#2963] Fix: Registration crashes with fatal error
