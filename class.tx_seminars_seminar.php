@@ -2424,7 +2424,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$loweredKey = strtolower($currentKey);
 			$currentLabel = $this->translate('label_'.$currentKey);
 			$keysWithLabels[$loweredKey] = $currentLabel;
-			$maxLength = max($maxLength, mb_strlen($currentLabel));
+			$maxLength = max(
+				$maxLength,
+				$this->charsetConversion->strlen(
+					$this->renderCharset, $currentLabel
+				)
+			);
 		}
 		$result = '';
 		foreach ($keysWithLabels as $currentKey => $currentLabel) {

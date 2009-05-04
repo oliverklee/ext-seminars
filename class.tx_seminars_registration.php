@@ -99,6 +99,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	public function __construct(tslib_cObj $cObj, $dbResult = false) {
 		$this->cObj = $cObj;
+		$this->initializeCharsetConversion();
 		$this->init();
 
 	 	if (!$dbResult) {
@@ -788,7 +789,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			}
 
 			$keysWithLabels[$loweredKey] = $currentLabel;
-			$maxLength = max($maxLength, mb_strlen($currentLabel));
+			$maxLength = max(
+				$maxLength,
+				$this->charsetConversion->strlen(
+					$this->renderCharset, $currentLabel
+				)
+			);
 		}
 
 		$result = '';
@@ -836,7 +842,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$currentLabel = $this->translate('label_' . $loweredKey);
 			}
 			$keysWithLabels[$loweredKey] = $currentLabel;
-			$maxLength = max($maxLength, mb_strlen($currentLabel));
+			$maxLength = max(
+				$maxLength,
+				$this->charsetConversion->strlen(
+					$this->renderCharset, $currentLabel
+				)
+			);
 		}
 
 		$result = '';
