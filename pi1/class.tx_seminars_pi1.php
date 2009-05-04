@@ -1323,7 +1323,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				? 'uploads/tx_srfeuserregister'
 				: $configuredUploadFolder;
 
-			if (mb_substr($uploadFolder, -1) != '/') {
+			if (substr($uploadFolder, -1) != '/') {
 				$uploadFolder .= '/';
 			}
 
