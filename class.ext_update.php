@@ -50,9 +50,6 @@ class ext_update {
 	public function main() {
 		$result = '';
 		try {
-			if ($this->needsToUpdateEventOrganizerRelations()) {
-				$result .= $this->updateEventOrganizerRelations();
-			}
 			if ($this->needsToUpdateEventField('needsRegistration')) {
 				$result .= $this->updateNeedsRegistrationField();
 			}
@@ -80,10 +77,7 @@ class ext_update {
 		) {
 			return false;
 		}
-		if (!tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM)
-			|| !tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS)
-			|| !tx_oelib_db::existsTable('tx_seminars_seminars_payment_methods_mm')
-		) {
+		if (!tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS)) {
 			return false;
 		}
 		if (!tx_oelib_db::tableHasColumn(
@@ -93,9 +87,7 @@ class ext_update {
 		}
 
 		try {
-			$result = (($this->needsToUpdateEventOrganizerRelations()
-					&& $this->hasEventsWithOrganizers())
-				|| $this->needsToUpdateEventField('needsRegistration')
+			$result = ($this->needsToUpdateEventField('needsRegistration')
 				|| $this->needsToUpdateEventField('queueSize')
 				|| $this->needsToUpdateTypoScriptTemplates()
 			);
@@ -104,94 +96,6 @@ class ext_update {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Updates the event-organizer-relations to real M:M relations.
-	 *
-	 * @return string information about the status of the update process,
-	 *                will not be empty.
-	 */
-	private function updateEventOrganizerRelations() {
-		$result = '<h2>Updating event-organizer-relations:</h2>';
-		$result .= '<ul>';
-
-		// Gets all events which have an organizer set.
-		$eventsWithOrganizers = tx_oelib_db::selectMultiple(
-			'uid, organizers',
-			SEMINARS_TABLE_SEMINARS,
-			SEMINARS_TABLE_SEMINARS . '.organizers<>"" AND ' .
-				SEMINARS_TABLE_SEMINARS . '.organizers<>"0"'
-		);
-
-		foreach ($eventsWithOrganizers as $event) {
-			$result .= '<li>Event #' . $event['uid'];
-
-			// Adds a relation entry for each organizer UID.
-			$result .= '<ul>';
-			$sorting = 0;
-			$organizerUids = t3lib_div::trimExplode(
-				',', $event['organizers'], true
-			);
-			foreach ($organizerUids as $organizerUid) {
-				$result .= '<li>Organizer #' . $organizerUid . '</li>';
-				tx_oelib_db::insert(
-					SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
-					array(
-						'uid_local' => $event['uid'],
-						'uid_foreign' => intval($organizerUid),
-						'sorting' => $sorting,
-					)
-				);
-				$sorting++;
-			}
-			$result .= '</ul>';
-
-			// Updates the event's organizers field with the number of organizer
-			// UIDs.
-			tx_oelib_db::update(
-				SEMINARS_TABLE_SEMINARS,
-				SEMINARS_TABLE_SEMINARS . '.uid = ' . $event['uid'],
-				array('organizers' => count($organizerUids))
-			);
-
-			$result .= '</li>';
-		}
-
-		$result .= '</ul>';
-
-		return $result;
-	}
-
-	/**
-	 * Checks whether there are no real event-organizer-m:n-relations yet.
-	 *
-	 * @return boolean true if there are no real event-organizer-m:n-relations,
-	 *                 false otherwise
-	 */
-	private function needsToUpdateEventOrganizerRelations() {
-		$row = tx_oelib_db::selectSingle(
-			'COUNT(*) AS count', SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM, '1=1'
-		);
-
-		return ($row['count'] == 0);
-	}
-
-	/**
-	 * Checks whether there are any events with organizers set.
-	 *
-	 * @return boolean true if there is at least one event with organizers set,
-	 *                 false otherwise
-	 */
-	private function hasEventsWithOrganizers() {
-		$row = tx_oelib_db::selectSingle(
-			'COUNT(*) AS count',
-			SEMINARS_TABLE_SEMINARS,
-			SEMINARS_TABLE_SEMINARS . '.organizers<>"" AND ' .
-				SEMINARS_TABLE_SEMINARS . '.organizers<>"0"'
-		);
-
-		return ($row['count'] > 0);
 	}
 
 	/**

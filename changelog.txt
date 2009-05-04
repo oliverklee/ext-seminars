@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2536] Change: Change the organizers field in table tx_seminars_seminars to an unsigned integer
 - [#2953] Fix: Use TYPO3's wrapper for the multibyte string functions
 - [#2971] Fix: Crash/SQL error in the list view if the static template is not included
 - [#2948] Change: Change the payment methods field in table tx_seminars_seminars to an unsigned integer
