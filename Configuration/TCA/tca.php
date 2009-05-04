@@ -134,7 +134,7 @@ $TCA['tx_seminars_test'] = array(
 $TCA['tx_seminars_seminars'] = array(
 	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,prices,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
+		'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,target_groups,skip_collision_check,cancelled,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -551,16 +551,6 @@ $TCA['tx_seminars_seminars'] = array(
 				'maxitems' => 1,
 			),
 		),
-		'prices' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.prices',
-			'config' => array(
-				'type' => 'inline',
-				'foreign_table' => 'tx_seminars_prices',
-				'foreign_field' => 'seminar',
-				'maxitems' => 999,
-			),
-		),
 		'price_regular' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular',
@@ -967,14 +957,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, queue_size, target_groups, skip_collision_check, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
-				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAccess, hidden;;1;;1-1-1, owner_feuser, vips',
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
 			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, requirements, dependencies, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, ' .
-				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAccess, hidden;;1;;1-1-1, ',
 		),
 		// Multiple event date
@@ -2157,141 +2147,6 @@ $TCA['tx_seminars_skills'] = array(
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
-	),
-);
-
-$TCA['tx_seminars_prices'] = array(
-	'ctrl' => $TCA['tx_seminars_prices']['ctrl'],
-	'interface' => array(
-		'showRecordFieldList' => 'title,value,currency,tax,including_tax,starttime,endtime,fe_group',
-	),
-	'columns' => array(
-		'seminar' => array(
-			'config' => array(
-				'type' => 'input',
-				'size' => '30',
-			),
-		),
-		'title' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.title',
-			'config' => array(
-				'type' => 'input',
-				'size' => '30',
-				'eval' => 'required,trim',
-			),
-		),
-		'value' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.value',
-			'config' => array(
-				'type' => 'input',
-				'size' => '8',
-				'max' => '8',
-				'eval' => 'double2',
-				'checkbox' => '0.00',
-				'range' => array(
-					'upper' => '99999.99',
-					'lower' => '0',
-				),
-				'default' => 0,
-			),
-		),
-		'currency' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.currency',
-			'config' => array(
-				'type' => 'select',
-				'internal_type' => 'db',
-				'allowed' => 'static_currencies',
-				'foreign_table' => 'static_currencies',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-				'items' => array(
-					'' => '',
-				),
-			),
-		),
-		'tax' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.tax',
-			'config' => array(
-				'type' => 'select',
-				'internal_type' => 'db',
-				'allowed' => 'static_taxes',
-				'foreign_table' => 'static_taxes',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-				'items' => array(
-					'' => '',
-				),
-			),
-		),
-		'including_tax' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.including_tax',
-			'config' => array(
-			'type' => 'select',
-				'default' => '0',
-				'items' => array(
-					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.including_tax.including', '0'),
-					array('LLL:EXT:seminars/locallang_db.xml:tx_seminars_prices.including_tax.excluding', '1'),
-				),
-				'size' => 1,
-				'minitems' => 1,
-				'maxitems' => 1,
-			),
-		),
-		'starttime' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
-			'config' => array(
-				'type' => 'input',
-				'size' => '8',
-				'max' => '20',
-				'eval' => 'date',
-				'default' => '0',
-				'checkbox' => '0',
-			),
-		),
-		'endtime' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
-			'config' => array(
-				'type' => 'input',
-				'size' => '8',
-				'max' => '20',
-				'eval' => 'date',
-				'checkbox' => '0',
-				'default' => '0',
-				'range' => array(
-					'upper' => mktime(0,0,0,12,31,2020),
-					'lower' => mktime(0,0,0,date('m')-1,date('d'),date('Y')),
-				),
-			),
-		),
-		'fe_group' => array (
-			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.fe_group',
-			'config' => array (
-				'type' => 'select',
-				'items' => array (
-					array('', 0),
-					array('LLL:EXT:lang/locallang_general.xml:LGL.hide_at_login', -1),
-					array('LLL:EXT:lang/locallang_general.xml:LGL.any_login', -2),
-					array('LLL:EXT:lang/locallang_general.xml:LGL.usergroups', '--div--'),
-				),
-				'foreign_table' => 'fe_groups',
-			),
-		),
-	),
-	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2,value,currency,tax,including_tax,starttime,endtime,fe_group'),
-	),
-	'palettes' => array(
-		'1' => array('showitem' => 'starttime, endtime, fe_group'),
 	),
 );
 
