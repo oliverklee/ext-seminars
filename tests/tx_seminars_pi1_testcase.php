@@ -2161,6 +2161,17 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testListViewSortedByCategoryWithoutStaticTemplateDoesNotCrash() {
+		$fixture = new tx_seminars_pi1();
+		$fixture->init(
+			array('sortListViewByCategory' => 1)
+		);
+
+		$fixture->main('', array());
+
+		$fixture->__destruct();
+	}
+
 	public function testListViewCanBeSortedByTitleAscendingWithinOneCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES,
