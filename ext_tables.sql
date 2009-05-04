@@ -254,7 +254,7 @@ CREATE TABLE tx_seminars_seminars (
 	price_special_board decimal(7,2) DEFAULT '0.00' NOT NULL,
 	prices int(11) unsigned DEFAULT '0' NOT NULL,
 	additional_information text,
-	payment_methods tinytext,
+	payment_methods int(11) unsigned DEFAULT '0' NOT NULL,
 	organizers tinytext,
 	organizing_partners int(11) unsigned DEFAULT '0' NOT NULL,
 	event_takes_place_reminder_sent int(1) unsigned DEFAULT '0' NOT NULL,

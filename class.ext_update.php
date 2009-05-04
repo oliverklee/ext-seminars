@@ -62,9 +62,6 @@ class ext_update {
 			if ($this->needsToUpdateTypoScriptTemplates()) {
 				$result .= $this->updateTypoScriptTemplates();
 			}
-			if ($this->needsToUpdateEventPaymentMethodRelations()) {
-				$result .= $this->updateEventPaymentMethodsRelations();
-			}
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = '';
 		}
@@ -101,8 +98,6 @@ class ext_update {
 				|| $this->needsToUpdateEventField('needsRegistration')
 				|| $this->needsToUpdateEventField('queueSize')
 				|| $this->needsToUpdateTypoScriptTemplates()
-				|| ($this->needsToUpdateEventPaymentMethodRelations()
-					&& $this->hasEventsWithPaymentMethods())
 			);
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = false;
@@ -309,94 +304,6 @@ class ext_update {
 		$result .= '</ul>';
 
 		return $result;
-	}
-
-	/**
-	 * Updates the event-payment-method-relations to real M:M relations.
-	 *
-	 * @return string information about the status of the update process,
-	 *                will not be empty.
-	 */
-	private function updateEventPaymentMethodsRelations() {
-		$result = '<h2>Updating event-payment-method-relations:</h2>';
-		$result .= '<ul>';
-
-		// Gets all events which have a payment method set.
-		$eventsWithPaymentMethods = tx_oelib_db::selectMultiple(
-			'uid, payment_methods',
-			'tx_seminars_seminars',
-			'tx_seminars_seminars.payment_methods<>"" AND ' .
-				'tx_seminars_seminars.payment_methods<>"0"'
-		);
-
-		foreach ($eventsWithPaymentMethods as $event) {
-			$result .= '<li>Event #' . $event['uid'];
-
-			// Adds a relation entry for each payment method UID.
-			$result .= '<ul>';
-			$sorting = 0;
-			$paymentMethodUids = t3lib_div::trimExplode(
-				',', $event['payment_methods'], true
-			);
-			foreach ($paymentMethodUids as $paymentMethodUid) {
-				$result .= '<li>Payment method #' . $paymentMethodUid . '</li>';
-				tx_oelib_db::insert(
-					'tx_seminars_seminars_payment_methods_mm',
-					array(
-						'uid_local' => $event['uid'],
-						'uid_foreign' => intval($paymentMethodUid),
-						'sorting' => $sorting,
-					)
-				);
-				$sorting++;
-			}
-			$result .= '</ul>';
-
-			// Updates the event's organizers field with the number of organizer
-			// UIDs.
-			tx_oelib_db::update(
-				'tx_seminars_seminars',
-				'tx_seminars_seminars.uid = ' . $event['uid'],
-				array('payment_methods' => count($paymentMethodUids))
-			);
-
-			$result .= '</li>';
-		}
-
-		$result .= '</ul>';
-
-		return $result;
-	}
-
-	/**
-	 * Checks whether there are no real event-payment-method-m:n-relations yet.
-	 *
-	 * @return boolean true if there are no real event-payment-method-m:n-
-	 *                 relations, false otherwise
-	 */
-	private function needsToUpdateEventPaymentMethodRelations() {
-		$row = tx_oelib_db::selectSingle(
-			'COUNT(*) AS count', 'tx_seminars_seminars_payment_methods_mm', '1=1'
-		);
-
-		return ($row['count'] == 0);
-	}
-
-	/**
-	 * Checks whether there are any events with payment methods set.
-	 *
-	 * @return boolean true if there is at least one event with payment methods
-	 *                 set, false otherwise
-	 */
-	private function hasEventsWithPaymentMethods() {
-		$row = tx_oelib_db::selectSingle(
-			'COUNT(*) AS count',
-			'tx_seminars_seminars',
-			'tx_seminars_seminars.payment_methods<>"" AND ' .
-				' tx_seminars_seminars.payment_methods<>"0"'
-		);
-
-		return ($row['count'] > 0);
 	}
 }
 
