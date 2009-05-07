@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2610] Change: Polish the BE events list
 - [#2965] Change: Hide the partner integration and the new prices in the 0.8.x branch before the beta
 - [#2953] Fix: Use TYPO3's wrapper for the multibyte string functions
 - [#2971] Fix: Crash/SQL error in the list view if the static template is not included

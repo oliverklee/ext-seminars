@@ -14,11 +14,11 @@
 			<label index="subModuleTitle_events">Events</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
-			<label index="eventlist.accreditation_number">Accreditation number</label>
+			<label index="eventlist.accreditation_number">Number</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
-			<label index="eventlist.attendeesOnRegistrationQueue">On queue</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">Waiting</label>
 			<label index="eventlist.attendees_min">Min.</label>
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Enough</label>
@@ -86,11 +86,11 @@ the event you're registered for has been canceled.</label>
 			<label index="subModuleTitle_events">Veranstaltungen</label>
 			<label index="subModuleTitle_speakers">ReferentInnen</label>
 			<label index="subModuleTitle_organizers">Veranstalter</label>
-			<label index="eventlist.accreditation_number">Akkreditierungsnummer</label>
+			<label index="eventlist.accreditation_number">Nummer</label>
 			<label index="eventlist.date">Datum</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Akt.</label>
-			<label index="eventlist.attendeesOnRegistrationQueue">Auf Warteliste</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">Wartend</label>
 			<label index="eventlist.attendees_min">Min.</label>
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Genug</label>
@@ -232,11 +232,11 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="subModuleTitle_events" type="integer">142581619</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
-			<label index="eventlist.accreditation_number" type="integer">251981191</label>
+			<label index="eventlist.accreditation_number" type="integer">187623698</label>
 			<label index="eventlist.date" type="integer">71780721</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
-			<label index="eventlist.attendeesOnRegistrationQueue" type="integer">117662364</label>
+			<label index="eventlist.attendeesOnRegistrationQueue" type="integer">91254249</label>
 			<label index="eventlist.attendees_min" type="integer">51517544</label>
 			<label index="eventlist.attendees_max" type="integer">244016059</label>
 			<label index="eventlist.enough_attendees" type="integer">30455057</label>
@@ -372,11 +372,11 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="title">Events</label>
 			<label index="subModuleTitle_registrations">Registrations</label>
 			<label index="subModuleTitle_events">Events</label>
-			<label index="eventlist.accreditation_number">Accreditation number</label>
+			<label index="eventlist.accreditation_number">Number</label>
 			<label index="eventlist.date">Date</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
-			<label index="eventlist.attendeesOnRegistrationQueue">On queue</label>
+			<label index="eventlist.attendeesOnRegistrationQueue">Waiting</label>
 			<label index="eventlist.attendees_min">Min.</label>
 			<label index="eventlist.attendees_max">Max.</label>
 			<label index="eventlist.enough_attendees">Enough</label>

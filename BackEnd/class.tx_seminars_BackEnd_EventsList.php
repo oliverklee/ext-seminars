@@ -323,7 +323,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 						$BE_USER->uc['titleLen']
 					) . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->seminar->getDate().LF,
+					($this->seminar->hasDate()
+						? $this->seminar->getDate() : '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					$this->getEditIcon(
 						$this->seminar->getUid()
@@ -344,20 +345,32 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 						$this->seminar->getUid()
 					) . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->getRegistrationsCsvIcon() .
-					$this->seminar->getAttendances() . LF,
+					($this->seminar->needsRegistration()
+						? $this->getRegistrationsCsvIcon() .
+							$this->seminar->getAttendances()
+						: '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->seminar->getAttendancesOnRegistrationQueue() . LF,
+					($this->seminar->hasRegistrationQueue()
+						? $this->seminar->getAttendancesOnRegistrationQueue()
+						: '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->seminar->getAttendancesMin() . LF,
+					($this->seminar->needsRegistration()
+						? $this->seminar->getAttendancesMin()
+						: '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					$this->seminar->getAttendancesMax() . LF,
+					($this->seminar->needsRegistration()
+						? $this->seminar->getAttendancesMax()
+						: '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					(!$this->seminar->hasEnoughAttendances()
-					? $LANG->getLL('no') : $LANG->getLL('yes')) . LF,
+					($this->seminar->needsRegistration()
+						? (!$this->seminar->hasEnoughAttendances()
+							? $LANG->getLL('no') : $LANG->getLL('yes'))
+						: '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
-					(!$this->seminar->isFull()
-					? $LANG->getLL('no') : $LANG->getLL('yes')) . LF,
+					($this->seminar->needsRegistration()
+						? (!$this->seminar->isFull()
+							? $LANG->getLL('no') : $LANG->getLL('yes'))
+						: '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					$this->getStatusIcon() . LF,
 				TAB . TAB . TAB . TAB . TAB .
