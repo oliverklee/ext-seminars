@@ -43,35 +43,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndSelectorWidget.php';
 
 	/**
-	 * @var array all languages that may be shown in the option box of the
-	 *            selector widget
-	 */
-	private $allLanguages = array();
-
-	/**
-	 * @var array all countries that may be shown in the option box of the
-	 *            selector widget
-	 */
-	private $allCountries = array();
-
-	/**
-	 * @var array all places that may be shown in the option box of the
-	 *            selector widget
-	 */
-	private $allPlaces = array();
-
-	/**
-	 * @var array all cities that may be shown in the option box of the
-	 *            selector widget
-	 */
-	private $allCities = array();
-
-	/**
-	 * @var array all event types
-	 */
-	private $allEventTypes = array();
-
-	/**
 	 * @var tx_staticinfotables_pi1 needed for the list view to convert ISO
 	 *                              codes to country names and languages
 	 */
@@ -117,26 +88,29 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
-	 * Returns the selector widget if it is not hidden through the TypoScript
-	 * setup configuration option "hideSelectorWidget".
+	 * Returns the selector widget if it is not hidden.
+	 *
+	 * The selector widget will automatically be hidden, if no search option is
+	 * selected to be displayed.
 	 *
 	 * @return string the HTML code of the selector widget, may be empty
 	 */
 	public function render() {
-		if ($this->getConfValueBoolean(
-			'hideSelectorWidget', 's_template_special'
-		)) {
+		if (!$this->hasConfValueString('displaySearchFormFields', 's_listView')) {
 			return '';
 		}
 
 		$this->initialize();
+
 		$this->fillOrHideSearchSubpart('event_type');
 		$this->fillOrHideSearchSubpart('language');
 		$this->fillOrHideSearchSubpart('place');
 		$this->fillOrHideSearchSubpart('country');
 		$this->fillOrHideSearchSubpart('city');
+		$this->fillOrHideFullTextSearch();
+		$this->setJavaScriptMarkers();
 
-		return $this->createSelectorWidget();
+		return $this->getSubpart('SELECTOR_WIDGET');
 	}
 
 	/**
@@ -153,6 +127,11 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->instantiateStaticInfo();
 		$this->seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
 	}
+
+
+	//////////////////////
+	// Utility functions
+	//////////////////////
 
 	/**
 	 * Adds a dummy option to the array of options. This is needed if the
@@ -201,30 +180,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		return $cleanedFormData;
-	}
-
-	/**
-	 * Creates the selector widget HTML that is shown on the list view.
-	 *
-	 * The selector widget is a form on which the user can set filter criteria
-	 * that should apply to the list view of events. There is a text field for
-	 * a text search. And there are multiple option boxes that contain the allowed
-	 * values for e.g. the field "language".
-	 *
-	 * @return string the HTML source for the selector widget
-	 */
-	private function createSelectorWidget() {
-		// Shows or hides the text search field.
-		if (!$this->getConfValueBoolean('hideSearchForm', 's_template_special')) {
-			// Sets the previous search string into the text search box.
-			$this->setMarker(
-				'searchbox_value', htmlspecialchars($this->piVars['sword'])
-			);
-		} else {
-			$this->hideSubparts('wrapper_searchbox');
-		}
-
-		return $this->getSubpart('SELECTOR_WIDGET');
 	}
 
 	/**
@@ -312,6 +267,34 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
+	 * Checks whether a given search field key should be displayed.
+	 *
+	 * @param string the search field name to check, must not be empty
+	 *
+	 * @return boolean true if the given field should be displayed as per
+	 *                 configuration, false otherwise
+	 */
+	private function hasSearchField($fieldToCheck) {
+		return in_array($fieldToCheck, $this->displaySearchFormFields);
+	}
+
+	/**
+	 * Sets the java script markers needed for the working reset button.
+	 */
+	private function setJavaScriptMarkers() {
+		$javaScriptMarker = '\'' .
+			implode('\', \'', $this->displaySearchFormFields) .
+			'\'';
+
+		$this->setMarker('search_fields_javascript', $javaScriptMarker);
+	}
+
+
+	///////////////////////////////////////////////////////////////
+	// Functions for hiding or filling the search widget subparts
+	///////////////////////////////////////////////////////////////
+
+	/**
 	 * Fills or hides the subpart for the given search field.
 	 *
 	 * @param string the key of the search field, must be one of the following:
@@ -359,16 +342,25 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
-	 * Checks whether a given search field key should be displayed.
-	 *
-	 * @param string the search field name to check, must not be empty
-	 *
-	 * @return boolean true if the given field should be displayed as per
-	 *                 configuration, false otherwise
+	 * Fills or hides the full text search subpart.
 	 */
-	private function hasSearchField($fieldToCheck) {
-		return in_array($fieldToCheck, $this->displaySearchFormFields);
+	private function fillOrHideFullTextSearch() {
+		if (!$this->hasSearchField('full_text_search')) {
+			$this->hideSubparts(self::SUBPART_PREFIX . 'TEXT');
+			$this->hideSubparts('SEARCH_JAVASCRIPT_TEXT');
+
+			return;
+		}
+
+		$this->setMarker(
+			'searchbox_value', htmlspecialchars($this->piVars['sword'])
+		);
 	}
+
+
+	///////////////////////////////////////////////////////
+	// Functions for retrieving Data for the option boxes
+	///////////////////////////////////////////////////////
 
 	/**
 	 * Gets the data for the eventy type search field options.

@@ -287,11 +287,8 @@ plugin.tx_seminars_pi1 {
 	# whether the option boxes in the selector widget contain an empty entry like "not selected"
 	showEmptyEntryInOptionLists = 0
 
-	# whether the search form should be hidden in list view (hides the text-search field within the selector widget)
-	hideSearchForm = 0
-
 	# comma-separated list of search options which should be shown in the search widget.
-	displaySearchFormFields = full_text_search
+	displaySearchFormFields =
 
 	# whether the page browser should be hidden in list view
 	hidePageBrowser = 0

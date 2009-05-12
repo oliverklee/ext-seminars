@@ -120,8 +120,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	// Tests for render()
 	///////////////////////
 
-	public function testRenderWithSelectorWidgetHiddenThroughTypoScriptReturnsEmptyString() {
-		$this->fixture->setConfigurationValue('hideSelectorWidget', true);
+	public function test_Render_WithAllSearchOptionsHidden_ReturnsEmptyString() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', '');
 
 		$this->assertEquals(
 			'',
@@ -129,44 +129,22 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderCanContainSearchWord() {
-		$searchWord = 'foo bar';
-		$this->fixture->piVars['sword'] = $searchWord;
-
-		$this->assertContains(
-			$searchWord,
-			$this->fixture->render()
+	public function test_Render_ForEnabledSearchWidget_ContainsSearchingHints() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
 		);
-	}
 
-	public function testRenderWithSearchBoxHiddenThroughTypoScriptDoesNotContainSearchWord() {
-		$this->fixture->setConfigurationValue('hideSearchForm', true);
-		$searchWord = 'foo bar';
-		$this->fixture->piVars['sword'] = $searchWord;
-
-		$this->assertNotContains(
-			$searchWord,
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsSearchingHints() {
 		$this->assertContains(
 			$this->fixture->translate('label_searching_hints'),
 			$this->fixture->render()
 		);
 	}
 
-	public function testRenderContainsSearchForm() {
-		$this->assertContains(
-			$this->fixture->translate('label_selector_searchbox') .
-				': <input type="text" id="tx_seminars_pi1_sword" ' .
-				'name="tx_seminars_pi1[sword]" value="" />',
-			$this->fixture->render()
+	public function test_Render_ForEnabledSearchWidget_ContainsSubmitButton() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
 		);
-	}
 
-	public function testRenderContainsSubmitButton() {
 		$this->assertContains(
 			'<input type="submit" value="' .
 				$this->fixture->translate('label_selector_submit') . '" />',
@@ -174,7 +152,11 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderContainsResetButton() {
+	public function test_Render_ForEnabledSearchWidget_ContainsResetButton() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
 		$this->assertContains(
 			'<input type="submit" value="' .
 				$this->fixture->translate('label_selector_reset') . '"',
@@ -194,6 +176,45 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'<option value="none">' .
 				$this->fixture->translate('label_selector_pleaseChoose') .
 				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function text_Render_ForTwoEnabledSearchParts_RendersBothSearchParts() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type,language'
+		);
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			$this->fixture->translate('label_event_type'),
+			$output
+		);
+		$this->assertContains(
+			$this->fixture->translate('label_language'),
+			$output
+		);
+	}
+
+	public function text_Render_ForTwoEnabledSearchParts_AddsBothSearchFieldsToJavascript() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type,language'
+		);
+
+		$this->assertContains(
+			'\'event_type\', \'language\'',
+			$this->fixture->render()
+		);
+	}
+
+	public function text_Render_ForEnabledSearchWidget_DoesNotHaveUnreplacedMarkers() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'full_text_search,language'
+		);
+
+		$this->assertNotContains(
+			'###',
 			$this->fixture->render()
 		);
 	}
@@ -236,7 +257,9 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////////////////////////////
 
 	public function test_Render_ForEventTypeHiddenInConfiguration_HidesEventTypeSubpart() {
-		$this->fixture->setConfigurationValue('displaySearchFormFields', '');
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
 
 		$this->fixture->render();
 
@@ -253,6 +276,17 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'<label for="tx_seminars_pi1-event_type">' .
 				$this->fixture->translate('label_event_type') . '</label>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledEventTypeOptions_ContainsJavascriptPartForEventType() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$this->assertRegExp(
+			'/var suffixes = new Array(.*\'event_type\'.*);/s',
 			$this->fixture->render()
 		);
 	}
@@ -376,7 +410,9 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	//////////////////////////////////////////////////////////////
 
 	public function test_Render_ForLanguageOptionsHiddenInConfiguration_HidesLanguageSubpart() {
-		$this->fixture->setConfigurationValue('displaySearchFormFields', '');
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
 
 		$this->fixture->render();
 
@@ -403,6 +439,17 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'<option value="' . $languageIsoCode . '">' . $languageName .
 				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledLanguageOptions_ContainsJavascriptPartForLanguage() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'language'
+		);
+
+		$this->assertRegExp(
+			'/var suffixes = new Array(.*\'language\'.*);/s',
 			$this->fixture->render()
 		);
 	}
@@ -511,9 +558,20 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_Render_ForEnabledPlaceOptions_ContainsJavascriptPartForPlace() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'place'
+		);
+
+		$this->assertRegExp(
+			'/var suffixes = new Array(.*\'place\'.*);/s',
+			$this->fixture->render()
+		);
+	}
+
 	public function test_Render_ForDisabledPlaceOptions_HidesPlaceSubpart() {
 		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', ''
+			'displaySearchFormFields', 'city'
 		);
 
 		$this->fixture->render();
@@ -656,9 +714,20 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_Render_ForEnabledCityOptions_ContainsJavascriptPartForCity() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
+		$this->assertRegExp(
+			'/var suffixes = new Array(.*\'city\'.*);/s',
+			$this->fixture->render()
+		);
+	}
+
 	public function test_Render_ForDisabledCityOptions_HidesCitySubpart() {
 		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', ''
+			'displaySearchFormFields', 'country'
 		);
 
 		$this->fixture->render();
@@ -806,9 +875,20 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_Render_ForEnabledCountryOptions_ContainsJavascriptPartForCountry() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'country'
+		);
+
+		$this->assertRegExp(
+			'/var suffixes = new Array(.*\'country\'.*);/s',
+			$this->fixture->render()
+		);
+	}
+
 	public function test_Render_ForDisabledCountryOptions_HidesCountrySubpart() {
 		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', ''
+			'displaySearchFormFields', 'city'
 		);
 
 		$this->fixture->render();
@@ -978,6 +1058,97 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'<option value="' . $countryIsoCode2 . '" selected="selected">' .
 				$countryName2 . '</option>',
 			$output
+		);
+	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning the full text search input
+	////////////////////////////////////////////////
+
+	public function test_Render_ForDisabledFullTextSearch_HidesFullTextSearchSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_TEXT')
+		);
+	}
+
+	public function test_Render_ForEnabledFullTextSearch_ShowsFullTextSearchLabel() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'full_text_search'
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('label_selector_searchbox'),
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledFullTextSearch_ContainsFullTextSearchSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'full_text_search'
+		);
+
+		$this->fixture->render();
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('SEARCH_PART_TEXT')
+		);
+	}
+
+	public function test_Render_ForEnabledFullTextSearch_ContainsFullTextJavaSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'full_text_search'
+		);
+
+		$this->assertContains(
+			'document.getElementById(\'tx_seminars_pi1_sword\')',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForDisabledFullTextSearch_HidesFullTextJavaSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'language'
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_JAVASCRIPT_TEXT')
+		);
+	}
+
+	public function test_Render_ForEnabledFullTextSearch_CanFillSearchedWordIntoTextbox() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'full_text_search'
+		);
+
+		$searchWord = 'foo bar';
+		$this->fixture->piVars['sword'] = $searchWord;
+
+		$this->assertContains(
+			$searchWord,
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledFullTextSearch_htmlSpecialcharsSearchedWord() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'full_text_search'
+		);
+
+		$searchWord = '<>';
+		$this->fixture->piVars['sword'] = $searchWord;
+
+		$this->assertContains(
+			htmlspecialchars($searchWord),
+			$this->fixture->render()
 		);
 	}
 }

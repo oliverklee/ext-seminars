@@ -233,7 +233,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkTimeframeInList();
 		$this->checkHideSelectorWidget();
 		$this->checkShowEmptyEntryInOptionLists();
-		$this->checkHideSearchForm();
 		$this->checkHidePageBrowser();
 		$this->checkHideCanceledEvents();
 		$this->checkSortListViewByCategory();
@@ -710,21 +709,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				.'needed if you changed the HTML template to show the selectors '
 				.'as dropdown menues. If this value is incorrect, the dummy entry '
 				.'might get displayed when this is not intended (or vice versa).'
-		);
-	}
-
-	/**
-	 * Checks the setting of the configuration value hideSearchForm.
-	 */
-	private function checkHideSearchForm() {
-		$this->checkIfBoolean(
-			'hideSearchForm',
-			true,
-			's_template_special',
-			'This value specifies whether the search form in the list view '
-				.'will be displayed. If this value is incorrect, the search '
-				.'form might get displayed when this is not intended (or '
-				.'vice versa).'
 		);
 	}
 
