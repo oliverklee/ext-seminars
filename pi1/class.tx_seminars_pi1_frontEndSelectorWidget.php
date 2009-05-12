@@ -122,6 +122,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->initialize();
 		$this->fillOrHideSearchSubpart('event_type');
 		$this->fillOrHideSearchSubpart('language');
+		$this->fillOrHideSearchSubpart('place');
 
 		$this->createAllowedValuesForSelectorWidget();
 
@@ -285,11 +286,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		// Defines the list of option boxes that should be shown in the form.
-		$allOptionBoxes = array(
-			'country',
-			'city',
-			'place'
-		);
+		$allOptionBoxes = array('country', 'city');
 
 		// Renders each option box.
 		foreach ($allOptionBoxes as $currentOptionBox) {
@@ -470,6 +467,9 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			case 'language':
 				$optionData = $this->getLanguageData();
 				break;
+			case 'place':
+				$optionData = $this->getPlaceData();
+				break;
 			default:
 				throw new Exception('The given search field .
 					"' . $searchField . '" was not an allowed value. ' .
@@ -546,6 +546,40 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 				$result[$languageIsoCode] = $languageName;
 			}
 		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the data for the place search field options.
+	 *
+	 * @return array the data for the country search field options; the key
+	 *               will be the UID of the place and the value will be the
+	 *               title of the place, will be empty if no data could be found
+	 */
+	private function getPlaceData() {
+		if ($this->seminarBag->isEmpty()) {
+			return array();
+		}
+
+		$result = array();
+
+		$whereClause = SEMINARS_TABLE_SITES . '.uid = uid_foreign AND ' .
+			'uid_local IN (' . $this->seminarBag->getUids() . ')';
+
+
+		$placeBagClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_placebag'
+		);
+		$placeBag = new $placeBagClassname(
+			$whereClause, SEMINARS_TABLE_SEMINARS_SITES_MM
+		);
+
+		foreach ($placeBag as $place) {
+			$result[$place->getUid()] = $place->getTitle();
+		}
+
+		$placeBag->__destruct();
 
 		return $result;
 	}

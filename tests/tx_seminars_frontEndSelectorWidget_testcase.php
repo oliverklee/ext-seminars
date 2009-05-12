@@ -214,22 +214,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderContainsLabelForPlacesSelector() {
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-place">' .
-				$this->fixture->translate('label_place') . '</label>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsSelectorForPlaces() {
-		$this->assertContains(
-			'<select name="tx_seminars_pi1[place][]" ' .
-				'id="tx_seminars_pi1-place" size="5" multiple="multiple">',
-			$this->fixture->render()
-		);
-	}
-
 	public function testRenderCanContainEmptyOption() {
 		$this->fixture->setConfigurationValue(
 			'showEmptyEntryInOptionLists', true
@@ -285,23 +269,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderCanContainPlaceOption() {
-		$placeTitle = 'test place';
-		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
-		);
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('place' => 1)
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->assertContains(
-			'<option value="' . $placeUid . '">' . $placeTitle . '</option>',
-			$this->fixture->render()
-		);
-	}
 
 	/////////////////////////////////////////////
 	// Test for removeDummyOptionFromFormData()
@@ -594,6 +561,153 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			$languageIsoCode2 . '" selected="selected">' . $languageName2 .
 				'</option>',
+			$output
+		);
+	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests concerning the rendering of the place option box
+	///////////////////////////////////////////////////////////
+
+	public function test_Render_ForEnabledPlaceOptions_ContainsLabelOfPlacesSelector() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'place'
+		);
+
+		$this->assertContains(
+			'<label for="tx_seminars_pi1-place">' .
+				$this->fixture->translate('label_place') . '</label>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForDisabledPlaceOptions_HidesPlaceSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', ''
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_PLACE')
+		);
+	}
+
+	public function test_Render_ForEnabledPlaceOptions_ContainsPlaceOptions() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'place'
+		);
+		$placeTitle = 'test place';
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+
+		$this->assertContains(
+			'<option value="' . $placeUid . '">' . $placeTitle . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPlaceOptions_HtmlSpecialCharsThePlaceTitle() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'place'
+		);
+		$placeTitle = '<>';
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+
+		$this->assertContains(
+			'<option value="' . $placeUid . '">' .
+				htmlspecialchars($placeTitle) . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPlaceOptions_ContainsSelectorForPlaces() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'place'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[place][]" ' .
+				'id="tx_seminars_pi1-place" size="5" multiple="multiple">',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPlaceOptions_CanPreselectPlaceOption() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'place'
+		);
+		$placeTitle = 'test place';
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+
+		$this->fixture->piVars['place'][] = $placeUid;
+
+		$this->assertContains(
+			'<option value="' . $placeUid . '" selected="selected">' . $placeTitle . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPlaceOptions_CanPreselectMultiplePlaceOptions() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'place'
+		);
+		$placeTitle = 'foo';
+		$placeTitle2 = 'bar';
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+		);
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('title' => $placeTitle2)
+		);
+
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid2, 'place'
+		);
+
+		$this->fixture->piVars['place'][] = $placeUid;
+		$this->fixture->piVars['place'][] = $placeUid2;
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			'<option value="' . $placeUid . '" selected="selected">' .
+				$placeTitle . '</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="' . $placeUid2 . '" selected="selected">' .
+				$placeTitle2 . '</option>',
 			$output
 		);
 	}
