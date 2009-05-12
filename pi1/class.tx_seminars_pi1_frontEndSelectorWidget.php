@@ -94,12 +94,22 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	private $seminarBag = null;
 
 	/**
+	 * @var tx_seminars_placebag all places which are assigned to at least one
+	 *      seminar
+	 */
+	private $placeBag = null;
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
 		if ($this->seminarBag) {
 			$this->seminarBag->__destruct();
 			unset($this->seminarBag);
+		}
+		if ($this->placeBag) {
+			$this->placeBag->__destruct();
+			unset($this->placeBag);
 		}
 		unset($this->staticInfo);
 
@@ -123,8 +133,8 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->fillOrHideSearchSubpart('event_type');
 		$this->fillOrHideSearchSubpart('language');
 		$this->fillOrHideSearchSubpart('place');
-
-		$this->createAllowedValuesForSelectorWidget();
+		$this->fillOrHideSearchSubpart('country');
+		$this->fillOrHideSearchSubpart('city');
 
 		return $this->createSelectorWidget();
 	}
@@ -145,78 +155,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
-	 * Gathers all the allowed entries for the option boxes of the selector
-	 * widget. This includes the languages, places, countries and event types of
-	 * the events that are selected and in the seminar bag for the current list
-	 * view.
-	 *
-	 * IMPORTANT: The lists for each option box contain only the values that
-	 * are coming from the selected events! So there's not a huge list of
-	 * languages of which 99% are not selected for any event (and thus would
-	 * result in no found events).
-	 *
-	 * The data will be written to global variables as arrays that contain the
-	 * value (value of the form field) and the label (text shown in the option
-	 * box) for each entry.
-	 */
-	private function createAllowedValuesForSelectorWidget() {
-		$allPlaceUids = array();
-
-		// Creates a separate seminar bag that contains all the events.
-		// We can't use the regular seminar bag that is used for the list
-		// view as it contains only part of the events.
-		$seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
-
-		// Walks through all events in the seminar bag to read the needed data
-		// from each event object.
-		foreach ($seminarBag as $event) {
-			// Reads the place(s) from the event record. The country will be
-			// read from the place record later.
-			$placeUids = $event->getRelatedMmRecordUids(
-				SEMINARS_TABLE_SEMINARS_SITES_MM
-			);
-			$allPlaceUids = array_merge($allPlaceUids, $placeUids);
-		}
-		$seminarBag->__destruct();
-		unset($seminarBag);
-
-		// Fetches the name of the location, the city and the country and adds
-		// it to the final array.
-		if (empty($allPlaceUids)) {
-			$allPlaceUids = array(0);
-		}
-
-		foreach ($this->createPlaceBag($allPlaceUids) as $uid => $place) {
-			if (!isset($this->allPlaces[$uid])) {
-				$this->allPlaces[$uid] = $place->getTitle();
-			}
-			$countryIsoCode = $place->getCountryIsoCode();
-			if (!isset($this->allCountries[$countryIsoCode])) {
-				$this->allCountries[$countryIsoCode]
-					= $this->staticInfo->getStaticInfoName(
-						'COUNTRIES', $countryIsoCode
-					);
-			}
-
-			$cityName = $place->getCity();
-			if (!isset($this->allCities[$cityName])) {
-				$this->allCities[$cityName] = $cityName;
-			}
-		}
-
-		// Brings the options into alphabetical order.
-		asort($this->allPlaces);
-		asort($this->allCities);
-		asort($this->allCountries);
-
-		// Adds an empty option to each list of options if this is needed.
-		$this->addEmptyOptionIfNeeded($this->allPlaces);
-		$this->addEmptyOptionIfNeeded($this->allCities);
-		$this->addEmptyOptionIfNeeded($this->allCountries);
-	}
-
-	/**
-	 * Adds a dummy option to the array of allowed values. This is needed if the
+	 * Adds a dummy option to the array of options. This is needed if the
 	 * user wants to show the option box as drop-down selector instead of
 	 * a multi-line select.
 	 *
@@ -285,90 +224,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			$this->hideSubparts('wrapper_searchbox');
 		}
 
-		// Defines the list of option boxes that should be shown in the form.
-		$allOptionBoxes = array('country', 'city');
-
-		// Renders each option box.
-		foreach ($allOptionBoxes as $currentOptionBox) {
-			$this->createOptionBox($currentOptionBox);
-		}
-
 		return $this->getSubpart('SELECTOR_WIDGET');
-	}
-
-	/**
-	 * Creates the HTML code for a single option box of the selector widget.
-	 *
-	 * The selector widget contains multiple option boxes. Each of them contains
-	 * a list of options for a certain sort of records. The option box for the
-	 * field "language" could contain the entries "English" and "German".
-	 *
-	 * @param string the name of the option box to generate, must not contain
-	 *               spaces and there must be a localized label "label_xyz"
-	 *               with this name, may not be empty
-	 */
-	private function createOptionBox($optionBoxName) {
-		// Sets the header that is shown in the label of this selector box.
-		$this->setMarker(
-			'options_header', $this->translate('label_' . $optionBoxName)
-		);
-
-		// Sets the name of this option box in the HTML source. This is needed
-		// to separate the different option boxes for further form processing.
-		// The additional pair of brackets is needed as we need to submit multiple
-		// values per field.
-		$this->setMarker(
-			'optionbox_name', $this->prefixId . '[' . $optionBoxName . '][]'
-		);
-
-		$this->setMarker(
-			'optionbox_id', $this->prefixId . '-' . $optionBoxName
-		);
-
-		// Fetches the possible entries for the current option box and renders
-		// them as HTML <option> entries for the <select> field.
-		$optionsList = '';
-		switch ($optionBoxName) {
-			case 'event_type':
-				$availableOptions = $this->allEventTypes;
-				break;
-			case 'language':
-				$availableOptions = $this->allLanguages;
-				break;
-			case 'country':
-				$availableOptions = $this->allCountries;
-				break;
-			case 'city':
-				$availableOptions = $this->allCities;
-				break;
-			case 'place':
-				$availableOptions = $this->allPlaces;
-				break;
-			default:
-				$availableOptions = array();
-				break;
-		}
-		foreach ($availableOptions as $currentValue => $currentLabel) {
-			$this->setMarker('option_label', $currentLabel);
-			$this->setMarker('option_value', $currentValue);
-
-			// Preselects the option if it was selected by the user.
-			if (isset($this->piVars[$optionBoxName])
-				&& ($currentValue != 'none')
-				&& (in_array($currentValue, $this->piVars[$optionBoxName]))
-			) {
-				$isSelected = ' selected="1"';
-			} else {
-				$isSelected = '';
-			}
-			$this->setMarker('option_selected', $isSelected);
-
-			$optionsList .= $this->getSubpart('OPTIONS_ENTRY');
-		}
-		$this->setMarker('options', $optionsList);
-		$this->setMarker(
-			'options_' . $optionBoxName, $this->getSubpart('OPTIONS_BOX')
-		);
 	}
 
 	/**
@@ -382,7 +238,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *
 	 * @return string the HTML content for the select, will not be empty
 	 */
-	private function createSingleOptionBox($name, array $options) {
+	private function createOptionBox($name, array $options) {
 		$this->setMarker('options_header', $this->translate('label_' . $name));
 		$this->setMarker(
 			'optionbox_name', $this->prefixId . '[' . $name . '][]'
@@ -413,22 +269,33 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
-	 * Returns a place bag object that contains all seminar places that are in
-	 * the list of given UIDs.
+	 * Creates a place bag with all places that are assigned to at least one
+	 * event.
 	 *
-	 * @param array all the UIDs to include in the bag, must not be empty
+	 * The place bag is stored in the member variable $this->placeBag.
 	 *
-	 * @return tx_seminars_placebag place bag object
+	 * Before this function is called, it must be assured that the seminar bag
+	 * is not empty.
 	 */
-	private function createPlaceBag(array $placeUids) {
-		$placeUidsAsCommaSeparatedList = implode(',', $placeUids);
-		$queryWhere = 'uid IN(' . $placeUidsAsCommaSeparatedList . ')';
+	private function createPlaceBag() {
+		if ($this->seminarBag->isEmpty()) {
+			throw new Exception('The seminar bag must not be empty when ' .
+				'calling this function.'
+			);
+		}
+		if ($this->placeBag) {
+			return;
+		}
+
+		$whereClause = SEMINARS_TABLE_SITES . '.uid = uid_foreign AND ' .
+			'uid_local IN (' . $this->seminarBag->getUids() . ')';
+
 		$placeBagClassname = t3lib_div::makeInstanceClassName(
 			'tx_seminars_placebag'
 		);
-		$placeBag = new $placeBagClassname($queryWhere);
-
-		return $placeBag;
+		$this->placeBag = new $placeBagClassname(
+			$whereClause, SEMINARS_TABLE_SEMINARS_SITES_MM
+		);
 	}
 
 	/**
@@ -470,6 +337,12 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			case 'place':
 				$optionData = $this->getPlaceData();
 				break;
+			case 'city':
+				$optionData = $this->getCityData();
+				break;
+			case 'country':
+				$optionData = $this->getCountryData();
+				break;
 			default:
 				throw new Exception('The given search field .
 					"' . $searchField . '" was not an allowed value. ' .
@@ -479,7 +352,8 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 				break;
 		}
 
-		$optionBox = $this->createSingleOptionBox($searchField, $optionData);
+		$this->addEmptyOptionIfNeeded($optionData);
+		$optionBox = $this->createOptionBox($searchField, $optionData);
 
 		$this->setMarker('options_' . $searchField, $optionBox);
 	}
@@ -532,18 +406,20 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$result = array();
 
 		foreach ($this->seminarBag as $event) {
-			// Reads the language from the event record.
-			$languageIsoCode = $event->getLanguage();
-			if ((!empty($languageIsoCode))
-				&& !isset($result[$languageIsoCode])) {
-				$languageName = $this->staticInfo->getStaticInfoName(
-					'LANGUAGES',
-					$languageIsoCode,
-					'',
-					'',
-					0
-				);
-				$result[$languageIsoCode] = $languageName;
+			if ($event->hasLanguage()) {
+				// Reads the language from the event record.
+				$languageIsoCode = $event->getLanguage();
+				if ((!empty($languageIsoCode))
+					&& !isset($result[$languageIsoCode])) {
+					$languageName = $this->staticInfo->getStaticInfoName(
+						'LANGUAGES',
+						$languageIsoCode,
+						'',
+						'',
+						0
+					);
+					$result[$languageIsoCode] = $languageName;
+				}
 			}
 		}
 
@@ -563,23 +439,65 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		$result = array();
+		$this->createPlaceBag();
 
-		$whereClause = SEMINARS_TABLE_SITES . '.uid = uid_foreign AND ' .
-			'uid_local IN (' . $this->seminarBag->getUids() . ')';
-
-
-		$placeBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_placebag'
-		);
-		$placeBag = new $placeBagClassname(
-			$whereClause, SEMINARS_TABLE_SEMINARS_SITES_MM
-		);
-
-		foreach ($placeBag as $place) {
+		foreach ($this->placeBag as $place) {
 			$result[$place->getUid()] = $place->getTitle();
 		}
 
-		$placeBag->__destruct();
+		return $result;
+	}
+
+	/**
+	 * Gets the data for the city search field options.
+	 *
+	 * @return array the data for the city search field options; the key and the
+	 *               value will be the name of the city, will be empty if no
+	 *               data could be found
+	 */
+	private function getCityData() {
+		if ($this->seminarBag->isEmpty()) {
+			return array();
+		}
+
+		$result = array();
+		$this->createPlaceBag();
+
+		foreach ($this->placeBag as $place) {
+			$result[$place->getCity()] = $place->getCity();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the data for the country search field options.
+	 *
+	 * @return array the data for the country search field options; the key will
+	 *               be the ISO-Alpha-2 code of the country the value will be
+	 *               the name of the country, will be empty if no data could be
+	 *               found
+	 */
+	private function getCountryData() {
+		if ($this->seminarBag->isEmpty()) {
+			return array();
+		}
+
+		$result = array();
+		$this->createPlaceBag();
+
+		foreach ($this->placeBag as $place) {
+			$countryIsoCode = $place->getCountryIsoCode();
+
+			if (($countryIsoCode != '0') && ($countryIsoCode != '')) {
+				if (!isset($result[$countryIsoCode])) {
+					$result[$countryIsoCode]
+						= $this->staticInfo->getStaticInfoName(
+							'COUNTRIES', $countryIsoCode
+						);
+				}
+			}
+		}
 
 		return $result;
 	}

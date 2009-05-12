@@ -182,39 +182,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderContainsLabelForCountriesSelector() {
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-country">' .
-				$this->fixture->translate('label_country') . '</label>',
-			$this->fixture->render()
+	public function test_Render_ForEnabledShowEmtpyEntryInOptionLists_ContainsEmptyOption() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
 		);
-	}
-
-	public function testRenderContainsSelectorForCountries() {
-		$this->assertContains(
-			'<select name="tx_seminars_pi1[country][]" ' .
-				'id="tx_seminars_pi1-country" size="5" multiple="multiple">',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsLabelForCitiesSelector() {
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-city">' .
-				$this->fixture->translate('label_city') . '</label>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsSelectorForCities() {
-		$this->assertContains(
-			'<select name="tx_seminars_pi1[city][]" ' .
-				'id="tx_seminars_pi1-city" size="5" multiple="multiple">',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderCanContainEmptyOption() {
 		$this->fixture->setConfigurationValue(
 			'showEmptyEntryInOptionLists', true
 		);
@@ -223,48 +194,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'<option value="none">' .
 				$this->fixture->translate('label_selector_pleaseChoose') .
 				'</option>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsCountryOption() {
-		$this->instantiateStaticInfo();
-
-		$countryIsoCode = 'DE';
-		$countryName = $this->staticInfo->getStaticInfoName(
-			'COUNTRIES', $countryIsoCode
-		);
-		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode)
-		);
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('place' => 1)
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->assertContains(
-			'<option value="' . $countryIsoCode . '">' . $countryName .
-				'</option>',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderCanContainCityOption() {
-		$cityName = 'test city';
-		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => $cityName)
-		);
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('place' => 1)
-		);
-		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
-		);
-
-		$this->assertContains(
-			'<option value="' . $cityName . '">' . $cityName . '</option>',
 			$this->fixture->render()
 		);
 	}
@@ -708,6 +637,346 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'<option value="' . $placeUid2 . '" selected="selected">' .
 				$placeTitle2 . '</option>',
+			$output
+		);
+	}
+
+
+	//////////////////////////////////////////////////////////
+	// Tests concerning the rendering of the city option box
+	//////////////////////////////////////////////////////////
+
+	public function test_Render_ForEnabledCityOptions_ContainsLabelOfCitySelector() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
+
+		$this->assertContains(
+			'<label for="tx_seminars_pi1-city">' .
+				$this->fixture->translate('label_city') . '</label>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForDisabledCityOptions_HidesCitySubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', ''
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_CITY')
+		);
+	}
+
+	public function test_Render_ForEnabledCityOptions_CanContainCityOption() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
+
+		$cityName = 'test city';
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => $cityName)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+
+		$this->assertContains(
+			'<option value="' . $cityName . '">' . $cityName . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledCityOptions_CanContainTwoCityOptiona() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
+		$cityName1 = 'foo city';
+		$cityName2 = 'bar city';
+
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => $cityName1)
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+		);
+
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => $cityName2)
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+		);
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			'<option value="' . $cityName1 . '">' . $cityName1 . '</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="' . $cityName2 . '">' . $cityName2 . '</option>',
+			$output
+		);
+	}
+
+	public function test_Render_ForEnabledCityOptions_CanPreselectCityOption() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
+		$cityTitle = 'test city';
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => $cityTitle)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+
+		$this->fixture->piVars['city'][] = $cityTitle;
+
+		$this->assertContains(
+			'<option value="' . $cityTitle . '" selected="selected">' .
+				$cityTitle . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledCityOptions_CanPreselectMultipleCityOptions() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
+		$cityTitle1 = 'bar city';
+		$cityTitle2 = 'foo city';
+
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => $cityTitle1)
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+		);
+
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => $cityTitle2)
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+		);
+
+		$this->fixture->piVars['city'][] = $cityTitle1;
+		$this->fixture->piVars['city'][] = $cityTitle2;
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			'<option value="' . $cityTitle1 . '" selected="selected">' .
+				$cityTitle1 . '</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="' . $cityTitle2 . '" selected="selected">' .
+				$cityTitle2 . '</option>',
+			$output
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////
+	// Tests concerning the rendering of the country option box
+	/////////////////////////////////////////////////////////////
+
+	public function test_Render_ForEnabledCountryOptions_ContainsLabelOfCountrySelector() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'country'
+		);
+
+		$this->assertContains(
+			'<label for="tx_seminars_pi1-country">' .
+				$this->fixture->translate('label_country') . '</label>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForDisabledCountryOptions_HidesCountrySubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', ''
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_COUNTRY')
+		);
+	}
+
+	public function test_Render_ForEnabledCountryOptions_CanContainCountryOption() {
+		$this->instantiateStaticInfo();
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'country'
+		);
+
+		$countryIsoCode = 'DE';
+		$countryName = $this->staticInfo->getStaticInfoName(
+			'COUNTRIES', $countryIsoCode
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+
+		$this->assertContains(
+			'<option value="' . $countryIsoCode . '">' . $countryName .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledCountryOptions_CanContainMultipleCountryOptions() {
+		$this->instantiateStaticInfo();
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'country'
+		);
+
+		$countryIsoCode1 = 'DE';
+		$countryName1 = $this->staticInfo->getStaticInfoName(
+			'COUNTRIES', $countryIsoCode1
+		);
+		$countryIsoCode2 = 'GB';
+		$countryName2 = $this->staticInfo->getStaticInfoName(
+			'COUNTRIES', $countryIsoCode2
+		);
+
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode1)
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+		);
+
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode2)
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+		);
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			'<option value="' . $countryIsoCode1 . '">' . $countryName1 .
+				'</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="' . $countryIsoCode2 . '">' . $countryName2 .
+				'</option>',
+			$output
+		);
+	}
+
+	public function test_Render_ForEnabledCountryOptions_CanPreselectOneCountryOption() {
+		$this->instantiateStaticInfo();
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'country'
+		);
+
+		$countryIsoCode = 'DE';
+		$countryName = $this->staticInfo->getStaticInfoName(
+			'COUNTRIES', $countryIsoCode
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+		);
+
+		$this->fixture->piVars['country'][] = $countryIsoCode;
+
+		$this->assertContains(
+			'<option value="' . $countryIsoCode . '" selected="selected">' .
+				$countryName . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledCountryOptions_CanPreselectMultipleCountryOptions() {
+		$this->instantiateStaticInfo();
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'country'
+		);
+
+		$countryIsoCode1 = 'DE';
+		$countryName1 = $this->staticInfo->getStaticInfoName(
+			'COUNTRIES', $countryIsoCode1
+		);
+		$countryIsoCode2 = 'GB';
+		$countryName2 = $this->staticInfo->getStaticInfoName(
+			'COUNTRIES', $countryIsoCode2
+		);
+
+		$placeUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode1)
+		);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+		);
+
+		$placeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode2)
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+		);
+
+		$this->fixture->piVars['country'][] = $countryIsoCode1;
+		$this->fixture->piVars['country'][] = $countryIsoCode2;
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			'<option value="' . $countryIsoCode1 . '" selected="selected">' .
+				$countryName1 . '</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="' . $countryIsoCode2 . '" selected="selected">' .
+				$countryName2 . '</option>',
 			$output
 		);
 	}
