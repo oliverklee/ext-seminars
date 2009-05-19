@@ -283,9 +283,22 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 * Sets the java script markers needed for the working reset button.
 	 */
 	private function setJavaScriptMarkers() {
+		$additionalJavaScriptMarkers = array();
+
+		if ($this->hasSearchField('date')) {
+			$additionalJavaScriptMarkers = array(
+				'from_day', 'from_month', 'from_year', 'to_day', 'to_month',
+				'to_year'
+			);
+		}
+
 		$javaScriptMarker = '\'' .
-			implode('\', \'', $this->displaySearchFormFields) .
-			'\'';
+			implode('\', \'',
+				array_merge(
+					$additionalJavaScriptMarkers,
+					$this->displaySearchFormFields
+				)
+			) . '\'';
 
 		$this->setMarker('search_fields_javascript', $javaScriptMarker);
 	}
@@ -296,15 +309,11 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 * @param array the options for the drop-down, the keys will be used as
 	 *              values and the array values as labels for the options, may
 	 *              be empty
-	 * @param string the HTML name of the drop-down, must be not empty
-	 * @param string the part of the date dropdown which is created, must not
-	 *               be empty
+	 * @param string the HTML name of the drop-down, must be not empty and
+	 *               unique
 	 */
-	private function createDropDown($options, $name, $key) {
-		$this->setMarker(
-			'dropdown_name',
-			$this->prefixId . '[' . $name . ']['. $key . ']'
-		);
+	private function createDropDown($options, $name) {
+		$this->setMarker('dropdown_name', $this->prefixId . '[' . $name . ']');
 		$this->setMarker('dropdown_id', $this->prefixId . '-' . $name);
 
 		// Adds an empty option to the dropdown
@@ -413,7 +422,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			$dropdowns = '';
 			foreach ($dateArrays as $dropdownPart => $dateArray) {
 				$dropdowns .= $this->createDropDown(
-					$dateArray, 'date_' . $fromOrTo, $dropdownPart
+					$dateArray, $fromOrTo . '_' . $dropdownPart
 				);
 			}
 			$this->setMarker('options_date_' . $fromOrTo, $dropdowns);

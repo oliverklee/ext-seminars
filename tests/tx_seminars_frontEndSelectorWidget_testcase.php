@@ -1106,7 +1106,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<select name="tx_seminars_pi1[date_from][day]"',
+			'<select name="tx_seminars_pi1[from_day]"',
 			$this->fixture->render()
 		);
 	}
@@ -1117,7 +1117,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<select name="tx_seminars_pi1[date_from][month]"',
+			'<select name="tx_seminars_pi1[from_month]"',
 			$this->fixture->render()
 		);
 	}
@@ -1128,7 +1128,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<select name="tx_seminars_pi1[date_from][year]"',
+			'<select name="tx_seminars_pi1[from_year]"',
 			$this->fixture->render()
 		);
 	}
@@ -1139,7 +1139,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<select name="tx_seminars_pi1[date_to][day]"',
+			'<select name="tx_seminars_pi1[to_day]"',
 			$this->fixture->render()
 		);
 	}
@@ -1150,7 +1150,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<select name="tx_seminars_pi1[date_to][month]"',
+			'<select name="tx_seminars_pi1[to_month]"',
 			$this->fixture->render()
 		);
 	}
@@ -1161,7 +1161,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<select name="tx_seminars_pi1[date_to][year]"',
+			'<select name="tx_seminars_pi1[to_year]"',
 			$this->fixture->render()
 		);
 	}
@@ -1203,5 +1203,17 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			$this->fixture->render()
 		);
 	}
+
+	public function test_Render_ForEnabledDateSearch_ContainsJavascriptDatePart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertRegExp(
+			'/var suffixes = new Array(.*\'to_year\'.*);/s',
+			$this->fixture->render()
+		);
+	}
+
 }
 ?>
