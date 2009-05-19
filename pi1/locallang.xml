@@ -41,6 +41,7 @@
 			<label index="seminars.pi_flexform.searchForm.country">Country</label>
 			<label index="seminars.pi_flexform.searchForm.city">City</label>
 			<label index="seminars.pi_flexform.searchForm.place">Place</label>
+			<label index="seminars.pi_flexform.searchForm.date">Date</label>
 			<label index="seminars.pi_flexform.searchForm.textField">Full-text search</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
@@ -62,6 +63,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7">events with the deadline in the future</label>
 			<label index="seminars.pi_flexform.hideFields">Hide fields in detailed view (comma-separated):</label>
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
+			<label index="seminars.pi_flexform.numberOfYearsInDateFilter">Number of years a user can search into the future:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
@@ -246,6 +248,8 @@
 			<label index="label_selector_pleaseChoose">please choose...</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Search term</label>
+			<label index="label_to">to</label>
+			<label index="label_date_search">Period from</label>
 			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
@@ -566,6 +570,7 @@
 			<label index="seminars.pi_flexform.searchForm.country">Land</label>
 			<label index="seminars.pi_flexform.searchForm.city">Stadt</label>
 			<label index="seminars.pi_flexform.searchForm.place">Ort</label>
+			<label index="seminars.pi_flexform.searchForm.date">Datum</label>
 			<label index="seminars.pi_flexform.searchForm.textField">Volltextsuche</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">Listenansicht auf Veranstaltungen dieser Arten einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">Listenansicht auf Veranstaltungen aus diesen Kategorien einschränken:</label>
@@ -587,6 +592,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7">Veranstaltungen mit Anmeldeschluss in der Zukunft</label>
 			<label index="seminars.pi_flexform.hideFields">Versteckte Felder in Detailansicht (komma-separiert):</label>
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Zeige leere Option im Auswahl-Widget:</label>
+			<label index="seminars.pi_flexform.numberOfYearsInDateFilter">Anzahl der Jahre die der User in die Zukunft suchen kann:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Suchformular in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Page-Browser in der Listenansicht verstecken:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Abgesagte Veranstaltungen in der Listenansicht nicht anzeigen:</label>
@@ -771,6 +777,8 @@
 			<label index="label_selector_pleaseChoose">bitte auswählen...</label>
 			<label index="label_selector_reset">zurücksetzen</label>
 			<label index="label_selector_searchbox">Suchbegriff</label>
+			<label index="label_to">bis</label>
+			<label index="label_date_search">Zeitraum von</label>
 			<label index="label_searching_hints_formal">Sie können die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setzen Sie den Filter bitte zurück.</label>
 			<label index="label_searching_hints_informal">Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setze den Filter bitte zurück.</label>
 			<label index="label_we_offer_events_in_categories_formal">Zurzeit können wir Ihnen Veranstaltungen aus den folgenden Kategorien anbieten:</label>
@@ -2008,6 +2016,7 @@
 			<label index="seminars.pi_flexform.searchForm.country" type="integer">93787849</label>
 			<label index="seminars.pi_flexform.searchForm.city" type="integer">92079470</label>
 			<label index="seminars.pi_flexform.searchForm.place" type="integer">129617664</label>
+			<label index="seminars.pi_flexform.searchForm.date" type="integer">71780721</label>
 			<label index="seminars.pi_flexform.searchForm.textField" type="integer">131588247</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes" type="integer">263724247</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories" type="integer">144505574</label>
@@ -2029,6 +2038,7 @@
 			<label index="seminars.pi_flexform.timeframeInList7" type="integer">187059203</label>
 			<label index="seminars.pi_flexform.hideFields" type="integer">25256911</label>
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists" type="integer">27709563</label>
+			<label index="seminars.pi_flexform.numberOfYearsInDateFilter" type="integer">158740807</label>
 			<label index="seminars.pi_flexform.hideSearchForm" type="integer">123595759</label>
 			<label index="seminars.pi_flexform.hidePageBrowser" type="integer">170072771</label>
 			<label index="seminars.pi_flexform.defaultEventVipsFeGroupID" type="integer">258081068</label>
@@ -2185,6 +2195,8 @@
 			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
 			<label index="label_selector_reset" type="integer">86431368</label>
 			<label index="label_selector_searchbox" type="integer">151546043</label>
+			<label index="label_to" type="integer">1797664</label>
+			<label index="label_date_search" type="integer">182310723</label>
 			<label index="label_searching_hints_formal" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
 			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
@@ -3221,6 +3233,7 @@
 			<label index="seminars.pi_flexform.searchForm.country">Country</label>
 			<label index="seminars.pi_flexform.searchForm.city">City</label>
 			<label index="seminars.pi_flexform.searchForm.place">Place</label>
+			<label index="seminars.pi_flexform.searchForm.date">Date</label>
 			<label index="seminars.pi_flexform.searchForm.textField">Full-text search</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
@@ -3243,6 +3256,7 @@
 			<label index="seminars.pi_flexform.hideFields">Hide fields in detailed view (comma-separated):</label>
 			<label index="seminars.pi_flexform.hidePageBrowser">Hide the page browser in list view:</label>
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
+			<label index="seminars.pi_flexform.numberOfYearsInDateFilter">Number of years a user can search into the future:</label>
 			<label index="seminars.pi_flexform.hideSearchForm">Hide the search form in list view:</label>
 			<label index="seminars.pi_flexform.hideCanceledEvents">Hide canceled events in list view:</label>
 			<label index="seminars.pi_flexform.sortListViewByCategory">Sort the list view by category:</label>
@@ -3396,6 +3410,8 @@
 			<label index="label_selector_pleaseChoose">please choose...</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Search term</label>
+			<label index="label_to">to</label>
+			<label index="label_date_search">Period from</label>
 			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>

@@ -287,6 +287,9 @@ plugin.tx_seminars_pi1 {
 	# comma-separated list of search options which should be shown in the search widget.
 	displaySearchFormFields =
 
+	# how many years are displayed in the date filter
+	numberOfYearsInDateFilter = 2
+
 	# whether the page browser should be hidden in list view
 	hidePageBrowser = 0
 

@@ -268,18 +268,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledEventType_ContainsLabelForEventTypeSelector() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'event_type'
-		);
-
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-event_type">' .
-				$this->fixture->translate('label_event_type') . '</label>',
-			$this->fixture->render()
-		);
-	}
-
 	public function test_Render_ForEnabledEventTypeOptions_ContainsJavascriptPartForEventType() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
@@ -454,18 +442,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledLanguageOptions_ContainsLanguagesSelectorLabel() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'language'
-		);
-
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-language">' .
-				$this->fixture->translate('label_language') . '</label>',
-			$this->fixture->render()
-		);
-	}
-
 	public function test_Render_ForEnabledLanguageOptions_ContainsSelectorForLanguages() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'language'
@@ -545,18 +521,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////////
 	// Tests concerning the rendering of the place option box
 	///////////////////////////////////////////////////////////
-
-	public function test_Render_ForEnabledPlaceOptions_ContainsLabelOfPlacesSelector() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'place'
-		);
-
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-place">' .
-				$this->fixture->translate('label_place') . '</label>',
-			$this->fixture->render()
-		);
-	}
 
 	public function test_Render_ForEnabledPlaceOptions_ContainsJavascriptPartForPlace() {
 		$this->fixture->setConfigurationValue(
@@ -703,16 +667,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	//////////////////////////////////////////////////////////
 	// Tests concerning the rendering of the city option box
 	//////////////////////////////////////////////////////////
-
-	public function test_Render_ForEnabledCityOptions_ContainsLabelOfCitySelector() {
-		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
-
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-city">' .
-				$this->fixture->translate('label_city') . '</label>',
-			$this->fixture->render()
-		);
-	}
 
 	public function test_Render_ForEnabledCityOptions_ContainsJavascriptPartForCity() {
 		$this->fixture->setConfigurationValue(
@@ -862,18 +816,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////////////////////////
 	// Tests concerning the rendering of the country option box
 	/////////////////////////////////////////////////////////////
-
-	public function test_Render_ForEnabledCountryOptions_ContainsLabelOfCountrySelector() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'country'
-		);
-
-		$this->assertContains(
-			'<label for="tx_seminars_pi1-country">' .
-				$this->fixture->translate('label_country') . '</label>',
-			$this->fixture->render()
-		);
-	}
 
 	public function test_Render_ForEnabledCountryOptions_ContainsJavascriptPartForCountry() {
 		$this->fixture->setConfigurationValue(
@@ -1078,17 +1020,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledFullTextSearch_ShowsFullTextSearchLabel() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'full_text_search'
-		);
-
-		$this->assertContains(
-			$this->fixture->translate('label_selector_searchbox'),
-			$this->fixture->render()
-		);
-	}
-
 	public function test_Render_ForEnabledFullTextSearch_ContainsFullTextSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'full_text_search'
@@ -1148,6 +1079,127 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			htmlspecialchars($searchWord),
+			$this->fixture->render()
+		);
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning the date search
+	/////////////////////////////////////
+
+	public function test_Render_ForDisabledDateSearch_HidesDateSearchSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'country'
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_DATE')
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearch_ContainsDayFromDropdown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[date_from][day]"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearch_ContainsMonthFromDropdown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[date_from][month]"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearch_ContainsYearFromDropdown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[date_from][year]"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearch_ContainsDayToDropdown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[date_to][day]"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearch_ContainsMonthToDropdown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[date_to][month]"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearch_ContainsYearToDropdown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertContains(
+			'<select name="tx_seminars_pi1[date_to][year]"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwo_ContainsThreeYearsInDropdown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+		$this->fixture->setConfigurationValue(
+			'numberOfYearsInDateFilter', 2
+		);
+
+		$output = $this->fixture->render();
+		$currentYear = intval(date('Y'));
+
+		$this->assertContains(
+			'<option value="' . $currentYear . '">' . $currentYear .'</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="' . $currentYear + 1 . '">' .
+				$currentYear + 1 .'</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="' . $currentYear + 2 . '">' .
+				$currentYear + 2 .'</option>',
+			$output
+		);
+	}
+
+	public function test_Render_ForEnabledDateSearch_AddsAnEmptyOptionToTheDropDown() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->assertContains(
+			'<option value="0">&nbsp;</option>',
 			$this->fixture->render()
 		);
 	}

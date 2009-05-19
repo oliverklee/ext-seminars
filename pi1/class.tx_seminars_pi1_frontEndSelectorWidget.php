@@ -108,6 +108,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->fillOrHideSearchSubpart('country');
 		$this->fillOrHideSearchSubpart('city');
 		$this->fillOrHideFullTextSearch();
+		$this->fillOrHideDateSearch();
 		$this->setJavaScriptMarkers();
 
 		return $this->getSubpart('SELECTOR_WIDGET');
@@ -289,6 +290,43 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->setMarker('search_fields_javascript', $javaScriptMarker);
 	}
 
+	/**
+	 * Creates a drop-down, including an empty option at the top.
+	 *
+	 * @param array the options for the drop-down, the keys will be used as
+	 *              values and the array values as labels for the options, may
+	 *              be empty
+	 * @param string the HTML name of the drop-down, must be not empty
+	 * @param string the part of the date dropdown which is created, must not
+	 *               be empty
+	 */
+	private function createDropDown($options, $name, $key) {
+		$this->setMarker(
+			'dropdown_name',
+			$this->prefixId . '[' . $name . ']['. $key . ']'
+		);
+		$this->setMarker('dropdown_id', $this->prefixId . '-' . $name);
+
+		// Adds an empty option to the dropdown
+		$this->setMarker('option_value', 0);
+		$this->setMarker('option_label', '&nbsp;');
+		$this->setMarker('option_selected', '');
+		$optionsList = $this->getSubpart('OPTIONS_ENTRY');
+
+		foreach ($options as $optionValue => $optionName) {
+			$this->setMarker('option_value', $optionValue);
+			$this->setMarker('option_label', $optionName);
+
+			$this->setMarker('option_selected', '');
+
+			$optionsList .= $this->getSubpart('OPTIONS_ENTRY');
+		}
+
+		$this->setMarker('dropdown_options', $optionsList);
+
+		return $this->getSubpart('SINGLE_DROPDOWN');
+	}
+
 
 	///////////////////////////////////////////////////////////////
 	// Functions for hiding or filling the search widget subparts
@@ -355,6 +393,31 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->setMarker(
 			'searchbox_value', htmlspecialchars($this->piVars['sword'])
 		);
+	}
+
+	/**
+	 * Fills or hides the date search subpart.
+	 */
+	private function fillOrHideDateSearch() {
+		if (!$this->hasSearchField('date')) {
+			$this->hideSubparts(
+				self::SUBPART_PREFIX . 'DATE'
+			);
+
+			return;
+		}
+
+		$dateArrays = $this->createDateArray();
+
+		foreach (array('from', 'to') as $fromOrTo) {
+			$dropdowns = '';
+			foreach ($dateArrays as $dropdownPart => $dateArray) {
+				$dropdowns .= $this->createDropDown(
+					$dateArray, 'date_' . $fromOrTo, $dropdownPart
+				);
+			}
+			$this->setMarker('options_date_' . $fromOrTo, $dropdowns);
+		}
 	}
 
 
@@ -489,6 +552,40 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 						);
 				}
 			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Compiles the possible values for date selector.
+	 *
+	 * @return array multi-dimensional array; the first level contains day,
+	 *         month and year as key, the second level has the day, month or
+	 *         year value as value and key, will not be empty
+	 */
+	private function createDateArray() {
+		$result = array(
+			'day' => array(),
+			'month' => array(),
+			'year' => array(),
+		);
+
+		for ($day = 1; $day <= 31; $day++) {
+			$result['day'][$day] = $day;
+		}
+
+		for ($month = 1; $month <= 12; $month++) {
+			$result['month'][$month] = $month;
+		}
+
+		$currentYear = intval(date('Y'));
+		$targetYear = $currentYear + $this->getConfValueInteger(
+			'numberOfYearsInDateFilter', 's_listView'
+		);
+
+		for ($year = $currentYear; $year < $targetYear; $year++) {
+			$result['year'][$year] = $year;
 		}
 
 		return $result;

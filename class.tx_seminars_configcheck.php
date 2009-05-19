@@ -251,6 +251,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkCategoryIconDisplay();
 		$this->checkSeminarImageSizes();
 		$this->checkDisplaySearchFormFields();
+		$this->checkNumberOfYearsInDateFilter();
 	}
 
  	/**
@@ -2152,10 +2153,26 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'all if this value is empty or contains only invalid keys.',
 			array(
 				'event_type', 'language', 'country' , 'city' , 'place',
-				'full_text_search',
+				'full_text_search', 'date'
 			)
 		);
 	}
+
+	/**
+	 * Checks the settings for numberOfYearsInDateFilter.
+	 */
+	private function checkNumberOfYearsInDateFilter() {
+		$this->checkIfPositiveInteger(
+			'numberOfYearsInDateFilter',
+			true,
+			's_listView',
+			'This value specifies the number years of years the user can ' .
+				'search for events in the event list. The date search will ' .
+				'have an empty drop-down for the year if this variable is ' .
+				'misconfigured.'
+		);
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_configcheck.php']) {
