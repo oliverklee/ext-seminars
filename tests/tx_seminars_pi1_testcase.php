@@ -2394,6 +2394,410 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////////////////////////
+	// Tests concerning the the list view, filtered by date
+	/////////////////////////////////////////////////////////
+
+	public function test_ListViewForGivenFromDate_ShowsEventWithBeginDateAfterFromDate() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$fromTime = $simTime - 86400;
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event From',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $fromTime);
+		$this->fixture->piVars['from_month'] = date('n', $fromTime);
+		$this->fixture->piVars['from_year'] = date('Y', $fromTime);
+
+		$this->assertContains(
+			'Foo Event From',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromDate_DoesNotShowEventWithBeginDateBeforeFromDate() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$fromTime = $simTime + 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event From',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $fromTime);
+		$this->fixture->piVars['from_month'] = date('n', $fromTime);
+		$this->fixture->piVars['from_year'] = date('Y', $fromTime);
+
+		$this->assertNotContains(
+			'Foo Event From',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromDateWithMissingDay_ShowsEventWithBeginDateOnFirstDayOfMonth() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event From',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_month'] = date('n', $simTime);
+		$this->fixture->piVars['from_year'] = date('Y', $simTime);
+
+		$this->assertContains(
+			'Foo Event From',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromDateWithMissingYear_ShowsEventWithBeginDateInCurrentYearAfterFromDate() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$fromTime = $simTime - 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event From',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $fromTime);
+		$this->fixture->piVars['from_month'] = date('n', $fromTime);
+
+		$this->assertContains(
+			'Foo Event From',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromDateWithMissingMonth_ShowsEventWithBeginDateOnFirstMonthOfYear() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event From',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $simTime);
+		$this->fixture->piVars['from_year'] = date('Y', $simTime);
+
+		$this->assertContains(
+			'Foo Event From',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromDateWithMissingMonthAndDay_ShowsEventWithBeginDateOnFirstDayOfGivenYear() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event From',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_year'] = date('Y', $simTime);
+
+		$this->assertContains(
+			'Foo Event From',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenToDate_ShowsEventWithBeginDateBeforeToDate() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$toTime = $simTime + 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['to_day'] = date('j', $toTime);
+		$this->fixture->piVars['to_month'] = date('n', $toTime);
+		$this->fixture->piVars['to_year'] = date('Y', $toTime);
+
+		$this->assertContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenToDate_HidesEventWithBeginDateAfterToDate() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$toTime = $simTime - 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['to_day'] = date('j', $toTime);
+		$this->fixture->piVars['to_month'] = date('n', $toTime);
+		$this->fixture->piVars['to_year'] = date('Y', $toTime);
+
+		$this->assertNotContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenToDateWithMissingDay_ShowsEventWithBeginDateOnEndOfGivenMonth() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['to_month'] = date('n', $simTime);
+		$this->fixture->piVars['to_year'] = date('Y', $simTime);
+
+		$this->assertContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenToDateWithMissingYear_ShowsEventWithBeginDateOnThisYearBeforeToDate() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$toTime = $simTime + 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['to_day'] = date('j', $toTime);
+		$this->fixture->piVars['to_month'] = date('n', $toTime);
+
+		$this->assertContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenToDateWithMissingMonth_ShowsEventWithBeginDateOnDayOfLastMonthOfGivenYear() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['to_day'] = date('j', $simTime);
+		$this->fixture->piVars['to_year'] = date('Y', $simTime);
+
+		$this->assertContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenToDateWithMissingMonthAndDay_ShowsEventWithBeginDateOnEndOfGivenYear() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['to_year'] = date('Y', $simTime);
+
+		$this->assertContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromAndToDates_ShowsEventWithBeginDateWithinTimespan() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$fromTime = $simTime - 86400;
+		$toTime = $simTime + 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $fromTime);
+		$this->fixture->piVars['from_month'] = date('n', $fromTime);
+		$this->fixture->piVars['from_year'] = date('Y', $fromTime);
+		$this->fixture->piVars['to_day'] = date('j', $toTime);
+		$this->fixture->piVars['to_month'] = date('n', $toTime);
+		$this->fixture->piVars['to_year'] = date('Y', $toTime);
+
+		$this->assertContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromAndToDates_CanShowTwoEventsWithBeginDateWithinTimespan() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$fromTime = $simTime - 86400;
+		$toTime = $simTime + 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $simTime,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Bar Event To',
+				'begin_date' => $simTime,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $fromTime);
+		$this->fixture->piVars['from_month'] = date('n', $fromTime);
+		$this->fixture->piVars['from_year'] = date('Y', $fromTime);
+		$this->fixture->piVars['to_day'] = date('j', $toTime);
+		$this->fixture->piVars['to_month'] = date('n', $toTime);
+		$this->fixture->piVars['to_year'] = date('Y', $toTime);
+
+		$output = $this->fixture->main('', array());
+
+		$this->assertContains(
+			'Foo Event To',
+			$output
+		);
+		$this->assertContains(
+			'Bar Event To',
+			$output
+		);
+	}
+
+	public function test_ListViewForGivenFromAndToDates_DoesNotShowEventWithBeginDateBeforeTimespan() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$toTime = $simTime + 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'begin_date' => $simTime - 86000,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $simTime);
+		$this->fixture->piVars['from_month'] = date('n', $simTime);
+		$this->fixture->piVars['from_year'] = date('Y', $simTime);
+		$this->fixture->piVars['to_day'] = date('j', $toTime);
+		$this->fixture->piVars['to_month'] = date('n', $toTime);
+		$this->fixture->piVars['to_year'] = date('Y', $toTime);
+
+		$this->assertNotContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenFromAndToDates_DoesNotShowEventWithBeginDateAfterTimespan() {
+		$simTime = $GLOBALS['SIM_EXEC_TIME'];
+		$fromTime = $simTime - 86400;
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'begin_date' => $simTime + 86400,
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = date('j', $fromTime);
+		$this->fixture->piVars['from_month'] = date('n', $fromTime);
+		$this->fixture->piVars['from_year'] = date('Y', $fromTime);
+		$this->fixture->piVars['to_day'] = date('j', $simTime);
+		$this->fixture->piVars['to_month'] = date('n', $simTime);
+		$this->fixture->piVars['to_year'] = date('Y', $simTime);
+
+		$this->assertNotContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForSentDateButAllDatesZero_ShowsEventWithoutBeginDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+			)
+		);
+
+		$this->fixture->piVars['from_day'] = 0;
+		$this->fixture->piVars['from_month'] = 0;
+		$this->fixture->piVars['from_year'] = 0;
+		$this->fixture->piVars['to_day'] = 0;
+		$this->fixture->piVars['to_month'] = 0;
+		$this->fixture->piVars['to_year'] = 0;
+
+		$this->assertContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	///////////////////////////////////////////////////
 	// Tests concerning the sorting in the list view.
 	///////////////////////////////////////////////////

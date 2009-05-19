@@ -2289,6 +2289,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				)
 			);
 		}
+
+		$this->filterByDate($builder);
 	}
 
 	/**
@@ -2962,6 +2964,107 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$this->setMarker('registration', $registrationLink);
+	}
+
+	/**
+	 * Filters the given seminar bag builder to the date set in piVars.
+	 *
+	 * @param tx_seminars_seminarbagbuilder the bag builder to limit by date
+	 */
+	private function filterByDate(tx_seminars_seminarbagbuilder $builder) {
+		$dateFrom = $this->getTimestampFromDatePiVars('from');
+		if ($dateFrom > 0) {
+			$builder->limitToEarliestBeginDate($dateFrom);
+		}
+
+		$dateTo = $this->getTimestampFromDatePiVars('to');
+		if ($dateTo > 0) {
+			$builder->limitToLatestBeginDate($dateTo);
+		}
+	}
+
+	/**
+	 * Retrieves the date which was sent via piVars and returns it as timestamp.
+	 *
+	 * @param string must be "from" or "to", depending on the date part which
+	 *               should be retrieved.
+	 *
+	 * @return integer the timestamp for the date set in piVars, will be 0 if no
+	 *                 date was set
+	 */
+	private function getTimestampFromDatePiVars($fromOrTo) {
+		$this->ensureIntegerPiVars(
+			array(
+				$fromOrTo . '_day', $fromOrTo . '_month', $fromOrTo . '_year'
+			)
+		);
+		if (($this->piVars[$fromOrTo . '_day'] == 0)
+			&& ($this->piVars[$fromOrTo . '_month'] == 0)
+			&& ($this->piVars[$fromOrTo . '_year'] == 0)
+		) {
+			return 0;
+		}
+
+		return ($fromOrTo == 'from') ? $this->getFromDate() : $this->getToDate();
+	}
+
+	/**
+	 * Gets the fromDate for the filtering of the list view, replacing empty
+	 * values with default values.
+	 *
+	 * Before this function is called, the piVars from_day, from_month and
+	 * from_year must be run through ensureIntegerPiVars.
+	 *
+	 * @return integer the timestamp for the fromDate, will be > 0
+	 */
+	private function getFromDate() {
+		$day = ($this->piVars['from_day'] > 0) ? $this->piVars['from_day'] : 1;
+		$month = ($this->piVars['from_month'] > 0)
+			? $this->piVars['from_month']
+			: 1;
+		$year = ($this->piVars['from_year'] > 0)
+			? $this->piVars['from_year']
+			: intval(date('Y', $GLOBALS['SIM_EXEC_TIME']));
+
+		return mktime(0, 0, 0, $month, $day, $year);
+	}
+
+	/**
+	 * Gets the toDate for the filtering of the list view, replacing empty
+	 * values with default values.
+	 *
+	 * Before this function is called, the piVars to_day, to_month and to_year
+	 * must be run through ensureIntegerPiVars.
+	 *
+	 * @return integer the timestamp for the toDate, will be > 0
+	 */
+	private function getToDate() {
+		$longMonths = array(1, 3, 5, 7, 8, 10, 12);
+
+		$month = ($this->piVars['to_month'] > 0)
+			? $this->piVars['to_month']
+			: 12;
+		$year = ($this->piVars['to_year'] > 0)
+			? $this->piVars['to_year']
+			: intval(date('Y', $GLOBALS['SIM_EXEC_TIME']));
+
+		$day = $this->piVars['to_day'];
+
+		if ($month == 2) {
+			// the last day of february can be 29 or 28, depending on the year
+			// so we use a behaviour of mktime which gives us the timestamp for
+			// the last day of february when asking for the 0 day of march
+			if (($day > 28) || ($day == 0)) {
+				$day = 0;
+				$month++;
+			}
+		} elseif(in_array($month, $longMonths))  {
+			$day = ($day > 0) ? $day : 31;
+		} else {
+			$day = ($day > 0) ? $day : 30;
+		}
+
+		return mktime(23, 59, 59, $month, $day, $year);
 	}
 }
 

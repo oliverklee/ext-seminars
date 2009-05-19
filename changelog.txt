@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2945] Feature: Filter the list view by the date selected in the search widget
 - [#2940] Feature: Add a datepicker to the list view
 - [#2937] Change: Show the list view search widget parts depending on the flexforms
 - [#2610] Change: Polish the BE events list
