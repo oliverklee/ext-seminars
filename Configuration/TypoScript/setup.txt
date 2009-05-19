@@ -281,9 +281,6 @@ plugin.tx_seminars_pi1 {
 	# comma-separated list of field names that shouldn't be displayed in the detail view, e.g. organizers,price_special
 	hideFields = credit_points,eventsnextday
 
-	# whether the selector widget should be hidden in list view
-	hideSelectorWidget = 0
-
 	# whether the option boxes in the selector widget contain an empty entry like "not selected"
 	showEmptyEntryInOptionLists = 0
 
