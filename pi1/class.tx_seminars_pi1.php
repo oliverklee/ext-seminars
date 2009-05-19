@@ -1533,6 +1533,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	protected function createListView($whatToDisplay) {
 		$result = '';
 		$isOkay = true;
+		$this->ensureIntegerPiVars(
+			array(
+				'from_day', 'from_month', 'from_year',
+				'to_day', 'to_month', 'to_year'
+			)
+		);
+
 
 		switch ($whatToDisplay) {
 			case 'my_events':
@@ -2993,11 +3000,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *                 date was set
 	 */
 	private function getTimestampFromDatePiVars($fromOrTo) {
-		$this->ensureIntegerPiVars(
-			array(
-				$fromOrTo . '_day', $fromOrTo . '_month', $fromOrTo . '_year'
-			)
-		);
 		if (($this->piVars[$fromOrTo . '_day'] == 0)
 			&& ($this->piVars[$fromOrTo . '_month'] == 0)
 			&& ($this->piVars[$fromOrTo . '_year'] == 0)

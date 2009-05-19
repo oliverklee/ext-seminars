@@ -326,8 +326,13 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			$this->setMarker('option_value', $optionValue);
 			$this->setMarker('option_label', $optionName);
 
-			$this->setMarker('option_selected', '');
+			if ($this->piVars[$name] == $optionValue) {
+				$selected = ' selected="selected"';
+			} else {
+				$selected = '';
+			}
 
+			$this->setMarker('option_selected', $selected);
 			$optionsList .= $this->getSubpart('OPTIONS_ENTRY');
 		}
 

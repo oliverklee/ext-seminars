@@ -1215,5 +1215,82 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_Render_ForSentToMonthValue_PreselectsToMonthValue() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+
+		$this->fixture->piVars['to_month'] = 5;
+
+
+		$this->assertContains(
+			'<option value="5" selected="selected">5</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForSentFromDate_PreselectsFromDateValues() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+		$this->fixture->setConfigurationValue(
+			'numberOfYearsInDateFilter', 2
+		);
+
+
+		$this->fixture->piVars['from_day'] = 2;
+		$this->fixture->piVars['from_month'] = 5;
+		$this->fixture->piVars['from_year'] = 2009;
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			'<option value="2" selected="selected">2</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="5" selected="selected">5</option>',
+			$output
+		);
+		$this->assertContains(
+			'<option value="2009" selected="selected">2009</option>',
+			$output
+		);
+	}
+
+	public function test_Render_ForNoSentDate_PreselectsNoDateValues() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+		$this->fixture->setConfigurationValue(
+			'numberOfYearsInDateFilter', 2
+		);
+
+		$this->assertNotContains(
+			'selected="selected"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForBothSentDatesZero_PreselectsNoDateValues() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'date'
+		);
+		$this->fixture->setConfigurationValue(
+			'numberOfYearsInDateFilter', 2
+		);
+
+		$this->fixture->piVars['from_day'] = 0;
+		$this->fixture->piVars['from_month'] = 0;
+		$this->fixture->piVars['from_year'] = 0;
+		$this->fixture->piVars['to_day'] = 0;
+		$this->fixture->piVars['to_month'] = 0;
+		$this->fixture->piVars['to_year'] = 0;
+
+		$this->assertNotContains(
+			'selected="selected"',
+			$this->fixture->render()
+		);
+	}
 }
 ?>
