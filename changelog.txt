@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2551] Fix: FE editor field labels have colons at the end
 - [#2994] Fix: Check if the data for the seminars is loaded from general storage PID
 - [#2944] Feature: Add monkey functionality to the datepicker
 - [#2945] Feature: Filter the list view by the date selected in the search widget
