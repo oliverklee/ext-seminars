@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2688| Change: Rework the FE editor HTML template and CSS
 - [#2997] Feature: Add a FE user group setting for hiding FE-edited events
 - [#2701] Fix: Image of a seminar was not displayed in single view
 - [#2551] Fix: FE editor field labels have colons at the end

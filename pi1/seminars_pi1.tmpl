@@ -526,134 +526,271 @@
 <!-- ###WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM### -->
 
 <!-- ###seminars_FORM### -->
-<p class="tx-seminars-pi1-error" style="display: {errors.cssdisplay};">
-	{errors}
-</p>
-<table class="tx-seminars-pi1-event-editor">
-	<tbody>
-		<tr>
-			<td>{title}</td>
-		</tr>
-		<tr>
-			<td>{subtitle}</td>
-		</tr>
-		<tr>
-			<td><fieldset>{categories}</fieldset></td>
-		</tr>
-		<tr>
-			<td>{teaser}</td>
-		</tr>
-		<tr>
-			<td>{description}</td>
-		</tr>
-		<tr>
-			<td>{event_type}</td>
-		</tr>
-		<tr>
-			<td>{accreditation_number}</td>
-		</tr>
-		<tr>
-			<td>{credit_points}</td>
-		</tr>
-		<tr>
-			<td>{begin_date}</td>
-		</tr>
-		<tr>
-			<td>{end_date}</td>
-		</tr>
-		<tr>
-			<td>{begin_date_registration}</td>
-		</tr>
-		<tr>
-			<td>{deadline_registration}</td>
-		</tr>
-		<tr>
-			<td>{deadline_early_bird}</td>
-		</tr>
-		<tr>
-			<td><fieldset>{place}</fieldset></td>
-		</tr>
-		<tr>
-			<td>{room}</td>
-		</tr>
-		<tr>
-			<td><fieldset>{lodgings}</fieldset></td>
-		</tr>
-		<tr>
-			<td><fieldset>{foods}</fieldset></td>
-		</tr>
-		<tr>
-			<td><fieldset>{speakers}</fieldset></td>
-		</tr>
-		<tr>
-			<td><fieldset>{partners}</fieldset></td>
-		</tr>
-		<tr>
-			<td><fieldset>{tutors}</fieldset></td>
-		</tr>
-		<tr>
-			<td><fieldset>{leaders}</fieldset></td>
-		</tr>
-		<tr>
-			<td>{price_regular}</td>
-		</tr>
-		<tr>
-			<td>{price_regular_early}</td>
-		</tr>
-		<tr>
-			<td>{price_regular_board}</td>
-		</tr>
-		<tr>
-			<td>{price_special}</td>
-		</tr>
-		<tr>
-			<td>{price_special_early}</td>
-		</tr>
-		<tr>
-			<td>{price_special_board}</td>
-		</tr>
-		<tr>
-			<td>{additional_information}</td>
-		</tr>
-		<tr>
-			<td><fieldset>{checkboxes}</fieldset></td>
-		</tr>
-		<tr>
-			<td><fieldset>{payment_methods}</fieldset></td>
-		</tr>
-		<tr>
-			<td><fieldset>{organizers}</fieldset></td>
-		</tr>
-		<tr>
-			<td>{needs_registration}</td>
-		</tr>
-		<tr>
-			<td>{allows_multiple_registrations}</td>
-		</tr>
-		<tr>
-			<td>{attendees_min}</td>
-		</tr>
-		<tr>
-			<td>{attendees_max}</td>
-		</tr>
-		<tr>
-			<td>{queue_size}</td>
-		</tr>
-		<tr>
-			<td><fieldset>{target_groups}</fieldset></td>
-		</tr>
-		<tr>
-			<td>{cancelled}</td>
-		</tr>
-		<tr>
-			<td>{uses_terms_2}</td>
-		</tr>
-		<tr>
-			<td>{notes}</td>
-		</tr>
-		<tr>
-			<td>
-				<fieldset>
+<div class="tx-seminars-pi1-event-editor">
+	<p class="tx-seminars-pi1-error" style="display: {errors.cssdisplay};">
+		{errors}
+	</p>
+	<fieldset>
+		<div class="columnlight">
+			<div class="columnleft">
+				<dl>
+					<dt>{title.label.tag}</dt>
+					<dd>{title}</dd>
+				</dl>
+				<dl>
+					<dt>{subtitle.label.tag}</dt>
+					<dd>{subtitle}</dd>
+				</dl>
+			</div>
+			<div class="columnright">
+				<dl>
+					<dt>{accreditation_number.label.tag}</dt>
+					<dd>{accreditation_number}</dd>
+				</dl>
+				<dl>
+					<dt>{credit_points.label.tag}</dt>
+					<dd>{credit_points}</dd>
+				</dl>
+			</div>
+		</div>
+
+		<div class="divider">&nbsp;</div>
+
+		<div class="columndark">
+			<div class="columnleft">
+				<dl>
+					<dt>{categories.label}</dt>
+					<dd class="checkboxes">{categories}</dd>
+				</dl>
+				<dl>
+					<dt>{event_type.label.tag}</dt>
+					<dd>{event_type}</dd>
+				</dl>
+			</div>
+			<div class="columnright">
+				<dl>
+					<dt>{cancelled.label.tag}</dt>
+					<dd>{cancelled}</dd>
+				</dl>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<div class="column-light">
+			<dl>
+				<dt>{teaser.label.tag}</dt>
+			</dl>
+			<dl>
+				<dd class="teaser">{teaser}</dd>
+			</dl>
+			<dl>
+				<dt>{description.label.tag}</dt>
+			</dl>
+			<dl>
+				<dd class="description">{description}</dd>
+			</dl>
+			<dl>
+				<dt>{additional_information.label.tag}</dt>
+			</dl>
+			<dl>
+				<dd class="additional_information">{additional_information}</dd>
+			</dl>
+		</div>
+	</fieldset>
+	<fieldset>
+		<div class="columndark date">
+			<div class="columnleft">
+				<dl>
+					<dt>{begin_date.label.tag}</dt>
+					<dd>{begin_date}</dd>
+				</dl>
+				<dl>
+					<dt>{end_date.label.tag}</dt>
+					<dd>{end_date}</dd>
+				</dl>
+			</div>
+
+			<div class="vertdivider"></div>
+
+			<div class="columnright">
+				<dl>
+					<dt>{begin_date_registration.label.tag}</dt>
+					<dd>{begin_date_registration}</dd>
+				</dl>
+				<dl>
+					<dt>{deadline_early_bird.label.tag}</dt>
+					<dd>{deadline_early_bird}</dd>
+				</dl>
+				<dl>
+					<dt>{deadline_registration.label.tag}</dt>
+					<dd>{deadline_registration}</dd>
+				</dl>
+			</div>
+		</div>
+
+		<div class="divider">&nbsp;</div>
+
+		<div class="columnlight">
+			<div class="columnleft registration">
+				<dl>
+					<dd>
+						<span class="checkbox">
+							{needs_registration}&nbsp;{needs_registration.label.tag}
+						</span>
+					</dd>
+				</dl>
+				<dl>
+					<dd>
+						<span class="checkbox">
+							{allows_multiple_registrations}&nbsp;{allows_multiple_registrations.label.tag}
+						</span>
+					</dd>
+				</dl>
+				<dl>
+					<dd>
+						<span class="checkbox">
+							{queue_size}&nbsp;{queue_size.label.tag}
+						</span>
+					</dd>
+				</dl>
+			</div>
+			<div class="columnright attendees">
+				<dl>
+					<dt>{attendees_min.label.tag}</dt>
+					<dd>{attendees_min}</dd>
+				</dl>
+				<dl>
+					<dt>{attendees_max.label.tag}</dt>
+					<dd>{attendees_max}</dd>
+				</dl>
+			</div>
+		</div>
+
+		<div class="divider">&nbsp;</div>
+
+		<div class="columndark single_column">
+			<dl>
+				<dt>{target_groups.label}</dt>
+				<dd class="checkboxes">{target_groups}</dd>
+			</dl>
+		</div>
+
+		<div class="divider">&nbsp;</div>
+
+		<div class="columnlight price">
+			<div class="columnleft">
+				<dl>
+					<dt>{price_regular.label.tag}</dt>
+					<dd>{price_regular}</dd>
+				</dl>
+				<dl>
+					<dt>{price_regular_early.label.tag}</dt>
+					<dd>{price_regular_early}</dd>
+				</dl>
+				<dl>
+					<dt>{price_regular_board.label.tag}</dt>
+					<dd>{price_regular_board}</dd>
+				</dl>
+				<dl>
+					<dt>{payment_methods.label}</dt>
+					<dd class="checkboxes">{payment_methods}</dd>
+				</dl>
+			</div>
+
+			<div class="vertdivider"></div>
+
+			<div class="columnright">
+				<dl>
+					<dt>{price_special.label.tag}</dt>
+					<dd>{price_special}</dd>
+				</dl>
+				<dl>
+					<dt>{price_special_early.label.tag}</dt>
+					<dd>{price_special_early}</dd>
+				</dl>
+				<dl>
+					<dt>{price_special_board.label.tag}</dt>
+					<dd>{price_special_board}</dd>
+				</dl>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<div class="columndark">
+			<div class="columnleft">
+				<dl>
+					<dt>{place.label}</dt>
+					<dd class="checkboxes">{place}</dd>
+				</dl>
+				<dl>
+					<dt>{room.label.tag}</dt>
+					<dd>{room}</dd>
+				</dl>
+			</div>
+
+			<div class="vertdivider"></div>
+
+			<div class="columnright">
+				<dl>
+					<dt>{lodgings.label}</dt>
+					<dd class="checkboxes">{lodgings}</dd>
+				</dl>
+				<dl>
+					<dt>{foods.label}</dt>
+					<dd class="checkboxes">{foods}</dd>
+				</dl>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<div class="columnlight">
+			<div class="columnleft">
+				<dl>
+					<dt>{speakers.label}</dt>
+					<dd class="checkboxes">{speakers}</dd>
+				</dl>
+				<dl>
+					<dt>{leaders.label}</dt>
+					<dd class="checkboxes">{leaders}</dd>
+				</dl>
+				<dl>
+					<dt>{organizers.label}</dt>
+					<dd class="checkboxes">{organizers}</dd>
+				</dl>
+			</div>
+
+			<div class="vertdivider"></div>
+
+			<div class="columnright">
+				<dl>
+					<dt>{partners.label}</dt>
+					<dd class="checkboxes">{partners}</dd>
+				</dl>
+				<dl>
+					<dt>{tutors.label}</dt>
+					<dd class="checkboxes">{tutors}</dd>
+				</dl>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<div class="columndark single_column">
+			<dl>
+				<dt>{checkboxes.label}</dt>
+				<dd class="checkboxes">{checkboxes}</dd>
+			</dl>
+			<dl>
+				<dd>
+					<span class="checkbox">{uses_terms_2}&nbsp;{uses_terms_2.label.tag}</span>
+				</dd>
+			</dl>
+		</div>
+	</fieldset>
+	<fieldset>
+		<div class="columnlight single_column">
+			<dl class="attached-files">
+				<dt>{attached_files.label.tag}</dt>
+				<dd>
 					{attached_files}
 					<!-- ###ATTACHED_FILES### -->
 					<ul class="attached-files">
@@ -667,21 +804,34 @@
 					</ul>
 					{delete_attached_files}
 					<!-- ###ATTACHED_FILES### -->
-				</fieldset>
-			</td>
-		</tr>
+				</dd>
+			</dl>
+		</div>
+	</fieldset>
+	<fieldset>
+		<div class="column-dark">
+			<dl>
+				<dt>{notes.label.tag}</dt>
+			</dl>
+			<dl class="notes">
+				<dd>{notes}</dd>
+			</dl>
+		</div>
+	</fieldset>
 
-		<tr>
-			<td>
-				<!-- ###SUBMIT_AND_STAY### -->
+	<div class="columnlight">
+		<dl id="submit">
+			<dt>&nbsp;</dt>
+			<dd>
+		<!-- ###SUBMIT_AND_STAY### -->
 				{submit_and_stay}
-				<!-- ###SUBMIT_AND_STAY### -->
+		<!-- ###SUBMIT_AND_STAY### -->
 				{btnsubmit}
 				{proceed_file_upload}
-			</td>
-		</tr>
-	</tbody>
-</table>
+			</dd>
+		</dl>
+	</div>
+</div>
 <!-- ###seminars_FORM### -->
 
 <!-- ###REGISTRATION_CONFIRMATION_FEUSER### -->

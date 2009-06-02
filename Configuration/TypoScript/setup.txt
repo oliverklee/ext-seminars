@@ -452,7 +452,7 @@ plugin.tx_seminars_pi1 {
 				description = This editor provides a FE editing feature for events.
 				form.formid = tx_seminars_pi1_seminars
 				debug = false
-				displaylabels = true
+				displaylabels = false
 			}
 			control {
 				datahandler = datahandler:DBMM
