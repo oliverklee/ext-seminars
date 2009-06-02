@@ -240,6 +240,11 @@
 	border: none;
 }
 
+.tx-seminars-pi1-listrow table td ul {
+	list-style: none;
+}
+
+
 th.tx-seminars-pi1-expiry,
 th.tx-seminars-pi1-seats,
 th.tx-seminars-pi1-total-price,

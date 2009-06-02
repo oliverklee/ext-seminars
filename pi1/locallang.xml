@@ -50,7 +50,7 @@
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Event managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
 			<label index="seminars.pi_flexform.showOwnerDataInSingleView">Show the owner data on the single view page:</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees:</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list only to attendees:</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
@@ -163,6 +163,7 @@
 			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_target_groups">Target Groups</label>
+			<label index="label_files">Files</label>
 			<label index="label_requirements">Requirements</label>
 			<label index="label_dependencies">Required for</label>
 			<label index="label_organizers">Organizers</label>
@@ -579,7 +580,7 @@
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Verwalter können ihre Veranstaltungen bearbeiten:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Einzelansicht</label>
 			<label index="seminars.pi_flexform.showOwnerDataInSingleView">Daten des Veranstaltungsbesitzers in der Einzelansicht anzeigen:</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Zeige angehängte Dateien in der Einzelansicht nur für Teilnehmer:</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Zeige angehängte Dateien nur für Teilnehmer:</label>
 			<label index="seminars.pi_flexform.templateFile">Dateiname des HTML-Templates:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Welche Veranstaltung soll als Detailansicht angezeigt werden?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Nur Veranstaltungen aus diesem Zeitabschnitt zeigen:</label>
@@ -692,6 +693,7 @@
 			<label index="label_select_paymentmethod">Zahlungsart:</label>
 			<label index="label_event_type">Veranstaltungsart</label>
 			<label index="label_target_groups">Zielgruppen</label>
+			<label index="label_files">Dateien</label>
 			<label index="label_requirements">Voraussetzungen</label>
 			<label index="label_dependencies">Voraussetzung für</label>
 			<label index="label_organizers">Veranstalter</label>
@@ -2025,7 +2027,7 @@
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents" type="integer">175224355</label>
 			<label index="seminars.pi_flexform.sheet_single_view" type="integer">260903848</label>
 			<label index="seminars.pi_flexform.showOwnerDataInSingleView" type="integer">115487597</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees" type="integer">5650261</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees" type="integer">73372081</label>
 			<label index="seminars.pi_flexform.templateFile" type="integer">31834415</label>
 			<label index="seminars.pi_flexform.showSingleEvent" type="integer">23243865</label>
 			<label index="seminars.pi_flexform.timeframeInList" type="integer">219963252</label>
@@ -2112,6 +2114,7 @@
 			<label index="label_select_paymentmethod" type="integer">203383656</label>
 			<label index="label_event_type" type="integer">99114704</label>
 			<label index="label_target_groups" type="integer">206184555</label>
+			<label index="label_files" type="integer">153041452</label>
 			<label index="label_organizers" type="integer">68798680</label>
 			<label index="label_organizing_partners" type="integer">1285796</label>
 			<label index="label_vacancies" type="integer">99017107</label>
@@ -3242,7 +3245,7 @@
 			<label index="seminars.pi_flexform.mayManagersEditTheirEvents">Event managers may edit their events:</label>
 			<label index="seminars.pi_flexform.sheet_single_view">Single view</label>
 			<label index="seminars.pi_flexform.showOwnerDataInSingleView">Show the owner data on the single view page:</label>
-			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list in single view only to attendees:</label>
+			<label index="seminars.pi_flexform.limitFileDownloadToAttendees">Show attached files list only to attendees:</label>
 			<label index="seminars.pi_flexform.templateFile">File name of the HTML template:</label>
 			<label index="seminars.pi_flexform.showSingleEvent">Which event should be shown in a detailed view?</label>
 			<label index="seminars.pi_flexform.timeframeInList">Only show events from this time-frame:</label>
@@ -3329,6 +3332,7 @@
 			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_event_type">Event type</label>
 			<label index="label_target_groups">Target Groups</label>
+			<label index="label_files">Files</label>
 			<label index="label_organizers">Organizers</label>
 			<label index="label_organizing_partners">Organizing partners</label>
 			<label index="label_vacancies">Vacancies</label>

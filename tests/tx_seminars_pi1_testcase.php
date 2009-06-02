@@ -4300,6 +4300,176 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////////////////////////////////////
+	// Tests concerning the attached files column in the list view
+	////////////////////////////////////////////////////////////////
+
+	public function test_ListView_ForLoggedOutUser_HidesAttachedFilesHeader() {
+		$this->testingFramework->logoutFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function test_ListView_ForLoggedOutUser_HidesAttachedFilesListRowItem() {
+		$this->testingFramework->logoutFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function test_ListView_ForLoggedInUser_ShowsAttachedFilesHeader() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function test_ListView_ForLoggedInUser_ShowsAttachedFilesListRowItem() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesFalse_ShowsAttachedFile() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->assertContains(
+			$dummyFileName,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesFalse_ShowsMultipleAttachedFiles() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$dummyFile2 = $this->testingFramework->createDummyFile();
+		$dummyFileName2 =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+		);
+
+		$output = $this->fixture->main('', array());
+
+		$this->assertContains(
+			$dummyFileName,
+			$output
+		);
+		$this->assertContains(
+			$dummyFileName2,
+			$output
+		);
+	}
+
+	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesTrueAndUserNotAttendee_HidesAttachedFile() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->assertNotContains(
+			$dummyFileName,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesTrueAndUserAttendee_ShowsAttachedFile() {
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
+		$this->createLogInAndRegisterFeUser();
+
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('attached_files' => $dummyFileName)
+		);
+
+		$this->assertContains(
+			$dummyFileName,
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	///////////////////////////////////////////////////////
 	// Tests concerning the owner data in the single view
 	///////////////////////////////////////////////////////

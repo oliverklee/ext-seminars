@@ -212,6 +212,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		)) {
 			$this->checkOwnerPictureMaxWidth();
 		}
+		$this->checkLimitFileDownloadToAttendees();
 	}
 
 	/**
@@ -252,6 +253,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkSeminarImageSizes();
 		$this->checkDisplaySearchFormFields();
 		$this->checkNumberOfYearsInDateFilter();
+		$this->checkLimitFileDownloadToAttendees();
 	}
 
  	/**
@@ -601,6 +603,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'paymentmethods',
 				'additional_information',
 				'target_groups',
+				'attached_files',
 				'organizers',
 				'vacancies',
 				'deadline_registration',
@@ -648,6 +651,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'total_price',
 				'organizers',
 				'target_groups',
+				'attached_files',
 				'vacancies',
 				'status_registration',
 				'registration',
@@ -1113,11 +1117,11 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'limitFileDownloadToAttendees',
 			true,
 			's_singleView',
-			'This value specifies whether the list of attached files in the ' .
-				'detailed view is only shown to logged in and registered ' .
-				'attendees. If this value is incorrect, the attached files ' .
-				'may be shown to the public although they should be visible ' .
-				'only to the attendees (or vice versa).'
+			'This value specifies whether the list of attached files is only ' .
+				'shown to logged in and registered attendees. If this value is ' .
+				'incorrect, the attached files may be shown to the public ' .
+				'although they should be visible only to the attendees ' .
+				'(or vice versa).'
 		);
 	}
 

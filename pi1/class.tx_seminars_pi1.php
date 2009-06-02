@@ -1172,17 +1172,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * if there are no attached files.
 	 */
 	private function setAttachedFilesMarkers() {
-		$mayDisplayAttachedFiles = true;
-
-		if ($this->getConfValueBoolean(
-				'limitFileDownloadToAttendees', 's_singleView'
-		)) {
-			$mayDisplayAttachedFiles =
-				tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-					&& $this->seminar->isUserRegistered($this->getFeUserUid());
-		}
-
-		if (!$this->seminar->hasAttachedFiles() || !$mayDisplayAttachedFiles) {
+		if (!$this->seminar->hasAttachedFiles()
+			|| !$this->mayUserAccessAttachedFiles()
+		) {
 			$this->hideSubparts('attached_files', 'field_wrapper');
 			return;
 		}
@@ -1653,6 +1645,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$this->hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay);
 		$this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
 		$this->hideEditColumnIfNecessary($whatToDisplay);
+		$this->hideAttachedFilesColumnIfNotLoggedIn();
 
 		if (!isset($this->piVars['pointer'])) {
 			$this->piVars['pointer'] = 0;
@@ -1807,6 +1800,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			'total_price',
 			'organizers',
 			'target_groups',
+			'attached_files',
 			'vacancies',
 			'status_registration',
 			'registration',
@@ -1993,6 +1987,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker(
 				'target_groups',
 				$this->seminar->getTargetGroupNames()
+			);
+			$this->setMarker(
+				'attached_files',
+				$this->getAttachedFilesListMarkerContent()
 			);
 			$this->setMarker(
 				'vacancies',
@@ -3068,6 +3066,65 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		return mktime(23, 59, 59, $month, $day, $year);
 	}
+
+	/**
+	 * Hides the list view subparts for the attached files if no user is logged
+	 * in at the front end.
+	 */
+	private function hideAttachedFilesColumnIfNotLoggedIn() {
+		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+			$this->hideColumns(array('attached_files'));
+		}
+	}
+
+	/**
+	 * Creates the marker content for the "attached files" list item.
+	 *
+	 * @return string the marker content for the "attached files" list item, will
+	 *                be empty if the user does not have the permissions to
+	 *                download the files, or no user is logged in at the front
+	 *                end
+	 */
+	private function getAttachedFilesListMarkerContent() {
+		if (!$this->mayUserAccessAttachedFiles()) {
+			return '';
+		}
+
+		$attachedFiles = '';
+		foreach ($this->seminar->getAttachedFiles($this) as $attachedFile) {
+			$this->setMarker(
+				'attached_files_single_title', $attachedFile['name']
+			);
+
+			$attachedFiles .= $this->getSubpart('ATTACHED_FILES_SINGLE_ITEM');
+		}
+
+		$this->setMarker('attached_files_items', $attachedFiles);
+
+		return ($attachedFiles != '')
+			? $this->getSubpart('ATTACHED_FILES_LIST_VIEW_ITEM')
+			: '';
+	}
+
+	/**
+	 * Checks if the current user has permission to access the attached files of
+	 * an event.
+	 *
+	 * @return boolean true if the user is allowed to access the attached files,
+	 *                 false otherwise
+	 */
+	private function mayUserAccessAttachedFiles() {
+		$result = true;
+
+		$limitToAttendees = $this->getConfValueBoolean(
+			'limitFileDownloadToAttendees', 'sDEF'
+		);
+
+		return !$limitToAttendees || (
+			tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+				&& $this->seminar->isUserRegistered($this->getFeUserUid())
+			);
+		}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1.php']) {

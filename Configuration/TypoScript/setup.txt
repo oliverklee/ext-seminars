@@ -220,6 +220,7 @@ plugin.tx_seminars_pi1 {
 	class_headertotal_price = total-price
 	class_headerorganizers =
 	class_headertarget_groups =
+	class_headerattached_files =
 	class_headervacancies =
 	class_headerstatus_registration =
 	class_headerregistration = registration
@@ -254,6 +255,7 @@ plugin.tx_seminars_pi1 {
 	class_listtotal_price =
 	class_listorganizers =
 	class_listtarget_groups =
+	class_listattached_files =
 	class_liststatus_registration =
 	class_listregistration =
 	class_listlist_registrations =
@@ -360,8 +362,8 @@ plugin.tx_seminars_pi1 {
 	# whether detailed information for the locations is shown in the single view
 	showSiteDetails = 1
 
-	# whether file downloads are limited to attendees only in the single view
-	limitFileDownloadToAttendees = 1
+	# whether file downloads are limited to attendees only
+	limitFileDownloadToAttendees = 0
 
 	# comma-separated list of FEuser fields to show in the list of registrations for an event
 	showFeUserFieldsInRegistrationsList = name
