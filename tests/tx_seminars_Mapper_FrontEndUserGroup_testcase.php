@@ -52,7 +52,7 @@ class tx_seminars_Mapper_FrontEndUserGroup_testcase extends tx_phpunit_testcase 
 	// Tests for the basic functionality
 	//////////////////////////////////////
 
-	public function test_Find_WithUidOfExistingRecord_ReturnsFrontEndUserGroupInstance() {
+	public function test_Mapper_ForGhost_ReturnsSeminarsFrontEndUserGroupInstance() {
 		$this->assertTrue(
 			$this->fixture->getNewGhost()
 				instanceof tx_seminars_Model_FrontEndUserGroup
