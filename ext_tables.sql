@@ -17,6 +17,14 @@ CREATE TABLE tx_partner_contact_info (
 
 
 #
+# Table structure for table 'fe_groups'
+#
+CREATE TABLE fe_groups (
+	tx_seminars_publish_events tinyint(1) DEFAULT '0' NOT NULL
+);
+
+
+#
 # Table structure for table 'tx_seminars_test'
 #
 CREATE TABLE tx_seminars_test (

@@ -308,6 +308,31 @@ t3lib_extMgm::addPlugin(
 	'list_type'
 );
 
+t3lib_div::loadTCA('fe_groups');
+t3lib_extMgm::addTCAcolumns(
+	'fe_groups',
+	array('tx_seminars_publish_events' => array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events',
+			'config' => array(
+				'type' => 'radio',
+				'default' => '0',
+				'items' => array(
+					array('LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events.I.0', '0'),
+					array('LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events.I.1', '1'),
+					array('LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events.I.2', '2'),
+				),
+			),
+		)),
+	1
+);
+
+t3lib_extMgm::addToAllTCAtypes(
+	'fe_groups',
+	'--div--;LLL:EXT:seminars/locallang_db.xml:fe_groups.tab_event_management,' .
+		'tx_seminars_publish_events;;;;1-1-1,'
+);
+
 if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_seminars_pi1_wizicon']
 		= t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_seminars_pi1_wizicon.php';
