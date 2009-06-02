@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2701] Fix: Image of a seminar was not displayed in single view
 - [#2994] Fix: Check if the data for the seminars is loaded from general storage PID
 - [#2610] Change: Polish the BE events list
 - [#2965] Change: Hide the partner integration and the new prices in the 0.8.x branch before the beta
