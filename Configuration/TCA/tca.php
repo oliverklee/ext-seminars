@@ -1,7 +1,9 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
+if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
+
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 if (!function_exists('tx_seminars_tableReplace')) {
 	/**
@@ -23,7 +25,30 @@ if (!function_exists('tx_seminars_tableReplace')) {
 	}
 }
 
-// unserialize the configuration array
+if (!function_exists('tx_seminars_tableRelations')) {
+	/**
+	 * Returns the WHERE clause part to limit the entries to the records stored
+	 * with the general record storage PID.
+	 *
+	 * @param string table name as prefix for the PID column, must not be empty
+	 *
+	 * @return string WHERE clause for the foreignTable WHERE part, will be
+	 *                empty if the storage PID should not be used to filter the
+	 *                select options
+	 */
+	function tx_seminars_tableRelations($tableName) {
+		if (!tx_oelib_configurationProxy::getInstance('seminars')
+			->getConfigurationValueBoolean('useStoragePid')
+		) {
+			return '';
+		}
+
+		return 'AND (' . $tableName . '.pid = ###STORAGE_PID### ' .
+			'OR ###STORAGE_PID### = 0)';
+	}
+}
+
+// unserializes the configuration array
 $globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
 $usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
 $useGeneralRecordStoragePage = (boolean) $globalConfiguration['useStoragePid'];
@@ -69,29 +94,6 @@ if ($selectType == 'select') {
 		'script' => 'wizard_list.php',
 		'JSopenParams' => 'height=480,width=640,status=0,menubar=0,scrollbars=1',
 	);
-}
-
-if (!function_exists('tx_seminars_tableRelations')) {
-	/**
-	 * Returns the WHERE clause part to limit the entries to the records stored
-	 * with the general record storage PID.
-	 *
-	 * @param string table name as prefix for the PID column, must not be empty
-	 *
-	 * @return string WHERE clause for the foreignTable WHERE part, will be
-	 *                empty if the storage PID should not be used to filter the
-	 *                select options
-	 */
-	function tx_seminars_tableRelations($tableName) {
-		if (!tx_oelib_configurationProxy::getInstance('seminars')
-			->getConfigurationValueBoolean('useStoragePid')
-		) {
-			return '';
-		}
-
-		return 'AND (' . $tableName . '.pid = ###STORAGE_PID### ' .
-			'OR ###STORAGE_PID### = 0)';
-	}
 }
 
 $TCA['tx_seminars_test'] = array(
