@@ -4402,6 +4402,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return '';
 		}
 
+		$imageWidth = array();
+		$imageHeight = array();
+		$imageUrl = array();
+
 		$imageWithTag = $this->createRestrictedImage(
 			SEMINARS_UPLOAD_PATH . $this->getImage(),
 			'',
@@ -4409,13 +4413,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$maxImageHeight
 		);
 
-		preg_match_all('/[\w\d\.\/]{3,}/', $imageWithTag, $imageFile);
+		preg_match('/width="([^"]*)"/', $imageWithTag, $imageWidth);
+		preg_match('/height="([^"]*)"/', $imageWithTag, $imageHeight);
+		preg_match('/src="([^"]*)"/', $imageWithTag, $imageUrl);
 
 		return ' style="' .
-			'background-image: url(\'' . $imageFile[0][2] . '\'); ' .
+			'background-image: url(\'' . $imageUrl[1] . '\'); ' .
 			'background-repeat: no-repeat; ' .
-			'padding-left: ' . $imageFile[0][4] . 'px; '.
-			'height: ' . $imageFile[0][6] . 'px;"';
+			'padding-left: ' . $imageWidth[1] . 'px; '.
+			'height: ' . $imageHeight[1] . 'px;"';
 	}
 
 	/**
