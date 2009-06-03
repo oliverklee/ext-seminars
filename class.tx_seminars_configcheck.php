@@ -212,6 +212,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		)) {
 			$this->checkOwnerPictureMaxWidth();
 		}
+		$this->checkLimitFileDownloadToAttendees();
 	}
 
 	/**
@@ -603,6 +604,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'paymentmethods',
 				'additional_information',
 				'target_groups',
+				'attached_files',
 				'organizers',
 				'vacancies',
 				'deadline_registration',
