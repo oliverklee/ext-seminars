@@ -1645,7 +1645,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$this->hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay);
 		$this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
 		$this->hideEditColumnIfNecessary($whatToDisplay);
-		$this->hideAttachedFilesColumnIfNotLoggedIn();
+		$this->hideFilesColumnIfUserCannotAccessFiles();
 
 		if (!isset($this->piVars['pointer'])) {
 			$this->piVars['pointer'] = 0;
@@ -3068,11 +3068,17 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Hides the list view subparts for the attached files if no user is logged
-	 * in at the front end.
+	 * Hides the list view subparts for the attached files if the user is not
+	 * allowed to access the attached files.
 	 */
-	private function hideAttachedFilesColumnIfNotLoggedIn() {
-		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+	private function hideFilesColumnIfUserCannotAccessFiles() {
+		$limitToAttendees = $this->getConfValueBoolean(
+			'limitFileDownloadToAttendees', 'sDEF'
+		);
+
+		if ($limitToAttendees
+			&& !tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+		) {
 			$this->hideColumns(array('attached_files'));
 		}
 	}
@@ -3086,6 +3092,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *                end
 	 */
 	private function getAttachedFilesListMarkerContent() {
+		if (!$this->seminar->hasAttachedFiles()) {
+			return '';
+		}
 		if (!$this->mayUserAccessAttachedFiles()) {
 			return '';
 		}
@@ -3114,8 +3123,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *                 false otherwise
 	 */
 	private function mayUserAccessAttachedFiles() {
-		$result = true;
-
 		$limitToAttendees = $this->getConfValueBoolean(
 			'limitFileDownloadToAttendees', 'sDEF'
 		);

@@ -4304,9 +4304,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning the attached files column in the list view
 	////////////////////////////////////////////////////////////////
 
-	public function test_ListView_ForLoggedOutUser_HidesAttachedFilesHeader() {
+	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesTrue_HidesAttachedFilesHeader() {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -4322,9 +4323,29 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedOutUser_HidesAttachedFilesListRowItem() {
+	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesFalse_ShowsAttachedFilesHeader() {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesTrue_HidesAttachedFilesListRowItem() {
+		$this->testingFramework->logoutFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -4336,6 +4357,25 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->main('', array());
 
 		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
+		);
+	}
+
+	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesFalse_ShowsAttachedFilesListRowItem() {
+		$this->testingFramework->logoutFrontEndUser();
+		$this->fixture->setConfigurationValue('hideColumns', '');
+		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event A'
+			)
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
 		);
 	}
@@ -4381,7 +4421,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
-
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
@@ -4401,7 +4440,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
-
 
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
@@ -4432,7 +4470,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
-
 
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
