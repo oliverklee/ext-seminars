@@ -108,6 +108,31 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		));
 	}
 
+	/**
+	 * Creates a front end user ghost which has a group with the given publish
+	 * settings.
+	 *
+	 * @param integer the publish settings for the user, must be one of the
+	 *                following:
+	 *                tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+	 *                tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
+	 *                tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+	 */
+	private function createAndLoginUserWithPublishSetting($publishSetting) {
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array('tx_seminars_publish_events' => $publishSetting)
+		);
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+
+		$user = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUser')->getNewGhost();
+		$user->setData(array('usergroup' => $list));
+		$this->testingFramework->loginFrontEndUser($user->getUid());
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -444,6 +469,98 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testPopulateListCategoriesDoesNotCrash() {
 		$this->fixture->populateListCategories(array());
+	}
+
+
+	////////////////////////////////////////
+	// Tests concerning modifyDataToInsert
+	////////////////////////////////////////
+
+	public function test_modifyDataToInsert_ForPublishSettingPublishImmediately_DoesNotHideCreatedEvent() {
+		$formData = array('hidden' => 0);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertEquals(
+			0,
+			$modifiedFormData['hidden']
+		);
+	}
+
+	public function test_modifyDataToInsert_ForPublishSettingPublishImmediately_DoesNotHideEditedEvent() {
+		$formData = array('hidden' => 0);
+		$this->fixture->setObjectUid(42);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertEquals(
+			0,
+			$modifiedFormData['hidden']
+		);
+	}
+
+	public function test_modifyDataToInsert_ForPublishSettingHideNew_HidesCreatedEvent() {
+		$formData = array('hidden' => 0);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertEquals(
+			1,
+			$modifiedFormData['hidden']
+		);
+	}
+
+	public function test_modifyDataToInsert_ForPublishSettingHideEdited_HidesCreatedEvent() {
+		$formData = array('hidden' => 0);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertEquals(
+			1,
+			$modifiedFormData['hidden']
+		);
+	}
+
+	public function test_modifyDataToInsert_ForPublishSettingHideEdited_HidesEditedEvent() {
+		$formData = array('hidden' => 0);
+		$this->fixture->setObjectUid(42);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertEquals(
+			1,
+			$modifiedFormData['hidden']
+		);
+	}
+
+	public function test_modifyDataToInsert_ForPublishSettingHideNew_DoesNotHideEditedEvent() {
+		$formData = array('hidden' => 0);
+		$this->fixture->setObjectUid(42);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertEquals(
+			0,
+			$modifiedFormData['hidden']
+		);
 	}
 }
 ?>

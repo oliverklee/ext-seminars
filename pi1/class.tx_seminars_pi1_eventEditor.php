@@ -508,6 +508,33 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	}
 
 	/**
+	 * Checks the publish settings of the user and hides the event record if
+	 * necessary.
+	 *
+	 * @param array form data, will be modified if the seminar must be hidden
+	 *              corresponding to the publish settings of the user, must not
+	 *              be empty
+	 */
+	private function checkPublishSettings(array &$formData) {
+		$publishSetting	= tx_oelib_FrontEndLoginManager::getLoggedInUser(
+			'tx_seminars_Mapper_FrontEndUser')->getPublishSetting();
+		$isNew = $this->getObjectUid() == 0;
+
+		$hideEditedObject = !$isNew
+			&& ($publishSetting
+				== tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+			);
+		$hideNewObject = $isNew
+			&& ($publishSetting
+				> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			);
+
+		if ($hideEditedObject || $hideNewObject) {
+			$formData['hidden'] = 1;
+		}
+	}
+
+	/**
 	 * Unifies decimal separators, processes the deletion of attachments and
 	 * purges non-seminars-fields.
 	 *
@@ -525,6 +552,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$this->purgeNonSeminarsFields($modifiedFormData);
 		$this->unifyDecimalSeparators($modifiedFormData);
 		$this->addAdministrativeData($modifiedFormData);
+		$this->checkPublishSettings($modifiedFormData);
 
 		return $modifiedFormData;
 	}
