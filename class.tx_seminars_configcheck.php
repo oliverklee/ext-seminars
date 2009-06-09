@@ -305,6 +305,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkCreateEventsPID();
 		$this->checkEventSuccessfullySavedPID();
 		$this->checkAllowedExtensionsForUpload();
+		$this->checkDisplayFrontEndEditorFields();
 	}
 
 	/**
@@ -2177,6 +2178,60 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		);
 	}
 
+	/**
+	 * Checks the setting of the configuration value displayFrontEndEditorFields.
+	 */
+	private function checkDisplayFrontEndEditorFields() {
+		$this->checkIfMultiInSetOrEmpty(
+			'displayFrontEndEditorFields',
+			true,
+			's_fe_editing',
+			'This value specifies which fields should be displayed in the ' .
+				'fe-editor. Incorrect values will cause the fields not to be ' .
+				'displayed.',
+			array(
+				'subtitle',
+				'accreditation_number',
+				'credit_points',
+				'categories',
+				'event_type',
+				'cancelled',
+				'teaser',
+				'description',
+				'additional_information',
+				'begin_date',
+				'end_date',
+				'begin_date_registration',
+				'deadline_early_bird',
+				'deadline_registration',
+				'needs_registration',
+				'allows_multiple_registrations',
+				'queue_size',
+				'attendees_min',
+				'attendees_max',
+				'target_groups',
+				'price_regular',
+				'price_regular_early',
+				'price_regular_board',
+				'price_special',
+				'price_special_early',
+				'price_special_board',
+				'payment_methods',
+				'place',
+				'room',
+				'lodgings',
+				'foods',
+				'speakers',
+				'leaders',
+				'partners',
+				'tutors',
+				'checkboxes',
+				'uses_terms_2',
+				'attached_file_box',
+				'notes',
+			)
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_configcheck.php']) {
