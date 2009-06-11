@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3050] Change: In the flexforms tab "list view", use the GRSP settings when selecting records
 - [#2998] Feature: Hide newly created/edited events depending on the setting in the FE user group
 - [#3007] Feature: Add a "Files" column to the list view
 - [#2688| Change: Rework the FE editor HTML template and CSS

@@ -353,7 +353,10 @@
 							<config>
 								<type>select</type>
 								<foreign_table>tx_seminars_event_types</foreign_table>
-								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<foreign_table_where>
+									AND (tx_seminars_event_types.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
+									ORDER BY title asc
+								</foreign_table_where>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
 							</config>
@@ -365,7 +368,10 @@
 							<config>
 								<type>select</type>
 								<foreign_table>tx_seminars_categories</foreign_table>
-								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<foreign_table_where>
+									AND (tx_seminars_categories.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
+									ORDER BY title asc
+								</foreign_table_where>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
 							</config>
@@ -377,7 +383,10 @@
 							<config>
 								<type>select</type>
 								<foreign_table>tx_seminars_sites</foreign_table>
-								<foreign_table_where>ORDER BY title asc</foreign_table_where>
+								<foreign_table_where>
+									AND (tx_seminars_sites.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
+									ORDER BY title asc
+								</foreign_table_where>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
 							</config>
