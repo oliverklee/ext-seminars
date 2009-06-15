@@ -261,7 +261,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		switch ($this->whatToDisplay) {
 			case 'edit_event':
-				$result = $this->createEventEditor();
+				$result = $this->createEventEditorHtml();
 				break;
 			case 'seminar_registration':
 				$result = $this->createRegistrationPage();
@@ -1569,8 +1569,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				}
 				break;
 			case 'my_entered_events':
-				$result .= $this->createEventEditor(true);
-				if (empty($result)) {
+				if ($this->hasEventEditorAccess()) {
 					$result .= $this->getSubpart(
 						'MESSAGE_MY_ENTERED_EVENTS'
 					);
@@ -2799,27 +2798,18 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 	/**
 	 * Checks whether logged-in FE user has access to the event editor and then
-	 * either creates the event editor HTML (or an empty string if
-	 * $accessTestOnly is true) or a localized error message.
+	 * either creates the event editor HTML or a localized error message.
 	 *
-	 * @param boolean whether only the access to the event editor should be
-	 *                checked
-	 *
-	 * @return string HTML code for the event editor (or an error message if the
-	 *                FE user doesn't have access to the editor)
+	 * @return string HTML code for the event editor, or an error message if the
+	 *                FE user doesn't have access to the editor
 	 */
-	protected function createEventEditor($accessTestOnly = false) {
+	protected function createEventEditorHtml() {
 		$result = '';
-
-		$eventEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_pi1_eventEditor'
-		);
-		$eventEditor = new $eventEditorClassname($this->conf, $this->cObj);
-		$eventEditor->setObjectUid(intval($this->piVars['seminar']));
+		$eventEditor = $this->createEventEditorInstance();
 
 		$hasAccessMessage = $eventEditor->hasAccessMessage();
 
-		if (($hasAccessMessage == '') && !$accessTestOnly) {
+		if (($hasAccessMessage == '')) {
 			$result = $eventEditor->render();
 		} else {
 			$result = $hasAccessMessage;
@@ -2829,9 +2819,23 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$eventEditor->__destruct();
-		unset($eventEditor);
 
 		return $result;
+	}
+
+	/**
+	 * Creates an event editor instance and returns it.
+	 *
+	 * @return tx_seminars_pi1_eventEditor the initialized event editor
+	 */
+	private function createEventEditorInstance() {
+		$eventEditorClassname = t3lib_div::makeInstanceClassName(
+			'tx_seminars_pi1_eventEditor'
+		);
+		$eventEditor = new $eventEditorClassname($this->conf, $this->cObj);
+		$eventEditor->setObjectUid(intval($this->piVars['seminar']));
+
+		return $eventEditor;
 	}
 
 	/**
@@ -3131,7 +3135,22 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
 				&& $this->seminar->isUserRegistered($this->getFeUserUid())
 			);
-		}
+	}
+
+	/**
+	 * Checks if the current FE user has access to the event editor and thus may
+	 * see the my entered events list.
+	 *
+	 * @return boolean true if the user is allowed to access the event editor,
+	 *                 false otherwise
+	 */
+	private function hasEventEditorAccess() {
+		$eventEditor = $this->createEventEditorInstance();
+		$result = ($eventEditor->hasAccessMessage() == '');
+		$eventEditor->__destruct();
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1.php']) {

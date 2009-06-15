@@ -64,9 +64,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function __construct(array $configuration, tslib_cObj $cObj) {
 		parent::__construct($configuration, $cObj);
-		$this->setFormConfiguration($this->conf['form.']['eventEditor.']);
-
-		$this->declareDataHandler();
 	}
 
 	/**
@@ -119,6 +116,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @return string HTML of the create/edit form
 	 */
 	public function render() {
+		$this->setFormConfiguration($this->conf['form.']['eventEditor.']);
+		$this->declareDataHandler();
+
 		$this->storeAttachedFiles();
 
 		$template = t3lib_div::makeInstance('tx_oelib_Template');
