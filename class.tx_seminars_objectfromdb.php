@@ -80,9 +80,11 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *                If this parameter is provided, $uid will be
 	 *                ignored.
 	 */
-	public function __construct($uid, $dbResult = null) {
+	public function __construct(
+		$uid, $dbResult = null, $allowHiddenRecords = false
+	) {
 		$this->initializeCharsetConversion();
-		$this->retrieveRecordAndGetData($uid, $dbResult);
+		$this->retrieveRecordAndGetData($uid, $dbResult, $allowHiddenRecords);
 		$this->init();
 	}
 
@@ -411,7 +413,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				'COUNT(*) AS num',
 				$tableName,
 				'uid=' . intval($uid) . tx_oelib_db::enableFields(
-					$tableName, $allowHiddenRecords
+					$tableName, intval($allowHiddenRecords)
 				)
 			);
 

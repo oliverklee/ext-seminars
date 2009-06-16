@@ -143,6 +143,34 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$test->__destruct();
 	}
 
+	public function test_CreateFromDbResult_FailsForHiddenRecord() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+		);
+
+		$test = new tx_seminars_test($this->fixtureUid);
+
+		$this->assertFalse(
+			$test->isOk()
+		);
+
+		$test->__destruct();
+	}
+
+	public function test_CreateFromDbResultWithAllowedHiddenRecords_GetsHiddenRecordFromDb() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+		);
+
+		$test = new tx_seminars_test($this->fixtureUid, null, true);
+
+		$this->assertTrue(
+			$test->isOk()
+		);
+
+		$test->__destruct();
+	}
+
 
 	//////////////////////////////////
 	// Tests for getting attributes.
@@ -394,6 +422,35 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 				SEMINARS_TABLE_TEST_TEST_MM,
 				'uid_local = ' . $this->fixtureUid . ' AND uid_foreign = 31 ' .
 					'AND sorting = 2'
+			)
+		);
+	}
+
+
+	//////////////////////////////////
+	// Tests concerning recordExists
+	//////////////////////////////////
+
+	public function test_recordExists_ForHiddenRecordAndNoHiddenRecordsAllowed_ReturnsFalse() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+		);
+
+		$this->assertFalse(
+			$this->fixture->recordExists(
+				$this->fixtureUid, SEMINARS_TABLE_TEST, false
+			)
+		);
+	}
+
+	public function test_recordExists_ForHiddenRecordAndHiddenRecordsAllowed_ReturnsTrue() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+		);
+
+		$this->assertTrue(
+			$this->fixture->recordExists(
+				$this->fixtureUid, SEMINARS_TABLE_TEST, true
 			)
 		);
 	}
