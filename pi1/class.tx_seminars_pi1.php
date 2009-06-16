@@ -241,7 +241,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				's_template_special'
 			);
 		} else {
-			$this->showUid = $this->piVars['showUid'];
+			$this->showUid = intval($this->piVars['showUid']);
 		}
 
 		$this->whatToDisplay = $this->getConfValueString('what_to_display');
