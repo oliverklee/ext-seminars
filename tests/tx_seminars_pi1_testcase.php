@@ -5366,5 +5366,39 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$output
 		);
 	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning my_entered_events view
+	////////////////////////////////////////////
+
+	public function test_MyEnteredEventView_ShowsHiddenRecords() {
+		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
+
+		$this->fixture->setConfigurationValue(
+			'what_to_display', 'my_entered_events'
+		);
+		$this->fixture->setConfigurationValue(
+			'eventEditorFeGroupID', $editorGroupUid
+		);
+
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
+			$editorGroupUid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'owner_feuser' => $feUserUid,
+				'hidden' => 1,
+				'title' => 'hiddenEvent',
+			)
+		);
+
+		$this->assertContains(
+			'hiddenEvent',
+			$this->fixture->main('', array())
+		);
+	}
 }
 ?>

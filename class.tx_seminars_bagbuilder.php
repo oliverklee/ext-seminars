@@ -117,7 +117,7 @@ abstract class tx_seminars_bagbuilder {
 	 * sorting in the BE, and hidden records will be shown.
 	 */
 	public function setBackEndMode() {
-		$this->showHiddenRecords = true;
+		$this->showHiddenRecords();
 		$this->ignoreTimingOfRecords = true;
 	}
 
@@ -243,6 +243,13 @@ abstract class tx_seminars_bagbuilder {
 	 */
 	public function setLimit($limit) {
 		$this->limit = $limit;
+	}
+
+	/**
+	 * Configures the bag to also contain hidden records.
+	 */
+	public function showHiddenRecords() {
+		$this->showHiddenRecords = true;
 	}
 }
 

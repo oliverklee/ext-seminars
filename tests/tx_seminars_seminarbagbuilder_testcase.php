@@ -6997,5 +6997,42 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$bag->__destruct();
 	}
+
+
+	///////////////////////////////////////
+	// Tests concerning showHiddenRecords
+	///////////////////////////////////////
+
+	public function test_showHiddenRecords_ForHiddenEvent_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('hidden' => 1)
+		);
+
+		$this->fixture->showHiddenRecords();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_showHiddenRecords_ForVisibleEvent_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('hidden' => 0)
+		);
+
+		$this->fixture->showHiddenRecords();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
 }
 ?>

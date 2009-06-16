@@ -1705,6 +1705,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 			case 'my_entered_events':
 				$builder->limitToOwner($this->getFeUserUid());
+				$builder->showHiddenRecords();
 				break;
 			case 'events_next_day':
 				$builder->limitToEventsNextDay($this->seminar);
