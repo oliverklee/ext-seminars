@@ -244,7 +244,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				's_template_special'
 			);
 		} else {
-			$this->showUid = $this->piVars['showUid'];
+			$this->showUid = intval($this->piVars['showUid']);
 		}
 
 		$this->whatToDisplay = $this->getConfValueString('what_to_display');
@@ -650,18 +650,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return string HTML for the plugin
 	 */
 	private function createSingleView() {
-		$this->internal['currentTable'] = SEMINARS_TABLE_SEMINARS;
-		$this->internal['currentRow'] = $this->pi_getRecord(
-			SEMINARS_TABLE_SEMINARS,
-			$this->showUid
-		);
-
 		$this->hideSubparts(
 			$this->getConfValueString('hideFields', 's_template_special'),
 			'FIELD_WRAPPER'
 		);
 
-		if ($this->createSeminar($this->internal['currentRow']['uid'])) {
+		if ($this->createSeminar($this->showUid)) {
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
