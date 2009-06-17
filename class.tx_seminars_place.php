@@ -68,6 +68,32 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	public function getCountryIsoCode() {
 		return $this->getRecordPropertyString('country');
 	}
+
+	/**
+	 * Returns our owner.
+	 *
+	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be null
+	 *                                     if this model has no owner
+	 */
+	public function getOwner() {
+		if (!$this->hasRecordPropertyInteger('owner')) {
+			return null;
+		}
+
+		return tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUser'
+		)->find($this->getRecordPropertyInteger('owner'));
+	}
+
+	/**
+	 * Sets our owner.
+	 *
+	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model
+	 *                                                  to set
+	 */
+	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
+		$this->setRecordPropertyInteger('owner', $frontEndUser->getUid());
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_place.php']) {

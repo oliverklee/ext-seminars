@@ -54,6 +54,26 @@ class tx_seminars_Model_Food extends tx_oelib_Model {
 
 		$this->setAsString('title', $title);
 	}
+
+	/**
+	 * Returns our owner.
+	 *
+	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be null
+	 *                                     if this model has no owner
+	 */
+	public function getOwner() {
+		return $this->getAsModel('owner');
+	}
+
+	/**
+	 * Sets our owner.
+	 *
+	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model
+	 *                                                  to set
+	 */
+	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
+		$this->set('owner', $frontEndUser);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_Food.php']) {

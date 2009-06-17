@@ -321,6 +321,7 @@ CREATE TABLE tx_seminars_speakers (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	organization tinytext,
 	homepage tinytext,
@@ -429,6 +430,7 @@ CREATE TABLE tx_seminars_sites (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	address text,
 	city tinytext,
@@ -454,6 +456,7 @@ CREATE TABLE tx_seminars_organizers (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	homepage tinytext,
 	email tinytext,
@@ -478,6 +481,7 @@ CREATE TABLE tx_seminars_payment_methods (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	description text,
 
@@ -498,6 +502,7 @@ CREATE TABLE tx_seminars_event_types (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -517,6 +522,7 @@ CREATE TABLE tx_seminars_checkboxes (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	description text,
 
@@ -567,6 +573,7 @@ CREATE TABLE tx_seminars_lodgings (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -616,6 +623,7 @@ CREATE TABLE tx_seminars_foods (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -707,6 +715,7 @@ CREATE TABLE tx_seminars_target_groups (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -726,6 +735,7 @@ CREATE TABLE tx_seminars_categories (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	icon tinytext,
 
@@ -746,6 +756,7 @@ CREATE TABLE tx_seminars_skills (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -768,6 +779,7 @@ CREATE TABLE tx_seminars_prices (
 	endtime int(11) unsigned DEFAULT '0' NOT NULL,
 	fe_group int(11) DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	seminar int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	value decimal(7,2) DEFAULT '0.00' NOT NULL,

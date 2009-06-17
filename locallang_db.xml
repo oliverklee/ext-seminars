@@ -85,7 +85,6 @@
 			<label index="tx_seminars_seminars.price_special_board">Special price including full board:</label>
 			<label index="tx_seminars_seminars.payment_methods">Allowed methods of payment:</label>
 			<label index="tx_seminars_seminars.divLabelAccess">Access</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.vips">Managers of this event:</label>
 			<label index="tx_seminars_seminars.image">Image:</label>
 			<label index="tx_seminars_seminars.requirements">Requirements:</label>
@@ -201,6 +200,7 @@
 			<label index="fe_groups.tx_seminars_publish_events.I.1">only newly created events are hidden</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.2">newly created and edited events are hidden</label>
 			<label index="fe_groups.tab_event_management">Event management</label>
+			<label index="owner_feuser">Front-end user who has created this record:</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminare</label>
@@ -279,7 +279,6 @@
 			<label index="tx_seminars_seminars.price_special_board">Spezialpreis inklusive Vollpension:</label>
 			<label index="tx_seminars_seminars.payment_methods">Erlaubte Zahlungsarten:</label>
 			<label index="tx_seminars_seminars.divLabelAccess">Zugriff</label>
-			<label index="tx_seminars_seminars.owner_feuser">Frontend-User, der diese Veranstaltung eingetragen hat:</label>
 			<label index="tx_seminars_seminars.vips">Verwalter dieser Veranstaltung:</label>
 			<label index="tx_seminars_seminars.image">Bild:</label>
 			<label index="tx_seminars_seminars.requirements">Voraussetzungen:</label>
@@ -395,6 +394,7 @@
 			<label index="fe_groups.tx_seminars_publish_events.I.1">nur neu erstellte Veranstaltungen verstecken</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.2">neu erstellte und bearbeitete Veranstaltungen verstecken</label>
 			<label index="fe_groups.tab_event_management">Veranstaltungsverwaltung</label>
+			<label index="owner_feuser">Frontend-User, der diesen Datensatz eingetragen hat:</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
@@ -418,7 +418,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Toon de reisvoorwaarden checkbox</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Staat meerdere registraties van dezelfde persoon toe</label>
 			<label index="tx_seminars_seminars.cancelled">Is geannuleerd:</label>
-			<label index="tx_seminars_seminars.owner_feuser">FE gebruiker dit deze bijeenkomst heeft aangemaakt:</label>
 			<label index="tx_seminars_seminars.vips">FE gebruikers welke toestemming hebben om de lijst van registraties te zien:</label>
 			<label index="tx_seminars_seminars.notes">Interne Notities</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Sprekers</label>
@@ -576,7 +575,6 @@
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Tillad flere indregistreringer fra samme person</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Undlad kollisionscheck for dette arrangement</label>
 			<label index="tx_seminars_seminars.cancelled">Er blevet aflyst:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Bruger som har oprettet denne begivenhed:</label>
 			<label index="tx_seminars_seminars.vips">Front end brugere der har tilladelse til at se listen over tilmeldte:</label>
 			<label index="tx_seminars_seminars.notes">Interne noter:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Foredragsholdere:</label>
@@ -728,7 +726,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Отображать транспортные условия в форме регистрации</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Позволять множественные регистрации от одного человека</label>
 			<label index="tx_seminars_seminars.cancelled">Отменено:</label>
-			<label index="tx_seminars_seminars.owner_feuser">FE-пользователь, создавший это мероприятие:</label>
 			<label index="tx_seminars_seminars.vips">Список FE-пользователей, которым разрешено просматривать список зарегистрировавшихся:</label>
 			<label index="tx_seminars_seminars.notes">Внутренние заметки:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Докладчики</label>
@@ -880,7 +877,6 @@
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Consenti registrazioni multiple per la stessa persona</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Salta il controllo di conflitti per questo evento:</label>
 			<label index="tx_seminars_seminars.cancelled">E' stato cancellato:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Utente di front-end che ha creato questo evento:</label>
 			<label index="tx_seminars_seminars.vips">Utenti di front-end abilitati a vedere la lista dei partecipanti:</label>
 			<label index="tx_seminars_seminars.notes">Note interne:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Oratori</label>
@@ -1033,7 +1029,6 @@
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Autoriser plusieurs inscriptions par personne</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Ne pas faire le contrôle de conflit pour cet événement:</label>
 			<label index="tx_seminars_seminars.cancelled">A été annulé:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Utilisateur front-end ayant créé cet événement:</label>
 			<label index="tx_seminars_seminars.vips">Utilisateurs front-end autorisés à voir la liste des inscriptions:</label>
 			<label index="tx_seminars_seminars.notes">Notes internes:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Conférenciers</label>
@@ -1192,7 +1187,6 @@
 			<label index="tx_seminars_seminars.cancelled_planned" type="integer">59756617</label>
 			<label index="tx_seminars_seminars.cancelled_canceled" type="integer">224147873</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed" type="integer">249197084</label>
-			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
 			<label index="tx_seminars_seminars.vips" type="integer">180644740</label>
 			<label index="tx_seminars_seminars.notes" type="integer">121419833</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
@@ -1435,7 +1429,6 @@
 			<label index="tx_seminars_seminars.checkboxes" type="integer">204622860</label>
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">247331383</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
-			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
 			<label index="tx_seminars_seminars.vips" type="integer">230656681</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
 			<label index="tx_seminars_seminars.partners" type="integer">192700976</label>
@@ -1591,7 +1584,6 @@
 			<label index="tx_seminars_seminars.checkboxes" type="integer">204622860</label>
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">247331383</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
-			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
 			<label index="tx_seminars_seminars.partners" type="integer">192700976</label>
 			<label index="tx_seminars_seminars.tutors" type="integer">184014682</label>
@@ -1683,7 +1675,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">247331383</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">128284088</label>
-			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
 			<label index="tx_seminars_seminars.vips" type="integer">230656681</label>
 			<label index="tx_seminars_seminars.notes" type="integer">121419833</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
@@ -1835,7 +1826,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">247331383</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">128284088</label>
-			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
 			<label index="tx_seminars_seminars.vips" type="integer">230656681</label>
 			<label index="tx_seminars_seminars.notes" type="integer">121419833</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
@@ -1988,7 +1978,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2" type="integer">247331383</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">128284088</label>
-			<label index="tx_seminars_seminars.owner_feuser" type="integer">174071250</label>
 			<label index="tx_seminars_seminars.vips" type="integer">230656681</label>
 			<label index="tx_seminars_seminars.notes" type="integer">121419833</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers" type="integer">258305227</label>
@@ -2177,7 +2166,6 @@
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>
 			<label index="tx_seminars_seminars.is_full">Is full:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.vips">Managers of this event:</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers">Speakers</label>
@@ -2399,7 +2387,6 @@
 			<label index="tx_seminars_seminars.checkboxes">Registration options with checkbox:</label>
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
 			<label index="tx_seminars_seminars.partners">Partners:</label>
 			<label index="tx_seminars_seminars.tutors">Tutors:</label>
@@ -2490,7 +2477,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to see the list of registrations:</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
@@ -2641,7 +2627,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to see the list of registrations:</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
@@ -2795,7 +2780,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to see the list of registrations:</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
@@ -2948,7 +2932,6 @@
 			<label index="tx_seminars_seminars.uses_terms_2">Display the travelling terms checkbox in the registration form</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.cancelled">Has been canceled:</label>
-			<label index="tx_seminars_seminars.owner_feuser">Front-end user who has created this event:</label>
 			<label index="tx_seminars_seminars.vips">Front-end users that are allowed to see the list of registrations:</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
