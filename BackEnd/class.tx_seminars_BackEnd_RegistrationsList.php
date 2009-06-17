@@ -146,7 +146,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 			),
 		);
 
-		$registrationBagBuilder = t3lib_div::makeInstance(
+		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_registrationBagBuilder'
 		);
 		$pageData = $this->page->getPageData();

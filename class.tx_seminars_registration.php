@@ -615,10 +615,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			if (isset(self::$cachedSeminars[$seminarUid])) {
 				$this->seminar = self::$cachedSeminars[$seminarUid];
 			} else {
-				$seminarClassname = t3lib_div::makeInstanceClassName(
-					'tx_seminars_seminar'
+				$this->seminar = tx_oelib_ObjectFactory::make(
+					'tx_seminars_seminar', $seminarUid
 				);
-				$this->seminar = new $seminarClassname($seminarUid);
 				self::$cachedSeminars[$seminarUid] = $this->seminar;
 			}
 		}

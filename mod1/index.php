@@ -239,7 +239,7 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$result .= '<h3>'
 			.$LANG->getLL('title_getEmailAddressesForAttendances').'</h3>';
 
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->setBackEndMode();
 		$builder->setSourcePages(intval($this->id));
 		$seminarBag = $builder->build();
@@ -286,14 +286,8 @@ class tx_seminars_module1 extends t3lib_SCbase {
 		$emailList = '';
 		$dividerInEmailList = ', ';
 
-		$registrationBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registrationbag'
-		);
-		$registrationBag = new $registrationBagClassname(
-			$queryParameters,
-				'',
-				'',
-				'crdate'
+		$registrationBag = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registrationbag', $queryParameters, '', '', 'crdate'
 			);
 
 		if ($registrationBag->current()) {
@@ -324,7 +318,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminar
 }
 
 // Make instance:
-$SOBE = t3lib_div::makeInstance('tx_seminars_module1');
+$SOBE = tx_oelib_ObjectFactory::make('tx_seminars_module1');
 $SOBE->init();
 
 // Include files?

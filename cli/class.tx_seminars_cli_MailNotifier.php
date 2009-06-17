@@ -125,7 +125,7 @@ class tx_seminars_cli_MailNotifier {
 			: null;
 
 		foreach ($organizerBag as $organizer) {
-			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 			$eMail->setSender($sender);
 			$eMail->setSubject($subject);
 			$eMail->addRecipient($organizer);
@@ -231,7 +231,7 @@ class tx_seminars_cli_MailNotifier {
 	 * @return tx_seminars_seminarbagbuilder builder for the seminar bag
 	 */
 	private function getSeminarBagBuilder($status) {
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->setTimeFrame('upcomingWithBeginDate');
 		$builder->limitToStatus($status);
 
@@ -251,7 +251,7 @@ class tx_seminars_cli_MailNotifier {
 		$configuration = tx_oelib_ConfigurationRegistry
 			::getInstance()->get('plugin.tx_seminars');
 
-		$csvCreator = t3lib_div::makeInstance('tx_seminars_pi2');
+		$csvCreator = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
 		$csvCreator->init();
 		foreach (array(
 			'fieldsFromFeUserForCsv' => getAsString,
@@ -265,7 +265,7 @@ class tx_seminars_cli_MailNotifier {
 		$csvString = $csvCreator->createListOfRegistrations($uid);
 		$csvCreator->__destruct();
 
-		$attachment = t3lib_div::makeInstance('tx_oelib_Attachment');
+		$attachment = tx_oelib_ObjectFactory::make('tx_oelib_Attachment');
 		$attachment->setContent($csvString);
 		$attachment->setContentType('text/csv');
 		$attachment->setFileName($configuration->getAsString(

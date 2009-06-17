@@ -127,7 +127,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		// Creates a separate seminar bag that contains all the events.
 		// We can't use the regular seminar bag that is used for the list
 		// view as it contains only part of the events.
-		$seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
+		$seminarBag = tx_oelib_ObjectFactory::make('tx_seminars_seminarbag');
 
 		// Walks through all events in the seminar bag to read the needed data
 		// from each event object.
@@ -380,10 +380,9 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	private function createPlaceBag(array $placeUids) {
 		$placeUidsAsCommaSeparatedList = implode(',', $placeUids);
 		$queryWhere = 'uid IN(' . $placeUidsAsCommaSeparatedList . ')';
-		$placeBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_placebag'
+		$placeBag = tx_oelib_ObjectFactory::make(
+			'tx_seminars_placebag', $queryWhere
 		);
-		$placeBag = new $placeBagClassname($queryWhere);
 
 		return $placeBag;
 	}

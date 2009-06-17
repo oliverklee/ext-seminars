@@ -116,7 +116,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
 
-		$this->configGetter = t3lib_div::makeInstance('tx_seminars_configgetter');
+		$this->configGetter = tx_oelib_ObjectFactory::make(
+			'tx_seminars_configgetter'
+		);
 		$this->configGetter->init();
 	}
 
@@ -183,7 +185,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 		$result = $this->createRegistrationsHeading();
 
-		$registrationBagBuilder = t3lib_div::makeInstance(
+		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_registrationBagBuilder'
 		);
 
@@ -302,7 +304,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 		$result = $this->createEventsHeading();
 
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->setBackEndMode();
 		$builder->setSourcePages($pid);
 
@@ -420,10 +422,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				);
 			}
 		} elseif (TYPO3_MODE == 'FE') {
-			$seminarClassName = t3lib_div::makeInstanceClassName(
-				'tx_seminars_seminar'
+			$seminar = tx_oelib_ObjectFactory::make(
+				'tx_seminars_seminar', $eventUid
 			);
-			$seminar = new $seminarClassName($eventUid);
 
 			$pi1TypoScriptSetup
 				=& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_seminars_pi1.'];

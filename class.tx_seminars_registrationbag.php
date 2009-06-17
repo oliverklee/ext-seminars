@@ -80,12 +80,8 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 * $this->dbResult is ensured to be not false when this function is called.
 	 */
 	protected function createItemFromDbResult() {
-		$registrationClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registration'
-		);
-		$this->currentItem = new $registrationClassname(
-			$this->cObj,
-			$this->dbResult
+		$this->currentItem = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registration', $this->cObj, $this->dbResult
 		);
 		$this->valid();
 	}

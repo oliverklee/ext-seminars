@@ -82,8 +82,9 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * called.
 	 */
 	protected function createItemFromDbResult() {
-		$seminarClassname = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$this->currentItem = new $seminarClassname(0, $this->dbResult);
+		$this->currentItem = tx_oelib_ObjectFactory::make(
+			'tx_seminars_seminar', 0, $this->dbResult
+		);
 		$this->valid();
 	}
 }

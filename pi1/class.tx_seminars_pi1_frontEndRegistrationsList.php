@@ -95,10 +95,9 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 	 * @param integer an event UID, invalid UIDs will be handled later
 	 */
 	private function createSeminar($seminarUid) {
-		$seminarClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminar'
+		$this->seminar = tx_oelib_ObjectFactory::make(
+			'tx_seminars_seminar', $seminarUid
 		);
-		$this->seminar = new $seminarClassName($seminarUid);
 	}
 
 	/**
@@ -177,7 +176,8 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 	 * is a valid seminar object.
 	 */
 	private function createRegistrationsList() {
-		$builder = t3lib_div::makeInstance('tx_seminars_registrationBagBuilder');
+		$builder
+			= tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$builder->limitToEvent($this->seminar->getUid());
 		$builder->limitToRegular();
 		$builder->limitToExistingUsers();

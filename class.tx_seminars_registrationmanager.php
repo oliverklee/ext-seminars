@@ -358,8 +358,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return boolean true the UID is valid, false otherwise
 	 */
 	public function existsSeminar($seminarUid) {
-		// We can't use t3lib_div::makeInstanceClassName in this case as we
-		// cannot use a class function when using a variable as class name.
 		return tx_seminars_objectfromdb::recordExists(
 			$seminarUid,
 			SEMINARS_TABLE_SEMINARS
@@ -518,10 +516,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		tx_seminars_seminar $seminar, array $registrationData,
 		tslib_pibase $plugin
 	) {
-		$registrationClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_registration'
+		$this->registration = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registration', $plugin->cObj
 		);
-		$this->registration = new $registrationClassname($plugin->cObj);
 		$this->registration->setRegistrationData(
 			$seminar,
 			$this->getFeUserUid(),
@@ -571,12 +568,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			);
 
 			if ($dbResult) {
-				$registrationClassname = t3lib_div::makeInstanceClassname(
-					'tx_seminars_registration'
-				);
-				$this->registration = new $registrationClassname(
-					$plugin->cObj,
-					$dbResult
+				$this->registration = tx_oelib_ObjectFactory::make(
+					'tx_seminars_registration', $plugin->cObj, $dbResult
 				);
 
 				if ($this->registration->getUser() == $this->getFeUserUid()) {
@@ -619,7 +612,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if ($seminar->hasVacancies()) {
 			$vacancies = $seminar->getVacancies();
 
-			$registrationBagBuilder = t3lib_div::makeInstance(
+			$registrationBagBuilder = tx_oelib_ObjectFactory::make(
 				'tx_seminars_registrationBagBuilder'
 			);
 			$registrationBagBuilder->limitToEvent($seminar->getUid());
@@ -699,7 +692,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *                                users registration, may be empty
 	 */
 	public function getMissingRequiredTopics(tx_seminars_seminar $event) {
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->limitToRequiredEventTopics($event->getTopicUid());
 		$builder->limitToTopicsWithoutRegistrationByUser($this->getFeUserUid());
 
@@ -739,7 +732,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMailNotification = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 		$eMailNotification->addRecipient($registration->getFrontEndUser());
 		$eMailNotification->setSender($event->getOrganizerBag()->current());
 		$eMailNotification->setSubject(
@@ -808,7 +801,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMailNotification = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 		$eMailNotification->setSender($registration->getFrontEndUser());
 
 		foreach ($event->getOrganizerBag() as $organizer) {
@@ -904,7 +897,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$event = $registration->getSeminarObject();
-		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 
 		$eMail->setSender($event->getOrganizerBag()->current());
 		$eMail->setMessage($this->getMessageForNotification($registration, $emailReason));

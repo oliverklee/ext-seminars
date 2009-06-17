@@ -71,10 +71,9 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 	 * @param integer an event UID, must be >= 0
 	 */
 	private function createSeminar($seminarUid) {
-		$seminarClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminar'
+		$this->seminar = tx_oelib_ObjectFactory::make(
+			'tx_seminars_seminar', $seminarUid
 		);
-		$this->seminar = new $seminarClassName($seminarUid);
 	}
 
 	/**

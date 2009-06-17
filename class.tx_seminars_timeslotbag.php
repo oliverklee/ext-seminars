@@ -76,10 +76,9 @@ class tx_seminars_timeslotbag extends tx_seminars_bag {
 	 * called.
 	 */
 	protected function createItemFromDbResult() {
-		$timeslotClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_timeslot'
+		$this->currentItem = tx_oelib_ObjectFactory::make(
+			'tx_seminars_timeslot', 0, $this->dbResult
 		);
-		$this->currentItem = new $timeslotClassname(0, $this->dbResult);
 		$this->valid();
 	}
 }

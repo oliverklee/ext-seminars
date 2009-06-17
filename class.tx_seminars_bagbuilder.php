@@ -98,10 +98,8 @@ abstract class tx_seminars_bagbuilder {
 	 * @return tx_seminars_bag customized, newly-created bag
 	 */
 	public function build() {
-		$bagClassname = t3lib_div::makeInstanceClassName(
-			$this->bagClassName
-		);
-		return new $bagClassname(
+		return tx_oelib_ObjectFactory::make(
+			$this->bagClassName,
 			$this->getWhereClause(),
 			implode(',', $this->additionalTableNames),
 			$this->groupBy,

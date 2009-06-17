@@ -50,7 +50,7 @@ class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_pi1_frontEndView 
 	 *                there are no categories to display
 	 */
 	public function render() {
-		$seminarBagBuilder = t3lib_div::makeInstance(
+		$seminarBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_seminarbagbuilder'
 		);
 		$seminarBagBuilder->setSourcePages(
@@ -74,7 +74,7 @@ class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_pi1_frontEndView 
 		$eventUids = $bag->getUids();
 		$bag->__destruct();
 
-		$categoryBagBuilder = t3lib_div::makeInstance(
+		$categoryBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_categorybagbuilder'
 		);
 		$categoryBagBuilder->limitToEvents($eventUids);

@@ -118,7 +118,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 			)
 		);
 
-		$builder = t3lib_div::makeInstance('tx_seminars_OrganizerBagBuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_OrganizerBagBuilder');
 
 		$pageData = $this->page->getPageData();
 		$builder->setSourcePages($pageData['uid']);

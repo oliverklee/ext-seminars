@@ -71,8 +71,9 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * @param integer UID of an event, must be > 0
 	 */
 	public function __construct($eventUid) {
-		$eventClassName = t3lib_div::makeInstanceClassName('tx_seminars_seminar');
-		$this->event = new $eventClassName($eventUid);
+		$this->event = tx_oelib_ObjectFactory::make(
+			'tx_seminars_seminar', $eventUid
+		);
 
 		if (!$this->event->isOk()) {
 			throw new Exception('There is no event with this UID.');
@@ -372,16 +373,17 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * Sends an e-mail to the attendees to inform about the changed event state.
 	 */
 	private function sendEmailToAttendees() {
-		$className = t3lib_div::makeInstanceClassName('tx_seminars_organizer');
-		$organizer = new $className(intval($this->getPostData('sender')));
+		$organizer = tx_oelib_ObjectFactory::make(
+			'tx_seminars_organizer', intval($this->getPostData('sender'))
+		);
 
 		$registrationBagBuilder
-			= t3lib_div::makeInstance('tx_seminars_registrationBagBuilder');
+			= tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 
 		foreach ($registrations as $registration) {
-			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 			$eMail->setSender($organizer);
 			$eMail->setSubject($this->getPostData('subject'));
 			$eMail->addRecipient($registration->getFrontEndUser());

@@ -99,10 +99,9 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function __construct(array $configuration, tslib_cObj $cObj) {
 		parent::__construct($configuration, $cObj);
 
-		$registrationManagerClassname = t3lib_div::makeInstanceClassName(
+		$this->registrationManager = tx_oelib_ObjectFactory::make(
 			'tx_seminars_registrationmanager'
 		);
-		$this->registrationManager = new $registrationManagerClassname();
 
 		$formFieldsToShow = t3lib_div::trimExplode(',',
 			$this->getConfValueString(
