@@ -53,10 +53,7 @@ class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_pi1_frontEndView
 			return '';
 		}
 
-		$seminarClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminar'
-		);
-		$seminar = new $seminarClassName($eventId);
+		$seminar = tx_oelib_ObjectFactory::make('tx_seminars_seminar', $eventId);
 		if (!$seminar->isOk()) {
 			return '';
 		}

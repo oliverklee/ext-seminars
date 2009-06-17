@@ -171,24 +171,21 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 			// If no sub module is specified, an empty page will be displayed.
 			switch ($this->subModule) {
 				case 2:
-					$registrationsListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_BackEnd_RegistrationsList'
+					$registrationsList = tx_oelib_ObjectFactory::make(
+						'tx_seminars_BackEnd_RegistrationsList', $this
 					);
-					$registrationsList = new $registrationsListClassname($this);
 					$this->content .= $registrationsList->show();
 					break;
 				case 3:
-					$speakersListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_BackEnd_SpeakersList'
+					$speakersList = tx_oelib_ObjectFactory::make(
+						'tx_seminars_BackEnd_SpeakersList', $this
 					);
-					$speakersList = new $speakersListClassname($this);
 					$this->content .= $speakersList->show();
 					break;
 				case 4:
-					$organizersListClassname = t3lib_div::makeInstanceClassName(
-						'tx_seminars_BackEnd_OrganizersList'
+					$organizersList = tx_oelib_ObjectFactory::make(
+						'tx_seminars_BackEnd_OrganizersList', $this
 					);
-					$organizersList = new $organizersListClassname($this);
 					$this->content .= $organizersList->show();
 					break;
 				case 1:
@@ -197,10 +194,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 					} elseif ($this->isCancelEventFormRequested()) {
 						$this->content .= $this->getCancelEventMailForm();
 					} else {
-						$eventsListClassname = t3lib_div::makeInstanceClassName(
-							'tx_seminars_BackEnd_EventsList'
+						$eventsList = tx_oelib_ObjectFactory::make(
+							'tx_seminars_BackEnd_EventsList', $this
 						);
-						$eventsList = new $eventsListClassname($this);
 						$this->content .= $eventsList->show();
 						$eventsList->__destruct();
 					}
@@ -262,10 +258,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return string the HTML source for the form
 	 */
 	private function getConfirmEventMailForm() {
-		$formClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_BackEnd_ConfirmEventMailForm'
-		);
-		$form = new $formClassName(
+		$form = tx_oelib_ObjectFactory::make(
+			'tx_seminars_BackEnd_ConfirmEventMailForm',
 			intval(t3lib_div::GPvar('eventUid'))
 		);
 		$form->setPostData(t3lib_div::_POST());
@@ -282,10 +276,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return string the HTML source for the form
 	 */
 	private function getCancelEventMailForm() {
-		$formClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_BackEnd_CancelEventMailForm'
-		);
-		$form = new $formClassName(
+		$form = tx_oelib_ObjectFactory::make(
+			'tx_seminars_BackEnd_CancelEventMailForm',
 			intval(t3lib_div::GPvar('eventUid'))
 		);
 		$form->setPostData(t3lib_div::_POST());
@@ -306,10 +298,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 *                 record on the current page, false otherwise
 	 */
 	private function hasStaticTemplateOrRecords() {
-		$configGetterClassname = t3lib_div::makeInstanceClassName(
+		$configGetter = tx_oelib_ObjectFactory::make(
 			'tx_seminars_configgetter'
 		);
-		$configGetter = new $configGetterClassname();
 		$configGetter->init();
 
 		$result = $configGetter->getConfValueBoolean('isStaticTemplateLoaded');
@@ -343,7 +334,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminar
 }
 
 // Make instance:
-$SOBE = t3lib_div::makeInstance('tx_seminars_module2');
+$SOBE = tx_oelib_ObjectFactory::make('tx_seminars_module2');
 $SOBE->init();
 
 // Include files?

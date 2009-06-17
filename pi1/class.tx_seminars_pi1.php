@@ -270,13 +270,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				// The fallthrough is intended
 				// because createRegistrationsListPage() will differentiate later.
 			case 'list_registrations':
-				$registrationsListClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_pi1_frontEndRegistrationsList'
-				);
-				$registrationsList = new $registrationsListClassName(
-					$this->conf,
-					$this->whatToDisplay,
-					intval($this->piVars['seminar']),
+				$registrationsList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_pi1_frontEndRegistrationsList', $this->conf,
+					$this->whatToDisplay, intval($this->piVars['seminar']),
 					$this->cObj
 				);
 				$result = $registrationsList->render();
@@ -284,19 +280,16 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				unset($registrationsList);
 				break;
 			case 'countdown':
-				$countdownClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_pi1_frontEndCountdown'
+				$countdown = tx_oelib_ObjectFactory::make(
+					'tx_seminars_pi1_frontEndCountdown', $this->conf, $this->cObj
 				);
-				$countdown = new $countdownClassName($this->conf, $this->cObj);
 				$result = $countdown->render();
 				$countdown->__destruct();
 				unset($countdown);
 				break;
 			case 'category_list':
-				$categoryListClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_pi1_frontEndCategoryList'
-				);
-				$categoryList = new $categoryListClassName(
+				$categoryList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_pi1_frontEndCategoryList',
 					$this->conf, $this->cObj
 				);
 				$result = $categoryList->render();
@@ -307,10 +300,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$result = $this->createCsvExportOfRegistrations();
 				break;
 			case 'event_headline':
-				$eventHeadlineClassName = t3lib_div::makeInstanceClassName(
-					'tx_seminars_pi1_frontEndEventHeadline'
-				);
-				$eventHeadline = new $eventHeadlineClassName(
+				$eventHeadline = tx_oelib_ObjectFactory::make(
+					'tx_seminars_pi1_frontEndEventHeadline',
 					$this->conf, $this->cObj
 				);
 				$result = $eventHeadline->render();
@@ -416,11 +407,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$seminarUid,
 			SEMINARS_TABLE_SEMINARS)
 		) {
-			/** Name of the seminar class in case someone subclasses it. */
-			$seminarClassname = t3lib_div::makeInstanceClassName(
-				'tx_seminars_seminar'
+			$this->seminar = tx_oelib_ObjectFactory::make(
+				'tx_seminars_seminar', $seminarUid
 			);
-			$this->seminar = new $seminarClassname($seminarUid);
 			$result = true;
 		} else {
 			$this->seminar = null;
@@ -460,10 +449,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				SEMINARS_TABLE_ATTENDANCES.' . uid=' . $registrationUid .
 					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 			);
-			/** Name of the registration class in case someone subclasses it. */
-			$registrationClassname = t3lib_div::makeInstanceClassName('tx_seminars_registration');
-			$this->registration = new $registrationClassname(
-				$this->cObj, $dbResult
+			$this->registration = tx_oelib_ObjectFactory::make(
+				'tx_seminars_registration', $this->cObj, $dbResult
 			);
 			if ($dbResult) {
 				$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
@@ -483,17 +470,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Creates the config getter and the registration manager.
 	 */
 	public function createHelperObjects() {
-		/** Name of the configGetter class in case someone subclasses it. */
-		$configGetterClassname = t3lib_div::makeInstanceClassName(
+		$this->configGetter = tx_oelib_ObjectFactory::make(
 			'tx_seminars_configgetter'
 		);
-		$this->configGetter = new $configGetterClassname();
-
-		/** Name of the registrationManager class in case someone subclasses it. */
-		$registrationManagerClassname = t3lib_div::makeInstanceClassName(
+		$this->registrationManager = tx_oelib_ObjectFactory::make(
 			'tx_seminars_registrationmanager'
 		);
-		$this->registrationManager = new $registrationManagerClassname();
 	}
 
 	/**
@@ -1887,10 +1869,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			}
 			$this->setMarker('image', $image);
 
-			$categoryListClassName = t3lib_div::makeInstanceClassName(
-				'tx_seminars_pi1_frontEndCategoryList'
+			$categoryList = tx_oelib_ObjectFactory::make(
+				'tx_seminars_pi1_frontEndCategoryList', $this->conf, $this->cObj
 			);
-			$categoryList = new $categoryListClassName($this->conf, $this->cObj);
 			$listOfCategories = $categoryList->createCategoryList(
 				$this->seminar->getCategories()
 			);
@@ -2026,7 +2007,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *                                       the list view
 	 */
 	private function createSeminarBagBuilder() {
-		$seminarBagBuilder = t3lib_div::makeInstance(
+		$seminarBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_seminarbagbuilder'
 		);
 
@@ -2049,7 +2030,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *                                            list view
 	 */
 	private function createRegistrationBagBuilder() {
-		$registrationBagBuilder = t3lib_div::makeInstance(
+		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_registrationBagBuilder'
 		);
 
@@ -2068,16 +2049,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *                                                  requirements list with
 	 */
 	private function createRequirementsList() {
-		$requirementsListClass = t3lib_div::makeInstanceClassName(
-			'tx_seminars_pi1_frontEndRequirementsList'
+		return tx_oelib_ObjectFactory::make(
+			'tx_seminars_pi1_frontEndRequirementsList', $this->conf, $this->cObj
 		);
-
-		$requirementsList = new $requirementsListClass(
-			$this->conf,
-			$this->cObj
-		);
-
-		return $requirementsList;
 	}
 
 	/**
@@ -2161,10 +2135,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return '';
 		}
 
-		$selectorWidgetClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_pi1_frontEndSelectorWidget'
+		$selectorWidget = tx_oelib_ObjectFactory::make(
+			'tx_seminars_pi1_frontEndSelectorWidget', $this->conf, $this->cObj
 		);
-		$selectorWidget = new $selectorWidgetClassName($this->conf, $this->cObj);
 
 		$result = $selectorWidget->render();
 
@@ -2715,11 +2688,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return string HTML code for the form
 	 */
 	protected function createRegistrationForm() {
-		$registrationEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_pi1_registrationEditor'
-		);
-		$registrationEditor = new $registrationEditorClassname(
-			$this->conf, $this->cObj
+		$registrationEditor = tx_oelib_ObjectFactory::make(
+			'tx_seminars_pi1_registrationEditor', $this->conf, $this->cObj
 		);
 		$registrationEditor->setSeminar($this->seminar);
 		$registrationEditor->setAction($this->piVars['action']);
@@ -2824,10 +2794,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return tx_seminars_pi1_eventEditor the initialized event editor
 	 */
 	private function createEventEditorInstance() {
-		$eventEditorClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_pi1_eventEditor'
+		$eventEditor = tx_oelib_ObjectFactory::make(
+			'tx_seminars_pi1_eventEditor', $this->conf, $this->cObj
 		);
-		$eventEditor = new $eventEditorClassname($this->conf, $this->cObj);
 		$eventEditor->setObjectUid(intval($this->piVars['seminar']));
 
 		return $eventEditor;

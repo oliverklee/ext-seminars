@@ -134,10 +134,9 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	private function processSingleTimeSlot($uid, array $fieldArray) {
 		// Initializes a timeslot object to have all
 		// functions available.
-		$timeslotClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_timeslot'
+		$timeslot = tx_oelib_ObjectFactory::make(
+			'tx_seminars_timeslot', $uid, false
 		);
-		$timeslot = new $timeslotClassname($uid, false);
 
 		if ($timeslot->isOk()) {
 			// Gets an associative array of fields that need
@@ -157,10 +156,9 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	private function processSingleEvent($uid, array $fieldArray) {
 		// Initializes a seminar object to have all functions
 		// available.
-		$seminarClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_seminar'
+		$seminar = tx_oelib_ObjectFactory::make(
+			'tx_seminars_seminar', $uid, false, true
 		);
-		$seminar = new $seminarClassname($uid, false, true);
 
 		if ($seminar->isOk()) {
 			// Gets an associative array of fields that need to be updated in

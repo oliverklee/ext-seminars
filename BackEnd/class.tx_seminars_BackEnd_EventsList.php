@@ -239,7 +239,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			),
 		);
 
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->setBackEndMode();
 		$pageData = $this->page->getPageData();
 		$builder->setSourcePages($pageData['uid']);
@@ -437,7 +437,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 
 		static $accessChecker = null;
 		if (!$accessChecker) {
-			$accessChecker = t3lib_div::makeInstance('tx_seminars_pi2');
+			$accessChecker = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
 			$accessChecker->init();
 		}
 

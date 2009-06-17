@@ -126,7 +126,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		);
 
 		$this->instantiateStaticInfo();
-		$this->seminarBag = t3lib_div::makeInstance('tx_seminars_seminarbag');
+		$this->seminarBag = tx_oelib_ObjectFactory::make('tx_seminars_seminarbag');
 	}
 
 
@@ -246,11 +246,8 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$whereClause = SEMINARS_TABLE_SITES . '.uid = uid_foreign AND ' .
 			'uid_local IN (' . $this->seminarBag->getUids() . ')';
 
-		$placeBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_placebag'
-		);
-		$this->placeBag = new $placeBagClassname(
-			$whereClause, SEMINARS_TABLE_SEMINARS_SITES_MM
+		$this->placeBag = tx_oelib_ObjectFactory::make(
+			'tx_seminars_placebag', $whereClause, SEMINARS_TABLE_SEMINARS_SITES_MM
 		);
 	}
 

@@ -78,8 +78,9 @@ class tx_seminars_placebag extends tx_seminars_bag {
 	 * @access protected
 	 */
 	protected function createItemFromDbResult() {
-		$placeClassname = t3lib_div::makeInstanceClassName('tx_seminars_place');
-		$this->currentItem = new $placeClassname(0, $this->dbResult);
+		$this->currentItem = tx_oelib_ObjectFactory::make(
+			'tx_seminars_place', 0, $this->dbResult
+		);
 		$this->valid();
 	}
 }

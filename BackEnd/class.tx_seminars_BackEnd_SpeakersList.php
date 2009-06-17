@@ -127,15 +127,9 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 		$orderBy = '';
 		$limit = '';
 
-		$speakerBagClassname = t3lib_div::makeInstanceClassName(
-			'tx_seminars_speakerbag'
-		);
-		$speakerBag = new $speakerBagClassname(
-			$queryWhere,
-			$additionalTables,
-			'',
-			$orderBy,
-			$limit
+		$speakerBag = tx_oelib_ObjectFactory::make(
+			'tx_seminars_speakerbag',
+			$queryWhere, $additionalTables, '', $orderBy, $limit
 		);
 
 		foreach ($speakerBag as $this->speaker) {

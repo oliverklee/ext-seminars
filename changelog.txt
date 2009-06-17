@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3080] Change: Use the object factory
 - [#3072] Feature: Add a field "owner" to all auxiliary records
 - [#2999| Change: In the "my entered events" list, also show hidden records
 - [#2279] Change: Decouple the FE editor access check from the form creation

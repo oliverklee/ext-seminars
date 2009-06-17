@@ -774,13 +774,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		$speakerBagClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_speakerbag'
-		);
-
-		return new $speakerBagClassName(
-			$mmTable.'.uid_local='.$this->getUid().' AND '
-				.SEMINARS_TABLE_SPEAKERS.'.uid='.$mmTable.'.uid_foreign',
+		return tx_oelib_ObjectFactory::make(
+			'tx_seminars_speakerbag',
+			$mmTable . '.uid_local = ' . $this->getUid() . ' AND ' .
+				SEMINARS_TABLE_SPEAKERS . '.uid = ' . $mmTable . '.uid_foreign',
 			$mmTable
 		);
 	}
@@ -2125,7 +2122,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			throw new Exception('There are no organizers related to this event.');
 		}
 
-		$builder = t3lib_div::makeInstance('tx_seminars_OrganizerBagBuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_OrganizerBagBuilder');
 		$builder->limitToEvent($this->getUid());
 
 		return $builder->build();
@@ -2289,10 +2286,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 		$result = array();
 
-		$organizerBagClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_organizerbag'
-		);
-		$organizerBag = new $organizerBagClassName(
+		$organizerBag = tx_oelib_ObjectFactory::make(
+			'tx_seminars_organizerbag',
 			SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM . '.uid_local=' .
 				$this->getUid() . ' AND ' .
 				SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM . '.uid_foreign=' .
@@ -2700,7 +2695,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function canSomebodyRegister() {
 		$registrationManager
-			= t3lib_div::makeInstance('tx_seminars_registrationmanager');
+			= tx_oelib_ObjectFactory::make('tx_seminars_registrationmanager');
 		$allowsRegistrationByDate
 			= $registrationManager->allowsRegistrationByDate($this);
 		$allowsRegistrationBySeats
@@ -2727,7 +2722,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function canSomebodyRegisterMessage() {
 		$message = '';
 		$registrationManager
-			= t3lib_div::makeInstance('tx_seminars_registrationmanager');
+			= tx_oelib_ObjectFactory::make('tx_seminars_registrationmanager');
 
 		if (!$this->needsRegistration()) {
 			$message = $this->translate('message_noRegistrationNecessary');
@@ -2909,11 +2904,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$this->getRecordPropertyInteger('topic'),
 				SEMINARS_TABLE_SEMINARS)
 			) {
-				/** Name of the seminar class in case someone subclasses it. */
-				$seminarClassname = t3lib_div::makeInstanceClassName(
-					'tx_seminars_seminar'
-				);
-				$result = new $seminarClassname(
+				$result = tx_oelib_ObjectFactory::make(
+					'tx_seminars_seminar',
 					$this->getRecordPropertyInteger('topic')
 				);
 			}
@@ -3707,12 +3699,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					.SEMINARS_TABLE_ATTENDANCES.'.seminar'
 				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.user='.$feUserUid;
 
-			$seminarBagClassname = t3lib_div::makeInstanceClassName(
-				'tx_seminars_seminarbag'
-			);
-			$seminarBag = new $seminarBagClassname(
-				$queryWhere,
-				$additionalTables
+			$seminarBag = tx_oelib_ObjectFactory::make(
+				'tx_seminars_seminarbag', $queryWhere, $additionalTables
 			);
 
 			// One blocking event is enough.
@@ -4048,10 +4036,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                                 empty
 	 */
 	private function createTimeSlotBag() {
-		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(
-			'tx_seminars_timeslotbag'
-		);
-		return new $timeSlotBagClassname(
+		return tx_oelib_ObjectFactory::make(
+			'tx_seminars_timeslotbag',
 			SEMINARS_TABLE_TIME_SLOTS . '.seminar = ' . $this->getUid() .
 				' AND ' . SEMINARS_TABLE_TIME_SLOTS . '.place > 0',
 			'',
@@ -4077,14 +4063,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function getTimeSlotsAsArrayWithMarkers() {
 		$result = array();
 
-		$timeSlotBagClassname = t3lib_div::makeInstanceClassname(
-			'tx_seminars_timeslotbag'
-		);
-		$timeSlotBag = new $timeSlotBagClassname(
-			SEMINARS_TABLE_TIME_SLOTS.'.seminar='.$this->getUid(),
+		$timeSlotBag = tx_oelib_ObjectFactory::make(
+			'tx_seminars_timeslotbag',
+			SEMINARS_TABLE_TIME_SLOTS . '.seminar = ' . $this->getUid(),
 			'',
 			'',
-			SEMINARS_TABLE_TIME_SLOTS.'.begin_date ASC'
+			SEMINARS_TABLE_TIME_SLOTS . '.begin_date ASC'
 		);
 
 		foreach ($timeSlotBag as $timeSlot) {
@@ -4136,7 +4120,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return array();
 		}
 
-		$builder = t3lib_div::makeInstance('tx_seminars_categorybagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_categorybagbuilder');
 		$builder->limitToEvents($this->getTopicUid());
 		$builder->sortByRelationOrder();
 		$bag = $builder->build();
@@ -4311,7 +4295,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                                event has no required events
 	 */
 	public function getRequirements() {
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->limitToRequiredEventTopics($this->getTopicUid());
 
 		return $builder->build();
@@ -4325,7 +4309,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                                this event has no depending events
 	 */
 	public function getDependencies() {
-		$builder = t3lib_div::makeInstance('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->limitToDependingEventTopics($this->getTopicUid());
 
 		return $builder->build();

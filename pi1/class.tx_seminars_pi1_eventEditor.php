@@ -121,7 +121,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$this->storeAttachedFiles();
 
-		$template = t3lib_div::makeInstance('tx_oelib_Template');
+		$template = tx_oelib_ObjectFactory::make('tx_oelib_Template');
 		$template->processTemplate(parent::render());
 
 		// The redirect to the FE editor with the current record loaded can
@@ -372,10 +372,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		if ($this->getObjectUid() > 0) {
-			$seminarClassname = t3lib_div::makeInstanceClassName(
-				'tx_seminars_seminar'
+			$seminar = tx_oelib_ObjectFactory::make(
+				'tx_seminars_seminar', $this->getObjectUid()
 			);
-			$seminar = new $seminarClassname($this->getObjectUid());
 			$isUserVip = $seminar->isUserVip(
 				$this->getFeUserUid(),
 				$this->getConfValueInteger('defaultEventVipsFeGroupID')

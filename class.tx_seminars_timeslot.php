@@ -46,13 +46,10 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * @return tx_seminars_speakerbag a speakerbag object
 	 */
 	private function getSpeakerBag() {
-		$speakerBagClassName = t3lib_div::makeInstanceClassName(
-			'tx_seminars_speakerbag'
-		);
-
-		return new $speakerBagClassName(
-			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM.'.uid_local='.$this->getUid()
-				.' AND uid=uid_foreign',
+		return tx_oelib_ObjectFactory::make(
+			'tx_seminars_speakerbag',
+			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM . '.uid_local = ' . $this->getUid()
+				.' AND uid = uid_foreign',
 			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM
 		);
 	}
