@@ -62,6 +62,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
+		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 		$this->seminarUid = $this->testingFramework->createRecord(
@@ -1787,6 +1788,57 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			htmlspecialchars('foo<bar'),
+			$this->fixture->main('', array())
+		);
+	}
+
+
+	//////////////////////////////////////////////////
+	// Tests concerning hidden events in single view
+	//////////////////////////////////////////////////
+
+	public function test_SingleView_ForHiddenRecordAndNoLoggedInUser_ReturnsWrongSeminarNumberMessage() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid, array('hidden' => 1)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			$this->fixture->translate('message_wrongSeminarNumber'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForHiddenRecordAndLoggedInUserNotOwnerOfHiddenRecord_ReturnsWrongSeminarNumberMessage() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid, array('hidden' => 1)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			$this->fixture->translate('message_wrongSeminarNumber'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_SingleView_ForHiddenRecordAndLoggedInUserOwnerOfHiddenRecord_ShowsHiddenEvent() {
+		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'hidden' => 1,
+				'title' => 'hidden event',
+				'owner_feuser' => $ownerUid,
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'hidden event',
 			$this->fixture->main('', array())
 		);
 	}

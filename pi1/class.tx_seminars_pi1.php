@@ -391,11 +391,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * method may be called.
 	 *
 	 * @param integer an event UID
+	 * @param booelan whether hidden records should be retrieved as well
 	 *
 	 * @return boolean true if the seminar UID is valid and the object has been
 	 *                 created, false otherwise
 	 */
-	public function createSeminar($seminarUid) {
+	public function createSeminar($seminarUid, $showHiddenRecords = false) {
 		$result = false;
 
 		if ($this->seminar) {
@@ -404,13 +405,16 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		if (tx_seminars_objectfromdb::recordExists(
-			$seminarUid,
-			SEMINARS_TABLE_SEMINARS)
+			$seminarUid, SEMINARS_TABLE_SEMINARS, $showHiddenRecords
+			)
 		) {
 			$this->seminar = tx_oelib_ObjectFactory::make(
-				'tx_seminars_seminar', $seminarUid
+				'tx_seminars_seminar', $seminarUid, false, $showHiddenRecords
 			);
-			$result = true;
+
+			$result = ($showHiddenRecords)
+				? $this->canShowCurrentEvent()
+				: true;
 		} else {
 			$this->seminar = null;
 		}
@@ -636,8 +640,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->getConfValueString('hideFields', 's_template_special'),
 			'FIELD_WRAPPER'
 		);
+		$feUserIsLoggedIn
+			= tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
 
-		if ($this->createSeminar($this->showUid)) {
+		if ($this->createSeminar($this->showUid, $feUserIsLoggedIn)) {
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
@@ -3114,6 +3120,27 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$eventEditor->__destruct();
 
 		return $result;
+	}
+
+	/**
+	 * Checks whether the currently logged-in user can display the current
+	 * event.
+	 *
+	 * When this function is called, $this->seminar must contain a seminar, and
+	 * a user must be logged in at the front end.
+	 *
+	 * @return boolean true if the logged-in user can view the current seminar,
+	 *                 false otherwise
+	 */
+	private function canShowCurrentEvent() {
+		if (!$this->seminar->isHidden()) {
+			return true;
+		}
+		if (!$this->seminar->hasOwner()) {
+			return false;
+		}
+
+		return ($this->seminar->getOwner()->getUid() == $this->getFeUserUid());
 	}
 }
 
