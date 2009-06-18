@@ -408,9 +408,10 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Checks whether a non-deleted and non-hidden record with a given UID exists
-	 * in the DB. If the parameter $allowHiddenRecords is set to true, hidden
-	 * records will be selected, too.
+	 * Checks whether a non-deleted record with a given UID exists in the DB.
+	 *
+	 * If the parameter $allowHiddenRecords is set to true, hidden records will
+	 * be selected, too.
 	 *
 	 * This method may be called statically.
 	 *
@@ -418,7 +419,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *               intvaled)
 	 * @param string string with the tablename where the UID should be searched
 	 *               for
-	 * @param boolean whether hidden records should be accepted
+	 * @param boolean whether hidden records should be found as well
 	 *
 	 * @return boolean true if a visible record with that UID exists, false
 	 *                 otherwise
