@@ -54,6 +54,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private $attachedFiles = array();
 
 	/**
+	 * @var string the prefix used for every subpart in the FE editor
+	 */
+	const SUBPART_PREFIX = 'fe_editor';
+
+	/**
 	 * The constructor.
 	 *
 	 * After the constructor has been called, hasAccessMessage() must be called
@@ -123,6 +128,10 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$template = tx_oelib_ObjectFactory::make('tx_oelib_Template');
 		$template->processTemplate(parent::render());
+
+		$template->hideSubpartsArray(
+			$this->getHiddenSubparts(), self::SUBPART_PREFIX
+		);
 
 		// The redirect to the FE editor with the current record loaded can
 		// only work with the record's UID, but new records do not have a UID
@@ -661,6 +670,127 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function getFileUploadErrorMessage() {
 		return $this->validationError;
+	}
+
+	/**
+	 * Retrieves the keys of the subparts which should be hidden in the event
+	 * editor.
+	 *
+	 * @return array the keys of the subparts which should be hidden in the
+	 *               event editor without the prefix FE_EDITOR_, will be empty
+	 *               if all subparts should be shown.
+	 */
+	private function getHiddenSubparts() {
+		$visibilityTree = tx_oelib_ObjectFactory::make(
+			'tx_oelib_Visibility_Tree', $this->createTemplateStructure()
+		);
+
+		$visibilityTree->makeNodesVisible($this->getFieldsToShow());
+		$subpartsToHide = $visibilityTree->getKeysOfHiddenSubparts();
+		$visibilityTree->__destruct();
+
+		return $subpartsToHide;
+	}
+
+	/**
+	 * Creates the template subpart structure.
+	 *
+	 * @return array the template's subpart structure for use with
+	 *               tx_oelib_Visibility_Tree
+	 */
+	private function createTemplateStructure() {
+		return array(
+			'subtitle' => false,
+			'title_right' => array(
+				'accreditation_number' => false,
+				'credit_points' => false,
+			),
+			'basic_information' => array(
+				'categories' => false,
+				'event_type' => false,
+				'cancelled' => false,
+			),
+			'text_blocks' => array(
+				'teaser' => false,
+				'description' => false,
+				'additional_information' => false,
+			),
+			'registration_information' => array(
+				'dates' => array(
+					'events_dates' => array(
+						'begin_date' => false,
+						'end_date' => false,
+					),
+					'registration_dates' => array(
+						'begin_date_registration' => false,
+						'deadline_early_bird' => false,
+						'deadline_registration' => false,
+					),
+				),
+				'attendance_information' => array(
+					'registration_and_queue' => array(
+						'needs_registration' => false,
+						'allows_multiple_registrations' => false,
+						'queue_size' => false,
+					),
+					'attendees_number' => array(
+						'attendees_min' => false,
+						'attendees_max' => false,
+					),
+				),
+				'target_groups' => false,
+				'prices' => array(
+					'regular_prices' => array(
+						'price_regular' => false,
+						'price_regular_early' => false,
+						'price_regular_board' => false,
+						'payment_methods' => false,
+					),
+					'special_prices' => array(
+						'price_special' => false,
+						'price_special_early' => false,
+						'price_special_board' => false,
+					),
+				),
+			),
+			'place_information' => array(
+				'place_and_room' => array(
+					'place' => false,
+					'room' => false,
+				),
+				'lodging_and_food' => array(
+					'lodgings' => false,
+					'foods' => false,
+				),
+			),
+			'speakers' => false,
+			'leaders' => false,
+			'partner_tutor' => array(
+				'partners' => false,
+				'tutors' => false,
+			),
+			'checkbox_options' => array(
+				'checkboxes' => false,
+				'uses_terms_2' => false,
+			),
+			'attached_file_box' => false,
+			'notes' => false,
+		);
+	}
+
+	/**
+	 * Returns the keys of the fields which should be shown in the FE editor.
+	 *
+	 * @return array the keys of the fields which should be shown, will be empty
+	 *               if all fields should be hidden
+	 */
+	private function getFieldsToShow() {
+		return t3lib_div::trimExplode(
+			',',
+			$this->getConfValueString(
+				'displayFrontEndEditorFields', 's_fe_editing'),
+			true
+		);
 	}
 }
 

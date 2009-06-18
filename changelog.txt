@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2692] Feature: Make it configurable via flexforms which FE editor fields should be shown
 - [#3001] Feature: Limit the event type filter in the search widget to the event types selected in the flexforms
 - [#3000] Change: In the single view, also show hidden records if the logged-in user is the owner
 - [#3080] Change: Use the object factory
