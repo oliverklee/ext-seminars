@@ -64,8 +64,8 @@
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
-			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
-			<label index="tx_seminars_seminars.foods">Available food options:</label>
+			<label index="tx_seminars_seminars.lodgings">Available lodgings:</label>
+			<label index="tx_seminars_seminars.foods">Available foods:</label>
 			<label index="tx_seminars_seminars.divLabelAttendees">Attendees</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
@@ -258,8 +258,8 @@
 			<label index="tx_seminars_seminars.place">Ort:</label>
 			<label index="tx_seminars_seminars.room">Raum:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Wohnen/Essen</label>
-			<label index="tx_seminars_seminars.lodgings">Verfügbare Unterbringungsmöglichkeiten:</label>
-			<label index="tx_seminars_seminars.foods">Verfügbare Verpflegungsmöglichkeiten:</label>
+			<label index="tx_seminars_seminars.lodgings">Verfügbare Unterbringungen:</label>
+			<label index="tx_seminars_seminars.foods">Verfügbare Verpflegungen:</label>
 			<label index="tx_seminars_seminars.divLabelAttendees">Teilnehmer</label>
 			<label index="tx_seminars_seminars.attendees_min">Minimale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen:</label>
@@ -1209,8 +1209,8 @@
 			<label index="tx_seminars_seminars.place" type="integer">24143558</label>
 			<label index="tx_seminars_seminars.room" type="integer">121727316</label>
 			<label index="tx_seminars_seminars.divLabelLodging" type="integer">214610700</label>
-			<label index="tx_seminars_seminars.lodgings" type="integer">157779404</label>
-			<label index="tx_seminars_seminars.foods" type="integer">264633539</label>
+			<label index="tx_seminars_seminars.lodgings" type="integer">152953929</label>
+			<label index="tx_seminars_seminars.foods" type="integer">127947447</label>
 			<label index="tx_seminars_seminars.divLabelAttendees" type="integer">12580046</label>
 			<label index="tx_seminars_seminars.attendees_min" type="integer">190118002</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">111778233</label>
@@ -1348,6 +1348,7 @@
 			<label index="fe_groups.tx_seminars_publish_events.I.1" type="integer">154538316</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.2" type="integer">64830383</label>
 			<label index="fe_groups.tab_event_management" type="integer">136062963</label>
+			<label index="owner_feuser" type="integer">36410852</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2131,8 +2132,8 @@
 			<label index="tx_seminars_seminars.place">Place:</label>
 			<label index="tx_seminars_seminars.room">Room:</label>
 			<label index="tx_seminars_seminars.divLabelLodging">Lodging/Food</label>
-			<label index="tx_seminars_seminars.lodgings">Available lodging options:</label>
-			<label index="tx_seminars_seminars.foods">Available food options:</label>
+			<label index="tx_seminars_seminars.lodgings">Available lodgings:</label>
+			<label index="tx_seminars_seminars.foods">Available foods:</label>
 			<label index="tx_seminars_seminars.speakers">Speakers:</label>
 			<label index="tx_seminars_seminars.partners">Partners:</label>
 			<label index="tx_seminars_seminars.tutors">Tutors:</label>
@@ -2302,6 +2303,7 @@
 			<label index="fe_groups.tx_seminars_publish_events.I.1">only newly created events are hidden</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.2">newly created and edited events are hidden</label>
 			<label index="fe_groups.tab_event_management">Event management</label>
+			<label index="owner_feuser">Front-end user who has created this record:</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

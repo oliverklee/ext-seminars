@@ -26,7 +26,7 @@
 .tx-seminars-pi1-event-editor .columnlight .columnleft,
 .tx-seminars-pi1-event-editor .columnlight .columnright {
 	display: table;
-	width: 48%;
+	width: 47%;
 	float: left;
 	padding: 10px 0 0;
 }
@@ -46,9 +46,15 @@
 .tx-seminars-pi1-event-editor .columndark .columnleft,
 .tx-seminars-pi1-event-editor .columndark .columnright {
 	display: table;
-	width: 48%;
+	width: 47%;
 	float: left;
 	padding: 10px 0 0;
+}
+
+.tx-seminars-pi1-event-editor .shortInput dt,
+.tx-seminars-pi1-event-editor .shortInput dd,
+.tx-seminars-pi1-event-editor .shortInput input {
+	width: 50%;
 }
 
 .tx-seminars-pi1-event-editor .columndark .columnleft {
@@ -133,14 +139,6 @@
 }
 
 /*DIVIDER*/
-.tx-seminars-pi1-event-editor .vertdivider {
-	width: 0%;
-	float: left;
-	height: 100%;
-	display: table;
-	border: 5px solid #fff;
-}
-
 .tx-seminars-pi1-event-editor .divider {
 	display: block;
 	background: #fff;
@@ -176,6 +174,11 @@
 
 .tx-seminars-pi1-event-editor dd input {
 	width: 90%;
+}
+
+.tx-seminars-pi1-event-editor dd.checkboxes input,
+.tx-seminars-pi1-event-editor span.checkbox input {
+	width: 10%;
 }
 
 /*SUBMIT BUTTOM*/
