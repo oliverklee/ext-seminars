@@ -1292,5 +1292,59 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			$this->fixture->render()
 		);
 	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning the event type limitation
+	///////////////////////////////////////////////
+
+	public function test_Render_ForEventTypeLimitedAndEventTypeDisplayed_ShowsTheLimitedEventType() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo_type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('event_type' => $eventTypeUid)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToEventTypes', $eventTypeUid
+		);
+
+		$this->assertContains(
+			'foo_type',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEventTypeLimitedAndEventTypeDisplayed_hidesEventTypeNotLimited() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'event_type'
+		);
+
+		$eventTypeUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo_type')
+		);
+		$eventTypeUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_EVENT_TYPES, array('title' => 'bar_type')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('event_type' => $eventTypeUid2)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToEventTypes', $eventTypeUid
+		);
+
+		$this->assertNotContains(
+			'bar_type',
+			$this->fixture->render()
+		);
+	}
 }
 ?>

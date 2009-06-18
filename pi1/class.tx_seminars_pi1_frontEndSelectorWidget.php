@@ -126,7 +126,18 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		);
 
 		$this->instantiateStaticInfo();
-		$this->seminarBag = tx_oelib_ObjectFactory::make('tx_seminars_seminarbag');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
+		$builder->limitToEventTypes(
+			t3lib_div::trimExplode(
+				',',
+				$this->getConfValueString(
+					'limitListViewToEventTypes', 's_listView'
+				),
+				true
+			)
+		);
+
+		$this->seminarBag = $builder->build();
 	}
 
 
