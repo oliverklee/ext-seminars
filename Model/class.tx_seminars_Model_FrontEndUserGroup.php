@@ -72,6 +72,16 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	public function getAuxiliaryRecordsPid() {
 		return $this->getAsInteger('tx_seminars_auxiliary_records_pid');
 	}
+
+	/**
+	 * Returns whether this user group has a PID for auxiliary records set.
+	 *
+	 * @return boolean true if this user group has PID for auxiliary records set,
+	 *                 false otherwise
+	 */
+	public function hasAuxiliaryRecordsPid() {
+		return $this->hasInteger('tx_seminars_auxiliary_records_pid');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUserGroup.php']) {

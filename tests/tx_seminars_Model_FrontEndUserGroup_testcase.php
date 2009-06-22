@@ -117,5 +117,32 @@ class tx_seminars_Model_FrontEndUserGroup_testcase extends tx_phpunit_testcase {
 			$this->fixture->getAuxiliaryRecordsPid()
 		);
 	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning hasAuxiliaryRecordsPid().
+	///////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasAuxiliaryRecordsPidWithoutPidReturnsFalse() {
+		$this->fixture->setData(array());
+
+		$this->assertFalse(
+			$this->fixture->hasAuxiliaryRecordsPid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAuxiliaryRecordsPidWithPidReturnsTrue() {
+		$this->fixture->setData(array('tx_seminars_auxiliary_records_pid' => 42));
+
+		$this->assertTrue(
+			$this->fixture->hasAuxiliaryRecordsPid()
+		);
+	}
 }
 ?>

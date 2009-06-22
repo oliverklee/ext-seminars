@@ -65,6 +65,32 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		return $result;
 	}
+
+	/**
+	 * Returns the PID where to store the auxiliary records created by this
+	 * front-end user.
+	 *
+	 * The PID is retrieved from the first user group which has a PID set.
+	 *
+	 * @return integer the PID where to store auxiliary records created by this
+	 *                 front-end user, will be 0 if no PID is set
+	 */
+	public function getAuxiliaryRecordsPid() {
+		if ($this->getUserGroups()->isEmpty()) {
+			return 0;
+		}
+
+		$auxiliaryRecordsPid = 0;
+
+		foreach ($this->getUserGroups() as $userGroup) {
+			if ($userGroup->hasAuxiliaryRecordsPid()) {
+				$auxiliaryRecordsPid = $userGroup->getAuxiliaryRecordsPid();
+				break;
+			}
+		}
+
+		return $auxiliaryRecordsPid;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUser.php']) {
