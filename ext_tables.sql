@@ -20,7 +20,8 @@ CREATE TABLE tx_partner_contact_info (
 # Table structure for table 'fe_groups'
 #
 CREATE TABLE fe_groups (
-	tx_seminars_publish_events tinyint(1) DEFAULT '0' NOT NULL
+	tx_seminars_publish_events tinyint(1) DEFAULT '0' NOT NULL,
+	tx_seminars_auxiliary_records_pid int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 

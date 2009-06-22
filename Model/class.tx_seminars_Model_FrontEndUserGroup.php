@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGroup {
 	/**
@@ -59,6 +60,17 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	 */
 	public function getPublishSetting() {
 		return $this->getAsInteger('tx_seminars_publish_events');
+	}
+
+	/**
+	 * Returns the PID where to store the auxiliary records created by this
+	 * front-end user group.
+	 *
+	 * @return integer the PID where to store the auxiliary records created by
+	 *                 this front-end user group, will be 0 if no PID is set
+	 */
+	public function getAuxiliaryRecordsPid() {
+		return $this->getAsInteger('tx_seminars_auxiliary_records_pid');
 	}
 }
 

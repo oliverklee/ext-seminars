@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_Model_FrontEndUserGroup_testcase extends tx_phpunit_testcase {
 	/**
@@ -85,6 +86,35 @@ class tx_seminars_Model_FrontEndUserGroup_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
 			$this->fixture->getPublishSetting()
+		);
+	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning getAuxiliaryRecordsPid().
+	///////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordsPidWithoutPidReturnsZero() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getAuxiliaryRecordsPid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordsPidWithPidReturnsPid() {
+		$this->fixture->setData(array('tx_seminars_auxiliary_records_pid' => 42));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getAuxiliaryRecordsPid()
 		);
 	}
 }

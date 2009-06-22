@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3073] Feature: Add a field (single page selection) to FE user groups about where newly created aux records should be stored
 - [#3031] Fix: CSS problems in FE editor in IE
 - [#2692] Feature: Make it configurable via flexforms which FE editor fields should be shown
 - [#3001] Feature: Limit the event type filter in the search widget to the event types selected in the flexforms
