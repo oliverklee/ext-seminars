@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#557] Change: Use Tabs for the BE edit form of registration records
 - [#1967] Change: In the registration TCEforms, put the billing address data in a tab "billing address"
 - [#3080] Change: Use the object factory
 - [#3000] Fix: Intval showUid

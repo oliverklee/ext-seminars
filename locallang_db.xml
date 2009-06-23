@@ -109,6 +109,9 @@
 			<label index="tx_seminars_speakers.cancelation_period">Cancelation period (in days):</label>
 			<label index="tx_seminars_attendances">Attendances</label>
 			<label index="tx_seminars_attendances.divLabelOverview">Overview</label>
+			<label index="tx_seminars_attendances.divLabelBookingInformation">Booking Information</label>
+			<label index="tx_seminars_attendances.divLabelRegistrationComments">Registration Comments</label>
+			<label index="tx_seminars_attendances.divLabelPaymentInformation">Payment Information</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress">Billing Address</label>
 			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
@@ -291,6 +294,9 @@
 			<label index="tx_seminars_speakers.cancelation_period">Absagefrist (in Tagen):</label>
 			<label index="tx_seminars_attendances">Anmeldungen</label>
 			<label index="tx_seminars_attendances.divLabelOverview">Übersicht</label>
+			<label index="tx_seminars_attendances.divLabelBookingInformation">Buchungsinformationen</label>
+			<label index="tx_seminars_attendances.divLabelRegistrationComments">Anmeldekommentare</label>
+			<label index="tx_seminars_attendances.divLabelPaymentInformation">Zahlungsinformationen</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress">Rechnungsadresse</label>
 			<label index="tx_seminars_attendances.uid">Ticket-ID:</label>
 			<label index="tx_seminars_attendances.title">Titel:</label>
@@ -1226,6 +1232,9 @@
 			<label index="tx_seminars_speakers.email" type="integer">126760538</label>
 			<label index="tx_seminars_attendances" type="integer">201645653</label>
 			<label index="tx_seminars_attendances.divLabelOverview" type="integer">62421031</label>
+			<label index="tx_seminars_attendances.divLabelBookingInformation" type="integer">4798000</label>
+			<label index="tx_seminars_attendances.divLabelRegistrationComments" type="integer">22127476</label>
+			<label index="tx_seminars_attendances.divLabelPaymentInformation" type="integer">97718815</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress" type="integer">42621189</label>
 			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
 			<label index="tx_seminars_attendances.title" type="integer">85903807</label>
@@ -2159,6 +2168,9 @@
 			<label index="tx_seminars_speakers.email">E-mail address:</label>
 			<label index="tx_seminars_attendances">Attendances</label>
 			<label index="tx_seminars_attendances.divLabelOverview">Overview</label>
+			<label index="tx_seminars_attendances.divLabelBookingInformation">Booking Information</label>
+			<label index="tx_seminars_attendances.divLabelRegistrationComments">Registration Comments</label>
+			<label index="tx_seminars_attendances.divLabelPaymentInformation">Payment Information</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress">Billing Address</label>
 			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
