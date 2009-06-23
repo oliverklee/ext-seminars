@@ -1692,12 +1692,14 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, uid, user;;;;1-1-1, seminar, registration_queue, price, seats, total_price, currency, tax, including_tax, attendees_names, kids, paid, datepaid, method_of_payment;;2, name;;3, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes'),
+		'0' => array('showitem' => '' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelOverview, hidden;;1;;1-1-1, uid, user;;;;1-1-1, seminar, registration_queue, price, seats, total_price, currency, tax, including_tax, attendees_names, kids, paid, datepaid, method_of_payment;;2, been_there, checkboxes, interests, expectations, background_knowledge, lodgings, accommodation, foods, food, known_from, notes, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelBillingAddress, name, gender, address, zip, city, country, telephone, email'
+		),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
 		'2' => array('showitem' => 'account_number, bank_code, bank_name, account_owner'),
-		'3' => array('showitem' => 'gender, address, zip, city, country, telephone, email'),
 	),
 );
 

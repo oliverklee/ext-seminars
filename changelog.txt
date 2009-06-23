@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#1967] Change: In the registration TCEforms, put the billing address data in a tab "billing address"
 - [#3080] Change: Use the object factory
 - [#3000] Fix: Intval showUid
 - [#3050] Change: In the flexforms tab "list view", use the GRSP settings when selecting records
