@@ -779,7 +779,6 @@ CREATE TABLE tx_seminars_prices (
 	endtime int(11) unsigned DEFAULT '0' NOT NULL,
 	fe_group int(11) DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	seminar int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	value decimal(7,2) DEFAULT '0.00' NOT NULL,

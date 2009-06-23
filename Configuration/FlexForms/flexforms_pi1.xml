@@ -354,7 +354,7 @@
 								<type>select</type>
 								<foreign_table>tx_seminars_event_types</foreign_table>
 								<foreign_table_where>
-									AND (tx_seminars_event_types.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
+									AND (tx_seminars_event_types.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0)
 									ORDER BY title asc
 								</foreign_table_where>
 								<maxitems>100</maxitems>
@@ -369,7 +369,7 @@
 								<type>select</type>
 								<foreign_table>tx_seminars_categories</foreign_table>
 								<foreign_table_where>
-									AND (tx_seminars_categories.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
+									AND (tx_seminars_categories.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0)
 									ORDER BY title asc
 								</foreign_table_where>
 								<maxitems>100</maxitems>
@@ -384,7 +384,7 @@
 								<type>select</type>
 								<foreign_table>tx_seminars_sites</foreign_table>
 								<foreign_table_where>
-									AND (tx_seminars_sites.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
+									AND (tx_seminars_sites.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0)
 									ORDER BY title asc
 								</foreign_table_where>
 								<maxitems>100</maxitems>
@@ -1068,6 +1068,94 @@
 							</config>
 						</TCEforms>
 					</displayFrontEndEditorFields>
+					<allowFrontEndEditingOfSpeakers>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfSpeakers</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfSpeakers>
+					<allowFrontEndEditingOfPlaces>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfPlaces</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfPlaces>
+					<allowFrontEndEditingOfOrganizers>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfOrganizers</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfOrganizers>
+					<allowFrontEndEditingOfPaymentMethods>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfPaymentMethods>
+					<allowFrontEndEditingOfEventTypes>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfEventTypes</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfEventTypes>
+					<allowFrontEndEditingOfCheckboxes>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfCheckboxes</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfCheckboxes>
+					<allowFrontEndEditingOfLodgings>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfLodgings</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfLodgings>
+					<allowFrontEndEditingOfFoods>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfFoods</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfFoods>
+					<allowFrontEndEditingOfTargetGroups>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfTargetGroups</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfTargetGroups>
+					<allowFrontEndEditingOfCategories>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfCategories</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfCategories>
+					<allowFrontEndEditingOfSkills>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfSkills</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</allowFrontEndEditingOfSkills>
 				</el>
 			</ROOT>
 		</s_fe_editing>

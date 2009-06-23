@@ -450,6 +450,39 @@ plugin.tx_seminars_pi1 {
 	# the maximum height of the image of a seminar in the single view
 	seminarImageSingleViewHeight = 160
 
+	# whether to allow front-end editing of speakers
+	allowFrontEndEditingOfSpeakers = 0
+
+	# whether to allow front-end editing of places
+	allowFrontEndEditingOfPlaces = 0
+
+	# whether to allow front-end editing of organizers
+	allowFrontEndEditingOfOrganizers = 0
+
+	# whether to allow front-end editing of payment methods
+	allowFrontEndEditingOfPaymentMethods = 0
+
+	# whether to allow front-end editing of event types
+	allowFrontEndEditingOfEventTypes = 0
+
+	# whether to allow front-end editing of checkboxes
+	allowFrontEndEditingOfCheckboxes = 0
+
+	# whether to allow front-end editing of lodgings
+	allowFrontEndEditingOfLodgings = 0
+
+	# whether to allow front-end editing of foods
+	allowFrontEndEditingOfFoods = 0
+
+	# whether to allow front-end editing of target groups
+	allowFrontEndEditingOfTargetGroups = 0
+
+	# whether to allow front-end editing of categories
+	allowFrontEndEditingOfCategories = 0
+
+	# whether to allow front-end editing of skills
+	allowFrontEndEditingOfSkills = 0
+
 	form {
 		eventEditor {
 			meta {

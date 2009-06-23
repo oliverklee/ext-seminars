@@ -2475,18 +2475,6 @@ $TCA['tx_seminars_prices'] = array(
 				'foreign_table' => 'fe_groups',
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
 		'0' => array('showitem' => 'title;;;;2-2-2,value,currency,tax,including_tax,starttime,endtime,fe_group'),

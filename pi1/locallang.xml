@@ -99,6 +99,17 @@
 			<label index="seminars.pi_flexform.iconOnly">Icons only</label>
 			<label index="seminars.pi_flexform.textOnly">Text only</label>
 			<label index="seminars.pi_flexform.fromTsSetup">(from TS setup)</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers">Allow editing speakers:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces">Allow editing places:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfOrganizers">Allow editing organizers:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods">Allow editing payment methods:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfEventTypes">Allow editing event types:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes">Allow editing checkboxes:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfLodgings">Allow editing lodgings:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfFoods">Allow editing foods:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups">Allow editing target groups:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCategories">Allow editing categories:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSkills">Allow editing skills:</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -629,6 +640,17 @@
 			<label index="seminars.pi_flexform.iconOnly">Nur Icons</label>
 			<label index="seminars.pi_flexform.textOnly">Nur Titel</label>
 			<label index="seminars.pi_flexform.fromTsSetup">(aus dem TS-Setup)</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers">Erlaube das Bearbeiten von ReferentInnen:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces">Erlaube das Bearbeiten von Veranstaltungsorten:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfOrganizers">Erlaube das Bearbeiten von Veranstaltern:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods">Erlaube das Bearbeiten von Zahlungsarten:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfEventTypes">Erlaube das Bearbeiten von Veranstaltungsarten:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes">Erlaube das Bearbeiten von Checkboxen:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfLodgings">Erlaube das Bearbeiten von Unterbringungen:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfFoods">Erlaube das Bearbeiten von Verpflegungen:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups">Erlaube das Bearbeiten von Zielgruppen:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCategories">Erlaube das Bearbeiten von Kategorien:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSkills">Erlaube das Bearbeiten von Fähigkeiten:</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorherige</label>
 			<label index="pi_list_browseresults_page">Seite</label>
 			<label index="pi_list_browseresults_next">Nächste &gt;</label>
@@ -2070,6 +2092,17 @@
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID" type="integer">107570988</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload" type="integer">98984260</label>
 			<label index="seminars.pi_flexform.displayFrontEndEditorFields" type="integer">170529509</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers" type="integer">179427878</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces" type="integer">111764351</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfOrganizers" type="integer">210250692</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" type="integer">217213270</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfEventTypes" type="integer">23956569</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes" type="integer">256414525</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfLodgings" type="integer">101317380</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfFoods" type="integer">128523747</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" type="integer">164080150</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCategories" type="integer">108322150</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSkills" type="integer">39856422</label>
 			<label index="pi_list_browseresults_prev" type="integer">20121992</label>
 			<label index="pi_list_browseresults_page" type="integer">26464201</label>
 			<label index="pi_list_browseresults_next" type="integer">232350798</label>
@@ -3288,6 +3321,17 @@
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
 			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Fields to display in the front-end editor</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers">Allow editing speakers:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces">Allow editing places:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfOrganizers">Allow editing organizers:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods">Allow editing payment methods:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfEventTypes">Allow editing event types:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes">Allow editing checkboxes:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfLodgings">Allow editing lodgings:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfFoods">Allow editing foods:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups">Allow editing target groups:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfCategories">Allow editing categories:</label>
+			<label index="seminars.pi_flexform.allowFrontEndEditingOfSkills">Allow editing skills:</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>

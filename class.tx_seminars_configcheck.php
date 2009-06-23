@@ -306,6 +306,18 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkEventSuccessfullySavedPID();
 		$this->checkAllowedExtensionsForUpload();
 		$this->checkDisplayFrontEndEditorFields();
+
+		$this->checkAllowFrontEndEditingOfCategories();
+		$this->checkAllowFrontEndEditingOfCheckboxes();
+		$this->checkAllowFrontEndEditingOfEventTypes();
+		$this->checkAllowFrontEndEditingOfFoods();
+		$this->checkAllowFrontEndEditingOfLodgings();
+		$this->checkAllowFrontEndEditingOfOrganizers();
+		$this->checkAllowFrontEndEditingOfPaymentMethods();
+		$this->checkAllowFrontEndEditingOfPlaces();
+		$this->checkAllowFrontEndEditingOfSkills();
+		$this->checkAllowFrontEndEditingOfSpeakers();
+		$this->checkAllowFrontEndEditingOfTargetGroups();
 	}
 
 	/**
@@ -2229,6 +2241,171 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'attached_file_box',
 				'notes',
 			)
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfSpeakers.
+	 */
+	private function checkAllowFrontEndEditingOfSpeakers() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfSpeakers',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of speakers is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'speakers might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfPlaces.
+	 */
+	private function checkAllowFrontEndEditingOfPlaces() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfPlaces',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of places is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'places might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfOrganizers.
+	 */
+	private function checkAllowFrontEndEditingOfOrganizers() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfOrganizers',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of organizers is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'organizers might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfPaymentMethods.
+	 */
+	private function checkAllowFrontEndEditingOfPaymentMethods() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfPaymentMethods',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of payment methods' .
+				' is possible. If this value is incorrect, front-end editing of ' .
+				'payment methods might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfEventTypes.
+	 */
+	private function checkAllowFrontEndEditingOfEventTypes() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfEventTypes',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of event types is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'event types might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfCheckboxes.
+	 */
+	private function checkAllowFrontEndEditingOfCheckboxes() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfCheckboxes',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of checkboxes is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'checkboxes might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfLodgings.
+	 */
+	private function checkAllowFrontEndEditingOfLodgings() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfLodgings',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of lodgings is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'lodgings might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfFoods.
+	 */
+	private function checkAllowFrontEndEditingOfFoods() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfFoods',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of foods ' .
+				'is possible. If this value is incorrect, front-end editing of ' .
+				'foods might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfTargetGroups.
+	 */
+	private function checkAllowFrontEndEditingOfTargetGroups() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfTargetGroups',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of target groups ' .
+				'is possible. If this value is incorrect, front-end editing of ' .
+				'target groups might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfCategories.
+	 */
+	private function checkAllowFrontEndEditingOfCategories() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfCategories',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of categories is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'categories might be possible even when this is not desired ' .
+				'(or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting for allowFrontEndEditingOfSkills.
+	 */
+	private function checkAllowFrontEndEditingOfSkills() {
+		$this->checkIfBoolean(
+			'allowFrontEndEditingOfSkills',
+			true,
+			's_fe_editing',
+			'This value specifies whether front-end editing of skills is ' .
+				'possible. If this value is incorrect, front-end editing of ' .
+				'skills might be possible even when this is not desired ' .
+				'(or vice versa).'
 		);
 	}
 }
