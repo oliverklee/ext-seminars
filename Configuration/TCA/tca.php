@@ -1287,16 +1287,6 @@ $TCA['tx_seminars_attendances'] = array(
 				'type' => 'check',
 			),
 		),
-		'referrer' => array(
-			'exlude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.referrer',
-			'config' => array(
-				'type' => 'input',
-				'size' => '20',
-				'max' => '255',
-				'eval' => 'trim',
-			),
-		),
 		'hidden' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -1693,7 +1683,7 @@ $TCA['tx_seminars_attendances'] = array(
 	),
 	'types' => array(
 		'0' => array('showitem' => '' .
-				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user;;;;1-1-1, been_there, referrer, hidden;;;;1-1-1, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user;;;;1-1-1, been_there, hidden;;;;1-1-1, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelBookingInformation, registration_queue, seats, price, total_price, attendees_names, kids, foods, food, lodgings, accommodation, checkboxes, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelPaymentInformation, paid, datepaid, currency, including_tax, tax, method_of_payment, account_number, account_owner, bank_code, bank_name, ' .

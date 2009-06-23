@@ -214,7 +214,6 @@
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
 			<label index="label_foods">Food:</label>
-			<label index="label_referrer">Referrer:</label>
 			<label index="label_register_entered_data_formal">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
@@ -734,7 +733,6 @@
 			<label index="label_email">E-Mail:</label>
 			<label index="label_lodgings">Art der Unterbringung:</label>
 			<label index="label_foods">Art der Verpflegung:</label>
-			<label index="label_referrer">Vermittler:</label>
 			<label index="label_register_entered_data_formal">Ihre Anmeldungsdaten</label>
 			<label index="label_register_entered_data_informal">Deine Anmeldungsdaten</label>
 			<label index="label_register_all_terms">Anmeldebedingungen</label>
@@ -2147,7 +2145,6 @@
 			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">100712032</label>
 			<label index="label_foods" type="integer">253668178</label>
-			<label index="label_referrer" type="integer">63889198</label>
 			<label index="label_register_entered_data_formal" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
 			<label index="label_register_all_terms" type="integer">246270935</label>
@@ -3358,7 +3355,6 @@
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
 			<label index="label_foods">Food:</label>
-			<label index="label_referrer">Referrer:</label>
 			<label index="label_register_entered_data_formal">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>

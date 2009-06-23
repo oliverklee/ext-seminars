@@ -27,7 +27,6 @@
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
-			<label index="label_referrer">Referrer</label>
 			<label index="label_price">Price</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
@@ -302,7 +301,6 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="label_lodgings">Gewählte Unterbringungsmöglichkeiten</label>
 			<label index="label_foods">Gewählte Verpflegungsmöglichkeiten</label>
 			<label index="label_kids">Anzahl Kinder</label>
-			<label index="label_referrer">Vermittler</label>
 			<label index="label_price">Preis</label>
 			<label index="label_price_general">Preis</label>
 			<label index="label_price_regular">Standardpreis</label>
@@ -1095,7 +1093,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_lodgings" type="integer">119452104</label>
 			<label index="label_foods" type="integer">48275051</label>
 			<label index="label_kids" type="integer">18594081</label>
-			<label index="label_referrer" type="integer">191825381</label>
 			<label index="label_price_general" type="integer">56627526</label>
 			<label index="label_price_regular" type="integer">81309183</label>
 			<label index="label_price_earlybird_regular" type="integer">236870027</label>
@@ -1659,7 +1656,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
-			<label index="label_referrer">Referrer</label>
 			<label index="label_price_general">Price</label>
 			<label index="label_price_regular">Regular price</label>
 			<label index="label_price_earlybird_regular">Early-bird price</label>

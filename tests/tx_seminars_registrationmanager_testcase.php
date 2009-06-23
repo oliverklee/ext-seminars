@@ -1829,23 +1829,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	// Tests regarding the notification of organizers
 	///////////////////////////////////////////////////
 
-	public function test_NotifyOrganizers_WithSetReferrerContainsReferrer() {
-		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue(
-			'showAttendanceFieldsInNotificationMail', 'referrer'
-		);
-		$registration = $this->createRegistration();
-		$registration->setReferrer('test referrer');
-
-		$this->fixture->notifyOrganizers($registration);
-		$registration->__destruct();
-
-		$this->assertContains(
-			'Referrer: test referrer',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-		);
-	}
-
 	public function test_NotifyOrganizers_IncludesHelloIfNotHidden() {
 		$registration = $this->createRegistration();
 		$this->fixture->setConfigurationValue('sendNotification', true);
@@ -1864,10 +1847,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_NotifyOrganizers_CanHideHelloByConfiguration() {
 		$registration = $this->createRegistration();
-		// Sets the referrer so there is at least one element in the e-mail.
-		$registration->setReferrer('test referrer');
+		// Sets the seats so there is at least one element in the e-mail.
+		$registration->setSeats(15);
 		$this->fixture->setConfigurationValue(
-			'showAttendanceFieldsInNotificationMail', 'referrer'
+			'showAttendanceFieldsInNotificationMail', 'seats'
 		);
 
 		$this->fixture->setConfigurationValue('sendNotification', true);

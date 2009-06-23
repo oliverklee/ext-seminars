@@ -149,7 +149,6 @@
 			<label index="tx_seminars_attendances.seats">Number of seats:</label>
 			<label index="tx_seminars_attendances.attendees_names">Additional attendees:</label>
 			<label index="tx_seminars_attendances.kids">Number of kids:</label>
-			<label index="tx_seminars_attendances.referrer">Referrer:</label>
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Address:</label>
@@ -334,7 +333,6 @@
 			<label index="tx_seminars_attendances.seats">Anzahl Plätze:</label>
 			<label index="tx_seminars_attendances.attendees_names">Zusätzlich angemeldete Personen:</label>
 			<label index="tx_seminars_attendances.kids">Anzahl Kinder:</label>
-			<label index="tx_seminars_attendances.referrer">Vermittler:</label>
 			<label index="tx_seminars_sites">Veranstaltungsorte</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Adresse:</label>
@@ -1272,7 +1270,6 @@
 			<label index="tx_seminars_attendances.seats" type="integer">134941724</label>
 			<label index="tx_seminars_attendances.attendees_names" type="integer">198880077</label>
 			<label index="tx_seminars_attendances.kids" type="integer">7953511</label>
-			<label index="tx_seminars_attendances.referrer" type="integer">63889198</label>
 			<label index="tx_seminars_sites" type="integer">79939835</label>
 			<label index="tx_seminars_sites.title" type="integer">81871034</label>
 			<label index="tx_seminars_sites.address" type="integer">46079327</label>
@@ -2207,7 +2204,6 @@
 			<label index="tx_seminars_attendances.seats">Number of seats:</label>
 			<label index="tx_seminars_attendances.attendees_names">Additional attendees:</label>
 			<label index="tx_seminars_attendances.kids">Number of kids:</label>
-			<label index="tx_seminars_attendances.referrer">Referrer:</label>
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Address:</label>

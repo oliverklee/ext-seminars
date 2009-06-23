@@ -1114,34 +1114,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets our referrer.
-	 *
-	 * @return string our referrer, may be empty
-	 */
-	public function getReferrer() {
-		return $this->getRecordPropertyString('referrer');
-	}
-
-	/**
-	 * Sets our referrer.
-	 *
-	 * @param string our referrer to set, may be empty
-	 */
-	public function setReferrer($referrer) {
-		$this->setRecordPropertyString('referrer', $referrer);
-	}
-
-	/**
-	 * Returns whether this registration has a referrer set.
-	 *
-	 * @return boolean true if this registraiton has a referrer set, false
-	 *                 otherwise
-	 */
-	public function hasReferrer() {
-		return $this->hasRecordPropertyString('referrer');
-	}
-
-	/**
 	 * Returns our attendees names.
 	 *
 	 * @return string our attendees names, will be empty if this registration
