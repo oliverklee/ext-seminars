@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#557] Change: Use Tabs for the BE edit form of registration records
 - [#1967] Change: In the registration TCEforms, put the billing address data in a tab "billing address"
 - [#3073] Feature: Add a field (single page selection) to FE user groups about where newly created aux records should be stored
 - [#3031] Fix: CSS problems in FE editor in IE
