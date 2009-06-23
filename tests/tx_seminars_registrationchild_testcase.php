@@ -225,14 +225,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetRegistrationDataWithKeyReferrerReturnsReferrer() {
-		$this->fixture->setReferrer('test referrer');
-		$this->assertEquals(
-			'test referrer',
-			$this->fixture->getRegistrationData('referrer')
-		);
-	}
-
 	public function testDumpAttendanceValuesCanContainUid() {
 		$this->assertContains(
 			(string) $this->fixture->getUid(),
@@ -499,39 +491,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'test title 2',
 			$fixture->getSeminarObject()->getTitle()
-		);
-	}
-
-
-	//////////////////////////////////
-	// Tests regarding the referrer.
-	//////////////////////////////////
-
-	public function testGetReferrerInitiallyReturnsAnEmptyString() {
-		$this->assertEquals(
-			'',
-			$this->fixture->getReferrer()
-		);
-	}
-
-	public function testGetReferrerWithSetReferrerReturnsReferrer() {
-		$this->fixture->setReferrer('test referrer');
-		$this->assertEquals(
-			'test referrer',
-			$this->fixture->getReferrer()
-		);
-	}
-
-	public function testHasReferrerInitiallyReturnsFalse() {
-		$this->assertFalse(
-			$this->fixture->hasReferrer()
-		);
-	}
-
-	public function testHasReferrerWithSetReferrerReturnsTrue() {
-		$this->fixture->setReferrer('test referrer');
-		$this->assertTrue(
-			$this->fixture->hasReferrer()
 		);
 	}
 

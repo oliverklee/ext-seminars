@@ -513,31 +513,6 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testMainCanExportOneReferrer() {
-		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'fieldsFromFeUserForCsv', ''
-		);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'fieldsFromAttendanceForCsv', 'referrer'
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
-			array(
-				'seminar' => $this->eventUid,
-				'referrer' => 'test referrer',
-				'user' => $this->testingFramework->createFrontEndUser(),
-			)
-		);
-
-		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
-		$this->fixture->piVars['seminar'] = $this->eventUid;
-
-		$this->assertContains(
-			'test referrer',
-			$this->fixture->main(null, array())
-		);
-	}
-
 	public function testCreateAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithDeletedUser() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
