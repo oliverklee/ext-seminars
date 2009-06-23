@@ -109,7 +109,8 @@ $TCA['tx_seminars_attendances'] = array(
 			'disabled' => 'hidden'
 		),
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'icon_tx_seminars_attendances.gif'
+		'iconfile' => $extIconRelPath . 'icon_tx_seminars_attendances.gif',
+		'dividers2tabs' => true,
 	)
 );
 
