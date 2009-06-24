@@ -133,6 +133,25 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->loginFrontEndUser($user->getUid());
 	}
 
+	/**
+	 * Creates a front-end user adds his/her front-end user group as event
+	 * editor front-end group and logs him/her in.
+	 *
+	 * @param array $frontEndUserGroupData front-end user group data to set, may
+	 *                                     be empty
+	 */
+	private function createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
+		array $frontEndUserGroupData = array()
+	) {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup(
+			$frontEndUserGroupData
+		);
+		$this->fixture->setConfigurationValue(
+			'eventEditorFeGroupID', $feUserGroupUid
+		);
+		$this->testingFramework->createAndLoginFrontEndUser($feUserGroupUid);
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -223,6 +242,47 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 				'uid=' . $this->fixture->getFeUserUid() .
 					' AND usergroup=' . $this->fixture->getConfValueInteger(
 						'defaultEventVipsFeGroupID'
+					)
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupCreatesFeUser() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords('fe_users')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupLogsInFrontEndUser() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
+
+		$this->assertTrue(
+			$this->testingFramework->isLoggedIn()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupAddsFrontEndUserToEventEditorFrontEndGroup() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
+
+		$this->assertEquals(
+			1,
+			$this->testingFramework->countRecords(
+				'fe_users',
+				'uid=' . $this->fixture->getFeUserUid() .
+					' AND usergroup=' . $this->fixture->getConfValueInteger(
+						'eventEditorFeGroupID'
 					)
 			)
 		);
@@ -560,6 +620,83 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$modifiedFormData['hidden']
+		);
+	}
+
+
+	////////////////////////////////////////////////////////////////
+	// Tests regarding isFrontEndEditingOfRelatedRecordsAllowed().
+	////////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function isFrontEndEditingOfRelatedRecordsAllowedWithoutPermissionAndWithoutPidReturnsFalse() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
+
+		$this->fixture->setConfigurationValue(
+			'allowFrontEndEditingOfTest', false
+		);
+
+		$this->assertFalse(
+			$this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+				array('relatedRecordType' => 'Test')
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithoutPidReturnsFalse() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
+
+		$this->fixture->setConfigurationValue(
+			'allowFrontEndEditingOfTest', true
+		);
+
+		$this->assertFalse(
+			$this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+				array('relatedRecordType' => 'Test')
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFrontEndEditingOfRelatedRecordsAllowedWithoutPermissionAndWithPidReturnsFalse() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
+			array('tx_seminars_auxiliary_records_pid' => 42)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'allowFrontEndEditingOfTest', false
+		);
+
+		$this->assertFalse(
+			$this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+				array('relatedRecordType' => 'Test')
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidReturnsFalse() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
+			array('tx_seminars_auxiliary_records_pid' => 42)
+		);
+
+		$this->fixture->setConfigurationValue(
+			'allowFrontEndEditingOfTest', true
+		);
+
+		$this->assertTrue(
+			$this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+				array('relatedRecordType' => 'Test')
+			)
 		);
 	}
 }

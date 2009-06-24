@@ -792,6 +792,30 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			true
 		);
 	}
+
+	/**
+	 * Returns whether front-end editing of the given related record type is
+	 * allowed.
+	 *
+	 * @param array $parameters the contents of the "params" child of the
+	 *                          userobj node as key/value pairs
+	 *
+	 * @return boolean true if front-end editing of the given related record
+	 *                 type is allowed, false otherwise
+	 */
+	public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters) {
+		$relatedRecordType = $parameters['relatedRecordType'];
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::
+			getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$isFrontEndEditingAllowed = $this->getConfValueBoolean(
+			'allowFrontEndEditingOf' . $relatedRecordType, 's_fe_editing'
+		);
+
+		return $isFrontEndEditingAllowed
+			&& ($frontEndUser->getAuxiliaryRecordsPid() > 0);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_eventEditor.php']) {

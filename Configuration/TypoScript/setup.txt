@@ -589,6 +589,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
+				newCategoryButton = renderlet:BUTTON
+				newCategoryButton {
+					name = newCategoryButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newCategoryButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = Categories
+						}
+					}
+				}
+
 				teaser = renderlet:TEXTAREA
 				teaser {
 					name = teaser
@@ -613,6 +627,20 @@ plugin.tx_seminars_pi1 {
 						userobj {
 							extension = this
 							method = populateListEventTypes
+						}
+					}
+				}
+
+				newEventTypeButton = renderlet:BUTTON
+				newEventTypeButton {
+					name = newEventTypeButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newEventTypeButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = EventTypes
 						}
 					}
 				}
@@ -711,6 +739,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
+				newPlaceButton = renderlet:BUTTON
+				newPlaceButton {
+					name = newPlaceButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newPlaceButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = Places
+						}
+					}
+				}
+
 				room = renderlet:TEXT
 				room {
 					name = room
@@ -727,6 +769,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
+				newLodgingButton = renderlet:BUTTON
+				newLodgingButton {
+					name = newLodgingButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newLodgingButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = Lodgings
+						}
+					}
+				}
+
 				foods = renderlet:CHECKBOX
 				foods {
 					name = foods
@@ -734,6 +790,20 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListFoods
+					}
+				}
+
+				newFoodButton = renderlet:BUTTON
+				newFoodButton {
+					name = newFoodButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newFoodButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = Foods
+						}
 					}
 				}
 
@@ -746,6 +816,29 @@ plugin.tx_seminars_pi1 {
 						method = populateListSpeakers
 					}
 				}
+
+				newSpeakerButton = renderlet:BUTTON
+				newSpeakerButton {
+					name = newSpeakerButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newSpeakerButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = Speakers
+						}
+					}
+				}
+
+				newLeaderButton < .newSpeakerButton
+				newLeaderButton.name = newLeaderButton
+
+				newPartnerButton < .newSpeakerButton
+				newPartnerButton.name = newPartnerButton
+
+				newTutorButton < .newSpeakerButton
+				newTutorButton.name = newTutorButton
 
 				partners = renderlet:CHECKBOX
 				partners {
@@ -871,6 +964,20 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
+				newCheckboxButton = renderlet:BUTTON
+				newCheckboxButton {
+					name = newCheckboxButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newCheckboxButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = Checkboxes
+						}
+					}
+				}
+
 				payment_methods = renderlet:CHECKBOX
 				payment_methods {
 					name = payment_methods
@@ -878,6 +985,20 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListPaymentMethods
+					}
+				}
+
+				newPaymentMethodButton = renderlet:BUTTON
+				newPaymentMethodButton {
+					name = newPaymentMethodButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newPaymentMethodButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = PaymentMethods
+						}
 					}
 				}
 
@@ -897,6 +1018,20 @@ plugin.tx_seminars_pi1 {
 								$value = array_pop(func_get_args());
 								return (!empty($value));
 							)
+						}
+					}
+				}
+
+				newOrganizerButton = renderlet:BUTTON
+				newOrganizerButton {
+					name = newOrganizerButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newOrganizerButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = Organizers
 						}
 					}
 				}
@@ -952,6 +1087,20 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListTargetGroups
+					}
+				}
+
+				newTargetGroupButton = renderlet:BUTTON
+				newTargetGroupButton {
+					name = newTargetGroupButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:newTargetGroupButton
+					process.userobj {
+						extension = this
+						method = isFrontEndEditingOfRelatedRecordsAllowed
+						params {
+							10.name = relatedRecordType
+							10.value = TargetGroups
+						}
 					}
 				}
 
