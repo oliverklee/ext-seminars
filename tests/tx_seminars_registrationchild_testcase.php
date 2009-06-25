@@ -243,6 +243,34 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_getRegistrationDataForNotesWithCarriageReturn_RemovesCarriageReturnFromNotes() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('notes' => 'foo' . CRLF . 'bar')
+		);
+
+		$this->assertNotContains(
+			CRLF,
+			$this->fixture->getRegistrationData('notes')
+		);
+
+		$seminar->__destruct();
+	}
+
+	public function test_getRegistrationDataForNotesWithCarriageReturnAndLineFeed_ReturnsNotesWithLinefeedAndNoCarriageReturn() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('notes' => 'foo' . CRLF . 'bar')
+		);
+
+		$this->assertEquals(
+			'foo' . LF . 'bar',
+			$this->fixture->getRegistrationData('notes')
+		);
+
+		$seminar->__destruct();
+	}
+
 
 	//////////////////////////////////////////
 	// Tests concerning dumpAttendanceValues

@@ -418,7 +418,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				break;
 		}
 
-		return (string) $result;
+		$carriageReturnRemoved = str_replace(CR, LF, (string) $result);
+
+		return preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved);
 	}
 
 	/**
@@ -936,11 +938,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the selected lodging options separated by CRLF. If there is no
+	 * Gets the selected lodging options separated by LF. If there is no
 	 * lodging option selected, this function will return an empty string.
 	 *
 	 * @return string the titles of the selected loding options separated by
-	 *                CRLF or an empty string if no lodging option is selected
+	 *                LF or an empty string if no lodging option is selected
 	 */
 	public function getLodgings() {
 		$result = '';
@@ -966,11 +968,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the selected food options separated by CRLF. If there is no
+	 * Gets the selected food options separated by LF. If there is no
 	 * food option selected, this function will return an empty string.
 	 *
 	 * @return string the titles of the selected loding options separated by
-	 *                CRLF or an empty string if no food option is selected
+	 *                LF or an empty string if no food option is selected
 	 */
 	public function getFoods() {
 		$result = '';
@@ -1042,7 +1044,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($dbResult) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 				if (!empty($result)) {
-					$result .= CRLF;
+					$result .= LF;
 				}
 				$result .= $row['title'];
 			}
