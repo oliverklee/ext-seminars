@@ -651,7 +651,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	}
 
 	/**
-	 * Provides data items for the list of available places.
+	 * Provides data items for the list of available payment methods.
 	 *
 	 * @param array array that contains any pre-filled data (may be
 	 *              empty, but not null, unused)
