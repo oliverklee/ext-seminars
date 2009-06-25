@@ -903,6 +903,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'attendees_names',
 				'kids',
 				'method_of_payment',
+				'company',
 				'gender',
 				'name',
 				'address',

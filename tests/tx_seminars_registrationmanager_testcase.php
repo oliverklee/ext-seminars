@@ -1908,6 +1908,60 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_NotifyOrganizers_ForRegistrationWithCompany_ShowsLabelOfCompany() {
+		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue(
+			'showAttendanceFieldsInNotificationMail', 'company'
+		);
+
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $this->seminar->getUid(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'company' => 'foo inc.',
+			)
+		);
+
+		$registration = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registrationchild', $registrationUid
+		);
+		$this->fixture->notifyOrganizers($registration);
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate('label_company'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function test_NotifyOrganizers_ForRegistrationWithCompany_ShowsCompanyOfRegistration() {
+		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue(
+			'showAttendanceFieldsInNotificationMail', 'company'
+		);
+
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $this->seminar->getUid(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'company' => 'foo inc.',
+			)
+		);
+
+		$registration = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registrationchild', $registrationUid
+		);
+		$this->fixture->notifyOrganizers($registration);
+		$registration->__destruct();
+
+		$this->assertContains(
+			'foo inc.',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
 
 	////////////////////////////////////////////////
 	// Tests concerning sendAdditionalNotification
