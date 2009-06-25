@@ -451,6 +451,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				break;
 			case 'more_seats':
 				$result = $this->isFormFieldEnabled('seats')
+					|| $this->isFormFieldEnabled('registered_themselves')
 					|| $this->isFormFieldEnabled('attendees_names')
 					|| $this->isFormFieldEnabled('kids');
 				break;
@@ -1379,6 +1380,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				'country',
 				'telephone',
 				'email',
+				'registered_themselves',
 			);
 
 			foreach ($parametersToSave as $currentKey) {
@@ -1495,6 +1497,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			'known_from',
 			'more_seats',
 			'seats',
+			'registered_themselves',
 			'attendees_names',
 			'kids',
 			'lodgings',

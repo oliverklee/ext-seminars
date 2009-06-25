@@ -1261,7 +1261,7 @@ $TCA['tx_seminars_speakers'] = array(
 $TCA['tx_seminars_attendances'] = array(
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,signed_themselves,seats,total_price,currency,tax,including_tax,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
+		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,registered_themselves,seats,total_price,currency,tax,including_tax,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
 	),
 	'columns' => array(
 		'title' => array(
@@ -1324,9 +1324,9 @@ $TCA['tx_seminars_attendances'] = array(
 				'type' => 'check',
 			),
 		),
-		'signed_themselves' => array(
+		'registered_themselves' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.signed_themselves',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.registered_themselves',
 			'config' => array(
 				'type' => 'check',
 				'default' => '1',
@@ -1723,7 +1723,7 @@ $TCA['tx_seminars_attendances'] = array(
 	'types' => array(
 		'0' => array('showitem' => '' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user;;;;1-1-1, been_there, hidden;;;;1-1-1, ' .
-				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelBookingInformation, registration_queue, signed_themselves, seats, price, total_price, attendees_names, kids, foods, food, lodgings, accommodation, checkboxes, ' .
+				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, total_price, attendees_names, kids, foods, food, lodgings, accommodation, checkboxes, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelPaymentInformation, paid, datepaid, currency, including_tax, tax, method_of_payment, account_number, account_owner, bank_code, bank_name, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.divLabelBillingAddress, company, gender, name, address, zip, city, country, telephone, email'

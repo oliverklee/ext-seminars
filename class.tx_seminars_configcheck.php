@@ -1076,6 +1076,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'food',
 				'known_from',
 				'seats',
+				'registered_themselves',
 				'attendees_names',
 				'kids',
 				'lodgings',

@@ -386,24 +386,24 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CreateListOfRegistrations_CanContainSignedThemselves() {
+	public function test_CreateListOfRegistrations_CanContainRegisteredThemselves() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'fieldsFromAttendanceForCsv', 'signed_themselves'
+			'fieldsFromAttendanceForCsv', 'registered_themselves'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
-				'signed_themselves' => 1,
+				'registered_themselves' => 1,
 			)
 		);
 
 		$this->assertContains(
-			'signed_themselves',
+			'registered_themselves',
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -419,14 +419,14 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromFeUserForCsv', ''
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'fieldsFromAttendanceForCsv', 'signed_themselves'
+			'fieldsFromAttendanceForCsv', 'registered_themselves'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
-				'signed_themselves' => 1,
+				'registered_themselves' => 1,
 			)
 		);
 

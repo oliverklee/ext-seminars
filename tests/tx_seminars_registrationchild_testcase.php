@@ -225,21 +225,21 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationData_ForSignedThemselvesZero_ReturnsLabelNo() {
-		$this->fixture->setSignedThemselves(0);
+	public function test_getRegistrationData_ForRegisteredThemselvesZero_ReturnsLabelNo() {
+		$this->fixture->setRegisteredThemselves(0);
 
 		$this->assertEquals(
 			$this->fixture->translate('label_no'),
-			$this->fixture->getRegistrationData('signed_themselves')
+			$this->fixture->getRegistrationData('registered_themselves')
 		);
 	}
 
-	public function test_getRegistrationData_ForSignedThemselvesOne_ReturnsLabelYes() {
-		$this->fixture->setSignedThemselves(1);
+	public function test_getRegistrationData_ForRegisteredThemselvesOne_ReturnsLabelYes() {
+		$this->fixture->setRegisteredThemselves(1);
 
 		$this->assertEquals(
 			$this->fixture->translate('label_yes'),
-			$this->fixture->getRegistrationData('signed_themselves')
+			$this->fixture->getRegistrationData('registered_themselves')
 		);
 	}
 
@@ -879,6 +879,19 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			is_array($this->fixture->getCheckboxesData())
+		);
+	}
+
+	public function test_SetRegistrationData_WithRegisteredThemselvesGiven_StoresRegisteredThemselvesIntoTheObject() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid,
+			array('registered_themselves' => 1)
+		);
+
+		$this->assertEquals(
+			$this->fixture->translate('label_yes'),
+			$this->fixture->getRegistrationData('registered_themselves')
 		);
 	}
 

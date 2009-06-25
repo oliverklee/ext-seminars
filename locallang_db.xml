@@ -146,7 +146,7 @@
 			<label index="tx_seminars_attendances.food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="tx_seminars_attendances.known_from">How have you heard of this event?</label>
 			<label index="tx_seminars_attendances.notes">Additional notes:</label>
-			<label index="tx_seminars_attendances.signed_themselves">Has signed up themselves:</label>
+			<label index="tx_seminars_attendances.registered_themselves">Has signed up themselves:</label>
 			<label index="tx_seminars_attendances.seats">Number of seats:</label>
 			<label index="tx_seminars_attendances.attendees_names">Additional attendees:</label>
 			<label index="tx_seminars_attendances.kids">Number of kids:</label>
@@ -346,7 +346,7 @@
 			<label index="tx_seminars_attendances.food">Welche Kost bevorzugen Sie (Normalkost, vegetarisch oder eine spezielle Diät):</label>
 			<label index="tx_seminars_attendances.known_from">Wie haben Sie von dieser Veranstaltung erfahren?</label>
 			<label index="tx_seminars_attendances.notes">Weitere Mitteilungen:</label>
-			<label index="tx_seminars_attendances.signed_themselves">Hat sich selbst angemeldet:</label>
+			<label index="tx_seminars_attendances.registered_themselves">Hat sich selbst angemeldet:</label>
 			<label index="tx_seminars_attendances.seats">Anzahl Plätze:</label>
 			<label index="tx_seminars_attendances.attendees_names">Zusätzlich angemeldete Personen:</label>
 			<label index="tx_seminars_attendances.kids">Anzahl Kinder:</label>
@@ -1294,7 +1294,7 @@
 			<label index="tx_seminars_attendances.food" type="integer">230880093</label>
 			<label index="tx_seminars_attendances.known_from" type="integer">243584829</label>
 			<label index="tx_seminars_attendances.notes" type="integer">67236517</label>
-			<label index="tx_seminars_attendances.signed_themselves" type="integer">104863324</label>
+			<label index="tx_seminars_attendances.registered_themselves" type="integer">104863324</label>
 			<label index="tx_seminars_attendances.seats" type="integer">134941724</label>
 			<label index="tx_seminars_attendances.attendees_names" type="integer">198880077</label>
 			<label index="tx_seminars_attendances.kids" type="integer">7953511</label>
@@ -2239,7 +2239,7 @@
 			<label index="tx_seminars_attendances.food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
 			<label index="tx_seminars_attendances.known_from">How have you heard of this event?</label>
 			<label index="tx_seminars_attendances.notes">Additional notes:</label>
-			<label index="tx_seminars_attendances.signed_themselves">Has signed up themselves:</label>
+			<label index="tx_seminars_attendances.registered_themselves">Has signed up themselves:</label>
 			<label index="tx_seminars_attendances.seats">Number of seats:</label>
 			<label index="tx_seminars_attendances.attendees_names">Additional attendees:</label>
 			<label index="tx_seminars_attendances.kids">Number of kids:</label>

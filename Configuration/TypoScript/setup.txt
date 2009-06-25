@@ -1701,6 +1701,20 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
+					registered_themselves = renderlet:CHECKSINGLE
+					registered_themselves {
+						name = registered_themselves
+						data.defaultvalue = 1
+						process.userobj {
+							extension = this
+							method = hasRegistrationFormField
+							params {
+								10.name = elementname
+								10.value = registered_themselves
+							}
+						}
+					}
+
 					attendees_names = renderlet:TEXTAREA
 					attendees_names {
 						name = attendees_names
@@ -2311,6 +2325,19 @@ plugin.tx_seminars_pi1 {
 							params {
 								10.name = elementname
 								10.value = seats
+							}
+						}
+					}
+
+					registered_themselves = renderlet:HIDDEN
+					registered_themselves {
+						name = registered_themselves
+						process.userobj {
+							extension = this
+							method = hasRegistrationFormField
+							params {
+								10.name = elementname
+								10.value = registered_themselves
 							}
 						}
 					}

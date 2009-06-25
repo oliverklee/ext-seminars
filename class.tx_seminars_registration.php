@@ -158,6 +158,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$seats = 1;
 		}
 		$this->recordData['seats'] = $seats;
+		$this->recordData['registered_themselves'] =
+			($registrationData['registered_themselves']) ? 1 : 0;
 
 		$availablePrices = $seminar->getAvailablePrices();
 		// If no (available) price is selected, use the first price by default.
@@ -378,7 +380,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				break;
 			case 'paid':
 				// The fallthrough is intended.
-			case 'signed_themselves':
+			case 'registered_themselves':
 				// The fallthrough is intended.
 			case 'been_there':
 				$result = ($this->getRecordPropertyBoolean($trimmedKey))

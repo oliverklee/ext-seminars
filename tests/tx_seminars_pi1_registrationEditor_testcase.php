@@ -401,5 +401,49 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			$this->fixture->getFeUserData(null, array('key' => 'country'))
 		);
 	}
+
+
+	////////////////////////////////////////
+	// Tests concerning isFormFieldEnabled
+	////////////////////////////////////////
+
+	public function test_isFormFieldEnabled_ForEnabledRegisteredThemselvesField_ReturnsTrue() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array('showRegistrationFields' => 'registered_themselves'),
+			$GLOBALS['TSFE']->cObj
+		);
+
+		$this->assertTrue(
+			$fixture->isFormFieldEnabled('registered_themselves')
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_isFormFieldEnabled_ForEnabledRegisteredThemselvesField_ReturnsTrueForMoreSeats() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array('showRegistrationFields' => 'registered_themselves'),
+			$GLOBALS['TSFE']->cObj
+		);
+
+		$this->assertTrue(
+			$fixture->isFormFieldEnabled('more_seats')
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_isFormFieldEnabled_NoEnabledRegistrationFields_ReturnsFalseForRegisteredThemselves() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array('showRegistrationFields' => ''),
+			$GLOBALS['TSFE']->cObj
+		);
+
+		$this->assertFalse(
+			$fixture->isFormFieldEnabled('registered_themselves')
+		);
+
+		$fixture->__destruct();
+	}
 }
 ?>

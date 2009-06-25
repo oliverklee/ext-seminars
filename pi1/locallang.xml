@@ -212,8 +212,9 @@
 			<label index="label_known_from_formal">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_register_additional_attendees">Register additional persons</label>
+			<label index="label_register_additional_attendees">Persons to register</label>
 			<label index="label_seats">Seats</label>
+			<label index="label_registered_themselves">myself</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
 			<label index="label_kids">Number of kids:</label>
@@ -466,7 +467,6 @@
 			<label index="label_known_from_formal">Hvordan har du hørt om dette arrangement?</label>
 			<label index="label_known_from_informal">Hvordan har du hørt om dette arrangement?</label>
 			<label index="label_notes">Yderligere bemærkninger:</label>
-			<label index="label_register_additional_attendees">Tilmeld flere personer</label>
 			<label index="label_seats">Antal pladser:</label>
 			<label index="label_register_seats">Samlet antal pladser der ønskes bestilt:</label>
 			<label index="label_attendees_names">Navne på yderligere tilmeldte:</label>
@@ -763,8 +763,9 @@
 			<label index="label_known_from_formal">Wie haben Sie von dieser Veranstaltung erfahren?</label>
 			<label index="label_known_from_informal">Wie hast du von dieser Veranstaltung erfahren?</label>
 			<label index="label_notes">Weitere Mitteilungen:</label>
-			<label index="label_register_additional_attendees">Weitere Personen anmelden</label>
+			<label index="label_register_additional_attendees">Angemeldete Personen</label>
 			<label index="label_seats">Plätze</label>
+			<label index="label_registered_themselves">ich selbst</label>
 			<label index="label_register_seats">Gesamtzahl der zu buchenden Plätze:</label>
 			<label index="label_attendees_names">Namen der zusätzlich anzumeldenden Personen:</label>
 			<label index="label_kids">Anzahl Kinder:</label>
@@ -1017,7 +1018,6 @@
 			<label index="label_known_from_formal">Hoe ben je geinformeerd over dit evenement.</label>
 			<label index="label_known_from_informal">Hoe ben je geinformeerd over dit evenement.</label>
 			<label index="label_notes">extra notities</label>
-			<label index="label_register_additional_attendees">Registreer extra personen</label>
 			<label index="label_seats">Stoelen</label>
 			<label index="label_register_seats">Totaal aantal stoelen voor deze boeking:</label>
 			<label index="label_attendees_names">Namen van extra personen voor de registratie:</label>
@@ -1246,7 +1246,6 @@
 			<label index="label_known_from_formal">Как вы узнали об этом событии?</label>
 			<label index="label_known_from_informal">Как вы узнали об этом событии?</label>
 			<label index="label_notes">Дополнительные заметки:</label>
-			<label index="label_register_additional_attendees">Регистрация дополнительных посетителей</label>
 			<label index="label_seats">Количество мест:</label>
 			<label index="label_register_seats">Общие количество мест</label>
 			<label index="label_attendees_names">Дополнительные посетители:</label>
@@ -1474,7 +1473,6 @@
 			<label index="label_known_from_formal">Come ha conosciuto questo evento?</label>
 			<label index="label_known_from_informal">Come hai conosciuto questo evento?</label>
 			<label index="label_notes">Note aggiuntive:</label>
-			<label index="label_register_additional_attendees">Registra altre personel</label>
 			<label index="label_seats">Posti</label>
 			<label index="label_register_seats">Numero totale di posti da prenotare:</label>
 			<label index="label_attendees_names">Nome delle persone aggiuntive da registrare:</label>
@@ -1703,7 +1701,6 @@
 			<label index="label_known_from_formal">Comment avez-vous entendu parler de cet événement?</label>
 			<label index="label_known_from_informal">Comment as-tu entendu parler de cet événement?</label>
 			<label index="label_notes">Informations supplémentaires:</label>
-			<label index="label_register_additional_attendees">Inscrire des personnes supplémentaires</label>
 			<label index="label_seats">Places</label>
 			<label index="label_register_seats">Nombre total de places à réserver:</label>
 			<label index="label_attendees_names">Nom des personnes supplémentaires:</label>
@@ -1979,7 +1976,6 @@
 			<label index="label_select_paymentmethod" type="integer">203383656</label>
 			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
-			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_register_seats" type="integer">76212082</label>
 			<label index="label_legend_payment" type="integer">205863499</label>
 			<label index="label_register_entered_data_formal" type="integer">250390933</label>
@@ -2203,8 +2199,9 @@
 			<label index="label_known_from_formal" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
-			<label index="label_register_additional_attendees" type="integer">70729970</label>
+			<label index="label_register_additional_attendees" type="integer">244973093</label>
 			<label index="label_seats" type="integer">187299883</label>
+			<label index="label_registered_themselves" type="integer">12551043</label>
 			<label index="label_register_seats" type="integer">76212082</label>
 			<label index="label_attendees_names" type="integer">43575953</label>
 			<label index="label_kids" type="integer">7953511</label>
@@ -2476,7 +2473,6 @@
 			<label index="label_known_from_formal" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
-			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_register_seats" type="integer">76212082</label>
 			<label index="label_attendees_names" type="integer">43575953</label>
@@ -2776,7 +2772,6 @@
 			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_checkboxes" type="integer">15950088</label>
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
-			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_register_seats" type="integer">76212082</label>
 			<label index="label_register_entered_data_formal" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
@@ -2930,7 +2925,6 @@
 			<label index="label_known_from_formal" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
-			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_register_seats" type="integer">76212082</label>
 			<label index="label_attendees_names" type="integer">43575953</label>
@@ -3161,7 +3155,6 @@
 			<label index="label_known_from_formal" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
-			<label index="label_register_additional_attendees" type="integer">70729970</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_register_seats" type="integer">76212082</label>
 			<label index="label_attendees_names" type="integer">43575953</label>
@@ -3442,8 +3435,9 @@
 			<label index="label_known_from_formal">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_register_additional_attendees">Register additional persons</label>
+			<label index="label_register_additional_attendees">Persons to register</label>
 			<label index="label_seats">Seats</label>
+			<label index="label_registered_themselves">myself</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
 			<label index="label_kids">Number of kids:</label>
@@ -3769,7 +3763,6 @@
 			<label index="label_select_paymentmethod">Payment method:</label>
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_register_lodging_and_food">Lodging and food</label>
-			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_legend_payment">Payment</label>
 			<label index="label_register_entered_data_formal">Your registration data</label>
@@ -4015,7 +4008,6 @@
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_checkboxes">Additional information:</label>
 			<label index="label_register_lodging_and_food">Lodging and food</label>
-			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_register_entered_data_formal">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
@@ -4172,7 +4164,6 @@
 			<label index="label_known_from_formal">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
@@ -4398,7 +4389,6 @@
 			<label index="label_known_from_formal">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
@@ -4629,7 +4619,6 @@
 			<label index="label_known_from_formal">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
-			<label index="label_register_additional_attendees">Register additional persons</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
