@@ -124,5 +124,15 @@ final class tx_seminars_registrationchild extends tx_seminars_registration {
 	public function getCheckboxesData() {
 		return $this->checkboxes;
 	}
+
+	/**
+	 * Sets the value for 'signed_themselves'.
+	 *
+	 * @param boolean $signedThemselves the value for the signed_themselves
+	 *                property
+	 */
+	public function setSignedThemselves($signedThemselves) {
+		$this->setRecordPropertyBoolean('signed_themselves', $signedThemselves);
+	}
 }
 ?>

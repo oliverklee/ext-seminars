@@ -225,6 +225,29 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_getRegistrationData_ForSignedThemselvesZero_ReturnsLabelNo() {
+		$this->fixture->setSignedThemselves(0);
+
+		$this->assertEquals(
+			$this->fixture->translate('label_no'),
+			$this->fixture->getRegistrationData('signed_themselves')
+		);
+	}
+
+	public function test_getRegistrationData_ForSignedThemselvesOne_ReturnsLabelYes() {
+		$this->fixture->setSignedThemselves(1);
+
+		$this->assertEquals(
+			$this->fixture->translate('label_yes'),
+			$this->fixture->getRegistrationData('signed_themselves')
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning dumpAttendanceValues
+	//////////////////////////////////////////
+
 	public function testDumpAttendanceValuesCanContainUid() {
 		$this->assertContains(
 			(string) $this->fixture->getUid(),

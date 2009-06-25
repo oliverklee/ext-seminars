@@ -386,6 +386,59 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_CreateListOfRegistrations_CanContainSignedThemselves() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'signed_themselves'
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'signed_themselves' => 1,
+			)
+		);
+
+		$this->assertContains(
+			'signed_themselves',
+			$this->fixture->createListOfRegistrations($this->eventUid)
+		);
+	}
+
+	public function testMainCanExportValueOfSignedThemseles() {
+		$this->markTestIncomplete(
+			'For this test to run, we need to provide a language file to the ' .
+				'registration class @see ' .
+				'https://bugs.oliverklee.com/show_bug.cgi?id=3133'
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'signed_themselves'
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'signed_themselves' => 1,
+			)
+		);
+
+		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
+		$this->fixture->piVars['seminar'] = $this->eventUid;
+
+		$this->assertContains(
+			$this->fixture->translate('label_yes'),
+			$this->fixture->main(null, array())
+		);
+	}
+
 	public function testMainCanExportOneRegistrationUid() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''

@@ -378,6 +378,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				break;
 			case 'paid':
 				// The fallthrough is intended.
+			case 'signed_themselves':
+				// The fallthrough is intended.
 			case 'been_there':
 				$result = ($this->getRecordPropertyBoolean($trimmedKey))
 					? $this->translate('label_yes')
