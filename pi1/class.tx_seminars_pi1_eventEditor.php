@@ -325,6 +325,44 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	}
 
 	/**
+	 * Provides data items from the DB.
+	 *
+	 * By default, the field "title" is used as the name that will be returned
+	 * within the array (as caption). For FE users, the field "name" is used.
+	 *
+	 * This method overrides the method in tx_seminars_pi1_frontEndEditor and
+	 * only returns the records where the currently logged in front-end user
+	 * is the owner or where no owner is specified.
+	 *
+	 * @param array $items array that contains any pre-filled data, may be empty
+	 * @param string $tableName the table name to query, must not be empty
+	 * @param string $queryParameters query parameter that will be used as the
+	 *                                WHERE clause, must not be empty
+	 * @param boolean $appendBreak whether to append a <br /> at the end of each
+	 *                             caption
+	 *
+	 * @return array $items with additional items from the $params['what']
+	 *               table as an array with the keys "caption" (for the title)
+	 *               and "value" (for the UID), might be empty
+	 */
+	public function populateList(
+		array $items, $tableName, $queryParameters = '1 = 1', $appendBreak = false
+	) {
+		$frontEndUser = tx_oelib_FrontEndLoginManager::
+			getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$additionalQueryParameters = ' AND (owner = ' . $frontEndUser->getUid() .
+			' OR owner = 0)';
+
+		return parent::populateList(
+			$items,
+			$tableName,
+			$queryParameters . $additionalQueryParameters,
+			$appendBreak
+		);
+	}
+
+	/**
 	 * Gets the URL of the page that should be displayed when an event has been
 	 * successfully created.
 	 * An URL of the FE editor's page is returned if "submit_and_stay" was

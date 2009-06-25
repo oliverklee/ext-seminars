@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3091] Feature: Only show aux records for selection in the FE editor that have no owner or are owned by the current FE user
 - [#3110] Feature: Add a checkbox "has signed up themselves" to the registration records
 - [#3108] Feature: Add a field "company" to the billing address in the registration records
 - [#3092] Feature: Display a "Create new" button below the aux records selection in the FE editor
