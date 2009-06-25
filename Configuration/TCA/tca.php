@@ -1060,7 +1060,7 @@ $TCA['tx_seminars_seminars'] = array(
 $TCA['tx_seminars_speakers'] = array(
 	'ctrl' => $TCA['tx_seminars_speakers']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email,cancelation_period'
+		'showRecordFieldList' => 'title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email,cancelation_period,owner'
 	),
 	'columns' => array(
 		'title' => array(
@@ -1249,7 +1249,7 @@ $TCA['tx_seminars_speakers'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period'),
+		'0' => array('showitem' => 'title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -1739,7 +1739,7 @@ $TCA['tx_seminars_attendances'] = array(
 $TCA['tx_seminars_sites'] = array(
 	'ctrl' => $TCA['tx_seminars_sites']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,address,homepage,directions,notes',
+		'showRecordFieldList' => 'title,address,homepage,directions,notes,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -1841,7 +1841,7 @@ $TCA['tx_seminars_sites'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, city, country, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes'),
+		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, city, country, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -1853,7 +1853,7 @@ $TCA['tx_seminars_sites'] = array(
 $TCA['tx_seminars_organizers'] = array(
 	'ctrl' => $TCA['tx_seminars_organizers']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,description,homepage,email,email_footer'
+		'showRecordFieldList' => 'title,description,homepage,email,email_footer,owner'
 	),
 	'columns' => array(
 		'title' => array(
@@ -1940,7 +1940,7 @@ $TCA['tx_seminars_organizers'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], homepage;;;;3-3-3, email, email_footer, attendances_pid'),
+		'0' => array('showitem' => 'title;;;;2-2-2, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], homepage;;;;3-3-3, email, email_footer, attendances_pid, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -1950,7 +1950,7 @@ $TCA['tx_seminars_organizers'] = array(
 $TCA['tx_seminars_payment_methods'] = array(
 	'ctrl' => $TCA['tx_seminars_payment_methods']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title, description',
+		'showRecordFieldList' => 'title, description, owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -1985,7 +1985,7 @@ $TCA['tx_seminars_payment_methods'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, description'),
+		'0' => array('showitem' => 'title;;;;2-2-2, description, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -1995,7 +1995,7 @@ $TCA['tx_seminars_payment_methods'] = array(
 $TCA['tx_seminars_event_types'] = array(
 	'ctrl' => $TCA['tx_seminars_event_types']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2021,7 +2021,7 @@ $TCA['tx_seminars_event_types'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2031,7 +2031,7 @@ $TCA['tx_seminars_event_types'] = array(
 $TCA['tx_seminars_checkboxes'] = array(
 	'ctrl' => $TCA['tx_seminars_checkboxes']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2057,7 +2057,7 @@ $TCA['tx_seminars_checkboxes'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2067,7 +2067,7 @@ $TCA['tx_seminars_checkboxes'] = array(
 $TCA['tx_seminars_lodgings'] = array(
 	'ctrl' => $TCA['tx_seminars_lodgings']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2093,7 +2093,7 @@ $TCA['tx_seminars_lodgings'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2103,7 +2103,7 @@ $TCA['tx_seminars_lodgings'] = array(
 $TCA['tx_seminars_foods'] = array(
 	'ctrl' => $TCA['tx_seminars_foods']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2129,7 +2129,7 @@ $TCA['tx_seminars_foods'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2246,7 +2246,7 @@ $TCA['tx_seminars_timeslots'] = array(
 $TCA['tx_seminars_target_groups'] = array(
 	'ctrl' => $TCA['tx_seminars_target_groups']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2272,7 +2272,7 @@ $TCA['tx_seminars_target_groups'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2282,7 +2282,7 @@ $TCA['tx_seminars_target_groups'] = array(
 $TCA['tx_seminars_categories'] = array(
 	'ctrl' => $TCA['tx_seminars_categories']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title, icon',
+		'showRecordFieldList' => 'title, icon, owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2323,7 +2323,7 @@ $TCA['tx_seminars_categories'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title, icon;;;;2-2-2'),
+		'0' => array('showitem' => 'title, icon;;;;2-2-2, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2333,7 +2333,7 @@ $TCA['tx_seminars_categories'] = array(
 $TCA['tx_seminars_skills'] = array(
 	'ctrl' => $TCA['tx_seminars_skills']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title, owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2359,7 +2359,7 @@ $TCA['tx_seminars_skills'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
