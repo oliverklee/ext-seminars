@@ -1516,8 +1516,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'test event',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -1768,8 +1769,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$this->fixture->translate('label_planned_disclaimer'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -1841,7 +1843,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Hello',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -1883,7 +1887,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertRegExp(
 			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -1904,7 +1910,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			$this->fixture->translate('label_vacancies') . ': ' .
 				$this->fixture->translate('label_unlimited'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -2074,7 +2082,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$this->fixture->translate('email_additionalNotificationIsFull'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -2143,7 +2153,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertRegExp(
 			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -2167,7 +2179,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			$this->fixture->translate('label_vacancies') . ': ' .
 				$this->fixture->translate('label_unlimited'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 

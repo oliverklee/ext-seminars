@@ -320,7 +320,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -525,7 +527,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -843,7 +847,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Mr. Test',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -858,7 +864,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'test event',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -872,7 +880,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			(string) $uid,
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -886,7 +896,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'2',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -904,7 +916,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 					->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
 				$GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
