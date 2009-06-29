@@ -102,7 +102,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testBuilderIgnoresTimedEventsByDefault() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
-			array('endtime' => mktime() - 1000)
+			array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
 		);
 		$bag = $this->fixture->build();
 
@@ -117,7 +117,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testBuilderFindsTimedEventsInBackEndMode() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
-			array('endtime' => mktime() - 1000)
+			array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
 		);
 
 		$this->fixture->setBackEndMode();
@@ -800,8 +800,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
-				'end_date' => time() - ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
 			)
 		);
 
@@ -820,7 +820,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
 				'end_date' => 0
 			)
 		);
@@ -840,8 +840,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_DAY,
-				'end_date' => time() + ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			)
 		);
 
@@ -859,8 +859,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK
 			)
 		);
 
@@ -878,7 +878,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'end_date' => 0
 			)
 		);
@@ -924,8 +924,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
-				'end_date' => time() - ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
 			)
 		);
 
@@ -944,7 +944,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
 				'end_date' => 0
 			)
 		);
@@ -964,8 +964,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_DAY,
-				'end_date' => time() + ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			)
 		);
 
@@ -984,8 +984,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK
 			)
 		);
 
@@ -1003,7 +1003,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'end_date' => 0
 			)
 		);
@@ -1048,8 +1048,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
-				'end_date' => time() - ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
 			)
 		);
 
@@ -1067,7 +1067,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
 				'end_date' => 0
 			)
 		);
@@ -1086,8 +1086,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_DAY,
-				'end_date' => time() + ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			)
 		);
 
@@ -1106,8 +1106,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK
 			)
 		);
 
@@ -1125,7 +1125,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'end_date' => 0
 			)
 		);
@@ -1170,8 +1170,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
-				'end_date' => time() - ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
 			)
 		);
 
@@ -1189,7 +1189,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
 				'end_date' => 0
 			)
 		);
@@ -1208,8 +1208,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_DAY,
-				'end_date' => time() + ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			)
 		);
 
@@ -1228,8 +1228,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK
 			)
 		);
 
@@ -1248,7 +1248,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'end_date' => 0
 			)
 		);
@@ -1295,8 +1295,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
-				'end_date' => time() - ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
 			)
 		);
 
@@ -1314,7 +1314,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
 				'end_date' => 0
 			)
 		);
@@ -1333,8 +1333,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_DAY,
-				'end_date' => time() + ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			)
 		);
 
@@ -1352,8 +1352,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK
 			)
 		);
 
@@ -1372,7 +1372,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'end_date' => 0
 			)
 		);
@@ -1543,8 +1543,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
-				'end_date' => time() - ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
 				'deadline_registration' => 0
 			)
 		);
@@ -1563,7 +1563,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
 				'end_date' => 0,
 				'deadline_registration' => 0
 			)
@@ -1583,8 +1583,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_DAY,
-				'end_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'deadline_registration' => 0
 			)
 		);
@@ -1603,8 +1603,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
 				'deadline_registration' => 0
 			)
 		);
@@ -1624,9 +1624,9 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + 2 * ONE_DAY,
-				'end_date' => time() + ONE_WEEK,
-				'deadline_registration' => time() + ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 2 * ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
+				'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			)
 		);
 
@@ -1645,9 +1645,9 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK,
-				'deadline_registration' => time() - ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
+				'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
 			)
 		);
 
@@ -1665,7 +1665,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'end_date' => 0,
 				'deadline_registration' => 0
 			)
@@ -1714,8 +1714,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
-				'end_date' => time() - ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY
 			)
 		);
 
@@ -1734,7 +1734,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_WEEK,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
 				'end_date' => 0
 			)
 		);
@@ -1754,8 +1754,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() - ONE_DAY,
-				'end_date' => time() + ONE_DAY
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			)
 		);
 
@@ -1774,8 +1774,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
-				'end_date' => time() + ONE_WEEK
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK
 			)
 		);
 
@@ -1794,7 +1794,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'begin_date' => time() + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'end_date' => 0
 			)
 		);

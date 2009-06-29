@@ -478,7 +478,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testBuilderIgnoresTimedRecordsByDefault() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_TEST,
-			array('endtime' => mktime() - 1000)
+			array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
 		);
 		$bag = $this->fixture->build();
 
@@ -492,7 +492,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testBuilderFindsTimedRecordsInBackEndMode() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_TEST,
-			array('endtime' => mktime() - 1000)
+			array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
 		);
 
 		$this->fixture->setBackEndMode();

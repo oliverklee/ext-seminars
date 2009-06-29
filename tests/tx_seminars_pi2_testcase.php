@@ -475,7 +475,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
@@ -483,7 +483,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => (time() + 1),
+				'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
@@ -516,7 +516,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
@@ -524,7 +524,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => (time() + 1),
+				'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
@@ -555,7 +555,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $frontEndUserUid,
 			)
 		);
@@ -580,7 +580,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $frontEndUserUid,
 			)
 		);
@@ -603,7 +603,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->getAutoIncrement('fe_users'),
 			)
 		);
@@ -658,7 +658,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
@@ -666,7 +666,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
@@ -686,7 +686,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'address' => 'foo " bar',
 			)
@@ -707,7 +707,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'address' => 'foo " bar',
 			)
@@ -728,7 +728,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'address' => 'foo ; bar',
 			)
@@ -749,7 +749,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'address' => 'foo' . LF . 'bar',
 			)
@@ -770,7 +770,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'address' => 'foo " bar',
 			)
@@ -791,7 +791,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->eventUid,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'address' => 'foo',
 				'title' => 'test',

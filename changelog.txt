@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2234] Change: Use $GLOBALS['SIM_ACCESS_TIME'] instead of time() in seminars
 - [#3112] Feature: Allow the usage of the billing address company field in the e-mail to the organizer
 - [#3134] Fix: Check line feeds for multiline registration CSV exports
 - [#3115] Feature: Add the checkbox "myself" to the registration form

@@ -72,7 +72,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
-		$this->currentTimestamp = time();
+		$this->currentTimestamp = $GLOBALS['SIM_EXEC_TIME'];
 		$this->beginDate = ($this->currentTimestamp + ONE_WEEK);
 		$this->unregistrationDeadline = ($this->currentTimestamp + ONE_WEEK);
 
@@ -939,7 +939,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////////////////////
 
 	public function testCanSomebodyRegisterIsTrueForEventWithFutureDate() {
-		$this->fixture->setBeginDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->assertTrue(
 			$this->fixture->canSomebodyRegister()
 		);
@@ -949,15 +949,15 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
-		$this->fixture->setBeginDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->assertTrue(
 			$this->fixture->canSomebodyRegister()
 		);
 	}
 
 	public function testCanSomebodyRegisterIsFalseForPastEvent() {
-		$this->fixture->setBeginDate(time() - 7200);
-		$this->fixture->setEndDate(time() - 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 		$this->assertFalse(
 			$this->fixture->canSomebodyRegister()
 		);
@@ -967,16 +967,16 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
-		$this->fixture->setBeginDate(time() - 7200);
-		$this->fixture->setEndDate(time() - 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 		$this->assertFalse(
 			$this->fixture->canSomebodyRegister()
 		);
 	}
 
 	public function testCanSomebodyRegisterIsFalseForCurrentlyRunningEvent() {
-		$this->fixture->setBeginDate(time() - 3600);
-		$this->fixture->setEndDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->assertFalse(
 			$this->fixture->canSomebodyRegister()
 		);
@@ -986,8 +986,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
-		$this->fixture->setBeginDate(time() - 3600);
-		$this->fixture->setEndDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->assertFalse(
 			$this->fixture->canSomebodyRegister()
 		);
@@ -1009,7 +1009,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_CanSomebodyRegister_ForEventWithUnlimitedVacanvies_IsTrue() {
-		$this->fixture->setBeginDate(time() + 3600);
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setUnlimitedVacancies();
 
 		$this->assertTrue(
@@ -3710,7 +3710,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testEventsWithTheExactSameDateCollide() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
-		$begin = mktime();
+		$begin = $GLOBALS['SIM_EXEC_TIME'];
 		$end = $begin + 1000;
 
 		$this->fixture->setBeginDate($begin);
@@ -3740,7 +3740,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testCollidingEventsDoNotCollideIfCollisionSkipIsEnabledForAllEvents() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
-		$begin = mktime();
+		$begin = $GLOBALS['SIM_EXEC_TIME'];
 		$end = $begin + 1000;
 
 		$this->fixture->setBeginDate($begin);
@@ -3774,7 +3774,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForThisEvent() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
-		$begin = mktime();
+		$begin = $GLOBALS['SIM_EXEC_TIME'];
 		$end = $begin + 1000;
 
 		$this->fixture->setBeginDate($begin);
@@ -3805,7 +3805,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForAnotherEvent() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
-		$begin = mktime();
+		$begin = $GLOBALS['SIM_EXEC_TIME'];
 		$end = $begin + 1000;
 
 		$this->fixture->setBeginDate($begin);
@@ -3897,7 +3897,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForVisibleTimedSingleEvent() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
-		$this->fixture->setRecordStartTime(mktime() - 1000);
+		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_complete.',
@@ -3907,7 +3907,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForVisibleTimedTopic() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
-		$this->fixture->setRecordStartTime(mktime() - 1000);
+		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_topic.',
@@ -3917,7 +3917,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForVisibleTimedDate() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
-		$this->fixture->setRecordStartTime(mktime() - 1000);
+		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_date.',
@@ -3927,7 +3927,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForExpiredSingleEvent() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
-		$this->fixture->setRecordEndTime(mktime() - 1000);
+		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_complete__t.',
@@ -3937,7 +3937,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForExpiredTimedTopic() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
-		$this->fixture->setRecordEndTime(mktime() - 1000);
+		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_topic__t.',
@@ -3947,7 +3947,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForExpiredTimedDate() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
-		$this->fixture->setRecordEndTime(mktime() - 1000);
+		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_date__t.',
@@ -3957,7 +3957,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForStillInvisibleTimedSingleEvent() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
-		$this->fixture->setRecordStartTime(mktime() + 1000);
+		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_complete__t.',
@@ -3967,7 +3967,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForStillInvisibleTimedTopic() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
-		$this->fixture->setRecordStartTime(mktime() + 1000);
+		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_topic__t.',
@@ -3977,7 +3977,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForStillInvisibleTimedDate() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
-		$this->fixture->setRecordStartTime(mktime() + 1000);
+		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_date__t.',

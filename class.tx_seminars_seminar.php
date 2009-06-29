@@ -3811,7 +3811,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->needsRegistration()) {
 			if ($this->hasUnregistrationDeadline()) {
-				if ($this->getUnregistrationDeadlineAsTimestamp() > time()) {
+				if ($this->getUnregistrationDeadlineAsTimestamp() > $GLOBALS['SIM_EXEC_TIME']) {
 					$result = true;
 				}
 			} elseif ($this->hasBeginDate()
@@ -3820,7 +3820,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				&& (($this->getBeginDateAsTimestamp()
 					- ($this->getConfValueInteger(
 					'unregistrationDeadlineDaysBeforeBeginDate') * ONE_DAY))
-					> time())
+					> $GLOBALS['SIM_EXEC_TIME'])
 			) {
 				$result = true;
 			}

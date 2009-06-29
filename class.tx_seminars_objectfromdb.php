@@ -317,7 +317,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 		}
 
 		// Saves the current time so that tstamp and crdate will be the same.
-		$now = time();
+		$now = $GLOBALS['SIM_EXEC_TIME'];
 		$this->setRecordPropertyInteger('tstamp', $now);
 
 		if (!$this->isInDb || !$this->hasUid()) {

@@ -539,14 +539,14 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @param array form data, will be modified, must not be empty
 	 */
 	private function addAdministrativeData(array &$formData) {
-		$formData['tstamp'] = mktime();
+		$formData['tstamp'] = $GLOBALS['SIM_EXEC_TIME'];
 
 		// Updating the timestamp is sufficent for existing records.
 		if ($this->iEdition) {
 			return;
 		}
 
-		$formData['crdate'] = mktime();
+		$formData['crdate'] = $GLOBALS['SIM_EXEC_TIME'];
 		$formData['owner_feuser'] = $this->getFeUserUid();
 		$formData['pid'] = $this->getConfValueInteger(
 			'createEventsPID', 's_fe_editing'
