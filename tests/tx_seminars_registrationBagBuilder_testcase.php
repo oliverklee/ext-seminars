@@ -71,11 +71,11 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testBuildReturnsBagWhichIsSortedAscendingByCrDate() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('title' => 'Title 2', 'crdate' => (time() + ONE_DAY))
+			array('title' => 'Title 2', 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + ONE_DAY))
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('title' => 'Title 1', 'crdate' => time())
+			array('title' => 'Title 1', 'crdate' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 
 		$registrationBag = $this->fixture->build();

@@ -454,8 +454,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
-				'begin_date' => time() + ONE_WEEK,
-				'end_date' => time() + ONE_WEEK + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
 			)
 		);
 		$dateUid2 = $this->testingFramework->createRecord(
@@ -465,8 +465,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date 2',
-				'begin_date' => time() + ONE_WEEK + 2*ONE_DAY,
-				'end_date' => time() + ONE_WEEK + 3*ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
 			)
 		);
 
@@ -500,8 +500,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
-				'begin_date' => time() + ONE_WEEK,
-				'end_date' => time() + ONE_WEEK + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
 			)
 		);
 		$singleEventUid = $this->testingFramework->createRecord(
@@ -511,8 +511,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
 				'topic' => $topicUid,
 				'title' => 'Test single 2',
-				'begin_date' => time() + ONE_WEEK + 2*ONE_DAY,
-				'end_date' => time() + ONE_WEEK + 3*ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
 			)
 		);
 

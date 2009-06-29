@@ -579,7 +579,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 							'.uid = ' . $registrationUid,
 						array(
 							'hidden' => 1,
-							'tstamp' => time()
+							'tstamp' => $GLOBALS['SIM_EXEC_TIME']
 						)
 					);
 

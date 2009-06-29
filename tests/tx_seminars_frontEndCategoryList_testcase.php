@@ -117,7 +117,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 1
 			)
 		);
@@ -145,7 +145,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 2
 			)
 		);
@@ -181,7 +181,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 2
 			)
 		);
@@ -211,7 +211,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $systemSubFolderUid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 1
 			)
 		);
@@ -236,7 +236,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $otherSystemFolderUid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 1
 			)
 		);
@@ -263,7 +263,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $otherSystemFolderUid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 1
 			)
 		);
@@ -287,7 +287,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 1,
 				'cancelled' => 1
 			)
@@ -341,8 +341,8 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
-				'end_date' => mktime() + 2000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'categories' => 1
 			)
 		);
@@ -370,8 +370,8 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
-				'begin_date' => mktime() - 2000,
-				'end_date' => mktime() - 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 2000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
 				'categories' => 1
 			)
 		);
@@ -399,7 +399,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
-				'begin_date' => mktime() + 1000,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 1
 			)
 		);

@@ -202,7 +202,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
-				'endtime' => mktime() - 1000
+				'endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000
 			)
 		);
 

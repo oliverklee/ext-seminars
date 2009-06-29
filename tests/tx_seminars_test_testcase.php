@@ -56,9 +56,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createTemplate(
 			$systemFolderUid,
 			array(
-				'tstamp' => time(),
+				'tstamp' => $GLOBALS['SIM_EXEC_TIME'],
 				'sorting' => 256,
-				'crdate' => time(),
+				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
 				'cruser_id' => 1,
 				'title' => 'TEST',
 				'root' => 1,
