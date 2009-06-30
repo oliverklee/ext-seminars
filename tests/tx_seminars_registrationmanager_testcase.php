@@ -66,6 +66,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		tx_seminars_registrationchild::purgeCachedSeminars();
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registrationmanager::SEND_TEXT_MAIL
+		);
 
 		$organizerUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ORGANIZERS,
@@ -1580,11 +1585,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_NotifyAttendee_ForTextMailSet_DoesNotHaveHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
-				'eMailFormatForAttendees',
-				tx_seminars_registrationmanager::SEND_TEXT_MAIL
-		);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
