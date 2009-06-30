@@ -201,6 +201,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->recordData['bank_name'] = $registrationData['bank_name'];
 		$this->recordData['account_owner'] = $registrationData['account_owner'];
 
+		$this->recordData['company'] = $registrationData['company'];
 		$this->recordData['gender'] = $registrationData['gender'];
 		$this->recordData['name'] = $registrationData['name'];
 		$this->recordData['address'] = $registrationData['address'];

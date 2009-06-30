@@ -224,6 +224,7 @@
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
 			<label index="label_billing_address">Billing address</label>
+			<label index="label_company">Company:</label>
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>
@@ -775,6 +776,7 @@
 			<label index="label_bank_name">Name der Bank:</label>
 			<label index="label_account_owner">Kontoinhaber:</label>
 			<label index="label_billing_address">Rechnungsadresse</label>
+			<label index="label_company">Firma:</label>
 			<label index="label_gender">Anrede</label>
 			<label index="label_gender.I.0">Herr</label>
 			<label index="label_gender.I.1">Frau</label>
@@ -2211,6 +2213,7 @@
 			<label index="label_bank_name" type="integer">204057381</label>
 			<label index="label_account_owner" type="integer">35539025</label>
 			<label index="label_billing_address" type="integer">33277925</label>
+			<label index="label_company" type="integer">98955432</label>
 			<label index="label_gender" type="integer">161832899</label>
 			<label index="label_gender.I.0" type="integer">19351194</label>
 			<label index="label_gender.I.1" type="integer">43922038</label>
@@ -3447,6 +3450,7 @@
 			<label index="label_bank_name">Bank name:</label>
 			<label index="label_account_owner">Account owner:</label>
 			<label index="label_billing_address">Billing address</label>
+			<label index="label_company">Company:</label>
 			<label index="label_gender">Mr./Mrs.</label>
 			<label index="label_gender.I.0">Mr.</label>
 			<label index="label_gender.I.1">Ms.</label>

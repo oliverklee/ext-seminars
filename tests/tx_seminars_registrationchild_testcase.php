@@ -923,6 +923,19 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_SetRegistrationData_WithCompanyGiven_StoresCompanyIntoTheObject() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setRegistrationData(
+			$this->fixture->getSeminarObject(), $userUid,
+			array('company' => 'Foo' . LF . 'Bar Inc')
+		);
+
+		$this->assertEquals(
+			'Foo' . LF . 'Bar Inc',
+			$this->fixture->getRegistrationData('company')
+		);
+	}
+
 
 	///////////////////////////////
 	// Tests regarding the seats.

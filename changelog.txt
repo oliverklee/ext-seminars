@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3116] Feature: Add a three-line textarea "company" to the billing address section in the registration form
 - [#3113] Feature: In the thank-you e-mail to the attendees, enumerate the registered persons
 - [#3142] Fix: Test failures with base64 encoding
 - [#3109] Feature: Allow the CSV export of the "company" field in the billing address

@@ -445,5 +445,44 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+	public function test_isFormFieldEnabled_ForEnabledCompanyField_ReturnsTrue() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array('showRegistrationFields' => 'company'),
+			$GLOBALS['TSFE']->cObj
+		);
+
+		$this->assertTrue(
+			$fixture->isFormFieldEnabled('company')
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_isFormFieldEnabled_NoEnabledRegistrationFields_ReturnsFalseForCompany() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array('showRegistrationFields' => ''),
+			$GLOBALS['TSFE']->cObj
+		);
+
+		$this->assertFalse(
+			$fixture->isFormFieldEnabled('company')
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_isFormFieldEnabled_ForEnabledCompanyField_ReturnsTrueForBillingAddress() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array('showRegistrationFields' => 'company, billing_address'),
+			$GLOBALS['TSFE']->cObj
+		);
+
+		$this->assertTrue(
+			$fixture->isFormFieldEnabled('billing_address')
+		);
+
+		$fixture->__destruct();
+	}
 }
 ?>

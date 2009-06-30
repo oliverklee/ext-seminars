@@ -1062,6 +1062,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'bank_name',
 				'account_owner',
 				'billing_address',
+				'company',
 				'gender',
 				'name',
 				'address',

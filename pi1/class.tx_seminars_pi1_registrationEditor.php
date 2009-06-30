@@ -63,6 +63,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * registration form
 	 */
 	private $fieldsInBillingAddress = array(
+		'company' => false,
 		'gender' => false,
 		'name' => false,
 		'address' => false,
@@ -439,7 +440,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				// This fields actually can also be disabled via TS setup.
 				$result = isset($this->formFieldsToShow[$key])
 					&& (
-						$this->isFormFieldEnabled('gender')
+						$this->isFormFieldEnabled('company')
+						|| $this->isFormFieldEnabled('gender')
 						|| $this->isFormFieldEnabled('name')
 						|| $this->isFormFieldEnabled('address')
 						|| $this->isFormFieldEnabled('zip')
@@ -1479,6 +1481,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			'account_owner',
 			'billing_address',
 			'billing_data',
+			'company',
 			'gender',
 			'name',
 			'address',
