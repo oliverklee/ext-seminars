@@ -408,6 +408,51 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_createListOfRegistrations_CanContainCompanyHeading() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'company'
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'company' => 'foo',
+			)
+		);
+
+		$this->assertContains(
+			'company',
+			$this->fixture->createListOfRegistrations($this->eventUid)
+		);
+	}
+
+	public function test_createListOfRegistrations_CanContainCompanyContent() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'company'
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'company' => 'foo bar inc.',
+			)
+		);
+
+		$this->assertContains(
+			'foo bar inc.',
+			$this->fixture->createListOfRegistrations($this->eventUid)
+		);
+	}
+
+
 	public function testMainCanExportValueOfSignedThemseles() {
 		$this->markTestIncomplete(
 			'For this test to run, we need to provide a language file to the ' .
