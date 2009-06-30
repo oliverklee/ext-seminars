@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3142] Fix: Test failures with base64 encoding
 - [#3109] Feature: Allow the CSV export of the "company" field in the billing address
 - [#2234] Change: Use $GLOBALS['SIM_ACCESS_TIME'] instead of time() in seminars
 - [#3112] Feature: Allow the usage of the billing address company field in the e-mail to the organizer
