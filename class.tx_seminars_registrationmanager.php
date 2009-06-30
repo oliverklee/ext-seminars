@@ -1055,11 +1055,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$this->hideSubparts('seats', $wrapperPrefix);
 		}
 
-		if ($registration->hasAttendeesNames()) {
-			$this->setMarker('attendees_names', $registration->getAttendeesNames());
-		} else {
-			$this->hideSubparts('attendees_names', $wrapperPrefix);
-		}
+		$this->fillOrHideAttendeeMarker($registration, $useHtml);
 
 		if ($registration->hasLodgings()) {
 			$this->setMarker('lodgings', $registration->getLodgings());
@@ -1221,6 +1217,43 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		return ($GLOBALS['SIM_EXEC_TIME']
 			>= $event->getRegistrationBeginAsUnixTimestamp());
+	}
+
+	/**
+	 * Fills the attendees_names marker or hides it if necessary.
+	 *
+	 * @param tx_seminars_registration $registration the current registration
+	 * @param boolean $useHtml whether to create HTML or plaintext output
+	 */
+	private function fillOrHideAttendeeMarker(
+		tx_seminars_registration $registration, $useHtml
+	) {
+		if (!$registration->hasAttendeesNames()) {
+			$this->hideSubparts(
+				'attendees_names',
+				(($useHtml) ? 'html_' : '') . 'field_wrapper'
+			);
+			return;
+		}
+
+		$attendeesNames = t3lib_div::trimExplode(
+			LF, $registration->getAttendeesNames(), true
+		);
+		if ($useHtml) {
+			$markerContent = '<ol><li>' .
+				implode('</li><li>', $attendeesNames) .
+				'</li></ol>';
+		} else {
+			$enumeratedNames = array();
+			$attendeeCounter = 1;
+			foreach ($attendeesNames as $attendeeName) {
+				$enumeratedNames[] = $attendeeCounter . '. ' . $attendeeName;
+				$attendeeCounter++;
+			}
+			$markerContent = implode(CRLF, $enumeratedNames);
+		}
+
+		$this->setMarker('attendees_names', $markerContent);
 	}
 }
 

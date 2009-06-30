@@ -1832,6 +1832,71 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_NotifyAttendee_MailBodyCanContainAttendeesNames() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$registration->setAttendeesNames('foo1 foo2');
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'foo1 foo2',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlainTextMail_EnumeratesAttendeesNames() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$registration->setAttendeesNames('foo1' . LF . 'foo2');
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'1. foo1' . CRLF . '2. foo2',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForHtmlMail_ReturnsAttendeesNamesInOrderedList() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registrationmanager::SEND_HTML_MAIL
+		);
+		$this->fixture->setConfigurationValue(
+			'cssFileForAttendeeMail',
+			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$registration->setAttendeesNames('foo1' . LF . 'foo2');
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertRegExp(
+			'/\<ol>.*<li>foo1<\/li>.*<li>foo2<\/li>.*<\/ol>/s',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
 
 	///////////////////////////////////////////////////
 	// Tests regarding the notification of organizers
