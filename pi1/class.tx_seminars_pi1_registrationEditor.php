@@ -1159,13 +1159,17 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	/**
 	 * Returns the default country as localized string.
 	 *
-	 * @return string the default country's localized name
+	 * @return string the default country's localized name, will be empty if
+	 *                there is no default country
 	 */
 	private function getDefaultCountry() {
 		$this->initStaticInfo();
 		$typoScriptPluginSetup = $GLOBALS['TSFE']->tmpl->setup['plugin.'];
 		$staticInfoSetup = $typoScriptPluginSetup['tx_staticinfotables_pi1.'];
-		$defaultCountryCode = $staticInfoSetup['countryCode'];
+		$defaultCountryCode = (string) $staticInfoSetup['countryCode'];
+		if ($defaultCountryCode == '') {
+			return '';
+		}
 
 		return tx_staticinfotables_div::getTitleFromIsoCode(
 			'static_countries', $defaultCountryCode,
