@@ -229,9 +229,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		// For the confirmation page, we need to reload the whole thing. Yet,
 		// the previous rendering still is necessary for processing the data.
 		if ($this->currentPageNumber > 0) {
-			// A mayday would be returned without unsetting the form ID.
-			unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
-				['context']['forms']['tx_seminars_pi1_registration_editor']);
+			$this->discardRenderedForm();
 			$this->setFormConfiguration();
 			// This will produce a new form to which no data can be provided.
 			$rawForm = $this->makeFormCreator()->render();
@@ -245,6 +243,25 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$this->hideUnusedFormFields();
 
 		return $this->getSubpart('', 2);
+	}
+
+	/**
+	 * Discards the rendered FORMIdable form from the page, including any header
+	 * data.
+	 */
+	private function discardRenderedForm() {
+		// A mayday would be returned without unsetting the form ID.
+		unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
+			['context']['forms']['tx_seminars_pi1_registration_editor']);
+		if (!is_array($GLOBALS['TSFE']->additionalHeaderData)) {
+			return;
+		}
+
+		foreach ($GLOBALS['TSFE']->additionalHeaderData as $key => $content) {
+			if (strpos($content, 'FORMIDABLE:') !== false) {
+				unset($GLOBALS['TSFE']->additionalHeaderData[$key]);
+			}
+		}
 	}
 
 	/**
