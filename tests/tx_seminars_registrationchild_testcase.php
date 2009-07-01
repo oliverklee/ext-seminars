@@ -36,12 +36,18 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
-	/** @var tx_seminars_registrationchild */
+	/**
+	 * @var tx_seminars_registrationchild
+	 */
 	private $fixture;
-	/** @var tx_oelib_testingFramework */
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
-	/** @var integer the UID of a seminar to which the fixture relates */
+	/**
+	 * @var integer the UID of a seminar to which the fixture relates
+	 */
 	private $seminarUid;
 
 	/**
@@ -153,6 +159,55 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$this->setPaymentMethodRelation(array()),
 			$this->setPaymentMethodRelation(array())
 		);
+	}
+
+
+	///////////////////////////////////////////////////////////////
+	// Tests concerning the payment method in setRegistrationData
+	///////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataUsesPaymentMethodUidFromSetRegistrationData() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('method_of_payment' => 42)
+		);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getMethodOfPaymentUid()
+		);
+
+		$seminar->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array('price_regular' => 31.42)
+		);
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid, $paymentMethodUid,
+			'payment_methods'
+		);
+
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, 0, array());
+
+		$this->assertEquals(
+			$paymentMethodUid,
+			$this->fixture->getMethodOfPaymentUid()
+		);
+
+		$seminar->__destruct();
 	}
 
 
