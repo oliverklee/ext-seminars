@@ -190,7 +190,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					'',
 					'tx_seminars_seminars_payment_methods_mm.sorting'
 				);
-				$methodOfPayment = $rows[0][$uid];
+				$methodOfPayment = $rows[0]['uid'];
 		}
 		$this->recordData['method_of_payment'] = $methodOfPayment;
 
