@@ -1,4 +1,5 @@
 0.8.0 (currently working on)
+- [#2773] Fix: 3 registration records created when registering with IE 6
 - [#3146] Fix: $uid is not initialized in registration::setRegistrationData
 - [#3151] Fix: SQL error on the registration page with latest static_info_tables
 - [#3142] Fix: Test failures with base64 encoding
