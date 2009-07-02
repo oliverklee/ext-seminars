@@ -56,13 +56,17 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkStaticIncluded();
 		$this->checkSalutationMode();
 		$this->checkTimeAndDate();
-		$this->checkShowTimeOfRegistrationDeadline();
-		$this->checkShowTimeOfEarlyBirdDeadline();
-		$this->checkShowVacanciesThreshold();
 		$this->checkDecimalDigits();
 		$this->checkDecimalSplitChar();
 		$this->checkShowToBeAnnouncedForEmptyPrice();
-		$this->checkSkipRegistrationCollisionCheck();
+
+		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
+			$this->checkShowTimeOfRegistrationDeadline();
+			$this->checkShowTimeOfEarlyBirdDeadline();
+			$this->checkShowVacanciesThreshold();
+			$this->checkAllowRegistrationForEventsWithoutDate();
+			$this->checkSkipRegistrationCollisionCheck();
+		}
 	}
 
 	/**
@@ -1949,6 +1953,22 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				.'to the user after the queue has been updated. If this value is '
 				.'not set correctly, the sending of notifications probably will '
 				.'not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * allowRegistrationForEventsWithoutDate.
+	 */
+	private function checkAllowRegistrationForEventsWithoutDate() {
+		$this->checkIfBoolean(
+			'allowRegistrationForEventsWithoutDate',
+			false,
+			'',
+			'This value specifies whether registration is possible for ' .
+				'events without a fixed date. ' .
+				'If this value is incorrect, registration might be possible ' .
+				'even when this is not desired (or vice versa).'
 		);
 	}
 

@@ -1,4 +1,5 @@
 0.8.1 (currently working on)
+- [#3159] Fix: Missing config check for allowRegistrationForEventsWithoutDate
 
 0.8.0 (released 2009-07-01)
 - [#2773] Fix: 3 registration records created when registering with IE 6
