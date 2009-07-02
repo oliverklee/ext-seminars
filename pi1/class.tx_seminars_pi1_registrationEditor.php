@@ -1395,6 +1395,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				'bank_code',
 				'bank_name',
 				'account_owner',
+				'company',
 				'gender',
 				'name',
 				'address',

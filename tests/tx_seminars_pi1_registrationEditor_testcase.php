@@ -233,6 +233,28 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_SaveDataToSession_CanStoreCompanyInSession() {
+		$this->fixture->processRegistration(array('company' => 'foo inc.'));
+
+		$this->assertEquals(
+			'foo inc.',
+			$this->session->getAsString(
+				'tx_seminars_registration_editor_company'
+			)
+		);
+	}
+
+	public function test_SaveDataToSession_CanStoreNameInSession() {
+		$this->fixture->processRegistration(array('name' => 'foo'));
+
+		$this->assertEquals(
+			'foo',
+			$this->session->getAsString(
+				'tx_seminars_registration_editor_name'
+			)
+		);
+	}
+
 
 	/////////////////////////////////////////////
 	// Tests concerning retrieveDataFromSession

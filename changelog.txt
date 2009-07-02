@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3120] Feature: Copy the company name and full name from the FE user into the billing data fields and store them in the session
 - [#3114] Feature: In the notification e-mail to the organizers, enumerate the registered persons
 - [#3118] Feature: In the thank-you e-mail, include the places' address field
 - [#3121] Change: When CSV-exporting the name in the FE users and registrations, take the first name and last name
