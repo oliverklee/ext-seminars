@@ -2289,23 +2289,24 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		) {
 			return ' class="' . $this->pi_getClassName('vacancies') . '"';
 		}
+
+		$classes = array('vacancies');
+
 		if ($seminar->hasDate() && $seminar->hasStarted()) {
-			return ' class="' . $this->pi_getClassName('vacancies') . ' ' .
-				$this->pi_getClassName('event-begin-date-over') . '"';
+			$classes[] = 'event-begin-date-over';
 		}
 
-		$result = $this->pi_getClassName('vacancies');
-
 		if ($seminar->hasVacancies()) {
-			$result .= ' ' . $this->pi_getClassName('vacancies-available') .
-			 ' ' . (($seminar->hasUnlimitedVacancies())
-				? $this->pi_getClassName('vacancies-unlimited')
-				: $this->pi_getClassName('vacancies-' . $seminar->getVacancies())
-			);
+			$classes[] = 'vacancies-available';
+			if ($seminar->hasUnlimitedVacancies()) {
+				$classes[] = 'vacancies-unlimited';
+			} else {
+				$classes[] = 'vacancies-' . $seminar->getVacancies();
+			}
 		} else {
-			$result .= ' ' . $this->pi_getClassName('vacancies-0');
+			$classes[] = 'vacancies-0';
 			if ($seminar->hasRegistrationQueue()) {
-				$result .= ' ' . $this->pi_getClassName('has-registration-queue');
+				$classes[] = 'has-registration-queue';
 			}
 		}
 
@@ -2313,12 +2314,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		// user stylesheets still can use the number of vacancies even for
 		// events for which the registration deadline is over.
 		if ($seminar->hasDate() && $seminar->isRegistrationDeadlineOver()) {
-			$result .= ' ' . $this->pi_getClassName(
-				'registration-deadline-over'
-			);
+			$classes[] = 'registration-deadline-over';
 		}
 
-		return ' class="' . $result . '"';
+		$prefixedClasses = array_map(
+			array($this, 'pi_getClassName'), $classes
+		);
+
+		return ' class="' . implode(' ', $prefixedClasses) . '"';
 	}
 
 	/**

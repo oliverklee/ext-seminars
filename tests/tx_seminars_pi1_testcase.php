@@ -5237,6 +5237,26 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function getVacanciesClasses_ForBeginDateInPastAndRegistrationForStartedEventsAllowed_ReturnsVacanciesAvailableClass() {
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+		$event->setNeedsRegistration(true);
+		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'allowRegistrationForStartedEvents', 1
+		);
+
+		$output = $this->fixture->getVacanciesClasses($event);
+		$event->__destruct();
+
+		$this->assertContains(
+			$this->fixture->pi_getClassName('vacancies-available'),
+			$output
+		);
+	}
+
 	public function test_GetVacanciesClasses_ForEventNotNeedingRegistration_ReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(false);
