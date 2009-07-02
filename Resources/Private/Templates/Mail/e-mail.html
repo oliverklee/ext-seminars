@@ -15,7 +15,9 @@
 <h2>Template for plain-text version of the thank-you mail to the attendee</h2>
 <pre>
 <!-- ###MAIL_THANKYOU### -->
-<!-- ###FIELD_WRAPPER_HELLO### -->###HELLO###
+<!-- ###FIELD_WRAPPER_HELLO### -->###SALUTATION###
+
+###INTRODUCTION###
 
 <!-- ###FIELD_WRAPPER_HELLO### --><!-- ###FIELD_WRAPPER_TITLE### --><!-- ###FIELD_WRAPPER_EVENT_TYPE###-->###EVENT_TYPE###: <!-- ###FIELD_WRAPPER_EVENT_TYPE###-->###TITLE###
 
@@ -90,7 +92,8 @@
 </head>
 <body>
 	<!-- ###HTML_FIELD_WRAPPER_HELLO### -->
-		<p>###HELLO###</p>
+		<p>###SALUTATION###</p>
+		<p>###INTRODUCTION###</p>
 	<!-- ###HTML_FIELD_WRAPPER_HELLO### -->
 
 	<!-- ###HTML_FIELD_WRAPPER_TITLE### -->
@@ -175,9 +178,9 @@
 <h2>Template for the notification e-mail to the organizer</h2>
 <pre>
 <!-- ###MAIL_NOTIFICATION### -->
-<!-- ###FIELD_WRAPPER_HELLO### -->###HELLO###
+###HELLO###
 
-<!-- ###FIELD_WRAPPER_HELLO### --><!-- ###FIELD_WRAPPER_SUMMARY### -->###SUMMARY###
+<!-- ###FIELD_WRAPPER_SUMMARY### -->###SUMMARY###
 
 <!-- ###FIELD_WRAPPER_SUMMARY### --><!-- ###FIELD_WRAPPER_SEMINARDATA### -->[###LABEL_SEMINARDATA###]
 ###SEMINARDATA###

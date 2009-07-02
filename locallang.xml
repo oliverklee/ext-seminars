@@ -96,34 +96,22 @@
 			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
+			<label index="email_salutation_informal">Dear %s,</label>
+			<label index="email_salutation_formal_0">Dear Mr. %s,</label>
+			<label index="email_salutation_formal_1">Dear Ms. %s,</label>
+			<label index="email_salutation_formal_2">Dear %s,</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
-			<label index="email_confirmationHello_formal">Hello %s,
-
-thank you for registering for this event:</label>
-			<label index="email_confirmationHello_informal">Hello %s,
-
-thank you for registering for this event:</label>
+			<label index="email_confirmationHello_formal">thank you for registering for this event:</label>
+			<label index="email_confirmationHello_informal">thank you for registering for this event:</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
-
-you just have unregistered from this event:</label>
-			<label index="email_confirmationOnUnregistrationHello_informal">Hello %s,
-
-you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">you just have unregistered from this event:</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">Hello %s,
-
-thank you for registering for the waiting list of this event:</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_informal">Hello %s,
-
-thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of this event:</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">Hello %s,
-
-your registration just has become a regular registration of this event:</label>
-			<label index="email_confirmationOnQueueUpdateHello_informal">Hello %s,
-
-your registration just has become a regular registration of this event:</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration of this event:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration of this event:</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Event has enough registrations: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Your event is full, there are no empty seats left.</label>
@@ -370,34 +358,22 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="message_registrationOpensOn">ab %s</label>
 			<label index="message_accessDenied_formal">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
 			<label index="message_accessDenied_informal">Zu diesem Teil der Site hast du leider keine Zugangsberechtigung.</label>
+			<label index="email_salutation_informal">Hallo %s,</label>
+			<label index="email_salutation_formal_0">Sehr geehrter Herr %s,</label>
+			<label index="email_salutation_formal_1">Sehr geehrte Frau %s,</label>
+			<label index="email_salutation_formal_2">Sehr geehrte(r) %s,</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
-			<label index="email_confirmationHello_formal">Guten Tag %s,
-
-vielen Dank für Ihre Anmeldung zu dieser Veranstaltung:</label>
-			<label index="email_confirmationHello_informal">Hallo %s,
-
-vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
+			<label index="email_confirmationHello_formal">vielen Dank für Ihre Anmeldung zu dieser Veranstaltung:</label>
+			<label index="email_confirmationHello_informal">vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
 			<label index="email_confirmationOnUnregistrationSubject">Abmeldebestätigung</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">Guten Tag %s,
-
-Sie haben sich gerade von dieser Veranstaltung abgemeldet:</label>
-			<label index="email_confirmationOnUnregistrationHello_informal">Hallo %s,
-
-du hast dich gerade von dieser Veranstaltung abgemeldet:</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">Sie haben sich gerade von dieser Veranstaltung abgemeldet:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">du hast dich gerade von dieser Veranstaltung abgemeldet:</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Anmeldebestätigung für die Warteliste</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">Guten Tag %s,
-
-vielen Dank für Ihre Anmeldung für die Warteliste von dieser Veranstaltung:</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_informal">Hallo %s,
-
-vielen Dank für deine Anmeldung für die Warteliste von dieser Veranstaltung:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">vielen Dank für Ihre Anmeldung für die Warteliste von dieser Veranstaltung:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">vielen Dank für deine Anmeldung für die Warteliste von dieser Veranstaltung:</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Bestätigung: Anmeldung wurde zu regulärer Anmeldung</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">Guten Tag %s,
-
-Ihre Anmeldung wurde gerade zu einer regulären Anmeldung von dieser Veranstaltung:</label>
-			<label index="email_confirmationOnQueueUpdateHello_informal">Hallo %s,
-
-deine Anmeldung wurde gerade zu einer regulären Anmeldung von dieser Veranstaltung:</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Ihre Anmeldung wurde gerade zu einer regulären Anmeldung von dieser Veranstaltung:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">deine Anmeldung wurde gerade zu einer regulären Anmeldung von dieser Veranstaltung:</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Folgende Veranstaltung hat nun genug Anmeldungen, um durchgeführt zu werden.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Veranstaltung hat genug Anmeldungen: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Folgende Veranstaltung ist nun komplett ausgebucht (keine freien Plätze mehr).</label>
@@ -1141,21 +1117,25 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_registrationOpensOn" type="integer">260849167</label>
 			<label index="message_accessDenied_formal" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
+			<label index="email_salutation_informal" type="integer">21620827</label>
+			<label index="email_salutation_formal_0" type="integer">169899728</label>
+			<label index="email_salutation_formal_1" type="integer">45885274</label>
+			<label index="email_salutation_formal_2" type="integer">251418939</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationHello" type="integer">88233580</label>
-			<label index="email_confirmationHello_informal" type="integer">88233580</label>
+			<label index="email_confirmationHello_informal" type="integer">211059923</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
-			<label index="email_confirmationHello_formal" type="integer">88233580</label>
+			<label index="email_confirmationHello_formal" type="integer">211059923</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
-			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">197103273</label>
-			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">197103273</label>
+			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">235936024</label>
+			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">235936024</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject" type="integer">245357554</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">49182706</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">49182706</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">54068632</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">54068632</label>
 			<label index="email_confirmationOnQueueUpdateSubject" type="integer">141930955</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">262513865</label>
-			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">262513865</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">110704185</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">110704185</label>
 			<label index="email_additionalNotificationSubject" type="integer">75541883</label>
 			<label index="email_additionalNotificationEnoughRegistrations" type="integer">40292240</label>
 			<label index="email_additionalNotificationIsFull" type="integer">125053794</label>
@@ -1704,34 +1684,22 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
+			<label index="email_salutation_informal">Hello %s,</label>
+			<label index="email_salutation_formal_0">Dear Mr. %s,</label>
+			<label index="email_salutation_formal_1">Dear Ms. %s,</label>
+			<label index="email_salutation_formal_2">Dear %s,</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
-			<label index="email_confirmationHello_formal">Hello %s,
-
-thank you for registering for this event:</label>
-			<label index="email_confirmationHello_informal">Hello %s,
-
-thank you for registering for this event:</label>
+			<label index="email_confirmationHello_formal">thank you for registering for this event:</label>
+			<label index="email_confirmationHello_informal">thank you for registering for this event:</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">Hello %s,
-
-you just have unregistered from this event:</label>
-			<label index="email_confirmationOnUnregistrationHello_informal">Hello %s,
-
-you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">you just have unregistered from this event:</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">Hello %s,
-
-thank you for registering for the waiting list of this event:</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_informal">Hello %s,
-
-thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of this event:</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of this event:</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">Hello %s,
-
-your registration just has become a regular registration of this event:</label>
-			<label index="email_confirmationOnQueueUpdateHello_informal">Hello %s,
-
-your registration just has become a regular registration of this event:</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration of this event:</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration of this event:</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Event has enough registrations: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Your event is full, there are no empty seats left.</label>

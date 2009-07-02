@@ -1033,11 +1033,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$wrapperPrefix
 		);
 
-		$hello = sprintf(
-			$this->translate('email_' . $helloSubjectPrefix . 'Hello'),
-			$registration->getUserName()
-		);
-		$this->setMarker('hello', (($useHtml) ? nl2br($hello) : $hello));
+		$this->createSalutation($registration, $useHtml, $helloSubjectPrefix);
+
 		$event = $registration->getSeminarObject();
 		if ($event->hasEventType()) {
 			$this->setMarker('event_type', $event->getEventType());
@@ -1274,6 +1271,55 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$this->setMarker(
 			'place', implode($newline . $newline, $formattedPlaces)
+		);
+	}
+
+	/**
+	 * Creates the salutation for the notification mails to the attendees.
+	 *
+	 * This function will also create the introductory sentence to the mails.
+	 *
+	 * The data is set into markers direclty.
+	 *
+	 * @param tx_seminars_registration $registration the registration for which
+	 *        the salutation should be created
+	 * @param boolean $useHtml whether to create a HTML salutation
+	 * @param string $helloSubjectPrefix
+	 *        prefix for the locallang key of the localized hello and subject
+	 *        string, allowed values are:
+	 *         - confirmation
+	 *         - confirmationOnUnregistration
+	 *         - confirmationOnRegistrationForQueue
+	 *         - confirmationOnQueueUpdate
+	 *        In the following, the parameter is prefixed with "email_" and
+	 *        postfixed with "Hello" or "Subject".
+	 */
+	private function createSalutation(
+		tx_seminars_registration $registration, $useHtml, $helloSubjectPrefix
+	) {
+		$user = $registration->getFrontEndUser();
+		$salutationMode = $this->getConfValueString('salutation');
+
+		switch ($salutationMode) {
+			case 'informal':
+				$salutation = sprintf(
+					$this->translate('email_salutation_informal'),
+					$user->getFirstOrFullName()
+				);
+				break;
+			default:
+				$salutation =  sprintf(
+					$this->translate(
+						'email_salutation_formal_' . $user->getGender()
+					), $user->getLastOrFullName()
+				);
+				break;
+		}
+
+		$this->setMarker('salutation', $salutation);
+		$this->setMarker(
+			'introduction',
+			$this->translate('email_' . $helloSubjectPrefix . 'Hello')
 		);
 	}
 }

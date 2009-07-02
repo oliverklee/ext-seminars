@@ -814,7 +814,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				.'organizers. A mistyped field name will cause the field to '
 				.'be included nonetheless.',
 			array(
-				'hello',
 				'summary',
 				'seminardata',
 				'feuserdata',

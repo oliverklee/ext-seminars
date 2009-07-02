@@ -2249,6 +2249,356 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////////
+	// Tests concerning the salutation
+	////////////////////////////////////
+
+	public function test_NotifyAttendee_ForInformalSalutation_ContainsInformalSalutation() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('email_salutation_informal'),
+				'foo_user'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForFormalSalutationAndGenderUnknown_ContainsFormalUnknownSalutation() {
+		if (t3lib_extMgm::isLoaded('sr_feuser_register')) {
+			$this->markTestSkipped(
+				'This test is only applicable if sr_feuser_register is ' .
+					'not loaded.'
+			);
+		}
+
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('email_salutation_formal_2'),
+				'foo_user'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForFormalSalutationAndGenderMale_ContainsFormalMaleSalutation() {
+		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
+			$this->markTestSkipped(
+				'This test is only applicable if sr_feuser_register is ' .
+					'loaded.'
+			);
+		}
+
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com', 'gender' => 0)
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('email_salutation_formal_0'),
+				'foo_user'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForFormalSalutationAndGenderFemale_ContainsFormalFemaleSalutation() {
+		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
+			$this->markTestSkipped(
+				'This test is only applicable if sr_feuser_register is ' .
+					'loaded.'
+			);
+		}
+
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com', 'gender' => 1)
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('email_salutation_formal_1'),
+				'foo_user'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForFormalSalutationAndConfirmation_ContainsFormalConfirmationText() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate('email_confirmationHello_formal'),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForInformalSalutationAndConfirmation_ContainsInformalConfirmationText() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate('email_confirmationHello_informal'),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForFormalSalutationAndUnregistration_ContainsFormalUnregistrationText() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnUnregistration', true
+		);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnUnregistration'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate(
+				'email_confirmationOnUnregistrationHello_formal'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForInformalSalutationAndUnregistration_ContainsInformalUnregistrationText() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnUnregistration', true
+		);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnUnregistration'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate(
+				'email_confirmationOnUnregistrationHello_informal'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForFormalSalutationAndQueueConfirmation_ContainsFormalQueueConfirmationText() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnRegistrationForQueue', true
+		);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnRegistrationForQueue'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate(
+				'email_confirmationOnRegistrationForQueueHello_formal'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForInformalSalutationAndQueueConfirmation_ContainsInformalQueueConfirmationText() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnRegistrationForQueue', true
+		);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnRegistrationForQueue'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate(
+				'email_confirmationOnRegistrationForQueueHello_informal'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForFormalSalutationAndQueueUpdate_ContainsFormalQueueUpdateText() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnQueueUpdate', true
+		);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnQueueUpdate'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate(
+				'email_confirmationOnQueueUpdateHello_formal'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForInformalSalutationAndQueueUpdate_ContainsInformalQueueUpdateText() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnQueueUpdate', true
+		);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnQueueUpdate'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate(
+				'email_confirmationOnQueueUpdateHello_informal'
+			),
+			base64_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+
 	///////////////////////////////////////////////////
 	// Tests regarding the notification of organizers
 	///////////////////////////////////////////////////
@@ -2264,30 +2614,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			'Hello',
-			base64_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
-		);
-	}
-
-	public function test_NotifyOrganizers_CanHideHelloByConfiguration() {
-		$registration = $this->createRegistration();
-		// Sets the seats so there is at least one element in the e-mail.
-		$registration->setSeats(15);
-		$this->fixture->setConfigurationValue(
-			'showAttendanceFieldsInNotificationMail', 'seats'
-		);
-
-		$this->fixture->setConfigurationValue('sendNotification', true);
-		$this->fixture->setConfigurationValue(
-			'hideFieldsInNotificationMail', 'hello'
-		);
-
-		$this->fixture->notifyOrganizers($registration);
-		$registration->__destruct();
-
-		$this->assertNotContains(
 			'Hello',
 			base64_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
