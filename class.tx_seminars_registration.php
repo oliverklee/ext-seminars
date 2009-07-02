@@ -414,6 +414,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			case 'checkboxes':
 				$result = $this->getCheckboxes();
 				break;
+			case 'attendees_names':
+				$result = $this->getEnumeratedAttendeeNames();
+				break;
 			default:
 				$result = $this->getRecordPropertyString($trimmedKey);
 				break;
@@ -1215,6 +1218,30 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	public function hasMethodOfPayment() {
 		return $this->hasRecordPropertyInteger('method_of_payment');
+	}
+
+	/**
+	 * Returns the enumerated attendees_names.
+	 *
+	 * @return string the names stored in attendees_name enumerated, will be
+	 *                empty if this registration has no attendees names
+	 */
+	private function getEnumeratedAttendeeNames() {
+		if (!$this->hasAttendeesNames()) {
+			return '';
+		}
+
+		$attendeesNames = t3lib_div::trimExplode(
+			LF, $this->getAttendeesNames(), true
+		);
+		$enumeratedNames = array();
+		$attendeeCounter = 1;
+		foreach ($attendeesNames as $attendeeName) {
+			$enumeratedNames[] = $attendeeCounter . '. ' . $attendeeName;
+			$attendeeCounter++;
+		}
+
+		return implode(LF, $enumeratedNames);
 	}
 }
 

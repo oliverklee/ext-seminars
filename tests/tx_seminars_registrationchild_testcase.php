@@ -331,6 +331,20 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
+	public function test_getRegistrationDataForMultipleAttendeeNames_ReturnsAttendeeNamesWithEnumeration() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
+		);
+
+		$this->assertEquals(
+			'1. foo' . LF . '2. bar',
+			$this->fixture->getRegistrationData('attendees_names')
+		);
+
+		$seminar->__destruct();
+	}
+
 
 	//////////////////////////////////////////
 	// Tests concerning dumpAttendanceValues
