@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3117] Feature: In the thank-you e-mail and the notification e-mail, list the FE user himself
 - [#3155] Feature: Add a switch for allowing registration for started events
 - [#3119] Change: Rework the salutation in the thank-you e-mails
 - [#3159] Fix: Missing config check for allowRegistrationForEventsWithoutDate

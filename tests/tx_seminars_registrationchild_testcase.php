@@ -1618,5 +1618,56 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$seminar->__destruct();
 	}
+
+	public function test_getEnumeratedAttendeeNames_ForSelfRegisteredUserAndNoAttendeeNames_ReturnsUsersName() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, $this->feUserUid, array('attendees_names' => '')
+		);
+		$this->fixture->setRegisteredThemselves(1);
+
+		$this->assertEquals(
+			'1. foo_user',
+			$this->fixture->getEnumeratedAttendeeNames()
+		);
+
+		$seminar->__destruct();
+	}
+
+	public function test_getEnumeratedAttendeeNames_ForSelfRegisteredUserAndAttendeeNames_ReturnsUserInFirstPosition() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, $this->feUserUid, array('attendees_names' => 'foo')
+		);
+		$this->fixture->setRegisteredThemselves(1);
+
+		$this->assertEquals(
+			'1. foo_user' . CRLF . '2. foo',
+			$this->fixture->getEnumeratedAttendeeNames()
+		);
+
+		$seminar->__destruct();
+	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning hasRegisteredMySelf
+	/////////////////////////////////////////
+
+	public function test_hasRegisteredMySelf_ForRegisteredThemselvesFalse_ReturnsFalse() {
+		$this->fixture->setRegisteredThemselves(0);
+
+		$this->assertFalse(
+			$this->fixture->hasRegisteredMySelf()
+		);
+	}
+
+	public function test_hasRegisteredMySelf_ForRegisteredThemselvesTrue_ReturnsTrue() {
+		$this->fixture->setRegisteredThemselves(1);
+
+		$this->assertTrue(
+			$this->fixture->hasRegisteredMySelf()
+		);
+	}
 }
 ?>

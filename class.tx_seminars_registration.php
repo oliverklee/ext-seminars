@@ -1233,13 +1233,19 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *                empty if this registration has no attendees names
 	 */
 	public function getEnumeratedAttendeeNames($useHtml = false) {
-		if (!$this->hasAttendeesNames()) {
+		if (!$this->hasAttendeesNames() && !$this->hasRegisteredMySelf()) {
 			return '';
 		}
 
 		$names = t3lib_div::trimExplode(
 			LF, $this->getAttendeesNames(), true
 		);
+		if ($this->hasRegisteredMySelf()) {
+			$names = array_merge(
+				array($this->getFrontEndUser()->getName()), $names
+			);
+		}
+
 		if ($useHtml) {
 			$result = '<ol><li>' . implode('</li><li>', $names) . '</li></ol>';
 		} else {
@@ -1253,6 +1259,15 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Checks whether the user has registered themselves.
+	 *
+	 * @return boolean true if the user registered themselves, false otherwise
+	 */
+	public function hasRegisteredMySelf() {
+		return $this->getRecordPropertyBoolean('registered_themselves');
 	}
 }
 
