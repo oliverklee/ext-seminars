@@ -1237,24 +1237,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$attendeesNames = t3lib_div::trimExplode(
-			LF, $registration->getAttendeesNames(), true
+		$this->setMarker(
+			'attendees_names',
+			$registration->getEnumeratedAttendeeNames($useHtml)
 		);
-		if ($useHtml) {
-			$markerContent = '<ol><li>' .
-				implode('</li><li>', $attendeesNames) .
-				'</li></ol>';
-		} else {
-			$enumeratedNames = array();
-			$attendeeCounter = 1;
-			foreach ($attendeesNames as $attendeeName) {
-				$enumeratedNames[] = $attendeeCounter . '. ' . $attendeeName;
-				$attendeeCounter++;
-			}
-			$markerContent = implode(CRLF, $enumeratedNames);
-		}
-
-		$this->setMarker('attendees_names', $markerContent);
 	}
 
 	/**

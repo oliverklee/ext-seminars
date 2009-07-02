@@ -1223,25 +1223,36 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Returns the enumerated attendees_names.
 	 *
+	 * If the enumerated names should be built by using HTML, they will be
+	 * created as list items of an ordered list. In the plain text case the
+	 * entries will be separated by CRLF.
+	 *
+	 * @param boolean $useHtml whether to use HTML to build the enumeration
+	 *
 	 * @return string the names stored in attendees_name enumerated, will be
 	 *                empty if this registration has no attendees names
 	 */
-	private function getEnumeratedAttendeeNames() {
+	public function getEnumeratedAttendeeNames($useHtml = false) {
 		if (!$this->hasAttendeesNames()) {
 			return '';
 		}
 
-		$attendeesNames = t3lib_div::trimExplode(
+		$names = t3lib_div::trimExplode(
 			LF, $this->getAttendeesNames(), true
 		);
-		$enumeratedNames = array();
-		$attendeeCounter = 1;
-		foreach ($attendeesNames as $attendeeName) {
-			$enumeratedNames[] = $attendeeCounter . '. ' . $attendeeName;
-			$attendeeCounter++;
+		if ($useHtml) {
+			$result = '<ol><li>' . implode('</li><li>', $names) . '</li></ol>';
+		} else {
+			$enumeratedNames = array();
+			$attendeeCounter = 1;
+			foreach ($names as $name) {
+				$enumeratedNames[] = $attendeeCounter . '. ' . $name;
+				$attendeeCounter++;
+			}
+			$result = implode(CRLF, $enumeratedNames);
 		}
 
-		return implode(LF, $enumeratedNames);
+		return $result;
 	}
 }
 

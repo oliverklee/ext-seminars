@@ -1557,5 +1557,66 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning getEnumeratedAttendeeNames
+	////////////////////////////////////////////////
+
+	public function test_getEnumeratedAttendeeNames_WithUseHtml_SeparatesAttendeesNamesWithListItems() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
+		);
+
+		$this->assertEquals(
+			'<ol><li>foo</li><li>bar</li></ol>',
+			$this->fixture->getEnumeratedAttendeeNames(true)
+		);
+
+		$seminar->__destruct();
+	}
+
+	public function test_getEnumeratedAttendeeNames_WithUseHtmlAndEmptyAttendeesNames_ReturnsEmptyString() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('attendees_names' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getEnumeratedAttendeeNames(true)
+		);
+
+		$seminar->__destruct();
+	}
+
+	public function test_getEnumeratedAttendeeNames_WithUsePlainText_SeparatesAttendeesNamesWithCarriageReturnAndLineFeed() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
+		);
+
+		$this->assertEquals(
+			'1. foo' . CRLF . '2. bar',
+			$this->fixture->getEnumeratedAttendeeNames()
+		);
+
+		$seminar->__destruct();
+	}
+
+	public function test_getEnumeratedAttendeeNames_WithUsePlainTextAndEmptyAttendeesNames_ReturnsEmptyString() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData(
+			$seminar, 0, array('attendees_names' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getEnumeratedAttendeeNames()
+		);
+
+		$seminar->__destruct();
+	}
 }
 ?>
