@@ -1,7 +1,7 @@
 0.9.0 (currently working on)
 - [#3117] Feature: In the thank-you e-mail and the notification e-mail, list the FE user himself
 - [#3155] Feature: Add a switch for allowing registration for started events
-- [#3119] Change: Rework the salutation in the thank-you e-mails
+- [#3119] Feature: Rework the salutation in the thank-you e-mails
 - [#3159] Fix: Missing config check for allowRegistrationForEventsWithoutDate
 - [#3120] Feature: Copy the company name and full name from the FE user into the billing data fields and store them in the session
 - [#3114] Feature: In the notification e-mail to the organizers, enumerate the registered persons
