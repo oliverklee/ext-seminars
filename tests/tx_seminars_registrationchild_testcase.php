@@ -55,6 +55,11 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	private $registrationUid;
 
+	/**
+	 * @var integer the UID of the user the registration relates to
+	 */
+	private $feUserUid;
+
 	public function setUp() {
 		tx_seminars_registrationchild::purgeCachedSeminars();
 
@@ -80,7 +85,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 
-		$feUserUid = $this->testingFramework->createFrontEndUser(
+		$this->feUserUid = $this->testingFramework->createFrontEndUser(
 			'',
 			array(
 				'name' => 'foo_user',
@@ -94,7 +99,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 				'seminar' => $this->seminarUid,
 				'interests' => 'nothing',
 				'expectations' => '',
-				'user' => $feUserUid,
+				'user' => $this->feUserUid,
 			)
 		);
 
@@ -640,15 +645,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetUserDataCanReturnNameSetViaSetUserData() {
-		$this->fixture->setUserData(array('name' => 'John Doe'));
-
-		$this->assertEquals(
-			'John Doe',
-			$this->fixture->getUserData('name')
-		);
-	}
-
 	public function testGetUserDataCanReturnWwwSetViaSetUserData() {
 		$this->fixture->setUserData(array('www' => 'www.foo.com'));
 
@@ -671,8 +667,58 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_getUserData_ForUserWithName_ReturnsUsersName() {
+		$this->assertEquals(
+			'foo_user',
+			$this->fixture->getUserData('name')
+		);
+	}
+
+	public function test_getUserData_ForUserWithOutNameButFirstName_ReturnsFirstName() {
+		$this->testingFramework->changeRecord(
+			'fe_users', $this->feUserUid,
+			array('name' => '', 'first_name' => 'first_foo')
+		);
+
+		$this->assertEquals(
+			'first_foo',
+			$this->fixture->getUserData('name')
+		);
+	}
+
+	public function test_getUserData_ForUserWithOutNameButLastName_ReturnsLastName() {
+		$this->testingFramework->changeRecord(
+			'fe_users', $this->feUserUid,
+			array('name' => '', 'last_name' => 'last_foo')
+		);
+
+		$this->assertEquals(
+			'last_foo',
+			$this->fixture->getUserData('name')
+		);
+	}
+
+	public function test_getUserData_ForUserWithOutNameButFirstAndLastName_ReturnsFirstAndLastName() {
+		$this->testingFramework->changeRecord(
+			'fe_users', $this->feUserUid,
+			array('name' => '', 'first_name' => 'first', 'last_name' => 'last')
+		);
+
+		$this->assertEquals(
+			'first last',
+			$this->fixture->getUserData('name')
+		);
+	}
+
+
+	////////////////////////////////////
+	// Tests concerning dumpUserValues
+	////////////////////////////////////
+
 	public function testDumpUserValuesContainsUserNameIfRequested() {
-		$this->fixture->setUserData(array('name' => 'John Doe'));
+		$this->testingFramework->changeRecord(
+			'fe_users', $this->feUserUid, array('name' => 'John Doe')
+		);
 
 		$this->assertContains(
 			'John Doe',
@@ -681,7 +727,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testDumpUserValuesContainsUserNameIfRequestedEvenForSpaceAfterCommaInKeyList() {
-		$this->fixture->setUserData(array('name' => 'John Doe'));
+		$this->testingFramework->changeRecord(
+			'fe_users', $this->feUserUid, array('name' => 'John Doe')
+		);
 
 		$this->assertContains(
 			'John Doe',
@@ -690,7 +738,9 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testDumpUserValuesContainsUserNameIfRequestedEvenForSpaceBeforeCommaInKeyList() {
-		$this->fixture->setUserData(array('name' => 'John Doe'));
+		$this->testingFramework->changeRecord(
+			'fe_users', $this->feUserUid, array('name' => 'John Doe')
+		);
 
 		$this->assertContains(
 			'John Doe',
@@ -699,8 +749,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testDumpUserValuesContainsLabelForUserNameIfRequested() {
-		$this->fixture->setUserData(array('name' => 'John Doe'));
-
 		$this->assertContains(
 			$this->fixture->translate('label_name'),
 			$this->fixture->dumpUserValues('name')
@@ -708,8 +756,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testDumpUserValuesContainsLabelEvenForSpaceAfterCommaInKeyList() {
-		$this->fixture->setUserData(array('name' => 'John Doe'));
-
 		$this->assertContains(
 			$this->fixture->translate('label_name'),
 			$this->fixture->dumpUserValues('email, name')
@@ -717,8 +763,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testDumpUserValuesContainsLabelEvenForSpaceBeforeCommaInKeyList() {
-		$this->fixture->setUserData(array('name' => 'John Doe'));
-
 		$this->assertContains(
 			$this->fixture->translate('label_name'),
 			$this->fixture->dumpUserValues('name ,email')

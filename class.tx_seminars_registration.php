@@ -479,6 +479,9 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 							$rawData
 						);
 						break;
+					case 'name':
+						$result = $this->getFrontEndUser()->getName();
+						break;
 					default:
 						$result = $rawData;
 						break;

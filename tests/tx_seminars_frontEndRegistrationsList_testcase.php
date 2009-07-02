@@ -103,7 +103,9 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 * Note: This creates a registration record.
 	 */
 	private function createLogInAndRegisterFrontEndUser() {
-		$this->feUserUid = $this->testingFramework->createAndLogInFrontEndUser();
+		$this->feUserUid = $this->testingFramework->createAndLogInFrontEndUser(
+			'', array('name' => 'John Doe')
+		);
 		$this->registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -279,11 +281,6 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			'showFeUserFieldsInRegistrationsList', 'name'
 		);
 		$this->createLogInAndRegisterFrontEndUser();
-		$this->testingFramework->changeRecord(
-			'fe_users',
-			$this->feUserUid,
-			array('name' => 'John Doe')
-		);
 
 		$this->assertContains(
 			'<td>John Doe</td>',

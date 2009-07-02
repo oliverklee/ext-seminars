@@ -1664,10 +1664,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
 		);
 		$registration = $this->createRegistration();
-		$registration->getFrontEndUser()->setData(
-			array(
-				'email' => 'foo@bar.com',
-			)
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
 		);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
