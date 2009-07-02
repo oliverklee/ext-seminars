@@ -4475,6 +4475,28 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$this->getRecordPropertyInteger('begin_date_registration')
 		);
 	}
+
+	/**
+	 * Returns the places associated with this event.
+	 *
+	 * @return tx_oelib_list with the models for the places of this event, will
+	 *                       be empty if this event has no places
+	 */
+	public function getPlaces() {
+		if (!$this->hasPlace()) {
+			return tx_oelib_ObjectFactory::make('tx_oelib_List');
+		}
+
+		$places = tx_oelib_db::selectMultiple(
+			'uid, title, address, city, country, homepage, directions',
+			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
+			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
+		);
+
+		return tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Place')
+			->getListOfModels($places);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminar.php']) {

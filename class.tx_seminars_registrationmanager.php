@@ -1109,7 +1109,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				(($useHtml) ? '&#8212;' : '-')
 			)
 		);
-		$this->setMarker('place', $event->getPlaceShort());
+
+		$this->fillPlacesMarker($event, $useHtml);
 
 		if ($event->hasRoom()) {
 			$this->setMarker('room', $event->getRoom());
@@ -1254,6 +1255,40 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$this->setMarker('attendees_names', $markerContent);
+	}
+
+	/**
+	 * Sets the places marker for the attendee notification.
+	 *
+	 * @param tx_seminars_seminar $event event of this registration
+	 * @param boolean $useHtml whether to send HTML or plain text mail
+	 */
+	private function fillPlacesMarker($event, $useHtml) {
+		if (!$event->hasPlace()) {
+			$this->setMarker(
+				'place', $this->translate('message_willBeAnnounced')
+			);
+
+			return;
+		}
+
+		$places = $event->getPlaces();
+		$newline = ($useHtml) ? '<br />' : CRLF;
+		$formattedPlaces = array();
+
+		foreach ($places as $place) {
+			$address = preg_replace(
+				'/[\n|\r]+/',
+				' ',
+				str_replace('<br />', ' ', strip_tags($place->getAddress()))
+			);
+
+			$formattedPlaces[] = $place->getTitle() . $newline . $address;
+		}
+
+		$this->setMarker(
+			'place', implode($newline . $newline, $formattedPlaces)
+		);
 	}
 }
 

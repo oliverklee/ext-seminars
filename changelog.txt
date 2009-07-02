@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3118] Feature: In the thank-you e-mail, include the places' address field
 - [#3121] Change: When CSV-exporting the name in the FE users and registrations, take the first name and last name
 - [#2773] Fix: 3 registration records created when registering with IE 6
 - [#3146] Fix: $uid is not initialized in registration::setRegistrationData

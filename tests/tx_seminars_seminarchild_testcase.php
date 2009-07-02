@@ -4557,6 +4557,34 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////
+	// Tests concerning getPlaces
+	///////////////////////////////
+
+	public function test_getPlacesForEventWithNoPlaces_ReturnsEmptyList() {
+		$this->assertTrue(
+			$this->fixture->getPlaces() instanceof tx_oelib_list
+		);
+	}
+
+	public function test_getPlaces_ForSeminarWithOnePlaces_ReturnsListWithPlaceModel() {
+		$this->addPlaceRelation();
+
+		$this->assertTrue(
+			$this->fixture->getPlaces()->first() instanceof tx_seminars_Model_place
+		);
+	}
+
+	public function test_getPlaces_ForSeminarWithOnePlaces_ReturnsListWithOnePlace() {
+		$this->addPlaceRelation();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getPlaces()->count()
+		);
+	}
+
+
 	/////////////////////////////
 	// Tests for attached files
 	/////////////////////////////

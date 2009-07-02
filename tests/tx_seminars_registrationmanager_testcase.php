@@ -1896,6 +1896,358 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_NotifyAttendee_CanSendPlaceTitleInMailBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('title' => 'foo_place')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'foo_place',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_CanSendPlaceAddressInMailBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('address' => 'foo_street')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'foo_street',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForEventWithNoPlace_SendsWillBeAnnouncedMessage() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$this->fixture->translate('message_willBeAnnounced'),
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlainTextMail_SeparatesPlacesTitleAndAddressWithCRLF() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'place_title','address' => 'place_address')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'place_title' . CRLF . 'place_address',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForHtmlMail_SeparatesPlacesTitleAndAddressWithBreaks() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registrationmanager::SEND_HTML_MAIL
+		);
+		$this->fixture->setConfigurationValue(
+			'cssFileForAttendeeMail',
+			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+		);
+
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'place_title','address' => 'place_address')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'place_title<br>place_address',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_StripsHtmlTagsFromPlaceAddress() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('title' => 'place_title','address' => 'place<h2>_address</h2>')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'place_title' . CRLF . 'place_address',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddress_ReplacesLineFeedsWithSpaces() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address1' . LF . 'address2')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address1 address2',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddress_ReplacesCarriageReturnsWithSpaces() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address1' . CR . 'address2')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address1 address2',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddress_ReplacesCarriageReturnAndLineFeedWithOneSpace() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address1' . CRLF . 'address2')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address1 address2',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddress_ReplacesMultipleCarriageReturnsWithOneSpace() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address1' . CR . CR . 'address2')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address1 address2',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_ReplacesMultipleLineFeedsWithSpaces() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address1' . LF . LF . 'address2')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address1 address2',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddressAndHtmlMails_ReplacesMultipleLineFeedsWithSpaces() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registrationmanager::SEND_HTML_MAIL
+		);
+		$this->fixture->setConfigurationValue(
+			'cssFileForAttendeeMail',
+			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+		);
+
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address1' . LF . LF . 'address2')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address1 address2',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddress_ReplacesMultipleLineFeedAndCarriageReturnsWithSpaces() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registrationmanager::SEND_HTML_MAIL
+		);
+		$this->fixture->setConfigurationValue(
+			'cssFileForAttendeeMail',
+			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+		);
+
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address1' . LF . 'address2' . CR . CRLF . 'address3')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address1 address2 address3',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
 
 	///////////////////////////////////////////////////
 	// Tests regarding the notification of organizers
