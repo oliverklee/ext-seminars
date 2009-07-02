@@ -1970,10 +1970,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return integer the latest possible moment to register for a seminar
 	 */
 	public function getLatestPossibleRegistrationTime() {
-		return (($this->hasRegistrationDeadline()) ?
-			$this->getRecordPropertyInteger('deadline_registration') :
-			$this->getBeginDateAsTimestamp()
-		);
+		if ($this->hasRegistrationDeadline()) {
+			return $this->getRecordPropertyInteger('deadline_registration');
+		}
+		if (!$this->getConfValueBoolean('allowRegistrationForStartedEvents')) {
+			return $this->getBeginDateAsTimestamp();
+		}
+
+		return ($this->hasEndDate()
+			? $this->getEndDateAsTimestamp()
+			: $this->getBeginDateAsTimestamp());
 	}
 
 	/**

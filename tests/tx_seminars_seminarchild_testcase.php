@@ -6342,5 +6342,160 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasAdditionalInformation()
 		);
 	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning getLatestPossibleRegistrationTime
+	///////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getLatestPossibleRegistrationTimeForEventWithoutAnyDatesReturnsZero() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'needs_registration' => 1,
+				'deadline_registration' => 0,
+				'begin_date' => 0,
+				'end_date' => 0,
+			)
+		);
+		$fixture = new tx_seminars_seminarchild($uid, array());
+
+		$this->assertEquals(
+			0,
+			$fixture->getLatestPossibleRegistrationTime()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLatestPossibleRegistrationTimeForEventWithBeginDateReturnsBeginDate() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'needs_registration' => 1,
+				'deadline_registration' => 0,
+				'begin_date' => $this->currentTimestamp,
+				'end_date' => 0,
+			)
+		);
+		$fixture = new tx_seminars_seminarchild($uid, array());
+
+		$this->assertEquals(
+			$this->currentTimestamp,
+			$fixture->getLatestPossibleRegistrationTime()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndRegistrationDeadlineReturnsRegistrationDeadline() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'needs_registration' => 1,
+				'deadline_registration' => $this->currentTimestamp,
+				'begin_date' => $this->currentTimestamp + 1000,
+				'end_date' => 0,
+			)
+		);
+		$fixture = new tx_seminars_seminarchild($uid, array());
+
+		$this->assertEquals(
+			$this->currentTimestamp,
+			$fixture->getLatestPossibleRegistrationTime()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLatestPossibleRegistrationTimeForEventWithBeginAndEndDateAndRegistrationForStartedEventsAllowedReturnsEndDate() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'needs_registration' => 1,
+				'deadline_registration' => 0,
+				'begin_date' => $this->currentTimestamp,
+				'end_date' => $this->currentTimestamp + 1000,
+			)
+		);
+		$fixture = new tx_seminars_seminarchild(
+			$uid, array('allowRegistrationForStartedEvents' => 1)
+		);
+
+		$this->assertEquals(
+			$this->currentTimestamp + 1000,
+			$fixture->getLatestPossibleRegistrationTime()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndRegistrationDeadlineAndRegistrationForStartedEventsAllowedReturnsRegistrationDeadline() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'needs_registration' => 1,
+				'deadline_registration' => $this->currentTimestamp - 1000,
+				'begin_date' => $this->currentTimestamp,
+				'end_date' => $this->currentTimestamp + 1000,
+			)
+		);
+		$fixture = new tx_seminars_seminarchild(
+			$uid, array('allowRegistrationForStartedEvents' => 1)
+		);
+
+		$this->assertEquals(
+			$this->currentTimestamp - 1000,
+			$fixture->getLatestPossibleRegistrationTime()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndWithoutEndDateAndRegistrationForStartedEventsAllowedReturnsBeginDate() {
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'needs_registration' => 1,
+				'deadline_registration' => 0,
+				'begin_date' => $this->currentTimestamp,
+				'end_date' => 0,
+			)
+		);
+		$fixture = new tx_seminars_seminarchild(
+			$uid, array('allowRegistrationForStartedEvents' => 1)
+		);
+
+		$this->assertEquals(
+			$this->currentTimestamp,
+			$fixture->getLatestPossibleRegistrationTime()
+		);
+
+		$fixture->__destruct();
+	}
 }
 ?>

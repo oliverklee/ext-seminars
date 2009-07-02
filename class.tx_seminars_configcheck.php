@@ -64,6 +64,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			$this->checkShowTimeOfRegistrationDeadline();
 			$this->checkShowTimeOfEarlyBirdDeadline();
 			$this->checkShowVacanciesThreshold();
+			$this->checkAllowRegistrationForStartedEvents();
 			$this->checkAllowRegistrationForEventsWithoutDate();
 			$this->checkSkipRegistrationCollisionCheck();
 		}
@@ -1940,6 +1941,22 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				.'to the user after the queue has been updated. If this value is '
 				.'not set correctly, the sending of notifications probably will '
 				.'not work as expected.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * allowRegistrationForStartedEvents.
+	 */
+	private function checkAllowRegistrationForStartedEvents() {
+		$this->checkIfBoolean(
+			'allowRegistrationForStartedEvents',
+			false,
+			'',
+			'This value specifies whether registration is possible even when ' .
+				'an event already has started. ' .
+				'If this value is incorrect, registration might be possible ' .
+				'even when this is not desired (or vice versa).'
 		);
 	}
 
