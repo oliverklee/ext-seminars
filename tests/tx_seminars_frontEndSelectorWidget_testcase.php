@@ -409,6 +409,17 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_Render_ForLanguageOptionsHiddenInConfiguration_DoesNotShowLanguageOptionsMarker() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
+		$this->assertNotContains(
+			'###OPTIONS_LANGUAGE###',
+			$this->fixture->render()
+		);
+	}
+
 	public function test_Render_ForEnabledLanguageOptions_ContainsLanguageOption() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'language'
@@ -837,6 +848,17 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->isSubpartVisible('SEARCH_PART_COUNTRY')
+		);
+	}
+
+	public function test_Render_ForDisabledCountryOptions_DoesNotShowCountryOptionsMarker() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
+		$this->assertNotcontains(
+			'###OPTIONS_COUNTRY###',
+			$this->fixture->render()
 		);
 	}
 
