@@ -1,4 +1,5 @@
 0.8.1 (currently working on)
+- [#3165] Fix: Umlauts not encoded correctly in the e-mail subject
 - [#3159] Fix: Missing config check for allowRegistrationForEventsWithoutDate
 
 0.8.0 (released 2009-07-01)
