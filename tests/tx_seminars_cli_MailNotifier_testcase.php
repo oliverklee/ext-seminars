@@ -1003,7 +1003,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$subject = str_replace('%event', '', $subject);
 
 		$this->assertContains(
-			$subject,
+			base64_encode($subject),
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
 		);
 	}
