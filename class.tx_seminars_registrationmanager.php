@@ -1266,7 +1266,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				str_replace('<br />', ' ', strip_tags($place->getAddress()))
 			);
 
-			$formattedPlaces[] = $place->getTitle() . $newline . $address;
+			$countryName = ($place->hasCountry())
+				? ', ' . $place->getCountry()->getLocalShortName()
+				: '';
+
+			$formattedPlaces[] = $place->getTitle() . $newline . $address .
+				$newline . $place->getCity() . $countryName;
 		}
 
 		$this->setMarker(

@@ -2248,6 +2248,174 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_SendsCityOfPlace() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => 'footown')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'footown',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_SendsCountryOfPlace() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES, array('city' => 'footown', 'country' => 54)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			$country->getLocalShortName(),
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_SeparatesAddressAndCityWithNewline() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address', 'city' => 'footown')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address' . CRLF . 'footown',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddressAndHtmlMails_SeparatresAddressAndCityLineWithBreaks() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setConfigurationValueInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registrationmanager::SEND_HTML_MAIL
+		);
+		$this->fixture->setConfigurationValue(
+			'cssFileForAttendeeMail',
+			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
+		);
+
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address', 'city' => 'footown')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'address<br>footown',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddressWithCountryAndCity_SeparatesCountryAndCityWithComma() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array(
+				'address' => 'address',
+				'city' => 'footown',
+				'country' => 54,
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			'footown, ' . $country->getLocalShortName(),
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_NotifyAttendee_ForPlaceAddressWithCityAndNoCountry_DoesNotAddSurplusCommaAfterCity() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$uid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SITES,
+			array('address' => 'address', 'city' => 'footown')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertNotContains(
+			'footown,',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
 
 	////////////////////////////////////
 	// Tests concerning the salutation
