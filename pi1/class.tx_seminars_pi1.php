@@ -1662,6 +1662,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		if (($whatToDisplay != 'topic_list') && ($whatToDisplay != 'my_events')) {
 			$this->limitForAdditionalParameters($builder);
 		}
+		if (!in_array(
+			$whatToDisplay,
+			array('my_entered_events', 'my_events', 'my_vip_events', 'topic_list')
+		)) {
+			$this->limitToTimeFrameSetting($builder);
+		}
 
 		switch ($whatToDisplay) {
 			case 'topic_list':
@@ -2209,17 +2215,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			&& !empty($this->piVars['sword'])
 		) {
 			$builder->limitToFullTextSearch($this->piVars['sword']);
-		}
-
-		try {
-			$builder->setTimeFrame(
-				$this->getConfValueString(
-					'timeframeInList', 's_template_special'
-				)
-			);
-		} catch (Exception $exception) {
-			// Ignores the exception because the user will be warned of the
-			// problem by the configuration check.
 		}
 
 		if (
@@ -2931,6 +2926,25 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$this->setMarker('registration', $registrationLink);
+	}
+
+	/**
+	 * Limits the bag to events within the time frame set by setup.
+	 *
+	 * @param tx_seminars_seminarbagbuilder $builder the seminarbagbuilder to
+	 *        limit by time frame
+	 */
+	private function limitToTimeFrameSetting($builder) {
+		try {
+			$builder->setTimeFrame(
+				$this->getConfValueString(
+					'timeframeInList', 's_template_special'
+				)
+			);
+		} catch (Exception $exception) {
+			// Ignores the exception because the user will be warned of the
+			// problem by the configuration check.
+		}
 	}
 }
 
