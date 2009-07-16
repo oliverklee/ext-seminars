@@ -932,7 +932,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'0',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -951,9 +953,15 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
+		preg_match(
+			'/"[\r\n]([^-=]+)/s',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
+			$mailBody
+		);
+
 		$this->assertContains(
 			'1',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			base64_decode($mailBody[1])
 		);
 	}
 
