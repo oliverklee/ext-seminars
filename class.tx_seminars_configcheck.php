@@ -311,6 +311,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkEventSuccessfullySavedPID();
 		$this->checkAllowedExtensionsForUpload();
 		$this->checkDisplayFrontEndEditorFields();
+		$this->checkRequiredFrontEndEditorFields();
 
 		$this->checkAllowFrontEndEditingOfCategories();
 		$this->checkAllowFrontEndEditingOfCheckboxes();
@@ -2448,6 +2449,80 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'(or vice versa).'
 		);
 	}
+
+	/**
+	 * Checks the configuration for requiredFrontEndEditorFields.
+	 */
+	private function checkRequiredFrontEndEditorFields() {
+		$this->checkIfMultiInSetOrEmpty(
+			'requiredFrontEndEditorFields',
+			true,
+			's_fe_editing',
+			'This value specifies which fields are required to be filled when ' .
+				'filing a new event. Some fields will be not be required if ' .
+				'this configuration is incorrect.',
+			array(
+				'subtitle',
+				'accreditation_number',
+				'credit_points',
+				'categories',
+				'event_type',
+				'cancelled',
+				'teaser',
+				'description',
+				'additional_information',
+				'begin_date',
+				'end_date',
+				'begin_date_registration',
+				'deadline_early_bird',
+				'deadline_registration',
+				'needs_registration',
+				'allows_multiple_registrations',
+				'queue_size',
+				'attendees_min',
+				'attendees_max',
+				'target_groups',
+				'price_regular',
+				'price_regular_early',
+				'price_regular_board',
+				'price_special',
+				'price_special_early',
+				'price_special_board',
+				'payment_methods',
+				'place',
+				'room',
+				'lodgings',
+				'foods',
+				'speakers',
+				'leaders',
+				'partners',
+				'tutors',
+				'checkboxes',
+				'uses_terms_2',
+				'attached_file_box',
+				'notes',
+			)
+		);
+
+		// checks whether the required fields are visible
+		$this->checkIfMultiInSetOrEmpty(
+			'requiredFrontEndEditorFields',
+			true,
+			's_fe_editing',
+			'This value specifies which fields are required to be filled when ' .
+				'filing a new event. Some fields are set to required but are ' .
+				'actually not configured to be visible in the form. The form ' .
+				'cannot be submitted as long as this inconsistency remains.',
+			t3lib_div::trimExplode(
+				',',
+				$this->objectToCheck->getConfValueString(
+					'displayFrontEndEditorFields', 's_fe_editing'
+				),
+				true
+			)
+		);
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_configcheck.php']) {

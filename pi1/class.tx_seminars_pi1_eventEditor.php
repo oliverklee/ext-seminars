@@ -59,6 +59,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	const SUBPART_PREFIX = 'fe_editor';
 
 	/**
+	 * @var array the fields required to file a new event.
+	 */
+	private $requiredFormFields = array();
+
+	/**
 	 * The constructor.
 	 *
 	 * After the constructor has been called, hasAccessMessage() must be called
@@ -69,6 +74,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function __construct(array $configuration, tslib_cObj $cObj) {
 		parent::__construct($configuration, $cObj);
+		$this->setRequiredFormFields();
 	}
 
 	/**
@@ -132,6 +138,8 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$template->hideSubpartsArray(
 			$this->getHiddenSubparts(), self::SUBPART_PREFIX
 		);
+
+		$this->setRequiredFieldLabels($template);
 
 		// The redirect to the FE editor with the current record loaded can
 		// only work with the record's UID, but new records do not have a UID
@@ -854,6 +862,39 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		return $isFrontEndEditingAllowed
 			&& ($frontEndUser->getAuxiliaryRecordsPid() > 0);
 	}
+
+	/**
+	 * Reads the list of required form fields from the configuration and stores
+	 * it in $this->requiredFormFields.
+	 */
+	private function setRequiredFormFields() {
+		$this->requiredFormFields = t3lib_div::trimExplode(
+			',',
+			$this->getConfValueString(
+				'requiredFrontEndEditorFields', 's_fe_editing'
+			)
+		);
+	}
+
+	/**
+	 * Adds a class 'required' to the label of a field if it is required.
+	 *
+	 * @param tx_oelib_template $template the template in which the required
+	 *        markers should be set.
+	 */
+	private function setRequiredFieldLabels(tx_oelib_template $template) {
+		$formFieldsToCheck = $this->getFieldsToShow();
+
+		foreach ($formFieldsToCheck as $formField) {
+			$template->setMarker(
+				$formField . '_required',
+				(in_array($formField, $this->requiredFormFields))
+					? ' class="required"'
+					: ''
+			);
+		}
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_eventEditor.php']) {

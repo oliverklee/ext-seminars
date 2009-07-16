@@ -14,6 +14,11 @@
 	margin-bottom: 20px;
 }
 
+.tx-seminars-pi1-event-editor dt.required,
+.tx-seminars-pi1-event-editor dd.required {
+	font-weight: bold;
+}
+
 /*WRAPPING COLUMNS*/
 .tx-seminars-pi1-event-editor .columnlight {
 	display: table;
