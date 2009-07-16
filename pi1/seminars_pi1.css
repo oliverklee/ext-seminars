@@ -269,6 +269,9 @@ th.tx-seminars-pi1-expiry,
 th.tx-seminars-pi1-seats,
 th.tx-seminars-pi1-total-price,
 th.tx-seminars-pi1-registration,
+th.tx-seminars-pi1-attached-files,
+th.tx-seminars-pi1-status,
+th.tx-seminars-pi1-edit,
 th.tx-seminars-pi1-list-registrations {
 	padding: .2em .5em;
 }

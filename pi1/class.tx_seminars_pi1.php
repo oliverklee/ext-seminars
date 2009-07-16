@@ -1627,6 +1627,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
 		$this->hideEditColumnIfNecessary($whatToDisplay);
 		$this->hideFilesColumnIfUserCannotAccessFiles();
+		$this->hideStatusColumnIfNotUsed($whatToDisplay);
 
 		if (!isset($this->piVars['pointer'])) {
 			$this->piVars['pointer'] = 0;
@@ -1787,6 +1788,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			'status_registration',
 			'registration',
 			'list_registrations',
+			'status',
 			'edit',
 			'registrations',
 		);
@@ -1988,6 +1990,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				'list_registrations',
 				$this->getRegistrationsListLink()
 			);
+
+			$this->setVisibilityStatusMarker();
+
 			$this->setMarker('edit', $this->getEditLink());
 
 			$this->setMarker('registrations', $this->getCsvExportLink());
@@ -3144,6 +3149,35 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		return ($this->seminar->getOwner()->getUid() == $this->getFeUserUid());
+	}
+
+	/**
+	 * Hides the status column for all views where it is not applicable.
+	 *
+	 * @param string $whatToDisplay the current list view, may be empty
+	 */
+	private function hideStatusColumnIfNotUsed($whatToDisplay) {
+		if (($whatToDisplay == 'my_entered_events')
+			|| ($whatToDisplay == 'my_vip_events')
+		){
+			return;
+		}
+
+		$this->hideColumns(array('status'));
+	}
+
+	/**
+	 * Sets the visibility status marker.
+	 */
+	private function setVisibilityStatusMarker() {
+		$visibilityMarker = ($this->seminar->isHidden())
+			? 'pending'
+			: 'published';
+
+		$this->setMarker(
+			'status',
+			$this->translate('visibility_status_' . $visibilityMarker)
+		);
 	}
 }
 

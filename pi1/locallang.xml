@@ -193,6 +193,9 @@
 			<label index="label_onlineUnregistration">Unregister now</label>
 			<label index="label_list_registrations">List of registrations</label>
 			<label index="label_listRegistrationsLink">View the list of registrations</label>
+			<label index="label_status">Status</label>
+			<label index="visibility_status_published">published</label>
+			<label index="visibility_status_pending">pending</label>
 			<label index="label_list_otherdates">Other dates for this topic</label>
 			<label index="label_list_dates">Dates for this topic</label>
 			<label index="label_eventsnextday">Subsequent events</label>
@@ -745,6 +748,9 @@
 			<label index="label_onlineUnregistration">Jetzt abmelden</label>
 			<label index="label_list_registrations">Liste der Anmeldungen</label>
 			<label index="label_listRegistrationsLink">Liste der Anmeldungen anzeigen</label>
+			<label index="label_status">Status</label>
+			<label index="visibility_status_published">veröffentlicht</label>
+			<label index="visibility_status_pending">ausstehend</label>
 			<label index="label_list_otherdates">Andere Termine für diese Veranstaltung</label>
 			<label index="label_list_dates">Termine für diese Veranstaltung</label>
 			<label index="label_eventsnextday">Veranstaltungen im Anschluss</label>
@@ -2182,6 +2188,9 @@
 			<label index="label_onlineUnregistration" type="integer">213082454</label>
 			<label index="label_list_registrations" type="integer">206095824</label>
 			<label index="label_listRegistrationsLink" type="integer">169828522</label>
+			<label index="label_status" type="integer">247806604</label>
+			<label index="visibility_status_published" type="integer">150505726</label>
+			<label index="visibility_status_pending" type="integer">130466533</label>
 			<label index="label_list_otherdates" type="integer">139958574</label>
 			<label index="label_list_dates" type="integer">46235180</label>
 			<label index="label_eventsnextday" type="integer">268130487</label>
@@ -3419,6 +3428,9 @@
 			<label index="label_onlineUnregistration">Unregister now</label>
 			<label index="label_list_registrations">List of registrations</label>
 			<label index="label_listRegistrationsLink">View the list of registrations</label>
+			<label index="label_status">Status</label>
+			<label index="visibility_status_published">published</label>
+			<label index="visibility_status_pending">pending</label>
 			<label index="label_list_otherdates">Other dates for this topic</label>
 			<label index="label_list_dates">Dates for this topic</label>
 			<label index="label_eventsnextday">Subsequent events</label>

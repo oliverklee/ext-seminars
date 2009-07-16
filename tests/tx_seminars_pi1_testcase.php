@@ -2013,6 +2013,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_ListView_HidesStatusColumnByDefault() {
+		$this->fixture->main('', array());
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
+		);
+	}
+
 
 	/////////////////////////////////////////////////////////
 	// Tests concerning the result counter in the list view
@@ -4188,6 +4196,39 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_MyVipEvents_ShowsStatusColumnByDefault() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
+		);
+	}
+
+	public function test_MyVipEventsForStatusColumnHiddenByTsSetup_HidesStatusColumn() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+		$this->fixture->setConfigurationValue('hideColumns', 'status');
+
+		$this->fixture->main('', array());
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
+		);
+	}
+
+	public function test_MyVipEventsForVisibleEvent_ShowsPublishedStatus() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->assertContains(
+			$this->fixture->translate('visibility_status_published'),
+			$this->fixture->main('', array())
+		);
+	}
+
 
 	////////////////////////////////////
 	// Tests concerning getFieldHeader
@@ -5469,6 +5510,89 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'hiddenEvent',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_MyEnteredEventView_ShowsStatusColumnByDefault() {
+		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
+
+		$this->fixture->setConfigurationValue(
+			'what_to_display', 'my_entered_events'
+		);
+		$this->fixture->setConfigurationValue(
+			'eventEditorFeGroupID', $editorGroupUid
+		);
+
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
+			$editorGroupUid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'owner_feuser' => $feUserUid,
+				'hidden' => 1,
+				'title' => 'hiddenEvent',
+			)
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
+		);
+	}
+
+	public function test_MyEnteredEventViewForHiddenEvent_ShowsStatusPendingLabel() {
+		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
+
+		$this->fixture->setConfigurationValue(
+			'what_to_display', 'my_entered_events'
+		);
+		$this->fixture->setConfigurationValue(
+			'eventEditorFeGroupID', $editorGroupUid
+		);
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
+			$editorGroupUid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'owner_feuser' => $feUserUid,
+				'hidden' => 1,
+			)
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('visibility_status_pending'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_MyEnteredEventViewForVisibleEvent_ShowsStatusPublishedLabel() {
+		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
+
+		$this->fixture->setConfigurationValue(
+			'what_to_display', 'my_entered_events'
+		);
+		$this->fixture->setConfigurationValue(
+			'eventEditorFeGroupID', $editorGroupUid
+		);
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
+			$editorGroupUid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'owner_feuser' => $feUserUid,
+			)
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('visibility_status_published'),
 			$this->fixture->main('', array())
 		);
 	}

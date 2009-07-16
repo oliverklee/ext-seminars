@@ -674,7 +674,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'status_registration',
 				'registration',
 				'list_registrations',
-				'edit'
+				'status',
+				'edit',
 			)
 		);
 	}
