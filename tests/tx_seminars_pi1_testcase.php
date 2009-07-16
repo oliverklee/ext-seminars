@@ -4196,6 +4196,48 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/////////////////////////////////////////////////////////////////////
+	// Tests concerning the displaying of events in the vip events view
+	/////////////////////////////////////////////////////////////////////
+
+	public function test_MyVipEventsViewWithTimeFrameSetToCurrent_ShowsCurrentEvent() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+		$this->fixture->setConfigurationValue('timeframeInList', 'current');
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'title' => 'currentEvent',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 20,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 20,
+			)
+		);
+
+		$this->assertContains(
+			'currentEvent',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_MyVipEventsViewWithTimeFrameSetToCurrent_ShowsEventInFuture() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+		$this->fixture->setConfigurationValue('timeframeInList', 'current');
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			array(
+				'title' => 'futureEvent',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 21,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+			)
+		);
+
+		$this->assertContains(
+			'futureEvent',
+			$this->fixture->main('', array())
+		);
+	}
+
 	public function test_MyVipEvents_ShowsStatusColumnByDefault() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
@@ -5593,6 +5635,38 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$this->fixture->translate('visibility_status_published'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_MyEnteredEventViewForTimeframeSetToCurrent_ShowsEventEndedInPast() {
+		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
+
+		$this->fixture->setConfigurationValue(
+			'what_to_display', 'my_entered_events'
+		);
+		$this->fixture->setConfigurationValue(
+			'eventEditorFeGroupID', $editorGroupUid
+		);
+		$this->fixture->setConfigurationValue('timeframeInList', 'current');
+
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
+			$editorGroupUid
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'owner_feuser' => $feUserUid,
+				'hidden' => 1,
+				'title' => 'pastEvent',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 30,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - 20,
+			)
+		);
+
+		$this->assertContains(
+			'pastEvent',
 			$this->fixture->main('', array())
 		);
 	}
