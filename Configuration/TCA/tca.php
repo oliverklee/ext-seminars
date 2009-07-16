@@ -1313,7 +1313,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'been_there' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.been_there',
 			'config' => array(
 				'type' => 'check',
@@ -1359,7 +1359,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'price' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.price',
 			'config' => array(
 				'type' => 'input',
@@ -1368,7 +1368,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'total_price' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.total_price',
 			'config' => array(
 				'type' => 'input',
@@ -1409,7 +1409,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'foods' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.foods',
 			'config' => array(
 				'type' => $selectType,
@@ -1425,7 +1425,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'food' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.food',
 			'config' => array(
 				'type' => 'text',
@@ -1434,7 +1434,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'lodgings' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.lodgings',
 			'config' => array(
 				'type' => $selectType,
@@ -1450,7 +1450,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'accommodation' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.accommodation',
 			'config' => array(
 				'type' => 'text',
@@ -1459,7 +1459,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'checkboxes' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.checkboxes',
 			'config' => array(
 				'type' => $selectType,
@@ -1475,7 +1475,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'interests' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.interests',
 			'config' => array(
 				'type' => 'text',
@@ -1484,7 +1484,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'expectations' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.expectations',
 			'config' => array(
 				'type' => 'text',
@@ -1493,7 +1493,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'background_knowledge' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.background_knowledge',
 			'config' => array(
 				'type' => 'text',
@@ -1502,7 +1502,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'known_from' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.known_from',
 			'config' => array(
 				'type' => 'text',
@@ -1511,7 +1511,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'notes' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.notes',
 			'config' => array(
 				'type' => 'text',
@@ -1520,14 +1520,14 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'paid' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.paid',
 			'config' => array(
 				'type' => 'check',
 			),
 		),
 		'datepaid' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.datepaid',
 			'config' => array(
 				'type' => 'input',
@@ -1586,7 +1586,7 @@ $TCA['tx_seminars_attendances'] = array(
 			),
 		),
 		'method_of_payment' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.method_of_payment',
 			'config' => array(
 				'type' => $selectType,

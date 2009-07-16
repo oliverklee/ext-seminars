@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#1664] Cleanup: Clean up the registration BE form
 - [#3178] Feature: Add a field "publication hash" to the seminars table
 - [#3160] Fix: Two tests don't work properly
 - [#3162] Feature: Include the places' cities and countries in the e-mails to the attendees
