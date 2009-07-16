@@ -4798,37 +4798,5 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$output
 		);
 	}
-
-	public function test_MyEnteredEventViewForTimeframeSetToCurrent_ShowsEventEndedInPast() {
-		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
-
-		$this->fixture->setConfigurationValue(
-			'what_to_display', 'my_entered_events'
-		);
-		$this->fixture->setConfigurationValue(
-			'eventEditorFeGroupID', $editorGroupUid
-		);
-		$this->fixture->setConfigurationValue('timeframeInList', 'current');
-
-		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
-			$editorGroupUid
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array(
-				'pid' => $this->systemFolderPid,
-				'owner_feuser' => $feUserUid,
-				'hidden' => 1,
-				'title' => 'pastEvent',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 30,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - 20,
-			)
-		);
-
-		$this->assertContains(
-			'pastEvent',
-			$this->fixture->main('', array())
-		);
-	}
 }
 ?>
