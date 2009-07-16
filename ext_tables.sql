@@ -285,6 +285,7 @@ CREATE TABLE tx_seminars_seminars (
 	image tinytext,
 	requirements int(11) unsigned DEFAULT '0' NOT NULL,
 	dependencies int(11) unsigned DEFAULT '0' NOT NULL,
+	publication_hash text,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

@@ -1020,6 +1020,16 @@ $TCA['tx_seminars_seminars'] = array(
 				'maxitems' => 1,
 			),
 		),
+		'publication_hash' => array(
+			'exclude' => 1,
+			'label' => '',
+			'config' => array(
+				'type' => 'input',
+				'size' => '20',
+				'max' => '255',
+				'eval' => 'trim',
+			),
+		),
 	),
 	'types' => array(
 		// Single event
