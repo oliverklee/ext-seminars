@@ -152,6 +152,29 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser($feUserGroupUid);
 	}
 
+	/**
+	 * Creates a fixture with the given field as required field.
+	 *
+	 * @param string $requiredField
+	 *        the field which should be required, may be empty
+	 *
+	 * @return tx_seminars_pi_eventEditor event editor fixture with the given
+	 *         field as required field, will not be null.
+	 */
+	private function getFixtureWithRequiredField($requiredField) {
+		$result = tx_oelib_ObjectFactory::make(
+			'tx_seminars_pi1_eventEditor',
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'form.' => array('eventEditor.' => array()),
+				'requiredFrontEndEditorFields' => $requiredField,
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$result->setTestMode();
+
+		return $result;
+	}
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -1254,6 +1277,233 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 				array('relatedRecordType' => 'Test')
 			)
 		);
+	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning validateStringField
+	/////////////////////////////////////////
+
+	public function test_validateStringFieldForNonRequiredFieldAndEmptyString_ReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->validateString(
+				array('elementName' => 'teaser', 'value' => '')
+			)
+		);
+	}
+
+	public function test_validateStringFieldForRequiredFieldAndEmptyString_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('teaser');
+
+		$this->assertFalse(
+			$fixture->validateString(
+				array('elementName' => 'teaser', 'value' => '')
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateStringFieldForRequiredFieldAndNonEmptyString_ReturnsTrue() {
+		$fixture = $this->getFixtureWithRequiredField('teaser');
+
+		$this->assertTrue(
+			$fixture->validateString(
+				array('elementName' => 'teaser', 'value' => 'foo')
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning validateIntegerField
+	//////////////////////////////////////////
+
+	public function test_validateIntegerFieldForNonRequiredFieldAndValueZero_ReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->validateInteger(
+				array('elementName' => 'attendees_max', 'value' => 0)
+			)
+		);
+	}
+
+	public function test_validateIntegerFieldForRequiredFieldAndValueZero_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('attendees_max');
+
+		$this->assertFalse(
+			$fixture->validateInteger(
+				array('elementName' => 'attendees_max', 'value' => 0)
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateIntegerFieldForRequiredFieldAndValueNonZero_ReturnsTrue() {
+		$fixture = $this->getFixtureWithRequiredField('attendees_max');
+
+		$this->assertTrue(
+			$fixture->validateInteger(
+				array('elementName' => 'attendees_max', 'value' => 15)
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	////////////////////////////////////////
+	// Tests concerning validateCheckboxes
+	////////////////////////////////////////
+
+	public function test_validateCheckboxesForNonRequiredFieldAndEmptyValue_ReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->validateCheckboxes(
+				array('elementName' => 'categories', 'value' => '')
+			)
+		);
+	}
+
+	public function test_validateCheckboxesForRequiredFieldAndValueNotArray_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('categories');
+
+		$this->assertFalse(
+			$fixture->validateCheckboxes(
+				array('elementName' => 'categories', 'value' => '')
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateCheckboxesForRequiredFieldAndValueEmptyArray_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('categories');
+
+		$this->assertFalse(
+			$fixture->validateCheckboxes(
+				array('elementName' => 'categories', 'value' => array())
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateCheckboxesForRequiredFieldAndValueNonEmptyArray_ReturnsTrue() {
+		$fixture = $this->getFixtureWithRequiredField('categories');
+
+		$this->assertTrue(
+			$fixture->validateCheckboxes(
+				array('elementName' => 'categories', 'value' => array(42))
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	//////////////////////////////////
+	// Tests concerning validateDate
+	//////////////////////////////////
+
+	public function test_validateDateForNonRequiredFieldAndEmptyString_ReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->validateDate(
+				array('elementName' => 'begin_date', 'value' => '')
+			)
+		);
+	}
+
+	public function test_validateDateForRequiredFieldAndEmptyString_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('begin_date');
+
+		$this->assertFalse(
+			$fixture->validateDate(
+				array('elementName' => 'begin_date', 'value' => '')
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateDateForRequiredFieldAndValidDate_ReturnsTrue() {
+		$fixture = $this->getFixtureWithRequiredField('begin_date');
+
+		$this->assertTrue(
+			$fixture->validateDate(
+				array(
+					'elementName' => 'begin_date',
+					'value' => '10:52 23-05-2008'
+				)
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateDateForRequiredFieldAndNonValidDate_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('begin_date');
+
+		$this->assertFalse(
+			$fixture->validateDate(
+				array(
+					'elementName' => 'begin_date',
+					'value' => 'foo'
+				)
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	///////////////////////////////////
+	// Tests concerning validatePrice
+	///////////////////////////////////
+
+	public function test_validatePriceForNonRequiredFieldAndEmptyString_ReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->validatePrice(
+				array('elementName' => 'price_regular', 'value' => '')
+			)
+		);
+	}
+
+	public function test_validatePriceForRequiredFieldAndEmptyString_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('price_regular');
+
+		$this->assertFalse(
+			$fixture->validatePrice(
+				array('elementName' => 'price_regular', 'value' => '')
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validatePriceForRequiredFieldAndValidPrice_ReturnsTrue() {
+		$fixture = $this->getFixtureWithRequiredField('price_regular');
+
+		$this->assertTrue(
+			$fixture->validatePrice(
+				array('elementName' => 'price_regular', 'value' => '20,08')
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validatePriceForRequiredFieldAndInvalidPrice_ReturnsFalse() {
+		$fixture = $this->getFixtureWithRequiredField('price_regular');
+
+		$this->assertFalse(
+			$fixture->validatePrice(
+				array('elementName' => 'price_regular', 'value' => 'foo')
+			)
+		);
+
+		$fixture->__destruct();
 	}
 }
 ?>

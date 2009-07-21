@@ -895,6 +895,122 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 	}
 
+	/**
+	 * Checks whether a given field is required.
+	 *
+	 * @param array $field
+	 *        the field to check, the array must contain an element with the key
+	 *        'elementName' and a nonempty value for that key
+	 *
+	 * @return boolean true if the field is required, false otherwise
+	 */
+	private function isFieldRequired(array $field) {
+		if ($field['elementName'] == '') {
+			throw new Exception('The given field name was empty.');
+		}
+
+		return in_array($field['elementName'], $this->requiredFormFields);
+	}
+
+	/**
+	 * Checks whether a given field needs to be filled in, but hasn't been
+	 * filled in yet.
+	 *
+	 * @param array $formData
+	 *        associative array containing the current value, with the key
+	 *        'value' and the name, with the key 'elementName', of the form
+	 *        field to check, must not be empty
+	 *
+	 * @return boolean true if this field is not empty or not required, false
+	 *                 otherwise
+	 */
+	public function validateString(array $formData) {
+		if (!$this->isFieldRequired($formData)) {
+			return true;
+		}
+
+		return (trim($formData['value']) != '');
+	}
+
+	/**
+	 * Checks whether a given field needs to be filled in with a non-zero value,
+	 * but hasn't been filled in correctly yet.
+	 *
+	 * @param array $formData
+	 *        associative array containing the current value, with the key
+	 *        'value' and the name, with the key 'elementName', of the form
+	 *        field to check, must not be empty
+	 *
+	 * @return boolean true if this field is not zero or not required, false
+	 *                 otherwise
+	 */
+	public function validateInteger(array $formData) {
+		if (!$this->isFieldRequired($formData)) {
+			return true;
+		}
+
+		return (intval($formData['value']) != 0);
+	}
+
+	/**
+	 * Checks whether a given field needs to be filled in with a non-empty array,
+	 * but hasn't been filled in correctly yet.
+	 *
+	 * @param array $formData
+	 *        associative array containing the current value, with the key
+	 *        'value' and the name, with the key 'elementName', of the form
+	 *        field to check, must not be empty
+	 *
+	 * @return boolean true if this field is not zero or not required, false
+	 *                 otherwise
+	 */
+	public function validateCheckboxes(array $formData) {
+		if (!$this->isFieldRequired($formData)) {
+			return true;
+		}
+
+		return is_array($formData['value']) && !empty($formData['value']);
+	}
+
+	/**
+	 * Checks whether a given field needs to be filled in with a valid date,
+	 * but hasn't been filled in correctly yet.
+	 *
+	 * @param array $formData
+	 *        associative array containing the current value, with the key
+	 *        'value' and the name, with the key 'elementName', of the form
+	 *        field to check, must not be empty
+	 *
+	 * @return boolean true if this field contains a valid date or if this field
+	 *                 is not required, false otherwise
+	 */
+	public function validateDate(array $formData) {
+		if (!$this->isFieldRequired($formData)) {
+			return true;
+		}
+
+		return (preg_match('/^[\d:\-\/ ]+$/', $formData['value']) == 1);
+	}
+
+	/**
+	 * Checks whether a given field needs to be filled in with a valid price,
+	 * but hasn't been filled in correctly yet.
+	 *
+	 * @param array $formData
+	 *        associative array containing the current value, with the key
+	 *        'value' and the name, with the key 'elementName', of the form
+	 *        field to check, must not be empty
+	 *
+	 * @return boolean true if this field contains a valid price or if this
+	 *                 field is not required, false otherwise
+	 */
+	public function validatePrice(array $formData) {
+		if (!$this->isFieldRequired($formData)) {
+			return true;
+		}
+
+		return (preg_match('/^\d+((,|.)\d{1,2})?$/', $formData['value']) == 1);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_eventEditor.php']) {
