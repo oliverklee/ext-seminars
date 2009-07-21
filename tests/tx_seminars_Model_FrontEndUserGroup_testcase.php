@@ -144,5 +144,48 @@ class tx_seminars_Model_FrontEndUserGroup_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasAuxiliaryRecordsPid()
 		);
 	}
+
+
+	//////////////////////////////////
+	// Tests concerning the reviewer
+	//////////////////////////////////
+
+	public function test_hasReviewerForGroupWithoutReviewer_ReturnsFalse() {
+		$this->fixture->setData(array('tx_seminars_reviewer' => null));
+
+		$this->assertFalse(
+			$this->fixture->hasReviewer()
+		);
+	}
+
+	public function test_hasReviewerForGroupWithReviewer_ReturnsTrue() {
+		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+
+		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
+
+		$this->assertTrue(
+			$this->fixture->hasReviewer()
+		);
+	}
+
+	public function test_getReviewerForGroupWithoutReviewer_ReturnsNull() {
+		$this->fixture->setData(array('tx_seminars_reviewer' => null));
+
+		$this->assertEquals(
+			null,
+			$this->fixture->getReviewer()
+		);
+	}
+
+	public function test_getReviewerForGroupWithReviewer_ReturnsReviewer() {
+		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+
+		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
+
+		$this->assertSame(
+			$backEndUser,
+			$this->fixture->getReviewer()
+		);
+	}
 }
 ?>

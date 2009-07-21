@@ -37,6 +37,14 @@ class tx_seminars_Mapper_FrontEndUserGroup extends tx_oelib_Mapper_FrontEndUserG
 	 * @var string the model class name for this mapper, must not be empty
 	 */
 	protected $modelClassName = 'tx_seminars_Model_FrontEndUserGroup';
+
+	/**
+	 * @var array the (possible) relations of the created models in the format
+	 *            DB column name => mapper name
+	 */
+	protected $relations = array(
+		'tx_seminars_reviewer' => 'tx_oelib_Mapper_BackEndUser',
+	);
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/class.tx_seminars_Mapper_FrontEndUserGroup.php']) {

@@ -91,6 +91,28 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		return $auxiliaryRecordsPid;
 	}
+
+	/**
+	 * Returns the reviewer set in the groups of this user.
+	 *
+	 * Will return the first reviewer found.
+	 *
+	 * @return tx_oelib_Model_BackEndUser the reviewer set in the user's group,
+	 *                                    will be null if no reviewer has been
+	 *                                    set or the user has no groups
+	 */
+	public function getReviewerFromGroup() {
+		$result = null;
+
+		foreach ($this->getUserGroups() as $userGroup) {
+			if ($userGroup->hasReviewer()) {
+				$result = $userGroup->getReviewer();
+				break;
+			}
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUser.php']) {

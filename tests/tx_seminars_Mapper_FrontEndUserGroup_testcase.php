@@ -58,5 +58,23 @@ class tx_seminars_Mapper_FrontEndUserGroup_testcase extends tx_phpunit_testcase 
 				instanceof tx_seminars_Model_FrontEndUserGroup
 		);
 	}
+
+
+	//////////////////////////////////
+	// Tests concerning the reviewer
+	//////////////////////////////////
+
+	public function test_FrontEndUserGroup_CanReturnBackEndUserModel() {
+		$backEndUser = tx_oelib_ObjectFactory::make(
+			'tx_oelib_Mapper_BackEndUser')->getNewGhost();
+		$frontEndUserGroup = $this->fixture->getLoadedTestingModel(
+			array('tx_seminars_reviewer' => $backEndUser->getUid())
+		);
+
+		$this->assertTrue(
+			$this->fixture->find($frontEndUserGroup->getUid())->getReviewer()
+				instanceof tx_oelib_Model_BackEndUser
+		);
+	}
 }
 ?>

@@ -82,6 +82,25 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	public function hasAuxiliaryRecordsPid() {
 		return $this->hasInteger('tx_seminars_auxiliary_records_pid');
 	}
+
+	/**
+	 * Checks whether this user group has a reviewer set.
+	 *
+	 * @return boolean true if a reviewer is set, false otherwise
+	 */
+	public function hasReviewer() {
+		return $this->getReviewer() != null;
+	}
+
+	/**
+	 * Returns the BE user which is stored as reviewer for this group.
+	 *
+	 * @return tx_oelib_Model_BackEndUser the reviewer for this group, will be
+	 *                                    null if no reviewer has been set
+	 */
+	public function getReviewer() {
+		return $this->getAsModel('tx_seminars_reviewer');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUserGroup.php']) {

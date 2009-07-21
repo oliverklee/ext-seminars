@@ -329,5 +329,105 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 			$this->fixture->getAuxiliaryRecordsPid()
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning getReviewerFromGroup
+	//////////////////////////////////////////
+
+	public function test_getReviewerFromGroupForUserWithoutGroups_ReturnsNull() {
+		$list = new tx_oelib_List();
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			null,
+			$this->fixture->getReviewerFromGroup()
+		);
+	}
+
+	public function test_getReviewerFromGroupForUserWithGroupWithNoReviewer_ReturnsNull() {
+		$userGroup = tx_oelib_ObjectFactory::make('tx_seminars_Model_FrontEndUserGroup');
+		$userGroup->setData(array('tx_seminars_reviewer' => null));
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			null,
+			$this->fixture->getReviewerFromGroup()
+		);
+	}
+
+	public function test_getReviewerFromGroupForUserWithGroupWithReviewer_ReturnsReviewer() {
+		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+
+		$userGroup = tx_oelib_ObjectFactory::make(
+			'tx_seminars_Model_FrontEndUserGroup'
+		);
+		$userGroup->setData(array('tx_seminars_reviewer' => $backEndUser));
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertSame(
+			$backEndUser,
+			$this->fixture->getReviewerFromGroup()
+		);
+	}
+
+	public function test_getReviewerFromGroupForUserWithTwoGroupsOneWithReviewerOneWithoutReviewer_ReturnsReviewer() {
+		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+
+		$userGroup1 = tx_oelib_ObjectFactory::make(
+			'tx_seminars_Model_FrontEndUserGroup'
+		);
+		$userGroup2 = tx_oelib_ObjectFactory::make(
+			'tx_seminars_Model_FrontEndUserGroup'
+		);
+
+		$userGroup1->setData(array('tx_seminars_reviewer' => null));
+		$userGroup2->setData(array('tx_seminars_reviewer' => $backEndUser));
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup1);
+		$list->add($userGroup2);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertSame(
+			$backEndUser,
+			$this->fixture->getReviewerFromGroup()
+		);
+	}
+
+	public function test_getReviewerFromGroupForUserWithTwoGroupsWithReviewers_ReturnsReviewerOfFirstGroup() {
+		$backEndUser1 = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+		$backEndUser2 = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+
+		$userGroup1 = tx_oelib_ObjectFactory::make(
+			'tx_seminars_Model_FrontEndUserGroup'
+		);
+		$userGroup2 = tx_oelib_ObjectFactory::make(
+			'tx_seminars_Model_FrontEndUserGroup'
+		);
+
+		$userGroup1->setData(array('tx_seminars_reviewer' => $backEndUser1));
+		$userGroup2->setData(array('tx_seminars_reviewer' => $backEndUser2));
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup1);
+		$list->add($userGroup2);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertSame(
+			$backEndUser1,
+			$this->fixture->getReviewerFromGroup()
+		);
+	}
 }
 ?>
