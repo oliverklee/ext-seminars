@@ -1202,6 +1202,61 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_modifyDataToInsertForEventHiddenOnEditing_AddsPublicationHashToEvent() {
+		$formData = array('hidden' => 0);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertTrue(
+			isset($modifiedFormData['publication_hash'])
+				&& !empty($modifiedFormData['publication_hash'])
+		);
+	}
+
+	public function test_modifyDataToInsertForEventHiddenOnCreation_AddsPublicationHashToEvent() {
+		$formData = array('hidden' => 0);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertTrue(
+			isset($modifiedFormData['publication_hash'])
+				&& !empty($modifiedFormData['publication_hash'])
+		);
+	}
+
+	public function test_modifyDataToInsertForEventNotHiddenOnEditing_DoesNotAddPublicationHashToEvent() {
+		$formData = array('hidden' => 0);
+		$this->fixture->setObjectUid(42);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertFalse(
+			isset($modifiedFormData['publication_hash'])
+		);
+	}
+
+	public function test_modifyDataToInsertForEventNotHiddenOnCreation_DoesNotAddPublicationHashToEvent() {
+		$formData = array('hidden' => 0);
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+
+		$this->assertFalse(
+			isset($modifiedFormData['publication_hash'])
+		);
+	}
+
 
 	////////////////////////////////////////////////////////////////
 	// Tests regarding isFrontEndEditingOfRelatedRecordsAllowed().

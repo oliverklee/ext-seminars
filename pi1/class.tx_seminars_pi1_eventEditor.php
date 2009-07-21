@@ -585,6 +585,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		if ($hideEditedObject || $hideNewObject) {
 			$formData['hidden'] = 1;
+			$formData['publication_hash'] = uniqid('', true);
 		}
 	}
 
