@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3182] Feature: Add functions concerning the publication hash to the event model and mapper
 - [#3179] Feature: When an event record is hidden by the FE editor, set the publication hash
 - [#3170] Feature: Add a list of checkboxes concerning which fields of the FE editor should be required.
 - [#3168] Fix: The "my entered events" and "my managed events" lists shouldn't use any time-frame limitations

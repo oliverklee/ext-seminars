@@ -659,5 +659,53 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 			$this->fixture->find($uid)->getEventManagers()->getUids()
 		);
 	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning findByPublicationHash
+	///////////////////////////////////////////
+
+	public function test_findByPublicationHashForEmptyPublicationHashGiven_ThrowsException() {
+		$this->setExpectedException(
+			'Exception', 'The given publication hash was empty.'
+		);
+
+		$this->fixture->findByPublicationHash('');
+	}
+
+	public function test_findByPublicationForEventWithProvidedPublicationHash_ReturnsThisEvent() {
+		$publicationHash = 'blubb';
+
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('publication_hash' => $publicationHash)
+		);
+
+		$this->assertEquals(
+			$eventUid,
+			$this->fixture->findByPublicationHash($publicationHash)->getUid()
+		);
+	}
+
+	public function test_findByPublicationForNoEventWithProvidedPublicationHash_ReturnsNull() {
+		$this->testingFramework->createRecord('tx_seminars_seminars');
+
+		$this->assertEquals(
+			null,
+			$this->fixture->findByPublicationHash('foo')
+		);
+	}
+
+	public function test_findByPublicationForEventWithProvidedPublicationHash_ReturnsEventModel() {
+		$publicationHash = 'blubb';
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('publication_hash' => $publicationHash)
+		);
+
+		$this->assertTrue(
+			$this->fixture->findByPublicationHash($publicationHash)
+				instanceof tx_seminars_Model_Event
+		);
+	}
 }
 ?>

@@ -1198,5 +1198,64 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 			$this->fixture->getRegistrationBeginAsUnixTimestamp()
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning the publication hash
+	//////////////////////////////////////////
+
+	public function test_hasPublicationHashForNoPublicationHashSet_ReturnsFalse() {
+		$this->fixture->setData(array('publication_hash' => ''));
+
+		$this->assertFalse(
+			$this->fixture->hasPublicationHash()
+		);
+	}
+
+	public function test_hasPublicationHashForPublicationHashSet_ReturnsTrue() {
+		$this->fixture->setData(array('publication_hash' => 'fooo'));
+
+		$this->assertTrue(
+			$this->fixture->hasPublicationHash()
+		);
+	}
+
+	public function test_getPublicationHashForNoPublicationHashSet_ReturnsEmptyString() {
+		$this->fixture->setData(array('publication_hash' => ''));
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getPublicationHash()
+		);
+	}
+
+	public function test_getPublicationHashForPublicationHashSet_ReturnsPublicationHash() {
+		$this->fixture->setData(array('publication_hash' => 'fooo'));
+
+		$this->assertEquals(
+			'fooo',
+			$this->fixture->getPublicationHash()
+		);
+	}
+
+	public function test_purgePublicationHashForPublicationHashSetInModel_PurgesPublicationHash() {
+		$this->fixture->setData(array('publication_hash' => 'fooo'));
+
+		$this->fixture->purgePublicationHash();
+
+		$this->assertFalse(
+			$this->fixture->hasPublicationHash()
+		);
+	}
+
+	public function test_purgePublicationHashForNoPublicationHashSetInModel_PurgesPublicationHash() {
+		$this->fixture->setData(array('publication_hash' => ''));
+
+		$this->fixture->purgePublicationHash();
+
+		$this->assertFalse(
+			$this->fixture->hasPublicationHash()
+		);
+	}
 }
 ?>

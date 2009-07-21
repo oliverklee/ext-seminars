@@ -69,6 +69,32 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 		'requirements' => 'tx_seminars_Mapper_Event',
 		'dependencies' => 'tx_seminars_Mapper_Event',
 	);
+
+	/**
+	 * Retrieves an event model with the publication hash provided.
+	 *
+	 * @param string $publicationHash
+	 *        the publication hash to find the event for, must not be empty
+	 *
+	 * @return tx_seminars_Model_Event the event with the publication hash
+	 *                                 provided, will be null if no event could
+	 *                                 be found
+	 */
+	public function findByPublicationHash($publicationHash) {
+		if ($publicationHash == '') {
+			throw new Exception('The given publication hash was empty.');
+		}
+
+		try {
+			$result = $this->findSingleByWhereClause(
+				array('publication_hash' => $publicationHash)
+			);
+		} catch (tx_oelib_Exception_NotFound $exception) {
+			$result = null;
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/class.tx_seminars_Mapper_Event.php']) {

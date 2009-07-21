@@ -1249,6 +1249,33 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	public function getRegistrationBeginAsUnixTimestamp() {
 		return $this->getAsInteger('begin_date_registration');
 	}
+
+	/**
+	 * Checks whether this event has a publication hash.
+	 *
+	 * @return boolean true if this event has a publication hash, false
+	 *                 otherwise
+	 */
+	public function hasPublicationHash() {
+		return $this->hasString('publication_hash');
+	}
+
+	/**
+	 * Returns the publication hash of this event.
+	 *
+	 * @return string the publication hash of this event, will be empty if this
+	 *                event has no publication hash set
+	 */
+	public function getPublicationHash() {
+		return $this->getAsString('publication_hash');
+	}
+
+	/**
+	 * Purges the publication hash of this event.
+	 */
+	public function purgePublicationHash() {
+		$this->setAsString('publication_hash', '');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_Event.php']) {
