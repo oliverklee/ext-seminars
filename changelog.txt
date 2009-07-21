@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3170] Feature: Add a list of checkboxes concerning which fields of the FE editor should be required.
 - [#3168] Fix: The "my entered events" and "my managed events" lists shouldn't use any time-frame limitations
 - [#3172] Feature: Add a column "status" to the "my entered events" and "my managed" events list
 - [#1664] Cleanup: Clean up the registration BE form

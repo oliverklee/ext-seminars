@@ -584,6 +584,18 @@ plugin.tx_seminars_pi1 {
 				subtitle {
 					name = subtitle
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.subtitle
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_emptySubtitle
+							extension = this
+							method = validateString
+							params {
+								10.name = elementName
+								10.value = subtitle
+							}
+						}
+					}
 				}
 
 				categories = renderlet:CHECKBOX
@@ -593,6 +605,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListCategories
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noCategoryChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = categories
+							}
+						}
 					}
 				}
 
@@ -614,12 +638,36 @@ plugin.tx_seminars_pi1 {
 				teaser {
 					name = teaser
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.teaser
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_emptyTeaser
+							extension = this
+							method = validateString
+							params {
+								10.name = elementName
+								10.value = teaser
+							}
+						}
+					}
 				}
 
 				description = renderlet:TEXTAREA
 				description {
 					name = description
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.description
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_emptyDescription
+							extension = this
+							method = validateString
+							params {
+								10.name = elementName
+								10.value = description
+							}
+						}
+					}
 				}
 
 				event_type = renderlet:LISTBOX
@@ -634,6 +682,18 @@ plugin.tx_seminars_pi1 {
 						userobj {
 							extension = this
 							method = populateListEventTypes
+						}
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noEventTypeChosen
+							extension = this
+							method = validateInteger
+							params {
+								10.name = elementName
+								10.value = event_type
+							}
 						}
 					}
 				}
@@ -656,12 +716,36 @@ plugin.tx_seminars_pi1 {
 				accreditation_number {
 					name = accreditation_number
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.accreditation_number
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_accreditationNumberZero
+							extension = this
+							method = validateString
+							params {
+								10.name = elementName
+								10.value = accreditation_number
+							}
+						}
+					}
 				}
 
 				credit_points = renderlet:TEXT
 				credit_points {
 					name = credit_points
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.credit_points
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_creditPointsZero
+							extension = this
+							method = validateInteger
+							params {
+								10.name = elementName
+								10.value = credit_points
+							}
+						}
+					}
 				}
 
 				begin_date = renderlet:DATE
@@ -673,6 +757,18 @@ plugin.tx_seminars_pi1 {
 						displaytime = true
 						converttotimestamp = true
 						allowmanualedition = true
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidBeginDate
+							extension = this
+							method = validateDate
+							params {
+								10.name = elementName
+								10.value = begin_date
+							}
+						}
 					}
 				}
 
@@ -686,6 +782,18 @@ plugin.tx_seminars_pi1 {
 						converttotimestamp = true
 						allowmanualedition = true
 					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidEndDate
+							extension = this
+							method = validateDate
+							params {
+								10.name = elementName
+								10.value = end_date
+							}
+						}
+					}
 				}
 
 				begin_date_registration = renderlet:DATE
@@ -697,6 +805,18 @@ plugin.tx_seminars_pi1 {
 						displaytime = true
 						converttotimestamp = true
 						allowmanualedition = true
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidBeginDateRegistration
+							extension = this
+							method = validateDate
+							params {
+								10.name = elementName
+								10.value = begin_date_registration
+							}
+						}
 					}
 				}
 
@@ -710,6 +830,18 @@ plugin.tx_seminars_pi1 {
 						converttotimestamp = true
 						allowmanualedition = true
 					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidDeadlineRegistration
+							extension = this
+							method = validateDate
+							params {
+								10.name = elementName
+								10.value = deadline_registration
+							}
+						}
+					}
 				}
 
 				deadline_early_bird = renderlet:DATE
@@ -721,6 +853,18 @@ plugin.tx_seminars_pi1 {
 						displaytime = true
 						converttotimestamp = true
 						allowmanualedition = true
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidDeadlineEarlyBird
+							extension = this
+							method = validateDate
+							params {
+								10.name = elementName
+								10.value = deadline_early_bird
+							}
+						}
 					}
 				}
 
@@ -734,6 +878,18 @@ plugin.tx_seminars_pi1 {
 						converttotimestamp = true
 						allowmanualedition = true
 					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidDeadlineUnregistration
+							extension = this
+							method = validateDate
+							params {
+								10.name = elementName
+								10.value = deadline_unregistration
+							}
+						}
+					}
 				}
 
 				place = renderlet:CHECKBOX
@@ -743,6 +899,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListPlaces
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPlaceChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = place
+							}
+						}
 					}
 				}
 
@@ -764,6 +932,18 @@ plugin.tx_seminars_pi1 {
 				room {
 					name = room
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.room
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_emptyRoom
+							extension = this
+							method = validateString
+							params {
+								10.name = elementName
+								10.value = room
+							}
+						}
+					}
 				}
 
 				lodgings = renderlet:CHECKBOX
@@ -773,6 +953,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListLodgings
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noLodgingsChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = lodgings
+							}
+						}
 					}
 				}
 
@@ -798,6 +990,18 @@ plugin.tx_seminars_pi1 {
 						extension = this
 						method = populateListFoods
 					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noFoodsChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = foods
+							}
+						}
+					}
 				}
 
 				newFoodButton = renderlet:BUTTON
@@ -821,6 +1025,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noSpeakersChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = speakers
+							}
+						}
 					}
 				}
 
@@ -855,6 +1071,18 @@ plugin.tx_seminars_pi1 {
 						extension = this
 						method = populateListSpeakers
 					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPartnersChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = partners
+							}
+						}
+					}
 				}
 
 				tutors = renderlet:CHECKBOX
@@ -864,6 +1092,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noTutorsChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = tutors
+							}
+						}
 					}
 				}
 
@@ -875,6 +1115,18 @@ plugin.tx_seminars_pi1 {
 						extension = this
 						method = populateListSpeakers
 					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noLeadersChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = leaders
+							}
+						}
+					}
 				}
 
 				price_regular = renderlet:TEXT
@@ -882,10 +1134,15 @@ plugin.tx_seminars_pi1 {
 					name = price_regular
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*((\.|,)[\d]{1,2})?$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPriceNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidPriceRegular
+							extension = this
+							method = validatePrice
+							params {
+								10.name = elementName
+								10.value = price_regular
+							}
 						}
 					}
 				}
@@ -895,10 +1152,15 @@ plugin.tx_seminars_pi1 {
 					name = price_regular_early
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular_early
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*((\.|,)[\d]{1,2})?$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPriceNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidPriceRegularEarly
+							extension = this
+							method = validatePrice
+							params {
+								10.name = elementName
+								10.value = price_regular_early
+							}
 						}
 					}
 				}
@@ -908,10 +1170,15 @@ plugin.tx_seminars_pi1 {
 					name = price_regular_board
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular_board
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*((\.|,)[\d]{1,2})?$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPriceNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidPriceRegularBoard
+							extension = this
+							method = validatePrice
+							params {
+								10.name = elementName
+								10.value = price_regular_board
+							}
 						}
 					}
 				}
@@ -921,10 +1188,15 @@ plugin.tx_seminars_pi1 {
 					name = price_special
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_special
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*((\.|,)[\d]{1,2})?$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPriceNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidPriceSpecial
+							extension = this
+							method = validatePrice
+							params {
+								10.name = elementName
+								10.value = price_special
+							}
 						}
 					}
 				}
@@ -934,10 +1206,15 @@ plugin.tx_seminars_pi1 {
 					name = price_special_early
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_special_early
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*((\.|,)[\d]{1,2})?$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPriceNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidPriceSpecialEarly
+							extension = this
+							method = validatePrice
+							params {
+								10.name = elementName
+								10.value = price_special_early
+							}
 						}
 					}
 				}
@@ -947,10 +1224,15 @@ plugin.tx_seminars_pi1 {
 					name = price_special_board
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_special_board
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*((\.|,)[\d]{1,2})?$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPriceNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidPriceSpecialBoard
+							extension = this
+							method = validatePrice
+							params {
+								10.name = elementName
+								10.value = price_special_board
+							}
 						}
 					}
 				}
@@ -959,6 +1241,18 @@ plugin.tx_seminars_pi1 {
 				additional_information {
 					name = additional_information
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.additional_information
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_emptyAdditionalInformation
+							extension = this
+							method = validateString
+							params {
+								10.name = elementName
+								10.value = additional_information
+							}
+						}
+					}
 				}
 
 				checkboxes = renderlet:CHECKBOX
@@ -968,6 +1262,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListCheckboxes
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noCheckboxesChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = checkboxes
+							}
+						}
 					}
 				}
 
@@ -992,6 +1298,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListPaymentMethods
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noPaymentMethodsChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = payment_methods
+							}
+						}
 					}
 				}
 
@@ -1060,10 +1378,15 @@ plugin.tx_seminars_pi1 {
 					name = attendees_min
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attendees_min
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noAttendeesNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_attendeesMinZero
+							extension = this
+							method = validateInteger
+							params {
+								10.name = elementName
+								10.value = attendees_min
+							}
 						}
 					}
 				}
@@ -1073,10 +1396,15 @@ plugin.tx_seminars_pi1 {
 					name = attendees_max
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.attendees_max
 					validators {
-						10 = validator:PREG
-						10.pattern {
-							value = /^[\d]*$/
-							message = LLL:EXT:seminars/pi1/locallang.xml:message_noAttendeesNumber
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_attendeesMaxZero
+							extension = this
+							method = validateInteger
+							params {
+								10.name = elementName
+								10.value = attendees_max
+							}
 						}
 					}
 				}
@@ -1094,6 +1422,18 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListTargetGroups
+					}
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_noTargetGroupsChosen
+							extension = this
+							method = validateCheckboxes
+							params {
+								10.name = elementName
+								10.value = target_groups
+							}
+						}
 					}
 				}
 
@@ -1141,6 +1481,18 @@ plugin.tx_seminars_pi1 {
 				notes {
 					name = notes
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.notes
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_emptyNotes
+							extension = this
+							method = validateString
+							params {
+								10.name = elementName
+								10.value = notes
+							}
+						}
+					}
 				}
 
 				attached_files = renderlet:UPLOAD

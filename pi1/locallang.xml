@@ -293,8 +293,40 @@
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
+			<label index="message_emptySubtitle">Please enter a subtitle.</label>
+			<label index="message_noCategoryChosen">Please select at least one category.</label>
+			<label index="message_emptyTeaser">Please enter a teaser.</label>
+			<label index="message_emptyDescription">Please enter a description.</label>
+			<label index="message_noEventTypeChosen">Please select an event type.</label>
+			<label index="message_accreditationNumberZero">Please enter an accreditation number.</label>
+			<label index="message_creditPointsZero">Please enter the credit points.</label>
+			<label index="message_invalidBeginDate">Please enter a valid begin date.</label>
+			<label index="message_invalidEndDate">Please enter a valid end date.</label>
+			<label index="message_invalidBeginDateRegistration">Please enter a valid begin date for the registration.</label>
+			<label index="message_invalidDeadlineRegistration">Please enter a valid registration deadline.</label>
+			<label index="message_invalidDeadlineEarlyBird">Please enter a valid early bird deadline for the registration.</label>
+			<label index="message_invalidDeadlineUnregistration">Please enter a valid unregistration deadline.</label>
+			<label index="message_noPlaceChosen">Please select at least one place.</label>
+			<label index="message_emptyRoom">Please enter a room.</label>
+			<label index="message_noLodgingsChosen">Please select at least one lodging.</label>
+			<label index="message_noFoodsChosen">Please select at least one food.</label>
+			<label index="message_noSpeakersChosen">Please select at least one speaker.</label>
+			<label index="message_noPartnersChosen">Please select at least one partner.</label>
+			<label index="message_noTutorsChosen">Please select at least one tutor.</label>
+			<label index="message_noLeadersChosen">Please select at least one leader.</label>
+			<label index="message_invalidPriceRegular">Please enter a valid regular price.</label>
+			<label index="message_invalidPriceRegularEarly">Please enter a valid regular early bird price.</label>
+			<label index="message_invalidPriceRegularBoard">Please enter a valid regular board price.</label>
+			<label index="message_invalidPriceSpecial">Please enter a valid special price.</label>
+			<label index="message_invalidPriceSpecialEarly">Please enter a valid special early bird price.</label>
+			<label index="message_invalidPriceSpecialBoard">Please enter a valid special board price.</label>
+			<label index="message_emptyAdditionalInformation">Please enter additional information.</label>
+			<label index="message_noCheckboxesChosen">Please select at least one additional information checkbox.</label>
+			<label index="message_noPaymentMethodsChosen">Please select at leasr one payment method.</label>
+			<label index="message_attendeesMinZero">Please enter the minimal number of attendees.</label>
+			<label index="message_attendeesMaxZero">Please enter the maximum number of attendees.</label>
+			<label index="message_noTargetGroupsChosen">Please select at least target group.</label>
+			<label index="message_emptyNotes">Please enter internal notes.</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
@@ -534,8 +566,6 @@
 			<label index="message_earlybird_price">Denne pris er gyldig og kan bookes frem til %s</label>
 			<label index="message_emptyTitle">Indtast en overskrift for dette arrangement.</label>
 			<label index="message_emptyOrganizer">Vælg mindst én arrangør</label>
-			<label index="message_noAttendeesNumber">Indtast kun antal for min og maks antal deltagere.</label>
-			<label index="message_noPriceNumber">Indtast kun tal som priser, hvor punktum er decimaltalseparator (f.x.: 99.50).</label>
 			<label index="message_noAccessToEventEditor_formal">Beklager, du har ikke rettigheder til at redigere arrangementer.</label>
 			<label index="message_noAccessToEventEditor_informal">Beklager, du har ikke rettigheder til at redigere arrangementer.</label>
 			<label index="message_noSeatsNumber">Indtast kun antal udfra antal stole.</label>
@@ -848,8 +878,40 @@
 			<label index="message_earlybird_price">Preis gültig und buchbar bis %s</label>
 			<label index="message_emptyTitle">Bitte geben Sie einen Titel für die Veranstaltung ein.</label>
 			<label index="message_emptyOrganizer">Bitte wählen Sie mindestens einen Veranstalter aus.</label>
-			<label index="message_noAttendeesNumber">Bitte geben Sie nur Zahlen für die minimale und maximale Anzahl Anmeldungen ein.</label>
-			<label index="message_noPriceNumber">Bitte geben Sie nur Zahlen als Preise an (ohne Währungsangabe).</label>
+			<label index="message_emptySubtitle">Bitte geben Sie einen Untertitel ein.</label>
+			<label index="message_noCategoryChosen">Bitte wählen Sie mindestens eine Kategorie aus.</label>
+			<label index="message_emptyTeaser">Bitte geben Sie einen Teaser-Text ein.</label>
+			<label index="message_emptyDescription">Bitte geben Sie eine Beschreibung ein.</label>
+			<label index="message_noEventTypeChosen">Bitte wählen Sie eine Veranstaltungsart aus.</label>
+			<label index="message_accreditationNumberZero">Bitte geben Sie die Akkreditierungsnummer an.</label>
+			<label index="message_creditPointsZero">Bitte geben Sie Leistungspunkte an.</label>
+			<label index="message_invalidBeginDate">Bitte geben Sie ein gültiges Anfangsdatum an.</label>
+			<label index="message_invalidEndDate">Bitte geben Sie ein gültiges Enddatum an.</label>
+			<label index="message_invalidBeginDateRegistration">Bitte geben Sie einen gültige Anmeldebegin an.</label>
+			<label index="message_invalidDeadlineRegistration">Bitte geben Sie eine gültige Anmelde-Deadline an.</label>
+			<label index="message_invalidDeadlineEarlyBird">Bitte geben Sie eine gültige Frühbucher-Deadline an.</label>
+			<label index="message_invalidDeadlineUnregistration">Bitte geben Sie eine gültige Abmelde-Deadline an.</label>
+			<label index="message_noPlaceChosen">Bitte wählen Sie mindestens einen Ort aus.</label>
+			<label index="message_emptyRoom">Bitte geben Sie einen Raum an.</label>
+			<label index="message_noLodgingsChosen">Bitte wählen Sie mindestens eine verfügbare Unterbringungsmöglichkeit aus.</label>
+			<label index="message_noFoodsChosen">Bitte wählen Sie mindestens eine vefügbare Verpflegung aus.</label>
+			<label index="message_noSpeakersChosen">Bitte wählen Sie mindestens einen Referenten aus.</label>
+			<label index="message_noPartnersChosen">Bitte wählen Sie mindestens einen Partner aus.</label>
+			<label index="message_noTutorsChosen">Bitte wählen Sie mindestens eine Kursbegleitung aus.</label>
+			<label index="message_noLeadersChosen">Bitte wählen Sie mindestens einen Kursleiter aus.</label>
+			<label index="message_invalidPriceRegular">Bitte geben Sie einen gültigen Standardpreis an.</label>
+			<label index="message_invalidPriceRegularEarly">Bitte geben Sie einen gültigen Standardpreis für Frühbucher an.</label>
+			<label index="message_invalidPriceRegularBoard">Bitte geben Sie einen gültigen Standardpreis inlusive Vollpension an.</label>
+			<label index="message_invalidPriceSpecial">Bitte geben Sie einen gültigen Spezialpreis an.</label>
+			<label index="message_invalidPriceSpecialEarly">Bitte geben Sie einen gültigen Spezialpreis für Frühbucher an.</label>
+			<label index="message_invalidPriceSpecialBoard">Bitte geben Sie einen gültigen Spezialpreis inlusive Vollpension an.</label>
+			<label index="message_emptyAdditionalInformation">Bitte geben Sie zusätliche Informationen ein.</label>
+			<label index="message_noCheckboxesChosen">Bitte wählen Sie mindestens eine Anmeldeoption mit Checkbox aus.</label>
+			<label index="message_noPaymentMethodsChosen">Bitte wählen Sie mindestens eine erlaubte Zahlungsart aus.</label>
+			<label index="message_attendeesMinZero">Bitte geben Sie die Mininmale Anzahl an TeilnehmerInnen an.</label>
+			<label index="message_attendeesMaxZero">Bitte geben Sie die Maxinmale Anzahl an TeilnehmerInnen an.</label>
+			<label index="message_noTargetGroupsChosen">Bitte wählen Sie mindestens eine Zielgruppe aus.</label>
+			<label index="message_emptyNotes">Bitte geben Sie interne Notizen ein.</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, Sie haben nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, du hast nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
 			<label index="message_noSeatsNumber">Bitte geben Sie nur Zahlen für die Anzahl der Pätze ein.</label>
@@ -1089,8 +1151,6 @@
 			<label index="message_earlybird_price">Prijs is geldig en er kan geboekt worden tot %s</label>
 			<label index="message_emptyTitle">Vul een titel in voor dit Seminar.</label>
 			<label index="message_emptyOrganizer">Vul tenminste 1 organisator in.</label>
-			<label index="message_noAttendeesNumber">Vul alleen het minimum en maximum aantal deelnemers in.</label>
-			<label index="message_noPriceNumber">Vul alleen cijfers in en gebruik een punt voor decimalen. (zonder munteenheid)</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, U heeft geen toegang tot de Evenementen Editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, Je hebt geen toegang tot de Evenementen Editor.</label>
 			<label index="message_noSeatsNumber">Geef alleen cijfers voor het aantal plaatsen.</label>
@@ -1316,8 +1376,6 @@
 			<label index="message_earlybird_price">цена действительна до %s</label>
 			<label index="message_emptyTitle">Введите название мероприятия.</label>
 			<label index="message_emptyOrganizer">Выберите как минимум одного организатора.</label>
-			<label index="message_noAttendeesNumber">Введите числа для минимального и максимального количества участников.</label>
-			<label index="message_noPriceNumber">Введите числа для цены (без обозначения валюты, используя точку как десятичный разделитель).</label>
 			<label index="message_noAccessToEventEditor_formal">Извините, у вас нет доступа к редактированию событий.</label>
 			<label index="message_noAccessToEventEditor_informal">Извините, у вас нет доступа к редактированию событий.</label>
 			<label index="message_noSeatsNumber">Введите количество мест.</label>
@@ -1544,8 +1602,6 @@
 			<label index="message_earlybird_price">Prezzo valido fino al %s</label>
 			<label index="message_emptyTitle">Inserire un titolo per l'evento.</label>
 			<label index="message_emptyOrganizer">Selezionare almeno un organizzatore.</label>
-			<label index="message_noAttendeesNumber">Inserire solo numeri per il minimo e massimo numero di partecipanti.</label>
-			<label index="message_noPriceNumber">Inserire solo numeri per il prezzo.</label>
 			<label index="message_noAccessToEventEditor_formal">Spiacente, non ha accesso alla modifica dell'evento.</label>
 			<label index="message_noAccessToEventEditor_informal">Spiacente, non hai accesso alla modifica dell'evento.</label>
 			<label index="message_noSeatsNumber">Inserire solo numeri per il numero di posti.</label>
@@ -1772,8 +1828,6 @@
 			<label index="message_earlybird_price">prix valables jusqu'au %s</label>
 			<label index="message_emptyTitle">Veuillez donner un titre à cet événement.</label>
 			<label index="message_emptyOrganizer">Veuillez choisir au moins un organisateur.</label>
-			<label index="message_noAttendeesNumber">Veuillez ne donner de chiffres que pour le nombre minimal et maximal de participants.</label>
-			<label index="message_noPriceNumber">Veuillez ne donner que des chiffres pour les prix (sans la monnaie).</label>
 			<label index="message_noAccessToEventEditor_formal">Désolé, vous n'avez pas accès à la modification des événements.</label>
 			<label index="message_noAccessToEventEditor_informal">Désolé, tu n'as pas accès à la modification des événements.</label>
 			<label index="message_noSeatsNumber">Veuillez ne donner que des chiffres pour le nombre de places.</label>
@@ -1954,8 +2008,6 @@
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
@@ -2286,8 +2338,40 @@
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noPriceNumber" type="integer">124212657</label>
+			<label index="message_emptySubtitle" type="integer">99304859</label>
+			<label index="message_noCategoryChosen" type="integer">167200433</label>
+			<label index="message_emptyTeaser" type="integer">252216048</label>
+			<label index="message_emptyDescription" type="integer">190683509</label>
+			<label index="message_noEventTypeChosen" type="integer">19952318</label>
+			<label index="message_accreditationNumberZero" type="integer">217086425</label>
+			<label index="message_creditPointsZero" type="integer">47736719</label>
+			<label index="message_invalidBeginDate" type="integer">114025529</label>
+			<label index="message_invalidEndDate" type="integer">45204937</label>
+			<label index="message_invalidBeginDateRegistration" type="integer">118512352</label>
+			<label index="message_invalidDeadlineRegistration" type="integer">191547219</label>
+			<label index="message_invalidDeadlineEarlyBird" type="integer">2384854</label>
+			<label index="message_invalidDeadlineUnregistration" type="integer">233826406</label>
+			<label index="message_noPlaceChosen" type="integer">21009857</label>
+			<label index="message_emptyRoom" type="integer">24174885</label>
+			<label index="message_noLodgingsChosen" type="integer">205512808</label>
+			<label index="message_noFoodsChosen" type="integer">20844572</label>
+			<label index="message_noSpeakersChosen" type="integer">246161049</label>
+			<label index="message_noPartnersChosen" type="integer">50120042</label>
+			<label index="message_noTutorsChosen" type="integer">140081436</label>
+			<label index="message_noLeadersChosen" type="integer">154581583</label>
+			<label index="message_invalidPriceRegular" type="integer">102399804</label>
+			<label index="message_invalidPriceRegularEarly" type="integer">95661530</label>
+			<label index="message_invalidPriceRegularBoard" type="integer">122945793</label>
+			<label index="message_invalidPriceSpecial" type="integer">243440613</label>
+			<label index="message_invalidPriceSpecialEarly" type="integer">47683436</label>
+			<label index="message_invalidPriceSpecialBoard" type="integer">51169901</label>
+			<label index="message_emptyAdditionalInformation" type="integer">97662471</label>
+			<label index="message_noCheckboxesChosen" type="integer">104822683</label>
+			<label index="message_noPaymentMethodsChosen" type="integer">79677170</label>
+			<label index="message_attendeesMinZero" type="integer">88696051</label>
+			<label index="message_attendeesMaxZero" type="integer">162951926</label>
+			<label index="message_noTargetGroupsChosen" type="integer">255227194</label>
+			<label index="message_emptyNotes" type="integer">75352038</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
@@ -2526,8 +2610,6 @@
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
@@ -2737,8 +2819,6 @@
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
@@ -2996,8 +3076,6 @@
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
@@ -3219,8 +3297,6 @@
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAttendeesNumber" type="integer">38208342</label>
-			<label index="message_noPriceNumber" type="integer">124212657</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
@@ -3528,8 +3604,40 @@
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
+			<label index="message_emptySubtitle">Please enter a subtitle.</label>
+			<label index="message_noCategoryChosen">Please select at least one category.</label>
+			<label index="message_emptyTeaser">Please enter a teaser.</label>
+			<label index="message_emptyDescription">Please enter a description.</label>
+			<label index="message_noEventTypeChosen">Please select an event type.</label>
+			<label index="message_accreditationNumberZero">Please enter an accreditation number.</label>
+			<label index="message_creditPointsZero">Please enter the credit points.</label>
+			<label index="message_invalidBeginDate">Please enter a valid begin date.</label>
+			<label index="message_invalidEndDate">Please enter a valid end date.</label>
+			<label index="message_invalidBeginDateRegistration">Please enter a valid begin date for the registration.</label>
+			<label index="message_invalidDeadlineRegistration">Please enter a valid registration deadline.</label>
+			<label index="message_invalidDeadlineEarlyBird">Please enter a valid early bird deadline for the registration.</label>
+			<label index="message_invalidDeadlineUnregistration">Please enter a valid unregistration deadline.</label>
+			<label index="message_noPlaceChosen">Please select at least one place.</label>
+			<label index="message_emptyRoom">Please enter a room.</label>
+			<label index="message_noLodgingsChosen">Please select at least one lodging.</label>
+			<label index="message_noFoodsChosen">Please select at least one food.</label>
+			<label index="message_noSpeakersChosen">Please select at least one speaker.</label>
+			<label index="message_noPartnersChosen">Please select at least one partner.</label>
+			<label index="message_noTutorsChosen">Please select at least one tutor.</label>
+			<label index="message_noLeadersChosen">Please select at least one leader.</label>
+			<label index="message_invalidPriceRegular">Please enter a valid regular price.</label>
+			<label index="message_invalidPriceRegularEarly">Please enter a valid regular early bird price.</label>
+			<label index="message_invalidPriceRegularBoard">Please enter a valid regular board price.</label>
+			<label index="message_invalidPriceSpecial">Please enter a valid special price.</label>
+			<label index="message_invalidPriceSpecialEarly">Please enter a valid special early bird price.</label>
+			<label index="message_invalidPriceSpecialBoard">Please enter a valid special board price.</label>
+			<label index="message_emptyAdditionalInformation">Please enter additional information.</label>
+			<label index="message_noCheckboxesChosen">Please select at least one additional information checkbox.</label>
+			<label index="message_noPaymentMethodsChosen">Please select at leasr one payment method.</label>
+			<label index="message_attendeesMinZero">Please enter the minimal number of attendees.</label>
+			<label index="message_attendeesMaxZero">Please enter the maximum number of attendees.</label>
+			<label index="message_noTargetGroupsChosen">Please select at least target group.</label>
+			<label index="message_emptyNotes">Please enter internal notes.</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
@@ -3749,8 +3857,6 @@
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
@@ -3977,8 +4083,6 @@
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
@@ -4221,8 +4325,6 @@
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
@@ -4464,8 +4566,6 @@
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
@@ -4687,8 +4787,6 @@
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAttendeesNumber">Please enter only numbers for the minimal and maximal numbers of attendees.</label>
-			<label index="message_noPriceNumber">Please enter only numbers as prices (omitting the currency).</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
