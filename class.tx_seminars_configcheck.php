@@ -1673,29 +1673,31 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	 * and the file exists.
 	 */
 	private function checkRegistrationEditorTemplateFile() {
+		$errorMessage = 'This specifies the HTML template for the registration '.
+			'form. If this file is not available, the registration form cannot '.
+			'be used.';
+
 		$this->checkForNonEmptyString(
 			'registrationEditorTemplateFile',
-			true,
-			's_registration',
-			'This specifies the HTML template for the registration form.'
+			false,
+			'',
+			$errorMessage
 		);
 
 		if ($this->objectToCheck->hasConfValueString(
-			'registrationEditorTemplateFile', 's_registration'
+			'registrationEditorTemplateFile', '', true
 		)) {
 			$rawFileName = $this->objectToCheck->getConfValueString(
-				'registrationEditorTemplateFile',
-				's_template_special'
+				'registrationEditorTemplateFile', '', true, true
 			);
 			if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
-				$message = 'The specified HTML template file <strong>'
-					.htmlspecialchars($rawFileName)
-					.'</strong> cannot be read. '
-					.'This specifies the HTML template for the registration form. '
-					.'Please either create the file <strong>'.$rawFileName
-					.'</strong> or select an existing file using the TS setup '
-					.'variable <strong>'.$this->getTSSetupPath()
-					.'templateFile</strong> or via FlexForms.';
+				$message = 'The specified HTML template file <strong>' .
+					htmlspecialchars($rawFileName) .  '</strong> cannot be read. ' .
+					$errorMessage . ' ' .
+					'Please either create the file <strong>' . $rawFileName .
+					'</strong> or select an existing file using the TS setup ' .
+					'variable <strong>'.$this->getTSSetupPath() .
+					'templateFile</strong> or via FlexForms.';
 				$this->setErrorMessage($message);
 			}
 		}

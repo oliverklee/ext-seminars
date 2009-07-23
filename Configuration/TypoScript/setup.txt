@@ -183,7 +183,7 @@ plugin.tx_seminars_pi1 {
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
 
 	# location of the template file for the registration form
-	registrationEditorTemplateFile = EXT:seminars/pi1/registration_editor.html
+	registrationEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.html
 
 	# whether to use formal or informal language
 	salutation = formal
