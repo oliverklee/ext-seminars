@@ -557,10 +557,7 @@ plugin.tx_seminars_pi1 {
 				}
 				renderer = renderer:TEMPLATE
 				renderer.template {
-					path.userobj {
-						extension = this
-						method = getTemplatePath
-					}
+					path < plugin.tx_seminars_pi1.eventEditorTemplateFile
 					subpart = ###seminars_FORM###
 					errortag = errors
 				}
