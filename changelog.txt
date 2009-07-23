@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3190] Change: Add TS setup variable for the FE editor HTML template
 - [#3191] Change: Move the registration editor template file to Resources
 - [#3185] Feature: Add a field "additional number of registered attendees" to the events table
 - [#3181] Feature: Add a setting for the BE user to notify to the FE groups

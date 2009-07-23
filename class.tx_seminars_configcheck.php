@@ -306,6 +306,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	protected function check_tx_seminars_pi1_edit_event() {
 		$this->checkCommonFrontEndSettings();
 
+		$this->checkEventEditorTemplateFile();
 		$this->checkEventEditorFeGroupID();
 		$this->checkCreateEventsPID();
 		$this->checkEventSuccessfullySavedPID();
@@ -2527,6 +2528,39 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		);
 	}
 
+	/**
+	 * Checks whether the HTML template for the event editor is provided and the
+	 * file exists.
+	 */
+	private function checkEventEditorTemplateFile() {
+		$errorMessage = 'This specifies the HTML template for the event editor. '.
+			'If this file is not available, the event editor cannot be used.';
+
+		$this->checkForNonEmptyString(
+			'eventEditorTemplateFile',
+			false,
+			'',
+			$errorMessage
+		);
+
+		if ($this->objectToCheck->hasConfValueString(
+			'eventEditorTemplateFile', '', true
+		)) {
+			$rawFileName = $this->objectToCheck->getConfValueString(
+				'eventEditorTemplateFile', '', true, true
+			);
+			if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
+				$message = 'The specified HTML template file <strong>' .
+					htmlspecialchars($rawFileName) .  '</strong> cannot be read. ' .
+					$errorMessage . ' ' .
+					'Please either create the file <strong>' . $rawFileName .
+					'</strong> or select an existing file using the TS setup ' .
+					'variable <strong>'.$this->getTSSetupPath() .
+					'templateFile</strong> or via FlexForms.';
+				$this->setErrorMessage($message);
+			}
+		}
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_configcheck.php']) {

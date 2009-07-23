@@ -182,6 +182,9 @@ plugin.tx_seminars_pi1 {
 	# location of the HTML template file
 	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
 
+	# location of the front end event editor template file
+	eventEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/eventEditor.html
+
 	# location of the template file for the registration form
 	registrationEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.html
 

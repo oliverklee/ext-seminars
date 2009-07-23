@@ -117,7 +117,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function getTemplatePath() {
 		return t3lib_div::getFileAbsFileName($this->getConfValueString(
-			'templateFile', 's_template_special', true
+			'eventEditorTemplateFile', '', true, true
 		));
 	}
 
