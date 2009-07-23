@@ -70,6 +70,7 @@
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Registration queue</label>
+			<label index="tx_seminars_seminars.offline_attendees">Number of offline-registered attendees:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
@@ -271,6 +272,7 @@
 			<label index="tx_seminars_seminars.attendees_min">Minimale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.queue_size">Warteliste</label>
+			<label index="tx_seminars_seminars.offline_attendees">Anzahl der offline angemeldeten TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.target_groups">Zielgruppen:</label>
 			<label index="tx_seminars_seminars.attendees">Momentane Anzahl Anmeldungen:</label>
 			<label index="tx_seminars_seminars.vacancies">Momentane Anzahl freie Plätze:</label>
@@ -1229,6 +1231,7 @@
 			<label index="tx_seminars_seminars.attendees_min" type="integer">190118002</label>
 			<label index="tx_seminars_seminars.attendees_max" type="integer">111778233</label>
 			<label index="tx_seminars_seminars.queue_size" type="integer">161296272</label>
+			<label index="tx_seminars_seminars.offline_attendees" type="integer">238405249</label>
 			<label index="tx_seminars_seminars.target_groups" type="integer">84804338</label>
 			<label index="tx_seminars_seminars.attendees" type="integer">5740012</label>
 			<label index="tx_seminars_seminars.vacancies" type="integer">7812058</label>
@@ -2179,6 +2182,7 @@
 			<label index="tx_seminars_seminars.attendees_min">Minimal number of attendees:</label>
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Registration queue</label>
+			<label index="tx_seminars_seminars.offline_attendees">Number of offline-registered attendees:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>

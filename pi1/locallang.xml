@@ -325,6 +325,7 @@
 			<label index="message_noPaymentMethodsChosen">Please select at leasr one payment method.</label>
 			<label index="message_attendeesMinZero">Please enter the minimal number of attendees.</label>
 			<label index="message_attendeesMaxZero">Please enter the maximum number of attendees.</label>
+			<label index="message_offlineAttendeesZero">Please enter the number of offline-registered attendees.</label>
 			<label index="message_noTargetGroupsChosen">Please select at least target group.</label>
 			<label index="message_emptyNotes">Please enter internal notes.</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
@@ -910,6 +911,7 @@
 			<label index="message_noPaymentMethodsChosen">Bitte wählen Sie mindestens eine erlaubte Zahlungsart aus.</label>
 			<label index="message_attendeesMinZero">Bitte geben Sie die Mininmale Anzahl an TeilnehmerInnen an.</label>
 			<label index="message_attendeesMaxZero">Bitte geben Sie die Maxinmale Anzahl an TeilnehmerInnen an.</label>
+			<label index="message_offlineAttendeesZero">Bitte geben Sie die Anzahl der offline angemeldeten TeilnehmerInnen an.</label>
 			<label index="message_noTargetGroupsChosen">Bitte wählen Sie mindestens eine Zielgruppe aus.</label>
 			<label index="message_emptyNotes">Bitte geben Sie interne Notizen ein.</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, Sie haben nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
@@ -2370,6 +2372,7 @@
 			<label index="message_noPaymentMethodsChosen" type="integer">79677170</label>
 			<label index="message_attendeesMinZero" type="integer">88696051</label>
 			<label index="message_attendeesMaxZero" type="integer">162951926</label>
+			<label index="message_offlineAttendeesZero" type="integer">206107390</label>
 			<label index="message_noTargetGroupsChosen" type="integer">255227194</label>
 			<label index="message_emptyNotes" type="integer">75352038</label>
 			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
@@ -3636,6 +3639,7 @@
 			<label index="message_noPaymentMethodsChosen">Please select at leasr one payment method.</label>
 			<label index="message_attendeesMinZero">Please enter the minimal number of attendees.</label>
 			<label index="message_attendeesMaxZero">Please enter the maximum number of attendees.</label>
+			<label index="message_offlineAttendeesZero">Please enter the number of offline-registered attendees.</label>
 			<label index="message_noTargetGroupsChosen">Please select at least target group.</label>
 			<label index="message_emptyNotes">Please enter internal notes.</label>
 			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>

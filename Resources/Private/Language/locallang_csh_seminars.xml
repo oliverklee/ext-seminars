@@ -12,22 +12,30 @@
 		<languageKey index="default" type="array">
 			<label index="attached_files.description">The files are available for download in the front end.</label>
 			<label index="attached_files.details">By default, only the front-end users that are registered for an event can download that event's files. This setting can be changed in the configuration.</label>
+			<label index="offline_attendees.description">This is the number of registrations for which no registration records in TYPO3 exist.</label>
+			<label index="offline_attendees.details">Still, these registrations will reduce the number of vacancies, for example if the registrations have been received offline via a phone call.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="attached_files.description">Diese Dateien stehen im Frontend zum Download bereit.</label>
 			<label index="attached_files.details">In der Standardkonfiguration können nur die für eine Veranstaltung angemeldeten Frontend-Benutzer die Dateien einer Veranstaltung herunterladen. Dieses Verhalten kann in der Konfiguration umgestellt werden.</label>
+			<label index="offline_attendees.description">Dies ist die Anzahl Anmeldungen, die nicht als Anmeldedatensätze in TYPO3 vorliegen, aber trotzdem die Anzahl der freien Plätze reduzieren sollen (zum Beispiel Offline-Anmeldungen per Telefon).</label>
+			<label index="offline_attendees.details">Dies ist die Anzahl Anmeldungen, die nicht als Anmeldedatensätze in TYPO3 vorliegen, aber trotzdem die Anzahl der freien Plätze reduzieren sollen (zum Beispiel Offline-Anmeldungen per Telefon).</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="de" type="array">
 			<label index="attached_files.description" type="integer">75903159</label>
 			<label index="attached_files.details" type="integer">16944897</label>
+			<label index="offline_attendees.description" type="integer">197658613</label>
+			<label index="offline_attendees.details" type="integer">154301489</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
 			<label index="attached_files.description">The files are available for download in the front end.</label>
 			<label index="attached_files.details">By default, only the front-end users that are registered for an event can download that event's files. This setting can be changed in the configuration.</label>
+			<label index="offline_attendees.description">This is the number of registrations for which no registration records in TYPO3 exist.</label>
+			<label index="offline_attendees.details">Still, these registrations will reduce the number of vacancies, for example if the registrations have been received offline via a phone call.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

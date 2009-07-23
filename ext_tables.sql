@@ -274,6 +274,7 @@ CREATE TABLE tx_seminars_seminars (
 	attendees_min int(11) unsigned DEFAULT '0' NOT NULL,
 	attendees_max int(11) unsigned DEFAULT '0' NOT NULL,
 	queue_size int(1) unsigned DEFAULT '0' NOT NULL,
+	offline_attendees int(11) unsigned DEFAULT '0' NOT NULL,
 	target_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	skip_collision_check tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	cancelled tinyint(1) unsigned DEFAULT '0' NOT NULL,

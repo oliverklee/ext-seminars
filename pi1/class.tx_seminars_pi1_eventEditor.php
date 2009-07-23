@@ -783,6 +783,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					'attendees_number' => array(
 						'attendees_min' => false,
 						'attendees_max' => false,
+						'offline_attendees' => false,
 					),
 				),
 				'target_groups' => false,

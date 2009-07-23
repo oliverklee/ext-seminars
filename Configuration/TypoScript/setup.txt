@@ -440,7 +440,7 @@ plugin.tx_seminars_pi1 {
 	allowedExtensionsForUpload = jpg,jpeg,png,bmp,gif,tiff,tif,txt,pdf,ps,svg,doc,docx,sxw,odt,xls,xlsx,sxc,ods,ppt,pptx,sxi,odp,html,htm,css,js,xml,xsd,zip,rar,gz,tgz,tar,bz2,tbz,tbz2
 
 	# comma-separated list of the fields to show in the FE-editor
-	displayFrontEndEditorFields = subtitle,accreditation_number,credit_points,categories,event_type,cancelled,teaser,description,additional_information,begin_date,end_date,begin_date_registration,deadline_early_bird,deadline_registration,needs_registration,allows_multiple_registrations,queue_size,attendees_min,attendees_max,target_groups,price_regular,price_regular_early,price_regular_board,price_special,price_special_early,price_special_board,payment_methods,place,room,lodgings,foods,speakers,leaders,partners,tutors,checkboxes,uses_terms_2,attached_file_box,notes
+	displayFrontEndEditorFields = subtitle,accreditation_number,credit_points,categories,event_type,cancelled,teaser,description,additional_information,begin_date,end_date,begin_date_registration,deadline_early_bird,deadline_registration,needs_registration,allows_multiple_registrations,queue_size,offline_attendees,attendees_min,attendees_max,target_groups,price_regular,price_regular_early,price_regular_board,price_special,price_special_early,price_special_board,payment_methods,place,room,lodgings,foods,speakers,leaders,partners,tutors,checkboxes,uses_terms_2,attached_file_box,notes
 
 	# comma-separated list of the fields which are required to be filled in the FE-edior
 	requiredFrontEndEditorFields =
@@ -1413,6 +1413,24 @@ plugin.tx_seminars_pi1 {
 				queue_size {
 					name = queue_size
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.queue_size
+				}
+
+				offline_attendees = renderlet:TEXT
+				offline_attendees {
+					name = offline_attendees
+					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.offline_attendees
+					validators {
+						10 = validator:STANDARD
+						10.userobj {
+							message = LLL:EXT:seminars/pi1/locallang.xml:message_offlineAttendeesZero
+							extension = this
+							method = validateInteger
+							params {
+								10.name = elementName
+								10.value = offline_attendees
+							}
+						}
+					}
 				}
 
 				target_groups = renderlet:CHECKBOX
