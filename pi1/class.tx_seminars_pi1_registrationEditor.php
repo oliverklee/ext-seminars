@@ -203,23 +203,6 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	}
 
 	/**
-	 * Gets the path to the HTML template as set in the TS setup or flexforms.
-	 * The returned path will always be an absolute path in the file system;
-	 * EXT: references will automatically get resolved.
-	 *
-	 * @return string the path to the HTML template as an absolute path in the
-	 *                file system, will not be empty in a correct configuration,
-	 *                will never be null
-	 */
-	public function getTemplatePath() {
-		return t3lib_div::getFileAbsFileName(
-			$this->getConfValueString(
-				'registrationEditorTemplateFile', '', true, true
-			)
-		);
-	}
-
-	/**
 	 * Creates the HTML output.
 	 *
 	 * @return string HTML of the create/edit form

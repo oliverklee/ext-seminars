@@ -1577,10 +1577,7 @@ plugin.tx_seminars_pi1 {
 
 					renderer = renderer:TEMPLATE
 					renderer.template {
-						path.userobj {
-							extension = this
-							method = getTemplatePath
-						}
+						path < plugin.tx_seminars_pi1.registrationEditorTemplateFile
 						subpart = ###REGISTRATION_EDITOR_STEP_1###
 						errortag = errors
 					}
@@ -2369,10 +2366,7 @@ plugin.tx_seminars_pi1 {
 
 					renderer = renderer:TEMPLATE
 					renderer.template {
-						path.userobj {
-							extension = this
-							method = getTemplatePath
-						}
+						path < plugin.tx_seminars_pi1.registrationEditorTemplateFile
 						subpart = ###REGISTRATION_EDITOR_STEP_2###
 						errortag = errors
 					}
@@ -2970,10 +2964,7 @@ plugin.tx_seminars_pi1 {
 
 				renderer = renderer:TEMPLATE
 				renderer.template {
-					path.userobj {
-						extension = this
-						method = getTemplatePath
-					}
+					path < plugin.tx_seminars_pi1.registrationEditorTemplateFile
 					subpart = ###REGISTRATION_EDITOR_UNREGISTRATION###
 					errortag = errors
 				}
