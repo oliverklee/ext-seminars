@@ -1288,7 +1288,7 @@ $TCA['tx_seminars_speakers'] = array(
 $TCA['tx_seminars_attendances'] = array(
 	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,registered_themselves,seats,total_price,currency,tax,including_tax,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
+		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,registered_themselves,total_price,currency,tax,including_tax,attendees_names,paid,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
 	),
 	'columns' => array(
 		'title' => array(
@@ -1351,14 +1351,6 @@ $TCA['tx_seminars_attendances'] = array(
 				'type' => 'check',
 			),
 		),
-		'registered_themselves' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.registered_themselves',
-			'config' => array(
-				'type' => 'check',
-				'default' => '1',
-			),
-		),
 		'seats' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.seats',
@@ -1372,6 +1364,14 @@ $TCA['tx_seminars_attendances'] = array(
 					'upper' => '999',
 					'lower' => '0',
 				),
+				'default' => '1',
+			),
+		),
+		'registered_themselves' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.registered_themselves',
+			'config' => array(
+				'type' => 'check',
 				'default' => '1',
 			),
 		),
