@@ -577,7 +577,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			return;
 		}
 
-		$keywords = split('[ ,]', $searchWords);
+		$keywords = preg_split('/[ ,]/', $searchWords);
 
 		$allWhereParts = array();
 
