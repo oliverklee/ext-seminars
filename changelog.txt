@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3217] Fix: Replace deprecated split() from tx_seminars_seminarbagbuilder->limitToFullTextSearch()
 - [#3190] Change: Add TS setup variable for the FE editor HTML template
 - [#3191] Change: Move the registration editor template file to Resources
 - [#3185] Feature: Add a field "additional number of registered attendees" to the events table
