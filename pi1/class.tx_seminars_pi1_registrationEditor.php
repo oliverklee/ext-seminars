@@ -1031,29 +1031,6 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	}
 
 	/**
-	 * Checks whether the list of attendees' names is non-empty or less than two
-	 * seats are requested or the field "attendees names" is not displayed.
-	 *
-	 * @param array associative array with the element "value" in which
-	 *              the current value of the field with the attendees'
-	 *              names is provided
-	 *
-	 * @return boolean true if the field is non-empty or less than two
-	 *                 seats are reserved or this field is not displayed
-	 *                 at all, false otherwise
-	 */
-	public function hasAttendeesNames(array $formData) {
-		$seats = (intval($this->getFormValue('seats')) > 0) ?
-			intval($this->getFormValue('seats')) : 1;
-
-		return (!empty($formData['value']) || ($seats < 2)
-			|| !$this->hasRegistrationFormField(
-				array('elementname' => 'attendees_names')
-			)
-		);
-	}
-
-	/**
 	 * Checks whether the current field is non-empty if the payment method
 	 * "bank transfer" is selected. If a different payment method is selected
 	 * (or none is defined as "bank transfer"), the check is always positive and
@@ -1613,6 +1590,70 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$this->registrationManager->removeRegistration(
 			$this->getRegistration()->getUid(), $this
 		);
+	}
+
+	/**
+	 * Gets the number of entered persons in the form by counting the lines
+	 * in the "additional attendees names" field and the state of the
+	 * "register myself" checkbox.
+	 *
+	 * @return integer the number of entered persons, will be >= 0
+	 */
+	public function getNumberOfEnteredPersons() {
+		if ($this->isFormFieldEnabled('registered_themselves')) {
+			$formData = intval($this->getFormValue('registered_themselves'));
+			$themselves = ($formData > 0) ? 1 : 0;
+		} else {
+			$themselves = 1;
+		}
+		$names = t3lib_div::trimExplode(
+			LF, (string) $this->getFormValue('attendees_names'), true
+		);
+		$namesCounter = count($names);
+
+		return $themselves + $namesCounter;
+	}
+
+	/**
+	 * Checks whether the number of selected seats matches the number of
+	 * registered persons (from the "attendees names" text area and the
+	 * "myself" checkbox).
+	 *
+	 * @return boolean true if the number of seats matches the number of
+	 *                 registered persons, false otherwise
+	 */
+	public function numberOfSeatsMatchesRegisteredPersons() {
+		if (intval($this->getFormValue('seats')) <= 0) {
+			return false;
+		}
+		if (!$this->isFormFieldEnabled('attendees_names')) {
+			return true;
+		}
+
+		return (intval($this->getFormValue('seats'))
+			== $this->getNumberOfEnteredPersons());
+	}
+
+	/**
+	 * Gets the error message to return if the number of registered persons
+	 * does not match the number of seats.
+	 *
+	 * @return string the localized error message, will be empty if both numbers
+	 *                match
+	 */
+	public function getMessageForSeatsNotMatchingRegisteredPersons() {
+		$seats = intval($this->getFormValue('seats'));
+		$persons = $this->getNumberOfEnteredPersons();
+
+		if ($persons < $seats) {
+			$result = $this->translate('message_lessAttendeesThanSeats');
+		} elseif ($persons > $seats) {
+			$result = $this->translate('message_moreAttendeesThanSeats');;
+		} else {
+			$result = '';
+		}
+
+		return $result;
 	}
 }
 

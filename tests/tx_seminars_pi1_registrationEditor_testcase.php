@@ -35,6 +35,7 @@ require_once(t3lib_extMgm::extPath('lang') . 'lang.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	/**
@@ -74,6 +75,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 				'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'logOutOneTimeAccountsAfterRegistration' => 1,
+				'showRegistrationFields' => 'registered_themselves,attendees_names',
 				'form.' => array(
 					'unregistration.' => array(),
 					'registration.'	=> array(
@@ -502,6 +504,302 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$fixture->isFormFieldEnabled('billing_address')
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	/////////////////////////////////////////////////////////////////////////
+	// Tests concerning the validation of the number of persons to register
+	/////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForEmptyFormDataReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForNoSelfRegistrationReturnsZero() {
+		$this->fixture->setFakedFormValue('registered_themselves', 0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForSelfRegistrationHiddenReturnsOne() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'showRegistrationFields' => 'seats',
+				'form.' => array(
+					'registration.'	=> array(
+						'step1.' => array('seats' => array()),
+						'step2.' => array(),
+					)
+				),
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setAction('register');
+		$fixture->setTestMode();
+
+		$this->assertEquals(
+			1,
+			$fixture->getNumberOfEnteredPersons()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForSelfRegistrationReturnsOne() {
+		$this->fixture->setFakedFormValue('registered_themselves', 1);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForOneWordAsNamesReturnsOne() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForOneWordWithLeadingLfAsNamesReturnsOne() {
+		$this->fixture->setFakedFormValue('attendees_names', LF . 'John');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForOneWordWithTrailingLfAsNamesReturnsOne() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John' . LF);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForOneWordWithTrailingSpaceLineAsNamesReturnsOne() {
+		$this->fixture->setFakedFormValue(
+			'attendees_names', 'John' . LF . '  ' . LF
+		);
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForTwoWordsAsNamesReturnsOne() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForTwoLinesSeparatedByLfAsNamesReturnsTwo() {
+		$this->fixture->setFakedFormValue(
+			'attendees_names', 'John Doe' . LF . 'Jane Doe'
+		);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForTwoLinesSeparatedByCrLfAsNamesReturnsTwo() {
+		$this->fixture->setFakedFormValue(
+			'attendees_names', 'John Doe' . CRLF . 'Jane Doe'
+		);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfEnteredPersonsForSelfRegistrationAndOneNameReturnsTwo() {
+		$this->fixture->setFakedFormValue(
+			'attendees_names', 'John Doe' . LF . '  ' . LF
+		);
+		$this->fixture->setFakedFormValue('registered_themselves', 1);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getNumberOfEnteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function numberOfSeatsMatchesRegisteredPersonsForZeroSeatsReturnsFalse() {
+		$this->fixture->setFakedFormValue('seats', 0);
+
+		$this->assertFalse(
+			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function numberOfSeatsMatchesRegisteredPersonsForNegativeSeatsReturnsFalse() {
+		$this->fixture->setFakedFormValue('seats', -4);
+
+		$this->assertFalse(
+			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function numberOfSeatsMatchesRegisteredPersonsForOnePersonAndOneSeatReturnsTrue() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$this->fixture->setFakedFormValue('seats', 1);
+
+		$this->assertTrue(
+			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function numberOfSeatsMatchesRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$this->fixture->setFakedFormValue('seats', 2);
+
+		$this->assertFalse(
+			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function numberOfSeatsMatchesRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John' . LF . 'Jane');
+		$this->fixture->setFakedFormValue('seats', 1);
+
+		$this->assertFalse(
+			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndOneSeatReturnsEmptyString() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$this->fixture->setFakedFormValue('seats', 1);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getMessageForSeatsNotMatchingRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndTwoSeatsReturnsMessage() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$this->fixture->setFakedFormValue('seats', 2);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_lessAttendeesThanSeats'),
+			$this->fixture->getMessageForSeatsNotMatchingRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getMessageForSeatsNotMatchingRegisteredPersonsForTwoPersonsAndOneSeatReturnsMessage() {
+		$this->fixture->setFakedFormValue('attendees_names', 'John' . LF . 'Jane');
+		$this->fixture->setFakedFormValue('seats', 1);
+
+		$this->assertEquals(
+			$this->fixture->translate('message_moreAttendeesThanSeats'),
+			$this->fixture->getMessageForSeatsNotMatchingRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function numberOfSeatsMatchesRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'showRegistrationFields' => 'seats',
+				'form.' => array(
+					'registration.'	=> array(
+						'step1.' => array('seats' => array()),
+						'step2.' => array(),
+					)
+				),
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setAction('register');
+		$fixture->setTestMode();
+
+		$fixture->setFakedFormValue('seats', 8);
+
+		$this->assertTrue(
+			$fixture->numberOfSeatsMatchesRegisteredPersons()
 		);
 
 		$fixture->__destruct();

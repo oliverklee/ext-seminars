@@ -2079,12 +2079,20 @@ plugin.tx_seminars_pi1 {
 								value = /^[\d]*$/
 								message = LLL:EXT:seminars/pi1/locallang.xml:message_noSeatsNumber
 							}
-
 							20 = validator:STANDARD
 							20.userobj {
 								extension = this
 								method = canRegisterSeats
 								message = LLL:EXT:seminars/pi1/locallang.xml:message_invalidNumberOfSeats
+							}
+							30 = validator:STANDARD
+							30.userobj {
+								extension = this
+								method = numberOfSeatsMatchesRegisteredPersons
+								message.userobj {
+									extension = this
+									method = getMessageForSeatsNotMatchingRegisteredPersons
+								}
 							}
 						}
 						process.userobj {
@@ -2114,14 +2122,6 @@ plugin.tx_seminars_pi1 {
 					attendees_names = renderlet:TEXTAREA
 					attendees_names {
 						name = attendees_names
-						validators {
-							10 = validator:STANDARD
-							10.userobj {
-								extension = this
-								method = hasAttendeesNames
-								message = LLL:EXT:seminars/pi1/locallang.xml:message_provideAttendeesNames
-							}
-						}
 						process.userobj {
 							extension = this
 							method = hasRegistrationFormField
@@ -2724,6 +2724,15 @@ plugin.tx_seminars_pi1 {
 								value = /^[\d]*$/
 								message = LLL:EXT:seminars/pi1/locallang.xml:message_noSeatsNumber
 							}
+							30 = validator:STANDARD
+							30.userobj {
+								extension = this
+								method = numberOfSeatsMatchesRegisteredPersons
+								message.userobj {
+									extension = this
+									method = getMessageForSeatsNotMatchingRegisteredPersons
+								}
+							}
 						}
 						process.userobj {
 							extension = this
@@ -2751,14 +2760,6 @@ plugin.tx_seminars_pi1 {
 					attendees_names = renderlet:HIDDEN
 					attendees_names {
 						name = attendees_names
-						validators {
-							10 = validator:STANDARD
-							10.userobj {
-								extension = this
-								method = hasAttendeesNames
-								message = LLL:EXT:seminars/pi1/locallang.xml:message_provideAttendeesNames
-							}
-						}
 						process.userobj {
 							extension = this
 							method = hasRegistrationFormField

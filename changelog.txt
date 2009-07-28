@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3156] Feature: Validate the number of lines in "additional attendees"
 - [#3219] Fix: Move the "myself" checkbox below the "seats" drop-down
 - [#3217] Fix: Replace deprecated split() from tx_seminars_seminarbagbuilder->limitToFullTextSearch()
 - [#3190] Change: Add TS setup variable for the FE editor HTML template
