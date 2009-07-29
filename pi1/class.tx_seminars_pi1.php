@@ -220,136 +220,146 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return string HTML for the plugin
 	 */
 	public function main($unused, array $conf) {
-		$this->init($conf);
-		$this->pi_initPIflexForm();
-
-		$this->getTemplateCode();
-		$this->setLabels();
-		$this->setCSS();
-		$this->getHookObjects();
-		$this->createHelperObjects();
-
-		// Lets warnings from the registration manager bubble up to us.
-		$this->setErrorMessage(
-			$this->registrationManager->checkConfiguration(true)
-		);
-
 		$result = '';
 
-		// Sets the UID of a single event that is requested (either by the
-		// configuration in the flexform or by a parameter in the URL).
-		if ($this->hasConfValueInteger('showSingleEvent', 's_template_special')) {
-			$this->showUid = $this->getConfValueInteger(
-				'showSingleEvent',
-				's_template_special'
+		try{
+			$this->init($conf);
+			$this->pi_initPIflexForm();
+
+			$this->getTemplateCode();
+			$this->setLabels();
+			$this->setCSS();
+			$this->getHookObjects();
+			$this->createHelperObjects();
+
+			// Lets warnings from the registration manager bubble up to us.
+			$this->setErrorMessage(
+				$this->registrationManager->checkConfiguration(true)
 			);
-		} else {
-			$this->showUid = intval($this->piVars['showUid']);
+
+			// Sets the UID of a single event that is requested (either by the
+			// configuration in the flexform or by a parameter in the URL).
+			if ($this->hasConfValueInteger('showSingleEvent', 's_template_special')) {
+				$this->showUid = $this->getConfValueInteger(
+					'showSingleEvent',
+					's_template_special'
+				);
+			} else {
+				$this->showUid = intval($this->piVars['showUid']);
+			}
+
+			$this->whatToDisplay = $this->getConfValueString('what_to_display');
+
+			if (!in_array(
+					$this->whatToDisplay,
+					array(
+						'list_registrations', 'list_vip_registrations',
+						'countdown', 'category_list',
+					)
+			)) {
+				$this->setFlavor($this->whatToDisplay);
+			}
+
+			switch ($this->whatToDisplay) {
+				case 'edit_event':
+					$result = $this->createEventEditor();
+					break;
+				case 'seminar_registration':
+					$result = $this->createRegistrationPage();
+					break;
+				case 'list_vip_registrations':
+					// The fallthrough is intended
+					// because createRegistrationsListPage() will differentiate later.
+				case 'list_registrations':
+					$registrationsList = tx_oelib_ObjectFactory::make(
+						'tx_seminars_pi1_frontEndRegistrationsList', $this->conf,
+						$this->whatToDisplay, intval($this->piVars['seminar']),
+						$this->cObj
+					);
+					$result = $registrationsList->render();
+					$registrationsList->__destruct();
+					unset($registrationsList);
+					break;
+				case 'countdown':
+					$countdown = tx_oelib_ObjectFactory::make(
+						'tx_seminars_pi1_frontEndCountdown', $this->conf, $this->cObj
+					);
+					$result = $countdown->render();
+					$countdown->__destruct();
+					unset($countdown);
+					break;
+				case 'category_list':
+					$categoryList = tx_oelib_ObjectFactory::make(
+						'tx_seminars_pi1_frontEndCategoryList',
+						$this->conf, $this->cObj
+					);
+					$result = $categoryList->render();
+					$categoryList->__destruct();
+					unset($categoryList);
+					break;
+				case 'csv_export_registrations':
+					$result = $this->createCsvExportOfRegistrations();
+					break;
+				case 'event_headline':
+					$eventHeadline = tx_oelib_ObjectFactory::make(
+						'tx_seminars_pi1_frontEndEventHeadline',
+						$this->conf, $this->cObj
+					);
+					$result = $eventHeadline->render();
+					$this->setErrorMessage(
+						$eventHeadline->checkConfiguration(true)
+					);
+					$eventHeadline->__destruct();
+					unset($eventHeadline);
+					break;
+				case 'topic_list':
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
+				case 'my_events':
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
+				case 'my_vip_events':
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
+				case 'my_entered_events':
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
+				case 'seminar_list':
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
+				case 'favorites_list':
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
+				default:
+					// Show the single view if a 'showUid' variable is set.
+					if ($this->showUid) {
+						// Intentionally overwrite the previously set flavor.
+						$this->setFlavor('single_view');
+						$this->whatToDisplay = 'seminar_list';
+						$result = $this->createSingleView();
+					} else {
+						$result = $this->createListView($this->whatToDisplay);
+					}
+					break;
+			}
+
+			// Let's check the configuration and display any errors.
+			// Here, we don't use the direct return value from
+			// $this->checkConfiguration as this would ignore any previous error
+			// messages.
+			$this->checkConfiguration();
+			$result .= $this->getWrappedConfigCheckMessage();
+			$result = $this->pi_wrapInBaseClass($result);
+		} catch (Exception $exception) {
+			$result .= '<p style="border: 2px solid red; padding: 1em; ' .
+				'font-weight: bold;">' . LF .
+				htmlspecialchars($exception->getMessage()) . LF .
+				'<br /><br />' . LF .
+				nl2br(htmlspecialchars($exception->getTraceAsString())) . LF .
+				'</p>' . LF;
 		}
 
-		$this->whatToDisplay = $this->getConfValueString('what_to_display');
-
-		if (!in_array(
-				$this->whatToDisplay,
-				array(
-					'list_registrations', 'list_vip_registrations',
-					'countdown', 'category_list',
-				)
-		)) {
-			$this->setFlavor($this->whatToDisplay);
-		}
-
-		switch ($this->whatToDisplay) {
-			case 'edit_event':
-				$result = $this->createEventEditor();
-				break;
-			case 'seminar_registration':
-				$result = $this->createRegistrationPage();
-				break;
-			case 'list_vip_registrations':
-				// The fallthrough is intended
-				// because createRegistrationsListPage() will differentiate later.
-			case 'list_registrations':
-				$registrationsList = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndRegistrationsList', $this->conf,
-					$this->whatToDisplay, intval($this->piVars['seminar']),
-					$this->cObj
-				);
-				$result = $registrationsList->render();
-				$registrationsList->__destruct();
-				unset($registrationsList);
-				break;
-			case 'countdown':
-				$countdown = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndCountdown', $this->conf, $this->cObj
-				);
-				$result = $countdown->render();
-				$countdown->__destruct();
-				unset($countdown);
-				break;
-			case 'category_list':
-				$categoryList = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndCategoryList',
-					$this->conf, $this->cObj
-				);
-				$result = $categoryList->render();
-				$categoryList->__destruct();
-				unset($categoryList);
-				break;
-			case 'csv_export_registrations':
-				$result = $this->createCsvExportOfRegistrations();
-				break;
-			case 'event_headline':
-				$eventHeadline = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndEventHeadline',
-					$this->conf, $this->cObj
-				);
-				$result = $eventHeadline->render();
-				$this->setErrorMessage(
-					$eventHeadline->checkConfiguration(true)
-				);
-				$eventHeadline->__destruct();
-				unset($eventHeadline);
-				break;
-			case 'topic_list':
-				// The fallthrough is intended
-				// because createListView() will differentiate later.
-			case 'my_events':
-				// The fallthrough is intended
-				// because createListView() will differentiate later.
-			case 'my_vip_events':
-				// The fallthrough is intended
-				// because createListView() will differentiate later.
-			case 'my_entered_events':
-				// The fallthrough is intended
-				// because createListView() will differentiate later.
-			case 'seminar_list':
-				// The fallthrough is intended
-				// because createListView() will differentiate later.
-			case 'favorites_list':
-				// The fallthrough is intended
-				// because createListView() will differentiate later.
-			default:
-				// Show the single view if a 'showUid' variable is set.
-				if ($this->showUid) {
-					// Intentionally overwrite the previously set flavor.
-					$this->setFlavor('single_view');
-					$this->whatToDisplay = 'seminar_list';
-					$result = $this->createSingleView();
-				} else {
-					$result = $this->createListView($this->whatToDisplay);
-				}
-				break;
-		}
-
-		// Let's check the configuration and display any errors.
-		// Here, we don't use the direct return value from
-		// $this->checkConfiguration as this would ignore any previous error
-		// messages.
-		$this->checkConfiguration();
-		$result .= $this->getWrappedConfigCheckMessage();
-
-		return $this->pi_wrapInBaseClass($result);
+		return $result;
 	}
 
 

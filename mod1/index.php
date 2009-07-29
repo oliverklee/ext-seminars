@@ -93,105 +93,116 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 		$this->tableUsers = 'fe_users';
 
-		// Access check!
-		// The page will show only if there is a valid page and if this page
-		// may be viewed by the user
-		$this->pageinfo = t3lib_BEfunc::readPageAccess(
-			$this->id,
-			$this->perms_clause
-		);
-		$access = is_array($this->pageinfo) ? 1 : 0;
-
-		$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
-			'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_SEMINARS
-				.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-				.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_ATTENDANCES
-				.' WHERE deleted=0 AND pid='.$this->id.')'
-		);
-		if ($dbResult) {
-			$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$numberOfRecordsOnCurrentPage = $dbResultRow['num'];
-		} else {
-			$numberOfRecordsOnCurrentPage = 0;
-		}
-
-		if ($this->id && ($access || $BE_USER->user['admin'])
-			&& ($numberOfRecordsOnCurrentPage)) {
-			// Draw the header.
-			$this->doc = t3lib_div::makeInstance('mediumDoc');
-			$this->doc->backPath = $BACK_PATH;
-			$this->doc->form='<form action="" method="post">';
-
-			// JavaScript
-			$this->doc->JScode = '
-				<script language="javascript" type="text/javascript">
-					script_ended = 0;
-					function jumpToUrl(URL) {
-						document.location = URL;
-					}
-				</script>
-			';
-			$this->doc->postCode='
-				<script language="javascript" type="text/javascript">
-					script_ended = 1;
-					if (top.fsMod) top.fsMod.recentIds["web"] = '
-					.intval($this->id).';
-				</script>
-			';
-
-			$headerSection = $this->doc->getHeader(
-				'pages',
-				$this->pageinfo,
-				$this->pageinfo['_thePath'])
-					.'<br>'
-					.$LANG->sL('LLL:EXT:lang/locallang_core.php:labels.path')
-					.': '
-					.t3lib_div::fixed_lgd_pre($this->pageinfo['_thePath'],50);
-
-			$this->content.=$this->doc->startPage($LANG->getLL('title'));
-			$this->content.=$this->doc->header($LANG->getLL('title'));
-			$this->content.=$this->doc->spacer(5);
-			$this->content.=$this->doc->section(
-				'',
-				$this->doc->funcMenu(
-					$headerSection,
-					t3lib_BEfunc::getFuncMenu(
-						$this->id,
-						'SET[function]',
-						$this->MOD_SETTINGS['function'],
-						$this->MOD_MENU['function']
-					)
-				)
+		try {
+			// Access check!
+			// The page will show only if there is a valid page and if this page
+			// may be viewed by the user
+			$this->pageinfo = t3lib_BEfunc::readPageAccess(
+				$this->id,
+				$this->perms_clause
 			);
-			$this->content.=$this->doc->divider(5);
+			$access = is_array($this->pageinfo) ? 1 : 0;
 
-			// Render content:
-			$this->moduleContent();
-
-			// ShortCut
-			if ($BE_USER->mayMakeShortcut()) {
-				$this->content.=$this->doc->spacer(20)
-				.$this->doc->section(
-					'',
-					$this->doc->makeShortcutIcon(
-						'id',
-						implode(',',array_keys($this->MOD_MENU)),
-						$this->MCONF['name']
-					)
-				);
+			$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
+				'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_SEMINARS
+					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
+					.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_ATTENDANCES
+					.' WHERE deleted=0 AND pid='.$this->id.')'
+			);
+			if ($dbResult) {
+				$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+				$numberOfRecordsOnCurrentPage = $dbResultRow['num'];
+			} else {
+				$numberOfRecordsOnCurrentPage = 0;
 			}
 
-			$this->content.=$this->doc->spacer(10);
-		} else {
-			// Either the user has no acces, the page ID is zero or there are no
-			// seminar or attendance records on the current page.
-			$this->doc = t3lib_div::makeInstance('mediumDoc');
-			$this->doc->backPath = $BACK_PATH;
+			if ($this->id && ($access || $BE_USER->user['admin'])
+				&& ($numberOfRecordsOnCurrentPage)) {
+				// Draw the header.
+				$this->doc = t3lib_div::makeInstance('mediumDoc');
+				$this->doc->backPath = $BACK_PATH;
+				$this->doc->form='<form action="" method="post">';
 
-			$this->content.=$this->doc->startPage($LANG->getLL('title'));
-			$this->content.=$this->doc->header($LANG->getLL('title'));
-			$this->content.=$this->doc->spacer(5);
-			$this->content.=$this->doc->spacer(10);
+				// JavaScript
+				$this->doc->JScode = '
+					<script language="javascript" type="text/javascript">
+						script_ended = 0;
+						function jumpToUrl(URL) {
+							document.location = URL;
+						}
+					</script>
+				';
+				$this->doc->postCode='
+					<script language="javascript" type="text/javascript">
+						script_ended = 1;
+						if (top.fsMod) top.fsMod.recentIds["web"] = '
+						.intval($this->id).';
+					</script>
+				';
+
+				$headerSection = $this->doc->getHeader(
+					'pages',
+					$this->pageinfo,
+					$this->pageinfo['_thePath'])
+						.'<br>'
+						.$LANG->sL('LLL:EXT:lang/locallang_core.php:labels.path')
+						.': '
+						.t3lib_div::fixed_lgd_pre($this->pageinfo['_thePath'],50);
+
+				$this->content.=$this->doc->startPage($LANG->getLL('title'));
+				$this->content.=$this->doc->header($LANG->getLL('title'));
+				$this->content.=$this->doc->spacer(5);
+				$this->content.=$this->doc->section(
+					'',
+					$this->doc->funcMenu(
+						$headerSection,
+						t3lib_BEfunc::getFuncMenu(
+							$this->id,
+							'SET[function]',
+							$this->MOD_SETTINGS['function'],
+							$this->MOD_MENU['function']
+						)
+					)
+				);
+				$this->content.=$this->doc->divider(5);
+
+				// Render content:
+				$this->moduleContent();
+
+				// ShortCut
+				if ($BE_USER->mayMakeShortcut()) {
+					$this->content.=$this->doc->spacer(20)
+					.$this->doc->section(
+						'',
+						$this->doc->makeShortcutIcon(
+							'id',
+							implode(',',array_keys($this->MOD_MENU)),
+							$this->MCONF['name']
+						)
+					);
+				}
+
+				$this->content.=$this->doc->spacer(10);
+			} else {
+				// Either the user has no acces, the page ID is zero or there
+				// are no seminar or attendance records on the current page.
+				$this->doc = t3lib_div::makeInstance('mediumDoc');
+				$this->doc->backPath = $BACK_PATH;
+
+				$this->content.=$this->doc->startPage($LANG->getLL('title'));
+				$this->content.=$this->doc->header($LANG->getLL('title'));
+				$this->content.=$this->doc->spacer(5);
+				$this->content.=$this->doc->spacer(10);
+			}
+		} catch (Exception $exception) {
+			$this->doc = t3lib_div::makeInstance('mediumDoc');
+			$this->content .= $this->doc->spacer(5);
+			$this->content .= '<p style="border: 2px solid red; padding: 1em; ' .
+				'font-weight: bold;">' . LF	.
+				htmlspecialchars($exception->getMessage()) . LF .
+				'<br /><br />' . LF .
+				nl2br(htmlspecialchars($exception->getTraceAsString())) . LF .
+				'</p>' . LF;
 		}
 	}
 

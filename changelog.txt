@@ -1,4 +1,5 @@
 0.8.1 (currently working on)
+- [#1867] Feature: Add a try/catch construct around the seminars and onetimeaccount pi1/pi2/mod1/mod2/cli main function
 - [#3217] Fix: Replace deprecated split() from tx_seminars_seminarbagbuilder->limitToFullTextSearch()
 - [#3168] Fix: The "my entered events" and "my managed events" lists shouldn't use any time-frame limitations
 - [#3160] Fix: Two tests don't work properly

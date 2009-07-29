@@ -84,25 +84,33 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @return string HTML for the plugin, might be empty
 	 */
 	public function main($unused, array $configuration) {
-		$this->init($configuration);
+		try{
+			$this->init($configuration);
 
-		switch ($this->piVars['table']) {
-			case SEMINARS_TABLE_SEMINARS:
-				$result = $this->createAndOutputListOfEvents(
-					intval($this->piVars['pid'])
-				);
-				break;
-			case SEMINARS_TABLE_ATTENDANCES:
-				$result = $this->createAndOutputListOfRegistrations(
-					intval($this->piVars['seminar'])
-				);
-				break;
-			default:
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-					'Status: 404 Not Found'
-				);
-				$result = $this->translate('message_404');
-				break;
+			switch ($this->piVars['table']) {
+				case SEMINARS_TABLE_SEMINARS:
+					$result = $this->createAndOutputListOfEvents(
+						intval($this->piVars['pid'])
+					);
+					break;
+				case SEMINARS_TABLE_ATTENDANCES:
+					$result = $this->createAndOutputListOfRegistrations(
+						intval($this->piVars['seminar'])
+					);
+					break;
+				default:
+					tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+						'Status: 404 Not Found'
+					);
+					$result = $this->translate('message_404');
+					break;
+			}
+		} catch (Exception $exception) {
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				'Status: 500 Internal Server Error'
+			);
+			$result = $exception->getMessage() . LF . LF .
+				$exception->getTraceAsString() . LF . LF;
 		}
 
 		return $result;
