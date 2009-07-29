@@ -88,19 +88,35 @@
 }
 .tx-seminars-pi1-event-editor .attached-files ul {
 	list-style: none;
-	width: 65%;
 }
 .tx-seminars-pi1-event-editor .attached-files ul li {
 	padding: 5px 0;
 	position: relative;
 }
-
-.tx-seminars-pi1-event-editor #tx_seminars_pi1_seminars_attached_files {
-	margin-bottom: 10px;
+.tx-seminars-pi1-event-editor .deleted {
+	text-decoration: line-through;
+	color: grey;
 }
 
-.tx-seminars-pi1-event-editor .date dd input{
+.tx-seminars-pi1-event-editor .date dd input {
 	width: 35%;
+}
+
+.tx-seminars-pi1-event-editor .attached-files dd {
+	clear: both;
+	width: 40%;
+}
+
+.tx-seminars-pi1-event-editor #tx_seminars_pi1_seminars_attached_files {
+	position: absolute;
+	right: 55px;
+	float: none;
+}
+
+.tx-seminars-pi1-event-editor .attached-files dt {
+	width: 40%;
+	position: relative;
+	padding-bottom: 20px;
 }
 
 .tx-seminars-pi1-event-editor .attached-files li input {
