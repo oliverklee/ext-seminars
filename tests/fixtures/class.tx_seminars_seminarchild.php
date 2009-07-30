@@ -545,5 +545,18 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'begin_date_registration', $registrationBeginDate
 		);
 	}
+
+	/**
+	 * Sets the number of offline registrations.
+	 *
+	 * @param integer
+	 *        $offlineRegistrations the number of offline registrations for this
+	 *        event, must be >= 0
+	 */
+	public function setOfflineRegistrationNumber($offlineRegistrations) {
+		$this->setRecordPropertyInteger(
+			'offline_attendees', $offlineRegistrations
+		);
+	}
 }
 ?>

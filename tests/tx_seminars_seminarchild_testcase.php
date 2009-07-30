@@ -6497,5 +6497,119 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+
+	/////////////////////////////////////////////
+	// Tests concerning hasOfflineRegistrations
+	/////////////////////////////////////////////
+
+	public function test_hasOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->hasOfflineRegistrations()
+		);
+	}
+
+	public function test_hasOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTrue() {
+		$this->fixture->setOfflineRegistrationNumber(2);
+
+		$this->assertTrue(
+			$this->fixture->hasOfflineRegistrations()
+		);
+	}
+
+
+	/////////////////////////////////////////////
+	// Tests concerning getOfflineRegistrations
+	/////////////////////////////////////////////
+
+	public function test_getOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsZero() {
+		$this->assertEquals(
+			0,
+			$this->fixture->getOfflineRegistrations()
+		);
+	}
+
+	public function test_getOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTwo() {
+		$this->fixture->setOfflineRegistrationNumber(2);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getOfflineRegistrations()
+		);
+	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning calculateStatistics
+	/////////////////////////////////////////
+
+	public function test_calculateStatistics_ForEventWithOfflineRegistrationsAndRegularRegistrations_CalculatesCumulatedAttendeeNumber() {
+		$this->fixture->setOfflineRegistrationNumber(1);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->fixture->getUid(),
+			)
+		);
+
+		$this->fixture->calculateStatistics();
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getAttendances()
+		);
+	}
+
+	public function test_calculateStatistics_ForEventWithOnePaidRegistration_SetsOnePaidAttendance() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->fixture->getUid(),
+				'paid' => 1,
+			)
+		);
+
+		$this->fixture->calculateStatistics();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getAttendancesPaid()
+		);
+	}
+
+	public function test_calculateStatistics_ForEventWithTwoAttendeesOnQueue_SetsTwoAttendanceOnQueue() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->fixture->getUid(),
+				'registration_queue' => 1,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->fixture->getUid(),
+				'registration_queue' => 1,
+			)
+		);
+
+		$this->fixture->calculateStatistics();
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getAttendancesOnRegistrationQueue()
+		);
+	}
+
+	public function test_calculateStatistics_ForEventWithOneOfflineRegistration_SetsAttendancesToOne() {
+		$this->fixture->setOfflineRegistrationNumber(1);
+
+		$this->fixture->calculateStatistics();
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getAttendances()
+		);
+	}
 }
 ?>

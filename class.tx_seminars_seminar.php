@@ -2826,7 +2826,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function calculateStatistics() {
 		$this->numberOfAttendances = $this->countAttendances(
 			'registration_queue=0'
-		);
+		) + $this->getOfflineRegistrations();
 		$this->numberOfAttendancesPaid = $this->countAttendances(
 			'(paid=1 OR datepaid!=0) AND registration_queue=0'
 		);
@@ -4502,6 +4502,26 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		return tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Place')
 			->getListOfModels($places);
+	}
+
+	/**
+	 * Checks whether this event has any offline registrations.
+	 *
+	 * @return boolean true if this event has at least one offline registration,
+	 *                 false otherwise
+	 */
+	public function hasOfflineRegistrations() {
+		return $this->hasRecordPropertyInteger('offline_attendees');
+	}
+
+	/**
+	 * Returns the number of offline registrations for this event.
+	 *
+	 * @return integer the number of offline registrations for this event, will
+	 *                 be 0 if this event has no offline registrations
+	 */
+	public function getOfflineRegistrations() {
+		return $this->getRecordPropertyInteger('offline_attendees');
 	}
 }
 

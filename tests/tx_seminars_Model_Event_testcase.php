@@ -1259,6 +1259,50 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////////////
+	// Tests concerning hasOfflineRegistrations
+	/////////////////////////////////////////////
+
+	public function test_hasOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsFalse() {
+		$this->fixture->setData(array('offline_attendees' => 0));
+
+		$this->assertFalse(
+			$this->fixture->hasOfflineRegistrations()
+		);
+	}
+
+	public function test_hasOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTrue() {
+		$this->fixture->setData(array('offline_attendees' => 2));
+
+		$this->assertTrue(
+			$this->fixture->hasOfflineRegistrations()
+		);
+	}
+
+
+	/////////////////////////////////////////////
+	// Tests concerning getOfflineRegistrations
+	/////////////////////////////////////////////
+
+	public function test_getOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsZero() {
+		$this->fixture->setData(array('offline_attendees' => 0));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getOfflineRegistrations()
+		);
+	}
+
+	public function test_getOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTwo() {
+		$this->fixture->setData(array('offline_attendees' => 2));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getOfflineRegistrations()
+		);
+	}
+
+
 	///////////////////////////////////
 	// Tests concerning markAsVisible
 	///////////////////////////////////

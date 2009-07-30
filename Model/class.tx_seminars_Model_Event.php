@@ -1278,6 +1278,26 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether this event has any offline registrations.
+	 *
+	 * @return boolean true if this event has at least one offline registration,
+	 *                 false otherwise
+	 */
+	public function hasOfflineRegistrations() {
+		return $this->hasInteger('offline_attendees');
+	}
+
+	/**
+	 * Returns the number of offline registrations for this event.
+	 *
+	 * @return integer the number of offline registrations for this event, will
+	 *                 be 0 if this event has no offline registrations
+	 */
+	public function getOfflineRegistrations() {
+		return $this->getAsInteger('offline_attendees');
+	}
+
+	/**
 	 * Marks this event as visible.
 	 */
 	public function markAsVisible() {
