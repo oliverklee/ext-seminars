@@ -188,6 +188,12 @@ plugin.tx_seminars_pi1 {
 	# location of the template file for the registration form
 	registrationEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/RegistrationEditor.html
 
+	# the strftime format code for the full date
+	dateFormatYMD < plugin.tx_seminars.dateFormatYMD
+
+	# The page type for the publishing links
+	typeNumForPublish = {$plugin.tx_seminars_publication.typeNum}
+
 	# whether to use formal or informal language
 	salutation = formal
 
@@ -562,8 +568,13 @@ plugin.tx_seminars_pi1 {
 					errortag = errors
 				}
 				actionlets {
-					10 = actionlet:REDIRECT
-					10.url.userobj {
+					10 = actionlet:USEROBJ
+					10.userobj {
+						extension = this
+						method = sendEMailToReviewer
+					}
+					20 = actionlet:REDIRECT
+					20.url.userobj {
 						extension = this
 						method = getEventSuccessfullySavedUrl
 					}

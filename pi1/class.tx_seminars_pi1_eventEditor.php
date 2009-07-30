@@ -65,6 +65,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private $requiredFormFields = array();
 
 	/**
+	 * @var string the publication hash for the event to edit/create
+	 */
+	private $publicationHash = '';
+
+	/**
 	 * The constructor.
 	 *
 	 * After the constructor has been called, hasAccessMessage() must be called
@@ -578,6 +583,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		if (($hideEditedObject || $hideNewObject) && !$eventIsHidden) {
 			$formData['hidden'] = 1;
 			$formData['publication_hash'] = uniqid('', true);
+			$this->publicationHash = $formData['publication_hash'];
+		} else {
+			$this->publicationHash = '';
 		}
 	}
 
@@ -1004,6 +1012,99 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		return (preg_match('/^\d+((,|.)\d{1,2})?$/', $formData['value']) == 1);
+	}
+
+	/**
+	 * Sends the publishing e-mail to the reviewer if necessary.
+	 */
+	public function sendEMailToReviewer() {
+		if ($this->publicationHash == '') {
+			return;
+		}
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$reviewer = $frontEndUser->getReviewerFromGroup();
+
+		if (!$reviewer) {
+			return;
+		}
+
+		tx_oelib_MapperRegistry::purgeInstance();
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->findByPublicationHash($this->publicationHash);
+
+		if ($event && $event->isHidden()) {
+			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
+			$eMail->addRecipient($reviewer);
+			$eMail->setSender($frontEndUser);
+			$eMail->setSubject($this->translate('publish_event_subject'));
+			$eMail->setMessage($this->createEMailContent($event));
+
+			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
+
+			$eMail->__destruct();
+		}
+	}
+
+	/**
+	 * Builds the content for the publishing e-mail to the reviewer.
+	 *
+	 * @param tx_seminars_Model_Event $event
+	 *        the event to send the publication e-mail for
+	 *
+	 * @return string the e-mail body for the publishing e-mail, will not be
+	 *                empty
+	 */
+	private function createEMailContent(tx_seminars_Model_Event $event) {
+		$this->getTemplateCode(true);
+		$this->setLabels();
+
+		$markerPrefix = 'publish_event';
+
+		$beginDate = strftime(
+			$this->getConfValueString('dateFormatYMD'),
+			$event->getBeginDateAsUnixTimeStamp()
+		);
+		$this->setMarker('title', $event->getTitle(), $markerPrefix);
+		$this->setOrDeleteMarkerIfNotEmpty(
+			'date', $beginDate, $markerPrefix, 'wrapper_publish_event'
+		);
+		$this->setMarker(
+			'description', $event->getDescription(), $markerPrefix
+		);
+
+		$this->setMarker('link', $this->createReviewUrl(), $markerPrefix);
+
+		return $this->getSubpart('MAIL_PUBLISH_EVENT');
+	}
+
+	/**
+	 * Builds the URL for the reviewer e-mail.
+	 *
+	 * @return string the URL for the plain text e-mail, will not be empty
+	 */
+	private function createReviewUrl() {
+		$url = $this->cObj->typoLink_URL(array(
+			'parameter' => $GLOBALS['TSFE']->id . ',' .
+				$this->getConfValueInteger('typeNumForPublish'),
+			'additionalParams' => t3lib_div::implodeArrayForUrl(
+				'tx_seminars_publication',
+				array(
+					'hash' => $this->publicationHash,
+				),
+				'',
+				false,
+				true
+			),
+			'type' => $this->getConfValueInteger('typeNumForPublish'),
+		));
+
+		return t3lib_div::locationHeaderUrl(preg_replace(
+			array('/\[/', '/\]/'),
+			array('%5B', '%5D'),
+			$url
+		));
 	}
 }
 

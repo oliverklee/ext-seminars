@@ -134,6 +134,24 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	/**
+	 * Creates a front-end user which has a group with the publish setting
+	 * tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
+	 */
+	private function createAndLoginUserWithReviewer() {
+		$backendUserUid = $this->testingFramework->createBackEndUser(
+			array('email' => 'foo@bar.com', 'realName' => 'Mr. Foo'));
+		$userGroupUid = $this->testingFramework->createFrontEndUserGroup(
+			array(
+				'tx_seminars_publish_events'
+					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+				'tx_seminars_reviewer' => $backendUserUid,
+			)
+		);
+
+		$this->testingFramework->createAndLoginFrontEndUser($userGroupUid);
+	}
+
+	/**
 	 * Creates a front-end user adds his/her front-end user group as event
 	 * editor front-end group and logs him/her in.
 	 *
@@ -1585,6 +1603,285 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$fixture->__destruct();
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning the publishing emails
+	///////////////////////////////////////////
+
+	public function test_eventEditorForNonHiddenEvent_DoesNotSendMail() {
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertEquals(
+			array(),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		);
+	}
+
+	public function test_eventEditorForEventHiddenBeforeEditing_DoesNotSendMail() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('hidden' => 1)
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertEquals(
+			array(),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		);
+	}
+
+	public function test_eventEditorForEventHiddenByForm_DoesSendMail() {
+		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertNotEquals(
+			array(),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		);
+	}
+
+	public function test_sendEMailToReviewer_SendsMailToReviewerMailAddress() {
+		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertEquals(
+			'foo@bar.com',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastRecipient()
+		);
+	}
+
+	public function test_sendEMailToReviewer_SetsPublishEventSubjectInMail() {
+		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertEquals(
+			$this->fixture->translate('publish_event_subject'),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+		);
+	}
+
+	public function test_sendEMailToReviewer_SendsTheTitleOfTheEvent() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('title' => 'foo Event')
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertContains(
+			'foo Event',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_sendEMailToReviewerForEventWithDate_SendsTheDateOfTheEvent() {
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertContains(
+			strftime(
+				$this->fixture->getConfValueString('dateFormatYMD'),
+				$GLOBALS['SIM_EXEC_TIME']
+			),
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_sendEMailToReviewerForEventWithoutDate_HidesDateMarker() {
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertNotContains(
+			'###PUBLISH_EVENT_DATE###',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_sendEMailToReviewer_SendsMailWithoutAnyUnreplacedMarkers() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertNotContains(
+			'###',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_sendEMailToReviewerForEventWithDescription_ShowsDescriptionInMail() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('description' => 'Foo Description')
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertContains(
+			'Foo Description',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	public function test_sendEMailToReviewer_SendsPublicationLinkInMail() {
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertContains(
+			'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
 	}
 }
 ?>

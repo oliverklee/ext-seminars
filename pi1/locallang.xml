@@ -372,6 +372,11 @@
 			<label index="newTargetGroupButton">Create new target group</label>
 			<label index="message_publishingSuccessful">The event has been published.</label>
 			<label index="message_publishingFailed">There is no such pending event.</label>
+			<label index="publish_event_subject">Event available for publication</label>
+			<label index="label_publish_event_text">An event has been edited in the front-end editor and currently is awaiting publication.</label>
+			<label index="label_publish_event_overview">The entered data as an overview:</label>
+			<label index="label_publish_event_link">If you want to publish this event, please click this link:</label>
+			<label index="label_publish_event_notice">If you do not want to publish this event, no action is needed.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">Generelt</label>
@@ -962,6 +967,11 @@
 			<label index="newTargetGroupButton">Neue Zielgruppe anlegen</label>
 			<label index="message_publishingSuccessful">Die Veranstaltung wurde veröffentlicht.</label>
 			<label index="message_publishingFailed">Es konnte keine entsprechend ausstehende Veranstaltung gefunden werden.</label>
+			<label index="publish_event_subject">Veranstaltung zum Freischalten verfügbar</label>
+			<label index="label_publish_event_text">Eine Veranstaltung ist im Front-end bearbeitet worden und müsste noch veröffentlicht werden.</label>
+			<label index="label_publish_event_overview">Die eingegebenen Daten in der Übersicht:</label>
+			<label index="label_publish_event_link">Wenn Sie diese Veranstaltung veröffentlichen möchten, klicken Sie bitte auf diesen Link:</label>
+			<label index="label_publish_event_notice">Wenn Sie die Veranstaltung nicht veröffentlichen möchten, brauchen Sie einfach nichts zu tun.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general">Algemeen</label>
@@ -2453,6 +2463,11 @@
 			<label index="newTargetGroupButton" type="integer">239089992</label>
 			<label index="message_publishingSuccessful" type="integer">170886030</label>
 			<label index="message_publishingFailed" type="integer">6189202</label>
+			<label index="publish_event_subject" type="integer">21240311</label>
+			<label index="label_publish_event_text" type="integer">114984141</label>
+			<label index="label_publish_event_overview" type="integer">12379179</label>
+			<label index="label_publish_event_link" type="integer">12134292</label>
+			<label index="label_publish_event_notice" type="integer">120778303</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3719,6 +3734,11 @@
 			<label index="newTargetGroupButton">Create new target group</label>
 			<label index="message_publishingSuccessful">The event has been published.</label>
 			<label index="message_publishingFailed">There is no such pending event.</label>
+			<label index="publish_event_subject">Event available for publication</label>
+			<label index="label_publish_event_text">An event has been edited in the front-end editor and currently is awaiting publication.</label>
+			<label index="label_publish_event_overview">The entered data as an overview:</label>
+			<label index="label_publish_event_link">If you want to publish this event, please click this link:</label>
+			<label index="label_publish_event_notice">If you do not want to publish this event, no action is needed.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>
