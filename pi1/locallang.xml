@@ -370,6 +370,8 @@
 			<label index="newPaymentMethodButton">Create new payment method</label>
 			<label index="newOrganizerButton">Create new organizer</label>
 			<label index="newTargetGroupButton">Create new target group</label>
+			<label index="message_publishingSuccessful">The event has been published.</label>
+			<label index="message_publishingFailed">There is no such pending event.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">Generelt</label>
@@ -958,6 +960,8 @@
 			<label index="newPaymentMethodButton">Neue Zahlungsart anlegen</label>
 			<label index="newOrganizerButton">Neuen Veranstalter anlegen</label>
 			<label index="newTargetGroupButton">Neue Zielgruppe anlegen</label>
+			<label index="message_publishingSuccessful">Die Veranstaltung wurde veröffentlicht.</label>
+			<label index="message_publishingFailed">Es konnte keine entsprechend ausstehende Veranstaltung gefunden werden.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general">Algemeen</label>
@@ -2447,6 +2451,8 @@
 			<label index="newPaymentMethodButton" type="integer">192793055</label>
 			<label index="newOrganizerButton" type="integer">212681082</label>
 			<label index="newTargetGroupButton" type="integer">239089992</label>
+			<label index="message_publishingSuccessful" type="integer">170886030</label>
+			<label index="message_publishingFailed" type="integer">6189202</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="seminars.pi_flexform.sheet_general" type="integer">14366585</label>
@@ -3711,6 +3717,8 @@
 			<label index="newPaymentMethodButton">Create new payment method</label>
 			<label index="newOrganizerButton">Create new organizer</label>
 			<label index="newTargetGroupButton">Create new target group</label>
+			<label index="message_publishingSuccessful">The event has been published.</label>
+			<label index="message_publishingFailed">There is no such pending event.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="seminars.pi_flexform.sheet_general">General</label>

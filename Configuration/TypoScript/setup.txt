@@ -3037,6 +3037,28 @@ tx_seminars_pi2 {
 	}
 }
 
+tx_seminars_publication = PAGE
+tx_seminars_publication {
+	# Just some random non-zero number.
+	typeNum = {$plugin.tx_seminars_publication.typeNum}
+
+	config {
+		enableContentLengthHeader = 1
+		no_cache = 1
+		doctype = xhtml_strict
+		removeDefaultJS = 1
+		setJS_openPic = 0
+	}
+
+	includeLibs.tx_seminars_publication = EXT:seminars/pi1/class.tx_seminars_pi1_frontEndPublishEvent.php
+	stdWrap.wrap = <p>|</p>
+
+	10 = USER
+	10 {
+		userFunc = tx_seminars_pi1_frontEndPublishEvent->render
+		xhtml_cleaning = all
+	}
+}
 
 page {
 	includeCSS {

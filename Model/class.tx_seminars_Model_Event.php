@@ -1276,6 +1276,13 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	public function purgePublicationHash() {
 		$this->setAsString('publication_hash', '');
 	}
+
+	/**
+	 * Marks this event as visible.
+	 */
+	public function markAsVisible() {
+		$this->setAsBoolean('hidden', false);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_Event.php']) {
