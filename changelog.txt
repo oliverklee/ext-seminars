@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3214] Fix: CSS validation error in the FE editor CSS
 - [#3235] Fix: Hidden records cannot be edited in the FE-editor
 - [#3192] Feature: Calculate places needed for a registration also by "offline attendees" field
 - [#3183] Feature: Add a page type + script for publishing an event
