@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3247] Fix: The visibility status of an edited event is not set in the fe-editor
 - [#3223] Fix: Label for terms_2 is missing in the registration form
 - [#3213] Fix: Crash when saving an event in the FE editor
 - [#3214] Fix: CSS validation error in the FE editor CSS

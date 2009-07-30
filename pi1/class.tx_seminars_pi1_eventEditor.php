@@ -558,7 +558,8 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private function checkPublishSettings(array &$formData) {
 		$publishSetting	= tx_oelib_FrontEndLoginManager::getLoggedInUser(
 			'tx_seminars_Mapper_FrontEndUser')->getPublishSetting();
-		$isNew = $this->getObjectUid() == 0;
+		$eventUid = $this->getObjectUid();
+		$isNew = ($eventUid == 0);
 
 		$hideEditedObject = !$isNew
 			&& ($publishSetting
@@ -569,7 +570,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 			);
 
-		if ($hideEditedObject || $hideNewObject) {
+		$eventIsHidden = !$isNew
+			? tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+				->find($eventUid)->isHidden()
+			: false;
+
+		if (($hideEditedObject || $hideNewObject) && !$eventIsHidden) {
 			$formData['hidden'] = 1;
 			$formData['publication_hash'] = uniqid('', true);
 		}

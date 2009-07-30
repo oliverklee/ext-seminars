@@ -1131,41 +1131,38 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////
 
 	public function test_modifyDataToInsert_ForPublishSettingPublishImmediately_DoesNotHideCreatedEvent() {
-		$formData = array('hidden' => 0);
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
-		$this->assertEquals(
-			0,
-			$modifiedFormData['hidden']
+		$this->assertFalse(
+			isset($modifiedFormData['hidden'])
 		);
 	}
 
 	public function test_modifyDataToInsert_ForPublishSettingPublishImmediately_DoesNotHideEditedEvent() {
-		$formData = array('hidden' => 0);
-		$this->fixture->setObjectUid(42);
+		$event = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
-		$this->assertEquals(
-			0,
-			$modifiedFormData['hidden']
+		$this->assertFalse(
+			isset($modifiedFormData['hidden'])
 		);
 	}
 
 	public function test_modifyDataToInsert_ForPublishSettingHideNew_HidesCreatedEvent() {
-		$formData = array('hidden' => 0);
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		$this->assertEquals(
 			1,
@@ -1174,12 +1171,11 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_modifyDataToInsert_ForPublishSettingHideEdited_HidesCreatedEvent() {
-		$formData = array('hidden' => 0);
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		$this->assertEquals(
 			1,
@@ -1188,13 +1184,14 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_modifyDataToInsert_ForPublishSettingHideEdited_HidesEditedEvent() {
-		$formData = array('hidden' => 0);
-		$this->fixture->setObjectUid(42);
+		$event = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		$this->assertEquals(
 			1,
@@ -1203,27 +1200,26 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_modifyDataToInsert_ForPublishSettingHideNew_DoesNotHideEditedEvent() {
-		$formData = array('hidden' => 0);
-		$this->fixture->setObjectUid(42);
+		$event = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
-		$this->assertEquals(
-			0,
-			$modifiedFormData['hidden']
+		$this->assertFalse(
+			isset($modifiedFormData['hidden'])
 		);
 	}
 
 	public function test_modifyDataToInsertForEventHiddenOnEditing_AddsPublicationHashToEvent() {
-		$formData = array('hidden' => 0);
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		$this->assertTrue(
 			isset($modifiedFormData['publication_hash'])
@@ -1232,12 +1228,11 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_modifyDataToInsertForEventHiddenOnCreation_AddsPublicationHashToEvent() {
-		$formData = array('hidden' => 0);
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		$this->assertTrue(
 			isset($modifiedFormData['publication_hash'])
@@ -1246,13 +1241,14 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_modifyDataToInsertForEventNotHiddenOnEditing_DoesNotAddPublicationHashToEvent() {
-		$formData = array('hidden' => 0);
-		$this->fixture->setObjectUid(42);
+		$event = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		$this->assertFalse(
 			isset($modifiedFormData['publication_hash'])
@@ -1260,12 +1256,27 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_modifyDataToInsertForEventNotHiddenOnCreation_DoesNotAddPublicationHashToEvent() {
-		$formData = array('hidden' => 0);
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 
-		$modifiedFormData = $this->fixture->modifyDataToInsert($formData);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertFalse(
+			isset($modifiedFormData['publication_hash'])
+		);
+	}
+
+	public function test_modifyDataToInsertForHiddenEvent_DoesNotAddPublicationHashToEvent() {
+		$event = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Event')->getLoadedTestingModel(
+			array('hidden' => 1)
+		);
+		$this->fixture->setObjectUid($event->getUid());
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		$this->assertFalse(
 			isset($modifiedFormData['publication_hash'])
