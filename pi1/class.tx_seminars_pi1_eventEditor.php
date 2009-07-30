@@ -405,7 +405,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		if (($this->getObjectUid() > 0)
 			&& !tx_seminars_objectfromdb::recordExists(
-				$this->getObjectUid(), SEMINARS_TABLE_SEMINARS
+				$this->getObjectUid(), SEMINARS_TABLE_SEMINARS, true
 			)
 		) {
 			return 'message_wrongSeminarNumber';
@@ -413,7 +413,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		if ($this->getObjectUid() > 0) {
 			$seminar = tx_oelib_ObjectFactory::make(
-				'tx_seminars_seminar', $this->getObjectUid()
+				'tx_seminars_seminar', $this->getObjectUid(), false, true
 			);
 			$isUserVip = $seminar->isUserVip(
 				$this->getFeUserUid(),

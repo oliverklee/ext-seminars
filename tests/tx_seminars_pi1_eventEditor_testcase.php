@@ -545,6 +545,21 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testHasAccessMessageForHiddenSeminarUidAndUserLoggedInReturnsEmptyString() {
+		$this->fixture->setObjectUid($this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'hidden' => 1,
+				'owner_feuser' => $this->testingFramework->createAndLoginFrontEndUser(),
+			)
+		));
+
+		$this->assertEquals(
+			'',
+			$this->fixture->hasAccessMessage()
+		);
+	}
+
 
 	////////////////////////////////////////////
 	// Tests concerning populateListCategories
