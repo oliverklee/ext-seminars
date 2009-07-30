@@ -2432,6 +2432,7 @@ plugin.tx_seminars_pi1 {
 					terms_2 = renderlet:CHECKSINGLE
 					terms_2 {
 						name = terms_2
+						label = ###LABEL_TERMS_2###
 						validators {
 							10 = validator:STANDARD
 							10.userobj {
