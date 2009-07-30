@@ -4,11 +4,11 @@ plugin.tx_seminars_pi1 {
 }
 
 plugin.tx_seminars_pi2 {
-    # cat=plugin.tx_seminars_pi2//; type=int+; label=The page type used for CSV export.
+	# cat=plugin.tx_seminars_pi2//; type=int+; label=The page type used for CSV export.
 	typeNumForCsv = 736
 }
 
 plugin.tx_seminars_publication {
-    # cat=plugin.tx_seminars_publication//; type=int+; label=The page type used for the publishing of events.
+	# cat=plugin.tx_seminars_publication//; type=int+; label=The page type used for the publishing of events.
 	typeNum = 737
 }
