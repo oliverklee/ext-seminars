@@ -21,29 +21,31 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * This file provides a JavaScript function to mark attachments as deleted in
- * the FE editor.
+/*
+ * This file provides some JavaScript functions for the seminars front-end
+ * editor and the registration form.
  *
- * @package		TYPO3
- * @subpackage	tx_realty
+ * @package TYPO3
+ * @subpackage tx_seminars
  *
- * @author		Saskia Metzler <saskia@merlin.owl.de>
+ * @author Saskia Metzler <saskia@merlin.owl.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 
 /**
  * Marks the current attachment as deleted if the confirm becomes submitted.
- * 
- * @param	string		ID of the list item with the attachment to delete, must
- * 						not be empty
- * @param	string		localized confirm message for whether really to mark an
- *						attachment for deletion
+ *
+ * @param string listItemId
+ *        ID of the list item with the attachment to delete, must not be empty
+ * @param string confirmMessage
+ *        localized confirm message for whether really to mark an attachment for
+ *        deletion
  */
 function markAttachmentAsDeleted(listItemId, confirmMessage) {
 	var listItem = document.getElementById(listItemId);
 	var fileNameDiv = listItem.getElementsByTagName("span")[0];
 	var deleteButton = listItem.getElementsByTagName("input")[0];
-	
+
 	if (confirm(confirmMessage)) {
 		document.getElementById("tx_seminars_pi1_seminars_delete_attached_files").value
 			+= "," + fileNameDiv.firstChild.nodeValue;
