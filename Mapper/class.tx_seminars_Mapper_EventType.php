@@ -42,14 +42,6 @@ class tx_seminars_Mapper_EventType extends tx_oelib_DataMapper {
 	 * @var string the model class name for this mapper, must not be empty
 	 */
 	protected $modelClassName = 'tx_seminars_Model_EventType';
-
-	/**
-	 * @var array the (possible) relations of the created models in the format
-	 *            DB column name => mapper name
-	 */
-	protected $relations = array(
-		'owner' => 'tx_seminars_Mapper_FrontEndUser',
-	);
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/class.tx_seminars_Mapper_EventType.php']) {

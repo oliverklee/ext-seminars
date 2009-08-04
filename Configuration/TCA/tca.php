@@ -1880,7 +1880,7 @@ $TCA['tx_seminars_sites'] = array(
 $TCA['tx_seminars_organizers'] = array(
 	'ctrl' => $TCA['tx_seminars_organizers']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,description,homepage,email,email_footer,owner'
+		'showRecordFieldList' => 'title,description,homepage,email,email_footer'
 	),
 	'columns' => array(
 		'title' => array(
@@ -1953,21 +1953,9 @@ $TCA['tx_seminars_organizers'] = array(
 				'show_thumbs' => '1',
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], homepage;;;;3-3-3, email, email_footer, attendances_pid, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], homepage;;;;3-3-3, email, email_footer, attendances_pid'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -1977,7 +1965,7 @@ $TCA['tx_seminars_organizers'] = array(
 $TCA['tx_seminars_payment_methods'] = array(
 	'ctrl' => $TCA['tx_seminars_payment_methods']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title, description, owner',
+		'showRecordFieldList' => 'title, description',
 	),
 	'columns' => array(
 		'title' => array(
@@ -1998,21 +1986,9 @@ $TCA['tx_seminars_payment_methods'] = array(
 				'rows' => '10',
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, description, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2, description'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2022,7 +1998,7 @@ $TCA['tx_seminars_payment_methods'] = array(
 $TCA['tx_seminars_event_types'] = array(
 	'ctrl' => $TCA['tx_seminars_event_types']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,owner',
+		'showRecordFieldList' => 'title',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2034,21 +2010,9 @@ $TCA['tx_seminars_event_types'] = array(
 				'eval' => 'required,trim',
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2094,7 +2058,7 @@ $TCA['tx_seminars_checkboxes'] = array(
 $TCA['tx_seminars_lodgings'] = array(
 	'ctrl' => $TCA['tx_seminars_lodgings']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,owner',
+		'showRecordFieldList' => 'title',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2106,21 +2070,9 @@ $TCA['tx_seminars_lodgings'] = array(
 				'eval' => 'required,trim',
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2130,7 +2082,7 @@ $TCA['tx_seminars_lodgings'] = array(
 $TCA['tx_seminars_foods'] = array(
 	'ctrl' => $TCA['tx_seminars_foods']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,owner',
+		'showRecordFieldList' => 'title',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2142,21 +2094,9 @@ $TCA['tx_seminars_foods'] = array(
 				'eval' => 'required,trim',
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2309,7 +2249,7 @@ $TCA['tx_seminars_target_groups'] = array(
 $TCA['tx_seminars_categories'] = array(
 	'ctrl' => $TCA['tx_seminars_categories']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title, icon, owner',
+		'showRecordFieldList' => 'title, icon',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2336,21 +2276,9 @@ $TCA['tx_seminars_categories'] = array(
 				'maxitems' => 1,
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title, icon;;;;2-2-2, owner'),
+		'0' => array('showitem' => 'title, icon;;;;2-2-2'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2360,7 +2288,7 @@ $TCA['tx_seminars_categories'] = array(
 $TCA['tx_seminars_skills'] = array(
 	'ctrl' => $TCA['tx_seminars_skills']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title, owner',
+		'showRecordFieldList' => 'title',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2372,21 +2300,9 @@ $TCA['tx_seminars_skills'] = array(
 				'eval' => 'required,trim',
 			),
 		),
-		'owner' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:owner_feuser',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'db',
-				'allowed' => 'fe_users',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

@@ -461,7 +461,6 @@ CREATE TABLE tx_seminars_organizers (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	homepage tinytext,
 	email tinytext,
@@ -486,7 +485,6 @@ CREATE TABLE tx_seminars_payment_methods (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	description text,
 
@@ -507,7 +505,6 @@ CREATE TABLE tx_seminars_event_types (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -578,7 +575,6 @@ CREATE TABLE tx_seminars_lodgings (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -628,7 +624,6 @@ CREATE TABLE tx_seminars_foods (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
@@ -740,7 +735,6 @@ CREATE TABLE tx_seminars_categories (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	icon tinytext,
 
@@ -761,7 +755,6 @@ CREATE TABLE tx_seminars_skills (
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 
 	PRIMARY KEY (uid),
