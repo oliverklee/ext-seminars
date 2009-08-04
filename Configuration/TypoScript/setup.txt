@@ -1581,6 +1581,7 @@ plugin.tx_seminars_pi1 {
 					form.formid = tx_seminars_pi1_registration_editor
 					debug = false
 					displaylabels = false
+					minify.enabled = 1
 				}
 				control {
 					datahandler = datahandler:RAW
@@ -1999,6 +2000,7 @@ plugin.tx_seminars_pi1 {
 					seats = renderlet:LISTBOX
 					seats {
 						name = seats
+						onchange = fixNameFieldsNumber();compileNames();
 						data {
 							items {
 								1 {
@@ -2119,6 +2121,7 @@ plugin.tx_seminars_pi1 {
 					registered_themselves = renderlet:CHECKSINGLE
 					registered_themselves {
 						name = registered_themselves
+						onchange = fixNameFieldsNumber();compileNames();
 						data.defaultvalue = 1
 						process.userobj {
 							extension = this
@@ -2130,7 +2133,7 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					attendees_names = renderlet:TEXTAREA
+					attendees_names = renderlet:HIDDEN
 					attendees_names {
 						name = attendees_names
 						process.userobj {
@@ -2141,6 +2144,11 @@ plugin.tx_seminars_pi1 {
 								10.value = attendees_names
 							}
 						}
+					}
+
+					structured_attendees_names = renderlet:HIDDEN
+					structured_attendees_names {
+						name = structured_attendees_names
 					}
 
 					kids = renderlet:LISTBOX
@@ -2780,6 +2788,11 @@ plugin.tx_seminars_pi1 {
 								10.value = attendees_names
 							}
 						}
+					}
+
+					structured_attendees_names = renderlet:HIDDEN
+					structured_attendees_names {
+						name = structured_attendees_names
 					}
 
 					kids = renderlet:HIDDEN

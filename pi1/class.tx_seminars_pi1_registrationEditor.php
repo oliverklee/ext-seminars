@@ -453,7 +453,6 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				break;
 			case 'more_seats':
 				$result = $this->isFormFieldEnabled('seats')
-					|| $this->isFormFieldEnabled('registered_themselves')
 					|| $this->isFormFieldEnabled('attendees_names')
 					|| $this->isFormFieldEnabled('kids');
 				break;

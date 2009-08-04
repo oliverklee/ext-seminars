@@ -444,13 +444,13 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_isFormFieldEnabled_ForEnabledRegisteredThemselvesField_ReturnsTrueForMoreSeats() {
+	public function test_isFormFieldEnabled_ForEnabledRegisteredThemselvesFieldOnly_ReturnsFalseForMoreSeats() {
 		$fixture = new tx_seminars_pi1_registrationEditor(
 			array('showRegistrationFields' => 'registered_themselves'),
 			$GLOBALS['TSFE']->cObj
 		);
 
-		$this->assertTrue(
+		$this->assertFalse(
 			$fixture->isFormFieldEnabled('more_seats')
 		);
 

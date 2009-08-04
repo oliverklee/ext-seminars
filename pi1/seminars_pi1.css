@@ -490,6 +490,12 @@ table.tx-seminars-pi1-timeslots td {
 	width: 14em;
 }
 
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-submit {
 	margin: .5em 0;
 	float: right;

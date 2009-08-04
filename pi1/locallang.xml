@@ -218,6 +218,7 @@
 			<label index="label_register_additional_attendees">Persons to register</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_registered_themselves">myself</label>
+			<label index="label_firstlastname">First/last name:</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
 			<label index="label_kids">Number of kids:</label>
@@ -813,6 +814,7 @@
 			<label index="label_register_additional_attendees">Angemeldete Personen</label>
 			<label index="label_seats">Plätze</label>
 			<label index="label_registered_themselves">ich selbst</label>
+			<label index="label_firstlastname">Vor-/Nachname:</label>
 			<label index="label_register_seats">Gesamtzahl der zu buchenden Plätze:</label>
 			<label index="label_attendees_names">Namen der zusätzlich anzumeldenden Personen:</label>
 			<label index="label_kids">Anzahl Kinder:</label>
@@ -2281,6 +2283,7 @@
 			<label index="label_register_additional_attendees" type="integer">244973093</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_registered_themselves" type="integer">12551043</label>
+			<label index="label_firstlastname" type="integer">239075375</label>
 			<label index="label_register_seats" type="integer">76212082</label>
 			<label index="label_attendees_names" type="integer">43575953</label>
 			<label index="label_kids" type="integer">7953511</label>
@@ -3552,6 +3555,7 @@
 			<label index="label_register_additional_attendees">Persons to register</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_registered_themselves">myself</label>
+			<label index="label_firstlastname">First/last name:</label>
 			<label index="label_register_seats">Total number of seats to book:</label>
 			<label index="label_attendees_names">Names of additional persons to register:</label>
 			<label index="label_kids">Number of kids:</label>

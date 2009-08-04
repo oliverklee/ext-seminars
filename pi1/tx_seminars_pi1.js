@@ -53,3 +53,125 @@ function markAttachmentAsDeleted(listItemId, confirmMessage) {
 		deleteButton.disabled = true;
 	}
 }
+
+/**
+ * Collects the names from the first/last name field pairs and compiles/inserts
+ * them into the human-readable "additional attendees" field and the machine-readable
+ * "structured attendees" field.
+ */
+function compileNames() {
+	var humanReadableField = $("tx_seminars_pi1_registration_editor_attendees_names");
+	var machineReadableField = $("tx_seminars_pi1_registration_editor_structured_attendees_names");
+
+	if (!humanReadableField || !machineReadableField) {
+		 return;
+	}
+
+	var firstNames = $$(".tx_seminars_pi1_registration_editor_first_name");
+	var lastNames = $$(".tx_seminars_pi1_registration_editor_last_name");
+
+	if (firstNames.length != lastNames.length) {
+		return;
+	}
+
+	var humanReadableNames = "";
+	var machineReadableNames = [];
+	for (var i = 0; i < firstNames.length; i++) {
+		var firstName = firstNames[i].value.strip();
+		var lastName = lastNames[i].value.strip();
+
+		if ((firstName.empty()) && (lastName.empty())) {
+			continue;
+		}
+
+		var fullName = (firstName + " " + lastName).strip();
+		if (!humanReadableNames.empty()) {
+			humanReadableNames += "\r\n";
+		}
+		humanReadableNames += fullName;
+
+		machineReadableNames[i] = [firstName, lastName];
+	}
+
+	humanReadableField.value = humanReadableNames;
+	machineReadableField.value = machineReadableNames.toJSON();
+}
+
+/**
+ * Restores the separate name fields from the hidden field with the names
+ * in a JSON-encoded array.
+ */
+function restoreSeparateNameFields() {
+	var machineReadableField = $("tx_seminars_pi1_registration_editor_structured_attendees_names");
+
+	if (!machineReadableField || machineReadableField.value.empty()
+		|| !machineReadableField.value.isJSON()) {
+		return;
+	}
+
+	var firstNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_first_name");
+	var lastNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_last_name");
+
+	if (firstNames.length != lastNames.length) {
+		return;
+	}
+
+	var allNames = machineReadableField.value.evalJSON(true);
+	var numberOfNames = Math.min(firstNames.length, allNames.length);
+
+	for (var i = 0; i < numberOfNames; i++) {
+		firstNames[i].value = allNames[i][0];
+		lastNames[i].value = allNames[i][1];
+	}
+}
+
+/**
+ * Adds or drops name fields to match the number of selected seats.
+ */
+function fixNameFieldsNumber() {
+	var neededNameLines = getNumberOfNeededNameFields();
+	var nameLines = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_name_line");
+
+	if (nameLines.length < neededNameLines) {
+		var nameLineTemplate =
+			$$("#tx_seminars_pi1_registration_editor_name_template "
+				+".tx_seminars_pi1_registration_editor_name_line")[0];
+		var nameLinesContainer =
+			$("tx_seminars_pi1_registration_editor_separate_names");
+
+		for (var i = nameLines.length; i < neededNameLines; i++) {
+			nameLinesContainer.appendChild(nameLineTemplate.cloneNode(true));
+		}
+	} else if (nameLines.length > neededNameLines) {
+		for (var i = nameLines.length; i > neededNameLines; i--) {
+			nameLines[i - 1].remove();
+		}
+	}
+}
+
+/**
+ * Gets the number of needed name fields.
+ *
+ * @return integer the number of needed name fields, will be >= 0
+ */
+function getNumberOfNeededNameFields() {
+	var seatsSelector = $("tx_seminars_pi1_registration_editor_seats");
+	if (!seatsSelector) {
+		return 0;
+	}
+
+	var seats = parseInt(seatsSelector.value);
+
+	var myselfSelector = $("tx_seminars_pi1_registration_editor_registered_themselves");
+	var selfSeat;
+	if (myselfSelector) {
+		selfSeat = myselfSelector.checked ? 1 : 0;
+	} else {
+		selfSeat = 1;
+	}
+
+	return seats - selfSeat;
+}
