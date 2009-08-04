@@ -472,32 +472,11 @@ plugin.tx_seminars_pi1 {
 	# whether to allow front-end editing of places
 	allowFrontEndEditingOfPlaces = 0
 
-	# whether to allow front-end editing of organizers
-	allowFrontEndEditingOfOrganizers = 0
-
-	# whether to allow front-end editing of payment methods
-	allowFrontEndEditingOfPaymentMethods = 0
-
-	# whether to allow front-end editing of event types
-	allowFrontEndEditingOfEventTypes = 0
-
 	# whether to allow front-end editing of checkboxes
 	allowFrontEndEditingOfCheckboxes = 0
 
-	# whether to allow front-end editing of lodgings
-	allowFrontEndEditingOfLodgings = 0
-
-	# whether to allow front-end editing of foods
-	allowFrontEndEditingOfFoods = 0
-
 	# whether to allow front-end editing of target groups
 	allowFrontEndEditingOfTargetGroups = 0
-
-	# whether to allow front-end editing of categories
-	allowFrontEndEditingOfCategories = 0
-
-	# whether to allow front-end editing of skills
-	allowFrontEndEditingOfSkills = 0
 
 	form {
 		eventEditor {
@@ -631,20 +610,6 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				newCategoryButton = renderlet:BUTTON
-				newCategoryButton {
-					name = newCategoryButton
-					label = LLL:EXT:seminars/pi1/locallang.xml:newCategoryButton
-					process.userobj {
-						extension = this
-						method = isFrontEndEditingOfRelatedRecordsAllowed
-						params {
-							10.name = relatedRecordType
-							10.value = Categories
-						}
-					}
-				}
-
 				teaser = renderlet:TEXTAREA
 				teaser {
 					name = teaser
@@ -705,20 +670,6 @@ plugin.tx_seminars_pi1 {
 								10.name = elementName
 								10.value = event_type
 							}
-						}
-					}
-				}
-
-				newEventTypeButton = renderlet:BUTTON
-				newEventTypeButton {
-					name = newEventTypeButton
-					label = LLL:EXT:seminars/pi1/locallang.xml:newEventTypeButton
-					process.userobj {
-						extension = this
-						method = isFrontEndEditingOfRelatedRecordsAllowed
-						params {
-							10.name = relatedRecordType
-							10.value = EventTypes
 						}
 					}
 				}
@@ -979,20 +930,6 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				newLodgingButton = renderlet:BUTTON
-				newLodgingButton {
-					name = newLodgingButton
-					label = LLL:EXT:seminars/pi1/locallang.xml:newLodgingButton
-					process.userobj {
-						extension = this
-						method = isFrontEndEditingOfRelatedRecordsAllowed
-						params {
-							10.name = relatedRecordType
-							10.value = Lodgings
-						}
-					}
-				}
-
 				foods = renderlet:CHECKBOX
 				foods {
 					name = foods
@@ -1011,20 +948,6 @@ plugin.tx_seminars_pi1 {
 								10.name = elementName
 								10.value = foods
 							}
-						}
-					}
-				}
-
-				newFoodButton = renderlet:BUTTON
-				newFoodButton {
-					name = newFoodButton
-					label = LLL:EXT:seminars/pi1/locallang.xml:newFoodButton
-					process.userobj {
-						extension = this
-						method = isFrontEndEditingOfRelatedRecordsAllowed
-						params {
-							10.name = relatedRecordType
-							10.value = Foods
 						}
 					}
 				}
@@ -1324,20 +1247,6 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
-				newPaymentMethodButton = renderlet:BUTTON
-				newPaymentMethodButton {
-					name = newPaymentMethodButton
-					label = LLL:EXT:seminars/pi1/locallang.xml:newPaymentMethodButton
-					process.userobj {
-						extension = this
-						method = isFrontEndEditingOfRelatedRecordsAllowed
-						params {
-							10.name = relatedRecordType
-							10.value = PaymentMethods
-						}
-					}
-				}
-
 				organizers = renderlet:CHECKBOX
 				organizers {
 					name = organizers
@@ -1354,20 +1263,6 @@ plugin.tx_seminars_pi1 {
 								$value = array_pop(func_get_args());
 								return (!empty($value));
 							)
-						}
-					}
-				}
-
-				newOrganizerButton = renderlet:BUTTON
-				newOrganizerButton {
-					name = newOrganizerButton
-					label = LLL:EXT:seminars/pi1/locallang.xml:newOrganizerButton
-					process.userobj {
-						extension = this
-						method = isFrontEndEditingOfRelatedRecordsAllowed
-						params {
-							10.name = relatedRecordType
-							10.value = Organizers
 						}
 					}
 				}

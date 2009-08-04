@@ -361,15 +361,9 @@
 			<label index="countdown_minutes_plural">minutes</label>
 			<label index="countdown_minutes_singular">minute</label>
 			<label index="countdown_seconds_plural">seconds</label>
-			<label index="newCategoryButton">Create new category</label>
-			<label index="newEventTypeButton">Create new event type</label>
 			<label index="newPlaceButton">Create new place</label>
-			<label index="newLodgingButton">Create new lodging</label>
-			<label index="newFoodButton">Create new food</label>
 			<label index="newSpeakerButton">Create new speaker</label>
 			<label index="newCheckboxButton">Create new checkbox</label>
-			<label index="newPaymentMethodButton">Create new payment method</label>
-			<label index="newOrganizerButton">Create new organizer</label>
 			<label index="newTargetGroupButton">Create new target group</label>
 			<label index="message_publishingSuccessful">The event has been published.</label>
 			<label index="message_publishingFailed">There is no such pending event.</label>
@@ -957,15 +951,9 @@
 			<label index="countdown_minutes_plural">Minuten</label>
 			<label index="countdown_minutes_singular">Minute</label>
 			<label index="countdown_seconds_plural">Sekunden</label>
-			<label index="newCategoryButton">Neue Kategorie anlegen</label>
-			<label index="newEventTypeButton">Neue Veranstaltungsart anlegen</label>
 			<label index="newPlaceButton">Neuen Veranstaltungsort anlegen</label>
-			<label index="newLodgingButton">Neue Unterbringung anlegen</label>
-			<label index="newFoodButton">Neue Verpflegung anlegen</label>
 			<label index="newSpeakerButton">Neue ReferentIn anlegen</label>
 			<label index="newCheckboxButton">Neue Checkbox anlegen</label>
-			<label index="newPaymentMethodButton">Neue Zahlungsart anlegen</label>
-			<label index="newOrganizerButton">Neuen Veranstalter anlegen</label>
 			<label index="newTargetGroupButton">Neue Zielgruppe anlegen</label>
 			<label index="message_publishingSuccessful">Die Veranstaltung wurde veröffentlicht.</label>
 			<label index="message_publishingFailed">Es konnte keine entsprechend ausstehende Veranstaltung gefunden werden.</label>
@@ -2454,15 +2442,9 @@
 			<label index="label_registration_requirements_informal" type="integer">48963476</label>
 			<label index="message_requirementsNotFulfilled_formal" type="integer">66387523</label>
 			<label index="message_requirementsNotFulfilled_informal" type="integer">66387523</label>
-			<label index="newCategoryButton" type="integer">243139682</label>
-			<label index="newEventTypeButton" type="integer">100295752</label>
 			<label index="newPlaceButton" type="integer">208822420</label>
-			<label index="newLodgingButton" type="integer">200959489</label>
-			<label index="newFoodButton" type="integer">257337761</label>
 			<label index="newSpeakerButton" type="integer">76404781</label>
 			<label index="newCheckboxButton" type="integer">234334467</label>
-			<label index="newPaymentMethodButton" type="integer">192793055</label>
-			<label index="newOrganizerButton" type="integer">212681082</label>
 			<label index="newTargetGroupButton" type="integer">239089992</label>
 			<label index="message_publishingSuccessful" type="integer">170886030</label>
 			<label index="message_publishingFailed" type="integer">6189202</label>
@@ -3726,15 +3708,9 @@
 			<label index="label_registration_requirements_informal">Please register for the following events first:</label>
 			<label index="message_requirementsNotFulfilled_formal">You are not registered for all required events yet.</label>
 			<label index="message_requirementsNotFulfilled_informal">You are not registered for all required events yet.</label>
-			<label index="newCategoryButton">Create new category</label>
-			<label index="newEventTypeButton">Create new event type</label>
 			<label index="newPlaceButton">Create new place</label>
-			<label index="newLodgingButton">Create new lodging</label>
-			<label index="newFoodButton">Create new food</label>
 			<label index="newSpeakerButton">Create new speaker</label>
 			<label index="newCheckboxButton">Create new checkbox</label>
-			<label index="newPaymentMethodButton">Create new payment method</label>
-			<label index="newOrganizerButton">Create new organizer</label>
 			<label index="newTargetGroupButton">Create new target group</label>
 			<label index="message_publishingSuccessful">The event has been published.</label>
 			<label index="message_publishingFailed">There is no such pending event.</label>

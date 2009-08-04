@@ -222,16 +222,11 @@
 	line-height: 20px;
 }
 
-.tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newOrganizerButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newSpeakerButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newLeaderButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newTutorButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newPartnerButton,
-.tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newCategoryButton,
-.tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newEventTypeButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newTargetGroupButton,
-.tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newFoodButton,
-.tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newLodgingButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newPlaceButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newCheckboxButton {
 	width: auto;

@@ -1247,30 +1247,6 @@
 							</config>
 						</TCEforms>
 					</allowFrontEndEditingOfPlaces>
-					<allowFrontEndEditingOfOrganizers>
-						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfOrganizers</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfOrganizers>
-					<allowFrontEndEditingOfPaymentMethods>
-						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfPaymentMethods>
-					<allowFrontEndEditingOfEventTypes>
-						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfEventTypes</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfEventTypes>
 					<allowFrontEndEditingOfCheckboxes>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfCheckboxes</label>
@@ -1279,22 +1255,6 @@
 							</config>
 						</TCEforms>
 					</allowFrontEndEditingOfCheckboxes>
-					<allowFrontEndEditingOfLodgings>
-						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfLodgings</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfLodgings>
-					<allowFrontEndEditingOfFoods>
-						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfFoods</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfFoods>
 					<allowFrontEndEditingOfTargetGroups>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfTargetGroups</label>
@@ -1303,22 +1263,6 @@
 							</config>
 						</TCEforms>
 					</allowFrontEndEditingOfTargetGroups>
-					<allowFrontEndEditingOfCategories>
-						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfCategories</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfCategories>
-					<allowFrontEndEditingOfSkills>
-						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfSkills</label>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</allowFrontEndEditingOfSkills>
 				</el>
 			</ROOT>
 		</s_fe_editing>
