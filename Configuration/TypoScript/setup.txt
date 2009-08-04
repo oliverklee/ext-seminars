@@ -888,6 +888,108 @@ plugin.tx_seminars_pi1 {
 							10.value = Places
 						}
 					}
+					onclick {
+						runat = ajax
+						userobj.php (
+							$this->oRenderer->_setDisplayLabels(true);
+							$result = $this->aORenderlets['newPlaceModalBox']->majixShowFreshBox();
+							$this->oRenderer->_setDisplayLabels(false);
+							return $result;
+						)
+					}
+				}
+
+				newPlaceModalBox = renderlet:MODALBOX
+				newPlaceModalBox {
+					name = newPlaceModalBox
+					childs {
+						newPlace_title = renderlet:TEXT
+						newPlace_title {
+							name = newPlace_title
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.title
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newPlace_address = renderlet:TEXTAREA
+						newPlace_address {
+							name = newPlace_address
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.address
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newPlace_city = renderlet:TEXT
+						newPlace_city {
+							name = newPlace_city
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.city
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newPlace_country = renderlet:LISTBOX
+						newPlace_country {
+							name = newPlace_country
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.country
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+							data {
+								items {
+									10.caption = &nbsp;
+									10.value = 0
+								}
+								userobj.php (
+									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+									return tx_seminars_pi1_eventEditor::populateListCountries();
+								)
+							}
+						}
+
+						newPlace_homepage = renderlet:TEXT
+						newPlace_homepage {
+							name = newPlace_homepage
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.homepage
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newPlace_directions = renderlet:TEXTAREA
+						newPlace_directions {
+							name = newPlace_directions
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.directions
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newPlace_notes = renderlet:TEXTAREA
+						newPlace_notes {
+							name = newPlace_notes
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.notes
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newPlace_cancelButton = renderlet:BUTTON
+						newPlace_cancelButton {
+							name = newPlace_cancelButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_cancel
+							wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+							onclick {
+								runat = client
+								userobj.php (
+									return array($this->aORenderlets['newPlaceModalBox']->majixCloseBox());
+								)
+							}
+						}
+
+						newPlace_saveButton = renderlet:BUTTON
+						newPlace_saveButton {
+							name = newPlace_saveButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_save
+							wrap = |</div>
+							onclick {
+								runat = ajax
+								params = newPlace_title, newPlace_address, newPlace_city, newPlace_country, newPlace_homepage, newPlace_directions, newPlace_notes
+								userobj.php (
+									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+									return tx_seminars_pi1_eventEditor::createNewPlace($this);
+								)
+							}
+						}
+					}
 				}
 
 				room = renderlet:TEXT

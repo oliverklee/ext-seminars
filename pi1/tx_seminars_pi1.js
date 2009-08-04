@@ -175,3 +175,29 @@ function getNumberOfNeededNameFields() {
 
 	return seats - selfSeat;
 }
+
+/**
+ * Appends a place so that it is available for selection in the FE editor.
+ *
+ * @param integer uid the UID of the place to add, must be >= 0
+ * @param string title the title of the place, must not be empty
+ */
+function appendPlaceInEditor(uid, title) {
+	var placesContainer = $("tx_seminars_pi1_seminars_place");
+	if (!placesContainer) {
+		return;
+	}
+	var nextOptionNumber = $$("#tx_seminars_pi1_seminars_place input").length;
+
+	var id = "tx_seminars_pi1_seminars_place_" + nextOptionNumber;
+	var input = new Element("input", {
+		"id": id, "type": "checkbox", "value": uid,
+		"name" : "tx_seminars_pi1_seminars[place][" + nextOptionNumber + "]"
+	});
+	var label = new Element("label", {"for": id});
+	label.appendChild(document.createTextNode(title));
+
+	placesContainer.appendChild(new Element("br"));
+	placesContainer.appendChild(input);
+	placesContainer.appendChild(label);
+}

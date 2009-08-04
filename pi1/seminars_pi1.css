@@ -232,7 +232,16 @@
 	width: auto;
 }
 
+#tx_ameosformidable_modalboxbox label {
+	font-size: .85em;
+	margin: .6em 0 0;
+	display: block;
+}
 
+#tx_ameosformidable_modalboxbox .modalbox-buttons {
+	margin-top: 1em;
+	float: right;
+}
 
 .tx-seminars-pi1-error {
 	color: #f00;

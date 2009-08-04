@@ -39,6 +39,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 * @var tx_seminars_pi1_eventEditor
 	 */
 	private $fixture;
+
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
@@ -1880,6 +1881,23 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
 			base64_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning populateListCountries
+	///////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function populateListCountriesContainsGermany() {
+		$this->assertTrue(
+			in_array(
+				array('caption' => 'Deutschland', 'value' => 54),
+				tx_seminars_pi1_eventEditor::populateListCountries()
 			)
 		);
 	}

@@ -525,7 +525,14 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private function purgeNonSeminarsFields(array &$formData) {
 		unset(
 			$formData['proceed_file_upload'],
-			$formData['delete_attached_files']
+			$formData['delete_attached_files'],
+			$formData['newPlace_title'],
+			$formData['newPlace_address'],
+			$formData['newPlace_city'],
+			$formData['newPlace_country'],
+			$formData['newPlace_homepage'],
+			$formData['newPlace_directions'],
+			$formData['newPlace_notes']
 		);
 	}
 
@@ -1105,6 +1112,100 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			array('%5B', '%5D'),
 			$url
 		));
+	}
+
+	/**
+	 * Creates a new place record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function createNewPlace(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+		$validationErrors = array();
+		if (trim($formData['newPlace_title']) == '') {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
+			);
+		}
+		if (trim($formData['newPlace_city']) == '') {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyCity'
+			);
+		}
+		if (!empty($validationErrors)) {
+			return array(
+				$formidable->majixExecJs(
+					'alert("' . implode('\n', $validationErrors) . '");'
+				),
+			);
+		};
+
+		$owner = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$pageUid = $owner->getAuxiliaryRecordsPid();
+
+		$countryUid = intval($formData['newPlace_country']);
+		if ($countryUid > 0) {
+			try {
+				$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
+					->find($countryUid);
+				$countryCode = $country->getIsoAlpha2Code();
+			} catch (Exception $exception) {
+				$countryCode = '';
+			}
+		} else {
+			$countryCode = '';
+		}
+
+		$place = tx_oelib_ObjectFactory::make('tx_seminars_Model_Place');
+		$place->setData(array(
+			'owner' => $owner,
+			'pid' => $pageUid,
+			'title' => strip_tags($formData['newPlace_title']),
+			'address' => strip_tags($formData['newPlace_address']),
+			'city' => strip_tags($formData['newPlace_city']),
+			'country' => $countryCode,
+			'homepage' => strip_tags($formData['newPlace_homepage']),
+			'directions' => $formData['newPlace_directions'],
+			'notes' => strip_tags($formData['newPlace_notes']),
+		));
+		$place->markAsDirty();
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place')->save($place);
+
+		return array(
+			$formidable->aORenderlets['newPlaceModalBox']->majixCloseBox(),
+			$formidable->majixExecJs(
+				'appendPlaceInEditor(' . $place->getUid() . ', "' .
+					addcslashes($place->getTitle(), '"\\') . '")'
+			),
+		);
+	}
+
+	/**
+	 * Provides data items for the list of countries.
+	 *
+	 * @return array $items
+	 *         items as an array with the keys "caption" (for the title) and
+	 *         "value" (for the UID)
+	 */
+	public static function populateListCountries() {
+		$result = array();
+
+		$countries = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
+			->findAll();
+		foreach ($countries as $country) {
+			$result[] = array(
+				'caption' => $country->getLocalShortName(),
+				'value' => $country->getUid(),
+			);
+		}
+
+		return $result;
 	}
 }
 
