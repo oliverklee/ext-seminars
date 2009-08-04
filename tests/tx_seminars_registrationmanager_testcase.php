@@ -2277,7 +2277,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => 'footown', 'country' => 54)
+			SEMINARS_TABLE_SITES,
+			array('city' => 'footown', 'country' => $country->getIsoAlpha2Code())
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
@@ -2367,7 +2368,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array(
 				'address' => 'address',
 				'city' => 'footown',
-				'country' => 54,
+				'country' => $country->getIsoAlpha2Code(),
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(

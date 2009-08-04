@@ -48,7 +48,6 @@ class tx_seminars_Mapper_Place extends tx_oelib_DataMapper {
 	 *            DB column name => mapper name
 	 */
 	protected $relations = array(
-		'country' => 'tx_oelib_Mapper_Country',
 		'owner' => 'tx_seminars_Mapper_FrontEndUser',
 	);
 }

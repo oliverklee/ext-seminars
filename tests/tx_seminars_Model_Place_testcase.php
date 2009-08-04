@@ -212,7 +212,7 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	 */
 	public function getCountryWithCountryReturnsCountryInstance() {
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
-		$this->fixture->setData(array('country' => $country));
+		$this->fixture->setData(array('country' => $country->getIsoAlpha2Code()));
 
 		$this->assertTrue(
 			$this->fixture->getCountry() instanceof tx_oelib_Model_Country
@@ -224,7 +224,7 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	 */
 	public function getCountryWithCountryReturnsCountryAsModel() {
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
-		$this->fixture->setData(array('country' => $country));
+		$this->fixture->setData(array('country' => $country->getIsoAlpha2Code()));
 
 		$this->assertSame(
 			$country,
@@ -260,9 +260,8 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasCountryWithCountryReturnsTrue() {
-		$this->fixture->setCountry(
-			tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->getNewGhost()
-		);
+		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+		$this->fixture->setCountry($country);
 
 		$this->assertTrue(
 			$this->fixture->hasCountry()
