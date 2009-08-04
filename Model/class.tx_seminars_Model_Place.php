@@ -110,7 +110,13 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	 * @return tx_oelib_Model_Country the country of this place
 	 */
 	public function getCountry() {
-		return $this->getAsModel('country');
+		$countryCode = $this->getAsString('country');
+		if ($countryCode == '') {
+			return null;
+		}
+
+		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
+			->findByIsoAlpha2Code($countryCode);
 	}
 
 	/**
@@ -119,7 +125,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	 * @param tx_oelib_Model_Country the country to set for this place
 	 */
 	public function setCountry(tx_oelib_Model_Country $country) {
-		$this->set('country', $country);
+		$this->set('country', $country->getIsoAlpha2Code());
 	}
 
 	/**

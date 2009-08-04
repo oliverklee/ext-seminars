@@ -83,19 +83,5 @@ class tx_seminars_Mapper_Place_testcase extends tx_phpunit_testcase {
 			$this->fixture->find($uid)->getTitle()
 		);
 	}
-
-	/**
-	 * @test
-	 */
-	public function findWithUidLoadsCountryRelation() {
-		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => 54)
-		);
-
-		$this->assertEquals(
-			54,
-			$this->fixture->find($uid)->getCountry()->getUid()
-		);
-	}
 }
 ?>
