@@ -350,8 +350,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$frontEndUser = tx_oelib_FrontEndLoginManager::
 			getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
-		$additionalQueryParameters = ' AND (owner = ' . $frontEndUser->getUid() .
-			' OR owner = 0)';
+		if (tx_oelib_db::tableHasColumn($tableName, 'owner')) {
+			$additionalQueryParameters
+				= ' AND (owner = ' . $frontEndUser->getUid() . ' OR owner = 0)';
+		} else {
+			$additionalQueryParameters = '';
+		}
 
 		return parent::populateList(
 			$items,

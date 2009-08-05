@@ -594,47 +594,13 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function populateListCategoriesShowsCategoryWithoutOwner() {
+	public function populateListCategoriesShowsCategory() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
 		);
 
 		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $categoryUid),
-				$this->fixture->populateListCategories(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListCategoriesShowsCategoryWithOwnerIsLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$categoryUid = $this->testingFramework->createRecord(
-			'tx_seminars_categories', array('owner' => $frontEndUserUid)
-		);
-
-		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $categoryUid),
-				$this->fixture->populateListCategories(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListCategoriesHidesCategoryWithOwnerIsNotLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$categoryUid = $this->testingFramework->createRecord(
-			'tx_seminars_categories', array('owner' => $frontEndUserUid + 1)
-		);
-
-		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $categoryUid),
 				$this->fixture->populateListCategories(array())
@@ -650,47 +616,13 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function populateListEventTypesShowsEventTypeWithoutOwner() {
+	public function populateListEventTypesShowsEventType() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$eventTypeUid = $this->testingFramework->createRecord(
 			'tx_seminars_event_types'
 		);
 
 		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $eventTypeUid),
-				$this->fixture->populateListEventTypes(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListEventTypesShowsEventTypeWithOwnerIsLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$eventTypeUid = $this->testingFramework->createRecord(
-			'tx_seminars_event_types', array('owner' => $frontEndUserUid)
-		);
-
-		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $eventTypeUid),
-				$this->fixture->populateListEventTypes(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListEventTypesHidesEventTypeWithOwnerIsNotLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$eventTypeUid = $this->testingFramework->createRecord(
-			'tx_seminars_event_types', array('owner' => $frontEndUserUid + 1)
-		);
-
-		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $eventTypeUid),
 				$this->fixture->populateListEventTypes(array())
@@ -706,47 +638,13 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function populateListLodgingsShowsLodgingWithoutOwner() {
+	public function populateListLodgingsShowsLodging() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$lodgingUid = $this->testingFramework->createRecord(
 			'tx_seminars_lodgings'
 		);
 
 		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $lodgingUid),
-				$this->fixture->populateListLodgings(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListLodgingsShowsLodgingWithOwnerIsLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$lodgingUid = $this->testingFramework->createRecord(
-			'tx_seminars_lodgings', array('owner' => $frontEndUserUid)
-		);
-
-		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $lodgingUid),
-				$this->fixture->populateListLodgings(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListLodgingsHidesLodgingWithOwnerIsNotLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$lodgingUid = $this->testingFramework->createRecord(
-			'tx_seminars_lodgings', array('owner' => $frontEndUserUid + 1)
-		);
-
-		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $lodgingUid),
 				$this->fixture->populateListLodgings(array())
@@ -762,47 +660,13 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function populateListFoodsShowsFoodWithoutOwner() {
+	public function populateListFoodsShowsFood() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$foodUid = $this->testingFramework->createRecord(
 			'tx_seminars_foods'
 		);
 
 		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $foodUid),
-				$this->fixture->populateListFoods(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListFoodsShowsFoodWithOwnerIsLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$foodUid = $this->testingFramework->createRecord(
-			'tx_seminars_foods', array('owner' => $frontEndUserUid)
-		);
-
-		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $foodUid),
-				$this->fixture->populateListFoods(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListFoodsHidesFoodWithOwnerIsNotLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$foodUid = $this->testingFramework->createRecord(
-			'tx_seminars_foods', array('owner' => $frontEndUserUid + 1)
-		);
-
-		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $foodUid),
 				$this->fixture->populateListFoods(array())
@@ -818,47 +682,13 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function populateListPaymentMethodsShowsPaymentMethodWithoutOwner() {
+	public function populateListPaymentMethodsShowsPaymentMethod() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$paymentMethodUid = $this->testingFramework->createRecord(
 			'tx_seminars_payment_methods'
 		);
 
 		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $paymentMethodUid),
-				$this->fixture->populateListPaymentMethods(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListPaymentMethodsShowsPaymentMethodWithOwnerIsLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$paymentMethodUid = $this->testingFramework->createRecord(
-			'tx_seminars_payment_methods', array('owner' => $frontEndUserUid)
-		);
-
-		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $paymentMethodUid),
-				$this->fixture->populateListPaymentMethods(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListPaymentMethodsHidesPaymentMethodWithOwnerIsNotLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$paymentMethodUid = $this->testingFramework->createRecord(
-			'tx_seminars_payment_methods', array('owner' => $frontEndUserUid + 1)
-		);
-
-		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $paymentMethodUid),
 				$this->fixture->populateListPaymentMethods(array())
@@ -874,47 +704,13 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function populateListOrganizersShowsOrganizerWithoutOwner() {
+	public function populateListOrganizersShowsOrganizer() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers'
 		);
 
 		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $organizerUid),
-				$this->fixture->populateListOrganizers(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListOrganizersShowsOrganizerWithOwnerIsLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$organizerUid = $this->testingFramework->createRecord(
-			'tx_seminars_organizers', array('owner' => $frontEndUserUid)
-		);
-
-		$this->assertTrue(
-			in_array(
-				array('caption' => '', 'value' => $organizerUid),
-				$this->fixture->populateListOrganizers(array())
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function populateListOrganizersHidesOrganizerWithOwnerIsNotLoggedInFrontEndUser() {
-		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$organizerUid = $this->testingFramework->createRecord(
-			'tx_seminars_organizers', array('owner' => $frontEndUserUid + 1)
-		);
-
-		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $organizerUid),
 				$this->fixture->populateListOrganizers(array())
