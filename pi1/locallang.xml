@@ -93,7 +93,8 @@
 			<label index="seminars.pi_flexform.createAuxiliaryRecordsPID">Sysfolder to store FE-created auxiliary records in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
-			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Fields to display in the front-end editor</label>
+			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Fields to display in the front-end editor:</label>
+			<label index="seminars.pi_flexform.requiredFrontEndEditorFields">Fields which are required to be filled in the front-end editor:</label>
 			<label index="seminars.pi_flexform.event_headline">Event headline</label>
 			<label index="seminars.pi_flexform.categoriesInListView">Display of the categories:</label>
 			<label index="seminars.pi_flexform.iconAndText">Icons and text</label>
@@ -686,6 +687,7 @@
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Seite, auf die nach dem Speichern einer Veranstaltung im Front-end umgeleitet wird</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">Liste erlaubter Dateiendungen für Front-end-Bearbeitung</label>
 			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Felder im Front-end-Editor anzeigen:</label>
+			<label index="seminars.pi_flexform.requiredFrontEndEditorFields">Felder, die im Front-end-Editor ausgefüllt sein müssen:</label>
 			<label index="seminars.pi_flexform.event_headline">Veranstaltungsüberschrift</label>
 			<label index="seminars.pi_flexform.categoriesInListView">Anzeige der Kategorien:</label>
 			<label index="seminars.pi_flexform.iconAndText">Icons und Titel</label>
@@ -2178,7 +2180,8 @@
 			<label index="seminars.pi_flexform.createAuxiliaryRecordsPID" type="integer">141830167</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID" type="integer">107570988</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload" type="integer">98984260</label>
-			<label index="seminars.pi_flexform.displayFrontEndEditorFields" type="integer">170529509</label>
+			<label index="seminars.pi_flexform.displayFrontEndEditorFields" type="integer">12896900</label>
+			<label index="seminars.pi_flexform.requiredFrontEndEditorFields" type="integer">251417579</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers" type="integer">179427878</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces" type="integer">111764351</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfOrganizers" type="integer">210250692</label>
@@ -3446,7 +3449,8 @@
 			<label index="seminars.pi_flexform.createAuxiliaryRecordsPID">Sysfolder to store FE-created auxiliary records in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
-			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Fields to display in the front-end editor</label>
+			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Fields to display in the front-end editor:</label>
+			<label index="seminars.pi_flexform.requiredFrontEndEditorFields">Fields which are required to be filled in the front-end editor:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers">Allow editing speakers:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces">Allow editing places:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfOrganizers">Allow editing organizers:</label>

@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3267] Fix: List of flexforms checkboxes "Fields to display in the FE editor" is doubled
 - [#3263] Feature: Add a fallback TS-setup value for the auxiliary records created in the FE
 - [#3262] Feature: Add a setting to the FE-usergroups where events created in the FE-editor will be saved.
 - [#3260] Fix: When sending the publication mail for an event without date, 01.01.1970 is shown as date.
