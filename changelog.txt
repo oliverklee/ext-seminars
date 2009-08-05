@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3268] Fix: The From: for the publishing e-mails is empty
 - [#2646] Fix: Config check does not complain if loginPID is empty on list view page
 - [#3267] Fix: List of flexforms checkboxes "Fields to display in the FE editor" is doubled
 - [#3263] Feature: Add a fallback TS-setup value for the auxiliary records created in the FE

@@ -149,7 +149,9 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->testingFramework->createAndLoginFrontEndUser($userGroupUid);
+		$this->testingFramework->createAndLoginFrontEndUser(
+			$userGroupUid, array('name' => 'Mr. Bar', 'email' => 'mail@foo.com')
+		);
 	}
 
 	/**
@@ -2048,6 +2050,54 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			base64_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
+		);
+	}
+
+	public function test_sendEMailToReviewer_UsesFrontEndUserNameAsFromNameForMail() {
+		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertContains(
+			'Mr. Bar',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+		);
+	}
+
+	public function test_sendEMailToReviewer_UsesFrontEndUserMailAddressAsFromAddressForMail() {
+		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertContains(
+			'<mail@foo.com>',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
 		);
 	}
 

@@ -1036,6 +1036,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		if ($this->publicationHash == '') {
 			return;
 		}
+		tx_oelib_MapperRegistry::purgeInstance();
 		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 		$reviewer = $frontEndUser->getReviewerFromGroup();
@@ -1043,8 +1044,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		if (!$reviewer) {
 			return;
 		}
-
-		tx_oelib_MapperRegistry::purgeInstance();
 
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->findByPublicationHash($this->publicationHash);
