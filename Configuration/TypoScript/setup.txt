@@ -569,8 +569,10 @@ plugin.tx_seminars_pi1 {
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.event_type
 					data {
 						items {
-							10.name = &amp;nbsp;
-							10.value = 0
+							item {
+								caption = &nbsp;
+								value = 0
+							}
 						}
 						userobj {
 							extension = this
