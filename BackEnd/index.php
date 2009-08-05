@@ -91,134 +91,140 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	public function main() {
 		global $LANG, $BACK_PATH, $BE_USER;
 
-		$this->content = '';
-		$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+		// starts the document
+		$this->doc = t3lib_div::makeInstance('bigDoc');
+		$this->doc->backPath = $BACK_PATH;
+		$this->doc->docType = 'xhtml_strict';
+		$this->doc->styleSheetFile2 = '../typo3conf/ext/seminars/BackEnd/BackEnd.css';
 
-		// Access check:
-		// The page will only be displayed if there is a valid page, if this
-		// page may be viewed by the current BE user and if the static template
-		// has been included or there actually are any records that will be
-		// listed by this module on the current page.
-		$hasAccess = is_array($pageAccess);
+		if ($this->id <= 0) {
+			echo $this->doc->startPage($LANG->getLL('title')) .
+				$this->doc->header($LANG->getLL('title')) .
+				$this->doc->spacer(5) . '<p class="errorMessage">' .
+				$GLOBALS['LANG']->getLL('message_noPageTypeSelected') . '</p>' .
+				$this->doc->endPage();
 
-		if ($this->id && ($hasAccess || $BE_USER->user['admin'])
-			&& $this->hasStaticTemplateOrRecords()
-		) {
-			$this->setPageData($pageAccess);
-			// starts the document
-			$this->doc = t3lib_div::makeInstance('bigDoc');
-			$this->doc->backPath = $BACK_PATH;
-			$this->doc->docType = 'xhtml_strict';
-			$this->doc->styleSheetFile2 = '../typo3conf/ext/seminars/BackEnd/BackEnd.css';
-
-			// JavaScript function called within getDeleteIcon()
-			$this->doc->JScode = '
-				<script type="text/javascript">
-					function jumpToUrl(URL) {
-						document.location = URL;
-					}
-				</script>
-			';
-
-			// draw the header
-			$this->content .= $this->doc->startPage($LANG->getLL('title'));
-			$this->content .= $this->doc->header($LANG->getLL('title'));
-			$this->content .= $this->doc->spacer(5);
-
-			// define the sub modules that should be available in the tabmenu
-			$this->availableSubModules = array();
-
-			// only show the tabs if the back-end user has access to the
-			// corresponding tables
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_SEMINARS)) {
-				$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
-			}
-
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_ATTENDANCES)) {
-				$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
-			}
-
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_SPEAKERS)) {
-				$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
-			}
-
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_ORGANIZERS)) {
-				$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
-			}
-
-			// Read the selected sub module (from the tab menu) and make it available within this class.
-			$this->subModule = intval(t3lib_div::_GET('subModule'));
-
-			// If $this->subModule is not a key of $this->availableSubModules,
-			// set it to the key of the first element in $this->availableSubModules
-			// so the first tab is activated.
-			if (!array_key_exists($this->subModule, $this->availableSubModules)) {
-				reset($this->availableSubModules);
-				$this->subModule = key($this->availableSubModules);
-			}
-
-			// Only generate the tab menu if the current back-end user has the
-			// rights to show any of the tabs.
-			if ($this->subModule) {
-				$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
-					'subModule',
-					$this->subModule,
-					$this->availableSubModules);
-				$this->content .= $this->doc->spacer(5);
-			}
-
-			// Select which sub module to display.
-			// If no sub module is specified, an empty page will be displayed.
-			switch ($this->subModule) {
-				case 2:
-					$registrationsList = tx_oelib_ObjectFactory::make(
-						'tx_seminars_BackEnd_RegistrationsList', $this
-					);
-					$this->content .= $registrationsList->show();
-					break;
-				case 3:
-					$speakersList = tx_oelib_ObjectFactory::make(
-						'tx_seminars_BackEnd_SpeakersList', $this
-					);
-					$this->content .= $speakersList->show();
-					break;
-				case 4:
-					$organizersList = tx_oelib_ObjectFactory::make(
-						'tx_seminars_BackEnd_OrganizersList', $this
-					);
-					$this->content .= $organizersList->show();
-					break;
-				case 1:
-					if ($this->isConfirmEventFormRequested()) {
-						$this->content .= $this->getConfirmEventMailForm();
-					} elseif ($this->isCancelEventFormRequested()) {
-						$this->content .= $this->getCancelEventMailForm();
-					} else {
-						$eventsList = tx_oelib_ObjectFactory::make(
-							'tx_seminars_BackEnd_EventsList', $this
-						);
-						$this->content .= $eventsList->show();
-						$eventsList->__destruct();
-					}
-				default:
-					$this->content .= '';
-					break;
-			}
-
-			// Finish the document (eg. add a closing html tag).
-			$this->content .= $this->doc->endPage();
-		} else {
-			// The user doesn't have access.
-			$this->doc = t3lib_div::makeInstance('mediumDoc');
-			$this->doc->backPath = $BACK_PATH;
-
-			$this->content .= $this->doc->startPage($LANG->getLL('title'));
-			$this->content .= $this->doc->header($LANG->getLL('title'));
-			$this->content .= $this->doc->spacer(5);
-
-			// end page
-			$this->content .= $this->doc->endPage();
+			return;
 		}
+
+		$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+		if (!is_array($pageAccess) && !$BE_USER->user['admin']) {
+			echo $this->doc->startPage($LANG->getLL('title')) .
+				$this->doc->header($LANG->getLL('title')) .
+				$this->doc->spacer(5) . $this->doc->endPage();
+
+			return;
+		}
+
+		if (!$this->hasStaticTemplate()) {
+			echo $this->doc->startPage($LANG->getLL('title')) .
+				$this->doc->header($LANG->getLL('title')) .
+				$this->doc->spacer(5) . '<p class="errorMessage">' .
+				$GLOBALS['LANG']->getLL('message_noStaticTemplateFound') .
+				'</p>' . $this->doc->endPage();
+
+			return;
+		}
+
+		$this->content = '';
+		$this->setPageData($pageAccess);
+
+		// JavaScript function called within getDeleteIcon()
+		$this->doc->JScode = '
+			<script type="text/javascript">
+				function jumpToUrl(URL) {
+					document.location = URL;
+				}
+			</script>
+		';
+
+		// draw the header
+		$this->content .= $this->doc->startPage($LANG->getLL('title'));
+		$this->content .= $this->doc->header($LANG->getLL('title'));
+		$this->content .= $this->doc->spacer(5);
+
+		// define the sub modules that should be available in the tabmenu
+		$this->availableSubModules = array();
+
+		// only show the tabs if the back-end user has access to the
+		// corresponding tables
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_SEMINARS)) {
+			$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
+		}
+
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_ATTENDANCES)) {
+			$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
+		}
+
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_SPEAKERS)) {
+			$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
+		}
+
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_ORGANIZERS)) {
+			$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
+		}
+
+		// Read the selected sub module (from the tab menu) and make it available within this class.
+		$this->subModule = intval(t3lib_div::_GET('subModule'));
+
+		// If $this->subModule is not a key of $this->availableSubModules,
+		// set it to the key of the first element in $this->availableSubModules
+		// so the first tab is activated.
+		if (!array_key_exists($this->subModule, $this->availableSubModules)) {
+			reset($this->availableSubModules);
+			$this->subModule = key($this->availableSubModules);
+		}
+
+		// Only generate the tab menu if the current back-end user has the
+		// rights to show any of the tabs.
+		if ($this->subModule) {
+			$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
+				'subModule',
+				$this->subModule,
+				$this->availableSubModules);
+			$this->content .= $this->doc->spacer(5);
+		}
+
+		// Select which sub module to display.
+		// If no sub module is specified, an empty page will be displayed.
+		switch ($this->subModule) {
+			case 2:
+				$registrationsList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEnd_RegistrationsList', $this
+				);
+				$this->content .= $registrationsList->show();
+				break;
+			case 3:
+				$speakersList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEnd_SpeakersList', $this
+				);
+				$this->content .= $speakersList->show();
+				break;
+			case 4:
+				$organizersList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEnd_OrganizersList', $this
+				);
+				$this->content .= $organizersList->show();
+				break;
+			case 1:
+				if ($this->isConfirmEventFormRequested()) {
+					$this->content .= $this->getConfirmEventMailForm();
+				} elseif ($this->isCancelEventFormRequested()) {
+					$this->content .= $this->getCancelEventMailForm();
+				} else {
+					$eventsList = tx_oelib_ObjectFactory::make(
+						'tx_seminars_BackEnd_EventsList', $this
+					);
+					$this->content .= $eventsList->show();
+					$eventsList->__destruct();
+				}
+			default:
+				$this->content .= '';
+				break;
+		}
+
+		// Finish the document (eg. add a closing html tag).
+		$this->content .= $this->doc->endPage();
 
 		// Output the whole content.
 		echo $this->content;
@@ -290,42 +296,14 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 
 	/**
 	 * Checks whether this extension's static template is included on the
-	 * current page or there is at least one event, attendance, organizer or
-	 * speaker record (and be it even hidden or deleted) on the current page.
+	 * current page.
 	 *
-	 * @return boolean true if the static template has been included or there is
-	 *                 at least one event, attendance, organizer or speaker
-	 *                 record on the current page, false otherwise
+	 * @return boolean true if the static template has been included, false
+	 *                 otherwise
 	 */
-	private function hasStaticTemplateOrRecords() {
-		$configGetter = tx_oelib_ObjectFactory::make(
-			'tx_seminars_configgetter'
-		);
-		$configGetter->init();
-
-		$result = $configGetter->getConfValueBoolean('isStaticTemplateLoaded');
-		$configGetter->__destruct();
-
-		// Only bother to check the existence of records on this page if there
-		// is *no* static template.
-		if (!$result) {
-			$dbResult = $GLOBALS['TYPO3_DB']->sql_query(
-				'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_SEMINARS
-					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-					.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_ATTENDANCES
-					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-					.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_ORGANIZERS
-					.' WHERE deleted=0 AND pid='.$this->id.') UNION '
-					.'(SELECT COUNT(*) AS num FROM '.SEMINARS_TABLE_SPEAKERS
-					.' WHERE deleted=0 AND pid='.$this->id.')'
-			);
-			if ($dbResult) {
-				$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				$result = ($dbResultRow['num'] > 0);
-			}
-		}
-
-		return $result;
+	private function hasStaticTemplate() {
+		return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->getAsBoolean('isStaticTemplateLoaded');
 	}
 }
 

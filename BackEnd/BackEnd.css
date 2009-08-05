@@ -133,3 +133,11 @@ td.cancel_button input {
 	margin-left: 5px;
 	position: absolute;
 }
+
+.errorMessage {
+	border: 2px solid red;
+	padding: 1em;
+	margin: 1em auto;
+	font-weight: bold;
+	width: 60%;
+}

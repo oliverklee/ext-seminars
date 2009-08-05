@@ -1,4 +1,5 @@
 0.8.1 (currently working on)
+- [#3244] Change: Remove the check in the BE module concerning whether there are any records on the page
 - [#2646] Fix: Config check does not complain if loginPID is empty on list view page
 - [#3010] Fix: The event type drop-down has two empty options
 - [#3257] Fix: The relation place -> country should use not use the UID, but the alpha2 code
