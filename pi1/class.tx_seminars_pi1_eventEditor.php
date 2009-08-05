@@ -1069,10 +1069,15 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$markerPrefix = 'publish_event';
 
-		$beginDate = strftime(
-			$this->getConfValueString('dateFormatYMD'),
-			$event->getBeginDateAsUnixTimeStamp()
-		);
+		if ($event->hasBeginDate()) {
+			$beginDate = strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$event->getBeginDateAsUnixTimeStamp()
+			);
+		} else {
+			$beginDate = '';
+		}
+
 		$this->setMarker('title', $event->getTitle(), $markerPrefix);
 		$this->setOrDeleteMarkerIfNotEmpty(
 			'date', $beginDate, $markerPrefix, 'wrapper_publish_event'

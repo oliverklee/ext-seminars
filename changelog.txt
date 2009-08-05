@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3260] Fix: When sending the publication mail for an event without date, 01.01.1970 is shown as date.
 - [#3010] Fix: The event type drop-down has two empty options
 - [#3094] Feature: Add a modal editor form for entering new place records
 - [#3234] Change: Remove support for FE editing some aux records

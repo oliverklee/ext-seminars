@@ -1801,6 +1801,36 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_sendEMailToReviewerForEventWithoutDate_DoesNotSendDate() {
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+		$seminarUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->setObjectUid($seminarUid);
+		$formData = $this->fixture->modifyDataToInsert(array());
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			array(
+				'hidden' => 1,
+				'publication_hash' => $formData['publication_hash'],
+				'title' => 'foo event',
+			)
+		);
+
+		$this->fixture->sendEMailToReviewer();
+
+		$this->assertNotContains(
+			'foo event,',
+			base64_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
 	public function test_sendEMailToReviewer_SendsMailWithoutAnyUnreplacedMarkers() {
 		$seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
