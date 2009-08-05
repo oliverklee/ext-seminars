@@ -871,8 +871,13 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			'allowFrontEndEditingOf' . $relatedRecordType, 's_fe_editing'
 		);
 
-		return $isFrontEndEditingAllowed
-			&& ($frontEndUser->getAuxiliaryRecordsPid() > 0);
+		$axiliaryPidFromSetup = $this->getConfValueBoolean(
+			'createAuxiliaryRecordsPID'
+		);
+		$isAnAuxiliaryPidSet = ($frontEndUser->getAuxiliaryRecordsPid() > 0) ||
+			($axiliaryPidFromSetup > 0);
+
+		return $isFrontEndEditingAllowed && $isAnAuxiliaryPidSet;
 	}
 
 	/**
@@ -1133,6 +1138,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @return array calls to be executed on the client
 	 */
 	public static function createNewPlace(tx_ameosformidable $formidable) {
+		$GLOBALS['TSFE']->tmpl->start(
+			t3lib_div::makeInstance('t3lib_pageSelect')->getRootLine(
+				$GLOBALS['TSFE']->id
+			)
+		);
+
 		$formData = $formidable->oMajixEvent->getParams();
 		$validationErrors = array();
 		if (trim($formData['newPlace_title']) == '') {
@@ -1155,7 +1166,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$owner = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-		$pageUid = $owner->getAuxiliaryRecordsPid();
+		$ownerPageUid = $owner->getAuxiliaryRecordsPid();
+
+		$pageUid = ($ownerPageUid > 0)
+			? $ownerPageUid
+			: tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+				->getAsInteger('createAuxiliaryRecordsPID');
 
 		$countryUid = intval($formData['newPlace_country']);
 		if ($countryUid > 0) {

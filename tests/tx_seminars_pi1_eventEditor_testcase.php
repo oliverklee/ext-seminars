@@ -1495,6 +1495,26 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidSetInSetupButNotUsergroupReturnsTrue() {
+		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
+
+		$this->fixture->setConfigurationValue(
+			'allowFrontEndEditingOfTest', true
+		);
+		$this->fixture->setConfigurationValue(
+			'createAuxiliaryRecordsPID', 42
+		);
+
+		$this->assertTrue(
+			$this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+				array('relatedRecordType' => 'Test')
+			)
+		);
+	}
+
 
 	/////////////////////////////////////////
 	// Tests concerning validateStringField

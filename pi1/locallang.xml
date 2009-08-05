@@ -90,6 +90,7 @@
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user group that is allowed to enter and edit events</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
 			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
+			<label index="seminars.pi_flexform.createAuxiliaryRecordsPID">Sysfolder to store FE-created auxiliary records in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
 			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Fields to display in the front-end editor</label>
@@ -681,6 +682,7 @@
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE-User-Gruppe, die Veranstaltungen eingeben und bearbeiten darf</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Seite mit dem Plugin zum Bearbeiten von Veranstaltungen</label>
 			<label index="seminars.pi_flexform.createEventsPID">SysFolder, in dem die Veranstaltungsdatensätze gespeichert werden</label>
+			<label index="seminars.pi_flexform.createAuxiliaryRecordsPID">SysFolder, in dem die im FE-Editor erstellten Hilfsdaten gespeichert werden</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Seite, auf die nach dem Speichern einer Veranstaltung im Front-end umgeleitet wird</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">Liste erlaubter Dateiendungen für Front-end-Bearbeitung</label>
 			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Felder im Front-end-Editor anzeigen:</label>
@@ -2173,6 +2175,7 @@
 			<label index="seminars.pi_flexform.eventEditorFeGroupID" type="integer">6056414</label>
 			<label index="seminars.pi_flexform.eventEditorPID" type="integer">236783633</label>
 			<label index="seminars.pi_flexform.createEventsPID" type="integer">130277073</label>
+			<label index="seminars.pi_flexform.createAuxiliaryRecordsPID" type="integer">141830167</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID" type="integer">107570988</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload" type="integer">98984260</label>
 			<label index="seminars.pi_flexform.displayFrontEndEditorFields" type="integer">170529509</label>
@@ -3440,6 +3443,7 @@
 			<label index="seminars.pi_flexform.eventEditorFeGroupID">FE user group that is allowed to enter and edit events</label>
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
 			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
+			<label index="seminars.pi_flexform.createAuxiliaryRecordsPID">Sysfolder to store FE-created auxiliary records in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
 			<label index="seminars.pi_flexform.allowedExtensionsForUpload">List of allowed file extensions for the upload</label>
 			<label index="seminars.pi_flexform.displayFrontEndEditorFields">Fields to display in the front-end editor</label>
