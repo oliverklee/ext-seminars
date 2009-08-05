@@ -248,6 +248,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkDetailPid();
 		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
 			$this->checkRegisterPid();
+			$this->checkLoginPid();
 		}
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
