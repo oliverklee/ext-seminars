@@ -554,9 +554,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$formData['crdate'] = $GLOBALS['SIM_EXEC_TIME'];
 		$formData['owner_feuser'] = $this->getFeUserUid();
-		$formData['pid'] = $this->getConfValueInteger(
-			'createEventsPID', 's_fe_editing'
-		);
+		$eventPid = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(
+			'tx_seminars_Mapper_FrontEndUser')->getEventRecordsPid();
+		$formData['pid'] = ($eventPid > 0)
+			? $eventPid
+			: $this->getConfValueInteger('createEventsPID', 's_fe_editing');
 	}
 
 	/**
@@ -568,8 +570,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *              be empty
 	 */
 	private function checkPublishSettings(array &$formData) {
-		$publishSetting	= tx_oelib_FrontEndLoginManager::getLoggedInUser(
-			'tx_seminars_Mapper_FrontEndUser')->getPublishSetting();
+		$publishSetting	= tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')
+				->getPublishSetting();
 		$eventUid = $this->getObjectUid();
 		$isNew = ($eventUid == 0);
 

@@ -20,6 +20,18 @@ t3lib_extMgm::addTCAcolumns(
 				),
 			),
 		),
+		'tx_seminars_events_pid' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_events_pid',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'pages',
+				'size' => '1',
+				'minitems' => '0',
+				'maxitems' => '1',
+			),
+		),
 		'tx_seminars_auxiliary_records_pid' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_auxiliary_records_pid',
@@ -51,7 +63,7 @@ t3lib_extMgm::addTCAcolumns(
 t3lib_extMgm::addToAllTCAtypes(
 	'fe_groups',
 	'--div--;LLL:EXT:seminars/locallang_db.xml:fe_groups.tab_event_management,' .
-		'tx_seminars_publish_events;;;;1-1-1,tx_seminars_auxiliary_records_pid,'.
-		'tx_seminars_reviewer'
+		'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
+		'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer'
 );
 ?>

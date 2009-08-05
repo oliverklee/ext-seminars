@@ -101,6 +101,26 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	public function getReviewer() {
 		return $this->getAsModel('tx_seminars_reviewer');
 	}
+
+	/**
+	 * Checks whether this user group has a storage PID for event records set.
+	 *
+	 * @return boolean true if this user group has a event storage PID, false
+	 *                  otherwise
+	 */
+	public function hasEventRecordPid() {
+		return $this->hasInteger('tx_seminars_events_pid');
+	}
+
+	/**
+	 * Gets this user group's storage PID for event records.
+	 *
+	 * @return integer the PID for the storage of event records, will be zero
+	 *                 if no PID has been set
+	 */
+	public function getEventRecordPid() {
+		return $this->getAsInteger('tx_seminars_events_pid');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUserGroup.php']) {

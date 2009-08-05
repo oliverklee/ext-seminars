@@ -1302,6 +1302,122 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_modifyDataToInsert_AddsTimestampToFormData() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertTrue(
+			isset($modifiedFormData['tstamp'])
+		);
+	}
+
+	public function test_modifyDataToInsert_setsTimestampToCurrentExecutionTime() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertEquals(
+			$GLOBALS['SIM_EXEC_TIME'],
+			$modifiedFormData['tstamp']
+		);
+	}
+
+	public function test_modifyDataToInsert_AddsCreationDateToFormData() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertTrue(
+			isset($modifiedFormData['crdate'])
+		);
+	}
+
+	public function test_modifyDataToInsert_SetsCreationDateToCurrentExecutionTime() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertEquals(
+			$GLOBALS['SIM_EXEC_TIME'],
+			$modifiedFormData['crdate']
+		);
+	}
+
+	public function test_modifyDataToInsert_AddsOwnerFeUserToFormData() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertTrue(
+			isset($modifiedFormData['owner_feuser'])
+		);
+	}
+
+	public function test_modifyDataToInsert_SetsOwnerFeUserToCurrentlyLoggedInUser() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertEquals(
+			1,
+			$modifiedFormData['owner_feuser']
+		);
+	}
+
+	public function test_modifyDataToInsert_AddsEventsPidToFormData() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertTrue(
+			isset($modifiedFormData['pid'])
+		);
+	}
+
+	public function test_modifyDataToInsertForNoUsergroupSpecificEventPid_SetsPidFromTsSetupAsEventPid() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+		$this->fixture->setConfigurationValue('createEventsPID', 42);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertEquals(
+			42,
+			$modifiedFormData['pid']
+		);
+	}
+
+	public function test_modifyDataToInsertForUsergroupSpecificEventPid_SetsPidFromUsergroupAsEventPid() {
+		$this->fixture->setConfigurationValue('createEventsPID', 42);
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(array('tx_seminars_events_pid' => 21));
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+
+		$user = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUser')->getNewGhost();
+		$user->setData(array('usergroup' => $list));
+		$this->testingFramework->loginFrontEndUser($user->getUid());
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertEquals(
+			21,
+			$modifiedFormData['pid']
+		);
+	}
+
 
 	////////////////////////////////////////////////////////////////
 	// Tests regarding isFrontEndEditingOfRelatedRecordsAllowed().

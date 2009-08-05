@@ -429,5 +429,117 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 			$this->fixture->getReviewerFromGroup()
 		);
 	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning getEventRecordsPid()
+	//////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getEventRecordsPidWithoutUserGroupReturnsZero() {
+		$list = new tx_oelib_List();
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getEventRecordsPid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEventRecordsPidWithUserGroupWithoutPidReturnsZero() {
+		$groupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup'
+		);
+		$userGroup = $groupMapper->getLoadedTestingModel(array());
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getEventRecordsPid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEventRecordsPidWithUserGroupWithPidReturnsPid() {
+		$groupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup'
+		);
+		$userGroup = $groupMapper->getLoadedTestingModel(
+			array('tx_seminars_events_pid' => 42)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getEventRecordsPid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEventRecordsPidWithTwoUserGroupsAndSecondUserGroupHasPidReturnsPid() {
+		$groupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup'
+		);
+		$userGroup = $groupMapper->getLoadedTestingModel(array());
+
+		$userGroup2 = $groupMapper->getLoadedTestingModel(
+			array('tx_seminars_events_pid' => 42)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+		$list->add($userGroup2);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getEventRecordsPid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordPidWithTwoUserGroupsAndBothUserGroupsHavePidReturnsPidOfFirstUserGroup() {
+		$groupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup'
+		);
+		$userGroup = $groupMapper->getLoadedTestingModel(
+			array('tx_seminars_events_pid' => 24)
+		);
+
+		$userGroup2 = $groupMapper->getLoadedTestingModel(
+			array('tx_seminars_events_pid' => 42)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+		$list->add($userGroup2);
+
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			24,
+			$this->fixture->getEventRecordsPid()
+		);
+	}
 }
 ?>

@@ -187,5 +187,44 @@ class tx_seminars_Model_FrontEndUserGroup_testcase extends tx_phpunit_testcase {
 			$this->fixture->getReviewer()
 		);
 	}
+
+
+	//////////////////////////////////////////////////
+	// Tests concerning the event record storage PID
+	//////////////////////////////////////////////////
+
+	public function test_hasEventRecordPidForNoPidSet_ReturnsFalse() {
+		$this->fixture->setData(array());
+
+		$this->assertFalse(
+			$this->fixture->hasEventRecordPid()
+		);
+	}
+
+	public function test_hasEventRecordPidForPidSet_ReturnsTrue() {
+		$this->fixture->setData(array('tx_seminars_events_pid' => 42));
+
+		$this->assertTrue(
+			$this->fixture->hasEventRecordPid()
+		);
+	}
+
+	public function test_getEventRecordPidForNoPidSet_ReturnsZero() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getEventRecordPid()
+		);
+	}
+
+	public function test_getEventRecordPidForPidSet_ReturnsThisPid() {
+		$this->fixture->setData(array('tx_seminars_events_pid' => 42));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getEventRecordPid()
+		);
+	}
 }
 ?>

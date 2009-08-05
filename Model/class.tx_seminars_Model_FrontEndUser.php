@@ -113,6 +113,32 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		return $result;
 	}
+
+	/**
+	 * Returns the PID where to store the event records for this user.
+	 *
+	 * This will return the first PID found for events in this user's groups.
+	 *
+	 * @return integer the PID for the event records to store, will be 0 if no
+	 *                 event record PID has been set in any of this user's
+	 *                 groups
+	 */
+	public function getEventRecordsPid() {
+		if ($this->getUserGroups()->isEmpty()) {
+			return 0;
+		}
+
+		$eventRecordPid = 0;
+
+		foreach ($this->getUserGroups() as $userGroup) {
+			if ($userGroup->hasEventRecordPid()) {
+				$eventRecordPid = $userGroup->getEventRecordPid();
+				break;
+			}
+		}
+
+		return $eventRecordPid;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUser.php']) {
