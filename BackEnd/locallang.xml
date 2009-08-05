@@ -55,6 +55,8 @@ the event to which you are registered is confirmed now.</label>
 			<label index="cancelMailForm_prefillField_messageBody">Dear %s,
 
 the event you're registered for has been canceled.</label>
+			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
+			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Arrangementer</label>
@@ -127,6 +129,8 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun zugesagt.</label>
 			<label index="cancelMailForm_prefillField_messageBody">Sehr geehrte/r %s,
 
 die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
+			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysFolder im Seitenbaum aus.</label>
+			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische seminars-template im TS-Setup dieses SysFolders ein.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Evenementen</label>
@@ -269,6 +273,8 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="cancelMailForm_sendButton" type="integer">125778442</label>
 			<label index="cancelMailForm_prefillField_subject" type="integer">175603821</label>
 			<label index="cancelMailForm_prefillField_messageBody" type="integer">240814090</label>
+			<label index="message_noPageTypeSelected" type="integer">217321592</label>
+			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -415,6 +421,8 @@ the event to which you are registered is confirmed now.</label>
 			<label index="cancelMailForm_prefillField_messageBody">Dear %s,
 
 the event you're registered for has been canceled.</label>
+			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
+			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>
