@@ -443,7 +443,7 @@ plugin.tx_seminars_pi1 {
 	createEventsPID =
 
 	# PID of the sysfolder where FE-created auxiliary records will be stored
-	createAuxiliaryRecordsPID = 
+	createAuxiliaryRecordsPID =
 
 	# PID of the page that will be shown when an event has been successfully entered on the FE
 	eventSuccessfullySavedPID =
