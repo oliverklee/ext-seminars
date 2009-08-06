@@ -1485,6 +1485,56 @@ plugin.tx_seminars_pi1 {
 							10.value = Checkboxes
 						}
 					}
+					onclick {
+						runat = ajax
+						userobj.php (
+							$this->oRenderer->_setDisplayLabels(true);
+							$result = $this->aORenderlets['newCheckboxModalBox']->majixShowFreshBox();
+							$this->oRenderer->_setDisplayLabels(false);
+							return $result;
+						)
+					}
+				}
+
+				newCheckboxModalBox = renderlet:MODALBOX
+				newCheckboxModalBox {
+					name = newCheckboxModalBox
+					childs {
+						newCheckbox_title = renderlet:TEXT
+						newCheckbox_title {
+							name = newCheckbox_title
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_checkboxes.title
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newCheckbox_cancelButton = renderlet:BUTTON
+						newCheckbox_cancelButton {
+							name = newCheckbox_cancelButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_cancel
+							wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+							onclick {
+								runat = client
+								userobj.php (
+									return $this->aORenderlets['newCheckboxModalBox']->majixCloseBox();
+								)
+							}
+						}
+
+						newCheckbox_saveButton = renderlet:BUTTON
+						newCheckbox_saveButton {
+							name = newCheckbox_saveButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_save
+							wrap = |</div>
+							onclick {
+								runat = ajax
+								params = newCheckbox_title
+								userobj.php (
+									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+									return tx_seminars_pi1_eventEditor::createNewCheckbox($this);
+								)
+							}
+						}
+					}
 				}
 
 				payment_methods = renderlet:CHECKBOX

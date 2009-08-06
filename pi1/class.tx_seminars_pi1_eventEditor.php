@@ -537,6 +537,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				'description', 'skills', 'notes', 'address', 'phone_work',
 				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period'
 			),
+			'newCheckbox_' => array('title'),
 		);
 
 		foreach ($fieldsToUnset as $prefix => $keys) {
@@ -1318,7 +1319,8 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			)
 		));
 		$speaker->markAsDirty();
-		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')->save($speaker);
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
+			->save($speaker);
 
 		return array(
 			$formidable->aORenderlets['newSpeakerModalBox']->majixCloseBox(),
@@ -1348,6 +1350,72 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		if (trim($formData['title']) == '') {
 			$validationErrors[] = $formidable->getLLLabel(
 				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyName'
+			);
+		}
+
+		return $validationErrors;
+	}
+
+	/**
+	 * Creates a new checkbox record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function createNewCheckbox(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+		$validationErrors = self::validateCheckbox(
+			$formidable, array('title' => $formData['newCheckbox_title'])
+		);
+		if (!empty($validationErrors)) {
+			return array(
+				$formidable->majixExecJs(
+					'alert("' . implode('\n', $validationErrors) . '");'
+				),
+			);
+		};
+
+		$checkbox = tx_oelib_ObjectFactory::make('tx_seminars_Model_Checkbox');
+		$checkbox->setData(array_merge(
+			self::createBasicAuxiliaryData(),
+			array('title' => trim(strip_tags($formData['newCheckbox_title'])))
+		));
+		$checkbox->markAsDirty();
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox')
+			->save($checkbox);
+
+		return array(
+			$formidable->aORenderlets['newCheckboxModalBox']->majixCloseBox(),
+			$formidable->majixExecJs(
+				'appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
+					addcslashes($checkbox->getTitle(), '"\\') . '")'
+			),
+		);
+	}
+
+	/**
+	 * Validates the entered data for a checkbox.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 * @param array $formData
+	 *        the entered form data, the key must be stripped of the
+	 *        "newCheckbox_"/"editCheckbox_" prefix
+	 *
+	 * @return array the error messages, will be empty if there are no
+	 *         validation errors
+	 */
+	private static function validateCheckbox(
+		tx_ameosformidable $formidable, array $formData
+	) {
+		$validationErrors = array();
+		if (trim($formData['title']) == '') {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
 			);
 		}
 

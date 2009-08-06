@@ -181,7 +181,7 @@ function getNumberOfNeededNameFields() {
  * Appends an auxiliary record as a checkbox so that it is available for
  * selection in the FE editor.
  *
- * @param integer uid the UID of the record to add, must be >= 0
+ * @param integer uid the UID of the record to add, must be > 0
  * @param string title the title of the record, must not be empty
  * @param string htmlName
  *        the relevant part of the IDs and names for the selection elements,
@@ -213,7 +213,7 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName) {
 /**
  * Appends a place so that it is available for selection in the FE editor.
  *
- * @param integer uid the UID of the place to add, must be >= 0
+ * @param integer uid the UID of the place to add, must be > 0
  * @param string title the title of the place, must not be empty
  */
 function appendPlaceInEditor(uid, title) {
@@ -223,7 +223,7 @@ function appendPlaceInEditor(uid, title) {
 /**
  * Appends a speaker so that it is available for selection in the FE editor.
  *
- * @param integer uid the UID of the speaker to add, must be >= 0
+ * @param integer uid the UID of the speaker to add, must be > 0
  * @param string title the name of the speaker, must not be empty
  */
 function appendSpeakerInEditor(uid, title) {
@@ -233,3 +233,12 @@ function appendSpeakerInEditor(uid, title) {
 	appendAuxiliaryRecordInEditor(uid, title, "tutors");
 }
 
+/**
+ * Appends a checkbox so that it is available for selection in the FE editor.
+ *
+ * @param integer uid the UID of the checkbox to add, must be > 0
+ * @param string title the title of the checkbox, must not be empty
+ */
+function appendCheckboxInEditor(uid, title) {
+	appendAuxiliaryRecordInEditor(uid, title, "checkboxes");
+}
