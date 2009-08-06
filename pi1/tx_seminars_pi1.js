@@ -242,3 +242,13 @@ function appendSpeakerInEditor(uid, title) {
 function appendCheckboxInEditor(uid, title) {
 	appendAuxiliaryRecordInEditor(uid, title, "checkboxes");
 }
+
+/**
+ * Appends a target group so that it is available for selection in the FE editor.
+ *
+ * @param integer uid the UID of the target group to add, must be > 0
+ * @param string title the title of the target group, must not be empty
+ */
+function appendTargetGroupInEditor(uid, title) {
+	appendAuxiliaryRecordInEditor(uid, title, "target_groups");
+}

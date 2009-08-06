@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3233] Feature: Add a modal editor for target groups
 - [#3232] Feature: Add a modal editor for registration checkboxes
 - [#3230] Feature: Add a modal editor for speakers
 - [#3274] Fix: Front end editor crashes

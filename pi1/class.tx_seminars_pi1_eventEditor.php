@@ -538,6 +538,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period'
 			),
 			'newCheckbox_' => array('title'),
+			'newTargetGroup_' => array('title'),
 		);
 
 		foreach ($fieldsToUnset as $prefix => $keys) {
@@ -1410,6 +1411,73 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *         validation errors
 	 */
 	private static function validateCheckbox(
+		tx_ameosformidable $formidable, array $formData
+	) {
+		$validationErrors = array();
+		if (trim($formData['title']) == '') {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
+			);
+		}
+
+		return $validationErrors;
+	}
+
+	/**
+	 * Creates a new target group record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function createNewTargetGroup(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+		$validationErrors = self::validateTargetGroup(
+			$formidable, array('title' => $formData['newTargetGroup_title'])
+		);
+		if (!empty($validationErrors)) {
+			return array(
+				$formidable->majixExecJs(
+					'alert("' . implode('\n', $validationErrors) . '");'
+				),
+			);
+		};
+
+		$targetGroup
+			= tx_oelib_ObjectFactory::make('tx_seminars_Model_TargetGroup');
+		$targetGroup->setData(array_merge(
+			self::createBasicAuxiliaryData(),
+			array('title' => trim(strip_tags($formData['newTargetGroup_title'])))
+		));
+		$targetGroup->markAsDirty();
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup')
+			->save($targetGroup);
+
+		return array(
+			$formidable->aORenderlets['newTargetGroupModalBox']->majixCloseBox(),
+			$formidable->majixExecJs(
+				'appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
+					addcslashes($targetGroup->getTitle(), '"\\') . '")'
+			),
+		);
+	}
+
+	/**
+	 * Validates the entered data for a target group.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 * @param array $formData
+	 *        the entered form data, the key must be stripped of the
+	 *        "newTargetGroup_"/"editTargetGroup_" prefix
+	 *
+	 * @return array the error messages, will be empty if there are no
+	 *         validation errors
+	 */
+	private static function validateTargetGroup(
 		tx_ameosformidable $formidable, array $formData
 	) {
 		$validationErrors = array();
