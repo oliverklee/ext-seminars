@@ -210,6 +210,24 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->set('owner', $frontEndUser);
 	}
+
+	/**
+	 * Returns our notes.
+	 *
+	 * @return string our notes, may be empty
+	 */
+	public function getNotes() {
+		return $this->getAsString('notes');
+	}
+
+	/**
+	 * Sets our notes.
+	 *
+	 * @param string $notes our notes to set, might be empty
+	 */
+	public function setNotes($notes) {
+		$this->setAsString('notes', $notes);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_Place.php']) {

@@ -393,5 +393,46 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasDirections()
 		);
 	}
+
+
+	//////////////////////////////
+	// Tests regarding the notes
+	//////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getNotesWithoutNotesReturnsAnEmptyString() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNotesWithNonEmptyNotesReturnsNotes() {
+		$this->fixture->setData(array('notes' => 'Nothing of interest.'));
+
+		$this->assertEquals(
+			'Nothing of interest.',
+			$this->fixture->getNotes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setNotesSetsNotes() {
+		$this->fixture->setNotes('Nothing of interest.');
+
+		$this->assertEquals(
+			'Nothing of interest.',
+			$this->fixture->getNotes()
+		);
+	}
 }
 ?>
