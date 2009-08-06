@@ -975,7 +975,7 @@ plugin.tx_seminars_pi1 {
 							onclick {
 								runat = client
 								userobj.php (
-									return array($this->aORenderlets['newPlaceModalBox']->majixCloseBox());
+									return $this->aORenderlets['newPlaceModalBox']->majixCloseBox();
 								)
 							}
 						}
@@ -1237,7 +1237,7 @@ plugin.tx_seminars_pi1 {
 							onclick {
 								runat = client
 								userobj.php (
-									return array($this->aORenderlets['newSpeakerModalBox']->majixCloseBox());
+									return $this->aORenderlets['newSpeakerModalBox']->majixCloseBox();
 								)
 							}
 						}

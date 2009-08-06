@@ -526,32 +526,24 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @param array form data, will be modified, must not be empty
 	 */
 	private function purgeNonSeminarsFields(array &$formData) {
-		unset(
-			$formData['proceed_file_upload'],
-			$formData['delete_attached_files'],
-			$formData['newPlace_title'],
-			$formData['newPlace_address'],
-			$formData['newPlace_city'],
-			$formData['newPlace_country'],
-			$formData['newPlace_homepage'],
-			$formData['newPlace_directions'],
-			$formData['newPlace_notes'],
-
-			$formData['newSpeaker_title'],
-			$formData['newSpeaker_gender'],
-			$formData['newSpeaker_organization'],
-			$formData['newSpeaker_homepage'],
-			$formData['newSpeaker_description'],
-			$formData['newSpeaker_skills'],
-			$formData['newSpeaker_notes'],
-			$formData['newSpeaker_address'],
-			$formData['newSpeaker_phone_work'],
-			$formData['newSpeaker_phone_home'],
-			$formData['newSpeaker_phone_mobile'],
-			$formData['newSpeaker_fax'],
-			$formData['newSpeaker_email'],
-			$formData['newSpeaker_cancelation_period']
+		$fieldsToUnset = array(
+			'' => array('proceed_file_upload', 'delete_attached_files'),
+			'newPlace_' => array(
+				'title', 'address', 'city', 'country', 'homepage', 'directions',
+				'notes'
+			),
+			'newSpeaker_' => array(
+				'title', 'gender', 'organization', 'homepage',
+				'description', 'skills', 'notes', 'address', 'phone_work',
+				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period'
+			),
 		);
+
+		foreach ($fieldsToUnset as $prefix => $keys) {
+			foreach ($keys as $key) {
+				unset($formData[$prefix . $key]);
+			}
+		}
 	}
 
 	/**
