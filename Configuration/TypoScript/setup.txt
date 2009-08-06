@@ -1093,6 +1093,15 @@ plugin.tx_seminars_pi1 {
 							10.value = Speakers
 						}
 					}
+					onclick {
+						runat = ajax
+						userobj.php (
+							$this->oRenderer->_setDisplayLabels(true);
+							$result = $this->aORenderlets['newSpeakerModalBox']->majixShowFreshBox();
+							$this->oRenderer->_setDisplayLabels(false);
+							return $result;
+						)
+					}
 				}
 
 				newLeaderButton < .newSpeakerButton
@@ -1103,6 +1112,152 @@ plugin.tx_seminars_pi1 {
 
 				newTutorButton < .newSpeakerButton
 				newTutorButton.name = newTutorButton
+
+				newSpeakerModalBox = renderlet:MODALBOX
+				newSpeakerModalBox {
+					name = newSpeakerModalBox
+					childs {
+						newSpeaker_title = renderlet:TEXT
+						newSpeaker_title {
+							name = newSpeaker_title
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.title
+							wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_gender = renderlet:LISTBOX
+						newSpeaker_gender {
+							name = newSpeaker_gender
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+							data {
+								items {
+									10.caption = &nbsp;
+									10.value = 0
+									20.caption = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_male
+									20.value = 1
+									30.caption = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_female
+									30.value = 2
+								}
+							}
+						}
+
+						newSpeaker_organization = renderlet:TEXT
+						newSpeaker_organization {
+							name = newSpeaker_organization
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.organization
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_homepage = renderlet:TEXT
+						newSpeaker_homepage {
+							name = newSpeaker_homepage
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.homepage
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_description = renderlet:TEXTAREA
+						newSpeaker_description {
+							name = newSpeaker_description
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.description
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_skills = renderlet:CHECKBOX
+						newSpeaker_skills {
+							name = newSpeaker_skills
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.skills
+							wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
+							data.userobj.php (
+								require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+								return tx_seminars_pi1_eventEditor::populateListSkills();
+							)
+						}
+
+						newSpeaker_notes = renderlet:TEXTAREA
+						newSpeaker_notes {
+							name = newSpeaker_notes
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.notes
+							wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_address = renderlet:TEXTAREA
+						newSpeaker_address {
+							name = newSpeaker_address
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.address
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_phone_work = renderlet:TEXT
+						newSpeaker_phone_work {
+							name = newSpeaker_phone_work
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.phone_work
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_phone_home = renderlet:TEXT
+						newSpeaker_phone_home {
+							name = newSpeaker_phone_home
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.phone_home
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_phone_mobile = renderlet:TEXT
+						newSpeaker_phone_mobile {
+							name = newSpeaker_phone_mobile
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.phone_mobile
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_fax = renderlet:TEXT
+						newSpeaker_fax {
+							name = newSpeaker_fax
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.fax
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_email = renderlet:TEXT
+						newSpeaker_email {
+							name = newSpeaker_email
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.email
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newSpeaker_cancelation_period = renderlet:TEXT
+						newSpeaker_cancelation_period {
+							name = newSpeaker_cancelation_period
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.cancelation_period
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
+						}
+
+						newSpeaker_cancelButton = renderlet:BUTTON
+						newSpeaker_cancelButton {
+							name = newSpeaker_cancelButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_cancel
+							wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+							onclick {
+								runat = client
+								userobj.php (
+									return array($this->aORenderlets['newSpeakerModalBox']->majixCloseBox());
+								)
+							}
+						}
+
+						newSpeaker_saveButton = renderlet:BUTTON
+						newSpeaker_saveButton {
+							name = newSpeaker_saveButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_save
+							wrap = |</div>
+							onclick {
+								runat = ajax
+								params = newSpeaker_title, newSpeaker_gender, newSpeaker_organization, newSpeaker_homepage, newSpeaker_description, newSpeaker_skills, newSpeaker_notes, newSpeaker_address, newSpeaker_phone_work, newSpeaker_phone_home, newSpeaker_phone_mobile, newSpeaker_fax, newSpeaker_email, newSpeaker_cancelation_period
+								userobj.php (
+									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+									return tx_seminars_pi1_eventEditor::createNewSpeaker($this);
+								)
+							}
+						}
+					}
+				}
 
 				partners = renderlet:CHECKBOX
 				partners {

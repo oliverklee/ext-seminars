@@ -521,8 +521,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	}
 
 	/**
-	 * Removes the form data elements "proceed_file_upload" and
-	 * "delete_attached_files" as they are no fields in the seminars table.
+	 * Removes all form data elements that are no fields in the seminars table.
 	 *
 	 * @param array form data, will be modified, must not be empty
 	 */
@@ -536,7 +535,22 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$formData['newPlace_country'],
 			$formData['newPlace_homepage'],
 			$formData['newPlace_directions'],
-			$formData['newPlace_notes']
+			$formData['newPlace_notes'],
+
+			$formData['newSpeaker_title'],
+			$formData['newSpeaker_gender'],
+			$formData['newSpeaker_organization'],
+			$formData['newSpeaker_homepage'],
+			$formData['newSpeaker_description'],
+			$formData['newSpeaker_skills'],
+			$formData['newSpeaker_notes'],
+			$formData['newSpeaker_address'],
+			$formData['newSpeaker_phone_work'],
+			$formData['newSpeaker_phone_home'],
+			$formData['newSpeaker_phone_mobile'],
+			$formData['newSpeaker_fax'],
+			$formData['newSpeaker_email'],
+			$formData['newSpeaker_cancelation_period']
 		);
 	}
 
@@ -1141,24 +1155,13 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @return array calls to be executed on the client
 	 */
 	public static function createNewPlace(tx_ameosformidable $formidable) {
-		$GLOBALS['TSFE']->tmpl->start(
-			t3lib_div::makeInstance('t3lib_pageSelect')->getRootLine(
-				$GLOBALS['TSFE']->id
+		$formData = $formidable->oMajixEvent->getParams();
+		$validationErrors = self::validatePlace(
+			$formidable, array(
+				'title' => $formData['newPlace_title'],
+				'city' => $formData['newPlace_city'],
 			)
 		);
-
-		$formData = $formidable->oMajixEvent->getParams();
-		$validationErrors = array();
-		if (trim($formData['newPlace_title']) == '') {
-			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
-			);
-		}
-		if (trim($formData['newPlace_city']) == '') {
-			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyCity'
-			);
-		}
 		if (!empty($validationErrors)) {
 			return array(
 				$formidable->majixExecJs(
@@ -1166,15 +1169,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				),
 			);
 		};
-
-		$owner = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-		$ownerPageUid = $owner->getAuxiliaryRecordsPid();
-
-		$pageUid = ($ownerPageUid > 0)
-			? $ownerPageUid
-			: tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-				->getAsInteger('createAuxiliaryRecordsPID');
 
 		$countryUid = intval($formData['newPlace_country']);
 		if ($countryUid > 0) {
@@ -1190,16 +1184,17 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		$place = tx_oelib_ObjectFactory::make('tx_seminars_Model_Place');
-		$place->setData(array(
-			'owner' => $owner,
-			'pid' => $pageUid,
-			'title' => strip_tags($formData['newPlace_title']),
-			'address' => strip_tags($formData['newPlace_address']),
-			'city' => strip_tags($formData['newPlace_city']),
-			'country' => $countryCode,
-			'homepage' => strip_tags($formData['newPlace_homepage']),
-			'directions' => $formData['newPlace_directions'],
-			'notes' => strip_tags($formData['newPlace_notes']),
+		$place->setData(array_merge(
+			self::createBasicAuxiliaryData(),
+			array(
+				'title' => trim(strip_tags($formData['newPlace_title'])),
+				'address' => trim(strip_tags($formData['newPlace_address'])),
+				'city' => trim(strip_tags($formData['newPlace_city'])),
+				'country' => $countryCode,
+				'homepage' => trim(strip_tags($formData['newPlace_homepage'])),
+				'directions' => trim($formData['newPlace_directions']),
+				'notes' => trim(strip_tags($formData['newPlace_notes']))
+			)
 		));
 		$place->markAsDirty();
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place')->save($place);
@@ -1214,11 +1209,164 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	}
 
 	/**
+	 * Validates the entered data for a place.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 * @param array $formData
+	 *        the entered form data, the key must be stripped of the
+	 *        "newPlace_"/"editPlace_" prefix
+	 *
+	 * @return array the error messages, will be empty if there are no
+	 *         validation errors
+	 */
+	private static function validatePlace(
+		tx_ameosformidable $formidable, array $formData
+	) {
+		$validationErrors = array();
+		if (trim($formData['title']) == '') {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
+			);
+		}
+		if (trim($formData['city']) == '') {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyCity'
+			);
+		}
+
+		return $validationErrors;
+	}
+
+	/**
+	 * Creates the basic data for a FE-entered auxiliary record (owner, PID).
+	 *
+	 * @return array the basic data as an associative array, will not be empty
+	 */
+	private static function createBasicAuxiliaryData() {
+		$GLOBALS['TSFE']->tmpl->start(
+			t3lib_div::makeInstance('t3lib_pageSelect')->getRootLine(
+				$GLOBALS['TSFE']->id
+			)
+		);
+
+		$owner = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$ownerPageUid = $owner->getAuxiliaryRecordsPid();
+
+		$pageUid = ($ownerPageUid > 0)
+			? $ownerPageUid
+			: tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+				->getAsInteger('createAuxiliaryRecordsPID');
+
+		return array(
+			'owner' => $owner,
+			'pid' => $pageUid,
+		);
+	}
+
+	/**
+	 * Creates a new speaker record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function createNewSpeaker(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+		$validationErrors = self::validateSpeaker(
+			$formidable, array('title' => $formData['newSpeaker_title'])
+		);
+		if (!empty($validationErrors)) {
+			return array(
+				$formidable->majixExecJs(
+					'alert("' . implode('\n', $validationErrors) . '");'
+				),
+			);
+		};
+
+		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
+		$skills = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		if (is_array($formData['newSpeaker_skills'])) {
+			foreach ($formData['newSpeaker_skills'] as $rawUid) {
+				$safeUid = intval($rawUid);
+				if ($safeUid > 0) {
+					$skills->add($skillMapper->find($safeUid));
+				}
+			}
+
+		}
+
+		$speaker = tx_oelib_ObjectFactory::make('tx_seminars_Model_Speaker');
+		$speaker->setData(array_merge(
+			self::createBasicAuxiliaryData(),
+			array(
+				'title' => trim(strip_tags($formData['newSpeaker_title'])),
+				'gender' => intval($formData['newSpeaker_gender']),
+				'organization'
+					=> trim(strip_tags($formData['newSpeaker_organization'])),
+				'homepage' => trim(strip_tags($formData['newSpeaker_homepage'])),
+				'description' => trim($formData['newSpeaker_description']),
+				'skills' => $skills,
+				'notes' => trim(strip_tags($formData['newSpeaker_notes'])),
+				'address' => trim(strip_tags($formData['newSpeaker_address'])),
+				'phone_work'
+					=> trim(strip_tags($formData['newSpeaker_phone_work'])),
+				'phone_home'
+					=> trim(strip_tags($formData['newSpeaker_phone_home'])),
+				'phone_mobile'
+					=> trim(strip_tags($formData['newSpeaker_phone_mobile'])),
+				'fax' => trim(strip_tags($formData['newSpeaker_fax'])),
+				'email' => trim(strip_tags($formData['newSpeaker_email'])),
+				'cancelation_period'
+					=> intval($formData['newSpeaker_cancelation_period']),
+			)
+		));
+		$speaker->markAsDirty();
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')->save($speaker);
+
+		return array(
+			$formidable->aORenderlets['newSpeakerModalBox']->majixCloseBox(),
+			$formidable->majixExecJs(
+				'appendSpeakerInEditor(' . $speaker->getUid() . ', "' .
+					addcslashes($speaker->getName(), '"\\') . '")'
+			),
+		);
+	}
+
+	/**
+	 * Validates the entered data for a speaker.
+	 *
+	 * @param tx_ameosformidable $formidable
+	 *        the FORMidable object for the AJAX call
+	 * @param array $formData
+	 *        the entered form data, the key must be stripped of the
+	 *        "newSpeaker_"/"editSpeaker_" prefix
+	 *
+	 * @return array the error messages, will be empty if there are no
+	 *         validation errors
+	 */
+	private static function validateSpeaker(
+		tx_ameosformidable $formidable, array $formData
+	) {
+		$validationErrors = array();
+		if (trim($formData['title']) == '') {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyName'
+			);
+		}
+
+		return $validationErrors;
+	}
+
+	/**
 	 * Provides data items for the list of countries.
 	 *
-	 * @return array $items
-	 *         items as an array with the keys "caption" (for the title) and
-	 *         "value" (for the UID)
+	 * @return array items as an array with the keys "caption" (for the title)
+	 *         and "value" (for the UID)
 	 */
 	public static function populateListCountries() {
 		$result = array();
@@ -1229,6 +1377,27 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$result[] = array(
 				'caption' => $country->getLocalShortName(),
 				'value' => $country->getUid(),
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Provides data items for the list of skills.
+	 *
+	 * @return array items as an array with the keys "caption" (for the title)
+	 *         and "value" (for the UID)
+	 */
+	public static function populateListSkills() {
+		$result = array();
+
+		$skills = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill')
+			->findAll();
+		foreach ($skills as $skill) {
+			$result[] = array(
+				'caption' => $skill->getTitle(),
+				'value' => $skill->getUid(),
 			);
 		}
 

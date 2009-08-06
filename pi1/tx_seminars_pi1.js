@@ -165,7 +165,8 @@ function getNumberOfNeededNameFields() {
 
 	var seats = parseInt(seatsSelector.value);
 
-	var myselfSelector = $("tx_seminars_pi1_registration_editor_registered_themselves");
+	var myselfSelector
+		= $("tx_seminars_pi1_registration_editor_registered_themselves");
 	var selfSeat;
 	if (myselfSelector) {
 		selfSeat = myselfSelector.checked ? 1 : 0;
@@ -177,27 +178,58 @@ function getNumberOfNeededNameFields() {
 }
 
 /**
+ * Appends an auxiliary record as a checkbox so that it is available for
+ * selection in the FE editor.
+ *
+ * @param integer uid the UID of the record to add, must be >= 0
+ * @param string title the title of the record, must not be empty
+ * @param string htmlName
+ *        the relevant part of the IDs and names for the selection elements,
+ *        e.g. "place", "speaker" or "tutor".
+ */
+function appendAuxiliaryRecordInEditor(uid, title, htmlName) {
+	var container = $("tx_seminars_pi1_seminars_" + htmlName);
+	if (!container) {
+		return;
+	}
+	var nextOptionNumber
+		= $$("#tx_seminars_pi1_seminars_" + htmlName + " input").length;
+
+	var id = "tx_seminars_pi1_seminars_" + htmlName + "_" + nextOptionNumber;
+	var input = new Element("input", {
+		"id": id, "type": "checkbox", "value": uid,
+		"name" :
+			"tx_seminars_pi1_seminars[" + htmlName + "][" + nextOptionNumber + "]"
+	});
+	var label = new Element("label", {"for": id});
+	label.appendChild(document.createTextNode(title));
+
+	container.appendChild(new Element("br"));
+	container.appendChild(input);
+	container.appendChild(label);
+}
+
+
+/**
  * Appends a place so that it is available for selection in the FE editor.
  *
  * @param integer uid the UID of the place to add, must be >= 0
  * @param string title the title of the place, must not be empty
  */
 function appendPlaceInEditor(uid, title) {
-	var placesContainer = $("tx_seminars_pi1_seminars_place");
-	if (!placesContainer) {
-		return;
-	}
-	var nextOptionNumber = $$("#tx_seminars_pi1_seminars_place input").length;
-
-	var id = "tx_seminars_pi1_seminars_place_" + nextOptionNumber;
-	var input = new Element("input", {
-		"id": id, "type": "checkbox", "value": uid,
-		"name" : "tx_seminars_pi1_seminars[place][" + nextOptionNumber + "]"
-	});
-	var label = new Element("label", {"for": id});
-	label.appendChild(document.createTextNode(title));
-
-	placesContainer.appendChild(new Element("br"));
-	placesContainer.appendChild(input);
-	placesContainer.appendChild(label);
+	appendAuxiliaryRecordInEditor(uid, title, "place");
 }
+
+/**
+ * Appends a speaker so that it is available for selection in the FE editor.
+ *
+ * @param integer uid the UID of the speaker to add, must be >= 0
+ * @param string title the name of the speaker, must not be empty
+ */
+function appendSpeakerInEditor(uid, title) {
+	appendAuxiliaryRecordInEditor(uid, title, "speakers");
+	appendAuxiliaryRecordInEditor(uid, title, "leaders");
+	appendAuxiliaryRecordInEditor(uid, title, "partners");
+	appendAuxiliaryRecordInEditor(uid, title, "tutors");
+}
+

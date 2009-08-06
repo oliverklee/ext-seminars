@@ -1913,5 +1913,26 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning populateListSkills
+	///////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function populateListSkillsHasSkillFromDatabase() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_skills', array('title' => 'Juggling')
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => 'Juggling', 'value' => $uid),
+				tx_seminars_pi1_eventEditor::populateListSkills()
+			)
+		);
+	}
 }
 ?>

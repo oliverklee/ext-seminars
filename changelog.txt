@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3230] Feature: Add a modal editor for speakers
 - [#3274] Fix: Front end editor crashes
 - [#3244] Change: Remove the check in the BE module concerning whether there are any records on the page
 - [#3268] Fix: The From: for the publishing e-mails is empty

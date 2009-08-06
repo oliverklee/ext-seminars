@@ -295,6 +295,7 @@
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title.</label>
+			<label index="message_emptyName">Please enter a name.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_emptySubtitle">Please enter a subtitle.</label>
 			<label index="message_noCategoryChosen">Please select at least one category.</label>
@@ -888,6 +889,7 @@
 			<label index="message_noRegistrations">Für diese Veranstaltung liegen bisher noch keine Anmeldungen vor.</label>
 			<label index="message_earlybird_price">Preis gültig und buchbar bis %s</label>
 			<label index="message_emptyTitle">Bitte geben Sie einen Titel ein.</label>
+			<label index="message_emptyName">Bitte geben Sie einen Namen an.</label>
 			<label index="message_emptyOrganizer">Bitte wählen Sie mindestens einen Veranstalter aus.</label>
 			<label index="message_emptySubtitle">Bitte geben Sie einen Untertitel ein.</label>
 			<label index="message_noCategoryChosen">Bitte wählen Sie mindestens eine Kategorie aus.</label>
@@ -2352,6 +2354,7 @@
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">174051111</label>
+			<label index="message_emptyName" type="integer">401512</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
 			<label index="message_emptySubtitle" type="integer">99304859</label>
 			<label index="message_noCategoryChosen" type="integer">167200433</label>
@@ -3623,6 +3626,7 @@
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title.</label>
+			<label index="message_emptyName">Please enter a name.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_emptySubtitle">Please enter a subtitle.</label>
 			<label index="message_emptyCity">Please enter a city.</label>

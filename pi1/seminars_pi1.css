@@ -238,7 +238,26 @@
 	display: block;
 }
 
+#tx_ameosformidable_modalboxbox .formidable-checkboxes label {
+	display: inline;
+}
+
+#tx_ameosformidable_modalboxbox .formidable-checkboxes label#tx_seminars_pi1_seminars_newSpeaker_skills_label {
+	display: block;
+}
+
+#tx_ameosformidable_modalboxbox .modalbox-column1 {
+	float: left;
+	width: 400px;
+}
+
+#tx_ameosformidable_modalboxbox .modalbox-column2 {
+	float: right;
+	width: 300px;
+}
+
 #tx_ameosformidable_modalboxbox .modalbox-buttons {
+	clear: both;
 	margin-top: 1em;
 	float: right;
 }
