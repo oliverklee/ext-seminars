@@ -2378,7 +2378,7 @@ plugin.tx_seminars_pi1 {
 					registered_themselves = renderlet:CHECKSINGLE
 					registered_themselves {
 						name = registered_themselves
-						onchange = fixNameFieldsNumber();compileNames();
+						onclick = fixNameFieldsNumber();compileNames();
 						data.defaultvalue = 1
 						process.userobj {
 							extension = this

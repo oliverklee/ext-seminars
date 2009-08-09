@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3290] Fix: Changes to the "myself" checkbox are registered only when the checkbox loses the focus in IE
 - [#3233] Feature: Add a modal editor for target groups
 - [#3232] Feature: Add a modal editor for registration checkboxes
 - [#3230] Feature: Add a modal editor for speakers
