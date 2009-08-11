@@ -304,7 +304,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		) && is_object($formidable);
 
 		foreach ($places as $place) {
-			$frontEndUserIsOwner = ($place->getOwner() == $frontEndUser);
+			$frontEndUserIsOwner = ($place->getOwner() === $frontEndUser);
 
 			// Only shows places which have no owner or where the owner is the
 			// currently logged in front-end user.
