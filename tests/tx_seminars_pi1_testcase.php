@@ -526,6 +526,99 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_OtherDatesListInSingleView_ShowsBookedOutEventsByDefault() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'Test topic',
+			)
+		);
+		$dateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
+			)
+		);
+		$dateUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date 2',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
+				'needs_registration' => 1,
+				'attendees_max' => 5,
+				'offline_attendees' => 5,
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $dateUid1;
+
+		$this->assertContains(
+			'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_OtherDatesListInSingleViewForShowOnlyEventsWithVacanciesSet_HidesBookedOutEvents() {
+		$this->fixture->setConfigurationValue(
+			'showOnlyEventsWithVacancies', true
+		);
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'title' => 'Test topic',
+			)
+		);
+		$dateUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
+			)
+		);
+		$dateUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'title' => 'Test date 2',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
+				'needs_registration' => 1,
+				'attendees_max' => 5,
+				'offline_attendees' => 5,
+			)
+		);
+
+		$this->fixture->piVars['showUid'] = $dateUid1;
+
+		$this->assertNotContains(
+			'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
+			$this->fixture->main('', array())
+		);
+	}
+
 	public function testSingleViewDisplaysAndLinksSpeakersNameButNotCompany() {
 		$this->fixture->setConfigurationValue(
 			'detailPID',
@@ -2018,6 +2111,46 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
+		);
+	}
+
+	public function test_ListView_ShowsBookedOutEventByDefault() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'needs_registration' => 1,
+				'attendees_max' => 5,
+				'offline_attendees' => 5,
+			)
+		);
+
+		$this->assertContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForShowOnlyEventsWithVacanciesSet_HidesBookedOutEvent() {
+		$this->fixture->setConfigurationValue(
+			'showOnlyEventsWithVacancies', true
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'needs_registration' => 1,
+				'attendees_max' => 5,
+				'offline_attendees' => 5,
+			)
+		);
+
+		$this->assertNotContains(
+			'Foo Event',
+			$this->fixture->main('', array())
 		);
 	}
 

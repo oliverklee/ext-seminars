@@ -1721,6 +1721,17 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 		}
 
+		if (($whatToDisplay == 'other_dates')
+			|| ($whatToDisplay == 'seminar_list')
+		) {
+			$hideBookedOutEvents = $this->getConfValueBoolean(
+				'showOnlyEventsWithVacancies', 's_listView'
+			);
+			if ($hideBookedOutEvents) {
+				$builder->limitToEventsWithVacancies();
+			}
+		}
+
 		$pointer = intval($this->piVars['pointer']);
 		$resultsAtATime = t3lib_div::intInRange(
 			$this->internal['results_at_a_time'], 1, 1000
