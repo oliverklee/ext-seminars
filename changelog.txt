@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3303] Fix: The registration cannot be submitted in Safari and Chrome
 - [#3093] Feature: Allow editing of existing place records in the FE editor
 - [#3289] Feature: Limit the list view to events with vacancies
 - [#3288] Feature: Add a flexforms checkbox for the list view to show only events that have vacancies
