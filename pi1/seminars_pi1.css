@@ -197,7 +197,7 @@
 	width: 90%;
 }
 
-.tx-seminars-pi1-event-editor dd.checkboxes input,
+.tx-seminars-pi1-event-editor dd.checkboxes input.tx-seminars-pi1-event-editor-checkbox,
 .tx-seminars-pi1-event-editor span.checkbox input {
 	width: 10%;
 }
@@ -220,6 +220,7 @@
 .tx-seminars-pi1-event-editor .checkboxes {
 	margin: 0 0 10px;
 	line-height: 20px;
+	position: relative;
 }
 
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newSpeakerButton,
@@ -229,6 +230,12 @@
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newTargetGroupButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newPlaceButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newCheckboxButton {
+	width: auto;
+}
+
+.tx-seminars-pi1-event-editor .tx-seminars-pi1-event-editor-edit-button {
+	position: absolute;
+	right: 10%;
 	width: auto;
 }
 

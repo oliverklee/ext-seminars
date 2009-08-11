@@ -598,6 +598,7 @@ plugin.tx_seminars_pi1 {
 				categories {
 					name = categories
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.categories
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListCategories
@@ -866,6 +867,7 @@ plugin.tx_seminars_pi1 {
 				place {
 					name = place
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.place
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListPlaces
@@ -1006,6 +1008,7 @@ plugin.tx_seminars_pi1 {
 				editPlaceButton {
 					name = editPlaceButton
 					label = Edit
+					class = tx-seminars-pi1-event-editor-edit-button
 					onclick {
 						runat = ajax
 						cache = false
@@ -1137,6 +1140,7 @@ plugin.tx_seminars_pi1 {
 				lodgings {
 					name = lodgings
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.lodgings
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListLodgings
@@ -1159,6 +1163,7 @@ plugin.tx_seminars_pi1 {
 				foods {
 					name = foods
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.foods
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListFoods
@@ -1181,6 +1186,7 @@ plugin.tx_seminars_pi1 {
 				speakers {
 					name = speakers
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.speakers
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1284,6 +1290,7 @@ plugin.tx_seminars_pi1 {
 						newSpeaker_skills {
 							name = newSpeaker_skills
 							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.skills
+							class = tx-seminars-pi1-event-editor-checkbox
 							wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
 							data.userobj.php (
 								require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
@@ -1381,6 +1388,7 @@ plugin.tx_seminars_pi1 {
 				partners {
 					name = partners
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.partners
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1403,6 +1411,7 @@ plugin.tx_seminars_pi1 {
 				tutors {
 					name = tutors
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.tutors
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1425,6 +1434,7 @@ plugin.tx_seminars_pi1 {
 				leaders {
 					name = leaders
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.leaders
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1573,6 +1583,7 @@ plugin.tx_seminars_pi1 {
 				checkboxes {
 					name = checkboxes
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.checkboxes
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListCheckboxes
@@ -1659,6 +1670,7 @@ plugin.tx_seminars_pi1 {
 				payment_methods {
 					name = payment_methods
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.payment_methods
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListPaymentMethods
@@ -1681,6 +1693,7 @@ plugin.tx_seminars_pi1 {
 				organizers {
 					name = organizers
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.organizers
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListOrganizers
@@ -1773,6 +1786,7 @@ plugin.tx_seminars_pi1 {
 				target_groups {
 					name = target_groups
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.target_groups
+					class = tx-seminars-pi1-event-editor-checkbox
 					data.userobj {
 						extension = this
 						method = populateListTargetGroups
