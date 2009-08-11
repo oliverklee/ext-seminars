@@ -1582,9 +1582,6 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			'numberOfFirstRegistrationPage'
 		) + $this->currentPageNumber;
 
-		$currentPageNumberForDisplay
-			= min($lastPageNumberForDisplay, $currentPageNumber);
-
 		// Decreases $lastPageNumberForDisplay by one if we only have 2 clicks
 		// to registration.
 		$numberOfClicks = $this->getConfValueInteger(
@@ -1595,6 +1592,9 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		if ($numberOfClicks == 2) {
 			$lastPageNumberForDisplay--;
 		}
+
+		$currentPageNumberForDisplay
+			= min($lastPageNumberForDisplay, $currentPageNumber);
 
 		return sprintf(
 			$this->translate('label_step_counter'),

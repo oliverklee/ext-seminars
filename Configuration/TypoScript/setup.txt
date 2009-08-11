@@ -1870,13 +1870,6 @@ plugin.tx_seminars_pi1 {
 					button_submit {
 						name = button_submit
 						label = ###LABEL_SUBMIT_REGISTRATION###
-						onclick {
-							runat = server
-							submit = full
-							userobj.php (
-								$this->_oParent->currentPageNumber = 2;
-							)
-						}
 					}
 
 					price = renderlet:HIDDEN
