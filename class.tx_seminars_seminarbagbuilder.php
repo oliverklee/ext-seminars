@@ -1112,6 +1112,23 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			SEMINARS_TABLE_SEMINARS . '.begin_date > 0 AND ' .
 			SEMINARS_TABLE_SEMINARS . '.begin_date <= ' . $latestBeginDate;
 	}
+
+	/**
+	 * Limits the bag to events which are not fully-booked yet (or have a queue).
+	 */
+	public function limitToEventsWithVacancies() {
+		$seats = '(SELECT SUM(seats) FROM ' . SEMINARS_TABLE_ATTENDANCES . ' ' .
+			'WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid' .
+			tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) . ')';
+		$hasVacancies = '(attendees_max > (' . $seats . ' + offline_attendees))';
+
+		$this->whereClauseParts['eventsWithVacancies'] =
+			'(needs_registration = 0 OR (needs_registration = 1 AND ' .
+				'(attendees_max = 0 OR queue_size = 1 OR ' .
+					'(attendees_max > 0 AND ' . $hasVacancies . ')' .
+				'))'.
+			')';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

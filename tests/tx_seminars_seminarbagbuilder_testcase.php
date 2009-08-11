@@ -7034,5 +7034,181 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$bag->__destruct();
 	}
+
+
+	////////////////////////////////////////////////
+	// Tests concerning limitToEventsWithVacancies
+	////////////////////////////////////////////////
+
+	public function test_LimitToEventsWithVacancies_ForEventWithNoRegistrationNeeded_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('needs_registration' => 0)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_LimitToEventsWithVacancies_ForEventWithUnlimitedVacancies_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('needs_registration' => 1, 'attendees_max' => 0)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_LimitToEventsWithVacancies_ForEventNoVacanciesButQueue_FindsThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 1,
+				'queue_size' => 1,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $eventUid, 'seats' => 1)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_LimitToEventsWithVacancies_ForEventWithOneVacancy_FindsThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('needs_registration' => 1, 'attendees_max' => 2)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $eventUid, 'seats' => 1)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_LimitToEventsWithVacancies_ForEventWithNoVacancies_DoesNotFindThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('needs_registration' => 1, 'attendees_max' => 1)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $eventUid, 'seats' => 1)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_LimitToEventsWithVacancies_ForEventWithNoVacanciesThroughOfflineRegistrations_DoesNotFindThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 10,
+				'offline_attendees' => 10,
+			)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_LimitToEventsWithVacancies_ForEventWithNoVacanciesThroughRegistrationsWithMultipleSeats_DoesNotFindThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 10,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $eventUid, 'seats' => 10)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_LimitToEventsWithVacancies_ForEventWithNoVacanciesThroughRegularAndOfflineRegistrations_DoesNotFindThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 10,
+				'offline_attendees' => 5,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $eventUid, 'seats' => 5)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
 }
 ?>
