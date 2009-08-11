@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3301] Change: Model_Place::setCountry should also accept null
 - [#3304] Fix: Crash on registration if a place has an invalid country
 - [#3290] Fix: Changes to the "myself" checkbox are registered only when the checkbox loses the focus in IE
 - [#3233] Feature: Add a modal editor for target groups
