@@ -274,14 +274,70 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	/**
 	 * Provides data items for the list of available places.
 	 *
-	 * @param array any pre-filled data (may be empty)
+	 * @param array $items any pre-filled data (may be empty)
+	 * @param array $unused unused
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array $items with additional items from the places table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
-	public function populateListPlaces(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_SITES);
+	public function populateListPlaces(
+		array $items, $unused = null, tx_ameosformidable $formidable = null
+	) {
+		$result = $items;
+
+		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
+		$places = $placeMapper->findAll();
+
+		if (is_object($formidable)) {
+			$editButtonConfiguration =& $formidable->_navConf(
+				$formidable->aORenderlets['editPlaceButton']->sXPath
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
+			array('relatedRecordType' => 'Places')
+		) && is_object($formidable);
+
+		foreach ($places as $place) {
+			$frontEndUserIsOwner = ($place->getOwner() == $frontEndUser);
+
+			// Only shows places which have no owner or where the owner is the
+			// currently logged in front-end user.
+			if ($place->getOwner() && !$frontEndUserIsOwner) {
+				continue;
+			}
+
+			if ($showEditButton && $frontEndUserIsOwner) {
+				$editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
+				$editButtonConfiguration['onclick']['userobj']['php'] = '
+					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+					return tx_seminars_pi1_eventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+					';
+				$editButton = $formidable->_makeRenderlet(
+					$editButtonConfiguration,
+					$formidable->aORenderlets['editPlaceButton']->sXPath
+				);
+				$editButtonHTML = $editButton->_render();
+				$result[] = array(
+					'caption' => $place->getTitle(),
+					'value' => $place->getUid(),
+					'labelcustom' => 'id="tx_seminars_pi1_seminars_place_label_' . $place->getUid() . '"',
+					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+				);
+			} else {
+				$result[] = array(
+					'caption' => $place->getTitle(),
+					'value' => $place->getUid(),
+				);
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -530,12 +586,16 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			'' => array('proceed_file_upload', 'delete_attached_files'),
 			'newPlace_' => array(
 				'title', 'address', 'city', 'country', 'homepage', 'directions',
-				'notes'
+				'notes',
+			),
+			'editPlace_' => array(
+				'title', 'address', 'city', 'country', 'homepage', 'directions',
+				'notes', 'uid',
 			),
 			'newSpeaker_' => array(
 				'title', 'gender', 'organization', 'homepage',
 				'description', 'skills', 'notes', 'address', 'phone_work',
-				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period'
+				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
 			),
 			'newCheckbox_' => array('title'),
 			'newTargetGroup_' => array('title'),
@@ -1164,39 +1224,89 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			);
 		};
 
-		$countryUid = intval($formData['newPlace_country']);
-		if ($countryUid > 0) {
-			try {
-				$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
-					->find($countryUid);
-				$countryCode = $country->getIsoAlpha2Code();
-			} catch (Exception $exception) {
-				$countryCode = '';
-			}
-		} else {
-			$countryCode = '';
-		}
-
 		$place = tx_oelib_ObjectFactory::make('tx_seminars_Model_Place');
-		$place->setData(array_merge(
-			self::createBasicAuxiliaryData(),
-			array(
-				'title' => trim(strip_tags($formData['newPlace_title'])),
-				'address' => trim(strip_tags($formData['newPlace_address'])),
-				'city' => trim(strip_tags($formData['newPlace_city'])),
-				'country' => $countryCode,
-				'homepage' => trim(strip_tags($formData['newPlace_homepage'])),
-				'directions' => trim($formData['newPlace_directions']),
-				'notes' => trim(strip_tags($formData['newPlace_notes']))
-			)
-		));
+		$place->setData(self::createBasicAuxiliaryData());
+		self::setPlaceData($place, 'newPlace_', $formData);
 		$place->markAsDirty();
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place')->save($place);
+
+		$editButtonConfiguration =& $formidable->_navConf(
+			$formidable->aORenderlets['editPlaceButton']->sXPath
+		);
+		$editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
+		$editButtonConfiguration['onclick']['userobj']['php'] = '
+			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+			return tx_seminars_pi1_eventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+			';
+		$editButton = $formidable->_makeRenderlet(
+			$editButtonConfiguration,
+			$formidable->aORenderlets['editPlaceButton']->sXPath
+		);
+		$editButtonHTML = $editButton->_render();
 
 		return array(
 			$formidable->aORenderlets['newPlaceModalBox']->majixCloseBox(),
 			$formidable->majixExecJs(
 				'appendPlaceInEditor(' . $place->getUid() . ', "' .
+					addcslashes($place->getTitle(), '"\\') . '", "' .
+					addcslashes($editButtonHTML['__compiled'], '"\\') . '");'
+			),
+		);
+	}
+
+ 	/**
+	 * Updates an existing place record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function updatePlace(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
+
+		try {
+			$place = $placeMapper->find(intval($formData['editPlace_uid']));
+		} catch (Exception $exception) {
+			return $formidable->majixExecJs(
+				'alert("The place with the given UID does not exist.");'
+			);
+		}
+
+		if ($place->getOwner() != $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this place.");'
+			);
+		}
+
+		$validationErrors = self::validatePlace(
+			$formidable,
+			array(
+				'title' => $formData['editPlace_title'],
+				'city' => $formData['editPlace_city'],
+			)
+		);
+		if (!empty($validationErrors)) {
+			return $formidable->majixExecJs(
+				'alert("' . implode('\n', $validationErrors) . '");'
+			);
+		};
+
+		self::setPlaceData($place, 'editPlace_', $formData);
+		$placeMapper->save($place);
+
+		$htmlId = 'tx_seminars_pi1_seminars_place_label_' . $place->getUid();
+
+		return array(
+			$formidable->aORenderlets['editPlaceModalBox']->majixCloseBox(),
+			$formidable->majixExecJs(
+				'updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
 					addcslashes($place->getTitle(), '"\\') . '")'
 			),
 		);
@@ -1230,6 +1340,106 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		return $validationErrors;
+	}
+
+	/**
+	 * Sets the data of a place model based on the data given in $formData.
+	 *
+	 * @param tx_seminars_Model_Place $place the place model to set the data
+	 * @param string $prefix the prefix of the form fields in $formData
+	 * @param array $formData the form data to use for setting the place data
+	 */
+	private static function setPlaceData(
+		tx_seminars_Model_Place $place, $prefix, array $formData
+	) {
+		$countryUid = intval($formData[$prefix . 'country']);
+		if ($countryUid > 0) {
+			try {
+				$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
+					->find($countryUid);
+			} catch (Exception $exception) {
+				$country = new tx_oelib_Model_Country();
+				$country->setData(array());
+			}
+		} else {
+			$country = new tx_oelib_Model_Country();
+			$country->setData(array());
+		}
+
+		$place->setTitle(trim(strip_tags($formData[$prefix . 'title'])));
+		$place->setAddress(trim(strip_tags($formData[$prefix . 'address'])));
+		$place->setCity(trim(strip_tags($formData[$prefix . 'city'])));
+		$place->setCountry($country);
+		$place->setHomepage(trim(strip_tags($formData[$prefix . 'homepage'])));
+		$place->setDirections(trim($formData[$prefix . 'directions']));
+		$place->setNotes(trim(strip_tags($formData[$prefix . 'notes'])));
+	}
+
+	/**
+	 * Shows a modalbox containing a form for editing an existing place record.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param integer $placeUid the UID of the place to edit, must be > 0
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function showEditPlaceModalBox(
+		tx_ameosformidable $formidable, $placeUid
+	) {
+		if ($placeUid <= 0) {
+			return $formidable->majixExecJs('alert("$placeUid must be >= 0.");');
+		}
+
+		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
+
+		try {
+			$place = $placeMapper->find(intval($placeUid));
+		} catch (tx_oelib_Exception_NotFound $exception) {
+			return $formidable->majixExecJs(
+				'alert("A place with the given UID does not exist.");'
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		if ($place->getOwner() != $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this place.");'
+			);
+		}
+
+		try {
+			$country = $place->getCountry();
+			if ($country) {
+				$countryUid = $country->getUid();
+			} else {
+				$countryUid = 0;
+			}
+		} catch (tx_oelib_Exception_NotFound $exception) {
+			$countryUid = 0;
+		}
+
+		$fields = array(
+			'uid' => $place->getUid(),
+			'title' => $place->getTitle(),
+			'address' => $place->getAddress(),
+			'city' => $place->getCity(),
+			'country' => $countryUid,
+			'homepage' => $place->getHomepage(),
+			'directions' => $place->getDirections(),
+			'notes' => $place->getNotes(),
+		);
+
+		foreach ($fields as $key => $value) {
+			$formidable->aORenderlets['editPlace_' . $key]->setValue($value);
+		}
+
+		$formidable->oRenderer->_setDisplayLabels(true);
+		$result = $formidable->aORenderlets['editPlaceModalBox']->majixShowBox();
+		$formidable->oRenderer->_setDisplayLabels(false);
+
+		return $result;
 	}
 
 	/**

@@ -30,6 +30,7 @@
  *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 
 /**
@@ -178,6 +179,23 @@ function getNumberOfNeededNameFields() {
 }
 
 /**
+ * Updates an auxiliary record after it has been edited in the FE editor.
+ *
+ * @param string htmlId
+ *        the HTML ID of the auxiliary record checkbox label to update, must not
+ *        be empty
+ * @param string title the title of the auxiliary record, must not be empty
+ */
+function updateAuxiliaryRecordInEditor(htmlId, title) {
+	var label = $(htmlId);
+	if (!label) {
+		return;
+	}
+
+	label.innerHTML = title;
+}
+
+/**
  * Appends an auxiliary record as a checkbox so that it is available for
  * selection in the FE editor.
  *
@@ -186,8 +204,10 @@ function getNumberOfNeededNameFields() {
  * @param string htmlName
  *        the relevant part of the IDs and names for the selection elements,
  *        e.g. "place", "speaker" or "tutor".
+ * @param string buttonHtml
+ *        the HTML of the edit button of the record, may be empty
  */
-function appendAuxiliaryRecordInEditor(uid, title, htmlName) {
+function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonHtml) {
 	var container = $("tx_seminars_pi1_seminars_" + htmlName);
 	if (!container) {
 		return;
@@ -201,23 +221,26 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName) {
 		"name" :
 			"tx_seminars_pi1_seminars[" + htmlName + "][" + nextOptionNumber + "]"
 	});
-	var label = new Element("label", {"for": id});
+	var labelId = "tx_seminars_pi1_seminars_" + htmlName + "_label_" + uid;
+	var label = new Element("label", {"for": id, "id": labelId});
 	label.appendChild(document.createTextNode(title));
 
 	container.appendChild(new Element("br"));
 	container.appendChild(input);
 	container.appendChild(label);
+	container.innerHTML = container.innerHTML + buttonHtml;
 }
-
 
 /**
  * Appends a place so that it is available for selection in the FE editor.
  *
  * @param integer uid the UID of the place to add, must be > 0
  * @param string title the title of the place, must not be empty
+ * @param string buttonHtml
+ *        the HTML of the edit button of the place, may be empty
  */
-function appendPlaceInEditor(uid, title) {
-	appendAuxiliaryRecordInEditor(uid, title, "place");
+function appendPlaceInEditor(uid, title, buttonHtml) {
+	appendAuxiliaryRecordInEditor(uid, title, "place", buttonHtml);
 }
 
 /**
@@ -227,10 +250,10 @@ function appendPlaceInEditor(uid, title) {
  * @param string title the name of the speaker, must not be empty
  */
 function appendSpeakerInEditor(uid, title) {
-	appendAuxiliaryRecordInEditor(uid, title, "speakers");
-	appendAuxiliaryRecordInEditor(uid, title, "leaders");
-	appendAuxiliaryRecordInEditor(uid, title, "partners");
-	appendAuxiliaryRecordInEditor(uid, title, "tutors");
+	appendAuxiliaryRecordInEditor(uid, title, "speakers", "");
+	appendAuxiliaryRecordInEditor(uid, title, "leaders", "");
+	appendAuxiliaryRecordInEditor(uid, title, "partners", "");
+	appendAuxiliaryRecordInEditor(uid, title, "tutors", "");
 }
 
 /**
@@ -240,7 +263,7 @@ function appendSpeakerInEditor(uid, title) {
  * @param string title the title of the checkbox, must not be empty
  */
 function appendCheckboxInEditor(uid, title) {
-	appendAuxiliaryRecordInEditor(uid, title, "checkboxes");
+	appendAuxiliaryRecordInEditor(uid, title, "checkboxes", "");
 }
 
 /**
@@ -250,5 +273,5 @@ function appendCheckboxInEditor(uid, title) {
  * @param string title the title of the target group, must not be empty
  */
 function appendTargetGroupInEditor(uid, title) {
-	appendAuxiliaryRecordInEditor(uid, title, "target_groups");
+	appendAuxiliaryRecordInEditor(uid, title, "target_groups", "");
 }
