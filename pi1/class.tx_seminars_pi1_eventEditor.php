@@ -1358,12 +1358,10 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
 					->find($countryUid);
 			} catch (Exception $exception) {
-				$country = new tx_oelib_Model_Country();
-				$country->setData(array());
+				$country = null;
 			}
 		} else {
-			$country = new tx_oelib_Model_Country();
-			$country->setData(array());
+			$country = null;
 		}
 
 		$place->setTitle(trim(strip_tags($formData[$prefix . 'title'])));
