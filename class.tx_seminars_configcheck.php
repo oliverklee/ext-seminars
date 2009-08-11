@@ -218,6 +218,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			$this->checkOwnerPictureMaxWidth();
 		}
 		$this->checkLimitFileDownloadToAttendees();
+		$this->checkShowOnlyEventsWithVacancies();
 	}
 
 	/**
@@ -260,6 +261,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkDisplaySearchFormFields();
 		$this->checkNumberOfYearsInDateFilter();
 		$this->checkLimitFileDownloadToAttendees();
+		$this->checkShowOnlyEventsWithVacancies();
 	}
 
  	/**
@@ -2449,6 +2451,21 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				$this->setErrorMessage($message);
 			}
 		}
+	}
+
+	/**
+	 * Checks the setting of the configuration value showOnlyEventsWithVacancies.
+	 */
+	private function checkShowOnlyEventsWithVacancies() {
+		$this->checkIfBoolean(
+			'showOnlyEventsWithVacancies',
+			true,
+			's_listView',
+			'This value specifies whether only events with vacancies should be ' .
+				'shown in the list view. If this value is not configured ' .
+				'properly, events with no vacancies will be shown in the ' .
+				'list view.'
+		);
 	}
 }
 

@@ -323,6 +323,9 @@ plugin.tx_seminars_pi1 {
 	# empty to have no such filter
 	limitListViewToPlaces =
 
+	# whether to show only events with vacancies on in the list view
+	showOnlyEventsWithVacancies = 0
+
 	# the maximum height of the image of a seminar in the list view
 	seminarImageListViewHeight = 43
 
