@@ -210,6 +210,18 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function getCountryWithInvalidCountryCodeReturnsNull() {
+		$this->fixture->setData(array('country' => '0'));
+
+		$this->assertEquals(
+			null,
+			$this->fixture->getCountry()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getCountryWithCountryReturnsCountryInstance() {
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
 		$this->fixture->setData(array('country' => $country->getIsoAlpha2Code()));
@@ -250,6 +262,17 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	 */
 	public function hasCountryWithoutCountryReturnsFalse() {
 		$this->fixture->setData(array());
+
+		$this->assertFalse(
+			$this->fixture->hasCountry()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasCountryWithInvalidCountryReturnsFalse() {
+		$this->fixture->setData(array('country' => '0'));
 
 		$this->assertFalse(
 			$this->fixture->hasCountry()

@@ -115,8 +115,14 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 			return null;
 		}
 
-		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
-			->findByIsoAlpha2Code($countryCode);
+		try {
+			$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
+				->findByIsoAlpha2Code($countryCode);
+		} catch (tx_oelib_Exception_NotFound $exception) {
+			$country = null;
+		}
+
+		return $country;
 	}
 
 	/**
