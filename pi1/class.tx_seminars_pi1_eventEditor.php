@@ -426,13 +426,72 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * Provides data items for the list of available target groups.
 	 *
 	 * @param array any pre-filled data (may be empty)
+	 * @param array $unused unused
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array $items with additional items from the target groups
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
-	public function populateListTargetGroups(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_TARGET_GROUPS);
+	public function populateListTargetGroups(
+		array $items, $unused = null, tx_ameosformidable $formidable = null
+	) {
+		$result = $items;
+
+		$targetGroupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_TargetGroup'
+		);
+		$targetGroups = $targetGroupMapper->findAll();
+
+		if (is_object($formidable)) {
+			$editButtonConfiguration =& $formidable->_navConf(
+				$formidable->aORenderlets['editTargetGroupButton']->sXPath
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
+			array('relatedRecordType' => 'TargetGroups')
+		) && is_object($formidable);
+
+		foreach ($targetGroups as $targetGroup) {
+			$frontEndUserIsOwner = ($targetGroup->getOwner() === $frontEndUser);
+
+			// Only shows target groups which have no owner or where the owner
+			// is the currently logged in front-end user.
+			if ($targetGroup->getOwner() && !$frontEndUserIsOwner) {
+				continue;
+			}
+
+			if ($showEditButton && $frontEndUserIsOwner) {
+				$editButtonConfiguration['name'] = 'editTargetGroupButton_' .
+					$targetGroup->getUid();
+				$editButtonConfiguration['onclick']['userobj']['php'] = '
+					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+					return tx_seminars_pi1_eventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+					';
+				$editButton = $formidable->_makeRenderlet(
+					$editButtonConfiguration,
+					$formidable->aORenderlets['editTargetGroupButton']->sXPath
+				);
+				$editButtonHTML = $editButton->_render();
+				$result[] = array(
+					'caption' => $targetGroup->getTitle(),
+					'value' => $targetGroup->getUid(),
+					'labelcustom' => 'id="tx_seminars_pi1_seminars_target_group_label_' . $targetGroup->getUid() . '"',
+					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+				);
+			} else {
+				$result[] = array(
+					'caption' => $targetGroup->getTitle(),
+					'value' => $targetGroup->getUid(),
+				);
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -654,8 +713,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
 			),
 			'newCheckbox_' => array('title'),
-			'editChecbox_' => array('title', 'uid'),
+			'editCheckbox_' => array('title', 'uid'),
 			'newTargetGroup_' => array('title'),
+			'editTargetGroup_' => array('title', 'uid'),
 		);
 
 		foreach ($fieldsToUnset as $prefix => $keys) {
@@ -1676,7 +1736,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		);
 	}
 
- 	/**
+	/**
 	 * Updates an existing checkbox record.
 	 *
 	 * This function is intended to be called via an AJAX FORMidable event.
@@ -1844,18 +1904,87 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$targetGroup
 			= tx_oelib_ObjectFactory::make('tx_seminars_Model_TargetGroup');
-		$targetGroup->setData(array_merge(
-			self::createBasicAuxiliaryData(),
-			array('title' => trim(strip_tags($formData['newTargetGroup_title'])))
-		));
+		$targetGroup->setData(self::createBasicAuxiliaryData());
+		self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
 		$targetGroup->markAsDirty();
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup')
 			->save($targetGroup);
+
+		$editButtonConfiguration =& $formidable->_navConf(
+			$formidable->aORenderlets['editTargetGroupButton']->sXPath
+		);
+		$editButtonConfiguration['name'] = 'editTargetGroupButton_' .
+			$targetGroup->getUid();
+		$editButtonConfiguration['onclick']['userobj']['php'] = '
+			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+			return tx_seminars_pi1_eventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+			';
+		$editButton = $formidable->_makeRenderlet(
+			$editButtonConfiguration,
+			$formidable->aORenderlets['editTargetGroupButton']->sXPath
+		);
+		$editButtonHTML = $editButton->_render();
 
 		return array(
 			$formidable->aORenderlets['newTargetGroupModalBox']->majixCloseBox(),
 			$formidable->majixExecJs(
 				'appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
+					addcslashes($targetGroup->getTitle(), '"\\') . '", "' .
+					addcslashes($editButtonHTML['__compiled'], '"\\') . '");'
+			),
+		);
+	}
+
+	/**
+	 * Updates an existing target group record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function updateTargetGroup(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
+
+		try {
+			$targetGroup = $targetGroupMapper->find(intval($formData['editTargetGroup_uid']));
+		} catch (Exception $exception) {
+			return $formidable->majixExecJs(
+				'alert("The target group with the given UID does not exist.");'
+			);
+		}
+
+		if ($targetGroup->getOwner() !== $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this target group.");'
+			);
+		}
+
+		$validationErrors = self::validateTargetGroup(
+			$formidable,
+			array('title' => $formData['editTargetGroup_title'])
+		);
+		if (!empty($validationErrors)) {
+			return $formidable->majixExecJs(
+				'alert("' . implode('\n', $validationErrors) . '");'
+			);
+		};
+
+		self::setTargetGroupData($targetGroup, 'editTargetGroup_', $formData);
+		$targetGroupMapper->save($targetGroup);
+
+		$htmlId = 'tx_seminars_pi1_seminars_target_group_label_' . $targetGroup->getUid();
+
+		return array(
+			$formidable->aORenderlets['editTargetGroupModalBox']->majixCloseBox(),
+			$formidable->majixExecJs(
+				'updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
 					addcslashes($targetGroup->getTitle(), '"\\') . '")'
 			),
 		);
@@ -1884,6 +2013,76 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		return $validationErrors;
+	}
+
+	/**
+	 * Sets the data of a target group model based on the data given in
+	 * $formData.
+	 *
+	 * @param tx_seminars_Model_TargetGroup $targetGroup
+	 *        the target group model to set the data
+	 * @param string $prefix the prefix of the form fields in $formData
+	 * @param array $formData
+	 *        the form data to use for setting the target group data
+	 */
+	private static function setTargetGroupData(
+		tx_seminars_Model_TargetGroup $targetGroup, $prefix, array $formData
+	) {
+		$targetGroup->setTitle($formData[$prefix . 'title']);
+	}
+
+	/**
+	 * Shows a modalbox containing a form for editing an existing target group
+	 * record.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param integer $targetGroupUid
+	 *        the UID of the target group to edit, must be > 0
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function showEditTargetGroupModalBox(
+		tx_ameosformidable $formidable, $targetGroupUid
+	) {
+		if ($targetGroupUid <= 0) {
+			return $formidable->majixExecJs('alert("$targetGroupUid must be >= 0.");');
+		}
+
+		$targetGroupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_TargetGroup'
+		);
+
+		try {
+			$targetGroup = $targetGroupMapper->find(intval($targetGroupUid));
+		} catch (tx_oelib_Exception_NotFound $exception) {
+			return $formidable->majixExecJs(
+				'alert("A target group with the given UID does not exist.");'
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		if ($targetGroup->getOwner() !== $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this target group.");'
+			);
+		}
+
+		$fields = array(
+			'uid' => $targetGroup->getUid(),
+			'title' => $targetGroup->getTitle(),
+		);
+
+		foreach ($fields as $key => $value) {
+			$formidable->aORenderlets['editTargetGroup_' . $key]->setValue($value);
+		}
+
+		$formidable->oRenderer->_setDisplayLabels(true);
+		$result = $formidable->aORenderlets['editTargetGroupModalBox']->majixShowBox();
+		$formidable->oRenderer->_setDisplayLabels(false);
+
+		return $result;
 	}
 
 	/**

@@ -1933,6 +1933,68 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
+				editTargetGroupButton = renderlet:BUTTON
+				editTargetGroupButton {
+					name = editTargetGroupButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:label_edit
+					class = tx-seminars-pi1-event-editor-edit-button
+					onclick {
+						runat = ajax
+						cache = false
+						userobj.php (
+							require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+							return tx_seminars_pi1_eventEditor::showEditTargetGroupModalBox($this);
+						)
+					}
+				}
+
+				editTargetGroupModalBox = renderlet:MODALBOX
+				editTargetGroupModalBox {
+					name = editTargetGroupModalBox
+					childs {
+						editTargetGroup_title = renderlet:TEXT
+						editTargetGroup_title {
+							name = editTargetGroup_title
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.title
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editTargetGroup_uid = renderlet:HIDDEN
+						editTargetGroup_uid {
+							name = editTargetGroup_uid
+						}
+
+						editTargetGroup_cancelButton = renderlet:BUTTON
+						editTargetGroup_cancelButton {
+							name = editTargetGroup_cancelButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_cancel
+							wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+							onclick {
+								runat = client
+								userobj.php (
+									return $this->aORenderlets['editTargetGroupModalBox']->majixCloseBox();
+								)
+							}
+						}
+
+						editTargetGroup_saveButton = renderlet:BUTTON
+						editTargetGroup_saveButton {
+							name = editTargetGroup_saveButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_save
+							wrap = |</div>
+							onclick {
+								runat = ajax
+								cache = false
+								params = editTargetGroup_title, editTargetGroup_uid
+								userobj.php (
+									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+									return tx_seminars_pi1_eventEditor::updateTargetGroup($this);
+								)
+							}
+						}
+					}
+				}
+
 				cancelled = renderlet:LISTBOX
 				cancelled {
 					name = cancelled

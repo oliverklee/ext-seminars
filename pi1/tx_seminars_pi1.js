@@ -273,7 +273,9 @@ function appendCheckboxInEditor(uid, title, buttonHtml) {
  *
  * @param integer uid the UID of the target group to add, must be > 0
  * @param string title the title of the target group, must not be empty
+ * @param string buttonHtml
+ *        the HTML of the edit button of the target group, may be empty
  */
-function appendTargetGroupInEditor(uid, title) {
-	appendAuxiliaryRecordInEditor(uid, title, "target_groups", "");
+function appendTargetGroupInEditor(uid, title, buttonHtml) {
+	appendAuxiliaryRecordInEditor(uid, title, "target_groups", buttonHtml);
 }
