@@ -261,9 +261,11 @@ function appendSpeakerInEditor(uid, title) {
  *
  * @param integer uid the UID of the checkbox to add, must be > 0
  * @param string title the title of the checkbox, must not be empty
+ * @param string buttonHtml
+ *        the HTML of the edit button of the checkbox, may be empty
  */
-function appendCheckboxInEditor(uid, title) {
-	appendAuxiliaryRecordInEditor(uid, title, "checkboxes", "");
+function appendCheckboxInEditor(uid, title, buttonHtml) {
+	appendAuxiliaryRecordInEditor(uid, title, "checkboxes", buttonHtml);
 }
 
 /**

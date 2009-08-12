@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3313] Feature: Allow editing of existing checkbox records in the FE editor
 - [#3316] Fix: Error in Unit Test populateListPlacesShowsPlaceWithOwnerIsLoggedInFrontEndUser
 - [#3315] Fix: Fix the position of the "Edit" buttons in the FE editor
 - [#3303] Fix: The registration cannot be submitted in Safari and Chrome

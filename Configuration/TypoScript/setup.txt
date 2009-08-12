@@ -1007,7 +1007,7 @@ plugin.tx_seminars_pi1 {
 				editPlaceButton = renderlet:BUTTON
 				editPlaceButton {
 					name = editPlaceButton
-					label = Edit
+					label = LLL:EXT:seminars/pi1/locallang.xml:label_edit
 					class = tx-seminars-pi1-event-editor-edit-button
 					onclick {
 						runat = ajax
@@ -1616,6 +1616,7 @@ plugin.tx_seminars_pi1 {
 					}
 					onclick {
 						runat = ajax
+						cache = false
 						userobj.php (
 							$this->oRenderer->_setDisplayLabels(true);
 							$result = $this->aORenderlets['newCheckboxModalBox']->majixShowFreshBox();
@@ -1656,10 +1657,73 @@ plugin.tx_seminars_pi1 {
 							wrap = |</div>
 							onclick {
 								runat = ajax
+								cache = false
 								params = newCheckbox_title
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 									return tx_seminars_pi1_eventEditor::createNewCheckbox($this);
+								)
+							}
+						}
+					}
+				}
+
+				editCheckboxButton = renderlet:BUTTON
+				editCheckboxButton {
+					name = editCheckboxButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:label_edit
+					class = tx-seminars-pi1-event-editor-edit-button
+					onclick {
+						runat = ajax
+						cache = false
+						userobj.php (
+							require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+							return tx_seminars_pi1_eventEditor::showEditCheckboxModalBox($this);
+						)
+					}
+				}
+
+				editCheckboxModalBox = renderlet:MODALBOX
+				editCheckboxModalBox {
+					name = editCheckboxModalBox
+					childs {
+						editCheckbox_title = renderlet:TEXT
+						editCheckbox_title {
+							name = editCheckbox_title
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_checkboxes.title
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editCheckbox_uid = renderlet:HIDDEN
+						editCheckbox_uid {
+							name = editCheckbox_uid
+						}
+
+						editCheckbox_cancelButton = renderlet:BUTTON
+						editCheckbox_cancelButton {
+							name = editCheckbox_cancelButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_cancel
+							wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+							onclick {
+								runat = client
+								userobj.php (
+									return $this->aORenderlets['editCheckboxModalBox']->majixCloseBox();
+								)
+							}
+						}
+
+						editCheckbox_saveButton = renderlet:BUTTON
+						editCheckbox_saveButton {
+							name = editCheckbox_saveButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_save
+							wrap = |</div>
+							onclick {
+								runat = ajax
+								cache = false
+								params = editCheckbox_title, editCheckbox_uid
+								userobj.php (
+									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+									return tx_seminars_pi1_eventEditor::updateCheckbox($this);
 								)
 							}
 						}

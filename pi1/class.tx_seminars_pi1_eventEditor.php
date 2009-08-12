@@ -356,14 +356,70 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	/**
 	 * Provides data items for the list of available checkboxes.
 	 *
-	 * @param array any pre-filled data (may be empty)
+	 * @param array $items any pre-filled data (may be empty)
+	 * @param array $unused unused
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array $items with additional items from the checkboxes
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
-	public function populateListCheckboxes(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_CHECKBOXES);
+	public function populateListCheckboxes(
+		array $items, $unused = null, tx_ameosformidable $formidable = null
+	) {
+		$result = $items;
+
+		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+		$checkboxes = $checkboxMapper->findAll();
+
+		if (is_object($formidable)) {
+			$editButtonConfiguration =& $formidable->_navConf(
+				$formidable->aORenderlets['editCheckboxButton']->sXPath
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
+			array('relatedRecordType' => 'Checkboxes')
+		) && is_object($formidable);
+
+		foreach ($checkboxes as $checkbox) {
+			$frontEndUserIsOwner = ($checkbox->getOwner() === $frontEndUser);
+
+			// Only shows checkboxes which have no owner or where the owner is
+			// the currently logged in front-end user.
+			if ($checkbox->getOwner() && !$frontEndUserIsOwner) {
+				continue;
+			}
+
+			if ($showEditButton && $frontEndUserIsOwner) {
+				$editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
+				$editButtonConfiguration['onclick']['userobj']['php'] = '
+					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+					return tx_seminars_pi1_eventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+					';
+				$editButton = $formidable->_makeRenderlet(
+					$editButtonConfiguration,
+					$formidable->aORenderlets['editCheckboxButton']->sXPath
+				);
+				$editButtonHTML = $editButton->_render();
+				$result[] = array(
+					'caption' => $checkbox->getTitle(),
+					'value' => $checkbox->getUid(),
+					'labelcustom' => 'id="tx_seminars_pi1_seminars_checkbox_label_' . $checkbox->getUid() . '"',
+					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+				);
+			} else {
+				$result[] = array(
+					'caption' => $checkbox->getTitle(),
+					'value' => $checkbox->getUid(),
+				);
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -598,6 +654,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
 			),
 			'newCheckbox_' => array('title'),
+			'editChecbox_' => array('title', 'uid'),
 			'newTargetGroup_' => array('title'),
 		);
 
@@ -1279,7 +1336,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			);
 		}
 
-		if ($place->getOwner() != $frontEndUser) {
+		if ($place->getOwner() !== $frontEndUser) {
 			return $formidable->majixExecJs(
 				'alert("You are not allowed to edit this place.");'
 			);
@@ -1401,7 +1458,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
-		if ($place->getOwner() != $frontEndUser) {
+		if ($place->getOwner() !== $frontEndUser) {
 			return $formidable->majixExecJs(
 				'alert("You are not allowed to edit this place.");'
 			);
@@ -1589,18 +1646,86 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		};
 
 		$checkbox = tx_oelib_ObjectFactory::make('tx_seminars_Model_Checkbox');
-		$checkbox->setData(array_merge(
-			self::createBasicAuxiliaryData(),
-			array('title' => trim(strip_tags($formData['newCheckbox_title'])))
-		));
+		$checkbox->setData(self::createBasicAuxiliaryData());
+		self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
 		$checkbox->markAsDirty();
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox')
 			->save($checkbox);
+
+		$editButtonConfiguration =& $formidable->_navConf(
+			$formidable->aORenderlets['editCheckboxButton']->sXPath
+		);
+		$editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
+		$editButtonConfiguration['onclick']['userobj']['php'] = '
+			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+			return tx_seminars_pi1_eventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+			';
+		$editButton = $formidable->_makeRenderlet(
+			$editButtonConfiguration,
+			$formidable->aORenderlets['editCheckboxButton']->sXPath
+		);
+		$editButtonHTML = $editButton->_render();
 
 		return array(
 			$formidable->aORenderlets['newCheckboxModalBox']->majixCloseBox(),
 			$formidable->majixExecJs(
 				'appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
+					addcslashes($checkbox->getTitle(), '"\\') . '", "' .
+					addcslashes($editButtonHTML['__compiled'], '"\\') . '");'
+			),
+		);
+	}
+
+ 	/**
+	 * Updates an existing checkbox record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function updateCheckbox(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+
+		try {
+			$checkbox = $checkboxMapper->find(intval($formData['editCheckbox_uid']));
+		} catch (Exception $exception) {
+			return $formidable->majixExecJs(
+				'alert("The checkbox with the given UID does not exist.");'
+			);
+		}
+
+		if ($checkbox->getOwner() !== $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this checkbox.");'
+			);
+		}
+
+		$validationErrors = self::validateCheckbox(
+			$formidable,
+			array('title' => $formData['editCheckbox_title'])
+		);
+		if (!empty($validationErrors)) {
+			return $formidable->majixExecJs(
+				'alert("' . implode('\n', $validationErrors) . '");'
+			);
+		};
+
+		self::setCheckboxData($checkbox, 'editCheckbox_', $formData);
+		$checkboxMapper->save($checkbox);
+
+		$htmlId = 'tx_seminars_pi1_seminars_checkbox_label_' . $checkbox->getUid();
+
+		return array(
+			$formidable->aORenderlets['editCheckboxModalBox']->majixCloseBox(),
+			$formidable->majixExecJs(
+				'updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
 					addcslashes($checkbox->getTitle(), '"\\') . '")'
 			),
 		);
@@ -1629,6 +1754,69 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		return $validationErrors;
+	}
+
+	/**
+	 * Sets the data of a checkbox model based on the data given in $formData.
+	 *
+	 * @param tx_seminars_Model_Checkbox $checkbox the checkbox model to set the data
+	 * @param string $prefix the prefix of the form fields in $formData
+	 * @param array $formData the form data to use for setting the checkbox data
+	 */
+	private static function setCheckboxData(
+		tx_seminars_Model_Checkbox $checkbox, $prefix, array $formData
+	) {
+		$checkbox->setTitle($formData[$prefix . 'title']);
+	}
+
+	/**
+	 * Shows a modalbox containing a form for editing an existing checkbox record.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param integer $checkboxUid the UID of the checkbox to edit, must be > 0
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function showEditCheckboxModalBox(
+		tx_ameosformidable $formidable, $checkboxUid
+	) {
+		if ($checkboxUid <= 0) {
+			return $formidable->majixExecJs('alert("$checkboxUid must be >= 0.");');
+		}
+
+		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+
+		try {
+			$checkbox = $checkboxMapper->find(intval($checkboxUid));
+		} catch (tx_oelib_Exception_NotFound $exception) {
+			return $formidable->majixExecJs(
+				'alert("A checkbox with the given UID does not exist.");'
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		if ($checkbox->getOwner() !== $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this checkbox.");'
+			);
+		}
+
+		$fields = array(
+			'uid' => $checkbox->getUid(),
+			'title' => $checkbox->getTitle(),
+		);
+
+		foreach ($fields as $key => $value) {
+			$formidable->aORenderlets['editCheckbox_' . $key]->setValue($value);
+		}
+
+		$formidable->oRenderer->_setDisplayLabels(true);
+		$result = $formidable->aORenderlets['editCheckboxModalBox']->majixShowBox();
+		$formidable->oRenderer->_setDisplayLabels(false);
+
+		return $result;
 	}
 
 	/**
