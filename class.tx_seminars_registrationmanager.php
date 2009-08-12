@@ -1256,7 +1256,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$places = $event->getPlaces();
-		$newline = ($useHtml) ? '<br />' : CRLF;
+		$newline = ($useHtml) ? '<br />' : LF;
 		$formattedPlaces = array();
 
 		foreach ($places as $place) {

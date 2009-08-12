@@ -1591,14 +1591,14 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getEnumeratedAttendeeNames_WithUsePlainText_SeparatesAttendeesNamesWithCarriageReturnAndLineFeed() {
+	public function test_getEnumeratedAttendeeNames_WithUsePlainText_SeparatesAttendeesNamesWithLineFeed() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
 		);
 
 		$this->assertEquals(
-			'1. foo' . CRLF . '2. bar',
+			'1. foo' . LF . '2. bar',
 			$this->fixture->getEnumeratedAttendeeNames()
 		);
 
@@ -1642,7 +1642,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRegisteredThemselves(1);
 
 		$this->assertEquals(
-			'1. foo_user' . CRLF . '2. foo',
+			'1. foo_user' . LF . '2. foo',
 			$this->fixture->getEnumeratedAttendeeNames()
 		);
 

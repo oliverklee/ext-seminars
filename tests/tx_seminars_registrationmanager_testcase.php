@@ -1862,7 +1862,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			'1. foo1' . CRLF . '2. foo2',
+			'1. foo1' . LF . '2. foo2',
 			base64_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
@@ -1964,7 +1964,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForPlainTextMail_SeparatesPlacesTitleAndAddressWithCRLF() {
+	public function test_NotifyAttendee_ForPlainTextMail_SeparatesPlacesTitleAndAddressWithLF() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
@@ -1983,7 +1983,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			'place_title' . CRLF . 'place_address',
+			'place_title' . LF . 'place_address',
 			base64_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
@@ -2043,7 +2043,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			'place_title' . CRLF . 'place_address',
+			'place_title' . LF . 'place_address',
 			base64_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
@@ -2319,7 +2319,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			'address' . CRLF . 'footown',
+			'address' . LF . 'footown',
 			base64_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)

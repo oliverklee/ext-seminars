@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3319] Change: Use only LF in the e-mail body
 - [#3314] Feature: Allow editing of existing target group records in the FE editor
 - [#3313] Feature: Allow editing of existing checkbox records in the FE editor
 - [#3316] Fix: Error in Unit Test populateListPlacesShowsPlaceWithOwnerIsLoggedInFrontEndUser

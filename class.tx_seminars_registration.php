@@ -1005,11 +1005,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the selected option checkboxes separated by CRLF. If no option
+	 * Gets the selected option checkboxes separated by LF. If no option
 	 * checkbox is selected, this function will return an empty string.
 	 *
 	 * @return string the titles of the selected option checkboxes separated by
-	 *                CRLF or an empty string if no option checkbox is selected
+	 *                LF or an empty string if no option checkbox is selected
 	 */
 	public function getCheckboxes() {
 		$result = '';
@@ -1025,7 +1025,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets a CRLF-separated list of the titles of records referenced by this
+	 * Gets a LF-separated list of the titles of records referenced by this
 	 * record.
 	 *
 	 * @param string the name of the foreign table (must not be empty), must
@@ -1033,7 +1033,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @param string the name of the m:m table, having the fields uid_local,
 	 *               uid_foreign and sorting, must not be empty
 	 *
-	 * @return string the titles of the referenced records separated by CRLF,
+	 * @return string the titles of the referenced records separated by LF,
 	 *                might be empty if no records are referenced
 	 */
 	private function getMmRecords($foreignTable, $mmTable) {
@@ -1225,7 +1225,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * If the enumerated names should be built by using HTML, they will be
 	 * created as list items of an ordered list. In the plain text case the
-	 * entries will be separated by CRLF.
+	 * entries will be separated by LF.
 	 *
 	 * @param boolean $useHtml whether to use HTML to build the enumeration
 	 *
@@ -1255,7 +1255,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$enumeratedNames[] = $attendeeCounter . '. ' . $name;
 				$attendeeCounter++;
 			}
-			$result = implode(CRLF, $enumeratedNames);
+			$result = implode(LF, $enumeratedNames);
 		}
 
 		return $result;
