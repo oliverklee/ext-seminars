@@ -309,7 +309,6 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$message = $GLOBALS['LANG']->getLL('email_eventTakesPlaceReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);
-		$message = str_replace(LF, CRLF, $message);
 
 		$this->createSeminarWithOrganizer(array(
 			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
@@ -516,7 +515,6 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$message = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);
-		$message = str_replace(LF, CRLF, $message);
 
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
 			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,

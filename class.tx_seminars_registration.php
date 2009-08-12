@@ -932,11 +932,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the selected lodging options separated by CRLF. If there is no
+	 * Gets the selected lodging options separated by LF. If there is no
 	 * lodging option selected, this function will return an empty string.
 	 *
 	 * @return string the titles of the selected loding options separated by
-	 *                CRLF or an empty string if no lodging option is selected
+	 *                LF or an empty string if no lodging option is selected
 	 */
 	public function getLodgings() {
 		$result = '';
@@ -962,11 +962,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the selected food options separated by CRLF. If there is no
+	 * Gets the selected food options separated by LF. If there is no
 	 * food option selected, this function will return an empty string.
 	 *
 	 * @return string the titles of the selected loding options separated by
-	 *                CRLF or an empty string if no food option is selected
+	 *                LF or an empty string if no food option is selected
 	 */
 	public function getFoods() {
 		$result = '';
@@ -992,11 +992,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets the selected option checkboxes separated by CRLF. If no option
+	 * Gets the selected option checkboxes separated by LF. If no option
 	 * checkbox is selected, this function will return an empty string.
 	 *
 	 * @return string the titles of the selected option checkboxes separated by
-	 *                CRLF or an empty string if no option checkbox is selected
+	 *                LF or an empty string if no option checkbox is selected
 	 */
 	public function getCheckboxes() {
 		$result = '';
@@ -1012,7 +1012,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Gets a CRLF-separated list of the titles of records referenced by this
+	 * Gets a LF-separated list of the titles of records referenced by this
 	 * record.
 	 *
 	 * @param string the name of the foreign table (must not be empty), must
@@ -1020,7 +1020,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @param string the name of the m:m table, having the fields uid_local,
 	 *               uid_foreign and sorting, must not be empty
 	 *
-	 * @return string the titles of the referenced records separated by CRLF,
+	 * @return string the titles of the referenced records separated by LF,
 	 *                might be empty if no records are referenced
 	 */
 	private function getMmRecords($foreignTable, $mmTable) {
@@ -1038,7 +1038,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($dbResult) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
 				if (!empty($result)) {
-					$result .= CRLF;
+					$result .= LF;
 				}
 				$result .= $row['title'];
 			}
