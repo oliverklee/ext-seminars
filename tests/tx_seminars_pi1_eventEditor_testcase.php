@@ -110,8 +110,8 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * Creates a front end user ghost which has a group with the given publish
-	 * settings.
+	 * Creates a front end user testing model which has a group with the given
+	 * publish settings.
 	 *
 	 * @param integer the publish settings for the user, must be one of the
 	 *                following:
@@ -121,16 +121,14 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 */
 	private function createAndLoginUserWithPublishSetting($publishSetting) {
 		$userGroup = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
-		$userGroup->setData(
-			array('tx_seminars_publish_events' => $publishSetting)
+			'tx_seminars_Mapper_FrontEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_publish_events' => $publishSetting)
 		);
-		$list = new tx_oelib_List();
-		$list->add($userGroup);
 
-		$user = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_FrontEndUser')->getNewGhost();
-		$user->setData(array('usergroup' => $list));
+		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->getLoadedTestingModel(
+				array('usergroup' => $userGroup->getUid())
+		);
 		$this->testingFramework->loginFrontEndUser($user->getUid());
 	}
 
@@ -1198,14 +1196,14 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('createEventsPID', 42);
 
 		$userGroup = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
-		$userGroup->setData(array('tx_seminars_events_pid' => 21));
-		$list = new tx_oelib_List();
-		$list->add($userGroup);
+			'tx_seminars_Mapper_FrontEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_events_pid' => 21)
+		);
 
 		$user = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_FrontEndUser')->getNewGhost();
-		$user->setData(array('usergroup' => $list));
+			'tx_seminars_Mapper_FrontEndUser')->getLoadedTestingModel(
+				array('usergroup' => $userGroup->getUid())
+		);
 		$this->testingFramework->loginFrontEndUser($user->getUid());
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());

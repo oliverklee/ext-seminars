@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3323] Change: Change all getNewGhost/set* sequences to getLoadedTestingModel in seminars
 - [#3320] Fix: Unbreak GMX by changing the default encoding for e-mails from base64 back to quoted-printable
 - [#3319] Change: Use only LF in the e-mail body
 - [#3314] Feature: Allow editing of existing target group records in the FE editor

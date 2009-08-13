@@ -55,12 +55,12 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////
 
 	public function test_getPublishSettings_ForUserWithOneGroupAndGroupPublishSettingZero_ReturnsPublishAll() {
-		$groupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		$userGroup = $groupMapper->getNewGhost();
-		$userGroup->setData(array(
-			'tx_seminars_publish_events'
-				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
-		));
+		$userGroup = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup')
+			->getLoadedTestingModel(array(
+				'tx_seminars_publish_events'
+					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			)
+		);
 
 		$list = new tx_oelib_List();
 		$list->add($userGroup);
@@ -73,12 +73,12 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_getPublishSettings_ForUserWithOneGroupAndGroupPublishSettingOne_ReturnsHideNew() {
-		$groupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		$userGroup = $groupMapper->getNewGhost();
-		$userGroup->setData(array(
-			'tx_seminars_publish_events'
-				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
-		));
+		$userGroup = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup')
+			->getLoadedTestingModel(array(
+				'tx_seminars_publish_events'
+					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+			)
+		);
 
 		$list = new tx_oelib_List();
 		$list->add($userGroup);
@@ -91,12 +91,12 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_getPublishSettings_ForUserWithOneGroupAndGroupPublishSettingTwo_ReturnsHideEdited() {
-		$groupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		$userGroup = $groupMapper->getNewGhost();
-		$userGroup->setData(array(
-			'tx_seminars_publish_events'
-				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
-		));
+		$userGroup = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup')
+			->getLoadedTestingModel(array(
+				'tx_seminars_publish_events'
+					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+			)
+		);
 
 		$list = new tx_oelib_List();
 		$list->add($userGroup);
@@ -120,14 +120,12 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 
 	public function test_getPublishSettings_ForUserWithTwoGroupsAndGroupPublishSettingZeroAndOne_ReturnsHideNew() {
 		$groupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		$userGroup = $groupMapper->getNewGhost();
-		$userGroup->setData(array(
+		$userGroup = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		));
 
-		$userGroup2 = $groupMapper->getNewGhost();
-		$userGroup2->setData(array(
+		$userGroup2 = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		));
@@ -145,14 +143,12 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 
 	public function test_getPublishSettings_ForUserWithTwoGroupsAndGroupPublishSettingOneAndTwo_ReturnsHideEdited() {
 		$groupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		$userGroup = $groupMapper->getNewGhost();
-		$userGroup->setData(array(
+		$userGroup = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		));
 
-		$userGroup2 = $groupMapper->getNewGhost();
-		$userGroup2->setData(array(
+		$userGroup2 = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		));
@@ -170,14 +166,12 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 
 	public function test_getPublishSettings_ForUserWithTwoGroupsAndGroupPublishSettingTwoAndZero_ReturnsHideEdited() {
 		$groupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		$userGroup = $groupMapper->getNewGhost();
-		$userGroup->setData(array(
+		$userGroup = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		));
 
-		$userGroup2 = $groupMapper->getNewGhost();
-		$userGroup2->setData(array(
+		$userGroup2 = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		));
@@ -195,14 +189,12 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 
 	public function test_getPublishSettings_ForUserWithTwoGroupsAndBothGroupPublishSettingsOne_ReturnsHideNew() {
 		$groupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		$userGroup = $groupMapper->getNewGhost();
-		$userGroup->setData(array(
+		$userGroup = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		));
 
-		$userGroup2 = $groupMapper->getNewGhost();
-		$userGroup2->setData(array(
+		$userGroup2 = $groupMapper->getLoadedTestingModel(array(
 			'tx_seminars_publish_events'
 				=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		));
