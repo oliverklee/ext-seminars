@@ -790,6 +790,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
+		$attachment = array();
 		preg_match(
 			'/filename.*csv";([^-=]+)/s',
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),

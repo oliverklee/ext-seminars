@@ -360,8 +360,10 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->render();
 
 		$this->assertEquals(
-			base64_encode('foo bar test user'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			'foo bar test user',
+			quoted_printable_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
