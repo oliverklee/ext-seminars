@@ -319,7 +319,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -525,7 +525,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -790,9 +790,15 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
+		preg_match(
+			'/filename.*csv";([^-=]+)/s',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
+			$attachment
+		);
+
 		$this->assertContains(
-			base64_encode('title' . CRLF . 'test registration' . CRLF),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			'title' . CRLF . 'test registration' . CRLF,
+			base64_decode($attachment[1])
 		);
 	}
 
@@ -845,7 +851,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Mr. Test',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -862,7 +868,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'test event',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -878,7 +884,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			(string) $uid,
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -894,7 +900,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'2',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -914,7 +920,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 					->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
 				$GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			),
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -930,7 +936,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'0',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -951,15 +957,11 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		preg_match(
-			'/"[\r\n]([^-=]+)/s',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
-			$mailBody
-		);
-
 		$this->assertContains(
 			'1',
-			base64_decode($mailBody[1])
+			quoted_printable_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 
@@ -1009,7 +1011,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$subject = str_replace('%event', '', $subject);
 
 		$this->assertContains(
-			base64_encode($subject),
+			t3lib_div::encodeHeader($subject, 'quoted-printable', 'utf-8'),
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
 		);
 	}

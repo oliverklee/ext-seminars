@@ -1668,7 +1668,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'foo Event',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -1700,7 +1700,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 				$this->fixture->getConfValueString('dateFormatYMD'),
 				$GLOBALS['SIM_EXEC_TIME']
 			),
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -1729,7 +1729,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'###PUBLISH_EVENT_DATE###',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -1759,7 +1759,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'foo event,',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -1787,7 +1787,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'###',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -1815,7 +1815,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Foo Description',
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
@@ -1843,7 +1843,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
-			base64_decode(
+			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
