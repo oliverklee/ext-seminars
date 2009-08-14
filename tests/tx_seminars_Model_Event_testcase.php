@@ -625,7 +625,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	public function getLanguageWithLanguageReturnsLanguage() {
 		$this->fixture->setData(array('language' => 'DE'));
 
-		$this->assertEquals(
+		$this->assertSame(
 			tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language')
 				->findByIsoAlpha2Code('DE'),
 			$this->fixture->getLanguage()
@@ -640,7 +640,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 			->findByIsoAlpha2Code('DE');
 		$this->fixture->setLanguage($language);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$language,
 			$this->fixture->getLanguage()
 		);

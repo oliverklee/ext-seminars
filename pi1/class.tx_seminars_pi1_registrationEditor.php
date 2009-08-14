@@ -1087,7 +1087,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 
 			$paymentMethod = intval($this->getFormValue('method_of_payment'));
 
-			if ($bankTransferUid && ($paymentMethod == $bankTransferUid)) {
+			if (($bankTransferUid > 0) && ($paymentMethod == $bankTransferUid)) {
 				$result = false;
 			}
 		}

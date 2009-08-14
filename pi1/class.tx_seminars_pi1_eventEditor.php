@@ -620,7 +620,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private function purgeUploadedFile($fileName) {
 		@unlink(PATH_site . 'uploads/tx_seminars/' . $fileName);
 		$keyToPurge = array_search($fileName, $this->attachedFiles);
-		if($keyToPurge !== false) {
+		if ($keyToPurge !== false) {
 			unset($this->attachedFiles[$keyToPurge]);
 		}
 	}

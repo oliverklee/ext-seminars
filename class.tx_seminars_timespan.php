@@ -154,7 +154,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 					if (strftime(
 							$this->getConfValueString('dateFormatY'),
 							$beginDate
-						) !== strftime(
+						) != strftime(
 							$this->getConfValueString('dateFormatY'),
 							$endDate)
 					) {
@@ -164,7 +164,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 						if (strftime(
 								$this->getConfValueString('dateFormatM'),
 								$beginDate
-							) !== strftime(
+							) != strftime(
 								$this->getConfValueString('dateFormatM'),
 								$endDate)
 						) {
@@ -226,7 +226,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 
 			// Only display the end time if the event has an end date/time set
 			// and the end time is not the same as the begin time.
-			if ($this->hasEndTime() && ($beginTime !== $endTime)) {
+			if ($this->hasEndTime() && ($beginTime != $endTime)) {
 				$result .= $dash.$endTime;
 			}
 		}
@@ -243,7 +243,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	public function hasTime() {
 		$beginTime = strftime('%H:%M', $this->getBeginDateAsTimestamp());
 
-		return ($this->hasDate() && ($beginTime !== '00:00'));
+		return ($this->hasDate() && ($beginTime != '00:00'));
 	}
 
 	/**
@@ -255,7 +255,7 @@ abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
 	public function hasEndTime() {
 		$endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
 
-		return ($this->hasEndDate() && ($endTime !== '00:00'));
+		return ($this->hasEndDate() && ($endTime != '00:00'));
 	}
 
 	/**
