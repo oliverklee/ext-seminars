@@ -689,8 +689,7 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 	public function test_findByPublicationForNoEventWithProvidedPublicationHash_ReturnsNull() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 
-		$this->assertEquals(
-			null,
+		$this->assertNull(
 			$this->fixture->findByPublicationHash('foo')
 		);
 	}

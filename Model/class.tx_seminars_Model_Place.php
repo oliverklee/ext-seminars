@@ -132,7 +132,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	 *        the country to set for this place, can be null for "no country"
 	 */
 	public function setCountry(tx_oelib_Model_Country $country = null) {
-		$countryCode = ($country != null) ? $country->getIsoAlpha2Code() : '';
+		$countryCode = ($country !== null) ? $country->getIsoAlpha2Code() : '';
 
 		$this->setAsString('country', $countryCode);
 	}

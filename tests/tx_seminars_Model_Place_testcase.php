@@ -201,8 +201,7 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	public function getCountryWithoutCountryReturnsNull() {
 		$this->fixture->setData(array());
 
-		$this->assertEquals(
-			null,
+		$this->assertNull(
 			$this->fixture->getCountry()
 		);
 	}
@@ -213,8 +212,7 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	public function getCountryWithInvalidCountryCodeReturnsNull() {
 		$this->fixture->setData(array('country' => '0'));
 
-		$this->assertEquals(
-			null,
+		$this->assertNull(
 			$this->fixture->getCountry()
 		);
 	}

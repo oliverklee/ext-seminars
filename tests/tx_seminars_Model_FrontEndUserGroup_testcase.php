@@ -171,8 +171,7 @@ class tx_seminars_Model_FrontEndUserGroup_testcase extends tx_phpunit_testcase {
 	public function test_getReviewerForGroupWithoutReviewer_ReturnsNull() {
 		$this->fixture->setData(array('tx_seminars_reviewer' => null));
 
-		$this->assertEquals(
-			null,
+		$this->assertNull(
 			$this->fixture->getReviewer()
 		);
 	}

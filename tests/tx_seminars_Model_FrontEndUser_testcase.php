@@ -331,8 +331,7 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 		$list = new tx_oelib_List();
 		$this->fixture->setData(array('usergroup' => $list));
 
-		$this->assertEquals(
-			null,
+		$this->assertNull(
 			$this->fixture->getReviewerFromGroup()
 		);
 	}
@@ -346,8 +345,7 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setData(array('usergroup' => $list));
 
-		$this->assertEquals(
-			null,
+		$this->assertNull(
 			$this->fixture->getReviewerFromGroup()
 		);
 	}

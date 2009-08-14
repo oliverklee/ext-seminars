@@ -72,7 +72,7 @@ class tx_seminars_pi1_frontEndPublishEvent extends tx_oelib_templatehelper {
 			$eventMapper = tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Event');
 			$event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 
-			if (($event != null) && $event->isHidden()) {
+			if (($event !== null) && $event->isHidden()) {
 				$event->markAsVisible();
 				$event->purgePublicationHash();
 				$eventMapper->save($event);

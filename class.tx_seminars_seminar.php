@@ -2925,8 +2925,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean true if we are a date record, false otherwise.
 	 */
 	public function isEventDate() {
-		return ($this->getRecordPropertyInteger('object_type') ==
-			SEMINARS_RECORD_TYPE_DATE);
+		return ($this->getRecordPropertyInteger('object_type')
+			== SEMINARS_RECORD_TYPE_DATE);
 	}
 
 	/**

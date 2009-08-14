@@ -1955,7 +1955,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker('language', $this->seminar->getLanguageName());
 
 			$currentDate = $this->seminar->getDate();
-			if (($currentDate === $this->previousDate)
+			if (($currentDate == $this->previousDate)
 				&& $this->getConfValueBoolean(
 					'omitDateIfSameAsPrevious',
 					's_template_special')

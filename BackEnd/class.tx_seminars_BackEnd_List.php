@@ -167,7 +167,7 @@ class tx_seminars_BackEnd_List {
 					'pages', $pageData['uid']
 				),
 				16)
-			&& $pageData['doktype'] == 254) {
+			&& ($pageData['doktype'] == 254)) {
 			$params = '&edit['.$this->tableName.']['.$pid.']=new';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langNew = $LANG->getLL('newRecordGeneral');

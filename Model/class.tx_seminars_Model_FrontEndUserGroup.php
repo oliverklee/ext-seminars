@@ -89,7 +89,7 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	 * @return boolean true if a reviewer is set, false otherwise
 	 */
 	public function hasReviewer() {
-		return $this->getReviewer() != null;
+		return $this->getReviewer() !== null;
 	}
 
 	/**

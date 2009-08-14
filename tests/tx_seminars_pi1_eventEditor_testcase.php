@@ -421,8 +421,9 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	public function testHasAccessMessageWithLoggedInFeUserAsOwnerReturnsEmptyResult() {
 		$this->createLogInAndAddFeUserAsOwner();
 
-		$this->assertTrue(
-			$this->fixture->hasAccessMessage() == ''
+		$this->assertEquals(
+			'',
+			$this->fixture->hasAccessMessage()
 		);
 	}
 
@@ -446,8 +447,9 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents' , 1);
 		$this->createLogInAndAddFeUserAsVip();
 
-		$this->assertTrue(
-			$this->fixture->hasAccessMessage() == ''
+		$this->assertEquals(
+			'',
+			$this->fixture->hasAccessMessage()
 		);
 	}
 
@@ -471,8 +473,9 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents' , 1);
 		$this->createLogInAndAddFeUserAsDefaultVip();
 
-		$this->assertTrue(
-			$this->fixture->hasAccessMessage() == ''
+		$this->assertEquals(
+			'',
+			$this->fixture->hasAccessMessage()
 		);
 	}
 
@@ -493,8 +496,9 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
 
-		$this->assertTrue(
-			$this->fixture->hasAccessMessage() == ''
+		$this->assertEquals(
+			'',
+			$this->fixture->hasAccessMessage()
 		);
 	}
 
@@ -526,8 +530,9 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('owner_feuser' => $userUid)
 		));
 
-		$this->assertTrue(
-			$this->fixture->hasAccessMessage() == ''
+		$this->assertEquals(
+			'',
+			$this->fixture->hasAccessMessage()
 		);
 	}
 
