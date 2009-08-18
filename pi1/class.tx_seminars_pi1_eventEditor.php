@@ -2344,7 +2344,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$result = array();
 
 		$countries = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
-			->findAll();
+			->findAll('cn_short_local');
 		foreach ($countries as $country) {
 			$result[] = array(
 				'caption' => $country->getLocalShortName(),

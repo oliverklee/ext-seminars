@@ -1917,6 +1917,23 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function populateListCountriesSortsResultsByLocalCountryName() {
+		$countries = tx_seminars_pi1_eventEditor::populateListCountries();
+		$positionGermany = array_search(
+			array('caption' => 'Deutschland', 'value' => 54), $countries
+		);
+		$positionGambia = array_search(
+			array('caption' => 'Gambia', 'value' => 81), $countries
+		);
+
+		$this->assertTrue(
+			$positionGermany < $positionGambia
+		);
+	}
+
 
 	///////////////////////////////////////////
 	// Tests concerning populateListSkills

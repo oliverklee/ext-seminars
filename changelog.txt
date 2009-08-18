@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3273] Fix: The countries in the modal editors should be sorted alphabetically
 - [#3307] Feature: Add the try/catch for BackEnd/index.php::main
 - [#3353] Fix: Selected payment method not listed on the confirmation page
 - [#3229] Change: Polish some labels in the registration process
