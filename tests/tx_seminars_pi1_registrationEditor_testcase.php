@@ -960,5 +960,30 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			$this->fixture->getPreselectedPaymentMethod()
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning getRegistrationData
+	/////////////////////////////////////////
+
+	public function test_getRegistrationDataForSelectedPaymentMethod_ReturnsTheSelectedPaymentMethod() {
+		$selectedPaymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'payment foo')
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$selectedPaymentMethodUid,
+			'payment_methods'
+		);
+		$this->fixture->setFakedFormValue(
+			'method_of_payment', $selectedPaymentMethodUid
+		);
+
+		$this->assertContains(
+			'payment foo',
+			$this->fixture->getRegistrationData()
+		);
+	}
 }
 ?>

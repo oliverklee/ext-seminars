@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3353] Fix: Selected payment method not listed on the confirmation page
 - [#3229] Change: Polish some labels in the registration process
 - [#3350] Fix: getPreselectedPaymentMethod does not return UID of selected payment method
 - [#3144] Fix: Increase the max input size for showRegistrationFields
