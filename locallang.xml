@@ -23,7 +23,7 @@
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
-			<label index="label_attendees_names">Additional attendees</label>
+			<label index="label_attendees_names">Registered persons</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
@@ -157,7 +157,6 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 			<label index="label_room">Rum</label>
 			<label index="label_seats">Pladser</label>
 			<label index="label_total_price">Pris i alt</label>
-			<label index="label_attendees_names">Yderligere tilmeldte personer</label>
 			<label index="label_lodgings">Vælg overnatningstype</label>
 			<label index="label_foods">Vælg mad</label>
 			<label index="label_kids">Antal børn</label>
@@ -265,7 +264,7 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="label_room">Raum</label>
 			<label index="label_seats">Plätze</label>
 			<label index="label_total_price">Gesamtpreis</label>
-			<label index="label_attendees_names">Zusätzlich angemeldete Personen</label>
+			<label index="label_attendees_names">Angemeldete Personen</label>
 			<label index="label_lodgings">Gewählte Unterbringungsmöglichkeiten</label>
 			<label index="label_foods">Gewählte Verpflegungsmöglichkeiten</label>
 			<label index="label_kids">Anzahl Kinder</label>
@@ -396,7 +395,6 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&q
 			<label index="label_room">Kamer</label>
 			<label index="label_seats">Stoelen</label>
 			<label index="label_total_price">Totaal prijs</label>
-			<label index="label_attendees_names">Aditionele deelnemers</label>
 			<label index="label_lodgings">Gekozen verblijf opties</label>
 			<label index="label_foods">Gekozen voeding opties</label>
 			<label index="label_kids">Aantal kinderen</label>
@@ -509,7 +507,6 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_room">Зал</label>
 			<label index="label_seats">Места</label>
 			<label index="label_total_price">Общая цена</label>
-			<label index="label_attendees_names">Дополнительные посетители</label>
 			<label index="label_lodgings">Выбранные опции размещения</label>
 			<label index="label_foods">Выбранные опции питания</label>
 			<label index="label_kids">Количество детей</label>
@@ -619,7 +616,6 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_room">Stanza</label>
 			<label index="label_seats">Posti</label>
 			<label index="label_total_price">Prezzo totale</label>
-			<label index="label_attendees_names">Partecipanti aggiuntivi</label>
 			<label index="label_lodgings">Opzioni alloggio selezionate</label>
 			<label index="label_foods">Opzioni vitto selezionate</label>
 			<label index="label_kids">Numero di bambini</label>
@@ -729,7 +725,6 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="label_room">Salle</label>
 			<label index="label_seats">Places</label>
 			<label index="label_total_price">Prix total</label>
-			<label index="label_attendees_names">Participants supplémentaires</label>
 			<label index="label_lodgings">Options d'hébergement choisies</label>
 			<label index="label_foods">Options de nourriture choisies</label>
 			<label index="label_kids">Nombre d'enfants</label>
@@ -868,7 +863,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
 			<label index="label_total_price" type="integer">15654485</label>
-			<label index="label_attendees_names" type="integer">168936155</label>
 			<label index="label_lodgings" type="integer">119452104</label>
 			<label index="label_foods" type="integer">48275051</label>
 			<label index="label_kids" type="integer">18594081</label>
@@ -941,7 +935,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_room" type="integer">214150095</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
-			<label index="label_attendees_names" type="integer">168936155</label>
+			<label index="label_attendees_names" type="integer">112261279</label>
 			<label index="label_lodgings" type="integer">119452104</label>
 			<label index="label_foods" type="integer">48275051</label>
 			<label index="label_kids" type="integer">18594081</label>
@@ -993,7 +987,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_registrationOpensOn" type="integer">260849167</label>
 			<label index="message_accessDenied_formal" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
-			<label index="email_salutation_informal" type="integer">21620827</label>
+			<label index="email_salutation_informal" type="integer">251418939</label>
 			<label index="email_salutation_formal_0" type="integer">169899728</label>
 			<label index="email_salutation_formal_1" type="integer">45885274</label>
 			<label index="email_salutation_formal_2" type="integer">251418939</label>
@@ -1087,7 +1081,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_uid" type="integer">187623698</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
-			<label index="label_attendees_names" type="integer">168936155</label>
 			<label index="label_lodgings" type="integer">119452104</label>
 			<label index="label_foods" type="integer">48275051</label>
 			<label index="label_kids" type="integer">18594081</label>
@@ -1166,7 +1159,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_room" type="integer">214150095</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
-			<label index="label_attendees_names" type="integer">168936155</label>
 			<label index="label_lodgings" type="integer">119452104</label>
 			<label index="label_foods" type="integer">48275051</label>
 			<label index="label_kids" type="integer">18594081</label>
@@ -1270,7 +1262,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_room" type="integer">214150095</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
-			<label index="label_attendees_names" type="integer">168936155</label>
 			<label index="label_lodgings" type="integer">119452104</label>
 			<label index="label_foods" type="integer">48275051</label>
 			<label index="label_kids" type="integer">18594081</label>
@@ -1372,7 +1363,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_room" type="integer">214150095</label>
 			<label index="label_seats" type="integer">187299883</label>
 			<label index="label_total_price" type="integer">15654485</label>
-			<label index="label_attendees_names" type="integer">168936155</label>
 			<label index="label_lodgings" type="integer">119452104</label>
 			<label index="label_foods" type="integer">48275051</label>
 			<label index="label_kids" type="integer">18594081</label>
@@ -1475,7 +1465,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
-			<label index="label_attendees_names">Additional attendees</label>
+			<label index="label_attendees_names">Registered persons</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
@@ -1527,7 +1517,7 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
-			<label index="email_salutation_informal">Hello %s,</label>
+			<label index="email_salutation_informal">Dear %s,</label>
 			<label index="email_salutation_formal_0">Dear Mr. %s,</label>
 			<label index="email_salutation_formal_1">Dear Ms. %s,</label>
 			<label index="email_salutation_formal_2">Dear %s,</label>
@@ -1640,7 +1630,6 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 
 someone just has registered for an event:</label>
 			<label index="label_total_price">Total price</label>
-			<label index="label_attendees_names">Additional attendees</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
@@ -1718,7 +1707,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
-			<label index="label_attendees_names">Additional attendees</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
@@ -1828,7 +1816,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
-			<label index="label_attendees_names">Additional attendees</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
@@ -1940,7 +1927,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
-			<label index="label_attendees_names">Additional attendees</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
@@ -2050,7 +2036,6 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_room">Room</label>
 			<label index="label_seats">Seats</label>
 			<label index="label_total_price">Total price</label>
-			<label index="label_attendees_names">Additional attendees</label>
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_foods">Selected food options</label>
 			<label index="label_kids">Number of kids</label>
