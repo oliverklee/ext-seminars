@@ -53,6 +53,11 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 */
 	private $session;
 
+	/**
+	 * @var integer the UID of the event the fixture relates to
+	 */
+	private $seminarUid = 0;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$frontEndPageUid = $this->testingFramework->createFrontEndPage();
@@ -66,6 +71,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('payment_methods' => '1')
 		));
+		$this->seminarUid = $seminar->getUid();
 
 		$this->fixture = new tx_seminars_pi1_registrationEditor(
 			array(
@@ -288,6 +294,86 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	public function testPopulateListPaymentMethodsDoesNotCrash() {
 		$this->fixture->populateListPaymentMethods(array());
 	}
+
+	public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsOneItem() {
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$paymentMethodUid,
+			'payment_methods'
+		);
+
+		$this->assertEquals(
+			1,
+			count($this->fixture->populateListPaymentMethods(array()))
+		);
+	}
+
+	public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle() {
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'foo')
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$paymentMethodUid,
+			'payment_methods'
+		);
+
+		$paymentMethods = $this->fixture->populateListPaymentMethods(array());
+
+		$this->assertContains(
+			'foo',
+			$paymentMethods[0]['caption']
+		);
+	}
+
+	public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsUid() {
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$paymentMethodUid,
+			'payment_methods'
+		);
+
+		$paymentMethods = $this->fixture->populateListPaymentMethods(array());
+
+		$this->assertEquals(
+			$paymentMethodUid,
+			$paymentMethods[0]['value']
+		);
+	}
+
+	public function testPopulateListPaymentMethodsForEventWithTwoPaymentMethodsReturnsBothPaymentMethods() {
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			'payment_methods'
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			'payment_methods'
+		);
+
+		$this->assertEquals(
+			2,
+			count($this->fixture->populateListPaymentMethods(array()))
+		);
+	}
+
 
 
 	////////////////////////////////////
@@ -803,6 +889,76 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$fixture->__destruct();
+	}
+
+
+	/////////////////////////////////////////////////
+	// Tests concerning getPreselectedPaymentMethod
+	/////////////////////////////////////////////////
+
+	public function test_getPreselectedPaymentMethodForOnePaymentMethod_ReturnsItsUid() {
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'foo')
+		);
+
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$paymentMethodUid,
+			'payment_methods'
+		);
+
+		$this->assertEquals(
+			$paymentMethodUid,
+			$this->fixture->getPreselectedPaymentMethod()
+		);
+	}
+
+	public function test_getPreselectedPaymentMethodForTwoNotSelectedPaymentMethods_ReturnsZero() {
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			'payment_methods'
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			'payment_methods'
+		);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getPreselectedPaymentMethod()
+		);
+	}
+
+	public function test_getPreselectedPaymentMethodForTwoPaymentMethodsOneSelectedOneNot_ReturnsUidOfSelectedRecord() {
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			'payment_methods'
+		);
+		$selectedPaymentMethodUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_PAYMENT_METHODS
+		);
+		$this->testingFramework->createRelation(
+			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			$this->seminarUid,
+			$selectedPaymentMethodUid,
+			'payment_methods'
+		);
+
+		$this->session->setAsInteger(
+			'tx_seminars_registration_editor_method_of_payment', $selectedPaymentMethodUid
+		);
+
+		$this->assertEquals(
+			$selectedPaymentMethodUid,
+			$this->fixture->getPreselectedPaymentMethod()
+		);
 	}
 }
 ?>
