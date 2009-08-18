@@ -322,6 +322,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					$editButtonConfiguration,
 					$formidable->aORenderlets['editPlaceButton']->sXPath
 				);
+				$editButton->includeScripts();
 				$editButtonHTML = $editButton->_render();
 				$result[] = array(
 					'caption' => $place->getTitle(),
@@ -344,13 +345,73 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * Provides data items for the list of available speakers.
 	 *
 	 * @param array any pre-filled data (may be empty)
+	 * @param array $parameters the parameters sent to this function by FORMidable
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array $items with additional items from the speakers table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
-	public function populateListSpeakers(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_SPEAKERS);
+	public function populateListSpeakers(
+		array $items, $parameters = array(), tx_ameosformidable $formidable = null
+	) {
+		$result = $items;
+
+		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+		$speakers = $speakerMapper->findAll();
+
+		if (is_object($formidable)) {
+			$editButtonConfiguration =& $formidable->_navConf(
+				$formidable->aORenderlets['editSpeakerButton']->sXPath
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
+			array('relatedRecordType' => 'Speakers')
+		) && is_object($formidable);
+
+		$type = $parameters['type'];
+
+		foreach ($speakers as $speaker) {
+			$frontEndUserIsOwner = ($speaker->getOwner() === $frontEndUser);
+
+			// Only shows speakers which have no owner or where the owner is
+			// the currently logged in front-end user.
+			if ($speaker->getOwner() && !$frontEndUserIsOwner) {
+				continue;
+			}
+
+			if ($showEditButton && $frontEndUserIsOwner) {
+				$editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
+				$editButtonConfiguration['onclick']['userobj']['php'] = '
+					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+					return tx_seminars_pi1_eventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
+					';
+				$editButton = $formidable->_makeRenderlet(
+					$editButtonConfiguration,
+					$formidable->aORenderlets['editSpeakerButton']->sXPath
+				);
+				$editButton->includeScripts();
+				$editButtonHTML = $editButton->_render();
+				$result[] = array(
+					'caption' => $speaker->getName(),
+					'value' => $speaker->getUid(),
+					'labelcustom' => 'id="tx_seminars_pi1_seminars_' .
+						strtolower($type) . '_label_' . $speaker->getUid() . '"',
+					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+				);
+			} else {
+				$result[] = array(
+					'caption' => $speaker->getName(),
+					'value' => $speaker->getUid(),
+				);
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -404,6 +465,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					$editButtonConfiguration,
 					$formidable->aORenderlets['editCheckboxButton']->sXPath
 				);
+				$editButton->includeScripts();
 				$editButtonHTML = $editButton->_render();
 				$result[] = array(
 					'caption' => $checkbox->getTitle(),
@@ -476,6 +538,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					$editButtonConfiguration,
 					$formidable->aORenderlets['editTargetGroupButton']->sXPath
 				);
+				$editButton->includeScripts();
 				$editButtonHTML = $editButton->_render();
 				$result[] = array(
 					'caption' => $targetGroup->getTitle(),
@@ -711,6 +774,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				'title', 'gender', 'organization', 'homepage',
 				'description', 'skills', 'notes', 'address', 'phone_work',
 				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
+			),
+			'editSpeaker_' => array(
+				'title', 'gender', 'organization', 'homepage',
+				'description', 'skills', 'notes', 'address', 'phone_work',
+				'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
+				'uid',
 			),
 			'newCheckbox_' => array('title'),
 			'editCheckbox_' => array('title', 'uid'),
@@ -1359,14 +1428,18 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$editButtonConfiguration,
 			$formidable->aORenderlets['editPlaceButton']->sXPath
 		);
+		$editButton->includeScripts();
 		$editButtonHTML = $editButton->_render();
 
 		return array(
 			$formidable->aORenderlets['newPlaceModalBox']->majixCloseBox(),
 			$formidable->majixExecJs(
 				'appendPlaceInEditor(' . $place->getUid() . ', "' .
-					addcslashes($place->getTitle(), '"\\') . '", "' .
-					addcslashes($editButtonHTML['__compiled'], '"\\') . '");'
+					addcslashes($place->getTitle(), '"\\') . '", {
+						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
+						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
+						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
+					});'
 			),
 		);
 	}
@@ -1607,53 +1680,110 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			);
 		};
 
-		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
-		$skills = tx_oelib_ObjectFactory::make('tx_oelib_List');
-		if (is_array($formData['newSpeaker_skills'])) {
-			foreach ($formData['newSpeaker_skills'] as $rawUid) {
-				$safeUid = intval($rawUid);
-				if ($safeUid > 0) {
-					$skills->add($skillMapper->find($safeUid));
-				}
-			}
-
-		}
-
 		$speaker = tx_oelib_ObjectFactory::make('tx_seminars_Model_Speaker');
 		$speaker->setData(array_merge(
 			self::createBasicAuxiliaryData(),
-			array(
-				'title' => trim(strip_tags($formData['newSpeaker_title'])),
-				'gender' => intval($formData['newSpeaker_gender']),
-				'organization'
-					=> trim(strip_tags($formData['newSpeaker_organization'])),
-				'homepage' => trim(strip_tags($formData['newSpeaker_homepage'])),
-				'description' => trim($formData['newSpeaker_description']),
-				'skills' => $skills,
-				'notes' => trim(strip_tags($formData['newSpeaker_notes'])),
-				'address' => trim(strip_tags($formData['newSpeaker_address'])),
-				'phone_work'
-					=> trim(strip_tags($formData['newSpeaker_phone_work'])),
-				'phone_home'
-					=> trim(strip_tags($formData['newSpeaker_phone_home'])),
-				'phone_mobile'
-					=> trim(strip_tags($formData['newSpeaker_phone_mobile'])),
-				'fax' => trim(strip_tags($formData['newSpeaker_fax'])),
-				'email' => trim(strip_tags($formData['newSpeaker_email'])),
-				'cancelation_period'
-					=> intval($formData['newSpeaker_cancelation_period']),
-			)
+			array('skills' => new tx_oelib_List())
 		));
+		self::setSpeakerData($speaker, 'newSpeaker_', $formData);
 		$speaker->markAsDirty();
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
 			->save($speaker);
+
+		$editButtonConfiguration =& $formidable->_navConf(
+			$formidable->aORenderlets['editSpeakerButton']->sXPath
+		);
+		$editButtonConfiguration['name'] = 'editSpeakerButton_' . $speaker->getUid();
+		$editButtonConfiguration['onclick']['userobj']['php'] = '
+			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
+			return tx_seminars_pi1_eventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
+			';
+		$editButton = $formidable->_makeRenderlet(
+			$editButtonConfiguration,
+			$formidable->aORenderlets['editSpeakerButton']->sXPath
+		);
+		$editButton->includeScripts();
+		$editButtonHTML = $editButton->_render();
 
 		return array(
 			$formidable->aORenderlets['newSpeakerModalBox']->majixCloseBox(),
 			$formidable->majixExecJs(
 				'appendSpeakerInEditor(' . $speaker->getUid() . ', "' .
-					addcslashes($speaker->getName(), '"\\') . '")'
+					addcslashes($speaker->getName(), '"\\') . '", {
+						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
+						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
+						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
+					});'
 			),
+		);
+	}
+
+	/**
+	 * Updates an existing speaker record.
+	 *
+	 * This function is intended to be called via an AJAX FORMidable event.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function updateSpeaker(tx_ameosformidable $formidable) {
+		$formData = $formidable->oMajixEvent->getParams();
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+
+		try {
+			$speaker = $speakerMapper->find(intval($formData['editSpeaker_uid']));
+		} catch (Exception $exception) {
+			return $formidable->majixExecJs(
+				'alert("The speaker with the given UID does not exist.");'
+			);
+		}
+
+		if ($speaker->getOwner() !== $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this speaker.");'
+			);
+		}
+
+		$validationErrors = self::validateSpeaker(
+			$formidable, array('title' => $formData['editSpeaker_title'])
+		);
+		if (!empty($validationErrors)) {
+			return array(
+				$formidable->majixExecJs(
+					'alert("' . implode('\n', $validationErrors) . '");'
+				),
+			);
+		};
+
+		self::setSpeakerData($speaker, 'editSpeaker_', $formData);
+		$speakerMapper->save($speaker);
+
+		$speakerTypes = array(
+			"speaker",
+			"leader",
+			"partner",
+			"tutor",
+		);
+
+		$uid = $speaker->getUid();
+		$name = $speaker->getName();
+
+		$javaScript = '';
+		foreach ($speakerTypes as $speakerType) {
+			$javaScript .= 'updateAuxiliaryRecordInEditor("' .
+				'tx_seminars_pi1_seminars_' .  $speakerType. '_label_' . $uid . '", ' .
+				'"' . addcslashes($name, '"\\') . '"' .
+				');';
+		}
+
+		return array(
+			$formidable->aORenderlets['editSpeakerModalBox']->majixCloseBox(),
+			$formidable->majixExecJs($javaScript),
 		);
 	}
 
@@ -1680,6 +1810,117 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		return $validationErrors;
+	}
+
+	/**
+	 * Sets the data of a speaker model based on the data given in $formData.
+	 *
+	 * @param tx_seminars_Model_Speaker $speaker
+	 *        the speaker model to set the data for
+	 * @param string $prefix the prefix of the form fields in $formData
+	 * @param array $formData the form data to use for setting the speaker data
+	 */
+	private static function setSpeakerData(tx_seminars_Model_Speaker $speaker, $prefix, array $formData) {
+		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
+		$skills = tx_oelib_ObjectFactory::make('tx_oelib_List');
+
+		if (is_array($formData[$prefix . 'skills'])) {
+			foreach ($formData[$prefix . 'skills'] as $rawUid) {
+				$safeUid = intval($rawUid);
+				if ($safeUid > 0) {
+					$skills->add($skillMapper->find($safeUid));
+				}
+			}
+
+		}
+
+		$speaker->setSkills($skills);
+
+		$speaker->setName(trim(strip_tags($formData[$prefix . 'title'])));
+		$speaker->setGender(intval($formData[$prefix . 'gender']));
+		$speaker->setOrganization($formData[$prefix . 'organization']);
+		$speaker->setHomepage(trim(strip_tags($formData[$prefix . 'homepage'])));
+		$speaker->setDescription(trim($formData[$prefix . 'description']));
+		$speaker->setNotes(trim(strip_tags($formData[$prefix . 'notes'])));
+		$speaker->setAddress(trim(strip_tags($formData[$prefix . 'address'])));
+		$speaker->setPhoneWork(trim(strip_tags($formData[$prefix . 'phone_work'])));
+		$speaker->setPhoneHome(trim(strip_tags($formData[$prefix . 'phone_home'])));
+		$speaker->setPhoneMobile(trim(strip_tags($formData[$prefix . 'phone_mobile'])));
+		$speaker->setFax(trim(strip_tags($formData[$prefix . 'fax'])));
+		$speaker->setEMailAddress(trim(strip_tags($formData[$prefix . 'email'])));
+		$speaker->setCancelationPeriod(intval($formData[$prefix . 'cancelation_period']));
+	}
+
+	/**
+	 * Shows a modalbox containing a form for editing an existing speaker record.
+	 *
+	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param integer $speakerUid the UID of the speaker to edit, must be > 0
+	 *
+	 * @return array calls to be executed on the client
+	 */
+	public static function showEditSpeakerModalBox(
+		tx_ameosformidable $formidable, $speakerUid
+	) {
+		if ($speakerUid <= 0) {
+			return $formidable->majixExecJs('alert("$speakerUid must be >= 0.");');
+		}
+
+		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+
+		try {
+			$speaker = $speakerMapper->find(intval($speakerUid));
+		} catch (tx_oelib_Exception_NotFound $exception) {
+			return $formidable->majixExecJs(
+				'alert("A speaker with the given UID does not exist.");'
+			);
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		if ($speaker->getOwner() !== $frontEndUser) {
+			return $formidable->majixExecJs(
+				'alert("You are not allowed to edit this speaker.");'
+			);
+		}
+
+		$fields = array(
+			'uid' => $speaker->getUid(),
+			'title' => $speaker->getName(),
+			'gender' => $speaker->getGender(),
+			'organization' => $speaker->getOrganization(),
+			'homepage' => $speaker->getHomepage(),
+			'description' => $speaker->getDescription(),
+			'notes' => $speaker->getNotes(),
+			'address' => $speaker->getAddress(),
+			'phone_work' => $speaker->getPhoneWork(),
+			'phone_home' => $speaker->getPhoneHome(),
+			'phone_mobile' => $speaker->getPhoneMobile(),
+			'fax' => $speaker->getFax(),
+			'email' => $speaker->getEMailAddress(),
+			'cancelation_period' => $speaker->getCancelationPeriod(),
+		);
+
+		foreach ($fields as $key => $value) {
+			$formidable->aORenderlets['editSpeaker_' . $key]->setValue($value);
+		}
+
+		$result = array();
+
+		$formidable->oRenderer->_setDisplayLabels(true);
+		$result[] = $formidable->aORenderlets['editSpeakerModalBox']->majixShowBox();
+		$formidable->oRenderer->_setDisplayLabels(false);
+
+		$result[] = $formidable->aORenderlets['editSpeaker_skills']->majixCheckNone();
+
+		$skills = $speaker->getSkills();
+		foreach ($skills as $skill) {
+			$result[] = $formidable->aORenderlets['editSpeaker_skills']
+				->majixCheckItem($skill->getUid());
+		}
+
+		return $result;
 	}
 
 	/**
@@ -1724,14 +1965,18 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$editButtonConfiguration,
 			$formidable->aORenderlets['editCheckboxButton']->sXPath
 		);
+		$editButton->includeScripts();
 		$editButtonHTML = $editButton->_render();
 
 		return array(
 			$formidable->aORenderlets['newCheckboxModalBox']->majixCloseBox(),
 			$formidable->majixExecJs(
 				'appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
-					addcslashes($checkbox->getTitle(), '"\\') . '", "' .
-					addcslashes($editButtonHTML['__compiled'], '"\\') . '");'
+					addcslashes($checkbox->getTitle(), '"\\') . '", {
+						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
+						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
+						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
+					});'
 			),
 		);
 	}
@@ -1923,14 +2168,18 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$editButtonConfiguration,
 			$formidable->aORenderlets['editTargetGroupButton']->sXPath
 		);
+		$editButton->includeScripts();
 		$editButtonHTML = $editButton->_render();
 
 		return array(
 			$formidable->aORenderlets['newTargetGroupModalBox']->majixCloseBox(),
 			$formidable->majixExecJs(
 				'appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
-					addcslashes($targetGroup->getTitle(), '"\\') . '", "' .
-					addcslashes($editButtonHTML['__compiled'], '"\\') . '");'
+					addcslashes($targetGroup->getTitle(), '"\\') . '", {
+						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
+						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
+						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
+					});'
 			),
 		);
 	}

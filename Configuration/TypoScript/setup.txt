@@ -1190,6 +1190,10 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
+						params {
+							10.name = type
+							10.value = Speaker
+						}
 					}
 					validators {
 						10 = validator:STANDARD
@@ -1384,6 +1388,173 @@ plugin.tx_seminars_pi1 {
 					}
 				}
 
+				editSpeakerButton = renderlet:BUTTON
+				editSpeakerButton {
+					name = editSpeakerButton
+					label = LLL:EXT:seminars/pi1/locallang.xml:label_edit
+					class = tx-seminars-pi1-event-editor-edit-button
+					onclick {
+						runat = ajax
+						cache = false
+						userobj.php (
+							require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+							return tx_seminars_pi1_eventEditor::showEditSpeakerModalBox($this);
+						)
+					}
+				}
+
+				editSpeakerModalBox = renderlet:MODALBOX
+				editSpeakerModalBox {
+					name = editSpeakerModalBox
+					childs {
+						editSpeaker_title = renderlet:TEXT
+						editSpeaker_title {
+							name = editSpeaker_title
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.title
+							wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_gender = renderlet:LISTBOX
+						editSpeaker_gender {
+							name = editSpeaker_gender
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+							data {
+								items {
+									10.caption = &nbsp;
+									10.value = 0
+									20.caption = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_male
+									20.value = 1
+									30.caption = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_female
+									30.value = 2
+								}
+							}
+						}
+
+						editSpeaker_organization = renderlet:TEXT
+						editSpeaker_organization {
+							name = editSpeaker_organization
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.organization
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_homepage = renderlet:TEXT
+						editSpeaker_homepage {
+							name = editSpeaker_homepage
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.homepage
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_description = renderlet:TEXTAREA
+						editSpeaker_description {
+							name = editSpeaker_description
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.description
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_skills = renderlet:CHECKBOX
+						editSpeaker_skills {
+							name = editSpeaker_skills
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.skills
+							class = tx-seminars-pi1-event-editor-checkbox
+							wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
+							data.userobj.php (
+								require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+								return tx_seminars_pi1_eventEditor::populateListSkills();
+							)
+						}
+
+						editSpeaker_notes = renderlet:TEXTAREA
+						editSpeaker_notes {
+							name = editSpeaker_notes
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.notes
+							wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_address = renderlet:TEXTAREA
+						editSpeaker_address {
+							name = editSpeaker_address
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.address
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_phone_work = renderlet:TEXT
+						editSpeaker_phone_work {
+							name = editSpeaker_phone_work
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.phone_work
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_phone_home = renderlet:TEXT
+						editSpeaker_phone_home {
+							name = editSpeaker_phone_home
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.phone_home
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_phone_mobile = renderlet:TEXT
+						editSpeaker_phone_mobile {
+							name = editSpeaker_phone_mobile
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.phone_mobile
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_fax = renderlet:TEXT
+						editSpeaker_fax {
+							name = editSpeaker_fax
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.fax
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_email = renderlet:TEXT
+						editSpeaker_email {
+							name = editSpeaker_email
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.email
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editSpeaker_cancelation_period = renderlet:TEXT
+						editSpeaker_cancelation_period {
+							name = editSpeaker_cancelation_period
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.cancelation_period
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
+						}
+
+						editSpeaker_uid = renderlet:HIDDEN
+						editSpeaker_uid {
+							name = editSpeaker_uid
+						}
+
+						editSpeaker_cancelButton = renderlet:BUTTON
+						editSpeaker_cancelButton {
+							name = editSpeaker_cancelButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_cancel
+							wrap = <div class="formidable-rdrstd-rdtwrap modalbox-buttons">|
+							onclick {
+								runat = client
+								userobj.php (
+									return $this->aORenderlets['editSpeakerModalBox']->majixCloseBox();
+								)
+							}
+						}
+
+						editSpeaker_saveButton = renderlet:BUTTON
+						editSpeaker_saveButton {
+							name = editSpeaker_saveButton
+							label = LLL:EXT:seminars/pi1/locallang.xml:label_save
+							wrap = |</div>
+							onclick {
+								runat = ajax
+								params = editSpeaker_title, editSpeaker_gender, editSpeaker_organization, editSpeaker_homepage, editSpeaker_description, editSpeaker_skills, editSpeaker_notes, editSpeaker_address, editSpeaker_phone_work, editSpeaker_phone_home, editSpeaker_phone_mobile, editSpeaker_fax, editSpeaker_email, editSpeaker_cancelation_period, editSpeaker_uid
+								userobj.php (
+									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+									return tx_seminars_pi1_eventEditor::updateSpeaker($this);
+								)
+							}
+						}
+					}
+				}
+
 				partners = renderlet:CHECKBOX
 				partners {
 					name = partners
@@ -1392,6 +1563,10 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
+						params {
+							10.name = type
+							10.value = Partner
+						}
 					}
 					validators {
 						10 = validator:STANDARD
@@ -1415,6 +1590,10 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
+						params {
+							10.name = type
+							10.value = Tutor
+						}
 					}
 					validators {
 						10 = validator:STANDARD
@@ -1438,6 +1617,10 @@ plugin.tx_seminars_pi1 {
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
+						params {
+							10.name = type
+							10.value = Leader
+						}
 					}
 					validators {
 						10 = validator:STANDARD

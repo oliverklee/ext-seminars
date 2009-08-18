@@ -204,10 +204,9 @@ function updateAuxiliaryRecordInEditor(htmlId, title) {
  * @param string htmlName
  *        the relevant part of the IDs and names for the selection elements,
  *        e.g. "place", "speaker" or "tutor".
- * @param string buttonHtml
- *        the HTML of the edit button of the record, may be empty
+ * @param array buttonData the data of the edit button of the record
  */
-function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonHtml) {
+function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
 	var container = $("tx_seminars_pi1_seminars_" + htmlName);
 	if (!container) {
 		return;
@@ -225,10 +224,21 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonHtml) {
 	var label = new Element("label", {"for": id, "id": labelId});
 	label.appendChild(document.createTextNode(title));
 
+	var button = new Element(
+		"input",
+		{
+			"type": "button",
+			"name": buttonData.name,
+			"value": buttonData.value,
+			"id": buttonData.id,
+			"class": "tx-seminars-pi1-event-editor-edit-button"
+		}
+	);
+
 	container.appendChild(new Element("br"));
 	container.appendChild(input);
 	container.appendChild(label);
-	container.innerHTML = container.innerHTML + buttonHtml;
+	container.appendChild(button);
 }
 
 /**
@@ -236,11 +246,10 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonHtml) {
  *
  * @param integer uid the UID of the place to add, must be > 0
  * @param string title the title of the place, must not be empty
- * @param string buttonHtml
- *        the HTML of the edit button of the place, may be empty
+ * @param array buttonData the data of the edit button of the place
  */
-function appendPlaceInEditor(uid, title, buttonHtml) {
-	appendAuxiliaryRecordInEditor(uid, title, "place", buttonHtml);
+function appendPlaceInEditor(uid, title, buttonData) {
+	appendAuxiliaryRecordInEditor(uid, title, "place", buttonData);
 }
 
 /**
@@ -248,12 +257,13 @@ function appendPlaceInEditor(uid, title, buttonHtml) {
  *
  * @param integer uid the UID of the speaker to add, must be > 0
  * @param string title the name of the speaker, must not be empty
+ * @param string buttonData the data of the edit button of the speaker
  */
-function appendSpeakerInEditor(uid, title) {
-	appendAuxiliaryRecordInEditor(uid, title, "speakers", "");
-	appendAuxiliaryRecordInEditor(uid, title, "leaders", "");
-	appendAuxiliaryRecordInEditor(uid, title, "partners", "");
-	appendAuxiliaryRecordInEditor(uid, title, "tutors", "");
+function appendSpeakerInEditor(uid, title, buttonData) {
+	appendAuxiliaryRecordInEditor(uid, title, "speakers", buttonData);
+	appendAuxiliaryRecordInEditor(uid, title, "leaders", buttonData);
+	appendAuxiliaryRecordInEditor(uid, title, "partners", buttonData);
+	appendAuxiliaryRecordInEditor(uid, title, "tutors", buttonData);
 }
 
 /**
@@ -261,11 +271,10 @@ function appendSpeakerInEditor(uid, title) {
  *
  * @param integer uid the UID of the checkbox to add, must be > 0
  * @param string title the title of the checkbox, must not be empty
- * @param string buttonHtml
- *        the HTML of the edit button of the checkbox, may be empty
+ * @param string buttonData the data of the edit button of the checkbox
  */
-function appendCheckboxInEditor(uid, title, buttonHtml) {
-	appendAuxiliaryRecordInEditor(uid, title, "checkboxes", buttonHtml);
+function appendCheckboxInEditor(uid, title, buttonData) {
+	appendAuxiliaryRecordInEditor(uid, title, "checkboxes", buttonData);
 }
 
 /**
@@ -273,9 +282,8 @@ function appendCheckboxInEditor(uid, title, buttonHtml) {
  *
  * @param integer uid the UID of the target group to add, must be > 0
  * @param string title the title of the target group, must not be empty
- * @param string buttonHtml
- *        the HTML of the edit button of the target group, may be empty
+ * @param string buttonData the data of the edit button of the target group
  */
-function appendTargetGroupInEditor(uid, title, buttonHtml) {
-	appendAuxiliaryRecordInEditor(uid, title, "target_groups", buttonHtml);
+function appendTargetGroupInEditor(uid, title, buttonData) {
+	appendAuxiliaryRecordInEditor(uid, title, "target_groups", buttonData);
 }

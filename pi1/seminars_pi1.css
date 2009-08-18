@@ -249,7 +249,8 @@
 	display: inline;
 }
 
-#tx_ameosformidable_modalboxbox .formidable-checkboxes label#tx_seminars_pi1_seminars_newSpeaker_skills_label {
+#tx_ameosformidable_modalboxbox .formidable-checkboxes label#tx_seminars_pi1_seminars_newSpeaker_skills_label,
+#tx_ameosformidable_modalboxbox .formidable-checkboxes label#tx_seminars_pi1_seminars_editSpeaker_skills_label {
 	display: block;
 }
 
