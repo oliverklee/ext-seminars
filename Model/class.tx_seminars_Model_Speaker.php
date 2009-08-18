@@ -166,6 +166,15 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	}
 
 	/**
+	 * Sets this speaker's skills.
+	 *
+	 * @param tx_oelib_List $skills this speaker's skills, may be empty
+	 */
+	public function setSkills(tx_oelib_List $skills) {
+		$this->set('skills', $skills);
+	}
+
+	/**
 	 * Returns our address.
 	 *
 	 * @return string our address, will be empty if there's no address set

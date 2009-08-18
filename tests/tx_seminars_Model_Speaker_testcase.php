@@ -784,5 +784,23 @@ class tx_seminars_Model_Speaker_testcase extends tx_phpunit_testcase {
 			$this->fixture->getNotes()
 		);
 	}
+
+
+	///////////////////////////////
+	// Test regarding the skills.
+	///////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function setSkillsSetsSkills() {
+		$skills = new tx_oelib_List();
+		$this->fixture->setSkills($skills);
+
+		$this->assertSame(
+			$skills,
+			$this->fixture->getSkills()
+		);
+	}
 }
 ?>
