@@ -1,4 +1,5 @@
 0.8.2 (currently working on)
+- [#3350] Fix: getPreselectedPaymentMethod does not return UID of selected payment method
 - [#3144] Fix: Increase the max input size for showRegistrationFields
 
 0.8.1 (released 2009-08-15)

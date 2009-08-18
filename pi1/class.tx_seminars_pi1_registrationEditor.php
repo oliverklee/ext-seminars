@@ -1351,15 +1351,18 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                 will be preselected
 	 */
 	public function getPreselectedPaymentMethod() {
-		$result = 0;
-
 		$availablePaymentMethods = $this->populateListPaymentMethods(array());
 		if (count($availablePaymentMethods) == 1) {
-			$result = key($availablePaymentMethods);
-		} else {
-			$paymentMethodFromSession = $this->retrieveSavedMethodOfPayment();
-			if (isset($availablePaymentMethods[$paymentMethodFromSession])) {
-				$result = $paymentMethodFromSession;
+			return $availablePaymentMethods[0]['value'];
+		}
+
+		$result = 0;
+		$paymentMethodFromSession = $this->retrieveSavedMethodOfPayment();
+
+		foreach ($availablePaymentMethods as $paymentMethod) {
+			if ($paymentMethod['value'] == $paymentMethodFromSession) {
+				$result = $paymentMethod['value'];
+				break;
 			}
 		}
 
