@@ -958,14 +958,15 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	private function getSelectedPaymentMethod() {
 		$result = '';
-
 		$availablePaymentMethods = $this->populateListPaymentMethods(array());
 
-		if (isset($availablePaymentMethods[
-			$this->getFormValue('method_of_payment')
-		])) {
-			$result = $availablePaymentMethods
-				[$this->getFormValue('method_of_payment')]['caption'];
+		foreach ($availablePaymentMethods as $paymentMethod) {
+			if ($paymentMethod['value'] ==
+				$this->getFormValue('method_of_payment')
+			) {
+				$result = $paymentMethod['caption'];
+				break;
+			}
 		}
 
 		// We use strip_tags to remove any trailing <br /> tags.
