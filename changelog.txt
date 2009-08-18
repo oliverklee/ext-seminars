@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3144] Fix: Increase the max input size for showRegistrationFields
 - [#3327] Fix: Front-end editing: after creating an auxiliary record clicking on "edit" for a previously existing auxiliary record has no effect
 - [#3311] Feature: Allow editing of existing speakers records in the FE editor
 - [#3317] Fix: Check for object comparisons / recursive nesting
