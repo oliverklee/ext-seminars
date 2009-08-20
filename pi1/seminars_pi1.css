@@ -260,14 +260,14 @@
 }
 
 #tx_ameosformidable_modalboxbox .modalbox-column2 {
-	float: right;
+	float: left;
 	width: 300px;
 }
 
 #tx_ameosformidable_modalboxbox .modalbox-buttons {
 	clear: both;
 	margin-top: 1em;
-	float: right;
+	float: left;
 }
 
 .tx-seminars-pi1-error {
