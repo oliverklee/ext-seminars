@@ -24,6 +24,7 @@ CREATE TABLE fe_groups (
 	tx_seminars_events_pid int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_seminars_auxiliary_records_pid int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_seminars_reviewer int(11) unsigned DEFAULT '0' NOT NULL
+	tx_seminars_default_categories int(11) unsigned DEFAULT '0' NOT NULL,
 );
 
 
@@ -803,6 +804,21 @@ CREATE TABLE tx_seminars_seminars_requirements_mm (
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign),
+	KEY dummy (is_dummy_record)
+);
+
+
+#
+# Table structure for table 'tx_seminars_usergroups_categories_mm'
+#
+CREATE TABLE tx_seminars_usergroups_categories_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(30) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign),
 	KEY dummy (is_dummy_record)

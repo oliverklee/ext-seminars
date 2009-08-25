@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description></description>
+		<type>CSH</type>
+		<csh_table>fe_groups</csh_table>
+		<fileId>EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xml</fileId>
+		<labelContext type="array">
+		</labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_seminars_default_categories.description">If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</label>
+			<label index="tx_seminars_default_categories.details">If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tx_seminars_default_categories.description">Wenn ein Benutzer mit Default-Kategorien im Front-end Veranstaltungen anlegt, bekommen alle diese Veranstaltungen automatisch die Default-Kategorien zugewiesen, und die Kategorieauswahl ist ausgeblendet.</label>
+			<label index="tx_seminars_default_categories.details">Wenn ein Benutzer mit Default-Kategorien im Front-end Veranstaltungen anlegt, bekommen alle diese Veranstaltungen automatisch die Default-Kategorien zugewiesen, und die Kategorieauswahl ist ausgeblendet.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="tx_seminars_default_categories.description" type="integer">138996863</label>
+			<label index="tx_seminars_default_categories.details" type="integer">138996863</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="tx_seminars_default_categories.description">If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</label>
+			<label index="tx_seminars_default_categories.details">If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</label>
+		</languageKey>
+	</orig_text>
+</T3locallang>
