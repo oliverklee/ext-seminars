@@ -868,6 +868,9 @@ plugin.tx_seminars_pi1 {
 					name = place
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.place
 					class = tx-seminars-pi1-event-editor-checkbox
+					wrapitem = <tr><td>|</td></tr>
+					wrap = <table class="checkboxTable"><tbody>|</tbody></table>
+					separator =
 					data.userobj {
 						extension = this
 						method = populateListPlaces

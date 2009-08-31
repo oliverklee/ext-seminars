@@ -328,12 +328,13 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					'caption' => $place->getTitle(),
 					'value' => $place->getUid(),
 					'labelcustom' => 'id="tx_seminars_pi1_seminars_place_label_' . $place->getUid() . '"',
-					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+					'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
 				);
 			} else {
 				$result[] = array(
 					'caption' => $place->getTitle(),
 					'value' => $place->getUid(),
+					'wrapitem' => '|</td><td>&nbsp;'
 				);
 			}
 		}

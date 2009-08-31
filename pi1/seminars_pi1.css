@@ -202,6 +202,22 @@
 	width: 10%;
 }
 
+.tx-seminars-pi1-event-editor table.checkboxTable {
+	width: 100%;
+}
+
+.tx-seminars-pi1-event-editor table.checkboxTable td {
+	vertical-align: top;
+}
+
+.tx-seminars-pi1-event-editor .checkboxFields .columnleft dt {
+	width: 20%;
+}
+
+.tx-seminars-pi1-event-editor .checkboxFields .columnleft dd {
+	width: 79%;
+}
+
 /*SUBMIT BUTTOM*/
 .tx-seminars-pi1-event-editor #submit {
 	margin: 0 0 10px;
@@ -234,8 +250,6 @@
 }
 
 .tx-seminars-pi1-event-editor .tx-seminars-pi1-event-editor-edit-button {
-	position: absolute;
-	right: 30%;
 	width: auto;
 }
 
