@@ -2362,6 +2362,23 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		return $result;
 	}
+
+	/**
+	 * Returns the UID of the preselected organizer.
+	 *
+	 * @return integer the UID of the preselected organizer; if more than one
+	 *                 organizer is available, zero will be returned
+	 */
+	public function getPreselectedOrganizer() {
+		$availableOrganizers = $this->populateListOrganizers(array());
+		if (count($availableOrganizers) != 1) {
+			return 0;
+		}
+
+		$organizerData = array_pop($availableOrganizers);
+
+		return $organizerData['value'];
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_eventEditor.php']) {

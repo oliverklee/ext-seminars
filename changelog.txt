@@ -2,6 +2,7 @@
 - [#3354] Change: populateList cannot work with test records only
 - [#3331] Fix: testSendCancelationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage fails
 - [#3362] Feature: Add accessors for the default categories
+- [#3046] Feature: If there is only one organizer available, auto-select it in the FE editor
 - [#3361] Feature: Add a setting for default categories to the FE user groups
 - [#3355] Fix: Fix the FE editor layout in IE7
 - [#3273] Fix: The countries in the modal editors should be sorted alphabetically

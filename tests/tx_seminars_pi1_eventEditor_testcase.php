@@ -48,6 +48,8 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
+		tx_oelib_MapperRegistry::getInstance()
+			->activateTestingMode($this->testingFramework);
 
 		$this->fixture = new tx_seminars_pi1_eventEditor(
 			array(
@@ -2032,6 +2034,41 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			count(tx_seminars_pi1_eventEditor::makeListToFormidableList($list))
+		);
+	}
+
+
+	/////////////////////////////////////////////
+	// Tests concerning getPreselectedOrganizer
+	/////////////////////////////////////////////
+
+	public function test_getPreselectedOrganizerForNoAvailableOrganizer_ReturnsZero() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getPreselectedOrganizer()
+		);
+	}
+
+	public function test_getPreselectedOrganizerForOneAvailableOrganizer_ReturnsTheOrganizersUid() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$organizerUid = $this->testingFramework->createRecord('tx_seminars_organizers');
+
+		$this->assertEquals(
+			$organizerUid,
+			$this->fixture->getPreselectedOrganizer()
+		);
+	}
+
+	public function test_getPreselectedOrganizerForTwoAvailableOrganizers_ReturnsZero() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->testingFramework->createRecord('tx_seminars_organizers');
+		$this->testingFramework->createRecord('tx_seminars_organizers');
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getPreselectedOrganizer()
 		);
 	}
 }

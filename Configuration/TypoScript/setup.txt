@@ -1959,9 +1959,15 @@ plugin.tx_seminars_pi1 {
 					name = organizers
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.organizers
 					class = tx-seminars-pi1-event-editor-checkbox
-					data.userobj {
-						extension = this
-						method = populateListOrganizers
+					data {
+						userobj {
+							extension = this
+							method = populateListOrganizers
+						}
+						defaultvalue.userobj {
+							extension = this
+							method = getPreselectedOrganizer
+						}
 					}
 					validators {
 						10 = validator:STANDARD
