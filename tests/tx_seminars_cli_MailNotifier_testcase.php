@@ -282,6 +282,8 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject() {
+		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry
+			::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(
 			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
 		);
@@ -303,6 +305,8 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage() {
+		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry
+			::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(
 			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
 		);
@@ -489,6 +493,8 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSendCancelationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject() {
+		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry
+			::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(
 			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
 		);
@@ -509,6 +515,8 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSendCancelationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage() {
+		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry
+			::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(
 			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
 		);
