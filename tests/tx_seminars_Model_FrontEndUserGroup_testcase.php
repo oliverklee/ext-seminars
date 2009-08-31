@@ -225,5 +225,63 @@ class tx_seminars_Model_FrontEndUserGroup_testcase extends tx_phpunit_testcase {
 			$this->fixture->getEventRecordPid()
 		);
 	}
+
+	//////////////////////////////////////////
+	// Tests concerning getDefaultCategories
+	//////////////////////////////////////////
+
+	public function test_getDefaultCategoriesForNoCategories_ReturnsAList() {
+		$this->fixture->setData(array(
+			'tx_seminars_default_categories' => tx_oelib_ObjectFactory::make('tx_oelib_List'))
+		);
+
+		$this->assertTrue(
+			$this->fixture->getDefaultCategories() instanceOf tx_oelib_List
+		);
+	}
+
+	public function test_getDefaultCategoriesForOneAssignedCategory_ReturnsThisCategoryInList() {
+		$list = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+			->getNewGhost();
+
+		$list->add($category);
+		$this->fixture->setData(array('tx_seminars_default_categories' => $list));
+
+		$this->assertSame(
+			$category,
+			$this->fixture->getDefaultCategories()->first()
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning hasDefaultCategories
+	//////////////////////////////////////////
+
+	public function test_hasDefaultCategoriesForNoAssignedCategories_ReturnsFalse() {
+		$this->fixture->setData(array(
+			'tx_seminars_default_categories'
+				=> tx_oelib_ObjectFactory::make('tx_oelib_List'))
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasDefaultCategories()
+		);
+	}
+
+	public function test_hasDefaultCategoriesForOneAssignedCategory_ReturnsTrue() {
+		$list = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$list->add(
+			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+				->getNewGhost()
+		);
+
+		$this->fixture->setData(array('tx_seminars_default_categories' => $list));
+
+		$this->assertTrue(
+			$this->fixture->hasDefaultCategories()
+		);
+	}
 }
 ?>

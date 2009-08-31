@@ -4485,7 +4485,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Returns the places associated with this event.
 	 *
-	 * @return tx_oelib_list with the models for the places of this event, will
+	 * @return tx_oelib_List with the models for the places of this event, will
 	 *                       be empty if this event has no places
 	 */
 	public function getPlaces() {

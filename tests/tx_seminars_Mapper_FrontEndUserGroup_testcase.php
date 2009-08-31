@@ -38,13 +38,20 @@ class tx_seminars_Mapper_FrontEndUserGroup_testcase extends tx_phpunit_testcase 
 	 */
 	private $fixture;
 
+	/**
+	 * @var tx_oelib_testingFramework the testing framework	 *
+	 */
+	private $testingFramework;
+
 	public function setUp() {
 		$this->fixture = new tx_seminars_Mapper_FrontEndUserGroup();
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 	}
 
 	public function tearDown() {
 		$this->fixture->__destruct();
-		unset($this->fixture);
+		$this->testingFramework->cleanUp();
+		unset($this->fixture, $this->testingFramework);
 	}
 
 
@@ -65,7 +72,7 @@ class tx_seminars_Mapper_FrontEndUserGroup_testcase extends tx_phpunit_testcase 
 	//////////////////////////////////
 
 	public function test_FrontEndUserGroup_CanReturnBackEndUserModel() {
-		$backEndUser = tx_oelib_ObjectFactory::make(
+		$backEndUser = tx_oelib_MapperRegistry::get(
 			'tx_oelib_Mapper_BackEndUser')->getNewGhost();
 		$frontEndUserGroup = $this->fixture->getLoadedTestingModel(
 			array('tx_seminars_reviewer' => $backEndUser->getUid())
@@ -74,6 +81,27 @@ class tx_seminars_Mapper_FrontEndUserGroup_testcase extends tx_phpunit_testcase 
 		$this->assertTrue(
 			$this->fixture->find($frontEndUserGroup->getUid())->getReviewer()
 				instanceof tx_oelib_Model_BackEndUser
+		);
+	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning the default categories
+	////////////////////////////////////////////
+
+	public function test_FrontEndUserGroup_ReturnsListOfCategories() {
+		$categoryUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_CATEGORIES, array()
+		);
+		$frontEndUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			'fe_groups', $frontEndUserGroupUid, $categoryUid, 'tx_seminars_default_categories'
+		);
+
+		$this->assertTrue(
+			$this->fixture->find($frontEndUserGroupUid)->getDefaultCategories()->first()
+				instanceof tx_seminars_Model_Category
 		);
 	}
 }

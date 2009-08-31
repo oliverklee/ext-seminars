@@ -121,6 +121,27 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	public function getEventRecordPid() {
 		return $this->getAsInteger('tx_seminars_events_pid');
 	}
+
+	/**
+	 * Gets this user group's assigned default categories.
+	 *
+	 * @return tx_oelib_List the list of default categories assigned to this
+	 *                       group, will be empty if no default categories are
+	 *                       assigned to this group
+	 */
+	public function getDefaultCategories() {
+		return $this->getAsList('tx_seminars_default_categories');
+	}
+
+	/**
+	 * Checks whether this user group has default categories assigned.
+	 *
+	 * @return boolean true if this group has at least one default category,
+	 *                 false otherwise
+	 */
+	public function hasDefaultCategories() {
+		return !$this->getDefaultCategories()->isEmpty();
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUserGroup.php']) {

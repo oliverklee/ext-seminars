@@ -531,5 +531,208 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 			$this->fixture->getEventRecordsPid()
 		);
 	}
+
+
+	///////////////////////////////////////////////////
+	// Tests concerning getDefaultCategoriesFromGroup
+	///////////////////////////////////////////////////
+
+	public function test_getDefaultCategoriesFromGroupForUserWithGroupWithoutCategories_ReturnsEmptyList() {
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array('tx_seminars_default_categories' => new tx_oelib_List())
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertTrue(
+			$this->fixture->getDefaultCategoriesFromGroup()->isEmpty()
+		);
+	}
+
+	public function test_getDefaultCategoriesFromGroupForUserWithOneGroupWithCategory_ReturnsThisCategory() {
+		$categories = new tx_oelib_List();
+		$categories->add(
+			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+				->getNewGhost()
+		);
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array('tx_seminars_default_categories' => $categories)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getDefaultCategoriesFromGroup()->count()
+		);
+	}
+
+	public function test_getDefaultCategoriesFromGroupForUserWithOneGroupWithTwoCategories_ReturnsTwoCategories() {
+		$categoryMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Category');
+		$categories = new tx_oelib_List();
+		$categories->add($categoryMapper->getNewGhost());
+		$categories->add($categoryMapper->getNewGhost());
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array('tx_seminars_default_categories' => $categories)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getDefaultCategoriesFromGroup()->count()
+		);
+	}
+
+	public function test_getDefaultCategoriesFromGroupForUserWithTwoGroupsOneWithCategory_ReturnsOneCategory() {
+		$frontEndGroupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup');
+		$userGroup1 = $frontEndGroupMapper->getNewGhost();
+		$userGroup1->setData(
+			array('tx_seminars_default_categories' => new tx_oelib_List())
+		);
+
+		$categories = new tx_oelib_List();
+		$categories->add(
+			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+				->getNewGhost()
+		);
+
+		$userGroup2 = $frontEndGroupMapper->getNewGhost();
+		$userGroup2->setData(
+			array('tx_seminars_default_categories' => $categories)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup1);
+		$list->add($userGroup2);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getDefaultCategoriesFromGroup()->count()
+		);
+	}
+
+	public function test_getDefaultCategoriesFromGroupForUserWithTwoGroupsBothWithSameCategory_ReturnsOneCategory() {
+		$categoryGhost = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Category')->getNewGhost();
+		$categories = new tx_oelib_List();
+		$categories->add($categoryGhost);
+
+		$frontEndGroupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup');
+		$userGroup1 = $frontEndGroupMapper->getNewGhost();
+		$userGroup1->setData(
+			array('tx_seminars_default_categories' => $categories)
+		);
+
+		$userGroup2 = $frontEndGroupMapper->getNewGhost();
+		$userGroup2->setData(
+			array('tx_seminars_default_categories' => $categories)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup1);
+		$list->add($userGroup2);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			1,
+			$this->fixture->getDefaultCategoriesFromGroup()->count()
+		);
+	}
+
+	public function test_getDefaultCategoriesFromGroupForUserWithTwoGroupsBothWithCategories_ReturnsTwoCategories() {
+		$categoryMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Category'
+		);
+		$frontEndGroupMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup');
+
+		$categoryGhost1 = $categoryMapper->getNewGhost();
+		$categories1 = new tx_oelib_List();
+		$categories1->add($categoryGhost1);
+		$userGroup1 = $frontEndGroupMapper->getNewGhost();
+		$userGroup1->setData(
+			array('tx_seminars_default_categories' => $categories1)
+		);
+
+		$categoryGhost2 = $categoryMapper->getNewGhost();
+		$categories2 = new tx_oelib_List();
+		$categories2->add($categoryGhost2);
+		$userGroup2 = $frontEndGroupMapper->getNewGhost();
+		$userGroup2->setData(
+			array('tx_seminars_default_categories' => $categories2)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup1);
+		$list->add($userGroup2);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->getDefaultCategoriesFromGroup()->count()
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning hasDefaultCategories
+	//////////////////////////////////////////
+
+	public function test_hasDefaultCategoriesForUserWithOneGroupWithoutCategory_ReturnsFalse() {
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array('tx_seminars_default_categories' => new tx_oelib_List())
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertFalse(
+			$this->fixture->hasDefaultCategories()
+		);
+	}
+
+	public function test_hasDefaultCategoriesForUserWithOneGroupWithCategory_ReturnsTrue() {
+		$categories = new tx_oelib_List();
+		$categories->add(
+			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+				->getNewGhost()
+		);
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array('tx_seminars_default_categories' => $categories)
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($userGroup);
+		$this->fixture->setData(array('usergroup' => $list));
+
+		$this->assertTrue(
+			$this->fixture->hasDefaultCategories()
+		);
+	}
 }
 ?>

@@ -4563,7 +4563,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_getPlacesForEventWithNoPlaces_ReturnsEmptyList() {
 		$this->assertTrue(
-			$this->fixture->getPlaces() instanceof tx_oelib_list
+			$this->fixture->getPlaces() instanceof tx_oelib_List
 		);
 	}
 

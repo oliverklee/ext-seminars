@@ -139,6 +139,35 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		return $eventRecordPid;
 	}
+
+	/**
+	 * Returns all default categories assigned to this user's groups.
+	 *
+	 * @return tx_oelib_List the categories assigned to this user's groups, will
+	 *                       be empty if no default categories have been assigned
+	 *                       to any of the user's groups
+	 */
+	public function getDefaultCategoriesFromGroup() {
+		$categories = tx_oelib_ObjectFactory::make('tx_oelib_List');
+
+		foreach ($this->getUserGroups() as $group) {
+			if ($group->hasDefaultCategories()) {
+				$categories->appendUnique($group->getDefaultCategories());
+			}
+		}
+
+		return $categories;
+	}
+
+	/**
+	 * Checks whether this user's groups have any default categories.
+	 *
+	 * @return boolean true if at least one of the user's groups has a default
+	 *                 category, false otherwise
+	 */
+	public function hasDefaultCategories() {
+		return !$this->getDefaultCategoriesFromGroup()->isEmpty();
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUser.php']) {
