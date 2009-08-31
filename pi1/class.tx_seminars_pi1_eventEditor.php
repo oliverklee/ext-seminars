@@ -202,7 +202,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function populateListCategories() {
 		$categories = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
-			->findAll('title ASC');
+			->findByPageUid($this->getStoragePid(), 'title ASC');
 
 		return self::makeListToFormidableList($categories);
 	}
@@ -216,7 +216,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function populateListEventTypes() {
 		$eventTypes = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_EventType')->findAll('title ASC');
+			'tx_seminars_Mapper_EventType')->findByPageUid(
+				$this->getStoragePid(), 'title ASC'
+		);
 
 		return self::makeListToFormidableList($eventTypes);
 	}
@@ -230,7 +232,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function populateListLodgings() {
 		$lodgings = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Lodging')
-			->findAll('title ASC');
+			->findByPageUid($this->getStoragePid(), 'title ASC');
 
 		return self::makeListToFormidableList($lodgings);
 	}
@@ -244,7 +246,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function populateListFoods() {
 		$foods= tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Food')
-			->findAll('title ASC');
+			->findByPageUid($this->getStoragePid(), 'title ASC');
 
 		return self::makeListToFormidableList($foods);
 	}
@@ -258,7 +260,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function populateListPaymentMethods() {
 		$paymentMethods = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_PaymentMethod')->findAll('title ASC');
+			'tx_seminars_Mapper_PaymentMethod')->findByPageUid(
+				$this->getStoragePid(), 'title ASC'
+		);
 
 		return self::makeListToFormidableList($paymentMethods);
 	}
@@ -272,7 +276,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	public function populateListOrganizers() {
 		$organizers = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_Organizer')->findAll('title ASC');
+			'tx_seminars_Mapper_Organizer')->findByPageUid(
+				$this->getStoragePid(), 'title ASC'
+		);
 
 		return self::makeListToFormidableList($organizers);
 	}
@@ -294,7 +300,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$result = $items;
 
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
-		$places = $placeMapper->findAll();
+		$places = $placeMapper->findByPageUid(
+			$this->getStoragePid(), 'title ASC'
+		);
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(
@@ -365,7 +373,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$result = $items;
 
 		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
-		$speakers = $speakerMapper->findAll();
+		$speakers = $speakerMapper->findByPageUid(
+			$this->getStoragePid(), 'title ASC'
+		);
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(
@@ -439,7 +449,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$result = $items;
 
 		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
-		$checkboxes = $checkboxMapper->findAll();
+		$checkboxes = $checkboxMapper->findByPageUid(
+			$this->getStoragePid(), 'title ASC'
+		);
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(
@@ -512,7 +524,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$targetGroupMapper = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_TargetGroup'
 		);
-		$targetGroups = $targetGroupMapper->findAll();
+		$targetGroups = $targetGroupMapper->findByPageUid(
+			$this->getStoragePid(), 'title ASC'
+		);
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(

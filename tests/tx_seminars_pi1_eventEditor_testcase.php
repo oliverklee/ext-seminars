@@ -613,6 +613,62 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function populateListCategoriesForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$categoryUid = $this->testingFramework->createRecord(
+			'tx_seminars_categories', array('pid' => 23)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $categoryUid),
+				$this->fixture->populateListCategories(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListCategoriesForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$categoryUid = $this->testingFramework->createRecord(
+			'tx_seminars_categories', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $categoryUid),
+				$this->fixture->populateListCategories(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListCategoriesForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$categoryUid = $this->testingFramework->createRecord(
+			'tx_seminars_categories', array('pid' => 21)
+		);
+
+		$this->assertFalse(
+			in_array(
+				array('caption' => '', 'value' => $categoryUid),
+				$this->fixture->populateListCategories(array())
+			)
+		);
+	}
+
 
 	///////////////////////////////////////////////
 	// Tests concerning populateListEventTypes().
@@ -635,6 +691,62 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function populateListEventTypesForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$eventTypeUid = $this->testingFramework->createRecord(
+			'tx_seminars_event_types', array('pid' => 87)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $eventTypeUid),
+				$this->fixture->populateListEventTypes(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListEventTypesForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$eventTypeUid = $this->testingFramework->createRecord(
+			'tx_seminars_event_types', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $eventTypeUid),
+				$this->fixture->populateListEventTypes(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListEventTypesForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$eventTypeUid = $this->testingFramework->createRecord(
+			'tx_seminars_event_types', array('pid' => 23)
+		);
+
+		$this->assertFalse(
+			in_array(
+				array('caption' => '', 'value' => $eventTypeUid),
+				$this->fixture->populateListEventTypes(array())
+			)
+		);
+	}
+
 
 	/////////////////////////////////////////////
 	// Tests concerning populateListLodgings().
@@ -644,12 +756,67 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListLodgingsShowsLodging() {
-		$this->testingFramework->createAndLoginFrontEndUser();
 		$lodgingUid = $this->testingFramework->createRecord(
 			'tx_seminars_lodgings'
 		);
 
 		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $lodgingUid),
+				$this->fixture->populateListLodgings(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListLodgingsForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$lodgingUid = $this->testingFramework->createRecord(
+			'tx_seminars_lodgings', array('pid' => 11)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $lodgingUid),
+				$this->fixture->populateListLodgings(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListLodgingsForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$lodgingUid = $this->testingFramework->createRecord(
+			'tx_seminars_lodgings', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $lodgingUid),
+				$this->fixture->populateListLodgings(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListLodgingsForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$lodgingUid = $this->testingFramework->createRecord(
+			'tx_seminars_lodgings', array('pid' => 21)
+		);
+
+		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $lodgingUid),
 				$this->fixture->populateListLodgings(array())
@@ -666,12 +833,67 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListFoodsShowsFood() {
-		$this->testingFramework->createAndLoginFrontEndUser();
 		$foodUid = $this->testingFramework->createRecord(
 			'tx_seminars_foods'
 		);
 
 		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $foodUid),
+				$this->fixture->populateListFoods(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListFoodsForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$foodUid = $this->testingFramework->createRecord(
+			'tx_seminars_foods', array('pid' => 22)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $foodUid),
+				$this->fixture->populateListFoods(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListFoodsForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$foodUid = $this->testingFramework->createRecord(
+			'tx_seminars_foods', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $foodUid),
+				$this->fixture->populateListFoods(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListFoodsForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$foodUid = $this->testingFramework->createRecord(
+			'tx_seminars_foods', array('pid' => 21)
+		);
+
+		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $foodUid),
 				$this->fixture->populateListFoods(array())
@@ -688,12 +910,67 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPaymentMethodsShowsPaymentMethod() {
-		$this->testingFramework->createAndLoginFrontEndUser();
 		$paymentMethodUid = $this->testingFramework->createRecord(
 			'tx_seminars_payment_methods'
 		);
 
 		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $paymentMethodUid),
+				$this->fixture->populateListPaymentMethods(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListPaymentMethodsForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			'tx_seminars_payment_methods', array('pid' => 52)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $paymentMethodUid),
+				$this->fixture->populateListPaymentMethods(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListPaymentMethodsForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			'tx_seminars_payment_methods', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $paymentMethodUid),
+				$this->fixture->populateListPaymentMethods(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListPaymentMethodsForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$paymentMethodUid = $this->testingFramework->createRecord(
+			'tx_seminars_payment_methods', array('pid' => 21)
+		);
+
+		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $paymentMethodUid),
 				$this->fixture->populateListPaymentMethods(array())
@@ -710,12 +987,67 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListOrganizersShowsOrganizer() {
-		$this->testingFramework->createAndLoginFrontEndUser();
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers'
 		);
 
 		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $organizerUid),
+				$this->fixture->populateListOrganizers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListOrganizersForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$organizerUid = $this->testingFramework->createRecord(
+			'tx_seminars_organizers', array('pid' => 12)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $organizerUid),
+				$this->fixture->populateListOrganizers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListOrganizersForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$organizerUid = $this->testingFramework->createRecord(
+			'tx_seminars_organizers', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $organizerUid),
+				$this->fixture->populateListOrganizers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListOrganizersForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$organizerUid = $this->testingFramework->createRecord(
+			'tx_seminars_organizers', array('pid' => 12)
+		);
+
+		$this->assertFalse(
 			in_array(
 				array('caption' => '', 'value' => $organizerUid),
 				$this->fixture->populateListOrganizers(array())
@@ -775,6 +1107,74 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites', array('owner' => $frontEndUserUid + 1)
+		);
+
+		$this->assertFalse(
+			in_array(
+				array(
+					'caption' => '', 'value' => $placeUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListPlaces(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListPlacesForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('pid' => 55)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $placeUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListPlaces(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListPlacesForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $placeUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListPlaces(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListPlacesForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('pid' => 21)
 		);
 
 		$this->assertFalse(
@@ -853,6 +1253,74 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function populateListCheckboxesForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$checkboxUid = $this->testingFramework->createRecord(
+			'tx_seminars_checkboxes', array('pid' => 12)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $checkboxUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListCheckboxes(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListCheckboxesForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$checkboxUid = $this->testingFramework->createRecord(
+			'tx_seminars_checkboxes', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $checkboxUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListCheckboxes(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListCheckboxesForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$checkboxUid = $this->testingFramework->createRecord(
+			'tx_seminars_checkboxes', array('pid' => 21)
+		);
+
+		$this->assertFalse(
+			in_array(
+				array(
+					'caption' => '', 'value' => $checkboxUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListCheckboxes(array())
+			)
+		);
+	}
+
 
 	/////////////////////////////////////////////////
 	// Tests concerning populateListTargetGroups().
@@ -918,6 +1386,74 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function populateListTargetGroupsForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$targetGroupUid = $this->testingFramework->createRecord(
+			'tx_seminars_target_groups', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $targetGroupUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListTargetGroups(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListTargetGroupsForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$targetGroupUid = $this->testingFramework->createRecord(
+			'tx_seminars_target_groups', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $targetGroupUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListTargetGroups(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListTargetGroupsForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$targetGroupUid = $this->testingFramework->createRecord(
+			'tx_seminars_target_groups', array('pid' => 21)
+		);
+
+		$this->assertFalse(
+			in_array(
+				array(
+					'caption' => '', 'value' => $targetGroupUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListTargetGroups(array())
+			)
+		);
+	}
+
 
 	/////////////////////////////////////////////
 	// Tests concerning populateListSpeakers().
@@ -970,6 +1506,74 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$speakerUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers', array('owner' => $frontEndUserUid + 1)
+		);
+
+		$this->assertFalse(
+			in_array(
+				array(
+					'caption' => '', 'value' => $speakerUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListSpeakers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListSpeakersForNoSetStoragePageReturnsRecordWithAnyPageId() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$speakerUid = $this->testingFramework->createRecord(
+			'tx_seminars_speakers', array('pid' => 25)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $speakerUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListSpeakers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListSpeakersForSetStoragePageReturnsRecordWithThisPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$speakerUid = $this->testingFramework->createRecord(
+			'tx_seminars_speakers', array('pid' => 42)
+		);
+
+		$this->assertTrue(
+			in_array(
+				array(
+					'caption' => '', 'value' => $speakerUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
+				$this->fixture->populateListSpeakers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListSpeakersForSetStoragePageDoesNotReturnsRecordWithOtherPageId() {
+		$pageUid = $this->testingFramework->createFrontEndPage(
+			0, array('storage_pid' => 42)
+		);
+		$this->testingFramework->createFakeFrontEnd($pageUid);
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$speakerUid = $this->testingFramework->createRecord(
+			'tx_seminars_speakers', array('pid' => 21)
 		);
 
 		$this->assertFalse(
@@ -1992,6 +2596,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
 
 	//////////////////////////////////////////////
 	// Tests concerning makeListToFormidableList
