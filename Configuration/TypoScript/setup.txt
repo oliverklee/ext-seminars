@@ -869,7 +869,7 @@ plugin.tx_seminars_pi1 {
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.place
 					class = tx-seminars-pi1-event-editor-checkbox
 					wrapitem = <tr><td>|</td></tr>
-					wrap = <table class="checkboxTable"><tbody>|</tbody></table>
+					wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
 					separator =
 					data.userobj {
 						extension = this
@@ -1190,6 +1190,9 @@ plugin.tx_seminars_pi1 {
 					name = speakers
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.speakers
 					class = tx-seminars-pi1-event-editor-checkbox
+					wrapitem = <tr><td>|</td></tr>
+					wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+					separator =
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1563,6 +1566,9 @@ plugin.tx_seminars_pi1 {
 					name = partners
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.partners
 					class = tx-seminars-pi1-event-editor-checkbox
+					wrapitem = <tr><td>|</td></tr>
+					wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+					separator =
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1590,6 +1596,9 @@ plugin.tx_seminars_pi1 {
 					name = tutors
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.tutors
 					class = tx-seminars-pi1-event-editor-checkbox
+					wrapitem = <tr><td>|</td></tr>
+					wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+					separator =
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1617,6 +1626,9 @@ plugin.tx_seminars_pi1 {
 					name = leaders
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.leaders
 					class = tx-seminars-pi1-event-editor-checkbox
+					wrapitem = <tr><td>|</td></tr>
+					wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+					separator =
 					data.userobj {
 						extension = this
 						method = populateListSpeakers
@@ -1770,6 +1782,9 @@ plugin.tx_seminars_pi1 {
 					name = checkboxes
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.checkboxes
 					class = tx-seminars-pi1-event-editor-checkbox
+					wrapitem = <tr><td>|</td></tr>
+					wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+					separator =
 					data.userobj {
 						extension = this
 						method = populateListCheckboxes
@@ -2037,6 +2052,9 @@ plugin.tx_seminars_pi1 {
 					name = target_groups
 					label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.target_groups
 					class = tx-seminars-pi1-event-editor-checkbox
+					wrapitem = <tr><td>|</td></tr>
+					wrap = <table class="checkboxTable" summary=""><tbody>|</tbody></table>
+					separator =
 					data.userobj {
 						extension = this
 						method = populateListTargetGroups

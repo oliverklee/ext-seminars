@@ -210,12 +210,19 @@
 	vertical-align: top;
 }
 
-.tx-seminars-pi1-event-editor .checkboxFields .columnleft dt {
-	width: 20%;
+.tx-seminars-pi1-event-editor .checkboxFields .columnleft dt,
+#speakerCheckboxFields .columnright dt {
+	width: 25%;
 }
 
-.tx-seminars-pi1-event-editor .checkboxFields .columnleft dd {
-	width: 79%;
+.tx-seminars-pi1-event-editor .checkboxFields .columnleft dd,
+#speakerCheckboxFields .columnright dd {
+	width: 74%;
+}
+
+#tx_seminars_pi1_seminars_target_groups,
+#tx_seminars_pi1_seminars_checkboxes {
+	width: 50%;
 }
 
 /*SUBMIT BUTTOM*/

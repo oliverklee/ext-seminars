@@ -402,12 +402,13 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					'value' => $speaker->getUid(),
 					'labelcustom' => 'id="tx_seminars_pi1_seminars_' .
 						strtolower($type) . '_label_' . $speaker->getUid() . '"',
-					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+					'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
 				);
 			} else {
 				$result[] = array(
 					'caption' => $speaker->getName(),
 					'value' => $speaker->getUid(),
+					'wrapitem' => '|</td><td>&nbsp;'
 				);
 			}
 		}
@@ -472,12 +473,13 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					'caption' => $checkbox->getTitle(),
 					'value' => $checkbox->getUid(),
 					'labelcustom' => 'id="tx_seminars_pi1_seminars_checkbox_label_' . $checkbox->getUid() . '"',
-					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+					'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
 				);
 			} else {
 				$result[] = array(
 					'caption' => $checkbox->getTitle(),
 					'value' => $checkbox->getUid(),
+					'wrapitem' => '|</td><td>&nbsp;',
 				);
 			}
 		}
@@ -545,12 +547,13 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					'caption' => $targetGroup->getTitle(),
 					'value' => $targetGroup->getUid(),
 					'labelcustom' => 'id="tx_seminars_pi1_seminars_target_group_label_' . $targetGroup->getUid() . '"',
-					'wrapitem' => '|' . $editButtonHTML['__compiled'],
+					'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
 				);
 			} else {
 				$result[] = array(
 					'caption' => $targetGroup->getTitle(),
 					'value' => $targetGroup->getUid(),
+					'wrapitem' => '|</td><td>&nbsp;',
 				);
 			}
 		}
