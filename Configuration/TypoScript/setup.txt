@@ -165,7 +165,7 @@ plugin.tx_seminars {
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.
 
-	# PID of the page (or system folder) where event registrations (attendances) will be stored
+	# PID of the or sysfolder where event registrations (attendances) will be stored
 	attendancesPID =
 }
 
@@ -400,31 +400,31 @@ plugin.tx_seminars_pi1 {
 	# number of levels to recurse when accessing the starting point
 	recursive =
 
-	# PID of the page that contains the seminar list
+	# PID of the FE page that contains the event list
 	listPID =
 
-	# PID of the page that contains the detailed view
+	# PID of the FE page that contains the single view
 	detailPID =
 
-	# PID of the page that contains the "my events" list
+	# PID of the FE page that contains the "my events" list
 	myEventsPID =
 
-	# PID of the page that contains the seminar registration plug-in
+	# PID of the FE page that contains the seminar registration plug-in
 	registerPID =
 
 	# PID of the thank-you page that will be displayed after a FE user has registered for an event
 	thankYouAfterRegistrationPID =
 
-	# Wether to send GET parameters to the thank-you-after-registration-page-URL.
+	# whether to send GET parameters to the thank-you-after-registration-page-URL
 	sendParametersToThankYouAfterRegistrationPageUrl = 1
 
-	# PID of the thank-you page that will be displayed after a FE user has unregistered from an event
+	# # PID of the page that will be displayed after a FE user has unregistered from an event
 	pageToShowAfterUnregistrationPID =
 
 	# Wether to send GET parameters to the thank-you-after-registration-page-URL.
 	sendParametersToPageToShowAfterUnregistrationUrl = 1
 
-	# PID of the page that contains the login form
+	# PID of the FE page that contains the login form or onetimeaccount
 	loginPID =
 
 	# PID of the page that contains the registrations list for participants
