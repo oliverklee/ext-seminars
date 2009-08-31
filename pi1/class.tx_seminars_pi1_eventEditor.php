@@ -167,7 +167,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$originalAttachmentList = $this->getFormCreator()->oDataHandler->oForm
 			->aORenderlets['attached_files']->mForcedValue;
 
-		if (($originalAttachmentList != '') && !empty($this->attachedFiles)) {
+		if (!empty($this->attachedFiles)) {
 			$attachmentList = '';
 			$fileNumber = 1;
 			foreach ($this->attachedFiles as $fileName) {

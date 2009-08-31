@@ -44,13 +44,13 @@
  */
 function markAttachmentAsDeleted(listItemId, confirmMessage) {
 	var listItem = document.getElementById(listItemId);
-	var fileNameDiv = listItem.getElementsByTagName("span")[0];
-	var deleteButton = listItem.getElementsByTagName("input")[0];
+	var fileNameDiv = listItem.getElementsByTagName("dt")[0];
+	var deleteButton = document.getElementById(listItemId + "_button");
 
 	if (confirm(confirmMessage)) {
 		document.getElementById("tx_seminars_pi1_seminars_delete_attached_files").value
-			+= "," + fileNameDiv.firstChild.nodeValue;
-		fileNameDiv.setAttribute("class", "deleted");
+			+= "," + listItem.firstChild.nodeValue;
+		listItem.setAttribute("class", "deleted");
 		deleteButton.disabled = true;
 	}
 }
