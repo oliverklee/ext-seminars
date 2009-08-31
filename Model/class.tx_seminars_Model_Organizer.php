@@ -184,6 +184,15 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	public function getDescription() {
 		return $this->getAsString('description');
 	}
+
+	/**
+	 * Returns our name.
+	 *
+	 * @return string our name, will not be empty
+	 */
+	public function getTitle() {
+		return $this->getName();
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_Organizer.php']) {

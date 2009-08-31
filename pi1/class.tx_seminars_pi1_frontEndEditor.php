@@ -177,52 +177,6 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	}
 
 	/**
-	 * Provides data items from the DB.
-	 *
-	 * By default, the field "title" is used as the name that will be returned
-	 * within the array (as caption). For FE users, the field "name" is used.
-	 *
-	 * @param array array that contains any pre-filled data, may be empty
-	 * @param string the table name to query, must not be empty
-	 * @param string query parameter that will be used as the WHERE clause, must
-	 *               not be empty
-	 * @param boolean whether to append a <br /> at the end of each caption
-	 *
-	 * @return array $items with additional items from the $params['what']
-	 *               table as an array with the keys "caption" (for the title)
-	 *               and "value" (for the UID), might be empty
-	 */
-	public function populateList(
-		array $items, $tableName, $queryParameters = '1=1', $appendBreak = false
-	) {
-		$result = $items;
-
-		$titleSuffix = ($appendBreak) ? '<br />' : '';
-		$captionField = ($tableName == 'fe_users') ? 'name' : 'title';
-
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			$tableName,
-			$queryParameters . tx_oelib_db::enableFields($tableName)
-		);
-		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
-		}
-
-		while ($dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-			$uid = $dbResultRow['uid'];
-			$title = $dbResultRow[$captionField];
-
-			$result[$uid] = array(
-				'caption' => $title . $titleSuffix,
-				'value' => $uid
-			);
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Returns a form value from the FORMidable object.
 	 *
 	 * Note: In test mode, this function will return faked values.

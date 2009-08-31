@@ -1990,5 +1990,49 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+	//////////////////////////////////////////////
+	// Tests concerning makeListToFormidableList
+	//////////////////////////////////////////////
+
+	public function test_makeListToFormidableList_ForEmptyListGiven_ReturnsEmptyArray() {
+		$this->assertEquals(
+			array(),
+			tx_seminars_pi1_eventEditor::makeListToFormidableList(new tx_oelib_List())
+		);
+	}
+
+	public function test_makeListToFormidableList_ForListWithOneElement_ReturnsModelDataInArray() {
+		$targetGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(
+				array('title' => 'foo')
+		);
+
+		$list = new tx_oelib_List();
+		$list->add($targetGroup);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => 'foo', 'value' => $targetGroup->getUid()),
+				tx_seminars_pi1_eventEditor::makeListToFormidableList($list)
+			)
+		);
+	}
+
+	public function test_makeListToFormidableList_ForListWithTwoElements_ReturnsArrayWithTwoModels() {
+		$targetGroup1 = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(array());
+		$targetGroup2 = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(array());
+
+		$list = new tx_oelib_List();
+		$list->add($targetGroup1);
+		$list->add($targetGroup2);
+
+		$this->assertEquals(
+			2,
+			count(tx_seminars_pi1_eventEditor::makeListToFormidableList($list))
+		);
+	}
 }
 ?>

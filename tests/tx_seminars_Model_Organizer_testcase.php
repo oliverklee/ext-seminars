@@ -87,6 +87,18 @@ class tx_seminars_Model_Organizer_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function getTitleWithNonEmptyNameReturnsName() {
+		$this->fixture->setData(array('title' => 'Fabulous organizer'));
+
+		$this->assertEquals(
+			'Fabulous organizer',
+			$this->fixture->getTitle()
+		);
+	}
+
 
 	//////////////////////////////////
 	// Tests regarding the homepage.

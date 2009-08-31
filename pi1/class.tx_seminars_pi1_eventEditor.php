@@ -196,79 +196,85 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	/**
 	 * Provides data items for the list of available categories.
 	 *
-	 * @param array any pre-filled data (may be empty)
-	 *
 	 * @return array $items with additional items from the categories
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
-	public function populateListCategories(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_CATEGORIES);
+	public function populateListCategories() {
+		$categories = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+			->findAll('title ASC');
+
+		return self::makeListToFormidableList($categories);
 	}
 
 	/**
 	 * Provides data items for the list of available event types.
 	 *
-	 * @param array any pre-filled data (may be empty)
-	 *
 	 * @return array $items with additional items from the event_types
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
-	public function populateListEventTypes(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_EVENT_TYPES);
+	public function populateListEventTypes() {
+		$eventTypes = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_EventType')->findAll('title ASC');
+
+		return self::makeListToFormidableList($eventTypes);
 	}
 
 	/**
 	 * Provides data items for the list of available lodgings.
 	 *
-	 * @param array any pre-filled data (may be empty)
-	 *
 	 * @return array $items with additional items from the lodgings table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
-	public function populateListLodgings(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_LODGINGS);
+	public function populateListLodgings() {
+		$lodgings = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Lodging')
+			->findAll('title ASC');
+
+		return self::makeListToFormidableList($lodgings);
 	}
 
 	/**
 	 * Provides data items for the list of available foods.
 	 *
-	 * @param array any pre-filled data (may be empty)
-	 *
 	 * @return array $items with additional items from the foods table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
-	public function populateListFoods(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_FOODS);
+	public function populateListFoods() {
+		$foods= tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Food')
+			->findAll('title ASC');
+
+		return self::makeListToFormidableList($foods);
 	}
 
 	/**
 	 * Provides data items for the list of available payment methods.
 	 *
-	 * @param array any pre-filled data (may be empty)
-	 *
 	 * @return array $items with additional items from payment methods
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
-	public function populateListPaymentMethods(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_PAYMENT_METHODS);
+	public function populateListPaymentMethods() {
+		$paymentMethods = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_PaymentMethod')->findAll('title ASC');
+
+		return self::makeListToFormidableList($paymentMethods);
 	}
 
 	/**
 	 * Provides data items for the list of available organizers.
 	 *
-	 * @param array any pre-filled data (may be empty)
-	 *
 	 * @return array $items with additional items from the organizers
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
-	public function populateListOrganizers(array $items) {
-		return $this->populateList($items, SEMINARS_TABLE_ORGANIZERS);
+	public function populateListOrganizers() {
+		$organizers = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Organizer')->findAll('title ASC');
+
+		return self::makeListToFormidableList($organizers);
 	}
 
 	/**
@@ -559,48 +565,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Provides data items from the DB.
-	 *
-	 * By default, the field "title" is used as the name that will be returned
-	 * within the array (as caption). For FE users, the field "name" is used.
-	 *
-	 * This method overrides the method in tx_seminars_pi1_frontEndEditor and
-	 * only returns the records where the currently logged in front-end user
-	 * is the owner or where no owner is specified.
-	 *
-	 * @param array $items array that contains any pre-filled data, may be empty
-	 * @param string $tableName the table name to query, must not be empty
-	 * @param string $queryParameters query parameter that will be used as the
-	 *                                WHERE clause, must not be empty
-	 * @param boolean $appendBreak whether to append a <br /> at the end of each
-	 *                             caption
-	 *
-	 * @return array $items with additional items from the $params['what']
-	 *               table as an array with the keys "caption" (for the title)
-	 *               and "value" (for the UID), might be empty
-	 */
-	public function populateList(
-		array $items, $tableName, $queryParameters = '1 = 1', $appendBreak = false
-	) {
-		$frontEndUser = tx_oelib_FrontEndLoginManager::
-			getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
-		if (tx_oelib_db::tableHasColumn($tableName, 'owner')) {
-			$additionalQueryParameters
-				= ' AND (owner = ' . $frontEndUser->getUid() . ' OR owner = 0)';
-		} else {
-			$additionalQueryParameters = '';
-		}
-
-		return parent::populateList(
-			$items,
-			$tableName,
-			$queryParameters . $additionalQueryParameters,
-			$appendBreak
-		);
 	}
 
 	/**
@@ -2366,14 +2330,33 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *         and "value" (for the UID)
 	 */
 	public static function populateListSkills() {
+		$skills = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill')
+			->findAll('title ASC');
+
+		return self::makeListToFormidableList($skills);
+	}
+
+	/**
+	 * Returns an array of caption value pairs for formidable checkboxes.
+	 *
+	 * @param tx_oelib_List $models
+	 *        List of models to show in the checkboxes, may be empty
+	 *
+	 * @return array items as an array with the keys "caption" (for the title)
+	 *         and "value" (for the UID), will be empty if an empty model list
+	 *         was provided
+	 */
+	public static function makeListToFormidableList(tx_oelib_List $models) {
+		if ($models->isEmpty()) {
+			return array();
+		}
+
 		$result = array();
 
-		$skills = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill')
-			->findAll();
-		foreach ($skills as $skill) {
+		foreach ($models as $model) {
 			$result[] = array(
-				'caption' => $skill->getTitle(),
-				'value' => $skill->getUid(),
+				'caption' => $model->getTitle(),
+				'value' => $model->getUid(),
 			);
 		}
 
