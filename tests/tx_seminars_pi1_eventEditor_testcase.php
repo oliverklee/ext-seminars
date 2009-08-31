@@ -737,7 +737,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $placeUid),
+				array(
+					'caption' => '', 'value' => $placeUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListPlaces(array())
 			)
 		);
@@ -754,7 +757,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $placeUid),
+				array(
+					'caption' => '', 'value' => $placeUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListPlaces(array())
 			)
 		);
@@ -771,7 +777,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			in_array(
-				array('caption' => '', 'value' => $placeUid),
+				array(
+					'caption' => '', 'value' => $placeUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListPlaces(array())
 			)
 		);
@@ -793,7 +802,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $checkboxUid),
+				array(
+					'caption' => '', 'value' => $checkboxUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListCheckboxes(array())
 			)
 		);
@@ -810,7 +822,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $checkboxUid),
+				array(
+					'caption' => '', 'value' => $checkboxUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListCheckboxes(array())
 			)
 		);
@@ -827,7 +842,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			in_array(
-				array('caption' => '', 'value' => $checkboxUid),
+				array(
+					'caption' => '', 'value' => $checkboxUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListCheckboxes(array())
 			)
 		);
@@ -849,7 +867,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $targetGroupUid),
+				array(
+					'caption' => '', 'value' => $targetGroupUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListTargetGroups(array())
 			)
 		);
@@ -866,7 +887,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $targetGroupUid),
+				array(
+					'caption' => '', 'value' => $targetGroupUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListTargetGroups(array())
 			)
 		);
@@ -883,7 +907,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			in_array(
-				array('caption' => '', 'value' => $targetGroupUid),
+				array(
+					'caption' => '', 'value' => $targetGroupUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListTargetGroups(array())
 			)
 		);
@@ -905,7 +932,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $speakerUid),
+				array(
+					'caption' => '', 'value' => $speakerUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListSpeakers(array())
 			)
 		);
@@ -922,7 +952,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				array('caption' => '', 'value' => $speakerUid),
+				array(
+					'caption' => '', 'value' => $speakerUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListSpeakers(array())
 			)
 		);
@@ -939,7 +972,10 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			in_array(
-				array('caption' => '', 'value' => $speakerUid),
+				array(
+					'caption' => '', 'value' => $speakerUid,
+					'wrapitem' => '|</td><td>&nbsp;'
+				),
 				$this->fixture->populateListSpeakers(array())
 			)
 		);
