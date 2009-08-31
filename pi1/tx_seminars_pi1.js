@@ -207,7 +207,7 @@ function updateAuxiliaryRecordInEditor(htmlId, title) {
  * @param array buttonData the data of the edit button of the record
  */
 function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
-	var container = $("tx_seminars_pi1_seminars_" + htmlName);
+	var container = $$("#tx_seminars_pi1_seminars_" + htmlName + " tbody")[0];
 	if (!container) {
 		return;
 	}
@@ -218,7 +218,8 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
 	var input = new Element("input", {
 		"id": id, "type": "checkbox", "value": uid,
 		"name" :
-			"tx_seminars_pi1_seminars[" + htmlName + "][" + nextOptionNumber + "]"
+			"tx_seminars_pi1_seminars[" + htmlName + "][" + nextOptionNumber + "]",
+		"class" : "tx-seminars-pi1-event-editor-checkbox"
 	});
 	var labelId = "tx_seminars_pi1_seminars_" + htmlName + "_label_" + uid;
 	var label = new Element("label", {"for": id, "id": labelId});
@@ -235,10 +236,17 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
 		}
 	);
 
-	container.appendChild(new Element("br"));
-	container.appendChild(input);
-	container.appendChild(label);
-	container.appendChild(button);
+	var tableRow = new Element("tr");
+	var tableColumnLeft = new Element("td");
+	var tableColumnRight = new Element("td");
+
+	tableColumnLeft.appendChild(input);
+	tableColumnLeft.appendChild(label);
+	tableColumnRight.appendChild(button);
+	tableRow.appendChild(tableColumnLeft);
+	tableRow.appendChild(tableColumnRight);
+
+	container.appendChild(tableRow);
 }
 
 /**
