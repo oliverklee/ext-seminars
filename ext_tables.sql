@@ -326,6 +326,7 @@ CREATE TABLE tx_seminars_speakers (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	hidden tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,

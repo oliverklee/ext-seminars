@@ -92,6 +92,9 @@ $TCA['tx_seminars_speakers'] = array(
 		'cruser_id' => 'cruser_id',
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
+		'enablecolumns' => array(
+			'disabled' => 'hidden',
+		),
 		'dynamicConfigFile' => $tcaPath,
 		'iconfile' => $extIconRelPath.'icon_tx_seminars_speakers.gif'
 	)

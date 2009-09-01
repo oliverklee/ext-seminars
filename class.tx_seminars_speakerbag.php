@@ -52,10 +52,12 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 	 *               safeguarded against SQL injection
 	 * @param string LIMIT clause (may be empty), must already be
 	 *               safeguarded against SQL injection
+	 * @param integer $showHiddenRecords
+	 *        If is set (0/1), any hidden-fields in records are ignored.
 	 */
 	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-		$orderBy = 'uid', $limit = ''
+		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1
 	) {
 		parent::__construct(
 			SEMINARS_TABLE_SPEAKERS,
@@ -63,7 +65,8 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 			$additionalTableNames,
 			$groupBy,
 			$orderBy,
-			$limit
+			$limit,
+			$showHiddenRecords
 		);
 	}
 

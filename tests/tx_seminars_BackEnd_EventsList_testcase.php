@@ -61,8 +61,8 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 	private $originalLanguage;
 
 	public function setUp() {
-		// Set's the localization to the default language so that all tests can
-		// run, even if the BE user has it's interface set to another language.
+		// Sets the localization to the default language so that all tests can
+		// run even if the BE user has its interface set to another language.
 		$this->originalLanguage = $GLOBALS['LANG']->lang;
 		$GLOBALS['LANG']->lang = 'default';
 

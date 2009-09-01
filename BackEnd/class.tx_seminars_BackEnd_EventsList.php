@@ -467,54 +467,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	}
 
 	/**
-	 * Generates a linked hide or unhide icon depending on the record's hidden
-	 * status.
-	 *
-	 * @param integer the UID of the record, must be > 0
-	 * @param boolean indicates whether the record is hidden (true) or is
-	 *                visible (false)
-	 *
-	 * @return string the HTML source code of the linked hide or unhide icon
-	 */
-	protected function getHideUnhideIcon($uid, $hidden) {
-		global $BACK_PATH, $LANG, $BE_USER;
-		$result = '';
-
-		$pageData = $this->page->getPageData();
-		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord(
-					'pages', $pageData['uid']
-				),
-				16
-			)
-		) {
-			if ($hidden) {
-				$params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
-				$icon = 'gfx/button_unhide.gif';
-				$langHide = $LANG->getLL('unHide');
-			} else {
-				$params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=1';
-				$icon = 'gfx/button_hide.gif';
-				$langHide = $LANG->getLL('hide');
-			}
-
-			$result = '<a href="' .
-				htmlspecialchars($this->page->doc->issueCommand($params)) . '">' .
-				'<img' .
-				t3lib_iconWorks::skinImg(
-					$BACK_PATH,
-					$icon,
-					'width="11" height="12"'
-				) .
-				' title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
-				'</a>';
-		}
-
-		return $result;
-	}
-
-	/**
 	 * Returns a button for canceling an event. The button will only be
 	 * returned if
 	 * - the current record is either a date or single event record

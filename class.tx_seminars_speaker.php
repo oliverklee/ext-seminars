@@ -334,6 +334,15 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->setRecordPropertyInteger('owner', $frontEndUser->getUid());
 	}
+
+	/**
+	 * Returns true if the speaker is hidden, otherwise false.
+	 *
+	 * @return boolean true if the speaker is hidden, false otherwise
+	 */
+	public function isHidden() {
+		return $this->getRecordPropertyBoolean('hidden');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_speaker.php']) {

@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 /**
  * Class 'speakers list' for the 'seminars' extension.
  *
@@ -34,7 +32,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 	/** the table we're working on */
-	protected $tableName = SEMINARS_TABLE_SPEAKERS;
+	protected $tableName = 'tx_seminars_speakers';
 
 	/** the speaker which we want to list/show */
 	private $speaker = null;
@@ -65,42 +63,42 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 		// Set the table layout of the event list.
 		$tableLayout = array(
 			'table' => array(
-				TAB.TAB
-					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'
-					.LF,
-				TAB.TAB
-					.'</table>'.LF
+				TAB . TAB .
+					'<table cellpadding="0" cellspacing="0" class="typo3-dblist">' .
+					LF,
+				TAB . TAB .
+					'</table>' . LF
 			),
 			array(
 				'tr' => array(
-					TAB.TAB.TAB
-						.'<thead>'.LF
-						.TAB.TAB.TAB.TAB
-						.'<tr>'.LF,
-					TAB.TAB.TAB.TAB
-						.'</tr>'.LF
-						.TAB.TAB.TAB
-						.'</thead>'.LF
+					TAB . TAB . TAB .
+						'<thead>' . LF .
+						TAB . TAB . TAB . TAB .
+						'<tr>' . LF,
+					TAB . TAB . TAB . TAB .
+						'</tr>' . LF .
+						TAB . TAB . TAB .
+						'</thead>' . LF
 				),
 				'defCol' => array(
-					TAB.TAB.TAB.TAB.TAB
-						.'<td class="c-headLineTable">'.LF,
-					TAB.TAB.TAB.TAB.TAB
-						.'</td>'.LF
+					TAB . TAB . TAB . TAB . TAB .
+						'<td class="c-headLineTable">' . LF,
+					TAB . TAB . TAB . TAB . TAB .
+						'</td>' . LF
 				)
 			),
 			'defRow' => array(
 				'tr' => array(
-					TAB.TAB.TAB
-						.'<tr>'.LF,
-					TAB.TAB.TAB
-						.'</tr>'.LF
+					TAB . TAB . TAB .
+						'<tr>' . LF,
+					TAB . TAB . TAB .
+						'</tr>' . LF
 				),
 				'defCol' => array(
-					TAB.TAB.TAB.TAB
-						.'<td>'.LF,
-					TAB.TAB.TAB.TAB
-						.'</td>'.LF
+					TAB . TAB . TAB . TAB .
+						'<td>'.LF,
+					TAB . TAB . TAB . TAB .
+						'</td>' . LF
 				)
 			)
 		);
@@ -109,14 +107,14 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 		$table = array(
 			array(
 				'',
-				TAB.TAB.TAB.TAB.TAB
-					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('speakerlist.title').'</span>'.LF,
-				TAB.TAB.TAB.TAB.TAB
-					.'&nbsp;'.LF,
-				TAB.TAB.TAB.TAB.TAB
-					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('speakerlist.skills').'</span>'.LF
+				TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
+					$LANG->getLL('speakerlist.title') . '</span>' . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					'&nbsp;' . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					'<span style="color: #ffffff; font-weight: bold;">' .
+					$LANG->getLL('speakerlist.skills') . '</span>' . LF
 			)
 		);
 
@@ -129,25 +127,30 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 
 		$speakerBag = tx_oelib_ObjectFactory::make(
 			'tx_seminars_speakerbag',
-			$queryWhere, $additionalTables, '', $orderBy, $limit
+			$queryWhere, $additionalTables, '', $orderBy, $limit, 1
 		);
 
 		foreach ($speakerBag as $this->speaker) {
 			// Add the result row to the table array.
 			$table[] = array(
-				TAB.TAB.TAB.TAB.TAB
-					.$this->speaker->getRecordIcon().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->speaker->getTitle().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->getEditIcon(
+				TAB . TAB . TAB . TAB . TAB .
+					$this->speaker->getRecordIcon() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->speaker->getTitle() . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->getEditIcon(
 						$this->speaker->getUid()
-					)
-					.$this->getDeleteIcon(
+					) .
+					$this->getDeleteIcon(
 						$this->speaker->getUid()
-					).LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->speaker->getSkillsShort().LF
+					) . LF .
+					TAB . TAB . TAB . TAB . TAB .
+					$this->getHideUnhideIcon(
+						$this->speaker->getUid(),
+						$this->speaker->isHidden()
+					) . LF,
+				TAB . TAB . TAB . TAB . TAB .
+					$this->speaker->getSkillsShort() . LF
 			);
 		}
 

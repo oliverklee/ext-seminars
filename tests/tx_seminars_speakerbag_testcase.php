@@ -47,10 +47,6 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
-
-		$this->testingFramework->createRecord(SEMINARS_TABLE_SPEAKERS);
-
-		$this->fixture = new tx_seminars_speakerbag('is_dummy_record=1');
 	}
 
 	protected function tearDown() {
@@ -66,9 +62,88 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBagCanHaveAtLeastOneElement() {
+		$this->testingFramework->createRecord('tx_seminars_speakers');
+
+		$this->fixture = new tx_seminars_speakerbag('is_dummy_record=1');
+
 		$this->assertEquals(
 			1,
 			$this->fixture->count()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function bagContainsVisibleSpeakers() {
+		$this->testingFramework->createRecord('tx_seminars_speakers');
+
+		$this->fixture = new tx_seminars_speakerbag('is_dummy_record=1');
+
+		$this->assertFalse(
+			$this->fixture->current()->isHidden()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function bagIgnoresHiddenSpeakersByDefault() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array('hidden' => 1)
+		);
+
+		$this->fixture = new tx_seminars_speakerbag('is_dummy_record=1');
+
+		$this->assertTrue(
+			$this->fixture->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function bagIgnoresHiddenSpeakersWithShowHiddenRecordsSetToMinusOne() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array('hidden' => 1)
+		);
+
+		$this->fixture = new tx_seminars_speakerbag(
+			'is_dummy_record=1',
+			'',
+			'',
+			'uid',
+			'',
+			-1
+		);
+
+		$this->assertTrue(
+			$this->fixture->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function bagContainsHiddenSpeakersWithShowHiddenRecordsSetToOne() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array('hidden' => 1)
+		);
+
+		$this->fixture = new tx_seminars_speakerbag(
+			'is_dummy_record=1',
+			'',
+			'',
+			'uid',
+			'',
+			1
+		);
+
+		$this->assertTrue(
+			$this->fixture->current()->isHidden()
 		);
 	}
 }
