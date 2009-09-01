@@ -2436,6 +2436,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////
 
 	public function test_validateCheckboxesForNonRequiredFieldAndEmptyValue_ReturnsTrue() {
+		$this->testingFramework->createAndLogInFrontEndUser();
 		$this->assertTrue(
 			$this->fixture->validateCheckboxes(
 				array('elementName' => 'categories', 'value' => '')
@@ -2444,6 +2445,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_validateCheckboxesForRequiredFieldAndValueNotArray_ReturnsFalse() {
+		$this->testingFramework->createAndLogInFrontEndUser();
 		$fixture = $this->getFixtureWithRequiredField('categories');
 
 		$this->assertFalse(
@@ -2456,6 +2458,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_validateCheckboxesForRequiredFieldAndValueEmptyArray_ReturnsFalse() {
+		$this->testingFramework->createAndLogInFrontEndUser();
 		$fixture = $this->getFixtureWithRequiredField('categories');
 
 		$this->assertFalse(
@@ -2468,11 +2471,53 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_validateCheckboxesForRequiredFieldAndValueNonEmptyArray_ReturnsTrue() {
+		$this->testingFramework->createAndLogInFrontEndUser();
 		$fixture = $this->getFixtureWithRequiredField('categories');
 
 		$this->assertTrue(
 			$fixture->validateCheckboxes(
 				array('elementName' => 'categories', 'value' => array(42))
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmpty_ReturnsTrue() {
+		$categories = new tx_oelib_List();
+		$categories->add(
+			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+				->getNewGhost()
+		);
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array('tx_seminars_default_categories' => $categories)
+		);
+
+		$this->testingFramework->createAndLogInFrontEndUser(
+			$userGroup->getUid()
+		);
+
+		$fixture = $this->getFixtureWithRequiredField('categories');
+
+		$this->assertTrue(
+			$fixture->validateCheckboxes(
+				array('elementName' => 'categories', 'value' => '')
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmpty_ReturnsFalse() {
+		$this->testingFramework->createAndLogInFrontEndUser();
+		$fixture = $this->getFixtureWithRequiredField('categories');
+
+		$this->assertFalse(
+			$fixture->validateCheckboxes(
+				array('elementName' => 'categories', 'value' => '')
 			)
 		);
 

@@ -1084,12 +1084,15 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *               if all fields should be hidden
 	 */
 	private function getFieldsToShow() {
-		return t3lib_div::trimExplode(
+		$fieldsToShow = t3lib_div::trimExplode(
 			',',
 			$this->getConfValueString(
 				'displayFrontEndEditorFields', 's_fe_editing'),
 			true
 		);
+		$this->removeCategoryIfNecessary($fieldsToShow);
+
+		return $fieldsToShow;
 	}
 
 	/**
@@ -1132,6 +1135,8 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				'requiredFrontEndEditorFields', 's_fe_editing'
 			)
 		);
+
+		$this->removeCategoryIfNecessary($this->requiredFormFields);
 	}
 
 	/**
@@ -2439,6 +2444,27 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$formData['categories'] =
 			$frontEndUser->getDefaultCategoriesFromGroup()->getUids();
+	}
+
+	/**
+	 * Removes the category field if the user has default categories set.
+	 *
+	 * @param array $formFields
+	 *        the fields which should be checked for category, will be modified,
+	 *        may be empty
+	 */
+	private function removeCategoryIfNecessary(array &$formFields) {
+		if (!in_array('categories', $formFields)) {
+			return;
+		}
+
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		if ($frontEndUser->hasDefaultCategories()) {
+			$categoryKey = array_search('categories', $formFields);
+			unset($formFields[$categoryKey]);
+		}
 	}
 }
 
