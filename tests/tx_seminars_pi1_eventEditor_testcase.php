@@ -2157,6 +2157,108 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_modifyDataToInsertForNewEventAndUserWithoutDefaultCategories_DoesNotAddAnyCategories() {
+		$this->createAndLoginUserWithPublishSetting(
+			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertFalse(
+			isset($modifiedFormData['categories'])
+		);
+	}
+
+	public function test_modifyDataToInsertForNewEventAndUserWithOneDefaultCategory_AddsThisCategory() {
+		$categories = new tx_oelib_List();
+		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+			->getNewGhost();
+		$categories->add($category);
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array(
+				'tx_seminars_default_categories' => $categories,
+				'tx_seminars_publish_events'
+					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+			)
+		);
+
+		$this->testingFramework->createAndLogInFrontEndUser(
+			$userGroup->getUid()
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertEquals(
+			$category->getUid(),
+			$modifiedFormData['categories']
+		);
+	}
+
+	public function test_modifyDataToInsertForNewEventAndUserWithTwoDefaultCategories_AddsTheseCategories() {
+		$categoryMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category');
+		$category1 = $categoryMapper->getNewGhost();
+		$category2 = $categoryMapper->getNewGhost();
+
+		$categories = new tx_oelib_List();
+		$categories->add($category1);
+		$categories->add($category2);
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array(
+				'tx_seminars_default_categories' => $categories,
+				'tx_seminars_publish_events'
+					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+			)
+		);
+
+		$this->testingFramework->createAndLogInFrontEndUser(
+			$userGroup->getUid()
+		);
+
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertEquals(
+			$category1->getUid() . ',' . $category2->getUid(),
+			$modifiedFormData['categories']
+		);
+	}
+
+	public function test_modifyDataToInsertForEditedEventAndUserWithOneDefaultCategory_DoesNotAddTheUsersCategory() {
+		$categories = new tx_oelib_List();
+		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+			->getNewGhost();
+		$categories->add($category);
+
+		$userGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(
+			array(
+				'tx_seminars_default_categories' => $categories,
+				'tx_seminars_publish_events'
+					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+			)
+		);
+
+		$this->testingFramework->createAndLogInFrontEndUser(
+			$userGroup->getUid()
+		);
+
+		$this->fixture->setObjectUid(tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Event')->getLoadedTestingModel(
+				array())->getUid()
+		);
+		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
+
+		$this->assertFalse(
+			isset($modifiedFormData['categories'])
+		);
+	}
+
 
 	////////////////////////////////////////////////////////////////
 	// Tests regarding isFrontEndEditingOfRelatedRecordsAllowed().

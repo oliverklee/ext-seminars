@@ -858,6 +858,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$this->unifyDecimalSeparators($modifiedFormData);
 		$this->addAdministrativeData($modifiedFormData);
 		$this->checkPublishSettings($modifiedFormData);
+		$this->addCategoriesOfUser($modifiedFormData);
 
 		return $modifiedFormData;
 	}
@@ -2412,6 +2413,32 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		return $this->getStoragePid() .
 			(($auxiliaryRecordsPid != 0) ? ',' . $auxiliaryRecordsPid : '');
+	}
+
+	/**
+	 * Adds the default categories of the currently logged-in user to the
+	 * event.
+	 *
+	 * Note: This affects only new records. Existing records (with a UID) will
+	 * not be changed.
+	 *
+	 * @param array $formData
+	 *        all entered form data with the field names as keys, will be
+	 *        modified, must not be empty
+	 */
+	private function addCategoriesOfUser(array &$formData) {
+		$eventUid = $this->getObjectUid();
+		if ($eventUid > 0) {
+			return;
+		}
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		if (!$frontEndUser->hasDefaultCategories()) {
+			return;
+		}
+
+		$formData['categories'] =
+			$frontEndUser->getDefaultCategoriesFromGroup()->getUids();
 	}
 }
 
