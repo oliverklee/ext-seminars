@@ -241,8 +241,10 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->setBackEndMode();
+
 		$pageData = $this->page->getPageData();
-		$builder->setSourcePages($pageData['uid']);
+		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+
 		$seminarBag = $builder->build();
 
 		$sortList = array();

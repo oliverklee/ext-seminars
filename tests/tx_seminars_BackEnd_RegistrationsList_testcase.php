@@ -24,8 +24,6 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 /**
  * Testcase for the registrations list class in the 'seminars' extension.
  *
@@ -90,7 +88,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 	public function testShowForOneEventContainsAccreditationNumber() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -99,7 +97,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -114,7 +112,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 	public function testShowForOneEventContainsHtmlSpecialCharedAccreditationNumber() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -123,7 +121,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -141,11 +139,11 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 			'', array('name' => 'foo_user')
 		);
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -165,7 +163,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -182,12 +180,12 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 	public function testShowWithRegistrationForInexistentUserDoesNotShowUserName() {
 		$userUid = $this->testingFramework->getAutoIncrement('fe_users');
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('pid' => $this->dummySysFolderPid)
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -203,7 +201,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 	public function testShowForOneEventContainsEventTitle() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -211,7 +209,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -226,7 +224,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 	public function testShowForOneDeletedEventDoesNotContainEventTitle() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -235,7 +233,7 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -253,11 +251,11 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 			'', array('name' => 'user_foo')
 		);
 		$seminarUid = $this->testingFramework->getAutoIncrement(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $seminarUid,
@@ -267,6 +265,35 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 		$this->assertContains(
 			'user_foo',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showContainsRegistrationFromSubfolder() {
+		$subfolderPid = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+		$seminarUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event for registration in subfolder',
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $subfolderPid,
+				'seminar' => $seminarUid,
+			)
+		);
+
+		$this->assertContains(
+			'event for registration in subfolder',
 			$this->fixture->show()
 		);
 	}

@@ -118,17 +118,13 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 			)
 		);
 
-		// Initialize variables for the database query.
-		$pageData = $this->page->getPageData();
-		$queryWhere = 'pid=' . $pageData['uid'];
-		$additionalTables = '';
-		$orderBy = '';
-		$limit = '';
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_SpeakerBagBuilder');
+		$builder->showHiddenRecords();
 
-		$speakerBag = tx_oelib_ObjectFactory::make(
-			'tx_seminars_speakerbag',
-			$queryWhere, $additionalTables, '', $orderBy, $limit, 1
-		);
+		$pageData = $this->page->getPageData();
+		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+
+		$speakerBag = $builder->build();
 
 		foreach ($speakerBag as $this->speaker) {
 			// Add the result row to the table array.

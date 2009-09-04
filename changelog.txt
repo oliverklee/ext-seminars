@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3243] Feature: In the "Events" BE module, show records from the current sysfolder and all subpages recursively
 - [#3358] Feature: Allow the hiding of speakers in the BE
 - [#3363] Feature: If the current FE user has default categories, automatically hide the category selector in the FE editor
 - [#3364] Feature: If the current FE user has default categories, automatically assign them for new events

@@ -25,16 +25,16 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the speakers list class in the 'seminars' extension.
+ * Testcase for the organizers list class in the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BackEnd_SpeakersList_testcase extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_OrganizersList_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_BackEnd_SpeakersList
+	 * @var tx_seminars_BackEnd_OrganizersList
 	 */
 	private $fixture;
 	/**
@@ -80,7 +80,7 @@ class tx_seminars_BackEnd_SpeakersList_testcase extends tx_phpunit_testcase {
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->backEndModule->doc->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_BackEnd_SpeakersList(
+		$this->fixture = new tx_seminars_BackEnd_OrganizersList(
 			$this->backEndModule
 		);
 	}
@@ -102,56 +102,20 @@ class tx_seminars_BackEnd_SpeakersList_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function showContainsHideButtonForVisibleSpeaker() {
-		$this->testingFramework->createRecord(
-			'tx_seminars_speakers',
-			array(
-				'pid' => $this->dummySysFolderPid,
-				'hidden' => 0,
-			)
-		);
-
-		$this->assertContains(
-			'gfx/button_hide.gif',
-			$this->fixture->show()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function showContainsUnhideButtonForHiddenSpeaker() {
-		$this->testingFramework->createRecord(
-			'tx_seminars_speakers',
-			array(
-				'pid' => $this->dummySysFolderPid,
-				'hidden' => 1,
-			)
-		);
-
-		$this->assertContains(
-			'gfx/button_unhide.gif',
-			$this->fixture->show()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function showContainsSpeakerFromSubfolder() {
+	public function showContainsOrganizerFromSubfolder() {
 		$subfolderPid = $this->testingFramework->createSystemFolder(
 			$this->dummySysFolderPid
 		);
 		$this->testingFramework->createRecord(
-			'tx_seminars_speakers',
+			'tx_seminars_organizers',
 			array(
-				'title' => 'Speaker in subfolder',
+				'title' => 'Organizer in subfolder',
 				'pid' => $subfolderPid,
 			)
 		);
 
 		$this->assertContains(
-			'Speaker in subfolder',
+			'Organizer in subfolder',
 			$this->fixture->show()
 		);
 	}

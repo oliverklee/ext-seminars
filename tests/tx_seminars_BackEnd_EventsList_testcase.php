@@ -24,8 +24,6 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 /**
  * Testcase for the events list class in the 'seminars' extension.
  *
@@ -116,7 +114,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsTableBodyHeaderForOneEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('pid' => $this->dummySysFolderPid)
 		);
 
@@ -129,7 +127,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 	public function testShowContainsNoBodyHeaderIfEventIsOnOtherPage() {
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 
@@ -141,7 +139,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsEventTitleForOneEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1'
@@ -156,14 +154,14 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsEventTitleForTwoEvents() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1'
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_2'
@@ -182,7 +180,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsEventTitleForOneHiddenEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -198,7 +196,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsEventTitleForOneTimedEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -214,7 +212,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowForOneEventContainsAccreditationNumber() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -230,7 +228,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowForOneEventContainsHtmlSpecialCharedAccreditationNumber() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
@@ -246,7 +244,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsCanceledStatusIconForCanceledEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
@@ -261,7 +259,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsConfirmedStatusIconForConfirmedEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
@@ -276,7 +274,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowDoesNotContainCanceledORConfirmedStatusIconForPlannedEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
@@ -298,7 +296,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowDoesNotContainConfirmButtonForEventThatIsAlreadyConfirmed() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
@@ -314,7 +312,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowDoesNotContainConfirmButtonForPlannedEventThatHasAlreadyBegun() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 42,
@@ -329,7 +327,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsConfirmButtonForPlannedEventThatHasNotStartedYet() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
@@ -345,7 +343,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsConfirmButtonForCanceledEventThatHasNotStartedYet() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
@@ -361,7 +359,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowDoesNotContainConfirmButtonForTopicRecords() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -376,7 +374,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsConfirmButtonWithVariableEventUidInHiddenField() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
@@ -392,7 +390,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowDoesNotContainCancelButtonForAlreadyCanceledEvent() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
@@ -408,7 +406,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowDoesNotContainCancelButtonPlannedEventThatHasAlreadyBegun() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 42,
@@ -423,7 +421,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsCancelButtonForPlannedEventThatHasNotStartedYet() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
@@ -438,7 +436,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsCancelButtonForConfirmedEventThatHasNotStartedYet() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
@@ -454,7 +452,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowDoesNotContainCancelButtonForTopicRecords() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
@@ -470,7 +468,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testShowContainsCancelButtonWithVariableEventUidInHiddenField() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
@@ -484,6 +482,27 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function showContainsEventFromSubfolder() {
+		$subfolderPid = $this->testingFramework->createSystemFolder(
+			$this->dummySysFolderPid
+		);
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'title' => 'Event in subfolder',
+				'pid' => $subfolderPid,
+			)
+		);
+
+		$this->assertContains(
+			'Event in subfolder',
+			$this->fixture->show()
+		);
+	}
+
 
 	/////////////////////////
 	// Tests for the icons.
@@ -491,7 +510,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 	public function testHasEventIcon() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',

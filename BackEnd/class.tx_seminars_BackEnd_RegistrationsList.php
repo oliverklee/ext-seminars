@@ -146,18 +146,16 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 			),
 		);
 
-		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationBagBuilder'
-		);
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$pageData = $this->page->getPageData();
-		$registrationBagBuilder->setSourcePages($pageData['uid']);
+		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 		if ($showRegistrationQueue) {
-			$registrationBagBuilder->limitToOnQueue();
+			$builder->limitToOnQueue();
 		} else {
-			$registrationBagBuilder->limitToRegular();
+			$builder->limitToRegular();
 		}
 
-		$registrationBag = $registrationBagBuilder->build();
+		$registrationBag = $builder->build();
 
 		$labelHeading = ($showRegistrationQueue)
 			? $LANG->getLL('registrationlist.label_queueRegistrations')

@@ -42,6 +42,11 @@ class tx_seminars_BackEnd_List {
 	protected $page = null;
 
 	/**
+	 * @var integer the depth of the recursion for the back-end lists
+	 */
+	const RECURSION_DEPTH = 250;
+
+	/**
 	 * The constructor. Sets the table name and the back-end page object.
 	 *
 	 * @param tx_seminars_BackEnd_Module the current back-end module
