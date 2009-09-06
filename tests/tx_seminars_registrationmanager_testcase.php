@@ -37,28 +37,48 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_registrationmanager
+	 */
 	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
-	/** a seminar to which the fixture relates */
+	/**
+	 * @var tx_seminars_seminarchild a seminar to which the fixture relates
+	 */
 	private $seminar = null;
 
-	/** the UID of a fake front-end user */
+	/**
+	 * @var integer the UID of a fake front-end user
+	 */
 	private $frontEndUserUid = 0;
 
-	/** UID of a fake login page */
+	/**
+	 * @var integer UID of a fake login page
+	 */
 	private $loginPageUid = 0;
 
-	/** UID of a fake registration page */
+	/**
+	 * @var integer UID of a fake registration page
+	 */
 	private $registrationPageUid = 0;
 
-	/** an instance of the Seminar Manager pi1 class */
+	/**
+	 * @var tx_seminars_pi1 a front-end plugin
+	 */
 	private $pi1 = null;
 
-	/** @var tx_seminars_seminarchild a fully booked seminar */
+	/**
+	 * @var tx_seminars_seminarchild a fully booked seminar
+	 */
 	private $fullyBookedSeminar = null;
 
-	/** @var tx_seminars_seminarchild a seminar */
+	/**
+	 * @var tx_seminars_seminarchild a seminar
+	 */
 	private $cachedSeminar = null;
 
 	protected function setUp() {
@@ -122,6 +142,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->cachedSeminar->__destruct();
 			unset($this->cachedSeminar);
 		}
+
+		tx_seminars_registrationmanager::purgeInstance();
+
 		unset(
 			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework
 		);
@@ -275,6 +298,44 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fullyBookedSeminar->getUid() > 0
+		);
+	}
+
+
+	////////////////////////////////////////////
+	// Tests regarding the Singleton property.
+	////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getInstanceReturnsRegistrationManagerInstance() {
+		$this->assertTrue(
+			tx_seminars_registrationmanager::getInstance() instanceof
+				tx_seminars_registrationmanager
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getInstanceTwoTimesReturnsSameInstance() {
+		$this->assertSame(
+			tx_seminars_registrationmanager::getInstance(),
+			tx_seminars_registrationmanager::getInstance()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getInstanceAfterPurgeInstanceReturnsNewInstance() {
+		$firstInstance = tx_seminars_registrationmanager::getInstance();
+		tx_seminars_registrationmanager::purgeInstance();
+
+		$this->assertNotSame(
+			$firstInstance,
+			tx_seminars_registrationmanager::getInstance()
 		);
 	}
 

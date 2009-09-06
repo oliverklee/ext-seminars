@@ -39,15 +39,24 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
-	/** same as class name */
+	/**
+	 * @var string same as class name
+	 */
 	public $prefixId = 'tx_seminars_registrationmanager';
-	/**  path to this script relative to the extension dir */
+	/**
+	 * @var string path to this script relative to the extension directory
+	 */
 	public $scriptRelPath = 'class.tx_seminars_registrationmanager.php';
 
 	/**
 	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
+
+	/**
+	 * @var tx_seminars_registrationmanager the Singleton instance
+	 */
+	private static $instance = null;
 
 	/**
 	 * @var tx_seminars_registration the current registration
@@ -77,6 +86,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 	/**
 	 * The constructor.
+	 *
+	 * It still is public due to the templatehelper base class. Nevertheless,
+	 * getInstance should be used so the Singleton property is retained.
 	 */
 	public function __construct() {
 		$this->init();
@@ -92,6 +104,30 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		parent::__destruct();
+	}
+
+	/**
+	 * Returns the instance of this class.
+	 *
+	 * @return tx_seminars_registrationmanager the current Singleton instance
+	 */
+	public static function getInstance() {
+		if (self::$instance === null) {
+			self::$instance = new tx_seminars_registrationmanager();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Purges the current instance so that getInstance will create a new
+	 * instance.
+	 */
+	public static function purgeInstance() {
+		if (self::$instance) {
+			self::$instance->__destruct();
+		}
+		self::$instance = null;
 	}
 
 	/**
