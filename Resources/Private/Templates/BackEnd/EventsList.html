@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Template for the back-end events list</title>
+</head>
+<body>
+<!-- ###SEMINARS_EVENT_LIST### -->
+	###NEW_RECORD_BUTTON###
+	###CSV_EVENT_EXPORT_BUTTON###
+	<table cellpadding="0" cellspacing="0" class="typo3-dblist">
+		<thead>
+			<tr>
+				<td class="c-headLineTable">&nbsp;</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_ACCREDITATION_NUMBER###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_TITLE###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_DATE###</span>
+				</td>
+				<td class="c-headLineTable">&nbsp;</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_ATTENDEES###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_NUMBER_OF_ATTENDEES_ON_QUEUE###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_MINIMUM_NUMBER_OF_ATTENDEES###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_MAXIMUM_NUMBER_OF_ATTENDEES###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_HAS_ENOUGH_ATTENDEES###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_IS_FULLY_BOOKED###</span>
+				</td>
+				<td class="c-headLineTable">
+					<span style="color: #ffffff; font-weight: bold;">###LABEL_STATUS###</span>
+				</td>
+				<td class="c-headLineTable">&nbsp;</td>
+				<td class="c-headLineTable">&nbsp;</td>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- ###EVENT_ROW### -->
+			<tr>
+				<td>
+					###ICON###
+				</td>
+				<td>
+					###ACCREDITATION_NUMBER###
+				</td>
+				<td>
+					###TITLE###
+				</td>
+				<td class="datecol">
+					###DATE###
+				</td>
+				<td>
+					###EDIT_BUTTON###
+					###DELETE_BUTTON###
+					###HIDE_UNHIDE_BUTTON###
+					###UP_DOWN_BUTTONS###
+				</td>
+				<td class="attendees">
+					###CSV_REGISTRATION_EXPORT_BUTTON###&nbsp;###NUMBER_OF_ATTENDEES###
+				</td>
+				<td class="queue">
+					###NUMBER_OF_ATTENDEES_ON_QUEUE###
+				</td>
+				<td class="attendees_min">
+					###MINIMUM_NUMBER_OF_ATTENDEES###
+				</td>
+				<td class="attendees_max">
+					###MAXIMUM_NUMBER_OF_ATTENDEES###
+				</td>
+				<td class="enough_attendees">
+					###HAS_ENOUGH_ATTENDEES###
+				</td>
+				<td class="is_full">
+					###IS_FULLY_BOOKED###
+				</td>
+				<td class="status">
+					###STATUS###
+				</td>
+				<td class="cancel_button">
+					<!-- ###CANCEL_BUTTON### -->
+						<form action="###CANCEL_BUTTON_URL###" method="post"><p><input type="submit" value="###LABEL_CANCEL_BUTTON###" /><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="cancelEvent" /></p></form>
+					<!-- ###CANCEL_BUTTON### -->
+				</td>
+				<td class="confirm_button">
+					<!-- ###CONFIRM_BUTTON### -->
+						<form action="###CONFIRM_BUTTON_URL###" method="post"><p><input type="submit" value="###LABEL_CONFIRM_BUTTON###" /><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="confirmEvent" /></p></form>
+					<!-- ###CONFIRM_BUTTON### -->
+				</td>
+			</tr>
+			<!-- ###EVENT_ROW### -->
+		</tbody>
+	</table>
+<!-- ###SEMINARS_EVENT_LIST### -->
+</body>
+</html>

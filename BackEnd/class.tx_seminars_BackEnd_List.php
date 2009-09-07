@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 /**
  * Class 'tx_seminars_BackEnd_List' for the 'seminars' extension.
  *
@@ -32,14 +30,26 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BackEnd_List {
-	/** the table we're working on */
+abstract class tx_seminars_BackEnd_List {
+	/**
+	 * @var string the name of the table we're working on
+	 */
 	protected $tableName = '';
 
 	/**
 	 * @var tx_seminars_BackEnd_Module the back-end module
 	 */
 	protected $page = null;
+
+	/**
+	 * @var tx_oelib_Template the template object
+	 */
+	protected $template = null;
+
+	/**
+	 * @var string the path to the template file of this list
+	 */
+	protected $templateFile = '';
 
 	/**
 	 * @var integer the depth of the recursion for the back-end lists
@@ -53,13 +63,15 @@ class tx_seminars_BackEnd_List {
 	 */
 	public function __construct(tx_seminars_BackEnd_Module $module) {
 		$this->page = $module;
+
+		$this->template = tx_oelib_TemplateRegistry::get($this->templateFile);
 	}
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		unset($this->page);
+		unset($this->page, $this->template);
 	}
 
 	/**

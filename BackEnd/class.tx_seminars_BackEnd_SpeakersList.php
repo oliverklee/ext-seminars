@@ -31,11 +31,20 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
-	/** the table we're working on */
+	/**
+	 * @var string the name of the table we're working on
+	 */
 	protected $tableName = 'tx_seminars_speakers';
 
-	/** the speaker which we want to list/show */
+	/**
+	 * @var tx_seminars_speaker the speaker which we want to list
+	 */
 	private $speaker = null;
+
+	/**
+	 * @var string the path to the template file of this list
+	 */
+	protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/SpeakersList.html';
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -55,106 +64,59 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 	 * @return string the HTML source code to display
 	 */
 	public function show() {
-		global $LANG;
-
-		// Initialize the variable for the HTML source code.
 		$content = '';
 
-		// Set the table layout of the event list.
-		$tableLayout = array(
-			'table' => array(
-				TAB . TAB .
-					'<table cellpadding="0" cellspacing="0" class="typo3-dblist">' .
-					LF,
-				TAB . TAB .
-					'</table>' . LF
-			),
-			array(
-				'tr' => array(
-					TAB . TAB . TAB .
-						'<thead>' . LF .
-						TAB . TAB . TAB . TAB .
-						'<tr>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</tr>' . LF .
-						TAB . TAB . TAB .
-						'</thead>' . LF
-				),
-				'defCol' => array(
-					TAB . TAB . TAB . TAB . TAB .
-						'<td class="c-headLineTable">' . LF,
-					TAB . TAB . TAB . TAB . TAB .
-						'</td>' . LF
-				)
-			),
-			'defRow' => array(
-				'tr' => array(
-					TAB . TAB . TAB .
-						'<tr>' . LF,
-					TAB . TAB . TAB .
-						'</tr>' . LF
-				),
-				'defCol' => array(
-					TAB . TAB . TAB . TAB .
-						'<td>'.LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF
-				)
-			)
+		$pageData = $this->page->getPageData();
+
+		$this->template->setMarker(
+			'new_record_button', $this->getNewIcon($pageData['uid'])
 		);
 
-		// Fill the first row of the table array with the header.
-		$table = array(
-			array(
-				'',
-				TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('speakerlist.title') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					'&nbsp;' . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('speakerlist.skills') . '</span>' . LF
-			)
+		$this->template->setMarker(
+			'label_full_name', $GLOBALS['LANG']->getLL('speakerlist.title')
+		);
+		$this->template->setMarker(
+			'label_skills', $GLOBALS['LANG']->getLL('speakerlist.skills')
 		);
 
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_SpeakerBagBuilder');
 		$builder->showHiddenRecords();
 
-		$pageData = $this->page->getPageData();
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 
 		$speakerBag = $builder->build();
 
+		$tableRows = '';
+
 		foreach ($speakerBag as $this->speaker) {
-			// Add the result row to the table array.
-			$table[] = array(
-				TAB . TAB . TAB . TAB . TAB .
-					$this->speaker->getRecordIcon() . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->speaker->getTitle() . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->getEditIcon(
-						$this->speaker->getUid()
-					) .
-					$this->getDeleteIcon(
-						$this->speaker->getUid()
-					) . LF .
-					TAB . TAB . TAB . TAB . TAB .
-					$this->getHideUnhideIcon(
-						$this->speaker->getUid(),
-						$this->speaker->isHidden()
-					) . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->speaker->getSkillsShort() . LF
+			$this->template->setMarker(
+				'icon', $this->speaker->getRecordIcon()
 			);
+			$this->template->setMarker(
+				'full_name', htmlspecialchars($this->speaker->getTitle())
+			);
+			$this->template->setMarker(
+				'edit_button', $this->getEditIcon($this->speaker->getUid())
+			);
+			$this->template->setMarker(
+				'delete_button', $this->getDeleteIcon($this->speaker->getUid())
+			);
+			$this->template->setMarker(
+				'hide_unhide_button',
+				$this->getHideUnhideIcon(
+					$this->speaker->getUid(), $this->speaker->isHidden()
+				)
+			);
+			$this->template->setMarker(
+				'skills', htmlspecialchars($this->speaker->getSkillsShort())
+			);
+
+			$tableRows .= $this->template->getSubpart('SPEAKER_ROW');
 		}
 
-		$content .= $this->getNewIcon($pageData['uid']);
+		$this->template->setSubpart('SPEAKER_ROW', $tableRows);
 
-		// Output the table array using the tableLayout array with the template
-		// class.
-		$content .= $this->page->doc->table($table, $tableLayout);
+		$content .= $this->template->getSubpart('SEMINARS_SPEAKER_LIST');
 
 		$content .= $speakerBag->checkConfiguration();
 

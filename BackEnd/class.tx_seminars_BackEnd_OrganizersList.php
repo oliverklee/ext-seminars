@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 /**
  * Class 'organizers list' for the 'seminars' extension.
  *
@@ -33,11 +31,20 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
-	/** the table we're working on */
-	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
+	/**
+	 * @var string the name of the table we're working on
+	 */
+	protected $tableName = 'tx_seminars_organizers';
 
-	/** the organizer which we want to list/show */
+	/**
+	 * @var tx_seminars_organizer the organizer which we want to list
+	 */
 	private $organizer = null;
+
+	/**
+	 * @var string the path to the template file of this list
+	 */
+	protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/OrganizersList.html';
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -58,96 +65,47 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 	 * @return string the HTML source code to display
 	 */
 	public function show() {
-		global $LANG;
-
-		// Initialize the variable for the HTML source code.
 		$content = '';
 
-		// Set the table layout of the event list.
-		$tableLayout = array(
-			'table' => array(
-				TAB.TAB
-					.'<table cellpadding="0" cellspacing="0" class="typo3-dblist">'
-					.LF,
-				TAB.TAB
-					.'</table>'.LF
-			),
-			array(
-				'tr' => array(
-					TAB.TAB.TAB
-						.'<thead>'.LF
-						.TAB.TAB.TAB.TAB
-						.'<tr>'.LF,
-					TAB.TAB.TAB.TAB
-						.'</tr>'.LF
-						.TAB.TAB.TAB
-						.'</thead>'.LF
-				),
-				'defCol' => array(
-					TAB.TAB.TAB.TAB.TAB
-						.'<td class="c-headLineTable">'.LF,
-					TAB.TAB.TAB.TAB.TAB
-						.'</td>'.LF
-				)
-			),
-			'defRow' => array(
-				'tr' => array(
-					TAB.TAB.TAB
-						.'<tr>'.LF,
-					TAB.TAB.TAB
-						.'</tr>'.LF
-				),
-				'defCol' => array(
-					TAB.TAB.TAB.TAB
-						.'<td>'.LF,
-					TAB.TAB.TAB.TAB
-						.'</td>'.LF
-				)
-			)
+		$pageData = $this->page->getPageData();
+
+		$this->template->setMarker(
+			'new_record_button', $this->getNewIcon($pageData['uid'])
 		);
 
-		// Fill the first row of the table array with the header.
-		$table = array(
-			array(
-				'',
-				TAB.TAB.TAB.TAB.TAB.TAB
-					.'<span style="color: #ffffff; font-weight: bold;">'
-					.$LANG->getLL('organizerlist.title').'</span>'.LF,
-				TAB.TAB.TAB.TAB.TAB.TAB
-					.'&nbsp;'.LF
-			)
+		$this->template->setMarker(
+			'label_full_name', $GLOBALS['LANG']->getLL('organizerlist.title')
 		);
 
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_OrganizerBagBuilder');
 
-		$pageData = $this->page->getPageData();
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 
 		$organizerBag = $builder->build();
 
+		$tableRows = '';
+
 		foreach ($organizerBag as $this->organizer) {
-			// Add the result row to the table array.
-			$table[] = array(
-				TAB.TAB.TAB.TAB.TAB
-					.$this->organizer->getRecordIcon().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->organizer->getTitle().LF,
-				TAB.TAB.TAB.TAB.TAB
-					.$this->getEditIcon(
-						$this->organizer->getUid()
-					)
-					.$this->getDeleteIcon(
-						$this->organizer->getUid()
-					).LF
+			$this->template->setMarker(
+				'icon', $this->organizer->getRecordIcon()
 			);
+			$this->template->setMarker(
+				'full_name', htmlspecialchars($this->organizer->getTitle())
+			);
+			$this->template->setMarker(
+				'edit_button', $this->getEditIcon($this->organizer->getUid())
+			);
+			$this->template->setMarker(
+				'delete_button', $this->getDeleteIcon($this->organizer->getUid())
+			);
+
+			$tableRows .= $this->template->getSubpart('ORGANIZER_ROW');
 		}
 		$organizerBag->__destruct();
 
-		$content .= $this->getNewIcon($pageData['uid']);
+		$this->template->setSubpart('ORGANIZER_ROW', $tableRows);
 
-		// Output the table array using the tableLayout array with the template
-		// class.
-		$content .= $this->page->doc->table($table, $tableLayout);
+		$content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');
 
 		$content .= $organizerBag->checkConfiguration();
 

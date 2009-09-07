@@ -22,7 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 /**
@@ -35,14 +34,19 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php'
  */
 class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	/**
-	 * @var string the table we're working on
+	 * @var string the name of the table we're working on
 	 */
-	protected $tableName = SEMINARS_TABLE_SEMINARS;
+	protected $tableName = 'tx_seminars_seminars';
 
 	/**
-	 * @var tx_seminars_seminar the seminar which we want to list/show
+	 * @var tx_seminars_seminar the seminar which we want to list
 	 */
 	private $seminar = null;
+
+	/**
+	 * @var string the path to the template file of this list
+	 */
+	protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/EventsList.html';
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -62,181 +66,42 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 * @return string the HTML source code of the event list
 	 */
 	public function show() {
-		global $LANG, $BE_USER;
-
-		// Initializes the variable for the HTML source code.
 		$content = '';
 
-		// Sets the table layout of the event list.
-		$tableLayout = array(
-			'table' => array(
-				TAB . TAB .
-					'<table cellpadding="0" cellspacing="0" class="typo3-dblist">' .
-					LF,
-				TAB . TAB .
-					'</table>' . LF,
-			),
-			array(
-				'tr' => array(
-					TAB . TAB . TAB .
-						'<thead>' . LF .
-						TAB . TAB . TAB . TAB .
-						'<tr>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</tr>' . LF .
-						TAB . TAB . TAB .
-						'</thead>' . LF,
-				),
-				'defCol' => array(
-					TAB . TAB . TAB . TAB . TAB .
-						'<td class="c-headLineTable">' . LF,
-					TAB . TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-			),
-			'defRow' => array(
-				'tr' => array(
-					TAB . TAB . TAB .
-						'<tr>' . LF,
-					TAB . TAB . TAB .
-						'</tr>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="datecol">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="attendees">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="queue">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="attendees_min">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="attendees_max">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="enough_attendees">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="is_full">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="status">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="cancel_button">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-				array(
-					TAB . TAB . TAB . TAB .
-						'<td class="confirm_button">' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-
-				'defCol' => array(
-					TAB . TAB . TAB . TAB .
-						'<td>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-			),
+		$this->template->setMarker(
+			'label_accreditation_number',
+			$GLOBALS['LANG']->getLL('eventlist.accreditation_number')
 		);
-
-		// Fills the first row of the table array with the header.
-		$table = array(
-			array(
-				'',
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.accreditation_number') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.title') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.date') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'&nbsp;' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.attendees') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.attendeesOnRegistrationQueue') .
-					'</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.attendees_min') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.attendees_max') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.enough_attendees') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('eventlist.is_full') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$GLOBALS['LANG']->getLL('eventlist_status') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'&nbsp;' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'&nbsp;' . LF,
-			),
+		$this->template->setMarker(
+			'label_title', $GLOBALS['LANG']->getLL('eventlist.title')
+		);
+		$this->template->setMarker(
+			'label_date', $GLOBALS['LANG']->getLL('eventlist.date')
+		);
+		$this->template->setMarker(
+			'label_attendees', $GLOBALS['LANG']->getLL('eventlist.attendees')
+		);
+		$this->template->setMarker(
+			'label_number_of_attendees_on_queue',
+			$GLOBALS['LANG']->getLL('eventlist.attendeesOnRegistrationQueue')
+		);
+		$this->template->setMarker(
+			'label_minimum_number_of_attendees',
+			$GLOBALS['LANG']->getLL('eventlist.attendees_min')
+		);
+		$this->template->setMarker(
+			'label_maximum_number_of_attendees',
+			$GLOBALS['LANG']->getLL('eventlist.attendees_max')
+		);
+		$this->template->setMarker(
+			'label_has_enough_attendees',
+			$GLOBALS['LANG']->getLL('eventlist.enough_attendees')
+		);
+		$this->template->setMarker(
+			'label_is_fully_booked', $GLOBALS['LANG']->getLL('eventlist.is_full')
+		);
+		$this->template->setMarker(
+			'label_status', $GLOBALS['LANG']->getLL('eventlist_status')
 		);
 
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
@@ -255,8 +120,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		);
 
 		$useManualSorting = $globalConfiguration['useManualSorting']
-			&& $BE_USER->check('tables_modify', SEMINARS_TABLE_SEMINARS)
-			&& $BE_USER->doesUserHaveAccess(
+			&& $GLOBALS['BE_USER']->check('tables_modify', SEMINARS_TABLE_SEMINARS)
+			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
 					'pages', $pageData['uid']
 				),
@@ -311,87 +176,112 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			}
 		}
 
+		$tableRows = '';
+
 		foreach ($seminarBag as $this->seminar) {
-			// Adds the result row to the table array.
-			$table[] = array(
-				TAB . TAB . TAB . TAB . TAB .
-					$this->seminar->getRecordIcon() . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					htmlspecialchars($this->seminar->getAccreditationNumber()) .
-					LF,
-				TAB . TAB . TAB . TAB . TAB .
+			$this->template->setMarker('uid', $this->seminar->getUid());
+			$this->template->setMarker('icon', $this->seminar->getRecordIcon());
+			$this->template->setMarker(
+				'accreditation_number',
+				htmlspecialchars($this->seminar->getAccreditationNumber())
+			);
+			$this->template->setMarker(
+				'title',
+				htmlspecialchars(
 					t3lib_div::fixed_lgd_cs(
 						$this->seminar->getRealTitle(),
-						$BE_USER->uc['titleLen']
-					) . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					($this->seminar->hasDate()
-						? $this->seminar->getDate() : '') . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->getEditIcon(
-						$this->seminar->getUid()
-					) . LF .
-					TAB . TAB . TAB . TAB . TAB .
-					$this->getDeleteIcon(
-						$this->seminar->getUid()
-					) . LF .
-					TAB . TAB . TAB . TAB . TAB .
-					$this->getHideUnhideIcon(
-						$this->seminar->getUid(),
-						$this->seminar->isHidden()
-					) . LF .
-					TAB . TAB . TAB . TAB . TAB .
-					$this->getUpDownIcons(
-						$useManualSorting,
-						$sortList,
-						$this->seminar->getUid()
-					) . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					($this->seminar->needsRegistration()
-						? $this->getRegistrationsCsvIcon() .
-							$this->seminar->getAttendances()
-						: '') . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					($this->seminar->hasRegistrationQueue()
-						? $this->seminar->getAttendancesOnRegistrationQueue()
-						: '') . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					($this->seminar->needsRegistration()
-						? $this->seminar->getAttendancesMin()
-						: '') . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					($this->seminar->needsRegistration()
-						? $this->seminar->getAttendancesMax()
-						: '') . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					($this->seminar->needsRegistration()
-						? (!$this->seminar->hasEnoughAttendances()
-							? $LANG->getLL('no') : $LANG->getLL('yes'))
-						: '') . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					($this->seminar->needsRegistration()
-						? (!$this->seminar->isFull()
-							? $LANG->getLL('no') : $LANG->getLL('yes'))
-						: '') . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->getStatusIcon() . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->getCancelButton() . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->getConfirmButton() . LF,
+						$GLOBALS['BE_USER']->uc['titleLen']
+					)
+				)
 			);
+			$this->template->setMarker(
+				'date',
+				($this->seminar->hasDate() ? $this->seminar->getDate() : '')
+			);
+			$this->template->setMarker(
+				'edit_button', $this->getEditIcon($this->seminar->getUid())
+			);
+			$this->template->setMarker(
+				'delete_button', $this->getDeleteIcon($this->seminar->getUid())
+			);
+			$this->template->setMarker(
+				'hide_unhide_button',
+				$this->getHideUnhideIcon(
+					$this->seminar->getUid(), $this->seminar->isHidden()
+				)
+			);
+			$this->template->setMarker(
+				'up_down_buttons',
+				$this->getUpDownIcons(
+					$useManualSorting, $sortList, $this->seminar->getUid()
+				)
+			);
+			$this->template->setMarker(
+				'csv_registration_export_button',
+				($this->seminar->needsRegistration()
+					? $this->getRegistrationsCsvIcon() : '')
+			);
+			$this->template->setMarker(
+				'number_of_attendees',
+				($this->seminar->needsRegistration()
+					? $this->seminar->getAttendances() : '')
+			);
+			$this->template->setMarker(
+				'number_of_attendees_on_queue',
+				($this->seminar->hasRegistrationQueue()
+					? $this->seminar->getAttendancesOnRegistrationQueue()
+					: '')
+			);
+			$this->template->setMarker(
+				'minimum_number_of_attendees',
+				($this->seminar->needsRegistration()
+					? $this->seminar->getAttendancesMin()
+					: '')
+			);
+			$this->template->setMarker(
+				'maximum_number_of_attendees',
+				($this->seminar->needsRegistration()
+					? $this->seminar->getAttendancesMax()
+					: '')
+			);
+			$this->template->setMarker(
+				'has_enough_attendees',
+				($this->seminar->needsRegistration()
+					? (!$this->seminar->hasEnoughAttendances()
+						? $GLOBALS['LANG']->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
+					: '')
+			);
+			$this->template->setMarker(
+				'is_fully_booked',
+				($this->seminar->needsRegistration()
+					? (!$this->seminar->isFull()
+						? $GLOBALS['LANG']->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
+					: '')
+			);
+			$this->template->setMarker(
+				'status', $this->getStatusIcon()
+			);
+
+			$this->setCancelButtonMarkers();
+			$this->setConfirmButtonMarkers();
+
+			$tableRows .= $this->template->getSubpart('EVENT_ROW');
 		}
 
-		$content .= $this->getNewIcon($pageData['uid']);
+		$this->template->setSubpart('EVENT_ROW', $tableRows);
 
-		if (!$seminarBag->isEmpty()) {
-			$content .= $this->getCsvIcon();
-		}
+		$this->template->setMarker(
+			'new_record_button', $this->getNewIcon($pageData['uid'])
+		);
+
+		$this->template->setMarker(
+			'csv_event_export_button',
+			(!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
+		);
+
 		$seminarBag->__destruct();
 
-		// Outputs the table array using the tableLayout array with the template
-		// class.
-		$content .= $this->page->doc->table($table, $tableLayout);
+		$content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
 
 		// Checks the BE configuration and the CSV export configuration.
 		$content .= $seminarBag->checkConfiguration();
@@ -450,7 +340,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		if ($this->seminar->hasAttendances()
 			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
 			$pageData = $this->page->getPageData();
-			$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
+			$langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
 			$result = '<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
 				$pageData['uid'] .
 				'&amp;tx_seminars_pi2[table]=' . SEMINARS_TABLE_ATTENDANCES .
@@ -469,62 +359,63 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	}
 
 	/**
-	 * Returns a button for canceling an event. The button will only be
-	 * returned if
+	 * Sets the markers of a button for canceling an event. The button will only
+	 * be visible if
 	 * - the current record is either a date or single event record
 	 * - the event is not canceled yet
 	 * - the event has not started yet
-	 * In all other cases, an empty string is returned.
-	 *
-	 * @return string HTML for the cancel button, may be empty
+	 * In all other cases the corresponding subpart is hidden.
 	 */
-	private function getCancelButton() {
-		$result = '';
+	private function setCancelButtonMarkers() {
+		$this->template->unhideSubpartsArray(array('CANCEL_BUTTON'));
 
-		$pageData = $this->page->getPageData();
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
 			&& !$this->seminar->isCanceled()
 			&& !$this->seminar->hasStarted()
 		) {
-			$result = '<form action="index.php?id=' . $pageData['uid'] .
-				'&amp;subModule=1" method="post"><p><input type="submit" value="' .
-				$GLOBALS['LANG']->getLL('eventlist_button_cancel') . '" />' .
-				'<input type="hidden" name="eventUid" value="' .
-				$this->seminar->getUid() . '" />' .
-				'<input type="hidden" name="action" value="cancelEvent" /></p></form>';
+			$pageData = $this->page->getPageData();
+			$this->template->setMarker('uid', $this->seminar->getUid());
+			$this->template->setMarker(
+				'cancel_button_url',
+				'index.php?id=' . $pageData['uid'] . '&amp;subModule=1'
+			);
+			$this->template->setMarker(
+				'label_cancel_button',
+				$GLOBALS['LANG']->getLL('eventlist_button_cancel')
+			);
+		} else {
+			$this->template->hideSubpartsArray(array('CANCEL_BUTTON'));
 		}
-
-		return $result;
 	}
 
 	/**
-	 * Returns a button for confirming an event. The button will only be
-	 * returned if
+	 * Sets the markers of a button for confirming an event. The button will
+	 * only be visible if
 	 * - the current record is either a date or single event record
 	 * - the event is not confirmed yet
 	 * - the event has not started yet
-	 * In all other cases, an empty string is returned.
-	 *
-	 * @return string HTML for the button, may be empty
+	 * In all other cases the corresponding subpart is hidden.
 	 */
-	private function getConfirmButton() {
-		$result = '';
+	private function setConfirmButtonMarkers() {
+		$this->template->unhideSubpartsArray(array('CONFIRM_BUTTON'));
 
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
 			&& !$this->seminar->isConfirmed()
 			&& !$this->seminar->hasStarted()
 		) {
 			$pageData = $this->page->getPageData();
-			$result = '<form action="index.php?id=' . $pageData['uid'] .
-				'&amp;subModule=1" method="post"><p><input type="submit" value="' .
-				$GLOBALS['LANG']->getLL('eventlist_button_confirm') . '" />' .
-				'<input type="hidden" name="eventUid" value="' .
-				$this->seminar->getUid() . '" />' .
-				'<input type="hidden" name="action" value="confirmEvent" />' .
-				'</p></form>';
+			$this->template->setMarker('uid', $this->seminar->getUid());
+			$this->template->setMarker(
+				'confirm_button_url',
+				'index.php?id=' . $pageData['uid'] . '&amp;subModule=1'
+			);
+			$this->template->setMarker(
+				'label_confirm_button',
+				$GLOBALS['LANG']->getLL('eventlist_button_confirm')
+			);
+		} else {
+			$this->template->hideSubpartsArray(array('CONFIRM_BUTTON'));
 		}
-
-		return $result;
 	}
 
 	/**
@@ -591,8 +482,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 					$BACK_PATH,
 					'gfx/button_' . $type . '.gif',
 					'width="11" height="10"'
-				) . ' title="' . $LANG->getLL('move' . ucfirst($type), 1) . '"' .
-				' alt="' . $LANG->getLL('move' . ucfirst($type), 1) . '" />' .
+				) . ' title="' . $GLOBALS['LANG']->getLL('move' . ucfirst($type), 1) . '"' .
+				' alt="' . $GLOBALS['LANG']->getLL('move' . ucfirst($type), 1) . '" />' .
 				'</a>';
 		} else {
 			$result = '<span class="clearUpDownButton"></span>';

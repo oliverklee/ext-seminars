@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 /**
  * Class 'registrations list' for the 'seminars' extension.
  *
@@ -34,9 +32,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	/**
-	 * @var string the table we're working on
+	 * @var string the name of the table we're working on
 	 */
-	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
+	protected $tableName = 'tx_seminars_attendances';
 
 	/**
 	 * @var string warnings from the registration bag configcheck
@@ -44,23 +42,53 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	private $configCheckWarnings = '';
 
 	/**
+	 * @var string the path to the template file of this list
+	 */
+	protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/RegistrationsList.html';
+
+	/**
 	 * Generates and prints out a registrations list.
 	 *
 	 * @return string the HTML source code to display
 	 */
 	public function show() {
-		// Initializes the variable for the HTML source code.
 		$content = '';
 
 		$pageData = $this->page->getPageData();
-		$content .= $this->getNewIcon($pageData['uid']);
 
-		// Generates the table with the regular attendances.
-		$content .= TAB . TAB . '<div style="clear: both;"></div>' . LF;
-		$content .= $this->getRegistrationTable(false);
+		$this->template->setMarker(
+			'new_record_button', $this->getNewIcon($pageData['uid'])
+		);
 
-		// Generates the table with the attendances on the registration queue.
-		$content .= $this->getRegistrationTable(true);
+		$this->template->setMarker(
+			'label_regular_registrations',
+			$GLOBALS['LANG']->getLL('registrationlist.label_regularRegistrations')
+		);
+		$this->template->setMarker(
+			'label_registrations_on_queue',
+			$GLOBALS['LANG']->getLL('registrationlist.label_queueRegistrations')
+		);
+		$this->template->setMarker(
+			'label_attendee_full_name',
+			$GLOBALS['LANG']->getLL('registrationlist.feuser.name')
+		);
+		$this->template->setMarker(
+			'label_event_accreditation_number',
+			$GLOBALS['LANG']->getLL('registrationlist.seminar.accreditation_number')
+		);
+		$this->template->setMarker(
+			'label_event_title',
+			$GLOBALS['LANG']->getLL('registrationlist.seminar.title')
+		);
+		$this->template->setMarker(
+			'label_event_date',
+			$GLOBALS['LANG']->getLL('registrationlist.seminar.date')
+		);
+
+		$this->setRegistrationTableMarkers(false);
+		$this->setRegistrationTableMarkers(true);
+
+		$content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
 
 		$content .= $this->configCheckWarnings;
 
@@ -74,81 +102,12 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	 * @param boolean True if the registration table for the registration
 	 *                queue should be generated and false if the table for
 	 *                the regular attendances should be generated.
-	 *
-	 * @return string the registration table, nicely formatted as HTML
 	 */
-	private function getRegistrationTable($showRegistrationQueue) {
-		global $LANG;
-
-		$content = '';
-
-		// Sets the table layout of the registration list.
-		$tableLayout = array(
-			'table' => array(
-				TAB . TAB .
-					'<table cellpadding="0" cellspacing="0" class="typo3-dblist">' .
-					LF,
-				TAB . TAB .
-					'</table>' . LF,
-			),
-			array(
-				'tr' => array(
-					TAB . TAB . TAB .
-						'<thead>' . LF .
-						TAB . TAB . TAB . TAB .
-						'<tr>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</tr>' . LF .
-						TAB . TAB . TAB .
-						'</thead>' . LF,
-				),
-				'defCol' => array(
-					TAB . TAB . TAB . TAB . TAB .
-						'<td class="c-headLineTable">' . LF,
-					TAB . TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-			),
-			'defRow' => array(
-				'tr' => array(
-					TAB . TAB . TAB .
-						'<tr>' . LF,
-					TAB . TAB . TAB .
-						'</tr>' . LF,
-				),
-				'defCol' => array(
-					TAB . TAB . TAB . TAB .
-						'<td>' . LF,
-					TAB . TAB . TAB . TAB .
-						'</td>' . LF,
-				),
-			),
-		);
-
-		// Fills the first row of the table array with the header.
-		$table = array(
-			array(
-				'',
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('registrationlist.feuser.name') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('registrationlist.seminar.accreditation_number') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('registrationlist.seminar.title') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'<span style="color: #ffffff; font-weight: bold;">' .
-					$LANG->getLL('registrationlist.seminar.date') . '</span>' . LF,
-				TAB . TAB . TAB . TAB . TAB . TAB .
-					'&nbsp;' . LF,
-			),
-		);
-
+	private function setRegistrationTableMarkers($showRegistrationQueue) {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$pageData = $this->page->getPageData();
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+
 		if ($showRegistrationQueue) {
 			$builder->limitToOnQueue();
 		} else {
@@ -157,20 +116,23 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 
 		$registrationBag = $builder->build();
 
-		$labelHeading = ($showRegistrationQueue)
-			? $LANG->getLL('registrationlist.label_queueRegistrations')
-			: $LANG->getLL('registrationlist.label_regularRegistrations');
+		if ($showRegistrationQueue) {
+			$this->template->setMarker(
+				'number_of_registrations_on_queue', $registrationBag->count()
+			);
+		} else {
+			$this->template->setMarker(
+				'number_of_regular_registrations', $registrationBag->count()
+			);
+		}
 
-		$content .= TAB . TAB . '<h3>' .
-			$labelHeading .
-			' (' . $registrationBag->count() . ')' .
-			'</h3>' . LF;
+		$tableRows = '';
 
 		foreach ($registrationBag as $registration) {
 			try {
-				$userName = $registration->getUserName();
+				$userName = htmlspecialchars($registration->getUserName());
 			} catch (tx_oelib_Exception_NotFound $e) {
-				$userName = $LANG->getLL('registrationlist.deleted');
+				$userName = $GLOBALS['LANG']->getLL('registrationlist.deleted');
 			}
 			$event = $registration->getSeminarObject();
 			if ($event->isOk()) {
@@ -180,30 +142,26 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 					$event->getAccreditationNumber()
 				);
 			} else {
-				$eventTitle = $LANG->getLL('registrationlist.deleted');
+				$eventTitle = $GLOBALS['LANG']->getLL('registrationlist.deleted');
 				$eventDate = '';
 				$accreditationNumber = '';
 			}
-			// Adds the result row to the table array.
-			$table[] = array(
-				TAB . TAB . TAB . TAB . TAB .
-					$registration->getRecordIcon() . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$userName . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$accreditationNumber . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$eventTitle . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$eventDate . LF,
-				TAB . TAB . TAB . TAB . TAB .
-					$this->getEditIcon(
-						$registration->getUid()
-					) .
-					$this->getDeleteIcon(
-						$registration->getUid()
-					) . LF,
+
+			$this->template->setMarker('icon', $registration->getRecordIcon());
+			$this->template->setMarker('attendee_full_name', $userName);
+			$this->template->setMarker('event_accreditation_number', $accreditationNumber);
+			$this->template->setMarker('event_title', $eventTitle);
+			$this->template->setMarker('event_date', $eventDate);
+			$this->template->setMarker(
+				'edit_button', $this->getEditIcon($registration->getUid())
 			);
+			$this->template->setMarker(
+				'delete_button', $this->getDeleteIcon($registration->getUid())
+			);
+
+			$tableRows .= ($showRegistrationQueue
+				? $this->template->getSubpart('REGISTRATION_ON_QUEUE_ROW')
+				: $this->template->getSubpart('REGULAR_REGISTRATION_ROW'));
 		}
 
 		if ($this->configCheckWarnings == '') {
@@ -212,11 +170,15 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 		}
 		$registrationBag->__destruct();
 
-		// Outputs the table array using the tableLayout array with the template
-		// class.
-		$content .= $this->page->doc->table($table, $tableLayout);
-
-		return $content;
+		if ($showRegistrationQueue) {
+			$this->template->setSubpart(
+				'REGISTRATION_ON_QUEUE_ROW', $tableRows
+			);
+		} else {
+			$this->template->setSubpart(
+				'REGULAR_REGISTRATION_ROW', $tableRows
+			);
+		}
 	}
 }
 
