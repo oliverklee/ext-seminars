@@ -109,7 +109,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->fillOrHideSearchSubpart('city');
 		$this->fillOrHideFullTextSearch();
 		$this->fillOrHideDateSearch();
-		$this->setJavaScriptMarkers();
 
 		return $this->getSubpart('SELECTOR_WIDGET');
 	}
@@ -288,30 +287,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
-	 * Sets the java script markers needed for the working reset button.
-	 */
-	private function setJavaScriptMarkers() {
-		$additionalJavaScriptMarkers = array();
-
-		if ($this->hasSearchField('date')) {
-			$additionalJavaScriptMarkers = array(
-				'from_day', 'from_month', 'from_year', 'to_day', 'to_month',
-				'to_year'
-			);
-		}
-
-		$javaScriptMarker = '\'' .
-			implode('\', \'',
-				array_merge(
-					$additionalJavaScriptMarkers,
-					$this->displaySearchFormFields
-				)
-			) . '\'';
-
-		$this->setMarker('search_fields_javascript', $javaScriptMarker);
-	}
-
-	/**
 	 * Creates a drop-down, including an empty option at the top.
 	 *
 	 * @param array the options for the drop-down, the keys will be used as
@@ -407,7 +382,6 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	private function fillOrHideFullTextSearch() {
 		if (!$this->hasSearchField('full_text_search')) {
 			$this->hideSubparts(self::SUBPART_PREFIX . 'TEXT');
-			$this->hideSubparts('SEARCH_JAVASCRIPT_TEXT');
 
 			return;
 		}

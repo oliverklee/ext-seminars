@@ -198,17 +198,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function text_Render_ForTwoEnabledSearchParts_AddsBothSearchFieldsToJavascript() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'event_type,language'
-		);
-
-		$this->assertContains(
-			'\'event_type\', \'language\'',
-			$this->fixture->render()
-		);
-	}
-
 	public function text_Render_ForEnabledSearchWidget_DoesNotHaveUnreplacedMarkers() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'full_text_search,language'
@@ -266,17 +255,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->isSubpartVisible('SEARCH_PART_EVENT_TYPE')
-		);
-	}
-
-	public function test_Render_ForEnabledEventTypeOptions_ContainsJavascriptPartForEventType() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'event_type'
-		);
-
-		$this->assertRegExp(
-			'/var suffixes = new Array(.*\'event_type\'.*);/s',
-			$this->fixture->render()
 		);
 	}
 
@@ -443,17 +421,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledLanguageOptions_ContainsJavascriptPartForLanguage() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'language'
-		);
-
-		$this->assertRegExp(
-			'/var suffixes = new Array(.*\'language\'.*);/s',
-			$this->fixture->render()
-		);
-	}
-
 	public function test_Render_ForEnabledLanguageOptions_ContainsSelectorForLanguages() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'language'
@@ -533,17 +500,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////////
 	// Tests concerning the rendering of the place option box
 	///////////////////////////////////////////////////////////
-
-	public function test_Render_ForEnabledPlaceOptions_ContainsJavascriptPartForPlace() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'place'
-		);
-
-		$this->assertRegExp(
-			'/var suffixes = new Array(.*\'place\'.*);/s',
-			$this->fixture->render()
-		);
-	}
 
 	public function test_Render_ForDisabledPlaceOptions_HidesPlaceSubpart() {
 		$this->fixture->setConfigurationValue(
@@ -679,17 +635,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	//////////////////////////////////////////////////////////
 	// Tests concerning the rendering of the city option box
 	//////////////////////////////////////////////////////////
-
-	public function test_Render_ForEnabledCityOptions_ContainsJavascriptPartForCity() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'city'
-		);
-
-		$this->assertRegExp(
-			'/var suffixes = new Array(.*\'city\'.*);/s',
-			$this->fixture->render()
-		);
-	}
 
 	public function test_Render_ForDisabledCityOptions_HidesCitySubpart() {
 		$this->fixture->setConfigurationValue(
@@ -828,17 +773,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////////////////////////
 	// Tests concerning the rendering of the country option box
 	/////////////////////////////////////////////////////////////
-
-	public function test_Render_ForEnabledCountryOptions_ContainsJavascriptPartForCountry() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'country'
-		);
-
-		$this->assertRegExp(
-			'/var suffixes = new Array(.*\'country\'.*);/s',
-			$this->fixture->render()
-		);
-	}
 
 	public function test_Render_ForDisabledCountryOptions_HidesCountrySubpart() {
 		$this->fixture->setConfigurationValue(
@@ -1055,29 +989,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledFullTextSearch_ContainsFullTextJavaSubpart() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'full_text_search'
-		);
-
-		$this->assertContains(
-			'document.getElementById(\'tx_seminars_pi1_sword\')',
-			$this->fixture->render()
-		);
-	}
-
-	public function test_Render_ForDisabledFullTextSearch_HidesFullTextJavaSubpart() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'language'
-		);
-
-		$this->fixture->render();
-
-		$this->assertFalse(
-			$this->fixture->isSubpartVisible('SEARCH_JAVASCRIPT_TEXT')
-		);
-	}
-
 	public function test_Render_ForEnabledFullTextSearch_CanFillSearchedWordIntoTextbox() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'full_text_search'
@@ -1223,17 +1134,6 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'<option value="0">&nbsp;</option>',
-			$this->fixture->render()
-		);
-	}
-
-	public function test_Render_ForEnabledDateSearch_ContainsJavascriptDatePart() {
-		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'date'
-		);
-
-		$this->assertRegExp(
-			'/var suffixes = new Array(.*\'to_year\'.*);/s',
 			$this->fixture->render()
 		);
 	}

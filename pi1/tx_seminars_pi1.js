@@ -295,3 +295,29 @@ function appendCheckboxInEditor(uid, title, buttonData) {
 function appendTargetGroupInEditor(uid, title, buttonData) {
 	appendAuxiliaryRecordInEditor(uid, title, "target_groups", buttonData);
 }
+
+/**
+ * Clears the selection of the search widget.
+ */
+function clearSearchWidgetFields() {
+	if (document.getElementById('tx_seminars_pi1_sword')) {
+		document.getElementById('tx_seminars_pi1_sword').value = '';
+	}
+
+	var suffixes = ['from_day', 'from_month', 'from_year', 'to_day', 'to_month',
+		'to_year', 'event_type', 'language', 'country', 'city', 'place', 'date',
+		'full_text_search'
+	];
+
+	for (var i = 0; i < suffixes.length; i++) {
+		var suffix = suffixes[i];
+		var element = document.getElementById(
+			'tx_seminars_pi1-' + suffix
+		);
+		if (element) {
+			for (var j = 0; j < element.options.length; j++) {
+				element.options[j].selected = false;
+			}
+		}
+	}
+}
