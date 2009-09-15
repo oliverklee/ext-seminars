@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3394] Feature: Add fields "minimumAge" and "maximumAge" to the target groups
 - [#1542] Feature: Use the new BE templating functions in mod2
 - [#2727] Change: Make the registration manager a Singleton instead of passing it around
 - [#3243] Feature: In the "Events" BE module, show records from the current sysfolder and all subpages recursively

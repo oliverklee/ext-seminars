@@ -187,6 +187,8 @@
 			<label index="tx_seminars_timeslots.room">Room</label>
 			<label index="tx_seminars_target_groups">Target Groups</label>
 			<label index="tx_seminars_target_groups.title">Title:</label>
+			<label index="tx_seminars_target_groups.minimum_age">Minimum age:</label>
+			<label index="tx_seminars_target_groups.maximum_age">Maximum age:</label>
 			<label index="tx_seminars_categories">Categories</label>
 			<label index="tx_seminars_categories.title">Title:</label>
 			<label index="tx_seminars_categories.icon">Icon:</label>
@@ -391,6 +393,8 @@
 			<label index="tx_seminars_timeslots.room">Raum</label>
 			<label index="tx_seminars_target_groups">Zielgruppen</label>
 			<label index="tx_seminars_target_groups.title">Titel:</label>
+			<label index="tx_seminars_target_groups.minimum_age">Mindestalter:</label>
+			<label index="tx_seminars_target_groups.maximum_age">Höchstalter:</label>
 			<label index="tx_seminars_categories">Kategorien</label>
 			<label index="tx_seminars_categories.title">Titel:</label>
 			<label index="tx_seminars_categories.icon">Icon:</label>
@@ -1343,6 +1347,8 @@
 			<label index="tx_seminars_timeslots.room" type="integer">214150095</label>
 			<label index="tx_seminars_target_groups" type="integer">206184555</label>
 			<label index="tx_seminars_target_groups.title" type="integer">85903807</label>
+			<label index="tx_seminars_target_groups.minimum_age" type="integer">101482881</label>
+			<label index="tx_seminars_target_groups.maximum_age" type="integer">156105337</label>
 			<label index="tx_seminars_categories" type="integer">183613834</label>
 			<label index="tx_seminars_categories.title" type="integer">85903807</label>
 			<label index="tx_seminars_skills" type="integer">178756701</label>
@@ -2308,6 +2314,8 @@
 			<label index="tx_seminars_timeslots.place">Place</label>
 			<label index="tx_seminars_target_groups">Target Groups</label>
 			<label index="tx_seminars_target_groups.title">Title:</label>
+			<label index="tx_seminars_target_groups.minimum_age">Minimum age:</label>
+			<label index="tx_seminars_target_groups.maximum_age">Maximum age:</label>
 			<label index="tx_seminars_categories">Categories</label>
 			<label index="tx_seminars_categories.title">Title:</label>
 			<label index="tx_seminars_skills">Skills</label>

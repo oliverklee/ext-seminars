@@ -2221,7 +2221,7 @@ $TCA['tx_seminars_timeslots'] = array(
 $TCA['tx_seminars_target_groups'] = array(
 	'ctrl' => $TCA['tx_seminars_target_groups']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,owner',
+		'showRecordFieldList' => 'title,minimum_age,maximum_age,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2231,6 +2231,34 @@ $TCA['tx_seminars_target_groups'] = array(
 				'type' => 'input',
 				'size' => '30',
 				'eval' => 'required,trim',
+			),
+		),
+		'minimum_age' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.minimum_age',
+			'config' => array(
+				'type' => 'input',
+				'size' => '3',
+				'eval' => 'int',
+				'checkbox' => '0',
+				'range' => array(
+					'lower' => '0',
+					'upper' => '199',
+		),
+			),
+		),
+		'maximum_age' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.maximum_age',
+			'config' => array(
+				'type' => 'input',
+				'size' => '3',
+				'eval' => 'int',
+				'checkbox' => '0',
+				'range' => array(
+					'lower' => '0',
+					'upper' => '199',
+				),
 			),
 		),
 		'owner' => array(
@@ -2247,7 +2275,7 @@ $TCA['tx_seminars_target_groups'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2, minimum_age, maximum_age, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
