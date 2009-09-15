@@ -119,7 +119,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->seminar = new tx_seminars_seminarchild($seminarUid);
 
-		$this->fixture = new tx_seminars_registrationmanager();
+		$this->fixture = tx_seminars_registrationmanager::getInstance();
 		$this->fixture->setConfigurationValue(
 			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
@@ -132,7 +132,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->pi1->__destruct();
 		}
 		$this->seminar->__destruct();
-		$this->fixture->__destruct();
 
 		if ($this->fullyBookedSeminar) {
 			$this->fullyBookedSeminar->__destruct();
@@ -144,7 +143,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 
 		tx_seminars_registrationmanager::purgeInstance();
-
 		unset(
 			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework
 		);
@@ -3041,15 +3039,16 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('attendees_min' => 1, 'attendees_max' => 42)
 		);
 
-		$fixture = new tx_seminars_registrationmanager();
-		$fixture->setConfigurationValue(
+		unset($this->fixture);
+		tx_seminars_registrationmanager::purgeInstance();
+		$this->fixture = tx_seminars_registrationmanager::getInstance();
+		$this->fixture->setConfigurationValue(
 			'templateFile',
 			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 
 		$registration = $this->createRegistration();
-		$fixture->sendAdditionalNotification($registration);
-		$fixture->__destruct();
+		$this->fixture->sendAdditionalNotification($registration);
 		$registration->__destruct();
 
 		$this->assertContains(
@@ -3070,15 +3069,16 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('attendees_min' => 0, 'attendees_max' => 42)
 		);
 
-		$fixture = new tx_seminars_registrationmanager();
-		$fixture->setConfigurationValue(
+		unset($this->fixture);
+		tx_seminars_registrationmanager::purgeInstance();
+		$this->fixture = tx_seminars_registrationmanager::getInstance();
+		$this->fixture->setConfigurationValue(
 			'templateFile',
 			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 
 		$registration = $this->createRegistration();
-		$fixture->sendAdditionalNotification($registration);
-		$fixture->__destruct();
+		$this->fixture->sendAdditionalNotification($registration);
 		$registration->__destruct();
 
 		$this->assertEquals(

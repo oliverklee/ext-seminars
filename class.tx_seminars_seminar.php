@@ -2700,13 +2700,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean true if registration is possible, false otherwise
 	 */
 	public function canSomebodyRegister() {
-		$registrationManager
-			= tx_oelib_ObjectFactory::make('tx_seminars_registrationmanager');
+		$registrationManager = tx_seminars_registrationmanager::getInstance();
 		$allowsRegistrationByDate
 			= $registrationManager->allowsRegistrationByDate($this);
 		$allowsRegistrationBySeats
 			= $registrationManager->allowsRegistrationBySeats($this);
-		$registrationManager->__destruct();
 
 		return $this->needsRegistration() && !$this->isCanceled()
 			&& $allowsRegistrationByDate && $allowsRegistrationBySeats;
@@ -2727,8 +2725,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function canSomebodyRegisterMessage() {
 		$message = '';
-		$registrationManager
-			= tx_oelib_ObjectFactory::make('tx_seminars_registrationmanager');
+		$registrationManager = tx_seminars_registrationmanager::getInstance();
 
 		if (!$this->needsRegistration()) {
 			$message = $this->translate('message_noRegistrationNecessary');
@@ -2748,7 +2745,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$this->getRegistrationBegin()
 			);
 		}
-		$registrationManager->__destruct();
 
 		return $message;
 	}

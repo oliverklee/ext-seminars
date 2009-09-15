@@ -107,6 +107,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->pi1->__destruct();
 		}
 		$this->fixture->__destruct();
+		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->pi1, $this->testingFramework);
 	}
 

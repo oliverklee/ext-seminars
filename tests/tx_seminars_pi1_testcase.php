@@ -105,6 +105,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();
+		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
 	}
 
@@ -415,7 +416,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetRegistrationManagerReturnsRegistrationManagerIfSet() {
+	public function testGetRegistrationManagerReturnsRegistrationManager() {
 		$this->assertTrue(
 			$this->fixture->getRegistrationManager()
 				instanceof tx_seminars_registrationmanager

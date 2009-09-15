@@ -120,12 +120,8 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndV
 	 */
 	private function getRequirements() {
 		if ($this->limitRequirementsToMissing) {
-			$registrationManager
-				= tx_oelib_ObjectFactory::make('tx_seminars_registrationmanager');
-			$result = $registrationManager->getMissingRequiredTopics(
-				$this->event
-			);
-			$registrationManager->__destruct();
+			$result = tx_seminars_registrationmanager::getInstance()
+				->getMissingRequiredTopics($this->event);
 		} else {
 			$result = $this->event->getRequirements();
 		}

@@ -75,13 +75,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	private $previousDate = '';
 
 	/**
-	 * @var tx_seminars_registrationmanager an instance of registration manager
-	 *                                      which we want to have around only
-	 *                                      once (for performance reasons)
-	 */
-	private $registrationManager = null;
-
-	/**
 	 * @var tx_seminars_pi1_frontEndCategoryList
 	 */
 	private $categoryList = null;
@@ -200,13 +193,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		if ($this->registration) {
 			$this->registration->__destruct();
 		}
-		if ($this->registrationManager) {
-			$this->registrationManager->__destruct();
-		}
 
 		unset(
 			$this->configGetter, $this->seminar, $this->registration,
-			$this->registrationManager, $this->hookObjects, $this->feuser
+			$this->hookObjects, $this->feuser
 		);
 		parent::__destruct();
 	}
@@ -234,7 +224,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			// Lets warnings from the registration manager bubble up to us.
 			$this->setErrorMessage(
-				$this->registrationManager->checkConfiguration(true)
+				$this->getRegistrationManager()->checkConfiguration(true)
 			);
 
 
@@ -379,9 +369,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @return boolean true if we are properly initialized, false otherwise
 	 */
 	public function isInitialized() {
-		return ($this->isInitialized
-			&& is_object($this->configGetter)
-			&& is_object($this->registrationManager));
+		return ($this->isInitialized && is_object($this->configGetter));
 	}
 
 	/**
@@ -401,9 +389,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Creates a seminar in $this->seminar.
 	 * If the seminar cannot be created, $this->seminar will be null, and
 	 * this function will return false.
-	 *
-	 * $this->registrationManager must have been initialized before this
-	 * method may be called.
 	 *
 	 * @param integer an event UID
 	 * @param booelan whether hidden records should be retrieved as well
@@ -442,9 +427,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * with the UID specified in the parameter $registrationUid.
 	 * If the registration cannot be created, $this->registration will be null,
 	 * and this function will return false.
-	 *
-	 * $this->registrationManager must have been initialized before this
-	 * method may be called.
 	 *
 	 * @param integer a registration UID
 	 *
@@ -492,9 +474,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$this->configGetter = tx_oelib_ObjectFactory::make(
 			'tx_seminars_configgetter'
 		);
-		$this->registrationManager = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationmanager'
-		);
 	}
 
 	/**
@@ -516,12 +495,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Returns the shared registration manager.
+	 * Returns the Singleton registration manager instance.
 	 *
-	 * @return tx_seminars_registrationmanager the shared registration manager
+	 * @return tx_seminars_registrationmanager the Singleton instance
 	 */
 	public function getRegistrationManager() {
-		return $this->registrationManager;
+		return tx_seminars_registrationmanager::getInstance();
 	}
 
 	/**
@@ -1369,10 +1348,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$this->setMarker(
 			'registration',
-			$this->registrationManager->canRegisterIfLoggedIn($this->seminar)
-			? $this->registrationManager->getLinkToRegistrationOrLoginPage(
+			$this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)
+			? $this->getRegistrationManager()->getLinkToRegistrationOrLoginPage(
 				$this, $this->seminar)
-			: $this->registrationManager->canRegisterIfLoggedInMessage(
+			: $this->getRegistrationManager()->canRegisterIfLoggedInMessage(
 				$this->seminar)
 		);
 	}
@@ -2590,9 +2569,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(true));
 
-			if (!$this->registrationManager->canRegisterIfLoggedIn($this->seminar)) {
+			if (!$this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage
-					= $this->registrationManager->canRegisterIfLoggedInMessage(
+					= $this->getRegistrationManager()->canRegisterIfLoggedInMessage(
 						$this->seminar
 					);
 			} else {
@@ -2628,7 +2607,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				case 'register':
 					// The fall-through is intended.
 				default:
-					$errorMessage = $this->registrationManager->existsSeminarMessage(
+					$errorMessage = $this->getRegistrationManager()->existsSeminarMessage(
 						$this->piVars['seminar']
 					);
 					break;
@@ -2637,7 +2616,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		if ($isOkay) {
 			if (($this->piVars['action'] == 'unregister')
-				|| $this->registrationManager->userFulfillsRequirements(
+				|| $this->getRegistrationManager()->userFulfillsRequirements(
 					$this->seminar
 				)
 			) {
@@ -2944,7 +2923,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		if ($whatToDisplay == 'my_events') {
 			 $this->setMarker('registration',
 			 	(($this->seminar->isUnregistrationPossible())
-					? $this->registrationManager->getLinkToUnregistrationPage(
+					? $this->getRegistrationManager()->getLinkToUnregistrationPage(
 						$this,
 						$this->registration
 					)
@@ -2956,12 +2935,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$registrationLink
-			= $this->registrationManager->getRegistrationLink(
+			= $this->getRegistrationManager()->getRegistrationLink(
 				$this, $this->seminar
 			);
 
 		if ($registrationLink == ''
-			&& !$this->registrationManager->registrationHasStarted(
+			&& !$this->getRegistrationManager()->registrationHasStarted(
 				$this->seminar
 			)
 		) {

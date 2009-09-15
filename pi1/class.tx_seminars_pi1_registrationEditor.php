@@ -44,9 +44,6 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	/**  Path to this script relative to the extension dir. */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_registrationEditor.php';
 
-	/** an instance of registration manager which we want to have around only once (for performance reasons) */
-	private $registrationManager = null;
-
 	/** the names of the form fields to show (with the keys being the same as
 	 *  the values for performance reasons */
 	private $formFieldsToShow = array();
@@ -100,10 +97,6 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function __construct(array $configuration, tslib_cObj $cObj) {
 		parent::__construct($configuration, $cObj);
 
-		$this->registrationManager = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationmanager'
-		);
-
 		$formFieldsToShow = t3lib_div::trimExplode(',',
 			$this->getConfValueString(
 				'showRegistrationFields', 's_template_special'
@@ -118,7 +111,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		unset($this->registrationManager, $this->staticInfo, $this->seminar);
+		unset($this->staticInfo, $this->seminar);
 		parent::__destruct();
 	}
 
@@ -280,10 +273,10 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function processRegistration(array $parameters) {
 		$this->saveDataToSession($parameters);
 
-		if ($this->registrationManager->canCreateRegistration(
+		if ($this->getRegistrationManager()->canCreateRegistration(
 			$this->getSeminar(), $parameters
 		)) {
-			$this->registrationManager->createRegistration(
+			$this->getRegistrationManager()->createRegistration(
 				$this->getSeminar(), $parameters, $this
 			);
 		}
@@ -300,7 +293,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                 available, false otherwise
 	 */
 	public function canRegisterSeats(array $formData) {
-		return $this->registrationManager->canRegisterSeats(
+		return $this->getRegistrationManager()->canRegisterSeats(
 			$this->getSeminar(), intval($formData['value'])
 		);
 	}
@@ -924,7 +917,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				$totalPrice = $this->getSeminar()->formatPrice(
 					$seats * $availablePrices[$selectedPrice]['amount']
 				);
-				$currency = $this->registrationManager->getConfValueString(
+				$currency = $this->getRegistrationManager()->getConfValueString(
 					'currency'
 				);
 				$result = $totalPrice . ' ' . $currency;
@@ -1590,7 +1583,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			exit;
 		}
 
-		$this->registrationManager->removeRegistration(
+		$this->getRegistrationManager()->removeRegistration(
 			$this->getRegistration()->getUid(), $this
 		);
 	}
@@ -1657,6 +1650,15 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns the Singleton registration manager instance.
+	 *
+	 * @return tx_seminars_registrationmanager the singleton instance
+	 */
+	private function getRegistrationManager() {
+		return tx_seminars_registrationmanager::getInstance();
 	}
 }
 
