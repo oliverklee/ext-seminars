@@ -363,8 +363,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	///////////////////////
 
 	/**
-	 * Checks that we are properly initialized and that we have a config getter
-	 * and a registration manager.
+	 * Checks that we are properly initialized and that we have a config getter.
 	 *
 	 * @return boolean true if we are properly initialized, false otherwise
 	 */
