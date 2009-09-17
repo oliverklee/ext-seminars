@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3395] Feature: Add a function for limiting the seminar bag to a certain age
 - [#3397] Feature: Add a function seminarBagBuilder::limitToOrganizers
 - [#3221] Change: Move the JavaScript code for resetting the search widget to tx_seminars_pi1.js
 - [#3394] Feature: Add fields "minimumAge" and "maximumAge" to the target groups

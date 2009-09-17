@@ -1161,6 +1161,67 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				SEMINARS_TABLE_SEMINARS . '.topic IN (' . $eventUids . ')))' .
 			')';
 	}
+
+	/**
+	 * Limits the bag to events which have target groups with age limits within
+	 * the provided age.
+	 *
+	 * @param integer $age the age to limit the bag to, must be >= 0
+	 */
+	public function limitToAge($age) {
+		if ($age == 0) {
+			return;
+		}
+
+		$matchingEvents = '';
+
+		$matchingTargetGroups = implode(',',
+			tx_oelib_db::selectColumnForMultiple(
+				'uid',
+				SEMINARS_TABLE_TARGET_GROUPS,
+				'(minimum_age <= ' . $age . ' AND (maximum_age = 0 OR maximum_age >= ' .
+					$age . '))'
+			)
+		);
+
+		if ($matchingTargetGroups != '') {
+			$eventsWithMatchingTargetGroup
+				= tx_oelib_db::selectColumnForMultiple(
+					'uid_local',
+					SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM,
+					'uid_foreign IN (' . $matchingTargetGroups . ')',
+					'uid_local'
+				);
+			$eventsWithoutTargetGroup = tx_oelib_db::selectColumnForMultiple(
+				'uid',
+				SEMINARS_TABLE_SEMINARS,
+				'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' OR ' .
+					'object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ') AND ' .'
+					(target_groups = 0)' .
+					tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
+			);
+
+			$matchingEvents = implode(
+				',',
+				array_merge(
+					$eventsWithMatchingTargetGroup,
+					$eventsWithoutTargetGroup
+				)
+			);
+		}
+
+		if ($matchingEvents == '') {
+			$this->whereClauseParts['ageLimit'] = '(0 = 1)';
+		} else {
+			$this->whereClauseParts['ageLimit'] =
+				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
+					SEMINARS_TABLE_SEMINARS .'.uid IN (' . $matchingEvents . ')) ' .
+					'OR ' .
+					'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+					'topic IN ' . '(' . $matchingEvents . '))' .
+				')';
+		}
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

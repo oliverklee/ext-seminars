@@ -7389,5 +7389,290 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$bag->__destruct();
 	}
+
+
+	////////////////////////////////
+	// Tests concerning limitToAge
+	////////////////////////////////
+
+	public function test_limitToAge_ForAgeWithinEventsAgeRange_FindsThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 50)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(6);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForAgeEqualToLowerLimitOfAgeRange_FindsThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 15, 'maximum_age' => 50)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForAgeEqualToHigherLimitOfAgeRange_FindsThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 15)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForNoLowerLimitAndAgeLowerThanMaximumAge_FindsThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 0, 'maximum_age' => 50)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForAgeHigherThanMaximumAge_DoesNotFindThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 0, 'maximum_age' => 50)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(51);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForNoHigherLimitAndAgeHigherThanMinimumAge_FindsThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 0)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForAgeLowerThanMinimumAge_FindsThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 0)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(4);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForEventWithoutTargetGroupAndAgeProvided_FindsThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+
+		$this->fixture->limitToAge(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForEventWithTargetGroupWithNoLimits_FindsThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForEventWithTwoTargetGroupOneWithMatchingRangeAndOneWithoutMatchingRange_FindsThisEvent() {
+		$targetGroupUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 20, 'maximum_age' => 50)
+		);
+		$targetGroupUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 20)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid1, 'target_groups'
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid2, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(21);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForEventWithTwoTargetGroupBothWithMatchingRanges_FindsThisEventOnlyOnce() {
+		$targetGroupUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 50)
+		);
+		$targetGroupUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 20)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid1, 'target_groups'
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid2, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(6);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToAge_ForAgeZeroGiven_FindsEventWithAgeLimits() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 15)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->limitToAge(0);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
 }
 ?>
