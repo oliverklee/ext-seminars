@@ -3,6 +3,7 @@
 	<name>tx_seminars</name>
 	<comment></comment>
 	<projects>
+		<project>tx_oelib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
