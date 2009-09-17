@@ -181,7 +181,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function text_Render_ForTwoEnabledSearchParts_RendersBothSearchParts() {
+	public function test_Render_ForTwoEnabledSearchParts_RendersBothSearchParts() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type,language'
 		);
@@ -198,9 +198,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function text_Render_ForEnabledSearchWidget_DoesNotHaveUnreplacedMarkers() {
+	public function test_Render_ForEnabledSearchWidget_DoesNotHaveUnreplacedMarkers() {
 		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'full_text_search,language'
+			'displaySearchFormFields',
+			'event_type,language,country,city,place,full_text_search,date,age'
 		);
 
 		$this->assertNotContains(
@@ -1266,6 +1267,77 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'bar_type',
+			$this->fixture->render()
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning the age search input
+	//////////////////////////////////////////
+
+	public function test_Render_ForDisabledAgeSearch_HidesAgeSearchSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_AGE')
+		);
+	}
+
+	public function test_Render_ForEnabledAgeSearch_ContainsAgeSearchSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'age'
+		);
+
+		$this->fixture->render();
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('SEARCH_PART_AGE')
+		);
+	}
+
+	public function test_Render_ForEnabledAgeSearch_CanFillSearchedAgeIntoTextbox() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'age'
+		);
+
+		$searchedAge = 15;
+		$this->fixture->piVars['age'] = $searchedAge;
+
+		$this->assertContains(
+			(string) $searchedAge,
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledAgeSearchAndAgeValueZero_AgeValue() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'age'
+		);
+
+		$searchedAge = 0;
+		$this->fixture->piVars['age'] = $searchedAge;
+
+		$this->assertNotContains(
+			'age]" value="' . $searchedAge . '"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledAgeSearch_DoesNotIncludeNonIntegerAgeAsValue() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'full_text_search'
+		);
+
+		$searchedAge = 'Hallo';
+		$this->fixture->piVars['age'] = $searchedAge;
+
+		$this->assertNotContains(
+			$searchedAge,
 			$this->fixture->render()
 		);
 	}

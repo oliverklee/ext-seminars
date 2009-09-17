@@ -2992,6 +2992,61 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////////////////
+	// Tests concerning the filtering by age in the list view
+	///////////////////////////////////////////////////////////
+
+	public function test_ListViewForGivenAge_ShowsEventWithTargetgroupWithinAge() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 20)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->piVars['age'] = 15;
+
+		$this->assertContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenAgeAndEventAgespanHigherThanAge_DoesNotShowThisEvent() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_TARGET_GROUPS,
+			array('minimum_age' => 5, 'maximum_age' => 20)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event To',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+		);
+
+		$this->fixture->piVars['age'] = 4;
+
+		$this->assertNotContains(
+			'Foo Event To',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	///////////////////////////////////////////////////
 	// Tests concerning the sorting in the list view.
 	///////////////////////////////////////////////////

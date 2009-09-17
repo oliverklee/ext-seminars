@@ -42,6 +42,7 @@
 			<label index="seminars.pi_flexform.searchForm.city">City</label>
 			<label index="seminars.pi_flexform.searchForm.place">Place</label>
 			<label index="seminars.pi_flexform.searchForm.date">Date</label>
+			<label index="seminars.pi_flexform.searchForm.age">Age</label>
 			<label index="seminars.pi_flexform.searchForm.textField">Full-text search</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
@@ -271,6 +272,7 @@
 			<label index="label_selector_searchbox">Search term</label>
 			<label index="label_to">to</label>
 			<label index="label_date_search">Period from</label>
+			<label index="label_age_search">Age:</label>
 			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
@@ -635,6 +637,7 @@
 			<label index="seminars.pi_flexform.searchForm.city">Stadt</label>
 			<label index="seminars.pi_flexform.searchForm.place">Ort</label>
 			<label index="seminars.pi_flexform.searchForm.date">Datum</label>
+			<label index="seminars.pi_flexform.searchForm.age">Alter</label>
 			<label index="seminars.pi_flexform.searchForm.textField">Volltextsuche</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">Listenansicht auf Veranstaltungen dieser Arten einschränken:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">Listenansicht auf Veranstaltungen aus diesen Kategorien einschränken:</label>
@@ -864,6 +867,7 @@
 			<label index="label_selector_searchbox">Suchbegriff</label>
 			<label index="label_to">bis</label>
 			<label index="label_date_search">Zeitraum von</label>
+			<label index="label_age_search">Alter:</label>
 			<label index="label_searching_hints_formal">Sie können die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setzen Sie den Filter bitte zurück.</label>
 			<label index="label_searching_hints_informal">Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setze den Filter bitte zurück.</label>
 			<label index="label_we_offer_events_in_categories_formal">Zurzeit können wir Ihnen Veranstaltungen aus den folgenden Kategorien anbieten:</label>
@@ -2121,6 +2125,7 @@
 			<label index="seminars.pi_flexform.searchForm.city" type="integer">92079470</label>
 			<label index="seminars.pi_flexform.searchForm.place" type="integer">129617664</label>
 			<label index="seminars.pi_flexform.searchForm.date" type="integer">71780721</label>
+			<label index="seminars.pi_flexform.searchForm.age" type="integer">165204693</label>
 			<label index="seminars.pi_flexform.searchForm.textField" type="integer">131588247</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes" type="integer">263724247</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories" type="integer">144505574</label>
@@ -2322,6 +2327,7 @@
 			<label index="label_selector_searchbox" type="integer">151546043</label>
 			<label index="label_to" type="integer">1797664</label>
 			<label index="label_date_search" type="integer">182310723</label>
+			<label index="label_age_search" type="integer">38941977</label>
 			<label index="label_searching_hints_formal" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
 			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
@@ -3384,6 +3390,7 @@
 			<label index="seminars.pi_flexform.searchForm.city">City</label>
 			<label index="seminars.pi_flexform.searchForm.place">Place</label>
 			<label index="seminars.pi_flexform.searchForm.date">Date</label>
+			<label index="seminars.pi_flexform.searchForm.age">Age</label>
 			<label index="seminars.pi_flexform.searchForm.textField">Full-text search</label>
 			<label index="seminars.pi_flexform.limitListViewToEventTypes">List events only of these types:</label>
 			<label index="seminars.pi_flexform.limitListViewToCategories">List events only from these categories:</label>
@@ -3583,6 +3590,7 @@
 			<label index="label_selector_searchbox">Search term</label>
 			<label index="label_to">to</label>
 			<label index="label_date_search">Period from</label>
+			<label index="label_age_search">Age:</label>
 			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>

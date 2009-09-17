@@ -301,12 +301,16 @@
 										<numIndex index="1">date</numIndex>
 									</numIndex>
 									<numIndex index="6" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.age</numIndex>
+										<numIndex index="1">age</numIndex>
+									</numIndex>
+									<numIndex index="7" type="array">
 										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.textField</numIndex>
 										<numIndex index="1">full_text_search</numIndex>
 									</numIndex>
 								</items>
 								<minitems>0</minitems>
-								<maxitems>7</maxitems>
+								<maxitems>8</maxitems>
 								<renderMode>checkbox</renderMode>
 							</config>
 						</TCEforms>

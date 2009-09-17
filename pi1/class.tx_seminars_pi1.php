@@ -1503,7 +1503,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$this->ensureIntegerPiVars(
 			array(
 				'from_day', 'from_month', 'from_year',
-				'to_day', 'to_month', 'to_year'
+				'to_day', 'to_month', 'to_year', 'age',
 			)
 		);
 
@@ -2270,6 +2270,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					'limitListViewToCategories', 's_listView'
 				)
 			);
+		}
+
+		if ($this->piVars['age'] > 0) {
+			$builder->limitToAge($this->piVars['age']);
 		}
 
 		$this->filterByDate($builder);

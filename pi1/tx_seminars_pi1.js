@@ -300,8 +300,11 @@ function appendTargetGroupInEditor(uid, title, buttonData) {
  * Clears the selection of the search widget.
  */
 function clearSearchWidgetFields() {
-	if (document.getElementById('tx_seminars_pi1_sword')) {
-		document.getElementById('tx_seminars_pi1_sword').value = '';
+	var textElements = ['tx_seminars_pi1_sword', 'tx_seminars_pi1_search_age'];
+	for (var i=0; i < textElements.length; i++) {
+		if (document.getElementById(textElements[i])) {
+			document.getElementById(textElements[i]).value = '';
+		}
 	}
 
 	var suffixes = ['from_day', 'from_month', 'from_year', 'to_day', 'to_month',

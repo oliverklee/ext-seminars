@@ -109,6 +109,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->fillOrHideSearchSubpart('city');
 		$this->fillOrHideFullTextSearch();
 		$this->fillOrHideDateSearch();
+		$this->fillOrHideAgeSearch();
 
 		return $this->getSubpart('SELECTOR_WIDGET');
 	}
@@ -414,6 +415,24 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			}
 			$this->setMarker('options_date_' . $fromOrTo, $dropdowns);
 		}
+	}
+
+	/**
+	 * Fills or hides the age search subpart.
+	 */
+	private function fillOrHideAgeSearch() {
+		if (!$this->hasSearchField('age')) {
+			$this->hideSubparts(
+				self::SUBPART_PREFIX . 'AGE'
+			);
+
+			return;
+		}
+		$age = intval($this->piVars['age']);
+
+		$this->setMarker(
+			'age_value', (($age > 0) ? $age : '')
+		);
 	}
 
 
