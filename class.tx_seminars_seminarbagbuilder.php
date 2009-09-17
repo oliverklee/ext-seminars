@@ -1129,6 +1129,38 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				'))'.
 			')';
 	}
+
+	/**
+	 * Limits the bag to events with the given organizers.
+	 *
+	 * @param string $organizerUids
+	 *               comma-separated list of organizer UIDs to limit the bag to,
+	 *               may be empty
+	 */
+	public function limitToOrganizers($organizerUids) {
+		if ($organizerUids == '') {
+			return;
+		}
+		$eventUids = implode(',', tx_oelib_db::selectColumnForMultiple(
+			'uid_local',
+			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			'uid_foreign IN (' . $organizerUids .')'
+		));
+
+		if ($eventUids == '') {
+			$this->whereClauseParts['eventsWithOrganizers'] = '(0 = 1)';
+
+			return;
+		}
+
+		$this->whereClauseParts['eventsWithOrganizers'] =
+			'((object_type = '. SEMINARS_RECORD_TYPE_COMPLETE . ') ' .
+				'AND (' . SEMINARS_TABLE_SEMINARS . '.uid IN (' . $eventUids .
+				')) OR ('.
+				'(object_type = '. SEMINARS_RECORD_TYPE_DATE .') AND (' .
+				SEMINARS_TABLE_SEMINARS . '.topic IN (' . $eventUids . ')))' .
+			')';
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

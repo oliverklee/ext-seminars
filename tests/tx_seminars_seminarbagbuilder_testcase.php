@@ -7211,5 +7211,183 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$bag->__destruct();
 	}
+
+
+	///////////////////////////////////////
+	// Tests concerning limitToOrganizers
+	///////////////////////////////////////
+
+	public function test_limitToOrganizers_ForOneProvidedOrganizerAndEventWithThisOrganizer_FindsThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->fixture->limitToOrganizers($organizerUid);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToOrganizers_ForOneProvidedOrganizerAndEventWithoutOrganizer_DoesNotFindThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+
+		$this->fixture->limitToOrganizers($organizerUid);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToOrganizers_ForOneProvidedOrganizerAndEventWithOtherOrganizer_DoesNotFindThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$organizerUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+		$organizerUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid1, 'organizers'
+		);
+
+		$this->fixture->limitToOrganizers($organizerUid2);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToOrganizers_ForTwoProvidedOrganizersAndEventWithFirstOrganizer_FindsThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$organizerUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+		$organizerUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid1, 'organizers'
+		);
+
+		$this->fixture->limitToOrganizers($organizerUid1 . ',' . $organizerUid2);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToOrganizers_ForProvidedOrganizerAndTwoEventsWithThisOrganizer_FindsTheseEvents() {
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid1, $organizerUid, 'organizers'
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid2, $organizerUid, 'organizers'
+		);
+
+		$this->fixture->limitToOrganizers($organizerUid);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			2,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToOrganizers_ForProvidedOrganizerAndTopicWithOrganizer_ReturnsTheTopicsDate() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+		);
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $topicUid, $organizerUid, 'organizers'
+		);
+
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+
+		$this->fixture->limitToOrganizers($organizerUid);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			$dateUid,
+			$bag->getUids()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToOrganizers_ForNoProvidedOrganizer_FindsEventWithOrganizer() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->fixture->limitToOrganizers('');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
 }
 ?>
