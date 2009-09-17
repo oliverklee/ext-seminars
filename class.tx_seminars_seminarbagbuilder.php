@@ -1222,6 +1222,71 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				')';
 		}
 	}
+
+	/**
+	 * Limits the bag to events which have a price lower or equal to the given
+	 * maximum price.
+	 *
+	 * @param integer $maximumPrice
+	 *                the maximum price an event is allowed to cost, must
+	 *                be >= 0
+	 */
+	public function limitToMaximumPrice($maximumPrice) {
+		if ($maximumPrice == 0) {
+			return;
+		}
+
+		$notZeroAndInRange = '(%1$s > 0 AND %1$s <= %2$u)';
+		$now = $GLOBALS['SIM_EXEC_TIME'];
+
+		$whereClause = '(object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ' OR ' .
+			'object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ') AND ('.
+			'(deadline_early_bird < ' . $now . ' AND ' .
+				'(price_regular <= ' . $maximumPrice . ' OR ' .
+					sprintf(
+						$notZeroAndInRange, 'price_special', $maximumPrice
+					) .')) '.
+			'OR (deadline_early_bird > ' . $now . ' AND ((' .
+					'(price_regular_early = 0 AND price_regular <= ' .
+						$maximumPrice .	') ' .
+					'OR (price_special_early = 0 AND price_special > 0 ' .
+						'AND price_special <= ' . $maximumPrice .
+					')' .
+				') OR (' .
+					sprintf(
+						$notZeroAndInRange, 'price_regular_early', $maximumPrice
+					) . ' OR ' .
+					sprintf(
+						$notZeroAndInRange, 'price_special_early', $maximumPrice
+					) .
+				'))) ' .
+			'OR ' .
+				sprintf(
+					$notZeroAndInRange, 'price_regular_board', $maximumPrice
+				) . ' OR ' .
+				sprintf(
+					$notZeroAndInRange, 'price_special_board', $maximumPrice
+				) .
+			')' . tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS);
+
+		$foundUids = implode(
+			',',
+			tx_oelib_db::selectColumnForMultiple(
+				'uid', SEMINARS_TABLE_SEMINARS, $whereClause
+			)
+		);
+
+		if ($foundUids == '') {
+			$this->whereClauseParts['maximumPrice'] = '(0 = 1)';
+		} else {
+			$this->whereClauseParts['maximumPrice'] =
+				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE. ' ' .
+				'AND ' . SEMINARS_TABLE_SEMINARS . '.uid IN (' . $foundUids .
+				')) OR ' .
+				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+				'topic IN (' . $foundUids . ')))';
+		}
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {
