@@ -1287,6 +1287,57 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				'topic IN (' . $foundUids . ')))';
 		}
 	}
+
+	/**
+	 * Limits the bag to events which have a price higher or equal to the given
+	 * minimum price.
+	 *
+	 * @param integer $minimumPrice
+	 *                the minimum price an event is allowed to cost, must
+	 *                be >= 0
+	 */
+	public function limitToMinimumPrice($minimumPrice) {
+		if ($minimumPrice == 0) {
+			return;
+		}
+
+		$now = $GLOBALS['SIM_EXEC_TIME'];
+		$whereClause = '(object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ' OR ' .
+			'object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ') AND (' .
+			'(deadline_early_bird < ' . $now . ' ' .
+				'AND (price_regular >= ' . $minimumPrice . ' ' .
+				'OR price_special >= ' . $minimumPrice . ')' .
+			') OR (deadline_early_bird > ' . $now . ' ' .
+				'AND ((' .
+						'(price_regular_early = 0 ' .
+							'AND price_regular >= ' . $minimumPrice . ') ' .
+						'OR (price_special_early = 0 ' .
+							'AND price_special >= ' . $minimumPrice . ')) ' .
+					'OR (price_regular_early >= ' . $minimumPrice . ' ' .
+						'OR price_special_early >= ' . $minimumPrice . ') ' .
+				')) ' .
+			'OR price_regular_board >= ' . $minimumPrice . ' ' .
+			'OR price_special_board >= ' . $minimumPrice . ') ' .
+			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS);
+
+		$foundUids = implode(
+			',',
+			tx_oelib_db::selectColumnForMultiple(
+				'uid', SEMINARS_TABLE_SEMINARS, $whereClause
+			)
+		);
+
+		if ($foundUids == '') {
+			$this->whereClauseParts['maximumPrice'] = '(0 = 1)';
+		} else {
+			$this->whereClauseParts['maximumPrice'] =
+				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE. ' ' .
+				'AND ' . SEMINARS_TABLE_SEMINARS . '.uid IN (' . $foundUids .
+				')) OR ' .
+				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+				'topic IN (' . $foundUids . ')))';
+		}
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {

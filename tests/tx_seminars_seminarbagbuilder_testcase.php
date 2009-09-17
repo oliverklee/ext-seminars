@@ -39,19 +39,33 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
 
+	/**
+	 * @var integer a unix timestamp in the past.
+	 */
+	private $past;
+
+	/**
+	 * @var integer a unix timestamp in the future.
+	 */
+	private $future;
+
 	public function setUp() {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
 		$this->fixture = new tx_seminars_seminarbagbuilder();
 		$this->fixture->setTestMode();
+		$this->future = $GLOBALS['EXEC_TIME'] + 50;
+		$this->past = $GLOBALS['EXEC_TIME'] - 50;
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->testingFramework);
+		unset(
+			$this->fixture, $this->testingFramework, $this->past, $this->future
+		);
 	}
 
 
@@ -6400,7 +6414,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
-				'expiry' => $GLOBALS['SIM_EXEC_TIME'] + 1000
+				'expiry' => $this->future
 			)
 		);
 		$userUid = $this->testingFramework->createFrontEndUser();
@@ -6429,7 +6443,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
-				'expiry' => $GLOBALS['SIM_EXEC_TIME'] - 1000
+				'expiry' => $this->past
 			)
 		);
 		$userUid = $this->testingFramework->createFrontEndUser();
@@ -7952,7 +7966,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_regular_early' => 49,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -7973,7 +7987,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_regular_early' => 50,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -7994,7 +8008,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_regular_early' => 51,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8014,7 +8028,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_regular_early' => 49,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] - 50,
+				'deadline_early_bird' => $this->past,
 			)
 		);
 
@@ -8034,7 +8048,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_special_early' => 49,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8055,7 +8069,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_special_early' => 50,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8076,7 +8090,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_special_early' => 51,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8095,7 +8109,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'price_regular' => 51,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8115,7 +8129,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_special_early' => 49,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] - 50,
+				'deadline_early_bird' => $this->past,
 			)
 		);
 
@@ -8135,7 +8149,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 49,
 				'price_regular_early' => 51,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8154,7 +8168,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'price_regular' => 49,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8175,7 +8189,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array(
 				'price_regular' => 51,
 				'price_special' => 49,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8195,7 +8209,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'price_regular' => 49,
-				'deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 50,
+				'deadline_early_bird' => $this->future,
 			)
 		);
 
@@ -8219,6 +8233,438 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->limitToMaximumPrice(0);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning limitToMinimumPrice
+	/////////////////////////////////////////
+
+	public function test_limitToMinimumPrice_ForEventWithRegularPriceLowerThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_regular' => 14)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForPriceGivenAndEventWithoutPrices_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+
+		$this->fixture->limitToMinimumPrice(16);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithRegularPriceEqualToMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_regular' => 15)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithRegularPriceGreaterThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_regular' => 16)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithRegularBoardPriceGreaterThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_regular_board' => 16)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithRegularBoardPriceEqualToMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_regular_board' => 15)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithRegularBoardPriceLowerThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_regular_board' => 14)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithSpecialBoardPriceGreaterThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_special_board' => 16)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithSpecialBoardPriceEqualToMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_special_board' => 15)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithSpecialBoardPriceLowerThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_special_board' => 14)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithSpecialPriceGreaterThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_special' => 16)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithSpecialPriceEqualToMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_special' => 15)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEventWithSpecialPriceLowerThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_special' => 14)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceZeroAndRegularPriceHigherThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_regular' => 16,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureNoPriceSet_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('deadline_early_bird' => $this->future)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_regular_early' => 14,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_regular_early' => 15,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_regular_early' => 16,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceZeroAndSpecialPriceHigherThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_special' => 16,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_special_early' => 14,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_special_early' => 15,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceHigherThanMinimum_FindsThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_special_early' => 16,
+				'deadline_early_bird' => $this->future
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInPastAndRegularEarlyPriceHigherThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_regular_early' => 16,
+				'deadline_early_bird' => $this->past
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInPastAndSpecialEarlyPriceHigherThanMinimum_DoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'price_special_early' => 16,
+				'deadline_early_bird' => $this->past
+			)
+		);
+
+		$this->fixture->limitToMinimumPrice(15);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToMinimumPrice_ForMinimumPriceZero_FindsEventWithRegularPrice() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS, array('price_regular' => 16)
+		);
+
+		$this->fixture->limitToMinimumPrice(0);
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
