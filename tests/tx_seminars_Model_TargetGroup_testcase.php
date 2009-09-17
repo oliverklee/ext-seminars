@@ -82,5 +82,87 @@ class tx_seminars_Model_TargetGroup_testcase extends tx_phpunit_testcase {
 			$this->fixture->getTitle()
 		);
 	}
+
+
+	/////////////////////////////////////
+	// Tests concerning the minimum age
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getMinimumAgeWithNoMinimumAgeSetReturnsZero() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getMinimumAge()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getMinimumAgeWithNonZeroMinimumAgeReturnsMinimumAge() {
+		$this->fixture->setData(array('minimum_age' => 18));
+
+		$this->assertEquals(
+			18,
+			$this->fixture->getMinimumAge()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setMinimumAgeSetsMinimumAge() {
+		$this->fixture->setMinimumAge(18);
+
+		$this->assertEquals(
+			18,
+			$this->fixture->getMinimumAge()
+		);
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning the maximum age
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getMaximumAgeWithNoMaximumAgeSetReturnsZero() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getMaximumAge()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getMaximumAgeWithNonZeroMaximumAgeReturnsMaximumAge() {
+		$this->fixture->setData(array('maximum_age' => 18));
+
+		$this->assertEquals(
+			18,
+			$this->fixture->getMaximumAge()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setMaximumAgeSetsMaximumAge() {
+		$this->fixture->setMaximumAge(18);
+
+		$this->assertEquals(
+			18,
+			$this->fixture->getMaximumAge()
+		);
+	}
 }
 ?>

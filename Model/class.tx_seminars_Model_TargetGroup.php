@@ -74,6 +74,48 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model {
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->set('owner', $frontEndUser);
 	}
+
+	/**
+	 * Returns this target group's minimum age.
+	 *
+	 * @return integer this target group's minimum age, will be >= 0; will be 0
+	 *                 if no minimum age has been set
+	 */
+	public function getMinimumAge() {
+		return $this->getAsInteger('minimum_age');
+	}
+
+	/**
+	 * Sets this target group's minimum age.
+	 *
+	 * @param integer $minimumAge
+	 *        this target group's minimum age, must be >= 0; set to 0 to unset
+	 *        the minimum age
+	 */
+	public function setMinimumAge($minimumAge) {
+		return $this->setAsInteger('minimum_age', $minimumAge);
+	}
+
+	/**
+	 * Returns this target group's maximum age.
+	 *
+	 * @return integer this target group's maximum age, will be >= 0; will be 0
+	 *                 if no maximum age has been set
+	 */
+	public function getMaximumAge() {
+		return $this->getAsInteger('maximum_age');
+	}
+
+	/**
+	 * Sets this target group's maximum age.
+	 *
+	 * @param integer $maximumAge
+	 *        this target group's maximum age, must be >= 0; set to 0 to unset
+	 *        the maximum age
+	 */
+	public function setMaximumAge($maximumAge) {
+		return $this->setAsInteger('maximum_age', $maximumAge);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_TargetGroup.php']) {
