@@ -1525,6 +1525,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	protected function createListView($whatToDisplay) {
 		$result = '';
 		$isOkay = true;
+		$this->ensureIntegerArrayValues(
+			array('event_type', 'place', 'organizer')
+		);
 
 		switch ($whatToDisplay) {
 			case 'my_events':
@@ -2955,6 +2958,37 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			// Ignores the exception because the user will be warned of the
 			// problem by the configuration check.
 		}
+	}
+
+	/**
+	 * Ensures that all values in the given array are intvaled and removes empty
+	 * or invalid values.
+	 *
+	 * @param array $piKeys the keys of the piVars to check, may be empty
+	 */
+	public function ensureIntegerArrayValues(array $keys) {
+		if (empty($keys)) {
+			return;
+		}
+
+		foreach ($keys as $key) {
+			if(!isset($this->piVars[$key])
+				|| !is_array($this->piVars[$key])
+			) {
+				continue;
+			}
+
+			foreach ($this->piVars[$key] as $innerKey => $value) {
+				$integerValue = intval($value);
+
+				if ($integerValue == 0) {
+					unset($this->piVars[$key][$innerKey]);
+				} else {
+					$this->piVars[$key][$innerKey] = $integerValue;
+				}
+			}
+		}
+
 	}
 }
 

@@ -4798,5 +4798,100 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$output
 		);
 	}
+
+
+	//////////////////////////////////////////////
+	// Tests concerning ensureIntegerArrayValues
+	//////////////////////////////////////////////
+
+	public function test_ensureIntegerArrayValuesForEmptyArrayGiven_DoesNotAddAnyPiVars() {
+		$this->fixture->ensureIntegerArrayValues(array());
+
+		$this->assertTrue(
+			empty($this->fixture->piVars)
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesForNotSetPiVarGiven_DoesNotAddThisPiVar() {
+		$this->fixture->ensureIntegerArrayValues(array('foo'));
+
+		$this->assertTrue(
+			empty($this->fixture->piVars)
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesForPiVarNotArray_DoesNotModifyThisPiVar() {
+		$this->fixture->piVars['foo'] = 'Hallo';
+		$this->fixture->ensureIntegerArrayValues(array('foo'));
+
+		$this->assertEquals(
+			'Hallo',
+			$this->fixture->piVars['foo']
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesForValidIntegerInArray_DoesNotModifyThisArrayElement() {
+		$this->fixture->piVars['foo'] = array(10);
+		$this->fixture->ensureIntegerArrayValues(array('foo'));
+
+		$this->assertEquals(
+			10,
+			$this->fixture->piVars['foo'][0]
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesForStringInArray_RemovesThisArrayElement() {
+		$this->fixture->piVars['foo'] = array('Hallo');
+		$this->fixture->ensureIntegerArrayValues(array('foo'));
+
+		$this->assertTrue(
+			empty($this->fixture->piVars['foo'])
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesForIntegerFollowedByStringInArray_RemovesStringFromArrayElement() {
+		$this->fixture->piVars['foo'] = array('2;blubb');
+		$this->fixture->ensureIntegerArrayValues(array('foo'));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->piVars['foo'][0]
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesForSingleInArray_RemovesNumbersAfterDecimalPoint() {
+		$this->fixture->piVars['foo'] = array(2.3);
+		$this->fixture->ensureIntegerArrayValues(array('foo'));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->piVars['foo'][0]
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesForZeroInArray_RemovesThisArrayElement() {
+		$this->fixture->piVars['foo'] = array(0);
+		$this->fixture->ensureIntegerArrayValues(array('foo'));
+
+		$this->assertTrue(
+			empty($this->fixture->piVars['foo'])
+		);
+	}
+
+	public function test_ensureIntegerArrayValuesMultiplePiKeysGiven_ValidatesElementsOfAllPiVars() {
+		$this->fixture->piVars['foo'] = array('2;blubb');
+		$this->fixture->piVars['bar'] = array('42');
+
+		$this->fixture->ensureIntegerArrayValues(array('foo', 'bar'));
+
+		$this->assertEquals(
+			2,
+			$this->fixture->piVars['foo'][0]
+		);
+		$this->assertEquals(
+			42,
+			$this->fixture->piVars['bar'][0]
+		);
+	}
 }
 ?>
