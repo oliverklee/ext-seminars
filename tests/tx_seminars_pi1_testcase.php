@@ -3047,6 +3047,54 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////////////////////////////////
+	// Tests concerning the filtering by organizer in the list view
+	/////////////////////////////////////////////////////////////////
+
+	public function test_ListViewForGivenOrganizer_ShowsEventWithOrganizer() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'Foo Event', 'pid' => $this->systemFolderPid)
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->fixture->piVars['organizer'][] = $organizerUid;
+
+		$this->assertContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenOrganizer_DoesNotShowEventWithOtherOrganizer() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('title' => 'Foo Event', 'pid' => $this->systemFolderPid)
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->fixture->piVars['organizer'][]
+			= $this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS);
+
+		$this->assertNotContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	///////////////////////////////////////////////////
 	// Tests concerning the sorting in the list view.
 	///////////////////////////////////////////////////

@@ -297,20 +297,24 @@
 										<numIndex index="1">place</numIndex>
 									</numIndex>
 									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.organizer</numIndex>
+										<numIndex index="1">organizer</numIndex>
+									</numIndex>
+									<numIndex index="6" type="array">
 										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.date</numIndex>
 										<numIndex index="1">date</numIndex>
 									</numIndex>
-									<numIndex index="6" type="array">
+									<numIndex index="7" type="array">
 										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.age</numIndex>
 										<numIndex index="1">age</numIndex>
 									</numIndex>
-									<numIndex index="7" type="array">
+									<numIndex index="8" type="array">
 										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.textField</numIndex>
 										<numIndex index="1">full_text_search</numIndex>
 									</numIndex>
 								</items>
 								<minitems>0</minitems>
-								<maxitems>8</maxitems>
+								<maxitems>9</maxitems>
 								<renderMode>checkbox</renderMode>
 							</config>
 						</TCEforms>

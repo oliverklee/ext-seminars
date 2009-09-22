@@ -2209,7 +2209,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'all if this value is empty or contains only invalid keys.',
 			array(
 				'event_type', 'language', 'country' , 'city' , 'place',
-				'full_text_search', 'date', 'age'
+				'full_text_search', 'date', 'age', 'organizer',
 			)
 		);
 	}

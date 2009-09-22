@@ -107,6 +107,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->fillOrHideSearchSubpart('place');
 		$this->fillOrHideSearchSubpart('country');
 		$this->fillOrHideSearchSubpart('city');
+		$this->fillOrHideSearchSubpart('organizer');
 		$this->fillOrHideFullTextSearch();
 		$this->fillOrHideDateSearch();
 		$this->fillOrHideAgeSearch();
@@ -334,7 +335,8 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 * Fills or hides the subpart for the given search field.
 	 *
 	 * @param string the key of the search field, must be one of the following:
-	 *               "event_type", "language", "country", "city", "places"
+	 *               "event_type", "language", "country", "city", "places",
+	 *               "organizer"
 	 */
 	private function fillOrHideSearchSubpart($searchField) {
 		if (!$this->hasSearchField($searchField)) {
@@ -362,11 +364,14 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			case 'country':
 				$optionData = $this->getCountryData();
 				break;
+			case 'organizer':
+				$optionData = $this->getOrganizerData();
+				break;
 			default:
 				throw new Exception('The given search field .
 					"' . $searchField . '" was not an allowed value. ' .
 					'Allowed values are: "event_type", "language", "country", ' .
-					'"city" or "places".'
+					'"city", "place" or "organizer".'
 				);
 				break;
 		}
@@ -601,6 +606,32 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 		for ($year = $currentYear; $year < $targetYear; $year++) {
 			$result['year'][$year] = $year;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the data for the organizer search field options.
+	 *
+	 * @return array the data for the organizer search field options; the key
+	 *               will be the UID of the organizer and the value will be the
+	 *               name of the organizer, will be empty if no data could be
+	 *               found
+	 */
+	private function getOrganizerData() {
+		$result = array();
+
+		foreach ($this->seminarBag as $event) {
+			if ($event->hasOrganizers()) {
+				$organizers = $event->getOrganizerBag();
+				foreach ($organizers as $organizer) {
+					$organizerUid = $organizer->getUid();
+					if (!isset($result[$organizerUid])) {
+						$result[$organizerUid] = $organizer->getName();
+					}
+				}
+			}
 		}
 
 		return $result;

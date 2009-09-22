@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3398] Feature: Add a search widget for the organizers
 - [#3396] Feature: Add an "age" field to the search widget and search for that age
 - [#3399] Feature: Add functions "limitToMinimumPrice" and "limitToMaximumPrice" to the seminarBagBuilder
 - [#3395] Feature: Add a function for limiting the seminar bag to a certain age

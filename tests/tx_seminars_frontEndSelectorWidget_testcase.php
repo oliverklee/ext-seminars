@@ -201,7 +201,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	public function test_Render_ForEnabledSearchWidget_DoesNotHaveUnreplacedMarkers() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields',
-			'event_type,language,country,city,place,full_text_search,date,age'
+			'event_type,language,country,city,place,full_text_search,date,' .
+				'age,organizer'
 		);
 
 		$this->assertNotContains(
@@ -1339,6 +1340,147 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertNotContains(
 			$searchedAge,
 			$this->fixture->render()
+		);
+	}
+
+
+	////////////////////////////////////////////////////////////////
+	// Tests concerning the rendering of the organizer option box
+	////////////////////////////////////////////////////////////////
+
+	public function test_Render_ForOrganizerHiddenInConfiguration_HidesOrganizerSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_ORGANIZER')
+		);
+	}
+
+	public function test_Render_ForEnabledOrganizer_ContainsOrganizerOption() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'organizer'
+		);
+
+		$organizerName = 'test organizer';
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->assertContains(
+			'<option value="' . $organizerUid . '">' . $organizerName .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledOrganizer_HtmlSpecialCharsTheOrganizersName() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'organizer'
+		);
+
+		$organizerName = '< Organizer Name >';
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->assertContains(
+			'<option value="' . $organizerUid . '">' .
+				htmlspecialchars($organizerName) .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledOrganizer_PreselectsSelectedValue() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'organizer'
+		);
+
+		$organizerName = 'Organizer Name';
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName)
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->fixture->piVars['organizer'][] = $organizerUid;
+
+		$this->assertContains(
+			$organizerUid . '" selected="selected">' . $organizerName .
+				'</option>',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledOrganizer_CanPreselectTwoValues() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'organizer'
+		);
+
+		$eventUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+
+		$organizerName1 = 'Organizer 1';
+		$organizerUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName1)
+		);
+		$organizerName2 = 'Organizer 2';
+		$organizerUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName2)
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid1, 'organizers'
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid2, 'organizers'
+		);
+
+		$this->fixture->piVars['organizer'][] = $organizerUid1;
+		$this->fixture->piVars['organizer'][] = $organizerUid2;
+
+		$output = $this->fixture->render();
+
+		$this->assertContains(
+			$organizerUid1 . '" selected="selected">' . $organizerName1 .
+				'</option>',
+			$output
+		);
+		$this->assertContains(
+			$organizerUid2 . '" selected="selected">' . $organizerName2 .
+				'</option>',
+			$output
+		);
+	}
+
+	public function test_Render_ForEnabledOrganizer_ContainsOrganizersSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'organizer'
+		);
+
+		$this->fixture->render();
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('SEARCH_PART_ORGANIZER')
 		);
 	}
 }

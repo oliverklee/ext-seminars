@@ -309,7 +309,7 @@ function clearSearchWidgetFields() {
 
 	var suffixes = ['from_day', 'from_month', 'from_year', 'to_day', 'to_month',
 		'to_year', 'event_type', 'language', 'country', 'city', 'place', 'date',
-		'full_text_search'
+		'organizer'
 	];
 
 	for (var i = 0; i < suffixes.length; i++) {

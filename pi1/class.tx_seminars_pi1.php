@@ -2225,6 +2225,16 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				)
 			);
 		}
+		if (is_array($this->piVars['organizer'])) {
+			$builder->limitToOrganizers(
+				implode(
+					',',
+					tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
+						$this->piVars['organizer']
+					)
+				)
+			);
+		}
 		if (isset($this->piVars['sword'])
 			&& !empty($this->piVars['sword'])
 		) {
