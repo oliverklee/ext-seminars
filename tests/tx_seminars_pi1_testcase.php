@@ -4201,6 +4201,123 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	//////////////////////////////////////////////////////////
+	// Tests concerning limiting the list view to organizers
+	//////////////////////////////////////////////////////////
+
+	public function testListViewLimitedToOrganizersContainsEventsWithSelectedOrganizer() {
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+			);
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with organizer 1',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToOrganizers', $organizerUid
+		);
+
+		$result = $this->fixture->main('', array());
+
+		$this->assertContains(
+			'Event with organizer 1',
+			$result
+		);
+	}
+
+	public function testListViewLimitedToOrganizerExcludesEventsWithNotSelectedOrganizer() {
+		$organizerUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+			);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with organizer 1',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid1, $organizerUid1, 'organizers'
+		);
+
+		$organizerUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+			);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with organizer 2',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid2, $organizerUid2, 'organizers'
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToOrganizers', $organizerUid1
+		);
+
+		$this->assertNotContains(
+			'Event with organizer 2',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function testListViewLimitedToOrganizersFromSelectorWidgetIgnoresFlexFormsValues() {
+		$organizerUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+			);
+		$eventUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with organizer 1',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid1, $organizerUid1, 'organizers'
+		);
+
+		$organizerUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+			);
+		$eventUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with organizer 2',
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS, $eventUid2, $organizerUid2, 'organizers'
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToOrganizers', $organizerUid1
+		);
+		$this->fixture->piVars['organizer'] = array($organizerUid2);
+
+		$result = $this->fixture->main('', array());
+
+		$this->assertNotContains(
+			'Event with organizer 1',
+			$result
+		);
+		$this->assertContains(
+			'Event with organizer 2',
+			$result
+		);
+	}
+
+
 	////////////////////////////////////////////////////////////
 	// Tests concerning the registration link in the list view
 	////////////////////////////////////////////////////////////

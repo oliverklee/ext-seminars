@@ -323,6 +323,10 @@ plugin.tx_seminars_pi1 {
 	# empty to have no such filter
 	limitListViewToPlaces =
 
+	# comma-separated list of organizer UIDs to filter the list view for, leave
+	# empty to have no such filter
+	limitListViewToOrganizers =
+
 	# whether to show only events with vacancies on in the list view
 	showOnlyEventsWithVacancies = 0
 

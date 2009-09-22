@@ -1273,6 +1273,65 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	}
 
 
+	//////////////////////////////////////////////
+	// Tests concerning the organizer limitation
+	//////////////////////////////////////////////
+
+	public function test_Render_ForOrganizersLimitedAndOrganizerDisplayed_ShowsTheLimitedOrganizers() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'organizer'
+		);
+
+		$organizerUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, array('title' => 'Organizer Foo')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS),
+			$organizerUid,
+			'organizers'
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToOrganizers', $organizerUid
+		);
+
+		$this->assertContains(
+			'Organizer Foo',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForOrganizerLimitedAndOrganizersDisplayed_hidesTheOrganizersWhichAreNotTheLimitedOnes() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'organizer'
+		);
+
+		$organizerUid1 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS, array('title' => 'Organizer Bar')
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS),
+			$organizerUid1,
+			'organizers'
+		);
+
+		$organizerUid2 = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ORGANIZERS
+		);
+
+		$this->fixture->setConfigurationValue(
+			'limitListViewToOrganizers', $organizerUid2
+		);
+
+		$this->assertNotContains(
+			'Organizer Bar',
+			$this->fixture->render()
+		);
+	}
+
+
 	//////////////////////////////////////////
 	// Tests concerning the age search input
 	//////////////////////////////////////////
@@ -1482,7 +1541,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$this->fixture->isSubpartVisible('SEARCH_PART_ORGANIZER')
 		);
-	}	
+	}
 
 
 	////////////////////////////////////////////

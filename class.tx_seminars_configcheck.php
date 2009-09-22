@@ -256,6 +256,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkLimitListViewToEventTypes();
 		$this->checkLimitListViewToCategories();
 		$this->checkLimitListViewToPlaces();
+		$this->checkLimitListViewToOrganizers();
 		$this->checkCategoryIconDisplay();
 		$this->checkSeminarImageSizes();
 		$this->checkDisplaySearchFormFields();
@@ -2057,6 +2058,21 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			true,
 			's_listView',
 			'This value specifies the places for which the list view ' .
+				'should be filtered. If this value is not set correctly, ' .
+				'some events might unintentionally get hidden or shown.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * limitListViewToOrganizers.
+	 */
+	private function checkLimitListViewToOrganizers() {
+		$this->checkIfPidListOrEmpty(
+			'limitListViewToOrganizers',
+			true,
+			's_listView',
+			'This value specifies the organizers for which the list view ' .
 				'should be filtered. If this value is not set correctly, ' .
 				'some events might unintentionally get hidden or shown.'
 		);

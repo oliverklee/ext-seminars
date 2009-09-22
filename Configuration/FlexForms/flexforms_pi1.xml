@@ -404,6 +404,21 @@
 							</config>
 						</TCEforms>
 					</limitListViewToPlaces>
+					<limitListViewToOrganizers>
+						<TCEforms>
+							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToOrganizers</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_seminars_organizers</foreign_table>
+								<foreign_table_where>
+									AND (tx_seminars_organizers.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0)
+									ORDER BY title asc
+								</foreign_table_where>
+								<maxitems>100</maxitems>
+								<renderMode>checkbox</renderMode>
+							</config>
+						</TCEforms>
+					</limitListViewToOrganizers>
 					<showOnlyEventsWithVacancies>
 						<TCEforms>
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showOnlyEventsWithVacancies</label>

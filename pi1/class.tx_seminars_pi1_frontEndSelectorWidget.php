@@ -139,6 +139,10 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			)
 		);
 
+		$builder->limitToOrganizers(
+			$this->getConfValueString('limitListViewToOrganizers', 's_listView')
+		);
+
 		$this->seminarBag = $builder->build();
 	}
 

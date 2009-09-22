@@ -2234,6 +2234,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					)
 				)
 			);
+		} else {
+			$builder->limitToOrganizers(
+				$this->getConfValueString(
+					'limitListViewToOrganizers', 's_listView'
+				)
+			);
 		}
 		if (isset($this->piVars['sword'])
 			&& !empty($this->piVars['sword'])
