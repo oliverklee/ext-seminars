@@ -171,7 +171,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			'showEmptyEntryInOptionLists', 's_template_special'
 		)) {
 			$completeOptionList = array(
-				'none' => $this->translate('label_selector_pleaseChoose')
+				0 => $this->translate('label_selector_pleaseChoose')
 			);
 			foreach ($options as $key => $value) {
 				$completeOptionList[$key] = $value;
@@ -192,7 +192,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$cleanedFormData = array();
 
 		foreach ($formData as $value) {
-			if ($value != 'none') {
+			if ($value !== 0) {
 				$cleanedFormData[] = $value;
 			}
 		}
@@ -225,7 +225,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 			// Preselects the option if it was selected by the user.
 			if (isset($this->piVars[$name])
-				&& (in_array($key, $this->piVars[$name]))
+				&& (in_array($key, $this->piVars[$name], true))
 			) {
 				$selected = ' selected="selected"';
 			} else {

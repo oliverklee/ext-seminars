@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3411] Fix: All data from the selector widget should be safeguarded
 - [#3408] Feature: Add a flexforms setting for limiting the list view to certain organizers
 - [#3400] Feature: Add two price fields to the search widget
 - [#3398] Feature: Add a search widget for the organizers

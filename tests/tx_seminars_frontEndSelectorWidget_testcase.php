@@ -174,7 +174,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<option value="none">' .
+			'<option value="0">' .
 				$this->fixture->translate('label_selector_pleaseChoose') .
 				'</option>',
 			$this->fixture->render()
@@ -220,7 +220,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			array('CH', 'DE'),
 			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
-				array('none', 'CH', 'DE')
+				array(0, 'CH', 'DE')
 			)
 		);
 	}
@@ -229,7 +229,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			array('CH', 'DE'),
 			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
-				array('CH', 'none', 'DE')
+				array('CH', 0, 'DE')
 			)
 		);
 	}
