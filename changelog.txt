@@ -1,3 +1,5 @@
+0.8.2 (currently working on)
+
 0.8.1 (released 2009-08-15)
 - [#3317] Fix: Check for object comparisons / recursive nesting
 - [#3320] Fix: Unbreak GMX by changing the default encoding for e-mails from base64 back to quoted-printable
