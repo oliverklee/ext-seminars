@@ -202,7 +202,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields',
 			'event_type,language,country,city,place,full_text_search,date,' .
-				'age,organizer'
+				'age,organizer,price'
 		);
 
 		$this->assertNotContains(
@@ -1315,7 +1315,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledAgeSearchAndAgeValueZero_AgeValue() {
+	public function test_Render_ForEnabledAgeSearchAndAgeValueZero_DoesNotShowAgeValueZero() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'age'
 		);
@@ -1331,7 +1331,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 	public function test_Render_ForEnabledAgeSearch_DoesNotIncludeNonIntegerAgeAsValue() {
 		$this->fixture->setConfigurationValue(
-			'displaySearchFormFields', 'full_text_search'
+			'displaySearchFormFields', 'age'
 		);
 
 		$searchedAge = 'Hallo';
@@ -1481,6 +1481,119 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->isSubpartVisible('SEARCH_PART_ORGANIZER')
+		);
+	}	
+
+
+	////////////////////////////////////////////
+	// Tests concerning the price search input
+	////////////////////////////////////////////
+
+	public function test_Render_ForDisabledPriceSearch_HidesPriceSearchSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'city'
+		);
+
+		$this->fixture->render();
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_PRICE')
+		);
+	}
+
+	public function test_Render_ForEnabledPriceSearch_ContainsPriceSearchSubpart() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'price'
+		);
+
+		$this->fixture->render();
+
+		$this->assertTrue(
+			$this->fixture->isSubpartVisible('SEARCH_PART_PRICE')
+		);
+	}
+
+	public function test_Render_ForEnabledPriceSearch_CanFillSearchedPriceFromIntoTextbox() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'price'
+		);
+
+		$priceFrom = 10;
+		$this->fixture->piVars['price_from'] = $priceFrom;
+
+		$this->assertContains(
+			(string) $priceFrom,
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPriceSearch_CanFillSearchedPriceToIntoTextbox() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'price'
+		);
+
+		$priceTo = 50;
+		$this->fixture->piVars['price_to'] = $priceTo;
+
+		$this->assertContains(
+			(string) $priceTo,
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPriceSearchAndPriceFromZero_DoesNotShowZeroForPriceFrom() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'price'
+		);
+
+		$priceFrom = 0;
+		$this->fixture->piVars['price_from'] = $priceFrom;
+
+		$this->assertNotContains(
+			'price_from]" value="' . $priceFrom . '"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPriceSearchAndPriceToZero_DoesNotShowZeroForPriceTo() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'price'
+		);
+
+		$priceTo = 0;
+		$this->fixture->piVars['price_to'] = $priceTo;
+
+		$this->assertNotContains(
+			'price_to]" value="' . $priceTo . '"',
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPriceSearch_DoesNotIncludeNonIntegerPriceFromAsValue() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'price'
+		);
+
+		$priceFrom = 'Hallo';
+		$this->fixture->piVars['price_from'] = $priceFrom;
+
+		$this->assertNotContains(
+			$priceFrom,
+			$this->fixture->render()
+		);
+	}
+
+	public function test_Render_ForEnabledPriceSearch_DoesNotIncludeNonIntegerPriceToAsValue() {
+		$this->fixture->setConfigurationValue(
+			'displaySearchFormFields', 'price'
+		);
+
+		$priceTo = 'Hallo';
+		$this->fixture->piVars['price_from'] = $priceTo;
+
+		$this->assertNotContains(
+			$priceTo,
+			$this->fixture->render()
 		);
 	}
 }

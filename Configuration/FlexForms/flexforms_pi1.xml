@@ -309,12 +309,16 @@
 										<numIndex index="1">age</numIndex>
 									</numIndex>
 									<numIndex index="8" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.price</numIndex>
+										<numIndex index="1">price</numIndex>
+									</numIndex>
+									<numIndex index="9" type="array">
 										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.textField</numIndex>
 										<numIndex index="1">full_text_search</numIndex>
 									</numIndex>
 								</items>
 								<minitems>0</minitems>
-								<maxitems>9</maxitems>
+								<maxitems>10</maxitems>
 								<renderMode>checkbox</renderMode>
 							</config>
 						</TCEforms>

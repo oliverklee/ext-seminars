@@ -1502,8 +1502,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$isOkay = true;
 		$this->ensureIntegerPiVars(
 			array(
-				'from_day', 'from_month', 'from_year',
-				'to_day', 'to_month', 'to_year', 'age',
+				'from_day', 'from_month', 'from_year', 'to_day', 'to_month',
+				'to_year', 'age', 'price_from', 'price_to',
 			)
 		);
 
@@ -2284,6 +2284,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		if ($this->piVars['age'] > 0) {
 			$builder->limitToAge($this->piVars['age']);
+		}
+
+		if ($this->piVars['price_from'] > 0) {
+			$builder->limitToMinimumPrice($this->piVars['price_from']);
+		}
+		if ($this->piVars['price_to'] > 0) {
+			$builder->limitToMaximumPrice($this->piVars['price_to']);
 		}
 
 		$this->filterByDate($builder);

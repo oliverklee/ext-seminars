@@ -111,6 +111,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		$this->fillOrHideFullTextSearch();
 		$this->fillOrHideDateSearch();
 		$this->fillOrHideAgeSearch();
+		$this->fillOrHidePriceSearch();
 
 		return $this->getSubpart('SELECTOR_WIDGET');
 	}
@@ -437,6 +438,29 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 		$this->setMarker(
 			'age_value', (($age > 0) ? $age : '')
+		);
+	}
+
+	/**
+	 * Fills or hides the price search subpart.
+	 */
+	private function fillOrHidePriceSearch() {
+		if (!$this->hasSearchField('price')) {
+			$this->hideSubparts(
+				self::SUBPART_PREFIX . 'PRICE'
+			);
+
+			return;
+		}
+
+		$priceFrom = intval($this->piVars['price_from']);
+		$priceTo = intval($this->piVars['price_to']);
+
+		$this->setMarker(
+			'price_from_value', (($priceFrom > 0) ? $priceFrom : '')
+		);
+		$this->setMarker(
+			'price_to_value', (($priceTo > 0) ? $priceTo : '')
 		);
 	}
 

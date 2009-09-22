@@ -438,6 +438,10 @@ div.tx-seminars-pi1-selectorwidget {
 	width: 20%;
 }
 
+#tx_seminars_pi1_price_from, #tx_seminars_pi1_price_to {
+	width: 6em;
+}
+
 table.tx-seminars-pi1-timeslots {
 	background-color: #fff;
 	color: #000;

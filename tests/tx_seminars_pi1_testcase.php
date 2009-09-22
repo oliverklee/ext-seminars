@@ -3095,6 +3095,85 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////////////////////////////
+	// Tests concerning the filtering by price in the list view
+	/////////////////////////////////////////////////////////////
+
+	public function test_ListViewForGivenPriceFrom_ShowsEventWithRegularPriceHigherThanPriceFrom() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'price_regular' => 21,
+			)
+		);
+
+		$this->fixture->piVars['price_from'] = 20;
+
+		$this->assertContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenPriceTo_ShowsEventWithRegularPriceLowerThanPriceTo() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'price_regular' => 19,
+			)
+		);
+
+		$this->fixture->piVars['price_to'] = 20;
+
+		$this->assertContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenPriceRange_ShowsEventWithRegularPriceWithinRange() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'price_regular' => 21,
+			)
+		);
+
+		$this->fixture->piVars['price_from'] = 20;
+		$this->fixture->piVars['price_to'] = 22;
+
+		$this->assertContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	public function test_ListViewForGivenPriceRange_HidesEventWithRegularPriceOutsideRange() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Foo Event',
+				'price_regular' => 23,
+			)
+		);
+
+		$this->fixture->piVars['price_from'] = 20;
+		$this->fixture->piVars['price_to'] = 22;
+
+		$this->assertNotContains(
+			'Foo Event',
+			$this->fixture->main('', array())
+		);
+	}
+
+
 	///////////////////////////////////////////////////
 	// Tests concerning the sorting in the list view.
 	///////////////////////////////////////////////////

@@ -300,10 +300,12 @@ function appendTargetGroupInEditor(uid, title, buttonData) {
  * Clears the selection of the search widget.
  */
 function clearSearchWidgetFields() {
-	var textElements = ['tx_seminars_pi1_sword', 'tx_seminars_pi1_search_age'];
+	var prefix = 'tx_seminars_pi1';
+	var textElements = ['sword', 'search_age', 'price_from', 'price_to'];
 	for (var i=0; i < textElements.length; i++) {
-		if (document.getElementById(textElements[i])) {
-			document.getElementById(textElements[i]).value = '';
+		var textElement = document.getElementById(prefix + '_' + textElements[i]);
+		if (textElement) {
+			textElement.value = '';
 		}
 	}
 
@@ -315,7 +317,7 @@ function clearSearchWidgetFields() {
 	for (var i = 0; i < suffixes.length; i++) {
 		var suffix = suffixes[i];
 		var element = document.getElementById(
-			'tx_seminars_pi1-' + suffix
+			prefix + '-' + suffix
 		);
 		if (element) {
 			for (var j = 0; j < element.options.length; j++) {
