@@ -1,11 +1,9 @@
-0.8.3 (currently working on)
+0.8.2 (currently working on)
 - [#3331] Fix: testSendCancelationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage fails
 - [#3307] Feature: Add the try/catch for BackEnd/index.php::main
 - [#3353] Fix: Selected payment method not listed on the confirmation page
 - [#3350] Fix: getPreselectedPaymentMethod does not return UID of selected payment method
 - [#3144] Fix: Increase the max input size for showRegistrationFields
-
-0.8.2 (currently working on)
 
 0.8.1 (released 2009-08-15)
 - [#3317] Fix: Check for object comparisons / recursive nesting
