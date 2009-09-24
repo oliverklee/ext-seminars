@@ -764,7 +764,11 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			'known_from',
 			'notes'
 		) as $currentKey) {
-			$result .= $this->getFormDataItemForConfirmation($currentKey);
+			if ($this->isFormFieldEnabled($currentKey)) {
+				$result .= $this->getFormDataItemForConfirmation(
+					$currentKey
+				);
+			}
 		}
 
 		return $result;
