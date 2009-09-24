@@ -531,6 +531,9 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
 			&& !$this->seminar->isCanceled()
 			&& !$this->seminar->hasStarted()
+			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
+			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord('pages', $pageData['uid']), 16)
 		) {
 			$result = '<form action="index.php?id=' . $pageData['uid'] .
 				'&amp;subModule=1" method="post"><p><input type="submit" value="' .
@@ -556,11 +559,14 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	private function getConfirmButton() {
 		$result = '';
 
+		$pageData = $this->page->getPageData();
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
 			&& !$this->seminar->isConfirmed()
 			&& !$this->seminar->hasStarted()
+			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
+			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord('pages', $pageData['uid']), 16)
 		) {
-			$pageData = $this->page->getPageData();
 			$result = '<form action="index.php?id=' . $pageData['uid'] .
 				'&amp;subModule=1" method="post"><p><input type="submit" value="' .
 				$GLOBALS['LANG']->getLL('eventlist_button_confirm') . '" />' .
