@@ -368,12 +368,15 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 */
 	private function setCancelButtonMarkers() {
 		$this->template->unhideSubpartsArray(array('CANCEL_BUTTON'));
+		$pageData = $this->page->getPageData();
 
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
 			&& !$this->seminar->isCanceled()
 			&& !$this->seminar->hasStarted()
+			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
+			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord('pages', $pageData['uid']), 16)
 		) {
-			$pageData = $this->page->getPageData();
 			$this->template->setMarker('uid', $this->seminar->getUid());
 			$this->template->setMarker(
 				'cancel_button_url',
@@ -398,12 +401,15 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 */
 	private function setConfirmButtonMarkers() {
 		$this->template->unhideSubpartsArray(array('CONFIRM_BUTTON'));
+		$pageData = $this->page->getPageData();
 
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
 			&& !$this->seminar->isConfirmed()
 			&& !$this->seminar->hasStarted()
+			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
+			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord('pages', $pageData['uid']), 16)
 		) {
-			$pageData = $this->page->getPageData();
 			$this->template->setMarker('uid', $this->seminar->getUid());
 			$this->template->setMarker(
 				'confirm_button_url',
