@@ -1,4 +1,5 @@
 0.8.2 (currently working on)
+- [#3425] Fix: Kids dropdown in step 1 missing 0 or "none" selection.  Only has choice of 1,2,3,4 or 5
 - [#3411] Fix: All data from the selector widget should be safeguarded
 - [#3331] Fix: testSendCancelationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage fails
 - [#3307] Feature: Add the try/catch for BackEnd/index.php::main

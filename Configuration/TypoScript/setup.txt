@@ -1541,6 +1541,10 @@ plugin.tx_seminars_pi1 {
 					kids {
 						name = kids
 						data.items {
+							blank {
+								caption = &nbsp;
+								value = 0
+							}
 							1 {
 								caption = 1
 								value = 1
