@@ -2117,6 +2117,20 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
 						}
 
+						newTargetGroup_minimum_age = renderlet:TEXT
+						newTargetGroup_minimum_age {
+							name = newTargetGroup_minimum_age
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.minimum_age
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						newTargetGroup_maximum_age = renderlet:TEXT
+						newTargetGroup_maximum_age {
+							name = newTargetGroup_maximum_age
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.maximum_age
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
 						newTargetGroup_cancelButton = renderlet:BUTTON
 						newTargetGroup_cancelButton {
 							name = newTargetGroup_cancelButton
@@ -2137,7 +2151,7 @@ plugin.tx_seminars_pi1 {
 							wrap = |</div>
 							onclick {
 								runat = ajax
-								params = newTargetGroup_title
+								params = newTargetGroup_title, newTargetGroup_minimum_age, newTargetGroup_maximum_age
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 									return tx_seminars_pi1_eventEditor::createNewTargetGroup($this);
@@ -2178,6 +2192,20 @@ plugin.tx_seminars_pi1 {
 							name = editTargetGroup_uid
 						}
 
+						editTargetGroup_minimum_age = renderlet:TEXT
+						editTargetGroup_minimum_age {
+							name = editTargetGroup_minimum_age
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.minimum_age
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editTargetGroup_maximum_age = renderlet:TEXT
+						editTargetGroup_maximum_age {
+							name = editTargetGroup_maximum_age
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups.maximum_age
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
 						editTargetGroup_cancelButton = renderlet:BUTTON
 						editTargetGroup_cancelButton {
 							name = editTargetGroup_cancelButton
@@ -2199,7 +2227,7 @@ plugin.tx_seminars_pi1 {
 							onclick {
 								runat = ajax
 								cache = false
-								params = editTargetGroup_title, editTargetGroup_uid
+								params = editTargetGroup_title, editTargetGroup_uid, editTargetGroup_minimum_age, editTargetGroup_maximum_age
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 									return tx_seminars_pi1_eventEditor::updateTargetGroup($this);

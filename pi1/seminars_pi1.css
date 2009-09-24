@@ -242,6 +242,13 @@
 	position: relative;
 }
 
+input#tx_seminars_pi1_seminars_editTargetGroup_minimum_age,
+input#tx_seminars_pi1_seminars_editTargetGroup_maximum_age,
+input#tx_seminars_pi1_seminars_newTargetGroup_minimum_age,
+input#tx_seminars_pi1_seminars_newTargetGroup_maximum_age {
+	width: 3em;
+}
+
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newSpeakerButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newLeaderButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newTutorButton,

@@ -765,8 +765,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			),
 			'newCheckbox_' => array('title'),
 			'editCheckbox_' => array('title', 'uid'),
-			'newTargetGroup_' => array('title'),
-			'editTargetGroup_' => array('title', 'uid'),
+			'newTargetGroup_' => array(
+				'title', 'uid', 'minimum_age', 'maximum_age',
+			),
+			'editTargetGroup_' => array(
+				'title', 'uid', 'minimum_age', 'maximum_age',
+			),
 		);
 
 		foreach ($fieldsToUnset as $prefix => $keys) {
@@ -2125,7 +2129,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	public static function createNewTargetGroup(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
 		$validationErrors = self::validateTargetGroup(
-			$formidable, array('title' => $formData['newTargetGroup_title'])
+			$formidable,
+			array(
+				'title' => $formData['newTargetGroup_title'],
+				'minimum_age' => $formData['newTargetGroup_minimum_age'],
+				'maximum_age' => $formData['newTargetGroup_maximum_age'],
+			)
 		);
 		if (!empty($validationErrors)) {
 			return array(
@@ -2205,7 +2214,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$validationErrors = self::validateTargetGroup(
 			$formidable,
-			array('title' => $formData['editTargetGroup_title'])
+			array(
+				'title' => $formData['editTargetGroup_title'],
+				'minimum_age' => $formData['editTargetGroup_minimum_age'],
+				'maximum_age' => $formData['editTargetGroup_maximum_age'],
+			)
 		);
 		if (!empty($validationErrors)) {
 			return $formidable->majixExecJs(
@@ -2248,6 +2261,25 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
 			);
 		}
+		if (preg_match('/^(\d*)$/', trim($formData['minimum_age']))
+			&& preg_match('/^(\d*)$/', trim($formData['maximum_age']))
+		) {
+			$minimumAge = $formData['minimum_age'];
+			$maximumAge = $formData['maximum_age'];
+
+			if (($minimumAge > 0) && ($maximumAge > 0)) {
+				if ($minimumAge > $maximumAge) {
+					$validationErrors[] = $formidable->getLLLabel(
+						'LLL:EXT:seminars/pi1/locallang.xml:' .
+							'message_targetGroupMaximumAgeSmallerThanMinimumAge'
+					);
+				}
+			}
+		} else {
+			$validationErrors[] = $formidable->getLLLabel(
+				'LLL:EXT:seminars/pi1/locallang.xml:message_noTargetGroupAgeNumber'
+			);
+		}
 
 		return $validationErrors;
 	}
@@ -2266,6 +2298,8 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		tx_seminars_Model_TargetGroup $targetGroup, $prefix, array $formData
 	) {
 		$targetGroup->setTitle($formData[$prefix . 'title']);
+		$targetGroup->setMinimumAge(intval($formData[$prefix . 'minimum_age']));
+		$targetGroup->setMaximumAge(intval($formData[$prefix . 'maximum_age']));
 	}
 
 	/**
@@ -2306,9 +2340,16 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			);
 		}
 
+		$minimumAge = ($targetGroup->getMinimumAge() > 0)
+			? $targetGroup->getMinimumAge() : '';
+		$maximumAge = ($targetGroup->getMaximumAge() > 0)
+			? $targetGroup->getMaximumAge() : '';
+
 		$fields = array(
 			'uid' => $targetGroup->getUid(),
 			'title' => $targetGroup->getTitle(),
+			'minimum_age' => $minimumAge,
+			'maximum_age' => $maximumAge,
 		);
 
 		foreach ($fields as $key => $value) {
