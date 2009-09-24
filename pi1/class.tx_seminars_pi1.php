@@ -3227,36 +3227,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			// problem by the configuration check.
 		}
 	}
-
-	/**
-	 * Ensures that all values in the given array are intvaled and removes empty
-	 * or invalid values.
-	 *
-	 * @param array $keys the keys of the piVars to check, may be empty
-	 */
-	public function ensureIntegerArrayValues(array $keys) {
-		if (empty($keys)) {
-			return;
-		}
-
-		foreach ($keys as $key) {
-			if (!isset($this->piVars[$key])
-				|| !is_array($this->piVars[$key])
-			) {
-				continue;
-			}
-
-			foreach ($this->piVars[$key] as $innerKey => $value) {
-				$integerValue = intval($value);
-
-				if ($integerValue == 0) {
-					unset($this->piVars[$key][$innerKey]);
-				} else {
-					$this->piVars[$key][$innerKey] = $integerValue;
-				}
-			}
-		}
-	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1.php']) {
