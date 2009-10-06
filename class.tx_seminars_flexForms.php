@@ -128,6 +128,63 @@ class tx_seminars_flexForms {
 
 		return array_keys($columns);
 	}
+
+	/**
+	 * Returns the items of the given table for the flexforms.
+	 *
+	 * The table to retrieve the items for must have a title column.
+	 *
+	 * The given configuration array must apply to the following convention:
+	 * - the sub-arrays "config", "row" and "items" must exist
+	 * - "config" must have an element "itemTable" with a valid table name of a
+	 *   table which has a title column
+	 * - "row" must have an item "pid" with the current page ID
+	 *
+	 * @param array $configuration the flexforms configuration
+	 *
+	 * @return array the modified flexforms configuration including the items
+	 *               available for selection
+	 */
+	public function getEntriesFromGeneralStoragePage(array $configuration) {
+		$storagePid = 0;
+		$whereClause = '1 = 1';
+		$table = $configuration['config']['itemTable'];
+
+		if (tx_oelib_configurationProxy::getInstance('seminars')
+			->getConfigurationValueBoolean('useStoragePid')
+		) {
+			$rootlinePages = t3lib_befunc::BEgetRootLine(
+				$configuration['row']['pid']
+			);
+
+			foreach ($rootlinePages as $page) {
+				$storagePid = intval($page['storage_pid']);
+				if ($storagePid > 0) {
+					$whereClause = '(' . $table . '.pid = ' . $storagePid . ')';
+					break;
+				}
+			}
+		}
+
+		$items = tx_oelib_db::selectMultiple(
+			'uid,title',
+			$table,
+			$whereClause . tx_oelib_db::enableFields($table),
+			'',
+			'title ASC'
+		);
+
+		$configuration['items'] = array();
+		foreach ($items as $item) {
+			$configuration['items'][] = array(
+				0 => $item['title'],
+				1 => $item['uid'],
+				2 => $GLOBALS['TCA'][$table]['ctrl']['iconfile']
+			);
+		}
+
+		return $configuration;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_flexForms.php']) {

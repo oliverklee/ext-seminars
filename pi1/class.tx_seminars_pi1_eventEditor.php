@@ -2448,6 +2448,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *                be empty
 	 */
 	private function getPidsForAuxiliaryRecords() {
+		$recordPids = array();
 		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 		$auxiliaryRecordsPid = $frontEndUser->getAuxiliaryRecordsPid();
@@ -2457,8 +2458,16 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					->getAsInteger('createAuxiliaryRecordsPID');
 		}
 
-		return $this->getStoragePid() .
-			(($auxiliaryRecordsPid != 0) ? ',' . $auxiliaryRecordsPid : '');
+		if (tx_oelib_configurationProxy::getInstance('seminars')
+			->getConfigurationValueBoolean('useStoragePid')
+		) {
+			$recordPids[] = $this->getStoragePid();
+		}
+		if ($auxiliaryRecordsPid != 0) {
+			$recordPids[] = $auxiliaryRecordsPid;
+		}
+
+		return implode(',', $recordPids);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-# cat=basic//10; type=boolean; label= Use "General record storage page": Set the "General record storage page" (AKA "GRSP" or "storagePid") if you want to save new entries at the GRSP by the add wizard (small icon at the right of select boxes). As default the records are saved in the current selected system folder.
+# cat=basic//10; type=boolean; label= Use "General record storage page": Whether to use the General Record Storage Page (GRSP) to store and load records like auxiliary records.
 useStoragePid = 0
 
 # cat=basic/enable; type=boolean; label=Enable configuration check.        This automatic configuration check checks the FE and BE settings of this extension for common problems and inconsistencies and will be helpful in getting to a working configuration quickly.

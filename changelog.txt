@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3429] Feature: Use the flag useStoragePid when filtering records by GRSP in the flexforms and the FE editor
 - [#3295] Fix: Hide the cancel/confirm buttons in the BE module if the logged-in user has no write access
 - [#3425] Fix: Kids dropdown in step 1 missing 0 or "none" selection.  Only has choice of 1,2,3,4 or 5
 - [#3411] Fix: All data from the selector widget should be safeguarded
