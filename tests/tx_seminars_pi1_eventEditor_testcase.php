@@ -2909,7 +2909,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
-		$formData = $this->fixture->modifyDataToInsert(array());
+		$this->fixture->modifyDataToInsert(array());
 
 		$this->fixture->sendEMailToReviewer();
 

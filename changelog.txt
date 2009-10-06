@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3333] Fix: Unused variable $formData in eventEditor_testcase::test_eventEditorForEventHiddenBeforeEditing_DoesNotSendMail
 - [#3334] Fix: Unused variable $secondEventUid in pi2_testcase::testCreateAndOutputListOfEventsHasResultEndingWithCariageReturnAndLineFeed
 - [#3224] Fix: Make sure all <script> tags have proper CDATA
 - [#3429] Change: Use the flag useStoragePid when filtering records by GRSP in the flexforms and the FE editor
