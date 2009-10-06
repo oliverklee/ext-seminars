@@ -1,4 +1,5 @@
 0.8.2 (currently working on)
+- [#3224] Fix: Make sure all <script> tags have proper CDATA
 - [#3429] Change: Use the flag useStoragePid when filtering records by GRSP in the flexforms and the FE editor
 - [#3207] Fix: Require static_info_tables_taxes
 - [#3295] Fix: Hide the cancel/confirm buttons in the BE module if the logged-in user has no write access
