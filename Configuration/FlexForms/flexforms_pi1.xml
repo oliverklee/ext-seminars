@@ -267,13 +267,10 @@
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToEventTypes</label>
 							<config>
 								<type>select</type>
-								<foreign_table>tx_seminars_event_types</foreign_table>
-								<foreign_table_where>
-									AND (tx_seminars_event_types.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
-									ORDER BY title asc
-								</foreign_table_where>
+								<itemTable>tx_seminars_event_types</itemTable>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
+								<itemsProcFunc>tx_seminars_flexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToEventTypes>
@@ -282,13 +279,10 @@
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToCategories</label>
 							<config>
 								<type>select</type>
-								<foreign_table>tx_seminars_categories</foreign_table>
-								<foreign_table_where>
-									AND (tx_seminars_categories.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
-									ORDER BY title asc
-								</foreign_table_where>
+								<itemTable>tx_seminars_categories</itemTable>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
+								<itemsProcFunc>tx_seminars_flexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToCategories>
@@ -297,13 +291,10 @@
 							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToPlaces</label>
 							<config>
 								<type>select</type>
-								<foreign_table>tx_seminars_sites</foreign_table>
-								<foreign_table_where>
-									AND (tx_seminars_sites.pid = ###STORAGE_PID### OR ###STORAGE_PID### = 0) 
-									ORDER BY title asc
-								</foreign_table_where>
+								<itemTable>tx_seminars_sites</itemTable>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
+								<itemsProcFunc>tx_seminars_flexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToPlaces>
