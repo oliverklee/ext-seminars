@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'dependencies' => 'cms,css_styled_content,oelib,ameos_formidable,static_info_tables',
+	'dependencies' => 'cms,css_styled_content,oelib,ameos_formidable,static_info_tables,static_info_tables_taxes',
 	'conflicts' => 'dbal,date2cal',
 	'priority' => '',
 	'loadOrder' => '',
@@ -43,6 +43,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'oelib' => '0.6.1-',
 			'ameos_formidable' => '1.1.0-1.9.99',
 			'static_info_tables' => '2.0.8-',
+			'static_info_tables_taxes' => '',
 		),
 		'conflicts' => array(
 			'dbal' => '',
