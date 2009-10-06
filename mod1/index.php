@@ -125,19 +125,19 @@ class tx_seminars_module1 extends t3lib_SCbase {
 
 				// JavaScript
 				$this->doc->JScode = '
-					<script language="javascript" type="text/javascript">
+					<script type="text/javascript">/*<![CDATA[*/
 						script_ended = 0;
 						function jumpToUrl(URL) {
 							document.location = URL;
 						}
-					</script>
+					/*]]>*/</script>
 				';
 				$this->doc->postCode='
-					<script language="javascript" type="text/javascript">
+					<script type="text/javascript">/*<![CDATA[*/
 						script_ended = 1;
 						if (top.fsMod) top.fsMod.recentIds["web"] = '
 						.intval($this->id).';
-					</script>
+					/*]]>*/</script>
 				';
 
 				$headerSection = $this->doc->getHeader(
