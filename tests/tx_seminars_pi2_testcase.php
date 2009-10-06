@@ -201,7 +201,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
-		$secondEventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => $this->pid,
