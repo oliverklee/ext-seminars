@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3204] Fix: In the confirmation step of the registration process price and payment method are shown even if disabled
 - [#3333] Fix: Unused variable $formData in eventEditor_testcase::test_eventEditorForEventHiddenBeforeEditing_DoesNotSendMail
 - [#3334] Fix: Unused variable $secondEventUid in pi2_testcase::testCreateAndOutputListOfEventsHasResultEndingWithCariageReturnAndLineFeed
 - [#3224] Fix: Make sure all <script> tags have proper CDATA

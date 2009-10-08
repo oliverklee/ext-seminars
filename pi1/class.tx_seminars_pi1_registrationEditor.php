@@ -127,9 +127,11 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 
 	/**
 	 * Sets the seminar for which to create the form.
+	 *
+	 * @param tx_seminars_seminar $event the event for which to create the form
 	 */
-	public function setSeminar(tx_seminars_seminar $seminar) {
-		$this->seminar = $seminar;
+	public function setSeminar(tx_seminars_seminar $event) {
+		$this->seminar = $event;
 	}
 
 	/**
@@ -764,7 +766,11 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			'known_from',
 			'notes'
 		) as $currentKey) {
-			$result .= $this->getFormDataItemForConfirmation($currentKey);
+			if ($this->isFormFieldEnabled($currentKey)) {
+				$result .= $this->getFormDataItemForConfirmation(
+					$currentKey
+				);
+			}
 		}
 
 		return $result;
