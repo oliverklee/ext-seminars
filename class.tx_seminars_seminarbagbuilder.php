@@ -1124,7 +1124,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$this->whereClauseParts['eventsWithVacancies'] =
 			'(needs_registration = 0 OR (needs_registration = 1 AND ' .
-				'(attendees_max = 0 OR queue_size = 1 OR ' .
+				'(attendees_max = 0 OR ' .
 					'(attendees_max > 0 AND ' . $hasVacancies . ')' .
 				'))'.
 			')';

@@ -7088,7 +7088,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventNoVacanciesButQueue_FindsThisEvent() {
+	public function test_LimitToEventsWithVacancies_ForEventNoVacanciesAndQueue_DoesNotFindThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
@@ -7106,9 +7106,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToEventsWithVacancies();
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
-			1,
-			$bag->count()
+		$this->assertTrue(
+			$bag->isEmpty()
 		);
 
 		$bag->__destruct();
