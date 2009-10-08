@@ -1,3 +1,5 @@
+0.8.3 (currently working on)
+
 0.8.2 (released 2009-10-08)
 - [#3204] Fix: In the confirmation step of the registration process price and payment method are shown even if disabled
 - [#3334] Fix: Unused variable $secondEventUid in pi2_testcase::testCreateAndOutputListOfEventsHasResultEndingWithCariageReturnAndLineFeed
