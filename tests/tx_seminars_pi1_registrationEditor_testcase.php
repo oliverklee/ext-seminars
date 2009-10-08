@@ -563,7 +563,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	// Tests concerning getRegistrationData
 	/////////////////////////////////////////
 
-	public function test_getRegistrationDataForSelectedPaymentMethod_ReturnsTheSelectedPaymentMethod() {
+	public function test_getRegistrationDataForFieldDisabledByConfiguration_ReturnsEmptyString() {
 		$selectedPaymentMethodUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'payment foo')
 		);
@@ -577,10 +577,38 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			'method_of_payment', $selectedPaymentMethodUid
 		);
 
-		$this->assertContains(
-			'payment foo',
+		$this->assertEquals(
+			'',
 			$this->fixture->getRegistrationData()
 		);
+	}
+
+	public function test_getRegistrationDataForFieldEnabledByConfiguration_ReturnsTheFieldsContent() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'showRegistrationFields' => 'price',
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->seminarUid,
+			array('price_regular' => 42)
+		);
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('price', 42);
+
+		$this->assertContains(
+			'42',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
 	}
 }
 ?>
