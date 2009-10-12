@@ -22,6 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 require_once(t3lib_extMgm::extPath('lang') . 'lang.php');
