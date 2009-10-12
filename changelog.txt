@@ -2,7 +2,7 @@
 - [#3440] Fix: Crash in the flexforms: Class not found
 - [#3295] Change: Hide the cancel/confirm buttons in the BE module if the logged-in user has no write access
 - [#3438] Change: The "hide fully-booked events" filter should hide events even if they have a waiting list
-- [#3204] Fix: In the confirmation step of the registration process price and payment method are shown even if disabled
+- [#3204] Fix: In the confirmation step of the registration process price and payment method are shown even if disabled, original patch by Donatas Elvikis
 - [#3333] Fix: Unused variable $formData in eventEditor_testcase::test_eventEditorForEventHiddenBeforeEditing_DoesNotSendMail
 - [#3334] Fix: Unused variable $secondEventUid in pi2_testcase::testCreateAndOutputListOfEventsHasResultEndingWithCariageReturnAndLineFeed
 - [#3224] Fix: Make sure all <script> tags have proper CDATA
