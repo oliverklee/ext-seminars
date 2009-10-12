@@ -1,4 +1,5 @@
 0.8.3 (currently working on)
+- [#3440] Fix: Crash in the flexforms: Class not found
 
 0.8.2 (released 2009-10-08)
 - [#3204] Fix: In the confirmation step of the registration process price and payment method are shown even if disabled
