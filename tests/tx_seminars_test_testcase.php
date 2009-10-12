@@ -451,5 +451,38 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			)
 		);
 	}
+
+
+	////////////////////////////////
+	// Tests concerning getPageUid
+	////////////////////////////////
+
+	public function test_getPageUidCanReturnRecordsPageUid() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_TEST, $this->fixtureUid, array('pid' => 42)
+		);
+		$fixture = new tx_seminars_test($this->fixtureUid);
+
+		$this->assertEquals(
+			42,
+			$fixture->getPageUid()
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_getPageUidForRecordWithPageUidZero_ReturnsZero() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_TEST, $this->fixtureUid, array('pid' => 0)
+		);
+		$fixture = new tx_seminars_test($this->fixtureUid);
+
+		$this->assertEquals(
+			0,
+			$fixture->getPageUid()
+		);
+
+		$fixture->__destruct();
+	}
 }
 ?>

@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3295] Change: Hide the cancel/confirm buttons in the BE module if the logged-in user has no write access
 - [#3438] Change: The "hide fully-booked events" filter should hide events even if they have a waiting list
 - [#3204] Fix: In the confirmation step of the registration process price and payment method are shown even if disabled
 - [#3333] Fix: Unused variable $formData in eventEditor_testcase::test_eventEditorForEventHiddenBeforeEditing_DoesNotSendMail

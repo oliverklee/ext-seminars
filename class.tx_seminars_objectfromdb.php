@@ -607,6 +607,15 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 			);
 		}
 	}
+
+	/**
+	 * Returns this record's page UID.
+	 *
+	 * @return integer the page UID for this record, will be >= 0
+	 */
+	public function getPageUid() {
+		return $this->getRecordPropertyInteger('pid');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_objectfromdb.php']) {
