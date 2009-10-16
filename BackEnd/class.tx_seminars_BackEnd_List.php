@@ -52,6 +52,11 @@ abstract class tx_seminars_BackEnd_List {
 	protected $templateFile = '';
 
 	/**
+	 * @var array the access rights to page UIDs
+	 */
+	protected $accessRights = array();
+
+	/**
 	 * @var integer the depth of the recursion for the back-end lists
 	 */
 	const RECURSION_DEPTH = 250;
@@ -78,22 +83,18 @@ abstract class tx_seminars_BackEnd_List {
 	 * Generates an edit record icon which is linked to the edit view of
 	 * a record.
 	 *
-	 * @param integer the UID of the record, must be > 0
+	 * @param integer $uid the UID of the record, must be > 0
+	 * @param integer $pageUid the PID of the record, must be >= 0
 	 *
 	 * @return string the HTML source code to return
 	 */
-	public function getEditIcon($uid) {
+	public function getEditIcon($uid, $pageUid) {
 		global $BACK_PATH, $LANG, $BE_USER;
 
 		$result = '';
 
-		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord(
-					'pages', $pageData['uid']
-				),
-			16)
+			&& $this->doesUserHaveAccess($pageUid)
 		) {
 			$params = '&edit['.$this->tableName.']['.$uid.']=edit';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
@@ -115,23 +116,18 @@ abstract class tx_seminars_BackEnd_List {
 	 * Generates a linked delete record icon whith a JavaScript confirmation
 	 * window.
 	 *
-	 * @param integer the UID of the record, must be > 0
+	 * @param integer $uid the UID of the record, must be > 0
+	 * @param integer $pageUid the PID of the record, must be >= 0
 	 *
 	 * @return string the HTML source code to return
 	 */
-	public function getDeleteIcon($uid) {
+	public function getDeleteIcon($uid, $pageUid) {
 		global $BACK_PATH, $LANG, $BE_USER;
 
 		$result = '';
 
-		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord(
-					'pages', $pageData['uid']
-				),
-				16
-			)
+			&& $this->doesUserHaveAccess($pageUid)
 		) {
 			$params = '&cmd['.$this->tableName.']['.$uid.'][delete]=1';
 
@@ -179,11 +175,7 @@ abstract class tx_seminars_BackEnd_List {
 
 		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord(
-					'pages', $pageData['uid']
-				),
-				16)
+			&& $this->doesUserHaveAccess($pageData['uid'])
 			&& ($pageData['doktype'] == 254)) {
 			$params = '&edit['.$this->tableName.']['.$pid.']=new';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
@@ -274,23 +266,18 @@ abstract class tx_seminars_BackEnd_List {
 	 * status.
 	 *
 	 * @param integer $uid the UID of the record, must be > 0
+	 * @param integer $pageUid the PID of the record, must be >= 0
 	 * @param boolean $hidden
 	 *        indicates whether the record is hidden (true) or is visible (false)
 	 *
 	 * @return string the HTML source code of the linked hide or unhide icon
 	 */
-	protected function getHideUnhideIcon($uid, $hidden) {
+	protected function getHideUnhideIcon($uid, $pageUid, $hidden) {
 		global $BACK_PATH, $LANG, $BE_USER;
 		$result = '';
 
-		$pageData = $this->page->getPageData();
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $BE_USER->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord(
-					'pages', $pageData['uid']
-				),
-				16
-			)
+			&& $this->doesUserHaveAccess($pageUid)
 		) {
 			if ($hidden) {
 				$params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
@@ -315,6 +302,25 @@ abstract class tx_seminars_BackEnd_List {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Checks if the currently logged-in BE user has access to records on the
+	 * given page.
+	 *
+	 * @param integer $pageUid the page to check the access for, must be >= 0
+	 *
+	 * @return boolean true if the user has access, false otherwise
+	 */
+	protected function doesUserHaveAccess($pageUid) {
+		if (!isset($this->accessRights[$pageUid])) {
+			$this->accessRights[$pageUid] = $GLOBALS['BE_USER']
+				->doesUserHaveAccess(
+					t3lib_BEfunc::getRecord('pages', $pageUid), 16
+			);
+		}
+
+		return $this->accessRights[$pageUid];
 	}
 }
 

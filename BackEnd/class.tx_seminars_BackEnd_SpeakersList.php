@@ -96,15 +96,23 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 				'full_name', htmlspecialchars($this->speaker->getTitle())
 			);
 			$this->template->setMarker(
-				'edit_button', $this->getEditIcon($this->speaker->getUid())
+				'edit_button',
+				$this->getEditIcon(
+					$this->speaker->getUid(), $this->speaker->getPageUid()
+				)
 			);
 			$this->template->setMarker(
-				'delete_button', $this->getDeleteIcon($this->speaker->getUid())
+				'delete_button',
+				$this->getDeleteIcon(
+					$this->speaker->getUid(), $this->speaker->getPageUid()
+				)
 			);
 			$this->template->setMarker(
 				'hide_unhide_button',
 				$this->getHideUnhideIcon(
-					$this->speaker->getUid(), $this->speaker->isHidden()
+					$this->speaker->getUid(),
+					$this->speaker->getPageUid(),
+					$this->speaker->isHidden()
 				)
 			);
 			$this->template->setMarker(

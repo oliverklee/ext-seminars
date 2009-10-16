@@ -93,10 +93,16 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 				'full_name', htmlspecialchars($this->organizer->getTitle())
 			);
 			$this->template->setMarker(
-				'edit_button', $this->getEditIcon($this->organizer->getUid())
+				'edit_button',
+				$this->getEditIcon(
+					$this->organizer->getUid(), $this->organizer->getPageUid()
+				)
 			);
 			$this->template->setMarker(
-				'delete_button', $this->getDeleteIcon($this->organizer->getUid())
+				'delete_button',
+				$this->getDeleteIcon(
+					$this->organizer->getUid(), $this->organizer->getPageUid()
+				)
 			);
 
 			$tableRows .= $this->template->getSubpart('ORGANIZER_ROW');

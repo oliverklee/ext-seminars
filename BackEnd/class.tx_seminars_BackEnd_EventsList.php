@@ -199,15 +199,23 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 				($this->seminar->hasDate() ? $this->seminar->getDate() : '')
 			);
 			$this->template->setMarker(
-				'edit_button', $this->getEditIcon($this->seminar->getUid())
+				'edit_button',
+				$this->getEditIcon(
+					$this->seminar->getUid(), $this->seminar->getPageUid()
+				)
 			);
 			$this->template->setMarker(
-				'delete_button', $this->getDeleteIcon($this->seminar->getUid())
+				'delete_button',
+				$this->getDeleteIcon(
+					$this->seminar->getUid(), $this->seminar->getPageUid()
+				)
 			);
 			$this->template->setMarker(
 				'hide_unhide_button',
 				$this->getHideUnhideIcon(
-					$this->seminar->getUid(), $this->seminar->isHidden()
+					$this->seminar->getUid(),
+					$this->seminar->getPageUid(),
+					$this->seminar->isHidden()
 				)
 			);
 			$this->template->setMarker(
@@ -374,8 +382,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			&& !$this->seminar->isCanceled()
 			&& !$this->seminar->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
-			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord('pages', $pageData['uid']), 16)
+			&& $this->doesUserHaveAccess($this->seminar->getPageUid())
 		) {
 			$this->template->setMarker('uid', $this->seminar->getUid());
 			$this->template->setMarker(
@@ -407,8 +414,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			&& !$this->seminar->isConfirmed()
 			&& !$this->seminar->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
-			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord('pages', $pageData['uid']), 16)
+			&& $this->doesUserHaveAccess($this->seminar->getPageUid())
 		) {
 			$this->template->setMarker('uid', $this->seminar->getUid());
 			$this->template->setMarker(
