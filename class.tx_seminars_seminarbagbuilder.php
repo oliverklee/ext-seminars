@@ -1117,7 +1117,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events which are not fully-booked yet (or have a queue).
 	 */
 	public function limitToEventsWithVacancies() {
-		$seats = '(SELECT SUM(seats) FROM ' . SEMINARS_TABLE_ATTENDANCES . ' ' .
+		$seats = '(SELECT COALESCE(SUM(seats),0) FROM ' . SEMINARS_TABLE_ATTENDANCES . ' ' .
 			'WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid' .
 			tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) . ')';
 		$hasVacancies = '(attendees_max > (' . $seats . ' + offline_attendees))';

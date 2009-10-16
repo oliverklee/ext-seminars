@@ -7225,6 +7225,44 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
+	public function test_limitToEventsWithVacanciesForEventWithVacanciesAndNoAttendees_FindsThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('needs_registration' => 1, 'attendees_max' => 10)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	public function test_limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendees_FindsThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'needs_registration' => 1,
+				'attendees_max' => 10,
+				'offline_attendees' => 9,
+			)
+		);
+
+		$this->fixture->limitToEventsWithVacancies();
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
 
 	///////////////////////////////////////
 	// Tests concerning limitToOrganizers
