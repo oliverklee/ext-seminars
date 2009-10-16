@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#2619] Cleanup: Refactor tx_seminars_pi2
 - [#3445] Fix: Events with nonzero number of max registrations not shown if "show only events with vacancies" is checked
 - [#3440] Fix: Crash in the flexforms: Class not found
 - [#3295] Change: Hide the cancel/confirm buttons in the BE module if the logged-in user has no write access

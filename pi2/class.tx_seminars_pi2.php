@@ -191,8 +191,6 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			return '';
 		}
 
-		$result = $this->createRegistrationsHeading();
-
 		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_registrationBagBuilder'
 		);
@@ -205,7 +203,28 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 		$registrationBagBuilder->limitToEvent($eventUid);
 		$registrationBagBuilder->limitToExistingUsers();
-		$bag = $registrationBagBuilder->build();
+
+		return $this->createRegistrationsHeading() .
+			$this->getRegistrationsCsvList($registrationBagBuilder);
+	}
+
+	/**
+	 * Returns the list of registrations as CSV separated values.
+	 *
+	 * The fields are separated by semicolons and the lines by CRLF.
+	 *
+	 * @param tx_seminars_registrationBagBuilder $builder
+	 *        the bag builder already limited to the registrations which should
+	 *        be returned
+	 *
+	 * @return string the list of registrations, will be empty if no
+	 *                registrations have been given
+	 */
+	private function getRegistrationsCsvList(
+		tx_seminars_registrationBagBuilder $builder
+	) {
+		$result = '';
+		$bag = $builder->build();
 
 		foreach ($bag as $registration) {
 			$userData = $this->retrieveData(
@@ -228,6 +247,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				';', array_merge($userData, $registrationData)
 			) . CRLF;
 		}
+
 		$bag->__destruct();
 
 		return $result;
@@ -494,13 +514,10 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * for registration lists.
 	 */
 	private function setContentTypeForRegistrationLists() {
-		$this->setCsvContentType();
-		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-			'Content-disposition: attachment; filename=' .
-				$this->configGetter->getConfValueString(
-					'filenameForRegistrationsCsv'
-				),
-			true
+		$this->setPageTypeAndDisposition(
+			$this->configGetter->getConfValueString(
+				'filenameForRegistrationsCsv'
+			)
 		);
 	}
 
@@ -509,24 +526,26 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * for event lists.
 	 */
 	private function setContentTypeForEventLists() {
-		$this->setCsvContentType();
-		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-			'Content-disposition: attachment; filename=' .
-				$this->configGetter->getConfValueString('filenameForEventsCsv'),
-			true
+		$this->setPageTypeAndDisposition(
+			$this->configGetter->getConfValueString('filenameForEventsCsv')
 		);
 	}
 
 	/**
-	 * Sets the HTTP header: the content type for CSV.
+	 * Sets the page's content type to CSV and the page's content disposition to
+	 * the given filename.
+	 *
+	 * Adds the data directly to the page header.
+	 *
+	 * @param string $csvFileName
+	 *        the name for the page which is used as storage name, must not be
+	 *        empty
 	 */
-	private function setCsvContentType() {
-		// In addition to the CSV content type and the charset, announces that
-		// we provide a CSV header line.
+	private function setPageTypeAndDisposition($csvFileName) {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Content-type: text/csv; header=present; charset=' .
-				$this->configGetter->getConfValueString('charsetForCsv'),
-			true
+				$this->configGetter->getConfValueString('charsetForCsv') .
+				'Content-disposition: attachment; filename=' . $csvFileName
 		);
 	}
 
