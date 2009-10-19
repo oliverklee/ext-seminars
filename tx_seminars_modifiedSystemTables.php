@@ -127,4 +127,30 @@ t3lib_extMgm::addToAllTCAtypes(
 		'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
 		'tx_seminars_default_categories'
 );
+
+t3lib_div::loadTCA('be_groups');
+t3lib_extMgm::addTCAcolumns(
+	'be_groups',
+	array(
+		'tx_seminars_events_folder' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:be_groups.tx_seminars_events_folder',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'pages',
+				'size' => '1',
+				'minitems' => '0',
+				'maxitems' => '1',
+			),
+		),
+	),
+	1
+);
+
+t3lib_extMgm::addToAllTCAtypes(
+	'be_groups',
+	'--div--;LLL:EXT:seminars/locallang_db.xml:be_groups.tab_event_management,' .
+		'tx_seminars_events_folder'
+);
 ?>
