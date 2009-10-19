@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3437] Change: Use the same salutation in the back-end form e-mails as in the thank-you e-mails
 - [#3291] Feature: Add a configuration to BE user groups in which sysfolder event records created in the "events" BE module should be stored
 - [#3299] Change: Change the %s in the BE module form mails to %salutation/%anrede
 - [#3279] Change: Drop the picture from the speakers SQL and TCA

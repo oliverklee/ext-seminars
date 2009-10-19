@@ -38,18 +38,22 @@ require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_registration
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class tx_seminars_registrationchild extends tx_seminars_registration {
+class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * The constructor.
 	 *
 	 * @param integer UID of the registration record, must be > 0
 	 */
-	public function __construct($registrationUid) {
-		$dbResult = tx_oelib_db::select(
-			'*',
-			$this->tableName,
-			'uid = ' . $registrationUid
-		);
+	public function __construct($registrationUid = 0) {
+		if ($registrationUid > 0) {
+			$dbResult = tx_oelib_db::select(
+				'*',
+				$this->tableName,
+				'uid = ' . $registrationUid
+			);
+		} else {
+			$dbResult = false;
+		}
 
 		$contentObject = t3lib_div::makeInstance('tslib_cObj');
 		$contentObject->start('');

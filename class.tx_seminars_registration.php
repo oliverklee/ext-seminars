@@ -577,7 +577,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return tx_oelib_Model_FrontEndUser the front-end user of the registration
 	 */
 	public function getFrontEndUser() {
-		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')->find(
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->find(
 			$this->getUser()
 		);
 	}
@@ -593,7 +593,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			return false;
 		}
 
-		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')->
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->
 			existsModel(
 				$this->getUser()
 			);

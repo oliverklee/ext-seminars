@@ -1,0 +1,96 @@
+<?php
+/***************************************************************
+* Copyright notice
+*
+* (c) 2009 Bernd Schönbach <bernd@oliverklee.de>
+* All rights reserved
+*
+* This script is part of the TYPO3 project. The TYPO3 project is
+* free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* The GNU General Public License can be found at
+* http://www.gnu.org/copyleft/gpl.html.
+*
+* This script is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
+
+/**
+ * Class 'tx_seminars_EmailSalutation' for the 'seminars' extension.
+ *
+ * This class creates a salutation for e-mails.
+ *
+ * @package TYPO3
+ * @subpackage tx_seminars
+ *
+ * @author Bernd Schönbach <bernd@oliverklee.de>
+ */
+class tx_seminars_EmailSalutation {
+	/**
+	 * @var tx_oelib_Translator the translator for the localized salutation
+	 */
+	private $translator = null;
+
+	/**
+	 * the constructor
+	 */
+	public function __construct() {
+		$this->translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
+	}
+
+	/**
+	 * The destructor. Frees as much memory as possible.
+	 */
+	public function __destruct() {
+		unset($this->translator);
+	}
+
+	/**
+	 * Creates the salutation for the given registration.
+	 *
+	 * The salutation is localized and gender-specific and contains the name of
+	 * the user belonging to the registration.
+	 *
+	 * @param tx_seminars_registration $registration
+	 *        the registration to create the salutation for
+	 *
+	 * @return string the localized, gender-specific salutation, will not be
+	 *                empty
+	 */
+	public function getSalutation(tx_seminars_registration $registration) {
+		$user = $registration->getFrontEndUser();
+
+		$salutationMode = tx_oelib_ConfigurationRegistry::getInstance()->get(
+			'seminars')->getAsString('salutation');
+
+		switch ($salutationMode) {
+			case 'informal':
+				$salutation = sprintf(
+					$this->translator->translate('email_salutation_informal'),
+					$user->getFirstOrFullName()
+				);
+				break;
+			default:
+				$salutation =  sprintf(
+					$this->translator->translate(
+						'email_salutation_formal_' . $user->getGender()
+					), $user->getLastOrFullName()
+				);
+				break;
+		}
+
+		return $salutation;
+	}
+}
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_EmailSalutation.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_EmailSalutation.php']);
+}
+?>
