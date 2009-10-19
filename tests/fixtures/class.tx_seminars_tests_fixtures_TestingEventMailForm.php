@@ -36,6 +36,12 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_tests_fixtures_TestingEventMailForm extends tx_seminars_BackEnd_EventMailForm {
 	/**
+	 * @var the prefix for all locallang keys for prefilling the form,
+	 *      must not be empty
+	 */
+	protected $formFieldPrefix = 'testForm_prefillField_';
+
+	/**
 	 * Returns the label for the submit button.
 	 *
 	 * @return string label for the submit button, will not be empty
@@ -47,21 +53,22 @@ class tx_seminars_tests_fixtures_TestingEventMailForm extends tx_seminars_BackEn
 	/**
 	 * Returns the initial value for a certain field.
 	 *
-	 * @param string the field name, must not be empty
+	 * @param string $fieldName
+	 *        the name of the field for which to get the initial value, must be
+	 *        either 'subject' or 'messageBody'
 	 *
 	 * @return string the initial value of the field, will be empty if no
 	 *                initial value is defined
 	 */
-	protected function getInitialValue($fieldName) {
-		$result = $GLOBALS['LANG']->getLL(
-			'eventMailForm_prefillFieldForConfirmation_' . $fieldName
-		);
-		if ($fieldName == 'subject') {
-			$this->getEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
-			$result .= ' ' . $this->getEvent()->getTitleAndDate();
-		}
+	public function getInitialValue($fieldName) {
+		return parent::getInitialValue($fieldName);
+	}
 
-		return $result;
+	/**
+	 * Sets the date format for the event.
+	 */
+	public function setDateFormat() {
+		$this->getEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 	}
 }
 ?>

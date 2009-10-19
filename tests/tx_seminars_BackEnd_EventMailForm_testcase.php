@@ -96,6 +96,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			array(
 				'organizers' => 0,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
+				'title' => 'Dummy Event',
 			)
 		);
 
@@ -109,6 +110,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_tests_fixtures_TestingEventMailForm(
 			$this->eventUid
 		);
+		$this->fixture->setDateFormat();
 	}
 
 	public function tearDown() {
@@ -145,6 +147,35 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'?id=42',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderContainsEventTitleInSubjectFieldForNewForm() {
+		$this->assertContains(
+			'Dummy Event',
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderContainsPrefilledBodyField() {
+		$this->assertContains(
+			$GLOBALS['LANG']->getLL('testForm_prefillField_messageBody'),
+			$this->fixture->render()
+		);
+	}
+
+	public function testRenderDoesNotPrefillSubjectFieldIfEmptyStringWasSentViaPost() {
+		$this->fixture->setPostData(
+			array(
+				'action' => 'cancelEvent',
+				'isSubmitted' => 'true',
+				'subject' => '',
+			)
+		);
+
+		$this->assertNotContains(
+			'Dummy event',
 			$this->fixture->render()
 		);
 	}
@@ -354,7 +385,8 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 				'action' => 'confirmEvent',
 				'isSubmitted' => 'true',
 				'subject' => 'foo',
-				'messageBody' => 'foo bar %s',
+				'messageBody' => 'foo bar %' .
+					$GLOBALS['LANG']->getLL('mailForm_salutation'),
 			)
 		);
 		$this->fixture->render();
@@ -365,6 +397,32 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
+	}
+
+	public function testSendEmailToRegistrationsWithoutReplacementMarkerInBodyDoesNotCrash() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array(
+						'email' => 'foo@valid-email.org', 'name' => 'test user'
+					)
+				)
+			)
+		);
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar foo',
+			)
+		);
+
+		$this->fixture->render();
 	}
 
 	public function testSendEmailToRegistrationsUsesSelectedOrganizerAsSender() {
@@ -470,6 +528,46 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			),
 			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning getInitialValue
+	/////////////////////////////////////
+
+	public function test_getInitialValueForSubject_AppendsEventTitle() {
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->eventUid, array('title' => 'FooBar')
+		);
+
+		$fixture = new tx_seminars_tests_fixtures_TestingEventMailForm(
+			$this->eventUid
+		);
+
+		$this->assertContains(
+			'FooBar',
+			$fixture->getInitialValue('subject')
+		);
+
+		$fixture->__destruct();
+	}
+
+	public function test_getInitialValueForSubject_AppendsEventDate() {
+		$beginDate = strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42);
+
+		$this->assertContains(
+			$beginDate,
+			$this->fixture->getInitialValue('subject')
+		);
+	}
+
+	public function test_getInitialValueForFoo_ThrowsException() {
+		$this->setExpectedException(
+			'Exception',
+			'There is no initial value for the field "foo" defined.'
+		);
+
+		$this->fixture->getInitialValue('foo');
 	}
 }
 ?>

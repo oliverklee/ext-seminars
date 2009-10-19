@@ -127,23 +127,9 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 
 
 
-	/////////////////////////////////////////////
+	///////////////////////////////////////////////
 	// Tests regarding the rendering of the form.
-	/////////////////////////////////////////////
-
-	public function testRenderContainsEventTitleInSubjectFieldForNewForm() {
-		$this->assertContains(
-			'Dummy event',
-			$this->fixture->render()
-		);
-	}
-
-	public function testRenderContainsPrefilledBodyField() {
-		$this->assertContains(
-			$GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody'),
-			$this->fixture->render()
-		);
-	}
+	///////////////////////////////////////////////
 
 	public function testRenderContainsSubmitButton() {
 		$this->assertContains(
@@ -154,17 +140,9 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		);
 	}
 
-	public function testRenderDoesNotPrefillSubjectFieldIfEmptyStringWasSentViaPost() {
-		$this->fixture->setPostData(
-			array(
-				'action' => 'cancelEvent',
-				'isSubmitted' => 'true',
-				'subject' => '',
-			)
-		);
-
-		$this->assertNotContains(
-			'Dummy event',
+	public function testRenderContainsPrefilledBodyFieldWithLocalizedSalutation() {
+		$this->assertContains(
+			$GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$this->fixture->render()
 		);
 	}
@@ -210,6 +188,45 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 				'uid = ' . $this->eventUid . ' AND cancelled = ' .
 					tx_seminars_seminar::STATUS_CANCELED
 			)
+		);
+	}
+
+
+	/////////////////////////////////
+	// Tests concerning the e-mails
+	/////////////////////////////////
+
+	public function testSendEmailToRegistrationsSendsEmailWithNameOfRegisteredUserOnSubmitOfValidForm() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'',
+					array('email' => 'foo@valid-email.org', 'name' => 'foo User')
+				)
+			)
+		);
+
+		$messageBody = str_replace(
+			'%s',
+			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
+			$GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody')
+		);
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => $messageBody,
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertContains(
+			'foo User',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
 	}
 }

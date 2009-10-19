@@ -44,31 +44,18 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Event
 	protected $statusToSet = tx_seminars_seminar::STATUS_CONFIRMED;
 
 	/**
+	 * @var the prefix for all locallang keys for prefilling the form,
+	 *      must not be empty
+	 */
+	protected $formFieldPrefix = 'confirmMailForm_prefillField_';
+
+	/**
 	 * Returns the label for the submit button.
 	 *
 	 * @return string label for the submit button, will not be empty
 	 */
 	protected function getSubmitButtonLabel() {
 		return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
-	}
-
-	/**
-	 * Returns the initial value for a certain field.
-	 *
-	 * @param string the field name, must not be empty
-	 *
-	 * @return string the initial value of the field, will be empty if no
-	 *                initial value is defined
-	 */
-	protected function getInitialValue($fieldName) {
-		$result = $GLOBALS['LANG']->getLL(
-			'confirmMailForm_prefillField_' . $fieldName
-		);
-		if ($fieldName == 'subject') {
-			$result .= ' ' . $this->getEvent()->getTitleAndDate();
-		}
-
-		return $result;
 	}
 }
 

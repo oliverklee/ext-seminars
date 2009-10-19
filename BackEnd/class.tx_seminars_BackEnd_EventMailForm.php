@@ -59,6 +59,12 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	protected $action;
 
 	/**
+	 * @var string the prefix for all locallang keys for prefilling the form,
+	 *             must not be empty
+	 */
+	protected $formFieldPrefix;
+
+	/**
 	 * @var integer the status to set when submitting the form
 	 */
 	protected $statusToSet = tx_seminars_seminar::STATUS_PLANNED;
@@ -388,8 +394,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 			$eMail->setSubject($this->getPostData('subject'));
 			$eMail->addRecipient($registration->getFrontEndUser());
 			$eMail->setMessage(
-				sprintf($this->getPostData('messageBody'),
-				$registration->getFrontEndUser()->getName())
+				$this->createMessageBody($registration->getFrontEndUser()->getName())
 			);
 
 			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
@@ -441,12 +446,88 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	/**
 	 * Returns the initial value for a certain field.
 	 *
-	 * @param string the field name, must not be empty
+	 * @param string $fieldName
+	 *        the name of the field for which to get the initial value, must be
+	 *        either 'subject' or 'messageBody'
 	 *
 	 * @return string the initial value of the field, will be empty if no
 	 *                initial value is defined
 	 */
-	abstract protected function getInitialValue($fieldName);
+	protected function getInitialValue($fieldName) {
+		switch ($fieldName) {
+			case 'subject':
+				$result = $this->appendTitleAndDate($this->formFieldPrefix);
+				break;
+			case 'messageBody':
+				$result = $this->localizeSalutationPlaceholder(
+					$this->formFieldPrefix
+				);
+				break;
+			default:
+				throw new Exception('There is no initial value for the field "' .
+					$fieldName . '" defined.'
+				);
+		}
+
+		return $result;
+
+	}
+
+	/**
+	 * Appends the title and the date to the subject.
+	 *
+	 * @param string $prefix
+	 *        the prefix for the locallang key of the subject, must be either
+	 *        "cancelMailForm_prefillField_" or "confirmMailForm_prefillField_"
+	 *        and always have a trailing underscore
+	 *
+	 * @return string the subject for the mail form suffixed with the event
+	 *                title and date, will be empty if no locallang label
+	 *                could be found for the given prefix
+	 */
+	private function appendTitleAndDate($prefix) {
+		return $GLOBALS['LANG']->getLL($prefix . 'subject') . ' ' .
+			$this->getEvent()->getTitleAndDate();
+	}
+
+	/**
+	 * Replaces the string placeholder "%s" with a localized placeholder for
+	 * the salutation.
+	 *
+	 * @param string $prefix
+	 *        the prefix for the locallang key of the messageBody, must be
+	 *        either "cancelMailForm_prefillField_" or
+	 *        "confirmMailForm_prefillField_" and always have a trailing
+	 *        underscore
+	 *
+	 * @return string the content for the prefilled messageBody field with the
+	 *                replaced placeholders, will be empty if no locallang label
+	 *                for the given prefix could be found
+	 */
+	private function localizeSalutationPlaceholder($prefix) {
+		return sprintf(
+			$GLOBALS['LANG']->getLL($prefix . 'messageBody'),
+			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation')
+		);
+	}
+
+	/**
+	 * Creates the message body for the e-mail.
+	 *
+	 * @param string $userName
+	 *        the full name of the user who receives the mail, must not be empty
+	 *
+	 * @return string the messsage with the salutation replaced by the user's
+	 *                name, will be empty if no message has been set in the POST
+	 *                data
+	 */
+	private function createMessageBody($name) {
+		return str_replace(
+			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
+			$name,
+			$this->getPostData('messageBody')
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_EventMailForm.php']) {

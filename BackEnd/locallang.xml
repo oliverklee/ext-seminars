@@ -57,6 +57,9 @@ the event to which you are registered is confirmed now.</label>
 the event you're registered for has been canceled.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
+			<label index="mailForm_salutation">salutation</label>
+			<label index="testForm_prefillField_subject">Event tested</label>
+			<label index="testForm_prefillField_messageBody">This is the message body.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Arrangementer</label>
@@ -131,6 +134,9 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun zugesagt.</label>
 die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysFolder im Seitenbaum aus.</label>
 			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische seminars-template im TS-Setup dieses SysFolders ein.</label>
+			<label index="mailForm_salutation">Anrede</label>
+			<label index="testForm_prefillField_subject">Event getestet</label>
+			<label index="testForm_prefillField_messageBody">Dies ist der Nachrichten körper.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Evenementen</label>
@@ -275,6 +281,9 @@ die Veranstaltung zu welcher Sie angemeldet sind, wurde nun abgesagt.</label>
 			<label index="cancelMailForm_prefillField_messageBody" type="integer">240814090</label>
 			<label index="message_noPageTypeSelected" type="integer">217321592</label>
 			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
+			<label index="mailForm_salutation" type="integer">128380848</label>
+			<label index="testForm_prefillField_subject" type="integer">115548765</label>
+			<label index="testForm_prefillField_messageBody" type="integer">10500938</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -423,6 +432,9 @@ the event to which you are registered is confirmed now.</label>
 the event you're registered for has been canceled.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
+			<label index="mailForm_salutation">salutation</label>
+			<label index="testForm_prefillField_subject">Event tested</label>
+			<label index="testForm_prefillField_messageBody">This is the message body.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>
