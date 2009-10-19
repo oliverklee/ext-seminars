@@ -99,7 +99,6 @@
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
 			<label index="tx_seminars_speakers.skills">Skills:</label>
-			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
 			<label index="tx_seminars_speakers.phone_work">Phone number (work):</label>
@@ -305,7 +304,6 @@
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Beschreibung:</label>
 			<label index="tx_seminars_speakers.skills">Fähigkeiten:</label>
-			<label index="tx_seminars_speakers.picture">Foto:</label>
 			<label index="tx_seminars_speakers.notes">Interne Notizen:</label>
 			<label index="tx_seminars_speakers.address">Adresse:</label>
 			<label index="tx_seminars_speakers.phone_work">Telefonnummer (Arbeit):</label>
@@ -481,7 +479,6 @@
 			<label index="tx_seminars_speakers.organization">Organisatie:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Omschrijving:</label>
-			<label index="tx_seminars_speakers.picture">Foto:</label>
 			<label index="tx_seminars_speakers.notes">Interne Notities:</label>
 			<label index="tx_seminars_speakers.address">Adres:</label>
 			<label index="tx_seminars_speakers.phone_work">Tel. (werk):</label>
@@ -643,7 +640,6 @@
 			<label index="tx_seminars_speakers.homepage">Hjemmeside:</label>
 			<label index="tx_seminars_speakers.description">Beskrivelse:</label>
 			<label index="tx_seminars_speakers.skills">Færdigheder:</label>
-			<label index="tx_seminars_speakers.picture">Billede:</label>
 			<label index="tx_seminars_speakers.notes">Interne noter:</label>
 			<label index="tx_seminars_speakers.address">Adresse:</label>
 			<label index="tx_seminars_speakers.phone_work">Telefon (arbejde):</label>
@@ -794,7 +790,6 @@
 			<label index="tx_seminars_speakers.homepage">Сайт:</label>
 			<label index="tx_seminars_speakers.description">Описание:</label>
 			<label index="tx_seminars_speakers.skills">Способности</label>
-			<label index="tx_seminars_speakers.picture">Картинка:</label>
 			<label index="tx_seminars_speakers.notes">Внутренние заметки:</label>
 			<label index="tx_seminars_speakers.address">Адрес:</label>
 			<label index="tx_seminars_speakers.phone_work">Рабочий телефон:</label>
@@ -945,7 +940,6 @@
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Descrizione:</label>
 			<label index="tx_seminars_speakers.skills">Capacità:</label>
-			<label index="tx_seminars_speakers.picture">Immagine:</label>
 			<label index="tx_seminars_speakers.notes">Note interne:</label>
 			<label index="tx_seminars_speakers.address">Indirizzo:</label>
 			<label index="tx_seminars_speakers.phone_work">Telefono ufficio:</label>
@@ -1097,7 +1091,6 @@
 			<label index="tx_seminars_speakers.homepage">Site internet:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
 			<label index="tx_seminars_speakers.skills">Compétences:</label>
-			<label index="tx_seminars_speakers.picture">Photo:</label>
 			<label index="tx_seminars_speakers.notes">Notes internes:</label>
 			<label index="tx_seminars_speakers.address">Adresse:</label>
 			<label index="tx_seminars_speakers.phone_work">Numéro de téléphone (prof.):</label>
@@ -1260,7 +1253,6 @@
 			<label index="tx_seminars_speakers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_speakers.description" type="integer">218120871</label>
 			<label index="tx_seminars_speakers.skills" type="integer">89069054</label>
-			<label index="tx_seminars_speakers.picture" type="integer">131759065</label>
 			<label index="tx_seminars_speakers.notes" type="integer">121419833</label>
 			<label index="tx_seminars_speakers.address" type="integer">46079327</label>
 			<label index="tx_seminars_speakers.phone_work" type="integer">234485445</label>
@@ -1416,7 +1408,6 @@
 			<label index="tx_seminars_speakers.organization" type="integer">119551324</label>
 			<label index="tx_seminars_speakers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_speakers.description" type="integer">218120871</label>
-			<label index="tx_seminars_speakers.picture" type="integer">131759065</label>
 			<label index="tx_seminars_speakers.notes" type="integer">121419833</label>
 			<label index="tx_seminars_speakers.address" type="integer">46079327</label>
 			<label index="tx_seminars_speakers.phone_work" type="integer">234485445</label>
@@ -1571,7 +1562,6 @@
 			<label index="tx_seminars_speakers.organization" type="integer">119551324</label>
 			<label index="tx_seminars_speakers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_speakers.description" type="integer">218120871</label>
-			<label index="tx_seminars_speakers.picture" type="integer">131759065</label>
 			<label index="tx_seminars_speakers.notes" type="integer">121419833</label>
 			<label index="tx_seminars_speakers.address" type="integer">46079327</label>
 			<label index="tx_seminars_speakers.phone_work" type="integer">234485445</label>
@@ -1751,7 +1741,6 @@
 			<label index="tx_seminars_speakers.organization" type="integer">119551324</label>
 			<label index="tx_seminars_speakers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_speakers.description" type="integer">218120871</label>
-			<label index="tx_seminars_speakers.picture" type="integer">131759065</label>
 			<label index="tx_seminars_speakers.notes" type="integer">121419833</label>
 			<label index="tx_seminars_speakers.address" type="integer">46079327</label>
 			<label index="tx_seminars_speakers.phone_work" type="integer">234485445</label>
@@ -1905,7 +1894,6 @@
 			<label index="tx_seminars_speakers.organization" type="integer">119551324</label>
 			<label index="tx_seminars_speakers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_speakers.description" type="integer">218120871</label>
-			<label index="tx_seminars_speakers.picture" type="integer">131759065</label>
 			<label index="tx_seminars_speakers.notes" type="integer">121419833</label>
 			<label index="tx_seminars_speakers.address" type="integer">46079327</label>
 			<label index="tx_seminars_speakers.phone_work" type="integer">234485445</label>
@@ -2057,7 +2045,6 @@
 			<label index="tx_seminars_speakers.organization" type="integer">119551324</label>
 			<label index="tx_seminars_speakers.homepage" type="integer">78145407</label>
 			<label index="tx_seminars_speakers.description" type="integer">218120871</label>
-			<label index="tx_seminars_speakers.picture" type="integer">131759065</label>
 			<label index="tx_seminars_speakers.notes" type="integer">121419833</label>
 			<label index="tx_seminars_speakers.address" type="integer">46079327</label>
 			<label index="tx_seminars_speakers.phone_work" type="integer">234485445</label>
@@ -2212,7 +2199,6 @@
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
 			<label index="tx_seminars_speakers.skills">Skills:</label>
-			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
 			<label index="tx_seminars_speakers.phone_work">Phone number (work):</label>
@@ -2386,7 +2372,6 @@
 			<label index="tx_seminars_speakers.organization">Organization:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
-			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
 			<label index="tx_seminars_speakers.phone_work">Phone number (work):</label>
@@ -2566,7 +2551,6 @@
 			<label index="tx_seminars_speakers.organization">Organization:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
-			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
 			<label index="tx_seminars_speakers.phone_work">Phone number (work):</label>
@@ -2716,7 +2700,6 @@
 			<label index="tx_seminars_speakers.organization">Organization:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
-			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
 			<label index="tx_seminars_speakers.phone_work">Phone number (work):</label>
@@ -2872,7 +2855,6 @@
 			<label index="tx_seminars_speakers.organization">Organization:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
-			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
 			<label index="tx_seminars_speakers.phone_work">Phone number (work):</label>
@@ -3024,7 +3006,6 @@
 			<label index="tx_seminars_speakers.organization">Organization:</label>
 			<label index="tx_seminars_speakers.homepage">Homepage:</label>
 			<label index="tx_seminars_speakers.description">Description:</label>
-			<label index="tx_seminars_speakers.picture">Picture:</label>
 			<label index="tx_seminars_speakers.notes">Internal Notes:</label>
 			<label index="tx_seminars_speakers.address">Address:</label>
 			<label index="tx_seminars_speakers.phone_work">Phone number (work):</label>

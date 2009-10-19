@@ -1177,21 +1177,6 @@ $TCA['tx_seminars_speakers'] = array(
 				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_skills'),
 			),
 		),
-		'picture' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.picture',
-			'config' => array(
-				'type' => 'group',
-				'internal_type' => 'file',
-				'allowed' => 'gif,png,jpeg,jpg',
-				'max_size' => 256,
-				'uploadfolder' => 'uploads/tx_seminars',
-				'show_thumbs' => 1,
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
-			),
-		),
 		'notes' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.notes',
