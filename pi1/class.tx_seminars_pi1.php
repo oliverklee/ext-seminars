@@ -292,9 +292,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					$categoryList->__destruct();
 					unset($categoryList);
 					break;
-				case 'csv_export_registrations':
-					$result = $this->createCsvExportOfRegistrations();
-					break;
 				case 'event_headline':
 					$eventHeadline = tx_oelib_ObjectFactory::make(
 						'tx_seminars_pi1_frontEndEventHeadline',
