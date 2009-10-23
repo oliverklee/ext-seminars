@@ -172,6 +172,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkNumberOfClicksForRegistration();
 		$this->checkNumberOfFirstRegistrationPage();
 		$this->checkNumberOfLastRegistrationPage();
+		$this->checkRegistrationPageNumbers();
 		$this->checkGeneralPriceInSingle();
 		$this->checkEventFieldsOnRegistrationPage();
 		$this->checkShowRegistrationFields();
@@ -2190,6 +2191,34 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'correctly, the image might be too large or not get ' .
 				'displayed at all.'
 		);
+	}
+
+	/**
+	 * Checks the relation between last and first page and the number of clicks.
+	 */
+	private function checkRegistrationPageNumbers() {
+		$clicks = $this->objectToCheck->getConfValueInteger(
+			'numberOfClicksForRegistration', 's_registration'
+		);
+		$firstPage = $this->objectToCheck->getConfValueInteger(
+			'numberOfFirstRegistrationPage'
+		);
+		$lastPage = $this->objectToCheck->getConfValueInteger(
+			'numberOfLastRegistrationPage'
+		);
+		$calculatedSteps = $lastPage - $firstPage + 2;
+
+		if ($calculatedSteps != $clicks) {
+			$message = 'The specified number of clicks does not correspond ' .
+				'to the number of the first and last registration page. ' .
+				'Please correct the values of <strong>' .
+				'numberOfClicksForRegistration</strong>, ' .
+				'<strong>numberOfFirstRegistrationPage</strong> or ' .
+				'<strong>numberOfLastRegistrationPage</strong>. A not ' .
+				'properly configured setting will lead to a misleading ' .
+				'number of steps, shown on the registration page.';
+			$this->setErrorMessage($message);
+		}
 	}
 }
 
