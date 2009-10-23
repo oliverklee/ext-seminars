@@ -22,29 +22,49 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+
 /**
- * Class 'tx_seminars_Model_BackEndUserGroup' for the 'seminars' extension.
- *
- * This class represents a back-end usergroup.
+ * Testcase for the tx_seminars_Mapper_BackEndUser class in the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Model_BackEndUserGroup extends tx_oelib_Model_BackEndUserGroup {
+class tx_seminars_Mapper_BackEndUser_testcase extends tx_phpunit_testcase {
 	/**
-	 * Returns the PID for the storage of new events.
-	 *
-	 * @return integer the PID for the storage of new events, will be 0 if no
-	 *                 PID has been set
+	 * @var tx_oelib_testingFramework for creating dummy records
 	 */
-	public function getEventFolder() {
-		return $this->getAsInteger('tx_seminars_events_folder');
-	}
-}
+	private $testingFramework;
+	/**
+	 * @var tx_seminars_Mapper_BackEndUser the object to test
+	 */
+	private $fixture;
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUserGroup.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUserGroup.php']);
+	public function setUp() {
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+
+		$this->fixture = new tx_seminars_Mapper_BackEndUser();
+	}
+
+	public function tearDown() {
+		$this->testingFramework->cleanUp();
+
+		$this->fixture->__destruct();
+		unset($this->fixture, $this->testingFramework);
+	}
+
+
+	//////////////////////////
+	// Tests concerning find
+	//////////////////////////
+
+	public function testFindWithUidOfExistingRecordReturnsBackEndUserInstance() {
+		$this->assertTrue(
+			$this->fixture->find($this->testingFramework->createBackEndUser())
+				instanceof tx_seminars_Model_BackEndUser
+		);
+	}
 }
 ?>

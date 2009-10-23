@@ -23,28 +23,46 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_BackEndUserGroup' for the 'seminars' extension.
+ * Class 'tx_seminars_Model_BackEndUser' for the 'seminars' extension.
  *
- * This class represents a back-end usergroup.
+ * This class represents a back-end user.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Model_BackEndUserGroup extends tx_oelib_Model_BackEndUserGroup {
+class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	/**
-	 * Returns the PID for the storage of new events.
+	 * Returns the PID for newly created event records.
 	 *
-	 * @return integer the PID for the storage of new events, will be 0 if no
-	 *                 PID has been set
+	 * Returns the first PID found in the user's groups greater than zero.
+	 *
+	 * @return integer the PID for newly created event records, will be 0 if no
+	 *                 group has a PID set for new event records
 	 */
-	public function getEventFolder() {
-		return $this->getAsInteger('tx_seminars_events_folder');
+	public function getEventFolderFromGroup() {
+		$groups = $this->getAllGroups();
+		if ($groups->isEmpty) {
+			return 0;
+		}
+
+		$result = 0;
+
+		foreach ($groups as $group) {
+			$eventFolderPid = $group->getEventFolder();
+			if ($eventFolderPid > 0) {
+				$result = $eventFolderPid;
+				break;
+			}
+		}
+
+		return $result;
 	}
+
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUserGroup.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUserGroup.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUser.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUser.php']);
 }
 ?>

@@ -70,5 +70,27 @@ class tx_seminars_Model_BackEndUserGroup_testcase extends tx_phpunit_testcase {
 			$this->fixture->getTitle()
 		);
 	}
+
+	////////////////////////////////////
+	// Tests concerning getEventFolder
+	/////////////////////////////////////
+
+	public function test_getEventFolderForNoSetEventFolder_ReturnsZero() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getEventFolder()
+		);
+	}
+
+	public function test_getEventFolderForSetEventFolder_ReturnsEventFolderPid() {
+		$this->fixture->setData(array('tx_seminars_events_folder' => 42));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getEventFolder()
+		);
+	}
 }
 ?>
