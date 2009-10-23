@@ -65,31 +65,24 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	//////////////////////
 
 	/**
-	 * Creates a registration with a FE-user with the given gender.
-	 *
-	 * The user will have the name "Foo".
+	 * Creates an FE-user with the given gender and the name "Foo".
 	 *
 	 * @param integer $gender
-	 *        the gender for the FE-user, must be one of
+	 *        the gender for the FE user, must be one of
 	 *        "tx_oelib_Model_FrontEndUser::GENDER_MALE",
 	 *        "tx_oelib_Model_FrontEndUser::GENDER_FEMALE" or
 	 *        "tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN", may be empty
 	 *
-	 * @return tx_seminars_registration the registration with the user, will
-	 *                                  not be null
+	 * @return tx_seminars_Model_FrontEndUser the loaded testing model of a
+	 *                                        FE user
 	 */
-	private function createRegistrationWithUser(
+	private function createFrontEndUser(
 		$gender = tx_oelib_Model_FrontEndUser::GENDER_MALE
 	) {
-		$feUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
 			->getLoadedTestingModel(
 				array('name' => 'Foo', 'gender' => $gender)
 		);
-
-		$registration = new tx_seminars_registrationchild();
-		$registration->setFrontEndUserUID($feUser->getUid());
-
-		return $registration;
 	}
 
 
@@ -97,26 +90,17 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	// Tests concerning the utility functions
 	///////////////////////////////////////////
 
-	public function test_createRegistrationWithUser_ReturnsRegistration() {
+	public function test_createFrontEndUser_ReturnsFeUserModel() {
 		$this->assertTrue(
-			$this->createRegistrationWithUser() instanceof tx_seminars_registration
+			$this->createFrontEndUser() instanceof tx_seminars_Model_FrontEndUser
 		);
 	}
 
-	public function test_createRegistrationWithUser_RelatesFrontEndUserWithRegistration() {
-		$this->assertTrue(
-			$this->createRegistrationWithUser()->hasExistingFrontEndUser()
-		);
-	}
-
-	public function test_createRegistrationWithUserForGivenGender_AssignesGenderToFrontEndUser() {
-		$registration = $this->createRegistrationWithUser(
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE
-		);
-
+	public function test_createFrontEndUserForGivenGender_AssignesGenderToFrontEndUser() {
 		$this->assertEquals(
 			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
-			$registration->getFrontEndUser()->getGender()
+			$this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE)
+				->getGender()
 		);
 	}
 
@@ -128,12 +112,12 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	public function test_getSalutation_ReturnsUsernameOfRegistration() {
 		$this->assertContains(
 			'Foo',
-			$this->fixture->getSalutation($this->createRegistrationWithUser())
+			$this->fixture->getSalutation($this->createFrontEndUser())
 		);
 	}
 
 	public function test_getSalutationForMaleUser_ReturnsMaleSalutation() {
-		$registration = $this->createRegistrationWithUser(
+		$user = $this->createFrontEndUser(
 			tx_oelib_Model_FrontEndUser::GENDER_MALE
 		);
 
@@ -141,14 +125,14 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 			sprintf(
 				tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 					->translate('email_salutation_formal_0'),
-				$registration->getFrontEndUser()->getLastOrFullName()
+				$user->getLastOrFullName()
 			),
-			$this->fixture->getSalutation($registration)
+			$this->fixture->getSalutation($user)
 		);
 	}
 
 	public function test_getSalutationForFemaleUser_ReturnsFemaleSalutation() {
-		$registration = $this->createRegistrationWithUser(
+		$user = $this->createFrontEndUser(
 			tx_oelib_Model_FrontEndUser::GENDER_FEMALE
 		);
 
@@ -156,14 +140,14 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 			sprintf(
 				tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 					->translate('email_salutation_formal_1'),
-				$registration->getFrontEndUser()->getLastOrFullName()
+				$user->getLastOrFullName()
 			),
-			$this->fixture->getSalutation($registration)
+			$this->fixture->getSalutation($user)
 		);
 	}
 
 	public function test_getSalutationForUserWithUnknownGender_ReturnsGenderUnknownSalutation() {
-		$registration = $this->createRegistrationWithUser(
+		$user = $this->createFrontEndUser(
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
 		);
 
@@ -171,14 +155,14 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 			sprintf(
 				tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 					->translate('email_salutation_formal_2'),
-				$registration->getFrontEndUser()->getLastOrFullName()
+				$user->getLastOrFullName()
 			),
-			$this->fixture->getSalutation($registration)
+			$this->fixture->getSalutation($user)
 		);
 	}
 
 	public function test_getSalutationForInformalSalutation_ReturnsInformalSalutation() {
-		$registration = $this->createRegistrationWithUser();
+		$user = $this->createFrontEndUser();
 		tx_oelib_ConfigurationRegistry::getInstance()->get(
 			'seminars')->setAsString('salutation', 'informal');
 
@@ -186,9 +170,9 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 			sprintf(
 				tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 					->translate('email_salutation_informal'),
-				$registration->getFrontEndUser()->getLastOrFullName()
+				$user->getLastOrFullName()
 			),
-			$this->fixture->getSalutation($registration)
+			$this->fixture->getSalutation($user)
 		);
 	}
 }
