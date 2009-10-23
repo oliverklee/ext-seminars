@@ -214,6 +214,7 @@
 			<label index="owner_feuser">Front-end user who has created this record:</label>
 			<label index="be_groups.tab_event_management">Event management</label>
 			<label index="be_groups.tx_seminars_events_folder">Sysfolder for new events</label>
+			<label index="be_groups.tx_seminars_registrations_folder">Sysfolder for new registrations</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminare</label>
@@ -421,6 +422,7 @@
 			<label index="owner_feuser">Frontend-User, der diesen Datensatz eingetragen hat:</label>
 			<label index="be_groups.tab_event_management">Veranstaltungsverwaltung</label>
 			<label index="be_groups.tx_seminars_events_folder">SysFolder für neue Veranstaltungen</label>
+			<label index="be_groups.tx_seminars_registrations_folder">SysFolder für neue Anmeldungen</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
@@ -1383,6 +1385,7 @@
 			<label index="owner_feuser" type="integer">36410852</label>
 			<label index="be_groups.tab_event_management" type="integer">136062963</label>
 			<label index="be_groups.tx_seminars_events_folder" type="integer">177662722</label>
+			<label index="be_groups.tx_seminars_registrations_folder" type="integer">253295245</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1" type="integer">146176001</label>
@@ -2346,6 +2349,7 @@
 			<label index="owner_feuser">Front-end user who has created this record:</label>
 			<label index="be_groups.tab_event_management">Event management</label>
 			<label index="be_groups.tx_seminars_events_folder">Sysfolder for new events</label>
+			<label index="be_groups.tx_seminars_registrations_folder">Sysfolder for new registrations</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>

@@ -73,7 +73,7 @@ class tx_seminars_Model_BackEndUserGroup_testcase extends tx_phpunit_testcase {
 
 	////////////////////////////////////
 	// Tests concerning getEventFolder
-	/////////////////////////////////////
+	////////////////////////////////////
 
 	public function test_getEventFolderForNoSetEventFolder_ReturnsZero() {
 		$this->fixture->setData(array());
@@ -90,6 +90,30 @@ class tx_seminars_Model_BackEndUserGroup_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			42,
 			$this->fixture->getEventFolder()
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning getRegistrationFolder
+	///////////////////////////////////////////
+
+
+	public function test_getRegistrationFolderForNoSetRegistrationFolder_ReturnsZero() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getRegistrationFolder()
+		);
+	}
+
+	public function test_getRegistrationFolderForSetRegistrationFolder_ReturnsRegistrationFolderPid() {
+		$this->fixture->setData(array('tx_seminars_registrations_folder' => 42));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getRegistrationFolder()
 		);
 	}
 }

@@ -36,12 +36,39 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	/**
 	 * Returns the PID for newly created event records.
 	 *
-	 * Returns the first PID found in the user's groups greater than zero.
+	 * This will be the first PID found in the user's groups greater than zero
 	 *
 	 * @return integer the PID for newly created event records, will be 0 if no
 	 *                 group has a PID set for new event records
 	 */
 	public function getEventFolderFromGroup() {
+		return $this->getRecordFolderFromGroup('event');
+	}
+
+	/**
+	 * Returns the PID for newly created registration records.
+	 *
+	 * This will be the first PID found in the user's groups greater than zero
+	 *
+	 * @return integer the PID for newly created registration records, will be
+	 *                 0 if no group has a PID set for new registration records
+	 */
+	public function getRegistrationFolderFromGroup() {
+		return $this->getRecordFolderFromGroup('registration');
+	}
+
+	/**
+	 * Returns the PID for newly created records of the given type.
+	 *
+	 * This will be the first PID found in the user's groups greater than zero
+	 *
+	 * @param string $type
+	 *        the type of the record, must be "event" or "registration"
+	 *
+	 * @return integer the PID for newly created records, will be 0 if no group
+	 *                 has a PID set for new records of the given type
+	 */
+	private function getRecordFolderFromGroup($type) {
 		$groups = $this->getAllGroups();
 		if ($groups->isEmpty) {
 			return 0;
@@ -50,16 +77,28 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 		$result = 0;
 
 		foreach ($groups as $group) {
-			$eventFolderPid = $group->getEventFolder();
-			if ($eventFolderPid > 0) {
-				$result = $eventFolderPid;
+			switch ($type) {
+				case 'event':
+					$recordFolderPid = $group->getEventFolder();
+					break;
+				case 'registration':
+					$recordFolderPid = $group->getRegistrationFolder();
+					break;
+				default:
+					throw new Exception(
+						'The given record folder type "' . $type .
+							'" was not valid.'
+					);
+			}
+
+			if ($recordFolderPid > 0) {
+				$result = $recordFolderPid;
 				break;
 			}
 		}
 
 		return $result;
 	}
-
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUser.php']) {

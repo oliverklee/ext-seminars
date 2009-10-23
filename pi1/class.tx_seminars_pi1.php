@@ -2947,7 +2947,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 */
 	private function setRegistrationLinkMarker($whatToDisplay) {
 		if ($whatToDisplay == 'my_events') {
-			 $this->setMarker('registration',
+			$this->setMarker('registration',
 			 	(($this->seminar->isUnregistrationPossible())
 					? $this->getRegistrationManager()->getLinkToUnregistrationPage(
 						$this,

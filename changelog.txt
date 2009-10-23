@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3292] Feature: Add a configuration to BE user groups in which sysfolder registration records created in the "events" BE module should be stored
 - [#3455] Fix: The function createCsvExportOfRegistrations does not exist
 - [#3437] Change: Use the same salutation in the back-end form e-mails as in the thank-you e-mails
 - [#3291] Feature: Add a configuration to BE user groups in which sysfolder event records created in the "events" BE module should be stored

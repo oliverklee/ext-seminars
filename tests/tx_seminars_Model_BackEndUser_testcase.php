@@ -111,5 +111,70 @@ class tx_seminars_Model_BackEndUser_testcase extends tx_phpunit_testcase {
 			(($eventFolder == 23) || ($eventFolder == 42))
 		);
 	}
+
+
+	////////////////////////////////////////////////////
+	// Tests concerning getRegistrationFolderFromGroup
+	////////////////////////////////////////////////////
+
+	public function test_getRegistrationFolderFromGroupForNoGroups_ReturnsZero() {
+		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getRegistrationFolderFromGroup()
+		);
+	}
+
+	public function test_getRegistrationFolderFromGroupForOneGroupWithoutRegistrationPid_ReturnsZero() {
+		$group = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(array());
+		$groups = new tx_oelib_List();
+		$groups->add($group);
+		$this->fixture->setData(array('usergroup' => $groups));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getRegistrationFolderFromGroup()
+		);
+	}
+
+	public function test_getRegistrationFolderFromGroupForOneGroupWithRegistrationPid_ReturnsThisPid() {
+		$group = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_registrations_folder' => 42)
+		);
+		$groups = new tx_oelib_List();
+		$groups->add($group);
+		$this->fixture->setData(array('usergroup' => $groups));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getRegistrationFolderFromGroup()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function test_getRegistrationFolderFromGroupForTwoGroupsBothWithDifferentRegistrationPids_ReturnsOnlyOneOfThePids() {
+		$group1 = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_registrations_folder' => 23)
+		);
+		$group2 = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_registrations_folder' => 42)
+		);
+		$groups = new tx_oelib_List();
+		$groups->add($group1);
+		$groups->add($group2);
+		$this->fixture->setData(array('usergroup' => $groups));
+		$eventFolder = $this->fixture->getRegistrationFolderFromGroup();
+
+		$this->assertTrue(
+			(($eventFolder == 23) || ($eventFolder == 42))
+		);
+	}
 }
 ?>

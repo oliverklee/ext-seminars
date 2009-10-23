@@ -42,6 +42,16 @@ class tx_seminars_Model_BackEndUserGroup extends tx_oelib_Model_BackEndUserGroup
 	public function getEventFolder() {
 		return $this->getAsInteger('tx_seminars_events_folder');
 	}
+
+	/**
+	 * Returns the PID for the storage of new registrations.
+	 *
+	 * @return integer the PID for the storage of new registrations, will be 0
+	 *                 if no PID has been set
+	 */
+	public function getRegistrationFolder() {
+		return $this->getAsInteger('tx_seminars_registrations_folder');
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_BackEndUserGroup.php']) {
