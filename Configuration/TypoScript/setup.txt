@@ -358,7 +358,7 @@ plugin.tx_seminars_pi1 {
 	# the maximum width of the owner picture in the single view
 	ownerPictureMaxWidth = 250
 
-	# whether to allow the CSV export in the "my editable events" view
+	# whether to allow the CSV export in the "my VIP events" view
 	allowCsvExportOfRegistrationsInMyVipEventsView = 0
 
 	# whether managers may edit their events

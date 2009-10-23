@@ -1001,12 +1001,12 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	private function checkAllowCsvExportOfRegistrationsInMyVipEventsView() {
 		$this->checkIfBoolean(
 			'allowCsvExportOfRegistrationsInMyVipEventsView',
-			true,
-			's_listView',
+			false,
+			'',
 			'This value specifies whether managers are allowed to access the ' .
-				'CSV export of registrations from the "my editable events" view. ' .
+				'CSV export of registrations from the "my VIP events" view. ' .
 				'If this value is incorrect, managers may be allowed to access ' .
-				'the CSV export of registrations from the "my editable events ' .
+				'the CSV export of registrations from the "my VIP events ' .
 				'view" although they should not be allowed to (or vice versa).'
 		);
 	}
