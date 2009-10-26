@@ -391,8 +391,8 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 		$this->fixture->render();
 
-		$this->assertEquals(
-			'foo bar test user',
+		$this->assertContains(
+			'test user',
 			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)

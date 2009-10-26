@@ -209,11 +209,8 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			)
 		);
 
-		$messageBody = str_replace(
-			'%s',
-			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
-			$GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody')
-		);
+		$messageBody = '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') .
+			$GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody');
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',

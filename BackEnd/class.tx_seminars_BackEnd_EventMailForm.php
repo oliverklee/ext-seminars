@@ -394,7 +394,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 			$eMail->setSubject($this->getPostData('subject'));
 			$eMail->addRecipient($registration->getFrontEndUser());
 			$eMail->setMessage(
-				$this->createMessageBody($registration->getFrontEndUser()->getName())
+				$this->createMessageBody($registration->getFrontEndUser())
 			);
 
 			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
@@ -505,28 +505,29 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 *                for the given prefix could be found
 	 */
 	private function localizeSalutationPlaceholder($prefix) {
-		return sprintf(
-			$GLOBALS['LANG']->getLL($prefix . 'messageBody'),
-			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation')
-		);
+		return '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') . LF . LF .
+			$GLOBALS['LANG']->getLL($prefix . 'messageBody');
 	}
 
 	/**
 	 * Creates the message body for the e-mail.
 	 *
-	 * @param string $userName
-	 *        the full name of the user who receives the mail, must not be empty
+	 * @param tx_seminars_Model_FrontEndUser $user the recipient of the e-mail
 	 *
 	 * @return string the messsage with the salutation replaced by the user's
 	 *                name, will be empty if no message has been set in the POST
 	 *                data
 	 */
-	private function createMessageBody($name) {
-		return str_replace(
+	private function createMessageBody(tx_seminars_Model_FrontEndUser $user) {
+		$salutation = tx_oelib_ObjectFactory::make('tx_seminars_EmailSalutation');
+		$result = str_replace(
 			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
-			$name,
+			$salutation->getSalutation($user),
 			$this->getPostData('messageBody')
 		);
+		$salutation->__destruct();
+
+		return $result;
 	}
 }
 

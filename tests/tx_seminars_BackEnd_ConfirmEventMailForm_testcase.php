@@ -208,11 +208,8 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 			)
 		);
 
-		$messageBody = str_replace(
-			'%s',
-			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
-			$GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody')
-		);
+		$messageBody = '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') .
+			$GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody');
 
 		$this->fixture->setPostData(
 			array(
