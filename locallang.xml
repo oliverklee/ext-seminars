@@ -96,10 +96,6 @@
 			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
-			<label index="email_salutation_informal">Dear %s,</label>
-			<label index="email_salutation_formal_0">Dear Mr. %s,</label>
-			<label index="email_salutation_formal_1">Dear Ms. %s,</label>
-			<label index="email_salutation_formal_2">Dear %s,</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationHello_formal">thank you for registering for this event:</label>
 			<label index="email_confirmationHello_informal">thank you for registering for this event:</label>
@@ -337,10 +333,6 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="message_registrationOpensOn">ab %s</label>
 			<label index="message_accessDenied_formal">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
 			<label index="message_accessDenied_informal">Zu diesem Teil der Site hast du leider keine Zugangsberechtigung.</label>
-			<label index="email_salutation_informal">Hallo %s,</label>
-			<label index="email_salutation_formal_0">Sehr geehrter Herr %s,</label>
-			<label index="email_salutation_formal_1">Sehr geehrte Frau %s,</label>
-			<label index="email_salutation_formal_2">Sehr geehrte(r) %s,</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
 			<label index="email_confirmationHello_formal">vielen Dank für Ihre Anmeldung zu dieser Veranstaltung:</label>
 			<label index="email_confirmationHello_informal">vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
@@ -987,10 +979,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_registrationOpensOn" type="integer">260849167</label>
 			<label index="message_accessDenied_formal" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
-			<label index="email_salutation_informal" type="integer">251418939</label>
-			<label index="email_salutation_formal_0" type="integer">169899728</label>
-			<label index="email_salutation_formal_1" type="integer">45885274</label>
-			<label index="email_salutation_formal_2" type="integer">251418939</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationHello" type="integer">88233580</label>
 			<label index="email_confirmationHello_informal" type="integer">211059923</label>
@@ -1517,10 +1505,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
-			<label index="email_salutation_informal">Dear %s,</label>
-			<label index="email_salutation_formal_0">Dear Mr. %s,</label>
-			<label index="email_salutation_formal_1">Dear Ms. %s,</label>
-			<label index="email_salutation_formal_2">Dear %s,</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationHello_formal">thank you for registering for this event:</label>
 			<label index="email_confirmationHello_informal">thank you for registering for this event:</label>

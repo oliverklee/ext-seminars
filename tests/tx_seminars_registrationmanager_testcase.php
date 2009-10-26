@@ -2483,7 +2483,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_NotifyAttendee_ForInformalSalutation_ContainsInformalSalutation() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
-		$this->fixture->setConfigurationValue('salutation', 'informal');
+		tx_oelib_ConfigurationRegistry::getInstance()->get('seminars')
+			->setAsString('salutation', 'informal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'fe_users', $registration->getFrontEndUser()->getUid(),
@@ -2497,10 +2498,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			sprintf(
-				$this->fixture->translate('email_salutation_informal'),
-				'foo_user'
-			),
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+				->translate('email_hello_informal'),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 			)
@@ -2530,10 +2529,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			sprintf(
-				$this->fixture->translate('email_salutation_formal_2'),
-				'foo_user'
-			),
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+				->translate('email_hello_formal_2'),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 			)
@@ -2563,10 +2560,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			sprintf(
-				$this->fixture->translate('email_salutation_formal_0'),
-				'foo_user'
-			),
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+				->translate('email_hello_formal_0'),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 			)
@@ -2596,10 +2591,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			sprintf(
-				$this->fixture->translate('email_salutation_formal_1'),
-				'foo_user'
-			),
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+				->translate('email_hello_formal_1'),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 			)

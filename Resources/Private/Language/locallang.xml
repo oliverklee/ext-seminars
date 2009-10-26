@@ -9,32 +9,41 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="email_salutation_informal">Dear %s,</label>
-			<label index="email_salutation_formal_0">Dear Mr. %s,</label>
-			<label index="email_salutation_formal_1">Dear Ms. %s,</label>
-			<label index="email_salutation_formal_2">Dear %s,</label>
+			<label index="email_hello_informal">Dear</label>
+			<label index="email_hello_formal_0">Dear</label>
+			<label index="email_hello_formal_1">Dear</label>
+			<label index="email_hello_formal_2">Dear</label>
+			<label index="email_salutation_title_0">Mr.</label>
+			<label index="email_salutation_title_1">Ms.</label>
+			<label index="email_salutation_title_2"></label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="email_salutation_informal">Hallo %s,</label>
-			<label index="email_salutation_formal_0">Sehr geehrter Herr %s,</label>
-			<label index="email_salutation_formal_1">Sehr geehrte Frau %s,</label>
-			<label index="email_salutation_formal_2">Sehr geehrte(r) %s,</label>
+			<label index="email_hello_informal">Hallo</label>
+			<label index="email_hello_formal_0">Sehr geehrter</label>
+			<label index="email_hello_formal_1">Sehr geehrte</label>
+			<label index="email_hello_formal_2">Sehr geehrte(r)</label>
+			<label index="email_salutation_title_0">Herr</label>
+			<label index="email_salutation_title_1">Frau</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
 		<languageKey index="de" type="array">
-			<label index="email_salutation_informal" type="integer">251418939</label>
-			<label index="email_salutation_formal_0" type="integer">169899728</label>
-			<label index="email_salutation_formal_1" type="integer">45885274</label>
-			<label index="email_salutation_formal_2" type="integer">251418939</label>
+			<label index="email_hello_informal" type="integer">112683164</label>
+			<label index="email_hello_formal_0" type="integer">112683164</label>
+			<label index="email_hello_formal_1" type="integer">112683164</label>
+			<label index="email_hello_formal_2" type="integer">112683164</label>
+			<label index="email_salutation_title_0" type="integer">19351194</label>
+			<label index="email_salutation_title_1" type="integer">43922038</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="de" type="array">
-			<label index="email_salutation_informal">Dear %s,</label>
-			<label index="email_salutation_formal_0">Dear Mr. %s,</label>
-			<label index="email_salutation_formal_1">Dear Ms. %s,</label>
-			<label index="email_salutation_formal_2">Dear %s,</label>
+			<label index="email_hello_informal">Dear</label>
+			<label index="email_hello_formal_0">Dear</label>
+			<label index="email_hello_formal_1">Dear</label>
+			<label index="email_hello_formal_2">Dear</label>
+			<label index="email_salutation_title_0">Mr.</label>
+			<label index="email_salutation_title_1">Ms.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

@@ -61,30 +61,34 @@ class tx_seminars_EmailSalutation {
 	 * @param tx_seminars_Model_FrontEndUser $user
 	 *        the user to create the salutation for
 	 *
-	 * @return string the localized, gender-specific salutation, will not be
-	 *                empty
+	 * @return string the localized, gender-specific salutation with a trailing
+	 *                comma, will not be empty
 	 */
 	public function getSalutation(tx_seminars_Model_FrontEndUser $user) {
+		$salutationParts = array();
+
 		$salutationMode = tx_oelib_ConfigurationRegistry::getInstance()->get(
 			'seminars')->getAsString('salutation');
-
 		switch ($salutationMode) {
 			case 'informal':
-				$salutation = sprintf(
-					$this->translator->translate('email_salutation_informal'),
-					$user->getFirstOrFullName()
+				$salutationParts[] = $this->translator->translate(
+					'email_hello_informal'
 				);
+				$salutationParts[] = $user->getFirstOrFullName();
 				break;
 			default:
-				$salutation =  sprintf(
-					$this->translator->translate(
-						'email_salutation_formal_' . $user->getGender()
-					), $user->getLastOrFullName()
+				$gender = $user->getGender();
+				$salutationParts[] = $this->translator->translate(
+					'email_hello_formal_' . $gender
 				);
+				$salutationParts[] = $this->translator->translate(
+						'email_salutation_title_' . $gender
+					);
+				$salutationParts[] = $user->getLastOrFullName();
 				break;
 		}
 
-		return $salutation;
+		return implode(' ', $salutationParts) . ',';
 	}
 }
 
