@@ -176,5 +176,70 @@ class tx_seminars_Model_BackEndUser_testcase extends tx_phpunit_testcase {
 			(($eventFolder == 23) || ($eventFolder == 42))
 		);
 	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning getAuxiliaryRecordsFolder
+	///////////////////////////////////////////////
+
+	public function test_getAuxiliaryRecordsFolderForNoGroups_ReturnsZero() {
+		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getAuxiliaryRecordsFolder()
+		);
+	}
+
+	public function test_getAuxiliaryRecordsFolderForOneGroupWithoutAuxiliaryRecordPid_ReturnsZero() {
+		$group = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(array());
+		$groups = new tx_oelib_List();
+		$groups->add($group);
+		$this->fixture->setData(array('usergroup' => $groups));
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getAuxiliaryRecordsFolder()
+		);
+	}
+
+	public function test_getAuxiliaryRecordsFolderForOneGroupWithAuxiliaryRecordsPid_ReturnsThisPid() {
+		$group = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_auxiliaries_folder' => 42)
+		);
+		$groups = new tx_oelib_List();
+		$groups->add($group);
+		$this->fixture->setData(array('usergroup' => $groups));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getAuxiliaryRecordsFolder()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function test_getAuxiliaryRecordsFolderForTwoGroupsBothWithDifferentAuxiliaryRecordPids_ReturnsOnlyOneOfThePids() {
+		$group1 = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_auxiliaries_folder' => 23)
+		);
+		$group2 = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_auxiliaries_folder' => 42)
+		);
+		$groups = new tx_oelib_List();
+		$groups->add($group1);
+		$groups->add($group2);
+		$this->fixture->setData(array('usergroup' => $groups));
+		$eventFolder = $this->fixture->getAuxiliaryRecordsFolder();
+
+		$this->assertTrue(
+			(($eventFolder == 23) || ($eventFolder == 42))
+		);
+	}
 }
 ?>

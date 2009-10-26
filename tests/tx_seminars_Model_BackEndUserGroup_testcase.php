@@ -116,5 +116,29 @@ class tx_seminars_Model_BackEndUserGroup_testcase extends tx_phpunit_testcase {
 			$this->fixture->getRegistrationFolder()
 		);
 	}
+
+
+	///////////////////////////////////////////////
+	// Tests concerning getAuxiliaryRecordsFolder
+	///////////////////////////////////////////////
+
+
+	public function test_getAuxiliaryRecordsFolderForNoSetAuxiliaryRecordsFolder_ReturnsZero() {
+		$this->fixture->setData(array());
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getAuxiliaryRecordFolder()
+		);
+	}
+
+	public function test_getAuxiliaryRecordsFolderForSetAuxiliaryRecordsFolder_ReturnsAuxiliaryRecordsFolderPid() {
+		$this->fixture->setData(array('tx_seminars_auxiliaries_folder' => 42));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getAuxiliaryRecordFolder()
+		);
+	}
 }
 ?>
