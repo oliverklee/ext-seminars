@@ -44,6 +44,21 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
+	 * @var integer HTTP status code for "page not found"
+	 */
+	const NOT_FOUND = 404;
+
+	/**
+	 * @var integer HTTP status code for "access denied"
+	 */
+	const ACCESS_DENIED = 403;
+
+	/**
+	 * @var integer the depth of the recursion for the back-end pages
+	 */
+	const RECURSION_DEPTH = 250;
+
+	/**
 	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_pi2';
@@ -62,6 +77,16 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * values in plugin.tx_seminars.
 	 */
 	private $configGetter = null;
+
+	/**
+	 * @var string the TYPO3 mode set for testing purposes
+	 */
+	private $typo3Mode;
+
+	/**
+	 * @var integer the HTTP status code of error
+	 */
+	private $errorType = 0;
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -99,10 +124,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					);
 					break;
 				default:
-					tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-						'Status: 404 Not Found'
+					$result = $this->addErrorHeaderAndReturnMessage(
+						self::NOT_FOUND
 					);
-					$result = $this->translate('message_404');
 					break;
 			}
 		} catch (Exception $exception) {
@@ -140,33 +164,30 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
-	 * @param integer UID of the event for which to create the CSV list, must be
-	 *                > 0
+	 * @param integer UID of the event for which to create the CSV list, must be >= 0
 	 *
 	 * @return string CSV list of registrations for the given seminar or
 	 *                an error message in case of an error
 	 */
-	public function createAndOutputListOfRegistrations($eventUid) {
-		if (tx_seminars_objectfromdb::recordExists(
-			$eventUid,
-			SEMINARS_TABLE_SEMINARS)
-		) {
-			if ($this->canAccessListOfRegistrations($eventUid)) {
-				$this->setContentTypeForRegistrationLists();
-				$result = $this->createListOfRegistrations($eventUid);
-			} else {
-				// Access is denied.
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-					'Status: 403 Forbidden'
-				);
-				$result = $this->translate('message_403');
+	public function createAndOutputListOfRegistrations($eventUid = 0) {
+		$pid = intval($this->piVars['pid']);
+		if ($eventUid > 0) {
+			if (!$this->hasAccessToEventAndItsRegistrations($eventUid)) {
+				return $this->addErrorHeaderAndReturnMessage($this->errorType);
 			}
 		} else {
-			// Wrong or missing UID.
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-				'Status: 404 Not Found'
-			);
-			$result = $this->translate('message_404_registrations');
+			if (!$this->canAccessRegistrationsOnPage($pid)) {
+				return $this->addErrorHeaderAndReturnMessage(
+					tx_seminars_pi2::ACCESS_DENIED
+				);
+			}
+		}
+
+		if ($eventUid == 0) {
+			$result = $this->createListOfRegistrationsOnPage($pid);
+		} else {
+			$this->setContentTypeForRegistrationLists();
+			$result = $this->createListOfRegistrations($eventUid);
 		}
 
 		return $result;
@@ -191,18 +212,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			return '';
 		}
 
-		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationBagBuilder'
-		);
-
-		if (!$this->configGetter->getConfValueBoolean(
-				'showAttendancesOnRegistrationQueueInCSV'
-		)) {
-			$registrationBagBuilder->limitToRegular();
-		}
-
+		$registrationBagBuilder = $this->createRegistrationBagBuilder();
 		$registrationBagBuilder->limitToEvent($eventUid);
-		$registrationBagBuilder->limitToExistingUsers();
 
 		return $this->createRegistrationsHeading() .
 			$this->getRegistrationsCsvList($registrationBagBuilder);
@@ -227,25 +238,45 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		$bag = $builder->build();
 
 		foreach ($bag as $registration) {
-			$userData = $this->retrieveData(
-				$registration,
-				'getUserData',
-				$this->configGetter->getConfValueString(
-					'fieldsFromFeUserForCsv'
-				)
-			);
-			$registrationData = $this->retrieveData(
-				$registration,
-				'getRegistrationData',
-				$this->configGetter->getConfValueString(
-					'fieldsFromAttendanceForCsv'
-				)
-			);
-			// Combines the arrays with the user and registration data
-			// and creates a list of semicolon-separated values from them.
-			$result .= implode(
-				';', array_merge($userData, $registrationData)
-			) . CRLF;
+			switch ($this->getTypo3Mode()) {
+				case 'BE':
+					$hasAccess = $GLOBALS['BE_USER']->doesUserHaveAccess(
+						t3lib_BEfunc::getRecord(
+							'pages', $registration->getPageUid()),
+						1
+					);
+					break;
+				case 'FE':
+					$hasAccess = true;
+					break;
+				default:
+					throw new Exception('You are trying to get a CSV list on a ' .
+						'non supported mode. Currently only BackEnd and ' .
+						'FrontEnd mode are allowed.'
+					);
+			}
+
+			if ($hasAccess) {
+				$userData = $this->retrieveData(
+					$registration,
+					'getUserData',
+					$this->configGetter->getConfValueString(
+						'fieldsFromFeUserForCsv'
+					)
+				);
+				$registrationData = $this->retrieveData(
+					$registration,
+					'getRegistrationData',
+					$this->configGetter->getConfValueString(
+						'fieldsFromAttendanceForCsv'
+					)
+				);
+				// Combines the arrays with the user and registration data
+				// and creates a list of semicolon-separated values from them.
+				$result .= implode(
+					';', array_merge($userData, $registrationData)
+				) . CRLF;
+			}
 		}
 
 		$bag->__destruct();
@@ -298,18 +329,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$this->setContentTypeForEventLists();
 				$result = $this->createListOfEvents($pid);
 			} else {
-				// Access is denied.
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-					'Status: 403 Forbidden'
+				$result = $this->addErrorHeaderAndReturnMessage(
+					self::ACCESS_DENIED
 				);
-				$result = $this->translate('message_403');
 			}
 		} else {
-			// Missing PID.
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-				'Status: 404 Not Found'
-			);
-			$result = $this->translate('message_404');
+			$result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
 		}
 
 		return $result;
@@ -427,86 +452,66 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			return true;
 		}
 
-		$result = false;
-
-		if (TYPO3_MODE == 'BE') {
-			// Checks read access to the registrations table.
-			$result = $GLOBALS['BE_USER']->check(
-				'tables_select',
-				SEMINARS_TABLE_ATTENDANCES
-			);
-			// Checks read access to all pages with registrations from the
-			// selected event.
-			$pidArray = tx_oelib_db::selectMultiple(
-				'DISTINCT pid',
-				SEMINARS_TABLE_ATTENDANCES,
-				'seminar=' . $eventUid .
-					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
-			);
-			foreach ($pidArray as $pid) {
-				// Checks read access for the current page.
-				$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
-					t3lib_BEfunc::getRecord('pages', $pid['pid']), 1
+		switch ($this->getTypo3Mode()) {
+			case 'BE':
+				// Checks read access to the registrations table.
+				$result = $GLOBALS['BE_USER']->check(
+					'tables_select',
+					SEMINARS_TABLE_ATTENDANCES
 				);
-			}
-		} elseif (TYPO3_MODE == 'FE') {
-			$seminar = tx_oelib_ObjectFactory::make(
-				'tx_seminars_seminar', $eventUid
-			);
-
-			$pi1TypoScriptSetup
-				=& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_seminars_pi1.'];
-
-			$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-				= (boolean) $pi1TypoScriptSetup['allowCsvExportOfRegistrationsInMyVipEventsView'];
-
-			$result = $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-				&& $seminar->isUserVip(
-					$this->getFeUserUid(),
-					$pi1TypoScriptSetup['defaultEventVipsFeGroupID']
+				// Checks read access to all pages with registrations from the
+				// selected event.
+				$pidArray = tx_oelib_db::selectMultiple(
+					'DISTINCT pid',
+					SEMINARS_TABLE_ATTENDANCES,
+					'seminar=' . $eventUid .
+						tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
 				);
+				foreach ($pidArray as $pid) {
+					// Checks read access for the current page.
+					$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
+						t3lib_BEfunc::getRecord('pages', $pid['pid']), 1
+					);
+				}
+				break;
+			case 'FE':
+				$seminar = tx_oelib_ObjectFactory::make(
+					'tx_seminars_seminar', $eventUid
+				);
+
+				$pi1TypoScriptSetup
+					=& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_seminars_pi1.'];
+
+				$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+					= (boolean) $pi1TypoScriptSetup['allowCsvExportOfRegistrationsInMyVipEventsView'];
+
+				$result = $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
+					&& $seminar->isUserVip(
+						$this->getFeUserUid(),
+						$pi1TypoScriptSetup['defaultEventVipsFeGroupID']
+					);
+				break;
+			default:
+				$result = false;
+				break;
 		}
 
 		return $result;
 	}
 
 	/**
-	 * Checks whether the list of registrations is accessible, ie.
-	 * 1. CSV access is allowed for testing purposes, or
-	 * 2. the logged-in BE user has read access to the registrations table and
-	 *    read access to *all* pages where the registration records of the
-	 *    selected event are stored.
+	 * Checks whether the logged-in BE user has read access to the events table
+	 * and read access to the page with the given PID.
 	 *
-	 * TODO: When additional ways to access the CSV data are added (e.g. FE
-	 * links), the corresponding access checks need to be added to this
-	 * function.
+	 * @param integer $pid
+	 *        PID of the page with events for which to check access, must
+	 *        be >= 0
 	 *
-	 * @param integer PID of the page with events for which to check access,
-	 *                must be > 0
-	 *
-	 * @return boolean true if the list of registrations may be exported as CSV
+	 * @return boolean true if the list of events may be exported as CSV, false
+	 *                 otherwise
 	 */
 	public function canAccessListOfEvents($pid) {
-		// no need to check any special permissions if global access is granted
-		if ($this->configGetter->getConfValueBoolean('allowAccessToCsv')) {
-			return true;
-		}
-
-		$result = false;
-
-		if (TYPO3_MODE == 'BE') {
-			// Checks read access to the events table.
-			$result = $GLOBALS['BE_USER']->check(
-				'tables_select',
-				SEMINARS_TABLE_SEMINARS
-			);
-			// Checks read access to the given page.
-			$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord('pages', $pid), 1
-			);
-		}
-
-		return $result;
+		return $this->canAccessTableAndPage(SEMINARS_TABLE_SEMINARS, $pid);
 	}
 
 	/**
@@ -570,6 +575,183 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		return intval(
 			$GLOBALS['TSFE']->tmpl->setup['tx_seminars_pi2.']['typeNum']
 		);
+	}
+
+	/**
+	 * Adds a status header and returns an error message.
+	 *
+	 * @param integer $errorCode
+	 *        the type of error message, must be tx_seminars_pi2::ACCESS_DENIED
+	 *        or tx_seminars_pi2::NOT_FOUND
+	 *
+	 * @return string the error message belonging to the error code, will not be
+	 *                empty
+	 */
+	private function addErrorHeaderAndReturnMessage($errorCode) {
+		switch ($errorCode) {
+			case self::ACCESS_DENIED:
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+					'Status: 403 Forbidden'
+				);
+				$result = $this->translate('message_403');
+				break;
+			case self::NOT_FOUND:
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+					'Status: 404 Not Found'
+				);
+				$result = $this->translate('message_404');
+				break;
+			default:
+				throw new Exception(
+					'"' . $errorCode . '" is no legal error code.'
+				);
+				break;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether the currently logged-in BE-User is allowed to access the
+	 * registrations records on the given page.
+	 *
+	 * @param integer $pid PID of the page to check the access for, must be >= 0
+	 *
+	 * @return booelan true if the currently logged-in BE-User is allowed to
+	 *                 access the registrations records, false if the user has
+	 *                 no access or this function is called in FE mode
+	 */
+	private function canAccessRegistrationsOnPage($pid) {
+		return $this->canAccessTableAndPage(SEMINARS_TABLE_ATTENDANCES, $pid);
+	}
+
+	/**
+	 * Checks whether the currently logged-in BE-User is allowed to access the
+	 * given table and page.
+	 *
+	 * @param string $table
+	 *        the name of the table to check the read access for, must not be
+	 *        empty
+	 *
+	 * @param integer $pid the page to check the access for, must be >= 0
+	 *
+	 * @return boolean true if the user has access to the given table and page,
+	 *                 false otherwise, will also return false if this function
+	 *                 is called in any other TYPO3 mode than BE
+	 */
+	private function canAccessTableAndPage($table, $pid) {
+		$result = false;
+
+		if ($this->getTypo3Mode() == 'BE') {
+			// Checks read access to the given table.
+			$result = $GLOBALS['BE_USER']->check(
+				'tables_select', $table
+			);
+			// Checks read access to the given page.
+			$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
+				t3lib_BEfunc::getRecord('pages', $pid), 1
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates a CSV list of registrations for the given page and its subpages,
+	 * including a heading line.
+	 *
+	 * @param integer $pid
+	 *        the PID of the page to export the registrations for, must be >= 0
+	 *
+	 * @return string CSV list of registrations for the given page, will be
+	 *                empty if no registrations could be found on the given page
+	 *                and its subpages
+	 */
+	private function createListOfRegistrationsOnPage($pid) {
+		$registrationsBagBuilder = $this->createRegistrationBagBuilder();
+		$registrationsBagBuilder->setSourcePages($pid, self::RECURSION_DEPTH);
+
+		return $this->createRegistrationsHeading() .
+			$this->getRegistrationsCsvList($registrationsBagBuilder);
+	}
+
+	/**
+	 * Creates a registrationBagBuilder with some preset limitations.
+	 *
+	 * @return tx_seminars_registrationBagBuilder the bag builder with some
+	 *                                            preset limitations, will not
+	 *                                            be null
+	 */
+	private function createRegistrationBagBuilder() {
+		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registrationBagBuilder'
+		);
+
+		if (!$this->configGetter->getConfValueBoolean(
+				'showAttendancesOnRegistrationQueueInCSV'
+		)) {
+			$registrationBagBuilder->limitToRegular();
+		}
+
+		$registrationBagBuilder->limitToExistingUsers();
+
+		return $registrationBagBuilder;
+	}
+
+	/**
+	 * Returns the mode currently set in TYPO3_MODE.
+	 *
+	 * @return string either "FE" or "BE" representing the TYPO3 mode
+	 */
+	private function getTypo3Mode() {
+		if ($this->typo3Mode != '') {
+			return $this->typo3Mode;
+		}
+
+		return TYPO3_MODE;
+	}
+
+	/**
+	 * Sets the TYPO3_MODE.
+	 *
+	 * The value is stored in the member variable $this->typo3Mode
+	 *
+	 * This function is for testing purposes only!
+	 *
+	 * @param string $typo3Mode the TYPO3_MODE to set, must be "BE" or "FE"
+	 */
+	public function setTypo3Mode($typo3Mode) {
+		$this->typo3Mode = $typo3Mode;
+	}
+
+	/**
+	 * Checks whether the currently logged in BE-User has access to the given
+	 * event and its registrations.
+	 *
+	 * Stores the type of the error in $this->errorType
+	 *
+	 * @param integer $eventUid
+	 *        the event to check the access for, must be >= 0 but not
+	 *        necessarily point to an existing event
+	 *
+	 * @return boolean true if the event record exists and the BE-User has
+	 *                 access to the registrations belonging to the event,
+	 *                 false otherwise
+	 */
+	private function hasAccessToEventAndItsRegistrations($eventUid) {
+		$result = false;
+
+		if (!tx_seminars_objectfromdb::recordExists(
+			$eventUid, SEMINARS_TABLE_SEMINARS
+		)) {
+			$this->errorType = self::NOT_FOUND;
+		} elseif (!$this->canAccessListOfRegistrations($eventUid)) {
+			$this->errorType = self::ACCESS_DENIED;
+		} else {
+			$result = true;
+		}
+
+		return $result;
 	}
 }
 

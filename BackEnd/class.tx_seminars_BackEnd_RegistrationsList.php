@@ -47,6 +47,18 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/RegistrationsList.html';
 
 	/**
+	 * @var integer parameter for setRegistrationTableMarkers to show the list
+	 *              of registrations on the queue
+	 */
+	const REGISTRATIONS_ON_QUEUE = 1;
+
+	/**
+	 * @var integer parameter for setRegistrationTableMarkers to show the list
+	 *              of reqular registrations
+	 */
+	const REGULAR_REGISTRATIONS = 2;
+
+	/**
 	 * Generates and prints out a registrations list.
 	 *
 	 * @return string the HTML source code to display
@@ -85,8 +97,15 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 			$GLOBALS['LANG']->getLL('registrationlist.seminar.date')
 		);
 
-		$this->setRegistrationTableMarkers(false);
-		$this->setRegistrationTableMarkers(true);
+		$isAnyRegularRegistrationVisible = $this->setRegistrationTableMarkers(
+			self::REGULAR_REGISTRATIONS
+		);
+		$this->template->setMarker(
+			'csv_export_button',
+			($isAnyRegularRegistrationVisible ? $this->getCsvIcon() : '')
+		);
+
+		$this->setRegistrationTableMarkers(self::REGISTRATIONS_ON_QUEUE);
 
 		$content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
 
@@ -99,24 +118,32 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	 * Gets the registration table for regular attendances and attendances on
 	 * the registration queue.
 	 *
-	 * @param boolean True if the registration table for the registration
-	 *                queue should be generated and false if the table for
-	 *                the regular attendances should be generated.
+	 * @param integer $registrationsToShow
+	 *        the switch to decide which registrations should be shown must
+	 *        be either
+	 *        tx_seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
+	 *        tx_seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
+	 *
+	 * @return boolean true if the generated list is not empty, false otherwise
 	 */
-	private function setRegistrationTableMarkers($showRegistrationQueue) {
+	private function setRegistrationTableMarkers($registrationsToShow) {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$pageData = $this->page->getPageData();
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 
-		if ($showRegistrationQueue) {
-			$builder->limitToOnQueue();
-		} else {
-			$builder->limitToRegular();
+		switch($registrationsToShow) {
+			case self::REGISTRATIONS_ON_QUEUE:
+				$builder->limitToOnQueue();
+				break;
+			case self::REGULAR_REGISTRATIONS:
+				$builder->limitToRegular();
+				break;
 		}
 
 		$registrationBag = $builder->build();
+		$result = !$registrationBag->isEmpty();
 
-		if ($showRegistrationQueue) {
+		if ($registrationsToShow == self::REGISTRATIONS_ON_QUEUE) {
 			$this->template->setMarker(
 				'number_of_registrations_on_queue', $registrationBag->count()
 			);
@@ -165,7 +192,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 				)
 			);
 
-			$tableRows .= ($showRegistrationQueue
+			$tableRows .= ($registrationsToShow == self::REGISTRATIONS_ON_QUEUE
 				? $this->template->getSubpart('REGISTRATION_ON_QUEUE_ROW')
 				: $this->template->getSubpart('REGULAR_REGISTRATION_ROW'));
 		}
@@ -176,7 +203,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 		}
 		$registrationBag->__destruct();
 
-		if ($showRegistrationQueue) {
+		if ($registrationsToShow == self::REGISTRATIONS_ON_QUEUE) {
 			$this->template->setSubpart(
 				'REGISTRATION_ON_QUEUE_ROW', $tableRows
 			);
@@ -185,6 +212,8 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 				'REGULAR_REGISTRATION_ROW', $tableRows
 			);
 		}
+
+		return $result;
 	}
 }
 

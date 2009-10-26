@@ -453,6 +453,40 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function test_createListOfRegistrationsForFrontEndMode_CanExportRegistrationsBelongingToAnEvent() {
+		$this->fixture->setTypo3Mode('FE');
+		$globalBackEndUser = $GLOBALS['BE_USER'];
+		$GLOBALS['BE_USER'] = null;
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'company'
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'company' => 'foo bar inc.',
+			)
+		);
+
+		$result = $this->fixture->createListOfRegistrations($this->eventUid);
+
+		$GLOBALS['BE_USER'] = $globalBackEndUser;
+
+		$this->assertContains(
+			'foo bar inc.',
+			$result
+		);
+	}
+
+
+	//////////////////////////////////////
+	// Tests concernin the main function
+	//////////////////////////////////////
 
 	public function testMainCanExportValueOfSignedThemseles() {
 		$this->markTestIncomplete(
@@ -932,6 +966,96 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			CRLF,
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+		);
+	}
+
+	public function testCreateAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage() {
+		$this->fixture->piVars['pid'] = $this->pid;
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo',
+				'pid' => $this->pid,
+			)
+		);
+
+		$this->assertContains(
+			'foo',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage() {
+		$this->fixture->piVars['pid'] = $this->pid;
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo',
+				'pid' => $this->pid + 1,
+			)
+		);
+
+		$this->assertNotContains(
+			'foo',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage() {
+		$this->fixture->piVars['pid'] = $this->pid;
+		$subpagePid = $this->testingFramework->createSystemFolder($this->pid);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'address'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'address' => 'foo',
+				'pid' => $subpagePid,
+			)
+		);
+
+		$this->assertContains(
+			'foo',
+			$this->fixture->createAndOutputListOfRegistrations()
+		);
+	}
+
+	public function testCreateAndOututListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader() {
+		$this->fixture->createAndOutputListOfRegistrations(
+			$this->testingFramework->getAutoIncrement(SEMINARS_TABLE_SEMINARS)
+		);
+
+		$this->assertContains(
+			'404',
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				->getLastAddedHeader()
+		);
+	}
+
+	public function testCreateAndOututListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader() {
+		$this->fixture->setTypo3Mode('FE');
+		$this->fixture->createAndOutputListOfRegistrations();
+
+		$this->assertContains(
+			'403',
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				->getLastAddedHeader()
 		);
 	}
 }

@@ -297,5 +297,43 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 			$this->fixture->show()
 		);
 	}
+
+	public function testShowForNonEmptyRegularRegistrationsListContainsCsvExportButton() {
+		$seminarUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $seminarUid,
+			)
+		);
+
+		$this->assertContains(
+			'class.tx_seminars_BackEnd_CSV',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowForEmptyRegularRegistrationsListContainsCsvExportButton() {
+		$seminarUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+			)
+		);
+
+		$this->assertNotContains(
+			'class.tx_seminars_BackEnd_CSV',
+			$this->fixture->show()
+		);
+	}
 }
 ?>
