@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3468] Change: Use the place Mapper in the front end selector widget
 - [#3293] Feature: Add a configuration to BE user groups in which sysfolder aux records created in the "events" BE module should be stored
 - [#3297] Feature: Add a button "CSV export" to the "registrations" tab
 - [#2733] Fix: allowCsvExportOfRegistrationsInMyVipEventsView configured via FlexForm has no effect

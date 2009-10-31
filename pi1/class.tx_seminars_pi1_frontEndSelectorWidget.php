@@ -65,10 +65,9 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	private $seminarBag = null;
 
 	/**
-	 * @var tx_seminars_placebag all places which are assigned to at least one
-	 *      seminar
+	 * @var tx_oelib_List all places which are assigned to at least one event
 	 */
-	private $placeBag = null;
+	private $places = null;
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -78,9 +77,9 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			$this->seminarBag->__destruct();
 			unset($this->seminarBag);
 		}
-		if ($this->placeBag) {
-			$this->placeBag->__destruct();
-			unset($this->placeBag);
+		if ($this->places) {
+			$this->places->__destruct();
+			$this->places = null;
 		}
 		unset($this->staticInfo);
 
@@ -242,30 +241,34 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	}
 
 	/**
-	 * Creates a place bag with all places that are assigned to at least one
-	 * event.
+	 * Creates a list of places with all places that are assigned to at least
+	 * one event.
 	 *
-	 * The place bag is stored in the member variable $this->placeBag.
+	 * The list of places is stored in the member variable $this->places.
 	 *
 	 * Before this function is called, it must be assured that the seminar bag
 	 * is not empty.
 	 */
-	private function createPlaceBag() {
+	private function collectPlaces() {
 		if ($this->seminarBag->isEmpty()) {
 			throw new Exception('The seminar bag must not be empty when ' .
 				'calling this function.'
 			);
 		}
-		if ($this->placeBag) {
+		if ($this->places) {
 			return;
 		}
 
-		$whereClause = SEMINARS_TABLE_SITES . '.uid = uid_foreign AND ' .
-			'uid_local IN (' . $this->seminarBag->getUids() . ')';
-
-		$this->placeBag = tx_oelib_ObjectFactory::make(
-			'tx_seminars_placebag', $whereClause, SEMINARS_TABLE_SEMINARS_SITES_MM
+		$dataOfPlaces = tx_oelib_db::selectMultiple(
+			'tx_seminars_sites.*',
+			'tx_seminars_sites, tx_seminars_seminars_place_mm',
+			'tx_seminars_sites.uid = tx_seminars_seminars_place_mm.uid_foreign ' .
+				'AND tx_seminars_seminars_place_mm.uid_local IN (' .
+				$this->seminarBag->getUids() . ')'
 		);
+
+		$this->places = tx_oelib_MapperRegistry::
+			get('tx_seminars_Mapper_Place')->getListOfModels($dataOfPlaces);
 	}
 
 	/**
@@ -542,9 +545,9 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		$result = array();
-		$this->createPlaceBag();
+		$this->collectPlaces();
 
-		foreach ($this->placeBag as $place) {
+		foreach ($this->places as $place) {
 			$result[$place->getUid()] = $place->getTitle();
 		}
 
@@ -564,9 +567,9 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		$result = array();
-		$this->createPlaceBag();
+		$this->collectPlaces();
 
-		foreach ($this->placeBag as $place) {
+		foreach ($this->places as $place) {
 			$result[$place->getCity()] = $place->getCity();
 		}
 
@@ -587,12 +590,12 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 		}
 
 		$result = array();
-		$this->createPlaceBag();
+		$this->collectPlaces();
 
-		foreach ($this->placeBag as $place) {
-			$countryIsoCode = $place->getCountryIsoCode();
+		foreach ($this->places as $place) {
+			if ($place->hasCountry()) {
+				$countryIsoCode = $place->getCountry()->getIsoAlpha2Code();
 
-			if (($countryIsoCode != '0') && ($countryIsoCode != '')) {
 				if (!isset($result[$countryIsoCode])) {
 					$result[$countryIsoCode]
 						= $this->staticInfo->getStaticInfoName(
