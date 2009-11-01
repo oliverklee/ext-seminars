@@ -4704,6 +4704,20 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function myVipEventsHidesRegistrationColumn() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->fixture->main('', array());
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_REGISTRATION')
+		);
+	}
+
 
 	////////////////////////////////////
 	// Tests concerning getFieldHeader
@@ -6128,6 +6142,30 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'pastEvent',
 			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function myEnteredEventsViewHidesRegistrationColumn() {
+		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
+
+		$this->fixture->setConfigurationValue(
+			'what_to_display', 'my_entered_events'
+		);
+		$this->fixture->setConfigurationValue(
+			'eventEditorFeGroupID', $editorGroupUid
+		);
+
+		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
+			$editorGroupUid
+		);
+
+		$this->fixture->main('', array());
+
+		$this->assertFalse(
+			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_REGISTRATION')
 		);
 	}
 }

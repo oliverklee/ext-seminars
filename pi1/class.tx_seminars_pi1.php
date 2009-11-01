@@ -2472,7 +2472,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Hides the registration column if online registration is disabled.
 	 */
 	private function hideRegisterColumnIfNecessary() {
-		if (!$this->getConfValueBoolean('enableRegistration')) {
+		if (!$this->getConfValueBoolean('enableRegistration')
+			|| ($whatToDisplay == 'my_vip_events')
+			|| ($whatToDisplay == 'my_entered_events')
+		) {
 			$this->hideColumns(array('registration'));
 		}
 	}
