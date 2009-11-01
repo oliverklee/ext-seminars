@@ -226,7 +226,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			);
 			$this->template->setMarker(
 				'csv_registration_export_button',
-				($this->seminar->needsRegistration()
+				(($this->seminar->needsRegistration()
+						&& !$this->seminar->isHidden())
 					? $this->getRegistrationsCsvIcon() : '')
 			);
 			$this->template->setMarker(
@@ -379,6 +380,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		$pageData = $this->page->getPageData();
 
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
+			&& !$this->seminar->isHidden()
 			&& !$this->seminar->isCanceled()
 			&& !$this->seminar->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
@@ -411,6 +413,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		$pageData = $this->page->getPageData();
 
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
+			&& !$this->seminar->isHidden()
 			&& !$this->seminar->isConfirmed()
 			&& !$this->seminar->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
