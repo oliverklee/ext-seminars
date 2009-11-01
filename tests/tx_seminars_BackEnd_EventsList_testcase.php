@@ -390,6 +390,24 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function showDoesNotContainConfirmButtonForHiddenEvent() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'hidden' => 1,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Confirm" />',
+			$this->fixture->show()
+		);
+	}
+
 	public function testShowDoesNotContainCancelButtonForAlreadyCanceledEvent() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -480,6 +498,83 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'<input type="submit" value="Cancel" />' .
 			'<input type="hidden" name="eventUid" value="' . $uid . '" />',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showDoesNotContainCancelButtonForHiddenEvent() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'hidden' => 1,
+			)
+		);
+
+		$this->assertNotContains(
+			'<input type="submit" value="Cancel" />',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showContainsCsvExportButtonForEventWithRegistration() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'needs_registration' => 1,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $eventUid,
+			)
+		);
+
+		$this->assertContains(
+			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
+				$this->dummySysFolderPid .
+				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
+				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showDoesNotContainCsvExportButtonForHiddenEventWithRegistration() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'hidden' => 1,
+				'needs_registration' => 1,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $eventUid,
+			)
+		);
+
+		$this->assertNotContains(
+			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
+				$this->dummySysFolderPid .
+				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
+				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">',
 			$this->fixture->show()
 		);
 	}

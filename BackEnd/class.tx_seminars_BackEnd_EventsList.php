@@ -346,7 +346,9 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 					) . LF,
 				TAB . TAB . TAB . TAB . TAB .
 					($this->seminar->needsRegistration()
-						? $this->getRegistrationsCsvIcon() .
+						? (!$this->seminar->isHidden()
+								? $this->getRegistrationsCsvIcon()
+								: '') .
 							$this->seminar->getAttendances()
 						: '') . LF,
 				TAB . TAB . TAB . TAB . TAB .
@@ -529,6 +531,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 
 		$pageData = $this->page->getPageData();
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
+			&& !$this->seminar->isHidden()
 			&& !$this->seminar->isCanceled()
 			&& !$this->seminar->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
@@ -561,6 +564,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 
 		$pageData = $this->page->getPageData();
 		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
+			&& !$this->seminar->isHidden()
 			&& !$this->seminar->isConfirmed()
 			&& !$this->seminar->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
