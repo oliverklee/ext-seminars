@@ -78,7 +78,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 
 		$seminarBag = $builder->build();
-		$tableRows = $this->createListBody($seminarBag);
+		$this->createListBody($seminarBag);
 
 		$this->template->setMarker(
 			'new_record_button', $this->getNewIcon($pageData['uid'])
@@ -151,11 +151,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	private function createListBody(tx_seminars_seminarbag $events) {
 		$tableRows = '';
 
-		// unserializes the configuration array
-		$globalConfiguration = unserialize(
-			$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
-		);
-		$useManualSorting = $globalConfiguration['useManualSorting']
+		$useManualSorting = tx_oelib_configurationProxy::getInstance('seminars')
+			->getAsBoolean('useManualSorting')
 			&& $GLOBALS['BE_USER']->check('tables_modify', SEMINARS_TABLE_SEMINARS)
 			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
@@ -355,8 +352,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 *                space) or an empty string
 	 */
 	public function getRegistrationsCsvIcon(tx_seminars_seminar $event) {
-		global $BACK_PATH, $LANG;
-
 		static $accessChecker = null;
 		if (!$accessChecker) {
 			$accessChecker = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
@@ -377,7 +372,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">' .
 				'<img' .
 				t3lib_iconWorks::skinImg(
-					$BACK_PATH,
+					$GLOBALS['BACK_PATH'],
 					'gfx/csv.gif',
 					'width="27" height="14"'
 				) .
@@ -508,8 +503,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 * @return string the HTML source code of a single linked up or down icon
 	 */
 	protected function getSingleUpOrDownIcon($type, $params, $moveToUid) {
-		global $LANG, $BACK_PATH;
-
 		$result = '';
 
 		if (isset($moveToUid)) {
@@ -517,7 +510,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 					$this->page->doc->issueCommand($params)
 				) . '">' .
 				'<img'.t3lib_iconWorks::skinImg(
-					$BACK_PATH,
+					$GLOBALS['BACK_PATH'],
 					'gfx/button_' . $type . '.gif',
 					'width="11" height="10"'
 				) . ' title="' . $GLOBALS['LANG']->getLL('move' . ucfirst($type), 1) . '"' .
