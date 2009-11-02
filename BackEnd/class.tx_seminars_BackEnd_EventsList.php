@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php'
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	/**
@@ -503,6 +504,18 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Returns the storage folder for new event records.
+	 *
+	 * This will be determined by the event folder storage setting of the
+	 * currently logged-in BE-user.
+	 *
+	 * @return integer the PID for new event records, will be >= 0
+	 */
+	protected function getNewRecordPid() {
+		return $this->getLoggedInUser()->getEventFolderFromGroup();
 	}
 }
 

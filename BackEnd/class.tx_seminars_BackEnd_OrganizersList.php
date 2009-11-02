@@ -29,6 +29,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 	/**
@@ -115,6 +116,18 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 		$organizerBag->__destruct();
 
 		return $content;
+	}
+
+	/**
+	 * Returns the storage folder for new organizer records.
+	 *
+	 * This will be determined by the auxiliary folder storage setting of the
+	 * currently logged-in BE-user.
+	 *
+	 * @return integer the PID for new organizer records, will be >= 0
+	 */
+	protected function getNewRecordPid() {
+		return $this->getLoggedInUser()->getAuxiliaryRecordsFolder();
 	}
 }
 

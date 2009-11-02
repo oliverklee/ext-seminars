@@ -39,6 +39,15 @@ table {
 	float: left;
 }
 
+#eventsList-clear {
+	clear: both;
+}
+
+#typo3-storageFolder {
+	float: left;
+	font-color: red;
+}
+
 .clearUpDownButton {
 	padding: 0;
 	margin: 0;

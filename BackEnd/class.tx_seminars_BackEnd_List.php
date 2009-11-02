@@ -29,6 +29,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 abstract class tx_seminars_BackEnd_List {
 	/**
@@ -60,6 +61,11 @@ abstract class tx_seminars_BackEnd_List {
 	 * @var integer the depth of the recursion for the back-end lists
 	 */
 	const RECURSION_DEPTH = 250;
+
+	/**
+	 * @var integer the page type of a sys-folder
+	 */
+	const SYSFOLDER_TYPE = 254;
 
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
@@ -163,7 +169,6 @@ abstract class tx_seminars_BackEnd_List {
 	/**
 	 * Returns a "create new record" image tag that is linked to the new record view.
 	 *
-	 * @param string the name of the table where the record should be saved to
 	 * @param integer the page ID where the record should be stored, must be > 0
 	 *
 	 * @return string the HTML source code to return
@@ -172,33 +177,60 @@ abstract class tx_seminars_BackEnd_List {
 		global $BACK_PATH, $LANG, $BE_USER;
 
 		$result = '';
-
+		$newRecordPid = $this->getNewRecordPid();
+		$pid = ($newRecordPid > 0) ? $newRecordPid : $pid;
 		$pageData = $this->page->getPageData();
+
 		if ($BE_USER->check('tables_modify', $this->tableName)
 			&& $this->doesUserHaveAccess($pageData['uid'])
-			&& ($pageData['doktype'] == 254)) {
-			$params = '&edit['.$this->tableName.']['.$pid.']=new';
+			&& ($pageData['doktype'] == self::SYSFOLDER_TYPE)
+		) {
+			$params = '&edit['.$this->tableName.'][';
+
+			if ($pageData['uid'] == $pid) {
+				$params .= $pageData['uid'];
+				$storageLabel = sprintf(
+					$LANG->getLL('label_create_record_in_current_folder'),
+					$pageData['title'],
+					$pageData['uid']
+				);
+			} else {
+				$storagePageData = t3lib_befunc::readPageAccess($pid, '');
+				$params .= $pid;
+				$storageLabel = sprintf(
+					$LANG->getLL('label_create_record_in_foreign_folder'),
+					$storagePageData['title'],
+					$pid
+				);
+			}
+			$params .= ']=new';
 			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
 			$langNew = $LANG->getLL('newRecordGeneral');
-			$result = TAB.TAB
-				.'<div id="typo3-newRecordLink">'.LF
-				.TAB.TAB.TAB
-				.'<a href="'.htmlspecialchars($editOnClick).'">'.LF
-				.TAB.TAB.TAB.TAB
-				.'<img'
-				.t3lib_iconWorks::skinImg(
+
+			$result = TAB . TAB .
+				'<div id="typo3-newRecordLink">' . LF .
+				TAB . TAB . TAB .
+				'<a href="' . htmlspecialchars($editOnClick) . '">' . LF .
+				TAB . TAB . TAB . TAB .
+				'<img' .
+				t3lib_iconWorks::skinImg(
 					$BACK_PATH,
 					'gfx/new_record.gif',
-					'width="7" height="4"')
+					'width="7" height="4"'
+				) .
 				// We use an empty alt attribute as we already have a textual
 				// representation directly next to the icon.
-				.' title="'.$langNew.'" alt="" />'.LF
-				.TAB.TAB.TAB.TAB
-				.$langNew.LF
-				.TAB.TAB.TAB
-				.'</a>'.LF
-				.TAB.TAB
-				.'</div>'.LF;
+				' title="' . $langNew . '" alt="" />' . LF .
+				TAB . TAB . TAB . TAB .
+				$langNew . LF .
+				TAB . TAB . TAB .
+				'</a>' . LF .
+				TAB . TAB .
+				'</div>' . LF;
+			$result .= TAB . TAB .
+				'<div id="eventsList-clear"></div><div id="typo3-storageFolder">' . LF .
+				$storageLabel .
+				'</div>' . LF;
 		}
 
 		return $result;
@@ -321,6 +353,28 @@ abstract class tx_seminars_BackEnd_List {
 		}
 
 		return $this->accessRights[$pageUid];
+	}
+
+	/**
+	 * Returns the PID for new records to store.
+	 *
+	 * This will be determined by the storage setting of the logged-in BE-user's
+	 * groups.
+	 *
+	 * @return integer the PID for the storage of new records, will be >= 0
+	 */
+	protected abstract function getNewRecordPid();
+
+	/**
+	 * Gets the currently logged in back-end user.
+	 *
+	 * @return tx_seminars_Model_BackEndUser the currently logged in back-end
+	 *                                       user
+	 */
+	protected function getLoggedInUser() {
+		return tx_oelib_BackEndLoginManager::getInstance()->getLoggedInUser(
+			'tx_seminars_Mapper_BackEndUser'
+		);
 	}
 }
 

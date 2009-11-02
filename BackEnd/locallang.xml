@@ -38,6 +38,8 @@
 			<label index="registrationlist.seminar.date">Event date</label>
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
 			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
+			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder &quot;%s&quot; (UID %u)</label>
+			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder &quot;%s&quot; (UID %u).</label>
 			<label index="eventMailForm_subject">Subject:</label>
 			<label index="eventMailForm_sender">Sender:</label>
 			<label index="eventMailForm_message">Message:</label>
@@ -111,6 +113,8 @@
 			<label index="registrationlist.seminar.date">Veranstaltungsdatum</label>
 			<label index="registrationlist.label_regularRegistrations">Reguläre Anmeldungen</label>
 			<label index="registrationlist.label_queueRegistrations">Anmeldungen auf der Warteliste</label>
+			<label index="label_create_record_in_foreign_folder">Der Datensatz wird im SysFolder &quot;%s&quot; (UID %u) erstellt.</label>
+			<label index="label_create_record_in_current_folder">Der Datensatz wird im aktuellen SysFolder &quot;%s&quot; (UID %u) erstellt.</label>
 			<label index="eventMailForm_subject">Betreff:</label>
 			<label index="eventMailForm_sender">Absender:</label>
 			<label index="eventMailForm_message">Mitteilung:</label>
@@ -259,6 +263,8 @@
 			<label index="eventlist_button_confirm" type="integer">118332393</label>
 			<label index="registrationlist.deleted" type="integer">244968423</label>
 			<label index="eventlist_button_cancel" type="integer">245659783</label>
+			<label index="label_create_record_in_foreign_folder" type="integer">118291962</label>
+			<label index="label_create_record_in_current_folder" type="integer">31292558</label>
 			<label index="eventMailForm_subject" type="integer">75107304</label>
 			<label index="eventMailForm_sender" type="integer">208064565</label>
 			<label index="eventMailForm_message" type="integer">155215423</label>
@@ -406,6 +412,8 @@
 			<label index="eventlist_button_confirm">Confirm</label>
 			<label index="registrationlist.deleted">(deleted)</label>
 			<label index="eventlist_button_cancel">Cancel</label>
+			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder &quot;%s&quot; (UID %u)</label>
+			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder &quot;%s&quot; (UID %u).</label>
 			<label index="eventMailForm_subject">Subject:</label>
 			<label index="eventMailForm_sender">Sender:</label>
 			<label index="eventMailForm_message">Message:</label>

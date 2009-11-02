@@ -74,7 +74,10 @@ class tx_seminars_BackEnd_OrganizersList_testcase extends tx_phpunit_testcase {
 
 		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;
-		$this->backEndModule->setPageData(array('uid' => $this->dummySysFolderPid));
+		$this->backEndModule->setPageData(array(
+			'uid' => $this->dummySysFolderPid,
+			'doktype' => tx_seminars_BackEnd_List::SYSFOLDER_TYPE,
+		));
 
 		$this->backEndModule->doc = t3lib_div::makeInstance('bigDoc');
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
@@ -116,6 +119,31 @@ class tx_seminars_BackEnd_OrganizersList_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Organizer in subfolder',
+			$this->fixture->show()
+		);
+	}
+
+
+	//////////////////////////////////////
+	// Tests concerning the "new" button
+	//////////////////////////////////////
+
+	public function testNewButtonForOrganizerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid() {
+		$newOrganizerFolder = $this->dummySysFolderPid + 1;
+		$backEndGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+			array('tx_seminars_auxiliaries_folder' => $newOrganizerFolder)
+		);
+		$backEndUser = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
+				array('usergroup' => $backEndGroup->getUid())
+		);
+		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+			$backEndUser
+		);
+
+		$this->assertContains(
+			'edit[tx_seminars_organizers][' . $newOrganizerFolder . ']=new',
 			$this->fixture->show()
 		);
 	}

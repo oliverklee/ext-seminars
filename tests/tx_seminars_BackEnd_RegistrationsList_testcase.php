@@ -59,7 +59,10 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;
-		$this->backEndModule->setPageData(array('uid' => $this->dummySysFolderPid));
+		$this->backEndModule->setPageData(array(
+			'uid' => $this->dummySysFolderPid,
+			'doktype' => tx_seminars_BackEnd_List::SYSFOLDER_TYPE,
+		));
 
 		$this->backEndModule->doc = t3lib_div::makeInstance('bigDoc');
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
@@ -332,6 +335,31 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 		$this->assertNotContains(
 			'class.tx_seminars_BackEnd_CSV',
+			$this->fixture->show()
+		);
+	}
+
+
+	//////////////////////////////////////
+	// Tests concerning the "new" button
+	//////////////////////////////////////
+
+	public function testNewButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid() {
+		$newRegistrationFolder = $this->dummySysFolderPid + 1;
+		$backEndGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+			array('tx_seminars_registrations_folder' => $newRegistrationFolder)
+		);
+		$backEndUser = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
+				array('usergroup' => $backEndGroup->getUid())
+		);
+		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+			$backEndUser
+		);
+
+		$this->assertContains(
+			'edit[tx_seminars_attendances][' . $newRegistrationFolder . ']=new',
 			$this->fixture->show()
 		);
 	}

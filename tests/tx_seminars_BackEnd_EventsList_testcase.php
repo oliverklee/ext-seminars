@@ -75,7 +75,10 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;
-		$this->backEndModule->setPageData(array('uid' => $this->dummySysFolderPid));
+		$this->backEndModule->setPageData(array(
+			'uid' => $this->dummySysFolderPid,
+			'doktype' => tx_seminars_BackEnd_List::SYSFOLDER_TYPE,
+		));
 
 		$this->backEndModule->doc = t3lib_div::makeInstance('bigDoc');
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
@@ -83,6 +86,18 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_BackEnd_EventsList(
 			$this->backEndModule
+		);
+
+		$backEndGroup = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+			array('tx_seminars_events_folder' => $this->dummySysFolderPid + 1)
+		);
+		$backEndUser = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
+			array('usergroup' => $backEndGroup->getUid())
+		);
+		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+			$backEndUser
 		);
 	}
 
@@ -619,6 +634,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
 	////////////////////////////////
 	// Tests for the localization.
 	////////////////////////////////
@@ -627,6 +643,74 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning the new record button
+	///////////////////////////////////////////
+
+	public function testEventListCanContainNewButton() {
+		$this->assertContains(
+			'newRecordLink',
+			$this->fixture->show()
+		);
+	}
+
+	public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid() {
+		$backEndUser = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(array());
+		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+			$backEndUser
+		);
+
+		$this->assertContains(
+			'edit[tx_seminars_seminars][' . $this->dummySysFolderPid . ']=new',
+			$this->fixture->show()
+		);
+	}
+
+	public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel() {
+		$backEndUser = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(array());
+		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+			$backEndUser
+		);
+
+		$this->assertContains(
+			sprintf(
+				$GLOBALS['LANG']->getLL('label_create_record_in_current_folder'),
+				'',
+				$this->dummySysFolderPid
+			),
+			$this->fixture->show()
+		);
+	}
+
+	public function testNewButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid() {
+		$newEventFolder = tx_oelib_BackEndLoginManager::getInstance()->
+			getLoggedInUser('tx_seminars_Mapper_BackEndUser')
+				->getEventFolderFromGroup();
+
+		$this->assertContains(
+			'edit[tx_seminars_seminars][' . $newEventFolder . ']=new',
+			$this->fixture->show()
+		);
+	}
+
+	public function testNewButtonForEventStoredInPageDetermindedByGroupHasForeignFolderLabel() {
+		$newEventFolder = tx_oelib_BackEndLoginManager::getInstance()->
+			getLoggedInUser('tx_seminars_Mapper_BackEndUser')
+				->getEventFolderFromGroup();
+
+		$this->assertContains(
+			sprintf(
+				$GLOBALS['LANG']->getLL('label_create_record_in_foreign_folder'),
+				'',
+				$newEventFolder
+			),
+			$this->fixture->show()
 		);
 	}
 }
