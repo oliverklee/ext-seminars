@@ -69,6 +69,41 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	public function show() {
 		$content = '';
 
+		$this->createTableHeading();
+
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
+		$builder->setBackEndMode();
+
+		$pageData = $this->page->getPageData();
+		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+
+		$seminarBag = $builder->build();
+		$tableRows = $this->createListBody($seminarBag);
+
+		$this->template->setMarker(
+			'new_record_button', $this->getNewIcon($pageData['uid'])
+		);
+
+		$this->template->setMarker(
+			'csv_event_export_button',
+			(!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
+		);
+
+		$content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
+
+		// Checks the BE configuration and the CSV export configuration.
+		$content .= $seminarBag->checkConfiguration();
+		$seminarBag->__destruct();
+
+		return $content;
+	}
+
+	/**
+	 * Sets the labels for the heading for the events table.
+	 *
+	 * The labels are set directly in the template, so nothing is returned.
+	 */
+	private function createTableHeading() {
 		$this->template->setMarker(
 			'label_accreditation_number',
 			$GLOBALS['LANG']->getLL('eventlist.accreditation_number')
@@ -104,22 +139,22 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 		$this->template->setMarker(
 			'label_status', $GLOBALS['LANG']->getLL('eventlist_status')
 		);
+	}
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
-		$builder->setBackEndMode();
-
-		$pageData = $this->page->getPageData();
-		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
-
-		$seminarBag = $builder->build();
-
-		$sortList = array();
+	/**
+	 * Creates all table rows for the list view.
+	 *
+	 * The table rows are set directly in the template, so nothing is returned.
+	 *
+	 * @param tx_seminars_seminarbag $events the events to list
+	 */
+	private function createListBody(tx_seminars_seminarbag $events) {
+		$tableRows = '';
 
 		// unserializes the configuration array
 		$globalConfiguration = unserialize(
 			$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
 		);
-
 		$useManualSorting = $globalConfiguration['useManualSorting']
 			&& $GLOBALS['BE_USER']->check('tables_modify', SEMINARS_TABLE_SEMINARS)
 			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
@@ -127,175 +162,159 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 					'pages', $pageData['uid']
 				),
 				16
-			);
+		);
 
-		if ($useManualSorting) {
-			// Initializes the array which holds the two previous records' UIDs.
-			$previousUids = array(
-				// contains the UID of the predecessor of the current record
-				0,
-				// contains the negative UID of the predecessor's predecessor
-				// or the current PID
-				0
-			);
+		$sortList = ($useManualSorting) ? $this->createSortList($events) : array();
 
-			foreach ($seminarBag as $this->seminar) {
-				$uid = $this->seminar->getUid();
-
-				// Sets the "previous" and "next" elements in the $sortList
-				// array only if we already got the predecessor of the
-				// current record in $previousUids[0]. This will be the case
-				// after the first iteration.
-				if ($previousUids[0]) {
-					// Sets the "previous" element of the current record to the
-					// predecessor of the previous record.
-					// This means when clicking on the "up" button the current
-					// record will be moved after the predecessor of the previous
-					// record.
-					$sortList[$uid]['previous'] = $previousUids[1];
-
-					// Sets the "next" element of the previous record to the
-					// negative UID of the current record.
-					// This means when clicking on the "down" button the previous
-					// record will be moved after the current record.
-					$sortList[$previousUids[0]]['next'] = -$uid;
-				}
-
-				// Sets the predecessor of the previous record to the negative
-				// UID of the previous record if the previous record of the
-				// current record is set already. Else set the predecessor of
-				// the previous record to the PID.
-				// That means if no predecessor of the previous record exists
-				// than move the current record to top of the current page.
-				$previousUids[1] = isset($sortList[$uid]['previous'])
-					? -$previousUids[0] : $pageData['uid'];
-
-				// Sets previous record to the current record's UID.
-				$previousUids[0] = $uid;
-
-				// Gets the next record and go to the start of the loop.
-			}
-		}
-
-		$tableRows = '';
-
-		foreach ($seminarBag as $this->seminar) {
-			$this->template->setMarker('uid', $this->seminar->getUid());
-			$this->template->setMarker('icon', $this->seminar->getRecordIcon());
+		foreach ($events as $event) {
+			$this->template->setMarker('uid', $event->getUid());
+			$this->template->setMarker('icon', $event->getRecordIcon());
 			$this->template->setMarker(
 				'accreditation_number',
-				htmlspecialchars($this->seminar->getAccreditationNumber())
+				htmlspecialchars($event->getAccreditationNumber())
 			);
 			$this->template->setMarker(
 				'title',
 				htmlspecialchars(
 					t3lib_div::fixed_lgd_cs(
-						$this->seminar->getRealTitle(),
+						$event->getRealTitle(),
 						$GLOBALS['BE_USER']->uc['titleLen']
 					)
 				)
 			);
 			$this->template->setMarker(
-				'date',
-				($this->seminar->hasDate() ? $this->seminar->getDate() : '')
+				'date', ($event->hasDate() ? $event->getDate() : '')
 			);
 			$this->template->setMarker(
 				'edit_button',
-				$this->getEditIcon(
-					$this->seminar->getUid(), $this->seminar->getPageUid()
-				)
+				$this->getEditIcon($event->getUid(), $event->getPageUid())
 			);
 			$this->template->setMarker(
 				'delete_button',
-				$this->getDeleteIcon(
-					$this->seminar->getUid(), $this->seminar->getPageUid()
-				)
+				$this->getDeleteIcon($event->getUid(), $event->getPageUid())
 			);
 			$this->template->setMarker(
 				'hide_unhide_button',
 				$this->getHideUnhideIcon(
-					$this->seminar->getUid(),
-					$this->seminar->getPageUid(),
-					$this->seminar->isHidden()
+					$event->getUid(), $event->getPageUid(), $event->isHidden()
 				)
 			);
 			$this->template->setMarker(
 				'up_down_buttons',
 				$this->getUpDownIcons(
-					$useManualSorting, $sortList, $this->seminar->getUid()
+					$useManualSorting, $sortList, $event->getUid()
 				)
 			);
 			$this->template->setMarker(
 				'csv_registration_export_button',
-				(($this->seminar->needsRegistration()
-						&& !$this->seminar->isHidden())
-					? $this->getRegistrationsCsvIcon() : '')
+				(($event->needsRegistration() && !$event->isHidden())
+					? $this->getRegistrationsCsvIcon($event) : '')
 			);
 			$this->template->setMarker(
 				'number_of_attendees',
-				($this->seminar->needsRegistration()
-					? $this->seminar->getAttendances() : '')
+				($event->needsRegistration() ? $event->getAttendances() : '')
 			);
 			$this->template->setMarker(
 				'number_of_attendees_on_queue',
-				($this->seminar->hasRegistrationQueue()
-					? $this->seminar->getAttendancesOnRegistrationQueue()
-					: '')
+				($event->hasRegistrationQueue()
+					? $event->getAttendancesOnRegistrationQueue() : '')
 			);
 			$this->template->setMarker(
 				'minimum_number_of_attendees',
-				($this->seminar->needsRegistration()
-					? $this->seminar->getAttendancesMin()
-					: '')
+				($event->needsRegistration() ? $event->getAttendancesMin() : '')
 			);
 			$this->template->setMarker(
 				'maximum_number_of_attendees',
-				($this->seminar->needsRegistration()
-					? $this->seminar->getAttendancesMax()
-					: '')
+				($event->needsRegistration() ? $event->getAttendancesMax() : '')
 			);
 			$this->template->setMarker(
 				'has_enough_attendees',
-				($this->seminar->needsRegistration()
-					? (!$this->seminar->hasEnoughAttendances()
+				($event->needsRegistration()
+					? (!$event->hasEnoughAttendances()
 						? $GLOBALS['LANG']->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
 					: '')
 			);
 			$this->template->setMarker(
 				'is_fully_booked',
-				($this->seminar->needsRegistration()
-					? (!$this->seminar->isFull()
+				($event->needsRegistration()
+					? (!$event->isFull()
 						? $GLOBALS['LANG']->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
 					: '')
 			);
 			$this->template->setMarker(
-				'status', $this->getStatusIcon()
+				'status', $this->getStatusIcon($event)
 			);
 
-			$this->setCancelButtonMarkers();
-			$this->setConfirmButtonMarkers();
+			$this->setCancelButtonMarkers($event);
+			$this->setConfirmButtonMarkers($event);
 
 			$tableRows .= $this->template->getSubpart('EVENT_ROW');
 		}
 
 		$this->template->setSubpart('EVENT_ROW', $tableRows);
+	}
 
-		$this->template->setMarker(
-			'new_record_button', $this->getNewIcon($pageData['uid'])
+	/**
+	 * Creates the sort list for the displayed events.
+	 *
+	 * @param tx_seminars_seminarbag $events the events to get the sorting for
+	 *
+	 * @return array the sort list in a multidimensional array with the event's
+	 *               UID as first-level key, the keywords "previous" and
+	 *               "next" as second level keys and the event UID's as values,
+	 *               will be empty if an empty bag has been given
+	 */
+	private function createSortList(tx_seminars_seminarbag $events) {
+		$sortList = array();
+		$pageData = $this->page->getPageData();
+
+		// Initializes the array which holds the two previous records' UIDs.
+		$previousUids = array(
+			// contains the UID of the predecessor of the current record
+			0,
+			// contains the negative UID of the predecessor's predecessor
+			// or the current PID
+			0
 		);
 
-		$this->template->setMarker(
-			'csv_event_export_button',
-			(!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
-		);
+		foreach ($events as $event) {
+			$uid = $event->getUid();
 
-		$content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
+			// Sets the "previous" and "next" elements in the $sortList
+			// array only if we already got the predecessor of the
+			// current record in $previousUids[0]. This will be the case
+			// after the first iteration.
+			if ($previousUids[0]) {
+				// Sets the "previous" element of the current record to the
+				// predecessor of the previous record.
+				// This means when clicking on the "up" button the current
+				// record will be moved after the predecessor of the previous
+				// record.
+				$sortList[$uid]['previous'] = $previousUids[1];
 
-		// Checks the BE configuration and the CSV export configuration.
-		$content .= $seminarBag->checkConfiguration();
-		$seminarBag->__destruct();
+				// Sets the "next" element of the previous record to the
+				// negative UID of the current record.
+				// This means when clicking on the "down" button the previous
+				// record will be moved after the current record.
+				$sortList[$previousUids[0]]['next'] = -$uid;
+			}
 
-		return $content;
+			// Sets the predecessor of the previous record to the negative
+			// UID of the previous record if the previous record of the
+			// current record is set already. Else set the predecessor of
+			// the previous record to the PID.
+			// That means if no predecessor of the previous record exists
+			// than move the current record to top of the current page.
+			$previousUids[1] = isset($sortList[$uid]['previous'])
+				? -$previousUids[0] : $pageData['uid'];
+
+			// Sets previous record to the current record's UID.
+			$previousUids[0] = $uid;
+
+			// Gets the next record and go to the start of the loop.
+		}
+
+		return $sortList;
 	}
 
 	/**
@@ -303,17 +322,19 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 * or "confirmed". If the event's status is "planned", an empty string will be
 	 * returned.
 	 *
+	 * @param tx_seminars_seminar $event the event to get the status icon for
+	 *
 	 * @return string HTML image tag, may be empty
 	 */
-	private function getStatusIcon() {
-		if (!$this->seminar->isCanceled() && !$this->seminar->isConfirmed()) {
+	private function getStatusIcon(tx_seminars_seminar $event) {
+		if (!$event->isCanceled() && !$event->isConfirmed()) {
 			return '';
 		}
 
-		if ($this->seminar->isConfirmed()) {
+		if ($event->isConfirmed()) {
 			$icon = 'icon_confirmed.png';
 			$labelKey = 'eventlist_status_confirmed';
-		} elseif ($this->seminar->isCanceled()) {
+		} elseif ($event->isCanceled()) {
 			$icon = 'icon_canceled.png';
 			$labelKey = 'eventlist_status_canceled';
 		}
@@ -327,12 +348,13 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 * if that event has at least one registration and access to all involved
 	 * registration records is granted.
 	 *
-	 * $this->seminar must be initialized when this function is called.
+	 * @param tx_seminars_seminar $event
+	 *        the event to get the registrations CSV icon for
 	 *
 	 * @return string the HTML for the linked image (followed by a non-breaking
 	 *                space) or an empty string
 	 */
-	public function getRegistrationsCsvIcon() {
+	public function getRegistrationsCsvIcon(tx_seminars_seminar $event) {
 		global $BACK_PATH, $LANG;
 
 		static $accessChecker = null;
@@ -343,9 +365,9 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 
 		$result = '';
 
-		$eventUid = $this->seminar->getUid();
+		$eventUid = $event->getUid();
 
-		if ($this->seminar->hasAttendances()
+		if ($event->hasAttendances()
 			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
 			$pageData = $this->page->getPageData();
 			$langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
@@ -373,19 +395,20 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 * - the event is not canceled yet
 	 * - the event has not started yet
 	 * In all other cases the corresponding subpart is hidden.
+	 *
+	 * @param tx_seminars_seminar $event the event to get the cancel button for
 	 */
-	private function setCancelButtonMarkers() {
+	private function setCancelButtonMarkers(tx_seminars_seminar $event) {
 		$this->template->unhideSubpartsArray(array('CANCEL_BUTTON'));
 		$pageData = $this->page->getPageData();
 
-		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
-			&& !$this->seminar->isHidden()
-			&& !$this->seminar->isCanceled()
-			&& !$this->seminar->hasStarted()
+		if (($event->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
+			&& !$event->isHidden() && !$event->isCanceled()
+			&& !$event->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
-			&& $this->doesUserHaveAccess($this->seminar->getPageUid())
+			&& $this->doesUserHaveAccess($event->getPageUid())
 		) {
-			$this->template->setMarker('uid', $this->seminar->getUid());
+			$this->template->setMarker('uid', $event->getUid());
 			$this->template->setMarker(
 				'cancel_button_url',
 				'index.php?id=' . $pageData['uid'] . '&amp;subModule=1'
@@ -406,19 +429,20 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 * - the event is not confirmed yet
 	 * - the event has not started yet
 	 * In all other cases the corresponding subpart is hidden.
+	 *
+	 * @param tx_seminars_seminar $event the event to get the confirm button for
 	 */
-	private function setConfirmButtonMarkers() {
+	private function setConfirmButtonMarkers(tx_seminars_seminar $event) {
 		$this->template->unhideSubpartsArray(array('CONFIRM_BUTTON'));
 		$pageData = $this->page->getPageData();
 
-		if (($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
-			&& !$this->seminar->isHidden()
-			&& !$this->seminar->isConfirmed()
-			&& !$this->seminar->hasStarted()
+		if (($event->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC)
+			&& !$event->isHidden() && !$event->isConfirmed()
+			&& !$event->hasStarted()
 			&& $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
-			&& $this->doesUserHaveAccess($this->seminar->getPageUid())
+			&& $this->doesUserHaveAccess($event->getPageUid())
 		) {
-			$this->template->setMarker('uid', $this->seminar->getUid());
+			$this->template->setMarker('uid', $event->getUid());
 			$this->template->setMarker(
 				'confirm_button_url',
 				'index.php?id=' . $pageData['uid'] . '&amp;subModule=1'
