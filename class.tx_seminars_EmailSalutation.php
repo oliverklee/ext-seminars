@@ -71,24 +71,50 @@ class tx_seminars_EmailSalutation {
 			'seminars')->getAsString('salutation');
 		switch ($salutationMode) {
 			case 'informal':
-				$salutationParts[] = $this->translator->translate(
+				$salutationParts['dear'] = $this->translator->translate(
 					'email_hello_informal'
 				);
-				$salutationParts[] = $user->getFirstOrFullName();
+				$salutationParts['name'] = $user->getFirstOrFullName();
 				break;
 			default:
 				$gender = $user->getGender();
-				$salutationParts[] = $this->translator->translate(
+				$salutationParts['dear'] = $this->translator->translate(
 					'email_hello_formal_' . $gender
 				);
-				$salutationParts[] = $this->translator->translate(
+				$salutationParts['title'] = $this->translator->translate(
 						'email_salutation_title_' . $gender
 					);
-				$salutationParts[] = $user->getLastOrFullName();
+				$salutationParts['name'] = $user->getLastOrFullName();
 				break;
 		}
 
+		foreach ($this->getHooks() as $hook) {
+			if (method_exists($hook, 'modifySalutation')) {
+				$hook->modifySalutation($salutationParts);
+			}
+		}
+
 		return implode(' ', $salutationParts) . ',';
+	}
+
+	/**
+	 * Gets all hooks for this class.
+	 *
+	 * @return array the hook objects in an array, will be empty if no hooks
+	 *               have been set
+	 */
+	private function getHooks() {
+		$result = array();
+
+		$hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
+			['modifyEmailSalutation'];
+		if (is_array($hooks)) {
+			foreach ($hooks as $classReference) {
+				$result[] = t3lib_div::getUserObj($classReference);
+			}
+		}
+
+		return $result;
 	}
 }
 

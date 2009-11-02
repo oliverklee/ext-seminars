@@ -46,16 +46,31 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	 */
 	private $fixture;
 
+	/**
+	 * @var array backed-up extension configuration of the TYPO3 configuration
+	 *            variables
+	 */
+	private $extConfBackup = array();
+
+	/**
+	 * @var array backed-up T3_VAR configuration
+	 */
+	private $t3VarBackup = array();
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_EmailSalutation();
 		tx_oelib_ConfigurationRegistry::getInstance()->get(
 			'seminars')->setAsString('salutation', 'formal');
+		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 	}
 
 	public function tearDown() {
 		$this->fixture->__destruct();
 		$this->testingFramework->cleanUp();
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
+		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
 
 		unset($this->testingFramework, $this->fixture);
 	}
@@ -212,6 +227,50 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 			$user->getLastOrFullName(),
 			$this->fixture->getSalutation($user)
 		);
+	}
+
+
+	///////////////////////////////
+	// Tests concerning the hooks
+	///////////////////////////////
+
+	public function test_getSalutationForHookSetInConfigurationCallsThisHook() {
+		$hookClassName = uniqid('tx_salutationHook');
+		$salutationHookMock = $this->getMock(
+			$hookClassName, array('modifySalutation')
+		);
+		$salutationHookMock->expects($this->atLeastOnce())
+			->method('modifySalutation');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $salutationHookMock;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
+			['modifyEmailSalutation'][$hookClassName] = $hookClassName;
+
+		$this->fixture->getSalutation($this->createFrontEndUser());
+	}
+
+	public function test_getSalutationCanCallMultipleSetHooks() {
+		$hookClassName1 = uniqid('tx_salutationHook1');
+		$salutationHookMock1 = $this->getMock(
+			$hookClassName1, array('modifySalutation')
+		);
+		$salutationHookMock1->expects($this->atLeastOnce())
+			->method('modifySalutation');
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName1] = $salutationHookMock1;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
+			['modifyEmailSalutation'][$hookClassName1] = $hookClassName1;
+
+		$hookClassName2 = uniqid('tx_salutationHook2');
+		$salutationHookMock2 = $this->getMock(
+			$hookClassName2, array('modifySalutation')
+		);
+		$salutationHookMock2->expects($this->atLeastOnce())
+			->method('modifySalutation');
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName2] = $salutationHookMock2;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
+			['modifyEmailSalutation'][$hookClassName2] = $hookClassName2;
+
+		$this->fixture->getSalutation($this->createFrontEndUser());
 	}
 }
 ?>
