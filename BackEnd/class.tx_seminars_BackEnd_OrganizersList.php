@@ -107,13 +107,12 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 
 			$tableRows .= $this->template->getSubpart('ORGANIZER_ROW');
 		}
-		$organizerBag->__destruct();
-
 		$this->template->setSubpart('ORGANIZER_ROW', $tableRows);
 
 		$content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');
 
 		$content .= $organizerBag->checkConfiguration();
+		$organizerBag->__destruct();
 
 		return $content;
 	}

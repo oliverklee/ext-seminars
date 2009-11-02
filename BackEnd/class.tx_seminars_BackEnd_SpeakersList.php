@@ -123,10 +123,11 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 		}
 
 		$this->template->setSubpart('SPEAKER_ROW', $tableRows);
-
 		$content .= $this->template->getSubpart('SEMINARS_SPEAKER_LIST');
 
 		$content .= $speakerBag->checkConfiguration();
+
+		$speakerBag->__destruct();
 
 		return $content;
 	}

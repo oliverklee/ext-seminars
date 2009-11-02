@@ -288,13 +288,11 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			(!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
 		);
 
-		$seminarBag->__destruct();
-
 		$content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
 
 		// Checks the BE configuration and the CSV export configuration.
 		$content .= $seminarBag->checkConfiguration();
-		$content .= $seminarBag->checkConfiguration(false, 'csv');
+		$seminarBag->__destruct();
 
 		return $content;
 	}
