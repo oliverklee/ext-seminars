@@ -381,13 +381,11 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 					$this->getConfirmButton() . LF,
 			);
 		}
-
 		$content .= $this->getNewIcon($pageData['uid']);
 
 		if (!$seminarBag->isEmpty()) {
 			$content .= $this->getCsvIcon();
 		}
-		$seminarBag->__destruct();
 
 		// Outputs the table array using the tableLayout array with the template
 		// class.
@@ -395,7 +393,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 
 		// Checks the BE configuration and the CSV export configuration.
 		$content .= $seminarBag->checkConfiguration();
-		$content .= $seminarBag->checkConfiguration(false, 'csv');
+		$seminarBag->__destruct();
 
 		return $content;
 	}

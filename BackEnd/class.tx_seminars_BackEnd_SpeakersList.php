@@ -158,6 +158,7 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 		$content .= $this->page->doc->table($table, $tableLayout);
 
 		$content .= $speakerBag->checkConfiguration();
+		$speakerBag->__destruct();
 
 		return $content;
 	}

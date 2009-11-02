@@ -141,8 +141,6 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 					).LF
 			);
 		}
-		$organizerBag->__destruct();
-
 		$content .= $this->getNewIcon($pageData['uid']);
 
 		// Output the table array using the tableLayout array with the template
@@ -150,6 +148,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 		$content .= $this->page->doc->table($table, $tableLayout);
 
 		$content .= $organizerBag->checkConfiguration();
+		$organizerBag->__destruct();
 
 		return $content;
 	}
