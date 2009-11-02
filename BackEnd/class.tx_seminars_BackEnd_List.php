@@ -182,7 +182,7 @@ abstract class tx_seminars_BackEnd_List {
 		$pageData = $this->page->getPageData();
 
 		if ($BE_USER->check('tables_modify', $this->tableName)
-			&& $this->doesUserHaveAccess($pageData['uid'])
+			&& $this->doesUserHaveAccess($pid)
 			&& ($pageData['doktype'] == self::SYSFOLDER_TYPE)
 		) {
 			$params = '&edit['.$this->tableName.'][';
