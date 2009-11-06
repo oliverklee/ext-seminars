@@ -9,98 +9,62 @@
 	###CSV_EXPORT_BUTTON###
 	###NEW_RECORD_BUTTON###
 	<div style="clear: both;"></div>
-	<h3>###LABEL_REGULAR_REGISTRATIONS### (###NUMBER_OF_REGULAR_REGISTRATIONS###)</h3>
-	<table cellpadding="0" cellspacing="0" class="typo3-dblist">
-		<thead>
-			<tr>
-				<td class="c-headLineTable">&nbsp;</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_ATTENDEE_FULL_NAME###</span>
-				</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_ACCREDITATION_NUMBER###</span>
-				</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_TITLE###</span>
-				</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_DATE###</span>
-				</td>
-				<td class="c-headLineTable">&nbsp;</td>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- ###REGULAR_REGISTRATION_ROW### -->
-			<tr>
-				<td>
-					###ICON###
-				</td>
-				<td>
-					###ATTENDEE_FULL_NAME###
-				</td>
-				<td>
-					###EVENT_ACCREDITATION_NUMBER###
-				</td>
-				<td>
-					###EVENT_TITLE###
-				</td>
-				<td>
-					###EVENT_DATE###
-				</td>
-				<td>
-					###EDIT_BUTTON###
-					###DELETE_BUTTON###
-				</td>
-			</tr>
-			<!-- ###REGULAR_REGISTRATION_ROW### -->
-		</tbody>
-	</table>
-	<h3>###LABEL_REGISTRATIONS_ON_QUEUE### (###NUMBER_OF_REGISTRATIONS_ON_QUEUE###)</h3>
-	<table cellpadding="0" cellspacing="0" class="typo3-dblist">
-		<thead>
-			<tr>
-				<td class="c-headLineTable">&nbsp;</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_ATTENDEE_FULL_NAME###</span>
-				</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_ACCREDITATION_NUMBER###</span>
-				</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_TITLE###</span>
-				</td>
-				<td class="c-headLineTable">
-					<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_DATE###</span>
-				</td>
-				<td class="c-headLineTable">&nbsp;</td>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- ###REGISTRATION_ON_QUEUE_ROW### -->
-			<tr>
-				<td>
-					###ICON###
-				</td>
-				<td>
-					###ATTENDEE_FULL_NAME###
-				</td>
-				<td>
-					###EVENT_ACCREDITATION_NUMBER###
-				</td>
-				<td>
-					###EVENT_TITLE###
-				</td>
-				<td>
-					###EVENT_DATE###
-				</td>
-				<td>
-					###EDIT_BUTTON###
-					###DELETE_BUTTON###
-				</td>
-			</tr>
-			<!-- ###REGISTRATION_ON_QUEUE_ROW### -->
-		</tbody>
-	</table>
+	###COMPLETE_TABLE###
 <!-- ###SEMINARS_REGISTRATION_LIST### -->
 </body>
 </html>
+
+<!-- ###REGISTRATION_TABLE### -->
+	<h3>###LABEL_REGISTRATIONS### (###NUMBER_OF_REGISTRATIONS###)</h3>
+	<table cellpadding="0" cellspacing="0" class="typo3-dblist">
+		<thead>
+			###TABLE_HEADER###
+		</thead>
+		<tbody>
+			###TABLE_ROWS###
+		</tbody>
+	</table>
+<!-- ###REGISTRATION_TABLE### -->
+
+<!-- ###REGISTRATION_TABLE_HEADING### -->
+	<tr>
+		<td class="c-headLineTable">&nbsp;</td>
+		<td class="c-headLineTable">
+			<span style="color: #ffffff; font-weight: bold;">###LABEL_ATTENDEE_FULL_NAME###</span>
+		</td>
+		<td class="c-headLineTable">
+			<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_ACCREDITATION_NUMBER###</span>
+		</td>
+		<td class="c-headLineTable">
+			<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_TITLE###</span>
+		</td>
+		<td class="c-headLineTable">
+			<span style="color: #ffffff; font-weight: bold;">###LABEL_EVENT_DATE###</span>
+		</td>
+		<td class="c-headLineTable">&nbsp;</td>
+	</tr>
+<!-- ###REGISTRATION_TABLE_HEADING### -->
+
+<!-- ###REGISTRATION_TABLE_ROW### -->
+	<tr>
+		<td>
+			###ICON###
+		</td>
+		<td>
+			###ATTENDEE_FULL_NAME###
+		</td>
+		<td>
+			###EVENT_ACCREDITATION_NUMBER###
+		</td>
+		<td>
+			###EVENT_TITLE###
+		</td>
+		<td>
+			###EVENT_DATE###
+		</td>
+		<td>
+			###EDIT_BUTTON###
+			###DELETE_BUTTON###
+		</td>
+	</tr>
+<!-- ###REGISTRATION_TABLE_ROW### -->

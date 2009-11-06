@@ -72,15 +72,6 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 		$this->template->setMarker(
 			'new_record_button', $this->getNewIcon($pageData['uid'])
 		);
-
-		$this->template->setMarker(
-			'label_regular_registrations',
-			$GLOBALS['LANG']->getLL('registrationlist.label_regularRegistrations')
-		);
-		$this->template->setMarker(
-			'label_registrations_on_queue',
-			$GLOBALS['LANG']->getLL('registrationlist.label_queueRegistrations')
-		);
 		$this->template->setMarker(
 			'label_attendee_full_name',
 			$GLOBALS['LANG']->getLL('registrationlist.feuser.name')
@@ -105,9 +96,12 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 			'csv_export_button',
 			($isAnyRegularRegistrationVisible ? $this->getCsvIcon() : '')
 		);
+		$registrationTables = $this->template->getSubpart('REGISTRATION_TABLE');
 
 		$this->setRegistrationTableMarkers(self::REGISTRATIONS_ON_QUEUE);
 
+		$registrationTables .= $this->template->getSubpart('REGISTRATION_TABLE');
+		$this->template->setMarker('complete_table', $registrationTables);
 		$content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
 
 		$content .= $this->configCheckWarnings;
@@ -132,27 +126,19 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 		$pageData = $this->page->getPageData();
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 
-		switch($registrationsToShow) {
+		switch ($registrationsToShow) {
 			case self::REGISTRATIONS_ON_QUEUE:
 				$builder->limitToOnQueue();
+				$tableLabel = 'registrationlist.label_queueRegistrations';
 				break;
 			case self::REGULAR_REGISTRATIONS:
 				$builder->limitToRegular();
+				$tableLabel = 'registrationlist.label_regularRegistrations';
 				break;
 		}
 
 		$registrationBag = $builder->build();
 		$result = !$registrationBag->isEmpty();
-
-		if ($registrationsToShow == self::REGISTRATIONS_ON_QUEUE) {
-			$this->template->setMarker(
-				'number_of_registrations_on_queue', $registrationBag->count()
-			);
-		} else {
-			$this->template->setMarker(
-				'number_of_regular_registrations', $registrationBag->count()
-			);
-		}
 
 		$tableRows = '';
 
@@ -193,26 +179,28 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 				)
 			);
 
-			$tableRows .= ($registrationsToShow == self::REGISTRATIONS_ON_QUEUE
-				? $this->template->getSubpart('REGISTRATION_ON_QUEUE_ROW')
-				: $this->template->getSubpart('REGULAR_REGISTRATION_ROW'));
+			$tableRows .= $this->template->getSubpart('REGISTRATION_TABLE_ROW');
 		}
 
 		if ($this->configCheckWarnings == '') {
 			$this->configCheckWarnings =
 				$registrationBag->checkConfiguration();
 		}
-		$registrationBag->__destruct();
 
-		if ($registrationsToShow == self::REGISTRATIONS_ON_QUEUE) {
-			$this->template->setSubpart(
-				'REGISTRATION_ON_QUEUE_ROW', $tableRows
-			);
-		} else {
-			$this->template->setSubpart(
-				'REGULAR_REGISTRATION_ROW', $tableRows
-			);
-		}
+		$this->template->setMarker(
+			'label_registrations',
+			$GLOBALS['LANG']->getLL($tableLabel)
+		);
+		$this->template->setMarker(
+			'number_of_registrations', $registrationBag->count()
+		);
+		$this->template->setMarker(
+			'table_header',
+			$this->template->getSubpart('REGISTRATION_TABLE_HEADING')
+		);
+		$this->template->setMarker('table_rows', $tableRows);
+
+		$registrationBag->__destruct();
 
 		return $result;
 	}
