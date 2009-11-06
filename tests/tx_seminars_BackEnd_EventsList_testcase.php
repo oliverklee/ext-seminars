@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 	/**
@@ -609,6 +610,69 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Event in subfolder',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowForEventWithRegistrationHasShowLink() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+		);
+
+		$this->assertContains(
+			$GLOBALS['LANG']->getLL('label_show_event_registrations'),
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowForEventWithoutRegistrationDoesNotHaveShowLink() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+		);
+
+		$this->assertNotContains(
+			$GLOBALS['LANG']->getLL('label_show_event_registrations'),
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowLinkLinksToRegistrationsTab() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+		);
+
+		$this->assertContains(
+			'&amp;subModule=2',
+			$this->fixture->show()
+		);
+	}
+
+	public function testShowLinkLinksToTheEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+		);
+
+		$this->assertContains(
+			'&amp;eventUid=' . $eventUid,
 			$this->fixture->show()
 		);
 	}

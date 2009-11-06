@@ -58,6 +58,7 @@
 			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
+			<label index="label_show_event_registrations">show</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Arrangementer</label>
@@ -133,6 +134,7 @@
 			<label index="mailForm_salutation">Anrede</label>
 			<label index="testForm_prefillField_subject">Event getestet</label>
 			<label index="testForm_prefillField_messageBody">Dies ist der Nachrichten körper.</label>
+			<label index="label_show_event_registrations">zeigen</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Evenementen</label>
@@ -282,6 +284,7 @@
 			<label index="mailForm_salutation" type="integer">128380848</label>
 			<label index="testForm_prefillField_subject" type="integer">115548765</label>
 			<label index="testForm_prefillField_messageBody" type="integer">10500938</label>
+			<label index="label_show_event_registrations" type="integer">176017707</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -431,6 +434,7 @@
 			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
+			<label index="label_show_event_registrations">show</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>

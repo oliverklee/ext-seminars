@@ -212,6 +212,12 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 				($event->needsRegistration() ? $event->getAttendances() : '')
 			);
 			$this->template->setMarker(
+				'show_registrations',
+				(($event->needsRegistration() && $event->hasAttendances())
+					? $this->createEventRegistrationsLink($event) : ''
+				)
+			);
+			$this->template->setMarker(
 				'number_of_attendees_on_queue',
 				($event->hasRegistrationQueue()
 					? $event->getAttendancesOnRegistrationQueue() : '')
@@ -533,6 +539,25 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	 */
 	protected function getNewRecordPid() {
 		return $this->getLoggedInUser()->getEventFolderFromGroup();
+	}
+
+	/**
+	 * Creates a link to the registrations page, showing the attendees for the
+	 * given event UID.
+	 *
+	 * @param tx_seminars_seminar $event
+	 *        the event to show the registrations for, must be >= 0
+	 *
+	 * @return string the URL to the registrations tab with the registration for
+	 *                the current event, will not be empty
+	 */
+	private function createEventRegistrationsLink(tx_seminars_seminar $event) {
+		$pageData = $this->page->getPageData();
+
+		return '<a href="index.php?id=' . $pageData['uid'] .
+			'&amp;subModule=2&amp;eventUid=' . $event->getUid() . '">' .
+			$GLOBALS['LANG']->getLL('label_show_event_registrations') .
+			'</a>';
 	}
 }
 
