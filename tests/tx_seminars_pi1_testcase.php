@@ -64,6 +64,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('currency', 'EUR');
+
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 		$this->seminarUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,

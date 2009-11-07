@@ -1169,7 +1169,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		if ($registration->hasTotalPrice()) {
-			$this->setMarker('total_price', $registration->getTotalPrice(' '));
+			$this->setMarker('total_price', $registration->getTotalPrice());
 		} else {
 			$this->hideSubparts('total_price', $wrapperPrefix);
 		}

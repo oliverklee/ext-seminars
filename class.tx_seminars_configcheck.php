@@ -56,8 +56,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkStaticIncluded();
 		$this->checkSalutationMode();
 		$this->checkTimeAndDate();
-		$this->checkDecimalDigits();
-		$this->checkDecimalSplitChar();
+		$this->checkCurrency();
 		$this->checkShowToBeAnnouncedForEmptyPrice();
 
 		if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
@@ -436,41 +435,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'This value specifies whether the extension will provide online '
 				.'registration. If this value is incorrect, the online '
 				.'registration will not be enabled or disabled correctly.'
-		);
-	}
-
-	/**
-	 * Checks the setting of the configuration value decimalDigits.
-	 */
-	private function checkDecimalDigits() {
-		$explanation = 'This value specifies the amount of digits displayed '
-			.'behind the decimal point in prices. If this value is incorrect, '
-			.'prices may have an unexpected look.';
-		$this->checkForNonEmptyString(
-			'decimalDigits',
-			false,
-			'',
-			$explanation
-		);
-		$this->checkIfInteger(
-			'decimalDigits',
-			false,
-			'',
-			$explanation
-		);
-	}
-
-	/**
-	 * Checks the setting of the configuration value decimalSplitChar.
-	 */
-	private function checkDecimalSplitChar() {
-		$this->checkForNonEmptyString(
-			'decimalSplitChar',
-			false,
-			'',
-			'This value specifies the char that is used to split the price. '
-			.'If this value is empty all prices will be shown wrong (missing '
-			.'decimal point).'
 		);
 	}
 
@@ -2511,6 +2475,22 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'number of steps, shown on the registration page.';
 			$this->setErrorMessage($message);
 		}
+	}
+
+	/**
+	 * Checks whether plugin.tx_seminars.currency is not empty and a valid ISO
+	 * 4217 alpha 3.
+	 */
+	public function checkCurrency() {
+		$this->checkIfSingleInSetNotEmpty(
+			'currency',
+			false,
+			'',
+			'The specified currency setting is either empty or not a valid ' .
+				'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
+				$this->getTSSetupPath() . 'currency</strong>.',
+			tx_oelib_db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
+		);
 	}
 }
 

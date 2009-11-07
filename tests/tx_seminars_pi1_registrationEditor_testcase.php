@@ -68,6 +68,9 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			tx_oelib_Session::TYPE_USER, $this->session
 		);
 
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('currency', 'EUR');
+
 		$seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('payment_methods' => '1')
 		));

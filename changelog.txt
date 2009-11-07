@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3489] Change: Use the price view helper
 - [#3491] Change: Allow prices with 3 decimal digits
 - [#3436] Feature: Add a hook for modifying the salutation in the e-mails
 - [#3446] Feature: Hide the "create new record" buttons if the logged-in BE user has no write access to the configured sysfolder or the corresponding table

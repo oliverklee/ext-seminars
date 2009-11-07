@@ -1123,16 +1123,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * no regular price has been set, either "free" or "to be announced" will
 	 * be returned, depending on the TS variable showToBeAnnouncedForEmptyPrice.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the regular seminar price
 	 */
-	public function getPriceRegular($space = '&nbsp;') {
+	public function getPriceRegular() {
 		if ($this->hasPriceRegular()) {
-			$value = $this->getPriceRegularAmount();
-			$currency = $this->getConfValueString('currency');
-			$result = $this->formatPrice($value).$space.$currency;
+			$result = $this->formatPrice($this->getPriceRegularAmount());
 		} else {
 			$result =
 				($this->getConfValueBoolean('showToBeAnnouncedForEmptyPrice'))
@@ -1161,10 +1156,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string the price, formatted as in configured in TS
 	 */
 	public function formatPrice($value) {
-		return number_format($value,
-			$this->getConfValueInteger('decimalDigits'),
-			$this->getConfValueString('decimalSplitChar'),
-			$this->getConfValueString('thousandsSplitChar'));
+		$priceViewHelper = tx_oelib_ObjectFactory::make(
+			'tx_oelib_ViewHelper_Price'
+		);
+		$priceViewHelper->setCurrencyFromIsoAlpha3Code(
+			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+				->getAsString('currency')
+		);
+		$priceViewHelper->setValue($value);
+
+		return $priceViewHelper->render();
 	}
 
 	/**
@@ -1172,15 +1173,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If there is a valid early bird offer, this price will be returned,
 	 * otherwise the default price.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the price and the currency
 	 */
-	public function getCurrentPriceRegular($space = '&nbsp;') {
+	public function getCurrentPriceRegular() {
 		return ($this->earlyBirdApplies())
-			? $this->getEarlyBirdPriceRegular($space)
-			: $this->getPriceRegular($space);
+			? $this->getEarlyBirdPriceRegular()
+			: $this->getPriceRegular();
 	}
 
 	/**
@@ -1188,31 +1186,23 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If there is a valid early bird offer, this price will be returned, the
 	 * default special price otherwise.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the price and the currency
 	 */
-	public function getCurrentPriceSpecial($space = '&nbsp;') {
+	public function getCurrentPriceSpecial() {
 		return ($this->earlyBirdApplies())
-			? $this->getEarlyBirdPriceSpecial($space)
-			: $this->getPriceSpecial($space);
+			? $this->getEarlyBirdPriceSpecial()
+			: $this->getPriceSpecial();
 	}
 
 	/**
 	 * Gets our regular price during the early bird phase as a string containing
 	 * amount and currency.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the regular early bird event price
 	 */
-	public function getEarlyBirdPriceRegular($space = '&nbsp;') {
-		$value = $this->getEarlyBirdPriceRegularAmount();
-		$currency = $this->getConfValueString('currency');
-		return $this->hasEarlyBirdPriceRegular() ?
-			$this->formatPrice($value).$space.$currency : '';
+	public function getEarlyBirdPriceRegular() {
+		return $this->hasEarlyBirdPriceRegular()
+			? $this->formatPrice($this->getEarlyBirdPriceRegularAmount()) : '';
 	}
 
 	/**
@@ -1230,16 +1220,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our special price during the early bird phase as a string containing
 	 * amount and currency.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the regular early bird event price
 	 */
-	public function getEarlyBirdPriceSpecial($space = '&nbsp;') {
-		$value = $this->getEarlyBirdPriceSpecialAmount();
-		$currency = $this->getConfValueString('currency');
-		return $this->hasEarlyBirdPriceSpecial() ?
-			$this->formatPrice($value).$space.$currency : '';
+	public function getEarlyBirdPriceSpecial() {
+		return $this->hasEarlyBirdPriceSpecial()
+			? $this->formatPrice($this->getEarlyBirdPriceSpecialAmount()) : '';
 	}
 
 	/**
@@ -1337,16 +1322,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our special price as a string containing amount and currency.
 	 * Returns an empty string if there is no special price set.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the special event price
 	 */
-	public function getPriceSpecial($space = '&nbsp;') {
-		$value = $this->getPriceSpecialAmount();
-		$currency = $this->getConfValueString('currency');
-		return $this->hasPriceSpecial() ?
-			$this->formatPrice($value).$space.$currency : '';
+	public function getPriceSpecial() {
+		return $this->hasPriceSpecial()
+			? $this->formatPrice($this->getPriceSpecialAmount()) : '';
 	}
 
 	/**
@@ -1375,16 +1355,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * amount and currency. Returns an empty string if there is no regular price
 	 * (including full board) set.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the regular event price (including full board)
 	 */
-	public function getPriceRegularBoard($space = '&nbsp;') {
-		$value = $this->getPriceRegularBoardAmount();
-		$currency = $this->getConfValueString('currency');
-		return $this->hasPriceRegularBoard() ?
-			$this->formatPrice($value).$space.$currency : '';
+	public function getPriceRegularBoard() {
+		return $this->hasPriceRegularBoard()
+			? $this->formatPrice($this->getPriceRegularBoardAmount()) : '';
 	}
 
 	/**
@@ -1415,16 +1390,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * amount and currency. Returns an empty string if there is no special price
 	 * (including full board) set.
 	 *
-	 * @param string the character or HTML entity used to separate price
-	 *               and currency
-	 *
 	 * @return string the special event price (including full board)
 	 */
-	public function getPriceSpecialBoard($space = '&nbsp;') {
-		$value = $this->getPriceSpecialBoardAmount();
-		$currency = $this->getConfValueString('currency');
-		return $this->hasPriceSpecialBoard() ?
-			$this->formatPrice($value).$space.$currency : '';
+	public function getPriceSpecialBoard() {
+		return $this->hasPriceSpecialBoard()
+			? $this->formatPrice($this->getPriceSpecialBoardAmount()) : '';
 	}
 
 	/**
@@ -2442,16 +2412,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$value = $this->getPlaceShort();
 					break;
 				case 'price_regular':
-					$value = $this->getPriceRegular(' ');
+					$value = $this->getPriceRegular();
 					break;
 				case 'price_regular_early':
-					$value = $this->getEarlyBirdPriceRegular(' ');
+					$value = $this->getEarlyBirdPriceRegular();
 					break;
 				case 'price_special':
-					$value = $this->getPriceSpecial(' ');
+					$value = $this->getPriceSpecial();
 					break;
 				case 'price_special_early':
-					$value = $this->getEarlyBirdPriceSpecial(' ');
+					$value = $this->getEarlyBirdPriceSpecial();
 					break;
 				case 'speakers':
 					$value = $this->getSpeakersShort($this);
@@ -3470,22 +3440,22 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$result = $this->getSpeakersWithDescriptionRaw($trimmedKey);
 				break;
 			case 'price_regular':
-				$result = $this->getPriceRegular(' ');
+				$result = $this->getPriceRegular();
 				break;
 			case 'price_regular_early':
-				$result = $this->getEarlyBirdPriceRegular(' ');
+				$result = $this->getEarlyBirdPriceRegular();
 				break;
 			case 'price_regular_board':
-				$result = $this->getPriceRegularBoard(' ');
+				$result = $this->getPriceRegularBoard();
 				break;
 			case 'price_special':
-				$result = $this->getPriceSpecial(' ');
+				$result = $this->getPriceSpecial();
 				break;
 			case 'price_special_early':
-				$result = $this->getEarlyBirdPriceSpecial(' ');
+				$result = $this->getEarlyBirdPriceSpecial();
 				break;
 			case 'price_special_board':
-				$result = $this->getPriceSpecialBoard(' ');
+				$result = $this->getPriceSpecialBoard();
 				break;
 			case 'additional_information':
 				$result = $this->getAdditionalInformation();
@@ -3579,14 +3549,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'value' => 'regular_early',
 				'amount' => $this->getEarlyBirdPriceRegularAmount(),
 				'caption' => $this->translate('label_price_earlybird_regular')
-					.': '.$this->getEarlyBirdPriceRegular(' ')
+					.': '.$this->getEarlyBirdPriceRegular()
 			);
 		} else {
 			$result['regular'] = array(
 				'value' => 'regular',
 				'amount' => $this->getPriceRegularAmount(),
 				'caption' => $this->translate('label_price_regular')
-					.': '.$this->getPriceRegular(' ')
+					.': '.$this->getPriceRegular()
 			);
 		}
 		if ($this->hasPriceRegularBoard()) {
@@ -3594,7 +3564,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'value' => 'regular_board',
 				'amount' => $this->getPriceRegularBoardAmount(),
 				'caption' => $this->translate('label_price_board_regular')
-					.': '.$this->getPriceRegularBoard(' ')
+					.': '.$this->getPriceRegularBoard()
 			);
 		}
 
@@ -3604,14 +3574,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					'value' => 'special_early',
 					'amount' => $this->getEarlyBirdPriceSpecialAmount(),
 					'caption' => $this->translate('label_price_earlybird_special')
-						.': '.$this->getEarlyBirdPriceSpecial(' ')
+						.': '.$this->getEarlyBirdPriceSpecial()
 				);
 			} else {
 				$result['special'] = array(
 					'value' => 'special',
 					'amount' => $this->getPriceSpecialAmount(),
 					'caption' => $this->translate('label_price_special')
-						.': '.$this->getPriceSpecial(' ')
+						.': '.$this->getPriceSpecial()
 				);
 			}
 		}
@@ -3620,7 +3590,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'value' => 'special_board',
 					'amount' => $this->getPriceSpecialBoardAmount(),
 				'caption' => $this->translate('label_price_board_special')
-					.': '.$this->getPriceSpecialBoard(' ')
+					.': '.$this->getPriceSpecialBoard()
 			);
 		}
 

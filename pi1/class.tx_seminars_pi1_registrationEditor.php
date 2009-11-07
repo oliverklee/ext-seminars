@@ -920,13 +920,9 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			$selectedPrice = $this->getKeyOfSelectedPrice();
 
 			if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
-				$totalPrice = $this->getSeminar()->formatPrice(
+				$result = $this->getSeminar()->formatPrice(
 					$seats * $availablePrices[$selectedPrice]['amount']
 				);
-				$currency = $this->getRegistrationManager()->getConfValueString(
-					'currency'
-				);
-				$result = $totalPrice . ' ' . $currency;
 			}
 		}
 

@@ -193,6 +193,8 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod() {
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('currency', 'EUR');
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array('price_regular' => 31.42)
@@ -1303,10 +1305,12 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setTotalPriceWithTotalPriceSetsTotalPrice() {
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('currency', 'EUR');
 		$this->fixture->setTotalPrice('42.42');
 
 		$this->assertEquals(
-			'42.42&nbsp;',
+			'€ 42,42',
 			$this->fixture->getTotalPrice()
 		);
 	}

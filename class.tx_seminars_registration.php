@@ -377,7 +377,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 				$result = $this->getPrice();
 				break;
 			case 'total_price':
-				$result = $this->getTotalPrice(' ');
+				$result = $this->getTotalPrice();
 				break;
 			case 'paid':
 				// The fallthrough is intended.
@@ -740,18 +740,14 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Gets the saved total price and the currency.
 	 * An empty string will be returned if no total price could be calculated.
 	 *
-	 * @param string character(s) used to separate the price from the currency
-	 *
 	 * @return string the total price and the currency or an empty string
 	 *                if no total price could be calculated
 	 */
-	public function getTotalPrice($space = '&nbsp;') {
+	public function getTotalPrice() {
 		$result = '';
 		$totalPrice = $this->getRecordPropertyDecimal('total_price');
-		$currency = $this->getConfValueString('currency');
 		if ($totalPrice != '0.00') {
-			$result = $this->getSeminarObject()->formatPrice($totalPrice) .
-				$space . $currency;
+			$result = $this->getSeminarObject()->formatPrice($totalPrice);
 		}
 
 		return $result;
