@@ -265,7 +265,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkShowOnlyEventsWithVacancies();
 	}
 
- 	/**
+	/**
 	 * Checks the configuration for: tx_seminars_pi1_frontEndCountdown.
 	 */
 	protected function check_tx_seminars_pi1_frontEndCountdown() {
@@ -346,7 +346,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkListPid();
 	}
 
- 	/**
+	/**
 	 * Checks the configuration for: tx_seminars_pi1/favorites_list
 	 */
 	protected function check_tx_seminars_pi1_favorites_list() {
@@ -1124,7 +1124,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		);
 	}
 
- 	/**
+	/**
 	 * Checks the setting of the configuration value
 	 * showRegistrationFieldsInRegistrationList.
 	 */

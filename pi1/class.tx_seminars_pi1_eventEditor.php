@@ -1436,7 +1436,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		);
 	}
 
- 	/**
+	/**
 	 * Updates an existing place record.
 	 *
 	 * This function is intended to be called via an AJAX FORMidable event.

@@ -464,7 +464,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 */
 	protected function retrieveRecord($uid, $allowHiddenRecords = false) {
 		if ($this->recordExists($uid, $this->tableName, $allowHiddenRecords)) {
-		 	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				$this->tableName,
 				'uid=' . intval($uid) . tx_oelib_db::enableFields(
@@ -474,9 +474,9 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				'',
 				'1'
 			);
-	 	} else {
-	 		$result = false;
-	 	}
+		} else {
+			$result = false;
+		}
 
 		return $result;
 	}

@@ -277,7 +277,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if ($seminar->hasSeparateDetailsPage()) {
 			$result = $plugin->cObj->typolink(
 				$label,
-			 	$seminar->getDetailedViewLinkConfiguration($plugin)
+				$seminar->getDetailedViewLinkConfiguration($plugin)
 			);
 		} else {
 			$result = $this->getLinkToStandardRegistrationOrLoginPage(

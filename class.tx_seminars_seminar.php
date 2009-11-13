@@ -1521,14 +1521,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
- 			SEMINARS_TABLE_PAYMENT_METHODS,
+			SEMINARS_TABLE_PAYMENT_METHODS,
 			'uid=' . $paymentMethodUid .
- 				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
- 		);
+				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+		);
 
 		if (!$dbResultPaymentMethod) {
 			return '';
- 		}
+		}
 
 		// We expect just one result.
 		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
@@ -1566,7 +1566,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if (!$dbResultPaymentMethod) {
 			return '';
- 		}
+		}
 
 		// We expect just one result.
 		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
@@ -1574,7 +1574,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $row['title'];
- 	}
+	}
 
 	/**
 	 * Checks whether this seminar has any payment methods set.
@@ -1620,7 +1620,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return $languageName;
 	}
 
- 	/**
+	/**
 	 * Returns the type of the record. This is one out of the following values:
 	 * 0 = single event (and default value of older records)
 	 * 1 = multiple event topic record
@@ -2489,7 +2489,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function isUserRegistered($feUserUid) {
 		$result = false;
 
-	 	$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			SEMINARS_TABLE_ATTENDANCES,
 			'seminar=' . $this->getUid() . ' AND user=' . $feUserUid .
@@ -2728,7 +2728,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return ($this->getStatus() == self::STATUS_CANCELED);
 	}
 
- 	/**
+	/**
 	 * Checks whether the latest possibility to register for this event is over.
 	 *
 	 * The latest moment is either the time the event starts, or a set
@@ -2741,7 +2741,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			>= $this->getLatestPossibleRegistrationTime());
 	}
 
- 	/**
+	/**
 	 * Checks whether the latest possibility to register with early bird rebate for this event is over.
 	 *
 	 * The latest moment is just before a set early bird deadline.
@@ -3682,7 +3682,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return $result;
 	}
 
- 	/**
+	/**
 	 * Checkes whether the collision check should be skipped for this event.
 	 *
 	 * @return boolean true if the collision check should be skipped for
@@ -3833,7 +3833,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return $this->numberOfAttendancesOnQueue;
 	}
 
- 	/**
+	/**
 	 * Checks whether there is at least one registration on the waiting list.
 	 *
 	 * @return boolean true if there is at least one registration on the
@@ -3881,7 +3881,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return $result;
 	}
 
- 	/**
+	/**
 	 * Checks whether there's a (begin) date set or any time slots exist.
 	 * If there's an end date but no begin date, this function still will return
 	 * false.

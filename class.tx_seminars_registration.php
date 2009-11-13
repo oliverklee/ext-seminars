@@ -102,11 +102,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		$this->initializeCharsetConversion();
 		$this->init();
 
-	 	if (!$dbResult) {
-	 		return;
-	 	}
+		if (!$dbResult) {
+			return;
+		}
 
-	 	$data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		$data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if ($data) {
 			$this->getDataFromDbResult($data);
 		}
@@ -295,7 +295,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			', ' . $this->getSeminarObject()->getDate('-');
 	}
 
- 	/**
+	/**
 	 * Gets the complete FE user data as an array.
 	 * The attendee's user data (from fe_users) will be written to
 	 * $this->userData.

@@ -102,7 +102,7 @@ t3lib_extMgm::addTCAcolumns(
 				'MM' => 'tx_seminars_usergroups_categories_mm',
 				'wizards' => array(
 					'list' => array(
-					 	'type' => 'popup',
+						'type' => 'popup',
 						'title' => 'List entries',
 						'icon' => 'list.gif',
 						'params' => array (
