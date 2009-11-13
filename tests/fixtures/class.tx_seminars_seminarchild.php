@@ -378,7 +378,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 		$this->setRecordPropertyInteger('endtime', $timeStamp);
 	}
 
- 	/**
+	/**
 	 * Sets the TypoScript configuration for the parameter
 	 * allowUnregistrationWithEmptyWaitingList.
 	 *

@@ -35,7 +35,7 @@
  * Marks the current attachment as deleted if the confirm becomes submitted.
  * 
  * @param	string		ID of the list item with the attachment to delete, must
- * 						not be empty
+ *						not be empty
  * @param	string		localized confirm message for whether really to mark an
  *						attachment for deletion
  */

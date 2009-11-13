@@ -1416,7 +1416,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 	}
 
- 	/**
+	/**
 	 * Creates the list of events that start the next day (after the current
 	 * event has ended). Practically, this is just a special kind of list view.
 	 * In case the current record is a topic record, this function will return
@@ -1453,7 +1453,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		return $result;
 	}
 
- 	/**
+	/**
 	 * Creates the list of (other) dates for this topic. Practically, this is
 	 * just a special kind of list view. In case this topic has no other dates,
 	 * this function will return an empty string.
@@ -2910,7 +2910,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	private function setRegistrationLinkMarker($whatToDisplay) {
 		if ($whatToDisplay == 'my_events') {
 			 $this->setMarker('registration',
-			 	(($this->seminar->isUnregistrationPossible())
+				(($this->seminar->isUnregistrationPossible())
 					? $this->registrationManager->getLinkToUnregistrationPage(
 						$this,
 						$this->registration

@@ -53,7 +53,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	 * 0 will unset the entry date)
 	 */
 	 public function setEntryDate($entryDate) {
-	 	$this->setRecordPropertyInteger('entry_date', $entryDate);
+		$this->setRecordPropertyInteger('entry_date', $entryDate);
 	 }
 
 	/**
@@ -63,7 +63,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	 *                unset the begin date)
 	 */
 	 public function setBeginDate($beginDate) {
-	 	$this->setRecordPropertyInteger('begin_date', $beginDate);
+		$this->setRecordPropertyInteger('begin_date', $beginDate);
 	 }
 }
 ?>

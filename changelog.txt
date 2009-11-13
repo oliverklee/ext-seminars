@@ -1,4 +1,5 @@
 0.8.4 (currently working on)
+- [#3508] Cleanup: Replace space + tab with tab
 - [#3484] Fix: In some BE modules the bags are destructed to early or not at all
 - [#3306] Fix: Hide the CSV export, cancel and confirm button for hidden events in the BE module
 - [#2733] Fix: allowCsvExportOfRegistrationsInMyVipEventsView configured via FlexForm has no effect
