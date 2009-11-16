@@ -183,10 +183,10 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			}
 		}
 
+		$this->setContentTypeForRegistrationLists();
 		if ($eventUid == 0) {
 			$result = $this->createListOfRegistrationsOnPage($pid);
 		} else {
-			$this->setContentTypeForRegistrationLists();
 			$result = $this->createListOfRegistrations($eventUid);
 		}
 

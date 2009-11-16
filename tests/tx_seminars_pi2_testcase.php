@@ -585,7 +585,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	// Tests concerning createAndOutputListOfRegistrations
 	////////////////////////////////////////////////////////
 
-	public function testCreateAndOutputListOfRegistrationsCanContainTwoRegistrationUids() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsCanContainTwoRegistrationUids() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -621,7 +624,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsCanContainNameOfUser() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsCanContainNameOfUser() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', 'name'
 		);
@@ -646,7 +652,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithDeletedUser() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithDeletedUser() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -671,7 +680,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithInexistentUser() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithInexistentUser() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -694,7 +706,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsSeparatesLinesWithCarriageReturnAndLineFeed() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsSeparatesLinesWithCarriageReturnAndLineFeed() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -726,7 +741,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsHasResultThatEndsWithCarriageReturnAndLineFeed() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsHasResultThatEndsWithCarriageReturnAndLineFeed() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -757,7 +775,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsEscapesDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsEscapesDoubleQuotes() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'uid,address'
 		);
@@ -778,7 +799,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsDoesNotEscapeRegularValues() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsDoesNotEscapeRegularValues() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
 		);
@@ -799,7 +823,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsWrapsValuesWithSemicolonsInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsWrapsValuesWithSemicolonsInDoubleQuotes() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
 		);
@@ -820,7 +847,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsWrapsValuesWithLineFeedsInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsWrapsValuesWithLineFeedsInDoubleQuotes() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
 		);
@@ -841,7 +871,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsWrapsValuesWithDoubleQuotesInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsWrapsValuesWithDoubleQuotesInDoubleQuotes() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
 		);
@@ -862,7 +895,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsSeparatesTwoValuesWithSemicolons() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsSeparatesTwoValuesWithSemicolons() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address,title'
 		);
@@ -884,7 +920,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsDoesNotWrapHeadlineFieldsInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsDoesNotWrapHeadlineFieldsInDoubleQuotes() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
 		);
@@ -902,7 +941,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfRegistrationsSeparatesHeadlineFieldsWithSemicolons() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsSeparatesHeadlineFieldsWithSemicolons() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address,title'
 		);
@@ -913,7 +955,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', ''
 		);
@@ -927,7 +972,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
 		);
@@ -941,7 +989,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenConfigurationFields() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenConfigurationFields() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
 		);
@@ -955,7 +1006,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfRegistrationsForBothConfigurationFieldsEmptyReturnsEmptyLine() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsForBothConfigurationFieldsEmptyReturnsEmptyLine() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', ''
 		);
@@ -969,7 +1023,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage() {
+	/**
+	 * @test
+	 */
+	public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage() {
 		$this->fixture->piVars['pid'] = $this->pid;
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
@@ -991,7 +1048,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage() {
+	/**
+	 * @test
+	 */
+	public function createAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage() {
 		$this->fixture->piVars['pid'] = $this->pid;
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'address'
@@ -1013,7 +1073,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage() {
+	/**
+	 * @test
+	 */
+	public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage() {
 		$this->fixture->piVars['pid'] = $this->pid;
 		$subpagePid = $this->testingFramework->createSystemFolder($this->pid);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
@@ -1036,7 +1099,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOututListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader() {
+	/**
+	 * @test
+	 */
+	public function createAndOututListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader() {
 		$this->fixture->createAndOutputListOfRegistrations(
 			$this->testingFramework->getAutoIncrement(SEMINARS_TABLE_SEMINARS)
 		);
@@ -1048,12 +1114,42 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOututListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader() {
+	/**
+	 * @test
+	 */
+	public function createAndOututListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader() {
 		$this->fixture->setTypo3Mode('FE');
 		$this->fixture->createAndOutputListOfRegistrations();
 
 		$this->assertContains(
 			'403',
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				->getLastAddedHeader()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForEventUidGivenSetsPageContentTypeToCsv() {
+		$this->fixture->createAndOutputListOfRegistrations($this->eventUid);
+
+		$this->assertContains(
+			'Content-type: text/csv;',
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				->getLastAddedHeader()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForNoEventUidGivenSetsPageContentTypeToCsv() {
+		$this->fixture->piVars['pid'] = $this->pid;
+		$this->fixture->createAndOutputListOfRegistrations();
+
+		$this->assertContains(
+			'Content-type: text/csv;',
 			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
 				->getLastAddedHeader()
 		);
