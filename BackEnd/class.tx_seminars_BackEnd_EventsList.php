@@ -213,7 +213,9 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			);
 			$this->template->setMarker(
 				'show_registrations',
-				(($event->needsRegistration() && $event->hasAttendances())
+				((!$event->isHidden()
+					&& $event->needsRegistration()
+					&& $event->hasAttendances())
 					? $this->createEventRegistrationsLink($event) : ''
 				)
 			);

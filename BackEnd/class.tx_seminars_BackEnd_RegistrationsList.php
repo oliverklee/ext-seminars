@@ -55,7 +55,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 
 	/**
 	 * @var integer parameter for setRegistrationTableMarkers to show the list
-	 *              of reqular registrations
+	 *              of regular registrations
 	 */
 	const REGULAR_REGISTRATIONS = 2;
 
@@ -69,9 +69,6 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 
 		$pageData = $this->page->getPageData();
 
-		$this->template->setMarker(
-			'new_record_button', $this->getNewIcon($pageData['uid'])
-		);
 		$this->template->setMarker(
 			'label_attendee_full_name',
 			$GLOBALS['LANG']->getLL('registrationlist.feuser.name')
@@ -89,21 +86,42 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 			$GLOBALS['LANG']->getLL('registrationlist.seminar.date')
 		);
 
-		$isAnyRegularRegistrationVisible = $this->setRegistrationTableMarkers(
-			self::REGULAR_REGISTRATIONS
-		);
-		$this->template->setMarker(
-			'csv_export_button',
-			($isAnyRegularRegistrationVisible ? $this->getCsvIcon() : '')
+		$eventUid = intval(t3lib_div::GPvar('eventUid'));
+		if (($eventUid > 0)
+		 	&& tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+		 		->existsModel($eventUid)
+		) {
+			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+				->find($eventUid);
+			$registrationsHeading = sprintf(
+				$GLOBALS['LANG']->getLL('registrationlist.label_registrationsHeading'),
+				htmlspecialchars($event->getTitle()),
+				$event->getUid()
+			);
+			$newButton = '';
+		} else {
+			$registrationsHeading = '';
+			$newButton = $this->getNewIcon($pageData['uid']);
+		}
+
+		$areAnyRegularRegistrationsVisible = $this->setRegistrationTableMarkers(
+			self::REGULAR_REGISTRATIONS, $eventUid
 		);
 		$registrationTables = $this->template->getSubpart('REGISTRATION_TABLE');
-
-		$this->setRegistrationTableMarkers(self::REGISTRATIONS_ON_QUEUE);
-
+		$this->setRegistrationTableMarkers(self::REGISTRATIONS_ON_QUEUE, $eventUid);
 		$registrationTables .= $this->template->getSubpart('REGISTRATION_TABLE');
-		$this->template->setMarker('complete_table', $registrationTables);
-		$content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
 
+		$this->template->setOrDeleteMarkerIfNotEmpty(
+			'registrations_heading', $registrationsHeading, '','wrapper'
+		);
+		$this->template->setMarker('new_record_button', $newButton);
+		$this->template->setMarker(
+			'csv_export_button',
+			($areAnyRegularRegistrationsVisible ? $this->getCsvIcon() : '')
+		);
+		$this->template->setMarker('complete_table', $registrationTables);
+
+		$content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
 		$content .= $this->configCheckWarnings;
 
 		return $content;
@@ -111,20 +129,27 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 
 	/**
 	 * Gets the registration table for regular attendances and attendances on
-	 * the registration queue.
+	 * the registration queue on the current page and subpages, if an event UID
+	 * is provided the registrations for an event are shown.
 	 *
 	 * @param integer $registrationsToShow
 	 *        the switch to decide which registrations should be shown must
 	 *        be either
 	 *        tx_seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
 	 *        tx_seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
+	 * @param integer $eventUid
+	 *        The UID of the event to show the registrations for, must be of an
+	 *        existing and non-hidden event or zero, but always >= 0. If the
+	 *        eventUid is zero all registrations on the current page and subpages
+	 *        are shown.
 	 *
 	 * @return boolean true if the generated list is not empty, false otherwise
 	 */
-	private function setRegistrationTableMarkers($registrationsToShow) {
+	private function setRegistrationTableMarkers(
+		$registrationsToShow, $eventUid = 0
+	) {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$pageData = $this->page->getPageData();
-		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 
 		switch ($registrationsToShow) {
 			case self::REGISTRATIONS_ON_QUEUE:
@@ -135,6 +160,11 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 				$builder->limitToRegular();
 				$tableLabel = 'registrationlist.label_regularRegistrations';
 				break;
+		}
+		if ($eventUid > 0) {
+			$builder->limitToEvent($eventUid);
+		} else {
+			$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 		}
 
 		$registrationBag = $builder->build();
@@ -188,8 +218,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 		}
 
 		$this->template->setMarker(
-			'label_registrations',
-			$GLOBALS['LANG']->getLL($tableLabel)
+			'label_registrations', $GLOBALS['LANG']->getLL($tableLabel)
 		);
 		$this->template->setMarker(
 			'number_of_registrations', $registrationBag->count()

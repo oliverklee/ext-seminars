@@ -18,6 +18,10 @@ td.is_full {
 	text-align: right;
 }
 
+td.attendees a {
+	text-decoration: underline;
+}
+
 img.icon {
 	margin-left: 4px;
 }

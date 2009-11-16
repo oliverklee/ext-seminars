@@ -52,10 +52,20 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 	 */
 	private $backEndModule;
 
+	/**
+	 * @var string a backup of the current BE user's language
+	 */
+	private $backEndLanguageBackup;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
+		$this->backEndLanguageBackup = $GLOBALS['LANG']->lang;
+		$GLOBALS['LANG']->lang = 'default';
+
+		// Loads the locallang file for properly working localization in the tests.
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
 		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;
@@ -74,13 +84,16 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 	}
 
 	public function tearDown() {
-		$this->testingFramework->cleanUp();
+		$GLOBALS['LANG']->lang = $this->backEndLanguageBackup;
 
+		$this->testingFramework->cleanUp();
 		tx_seminars_registration::purgeCachedSeminars();
 		$this->fixture->__destruct();
 		$this->backEndModule->__destruct();
+
 		unset(
-			$this->backEndModule, $this->fixture, $this->testingFramework
+			$this->backEndModule, $this->fixture, $this->testingFramework,
+			$_GET['eventUid']
 		);
 	}
 
@@ -335,6 +348,92 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 
 		$this->assertNotContains(
 			'class.tx_seminars_BackEnd_CSV',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showForEventUidSetShowsTitleOfThisEvent() {
+		$_GET['eventUid'] = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+			)
+		);
+
+		$this->assertContains(
+			'event_1',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showForEventUidSetShowsUidOfThisEvent() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'title' => 'event_1',
+			)
+		);
+		$_GET['eventUid'] = $eventUid;
+
+		$this->assertContains(
+			'(UID ' . $eventUid . ')',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showForEventUidSetShowsRegistrationOfThisEvent() {
+		$userUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'user_foo')
+		);
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $eventUid,
+				'user' => $userUid,
+			)
+		);
+
+		$_GET['eventUid'] = $eventUid;
+
+		$this->assertContains(
+			'user_foo',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showForEventUidSetDoesNotShowRegistrationOfAnotherEvent() {
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('name' => 'user_foo')
+				),
+			)
+		);
+
+		$_GET['eventUid'] = $this->testingFramework->createRecord(
+			'tx_seminars_seminars'
+		);
+
+		$this->assertNotContains(
+			'user_foo',
 			$this->fixture->show()
 		);
 	}

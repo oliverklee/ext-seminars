@@ -38,6 +38,7 @@
 			<label index="registrationlist.seminar.date">Event date</label>
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
 			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
+			<label index="registrationlist.label_registrationsHeading">Registrations for event &quot;%s&quot; (UID %u)</label>
 			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder &quot;%s&quot; (UID %u)</label>
 			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder &quot;%s&quot; (UID %u).</label>
 			<label index="eventMailForm_subject">Subject:</label>
@@ -114,6 +115,7 @@
 			<label index="registrationlist.seminar.date">Veranstaltungsdatum</label>
 			<label index="registrationlist.label_regularRegistrations">Reguläre Anmeldungen</label>
 			<label index="registrationlist.label_queueRegistrations">Anmeldungen auf der Warteliste</label>
+			<label index="registrationlist.label_registrationsHeading">Anmeldungen für die Veranstaltung &quot;%s&quot; (UID %u)</label>
 			<label index="label_create_record_in_foreign_folder">Der Datensatz wird im SysFolder &quot;%s&quot; (UID %u) erstellt.</label>
 			<label index="label_create_record_in_current_folder">Der Datensatz wird im aktuellen SysFolder &quot;%s&quot; (UID %u) erstellt.</label>
 			<label index="eventMailForm_subject">Betreff:</label>
@@ -258,6 +260,7 @@
 			<label index="registrationlist.seminar.date" type="integer">56229706</label>
 			<label index="registrationlist.label_regularRegistrations" type="integer">52997146</label>
 			<label index="registrationlist.label_queueRegistrations" type="integer">122173419</label>
+			<label index="registrationlist.label_registrationsHeading" type="integer">100082751</label>
 			<label index="referencesWarning" type="integer">94848684</label>
 			<label index="eventlist_status" type="integer">247806604</label>
 			<label index="eventlist_status_canceled" type="integer">224147873</label>
@@ -408,6 +411,7 @@
 			<label index="registrationlist.seminar.date">Event date</label>
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
 			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
+			<label index="registrationlist.label_registrationsHeading">Registrations for event &quot;%s&quot; (UID %u)</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 			<label index="eventlist_status">Status</label>
 			<label index="eventlist_status_canceled">canceled</label>

@@ -677,6 +677,27 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	public function testShowForHiddenEventWithRegistrationDoesNotHaveShowLink() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'needs_registration' => 1,
+				'hidden' => 1,
+			)
+		);
+
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+		);
+
+		$this->assertNotContains(
+			$GLOBALS['LANG']->getLL('label_show_event_registrations'),
+			$this->fixture->show()
+		);
+	}
+
 
 	/////////////////////////
 	// Tests for the icons.
