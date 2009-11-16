@@ -438,6 +438,76 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function showForEventUidAddsEventUidToCsvExportIcon() {
+		$userUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'user_foo')
+		);
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $eventUid,
+				'user' => $userUid,
+			)
+		);
+
+		$_GET['eventUid'] = $eventUid;
+
+		$this->assertContains(
+			'tx_seminars_pi2[eventUid]=' . $eventUid,
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showForEventUidDoesNotAddPidToCsvExportIcon() {
+		$userUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'user_foo')
+		);
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $eventUid,
+				'user' => $userUid,
+			)
+		);
+
+		$_GET['eventUid'] = $eventUid;
+
+		$this->assertNotContains(
+			'tx_seminars_pi2[pid]=',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showForNoEventUidDoesNotAddEventUidToCsvExportIcon() {
+		$userUid = $this->testingFramework->createFrontEndUser(
+			'', array('name' => 'user_foo')
+		);
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $eventUid,
+				'user' => $userUid,
+			)
+		);
+
+		$this->assertNotContains(
+			'tx_seminars_pi2[eventUid]=',
+			$this->fixture->show()
+		);
+	}
+
 
 	//////////////////////////////////////
 	// Tests concerning the "new" button

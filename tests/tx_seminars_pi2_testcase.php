@@ -511,7 +511,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
-		$this->fixture->piVars['seminar'] = $this->eventUid;
+		$this->fixture->piVars['eventUid'] = $this->eventUid;
 
 		$this->assertContains(
 			$this->fixture->translate('label_yes'),
@@ -535,7 +535,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
-		$this->fixture->piVars['seminar'] = $this->eventUid;
+		$this->fixture->piVars['eventUid'] = $this->eventUid;
 
 		$this->assertContains(
 			(string) $registrationUid,

@@ -120,7 +120,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					break;
 				case SEMINARS_TABLE_ATTENDANCES:
 					$result = $this->createAndOutputListOfRegistrations(
-						intval($this->piVars['seminar'])
+						intval($this->piVars['eventUid'])
 					);
 					break;
 				default:

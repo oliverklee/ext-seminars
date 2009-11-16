@@ -272,7 +272,7 @@ abstract class tx_seminars_BackEnd_List {
 			TAB . TAB . TAB .
 			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' . $pageData['uid'] .
 			'&amp;tx_seminars_pi2[table]=' . $this->tableName .
-			'&amp;tx_seminars_pi2[pid]=' . $pageData['uid'] . '">' . LF .
+			$this->getAdditionalCsvParameters() . '">' . LF .
 			TAB . TAB . TAB . TAB .
 			'<img' .
 			t3lib_iconWorks::skinImg(
@@ -375,6 +375,19 @@ abstract class tx_seminars_BackEnd_List {
 		return tx_oelib_BackEndLoginManager::getInstance()->getLoggedInUser(
 			'tx_seminars_Mapper_BackEndUser'
 		);
+	}
+
+	/**
+	 * Returns the parameters to add to the CSV icon link.
+	 *
+	 * @return string the additional link parameters for the CSV icon link, will
+	 *                always start with an &amp and be htmlspecialchared, may
+	 *                be empty
+	 */
+	protected function getAdditionalCsvParameters() {
+		$pageData = $this->page->getPageData();
+
+		return '&amp;tx_seminars_pi2[pid]=' . $pageData['uid'];
 	}
 }
 

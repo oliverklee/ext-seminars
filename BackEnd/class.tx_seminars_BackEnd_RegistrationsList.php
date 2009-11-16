@@ -60,6 +60,11 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	const REGULAR_REGISTRATIONS = 2;
 
 	/**
+	 * @var integer the UID of the event to show the registrations for
+	 */
+	private $eventUid = 0;
+
+	/**
 	 * Generates and prints out a registrations list.
 	 *
 	 * @return string the HTML source code to display
@@ -91,6 +96,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 		 	&& tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 		 		->existsModel($eventUid)
 		) {
+			$this->eventUid = $eventUid;
 			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 				->find($eventUid);
 			$registrationsHeading = sprintf(
@@ -105,10 +111,10 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 		}
 
 		$areAnyRegularRegistrationsVisible = $this->setRegistrationTableMarkers(
-			self::REGULAR_REGISTRATIONS, $eventUid
+			self::REGULAR_REGISTRATIONS
 		);
 		$registrationTables = $this->template->getSubpart('REGISTRATION_TABLE');
-		$this->setRegistrationTableMarkers(self::REGISTRATIONS_ON_QUEUE, $eventUid);
+		$this->setRegistrationTableMarkers(self::REGISTRATIONS_ON_QUEUE);
 		$registrationTables .= $this->template->getSubpart('REGISTRATION_TABLE');
 
 		$this->template->setOrDeleteMarkerIfNotEmpty(
@@ -129,25 +135,21 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 
 	/**
 	 * Gets the registration table for regular attendances and attendances on
-	 * the registration queue on the current page and subpages, if an event UID
-	 * is provided the registrations for an event are shown.
+	 * the registration queue.
+	 *
+	 * If an event UID > 0 in $this->eventUid is set, the registrations of this
+	 * event will be listed, otherwise the registrations on the current page and
+	 * subpages will be listed.
 	 *
 	 * @param integer $registrationsToShow
-	 *        the switch to decide which registrations should be shown must
+	 *        the switch to decide which registrations should be shown, must
 	 *        be either
 	 *        tx_seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
 	 *        tx_seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
-	 * @param integer $eventUid
-	 *        The UID of the event to show the registrations for, must be of an
-	 *        existing and non-hidden event or zero, but always >= 0. If the
-	 *        eventUid is zero all registrations on the current page and subpages
-	 *        are shown.
 	 *
 	 * @return boolean true if the generated list is not empty, false otherwise
 	 */
-	private function setRegistrationTableMarkers(
-		$registrationsToShow, $eventUid = 0
-	) {
+	private function setRegistrationTableMarkers($registrationsToShow) {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$pageData = $this->page->getPageData();
 
@@ -161,8 +163,8 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 				$tableLabel = 'registrationlist.label_regularRegistrations';
 				break;
 		}
-		if ($eventUid > 0) {
-			$builder->limitToEvent($eventUid);
+		if ($this->eventUid > 0) {
+			$builder->limitToEvent($this->eventUid);
 		} else {
 			$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 		}
@@ -244,6 +246,23 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	 */
 	protected function getNewRecordPid() {
 		return $this->getLoggedInUser()->getRegistrationFolderFromGroup();
+	}
+
+	/**
+	 * Returns the parameters to add to the CSV icon link.
+	 *
+	 * @return string the additional link parameters for the CSV icon link, will
+	 *                always start with an &amp and be htmlspecialchared, may
+	 *                be empty
+	 */
+	protected function getAdditionalCsvParameters() {
+		if ($this->eventUid > 0) {
+			$result = '&amp;tx_seminars_pi2[eventUid]=' . $this->eventUid;
+		} else {
+			$result = parent::getAdditionalCsvParameters();
+		}
+
+		return $result;
 	}
 }
 
