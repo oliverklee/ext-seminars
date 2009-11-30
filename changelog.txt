@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3551] Fix: The configuration registry needs to make sure the configuration is loaded in the FE
 - [#3517] Fix: The CSV export page for the registrations on a page, has the wrong content type
 - [#3298] Feature: Provide a way to list the registrations for a selected event
 - [#3508] Cleanup: Replace space + tab with tab

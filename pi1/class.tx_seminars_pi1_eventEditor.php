@@ -1628,12 +1628,6 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @return array the basic data as an associative array, will not be empty
 	 */
 	private static function createBasicAuxiliaryData() {
-		$GLOBALS['TSFE']->tmpl->start(
-			t3lib_div::makeInstance('t3lib_pageSelect')->getRootLine(
-				$GLOBALS['TSFE']->id
-			)
-		);
-
 		$owner = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 		$ownerPageUid = $owner->getAuxiliaryRecordsPid();
