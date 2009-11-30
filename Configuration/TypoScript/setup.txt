@@ -2537,10 +2537,9 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					company = renderlet:TEXTAREA
+					company = renderlet:TEXT
 					company {
 						name = company
-						custom = rows="3" cols="20"
 						data.defaultvalue.userobj {
 							extension = this
 							method = getFeUserData
