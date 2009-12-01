@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>tx_seminars_0_8_x</name>
+	<name>seminars_0_8_x</name>
 	<comment></comment>
 	<projects>
 		<project>tx_oelib</project>
+		<project>oelib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
