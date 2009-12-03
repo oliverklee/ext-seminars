@@ -288,11 +288,11 @@ class tx_seminars_cli_MailNotifier {
 	private function customizeMessage(
 		$locallangKey, tx_seminars_seminar $event, $organizerName = ''
 	) {
+		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry
+			::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(
 			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
 		);
-		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry
-			::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
 		$result = $GLOBALS['LANG']->getLL($locallangKey);
 
 		foreach (array(
