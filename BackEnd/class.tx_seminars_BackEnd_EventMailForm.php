@@ -431,9 +431,8 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * @return string HTML for the submit button, will not be empty
 	 */
 	protected function createSubmitButton() {
-		return '<p><input type="submit" value="' .
-			$this->getSubmitButtonLabel() .
-			'" class="submitButton '. $this->action . '" /></p>';
+		return '<p><button class="submitButton '. $this->action . '">' .
+			'<p>' . $this->getSubmitButtonLabel() . '</p></button></p>';
 	}
 
 	/**

@@ -132,9 +132,9 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 
 	public function testRenderContainsSubmitButton() {
 		$this->assertContains(
-			'<input type="submit" value="' .
+			'<button class="submitButton confirmEvent"><p>' .
 				$GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
-				'" class="submitButton confirmEvent" />',
+				'</p></button>',
 			$this->fixture->render()
 		);
 	}

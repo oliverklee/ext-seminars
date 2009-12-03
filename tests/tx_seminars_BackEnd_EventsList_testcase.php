@@ -321,7 +321,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Confirm" />',
+			'<button><p>Confirm</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -336,7 +336,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Confirm" />',
+			'<button><p>Confirm</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -352,7 +352,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<input type="submit" value="Confirm" />',
+			'<button><p>Confirm</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -368,7 +368,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<input type="submit" value="Confirm" />',
+			'<button><p>Confirm</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -383,7 +383,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Confirm" />',
+			'<button><p>Confirm</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -398,7 +398,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<input type="submit" value="Confirm" />' .
+			'<button><p>Confirm</p></button>' .
 			'<input type="hidden" name="eventUid" value="' . $uid . '" />',
 			$this->fixture->show()
 		);
@@ -417,7 +417,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Confirm" />',
+			'<button><p>Confirm</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -433,7 +433,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Cancel" />',
+			'<button><p>Cancel</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -448,7 +448,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Cancel" />',
+			'<button><p>Cancel</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -463,7 +463,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<input type="submit" value="Cancel" />',
+			'<button><p>Cancel</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -479,7 +479,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<input type="submit" value="Cancel" />',
+			'<button><p>Cancel</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -495,7 +495,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Cancel" />',
+			'<button><p>Cancel</p></button>',
 			$this->fixture->show()
 		);
 	}
@@ -510,7 +510,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<input type="submit" value="Cancel" />' .
+			'<button><p>Cancel</p></button>' .
 			'<input type="hidden" name="eventUid" value="' . $uid . '" />',
 			$this->fixture->show()
 		);
@@ -529,7 +529,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<input type="submit" value="Cancel" />',
+			'<button><p>Cancel</p></button>',
 			$this->fixture->show()
 		);
 	}

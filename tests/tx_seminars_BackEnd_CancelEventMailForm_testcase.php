@@ -133,9 +133,9 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 
 	public function testRenderContainsSubmitButton() {
 		$this->assertContains(
-			'<input type="submit" value="' .
+			'<button class="submitButton cancelEvent"><p>' .
 			$GLOBALS['LANG']->getLL('cancelMailForm_sendButton') .
-			'" class="submitButton cancelEvent" />',
+			'</p></button>',
 			$this->fixture->render()
 		);
 	}
