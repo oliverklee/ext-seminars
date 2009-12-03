@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3574] Change: Change the default texts in the cancel/confirm forms
 - [#3533] Change: Make the company field one line and document how to change that
 - [#3551] Fix: The configuration registry needs to make sure the configuration is loaded in the FE
 - [#3517] Fix: The CSV export page for the registrations on a page, has the wrong content type
