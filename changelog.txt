@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3575] Change: Tweak the texts in the unregistration e-mail
 - [#3541] Fix: Failure in test case testSendRemindersToOrganizersForCliBackendUserWithLanguageGermanSendsReminderInGerman
 - [#3573] Change: Make the BE cancel/confirm e-mail form buttons play nicely with the new TYPO3 4.3 buttons styles
 - [#3574] Change: Change the default texts in the cancel/confirm forms

@@ -100,8 +100,8 @@
 			<label index="email_confirmationHello_formal">thank you for registering for this event:</label>
 			<label index="email_confirmationHello_informal">thank you for registering for this event:</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">you just have unregistered from this event:</label>
-			<label index="email_confirmationOnUnregistrationHello_informal">you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from this event.</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">hereby, we confirm your unregistration from this event.</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of this event:</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of this event:</label>
@@ -337,8 +337,8 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="email_confirmationHello_formal">vielen Dank für Ihre Anmeldung zu dieser Veranstaltung:</label>
 			<label index="email_confirmationHello_informal">vielen Dank für deine Anmeldung zu dieser Veranstaltung:</label>
 			<label index="email_confirmationOnUnregistrationSubject">Abmeldebestätigung</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">Sie haben sich gerade von dieser Veranstaltung abgemeldet:</label>
-			<label index="email_confirmationOnUnregistrationHello_informal">du hast dich gerade von dieser Veranstaltung abgemeldet:</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">hiermit bestätigen wir Ihre Abmeldung von dieser Veranstaltung.</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">hiermit bestätigen wir deine Abmeldung von dieser Veranstaltung.</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Anmeldebestätigung für die Warteliste</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_formal">vielen Dank für Ihre Anmeldung für die Warteliste von dieser Veranstaltung:</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">vielen Dank für deine Anmeldung für die Warteliste von dieser Veranstaltung:</label>
@@ -986,8 +986,8 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
 			<label index="email_confirmationHello_formal" type="integer">211059923</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
-			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">235936024</label>
-			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">235936024</label>
+			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">137529634</label>
+			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">137529634</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject" type="integer">245357554</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">54068632</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">54068632</label>
@@ -1509,8 +1509,8 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_confirmationHello_formal">thank you for registering for this event:</label>
 			<label index="email_confirmationHello_informal">thank you for registering for this event:</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">you just have unregistered from this event:</label>
-			<label index="email_confirmationOnUnregistrationHello_informal">you just have unregistered from this event:</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from this event.</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">hereby, we confirm your unregistration from this event.</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of this event:</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of this event:</label>
