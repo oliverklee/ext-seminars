@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3542] Fix: Failure in test case test_limitToAge_ForEventWithoutTargetGroupAndAgeProvided_FindsThisEvent
 - [#3575] Change: Tweak the texts in the unregistration e-mail
 - [#3541] Fix: Failure in test case testSendRemindersToOrganizersForCliBackendUserWithLanguageGermanSendsReminderInGerman
 - [#3573] Change: Make the BE cancel/confirm e-mail form buttons play nicely with the new TYPO3 4.3 buttons styles

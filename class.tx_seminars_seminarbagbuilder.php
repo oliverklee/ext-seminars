@@ -1173,8 +1173,6 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			return;
 		}
 
-		$matchingEvents = '';
-
 		$matchingTargetGroups = implode(',',
 			tx_oelib_db::selectColumnForMultiple(
 				'uid',
@@ -1184,6 +1182,14 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			)
 		);
 
+		$eventsWithoutTargetGroup = tx_oelib_db::selectColumnForMultiple(
+			'uid',
+			SEMINARS_TABLE_SEMINARS,
+			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' OR ' .
+				'object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ') AND ' .'
+				(target_groups = 0)' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
+		);
 		if ($matchingTargetGroups != '') {
 			$eventsWithMatchingTargetGroup
 				= tx_oelib_db::selectColumnForMultiple(
@@ -1192,33 +1198,25 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 					'uid_foreign IN (' . $matchingTargetGroups . ')',
 					'uid_local'
 				);
-			$eventsWithoutTargetGroup = tx_oelib_db::selectColumnForMultiple(
-				'uid',
-				SEMINARS_TABLE_SEMINARS,
-				'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' OR ' .
-					'object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ') AND ' .'
-					(target_groups = 0)' .
-					tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
-			);
 
-			$matchingEvents = implode(
-				',',
-				array_merge(
-					$eventsWithMatchingTargetGroup,
-					$eventsWithoutTargetGroup
-				)
+			$matchingEventsUids = array_merge(
+				$eventsWithMatchingTargetGroup,
+				$eventsWithoutTargetGroup
 			);
+		} else {
+			$matchingEventsUids = $eventsWithoutTargetGroup;
 		}
 
-		if ($matchingEvents == '') {
+		if (empty($matchingEventsUids)) {
 			$this->whereClauseParts['ageLimit'] = '(0 = 1)';
 		} else {
+			$matchingEventsUidList = implode(',', $matchingEventsUids);
 			$this->whereClauseParts['ageLimit'] =
 				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
-					SEMINARS_TABLE_SEMINARS .'.uid IN (' . $matchingEvents . ')) ' .
+					SEMINARS_TABLE_SEMINARS .'.uid IN (' . $matchingEventsUidList . ')) ' .
 					'OR ' .
 					'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
-					'topic IN ' . '(' . $matchingEvents . '))' .
+					'topic IN ' . '(' . $matchingEventsUidList . '))' .
 				')';
 		}
 	}

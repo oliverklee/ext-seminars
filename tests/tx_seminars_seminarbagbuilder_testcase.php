@@ -7157,7 +7157,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_LimitToEventsWithVacancies_ForEventWithNoVacanciesThroughOfflineRegistrations_DoesNotFindThisEvent() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'needs_registration' => 1,
@@ -7291,7 +7291,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_limitToOrganizers_ForOneProvidedOrganizerAndEventWithoutOrganizer_DoesNotFindThisEvent() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 		$organizerUid = $this->testingFramework->createRecord(
@@ -7606,7 +7606,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_limitToAge_ForEventWithoutTargetGroupAndAgeProvided_FindsThisEvent() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
 
