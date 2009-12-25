@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3588] Feature: Add registration model and mapper
 - [#3542] Fix: Failure in test case test_limitToAge_ForEventWithoutTargetGroupAndAgeProvided_FindsThisEvent
 - [#3575] Change: Tweak the texts in the unregistration e-mail
 - [#3541] Fix: Failure in test case testSendRemindersToOrganizersForCliBackendUserWithLanguageGermanSendsReminderInGerman
