@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009 Bernd Schönbach <bernd@oliverklee.de>
+* (c) 2009-2010 Bernd Schönbach <bernd@oliverklee.de>
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
