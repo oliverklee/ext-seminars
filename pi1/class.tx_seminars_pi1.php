@@ -212,7 +212,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	public function main($unused, array $conf) {
 		$result = '';
 
-		try{
+		try {
 			$this->init($conf);
 			$this->pi_initPIflexForm();
 
