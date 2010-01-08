@@ -26,15 +26,15 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
-require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-
 /**
- * Testcase for the 'frontEndSelectorWidget' class in the 'seminars' extension.
+ * Testcase for the tx_seminars_pi1_frontEndSelectorWidget class in the
+ * "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	/**
@@ -314,7 +314,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
 		);
 
-		$this->fixture->piVars['event_type'][] = $eventTypeUid;
+		$this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
 
 		$this->assertContains(
 			$eventTypeUid . '" selected="selected">' . $eventTypeTitle .
@@ -344,8 +344,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid2)
 		);
 
-		$this->fixture->piVars['event_type'][] = $eventTypeUid;
-		$this->fixture->piVars['event_type'][] = $eventTypeUid2;
+		$this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
+		$this->fixture->piVars['event_type'][] = (string) $eventTypeUid2;
 
 		$output = $this->fixture->render();
 
@@ -585,7 +585,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
 		);
 
-		$this->fixture->piVars['place'][] = $placeUid;
+		$this->fixture->piVars['place'][] = (string) $placeUid;
 
 		$this->assertContains(
 			'<option value="' . $placeUid . '" selected="selected">' . $placeTitle . '</option>',
@@ -616,8 +616,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid2, 'place'
 		);
 
-		$this->fixture->piVars['place'][] = $placeUid;
-		$this->fixture->piVars['place'][] = $placeUid2;
+		$this->fixture->piVars['place'][] = (string) $placeUid;
+		$this->fixture->piVars['place'][] = (string) $placeUid2;
 
 		$output = $this->fixture->render();
 
@@ -1277,9 +1277,9 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////////////
-	// Tests concerning the organizer limitation
-	//////////////////////////////////////////////
+	////////////////////////////////////////////////
+	// Tests concerning the organizer search widget
+	////////////////////////////////////////////////
 
 	public function test_Render_ForOrganizersLimitedAndOrganizerDisplayed_ShowsTheLimitedOrganizers() {
 		$this->fixture->setConfigurationValue(
@@ -1486,7 +1486,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
 		);
 
-		$this->fixture->piVars['organizer'][] = $organizerUid;
+		$this->fixture->piVars['organizer'][] = (string) $organizerUid;
 
 		$this->assertContains(
 			$organizerUid . '" selected="selected">' . $organizerName .
@@ -1518,8 +1518,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid2, 'organizers'
 		);
 
-		$this->fixture->piVars['organizer'][] = $organizerUid1;
-		$this->fixture->piVars['organizer'][] = $organizerUid2;
+		$this->fixture->piVars['organizer'][] = (string) $organizerUid1;
+		$this->fixture->piVars['organizer'][] = (string) $organizerUid2;
 
 		$output = $this->fixture->render();
 

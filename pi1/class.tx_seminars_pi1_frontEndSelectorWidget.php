@@ -224,7 +224,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 			// Preselects the option if it was selected by the user.
 			if (isset($this->piVars[$name])
-				&& (in_array($key, $this->piVars[$name], true))
+				&& (in_array((string) $key, $this->piVars[$name], true))
 			) {
 				$selected = ' selected="selected"';
 			} else {
