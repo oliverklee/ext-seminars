@@ -1154,7 +1154,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForSentFromDate_PreselectsFromDateValues() {
+	/**
+	 * @test
+	 */
+	public function renderForSentFromDatePreselectsFromDateValues() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1162,10 +1165,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'numberOfYearsInDateFilter', 2
 		);
 
-
+		$thisYear = date('Y', mktime());
 		$this->fixture->piVars['from_day'] = 2;
 		$this->fixture->piVars['from_month'] = 5;
-		$this->fixture->piVars['from_year'] = 2009;
+		$this->fixture->piVars['from_year'] = $thisYear;
 
 		$output = $this->fixture->render();
 
@@ -1178,7 +1181,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			$output
 		);
 		$this->assertContains(
-			'<option value="2009" selected="selected">2009</option>',
+			'<option value="' . $thisYear . '" selected="selected">' .
+				$thisYear . '</option>',
 			$output
 		);
 	}
