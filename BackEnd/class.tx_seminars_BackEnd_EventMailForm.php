@@ -394,7 +394,9 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 			$eMail->setSubject($this->getPostData('subject'));
 			$eMail->addRecipient($registration->getFrontEndUser());
 			$eMail->setMessage(
-				$this->createMessageBody($registration->getFrontEndUser())
+				$this->createMessageBody(
+					$registration->getFrontEndUser(), $organizer
+				)
 			);
 
 			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
@@ -512,21 +514,28 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * Creates the message body for the e-mail.
 	 *
 	 * @param tx_seminars_Model_FrontEndUser $user the recipient of the e-mail
+	 * @param tx_seminars_organizer $organizer
+	 *                              the organizer which is selected as sender
 	 *
 	 * @return string the messsage with the salutation replaced by the user's
 	 *                name, will be empty if no message has been set in the POST
 	 *                data
 	 */
-	private function createMessageBody(tx_seminars_Model_FrontEndUser $user) {
+	private function createMessageBody(
+		tx_seminars_Model_FrontEndUser $user, tx_seminars_organizer $organizer
+	) {
 		$salutation = tx_oelib_ObjectFactory::make('tx_seminars_EmailSalutation');
-		$result = str_replace(
+		$messageText = str_replace(
 			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$salutation->getSalutation($user),
 			$this->getPostData('messageBody')
 		);
 		$salutation->__destruct();
+		$organizerFooter = $organizer->getEmailFooter();
+		$messageFooter = ($organizerFooter != '') ? LF . '-- ' . LF .
+			$organizerFooter : '';
 
-		return $result;
+		return $messageText . $messageFooter;
 	}
 }
 

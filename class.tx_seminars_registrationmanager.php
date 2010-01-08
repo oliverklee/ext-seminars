@@ -1205,7 +1205,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$footers = $event->getOrganizersFooter();
-		$this->setMarker('footer', (!empty($footers)) ? '-- ' . LF . $footers[0] : '');
+		$this->setMarker(
+			'footer',
+			(!empty($footers)) ? LF . '-- ' . LF . $footers[0] : ''
+		);
 
 		return $this->getSubpart(
 			(($useHtml) ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU')

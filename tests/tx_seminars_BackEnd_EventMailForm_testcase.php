@@ -505,6 +505,83 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function sendEmailToRegistrationsAppendsOrganizersFooterToMessageBodyIfSet() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@valid-email.org')
+				)
+			)
+		);
+		$organizerFooter = 'organizer footer';
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+				'sender' => $this->testingFramework->createRecord(
+					SEMINARS_TABLE_ORGANIZERS,
+					array(
+						'title' => 'Second Organizer',
+						'email' => 'bar@example.org',
+						'email_footer' => $organizerFooter,
+					)
+				)
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertContains(
+			LF . '-- ' . LF . $organizerFooter,
+			quoted_printable_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendEmailToRegistrationsForOrganizerWithoutFooterDoesNotAppendFooterMarkersToMessageBody() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@valid-email.org')
+				)
+			)
+		);
+		$organizerFooter = 'organizer footer';
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+				'sender' => $this->organizerUid
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertNotContains(
+			LF . '-- ' . LF,
+			quoted_printable_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
+		);
+	}
+
 
 	/////////////////////////////////
 	// Tests for redirectToListView

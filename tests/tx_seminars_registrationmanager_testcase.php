@@ -1784,7 +1784,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$pi1->__destruct();
 
 		$this->assertContains(
-			'-- ' . LF . 'organizer footer',
+			LF . '-- ' . LF . 'organizer footer',
 			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
