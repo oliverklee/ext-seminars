@@ -97,6 +97,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array(
 				'title' => 'test organizer',
 				'email' => 'mail@example.com',
+				'email_footer' => 'organizer footer',
 			)
 		);
 
@@ -1766,6 +1767,27 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'<a href=3D"' . $seminarLink,
 			tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendee_AppendsOrganizersFooterToMailBody() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$registration->__destruct();
+		$pi1->__destruct();
+
+		$this->assertContains(
+			'-- ' . LF . 'organizer footer',
+			quoted_printable_decode(
+				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			)
 		);
 	}
 

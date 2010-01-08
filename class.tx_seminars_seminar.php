@@ -2206,7 +2206,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets our organizers' e-mail footers.
 	 *
-	 * @return array the organizers' e-mail footers.
+	 * @return array the organizers' e-mail footers, will be empty if no
+	 *               organzier was set, or all organizers have no e-mail footer
 	 */
 	public function getOrganizersFooter() {
 		if (!$this->hasOrganizers()) {
@@ -2217,7 +2218,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$organizers = $this->getOrganizerBag();
 		foreach ($organizers as $organizer) {
-			$result[] = $organizer->getEmailFooter();
+			$emailFooter = $organizer->getEmailFooter();
+			if ($emailFooter != '') {
+				$result[] = $emailFooter;
+			}
 		}
 		$organizers->__destruct();
 

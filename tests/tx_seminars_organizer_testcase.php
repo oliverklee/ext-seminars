@@ -122,11 +122,20 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEmailFooter() {
+	/**
+	 * @test
+	 */
+	public function getEmailFooterForEmptyFooterReturnsEmptyString() {
 		$this->assertEquals(
 			'',
 			$this->fixture->getEmailFooter()
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEmailFooterForNonEmptyFooterReturnsThisFooter() {
 		$this->assertEquals(
 			'line 1'.LF.'line 2',
 			$this->maximalFixture->getEmailFooter()

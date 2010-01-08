@@ -3102,14 +3102,25 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersFootersWithNoOrganizersReturnsEmptyString() {
+
+	/////////////////////////////////////////
+	// Tests concerning getOrganizersFooter
+	/////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getOrganizersFootersWithNoOrganizersReturnsEmptyArray() {
 		$this->assertEquals(
 			array(),
 			$this->fixture->getOrganizersFooter()
 		);
 	}
 
-	public function testGetOrganizersFootersWithSingleOrganizerReturnsSingleOrganizer() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersFootersWithSingleOrganizerReturnsSingleOrganizerFooter() {
 		$organizer = array('email_footer' => 'test email footer');
 		$this->addOrganizerRelation($organizer);
 		$this->assertEquals(
@@ -3118,7 +3129,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersFootersWithMultipleOrganizersReturnsTwoOrganizers() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersFootersWithMultipleOrganizersReturnsTwoOrganizerFooters() {
 		$firstOrganizer = array('email_footer' => 'test email footer');
 		$secondOrganizer = array('email_footer' => 'test email footer');
 		$this->addOrganizerRelation($firstOrganizer);
@@ -3131,6 +3145,36 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->getOrganizersFooter()
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getOrganizersFootersWithSingleOrganizerWithoutEMailFooterReturnsEmptyArray() {
+		$this->addOrganizerRelation();
+
+		$this->assertEquals(
+			array(),
+			$this->fixture->getOrganizersFooter()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getOrganizersFootersWithTwoOrganizersOneWithFooterOneWithoutrReturnsOnlyTheNonEmptyFooter() {
+		$secondOrganizer = array('email_footer' => 'test email footer');
+		$this->addOrganizerRelation();
+		$this->addOrganizerRelation($secondOrganizer);
+		$this->assertEquals(
+			array($secondOrganizer['email_footer']),
+			$this->fixture->getOrganizersFooter()
+		);
+	}
+
+
+	///////////////////////////////////////
+	// Tests concerning getAttendancesPid
+	///////////////////////////////////////
 
 	public function testGetAttendancesPidWithNoOrganizerReturnsZero() {
 		$this->assertEquals(
