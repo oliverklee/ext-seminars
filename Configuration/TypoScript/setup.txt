@@ -65,9 +65,6 @@ plugin.tx_seminars {
 	# Whether to send a confirmation to the user if the queue has been updated.
 	sendConfirmationOnQueueUpdate = 1
 
-	# Whether to add the CSV file of the registrations when sending the e-mail to the organizers.
-	addRegistrationCsvToOrganizerMail = 0
-
 	# the time format (in strftime format)
 	timeFormat = %H:%M
 
