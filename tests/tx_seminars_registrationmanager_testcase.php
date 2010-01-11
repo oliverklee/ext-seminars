@@ -2503,7 +2503,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	// Tests concerning the salutation
 	////////////////////////////////////
 
-	public function test_NotifyAttendee_ForInformalSalutation_ContainsInformalSalutation() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationContainsInformalSalutation() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_ConfigurationRegistry::getInstance()->get('seminars')
 			->setAsString('salutation', 'informal');
@@ -2528,7 +2531,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForFormalSalutationAndGenderUnknown_ContainsFormalUnknownSalutation() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndGenderUnknownContainsFormalUnknownSalutation() {
 		if (t3lib_extMgm::isLoaded('sr_feuser_register')) {
 			$this->markTestSkipped(
 				'This test is only applicable if sr_feuser_register is ' .
@@ -2559,7 +2565,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForFormalSalutationAndGenderMale_ContainsFormalMaleSalutation() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation() {
 		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
 			$this->markTestSkipped(
 				'This test is only applicable if sr_feuser_register is ' .
@@ -2590,7 +2599,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForFormalSalutationAndGenderFemale_ContainsFormalFemaleSalutation() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation() {
 		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
 			$this->markTestSkipped(
 				'This test is only applicable if sr_feuser_register is ' .
@@ -2621,7 +2633,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForFormalSalutationAndConfirmation_ContainsFormalConfirmationText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
@@ -2637,14 +2652,20 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate('email_confirmationHello_formal'),
+			sprintf(
+				$this->fixture->translate('email_confirmationHello_formal'),
+				$this->seminar->getTitle()
+			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 			)
 		);
 	}
 
-	public function test_NotifyAttendee_ForInformalSalutationAndConfirmation_ContainsInformalConfirmationText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndConfirmationContainsInformalConfirmationText() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		$this->fixture->setConfigurationValue('salutation', 'informal');
 		$registration = $this->createRegistration();
@@ -2660,14 +2681,142 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate('email_confirmationHello_informal'),
+			sprintf(
+				$this->fixture->translate('email_confirmationHello_informal'),
+				$this->seminar->getTitle()
+			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
 			)
 		);
 	}
 
-	public function test_NotifyAttendee_ForFormalSalutationAndUnregistration_ContainsFormalUnregistrationText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForConfirmationContainsEventsDate() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('email_eventDate'),
+				$this->seminar->getDate('-')
+			),
+			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForConfirmationAndEventWithoutEndDateContainsEventsBeginTime() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminar->getUid(), array('end_date' => 0));
+		$this->seminar->setEndDate(0);
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('email_timeAt'),
+				$this->seminar->getTime()
+			),
+			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForConfirmationAndEventWithoutDatedoesNotContainEventDateMarker() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+		$this->seminar->setEndDate(0);
+		$this->seminar->setBeginDate(0);
+
+		$this->assertNotContains(
+			$this->fixture->translate('email_eventDate'),
+			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForConfirmationAndEventWithBeginAndEndTimeContainsEventTimeFromAndToMarkers() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertContains(
+			sprintf(
+				$this->fixture->translate('email_timeFrom'),
+				$this->seminar->getTime(
+					' ' . $this->fixture->translate('email_timeTo') . ' '
+				)
+			),
+			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndUnregistrationContainsFormalUnregistrationText() {
 		$this->fixture->setConfigurationValue(
 			'sendConfirmationOnUnregistration', true
 		);
@@ -2687,8 +2836,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate(
-				'email_confirmationOnUnregistrationHello_formal'
+			sprintf(
+				$this->fixture->translate(
+					'email_confirmationOnUnregistrationHello_formal'
+				),
+				$this->seminar->getTitle()
 			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
@@ -2696,7 +2848,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForInformalSalutationAndUnregistration_ContainsInformalUnregistrationText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndUnregistrationContainsInformalUnregistrationText() {
 		$this->fixture->setConfigurationValue(
 			'sendConfirmationOnUnregistration', true
 		);
@@ -2716,8 +2871,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate(
-				'email_confirmationOnUnregistrationHello_informal'
+			sprintf(
+				$this->fixture->translate(
+					'email_confirmationOnUnregistrationHello_informal'
+				),
+				$this->seminar->getTitle()
 			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
@@ -2725,7 +2883,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForFormalSalutationAndQueueConfirmation_ContainsFormalQueueConfirmationText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndQueueConfirmationContainsFormalQueueConfirmationText() {
 		$this->fixture->setConfigurationValue(
 			'sendConfirmationOnRegistrationForQueue', true
 		);
@@ -2754,7 +2915,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForInformalSalutationAndQueueConfirmation_ContainsInformalQueueConfirmationText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndQueueConfirmationContainsInformalQueueConfirmationText() {
 		$this->fixture->setConfigurationValue(
 			'sendConfirmationOnRegistrationForQueue', true
 		);
@@ -2783,7 +2947,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForFormalSalutationAndQueueUpdate_ContainsFormalQueueUpdateText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndQueueUpdateContainsFormalQueueUpdateText() {
 		$this->fixture->setConfigurationValue(
 			'sendConfirmationOnQueueUpdate', true
 		);
@@ -2812,7 +2979,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyAttendee_ForInformalSalutationAndQueueUpdate_ContainsInformalQueueUpdateText() {
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndQueueUpdateContainsInformalQueueUpdateText() {
 		$this->fixture->setConfigurationValue(
 			'sendConfirmationOnQueueUpdate', true
 		);

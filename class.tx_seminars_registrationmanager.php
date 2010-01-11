@@ -1077,18 +1077,14 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$salutation->getSalutation($registration->getFrontEndUser())
 		);
 		$salutation->__destruct();
-		$this->setMarker(
-			'introduction',
-			$this->translate('email_' . $helloSubjectPrefix . 'Hello')
-		);
 
 		$event = $registration->getSeminarObject();
-		if ($event->hasEventType()) {
-			$this->setMarker('event_type', $event->getEventType());
-		} else {
-			$this->hideSubparts('event_type', $wrapperPrefix);
-		}
-		$this->setMarker('title', $event->getTitle());
+
+		$this->setMarker(
+			'introduction',
+			$this->getEMailIntroduction($helloSubjectPrefix, $registration)
+		);
+
 		$this->setMarker('uid', $event->getUid());
 
 		$this->setMarker('registration_uid', $registration->getUid());
@@ -1327,6 +1323,62 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$this->setMarker(
 			'place', implode($newline . $newline, $formattedPlaces)
 		);
+	}
+
+	/**
+	 * Gets the introductory part of the e-mail to the attendees.
+	 *
+	 * @param string $helloSubjectPrefix
+	 *        prefix for the locallang key of the localized hello and subject
+	 *        string, allowed values are:
+	 *          - confirmation
+	 *          - confirmationOnUnregistration
+	 *          - confirmationOnRegistrationForQueue
+	 *          - confirmationOnQueueUpdate
+	 *          In the following the parameter is prefixed with
+	 *          "email_" and postfixed with "Hello".
+	 * @param tx_seminars_registration $registration
+	 *        the registration the introduction should be created for
+	 *
+	 * @return string the introduction for the e-mails, will not be empty
+	 */
+	private function getEMailIntroduction(
+		$helloSubjectPrefix, tx_seminars_registration $registration
+	) {
+		$event = $registration->getSeminarObject();
+		$introduction = $this->translate(
+			'email_' . $helloSubjectPrefix . 'Hello'
+		);
+		if (($helloSubjectPrefix != 'confirmation')
+			&& ($helloSubjectPrefix != 'confirmationOnUnregistration')
+		) {
+			return $introduction;
+		}
+
+		$result .= sprintf($introduction, $event->getTitle());
+		if ($event->hasDate()) {
+			$result .= ' ' . sprintf(
+				$this->translate('email_eventDate'),
+				$event->getDate('-')
+			);
+
+			if ($event->hasTime() && !$event->hasTimeslots()) {
+				$timeToLabel = $this->translate('email_timeTo');
+				$time = $event->getTime(' ' . $timeToLabel . ' ');
+				$label = ' ' . ((!$event->isOpenEnded())
+					? $this->translate('email_timeFrom')
+					: $this->translate('email_timeAt'));
+				$result .= sprintf($label, $time);
+			}
+		}
+
+		if ($registration->hasTotalPrice()) {
+			$result .= ' ' . sprintf(
+				$this->translate('email_price'), $registration->getTotalPrice()
+			);
+		}
+
+		return $result . '.';
 	}
 }
 

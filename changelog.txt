@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3576] Feature: Mention the event title, date, time and price in the thank-you and unregistration e-mail
 - [#3640] Fix: The message about the UID is red
 - [#3563] Feature: Automatically append the organizer's footer when sending an e-mail using the cancel/confirm forms
 - [#3609] Fix: Monkey functionality is broken in some search widget parts
