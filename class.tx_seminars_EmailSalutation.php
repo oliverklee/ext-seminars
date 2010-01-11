@@ -116,6 +116,44 @@ class tx_seminars_EmailSalutation {
 
 		return $result;
 	}
+
+	/**
+	 * Creates an e-mail introduction with the given event's title, date and
+	 * time prepended with the given introduction string.
+	 *
+	 * @param string $introductionBegin
+	 *        the start of the introduction, must not be empty and contain %s as
+	 *        place to fill the title of the event in
+	 * @param tx_seminars_seminar $event the event the introduction is for
+	 *
+	 * @return string the introduction with the event's title and if available
+	 *                date and time, will not be empty
+	 */
+	public function createIntroduction(
+		$introductionBegin, tx_seminars_seminar $event
+	) {
+		$result = sprintf($introductionBegin, $event->getTitle());
+
+		if (!$event->hasDate()) {
+			return $result;
+		}
+
+		$result .= ' ' . sprintf(
+			$this->translator->translate('email_eventDate'),
+			$event->getDate('-')
+		);
+
+		if ($event->hasTime() && !$event->hasTimeslots()) {
+			$timeToLabel = $this->translator->translate('email_timeTo');
+			$time = $event->getTime(' ' . $timeToLabel . ' ');
+			$label = ' ' . (!$event->isOpenEnded()
+				? $this->translator->translate('email_timeFrom')
+				: $this->translator->translate('email_timeAt'));
+			$result .= sprintf($label, $time);
+		}
+
+		return $result;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_EmailSalutation.php']) {

@@ -16,6 +16,10 @@
 			<label index="email_salutation_title_0">Mr.</label>
 			<label index="email_salutation_title_1">Ms.</label>
 			<label index="email_salutation_title_2"></label>
+			<label index="email_eventDate">on %s</label>
+			<label index="email_timeFrom">from %s</label>
+			<label index="email_timeAt">at %s</label>
+			<label index="email_timeTo">to</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="email_hello_informal">Hallo</label>
@@ -24,6 +28,10 @@
 			<label index="email_hello_formal_2">Sehr geehrte(r)</label>
 			<label index="email_salutation_title_0">Herr</label>
 			<label index="email_salutation_title_1">Frau</label>
+			<label index="email_eventDate">am %s</label>
+			<label index="email_timeFrom">von %s</label>
+			<label index="email_timeAt">um %s Uhr</label>
+			<label index="email_timeTo">bis</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
@@ -34,6 +42,10 @@
 			<label index="email_hello_formal_2" type="integer">112683164</label>
 			<label index="email_salutation_title_0" type="integer">19351194</label>
 			<label index="email_salutation_title_1" type="integer">43922038</label>
+			<label index="email_eventDate" type="integer">136305816</label>
+			<label index="email_timeFrom" type="integer">142681003</label>
+			<label index="email_timeAt" type="integer">165928074</label>
+			<label index="email_timeTo" type="integer">1797664</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -44,6 +56,10 @@
 			<label index="email_hello_formal_2">Dear</label>
 			<label index="email_salutation_title_0">Mr.</label>
 			<label index="email_salutation_title_1">Ms.</label>
+			<label index="email_eventDate">on %s</label>
+			<label index="email_timeFrom">from %s</label>
+			<label index="email_timeAt">at %s</label>
+			<label index="email_timeTo">to</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

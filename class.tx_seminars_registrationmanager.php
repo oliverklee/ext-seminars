@@ -1069,21 +1069,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$wrapperPrefix
 		);
 
-		$salutation = tx_oelib_ObjectFactory::make(
-			'tx_seminars_EmailSalutation'
-		);
-		$this->setMarker(
-			'salutation',
-			$salutation->getSalutation($registration->getFrontEndUser())
-		);
-		$salutation->__destruct();
-
+		$this->setEMailIntroduction($helloSubjectPrefix, $registration);
 		$event = $registration->getSeminarObject();
-
-		$this->setMarker(
-			'introduction',
-			$this->getEMailIntroduction($helloSubjectPrefix, $registration)
-		);
 
 		$this->setMarker('uid', $event->getUid());
 
@@ -1326,7 +1313,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Gets the introductory part of the e-mail to the attendees.
+	 * Sets the introductory part of the e-mail to the attendees.
 	 *
 	 * @param string $helloSubjectPrefix
 	 *        prefix for the locallang key of the localized hello and subject
@@ -1339,46 +1326,43 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *          "email_" and postfixed with "Hello".
 	 * @param tx_seminars_registration $registration
 	 *        the registration the introduction should be created for
-	 *
-	 * @return string the introduction for the e-mails, will not be empty
 	 */
-	private function getEMailIntroduction(
+	private function setEMailIntroduction(
 		$helloSubjectPrefix, tx_seminars_registration $registration
 	) {
+		$salutation = tx_oelib_ObjectFactory::make(
+			'tx_seminars_EmailSalutation'
+		);
+		$this->setMarker(
+			'salutation',
+			$salutation->getSalutation($registration->getFrontEndUser())
+		);
+
 		$event = $registration->getSeminarObject();
-		$introduction = $this->translate(
+		$introductionPrefix = $this->translate(
 			'email_' . $helloSubjectPrefix . 'Hello'
 		);
 		if (($helloSubjectPrefix != 'confirmation')
 			&& ($helloSubjectPrefix != 'confirmationOnUnregistration')
 		) {
-			return $introduction;
-		}
-
-		$result .= sprintf($introduction, $event->getTitle());
-		if ($event->hasDate()) {
-			$result .= ' ' . sprintf(
-				$this->translate('email_eventDate'),
-				$event->getDate('-')
+			$introduction = $introductionPrefix;
+		} else {
+			$introduction = $salutation->createIntroduction(
+				$introductionPrefix, $event
 			);
 
-			if ($event->hasTime() && !$event->hasTimeslots()) {
-				$timeToLabel = $this->translate('email_timeTo');
-				$time = $event->getTime(' ' . $timeToLabel . ' ');
-				$label = ' ' . ((!$event->isOpenEnded())
-					? $this->translate('email_timeFrom')
-					: $this->translate('email_timeAt'));
-				$result .= sprintf($label, $time);
+			if ($registration->hasTotalPrice()) {
+				$introduction .= ' ' . sprintf(
+					$this->translate('email_price'), $registration->getTotalPrice()
+				);
 			}
 		}
+		$this->setMarker(
+			'introduction',
+			$introduction
+		);
 
-		if ($registration->hasTotalPrice()) {
-			$result .= ' ' . sprintf(
-				$this->translate('email_price'), $registration->getTotalPrice()
-			);
-		}
-
-		return $result . '.';
+		$salutation->__destruct();
 	}
 }
 

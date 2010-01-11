@@ -272,5 +272,124 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->getSalutation($this->createFrontEndUser());
 	}
+
+
+	////////////////////////////////////////
+	// Tests concerning createIntroduction
+	////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForEventWithDateReturnsEventsDate() {
+		$dateFormatYMD = '%d.%m.%Y';
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
+		);
+
+		$event = new tx_seminars_seminarchild($eventUid, array(
+			'dateFormatYMD' => $dateFormatYMD
+		));
+
+		$this->assertContains(
+			strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME']),
+			$this->fixture->createIntroduction('%s', $event)
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForEventWithBeginAndEndDateOnDifferentDaysReturnsEventsDateFromTo() {
+		$dateFormatYMD = '%d.%m.%Y';
+		$dateFormatD = '%d';
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			)
+		);
+
+		$event = new tx_seminars_seminarchild($eventUid, array(
+			'dateFormatYMD' => $dateFormatYMD,
+			'dateFormatD' => $dateFormatD,
+			'abbreviateDateRanges' => 1,
+		));
+
+		$this->assertContains(
+			strftime($dateFormatD, $GLOBALS['SIM_EXEC_TIME']) .
+				'-' .
+				strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY),
+			$this->fixture->createIntroduction('%s', $event)
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForEventWithTimeReturnsEventsTime() {
+		$timeFormat = '%H:%M';
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
+			)
+		);
+
+		$event = new tx_seminars_seminarchild($eventUid, array(
+			'timeFormat' => $timeFormat,
+		));
+
+		$this->assertContains(
+			strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']),
+			$this->fixture->createIntroduction('%s', $event)
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForEventWithStartAndEndOnOneDayReturnsTimeFromTo() {
+		$timeFormat = '%H:%M';
+		$endDate = $GLOBALS['SIM_EXEC_TIME'] + 3600;
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
+				'end_date' => $endDate,
+			)
+		);
+
+		$event = new tx_seminars_seminarchild($eventUid, array(
+			'timeFormat' => $timeFormat,
+		));
+		$translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
+		$output = $this->fixture->createIntroduction('%s', $event);
+
+		$this->assertContains(
+			sprintf(
+				$translator->translate('email_timeFrom'),
+				strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME'])
+			),
+			$output
+		);
+		$this->assertContains(
+			sprintf(
+				$translator->translate('email_timeTo'),
+				strftime($timeFormat, $endDate)
+			),
+			$output
+		);
+
+		$event->__destruct();
+	}
 }
 ?>

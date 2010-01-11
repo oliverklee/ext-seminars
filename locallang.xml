@@ -99,10 +99,6 @@
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationHello_formal">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">thank you for registering for the event &quot;%s&quot;</label>
-			<label index="email_eventDate">on %s</label>
-			<label index="email_timeFrom">from %s</label>
-			<label index="email_timeAt">at %s</label>
-			<label index="email_timeTo">to</label>
 			<label index="email_price">at the total price of %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
 			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
@@ -341,10 +337,6 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
 			<label index="email_confirmationHello_formal">vielen Dank für Ihre Anmeldung zur Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">vielen Dank für deine Anmeldung zur Veranstaltung &quot;%s&quot;</label>
-			<label index="email_eventDate">am %s</label>
-			<label index="email_timeFrom">von %s</label>
-			<label index="email_timeAt">um %s Uhr</label>
-			<label index="email_timeTo">bis</label>
 			<label index="email_price">zum Gesamtpreis von %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Abmeldebestätigung</label>
 			<label index="email_confirmationOnUnregistrationHello_formal">hiermit bestätigen wir Ihre Abmeldung von der Veranstaltung &quot;%s&quot;</label>
@@ -995,10 +987,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
 			<label index="email_confirmationHello_formal" type="integer">186378957</label>
-			<label index="email_eventDate" type="integer">136305816</label>
-			<label index="email_timeFrom" type="integer">142681003</label>
-			<label index="email_timeAt" type="integer">165928074</label>
-			<label index="email_timeTo" type="integer">1797664</label>
 			<label index="email_price" type="integer">102789220</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
 			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">225736015</label>
@@ -1523,10 +1511,6 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationHello_formal">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">thank you for registering for the event &quot;%s&quot;</label>
-			<label index="email_eventDate">on %s</label>
-			<label index="email_timeFrom">from %s</label>
-			<label index="email_timeAt">at %s</label>
-			<label index="email_timeTo">to</label>
 			<label index="email_price">at the total price of %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
 			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
