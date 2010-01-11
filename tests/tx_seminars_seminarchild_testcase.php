@@ -1819,6 +1819,109 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////////////////////////////////////////////
+	// Tests concerning getUnregistrationDeadlineFromModelAndConfiguration
+	////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndNoUnregistrationDeadlineReturnsZero() {
+		$this->fixture->setBeginDate(0);
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->fixture->setGlobalUnregistrationDeadline(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndUnregistrationDeadlineSetInEventReturnsUnregistrationDeadline() {
+		$this->fixture->setBeginDate(0);
+		$this->fixture->setUnregistrationDeadline($this->currentTimestamp);
+		$this->fixture->setGlobalUnregistrationDeadline(0);
+
+		$this->assertEquals(
+			$this->currentTimestamp,
+			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndUnregistrationDeadlinInEventAndUnregistrationDeadlineSetInConfigurationReturnsZero() {
+		$this->fixture->setBeginDate(0);
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->fixture->setGlobalUnregistrationDeadline($this->currentTimestamp);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlineSetInEventReturnsThisDeadline() {
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+		$this->fixture->setUnregistrationDeadline($this->currentTimestamp);
+		$this->fixture->setGlobalUnregistrationDeadline(0);
+
+		$this->assertEquals(
+			$this->currentTimestamp,
+			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndNoDeadlineConfigurationSetReturnsZero() {
+		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->fixture->setGlobalUnregistrationDeadline(0);
+
+		$this->assertEquals(
+			0,
+			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndDeadlineConfigurationSetReturnsCalculatedDeadline() {
+		$this->fixture->setBeginDate($this->currentTimestamp + ONE_WEEK);
+		$this->fixture->setUnregistrationDeadline(0);
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+
+		$this->assertEquals(
+			$this->currentTimestamp + ONE_WEEK - ONE_DAY,
+			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlinesSetInEventAndConfigurationReturnsEventsDeadline() {
+		$this->fixture->setBeginDate(($this->currentTimestamp + ONE_WEEK));
+		$this->fixture->setUnregistrationDeadline($this->currentTimestamp);
+		$this->fixture->setGlobalUnregistrationDeadline(1);
+
+		$this->assertEquals(
+			$this->currentTimestamp,
+			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
+		);
+	}
+
+
 	//////////////////////////////////////////
 	// Tests concerning hasRegistrationQueue
 	//////////////////////////////////////////

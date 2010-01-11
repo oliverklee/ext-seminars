@@ -3786,17 +3786,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = false;
 
 		if ($this->needsRegistration()) {
-			if ($this->hasUnregistrationDeadline()) {
-				if ($this->getUnregistrationDeadlineAsTimestamp() > $GLOBALS['SIM_EXEC_TIME']) {
-					$result = true;
-				}
-			} elseif ($this->hasBeginDate()
-				&& $this->hasConfValueInteger(
-					'unregistrationDeadlineDaysBeforeBeginDate')
-				&& (($this->getBeginDateAsTimestamp()
-					- ($this->getConfValueInteger(
-					'unregistrationDeadlineDaysBeforeBeginDate') * ONE_DAY))
-					> $GLOBALS['SIM_EXEC_TIME'])
+			if ($this->getUnregistrationDeadlineFromModelAndConfiguration()
+				> $GLOBALS['SIM_EXEC_TIME']
 			) {
 				$result = true;
 			}
@@ -4492,6 +4483,49 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function getOfflineRegistrations() {
 		return $this->getRecordPropertyInteger('offline_attendees');
+	}
+
+	/**
+	 * Returns the unregistration deadline set by configuration and the begin
+	 * date as UNIX timestamp.
+	 *
+	 * This function may only be called if this event has a begin date.
+	 *
+	 * @return integer the unregistration deadline as UNIX timestamp determined
+	 *                 by configuration and the begin date, will be 0 if the
+	 *                 unregistrationDeadlineDaysBeforeBeginDate is not set
+	 */
+	private function getUnregistrationDeadlineFromConfiguration() {
+		if (!$this->hasConfValueInteger(
+			'unregistrationDeadlineDaysBeforeBeginDate'
+		)) {
+			return 0;
+		}
+
+		$secondsForUnregistration = ONE_DAY * $this->getConfValueInteger(
+			'unregistrationDeadlineDaysBeforeBeginDate'
+		);
+
+		return $this->getBeginDateAsTimestamp() - $secondsForUnregistration;
+	}
+
+	/**
+	 * Returns the effective unregistration deadline for this event as UNIX
+	 * timestamp.
+	 *
+	 * @return integer the unregistration deadline for this event as UNIX
+	 *                 timestamp, will be 0 if this event has no begin date
+	 */
+	public function getUnregistrationDeadlineFromModelAndConfiguration() {
+		if ($this->hasUnregistrationDeadline()) {
+			return $this->getUnregistrationDeadlineAsTimestamp();
+		}
+
+		if (!$this->hasBeginDate()) {
+			return 0;
+		}
+
+		return $this->getUnregistrationDeadlineFromConfiguration();
 	}
 }
 
