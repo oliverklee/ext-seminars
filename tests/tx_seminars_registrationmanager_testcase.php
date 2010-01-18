@@ -2784,8 +2784,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate(
-				'email_confirmationOnRegistrationForQueueHello_formal'
+			sprintf(
+				$this->fixture->translate(
+					'email_confirmationOnRegistrationForQueueHello_formal'
+				),
+				$this->seminar->getTitle()
 			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
@@ -2816,8 +2819,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate(
-				'email_confirmationOnRegistrationForQueueHello_informal'
+			sprintf(
+				$this->fixture->translate(
+					'email_confirmationOnRegistrationForQueueHello_informal'
+				),
+				$this->seminar->getTitle()
 			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
@@ -2848,8 +2854,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate(
-				'email_confirmationOnQueueUpdateHello_formal'
+			sprintf(
+				$this->fixture->translate(
+					'email_confirmationOnQueueUpdateHello_formal'
+				),
+				$this->seminar->getTitle()
 			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()
@@ -2880,8 +2889,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration->__destruct();
 
 		$this->assertContains(
-			$this->fixture->translate(
-				'email_confirmationOnQueueUpdateHello_informal'
+			sprintf(
+				$this->fixture->translate(
+					'email_confirmationOnQueueUpdateHello_informal'
+				),
+				$this->seminar->getTitle()
 			),
 			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
 				->getLastBody()

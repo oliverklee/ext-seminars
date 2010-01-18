@@ -1339,27 +1339,20 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		);
 
 		$event = $registration->getSeminarObject();
-		$introductionPrefix = $this->translate(
-			'email_' . $helloSubjectPrefix . 'Hello'
+		$introduction = $salutation->createIntroduction(
+			$this->translate('email_' . $helloSubjectPrefix . 'Hello'),
+			$event
 		);
-		if (($helloSubjectPrefix != 'confirmation')
-			&& ($helloSubjectPrefix != 'confirmationOnUnregistration')
-		) {
-			$introduction = $introductionPrefix;
-		} else {
-			$introduction = $salutation->createIntroduction(
-				$introductionPrefix, $event
-			);
 
-			if ($registration->hasTotalPrice()) {
-				$introduction .= ' ' . sprintf(
-					$this->translate('email_price'), $registration->getTotalPrice()
-				);
-			}
+		if ($registration->hasTotalPrice()) {
+			$introduction .= ' ' . sprintf(
+				$this->translate('email_price'), $registration->getTotalPrice()
+			);
 		}
+
 		$this->setMarker(
 			'introduction',
-			$introduction
+			$introduction . '.'
 		);
 
 		$salutation->__destruct();
