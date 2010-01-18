@@ -372,21 +372,16 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 			'timeFormat' => $timeFormat,
 		));
 		$translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
-		$output = $this->fixture->createIntroduction('%s', $event);
+		$timeInsert = strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
+			$translator->translate('email_timeTo') . ' ' .
+			strftime($timeFormat, $endDate);
 
 		$this->assertContains(
 			sprintf(
 				$translator->translate('email_timeFrom'),
-				strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME'])
+				$timeInsert
 			),
-			$output
-		);
-		$this->assertContains(
-			sprintf(
-				$translator->translate('email_timeTo'),
-				strftime($timeFormat, $endDate)
-			),
-			$output
+			$this->fixture->createIntroduction('%s', $event)
 		);
 
 		$event->__destruct();

@@ -50,15 +50,18 @@
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 			<label index="confirmMailForm_sendButton">Confirm and send</label>
 			<label index="confirmMailForm_prefillField_subject">Event confirmed:</label>
-			<label index="confirmMailForm_prefillField_messageBody">this event now is confirmed.</label>
+			<label index="confirmMailForm_prefillField_messageBody">This event now is confirmed.</label>
+			<label index="confirmMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="cancelMailForm_sendButton">Send cancellation</label>
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
-			<label index="cancelMailForm_prefillField_messageBody">unfortunately, we had to cancel this event.</label>
+			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
+			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
+			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>
 			<label index="label_show_event_registrations">show</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
@@ -127,15 +130,18 @@
 			<label index="referencesWarning">(Es gibt %s Verbindung(en) zu diesem Datensatz!)</label>
 			<label index="confirmMailForm_sendButton">Bestätigen und senden</label>
 			<label index="confirmMailForm_prefillField_subject">Veranstaltung zugesagt:</label>
-			<label index="confirmMailForm_prefillField_messageBody">wir haben diese Veranstaltung jetzt bestätigt.</label>
+			<label index="confirmMailForm_prefillField_messageBody">Wir haben diese Veranstaltung jetzt bestätigt.</label>
+			<label index="confirmMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
 			<label index="cancelMailForm_sendButton">Absage senden</label>
 			<label index="cancelMailForm_prefillField_subject">Veranstaltung abgesagt:</label>
-			<label index="cancelMailForm_prefillField_messageBody">leider musste diese Veranstaltung abgesagt werden.</label>
+			<label index="cancelMailForm_prefillField_messageBody">Leider musste diese Veranstaltung abgesagt werden.</label>
+			<label index="cancelMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
 			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysFolder im Seitenbaum aus.</label>
 			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische seminars-template im TS-Setup dieses SysFolders ein.</label>
 			<label index="mailForm_salutation">Anrede</label>
 			<label index="testForm_prefillField_subject">Event getestet</label>
-			<label index="testForm_prefillField_messageBody">Dies ist der Nachrichten körper.</label>
+			<label index="testForm_prefillField_messageBody">Dies ist der Nachrichtenkörper.</label>
+			<label index="testForm_prefillField_introduction">Dies ist die Einleitung: %s</label>
 			<label index="label_show_event_registrations">zeigen</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -276,17 +282,20 @@
 			<label index="eventMailForm_backButton" type="integer">5603241</label>
 			<label index="confirmMailForm_sendButton" type="integer">78298817</label>
 			<label index="confirmMailForm_prefillField_subject" type="integer">47880380</label>
-			<label index="confirmMailForm_prefillField_messageBody" type="integer">23118804</label>
+			<label index="confirmMailForm_prefillField_messageBody" type="integer">100475854</label>
+			<label index="confirmMailForm_prefillField_introduction" type="integer">115928722</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty" type="integer">9192935</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty" type="integer">54495100</label>
 			<label index="cancelMailForm_sendButton" type="integer">125778442</label>
 			<label index="cancelMailForm_prefillField_subject" type="integer">175603821</label>
-			<label index="cancelMailForm_prefillField_messageBody" type="integer">139514536</label>
+			<label index="cancelMailForm_prefillField_messageBody" type="integer">121602317</label>
+			<label index="cancelMailForm_prefillField_introduction" type="integer">115928722</label>
 			<label index="message_noPageTypeSelected" type="integer">217321592</label>
 			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
 			<label index="mailForm_salutation" type="integer">128380848</label>
 			<label index="testForm_prefillField_subject" type="integer">115548765</label>
 			<label index="testForm_prefillField_messageBody" type="integer">10500938</label>
+			<label index="testForm_prefillField_introduction" type="integer">150623124</label>
 			<label index="label_show_event_registrations" type="integer">176017707</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
@@ -427,17 +436,20 @@
 			<label index="eventMailForm_backButton">Back</label>
 			<label index="confirmMailForm_sendButton">Confirm and send</label>
 			<label index="confirmMailForm_prefillField_subject">Event confirmed:</label>
-			<label index="confirmMailForm_prefillField_messageBody">this event now is confirmed.</label>
+			<label index="confirmMailForm_prefillField_messageBody">This event now is confirmed.</label>
+			<label index="confirmMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Please enter a subject.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Please enter a message body.</label>
 			<label index="cancelMailForm_sendButton">Send cancellation</label>
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
-			<label index="cancelMailForm_prefillField_messageBody">unfortunately, we had to cancel this event.</label>
+			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
+			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
+			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>
 			<label index="label_show_event_registrations">show</label>
 		</languageKey>
 		<languageKey index="nl" type="array">

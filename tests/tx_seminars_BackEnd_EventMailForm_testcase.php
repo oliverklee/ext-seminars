@@ -165,6 +165,19 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function renderContainsBodyFieldWithIntroduction() {
+		$this->assertContains(
+			sprintf(
+				$GLOBALS['LANG']->getLL('testForm_prefillField_introduction'),
+				htmlspecialchars('"Dummy Event"')
+			),
+			$this->fixture->render()
+		);
+	}
+
 	public function testRenderDoesNotPrefillSubjectFieldIfEmptyStringWasSentViaPost() {
 		$this->fixture->setPostData(
 			array(

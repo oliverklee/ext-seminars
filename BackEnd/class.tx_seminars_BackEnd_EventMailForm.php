@@ -506,8 +506,21 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 *                for the given prefix could be found
 	 */
 	private function localizeSalutationPlaceholder($prefix) {
+		$salutation = tx_oelib_ObjectFactory::make(
+			'tx_seminars_EmailSalutation'
+		);
+		$eventDetails = $salutation->createIntroduction(
+			'"%s"',
+			$this->getEvent()
+		);
+		$introduction = sprintf(
+			$GLOBALS['LANG']->getLL($prefix . 'introduction'),
+			$eventDetails
+		);
+		$salutation->__destruct();
+
 		return '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') . LF . LF .
-			$GLOBALS['LANG']->getLL($prefix . 'messageBody');
+			$introduction . LF . $GLOBALS['LANG']->getLL($prefix . 'messageBody');
 	}
 
 	/**
