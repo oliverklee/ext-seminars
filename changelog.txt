@@ -1,4 +1,5 @@
 0.8.4 (currently working on)
+- [#3556] Fix: Use PATH_tslib in require once for tslib_content
 - [#3585] Fix: Removed the unused variable addRegistrationCsvToOrganizerMail
 - [#3641] Change: Update all copyrights to 2010
 - [#3541] Fix: Failure in test case testSendRemindersToOrganizersForCliBackendUserWithLanguageGermanSendsReminderInGerman
