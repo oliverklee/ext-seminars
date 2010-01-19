@@ -116,13 +116,14 @@ class tx_seminars_cli_MailNotifier {
 		tx_seminars_seminar $event, $messageKey
 	) {
 		$organizerBag = $event->getOrganizerBag();
+		$attachment = null;
 
 		// The first organizer is taken as sender.
 		$sender = $organizerBag->current();
 		$subject = $this->customizeMessage($messageKey . 'Subject', $event);
-		$attachment = ($event->getAttendances() > 0)
-			? $this->getCsv($event->getUid())
-			: null;
+		if ($this->shouldCsvFileBeAdded($event)) {
+			$attachment =$this->getCsv($event->getUid());
+		}
 
 		foreach ($organizerBag as $organizer) {
 			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
@@ -313,6 +314,20 @@ class tx_seminars_cli_MailNotifier {
 				->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
 			$timestamp
 		);
+	}
+
+	/**
+	 * Checks whether the CSV file should be added to the e-mail.
+	 *
+	 * @param tx_seminars_seminars $event the event to send the e-mail for
+	 *
+	 * @return boolean true if the CSV file should be added, false otherwise
+	 */
+	private function shouldCsvFileBeAdded(tx_seminars_seminar $event) {
+		return tx_oelib_ConfigurationRegistry::getInstance()->get(
+			'plugin.tx_seminars')->getAsBoolean(
+				'addRegistrationCsvToOrganizerReminderMail')
+			&& ($event->getAttendances() > 0);
 	}
 }
 
