@@ -45,6 +45,11 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 */
 	private $testingFramework;
 
+	/**
+	 * @var tx_seminars_configgetter
+	 */
+	private $configGetter;
+
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
@@ -62,19 +67,27 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'sendEventTakesPlaceReminderDaysBeforeBeginDate' => 2,
 			'sendCancelationDeadlineReminder' => true,
 			'filenameForRegistrationsCsv' => 'registrations.csv',
-			'fieldsFromAttendanceForCsv' => 'title',
 			'dateFormatYMD' => '%d.%m.%Y',
 		));
 		tx_oelib_ConfigurationRegistry::getInstance()
 			->set('plugin.tx_seminars', $configuration);
 
+		$this->configGetter = new tx_seminars_configgetter();
+		$this->configGetter->setConfigurationValue(
+			'fieldsFromAttendanceForEmailCsv', 'title'
+		);
+		$this->configGetter->setConfigurationValue(
+			'showAttendancesOnRegistrationQueueInEmailCsv', 1
+		);
+
 		$this->fixture = new tx_seminars_cli_MailNotifier();
 	}
 
 	public function tearDown() {
+		$this->configGetter->__destruct();
 		$this->testingFramework->cleanUp();
 
-		unset($this->fixture, $this->testingFramework);
+		unset($this->fixture, $this->testingFramework, $this->configGetter);
 	}
 
 
@@ -807,6 +820,128 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'title' . CRLF . 'test registration' . CRLF,
+			base64_decode($attachment[1])
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendRemindersToOrganizersSendsEmailWithCsvFileWithOfFrontEndUserData() {
+		$this->configGetter->setConfigurationValue(
+			'fieldsFromFeUserForEmailCsv', 'email'
+		);
+
+		$eventUid = $this->createSeminarWithOrganizer(array(
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+		));
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array(
+				'title' => 'test registration',
+				'seminar' => $eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@bar.com')
+				),
+			)
+		);
+
+		$this->fixture->sendEventTakesPlaceReminders();
+
+		$attachment = array();
+		preg_match(
+			'/filename.*csv";([^-=]+)/s',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
+			$attachment
+		);
+
+		$this->assertContains(
+			'foo@bar.com',
+			base64_decode($attachment[1])
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithCsvWithRegistrationsOnQueue() {
+		$eventUid = $this->createSeminarWithOrganizer(array(
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+		));
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array(
+				'title' => 'real registration',
+				'seminar' => $eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array(
+				'title' => 'on queue',
+				'seminar' => $eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'registration_queue' => 1
+			)
+		);
+
+		$this->fixture->sendEventTakesPlaceReminders();
+
+		$attachment = array();
+		preg_match(
+			'/filename.*csv";([^-=]+)/s',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
+			$attachment
+		);
+
+		$this->assertContains(
+			'on queue',
+			base64_decode($attachment[1])
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvFalseSendsEmailWithCsvFileWhichDoesNotContainDataOfAttendanceOnQueue() {
+		$this->configGetter->setConfigurationValue(
+			'showAttendancesOnRegistrationQueueInEmailCsv', 0
+		);
+
+		$eventUid = $this->createSeminarWithOrganizer(array(
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+		));
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array(
+				'title' => 'real registration',
+				'seminar' => $eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES, array(
+				'title' => 'on queue',
+				'seminar' => $eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'registration_queue' => 1
+			)
+		);
+
+		$this->fixture->sendEventTakesPlaceReminders();
+
+		$attachment = array();
+		preg_match(
+			'/filename.*csv";([^-=]+)/s',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
+			$attachment
+		);
+
+		$this->assertNotContains(
+			'on queue',
 			base64_decode($attachment[1])
 		);
 	}

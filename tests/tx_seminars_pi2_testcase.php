@@ -1154,5 +1154,199 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				->getLastAddedHeader()
 		);
 	}
+
+
+	///////////////////////////////////////////////////////////
+	// Tests concerning the export mode and the configuration
+	///////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForEmailModeUsesFeUserFieldsFromEmailConfiguration() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForEmailCsv', 'email'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', 'name'
+		);
+
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			'', array('email' => 'foo@bar.com')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $this->eventUid, 'user' => $frontEndUserUid)
+		);
+		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
+
+		$this->assertContains(
+			'foo@bar.com',
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForWebModeNotUsesFeUserFieldsFromEmailConfiguration() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForEmailCsv', 'email'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', 'name'
+		);
+
+		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
+			'', array('email' => 'foo@bar.com')
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array('seminar' => $this->eventUid, 'user' => $frontEndUserUid)
+		);
+		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_WEB);
+
+		$this->assertNotContains(
+			'foo@bar.com',
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForEmailModeUsesRegistrationFieldsFromEmailConfiguration() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForEmailCsv', 'bank_name'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', ''
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'bank_name' => 'foo bank'
+			)
+		);
+		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
+
+		$this->assertContains(
+			'foo bank',
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationFieldsFromEmailConfiguration() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForEmailCsv', 'bank_name'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', ''
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'bank_name' => 'foo bank'
+			)
+		);
+		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_WEB);
+
+		$this->assertNotContains(
+			'foo bank',
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForEmailModeUsesRegistrationsOnQueueSettingFromEmailConfiguration() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'showAttendancesOnRegistrationQueueInEmailCsv', true
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForEmailCsv', 'uid'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'showAttendancesOnRegistrationQueueInCsv', false
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$queueUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'bank_name' => 'foo bank',
+				'registration_queue' => 1,
+			)
+		);
+		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
+
+		$this->assertContains(
+			(string) $queueUid,
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromEmailConfiguration() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'showAttendancesOnRegistrationQueueInEmailCsv', true
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForEmailCsv', 'uid'
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'showAttendancesOnRegistrationQueueInCsv', false
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'uid'
+		);
+
+
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$queueUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+				'bank_name' => 'foo bank',
+				'registration_queue' => 1,
+			)
+		);
+		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_WEB);
+
+		$this->assertNotContains(
+			(string) $queueUid,
+			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+		);
+	}
 }
 ?>

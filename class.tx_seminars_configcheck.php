@@ -1469,6 +1469,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkFieldsFromEventsForCsv();
 		$this->checkFieldsFromFeUserForCsv();
 		$this->checkFieldsFromAttendanceForCsv();
+		$this->checkFieldsFromFeUserForEmailCsv();
+		$this->checkFieldsFromAttendanceForEmailCsv();
+		$this->checkShowAttendancesOnRegistrationQueueInEmailCsv();
 	}
 
 	/**
@@ -1593,9 +1596,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'fieldsFromFeUserForCsv',
 			false,
 			'',
-			'These values specify the FE user fields to export via CSV. '
-				.'A mistyped field name will cause the field to not get '
-				.'included.',
+			'These values specify the FE user fields to export via CSV in web ' .
+				'mode. A mistyped field name will cause the field to not get ' .
+				'included.',
 			'fe_users'
 		);
 	}
@@ -1608,9 +1611,39 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'fieldsFromAttendanceForCsv',
 			false,
 			'',
-			'These values specify the registration fields to export via CSV. '
-				.'A mistyped field name will cause the field to not get '
-				.'included.',
+			'These values specify the registration fields to export via CSV in ' .
+				'web mode. A mistyped field name will cause the field to not get ' .
+				'included.',
+			SEMINARS_TABLE_ATTENDANCES
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value fieldsFromFeUserForEmailCsv.
+	 */
+	private function checkFieldsFromFeUserForEmailCsv() {
+		$this->checkIfMultiInTableOrEmpty(
+			'fieldsFromFeUserForCliCsv',
+			false,
+			'',
+			'These values specify the FE user fields to export via CSV in e-mail ' .
+				'mode. A mistyped field name will cause the field to not get ' .'
+				included.',
+			'fe_users'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value fieldsFromAttendanceForEmailCsv.
+	 */
+	private function checkFieldsFromAttendanceForEmailCsv() {
+		$this->checkIfMultiInTableOrEmpty(
+			'fieldsFromAttendanceForEmailCsv',
+			false,
+			'',
+			'These values specify the registration fields to export via CSV in ' .
+				'e-mail mode. A mistyped field name will cause the field to not ' .
+				'get included.',
 			SEMINARS_TABLE_ATTENDANCES
 		);
 	}
@@ -2490,6 +2523,21 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
 				$this->getTSSetupPath() . 'currency</strong>.',
 			tx_oelib_db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
+		);
+	}
+
+	/**
+	 * Checks the setting of showAttendancesOnRegistrationQueueInEmailCsv
+	 */
+	public function checkShowAttendancesOnRegistrationQueueInEmailCsv() {
+		$this->checkIfBoolean(
+			'showAttendancesOnRegistrationQueueInEmailCsv',
+			false,
+			'',
+			'This value specifies if attendances on the registration queue ' .
+				'should also be exported in the CSV file in the e-mail mode.' .
+				'If this is not set correctly, the attendances on the ' .
+				'registration queue might not get exported.'
 		);
 	}
 }

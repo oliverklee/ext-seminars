@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3580] Feature: Add separate TS setup configuration variables for the CSV columns in the e-mail to the organizers
 - [#3556] Fix: Use PATH_tslib in require once for tslib_content
 - [#3562] Feature: Also mention event title, date and time in the other notification mails
 - [#3579] Feature: In the cancel/confirm texts, insert the title, date and time of the event

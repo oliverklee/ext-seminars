@@ -59,6 +59,16 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	const RECURSION_DEPTH = 250;
 
 	/**
+	 * @var string export mode for attachments created from back end
+	 */
+	const EXPORT_MODE_WEB = 'web';
+
+	/**
+	 * @var string export mode for attachments send via e-mail
+	 */
+	const EXPORT_MODE_EMAIL = 'e-mail';
+
+	/**
 	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_pi2';
@@ -87,6 +97,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @var integer the HTTP status code of error
 	 */
 	private $errorType = 0;
+
+	/**
+	 * @var string the export mode for the CSV file possible values are
+	 *             EXPORT_MODE_WEB and EXPORT_MODE_WEB
+	 */
+	private $exportMode = self::EXPORT_MODE_WEB;
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -260,16 +276,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$userData = $this->retrieveData(
 					$registration,
 					'getUserData',
-					$this->configGetter->getConfValueString(
-						'fieldsFromFeUserForCsv'
-					)
+					$this->getFrontEndUserFieldsConfiguration()
 				);
 				$registrationData = $this->retrieveData(
 					$registration,
 					'getRegistrationData',
-					$this->configGetter->getConfValueString(
-						'fieldsFromAttendanceForCsv'
-					)
+					$this->getRegistrationFieldsConfiguration()
 				);
 				// Combines the arrays with the user and registration data
 				// and creates a list of semicolon-separated values from them.
@@ -293,14 +305,10 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 */
 	protected function createRegistrationsHeading() {
 		$fieldsFromFeUser = t3lib_div::trimExplode(
-			',',
-			$this->configGetter->getConfValueString('fieldsFromFeUserForCsv'),
-			true
+			',', $this->getFrontEndUserFieldsConfiguration(), TRUE
 		);
 		$fieldsFromAttendances = t3lib_div::trimExplode(
-			',',
-			$this->configGetter->getConfValueString('fieldsFromAttendanceForCsv'),
-			true
+			',', $this->getRegistrationFieldsConfiguration(), TRUE
 		);
 
 		$result = array_merge($fieldsFromFeUser, $fieldsFromAttendances);
@@ -687,9 +695,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			'tx_seminars_registrationBagBuilder'
 		);
 
-		if (!$this->configGetter->getConfValueBoolean(
-				'showAttendancesOnRegistrationQueueInCSV'
-		)) {
+		if (!$this->getRegistrationsOnQueueConfiguration()) {
 			$registrationBagBuilder->limitToRegular();
 		}
 
@@ -752,6 +758,79 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Sets the mode of the CSV export.
+	 *
+	 * @param string $exportMode
+	 *        the export mode, must be either tx_seminars_pi2::EXPORT_MODE_WEB or
+	 *        tx_seminars_pi2::EXPORT_MODE_EMAIL
+	 */
+	public function setExportMode($exportMode) {
+		$this->exportMode = ($exportMode == self::EXPORT_MODE_EMAIL)
+			? self::EXPORT_MODE_EMAIL
+			: self::EXPORT_MODE_WEB;
+	}
+
+	/**
+	 * Gets the fields which should be used from the fe_users table for the CSV
+	 * files.
+	 *
+	 * @return string the fe_user table fields to use in the CSV file, will be
+	 *                empty if no fields were set.
+	 */
+	private function getFrontEndUserFieldsConfiguration() {
+		switch ($this->exportMode) {
+			case self::EXPORT_MODE_EMAIL:
+				$configurationVariable = 'fieldsFromFeUserForEmailCsv';
+				break;
+			default:
+				$configurationVariable = 'fieldsFromFeUserForCsv';
+				break;
+		}
+
+		return $this->configGetter->getConfValueString($configurationVariable);
+	}
+
+	/**
+	 * Returns the fields which should be used from the attendances table for
+	 * the CSV attachment.
+	 *
+	 * @return string the attendance table fields to use in the CSV attachment,
+	 *                will be empty if no fields were set.
+	 */
+	private function getRegistrationFieldsConfiguration() {
+		switch ($this->exportMode) {
+			case self::EXPORT_MODE_EMAIL:
+				$configurationVariable = 'fieldsFromAttendanceForEmailCsv';
+				break;
+			default:
+				$configurationVariable = 'fieldsFromAttendanceForCsv';
+				break;
+		}
+
+		return $this->configGetter->getConfValueString($configurationVariable);
+	}
+
+	/**
+	 * Returns whether the attendances on queue should also be exported in the
+	 * CSV file.
+	 *
+	 * @return boolean true if the attendances on queue should also be exported,
+	 *                 false otherwise
+	 */
+	private function getRegistrationsOnQueueConfiguration() {
+		switch ($this->exportMode) {
+			case self::EXPORT_MODE_EMAIL:
+				$configurationVariable = 'showAttendancesOnRegistrationQueueInEmailCsv';
+				break;
+			default:
+				$configurationVariable = 'showAttendancesOnRegistrationQueueInCSV';
+				break;
+		}
+
+		return $this->configGetter->getConfValueBoolean($configurationVariable);
 	}
 }
 
