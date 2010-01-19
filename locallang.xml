@@ -109,6 +109,8 @@
 			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
 			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
+			<label index="email_unregistrationNotice_formal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
+			<label index="email_unregistrationNotice_informal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Event has enough registrations: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Your event is full, there are no empty seats left.</label>
@@ -347,6 +349,8 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="email_confirmationOnQueueUpdateSubject">Bestätigung: Anmeldung wurde zu regulärer Anmeldung</label>
 			<label index="email_confirmationOnQueueUpdateHello_formal">Ihre Anmeldung wurde gerade zu einer regulären Anmeldung der Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">deine Anmeldung wurde gerade zu einer regulären Anmeldung der Veranstaltung &quot;%s&quot;</label>
+			<label index="email_unregistrationNotice_formal">Bis zum %s können Sie Ihre Anmeldung kostenfrei stornieren; danach sind Sie zur Zahlung der Veranstaltungsgebühr verpflichtet.</label>
+			<label index="email_unregistrationNotice_informal">Bis zum %s kannst du deine Anmeldung kostenfrei stornieren; danach bist du zur Zahlung der Veranstaltungsgebühr verpflichtet.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Folgende Veranstaltung hat nun genug Anmeldungen, um durchgeführt zu werden.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Veranstaltung hat genug Anmeldungen: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Folgende Veranstaltung ist nun komplett ausgebucht (keine freien Plätze mehr).</label>
@@ -997,6 +1001,8 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_confirmationOnQueueUpdateSubject" type="integer">141930955</label>
 			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">43196046</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">43196046</label>
+			<label index="email_unregistrationNotice_formal" type="integer">89330569</label>
+			<label index="email_unregistrationNotice_informal" type="integer">89330569</label>
 			<label index="email_additionalNotificationSubject" type="integer">75541883</label>
 			<label index="email_additionalNotificationEnoughRegistrations" type="integer">40292240</label>
 			<label index="email_additionalNotificationIsFull" type="integer">125053794</label>
@@ -1521,6 +1527,8 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
 			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
+			<label index="email_unregistrationNotice_formal">You will be able to unregister for free until %s after this date you will have to pay the event fee.</label>
+			<label index="email_unregistrationNotice_informal">You will be able to unregister for free until %s after this date you will have to pay the event fee.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Event has enough registrations: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Your event is full, there are no empty seats left.</label>

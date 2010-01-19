@@ -1071,6 +1071,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$this->setEMailIntroduction($helloSubjectPrefix, $registration);
 		$event = $registration->getSeminarObject();
+		$this->fillOrHideUnregistrationNotice(
+			$helloSubjectPrefix, $registration, $useHtml
+		);
 
 		$this->setMarker('uid', $event->getUid());
 
@@ -1356,6 +1359,64 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		);
 
 		$salutation->__destruct();
+	}
+
+	/**
+	 * Fills or hides the unregistration notice depending on the notification
+	 * e-mail type.
+	 *
+	 * @param string $helloSubjectPrefix
+	 *        prefix for the locallang key of the localized hello and subject
+	 *        string, allowed values are:
+	 *          - confirmation
+	 *          - confirmationOnUnregistration
+	 *          - confirmationOnRegistrationForQueue
+	 *          - confirmationOnQueueUpdate
+	 * @param tx_seminars_registration $registration
+	 *        the registration the introduction should be created for
+	 * @param boolean $useHtml whether to send HTML instead of plain text e-mail
+	 */
+	private function fillOrHideUnregistrationNotice(
+		$helloSubjectPrefix, tx_seminars_registration $registration, $useHtml
+	) {
+		$event = $registration->getSeminarObject();
+		if (($helloSubjectPrefix == 'confirmationOnUnregistration')
+			|| !$event->isUnregistrationPossible()
+		) {
+			$this->hideSubparts(
+				'unregistration_notice',
+				(($useHtml) ? 'html_' : '') . 'field_wrapper'
+			);
+
+			return;
+		}
+
+		$this->setMarker(
+			'unregistration_notice',
+			$this->getUnregistrationNotice($event)
+		);
+	}
+
+	/**
+	 * Returns the unregistration notice for the notification mails.
+	 *
+	 * @param tx_seminars_seminar $event
+	 *        the event to get the unregistration deadline from
+	 *
+	 * @return string the unregistration notice with the event's unregistration
+	 *                deadline, will not be empty
+	 */
+	protected function getUnregistrationNotice(tx_seminars_seminar $event) {
+		$unregistrationDeadline
+			= $event->getUnregistrationDeadlineFromModelAndConfiguration();
+
+		return sprintf(
+			$this->translate('email_unregistrationNotice'),
+			strftime(
+				$this->getConfValueString('dateFormatYMD'),
+				$unregistrationDeadline
+			)
+		);
 	}
 }
 

@@ -2902,6 +2902,169 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////
+	// Tests concerning the unregistration notice
+	///////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice() {
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
+		);
+		$fixture->expects($this->never())->method('getUnregistrationNotice');
+
+		$fixture->setConfigurationValue('sendConfirmationOnUnregistration', TRUE);
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			)
+		);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnUnregistration'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice() {
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
+		);
+		$fixture->expects($this->never())->method('getUnregistrationNotice');
+		$fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$fixture->setConfigurationValue(
+			'allowUnregistrationWithEmptyWaitingList', FALSE
+		);
+
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			)
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice() {
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
+		);
+		$fixture->expects($this->once())->method('getUnregistrationNotice');
+		$fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$fixture->setConfigurationValue(
+			'allowUnregistrationWithEmptyWaitingList', TRUE
+		);
+
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			)
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice() {
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
+		);
+		$fixture->expects($this->once())->method('getUnregistrationNotice');
+
+		$fixture->setConfigurationValue(
+			'sendConfirmationOnRegistrationForQueue', TRUE
+		);
+		$registration = $this->createRegistration();
+		$this->createRegistration();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'queue_size' => 1,
+			)
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_ATTENDANCES, $registration->getUid(),
+			array('registration_queue' => 1)
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnRegistrationForQueue'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice() {
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
+		);
+		$fixture->expects($this->once())->method('getUnregistrationNotice');
+
+		$fixture->setConfigurationValue('sendConfirmationOnQueueUpdate', TRUE);
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'queue_size' => 1,
+			)
+		);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_ATTENDANCES, $registration->getUid(),
+			array('registration_queue' => 1)
+		);
+
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnQueueUpdate'
+		);
+		$pi1->__destruct();
+		$registration->__destruct();
+		$fixture->__destruct();
+	}
+
+
 	///////////////////////////////////////////////////
 	// Tests regarding the notification of organizers
 	///////////////////////////////////////////////////
