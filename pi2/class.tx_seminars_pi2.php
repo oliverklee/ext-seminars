@@ -33,6 +33,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
+$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
+$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
+
 /**
  * Plugin 'CSV export' for the 'seminars' extension.
  *
@@ -41,6 +44,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
@@ -304,11 +308,17 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *                not be empty
 	 */
 	protected function createRegistrationsHeading() {
-		$fieldsFromFeUser = t3lib_div::trimExplode(
-			',', $this->getFrontEndUserFieldsConfiguration(), TRUE
+		$fieldsFromFeUser = $this->localizeCsvHeadings(
+			t3lib_div::trimExplode(
+				',', $this->getFrontEndUserFieldsConfiguration(), TRUE
+			),
+			'LGL'
 		);
-		$fieldsFromAttendances = t3lib_div::trimExplode(
-			',', $this->getRegistrationFieldsConfiguration(), TRUE
+		$fieldsFromAttendances = $this->localizeCsvHeadings(
+			t3lib_div::trimExplode(
+				',', $this->getRegistrationFieldsConfiguration(), TRUE
+			),
+			SEMINARS_TABLE_ATTENDANCES
 		);
 
 		$result = array_merge($fieldsFromFeUser, $fieldsFromAttendances);
@@ -831,6 +841,34 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		}
 
 		return $this->configGetter->getConfValueBoolean($configurationVariable);
+	}
+
+	/**
+	 * Returns the localized field names.
+	 *
+	 * @param array $fieldNames the field names to translate, may be empty
+	 * @param string $tableName the table to which the fields belong to
+	 *
+	 * @return array the translated field names in an array, will be empty if no
+	 *               field names were given
+	 */
+	private function localizeCsvHeadings(array $fieldNames, $tableName) {
+		if (empty($fieldNames)) {
+			return array();
+		}
+		$result = array();
+
+		foreach ($fieldNames as $fieldName) {
+			$translation = trim($GLOBALS['LANG']->getLL($tableName . '.' . $fieldName));
+
+			if (substr($translation, -1) == ':') {
+				$translation = substr($translation, 0, -1);
+			}
+
+			$result[] = $translation;
+		}
+
+		return $result;
 	}
 }
 

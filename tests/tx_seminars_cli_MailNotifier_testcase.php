@@ -33,6 +33,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @subpackage tx_seminars
  *
  * @author Saskia Metzler <saskia@merlin.owl.de>
+ * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	/**
@@ -870,7 +871,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'title' . CRLF . 'test registration' . CRLF,
+			'test registration' . CRLF,
 			base64_decode($attachment[1])
 		);
 	}

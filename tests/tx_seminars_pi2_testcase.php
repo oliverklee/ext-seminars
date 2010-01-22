@@ -46,6 +46,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	private $eventUid;
 
 	public function setUp() {
+		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
+		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
+
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
@@ -359,9 +362,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
+		$name = $GLOBALS['LANG']->getLL('LGL.name');
+		$uid = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.uid');
 
 		$this->assertEquals(
-			'name;uid' . CRLF,
+			str_replace(':', '', ($name . ';' . $uid . CRLF)),
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -387,7 +392,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CreateListOfRegistrations_CanContainRegisteredThemselves() {
+	public function test_CreateListOfRegistrations_CanContainLocalizedRegisteredThemselves() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -402,14 +407,21 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				'registered_themselves' => 1,
 			)
 		);
+		$registeredThemselves = substr(
+			$GLOBALS['LANG']->getLL(
+				SEMINARS_TABLE_ATTENDANCES . '.registered_themselves'
+			),
+			0,
+			-1
+		);
 
 		$this->assertContains(
-			'registered_themselves',
+			$registeredThemselves,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
 
-	public function test_createListOfRegistrations_CanContainCompanyHeading() {
+	public function test_createListOfRegistrations_CanContainLocalizedCompanyHeading() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -424,9 +436,14 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				'company' => 'foo',
 			)
 		);
+		$company = substr(
+			$GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.company'),
+			0,
+			-1
+		);
 
 		$this->assertContains(
-			'company',
+			$company,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -734,8 +751,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
-			'uid' . CRLF . $firstRegistrationUid . CRLF .
+		$this->assertContains(
+			CRLF . $firstRegistrationUid . CRLF .
 				 $secondRegistrationUid . CRLF,
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
@@ -930,13 +947,18 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$registrationsList
 			= $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
+		$localizedAddress = substr(
+			$GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.address'),
+			0,
+			-1
+		);
 
 		$this->assertContains(
-			'address',
+			$localizedAddress,
 			$registrationsList
 		);
 		$this->assertNotContains(
-			'"address"',
+			'"' . $localizedAddress . '"',
 			$registrationsList
 		);
 	}
@@ -949,8 +971,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'address,title'
 		);
 
+		$address = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.address');
+		$title = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.title');
 		$this->assertContains(
-			'address;title',
+			str_replace(':', '', $address . ';' . $title),
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
@@ -1000,8 +1024,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromFeUserForCsv', 'name'
 		);
 
+		$name = $GLOBALS['LANG']->getLL('LGL.name');
+		$address = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.address');
+
 		$this->assertContains(
-			'name;address',
+			str_replace(':', '', $name . ';' . $address),
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
