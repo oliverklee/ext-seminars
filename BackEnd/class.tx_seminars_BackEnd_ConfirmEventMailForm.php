@@ -57,6 +57,15 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Event
 	protected function getSubmitButtonLabel() {
 		return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
 	}
+
+	/**
+	 * Gets the content of the message body for the e-mail.
+	 *
+	 * @return string the content for the message body, will not be empty
+	 */
+	protected function getMessageBodyFormContent() {
+		return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/class.tx_seminars_BackEnd_ConfirmEventMailForm.php']) {

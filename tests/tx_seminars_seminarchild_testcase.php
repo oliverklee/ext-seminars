@@ -4180,6 +4180,65 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////
+	// Tests for getDetailsPage
+	/////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getDetailsPageForNoSeparateDetailsPageSetReturnsEmptyString() {
+		$this->assertEquals(
+			'',
+			$this->fixture->getDetailsPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDetailsPageForInternalSeparateDetailsPageSetReturnsThisPage() {
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $detailsPageUid,
+			)
+		);
+		$event = new tx_seminars_seminarchild($eventUid);
+
+		$this->assertEquals(
+			$detailsPageUid,
+			$event->getDetailsPage()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDetailsPageForExternalSeparateDetailsPageSetReturnsThisPage() {
+		$externalUrl = 'www.test.com';
+		$eventUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'a test event',
+				'details_page' => $externalUrl,
+			)
+		);
+		$event = new tx_seminars_seminarchild($eventUid);
+
+		$this->assertEquals(
+			$externalUrl,
+			$event->getDetailsPage()
+		);
+
+		$event->__destruct();
+	}
+
+
 	///////////////////////////////////////////////
 	// Tests for getDetailedViewLinkConfiguration
 	///////////////////////////////////////////////

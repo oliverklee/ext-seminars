@@ -659,5 +659,66 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->getInitialValue('foo');
 	}
+
+
+	////////////////////////////////////////
+	// Tests concerning the error messages
+	////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getErrorMessageForIncompleteFormAndNoStoredMessageReturnsEmptyString() {
+		$this->fixture->markAsIncomplete();
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getErrorMessage('subject')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getErrorMessageForCompleteFormAndStoredMessageReturnsStoredMessage() {
+		$this->fixture->setErrorMessage('subject', 'Foo');
+
+		$this->assertContains(
+			'Foo',
+			$this->fixture->getErrorMessage('subject')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getErrorMessageForInCompleteFormAndStoredMessageReturnsThisErrorMessage() {
+		$this->fixture->markAsIncomplete();
+		$this->fixture->setErrorMessage('subject', 'Foo');
+
+		$this->assertContains(
+			'Foo',
+			$this->fixture->getErrorMessage('subject')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setErrorMessageForAlreadySetErrorMessageAppendsNewMessage() {
+		$this->fixture->markAsIncomplete();
+		$this->fixture->setErrorMessage('subject', 'Foo');
+		$this->fixture->setErrorMessage('subject', 'Bar');
+		$errorMessage = $this->fixture->getErrorMessage('subject');
+
+		$this->assertContains(
+			'Foo',
+			$errorMessage
+		);
+		$this->assertContains(
+			'Bar',
+			$errorMessage
+		);
+	}
 }
 ?>

@@ -70,5 +70,41 @@ class tx_seminars_tests_fixtures_TestingEventMailForm extends tx_seminars_BackEn
 	public function setDateFormat() {
 		$this->getEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 	}
+
+	/**
+	 * Gets the content of the message body for the e-mail.
+	 *
+	 * @return string the content for the message body, will not be empty
+	 */
+	protected function getMessageBodyFormContent() {
+		return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
+	}
+
+	/**
+	 * Sets an error message.
+	 *
+	 * @param string $fieldName
+	 *        the field name to set the error message for, must be "messageBody"
+	 *        or "subject"
+	 * @param string $message the error message to set, may be empty
+	 */
+	public function setErrorMessage($fieldName, $message) {
+		parent::setErrorMessage($fieldName, $message);
+	}
+
+	/**
+	 * Returns all error messages set via setErrorMessage for the given field
+	 * name.
+	 *
+	 * @param string $fieldName
+	 *        the field name for which the error message should be returned,
+	 *        must not be empty
+	 *
+	 * @return string the error message for the field, will be empty if there's
+	 *                no error message for this field
+	 */
+	public function getErrorMessage($fieldName) {
+		return parent::getErrorMessage($fieldName);
+	}
 }
 ?>

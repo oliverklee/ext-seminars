@@ -47,15 +47,17 @@
 			<label index="eventMailForm_backButton">Back</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Please enter a subject.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Please enter a message body.</label>
+			<label index="eventMailForm_error_noDetailsPageFound">The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</label>
 			<label index="referencesWarning">(There are %s reference(s) to this record!)</label>
 			<label index="confirmMailForm_sendButton">Confirm and send</label>
 			<label index="confirmMailForm_prefillField_subject">Event confirmed:</label>
 			<label index="confirmMailForm_prefillField_messageBody">This event now is confirmed.</label>
 			<label index="confirmMailForm_prefillField_introduction">you registered for the event %s.</label>
-			<label index="cancelMailForm_sendButton">Send cancellation</label>
+			<label index="cancelMailForm_sendButton">Send cancelation</label>
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
 			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
 			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
+			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 			<label index="mailForm_salutation">salutation</label>
@@ -127,6 +129,7 @@
 			<label index="eventMailForm_backButton">Zurück</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Bitte geben Sie einen Betreff ein.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Bitte geben Sie eine Mitteilung ein.</label>
+			<label index="eventMailForm_error_noDetailsPageFound">Die Einzelansichtsseite ist nicht gesetzt. Wenn diese nicht gesetzt ist, kann kein Link zur Einzelansichtsseite in der Absage gesendet werden. Um dieses Problem zu beheben, setzen Sie bitte plugin.tx_seminars_pi1.detailPID im TS-Setup der gerade ausgewählten Seite.</label>
 			<label index="referencesWarning">(Es gibt %s Verbindung(en) zu diesem Datensatz!)</label>
 			<label index="confirmMailForm_sendButton">Bestätigen und senden</label>
 			<label index="confirmMailForm_prefillField_subject">Veranstaltung zugesagt:</label>
@@ -136,6 +139,7 @@
 			<label index="cancelMailForm_prefillField_subject">Veranstaltung abgesagt:</label>
 			<label index="cancelMailForm_prefillField_messageBody">Leider musste diese Veranstaltung abgesagt werden.</label>
 			<label index="cancelMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
+			<label index="cancelMailForm_alternativeDate">Alternativtermine entnehmen Sie bitte unserer Homepage:</label>
 			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysFolder im Seitenbaum aus.</label>
 			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische seminars-template im TS-Setup dieses SysFolders ein.</label>
 			<label index="mailForm_salutation">Anrede</label>
@@ -286,10 +290,12 @@
 			<label index="confirmMailForm_prefillField_introduction" type="integer">115928722</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty" type="integer">9192935</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty" type="integer">54495100</label>
-			<label index="cancelMailForm_sendButton" type="integer">125778442</label>
+			<label index="eventMailForm_error_noDetailsPageFound" type="integer">236121578</label>
+			<label index="cancelMailForm_sendButton" type="integer">131764518</label>
 			<label index="cancelMailForm_prefillField_subject" type="integer">175603821</label>
 			<label index="cancelMailForm_prefillField_messageBody" type="integer">121602317</label>
 			<label index="cancelMailForm_prefillField_introduction" type="integer">115928722</label>
+			<label index="cancelMailForm_alternativeDate" type="integer">231667710</label>
 			<label index="message_noPageTypeSelected" type="integer">217321592</label>
 			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
 			<label index="mailForm_salutation" type="integer">128380848</label>
@@ -440,10 +446,12 @@
 			<label index="confirmMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="eventMailForm_error_subjectMustNotBeEmpty">Please enter a subject.</label>
 			<label index="eventMailForm_error_messageBodyMustNotBeEmpty">Please enter a message body.</label>
-			<label index="cancelMailForm_sendButton">Send cancellation</label>
+			<label index="eventMailForm_error_noDetailsPageFound">The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</label>
+			<label index="cancelMailForm_sendButton">Send cancelation</label>
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
 			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
 			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
+			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 			<label index="mailForm_salutation">salutation</label>

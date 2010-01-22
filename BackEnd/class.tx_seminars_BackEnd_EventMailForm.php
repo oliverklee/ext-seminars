@@ -150,15 +150,17 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	private function validateFormData() {
 		if ($this->getPostData('subject') == '') {
 			$this->markAsIncomplete();
-			$this->errorMessages['subject'] = $GLOBALS['LANG']->getLL(
-				'eventMailForm_error_subjectMustNotBeEmpty'
+			$this->setErrorMessage(
+				'subject',
+				$GLOBALS['LANG']->getLL('eventMailForm_error_subjectMustNotBeEmpty')
 			);
 		}
 
 		if ($this->getPostData('messageBody') == '') {
 			$this->markAsIncomplete();
-			$this->errorMessages['messageBody'] = $GLOBALS['LANG']->getLL(
-				'eventMailForm_error_messageBodyMustNotBeEmpty'
+			$this->setErrorMessage(
+				'messageBody',
+				$GLOBALS['LANG']->getLL('eventMailForm_error_messageBodyMustNotBeEmpty')
 			);
 		}
 
@@ -234,9 +236,8 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 *                message, will not be empty
 	 */
 	protected function createSubjectFormElement() {
-		$classMarker = (isset(
-			$this->errorMessages['subject'])
-		) ? 'class="error" ' : '';
+		$classMarker = ($this->hasErrorMessage('subject'))
+			? 'class="error" ' : '';
 
 		return '<p><label for="subject">' .
 			$GLOBALS['LANG']->getLL('eventMailForm_subject') . '</label>' .
@@ -253,15 +254,14 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * @return string HTML for the subject field, optionally with an error message
 	 */
 	protected function createMessageBodyFormElement() {
-		$classMarker = (isset(
-			$this->errorMessages['messageBody'])
-		) ? ', error' : '';
+		$messageBody = $this->fillFormElement('messageBody');
+		$classMarker = ($this->hasErrorMessage('messageBody')) ? ', error' : '';
 
 		return '<p><label for="messageBody">' .
 			$GLOBALS['LANG']->getLL('eventMailForm_message') . '</label>' .
 			'<textarea cols="50" rows="20" class="eventMailForm_message' .
 			$classMarker . '" id="messageBody" name="messageBody">' .
-			htmlspecialchars($this->fillFormElement('messageBody')) . '</textarea>' .
+			htmlspecialchars($messageBody) . '</textarea>' .
 			$this->getErrorMessage('messageBody') . '</p>';
 	}
 
@@ -287,14 +287,15 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	}
 
 	/**
-	 * Returns error messages from $this->errorMessages depending on a certain
-	 * field name.
+	 * Returns all error messages set via setErrorMessage for the given field
+	 * name.
 	 *
-	 * @throws Exception if $fieldName is empty
+	 * @param string $fieldName
+	 *        the field name for which the error message should be returned,
+	 *        must not be empty
 	 *
-	 * @param string the field name for which the error message should be returned, must not be empty
-	 *
-	 * @return string the error message for the field, will be empty if there's no error message for this field
+	 * @return string the error message for the field, will be empty if there's
+	 *                no error message for this field
 	 */
 	protected function getErrorMessage($fieldName) {
 		if ($fieldName == '') {
@@ -303,7 +304,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 
 		$result = '';
 
-		if (!$this->isComplete && isset($this->errorMessages[$fieldName])) {
+		if ($this->hasErrorMessage($fieldName)) {
 			$result = '<span class="EventMailForm_error">' .
 				$this->errorMessages[$fieldName] . '</span>';
 		}
@@ -460,9 +461,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 				$result = $this->appendTitleAndDate($this->formFieldPrefix);
 				break;
 			case 'messageBody':
-				$result = $this->localizeSalutationPlaceholder(
-					$this->formFieldPrefix
-				);
+				$result = $this->getMessageBodyFormContent();
 				break;
 			default:
 				throw new Exception('There is no initial value for the field "' .
@@ -505,7 +504,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 *                replaced placeholders, will be empty if no locallang label
 	 *                for the given prefix could be found
 	 */
-	private function localizeSalutationPlaceholder($prefix) {
+	protected function localizeSalutationPlaceholder($prefix) {
 		$salutation = tx_oelib_ObjectFactory::make(
 			'tx_seminars_EmailSalutation'
 		);
@@ -549,6 +548,42 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 			$organizerFooter : '';
 
 		return $messageText . $messageFooter;
+	}
+
+	/**
+	 * Gets the content of the message body for the e-mail.
+	 *
+	 * @return string the content for the message body, will not be empty
+	 */
+	abstract protected function getMessageBodyFormContent();
+
+	/**
+	 * Sets an error message.
+	 *
+	 * @param string $fieldName
+	 *        the field name to set the error message for, must be "messageBody"
+	 *        or "subject"
+	 * @param string $message the error message to set, may be empty
+	 */
+	protected function setErrorMessage($fieldName, $message) {
+		if ($this->hasErrorMessage($fieldName)) {
+			$this->errorMessages[$fieldName] .= '<br />' . $message;
+		} else {
+			$this->errorMessages[$fieldName] = $message;
+		}
+	}
+
+	/**
+	 * Checks whether an error message has been set for the given fieldname.
+	 *
+	 * @param string $fieldName
+	 *        the field to check the error message for, must not be empty
+	 *
+	 * @return boolean true if an error message has been stored for the given
+	 *                 fieldname, false otherwise
+	 */
+	private function hasErrorMessage($fieldName) {
+		return isset($this->errorMessages[$fieldName]);
 	}
 }
 

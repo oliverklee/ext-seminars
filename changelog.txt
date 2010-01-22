@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3578] Feature: In the cancel e-mail text, provide a link to the single view
 - [#3577] Feature: Mention the unregistration in the thank-you e-mail
 - [#3585] Fix: Registration csv-file could not be added to the organizer mail
 - [#3580] Feature: Add separate TS setup configuration variables for the CSV columns in the e-mail to the organizers

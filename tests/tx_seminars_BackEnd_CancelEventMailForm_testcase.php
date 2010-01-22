@@ -155,6 +155,228 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 	}
 
 
+	/////////////////////////////////////////////////
+	// Tests concerning the link to the single view
+	/////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function renderForSingleEventDoesNotAppendSingleViewLink() {
+		$detailPid = $this->testingFramework->createFrontEndPage();
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+			->set('detailPID', $detailPid);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->eventUid,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$this->assertNotContains(
+			(string) $detailPid,
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForDateWithOtherDatesInFutureAppendsSingleViewLink() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'Dummy event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$dateUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS),
+			'organizers'
+		);
+
+		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+
+		$detailPid = $this->testingFramework->createFrontEndPage();
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+			->set('detailPID', $detailPid);
+
+		$this->assertContains(
+			$GLOBALS['LANG']->getLL('cancelMailForm_alternativeDate'),
+			$fixture->render()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForDateWithoutOtherDatesNotAppendsSingleViewLink() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'Dummy event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$dateUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS),
+			'organizers'
+		);
+
+		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+
+		$detailPid = $this->testingFramework->createFrontEndPage();
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+			->set('detailPID', $detailPid);
+
+		$this->assertNotContains(
+			(string) $detailPid,
+			$fixture->render()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForDateWithOtherDatesInPastNotAppendsSingleViewLink() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'Dummy event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+			)
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$dateUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS),
+			'organizers'
+		);
+
+		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+
+		$detailPid = $this->testingFramework->createFrontEndPage();
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+			->set('detailPID', $detailPid);
+
+		$this->assertNotContains(
+			(string) $detailPid,
+			$fixture->render()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForDateWithoutSetDetailPidShowsErrorMessage() {
+		$topicUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'title' => 'Dummy event',
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+			)
+		);
+		$dateUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+			)
+		);
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicUid,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			)
+		);
+
+		$this->testingFramework->createRelationAndUpdateCounter(
+			SEMINARS_TABLE_SEMINARS,
+			$dateUid,
+			$this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS),
+			'organizers'
+		);
+
+		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+			->set('detailPID', 0);
+
+		$this->assertContains(
+			$GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
+			$fixture->render()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForSingleEventAndNoSetDetailPidNotShowsErrorMessage() {
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+			->set('detailPID', 0);
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_SEMINARS,
+			$this->eventUid,
+			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+		);
+
+		$this->assertNotContains(
+			$GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
+			$this->fixture->render()
+		);
+	}
+
+
 	////////////////////////////////
 	// Tests for the localization.
 	////////////////////////////////

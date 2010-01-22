@@ -155,6 +155,7 @@ td.cancel_button button p {
 	font-weight: bold;
 	margin-left: 5px;
 	position: absolute;
+	width: 250px;
 }
 
 .errorMessage {

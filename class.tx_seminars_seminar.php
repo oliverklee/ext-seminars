@@ -2355,7 +2355,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function getDetailedViewLinkConfiguration(tslib_pibase $plugin) {
 		return ($this->hasSeparateDetailsPage())
 			? array(
-				'parameter' => $this->getRecordPropertyString('details_page')
+				'parameter' => $this->getDetailsPage()
 			)
 			: array(
 				'parameter' => $plugin->getConfValueInteger('detailPID'),
@@ -2378,6 +2378,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function hasSeparateDetailsPage() {
 		return $this->hasRecordPropertyString('details_page');
+	}
+
+	/**
+	 * Returns this event's separate details page URL (which may be
+	 * internal or external) or page ID.
+	 *
+	 * @return string the URL to this events separate details page, will be
+	 *                empty if this event has no separate details page set
+	 */
+	public function getDetailsPage() {
+		return $this->getRecordPropertyString('details_page');
 	}
 
 	/**
