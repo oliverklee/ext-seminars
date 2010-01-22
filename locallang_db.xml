@@ -132,9 +132,17 @@
 			<label index="tx_seminars_attendances.bank_code">Bank code:</label>
 			<label index="tx_seminars_attendances.bank_name">Bank name:</label>
 			<label index="tx_seminars_attendances.account_owner">Account owner:</label>
+			<label index="tx_seminars_attendances.company">Company:</label>
+			<label index="tx_seminars_attendances.name">Name:</label>
 			<label index="tx_seminars_attendances.gender">Gender:</label>
 			<label index="tx_seminars_attendances.gender.I.0">Mr.</label>
 			<label index="tx_seminars_attendances.gender.I.1">Ms.</label>
+			<label index="tx_seminars_attendances.address">Address:</label>
+			<label index="tx_seminars_attendances.zip">ZIP:</label>
+			<label index="tx_seminars_attendances.city">City:</label>
+			<label index="tx_seminars_attendances.country">Country:</label>
+			<label index="tx_seminars_attendances.telephone">Telephone:</label>
+			<label index="tx_seminars_attendances.email">E-mail:</label>
 			<label index="tx_seminars_attendances.been_there">Has attended:</label>
 			<label index="tx_seminars_attendances.checkboxes">Selected options:</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>
@@ -341,9 +349,17 @@
 			<label index="tx_seminars_attendances.bank_code">Bankleitzahl:</label>
 			<label index="tx_seminars_attendances.bank_name">Name der Bank:</label>
 			<label index="tx_seminars_attendances.account_owner">Kontoinhaber:</label>
+			<label index="tx_seminars_attendances.company">Firma:</label>
+			<label index="tx_seminars_attendances.name">Name:</label>
 			<label index="tx_seminars_attendances.gender">Herr/Frau:</label>
 			<label index="tx_seminars_attendances.gender.I.0">Herr</label>
 			<label index="tx_seminars_attendances.gender.I.1">Frau</label>
+			<label index="tx_seminars_attendances.address">Adresse:</label>
+			<label index="tx_seminars_attendances.zip">Postleitzahl:</label>
+			<label index="tx_seminars_attendances.city">Stadt:</label>
+			<label index="tx_seminars_attendances.country">Land:</label>
+			<label index="tx_seminars_attendances.telephone">Telefon:</label>
+			<label index="tx_seminars_attendances.email">E-Mail:</label>
 			<label index="tx_seminars_attendances.been_there">Hat teilgenommen:</label>
 			<label index="tx_seminars_attendances.checkboxes">Gewählte Optionen:</label>
 			<label index="tx_seminars_attendances.interests">Spezielle Interessen:</label>
@@ -1293,9 +1309,17 @@
 			<label index="tx_seminars_attendances.bank_code" type="integer">171550314</label>
 			<label index="tx_seminars_attendances.bank_name" type="integer">204057381</label>
 			<label index="tx_seminars_attendances.account_owner" type="integer">35539025</label>
+			<label index="tx_seminars_attendances.company" type="integer">98955432</label>
+			<label index="tx_seminars_attendances.name" type="integer">81871034</label>
 			<label index="tx_seminars_attendances.gender" type="integer">212491130</label>
 			<label index="tx_seminars_attendances.gender.I.0" type="integer">19351194</label>
 			<label index="tx_seminars_attendances.gender.I.1" type="integer">43922038</label>
+			<label index="tx_seminars_attendances.address" type="integer">46079327</label>
+			<label index="tx_seminars_attendances.zip" type="integer">234550549</label>
+			<label index="tx_seminars_attendances.city" type="integer">201307921</label>
+			<label index="tx_seminars_attendances.country" type="integer">258260574</label>
+			<label index="tx_seminars_attendances.telephone" type="integer">33624454</label>
+			<label index="tx_seminars_attendances.email" type="integer">233919839</label>
 			<label index="tx_seminars_attendances.been_there" type="integer">161603609</label>
 			<label index="tx_seminars_attendances.checkboxes" type="integer">78451248</label>
 			<label index="tx_seminars_attendances.interests" type="integer">236721406</label>
@@ -2242,9 +2266,17 @@
 			<label index="tx_seminars_attendances.bank_code">Bank code:</label>
 			<label index="tx_seminars_attendances.bank_name">Bank name:</label>
 			<label index="tx_seminars_attendances.account_owner">Account owner:</label>
+			<label index="tx_seminars_attendances.company">Company:</label>
+			<label index="tx_seminars_attendances.name">Name:</label>
 			<label index="tx_seminars_attendances.gender">Gender:</label>
 			<label index="tx_seminars_attendances.gender.I.0">Mr.</label>
 			<label index="tx_seminars_attendances.gender.I.1">Ms.</label>
+			<label index="tx_seminars_attendances.address">Address:</label>
+			<label index="tx_seminars_attendances.zip">ZIP:</label>
+			<label index="tx_seminars_attendances.city">City:</label>
+			<label index="tx_seminars_attendances.country">Country:</label>
+			<label index="tx_seminars_attendances.telephone">Telephone:</label>
+			<label index="tx_seminars_attendances.email">E-mail:</label>
 			<label index="tx_seminars_attendances.been_there">Has attended:</label>
 			<label index="tx_seminars_attendances.checkboxes">Selected options:</label>
 			<label index="tx_seminars_attendances.interests">Special interests:</label>

@@ -1650,7 +1650,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'company' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.company',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.company',
 			'config' => array(
 				'type' => 'text',
 				'cols' => '20',
@@ -1672,7 +1672,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'name' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.name',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.name',
 			'config' => array(
 				'type' => 'input',
 				'size' => '40',
@@ -1682,7 +1682,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'address' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.address',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.address',
 			'config' => array(
 				'type' => 'text',
 				'cols' => '20',
@@ -1691,7 +1691,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'zip' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.zip',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.zip',
 			'config' => array(
 				'type' => 'input',
 				'size' => '8',
@@ -1701,7 +1701,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'city' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.city',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.city',
 			'config' => array(
 				'type' => 'input',
 				'size' => '20',
@@ -1711,7 +1711,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'country' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.country',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.country',
 			'config' => array(
 				'type' => 'input',
 				'size' => '16',
@@ -1721,7 +1721,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'telephone' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.phone',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.phone',
 			'config' => array(
 				'type' => 'input',
 				'size' => '20',
@@ -1731,7 +1731,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'email' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.email',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.email',
 			'config' => array(
 				'type' => 'input',
 				'size' => '20',
