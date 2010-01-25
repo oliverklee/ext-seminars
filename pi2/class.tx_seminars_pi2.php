@@ -401,13 +401,15 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *                configured correctly
 	 */
 	private function createEventsHeading() {
-		return str_replace(
+		$eventFields = t3lib_div::trimExplode(
 			',',
-			';',
-			$this->configGetter->getConfValueString(
-				'fieldsFromEventsForCsv'
-			) . CRLF
+			$this->configGetter->getConfValueString('fieldsFromEventsForCsv'),
+			TRUE
 		);
+
+		return implode(
+			';', $this->localizeCsvHeadings($eventFields, SEMINARS_TABLE_SEMINARS)
+		) . CRLF;
 	}
 
 	/**

@@ -76,6 +76,27 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	}
 
 
+	//////////////////////
+	// Utility functions
+	//////////////////////
+
+	/*
+	 * Retrieves the localization for the given locallang key and then strips
+	 * the trailing colon from the localization
+	 *
+	 * @param string $locallangKey
+	 *        the locallang key with the localization to remove the trailing
+	 *        colon from, must not be empty and the localization must have a
+	 *        trailing colon
+	 *
+	 * @return string locallang string with the removed trailing colon, will not
+	 *                be empty
+	 */
+	private function localizeAndRemoveColon($locallangKey) {
+		return substr($GLOBALS['LANG']->getLL($locallangKey), 0, -1);
+	}
+
+
 	////////////////////////////////////////
 	// Tests for the CSV export of events.
 	////////////////////////////////////////
@@ -102,7 +123,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertEquals(
-			'uid;title' . CRLF,
+			$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.uid') . ';' .
+				$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.title') .
+				CRLF,
 			$this->fixture->createListOfEvents($pid)
 		);
 	}
@@ -195,7 +218,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertEquals(
-			'uid' . CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
+			$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.uid')
+				. CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
 			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
@@ -321,13 +345,16 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'description,title'
 		);
 		$eventList = $this->fixture->createAndOutputListOfEvents($this->pid);
+		$description = $this->localizeAndRemoveColon(
+			SEMINARS_TABLE_SEMINARS . '.description'
+		);
 
 		$this->assertContains(
-			'description',
+			$description,
 			$eventList
 		);
 		$this->assertNotContains(
-			'"description"',
+			'"' . $description . '"',
 			$eventList
 		);
 	}
@@ -338,7 +365,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'description;title',
+			$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.description') .
+				';' . $this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.title'),
 			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
@@ -362,11 +390,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
-		$name = $GLOBALS['LANG']->getLL('LGL.name');
-		$uid = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.uid');
 
 		$this->assertEquals(
-			str_replace(':', '', ($name . ';' . $uid . CRLF)),
+			$this->localizeAndRemoveColon('LGL.name') . ';' .
+				$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.uid') .
+				CRLF,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -407,16 +435,11 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				'registered_themselves' => 1,
 			)
 		);
-		$registeredThemselves = substr(
-			$GLOBALS['LANG']->getLL(
-				SEMINARS_TABLE_ATTENDANCES . '.registered_themselves'
-			),
-			0,
-			-1
-		);
 
 		$this->assertContains(
-			$registeredThemselves,
+			$this->localizeAndRemoveColon(
+				SEMINARS_TABLE_ATTENDANCES . '.registered_themselves'
+			),
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -436,14 +459,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 				'company' => 'foo',
 			)
 		);
-		$company = substr(
-			$GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.company'),
-			0,
-			-1
-		);
 
 		$this->assertContains(
-			$company,
+			$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.company'),
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -947,10 +965,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$registrationsList
 			= $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
-		$localizedAddress = substr(
-			$GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.address'),
-			0,
-			-1
+		$localizedAddress = $this->localizeAndRemoveColon(
+			SEMINARS_TABLE_ATTENDANCES . '.address'
 		);
 
 		$this->assertContains(
@@ -971,10 +987,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'address,title'
 		);
 
-		$address = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.address');
-		$title = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.title');
 		$this->assertContains(
-			str_replace(':', '', $address . ';' . $title),
+			$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.address') .
+				';' . $this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.title'),
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
@@ -1024,11 +1039,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromFeUserForCsv', 'name'
 		);
 
-		$name = $GLOBALS['LANG']->getLL('LGL.name');
-		$address = $GLOBALS['LANG']->getLL(SEMINARS_TABLE_ATTENDANCES . '.address');
-
 		$this->assertContains(
-			str_replace(':', '', $name . ';' . $address),
+			$this->localizeAndRemoveColon('LGL.name') . ';' .
+				$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.address'),
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
