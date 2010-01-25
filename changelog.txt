@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3560] Fix: Multiple tests of the eventEditor testcase fail
 - [#3668] Fix: CSV export for registrations for one event does not work
 - [#3564] Feature: For the CSV export of registrations and events, use localized column headings
 - [#3578] Feature: In the cancel e-mail text, provide a link to the single view
