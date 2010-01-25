@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3669] Change: UTF-8 em dash used in ISO8859-1 CSV export
 - [#3560] Fix: Multiple tests of the eventEditor testcase fail
 - [#3668] Fix: CSV export for registrations for one event does not work
 - [#3564] Feature: For the CSV export of registrations and events, use localized column headings

@@ -6203,7 +6203,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests concerning getEventData
 	//////////////////////////////////
 
-	public function testGetEventDataReturnsFormattedUnregistrationDeadline() {
+	/**
+	 * @test
+	 */
+	public function getEventDataReturnsFormattedUnregistrationDeadline() {
 		$this->fixture->setUnregistrationDeadline(1893488400);
 		$this->fixture->setShowTimeOfUnregistrationDeadline(0);
 		$this->assertEquals(
@@ -6212,7 +6215,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataForShowTimeOfUnregistrationDeadlineTrueReturnsFormattedUnregistrationDeadlineWithTime() {
+	/**
+	 * @test
+	 */
+	public function getEventDataForShowTimeOfUnregistrationDeadlineTrueReturnsFormattedUnregistrationDeadlineWithTime() {
 		$this->fixture->setUnregistrationDeadline(1893488400);
 		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
 
@@ -6222,7 +6228,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataForUnregistrationDeadlineZeroReturnsEmptyString () {
+	/**
+	 * @test
+	 */
+	public function getEventDataForUnregistrationDeadlineZeroReturnsEmptyString () {
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->assertEquals(
 			'',
@@ -6230,7 +6239,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataForEventWithMultipleLodgingsSeparatesLodgingsWithLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getEventDataForEventWithMultipleLodgingsSeparatesLodgingsWithLineFeeds() {
 		$lodgingUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
 		);
@@ -6255,7 +6267,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataForEventWithMultipleLodgingsDoesNotSeparateLodgingsWithCarriageReturnsAndLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getEventDataForEventWithMultipleLodgingsDoesNotSeparateLodgingsWithCarriageReturnsAndLineFeeds() {
 		$lodgingUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
 		);
@@ -6280,7 +6295,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataDataWithCarriageReturnAndLinefeedGetsConvertedToLineFeedOnly() {
+	/**
+	 * @test
+	 */
+	public function getEventDataDataWithCarriageReturnAndLinefeedGetsConvertedToLineFeedOnly() {
 		$this->fixture->setDescription('foo'. CRLF . 'bar');
 
 		$this->assertContains(
@@ -6289,7 +6307,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataDataWithTwoAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
+	/**
+	 * @test
+	 */
+	public function getEventDataDataWithTwoAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
 		$this->fixture->setDescription('foo'. LF . LF . 'bar');
 
 		$this->assertContains(
@@ -6298,7 +6319,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataDataWithThreeAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
+	/**
+	 * @test
+	 */
+	public function getEventDataDataWithThreeAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
 		$this->fixture->setDescription('foo'. LF . LF .  LF . 'bar');
 
 		$this->assertContains(
@@ -6307,13 +6331,44 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventDataDataWithFourAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
+	/**
+	 * @test
+	 */
+	public function getEventDataDataWithFourAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed() {
 		$this->fixture->setDescription('foo'. LF . LF .  LF . LF . 'bar');
 
 		$this->assertContains(
 			'foo' . LF . 'bar',
 			$this->fixture->getEventData('description')
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEventDataForEventWithDateUsesHyphenAsDateSeparator() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + ONE_DAY);
+
+		$this->assertContains(
+			'-',
+			$this->fixture->getEventData('date')
+		);
+
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEventDataForEventWithTimeUsesHyphenAsTimeSeparator() {
+		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
+
+		$this->assertContains(
+			'-',
+			$this->fixture->getEventData('time')
+		);
+
 	}
 
 

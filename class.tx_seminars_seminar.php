@@ -3419,10 +3419,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$result = $this->getCreditPoints();
 				break;
 			case 'date':
-				$result = $this->getDate(UTF8_EN_DASH);
+				$result = $this->getDate('-');
 				break;
 			case 'time':
-				$result = $this->getTime(UTF8_EN_DASH);
+				$result = $this->getTime('-');
 				break;
 			case 'deadline_registration':
 				$result = $this->getRegistrationDeadline();
