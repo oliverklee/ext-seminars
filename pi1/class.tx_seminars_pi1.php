@@ -2567,7 +2567,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 						'type' => tx_seminars_pi2::getTypeNum(),
 						'tx_seminars_pi2' => array(
 							'table' => SEMINARS_TABLE_ATTENDANCES,
-							'seminar' => $this->seminar->getUid(),
+							'eventUid' => $this->seminar->getUid(),
 						),
 					)
 				),

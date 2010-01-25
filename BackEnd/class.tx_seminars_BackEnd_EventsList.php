@@ -377,7 +377,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			$result = '<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
 				$pageData['uid'] .
 				'&amp;tx_seminars_pi2[table]=' . SEMINARS_TABLE_ATTENDANCES .
-				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">' .
+				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">' .
 				'<img' .
 				t3lib_iconWorks::skinImg(
 					$GLOBALS['BACK_PATH'],

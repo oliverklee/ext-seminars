@@ -4580,7 +4580,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning allowCsvExportOfRegistrationsInMyVipEventsView in the "my vip events" list view
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public function testRegistrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToFalseIsHiddenInMyVipEventsListView() {
+	/**
+	 * @test
+	 */
+	public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToFalseIsHiddenInMyVipEventsListView() {
 		$this->createLogInAndAddFeUserAsVip();
 
 		$this->fixture->main(
@@ -4595,7 +4598,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRegistrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToTrueIsVisibleInMyVipEventsListView() {
+	/**
+	 * @test
+	 */
+	public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToTrueIsVisibleInMyVipEventsListView() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue(
 			'allowCsvExportOfRegistrationsInMyVipEventsView', 1
@@ -4605,6 +4611,38 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->main('', array());
 		$this->assertTrue(
 			$this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function myVipEventsViewForAllowCsvExportOfRegistrationsInTrueHasEventUidPiVarInRegistrationLink() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue(
+			'allowCsvExportOfRegistrationsInMyVipEventsView', 1
+		);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->assertContains(
+			'tx_seminars_pi2[eventUid]',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function myVipEventsViewForAllowCsvExportOfRegistrationsInTrueHasTablePiVarInRegistrationLink() {
+		$this->createLogInAndAddFeUserAsVip();
+		$this->fixture->setConfigurationValue(
+			'allowCsvExportOfRegistrationsInMyVipEventsView', 1
+		);
+		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
+
+		$this->assertContains(
+			'tx_seminars_pi2[table]=' . SEMINARS_TABLE_ATTENDANCES,
+			$this->fixture->main('', array())
 		);
 	}
 

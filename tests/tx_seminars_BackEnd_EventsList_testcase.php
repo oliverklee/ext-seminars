@@ -558,7 +558,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
 				$this->dummySysFolderPid .
 				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
-				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">',
+				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
 			$this->fixture->show()
 		);
 	}
@@ -588,7 +588,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
 				$this->dummySysFolderPid .
 				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
-				'&amp;tx_seminars_pi2[seminar]=' . $eventUid . '">',
+				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
 			$this->fixture->show()
 		);
 	}
