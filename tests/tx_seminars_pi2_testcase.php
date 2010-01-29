@@ -47,8 +47,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 	public function setUp() {
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->pid = $this->testingFramework->createSystemFolder();
 		$this->eventUid = $this->testingFramework->createRecord(
