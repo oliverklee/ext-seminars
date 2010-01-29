@@ -2954,7 +2954,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return boolean true if the corresponding integer exists and is non-empty
 	 */
-	private function hasTopicInteger($key) {
+	protected function hasTopicInteger($key) {
 		$result = false;
 
 		if ($this->isTopicOkay()) {
@@ -2976,7 +2976,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return integer the corresponding element from the record data array
 	 */
-	private function getTopicInteger($key) {
+	protected function getTopicInteger($key) {
 		$result = 0;
 
 		if ($this->isTopicOkay()) {

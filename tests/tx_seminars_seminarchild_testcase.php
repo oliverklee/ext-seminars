@@ -1383,6 +1383,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'Italiano',
 			$seminar->getLanguageName()
 		);
+
+		$seminar->__destruct();
 	}
 
 	public function testGetLanguageOnSingleRecordThatWasADateRecord() {
@@ -1412,6 +1414,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'Italiano',
 			$seminar->getLanguageName()
 		);
+
+		$seminar->__destruct();
 	}
 
 
@@ -6872,6 +6876,146 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			1,
 			$this->fixture->getAttendances()
 		);
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning getTopicInteger
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getTopicIntegerForSingleEventReturnsDataFromRecord() {
+		$this->fixture->setRecordPropertyInteger('credit_points', 42);
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getTopicInteger('credit_points')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTopicIntegerForDateReturnsDataFromTopic() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'credit_points' => 42,
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicRecordUid,
+			)
+		);
+
+		$date = new tx_seminars_seminarchild($dateRecordUid);
+
+		$this->assertEquals(
+			42,
+			$date->getTopicInteger('credit_points')
+		);
+
+		$date->__destruct();
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning hasTopicInteger
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasTopicIntegerForSingleEventForZeroReturnsFalse() {
+		$this->fixture->setRecordPropertyInteger('credit_points', 0);
+
+		$this->assertFalse(
+			$this->fixture->hasTopicInteger('credit_points')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTopicIntegerForSingleEventForPositiveIntegerReturnsFalse() {
+		$this->fixture->setRecordPropertyInteger('credit_points', 1);
+
+		$this->assertTrue(
+			$this->fixture->hasTopicInteger('credit_points')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTopicIntegerForSingleEventForNegativeIntegerReturnsFalse() {
+		$this->fixture->setRecordPropertyInteger('credit_points', -1);
+
+		$this->assertTrue(
+			$this->fixture->hasTopicInteger('credit_points')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTopicIntegerForDateForZeroInTopicReturnsFalse() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'credit_points' => 0,
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicRecordUid,
+			)
+		);
+
+		$date = new tx_seminars_seminarchild($dateRecordUid);
+
+		$this->assertFalse(
+			$date->hasTopicInteger('credit_points')
+		);
+
+		$date->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasTopicIntegerForDateForPositiveIntegerInTopicReturnsTrue() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'credit_points' => 1,
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'topic' => $topicRecordUid,
+			)
+		);
+
+		$date = new tx_seminars_seminarchild($dateRecordUid);
+
+		$this->assertTrue(
+			$date->hasTopicInteger('credit_points')
+		);
+
+		$date->__destruct();
 	}
 }
 ?>
