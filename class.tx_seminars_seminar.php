@@ -1844,10 +1844,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether this seminar still has vacancies (is not full yet).
 	 *
-	 * @return boolean true if the seminar has vacancies, false if it is full.
+	 * @return boolean TRUE if the seminar has vacancies, FALSE if it is full
 	 */
 	public function hasVacancies() {
-		return !($this->isFull());
+		return !$this->isFull();
 	}
 
 	/**
