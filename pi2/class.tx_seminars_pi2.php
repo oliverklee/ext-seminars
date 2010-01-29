@@ -33,9 +33,6 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
-$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
-$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
-
 /**
  * Plugin 'CSV export' for the 'seminars' extension.
  *
@@ -109,6 +106,19 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	private $exportMode = self::EXPORT_MODE_WEB;
 
 	/**
+	 * @var language the language object for translating the CSV headings
+	 */
+	private $language = null;
+
+	/**
+	 * The constructor.
+	 */
+	public function __construct() {
+		parent::__construct();
+		$this->loadLocallangFiles();
+	}
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
@@ -116,6 +126,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			$this->configGetter->__destruct();
 			unset($this->configGetter);
 		}
+		unset($this->language);
 
 		parent::__destruct();
 	}
@@ -172,6 +183,32 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			'tx_seminars_configgetter'
 		);
 		$this->configGetter->init();
+	}
+
+	/**
+	 * Loads the locallang files needed to translate the CSV headings.
+	 */
+	private function loadLocallangFiles() {
+		if (is_object($GLOBALS['TSFE']) && is_array($this->LOCAL_LANG)) {
+			require_once(t3lib_extMgm::extPath('lang') . 'lang.php');
+			$this->language = tx_oelib_ObjectFactory::make('language');
+			if (!empty($this->LLkey)) {
+				$this->language->init($this->LLkey);
+			}
+		} elseif (is_object($GLOBALS['LANG'])) {
+			$this->language = $GLOBALS['LANG'];
+		} else {
+			throw new Exception(
+				'The language could not be loaded. Please check your installation.'
+			);
+		}
+
+		$this->language->includeLLFile(
+			t3lib_extMgm::extPath('seminars') . 'locallang_db.xml'
+		);
+		$this->language->includeLLFile(
+			t3lib_extMgm::extPath('lang') . 'locallang_general.xml'
+		);
 	}
 
 	/**
@@ -861,7 +898,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		$result = array();
 
 		foreach ($fieldNames as $fieldName) {
-			$translation = trim($GLOBALS['LANG']->getLL($tableName . '.' . $fieldName));
+			$translation = trim($this->language->getLL($tableName . '.' . $fieldName));
 
 			if (substr($translation, -1) == ':') {
 				$translation = substr($translation, 0, -1);
