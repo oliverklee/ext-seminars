@@ -390,6 +390,9 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 		$registrations = $registrationBagBuilder->build();
 
 		foreach ($registrations as $registration) {
+			if (!$registration->getFrontEndUser()->hasEMailAddress()) {
+				continue;
+			}
 			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 			$eMail->setSender($organizer);
 			$eMail->setSubject($this->getPostData('subject'));
