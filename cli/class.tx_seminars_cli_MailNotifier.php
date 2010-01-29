@@ -122,7 +122,7 @@ class tx_seminars_cli_MailNotifier {
 		$sender = $organizerBag->current();
 		$subject = $this->customizeMessage($messageKey . 'Subject', $event);
 		if ($this->shouldCsvFileBeAdded($event)) {
-			$attachment =$this->getCsv($event->getUid());
+			$attachment = $this->getCsv($event->getUid());
 		}
 
 		foreach ($organizerBag as $organizer) {
