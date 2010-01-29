@@ -308,7 +308,10 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	// Tests for sendEmailToRegistrations
 	///////////////////////////////////////
 
-	public function testSendEmailToRegistrationsSendsEmailWithSubjectOnSubmitOfValidForm() {
+	/**
+	 * @test
+	 */
+	public function sendEmailToRegistrationsSendsEmailWithSubjectOnSubmitOfValidForm() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -335,7 +338,39 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSendEmailToRegistrationsInsertsUserNameIntoMailText() {
+	/**
+	 * @test
+	 */
+	public function sendEmailToRegistrationsForAttendeeWithoutEMailAddressDoesNotSendMail() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser()
+			)
+		);
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => 'true',
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertEquals(
+			array(),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastEmail()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendEmailToRegistrationsInsertsUserNameIntoMailText() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -367,7 +402,10 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSendEmailToRegistrationsUsesSelectedOrganizerAsSender() {
+	/**
+	 * @test
+	 */
+	public function sendEmailToRegistrationsUsesSelectedOrganizerAsSender() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -402,7 +440,10 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSendEmailToRegistrationsForEventWithTwoRegistrationsSendsTwoEmails() {
+	/**
+	 * @test
+	 */
+	public function sendEmailToRegistrationsForEventWithTwoRegistrationsSendsTwoEmails() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(

@@ -1492,6 +1492,33 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForAttendeeWithoutMailAdressDoesNotSendEmail() {
+		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'seminar' => $this->seminar->getUid(),
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+		$registration = new tx_seminars_registrationchild($registrationUid);
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertEquals(
+			array(),
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastEmail()
+		);
+	}
+
 	public function test_NotifyAttendee_MailSubjectContainsConfirmationSubject() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		$pi1 = new tx_seminars_pi1();

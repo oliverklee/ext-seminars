@@ -732,6 +732,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
+		if (!$registration->getFrontEndUser()->hasEMailAddress()) {
+			return;
+		}
+
 		$eMailNotification = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 		$eMailNotification->addRecipient($registration->getFrontEndUser());
 		$eMailNotification->setSender($event->getOrganizerBag()->current());
