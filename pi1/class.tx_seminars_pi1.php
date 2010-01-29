@@ -480,12 +480,18 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Creates the config getter and the registration manager.
 	 */
 	public function createHelperObjects() {
-		$this->configGetter = tx_oelib_ObjectFactory::make(
-			'tx_seminars_configgetter'
-		);
-		$this->registrationManager = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationmanager'
-		);
+		if ($this->configGetter === null) {
+			$this->configGetter = tx_oelib_ObjectFactory::make(
+				'tx_seminars_configgetter'
+			);
+			$this->configGetter->init();
+		}
+
+		if ($this->registrationManager === null) {
+			$this->registrationManager = tx_oelib_ObjectFactory::make(
+				'tx_seminars_registrationmanager'
+			);
+		}
 	}
 
 	/**

@@ -97,12 +97,13 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars_organizers_mm', $seminarUid, $organizerUid
 		);
 
-		$this->seminar = new tx_seminars_seminarchild($seminarUid);
-
-		$this->fixture = new tx_seminars_registrationmanager();
-		$this->fixture->setConfigurationValue(
-			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		tx_oelib_templateHelper::setCachedConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
+
+		$this->seminar = new tx_seminars_seminarchild($seminarUid);
+		$this->fixture = new tx_seminars_registrationmanager();
 	}
 
 	protected function tearDown() {

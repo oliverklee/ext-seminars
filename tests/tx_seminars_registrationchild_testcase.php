@@ -98,13 +98,16 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_registrationchild($this->registrationUid);
-		$this->fixture->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
-		$this->fixture->setConfigurationValue('decimalDigits', 2);
-		$this->fixture->setConfigurationValue('decimalSplitChar', '.');
-		$this->fixture->setConfigurationValue('thousandsSplitChar', '');
+		tx_oelib_templatehelper::setCachedConfigurationValue('decimalDigits', 2);
+		tx_oelib_templatehelper::setCachedConfigurationValue('decimalSplitChar', '.');
+		tx_oelib_templatehelper::setCachedConfigurationValue('thousandsSplitChar', '');
+
+		$this->fixture = new tx_seminars_registrationchild(
+			$this->registrationUid
+		);
 	}
 
 	public function tearDown() {
