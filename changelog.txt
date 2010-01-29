@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#981] Change: Remove the "has paid" attribute in attendance records
 - [#3481] Fix: ext_icon.gif is not a GIF file but a PNG file
 - [#3678] Change: Make tx_seminars_seminar::(has|get)TopicInteger() protected
 - [#3675] Fix: Crash in the FE seminar list view if no BE user is logged in

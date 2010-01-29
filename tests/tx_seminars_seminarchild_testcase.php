@@ -6831,7 +6831,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->fixture->getUid(),
-				'paid' => 1,
+				'datepaid' => $GLOBALS['SIM_EXEC_TIME'],
 			)
 		);
 

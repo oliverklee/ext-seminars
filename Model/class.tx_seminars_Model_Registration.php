@@ -209,10 +209,11 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	/**
 	 * Returns whether this registration is paid.
 	 *
-	 * @return boolean TRUE if this registration is paid, FALSE otherwise
+	 * @return boolean TRUE if this registration has a payment date, FALSE
+	 *                 otherwise
 	 */
 	public function isPaid() {
-		return $this->getAsBoolean('paid');
+		return ($this->getPaymentDateAsUnixTimestamp() > 0);
 	}
 
 	/**

@@ -2809,7 +2809,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'registration_queue=0'
 		) + $this->getOfflineRegistrations();
 		$this->numberOfAttendancesPaid = $this->countAttendances(
-			'(paid=1 OR datepaid!=0) AND registration_queue=0'
+			'datepaid != 0 AND registration_queue = 0'
 		);
 		$this->numberOfAttendancesOnQueue = $this->countAttendances(
 			'registration_queue=1'

@@ -832,7 +832,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testIsPaidForPaidRegistrationReturnsTrue() {
-		$this->fixture->setIsPaid(true);
+		$this->fixture->setPaymentDateAsUnixTimestamp($GLOBALS['SIM_EXEC_TIME']);
 
 		$this->assertTrue(
 			$this->fixture->isPaid()
@@ -840,7 +840,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testIsPaidForUnpaidRegistrationReturnsFalse() {
-		$this->fixture->setIsPaid(false);
+		$this->fixture->setPaymentDateAsUnixTimestamp(0);
 
 		$this->assertFalse(
 			$this->fixture->isPaid()

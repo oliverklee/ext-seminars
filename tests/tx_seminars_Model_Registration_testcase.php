@@ -395,7 +395,7 @@ class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function isPaidForPaidRegistrationReturnsTrue() {
-		$this->fixture->setData(array('paid' => TRUE));
+		$this->fixture->setData(array('datepaid' => $GLOBALS['SIM_EXEC_TIME']));
 
 		$this->assertTrue(
 			$this->fixture->isPaid()

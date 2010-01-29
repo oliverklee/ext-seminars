@@ -68,14 +68,16 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to paid registrations.
 	 */
 	public function limitToPaid() {
-		$this->whereClauseParts['paid'] = SEMINARS_TABLE_ATTENDANCES . '.paid=1';
+		$this->whereClauseParts['paid'] = SEMINARS_TABLE_ATTENDANCES .
+			'.datepaid != 0';
 	}
 
 	/**
 	 * Limits the bag to unpaid registrations.
 	 */
 	public function limitToUnpaid() {
-		$this->whereClauseParts['paid'] = SEMINARS_TABLE_ATTENDANCES . '.paid=0';
+		$this->whereClauseParts['paid'] = SEMINARS_TABLE_ATTENDANCES .
+			'.datepaid = 0';
 	}
 
 	/**

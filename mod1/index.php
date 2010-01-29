@@ -264,11 +264,11 @@ class tx_seminars_module1 extends t3lib_SCbase {
 				$this->generateEmailList($seminarQuery) . '<hr />';
 			$result .= $LANG->getLL('label_paid') . '<br />' .
 				$this->generateEmailList(
-					$seminarQuery . ' AND (paid=1 OR datepaid!="")'
+					$seminarQuery . ' AND datepaid != 0'
 				) . '<hr />';
 			$result .= $LANG->getLL('label_unpaid') . '<br />' .
 				$this->generateEmailList(
-					$seminarQuery . ' AND (paid=0 AND datepaid=0)'
+					$seminarQuery . ' AND datepaid = 0'
 				) . '<hr />';
 		}
 

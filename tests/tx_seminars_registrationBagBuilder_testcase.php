@@ -188,7 +188,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToPaidFindsPaidRegistration() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('title' => 'Attendance 2', 'paid' => 1)
+			array('title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 		$this->fixture->limitToPaid();
 		$registrationBag = $this->fixture->build();
@@ -203,7 +203,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToPaidIgnoresUnpaidRegistration() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('title' => 'Attendance 1', 'paid' => 0)
+			array('title' => 'Attendance 1', 'datepaid' => 0)
 		);
 		$this->fixture->limitToPaid();
 		$registrationBag = $this->fixture->build();
@@ -223,7 +223,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToUnpaidFindsUnpaidRegistration() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('paid' => 0)
+			array('datepaid' => 0)
 		);
 		$this->fixture->limitToUnpaid();
 		$registrationBag = $this->fixture->build();
@@ -238,7 +238,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToUnpaidIgnoresPaidRegistration() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('paid' => 1)
+			array('datepaid' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 		$this->fixture->limitToUnpaid();
 		$registrationBag = $this->fixture->build();
@@ -258,7 +258,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testRemovePaymentLimitationRemovesPaidLimit() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('paid' => 0)
+			array('datepaid' => 0)
 		);
 		$this->fixture->limitToPaid();
 		$this->fixture->removePaymentLimitation();
@@ -274,7 +274,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testRemovePaymentLimitationRemovesUnpaidLimit() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
-			array('paid' => 1)
+			array('datepaid' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 		$this->fixture->limitToUnpaid();
 		$this->fixture->removePaymentLimitation();

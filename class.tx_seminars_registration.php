@@ -379,8 +379,6 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			case 'total_price':
 				$result = $this->getTotalPrice();
 				break;
-			case 'paid':
-				// The fallthrough is intended.
 			case 'registered_themselves':
 				// The fallthrough is intended.
 			case 'been_there':
@@ -644,16 +642,17 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return boolean whether this attendance has already been paid for
 	 */
 	public function isPaid() {
-		return $this->getRecordPropertyBoolean('paid');
+		return $this->getRecordPropertyInteger('datepaid') > 0;
 	}
 
 	/**
-	 * Sets whether this registration has already been paid for.
+	 * Sets the date when this registration has been paid for.
 	 *
-	 * @param boolean whether this attendance has already been paid for
+	 * @param integer $paymentDate
+	 *        the date of the payment as UNIX timestamp, must be >= 0
 	 */
-	public function setIsPaid($isPaid) {
-		$this->setRecordPropertyBoolean('paid', $isPaid);
+	public function setPaymentDateAsUnixTimestamp($paymentDate) {
+		$this->setRecordPropertyInteger('datepaid', $paymentDate);
 	}
 
 	/**
