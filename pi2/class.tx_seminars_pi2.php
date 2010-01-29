@@ -140,7 +140,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @return string HTML for the plugin, might be empty
 	 */
 	public function main($unused, array $configuration) {
-		try{
+		try {
 			$this->init($configuration);
 
 			switch ($this->piVars['table']) {

@@ -50,8 +50,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->pid = $this->testingFramework->createSystemFolder();
 		$this->eventUid = $this->testingFramework->createRecord(
