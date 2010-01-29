@@ -46,11 +46,6 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 */
 	private $testingFramework;
 
-	/**
-	 * @var tx_seminars_configgetter
-	 */
-	private $configGetter;
-
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
@@ -73,11 +68,10 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		tx_oelib_ConfigurationRegistry::getInstance()
 			->set('plugin.tx_seminars', $configuration);
 
-		$this->configGetter = new tx_seminars_configgetter();
-		$this->configGetter->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'fieldsFromAttendanceForEmailCsv', 'title'
 		);
-		$this->configGetter->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'showAttendancesOnRegistrationQueueInEmailCsv', 1
 		);
 
@@ -85,10 +79,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->configGetter->__destruct();
 		$this->testingFramework->cleanUp();
 
-		unset($this->fixture, $this->testingFramework, $this->configGetter);
+		unset($this->fixture, $this->testingFramework);
 	}
 
 
@@ -884,7 +877,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			->get('plugin.tx_seminars')->set(
 				'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
-		$this->configGetter->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'fieldsFromFeUserForEmailCsv', 'email'
 		);
 
@@ -970,7 +963,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			->get('plugin.tx_seminars')->set(
 				'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
-		$this->configGetter->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'showAttendancesOnRegistrationQueueInEmailCsv', 0
 		);
 

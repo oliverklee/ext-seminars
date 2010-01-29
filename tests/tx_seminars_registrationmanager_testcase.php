@@ -118,12 +118,13 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars_organizers_mm', $seminarUid, $organizerUid
 		);
 
-		$this->seminar = new tx_seminars_seminarchild($seminarUid);
-
-		$this->fixture = tx_seminars_registrationmanager::getInstance();
-		$this->fixture->setConfigurationValue(
-			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		tx_oelib_templateHelper::setCachedConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
+
+		$this->seminar = new tx_seminars_seminarchild($seminarUid);
+		$this->fixture = tx_seminars_registrationmanager::getInstance();
 	}
 
 	protected function tearDown() {
@@ -2964,14 +2965,15 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice() {
+		tx_oelib_templatehelper::setCachedConfigurationValue(
+			'allowUnregistrationWithEmptyWaitingList', FALSE
+		);
+
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
 		);
 		$fixture->expects($this->never())->method('getUnregistrationNotice');
 		$fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$fixture->setConfigurationValue(
-			'allowUnregistrationWithEmptyWaitingList', FALSE
-		);
 
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -2993,14 +2995,15 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice() {
+		tx_oelib_templatehelper::setCachedConfigurationValue(
+			'allowUnregistrationWithEmptyWaitingList', TRUE
+		);
+
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
 		);
 		$fixture->expects($this->once())->method('getUnregistrationNotice');
 		$fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$fixture->setConfigurationValue(
-			'allowUnregistrationWithEmptyWaitingList', TRUE
-		);
 
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(

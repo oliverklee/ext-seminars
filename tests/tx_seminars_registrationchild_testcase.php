@@ -107,9 +107,6 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
-		$this->fixture->setConfigurationValue('decimalDigits', 2);
-		$this->fixture->setConfigurationValue('decimalSplitChar', '.');
-		$this->fixture->setConfigurationValue('thousandsSplitChar', '');
 	}
 
 	public function tearDown() {

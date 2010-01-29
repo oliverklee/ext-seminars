@@ -96,10 +96,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->getTemplateCode();
 		$this->fixture->setLabels();
 		$this->fixture->createHelperObjects();
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'dateFormatYMD', '%d.%m.%Y'
 		);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'timeFormat', '%H:%M'
 		);
 	}

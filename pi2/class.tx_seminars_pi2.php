@@ -179,10 +179,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
 
-		$this->configGetter = tx_oelib_ObjectFactory::make(
-			'tx_seminars_configgetter'
-		);
-		$this->configGetter->init();
+		if ($this->configGetter === null) {
+			$this->configGetter = tx_oelib_ObjectFactory::make(
+				'tx_seminars_configgetter'
+			);
+			$this->configGetter->init();
+		}
 	}
 
 	/**

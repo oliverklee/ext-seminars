@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3650] Fix: Objects overwrite/delete each other's configuration arrays
 - [#3680] Fix: Don't send the e-mails to the attendees if the FE user's e-mail address is empty
 - [#981] Change: Remove the "has paid" attribute in attendance records
 - [#3481] Fix: ext_icon.gif is not a GIF file but a PNG file

@@ -100,10 +100,8 @@ class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testRenderWithUidOfExistingEventReturnsDateOfSelectedEvent() {
-		$configGetter = new tx_seminars_configgetter();
-
 		$dateFormat = '%d.%m.%Y';
-		$configGetter->setConfigurationValue(
+		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'dateFormatYMD',
 			$dateFormat
 		);
@@ -113,9 +111,6 @@ class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
 			strftime($dateFormat, $this->eventDate),
 			$this->fixture->render()
 		);
-
-		$configGetter->__destruct();
-		unset($configGetter);
 	}
 
 	public function testRenderReturnsEmptyStringIfNoUidIsSetInPiVar() {
