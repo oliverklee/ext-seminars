@@ -1,6 +1,6 @@
 0.9.0 (currently working on)
 - [#3675] Fix: Crash in the FE seminar list view if no BE user is logged in
-- [#3669] Change: UTF-8 em dash used in ISO8859-1 CSV export
+- [#3669] Fix: UTF-8 em dash used in ISO8859-1 CSV export
 - [#3560] Fix: Multiple tests of the eventEditor testcase fail
 - [#3668] Fix: CSV export for registrations for one event does not work
 - [#3564] Feature: For the CSV export of registrations and events, use localized column headings
