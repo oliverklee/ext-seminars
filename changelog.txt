@@ -1,5 +1,5 @@
 0.8.4 (currently working on)
-- [#3669] Change: UTF-8 em dash used in ISO8859-1 CSV export
+- [#3669] Fix: UTF-8 em dash used in ISO8859-1 CSV export
 - [#3556] Fix: Use PATH_tslib in require once for tslib_content
 - [#3585] Fix: Removed the unused variable addRegistrationCsvToOrganizerMail
 - [#3641] Change: Update all copyrights to 2010
