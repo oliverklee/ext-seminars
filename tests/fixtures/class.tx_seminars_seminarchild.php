@@ -545,5 +545,42 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 			'begin_date_registration', $registrationBeginDate
 		);
 	}
+
+	/**
+	 * Checks a integer element of the record data array for existence and
+	 * non-emptiness. If we are a date record, it'll be retrieved from the
+	 * corresponding topic record.
+	 *
+	 * @param string key of the element to check
+	 *
+	 * @return boolean true if the corresponding integer exists and is non-empty
+	 */
+	public function hasTopicInteger($key) {
+		return parent::hasTopicInteger($key);
+	}
+
+	/**
+	 * Gets an (intval'ed) integer element of the record data array.
+	 * If the array has not been initialized properly, 0 is returned instead.
+	 * If we are a date record, it'll be retrieved from the corresponding
+	 * topic record.
+	 *
+	 * @param string the name of the field to retrieve
+	 *
+	 * @return integer the corresponding element from the record data array
+	 */
+	public function getTopicInteger($key) {
+		return parent::getTopicInteger($key);
+	}
+
+	/**
+	 * Sets an integer element of the record data array (and intvals it).
+	 *
+	 * @param string key of the element to set (must be non-empty)
+	 * @param integer the value that will be written into the element
+	 */
+	public function setRecordPropertyInteger($key, $value) {
+		parent::setRecordPropertyInteger($key, $value);
+	}
 }
 ?>
