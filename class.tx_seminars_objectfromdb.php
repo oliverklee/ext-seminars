@@ -254,8 +254,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Sets a string element of the record data array (and trims it).
 	 *
-	 * @param string key of the element to set (must be non-empty)
-	 * @param string the value that will be written into the element
+	 * @param string $key key of the element to set (must be non-empty)
+	 * @param string $value the value that will be written into the element
 	 */
 	protected function setRecordPropertyString($key, $value) {
 		if (!empty($key)) {

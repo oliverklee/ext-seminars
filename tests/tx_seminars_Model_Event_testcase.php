@@ -1238,6 +1238,32 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function setPublicationHashSetsPublicationHash() {
+		$this->fixture->setPublicationHash('5318761asdf35as5sad35asd35asd');
+
+		$this->assertEquals(
+			'5318761asdf35as5sad35asd35asd',
+			$this->fixture->getPublicationHash()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setPublicationHashWithEmptyStringOverridesNonEmptyData() {
+		$this->fixture->setData(array('publication_hash' => 'fooo'));
+
+		$this->fixture->setPublicationHash('');
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getPublicationHash()
+		);
+	}
+
 	public function test_purgePublicationHashForPublicationHashSetInModel_PurgesPublicationHash() {
 		$this->fixture->setData(array('publication_hash' => 'fooo'));
 
@@ -1255,6 +1281,28 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->hasPublicationHash()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isPublishedForEventWithoutPublicationHashIsTrue() {
+		$this->fixture->setPublicationHash('');
+
+		$this->assertTrue(
+			$this->fixture->isPublished()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isPublishedForEventWithPublicationHashIsFalse() {
+		$this->fixture->setPublicationHash('5318761asdf35as5sad35asd35asd');
+
+		$this->assertFalse(
+			$this->fixture->isPublished()
 		);
 	}
 

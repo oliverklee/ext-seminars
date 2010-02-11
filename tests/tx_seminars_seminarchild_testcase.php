@@ -7017,5 +7017,59 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$date->__destruct();
 	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning the publication state
+	///////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getPublicationHashReturnsPublicationHash() {
+		$this->fixture->setRecordPropertyString(
+			'publication_hash',
+			'5318761asdf35as5sad35asd35asd'
+		);
+
+		$this->assertEquals(
+			'5318761asdf35as5sad35asd35asd',
+			$this->fixture->getPublicationHash()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setPublicationHashSetsPublicationHash() {
+		$this->fixture->setPublicationHash('5318761asdf35as5sad35asd35asd');
+
+		$this->assertEquals(
+			'5318761asdf35as5sad35asd35asd',
+			$this->fixture->getPublicationHash()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isPublishedForEventWithoutPublicationHashIsTrue() {
+		$this->fixture->setPublicationHash('');
+
+		$this->assertTrue(
+			$this->fixture->isPublished()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isPublishedForEventWithPublicationHashIsFalse() {
+		$this->fixture->setPublicationHash('5318761asdf35as5sad35asd35asd');
+
+		$this->assertFalse(
+			$this->fixture->isPublished()
+		);
+	}
 }
 ?>

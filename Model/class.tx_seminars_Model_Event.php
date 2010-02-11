@@ -1251,16 +1251,6 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
-	 * Checks whether this event has a publication hash.
-	 *
-	 * @return boolean true if this event has a publication hash, false
-	 *                 otherwise
-	 */
-	public function hasPublicationHash() {
-		return $this->hasString('publication_hash');
-	}
-
-	/**
 	 * Returns the publication hash of this event.
 	 *
 	 * @return string the publication hash of this event, will be empty if this
@@ -1271,10 +1261,44 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether this event has a publication hash.
+	 *
+	 * @return boolean TRUE if this event has a publication hash, FALSE
+	 *                 otherwise
+	 */
+	public function hasPublicationHash() {
+		return $this->hasString('publication_hash');
+	}
+
+	/**
+	 * Sets this event's publication hash.
+	 *
+	 * @param string $hash
+	 *        the publication hash, use a non-empty string to mark an event as
+	 *        "not published yet" and an empty string to mark an event as
+	 *        published
+	 */
+	public function setPublicationHash($hash) {
+		$this->setAsString('publication_hash', $hash);
+	}
+
+	/**
 	 * Purges the publication hash of this event.
 	 */
 	public function purgePublicationHash() {
-		$this->setAsString('publication_hash', '');
+		$this->setPublicationHash('');
+	}
+
+	/**
+	 * Checks whether this event has been published.
+	 *
+	 * Note: The publication state of an event is not related to whether it is
+	 * hidden or not.
+	 *
+	 * @return boolean TRUE if this event has been published, FALSE otherwise
+	 */
+	public function isPublished() {
+		return !$this->hasPublicationHash();
 	}
 
 	/**

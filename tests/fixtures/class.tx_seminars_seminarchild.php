@@ -595,5 +595,15 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setRecordPropertyInteger($key, $value) {
 		parent::setRecordPropertyInteger($key, $value);
 	}
+
+	/**
+	 * Sets a string element of the record data array (and trims it).
+	 *
+	 * @param string $key key of the element to set (must be non-empty)
+	 * @param string $value the value that will be written into the element
+	 */
+	public function setRecordPropertyString($key, $value) {
+		parent::setRecordPropertyString($key, $value);
+	}
 }
 ?>
