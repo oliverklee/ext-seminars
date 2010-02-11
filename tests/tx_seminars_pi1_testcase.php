@@ -37,21 +37,33 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_semina
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
-	/** @var tx_seminars_pi1 */
+	/**
+	 * @var tx_seminars_pi1
+	 */
 	private $fixture;
-	/** @var tx_oelib_testingFramework */
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
-	/** the UID of a seminar to which the fixture relates */
+	/**
+	 * @var integer the UID of a seminar to which the fixture relates
+	 */
 	private $seminarUid;
 
-	/** PID of a dummy system folder */
+	/**
+	 * @var integer PID of a dummy system folder
+	 */
 	private $systemFolderPid = 0;
 
-	/** the number of target groups for the current event record */
+	/**
+	 * @var integer the number of target groups for the current event record
+	 */
 	private $numberOfTargetGroups = 0;
 
-	/** @var integer the number of categories for the current event record */
+	/**
+	 * @var integer the number of categories for the current event record
+	 */
 	private $numberOfCategories = 0;
 
 	/**
