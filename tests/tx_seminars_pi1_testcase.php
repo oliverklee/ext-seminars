@@ -3115,7 +3115,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////////////////////////
 
 	public function test_ListViewForGivenPriceFrom_ShowsEventWithRegularPriceHigherThanPriceFrom() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => $this->systemFolderPid,
@@ -3133,7 +3133,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListViewForGivenPriceTo_ShowsEventWithRegularPriceLowerThanPriceTo() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => $this->systemFolderPid,
@@ -3151,7 +3151,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListViewForGivenPriceRange_ShowsEventWithRegularPriceWithinRange() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => $this->systemFolderPid,
@@ -3170,7 +3170,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListViewForGivenPriceRange_HidesEventWithRegularPriceOutsideRange() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => $this->systemFolderPid,
@@ -6211,9 +6211,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'eventEditorFeGroupID', $editorGroupUid
 		);
 
-		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
-			$editorGroupUid
-		);
+		$this->testingFramework->createAndLoginFrontEndUser($editorGroupUid);
 
 		$this->fixture->main('', array());
 
