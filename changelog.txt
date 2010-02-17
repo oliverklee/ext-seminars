@@ -10,7 +10,7 @@
 - [#3641] Change: Update all copyrights to 2010
 - [#3541] Fix: Failure in test case testSendRemindersToOrganizersForCliBackendUserWithLanguageGermanSendsReminderInGerman
 - [#3508] Cleanup: Replace space + tab with tab
-- [#3484] Fix: In some BE modules the bags are destructed to early or not at all
+- [#3484] Fix: In some BE modules the bags are destructed too early or not at all
 - [#3306] Fix: Hide the CSV export, cancel and confirm button for hidden events in the BE module
 - [#2733] Fix: allowCsvExportOfRegistrationsInMyVipEventsView configured via FlexForm has no effect
 - [#2046] Fix: The number of steps and pages must be checked in relation to each other
