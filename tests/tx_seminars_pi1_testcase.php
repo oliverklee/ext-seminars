@@ -239,6 +239,75 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * Creates a subclass of the fixture class that makes protected methods
+	 * public where necessary.
+	 *
+	 * @return string the class name of the subclass, will not be empty
+	 */
+	private function createAccessibleProxyClass() {
+		$testingClassName = 'tx_seminars_pi1_Testing';
+
+		if (!class_exists($testingClassName)) {
+			eval(
+				'class ' . $testingClassName . ' extends tx_seminars_pi1 {' .
+				'public function setSeminar(tx_seminars_seminar $seminar = null) {' .
+				'  parent::setSeminar($seminar);' .
+				'}' .
+				'public function createEditLink() {' .
+				'  return parent::createEditLink();' .
+				'}' .
+				'public function mayCurrentUserEditCurrentEvent() {' .
+				'  return parent::mayCurrentUserEditCurrentEvent();' .
+				'}' .
+				'}'
+			);
+		}
+
+		return $testingClassName;
+	}
+
+	/**
+	 * Creates a mock ccontent object that can create links in the following
+	 * form:
+	 *
+	 * <a href="index.php?id=42&amp;...parameters">link title</a>
+	 *
+	 * The page ID isn't checked for existence. So any page ID can be used.
+	 *
+	 * @return tslib_cObj a mock content object
+	 */
+	private function createContentMock() {
+		$mock = $this->getMock('tslib_cObj', array('getTypoLink'));
+		$mock->expects($this->any())->method('getTypoLink')
+			->will($this->returnCallback(array($this, 'getTypoLink')));
+
+		return $mock;
+	}
+
+	/**
+	 * Callback function for creating mock typolinks.
+	 *
+	 * @param string $label the link text
+	 * @param integer $pageId the page ID to link to, must be >= 0
+	 * @param array $urlParameters
+	 *        URL parameters to set as key/value pairs, not URL-encoded yet
+	 * @param unknown_type $target link target (not used yet)
+	 *
+	 * @return string faked link tag, will not be empty
+	 */
+	public function getTypoLink(
+		$label, $pageId, array $urlParameters = array(), $target = ''
+	) {
+		$encodedParameters = '';
+		foreach ($urlParameters as $key => $value) {
+			$encodedParameters .= '&amp;' . $key . '=' .$value;
+		}
+
+		return '<a href="index.php?id=' . $pageId . $encodedParameters . '">' .
+			htmlspecialchars($label) . '</a>';
+	}
+
 
 	/////////////////////////////////////
 	// Tests for the utility functions.
@@ -391,6 +460,98 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->countRecords(
 				SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
 				'uid_local='.$this->seminarUid
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAccessibleProxyClassCreatesFixtureSubclass() {
+		$className = $this->createAccessibleProxyClass();
+		$instance = new $className();
+
+		$this->assertTrue(
+			$instance instanceof tx_seminars_pi1
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createContentMockCreatesContentInstance() {
+		$this->assertTrue(
+			$this->createContentMock() instanceof tslib_cObj
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createTypoLinkInContentMockCreatesLinkToPageId() {
+		$contentMock = $this->createContentMock();
+
+		$this->assertContains(
+			'<a href="index.php?id=42',
+			$contentMock->getTypoLink('link label', 42)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createTypoLinkInContentMockUsesLinkTitle() {
+		$contentMock = $this->createContentMock();
+
+		$this->assertContains(
+			'>link label</a>',
+			$contentMock->getTypoLink('link label', 42)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createTypoLinkInContentMockHtmlspecialcharsLinkTitle() {
+		$contentMock = $this->createContentMock();
+
+		$this->assertContains(
+			'>foo &amp; bar</a>',
+			$contentMock->getTypoLink('foo & bar'), 42
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createTypoLinkInContentMockAddsParameters() {
+		$contentMock = $this->createContentMock();
+
+		$this->assertContains(
+			'tx_seminars_pi1[seminar]=42',
+			$contentMock->getTypoLink(
+				'link label',
+				1,
+				array('tx_seminars_pi1[seminar]' => 42)
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createTypoLinkInContentMockCanAddTwoParameters() {
+		$contentMock = $this->createContentMock();
+
+		$this->assertContains(
+			'tx_seminars_pi1[seminar]=42&amp;foo=bar',
+			$contentMock->getTypoLink(
+				'link label',
+				1,
+				array(
+					'tx_seminars_pi1[seminar]' => 42,
+					'foo' => 'bar'
+				)
 			)
 		);
 	}
@@ -6218,6 +6379,180 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_REGISTRATION')
 		);
+	}
+
+
+	////////////////////////////////////////////////////
+	// Tests concerning mayCurrentUserEditCurrentEvent
+	////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function mayCurrentUserEditCurrentEventForLoggedInUserAsOwnerIsTrue() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array();
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+		);
+		$event->expects($this->any())->method('isUserVip')
+			->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isOwnerFeUser')
+			->will($this->returnValue(TRUE));
+		$fixture->setSeminar($event);
+
+		$this->assertTrue(
+			$fixture->mayCurrentUserEditCurrentEvent()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndVipEditorAccessIsTrue() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array('mayManagersEditTheirEvents' => TRUE);
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+		);
+		$event->expects($this->any())->method('isUserVip')
+			->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isOwnerFeUser')
+			->will($this->returnValue(FALSE));
+		$fixture->setSeminar($event);
+
+		$this->assertTrue(
+			$fixture->mayCurrentUserEditCurrentEvent()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndNoVipEditorAccessIsFalse() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array('mayManagersEditTheirEvents' => FALSE);
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+		);
+		$event->expects($this->any())->method('isUserVip')
+			->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isOwnerFeUser')
+			->will($this->returnValue(FALSE));
+		$fixture->setSeminar($event);
+
+		$this->assertFalse(
+			$fixture->mayCurrentUserEditCurrentEvent()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function mayCurrentUserEditCurrentEventForLoggedInUserNeitherVipNorOwnerIsFalse() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array(
+			'eventEditorPID' => 42,
+			'mayManagersEditTheirEvents' => TRUE,
+		);
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+		);
+		$event->expects($this->any())->method('getUid')
+			->will($this->returnValue(91));
+		$event->expects($this->any())->method('isUserVip')
+			->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isOwnerFeUser')
+			->will($this->returnValue(FALSE));
+		$fixture->setSeminar($event);
+
+		$this->assertFalse(
+			$fixture->mayCurrentUserEditCurrentEvent()
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	/////////////////////////////////////
+	// Tests concerning the "edit" link
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function createEditLinkForEditAccessGrantedCreatesLinkToEditPageWithEventUid() {
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array(
+			'eventEditorPID' => 42,
+		);
+		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
+			->will($this->returnValue(TRUE));
+
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+		);
+		$event->expects($this->any())->method('getUid')
+			->will($this->returnValue(91));
+		$fixture->setSeminar($event);
+
+		$this->assertContains(
+			'<a href="index.php?id=42&amp;tx_seminars_pi1[seminar]=91">' .
+				$fixture->translate('label_edit') . '</a>',
+			$fixture->createEditLink()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createEditLinkForEditAccessDeniedReturnsEmptyString() {
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array('eventEditorPID' => 42);
+		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
+			->will($this->returnValue(FALSE));
+
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+		);
+		$event->expects($this->any())->method('getUid')
+			->will($this->returnValue(91));
+		$fixture->setSeminar($event);
+
+		$this->assertEquals(
+			'',
+			$fixture->createEditLink()
+		);
+
+		$fixture->__destruct();
 	}
 }
 ?>

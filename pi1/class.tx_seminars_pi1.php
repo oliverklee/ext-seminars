@@ -404,18 +404,27 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$seminarUid, SEMINARS_TABLE_SEMINARS, $showHiddenRecords
 			)
 		) {
-			$this->seminar = tx_oelib_ObjectFactory::make(
+			$this->setSeminar(tx_oelib_ObjectFactory::make(
 				'tx_seminars_seminar', $seminarUid, false, $showHiddenRecords
-			);
+			));
 
 			$result = ($showHiddenRecords)
 				? $this->canShowCurrentEvent()
 				: true;
 		} else {
-			$this->seminar = null;
+			$this->setSeminar(null);
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Sets the current seminar for the list view.
+	 *
+	 * @param tx_seminars_seminar $seminar the current seminar
+	 */
+	protected function setSeminar(tx_seminars_seminar $seminar = null) {
+		$this->seminar = $seminar;
 	}
 
 	/**
@@ -727,9 +736,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$result .= $this->createEventsOnNextDayList();
 			}
 			$this->seminar->__destruct();
-			unset($this->seminar);
-			$this->seminar = $seminar;
-			unset($seminar);
+			$this->setSeminar($seminar);
 			if ($this->seminar->isEventTopic() || $this->seminar->isEventDate()) {
 				$result .= $this->createOtherDatesList();
 			}
@@ -1751,9 +1758,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		foreach ($seminarOrRegistrationBag as $currentItem) {
 			if ($whatToDisplay == 'my_events') {
 				$this->registration = $currentItem;
-				$this->seminar = $this->registration->getSeminarObject();
+				$this->setSeminar($this->registration->getSeminarObject());
 			} else {
-				$this->seminar = $currentItem;
+				$this->setSeminar($currentItem);
 			}
 
 			$result .= $this->createListRow($rowCounter, $whatToDisplay);
@@ -2005,7 +2012,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$this->setVisibilityStatusMarker();
 
-			$this->setMarker('edit', $this->getEditLink());
+			$this->setMarker('edit', $this->createEditLink());
 
 			$this->setMarker('registrations', $this->getCsvExportLink());
 
@@ -2358,15 +2365,35 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Creates the link to the event editor for the current event.
-	 * Returns an empty string if editing this event is not allowed.
+	 * Creates the "edit" link for the current event in the list view, depending
+	 * on the logged-in FE user's permissions.
 	 *
-	 * A link is created if the logged-in FE user is the owner of the event.
-	 *
-	 * @return string HTML for the link (may be an empty string)
+	 * @return string HTML with the link, will be empty if the FE user can not
+	 *                edit the current event
 	 */
-	protected function getEditLink() {
-		$result = '';
+	protected function createEditLink() {
+		if (!$this->mayCurrentUserEditCurrentEvent()) {
+			return '';
+		}
+
+		return $this->cObj->getTypoLink(
+			$this->translate('label_edit'),
+			$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
+			array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
+		);
+	}
+
+	/**
+	 * Checks whether the currently logged-in FE user is allowed to edit the
+	 * current event in the list view.
+	 *
+	 * @return boolean TRUE if the current user is allowed to edit the current
+	 *                 event, FALSE otherwise
+	 */
+	protected function mayCurrentUserEditCurrentEvent() {
+		if ($this->seminar->isOwnerFeUser()) {
+			return TRUE;
+		}
 
 		$mayManagersEditTheirEvents = $this->getConfValueBoolean(
 			'mayManagersEditTheirEvents', 's_listView'
@@ -2377,17 +2404,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->getConfValueInteger('defaultEventVipsFeGroupID')
 		);
 
-		if ($this->seminar->isOwnerFeUser()
-			|| ($mayManagersEditTheirEvents && $isUserManager)
-		) {
-			$result = $this->cObj->getTypoLink(
-				$this->translate('label_edit'),
-				$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
-				array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
-			);
-		}
-
-		return $result;
+		return $mayManagersEditTheirEvents && $isUserManager;
 	}
 
 	/**
