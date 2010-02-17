@@ -268,7 +268,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * Creates a mock ccontent object that can create links in the following
+	 * Creates a mock content object that can create links in the following
 	 * form:
 	 *
 	 * <a href="index.php?id=42&amp;...parameters">link title</a>
