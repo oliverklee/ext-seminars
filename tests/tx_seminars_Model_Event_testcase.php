@@ -1349,20 +1349,5 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 			$this->fixture->getOfflineRegistrations()
 		);
 	}
-
-
-	///////////////////////////////////
-	// Tests concerning markAsVisible
-	///////////////////////////////////
-
-	public function test_markAsVisibleForHiddenEvent_marksItAsVisible() {
-		$this->fixture->setData(array('hidden' => 1));
-
-		$this->fixture->markAsVisible();
-
-		$this->assertFalse(
-			$this->fixture->isHidden()
-		);
-	}
 }
 ?>
