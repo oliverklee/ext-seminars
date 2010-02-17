@@ -7226,7 +7226,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_limitToEventsWithVacanciesForEventWithVacanciesAndNoAttendees_FindsThisEvent() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('needs_registration' => 1, 'attendees_max' => 10)
 		);
@@ -7243,7 +7243,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendees_FindsThisEvent() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'needs_registration' => 1,
