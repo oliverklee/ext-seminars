@@ -832,19 +832,19 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
+		if (!$registration->hasExistingFrontEndUser()) {
+			return;
+		}
 		$event = $registration->getSeminarObject();
 		if (!$event->hasOrganizers()) {
 			return;
 		}
 
-		if (!$registration->hasExistingFrontEndUser()) {
-			return;
-		}
-
+		$organizers = $event->getOrganizerBag();
 		$eMailNotification = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
-		$eMailNotification->setSender($registration->getFrontEndUser());
+		$eMailNotification->setSender($organizers->current());
 
-		foreach ($event->getOrganizerBag() as $organizer) {
+		foreach ($organizers as $organizer) {
 			$eMailNotification->addRecipient($organizer);
 		}
 
