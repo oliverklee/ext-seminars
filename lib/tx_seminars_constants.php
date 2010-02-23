@@ -37,9 +37,6 @@ define('SEMINARS_TABLE_TARGET_GROUPS', 'tx_seminars_target_groups');
 define('SEMINARS_TABLE_CATEGORIES', 'tx_seminars_categories');
 define('SEMINARS_TABLE_SKILLS', 'tx_seminars_skills');
 define('SEMINARS_TABLE_TEST', 'tx_seminars_test');
-define('SEMINARS_TABLE_PARTNER_MAIN', 'tx_partner_main');
-define('SEMINARS_TABLE_PARTNER_CONTACT_INFO', 'tx_partner_contact_info');
-define('SEMINARS_TABLE_PRICES', 'tx_seminars_prices');
 
 define('SEMINARS_TABLE_SEMINARS_MANAGERS_MM', 'tx_seminars_seminars_feusers_mm');
 define('SEMINARS_TABLE_SEMINARS_SPEAKERS_MM', 'tx_seminars_seminars_speakers_mm');
@@ -66,15 +63,6 @@ define('SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM', 'tx_seminars_seminars_payme
 define('SEMINARS_RECORD_TYPE_COMPLETE', 0);
 define('SEMINARS_RECORD_TYPE_TOPIC', 1);
 define('SEMINARS_RECORD_TYPE_DATE', 2);
-
-define('SEMINARS_PARTNER_MAIN_TYPE_PERSON', 0);
-define('SEMINARS_PARTNER_MAIN_TYPE_ORGANIZATION', 1);
-
-define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_PHONE', 0);
-define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_MOBILE', 1);
-define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_FAX', 2);
-define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_EMAIL', 3);
-define('SEMINARS_PARTNER_CONTACT_INFORMATION_TYPE_URL', 4);
 
 define('SEMINARS_PRICE_CURRENCY_LEFT', 0);
 define('SEMINARS_PRICE_CURRENCY_RIGHT', 1);

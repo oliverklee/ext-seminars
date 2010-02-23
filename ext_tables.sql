@@ -1,22 +1,4 @@
 #
-# Table structure for table 'tx_partner_main'
-#
-CREATE TABLE tx_partner_main (
-	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-
-	KEY dummy (is_dummy_record)
-);
-
-
-#
-# Table structure for table 'tx_partner_contact_info'
-#
-CREATE TABLE tx_partner_contact_info (
-	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL
-);
-
-
-#
 # Table structure for table 'fe_groups'
 #
 CREATE TABLE fe_groups (
@@ -273,7 +255,6 @@ CREATE TABLE tx_seminars_seminars (
 	price_special decimal(7,3) DEFAULT '0.000' NOT NULL,
 	price_special_early decimal(7,3) DEFAULT '0.000' NOT NULL,
 	price_special_board decimal(7,3) DEFAULT '0.000' NOT NULL,
-	prices int(11) unsigned DEFAULT '0' NOT NULL,
 	additional_information text,
 	payment_methods int(11) unsigned DEFAULT '0' NOT NULL,
 	organizers int(11) unsigned DEFAULT '0' NOT NULL,
@@ -772,34 +753,6 @@ CREATE TABLE tx_seminars_skills (
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY dummy (is_dummy_record)
-);
-
-
-#
-# Table structure for table 'tx_seminars_prices'
-#
-CREATE TABLE tx_seminars_prices (
-	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-	pid int(11) unsigned DEFAULT '0' NOT NULL,
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	starttime int(11) unsigned DEFAULT '0' NOT NULL,
-	endtime int(11) unsigned DEFAULT '0' NOT NULL,
-	fe_group int(11) DEFAULT '0' NOT NULL,
-	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	seminar int(11) unsigned DEFAULT '0' NOT NULL,
-	title tinytext,
-	value decimal(7,3) DEFAULT '0.000' NOT NULL,
-	currency int(11) unsigned DEFAULT '0' NOT NULL,
-	tax int(11) unsigned DEFAULT '0' NOT NULL,
-	including_tax tinyint(1) unsigned DEFAULT '0' NOT NULL,
-
-	PRIMARY KEY (uid),
-	KEY parent (pid),
-	KEY dummy (is_dummy_record),
-	KEY seminar (seminar)
 );
 
 
