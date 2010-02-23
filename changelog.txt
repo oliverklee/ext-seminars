@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3695] Feature: Add functions for hiding and unhiding events
 - [#3681] Change: In the notification e-mails to the organizers, use the organizer as sender
 - [#3697] Feature: Add a timespan "today"
 - [#3700] Fix: In pi1::hideRegisterColumnIfNecessary, $whatToDisplay is undeclared
