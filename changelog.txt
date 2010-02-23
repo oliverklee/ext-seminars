@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3700] Fix: In pi1::hideRegisterColumnIfNecessary, $whatToDisplay is undeclared
 - [#3703] Cleanup: Refactor and unit-test pi1::getEditLink
 - [#3694] Feature: Add a function to check whether an event is published
 - [#872] Cleanup: Drop all references to the the seminars baseURL configuration

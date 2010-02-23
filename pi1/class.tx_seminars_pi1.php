@@ -1623,7 +1623,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$this->hideColumnsForAllViewsFromTypoScriptSetup();
-		$this->hideRegisterColumnIfNecessary();
+		$this->hideRegisterColumnIfNecessary($whatToDisplay);
 		$this->hideColumnsForAllViewsExceptMyEvents($whatToDisplay);
 		$this->hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay);
 		$this->hideListRegistrationsColumnIfNecessary($whatToDisplay);
@@ -2489,8 +2489,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 	/**
 	 * Hides the registration column if online registration is disabled.
+	 *
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string
+	 *        (for the default list view), the value from "what_to_display" or
+	 *        "other_dates"
 	 */
-	private function hideRegisterColumnIfNecessary() {
+	private function hideRegisterColumnIfNecessary($whatToDisplay) {
 		if (!$this->getConfValueBoolean('enableRegistration')
 			|| ($whatToDisplay == 'my_vip_events')
 			|| ($whatToDisplay == 'my_entered_events')

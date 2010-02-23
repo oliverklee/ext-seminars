@@ -92,6 +92,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
+				'enableRegistration' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'what_to_display' => 'seminar_list',
 				'pidList' => $this->systemFolderPid,
