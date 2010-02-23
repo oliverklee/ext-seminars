@@ -3264,7 +3264,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		// hasAccessMessage returns an empty string only if an event record with
-		// the UID set in the piVars "seminar" exists and the currently
+		// the UID set in the piVar "seminar" exists and the currently
 		// logged-in FE user is allowed to edit it.
 		if ($this->createEventEditorInstance()->hasAccessMessage() !== '') {
 			return;
