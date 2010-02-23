@@ -49,7 +49,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	private static $validTimeFrames = array(
 		'past', 'pastAndCurrent', 'current', 'currentAndUpcoming', 'upcoming',
-		'upcomingWithBeginDate', 'deadlineNotOver', 'all',
+		'upcomingWithBeginDate', 'deadlineNotOver', 'all', 'today',
 	);
 
 	/**
@@ -281,6 +281,25 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 						.')'
 					.')';
 				break;
+			case 'today':
+				$day = date('j', $now);
+				$month = date('n', $now);
+				$year = date('Y', $now);
+
+				$todayBegin = mktime(0, 0, 0, $month, $day, $year);
+				$todayEnd = mktime(23, 59, 59, $month, $day, $year);
+
+				$where = '(' .
+					SEMINARS_TABLE_SEMINARS . '.begin_date BETWEEN ' .
+					$todayBegin . ' AND ' . $todayEnd .
+					') OR ( ' .
+					SEMINARS_TABLE_SEMINARS . '.end_date BETWEEN ' .
+					$todayBegin . ' AND ' . $todayEnd .
+					') OR ( '.
+					SEMINARS_TABLE_SEMINARS . '.begin_date < ' . $todayBegin .
+					' AND ' . SEMINARS_TABLE_SEMINARS . '.end_date > ' . $todayEnd .
+					')';
+					break;
 			case 'all':
 			default:
 				// To show all events, we don't need any additional parameters.
@@ -289,7 +308,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		if ($where != '') {
-			$this->whereClauseParts['timeFrame'] = '('.$where.')';
+			$this->whereClauseParts['timeFrame'] = '(' . $where . ')';
 		}
 	}
 

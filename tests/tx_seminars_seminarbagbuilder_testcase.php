@@ -1722,6 +1722,193 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	/////////////////////////////////////////////////////////////////
 	// Tests for limiting the bag to events in certain time-frames.
 	//
+	// * today
+	/////////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayFindsOpenEndedEventStartingToday() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
+				'end_date' => 0,
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayNotFindsOpenEndedEventStartingTomorrow() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => 0,
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayFindsEventStartingTodayEndingTomorrow() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayFindsEventStartingYesterdayEndingToday() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'],
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayFindsEventStartingYesterdayEndingTomorrow() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			1,
+			$bag->count()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayIgnoresEventStartingLastWeekEndingYesterday() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayIgnoresEventStartingTomorrowEndingNextWeek() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTimeFrameTodayIgnoresEventWithoutDate() {
+		$this->testingFramework->createRecord(
+			SEMINARS_TABLE_SEMINARS,
+			array(
+				'begin_date' => 0,
+				'end_date' => 0,
+			)
+		);
+
+		$this->fixture->setTimeFrame('today');
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests for limiting the bag to events in certain time-frames.
+	//
 	// * all events
 	/////////////////////////////////////////////////////////////////
 

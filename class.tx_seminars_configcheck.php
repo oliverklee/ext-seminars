@@ -663,7 +663,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'current',
 				'currentAndUpcoming',
 				'upcoming',
-				'deadlineNotOver'
+				'deadlineNotOver',
+				'today',
 			)
 		);
 	}
