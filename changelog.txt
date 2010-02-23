@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3697] Feature: Add a timespan "today"
 - [#3706] Change: Hide the partner integration and the new prices in the 0.9.x branch before the beta
 - [#3700] Fix: In pi1::hideRegisterColumnIfNecessary, $whatToDisplay is undeclared
 - [#3703] Cleanup: Refactor and unit-test pi1::getEditLink

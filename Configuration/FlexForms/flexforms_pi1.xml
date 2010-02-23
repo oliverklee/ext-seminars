@@ -548,6 +548,10 @@
 										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList7</numIndex>
 										<numIndex index="1">deadlineNotOver</numIndex>
 									</numIndex>
+									<numIndex index="8" type="array">
+										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList8</numIndex>
+										<numIndex index="1">today</numIndex>
+									</numIndex>
 								</items>
 								<size>1</size>
 								<maxitems>1</maxitems>
