@@ -1,4 +1,4 @@
-0.8.4 (currently working on)
+0.8.4 (released 2010-02-23)
 - [#3681] Change: In the notification e-mails to the organizers, use the organizer as sender
 - [#872] Cleanup: Drop all references to the the seminars baseURL configuration
 - [#3650] Fix: Objects overwrite/delete each other's configuration arrays
