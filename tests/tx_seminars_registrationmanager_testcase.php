@@ -3099,6 +3099,38 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	// Tests regarding the notification of organizers
 	///////////////////////////////////////////////////
 
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersUsesOrganizerAsFrom() {
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyOrganizers($registration);
+		$registration->__destruct();
+
+		$this->assertContains(
+			'From: "test organizer" <mail@example.com>',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersUsesOrganizerAsTo() {
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyOrganizers($registration);
+		$registration->__destruct();
+
+		$this->assertEquals(
+			'mail@example.com',
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastRecipient()
+		);
+	}
+
 	public function test_NotifyOrganizers_IncludesHelloIfNotHidden() {
 		$registration = $this->createRegistration();
 		$this->fixture->setConfigurationValue('sendNotification', true);
