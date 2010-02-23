@@ -304,16 +304,18 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					$eventHeadline->__destruct();
 					unset($eventHeadline);
 					break;
+				case 'my_vip_events':
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
+					// We still use the processHideUnhide call in the next case.
+				case 'my_entered_events':
+					$this->processHideUnhide();
+					// The fallthrough is intended
+					// because createListView() will differentiate later.
 				case 'topic_list':
 					// The fallthrough is intended
 					// because createListView() will differentiate later.
 				case 'my_events':
-					// The fallthrough is intended
-					// because createListView() will differentiate later.
-				case 'my_vip_events':
-					// The fallthrough is intended
-					// because createListView() will differentiate later.
-				case 'my_entered_events':
 					// The fallthrough is intended
 					// because createListView() will differentiate later.
 				case 'seminar_list':
@@ -2860,7 +2862,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *
 	 * @return tx_seminars_pi1_eventEditor the initialized event editor
 	 */
-	private function createEventEditorInstance() {
+	protected function createEventEditorInstance() {
 		$eventEditor = tx_oelib_ObjectFactory::make(
 			'tx_seminars_pi1_eventEditor', $this->conf, $this->cObj
 		);
@@ -3250,6 +3252,60 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			// Ignores the exception because the user will be warned of the
 			// problem by the configuration check.
 		}
+	}
+
+	/**
+	 * Processes hide/unhide events for the FE-editable events.
+	 */
+	protected function processHideUnhide() {
+		$this->ensureIntegerPiVars(array('seminar'));
+		if ($this->piVars['seminar'] <= 0) {
+			return;
+		}
+
+		// hasAccessMessage returns an empty string only if an event record with
+		// the UID set in the piVars "seminar" exists and the currently
+		// logged-in FE user is allowed to edit it.
+		if ($this->createEventEditorInstance()->hasAccessMessage() !== '') {
+			return;
+		}
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->find($this->piVars['seminar']);
+		if (!$event->isPublished()) {
+			return;
+		}
+
+		switch ($this->piVars['action']) {
+			case 'hide':
+				$this->hideEvent($event);
+				break;
+			case 'unhide':
+				$this->unhideEvent($event);
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Marks $event as hidden and saves it.
+	 *
+	 * @param tx_seminars_Model_Event $event the event to hide
+	 */
+	protected function hideEvent(tx_seminars_Model_Event $event) {
+		$event->markAsHidden();
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->save($event);
+	}
+
+	/**
+	 * Marks $event as visible and saves it.
+	 *
+	 * @param tx_seminars_Model_Event $event the event to unhide
+	 */
+	protected function unhideEvent(tx_seminars_Model_Event $event) {
+		$event->markAsVisible();
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->save($event);
 	}
 }
 
