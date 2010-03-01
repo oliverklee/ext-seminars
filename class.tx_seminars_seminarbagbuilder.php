@@ -63,7 +63,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	private static $searchFieldList = array(
 		'seminars' => array('accreditation_number'),
-		'seminars_topic' => array('title', 'subtitle', 'teaser', 'description'),
+		'seminars_topic' => array('title', 'subtitle', 'description'),
 		'speakers' => array('title', 'organization', 'description'),
 		'partners' => array('title', 'organization', 'description'),
 		'tutors' => array('title', 'organization', 'description'),

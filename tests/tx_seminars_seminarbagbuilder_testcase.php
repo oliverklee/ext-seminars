@@ -3778,37 +3778,6 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToFullTextSearchFindsEventWithSearchWordInTeaser() {
-		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('teaser' => 'foo bar event')
-		);
-		$this->fixture->limitToFullTextSearch('foo');
-		$bag = $this->fixture->build();
-
-		$this->assertEquals(
-			$eventUid,
-			$bag->current()->getUid()
-		);
-
-		$bag->__destruct();
-	}
-
-	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTeaser() {
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('teaser' => 'bar event')
-		);
-		$this->fixture->limitToFullTextSearch('foo');
-		$bag = $this->fixture->build();
-
-		$this->assertTrue(
-			$bag->isEmpty()
-		);
-
-		$bag->__destruct();
-	}
-
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInDescription() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4997,59 +4966,6 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'subtitle' => 'bar event',
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-			)
-		);
-		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array(
-				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
-			)
-		);
-		$this->fixture->limitToFullTextSearch('foo');
-		$this->fixture->limitToDateAndSingleRecords();
-		$bag = $this->fixture->build();
-
-		$this->assertTrue(
-			$bag->isEmpty()
-		);
-
-		$bag->__destruct();
-	}
-
-	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicTeaser() {
-		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array(
-				'teaser' => 'foo bar event',
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-			)
-		);
-		$dateUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array(
-				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
-			)
-		);
-		$this->fixture->limitToFullTextSearch('foo');
-		$this->fixture->limitToDateAndSingleRecords();
-		$bag = $this->fixture->build();
-
-		$this->assertEquals(
-			$dateUid,
-			$bag->current()->getUid()
-		);
-
-		$bag->__destruct();
-	}
-
-	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTeaser() {
-		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array(
-				'teaser' => 'bar event',
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
