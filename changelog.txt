@@ -1,4 +1,4 @@
-0.10.0 (currently working on)
+1.0.0 (currently working on)
 - [#3583] Change: Speed up our full-text search
 - [#3582] Change: Slim down our full-text search
 
