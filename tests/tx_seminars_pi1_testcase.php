@@ -255,8 +255,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'public function setSeminar(tx_seminars_seminar $seminar = null) {' .
 				'  parent::setSeminar($seminar);' .
 				'}' .
-				'public function createEditLink() {' .
-				'  return parent::createEditLink();' .
+				'public function createAllEditorLinks() {' .
+				'  return parent::createAllEditorLinks();' .
 				'}' .
 				'public function mayCurrentUserEditCurrentEvent() {' .
 				'  return parent::mayCurrentUserEditCurrentEvent();' .
@@ -6502,14 +6502,42 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////
-	// Tests concerning the "edit" link
-	/////////////////////////////////////
+	///////////////////////////////////////////////////////////
+	// Tests concerning the "edit", "hide" and "unhide" links
+	///////////////////////////////////////////////////////////
 
 	/**
 	 * @test
 	 */
-	public function createEditLinkForEditAccessGrantedCreatesLinkToEditPageWithEventUid() {
+	public function createAllEditorLinksForEditAccessDeniedReturnsEmptyString() {
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array('eventEditorPID' => 42);
+		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
+			->will($this->returnValue(FALSE));
+
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
+		);
+		$event->expects($this->any())->method('getUid')
+			->will($this->returnValue(91));
+		$fixture->setSeminar($event);
+
+		$this->assertEquals(
+			'',
+			$fixture->createAllEditorLinks()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid() {
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -6522,7 +6550,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			->will($this->returnValue(TRUE));
 
 		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
 		);
 		$event->expects($this->any())->method('getUid')
 			->will($this->returnValue(91));
@@ -6531,7 +6559,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			'<a href="index.php?id=42&amp;tx_seminars_pi1[seminar]=91">' .
 				$fixture->translate('label_edit') . '</a>',
-			$fixture->createEditLink()
+			$fixture->createAllEditorLinks()
 		);
 
 		$fixture->__destruct();
@@ -6540,26 +6568,136 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function createEditLinkForEditAccessDeniedReturnsEmptyString() {
+	public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid() {
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
 		);
 		$fixture->cObj = $this->createContentMock();
-		$fixture->conf = array('eventEditorPID' => 42);
+		$fixture->conf = array();
 		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
-			->will($this->returnValue(FALSE));
+			->will($this->returnValue(TRUE));
 
 		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
+			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
 		);
 		$event->expects($this->any())->method('getUid')
 			->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')
+			->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isHidden')
+			->will($this->returnValue(FALSE));
 		$fixture->setSeminar($event);
 
-		$this->assertEquals(
-			'',
-			$fixture->createEditLink()
+		$currentPageId = $GLOBALS['TSFE']->id;
+
+		$this->assertContains(
+			'<a href="index.php?id=' . $currentPageId .
+				'&amp;tx_seminars_pi1[action]=hide' .
+				'&amp;tx_seminars_pi1[seminar]=91">' .
+				$fixture->translate('label_hide') . '</a>',
+			$fixture->createAllEditorLinks()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid() {
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array();
+		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
+			->will($this->returnValue(TRUE));
+
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
+		);
+		$event->expects($this->any())->method('getUid')
+			->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')
+			->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isHidden')
+			->will($this->returnValue(TRUE));
+		$fixture->setSeminar($event);
+
+		$currentPageId = $GLOBALS['TSFE']->id;
+
+		$this->assertContains(
+			'<a href="index.php?id=' . $currentPageId .
+				'&amp;tx_seminars_pi1[action]=unhide' .
+				'&amp;tx_seminars_pi1[seminar]=91">' .
+				$fixture->translate('label_unhide') . '</a>',
+			$fixture->createAllEditorLinks()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesHideLink() {
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array();
+		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
+			->will($this->returnValue(TRUE));
+
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
+		);
+		$event->expects($this->any())->method('getUid')
+			->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')
+			->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isHidden')
+			->will($this->returnValue(FALSE));
+		$fixture->setSeminar($event);
+
+		$this->assertNotContains(
+			'tx_seminars_pi1[action]=hide',
+			$fixture->createAllEditorLinks()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesUnhideLink() {
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array();
+		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
+			->will($this->returnValue(TRUE));
+
+		$event = $this->getMock(
+			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
+		);
+		$event->expects($this->any())->method('getUid')
+			->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')
+			->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isHidden')
+			->will($this->returnValue(TRUE));
+		$fixture->setSeminar($event);
+
+		$this->assertNotContains(
+			'tx_seminars_pi1[action]=unhide',
+			$fixture->createAllEditorLinks()
 		);
 
 		$fixture->__destruct();

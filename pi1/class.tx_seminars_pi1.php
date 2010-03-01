@@ -2014,7 +2014,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			$this->setVisibilityStatusMarker();
 
-			$this->setMarker('edit', $this->createEditLink());
+			$this->setMarker('edit', $this->createAllEditorLinks());
 
 			$this->setMarker('registrations', $this->getCsvExportLink());
 
@@ -2367,21 +2367,77 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Creates the "edit" link for the current event in the list view, depending
-	 * on the logged-in FE user's permissions.
+	 * Creates the "edit", "hide" and "unhide" links for the current event in
+	 * the list view, depending on the logged-in FE user's permissions and the
+	 * event's state.
 	 *
-	 * @return string HTML with the link, will be empty if the FE user can not
+	 * @return string HTML with the links, will be empty if the FE user can not
 	 *                edit the current event
 	 */
-	protected function createEditLink() {
+	protected function createAllEditorLinks() {
 		if (!$this->mayCurrentUserEditCurrentEvent()) {
 			return '';
 		}
 
+		$result = $this->createEditLink();
+
+		if ($this->seminar->isPublished()) {
+			$result .= ' ';
+			$result .=  $this->seminar->isHidden()
+				? $this->createUnhideLink() : $this->createHideLink();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the link to the event editor for the current event.
+	 *
+	 * This function does not check the edit permissions for this event.
+	 *
+	 * @return string HTML for the link, will not be empty
+	 */
+	protected function createEditLink() {
 		return $this->cObj->getTypoLink(
 			$this->translate('label_edit'),
 			$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
 			array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
+		);
+	}
+
+	/**
+	 * Creates a "hide" link (to the current page) for the current event.
+	 *
+	 * This function does not check the edit permissions for this event.
+	 *
+	 * @return string HTML for the link, will not be empty
+	 */
+	protected function createHideLink() {
+		return $this->cObj->getTypoLink(
+			$this->translate('label_hide'),
+			$GLOBALS['TSFE']->id,
+			array(
+				'tx_seminars_pi1[action]' => 'hide',
+				'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
+			)
+		);
+	}
+
+	/**
+	 * Creates a "unhide" link (to the current page) for the current event.
+	 *
+	 * This function does not check the edit permissions for this event.
+	 *
+	 * @return string HTML for the link, will not be empty
+	 */
+	protected function createUnhideLink() {
+		return $this->cObj->getTypoLink(
+			$this->translate('label_unhide'),
+			$GLOBALS['TSFE']->id,
+			array(
+				'tx_seminars_pi1[action]' => 'unhide',
+				'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
+			)
 		);
 	}
 
