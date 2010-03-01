@@ -165,7 +165,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledShowEmtpyEntryInOptionLists_ContainsEmptyOption() {
+	public function test_Render_ForEnabledShowEmptyEntryInOptionLists_ContainsEmptyOption() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -371,6 +371,47 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 				'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
 			$this->fixture->render()
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function itemsInSearchBoxAreSortedAlphabetically() {
+		$fixture = $this->getMock(
+			'tx_seminars_pi1_frontEndSelectorWidget',
+			array(
+				'initialize', 'hasSearchField', 'getEventTypeData',
+				'getLanguageData', 'getPlaceData', 'getCityData',
+				'getCountryData'
+			),
+			array(
+				array(
+					'isStaticTemplateLoaded' => 1,
+					'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+					'displaySearchFormFields' => 'event_type',
+				),
+				$GLOBALS['TSFE']->cObj
+			)
+		);
+		$fixture->expects($this->any())->method('hasSearchField')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->once())->method('getEventTypeData')
+			->will($this->returnValue(array(1 => 'Foo', 2 => 'Bar')));
+		$fixture->expects($this->any())->method('getLanguageData')
+			->will($this->returnValue(array()));
+		$fixture->expects($this->any())->method('getPlaceData')
+			->will($this->returnValue(array()));
+		$fixture->expects($this->any())->method('getCityData')
+			->will($this->returnValue(array()));
+		$fixture->expects($this->any())->method('getCountryData')
+			->will($this->returnValue(array()));
+
+		$output = $fixture->render();
+		$this->assertTrue(
+			strpos($output, 'Bar') < strpos($output, 'Foo')
+		);
+
+		$fixture->__destruct();
 	}
 
 

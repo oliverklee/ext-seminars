@@ -166,18 +166,15 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 * @param array array of options, may be empty
 	 */
 	private function addEmptyOptionIfNeeded(array &$options) {
-		if ($this->getConfValueBoolean(
+		if (!$this->getConfValueBoolean(
 			'showEmptyEntryInOptionLists', 's_template_special'
 		)) {
-			$completeOptionList = array(
-				0 => $this->translate('label_selector_pleaseChoose')
-			);
-			foreach ($options as $key => $value) {
-				$completeOptionList[$key] = $value;
-			}
-
-			$options = $completeOptionList;
+			return;
 		}
+
+		$options = array(
+			0 => $this->translate('label_selector_pleaseChoose')
+		) + $options;
 	}
 
 	/**
@@ -292,7 +289,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 * @return boolean true if the given field should be displayed as per
 	 *                 configuration, false otherwise
 	 */
-	private function hasSearchField($fieldToCheck) {
+	protected function hasSearchField($fieldToCheck) {
 		return in_array($fieldToCheck, $this->displaySearchFormFields);
 	}
 
@@ -384,6 +381,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 				break;
 		}
 
+		asort($optionData, SORT_STRING);
 		$this->addEmptyOptionIfNeeded($optionData);
 		$optionBox = $this->createOptionBox($searchField, $optionData);
 
@@ -484,7 +482,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *               title of the event type, will be empty if no data could be
 	 *               found
 	 */
-	private function getEventTypeData() {
+	protected function getEventTypeData() {
 		$result = array();
 
 		foreach ($this->seminarBag as $event) {
@@ -508,7 +506,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *               the localized title of the language, will be empty if no
 	 *               data could be found
 	 */
-	private function getLanguageData() {
+	protected function getLanguageData() {
 		$result = array();
 
 		foreach ($this->seminarBag as $event) {
@@ -539,7 +537,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *               will be the UID of the place and the value will be the
 	 *               title of the place, will be empty if no data could be found
 	 */
-	private function getPlaceData() {
+	protected function getPlaceData() {
 		if ($this->seminarBag->isEmpty()) {
 			return array();
 		}
@@ -561,7 +559,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *               value will be the name of the city, will be empty if no
 	 *               data could be found
 	 */
-	private function getCityData() {
+	protected function getCityData() {
 		if ($this->seminarBag->isEmpty()) {
 			return array();
 		}
@@ -584,7 +582,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *               the name of the country, will be empty if no data could be
 	 *               found
 	 */
-	private function getCountryData() {
+	protected function getCountryData() {
 		if ($this->seminarBag->isEmpty()) {
 			return array();
 		}

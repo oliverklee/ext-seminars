@@ -1,4 +1,5 @@
 0.9.0 (currently working on)
+- [#3712] Fix: Items in the search filter comboboxes should be sorted alphabetically
 - [#3696] Feature: Add links "hide" and "unhide" to the lists of editable events
 - [#3695] Feature: Add functions for hiding and unhiding events
 - [#3681] Change: In the notification e-mails to the organizers, use the organizer as sender
