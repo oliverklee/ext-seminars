@@ -641,8 +641,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				)
 			);
 
-			$allWhereParts[] = '(' .
-				implode(' OR ', $wherePartsForCurrentSearchword) . ')';
+			if (!empty($wherePartsForCurrentSearchword)) {
+				$allWhereParts[] = '(' .
+					implode(' OR ', $wherePartsForCurrentSearchword) . ')';
+			}
 		}
 
 		if (!empty($allWhereParts)) {
@@ -807,17 +809,34 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	private function getSearchWherePartForEventTopics($searchWord) {
 		$result = array();
 
+		$where = array();
 		foreach (self::$searchFieldList['seminars_topic'] as $field) {
-			$result[] = 'EXISTS (' .
-				'SELECT * FROM ' . SEMINARS_TABLE_SEMINARS . ' s1,' .
-						SEMINARS_TABLE_SEMINARS . ' s2' .
-					' WHERE (s1.' . $field . ' LIKE ' . $searchWord .
-						' AND ((s1.uid=s2.topic AND s2.object_type=' .
-							SEMINARS_RECORD_TYPE_DATE . ') ' .
-							' OR (s1.uid=s2.uid AND s1.object_type!=' .
-							SEMINARS_RECORD_TYPE_DATE . ')))' .
-					' AND s2.uid=' . SEMINARS_TABLE_SEMINARS . '.uid' .
-			')';
+			$where[] = $field . ' LIKE ' . $searchWord;
+		}
+
+		$directMatchUids = tx_oelib_db::selectColumnForMultiple(
+			'uid',
+			SEMINARS_TABLE_SEMINARS,
+			'object_type != ' . SEMINARS_RECORD_TYPE_DATE .
+				' AND (' . implode(' OR ', $where) . ')'
+		);
+		if (!empty($directMatchUids)) {
+			$result[] = '(' . SEMINARS_TABLE_SEMINARS . '.uid IN (' .
+				implode(',', $directMatchUids) . '))';
+		}
+
+		$topicUids = tx_oelib_db::selectColumnForMultiple(
+			'uid',
+			SEMINARS_TABLE_SEMINARS,
+			'object_type != ' . SEMINARS_RECORD_TYPE_DATE .
+				' AND (' . implode(' OR ', $where) . ')' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
+		);
+		if (!empty($topicUids)) {
+			$result[] = '(' . SEMINARS_TABLE_SEMINARS . '.object_type = ' .
+				SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+				SEMINARS_TABLE_SEMINARS . '.topic IN( ' .
+				implode(',', $topicUids) . '))';
 		}
 
 		return $result;
@@ -937,14 +956,19 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Searches for $searchWord in $field in $foreignTable using the m:n table
 	 * $mmTable.
 	 *
-	 * @param string the current search word, must not be empty,
-	 *               must be SQL-safe and quoted for LIKE
-	 * @param string the key of the search field list, must not be empty,
-	 *               must be an valid key of $this->searchFieldList
-	 * @param string the foreign table to search in, must not be empty
-	 * @param string the m:n relation table, must not be empty
+	 * @param string $searchWord
+	 *        the current search word, must not be empty, must be SQL-safe and
+	 *        quoted for LIKE
+	 * @param string $searchFieldKey
+	 *        the key of the search field list, must not be empty, must be a
+	 *        valid key of $this->searchFieldList
+	 * @param string $foreignTable
+	 *        the name of the foreign table to search in, must not be empty
+	 * @param string $mmTable
+	 *        the m:n relation table, must not be empty
 	 *
-	 * @return array the WHERE clause parts for the search in categories
+	 * @return array the WHERE clause parts for the search in categories,
+	 *               will not be empty
 	 */
 	private function getSearchWherePartForMmRelation(
 		$searchWord, $searchFieldKey, $foreignTable, $mmTable
@@ -955,17 +979,31 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$result = array();
 
+		$foreignQuery = array();
 		foreach (self::$searchFieldList[$searchFieldKey] as $field) {
-			$result[] = 'EXISTS (' .
-				'SELECT * FROM ' . $foreignTable . ', ' . $mmTable .
-					' WHERE ' . $foreignTable . '.' . $field .
-							' LIKE ' . $searchWord .
-						' AND ' . $mmTable . '.uid_local=' .
-							SEMINARS_TABLE_SEMINARS . '.uid' .
-						' AND ' . $mmTable . '.uid_foreign=' .
-							$foreignTable . '.uid' .
-			')';
+			$foreignQuery[] = $field . ' LIKE ' . $searchWord;
 		}
+		$foreignUids = tx_oelib_db::selectColumnForMultiple(
+			'uid',
+			$foreignTable,
+			'(' . implode(' OR ', $foreignQuery) . ')' .
+				tx_oelib_db::enableFields($foreignTable)
+		);
+		if (empty($foreignUids)) {
+			return array();
+		}
+
+		$localUids = tx_oelib_db::selectColumnForMultiple(
+			'uid_local',
+			$mmTable,
+			'uid_foreign IN (' . implode(',', $foreignUids). ')'
+		);
+		if (empty($localUids)) {
+			return array();
+		}
+
+		$result[] = SEMINARS_TABLE_SEMINARS . '.uid  IN (' .
+			implode(',', $localUids) . ')';
 
 		return $result;
 	}

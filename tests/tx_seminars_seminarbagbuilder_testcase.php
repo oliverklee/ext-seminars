@@ -36,7 +36,13 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_seminarbagbuilder
+	 */
 	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
 	/**
