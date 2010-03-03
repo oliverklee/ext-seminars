@@ -1173,10 +1173,12 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	public function createAndOutputListOfRegistrationsForEventUidGivenSetsPageContentTypeToCsv() {
 		$this->fixture->createAndOutputListOfRegistrations($this->eventUid);
 
-		$this->assertContains(
-			'Content-type: text/csv;',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
-				->getLastAddedHeader()
+		$this->assertTrue(
+			in_array(
+				'Content-type: text/csv; header=present; charset=',
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+					->getAllAddedHeaders()
+			)
 		);
 	}
 
@@ -1187,10 +1189,12 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['pid'] = $this->pid;
 		$this->fixture->createAndOutputListOfRegistrations();
 
-		$this->assertContains(
-			'Content-type: text/csv;',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
-				->getLastAddedHeader()
+		$this->assertTrue(
+			in_array(
+				'Content-type: text/csv; header=present; charset=',
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+					->getAllAddedHeaders()
+			)
 		);
 	}
 
