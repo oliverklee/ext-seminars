@@ -608,8 +608,10 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	private function setPageTypeAndDisposition($csvFileName) {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Content-type: text/csv; header=present; charset=' .
-				$this->configGetter->getConfValueString('charsetForCsv') .
-				'Content-disposition: attachment; filename=' . $csvFileName
+				$this->configGetter->getConfValueString('charsetForCsv')
+		);
+		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+			'Content-disposition: attachment; filename=' . $csvFileName
 		);
 	}
 
