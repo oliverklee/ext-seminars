@@ -807,39 +807,30 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * @return array the WHERE clause parts for the search in event topics
 	 */
 	private function getSearchWherePartForEventTopics($searchWord) {
-		$result = array();
-
 		$where = array();
 		foreach (self::$searchFieldList['seminars_topic'] as $field) {
 			$where[] = $field . ' LIKE ' . $searchWord;
 		}
 
-		$directMatchUids = tx_oelib_db::selectColumnForMultiple(
+		$matchingUids = tx_oelib_db::selectColumnForMultiple(
 			'uid',
 			SEMINARS_TABLE_SEMINARS,
-			'object_type != ' . SEMINARS_RECORD_TYPE_DATE .
-				' AND (' . implode(' OR ', $where) . ')'
-		);
-		if (!empty($directMatchUids)) {
-			$result[] = '(' . SEMINARS_TABLE_SEMINARS . '.uid IN (' .
-				implode(',', $directMatchUids) . '))';
-		}
-
-		$topicUids = tx_oelib_db::selectColumnForMultiple(
-			'uid',
-			SEMINARS_TABLE_SEMINARS,
-			'object_type != ' . SEMINARS_RECORD_TYPE_DATE .
-				' AND (' . implode(' OR ', $where) . ')' .
+			'(' . implode(' OR ', $where) . ')' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
 		);
-		if (!empty($topicUids)) {
-			$result[] = '(' . SEMINARS_TABLE_SEMINARS . '.object_type = ' .
-				SEMINARS_RECORD_TYPE_DATE . ' AND ' .
-				SEMINARS_TABLE_SEMINARS . '.topic IN( ' .
-				implode(',', $topicUids) . '))';
+		if (empty($matchingUids)) {
+			return array();
 		}
 
-		return $result;
+		$inUids = ' IN (' .
+			implode(',', $matchingUids) . ')';
+		return array(
+			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE .
+				' AND ' . SEMINARS_TABLE_SEMINARS . '.uid' . $inUids . ')',
+			'(' . SEMINARS_TABLE_SEMINARS . '.object_type = ' .
+				SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+				SEMINARS_TABLE_SEMINARS . '.topic' . $inUids . ')',
+		);
 	}
 
 	/**
