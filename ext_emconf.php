@@ -43,7 +43,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'oelib' => '0.7.0-',
 			'ameos_formidable' => '1.1.0-1.9.99',
 			'partner' => '0.5.0-',
-			'static_info_tables' => '2.0.8-',
+			'static_info_tables' => '2.1.0-',
 			'static_info_tables_taxes' => '',
 		),
 		'conflicts' => array(
