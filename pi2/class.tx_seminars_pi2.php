@@ -237,7 +237,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		} else {
 			if (!$this->canAccessRegistrationsOnPage($pid)) {
 				return $this->addErrorHeaderAndReturnMessage(
-					tx_seminars_pi2::ACCESS_DENIED
+					self::ACCESS_DENIED
 				);
 			}
 		}
