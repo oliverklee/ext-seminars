@@ -302,7 +302,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 * @param integer $pageId the page ID to link to, must be >= 0
 	 * @param array $urlParameters
 	 *        URL parameters to set as key/value pairs, not URL-encoded yet
-	 * @param unknown_type $target link target (not used yet)
+	 * @param string $target link target (not used yet)
 	 *
 	 * @return string faked link tag, will not be empty
 	 */
