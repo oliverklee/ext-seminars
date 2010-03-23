@@ -504,6 +504,10 @@ table.tx-seminars-pi1-timeslots td {
 	margin-right: 25em;
 }
 
+#tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-method-of-payment dd input {
+	border: none;
+}
+
 #tx-seminars-pi1-registration-banking-data {
 	position: absolute;
 	top: 0;
