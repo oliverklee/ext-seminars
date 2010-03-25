@@ -1,4 +1,5 @@
 0.9.1 (currently working on)
+- [#2586] Change: Remove the conflict with date2cal once the date2cal bugs have been fixed
 - [#3735] Fix: Error 102 when saving a registration record in backend
 - [#3779] Fix: Typo in the Event Model: "Boad"
 - [#3595] Fix: Internet Explorer shows border around radio button on registration page, patch by Thomas Biesenbach
