@@ -685,9 +685,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return float true if this event has a regular board price, false
 	 *               otherwise
 	 */
-	public function hasRegularBoadPrice() {
+	public function hasRegularBoardPrice() {
 		return ($this->isEventDate())
-			? $this->getTopic()->hasRegularBoadPrice()
+			? $this->getTopic()->hasRegularBoardPrice()
 			: $this->hasFloat('price_regular_board');
 	}
 
