@@ -783,7 +783,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$this->initializeTemplate();
 
 		$mailFormat = tx_oelib_configurationProxy::getInstance('seminars')
-			->getConfigurationValueInteger('eMailFormatForAttendees');
+			->getAsInteger('eMailFormatForAttendees');
 		if (($mailFormat == self::SEND_HTML_MAIL)
 			|| (($mailFormat == self::SEND_USER_MAIL)
 				&& $registration->getFrontEndUser()->wantsHtmlEMail())

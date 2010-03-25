@@ -17,7 +17,7 @@ if (!function_exists('tx_seminars_tableRelations')) {
 	 */
 	function tx_seminars_tableRelations($tableName) {
 		if (!tx_oelib_configurationProxy::getInstance('seminars')
-			->getConfigurationValueBoolean('useStoragePid')
+			->getAsBoolean('useStoragePid')
 		) {
 			return '';
 		}

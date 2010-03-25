@@ -214,9 +214,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'',
-			$this->session->getAsString(
-				'tx_seminars_registration_editor_zip'
-			)
+			$this->session->getAsString('tx_seminars_registration_editor_zip')
 		);
 	}
 
@@ -225,9 +223,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'12345',
-			$this->session->getAsString(
-				'tx_seminars_registration_editor_zip'
-			)
+			$this->session->getAsString('tx_seminars_registration_editor_zip')
 		);
 	}
 
@@ -239,9 +235,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'',
-			$this->session->getAsString(
-				'tx_seminars_registration_editor_zip'
-			)
+			$this->session->getAsString('tx_seminars_registration_editor_zip')
 		);
 	}
 
