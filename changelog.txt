@@ -1,4 +1,5 @@
 0.9.1 (currently working on)
+- [#3779] Fix: Typo in the Event Model: "Boad"
 - [#3595] Fix: Internet Explorer shows border around radio button on registration page, patch by Thomas Biesenbach
 - [#3710] Change: Use self:: for static calls within the same class
 - [#3450] Change: Mention in setup.txt that the admin should not copy'n'paste the complete template into the TS template

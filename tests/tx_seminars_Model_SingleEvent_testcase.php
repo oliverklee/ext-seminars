@@ -695,7 +695,7 @@ class tx_seminars_Model_SingleEvent_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertFalse(
-			$this->fixture->hasRegularBoadPrice()
+			$this->fixture->hasRegularBoardPrice()
 		);
 	}
 
@@ -711,7 +711,7 @@ class tx_seminars_Model_SingleEvent_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertTrue(
-			$this->fixture->hasRegularBoadPrice()
+			$this->fixture->hasRegularBoardPrice()
 		);
 	}
 
