@@ -87,7 +87,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_TEXT_MAIL
 		);
@@ -1652,10 +1652,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForHtmlMailSet_HasHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1691,10 +1691,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToHtmlMails_HasHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_USER_MAIL
-		);
+			);
 		$registration = $this->createRegistration();
 		$registration->getFrontEndUser()->setData(
 			array(
@@ -1719,10 +1719,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToTextMails_DoesNotHaveHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_USER_MAIL
-		);
+			);
 		$registration = $this->createRegistration();
 		$registration->getFrontEndUser()->setData(
 			array(
@@ -1747,10 +1747,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForHtmlMails_ContainsNameOfUserInBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'fe_users', $registration->getFrontEndUser()->getUid(),
@@ -1773,10 +1773,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForHtmlMails_HasLinkToSeminarInBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$registration = $this->createRegistration();
 		$registration->getFrontEndUser()->setData(
 			array(
@@ -1916,10 +1916,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForHtmlMails_HasCssStylesFromFile() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$this->fixture->setConfigurationValue(
 			'cssFileForAttendeeMail',
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -1981,10 +1981,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForHtmlMail_ReturnsAttendeesNamesInOrderedList() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$this->fixture->setConfigurationValue(
 			'cssFileForAttendeeMail',
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2102,10 +2102,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForHtmlMail_SeparatesPlacesTitleAndAddressWithBreaks() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$this->fixture->setConfigurationValue(
 			'cssFileForAttendeeMail',
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2292,10 +2292,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForPlaceAddressAndHtmlMails_ReplacesMultipleLineFeedsWithSpaces() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$this->fixture->setConfigurationValue(
 			'cssFileForAttendeeMail',
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2326,10 +2326,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForPlaceAddress_ReplacesMultipleLineFeedAndCarriageReturnsWithSpaces() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$this->fixture->setConfigurationValue(
 			'cssFileForAttendeeMail',
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2438,10 +2438,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_NotifyAttendee_ForPlaceAddressAndHtmlMails_SeparatresAddressAndCityLineWithBreaks() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueInteger(
+			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
-		);
+			);
 		$this->fixture->setConfigurationValue(
 			'cssFileForAttendeeMail',
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'

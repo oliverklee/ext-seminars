@@ -2453,7 +2453,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		}
 
 		if (tx_oelib_configurationProxy::getInstance('seminars')
-			->getConfigurationValueBoolean('useStoragePid')
+			->getAsBoolean('useStoragePid')
 		) {
 			$recordPids[] = $this->getStoragePid();
 		}

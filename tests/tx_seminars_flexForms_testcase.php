@@ -60,14 +60,13 @@ class tx_seminars_flexForms_testcase extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_flexForms();
 		$this->tcaBackup = $GLOBALS['TCA'][$this->testingTable]['ctrl'];
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueBoolean('useStoragePid',false);
+			->setAsBoolean('useStoragePid', FALSE);
 		$GLOBALS['TCA'][$this->testingTable]['ctrl']['iconfile'] = 'fooicon';
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 		$GLOBALS['TCA'][$this->testingTable]['ctrl'] = $this->tcaBackup;
-		tx_oelib_configurationProxy::purgeInstances();
 		unset(
 			$this->fixture, $this->testingFramework, $this->tcaBackup,
 			$this->testingTable
@@ -81,7 +80,7 @@ class tx_seminars_flexForms_testcase extends tx_phpunit_testcase {
 
 	public function test_getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSet_FindsRecordWithThisPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueBoolean('useStoragePid', true);
+			->setAsBoolean('useStoragePid', TRUE);
 
 		$storagePageUid = $this->testingFramework->createSystemFolder();
 		$sysFolderUid = $this->testingFramework->createSystemFolder(
@@ -111,7 +110,7 @@ class tx_seminars_flexForms_testcase extends tx_phpunit_testcase {
 
 	public function test_getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSet_DoesNotFindRecordWithOtherPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueBoolean('useStoragePid', true);
+			->setAsBoolean('useStoragePid', TRUE);
 
 		$sysFolderUid = $this->testingFramework->createSystemFolder(
 			0,
@@ -140,7 +139,7 @@ class tx_seminars_flexForms_testcase extends tx_phpunit_testcase {
 
 	public function test_getEntriesFromGeneralStoragePageForUseStoragePidSetAndStoragePidSetOnParentPage_FindsRecordWithThisPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueBoolean('useStoragePid', true);
+			->setAsBoolean('useStoragePid', TRUE);
 
 		$storagePage = $this->testingFramework->createSystemFolder();
 		$parentPageUid = $this->testingFramework->createFrontEndPage(
@@ -172,7 +171,7 @@ class tx_seminars_flexForms_testcase extends tx_phpunit_testcase {
 
 	public function test_getEntriesFromGeneralStoragePageForUseStoragePidSetAndNoStoragePidSet_FindsRecordWithAnyPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
-			->setConfigurationValueBoolean('useStoragePid', true);
+			->setAsBoolean('useStoragePid', TRUE);
 
 		$recordUid = $this->testingFramework->createRecord(
 			$this->testingTable, array('title' => 'foo record', 'pid' => 42)

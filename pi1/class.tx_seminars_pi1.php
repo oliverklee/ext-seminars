@@ -1291,8 +1291,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		if ($owner->hasImage()) {
 			$configuredUploadFolder = tx_oelib_configurationProxy::getInstance(
-					'sr_feuser_register'
-				)->getConfigurationValueString('uploadFolder');
+				'sr_feuser_register'
+			)->getAsString('uploadFolder');
 
 			$uploadFolder = ($configuredUploadFolder == '')
 				? 'uploads/tx_srfeuserregister'

@@ -153,7 +153,7 @@ class tx_seminars_flexForms {
 		$table = $configuration['config']['itemTable'];
 
 		if (tx_oelib_configurationProxy::getInstance('seminars')
-			->getConfigurationValueBoolean('useStoragePid')
+			->getAsBoolean('useStoragePid')
 		) {
 			$rootlinePages = t3lib_befunc::BEgetRootLine(
 				$configuration['row']['pid']
