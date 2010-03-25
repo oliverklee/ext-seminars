@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
@@ -811,6 +812,101 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 		return ($this->isEventDate())
 			? $this->getTopic()->hasSpecialBoardPrice()
 			: $this->hasFloat('price_special_board');
+	}
+
+	/**
+	 * Checks whether this event is sold with early bird prices.
+	 *
+	 * This will return TRUE if the event has a deadline and a price defined
+	 * for early-bird registrations. If the special price (e.g. for students)
+	 * is not used, then the student's early bird price is not checked.
+	 *
+	 * Attention: Both prices (standard and special) need to have an early bird
+	 * version for this function to return true (if there is a regular special
+	 * price).
+	 *
+	 * @return boolean TRUE if an early bird deadline and early bird prices
+	 *                 are set, FALSE otherwise
+	 */
+	public function hasEarlyBirdPrice() {
+		// whether the event has regular prices set (a normal one and an early bird)
+		$priceRegularIsOk = $this->hasRegularPrice()
+			&& $this->hasRegularEarlyBirdPrice();
+
+		// whether no special price is set, or both special prices
+		// (normal and early bird) are set
+		$priceSpecialIsOk = !$this->hasSpecialPrice()
+			|| ($this->hasSpecialPrice() && $this->hasSpecialEarlyBirdPrice());
+
+		return ($this->hasEarlyBirdDeadline()
+			&& $priceRegularIsOk
+			&& $priceSpecialIsOk);
+	}
+
+	/**
+	 * Checks whether the latest possibility to register with early bird rebate
+	 * for this event is over.
+	 *
+	 * The latest moment is just before a set early bird deadline.
+	 *
+	 * @return boolean TRUE if the deadline has passed, FALSE otherwise
+	 */
+	public function isEarlyBirdDeadlineOver() {
+		return ($GLOBALS['SIM_EXEC_TIME']
+			>= $this->getEarlyBirdDeadlineAsUnixTimeStamp());
+	}
+
+
+	/**
+	 * Returns whether an early bird price applies.
+	 *
+	 * @return boolean TRUE if this event has an early bird dealine set and
+	 *                 this deadline is not over yet, FALSE otherwise
+	 */
+	public function earlyBirdApplies() {
+		return $this->hasEarlyBirdPrice() && !$this->isEarlyBirdDeadlineOver();
+	}
+
+	/**
+	 * Gets the list of available prices for this event at this particular time.
+	 *
+	 * If there is an early-bird price available and the early-bird deadline has
+	 * not passed yet, the early-bird price is used.
+	 *
+	 * The possible keys of the return value are:
+	 * regular, regular_early, regular_board,
+	 * special, special_early, special_board
+	 *
+	 * @return array the available prices as an associative array of floats,
+	 *               will not be empty
+	 */
+	public function getAvailablePrices() {
+		$result = array();
+
+		$earlyBirdApplies = $this->earlyBirdApplies();
+
+		if ($earlyBirdApplies && $this->hasRegularEarlyBirdPrice()) {
+			$result['regular_early'] = $this->getRegularEarlyBirdPrice();
+		} else {
+			$result['regular'] = $this->getRegularPrice();
+		}
+
+		if ($this->hasSpecialPrice()) {
+			if ($earlyBirdApplies && $this->hasSpecialEarlyBirdPrice()) {
+				$result['special_early'] = $this->getSpecialEarlyBirdPrice();
+			} else {
+				$result['special'] = $this->getSpecialPrice();
+			}
+		}
+
+		if ($this->hasRegularBoardPrice()) {
+			$result['regular_board'] = $this->getRegularBoardPrice();
+		}
+		if ($this->hasSpecialBoardPrice()) {
+			$result['special_board'] = $this->getSpecialBoardPrice();
+		}
+
+		return $result;
 	}
 
 	/**

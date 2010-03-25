@@ -33,6 +33,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_EventTopic_testcase extends tx_phpunit_testcase {
 	/**
@@ -1265,6 +1266,461 @@ class tx_seminars_Model_EventTopic_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->hasImage()
+		);
+	}
+
+
+	///////////////////////////////////////
+	// Tests concerning hasEarlyBirdPrice
+	///////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasEarlyBirdPriceForNoDeadlineAndAllPricesSetReturnsFalse() {
+		$this->fixture->setData(
+			array(
+				'deadline_early_bird' => 0,
+				'price_regular' => 1.000,
+				'price_regular_early' => 1.000,
+				'price_special' => 1.000,
+				'price_special_early' => 1.000,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEarlyBirdPriceForDeadlineAndAllPricesSetReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'deadline_early_bird' => 1234,
+				'price_regular' => 1.000,
+				'price_regular_early' => 1.000,
+				'price_special' => 1.000,
+				'price_special_early' => 1.000,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEarlyBirdPriceForDeadlinAndAllRegularPricesSetReturnsTrue() {
+		$this->fixture->setData(
+			array(
+				'deadline_early_bird' => 1234,
+				'price_regular' => 1.000,
+				'price_regular_early' => 1.000,
+			)
+		);
+
+		$this->assertTrue(
+			$this->fixture->hasEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEarlyBirdPriceForDeadlineAndRegularPriceAndAllSpecialPricesSetReturnsFalse() {
+		$this->fixture->setData(
+			array(
+				'deadline_early_bird' => 1234,
+				'price_regular' => 1.000,
+				'price_special' => 1.000,
+				'price_special_early' => 1.000,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEarlyBirdPriceForDeadlineAndNoRegularPriceAndAllSpecialPricesSetReturnsFalse() {
+		$this->fixture->setData(
+			array(
+				'deadline_early_bird' => 1234,
+				'price_special' => 1.000,
+				'price_special_early' => 1.000,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasEarlyBirdPrice()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEarlyBirdPriceForDeadlineAndOnlyEarlyBirdPricesSetReturnsFalse() {
+		$this->fixture->setData(
+			array(
+				'deadline_early_bird' => 1234,
+				'price_regular_early' => 1.000,
+				'price_special_early' => 1.000,
+			)
+		);
+
+		$this->assertFalse(
+			$this->fixture->hasEarlyBirdPrice()
+		);
+	}
+
+
+	/////////////////////////////////////////////
+	// Tests concerning isEarlyBirdDeadlineOver
+	/////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function isEarlyBirdDeadlineOverForNoEarlyBirdDeadlineReturnsTrue() {
+		$this->fixture->setData(array());
+
+		$this->assertTrue(
+			$this->fixture->isEarlyBirdDeadlineOver()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInPastReturnsTrue() {
+		$this->fixture->setData(
+			array('deadline_early_bird' => ($GLOBALS['SIM_EXEC_TIME'] - 1))
+		);
+
+		$this->assertTrue(
+			$this->fixture->isEarlyBirdDeadlineOver()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineNowReturnsTrue() {
+		$this->fixture->setData(
+			array('deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'])
+		);
+
+		$this->assertTrue(
+			$this->fixture->isEarlyBirdDeadlineOver()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInFutureReturnsFalse() {
+		$this->fixture->setData(
+			array('deadline_early_bird' => ($GLOBALS['SIM_EXEC_TIME'] + 1))
+		);
+
+		$this->assertFalse(
+			$this->fixture->isEarlyBirdDeadlineOver()
+		);
+	}
+
+
+	//////////////////////////////////////
+	// Tests concerning earlyBirdApplies
+	//////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function earlyBirdAppliesForNoEarlyBirdPriceAndDeadlineOverReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver')
+		);
+		$fixture->expects($this->any())->method('hasEarlyBirdPrice')
+			->will($this->returnValue(FALSE));
+		$fixture->expects($this->any())->method('isEarlyBirdDeadlineOver')
+			->will($this->returnValue(TRUE));
+
+		$this->assertFalse(
+			$fixture->earlyBirdApplies()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineOverReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver')
+		);
+		$fixture->expects($this->any())->method('hasEarlyBirdPrice')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isEarlyBirdDeadlineOver')
+			->will($this->returnValue(TRUE));
+
+		$this->assertFalse(
+			$fixture->earlyBirdApplies()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineNotOverReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver')
+		);
+		$fixture->expects($this->any())->method('hasEarlyBirdPrice')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isEarlyBirdDeadlineOver')
+			->will($this->returnValue(FALSE));
+
+		$this->assertTrue(
+			$fixture->earlyBirdApplies()
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	////////////////////////////////////////
+	// Tests concerning getAvailablePrices
+	////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(FALSE));
+		$fixture->setData(array());
+
+		$this->assertEquals(
+			array('regular' => 0.000),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(FALSE));
+		$fixture->setData(array('price_regular' => 12.345));
+
+		$this->assertEquals(
+			array('regular' => 12.345),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(TRUE));
+		$fixture->setData(
+			array(
+				'price_regular' => 12.345,
+				'price_regular_early' => 23.456,
+			)
+		);
+
+		$this->assertEquals(
+			array('regular_early' => 23.456),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(FALSE));
+		$fixture->setData(
+			array(
+				'price_regular' => 12.345,
+				'price_regular_early' => 23.456,
+			)
+		);
+
+		$this->assertEquals(
+			array('regular' => 12.345),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(FALSE));
+		$fixture->setData(
+			array(
+				'price_regular_board' => 23.456,
+			)
+		);
+
+		$this->assertEquals(
+			array(
+				'regular' => 0.000,
+				'regular_board' => 23.456,
+			),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(FALSE));
+		$fixture->setData(
+			array(
+				'price_special_board' => 23.456,
+			)
+		);
+
+		$this->assertEquals(
+			array(
+				'regular' => 0.000,
+				'special_board' => 23.456,
+			),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(FALSE));
+		$fixture->setData(array('price_special' => 12.345));
+
+		$this->assertEquals(
+			array(
+				'regular' => 0.000,
+				'special' => 12.345,
+			),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(TRUE));
+		$fixture->setData(
+			array(
+				'price_special' => 34.567,
+				'price_special_early' => 23.456,
+			)
+		);
+
+		$this->assertEquals(
+			array(
+				'regular' => 0.000,
+				'special_early' => 23.456,
+			),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(TRUE));
+		$fixture->setData(
+			array(
+				'price_regular' => 34.567,
+				'price_special_early' => 23.456,
+			)
+		);
+
+		$this->assertEquals(
+			array('regular' => 34.567),
+			$fixture->getAvailablePrices()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('earlyBirdApplies')
+		);
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue(FALSE));
+		$fixture->setData(
+			array(
+				'price_special' => 34.567,
+				'price_special_early' => 23.456,
+			)
+		);
+
+		$this->assertEquals(
+			array(
+				'regular' => 0.000,
+				'special' => 34.567,
+			),
+			$fixture->getAvailablePrices()
 		);
 	}
 }
