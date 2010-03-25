@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#955] Change: Drop mod1
 - [#3065] Change: Use the new getters/setters when using the configuration proxy
 - [#2586] Change: Remove the conflict with date2cal once the date2cal bugs have been fixed
 - [#3735] Fix: Error 102 when saving a registration record in backend

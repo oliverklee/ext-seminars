@@ -82,7 +82,6 @@ return array(
 	'tx_seminars_model_targetgroup' => $extensionPath . 'Model/class.tx_seminars_Model_TargetGroup.php',
 	'tx_seminars_model_timeslot' => $extensionPath . 'Model/class.tx_seminars_Model_TimeSlot.php',
 	'tx_seminars_cli_mailnotifier' => $extensionPath . 'cli/class.tx_seminars_cli_MailNotifier.php',
-	'tx_seminars_module1' => $extensionPath . 'mod1/index.php',
 	'tx_seminars_pi1' => $extensionPath . 'pi1/class.tx_seminars_pi1.php',
 	'tx_seminars_pi1_eventeditor' => $extensionPath . 'pi1/class.tx_seminars_pi1_eventEditor.php',
 	'tx_seminars_pi1_frontendcategorylist' => $extensionPath . 'pi1/class.tx_seminars_pi1_frontEndCategoryList.php',
