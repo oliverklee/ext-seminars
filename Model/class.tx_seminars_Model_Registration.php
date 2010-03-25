@@ -164,6 +164,16 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	}
 
 	/**
+	 * Sets whether the front-end user registered themselves.
+	 *
+	 * @param boolean $registeredThemselves
+	 *        whether the front-end user registered themselves
+	 */
+	public function setRegisteredThemselves($registeredThemselves) {
+		$this->setAsBoolean('registered_themselves', $registeredThemselves);
+	}
+
+	/**
 	 * Returns the total price of this registration.
 	 *
 	 * @return float the total price of this registration, will be >= 0

@@ -282,6 +282,17 @@ class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function setRegisteredThemselvesSetsRegisteredThemselves() {
+		$this->fixture->setRegisteredThemselves(TRUE);
+
+		$this->assertTrue(
+			$this->fixture->hasRegisteredThemselves()
+		);
+	}
+
 
 	/////////////////////////////////////
 	// Tests regarding the total price.
