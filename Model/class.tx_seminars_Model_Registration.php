@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Registration extends tx_oelib_Model {
 	/**
@@ -85,6 +86,19 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	}
 
 	/**
+	 * Returns the event of this registration.
+	 *
+	 * This is an alias for getEvent necessary for the relation to the event.
+	 *
+	 * @return tx_seminars_Model_Event the event of this registration
+	 *
+	 * @see getEvent
+	 */
+	public function getSeminar() {
+		return $this->getEvent();
+	}
+
+	/**
 	 * Sets the event of this registration.
 	 *
 	 * @param tx_seminars_Model_Event $event
@@ -92,6 +106,20 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	 */
 	public function setEvent(tx_seminars_Model_Event $event) {
 		$this->set('seminar', $event);
+	}
+
+	/**
+	 * Sets the event of this registration.
+	 *
+	 * This is an alias for setEvent necessary for the relation to the event.
+	 *
+	 * @param tx_seminars_Model_Event $event
+	 *        the event to set for this registration
+	 *
+	 * @see setEvent
+	 */
+	public function setSeminar(tx_seminars_Model_Event $event) {
+		$this->setEvent($event);
 	}
 
 	/**

@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Mapper_Registration_testcase extends tx_phpunit_testcase {
 	/**
@@ -101,6 +102,21 @@ class tx_seminars_Mapper_Registration_testcase extends tx_phpunit_testcase {
 			$this->fixture->getLoadedTestingModel(
 				array('seminar' => $event->getUid())
 			)->getEvent() instanceof
+				tx_seminars_Model_Event
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSeminarWithEventReturnsEventInstance() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getNewGhost();
+
+		$this->assertTrue(
+			$this->fixture->getLoadedTestingModel(
+				array('seminar' => $event->getUid())
+			)->getSeminar() instanceof
 				tx_seminars_Model_Event
 		);
 	}

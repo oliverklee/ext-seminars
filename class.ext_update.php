@@ -32,13 +32,15 @@ if (t3lib_extMgm::isLoaded('seminars')) {
 /**
  * Class 'ext_update' for the 'seminars' extension.
  *
- * This class offers functions to update the database from one version to another.
+ * This class offers functions to update the database from one version to
+ * another.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class ext_update {
 	/**
@@ -50,14 +52,8 @@ class ext_update {
 	public function main() {
 		$result = '';
 		try {
-			if ($this->needsToUpdateEventField('needsRegistration')) {
-				$result .= $this->updateNeedsRegistrationField();
-			}
-			if ($this->needsToUpdateEventField('queueSize')) {
-				$result .= $this->updateQueueSizeField();
-			}
-			if ($this->needsToUpdateTypoScriptTemplates()) {
-				$result .= $this->updateTypoScriptTemplates();
+			if ($this->needsToUpdateEventField('registrations')) {
+				$result .= $this->updateRegistrationsField();
 			}
 		} catch (tx_oelib_Exception_Database $exception) {
 			$result = '';
@@ -69,145 +65,85 @@ class ext_update {
 	/**
 	 * Returns whether the update module may be accessed.
 	 *
-	 * @return boolean true if the update module may be accessed, false otherwise
+	 * @return boolean TRUE if the update module may be accessed, FALSE otherwise
 	 */
 	public function access() {
 		if (!t3lib_extMgm::isLoaded('oelib')
 			|| !t3lib_extMgm::isLoaded('seminars')
 		) {
-			return false;
+			return FALSE;
 		}
-		if (!tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS)) {
-			return false;
+		if (!tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS)
+			|| !tx_oelib_db::existsTable(SEMINARS_TABLE_ATTENDANCES)
+		) {
+			return FALSE;
 		}
 		if (!tx_oelib_db::tableHasColumn(
-			SEMINARS_TABLE_SEMINARS, 'needs_registration'
+			SEMINARS_TABLE_SEMINARS, 'registrations'
 		)) {
-			return false;
+			return FALSE;
 		}
 
 		try {
-			$result = ($this->needsToUpdateEventField('needsRegistration')
-				|| $this->needsToUpdateEventField('queueSize')
-				|| $this->needsToUpdateTypoScriptTemplates()
-			);
+			$result = $this->needsToUpdateEventField('registrations');
 		} catch (tx_oelib_Exception_Database $exception) {
-			$result = false;
+			$result = FALSE;
 		}
 
 		return $result;
 	}
 
 	/**
-	 * Checks whether there are events which need to be updated, in given DB
-	 * field.
+	 * Checks whether there are events which need to be updated concerning a
+	 * given DB field.
 	 *
 	 * @param string the DB field to check for needing an update, must be
-	 *               'queueSize' or 'needsRegistration
+	 *               'registrations'
 	 *
-	 * @return boolean true if any rows need to be updated, false otherwise
+	 * @return boolean TRUE if any rows need to be updated, FALSE otherwise
 	 */
 	private function needsToUpdateEventField($fieldToUpdate) {
 		switch ($fieldToUpdate) {
-			case 'needsRegistration':
-				$whereClause = 'attendees_max > 0 AND needs_registration = 0 ';
-				break;
-			case 'queueSize':
-				$whereClause = 'queue_size > 1';
+			case 'registrations':
+				$whereClause = 'registrations = 0 AND EXISTS (' .
+					'SELECT * FROM ' . SEMINARS_TABLE_ATTENDANCES .
+					' WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid ' .
+					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) .
+					')';
 				break;
 			default:
 				throw new Exception('needsToUpdateEventField was called with ' .
-				'"' . $fieldToUpdate . '" but allowed values are only ' .
-					'\'needsRegistration\' and \'queueSize\'.');
+					'"' . $fieldToUpdate . '" but the allowed value is only ' .
+					'"registrations"');
 				break;
 		}
 
-		$row = tx_oelib_db::selectSingle(
-			'COUNT(*) AS number', SEMINARS_TABLE_SEMINARS, $whereClause
-		);
-
-		return ($row['number'] > 0);
+		return (tx_oelib_db::count(SEMINARS_TABLE_SEMINARS, $whereClause) > 0);
 	}
 
 	/**
-	 * Updates the needs_registration field of the event records.
+	 * Updates the "registrations" field of the event records.
 	 *
 	 * @return string information about the status of the update process,
 	 *                will not be empty
 	 */
-	private function updateNeedsRegistrationField() {
-		return '<h2>Updating events needs_registrations field.</h2>' .
-			'<p> Updating ' . tx_oelib_db::update(
-				SEMINARS_TABLE_SEMINARS,
-				'needs_registration = 0 AND attendees_max > 0',
-				array('needs_registration' => 1)
-			) . ' events.</p>';
-	}
-
-	/**
-	 * Updates the queue_size field of the event records, changing it from
-	 * integer to boolean.
-	 *
-	 * @return string information about the status of the update process,
-	 *                will not be empty
-	 */
-	private function updateQueueSizeField() {
-		return '<h2>Updating events queue_size field.</h2>' .
-			'<p> Updating ' . tx_oelib_db::update(
-				SEMINARS_TABLE_SEMINARS,
-				'queue_size > 1',
-				array('queue_size' => 1)
-			) . ' events.</p>';
-	}
-
-	/**
-	 * Returns whether there are any TypoScript template records that need to be
-	 * updated.
-	 *
-	 * @return boolean true if there are any TypoScript template records that
-	 *                 need to be updated, false otherwise
-	 */
-	private function needsToUpdateTypoScriptTemplates() {
-		$row = tx_oelib_db::selectSingle(
-			'COUNT(*) as count', 'sys_template',
-			'include_static_file LIKE \'%EXT:seminars/static/%\''
-		);
-
-		return ($row['count'] > 0);
-	}
-
-	/**
-	 * Updates the TypoScript template records.
-	 *
-	 * @return string information about the status of the update process,
-	 *                will not be empty
-	 */
-	private function updateTypoScriptTemplates() {
-		$result = '<h2>Updating TypoScript template records.</h2>';
-		$result .= '<ul>';
-
-		$rows = tx_oelib_db::selectMultiple(
-			'uid, include_static_file', 'sys_template',
-			'include_static_file LIKE \'%EXT:seminars/static/%\''
-		);
-
-		foreach ($rows as $row) {
-			$result .= '<li>Updating TypoScript template #' . $row['uid'] . '</li>';
-			tx_oelib_db::update(
-				'sys_template', 'uid=' . $row['uid'],
-				array(
-					'include_static_file' => str_replace(
-						'EXT:seminars/static/',
-						'EXT:seminars/Configuration/TypoScript',
-						$row['include_static_file']
-					),
-				)
-			);
+	private function updateRegistrationsField() {
+		$query = 'UPDATE ' . SEMINARS_TABLE_SEMINARS . ' SET registrations = ' .
+				'(SELECT COUNT(*) FROM ' . SEMINARS_TABLE_ATTENDANCES .
+				' WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid ' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) . ')' .
+			' WHERE registrations = 0 AND EXISTS (' .
+				'SELECT * FROM ' . SEMINARS_TABLE_ATTENDANCES .
+				' WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid ' .
+				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) .
+			')';
+		if (!$GLOBALS['TYPO3_DB']->sql_query($query)) {
+			throw new tx_oelib_Exception_Database();
 		}
 
-		$result .= '</ul>';
-
-		return $result;
+		return '<h2>Updating the events.registrations field.</h2>' .
+			'<p>Updating ' . $GLOBALS['TYPO3_DB']->sql_affected_rows() .
+			' event records.</p>';
 	}
 }
 

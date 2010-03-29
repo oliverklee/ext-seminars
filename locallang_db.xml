@@ -38,6 +38,7 @@
 			<label index="tx_seminars_seminars.needs_registration">Needs registration</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Allows multiple registrations from the same person</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Skip the collision check for this event:</label>
+			<label index="tx_seminars_seminars.registrations">Registrations:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>
@@ -256,6 +257,7 @@
 			<label index="tx_seminars_seminars.needs_registration">Anmeldung nötig</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations">Lässt mehrfache Anmeldungen derselben Person zu</label>
 			<label index="tx_seminars_seminars.skip_collision_check">Den Kollisionscheck für diese Veranstaltung ausschalten:</label>
+			<label index="tx_seminars_seminars.registrations">Anmeldungen:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">geplant</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">abgesagt</label>
@@ -1223,6 +1225,7 @@
 			<label index="tx_seminars_seminars.needs_registration" type="integer">228396671</label>
 			<label index="tx_seminars_seminars.allows_multiple_registrations" type="integer">206791403</label>
 			<label index="tx_seminars_seminars.skip_collision_check" type="integer">139479602</label>
+			<label index="tx_seminars_seminars.registrations" type="integer">194929919</label>
 			<label index="tx_seminars_seminars.cancelled" type="integer">38413271</label>
 			<label index="tx_seminars_seminars.cancelled_planned" type="integer">59756617</label>
 			<label index="tx_seminars_seminars.cancelled_canceled" type="integer">224147873</label>
@@ -2214,6 +2217,7 @@
 			<label index="tx_seminars_seminars.queue_size">Registration queue</label>
 			<label index="tx_seminars_seminars.offline_attendees">Number of offline-registered attendees:</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
+			<label index="tx_seminars_seminars.registrations">Registrations:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>

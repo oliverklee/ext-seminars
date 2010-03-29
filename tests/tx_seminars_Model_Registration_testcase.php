@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 	/**
@@ -122,10 +123,52 @@ class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function getEventReturnsEvent() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getNewGhost();
+		$this->fixture->setData(array('seminar' => $event));
+
+		$this->assertSame(
+			$event,
+			$this->fixture->getEvent()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSeminarReturnsEvent() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getNewGhost();
+		$this->fixture->setData(array('seminar' => $event));
+
+		$this->assertSame(
+			$event,
+			$this->fixture->getSeminar()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function setEventSetsEvent() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getNewGhost();
 		$this->fixture->setEvent($event);
+
+		$this->assertSame(
+			$event,
+			$this->fixture->getEvent()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSeminarSetsEvent() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getNewGhost();
+		$this->fixture->setSeminar($event);
 
 		$this->assertSame(
 			$event,

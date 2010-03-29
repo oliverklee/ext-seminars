@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	/**
@@ -68,6 +69,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 		'checkboxes' => 'tx_seminars_Mapper_Checkbox',
 		'requirements' => 'tx_seminars_Mapper_Event',
 		'dependencies' => 'tx_seminars_Mapper_Event',
+		'registrations' => 'tx_seminars_Mapper_Registration',
 	);
 
 	/**

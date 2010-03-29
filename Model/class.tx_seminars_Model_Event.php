@@ -1087,9 +1087,19 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether this event has unlimited vacancies.
+	 *
+	 * @return boolean TRUE if this event has unlimited vacancies, FALSE
+	 *                 otherwise
+	 */
+	public function hasUnlimitedVacancies() {
+		return !$this->hasMaximumAttendees();
+	}
+
+	/**
 	 * Returns whether this event has a registration queue.
 	 *
-	 * @return boolean true if this event has a registration queue, false
+	 * @return boolean TRUE if this event has a registration queue, FALSE
 	 *                 otherwise
 	 */
 	public function hasRegistrationQueue() {
@@ -1415,6 +1425,168 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function getOfflineRegistrations() {
 		return $this->getAsInteger('offline_attendees');
+	}
+
+	/**
+	 * Gets the registrations for this event.
+	 *
+	 * @return tx_oelib_List the registrations for this event (both regular and
+	 *                       on the waiting list), will be empty if this event
+	 *                       has no registrations
+	 */
+	public function getRegistrations() {
+		return $this->getAsList('registrations');
+	}
+
+	/**
+	 * Sets the registrations for this event.
+	 *
+	 * @param tx_oelib_List $registrations
+	 *       the registrations for this event (both regular and on the waiting
+	 *       list), may be empty
+	 */
+	public function setRegistrations(tx_oelib_List $registrations) {
+		$this->set('registrations', $registrations);
+	}
+
+	/**
+	 * Attaches a registration to this event.
+	 *
+	 * @param tx_seminars_Model_Registration $registration
+	 *        the registration to attach
+	 */
+	public function attachRegistration(
+		tx_seminars_Model_Registration $registration
+	) {
+		$this->getRegistrations()->add($registration);
+	}
+
+	/**
+	 * Gets the regular registrations for this event, ie. the registrations
+	 * that are not on the waiting list.
+	 *
+	 * @return tx_oelib_List the regular registrations for this event, will be
+	 *                       will be empty if this event no regular
+	 *                       registrations
+	 */
+	public function getRegularRegistrations() {
+		$regularRegistrations = tx_oelib_ObjectFactory::make('tx_oelib_List');
+
+		foreach ($this->getRegistrations() as $registration) {
+			if (!$registration->isOnRegistrationQueue()) {
+				$regularRegistrations->add($registration);
+			}
+		}
+
+		return $regularRegistrations;
+	}
+
+	/**
+	 * Gets the queue registrations for this event, ie. the registrations
+	 * that are no regular registrations (yet).
+	 *
+	 * @return tx_oelib_List the queue registrations for this event, will be
+	 *                       will be empty if this event no queue registrations
+	 */
+	public function getQueueRegistrations() {
+		$queueRegistrations = tx_oelib_ObjectFactory::make('tx_oelib_List');
+
+		foreach ($this->getRegistrations() as $registration) {
+			if ($registration->isOnRegistrationQueue()) {
+				$queueRegistrations->add($registration);
+			}
+		}
+
+		return $queueRegistrations;
+	}
+
+	/**
+	 * Checks whether this event has any registrations on its registration
+	 * queue (ie. on the waiting list).
+	 *
+	 * @return boolean TRUE if there is at least one registration on the queue,
+	 *                 FALSE otherwise
+	 */
+	public function hasQueueRegistrations() {
+		return !$this->getQueueRegistrations()->isEmpty();
+	}
+
+	/**
+	 * Returns the number of regularly registered seats for this event.
+	 *
+	 * This functions counts the number of registered seats from regular
+	 * registrations (but not from queue registrations) and the number of
+	 * offline registrations.
+	 *
+	 * @return boolean the number of registered seats for this event, will
+	 *                 be >= 0
+	 */
+	public function getRegisteredSeats() {
+		$registeredSeats = $this->getOfflineRegistrations();
+
+		foreach ($this->getRegularRegistrations() as $registration) {
+			$registeredSeats += $registration->getSeats();
+		}
+
+		return $registeredSeats;
+	}
+
+	/**
+	 * Checks whether this event has enough regular registrations to take place.
+	 *
+	 * If this event has zero as the minimum number of registrations, this
+	 * function will always return TRUE.
+	 *
+	 * @return boolean TRUE if this event has enough regular registrations to
+	 *                 to take place, FALSE otherwise
+	 */
+	public function hasEnoughRegistrations() {
+		return ($this->getRegisteredSeats() >= $this->getMinimumAttendees());
+	}
+
+	/**
+	 * Returns the number of vacancies for this event.
+	 *
+	 * If this event has an unlimited number of possible registrations, this
+	 * function will always return zero.
+	 *
+	 * @return integer the number of vacancies for this event, will be >= 0
+	 */
+	public function getVacancies() {
+		return max(
+			0,
+			$this->getMaximumAttendees() - $this->getRegisteredSeats()
+		);
+	}
+
+	/**
+	 * Checks whether this event has at least one vacancy.
+	 *
+	 * If this event has an unlimited number of possible registrations, this
+	 * function will always return TRUE.
+	 *
+	 *
+	 * @return boolean TRUE if this event has at least one vacancy
+	 *                 FALSE otherwise
+	 */
+	public function hasVacancies() {
+		if ($this->hasUnlimitedVacancies()) {
+			return TRUE;
+		}
+
+		return ($this->getVacancies() > 0);
+	}
+
+	/**
+	 * Checks whether this event is fully booked.
+	 *
+	 * If this event has an unlimited number of possible registrations, this
+	 * function will always return FALSE.
+	 *
+	 * @return boolean TRUE if this event is fully booked, false otherwise
+	 */
+	public function isFull() {
+		return !$this->hasVacancies();
 	}
 }
 

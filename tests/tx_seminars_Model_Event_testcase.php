@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
@@ -1347,6 +1348,667 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->fixture->getOfflineRegistrations()
+		);
+	}
+
+
+	///////////////////////////////////////
+	// Tests concerning the registrations
+	///////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationsReturnsRegistrations() {
+		$registrations = new tx_oelib_List();
+
+		$this->fixture->setData(array('registrations' => $registrations));
+
+		$this->assertSame(
+			$registrations,
+			$this->fixture->getRegistrations()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationsSetsRegistrations() {
+		$registrations = new tx_oelib_List();
+
+		$this->fixture->setRegistrations($registrations);
+
+		$this->assertSame(
+			$registrations,
+			$this->fixture->getRegistrations()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularRegistrationsReturnsRegularRegistrations() {
+		$registrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('registration_queue' => 0)
+			);
+		$registrations->add($registration);
+		$this->fixture->setRegistrations($registrations);
+
+		$this->assertEquals(
+			$registration->getUid(),
+			$this->fixture->getRegularRegistrations()->getUids()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegularRegistrationsNotReturnsQueueRegistrations() {
+		$registrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('registration_queue' => 1)
+			);
+		$registrations->add($registration);
+		$this->fixture->setRegistrations($registrations);
+
+		$this->assertTrue(
+			$this->fixture->getRegularRegistrations()->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getQueueRegistrationsReturnsQueueRegistrations() {
+		$registrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('registration_queue' => 1)
+			);
+		$registrations->add($registration);
+		$this->fixture->setRegistrations($registrations);
+
+		$this->assertEquals(
+			$registration->getUid(),
+			$this->fixture->getQueueRegistrations()->getUids()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getQueueRegistrationsNotReturnsRegularRegistrations() {
+		$registrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('registration_queue' => 0)
+			);
+		$registrations->add($registration);
+		$this->fixture->setRegistrations($registrations);
+
+		$this->assertTrue(
+			$this->fixture->getQueueRegistrations()->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue() {
+		$registrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('registration_queue' => 1)
+			);
+		$registrations->add($registration);
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getQueueRegistrations')
+		);
+		$event->expects($this->any())->method('getQueueRegistrations')
+			->will($this->returnValue($registrations));
+
+		$this->assertTrue(
+			$event->hasQueueRegistrations()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getQueueRegistrations')
+		);
+		$event->expects($this->any())->method('getQueueRegistrations')
+			->will($this->returnValue(new tx_oelib_List()));
+
+		$this->assertFalse(
+			$event->hasQueueRegistrations()
+		);
+
+		$event->__destruct();
+	}
+
+
+	//////////////////////////////////////////////////////////////////////
+	// Tests concerning hasUnlimitedVacancies
+	//////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasUnlimitedVacanciesForMaxAttendeesZeroReturnsTrue() {
+		$this->fixture->setData(array('attendees_max' => 0));
+
+		$this->assertTrue(
+			$this->fixture->hasUnlimitedVacancies()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasUnlimitedVacanciesForMaxAttendeesOneReturnsFalse() {
+		$this->fixture->setData(array('attendees_max' => 1));
+
+		$this->assertFalse(
+			$this->fixture->hasUnlimitedVacancies()
+		);
+	}
+
+
+	////////////////////////////////////////
+	// Tests concerning getRegisteredSeats
+	////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getRegisteredSeatsForNoRegularRegistrationsReturnsZero() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegularRegistrations')
+		);
+		$event->setData(array());
+		$event->expects($this->any())->method('getRegularRegistrations')
+			->will($this->returnValue(new tx_oelib_List()));
+
+		$this->assertEquals(
+			0,
+			$event->getRegisteredSeats()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegisteredSeatsCountsSingleSeatRegularRegistrations() {
+		$registrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('seats' => 1)
+			);
+		$registrations->add($registration);
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegularRegistrations')
+		);
+		$event->setData(array());
+		$event->expects($this->any())->method('getRegularRegistrations')
+			->will($this->returnValue($registrations));
+
+		$this->assertEquals(
+			1,
+			$event->getRegisteredSeats()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegisteredSeatsCountsMultiSeatRegularRegistrations() {
+		$registrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('seats' => 2)
+			);
+		$registrations->add($registration);
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegularRegistrations')
+		);
+		$event->setData(array());
+		$event->expects($this->any())->method('getRegularRegistrations')
+			->will($this->returnValue($registrations));
+
+		$this->assertEquals(
+			2,
+			$event->getRegisteredSeats()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegisteredSeatsNotCountsQueueRegistrations() {
+		$queueRegistrations = new tx_oelib_List();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
+				array('seats' => 1)
+			);
+		$queueRegistrations->add($registration);
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getRegularRegistrations', 'getQueueRegistrations')
+		);
+		$event->setData(array());
+		$event->expects($this->any())->method('getQueueRegistrations')
+			->will($this->returnValue($queueRegistrations));
+		$event->expects($this->any())->method('getRegularRegistrations')
+			->will($this->returnValue(new tx_oelib_List()));
+
+		$this->assertEquals(
+			0,
+			$event->getRegisteredSeats()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegisteredSeatsCountsOfflineRegistrations() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegularRegistrations')
+		);
+		$event->setData(array('offline_attendees' => 2));
+		$event->expects($this->any())->method('getRegularRegistrations')
+			->will($this->returnValue(new tx_oelib_List()));
+
+		$this->assertEquals(
+			2,
+			$event->getRegisteredSeats()
+		);
+
+		$event->__destruct();
+	}
+
+
+	////////////////////////////////////////////
+	// Tests concerning hasEnoughRegistrations
+	////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasEnoughRegistrationsForZeroSeatsAndZeroNeededReturnsTrue() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_min' => 0));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(0));
+
+		$this->assertTrue(
+			$event->hasEnoughRegistrations()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEnoughRegistrationsForLessSeatsThanNeededReturnsFalse() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_min' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(1));
+
+		$this->assertFalse(
+			$event->hasEnoughRegistrations()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEnoughRegistrationsForAsManySeatsAsNeededReturnsTrue() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_min' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertTrue(
+			$event->hasEnoughRegistrations()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasEnoughRegistrationsForMoreSeatsThanNeededReturnsTrue() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_min' => 1));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertTrue(
+			$event->hasEnoughRegistrations()
+		);
+
+		$event->__destruct();
+	}
+
+
+	//////////////////////////////////
+	// Tests concerning getVacancies
+	//////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getVacanciesForOneRegisteredAndTwoMaximumReturnsOne() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(1));
+
+		$this->assertEquals(
+			1,
+			$event->getVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getVacanciesForAsManySeatsRegisteredAsMaximumReturnsZero() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertEquals(
+			0,
+			$event->getVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsZero() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 1));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertEquals(
+			0,
+			$event->getVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsZero() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 0));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(1));
+
+		$this->assertEquals(
+			0,
+			$event->getVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+
+	//////////////////////////////////
+	// Tests concerning hasVacancies
+	//////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(1));
+
+		$this->assertTrue(
+			$event->hasVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertFalse(
+			$event->hasVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 1));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertFalse(
+			$event->hasVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 0));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(1));
+
+		$this->assertTrue(
+			$event->hasVacancies()
+		);
+
+		$event->__destruct();
+	}
+
+
+	////////////////////////////
+	// Tests concerning isFull
+	////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function isFullForLessSeatsThanMaximumReturnsFalse() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(1));
+
+		$this->assertFalse(
+			$event->isFull()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFullForAsManySeatsAsMaximumReturnsTrue() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 2));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertTrue(
+			$event->isFull()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFullForMoreSeatsThanMaximumReturnsTrue() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 1));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(2));
+
+		$this->assertTrue(
+			$event->isFull()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFullForZeroSeatsAndUnlimitedMaximumReturnsFalse() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 0));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(0));
+
+		$this->assertFalse(
+			$event->isFull()
+		);
+
+		$event->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFullForPositiveSeatsAndUnlimitedMaximumReturnsFalse() {
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getRegisteredSeats')
+		);
+		$event->setData(array('attendees_max' => 0));
+		$event->expects($this->any())->method('getRegisteredSeats')
+			->will($this->returnValue(1));
+
+		$this->assertFalse(
+			$event->isFull()
+		);
+
+		$event->__destruct();
+	}
+
+
+	////////////////////////////////////////
+	// Tests concerning attachRegistration
+	////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function appendRegistrationAddsRegistration() {
+		$this->fixture->setRegistrations(new tx_oelib_List());
+
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getNewGhost();
+		$this->fixture->attachRegistration($registration);
+
+		$this->assertTrue(
+			$this->fixture->getRegistrations()->hasUid($registration->getUid())
+		);
+
+	}
+
+	/**
+	 * @test
+	 */
+	public function appendRegistrationNotRemovesExistingRegistration() {
+		$registrations = new tx_oelib_List();
+		$oldRegistration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getNewGhost();
+		$registrations->add($oldRegistration);
+		$this->fixture->setRegistrations($registrations);
+
+		$newRegistration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getNewGhost();
+		$this->fixture->attachRegistration($newRegistration);
+
+		$this->assertTrue(
+			$this->fixture->getRegistrations()->hasUid($oldRegistration->getUid())
 		);
 	}
 }
