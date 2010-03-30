@@ -70,6 +70,20 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	private $isTemplateInitialized = false;
 
 	/**
+	 * hook objects for this class
+	 *
+	 * @var array
+	 */
+	private $hooks = array();
+
+	/**
+	 * whether the hooks in $this->hooks have been retrieved
+	 *
+	 * @var boolean
+	 */
+	private $hooksHaveBeenRetrieved = FALSE;
+
+	/**
 	 * @var integer use text format for e-mails to attendees
 	 */
 	const SEND_TEXT_MAIL = 0;
@@ -102,6 +116,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$this->registration->__destruct();
 			unset($this->registration);
 		}
+		$this->hooks = array();
 
 		parent::__destruct();
 	}
@@ -131,31 +146,40 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Checks whether is possible to register for a given seminar at all:
-	 * if a possibly logged-in user hasn't registered yet for this seminar,
-	 * if the seminar isn't canceled, full etc.
+	 * Checks whether is possible to register for a given event at all:
+	 * if a possibly logged-in user hasn't registered yet for this event,
+	 * if the event isn't canceled, full etc.
 	 *
-	 * If no user is logged in, it is just checked whether somebody could register
-	 * for this seminar.
+	 * If no user is logged in, it is just checked whether somebody could
+	 * register for this event.
 	 *
-	 * Returns true if everything is okay, false otherwise.
+	 * This function works even if no user is logged in.
 	 *
-	 * This function even works if no user is logged in.
+	 * @param tx_seminars_seminar $event
+	 *        am event for which we'll check if it is possible to register
 	 *
-	 * @param object a seminar for which we'll check if it is possible to
-	 *               register
-	 *
-	 * @return boolean true if everything is okay for the link, false otherwise
+	 * @return boolean TRUE if it is okay to register, FALSE otherwise
 	 */
 	public function canRegisterIfLoggedIn(tx_seminars_seminar $event) {
-		if (!$event->canSomebodyRegister()) {
-			return false;
+		if (!$seminar->canSomebodyRegister()) {
+			return FALSE;
 		}
 		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
-			return true;
+			return TRUE;
 		}
 
-		return $this->couldThisUserRegister($event);
+		$canRegister = $this->couldThisUserRegister($seminar);
+
+		$user = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		foreach ($this->getHooks() as $hook) {
+			if (method_exists($hook, 'canRegisterForSeminar')) {
+				$canRegister = $canRegister
+					&& $hook->canRegisterForSeminar($seminar, $user);
+			}
+		}
+
+		return $canRegister;
 	}
 
 	/**
@@ -1433,6 +1457,27 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 */
 	public function getRegistration() {
 		return $this->registration;
+	}
+
+	/**
+	 * Gets all hooks for this class.
+	 *
+	 * @return array the hook objects, will be empty if no hooks have been set
+	 */
+	private function getHooks() {
+		if (!$this->hooksHaveBeenRetrieved) {
+			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
+				['seminars']['registration'];
+			if (is_array($hookClasses)) {
+				foreach ($hookClasses as $hookClass) {
+					$this->hooks[] = t3lib_div::getUserObj($hookClass);
+				}
+			}
+
+			$this->hooksHaveBeenRetrieved = TRUE;
+		}
+
+		return $this->hooks;
 	}
 }
 

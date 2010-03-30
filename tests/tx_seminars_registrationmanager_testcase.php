@@ -81,7 +81,24 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	private $cachedSeminar = null;
 
+	/**
+	 * backed-up extension configuration of the TYPO3 configuration variables
+	 *
+	 * @var array
+	 */
+	private $extConfBackup = array();
+
+	/**
+	 * backed-up T3_VAR configuration
+	 *
+	 * @var array
+	 */
+	private $t3VarBackup = array();
+
 	protected function setUp() {
+		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
+
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
@@ -148,6 +165,9 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		unset(
 			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework
 		);
+
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
+		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
 	}
 
 
@@ -683,13 +703,19 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	// Tests concerning canRegisterIfLoggedIn
 	///////////////////////////////////////////
 
-	public function testCanRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue() {
 		$this->assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedInUserAndRegistrationOpenReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedInUserAndRegistrationOpenReturnsTrue() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertTrue(
@@ -697,7 +723,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserReturnsFalse() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -711,8 +740,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowedReturnsTrue() {
-		$this->seminar->setAllowsMultipleRegistrations(true);
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowedReturnsTrue() {
+		$this->seminar->setAllowsMultipleRegistrations(TRUE);
 
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
@@ -727,7 +759,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedInButBlockedUserReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedInButBlockedUserReturnsFalse() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -753,7 +788,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarReturnsFalse() {
 		$this->createBookedOutSeminar();
 
 		$this->assertFalse(
@@ -761,7 +799,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse() {
 		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
 		$this->assertFalse(
@@ -769,16 +810,22 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanRegisterIfLoggedInForLoggedOutUserAndSeminarWithoutRegistrationReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedOutUserAndSeminarWithoutRegistrationReturnsFalse() {
 		$this->seminar->setAttendancesMax(0);
-		$this->seminar->setNeedsRegistration(false);
+		$this->seminar->setNeedsRegistration(FALSE);
 
 		$this->assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
 
-	public function test_CanRegisterIfLoggedIn_ForLoggedOutUserAndSeminarWithUnlimitedVacancies_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertTrue(
@@ -786,7 +833,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedIn_ForLoggedInUserAndSeminarWithUnlimitedVacancies_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 		$this->testingFramework->createAndLoginFrontEndUser();
 
@@ -795,23 +845,107 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedIn_ForLoggedOutUserAndFullyBookedSeminarWithQueue_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarWithQueueReturnsTrue() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
 
-	public function test_CanRegisterIfLoggedIn_ForLoggedInUserAndFullyBookedSeminarWithQueue_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForLoggedInUserAndFullyBookedSeminarWithQueueReturnsTrue() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForRegistrationPossibleCallsCanRegisterForSeminarHook() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$user = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
+		$hook->expects($this->once())->method('canRegisterForSeminar')
+			->with($this->seminar, $user);
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->canRegisterIfLoggedIn($this->seminar);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForRegistrationNotPossibleNotCallsCanRegisterForSeminarHook() {
+		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
+		$hook->expects($this->never())->method('canRegisterForSeminar');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->canRegisterIfLoggedIn($this->seminar);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForRegistrationPossibleAndHookReturningTrueReturnsTrue() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
+		$hook->expects($this->once())->method('canRegisterForSeminar')
+			->will($this->returnValue(TRUE));
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->assertTrue(
+			$this->fixture->canRegisterIfLoggedIn($this->seminar)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInForRegistrationPossibleAndHookReturningFalseReturnsFalse() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
+		$hook->expects($this->once())->method('canRegisterForSeminar')
+			->will($this->returnValue(FALSE));
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
