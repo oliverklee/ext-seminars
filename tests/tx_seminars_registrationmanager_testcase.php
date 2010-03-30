@@ -3991,5 +3991,91 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->fixture->registrationHasStarted($this->seminar)
 		);
 	}
+
+
+	////////////////////////////////////////
+	// Tests concerning createRegistration
+	////////////////////////////////////////
+
+	/**
+	 * @TODO: This is just a transitional test that needs to be removed once
+	 * createRegistration uses the data mapper to save the registration.
+	 *
+	 * @test
+	 */
+	public function createRegistrationSavesRegistration() {
+		$this->createAndLogInFrontEndUser();
+
+		$plugin = new tx_seminars_pi1();
+		$plugin->cObj = $GLOBALS['TSFE']->cObj;
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager',
+			array(
+				'notifyAttendee', 'notifyOrganizers',
+				'sendAdditionalNotification', 'setRegistrationData'
+			)
+		);
+
+		$fixture->createRegistration(
+			$this->seminar, array(), $plugin
+		);
+
+		$this->assertTrue(
+			$fixture->getRegistration() instanceof tx_seminars_registration
+		);
+		$uid = $fixture->getRegistration()->getUid();
+		$this->assertTrue(
+			// We're not using the testing framework here because the record
+			// is not marked as dummy record.
+			tx_oelib_db::existsRecordWithUid(
+				'tx_seminars_attendances', $uid
+			)
+		);
+
+		$fixture->__destruct();
+		$plugin->__destruct();
+
+		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createRegistrationCallsSeminarRegistrationCreatedHook() {
+		$this->createAndLoginFrontEndUser();
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('seminarRegistrationCreated'));
+		// We cannot test for the expected parameters because the registration
+		// instance does not exist yet at this point.
+		$hook->expects($this->once())->method('seminarRegistrationCreated');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$plugin = new tx_seminars_pi1();
+		$plugin->cObj = $GLOBALS['TSFE']->cObj;
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager',
+			array(
+				'notifyAttendee', 'notifyOrganizers',
+				'sendAdditionalNotification', 'setRegistrationData'
+			)
+		);
+
+		$fixture->createRegistration(
+			$this->seminar, array(), $plugin
+		);
+
+		$uid = $fixture->getRegistration()->getUid();
+
+		$fixture->__destruct();
+		$plugin->__destruct();
+
+		// @TODO Remove this delete once the registration is saved by the data
+		// mapper.
+		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+	}
 }
 ?>

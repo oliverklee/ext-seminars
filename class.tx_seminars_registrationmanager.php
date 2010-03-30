@@ -589,11 +589,18 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$this->registration->setRegistrationData(
 			$seminar,
 			$this->getFeUserUid(),
-			$registrationData
+			$formData
 		);
 		$this->registration->commitToDb();
-
 		$seminar->calculateStatistics();
+
+		$user = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		foreach ($this->getHooks() as $hook) {
+			if (method_exists($hook, 'seminarRegistrationCreated')) {
+				$hook->seminarRegistrationCreated($this->registration, $user);
+			}
+		}
 
 		if ($this->registration->isOnRegistrationQueue()) {
 			$this->notifyAttendee(
