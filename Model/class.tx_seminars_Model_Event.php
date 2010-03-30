@@ -1458,6 +1458,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	public function attachRegistration(
 		tx_seminars_Model_Registration $registration
 	) {
+		$registration->setEvent($this);
 		$this->getRegistrations()->add($registration);
 	}
 

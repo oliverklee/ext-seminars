@@ -1980,23 +1980,23 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function appendRegistrationAddsRegistration() {
+	public function attachRegistrationAddsRegistration() {
 		$this->fixture->setRegistrations(new tx_oelib_List());
 
 		$registration = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Registration')->getNewGhost();
+			::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array());
 		$this->fixture->attachRegistration($registration);
 
 		$this->assertTrue(
 			$this->fixture->getRegistrations()->hasUid($registration->getUid())
 		);
-
 	}
 
 	/**
 	 * @test
 	 */
-	public function appendRegistrationNotRemovesExistingRegistration() {
+	public function attachRegistrationNotRemovesExistingRegistration() {
 		$registrations = new tx_oelib_List();
 		$oldRegistration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getNewGhost();
@@ -2004,11 +2004,29 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRegistrations($registrations);
 
 		$newRegistration = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Registration')->getNewGhost();
+			::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array());
 		$this->fixture->attachRegistration($newRegistration);
 
 		$this->assertTrue(
 			$this->fixture->getRegistrations()->hasUid($oldRegistration->getUid())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function attachRegistrationSetsEventForRegistration() {
+		$this->fixture->setRegistrations(new tx_oelib_List());
+
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array());
+		$this->fixture->attachRegistration($registration);
+
+		$this->assertSame(
+			$this->fixture,
+			$registration->getEvent()
 		);
 	}
 }
