@@ -133,6 +133,16 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	}
 
 	/**
+	 * Sets whether this registration is on the registration queue.
+	 *
+	 * @param boolean $isOnQueue
+	 *        whether this registration should be on the registration queue
+	 */
+	public function setOnRegistrationQueue($isOnQueue) {
+		$this->setAsBoolean('registration_queue', $isOnQueue);
+	}
+
+	/**
 	 * Returns the name of the price of this registration.
 	 *
 	 * @return string the name of the price of this registration,

@@ -177,9 +177,9 @@ class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////
-	// Tests regarding isOnRegistrationQueue().
-	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	// Tests regarding isOnRegistrationQueue and setOnRegistrationQueue
+	/////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @test
@@ -199,6 +199,30 @@ class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 		$this->fixture->setData(array('registration_queue' => TRUE));
 
 		$this->assertTrue(
+			$this->fixture->isOnRegistrationQueue()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setOnRegistrationQueueTrueSetsRegistrationQueuetoToTrue() {
+		$this->fixture->setData(array('registration_queue' => FALSE));
+		$this->fixture->setOnRegistrationQueue(TRUE);
+
+		$this->assertTrue(
+			$this->fixture->isOnRegistrationQueue()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setOnRegistrationQueueFalseSetsRegistrationQueuetoToFalse() {
+		$this->fixture->setData(array('registration_queue' => TRUE));
+		$this->fixture->setOnRegistrationQueue(FALSE);
+
+		$this->assertFalse(
 			$this->fixture->isOnRegistrationQueue()
 		);
 	}
