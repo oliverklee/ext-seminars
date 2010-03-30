@@ -235,6 +235,26 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		return new tx_seminars_registrationchild($registrationUid);
 	}
 
+	/**
+	 * Creates a subclass of the fixture class that makes protected methods
+	 * public where necessary.
+	 *
+	 * @return string the class name of the subclass, will not be empty
+	 */
+	private function createAccessibleProxyClass() {
+		$testingClassName = 'tx_seminars_registrationmanager' . uniqid();
+
+		if (!class_exists($testingClassName)) {
+			eval(
+				'class ' . $testingClassName .
+					' extends tx_seminars_registrationmanager {' .
+				'}'
+			);
+		}
+
+		return $testingClassName;
+	}
+
 
 	////////////////////////////////////
 	// Tests for the utility functions
@@ -298,6 +318,18 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fullyBookedSeminar->getUid() > 0
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAccessibleProxyClassCreatesFixtureSubclass() {
+		$className = $this->createAccessibleProxyClass();
+		$instance = new $className();
+
+		$this->assertTrue(
+			$instance instanceof tx_seminars_registrationmanager
 		);
 	}
 

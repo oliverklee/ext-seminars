@@ -542,15 +542,14 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * The additional notifications will only be sent if this is enabled in the
 	 * TypoScript setup (which is the default).
 	 *
-	 * @param object the seminar object (that's the seminar we would like to
-	 *               register for)
-	 * @param array associative array with the registration data the user has
-	 *              just entered
-	 * @param tslib_pibase live plugin object
+	 * @param tx_seminars_seminar $seminar
+	 *        the seminar we would like to register for
+	 * @param array $formData
+	 *        the raw registration data from the registration form
+	 * @param tslib_pibase $plugin live plugin object
 	 */
 	public function createRegistration(
-		tx_seminars_seminar $seminar, array $registrationData,
-		tslib_pibase $plugin
+		tx_seminars_seminar $seminar, array $formData, tslib_pibase $plugin
 	) {
 		$this->registration = tx_oelib_ObjectFactory::make(
 			'tx_seminars_registration', $plugin->cObj
@@ -1421,6 +1420,19 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				$unregistrationDeadline
 			)
 		);
+	}
+
+	/**
+	 * Returns the (old) registration created via createRegistration.
+	 *
+	 * @TODO: This is just a transitional helper function that can be removed
+	 * once createRegistration does not use the old registration class anymore.
+	 *
+	 * @return tx_seminars_registration the created registration, will be null
+	 *                                  if no registration has been created
+	 */
+	public function getRegistration() {
+		return $this->registration;
 	}
 }
 
