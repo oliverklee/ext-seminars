@@ -1636,7 +1636,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	// Tests concerning removeRegistration
 	////////////////////////////////////////
 
-	public function testRemoveRegistrationHidesRegistrationOfUser() {
+	/**
+	 * @test
+	 */
+	public function removeRegistrationHidesRegistrationOfUser() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$seminarUid = $this->seminar->getUid();
 		$this->createFrontEndPages();

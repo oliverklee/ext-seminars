@@ -624,53 +624,51 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 	/**
 	 * Removes the given registration (if it exists and if it belongs to the
-	 * currently logged in FE user).
+	 * currently logged-in FE user).
 	 *
-	 * @param integer the UID of the registration that should be removed
-	 * @param tslib_pibase live plugin object
+	 * @param integer $uid the UID of the registration that should be removed
+	 * @param tslib_pibase $plugin a live plugin object
 	 */
-	public function removeRegistration($registrationUid, tslib_pibase $plugin) {
-		if (tx_seminars_objectfromdb::recordExists(
-				$registrationUid,
-				SEMINARS_TABLE_ATTENDANCES
-		)){
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+	public function removeRegistration($uid, tslib_pibase $plugin) {
+		if (!tx_seminars_objectfromdb::recordExists(
+			$uid, SEMINARS_TABLE_ATTENDANCES
+		)) {
+			return;
+		}
+		$this->registration = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registration',
+			$plugin->cObj,
+			tx_oelib_db::select(
 				'*',
 				SEMINARS_TABLE_ATTENDANCES,
-				SEMINARS_TABLE_ATTENDANCES . '.uid=' . $registrationUid .
+				'uid = ' . $uid .
 					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
-			);
-
-			if ($dbResult) {
-				$this->registration = tx_oelib_ObjectFactory::make(
-					'tx_seminars_registration', $plugin->cObj, $dbResult
-				);
-
-				if ($this->registration->getUser() == $this->getFeUserUid()) {
-					tx_oelib_db::update(
-						SEMINARS_TABLE_ATTENDANCES,
-						SEMINARS_TABLE_ATTENDANCES .
-							'.uid = ' . $registrationUid,
-						array(
-							'hidden' => 1,
-							'tstamp' => $GLOBALS['SIM_EXEC_TIME']
-						)
-					);
-
-					$this->notifyAttendee(
-						$this->registration,
-						$plugin,
-						'confirmationOnUnregistration'
-					);
-					$this->notifyOrganizers(
-						$this->registration,
-						'notificationOnUnregistration'
-					);
-
-					$this->fillVacancies($plugin);
-				}
-			}
+			)
+		);
+		if ($this->registration->getUser() !== $this->getFeUserUid()) {
+			return;
 		}
+
+		tx_oelib_db::update(
+			SEMINARS_TABLE_ATTENDANCES,
+			'uid = ' . $uid,
+			array(
+				'hidden' => 1,
+				'tstamp' => $GLOBALS['SIM_EXEC_TIME']
+			)
+		);
+
+		$this->notifyAttendee(
+			$this->registration,
+			$plugin,
+			'confirmationOnUnregistration'
+		);
+		$this->notifyOrganizers(
+			$this->registration,
+			'notificationOnUnregistration'
+		);
+
+		$this->fillVacancies($plugin);
 	}
 
 	/**
