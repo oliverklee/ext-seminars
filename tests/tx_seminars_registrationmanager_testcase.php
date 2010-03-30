@@ -955,14 +955,20 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	// Tests concerning canRegisterIfLoggedInMessage
 	//////////////////////////////////////////////////
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndSeminarRegistrationOpen_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarRegistrationOpenReturnsEmptyString() {
 		$this->assertEquals(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedInUserAndRegistrationOpen_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedInUserAndRegistrationOpenReturnsEmptyString() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertEquals(
@@ -971,7 +977,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedInButAlreadyRegisteredUser_ReturnsAlreadyRegisteredMessage() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredUserReturnsAlreadyRegisteredMessage() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -986,7 +995,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowed_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowedReturnsEmptyString() {
 		$this->seminar->setAllowsMultipleRegistrations(true);
 
 		$this->testingFramework->createRecord(
@@ -1003,7 +1015,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedInButBlockedUser_ReturnsUserIsBlockedMessage() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedInButBlockedUserReturnsUserIsBlockedMessage() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -1030,7 +1045,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndFullyBookedSeminar_ReturnsFullyBookedMessage() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedMessage() {
 		$this->createBookedOutSeminar();
 
 		$this->assertEquals(
@@ -1039,7 +1057,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndCanceledSeminar_ReturnsSeminarCancelledMessage() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedOutUserAndCanceledSeminarReturnsSeminarCancelledMessage() {
 		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
 		$this->assertEquals(
@@ -1048,7 +1069,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndSeminarWithoutRegistration_ReturnsNoRegistrationNeededMessage() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarWithoutRegistrationReturnsNoRegistrationNeededMessage() {
 		$this->seminar->setAttendancesMax(0);
 		$this->seminar->setNeedsRegistration(false);
 
@@ -1058,7 +1082,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndSeminarWithUnlimitedVacancies_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsEmptyString() {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertEquals(
@@ -1067,7 +1094,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedInUserAndSeminarWithUnlimitedVacancies_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsEmptyString() {
 		$this->seminar->setUnlimitedVacancies();
 		$this->testingFramework->createAndLoginFrontEndUser();
 
@@ -1077,7 +1107,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndFullyBookedSeminarWithQueue_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarWithQueueReturnsEmptyString() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
 		$this->seminar->setRegistrationQueue(true);
@@ -1088,7 +1121,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterIfLoggedInMessage_ForLoggedInUserAndFullyBookedSeminarWithQueue_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForLoggedInUserAndFullyBookedSeminarWithQueueReturnsEmptyString() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
 		$this->seminar->setRegistrationQueue(true);
@@ -1096,6 +1132,121 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForRegistrationPossibleCallsCanUserRegisterForSeminarMessageHook() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$user = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));
+		$hook->expects($this->once())->method('canRegisterForSeminarMessage')
+			->with($this->seminar, $user);
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->canRegisterIfLoggedInMessage($this->seminar);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForRegistrationNotPossibleNotCallsCanUserRegisterForSeminarMessageHook() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));
+		$hook->expects($this->never())->method('canRegisterForSeminarMessage');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->canRegisterIfLoggedInMessage($this->seminar);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForRegistrationPossibleReturnsStringFromHook() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));
+		$hook->expects($this->once())->method('canRegisterForSeminarMessage')
+			->will($this->returnValue('Hello world!'));
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->assertEquals(
+			'Hello world!',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForRegistrationPossibleReturnsNonEmptyStringFromFirstHook() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$hookClass1 = uniqid('tx_registrationHook');
+		$hook1 = $this->getMock($hookClass1, array('canRegisterForSeminarMessage'));
+		$hook1->expects($this->any())->method('canRegisterForSeminarMessage')
+			->will($this->returnValue('message 1'));
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass1] = $hook1;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass1] = $hookClass1;
+
+		$hookClass2 = uniqid('tx_registrationHook');
+		$hook2 = $this->getMock($hookClass2, array('canRegisterForSeminarMessage'));
+		$hook2->expects($this->any())->method('canRegisterForSeminarMessage')
+			->will($this->returnValue('message 2'));
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass2] = $hook2;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass2] = $hookClass2;
+
+		$this->assertEquals(
+			'message 1',
+			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function canRegisterIfLoggedInMessageForRegistrationPossibleReturnsFirstNonEmptyStringFromHooks() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$hookClass1 = uniqid('tx_registrationHook');
+		$hook1 = $this->getMock($hookClass1, array('canRegisterForSeminarMessage'));
+		$hook1->expects($this->any())->method('canRegisterForSeminarMessage')
+			->will($this->returnValue(''));
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass1] = $hook1;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass1] = $hookClass1;
+
+		$hookClass2 = uniqid('tx_registrationHook');
+		$hook2 = $this->getMock($hookClass2, array('canRegisterForSeminarMessage'));
+		$hook2->expects($this->any())->method('canRegisterForSeminarMessage')
+			->will($this->returnValue('message 2'));
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass2] = $hook2;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass2] = $hookClass2;
+
+		$this->assertEquals(
+			'message 2',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
 	}

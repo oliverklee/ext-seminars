@@ -203,27 +203,35 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @return string error message or empty string
 	 */
-	public function canRegisterIfLoggedInMessage(tx_seminars_seminar $seminar) {
-		$result = '';
+	public function canRegisterIfLoggedInMessage(tx_seminars_seminar $event) {
+		$message = '';
 
-		if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-			&& $this->isUserBlocked($seminar)
-		) {
-			// The current user is already blocked for this event.
-			$result = $this->translate('message_userIsBlocked');
-		} elseif (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-			&& !$this->couldThisUserRegister($seminar)
-		) {
-			// The current user can not register for this event (no multiple
-			// registrations are possible and the user is already registered).
-			$result = $this->translate('message_alreadyRegistered');
-		} elseif (!$seminar->canSomebodyRegister()) {
-			// it is not possible to register for this seminar at all (it is
-			// canceled, full, etc.)
-			$result = $seminar->canSomebodyRegisterMessage();
+		$isLoggedIn = tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+
+		if ($isLoggedIn	&& $this->isUserBlocked($event)) {
+			$message = $this->translate('message_userIsBlocked');
+		} elseif ($isLoggedIn && !$this->couldThisUserRegister($event)) {
+			$message = $this->translate('message_alreadyRegistered');
+		} elseif (!$event->canSomebodyRegister()) {
+			$message = $event->canSomebodyRegisterMessage();
 		}
 
-		return $result;
+		if ($isLoggedIn && ($message == '')) {
+			$user = tx_oelib_FrontEndLoginManager::getInstance()
+				->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+			foreach ($this->getHooks() as $hook) {
+				if (method_exists($hook, 'canRegisterForSeminarMessage')) {
+					$message = $hook->canRegisterForSeminarMessage(
+						$event, $user
+					);
+					if ($message !== '') {
+						break;
+					}
+				}
+			}
+		}
+
+		return $message;
 	}
 
 	/**
