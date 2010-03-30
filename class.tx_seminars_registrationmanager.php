@@ -161,21 +161,21 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return boolean TRUE if it is okay to register, FALSE otherwise
 	 */
 	public function canRegisterIfLoggedIn(tx_seminars_seminar $event) {
-		if (!$seminar->canSomebodyRegister()) {
+		if (!$event->canSomebodyRegister()) {
 			return FALSE;
 		}
 		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return TRUE;
 		}
 
-		$canRegister = $this->couldThisUserRegister($seminar);
+		$canRegister = $this->couldThisUserRegister($event);
 
 		$user = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 		foreach ($this->getHooks() as $hook) {
 			if (method_exists($hook, 'canRegisterForSeminar')) {
 				$canRegister = $canRegister
-					&& $hook->canRegisterForSeminar($seminar, $user);
+					&& $hook->canRegisterForSeminar($event, $user);
 			}
 		}
 
