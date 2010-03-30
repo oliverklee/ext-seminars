@@ -1667,6 +1667,35 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function removeRegistrationCallsSeminarRegistrationRemovedHook() {
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('seminarRegistrationRemoved'));
+		// We cannot test for the expected parameters because the registration
+		// instance does not exist yet at this point.
+		$hook->expects($this->once())->method('seminarRegistrationRemoved');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+		$seminarUid = $this->seminar->getUid();
+		$this->createFrontEndPages();
+
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $userUid,
+				'seminar' => $seminarUid,
+			)
+		);
+
+		$this->fixture->removeRegistration($registrationUid, $this->pi1);
+	}
+
+	/**
+	 * @test
+	 */
 	public function removeRegistrationWithFittingQueueRegistrationMovesItFromQueue() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$seminarUid = $this->seminar->getUid();
@@ -1695,6 +1724,44 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ATTENDANCES,
 			'registration_queue = 0 AND uid = ' . $queueRegistrationUid
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeRegistrationWithFittingQueueRegistrationCallsSeminarRegistrationMovedFromQueueHook() {
+		$hookClass = uniqid('tx_registrationHook');
+		$hook = $this->getMock($hookClass, array('seminarRegistrationMovedFromQueue'));
+		// We cannot test for the expected parameters because the registration
+		// instance does not exist yet at this point.
+		$hook->expects($this->once())->method('seminarRegistrationMovedFromQueue');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+		$seminarUid = $this->seminar->getUid();
+		$this->createFrontEndPages();
+
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $userUid,
+				'seminar' => $seminarUid,
+			)
+		);
+		$queueRegistrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $userUid,
+				'seminar' => $seminarUid,
+				'seats' => 1,
+				'registration_queue' => 1,
+			)
+		);
+
+		$this->fixture->removeRegistration($registrationUid, $this->pi1);
 	}
 
 

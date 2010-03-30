@@ -649,6 +649,14 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
+		$user = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		foreach ($this->getHooks() as $hook) {
+			if (method_exists($hook, 'seminarRegistrationRemoved')) {
+				$hook->seminarRegistrationRemoved($this->registration, $user);
+			}
+		}
+
 		tx_oelib_db::update(
 			SEMINARS_TABLE_ATTENDANCES,
 			'uid = ' . $uid,
@@ -706,6 +714,15 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 					array('registration_queue' => 0)
 				);
 				$vacancies -= $registration->getSeats();
+
+				$user = $registration->getFrontEndUser();
+				foreach ($this->getHooks() as $hook) {
+					if (method_exists($hook, 'seminarRegistrationMovedFromQueue')) {
+						$hook->seminarRegistrationMovedFromQueue(
+							$registration, $user
+						);
+					}
+				}
 
 				$this->notifyAttendee(
 					$registration,
