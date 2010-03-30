@@ -675,60 +675,55 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Fills vacancies created through a unregistration with attendees from the
 	 * registration queue.
 	 *
-	 * @param tslib_pibase live plugin object
+	 * @param tslib_pibase $plugin live plugin object
 	 */
 	private function fillVacancies(tslib_pibase $plugin) {
 		$seminar = $this->registration->getSeminarObject();
 		$seminar->calculateStatistics();
+		if (!$seminar->hasVacancies()) {
+			return;
+		}
 
-		if ($seminar->hasVacancies()) {
-			$vacancies = $seminar->getVacancies();
+		$vacancies = $seminar->getVacancies();
 
-			$registrationBagBuilder = tx_oelib_ObjectFactory::make(
-				'tx_seminars_registrationBagBuilder'
-			);
-			$registrationBagBuilder->limitToEvent($seminar->getUid());
-			$registrationBagBuilder->limitToOnQueue();
-			$registrationBagBuilder->limitToSeatsAtMost(
-				$seminar->getVacancies()
-			);
+		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registrationBagBuilder'
+		);
+		$registrationBagBuilder->limitToEvent($seminar->getUid());
+		$registrationBagBuilder->limitToOnQueue();
+		$registrationBagBuilder->limitToSeatsAtMost($vacancies);
 
-			$bag = $registrationBagBuilder->build();
-			foreach ($bag as $registration) {
-				if ($vacancies <= 0) {
-					break;
-				}
+		$bag = $registrationBagBuilder->build();
+		foreach ($bag as $registration) {
+			if ($vacancies <= 0) {
+				break;
+			}
 
-				if ($registration->getSeats() <= $vacancies) {
-					tx_oelib_db::update(
-						SEMINARS_TABLE_ATTENDANCES,
-						'uid = ' . $registration->getUid(),
-						array(
-							'registration_queue' => 0
-						)
-					);
-					$vacancies -= $registration->getSeats();
+			if ($registration->getSeats() <= $vacancies) {
+				tx_oelib_db::update(
+					SEMINARS_TABLE_ATTENDANCES,
+					'uid = ' . $registration->getUid(),
+					array('registration_queue' => 0)
+				);
+				$vacancies -= $registration->getSeats();
 
-					$this->notifyAttendee(
-						$registration,
-						$plugin,
-						'confirmationOnQueueUpdate'
-					);
-					$this->notifyOrganizers(
-						$registration, 'notificationOnQueueUpdate'
-					);
+				$this->notifyAttendee(
+					$registration,
+					$plugin,
+					'confirmationOnQueueUpdate'
+				);
+				$this->notifyOrganizers(
+					$registration, 'notificationOnQueueUpdate'
+				);
 
-					if (
-						$this->getConfValueBoolean(
-							'sendAdditionalNotificationEmails'
-						)
-					) {
-						$this->sendAdditionalNotification($registration);
-					}
+				if ($this->getConfValueBoolean(
+					'sendAdditionalNotificationEmails'
+				)) {
+					$this->sendAdditionalNotification($registration);
 				}
 			}
-			$bag->__destruct();
 		}
+		$bag->__destruct();
 	}
 
 	/**

@@ -1664,6 +1664,39 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function removeRegistrationWithFittingQueueRegistrationMovesItFromQueue() {
+		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
+		$seminarUid = $this->seminar->getUid();
+		$this->createFrontEndPages();
+
+		$registrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $userUid,
+				'seminar' => $seminarUid,
+			)
+		);
+		$queueRegistrationUid = $this->testingFramework->createRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			array(
+				'user' => $userUid,
+				'seminar' => $seminarUid,
+				'seats' => 1,
+				'registration_queue' => 1,
+			)
+		);
+
+		$this->fixture->removeRegistration($registrationUid, $this->pi1);
+
+		$this->testingFramework->existsRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			'registration_queue = 0 AND uid = ' . $queueRegistrationUid
+		);
+	}
+
 
 	//////////////////////////////////////
 	// Tests concerning canRegisterSeats
