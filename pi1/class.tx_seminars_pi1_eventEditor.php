@@ -598,9 +598,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				$this->prefixId,
 				array('seminar' => $this->getObjectUid())
 			);
-			$pageId =  $GLOBALS['TSFE']->id;
+			$pageId = $GLOBALS['TSFE']->id;
 		} else {
-			$pageId =  $this->getConfValueInteger(
+			$pageId = $this->getConfValueInteger(
 				'eventSuccessfullySavedPID', 's_fe_editing'
 			);
 		}
@@ -792,7 +792,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$formData['tstamp'] = $GLOBALS['SIM_EXEC_TIME'];
 
 		// Updating the timestamp is sufficent for existing records.
-		if ($this->iEdition) {
+		if ($this->getObjectUid() > 0) {
 			return;
 		}
 
