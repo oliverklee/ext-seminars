@@ -1018,11 +1018,11 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	private function checkShowRegistrationFields() {
 		$this->checkIfMultiInSetNotEmpty(
 			'showRegistrationFields',
-			true,
+			TRUE,
 			's_template_special',
-			'This value specifies which registration fields '
-				.'will be displayed on the registration page. '
-				.'Incorrect values will cause those fields to not get displayed.',
+			'This value specifies which registration fields ' .
+				'will be displayed on the registration page. ' .
+				'Incorrect values will cause those fields to not get displayed.',
 			array(
 				'step_counter',
 				'price',
@@ -1055,6 +1055,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'foods',
 				'checkboxes',
 				'notes',
+				'total_price',
 				'feuser_data',
 				'billing_address',
 				'registration_data',
