@@ -667,12 +667,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return $this->translate('message_willBeAnnounced');
 		}
 
-		$result = '';
+		$placeTexts = array();
 
 		foreach ($this->getPlacesAsArray() as $place) {
-			$result .= $place['title'];
+			$placeText = $place['title'];
 			if ($place['homepage'] != '') {
-				$result .= LF . $place['homepage'];
+				$placeText .= LF . $place['homepage'];
 			}
 
 			$descriptionParts = array();
@@ -691,15 +691,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				}
 			}
 
-			$result .= implode(', ', $descriptionParts);
+			if (!empty($descriptionParts)) {
+				$placeText .= ', ' . implode(', ', $descriptionParts);
+			}
 			if ($place['directions'] != '') {
-				$result .= LF . str_replace(CR, ', ', $place['directions']);
+				$placeText .= LF . str_replace(CR, ', ', $place['directions']);
 			}
 
-			$result .= LF;
+			$placeTexts[] = $placeText;
 		}
 
-		return $result;
+		return implode(LF, $placeTexts);
 	}
 
 	/**
@@ -712,7 +714,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return array all places as a two-dimensional array, will be empty
 	 *               if there are no places assigned
 	 */
-	private function getPlacesAsArray() {
+	protected function getPlacesAsArray() {
 		return tx_oelib_db::selectMultiple(
 			'title, address, city, country, homepage, directions',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,

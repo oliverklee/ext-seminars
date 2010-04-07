@@ -6358,7 +6358,6 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'-',
 			$this->fixture->getEventData('date')
 		);
-
 	}
 
 	/**
@@ -6372,7 +6371,72 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'-',
 			$this->fixture->getEventData('time')
 		);
+	}
 
+	/**
+	 * @test
+	 */
+	public function getEventDataSeparatesPlacePartsByCommaAndSpace() {
+		$place = array(
+			'title' => 'Hotel Ibis',
+			'homepage' => '',
+			'address' => 'Kaiser-Karl-Ring 91',
+			'city' => 'Bonn',
+			'country' => '',
+			'directions' => '',
+		);
+
+		$fixture = $this->getMock(
+			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
+		);
+		$fixture->expects($this->any())->method('getPlacesAsArray')
+			->will($this->returnValue(array($place)));
+		$fixture->expects($this->any())->method('hasPlace')
+			->will($this->returnValue(TRUE));
+
+		$this->assertEquals(
+			'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
+			$fixture->getEventData('place')
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEventDataSeparatesTwoPlacesByLineFeed() {
+		$place1 = array(
+			'title' => 'Hotel Ibis',
+			'homepage' => '',
+			'address' => '',
+			'city' => '',
+			'country' => '',
+			'directions' => '',
+		);
+		$place2 = array(
+			'title' => 'Wasserwerk',
+			'homepage' => '',
+			'address' => '',
+			'city' => '',
+			'country' => '',
+			'directions' => '',
+		);
+
+		$fixture = $this->getMock(
+			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
+		);
+		$fixture->expects($this->any())->method('getPlacesAsArray')
+			->will($this->returnValue(array($place1, $place2)));
+		$fixture->expects($this->any())->method('hasPlace')
+			->will($this->returnValue(TRUE));
+
+		$this->assertEquals(
+			'Hotel Ibis' . LF . 'Wasserwerk',
+			$fixture->getEventData('place')
+		);
+
+		$fixture->__destruct();
 	}
 
 
