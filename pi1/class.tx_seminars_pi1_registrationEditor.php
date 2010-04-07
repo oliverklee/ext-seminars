@@ -38,19 +38,33 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor {
-	/** Same as class name */
+	/**
+	 * same as class name
+	 *
+	 * @var string
+	 */
 	public $prefixId = 'tx_seminars_registration_editor';
 
-	/**  Path to this script relative to the extension dir. */
+	/**
+	 * path to this script relative to the extension dir
+	 *
+	 * @var string
+	 */
 	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_registrationEditor.php';
 
-	/** the names of the form fields to show (with the keys being the same as
-	 *  the values for performance reasons */
+	/**
+	 * the names of the form fields to show (with the keys being the same as
+	 * the values for performance reasons)
+	 *
+	 * @var array
+	 */
 	private $formFieldsToShow = array();
 
 	/**
 	 * the number of the current page of the form (starting with 0 for the first
 	 * page)
+	 *
+	 * @var integer
 	 */
 	public $currentPageNumber = 0;
 
@@ -58,6 +72,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * fields that are part of the billing address, with the value controlling
 	 * if the field will be displayed with a label on the second page of the
 	 * registration form
+	 *
+	 * @var array
 	 */
 	private $fieldsInBillingAddress = array(
 		'company' => false,
