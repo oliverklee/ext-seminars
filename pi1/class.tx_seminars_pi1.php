@@ -1668,7 +1668,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 		if (!in_array(
 			$whatToDisplay,
-			array('my_entered_events', 'my_events', 'my_vip_events', 'topic_list')
+			array('my_entered_events', 'my_events', 'topic_list')
 		)) {
 			$this->limitToTimeFrameSetting($builder);
 		}
@@ -3294,8 +3294,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Limits the bag to events within the time frame set by setup.
 	 *
-	 * @param tx_seminars_seminarbagbuilder $builder the seminarbagbuilder to
-	 *        limit by time frame
+	 * @param tx_seminars_seminarbagbuilder $builder
+	 *        the seminarbagbuilder to limit by time frame
 	 */
 	private function limitToTimeFrameSetting($builder) {
 		try {

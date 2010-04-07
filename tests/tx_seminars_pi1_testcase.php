@@ -4853,11 +4853,15 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
 	/////////////////////////////////////////////////////////////////////
-	// Tests concerning the displaying of events in the vip events view
+	// Tests concerning the displaying of events in the VIP events view
 	/////////////////////////////////////////////////////////////////////
 
-	public function test_MyVipEventsViewWithTimeFrameSetToCurrent_ShowsCurrentEvent() {
+	/**
+	 * @test
+	 */
+	public function myVipEventsViewWithTimeFrameSetToCurrentShowsCurrentEvent() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 		$this->fixture->setConfigurationValue('timeframeInList', 'current');
@@ -4876,7 +4880,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyVipEventsViewWithTimeFrameSetToCurrent_ShowsEventInFuture() {
+	/**
+	 * @test
+	 */
+	public function myVipEventsViewWithTimeFrameSetToCurrentNotShowsEventInFuture() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 		$this->fixture->setConfigurationValue('timeframeInList', 'current');
@@ -4889,7 +4896,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertContains(
+		$this->assertNotContains(
 			'futureEvent',
 			$this->fixture->main('', array())
 		);
