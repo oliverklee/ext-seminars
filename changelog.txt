@@ -1,4 +1,5 @@
 0.9.1 (currently working on)
+- [#3149] Fix: Search in list module ignores the the registration titles
 - [#3792] Fix: Total price not shown on registration summary page
 - [#3793] Change: The "my managed events" list should take timeframeInList into account
 - [#3784] Fix: $this->iEdition not defined in addAdministrativeData

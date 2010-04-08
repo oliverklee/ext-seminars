@@ -1278,7 +1278,8 @@ $TCA['tx_seminars_attendances'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.title',
 			'config' => array(
-				'type' => 'none',
+				'type' => 'input',
+				'readOnly' => 1,
 			),
 		),
 		'uid' => array(
