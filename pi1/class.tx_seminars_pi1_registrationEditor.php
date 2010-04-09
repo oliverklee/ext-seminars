@@ -797,7 +797,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * If the entered data is empty, an empty string will be returned (so the
 	 * heading will only be included for non-empty data).
 	 *
-	 * @param string key of the field for which the data should be displayed
+	 * @param string $key
+	 *        the key of the field for which the data should be displayed
 	 *
 	 * @return string the data from the corresponding form field formatted in
 	 *                HTML with a heading (or an empty string if the form data
@@ -841,6 +842,16 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 					$this->getSeminar()->getCheckboxes(),
 					$currentFormData
 				);
+				break;
+			case 'attendees_names':
+				if ($this->isFormFieldEnabled('registered_themselves')
+					&& ($this->getFormValue('registered_themselves') == '1')
+				) {
+					$name = tx_oelib_FrontEndLoginManager::getInstance()
+						->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')
+						->getName();
+					$currentFormData = $name . CR . $currentFormData;
+				}
 				break;
 			default:
 				break;
