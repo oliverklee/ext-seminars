@@ -1768,7 +1768,7 @@ $TCA['tx_seminars_attendances'] = array(
 $TCA['tx_seminars_sites'] = array(
 	'ctrl' => $TCA['tx_seminars_sites']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,address,homepage,directions,notes,owner',
+		'showRecordFieldList' => 'title,address,zip,city,homepage,directions,notes,owner',
 	),
 	'columns' => array(
 		'title' => array(
@@ -1787,6 +1787,15 @@ $TCA['tx_seminars_sites'] = array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
+			),
+		),
+		'zip' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.zip',
+			'config' => array(
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'trim',
 			),
 		),
 		'city' => array(
@@ -1870,7 +1879,7 @@ $TCA['tx_seminars_sites'] = array(
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, city, country, homepage, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes, owner'),
+		'0' => array('showitem' => 'title;;;;2-2-2, address;;;;3-3-3, zip, city, country, homepage;;;;3-3-3, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes, owner'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

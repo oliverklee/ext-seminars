@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	/**
@@ -147,6 +148,57 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->hasAddress()
+		);
+	}
+
+
+	//////////////////////////////////
+	// Tests regarding the ZIP code.
+	//////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getZipWithNonEmptyZipReturnsZip() {
+		$this->fixture->setData(array('zip' => '13373'));
+
+		$this->assertEquals(
+			'13373',
+			$this->fixture->getZip()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setZipSetsZip() {
+		$this->fixture->setZip('13373');
+
+		$this->assertEquals(
+			'13373',
+			$this->fixture->getZip()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasZipWithNonEmptyZipReturnsTrue() {
+		$this->fixture->setData(array('zip' => '13373'));
+
+		$this->assertTrue(
+			$this->fixture->hasZip()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasZipWithEmptyZipReturnsFalse() {
+		$this->fixture->setData(array('zip' => ''));
+
+		$this->assertFalse(
+			$this->fixture->hasZip()
 		);
 	}
 

@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
@@ -80,6 +81,33 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	 */
 	public function hasAddress() {
 		return $this->hasString('address');
+	}
+
+	/**
+	 * Returns our ZIP code.
+	 *
+	 * @return string the ZIP code, might be empty
+	 */
+	public function getZip() {
+		return $this->getAsString('zip');
+	}
+
+	/**
+	 * Sets our ZIP code.
+	 *
+	 * @param string our ZIP code, may be empty
+	 */
+	public function setZip($zip) {
+		$this->setAsString('zip', $zip);
+	}
+
+	/**
+	 * Returns whether this place has a ZIP code.
+	 *
+	 * @return boolean TRUE if this place has a ZIP code, FALSE otherwise
+	 */
+	public function hasZip() {
+		return $this->hasString('zip');
 	}
 
 	/**
@@ -165,9 +193,9 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	}
 
 	/**
-	 * Returns whether this organizer has a homepage.
+	 * Returns whether this place has a homepage.
 	 *
-	 * @return boolean true if this organizer has a homepage, false otherwise
+	 * @return boolean TRUE if this place has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasString('homepage');

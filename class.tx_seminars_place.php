@@ -33,12 +33,23 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_place extends tx_seminars_objectfromdb {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
 	protected $tableName = SEMINARS_TABLE_SITES;
+
+	/**
+	 * Returns the ZIP code of this place.
+	 *
+	 * @return string the ZIP code of this place, will be empty if no ZIP code
+	 *                has been set
+	 */
+	public function getZip() {
+		return $this->getRecordPropertyString('zip');
+	}
 
 	/**
 	 * Returns the name of the city of this place record.

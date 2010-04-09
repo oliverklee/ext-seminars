@@ -163,6 +163,7 @@
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Address:</label>
+			<label index="tx_seminars_sites.zip">ZIP code:</label>
 			<label index="tx_seminars_sites.city">City:</label>
 			<label index="tx_seminars_sites.country">Country:</label>
 			<label index="tx_seminars_sites.homepage">Homepage:</label>
@@ -382,6 +383,7 @@
 			<label index="tx_seminars_sites">Veranstaltungsorte</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Adresse:</label>
+			<label index="tx_seminars_sites.zip">Postleitzahl:</label>
 			<label index="tx_seminars_sites.city">Stadt:</label>
 			<label index="tx_seminars_sites.country">Land:</label>
 			<label index="tx_seminars_sites.homepage">Homepage:</label>
@@ -1339,6 +1341,7 @@
 			<label index="tx_seminars_sites" type="integer">79939835</label>
 			<label index="tx_seminars_sites.title" type="integer">81871034</label>
 			<label index="tx_seminars_sites.address" type="integer">46079327</label>
+			<label index="tx_seminars_sites.zip" type="integer">220717528</label>
 			<label index="tx_seminars_sites.city" type="integer">201307921</label>
 			<label index="tx_seminars_sites.country" type="integer">258260574</label>
 			<label index="tx_seminars_sites.homepage" type="integer">78145407</label>
@@ -2293,6 +2296,7 @@
 			<label index="tx_seminars_sites">Seminar Sites</label>
 			<label index="tx_seminars_sites.title">Name:</label>
 			<label index="tx_seminars_sites.address">Address:</label>
+			<label index="tx_seminars_sites.zip">ZIP code:</label>
 			<label index="tx_seminars_sites.city">City:</label>
 			<label index="tx_seminars_sites.country">Country:</label>
 			<label index="tx_seminars_sites.homepage">Homepage:</label>

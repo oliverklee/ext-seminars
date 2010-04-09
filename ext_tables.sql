@@ -449,6 +449,7 @@ CREATE TABLE tx_seminars_sites (
 	owner int(11) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	address text,
+	zip tinytext,
 	city tinytext,
 	country char(2) DEFAULT '' NOT NULL,
 	homepage tinytext,

@@ -33,11 +33,19 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <typo3-coding@rimann.org>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_place_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_place
+	 */
 	private $fixture;
 
-	/** our instance of the testing framework */
+	/**
+	 * our instance of the testing framework
+	 *
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
 	public function setUp() {
@@ -47,8 +55,9 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SITES,
 			array(
 				'title' => 'TEST Place 1',
+				'zip' => '13373',
 				'city' => 'Tokyo',
-				'country' => 'JP'
+				'country' => 'JP',
 			)
 		);
 		$this->fixture = new tx_seminars_place($uid);
@@ -77,14 +86,30 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 	// Tests for getting the site attributes.
 	///////////////////////////////////////////
 
-	public function testGetCity() {
+	/**
+	 * @test
+	 */
+	public function getZipReturnsZip() {
+		$this->assertEquals(
+			'13373',
+			$this->fixture->getZip()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCityReturnsCity() {
 		$this->assertEquals(
 			'Tokyo',
 			$this->fixture->getCity()
 		);
 	}
 
-	public function testGetCountryIsoCode() {
+	/**
+	 * @test
+	 */
+	public function getCountryReturnsIsoCodeOfCountry() {
 		$this->assertEquals(
 			'JP',
 			$this->fixture->getCountryIsoCode()
