@@ -3122,6 +3122,7 @@ plugin.tx_seminars_pi1 {
 								}
 							)
 						}
+						onclick-2 = $("tx_seminars_pi1_registration_editor_button_submit").disabled = true;
 					}
 
 					next_page = renderlet:PASSTHRU
@@ -3241,6 +3242,7 @@ plugin.tx_seminars_pi1 {
 					button_submit {
 						name = button_submit
 						label = ###LABEL_SUBMIT_REGISTRATION###
+						onclick = $("tx_seminars_pi1_registration_editor_button_submit").disabled = true;
 					}
 
 					price = renderlet:HIDDEN
