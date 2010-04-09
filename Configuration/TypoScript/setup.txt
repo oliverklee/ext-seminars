@@ -935,6 +935,13 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
 						}
 
+						newPlace_zip = renderlet:TEXT
+						newPlace_zip {
+							name = newPlace_zip
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.zip
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
 						newPlace_city = renderlet:TEXT
 						newPlace_city {
 							name = newPlace_city
@@ -1001,7 +1008,7 @@ plugin.tx_seminars_pi1 {
 							onclick {
 								runat = ajax
 								cache = false
-								params = newPlace_title, newPlace_address, newPlace_city, newPlace_country, newPlace_homepage, newPlace_directions, newPlace_notes
+								params = newPlace_title, newPlace_address, newPlace_zip, newPlace_city, newPlace_country, newPlace_homepage, newPlace_directions, newPlace_notes
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 									return tx_seminars_pi1_eventEditor::createNewPlace($this);
@@ -1041,6 +1048,13 @@ plugin.tx_seminars_pi1 {
 						editPlace_address {
 							name = editPlace_address
 							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.address
+							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
+						}
+
+						editPlace_zip = renderlet:TEXT
+						editPlace_zip {
+							name = editPlace_zip
+							label = LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites.zip
 							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
 						}
 
@@ -1115,7 +1129,7 @@ plugin.tx_seminars_pi1 {
 							onclick {
 								runat = ajax
 								cache = false
-								params = editPlace_title, editPlace_address, editPlace_city, editPlace_country, editPlace_homepage, editPlace_directions, editPlace_notes, editPlace_uid
+								params = editPlace_title, editPlace_address, editPlace_zip, editPlace_city, editPlace_country, editPlace_homepage, editPlace_directions, editPlace_notes, editPlace_uid
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 									return tx_seminars_pi1_eventEditor::updatePlace($this);

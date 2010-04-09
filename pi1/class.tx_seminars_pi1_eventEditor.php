@@ -745,12 +745,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$fieldsToUnset = array(
 			'' => array('proceed_file_upload', 'delete_attached_files'),
 			'newPlace_' => array(
-				'title', 'address', 'city', 'country', 'homepage', 'directions',
-				'notes',
+				'title', 'address', 'zip', 'city', 'country', 'homepage',
+				'directions', 'notes',
 			),
 			'editPlace_' => array(
-				'title', 'address', 'city', 'country', 'homepage', 'directions',
-				'notes', 'uid',
+				'title', 'address', 'zip', 'city', 'country', 'homepage',
+				'directions', 'notes', 'uid',
 			),
 			'newSpeaker_' => array(
 				'title', 'gender', 'organization', 'homepage',
@@ -1391,6 +1391,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$validationErrors = self::validatePlace(
 			$formidable, array(
 				'title' => $formData['newPlace_title'],
+				'zip' => $formData['newPlace_zip'],
 				'city' => $formData['newPlace_city'],
 			)
 		);
@@ -1471,6 +1472,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$formidable,
 			array(
 				'title' => $formData['editPlace_title'],
+				'zip' => $formData['editPlace_zip'],
 				'city' => $formData['editPlace_city'],
 			)
 		);
@@ -1548,6 +1550,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$place->setTitle(trim(strip_tags($formData[$prefix . 'title'])));
 		$place->setAddress(trim(strip_tags($formData[$prefix . 'address'])));
+		$place->setZip(trim(strip_tags($formData[$prefix . 'zip'])));
 		$place->setCity(trim(strip_tags($formData[$prefix . 'city'])));
 		$place->setCountry($country);
 		$place->setHomepage(trim(strip_tags($formData[$prefix . 'homepage'])));
@@ -1604,6 +1607,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			'uid' => $place->getUid(),
 			'title' => $place->getTitle(),
 			'address' => $place->getAddress(),
+			'zip' => $place->getZip(),
 			'city' => $place->getCity(),
 			'country' => $countryUid,
 			'homepage' => $place->getHomepage(),
