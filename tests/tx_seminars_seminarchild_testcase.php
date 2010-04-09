@@ -6523,6 +6523,60 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
+	/**
+	 * @test
+	 */
+	public function getEventDataForPlaceWithoutZipContainsTitleAndAddressAndCity() {
+		$place = array(
+			'title' => 'Hotel Ibis',
+			'address' => 'Kaiser-Karl-Ring 91',
+			'zip' => '',
+			'city' => 'Bonn',
+		);
+
+		$fixture = $this->getMock(
+			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
+		);
+		$fixture->expects($this->any())->method('getPlacesAsArray')
+			->will($this->returnValue(array($place)));
+		$fixture->expects($this->any())->method('hasPlace')
+			->will($this->returnValue(TRUE));
+
+		$this->assertEquals(
+			'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
+			$fixture->getEventData('place')
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEventDataForPlaceWithZipContainsTitleAndAddressAndZipAndCity() {
+		$place = array(
+			'title' => 'Hotel Ibis',
+			'address' => 'Kaiser-Karl-Ring 91',
+			'zip' => '53111',
+			'city' => 'Bonn',
+		);
+
+		$fixture = $this->getMock(
+			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
+		);
+		$fixture->expects($this->any())->method('getPlacesAsArray')
+			->will($this->returnValue(array($place)));
+		$fixture->expects($this->any())->method('hasPlace')
+			->will($this->returnValue(TRUE));
+
+		$this->assertEquals(
+			'Hotel Ibis, Kaiser-Karl-Ring 91, 53111 Bonn',
+			$fixture->getEventData('place')
+		);
+
+		$fixture->__destruct();
+	}
+
 
 	///////////////////////////////////////
 	// Tests concerning dumpSeminarValues

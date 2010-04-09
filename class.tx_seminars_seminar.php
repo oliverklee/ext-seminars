@@ -682,7 +682,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$descriptionParts[] = str_replace(CR, ',', $place['address']);
 			}
 			if ($place['city'] != '') {
-				$descriptionParts[] = $place['city'];
+				$descriptionParts[] = trim(
+					$place['zip'] . ' ' . $place['city']
+				);
 			}
 			if ($place['country'] != '') {
 				$countryName = $this->getCountryNameFromIsoCode(
