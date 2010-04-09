@@ -1,4 +1,5 @@
 0.9.1 (currently working on)
+- [#3220] Feature: On the second registration page, list the user's name at the beginning of the names list if "myself" has been checked
 - [#3543] Fix: Multiple registrations when double-clicking submit-button
 - [#3149] Fix: Search in list module ignores the the registration titles
 - [#3792] Fix: Total price not shown on registration summary page

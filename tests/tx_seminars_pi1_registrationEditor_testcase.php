@@ -373,7 +373,6 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	}
 
 
-
 	////////////////////////////////////
 	// Tests concerning getStepCounter
 	////////////////////////////////////
@@ -964,7 +963,10 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	// Tests concerning getRegistrationData
 	/////////////////////////////////////////
 
-	public function test_getRegistrationDataForFieldDisabledByConfiguration_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForDisabledPaymentMethodFieldReturnsEmptyString() {
 		$selectedPaymentMethodUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'payment foo')
 		);
@@ -984,7 +986,10 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationDataForFieldEnabledByConfiguration_ReturnsTheFieldsContent() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue() {
 		$fixture = new tx_seminars_pi1_registrationEditor(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
@@ -1005,6 +1010,146 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'42',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataHtmlspecialcharsInterestsField() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'showRegistrationFields' => 'interests',
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('interests', 'A, B & C');
+
+		$this->assertContains(
+			'A, B &amp; C',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'showRegistrationFields' => 'interests',
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('interests', 'Love' . CR . 'Peace');
+
+		$this->assertContains(
+			'Love<br />Peace',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataCanContainAttendeesNames() {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'showRegistrationFields' => 'attendees_names',
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('attendees_names', 'John Doe');
+
+		$this->assertContains(
+			'John Doe',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForAttendeesNamesAndThemselvesSelectedContainsUserName() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'', array('name' => 'Jane Doe')
+		);
+
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'showRegistrationFields' => 'attendees_names,registered_themselves',
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$fixture->setFakedFormValue('registered_themselves', '1');
+
+		$this->assertContains(
+			'Jane Doe',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForAttendeesNamesEnabledAndThemselvesNotSelectedNotContainsUserName() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'', array('name' => 'Jane Doe')
+		);
+
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array(
+				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'showRegistrationFields' => 'attendees_names,registered_themselves',
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$fixture->setFakedFormValue('registered_themselves', '');
+
+		$this->assertNotContains(
+			'Jane Doe',
 			$fixture->getRegistrationData()
 		);
 
