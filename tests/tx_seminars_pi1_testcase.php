@@ -7232,5 +7232,52 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+
+	//////////////////////////////////
+	// Tests concerning initListView
+	//////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function initListViewForDefaultListLimitsListByAdditionalParameters() {
+		$fixture = $this->getMock(
+			'tx_seminars_pi1', array('limitForAdditionalParameters')
+		);
+		$fixture->expects($this->once())->method('limitForAdditionalParameters');
+
+		$fixture->initListView('');
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function initListViewForTopicListLimitsListByAdditionalParameters() {
+		$fixture = $this->getMock(
+			'tx_seminars_pi1', array('limitForAdditionalParameters')
+		);
+		$fixture->expects($this->once())->method('limitForAdditionalParameters');
+
+		$fixture->initListView('topic_list');
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function initListViewForMyEventsListNotLimitsListByAdditionalParameters() {
+		$fixture = $this->getMock(
+			'tx_seminars_pi1', array('limitForAdditionalParameters')
+		);
+		$fixture->expects($this->never())->method('limitForAdditionalParameters');
+
+		$fixture->initListView('my_events');
+
+		$fixture->__destruct();
+	}
 }
 ?>

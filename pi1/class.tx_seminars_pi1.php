@@ -1611,14 +1611,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * creates a seminar bag or a registration bag (for the "my events" view),
 	 * but does not create any actual HTML output.
 	 *
-	 * @param string a string selecting the flavor of list view: either
-	 *               an empty string (for the default list view), the
-	 *               value from "what_to_display" or "other_dates"
+	 * @param string $whatToDisplay
+	 *        the flavor of list view: either an empty string (for the default
+	 *        list view), the value from "what_to_display", or "other_dates"
 	 *
-	 * @return object a seminar bag or a registration bag containing the
-	 *                seminars or registrations for the list view
+	 * @return tx_seminars_bag a seminar bag or a registration bag containing the
+	 *                         the seminars or registrations for the list view
 	 */
-	protected function initListView($whatToDisplay = '') {
+	public function initListView($whatToDisplay = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
 			$this->conf['pidList'] = $this->getConfValueString('pages');
 			$this->conf['recursive'] = $this->getConfValueInteger('recursive');
@@ -1661,15 +1661,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$builder = $this->createSeminarBagBuilder();
 		}
 
-		// Time-frames and hiding canceled events doesn't make sense for the
-		// topic list.
-		if (($whatToDisplay != 'topic_list') && ($whatToDisplay != 'my_events')) {
+		if ($whatToDisplay != 'my_events') {
 			$this->limitForAdditionalParameters($builder);
 		}
 		if (!in_array(
 			$whatToDisplay,
 			array('my_entered_events', 'my_events', 'topic_list')
 		)) {
+			$builder->limitToDateAndSingleRecords();
 			$this->limitToTimeFrameSetting($builder);
 		}
 
@@ -2183,12 +2182,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Limits the given seminarbagbuilder for additional parameters needed to
 	 * build the list view.
 	 *
-	 * @param tx_seminars_seminarbagbuilder the seminarbagbuilder to limit for
-	 *                                      additional parameters
+	 * @param tx_seminars_seminarbagbuilder $builder
+	 *        the seminarbagbuilder to limit for additional parameters
 	 */
 	protected function limitForAdditionalParameters(tx_seminars_seminarbagbuilder $builder) {
-		$builder->limitToDateAndSingleRecords();
-
 		// Adds the query parameter that result from the user selection in the
 		// selector widget (including the search form).
 		if (is_array($this->piVars['language'])) {
@@ -2199,8 +2196,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			);
 		}
 
-		// TODO: This needs to be changed when bug 2304 gets fixed.
-		// @see https://bugs.oliverklee.com/show_bug.cgi?id=2304
+		// TODO: This needs to be changed when bug 3410 gets fixed.
+		// @see https://bugs.oliverklee.com/show_bug.cgi?id=3410
 		if (is_array($this->piVars['place'])) {
 			$builder->limitToPlaces(
 				tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
