@@ -367,8 +367,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return string HTML code with the link
 	 */
 	private function getLinkToStandardRegistrationOrLoginPage(
-		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar,
-		$label
+		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar, $label
 	) {
 		if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			// provides the registration link
@@ -787,17 +786,18 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Sends an e-mail to the attendee with a message concerning his/her
 	 * registration or unregistration.
 	 *
-	 * @param tx_seminars_registration the registration for which the
-	 *                                 notification should be send
-	 * @param tslib_pibase a live page
-	 * @param string prefix for the locallang key of the localized hello
-	 *               and subject string, allowed values are:
-	 *               - confirmation
-	 *               - confirmationOnUnregistration
-	 *               - confirmationOnRegistrationForQueue
-	 *               - confirmationOnQueueUpdate
-	 *               In the following the parameter is prefixed with
-	 *               "email_" and postfixed with "Hello" or "Subject".
+	 * @param tx_seminars_registration $registration
+	 *        the registration for which the notification should be sent
+	 * @param tslib_pibase $plugin a live plugin
+	 * @param string $helloSubjectPrefix
+	 *        prefix for the locallang key of the localized hello and subject
+	 *        string; allowed values are:
+	 *        - confirmation
+	 *        - confirmationOnUnregistration
+	 *        - confirmationOnRegistrationForQueue
+	 *        - confirmationOnQueueUpdate
+	 *        In the following the parameter is prefixed with "email_" and
+	 *        postfixed with "Hello" or "Subject".
 	 */
 	public function notifyAttendee(
 		tx_seminars_registration $registration,
@@ -1090,23 +1090,23 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_registration the registration for which the
 	 *                                 notification should be send
-	 * @param tslib_pibase a live plugin
-	 * @param string prefix for the locallang key of the localized hello
-	 *               and subject string, allowed values are:
-	 *               - confirmation
-	 *               - confirmationOnUnregistration
-	 *               - confirmationOnRegistrationForQueue
-	 *               - confirmationOnQueueUpdate
-	 *               In the following the parameter is prefixed with
-	 *               "email_" and postfixed with "Hello" or "Subject".
-	 * @param boolean whether to create a HTML body for the e-mail or just the
-	 *                plain text version
+	 * @param tslib_pibase $plugin a live plugin
+	 * @param string $helloSubjectPrefix
+	 *        prefix for the locallang key of the localized hello and subject
+	 *        string; allowed values are:
+	 *        - confirmation
+	 *        - confirmationOnUnregistration
+	 *        - confirmationOnRegistrationForQueue
+	 *        - confirmationOnQueueUpdate
+	 *        In the following the parameter is prefixed with "email_" and
+	 *        postfixed with "Hello" or "Subject".
+	 * @param boolean $useHtml whether to create HTML instead of plain text
 	 *
 	 * @return string the e-mail body for the attendee e-mail, will not be empty
 	 */
 	private function buildEmailContent(
 		tx_seminars_registration $registration,
-		tslib_pibase $plugin, $helloSubjectPrefix , $useHtml = false
+		tslib_pibase $plugin, $helloSubjectPrefix , $useHtml = FALSE
 	) {
 		$wrapperPrefix = (($useHtml) ? 'html_' : '') . 'field_wrapper';
 
@@ -1309,7 +1309,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Fills the attendees_names marker or hides it if necessary.
 	 *
 	 * @param tx_seminars_registration $registration the current registration
-	 * @param boolean $useHtml whether to create HTML or plaintext output
+	 * @param boolean $useHtml whether to create HTML instead of plain text
 	 */
 	private function fillOrHideAttendeeMarker(
 		tx_seminars_registration $registration, $useHtml
@@ -1332,9 +1332,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Sets the places marker for the attendee notification.
 	 *
 	 * @param tx_seminars_seminar $event event of this registration
-	 * @param boolean $useHtml whether to send HTML or plain text mail
+	 * @param boolean $useHtml whether to create HTML instead of plain text
 	 */
-	private function fillPlacesMarker($event, $useHtml) {
+	private function fillPlacesMarker(tx_seminars_seminar $event, $useHtml) {
 		if (!$event->hasPlace()) {
 			$this->setMarker(
 				'place', $this->translate('message_willBeAnnounced')
@@ -1343,28 +1343,41 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$places = $event->getPlaces();
 		$newline = ($useHtml) ? '<br />' : LF;
+
 		$formattedPlaces = array();
-
-		foreach ($places as $place) {
-			$address = preg_replace(
-				'/[\n|\r]+/',
-				' ',
-				str_replace('<br />', ' ', strip_tags($place->getAddress()))
-			);
-
-			$countryName = ($place->hasCountry())
-				? ', ' . $place->getCountry()->getLocalShortName()
-				: '';
-
-			$formattedPlaces[] = $place->getTitle() . $newline . $address .
-				$newline . $place->getCity() . $countryName;
+		foreach ($event->getPlaces() as $place) {
+			$formattedPlaces[] = $this->formatPlace($place, $newline);
 		}
 
 		$this->setMarker(
 			'place', implode($newline . $newline, $formattedPlaces)
 		);
+	}
+
+	/**
+	 * Formats a place for the thank-you e-mail.
+	 *
+	 * @param $place the place to format
+	 * @param $newline
+	 *        the newline to use in formatting, must be either LF or '<br />'
+	 *
+	 * @return string the formatted place, will not be empty
+	 */
+	private function formatPlace(tx_seminars_Model_Place $place, $newline) {
+		$address = preg_replace(
+			'/[\n|\r]+/',
+			' ',
+			str_replace('<br />', ' ', strip_tags($place->getAddress()))
+		);
+
+		$countryName = ($place->hasCountry())
+			? ', ' . $place->getCountry()->getLocalShortName()
+			: '';
+		$zipAndCity = trim($place->getZip() . ' ' . $place->getCity());
+
+		return $place->getTitle() . $newline . $address .
+			$newline . $zipAndCity . $countryName;
 	}
 
 	/**

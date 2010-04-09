@@ -4472,7 +4472,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$places = tx_oelib_db::selectMultiple(
-			'uid, title, address, city, country, homepage, directions',
+			'uid, title, address, zip, city, country, homepage, directions',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
 			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
