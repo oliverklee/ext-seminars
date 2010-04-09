@@ -1,4 +1,5 @@
 0.9.1 (currently working on)
+- [#3803] Cleanup: clean up the place model a bit
 - [#3220] Feature: On the second registration page, list the user's name at the beginning of the names list if "myself" has been checked
 - [#3543] Fix: Multiple registrations when double-clicking submit-button
 - [#3149] Fix: Search in list module ignores the the registration titles
@@ -15,7 +16,7 @@
 - [#3710] Change: Use self:: for static calls within the same class
 - [#3450] Change: Mention in setup.txt that the admin should not copy'n'paste the complete template into the TS template
 - [#3729] Change: Provide ext_autoload for our extensions
-- [#3718] Fix: CSV file displayed in the brower or saved with php suffix, original patch by Jörn Dost
+- [#3718] Fix: CSV file displayed in the browser or saved with php suffix, original patch by Jörn Dost
 
 0.9.0 (released 2010-03-01)
 - [#3712] Fix: Items in the search filter comboboxes should be sorted alphabetically

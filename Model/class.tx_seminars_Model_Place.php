@@ -165,9 +165,9 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	}
 
 	/**
-	 * Returns whether this organizer has a homepage.
+	 * Returns whether this place has a homepage.
 	 *
-	 * @return boolean true if this organizer has a homepage, false otherwise
+	 * @return boolean TRUE if this place has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasString('homepage');

@@ -35,9 +35,16 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
 class tx_seminars_place_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_place
+	 */
 	private $fixture;
 
-	/** our instance of the testing framework */
+	/**
+	 * our instance of the testing framework
+	 *
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
 	public function setUp() {
@@ -48,7 +55,7 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 			array(
 				'title' => 'TEST Place 1',
 				'city' => 'Tokyo',
-				'country' => 'JP'
+				'country' => 'JP',
 			)
 		);
 		$this->fixture = new tx_seminars_place($uid);
@@ -77,14 +84,20 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 	// Tests for getting the site attributes.
 	///////////////////////////////////////////
 
-	public function testGetCity() {
+	/**
+	 * @test
+	 */
+	public function getCityReturnsCity() {
 		$this->assertEquals(
 			'Tokyo',
 			$this->fixture->getCity()
 		);
 	}
 
-	public function testGetCountryIsoCode() {
+	/**
+	 * @test
+	 */
+	public function getCountryReturnsIsoCodeOfCountry() {
 		$this->assertEquals(
 			'JP',
 			$this->fixture->getCountryIsoCode()

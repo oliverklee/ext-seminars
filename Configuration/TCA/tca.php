@@ -1743,7 +1743,7 @@ $TCA['tx_seminars_attendances'] = array(
 $TCA['tx_seminars_sites'] = array(
 	'ctrl' => $TCA['tx_seminars_sites']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,address,homepage,directions,notes,owner',
+		'showRecordFieldList' => 'title,address,city,homepage,directions,notes,owner',
 	),
 	'columns' => array(
 		'title' => array(
