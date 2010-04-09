@@ -1,4 +1,4 @@
-0.9.1 (currently working on)
+0.9.1 (released 2010-04-09)
 - [#3803] Cleanup: clean up the place model a bit
 - [#3220] Feature: On the second registration page, list the user's name at the beginning of the names list if "myself" has been checked
 - [#3543] Fix: Multiple registrations when double-clicking submit-button
