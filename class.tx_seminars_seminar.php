@@ -416,7 +416,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * links. Returns a localized string "will be announced" if the seminar has
 	 * no places set.
 	 *
-	 * @param tx_oelib_templatehelper the current FE plugin
+	 * @param tx_oelib_templatehelper $plugin the current FE plugin
 	 *
 	 * @return string our places description (or '' if there is an error)
 	 */
@@ -448,7 +448,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$descriptionParts[] = str_replace(CR, ',', $place['address']);
 			}
 			if ($place['city'] != '') {
-				$descriptionParts[] = $place['city'];
+				$descriptionParts[] = trim(
+					$place['zip'] . ' ' . $place['city']
+				);
 			}
 			if ($place['country'] != '') {
 				$countryName = $this->getCountryNameFromIsoCode(
@@ -716,7 +718,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	protected function getPlacesAsArray() {
 		return tx_oelib_db::selectMultiple(
-			'title, address, city, country, homepage, directions',
+			'title, address, zip, city, country, homepage, directions',
 			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
 			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)

@@ -4539,7 +4539,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests concerning getPlaceWithDetails
 	/////////////////////////////////////////
 
-	public function testGetPlaceWithDetailsReturnsWillBeAnnouncedForNoPlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsReturnsWillBeAnnouncedForNoPlace() {
 		$this->createPi1();
 		$this->assertContains(
 			$this->fixture->translate('message_willBeAnnounced'),
@@ -4547,7 +4550,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsContainsTitleOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsContainsTitleOfOnePlace() {
 		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place'));
 
@@ -4557,7 +4563,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsContainsTitleOfAllRelatedPlaces() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsContainsTitleOfAllRelatedPlaces() {
 		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place'));
 		$this->addPlaceRelation(array('title' => 'another place'));
@@ -4572,7 +4581,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsContainsAddressOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsContainsAddressOfOnePlace() {
 		$this->createPi1();
 		$this->addPlaceRelation(
 			array('title' => 'a place', 'address' => 'a street')
@@ -4584,7 +4596,40 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsContainsCityOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsForNonEmptyZipAndCityContainsZip() {
+		$this->createPi1();
+		$this->addPlaceRelation(
+			array('title' => 'a place', 'zip' => '12345', 'city' => 'Hamm')
+		);
+
+		$this->assertContains(
+			'12345',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsForNonEmptyZipAndEmptyCityNotContainsZip() {
+		$this->createPi1();
+		$this->addPlaceRelation(
+			array('title' => 'a place', 'zip' => '12345', 'city' => '')
+		);
+
+		$this->assertNotContains(
+			'12345',
+			$this->fixture->getPlaceWithDetails($this->pi1)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsContainsCityOfOnePlace() {
 		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place', 'city' => 'Emden'));
 
@@ -4594,7 +4639,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsContainsCountryOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsContainsCountryOfOnePlace() {
 		$this->createPi1();
 		$this->addPlaceRelation(array('title' => 'a place', 'country' => 'de'));
 
@@ -4604,7 +4652,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsContainsHomepageLinkOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsContainsHomepageLinkOfOnePlace() {
 		$this->createPi1();
 		$this->addPlaceRelation(array('homepage' => 'www.test.com'));
 
@@ -4614,7 +4665,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsContainsDirectionsOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsContainsDirectionsOfOnePlace() {
 		$this->createPi1();
 		$this->addPlaceRelation(array('directions' => 'Turn right.'));
 
@@ -4629,7 +4683,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests concerning getPlaceWithDetailsRaw
 	////////////////////////////////////////////
 
-	public function testGetPlaceWithDetailsRawReturnsWillBeAnnouncedForNoPlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawReturnsWillBeAnnouncedForNoPlace() {
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->assertContains(
@@ -4638,7 +4695,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawContainsTitleOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawContainsTitleOfOnePlace() {
 		$this->addPlaceRelation(array('title' => 'a place'));
 
 		$this->assertContains(
@@ -4647,7 +4707,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawContainsTitleOfAllRelatedPlaces() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawContainsTitleOfAllRelatedPlaces() {
 		$this->addPlaceRelation(array('title' => 'a place'));
 		$this->addPlaceRelation(array('title' => 'another place'));
 
@@ -4661,7 +4724,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawContainsAddressOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawContainsAddressOfOnePlace() {
 		$this->addPlaceRelation(
 			array('title' => 'a place', 'address' => 'a street')
 		);
@@ -4672,7 +4738,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawContainsCityOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawContainsCityOfOnePlace() {
 		$this->addPlaceRelation(array('title' => 'a place', 'city' => 'Emden'));
 
 		$this->assertContains(
@@ -4681,7 +4750,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawContainsCountryOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawContainsCountryOfOnePlace() {
 		$this->addPlaceRelation(array('title' => 'a place', 'country' => 'de'));
 
 		$this->assertContains(
@@ -4690,7 +4762,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawContainsHomepageUrlOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawContainsHomepageUrlOfOnePlace() {
 		$this->addPlaceRelation(array('homepage' => 'www.test.com'));
 
 		$this->assertContains(
@@ -4699,7 +4774,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawContainsDirectionsOfOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawContainsDirectionsOfOnePlace() {
 		$this->addPlaceRelation(array('directions' => 'Turn right.'));
 
 		$this->assertContains(
@@ -4708,7 +4786,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawSeparatesMultiplePlacesWithLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawSeparatesMultiplePlacesWithLineFeeds() {
 		$this->addPlaceRelation(array('title' => 'a place'));
 		$this->addPlaceRelation(array('title' => 'another place'));
 
@@ -4718,7 +4799,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPlaceWithDetailsRawDoesNotSeparateMultiplePlacesWithCarriageReturnsAndLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getPlaceWithDetailsRawDoesNotSeparateMultiplePlacesWithCarriageReturnsAndLineFeeds() {
 		$this->addPlaceRelation(array('title' => 'a place'));
 		$this->addPlaceRelation(array('title' => 'another place'));
 

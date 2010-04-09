@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3805] Feature: Display the places ZIP in the single view
 - [#3804] Feature: Add the places ZIP to the FE editor
 - [#3803] Feature: Add a field "ZIP" to the places
 - [#3220] Feature: On the second registration page, list the user's name at the beginning of the names list if "myself" has been checked

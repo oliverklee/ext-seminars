@@ -1303,7 +1303,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning places in the single view
 	///////////////////////////////////////////////
 
-	public function testSingleViewContainsTitleOfEventPlace() {
+	/**
+	 * @test
+	 */
+	public function singleViewContainsTitleOfEventPlace() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
