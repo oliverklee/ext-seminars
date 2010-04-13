@@ -267,7 +267,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	private function getConfirmEventMailForm() {
 		$form = tx_oelib_ObjectFactory::make(
 			'tx_seminars_BackEnd_ConfirmEventMailForm',
-			intval(t3lib_div::GPvar('eventUid'))
+			intval(t3lib_div::_GP('eventUid'))
 		);
 		$form->setPostData(t3lib_div::_POST());
 
@@ -285,7 +285,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	private function getCancelEventMailForm() {
 		$form = tx_oelib_ObjectFactory::make(
 			'tx_seminars_BackEnd_CancelEventMailForm',
-			intval(t3lib_div::GPvar('eventUid'))
+			intval(t3lib_div::_GP('eventUid'))
 		);
 		$form->setPostData(t3lib_div::_POST());
 
