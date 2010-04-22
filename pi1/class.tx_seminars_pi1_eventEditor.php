@@ -1391,8 +1391,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$validationErrors = self::validatePlace(
 			$formidable, array(
 				'title' => $formData['newPlace_title'],
+				'address' => $formData['newPlace_address'],
 				'zip' => $formData['newPlace_zip'],
 				'city' => $formData['newPlace_city'],
+				'country' => $formData['newPlace_country'],
+				'homepage' => $formData['newPlace_homepage'],
+				'directions' => $formData['newPlace_directions'],
 			)
 		);
 		if (!empty($validationErrors)) {
@@ -1472,8 +1476,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$formidable,
 			array(
 				'title' => $formData['editPlace_title'],
+				'address' => $formData['editPlace_address'],
 				'zip' => $formData['editPlace_zip'],
 				'city' => $formData['editPlace_city'],
+				'country' => $formData['editPlace_country'],
+				'homepage' => $formData['editPlace_homepage'],
+				'directions' => $formData['editPlace_directions'],
 			)
 		);
 		if (!empty($validationErrors)) {
@@ -1508,22 +1516,55 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @return array the error messages, will be empty if there are no
 	 *         validation errors
 	 */
-	private static function validatePlace(
+	static private function validatePlace(
 		tx_ameosformidable $formidable, array $formData
 	) {
 		$validationErrors = array();
-		if (trim($formData['title']) == '') {
-			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
-			);
+
+		$keys = array(
+			'title', 'address', 'zip', 'city', 'homepage', 'directions'
+		);
+		foreach ($keys as $key) {
+			if ((trim($formData[$key]) == '') && self::isPlaceFieldRequired($key)
+			) {
+				$validationErrors[] = $formidable->getLLLabel(
+					'LLL:EXT:seminars/pi1/locallang.xml:message_empty' .
+						ucfirst($key)
+				);
+			}
 		}
-		if (trim($formData['city']) == '') {
+		$key = 'country';
+		if ((intval($formData[$key]) == 0)
+			&& self::isPlaceFieldRequired($key)
+		) {
 			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyCity'
+				'LLL:EXT:seminars/pi1/locallang.xml:message_empty' . ucfirst($key)
 			);
 		}
 
 		return $validationErrors;
+	}
+
+	/**
+	 * Checks whether the place field with the key $key is required.
+	 *
+	 * @param string $key the key of the field to check, must not be empty
+	 *
+	 * @return boolean TRUE if the field with the key $key is required,
+	 *                 FALSE otherwise
+	 */
+	static private function isPlaceFieldRequired($key) {
+		if ($key == '') {
+			throw new InvalidArgumentException('$key must not be empty.');
+		}
+
+		$requiredFields = tx_oelib_ConfigurationRegistry::get(
+			'plugin.tx_seminars_pi1'
+		)->getAsTrimmedArray('requiredFrontEndEditorPlaceFields');
+		// The field "title" always is required.
+		$requiredFields[] = 'title';
+
+		return in_array($key, $requiredFields);
 	}
 
 	/**

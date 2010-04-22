@@ -317,6 +317,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkAllowedExtensionsForUpload();
 		$this->checkDisplayFrontEndEditorFields();
 		$this->checkRequiredFrontEndEditorFields();
+		$this->checkRequiredFrontEndEditorPlaceFields();
 
 		$this->checkAllowFrontEndEditingOfCheckboxes();
 		$this->checkAllowFrontEndEditingOfPlaces();
@@ -2370,7 +2371,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			true,
 			's_fe_editing',
 			'This value specifies which fields are required to be filled when ' .
-				'filing a new event. Some fields will be not be required if ' .
+				'editing an event. Some fields will be not be required if ' .
 				'this configuration is incorrect.',
 			array(
 				'subtitle',
@@ -2422,7 +2423,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			true,
 			's_fe_editing',
 			'This value specifies which fields are required to be filled when ' .
-				'filing a new event. Some fields are set to required but are ' .
+				'editing an event. Some fields are set to required but are ' .
 				'actually not configured to be visible in the form. The form ' .
 				'cannot be submitted as long as this inconsistency remains.',
 			t3lib_div::trimExplode(
@@ -2431,6 +2432,28 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 					'displayFrontEndEditorFields', 's_fe_editing'
 				),
 				true
+			)
+		);
+	}
+
+	/**
+	 * Checks the configuration for requiredFrontEndEditorPlaceFields.
+	 */
+	private function checkRequiredFrontEndEditorPlaceFields() {
+		$this->checkIfMultiInSetOrEmpty(
+			'requiredFrontEndEditorPlaceFields',
+			FALSE,
+			'',
+			'This value specifies which fields are required to be filled when ' .
+				'editing a pkace. Some fields will be not be required if ' .
+				'this configuration is incorrect.',
+			array(
+				'address',
+				'zip',
+				'city',
+				'country',
+				'homepage',
+				'directions',
 			)
 		);
 	}

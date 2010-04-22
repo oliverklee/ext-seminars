@@ -310,7 +310,12 @@
 			<label index="message_noCategoryChosen">Please select at least one category.</label>
 			<label index="message_emptyTeaser">Please enter a teaser.</label>
 			<label index="message_emptyDescription">Please enter a description.</label>
+			<label index="message_emptyAddress">Please enter an address.</label>
+			<label index="message_emptyZip">Please enter a ZIP code.</label>
 			<label index="message_emptyCity">Please enter a city.</label>
+			<label index="message_emptyCountry">Please select a country.</label>
+			<label index="message_emptyHomepage">Please enter a homepage URL.</label>
+			<label index="message_emptyDirections">Please enter some directions.</label>
 			<label index="message_noEventTypeChosen">Please select an event type.</label>
 			<label index="message_accreditationNumberZero">Please enter an accreditation number.</label>
 			<label index="message_creditPointsZero">Please enter the credit points.</label>
@@ -912,7 +917,12 @@
 			<label index="message_noCategoryChosen">Bitte wählen Sie mindestens eine Kategorie aus.</label>
 			<label index="message_emptyTeaser">Bitte geben Sie einen Teaser-Text ein.</label>
 			<label index="message_emptyDescription">Bitte geben Sie eine Beschreibung ein.</label>
+			<label index="message_emptyAddress">Bitte geben Sie eine Adresse an.</label>
+			<label index="message_emptyZip">Bitte geben Sie eine Postleitzahl an.</label>
 			<label index="message_emptyCity">Bitte geben Sie eine Stadt an.</label>
+			<label index="message_emptyCountry">Bitte wählen Sie ein Land aus.</label>
+			<label index="message_emptyHomepage">Bitte geben Sie eine URL für die Homepage an.</label>
+			<label index="message_emptyDirections">Bitte geben Sie eine Anfahrtsbeschreibung an.</label>
 			<label index="message_noEventTypeChosen">Bitte wählen Sie eine Veranstaltungsart aus.</label>
 			<label index="message_accreditationNumberZero">Bitte geben Sie die Akkreditierungsnummer an.</label>
 			<label index="message_creditPointsZero">Bitte geben Sie Leistungspunkte an.</label>
@@ -2373,7 +2383,12 @@
 			<label index="message_noCategoryChosen" type="integer">167200433</label>
 			<label index="message_emptyTeaser" type="integer">252216048</label>
 			<label index="message_emptyDescription" type="integer">190683509</label>
+			<label index="message_emptyAddress" type="integer">48694806</label>
+			<label index="message_emptyZip" type="integer">230309708</label>
 			<label index="message_emptyCity" type="integer">55975965</label>
+			<label index="message_emptyCountry" type="integer">222337689</label>
+			<label index="message_emptyHomepage" type="integer">94029785</label>
+			<label index="message_emptyDirections" type="integer">24959283</label>
 			<label index="message_noEventTypeChosen" type="integer">19952318</label>
 			<label index="message_accreditationNumberZero" type="integer">217086425</label>
 			<label index="message_creditPointsZero" type="integer">47736719</label>
@@ -3641,7 +3656,12 @@
 			<label index="message_emptyName">Please enter a name.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
 			<label index="message_emptySubtitle">Please enter a subtitle.</label>
+			<label index="message_emptyAddress">Please enter an address.</label>
+			<label index="message_emptyZip">Please enter a ZIP code.</label>
 			<label index="message_emptyCity">Please enter a city.</label>
+			<label index="message_emptyCountry">Please select a country.</label>
+			<label index="message_emptyHomepage">Please enter a homepage URL.</label>
+			<label index="message_emptyDirections">Please enter some directions.</label>
 			<label index="message_noCategoryChosen">Please select at least one category.</label>
 			<label index="message_emptyTeaser">Please enter a teaser.</label>
 			<label index="message_emptyDescription">Please enter a description.</label>
